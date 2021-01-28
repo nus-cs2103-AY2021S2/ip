@@ -3,8 +3,8 @@ package Duke.Exception;
 /**
  * An exception for Event, Deadline and Todo task with no description.
  */
-public class EmptyTaskException extends Exception{
-    String type;
+public class EmptyTaskException extends Exception {
+    private final String type;
 
     /**
      * The constructor for this Exception has 1 parameter: the type of the command (event, deadline or todo).

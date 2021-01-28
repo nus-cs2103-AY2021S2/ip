@@ -8,7 +8,8 @@ public class Deadline extends Task {
     protected String by;
 
     /**
-     * The Deadline class constructor has 2 parameters: the description about a specific deadline and the time that the deadline needs to be done.
+     * The Deadline class constructor has 2 parameters:
+     * the description about a specific deadline and the time that the deadline needs to be done.
      * @param description The description about the deadline.
      * @param by The time that the deadline needs to be done.
      */

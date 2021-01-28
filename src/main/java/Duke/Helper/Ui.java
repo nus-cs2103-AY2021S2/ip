@@ -1,10 +1,9 @@
 package Duke.Helper;
 
-import Duke.Task.Task;
-
 import java.util.ArrayList;
 
 import Duke.Constant.Constants;
+import Duke.Task.Task;
 
 /**
  * A class handles interactions with the user.
@@ -27,9 +26,9 @@ public class Ui {
      * Lists all available tasks in the database.
      * @param list A list containing all the current tasks
      */
-    public void printAllTask(ArrayList<Task> list){
+    public void printAllTask(ArrayList<Task> list) {
         System.out.println(LINES);
-        if (list.isEmpty()){
+        if (list.isEmpty()) {
             System.out.println(Constants.EMPTY_TASK_LIST);
         } else {
             System.out.println(Constants.START_LISTING);
@@ -42,9 +41,13 @@ public class Ui {
         System.out.println();
     }
 
-    public void printMatchedTask(ArrayList<Task> list){
+    /**
+     * Prints all the matched tasks for find command.
+     * @param list List of tasks that match the keyword.
+     */
+    public void printMatchedTask(ArrayList<Task> list) {
         System.out.println(LINES);
-        if (list.isEmpty()){
+        if (list.isEmpty()) {
             System.out.println(Constants.FIND_FAIL);
         } else {
             System.out.println(Constants.FIND_SUCCESS);

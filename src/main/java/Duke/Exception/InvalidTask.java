@@ -3,8 +3,8 @@ package Duke.Exception;
 /**
  * An exception that handle a command for Deadline command without the word "/by" and Event command without the word "/at".
  */
-public class InvalidTask extends Exception{
-    String type;
+public class InvalidTask extends Exception {
+    private final String type;
 
     /**
      * The constructor for this Exception has 1 parameter: the type of the command (event or deadline).

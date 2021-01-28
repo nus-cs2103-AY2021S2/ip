@@ -3,9 +3,9 @@ package Duke.Exception;
 /**
  * An exception for handling invalid index (negative or out of bound) for done and delete command.
  */
-public class InvalidIndex extends IndexOutOfBoundsException{
-    String type;
-    int listSize;
+public class InvalidIndex extends IndexOutOfBoundsException {
+    private final String type;
+    private final int listSize;
 
     /**
      * This exception constructor has 2 parameters: the type of the command (done or delete) and the number of tasks in the list.

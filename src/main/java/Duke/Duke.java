@@ -1,23 +1,19 @@
 package Duke;
 
-import Duke.Exception.EmptyTaskException;
-import Duke.Exception.InvalidTask;
-import Duke.Exception.NoSuchCommandException;
-import Duke.Exception.InvalidIndex;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import Duke.Command.Command;
-
 import Duke.Constant.Constants;
-
+import Duke.Exception.EmptyFindContent;
+import Duke.Exception.EmptyTaskException;
+import Duke.Exception.InvalidIndex;
+import Duke.Exception.InvalidTask;
+import Duke.Exception.NoSuchCommandException;
 import Duke.Helper.Storage;
 import Duke.Helper.TaskList;
 import Duke.Helper.Ui;
-
-import Duke.Exception.*;
 import Duke.Task.Task;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * The main driver class for this application
@@ -32,7 +28,7 @@ public class Duke {
      * The Duke class constructor has 1 parameter: a path to the destination for reading and writing data.
      * @param path the destination for reading and writing data.
      */
-    public Duke(String path){
+    public Duke(String path) {
         this.sc = new Scanner(System.in);
         this.storage = new Storage(path);
         this.taskList = new TaskList(storage.readDataFromFile());
@@ -51,52 +47,51 @@ public class Duke {
     private void run() {
         System.out.println(Constants.START);
         ui.printResponse(Constants.GREETING);
-        while (sc.hasNextLine()){
+        while (sc.hasNextLine()) {
             String command = sc.nextLine().trim();
-            if (command.equalsIgnoreCase(Command.BYE.getAction())){
+            if (command.equalsIgnoreCase(Command.BYE.getAction())) {
                 ui.printResponse(Constants.BYE);
                 break;
-            } else if (command.equalsIgnoreCase(Command.LIST.getAction())){
+            } else if (command.equalsIgnoreCase(Command.LIST.getAction())) {
                 ui.printAllTask(taskList.getList());
-            } else if (command.equalsIgnoreCase(Command.DONE.getAction()) ||
-                    command.equalsIgnoreCase(Command.DELETE.getAction())){
+            } else if (command.equalsIgnoreCase(Command.DONE.getAction())
+                    || command.equalsIgnoreCase(Command.DELETE.getAction())) {
                 try {
                     throw new InvalidIndex(command, taskList.getList().size());
-                } catch (InvalidIndex e){
+                } catch (InvalidIndex e) {
                     ui.printResponse(e.getMessage());
                 }
-            } else if (command.toLowerCase().startsWith(Command.DONE.getAction())){
-                try{
+            } else if (command.toLowerCase().startsWith(Command.DONE.getAction())) {
+                try {
                     int doneIndex = Integer.parseInt(command.substring(5));
                     String result = taskList.finishTask(doneIndex);
                     ui.printResponse(result);
-                } catch (NumberFormatException | InvalidIndex e){
+                } catch (NumberFormatException | InvalidIndex e) {
                     System.out.println(e.getMessage());
                 }
-            } else if (command.toLowerCase().startsWith(Command.DELETE.getAction())){
-                try{
+            } else if (command.toLowerCase().startsWith(Command.DELETE.getAction())) {
+                try {
                     int deleteIndex = Integer.parseInt(command.substring(7));
                     String result = taskList.deleteTask(deleteIndex);
                     ui.printResponse(result);
-                } catch (NumberFormatException | InvalidIndex e){
+                } catch (NumberFormatException | InvalidIndex e) {
                     ui.printResponse(e.getMessage());
                 }
-            } else if (command.equalsIgnoreCase(Command.FIND.getAction())){
+            } else if (command.equalsIgnoreCase(Command.FIND.getAction())) {
                 try {
                     throw new EmptyFindContent();
                 } catch (EmptyFindContent e) {
                     ui.printResponse(e.getMessage());
                 }
-            } else if (command.toLowerCase().startsWith(Command.FIND.getAction())){
+            } else if (command.toLowerCase().startsWith(Command.FIND.getAction())) {
                 String keyword = command.substring(5);
                 ArrayList<Task> filter = taskList.findTask(keyword);
                 ui.printMatchedTask(filter);
-            }
-            else {
+            } else {
                 try {
                     String status = taskList.addTask(command);
                     ui.printResponse(status);
-                } catch (NoSuchCommandException | EmptyTaskException | InvalidTask e){
+                } catch (NoSuchCommandException | EmptyTaskException | InvalidTask e) {
                     ui.printResponse(e.getMessage());
                 }
             }

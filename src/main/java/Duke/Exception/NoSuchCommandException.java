@@ -3,7 +3,7 @@ package Duke.Exception;
 /**
  * An exception that handle commands that are not available in the command list.
  */
-public class NoSuchCommandException extends Exception{
+public class NoSuchCommandException extends Exception {
 
     /**
      * Gets the message that user sees when entering a command that is not in the command list.
