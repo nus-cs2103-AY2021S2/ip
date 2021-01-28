@@ -19,7 +19,7 @@ public class Ui {
      * Message to be printed if any number that has to be inputted is invalid.
      * @return The error message string.
      */
-    public static String  InvalidNumberExceptionMessage() {
+    public static String InvalidNumberExceptionMessage() {
         return LINE + SPACE + "ERROR! D: Please give a number greater than zero and smaller than the total number of tasks" + LINE;
     }
 
@@ -27,7 +27,7 @@ public class Ui {
      * Message to be printed if the keyword that has been inputted is invalid.
      * @return The error message string.
      */
-    public static String  InvalidKeywordExceptionMessage() {
+    public static String InvalidKeywordExceptionMessage() {
         return LINE + SPACE + "The supported keywords are: todo, deadline, event, done, list, delete, bye only." + LINE;
     }
 
