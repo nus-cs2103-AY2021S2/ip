@@ -8,8 +8,8 @@ import duke.maincomponents.Ui;
 import java.util.ArrayList;
 
 public class EventCommand implements Command {
-    ArrayList<String> eventDescription;
-    public EventCommand(ArrayList<String> a){
+    private ArrayList<String> eventDescription;
+    public EventCommand(ArrayList<String> a) {
         eventDescription = a;
     }
 

@@ -1,8 +1,9 @@
 package duke.task;
-import duke.exceptions.TaskException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.exceptions.TaskException;
 // import java.time.LocalDateTime;
 
 public class Deadline extends Task {
@@ -16,12 +17,12 @@ public class Deadline extends Task {
 
         try {
             String trimmed = deadlineBy.trim();
-            if (trimmed.substring(0,4).contains("-")) {
+            if (trimmed.substring(0, 4).contains("-")) {
                 dateBy = LocalDate.parse(deadlineBy.trim(), formatone);
-            }else{
+            } else {
                 dateBy = LocalDate.parse(deadlineBy.trim(), formattwo);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new TaskException("deadline must be of the format date-month-year, in numbers.");
         }
         /*
@@ -31,18 +32,18 @@ public class Deadline extends Task {
         */
     }
 
-    public Deadline(String description, String by, int doneInt) throws TaskException{
+    public Deadline(String description, String by, int doneInt) throws TaskException {
         super(description, doneInt);
         this.deadlineBy = by;
 
         try {
             String trimmed = deadlineBy.trim();
-            if (trimmed.substring(0,4).contains("-")) {
+            if (trimmed.substring(0, 4).contains("-")) {
                 dateBy = LocalDate.parse(deadlineBy.trim(), formatone);
-            }else{
+            } else {
                 dateBy = LocalDate.parse(deadlineBy.trim(), formattwo);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new TaskException("deadline must be of the format date-month-year, in numbers.");
         }
     }
@@ -50,11 +51,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDate = dateBy.format(DateTimeFormatter.ofPattern("MMM d uuuu"));
-        return "[D]" +super.toString() + " (by: " + formattedDate + ")";
+        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 
     @Override
-    public String toSaveFormat(){
+    public String toSaveFormat() {
         return "D|" + super.toSaveFormat() + "|" + deadlineBy;
     }
 }

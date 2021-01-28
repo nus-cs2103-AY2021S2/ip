@@ -5,7 +5,7 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public ToDo(String description, int doneInt){
+    public ToDo(String description, int doneInt) {
         super(description, doneInt);
     }
 
@@ -15,7 +15,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toSaveFormat(){
+    public String toSaveFormat() {
         return "T|" + super.toSaveFormat();
     }
 }

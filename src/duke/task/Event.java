@@ -7,7 +7,7 @@ public class Event extends Task {
         this.eventAt = eventAt;
     }
 
-    public Event(String description, String eventAt, int doneInt){
+    public Event(String description, String eventAt, int doneInt) {
         super(description, doneInt);
         this.eventAt = eventAt;
     }
@@ -18,7 +18,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toSaveFormat(){
+    public String toSaveFormat() {
         return "E|" + super.toSaveFormat() + "|" + eventAt;
     }
 }

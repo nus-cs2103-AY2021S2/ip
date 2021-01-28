@@ -1,11 +1,13 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.maincomponents.Storage;
-import duke.task.Task;
 import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
+import duke.task.Task;
 
-import java.util.ArrayList;
+
 
 public class ShowListCommand implements Command {
 

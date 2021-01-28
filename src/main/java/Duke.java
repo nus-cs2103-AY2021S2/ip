@@ -6,15 +6,15 @@ import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
 
 public class Duke {
+    private static final String FILENAME = "dukedata.txt";
+    private static final String FOLDERNAME = "data";
+    private static final String PATH = FOLDERNAME + "/" + FILENAME;
+
     private Storage dukeStorage;
     private TaskList dukeTaskList;
     private Ui dukeUi;
 
-    final static String FILENAME = "dukedata.txt";
-    final static String FOLDERNAME = "data";
-    final static String PATH = FOLDERNAME + "/" + FILENAME;
-
-    public Duke(String filePath,String folderName) {
+    public Duke(String filePath, String folderName) {
         dukeUi = new Ui();
         try {
             dukeStorage = new Storage(filePath, folderName);
@@ -33,7 +33,7 @@ public class Duke {
         boolean isExit = false;
         String userInput = dukeUi.readCommand();
 
-        while ( !isExit){
+        while ( !isExit) {
             try {
                 Command c = stringParser.parse(userInput);
                 c.execute(dukeTaskList, dukeUi, dukeStorage);
@@ -45,7 +45,7 @@ public class Duke {
 
             try {
                 dukeStorage.saveToFile(dukeTaskList.getCurrentTaskList());
-            }catch(DukeException e){
+            } catch (DukeException e) {
                 dukeUi.showErrorMsg(e.getMessage());
             }
         }

@@ -7,16 +7,16 @@ import duke.maincomponents.Ui;
 import duke.task.Task;
 
 public class DoneCommand implements Command {
-    int taskDoneInt;
-    public DoneCommand(int i){
+    private int taskDoneInt;
+    public DoneCommand(int i) {
         taskDoneInt = i;
     }
     @Override
-    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage){
-        try{
+    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+        try {
             Task doneTask = dukeTaskList.checkTaskAsDone(taskDoneInt);
             dukeUi.showTaskDone(doneTask);
-        }catch (DukeException e){
+        } catch (DukeException e) {
             dukeUi.showErrorMsg(e.getMessage());
         }
     }

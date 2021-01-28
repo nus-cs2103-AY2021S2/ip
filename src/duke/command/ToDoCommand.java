@@ -1,14 +1,14 @@
 package duke.command;
 
 import duke.maincomponents.Storage;
-import duke.task.Task;
 import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
+import duke.task.Task;
 
-public class ToDoCommand implements Command{
-    String toDoDescription;
+public class ToDoCommand implements Command {
+    private String toDoDescription;
 
-    public ToDoCommand(String s){
+    public ToDoCommand(String s) {
         toDoDescription = s;
     }
 

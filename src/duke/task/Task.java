@@ -12,9 +12,9 @@ public class Task {
 
     public Task(String description, int doneInt) {
         this.description = description;
-        if (doneInt == 1){
+        if (doneInt == 1) {
             this.isDone = true;
-        }else{
+        } else {
             this.isDone = false;
         }
     }
@@ -24,15 +24,15 @@ public class Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public void changeTaskToDone(){
+    public void changeTaskToDone() {
         isDone = true;
     }
 
-    public String toSaveFormat(){
+    public String toSaveFormat() {
         int isDoneInt = isDone ? 1 : 0;
         return isDoneInt + "|" + description;
     }
