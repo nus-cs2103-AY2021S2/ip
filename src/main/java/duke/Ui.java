@@ -1,3 +1,17 @@
+/**
+ * This UI class handles the output string of Duke
+ * 
+ * @param logo Duke logo
+ * @param line Indentation line
+ * @param terminate_input input to end Duke
+ * @param indentation spaces to aline the output string
+ * 
+ * @param sc Scanner to scan the user input
+ * 
+ * @author WangYihe
+ * @author E0424695
+ */
+
 package duke;
 
 
@@ -10,10 +24,6 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     public static String line = "    ____________________________________________________________";
     public static String indentation = "    ";
-    public static String terminate_input = "bye";
-    public static String show_list = "list";
-    public static String done = "done";
-    public static String delete = "delete";
 
     public final Scanner sc;
 
@@ -71,6 +81,16 @@ public class Ui {
         }
     }
 
+    public void reportFindedTask(List<Task> task) {
+        printLine();
+        printMessage("Here are the matching tasks in your list");
+        for (int i = 0; i < task.size(); i++) {
+            int index = i + 1;
+            printMessage(index + "." + task.get(i).toString());
+        }
+        printLine();
+    }
+
     public void runUi(TaskList task, FileSaver fs) {
         boolean run = true;
         while (run) {
@@ -92,6 +112,9 @@ public class Ui {
                         break;
                     case DONE:
                         task.doneTask(input[1], this);
+                        break;
+                    case FIND:
+                        reportFindedTask(task.findTask(input[1]));
                         break;
                     case BYE:
                         bye();

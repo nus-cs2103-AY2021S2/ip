@@ -1,3 +1,13 @@
+/** 
+ * This class is the class of tasks that is going to be added to Duke
+ * 
+ * @param description Task description
+ * @param isDone Task status of whether task has been done
+ * 
+ * @author WangYihe
+ * @author E0424695
+ */
+
 package duke;
 
 public class Task {

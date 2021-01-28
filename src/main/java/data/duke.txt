@@ -1,1 +1,3 @@
-T | 0 | task
+T | 1 | task
+T | 0 | read java
+T | 0 | type java

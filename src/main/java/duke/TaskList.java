@@ -1,3 +1,12 @@
+/**
+ * This TaskList class handles the logic of adding and deleting tasks of Duke
+ * 
+ * @param task Task arraylist to hold the current input tasks
+ * 
+ * @author WangYihe
+ * @author E0424695
+ */
+
 package duke;
 
 import java.util.ArrayList;
@@ -127,5 +136,15 @@ public class TaskList {
             ui.printMessage(i + "." + task.get(i - 1).toString());
         }
         ui.printLine();
+    }
+
+    public List<Task> findTask(String taskInfo) {
+        List<Task> findedTasks = new ArrayList<>();
+        for (Task t : task) {
+            if (t.getDescription().contains(taskInfo)) {
+                findedTasks.add(t);
+            }
+        }
+        return findedTasks;
     }
 }

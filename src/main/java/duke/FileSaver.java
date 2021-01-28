@@ -1,3 +1,12 @@
+/**
+ * This TaskList class handles the logic of adding and deleting tasks of Duke
+ * 
+ * @param file Task file to remember the tasks
+ * 
+ * @author WangYihe
+ * @author E0424695
+ */
+
 package duke;
 
 import java.io.File;
