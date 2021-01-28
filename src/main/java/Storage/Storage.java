@@ -23,7 +23,6 @@ public class Storage {
     private final Path dukeTxt = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
     private List<DukeTask> loadfile;
 
-
     public Storage() {
         this.loadfile = new ArrayList<>();
     }
@@ -58,34 +57,34 @@ public class Storage {
                 String taskType = lineData[0];
                 try {
                     switch (taskType) {
-                        case ("T"):
-                            String info[] = lineData[1].split(" [|] ", 2);
-                            if (info[0].equals("1")) {
-                                this.loadfile.add(new Todos(info[1], true));
-                            } else {
-                                this.loadfile.add(new Todos(info[1], false));
-                            }
-                            break;
-                        case ("D"):
-                            String info2[] = lineData[1].split(" [|] ", 3);
+                    case ("T"):
+                        String info[] = lineData[1].split(" [|] ", 2);
+                        if (info[0].equals("1")) {
+                            this.loadfile.add(new Todos(info[1], true));
+                        } else {
+                            this.loadfile.add(new Todos(info[1], false));
+                        }
+                        break;
+                    case ("D"):
+                        String info2[] = lineData[1].split(" [|] ", 3);
 
-                            if (info2[0].equals("1")) {
-                                this.loadfile.add(new Deadlines(info2[1], true, info2[2]));
-                            } else {
-                                this.loadfile.add(new Deadlines(info2[1], false, info2[2]));
-                            }
-                            break;
-                        case ("E"):
-                            String info3[] = lineData[1].split(" [|] ", 3);
-                            String[] information = Events.parseEvent(info3[2]);
-                            if (info3[0].equals("1")) {
-                                this.loadfile.add(new Events(info3[1], true, information[0],
-                                        information[1], information[2]));
-                            } else {
-                                this.loadfile.add(new Events(info3[1], false, information[0],
-                                        information[1], information[2]));
-                            }
-                            break;
+                        if (info2[0].equals("1")) {
+                            this.loadfile.add(new Deadlines(info2[1], true, info2[2]));
+                        } else {
+                            this.loadfile.add(new Deadlines(info2[1], false, info2[2]));
+                        }
+                        break;
+                    case ("E"):
+                        String info3[] = lineData[1].split(" [|] ", 3);
+                        String[] information = Events.parseEvent(info3[2]);
+                        if (info3[0].equals("1")) {
+                            this.loadfile.add(new Events(info3[1], true, information[0],
+                                    information[1], information[2]));
+                        } else {
+                            this.loadfile.add(new Events(info3[1], false, information[0],
+                                    information[1], information[2]));
+                        }
+                        break;
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("It seems one of your tasks is missing some info:");

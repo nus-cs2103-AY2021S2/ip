@@ -6,19 +6,8 @@ import TaskList.TaskList;
 import Ui.Ui;
 
 public abstract class Command {
-    TaskList tasklist;
-    Ui ui;
-    Storage storage;
 
-
-    Command(TaskList tasklist, Ui ui, Storage storage) {
-        this.tasklist = tasklist;
-        this.ui = ui;
-        this.storage = storage;
-    }
-
-    Command() {
-    }
+    Command() { }
 
     /**
      * Abstract method to Executes the Command given.
