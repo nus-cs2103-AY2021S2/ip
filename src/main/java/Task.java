@@ -42,6 +42,5 @@ public class Task {
         return "Now you have " + getNumOfTasks()
                 + (getNumOfTasks() == 1 ? " task" : " tasks")
                 + " in the list.";
-
     }
 }

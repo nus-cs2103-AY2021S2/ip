@@ -105,8 +105,8 @@ public class Duke {
                     break;
                 case HELP:
                     String allCommands = "todo\n"
-                            + "deadline *text* /by *date*\n"
-                            + "event *text* /at *text*\n"
+                            + "deadline *text* /by yyyy-mm-dd\n"
+                            + "event *text* /at yyyy-mm-dd\n"
                             + "done *number*\n"
                             + "list\n"
                             + "delete *number*\n"
