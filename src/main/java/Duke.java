@@ -46,7 +46,7 @@ public class Duke {
                         Task t = store.get(index);
                         t.isDone = true;
                         System.out.println("The following task is now marked as done:\n" +
-                                formatOrderedPrint(store,-1));
+                                formatOrderedPrint(store,index));
                         break;
                     case "todo":
                         store.add(new ToDos(tokens[1]));
