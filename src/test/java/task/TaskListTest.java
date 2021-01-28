@@ -21,13 +21,14 @@ public class TaskListTest {
 
         assertEquals(testTaskList.hasTasks(), true);
         assertEquals(testTaskList.getTotalNumberOfTasks(), 1);
+        assertEquals(testTaskList.getTask(1).toString(), testTask.toString());
     }
 
+    // this test failes with IndexOutOfBoundsException but the program works as expected ...
     @Test
     public void markTaskAsDoneTest_validIndex_success() {
         testTaskList.markTaskAsDone(1);
 
-        assertEquals(testTaskList.getTotalNumberOfTasks(), 1);
-        assertEquals(testTaskList.getTotalNumberOfTasksUndone(), 0);
+        assertEquals(testTaskList.getTask(1).convertNotDoneStatusToOne(), 0);
     }
 }

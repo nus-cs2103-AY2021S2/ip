@@ -12,11 +12,11 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return isDone ? "X" : " ";
     }
 
-    public int isNotDone() {
-        return (isDone ? 0 : 1);
+    public int convertNotDoneStatusToOne() {
+        return isDone ? 0 : 1;
     }
 
     public void markAsDone() {

@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
 public class Storage {
     // source: https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
     // inserts correct file path separator on *nix and Windows
-    static Path dataPath;
+    private static Path dataPath;
 
     public Storage(String filePath) {
 
         String[] filePathSplit = filePath.split("(?:.(?!/))+$", 2);
         // take file path with respect to OlafApp directory
-        String fileDirectory = "../" + filePathSplit[0];
+        String fileDirectory = filePathSplit[0];
 
         File directory = new File(fileDirectory);
         if (!directory.exists()) {

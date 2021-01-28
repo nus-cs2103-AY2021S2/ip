@@ -27,7 +27,7 @@ public class OlafApp {
     }
 
     // todo: break this down into more methods...?
-    void run() {
+    public void run() {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println(PrintText.WELCOME_MESSAGE);
@@ -146,7 +146,7 @@ public class OlafApp {
         }
     }
 
-    void stop() {
+    private void stop() {
         isActive = false;
         ui.formatResponse("  Aww hope to see you soon, goodbye!\n");
     }

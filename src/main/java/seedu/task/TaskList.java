@@ -41,7 +41,7 @@ public class TaskList {
 
     public int getTotalNumberOfTasksUndone() {
         return tasks.stream()
-                .mapToInt(Task::isNotDone)
+                .mapToInt(Task::convertNotDoneStatusToOne)
                 .reduce(0, Integer::sum);
     }
 
