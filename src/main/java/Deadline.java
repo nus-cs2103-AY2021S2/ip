@@ -12,6 +12,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * makes a deadline with the string given
+     * @param line input string that will be split into the task description and date
+     * @return a Deadline
+     * @throws DukeException
+     */
+
     public static Deadline makeDeadline(String line) throws DukeException {
         if (line.equals("")) {
             throw new DukeException("☹ OOPS!!!The description of a todo cannot be empty.\n");

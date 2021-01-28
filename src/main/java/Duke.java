@@ -1,9 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 
@@ -17,6 +13,11 @@ public class Duke {
         }
     }
 
+    /**
+     * provides a platform for users to key in tasks to add to the list
+     * @param args
+     */
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
@@ -29,9 +30,8 @@ public class Duke {
         System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
         System.out.println("____________________________");
 
-        ArrayList<Task> lst = new ArrayList<>();
         Storage st = new Storage();
-        st.printContent(st.defaultFilePath(), lst);
+        st.initialise(st.getDefaultFilePath());
 
         while (sc.hasNext()) {
             String input = sc.next();

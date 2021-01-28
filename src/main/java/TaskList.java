@@ -10,11 +10,21 @@ public class TaskList {
 
     public TaskList() {}
 
+    /**
+     * Returns and prints the specific Task type
+     * Adds the task into the list if the Task is either "Todo", "Deadline" or "Event"
+     * if the command given is "done", then the task will be marked as done but stay in the list
+     * if the command given is "delete", then the task wil be deleted and removed from the list
+     * @param input the task to be added/deleted/edited in the list
+     * @param sc the scanner that was used to obtain the input
+     *           and will thus be used to obtain the remaining lines
+     */
+
     public static void createTask(String input, Scanner sc) {
         ArrayList<Task> lst = new ArrayList<>();
         Storage store = new Storage();
         String home = store.getHome();
-        String file = store.defaultFilePath();
+        String file = store.getDefaultFilePath();
         if (input.equals("list")) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < lst.size(); i++) {

@@ -17,6 +17,6 @@ public class StorageTest {
 
     public void test2() {
         String expected = "C:" + File.separator + "Users" + File.separator + "xindi" + File.separator + "task.txt";
-        assertEquals(expected, Storage.defaultFilePath());
+        assertEquals(expected, Storage.getDefaultFilePath());
     }
 }

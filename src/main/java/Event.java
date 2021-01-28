@@ -6,6 +6,13 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * makes an event with the string given
+     * @param line input string that will be split into the task description and date
+     * @return an Event
+     * @throws DukeException
+     */
+
     public static Event makeEvent(String line) throws DukeException {
         if (line.equals("")) {
             throw new DukeException("☹ OOPS!!!The description of a todo cannot be empty.\n");
