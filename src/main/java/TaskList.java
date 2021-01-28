@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Return size of list of tasks.
+     * Returns size of list of tasks.
      *
      * @return int size of list of tasks.
      */

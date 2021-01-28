@@ -7,12 +7,17 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-
+/**
+ * Class that runs the entire Duke application
+ */
 public class Duke {
 
     private static String folderPath = "./data/";
     private static String fileName = "All Tasks.txt";
 
+    /**
+     * Runs the Duke application
+     */
     public static void run() {
         Scanner sc = new Scanner(System.in);
         sc.useDelimiter("\n");//only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
