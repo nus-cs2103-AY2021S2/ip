@@ -14,7 +14,7 @@ public class EventTest {
     }
 
     @Test
-    public void createDeadline_invalidDateFormat_exceptionThrown() {
+    public void createEvent_invalidDateFormat_exceptionThrown() {
         assertThrows(java.time.format.DateTimeParseException.class, () -> {
             new Event("test", "abcd");
         });
