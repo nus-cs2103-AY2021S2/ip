@@ -30,11 +30,11 @@ test {
 }
 
 application {
-    mainClassName = "com.tjtanjin.ip.Duke"
+    mainClassName = "com.tjtanjin.steve.Steve"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "steve"
     archiveClassifier = null
 }
 
