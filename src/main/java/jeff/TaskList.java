@@ -77,4 +77,14 @@ public class TaskList {
     public void deleteTask(int index) {
         tasks.remove(index);
     }
+
+    public ArrayList<Task> findTask(String s) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getName().contains(s)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
+    }
 }
