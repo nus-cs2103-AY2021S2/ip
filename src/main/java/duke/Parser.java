@@ -29,54 +29,53 @@ public class Parser {
         String commandType = messages[0];
 
         switch (commandType) {
-            case "bye":
-                return new ExitCommand();
+        case "bye":
+            return new ExitCommand();
 
-            case "delete":
-                if (messages.length == 1) {
-                    throw new DukeException("The task index is missing.");
-                }
-                return new DeleteCommand(Integer.parseInt(messages[1]));
+        case "delete":
+            if (messages.length == 1) {
+                throw new DukeException("The task index is missing.");
+            }
+            return new DeleteCommand(Integer.parseInt(messages[1]));
 
-            case "done":
-                if (messages.length == 1) {
-                    throw new DukeException("The task index is missing.");
-                }
-                int id = Integer.parseInt(messages[1]);
+        case "done":
+            if (messages.length == 1) {
+                throw new DukeException("The task index is missing.");
+            }
+            int id = Integer.parseInt(messages[1]);
+            return new DoneCommand(id);
 
-                return new DoneCommand(id);
+        case "deadline":
+            if (messages.length == 1) {
+                throw new DukeException("The task description is missing.");
+            }
+            try {
+                return generateDeadline(processTask(commandLine));
+            } catch (Exception ex) {
+                throw new DukeException("Deadline description is in wrong format.");
+            }
 
-            case "deadline":
-                if (messages.length == 1) {
-                    throw new DukeException("The task description is missing.");
-                }
-                try {
-                    return generateDeadline(processTask(commandLine));
-                } catch (Exception ex) {
-                    throw new DukeException("Deadline description is in wrong format.");
-                }
+        case "event":
+            if (messages.length == 1) {
+                throw new DukeException("The task description is missing.");
+            }
+            try {
+                return generateEvent(processTask(commandLine));
+            } catch (Exception ex) {
+                throw new DukeException("Event description is in wrong format.");
+            }
 
-            case "event":
-                if (messages.length == 1) {
-                    throw new DukeException("The task description is missing.");
-                }
-                try {
-                    return generateEvent(processTask(commandLine));
-                } catch (Exception ex) {
-                    throw new DukeException("Event description is in wrong format.");
-                }
+        case "todo":
+            if (messages.length == 1) {
+                throw new DukeException("The task description is missing.");
+            }
+            return new AddTodo(new Todo(processTask(commandLine), 0));
 
-            case "todo":
-                if (messages.length == 1) {
-                    throw new DukeException("The task description is missing.");
-                }
-                return new AddTodo(new Todo(processTask(commandLine), 0));
+        case "list":
+            return new ListCommand();
 
-            case "list":
-                return new ListCommand();
-
-            default:
-                throw new DukeException("I'm sorry, but I don't know what " + commandType + " means.");
+        default:
+            throw new DukeException("I'm sorry, but I don't know what " + commandType + " means.");
 
         }
     }

@@ -5,7 +5,7 @@ import duke.task.Deadline;
 /**
  * Represents a command that adds Deadline into the task list.
  */
-public class AddDeadline extends AddCommand{
+public class AddDeadline extends AddCommand {
     private Deadline task;
 
     /**

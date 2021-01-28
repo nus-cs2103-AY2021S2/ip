@@ -9,7 +9,7 @@ import duke.Storage;
 /**
  * Represents a command that makes the chat bot exit.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * Executes the command.
      * @param tasks The task list used for execution of the command.

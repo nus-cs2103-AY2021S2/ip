@@ -5,7 +5,7 @@ import duke.task.Todo;
 /**
  * Represents a command that adds Todo into the task list.
  */
-public class AddTodo extends AddCommand{
+public class AddTodo extends AddCommand {
     private Todo task;
 
     /**

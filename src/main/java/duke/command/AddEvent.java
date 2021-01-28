@@ -5,7 +5,7 @@ import duke.task.Event;
 /**
  * Represents a command that adds Event into the task list.
  */
-public class AddEvent extends AddCommand{
+public class AddEvent extends AddCommand {
     private Event task;
 
     /**

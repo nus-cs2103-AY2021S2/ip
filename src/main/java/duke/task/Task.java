@@ -34,7 +34,7 @@ public class Task {
     /**
      * Updates the task as done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
         this.status = 1;
     }
@@ -43,7 +43,7 @@ public class Task {
      * Converts task details into txt format for local storage.
      * @return The text stored in the local file.
      */
-    public String toTxt(){
+    public String toTxt() {
         return String.format("| %s | %s", isDone ? "1" : "0", this.description);
     }
 

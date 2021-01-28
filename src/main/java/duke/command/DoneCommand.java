@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private final int id;
 
     /**
@@ -24,7 +24,7 @@ public class DoneCommand extends Command{
      * @throws DukeException If there is any invalid command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (id < 1 || id > tasks.getSize()) {
             throw new DukeException("The task id is invalid.");
         }

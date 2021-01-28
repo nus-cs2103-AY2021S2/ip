@@ -9,7 +9,7 @@ import duke.Storage;
 /**
  * Represents a command that displays all tasks in the task list.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Executes the command.

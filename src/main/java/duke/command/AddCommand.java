@@ -9,7 +9,7 @@ import duke.Storage;
 /**
  * Represents a command that adds task into the task list.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private Task task;
 
     /**

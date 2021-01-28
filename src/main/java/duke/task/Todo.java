@@ -19,7 +19,7 @@ public class Todo extends Task {
      * @return The text stored in the local file.
      */
     @Override
-    public String toTxt(){
+    public String toTxt() {
         return "T " + super.toTxt() + "\n";
     }
 
