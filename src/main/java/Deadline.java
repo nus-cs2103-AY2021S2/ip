@@ -8,19 +8,19 @@ import java.time.format.DateTimeFormatter;
    */
 class Deadline extends Task {
 
-    protected LocalDate by;
+    protected LocalDate date;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String date) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.date = LocalDate.parse(date);
     }
     @Override
     LocalDate getTime(){
-        return this.by;
+        return this.date;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

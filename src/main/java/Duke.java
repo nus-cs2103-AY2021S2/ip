@@ -22,7 +22,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException | IOException | ParseException e) {
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -37,7 +37,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException | IOException e) {
+            } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (NullPointerException e) {
                 ui.showError(e.getMessage());

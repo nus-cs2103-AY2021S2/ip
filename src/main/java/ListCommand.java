@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
    * ListCommand inherits Command
    * @param command the main action of the command (todo,deadline,event)
@@ -15,13 +13,12 @@ public class ListCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
             ui.list(storage.read(),this.date);
     }
 
     @Override
     boolean isExit() {
-        // TODO Auto-generated method stub
         return false;
     }
     

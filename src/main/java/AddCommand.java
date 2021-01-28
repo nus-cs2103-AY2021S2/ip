@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
    * AddCommand inherits Command
    * @param command the main action of the command (todo,deadline,event)
@@ -14,7 +12,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (this.command.equals("todo")) {
             Task newTask = new ToDos(task);
             taskList.add(newTask);

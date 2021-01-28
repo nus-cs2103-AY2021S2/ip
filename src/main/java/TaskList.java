@@ -39,10 +39,4 @@ public class TaskList {
 	public Task get(int i) {
 		return this.taskList.get(i);
 	}
-
-
-
-
-	
-    
 }

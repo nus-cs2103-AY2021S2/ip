@@ -23,33 +23,46 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void store(String line) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath, true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter pw = new PrintWriter(bw);
-        pw.println(line);
-        pw.close();
-    }
-
-    public Scanner read() throws FileNotFoundException {
-        Scanner fileScanner = new Scanner(new File(this.filePath));
-        return fileScanner;
-    }
-
-    public void rewrite(TaskList taskList) throws IOException {
-        FileWriter tfw = new FileWriter(this.filePath);
-        BufferedWriter tbw = new BufferedWriter(tfw);
-        PrintWriter tpw = new PrintWriter(tbw);
-        for (int i = 1; i <= taskList.size(); i++) {
-            Task writeTask = taskList.get(i-1);
-            tpw.println(i + "." + writeTask.toString());
+    public void store(String line) throws DukeException {
+        try{
+            FileWriter fw = new FileWriter(this.filePath, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            pw.println(line);
+            pw.close();
+        } catch (IOException e) {
+            throw new DukeException("Error storing file");
         }
-        tpw.close();
-        
     }
 
-    public List<Task> load() throws IOException, ParseException , DukeException{
-        List<Task> taskList = new ArrayList<Task>(100);
+    public Scanner read() throws DukeException {
+        try {
+            Scanner fileScanner = new Scanner(new File(this.filePath));
+            return fileScanner;
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Error scanning file");
+        }
+    }
+
+    public void rewrite(TaskList taskList) throws DukeException {
+        FileWriter tfw;
+        try {
+            tfw = new FileWriter(this.filePath);
+            BufferedWriter tbw = new BufferedWriter(tfw);
+            PrintWriter tpw = new PrintWriter(tbw);
+            for (int i = 1; i <= taskList.size(); i++) {
+                Task writeTask = taskList.get(i-1);
+                tpw.println(i + "." + writeTask.toString());
+            }
+            tpw.close();
+        } catch (IOException e) {
+            throw new DukeException("Error editing file");
+        }
+    }
+
+    public List<Task> load() throws DukeException {
+        try {
+            List<Task> taskList = new ArrayList<Task>(100);
         FileWriter fw = new FileWriter(this.filePath, true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
@@ -95,7 +108,6 @@ public class Storage {
                     }
                     taskList.add(newTask);
                 }
-
             } else if (type.contains("E")) {
                 try {
                     String sequence = read[1];
@@ -130,10 +142,9 @@ public class Storage {
         pw.close();
         br.close();
         return taskList;
+        }catch(IOException | ParseException e){
+            throw new DukeException("Error Loading File");
+        }
+        
     }
-
-	public void delete() {
-	} 
-    
-    
 }
