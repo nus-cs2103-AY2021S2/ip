@@ -27,7 +27,7 @@ public class Deadline extends Task {
         String dateString = Parser.extractDate(by);
         String convertedDateString = dateOfDeadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));  // convert the format
         String modified_by = by.replaceAll(dateString, convertedDateString);
-        return "[" + this.getLetterCode() + "]" + super.toString() + " (by: " + modified_by + ")";
+        return super.toString() + " (by: " + modified_by + ")";
     }
 
 

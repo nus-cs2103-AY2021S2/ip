@@ -26,7 +26,7 @@ public class Event extends Task {
         String dateString = Parser.extractDate(at);
         String convertedDateString = dateOfEvent.format(DateTimeFormatter.ofPattern("MMM d yyyy"));  // convert the format
         String modified_at = at.replaceAll(dateString, convertedDateString);
-        return "[" + this.getLetterCode() + "]" + super.toString() + " (at: " + modified_at + ")";
+        return super.toString() + " (at: " + modified_at + ")";
     }
 
     @Override
