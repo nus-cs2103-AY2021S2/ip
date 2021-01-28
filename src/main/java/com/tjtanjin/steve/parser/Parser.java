@@ -1,6 +1,5 @@
 package com.tjtanjin.steve.parser;
 
-import com.tjtanjin.steve.DukeException;
 import com.tjtanjin.steve.commands.ByeCommand;
 import com.tjtanjin.steve.commands.CommandHandler;
 import com.tjtanjin.steve.commands.DeadlineCommand;
@@ -106,7 +105,7 @@ public class Parser {
             default:
                 return "Error: Invalid instruction, type 'help' to see the options.";
             }
-        } catch (DukeException e) {
+        } catch (SteveInvalidFormatException | SteveInvalidParamsException e) {
             return e.getMessage();
         }
     }
@@ -132,22 +131,23 @@ public class Parser {
      * @param input input provided by user
      * @return index of task
      */
-    public int parseIndex(String cmd, String input) throws DukeException {
+    public int parseIndex(String cmd, String input)
+            throws SteveInvalidFormatException, SteveInvalidParamsException {
         String[] parsedString = input.split("\\s+");
 
         try {
             return Integer.parseInt(parsedString[1]) - 1;
         } catch (IndexOutOfBoundsException e) {
             if (cmd.equals("done")) {
-                throw new DukeException("Info: Usage for done: " + doneCommand.getDescription());
+                throw new SteveInvalidFormatException("Info: Usage for done: " + doneCommand.getDescription());
             } else {
-                throw new DukeException("Info: Usage for delete: " + deleteCommand.getDescription());
+                throw new SteveInvalidFormatException("Info: Usage for delete: " + deleteCommand.getDescription());
             }
         } catch (NumberFormatException e) {
             if (cmd.equals("done")) {
-                throw new DukeException("Info: Index of task to mark as done must be a number!");
+                throw new SteveInvalidParamsException("Info: Index of task to mark as done must be a number!");
             } else {
-                throw new DukeException("Info: Index of task to delete must be a number!");
+                throw new SteveInvalidParamsException("Info: Index of task to delete must be a number!");
             }
         }
     }
@@ -157,7 +157,7 @@ public class Parser {
      * @param input input provided by user
      * @return name of task
      */
-    public String parseTaskName(String input) throws DukeException {
+    public String parseTaskName(String input) throws SteveInvalidFormatException {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails;
@@ -175,15 +175,17 @@ public class Parser {
             return taskName;
         } catch (IndexOutOfBoundsException e) {
             if (taskType.equalsIgnoreCase("TODO")) {
-                throw new DukeException("Info: Usage for todo: " + todoCommand.getDescription());
+                throw new SteveInvalidFormatException("Info: Usage for todo: "
+                        + todoCommand.getDescription());
             } else if (taskType.equalsIgnoreCase("DEADLINE")) {
-                throw new DukeException("Info: Usage for deadline: " + deadlineCommand.getDescription());
+                throw new SteveInvalidFormatException("Info: Usage for deadline: "
+                        + deadlineCommand.getDescription());
             } else if (taskType.equalsIgnoreCase("EVENT")) {
-                throw new DukeException("Info: Usage for event: " + eventCommand.getDescription());
-            } else if (taskType.equalsIgnoreCase("FIND")) {
-                throw new DukeException("Info: Usage for find: " + findCommand.getDescription());
+                throw new SteveInvalidFormatException("Info: Usage for event: "
+                        + eventCommand.getDescription());
             } else {
-                throw new DukeException("Info: Invalid instruction, perhaps you meant todo, deadline or event?");
+                throw new SteveInvalidFormatException("Info: Usage for find: "
+                        + findCommand.getDescription());
             }
         }
     }
@@ -193,7 +195,7 @@ public class Parser {
      * @param input input provided by user
      * @return array of dates for task
      */
-    public LocalDate[] parseTaskDates(String input) throws DukeException {
+    public LocalDate[] parseTaskDates(String input) throws SteveInvalidFormatException {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails = parsedString[1];
@@ -209,9 +211,9 @@ public class Parser {
             }
         } catch (IndexOutOfBoundsException | NullPointerException | DateTimeException e) {
             if (taskType.equalsIgnoreCase(Cmd.DEADLINE.toString())) {
-                throw new DukeException("Error: Invalid date specified, please adhere to the format: /by YYYY-MM-DD");
+                throw new SteveInvalidFormatException("Error: Invalid date specified, please adhere to the format: /by YYYY-MM-DD");
             } else {
-                throw new DukeException("Error: Invalid date specified, "
+                throw new SteveInvalidFormatException("Error: Invalid date specified, "
                         + "please adhere to the format: /from YYYY-MM-DD /to YYYY-MM-DD");
             }
         }

@@ -55,7 +55,7 @@ public class UiHandler {
     }
 
     /**
-     * Prints error message to the yser
+     * Prints error message to the user
      * @param response error message to print
      */
     public void showError(String response) {

@@ -1,6 +1,5 @@
 package com.tjtanjin.steve.tasks;
 
-import com.tjtanjin.steve.DukeException;
 import com.tjtanjin.steve.storage.StorageHandler;
 
 import java.time.LocalDate;
@@ -73,14 +72,12 @@ public class TaskHandler {
                         taskName, "complete", taskType, taskDates)) {
                     return "Info: Yay your task is done! :D";
                 } else {
-                    throw new DukeException("Error: There was an error marking your task as done, "
-                            + "please check your syntax and try again.");
+                    return "Error: There was an error marking your task as done, "
+                            + "please check your syntax and try again.";
                 }
             }
         } catch (IndexOutOfBoundsException e) {
             return "Error: The specified task index does not exist!";
-        } catch (DukeException e) {
-            return e.getMessage();
         }
     }
 
@@ -100,13 +97,11 @@ public class TaskHandler {
                     taskName, "complete", taskType, taskDates)) {
                 return "Info: The following task has been deleted:\n" + task;
             } else {
-                throw new DukeException("Error: There was an error deleting your task, "
-                        + "please check your syntax and try again.");
+                return "Error: There was an error deleting your task, "
+                        + "please check your syntax and try again.";
             }
         } catch (IndexOutOfBoundsException e) {
             return "Error: The specified task index does not exist!";
-        } catch (DukeException e) {
-            return e.getMessage();
         }
     }
 
