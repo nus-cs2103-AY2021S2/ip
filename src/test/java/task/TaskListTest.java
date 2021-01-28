@@ -24,7 +24,7 @@ public class TaskListTest {
         assertEquals(testTaskList.getTask(1).toString(), testTask.toString());
     }
 
-    // this test failes with IndexOutOfBoundsException but the program works as expected ...
+    // this test fails with IndexOutOfBoundsException but the program works as expected ...
     @Test
     public void markTaskAsDoneTest_validIndex_success() {
         testTaskList.markTaskAsDone(1);

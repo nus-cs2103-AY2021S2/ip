@@ -15,18 +15,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 
+/**
+ * Handles the main logic of the application.
+ */
 public class OlafApp {
     private TaskList taskList;
     private Ui ui;
     private boolean isActive;
+    // todo: break this down into more methods...?
 
-    OlafApp(TaskList tasks) {
+    /**
+     * Creates an instance of OlafApp.
+     *
+     * @param tasks TaskList used by the application.
+     */
+    public OlafApp(TaskList tasks) {
         this.taskList = tasks;
         this.ui = new Ui();
         this.isActive = true;
     }
 
-    // todo: break this down into more methods...?
+    /**
+     * Executes the Application until user exits.
+     */
     public void run() {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
@@ -85,6 +96,7 @@ public class OlafApp {
             } else if (command.toLowerCase().startsWith("todo")) {
                 try {
                     String expression = Parser.parseParameter(command, " ", 1);
+
                     Todo newTodo = new Todo(expression);
                     taskList.addTask(newTodo);
 
@@ -148,6 +160,6 @@ public class OlafApp {
 
     private void stop() {
         isActive = false;
-        ui.formatResponse("  Aww hope to see you soon, goodbye!\n");
+        ui.showFormatResponse("  Aww hope to see you soon, goodbye!\n");
     }
 }
