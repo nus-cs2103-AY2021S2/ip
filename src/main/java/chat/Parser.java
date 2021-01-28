@@ -1,11 +1,6 @@
 package chat;
 
-import chat.command.Command; 
-import chat.command.ListCommand; 
-import chat.command.DoneCommand;
-import chat.command.DeleteCommand;
-import chat.command.AddCommand;
-import chat.command.ExitCommand;
+import chat.command.*;
 
 public class Parser {
     //deals with making sense of user command
@@ -20,8 +15,10 @@ public class Parser {
             return new AddCommand(str);
         } else if (str.startsWith("delete")) {
             return new DeleteCommand(str);
-        } else if (str.equals("bye")) { 
+        } else if (str.equals("bye")) {
             return new ExitCommand();
+        } else if (str.startsWith("find")) {
+            return new FindCommand(str);
         } else {
             throw new ChatException("Sorry this instruction does not exist!\n" +
                     "Please choose from the following: " +
