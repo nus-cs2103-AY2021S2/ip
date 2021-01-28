@@ -22,6 +22,8 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(first[1]));
         case ("delete"):
             return new DeleteCommand(Integer.parseInt(first[1]));
+        case ("find"):
+            return new FindCommand(first[1]);
         default:
             throw new DukeException("Unknown command received.");
         }

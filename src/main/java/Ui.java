@@ -57,6 +57,13 @@ public class Ui {
         printPartition();
     }
 
+    public void printSomeTasks(ArrayList<Task> tasks) {
+        for (int i = 1; i <= tasks.size(); i++) {
+            System.out.println("" + i + ". " + tasks.get(i - 1).getStatus());
+        }
+        printPartition();
+    }
+
     public void printNumTasks(TaskList taskList) {
         System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
         printPartition();
