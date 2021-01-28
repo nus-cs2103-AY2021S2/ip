@@ -9,7 +9,6 @@ public class Storage {
      */
     public Storage(String filePath) throws IOException {
         file = new File(filePath);
-        file.getParentFile().mkdirs();
     }
 
 
