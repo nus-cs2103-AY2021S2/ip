@@ -12,7 +12,7 @@ public class Command {
     protected boolean toExit;
 
     public enum CommandsEnum {
-        USAGE, LIST,
+        USAGE, LIST, FIND,
         TODO, DEADLINE, EVENT,
         DONE, DELETE, SAVE, BYE
     }
@@ -32,6 +32,9 @@ public class Command {
                     break;
                 case LIST:
                     this.listCommand(tasks, ui);
+                    break;
+                case FIND:
+                    this.findTasks(tasks, ui);
                     break;
                 case TODO:
                 case DEADLINE:
@@ -58,6 +61,10 @@ public class Command {
 
     public void listCommand(TaskList tasks, Ui ui) {
         ui.say(tasks.showList());
+    }
+
+    public void findTasks(TaskList tasks, Ui ui) {
+        ui.say(tasks.findTasks(this.commandArgs[0]));
     }
 
     public void addTask(TaskList tasks, Ui ui) throws DukeException {

@@ -37,6 +37,19 @@ public class TaskList {
         return sb.toString();
     }
 
+    public String findTasks(String keyword) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < collection.size(); i++) {
+            Task task = this.collection.get(i);
+            if (task.getDescription().contains(keyword)) {
+                sb.append(String.format("\t%d. %s\n", i + 1, collection.get(i)));
+            }
+        }
+        return sb.toString();
+    }
+
     public String addTask(String type, String[] args) throws DukeException {
         // Ensure task description and argument cannot be empty
         if (args[0].equals("")) {
