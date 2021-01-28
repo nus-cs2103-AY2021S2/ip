@@ -1,4 +1,5 @@
 enum Command {
+    FIND,
     LIST,
     TODO,
     EVENT,
