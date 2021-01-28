@@ -1,11 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
@@ -25,7 +18,6 @@ public class Duke {
 
     public void run() {
         ui.showGreetings();
-        Parser parser = new Parser();
         boolean toContinue = true;
 
         while (toContinue) {
@@ -34,7 +26,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 }

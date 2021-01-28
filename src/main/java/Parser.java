@@ -3,10 +3,6 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    public Parser() {
-
-    }
-
     public Command parseCommand(String userInput) {
         if (userInput.equals("bye")) {
             return Command.BYE;
@@ -48,7 +44,7 @@ public class Parser {
     public Event parseEvent(String userInput, int timeIndex) throws DukeException {
         try {
             String name = userInput.substring(6, timeIndex - 1);
-            String dateTime = userInput.substring(timeIndex + 4);
+            String dateTime = userInput.substring(timeIndex + 5);
             String dateString = dateTime.substring(0, 10);
             String timeString = dateTime.substring(11);
             LocalDate date = LocalDate.parse(dateString);
@@ -63,7 +59,7 @@ public class Parser {
     public Deadline parseDeadline(String userInput, int timeIndex) throws DukeException {
         try {
             String name = userInput.substring(9, timeIndex - 1);
-            String dateTime = userInput.substring(timeIndex + 4);
+            String dateTime = userInput.substring(timeIndex + 5);
             String dateString = dateTime.substring(0, 10);
             String timeString = dateTime.substring(11);
             LocalDate deadline = LocalDate.parse(dateString);
