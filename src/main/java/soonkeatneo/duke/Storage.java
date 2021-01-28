@@ -38,14 +38,6 @@ public class Storage {
                 throw new DukeException();
             }
         }
-        /*
-        this.dataDirectory = new File("data");
-        if (!this.dataDirectory.exists()) {
-            // mkdirs does not throw any exception even when failing
-            this.dataDirectory.mkdirs();
-        }
-        this.dataFile = new File(this.dataDirectory.getPath() + File.separator + "data.txt");
-        */
         return this;
     }
 
