@@ -9,7 +9,7 @@ public class Event extends Task {
     private final LocalTime time;
 
     public Event(String name, String date, String time) throws DateTimeParseException {
-        super(name);
+        super (name);
         this.date = LocalDate.parse(date);
         this.time = LocalTime.parse(time);
     }
@@ -28,7 +28,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s (at: %s %s %s %s:%s)", super.toString(), date.getDayOfMonth(), date.getMonth(), date.getYear(), time.getHour(), time.getMinute());
+        return String.format("%s (at: %s %s %s %s:%s)", super.toString(), date.getDayOfMonth(),
+                date.getMonth(), date.getYear(), time.getHour(), time.getMinute());
 
     }
 }

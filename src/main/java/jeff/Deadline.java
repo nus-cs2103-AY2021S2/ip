@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private final LocalDate date;
     private final LocalTime time;
 
     public Deadline(String name, String date, String time) throws DateTimeParseException {
-        super(name);
+        super (name);
         this.date = LocalDate.parse(date);
         this.time = LocalTime.parse(time);
     }
@@ -28,6 +28,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s %s %s %s:%s)", super.toString(), date.getDayOfMonth(), date.getMonth(), date.getYear(), time.getHour(), time.getMinute());
+        return String.format("%s (by: %s %s %s %s:%s)", super.toString(), date.getDayOfMonth(),
+                date.getMonth(), date.getYear(), time.getHour(), time.getMinute());
     }
 }

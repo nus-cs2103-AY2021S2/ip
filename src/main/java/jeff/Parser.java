@@ -11,11 +11,11 @@ public class Parser {
         Command cmd;
         try {
             cmd = Command.valueOf(messageMain[0]);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw new JeffException("I can't understand the message");
         }
 
-        switch(cmd) {
+        switch (cmd) {
 
         case list:
             if (tasks.getNumTasks() == 0) {
@@ -47,9 +47,9 @@ public class Parser {
                 Task deadline = new Deadline(messageMain[1], dateTime[0], dateTime[1]);
                 tasks.addTask(deadline);
                 ui.print("Got it. I've added this task:\n" + deadline + tasks.queryNumTasks());
-            } catch(ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new JeffException("please provide a date and time for deadline");
-            } catch(DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 throw new JeffException("please provide datetime as YYYY-MM-DD HH:MM");
             }
             break;
@@ -65,7 +65,7 @@ public class Parser {
                 ui.print("Got it. I've added this task:\n" + event + tasks.queryNumTasks());
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new JeffException("please provide a date and time for event");
-            } catch(DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 throw new JeffException("please provide datetime as YYYY-MM-DD HH:MM");
             }
             break;
@@ -79,15 +79,15 @@ public class Parser {
                 Task doneTask = tasks.getTask(taskIndex);
                 doneTask.setDone();
                 ui.print("Nice! I've marked this task as done:\n" + doneTask);
-            } catch(IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new JeffException("task number does not exist");
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new JeffException("indicate task number as an integer");
             }
             break;
 
         case delete:
-            if(messageMain.length != 2) {
+            if (messageMain.length != 2) {
                 throw new JeffException("wrong number of arguments for delete");
             }
             try {
@@ -95,9 +95,9 @@ public class Parser {
                 Task toRemove = tasks.getTask(taskIndex);
                 tasks.deleteTask(taskIndex);
                 ui.print("Noted. I've removed this task:\n" + toRemove + tasks.queryNumTasks());
-            } catch(IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new JeffException("task number does not exist");
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new JeffException("indicate task number as an integer");
             }
             break;
@@ -107,6 +107,7 @@ public class Parser {
             storage.save(tasks.getTaskList());
             isExit = true;
         }
+
         return isExit;
     }
 }

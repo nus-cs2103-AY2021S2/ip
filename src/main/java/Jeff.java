@@ -20,7 +20,7 @@ public class Jeff {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             String fullMessage = ui.readMessage();
             try {
                 isExit = Parser.execute(fullMessage, tasks, ui, storage);

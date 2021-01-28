@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +20,7 @@ public class Storage {
             File data = new File(filePath);
             Scanner sc = new Scanner(data);
             ArrayList<Task> savedTasks = new ArrayList<>();
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String[] line = sc.nextLine().split("#");
                 switch (line[0]) {
                 case "T":
