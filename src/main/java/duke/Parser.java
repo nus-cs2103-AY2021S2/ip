@@ -43,6 +43,9 @@ public class Parser {
         } else if (strippedCmd.startsWith("event")) {
             String args = strippedCmd.substring(5).strip();
             result = new EventCommand(args);
+        } else if (strippedCmd.startsWith("find")) {
+            String args = strippedCmd.substring(4).strip();
+            result = new FindCommand(args);
         } else {
             throw new DukeException("I apologize, I do not comprehend your command.");
         }
