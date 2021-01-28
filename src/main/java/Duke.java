@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Duke {
@@ -17,7 +18,7 @@ public class Duke {
      * provides a platform for users to key in tasks to add to the list
      * @param args
      */
-    
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
