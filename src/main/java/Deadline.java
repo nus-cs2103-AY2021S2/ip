@@ -1,16 +1,31 @@
 //Deadlines: tasks that need to be done before a specific date/time
+import java.time.DateTimeException;
+import java.time.LocalDate;
 public class Deadline extends Task{
-    private String deadline;
-    Deadline(String deadline, String deadlineDetail){
+    private String deadlineDateString;
+    private LocalDate deadlineDate;
+
+    Deadline(String deadlineDateString, String deadlineDetail){
         super(deadlineDetail);
-        this.deadline = deadline;
+        try{
+            this.deadlineDate = Task.dateStringToDate(deadlineDateString);
+            this.deadlineDateString = deadlineDate.getMonth().toString().toLowerCase() + " " +
+                    deadlineDate.getDayOfMonth() + " " + deadlineDate.getYear();
+        }
+        catch(DateTimeException e){
+            System.err.println("Please input date in yyyy-MM-dd format.");
+        }
     }
     public String getDeadline(){
-        return this.deadline;
+        return this.deadlineDateString;
+    }
+
+    public LocalDate getDeadlineDate(){
+        return this.deadlineDate;
     }
 
     @Override
     public String toString(){
-        return "[D]" + " | " + super.toString() + "| (by: " + this.deadline + ")";
+        return "[D] | " + super.toString() + " | by: " + this.deadlineDateString;
     }
 }

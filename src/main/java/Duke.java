@@ -1,11 +1,8 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 
 public class Duke {
@@ -85,7 +82,7 @@ public class Duke {
                         Duke.printAddedTask(newTask);
                         break;
                     case addEventCommand:
-                        String[] eventTimeAndTask = command.split("/at");
+                        String[] eventTimeAndTask = command.split("/at ");
                         //offset of 6 to remove "event " frm statement
                         newTask = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
                         Duke.printAddedTask(newTask);
@@ -98,7 +95,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
-            catch(DukeException ex){
+            catch(DukeException ex) {
                 System.err.println(ex.getMessage());
             }
         }
@@ -107,10 +104,6 @@ public class Duke {
         for(int i = 0; i< userList.size();i++){
             System.out.println(i+1 +". " + userList.get(i).toString());
         }
-//        System.out.println(userList.size());
-//        for(Task x: userList){
-//            System.out.println(x.toString());
-//        }
     }
 
     private static void printDoneTask(int taskNumber){

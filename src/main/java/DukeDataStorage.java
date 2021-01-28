@@ -1,9 +1,12 @@
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import static java.lang.Integer.parseInt;
 
 public class DukeDataStorage {
     private String filePath;
@@ -24,25 +27,29 @@ public class DukeDataStorage {
             String[] userTask = line.split(" \\| ");
             String eventType = userTask[0];
             Task taskInList;
-            switch (eventType){
-                case("[T]"):
-                    taskInList = new ToDo(userTask[2]);
-                    taskList.add(taskInList);
-                    break;
-                case("[E]"):
-                    String eventDuration = userTask[3].split("\\(at: ")[1].replaceFirst("\\)","");
-                    String eventDetail = userTask[2];
-                    taskInList = new Event(eventDuration, eventDetail);
-                    taskList.add(taskInList);
-                    break;
-                case("[D]"):
-                    String deadline = userTask[3].split("\\(by: ")[1].replaceFirst("\\)", "");
-                    String deadlineDetail = userTask[2];
-                    taskInList = new Deadline(deadline, deadlineDetail);
-                    taskList.add(taskInList);
-                    break;
+            try {
+                switch (eventType){
+                    case("[T]"):
+                        taskInList = new ToDo(userTask[2]);
+                        taskList.add(taskInList);
+                        break;
+                    case("[E]"):
+                        String eventDuration = DukeDataStorage.parseDate(userTask[3].split("at: ")[1]);
+                        String eventDetail = userTask[2];
+                        taskInList = new Event(eventDuration, eventDetail);
+                        taskList.add(taskInList);
+                        break;
+                    case("[D]"):
+                        String deadline = DukeDataStorage.parseDate(userTask[3].split("by: ")[1]);
+                        String deadlineDetail = userTask[2];
+                        taskInList = new Deadline(deadline, deadlineDetail);
+                        taskList.add(taskInList);
+                        break;
+                }
             }
-
+            catch (Exception e){
+                System.err.println(e.getMessage());
+            }
         }
         return taskList;
     }
@@ -62,4 +69,14 @@ public class DukeDataStorage {
             System.err.println(e);
         }
     }
+// input: month day year
+    public static String parseDate(String unformattedDate){
+        String[] dateArr = unformattedDate.split(" ");
+        String monthString = String.format("%02d", Month.valueOf(dateArr[0].toUpperCase()).getValue());
+        String day = String.format("%02d", Integer.parseInt(dateArr[1]));
+        String year = dateArr[2];
+        String formattedDate = year + "-" + monthString + "-" + day;
+        return formattedDate;
+    }
+
 }
