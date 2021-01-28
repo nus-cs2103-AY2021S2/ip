@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +30,7 @@ public class Duke {
                         taskList.add(todos);
                         printTaskAddedMessage(todos);
                     } catch (EmptyTaskDukeException e) {
-                        System.out.println(formatMessage(e + ""));
+                        System.out.println(formatMessage(e.getMessage()));
                     }
                     break;
                 case DEADLINE:
@@ -38,7 +39,11 @@ public class Duke {
                         taskList.add(deadlines);
                         printTaskAddedMessage(deadlines);
                     } catch (EmptyTaskDukeException e) {
-                        System.out.println(formatMessage(e + ""));
+                        System.out.println(formatMessage(e.getMessage()));
+                    } catch (DateTimeParseException e) {
+                        System.out.println(formatMessage(e.getMessage()
+                                + "\nError! Invalid time/date format."
+                                + "\nPlease input a valid time/date format!"));
                     }
                     break;
                 case EVENT:
@@ -47,7 +52,11 @@ public class Duke {
                         taskList.add(events);
                         printTaskAddedMessage(events);
                     } catch (EmptyTaskDukeException e) {
-                        System.out.println(formatMessage(e + ""));
+                        System.out.println(formatMessage(e.getMessage()));
+                    } catch (DateTimeParseException e) {
+                        System.out.println(formatMessage(e.getMessage()
+                                + "\nError! Invalid time/date format."
+                                + "\nPlease input a valid time/date format!"));
                     }
                     break;
                 case LIST:

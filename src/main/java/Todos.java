@@ -1,6 +1,7 @@
 public class Todos extends Task {
     public Todos(String input) throws EmptyTaskDukeException {
         super(input);
+        Task.incrementNumOfTask();
     }
 
     @Override

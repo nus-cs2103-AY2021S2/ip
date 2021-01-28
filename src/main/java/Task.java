@@ -9,7 +9,6 @@ public class Task {
         } else {
             this.taskName = input;
             isTaskCompleted = false;
-            numOfTasks++;
         }
     }
 
@@ -33,6 +32,10 @@ public class Task {
 
     private static int getNumOfTasks() {
         return numOfTasks;
+    }
+
+    public static void incrementNumOfTask() {
+        numOfTasks++;
     }
 
     public static String getNumOfTasksString() {
