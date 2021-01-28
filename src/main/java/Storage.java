@@ -1,18 +1,18 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import static java.lang.Integer.parseInt;
 
-public class DukeDataStorage {
+public class Storage {
     private String filePath;
 
 
-    DukeDataStorage(String filePath) throws IOException {
+    Storage(String filePath) throws IOException {
+        String parentPath = filePath.split("tasks.txt")[0];
+        if(!Files.exists(Paths.get(parentPath))){
+            Files.createDirectories(Paths.get(parentPath));
+        }
         if(!Files.exists(Paths.get(filePath))){
             Files.createFile(Paths.get(filePath));
         }
@@ -34,13 +34,13 @@ public class DukeDataStorage {
                         taskList.add(taskInList);
                         break;
                     case("[E]"):
-                        String eventDuration = DukeDataStorage.parseDate(userTask[3].split("at: ")[1]);
+                        String eventDuration = Parser.parseDate(userTask[3].split("at: ")[1]);
                         String eventDetail = userTask[2];
                         taskInList = new Event(eventDuration, eventDetail);
                         taskList.add(taskInList);
                         break;
                     case("[D]"):
-                        String deadline = DukeDataStorage.parseDate(userTask[3].split("by: ")[1]);
+                        String deadline = Parser.parseDate(userTask[3].split("by: ")[1]);
                         String deadlineDetail = userTask[2];
                         taskInList = new Deadline(deadline, deadlineDetail);
                         taskList.add(taskInList);
@@ -68,15 +68,6 @@ public class DukeDataStorage {
         } catch (IOException e) {
             System.err.println(e);
         }
-    }
-// input: month day year
-    public static String parseDate(String unformattedDate){
-        String[] dateArr = unformattedDate.split(" ");
-        String monthString = String.format("%02d", Month.valueOf(dateArr[0].toUpperCase()).getValue());
-        String day = String.format("%02d", Integer.parseInt(dateArr[1]));
-        String year = dateArr[2];
-        String formattedDate = year + "-" + monthString + "-" + day;
-        return formattedDate;
     }
 
 }
