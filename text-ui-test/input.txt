@@ -9,6 +9,7 @@ list
 deadline return book /by 2021-01-24
 event project meeting /at 2021-01-25
 delete 5
+y
 invalidtest
 todo
 deadline

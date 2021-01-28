@@ -173,4 +173,20 @@ public class Ui {
         echoSingleBorder("Do you want to save the current tasklist? y/n");
         return readInput();
     }
+
+    /**
+     * Confirms if user want to delete this task.
+     * @return Response from user.
+     */
+    public String deleteTaskPrompt() {
+        echoSingleBorder("Are you sure you want to delete this task? y/n");
+        return readInput();
+    }
+
+    /**
+     * Displays delete aborted message.
+     */
+    public void abortDelete() {
+        echoSingleBorder("Deletion cancelled.");
+    }
 }

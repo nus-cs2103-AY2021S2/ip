@@ -131,9 +131,21 @@ public class Duke {
     }
 
     private void deleteTask(String num) throws DukeInputException {
-        int taskNum = Integer.parseInt(num);
-        Task t = tasks.deleteTask(taskNum - 1);
-        ui.deleteTask(t.toString(), tasks.size());
+        String s = ui.deleteTaskPrompt();
+        try {
+            Parser.parseYesNo(s);
+        } catch (DukeInputException e) {
+            ui.displayError(e);
+            deleteTask(num);
+            return;
+        }
+        if (s.equals("y")) {
+            int taskNum = Integer.parseInt(num);
+            Task t = tasks.deleteTask(taskNum - 1);
+            ui.deleteTask(t.toString(), tasks.size());
+        } else {
+            ui.abortDelete();
+        }
     }
 
     private boolean exit() {
