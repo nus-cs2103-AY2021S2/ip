@@ -15,7 +15,7 @@ public class Todo extends Task {
      */
     public static Todo createTodo(String description) throws DukeInputException {
         if (description.length() == 0) {
-                throw new DukeInputException("The description of Todo cannot be empty.");
+            throw new DukeInputException("The description of Todo cannot be empty.");
         }
         return new Todo(description);
     }

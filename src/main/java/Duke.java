@@ -1,41 +1,30 @@
 /**
  * Duke is a task manager.
- * <p>
- * Currently supports these functionalities:
- * <p>
- * bye 
- * <p>  - Close Duke
- * <p>
- * list
- * <p>  - List out all task
- * <p>
- * done [number]
- * <p>  - Mark selected task as done
- * <p>
- * todo [description]
- * <p>  - Add a todo task
- * <p>
- * deadline [description] /by [due date]
- * <p>  - Add a deadline task with a due date (YYYY-MM-DD)
- * <p>
- * event [description] /at [date]
- * <p>  - Add a event task with a date (YYYY-MM-DD)
- * <p>
- * delete [number]
- * <p>  - Delete a task
- * <p>
- * save
- * <p>  - save checklist to "data/dukeData.txt"
- * <p>
- * load
- * <p>  - Load previously saved checklist
- * <p>
- * help
- * <p>  - Display list of commands
- * <p>
- * search [keyword/date]
- * <p>  - Display all task containing the following keyword.
- * <p>  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.
+ * 
+ * <p>Currently supports these functionalities:
+ * <br>bye 
+ * <br>  - Prompt user to save tasklist. Then closes Duke.
+ * <br>list
+ * <br>  - List out all task
+ * <br>done [number]
+ * <br>  - Mark selected task as done
+ * <br>todo [description]
+ * <br>  - Add a todo task
+ * <br>deadline [description] /by [due date]
+ * <br>  - Add a deadline task with a due date (YYYY-MM-DD)
+ * <br>event [description] /at [date]
+ * <br>  - Add a event task with a date (YYYY-MM-DD)
+ * <br>delete [number]
+ * <br>  - Delete a task
+ * <br>save
+ * <br>  - save checklist to "data/dukeData.txt"
+ * <br>load
+ * <br>  - Load previously saved checklist
+ * <br>help
+ * <br>  - Display list of commands
+ * <br>search [keyword/date]
+ * <br>  - Display all task containing the following keyword.
+ * <br>  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.
  */
 public class Duke {
 
@@ -43,6 +32,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor to create Duke object.
+     * @param filePath File path to save tasklist.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();

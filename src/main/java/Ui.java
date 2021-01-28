@@ -165,6 +165,10 @@ public class Ui {
         echoSingleBorder("TaskList loaded successfully!");
     }
 
+    /**
+     * Prompts user to save file.
+     * @return Response from user.
+     */
     public String saveFilePrompt() {
         echoSingleBorder("Do you want to save the current tasklist? y/n");
         return readInput();

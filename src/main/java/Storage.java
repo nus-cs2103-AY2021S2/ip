@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 /**
  * Storage to save tasklist to a text file.
- * <p>
- * Default path is "data/dukeData.txt".
+ * 
+ * <p>Default path is "data/dukeData.txt".
  */
 public class Storage {
     private File file;

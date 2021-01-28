@@ -8,8 +8,7 @@ public class Parser {
 
     /**
      * Checks if input from user is valid.
-     * <p>
-     * Only accepts valid commands, followed by valid parameters.
+     * <br>Only accepts valid commands, followed by valid parameters.
      * @param input Input from user.
      * @throws DukeInputException If input is invalid.
      */
@@ -155,6 +154,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if input is either a "y" (yes) or "n" (no).
+     * @param s Input from user.
+     * @throws DukeInputException If input is neither a "y" or "n".
+     */
     public static void parseYesNo(String s) throws DukeInputException {
         if (!(s.equals("y") || s.equals("n"))) {
             throw new DukeInputException("Invalid input! Please key in either \"y\" or \"n\"");

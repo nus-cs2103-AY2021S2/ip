@@ -10,12 +10,21 @@ public abstract class Task {
     protected boolean isDone;
     protected LocalDate date;
 
+    /**
+     * Constructor to create a Task with a description.
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.date = null;
     }
 
+    /**
+     * Constructor to create a Task with a description and a date.
+     * @param description Description of the task.
+     * @param date Date of the task.
+     */
     public Task(String description, LocalDate date) {
         this.description = description;
         this.isDone = false;
