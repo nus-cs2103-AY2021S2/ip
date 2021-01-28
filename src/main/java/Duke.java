@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Class Duke is the main class for the execution of Duke chatbot.
@@ -51,6 +53,9 @@ public class Duke {
                 String part1 = parts[0];
                 String part2 = parts[1];
                 Task task = new Deadline(part1.substring(7,part1.length()-1), part2.substring(2,part2.length()-1));
+                if (part1.charAt(4) == 'X') {
+                    task.isDone = true;
+                }
                 task.index = arrayList.size() + 1;
                 arrayList.add(task);
             } else if (line.contains("[E]")){
@@ -58,10 +63,16 @@ public class Duke {
                 String part1 = parts[0];
                 String part2 = parts[1];
                 Task task = new Event(part1.substring(7,part1.length()-1), part2.substring(2,part2.length()-1));
+                if (part1.charAt(4) == 'X') {
+                    task.isDone = true;
+                }
                 task.index = arrayList.size() + 1;
                 arrayList.add(task);
             } else if (line.contains("[T]")){
                 Task task = new Todo(line.substring(7));
+                if (line.charAt(4) == 'X') {
+                    task.isDone = true;
+                }
                 task.index = arrayList.size() + 1;
                 arrayList.add(task);
             }
@@ -141,31 +152,61 @@ public class Duke {
             } else if (input.contains("deadline") && !(input.equals("deadline"))) {
                 System.out.println("--------------------------");
                 System.out.println("Got it. I've added this task: ");
-                String[] parts = input.split("/");
+                String[] parts = input.split("/",2);
                 String part1 = parts[0];
                 String part2 = parts[1];
-                Task task = new Deadline(part1.substring(9), part2.substring(3));
-                task.index = arrayList.size() + 1;
-                arrayList.add(task);
-                System.out.println(task);
+
+                //e.g. deadline return book /by 02/12/2019
+                if (part2.contains("/")) {
+                    String dateString = part2.substring(3);
+                    String temp = dateString.substring(6)+"-"+dateString.substring(3,5) + "-" +dateString.substring(0,2);
+                    LocalDate xx = LocalDate.parse(temp);
+                    String f = xx.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
+                    Task task = new Deadline(part1.substring(9), f);
+                    task.index = arrayList.size()+1;
+                    arrayList.add(task);
+                    System.out.println(task);
+                } else {
+                    Task task = new Deadline(part1.substring(9), part2.substring(3));
+                    task.index = arrayList.size() + 1;
+                    arrayList.add(task);
+                    System.out.println(task);
+                }
+
                 System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
                 System.out.println("--------------------------");
+
 
             } else if (input.contains("event") && !(input.equals("event"))) {
                 System.out.println("--------------------------");
                 System.out.println("Got it. I've added this task: ");
-                String[] parts = input.split("/");
+                String[] parts = input.split("/",2);
                 String part1 = parts[0];
                 String part2 = parts[1];
-                Task task = new Event(part1.substring(6), part2.substring(3));
-                task.index = arrayList.size() + 1;
-                arrayList.add(task);
-                System.out.println(task);
+
+                // e.g. event project meeting /at 02/12/2019 2-4pm
+                if (part2.contains("/")) {
+                    String dateString = part2.substring(3,13);
+                    String timeString = part2.substring(13);
+                    String temp = dateString.substring(6) + "-" + dateString.substring(3, 5) + "-" + dateString.substring(0, 2);
+                    LocalDate xx = LocalDate.parse(temp);
+                    String f = xx.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + timeString ;
+
+                    Task task = new Event(part1.substring(6), f);
+                    task.index = arrayList.size() + 1;
+                    arrayList.add(task);
+                    System.out.println(task);
+                } else {
+                    Task task = new Event(part1.substring(6), part2.substring(3));
+                    task.index = arrayList.size() + 1;
+                    arrayList.add(task);
+                    System.out.println(task);
+                }
                 System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
                 System.out.println("--------------------------");
 
-
-            } else if (input.contains("delete") && !(input.equals("delete"))) {
+            }  else if (input.contains("delete") && !(input.equals("delete"))) {
 
                 int deletedNumber = Integer.parseInt(input.substring(7));
                 try {
@@ -225,32 +266,6 @@ public class Duke {
     }
 }
 
-
-/*
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    private static void printFileContents() throws FileNotFoundException {
-        File f = new File("duke.txt"); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-    }
-}
-    }
-
-
-    private static void writeToFile(String path, String s) throws IOException {
-        FileWriter fw = new FileWriter(path);
-        fw.write(s);
-        fw.close();
-    }
-
- */
 
 
 
