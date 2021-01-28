@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * The Duke program implements an application that
+ * allows users to store Tasks in a list, which will
+ * be saved in between sessions.
+ */
 public class Duke {
 
     private final Ui ui;
@@ -7,6 +12,13 @@ public class Duke {
     private final Parser parser;
     private final TaskList taskList;
 
+    /**
+     * Class constructor.
+     * @param ui handles interactions with user.
+     * @param storage handles loading and saving of Tasks.
+     * @param parser handles user commands.
+     * @param taskList contains list of Tasks.
+     */
     public Duke(Ui ui, Storage storage, Parser parser, TaskList taskList) {
         this.ui = ui;
         this.storage = storage;
@@ -14,6 +26,9 @@ public class Duke {
         this.taskList = taskList;
     }
 
+    /**
+     * This method executes the main logic of the Duke program.
+     */
     public void run() {
         ui.greet();
         boolean byeFlag = false;
@@ -68,6 +83,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Initialises a Duke object after loading a saved file
+     * of Tasks if it exists, then executes main logic.
+     * @param args unused.
+     */
     public static void main(String[] args) {
         Ui ui = new Ui();
         Storage storage = new Storage();
