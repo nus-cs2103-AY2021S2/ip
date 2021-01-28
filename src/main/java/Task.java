@@ -1,6 +1,6 @@
 public class Task {
-    public String task;
-    public boolean isDone;
+    protected String task;
+    protected boolean isDone;
 
     public Task(String task) {
         task = task.strip();
@@ -27,7 +27,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + task;
     }
 
-    public void doneTask() {
+    public void setDone() {
         isDone = true;
     }
 }

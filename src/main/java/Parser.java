@@ -1,26 +1,26 @@
 public class Parser {
-    public static String trimWhiteSpaces(String str) {
-        return str.trim();
+    public static String trimWhiteSpaces(String input) {
+        return input.trim();
     }
 
-    public static String[] firstAndRest(String str) {
-        String[] res = new String[2];
-        String[] split = str.split(" ");
-        res[0] = split[0];
+    public static String[] splitFirstAndRest(String input) {
+        String[] result = new String[2];
+        String[] split = input.split(" ");
+        result[0] = split[0];
         String rest = "";
-        for(int i = 1; i < split.length; i++) {
+        for (int i = 1; i < split.length; i++) {
             rest += " " + split[i];
         }
-        res[1] = rest;
-        return res;
+        result[1] = rest;
+        return result;
     }
 
-    public static int makeToInt(String str) {
+    public static int makeToInt(String input) {
         try {
-            return Integer.parseInt(Parser.trimWhiteSpaces(str));
+            return Integer.parseInt(Parser.trimWhiteSpaces(input));
         } catch (NumberFormatException e) {
             throw new NumberFormatException(Ui.lineGetter() +
-                    " Enter a number after command, 'done (number)' or 'delete (number)'\n"
+                    " Enter a number after command, 'done (number)'\n or 'delete (number)'\n"
                      + Ui.lineGetter());
         }
     }
