@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import com.tjtanjin.steve.tasks.Task;
 import org.junit.jupiter.api.Test;
 
 public class TaskTest {

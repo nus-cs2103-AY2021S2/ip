@@ -1,9 +1,9 @@
 package com.tjtanjin.steve.tasks;
 
-import com.tjtanjin.steve.storage.StorageHandler;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import com.tjtanjin.steve.storage.StorageHandler;
 
 /**
  * TaskHandler manages all task operations. It is managed through the CommandHandler and works directly

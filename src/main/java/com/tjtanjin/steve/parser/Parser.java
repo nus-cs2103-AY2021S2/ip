@@ -211,7 +211,8 @@ public class Parser {
             }
         } catch (IndexOutOfBoundsException | NullPointerException | DateTimeException e) {
             if (taskType.equalsIgnoreCase(Cmd.DEADLINE.toString())) {
-                throw new SteveInvalidFormatException("Error: Invalid date specified, please adhere to the format: /by YYYY-MM-DD");
+                throw new SteveInvalidFormatException("Error: Invalid date specified, "
+                        + "please adhere to the format: /by YYYY-MM-DD");
             } else {
                 throw new SteveInvalidFormatException("Error: Invalid date specified, "
                         + "please adhere to the format: /from YYYY-MM-DD /to YYYY-MM-DD");
