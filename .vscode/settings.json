@@ -1,4 +1,4 @@
 {
 	"java.format.settings.url": "checkstyle.xml",
-	"java.checkstyle.configuration": "${workspaceFolder}\\config\\checkstyle\\checkstyle.xml"
+	"java.checkstyle.configuration": "${workspaceFolder}\\cs2030_checks.xml"
 }

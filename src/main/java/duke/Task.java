@@ -45,6 +45,9 @@ public class Task {
         }
     }
 
+    /**
+     * To Print out the Task in a nice format.
+     */
     public String toString() {
         if (!isCompleted()) {
             return String.format("[%s][ ] %s", this.getIdentity(), this.getName());
@@ -53,6 +56,9 @@ public class Task {
         }
     }
 
+    /**
+     * To Print out the Task for use in the Storage file.
+     */
     public String storeString() {
         return String.format("%s | %d | %s | %s", this.getIdentity(), this.isCompleted() ? 1 : 0, this.getName(),
                 this.getDate());
