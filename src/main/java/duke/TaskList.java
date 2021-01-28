@@ -6,9 +6,12 @@ import duke.models.Task;
 import duke.models.Todo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
+    public static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
     private ArrayList<Task> tasks;
 
     public TaskList() {
@@ -49,10 +52,10 @@ public class TaskList {
 
         if (task instanceof Deadline) {
             builder.append("|");
-            builder.append(((Deadline) task).getDeadline());
+            builder.append(DATE_TIME_FORMATTER.format(((Deadline) task).getDeadline()));
         } else if (task instanceof Event) {
             builder.append("|");
-            builder.append(((Event) task).getDate());
+            builder.append(DATE_TIME_FORMATTER.format(((Event) task).getDate()));
         }
 
         return builder.toString();
@@ -66,12 +69,12 @@ public class TaskList {
         if (type.equals("T")) {
             task = new Todo(taskStringArray[2]);
         } else if (type.equals("D")) {
-            task = new Deadline(taskStringArray[2], LocalDateTime.parse(taskStringArray[3]));
+            task = new Deadline(taskStringArray[2], LocalDateTime.parse(taskStringArray[3], DATE_TIME_FORMATTER));
         } else if (type.equals("E")) {
-            task = new Event(taskStringArray[2], LocalDateTime.parse(taskStringArray[3]));
+            task = new Event(taskStringArray[2], LocalDateTime.parse(taskStringArray[3], DATE_TIME_FORMATTER));
         }
 
-        if (taskStringArray[1].equals('1') && task != null) {
+        if (taskStringArray[1].equals("1") && task != null) {
             task.markAsDone();
         }
 

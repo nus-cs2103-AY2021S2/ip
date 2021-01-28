@@ -8,6 +8,7 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String HORIZONTAL_LINE = "_____________________________________________________________________";
 
     public Ui() {
 
@@ -18,7 +19,7 @@ public class Ui {
     }
 
     public void printHorizontalLine() {
-        printIndentOutput("_____________________________________________________________________");
+        printIndentOutput(HORIZONTAL_LINE);
     }
 
     public void printTaskListStatus(TaskList tasks, Task curTask) {

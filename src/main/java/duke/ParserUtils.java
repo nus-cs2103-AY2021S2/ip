@@ -39,6 +39,9 @@ public class ParserUtils {
         if (cmdArgs.length < 2) {
             throw new DukeException(errorMessage);
         }
+        if (cmdArgs[1].isEmpty()) {
+            throw new DukeException(errorMessage);
+        }
         return cmdArgs;
     }
 }

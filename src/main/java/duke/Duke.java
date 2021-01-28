@@ -3,6 +3,7 @@ package duke;
 import duke.commands.Command;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,8 +12,16 @@ public class Duke {
     private TaskList tasks;
 
     public Duke() {
+        this(null);
+    }
+
+    public Duke(String directoryPath) {
         this.ui = new Ui();
-        this.storage = new Storage();
+        if (directoryPath != null) {
+            this.storage = new Storage(Paths.get(directoryPath));
+        } else {
+            this.storage = new Storage();
+        }
         try {
             this.tasks = storage.readTasks();
         } catch(IOException e) {
