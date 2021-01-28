@@ -5,14 +5,25 @@ import duke.TaskList;
 import duke.Ui;
 import duke.models.Task;
 
+/**
+ * Abstract class for commands adding new tasks to the list.
+ */
 public abstract class AddCommand implements Command {
     private String taskName;
     public AddCommand(String taskName) {
         this.taskName = taskName;
     }
 
+    /**
+     * Gets the task to be added to the list.
+     * @return task to be added to the list
+     */
     public abstract Task getTask();
 
+    /**
+     * Returns the name of the task.
+     * @return name of the task
+     */
     public String getTaskName() {
         return taskName;
     }

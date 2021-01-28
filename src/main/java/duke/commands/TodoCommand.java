@@ -8,6 +8,10 @@ import duke.commands.Command;
 import duke.models.Task;
 import duke.models.Todo;
 
+/**
+ * Handles the Todo command of the user to create new todos in the list.
+ * Format of command: "todo <todo_name>".
+ */
 public class TodoCommand implements Command {
     private String taskName;
 

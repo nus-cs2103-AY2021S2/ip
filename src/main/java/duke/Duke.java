@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Main Duke class.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -30,6 +33,10 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Executes the Duke program by reading in commands and giving appropriate outputs.
+     */
     public void run() {
         ui.printIntro();
 

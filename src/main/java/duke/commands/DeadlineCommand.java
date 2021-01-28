@@ -5,6 +5,10 @@ import duke.models.Task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Handles the Deadline command of the user to create new deadlines in the list.
+ * Format of command: "deadline <deadline_name> /by <deadline>".
+ */
 public class DeadlineCommand extends AddCommand {
     private LocalDateTime deadline;
 
