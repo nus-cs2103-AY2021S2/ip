@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -37,10 +39,12 @@ public class Storage {
                         task = new Todo(input);
                         break;
                     case "D ":
-                        task = new Deadline(taskArr[3].substring(3), " " + taskArr[2].substring(0, taskArr[2].length() - 1));
+                        LocalDateTime dateTime = LocalDateTime.parse(taskArr[3].substring(4), DateTimeFormatter.ofPattern("dd-M-yyyy Hmm"));
+                        task = new Deadline(dateTime, taskArr[2].substring(0, taskArr[2].length() - 1));
                         break;
                     case "E ":
-                        task = new Event(taskArr[3].substring(3), " " + taskArr[2].substring(0, taskArr[2].length() - 1));
+                        LocalDateTime dateTimeStart = LocalDateTime.parse(taskArr[3].substring(4), DateTimeFormatter.ofPattern("dd-M-yyyy Hmm"));
+                        task = new Event(dateTimeStart, taskArr[2].substring(0, taskArr[2].length() - 1));
                         break;
                 }
                 if (task != null) {

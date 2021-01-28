@@ -1,55 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String date;
+    private LocalDateTime date;
     private String description;
 
-    public Event(String input) {
-        super(input);
-    }
-
-    public Event(String date, String description) {
-        super(description + " " + date);
+    public Event(LocalDateTime date, String description) {
+        super(description);
         this.date = date;
         this.description = description;
-    }
-
-    public void fillAttributes() {
-        if (hasValidDate()) {
-            String[] command = input.split(" ");
-            int index = findDate();
-            String descriptionStr = "";
-            String dateStr = "";
-            for (int i = 1; i < command.length; i++) {
-                if (i < index) {
-                    descriptionStr += " " + command[i];
-                } else if (i > index) {
-                    dateStr += " " + command[i];
-                }
-            }
-            this.description = descriptionStr;
-            this.date = dateStr;
-        }
-    }
-    public int findDate() {
-        String[] command = input.split(" ");
-        boolean found = false;
-        int index = 0;
-        while (!found && index < command.length) {
-            if (command[index].equals("/at")) {
-                found = true;
-            } else {
-                index++;
-            }
-        }
-        return index;
-    }
-
-    public boolean hasValidDate() {
-        String[] command = input.split(" ");
-        if (this.findDate() == command.length) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     @Override
@@ -60,8 +19,7 @@ public class Event extends Task {
         } else {
             str += "O |";
         }
-        fillAttributes();
-        str += description + " | at:" + date;
+        str += " " + description + " | at: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy Hmm"));
         return str;
     }
 
@@ -73,8 +31,7 @@ public class Event extends Task {
         } else {
             str += UNCHECKED;
         }
-        fillAttributes();
-        str += description + " (at:" + date + ")";
+        str += " " + description + " (at: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy Hmm")) + ")";
         return str;
     }
 }

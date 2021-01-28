@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public TaskList tasks;
@@ -48,11 +51,16 @@ public class Duke {
                 } else if (command[1].equals("")) {
                     throw new DukeException(("Please describe the nature of your task sir/maam."));
                 } else {
-                    Deadline task = new Deadline(input);
-                    if (!task.hasValidDeadline()) {
+                    String[] details = input.split(" /by ");
+                    if (details.length != 2) {
                         throw new DukeException("Please specify the deadline for this task using /by.");
-                    } else {
+                    }
+                    try {
+                        LocalDateTime dateTime = LocalDateTime.parse(details[1], DateTimeFormatter.ofPattern("dd/M/yyyy Hmm"));
+                        Deadline task = new Deadline(dateTime, details[0].substring(9));
                         tasks.addTask(task);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(e);
                     }
                 }
             } else if (command[0].equals("event")) {
@@ -61,11 +69,16 @@ public class Duke {
                 } else if (command[1].equals("")) {
                     throw new DukeException(("Please describe the nature of your task sir/maam."));
                 } else {
-                    Event task = new Event(input);
-                    if (!task.hasValidDate()) {
+                    String[] details = input.split(" /at ");
+                    if (details.length != 2) {
                         throw new DukeException("Please specify the date of this event using /at.");
-                    } else {
+                    }
+                    try {
+                        LocalDateTime dateTime = LocalDateTime.parse(details[1], DateTimeFormatter.ofPattern("dd/M/yyyy Hmm"));
+                        Event task = new Event(dateTime, details[0].substring(6));
                         tasks.addTask(task);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(e);
                     }
                 }
             } else if (command[0].equals("list")) {
@@ -110,10 +123,3 @@ public class Duke {
         storage.saveTaskList(str);
     }
 }
-
-
-
-
-
-
-
