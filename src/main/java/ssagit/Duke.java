@@ -1,7 +1,11 @@
 package ssagit;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.lang.*;
+import java.time.LocalDate;
 
 public class Duke {
     /**
@@ -50,8 +54,13 @@ public class Duke {
             String input;
             int j = 0; // task counter
 
+            // date init
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
+            DateValidator validator = new DateValidatorLocalDate(dateFormatter);
+
             while (true) {
                 input = sc.nextLine();
+                System.out.println(input);
                 String inputArr[] = input.split(" ");
                 if (inputArr[0].equals("bye"))
                     break;
@@ -70,16 +79,24 @@ public class Duke {
                 } else if (inputArr[0].equals("todo") || inputArr[0].equals("event") ||
                         inputArr[0].equals("deadline")) {
                     // add to list
-                    String[] inputArrTasks = input.split("/");
+                    String[] inputArrTasks = input.split("/", 2);
                     String[] firstHalf = inputArrTasks[0].split(" ", 2);
+                    System.out.println(inputArrTasks[1]);
 
                     if (inputArrTasks.length != 1) {
                         // create Deadline/Event
                         String[] secondHalf = inputArrTasks[1].split(" ", 2);
-                        if (inputArr[0].equals("event")) {
-                            taskArr[j] = new EventTask(firstHalf[1], false, secondHalf[1]);
-                        } else if (inputArr[0].equals("deadline")) {
-                            taskArr[j] = new DeadlineTask(firstHalf[1], false, secondHalf[1]);
+                        System.out.println(secondHalf[1]);
+                        if (validator.isValid(secondHalf[1])) {
+                            Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(secondHalf[1]);
+                            if (inputArr[0].equals("event")) {
+                                taskArr[j] = new EventTask(firstHalf[1], false, date);
+                            } else if (inputArr[0].equals("deadline")) {
+                                taskArr[j] = new DeadlineTask(firstHalf[1], false, date);
+                            }
+                        } else {
+                            System.out.println("Invalid date format for timed Task");
+                            continue;
                         }
                     } else {
                         // create todoTask
@@ -121,6 +138,8 @@ public class Duke {
             System.out.println(e.getMessage());
         } catch (UnknownInputParamException e) {
             System.out.println(e.getMessage());
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 }
