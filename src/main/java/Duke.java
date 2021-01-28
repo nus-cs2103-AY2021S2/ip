@@ -1,9 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
+/**
+ * Main Duke chatbot class.
+ */
 public class Duke {
-
+    /** List of Tasks */
     private ArrayList<Task> list;
     private Duke(ArrayList<Task> list){
 
