@@ -2,6 +2,8 @@ package jeff;
 
 import java.time.format.DateTimeParseException;
 
+import java.util.ArrayList;
+
 public class Parser {
 
     public static boolean execute(String message, TaskList tasks, Ui ui, Storage storage) throws JeffException {
@@ -106,7 +108,21 @@ public class Parser {
             ui.print("Bye. Hope to see you again!");
             storage.save(tasks.getTaskList());
             isExit = true;
+            break;
+
+        case find:
+            if(messageMain.length != 2) {
+                throw new JeffException("enter keyword to find task(s) by");
+            }
+            ArrayList<Task> foundTasks = tasks.findTask(messageMain[1]);
+            String s = "Here are the tasks I found matching \"" + messageMain[1] + "\":\n";
+            for (Task t : foundTasks) {
+                s += t.toString() + "\n";
+            }
+            ui.print(s);
+            break;
         }
+        
         return isExit;
     }
 }

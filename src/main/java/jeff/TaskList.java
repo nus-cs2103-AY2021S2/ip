@@ -36,4 +36,14 @@ public class TaskList {
     public void deleteTask(int i) {
         tasks.remove(i);
     }
+
+    public ArrayList<Task> findTask(String s) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getName().contains(s)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
+    }
 }

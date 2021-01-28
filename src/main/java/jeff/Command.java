@@ -7,5 +7,6 @@ public enum Command {
     event,
     done,
     delete,
-    bye
+    bye,
+    find
 }
