@@ -100,4 +100,22 @@ public class Ui{
 
         return toreturn + input;
     }
+
+    public void showFoundTaskList(ArrayList<Task> taskArray){
+        StringBuilder sb = new StringBuilder();
+        sb.append(horizontalLine()).append('\n');
+
+        sb.append(indentedString("Here are the matching tasks in your list:\n"));
+        for (int i = 0; i < taskArray.size(); i++) {
+
+            Task currentTask = taskArray.get(i);
+
+            String numberIndicator =  (i+1) + ".";
+            String temp = numberIndicator + currentTask.toString() + '\n';
+
+            sb.append(indentedString( temp ));
+        }
+        sb.append(horizontalLine());
+        System.out.println(sb.toString());
+    }
 }

@@ -36,4 +36,8 @@ public class Task {
         int isDoneInt = isDone ? 1 : 0;
         return isDoneInt + "|" + description;
     }
+
+    public boolean descriptionContains(String input){
+        return description.contains(input);
+    }
 }

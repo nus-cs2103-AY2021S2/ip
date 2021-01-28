@@ -138,7 +138,22 @@ public class Parser {
                         "[eg. deadline submit work /by 2020-03-20]");
             }
         }
+    }
 
+    public boolean equalsToFind(String userInput) {
+        return checkStringStartingEquals(userInput, "find");
+    }
+
+    public String parseFindCommand(String userInput) throws DukeException{
+        int length = "find".length();
+
+        if (checkStringEquals(userInput, "find")){
+            throw new DukeException("Error! The description of what you wish to find cannot be empty!");
+        }else if(!checkStringEquals(userInput.substring(length,length+1), " ")){
+            throw new DukeException("Error! Please include a space after the string you wish to find.");
+        }else{
+            return userInput.substring(length+1);
+        }
     }
 
     public boolean checkIfExit(String userInput){
@@ -167,7 +182,11 @@ public class Parser {
             }else if(this.equalsToDeadline(userInput)) {
                 ArrayList<String> eventDescription = this.parseDeadlineCommand(userInput);
                 return new DeadlineCommand(eventDescription);
-            }else{
+            }else if(this.equalsToFind(userInput)){
+                String stringToFind = this.parseFindCommand(userInput);
+                return new FindCommand(stringToFind);
+            }
+            else{
                 throw new DukeException("I'm sorry, but I don't know what that means");
             }
 
