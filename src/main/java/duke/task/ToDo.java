@@ -1,14 +1,14 @@
-package duke;
+package duke.task;
 
 /**
  * ToDo task class (with time formatting feature).
  */
 public class ToDo extends Task {
-    ToDo(String name, TaskType type) {
+    public ToDo(String name, TaskType type) {
         super(name, type);
     }
 
-    ToDo(String name, TaskType type, boolean done) {
+    public ToDo(String name, TaskType type, boolean done) {
         super(name, type, done);
     }
 

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,6 +18,7 @@ public class Storage {
 
     /**
      * Constructs the storage.
+     *
      * @param filePath the filepath of the storage file
      */
     public Storage(String filePath) {

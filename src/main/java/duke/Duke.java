@@ -1,21 +1,18 @@
 package duke;
 
 /**
- * The main duke.Duke class.
+ * The main Duke class.
  */
 public class Duke {
-    private final Ui ui;
-    private final Storage storage;
     private final Chatbot chatbot;
 
     Duke() {
-        ui = new Ui();
-        storage = new Storage("./data.txt");
-        chatbot = new Chatbot(storage.readFile());
+        chatbot = new Chatbot();
     }
 
     /**
      * Triggers the execution of duke.Duke.
+     *
      * @param args command line arguments
      */
     public static void main(String[] args) {
@@ -27,10 +24,9 @@ public class Duke {
      * chat bot execution, welfare, and update of file.
      */
     public void execute() {
-        ui.welcome();
+        System.out.println(Ui.welcome());
         chatbot.execute();
-        ui.welfare();
-        storage.updateFile(chatbot.getTaskList());
+        System.out.println(Ui.welfare());
     }
 
 }
