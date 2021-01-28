@@ -1,4 +1,4 @@
-package duke;
+package soonkeatneo.duke;
 
 /**
  * Implementation for the chat-bot UI.

@@ -1,10 +1,10 @@
-package duke;
+package soonkeatneo.duke;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import java.time.format.DateTimeParseException;
-import duke.task.Deadline;
+import soonkeatneo.duke.task.Deadline;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {

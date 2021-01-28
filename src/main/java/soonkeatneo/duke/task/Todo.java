@@ -1,4 +1,4 @@
-package duke.task;
+package soonkeatneo.duke.task;
 
 /**
  * Implementation for {@Task} with no schedules assigned.

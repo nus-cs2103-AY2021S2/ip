@@ -1,4 +1,4 @@
-package duke;
+package soonkeatneo.duke;
 
 public class InvalidCommandException extends IllegalArgumentException {
     public InvalidCommandException() {

@@ -1,4 +1,4 @@
-package duke;
+package soonkeatneo.duke;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package duke;
+package soonkeatneo.duke;
 
 public class InvalidTaskException extends IllegalArgumentException {
     public InvalidTaskException() {

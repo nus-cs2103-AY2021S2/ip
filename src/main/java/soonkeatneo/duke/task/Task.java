@@ -1,4 +1,4 @@
-package duke.task;
+package soonkeatneo.duke.task;
 
 /**
  * Implementation for the Tasks that the chat-bot stores.

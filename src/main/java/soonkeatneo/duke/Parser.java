@@ -1,11 +1,11 @@
-package duke;
+package soonkeatneo.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
+import soonkeatneo.duke.task.Deadline;
+import soonkeatneo.duke.task.Event;
+import soonkeatneo.duke.task.Todo;
 
 /**
  * Implementation for parsing of input to be routed to specific handlers.
