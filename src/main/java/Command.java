@@ -5,7 +5,7 @@ import java.io.IOException;
  * Specific commands will inherit from this abstract class.
  */
 public abstract class Command {
-    private boolean exit = false;
+    private boolean isExit = false;
 
     /**
      * Executes the given command and modifies the TaskList and Storage.
@@ -21,7 +21,7 @@ public abstract class Command {
      * To identify if a command causes the Duke bot to stop running.
      */
     public void toggleExit() {
-        this.exit = !this.exit;
+        this.isExit = !this.isExit;
     }
 
     /**
@@ -29,6 +29,6 @@ public abstract class Command {
      * @return If a command is an exit command.
      */
     public boolean isExit() {
-        return this.exit;
+        return this.isExit;
     }
 }
