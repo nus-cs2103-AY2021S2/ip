@@ -13,6 +13,10 @@ public abstract class Task {
         this.done = true;
     }
 
+    public String getTask() {
+        return this.task;
+    }
+
     public abstract String fileString();
 
     @Override
