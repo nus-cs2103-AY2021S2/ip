@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<Task>();
@@ -37,7 +38,34 @@ public class Duke {
                 "\n" + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void saveTaskList() {
+        try {
+            File file = new File("src\\main\\duke.txt");
+            FileWriter fw = new FileWriter(file);
+            //PrintWriter pw = new PrintWriter(file);
+            for (int i = 0; i < taskList.size(); ++i) {
+                fw.write(taskList.get(i).toString() + "\n");
+            }
+            fw.close();
+            //pw.close();
+        } catch (Exception ex) {
+            System.out.println("error" + ex.getMessage());
+        }
+    }
+
+    public static void loadTaskList() throws Exception {
+        String line  = null;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\main\\duke.txt"));
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        };
+
+    public static void main(String[] args) throws DukeException, Exception {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -88,12 +116,12 @@ public class Duke {
                 String time = "";
                 String desc = "";
                 int start = 0;
-                for(int i = 1; i < spiltInput.length; ++i) {
+                for (int i = 1; i < spiltInput.length; ++i) {
                     if (spiltInput[i].equals("/by")){
                         start = i;
                         break;
                     }
-                    if(desc.equals("")) {
+                    if (desc.equals("")) {
                         desc += spiltInput[i];
                     } else {
                         desc = desc + " " + spiltInput[i];
@@ -108,7 +136,7 @@ public class Duke {
                 }
                 DeadlineTask task = new DeadlineTask(desc, time);
                 addTask(task);
-            } else if(input.startsWith("todo")) {
+            } else if (input.startsWith("todo")) {
                 String[] spiltInput = input.split("\\s+");
                 String desc = "";
                 for(int i = 1; i < spiltInput.length; ++i) {
@@ -126,6 +154,10 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 listTask();
+            } else if (input.equals("save")) {
+                saveTaskList();
+            } else if (input.equals("load")) {
+                loadTaskList();
             } else {
                 throw new InvalidArgument("Your input is invalid, Please try again");
             }
