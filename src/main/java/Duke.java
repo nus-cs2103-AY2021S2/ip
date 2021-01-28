@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,6 +34,7 @@ public class Duke {
 
         Storage st = new Storage();
         st.initialise(st.getDefaultFilePath());
+        ArrayList<Task> lst = new ArrayList<>();
 
         while (sc.hasNext()) {
             String input = sc.next();
@@ -41,7 +43,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again!");
                 break;
             } else {
-                tl.createTask(input, sc);
+                tl.createTask(input, sc, lst);
             }
         }
     }

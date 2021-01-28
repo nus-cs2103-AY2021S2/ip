@@ -16,13 +16,14 @@ public class TaskList {
      * Adds the task into the list if the Task is either "Todo", "Deadline" or "Event"
      * if the command given is "done", then the task will be marked as done but stay in the list
      * if the command given is "delete", then the task wil be deleted and removed from the list
+     * if the command given is "find", then the task will proceed to scan through the list
+     * and return the respective tasks that have the matching keyword
      * @param input the task to be added/deleted/edited in the list
      * @param sc the scanner that was used to obtain the input
      *           and will thus be used to obtain the remaining lines
      */
 
-    public static void createTask(String input, Scanner sc) {
-        ArrayList<Task> lst = new ArrayList<>();
+    public static void createTask(String input, Scanner sc, ArrayList<Task> lst) {
         Storage store = new Storage();
         String home = store.getHome();
         String file = store.getDefaultFilePath();
@@ -177,8 +178,27 @@ public class TaskList {
                 } catch (IOException e) {
                     System.out.println("OOPS!!! " + e.getMessage());
                 }
-            } catch (DukeException ex){
+            } catch (DukeException ex) {
                 System.err.println("☹ OOPS!!! The description of an event cannot be empty.\n");
+            }
+        } else if (input.equals("find")) {
+            String keyword = sc.next();
+            int matchCount = 0;
+            ArrayList<Integer> num = new ArrayList<>();
+            for (int i = 0; i < lst.size(); i++) {
+                String taskDes = lst.get(i).des;
+                if (taskDes.toLowerCase().indexOf(keyword.toLowerCase()) != -1) {
+                    num.add(i);
+                    matchCount++;
+                }
+            }
+            if (matchCount != 0) {
+                System.out.println("Here are the matching tasks in your list:\n");
+                for (int j = 0; j < num.size(); j++) {
+                    System.out.println(lst.get(j));
+                }
+            } else {
+                System.out.println("There are no tasks matching this keyword :-(");
             }
         } else {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
