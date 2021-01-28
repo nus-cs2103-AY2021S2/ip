@@ -14,8 +14,16 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * Represents a parser that processes input command lines from a user.
+ */
 public class Parser {
-
+    /**
+     * Parses the input line from a user.
+     * @param commandLine Input string to be parsed.
+     * @return A command based on the input.
+     * @throws DukeException If invalid command is given.
+     */
     public static Command parse(String commandLine) throws DukeException{
         String[] messages = commandLine.split(" ");
         String commandType = messages[0];
@@ -73,11 +81,21 @@ public class Parser {
         }
     }
 
-    //Gets task description
+    /**
+     * Processes the String to get the task description.
+     * @param message Input string to be processed.
+     * @return A task description.
+     */
     public static String processTask(String message){
         return message.substring(message.indexOf(' ') + 1);
     }
 
+    /**
+     * Generates a AddEvent command from the task description.
+     * @param description Event description.
+     * @return A command that adds a Event to the task list.
+     * @throws Exception If invalid description is given.
+     */
     public static AddEvent generateEvent(String description) throws Exception {
 
         String name = description.substring(0, description.indexOf(" /at "));
@@ -89,6 +107,12 @@ public class Parser {
         return new AddEvent(new Event(name, 0, at));
     }
 
+    /**
+     * Generates a AddDeadline command from the task description.
+     * @param description Deadline description.
+     * @return A command that adds a Deadline to the task list.
+     * @throws Exception If invalid description is given.
+     */
     public static AddDeadline generateDeadline(String description) throws Exception {
         String name = description.substring(0, description.indexOf(" /by "));
         String time = description.substring(description.indexOf(" /by ") + 5);

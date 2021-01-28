@@ -8,7 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Represents a test driver for <code>Parser</code>.
+ */
 public class ParserTest {
+
+    /**
+     * Tests how Parser parses valid command input.
+     * @throws DukeException If invalid command is given.
+     */
     @Test
     public void testParse_success() throws DukeException{
         Command c1 = Parser.parse("bye");
@@ -17,6 +25,9 @@ public class ParserTest {
         assertTrue(c2 instanceof ListCommand);
     }
 
+    /**
+     * Tests how Parser parses invalid command input.
+     */
     @Test
     public void testParse_exceptionThrown(){
         try {

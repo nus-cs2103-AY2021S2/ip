@@ -11,14 +11,26 @@ import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
 
+/**
+ * Represents local storage of task data.
+ */
 public class Storage {
     private String path;
     private TaskList taskList = new TaskList();
 
+    /**
+     * Constructor for Storage.
+     * @param path Path of the file storing task data.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Loads and opens the file with a specified path.
+     * @return Task list.
+     * @throws DukeException If file for storage cannot be created.
+     */
     public TaskList openFile() throws DukeException{
         File file = new File(path);
 
@@ -44,7 +56,12 @@ public class Storage {
         }
     }
 
-    //Process txt into Task
+    /**
+     * Retrieves a task by processing the content stored locally.
+     * @param txtLine A line of text stored in the txt file.
+     * @return Task based on the file content.
+     * @throws DukeException If text is invalid.
+     */
     public Task processContent (String txtLine) throws DukeException{
         String[] content = txtLine.split(" \\| ");
         String taskType = content[0];
@@ -63,7 +80,9 @@ public class Storage {
         }
     }
 
-    //Update taskList into txt
+    /**
+     * Updates the local file every time there is a change in the task list.
+     */
     public void updateFile(){
         try{
             FileWriter fw = new FileWriter(path);
