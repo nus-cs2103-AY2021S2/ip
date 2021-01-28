@@ -2,6 +2,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with user interactions.
+ * Read data input from user.
+ * Print messages to inform/update user according to Duke actions.
+ */
 public class Ui {
     private final Scanner sc;
 

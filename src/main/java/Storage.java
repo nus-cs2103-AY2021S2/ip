@@ -6,9 +6,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with storing and retrieving tasks from a saved file in the hard drive.
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Constructor to create a saved file in the hard drive if it does not already exist.
+     * @param path The path where the saved file is located.
+     * @throws IOException If error occur when creating the new file.
+     * @throws DukeException If error occur when creating the folder/file.
+     */
     public Storage(String path) throws IOException, DukeException {
         String[] splits = path.split("/");
         File dir = new File(splits[0]);
@@ -28,6 +37,12 @@ public class Storage {
         this.file = savedTasks;
     }
 
+    /**
+     * Loads in the data from the saved file.
+     * @return An ArrayList of Tasks retrieved from the saved file.
+     * @throws FileNotFoundException If the saved file cannot be found.
+     * @throws DukeException If the saved file contains data that cannot be read.
+     */
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         Scanner sc = new Scanner(this.file);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -59,6 +74,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Updates the saved file in hard drive according to what is in the current TaskList.
+     * @param taskList Contains the tasks at hand.
+     * @throws IOException If a FileWriter cannot be created.
+     */
     public void update(TaskList taskList) throws IOException {
         StringBuilder textToAdd = new StringBuilder();
         FileWriter fw = new FileWriter(this.file);
