@@ -28,13 +28,11 @@ public class Deadline extends Task {
         String[] dateList = this.afterBy.split(" ", 2);
         LocalDate deadlineDate = LocalDate.parse(dateList[0]);
 
-        deadlineDate.format(dateFormat);
-
         if (dateList.length >= 2) {
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm a");
             LocalTime time = LocalTime.parse(dateList[1]);
 
-            return deadlineDate + " " + time.format(timeFormat);
+            return deadlineDate.format(dateFormat) + " " + time.format(timeFormat);
         } else {
             return deadlineDate.toString();
         }

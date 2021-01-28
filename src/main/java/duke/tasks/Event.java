@@ -30,13 +30,11 @@ public class Event extends Task{
         String[] dateList = this.dateTime.split(" ", 2);
         LocalDate eventDate = LocalDate.parse(dateList[0]);
 
-        eventDate.format(dateFormat);
-
         if (dateList.length == 2) {
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm a");
             LocalTime eventTime = LocalTime.parse(dateList[1]);
 
-            return eventDate + " " + eventTime.format(timeFormat);
+            return eventDate.format(dateFormat) + " " + eventTime.format(timeFormat);
         } else {
             return eventDate.toString();
         }
