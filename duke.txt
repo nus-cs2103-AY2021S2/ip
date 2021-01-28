@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [D][X] return book (by: Sunday)
 [D][X] return book (by: Sunday)
 [D][X] return book (by: Sunday)
@@ -12,3 +13,7 @@
 [D][X] return book (by: Sunday)
 >>>>>>> branch-A-CodingStandard
 [D][ ] return book (by: Sunday)
+=======
+[E][ ] project meeting (at: Mon 2-4pm)
+[E][X] project meeting (at: Mon 2-4pm)
+>>>>>>> branch-Level-9
