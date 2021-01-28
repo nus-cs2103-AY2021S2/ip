@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ public class Duke {
 
         // Task list
         List<Task> taskList = new ArrayList<>();
+        loadTasksIntoTaskList(taskList);
         Scanner sc = new Scanner(System.in);
 
         boolean isChatBotOnline = true;
@@ -27,27 +29,30 @@ public class Duke {
                     try {
                         Todos todos = new Todos(additionalText);
                         taskList.add(todos);
+                        saveTasksToInternalStorage(taskList);
                         printTaskAddedMessage(todos);
                     } catch (EmptyTaskDukeException e) {
-                        System.out.println(formatMessage(e + ""));
+                        System.out.println(formatMessage(e.getMessage()));
                     }
                     break;
                 case DEADLINE:
                     try {
                         Deadlines deadlines = new Deadlines(additionalText);
                         taskList.add(deadlines);
+                        saveTasksToInternalStorage(taskList);
                         printTaskAddedMessage(deadlines);
                     } catch (EmptyTaskDukeException e) {
-                        System.out.println(formatMessage(e + ""));
+                        System.out.println(formatMessage(e.getMessage()));
                     }
                     break;
                 case EVENT:
                     try {
                         Events events = new Events(additionalText);
                         taskList.add(events);
+                        saveTasksToInternalStorage(taskList);
                         printTaskAddedMessage(events);
                     } catch (EmptyTaskDukeException e) {
-                        System.out.println(formatMessage(e + ""));
+                        System.out.println(formatMessage(e.getMessage()));
                     }
                     break;
                 case LIST:
@@ -59,6 +64,7 @@ public class Duke {
                         int arrayNumber = taskNumber - 1;
                         Task task = taskList.get(arrayNumber);
                         String doneMessage = task.setDone();
+                        saveTasksToInternalStorage(taskList);
                         System.out.println(formatMessage(doneMessage));
                     } catch (NumberFormatException e) {
                         System.out.println(formatMessage(e +
@@ -76,6 +82,7 @@ public class Duke {
                         int arrayNumber = taskNumber - 1;
                         Task task = taskList.get(arrayNumber);
                         taskList.remove(arrayNumber);
+                        saveTasksToInternalStorage(taskList);
                         System.out.println(formatMessage("The following task has been removed:\n" +
                                 task + "\n" + Task.getNumOfTasksString()));
                     } catch (NumberFormatException e) {
@@ -145,5 +152,13 @@ public class Duke {
     static void printTaskAddedMessage(Task task) {
         System.out.println(formatMessage("Got it. I've added this task:\n"
                 + task + "\n" + Task.getNumOfTasksString()));
+    }
+
+    static void saveTasksToInternalStorage(List<Task> taskList) {
+        DukeFileWriter.saveTaskListInInternalStorage(taskList);
+    }
+
+    static void loadTasksIntoTaskList(List<Task> taskList) {
+        DukeFileReader.loadTasksIntoTaskList(taskList);
     }
 }
