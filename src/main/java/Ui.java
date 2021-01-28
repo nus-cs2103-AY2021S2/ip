@@ -61,4 +61,12 @@ public class Ui {
         String message = "Got it. I`ve added this task:";
         this.printExecuteResult(message, task, numTasks, "");
     }
+
+    public void showSuccessSearch() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public void showFailSearch(String searchTerm) {
+        System.out.println("There are no matching task with " + searchTerm);
+    }
 }

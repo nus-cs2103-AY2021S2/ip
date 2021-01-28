@@ -4,6 +4,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    public static String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
+    public static String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
 
     public static Command parse(String fullCommand) throws DukeException , DukeDeadlineException{
         int firstSpace = fullCommand.indexOf(" ");
@@ -30,11 +32,14 @@ public class Parser {
 
         //Commands that needs a description
         Task task = null;
-        if(keyword.equalsIgnoreCase("todo")) {
-            checkDescription(firstSpace);
+        if(keyword.equalsIgnoreCase("find")){
+            checkDescription(firstSpace, ERROR_SEARCH_TERM);
+            return new FindCommand(fullCommand.substring(firstSpace));
+        } else if(keyword.equalsIgnoreCase("todo")) {
+            checkDescription(firstSpace, ERROR_DESCRIPTION);
             task = new Todo(fullCommand.substring(firstSpace));
         } else if (keyword.equalsIgnoreCase("deadline") || keyword.equalsIgnoreCase("event")){
-            checkDescription(firstSpace);
+            checkDescription(firstSpace, ERROR_DESCRIPTION);
             task = createTaskWithDeadline(fullCommand, keyword, firstSpace);
         } else {
             return null;
@@ -43,9 +48,9 @@ public class Parser {
         return new AddCommand(task);
     }
 
-    private static void checkDescription(int firstSpace) throws DukeException {
+    private static void checkDescription(int firstSpace, String errorMessage) throws DukeException {
         if (firstSpace == -1) {
-            throw new DukeException("OOPS!!! The description cannot be empty.");
+            throw new DukeException(errorMessage);
         }
     }
 

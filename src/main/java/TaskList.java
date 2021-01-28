@@ -45,6 +45,21 @@ public class TaskList {
         ui.showSuccessAddTask(task.toString(), taskList.size());
     }
 
+    public void search(Ui ui, String searchTerm) {
+        int count = 0;
+        for(Task t : taskList) {
+            if (t.getDescription().indexOf(searchTerm) != -1) {
+                if(count == -1) {
+                    ui.showSuccessSearch();
+                }
+                ui.printTask(++count + ".", t.toString());
+            }
+        }
+        if (count == 0) {
+            ui.showFailSearch(searchTerm);
+        }
+    }
+
     public ArrayList<Task> getTaskList() {
         return taskList;
     }

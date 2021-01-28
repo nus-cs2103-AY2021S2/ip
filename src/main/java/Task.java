@@ -19,6 +19,10 @@ public abstract class Task {
         return false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String save() {
         return String.format("%s,%s", this.isDone ? "1" : "0", this.description);
     }
