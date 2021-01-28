@@ -8,8 +8,6 @@ public class Task {
 
     String taskName;
     boolean isDone;
-    // TaskType type;
-    // String time;
 
     /**
      * Task class constructor
@@ -17,15 +15,28 @@ public class Task {
     public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
-        // this.type = type;
-        // this.time = time;
     }
 
+    /**
+     * Function to mark a task as completed
+     */
     public void markDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns a formatted string of the state of the task
+     */
     public String toString() {
+        if (isDone) return "todo | done | " + taskName;
+        return "todo | not done | " + taskName;
+    }
+
+    /**
+     * Used when adding tasks
+     * @return More human readable toString()
+     */
+    public String toFormattedString() {
         if (isDone) return "[T][X] " + taskName;
         return "[T][ ] " + taskName;
     }
