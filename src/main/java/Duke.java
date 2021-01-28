@@ -82,6 +82,8 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch(EmptyArgument e){
                 System.out.println("Cannot have empty argument");
+            } catch (BadDateArgumentException e) {
+                System.out.println("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044");
             } finally {
                 int newHash = store.hashCode();
                 if(newHash != hash){

@@ -66,6 +66,9 @@ public class TaskListFileUtils {
             }catch(EmptyArgument e){
                 badLines++;
                 break;
+            }catch(BadDateArgumentException e){
+                badLines++;
+                break;
             }
             t.isDone = isDone;
             store.add(t);

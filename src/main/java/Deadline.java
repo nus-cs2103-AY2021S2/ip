@@ -1,14 +1,19 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, String by) throws EmptyArgument {
+    public Deadline(String description, String by) throws EmptyArgument, BadDateArgumentException {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
-        LocalDate date = LocalDate.parse(by, formatter);
-        this.by = date;
+        try {
+            LocalDate date = LocalDate.parse(by, formatter);
+            this.by = date;
+        }catch(DateTimeParseException e){
+            throw new BadDateArgumentException();
+        }
     }
 
     @Override
