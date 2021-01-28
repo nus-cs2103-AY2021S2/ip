@@ -21,6 +21,11 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructs a new TaskList from the given save file.
+     * @param save the save file containing the info needed to create the TaskList.
+     * @throws VergilException if the save file is not found.
+     */
     public TaskList(File save) throws VergilException {
         this();
 
@@ -57,21 +62,37 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task to the list.
+     * @param t the task to be added.
+     */
     public void add(Task t) {
         tasks.add(t);
     }
 
-    public void complete(int index) throws VergilException {
+    /**
+     * Marks the task with the given list number as done.
+     * @param listNum the number of the task on the list.
+     * @throws VergilException if the given number of the task is not found
+     * within the task list.
+     */
+    public void complete(int listNum) throws VergilException {
         try {
-            tasks.get(index - 1).doTask();
+            tasks.get(listNum - 1).doTask();
         } catch (IndexOutOfBoundsException e) {
             throw new VergilException("Unable to find task.");
         }
     }
 
-    public void delete(int index) throws VergilException {
+    /**
+     * Deletes the task with the given list number from the list.
+     * @param listNum the number of the task on the list.
+     * @throws VergilException if the given number of the task is not found
+     * within the task list.
+     */
+    public void delete(int listNum) throws VergilException {
         try {
-            tasks.remove(index - 1);
+            tasks.remove(listNum - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new VergilException("Unable to find task.");
         }
@@ -93,6 +114,10 @@ public class TaskList {
         return subList;
     }
 
+    /**
+     * Returns the tasks in the list, but as save file entries.
+     * @return a save-file-entries representation of the task list.
+     */
     public String toSaveString() {
         StringBuilder str = new StringBuilder();
 
