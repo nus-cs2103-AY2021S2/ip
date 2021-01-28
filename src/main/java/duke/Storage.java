@@ -26,9 +26,8 @@ public class Storage {
      */
     public void addToFile(Task task) {
         File save = new File(this.filePath);
-        FileWriter fw = null;
         try {
-            fw = new FileWriter(save, true);
+            FileWriter fw = new FileWriter(save, true);
             fw.write(task.fileString() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -49,6 +48,7 @@ public class Storage {
             temp.createNewFile();
             Scanner sc = new Scanner(save);
             FileWriter fw = new FileWriter(temp);
+
             //copy all lines except line to be deleted to temp
             while(sc.hasNextLine()) {
                 //skip the line to be deleted
@@ -61,6 +61,7 @@ public class Storage {
             }
             fw.close();
             sc.close();
+
             //delete original save and rename temp to save
             save.delete();
             temp.renameTo(save);
@@ -82,6 +83,7 @@ public class Storage {
             temp.createNewFile();
             Scanner sc = new Scanner(save);
             FileWriter fw = new FileWriter(temp);
+
             //copy all lines except line to be edited to temp
             while(sc.hasNextLine()) {
                 //change line to be edited
@@ -94,6 +96,7 @@ public class Storage {
             }
             fw.close();
             sc.close();
+
             //delete original save and rename temp to save
             save.delete();
             temp.renameTo(save);

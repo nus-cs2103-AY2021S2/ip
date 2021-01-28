@@ -23,7 +23,7 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeException {
         String strippedCmd = command.strip();
-        Command result = null;
+        Command result;
         if (strippedCmd.equals("bye")) {
             result = new ByeCommand("");
         } else if (strippedCmd.equals("list")) {
