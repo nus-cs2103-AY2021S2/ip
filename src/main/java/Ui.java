@@ -164,4 +164,9 @@ public class Ui {
     public void loaded() {
         echoSingleBorder("TaskList loaded successfully!");
     }
+
+    public String saveFilePrompt() {
+        echoSingleBorder("Do you want to save the current tasklist? y/n");
+        return readInput();
+    }
 }

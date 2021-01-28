@@ -19,7 +19,7 @@ public class Parser {
         String command = s[0];
         String args = s.length == 2 ? s[1] : "";
 
-        switch(command) { 
+        switch (command) { 
         case "bye": 
             break; 
         case "list": 
@@ -152,6 +152,12 @@ public class Parser {
     private static void checkValidSearch(String s) throws DukeInputException {
         if (s.length() == 0) {
             throw new DukeInputException("Enter a keyword to search!");
+        }
+    }
+
+    public static void parseYesNo(String s) throws DukeInputException {
+        if (!(s.equals("y") || s.equals("n"))) {
+            throw new DukeInputException("Invalid input! Please key in either \"y\" or \"n\"");
         }
     }
 }

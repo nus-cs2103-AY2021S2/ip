@@ -81,10 +81,12 @@ public class Duke {
             String args = s.length == 2 ? s[1] : "";
 
             try {
-                switch(command) { 
+                switch (command) { 
                 case "bye": 
-                    ui.exit(); 
-                    return;
+                    if (exit()) {
+                        return;
+                    }
+                    break;
                 case "list": 
                     ui.displayList(tasks.listOutTask());
                     break; 
@@ -139,5 +141,26 @@ public class Duke {
         int taskNum = Integer.parseInt(num);
         Task t = tasks.deleteTask(taskNum - 1);
         ui.deleteTask(t.toString(), tasks.size());
+    }
+
+    private boolean exit() {
+        String s = ui.saveFilePrompt();
+        try {
+            Parser.parseYesNo(s);
+        } catch (DukeInputException e) {
+            ui.displayError(e);
+            return exit();
+        }
+        if (s.equals("y")) {
+            try {
+                storage.saveTaskList(tasks.toList());
+                ui.saved();
+            } catch (DukeException e) {
+                ui.displayError(e);
+                return false;
+            }
+        }
+        ui.exit();
+        return true;
     }
 }
