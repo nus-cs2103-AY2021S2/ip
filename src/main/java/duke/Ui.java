@@ -23,10 +23,6 @@ public class Ui {
                     "\\____\\\\____/\\____/\\____/\\____//_/   \\____\\",
             "Till next time :)"
     };
-    private final String[] LOADING = {
-            System.lineSeparator() +
-                    "Loading..."
-    };
     private final String[] READY = {
             System.lineSeparator() +
                     "Tasker is ready :)"
