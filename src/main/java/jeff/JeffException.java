@@ -3,7 +3,7 @@ package jeff;
 /**
  * Represents any errors thrown during execution of Jeff.
  */
-public class JeffException extends Exception{
+public class JeffException extends Exception {
 
     /**
      * Constructor for JeffException.
@@ -11,6 +11,6 @@ public class JeffException extends Exception{
      * @param errorMessage Message describing error.
      */
     public JeffException(String errorMessage) {
-        super(errorMessage);
+        super (errorMessage);
     }
 }

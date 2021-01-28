@@ -12,7 +12,7 @@ public class Jeff {
      * Constructor for the Jeff class.
      * Initializes the Storage, TaskList and Ui needed for the chatbot.
      *
-     * @param filePath
+     * @param filePath File path to load/store tasks from.
      */
     public Jeff(String filePath) {
         ui = new Ui();
@@ -31,7 +31,7 @@ public class Jeff {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             String fullMessage = ui.readMessage();
             try {
                 isExit = Parser.execute(fullMessage, tasks, ui, storage);
