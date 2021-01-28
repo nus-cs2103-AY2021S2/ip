@@ -1,52 +1,9 @@
+package ssagit;
+
 import java.util.*;
 import java.lang.*;
 
 public class Duke {
-
-    enum Type {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
-
-    /**
-     * Task class
-     */
-    static class Task {
-
-        String taskName;
-        boolean isDone;
-        Type type;
-        String time;
-
-        /**
-         * Task class constructor
-         */
-        public Task(String taskName, boolean isDone, Type type, String time) {
-            this.taskName = taskName;
-            this.isDone = isDone;
-            this.type = type;
-            this.time = time;
-        }
-
-        public void markDone() {
-            this.isDone = true;
-        }
-
-        public String toString() {
-            if (type == Type.TODO) {
-                if (isDone) return "[T][X] " + taskName;
-                return "[T][ ] " + taskName;
-            } else if (type == Type.DEADLINE) {
-                if (isDone) return "[D][X] " + taskName + " (by: " + time + ")";
-                return "[D][ ] " + taskName + " (by: " + time + ")";
-            } else if (type == Type.EVENT) {
-                if (isDone) return "[E][X] " + taskName + " (at: " + time + ")";
-                return "[E][ ] " + taskName + " (at: " + time + ")";
-            } else return "O_o How did you input other types?";
-        }
-    }
-
     /**
      * Exception class for missing todo descriptor
      */
@@ -63,6 +20,17 @@ public class Duke {
         public UnknownInputParamException(String errorMessage) {
             super(errorMessage);
         }
+    }
+
+    /**
+     * Duke speaks in chat boxes
+     *
+     * @param str input string within chat boxes
+     */
+    static void formatBox(String str) {
+        System.out.println("------------------------------------");
+        System.out.println(str);
+        System.out.println("------------------------------------");
     }
 
     public static void main(String[] args) {
@@ -106,17 +74,21 @@ public class Duke {
                     String[] firstHalf = inputArrTasks[0].split(" ", 2);
 
                     if (inputArrTasks.length != 1) {
+                        // create Deadline/Event
                         String[] secondHalf = inputArrTasks[1].split(" ", 2);
-                        taskArr[j] = new Task(firstHalf[1], false,
-                                Type.valueOf(firstHalf[0].toUpperCase()), secondHalf[1]);
+                        if (inputArr[0].equals("event")) {
+                            taskArr[j] = new EventTask(firstHalf[1], false, secondHalf[1]);
+                        } else if (inputArr[0].equals("deadline")) {
+                            taskArr[j] = new DeadlineTask(firstHalf[1], false, secondHalf[1]);
+                        }
                     } else {
+                        // create todoTask
                         if (firstHalf.length == 1) {
                             throw new MissingTodoDescriptorException("------------------------------------\n" +
                                     ":( OOPS!!! The description of a todo cannot be empty\n" +
                                     "------------------------------------");
                         } else {
-                            taskArr[j] = new Task(firstHalf[1], false,
-                                    Type.valueOf(firstHalf[0].toUpperCase()), "");
+                            taskArr[j] = new Task(firstHalf[1], false);
                         }
                     }
                     j++; // increase task count in list
@@ -150,16 +122,5 @@ public class Duke {
         } catch (UnknownInputParamException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    /**
-     * Duke speaks in chat boxes
-     *
-     * @param str input string within chat boxes
-     */
-    public static void formatBox(String str) {
-        System.out.println("------------------------------------");
-        System.out.println(str);
-        System.out.println("------------------------------------");
     }
 }
