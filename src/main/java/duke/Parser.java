@@ -13,15 +13,15 @@ public class Parser {
         // Get description
         int i;
         for (i = 1; i < inputArr.length; i++) {
-            if (taskType.equals("todo") || (!inputArr[i].toLowerCase().equals("/by") && !inputArr[i].toLowerCase().equals("/at"))) {
+            if (taskType.equals("todo") || (!inputArr[i].equalsIgnoreCase("/by") && !inputArr[i].equalsIgnoreCase("/at"))) {
                 if (!taskDesc.equals(""))
                     taskDesc += " ";
                 taskDesc += inputArr[i];
             } else {
                 // Ensure no misuse of arguments
-                if (!inputArr[i].toLowerCase().equals("/by") && taskType.equals("deadline"))
+                if (!inputArr[i].equalsIgnoreCase("/by") && taskType.equals("deadline"))
                     throw new DukeException("You're confusing me with parameters from other commands...");
-                else if (!inputArr[i].toLowerCase().equals("/at") && taskType.equals("event"))
+                else if (!inputArr[i].equalsIgnoreCase("/at") && taskType.equals("event"))
                     throw new DukeException("You're confusing me with parameters from other commands...");
 
                 break;
