@@ -1,31 +1,29 @@
-import duke.Chatbot;
-import duke.Storage;
-import duke.Ui;
+package duke;
 
 /**
- * The main Duke class.
+ * The main duke.Duke class.
  */
 public class Duke {
     private final Ui ui;
     private final Storage storage;
     private final Chatbot chatbot;
 
-    Duke(String filePath) {
+    Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("./data.txt");
         chatbot = new Chatbot(storage.readFile());
     }
 
     /**
-     * Triggers the execution of Duke.
+     * Triggers the execution of duke.Duke.
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        new Duke("./data.txt").execute();
+        new Duke().execute();
     }
 
     /**
-     * Executes all the functions needed for Duke, including welcome,
+     * Executes all the functions needed for duke.Duke, including welcome,
      * chat bot execution, welfare, and update of file.
      */
     public void execute() {
