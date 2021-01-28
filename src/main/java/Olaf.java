@@ -31,6 +31,6 @@ public class Olaf {
     }
 
     public static void main(String[] args) throws IOException {
-        new Olaf("../../../data/olaf.txt").run();
+        new Olaf("data/olaf.txt").run();
     }
 }

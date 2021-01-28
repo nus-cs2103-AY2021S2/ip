@@ -109,7 +109,6 @@ public class OlafApp {
 
                     ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                             newDeadline, taskList.getTotalNumberOfTasksUndone());
-                    System.out.println(PrintText.BORDER);
                 } catch (Exception e) {
                     // catches both ParseException and IndexOutOfBounds exception
                     ui.showFormatError(PrintText.DEADLINE_FORMAT);
