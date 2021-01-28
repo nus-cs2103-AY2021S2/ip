@@ -11,7 +11,7 @@ public class Parser {
         return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
     }
 
-    public static parseInput(String input) {
+    public static Command parseInput(String input) throws DukeWrongCommandException {
         String[] parsedInput = input.split(" ", 2);
         String commandStr = parsedInput[0];
         Command c;

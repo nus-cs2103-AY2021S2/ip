@@ -8,16 +8,21 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         Task t = null;
         switch(taskType) {
             case "todo":
+                t = ToDo.create(taskInfo);
                 break;
             case "deadline":
+                t = Deadline.create(taskInfo);
                 break;
             case "event":
+                t = Event.create(taskInfo);
                 break;
         }
-        //update storage.
+        tl.add(t);
+        ui.printAddedTask(t);
+        storage.save(tl.toString());
     }
 }

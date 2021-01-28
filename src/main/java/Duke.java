@@ -1,6 +1,33 @@
 public class Duke {
+    private Ui ui;
+    private Storage storage;
+    private TaskList tl;
+
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage();
+        this.tl = new TaskList();
+    }
+
+    public void run() {
+        ui.printGreeting();
+        storage.load(tl);
+        String input;
+        input = ui.readLine();
+        while(!input.equals("bye")) {
+            try {
+                Command c = Parser.parseInput(input);
+                c.execute(tl, ui, storage);
+            } catch (Exception e) {
+                ui.printError(e.toString());
+            } finally {
+                input = ui.readLine();
+            }
+        }
+        ui.printBye();
+    }
+
     public static void main(String[] args) {
-        DukeSimulator ds = new DukeSimulator();
-        ds.run();
+        new Duke().run();
     }
 }

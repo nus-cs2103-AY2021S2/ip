@@ -8,6 +8,14 @@ public class ToDo extends Task {
         super(description, done);
     }
 
+    public static ToDo create(String taskInfo) throws DukeMissingDescriptionException {
+        if (taskInfo.equals(" ") || taskInfo.equals("")) {
+            throw new DukeMissingDescriptionException("todo");
+        } else {
+            return new ToDo(taskInfo);
+        }
+    }
+
     @Override
     public ToDo finishTask() {
         return new ToDo(description, true);

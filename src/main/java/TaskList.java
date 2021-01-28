@@ -18,18 +18,21 @@ public class TaskList {
     }
 
     public Task remove(int num) {
-        return taskList.remove(num - 1);
+        return taskList.remove(num);
     }
 
     public Task get(int num) {
-        return taskList.get(num - 1);
+        return taskList.get(num);
     }
 
-    public void set(int num, ) {
-
+    public void set(int taskNum, Task t) {
+        taskList.set(taskNum, t);
     }
 
-    public void doneTask
+    public ArrayList<Task> getList() {
+        return new ArrayList<Task>(taskList);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("");

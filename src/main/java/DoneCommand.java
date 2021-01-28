@@ -11,6 +11,6 @@ public class DoneCommand extends Command {
         t = t.finishTask();
         tl.set(taskNum - 1, t);
         ui.printMarkedDone(t);
-        storage.save(tl);
+        storage.save(tl.toString());
     }
 }

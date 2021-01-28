@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 
 
 public class Storage {
-    private final String PATHNAME = "C:/users/chian/Desktop/CS2103/ip/data/";
-    private final String FILENAME = "data.txt";
+    private final static String PATHNAME = "C:/users/chian/Desktop/CS2103/ip/data/";
+    private final static String FILENAME = "data.txt";
 
-    private void save(String tasks) {
+    public static void save(String tasks) {
         try {
             FileWriter fw = new FileWriter(PATHNAME + FILENAME);
             fw.write(tasks);
@@ -19,7 +19,7 @@ public class Storage {
         }
     }
 
-    private void load(TaskList tl) {
+    public static void load(TaskList tl) {
         try {
             File f = new File(PATHNAME + FILENAME);
             f.createNewFile();
@@ -50,7 +50,7 @@ public class Storage {
                     tl.add(t);
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             Ui.printMessage("Unable to load file!");
         }
     }
