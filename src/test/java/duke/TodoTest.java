@@ -17,6 +17,6 @@ public class TodoTest {
         assertEquals(testTodo.toString(), "[T][ ] test");
     }
 
-    
+
 }
 

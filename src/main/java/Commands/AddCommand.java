@@ -13,6 +13,13 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+     /**
+      * Executes the Add Command by adding the DukeTask into the TaskList.
+      *
+      * @param tasklist Duke TaskList object.
+      * @param storage Duke Storage object.
+      * @param ui Duke UI object.
+      */
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) {
         tasklist.add(this.task);

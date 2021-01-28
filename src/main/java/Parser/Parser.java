@@ -8,6 +8,13 @@ import Tasks.Todos;
 
 public class Parser {
 
+    /**
+     * Parses the input given and returns a command to be executed.
+     *
+     * @param line  TaskList object.
+     * @return The respective Command based on the input.
+     * @throws DukeException When the Index, Description or Details are empty based on the different Tasks.
+     */
     public static Command parse(String line) throws DukeException {
         String[] doneLine = line.split(" ", 2);
         line = doneLine[0]; // get the first keyword

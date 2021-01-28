@@ -27,12 +27,7 @@ public class DukeTask {
         }
     }
 
-    public DukeTask(String name) {
-        this(name, false, TaskType.EMPTY);
-    }
-
     public DukeTask(String name, TaskType type) {
-
         this(name, false, type);
     }
 
@@ -42,6 +37,11 @@ public class DukeTask {
         this.type = type;
     }
 
+    /**
+     * Mark the DukeTask as done.
+     * 
+     * @return a new DukeTask who is marked as done.
+     */
     public DukeTask markDone() {
         return new DukeTask(this.name, true, this.type);
     }

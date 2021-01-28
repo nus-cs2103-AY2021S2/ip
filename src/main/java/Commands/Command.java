@@ -10,6 +10,7 @@ public abstract class Command {
     Ui ui;
     Storage storage;
 
+
     Command(TaskList tasklist, Ui ui, Storage storage) {
         this.tasklist = tasklist;
         this.ui = ui;
@@ -17,9 +18,16 @@ public abstract class Command {
     }
 
     Command() {
-
     }
 
-    public abstract void execute(TaskList t, Ui ui, Storage storage) throws DukeException;
+    /**
+     * Abstract method to Executes the Command given.
+     *
+     * @param tasklist Duke TaskList object.
+     * @param storage Duke Storage object.
+     * @param ui Duke UI object.
+     * @throws DukeException Depends on the error of the command.
+     */
+    public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
     public abstract boolean isExit();
 }

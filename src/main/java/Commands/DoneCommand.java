@@ -14,6 +14,14 @@ public class DoneCommand extends Command{
         this.index = index;
     }
 
+    /**
+     * Executes the Done Command by marking the DukeTask in the TaskList as done.
+     *
+     * @param tasklist Duke TaskList object.
+     * @param storage Duke Storage object.
+     * @param ui Duke UI object.
+     * @throws DukeException If index of the Task is out of bounds.
+     */
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         try {
