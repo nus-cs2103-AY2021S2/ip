@@ -20,9 +20,16 @@ import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class represents a Parser.
+ */
 public class Parser {
-    public Parser() {}
-
+    /**
+     * Returns a Command based on user's input.
+     * @param input The full command from user's input.
+     * @return A command base on the input.
+     * @throws DukeException If error occurs during the process.
+     */
     public static Command parseCommand(String input) throws DukeException {
         int endIndex = input.indexOf(" ");
         String potentialCommand = (endIndex == -1) ? input : input.substring(0, endIndex);
@@ -48,6 +55,12 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Returns a LocalDateTime from a string containing date and time.
+     * @param dateTime The input string containing date and time.
+     * @return A LocalDateTime parsed from the input string.
+     * @throws InvalidDateTimeException If the input date and time string is not valid.
+     */
     public static LocalDateTime parseDateTime(String dateTime) throws InvalidDateTimeException {
         String[] dateAndTime = dateTime.strip().split(" ");
         LocalDateTime parsedDateTime;
@@ -62,7 +75,7 @@ public class Parser {
 
     }
 
-    public static LocalDate parseDate(String date) throws InvalidDateTimeException {
+    private static LocalDate parseDate(String date) throws InvalidDateTimeException {
         String[] yearMonthDay = date.strip().split("-");
         if (yearMonthDay.length != 3) {
             throw new InvalidDateTimeException("Input date is not valid.");
@@ -81,7 +94,7 @@ public class Parser {
         }
     }
 
-    public static LocalTime parseTime(String time) throws InvalidDateTimeException {
+    private static LocalTime parseTime(String time) throws InvalidDateTimeException {
         String hour = time.strip().substring(0, 2);
         String minute = time.strip().substring(2, 4);
         try {

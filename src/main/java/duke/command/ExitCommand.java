@@ -4,14 +4,25 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * A class represents ExitCommand
+ */
 public class ExitCommand extends Command {
-    public ExitCommand() {}
-
+    /**
+     * Calls ui to print a farewell message.
+     * @param tasks Task list given.
+     * @param ui User interface class object.
+     * @param storage Storage path that is going to be updated.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.sayGoodBye();
     }
 
+    /**
+     * Returns true.
+     * @return True.
+     */
     @Override
     public boolean isExit() {
         return true;

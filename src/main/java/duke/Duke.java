@@ -7,12 +7,18 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 
-
+/**
+ * A class represents the Duke bot.
+ */
 public class Duke {
     private TaskList tasks;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Constructs a Duke bot.
+     * @param filePath The file path to store the tasks.
+     */
     Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,10 +29,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to lunch the bot.
+     * @param args Arguments of the main method.
+     */
     public static void main(String[] args) {
         new Duke(System.getProperty("user.dir") + "/duke.txt").run();
     }
 
+    /**
+     * Launch the Duke bot by reading in the user input and gives responses.
+     */
     public void run() {
         boolean isOver = false;
         ui.showWelcome();

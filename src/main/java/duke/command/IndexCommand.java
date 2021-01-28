@@ -2,14 +2,26 @@ package duke.command;
 
 import duke.exception.DescriptionMissingException;
 
+/**
+ * An abstract class represents an IndexCommand.
+ */
 public abstract class IndexCommand extends Command {
     protected String fullCommand;
 
+    /**
+     * Constructs an IndexCommand.
+     * @param fullCommand The full command from the user's input.
+     */
     public IndexCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
-    public int getIndex() throws DescriptionMissingException {
+    /**
+     * Returns the index specified in the user's input.
+     * @return Index from the user's input.
+     * @throws DescriptionMissingException If the input contains no number.
+     */
+    protected int getIndex() throws DescriptionMissingException {
         String[] doneInstructions = fullCommand.strip().split(" ");
 
         if (doneInstructions.length != 2) {
@@ -24,6 +36,10 @@ public abstract class IndexCommand extends Command {
         }
     }
 
+    /**
+     * Returns false.
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

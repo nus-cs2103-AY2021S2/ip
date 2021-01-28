@@ -18,17 +18,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class represents a Storage.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a Storage.
+     * @param path The file path specified by the Duke bot.
+     */
     public Storage(String path) {
         filePath = path;
     }
 
-    public void createFileNotExists(File file) throws IOException {
+    private void createFileNotExists(File file) throws IOException {
         file.createNewFile();
     }
 
+    /**
+     * Returns an ArrayList of tasks that recorded in the storage to the current task list.
+     * @return An ArrayList of tasks.
+     * @throws DukeException If error occurs during the process.
+     */
     public ArrayList<Task> syncFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -72,6 +84,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the tasks recorded in the storage.
+     * @param tasks Tasks to be recorded.
+     */
     public void updateInFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);

@@ -12,13 +12,27 @@ import duke.parser.Parser;
 
 import java.time.LocalDateTime;
 
+/**
+ * A class represents a DeadlineCommand.
+ */
 public class DeadlineCommand extends AddCommand {
     String fullCommand;
 
+    /**
+     * Constructs a DeadlineCommand.
+     * @param fullCommand Full command from the user's input.
+     */
     public DeadlineCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
+    /**
+     * Adds the Deadline task into a given task list while updating the file.
+     * @param tasks Task list given.
+     * @param ui User interface class object.
+     * @param storage Storage path that is going to be updated.
+     * @throws DukeException If error occurs during the process.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Deadline deadline = getTask();
@@ -26,7 +40,7 @@ public class DeadlineCommand extends AddCommand {
     }
 
     @Override
-    public Deadline getTask()
+    protected Deadline getTask()
             throws DescriptionMissingException, InvalidDateTimeException {
         String nameDeadline = fullCommand.substring(8).strip();
         if (nameDeadline.equals("")) {

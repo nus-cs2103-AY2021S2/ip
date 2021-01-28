@@ -1,39 +1,49 @@
 package duke.task;
 
+/**
+ * A class represents a Task.
+ */
 public class Task {
     protected String name;
     protected boolean isDone;
 
-    public Task(String taskName) {
+    /**
+     * Constructs a Task.
+     * @param taskName The name of the Task.
+     */
+    protected Task(String taskName) {
         name = taskName;
         isDone = false;
     }
 
     /**
-     * This is the setter to for the "isDone"
-     * status of the Task.
+     * Marks the status of the Task as "completed".
      */
     public void complete() {
         isDone = true;
     }
 
     /**
-     * This method is the getter of status.
-     * @return the status of the task
+     * Returns the status icon of the Task.
+     * @return The status icon of the task.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
-     * This method overrides the toString() method.
-     * @return the status and name of the Task
+     * Returns a string in the given format.
+     * @return A string in the given format.
      */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + name;
     }
 
+    /**
+     * Returns a string in the given format for storing in files.
+     * @return A string in the given format for storing in files.
+     */
     public String toFileString() {
         return "| " + (isDone ? "1" : "0") + " | " + name;
     }

@@ -11,13 +11,27 @@ import duke.parser.Parser;
 
 import java.time.LocalDateTime;
 
+/**
+ * A class represents an EventCommand.
+ */
 public class EventCommand extends AddCommand {
     String fullCommand;
 
+    /**
+     * Constructs an EventCommand.
+     * @param fullCommand The full command from user's input.
+     */
     public EventCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
+    /**
+     * Adds the Event task into a given task list while updating the file.
+     * @param tasks Task list given.
+     * @param ui User interface class object.
+     * @param storage Storage path that is going to be updated.
+     * @throws DukeException If error occurs during the process.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Event event = getTask();
@@ -25,7 +39,7 @@ public class EventCommand extends AddCommand {
     }
 
     @Override
-    public Event getTask() throws DescriptionMissingException, InvalidDateTimeException {
+    protected Event getTask() throws DescriptionMissingException, InvalidDateTimeException {
         String nameDate = fullCommand.substring(5).strip();
         if (nameDate.equals("")) {
             throw new DescriptionMissingException("Argument missing!");
