@@ -1,2 +1,2 @@
-T|0|rest
-D|0|submit work|2020-03-20
+E|1|phone|a
+D|0|die|2020-03-01

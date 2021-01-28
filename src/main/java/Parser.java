@@ -137,4 +137,39 @@ public class Parser {
         }
 
     }
+
+    public boolean checkIfExit(String userInput){
+        return userInput.equals("bye");
+    }
+
+    public Command parse(String userInput) throws DukeException{
+        try {
+            if (this.equalsToList(userInput)) {
+                return new ShowListCommand();
+
+            } else if (this.equalsToDone(userInput)) {
+                int taskDoneInt = this.parseDoneCommand(userInput);
+                return new DoneCommand(taskDoneInt);
+
+            } else if (this.equalsToDelete(userInput)) {
+                int taskDeleteInt = this.parseDeleteCommand(userInput);
+                return new DeleteCommand(taskDeleteInt);
+
+            } else if (this.equalsToToDo(userInput)) {
+                String toDoDescription = this.parseToDoCommand(userInput);
+                return new ToDoCommand(toDoDescription);
+            } else if(this.equalsToEvent(userInput)){
+                ArrayList<String> eventDescription = this.parseEventCommand(userInput);
+                return new EventCommand(eventDescription);
+            }else if(this.equalsToDeadline(userInput)) {
+                ArrayList<String> eventDescription = this.parseDeadlineCommand(userInput);
+                return new DeadlineCommand(eventDescription);
+            }else{
+                throw new DukeException("I'm sorry, but I don't know what that means");
+            }
+
+        }catch(DukeException e){
+            throw e;
+        }
+    }
 }

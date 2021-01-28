@@ -25,64 +25,21 @@ public class Duke {
     }
 
     public void run() {
-        //...
-        Scanner scanner = new Scanner(System.in);
         Parser stringParser = new Parser();
         dukeUi.showWelcomeLine();
 
-        String userInput = scanner.nextLine();
+        boolean isExit = false;
+        String userInput = dukeUi.readCommand();
 
-        while ( !userInput.equals("bye")){
-
-            if (stringParser.equalsToList(userInput)){
-                ArrayList<Task> currentTaskList = dukeTaskList.getCurrentTaskList();
-                Ui.showReturnTaskList(currentTaskList);
-            }else if(stringParser.equalsToDone(userInput)){
-                try {
-                    int taskDoneInt = stringParser.parseDoneCommand(userInput);
-                    Task doneTask = dukeTaskList.checkTaskAsDone(taskDoneInt);
-
-                    dukeUi.showTaskDone(doneTask);
-                }catch(DukeException e){
-                    dukeUi.showErrorMsg(e.getMessage());
-                }
-            }else if(stringParser.equalsToDelete(userInput)){
-                try{
-                    int taskDeleteInt = stringParser.parseDeleteCommand(userInput);
-                    Task deletedTask = dukeTaskList.deleteTask(taskDeleteInt);
-                    dukeUi.showTaskDeleted(deletedTask, dukeTaskList.getNumberOfTasks());
-                }catch(DukeException e){
-                    dukeUi.showErrorMsg(e.getMessage());
-                }
-            }else if(stringParser.equalsToToDo(userInput)){
-                try{
-                    String toDoDescription = stringParser.parseToDoCommand(userInput);
-                    Task toDoTask = dukeTaskList.addToDoTask(toDoDescription);
-                    dukeUi.showAddedTask(toDoTask, dukeTaskList.getNumberOfTasks());
-                }catch(DukeException e){
-                    dukeUi.showErrorMsg(e.getMessage());
-                }
-            }else if(stringParser.equalsToEvent(userInput)){
-                try {
-                    ArrayList<String> eventDescription = stringParser.parseEventCommand(userInput);
-                    Task eventTask = dukeTaskList.addEventTask(eventDescription);
-                    dukeUi.showAddedTask(eventTask, dukeTaskList.getNumberOfTasks());
-                }catch(DukeException e){
-                    dukeUi.showErrorMsg(e.getMessage());
-                }
-            }else if(stringParser.equalsToDeadline(userInput)) {
-                try {
-                    ArrayList<String> eventDescription = stringParser.parseDeadlineCommand(userInput);
-                    Task deadlineTask = dukeTaskList.addDeadlineTask(eventDescription);
-                    dukeUi.showAddedTask(deadlineTask, dukeTaskList.getNumberOfTasks());
-                } catch (DukeException e) {
-                    dukeUi.showErrorMsg(e.getMessage());
-                }
-
-            }else{
-                dukeUi.showErrorMsg("I'm sorry, but I don't know what that means");
+        while ( !isExit){
+            try {
+                Command c = stringParser.parse(userInput);
+                c.execute(dukeTaskList, dukeUi, dukeStorage);
+            } catch (DukeException e) {
+                dukeUi.showErrorMsg(e.getMessage());
             }
-            userInput = scanner.nextLine();
+            userInput = dukeUi.readCommand();
+            isExit = stringParser.checkIfExit(userInput);
 
             try {
                 dukeStorage.saveToFile(dukeTaskList.getCurrentTaskList());
@@ -97,4 +54,3 @@ public class Duke {
         new Duke(PATH, FOLDERNAME).run();
     }
 }
-

@@ -1,8 +1,15 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui{
+
+    Scanner scanner;
+    public Ui(){
+        scanner = new Scanner(System.in);
+    }
+
     public void showWelcomeLine(){
         System.out.println(defaultFormatting("Hello! I'm Duke\n" +
                 padSpaces("What can I do for you?", 5)));
@@ -63,6 +70,11 @@ public class Ui{
                 "\n" + numberOfTasksLine(numberOfTasks);
 
         System.out.println(defaultFormatting(temp));
+    }
+
+
+    public String readCommand() {
+        return scanner.nextLine().trim();
     }
 
     private static String horizontalLine(){
