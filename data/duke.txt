@@ -1,4 +1,5 @@
-T ; 0 ; dog
 D ; 1 ; return book ; 2019-10-15
 E ; 0 ; project meeting ; 2020-10-15
 T ; 0 ; eat lunch
+T ; 1 ; walk the dog
+T ; 0 ; watch movie with friends

@@ -7,23 +7,23 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ____________________________________________________________
 Got it. I've added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 2019-10-15)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 Got it. I've added this task:
-[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] project meeting (at: 2019-10-15)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: 2019-10-15)
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][X] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
+2. [D][X] return book (by: 2019-10-15)
+3. [E][ ] project meeting (at: 2019-10-15)
 ____________________________________________________________
 Got it. I've added this task:
-[E][ ] gathering (at: Sunday afternoon)
+[E][ ] gathering (at: 2019-10-15)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -31,12 +31,12 @@ Nice! I've marked this task as done:
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][X] borrow book
-2. [D][X] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
-4. [E][ ] gathering (at: Sunday afternoon)
+2. [D][X] return book (by: 2019-10-15)
+3. [E][ ] project meeting (at: 2019-10-15)
+4. [E][ ] gathering (at: 2019-10-15)
 ____________________________________________________________
 Noted. I've removed this task:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: 2019-10-15)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 Noted. I've removed this task:
@@ -44,8 +44,8 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ____________________________________________________________
 Here are the tasks in your list:
-1. [E][ ] project meeting (at: Mon 2-4pm)
-2. [E][ ] gathering (at: Sunday afternoon)
+1. [E][ ] project meeting (at: 2019-10-15)
+2. [E][ ] gathering (at: 2019-10-15)
 ____________________________________________________________
 OOPS!!! The description of a todo cannot be empty.
 ____________________________________________________________
