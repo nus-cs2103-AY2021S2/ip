@@ -2,3 +2,7 @@ E|0|meet friends|1030pm
 T|1|cook food
 D|0|finish assignment|430pm
 E|0|meet friends|1030pm
+E|0|eat dinner|230pm
+E|0|3230 lecture|1400
+E|0|watch movie|10pm
+E|0|eat dinner|6pm

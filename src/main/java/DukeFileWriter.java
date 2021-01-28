@@ -1,9 +1,10 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class DukeFileWriter {
-    private static final String FILE_PATH = "data/duke.txt";
+    private static final String FILE_PATH = "data" + File.separator + "duke.txt";
 
     public static void saveTaskListInInternalStorage(List<Task> taskList) {
         try {
@@ -42,6 +43,7 @@ public class DukeFileWriter {
     }
 
     private static void writeToFile(String textToAdd) throws IOException {
+        FileDirectoryChecker.doesFileExist(FILE_PATH);
         FileWriter fw = new FileWriter(FILE_PATH);
         fw.write(textToAdd);
         fw.close();

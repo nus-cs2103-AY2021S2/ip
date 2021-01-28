@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DukeFileReader {
-    private static final String FILE_PATH = "data/duke.txt";
+    private static final String FILE_PATH = "data" + File.separator + "duke.txt";
 
     private static List<Task> readTaskListFromInternalStorage() throws FileNotFoundException {
         List<Task> taskList = new ArrayList<>();
+        FileDirectoryChecker.doesFileExist(FILE_PATH);
         File f = new File(FILE_PATH);
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
