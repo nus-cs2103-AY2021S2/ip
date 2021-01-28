@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
  * A subclass of Task, representing an event with date and time.
  */
 public class Event extends Task {
-    private LocalDateTime datetime;
+    private LocalDateTime dateTime;
 
-    public Event(String taskName, LocalDateTime datetime) {
+    public Event(String taskName, LocalDateTime dateTime) {
         super(taskName);
-        this.datetime = datetime;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -19,7 +19,7 @@ public class Event extends Task {
      * @return date and time of event
      */
     public LocalDateTime getDate() {
-        return datetime;
+        return dateTime;
     }
 
     /**
@@ -28,6 +28,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return "[E]" + super.toString() + " (at: " + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }

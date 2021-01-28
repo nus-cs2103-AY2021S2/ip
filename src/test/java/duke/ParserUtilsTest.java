@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserUtilsTest {
     @Test
-    public void testParseDateBySlash() throws DukeException {
-        LocalDateTime datetime = ParserUtils.parseDateTime("1/12/1212", "Invalid Date");
-        assertEquals(LocalDateTime.of(1212, 12, 1, 0,0), datetime);
+    public void testParseDateTimeBySlash() throws DukeException {
+        LocalDateTime dateTime = ParserUtils.parseDateTime("1/12/1212", "Invalid Date");
+        assertEquals(LocalDateTime.of(1212, 12, 1, 0,0), dateTime);
     }
 
     @Test

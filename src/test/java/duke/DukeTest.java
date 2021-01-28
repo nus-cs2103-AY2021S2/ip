@@ -8,6 +8,5 @@ public class DukeTest {
     @Test
     public void empty(){
         Duke d = new Duke();
-        assertEquals(2, 2);
     }
 }
