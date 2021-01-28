@@ -3,9 +3,6 @@ package duke.customClass;
 import java.util.Scanner;
 
 public class Ui {
-    public Ui () {
-
-    }
 
     public void greetingMessage() {
         String logo = "   ___     ___    _  _     ___     ___     _\n" +
