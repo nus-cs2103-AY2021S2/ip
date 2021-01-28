@@ -13,7 +13,6 @@ public class ExitCommand implements Command {
 		storage.saveFile(data);
 
 		System.out.println("\tBye. Hope to see you again soon!");
-		ui.showLine();
 	}
 
 }
