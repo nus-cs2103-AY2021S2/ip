@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +18,8 @@ public class TaskList {
         tasks.get(index).setCompleted();
     }
 
-    public TaskList remove(int index) {
+    public void remove(int index) {
         tasks.remove(index);
-        return (new TaskList(tasks));
     }
 
     public void add(Task task) {

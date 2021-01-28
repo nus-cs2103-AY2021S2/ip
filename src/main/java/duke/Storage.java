@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,7 +17,7 @@ public class Storage {
     }
 
     public void save(TaskList taskList) throws IOException {
-        FileWriter fw = new FileWriter(filePath); // create a FileWriter in append mode
+        FileWriter fw = new FileWriter(filePath);
         for (Task t : taskList.getTasks()) {
             fw.write(t.storeString() + "\n");
         }

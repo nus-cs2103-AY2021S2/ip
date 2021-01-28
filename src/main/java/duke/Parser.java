@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -20,10 +22,12 @@ public class Parser {
             String input = sc.nextLine();
             try {
                 identifyInput(input);
-            } catch (DukeGeneralException e) {
-                ui.showDukeGeneralError();
             } catch (DukeTaskException e1) {
                 ui.showDukeTaskError();
+            } catch (IndexOutOfBoundsException e) {
+                ui.showDukeEmptyListError();
+            } catch (Exception e) {
+                ui.showDukeGeneralError();
             }
         }
     }
@@ -45,11 +49,8 @@ public class Parser {
                 break;
 
             case "list":
-                try {
-                    ui.showList(tasks);
-                } catch (Exception e) {
-                    ui.showDukeEmptyListError();
-                }
+                ui.showList(tasks);
+                ui.showDukeEmptyListError();
                 break;
 
             case "done":
@@ -77,23 +78,20 @@ public class Parser {
 
             case "delete":
                 ui.showDeleteTask(input, tasks);
-                tasks = tasks.remove(ui.getIndex(input));
+                tasks.remove(ui.getIndex(input));
                 break;
-
-            case "empty":
-                throw new DukeTaskException("☹ OOPS!!! The description of a todo cannot be empty.");
 
             default:
                 throw new DukeGeneralException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private String getCommand(String input) {
+    private String getCommand(String input) throws DukeTaskException {
         try {
             String[] arr = input.split(" ", 2);
             return arr[0];
         } catch (Exception e) {
-            return "empty";
+            throw new DukeTaskException("");
         }
     }
 
@@ -102,7 +100,7 @@ public class Parser {
             String[] arr = input.split(" ", 2);
             return arr[1];
         } catch (Exception e) {
-            return "empty";
+            throw new DukeTaskException("");
         }
 
     }
