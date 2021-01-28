@@ -1,11 +1,21 @@
 import java.io.IOException;
 import java.lang.System;
 
+/**
+ * Main driver class of the Duke program.
+ * Keeps track of the tasks the user has and provide methods to modify
+ * these tasks.
+ */
 public class Duke {
     private final Ui ui;
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Constructor of the Duke class to initialise the bot.
+     * Initialises the Ui, TaskList and Storage according to input path.
+     * @param path Path of the file saved in hard drive that stores tasks.
+     */
     public Duke(String path) {
         ui = new Ui();
         try {
@@ -20,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver method for the Duke bot.
+     */
     public void run() {
         ui.printIntroduction();
         boolean isExit = false;
@@ -41,6 +54,11 @@ public class Duke {
         ui.printExitMessage();
     }
 
+    /**
+     * Main method for the Duke class.
+     * Creates a new Duke and calls Duke.run().
+     * @param args Args for main method.
+     */
     public static void main(String[] args) {
         new Duke("data/savedTasks.txt").run();
     }
