@@ -2,8 +2,21 @@ package jeff;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses a single user input line and executes the input.
+ */
 public class Parser {
 
+    /**
+     * Executes the message passed in by user.
+     *
+     * @param message Message passed in by user.
+     * @param tasks TaskList object to operate on.
+     * @param ui Ui object to use to generate output for user.
+     * @param storage Storage object to read/store tasks to disk.
+     * @return true if Jeff should terminate, false otherwise.
+     * @throws JeffException If an error is encountered.
+     */
     public static boolean execute(String message, TaskList tasks, Ui ui, Storage storage) throws JeffException {
         boolean isExit = false;
         String[] messageSplit = message.split(",");
