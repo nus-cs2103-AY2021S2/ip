@@ -15,8 +15,17 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+
     public static void printMessage(String message) {
         System.out.println(message);
+    }
+
+    public static void printError(String error) {
+        System.out.print(LINE + erroer + LINE);
+    }
+
+    public String readLine() {
+        return sc.nextLine();
     }
 
     public void printGreeting() {
@@ -29,19 +38,35 @@ public class Ui {
         System.out.print(LINE + byeMessage + LINE);
     }
 
-    private String taskMessage(int numOfTasks) {
+    public void printTasks(TaskList tl) {
+        int index = 1;
+        System.out.print(line);
+        for (Task t : taskList) {
+            System.out.print(String.format("     %d. %s\n",
+                    index++, t.toString()));
+        }
+        System.out.print(line);
+    }
+
+    private String taskListMessage(int numOfTasks) {
         return String.format("     Now you have %d task(s) in the list\n", numOfTasks);
     }
 
-    public void printAddedTask() {
-        String message = "     Got it. I've added this task:\n";
+    public void printAddedTask(Task t) {
+        String addMsg = "     Got it. I've added this task:\n";
+        String taskMsg = "\t" + t.toString() + "\n";
+        System.our.print(LINE + addMsg + taskMsg + LINE);
     }
 
-    public void printMarkedDone() {
-        String message = "     Nice! I've marked this task as done:\n";
+    public void printMarkedDone(Task t) {
+        String doneMsg = "     Nice! I've marked this task as done:\n";
+        String taskMsg = "\t" + t.toString() + "\n";
+        System.our.print(LINE + doneMsg + taskMsg + LINE);
     }
 
-    public void printDeletedTask() {
-        String message = "     Got it. I've added this task:\n";
+    public void printDeletedTask(Task t) {
+        String deleteMsg = "     Noted. I've removed this task:\n";
+        String taskMsg = "\t" + t.toString() + "\n";
+        System.our.print(LINE + deleteMsg + taskMsg + LINE);
     }
 }

@@ -1,7 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -13,31 +12,30 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-
-
 public class DukeSimulator {
-
-
-    private List<Task> taskList;
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
 
     public DukeSimulator() {
-        taskList = new ArrayList<Task>();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        TaskList taskList = new TaskList();
     }
 
 
     public void run() {
-        greeting();
+        ui.printGreeting();
         loadTaskList();
-        Scanner sc = new Scanner(System.in);
         String command;
-        command = sc.nextLine();
+        command = ui.readLine();
         while(!command.equals("bye")) {
             processCmd(command);
             save();
             command = sc.nextLine();
         }
 
-        bye();
+        ui.printBye();
     }
 
     private void processCmd(String command) {
@@ -53,7 +51,7 @@ public class DukeSimulator {
                 addTask(command);
             }
         } catch (DukeException e) {
-            System.out.print(line + e.toString() + line);
+            Ui.printError(e.toString());
         }
     }
 
@@ -70,12 +68,6 @@ public class DukeSimulator {
             throw new DukeWrongCommandException(parsedCommand[0]);
         }
         taskList.add(t);
-        String taskCount =
-                String.format("     Now you have %d task(s) in the list\n",
-                        taskList.size());
-        String addedTask = line + "     Got it. I've added this task:\n"
-                + "\t" + t.toString() + "\n" + taskCount + line;
-        System.out.print(addedTask);
     }
 
     private Task toDoMaker(String command) throws DukeMissingDescriptionException {
@@ -127,20 +119,6 @@ public class DukeSimulator {
         }
     }
 
-
-
-
-
-    private void printList() {
-        int index = 1;
-        System.out.print(line);
-        for (Task t : taskList) {
-            System.out.print(String.format("     %d. %s\n",
-                    index++, t.toString()));
-        }
-        System.out.print(line);
-    }
-
     private void doneTask(String s) {
         int taskNum = Integer.valueOf(s);
         Task t = taskList.get(taskNum - 1);
@@ -155,10 +133,5 @@ public class DukeSimulator {
         int taskNum = Integer.valueOf(s);
         Task t = taskList.get(taskNum - 1);
         taskList.remove(taskNum - 1);
-        String taskCount = String.format("     Now you have %d task(s) in the list\n",
-                taskList.size());
-        String deleteTask = line + "     Noted. I've removed this task:\n"
-                + "\t" + t.toString() + "\n" + taskCount + line;
-        System.out.print(deleteTask);
     }
 }

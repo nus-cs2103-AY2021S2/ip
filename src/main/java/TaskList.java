@@ -17,6 +17,11 @@ public class TaskList {
         taskList.add(t);
     }
 
+    public void deleteTask(int num) {
+        taskList.remove(num - 1);
+    }
+
+    public void doneTask
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("");
