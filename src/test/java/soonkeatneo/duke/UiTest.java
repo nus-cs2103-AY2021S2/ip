@@ -23,7 +23,7 @@ public class UiTest {
     }
 
     @Test
-    void greetUser_thenOutputCaptorSuccess() {
+    void greetUser_correctOutputPrinted() {
         Ui.greetUser();
         String expected = "Henlooooo~! My name is " + Duke.BOT_NAME + "\n" +
                 "    What can I do for you today? :)";
@@ -32,14 +32,14 @@ public class UiTest {
     }
 
     @Test
-    void showTestMessage_onPrintMessage_thenOutputCaptorSuccess() {
+    void showTestMessage_correctOutputPrinted() {
         Ui.printMessage("Test");
         String expected = "    Test\n";
         assertEquals(expected, outputStreamCaptor.toString());
     }
 
     @Test
-    void showSeparators_onFunctionCall_thenOutputCaptorSuccess() {
+    void showSeparators_correctOutputPrinted() {
         Ui.printSeparators();
         String expected = "~~~~~~~~~~~~~~~~~~~~~~\n";
         assertEquals(expected, outputStreamCaptor.toString());

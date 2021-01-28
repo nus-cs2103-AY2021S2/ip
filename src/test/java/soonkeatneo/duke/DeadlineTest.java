@@ -14,14 +14,14 @@ public class DeadlineTest {
     }
 
     @Test
-    public void createDeadline_invalidDateFormat_throwsException() {
+    public void createDeadline_invalidDateFormat_exceptionThrown() {
         assertThrows(java.time.format.DateTimeParseException.class, () -> {
             new Deadline("test", "abcd");
         });
     }
 
     @Test
-    public void toString_validInputs_outputsCorrectly() {
+    public void toString_validInputs_correctOutputPrinted() {
         String expected = new Deadline("some item", "2021-01-01").toString();
         assertEquals("[D][ ] some item (by: Friday, Jan 1 2021)", expected);
     }
