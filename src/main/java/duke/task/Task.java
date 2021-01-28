@@ -16,6 +16,10 @@ public class Task {
         isDone = false;
     }
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * Marks the status of the Task as "completed".
      */

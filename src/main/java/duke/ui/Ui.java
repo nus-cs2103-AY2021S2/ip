@@ -61,4 +61,12 @@ public class Ui {
             System.out.println(" " + (i + 1) + "." + tempTask);
         }
     }
+
+    public void listMatchingTasks(TaskList tasks) {
+        System.out.println(" Here are the matching tasks: ");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task tempTask = tasks.get(i);
+            System.out.println(" " + (i + 1) + "." + tempTask);
+        }
+    }
 }
