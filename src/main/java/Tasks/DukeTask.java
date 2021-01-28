@@ -56,6 +56,10 @@ public class DukeTask {
         return String.format("%s | %d | %s", task, done, this.name);
     }
 
+    public String getname() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return this.type + this.getStatusIcon() + " " + this.name;

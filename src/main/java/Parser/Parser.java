@@ -42,6 +42,8 @@ public class Parser {
 
         try {
         switch (line) {
+        case ("find"):
+            return new FindCommand(doneLine[1]);
         case ("todo"):
             return new AddCommand(new Todos(doneLine[1]));
         case ("deadline"):

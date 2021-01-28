@@ -34,6 +34,16 @@ public class TaskList {
         this.list.remove(index - 1);
     }
 
+    public List<DukeTask> find(String word) {
+        List<DukeTask> finder = new ArrayList<>();
+        for (DukeTask task : this.list) {
+            if (task.getname().contains(word)) {
+                finder.add(task);
+            }
+        }
+        return finder;
+    }
+
     public int size() {
         return this.list.size();
     }
