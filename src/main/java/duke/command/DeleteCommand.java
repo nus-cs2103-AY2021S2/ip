@@ -2,8 +2,9 @@ package duke.command;
 
 import duke.DukeException;
 import duke.StringParser;
-import duke.task.Task;
 import duke.TaskList;
+
+import duke.task.Task;
 
 /**
  * Command type delete.

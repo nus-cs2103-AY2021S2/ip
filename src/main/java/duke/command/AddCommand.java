@@ -4,10 +4,11 @@ import duke.CommandType;
 import duke.DukeException;
 import duke.StringParser;
 import duke.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
+
 import duke.task.Task;
 import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 import java.time.DateTimeException;
 
