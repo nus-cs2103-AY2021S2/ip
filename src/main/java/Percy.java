@@ -1,15 +1,11 @@
-import percy.exception.PercyException;
-import percy.task.Deadline;
-import percy.task.Event;
-import percy.ui.UserInterface;
-
 import java.io.IOException;
 
-import percy.ui.UserInterface;
 import percy.command.Command;
 import percy.command.Parser;
-import percy.task.TaskList;
+import percy.exception.PercyException;
 import percy.storage.Storage;
+import percy.task.TaskList;
+import percy.ui.UserInterface;
 
 public class Percy {
     TaskList list;

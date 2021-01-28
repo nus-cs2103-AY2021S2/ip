@@ -1,0 +1,8 @@
+plugins {
+    id 'checkstyle'
+    // other plugins
+}
+
+checkstyle {
+    toolVersion = '8.39'
+}
