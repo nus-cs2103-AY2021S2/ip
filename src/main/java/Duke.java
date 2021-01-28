@@ -1,10 +1,20 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) throws DukeException {
-        ArrayList<Task> myList = new ArrayList();
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
+        Database database = new Database( "data.txt");
+        ArrayList<String> listOfTasks;
+        ArrayList<Task> myList;
+       try {
+            listOfTasks = database.readFile();
+            myList = readInput(listOfTasks);
+        }
+        catch (FileNotFoundException e){
+            throw new FileNotFoundException("No File Detected");
+        }
         System.out.println("____________________________________");
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println("____________________________________");
@@ -31,6 +41,7 @@ public class Duke {
                                     System.out.println(" " + newTodo.toString());
                                     myList.add(newTodo);
                                     System.out.println("Now you have " + myList.size() + " tasks in the list.");
+                                    database.writeTaskToFile(myList);
                                 } catch (Exception e){
                                     System.out.println("Enter valid todo");
                                 }
@@ -64,6 +75,8 @@ public class Duke {
                                     System.out.println(" " + newDeadline.toString());
                                     myList.add(newDeadline);
                                     System.out.println("Now you have " + myList.size() + " tasks in the list.");
+                                    database.writeTaskToFile(myList);
+
                                 }
                             } catch(DukeException e) {
                                 System.out.println(e.getMessage());
@@ -97,6 +110,7 @@ public class Duke {
                                     System.out.println(" " + newEvent.toString());
                                     myList.add(newEvent);
                                     System.out.println("Now you have " + myList.size() + " tasks in the list.");
+                                    database.writeTaskToFile(myList);
                                 }
                             } catch(DukeException e) {
                                 System.out.println(e.getMessage());
@@ -146,6 +160,7 @@ public class Duke {
                                     t.markAsDone();
                                     System.out.println("Nice! I've marked this task as done");
                                     System.out.println(t.toString());
+                                    database.writeTaskToFile(myList);
                                 } catch (Exception e){
                                     System.out.println("Please enter a valid index");
                                 }
@@ -179,6 +194,7 @@ public class Duke {
                                     System.out.println(myList.get(index-1));
                                     myList.remove(index-1);
                                     System.out.println("Now you have " + myList.size() + " tasks in the list");
+                                    database.writeTaskToFile(myList);
 
                                 } catch (Exception e){
                                     System.out.println("Please enter a valid index");
@@ -208,4 +224,38 @@ public class Duke {
 
         }
     }
+
+    private static ArrayList<Task> readInput(ArrayList<String> strings) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for(String str: strings) {
+            char identifier = str.charAt(1);
+            switch(identifier) {
+                case 'D':
+                    String subString = str.substring(7);
+                    String[] inputs = subString.split("by: ");
+                    String name = inputs[0].substring(0, inputs[0].length()-2);
+                    String deadline = inputs[1].substring(0, inputs[1].length()-1);
+                    Deadline deadline1 = new Deadline(name, deadline);
+                    tasks.add(deadline1);
+                    break;
+                case 'T':
+                    String subString1 = str.substring(7);
+                    Todo todo1 = new Todo(subString1);
+                    tasks.add(todo1);
+                    break;
+                case 'E':
+                    String subString2 = str.substring(7);
+                    String[] inputs1 = subString2.split("at: ");
+                    String desc = inputs1[0].substring(0, inputs1[0].length()-2);
+                    String at = inputs1[1].substring(0, inputs1[1].length()-1);
+                    Event event1 = new Event(desc, at);
+                    tasks.add(event1);
+
+                    break;
+            }
+        }
+        return tasks;
+    }
+
+
 }
