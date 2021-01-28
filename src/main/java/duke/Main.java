@@ -1,6 +1,12 @@
-import java.util.Scanner;
+ package duke;
 
-public class Main {
+ import duke.command.Statement;
+ import duke.exception.DukeException;
+ import duke.command.Command;
+ import duke.storage.Storage;
+ import duke.task.TaskList;
+
+ public class Main {
 
     private Storage storage;
     private Ui ui;

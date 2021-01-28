@@ -1,9 +1,13 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
 class DukeFileWriter {
 
-    void writeFile(String filePath, String input) throws DukeException{
+    void writeFile(String filePath, String input) throws DukeException {
 
         try {
             FileWriter fw = new FileWriter(filePath);

@@ -1,14 +1,19 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.List;
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
     private final List<Task> list;
 
-    TaskList() {
+    public TaskList() {
         this.list = new ArrayList<Task>();
     }
 
-    TaskList(List<Task> list) {
+    public TaskList(List<Task> list) {
         this.list = list;
     }
 
@@ -20,11 +25,11 @@ class TaskList {
         return list.size();
     }
 
-    void add(Task task){
+    public void add(Task task){
         list.add(task);
     }
 
-    Task delete(String num) throws DukeException{
+    public Task delete(String num) throws DukeException {
         int index = Integer.valueOf(num) - 1;
 
         if(index < 0 || index >= list.size()) {
@@ -34,7 +39,7 @@ class TaskList {
         return list.remove(index);
     }
 
-    Task markTaskAsDone(String num) throws DukeException{
+    public Task markTaskAsDone(String num) throws DukeException{
         int index = Integer.valueOf(num) - 1;
 
         if(index < 0 || index >= list.size()) {
@@ -47,7 +52,7 @@ class TaskList {
         return t;
     }
 
-    String listOutTaskInString() {
+    public String listOutTaskInString() {
         String res = "";
 
         res += "Done tasks: " + System.lineSeparator();

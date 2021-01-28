@@ -1,12 +1,16 @@
+package duke.command;
+
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-class Statement {
+public class Statement {
     private final String statement;
     private final Hashtable<String, Integer> argsTable;
 
-    Statement(String statement) {
+    public Statement(String statement) {
         this.statement = statement;
         argsTable = new Hashtable<>();
 
@@ -21,7 +25,7 @@ class Statement {
 
     //return a list of String with the first element as the command
     //the second element is description and third element is time (if applicable)
-    List<String> parseStatement() throws DukeException {
+    private List<String> parseStatement() throws DukeException {
         Scanner sc = new Scanner(statement);
         String command = sc.next();
 
@@ -62,7 +66,7 @@ class Statement {
         return result;
     }
 
-    Command parse() throws DukeException{
+    public Command parse() throws DukeException{
         try {
             List<String> parsedArgs = parseStatement();
             String command = parsedArgs.get(0);

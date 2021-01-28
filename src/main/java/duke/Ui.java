@@ -1,7 +1,11 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.List;
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
 
     private Scanner sc;
 
@@ -26,7 +30,7 @@ class Ui {
         System.out.println(msg);
     }
 
-    void showExit() {
+    public void showExit() {
         sc.close();
         System.out.println("Bye. Hope to see you again soon!");
     }
@@ -40,12 +44,12 @@ class Ui {
         showTaskAndSize(task, size);
     }
 
-    void showDelete(String task, int size) {
+    public void showDelete(String task, int size) {
         System.out.println("Noted, I've removed this task: ");
         showTaskAndSize(task, size);
     }
 
-    void showDone(String task, int size) {
+    public void showDone(String task, int size) {
         System.out.println("Nice! I've mark this task as done");
         showTaskAndSize(task, size);
     }
@@ -55,7 +59,7 @@ class Ui {
         System.out.println(String.format("Now you have %d tasks in the list.", size));
     }
 
-    void showList(List<Task> list) {
+    public void showList(List<Task> list) {
         if(list.isEmpty()){
             System.out.println("There is currently no task in the list.");
         }else{

@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.util.Scanner;
 
-class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
 
@@ -9,11 +11,11 @@ class Task {
         this.isDone = false;
     }
 
-    String getDescription(){
+    public String getDescription(){
         return description;
     }
 
-    boolean getIsDone() {
+    public boolean getIsDone() {
         return isDone;
     }
 
@@ -21,7 +23,7 @@ class Task {
         return (isDone ? "\u2713" : " "); //return tick or X symbols
     }
 
-    void markAsDone(){
+    public void markAsDone(){
         isDone = true;
     }
 

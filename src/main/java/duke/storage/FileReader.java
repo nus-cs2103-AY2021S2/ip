@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -8,7 +16,7 @@ import java.io.FileWriter;
 
 class FileReader {
 
-    List<Task> readFile(String path) throws DukeException{
+    List<Task> readFile(String path) throws DukeException {
         try {
             File f = new File(path);
 

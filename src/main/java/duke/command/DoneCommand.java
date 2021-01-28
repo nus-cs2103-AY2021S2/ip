@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
 class DoneCommand extends Command{
 
     DoneCommand(String index) {
@@ -5,7 +13,7 @@ class DoneCommand extends Command{
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.markTaskAsDone(description);
         ui.showDone(t.toString(), tasks.getSize());
         storage.save(tasks.listOutTaskInString());

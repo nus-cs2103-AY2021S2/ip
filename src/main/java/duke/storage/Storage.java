@@ -1,21 +1,24 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.List;
 
-class Storage {
+public class Storage {
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    List<Task> load() throws DukeException{
+    public List<Task> load() throws DukeException {
         FileReader fr = new FileReader();
 
         return fr.readFile(filePath);
     }
 
-
-
-    void save(String modifiedResult) throws DukeException{
+    public void save(String modifiedResult) throws DukeException{
         DukeFileWriter fw = new DukeFileWriter();
 
         fw.writeFile(filePath, modifiedResult);
