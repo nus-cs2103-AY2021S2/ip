@@ -16,8 +16,8 @@ import java.text.SimpleDateFormat;
 public class FileSaver {
     public File file;
     
-    public FileSaver() {
-        file = new File("data", "duke.txt");
+    public FileSaver(String folderName, String fileName) {
+        file = new File(folderName, fileName);
     }
 
     public void createFile() throws DukeException {
@@ -36,7 +36,7 @@ public class FileSaver {
         }
     }
 
-    public void addTask(List<Task> task, Task t, String isDone) {
+    public void addTask(TaskList task, Task t, String isDone) {
         if (isDone.trim().equals("1")) {
             t.markAsDone();
         } 
@@ -55,7 +55,7 @@ public class FileSaver {
         return true;
     }
 
-    public void parseTask(List<Task> task, String info) throws IndexOutOfBoundsException{
+    public void parseTask(TaskList task, String info) throws IndexOutOfBoundsException{
         String[] taskInfo = info.split(" \\| ");
         String type = taskInfo[0].trim();
         switch (type) {
@@ -82,7 +82,7 @@ public class FileSaver {
         } 
     }
 
-    public void load(List<Task> task) throws DukeException {
+    public void load(TaskList task) throws DukeException {
         createFile();
         try {
             Scanner sc = new Scanner(file);
@@ -97,10 +97,10 @@ public class FileSaver {
         }
     }
 
-    public void save(List<Task> task) throws DukeException {
+    public void save(TaskList task) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
-            for (int i = 0; i < task.size(); i++) {
+            for (int i = 0; i < task.getSize(); i++) {
                 Task t = task.get(i);
                 fw.write(t.savedFormat() + System.lineSeparator());
             } 
