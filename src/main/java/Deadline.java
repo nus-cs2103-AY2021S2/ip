@@ -24,6 +24,7 @@ public class Deadline extends Task {
 			LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE);
 			return new Deadline(description, date);
 		} catch (DateTimeParseException e) {
+            System.out.println("\tPlease follow this format \"YYYY-MM-DD [hh:mm[:ss]]\" for datetime.");
 			return null;
 		}
 	}
@@ -34,6 +35,7 @@ public class Deadline extends Task {
 			LocalTime time = LocalTime.parse(timeStr, DateTimeFormatter.ISO_LOCAL_TIME);
 			return new Deadline(description, date, time);
 		} catch (DateTimeParseException e) {
+            System.out.println("\tPlease follow this format \"YYYY-MM-DD [hh:mm[:ss]]\" for datetime.");
 			return null;
 		}
 	}

@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Storage {
 	private final String filePath;
@@ -40,12 +41,17 @@ public class Storage {
         }
     }
 
-    public List<String> loadFile() {
+    public TaskList loadFile() {
         Path path = Paths.get(filePath);
         if (!Files.exists(path))
             return null;
         try {
-            return Files.readAllLines(path, StandardCharsets.UTF_8);
+            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            List<Task> t = lines.stream()
+                    .map(str -> Parser.parseAsTask(str))
+                    .filter(task -> task != null)
+                    .collect(Collectors.toList());
+            return new TaskList(t);
         } catch (IOException e) {
             System.err.println("Duke cannot read the file.");
             e.printStackTrace();
