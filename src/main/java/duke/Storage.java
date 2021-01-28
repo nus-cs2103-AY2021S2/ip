@@ -40,8 +40,8 @@ public class Storage {
      * @throws FileNotFoundException If the file does not exist.
      */
     public List<Task> load() throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
         List<Task> tempTask = new ArrayList<>();
         while (s.hasNextLine()) {
             String[] strArr = s.nextLine().split(" \\| ");
