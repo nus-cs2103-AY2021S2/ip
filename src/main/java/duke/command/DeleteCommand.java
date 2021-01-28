@@ -1,19 +1,14 @@
 package duke.command;
 
 
-import duke.task.Task;
 import duke.exceptions.DukeException;
-import duke.ui.Ui;
+import duke.task.Task;
 
 public class DeleteCommand extends Command{
 	public DeleteCommand(String task, String date) {
 		super("delete", task, date, command -> {
-			try {
-				return handleDelete(task, date);
-			} catch (DukeException e) {
-				System.out.println(e.getMessage());
-			}
-			return false;
+			return handleDelete(task, date);
+
 		});
 	}
 
@@ -23,7 +18,7 @@ public class DeleteCommand extends Command{
 	 *
 	 * @param task name of the user task.
 	 */
-	private static final Boolean handleDelete(String task, String date) throws DukeException {
+	private static final Boolean handleDelete(String task, String date) {
 		if (task.length() > 0 && date.equals("")) {
 			try {
 				int num = Integer.parseInt(task);
@@ -31,9 +26,8 @@ public class DeleteCommand extends Command{
 			} catch (NumberFormatException e) {
 				DukeException.NumberFormatException();
 			}
-		} else {
-			throw new DukeException(Ui.COMMANDERROR);
 		}
+
 		return false;
 	}
 }

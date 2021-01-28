@@ -3,26 +3,43 @@ package duke.utils;
 import duke.command.*;
 import duke.exceptions.DukeException;
 import duke.task.Task;
+import duke.type.CommandType;
 import duke.ui.Ui;
 
 public class Parser {
-	private String instruction;
-	private String taskName;
-	private String date;
+	private String input;
 
 	public Parser(String input) {
-		try {
-			this.instruction = extractInstruction(input);
-		} catch (DukeException e) {
-			DukeException.EmptyCommandException();
-			this.instruction = "";
-		}
-		this.taskName = extractTask(input, instruction);
-		this.date = extractDate(input, instruction);
+		this.input = input;
 	}
 
 	public final Command parse() {
-		Command command;
+		String instruction;
+		String taskName;
+		String date;
+		Command command = new ErrorCommand();
+
+		try {
+			instruction = extractInstruction(input);
+		} catch (DukeException e) {
+			System.out.println(e.getMessage());
+			return command;
+		}
+
+		try {
+			taskName = extractTask(input, instruction);
+		} catch (DukeException e) {
+			System.out.println(e.getMessage());
+			return command;
+		}
+
+		try {
+			date = extractDate(input, instruction);
+		} catch (DukeException e) {
+			System.out.println(e.getMessage());
+			return command;
+		}
+
 		switch (instruction) {
 		case "bye":
 			command = new ExitCommand(taskName, date);
@@ -41,7 +58,6 @@ public class Parser {
 			command = new DeleteCommand(taskName, date);
 			break;
 		default:
-			command = new ErrorCommand();
 			break;
 		}
 		return command;
@@ -57,8 +73,12 @@ public class Parser {
 	static final String extractInstruction(String input) throws DukeException {
 
 		String instruction = input.trim().toLowerCase().split(" ")[0];
-		if (instruction.equals("")) {
+		if (input.replaceAll(" ", "").equals("")) {
 			throw new DukeException(Ui.EMPTYCOMMAND);
+		}
+
+		if (CommandType.valueOfType(instruction) == null) {
+			throw new DukeException(Ui.COMMANDERROR);
 		}
 
 		return instruction;
@@ -71,46 +91,59 @@ public class Parser {
 	 * @param command user command.
 	 * @return the task name if there is one and return empty string if task name empty.
 	 */
-	static final String extractTask(String input, String command) {
+	static final String extractTask(String input, String command) throws DukeException {
 		String body = input.replaceAll(command, "").trim();
-		if (command.equals("todo") || command.equals("delete")) {
-			return body;
-		} else if (command.equals("done")) {
-			return body.replaceAll("[^0-9]", "");
-		} else {
-			try {
-				return body.split("/")[0];
-			} catch (ArrayIndexOutOfBoundsException e) {
-				return "";
+		if (command.equals("todo")) {
+			if (body.equals("")) {
+				throw new DukeException(Ui.EMPTYTASK);
+			} else {
+				return body;
 			}
+		} else if (command.equals("done") || command.equals("delete")) {
+			String hasLetter = body.replaceAll("[0-9]", "");
+			if (hasLetter.length() > 0) {
+				throw new DukeException(Ui.KEYINNUMBER);
+			} else {
+				return body.replaceAll("[^0-9]", "");
+			}
+		} else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
+			if (body.equals("")) {
+				throw new DukeException(Ui.EMPTYTASK);
+			} else {
+				String task = body.split("/")[0];
+				return task;
+			}
+		} else {
+			if (body.length() > 0) {
+				throw new DukeException(Ui.COMMANDERROR);
+			}
+			return "";
 		}
 	}
 
 	/**
 	 * extract the date of the task to be done.
 	 * @param input user input.
-	 * @param command user command.
+	 * @param instruction user command.
 	 * @return the task date in String and return empty if there is no date.
 	 */
-	static final String extractDate(String input, String command) {
-		String body = input.replaceAll(command, "").trim();
+	static final String extractDate(String input, String instruction) throws DukeException {
+		String body = input.replaceAll(instruction, "").trim();
 		String[] parts = body.split("/", 2);
 		if (parts.length == 2) {
-			return DateAndTime.converter(parts[1]);
+			String date = DateAndTime.converter(parts[1]);
+			if (date.equals("")) {
+				throw new DukeException(Ui.WRONGDATEFORMAT);
+			}
+			return date;
 		} else {
+			if (instruction.equals("todo") || instruction.equals("deadline")
+					|| instruction.equals("event")) {
+				throw new DukeException(Ui.MISSINGDATE);
+			}
 			return "";
 		}
 	}
 
-	public String getInstruction() {
-		return this.instruction;
-	}
 
-	public String getTaskName() {
-		return taskName;
-	}
-
-	public String getDate() {
-		return date;
-	}
 }
