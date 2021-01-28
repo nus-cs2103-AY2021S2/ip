@@ -1,18 +1,19 @@
 package duke.storage;
 
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
 import duke.exception.DukeException;
-import duke.task.Deadline;
 import duke.parser.Parser;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
@@ -99,6 +100,4 @@ public class Storage {
             System.out.println("Has no targeted file in: " + e.getMessage());
         }
     }
-
-
 }

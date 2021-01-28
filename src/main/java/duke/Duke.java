@@ -19,7 +19,7 @@ public class Duke {
      * Constructs a Duke bot.
      * @param filePath The file path to store the tasks.
      */
-    Duke(String filePath) {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {

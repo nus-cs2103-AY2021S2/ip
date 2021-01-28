@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * A class represents a TaskList.
  */
 public class TaskList {
-    ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Constructs a TaskList.

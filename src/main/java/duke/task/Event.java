@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A class represents an Event.
  */
 public class Event extends Task {
-    protected LocalDateTime startTime;
+    private final LocalDateTime startTime;
 
     /**
      * Constructs an Event.

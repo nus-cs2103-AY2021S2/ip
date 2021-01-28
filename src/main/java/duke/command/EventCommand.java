@@ -1,10 +1,10 @@
 package duke.command;
 
+import duke.task.Event;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.exception.DukeException;
-import duke.task.Event;
 import duke.exception.DescriptionMissingException;
 import duke.exception.InvalidDateTimeException;
 import duke.parser.Parser;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * A class represents an EventCommand.
  */
 public class EventCommand extends AddCommand {
-    String fullCommand;
+    private final String fullCommand;
 
     /**
      * Constructs an EventCommand.
