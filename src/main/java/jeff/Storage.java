@@ -7,13 +7,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles loading/storing tasks from/to hard disk.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath File path to read from/ write to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads and returns tasks from hard disk.
+     *
+     * @return ArrayList of Task objects.
+     * @throws JeffException If file is not found.
+     */
     public ArrayList<Task> load() throws JeffException {
         try {
             File data = new File(filePath);
@@ -50,6 +64,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks to hard disk.
+     *
+     * @param tasks ArrayList of Task objects to be saved.
+     * @throws JeffException If an error is encountered while saving.
+     */
     public void save(ArrayList<Task> tasks) throws JeffException {
         try {
             FileWriter fw = new FileWriter(filePath);
