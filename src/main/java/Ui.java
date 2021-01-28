@@ -61,4 +61,16 @@ public class Ui {
         String taskMsg = "\t" + t.toString() + "\n";
         System.out.print(LINE + deleteMsg + taskMsg + LINE);
     }
+
+    public void printFoundTasks(TaskList tl) {
+        int index = 1;
+        String findMsg = "     Here are the matching tasks in your list:\n";
+        System.out.print(LINE);
+        System.out.print(findMsg);
+        for (Task t : tl.getList()) {
+            System.out.print(String.format("     %d. %s\n",
+                    index++, t.toString()));
+        }
+        System.out.print(LINE);
+    }
 }
