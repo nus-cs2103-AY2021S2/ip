@@ -8,12 +8,23 @@ public class TaskList {
         this.taskList = new ArrayList<>(taskCollection);
     }
 
+    /**
+     * Provides UI object the representation
+            of all the task in the taskList for printing
+     * @param ui (Ui object to do the actual printing)
+     */
     public void printAllTask(Ui ui) {
         for (int i = 0; i < taskList.size(); i++) {
             ui.printTask(i + 1 + ".", taskList.get(i).toString());
         }
     }
 
+    /**
+     * Returns boolean that represent option being valid / invalid
+     * @param ui UI object for printing error message
+     * @param option Input for checking
+     * @return
+     */
     public boolean checkValidOption(Ui ui, int option) {
         boolean result = option < 0 || option >= this.taskList.size();
         if (result) {
@@ -22,6 +33,11 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Marks a specific task based on the number given as done
+     * @param ui Ui object to inform user if the task is already done
+     * @param option task number entered by the user
+     */
     public void markAsDone(Ui ui, int option) {
         if(!checkValidOption(ui, option)) {
             Task task = taskList.get(option);
@@ -33,6 +49,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task in the taskList based on the number given
+     * @param ui Ui object to show message upon successfully deleting
+     * @param option task number entered by the user
+     */
     public void deleteTask(Ui ui, int option) {
         if(!checkValidOption(ui, option)) {
             Task t = taskList.remove(option);
@@ -40,11 +61,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task into the taskList
+     * @param ui UI object to show message upon successfully adding
+     * @param task Task object to be adding into the taskList
+     */
     public void addTask(Ui ui, Task task) {
         taskList.add(task);
         ui.showSuccessAddTask(task.toString(), taskList.size());
     }
 
+    /**
+     * Prints task that has description containing the search term
+     * @param ui Ui object that does the printing
+     * @param searchTerm String that contains the serach term
+     */
     public void search(Ui ui, String searchTerm) {
         int count = 0;
         for(Task t : taskList) {
@@ -60,6 +91,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the TaskList
+     * @return ArrayList<Task> taskList
+     */
     public ArrayList<Task> getTaskList() {
         return taskList;
     }

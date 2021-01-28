@@ -3,6 +3,9 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Contains the main logic of the Duke class
+     */
     public void run() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -31,6 +34,7 @@ public class Duke {
         }
         this.storage.save(tasks.getTaskList());
     }
+
     public static void main(String[] args) {
         new Duke().run();
     }
