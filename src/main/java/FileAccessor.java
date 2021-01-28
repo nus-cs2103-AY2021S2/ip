@@ -6,7 +6,20 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Represents the accessing a file to write and read.
+ */
 public class FileAccessor {
+
+    /**
+     * Returns a ArrayList which has the tasks in the hard drive file specified by path appended to it.
+     *
+     * @param path Specify the path where the file with data exists.
+     * @param tasks ArrayList to save the tasks from hard drive to.
+     * @return ArrayList<Task> list of tasks saved in path.
+     * @throws FileNotFoundException if file at path does not exist.
+     * @throws IllegalArgumentException if data in file is not in the correct format.
+     */
     public static ArrayList<Task> ReadFromTasks(String path, ArrayList<Task> tasks) throws FileNotFoundException {
         File f = new File(path);
         Scanner sc = new Scanner(f);
@@ -35,6 +48,14 @@ public class FileAccessor {
     }
 
     //assume in correct format
+
+    /**
+     * Writes the data from tasks to the path.
+     *
+     * @param path Specify the path where the file with data exists.
+     * @param tasks ArrayList of tasks to write to path.
+     * @throws IOException if unable to write to path.
+     */
     public static void WriteToTasks(String path, ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(path);
         String s = "";
