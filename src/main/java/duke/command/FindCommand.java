@@ -7,13 +7,27 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A class represents a FindCommand.
+ */
 public class FindCommand extends Command {
     protected String fullCommand;
 
+    /**
+     * Constructs a FindCommand.
+     * @param fullCommand The full command from user's input.
+     */
     public FindCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
+    /**
+     * Collects all the matching tasks and calls ui to print therm.
+     * @param tasks Task list given.
+     * @param ui User interface class object.
+     * @param storage Storage path that is going to be updated.
+     * @throws DukeException If error occurs during the process.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String keyword = fullCommand.substring(4).strip();
@@ -31,6 +45,10 @@ public class FindCommand extends Command {
         ui.listMatchingTasks(matchingTasks);
     }
 
+    /**
+     * Returns false.
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;
