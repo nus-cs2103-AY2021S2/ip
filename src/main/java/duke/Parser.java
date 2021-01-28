@@ -93,7 +93,7 @@ public class Parser {
         String regex = "^done\\s+([0-9]+)$"; // "done" followed by at least one space and at least one number.
         Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = patternToMatch.matcher(input);
-        if (!m.matches()){
+        if (!m.matches()) {
             // Unable to parse the string following "done "
             throw new DukeException("The input for done must be integer.");
         }
