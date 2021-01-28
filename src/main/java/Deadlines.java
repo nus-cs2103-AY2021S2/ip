@@ -48,71 +48,71 @@ public class Deadlines extends Task {
     @Override
     public String setDone() {
         super.setTaskCompleted();
-        return "Nice! I've marked this deadline as done:\n" +
-                toString();
+        return "Nice! I've marked this deadline as done:\n"
+                + toString();
     }
 
     @Override
     public String toString() {
         String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
-        return "[D]" + "[" + taskStringCheck + "] " + super.getTaskName() +
-                "(by: " + formatDate(dueBy) +  ")";
+        return "[D]" + "[" + taskStringCheck + "] " + super.getTaskName()
+                + " (by: " + formatDate(dueBy) +  ")";
     }
 
     private String formatDate(LocalDate date) {
         DayOfWeek day = date.getDayOfWeek();
         Month mth = date.getMonth();
         String dateString = "";
-        dateString = getDayString(day) + " " + getMthString(mth) + " " +
+        dateString = getDayString(day) + " " + getMthString(mth) + " "
                 + date.getDayOfMonth() + " " + date.getYear();
         return dateString;
     }
 
     private String getDayString(DayOfWeek day) {
         switch (day) {
-            case MONDAY:
-                return "Mon";
-            case TUESDAY:
-                return "Tue";
-            case WEDNESDAY:
-                return "Wed";
-            case THURSDAY:
-                return "Thu";
-            case FRIDAY:
-                return "Fri";
-            case SATURDAY:
-                return "Sat";
-            default:
-                return "Sun";
+        case MONDAY:
+            return "Mon";
+        case TUESDAY:
+            return "Tue";
+        case WEDNESDAY:
+            return "Wed";
+        case THURSDAY:
+            return "Thu";
+        case FRIDAY:
+            return "Fri";
+        case SATURDAY:
+            return "Sat";
+        default:
+            return "Sun";
         }
     }
 
     private String getMthString(Month mth) {
         switch (mth) {
-            case JANUARY:
-                return "Jan";
-            case FEBRUARY:
-                return "Feb";
-            case MARCH:
-                return "Mar";
-            case APRIL:
-                return "Apr";
-            case MAY:
-                return "May";
-            case JUNE:
-                return "Jun";
-            case JULY:
-                return "Jul";
-            case AUGUST:
-                return "Aug";
-            case SEPTEMBER:
-                return "Sep";
-            case OCTOBER:
-                return "Oct";
-            case NOVEMBER:
-                return "Nov";
-            default:
-                return "Dec";
+        case JANUARY:
+            return "Jan";
+        case FEBRUARY:
+            return "Feb";
+        case MARCH:
+            return "Mar";
+        case APRIL:
+            return "Apr";
+        case MAY:
+            return "May";
+        case JUNE:
+            return "Jun";
+        case JULY:
+            return "Jul";
+        case AUGUST:
+            return "Aug";
+        case SEPTEMBER:
+            return "Sep";
+        case OCTOBER:
+            return "Oct";
+        case NOVEMBER:
+            return "Nov";
+        default:
+            return "Dec";
         }
     }
 }

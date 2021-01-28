@@ -7,12 +7,8 @@ public enum Commands {
 
     private String commandString;
 
-    private Commands (String commandString) {
+    private Commands(String commandString) {
         this.commandString = commandString;
-    }
-
-    public String getCommandStr() {
-        return this.commandString;
     }
 
     public static Commands get(String str) {
@@ -27,5 +23,9 @@ public enum Commands {
 
     private static String commandsToUpperCase(String command) {
         return command.toUpperCase();
+    }
+
+    public String getCommandStr() {
+        return this.commandString;
     }
 }

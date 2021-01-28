@@ -7,8 +7,8 @@ public class Todos extends Task {
     @Override
     public String setDone() {
         super.setTaskCompleted();
-        return "Nice! I've marked this todo as done:\n" +
-                toString();
+        return "Nice! I've marked this todo as done:\n"
+                + toString();
     }
 
     @Override

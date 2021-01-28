@@ -49,23 +49,30 @@ public class Events extends Task {
     @Override
     public String setDone() {
         super.setTaskCompleted();
-        return "Nice! I've marked this event as done:\n" +
-                toString();
+        return "Nice! I've marked this event as done:\n"
+                + toString();
     }
 
     @Override
     public String toString() {
         String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
-        return "[E]" + "[" + taskStringCheck + "] " + super.getTaskName()
-                + "(at: " + formatDate(dueAt) +  ")";
+        return "[E]"
+                + "[" + taskStringCheck + "] "
+                + super.getTaskName()
+                + " (at: " + formatDate(dueAt)
+                +  ")";
     }
 
     private String formatDate(LocalDate date) {
         DayOfWeek day = date.getDayOfWeek();
         Month mth = date.getMonth();
         String dateString = "";
-        dateString = getDayString(day) + " " + getMthString(mth) + " "
-                + date.getDayOfMonth() + " " + date.getYear();
+        dateString = getDayString(day)
+                + " "
+                + getMthString(mth)
+                + " "
+                + date.getDayOfMonth()
+                + " " + date.getYear();
         return dateString;
     }
 

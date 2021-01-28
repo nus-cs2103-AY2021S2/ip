@@ -14,8 +14,8 @@ public class Task {
 
     public String setDone() {
         setTaskCompleted();
-        return "Nice! I've marked this task as done: \n" +
-                toString();
+        return "Nice! I've marked this task as done: \n"
+                + toString();
     }
 
     public void setTaskCompleted() {
@@ -39,9 +39,9 @@ public class Task {
     }
 
     public static String getNumOfTasksString() {
-        return "Now you have " + getNumOfTasks() +
-                (getNumOfTasks() == 1 ? " task" : " tasks") +
-                " in the list.";
+        return "Now you have " + getNumOfTasks()
+                + (getNumOfTasks() == 1 ? " task" : " tasks")
+                + " in the list.";
 
     }
 }
