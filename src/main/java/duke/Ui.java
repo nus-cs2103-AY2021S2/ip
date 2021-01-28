@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public static String lineSpacing = "____________________________________________________________";
+    protected static String lineSpacing = "____________________________________________________________";
 
-    public static String taskConfirmation = "Got it. I've added this task:\n";
+    protected static String taskConfirmation = "Got it. I've added this task:\n";
 
     public void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n" + lineSpacing);
@@ -18,7 +18,7 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void taskAddConfirmation(Task t, TaskList taskList) {
+    public void printTaskAddedConfirmation(Task t, TaskList taskList) {
         int numTasks = taskList.getTasks().size();
         System.out.println(taskConfirmation + t
                 + "\nNow you have " + numTasks
@@ -41,12 +41,12 @@ public class Ui {
         System.out.println(lineSpacing);
     }
 
-    public void taskDoneConfirmation(Task task) {
+    public void printTaskDoneConfirmation(Task task) {
         System.out.println("Nice! I've marked this task as done:\n" + task
                 + "\n" + lineSpacing);
     }
 
-    public void taskDeleteConfirmation(TaskList taskList, Task task) {
+    public void printTaskDeleteConfirmation(TaskList taskList, Task task) {
         ArrayList<Task> tasks = taskList.getTasks();
         System.out.println("Noted! I've removed this task:\n" + task
                 + "\nNow you have " + tasks.size()
@@ -54,11 +54,11 @@ public class Ui {
                 + lineSpacing);
     }
 
-    public void byeMessage() {
+    public void printByeMessage() {
         System.out.println("Bye. Hope to see you again soon!\n" + lineSpacing);
     }
 
-    public void dukeExceptionMessage(DukeException e) {
+    public void printDukeExceptionMessage(DukeException e) {
         System.out.println("Duke has encountered an error: " + e.getMessage()
                 + "\n" + lineSpacing);
     }

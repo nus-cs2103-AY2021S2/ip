@@ -16,10 +16,10 @@ public class Storage {
         if (!dir.exists()) {
             dir.mkdir();
         }
-        File saved_tasks = new File(dir, "saved_tasks");
-        if (!saved_tasks.exists()) {
+        File savedTasks = new File(dir, "saved_tasks");
+        if (!savedTasks.exists()) {
             try {
-                saved_tasks.createNewFile();
+                savedTasks.createNewFile();
                 return new TaskList(new ArrayList<>());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -27,7 +27,7 @@ public class Storage {
             }
         } else {
             try {
-                FileInputStream fis = new FileInputStream(saved_tasks);
+                FileInputStream fis = new FileInputStream(savedTasks);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 TaskList result = (TaskList) ois.readObject();
                 ois.close();
@@ -42,9 +42,9 @@ public class Storage {
 
     public void writeToFile(TaskList tasks) {
         File dir = new File("data");
-        File saved_tasks = new File(dir, "saved_tasks");
+        File savedTasks = new File(dir, "saved_tasks");
         try {
-            FileOutputStream fos = new FileOutputStream(saved_tasks);
+            FileOutputStream fos = new FileOutputStream(savedTasks);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(tasks);
             oos.close();
