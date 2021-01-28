@@ -91,6 +91,12 @@ public class SaveToFile {
         }
     }
 
+    public void beginClose(ArrayList<Task> arrL) {
+        for (Task task: arrL) {
+            writeToFile(task);
+        }
+    }
+
     public void closeFile () {
         try {
             this.fio.close();
