@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -44,6 +45,27 @@ public class Ui {
         case LIST:
             System.out.println("This is your list of tasks:\n");
             System.out.println(tasks.toString());
+            return true;
+        case FIND:
+            TaskList findTask = new TaskList();
+            try {
+                String name = parser.parseName(userInput, 5);
+                ArrayList<Task> taskList = tasks.getTaskList();
+                for (Task task : taskList) {
+                    String taskName = task.name;
+                    if (taskName.contains(name)) {
+                        findTask.addTask(task);
+                    }
+                }
+                if (findTask.getSize() != 0) {
+                    System.out.println("Here are your search results: \n");
+                    System.out.println(findTask.toString());
+                } else {
+                    System.out.println("Oops, there is no matching task!");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
             return true;
         case DONE:
             try {

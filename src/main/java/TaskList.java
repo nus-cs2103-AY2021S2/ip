@@ -49,6 +49,10 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
+
     /**
      * Adds a todo task to the list.
      * @param task Todo task to be added

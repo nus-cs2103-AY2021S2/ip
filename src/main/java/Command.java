@@ -2,6 +2,7 @@
  * Represents the different types of possible commands.
  */
 enum Command {
+    FIND,
     LIST,
     TODO,
     EVENT,
