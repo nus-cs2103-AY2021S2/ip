@@ -18,7 +18,8 @@ public class DeadlineCommand extends Command {
             + "Usage 1: deadline <task_description> /by dd/mm/yyyy\n"
             + "Example: deadline Assignment 1 /by 31/1/2021\n"
             + "Usage 2: deadline <task_description> /by dd/mm/yyyy HHHH\n"
-            + "Example: deadline Assignment 1 /by 31/1/2021 1800";
+            + "Example: deadline Assignment 1 /by 31/1/2021 1800\n"
+            + "Example: deadline Assignment 2 /by 28/10/2021, 2359";
 
     private final String taskName;
     private final LocalDate deadlineDate;

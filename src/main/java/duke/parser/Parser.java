@@ -116,7 +116,7 @@ public class Parser {
         String userInputDateTime = deadlineInputArr[1].strip();
 
         // Split the datetime string into a date string and a time string (if available)
-        String[] userInputDateTimeArr = userInputDateTime.split("\\s", 2);
+        String[] userInputDateTimeArr = userInputDateTime.split("\\s*,*\\s+|\\s*,\\s*", 2);
         String userInputDate = userInputDateTimeArr[0].strip();
         LocalDate deadlineDate = parseDate(userInputDate);
 
