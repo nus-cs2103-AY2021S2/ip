@@ -2,20 +2,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     public TaskList(Collection<Task> taskCollection) {
-        this.taskList = new ArrayList<>(taskCollection);
+        this.tasks = new ArrayList<>(taskCollection);
     }
 
     public void printAllTask(Ui ui) {
-        for (int i = 0; i < taskList.size(); i++) {
-            ui.printTask(i + 1 + ".", taskList.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            ui.printTask(i + 1 + ".", tasks.get(i).toString());
         }
     }
 
     public boolean checkValidOption(Ui ui, int option) {
-        boolean result = option < 0 || option >= this.taskList.size();
+        boolean result = option < 0 || option >= this.tasks.size();
         if (result) {
             ui.showError("Invalid task Option");
         }
@@ -24,25 +24,25 @@ public class TaskList {
 
     public void markAsDone(Ui ui, int option) {
         if(!checkValidOption(ui, option)) {
-            Task task = taskList.get(option);
+            Task task = tasks.get(option);
             if (!task.markAsDone()) {
                 ui.showError("Task is already marked done");
             } else {
-                ui.showSuccessMarkDone(task.toString(), taskList.size());
+                ui.showSuccessMarkDone(task.toString(), tasks.size());
             }
         }
     }
 
     public void deleteTask(Ui ui, int option) {
         if(!checkValidOption(ui, option)) {
-            Task t = taskList.remove(option);
-            ui.showSuccessDeleteTask(t.toString(), taskList.size());
+            Task t = tasks.remove(option);
+            ui.showSuccessDeleteTask(t.toString(), tasks.size());
         }
     }
 
     public void addTask(Ui ui, Task task) {
-        taskList.add(task);
-        ui.showSuccessAddTask(task.toString(), taskList.size());
+        tasks.add(task);
+        ui.showSuccessAddTask(task.toString(), tasks.size());
     }
 
     public ArrayList<Task> getTaskList() {
