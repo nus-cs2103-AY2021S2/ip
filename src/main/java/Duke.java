@@ -5,6 +5,9 @@ import duke.maincomponents.Storage;
 import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
 
+/**
+ * Main class for Duke that handles the execution of its functions
+ */
 public class Duke {
     private static final String FILENAME = "dukedata.txt";
     private static final String FOLDERNAME = "data";
@@ -14,6 +17,11 @@ public class Duke {
     private TaskList dukeTaskList;
     private Ui dukeUi;
 
+    /**
+     * Default Constructor for Duke
+     * @param filePath path where the datafile storing the session is
+     * @param folderName path of the folder storing the datafile
+     */
     public Duke(String filePath, String folderName) {
         dukeUi = new Ui();
         try {
@@ -26,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main loop of Duke program
+     */
     public void run() {
         Parser stringParser = new Parser();
         dukeUi.showWelcomeLine();
