@@ -4,6 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Handles the List command of the user to list out all tasks.
+ * Format of command: "list".
+ */
 public class ListCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

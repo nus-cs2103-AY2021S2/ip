@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Abstraction to store Tasks in a list.
+ */
 public class TaskList {
     public static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
@@ -34,6 +37,11 @@ public class TaskList {
         this.tasks.remove(index);
     }
 
+    /**
+     * Converts the tasks to string (to be used by Storage for file saving).
+     * @param task task
+     * @return string representation of task
+     */
     public static String taskToString(Task task) {
         StringBuilder builder = new StringBuilder();
         if (task instanceof Deadline) {
@@ -61,6 +69,11 @@ public class TaskList {
         return builder.toString();
     }
 
+    /**
+     * Parses the given string (from file) into the correct task object.
+     * @param taskString task string (from file)
+     * @return task object
+     */
     public static Task parseTask(String taskString) {
         String[] taskStringArray = taskString.split("\\|");
         String type = taskStringArray[0];
