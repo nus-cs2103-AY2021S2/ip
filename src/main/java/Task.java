@@ -21,5 +21,9 @@ public abstract class Task {
                 description;
     }
 
-    //...
+    abstract String toFileString();
+
+    String toBaseFileString(){
+        return (isDone ? "1" : "0") + "," + description.length() + "," + description;
+    }
 }
