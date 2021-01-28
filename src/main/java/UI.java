@@ -1,3 +1,8 @@
+/**
+ * Class that handles the user interface the user sees
+ * when opening up the app and closing the app.
+ */
+
 public class UI {
 
     public UI() {
