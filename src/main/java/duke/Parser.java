@@ -3,6 +3,9 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Utility class to parse user input.
+ */
 public class Parser {
 
     private Scanner sc;
@@ -10,6 +13,14 @@ public class Parser {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Parser contains the Storage, Tasks, and Ui classes and acts as an
+     * intermediary for them to interact.
+     * 
+     * @param storage Storage class
+     * @param tasks   TaskList class
+     * @param ui      Ui Class
+     */
     public Parser(Storage storage, TaskList tasks, Ui ui) {
         this.sc = new Scanner(System.in);
         this.storage = storage;
@@ -17,6 +28,10 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Instantiates the scanner and parses inputs.
+     * 
+     */
     public void open() {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -85,7 +100,8 @@ public class Parser {
                 break;
 
             default:
-                throw new DukeGeneralException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeGeneralException(
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 

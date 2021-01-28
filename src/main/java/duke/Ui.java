@@ -13,12 +13,24 @@ public class Ui {
         textWarper("Bye. Hope to see you again soon!\n");
     }
 
+    /**
+     * Prints out the TaskList in a nice format.
+     * 
+     * @param tasks the TaskList to be printed.
+     */
     public void showList(TaskList tasks) {
         String out = "Here are the tasks in your list: \n";
         out += printList(tasks);
         textWarper(out);
     }
 
+    /**
+     * Searches the TaskList and prints out the items that matches the user
+     * specifications.
+     * 
+     * @param tasks  the TaskList to be searched.
+     * @param toFind the String that the user is looking for.
+     */
     public void showFind(TaskList tasks, String toFind) {
         String out;
         List<Task> tempList = new ArrayList<>();
@@ -36,12 +48,24 @@ public class Ui {
         textWarper(out);
     }
 
+    /**
+     * Prints out confirmation after marking an item as done.
+     * 
+     * @param input The string input by the user.
+     * @param tasks The TaskList to be checked.
+     */
     public void showDone(String input, TaskList tasks) {
         String out = "Nice! I've marked this task as done: \n  ";
         out += tasks.get(getIndex(input));
         textWarper(out);
     }
 
+    /**
+     * Prints out confirmations that the Task was added to the TaskList.
+     * 
+     * @param tasks The TaskList to be added to.
+     * @param temp  The Task to be added.
+     */
     public void showTaskAdded(TaskList tasks, Task temp) {
         String out = "Got it. I've added this task:\n ";
         out += temp.toString() + "\n";
@@ -49,6 +73,12 @@ public class Ui {
         textWarper(out);
     }
 
+    /**
+     * Prints out confirmation for deleting a task from the TaskList.
+     * 
+     * @param input The input string.
+     * @param tasks The TaskList which the item is removed from.
+     */
     public void showDeleteTask(String input, TaskList tasks) {
         String out = "Noted. I've removed this task: \n  ";
         out += tasks.get(getIndex(input)) + "\n";
