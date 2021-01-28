@@ -1,4 +1,11 @@
-import models.Task;
+package duke.commands;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.commands.Command;
+import duke.models.Task;
 
 public class DoneCommand implements Command {
     private int index;

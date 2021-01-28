@@ -1,5 +1,7 @@
-import models.Event;
-import models.Task;
+package duke.commands;
+
+import duke.models.Event;
+import duke.models.Task;
 
 import java.time.LocalDateTime;
 

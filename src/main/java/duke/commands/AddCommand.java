@@ -1,4 +1,9 @@
-import models.Task;
+package duke.commands;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.models.Task;
 
 public abstract class AddCommand implements Command {
     private String taskName;

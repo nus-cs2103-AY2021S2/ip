@@ -1,7 +1,9 @@
-import models.Task;
+package duke;
+
+import duke.models.Task;
 
 public class Ui {
-    public static final String logo = " ____        _        \n"
+    public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -26,7 +28,7 @@ public class Ui {
     }
 
     public void printIntro() {
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
 
         printHorizontalLine();
         printIndentOutput("What can I do for you?");

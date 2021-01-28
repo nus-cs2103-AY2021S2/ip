@@ -1,6 +1,12 @@
-import models.Task;
+package duke.commands;
 
-public class DeleteCommand implements Command{
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.models.Task;
+
+public class DeleteCommand implements Command {
     private int index;
     public DeleteCommand(int index) {
         this.index = index;

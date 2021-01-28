@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -6,7 +8,7 @@ import java.time.temporal.ChronoField;
 import java.util.Locale;
 
 public class ParserUtils {
-    private static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().
+    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder().
             appendPattern("[d/M/yyyy HHmm]").
             appendPattern("[d/M/yyyy]").
             appendPattern("[yyyy-M-d]").
@@ -18,7 +20,7 @@ public class ParserUtils {
 
     public static LocalDateTime parseDateTime(String datetime, String errorMessage) throws DukeException {
         try {
-            return LocalDateTime.parse(datetime, formatter);
+            return LocalDateTime.parse(datetime, FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException(errorMessage);
         }

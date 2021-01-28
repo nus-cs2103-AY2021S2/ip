@@ -1,14 +1,8 @@
-import models.Deadline;
-import models.Event;
-import models.Task;
-import models.Todo;
+package duke;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Storage {
     public static final String FILENAME = "data.log";

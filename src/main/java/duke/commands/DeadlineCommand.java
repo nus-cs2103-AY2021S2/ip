@@ -1,5 +1,7 @@
-import models.Deadline;
-import models.Task;
+package duke.commands;
+
+import duke.models.Deadline;
+import duke.models.Task;
 
 import java.time.LocalDateTime;
 
