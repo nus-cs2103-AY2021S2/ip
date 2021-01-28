@@ -1,14 +1,15 @@
 package ssagit;
+import java.util.Date;
 
 /**
  * Represent a task for deadlines
  */
 public class DeadlineTask extends Task{
-    String time;
+    Date deadline;
 
-    public DeadlineTask(String taskName, boolean isDone, String time) {
+    public DeadlineTask(String taskName, boolean isDone, Date deadline) {
         super(taskName, isDone);
-        this.time = time;
+        this.deadline = deadline;
     }
 
     @Override
@@ -16,8 +17,8 @@ public class DeadlineTask extends Task{
      * Returns a formatted string of the state of the task
      */
     public String toString() {
-        if (isDone) return "deadline | done | " + taskName + " | " + time;
-        return "deadline | not done | " + taskName + " | " + time;
+        if (isDone) return "deadline | done | " + taskName + " | " + deadline.toString();
+        return "deadline | not done | " + taskName + " | " + deadline.toString();
     }
 
     /**
@@ -26,6 +27,6 @@ public class DeadlineTask extends Task{
      */
     public String toFormattedString() {
         if (isDone) return "[D][X] " + taskName + " (by: " + time + ")";
-        return "[D][ ] " + taskName + " (by: " + time + ")";
+        return "[D][ ] " + taskName + " (by: " + deadline.toString() + ")";
     }
 }
