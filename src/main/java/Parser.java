@@ -18,8 +18,6 @@ public class Parser {
             return Command.DEADLINE;
         } else if (userInput.length() >= 6 && userInput.startsWith("delete")) {
             return Command.DELETE;
-        } else if (userInput.length() >= 4 && userInput.startsWith("find")) {
-            return Command.FIND;
         } else {
             return Command.INVALID;
         }
@@ -39,12 +37,8 @@ public class Parser {
         return number;
     }
 
-    public String parseName(String userInput, int start) throws DukeException {
-        try {
-            return userInput.substring(start);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("No name detected. Please try again.", e);
-        }
+    public String parseName(String userInput, int start) {
+        return userInput.substring(start);
     }
 
     public Event parseEvent(String userInput, int timeIndex) throws DukeException {
