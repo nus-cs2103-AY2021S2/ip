@@ -17,7 +17,7 @@ public class TaskList {
 
     void add(Task task) throws DukeException {
         storage.add(task);
-        System.out.println("ALRIGHT. I HAVE ALREADY ADDED THE TASK!");
+        System.out.println("ALRIGHT. I HAVE ALREADY ADDED THE TASK!!!");
         System.out.println(task);
         System.out.println("Now you have " + storage.size() + " tasks in the list.");
         System.out.println();
