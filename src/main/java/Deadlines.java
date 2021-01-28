@@ -6,9 +6,14 @@ public class Deadlines extends Task {
         dueBy = getDueDateFromInput(input);
     }
 
+    public Deadlines(String name, String dueBy) throws EmptyTaskDukeException {
+        super(name);
+        this.dueBy = dueBy;
+    }
+
     private static String getTaskNameFromInput(String input) {
         if (input.contains(DUE_COMMAND)) {
-            return input.split(DUE_COMMAND)[0];
+            return input.split(DUE_COMMAND)[0].trim();
         } else {
             return input;
         }
@@ -29,6 +34,10 @@ public class Deadlines extends Task {
         return input;
     }
 
+    public String getDueBy() {
+        return this.dueBy;
+    }
+
     @Override
     public String setDone() {
         super.setTaskCompleted();
@@ -40,6 +49,6 @@ public class Deadlines extends Task {
     public String toString() {
         String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
         return "[D]" + "[" + taskStringCheck + "] " + super.getTaskName() +
-                "(by: " + (dueBy.equals(null) ? "not specified" : dueBy) +  ")";
+                " (by: " + (dueBy.equals(null) ? "not specified" : dueBy) +  ")";
     }
 }
