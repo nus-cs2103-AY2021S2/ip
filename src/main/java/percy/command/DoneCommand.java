@@ -3,10 +3,9 @@ package percy.command;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import percy.ui.UserInterface;
+import percy.ui.Ui;
 import percy.task.Task;
 import percy.task.TaskList;
-import percy.task.Todo;
 import percy.storage.Storage;
 
 public class DoneCommand extends Command {
@@ -37,6 +36,6 @@ public class DoneCommand extends Command {
         storage.save(taskList);
         // Task doneTask = list.get(taskNum - 1).doTask();
         // list.set(taskNum - 1, doneTask);
-        return UserInterface.makeDoneMsg(doneTask);
+        return Ui.makeDoneMsg(doneTask);
     }
 }

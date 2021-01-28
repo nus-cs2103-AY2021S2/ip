@@ -2,8 +2,9 @@ package percy.task;
 
 import java.util.ArrayList;
 
-import percy.task.Task;
-
+/**
+ * A list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -41,10 +42,18 @@ public class TaskList {
         this.list = list;
     }
 
+    /**
+     * Adds task to TaskList.
+     * @param task the task to be added.
+     */
     public void addTaskToList(Task task) {
         list.add(task);
     }
 
+    /**
+     * Deletes task from TaskList.
+     * @param task the task to be deleted.
+     */
     public void deleteTaskFromList(Task task) {
         list.remove(task);
     }

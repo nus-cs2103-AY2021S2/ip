@@ -2,7 +2,7 @@ package percy.command;
 
 import percy.exception.UnknownCommandException;
 import percy.task.TaskList;
-import percy.ui.UserInterface;
+import percy.ui.Ui;
 import percy.storage.Storage;
 
 /**
@@ -22,6 +22,6 @@ public class UnknownCommand extends Command {
      */
     public String execute(TaskList taskList, Storage storage) {
         Exception ex = new UnknownCommandException();
-        return UserInterface.makeMsg(ex.toString());
+        return Ui.makeMsg(ex.toString());
     }
 }

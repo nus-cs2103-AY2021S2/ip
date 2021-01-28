@@ -2,8 +2,7 @@ package percy.command;
 
 import percy.exception.PercyException;
 
-import percy.task.Deadline;
-import percy.ui.UserInterface;
+import percy.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -65,7 +64,7 @@ public class Parser {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The description or  date/time of an event cannot be empty.");
             arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         }
     }
 
@@ -80,12 +79,12 @@ public class Parser {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The description or date/time of an event cannot be empty.");
             arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         } catch (DateTimeParseException e) {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The date and time format of an event is wrong.");
             arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         }
     }
 
@@ -100,12 +99,12 @@ public class Parser {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The description or date/time of an event cannot be empty.");
             arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         } catch (DateTimeParseException e) {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The date and time format of an event is wrong.");
             arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         }
     }
 
@@ -119,7 +118,7 @@ public class Parser {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
             arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         }
     }
 
@@ -134,12 +133,12 @@ public class Parser {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
             arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         } catch (DateTimeParseException e) {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The date and time format of a deadline is wrong.");
             arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         }
     }
 
@@ -154,12 +153,12 @@ public class Parser {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
             arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         } catch (DateTimeParseException e) {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The date and time format of a deadline is wrong.");
             arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(UserInterface.makeMsg(arr));
+            throw new PercyException(Ui.makeMsg(arr));
         }
     }
 }

@@ -1,8 +1,11 @@
 package percy.command;
+
 import java.io.IOException;
 
-import percy.task.TaskList;
 import percy.storage.Storage;
+import percy.task.TaskList;
+
+
 
 public abstract class Command {
     private boolean isExit;
@@ -15,5 +18,5 @@ public abstract class Command {
         return this.isExit;
     }
 
-    abstract public String execute(TaskList list, Storage storage) throws IOException;
+    public abstract String execute(TaskList list, Storage storage) throws IOException;
 }

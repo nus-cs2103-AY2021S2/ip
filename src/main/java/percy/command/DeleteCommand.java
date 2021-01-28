@@ -2,11 +2,10 @@ package percy.command;
 
 import percy.task.Task;
 import percy.task.TaskList;
-import percy.ui.UserInterface;
+import percy.ui.Ui;
 import percy.storage.Storage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND = "delete";
@@ -32,6 +31,6 @@ public class DeleteCommand extends Command {
         Task deleteTask = taskList.getTaskList().get(taskNum - 1);
         taskList.deleteTaskFromList(deleteTask);
         storage.save(taskList);
-        return UserInterface.makeDeleteMsg(deleteTask, taskList);
+        return Ui.makeDeleteMsg(deleteTask, taskList);
     }
 }

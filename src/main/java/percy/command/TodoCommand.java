@@ -6,7 +6,7 @@ import percy.exception.NoDescriptionException;
 import percy.task.Task;
 import percy.task.TaskList;
 import percy.task.Todo;
-import percy.ui.UserInterface;
+import percy.ui.Ui;
 import percy.storage.Storage;
 
 public class TodoCommand extends Command {
@@ -36,11 +36,11 @@ public class TodoCommand extends Command {
                 throw new NoDescriptionException("todo");
             }
         } catch(NoDescriptionException ex){
-            return UserInterface.makeMsg(ex.toString());
+            return Ui.makeMsg(ex.toString());
         }
         Task todo = new Todo(todoDescription);
         taskList.addTaskToList(todo);
         storage.save(taskList);
-        return UserInterface.makeAddMsg(todo, taskList);
+        return Ui.makeAddMsg(todo, taskList);
     }
 }

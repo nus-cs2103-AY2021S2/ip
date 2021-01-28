@@ -1,7 +1,7 @@
 package percy.command;
 
 import percy.exception.NoDescriptionException;
-import percy.ui.UserInterface;
+import percy.ui.Ui;
 import percy.task.Deadline;
 import percy.task.Task;
 import percy.task.TaskList;
@@ -50,12 +50,12 @@ public class DeadlineCommand extends Command {
                 throw new NoDescriptionException("deadline");
             }
         } catch(NoDescriptionException ex) {
-            UserInterface.makeMsg(ex.toString());
+            Ui.makeMsg(ex.toString());
         }
 
         Task deadlineTask = new Deadline(deadlineDescription, date, time);
         taskList.addTaskToList(deadlineTask);
         storage.save(taskList);
-        return UserInterface.makeAddMsg(deadlineTask, taskList);
+        return Ui.makeAddMsg(deadlineTask, taskList);
     }
 }

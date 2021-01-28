@@ -4,37 +4,47 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-
-import percy.exception.PercyException;
+import percy.task.Deadline;
+import percy.task.Event;
 import percy.task.Task;
 import percy.task.TaskList;
-import percy.task.Deadline;
 import percy.task.Todo;
-import percy.task.Event;
 
+/**
+ * Represents the storage.
+ */
 public class Storage {
     private static final String DELIMITER = " \\| ";
     private File file;
     private String filePath;
 
+    /**
+     * Constructs storage.
+     * @param filePath filePath to storage.
+     * @throws IOException error.
+     */
     public Storage(String filePath) throws IOException {
         this.file = new File(filePath);
 
         // assert file != null;
-        if(!this.file.exists()) { // If file does not exist, folder does not exist
+        if (!this.file.exists()) { // If file does not exist, folder does not exist
             file.getParentFile().mkdir(); // Creates data folder
             file.createNewFile(); // throws IOException  create a file in abstract directory
         }
         this.filePath = filePath;
     }
 
+    /**
+     * Parses and then loads the tasks from storage into an ArrayList.
+     * @return task list.
+     * @throws FileNotFoundException error
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
         int taskCount = 0;
@@ -82,6 +92,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the taskList into storage.
+     * @param taskList the updated taskList.
+     * @throws IOException error.
+     */
     public void save(TaskList taskList) throws IOException { // catch?
         ArrayList<Task> taskArr = taskList.getTaskList();
         FileWriter file = new FileWriter(filePath);
@@ -91,8 +106,4 @@ public class Storage {
         file.close();
     }
 
-    /*
-        private String[] parseDate() {
-     */
-
-    }
+}

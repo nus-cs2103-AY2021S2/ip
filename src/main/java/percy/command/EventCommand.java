@@ -4,7 +4,7 @@ import percy.task.Task;
 import percy.task.TaskList;
 
 import percy.task.Event;
-import percy.ui.UserInterface;
+import percy.ui.Ui;
 import percy.storage.Storage;
 
 import java.io.IOException;
@@ -50,6 +50,6 @@ public class EventCommand extends Command {
 
         taskList.addTaskToList(event);
         storage.save(taskList);
-        return UserInterface.makeAddMsg(event, taskList);
+        return Ui.makeAddMsg(event, taskList);
     }
 }
