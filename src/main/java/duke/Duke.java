@@ -1,16 +1,4 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-//to handle date and time
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+package duke;
 
 public class Duke {
     private TaskList task;

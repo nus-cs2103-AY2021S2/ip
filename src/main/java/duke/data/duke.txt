@@ -1,0 +1,4 @@
+T | 1 | java
+T | 0 | eat
+T | 0 | buy food
+D | 0 | java
