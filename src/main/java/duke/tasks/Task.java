@@ -12,6 +12,12 @@ public class Task {
         this.type = type;
     }
 
+    public Task(String info, boolean isDone) {
+        this.info = info;
+        this.isDone = isDone;
+
+    }
+
     public String getInfo() {
         return this.info;
     }
@@ -36,8 +42,15 @@ public class Task {
 
     @Override
     public String toString() {
-        output = "[" + checkIcon() + "]" + this.info;
+        String output = "[" + checkIcon() + "]" + this.info;
         return output;
     }
 
+    public String toSave() {
+        return this.getType().toString() + " " + this.getInfo();
+    }
+
+    public boolean getDoneStatus() {
+        return this.isDone;
+    }
 }

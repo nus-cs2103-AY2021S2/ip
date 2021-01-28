@@ -6,6 +6,13 @@ public class Event extends Task{
         super(info, taskType.Event);
         this.after = after;
     }
+
+    public Event(String info, String after, boolean isDone) {
+        super(info, isDone);
+        this.type = taskType.Event;
+        this.after = after;
+    }
+
     @Override
     public String toString(){
         return "[E]" + super.toString() + " (at:" + this.after + ")";
