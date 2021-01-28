@@ -4,6 +4,7 @@ import duke.commands.Command;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
@@ -26,6 +27,9 @@ public class Duke {
             this.tasks = storage.readTasks();
         } catch(IOException e) {
             ui.printError("Unable to create file");
+            this.tasks = new TaskList();
+        } catch(Exception e) {
+            ui.printError("Unable to parse file");
             this.tasks = new TaskList();
         }
     }
