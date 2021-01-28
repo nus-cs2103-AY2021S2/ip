@@ -8,7 +8,7 @@ import java.time.temporal.ChronoField;
 import java.util.Locale;
 
 public class ParserUtils {
-    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder().
+    private static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder().
             appendPattern("[d/M/yyyy HHmm]").
             appendPattern("[d/M/yyyy]").
             appendPattern("[yyyy-M-d]").
@@ -18,9 +18,9 @@ public class ParserUtils {
             parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0).
             toFormatter(Locale.ENGLISH);
 
-    public static LocalDateTime parseDateTime(String datetime, String errorMessage) throws DukeException {
+    public static LocalDateTime parseDateTime(String dateTime, String errorMessage) throws DukeException {
         try {
-            return LocalDateTime.parse(datetime, FORMATTER);
+            return LocalDateTime.parse(dateTime, INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException(errorMessage);
         }

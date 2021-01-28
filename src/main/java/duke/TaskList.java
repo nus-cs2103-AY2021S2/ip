@@ -62,19 +62,19 @@ public class TaskList {
     }
 
     public static Task parseTask(String taskString) {
-        String[] taskStringArray = taskString.split("\\|");
-        String type = taskStringArray[0];
+        String[] taskDetails = taskString.split("\\|");
+        String type = taskDetails[0];
         Task task = null;
 
         if (type.equals("T")) {
-            task = new Todo(taskStringArray[2]);
+            task = new Todo(taskDetails[2]);
         } else if (type.equals("D")) {
-            task = new Deadline(taskStringArray[2], LocalDateTime.parse(taskStringArray[3], DATE_TIME_FORMATTER));
+            task = new Deadline(taskDetails[2], LocalDateTime.parse(taskDetails[3], DATE_TIME_FORMATTER));
         } else if (type.equals("E")) {
-            task = new Event(taskStringArray[2], LocalDateTime.parse(taskStringArray[3], DATE_TIME_FORMATTER));
+            task = new Event(taskDetails[2], LocalDateTime.parse(taskDetails[3], DATE_TIME_FORMATTER));
         }
 
-        if (taskStringArray[1].equals("1") && task != null) {
+        if (taskDetails[1].equals("1") && task != null) {
             task.markAsDone();
         }
 

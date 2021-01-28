@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TaskTest {
     @Test
     public void testCreateDeadline() {
-        LocalDateTime datetime = LocalDateTime.of(2020, 04, 04, 03, 00, 00);
-        Deadline d = new Deadline("Deadline 1", datetime);
+        LocalDateTime dateTime = LocalDateTime.of(2020, 04, 04, 03, 00, 00);
+        Deadline d = new Deadline("Deadline 1", dateTime);
         assertEquals("Deadline 1", d.getTaskName());
-        assertEquals(datetime, d.getDeadline());
+        assertEquals(dateTime, d.getDeadline());
     }
 
     @Test
     public void testCreateEvent() {
-        LocalDateTime datetime = LocalDateTime.of(2020, 03, 04, 03, 00, 00);
-        Event e = new Event("Event 1", datetime);
+        LocalDateTime dateTime = LocalDateTime.of(2020, 03, 04, 03, 00, 00);
+        Event e = new Event("Event 1", dateTime);
         assertEquals("Event 1", e.getTaskName());
-        assertEquals(datetime, e.getDate());
+        assertEquals(dateTime, e.getDate());
     }
 
     @Test

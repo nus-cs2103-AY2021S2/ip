@@ -4,19 +4,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private LocalDateTime datetime;
+    private LocalDateTime dateTime;
 
-    public Event(String taskName, LocalDateTime datetime) {
+    public Event(String taskName, LocalDateTime dateTime) {
         super(taskName);
-        this.datetime = datetime;
+        this.dateTime = dateTime;
     }
 
     public LocalDateTime getDate() {
-        return datetime;
+        return dateTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return "[E]" + super.toString() + " (at: " + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }

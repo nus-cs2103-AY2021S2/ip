@@ -6,15 +6,15 @@ import duke.models.Task;
 import java.time.LocalDateTime;
 
 public class EventCommand extends AddCommand {
-    private LocalDateTime datetime;
+    private LocalDateTime dateTime;
 
-    public EventCommand(String taskName, LocalDateTime datetime) {
+    public EventCommand(String taskName, LocalDateTime dateTime) {
         super(taskName);
-        this.datetime = datetime;
+        this.dateTime = dateTime;
     }
 
     @Override
     public Task getTask() {
-        return new Event(getTaskName(), datetime);
+        return new Event(getTaskName(), dateTime);
     }
 }
