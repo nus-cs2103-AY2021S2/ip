@@ -1,14 +1,14 @@
 package duke;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import duke.exceptions.*;
 import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
-import duke.exceptions.MissingArgumentException;
-import duke.exceptions.NoKeywordException;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,7 +65,11 @@ public class Duke {
                         input = sc.nextLine();
                     } else if (action.equals("done")) {
                         if (inputWords.length < 2) {
-                            throw new MissingArgumentException("Wrong number of arguments");
+                            throw new MissingArgumentException("Wrong number of arguments.");
+                        } else if (taskList.size() == 0) {
+                            throw new EmptyListException("List is empty.");
+                        } else if (Integer.parseInt(inputWords[1]) > taskList.size()) {
+                            throw new NotExistingTaskException("No such task number");
                         }
                         int idx = Integer.parseInt(inputWords[1]);
                         System.out.println(taskList.get(idx - 1).markCompleted());
@@ -74,7 +78,7 @@ public class Duke {
                         if (inputWords.length < 2) {
                             throw new MissingArgumentException("Wrong number of arguments");
                         }
-                        System.out.println("Master, I've added this task as requested:");
+                        System.out.println("\nMaster, I've added this task as requested:");
                         StringBuilder sb = new StringBuilder();
                         String taskItem;
 
@@ -95,7 +99,7 @@ public class Duke {
                                     slashIdx = i;
                                 }
                             }
-                            for (int j = 0; j < slashIdx; j++) {
+                            for (int j = 1; j < slashIdx; j++) {
                                 sb.append(" ");
                                 sb.append(inputWords[j]);
                             }
@@ -106,15 +110,18 @@ public class Duke {
                                 sbSlash.append(" ");
                                 sbSlash.append(inputWords[k]);
                             }
-
-                            if (action.equals("deadline")) {
-                                Deadline deadlineItem = new Deadline(taskItem, sbSlash.toString());
-                                taskList.add(deadlineItem);
-                                System.out.println(deadlineItem.toString());
-                            } else {
-                                Event eventItem = new Event(taskItem, sbSlash.toString());
-                                taskList.add(eventItem);
-                                System.out.println(eventItem.toString());
+                            try {
+                                if (action.equals("deadline")) {
+                                    Deadline deadlineItem = new Deadline(taskItem, sbSlash.toString());
+                                    taskList.add(deadlineItem);
+                                    System.out.println(deadlineItem.toString());
+                                } else {
+                                    Event eventItem = new Event(taskItem, sbSlash.toString());
+                                    taskList.add(eventItem);
+                                    System.out.println(eventItem.toString());
+                                }
+                            } catch (Exception e) {
+                                throw new DateTimeFormatException("Wrong datetime format given.");
                             }
                         }
                         if (taskList.size() == 1) {
@@ -126,9 +133,14 @@ public class Duke {
                     } else if (action.equals("delete")) {
                         if (inputWords.length < 2) {
                             throw new MissingArgumentException("Wrong number of arguments");
+                        } else if (taskList.size() == 0) {
+                            throw new EmptyListException("List is empty.");
+                        } else if (Integer.parseInt(inputWords[1]) > taskList.size()) {
+                            throw new NotExistingTaskException("No such task number");
                         }
                         int deleteIdx = Integer.parseInt(inputWords[1]);
-                        System.out.println("Understood Master. I've removed this task from the list:");
+                        System.out.println(
+                                "\nUnderstood Master. I've removed this task from the list:");
                         System.out.println(taskList.get(deleteIdx - 1));
                         taskList.remove(deleteIdx);
                         if (taskList.size() == 1) {
@@ -146,10 +158,24 @@ public class Duke {
                         throw new NoKeywordException("No such action.");
                     }
                 } catch (MissingArgumentException error) {
-                    System.out.println("Master, I'm afraid you're missing the task number.");
+                    System.out.println(
+                            "\nMaster, I'm afraid you're missing the task number.");
                     input = sc.nextLine();
                 } catch (NoKeywordException error) {
-                    System.out.println("Sorry Master but I don't understand what you mean.");
+                    System.out.println(
+                            "\nSorry Master but I cannot do that.");
+                    input = sc.nextLine();
+                } catch (DateTimeFormatException error) {
+                    System.out.println(
+                            "\nMaster, please input the date and time as such: \"YYYY-MM-DD HH:MM\"");
+                    input = sc.nextLine();
+                } catch (EmptyListException error) {
+                    System.out.println(
+                            "\nThe list is empty, Master.");
+                    input = sc.nextLine();
+                } catch (NotExistingTaskException error) {
+                    System.out.println(
+                            "\nI'm afraid the task number is not in the list, Master.");
                     input = sc.nextLine();
                 }
             }
