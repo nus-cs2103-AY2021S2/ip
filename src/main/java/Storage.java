@@ -7,6 +7,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Stores the list of tasks, and is responsible for
+ * loading and changing the list of tasks in the hard disk.
+ */
 public class Storage {
     private final String filePath;
 
@@ -14,6 +18,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the list of tasks from the hard disk into Duke.
+     * @return An ArrayList containing all the tasks saved in hard disk
+     * @throws DukeException if the file cannot be found in the hard disk
+     */
     public ArrayList<Task> load() throws DukeException {
         String currDirectory = System.getProperty("user.dir");
         java.nio.file.Path path = java.nio.file.Paths.get(currDirectory, "data");
@@ -67,6 +76,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Save the Todo tasks in the hard disk
+     * @param task new Todo task to be saved
+     * @throws DukeException if the named file exists but is a directory rather
+     * than a regular file, does not exist but cannot be created, or cannot
+     * be opened for any other reason
+     */
     public void appendToDo(Todo task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt", true);
@@ -77,6 +93,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the Event in the hard disk
+     * @param task new Event to be saved
+     * @throws DukeException if the named file exists but is a directory rather
+     * than a regular file, does not exist but cannot be created, or cannot
+     * be opened for any other reason
+     */
     public void appendEvent(Event task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt", true);
@@ -88,6 +111,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the new Deadline in the hard disk
+     * @param task new Deadline to be saved
+     * @throws DukeException if the named file exists but is a directory rather
+     * than a regular file, does not exist but cannot be created, or cannot
+     * be opened for any other reason
+     */
     public void appendDeadline(Deadline task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt", true);
@@ -99,6 +129,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Update changes in the hard disk
+     * @param task The TaskList to be updated
+     * @throws DukeException if the named file exists but is a directory rather
+     * than a regular file, does not exist but cannot be created, or cannot
+     * be opened for any other reason
+     */
     public void rewrite(TaskList task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt");

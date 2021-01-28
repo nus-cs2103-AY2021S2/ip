@@ -1,9 +1,20 @@
-import java.io.IOException;
-
+/**
+ * Duke is a program that helps you keep track of tasks.
+ *
+ * @author Sylvia
+ * @version 0.1
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath This is the path of the file that stores the list
+     *                 of tasks from the current working directory.
+     */
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -16,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Duke starts to take in commands.
+     */
     public void run() {
         ui.showGreetings();
         boolean toContinue = true;
