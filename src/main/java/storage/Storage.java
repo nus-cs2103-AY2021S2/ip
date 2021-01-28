@@ -1,3 +1,10 @@
+package storage;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,22 +21,23 @@ import java.util.stream.Collectors;
 public class Storage {
     // source: https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
     // inserts correct file path separator on *nix and Windows
-    private static Path dataPath;
+    static Path dataPath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         String[] filePathSplit = filePath.split("(?:.(?!/))+$", 2);
         String fileDirectory = filePathSplit[0];
-        String file = filePathSplit[1];
         File directory = new File(fileDirectory);
         if (! directory.exists()){
             directory.mkdir();
         }
-        dataPath = Paths.get(filePath);
+
+        this.dataPath = Paths.get(filePath);
     }
 
-    static void saveData(String taskList) {
+    // why does this have to be static??
+    public static void saveData(String taskList) {
         try {
-            // save all tasks again if TaskList has tasks
+            // save all tasks again if task.TaskList has tasks
             if (taskList.length() > 0) {
                 // splitting by "  %d. [" incase the task description uses periods and digits as well
                 ArrayList<String> tasksWithoutIndex = new ArrayList<>(List.of(taskList.split("  \\d. \\[")));
@@ -53,7 +61,7 @@ public class Storage {
         }
     }
 
-    ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException {
         return Files.readAllLines(dataPath,
                 StandardCharsets.UTF_8)
                 .stream()

@@ -1,3 +1,5 @@
+package common;
+
 public enum PrintText {
     LOGO {
         @Override

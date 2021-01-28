@@ -1,43 +1,45 @@
+package task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class TaskList {
-    List<Task> tasks;
+    private List<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
-    TaskList(ArrayList<Task> savedData) {
+    public TaskList(ArrayList<Task> savedData) {
         tasks = savedData;
     }
 
-    boolean hasTasks() {
+    public boolean hasTasks() {
         return tasks.size() > 0;
     }
 
-    Task getTask(int idx) {
+    public Task getTask(int idx) {
         return tasks.get(idx - 1);
     }
 
-    void addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    void markTaskAsDone(int idx) {
+    public void markTaskAsDone(int idx) {
         tasks.get(idx - 1).markAsDone();
     }
 
-    Task deleteTask(int idx) {
+    public Task deleteTask(int idx) {
         return tasks.remove(idx - 1);
     }
 
-    int getTotalNumberOfTasks() {
+    public int getTotalNumberOfTasks() {
         return tasks.size();
     }
 
-    int getTotalNumberOfTasksUndone() {
+    public int getTotalNumberOfTasksUndone() {
         return tasks.stream()
                 .mapToInt(Task::isNotDone)
                 .reduce(0, Integer::sum);
@@ -49,7 +51,7 @@ public class TaskList {
             // adapted from: https://stackoverflow.com/questions/49080255/get-index-while-iterating-list-with-stream
             return IntStream.range(0, tasks.size())
                     .mapToObj(index -> String.format("  %s. %s\n",
-                            index, tasks.get(index).toString()))
+                            index+1, tasks.get(index).toString()))
                     .reduce((a, b) -> a + b)
                     .get();
         }
