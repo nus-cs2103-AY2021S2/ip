@@ -2,14 +2,8 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import duke.command.Command;
-import duke.command.AddDeadline;
-import duke.command.AddEvent;
-import duke.command.AddTodo;
-import duke.command.ExitCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
+
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -66,6 +60,12 @@ public class Parser {
 
             case "list":
                 return new ListCommand();
+
+            case "find":
+                if (messages.length == 1) {
+                    throw new DukeException("The keyword is missing.");
+                }
+                return new FindCommand(processTask(commandLine));
 
             default:
                 throw new DukeException("I'm sorry, but I don't know what " + commandType + " means.");
