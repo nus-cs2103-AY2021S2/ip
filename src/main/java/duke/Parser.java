@@ -50,7 +50,10 @@ public class Parser {
 
             case "list":
                 ui.showList(tasks);
-                ui.showDukeEmptyListError();
+                break;
+
+            case "find":
+                ui.showFind(tasks, getMessage(input).trim());
                 break;
 
             case "done":

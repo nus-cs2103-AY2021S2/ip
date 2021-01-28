@@ -9,4 +9,5 @@ blah
 todo
 delete 3
 list
+find dishes
 bye

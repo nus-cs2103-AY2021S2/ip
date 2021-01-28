@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ui {
 
     public Ui() {
@@ -13,6 +16,23 @@ public class Ui {
     public void showList(TaskList tasks) {
         String out = "Here are the tasks in your list: \n";
         out += printList(tasks);
+        textWarper(out);
+    }
+
+    public void showFind(TaskList tasks, String toFind) {
+        String out;
+        List<Task> tempList = new ArrayList<>();
+        for (Task t : tasks.getTasks()) {
+            if (t.getName().contains(toFind)) {
+                tempList.add(t);
+            }
+        }
+        if (!tempList.isEmpty()) {
+            out = "Here are the matching tasks in your list: \n";
+            out += printList(new TaskList(tempList));
+        } else {
+            out = "Nothing in the list matches\n";
+        }
         textWarper(out);
     }
 
