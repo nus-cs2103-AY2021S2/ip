@@ -15,6 +15,10 @@ public class Task {
         done = true;
     }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
     @Override
     public String toString() {
         if (done) {

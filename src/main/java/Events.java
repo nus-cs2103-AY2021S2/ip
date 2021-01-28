@@ -1,15 +1,22 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Events extends Task {
 
-    private String duration;
+    private LocalDate duration;
 
-    public Events(String name, String duration) {
+    public Events(String name, LocalDate duration) {
         super(name);
         this.duration = duration;
     }
 
+    public LocalDate getDuration() {
+        return duration;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + duration + ")";
+        return "[E]" + super.toString() + " (at: " + duration.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 }
