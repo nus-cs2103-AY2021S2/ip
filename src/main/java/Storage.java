@@ -29,22 +29,22 @@ public class Storage {
             Task taskInList;
             try {
                 switch (eventType){
-                    case("[T]"):
-                        taskInList = new ToDo(userTask[2]);
-                        taskList.add(taskInList);
-                        break;
-                    case("[E]"):
-                        String eventDuration = Parser.parseDate(userTask[3].split("at: ")[1]);
-                        String eventDetail = userTask[2];
-                        taskInList = new Event(eventDuration, eventDetail);
-                        taskList.add(taskInList);
-                        break;
-                    case("[D]"):
-                        String deadline = Parser.parseDate(userTask[3].split("by: ")[1]);
-                        String deadlineDetail = userTask[2];
-                        taskInList = new Deadline(deadline, deadlineDetail);
-                        taskList.add(taskInList);
-                        break;
+                case("[T]"):
+                    taskInList = new ToDo(userTask[2]);
+                    taskList.add(taskInList);
+                    break;
+                case("[E]"):
+                    String eventDuration = Parser.parseDate(userTask[3].split("at: ")[1]);
+                    String eventDetail = userTask[2];
+                    taskInList = new Event(eventDuration, eventDetail);
+                    taskList.add(taskInList);
+                    break;
+                case("[D]"):
+                    String deadline = Parser.parseDate(userTask[3].split("by: ")[1]);
+                    String deadlineDetail = userTask[2];
+                    taskInList = new Deadline(deadline, deadlineDetail);
+                    taskList.add(taskInList);
+                    break;
                 }
             }
             catch (Exception e){

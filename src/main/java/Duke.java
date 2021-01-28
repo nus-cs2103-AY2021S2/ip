@@ -44,44 +44,44 @@ public class Duke {
             ui.printHorizontalRule();
             try {
                 switch (commandArr[0]) {
-                    case exitCommand:
-                        ui.printExitMessage();
-                        sc.close();
-                        //add data back into the file
-                        storage.writeData(tasks.getTaskList());
-                        isBye = true;
-                        break;
-                    case listCommand:
-                        ui.printTasks(tasks);
-                        ui.printHorizontalRule();
-                        break;
-                    case doneCommand:
-                        int taskNumber = Integer.parseInt(commandArr[1]);
-                        ui.printDoneTask(tasks, taskNumber);
-                        break;
-                    case addTodoCommand:
-                        if(commandArr.length == 1){
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        else {
-                            newTask = Parser.parseAddTodo(command);
-                            ui.printAddedTask(tasks, newTask);
-                        }
-                        break;
-                    case addDeadlineCommand:
-                        newTask = Parser.parseAddDeadline(command);
+                case exitCommand:
+                    ui.printExitMessage();
+                    sc.close();
+                    //add data back into the file
+                    storage.writeData(tasks.getTaskList());
+                    isBye = true;
+                    break;
+                case listCommand:
+                    ui.printTasks(tasks);
+                    ui.printHorizontalRule();
+                    break;
+                case doneCommand:
+                    int taskNumber = Integer.parseInt(commandArr[1]);
+                    ui.printDoneTask(tasks, taskNumber);
+                    break;
+                case addTodoCommand:
+                    if(commandArr.length == 1){
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    else {
+                        newTask = Parser.parseAddTodo(command);
                         ui.printAddedTask(tasks, newTask);
-                        break;
-                    case addEventCommand:
-                        newTask = Parser.parseAddEvent(command);
-                        ui.printAddedTask(tasks, newTask);
-                        break;
-                    case deleteCommand:
-                        int taskNumToBeDeleted = Parser.parseDeleteCommand(command);
-                        ui.printDeletedTask(tasks, taskNumToBeDeleted);
-                        break;
-                    default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    break;
+                case addDeadlineCommand:
+                    newTask = Parser.parseAddDeadline(command);
+                    ui.printAddedTask(tasks, newTask);
+                    break;
+                case addEventCommand:
+                    newTask = Parser.parseAddEvent(command);
+                    ui.printAddedTask(tasks, newTask);
+                    break;
+                case deleteCommand:
+                    int taskNumToBeDeleted = Parser.parseDeleteCommand(command);
+                    ui.printDeletedTask(tasks, taskNumToBeDeleted);
+                    break;
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
             catch(DukeException ex) {
