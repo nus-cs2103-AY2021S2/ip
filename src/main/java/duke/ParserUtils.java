@@ -24,9 +24,9 @@ public class ParserUtils {
     /**
      * Parses user-given datetime strings into DateTime objects.
      * Valid datetime formats are specified in FORMATTER.
-     * @param datetime datetime string
+     * @param dateTime dateTime string
      * @param errorMessage error message to display if string could not be parsed
-     * @return datetime object
+     * @return dateTime object
      * @throws DukeException
      */
     public static LocalDateTime parseDateTime(String dateTime, String errorMessage) throws DukeException {

@@ -7,6 +7,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
 
@@ -62,7 +63,7 @@ public class Parser {
             String[] cmdArgs = ParserUtils.getCommandArgs(line, "I'm sorry, but delete needs the index of a Task.");
             int index = ParserUtils.parseInt(cmdArgs[1], "The index of the task needs to be an integer.");
             return new DeleteCommand(index);
-        } else if (checkMatchString(line, "find")) {
+        } else if (isCommandMatch(line, "find")) {
             String[] cmdArgs = ParserUtils.getCommandArgs(line, "I'm sorry, but find needs a keyword specified.");
             String keyword = cmdArgs[1];
             return new FindCommand(keyword);
