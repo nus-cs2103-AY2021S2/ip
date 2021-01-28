@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.command.*;
+import duke.task.*;
+
 import java.time.LocalDate;
 
 public class Parser {

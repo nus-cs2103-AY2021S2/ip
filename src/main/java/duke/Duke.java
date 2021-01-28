@@ -1,3 +1,10 @@
+package duke;
+
+import duke.ui.*;
+import duke.task.*;
+import duke.storage.Storage;
+import duke.command.*;
+
 import java.io.IOException;
 import java.lang.System;
 

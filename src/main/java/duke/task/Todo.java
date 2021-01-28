@@ -1,12 +1,16 @@
+package duke.task;
+
+import duke.ui.DukeException;
+
 public class Todo extends Task {
-    Todo(String name) throws DukeException {
+    public Todo(String name) throws DukeException {
         super(name);
         if (name.isBlank()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
     }
 
-    Todo(String name, boolean done) {
+    public Todo(String name, boolean done) {
         super(name, done);
     }
 
