@@ -10,40 +10,92 @@ Now you have 1 task in the list.
 ____________________________________________________________
 
 ____________________________________________________________
+Text 'Sat 2-4pm' could not be parsed at index 0
+Error! Invalid time/date format.
+Please input a valid time/date format!
+____________________________________________________________
+
+____________________________________________________________
 Got it. I've added this task:
-[E][ ] eat with friends (at: Sat 2-4pm)
+[E][ ] eat with friends (at: Tue Jan 28 2020)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
-Got it. I've added this task:
-[D][ ] 3230 assignment (by: Sun 12am)
-Now you have 3 tasks in the list.
+Text 'Sun 12am' could not be parsed at index 0
+Error! Invalid time/date format.
+Please input a valid time/date format!
 ____________________________________________________________
 
 ____________________________________________________________
 Got it. I've added this task:
-[E][ ] play games with friends(at: not specified)
-Now you have 4 tasks in the list.
+[D][ ] 3230 assignment (by: Wed Jan 29 2020)
+Now you have 3 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+Text 'not specified' could not be parsed at index 0
+Error! Invalid time/date format.
+Please input a valid time/date format!
 ____________________________________________________________
 
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][ ] do homework
-2. [E][ ] eat with friends (at: Sat 2-4pm)
-3. [D][ ] 3230 assignment (by: Sun 12am)
-4. [E][ ] play games with friends(at: not specified)
+2. [E][ ] eat with friends (at: Tue Jan 28 2020)
+3. [D][ ] 3230 assignment (by: Wed Jan 29 2020)
+____________________________________________________________
+
+____________________________________________________________
+Text 'not specified' could not be parsed at index 0
+Error! Invalid time/date format.
+Please input a valid time/date format!
 ____________________________________________________________
 
 ____________________________________________________________
 Nice! I've marked this event as done:
-[E][X] eat with friends (at: Sat 2-4pm)
+[E][X] eat with friends (at: Tue Jan 28 2020)
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][ ] do homework
+2. [E][X] eat with friends (at: Tue Jan 28 2020)
+3. [D][ ] 3230 assignment (by: Wed Jan 29 2020)
 ____________________________________________________________
 
 ____________________________________________________________
 The following task has been removed:
-[E][X] eat with friends (at: Sat 2-4pm)
-Now you have 4 tasks in the list.
+[E][X] eat with friends (at: Tue Jan 28 2020)
+Now you have 2 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][ ] do homework
+2. [D][ ] 3230 assignment (by: Wed Jan 29 2020)
+____________________________________________________________
+
+____________________________________________________________
+todo
+deadline *text* /by yyyy-mm-dd
+event *text* /at yyyy-mm-dd
+done *number*
+list
+delete *number*
+bye
+____________________________________________________________
+
+____________________________________________________________
+The following task has been removed:
+[T][ ] do homework
+Now you have 1 task in the list.
+____________________________________________________________
+
+____________________________________________________________
+The following task has been removed:
+[D][ ] 3230 assignment (by: Wed Jan 29 2020)
+Now you have 0 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________

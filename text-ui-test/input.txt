@@ -1,8 +1,16 @@
 todo do homework
 event eat with friends /at Sat 2-4pm
+event eat with friends /at 2020-01-28
 deadline 3230 assignment /by Sun 12am
+deadline 3230 assignment /by 2020-01-29
 event play games with friends
 list
+event play games with friends /by asdf
 done 2
+list
 delete 2
+list
+help
+delete 1
+delete 1
 bye
