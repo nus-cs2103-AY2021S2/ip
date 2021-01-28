@@ -1,3 +1,15 @@
+package vergil.main;
+
+import vergil.components.Ui;
+import vergil.components.Storage;
+import vergil.components.Parser;
+import vergil.components.TaskList;
+import vergil.types.VergilException;
+import vergil.types.Command;
+import vergil.types.Todo;
+import vergil.types.Event;
+import vergil.types.Deadline;
+
 public class Vergil {
     private Ui ui;
     private Storage storage;
