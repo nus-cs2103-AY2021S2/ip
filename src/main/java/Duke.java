@@ -83,8 +83,8 @@ public class Duke {
             } catch(EmptyArgument e){
                 System.out.println("Cannot have empty argument");
             } finally {
-                int x = store.hashCode();
-                if(store.hashCode() != hash){
+                int newHash = store.hashCode();
+                if(newHash != hash){
                     try {
                         TaskListFileUtils.saveTaskList(store);
                     } catch (IOException e) {
