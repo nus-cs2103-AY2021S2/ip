@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Handles saving and loading of application data.
- */
 public class Storage {
     // source: https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
     // inserts correct file path separator on *nix and Windows
@@ -40,13 +37,8 @@ public class Storage {
         this.dataPath = Paths.get(filePath);
     }
 
-    /**
-     * Saves application data to local file.
-     *
-     * @param taskList {@code toString} form of application's TaskList
-     */
+    // why does this have to be static??
     public static void saveData(String taskList) {
-        // why does this have to be static??
         try {
             // save all tasks again if task.TaskList has tasks
             if (taskList.length() > 0) {
