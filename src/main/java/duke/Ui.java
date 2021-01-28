@@ -23,7 +23,7 @@ public class Ui {
 
     public void showAdded(Task task, TaskList tasks){
         System.out.println("Got it. I've added this task:\n  " + task);
-        System.out.println("Now you have " + tasks.getSize() + "task"
+        System.out.println("Now you have " + tasks.getSize() + " task"
                 + (tasks.getSize()>1 ? "s in the list." : " in the list."));
 
     }
