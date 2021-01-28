@@ -77,6 +77,14 @@ public class Parser {
 
             break;
 
+        case "find":
+            if (!hasParams) {
+                throw new DukeException("Search term cannot be empty!");
+            }
+
+            parsed = new CommandFind(commandAndParams[1]);
+            break;
+
         case "list":
             parsed = new CommandList();
             break;

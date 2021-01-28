@@ -1,6 +1,7 @@
 public class CommandList extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.printCommand(this);
         tasks.printTasks();
     }
 

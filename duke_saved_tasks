@@ -1,2 +1,3 @@
 T | F | test
-T | T | test
+T | F | test
+E | F | test  | 2021-01-01T00:00
