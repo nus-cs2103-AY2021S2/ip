@@ -7,6 +7,7 @@ public enum Command {
     DELETE,
     LIST,
     DONE,
+    FIND,
     BYE,
     ERROR;
 }

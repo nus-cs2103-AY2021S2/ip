@@ -23,6 +23,10 @@ public class Task {
         return isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String saveString() {
         return isDone ? "Task *** 1 *** " + description : "Task *** 0 *** " + description;
     }
