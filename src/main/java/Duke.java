@@ -9,6 +9,11 @@ public class Duke {
         this.tl = new TaskList();
     }
 
+    /**
+     * Simulates the running of Duke.
+     * A interative task planner.
+     *
+     */
     public void run() {
         ui.printGreeting();
         storage.load(tl);
