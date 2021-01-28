@@ -19,7 +19,7 @@ public class Storage {
         this.path = path;
     }
 
-    public TaskList openFile() throws DukeException{
+    public TaskList openFile() throws DukeException {
         File file = new File(path);
 
         if(!file.exists()) {
@@ -39,7 +39,7 @@ public class Storage {
                 taskList.addTask(task);
             }
             return taskList;
-        } catch(FileNotFoundException e){
+        } catch(FileNotFoundException e) {
             throw new DukeException("File cannot be found.");
         }
     }
@@ -51,15 +51,17 @@ public class Storage {
         int taskStatus = Integer.parseInt(content[1]);
         String taskDescription = content[2];
 
-        switch(taskType){
-            case "D":
-                return new Deadline(taskDescription, taskStatus, LocalDateTime.parse(content[3], DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")));
-            case "E":
-                return new Event(taskDescription, taskStatus, LocalDateTime.parse(content[3], DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")));
-            case "T":
-                return new Todo(taskDescription, taskStatus);
-            default:
-                throw new DukeException(taskType + " is an invalid text type. Please modify the file accordingly.");
+        switch(taskType) {
+        case "D":
+            return new Deadline(taskDescription, taskStatus, LocalDateTime.parse(content[3],
+                    DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")));
+        case "E":
+            return new Event(taskDescription, taskStatus, LocalDateTime.parse(content[3],
+                    DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")));
+        case "T":
+            return new Todo(taskDescription, taskStatus);
+        default:
+            throw new DukeException(taskType + " is an invalid text type. Please modify the file accordingly.");
         }
     }
 

@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     public int getSize() {
-        if(tasks.isEmpty()){
+        if(tasks.isEmpty()) {
             return 0;
         } else {
             return tasks.size();
@@ -41,7 +41,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder message = new StringBuilder("Here are the tasks in your list:\n");
-        if(this.getSize()==0){
+        if(this.getSize()==0) {
             message.append("There is no task in the list.\n");
         } else {
             for (int i = 1; i <= this.getSize(); i++) {

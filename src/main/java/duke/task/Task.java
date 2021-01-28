@@ -19,12 +19,12 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
         this.status = 1;
     }
 
-    public String toTxt(){
+    public String toTxt() {
         return String.format("| %s | %s", isDone ? "1" : "0", this.description);
     }
 
