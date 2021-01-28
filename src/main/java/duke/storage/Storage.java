@@ -5,15 +5,15 @@ import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDoTask;
-
-import duke.utils.Formatter;
+import duke.utils.OutputDateTimeFormat;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,8 +119,18 @@ public class Storage {
             break;
         case DeadlineTask.IDENTIFIER:
             String deadlineTaskDescription = arr[3];
-            LocalDateTime deadline = LocalDateTime.parse(deadlineTaskDescription, Formatter.OUTPUT_DATE_FORMATTER);
-            task = new DeadlineTask(taskName, isTaskCompleted, deadline);
+            String[] deadlineTaskDescriptionArr = deadlineTaskDescription.split(",");
+            String deadlineDateString = deadlineTaskDescriptionArr[0].strip();
+            LocalDate deadlineDate = LocalDate.parse(deadlineDateString, OutputDateTimeFormat.OUTPUT_DATE_FORMAT);
+            if (deadlineTaskDescriptionArr.length == 1) {
+                // There is no time component
+                task = new DeadlineTask(taskName, isTaskCompleted, deadlineDate);
+            } else {
+                // There is a time component
+                String deadlineTimeString = deadlineTaskDescriptionArr[1].strip();
+                LocalTime deadlineTime = LocalTime.parse(deadlineTimeString, OutputDateTimeFormat.OUTPUT_TIME_FORMAT);
+                task = new DeadlineTask(taskName, isTaskCompleted, deadlineDate, deadlineTime);
+            }
             break;
         case EventTask.IDENTIFIER:
             String eventTaskDescription = arr[3];

@@ -14,9 +14,10 @@ import duke.commands.ListCommand;
 import duke.commands.NoDescriptionException;
 import duke.commands.ToDoCommand;
 
-import duke.utils.Formatter;
+import duke.utils.InputDateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import java.util.regex.Matcher;
@@ -98,7 +99,6 @@ public class Parser {
      * @return {@code DeadlineCommand}
      * @throws NoDescriptionException      if the description of the task is empty
      * @throws InvalidDescriptionException if the format of the deadline is invalid
-     * @see Parser#parseDateTime(String)
      */
     private Command parseArgumentsForDeadline(String arguments) throws NoDescriptionException,
             InvalidDescriptionException {
@@ -108,28 +108,60 @@ public class Parser {
         if (!arguments.contains("/by")) {
             throw new InvalidDescriptionException("Invalid description syntax. "
                     + "Please follow the usage as shown below:\n"
-                    + "Usage: deadline <task_description> /by dd/mm/yyyy HHHH");
+                    + DeadlineCommand.MESSAGE_USAGE);
         }
-        String[] deadlineInputArr = arguments.split("/by");
+        // Split the user input into the task name and the datetime string
+        String[] deadlineInputArr = arguments.split("/by", 2);
         String deadlineTaskName = deadlineInputArr[0].strip();
         String userInputDateTime = deadlineInputArr[1].strip();
-        LocalDateTime deadline = parseDateTime(userInputDateTime);
-        return new DeadlineCommand(deadlineTaskName, deadline);
+
+        // Split the datetime string into a date string and a time string (if available)
+        String[] userInputDateTimeArr = userInputDateTime.split("\\s", 2);
+        String userInputDate = userInputDateTimeArr[0].strip();
+        LocalDate deadlineDate = parseDate(userInputDate);
+
+        if (userInputDateTimeArr.length == 1) {
+            // User did not enter a time string
+            return new DeadlineCommand(deadlineTaskName, deadlineDate);
+        } else {
+            // User entered a time string
+            String userInputTime = userInputDateTimeArr[1].strip();
+            LocalTime deadlineTime = parseTime(userInputTime);
+            return new DeadlineCommand(deadlineTaskName, deadlineDate, deadlineTime);
+        }
     }
 
     /**
-     * Parses the input date string format into a LocalDateTime object.
+     * Parses the input date string format into a {@code LocalDate} object
      *
-     * @param dateString user input date of the format "dd/mm/yyyy HHHH"
-     * @return {@code LocalDateTime} object representing the date and time
-     * @throws InvalidDescriptionException if the format of the date and time is invalid
+     * @param dateString user input date string
+     * @return {@code LocalDate} object representing the date
+     * @throws InvalidDescriptionException if the format of the date is invalid
      */
-    private static LocalDateTime parseDateTime(String dateString) throws InvalidDescriptionException {
+    private static LocalDate parseDate(String dateString) throws InvalidDescriptionException {
         try {
-            return LocalDateTime.parse(dateString, Formatter.INPUT_DATE_FORMATTER);
+            return LocalDate.parse(dateString, InputDateTimeFormat.INPUT_DATE_FORMAT);
         } catch (DateTimeParseException ex) {
-            throw new InvalidDescriptionException("Please enter a valid date and time for a deadline task "
-                    + "using this format:\ndeadline task_name /by dd/mm/yyyy HHHH");
+            throw new InvalidDescriptionException("Unable to parse date. "
+                    + "Please follow the usage as shown below:\n"
+                    + DeadlineCommand.MESSAGE_USAGE);
+        }
+    }
+
+    /**
+     * Parses the input time string format into a {@code LocalTime} object
+     *
+     * @param timeString user input time string
+     * @return {@code LocalTime} object representing the time
+     * @throws InvalidDescriptionException if the format of the time is invalid
+     */
+    private static LocalTime parseTime(String timeString) throws InvalidDescriptionException {
+        try {
+            return LocalTime.parse(timeString, InputDateTimeFormat.INPUT_TIME_FORMAT);
+        } catch (DateTimeParseException ex) {
+            throw new InvalidDescriptionException("Unable to parse time. "
+                    + "Please follow the usage as shown below:\n"
+                    + DeadlineCommand.MESSAGE_USAGE);
         }
     }
 

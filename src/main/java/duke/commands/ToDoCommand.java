@@ -25,7 +25,7 @@ public class ToDoCommand extends Command {
     public CommandResult execute() {
         ToDoTask task = new ToDoTask(taskName);
         taskList.addTask(task);
-        return new CommandResult(MESSAGE_ADDED_TASK + task.toString() + "\n"
+        return new CommandResult(MESSAGE_ADDED_TASK + "\n  " + task.toString() + "\n"
                 + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()), taskList);
     }
 }

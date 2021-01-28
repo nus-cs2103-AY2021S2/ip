@@ -1,8 +1,9 @@
 package duke.tasks;
 
-import duke.utils.Formatter;
+import duke.utils.OutputDateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Represents a task with a deadline.
@@ -10,16 +11,31 @@ import java.time.LocalDateTime;
 public class DeadlineTask extends Task {
     public static final String IDENTIFIER = "D";
 
-    private LocalDateTime deadline;
+    private final LocalDate deadlineDate;
+    private final LocalTime deadlineTime;
 
-    public DeadlineTask(String name, LocalDateTime deadline) {
+    public DeadlineTask(String name, LocalDate deadlineDate) {
         super(IDENTIFIER, name);
-        this.deadline = deadline;
+        this.deadlineDate = deadlineDate;
+        deadlineTime = null;
     }
 
-    public DeadlineTask(String name, boolean isCompleted, LocalDateTime deadline) {
+    public DeadlineTask(String name, LocalDate deadlineDate, LocalTime deadlineTime) {
+        super(IDENTIFIER, name);
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
+    }
+
+    public DeadlineTask(String name, boolean isCompleted, LocalDate deadlineDate) {
         super(IDENTIFIER, name, isCompleted);
-        this.deadline = deadline;
+        this.deadlineDate = deadlineDate;
+        deadlineTime = null;
+    }
+
+    public DeadlineTask(String name, boolean isCompleted, LocalDate deadlineDate, LocalTime deadlineTime) {
+        super(IDENTIFIER, name, isCompleted);
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
     }
 
     /**
@@ -28,7 +44,13 @@ public class DeadlineTask extends Task {
      * @return formatted deadline string
      */
     public String getDeadline() {
-        return deadline.format(Formatter.OUTPUT_DATE_FORMATTER);
+        StringBuilder deadline = new StringBuilder();
+        deadline.append(deadlineDate.format(OutputDateTimeFormat.OUTPUT_DATE_FORMAT));
+        if (deadlineTime != null) {
+            deadline.append(", ");
+            deadline.append(deadlineTime.format(OutputDateTimeFormat.OUTPUT_TIME_FORMAT));
+        }
+        return deadline.toString();
     }
 
     @Override
