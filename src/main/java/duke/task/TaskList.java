@@ -9,6 +9,12 @@ public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
+     * Constructs an empty TaskList
+     */
+    public TaskList() {
+    }
+
+    /**
      * Constructs a TaskList.
      * @param tasks An ArrayList of tasks to be stored in this TaskList.
      */
