@@ -57,38 +57,7 @@ public class Duke {
         }
     }
 
-//    public void run() {
-//        try {
-//            this.loadTasks();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        this.introduction();
-//
-//
-//
-//        boolean validState = true;
-//
-//        while (validState) {
-//
-//            } else {
-//
-//
-//                try {
-//                    this.saveTasks();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                line = sc.nextLine();
-//            }
-//        }
-//
-//        sc.close();
-//    }
-
-
-    public static void main(String[] args) throws DukeException, FileNotFoundException {
+    public static void main(String[] args) {
         Duke simulator = new Duke();
         simulator.run();
     }

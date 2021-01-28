@@ -32,6 +32,7 @@ public class DukeTask {
     }
 
     public DukeTask(String name, TaskType type) {
+
         this(name, false, type);
     }
 
