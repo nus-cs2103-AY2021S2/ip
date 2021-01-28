@@ -1,15 +1,15 @@
 import java.io.IOException;
 
 public abstract class Command {
-    private boolean exit = false;
+    private boolean isExit = false;
 
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
     public void toggleExit() {
-        this.exit = !this.exit;
+        this.isExit = !this.isExit;
     }
 
     public boolean isExit() {
-        return this.exit;
+        return this.isExit;
     }
 }
