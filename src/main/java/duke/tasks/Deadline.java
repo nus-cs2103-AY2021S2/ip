@@ -17,10 +17,19 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * returns string representation of Deadline when saving locally.
+     * @return string of Deadline when saving.
+     */
     public String saveString() {
         return isDone ? "D --- 1 --- " + description + " --- " + by : "D --- 0 --- " + description + " --- " + by;
     }
 
+    /**
+     * Converts user input for date in yyyy-mm-dd format into MMM d yyyy format.
+     * @param input a string representation of a date in the format yyyy-mm-dd.
+     * @return string representation of date in MMM d yyyy format.
+     */
     public static String convertToDate(String input) {
         try {
             LocalDate date = LocalDate.parse(input);
@@ -30,6 +39,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * returns string representation of Deadline.
+     * @return string of Deadline.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + Deadline.convertToDate(by) + ")";

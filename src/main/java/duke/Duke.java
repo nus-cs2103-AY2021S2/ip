@@ -7,7 +7,9 @@ import duke.customClass.TaskList;
 import duke.customClass.Parser;
 import duke.customClass.CommandRouter;
 
-
+/**
+ * Duke is a todo list with features built incrementally.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -20,6 +22,9 @@ public class Duke {
         tasks.dataInput(storage.loadData());
     }
 
+    /**
+     * This method call each of the respective classes to execute a command that the user input
+     */
     public void run() {
         CommandRouter commandRouter = new CommandRouter();
         boolean isExit = false;
@@ -35,12 +40,10 @@ public class Duke {
             ui.separatorLine();
         }
         storage.save(tasks.getList());
-
-        ui.exitMessage();
     }
 
     public static void main(String[] args) {
-        new Duke("src/data/duke.tasks.txt").run();
+        new Duke(System.getProperty("user.dir") + "/data/duke.tasks.txt").run();
     }
 }
 

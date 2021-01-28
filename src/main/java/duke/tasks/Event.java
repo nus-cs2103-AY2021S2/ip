@@ -18,10 +18,19 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * returns string representation of Event when saving locally.
+     * @return string of Event when saving.
+     */
     public String saveString() {
         return isDone ? "E --- 1 --- " + description + " --- " + at : "E --- 0 --- " + description + " --- " + at;
     }
 
+    /**
+     * Converts user input for date in yyyy-mm-dd format into MMM d yyyy format.
+     * @param input a string representation of a date in the format yyyy-mm-dd.
+     * @return string representation of date in MMM d yyyy format.
+     */
     public static String convertToDate(String input) {
         try {
             LocalDate date = LocalDate.parse(input);
@@ -31,6 +40,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * returns string representation of Event.
+     * @return string of Event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + Event.convertToDate(at) + ")";
