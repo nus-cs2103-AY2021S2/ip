@@ -1,28 +1,17 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Type of Task that the user can input.
  */
 public class Deadline extends Task {
-    /** Date and deadline of the Deadline */
-    protected LocalDate date;
-
     /**
      * Constructor for Deadline objects
      * @param description What the deadline is.
      * @param date The date by which it has to be completed.
      */
-    Deadline(String description, LocalDate date) {
-        super(description);
-        this.date = date;
-    }
-
-    /**
-     * Getter which returns the date the deadline should be completed be by.
-     * @return the deadline by which the Task should be completed.
-     */
-    public LocalDate getDate() {
-        return date;
+    Deadline(String description, LocalDate date, LocalTime time) {
+        super(description, date, time);
     }
 
     /**
@@ -40,6 +29,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (By: " + date + ")";
+        return super.toString() + " (By: " + dateFormat.format(date) + " by " + timeFormat.format(time) + ")";
     }
 }

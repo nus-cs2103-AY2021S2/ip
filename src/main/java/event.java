@@ -1,28 +1,18 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Type of Task that the user can input.
  */
 public class Event extends Task {
-    /** Date and duration of the event */
-    protected LocalDate date;
 
     /**
      * Constructor for Event objects.
      * @param description What the event is.
      * @param date The date by which it has to be completed.
      */
-    Event(String description, LocalDate date) {
-        super(description);
-        this.date = date;
-    }
-
-    /**
-     * Getter which returns the date the Event occurs on.
-     * @return The date and duration of the Event.
-     */
-    public LocalDate getDate() {
-        return date;
+    Event(String description, LocalDate date, LocalTime time) {
+        super(description, date, time);
     }
 
     /**
@@ -40,6 +30,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        return super.toString() + " (at: " + dateFormat.format(date) + " at " + timeFormat.format(time) + ")";
     }
 }

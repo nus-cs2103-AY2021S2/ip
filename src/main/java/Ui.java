@@ -16,11 +16,19 @@ public class Ui {
     }
 
     /**
-     * Message to printed if any number that has to be inputted is invalid.
-     * @return
+     * Message to be printed if any number that has to be inputted is invalid.
+     * @return The error message string.
      */
     public static String  InvalidNumberExceptionMessage() {
         return LINE + SPACE + "ERROR! D: Please give a number greater than zero and smaller than the total number of tasks" + LINE;
+    }
+
+    /**
+     * Message to be printed if the keyword that has been inputted is invalid.
+     * @return The error message string.
+     */
+    public static String  InvalidKeywordExceptionMessage() {
+        return LINE + SPACE + "The supported keywords are: todo, deadline, event, done, list, delete, bye only." + LINE;
     }
 
     /**
@@ -28,8 +36,25 @@ public class Ui {
      * @param task The type of task that had the wrong format.
      * @return The error message string.
      */
-    public static String  InvalidTaskFormatExceptionMessage(String task) {
-        return LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task + LINE;
+    public static String InvalidTaskFormatExceptionMessage(String task) {
+        return LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task +
+                "\n" + SPACE + "The expected format for the task is: " + Ui.CorrectTaskFormat(task) + LINE;
+    }
+
+    /**
+     * Prints the correct format of the given task.
+     * @param task The task for which we want the format for.
+     * @return A string explaining the format of the task.
+     */
+    public static String CorrectTaskFormat(String task) {
+        switch(task) {
+        case "todo":
+            return "todo *description of task*";
+        case "deadline":
+            return "deadline *description of task* /by *date and time*";
+        default: //case "event"
+            return "event *description of task* /at *date and time*";
+        }
     }
 
     /**

@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -7,9 +6,8 @@ import java.util.Scanner;
 public class Parser {
     /**
      * Determines the keyword and processes the input based on the keyword.
-     * @throws IOException In case of user errors.
      */
-    static void parse() throws IOException {
+    static void parse() {
         Scanner sc = new Scanner(System.in);
         boolean canExitNow = false;
         while (!canExitNow) {
@@ -25,12 +23,17 @@ public class Parser {
                     checkSplLength(spl, 2, "deadline");
                     String[] spl2 = spl[1].split(" /by ", 2);
                     checkSplLength(spl2, 2, "deadline");
-                    TaskList.processDeadline(spl2);
+                    String[] spl3 = spl2[1].split(" ", 2);
+                    checkSplLength(spl3, 2, "deadline");
+                    TaskList.processDeadline(spl2, spl3);
+                    break;
                 case "event":
                     checkSplLength(spl, 2, "event");
-                    String[] spl3 =spl[1].split(" /at ", 2);
-                    checkSplLength(spl3, 2, "event");
-                    TaskList.processEvent(spl3);
+                    String[] spl4 =spl[1].split(" /at ", 2);
+                    checkSplLength(spl4, 2, "event");
+                    String[] spl5 = spl4[1].split(" ", 2);
+                    checkSplLength(spl5, 2, "event");
+                    TaskList.processEvent(spl4, spl5);
                     break;
                 case "done":
                     checkSplLength(spl, 2, "done");
@@ -55,7 +58,7 @@ public class Parser {
                     TaskList.processFind(spl);
                     break;
                 default:
-                    throw new InvalidKeywordException();
+                    throw new InvalidKeywordException(Ui.InvalidKeywordExceptionMessage());
                 }
             } catch (InvalidTaskFormatException e) {
                 e.printMessage();

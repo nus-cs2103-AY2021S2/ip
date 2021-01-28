@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +20,12 @@ public class TaskList {
     }
 
     /**
+     * Getter that returns the Array List of tasks.
+     * @return The variable storage.
+     */
+    static ArrayList<Task> getStorage() { return storage; }
+
+    /**
      * Checks if the folder and file to store the data are present.
      * Creates the folder and/or the file in case they are not there.
      */
@@ -28,7 +35,7 @@ public class TaskList {
             dir.mkdir();
             File f = new File("./data/tasks.txt");
             if (!f.createNewFile()) {
-                count = Storage.uploadFromHardDrive(storage);
+                count = Storage.uploadFromHardDrive();
             }
 
         } catch (IOException e) {
@@ -52,8 +59,8 @@ public class TaskList {
      * and printing the output message.
      * @param spl Contains the keyword, description and date in the array.
      */
-    static void processDeadline(String[] spl) {
-        storage.add(new Deadline(spl[0], LocalDate.parse(spl[1])));
+    static void processDeadline(String[] spl, String[] spl2) {
+        storage.add(new Deadline(spl[0], LocalDate.parse(spl2[0]), LocalTime.parse(spl2[1])));
         count++;
         Ui.outputMessageTask(spl[0], storage.get(count - 1));
     }
@@ -63,8 +70,8 @@ public class TaskList {
      * and printing the output message.
      * @param spl Contains the keyword, description and date in the array.
      */
-    static void processEvent(String[] spl) {
-        storage.add(new Event(spl[0], LocalDate.parse(spl[1])));
+    static void processEvent(String[] spl, String[] spl2) {
+        storage.add(new Event(spl[0], LocalDate.parse(spl2[0]), LocalTime.parse(spl2[1])));
         count++;
         Ui.outputMessageTask(spl[0], storage.get(count - 1));
     }
@@ -111,10 +118,9 @@ public class TaskList {
     /**
      * Stores the task list once the user wants to leave the program.
      * Prints an output message as well.
-     * @throws IOException In case of errors while uploading the Task List to an external file.
      */
-    static void processBye() throws IOException {
-        Storage.uploadToHardDrive(storage);
+    static void processBye() {
+        Storage.uploadToHardDrive();
         Ui.outputMessageBye();
     }
 }
