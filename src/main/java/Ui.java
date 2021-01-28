@@ -40,12 +40,12 @@ public class Ui {
 
     public void printTasks(TaskList tl) {
         int index = 1;
-        System.out.print(line);
+        System.out.print(LINE);
         for (Task t : taskList) {
             System.out.print(String.format("     %d. %s\n",
                     index++, t.toString()));
         }
-        System.out.print(line);
+        System.out.print(LINE);
     }
 
     private String taskListMessage(int numOfTasks) {

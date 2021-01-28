@@ -26,49 +26,17 @@ public class DukeSimulator {
 
     public void run() {
         ui.printGreeting();
-        loadTaskList();
-        String command;
-        command = ui.readLine();
-        while(!command.equals("bye")) {
-            processCmd(command);
-            save();
-            command = sc.nextLine();
+        storage.load(tl);
+        String input;
+        input = ui.readLine();
+        while(!input.equals("bye")) {
+            Command c = Parser.parseInput(input);
+            c.execute(tl, ui, storage);
+            input = ui.readLine();
         }
-
         ui.printBye();
     }
 
-    private void processCmd(String command) {
-        try {
-            String[] parsedCommand = command.split(" ", 2);
-            if(parsedCommand[0].equals("list")) {
-                printList();
-            } else if(parsedCommand[0].equals("done")) {
-                doneTask(parsedCommand[1]);
-            } else if(parsedCommand[0].equals("delete")) {
-                deleteTask(parsedCommand[1]);
-            } else {
-                addTask(command);
-            }
-        } catch (DukeException e) {
-            Ui.printError(e.toString());
-        }
-    }
-
-    private void addTask(String command) throws DukeException {
-        String[] parsedCommand = command.split(" ", 2);
-        Task t;
-        if (parsedCommand[0].equals("todo")) {
-            t = toDoMaker(parsedCommand[1]);
-        } else if (parsedCommand[0].equals("deadline")) {
-            t = deadlineMaker(parsedCommand[1]);
-        } else if (parsedCommand[0].equals("event")) {
-            t = eventMaker(parsedCommand[1]);
-        } else {
-            throw new DukeWrongCommandException(parsedCommand[0]);
-        }
-        taskList.add(t);
-    }
 
     private Task toDoMaker(String command) throws DukeMissingDescriptionException {
         if(command.equals("")) {
@@ -119,19 +87,4 @@ public class DukeSimulator {
         }
     }
 
-    private void doneTask(String s) {
-        int taskNum = Integer.valueOf(s);
-        Task t = taskList.get(taskNum - 1);
-        t = t.finishTask();
-        taskList.set(taskNum - 1, t);
-        String statement = "     Nice! I've marked this task as done:\n"
-                + String.format("\t%s\n", t.toString());
-        System.out.print(line + statement + line);
-    }
-
-    private void deleteTask(String s) {
-        int taskNum = Integer.valueOf(s);
-        Task t = taskList.get(taskNum - 1);
-        taskList.remove(taskNum - 1);
-    }
 }

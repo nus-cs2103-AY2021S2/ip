@@ -9,7 +9,7 @@ public class Storage {
     private final String PATHNAME = "C:/users/chian/Desktop/CS2103/ip/data/";
     private final String FILENAME = "data.txt";
 
-    private void saveTaskList(String tasks) {
+    private void save(String tasks) {
         try {
             FileWriter fw = new FileWriter(PATHNAME + FILENAME);
             fw.write(tasks);
@@ -19,7 +19,7 @@ public class Storage {
         }
     }
 
-    private void loadTaskList(TaskList tl) {
+    private void load(TaskList tl) {
         try {
             File f = new File(PATHNAME + FILENAME);
             f.createNewFile();

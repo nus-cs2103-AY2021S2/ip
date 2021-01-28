@@ -17,8 +17,16 @@ public class TaskList {
         taskList.add(t);
     }
 
-    public void deleteTask(int num) {
-        taskList.remove(num - 1);
+    public Task remove(int num) {
+        return taskList.remove(num - 1);
+    }
+
+    public Task get(int num) {
+        return taskList.get(num - 1);
+    }
+
+    public void set(int num, ) {
+
     }
 
     public void doneTask
