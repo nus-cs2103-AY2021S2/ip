@@ -83,8 +83,8 @@ public class Storage {
                 try {
                     String sequence = read[1];
                     String[] data = sequence.split("] ");
-                    String secondData = data[1].replace("(by: ", "").replace(")", "");
-                    String[] seperateTime = secondData.split(" ", 2);
+                    String secondData = data[1].replace("(by: ", "/").replace(")", "/");
+                    String[] seperateTime = secondData.split("/");
                     SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy", Locale.ENGLISH);
                     Date date = formatter.parse(seperateTime[1]);
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -112,8 +112,8 @@ public class Storage {
                 try {
                     String sequence = read[1];
                     String[] data = sequence.split("] ");
-                    String secondData = data[1].replace("(at: ", "").replace(")", "");
-                    String[] seperateTime = secondData.split(" ", 2);
+                    String secondData = data[1].replace("(at: ", "/").replace(")", "/");
+                    String[] seperateTime = secondData.split("/");
                     SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy", Locale.ENGLISH);
                     Date date = formatter.parse(seperateTime[1]);
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

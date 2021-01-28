@@ -32,7 +32,11 @@ public class Parser {
             Command delete = new DeleteCommand("delete", Integer.toString(index), "");
             return delete;
             
-        } else if (lineSplit[0].equals("todo")) {
+        } else if (lineSplit[0].equals("find")) {
+            Command find = new FindCommand("find", lineSplit[1], "");
+            return find;
+            
+        }else if (lineSplit[0].equals("todo")) {
             try {
                 String[] item = lineSplit[1].split("/");
                 Command todo = new AddCommand("todo", item[0], "");

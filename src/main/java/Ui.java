@@ -65,27 +65,35 @@ public class Ui {
     public void list(Scanner scanner, String date) {
         if (date.equals("")) {
             System.out.println("Here are the tasks in your list");
-        while (scanner.hasNext()) {
-            System.out.println(scanner.nextLine());
+            while (scanner.hasNext()) {
+                System.out.println(scanner.nextLine());
+            }
+        } else {
+            LocalDate thisDate = LocalDate.parse(date);
+            System.out.println("Here are the tasks in your list due on "
+                    + thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            while (scanner.hasNext()) {
+                String curTask = scanner.nextLine();
+                String[] string = curTask.split(": ");
+                if (string.length > 1) {
+                    String dueDate = string[1].replace(")", "");
+                    if (dueDate.equals(thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))) {
+                        System.out.println(curTask);
+                    }
+                }
+
+            }
         }
-    } else {
-        LocalDate thisDate = LocalDate.parse(date);
-        System.out.println(
-                "Here are the tasks in your list due on " + thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+    }
+
+    public void findTaskString(String task, Scanner scanner) {
+        System.out.println("Here are the tasks in your list:\n");
         while (scanner.hasNext()) {
             String curTask = scanner.nextLine();
-            String[] string = curTask.split(": ");
-            if (string.length > 1) {
-                String dueDate = string[1].replace(")", "");
-                if (dueDate.equals(thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))) {
-                    System.out.println(curTask);
-                }
+            if (curTask.contains(task)) {
+                System.out.println(curTask);
             }
-
         }
-    }
-                                
-        
-    }
+	}
 
 }
