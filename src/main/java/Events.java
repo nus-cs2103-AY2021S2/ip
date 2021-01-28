@@ -1,15 +1,22 @@
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeParseException;
+
 public class Events extends Task {
-    private String dueAt;
+    private LocalDate dueAt;
 
     private static final String DUE_COMMAND = "/at";
-    public Events(String input) throws EmptyTaskDukeException {
+
+    public Events(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
-        dueAt = getDueDateFromInput(input);
+        dueAt = LocalDate.parse(getDueDateFromInput(input));
+        Task.incrementNumOfTask();
     }
 
     public Events(String name, String dueAt) throws EmptyTaskDukeException {
         super(name);
-        this.dueAt = dueAt;
+        this.dueAt = LocalDate.parse(dueAt);
     }
 
     private static String getTaskNameFromInput(String input) {
@@ -36,7 +43,7 @@ public class Events extends Task {
     }
 
     public String getDueAt() {
-        return this.dueAt;
+        return this.dueAt.toString();
     }
 
     @Override
@@ -49,7 +56,64 @@ public class Events extends Task {
     @Override
     public String toString() {
         String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
-        return "[E]" + "[" + taskStringCheck + "] " + super.getTaskName() +
-                " (at: " + (dueAt.equals(null) ? "not specified" : dueAt) +  ")";
+        return "[E]" + "[" + taskStringCheck + "] " + super.getTaskName()
+                + "(at: " + formatDate(dueAt) +  ")";
+    }
+
+    private String formatDate(LocalDate date) {
+        DayOfWeek day = date.getDayOfWeek();
+        Month mth = date.getMonth();
+        String dateString = "";
+        dateString = getDayString(day) + " " + getMthString(mth) + " "
+                + date.getDayOfMonth() + " " + date.getYear();
+        return dateString;
+    }
+
+    private String getDayString(DayOfWeek day) {
+        switch (day) {
+        case MONDAY:
+            return "Mon";
+        case TUESDAY:
+            return "Tue";
+        case WEDNESDAY:
+            return "Wed";
+        case THURSDAY:
+            return "Thu";
+        case FRIDAY:
+            return "Fri";
+        case SATURDAY:
+            return "Sat";
+        default:
+            return "Sun";
+        }
+    }
+
+    private String getMthString(Month mth) {
+        switch (mth) {
+        case JANUARY:
+            return "Jan";
+        case FEBRUARY:
+            return "Feb";
+        case MARCH:
+            return "Mar";
+        case APRIL:
+            return "Apr";
+        case MAY:
+            return "May";
+        case JUNE:
+            return "Jun";
+        case JULY:
+            return "Jul";
+        case AUGUST:
+            return "Aug";
+        case SEPTEMBER:
+            return "Sep";
+        case OCTOBER:
+            return "Oct";
+        case NOVEMBER:
+            return "Nov";
+        default:
+            return "Dec";
+        }
     }
 }
