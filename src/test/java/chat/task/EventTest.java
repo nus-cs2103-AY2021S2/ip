@@ -278,36 +278,37 @@ public class EventTest {
     }
 
     @Test
-    public void allParameterStr_eventObjNotDone_chatException() {
+    public void allParameterStr_eventObjNotDone_commaSeparatedString() {
         assertEquals("E,false,final exam,20/03/2021 20:00,20/03/2021 21:00",
                 new Event(false, "final exam", "20/03/2021 20:00", "20/03/2021 21:00").allParameterStr());
     }
 
     @Test
-    public void allParameterStr_eventObjDone_chatException() {
+    public void allParameterStr_eventObjDone_commaSeparatedString() {
         assertEquals("E,true,final exam,20/03/2021 20:00,20/03/2021 21:00",
                 new Event(true, "final exam", "20/03/2021 20:00", "20/03/2021 21:00").allParameterStr());
     }
 
     @Test
-    public void toString_eventObjNotDoneSameDay_chatException() {
+    public void toString_eventObjNotDoneSameDay_string() {
         assertEquals("[E][ ] final exam (at: 20 Mar 2021, 8:00PM - 9:00PM)",
                 new Event(false, "final exam", "20/03/2021 20:00", "20/03/2021 21:00").toString());
     }
 
     @Test
-    public void toString_eventObjNotDoneDiffDay_chatException() {
+    public void toString_eventObjNotDoneDiffDay_string() {
         assertEquals("[E][ ] final exam (at: 20 Mar 2021, 8:00PM - 21 Mar 2021, 8:00PM)",
                 new Event(false, "final exam", "20/03/2021 20:00", "21/03/2021 20:00").toString());
     }
 
-    public void toString_eventObjDoneSameDay_chatException() {
+    @Test
+    public void toString_eventObjDoneSameDay_string() {
         assertEquals("[E][X] final exam (at: 20 Mar 2021, 8:00PM - 9:00PM)",
                 new Event(true, "final exam", "20/03/2021 20:00", "20/03/2021 21:00").toString());
     }
 
     @Test
-    public void toString_eventObjDoneDiffDay_chatException() {
+    public void toString_eventObjDoneDiffDay_string() {
         assertEquals("[E][X] final exam (at: 20 Mar 2021, 8:00PM - 21 Mar 2021, 8:00PM)",
                 new Event(true, "final exam", "20/03/2021 20:00", "21/03/2021 20:00").toString());
     }

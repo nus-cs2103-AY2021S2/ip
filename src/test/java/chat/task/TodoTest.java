@@ -74,25 +74,25 @@ public class TodoTest {
     }
     
     @Test
-    public void allParameterStr_todoObjNotDone_chatException() {
+    public void allParameterStr_todoObjNotDone_commaSeparatedString() {
         assertEquals("T,false,read book", 
                 new Todo(false, "read book").allParameterStr());
     }
 
     @Test
-    public void allParameterStr_todoObjDone_chatException() {
+    public void allParameterStr_todoObjDone_commaSeparatedString() {
         assertEquals("T,true,read book",
                 new Todo(true, "read book").allParameterStr());
     }
 
     @Test
-    public void toString_todoObjNotDone_chatException() {
+    public void toString_todoObjNotDone_string() {
         assertEquals("[T][ ] read book",
                 new Todo(false, "read book").toString());
     }
 
     @Test
-    public void toString_todoObjDone_chatException() {
+    public void toString_todoObjDone_string() {
         assertEquals("[T][X] read book",
                 new Todo(true, "read book").toString());
     }

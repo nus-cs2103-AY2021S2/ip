@@ -210,25 +210,25 @@ public class DeadlineTest {
     }
 
     @Test
-    public void allParameterStr_deadlineObjNotDone_chatException() {
+    public void allParameterStr_deadlineObjNotDone_commaSeparatedString() {
         assertEquals("D,false,return book,20/03/2021 20:00",
                 new Deadline(false, "return book", "20/03/2021 20:00").allParameterStr());
     }
 
     @Test
-    public void allParameterStr_deadlineObjDone_chatException() {
+    public void allParameterStr_deadlineObjDone_commaSeparatedString() {
         assertEquals("D,true,return book,20/03/2021 20:00",
                 new Deadline(true, "return book", "20/03/2021 20:00").allParameterStr());
     }
 
     @Test
-    public void toString_deadlineObjNotDone_chatException() {
+    public void toString_deadlineObjNotDone_string() {
         assertEquals("[D][ ] return book (by: 20 Mar 2021, 8:00PM)",
                 new Deadline(false, "return book", "20/03/2021 20:00").toString());
     }
 
     @Test
-    public void toString_deadlineObjDone_chatException() {
+    public void toString_deadlineObjDone_string() {
         assertEquals("[D][X] return book (by: 20 Mar 2021, 8:00PM)",
                 new Deadline(true, "return book", "20/03/2021 20:00").toString());
     }
