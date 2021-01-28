@@ -4,6 +4,7 @@ import vergil.components.Ui;
 import vergil.components.Storage;
 import vergil.components.Parser;
 import vergil.components.TaskList;
+
 import vergil.types.VergilException;
 import vergil.types.Command;
 import vergil.types.Todo;
@@ -20,6 +21,7 @@ public class Vergil {
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
+
         try {
             taskList = new TaskList(storage.load());
         } catch (VergilException e) {
@@ -33,7 +35,6 @@ public class Vergil {
         Command cmd;
 
         ui.displayWelcome();
-
 
         while (!hasFinished) {
             try {
@@ -82,6 +83,7 @@ public class Vergil {
             } catch (VergilException e) {
                 ui.displayError(e.getMessage());
             }
+
             System.out.println();
         }
     }

@@ -1,9 +1,11 @@
 package vergil.components;
 
 import vergil.types.VergilException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 
 public class Storage {
@@ -21,9 +23,11 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             Scanner tlEntries = new Scanner(tl.toSaveString());
+
             while (tlEntries.hasNextLine()) {
                 fw.write(tlEntries.nextLine() + System.lineSeparator());
             }
+
             fw.close();
         } catch (IOException e) {
             throw new VergilException("Unable to save.");
