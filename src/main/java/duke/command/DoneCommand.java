@@ -1,11 +1,14 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Represents a 'done' command.
+ * Marks the specified task as done.
+ */
 public class DoneCommand extends Command {
 
     public DoneCommand(String arguments) {

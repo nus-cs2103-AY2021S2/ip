@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * DukeException class represents exceptions that are specific to the Duke application.
+ */
 public class DukeException extends Throwable {
     private String msg;
 

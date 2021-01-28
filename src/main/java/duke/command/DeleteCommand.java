@@ -1,11 +1,14 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Represents a 'delete' command.
+ * Deletes a specified task from the task list.
+ */
 public class DeleteCommand extends Command {
     public DeleteCommand(String arguments) {
         super(arguments);

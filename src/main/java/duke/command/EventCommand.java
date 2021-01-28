@@ -1,9 +1,16 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Event;
 import duke.task.Task;
 
+/**
+ * Represents an 'event' command.
+ * Adds a new event to the task list.
+ */
 public class EventCommand extends Command {
 
     public EventCommand(String arguments) {

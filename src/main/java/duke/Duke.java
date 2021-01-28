@@ -1,14 +1,12 @@
 package duke;
 
 import duke.command.Command;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
 
 import java.io.IOException;
-import java.util.Scanner;
 
+/**
+ * Duke is a basic to-do list application.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
@@ -19,13 +17,16 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             taskList = new TaskList();
-            taskList.load(storage);
+            storage.loadData(taskList);
             ui.showLoadSuccess();
         } catch (IOException e) {
             taskList = new TaskList();
         }
     }
 
+    /**
+     * The driver method to run a created Duke object that responds to user input.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -41,6 +42,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method which initializes and runs Duke.
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

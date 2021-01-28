@@ -1,6 +1,9 @@
 package duke.task;
 
-public class Event extends Task{
+/**
+ * Represents an event task with a date
+ */
+public class Event extends Task {
     protected String at;
     public Event(String task, String at) {
         super(task);
@@ -12,6 +15,10 @@ public class Event extends Task{
         this.at = at;
     }
 
+    /**
+     * Returns a String representation of this Event for storage to a file.
+     * @return String representation
+     */
     public String fileString() {
         return "E | " + this.done + " | " + this.task + " | " + this.at;
     }
