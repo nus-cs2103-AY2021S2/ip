@@ -1,3 +1,5 @@
+package vergil.types;
+
 public class Todo extends Task {
     /**
      * Constructs a to-do task.

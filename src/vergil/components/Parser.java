@@ -1,3 +1,8 @@
+package vergil.components;
+
+import vergil.types.Command;
+import vergil.types.CommandType;
+import vergil.types.VergilException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

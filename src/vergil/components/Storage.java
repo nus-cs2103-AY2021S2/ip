@@ -1,3 +1,6 @@
+package vergil.components;
+
+import vergil.types.VergilException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

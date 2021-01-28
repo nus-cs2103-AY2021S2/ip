@@ -1,38 +1,40 @@
+package vergil.types;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
     private LocalDateTime time;
 
     /**
-     * Constructs a deadline task.
-     * @param description a description of the deadline task.
-     * @param time the time the task is due.
+     * Constructs an event task.
+     * @param description a description of the task.
+     * @param time the time the task is scheduled to occur.
      */
-    public Deadline(String description, LocalDateTime time) {
+    public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
     /**
-     * Constructs a deadline task.
+     * Constructs an event task.
      * @param description a description of the task.
-     * @param time the time the task is due.
+     * @param time the time the task is scheduled to occur.
      * @param isDone the completion status of the task.
      */
-    public Deadline(String description, LocalDateTime time, boolean isDone) {
+    public Event(String description, LocalDateTime time, boolean isDone) {
         super(description, isDone);
         this.time = time;
     }
 
     @Override
     public String getSaveString() {
-        return String.format("d::%s::%s", super.getSaveString(), time);
+        return String.format("e::%s::%s", super.getSaveString(), time);
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)",
+        return String.format("[D]%s (at: %s)",
                 super.toString(),
                 time.format(DateTimeFormatter.ofPattern("d MMM y @ h:mm a")));
     }

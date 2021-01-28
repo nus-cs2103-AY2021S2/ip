@@ -1,3 +1,5 @@
+package vergil.components;
+
 import java.util.Scanner;
 
 public class Ui {

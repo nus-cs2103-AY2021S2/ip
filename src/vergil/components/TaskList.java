@@ -1,3 +1,10 @@
+package vergil.components;
+
+import vergil.types.Task;
+import vergil.types.Todo;
+import vergil.types.Deadline;
+import vergil.types.Event;
+import vergil.types.VergilException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
