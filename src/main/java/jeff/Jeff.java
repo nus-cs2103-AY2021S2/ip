@@ -1,4 +1,4 @@
-import jeff.*;
+package jeff;
 
 /**
  * Main class for the Jeff chatbot.
