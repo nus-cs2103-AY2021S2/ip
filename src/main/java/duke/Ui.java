@@ -3,10 +3,14 @@ package duke;
 public class Ui {
     private final String[] HELLO = {
             System.lineSeparator() +
-                    " _____ ____  ____  _  __ _____ ____ " + System.lineSeparator() +
-                    "/__ __Y  _ \\/ ___\\/ |/ //  __//  __\\" + System.lineSeparator() +
-                    "  / \\ | / \\||    \\|   / |  \\  |  \\/|" + System.lineSeparator() +
-                    "  | | | |-||\\___ ||   \\ |  /_ |    /" + System.lineSeparator() +
+                    " _____ ____  ____  _  __ _____ ____ " +
+                    System.lineSeparator() +
+                    "/__ __Y  _ \\/ ___\\/ |/ //  __//  __\\" +
+                    System.lineSeparator() +
+                    "  / \\ | / \\||    \\|   / |  \\  |  \\/|" +
+                    System.lineSeparator() +
+                    "  | | | |-||\\___ ||   \\ |  /_ |    /" +
+                    System.lineSeparator() +
                     "  \\_/ \\_/ \\|\\____/\\_|\\_\\\\____\\\\_/\\_\\",
             "Sup sup! I'm Tasker :)"
     };
