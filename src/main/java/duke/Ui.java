@@ -85,7 +85,7 @@ public class Ui {
      * Displays error messages when an exception is caught.
      * @param error Error being caught.
      */
-    public void showError(Exception error){
+    public void showError(Exception error) {
         System.out.println(error);
     }
 
@@ -99,7 +99,7 @@ public class Ui {
     /**
      * Displays farewell message.
      */
-    public void sayBye(){
+    public void sayBye() {
         System.out.println("Bye. Hope to see you again soon!\n");
     }
 }
