@@ -32,6 +32,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (at: " + this.getFormattedTime() + ")" ;
+        return "[" + this.cat + "] " + super.toString() + " (at: " + this.getFormattedTime() + ")" ;
     }
 }

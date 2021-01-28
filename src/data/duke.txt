@@ -3,3 +3,5 @@ E : 0 : meeting : 2021-01-29
 D : 1 : Homework : 2021-02-03
 T : 1 : return book
 D : 1 : Quiz : 2021-01-28
+T : 0 : Buy bananas
+E : 0 : party : 2021-01-30

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    /** Deadline of deadline */
+    /** Date of deadline */
     protected LocalDate by;
 
     public Deadline(String name, String by) {
@@ -30,7 +30,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + this.getFormattedDeadline() + ")";
+        return "[" + this.cat + "] " + super.toString() + " (by: " + this.getFormattedDeadline() + ")";
     }
 
 }

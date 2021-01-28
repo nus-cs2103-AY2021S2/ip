@@ -9,8 +9,7 @@ public class Parser {
     /** Array to store input from user that is split by empty space */
     private String[] arr;
 
-    public Parser() {
-    }
+    public Parser() {}
 
     /**
      * Splits user input and checks for exceptions
