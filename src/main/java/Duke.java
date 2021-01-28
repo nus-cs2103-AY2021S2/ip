@@ -1,5 +1,5 @@
+import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,13 +15,22 @@ public class Duke {
         String separator = "------------------\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("No unicode allowed");
+        List<Task> store = null;
+        try {
+            System.out.println("Loading From File...");
+            store = TaskListFileUtils.LoadTaskList();
+            System.out.println("Loaded");
+        } catch (IOException e) {
+            System.out.println("Failed to Load file. Aborting.");
+            return;
+        }
         Scanner in = new Scanner(System.in);
         String line;
-        List<Task> store = new ArrayList<>();
         String tokens[] = {"invalid"};
         do{
             System.out.print(separator + "Listening to your input: ");
             line = in.nextLine();
+            int hash = store.hashCode(); //To detect changes later.
             try {
                 String singleTokens[] = {"bye","list"};
                 tokens = splitTokenIntoTwo(line," ", singleTokens);
@@ -30,9 +39,7 @@ public class Duke {
                         System.out.println(separator + "Goodbye from\n" + logo);
                         break;
                     case "list":
-                        for (int i = 0 ; i < store.size(); i++) {
-                            System.out.println(formatOrderedPrint(store,i));
-                        }
+                        printList(store);
                         break;
                     case "done":
                         int index = Integer.valueOf(tokens[1]) - 1;
@@ -75,10 +82,28 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch(EmptyArgument e){
                 System.out.println("Cannot have empty argument");
+            } finally {
+                int newHash = store.hashCode();
+                if(newHash != hash){
+                    try {
+                        TaskListFileUtils.saveTaskList(store);
+                    } catch (IOException e) {
+                        System.out.println("Unable to save list. Dumping ...");
+                        printList(store);
+                        System.out.println("Continuing Normal operation");
+                    }
+                }
             }
         }while(!tokens[0].equals("bye"));
         in.close();
     }
+
+    private static void printList(List<Task> store){
+        for (int i = 0 ; i < store.size(); i++) {
+            System.out.println(formatOrderedPrint(store,i));
+        }
+    }
+
     private static String formatOrderedPrint(List<Task> tasks, int i){
         final int size = tasks.size();
         while (i < 0){

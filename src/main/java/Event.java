@@ -14,4 +14,9 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (Event Time: " + eventPeriod + ")";
     }
+
+    @Override
+    public String toFileString() {
+        return "E," + super.toBaseFileString() + "," + eventPeriod.length() + "," + eventPeriod;
+    }
 }

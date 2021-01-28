@@ -21,5 +21,14 @@ public abstract class Task {
                 description;
     }
 
-    //...
+    abstract String toFileString();
+
+    @Override
+    public int hashCode(){
+        return this.toString().hashCode();
+    }
+
+    String toBaseFileString(){
+        return (isDone ? "1" : "0") + "," + description.length() + "," + description;
+    }
 }
