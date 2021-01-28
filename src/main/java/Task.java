@@ -1,21 +1,19 @@
-package duke.task;
-
 public class Task {
-    private final String name;
-    private boolean done;
+    private String name;
+    private boolean isDone;
 
     Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     Task(String name, boolean done) {
         this.name = name;
-        this.done = done;
+        this.isDone = done;
     }
 
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public String getName() {
@@ -23,11 +21,11 @@ public class Task {
     }
 
     public String getStatus() {
-        return "[" + (this.done ? "\u2713" : "\u2718") + "] " + this.name;
+        return "[" + (this.isDone ? "\u2713" : "\u2718") + "] " + this.name;
     }
 
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
 }

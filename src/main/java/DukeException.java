@@ -1,5 +1,3 @@
-package duke.ui;
-
 public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
@@ -7,6 +5,6 @@ public class DukeException extends Exception {
 
     @Override
     public String getMessage() {
-        return super.getMessage();
+        return "OOPS! " + super.getMessage();
     }
 }
