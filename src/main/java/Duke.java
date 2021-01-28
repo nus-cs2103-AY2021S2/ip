@@ -53,7 +53,7 @@ public class Duke {
                                 formatOrderedPrint(store,-1));
                         break;
                     case "event":
-                        tokens = splitTokenIntoTwo(tokens[1]," /by ");
+                        tokens = splitTokenIntoTwo(tokens[1]," /at ");
                         store.add(new Event(tokens[0],tokens[1]));
                         System.out.println("The following event item has been added:\n" +
                                 formatOrderedPrint(store,-1));
