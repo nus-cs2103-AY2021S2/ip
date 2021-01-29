@@ -14,6 +14,7 @@ public class ParserTest {
         assertTrue(p.parseCmd("todo") instanceof InvalidCommand);
     }
 
+    @Test
     public void parser_addToDoCmdProper_returnsAddToDoCmd() {
         Parser p = new Parser();
 
