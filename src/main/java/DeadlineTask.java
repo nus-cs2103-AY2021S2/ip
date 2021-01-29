@@ -1,4 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
+    LocalDate date;
+
     DeadlineTask(String task) {
         super(task);
     }
@@ -15,8 +20,10 @@ public class DeadlineTask extends Task {
                 time += divideCommand[i] + " ";
             }
         }
+        date = LocalDate.parse(time);
+        String dateFormat = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String taskRepresent = divideCommand[1] + " " + divideCommand[2]
-                + " (" + divideCommand[3].substring(1) + ": " + time + ")";
+                + " (" + divideCommand[3].substring(1) + ": " + dateFormat + ")";
         if (this.getStatus()) {
             return "[D][X] " + taskRepresent;
         } else {
