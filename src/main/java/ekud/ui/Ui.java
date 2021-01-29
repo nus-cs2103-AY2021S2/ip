@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Ui {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
     private static final String PADDING = "\t";
-    private static final String WELCOME_MESSAGE = "Yo! I'm ekud.Ekud!\nWhat you want?";
+    private static final String WELCOME_MESSAGE = "Yo! I'm Ekud!\nWhat you want?";
     private final Scanner input;
     private final PrintStream output;
 
