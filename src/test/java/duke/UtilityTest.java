@@ -1,10 +1,10 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static duke.Utility.isNumeric;
 import static duke.Utility.isValidDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class UtilityTest {
     @Test

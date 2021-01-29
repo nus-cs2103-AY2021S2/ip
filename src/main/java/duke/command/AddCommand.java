@@ -1,17 +1,17 @@
 package duke.command;
 
+import java.time.LocalDate;
+
+import duke.Storage;
+import duke.Ui;
+import duke.Utility;
 import duke.exception.DukeException;
 import duke.exception.DukeExceptionType;
-import duke.Storage;
-import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.Ui;
-import duke.Utility;
-
-import java.time.LocalDate;
 
 /**
  * Handles adding of ToDo, Event and Deadline tasks
@@ -92,6 +92,8 @@ public class AddCommand extends Command {
             break;
         case "deadline":
             deadlineProcess(description, date, tasks);
+            break;
+        default:
             break;
         }
         storage.save(tasks);
