@@ -3,6 +3,10 @@ package DukeBody;
 import DukeTask.*;
 import java.util.ArrayList;
 
+/**
+ * ArrayList derived class representing a list of tasks with
+ * added functionality to mark tasks as done at indexes.
+ */
 public class TaskList extends ArrayList<Task> {
     private static final long serialVersionUID = 6951591508963981354L;
 
