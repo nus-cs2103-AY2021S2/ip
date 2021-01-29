@@ -1,4 +1,4 @@
-# ekud.Ekud project template
+# Ekud project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
@@ -14,10 +14,8 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 1. After that, locate the `src/ekud.main/java/ekud.Ekud.java` file, right-click it, and choose `Run ekud.Ekud.ekud.main()`. If the setup is correct, you should see something like the below:
    ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+	____________________________________________________________
+	 Yo! I'm ekud.Ekud!
+	 What you want?
+	____________________________________________________________
    ```
