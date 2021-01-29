@@ -1,11 +1,28 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskManager {
     public List<Task> taskList;
 
     public TaskManager() {
         taskList = new ArrayList<>();
+    }
+
+    public void loadTasksFromStorage(String tasks) {
+        Scanner sc = new Scanner(tasks);
+        while (sc.hasNextLine()) {
+            String[] taskParameters = sc.nextLine().split(Task.TASK_DELIMITER);
+            switch (taskParameters[0]) {
+            case "TODO":
+                addTask(new Todo(taskParameters[1]));
+            case "DEADLINE":
+                addTask(new Deadline(taskParameters[1], taskParameters[2]));
+            case "EVENT":
+                addTask(new Event(taskParameters[1], taskParameters[2]));
+            }
+        }
+        sc.close();
     }
 
     public void addTask(Task task) {

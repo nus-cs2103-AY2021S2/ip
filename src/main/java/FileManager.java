@@ -13,7 +13,7 @@ public class FileManager {
         return data.createNewFile();
     }
 
-    public void initialiseDirectory(String path) throws IOException {
+    public void initialiseDirectory(String path) {
         File directory = new File(path);
         if (!directory.exists()) {
             directory.mkdir();
@@ -26,7 +26,7 @@ public class FileManager {
         fileWriter.close();
     }
 
-    public StringBuilder loadFromFile(String path) throws FileNotFoundException {
+    public StringBuilder loadTasksFromFile(String path) throws FileNotFoundException {
         StringBuilder sb = new StringBuilder();
         File data = new File(path);
         Scanner sc = new Scanner(data);
