@@ -9,22 +9,47 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents the task list used by the Duke chat bot.
+ * It manages all the tasks in the list.
+ */
 public class TaskList {
 
     protected ArrayList<Task> collection;
 
+    /**
+     * Initialises the class with an empty
+     * task list collection for future
+     * task-related operations.
+     */
     public TaskList() {
         this.collection = new ArrayList<>();
     }
 
+    /**
+     * Initialises the class with a specified
+     * task list collection for future
+     * task-related operations.
+     */
     public TaskList(ArrayList<Task> collection) {
         this.collection = collection;
     }
 
+    /**
+     * Retrieves the exact task list.
+     *
+     * @return Task list.
+     */
     public ArrayList<Task> getList() {
         return this.collection;
     }
 
+    /**
+     * Retrieves the exact task list in a
+     * nicely formatted output.
+     *
+     * @return Formatted output.
+     */
     public String showList() {
         StringBuilder sb = new StringBuilder();
 
@@ -36,6 +61,15 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Filters the task list to find tasks
+     * that matches a certain keyword.
+     * Formats the result into a pleasant
+     * viewing format.
+     *
+     * @param keyword Keyword used to filter.
+     * @return Formatted output.
+     */
     public String findTasks(String keyword) {
         StringBuilder sb = new StringBuilder();
 
@@ -49,6 +83,14 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Adds the specified task into the task list.
+     *
+     * @param type Task type.
+     * @param args Task arguments.
+     * @return Successful result of the operation.
+     * @throws DukeException If invalid task type or arguments specified.
+     */
     public String addTask(String type, String[] args) throws DukeException {
         // Ensure task description and argument cannot be empty
         if (args[0].equals("")) {
@@ -79,6 +121,13 @@ public class TaskList {
         return "Got it, I have added the task '" + args[0] + "' to your collection.";
     }
 
+    /**
+     * Marks specified task from the task list as done.
+     *
+     * @param index Index of the task from the task list.
+     * @return Successful result of the operation.
+     * @throws DukeException If invalid index specified.
+     */
     public String markDone(String index) throws DukeException {
         try {
             int itemIdx = Integer.parseInt(index.split(" ")[0]) - 1;
@@ -95,6 +144,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes specified task from the task list
+     *
+     * @param index Index of the task from the task list.
+     * @return Successful result of the operation.
+     * @throws DukeException If invalid index specified.
+     */
     public String deleteTask(String index) throws DukeException {
         try {
             int itemIdx = Integer.parseInt(index.split(" ")[0]) - 1;

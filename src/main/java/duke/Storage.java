@@ -13,14 +13,31 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the storage functionalities used by
+ * the Duke chat bot. It manages the loading and saving
+ * of tasks in and out of the disk.
+ */
 public class Storage {
 
     protected Path filePath;
 
+    /**
+     * Initialises the class with a file path
+     * where the file will be used for data storage
+     * operations.
+     */
     public Storage(String filePath) {
         this.filePath = Paths.get(System.getProperty("user.dir"), filePath);
     }
 
+    /**
+     * Loads task list data found in the disk
+     * into the Duke chat bot.
+     *
+     * @return Task list.
+     * @throws DukeException If the file cannot be found.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> collection = new ArrayList<>();
 
@@ -50,6 +67,14 @@ public class Storage {
         return collection;
     }
 
+    /**
+     * Saves the task list data from the
+     * Duke chat bot into the disk.
+     *
+     * @param collection Task list.
+     * @return Successful result of the operation.
+     * @throws DukeException If the file cannot be found.
+     */
     public String save(ArrayList<Task> collection) throws DukeException {
         try {
             Files.createDirectories(this.filePath.getParent()); // force create directories
