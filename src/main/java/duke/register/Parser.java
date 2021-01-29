@@ -16,7 +16,7 @@ public class Parser {
     }
 
     public void parseTaskType() {
-        taskType = commandSeparate[0];
+        taskType = commandSeparate[0].toLowerCase();
     }
 
     public void parseTaskName() {

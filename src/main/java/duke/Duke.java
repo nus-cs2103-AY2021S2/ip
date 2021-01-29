@@ -36,7 +36,7 @@ public class Duke {
             Parser p = new Parser(command);
             p.parse();
             String TaskType = p.getTaskType();
-            if (command.equals("bye")) {
+            if (command.equals("bye") || command.equals("exit")) {
                 ui.goodbye();
                 storage.saveTask(taskList);
                 break;
