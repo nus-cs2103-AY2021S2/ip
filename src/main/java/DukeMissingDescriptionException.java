@@ -1,5 +1,6 @@
 public class DukeMissingDescriptionException extends DukeException {
     String command;
+
     public DukeMissingDescriptionException(String command) {
         this.command = command;
     }

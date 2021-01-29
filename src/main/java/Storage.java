@@ -14,7 +14,7 @@ public class Storage {
             FileWriter fw = new FileWriter(PATHNAME + FILENAME);
             fw.write(tasks);
             fw.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             Ui.printMessage("Unable to save file!");
         }
     }
@@ -29,22 +29,22 @@ public class Storage {
                 String[] taskArray = strTask.split(" \\| ");
                 Task t = null;
                 switch (taskArray[0]) {
-                    case "T":
-                        t = new ToDo(taskArray[2]);
-                        break;
-                    case "E":
-                        String[] timeArray = taskArray[3].split("-");
-                        LocalDateTime ldtStart = Parser.parseFileDate(timeArray[0]);
-                        LocalDateTime ldtEnd = Parser.parseFileDate(timeArray[1]);
-                        t = new Event(taskArray[2], ldtStart, ldtEnd);
-                        break;
-                    case "D":
-                        LocalDateTime ldt = Parser.parseFileDate(taskArray[3]);
-                        t = new Deadline(taskArray[2], ldt);
-                        break;
+                case "T":
+                    t = new ToDo(taskArray[2]);
+                    break;
+                case "E":
+                    String[] timeArray = taskArray[3].split("-");
+                    LocalDateTime ldtStart = Parser.parseFileDate(timeArray[0]);
+                    LocalDateTime ldtEnd = Parser.parseFileDate(timeArray[1]);
+                    t = new Event(taskArray[2], ldtStart, ldtEnd);
+                    break;
+                case "D":
+                    LocalDateTime ldt = Parser.parseFileDate(taskArray[3]);
+                    t = new Deadline(taskArray[2], ldt);
+                    break;
                 }
-                if(t != null) {
-                    if(taskArray[1].equals("X")) {
+                if (t != null) {
+                    if (taskArray[1].equals("X")) {
                         t = t.finishTask();
                     }
                     tl.add(t);

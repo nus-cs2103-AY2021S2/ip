@@ -15,23 +15,23 @@ public class Parser {
         String[] parsedInput = input.split(" ", 2);
         String commandStr = parsedInput[0];
         Command c;
-        switch(commandStr) {
-            case "list":
-                c = new ListCommand();
-                break;
-            case "done":
-                c = new DoneCommand(Integer.parseInt(parsedInput[1]));
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                c = new AddCommand(commandStr, parsedInput[1]);
-                break;
-            case "delete":
-                c = new DeleteCommand(Integer.parseInt(parsedInput[1]));
-                break;
-            default:
-                throw new DukeWrongCommandException(commandStr);
+        switch (commandStr) {
+        case "list":
+            c = new ListCommand();
+            break;
+        case "done":
+            c = new DoneCommand(Integer.parseInt(parsedInput[1]));
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            c = new AddCommand(commandStr, parsedInput[1]);
+            break;
+        case "delete":
+            c = new DeleteCommand(Integer.parseInt(parsedInput[1]));
+            break;
+        default:
+            throw new DukeWrongCommandException(commandStr);
         }
         return c;
     }

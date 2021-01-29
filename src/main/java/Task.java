@@ -25,6 +25,7 @@ public abstract class Task {
 
 
     public abstract String saveTask();
+
     public abstract Task finishTask();
 
     @Override

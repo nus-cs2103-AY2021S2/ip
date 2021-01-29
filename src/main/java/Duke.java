@@ -14,7 +14,7 @@ public class Duke {
         storage.load(tl);
         String input;
         input = ui.readLine();
-        while(!input.equals("bye")) {
+        while (!input.equals("bye")) {
             try {
                 Command c = Parser.parseInput(input);
                 c.execute(tl, ui, storage);

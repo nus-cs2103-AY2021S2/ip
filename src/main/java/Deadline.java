@@ -18,9 +18,9 @@ public class Deadline extends Task {
     public static Deadline create(String taskInfo) throws DukeWrongFormatException,
             DukeMissingDescriptionException {
         String[] parsedInfo = taskInfo.split(" /by ", 2);
-        if(parsedInfo.length != 2) {
+        if (parsedInfo.length != 2) {
             throw new DukeWrongFormatException("deadline");
-        } else if(parsedInfo[0].equals(" ") || parsedInfo[1].equals(" ")) {
+        } else if (parsedInfo[0].equals(" ") || parsedInfo[1].equals(" ")) {
             throw new DukeMissingDescriptionException("deadline");
         } else {
             try {
