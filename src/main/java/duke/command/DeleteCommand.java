@@ -18,6 +18,7 @@ public class DeleteCommand extends Command {
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

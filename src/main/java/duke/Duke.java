@@ -5,7 +5,6 @@ import duke.logging.Parser;
 import duke.logging.Storage;
 import duke.logging.TaskList;
 import duke.logging.Ui;
-import duke.model.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,7 +12,7 @@ import java.io.FileNotFoundException;
 
 public class Duke {
     private final Storage storage;
-    private TaskList tasks = new TaskList(new ArrayList<Task>());
+    private TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui;
 
     public Duke(String filePath) {

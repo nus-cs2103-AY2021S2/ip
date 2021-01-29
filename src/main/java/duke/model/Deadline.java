@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
     private final LocalDate dateTime;
 
-    public Deadline(boolean markAsDone, String taskName, LocalDate dateTime) {
-        super('D', markAsDone, taskName);
+    public Deadline(boolean isCompleted, String taskName, LocalDate dateTime) {
+        super('D', isCompleted, taskName);
         this.dateTime = dateTime;
     }
 

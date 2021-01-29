@@ -7,7 +7,7 @@ import duke.logging.Ui;
 public abstract class Command {
     protected final String taskDescription;
 
-    public Command (String taskDescription) {
+    public Command(String taskDescription) {
         this.taskDescription = taskDescription;
     }
 

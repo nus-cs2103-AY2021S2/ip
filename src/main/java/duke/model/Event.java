@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDate dateTime;
 
-    public Event(boolean markAsDone, String taskName, LocalDate dateTime) {
-        super('E', markAsDone, taskName);
+    public Event(boolean isCompleted, String taskName, LocalDate dateTime) {
+        super('E', isCompleted, taskName);
         this.dateTime = dateTime;
     }
 
