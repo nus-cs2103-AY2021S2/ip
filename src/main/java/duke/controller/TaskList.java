@@ -1,6 +1,6 @@
-package controller;
+package duke.controller;
 
-import task.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

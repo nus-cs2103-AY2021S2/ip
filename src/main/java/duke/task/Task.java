@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.time.LocalDate;
 
@@ -66,7 +66,7 @@ public abstract class Task {
         return checkBox + " " + this.taskName;
     }
     /**
-     * Parse the task to comply with CSV format.
+     * Parse the java.duke.controller.task to comply with CSV format.
      *
      * @return A string that complies with CSV format.
      */

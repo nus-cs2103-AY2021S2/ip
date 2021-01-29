@@ -1,12 +1,12 @@
-import controller.DukeException;
-import controller.Parser;
-import controller.TaskList;
-import controller.Ui;
 import org.junit.jupiter.api.Test;
-import task.Deadline;
-import task.Event;
-import task.ToDo;
 
+import duke.DukeException;
+import duke.controller.Parser;
+import duke.controller.TaskList;
+import duke.controller.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,7 +50,7 @@ public class DukeTest {
             parser.handleTasksWithTime("deadline", "deadline a", taskList);
         } catch (DukeException e) {
             assertEquals(
-                    "The timing of the task is not included. Please check your input.",
+                    "The timing of the java.duke.controller.task is not included. Please check your input.",
                     e.getMessage());
         }
     }

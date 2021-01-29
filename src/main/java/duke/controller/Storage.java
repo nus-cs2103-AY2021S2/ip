@@ -1,8 +1,9 @@
-package controller;
+package duke.controller;
 
-import task.Deadline;
-import task.Event;
-import task.ToDo;
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 import java.io.BufferedReader;
 import java.io.File;

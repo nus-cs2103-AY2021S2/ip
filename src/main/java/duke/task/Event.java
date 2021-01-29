@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,7 +43,7 @@ public class Event extends Task{
     }
 
     /**
-     * Parse the task to comply with CSV format.
+     * Parse the java.duke.controller.task to comply with CSV format.
      *
      * @return A string that complies with CSV format.
      */

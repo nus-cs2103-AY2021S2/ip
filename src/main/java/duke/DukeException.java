@@ -1,4 +1,4 @@
-package controller;
+package duke;
 
 /**
  * Exception class to handle errors, especially user input errors.
