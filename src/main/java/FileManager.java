@@ -8,9 +8,16 @@ public class FileManager {
 
     public FileManager() {}
 
-    public boolean initialiseFile(String path) throws IOException {
+    public boolean createFile(String path) throws IOException {
         File data = new File(path);
         return data.createNewFile();
+    }
+
+    public void initialiseDirectory(String path) throws IOException {
+        File directory = new File(path);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
     }
 
     public void writeToFile(String path, String message) throws IOException {
