@@ -10,12 +10,12 @@ public class ToDo extends Task {
      * @param description Description of the todo task.
      */
     public ToDo(String description) {
-        super(description);
+        super (description);
         this.taskType = "ToDo";
     }
 
     /**
-     * Generate details of a todo task - description.
+     * Generates details of a todo task - description.
      * @return String output for a todo task.
      */
     @Override

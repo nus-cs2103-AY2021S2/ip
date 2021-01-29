@@ -4,8 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * <code>Event</code> class represents any event task
- * with a description and date.
+ * <code>Event</code> class represents any event task with a description and date.
  */
 public class Event extends Task {
     private final LocalDateTime date;
@@ -16,13 +15,13 @@ public class Event extends Task {
      * @param date Date of the event task.
      */
     public Event(String description, LocalDateTime date) {
-        super(description);
+        super (description);
         this.date = date;
         this.taskType = "Event";
     }
 
     /**
-     * Generate the date of the event task.
+     * Generates the date of the event task.
      * @return Date of the task in String format.
      */
     @Override
@@ -31,7 +30,7 @@ public class Event extends Task {
     }
 
     /**
-     * Generate details of an event task - description, date.
+     * Generates details of an event task - description, date.
      * @return String output for a event task.
      */
     @Override

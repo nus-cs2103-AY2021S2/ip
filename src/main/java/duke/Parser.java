@@ -23,7 +23,7 @@ public class Parser {
     }
 
     /**
-     * Parse the String user input into an array of Strings.
+     * Parses the String user input into an array of Strings.
      * @return An array of Strings of the parsed user input.
      */
     public String[] parseUserInput() {
@@ -31,8 +31,7 @@ public class Parser {
     }
 
     /**
-     * Retrieve the user's task action by accessing the array of
-     * parsed user input Strings.
+     * Retrieves the user's task action by accessing the array of parsed user input Strings.
      * @return User command task action.
      */
     public String getUserAction() {
@@ -40,19 +39,20 @@ public class Parser {
     }
 
     /**
-     * Check the user input and ensures that it makes sense.
+     * Checks the user input and ensures that it makes sense.
      * @param list List of existing tasks.
      * @throws MissingTaskNumberException If there is no task number for done or delete actions.
      * @throws InvalidTaskNumberException If the task number is outside the list range.
      * @throws EmptyDescriptionException If there is no description for the task action.
      */
     public void checkUserInput(List<Task> list)
-            throws MissingTaskNumberException, InvalidTaskNumberException
-            , EmptyDescriptionException {
+            throws MissingTaskNumberException,
+            InvalidTaskNumberException,
+            EmptyDescriptionException {
         String[] userInputArr = userInput.split(" ");
         String task = userInputArr[0];
 
-        switch(task) {
+        switch (task) {
         case "todo":
         case "deadline":
         case "event":

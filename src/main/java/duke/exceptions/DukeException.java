@@ -1,8 +1,7 @@
 package duke.exceptions;
 
 /**
- * <code>DukeException</code> class handles incorrect inputs
- * entered by the user.
+ * <code>DukeException</code> class handles incorrect inputs entered by the user.
  */
 public class DukeException extends Exception {
 
@@ -11,6 +10,6 @@ public class DukeException extends Exception {
      * @param message Error message.
      */
     public DukeException(String message) {
-        super(message);
+        super (message);
     }
 }

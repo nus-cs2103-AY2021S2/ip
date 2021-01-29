@@ -12,15 +12,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.time.LocalDateTime;
-
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * <code>Storage</code> class handles the loading of tasks from the file and
- * saving tasks in the file.
+ * <code>Storage</code> class handles the loading of tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
@@ -35,6 +33,7 @@ public class Storage {
             File file = new File(filePath);
 
             if (!file.exists()) {
+                file.mkdir();
                 file.createNewFile();
             } else {
                 readFileContents(filePath);
@@ -50,7 +49,8 @@ public class Storage {
      * @return List of existing tasks in the file.
      * @throws FileNotFoundException If the file cannot be found.
      */
-    public List<Task> readFileContents(String filePath) throws FileNotFoundException {
+    public List<Task> readFileContents(String filePath)
+            throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         List<Task> list = new ArrayList<>();
@@ -91,7 +91,7 @@ public class Storage {
     }
 
     /**
-     * Save the tasks in the file whenever the task list changes.
+     * Saves the tasks in the file whenever the task list changes.
      * @param filePath Filepath of the file that saves task.
      * @param list List of existing tasks.
      */
@@ -100,7 +100,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
 
             for (Task task : list) {
-                boolean done = task.getIsDone();
+                boolean done = task.isDone();
                 String doneString = "0";
                 String taskDescription = task.getDescription();
                 String taskDate;
@@ -110,14 +110,17 @@ public class Storage {
                 }
 
                 if (task.getTaskType().equals("ToDo")) {
-                    fw.write("T | " + doneString + " | " + taskDescription + "\n");
+                    fw.write("T | " + doneString
+                            + " | " + taskDescription + "\n");
                 } else {
                     taskDate = task.getTaskDate();
 
                     if (task.getTaskType().equals("Deadline")) {
-                        fw.write("D | " + doneString + " | " + taskDescription + "| " + taskDate + "\n");
+                        fw.write("D | " + doneString
+                                + " | " + taskDescription + "| " + taskDate + "\n");
                     } else {
-                        fw.write("E | " + doneString + " | " + taskDescription + "| " + taskDate + "\n");
+                        fw.write("E | " + doneString
+                                + " | " + taskDescription + "| " + taskDate + "\n");
                     }
                 }
             }

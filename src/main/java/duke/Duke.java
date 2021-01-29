@@ -4,7 +4,7 @@ import duke.exceptions.*;
 import duke.task.Task;
 
 import java.io.FileNotFoundException;
-import java.time.DateTimeException;
+
 import java.util.Scanner;
 
 /**
@@ -14,7 +14,7 @@ public class Duke {
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
-    private static boolean exit = false;
+    private static boolean isExit = false;
     private final String filePath;
 
     /**
@@ -42,7 +42,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ui.welcome();
 
-        while (!exit) {
+        while (!isExit) {
             try {
                 String userInput = sc.nextLine();
                 Parser parser = new Parser(userInput);
@@ -51,28 +51,28 @@ public class Duke {
                 String userAction = parser.getUserAction();
 
                 switch (userAction) {
-                case "bye":  //exit
+                case "bye":
                     ui.exit();
-                    exit = true;
+                    isExit = true;
                     break;
 
-                case "list":  //list task
+                case "list":
                     ui.printTaskList(tasks.list);
                     break;
 
                 case "todo":
                 case "deadline":
-                case "event":  //add new task
+                case "event":
                     Task newTask = tasks.addNewTask(userInput);
                     ui.printAddTask(newTask, tasks.list);
                     break;
 
-                case "done":  //mark as done
+                case "done":
                     tasks.markAsDone(userInput);
                     ui.printDoneTask(Integer.parseInt(parsedUserInput[1]) - 1, tasks.list);
                     break;
 
-                case "delete":  //delete task
+                case "delete":
                     ui.printDeleteTask(Integer.parseInt(parsedUserInput[1]) - 1, tasks.list);
                     tasks.deleteTask(userInput);
                     break;
@@ -82,9 +82,7 @@ public class Duke {
                 }
 
                 storage.overWriteFile(filePath, tasks.list);
-            } catch (EmptyDescriptionException | InvalidInputException
-                    | InvalidTaskNumberException | DateTimeException
-                    | MissingTaskNumberException | InvalidDateException ex) {
+            } catch (DukeException ex) {
                 ui.printDivider();
                 System.out.println(ex.getMessage());
                 ui.printDivider();

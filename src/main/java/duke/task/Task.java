@@ -1,8 +1,7 @@
 package duke.task;
 
 /**
- * <code>Task</code> class represents any task with a
- * description - deadline, event, todo.
+ * <code>Task</code> class represents any task with a description - deadline, event, todo.
  */
 public class Task {
     protected String description;
@@ -20,24 +19,22 @@ public class Task {
     }
 
     /**
-     * Generate the appropriate symbol according to whether
-     * the task is marked as done.
+     * Generates the appropriate symbol according to whether the task is marked as done.
      * @return String format of the symbol.
      */
     public String getStatusIcon() {
-        //return tick or X symbols
         return (isDone ? "\u2718" : " ");
     }
 
     /**
-     * Indicate the task as done.
+     * Indicates the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Generate the date of the task.
+     * Generates the date of the task.
      * @return Date of the task in String format.
      */
     public String getTaskDate() {
@@ -45,7 +42,7 @@ public class Task {
     }
 
     /**
-     * Generate the description of the task.
+     * Generates the description of the task.
      * @return Description of the task.
      */
     public String getDescription() {
@@ -53,7 +50,7 @@ public class Task {
     }
 
     /**
-     * Generate the specific type of the task - deadline, event, todo.
+     * Generates the specific type of the task - deadline, event, todo.
      * @return Specific type of task.
      */
     public String getTaskType() {
@@ -61,15 +58,15 @@ public class Task {
     }
 
     /**
-     * Check if the task is marked as done.
+     * Checks if the task is marked as done.
      * @return True if the task is done otherwise false.
      */
-    public boolean getIsDone() {
+    public boolean isDone() {
         return this.isDone;
     }
 
     /**
-     * Generate details of a task - description, done.
+     * Generates details of a task - description, done.
      * @return String output for a task.
      */
     @Override

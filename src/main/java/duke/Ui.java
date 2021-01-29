@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.Task;
+
 import java.util.List;
 
 /**
@@ -15,14 +16,14 @@ public class Ui {
     }
 
     /**
-     * Print the horizontal divider line to separate different commands and output.
+     * Prints the horizontal divider line to separate different commands and output.
      */
     public void printDivider() {
         System.out.println("    _________________________________________________");
     }
 
     /**
-     * Print a welcome message when the Duke application starts up.
+     * Prints a welcome message when the Duke application starts up.
      */
     public void welcome() {
         String logo = "   ____        _        \n"
@@ -38,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * Print a goodbye message when the user terminates the Duke application.
+     * Prints a goodbye message when the user terminates the Duke application.
      */
     public void exit() {
         printDivider();
@@ -47,14 +48,14 @@ public class Ui {
     }
 
     /**
-     * Print an error message when no folder for the file can be found.
+     * Prints an error message when no folder for the file can be found.
      */
     public void printLoadingError() {
         System.out.println("\n     No existing folder found! Created a new folder. :)");
     }
 
     /**
-     * Print the list of existing tasks when user input "list" command.
+     * Prints the list of existing tasks when user input "list" command.
      * @param list List of existing tasks.
      */
     public void printTaskList(List<Task> list) {
@@ -75,7 +76,7 @@ public class Ui {
     }
 
     /**
-     * Print a validation message when user adds a new Task to the list.
+     * Prints a validation message when user adds a new Task to the list.
      * @param newTask New Task added by the user.
      * @param list List of existing tasks.
      */
@@ -88,7 +89,7 @@ public class Ui {
     }
 
     /**
-     * Print a validation message when user marks a Task as done.
+     * Prints a validation message when user marks a Task as done.
      * @param taskNumber Number of the task that the user wants to mark as done.
      * @param list List of existing tasks.
      */
@@ -100,7 +101,7 @@ public class Ui {
     }
 
     /**
-     * Print a validation message when user deletes a task frp, the list.
+     * Prints a validation message when user deletes a task frp, the list.
      * @param taskNumber Number of the task that the user wants to delete.
      * @param list List of existing tasks.
      */
@@ -108,7 +109,8 @@ public class Ui {
         printDivider();
         System.out.println("     Noted. I've removed this task:\n"
                 + "        " + list.get(taskNumber)
-                + "\n     Now you have " + (list.size() - 1) + " tasks in the list.");
+                + "\n     Now you have " + (list.size() - 1)
+                + " tasks in the list.");
         printDivider();
     }
 }
