@@ -61,7 +61,7 @@ public class FileAccessor {
         String taskToWrite = "";
         for (Task task : tasks) {
             String done = "0";
-            if(task.isDone) {
+            if (task.isDone) {
                 done = "1";
             }
             if (task instanceof Todo) {

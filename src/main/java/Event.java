@@ -16,7 +16,7 @@ public class Event extends Task {
         this.task = split[0].trim();
         String trimmed = split[1].trim();
         String[] split1 = trimmed.split(" ");
-        if(split1.length != 2) {
+        if (split1.length != 2) {
             throw new ArrayIndexOutOfBoundsException(Ui.lineGetter() + " Enter date and time "
                     + "in this format yyyy-mm-dd hh:mm\n" + Ui.lineGetter());
         }
