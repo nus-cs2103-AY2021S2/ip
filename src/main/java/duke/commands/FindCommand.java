@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Searches (case-sensitive) for tasks containing a search term.
