@@ -1,0 +1,5 @@
+todo | not done | a
+todo | not done | b
+todo | not done | c
+deadline | not done | return book  | 2/12/2019 1800
+deadline | not done | return book  | 2/12/2019 1800

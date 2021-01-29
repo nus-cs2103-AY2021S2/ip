@@ -12,6 +12,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
+import ssagit.ui.ConsoleUI;
+
 public class Duke {
     /**
      * Exception class for missing todoTask descriptor
@@ -29,32 +31,6 @@ public class Duke {
         public UnknownInputParamException(String errorMessage) {
             super(errorMessage);
         }
-    }
-
-    /**
-     * Duke speaks in chat boxes
-     *
-     * @param str input string within chat boxes
-     */
-    static void formatBox(String str) {
-        System.out.println("------------------------------------");
-        System.out.println(str);
-        System.out.println("------------------------------------");
-    }
-
-    /**
-     * Prints the tasks in the array of tasks
-     * @param taskArr array of Task objects
-     */
-    static void list(Task[] taskArr) {
-        System.out.println("+++++++++++++++++++++++++++++++++++++");
-        System.out.println("Here are the tasks in your list: ");
-        System.out.println("TaskType | isDone | taskName | time (if any)");
-        for (Task t : taskArr) {
-            if (t == null) break;
-            System.out.println(t.toString());
-        }
-        System.out.println("+++++++++++++++++++++++++++++++++++++");
     }
 
     /**
@@ -129,17 +105,12 @@ public class Duke {
 
     public static void main(String[] args) {
         try {
-            String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-            System.out.println("Hello from\n" + logo);
-            String introduction = "I'm Duke!\nWhat can I do for ya?\n";
-            formatBox(introduction);
+            /** Handler for all UI stuff */
+            ConsoleUI ui = new ConsoleUI(System.in);
+            ui.introduction();
 
             // inits
-            Scanner sc = new Scanner(System.in);
+            // Scanner sc = new Scanner(System.in);
             Task[] taskArr = new Task[100];
             String input;
             // date init
@@ -156,16 +127,17 @@ public class Duke {
             int taskIterator = readTaskListToArray(taskArr, relativePath, validator);
             FileWriter fw = new FileWriter(absolutePath.toString());
             while (true) {
-                input = sc.nextLine();
+                input = ui.nextLine();
                 String inputArr[] = input.split(" ");
                 if (inputArr[0].equals("bye"))
                     break;
                 else if (inputArr[0].equals("list")) {
-                    list(taskArr);
+                    ui.list(taskArr);
                 } else if (inputArr[0].equals("done")) {
                     int taskNum = Integer.parseInt(inputArr[1]) - 1;
                     taskArr[taskNum].markDone();
-                    formatBox("Nice! I've marked this task as done:\n" + taskArr[taskNum].toFormattedString());
+                    // ui.formatBox("Nice! I've marked this task as done:\n" + taskArr[taskNum].toFormattedString());
+                    ui.markDone(taskArr[taskNum].toFormattedString());
                 } else if (inputArr[0].equals("todo") || inputArr[0].equals("event") ||
                         inputArr[0].equals("deadline")) {
                     // add to list
@@ -197,10 +169,14 @@ public class Duke {
                     }
                     taskIterator++; // increase task count in list
                     // print output
+                    /*
                     String formattedInput = "Got it. I've added this task:\n  ";
                     formattedInput = formattedInput.concat(taskArr[taskIterator - 1].toFormattedString()).concat("\n");
                     formattedInput = formattedInput.concat("Now you have " + taskIterator + " tasks in the list.");
-                    formatBox(formattedInput);
+                    ui.formatBox(formattedInput);
+                    */
+                    /** show message to user when task is added */
+                    ui.addTaskMessage(taskArr[taskIterator - 1].toFormattedString(), taskIterator);
 
                     // add new task to file
                     fw.append(taskArr[taskIterator - 1].toOutputFileString() + "\n");
@@ -208,10 +184,13 @@ public class Duke {
                 } else if (inputArr[0].equals("delete")) {
                     int removeIndex = Integer.parseInt(inputArr[1]);
                     taskIterator--; // reduce task count in list
+                    /*
                     String formattedInput = "Got it. I've removed this task:\n  ";
                     formattedInput = formattedInput.concat(taskArr[removeIndex - 1].toFormattedString()).concat("\n");
                     formattedInput = formattedInput.concat("Now you have " + taskIterator + " tasks in the list.");
-                    formatBox(formattedInput);
+                    ui.formatBox(formattedInput);
+                    */
+                    ui.deleteTaskMessage(taskArr[removeIndex - 1].toFormattedString(), taskIterator);
                     // actually delete the task and move all other tasks forward
                     for (int i = removeIndex - 1; i < taskArr.length - 1; i++) {
                         taskArr[i] = taskArr[i + 1];
@@ -227,8 +206,7 @@ public class Duke {
             recreateFile(taskArr, fw, absolutePath);
             fw.flush();
             fw.close();
-            String bye = "Bye. Hope to see you again soon!";
-            formatBox(bye);
+            ui.bye();
         } catch (MissingTodoDescriptorException e) {
             System.out.println(e.getMessage());
         } catch (UnknownInputParamException e) {
