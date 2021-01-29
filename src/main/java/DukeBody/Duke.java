@@ -30,6 +30,7 @@ public class Duke {
 
         user_active: while (true) {
             String command = scanner.next();
+            int taskIndex;
 
             this.ui.brace();
             try {
@@ -58,9 +59,15 @@ public class Duke {
                         break;
 
                     case "done":
-                        int taskIndex = scanner.nextInt();
+                        taskIndex = scanner.nextInt() - 1;
                         this.tasks.markAsDone(taskIndex);
                         this.ui.markedAsDone(this.tasks.get(taskIndex));
+                        break;
+
+                    case "delete":
+                        taskIndex = scanner.nextInt() - 1;
+                        Task task = this.tasks.remove(taskIndex);
+                        this.ui.removedTask(this.tasks, task);
                         break;
 
                     default:
