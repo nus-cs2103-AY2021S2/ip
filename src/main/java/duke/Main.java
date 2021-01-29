@@ -1,10 +1,13 @@
  package duke;
 
  import duke.command.Statement;
- import duke.exception.DukeException;
  import duke.command.Command;
+
  import duke.storage.Storage;
+
  import duke.task.TaskList;
+
+ import duke.exception.DukeException;
 
  public class Main {
 

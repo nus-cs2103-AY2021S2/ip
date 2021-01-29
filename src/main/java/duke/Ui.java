@@ -109,12 +109,12 @@ public class Ui {
      * @param list The list storing the tasks.
      */
     public void showList(List<Task> list) {
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             System.out.println("There is currently no task in the list.");
-        }else{
+        } else {
             System.out.println("Here are the tasks in your list:");
             int index = 1;
-            for(Task t: list){
+            for (Task t: list) {
                 System.out.println(index + "." + t);
                 index++;
             }

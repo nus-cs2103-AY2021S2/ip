@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+
 import duke.task.Task;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class Storage {
      * @param modifiedResult String to be write into the data file.
      * @throws DukeException If an I/O error occurs.
      */
-    public void save(String modifiedResult) throws DukeException{
+    public void save(String modifiedResult) throws DukeException {
         DukeFileWriter fw = new DukeFileWriter();
 
         fw.writeFile(filePath, modifiedResult);

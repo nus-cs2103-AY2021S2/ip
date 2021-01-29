@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Deadline extends from class Task and representing a task
  * that must be completed before a particular time/date.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private final String preposition;
     private final LocalDate date;
 
@@ -38,8 +38,9 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String dateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
         return String.format("[D][%s] %s (%s %s)", getStatusIcon(), description, preposition, dateStr);
     }
 }

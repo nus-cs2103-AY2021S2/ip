@@ -1,8 +1,11 @@
 package duke.command;
 
 import duke.exception.DukeException;
+
 import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.Ui;
 
 import java.time.LocalDate;
@@ -52,8 +55,9 @@ public abstract class Command {
         }
     }
 
+
     private boolean checkEquality(String s1, String s2) {
-        if(s1 == null) {
+        if (s1 == null) {
             return s2 == null;
         } else {
             if (s2 == null) {
@@ -65,7 +69,7 @@ public abstract class Command {
     }
 
     private boolean checkEqualityDate(LocalDate d1, LocalDate d2) {
-        if(d1 == null) {
+        if (d1 == null) {
             return d2 == null;
         } else {
             if (d2 == null) {

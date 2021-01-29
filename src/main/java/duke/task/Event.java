@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Event extends from class Task and represent a task
  * that is happening in a particular time/date.
  */
-public class Event extends Task{
+public class Event extends Task {
     private final String preposition;
     private final LocalDate date;
 
@@ -38,8 +38,9 @@ public class Event extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String dateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
         return String.format("[E][%s] %s (%s %s)", getStatusIcon(), description, preposition, dateStr);
     }
 }

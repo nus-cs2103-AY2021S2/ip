@@ -1,9 +1,12 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+
+import duke.exception.DukeException;
+
+import duke.storage.Storage;
+
+import duke.task.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -48,14 +51,14 @@ public class AddCommand extends Command{
 
     private Task getCorrectTask() {
         switch(command) {
-            case "todo":
-                return new Todo(description);
-            case "event":
-                return new Event(description, preposition, date);
-            case "deadline":
-                return new Deadline(description, preposition, date);
-            default:
-                return null;
+        case "todo":
+            return new Todo(description);
+        case "event":
+            return new Event(description, preposition, date);
+        case "deadline":
+            return new Deadline(description, preposition, date);
+        default:
+            return null;
         }
     }
 }
