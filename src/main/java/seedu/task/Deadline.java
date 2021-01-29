@@ -3,14 +3,27 @@ package seedu.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task in the application.
+ * This extends the {@code Task} class.
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Creates an instance of {@code Deadline}.
+     *
+     * @param description The deadline description.
+     * @param deadline The date and time of the deadline.
+     */
     public Deadline(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
+    /**
+     * Returns {@code String} representation of this {@code Deadline}.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "

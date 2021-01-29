@@ -1,5 +1,8 @@
 package seedu.common;
 
+/**
+ * All the {@code String} constants commonly used in the application.
+ */
 public enum PrintText {
     LOGO {
         @Override

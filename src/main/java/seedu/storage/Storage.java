@@ -1,9 +1,6 @@
 package seedu.storage;
 
-import seedu.task.Deadline;
-import seedu.task.Event;
-import seedu.task.Task;
-import seedu.task.Todo;
+import seedu.task.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,11 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Handles storing and loading of application data from local file.
+ * All {@code Task}s are stored and read from this file.
+ */
 public class Storage {
     // source: https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
     // inserts correct file path separator on *nix and Windows
-    private static Path dataPath;
+    private Path dataPath;
 
+    /**
+     * Creates an instance of {@code Storage}.
+     *
+     * @param filePath The path to the file where all the tasks are to be stored.
+     */
     public Storage(String filePath) {
 
         String[] filePathSplit = filePath.split("(?:.(?!/))+$", 2);
@@ -37,13 +43,20 @@ public class Storage {
         this.dataPath = Paths.get(filePath);
     }
 
-    // why does this have to be static??
-    public static void saveData(String taskList) {
+    /**
+     * Saves all the tasks to the local file.
+     * Overwrites the file everytime this method executes.
+     *
+     * @param taskList The {@code TaskList} of containing all the tasks to be saved.
+     */
+    public void saveData(TaskList taskList) {
         try {
             // save all tasks again if task.TaskList has tasks
-            if (taskList.length() > 0) {
-                // splitting by "  %d. [" incase the task description uses periods and digits as well
-                ArrayList<String> tasksWithoutIndex = new ArrayList<>(List.of(taskList.split("  \\d. \\[")));
+            if (taskList.hasTasks()) {
+                String taskListToString = taskList.toString();
+                // splitting by "  %d. [" in case the task description uses periods and digits as well
+                ArrayList<String> tasksWithoutIndex = new ArrayList<>(
+                        List.of(taskListToString.split("  \\d. \\[")));
                 String toSave = tasksWithoutIndex.stream()
                         .reduce((a, b) -> a + b)
                         .get();
@@ -64,6 +77,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads all the tasks from the local file.
+     *
+     * @throws IOException If there is nothing stored.
+     */
     public ArrayList<Task> load() throws IOException {
         return Files.readAllLines(dataPath,
                 StandardCharsets.UTF_8)

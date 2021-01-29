@@ -15,19 +15,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 
+/**
+ * Handles application logic.
+ */
 public class OlafApp {
     private TaskList taskList;
     private Ui ui;
+    private Storage storage;
     private boolean isActive;
 
-    OlafApp(TaskList tasks) {
+    /**
+     * Creates an instance of {@code OlafApp}.
+     *
+     * @param tasks All the tasks stored.
+     * @param ui A {@code Ui} instance to handle test output.
+     * @param storage A {@code Storage} instance to handle saving and loading tasks from local file.
+     */
+    OlafApp(TaskList tasks, Ui ui, Storage storage) {
         this.taskList = tasks;
-        this.ui = new Ui();
+        this.ui = ui;
+        this.storage = storage;
         this.isActive = true;
     }
 
-    // todo: break this down into more methods...?
+    /**
+     * Executes each session of the application.
+     */
     public void run() {
+        // todo: break this down into more methods...?
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println(PrintText.WELCOME_MESSAGE);
@@ -61,7 +76,7 @@ public class OlafApp {
                     int id = Parser.parseIntParameter(command);
                     taskList.markTaskAsDone(id);
 
-                    Storage.saveData(taskList.toString());
+                    storage.saveData(taskList);
 
                     ui.showDoneSuccess(id, taskList.getTask(id), taskList.getTotalNumberOfTasksUndone());
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -74,7 +89,7 @@ public class OlafApp {
                     int id = Parser.parseIntParameter(command);
                     Task deleted = taskList.deleteTask(id);
 
-                    Storage.saveData(taskList.toString());
+                    storage.saveData(taskList);
 
                     ui.showDeleteSuccess(id, deleted, taskList.getTotalNumberOfTasks());
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -88,7 +103,7 @@ public class OlafApp {
                     Todo newTodo = new Todo(expression);
                     taskList.addTask(newTodo);
 
-                    Storage.saveData(taskList.toString());
+                    storage.saveData(taskList);
 
                     ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                             newTodo, taskList.getTotalNumberOfTasksUndone());
@@ -106,7 +121,7 @@ public class OlafApp {
                     Deadline newDeadline = new Deadline(description, deadline);
                     taskList.addTask(newDeadline);
 
-                    Storage.saveData(taskList.toString());
+                    storage.saveData(taskList);
 
                     ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                             newDeadline, taskList.getTotalNumberOfTasksUndone());
@@ -129,7 +144,7 @@ public class OlafApp {
                     Event newEvent = new Event(description, startDateTime, endDateTime);
                     taskList.addTask(newEvent);
 
-                    Storage.saveData(taskList.toString());
+                    storage.saveData(taskList);
 
                     ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                             newEvent, taskList.getTotalNumberOfTasksUndone());
@@ -148,6 +163,6 @@ public class OlafApp {
 
     private void stop() {
         isActive = false;
-        ui.formatResponse("  Aww hope to see you soon, goodbye!\n");
+        ui.showFormatResponse("  Aww hope to see you soon, goodbye!\n");
     }
 }
