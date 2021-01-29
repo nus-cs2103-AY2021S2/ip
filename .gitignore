@@ -32,3 +32,4 @@ text-ui-test/Test_8/ACTUAL_OK_8.TXT
 text-ui-test/Test_1/tasks.txt
 src/main/java/tasks.txt
 text-ui-test/Test_5/tasks.txt
+text-ui-test/runtest.sh
