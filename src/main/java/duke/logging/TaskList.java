@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -36,9 +35,12 @@ public class TaskList {
                 || (type.equals("event")) && !taskDescription.contains("/at")) {
             throw new InvalidDescriptionException("☹ OOPS!!! The description format of " + type + " is wrong.");
         } else {
-            int index = type.equals("deadline") ? taskDescription.indexOf("/by") : taskDescription.indexOf("/at");
+            int index = type.equals("deadline")
+                    ? taskDescription.indexOf("/by")
+                    : taskDescription.indexOf("/at");
             String taskName = taskDescription.substring(0, index);
-            String dateTimeString = taskDescription.substring(index + 4).strip().replace("/", "-");
+            String dateTimeString = taskDescription.substring(index + 4).strip()
+                    .replace("/", "-");
             LocalDate dateTime = LocalDate.parse(dateTimeString);
 
             if (type.equals("deadline")) {
@@ -62,8 +64,8 @@ public class TaskList {
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
         } catch (IndexOutOfBoundsException ex) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big " +
-                    "or smaller than 0. There are currently " + tasks.size() + " tasks");
+            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big "
+                    + "or smaller than 0. There are currently " + tasks.size() + " tasks");
         }
     }
 
@@ -77,8 +79,25 @@ public class TaskList {
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
         } catch (IndexOutOfBoundsException ex) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big " +
-                    "or smaller than 0. There are currently " + tasks.size() + " tasks");
+            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big "
+                    + "or smaller than 0. There are currently " + tasks.size() + " tasks");
+        }
+    }
+
+    public void find(String taskDescription, Ui ui) throws InvalidDescriptionException {
+        if (taskDescription.length() == 0) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The description cannot be empty.");
+        }
+        System.out.println(taskDescription.length());
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.containSubstring(taskDescription.strip())) {
+                matchingTasks.add(task);
+            }
+        }
+        ui.findCommandInteraction(matchingTasks);
+        for (Task task: matchingTasks) {
+            System.out.println("     " + task);
         }
     }
 }

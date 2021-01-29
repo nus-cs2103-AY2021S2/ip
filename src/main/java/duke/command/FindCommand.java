@@ -1,21 +1,23 @@
 package duke.command;
 
+import duke.exception.InvalidDescriptionException;
 import duke.logging.Storage;
 import duke.logging.TaskList;
 import duke.logging.Ui;
 
-public class DeleteCommand extends Command {
-    public DeleteCommand(String taskDescription) {
+public class FindCommand extends Command {
+    public FindCommand(String taskDescription) {
         super(taskDescription);
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            storage.overwrite(taskList.delete(taskDescription, ui));
-        } catch (Exception ex) {
+            taskList.find(taskDescription, ui);
+        } catch (InvalidDescriptionException ex) {
             System.out.println("     " + ex.getMessage());
         }
+
     }
 
     @Override

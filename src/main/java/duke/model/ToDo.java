@@ -1,8 +1,8 @@
 package duke.model;
 
 public class ToDo extends Task {
-    public ToDo(Boolean markAsDone, String taskName) {
-        super('T', markAsDone, taskName);
+    public ToDo(Boolean isCompleted, String taskName) {
+        super('T', isCompleted, taskName);
     }
 
     @Override

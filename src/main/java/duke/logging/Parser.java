@@ -17,6 +17,8 @@ public class Parser {
             return new DoneCommand(taskDescription);
         } else if (type.equals("delete")) {
             return new DeleteCommand(taskDescription);
+        } else if (type.equals("find")) {
+            return new FindCommand(taskDescription);
         } else {
             return new UnknownCommand(taskDescription);
         }
