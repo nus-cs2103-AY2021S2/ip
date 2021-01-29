@@ -37,17 +37,35 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Changes the task state to be finished.
+     *
+     * @return new finished Event task.
+     */
     @Override
     public Event finishTask() {
         return new Event(description, start, end, true);
     }
 
+    /**
+     * Return string of deadline name and info.
+     * Format is for saving task into text file.
+     *
+     * @return string format of task's info.
+     */
     @Override
     public String saveTask() {
         return String.format("E | %s | %s | %s-%s\n", super.getStatusIcon(),
                 description, super.timeFormat(start) , super.timeFormat(end));
     }
 
+
+    /**
+     * Returns string of event task name and info.
+     * Format is for the display on the list.
+     *
+     * @return string format of task's info.
+     */
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s - %s)", super.toString(),

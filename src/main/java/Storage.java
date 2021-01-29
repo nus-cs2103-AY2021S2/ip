@@ -9,6 +9,11 @@ public class Storage {
     private final static String PATHNAME = "C:/users/chian/Desktop/CS2103/ip/data/";
     private final static String FILENAME = "data.txt";
 
+    /**
+     * Writes file with tasks on list and saves.
+     *
+     * @param tasks string format of all tasks on list.
+     */
     public static void save(String tasks) {
         try {
             FileWriter fw = new FileWriter(PATHNAME + FILENAME);
@@ -19,6 +24,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load tasks stored in drive to task list.
+     *
+     * @param tl task list to contain stored tasks.
+     */
     public static void load(TaskList tl) {
         try {
             File f = new File(PATHNAME + FILENAME);

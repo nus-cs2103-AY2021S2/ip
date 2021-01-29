@@ -15,10 +15,22 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Return string logo for task's completion.
+     * 'X' is done. ' ' is not done.
+     *
+     * @return string logo.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * String for task date and timing.
+     *
+     * @param dateTime date and timing of task.
+     * @return String for task date and timing.
+     */
     public String timeFormat(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
     }

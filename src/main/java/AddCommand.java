@@ -7,6 +7,15 @@ public class AddCommand extends Command{
         this.taskInfo = taskInfo;
     }
 
+    /**
+     * Identify task type and create the task with the task info.
+     * Task is then added to the task list and stored on disk.
+     *
+     * @param tl task list.
+     * @param ui user interface object.
+     * @param storage storage of task list.
+     * @throws DukeException if task cannot be created.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         Task t = null;

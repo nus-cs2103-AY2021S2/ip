@@ -5,6 +5,14 @@ public class DoneCommand extends Command {
         this.taskNum = taskNum;
     }
 
+    /**
+     * Marks a task done of a specfic numbering.
+     * Print marked message and update drive.
+     *
+     * @param tl task list.
+     * @param ui object for user interface.
+     * @param storage objec to store and load task list.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) {
         Task t = tl.get(taskNum - 1);
