@@ -47,6 +47,9 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
+                if (list.size() == 0) {
+                    System.out.println("You have no tasks in the list!");
+                }
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println((i + 1) + "." + list.get(i));
                 }
