@@ -3,6 +3,7 @@ package duke.ui;
 import duke.storage.Storage;
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -53,12 +54,17 @@ public class Ui {
         showLine();
     }
 
-    public void showList(Storage storage) {
+    public void showList(ArrayList<Task> arrL) {
         showLine();
-        for (int i = 0; i < storage.getArrSize(); i++) {
-            System.out.println("   " + (i + 1) + ". " + storage.get(i));
+        if (arrL.isEmpty()) {
+            System.out.println("   No Tasks found!");
+        } else {
+            System.out.println("   Here are the results!");
+            for (int i = 0; i < arrL.size(); i++) {
+                System.out.println("   " + (i + 1) + ". " + arrL.get(i));
+            }
+            showLine();
         }
-        showLine();
     }
 
     public void showDone(Task task) {
