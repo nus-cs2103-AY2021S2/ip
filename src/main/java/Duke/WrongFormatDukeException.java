@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class WrongFormatDukeException extends DukeException {
     private final String todo = "todo (task description)";
@@ -8,6 +8,7 @@ public class WrongFormatDukeException extends DukeException {
     private final String delete = "delete (valid index)";
     private final String list = "list";
     private final String help = "help";
+    private final String FIND = "find (keyword)";
     private String command;
 
     public WrongFormatDukeException(String command) {
@@ -31,6 +32,8 @@ public class WrongFormatDukeException extends DukeException {
             str += list;
         } else if (command.equals("help")) {
             str += help;
+        } else if (command.equals("find")) {
+            str += FIND;
         }
         return str;
     }

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.Scanner;
 
@@ -51,6 +51,8 @@ public class Duke {
                 cmd = new DeleteTaskCommand(command, input, tasks);
             } else if (command.equals("help")) {
                 cmd = new HelpCommand(command, input, tasks);
+            } else if (command.equals("find")) {
+                cmd = new FindCommand(command, input, tasks);
             } else {
                 throw new WrongCommandDukeException();
             }

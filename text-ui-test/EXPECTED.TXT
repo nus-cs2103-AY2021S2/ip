@@ -1,4 +1,4 @@
-Hello! I'm Duke
+Hello! I'm duke
 How can I help you sir/maam?
 DukeException: Please describe the nature of your task sir/maam.
 Understood. I have added this task to the list:

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Ui {
     private final String spacer = "----------------------------------------------------";
@@ -77,6 +77,16 @@ public class Ui {
         System.out.println("'delete (valid index)' (removes a task from your list)");
         System.out.println("Do omit the parentheses in the actual command.");
         System.out.println("I pray that I will be of use to you.");
+        printSpacer();
+    }
+
+    public void printFoundTaskList(TaskList taskList) {
+        printSpacer();
+        System.out.println("Here are the tasks that fit your search criteria:");
+        for (int i = 1; i <= taskList.size(); i++) {
+            System.out.println(String.format("%d. ", i) + taskList.getTask(i - 1).toString());
+        }
+        System.out.println("I can only pray that I have been of use to you.");
         printSpacer();
     }
 }

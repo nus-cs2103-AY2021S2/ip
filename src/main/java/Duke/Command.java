@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public abstract class Command {
     protected final String command;
