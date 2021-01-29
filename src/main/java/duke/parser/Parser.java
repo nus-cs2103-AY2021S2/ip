@@ -11,7 +11,17 @@ import duke.commands.ExitCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
 
+/**
+ * Parses Duke commands.
+ */
 public class Parser {
+    /**
+     * Parses the raw input string and returns an appropriate command. If the command is invalid, an InvalidCommand
+     * is returned.
+     *
+     * @param rawInput The string of user input.
+     * @return The relevant command.
+     */
     public Command parseCmd(String rawInput) {
         String cmd = rawInput.trim();
 

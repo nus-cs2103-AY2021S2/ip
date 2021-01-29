@@ -7,6 +7,9 @@ import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.TaskList;
 
+/**
+ * Adds an event to the task list.
+ */
 public class AddEventCommand extends Command {
     private static final Pattern ADD_EVENT_KEYWORD = Pattern.compile("(?i)event\\b");
     private static final Pattern ADD_EVENT_DESC = Pattern.compile("(?i)event\\s+(\\w.*)");
@@ -20,10 +23,24 @@ public class AddEventCommand extends Command {
         this.period = period;
     }
 
+    /**
+     * Returns true if the input string starts with the keyword event. False otherwise.
+     *
+     * @param input Command as a string.
+     * @return true if the input string starts with the keyword event. False otherwise.
+     */
     public static boolean isAddEventCommand(String input) {
         return ADD_EVENT_KEYWORD.matcher(input).find();
     }
 
+    /**
+     * Parses the input command string as an add event command and returns an AddEventCommand if successful.
+     * Throws a DukeException with a relevant message if parsing fails.
+     *
+     * @param input Command as a string.
+     * @return The parsed AddEventCommand.
+     * @throws DukeException If parsing fails.
+     */
     public static AddEventCommand parseAddEventCommand(String input) throws DukeException {
         // check description exists
         Matcher descMatcher = ADD_EVENT_DESC.matcher(input);
@@ -45,6 +62,13 @@ public class AddEventCommand extends Command {
         return new AddEventCommand(taskDesc, period);
     }
 
+    /**
+     * Adds an event to tasks and returns a CommandResult indicating success.
+     *
+     * @param tasks The task list to add to.
+     * @param storage The storage used by Duke (unused).
+     * @return A CommandResult indicating success.
+     */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         Event event = new Event(taskDesc, period);

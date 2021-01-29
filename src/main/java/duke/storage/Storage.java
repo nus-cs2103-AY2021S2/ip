@@ -7,15 +7,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Abstracts saving and loading a string to and from a file.
+ */
 public class Storage {
     private final Path dirPath;
     private final Path filePath;
 
+    /**
+     * Constructs a Storage with the given file path.
+     *
+     * @param path The file path to use for saving and loading.
+     */
     public Storage(String path) {
         filePath = Path.of(path).toAbsolutePath();
         dirPath = filePath.getParent();
     }
 
+    /**
+     * Attempts to load text from the configured file path. Throws a StorageException if it fails to load.
+     *
+     * @return The text read from the configured file path.
+     * @throws StorageException If it fails to load.
+     */
     public String load() throws StorageException {
         try {
             return Files.readString(filePath);
@@ -24,6 +38,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Attempts to save text to the configured file path. Throws a StorageException if it fails to save.
+     * If the configured file path specifies non-existent folders or a non-existent file, this method
+     * attempts to create them.
+     *
+     * @param data The text to be saved.
+     * @throws StorageException If it fails to save.
+     */
     public void save(String data) throws StorageException {
         // Solution below adapted from https://tinyurl.com/y35nn2nl
         // create folders if necessary

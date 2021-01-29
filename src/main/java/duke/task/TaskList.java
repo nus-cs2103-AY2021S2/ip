@@ -4,13 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private final List<Task> tasks;
 
+    /**
+     * Constructs an empty task list.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Attempts to construct a task list by parsing the input string. Throws a TaskParseException if parsing fails.
+     *
+     * @param serialized The task list in serialized form.
+     * @throws TaskParseException If parsing fails.
+     */
     public TaskList(String serialized) throws TaskParseException {
         tasks = deserialize(serialized);
     }
@@ -39,18 +51,39 @@ public class TaskList {
         return ts;
     }
 
+    /**
+     * Adds a task to the list.
+     *
+     * @param t The task to add.
+     */
     public void add(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Returns the task at the given index.
+     *
+     * @param index The task index.
+     * @return The task at index.
+     */
     public Task getAt(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Removes the task at the given index.
+     *
+     * @param index The index of the task to remove.
+     */
     public void removeAt(int index) {
         tasks.remove(index);
     }
 
+    /**
+     * Returns a serialized string of this task list.
+     *
+     * @return A serialized string of this task list.
+     */
     public String serialize() {
         StringBuilder serial = new StringBuilder();
         for (Task t : tasks) {
@@ -59,6 +92,11 @@ public class TaskList {
         return serial.toString();
     }
 
+    /**
+     * Returns the number of tasks in this list.
+     *
+     * @return The number of tasks in this list.
+     */
     public int taskCount() {
         return tasks.size();
     }
