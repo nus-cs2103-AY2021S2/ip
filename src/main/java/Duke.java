@@ -1,10 +1,18 @@
-public class Duke {
-    UI ui;
-    Tasks taskList;
+import java.io.IOException;
 
-    public Duke(){
+public class Duke {
+    private UI ui;
+    private Tasks taskList;
+    private Storage storage;
+
+    public Duke(String path) throws IOException {
         ui = new UI();
-        taskList = new Tasks();
+        storage = new Storage(path);
+        try{
+            taskList = storage.load();
+        }catch(Exception e) {
+            taskList = new Tasks();
+        }
         ui.greetings();
     }
 
@@ -45,8 +53,8 @@ public class Duke {
         }
     }
     //Main method where duke is initialized
-    public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke();
+    public static void main(String[] args) throws DukeException, IOException {
+        Duke duke = new Duke("data/duke.txt");
         duke.process();
     }
 }
