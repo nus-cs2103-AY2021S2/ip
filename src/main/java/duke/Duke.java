@@ -1,12 +1,12 @@
-package Duke;
+package duke;
 
 import java.util.Scanner;
 
 public class Duke {
-    public TaskList tasks;
-    public Storage storage;
-    public Ui ui;
-    public Parser parser;
+    private TaskList tasks;
+    private Storage storage;
+    private Ui ui;
+    private Parser parser;
 
     public Duke() {
         this.tasks = new TaskList();
@@ -20,7 +20,7 @@ public class Duke {
         duke.run();
     }
 
-    public void run() {
+    private void run() {
         ui.printGreeting();
         storage.loadTaskList(tasks);
         Scanner sc = new Scanner(System.in);
@@ -37,7 +37,7 @@ public class Duke {
         }
     }
 
-    public void executeCommand(String input) {
+    private void executeCommand(String input) {
         String command = parser.parseCommand(input);
         Command cmd = null;
         try {
@@ -61,9 +61,9 @@ public class Duke {
         tasks = cmd.getTaskList();
     }
 
-    public void save() {
+    private void save() {
         String str = "";
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.getSize(); i++) {
             str += tasks.getTask(i).formatToSave() + "\n";
         }
         storage.saveTaskList(str);

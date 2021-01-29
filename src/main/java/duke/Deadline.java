@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +16,7 @@ public class Deadline extends Task {
     @Override
     public String formatToSave() {
         String str = "D | ";
-        if (done) {
+        if (isDone) {
             str += "X |";
         } else {
             str += "O |";
@@ -28,7 +28,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String str = "[D]";
-        if (done) {
+        if (isDone) {
             str += CHECKED;
         } else {
             str += UNCHECKED;

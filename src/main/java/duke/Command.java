@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public abstract class Command {
     protected final String command;
@@ -7,7 +7,7 @@ public abstract class Command {
     protected Ui ui;
     protected Parser parser;
 
-    Command(String command, String input, TaskList taskList) {
+    public Command(String command, String input, TaskList taskList) {
         this.command = command;
         this.input = input;
         this.taskList = taskList;

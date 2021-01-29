@@ -1,14 +1,14 @@
-package Duke;
+package duke;
 
 public class HelpCommand extends Command {
 
-    HelpCommand(String command, String input, TaskList taskList) {
+    public HelpCommand(String command, String input, TaskList taskList) {
         super(command, input, taskList);
     }
 
     public void help() {
         try {
-            if (parser.isCorrectHelp(input)) {
+            if (parser.canParseHelpCommand(input)) {
                 ui.printHelp();
             } else {
                 throw new WrongFormatDukeException(command);

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Todo extends Task {
     private String description;
@@ -11,7 +11,7 @@ public class Todo extends Task {
     @Override
     public String formatToSave() {
         String str = "T | ";
-        if (done) {
+        if (isDone) {
             str += "X |";
         } else {
             str += "O |";
@@ -23,7 +23,7 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String str = "[T]";
-        if (done) {
+        if (isDone) {
             str += CHECKED;
         } else {
             str += UNCHECKED;

@@ -1,10 +1,11 @@
-package Duke;
+package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    public LocalDateTime parseDate(String date) {
+
+    private LocalDateTime parseDate(String date) {
         LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/M/yyyy Hmm"));
         return dateTime;
     }
@@ -14,7 +15,7 @@ public class Parser {
         return command[0];
     }
 
-    public boolean isCorrectTodo(String input) {
+    public boolean canParseTodo(String input) {
         String[] command = input.split(" ");
         if (command.length == 1) {
             return false;
@@ -25,7 +26,7 @@ public class Parser {
         }
     }
 
-    public String parseTodoDescripton(String input) {
+    public String parseTodoDescription(String input) {
         String[] command = input.split(" ");
         String description = "";
         for (int i = 1; i < command.length; i++) {
@@ -34,7 +35,7 @@ public class Parser {
         return description;
     }
 
-    public boolean isCorrectDeadline(String input) {
+    public boolean canParseDeadline(String input) {
         String[] command = input.split(" ");
         if (command.length == 1) {
             return false;
@@ -60,7 +61,7 @@ public class Parser {
         return parseDate(details[1]);
     }
 
-    public boolean isCorrectEvent(String input) {
+    public boolean canParseEvent(String input) {
         String[] command = input.split(" ");
         if (command.length == 1) {
             return false;
@@ -98,7 +99,7 @@ public class Parser {
         return parseDate(dates[1]);
     }
 
-    public boolean isCorrectList(String input) {
+    public boolean canParseListCommand(String input) {
         if (input.equals("list") || input.equals("list ")) {
             return true;
         } else {
@@ -106,7 +107,7 @@ public class Parser {
         }
     }
 
-    public boolean isCorrectIndexCommand(String input, int size) {
+    public boolean canParseIndexCommand(String input, int size) {
         String[] command = input.split(" ");
         if (input.equals("done") || input.equals("done ")) {
             return false;
@@ -128,7 +129,7 @@ public class Parser {
         return index;
     }
 
-    public boolean isCorrectHelp(String input) {
+    public boolean canParseHelpCommand(String input) {
         if (input.equals("help") || input.equals("help ")) {
             return true;
         } else {
