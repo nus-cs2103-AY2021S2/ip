@@ -1,5 +1,3 @@
-package test;
-
 import controller.DukeException;
 import controller.Parser;
 import controller.TaskList;

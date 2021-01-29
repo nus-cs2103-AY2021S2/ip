@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Class for general tasks. Not instantiable as it is an abstract class.
  */
 public abstract class Task {
-    private String taskName;
+    private final String taskName;
     private boolean done;
 
     /**
