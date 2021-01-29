@@ -58,6 +58,11 @@ public class Duke {
                 case LIST:
                     ui.listTasks(taskList);
                     break;
+                case FIND:
+                    String keyword = parser.parseKeyword(input);
+                    TaskList matchingTasks = taskList.findMatchingTasks(keyword);
+                    ui.printMatchingTasks(matchingTasks);
+                    break;
                 case DONE:
                     int doneIndex = parser.parseDone(input, taskList);
                     Task doneTask = taskList.getTask(doneIndex);

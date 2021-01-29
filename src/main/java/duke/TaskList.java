@@ -64,4 +64,29 @@ public class TaskList implements Serializable  {
     public void deleteTask(int index) {
         this.tasks.remove(index);
     }
+
+    /**
+     * Returns a TaskList containing Tasks that
+     * have descriptions matching the String keyword.
+     * @param keyword the String keyword to be matched with Task descriptions.
+     * @return a TaskList containing matching Tasks.
+     */
+    public TaskList findMatchingTasks(String keyword) {
+        TaskList matchingTasks = new TaskList(new ArrayList<>());
+        for (Task task : tasks) {
+            String description = task.description;
+            String[] words = description.split(" ");
+            boolean isMatching = false;
+            for (String word : words) {
+                if (word.equals(keyword)) {
+                    isMatching = true;
+                    break;
+                }
+            }
+            if (isMatching) {
+                matchingTasks.addTask(task);
+            }
+        }
+        return matchingTasks;
+    }
 }

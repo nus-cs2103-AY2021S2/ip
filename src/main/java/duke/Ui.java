@@ -91,6 +91,27 @@ public class Ui {
     }
 
     /**
+     * Prints the details of all the Tasks in the TaskList,
+     * that matched a keyword input by the user,
+     * in numerical order.
+     * @param taskList the TaskList containing the matched Tasks to be printed.
+     */
+    public void printMatchingTasks(TaskList taskList) {
+        ArrayList<Task> tasks = taskList.getTasks();
+        if (tasks.isEmpty()) {
+            System.out.println("There are no matching tasks in your list. :(\n" + lineSpacing);
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int num = 1;
+            for (Task task : tasks) {
+                System.out.println(num + "." + task);
+                num++;
+            }
+            System.out.println(lineSpacing);
+        }
+    }
+
+    /**
      * Prints a message that signals
      * the termination of the Duke program.
      */

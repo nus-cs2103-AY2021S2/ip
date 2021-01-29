@@ -24,7 +24,7 @@ public class Parser {
         String[] arr = input.split(" ");
         try {
             return Command.valueOf(arr[0].toUpperCase());
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException illegalArgumentException) {
             throw new DukeException("OOPS!!! I'm sorry, but that is an invalid command :-(");
         }
     }
@@ -65,7 +65,7 @@ public class Parser {
         LocalDateTime deadlineDate;
         try {
             deadlineDate = LocalDateTime.parse(arr2[1], INPUT_DATETIME_FORMAT);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException dateTimeParseException) {
             throw new DukeException("OOPS!!! Please input date and time in the following format: dd-MM-yyyy HHmm.");
         }
         return new Deadline(arr2[0].substring(9), deadlineDate);
@@ -92,7 +92,7 @@ public class Parser {
         LocalDateTime eventDate;
         try {
             eventDate = LocalDateTime.parse(arr3[1], INPUT_DATETIME_FORMAT);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException dateTimeParseException) {
             throw new DukeException("OOPS!!! Please input date and time in the following format: dd-MM-yyyy HHmm.");
         }
         return new Event(arr3[0].substring(6), eventDate);
@@ -119,7 +119,7 @@ public class Parser {
                 throw new DukeException("OOPS!!! The numbered task does not exist.");
             }
             return argument - 1;
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException numberFormatException) {
             throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
         }
     }
@@ -145,8 +145,26 @@ public class Parser {
                 throw new DukeException("OOPS!!! The numbered task does not exist.");
             }
             return argument - 1;
-        } catch (NumberFormatException exception) {
+        } catch (NumberFormatException numberFormatException) {
             throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
         }
+    }
+
+    /**
+     * Returns a valid String keyword.
+     * @param input user input.
+     * @return a valid String keyword
+     * @throws DukeException when user enters more than one keyword
+     *         or none at all.
+     */
+    public String parseKeyword(String input) throws DukeException {
+        String[] arr = input.split(" ");
+        if (arr.length < 2) {
+            throw new DukeException("OOPS!!! Please enter a keyword.");
+        }
+        if (arr.length > 2) {
+            throw new DukeException("OOPS!!! Please enter only one keyword.");
+        }
+        return arr[1];
     }
 }
