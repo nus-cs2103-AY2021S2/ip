@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.ToDo;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AddToDoCommand extends Command {
     private static final Pattern ADD_TODO_KEYWORD = Pattern.compile("(?i)todo\\b");

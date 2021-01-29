@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.commands.CommandResult;
-
 import java.io.PrintStream;
 import java.util.Scanner;
+
+import duke.commands.CommandResult;
 
 public class TextUi implements Ui {
     private static final String COMMAND_PROMPT = "Type Command> ";

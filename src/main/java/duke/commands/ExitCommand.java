@@ -1,9 +1,9 @@
 package duke.commands;
 
+import java.util.regex.Pattern;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import java.util.regex.Pattern;
 
 public class ExitCommand extends Command {
     private static final Pattern EXIT_KEYWORD = Pattern.compile("(?i)bye\\b");
