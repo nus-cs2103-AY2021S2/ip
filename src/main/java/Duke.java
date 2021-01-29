@@ -54,7 +54,6 @@ public class Duke {
                     throw new DukeException("Oops!!! Invalid Input :(");
                 }
             }
-
         }
     }
 
