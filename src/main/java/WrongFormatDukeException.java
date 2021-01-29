@@ -1,7 +1,7 @@
 public class WrongFormatDukeException extends DukeException {
     private final String todo = "todo (task description)";
     private final String deadline = "deadline (task description) /by (DD/MM/YYYY TIME)";
-    private final String event = "event (task description) /at (DD/MM/YYYY TIME)";
+    private final String event = "event (task description) /from (DD/MM/YYYY TIME) /to (DD/MM/YYYY TIME)";
     private final String done = "done (valid index)";
     private final String delete = "delete (valid index)";
     private final String list = "list";

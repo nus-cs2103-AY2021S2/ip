@@ -39,12 +39,13 @@ public class Storage {
                         task = new Todo(input);
                         break;
                     case "D ":
-                        LocalDateTime dateTime = LocalDateTime.parse(taskArr[3].substring(4), DateTimeFormatter.ofPattern("dd-M-yyyy Hmm"));
+                        LocalDateTime dateTime = LocalDateTime.parse(taskArr[3].substring(4), DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
                         task = new Deadline(dateTime, taskArr[2].substring(0, taskArr[2].length() - 1));
                         break;
                     case "E ":
-                        LocalDateTime dateTimeStart = LocalDateTime.parse(taskArr[3].substring(4), DateTimeFormatter.ofPattern("dd-M-yyyy Hmm"));
-                        task = new Event(dateTimeStart, taskArr[2].substring(0, taskArr[2].length() - 1));
+                        LocalDateTime dateTimeStart = LocalDateTime.parse(taskArr[3].substring(6, taskArr[3].length() - 1), DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
+                        LocalDateTime dateTimeEnd = LocalDateTime.parse(taskArr[4].substring(4), DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
+                        task = new Event(dateTimeStart, dateTimeEnd, taskArr[2].substring(0, taskArr[2].length() - 1));
                         break;
                 }
                 if (task != null) {

@@ -70,7 +70,7 @@ public class Ui {
         System.out.println("'list' (shows the list of tasks you have on your list)");
         System.out.println("'todo (task description)' (adds a To Do task to your list)");
         System.out.println("'deadline (task description) /by (DD/MM/YYYY TIME)' (adds a Deadline task to your list)");
-        System.out.println("'event (task description) /at (DD/MM/YYYY TIME)' (adds an Event task to your list)");
+        System.out.println("'event (task description) /from (DD/MM/YYYY TIME) /to (DD/MM/YYYY TIME)' (adds an Event task to your list)");
         System.out.println("'done (valid index)' (checks a task on your list)");
         System.out.println("'delete (valid index)' (removes a task from your list)");
         System.out.println("Do omit the parentheses in the actual command.");

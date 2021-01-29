@@ -1,4 +1,5 @@
-T | X | work 
-D | O | fly | by: 11-7-2018 1900
-E | O | xmas | at: 25-12-2021 1800
-T | O | submit homework 
+T | O | work 
+E | O | work | from: 21-8-2020 0830 | to: 20-9-2020 1730
+D | O | work | by: 08-8-2021 1649
+D | X | work | by: 30-1-2021 1900
+E | O | work | from: 18-5-2021 1750 | to: 18-5-2021 1850

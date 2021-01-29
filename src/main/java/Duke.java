@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
@@ -40,78 +39,26 @@ public class Duke {
 
     public void executeCommand(String input) {
         String command = parser.parseCommand(input);
+        Command cmd = null;
         try {
-            if (command.equals("todo")) {
-                if (parser.isCorrectTodo(input)) {
-                    String description = parser.parseTodoDescripton(input);
-                    Task task = new Todo(description);
-                    tasks.addTask(task);
-                    ui.printAddTask(task, tasks.size());
-                } else {
-                    throw new WrongFormatDukeException(command);
-                }
-            } else if (command.equals("deadline")) {
-                if (parser.isCorrectDeadline(input)) {
-                    try {
-                        LocalDateTime dateTime = parser.parseDeadlineDate(input);
-                        String description = parser.parseDeadlineDescription(input);
-                        Deadline task = new Deadline(dateTime, description);
-                        tasks.addTask(task);
-                        ui.printAddTask(task, tasks.size());
-                    } catch (DateTimeParseException e) {
-                        ui.printError(new WrongFormatDukeException(command));
-                    }
-                } else {
-                    throw new WrongFormatDukeException(command);
-                }
-            } else if (command.equals("event")) {
-                if (parser.isCorrectEvent(input)) {
-                    try {
-                        LocalDateTime dateTime = parser.parseEventDate(input);
-                        String description = parser.parseEventDescription(input);
-                        Event task = new Event(dateTime, description);
-                        tasks.addTask(task);
-                        ui.printAddTask(task, tasks.size());
-                    } catch (DateTimeParseException e) {
-                        ui.printError(new WrongFormatDukeException(command));
-                    }
-                } else {
-                    throw new WrongFormatDukeException(command);
-                }
+            if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                cmd = new AddTaskCommand(command, input, tasks);
             } else if (command.equals("list")) {
-                if (parser.isCorrectList(input)) {
-                    ui.printTaskList(tasks);
-                } else {
-                    throw new WrongFormatDukeException(command);
-                }
+                cmd = new ListTaskCommand(command, input, tasks);
             } else if (command.equals("done")) {
-                if (parser.isCorrectIndexCommand(input, tasks.size())) {
-                    int index = parser.parseIndex(input);
-                    tasks.doneTask(index);
-                    ui.printDoneTask(tasks.getTask(index));
-                } else {
-                    throw new WrongFormatDukeException(command);
-                }
+                cmd = new DoneTaskCommand(command, input, tasks);
             } else if (command.equals("delete")) {
-                if (parser.isCorrectIndexCommand(input, tasks.size())) {
-                    int index = parser.parseIndex(input);
-                    Task deleted = tasks.deleteTask(index);
-                    ui.printDeleteTask(deleted);
-                } else {
-                    throw new WrongFormatDukeException(command);
-                }
+                cmd = new DeleteTaskCommand(command, input, tasks);
             } else if (command.equals("help")) {
-                if (parser.isCorrectHelp(input)) {
-                    ui.printHelp();
-                } else {
-                    throw new WrongFormatDukeException(command);
-                }
+                cmd = new HelpCommand(command, input, tasks);
             } else {
                 throw new WrongCommandDukeException();
             }
         } catch (DukeException e) {
             ui.printError(e);
         }
+        cmd.execute();
+        tasks = cmd.getTaskList();
     }
 
     public void save() {

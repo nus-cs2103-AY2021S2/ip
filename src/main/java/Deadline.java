@@ -19,7 +19,7 @@ public class Deadline extends Task {
         } else {
             str += "O |";
         }
-        str += " " + description + " | by: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy Hmm"));
+        str += " " + description + " | by: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
         return str;
     }
 
@@ -31,7 +31,7 @@ public class Deadline extends Task {
         } else {
             str += UNCHECKED;
         }
-        str += " " + description + " (by: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy Hmm")) + ")";
+        str += " " + description + " (by: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm")) + ")";
         return str;
     }
 }

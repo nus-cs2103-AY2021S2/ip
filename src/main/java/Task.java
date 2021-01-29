@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     public String input;
     public boolean done;
     static String CHECKED = "[X]";
@@ -9,9 +9,7 @@ public class Task {
         this.done = false;
     }
 
-    public String formatToSave() {
-        return this.input;
-    }
+    public abstract String formatToSave();
 
     public void checkTask() {
         this.done = true;

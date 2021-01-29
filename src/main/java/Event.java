@@ -2,12 +2,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String description;
 
-    public Event(LocalDateTime date, String description) {
+    public Event(LocalDateTime startDate, LocalDateTime endDate, String description) {
         super(description);
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.description = description;
     }
 
@@ -19,7 +21,8 @@ public class Event extends Task {
         } else {
             str += "O |";
         }
-        str += " " + description + " | at: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy Hmm"));
+        str += " " + description + " | from: " + startDate.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"))
+                + " | to: " + endDate.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
         return str;
     }
 
@@ -31,7 +34,8 @@ public class Event extends Task {
         } else {
             str += UNCHECKED;
         }
-        str += " " + description + " (at: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy Hmm")) + ")";
+        str += " " + description + " (from: " + startDate.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"))
+                + " - " + endDate.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm")) + ")";
         return str;
     }
 }

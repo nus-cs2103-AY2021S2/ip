@@ -36,14 +36,14 @@ public class Parser {
         String[] command = input.split(" ");
         if (command.length == 1) {
             return false;
-        } else if (command[1].equals("")) {
+        } else if (command[1].equals("/by")) {
             return false;
         } else {
             String[] details = input.split(" /by ");
             if (details.length != 2) {
                 return false;
             } else {
-                return true;
+                    return true;
             }
         }
     }
@@ -62,26 +62,38 @@ public class Parser {
         String[] command = input.split(" ");
         if (command.length == 1) {
             return false;
-        } else if (command[1].equals("")) {
+        } else if (command[1].equals("/from")) {
             return false;
         } else {
-            String[] details = input.split(" /at ");
+            String[] details = input.split(" /from ");
             if (details.length != 2) {
                 return false;
             } else {
-                return true;
+                String[] dates = details[1].split(" /to ");
+                if (dates.length != 2) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         }
     }
 
     public String parseEventDescription(String input) {
-        String[] details = input.split(" /at ");
+        String[] details = input.split(" /from ");
         return details[0].substring(6);
     }
 
-    public LocalDateTime parseEventDate(String input) {
-        String[] details = input.split(" /at ");
-        return parseDate(details[1]);
+    public LocalDateTime parseEventStartDate(String input) {
+        String[] details = input.split(" /from ");
+        String[] dates = details[1].split(" /to ");
+        return parseDate(dates[0]);
+    }
+
+    public LocalDateTime parseEventEndDate(String input) {
+        String[] details = input.split(" /from ");
+        String[] dates = details[1].split(" /to ");
+        return parseDate(dates[1]);
     }
 
     public boolean isCorrectList(String input) {
