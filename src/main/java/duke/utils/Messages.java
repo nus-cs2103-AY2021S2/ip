@@ -21,4 +21,6 @@ public class Messages {
     public static final String MESSAGE_SHOW_TASKLIST = "Here are the tasks in your list:";
 
     public static final String MESSAGE_HELP = "Here are the list of available commands:";
+
+    public static final String MESSAGE_EMPTY_DESCRIPTION = "OOPS!!! The description of a task cannot be empty.";
 }

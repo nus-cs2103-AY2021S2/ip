@@ -23,6 +23,8 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static duke.utils.Messages.MESSAGE_EMPTY_DESCRIPTION;
+
 /**
  * Parses user input.
  */
@@ -87,7 +89,7 @@ public class Parser {
      */
     private Command parseArgumentsForToDo(String arguments) throws NoDescriptionException {
         if (arguments.isBlank()) {
-            throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
+            throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         }
         return new ToDoCommand(arguments);
     }
@@ -103,7 +105,7 @@ public class Parser {
     private Command parseArgumentsForDeadline(String arguments) throws NoDescriptionException,
             InvalidDescriptionException {
         if (arguments.isBlank()) {
-            throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
+            throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         }
         if (!arguments.contains("/by")) {
             throw new InvalidDescriptionException("Invalid description syntax. "
@@ -176,7 +178,7 @@ public class Parser {
     private Command parseArgumentsForEvent(String arguments) throws NoDescriptionException,
             InvalidDescriptionException {
         if (arguments.isBlank()) {
-            throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
+            throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         }
         if (!arguments.contains("/at")) {
             throw new InvalidDescriptionException("Invalid description syntax. "
@@ -223,7 +225,7 @@ public class Parser {
     private Command parseArgumentsForDelete(String arguments) throws InvalidDescriptionException,
             NoDescriptionException, IndexOutOfBoundsException {
         if (arguments.isBlank()) {
-            throw new NoDescriptionException("Please indicate a task number to be marked as done.");
+            throw new NoDescriptionException("Please indicate a task number to be deleted.");
         }
         try {
             int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
