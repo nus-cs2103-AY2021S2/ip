@@ -8,13 +8,15 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     public void populate(ListParser p) {
         String typeOfTask = p.getTypeOfTask();
         Boolean isDone = p.getIsDone();
         String description = p.getDescription();
         LocalDateTime time = p.getTime();
-//        System.out.println("populate");
-//        System.out.println(p.toString());
 
         switch(typeOfTask) {
         case "T":
@@ -45,9 +47,8 @@ public class TaskList {
                 newTask = new Event(description, time);
             }
             tasks.add(newTask);
-            HardDisk.save(tasks);
             String instructions = Response.ADD.toString() + newTask + "\n" + this.status();
-            Duke.output(instructions);
+            enclose(instructions);
         }
     }
 
@@ -55,10 +56,9 @@ public class TaskList {
         int i = Integer.parseInt(p.getDescription()) - 1;
         Task task = tasks.get(i);
         tasks.remove(i);
-        HardDisk.save(tasks);
 
         String instructions = Response.DELETE.toString() + task + "\n" + this.status();
-        Duke.output(instructions);
+        enclose(instructions);
     }
 
     public void markAsDone(Parser p) throws EmptyDescription {
@@ -67,8 +67,7 @@ public class TaskList {
         }
         int i = Integer.parseInt(p.getDescription()) - 1;
         tasks.set(i, tasks.get(i).setDone());
-        HardDisk.save(tasks);
-        Duke.output(Response.DONE.toString() + tasks.get(i) + "\n");
+        enclose(Response.DONE.toString() + tasks.get(i) + "\n");
     }
 
     public void list() {
@@ -76,7 +75,16 @@ public class TaskList {
         for(int i = 0; i < tasks.size(); i++) {
             msg += (i + 1) + "." + tasks.get(i) + "\n";
         }
-        Duke.output(Response.LIST.toString() + msg);
+        enclose(Response.LIST.toString() + msg);
+    }
+
+    /**
+     * Prints output to user in generic format.
+     */
+    public void enclose(String reply) {
+        System.out.println("---------------------------------------");
+        System.out.println(reply);
+        System.out.println("---------------------------------------\n");
     }
 
     public  String status() {

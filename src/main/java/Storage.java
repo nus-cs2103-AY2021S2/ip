@@ -6,20 +6,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HardDisk {
+public class Storage {
     private static Path filePath;
 
-    public static void retrieveFilePath() {
+    public  void retrieveFilePath() {
         try {
             String current = System.getProperty("user.dir");
             Path projectRoot = Paths.get(current).getParent();
 
             Path directoryPath = Paths.get(projectRoot.toString(),"data");
             Boolean directoryExists = Files.exists(directoryPath);
-
-//            System.out.println(directoryPath);
-
-
             if (directoryExists.equals(false)) {
                 Files.createDirectory(directoryPath);
             }
@@ -35,7 +31,7 @@ public class HardDisk {
         }
     }
 
-    public static void save(ArrayList<Task> taskList) {
+    public void save(ArrayList<Task> taskList) {
         try {
             String data = "";
 
@@ -56,24 +52,16 @@ public class HardDisk {
         }
     }
 
-    public static TaskList read() {
+    public TaskList load() throws IOException {
         TaskList taskList = new TaskList();
-        try {
-            retrieveFilePath();
-            List<String> s = Files.readAllLines(filePath);
-//            System.out.println(s.size());
+        retrieveFilePath();
+        List<String> s = Files.readAllLines(filePath);
 
-            for (int i = 0; i < s.size() ; i++) {
-                ListParser p = new ListParser();
-                p = p.parse(s.get(i));
-                taskList.populate(p);
-            }
-
-        } catch (IOException e) {
-            System.out.println("error here2");
-
+        for (int i = 0; i < s.size() ; i++) {
+            ListParser p = new ListParser();
+            p = p.parse(s.get(i));
+            taskList.populate(p);
         }
-
         return taskList;
     }
 }

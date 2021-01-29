@@ -36,6 +36,7 @@ public class Parser {
         this.time = time;
     }
 
+
     /**
      * Returns a Parser that represent the parsed user input.
      * Parses user input into typeOfTask, description, time.
