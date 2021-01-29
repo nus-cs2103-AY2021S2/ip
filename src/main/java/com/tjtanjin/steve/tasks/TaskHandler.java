@@ -17,6 +17,7 @@ public class TaskHandler {
 
     /**
      * Constructor for TaskList.
+     *
      * @param storageHandler storage to store and load tasks from
      */
     public TaskHandler(StorageHandler storageHandler) {
@@ -26,6 +27,7 @@ public class TaskHandler {
 
     /**
      * Adds a new task.
+     *
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @param taskDates taskDates array of dates (defaults to first element for deadline end date)
@@ -49,12 +51,18 @@ public class TaskHandler {
         }
     }
 
+    /**
+     * Gets array list of tasks.
+     *
+     * @return array list of tasks
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
     /**
      * Marks a task as done.
+     *
      * @param index index of task to mark as done
      * @return string response after operation is done
      */
@@ -83,6 +91,7 @@ public class TaskHandler {
 
     /**
      * Deletes a task.
+     *
      * @param index index of task to delete
      * @return string response after operation is done
      */
@@ -107,6 +116,7 @@ public class TaskHandler {
 
     /**
      * Shows all tasks to user
+     *
      * @return string response after operation is done
      */
     public String showAllTasks() {
@@ -124,7 +134,8 @@ public class TaskHandler {
     }
 
     /**
-     * Find tasks whose name contains input from user.
+     * Finds all tasks whose name contains input from user.
+     *
      * @param taskName name of task
      * @return string response after operation is done
      */

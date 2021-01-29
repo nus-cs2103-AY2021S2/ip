@@ -16,6 +16,11 @@ public class ByeCommand {
         this.description = description;
     }
 
+    /**
+     * Gets the description of bye command, currently unused.
+     *
+     * @return description of bye command
+     */
     public String getDescription() {
         return this.description;
     }

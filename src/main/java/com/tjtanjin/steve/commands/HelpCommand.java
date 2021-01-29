@@ -18,12 +18,18 @@ public class HelpCommand {
         this.cmdInfo = cmdInfo;
     }
 
+    /**
+     * Gets the description of help command, currently unused.
+     *
+     * @return description of help command
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * List all available command usage and descriptions.
+     * Lists out all available command usage and descriptions.
+     *
      * @return string response after operation is done
      */
     public String execute() {

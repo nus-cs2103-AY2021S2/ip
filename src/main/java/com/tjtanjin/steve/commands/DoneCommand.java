@@ -12,6 +12,7 @@ public class DoneCommand {
 
     /**
      * Constructor for DoneCommand.
+     *
      * @param taskHandler provides access for command to modify tasks
      */
     public DoneCommand(String description, TaskHandler taskHandler) {
@@ -19,12 +20,18 @@ public class DoneCommand {
         this.taskHandler = taskHandler;
     }
 
+    /**
+     * Gets the description of done command.
+     *
+     * @return description of done command
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
      * Forwards the mark task as done operation to TaskHandler.
+     *
      * @param index of task to mark as done
      * @return string response after operation is done
      */

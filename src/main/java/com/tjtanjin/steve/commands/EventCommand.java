@@ -14,6 +14,7 @@ public class EventCommand {
 
     /**
      * Constructor for EventCommand.
+     *
      * @param taskHandler provides access for command to modify tasks
      */
     public EventCommand(String description, TaskHandler taskHandler) {
@@ -21,12 +22,18 @@ public class EventCommand {
         this.taskHandler = taskHandler;
     }
 
+    /**
+     * Gets the description of event command.
+     *
+     * @return description of event command
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
      * Forwards the add event task operation to TaskHandler.
+     *
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @param taskDates array of dates

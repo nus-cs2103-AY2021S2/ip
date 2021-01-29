@@ -61,6 +61,7 @@ public class Parser {
 
     /**
      * Parses input from user to determine action to take.
+     *
      * @param input input provided by user
      * @return string response after operation is done
      */
@@ -112,6 +113,7 @@ public class Parser {
 
     /**
      * Checks if a command provided by user is valid.
+     *
      * @param command command provided by user
      * @return true if command is valid, false otherwise
      */
@@ -127,6 +129,7 @@ public class Parser {
 
     /**
      * Parses index from user for done and delete command.
+     *
      * @param cmd cmd from user (done or delete)
      * @param input input provided by user
      * @return index of task
@@ -153,7 +156,8 @@ public class Parser {
     }
 
     /**
-     * Parses task name from user input
+     * Parses task name from user input.
+     *
      * @param input input provided by user
      * @return name of task
      */
@@ -191,7 +195,8 @@ public class Parser {
     }
 
     /**
-     * Parses task due date from user input
+     * Parses task due date from user input.
+     *
      * @param input input provided by user
      * @return array of dates for task
      */

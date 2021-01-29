@@ -16,6 +16,7 @@ public class Steve extends Application {
 
     /**
      * Initializes key classes and calls the UiHandler to show the stage.
+     *
      * @param stage primary stage provided by javafx
      */
     @Override

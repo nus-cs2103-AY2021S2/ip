@@ -8,6 +8,7 @@ public class ToDo extends Task {
 
     /**
      * Constructor for ToDo class.
+     *
      * @param taskName name of task
      * @param status task completion status
      */

@@ -12,6 +12,7 @@ public class ListCommand {
 
     /**
      * Constructor for ListCommand.
+     *
      * @param taskHandler provides access for command to modify tasks
      */
     public ListCommand(String description, TaskHandler taskHandler) {
@@ -19,12 +20,18 @@ public class ListCommand {
         this.taskHandler = taskHandler;
     }
 
+    /**
+     * Gets the description of list command, currently unused.
+     *
+     * @return description of list command
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * List all tasks entered by user.
+     * Lists out all tasks entered by user.
+     *
      * @return string response after operation is done
      */
     public String execute() {

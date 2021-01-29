@@ -8,6 +8,7 @@ public class SteveInvalidParamsException extends Exception {
     /**
      * Constructor for SteveInvalidParamsException class for custom exceptions
      * of invalid params format.
+     *
      * @param errMsg error message
      */
     public SteveInvalidParamsException(String errMsg) {

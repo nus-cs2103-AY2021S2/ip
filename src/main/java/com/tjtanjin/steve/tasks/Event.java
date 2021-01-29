@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event class.
+     *
      * @param taskName name of task
      * @param status task completion status
      * @param taskDates array of dates (first element is start date, second element is end date)
@@ -23,6 +24,11 @@ public class Event extends Task {
         this.endDate = taskDates[1];
     }
 
+    /**
+     * Gets array of due dates, 2 elements for event class.
+     *
+     * @return array with 2 elements representing start and end date
+     */
     @Override
     public LocalDate[] getDates() {
         LocalDate[] taskDates = new LocalDate[2];
@@ -31,6 +37,11 @@ public class Event extends Task {
         return taskDates;
     }
 
+    /**
+     * Gets the string describing event.
+     *
+     * @return String describing event
+     */
     @Override
     public String toString() {
         return super.toString()

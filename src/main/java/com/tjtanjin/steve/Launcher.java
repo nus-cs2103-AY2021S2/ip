@@ -9,6 +9,7 @@ public class Launcher {
 
     /**
      * Launches the Steve class.
+     *
      * @param args command line arguments
      */
     public static void main(String[] args) {

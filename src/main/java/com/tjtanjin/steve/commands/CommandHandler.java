@@ -22,6 +22,7 @@ public class CommandHandler {
 
     /**
      * Constructor for CommandHandler.
+     *
      * @param taskHandler task handler to pass to commands that modify tasks
      */
     public CommandHandler(TaskHandler taskHandler) {
@@ -54,38 +55,83 @@ public class CommandHandler {
         this.todoCommand = new TodoCommand(cmdInfo.get("TODO"), taskHandler);
     }
 
+    /**
+     * Gets the bye command object.
+     *
+     * @return bye command object
+     */
     public ByeCommand getByeCommand() {
         return this.byeCommand;
     }
 
+    /**
+     * Gets the deadline command object.
+     *
+     * @return deadline command object
+     */
     public DeadlineCommand getDeadlineCommand() {
         return this.deadlineCommand;
     }
 
+    /**
+     * Gets the delete command object.
+     *
+     * @return delete command object
+     */
     public DeleteCommand getDeleteCommand() {
         return this.deleteCommand;
     }
 
+    /**
+     * Gets the done command object.
+     *
+     * @return done command object
+     */
     public DoneCommand getDoneCommand() {
         return this.doneCommand;
     }
 
+    /**
+     * Gets the event command object.
+     *
+     * @return event command object
+     */
     public EventCommand getEventCommand() {
         return this.eventCommand;
     }
 
+    /**
+     * Gets the find command object.
+     *
+     * @return find command object
+     */
     public FindCommand getFindCommand() {
         return this.findCommand;
     }
 
+    /**
+     * Gets the help command object.
+     *
+     * @return help command object
+     */
     public HelpCommand getHelpCommand() {
         return this.helpCommand;
     }
 
+    /**
+     * Gets the list command object.
+     *
+     * @return list command object
+     */
     public ListCommand getListCommand() {
         return this.listCommand;
     }
 
+    /**
+     * Gets the todo command object.
+     *
+     * @return todo command object
+     */
     public TodoCommand getTodoCommand() {
         return this.todoCommand;
     }

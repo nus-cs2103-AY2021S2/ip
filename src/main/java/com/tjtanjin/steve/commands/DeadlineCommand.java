@@ -14,6 +14,7 @@ public class DeadlineCommand {
 
     /**
      * Constructor for DeadlineCommand.
+     *
      * @param taskHandler provides access for command to modify tasks
      */
     public DeadlineCommand(String description, TaskHandler taskHandler) {
@@ -21,12 +22,18 @@ public class DeadlineCommand {
         this.taskHandler = taskHandler;
     }
 
+    /**
+     * Gets the description of deadline command.
+     *
+     * @return description of deadline command
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
      * Forwards the add deadline task operation to TaskHandler.
+     *
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @param taskDates array of dates

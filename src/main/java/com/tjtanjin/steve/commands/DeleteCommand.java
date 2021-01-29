@@ -12,6 +12,7 @@ public class DeleteCommand {
 
     /**
      * Constructor for DeleteCommand.
+     *
      * @param taskHandler provides access for command to modify tasks
      */
     public DeleteCommand(String description, TaskHandler taskHandler) {
@@ -19,12 +20,18 @@ public class DeleteCommand {
         this.taskHandler = taskHandler;
     }
 
+    /**
+     * Gets the description of delete command.
+     *
+     * @return description of delete command
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
      * Forwards the delete task operation to TaskHandler.
+     *
      * @param index of task to delete
      * @return string response after operation is done
      */

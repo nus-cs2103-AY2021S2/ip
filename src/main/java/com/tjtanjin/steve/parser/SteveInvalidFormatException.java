@@ -8,6 +8,7 @@ public class SteveInvalidFormatException extends Exception {
     /**
      * Constructor for SteveInvalidFormatException class for custom exceptions
      * of invalid input format.
+     *
      * @param errMsg error message
      */
     public SteveInvalidFormatException(String errMsg) {

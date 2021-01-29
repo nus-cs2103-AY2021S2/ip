@@ -29,6 +29,7 @@ public class UiHandler {
 
     /**
      * Constructor for UiHandler.
+     *
      * @param parser parser to process user input
      */
     public UiHandler(Parser parser) {
@@ -37,6 +38,7 @@ public class UiHandler {
 
     /**
      * Shows the window of the application to the user.
+     *
      * @param stage stage to show user
      */
     public void showMainScreen(Stage stage) {
@@ -109,7 +111,8 @@ public class UiHandler {
     }
 
     /**
-     * Prints information to the user
+     * Prints information to the user.
+     *
      * @param info information to print
      */
     public void showInfo(String info) {
@@ -118,7 +121,8 @@ public class UiHandler {
     }
 
     /**
-     * Prints error message to the user
+     * Prints error message to the user.
+     *
      * @param msg error message to print
      */
     public void showError(String msg) {
@@ -128,6 +132,8 @@ public class UiHandler {
 
     /**
      * Handles the dialog container. Clears the user input after processing.
+     *
+     * @param input input given by the user
      */
     private void handleUserInput(String input) {
         Label text = new Label("\n" + userInput.getText());
@@ -140,6 +146,7 @@ public class UiHandler {
 
     /**
      * Checks response and print as info or error.
+     *
      * @param response error message to print
      */
     public void showResponse(String response) {
@@ -152,6 +159,7 @@ public class UiHandler {
 
     /**
      * Terminates the program with a final message.
+     *
      * @param crashMsg message to print before termination
      */
     public static void terminate(String crashMsg) {

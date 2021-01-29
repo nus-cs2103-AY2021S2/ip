@@ -29,6 +29,11 @@ public class StorageHandler {
     private final ArrayList<Task> tasks = new ArrayList<>();
     private final String path;
 
+    /**
+     * Constructor for StorageHandler.
+     *
+     * @param path path to look for or create storage file
+     */
     public StorageHandler(String path) {
         this.path = path;
     }
@@ -36,6 +41,7 @@ public class StorageHandler {
     //solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
     /**
      * Loads saved tasks from hard disk.
+     *
      * @return array list of tasks
      */
     @SuppressWarnings("unchecked")
@@ -68,7 +74,8 @@ public class StorageHandler {
     }
 
     /**
-     * Retrieve individual task information and repopulate them into taskList.
+     * Retrieves individual task information and repopulate them into taskList.
+     *
      * @param task task to retrieve information for
      */
     private void parseTaskGroup(JSONObject task) {
@@ -100,6 +107,7 @@ public class StorageHandler {
     //solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
     /**
      * Saves task into hard disk.
+     *
      * @param index index of task being saved
      * @param saveType type of save operation (new task, modify existing task or deleting task)
      * @param taskName name of task

@@ -12,6 +12,7 @@ public class TodoCommand {
 
     /**
      * Constructor for TodoCommand.
+     *
      * @param taskHandler provides access for command to modify tasks
      */
     public TodoCommand(String description, TaskHandler taskHandler) {
@@ -19,12 +20,18 @@ public class TodoCommand {
         this.taskHandler = taskHandler;
     }
 
+    /**
+     * Gets the description of todo command.
+     *
+     * @return description of todo command
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
      * Forwards the add todo task operation to TaskHandler.
+     *
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @return string response after operation is done

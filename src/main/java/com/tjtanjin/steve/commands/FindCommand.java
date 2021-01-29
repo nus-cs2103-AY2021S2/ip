@@ -12,6 +12,7 @@ public class FindCommand {
 
     /**
      * Constructor for FindCommand.
+     *
      * @param taskHandler provides access for command to modify tasks
      */
     public FindCommand(String description, TaskHandler taskHandler) {
@@ -19,12 +20,18 @@ public class FindCommand {
         this.taskHandler = taskHandler;
     }
 
+    /**
+     * Gets the description of find command.
+     *
+     * @return description of find command
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
      * Forwards the find task operation to TaskHandler.
+     *
      * @param taskName name of task
      * @return string response after operation is done
      */

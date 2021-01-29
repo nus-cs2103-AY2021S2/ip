@@ -17,6 +17,7 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for DialogBox.
+     *
      * @param l label for the chat message
      * @param iv image of the sender/receiver
      */
@@ -42,6 +43,7 @@ public class DialogBox extends HBox {
 
     /**
      * Gets the dialog box for user.
+     *
      * @param l chat message of user
      * @param iv image of user
      * @return dialog box for user
@@ -52,6 +54,7 @@ public class DialogBox extends HBox {
 
     /**
      * Gets the dialog box for Steve.
+     *
      * @param l chat message of steve
      * @param iv image of steve
      * @return dialog box for steve
