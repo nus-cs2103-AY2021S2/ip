@@ -1,9 +1,13 @@
 package ekud.common.exception;
 
-public class DukeException extends Exception {
+public class EkudException extends Exception {
     protected String message;
 
-    public DukeException(String message) {
+    /**
+     * Construct an exception for Ekud.
+     * @param message The exception message.
+     */
+    public EkudException(String message) {
         super(message);
         this.message = message;
     }

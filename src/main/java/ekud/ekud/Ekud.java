@@ -1,7 +1,7 @@
 package ekud;
 
 import ekud.command.Command;
-import ekud.common.exception.DukeException;
+import ekud.common.exception.EkudException;
 import ekud.parser.Parser;
 import ekud.storage.Storage;
 import ekud.task.TaskList;
@@ -22,7 +22,7 @@ public class Ekud {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (EkudException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -47,7 +47,7 @@ public class Ekud {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (EkudException e) {
                 ui.showError(e.toString());
             } finally {
                 ui.showLine();
