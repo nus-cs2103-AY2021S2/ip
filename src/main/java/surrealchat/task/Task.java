@@ -1,6 +1,7 @@
 package surrealchat.task;
 
-//Below solution adapted from partial solution in: https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
+//Below solution adapted from partial solution in:
+// https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
 /**
  * Represents an abstract task, which task subclasses inherit from.
  */

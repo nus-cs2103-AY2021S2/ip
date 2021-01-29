@@ -11,7 +11,15 @@ import surrealchat.command.ToDoCommand;
 import surrealchat.easteregg.OrangEasterEgg;
 import surrealchat.easteregg.VegetalEasterEgg;
 
+/**
+ * Class for displaying descriptions to help user in understanding commands.
+ */
 public class HelpMode {
+    /**
+     * Displays descriptions on how to use commands.
+     * @param command The command which user wishes to understand how to use.
+     * @return String related to how the above command works.
+     */
     public static String displayHelp(String command) {
         switch(command.trim()) {
         case "bye":

@@ -1,47 +1,74 @@
 package surrealchat.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTaskTest {
-    public static final String TEST_DESCRIPTION = "Do CS2103T quiz";
-    public static final LocalDate TEST_DEADLINE = LocalDate.parse("2020-10-21");
-    public static final DeadlineTask STARTING_TASK = DeadlineTask.createNewDeadlineTask(
+    private static final String TEST_DESCRIPTION = "Do CS2103T quiz";
+    private static final LocalDate TEST_DEADLINE = LocalDate.parse("2020-10-21");
+    private static final DeadlineTask STARTING_TASK = DeadlineTask.createNewDeadlineTask(
             DeadlineTaskTest.TEST_DESCRIPTION, DeadlineTaskTest.TEST_DEADLINE);
 
+    /**
+     * Tests the functionality of toString() method in DeadlineTask class.
+     */
     @Test
-    public void testPrintStringConversion(){
+    public void testPrintStringConversion() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.toString(),
                 "[D][\u2718] Do CS2103T quiz (by: 2020-10-21)");
     }
 
+    /**
+     * Tests the functionality of saveTask() method in DeadlineTask class.
+     */
     @Test
-    public void testFileStringConversion(){
+    public void testFileStringConversion() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.saveTask(),
                 "D/split/0/split/Do CS2103T quiz /by 2020-10-21");
     }
 
+    /**
+     * Tests whether getType() returns "D" for DeadlineTask.
+     */
     @Test
-    public void testDeadlineTaskType(){
+    public void testDeadlineTaskType() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.getType(),
                 "D");
     }
 
+    /**
+     * Tests functionality of getDescription().
+     */
+    @Test
+    public void testGetDescription() {
+        assertEquals(DeadlineTaskTest.STARTING_TASK.getDescription(),
+                "Do CS2103T quiz");
+    }
+
+    /**
+     * Tests functionality of editDescription().
+     */
     @Test
     public void testEditDescription() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.editDescription("Eat biscuits").getDescription(),
                 "Eat biscuits");
     }
 
+    /**
+     * Tests functionality of whether task can be marked as done.
+     */
     @Test
     public void testMarkDone() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.markAsDone().toString(),
                 "[D][\u2713] Do CS2103T quiz (by: 2020-10-21)");
     }
 
+    /**
+     * Tests functionality of whether task can be marked as undone after being marked as done.
+     */
     @Test
     public void testMarkUndone() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.markAsDone().markAsDone().toString(),

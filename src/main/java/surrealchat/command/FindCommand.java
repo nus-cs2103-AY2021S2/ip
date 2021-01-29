@@ -1,16 +1,16 @@
 package surrealchat.command;
 
-import surrealchat.task.Task;
-import surrealchat.task.TaskManagement;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import surrealchat.task.Task;
+import surrealchat.task.TaskManagement;
+
 /**
  * Command object for finding Tasks based on a keyword.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     protected final String keyword;
 
     /**

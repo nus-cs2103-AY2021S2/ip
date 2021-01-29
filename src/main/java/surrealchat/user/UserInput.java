@@ -58,13 +58,15 @@ public class UserInput {
     public int getInputNumber(String description) {
         description = description.trim();
         if (description.isEmpty()) {
-            throw new NoSuchElementException("Did you forget to put a number for the command you just typed in? Not stonks!");
+            throw new NoSuchElementException(
+                    "Did you forget to put a number for the command you just typed in? Not stonks!");
         } else {
             try {
                 int taskNumber = Integer.valueOf(description);
                 return taskNumber;
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Did you put something other than a number or did you put a number incorrectly? Not stonks!");
+                throw new NumberFormatException(
+                        "Did you put something other than a number or did you put a number incorrectly? Not stonks!");
             }
         }
     }

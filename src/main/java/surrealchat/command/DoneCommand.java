@@ -1,14 +1,14 @@
 package surrealchat.command;
 
+import java.util.NoSuchElementException;
+
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
-
-import java.util.NoSuchElementException;
 
 /**
  * Command object for toggling the isDone variable on Task object.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private static final int TASK_DONE = 1;
     private static final int TASK_NOT_DONE = 0;
     protected final String taskNumberString;
@@ -29,12 +29,14 @@ public class DoneCommand extends Command{
     private int getInputNumber(String description) {
         description = description.trim();
         if (description.isEmpty()) {
-            throw new NoSuchElementException("Did you forget to put a number for the command you just typed in? Not stonks!");
+            throw new NoSuchElementException(
+                    "Did you forget to put a number for the command you just typed in? Not stonks!");
         } else {
             try {
                 return Integer.valueOf(description);
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Did you put something other than a number or did you put a number incorrectly? Not stonks!");
+                throw new NumberFormatException(
+                        "Did you put something other than a number or did you put a number incorrectly? Not stonks!");
             }
         }
     }

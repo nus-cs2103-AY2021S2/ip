@@ -1,9 +1,9 @@
 package surrealchat.command;
 
+import java.util.NoSuchElementException;
+
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
-
-import java.util.NoSuchElementException;
 
 /**
  * Command object for deleting a Task object.
@@ -24,13 +24,15 @@ public class DeleteCommand extends Command {
         description = description.trim();
 
         if (description.isEmpty()) {
-            throw new NoSuchElementException("Did you forget to put a number for the command you just typed in? Not stonks!");
+            throw new NoSuchElementException(
+                    "Did you forget to put a number for the command you just typed in? Not stonks!");
         }
 
         try {
             return Integer.valueOf(description);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Did you put something other than a number or did you put a number incorrectly? Not stonks!");
+            throw new NumberFormatException(
+                    "Did you put something other than a number or did you put a number incorrectly? Not stonks!");
         }
     }
 

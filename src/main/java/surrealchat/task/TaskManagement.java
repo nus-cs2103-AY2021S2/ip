@@ -153,7 +153,7 @@ public class TaskManagement {
             throw new NoSuchElementException("Empty todo task description. Not stonks!");
         }
 
-        ToDoTask newTask = ToDoTask.createNewToDoTask(taskDescription.trim());
+        ToDoTask newTask = ToDoTask.loadToDoTaskFromFile(taskDescription.trim(), isDone);
         this.addTask(newTask);
         return newTask;
     }
