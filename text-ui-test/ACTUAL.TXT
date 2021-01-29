@@ -65,11 +65,13 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Enter a number after command, 'done (number)' or 'delete (number)'
+ Enter a number after command, 'done (number)'
+ or 'delete (number)'
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ Please enter 'todo (your task)',
+ or 'deadline (your task) / (deadline date time)',
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
@@ -77,7 +79,8 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ Please enter 'todo (your task)',
+ or 'deadline (your task) / (deadline date time)',
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
@@ -85,7 +88,8 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ Please enter 'todo (your task)',
+ or 'deadline (your task) / (deadline date time)',
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
@@ -93,7 +97,8 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ Please enter 'todo (your task)',
+ or 'deadline (your task) / (deadline date time)',
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
@@ -113,7 +118,8 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ Please enter 'todo (your task)',
+ or 'deadline (your task) / (deadline date time)',
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
@@ -121,7 +127,8 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ Please enter 'todo (your task)',
+ or 'deadline (your task) / (deadline date time)',
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
@@ -129,7 +136,8 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ Please enter 'todo (your task)',
+ or 'deadline (your task) / (deadline date time)',
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.

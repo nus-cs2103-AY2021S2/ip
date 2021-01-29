@@ -20,7 +20,8 @@ public class TaskList {
      *
      * @return ArrayList<Task> tasks so far.
      */
-    public static ArrayList<Task> getList() {//prob with this is can change value as pass by ref
+    public static ArrayList<Task> getList() {
+        //prob with this is can change value as pass by ref
         return tasks;
     }
 
@@ -29,7 +30,7 @@ public class TaskList {
      *
      * @return int size of list of tasks.
      */
-    public static int listSize() {
+    public static int getListSize() {
         return tasks.size();
     }
 
@@ -52,41 +53,41 @@ public class TaskList {
     }
 
     /**
-     * Sets the task at index num to be complete and returns that task.
+     * Sets the task at index number to be complete and returns that task.
      *
-     * @param num task number in the list that is completed.
+     * @param number task number in the list that is completed.
      * @return Task task that has been completed.
      * @throws IndexOutOfBoundsException if num is not in the range of 0 to tasks list size or tasks list size is zero.
      */
-    public static Task doneTask(int num) {
-        if(tasks.size()==0) {
-            throw new IndexOutOfBoundsException(Ui.lineGetter() +
-                    "  No tasks to complete!\n" + Ui.lineGetter());
-        } else if (num < 0 || num >= tasks.size()) {
-            throw new IndexOutOfBoundsException(Ui.lineGetter() +
-                    " Enter 'done' followed by a number between " +
-                    "1 and " + tasks.size() + "\n" + Ui.lineGetter());
+    public static Task doneTask(int number) {
+        if (tasks.size() == 0) {
+            throw new IndexOutOfBoundsException(Ui.lineGetter()
+                    + "  No tasks to complete!\n" + Ui.lineGetter());
+        } else if (number < 0 || number >= tasks.size()) {
+            throw new IndexOutOfBoundsException(Ui.lineGetter()
+                    + " Enter 'done' followed by a number between "
+                    + "1 and " + tasks.size() + "\n" + Ui.lineGetter());
         }
-        tasks.get(num).doneTask();
-        return tasks.get(num);
+        tasks.get(number).setDone();
+        return tasks.get(number);
     }
 
     /**
-     * Deletes a task at index num and returns that task.
+     * Deletes a task at index number and returns that task.
      *
-     * @param num task number in the list that is deleted.
+     * @param number task number in the list that is deleted.
      * @return Task task that has been deleted.
      * @throws IndexOutOfBoundsException if num is not in the range of 0 to tasks list size or tasks list size is zero.
      */
-    public static Task deleteTask(int num) {
-        if(tasks.size()==0) {
-            throw new IndexOutOfBoundsException(Ui.lineGetter() +
-                    "  No tasks to delete!\n" + Ui.lineGetter());
-        } else if (num < 0 || num >= tasks.size()) {
-            throw new IndexOutOfBoundsException(Ui.lineGetter() +
-                    " Enter 'delete' followed by a number between " +
-                    "1 and " + tasks.size() + "\n" + Ui.lineGetter());
+    public static Task deleteTask(int number) {
+        if (tasks.size() == 0) {
+            throw new IndexOutOfBoundsException(Ui.lineGetter()
+                    + "  No tasks to delete!\n" + Ui.lineGetter());
+        } else if (number < 0 || number >= tasks.size()) {
+            throw new IndexOutOfBoundsException(Ui.lineGetter()
+                    + " Enter 'delete' followed by a number between "
+                    + "1 and " + tasks.size() + "\n" + Ui.lineGetter());
         }
-        return tasks.remove(num);
+        return tasks.remove(number);
     }
 }

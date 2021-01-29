@@ -2,15 +2,15 @@
  * Represents a Task that is yet to do.
  */
 public class Todo extends Task {
-    public Todo(String str) {
-        super(str);
-        if(str.length()==0) {
+    public Todo(String input) {
+        super(input);
+        if (input.length() == 0) {
             throw new IllegalArgumentException();
         }
     }
 
-    public Todo(String str, boolean isDone) {
-        super(str, isDone);
+    public Todo(String input, boolean isDone) {
+        super(input, isDone);
     }
 
     @Override

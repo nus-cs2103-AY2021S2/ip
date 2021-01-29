@@ -12,7 +12,7 @@ class TaskTest {
     @Test
     void doneTask_taskNotDone_isDoneTrue() {
         Task task = new Task("fs");
-        task.doneTask();
+        task.setDone();
         assertEquals(true, task.isDone);
     }
 }

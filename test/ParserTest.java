@@ -6,19 +6,19 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ParserTest {
 
     @Test
-    void trimWhiteSpaces() {
+    void trimWhiteSpaces_stringWithLeadingAndTrailingWhiteSpace_trimmedString() {
         assertEquals("df", Parser.trimWhiteSpaces("   df   "));
     }
 
     @Test
-    void firstAndRest_stringWithSpaces_firstInZeroIdxRestInFirstIdx() {
+    void splitFirstAndRest_stringWithSpaces_firstInZeroIdxRestInFirstIdx() {
         String[] check = {"first", " have a good day"};
-        String[] res = Parser.firstAndRest("first have a good day");
-        for(int i = 0; i < res.length; i++) {
-            System.out.println(res[i]);
+        String[] result = Parser.splitFirstAndRest("first have a good day");
+        for (int i = 0; i < result.length; i++) {
+            System.out.println(result[i]);
         }
-        assertEquals(check[0], res[0]);
-        assertEquals(check[1], res[1]);
+        assertEquals(check[0], result[0]);
+        assertEquals(check[1], result[1]);
     }
 
     @Test
@@ -27,8 +27,8 @@ class ParserTest {
             assertEquals(0, Parser.makeToInt("dsf"));
             fail();
         } catch (NumberFormatException e) {
-            assertEquals(Ui.lineGetter() +
-                    " Enter a number after command, 'done (number)' or 'delete (number)'\n"
+            assertEquals(Ui.lineGetter()
+                    + " Enter a number after command, 'done (number)' or 'delete (number)'\n"
                     + Ui.lineGetter(), e.getMessage());
         }
     }

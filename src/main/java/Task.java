@@ -2,8 +2,8 @@
  * Represents a task that user has not yet done, or has completed.
  */
 public class Task {
-    public String task;
-    public boolean isDone;
+    protected String task;
+    protected boolean isDone;
 
     public Task(String task) {
         task = task.strip();
@@ -38,7 +38,7 @@ public class Task {
     /**
      * Sets the isDone variable to true.
      */
-    public void doneTask() {
+    public void setDone() {
         isDone = true;
     }
 }
