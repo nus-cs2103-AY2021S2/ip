@@ -54,6 +54,21 @@ public class Ui {
                 + lineSpacing);
     }
 
+    public void printMatchingTasks(TaskList taskList) {
+        ArrayList<Task> tasks = taskList.getTasks();
+        if (tasks.isEmpty()) {
+            System.out.println("There are no matching tasks in your list. :(\n" + lineSpacing);
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int num = 1;
+            for (Task task : tasks) {
+                System.out.println(num + "." + task);
+                num++;
+            }
+            System.out.println(lineSpacing);
+        }
+    }
+
     public void byeMessage() {
         System.out.println("Bye. Hope to see you again soon!\n" + lineSpacing);
     }

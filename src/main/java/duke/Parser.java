@@ -95,4 +95,15 @@ public class Parser {
             throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
         }
     }
+
+    public String parseKeyword(String input) throws DukeException {
+        String[] arr = input.split(" ");
+        if (arr.length < 2) {
+            throw new DukeException("OOPS!!! Please enter a keyword.");
+        }
+        if (arr.length > 2) {
+            throw new DukeException("OOPS!!! Please enter only one keyword.");
+        }
+        return arr[1];
+    }
 }
