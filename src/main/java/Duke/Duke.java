@@ -3,10 +3,10 @@ package Duke;
 import java.util.Scanner;
 
 public class Duke {
-    public TaskList tasks;
-    public Storage storage;
-    public Ui ui;
-    public Parser parser;
+    private TaskList tasks;
+    private Storage storage;
+    private Ui ui;
+    private Parser parser;
 
     public Duke() {
         this.tasks = new TaskList();
@@ -20,7 +20,10 @@ public class Duke {
         duke.run();
     }
 
-    public void run() {
+    /**
+     * Starts the Duke program.
+     */
+    private void run() {
         ui.printGreeting();
         storage.loadTaskList(tasks);
         Scanner sc = new Scanner(System.in);
@@ -37,7 +40,12 @@ public class Duke {
         }
     }
 
-    public void executeCommand(String input) {
+    /**
+     * Executes the command given by the user input.
+     * If it is an invalid command, it prints the exception faced.
+     * @param input User input.
+     */
+    private void executeCommand(String input) {
         String command = parser.parseCommand(input);
         Command cmd = null;
         try {
@@ -61,7 +69,10 @@ public class Duke {
         tasks = cmd.getTaskList();
     }
 
-    public void save() {
+    /**
+     * Saves the tasks in the task list into the storage file.
+     */
+    private void save() {
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
             str += tasks.getTask(i).formatToSave() + "\n";

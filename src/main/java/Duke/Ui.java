@@ -3,10 +3,13 @@ package Duke;
 public class Ui {
     private final String spacer = "----------------------------------------------------";
 
-    public void printSpacer() {
+    private void printSpacer() {
         System.out.println(spacer);
     }
 
+    /**
+     * Prints the greeting when Duke is started.
+     */
     public void printGreeting() {
         printSpacer();
         System.out.println("Hello my name is Mr. C!" +
@@ -15,16 +18,25 @@ public class Ui {
         printSpacer();
     }
 
+    /**
+     * Prints the goodbye message when Duke is exited.
+     */
     public void printBye() {
         printSpacer();
         System.out.println("Farewell sir/ma'am. I hope to see you again soon.");
         printSpacer();
     }
 
-    public void printTask(Task task) {
+    private void printTask(Task task) {
         System.out.println(task);
     }
 
+    /**
+     * Prints a message for when a task is added to the list.
+     *
+     * @param task Task to be added.
+     * @param size Number of tasks currently in the list.
+     */
     public void printAddTask(Task task, int size) {
         printSpacer();
         System.out.println("I have added the following task to your list:");
@@ -33,6 +45,11 @@ public class Ui {
         printSpacer();
     }
 
+    /**
+     * Prints a message for when a task is marked as done.
+     *
+     * @param task Task to be marked as done.
+     */
     public void printDoneTask(Task task) {
         printSpacer();
         System.out.println("Congratulations on conquering this task:");
@@ -41,6 +58,11 @@ public class Ui {
         printSpacer();
     }
 
+    /**
+     * Prints a message for when a task is being removed from the list.
+     *
+     * @param task Task to be removed.
+     */
     public void printDeleteTask(Task task) {
         printSpacer();
         System.out.println("I have removed the following task from your list:");
@@ -49,6 +71,11 @@ public class Ui {
         printSpacer();
     }
 
+    /**
+     * Prints all the tasks in the list.
+     *
+     * @param taskList List of tasks.
+     */
     public void printTaskList(TaskList taskList) {
         printSpacer();
         System.out.println("Here are the tasks in your list:");
@@ -59,12 +86,20 @@ public class Ui {
         printSpacer();
     }
 
+    /**
+     * Prints the error message.
+     *
+     * @param e Exception that has occurred.
+     */
     public void printError(DukeException e) {
         printSpacer();
         System.out.println(e);
         printSpacer();
     }
 
+    /**
+     * Prints the help message.
+     */
     public void printHelp() {
         printSpacer();
         System.out.println("These are the following commands that I understand:");

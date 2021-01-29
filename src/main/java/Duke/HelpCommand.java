@@ -6,7 +6,12 @@ public class HelpCommand extends Command {
         super(command, input, taskList);
     }
 
-    public void help() {
+    /**
+     * Checks if the user input is formatted into a correct help command.
+     * If it is, help message is printed.
+     * Otherwise, it prints the exception faced.
+     */
+    private void help() {
         try {
             if (parser.isCorrectHelp(input)) {
                 ui.printHelp();

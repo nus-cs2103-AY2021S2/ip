@@ -6,7 +6,12 @@ public class DeleteTaskCommand extends Command {
         super(command, input, taskList);
     }
 
-    public void removeTask() {
+    /**
+     * Checks if the user input is formatted into a correct Delete command.
+     * If it is, it removes the task and prints the Delete message.
+     * Otherwise, it prints the exception faced.
+     */
+    private void removeTask() {
         try {
             if (parser.isCorrectIndexCommand(input, taskList.size())) {
                 int index = parser.parseIndex(input);

@@ -16,6 +16,11 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * Writes the tasks in the task list into the specified file.
+     *
+     * @param tasks Task list to be saved.
+     */
     public void saveTaskList(String tasks) {
         try {
             FileWriter fw = new FileWriter(filePath + fileName);
@@ -26,6 +31,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the saved task list in the file and adds the task into the task list.
+     *
+     * @param taskList Task list to load the tasks from the file to.
+     */
     public void loadTaskList(TaskList taskList) {
         try {
             File f = new File(filePath + fileName);

@@ -9,6 +9,11 @@ public class AddTaskCommand extends Command {
         super(command, input, taskList);
     }
 
+    /**
+     * Checks if the user input is formatted into a correct To-do command.
+     * If it is, it adds the To-do to the task list and prints the Add task message.
+     * Otherwise, it prints the exception faced.
+     */
     private void addTodo() {
         try {
             if (parser.isCorrectTodo(input)) {
@@ -24,6 +29,11 @@ public class AddTaskCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the user input is formatted into a correct Deadline command.
+     * If it is, it adds the Deadline to the task list and prints the Add task message.
+     * Otherwise, it prints the exception faced.
+     */
     private void addDeadline() {
         try {
             if (parser.isCorrectDeadline(input)) {
@@ -44,6 +54,11 @@ public class AddTaskCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the user input is formatted into a correct Event command.
+     * If it is, it adds the Event to the task list and prints the Add task message.
+     * Otherwise, it prints the exception faced.
+     */
     private void addEvent() {
         try {
             if (parser.isCorrectEvent(input)) {

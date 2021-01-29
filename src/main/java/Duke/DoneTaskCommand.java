@@ -6,7 +6,12 @@ public class DoneTaskCommand extends Command {
         super(command, input, taskList);
     }
 
-    public void doTask() {
+    /**
+     * Checks if the user input is formatted into a correct Done command.
+     * If it is, it marks the task as done and prints the Done message.
+     * Otherwise, it prints the exception faced.
+     */
+    private void doTask() {
         try {
             if (parser.isCorrectIndexCommand(input, taskList.size())) {
                 int index = parser.parseIndex(input);

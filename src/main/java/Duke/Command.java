@@ -15,9 +15,17 @@ public abstract class Command {
         this.parser = new Parser();
     }
 
+    /**
+     * Returns the task list.
+     *
+     * @return Task list.
+     */
     public TaskList getTaskList() {
         return this.taskList;
     }
 
+    /**
+     * Executes the command based on the user input and task list.
+     */
     public abstract void execute();
 }
