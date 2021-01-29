@@ -1,8 +1,9 @@
+package duke.task;
 /**
  * This class handles the TodoTask.
  */
 public class TodoTask extends Task {
-    TodoTask(String task) {
+    public TodoTask(String task) {
         super(task);
     }
 

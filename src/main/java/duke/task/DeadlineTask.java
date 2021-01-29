@@ -1,13 +1,14 @@
+package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This class handles the eventTask.
+ * This class handles the deadlineTasks
  */
-public class EventTask extends Task {
+public class DeadlineTask extends Task {
     LocalDate date;
 
-    EventTask(String task) {
+    public DeadlineTask(String task) {
         super(task);
     }
 
@@ -28,9 +29,9 @@ public class EventTask extends Task {
         String taskRepresent = divideCommand[1] + " " + divideCommand[2]
                 + " (" + divideCommand[3].substring(1) + ": " + dateFormat + ")";
         if (this.getStatus()) {
-            return "[E][X] " + taskRepresent;
+            return "[D][X] " + taskRepresent;
         } else {
-            return "[E][ ] " + taskRepresent;
+            return "[D][ ] " + taskRepresent;
         }
     }
 }

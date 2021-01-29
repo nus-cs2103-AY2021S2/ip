@@ -1,3 +1,4 @@
+package duke.task;
 /**
  * Basic task class from which the specific tasks are formed
  */

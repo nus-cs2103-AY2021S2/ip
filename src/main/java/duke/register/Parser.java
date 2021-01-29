@@ -1,3 +1,4 @@
+package duke.register;
 /**
  * This class processes the command by breaking down into components
  */
@@ -9,7 +10,7 @@ public class Parser {
     private String date = "";
     private String index;
 
-    Parser(String command) {
+    public Parser(String command) {
         this.command = command;
         commandSeparate = command.split(" ");
     }

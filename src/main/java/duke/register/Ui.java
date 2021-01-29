@@ -1,3 +1,4 @@
+package duke.register;
 import java.util.Scanner;
 
 /**
@@ -6,7 +7,7 @@ import java.util.Scanner;
 public class Ui {
     Scanner ui;
 
-    Ui() {
+    public Ui() {
         ui = new Scanner(System.in);
     }
 

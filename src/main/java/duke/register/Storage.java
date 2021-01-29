@@ -1,3 +1,10 @@
+package duke.register;
+import duke.exception.DukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TaskList;
+import duke.task.TodoTask;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

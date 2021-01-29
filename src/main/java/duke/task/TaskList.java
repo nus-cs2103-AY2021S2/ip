@@ -1,3 +1,8 @@
+package duke.task;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +12,7 @@ public class TaskList {
     ArrayList<Task> Tasks;
 
     //Initializes the taskList
-    TaskList() {
+    public TaskList() {
         Tasks = new ArrayList<Task>();
     }
 
