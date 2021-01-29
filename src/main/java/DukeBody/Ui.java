@@ -24,6 +24,10 @@ public class Ui {
                 + "__________________________________________________");
     }
 
+    /**
+     * shows reading database message from userdata.
+     * @param username
+     */
     public void storageReading (String username) {
         print("Reading tasks from userdata for User: " + username);
     }
