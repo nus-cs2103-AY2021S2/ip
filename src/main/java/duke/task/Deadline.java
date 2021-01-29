@@ -12,6 +12,12 @@ public class Deadline extends Task {
     private final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
+    /**
+     * Builder for Deadline.
+     *
+     * @param description Task description.
+     * @param by Finish by this time.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;

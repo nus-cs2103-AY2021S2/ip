@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * ArrayList adapted to Duke.
@@ -12,7 +12,7 @@ public class TaskList {
     private final ArrayList<Task> list;
 
     public TaskList() {
-         this.list = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
     public void addJob(Task t) {
@@ -27,6 +27,12 @@ public class TaskList {
         return this.list.size();
     }
 
+    /**
+     * Replaces Task at index with newTask.
+     *
+     * @param index Target Task.
+     * @param newTask New Task to add.
+     */
     public void replaceJob(int index, Task newTask) {
         this.list.remove(index);
         this.list.add(index, newTask);

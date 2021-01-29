@@ -12,6 +12,12 @@ public class Event extends Task {
     private final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
+    /**
+     * Builder for Event.
+     *
+     * @param description Task description.
+     * @param at Finish by this time.
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;

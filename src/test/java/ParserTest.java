@@ -1,93 +1,89 @@
-import duke.DukeException;
-import duke.Parser;
-import duke.TaskList;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.Parser;
+
+
 public class ParserTest {
-    private class DummyTaskList extends TaskList {
-        DummyTaskList() {
-            super();
-        }
-    }
 
     @Test
-    public void parseCommand_Bye() throws DukeException {
+    public void parseCommand_bye() throws DukeException {
         assertEquals("Test usage: this is an EXIT command",
-                Parser.parseCommand("bye", new TaskList()).toString());
+                Parser.parseCommand("bye").toString());
         assertEquals("Test usage: this is an EXIT command",
-                Parser.parseCommand("BYE", new TaskList()).toString());
+                Parser.parseCommand("BYE").toString());
         assertEquals("Test usage: this is an EXIT command",
-                Parser.parseCommand("bYe", new TaskList()).toString());
+                Parser.parseCommand("bYe").toString());
     }
 
     @Test
-    public void parseCommand_List() throws DukeException {
+    public void parseCommand_list() throws DukeException {
         assertEquals("Test usage: this is a LIST command",
-                Parser.parseCommand("list", new TaskList()).toString());
+                Parser.parseCommand("list").toString());
         assertEquals("Test usage: this is a LIST command",
-                Parser.parseCommand("LIST", new TaskList()).toString());
+                Parser.parseCommand("LIST").toString());
         assertEquals("Test usage: this is a LIST command",
-                Parser.parseCommand("LisT", new TaskList()).toString());
+                Parser.parseCommand("LisT").toString());
     }
 
     @Test
-    public void parseCommand_Deadline() throws DukeException {
+    public void parseCommand_deadline() throws DukeException {
         assertEquals("Test usage: this is a DEADLINE command",
-                Parser.parseCommand("deadline ", new TaskList()).toString());
+                Parser.parseCommand("deadline ").toString());
         assertEquals("Test usage: this is a DEADLINE command",
-                Parser.parseCommand("DEADLINE ", new TaskList()).toString());
+                Parser.parseCommand("DEADLINE ").toString());
         assertEquals("Test usage: this is a DEADLINE command",
-                Parser.parseCommand("DeadLINe ", new TaskList()).toString());
+                Parser.parseCommand("DeadLINe ").toString());
     }
 
     @Test
-    public void parseCommand_Event() throws DukeException {
+    public void parseCommand_event() throws DukeException {
         assertEquals("Test usage: this is an EVENT command",
-                Parser.parseCommand("event ", new TaskList()).toString());
+                Parser.parseCommand("event ").toString());
         assertEquals("Test usage: this is an EVENT command",
-                Parser.parseCommand("EVENT ", new TaskList()).toString());
+                Parser.parseCommand("EVENT ").toString());
         assertEquals("Test usage: this is an EVENT command",
-                Parser.parseCommand("EvenT ", new TaskList()).toString());
+                Parser.parseCommand("EvenT ").toString());
     }
 
     @Test
-    public void parseCommand_Todo() throws DukeException {
+    public void parseCommand_todo() throws DukeException {
         assertEquals("Test usage: this is a TODO command",
-                Parser.parseCommand("todo ", new TaskList()).toString());
+                Parser.parseCommand("todo ").toString());
         assertEquals("Test usage: this is a TODO command",
-                Parser.parseCommand("TODO ", new TaskList()).toString());
+                Parser.parseCommand("TODO ").toString());
         assertEquals("Test usage: this is a TODO command",
-                Parser.parseCommand("TodO ", new TaskList()).toString());
+                Parser.parseCommand("TodO ").toString());
     }
 
     @Test
-    public void parseCommand_Delete() throws DukeException {
+    public void parseCommand_delete() throws DukeException {
         assertEquals("Test usage: this is a DELETE command",
-                Parser.parseCommand("delete ", new TaskList()).toString());
+                Parser.parseCommand("delete ").toString());
         assertEquals("Test usage: this is a DELETE command",
-                Parser.parseCommand("DELETE ", new TaskList()).toString());
+                Parser.parseCommand("DELETE ").toString());
         assertEquals("Test usage: this is a DELETE command",
-                Parser.parseCommand("dElEte ", new TaskList()).toString());
+                Parser.parseCommand("dElEte ").toString());
     }
 
     @Test
-    public void parseCommand_Done() throws DukeException {
+    public void parseCommand_done() throws DukeException {
         assertEquals("Test usage: this is a DONE command",
-                Parser.parseCommand("done ", new TaskList()).toString());
+                Parser.parseCommand("done ").toString());
         assertEquals("Test usage: this is a DONE command",
-                Parser.parseCommand("DONE ", new TaskList()).toString());
+                Parser.parseCommand("DONE ").toString());
         assertEquals("Test usage: this is a DONE command",
-                Parser.parseCommand("DoNe ", new TaskList()).toString());
+                Parser.parseCommand("DoNe ").toString());
     }
 
     @Test
     public void parseCommand_invalidCommandOneLetter_exceptionThrown() {
         try {
             assertEquals("",
-                    Parser.parseCommand("a", new TaskList()).toString());
+                    Parser.parseCommand("a").toString());
             fail();
         } catch (DukeException e) {
             assertEquals("Invalid command", e.getMessage());
@@ -98,7 +94,7 @@ public class ParserTest {
     public void parseCommand_invalidCommandZeroLetter_exceptionThrown() {
         try {
             assertEquals("",
-                    Parser.parseCommand("", new TaskList()).toString());
+                    Parser.parseCommand("").toString());
             fail();
         } catch (DukeException e) {
             assertEquals("Invalid command", e.getMessage());
@@ -109,10 +105,10 @@ public class ParserTest {
     public void parseCommand_invalidCommandLongLetter_exceptionThrown() {
         try {
             assertEquals("",
-                    Parser.parseCommand("frhyuighrdiughiudfhgvijverhfiueeidfhaijfjiorejgiorshjglrkehgjklergaa" +
-                                    "ghdfjkhvehrghiuyerhgidfbvijergfvnjrkdbgnvjkdfbnvjkfdnvjkdfbvnjkdfbvjdfkbjkdf" +
-                                    "vnjdfkvbjkdfbfjrighuiohguidsfhguitrnvbuirthgjithgijtnbjitrhgjidfhahjueriutdf",
-                            new TaskList()).toString());
+                    Parser.parseCommand("frhyuighrdiughiudfhgvijverhfiueeidfhaijfjiorejgiorshjglrkehgjklergaa"
+                            + "ghdfjkhvehrghiuyerhgidfbvijergfvnjrkdbgnvjkdfbnvjkfdnvjkdfbvnjkdfbvjdfkbjkdf"
+                            + "vnjdfkvbjkdfbfjrighuiohguidsfhguitrnvbuirthgjithgijtnbjitrhgjidfhahjueriutdf")
+                            .toString());
             fail();
         } catch (DukeException e) {
             assertEquals("Invalid command", e.getMessage());
@@ -123,8 +119,7 @@ public class ParserTest {
     public void parseCommand_invalidCommandWithoutSpace_exceptionThrown() {
         try {
             assertEquals("",
-                    Parser.parseCommand("done",
-                            new TaskList()).toString());
+                    Parser.parseCommand("done").toString());
             fail();
         } catch (DukeException e) {
             assertEquals("Invalid command", e.getMessage());
@@ -135,8 +130,7 @@ public class ParserTest {
     public void parseCommand_invalidCommandSpaceBeforeCommand_exceptionThrown() {
         try {
             assertEquals("",
-                    Parser.parseCommand(" done ",
-                            new TaskList()).toString());
+                    Parser.parseCommand(" done ").toString());
             fail();
         } catch (DukeException e) {
             assertEquals("Invalid command", e.getMessage());
@@ -147,8 +141,7 @@ public class ParserTest {
     public void parseCommand_invalidCommandSpaceInBetweenCommand_exceptionThrown() {
         try {
             assertEquals("",
-                    Parser.parseCommand("d one ",
-                            new TaskList()).toString());
+                    Parser.parseCommand("d one ").toString());
             fail();
         } catch (DukeException e) {
             assertEquals("Invalid command", e.getMessage());
@@ -159,8 +152,7 @@ public class ParserTest {
     public void parseCommand_invalidCommandTwoCommandsConcat_exceptionThrown() {
         try {
             assertEquals("",
-                    Parser.parseCommand("byelist",
-                            new TaskList()).toString());
+                    Parser.parseCommand("byelist").toString());
             fail();
         } catch (DukeException e) {
             assertEquals("Invalid command", e.getMessage());

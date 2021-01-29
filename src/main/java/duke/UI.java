@@ -1,9 +1,9 @@
 package duke;
 
-import duke.command.Command;
-
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.command.Command;
 
 /**
  * User interface of Duke.

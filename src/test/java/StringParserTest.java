@@ -1,7 +1,11 @@
-import duke.StringParser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.StringParser;
 
 public class StringParserTest {
     @Test
@@ -24,7 +28,7 @@ public class StringParserTest {
     }
 
     @Test
-    public void newLiner_SpecialString() {
+    public void newLiner_specialString() {
         assertEquals("1\n2\n345\n",
                 StringParser.newLiner("1\n2345", 3));
     }
