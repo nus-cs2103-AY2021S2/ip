@@ -10,17 +10,10 @@ public class Ui {
     /**
      * Prints the startup message.
      */
-    public void initialize() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("------------------------");
-        System.out.println("Hello! I'm Duke's friend, Ekud." +
+    public String initialize() {
+        return "Hello! I'm Duke's friend, Ekud." +
                 "\nDuke's dead, so I'm here to take his job." +
-                "\nYou want to jot down some tasks?");
+                "\nYou want to jot down some tasks?\n";
     }
 
     /**
@@ -30,17 +23,16 @@ public class Ui {
      * @param t Task involved in the action.
      * @param size Number of Tasks in the list.
      */
-    public void printOnListChange(String preMessage, Task t, int size) {
-        System.out.println(preMessage);
-        System.out.println(t);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String printOnListChange(String preMessage, Task t, int size) {
+        return preMessage + "\n" + t + "\n" +
+        "Now you have " + size + " tasks in the list.\n";
     }
 
     /**
      * Prints the exit message.
      */
-    public void exit() {
-        System.out.println("Bye Bye. Please give me 5-star rating, I still need this job." +
-                "\nMuch thank.");
+    public String exit() {
+        return "Bye Bye. Please give me 5-star rating, I still need this job." +
+                "\nMuch thank.";
     }
 }

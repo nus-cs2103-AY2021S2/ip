@@ -4,75 +4,88 @@ import duke.controller.Parser;
 import duke.controller.Storage;
 import duke.controller.TaskList;
 import duke.controller.Ui;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.util.Scanner;
 
 public class Duke {
+    @FXML
+    private TextArea screen;
+
+    @FXML
+    private TextField input;
+
+    @FXML
+    private Button submit;
+
+    private Parser parser;
+
+    private TaskList listOfTasks;
+
     private static final String FILENAME = "duke.csv";
 
-    public static void main(String[] args) {
-        run();
-    }
+    private final Storage storage = new Storage(FILENAME);
 
-    /**
-     * Runs the application.
-     */
-    public static void run() {
+    @FXML
+    private void initialize() {
         Ui ui = new Ui();
-        ui.initialize();
-        Storage storage = new Storage(FILENAME);
-        TaskList listOfTasks = null;
+        screen.appendText(ui.initialize() + "\n");
         try {
             listOfTasks = storage.handleLoad();
         } catch (DukeException e) {
             System.out.println(e.toString());
             System.exit(1);
         }
-        Parser parser = new Parser(ui);
 
-        Scanner sc = new Scanner(System.in);
-        System.out.print(">>> ");
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            try {
-                if (input.equals("list")) {
-                    parser.handleList(listOfTasks);
-                } else {
-                    // handle the commands with arguments
-                    int spaceIndex = input.indexOf(" ");
-                    int cutOffPoint = spaceIndex == -1 ? input.length() : spaceIndex;
-                    String command = input.substring(0, cutOffPoint);
+        parser = new Parser(ui);
+    }
 
-                    switch (command) {
+    @FXML
+    private void onSubmit() {
+        String userInput = input.getText();
+        try {
+            if (userInput.equals("list")) {
+                screen.appendText(parser.handleList(listOfTasks));
+            } else {
+                // handle the commands with arguments
+                int spaceIndex = userInput.indexOf(" ");
+                int cutOffPoint = spaceIndex == -1 ? userInput.length() : spaceIndex;
+                String command = userInput.substring(0, cutOffPoint);
+
+                String textToAppend = "";
+                switch (command) {
                     case "done":
-                        parser.handleDone(input, listOfTasks);
+                        textToAppend = parser.handleDone(userInput, listOfTasks);
                         break;
                     case "todo":
-                        parser.handleTodo(input, listOfTasks);
+                        textToAppend = parser.handleTodo(userInput, listOfTasks);
                         break;
                     case "delete":
-                        parser.handleDelete(input, listOfTasks);
+                        textToAppend = parser.handleDelete(userInput, listOfTasks);
                         break;
                     case "deadline":
                     case "event":
-                        parser.handleTasksWithTime(command, input, listOfTasks);
+                        textToAppend = parser.handleTasksWithTime(command, userInput, listOfTasks);
                         break;
                     case "find":
-                        parser.handleFind(input, listOfTasks);
+                        textToAppend = parser.handleFind(userInput, listOfTasks);
+                        break;
+                    case "bye":
+                        System.exit(0);
                         break;
                     default:
-                        System.out.println("I have no idea what that means, what do you want?");
+                        textToAppend = "I have no idea what that means, what do you want?\n";
                         break;
-                    }
                 }
-                storage.handleSave(listOfTasks);
-            } catch (DukeException e) {
-                System.out.println(e.toString());
+                screen.appendText(textToAppend + "\n");
             }
-
-            System.out.print(">>> ");
-            input = sc.nextLine();
+            input.clear();
+            storage.handleSave(listOfTasks);
+        } catch (DukeException e) {
+            screen.appendText(e.toString() + "\n");
         }
-        ui.exit();
     }
 }

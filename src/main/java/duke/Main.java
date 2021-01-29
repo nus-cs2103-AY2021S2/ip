@@ -16,6 +16,9 @@ public class Main extends Application {
             fxmlLoader.setLocation(getClass().getResource("/view/interface.fxml"));
             AnchorPane pane = fxmlLoader.load();
             Scene scene = new Scene(pane);
+
+            primaryStage.setTitle("Duke App");
+            primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e){
