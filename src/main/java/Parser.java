@@ -66,18 +66,18 @@ public class Parser {
             throw new DukeException("no description should be added for this command!");
         } else if (possibleTaskInputs.contains(input[0])) {
             switch(input[0]) {
-                case "deadline":
-                    if (!userInput.contains("/by")) {
-                        throw new DukeException("Deadline entries must have a /by phrase!");
-                    } else {
-                        break;
-                    }
-                case "event":
-                    if (!userInput.contains("/at")) {
-                        throw new DukeException("Event entries must have a /at phrase!");
-                    } else {
-                        break;
-                    }
+            case "deadline":
+                if (!userInput.contains("/by")) {
+                    throw new DukeException("Deadline entries must have a /by phrase!");
+                } else {
+                    break;
+                }
+            case "event":
+                if (!userInput.contains("/at")) {
+                    throw new DukeException("Event entries must have a /at phrase!");
+                } else {
+                    break;
+                }
             }
         } else if (possibleActionInputs.contains(input[0])) {
             if (input.length > 2) {
