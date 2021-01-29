@@ -1,21 +1,19 @@
-import java.io.IOException;
-
 /**
  * The main class where the duke is run
  */
 
 public class Duke {
-    private UI ui;
-    private Tasks taskList;
+    private Ui ui;
+    private TaskList taskList;
     private Storage storage;
 
     public Duke(String path) {
-        ui = new UI();
+        ui = new Ui();
         storage = new Storage(path);
         try {
             taskList = storage.load();
         } catch (Exception e) {
-            taskList = new Tasks();
+            taskList = new TaskList();
         }
         ui.greetings();
     }

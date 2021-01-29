@@ -38,9 +38,9 @@ public class Storage {
      * @return
      * @throws DukeException
      */
-    public Tasks load() throws DukeException {
+    public TaskList load() throws DukeException {
         try {
-            Tasks taskList = new Tasks();
+            TaskList taskList = new TaskList();
             Scanner fio = new Scanner(file);
             while (fio.hasNextLine()) {
                 String line = fio.nextLine();
@@ -65,7 +65,7 @@ public class Storage {
      *
      * @param tasks
      */
-    public void saveTask(Tasks tasks) {
+    public void saveTask(TaskList tasks) {
         this.checkIfExist();
         try {
             PrintWriter pw = new PrintWriter(file);

@@ -3,10 +3,10 @@ import java.util.Scanner;
 /**
  * This class is mainly for the input
  */
-public class UI {
+public class Ui {
     Scanner ui;
 
-    UI() {
+    Ui() {
         ui = new Scanner(System.in);
     }
 

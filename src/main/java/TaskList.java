@@ -3,11 +3,11 @@ import java.util.ArrayList;
 /**
  * Class for storing the taskList which stores the tasks
  */
-public class Tasks {
+public class TaskList {
     ArrayList<Task> Tasks;
 
     //Initializes the taskList
-    Tasks() {
+    TaskList() {
         Tasks = new ArrayList<Task>();
     }
 
@@ -25,7 +25,7 @@ public class Tasks {
 
     //Returns a taskList of the tasks that have matching keyword.
     public void findTask(String keyword) {
-        Tasks matches = new Tasks();
+        TaskList matches = new TaskList();
         for (Task t : Tasks) {
             String task = t.getTaskName();
             String[] taskName = task.split(" ");
