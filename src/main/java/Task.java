@@ -23,6 +23,9 @@ public abstract class Task {
         return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
     }
 
+    public String getName() {
+        return description;
+    }
 
     public abstract String saveTask();
     public abstract Task finishTask();
