@@ -1,15 +1,23 @@
-public class Duke {
-    UI ui;
-    Tasks taskList;
+import java.io.IOException;
 
-    public Duke(){
+public class Duke {
+    private UI ui;
+    private Tasks taskList;
+    private Storage storage;
+
+    public Duke(String path) throws IOException {
         ui = new UI();
-        taskList = new Tasks();
+        storage = new Storage(path);
+        try {
+            taskList = storage.load();
+        } catch (Exception e) {
+            taskList = new Tasks();
+        }
         ui.greetings();
     }
 
     //Uses the UI and runs against various conditions
-    public void process () throws DukeException {
+    public void process() throws DukeException {
         String command;
         while (true) {
             command = ui.getCommand();
@@ -18,6 +26,7 @@ public class Duke {
 
             if (command.equals("bye")) {
                 ui.goodbye();
+                storage.saveTask(taskList);
                 break;
             } else if (command.equals("list")) {
                 taskList.printTasks();
@@ -44,9 +53,10 @@ public class Duke {
 
         }
     }
+
     //Main method where duke is initialized
-    public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke();
+    public static void main(String[] args) throws DukeException, IOException {
+        Duke duke = new Duke("data/duke.txt");
         duke.process();
     }
 }

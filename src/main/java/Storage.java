@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Storage class to store the data in a file
+ */
 public class Storage {
     private String path;
     private File file;
@@ -11,55 +14,59 @@ public class Storage {
     /**
      * Constructor to initialize storage
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.path = filePath;
         file = new File(filePath);
     }
 
-    public void checkIfExist(){
-        if(file.exists()){
+    public void checkIfExist() {
+        if (file.exists()) {
             return;
         }
-        try{
+        try {
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Tasks load() throws DukeException{
-        try{
+
+    public Tasks load() throws DukeException {
+        try {
             Tasks taskList = new Tasks();
             Scanner fio = new Scanner(file);
-            while(fio.hasNextLine()){
-                String command = fio.nextLine();
-                Parser parser = new Parser(command);
-                String commandType = parser.getTaskType();
-                if(commandType.equals("todo")){
-                    taskList.addTask(new TodoTask(command));
-                }else if(commandType.equals("deadline")){
-                    taskList.addTask(new DeadlineTask(command));
-                }else if(commandType.equals("event")){
-                    taskList.addTask(new EventTask(command));
+            while (fio.hasNextLine()) {
+                String line = fio.nextLine();
+                String[] command = line.split(" ");
+                if (command[0].equals("todo")) {
+                    taskList.addTask(new TodoTask(line));
+                } else if (command[0].equals("deadline")) {
+                    taskList.addTask(new DeadlineTask(line));
+                } else if (command[0].equals("event")) {
+                    taskList.addTask(new EventTask(line));
                 }
             }
             fio.close();
             return taskList;
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new DukeException("failed to load file");
         }
     }
 
-
-    public void saveTask(Tasks tasks){
+    /**
+     * Saves the tasks into a file so that they can be loaded on to the taskList
+     *
+     * @param tasks
+     */
+    public void saveTask(Tasks tasks) {
         this.checkIfExist();
-        try{
+        try {
             PrintWriter pw = new PrintWriter(file);
-            for(int i = 0; i < tasks.numOfTasks(); i++){
-                pw.println(i + 1 + "." + tasks.getTask(i));
+            for (int i = 0; i < tasks.numOfTasks(); i++) {
+                pw.println(tasks.getTask(i).getTaskName());
             }
             pw.close();
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
 
         }
     }
