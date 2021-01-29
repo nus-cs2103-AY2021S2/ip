@@ -3,8 +3,12 @@ public class Todo extends Task {
         super(toDoDescription);
     }
 
+    public Todo(String toDoDescription, boolean isDone) {
+        super(toDoDescription, isDone);
+    }
+
     @Override
     public String toString() {
-        return "TODO" + Task.TASK_DELIMITER + "[" + (done ? "X" : " ") + "]" + Task.TASK_DELIMITER + taskDescription;
+        return "TODO" + Task.TASK_DELIMITER + (isDone ? "done" : " ") + Task.TASK_DELIMITER + taskDescription;
     }
 }

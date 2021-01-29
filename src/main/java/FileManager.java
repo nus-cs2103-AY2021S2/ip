@@ -26,7 +26,6 @@ public class FileManager {
         File data = new File(path);
         if (data.exists()) {
             PrintWriter pw = new PrintWriter(path);
-            pw.close();
         }
 
         FileWriter fileWriter = new FileWriter(path);
@@ -44,6 +43,8 @@ public class FileManager {
             sb.append(value);
             sb.append("\n");
         }
+
+//        System.out.println(sb.toString());
         return sb;
 
     }

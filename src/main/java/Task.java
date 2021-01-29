@@ -1,19 +1,25 @@
 public class Task {
     protected String taskDescription;
-    protected boolean done;
+    protected boolean isDone;
     public static final String TASK_DELIMITER = " | ";
+    public static final String TASK_DELIMITER_REGEX = " [|] ";
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
-        done = false;
+        isDone = false;
+    }
+
+    public Task(String taskDescription, boolean isDone) {
+        this.taskDescription = taskDescription;
+        this.isDone = isDone;
     }
 
     public void setDone() {
-        done = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return "[" + (done ? "X" : " ") + "]" + TASK_DELIMITER + taskDescription;
+        return (isDone ? "done" : " ") + TASK_DELIMITER + taskDescription;
     }
 }

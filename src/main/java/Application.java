@@ -17,12 +17,15 @@ public class Application {
         taskManager = new TaskManager();
         sc = new Scanner(System.in);
 
-        dataDirectoryName = "../../../data/";
+        dataDirectoryName = "./data/";
         dataFileName = "data.txt";
     }
 
     public void runApplication() {
         UserInterface.greetUser();
+        initialiseDataStorage();
+        loadTasksFromStorage();
+
         String[] userInput = sc.nextLine().split(" ", 2);
         String command = userInput[0];
 
@@ -68,6 +71,7 @@ public class Application {
             } catch (ToDoBeastException e) {
                 System.out.println(UserInterface.line + "\t" + e.getMessage() + "\n" + UserInterface.line);
             } finally {
+                writeDataToStorage();
                 userInput = sc.nextLine().split(" ", 2);
                 command = userInput[0];
             }
@@ -119,6 +123,7 @@ public class Application {
             fileManager.initialiseDirectory(dataDirectoryName);
             fileManager.createFile(dataDirectoryName + dataFileName);
         } catch (IOException e) {
+            System.err.println("oops");
             e.printStackTrace();
         }
     }
@@ -128,6 +133,7 @@ public class Application {
             StringBuilder tasks = fileManager.loadTasksFromFile(dataDirectoryName + dataFileName);
             taskManager.loadTasksFromStorage(tasks.toString());
         } catch (FileNotFoundException e) {
+            System.err.println("oops");
             e.printStackTrace();
         }
     }
