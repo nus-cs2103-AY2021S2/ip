@@ -43,6 +43,10 @@ public class Event extends Task{
         return new Event(this.msg, true, this.time);
     }
 
+    public String encode() {
+        return "E" + "|" + super.encode() + "|" + this.time;
+    }
+
     /**
      * Returns a String that describes Event.
      *

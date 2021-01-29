@@ -40,6 +40,15 @@ public class Task {
         return new Task(this.msg, true);
     }
 
+    public String encode() {
+        if (isDone.equals(true)) {
+            return "DONE" + "|" + this.msg;
+        } else {
+            return "PENDING" + "|" + this.msg;
+        }
+    }
+
+
     /**
      * Returns a String that describes Task.
      *
@@ -48,7 +57,7 @@ public class Task {
     @Override
     public String toString() {
         if (isDone.equals(true)) {
-            return "[" + "X" + "] " + msg;
+            return "[" + "DONE" + "] " + msg;
         } else {
             return "[ ] " + msg;
         }

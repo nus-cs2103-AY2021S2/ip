@@ -7,6 +7,25 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public void populate(ListParser p) {
+        String typeOfTask = p.getTypeOfTask();
+        Boolean isDone = p.getIsDone();
+        String description = p.getDescription();
+        String time = p.getTime();
+
+        switch(typeOfTask) {
+        case "todo":
+            tasks.add(new Todo(description, isDone));
+            break;
+        case "deadline":
+            tasks.add(new Deadline(description, isDone, time));
+            break;
+        case "event":
+            tasks.add(new Event(description, isDone, time));
+            break;
+        }
+    }
+
     public void add(Parser p) throws EmptyDescription {
         String typeOfTask = p.getTypeOfTask();
         String description = p.getDescription();
@@ -23,6 +42,7 @@ public class TaskList {
                 newTask = new Event(description, time);
             }
             tasks.add(newTask);
+            HardDisk.save(tasks);
             String instructions = Response.ADD.toString() + newTask + "\n" + this.status();
             Duke.output(instructions);
         }
@@ -32,6 +52,7 @@ public class TaskList {
         int i = Integer.parseInt(p.getDescription()) - 1;
         Task task = tasks.get(i);
         tasks.remove(i);
+        HardDisk.save(tasks);
 
         String instructions = Response.DELETE.toString() + task + "\n" + this.status();
         Duke.output(instructions);
@@ -43,6 +64,7 @@ public class TaskList {
         }
         int i = Integer.parseInt(p.getDescription()) - 1;
         tasks.set(i, tasks.get(i).setDone());
+        HardDisk.save(tasks);
         Duke.output(Response.DONE.toString() + tasks.get(i) + "\n");
     }
 
