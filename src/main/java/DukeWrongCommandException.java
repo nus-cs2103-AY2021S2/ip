@@ -1,5 +1,6 @@
 public class DukeWrongCommandException extends DukeException {
     String command;
+
     public DukeWrongCommandException(String command) {
         this.command = command;
     }

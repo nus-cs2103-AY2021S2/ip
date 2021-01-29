@@ -13,9 +13,9 @@ public class Event extends Task {
     public static Event create(String taskInfo) throws DukeWrongFormatException,
             DukeMissingDescriptionException {
         String[] parsedInfo = taskInfo.split(" /at ", 2);
-        if(parsedInfo.length != 2) {
+        if (parsedInfo.length != 2) {
             throw new DukeWrongFormatException("event1");
-        } else if(parsedInfo[0].equals(" ") || parsedInfo[1].equals(" ")) {
+        } else if (parsedInfo[0].equals(" ") || parsedInfo[1].equals(" ")) {
             throw new DukeMissingDescriptionException("event");
         } else {
             try {
@@ -56,7 +56,7 @@ public class Event extends Task {
     @Override
     public String saveTask() {
         return String.format("E | %s | %s | %s-%s\n", super.getStatusIcon(),
-                description, super.timeFormat(start) , super.timeFormat(end));
+                description, super.timeFormat(start), super.timeFormat(end));
     }
 
 
@@ -69,6 +69,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s - %s)", super.toString(),
-                super.timeFormat(start) , super.timeFormat(end));
+                super.timeFormat(start), super.timeFormat(end));
     }
 }
