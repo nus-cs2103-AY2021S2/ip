@@ -6,6 +6,11 @@ public class FindCommand extends Command {
         super(command, input, taskList);
     }
 
+    /**
+     * Checks if the user input is formatted into a correct find command.
+     * If it is, it prints the find message.
+     * Otherwise, it prints the exception faced.
+     */
     private void find() {
         try {
             if (parser.canParseFindCommand(input)) {

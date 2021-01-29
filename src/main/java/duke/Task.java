@@ -11,10 +11,17 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public String getDescription() {
+
+    private String getDescription() {
         return this.input;
     }
 
+    /**
+     * Checks if the description of a task contains a given keyword.
+     *
+     * @param keyword Keyword.
+     * @return Boolean.
+     */
     public boolean hasKeyWord(String keyword) {
         String[] words = getDescription().split(" ");
         boolean containsKeyword = false;

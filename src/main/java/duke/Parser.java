@@ -10,11 +10,23 @@ public class Parser {
         return dateTime;
     }
 
+    /**
+     * Parses user input and returns the command.
+     *
+     * @param input User input.
+     * @return Command word.
+     */
     public String parseCommand(String input) {
         String[] command = input.split(" ");
         return command[0];
     }
 
+    /**
+     * Checks if the user input is formatted into a correct To-do task.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     public boolean canParseTodo(String input) {
         String[] command = input.split(" ");
         if (command.length == 1) {
@@ -26,6 +38,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input and returns the description of a To-do task.
+     *
+     * @param input User input.
+     * @return To-do description.
+     */
     public String parseTodoDescription(String input) {
         String[] command = input.split(" ");
         String description = "";
@@ -35,6 +53,12 @@ public class Parser {
         return description;
     }
 
+    /**
+     * Checks if the user input is formatted into a correct Deadline task.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     public boolean canParseDeadline(String input) {
         String[] command = input.split(" ");
         if (command.length == 1) {
@@ -51,16 +75,34 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input and returns the description of a Deadline task.
+     *
+     * @param input User input.
+     * @return Deadline description.
+     */
     public String parseDeadlineDescription(String input) {
         String[] details = input.split(" /by ");
         return details[0].substring(9);
     }
 
+    /**
+     * Parses the user input and returns the deadline of a Deadline task.
+     *
+     * @param input User input.
+     * @return Deadline date.
+     */
     public LocalDateTime parseDeadlineDate(String input) {
         String[] details = input.split(" /by ");
         return parseDate(details[1]);
     }
 
+    /**
+     * Checks if the user input is formatted into a correct Event task.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     public boolean canParseEvent(String input) {
         String[] command = input.split(" ");
         if (command.length == 1) {
@@ -82,23 +124,47 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input and returns the description of an Event task.
+     *
+     * @param input User input.
+     * @return Event description.
+     */
     public String parseEventDescription(String input) {
         String[] details = input.split(" /from ");
         return details[0].substring(6);
     }
 
+    /**
+     * Parses the user input and returns the start date of an Event task.
+     *
+     * @param input User input.
+     * @return Event start date.
+     */
     public LocalDateTime parseEventStartDate(String input) {
         String[] details = input.split(" /from ");
         String[] dates = details[1].split(" /to ");
         return parseDate(dates[0]);
     }
 
+    /**
+     * Parses the user input and returns the end date of an Event task.
+     *
+     * @param input User input.
+     * @return Event end date.
+     */
     public LocalDateTime parseEventEndDate(String input) {
         String[] details = input.split(" /from ");
         String[] dates = details[1].split(" /to ");
         return parseDate(dates[1]);
     }
 
+    /**
+     * Checks if the user input is formatted into a correct List command.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     public boolean canParseListCommand(String input) {
         if (input.equals("list") || input.equals("list ")) {
             return true;
@@ -107,6 +173,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the user input is formatted into a correct index calling command.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     public boolean canParseIndexCommand(String input, int size) {
         String[] command = input.split(" ");
         if (input.equals("done") || input.equals("done ")) {
@@ -123,12 +195,24 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input and returns the index of an index calling command.
+     *
+     * @param input User input.
+     * @return Index.
+     */
     public int parseIndex(String input) {
         String[] command = input.split(" ");
         int index = Integer.valueOf(command[1]) - 1;
         return index;
     }
 
+    /**
+     * Checks if the user input is formatted into a correct Help command.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     public boolean canParseHelpCommand(String input) {
         if (input.equals("help") || input.equals("help ")) {
             return true;
@@ -138,7 +222,7 @@ public class Parser {
     }
 
     /**
-     * Checks if the user input is formatted into a correct find command.
+     * Checks if the user input is formatted into a correct Find command.
      *
      * @param input User input.
      * @return Boolean.

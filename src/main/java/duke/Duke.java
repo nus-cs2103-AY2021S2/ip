@@ -20,6 +20,9 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Starts the Duke program.
+     */
     private void run() {
         ui.printGreeting();
         storage.loadTaskList(tasks);
@@ -37,6 +40,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the command that the user inputs.
+     *
+     * @param input User input.
+     */
     private void executeCommand(String input) {
         String command = parser.parseCommand(input);
         Command cmd = null;
@@ -63,6 +71,9 @@ public class Duke {
         tasks = cmd.getTaskList();
     }
 
+    /**
+     * Saves the task list into the storage file.
+     */
     private void save() {
         String str = "";
         for (int i = 0; i < tasks.getSize(); i++) {
