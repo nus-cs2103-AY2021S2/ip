@@ -1,4 +1,10 @@
-import Exceptions.InvalidDateException;
+package duke;
+
+import duke.exceptions.InvalidDateException;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -8,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    public List<Task> list;
+    protected List<Task> list;
 
     public TaskList() {
         this.list = new ArrayList<>();

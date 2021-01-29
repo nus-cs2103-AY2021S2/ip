@@ -1,4 +1,7 @@
-import Exceptions.*;
+package duke;
+
+import duke.exceptions.*;
+import duke.task.Task;
 
 import java.io.FileNotFoundException;
 import java.time.DateTimeException;

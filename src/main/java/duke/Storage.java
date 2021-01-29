@@ -1,4 +1,10 @@
-import Exceptions.InvalidFolderException;
+package duke;
+
+import duke.exceptions.InvalidFolderException;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +16,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Storage {
@@ -51,7 +56,6 @@ public class Storage {
             } else {
                 taskDescription = taskString.substring(8, indexOfDivider);
                 taskDate = LocalDateTime.parse(taskString.substring(indexOfDivider + 2), df);
-                //taskDate = LocalDateTime.parse(taskString.split(" | ")[4]);
 
                 if (taskString.startsWith("D")) {
                     task = new Deadline(taskDescription, taskDate);
@@ -75,21 +79,21 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
 
             for (Task task : list) {
-                boolean done = task.isDone;
+                boolean done = task.getIsDone();
                 String doneString = "0";
-                String taskDescription = task.description;
+                String taskDescription = task.getDescription();
                 String taskDate;
 
                 if (done) {
                     doneString = "1";
                 }
 
-                if (task.taskType.equals("ToDo")) {
+                if (task.getTaskType().equals("ToDo")) {
                     fw.write("T | " + doneString + " | " + taskDescription + "\n");
                 } else {
                     taskDate = task.getTaskDate();
 
-                    if (task.taskType.equals("Deadline")) {
+                    if (task.getTaskType().equals("Deadline")) {
                         fw.write("D | " + doneString + " | " + taskDescription + "| " + taskDate + "\n");
                     } else {
                         fw.write("E | " + doneString + " | " + taskDescription + "| " + taskDate + "\n");

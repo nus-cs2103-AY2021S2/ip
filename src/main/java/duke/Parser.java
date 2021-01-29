@@ -1,6 +1,9 @@
-import Exceptions.EmptyDescriptionException;
-import Exceptions.InvalidTaskNumberException;
-import Exceptions.MissingTaskNumberException;
+package duke;
+
+import duke.task.Task;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.MissingTaskNumberException;
 
 import java.util.List;
 
