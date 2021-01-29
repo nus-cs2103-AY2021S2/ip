@@ -7,13 +7,15 @@ public class DeadlineTaskTest {
     @Test
     public void Test1() {
         DeadlineTask dTask = new DeadlineTask("deadline do assignment /by 2021-03-15");
-        assertEquals("[D][ ] do assignment (by: Mar 15 2021)", dTask);
+        String dTaskString = dTask.toString();
+        assertEquals("[D][ ] do assignment (by: Mar 15 2021)", dTaskString);
     }
 
     @Test
     public void Test2() {
         DeadlineTask dTask = new DeadlineTask("deadline do assignment /by 2021-03-15");
         dTask.markDone();
-        assertNotEquals("[D][X] do assignment (by: Mar 15 2021)", dTask);
+        String dTaskString = dTask.toString();
+        assertNotEquals("[D][ ] do assignment (by: Mar 15 2021)", dTaskString);
     }
 }
