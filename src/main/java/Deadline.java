@@ -42,6 +42,11 @@ public class Deadline extends Task{
         return new Deadline(this.msg, true, this.by);
     }
 
+    public String encode() {
+        return "D" + "|" + super.encode() + "|" + this.by;
+    }
+
+
     /**
      * Returns a String that describes Deadline.
      *

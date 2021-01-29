@@ -37,6 +37,10 @@ public class Todo extends Task{
         return new Todo(this.msg, true);
     }
 
+    public String encode() {
+        return "T" + "|" + super.encode();
+    }
+
     /**
      * Returns a String that describes Todo.
      *
