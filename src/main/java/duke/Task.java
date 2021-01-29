@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
 public abstract class Task {
-    protected String input;
-    protected boolean isDone;
+    public String input;
+    public boolean isDone;
     static String CHECKED = "[X]";
     static String UNCHECKED = "[ ]";
 
@@ -13,9 +13,6 @@ public abstract class Task {
 
     public abstract String formatToSave();
 
-    /**
-     * Marks the task as done.
-     */
     public void checkTask() {
         this.isDone = true;
     }

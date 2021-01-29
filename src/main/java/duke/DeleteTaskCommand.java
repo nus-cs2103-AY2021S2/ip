@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
 public class DeleteTaskCommand extends Command {
 
-    DeleteTaskCommand(String command, String input, TaskList taskList) {
+    public DeleteTaskCommand(String command, String input, TaskList taskList) {
         super(command, input, taskList);
     }
 
@@ -13,7 +13,7 @@ public class DeleteTaskCommand extends Command {
      */
     private void removeTask() {
         try {
-            if (parser.isCorrectIndexCommand(input, taskList.size())) {
+            if (parser.canParseIndexCommand(input, taskList.getSize())) {
                 int index = parser.parseIndex(input);
                 Task deleted = taskList.deleteTask(index);
                 ui.printDeleteTask(deleted);

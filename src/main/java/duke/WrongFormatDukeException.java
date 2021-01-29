@@ -1,13 +1,13 @@
-package Duke;
+package duke;
 
 public class WrongFormatDukeException extends DukeException {
-    private final String todo = "todo (task description)";
-    private final String deadline = "deadline (task description) /by (DD/MM/YYYY TIME)";
-    private final String event = "event (task description) /from (DD/MM/YYYY TIME) /to (DD/MM/YYYY TIME)";
-    private final String done = "done (valid index)";
-    private final String delete = "delete (valid index)";
-    private final String list = "list";
-    private final String help = "help";
+    private final String TODO = "todo (task description)";
+    private final String DEADLINE = "deadline (task description) /by (DD/MM/YYYY TIME)";
+    private final String EVENT = "event (task description) /from (DD/MM/YYYY TIME) /to (DD/MM/YYYY TIME)";
+    private final String DONE = "done (valid index)";
+    private final String DELETE = "delete (valid index)";
+    private final String LIST = "list";
+    private final String HELP = "help";
     private String command;
 
     public WrongFormatDukeException(String command) {
@@ -18,19 +18,19 @@ public class WrongFormatDukeException extends DukeException {
     public String toString() {
         String str = "Sorry, I believe you have made a mistake in the format of this command.\nHere is the correct format:\n";
         if (command.equals("todo")) {
-            str += todo;
+            str += TODO;
         } else if (command.equals("deadline")) {
-            str += deadline;
+            str += DEADLINE;
         } else if (command.equals("event")) {
-            str += event;
+            str += EVENT;
         } else if (command.equals("done")) {
-            str += done;
+            str += DONE;
         } else if (command.equals("delete")) {
-            str += delete;
+            str += DELETE;
         } else if (command.equals("list")) {
-            str += list;
+            str += LIST;
         } else if (command.equals("help")) {
-            str += help;
+            str += HELP;
         }
         return str;
     }

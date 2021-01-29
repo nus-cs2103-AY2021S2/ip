@@ -1,11 +1,13 @@
-package Duke;
+package duke;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.util.Scanner;
 
 public class Storage {
     private final String filePath;
@@ -46,19 +48,22 @@ public class Storage {
                 String[] taskArr = taskString.split("\\| ");
                 Task task = null;
                 switch(taskArr[0]) {
-                    case "T ":
-                        String input = taskArr[2];
+                case "T ":
+                    String input = taskArr[2];
                         task = new Todo(input);
                         break;
-                    case "D ":
-                        LocalDateTime dateTime = LocalDateTime.parse(taskArr[3].substring(4), DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
-                        task = new Deadline(dateTime, taskArr[2].substring(0, taskArr[2].length() - 1));
-                        break;
-                    case "E ":
-                        LocalDateTime dateTimeStart = LocalDateTime.parse(taskArr[3].substring(6, taskArr[3].length() - 1), DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
-                        LocalDateTime dateTimeEnd = LocalDateTime.parse(taskArr[4].substring(4), DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
-                        task = new Event(dateTimeStart, dateTimeEnd, taskArr[2].substring(0, taskArr[2].length() - 1));
-                        break;
+                case "D ":
+                    LocalDateTime dateTime = LocalDateTime.parse(taskArr[3].substring(4),
+                            DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
+                    task = new Deadline(dateTime, taskArr[2].substring(0, taskArr[2].length() - 1));
+                    break;
+                case "E ":
+                    LocalDateTime dateTimeStart = LocalDateTime.parse(taskArr[3].substring(6, taskArr[3].length() - 1),
+                            DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
+                    LocalDateTime dateTimeEnd = LocalDateTime.parse(taskArr[4].substring(4),
+                            DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
+                    task = new Event(dateTimeStart, dateTimeEnd, taskArr[2].substring(0, taskArr[2].length() - 1));
+                    break;
                 }
                 if (task != null) {
                     if (taskArr[1].equals("X ")) {

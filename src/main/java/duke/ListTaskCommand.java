@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
 public class ListTaskCommand extends Command {
 
-    ListTaskCommand(String command, String input, TaskList taskList) {
+    public ListTaskCommand(String command, String input, TaskList taskList) {
         super(command, input, taskList);
     }
 
@@ -13,7 +13,7 @@ public class ListTaskCommand extends Command {
      */
     private void listTask() {
         try {
-            if (parser.isCorrectList(input)) {
+            if (parser.canParseListCommand(input)) {
                 ui.printTaskList(taskList);
             } else {
                 throw new WrongFormatDukeException(command);

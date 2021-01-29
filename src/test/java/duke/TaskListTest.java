@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +8,7 @@ public class TaskListTest {
     @Test
     public void testSize() {
         TaskList taskList = new TaskList();
-        int actual = taskList.size();
+        int actual = taskList.getSize();
         assertEquals(0, actual);
     }
 
@@ -19,7 +19,7 @@ public class TaskListTest {
         taskList.addTask(task1);
         Task task2 = taskList.getTask(0);
         assertEquals(task1, task2);
-        assertEquals(1, taskList.size());
+        assertEquals(1, taskList.getSize());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class TaskListTest {
         taskList.addTask(task1);
         Task task2 = taskList.deleteTask(0);
         assertEquals(task1, task2);
-        assertEquals(0, taskList.size());
+        assertEquals(0, taskList.getSize());
     }
 
     @Test
@@ -42,6 +42,6 @@ public class TaskListTest {
         String actual = task1.toString();
         String expected = "[T][X] read book";
         assertEquals(expected, actual);
-        assertEquals(1, taskList.size());
+        assertEquals(1, taskList.getSize());
     }
 }

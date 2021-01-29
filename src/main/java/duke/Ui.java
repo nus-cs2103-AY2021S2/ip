@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Ui {
     private final String spacer = "----------------------------------------------------";
@@ -79,7 +79,7 @@ public class Ui {
     public void printTaskList(TaskList taskList) {
         printSpacer();
         System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= taskList.size(); i++) {
+        for (int i = 1; i <= taskList.getSize(); i++) {
             System.out.println(String.format("%d. ", i) + taskList.getTask(i - 1).toString());
         }
         System.out.println("\nDo what you will with this information.");

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.Scanner;
 
@@ -20,9 +20,6 @@ public class Duke {
         duke.run();
     }
 
-    /**
-     * Starts the Duke program.
-     */
     private void run() {
         ui.printGreeting();
         storage.loadTaskList(tasks);
@@ -40,11 +37,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Executes the command given by the user input.
-     * If it is an invalid command, it prints the exception faced.
-     * @param input User input.
-     */
     private void executeCommand(String input) {
         String command = parser.parseCommand(input);
         Command cmd = null;
@@ -69,12 +61,9 @@ public class Duke {
         tasks = cmd.getTaskList();
     }
 
-    /**
-     * Saves the tasks in the task list into the storage file.
-     */
     private void save() {
         String str = "";
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.getSize(); i++) {
             str += tasks.getTask(i).formatToSave() + "\n";
         }
         storage.saveTaskList(str);
