@@ -7,9 +7,10 @@ import java.io.IOException;
  */
 public class Duke {
     protected static boolean isFinished;
+    protected static final String FILE_PATH_SAVED_TASKS = "./savedTasks.txt";
     private Storage storage;
     private Ui ui;
-    protected static final String FILE_PATH_SAVED_TASKS = "./savedTasks.txt";
+
 
     /**
      * Loads the task list from hardware if it was previously created, else creates

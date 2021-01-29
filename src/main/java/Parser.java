@@ -13,61 +13,61 @@ public class Parser {
      * @throws DukeException if user command is invalid
      */
     public static void handleUserCommand(String input, Ui ui) throws DukeException {
-            if (input.equals("bye")) {
-                ui.showGoodbyeMessage();
+        if (input.equals("bye")) {
+            ui.showGoodbyeMessage();
 
-                Duke.isFinished = true;
-            } else if (input.equals("list")) {
-                ui.showTaskList();
-            } else if (input.startsWith("find")) {
-                String keyword = getKeyword(input);
+            Duke.isFinished = true;
+        } else if (input.equals("list")) {
+            ui.showTaskList();
+        } else if (input.startsWith("find")) {
+            String keyword = getKeyword(input);
 
-                ArrayList<String> matchedTasks = TaskList.findMatchingTasks(keyword);
+            ArrayList<String> matchedTasks = TaskList.findMatchingTasks(keyword);
 
-                ui.showMatchingTasks(matchedTasks);
-            } else if (input.startsWith("done ")) {
-                Task finishedTask = getFinishedTask(input);
+            ui.showMatchingTasks(matchedTasks);
+        } else if (input.startsWith("done ")) {
+            Task finishedTask = getFinishedTask(input);
 
-                TaskList.setDone(finishedTask);
+            TaskList.setDone(finishedTask);
 
-                ui.showTaskDone(finishedTask);
-            } else if (input.startsWith("todo ")) {
-                if (input.split(" ").length == 1) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                }
-                String todoTask = getTodoTask(input);
-
-                TaskList.createTodoTask(todoTask);
-
-                ui.showTaskAdded();
-                ui.showNumberOfTasks();
-            } else if (input.startsWith("event ")) {
-                String eventTask = getEventTask(input);
-                String date = getEventDate(input);
-
-                TaskList.createEventTask(eventTask, date);
-
-                ui.showTaskAdded();
-                ui.showNumberOfTasks();
-            } else if (input.startsWith("deadline ")) {
-                String deadlineTask = getDeadlineTask(input);
-                LocalDate deadline = getDeadlineDate(input);
-
-                TaskList.createDeadlineTask(deadlineTask, deadline);
-
-                ui.showTaskAdded();
-                ui.showNumberOfTasks();
-            } else if (input.startsWith("delete ")) {
-                int taskNumber = getTaskNumberToBeDeleted(input);
-                Task taskDeleted = getTaskToBeDeleted(taskNumber);
-
-                TaskList.deleteTask(taskNumber);
-
-                ui.showTaskDeleted(taskDeleted);
-                ui.showNumberOfTasks();
-            } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            ui.showTaskDone(finishedTask);
+        } else if (input.startsWith("todo ")) {
+            if (input.split(" ").length == 1) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
+            String todoTask = getTodoTask(input);
+
+            TaskList.createTodoTask(todoTask);
+
+            ui.showTaskAdded();
+            ui.showNumberOfTasks();
+        } else if (input.startsWith("event ")) {
+            String eventTask = getEventTask(input);
+            String date = getEventDate(input);
+
+            TaskList.createEventTask(eventTask, date);
+
+            ui.showTaskAdded();
+            ui.showNumberOfTasks();
+        } else if (input.startsWith("deadline ")) {
+            String deadlineTask = getDeadlineTask(input);
+            LocalDate deadline = getDeadlineDate(input);
+
+            TaskList.createDeadlineTask(deadlineTask, deadline);
+
+            ui.showTaskAdded();
+            ui.showNumberOfTasks();
+        } else if (input.startsWith("delete ")) {
+            int taskNumber = getTaskNumberToBeDeleted(input);
+            Task taskDeleted = getTaskToBeDeleted(taskNumber);
+
+            TaskList.deleteTask(taskNumber);
+
+            ui.showTaskDeleted(taskDeleted);
+            ui.showNumberOfTasks();
+        } else {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
     }
 
     public static String getKeyword(String input) {
@@ -135,7 +135,7 @@ public class Parser {
      * @return deadline task description
      */
     public static String getDeadlineTask(String input) {
-        return input.substring(9).split("/",2)[0];
+        return input.substring(9).split("/", 2)[0];
     }
 
     /**
@@ -144,8 +144,8 @@ public class Parser {
      * @return deadline date
      */
     public static LocalDate getDeadlineDate(String input) {
-        return LocalDate.parse(input.substring(9).split("/",2)[1].substring(3)
-                .replaceAll("/","-"));
+        return LocalDate.parse(input.substring(9).split("/", 2)[1].substring(3)
+                .replaceAll("/", "-"));
     }
 
 

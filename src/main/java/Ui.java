@@ -1,12 +1,11 @@
-import java.util.Scanner;
-
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * In charge of interactions with the user
  */
 public class Ui {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     /**
      * Initializes a Ui object and greets the user
@@ -65,14 +64,14 @@ public class Ui {
      * @return the command-line input supplied by the user
      */
     public String readUserCommand() {
-       return sc.nextLine();
+        return sc.nextLine();
     }
 
     /**
      * Prints out a farewell message
      */
     public void showGoodbyeMessage() {
-       System.out.println("Bye. Hope to see you soon!\n");
+        System.out.println("Bye. Hope to see you soon!\n");
     }
 
     /**
@@ -92,7 +91,7 @@ public class Ui {
         System.out.println("Here are your tasks!");
 
         for (int i = 1; i <= TaskList.updatedTaskList.size(); i++) {
-            Task task = TaskList.updatedTaskList.get(i-1);
+            Task task = TaskList.updatedTaskList.get(i - 1);
             System.out.print(i + ".");
             System.out.println(task);
         }

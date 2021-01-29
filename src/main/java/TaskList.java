@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 
 /**
@@ -18,12 +17,23 @@ public class TaskList {
         updatedTaskList = new ArrayList<>();
     }
 
+    /**
+     * Initializes a TaskList object in the situation where the specified
+     * file from which tasks are supposed to be loaded from is found
+     * @param loadedList the lists of tasks loaded from the file
+     * @throws DukeException if user command is invalid
+     */
     public TaskList(ArrayList<String> loadedList) throws DukeException {
         updatedTaskList = new ArrayList<>();
         TaskList.loadedList = loadedList;
         updateTaskList();
     }
 
+    /**
+     * Updates the task list for the current chatbot session with the
+     * list of tasks loaded from the specified file
+     * @throws DukeException if user command is invalid
+     */
     public static void updateTaskList() throws DukeException {
         for (int i = 0; i < loadedList.size(); i++) {
             String storedTaskString = loadedList.get(i);
@@ -102,9 +112,13 @@ public class TaskList {
         return input.substring(dateIndex + 5, input.length() - 2);
     }
 
+    /**
+     * Checks if the task stored in the file has been completed
+     * @param storedTaskString task stored in the file
+     */
     public static void checkIfTaskDone(String storedTaskString) {
         if (storedTaskString.substring(4).startsWith("C")) {
-            setDone(updatedTaskList.get(updatedTaskList.size()-1));
+            setDone(updatedTaskList.get(updatedTaskList.size() - 1));
         }
     }
 
@@ -162,6 +176,11 @@ public class TaskList {
         updatedTaskList.remove(taskNumber - 1);
     }
 
+    /**
+     * Returns all the tasks in the current task list that matches the specified keyword
+     * @param keyword used to find a matching task
+     * @return tasks that matches the keyword
+     */
     public static ArrayList<String> findMatchingTasks(String keyword) {
         ArrayList<String> matchedTasks = new ArrayList<>();
         for (int i = 0; i < loadedList.size(); i++) {
