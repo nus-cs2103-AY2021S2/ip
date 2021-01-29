@@ -43,6 +43,14 @@ test {
     }
 }
 
+test {
+    useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion = '8.29'
+}
+
 application {
     mainClassName = "seedu.duke.Duke"
 }
