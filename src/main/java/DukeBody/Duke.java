@@ -59,7 +59,8 @@ public class Duke {
                     
                     case "done":
                         int taskIndex = scanner.nextInt();
-                        this.tasks.markAsDone(taskIndex, Ui.outputFormat);
+                        this.tasks.markAsDone(taskIndex);
+                        this.ui.markedAsDone(this.tasks.get(taskIndex));
                         break;
                     
                     case "todo":
@@ -103,12 +104,11 @@ public class Duke {
         try {
             this.storage.saveTasks(this.tasks);
         } catch (Exception E) {
-
+            this.ui.saveTasksFailure();
         }
 
         this.ui.byebye();
     }
-
 
     public static void main(String[] args) {
         new Duke("A0183450J").run();

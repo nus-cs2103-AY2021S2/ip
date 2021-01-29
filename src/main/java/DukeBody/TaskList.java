@@ -21,9 +21,9 @@ public class TaskList extends ArrayList<Task> {
     }
 
     // mutators
-    public void markAsDone (int taskIndex, DateTimeFormatter outputFormat) 
-            throws IndexOutOfBoundsException {
-        this.get(taskIndex - 1).markAsDone(outputFormat);
+    public void markAsDone (int taskIndex)
+            throws IndexOutOfBoundsException, Task.MarkedAsDoneException {
+        this.get(taskIndex - 1).markAsDone();
     }
 
     @Override

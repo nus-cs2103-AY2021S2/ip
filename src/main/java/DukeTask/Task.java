@@ -12,6 +12,14 @@ public abstract class Task {
         }
     }
 
+    public static class MarkedAsDoneException extends Exception {
+        private static final long serialVersionUID = 1L;
+
+        public MarkedAsDoneException () {
+            super("! The task has already been marked as done.");
+        }
+    }    
+
     protected enum TaskState {
         done, undone;
     }
@@ -39,7 +47,7 @@ public abstract class Task {
 
     // accessors
     public boolean isDone () {
-        return (this.state == TaskState.undone);
+        return (this.state == TaskState.done);
     }
 
     public String taskInformation (DateTimeFormatter outputFormat) {
@@ -50,22 +58,18 @@ public abstract class Task {
 
     public String toCommand (String delimiter, DateTimeFormatter parseFormat) {
         // unique parsing sequence for Task
-        return (this.state == TaskState.done ? 1 : 0) + delimiter + this.description
+        return (this.isDone() ? 1 : 0) + delimiter + this.description
                 + delimiter + this.createdDateTime.format(parseFormat);
     }
 
     // mutators
-    public void markAsDone (DateTimeFormatter outputFormat) {
+    public void markAsDone () throws Task.MarkedAsDoneException {
         switch (this.state) {
         case done:
-            System.out.println("     This task has already been marked done!\n     "
-                    + taskInformation(outputFormat));
-            break;
+            throw new Task.MarkedAsDoneException();
 
         case undone:
             this.state = TaskState.done;
-            System.out.println("     Woohoo! I've marked this task as done\n     " 
-                    + taskInformation(outputFormat));
         }
     }
 }

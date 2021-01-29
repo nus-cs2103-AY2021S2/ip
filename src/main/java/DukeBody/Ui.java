@@ -38,9 +38,18 @@ public class Ui {
         print("You now have " + tasks.size() + " tasks.");
     }
 
+    public void markedAsDone (Task task) {
+        print("Woohoo the task has been marked as done:");
+        print(task.taskInformation(Ui.outputFormat));
+    }
+
     public void removedTask (TaskList tasks, Task task) {
         print("Removed task:", task.taskInformation(Ui.outputFormat), "You now have " 
             + tasks.size() + " tasks.");
+    }
+
+    public void saveTasksFailure () {
+        print("Save tasks to userdata failed spectacularly :((");
     }
 
     public void confuzzled () {
