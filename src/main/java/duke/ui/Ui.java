@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Handles Ui related functions such as input and output.
@@ -24,9 +24,10 @@ public class Ui {
     /**
      * Prints input strings with indentation and top and bottom lines.
      * Each String is printed on a new line.
+     *
      * @param strings input strings.
      */
-    private static void printWithIndentation(String ... strings) {
+    private static void printWithIndentation(String... strings) {
         System.out.println(INDENT + LINE_BREAK);
 
         for (String s : strings) {
@@ -38,6 +39,7 @@ public class Ui {
 
     /**
      * Checks if there is any more user input to process.
+     *
      * @return true if there is still user input, false otherwise.
      */
     public boolean hasMoreTokens() {
@@ -46,6 +48,7 @@ public class Ui {
 
     /**
      * Gets next line of user input.
+     *
      * @return user input
      */
     public String getUserCommand() {
@@ -68,6 +71,7 @@ public class Ui {
 
     /**
      * Displays error message.
+     *
      * @param errorMessage message to be displayed.
      */
     public void showErrorMessage(String errorMessage) {
@@ -76,6 +80,7 @@ public class Ui {
 
     /**
      * Displays list of current tasks.
+     *
      * @param taskList list of current tasks.
      */
     public void showTasks(ArrayList<Task> taskList) {
@@ -92,15 +97,19 @@ public class Ui {
         }
     }
 
-    public void showFilteredTasks(ArrayList<Task> taskList) {
-        if (taskList.size() == 0) {
+    /**
+     * Displays list of matching tasks after search.
+     * @param tasks List of tasks.
+     */
+    public void showFilteredTasks(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
             printWithIndentation("No matching tasks were found.");
         } else {
-            String[] outputArr = new String[taskList.size() + 1];
+            String[] outputArr = new String[tasks.size() + 1];
             outputArr[0] = "Here are the matching tasks in your list:";
 
-            for (int i = 0; i < taskList.size(); i++) {
-                outputArr[i + 1] = (i + 1) + "." + taskList.get(i).toString();
+            for (int i = 0; i < tasks.size(); i++) {
+                outputArr[i + 1] = (i + 1) + "." + tasks.get(i).toString();
             }
 
             printWithIndentation(outputArr);
@@ -109,19 +118,21 @@ public class Ui {
 
     /**
      * Displays message after user successfully deletes a task.
+     *
      * @param numTasks number of tasks left.
-     * @param task task that was deleted.
+     * @param task     task that was deleted.
      */
     public void showSuccessfulDeleteMessage(int numTasks, Task task) {
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
 
         printWithIndentation("Got it! I've removed this task:",
-                "  " + task.toString(),
-                "Now you have " + formattedTasksCount + " in the list.");
+            "  " + task.toString(),
+            "Now you have " + formattedTasksCount + " in the list.");
     }
 
     /**
      * Displays message after user successfully marks a task as done.
+     *
      * @param task task that was marked as done.
      */
     public void showSuccessfulDoneMessage(Task task) {
@@ -130,14 +141,15 @@ public class Ui {
 
     /**
      * Displays message after user successfully adds a task.
+     *
      * @param numTasks number of tasks left.
-     * @param task task that was added.
+     * @param task     task that was added.
      */
     public void showAddTaskMessage(int numTasks, Task task) {
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
 
         printWithIndentation("Got it! I've added this task:",
-                "  " + task.toString(),
-                "Now you have " + formattedTasksCount + " in the list.");
+            "  " + task.toString(),
+            "Now you have " + formattedTasksCount + " in the list.");
     }
 }

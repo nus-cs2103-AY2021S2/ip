@@ -1,20 +1,23 @@
 package duke.task;
 
-import duke.utils.DateTime;
-
 import java.time.LocalDate;
+
+import duke.utils.DateTime;
 
 /**
  * Event task.
  */
 public class Event extends Task {
-    /** Date of event */
+    /**
+     * Date of event
+     */
     protected LocalDate at;
 
     /**
      * Creates new instance of event.
+     *
      * @param description Description of event.
-     * @param at Date of event.
+     * @param at          Date of event.
      */
     public Event(String description, LocalDate at) {
         super(description);
@@ -25,7 +28,8 @@ public class Event extends Task {
     public String serialise() {
         String type = "EVENT";
         StringBuilder sb = new StringBuilder();
-        sb.append(type).append('|').append(isDone).append('|').append(description).append('|').append(DateTime.serialiseDate(at));
+        sb.append(type).append('|').append(isDone).append('|').append(description).append('|')
+            .append(DateTime.serialiseDate(at));
 
         return sb.toString();
     }

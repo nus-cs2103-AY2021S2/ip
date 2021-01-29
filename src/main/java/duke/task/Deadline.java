@@ -1,20 +1,23 @@
 package duke.task;
 
-import duke.utils.DateTime;
-
 import java.time.LocalDate;
+
+import duke.utils.DateTime;
 
 /**
  * Deadline task.
  */
 public class Deadline extends Task {
-    /** Date the task is to be completed by. */
+    /**
+     * Date the task is to be completed by.
+     */
     protected LocalDate by;
 
     /**
      * Creates new instance of deadline.
+     *
      * @param description Description of deadline.
-     * @param by Date the task is to be completed by.
+     * @param by          Date the task is to be completed by.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -25,7 +28,8 @@ public class Deadline extends Task {
     public String serialise() {
         String type = "DEADLINE";
         StringBuilder sb = new StringBuilder();
-        sb.append(type).append('|').append(isDone).append('|').append(description).append('|').append(DateTime.serialiseDate(by));
+        sb.append(type).append('|').append(isDone).append('|')
+            .append(description).append('|').append(DateTime.serialiseDate(by));
 
         return sb.toString();
     }

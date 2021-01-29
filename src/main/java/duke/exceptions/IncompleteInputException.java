@@ -6,8 +6,12 @@ import duke.utils.Command;
  * Exception thrown when input is incomplete.
  */
 public class IncompleteInputException extends DukeException {
-    String message;
+    private String message;
 
+    /**
+     * Creates an instance of exception thrown when input is incomplete.
+     * @param command Command that was called.
+     */
     public IncompleteInputException(Command command) {
         super("");
 

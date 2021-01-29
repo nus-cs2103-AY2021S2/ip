@@ -1,19 +1,21 @@
 package duke.task;
 
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidInputException;
 import duke.exceptions.UnknownCommandException;
 import duke.utils.Command;
 import duke.utils.DateTime;
 
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-
 /**
  * Represents list of tasks.
  */
 public class TaskList {
-    /** Lists of tasks. */
+    /**
+     * Lists of tasks.
+     */
     private ArrayList<Task> tasks;
 
     /**
@@ -25,13 +27,16 @@ public class TaskList {
 
     /**
      * Updates tasks.
+     *
      * @param tasks new tasks.
      */
     public void setTaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
     /**
      * Returns list of tasks.
+     *
      * @return List of tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -40,14 +45,16 @@ public class TaskList {
 
     /**
      * Adds a task to the list of tasks.
+     *
      * @param command Command to determine type of task to add.
-     * @param input Input string.
+     * @param input   Input string.
      * @return Task The task that was added.
      * @throws ArrayIndexOutOfBoundsException If input is not complete.
-     * @throws InvalidDateException If date is invalid.
-     * @throws UnknownCommandException If command is invalid.
+     * @throws InvalidDateException           If date is invalid.
+     * @throws UnknownCommandException        If command is invalid.
      */
-    public Task addTask(Command command, String input) throws ArrayIndexOutOfBoundsException, InvalidDateException, UnknownCommandException {
+    public Task addTask(Command command, String input)
+        throws ArrayIndexOutOfBoundsException, InvalidDateException, UnknownCommandException {
         String[] tokens;
         Task task;
 
@@ -84,6 +91,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
+     *
      * @param idx Index of task to mark as done.
      * @return Task that was marked as done.
      * @throws InvalidInputException If index is not in valid range.
@@ -103,6 +111,7 @@ public class TaskList {
 
     /**
      * Deletes a task.
+     *
      * @param idx Index of task to be deleted.
      * @return Task that was deleted.
      * @throws InvalidInputException If index is not in valid range.
@@ -139,6 +148,7 @@ public class TaskList {
 
     /**
      * Returns size of list of tasks.
+     *
      * @return size of list of tasks.
      */
     public int getSize() {

@@ -29,7 +29,7 @@ public class Parser {
 
         try {
             return Command.valueOf(subStrings[0].trim().toUpperCase());
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new UnknownCommandException(subStrings[0].trim());
         }
     }
