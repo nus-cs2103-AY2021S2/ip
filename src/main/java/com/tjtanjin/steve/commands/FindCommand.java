@@ -7,8 +7,8 @@ import com.tjtanjin.steve.tasks.TaskHandler;
  */
 public class FindCommand {
 
-    private final TaskHandler taskHandler;
-    private final String description;
+    private final TaskHandler TASK_HANDLER;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for FindCommand.
@@ -16,8 +16,8 @@ public class FindCommand {
      * @param taskHandler provides access for command to modify tasks
      */
     public FindCommand(String description, TaskHandler taskHandler) {
-        this.description = description;
-        this.taskHandler = taskHandler;
+        this.DESCRIPTION = description;
+        this.TASK_HANDLER = taskHandler;
     }
 
     /**
@@ -26,7 +26,7 @@ public class FindCommand {
      * @return description of find command
      */
     public String getDescription() {
-        return this.description;
+        return this.DESCRIPTION;
     }
 
     /**
@@ -36,6 +36,6 @@ public class FindCommand {
      * @return string response after operation is done
      */
     public String execute(String taskName) {
-        return taskHandler.findTask(taskName);
+        return TASK_HANDLER.findTask(taskName);
     }
 }

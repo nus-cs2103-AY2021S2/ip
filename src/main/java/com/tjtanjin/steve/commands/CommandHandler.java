@@ -10,15 +10,15 @@ import com.tjtanjin.steve.tasks.TaskHandler;
  */
 public class CommandHandler {
 
-    private final ByeCommand byeCommand;
-    private final DeadlineCommand deadlineCommand;
-    private final DeleteCommand deleteCommand;
-    private final DoneCommand doneCommand;
-    private final EventCommand eventCommand;
-    private final FindCommand findCommand;
-    private final HelpCommand helpCommand;
-    private final ListCommand listCommand;
-    private final TodoCommand todoCommand;
+    private final ByeCommand BYE_COMMAND;
+    private final DeadlineCommand DEADLINE_COMMAND;
+    private final DeleteCommand DELETE_COMMAND;
+    private final DoneCommand DONE_COMMAND;
+    private final EventCommand EVENT_COMMAND;
+    private final FindCommand FIND_COMMAND;
+    private final HelpCommand HELP_COMMAND;
+    private final ListCommand LIST_COMMAND;
+    private final TodoCommand TODO_COMMAND;
 
     /**
      * Constructor for CommandHandler.
@@ -44,15 +44,15 @@ public class CommandHandler {
         cmdInfo.put("FIND", "find <name> | Description: finds task by name");
 
         //initialize commands
-        this.byeCommand = new ByeCommand(cmdInfo.get("BYE"));
-        this.deadlineCommand = new DeadlineCommand(cmdInfo.get("DEADLINE"), taskHandler);
-        this.deleteCommand = new DeleteCommand(cmdInfo.get("DELETE"), taskHandler);
-        this.doneCommand = new DoneCommand(cmdInfo.get("DONE"), taskHandler);
-        this.eventCommand = new EventCommand(cmdInfo.get("EVENT"), taskHandler);
-        this.findCommand = new FindCommand(cmdInfo.get("FIND"), taskHandler);
-        this.helpCommand = new HelpCommand(cmdInfo.get("HELP"), cmdInfo);
-        this.listCommand = new ListCommand(cmdInfo.get("LIST"), taskHandler);
-        this.todoCommand = new TodoCommand(cmdInfo.get("TODO"), taskHandler);
+        this.BYE_COMMAND = new ByeCommand(cmdInfo.get("BYE"));
+        this.DEADLINE_COMMAND = new DeadlineCommand(cmdInfo.get("DEADLINE"), taskHandler);
+        this.DELETE_COMMAND = new DeleteCommand(cmdInfo.get("DELETE"), taskHandler);
+        this.DONE_COMMAND = new DoneCommand(cmdInfo.get("DONE"), taskHandler);
+        this.EVENT_COMMAND = new EventCommand(cmdInfo.get("EVENT"), taskHandler);
+        this.FIND_COMMAND = new FindCommand(cmdInfo.get("FIND"), taskHandler);
+        this.HELP_COMMAND = new HelpCommand(cmdInfo.get("HELP"), cmdInfo);
+        this.LIST_COMMAND = new ListCommand(cmdInfo.get("LIST"), taskHandler);
+        this.TODO_COMMAND = new TodoCommand(cmdInfo.get("TODO"), taskHandler);
     }
 
     /**
@@ -61,7 +61,7 @@ public class CommandHandler {
      * @return bye command object
      */
     public ByeCommand getByeCommand() {
-        return this.byeCommand;
+        return this.BYE_COMMAND;
     }
 
     /**
@@ -70,7 +70,7 @@ public class CommandHandler {
      * @return deadline command object
      */
     public DeadlineCommand getDeadlineCommand() {
-        return this.deadlineCommand;
+        return this.DEADLINE_COMMAND;
     }
 
     /**
@@ -79,7 +79,7 @@ public class CommandHandler {
      * @return delete command object
      */
     public DeleteCommand getDeleteCommand() {
-        return this.deleteCommand;
+        return this.DELETE_COMMAND;
     }
 
     /**
@@ -88,7 +88,7 @@ public class CommandHandler {
      * @return done command object
      */
     public DoneCommand getDoneCommand() {
-        return this.doneCommand;
+        return this.DONE_COMMAND;
     }
 
     /**
@@ -97,7 +97,7 @@ public class CommandHandler {
      * @return event command object
      */
     public EventCommand getEventCommand() {
-        return this.eventCommand;
+        return this.EVENT_COMMAND;
     }
 
     /**
@@ -106,7 +106,7 @@ public class CommandHandler {
      * @return find command object
      */
     public FindCommand getFindCommand() {
-        return this.findCommand;
+        return this.FIND_COMMAND;
     }
 
     /**
@@ -115,7 +115,7 @@ public class CommandHandler {
      * @return help command object
      */
     public HelpCommand getHelpCommand() {
-        return this.helpCommand;
+        return this.HELP_COMMAND;
     }
 
     /**
@@ -124,7 +124,7 @@ public class CommandHandler {
      * @return list command object
      */
     public ListCommand getListCommand() {
-        return this.listCommand;
+        return this.LIST_COMMAND;
     }
 
     /**
@@ -133,6 +133,6 @@ public class CommandHandler {
      * @return todo command object
      */
     public TodoCommand getTodoCommand() {
-        return this.todoCommand;
+        return this.TODO_COMMAND;
     }
 }

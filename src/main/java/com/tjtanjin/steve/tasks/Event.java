@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  * support for an endDate.
  */
 public class Event extends Task {
-    private final LocalDate startDate;
-    private final LocalDate endDate;
+    private final LocalDate START_DATE;
+    private final LocalDate END_DATE;
 
     /**
      * Constructor for Event class.
@@ -20,8 +20,8 @@ public class Event extends Task {
      */
     public Event(String taskName, String status, LocalDate[] taskDates) {
         super(taskName, status, "EVENT");
-        this.startDate = taskDates[0];
-        this.endDate = taskDates[1];
+        this.START_DATE = taskDates[0];
+        this.END_DATE = taskDates[1];
     }
 
     /**
@@ -32,8 +32,8 @@ public class Event extends Task {
     @Override
     public LocalDate[] getDates() {
         LocalDate[] taskDates = new LocalDate[2];
-        taskDates[0] = this.startDate;
-        taskDates[1] = this.endDate;
+        taskDates[0] = this.START_DATE;
+        taskDates[1] = this.END_DATE;
         return taskDates;
     }
 
@@ -45,7 +45,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return super.toString()
-                + " (from: " + this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                        + " to: " + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + " (from: " + this.START_DATE.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                        + " to: " + this.END_DATE.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

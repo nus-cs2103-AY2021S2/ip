@@ -12,8 +12,8 @@ import com.tjtanjin.steve.storage.StorageHandler;
 public class TaskHandler {
 
     //use arraylist to store tasks
-    private final StorageHandler storageHandler;
-    private final ArrayList<Task> tasks;
+    private final StorageHandler STORAGE_HANDLER;
+    private final ArrayList<Task> TASKS;
 
     /**
      * Constructor for TaskList.
@@ -21,8 +21,8 @@ public class TaskHandler {
      * @param storageHandler storage to store and load tasks from
      */
     public TaskHandler(StorageHandler storageHandler) {
-        this.storageHandler = storageHandler;
-        this.tasks = storageHandler.loadTasks();
+        this.STORAGE_HANDLER = storageHandler;
+        this.TASKS = storageHandler.loadTasks();
     }
 
     /**
@@ -42,10 +42,10 @@ public class TaskHandler {
         } else {
             task = new ToDo(taskName, "incomplete");
         }
-        tasks.add(task);
-        if (storageHandler.saveTask(tasks.size(), "NEW",
+        TASKS.add(task);
+        if (STORAGE_HANDLER.saveTask(TASKS.size(), "NEW",
                 taskName, "incomplete", taskType.toUpperCase(), taskDates)) {
-            return "Info: Your task has been added! You now have " + tasks.size() + " task(s)!";
+            return "Info: Your task has been added! You now have " + TASKS.size() + " task(s)!";
         } else {
             return "Error: There was an error saving your task, please check your syntax and try again.";
         }
@@ -57,7 +57,7 @@ public class TaskHandler {
      * @return array list of tasks
      */
     public ArrayList<Task> getTasks() {
-        return tasks;
+        return TASKS;
     }
 
     /**
@@ -68,7 +68,7 @@ public class TaskHandler {
      */
     public String markTaskDone(int index) {
         try {
-            Task task = tasks.get(index);
+            Task task = TASKS.get(index);
             if (task.getStatus().equals("complete")) {
                 return "Error: Task is already completed!";
             } else {
@@ -76,7 +76,7 @@ public class TaskHandler {
                 String taskName = task.getTaskName();
                 String taskType = task.getType().toUpperCase();
                 LocalDate[] taskDates = task.getDates();
-                if (storageHandler.saveTask(index, "DONE",
+                if (STORAGE_HANDLER.saveTask(index, "DONE",
                         taskName, "complete", taskType, taskDates)) {
                     return "Info: Yay your task is done! :D";
                 } else {
@@ -97,12 +97,12 @@ public class TaskHandler {
      */
     public String deleteTask(int index) {
         try {
-            Task task = tasks.get(index);
-            tasks.remove(task);
+            Task task = TASKS.get(index);
+            TASKS.remove(task);
             String taskName = task.getTaskName();
             String taskType = task.getType().toUpperCase();
             LocalDate[] taskDates = task.getDates();
-            if (storageHandler.saveTask(index, "DELETE",
+            if (STORAGE_HANDLER.saveTask(index, "DELETE",
                     taskName, "complete", taskType, taskDates)) {
                 return "Info: The following task has been deleted:\n" + task;
             } else {
@@ -120,15 +120,15 @@ public class TaskHandler {
      * @return string response after operation is done
      */
     public String showAllTasks() {
-        if (tasks.size() == 0) {
+        if (TASKS.size() == 0) {
             return "Info: You have no task at the moment!";
         } else {
             StringBuilder str = new StringBuilder("Info: ");
-            for (int i = 1; i <= tasks.size(); i++) {
-                Task task = tasks.get(i - 1);
+            for (int i = 1; i <= TASKS.size(); i++) {
+                Task task = TASKS.get(i - 1);
                 str.append(i).append(".").append(task).append("\n");
             }
-            str.append("You have ").append(tasks.size()).append(" task(s)!");
+            str.append("You have ").append(TASKS.size()).append(" task(s)!");
             return str.toString();
         }
     }
@@ -140,13 +140,13 @@ public class TaskHandler {
      * @return string response after operation is done
      */
     public String findTask(String taskName) {
-        if (tasks.size() == 0) {
+        if (TASKS.size() == 0) {
             return "Info: You have no task at the moment!";
         } else {
             int counter = 0;
             StringBuilder str = new StringBuilder("Info: ");
-            for (int i = 1; i <= tasks.size(); i++) {
-                Task task = tasks.get(i - 1);
+            for (int i = 1; i <= TASKS.size(); i++) {
+                Task task = TASKS.get(i - 1);
                 if (task.getTaskName().contains(taskName)) {
                     counter += 1;
                     str.append(counter).append(".").append(task).append("\n");

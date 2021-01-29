@@ -20,12 +20,12 @@ import javafx.stage.Stage;
  */
 public class UiHandler {
 
-    private static final VBox dialogContainer = new VBox();
+    private static final VBox DIALOG_CONTAINER = new VBox();
     private static ScrollPane scrollPane;
     private static TextField userInput;
-    private final Parser parser;
-    private final Image user = new Image(getClass().getResourceAsStream("/images/user.png"));
-    private final Image steve = new Image(getClass().getResourceAsStream("/images/steve.png"));
+    private final Parser PARSER;
+    private final Image USER = new Image(getClass().getResourceAsStream("/images/user.png"));
+    private final Image STEVE = new Image(getClass().getResourceAsStream("/images/steve.png"));
 
     /**
      * Constructor for UiHandler.
@@ -33,7 +33,7 @@ public class UiHandler {
      * @param parser parser to process user input
      */
     public UiHandler(Parser parser) {
-        this.parser = parser;
+        this.PARSER = parser;
     }
 
     /**
@@ -73,10 +73,10 @@ public class UiHandler {
         mainLayout.setPrefSize(windowMinWidth, windowMinHeight);
 
         //setup dialog container (chat messages)
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.setPrefWidth(dialogContainerMinWidth);
-        dialogContainer.setMinWidth(dialogContainerMinWidth);
-        dialogContainer.setMaxWidth(dialogContainerMaxWidth);
+        DIALOG_CONTAINER.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        DIALOG_CONTAINER.setPrefWidth(dialogContainerMinWidth);
+        DIALOG_CONTAINER.setMinWidth(dialogContainerMinWidth);
+        DIALOG_CONTAINER.setMaxWidth(dialogContainerMaxWidth);
 
         //setup user input text area
         userInput.setPrefWidth(windowMinWidth - 75);
@@ -89,14 +89,14 @@ public class UiHandler {
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
         //setup scroll pane and scrollbar
-        scrollPane.setContent(dialogContainer);
+        scrollPane.setContent(DIALOG_CONTAINER);
         scrollPane.setPrefSize(windowMinWidth - 15, windowMinHeight - 65);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        DIALOG_CONTAINER.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         //captures user input and calls the function responsible for handling it
         sendButton.setOnMouseClicked((event) -> handleUserInput(userInput.getText()));
@@ -117,7 +117,7 @@ public class UiHandler {
      */
     public void showInfo(String info) {
         Label text = new Label(info);
-        dialogContainer.getChildren().add(DialogBox.getSteveDialog(text, new ImageView(steve)));
+        DIALOG_CONTAINER.getChildren().add(DialogBox.getSteveDialog(text, new ImageView(STEVE)));
     }
 
     /**
@@ -127,7 +127,7 @@ public class UiHandler {
      */
     public void showError(String msg) {
         Label text = new Label(msg);
-        dialogContainer.getChildren().add(DialogBox.getSteveDialog(text, new ImageView(steve)));
+        DIALOG_CONTAINER.getChildren().add(DialogBox.getSteveDialog(text, new ImageView(STEVE)));
     }
 
     /**
@@ -137,11 +137,11 @@ public class UiHandler {
      */
     private void handleUserInput(String input) {
         Label text = new Label("\n" + userInput.getText());
-        dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(text, new ImageView(user))
+        DIALOG_CONTAINER.getChildren().add(
+                DialogBox.getUserDialog(text, new ImageView(USER))
         );
         userInput.clear();
-        showResponse(parser.parseInput(input));
+        showResponse(PARSER.parseInput(input));
     }
 
     /**

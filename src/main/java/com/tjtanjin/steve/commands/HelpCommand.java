@@ -7,15 +7,15 @@ import java.util.HashMap;
  */
 public class HelpCommand {
 
-    private final HashMap<String, String> cmdInfo;
-    private final String description;
+    private final HashMap<String, String> CMD_INFO;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for HelpCommand.
      */
     public HelpCommand(String description, HashMap<String, String> cmdInfo) {
-        this.description = description;
-        this.cmdInfo = cmdInfo;
+        this.DESCRIPTION = description;
+        this.CMD_INFO = cmdInfo;
     }
 
     /**
@@ -24,7 +24,7 @@ public class HelpCommand {
      * @return description of help command
      */
     public String getDescription() {
-        return this.description;
+        return this.DESCRIPTION;
     }
 
     /**
@@ -34,7 +34,7 @@ public class HelpCommand {
      */
     public String execute() {
         StringBuilder str = new StringBuilder("Info: The available commands are as listed below:");
-        for (String info : cmdInfo.values()) {
+        for (String info : CMD_INFO.values()) {
             str.append("\n").append(info);
         }
         return str.toString();

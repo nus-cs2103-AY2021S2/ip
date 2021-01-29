@@ -34,29 +34,29 @@ public class Parser {
     }
 
     //all commands
-    private final ByeCommand byeCommand;
-    private final DeadlineCommand deadlineCommand;
-    private final DeleteCommand deleteCommand;
-    private final DoneCommand doneCommand;
-    private final EventCommand eventCommand;
-    private final FindCommand findCommand;
-    private final HelpCommand helpCommand;
-    private final ListCommand listCommand;
-    private final TodoCommand todoCommand;
+    private final ByeCommand BYE_COMMAND;
+    private final DeadlineCommand DEADLINE_COMMAND;
+    private final DeleteCommand DELETE_COMMAND;
+    private final DoneCommand DONE_COMMAND;
+    private final EventCommand EVENT_COMMAND;
+    private final FindCommand FIND_COMMAND;
+    private final HelpCommand HELP_COMMAND;
+    private final ListCommand LIST_COMMAND;
+    private final TodoCommand TODO_COMMAND;
 
     /**
      * Constructor for Parser class that initialises all valid commands.
      */
     public Parser(CommandHandler commandHandler) {
-        this.byeCommand = commandHandler.getByeCommand();
-        this.deadlineCommand = commandHandler.getDeadlineCommand();
-        this.deleteCommand = commandHandler.getDeleteCommand();
-        this.doneCommand = commandHandler.getDoneCommand();
-        this.eventCommand = commandHandler.getEventCommand();
-        this.findCommand = commandHandler.getFindCommand();
-        this.helpCommand = commandHandler.getHelpCommand();
-        this.listCommand = commandHandler.getListCommand();
-        this.todoCommand = commandHandler.getTodoCommand();
+        this.BYE_COMMAND = commandHandler.getByeCommand();
+        this.DEADLINE_COMMAND = commandHandler.getDeadlineCommand();
+        this.DELETE_COMMAND = commandHandler.getDeleteCommand();
+        this.DONE_COMMAND = commandHandler.getDoneCommand();
+        this.EVENT_COMMAND = commandHandler.getEventCommand();
+        this.FIND_COMMAND = commandHandler.getFindCommand();
+        this.HELP_COMMAND = commandHandler.getHelpCommand();
+        this.LIST_COMMAND = commandHandler.getListCommand();
+        this.TODO_COMMAND = commandHandler.getTodoCommand();
     }
 
     /**
@@ -77,32 +77,32 @@ public class Parser {
         try {
             switch (Cmd.valueOf(command)) {
             case BYE:
-                byeCommand.execute();
+                BYE_COMMAND.execute();
                 return null;
             case DEADLINE:
                 String deadlineTaskName = parseTaskName(input);
                 LocalDate[] deadlineTaskDates = parseTaskDates(input);
-                return deadlineCommand.execute(command, deadlineTaskName, deadlineTaskDates);
+                return DEADLINE_COMMAND.execute(command, deadlineTaskName, deadlineTaskDates);
             case DELETE:
                 int deleteIndex = parseIndex("delete", input);
-                return deleteCommand.execute(deleteIndex);
+                return DELETE_COMMAND.execute(deleteIndex);
             case DONE:
                 int doneIndex = parseIndex("done", input);
-                return doneCommand.execute(doneIndex);
+                return DONE_COMMAND.execute(doneIndex);
             case EVENT:
                 String eventTaskName = parseTaskName(input);
                 LocalDate[] eventTaskDates = parseTaskDates(input);
-                return eventCommand.execute(command, eventTaskName, eventTaskDates);
+                return EVENT_COMMAND.execute(command, eventTaskName, eventTaskDates);
             case FIND:
                 String searchTerm = parseTaskName(input);
-                return findCommand.execute(searchTerm);
+                return FIND_COMMAND.execute(searchTerm);
             case HELP:
-                return helpCommand.execute();
+                return HELP_COMMAND.execute();
             case LIST:
-                return listCommand.execute();
+                return LIST_COMMAND.execute();
             case TODO:
                 String todoTaskName = parseTaskName(input);
-                return todoCommand.execute(command, todoTaskName);
+                return TODO_COMMAND.execute(command, todoTaskName);
             default:
                 return "Error: Invalid instruction, type 'help' to see the options.";
             }
@@ -142,9 +142,9 @@ public class Parser {
             return Integer.parseInt(parsedString[1]) - 1;
         } catch (IndexOutOfBoundsException e) {
             if (cmd.equals("done")) {
-                throw new SteveInvalidFormatException("Info: Usage for done: " + doneCommand.getDescription());
+                throw new SteveInvalidFormatException("Info: Usage for done: " + DONE_COMMAND.getDescription());
             } else {
-                throw new SteveInvalidFormatException("Info: Usage for delete: " + deleteCommand.getDescription());
+                throw new SteveInvalidFormatException("Info: Usage for delete: " + DELETE_COMMAND.getDescription());
             }
         } catch (NumberFormatException e) {
             if (cmd.equals("done")) {
@@ -180,16 +180,16 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             if (taskType.equalsIgnoreCase("TODO")) {
                 throw new SteveInvalidFormatException("Info: Usage for todo: "
-                        + todoCommand.getDescription());
+                        + TODO_COMMAND.getDescription());
             } else if (taskType.equalsIgnoreCase("DEADLINE")) {
                 throw new SteveInvalidFormatException("Info: Usage for deadline: "
-                        + deadlineCommand.getDescription());
+                        + DEADLINE_COMMAND.getDescription());
             } else if (taskType.equalsIgnoreCase("EVENT")) {
                 throw new SteveInvalidFormatException("Info: Usage for event: "
-                        + eventCommand.getDescription());
+                        + EVENT_COMMAND.getDescription());
             } else {
                 throw new SteveInvalidFormatException("Info: Usage for find: "
-                        + findCommand.getDescription());
+                        + FIND_COMMAND.getDescription());
             }
         }
     }

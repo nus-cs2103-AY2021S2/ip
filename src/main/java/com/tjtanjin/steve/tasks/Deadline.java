@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * support for an endDate.
  */
 public class Deadline extends Task {
-    private final LocalDate endDate;
+    private final LocalDate END_DATE;
 
     /**
      * Constructor for Deadline class.
@@ -19,7 +19,7 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, String status, LocalDate[] taskDates) {
         super(taskName, status, "DEADLINE");
-        this.endDate = taskDates[0];
+        this.END_DATE = taskDates[0];
     }
 
     /**
@@ -30,7 +30,7 @@ public class Deadline extends Task {
     @Override
     public LocalDate[] getDates() {
         LocalDate[] taskDates = new LocalDate[1];
-        taskDates[0] = this.endDate;
+        taskDates[0] = this.END_DATE;
         return taskDates;
     }
 
@@ -42,6 +42,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return super.toString()
-                + " (by: " + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + " (by: " + this.END_DATE.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

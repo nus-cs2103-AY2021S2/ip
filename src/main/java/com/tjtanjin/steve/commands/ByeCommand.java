@@ -7,13 +7,13 @@ import com.tjtanjin.steve.ui.UiHandler;
  */
 public class ByeCommand {
 
-    private final String description;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for ByeCommand.
      */
     public ByeCommand(String description) {
-        this.description = description;
+        this.DESCRIPTION = description;
     }
 
     /**
@@ -22,7 +22,7 @@ public class ByeCommand {
      * @return description of bye command
      */
     public String getDescription() {
-        return this.description;
+        return this.DESCRIPTION;
     }
 
     /**

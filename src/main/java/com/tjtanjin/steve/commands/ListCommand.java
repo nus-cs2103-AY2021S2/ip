@@ -7,8 +7,8 @@ import com.tjtanjin.steve.tasks.TaskHandler;
  */
 public class ListCommand {
 
-    private final TaskHandler taskHandler;
-    private final String description;
+    private final TaskHandler TASK_HANDLER;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for ListCommand.
@@ -16,8 +16,8 @@ public class ListCommand {
      * @param taskHandler provides access for command to modify tasks
      */
     public ListCommand(String description, TaskHandler taskHandler) {
-        this.description = description;
-        this.taskHandler = taskHandler;
+        this.DESCRIPTION = description;
+        this.TASK_HANDLER = taskHandler;
     }
 
     /**
@@ -26,7 +26,7 @@ public class ListCommand {
      * @return description of list command
      */
     public String getDescription() {
-        return this.description;
+        return this.DESCRIPTION;
     }
 
     /**
@@ -35,6 +35,6 @@ public class ListCommand {
      * @return string response after operation is done
      */
     public String execute() {
-        return taskHandler.showAllTasks();
+        return TASK_HANDLER.showAllTasks();
     }
 }

@@ -9,8 +9,8 @@ import com.tjtanjin.steve.tasks.TaskHandler;
  */
 public class DeadlineCommand {
 
-    private final TaskHandler taskHandler;
-    private final String description;
+    private final TaskHandler TASK_HANDLER;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for DeadlineCommand.
@@ -18,8 +18,8 @@ public class DeadlineCommand {
      * @param taskHandler provides access for command to modify tasks
      */
     public DeadlineCommand(String description, TaskHandler taskHandler) {
-        this.description = description;
-        this.taskHandler = taskHandler;
+        this.DESCRIPTION = description;
+        this.TASK_HANDLER = taskHandler;
     }
 
     /**
@@ -28,7 +28,7 @@ public class DeadlineCommand {
      * @return description of deadline command
      */
     public String getDescription() {
-        return this.description;
+        return this.DESCRIPTION;
     }
 
     /**
@@ -40,6 +40,6 @@ public class DeadlineCommand {
      * @return string response after operation is done
      */
     public String execute(String taskType, String taskName, LocalDate[] taskDates) {
-        return taskHandler.addTask(taskType, taskName, taskDates);
+        return TASK_HANDLER.addTask(taskType, taskName, taskDates);
     }
 }

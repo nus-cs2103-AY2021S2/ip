@@ -9,9 +9,9 @@ import java.time.LocalDate;
 public class Task {
 
     //task details
-    private final String taskName;
+    private final String TASK_NAME;
+    private final String TYPE;
     private String status;
-    private final String type;
 
     /**
      * Constructor for Task class.
@@ -21,9 +21,9 @@ public class Task {
      * @param type type of task
      */
     public Task(String taskName, String status, String type) {
-        this.taskName = taskName;
+        this.TASK_NAME = taskName;
         this.status = status;
-        this.type = type;
+        this.TYPE = type;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Task {
      * @return name of task
      */
     public String getTaskName() {
-        return this.taskName;
+        return this.TASK_NAME;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Task {
      * @return type of task
      */
     public String getType() {
-        return this.type;
+        return this.TYPE;
     }
 
     /**

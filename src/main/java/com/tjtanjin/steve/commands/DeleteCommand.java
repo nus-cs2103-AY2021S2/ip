@@ -7,8 +7,8 @@ import com.tjtanjin.steve.tasks.TaskHandler;
  */
 public class DeleteCommand {
 
-    private final TaskHandler taskHandler;
-    private final String description;
+    private final TaskHandler TASK_HANDLER;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for DeleteCommand.
@@ -16,8 +16,8 @@ public class DeleteCommand {
      * @param taskHandler provides access for command to modify tasks
      */
     public DeleteCommand(String description, TaskHandler taskHandler) {
-        this.description = description;
-        this.taskHandler = taskHandler;
+        this.DESCRIPTION = description;
+        this.TASK_HANDLER = taskHandler;
     }
 
     /**
@@ -26,7 +26,7 @@ public class DeleteCommand {
      * @return description of delete command
      */
     public String getDescription() {
-        return this.description;
+        return this.DESCRIPTION;
     }
 
     /**
@@ -36,6 +36,6 @@ public class DeleteCommand {
      * @return string response after operation is done
      */
     public String execute(int index) {
-        return taskHandler.deleteTask(index);
+        return TASK_HANDLER.deleteTask(index);
     }
 }

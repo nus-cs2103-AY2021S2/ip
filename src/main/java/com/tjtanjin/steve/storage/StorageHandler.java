@@ -25,9 +25,9 @@ import com.tjtanjin.steve.ui.UiHandler;
  */
 public class StorageHandler {
 
+    private final ArrayList<Task> TASKS = new ArrayList<>();
+    private final String PATH;
     private JSONArray taskList = new JSONArray();
-    private final ArrayList<Task> tasks = new ArrayList<>();
-    private final String path;
 
     /**
      * Constructor for StorageHandler.
@@ -35,7 +35,7 @@ public class StorageHandler {
      * @param path path to look for or create storage file
      */
     public StorageHandler(String path) {
-        this.path = path;
+        this.PATH = path;
     }
 
     //solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
@@ -47,7 +47,7 @@ public class StorageHandler {
     @SuppressWarnings("unchecked")
     public ArrayList<Task> loadTasks() {
 
-        File tasksFile = new File(this.path);
+        File tasksFile = new File(this.PATH);
         try {
             tasksFile.getParentFile().mkdirs();
             tasksFile.createNewFile();
@@ -59,7 +59,7 @@ public class StorageHandler {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader(this.path)) {
+        try (FileReader reader = new FileReader(this.PATH)) {
             //read JSON file
             Object obj = jsonParser.parse(reader);
 
@@ -70,7 +70,7 @@ public class StorageHandler {
         } catch (IOException | ParseException e) {
             //do nothing, empty file is ok just means nothing to load
         }
-        return tasks;
+        return TASKS;
     }
 
     /**
@@ -88,19 +88,19 @@ public class StorageHandler {
         String type = (String) taskDetails.get("type");
 
         if (type.equals("TODO")) {
-            tasks.add(new ToDo(taskName, status));
+            TASKS.add(new ToDo(taskName, status));
         } else if (type.equals("DEADLINE")) {
             String endDate = (String) taskDetails.get("endDate");
             LocalDate[] taskDates = new LocalDate[1];
             taskDates[0] = LocalDate.parse(endDate);
-            tasks.add(new Deadline(taskName, status, taskDates));
+            TASKS.add(new Deadline(taskName, status, taskDates));
         } else {
             String startDate = (String) taskDetails.get("startDate");
             String endDate = (String) taskDetails.get("endDate");
             LocalDate[] taskDates = new LocalDate[2];
             taskDates[0] = LocalDate.parse(startDate);
             taskDates[1] = LocalDate.parse(endDate);
-            tasks.add(new Event(taskName, status, taskDates));
+            TASKS.add(new Event(taskName, status, taskDates));
         }
     }
 
@@ -151,7 +151,7 @@ public class StorageHandler {
         }
 
         //write JSON file
-        try (FileWriter file = new FileWriter(this.path)) {
+        try (FileWriter file = new FileWriter(this.PATH)) {
 
             file.write(taskList.toJSONString());
             file.flush();
