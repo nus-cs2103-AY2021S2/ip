@@ -9,7 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Duke {
     @FXML
@@ -47,6 +48,8 @@ public class Duke {
     private void onSubmit() {
         String userInput = input.getText();
         try {
+            screen.appendText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " - "
+                    + userInput + "\n");
             if (userInput.equals("list")) {
                 screen.appendText(parser.handleList(listOfTasks));
             } else {
