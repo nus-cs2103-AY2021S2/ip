@@ -52,7 +52,7 @@ public class Percy {
     /**
      * Runs the chat bot Percy.
      */
-    public static void main() {
+    public static void main(String [] args) {
         try {
             new Percy().run();
         } catch (IOException ex) {
