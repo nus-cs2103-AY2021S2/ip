@@ -54,4 +54,12 @@ public class TaskManager {
         return outputString.toString();
     }
 
+    public static void printTaskList(List<Task> taskList) {
+        int count = 1;
+        System.out.print(UserInterface.line);
+        for (Task task : taskList) {
+            System.out.println("\t" + count++ + ". " + task);
+        }
+        System.out.println(UserInterface.line);
+    }
 }
