@@ -1,8 +1,5 @@
 package ekud.command;
 
-import java.util.Vector;
-
-import ekud.common.exception.DukeException;
 import ekud.storage.Storage;
 import ekud.task.Task;
 import ekud.task.TaskList;

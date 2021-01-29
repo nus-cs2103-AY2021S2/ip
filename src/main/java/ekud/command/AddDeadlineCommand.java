@@ -2,7 +2,7 @@ package ekud.command;
 
 import java.time.LocalDateTime;
 
-import ekud.common.exception.DukeException;
+import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.Deadline;
 import ekud.task.TaskList;
@@ -30,7 +30,7 @@ public class AddDeadlineCommand extends AddTimedTaskCommand {
      * @param storage The file writer.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException {
         tasks.add(new Deadline(description, dateTime));
         super.execute(tasks, ui, storage);
     }

@@ -1,6 +1,6 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
+import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.TaskList;
 import ekud.ui.Ui;
@@ -17,8 +17,8 @@ public class ByeCommand extends Command {
      * @param storage The file writer.
      */
     @Override
-    public void execute(final TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        storage.save(tasks);  // probably can skip since tasks are written to disk on every modification
+    public void execute(final TaskList tasks, Ui ui, Storage storage) throws EkudException {
+        storage.save(tasks); // probably can skip since tasks are written to disk on every modification
         ui.printLines("Bye bye. Anything call me ah!");
     }
 

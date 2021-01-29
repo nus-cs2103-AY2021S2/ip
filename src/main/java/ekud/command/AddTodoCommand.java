@@ -1,6 +1,6 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
+import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.TaskList;
 import ekud.task.ToDo;
@@ -27,7 +27,7 @@ public class AddTodoCommand extends AddCommand {
      * @param storage The file writer.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException {
         tasks.add(new ToDo(description));
         super.execute(tasks, ui, storage);
     }

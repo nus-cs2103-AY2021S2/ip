@@ -12,7 +12,7 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ekud.common.exception.DukeException;
+import ekud.common.exception.EkudException;
 import ekud.task.Deadline;
 import ekud.task.EventTask;
 import ekud.task.Task;
@@ -56,9 +56,9 @@ public class Storage {
      * Read the file and reconstruct all tasks.
      *
      * @return A Vector containing all reconstructed tasks.
-     * @throws DukeException If any errors are encountered during I/O operations, or if the task is invalid.
+     * @throws EkudException If any errors are encountered during I/O operations, or if the task is invalid.
      */
-    public Vector<Task> load() throws DukeException {
+    public Vector<Task> load() throws EkudException {
         Vector<Task> ret = new Vector<>();
         Scanner s;
         try {
@@ -82,7 +82,7 @@ public class Storage {
                 ret.add(new EventTask(data[2], LocalDateTime.parse(data[3])));
                 break;
             default:
-                throw new DukeException("Unknown task type");
+                throw new EkudException("Unknown task type");
             }
 
             // mark as read accordingly
@@ -111,9 +111,9 @@ public class Storage {
      * Save tasks to disk.
      *
      * @param tasks The list of tasks.
-     * @throws DukeException If an I/O error occurs.
+     * @throws EkudException If an I/O error occurs.
      */
-    public void save(final TaskList tasks) throws DukeException {
+    public void save(final TaskList tasks) throws EkudException {
         if (!canSave) {
             return;
         }
@@ -122,7 +122,7 @@ public class Storage {
         try (FileWriter fw = new FileWriter(filePath, false)) {
             writeToFile(fw, list);
         } catch (IOException e) {
-            throw new DukeException("Storage: IOException encountered");
+            throw new EkudException("Storage: IOException encountered");
         }
     }
 }

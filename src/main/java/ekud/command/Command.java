@@ -1,6 +1,6 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
+import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.TaskList;
 import ekud.ui.Ui;
@@ -16,7 +16,7 @@ public abstract class Command {
      * @param ui      The user interface.
      * @param storage The file writer.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException;
 
     /**
      * Return whether the current command is a signal to exit the application. Only the appropriate tasks should

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * Command that creates a task with date and time information.
  */
 public abstract class AddTimedTaskCommand extends AddCommand {
-    LocalDateTime dateTime;
+    protected LocalDateTime dateTime;
 
     /**
      * Construct a task with date and time information.

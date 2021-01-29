@@ -1,20 +1,20 @@
 package ekud.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
+import java.util.LinkedList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-import java.util.LinkedList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class TaskWithDateTimeTest {
     static final String DATE_TIME_TASK_DESCRIPTION = "task with datetime description";
     static final LocalDateTime DATE_TIME = LocalDateTime.of(2020, 2, 2, 2, 2);
 
-    private static class TaskWithDateTimeImpl extends TaskWithDateTime{
+    private static class TaskWithDateTimeImpl extends TaskWithDateTime {
         public TaskWithDateTimeImpl(String description, LocalDateTime dateTime) {
             super(description, dateTime);
         }

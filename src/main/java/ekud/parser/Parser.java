@@ -17,7 +17,7 @@ import ekud.command.DeleteCommand;
 import ekud.command.DoneCommand;
 import ekud.command.FindCommand;
 import ekud.command.ListCommand;
-import ekud.common.exception.DukeException;
+import ekud.common.exception.EkudException;
 import ekud.common.exception.IncompleteDetailException;
 import ekud.common.exception.InvalidCommandException;
 import ekud.common.exception.InvalidTaskIndexException;
@@ -39,9 +39,9 @@ public class Parser {
      * @param commandType The type of Task to create, namely ToDo, Deadline or Event.
      * @param arguments   All extra arguments necessary for the given task.
      * @return The AddCommand that can be used to construct the task.
-     * @throws DukeException If the command type is invalid or any problems with arguments.
+     * @throws EkudException If the command type is invalid or any problems with arguments.
      */
-    private static AddCommand createAddCommand(CommandType commandType, String arguments) throws DukeException {
+    private static AddCommand createAddCommand(CommandType commandType, String arguments) throws EkudException {
         if (arguments.isBlank()) {
             throw new NoTaskDescriptionException();
         }
@@ -53,7 +53,7 @@ public class Parser {
             final Matcher matcher = TIMED_TASK_ARGS.matcher(arguments);
 
             if (!matcher.matches()) {
-                throw new DukeException("Invalid command format!");
+                throw new EkudException("Invalid command format!");
             }
 
             String dateTimeString = matcher.group("datetime").trim();
@@ -61,7 +61,7 @@ public class Parser {
             try {
                 dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
             } catch (DateTimeParseException e) {
-                throw new DukeException("Invalid date and time format, use d/M/yyyy HHmm");
+                throw new EkudException("Invalid date and time format, use d/M/yyyy HHmm");
             }
 
             if (matcher.group("separator").equals("/by")) {
@@ -79,13 +79,13 @@ public class Parser {
      *
      * @param fullCommand The String containing the entire command.
      * @return The Command that can be executed to satisfy the fullCommand given.
-     * @throws DukeException If any parts of the command are invalid.
+     * @throws EkudException If any parts of the command are invalid.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws EkudException {
         final Matcher matcher = COMMAND_FORMAT.matcher(fullCommand.trim());
 
         if (!matcher.matches()) {
-            throw new DukeException("Invalid command format!");
+            throw new EkudException("Invalid command format!");
         }
 
         final String commandWord = matcher.group("command");
@@ -108,7 +108,7 @@ public class Parser {
             try {
                 date = LocalDate.parse(arguments, DateTimeFormatter.ofPattern("d/M/yyyy"));
             } catch (DateTimeParseException e) {
-                throw new DukeException("Invalid date format, use d/M/yyyy");
+                throw new EkudException("Invalid date format, use d/M/yyyy");
             }
             return new ListCommand(date);
 

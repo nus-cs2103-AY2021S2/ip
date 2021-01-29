@@ -1,20 +1,20 @@
 package ekud.task;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 public class EventTaskTest {
     public static final String EVENT_DESCRIPTION = "event description";
-    static final LocalDateTime DATE_TIME = LocalDateTime.of(2020, 2, 2, 2, 2);
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy h.mma");
+    static final LocalDateTime DATE_TIME = LocalDateTime.of(2020, 2, 2, 2, 2);
 
     @Nested
     @DisplayName("freshly created")

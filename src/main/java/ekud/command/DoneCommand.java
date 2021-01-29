@@ -1,6 +1,6 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
+import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.Task;
 import ekud.task.TaskList;
@@ -29,7 +29,7 @@ public class DoneCommand extends ModificationCommand {
      * @param storage The file writer.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException {
         Task doneTask = tasks.markDone(index);
         super.execute(tasks, ui, storage);
 

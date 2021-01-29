@@ -1,17 +1,20 @@
 package ekud.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.LinkedList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Abstract base class for all tasks")
 public class TaskTest {
-    public final String TASK_DESCRIPTION = "task description";
+    private static final String TASK_DESCRIPTION = "task description";
 
     private static class TaskImpl extends Task {
         public TaskImpl(String description) {
