@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * The main class where the duke is run
+ */
 public class Duke {
     private UI ui;
     private Tasks taskList;

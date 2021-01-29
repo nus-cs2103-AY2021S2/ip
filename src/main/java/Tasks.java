@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 
+/**
+ * Class for storing the taskList which stores the tasks
+ */
 public class Tasks {
     ArrayList<Task> Tasks;
 
-    //Initializes the tasklist
+    //Initializes the taskList
     Tasks() {
         Tasks = new ArrayList<Task>();
     }

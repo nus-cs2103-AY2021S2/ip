@@ -19,6 +19,9 @@ public class Storage {
         file = new File(filePath);
     }
 
+    /**
+     * Checks if the file exist
+     */
     public void checkIfExist() {
         if (file.exists()) {
             return;
@@ -30,7 +33,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Reads the data from the file and returns then in a task list
+     * @return
+     * @throws DukeException
+     */
     public Tasks load() throws DukeException {
         try {
             Tasks taskList = new Tasks();

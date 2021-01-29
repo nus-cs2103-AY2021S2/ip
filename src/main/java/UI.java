@@ -10,6 +10,10 @@ public class UI {
         ui = new Scanner(System.in);
     }
 
+    /**
+     * Gets the command from the user
+     * @return
+     */
     public String getCommand() {
         return ui.nextLine();
     }
