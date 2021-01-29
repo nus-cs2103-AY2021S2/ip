@@ -79,6 +79,10 @@ public abstract class Task {
         return (this.state == TaskState.done);
     }
 
+    public boolean inDescription (String keyphrase) {
+        return this.description.indexOf(keyphrase) >= 0;
+    }
+
     /**
      * Returns information about the task.
      * @param outputFormat  the format in which to output any datetime

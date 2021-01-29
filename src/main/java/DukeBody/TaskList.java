@@ -11,16 +11,28 @@ public class TaskList extends ArrayList<Task> {
     private static final long serialVersionUID = 6951591508963981354L;
 
     // accessors
-    public ArrayList<Task> outstandingTasks () {
-        ArrayList<Task> outstanding = new ArrayList<Task>();
+    public TaskList undoneTasks () {
+        TaskList undone = new TaskList();
 
         for (Task task: this) {
             if (! task.isDone()) {
-                outstanding.add(task);
+                undone.add(task);
             }
         }
 
-        return outstanding;
+        return undone;
+    }
+
+    public TaskList matchedTasks (String keyphrase) {
+        TaskList matched = new TaskList();
+
+        for (Task task: this) {
+            if (task.inDescription(keyphrase)) {
+                matched.add(task);
+            }
+        }
+
+        return matched;
     }
 
     // mutators

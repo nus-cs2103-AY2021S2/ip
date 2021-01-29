@@ -39,23 +39,19 @@ public class Duke {
                         break user_active;
 
                     case "list":
-                        for (int i = 0; i < this.tasks.size(); ++i) {
-                            this.ui.print(i + 1 + ". " + this.tasks.get(i).taskInformation(
-                                    Ui.outputFormat));
-                        }
-
-                        this.ui.print("You have " + this.tasks.outstandingTasks().size()
+                        this.ui.listTasks(this.tasks);
+                        this.ui.print("You have " + this.tasks.undoneTasks().size()
                                 + " undone tasks.");
                         break;
 
+                    case "find":
+                        this.ui.print("I found these matches from your search:");
+                        this.ui.listTasks(this.tasks.matchedTasks(scanner.next()));
+                        break;
+
                     case "undone":
-                        ArrayList<Task> undoneTasks = this.tasks.outstandingTasks();
-
-                        for (int i = 0; i < undoneTasks.size(); ++i) {
-                            this.ui.print(i + 1 + ". " + undoneTasks.get(i).taskInformation(
-                                    Ui.outputFormat));
-                        }
-
+                        this.ui.print("Tasks that remain outstanding:");
+                        this.ui.listTasks(this.tasks.undoneTasks());
                         break;
 
                     case "done":
