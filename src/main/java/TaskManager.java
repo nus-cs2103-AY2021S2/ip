@@ -28,4 +28,13 @@ public class TaskManager {
         return taskList;
     }
 
+    public String returnTaskListAsString() {
+        StringBuilder outputString = new StringBuilder();
+        for (Task task : taskList) {
+            outputString.append(task.toString());
+            outputString.append("\n");
+        }
+        return outputString.toString();
+    }
+
 }
