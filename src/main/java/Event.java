@@ -8,6 +8,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E][" + (done ? "X" : " ") + "] " + taskDescription + " (" + time + ")";
+        return "EVENT" + Task.TASK_DELIMITER + "[" + (done ? "X" : " ") + "]" + Task.TASK_DELIMITER + taskDescription + Task.TASK_DELIMITER + "(" + time + ")";
     }
 }

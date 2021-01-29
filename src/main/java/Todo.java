@@ -5,6 +5,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T][" + (done ? "X" : " ") + "] " + taskDescription;
+        return "TODO" + Task.TASK_DELIMITER + "[" + (done ? "X" : " ") + "]" + Task.TASK_DELIMITER + taskDescription;
     }
 }

@@ -1,6 +1,7 @@
 public class Task {
     protected String taskDescription;
     protected boolean done;
+    public static final String TASK_DELIMITER = " | ";
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
@@ -13,6 +14,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (done ? "X" : " ") + "] " + taskDescription;
+        return "[" + (done ? "X" : " ") + "]" + TASK_DELIMITER + taskDescription;
     }
 }

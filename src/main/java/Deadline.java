@@ -8,6 +8,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D][" + (done ? "X" : " ") + "] " + taskDescription + " (" + time + ")";
+        return "DEADLINE" + Task.TASK_DELIMITER + "[" + (done ? "X" : " ") + "]" + Task.TASK_DELIMITER + taskDescription + Task.TASK_DELIMITER + "(" + time + ")";
     }
 }
