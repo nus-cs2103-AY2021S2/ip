@@ -3,14 +3,27 @@ package duke;
 import duke.task.Task;
 import java.util.List;
 
+/**
+ * <code>Ui</code> class handles the interactions with the user.
+ */
 public class Ui {
+
+    /**
+     * Constructor for Ui class.
+     */
     public Ui() {
     }
 
+    /**
+     * Print the horizontal divider line to separate different commands and output.
+     */
     public void printDivider() {
         System.out.println("    _________________________________________________");
     }
 
+    /**
+     * Print a welcome message when the Duke application starts up.
+     */
     public void welcome() {
         String logo = "   ____        _        \n"
                 + "               |  _ \\ _   _| | _____\n"
@@ -24,16 +37,26 @@ public class Ui {
         printDivider();
     }
 
+    /**
+     * Print a goodbye message when the user terminates the Duke application.
+     */
     public void exit() {
         printDivider();
         System.out.println("     Bye. Hope to see you again soon!");
         printDivider();
     }
 
+    /**
+     * Print an error message when no folder for the file can be found.
+     */
     public void printLoadingError() {
-        System.out.println("\n     No existing file found! Created a new file. :)");
+        System.out.println("\n     No existing folder found! Created a new folder. :)");
     }
 
+    /**
+     * Print the list of existing tasks when user input "list" command.
+     * @param list List of existing tasks.
+     */
     public void printTaskList(List<Task> list) {
         if (list.size() == 0) {
             printDivider();
@@ -51,6 +74,11 @@ public class Ui {
         printDivider();
     }
 
+    /**
+     * Print a validation message when user adds a new Task to the list.
+     * @param newTask New Task added by the user.
+     * @param list List of existing tasks.
+     */
     public void printAddTask(Task newTask, List<Task> list) {
         printDivider();
         System.out.println("      Yes sir! I've added this task:\n"
@@ -59,6 +87,11 @@ public class Ui {
         printDivider();
     }
 
+    /**
+     * Print a validation message when user marks a Task as done.
+     * @param taskNumber Number of the task that the user wants to mark as done.
+     * @param list List of existing tasks.
+     */
     public void printDoneTask(int taskNumber, List<Task> list) {
         printDivider();
         System.out.println("     Nice! I've marked this task as done:\n"
@@ -66,6 +99,11 @@ public class Ui {
         printDivider();
     }
 
+    /**
+     * Print a validation message when user deletes a task frp, the list.
+     * @param taskNumber Number of the task that the user wants to delete.
+     * @param list List of existing tasks.
+     */
     public void printDeleteTask(int taskNumber, List<Task> list) {
         printDivider();
         System.out.println("     Noted. I've removed this task:\n"

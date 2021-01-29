@@ -18,7 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * <code>Storage</code> class handles the loading of tasks from the file and
+ * saving tasks in the file.
+ */
 public class Storage {
+
+    /**
+     * Constructor for Storage class.
+     * Initializes File for the task file.
+     * @param filePath Filepath of the file that saves task
+     * @throws InvalidFolderException If folder to store the file does not exist.
+     */
     public Storage(String filePath) throws InvalidFolderException {
         try {
             File file = new File(filePath);
@@ -33,7 +44,12 @@ public class Storage {
         }
     }
 
-    //When Duke startup, read file content & input into a list.
+    /**
+     * Returns a List of existing tasks from the file when Duke starts up.
+     * @param filePath Filepath of the file that saves task.
+     * @return List of existing tasks in the file.
+     * @throws FileNotFoundException If the file cannot be found.
+     */
     public List<Task> readFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -74,6 +90,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Save the tasks in the file whenever the task list changes.
+     * @param filePath Filepath of the file that saves task.
+     * @param list List of existing tasks.
+     */
     public void overWriteFile(String filePath, List<Task> list) {
         try {
             FileWriter fw = new FileWriter(filePath);

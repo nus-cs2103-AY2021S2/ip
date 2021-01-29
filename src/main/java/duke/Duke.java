@@ -7,6 +7,9 @@ import java.io.FileNotFoundException;
 import java.time.DateTimeException;
 import java.util.Scanner;
 
+/**
+ * Main class of the <code>Duke</code> application.
+ */
 public class Duke {
     private static Storage storage;
     private static TaskList tasks;
@@ -14,20 +17,27 @@ public class Duke {
     private static boolean exit = false;
     private final String filePath;
 
-
-    public Duke(String filePath) throws InvalidFolderException {
+    /**
+     * Constructor for Duke application.
+     * Initializes Ui, Storage and TaskList.
+     * @param filePath Filepath of the file that saves tasks.
+     */
+    public Duke(String filePath) {
         this.filePath = filePath;
         ui = new Ui();
-        storage = new Storage(filePath);
 
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.readFileContents(filePath));
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | InvalidFolderException e) {
             ui.printLoadingError();
             tasks = new TaskList();
         }
     }
 
+    /**
+     * Executes Duke application until user terminates it.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.welcome();
@@ -84,7 +94,11 @@ public class Duke {
         sc.close();
     }
 
-    public static void main(String[] args) throws InvalidFolderException {
-        new Duke("./data/duke.txt").run();
+    /**
+     * Main method for Duke application.
+     * @param args Argument fed into the command line.
+     */
+    public static void main(String[] args) {
+            new Duke("./data/duke.txt").run();
     }
 }
