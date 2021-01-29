@@ -17,13 +17,25 @@ public class Ui {
     /**
      * Greets the user with a message
      */
-    public static void greetUser() {
+    public static String greetUser() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\nHow can I help?\n");
+        return "Hello from\n" + logo + "\nHow can I help?\n";
+    }
+
+    public String displayMessage(String message) {
+        return message;
+    }
+
+    public String displayArraylist(ArrayList<String> arraylist) {
+        String arrayListContents = "";
+        for(int i = 0; i < arraylist.size(); i++) {
+            arrayListContents += arraylist.get(i) + "\n";
+        }
+        return arrayListContents;
     }
 
     /**
@@ -70,8 +82,8 @@ public class Ui {
     /**
      * Prints out a farewell message
      */
-    public void showGoodbyeMessage() {
-        System.out.println("Bye. Hope to see you soon!\n");
+    public String showGoodbyeMessage() {
+        return "Bye. Hope to see you soon!\n";
     }
 
     /**
@@ -87,15 +99,19 @@ public class Ui {
     /**
      * Prints out line-by-line all of the tasks in the task list
      */
-    public void showTaskList() {
-        System.out.println("Here are your tasks!");
+    public String showTaskList() {
+        String taskList = "Here are your tasks!\n";
 
         for (int i = 1; i <= TaskList.updatedTaskList.size(); i++) {
             Task task = TaskList.updatedTaskList.get(i - 1);
-            System.out.print(i + ".");
-            System.out.println(task);
+            taskList += i;
+            taskList += ".";
+            taskList += task + "\n";
+            //System.out.print(i + ".");
+            //System.out.println(task);
         }
-        System.out.println();
+        //System.out.println();
+        return taskList;
     }
 
     /**
