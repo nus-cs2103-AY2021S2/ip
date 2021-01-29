@@ -15,15 +15,6 @@ import javafx.stage.Stage;
 public class Steve extends Application {
 
     /**
-     * Greets then listens for input from user, entry point of the program.
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        //debugging purposes
-        System.out.println("Running Steve...");
-    }
-
-    /**
      * Initializes key classes and calls the UiHandler to show the stage.
      * @param stage primary stage provided by javafx
      */
