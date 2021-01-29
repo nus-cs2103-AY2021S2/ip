@@ -11,7 +11,6 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.fio = new Storage();
-
     }
 
     public void run() {
