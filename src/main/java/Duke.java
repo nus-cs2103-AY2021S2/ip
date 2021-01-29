@@ -26,31 +26,31 @@ public class Duke {
             Parser p = new Parser(command);
             p.parse();
             String TaskType = p.getTaskType();
-            String[] executable = new String[100];
-            executable = command.split(" ");
+        //    String[] executable = new String[100];
+        //    executable = command.split(" ");
             if (command.equals("bye")) {
                 ui.goodbye();
                 storage.saveTask(taskList);
                 break;
             } else if (command.equals("list")) {
                 taskList.printTasks();
-            } else if (executable.length > 1) {
-                if (executable[0].equals("done")) {
-                    taskList.markAsDone(Integer.parseInt(executable[1]));
-                } else if (executable[0].equals("delete")) {
-                    taskList.DeleteTask(Integer.parseInt(executable[1]));
-                } else if (executable[0].equals("find")) {
-                    taskList.findTask(executable[1]);
-                } else if (executable[0].equals("todo")) {
+            } else if (p.getCommandLength() > 1) {
+                if (p.getTaskType().equals("done")) {
+                    taskList.markAsDone(Integer.parseInt(p.getIndex()));
+                } else if (p.getTaskType().equals("delete")) {
+                    taskList.DeleteTask(Integer.parseInt(p.getIndex()));
+                } else if (p.getTaskType().equals("find")) {
+                    taskList.findTask(p.getTaskName());
+                } else if (p.getTaskType().equals("todo")) {
                     taskList.addTask(new TodoTask(command));
-                } else if (executable[0].equals("deadline")) {
+                } else if (p.getTaskType().equals("deadline")) {
                     taskList.addTask(new DeadlineTask(command));
-                } else if (executable[0].equals("event")) {
+                } else if (p.getTaskType().equals("event")) {
                     taskList.addTask(new EventTask(command));
                 }
             } else {
-                if (executable[0].equals("todo") || executable[0].equals("deadline")
-                        || executable[0].equals("event")) {
+                if (p.getTaskType().equals("todo") || p.getTaskType().equals("deadline")
+                        || p.getTaskType().equals("event")) {
                     throw new DukeException("Oops!!! Incomplete command :(");
                 } else {
                     throw new DukeException("Oops!!! Invalid Input :(");

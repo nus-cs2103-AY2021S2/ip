@@ -3,7 +3,9 @@ todo go gym
 todo read news
 todo buy pencil
 todo add books
-todo read books
 todo get coffee
 todo print assignment
 deadline do assignment /by 2021-03-15
+todo visit museum
+deadline finish lab /by 2021-06-21
+event attend wedding /at 2021-07-21
