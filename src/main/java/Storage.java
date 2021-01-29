@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Storage class to store the data in a file
+ */
 public class Storage {
     private String path;
     private File file;
@@ -27,20 +30,20 @@ public class Storage {
         }
     }
 
+
     public Tasks load() throws DukeException{
         try{
             Tasks taskList = new Tasks();
             Scanner fio = new Scanner(file);
             while(fio.hasNextLine()){
-                String command = fio.nextLine();
-                Parser parser = new Parser(command);
-                String commandType = parser.getTaskType();
-                if(commandType.equals("todo")){
-                    taskList.addTask(new TodoTask(command));
-                }else if(commandType.equals("deadline")){
-                    taskList.addTask(new DeadlineTask(command));
-                }else if(commandType.equals("event")){
-                    taskList.addTask(new EventTask(command));
+                String line = fio.nextLine();
+                String[] command = line.split(" ");
+                if(command[0].equals("todo")){
+                    taskList.addTask(new TodoTask(line));
+                }else if(command[0].equals("deadline")){
+                    taskList.addTask(new DeadlineTask(line));
+                }else if(command[0].equals("event")){
+                    taskList.addTask(new EventTask(line));
                 }
             }
             fio.close();
@@ -56,7 +59,7 @@ public class Storage {
         try{
             PrintWriter pw = new PrintWriter(file);
             for(int i = 0; i < tasks.numOfTasks(); i++){
-                pw.println(i + 1 + "." + tasks.getTask(i));
+                pw.println(tasks.getTask(i).getTaskName());
             }
             pw.close();
         }catch (FileNotFoundException e){

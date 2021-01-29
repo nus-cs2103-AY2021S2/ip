@@ -26,6 +26,7 @@ public class Duke {
 
             if (command.equals("bye")) {
                 ui.goodbye();
+                storage.saveTask(taskList);
                 break;
             } else if (command.equals("list")) {
                 taskList.printTasks();
