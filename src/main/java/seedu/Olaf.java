@@ -39,7 +39,7 @@ public class Olaf {
     public void run() {
         new OlafApp(tasks).run();
     }
-    
+
     /**
      * Starts the application with OlafApp.
      *
