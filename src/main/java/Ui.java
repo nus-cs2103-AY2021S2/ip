@@ -45,7 +45,8 @@ public class Ui {
                 "or 'deadline (your task) / (deadline date time)',\n or " +
                 "'event (event name) / (event date time)' to add tasks.\n " +
                 "To see your tasks enter 'list'.\n To complete a task enter " +
-                "'done (number of the task in the list)'.\n And to close Duke " +
+                "'done (number of the task in the list)'.\n To search for a " +
+                " keyword enter 'find (keyword)'\n And to close Duke " +
                 "enter 'bye'.\n"+ line;
     }
 

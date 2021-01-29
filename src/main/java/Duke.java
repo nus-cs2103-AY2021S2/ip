@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class Duke {
 
-    private static String folderPath = "./src/main/java/data/";
+    private static String folderPath = "../src/main/java/data/";
     private static String fileName = "All Tasks.txt";
 
     public static void run() {
@@ -68,6 +68,12 @@ public class Duke {
                             System.out.println(Ui.deleteTask(del, TaskList.listSize()));
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
                             System.out.println(e.getMessage());//rmb do for parse
+                        }
+                    } else if (split[0].equals("find")) {
+                        try {
+                            System.out.println(TaskList.findTask(split[1]));
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
                         }
                     } else if (split[0].equals("todo") || split[0].equals("deadline")
                             || split[0].equals("event")) {

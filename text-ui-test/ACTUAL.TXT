@@ -13,27 +13,29 @@ ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
  [T][✘] eat later
- Now you have 2 tasks in the list
+ Now you have 4 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  Got it. I've added this task:
  [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
- Now you have 3 tasks in the list
+ Now you have 5 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  Got it. I've added this task:
  [E][✘] go to buffet (at: Dec 23 2020 23:23)
- Now you have 4 tasks in the list
+ Now you have 6 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  Here are the tasks in your list:
  1. [T][✘] chill
- 2. [T][✘] eat later
- 3. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
- 4. [E][✘] go to buffet (at: Dec 23 2020 23:23)
+ 2. [E][✘] dirty (at: Oct 10 2020 20:30)
+ 3. [D][✘] make me chill (by: Dec 11 2020 21:20)
+ 4. [T][✘] eat later
+ 5. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+ 6. [E][✘] go to buffet (at: Dec 23 2020 23:23)
 ____________________________________________________________
 
 ____________________________________________________________
@@ -43,25 +45,48 @@ ____________________________________________________________
 
 ____________________________________________________________
  Good job on completing this task!
- [T][✓] eat later
+ [E][✓] dirty (at: Oct 10 2020 20:30)
 ____________________________________________________________
 
 ____________________________________________________________
- Good job on completing this task!
- [D][✓] eat     mee siam (by: Jan 23 2021 20:21)
+ Here are your matching tasks: 
+ 4. [T][✘] eat later
+ 5. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'find' followed by  only 1 word to search
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'find' followed by  only 1 word to search
+____________________________________________________________
+
+____________________________________________________________
+ Enter a number after command, 'done (number)' or 'delete (number)'
+____________________________________________________________
+
+____________________________________________________________
+ Enter a number after command, 'done (number)' or 'delete (number)'
+____________________________________________________________
+
+____________________________________________________________
+ Enter a number after command, 'done (number)' or 'delete (number)'
 ____________________________________________________________
 
 ____________________________________________________________
  Here are the tasks in your list:
  1. [T][✓] chill
- 2. [T][✓] eat later
- 3. [D][✓] eat     mee siam (by: Jan 23 2021 20:21)
- 4. [E][✘] go to buffet (at: Dec 23 2020 23:23)
+ 2. [E][✓] dirty (at: Oct 10 2020 20:30)
+ 3. [D][✘] make me chill (by: Dec 11 2020 21:20)
+ 4. [T][✘] eat later
+ 5. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+ 6. [E][✘] go to buffet (at: Dec 23 2020 23:23)
 ____________________________________________________________
 
 ____________________________________________________________
  Good job on completing this task!
- [E][✓] go to buffet (at: Dec 23 2020 23:23)
+ [T][✓] eat later
 ____________________________________________________________
 
 ____________________________________________________________
@@ -73,6 +98,7 @@ ____________________________________________________________
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
+ To search for a  keyword enter 'find (keyword)'
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
@@ -81,6 +107,7 @@ ____________________________________________________________
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
+ To search for a  keyword enter 'find (keyword)'
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
@@ -89,6 +116,7 @@ ____________________________________________________________
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
+ To search for a  keyword enter 'find (keyword)'
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
@@ -97,6 +125,7 @@ ____________________________________________________________
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
+ To search for a  keyword enter 'find (keyword)'
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
@@ -117,6 +146,7 @@ ____________________________________________________________
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
+ To search for a  keyword enter 'find (keyword)'
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
@@ -125,6 +155,7 @@ ____________________________________________________________
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
+ To search for a  keyword enter 'find (keyword)'
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
@@ -133,6 +164,7 @@ ____________________________________________________________
  or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
+ To search for a  keyword enter 'find (keyword)'
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
@@ -151,39 +183,37 @@ ____________________________________________________________
 ____________________________________________________________
  I've removed the following task:
  [T][✓] chill
+ You now have 5 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+ I've removed the following task:
+ [E][✓] dirty (at: Oct 10 2020 20:30)
+ You now have 4 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+ I've removed the following task:
+ [D][✘] make me chill (by: Dec 11 2020 21:20)
  You now have 3 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
- I've removed the following task:
- [T][✓] eat later
- You now have 2 tasks in the list
+ Enter a number after command, 'done (number)' or 'delete (number)'
 ____________________________________________________________
 
 ____________________________________________________________
- I've removed the following task:
- [D][✓] eat     mee siam (by: Jan 23 2021 20:21)
- You now have 1 tasks in the list
+ Enter 'delete' followed by a number between 1 and 3
 ____________________________________________________________
 
 ____________________________________________________________
- I've removed the following task:
- [E][✓] go to buffet (at: Dec 23 2020 23:23)
- You now have 0 tasks in the list
-____________________________________________________________
-
-____________________________________________________________
-  No tasks to delete!
-____________________________________________________________
-
-____________________________________________________________
-  No tasks to complete!
+ Enter 'done' followed by a number between 1 and 3
 ____________________________________________________________
 
 ____________________________________________________________
  Got it. I've added this task:
  [T][✘] chill
- Now you have 1 tasks in the list
+ Now you have 4 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
