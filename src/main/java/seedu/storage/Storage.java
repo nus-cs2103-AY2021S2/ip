@@ -97,6 +97,7 @@ public class Storage {
             String expression = line.split("] ", 2)[1];
             String[] descriptionSplit = expression.split(" \\(at: ", 2);
             String[] durationSplit = descriptionSplit[1].split(" to ");
+
             LocalDateTime start = LocalDateTime.parse(durationSplit[0].trim(),
                     DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
             LocalDateTime end = LocalDateTime.parse(durationSplit[1].trim(),
