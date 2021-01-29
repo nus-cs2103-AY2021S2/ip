@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private final String preposition;
     private final LocalDate date;
 
@@ -20,8 +20,9 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String dateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
         return String.format("[D][%s] %s (%s %s)", getStatusIcon(), description, preposition, dateStr);
     }
 }

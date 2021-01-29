@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -8,11 +9,13 @@ import duke.task.Todo;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileWriter;
+
 import java.time.LocalDate;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.io.FileWriter;
 
 class FileReader {
 
@@ -20,11 +23,12 @@ class FileReader {
         try {
             File f = new File(path);
 
-            if(!f.exists()) {
+            if (!f.exists()) {
                 //create a new file and write as if the list is empty
                 f.createNewFile();
                 FileWriter fw = new FileWriter(path);
-                fw.write("Done tasks: " + System.lineSeparator() + "Pending tasks: " + System.lineSeparator());
+                fw.write("Done tasks: " + System.lineSeparator() + "Pending tasks: "
+                        + System.lineSeparator());
                 fw.close();
 
                 f = new File(path);
@@ -34,12 +38,11 @@ class FileReader {
             List<Task> tasks = new ArrayList<>();
             boolean isDone = true;
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String currStr = sc.nextLine();
 
-                if(currStr.equals("Done tasks: ") || currStr.equals("Pending tasks: ")) {
-
-                    if(currStr.equals("Pending tasks: ")) {
+                if (currStr.equals("Done tasks: ") || currStr.equals("Pending tasks: ")) {
+                    if (currStr.equals("Pending tasks: ")) {
                         isDone = false;
                     }
 
@@ -48,12 +51,10 @@ class FileReader {
 
                 Task t = toTask(currStr);
 
-                if(isDone) {
+                if (isDone) {
                     t.markAsDone();
                 }
-
                 tasks.add(t);
-
             }
 
             return tasks;
@@ -74,22 +75,22 @@ class FileReader {
             String preposition = null;
             LocalDate date = null;
 
-            if(args.length == 2) {
+            if (args.length == 2) {
                 second = args[1].trim();
                 String[] prepositionAndDate = second.split("[\\s]");
                 preposition = prepositionAndDate[0];
                 date = LocalDate.parse(prepositionAndDate[1]);
             }
 
-            switch(command) {
-                case "todo":
-                    return new Todo(first);
-                case "event":
-                    return new Event(first, preposition, date);
-                case "deadline":
-                    return  new Deadline(first, preposition, date);
-                default:
-                    return null;
+            switch (command) {
+            case "todo":
+                return new Todo(first);
+            case "event":
+                return new Event(first, preposition, date);
+            case "deadline":
+                return  new Deadline(first, preposition, date);
+            default:
+                return null;
             }
     }
 

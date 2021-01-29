@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+
 import duke.task.Task;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class Storage {
         return fr.readFile(filePath);
     }
 
-    public void save(String modifiedResult) throws DukeException{
+    public void save(String modifiedResult) throws DukeException {
         DukeFileWriter fw = new DukeFileWriter();
 
         fw.writeFile(filePath, modifiedResult);
