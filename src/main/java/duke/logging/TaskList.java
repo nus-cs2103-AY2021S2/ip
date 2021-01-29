@@ -121,7 +121,6 @@ public class TaskList {
         if (taskDescription.length() == 0) {
             throw new InvalidDescriptionException("☹ OOPS!!! The description cannot be empty.");
         }
-        System.out.println(taskDescription.length());
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task: tasks) {
             if (task.containSubstring(taskDescription.strip())) {

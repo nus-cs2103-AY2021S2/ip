@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
 import duke.command.UnknownCommand;
 import duke.command.Command;
+import duke.command.FindCommand;
 
 /**
  * The Parser class denotes a parser.
