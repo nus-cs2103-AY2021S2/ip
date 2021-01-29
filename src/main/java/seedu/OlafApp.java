@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Handles the main logic of the application.
@@ -66,6 +67,16 @@ public class OlafApp {
                             taskList.getTotalNumberOfTasksUndone(), PrintText.BORDER);
                 } else {
                     System.out.println(PrintText.EMPTY_TASKLIST_ERROR);
+                }
+            } else if (command.toLowerCase().startsWith("find")) {
+                String expression = Parser.parseParameter(command, " ", 1);
+                TaskList matches = taskList.findTasks(expression);
+
+                if (matches.hasTasks()) {
+                    String output = "Here are the tasks that match your search:\n\n" + matches.toString();
+                    ui.showFormatResponse(output);
+                } else {
+                    ui.showFormatResponse("No tasks match your search...");
                 }
             } else if (command.toLowerCase().startsWith("done")) {
                 try {

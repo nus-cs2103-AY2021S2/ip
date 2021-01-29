@@ -2,6 +2,7 @@ package seedu.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TaskList {
@@ -33,6 +34,13 @@ public class TaskList {
 
     public Task deleteTask(int idx) {
         return tasks.remove(idx - 1);
+    }
+
+    public TaskList findTasks(String search) {
+        ArrayList<Task> matches = tasks.stream()
+                .filter(task -> task.getDescription().contains(search))
+                .collect(Collectors.toCollection(ArrayList::new));
+        return new TaskList(matches);
     }
 
     public int getTotalNumberOfTasks() {
