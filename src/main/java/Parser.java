@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * Parses user input into typeOfTask, description, time.
  *
@@ -7,7 +9,7 @@
 public class Parser {
     private String typeOfTask;
     private String description;
-    private String time;
+    private LocalDateTime time;
 
     /**
      * Returns Parser.
@@ -17,7 +19,7 @@ public class Parser {
     Parser() {
         this.typeOfTask = "";
         this.description = "";
-        this.time = "";
+        this.time = null;
     }
 
     /**
@@ -28,7 +30,7 @@ public class Parser {
      * @param time time of task.
      * @return Parser
      */
-    Parser(String typeOfTask, String description, String time) {
+    Parser(String typeOfTask, String description, LocalDateTime time) {
         this.typeOfTask = typeOfTask;
         this.description = description;
         this.time = time;
@@ -47,14 +49,16 @@ public class Parser {
         if (inputSplit.length >= 2) {
             if (inputSplit[1].equals("")) {
             } else {
+                TimeParser timeParser = new TimeParser();
                 if (inputSplit[1].split("/by").length == 2) {
                     String[] descSplit = inputSplit[1].split("/by ");
                     description = descSplit[0];
-                    time = descSplit[1];
+                    time = timeParser.parse(descSplit[1]);
+
                 } else if (inputSplit[1].split("/at").length == 2) {
                     String[] descSplit = inputSplit[1].split("/at ");
                     description = descSplit[0];
-                    time = descSplit[1];
+                    time = timeParser.parse(descSplit[1]);
                 } else {
                     description = inputSplit[1];
                 }
@@ -86,7 +90,7 @@ public class Parser {
      *
      * @return time
      */
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 

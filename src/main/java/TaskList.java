@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -13,7 +14,7 @@ public class TaskList {
         if (description.equals("")) {
             throw new EmptyDescription(typeOfTask);
         } else {
-            String time = p.getTime();
+            LocalDateTime time = p.getTime();
             Task newTask;
             if (typeOfTask.equals("todo")) {
                 newTask = new Todo(description);

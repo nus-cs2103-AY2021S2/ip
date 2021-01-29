@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an Event.
  * Sub-class of Task.
@@ -6,7 +9,7 @@
  * @version 1.0
  */
 public class Event extends Task{
-    protected String time;
+    protected LocalDateTime time;
 
     /**
      * Returns an Event.
@@ -15,7 +18,7 @@ public class Event extends Task{
      * @param time time of Event.
      * @return Event
      */
-    Event(String msg, String time) {
+    Event(String msg, LocalDateTime time) {
         super(msg);
         this.time = time;
     }
@@ -28,7 +31,7 @@ public class Event extends Task{
      * @param time time of Event.
      * @return Event
      */
-    Event(String msg, Boolean isDone, String time) {
+    Event(String msg, Boolean isDone, LocalDateTime time) {
         super(msg, isDone);
         this.time = time;
     }
@@ -50,6 +53,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + time + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
+        return "[E]" + super.toString() + "(at: " + time.format(formatter) + ")";
     }
 }
