@@ -1,9 +1,10 @@
-package controller;
+package duke.controller;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.time.LocalDate;
 
@@ -44,7 +45,7 @@ public class Parser {
         try {
             int index = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
             taskList.markAsDone(index);
-            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("Nice! I've marked this java.duke.controller.task as done:");
             System.out.println(taskList.getTaskAtIndex(index));
         } catch (IndexOutOfBoundsException e) {
             System.out.println(
@@ -70,7 +71,7 @@ public class Parser {
         Task temp = new ToDo(task);
         taskList.addTask(temp);
         this.ui.printOnListChange(
-                "Got it. I have added the following task:",
+                "Got it. I have added the following java.duke.controller.task:",
                 temp,
                 taskList.getNumberOfTasks());
     }
@@ -96,11 +97,11 @@ public class Parser {
             }
             taskList.addTask(temp);
             this.ui.printOnListChange(
-                    "Got it. I have added the following task:",
+                    "Got it. I have added the following java.duke.controller.task:",
                     temp,
                     taskList.getNumberOfTasks());
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("The timing of the task is not included. Please check your input.");
+            throw new DukeException("The timing of the java.duke.controller.task is not included. Please check your input.");
         } catch (java.time.format.DateTimeParseException e) {
             throw new DukeException("Please input a date with correct format (yyyy-mm-dd).");
         }
@@ -117,7 +118,7 @@ public class Parser {
         try {
             int index = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
             this.ui.printOnListChange(
-                    "Noted. I have removed the following task:",
+                    "Noted. I have removed the following java.duke.controller.task:",
                     taskList.deleteTask(index),
                     taskList.getNumberOfTasks()
             );

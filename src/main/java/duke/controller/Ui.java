@@ -1,6 +1,6 @@
-package controller;
+package duke.controller;
 
-import task.Task;
+import duke.task.Task;
 
 /**
  * A class to handle the printing of the current status
@@ -41,6 +41,6 @@ public class Ui {
      */
     public void exit() {
         System.out.println("Bye Bye. Please give me 5-star rating, I still need this job." +
-                "\nMuch thanks.");
+                "\nMuch thank.");
     }
 }

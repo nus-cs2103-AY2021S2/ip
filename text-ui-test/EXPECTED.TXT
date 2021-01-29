@@ -9,22 +9,22 @@ Hello from
 Hello! I'm Duke's friend, Ekud.
 Duke's dead, so I'm here to take his job.
 You want to jot down some tasks?
-Got it. I have added this task:
+Got it. I have added this java.duke.controller.task:
 [T][ ] haha
 Now you have 1 tasks in the list.
-Got it. I have added this task:
+Got it. I have added this java.duke.controller.task:
 [T][ ] haha
 Now you have 2 tasks in the list.
 Here are the tasks in your list:
 1. [T][ ] haha
 2. [T][ ] haha
-Got it. I have added this task:
+Got it. I have added this java.duke.controller.task:
 [T][ ] borrow book
 Now you have 3 tasks in the list.
-Got it. I have added this task:
+Got it. I have added this java.duke.controller.task:
 [D][ ] return book  (by: Sunday)
 Now you have 4 tasks in the list.
-Got it. I have added this task:
+Got it. I have added this java.duke.controller.task:
 [E][ ] project meeting  (at: Mon 2-4pm)
 Now you have 5 tasks in the list.
 Here are the tasks in your list:
@@ -33,11 +33,11 @@ Here are the tasks in your list:
 3. [T][ ] borrow book
 4. [D][ ] return book  (by: Sunday)
 5. [E][ ] project meeting  (at: Mon 2-4pm)
-Nice! I've marked this task as done:
+Nice! I've marked this java.duke.controller.task as done:
 [T][X] haha
-Nice! I've marked this task as done:
+Nice! I've marked this java.duke.controller.task as done:
 [T][X] haha
-Nice! I've marked this task as done:
+Nice! I've marked this java.duke.controller.task as done:
 [T][X] borrow book
 Here are the tasks in your list:
 1. [T][ ] haha

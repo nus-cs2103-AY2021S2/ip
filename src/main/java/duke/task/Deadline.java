@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,10 +10,10 @@ public class Deadline extends Task{
     LocalDate deadLine;
 
     /**
-     * Constructs an undone Deadline task with a deadline and a name.
+     * Constructs an undone Deadline java.duke.controller.task with a deadline and a name.
      *
-     * @param taskName Name of the Deadline task.
-     * @param deadLine Deadline of the Deadline task.
+     * @param taskName Name of the Deadline java.duke.controller.task.
+     * @param deadLine Deadline of the Deadline java.duke.controller.task.
      */
     public Deadline(String taskName, LocalDate deadLine) {
         super(taskName);
@@ -21,11 +21,11 @@ public class Deadline extends Task{
     }
 
     /**
-     * Constructs a Deadline task with a deadline, a name and status.
+     * Constructs a Deadline java.duke.controller.task with a deadline, a name and status.
      *
-     * @param taskName Name of the Deadline task.
-     * @param done Status of the task, done or not done.
-     * @param deadLine Deadline of the Deadline task.
+     * @param taskName Name of the Deadline java.duke.controller.task.
+     * @param done Status of the java.duke.controller.task, done or not done.
+     * @param deadLine Deadline of the Deadline java.duke.controller.task.
      */
     public Deadline(String taskName, boolean done, LocalDate deadLine) {
         super(taskName, done);
@@ -33,9 +33,9 @@ public class Deadline extends Task{
     }
 
     /**
-     * Returns a string representation of the Deadline task.
+     * Returns a string representation of the Deadline java.duke.controller.task.
      *
-     * @return A string representation of the Deadline task.
+     * @return A string representation of the Deadline java.duke.controller.task.
      */
     public String toString() {
         String formattedDate = this.deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -43,7 +43,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * Parse the task to comply with CSV format.
+     * Parse the java.duke.controller.task to comply with CSV format.
      *
      * @return A string that complies with CSV format.
      */

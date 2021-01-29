@@ -1,4 +1,9 @@
-import controller.*;
+package duke;
+
+import duke.controller.Parser;
+import duke.controller.Storage;
+import duke.controller.TaskList;
+import duke.controller.Ui;
 
 import java.util.Scanner;
 
