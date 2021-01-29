@@ -2,13 +2,14 @@ package duke;
 
 import duke.Task;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     //invoke super constructor
-    ToDo(String toDoDetail){
+    ToDo(String toDoDetail) {
         super(toDoDetail);
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + " | " + super.toString();
     }
 }

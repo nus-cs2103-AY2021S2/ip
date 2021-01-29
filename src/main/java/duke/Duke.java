@@ -17,21 +17,24 @@ import java.util.Scanner;
 
 
 public class Duke {
-//    private static ArrayList<Task> userList = new ArrayList<>();
-    //---------------------------------------------------------------------------------------------------------
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
+    private Parser parser;
+
     public Duke(String filePath) {
         ui = new Ui();
+        Parser parser = new Parser();
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.getTaskList());
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.err.println(e.getMessage());
         }
 
     }
+
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
@@ -71,31 +74,31 @@ public class Duke {
                     ui.printDoneTask(tasks, taskNumber);
                     break;
                 case addTodoCommand:
-                    if(commandArr.length == 1){
+                    if (commandArr.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     else {
-                        newTask = Parser.parseAddTodo(command);
+                        newTask = parser.parseAddTodo(command);
                         ui.printAddedTask(tasks, newTask);
                     }
                     break;
                 case addDeadlineCommand:
-                    newTask = Parser.parseAddDeadline(command);
+                    newTask = parser.parseAddDeadline(command);
                     ui.printAddedTask(tasks, newTask);
                     break;
                 case addEventCommand:
-                    newTask = Parser.parseAddEvent(command);
+                    newTask = parser.parseAddEvent(command);
                     ui.printAddedTask(tasks, newTask);
                     break;
                 case deleteCommand:
-                    int taskNumToBeDeleted = Parser.parseDeleteCommand(command);
+                    int taskNumToBeDeleted = parser.parseDeleteCommand(command);
                     ui.printDeletedTask(tasks, taskNumToBeDeleted);
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
-            catch(DukeException ex) {
+            catch (DukeException ex) {
                 System.err.println(ex.getMessage());
             }
         }

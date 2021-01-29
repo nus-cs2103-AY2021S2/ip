@@ -1,6 +1,6 @@
-[E] | [✘] | eventtest | at: january 1 2021
+[E] | [✓] | eventtest | at: january 1 2021
 [D] | [✘] | deadlinetest | by: february 2 2021
 [T] | [✘] | todotest
 [T] | [✘] | todotest2
 [D] | [✘] | deadlinetest2  | by: january 2 2020
-[E] | [✘] | eventtest2  | at: january 3 2020
+[E] | [✓] | eventtest2  | at: january 3 2020

@@ -1,33 +1,36 @@
 package duke;
+
 import duke.Task;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-public class Event extends Task{
+public class Event extends Task {
     private String eventDateString;
     private LocalDate eventDate;
+
     Event(String eventDateString, String eventDetail) {
         super(eventDetail);
-        try{
+        try {
             this.eventDate = Task.dateStringToDate(eventDateString);
             this.eventDateString = eventDate.getMonth().toString().toLowerCase() + " " +
                     eventDate.getDayOfMonth() + " " + eventDate.getYear();
         }
-        catch(DateTimeException e){
+        catch (DateTimeException e) {
             System.err.println("Please input date in yyyy-MM-dd format.");
         }
     }
-    public String getEventDateString(){
+
+    public String getEventDateString() {
         return this.eventDateString;
     }
 
-    public LocalDate getEventDate(){
+    public LocalDate getEventDate() {
         return this.eventDate;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[E] | " + super.toString() + " | at: " + this.eventDateString;
     }
 }
