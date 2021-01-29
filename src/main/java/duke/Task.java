@@ -4,7 +4,7 @@ import java.time.LocalDate;
 /**
  * Represents a task that has to be done.
  */
-public class Task{
+public class Task {
 
     protected String description;
     protected boolean isCompleted;

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a task that has a deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDate date;
     protected LocalTime time;
@@ -36,7 +36,7 @@ public class Deadline extends Task{
     @Override
     public String getFormattedData() {
         String currentTime = time == null ? "" : " " + time;
-        return  "D | " + super.getFormattedData() + " | " + date + currentTime;
+        return "D | " + super.getFormattedData() + " | " + date + currentTime;
     }
 
     /**
@@ -46,6 +46,7 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         String exactTime = time == null ? "" : " " + time.format(DateTimeFormatter.ofPattern("hh:mma"));
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + exactTime + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + exactTime + ")";
     }
 }

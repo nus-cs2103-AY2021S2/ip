@@ -19,14 +19,14 @@ public class Ui {
     }
 
     public void showAddedTask(Task task, int numOfTasks) {
-        System.out.println("Got it. I've added this task:\n" + task +
-                "\nNow you have " + numOfTasks + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + task
+                + "\nNow you have " + numOfTasks + " tasks in the list.");
         System.out.println("");
     }
 
     public void showRemovedTask(Task task, int numOfTasks) {
-        System.out.println("Noted. I've removed this task:\n" + task +
-                "\nNow you have " + numOfTasks + " tasks in the list.");
+        System.out.println("Noted. I've removed this task:\n"
+                + task + "\nNow you have " + numOfTasks + " tasks in the list.");
         System.out.println("");
     }
 
@@ -53,7 +53,7 @@ public class Ui {
 
     public void showDueTasks(ArrayList<Task> list, String date) {
         LocalDate currentDate = LocalDate.parse(date);
-        System.out.println("Here are the tasks due on " + currentDate + ": " );
+        System.out.println("Here are the tasks due on " + currentDate + ": ");
         for (int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + ". " + list.get(i));
         }

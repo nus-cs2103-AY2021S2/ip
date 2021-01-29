@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents a bye command keyed in by the user.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     ByeCommand(String[] parsedAction) {
         super(parsedAction);

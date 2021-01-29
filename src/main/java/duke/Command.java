@@ -20,7 +20,7 @@ public abstract class Command {
      * @throws IOException If the list of tasks are not in the correct storage format.
      * @throws DukeException If the task number specified to mark done or delete is not a valid task number.
      */
-    abstract void execute(TaskManager taskManager,Ui ui, Storage storage) throws DukeException, IOException;
+    abstract void execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException, IOException;
 
     public boolean isExit() {
         return false;

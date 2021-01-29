@@ -4,14 +4,15 @@ import java.io.IOException;
 /**
  * Represents a done command keyed in by the user.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     DoneCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 
     /**
-     * Executes the done command by marking the task as completed, printing the completed task to the user and updating the stored file.
+     * Executes the done command by marking the task as completed, printing the completed task to the user and
+     * updating the stored file.
      *
      * @param taskManager TaskManager object that maintains the list of tasks.
      * @param ui Ui object that handles user interaction.

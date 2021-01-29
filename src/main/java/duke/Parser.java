@@ -4,14 +4,14 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Parser {
-    private final static String TODO = "todo";
-    private final static String DELETE = "delete";
-    private final static String DONE = "done";
-    private final static String EVENT = "event";
-    private final static String DEADLINE = "deadline";
-    private final static String LIST = "list";
-    private final static String DUE = "due";
-    private final static String FIND = "find";
+    private static final String TODO = "todo";
+    private static final String DELETE = "delete";
+    private static final String DONE = "done";
+    private static final String EVENT = "event";
+    private static final String DEADLINE = "deadline";
+    private static final String LIST = "list";
+    private static final String DUE = "due";
+    private static final String FIND = "find";
 
     public static ArrayList<String> parseToStart(ArrayList<String> oldData) {
         ArrayList<String> parsedData = new ArrayList<>();
@@ -81,10 +81,10 @@ public class Parser {
                     String description = inputArray[1];
                     if (command.equals(TODO)) {
                         return new AddCommand(inputArray);
-                    } else if ((command.equals(EVENT) && description.contains("/at")) ||
-                            (command.equals(DEADLINE) && description.contains("by"))) {
-                        String[] arr = command.equals(EVENT) ? description.split("/at", 2) :
-                                description.split("/by", 2);
+                    } else if ((command.equals(EVENT) && description.contains("/at"))
+                            || (command.equals(DEADLINE) && description.contains("by"))) {
+                        String[] arr = command.equals(EVENT) ? description.split("/at", 2)
+                                : description.split("/by", 2);
                         if (arr.length == 2) {
                             return new AddCommand(inputArray);
                         } else {
@@ -96,7 +96,7 @@ public class Parser {
                 }
             } else if (command.equals("bye")) {
                 return new ByeCommand(inputArray);
-            }  else {
+            } else {
                 throw new DukeException("Invalid command! Please try again.");
             }
         }

@@ -14,7 +14,7 @@ public class ToDo extends Task {
      */
     @Override
     public String getFormattedData() {
-        return  "T | " + super.getFormattedData();
+        return "T | " + super.getFormattedData();
     }
 
     /**

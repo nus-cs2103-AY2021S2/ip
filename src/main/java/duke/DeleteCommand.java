@@ -12,7 +12,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the delete command by removing the task from the list, printing the deleted task to the user and updating the stored file.
+     * Executes the delete command by removing the task from the list, printing the deleted task to the user and
+     * updating the stored file.
      *
      * @param taskManager TaskManager object that maintains the list of tasks.
      * @param ui Ui object that handles user interaction.

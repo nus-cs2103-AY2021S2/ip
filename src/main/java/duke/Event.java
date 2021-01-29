@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a task that happens on a specific date and time.
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDate date;
     protected String duration;
@@ -28,7 +28,7 @@ public class Event extends Task{
      */
     @Override
     public String getFormattedData() {
-        return  "E | " + super.getFormattedData() + " | " + date + " " + duration;
+        return "E | " + super.getFormattedData() + " | " + date + " " + duration;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
-                duration + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " + duration + ")";
     }
 }

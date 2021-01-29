@@ -3,9 +3,9 @@ package duke;
 /**
  * Represents an exception that is specific to Duke.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
-    DukeException(String message){
+    DukeException(String message) {
         super(message);
     }
 }

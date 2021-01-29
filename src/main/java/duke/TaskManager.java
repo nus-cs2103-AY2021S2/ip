@@ -2,17 +2,14 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TaskManager{
+public class TaskManager {
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
     private ArrayList<Task> list = new ArrayList<>(100);
-    private final static String TODO = "todo";
-    private final static String DELETE = "delete";
-    private final static String DONE = "done";
-    private final static String EVENT = "event";
-    private final static String DEADLINE = "deadline";
-    private final static String LIST = "list";
-    private final static String DUE = "due";
 
-    public Task add(String type, String task, boolean isCompleted)  {
+
+
+    public Task add(String type, String task, boolean isCompleted) {
         if (type.equals(TODO)) {
             Task newTask = new ToDo(task, isCompleted);
             list.add(newTask);
@@ -54,10 +51,10 @@ public class TaskManager{
 
     public ArrayList<Task> getTasksOn(String date) {
         LocalDate currentDate = LocalDate.parse(date);
-        System.out.println("Here are the tasks due on " + date + ": " );
+        System.out.println("Here are the tasks due on " + date + ": ");
         ArrayList<Task> dueList = new ArrayList<>();
-        for(Task task : list) {
-            if(task.getTaskDate().equals(currentDate)) {
+        for (Task task : list) {
+            if (task.getTaskDate().equals(currentDate)) {
                 dueList.add(task);
             }
         }

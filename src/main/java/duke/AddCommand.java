@@ -4,14 +4,15 @@ import java.io.IOException;
 /**
  * Represents an add command keyed in by the user.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     AddCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 
     /**
-     * Executes the add command by adding the task to the list, printing the added task to the user and updating the stored file.
+     * Executes the add command by adding the task to the list, printing the added task to the user and updating
+     * the stored file.
      *
      * @param taskManager TaskManager object that maintains the list of tasks.
      * @param ui Ui object that handles user interaction.
