@@ -2,7 +2,7 @@ package Exceptions;
 
 public class InvalidTaskNumberException extends DukeException {
 
-    public InvalidTaskNumberException(String message) {
-        super(message);
+    public InvalidTaskNumberException() {
+        super("     ☹ OOPS!!! You have entered an invalid task number.");
     }
 }

@@ -1,8 +1,7 @@
 package Exceptions;
 
 public class InvalidDateException extends DukeException {
-
-    public InvalidDateException(String message) {
-        super(message);
+    public InvalidDateException() {
+        super("     ☹ OOPS!!! You have entered an invalid date/time.");
     }
 }
