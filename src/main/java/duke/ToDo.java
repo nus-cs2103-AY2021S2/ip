@@ -1,3 +1,5 @@
+package duke;
+
 public class ToDo extends Task {
     public final String SHORT_HAND = "T";
 

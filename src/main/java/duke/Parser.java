@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Parser class is an abstraction of an object that parses and interprets text messages into commands.
  */

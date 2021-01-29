@@ -1,3 +1,6 @@
+import duke.DukeException;
+import duke.Parser;
+import duke.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

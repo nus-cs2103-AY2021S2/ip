@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends Task {
     protected final String at;
     public final String SHORT_HAND = "E";

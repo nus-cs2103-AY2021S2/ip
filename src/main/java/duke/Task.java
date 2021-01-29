@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Task creates an abstraction of everyday tasks that user perform.
  */
@@ -29,6 +31,18 @@ public class Task {
     public void markAsDone() {
         // TODO consider adding assertion here
         isDone = true;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(boolean bool) {
+        isDone = bool;
+    }
+
+    public String getTaskDescription () {
+        return taskDescription;
     }
 
     /**
