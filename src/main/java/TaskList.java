@@ -8,12 +8,41 @@ public class TaskList {
         DONE,
         DELETE,
     }
+    boolean edited = false;
     List<Task> store;
     public TaskList(String[][] tokens) throws EmptyArgument, BadDateArgumentException {
         store = new ArrayList<>();
         for(String[] args: tokens){
             addTask(args);
         }
+    }
+    public String run(Command c) throws EmptyArgument, BadDateArgumentException {
+        String[] args = c.run();
+        String results;
+        switch(c.getType()){
+        case ADD:
+            results = addTask(args);
+            edited = true;
+            break;
+        case DONE:
+            results = setDone(Integer.parseInt(args[0]));
+            edited = true;
+            break;
+        case DELETE:
+            results = delete(Integer.parseInt(args[0]));
+            edited = true;
+            break;
+        case LIST:
+            results = getList();
+            break;
+        default:
+            results = "";
+            break;
+        }
+        return results;
+    }
+    private void markSaved(){
+        edited = false;
     }
     private String addTask(String[] tokens) throws EmptyArgument, BadDateArgumentException {
         Task t;
@@ -32,28 +61,6 @@ public class TaskList {
         }
         store.add(t);
         return formatOrderedPrint(-1);
-    }
-    public String run(Command c) throws EmptyArgument, BadDateArgumentException {
-        String[] args = c.run();
-        String results;
-        switch(c.getType()){
-        case ADD:
-            results = addTask(args);
-            break;
-        case DONE:
-            results = setDone(Integer.parseInt(args[0]));
-            break;
-        case DELETE:
-            results = delete(Integer.parseInt(args[0]));
-            break;
-        case LIST:
-            results = getList();
-            break;
-        default:
-            results = "";
-            break;
-        }
-        return results;
     }
     private String setDone(int doneIndex){
         Task t = store.get(doneIndex);
