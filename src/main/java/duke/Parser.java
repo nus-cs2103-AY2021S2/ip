@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Parser {
 
-    public static DateTimeFormatter INPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    protected static DateTimeFormatter INPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     /**
      * Returns a valid Duke Command after parsing user input.

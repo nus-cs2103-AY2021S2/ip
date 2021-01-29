@@ -31,29 +31,29 @@ public class Duke {
      */
     public void run() {
         ui.greet();
-        boolean byeFlag = false;
-        while (!byeFlag) {
+        boolean isTerminated = false;
+        while (!isTerminated) {
             try {
                 String input = ui.readInput();
                 Command command = parser.parseCommand(input);
                 switch (command) {
                 case TODO:
-                    ToDo t = parser.parseToDo(input);
-                    taskList.addTask(t);
+                    ToDo toDo = parser.parseToDo(input);
+                    taskList.addTask(toDo);
                     storage.writeToFile(taskList);
-                    ui.taskAddConfirmation(t, taskList);
+                    ui.printTaskAddedConfirmation(toDo, taskList);
                     break;
                 case DEADLINE:
-                    Deadline d = parser.parseDeadline(input);
-                    taskList.addTask(d);
+                    Deadline deadline = parser.parseDeadline(input);
+                    taskList.addTask(deadline);
                     storage.writeToFile(taskList);
-                    ui.taskAddConfirmation(d, taskList);
+                    ui.printTaskAddedConfirmation(deadline, taskList);
                     break;
                 case EVENT:
-                    Event e = parser.parseEvent(input);
-                    taskList.addTask(e);
+                    Event event = parser.parseEvent(input);
+                    taskList.addTask(event);
                     storage.writeToFile(taskList);
-                    ui.taskAddConfirmation(e, taskList);
+                    ui.printTaskAddedConfirmation(event, taskList);
                     break;
                 case LIST:
                     ui.listTasks(taskList);
@@ -63,22 +63,22 @@ public class Duke {
                     Task doneTask = taskList.getTask(doneIndex);
                     taskList.markTaskAsDone(doneIndex);
                     storage.writeToFile(taskList);
-                    ui.taskDoneConfirmation(doneTask);
+                    ui.printTaskDoneConfirmation(doneTask);
                     break;
                 case DELETE:
                     int deleteIndex = parser.parseDelete(input, taskList);
                     Task deleteTask = taskList.getTask(deleteIndex);
                     taskList.deleteTask(deleteIndex);
                     storage.writeToFile(taskList);
-                    ui.taskDeleteConfirmation(taskList, deleteTask);
+                    ui.printTaskDeleteConfirmation(taskList, deleteTask);
                     break;
                 case BYE:
-                    ui.byeMessage();
-                    byeFlag = true;
+                    ui.printByeMessage();
+                    isTerminated = true;
                     break;
                 }
-            } catch (DukeException e) {
-                ui.dukeExceptionMessage(e);
+            } catch (DukeException dukeException) {
+                ui.printDukeExceptionMessage(dukeException);
             }
         }
     }

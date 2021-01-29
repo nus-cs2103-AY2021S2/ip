@@ -9,9 +9,9 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static String lineSpacing = "____________________________________________________________";
+    protected static String lineSpacing = "____________________________________________________________";
 
-    public static String taskConfirmation = "Got it. I've added this task:\n";
+    protected static String taskConfirmation = "Got it. I've added this task:\n";
 
     /**
      * Prints a greeting message for the user
@@ -37,7 +37,7 @@ public class Ui {
      * @param t the Task that was added to the TaskList.
      * @param taskList the TaskList in which the Task was added to.
      */
-    public void taskAddConfirmation(Task t, TaskList taskList) {
+    public void printTaskAddedConfirmation(Task t, TaskList taskList) {
         int numTasks = taskList.getTasks().size();
         System.out.println(taskConfirmation + t
                 + "\nNow you have " + numTasks
@@ -70,7 +70,7 @@ public class Ui {
      * of the Task that was marked as done.
      * @param task the Task that was marked as done.
      */
-    public void taskDoneConfirmation(Task task) {
+    public void printTaskDoneConfirmation(Task task) {
         System.out.println("Nice! I've marked this task as done:\n" + task
                 + "\n" + lineSpacing);
     }
@@ -82,7 +82,7 @@ public class Ui {
      * @param taskList the TaskList from which the Task was deleted.
      * @param task the Task to be deleted.
      */
-    public void taskDeleteConfirmation(TaskList taskList, Task task) {
+    public void printTaskDeleteConfirmation(TaskList taskList, Task task) {
         ArrayList<Task> tasks = taskList.getTasks();
         System.out.println("Noted! I've removed this task:\n" + task
                 + "\nNow you have " + tasks.size()
@@ -94,7 +94,7 @@ public class Ui {
      * Prints a message that signals
      * the termination of the Duke program.
      */
-    public void byeMessage() {
+    public void printByeMessage() {
         System.out.println("Bye. Hope to see you again soon!\n" + lineSpacing);
     }
 
@@ -103,7 +103,7 @@ public class Ui {
      * user input was invalid along with the error message.
      * @param e the DukeException containing the details of the error.
      */
-    public void dukeExceptionMessage(DukeException e) {
+    public void printDukeExceptionMessage(DukeException e) {
         System.out.println("Duke has encountered an error: " + e.getMessage()
                 + "\n" + lineSpacing);
     }
