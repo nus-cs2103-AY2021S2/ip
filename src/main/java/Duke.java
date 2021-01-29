@@ -35,6 +35,8 @@ public class Duke {
                     taskList.markAsDone(Integer.parseInt(executable[1]));
                 } else if (executable[0].equals("delete")) {
                     taskList.DeleteTask(Integer.parseInt(executable[1]));
+                } else if (executable[0].equals("find")) {
+                    taskList.findTask(executable[1]);
                 } else if (executable[0].equals("todo")) {
                     taskList.addTask(new TodoTask(command));
                 } else if (executable[0].equals("deadline")) {
