@@ -3,12 +3,13 @@ import java.io.IOException;
 /**
  * The main class where the duke is run
  */
+
 public class Duke {
     private UI ui;
     private Tasks taskList;
     private Storage storage;
 
-    public Duke(String path) throws IOException {
+    public Duke(String path) {
         ui = new UI();
         storage = new Storage(path);
         try {
@@ -58,7 +59,7 @@ public class Duke {
     }
 
     //Main method where duke is initialized
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("data/duke.txt");
         duke.process();
     }
