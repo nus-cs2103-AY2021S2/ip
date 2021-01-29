@@ -72,9 +72,9 @@ public class TaskList {
     }
 
     /**
-     * Returns a {@code String} respresentation of the {@code Tasks} that match the search.
+     * Returns a {@code TaskList} of the {@code Task}s that match the search.
      *
-     * @param search List index of task as shown in {@code String} representation of {@code TaskList}.
+     * @param search The search expression.
      */
     public TaskList findTasks(String search) {
         ArrayList<Task> matches = tasks.stream()
