@@ -1,3 +1,6 @@
+/**
+ * Represents a Task that is yet to do.
+ */
 public class Todo extends Task {
     public Todo(String str) {
         super(str);

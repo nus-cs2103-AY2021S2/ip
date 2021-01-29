@@ -1,3 +1,6 @@
+/**
+ * Represents a task that user has not yet done, or has completed.
+ */
 public class Task {
     public String task;
     public boolean isDone;
@@ -14,6 +17,11 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns a tick if task is done, and cross otherwise.
+     *
+     * @return String a tick or cross.
+     */
     public String getStatusIcon() {
         if (isDone) {
             return "\u2713";
@@ -27,6 +35,9 @@ public class Task {
         return "[" + getStatusIcon() + "] " + task;
     }
 
+    /**
+     * Sets the isDone variable to true.
+     */
     public void doneTask() {
         isDone = true;
     }
