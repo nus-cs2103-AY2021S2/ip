@@ -69,7 +69,7 @@ public class Duke {
      * @param tokens  Input String split into tokens.
      * @throws DukeException
      */
-    public void processInput(Command command, String[] tokens) throws DukeException {
+    public void runUserCommand(Command command, String[] tokens) throws DukeException {
         switch (command) {
         case SKIP:
             break;
@@ -120,7 +120,7 @@ public class Duke {
             try {
                 String[] tokens = Parser.splitIntoSubstrings(input);
                 Command command = Parser.parseCommand(tokens);
-                processInput(command, tokens);
+                runUserCommand(command, tokens);
             } catch (DukeException e) {
                 ui.showErrorMessage(e.getMessage());
             }
