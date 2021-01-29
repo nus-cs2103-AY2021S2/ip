@@ -42,6 +42,10 @@ public class Duke {
         }
 
         parser = new Parser(ui);
+
+        submit.setDisable(true);
+        input.textProperty().addListener((observable, oldValue, newValue) ->
+                submit.setDisable(newValue.equals("")));
     }
 
     @FXML
@@ -60,28 +64,28 @@ public class Duke {
 
                 String textToAppend = "";
                 switch (command) {
-                    case "done":
-                        textToAppend = parser.handleDone(userInput, listOfTasks);
-                        break;
-                    case "todo":
-                        textToAppend = parser.handleTodo(userInput, listOfTasks);
-                        break;
-                    case "delete":
-                        textToAppend = parser.handleDelete(userInput, listOfTasks);
-                        break;
-                    case "deadline":
-                    case "event":
-                        textToAppend = parser.handleTasksWithTime(command, userInput, listOfTasks);
-                        break;
-                    case "find":
-                        textToAppend = parser.handleFind(userInput, listOfTasks);
-                        break;
-                    case "bye":
-                        System.exit(0);
-                        break;
-                    default:
-                        textToAppend = "I have no idea what that means, what do you want?\n";
-                        break;
+                case "done":
+                    textToAppend = parser.handleDone(userInput, listOfTasks);
+                    break;
+                case "todo":
+                    textToAppend = parser.handleTodo(userInput, listOfTasks);
+                    break;
+                case "delete":
+                    textToAppend = parser.handleDelete(userInput, listOfTasks);
+                    break;
+                case "deadline":
+                case "event":
+                    textToAppend = parser.handleTasksWithTime(command, userInput, listOfTasks);
+                    break;
+                case "find":
+                    textToAppend = parser.handleFind(userInput, listOfTasks);
+                    break;
+                case "bye":
+                    System.exit(0);
+                    break;
+                default:
+                    textToAppend = "I have no idea what that means, what do you want?\n";
+                    break;
                 }
                 screen.appendText(textToAppend + "\n");
             }
