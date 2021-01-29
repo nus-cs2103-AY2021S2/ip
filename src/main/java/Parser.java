@@ -7,6 +7,7 @@ public class Parser {
     private String taskType;
     private String taskName;
     private String date = "";
+    private String index;
 
     Parser(String command) {
         this.command = command;
@@ -33,9 +34,21 @@ public class Parser {
     }
 
     public void parse() {
-        parseTaskType();
-        parseTaskName();
-        parseTaskDate();
+        if (commandSeparate.length == 1) {
+            parseTaskType();
+        } else if (commandSeparate.length == 2) {
+            parseTaskType();
+            index = commandSeparate[1];
+            taskName = commandSeparate[1];
+        } else {
+            parseTaskType();
+            parseTaskName();
+            parseTaskDate();
+        }
+    }
+
+    public int getCommandLength() {
+        return commandSeparate.length;
     }
 
     public String getTaskType() {
@@ -48,6 +61,10 @@ public class Parser {
 
     public String getDate() {
         return date;
+    }
+
+    public String getIndex(){
+        return index;
     }
 
 }

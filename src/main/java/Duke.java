@@ -23,9 +23,11 @@ public class Duke {
         String command;
         while (true) {
             command = ui.getCommand();
+            Parser p = new Parser(command);
+            p.parse();
+            String TaskType = p.getTaskType();
             String[] executable = new String[100];
             executable = command.split(" ");
-
             if (command.equals("bye")) {
                 ui.goodbye();
                 storage.saveTask(taskList);
