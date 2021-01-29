@@ -117,6 +117,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find a task that has it's name matching the task description.
+     * @param taskDescription                 The description of the task.
+     * @param ui                              A user interface.
+     * @throws InvalidDescriptionException    If the task description is empty.
+     */
     public void find(String taskDescription, Ui ui) throws InvalidDescriptionException {
         if (taskDescription.length() == 0) {
             throw new InvalidDescriptionException("☹ OOPS!!! The description cannot be empty.");

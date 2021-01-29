@@ -99,6 +99,10 @@ public class Ui {
         throw new InvalidInputException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    /**
+     * A find command interaction which complements with a find command.
+     * @param matchingTasks    All the matching tasks found.
+     */
     public void findCommandInteraction(ArrayList<Task> matchingTasks) {
         if (matchingTasks.size() == 0) {
             System.out.println("     ☹ No match found ☹");

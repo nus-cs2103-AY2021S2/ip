@@ -10,11 +10,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
+/**
+ * A personal chat bot that helps a person keep track of various things.
+ */
 public class Duke {
     private final Storage storage;
     private TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui;
 
+    /**
+     * Constructs a Duke chat bot.
+     * @param filePath The filepath where the data are going to be stored at.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the Duke chat bot.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.showWelcome(tasks);
