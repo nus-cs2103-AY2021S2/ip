@@ -44,7 +44,7 @@ public class DeadlineTaskTest {
 
     @Test
     public void testMarkUndone() {
-        assertEquals(DeadlineTaskTest.STARTING_TASK.markAsDone().markAsDone().markAsDone().toString(),
+        assertEquals(DeadlineTaskTest.STARTING_TASK.markAsDone().markAsDone().toString(),
                 "[D][\u2718] Do CS2103T quiz (by: 2020-10-21)");
     }
 }

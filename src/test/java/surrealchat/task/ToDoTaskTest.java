@@ -46,7 +46,7 @@ public class ToDoTaskTest {
 
     @Test
     public void testMarkUndone() {
-        assertEquals(ToDoTaskTest.STARTING_TASK.markAsDone().markAsDone().markAsDone().toString(),
+        assertEquals(ToDoTaskTest.STARTING_TASK.markAsDone().markAsDone().toString(),
                 "[T][\u2718] Do CS2103T quiz");
     }
 }

@@ -54,8 +54,9 @@ public abstract class Task {
     }
 
     /**
-     * Changes the description of the Task
-     * @return New Task with edited description
+     * Changes the description of the Task.
+     * @param newDescription The new description for the Task.
+     * @return New Task with edited description.
      */
     public abstract Task editDescription(String newDescription);
 

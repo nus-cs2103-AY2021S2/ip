@@ -44,7 +44,7 @@ public class EventTaskTest {
 
     @Test
     public void testMarkUndone() {
-        assertEquals(EventTaskTest.STARTING_TASK.markAsDone().markAsDone().markAsDone().toString(),
+        assertEquals(EventTaskTest.STARTING_TASK.markAsDone().markAsDone().toString(),
                 "[E][\u2718] Do CS2103T quiz (at: 2020-10-21)");
     }
 }
