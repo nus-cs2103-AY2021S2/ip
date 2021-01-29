@@ -2,7 +2,6 @@ package duke.utils;
 
 import duke.command.*;
 import duke.exceptions.DukeException;
-import duke.task.Task;
 import duke.type.CommandType;
 import duke.ui.Ui;
 
@@ -43,7 +42,7 @@ public class Parser {
 		switch (instruction) {
 		case "bye":
 			command = new ExitCommand(taskName, date);
-			TaskStorage.writeToFiles(Task.getTaskList());
+			TaskStorage.writeToFiles();
 			break;
 		case "list":
 			command = new ListCommand();
@@ -70,7 +69,7 @@ public class Parser {
 	 * @param input the input key in by user.
 	 * @return String representation of the command word of the user input.
 	 */
-	static final String extractInstruction(String input) throws DukeException {
+	static String extractInstruction(String input) throws DukeException {
 
 		String instruction = input.trim().toLowerCase().split(" ")[0];
 		if (input.replaceAll(" ", "").equals("")) {
@@ -91,7 +90,7 @@ public class Parser {
 	 * @param command user command.
 	 * @return the task name if there is one and return empty string if task name empty.
 	 */
-	static final String extractTask(String input, String command) throws DukeException {
+	static String extractTask(String input, String command) throws DukeException {
 		String body = input.replaceAll(command, "").trim();
 		if (command.equals("todo")) {
 			if (body.equals("")) {
@@ -127,17 +126,17 @@ public class Parser {
 	 * @param instruction user command.
 	 * @return the task date in String and return empty if there is no date.
 	 */
-	static final String extractDate(String input, String instruction) throws DukeException {
+	static String extractDate(String input, String instruction) throws DukeException {
 		String body = input.replaceAll(instruction, "").trim();
 		String[] parts = body.split("/", 2);
 		if (parts.length == 2) {
 			String date = DateAndTime.converter(parts[1]);
-			if (date.equals("")) {
+			if (date.equals(Ui.WRONGDATEFORMAT)) {
 				throw new DukeException(Ui.WRONGDATEFORMAT);
 			}
 			return date;
 		} else {
-			if (instruction.equals("todo") || instruction.equals("deadline")
+			if (instruction.equals("deadline")
 					|| instruction.equals("event")) {
 				throw new DukeException(Ui.MISSINGDATE);
 			}

@@ -1,10 +1,11 @@
 package duke.driver;
 
-import java.util.Scanner;
-import duke.ui.Ui;
-import duke.utils.TaskStorage;
 import duke.command.Command;
+import duke.ui.Ui;
 import duke.utils.Parser;
+import duke.utils.TaskStorage;
+
+import java.util.Scanner;
 
 
 /**
@@ -20,8 +21,6 @@ public class DukeDriver {
         Scanner sc = new Scanner(System.in);
         System.out.println(Ui.LOGO);
         System.out.println(Ui.GREETING);
-
-        System.out.println(Ui.LOADFILE);
 
         Ui.SLEEP();
 

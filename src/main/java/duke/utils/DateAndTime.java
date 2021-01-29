@@ -1,5 +1,7 @@
 package duke.utils;
 
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,15 +15,15 @@ public class DateAndTime {
 				LocalDate d1 = LocalDate.parse(date.trim());
 				return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 			} catch (DateTimeParseException e) {
-				return "";
+				return Ui.WRONGDATEFORMAT;
 			}
 		} else {
-			return "";
+			return Ui.WRONGDATEFORMAT;
 		}
 	}
 
 
-	public static final boolean isDashFormat(String date) {
+	private static final boolean isDashFormat(String date) {
 		String[] dashFormat = date.toLowerCase().split("-", 3);
 		for (String s : dashFormat) {
 			if (!isNumeric(s.trim())) {
@@ -31,7 +33,7 @@ public class DateAndTime {
 		return true;
 	}
 
-	public static boolean isNumeric(String strNum) {
+	private static boolean isNumeric(String strNum) {
 		if (strNum == null) {
 			return false;
 		}

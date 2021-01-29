@@ -7,8 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
+
+
 	@Test
-	void extractInstruction() throws DukeException {
+	void extractInstructionTest() throws DukeException {
 		String testInput = "todo swimming";
 		String actualInstruction = Parser.extractInstruction(testInput);
 		assertEquals("todo", actualInstruction);
@@ -38,7 +40,7 @@ public class ParserTest {
 
 
 	@Test
-	void extractTask() throws DukeException {
+	void extractTaskTest() throws DukeException {
 		String testInput = "deadline project/2019-10-22";
 		String actualTask = Parser.extractTask(testInput, "deadline");
 		assertEquals("project", actualTask);
@@ -56,7 +58,7 @@ public class ParserTest {
 	}
 
 	@Test
-	void extractDate() throws DukeException {
+	void extractDateTest() throws DukeException {
 		String testInput = "deadline project /2019-10-22";
 		String actualDate = Parser.extractDate(testInput, "deadline");
 		assertEquals("Oct 22 2019", actualDate);

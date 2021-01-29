@@ -24,6 +24,7 @@ public class Ui {
     public static final String TASKERROR = "!!!!!!!!!!Walao, no such task!!!!!!!!!";
     public static final String SAVETOFILEERROR = "Huh? Where your file?";
     public static final String EMPTYCOMMAND = "!!!Walao, command cannot be empty!!!";
+    public static final String SUCCESSFULSAVE = "~~~~~~~~~~~File Saved Successfully!~~~~~~~~~~~~";
     public static final String FAREWELL = UPPER
             + "~~~~~~~~~~~ I Zao Liao. Don't Miss Meeeeeee ~~~~~~~~~~~."
             + LOWER;
@@ -36,6 +37,7 @@ public class Ui {
     public static final String LOADFILE = "********** Wait ah~ Loading file for you **********\n";
     public static final String NOFILE = "********** File also don't have ah, nvm I make one for you **********\n";
     public static final String EMPTYFILE = "********** Awwww~ You don't have any history of tasks **********\n";
+    public static final String SUCESSFULLOAD = "***********Sir, here is your past history************";
 
     /**
      * make a chatBox that wrap a given String.

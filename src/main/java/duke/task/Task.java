@@ -1,9 +1,10 @@
 package duke.task;
 
+import duke.exceptions.DukeException;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
-import duke.ui.Ui;
-import duke.exceptions.DukeException;
 
 
 /**
@@ -71,7 +72,7 @@ public class Task {
      *
      * @param i the index label of the Task.
      */
-    public static final void done(int i) {
+    public static void done(int i) {
         try {
             Task t = taskList.get(i - 1);
             taskList.get(i - 1).done = "X";
@@ -81,7 +82,7 @@ public class Task {
         }
     }
 
-    public static final void delete(int i) {
+    public static void delete(int i) {
         try {
             Task t = taskList.get(i - 1);
             taskList.remove(i - 1);
@@ -94,6 +95,10 @@ public class Task {
         } catch (IndexOutOfBoundsException e) {
             DukeException.taskErrorException();
         }
+    }
+
+    public static void clearAllTask() {
+        taskList.clear();
     }
 
     /**
@@ -120,7 +125,7 @@ public class Task {
      *
      * @return a String representation of the isDone status (X for done).
      */
-    public String isDone() {
+    public String getDoneStatus() {
         return done;
     }
 

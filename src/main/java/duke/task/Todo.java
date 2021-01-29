@@ -28,6 +28,6 @@ public class Todo extends Task{
 
     @Override
     public String toString() {
-        return String.format("[T][%s] %d. %s", super.isDone(), super.getIndex(), super.getTaskName());
+        return String.format("[T][%s] %d. %s", super.getDoneStatus(), super.getIndex(), super.getTaskName());
     }
 }

@@ -26,7 +26,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %d. %s ( %s )", super.isDone(), super.getIndex(),
+        return String.format("[E][%s] %d. %s ( %s )", super.getDoneStatus(), super.getIndex(),
                 super.getTaskName(), super.getDate());
     }
 }
