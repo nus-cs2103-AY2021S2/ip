@@ -16,7 +16,7 @@ public class Tasks {
     }
 
     //Delete a task
-    public void DeleteTask(int idx){
+    public void DeleteTask(int idx) {
         System.out.println("Noted. Task removed: \n" + Tasks.get(idx - 1));
         Tasks.remove(idx - 1);
         System.out.println("Now you have " + numOfTasks() + " items in your list");
@@ -33,7 +33,7 @@ public class Tasks {
         return Tasks.size();
     }
 
-    public Task getTask(int idx){
+    public Task getTask(int idx) {
         return Tasks.get(idx);
     }
 

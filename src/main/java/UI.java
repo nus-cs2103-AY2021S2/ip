@@ -15,8 +15,7 @@ public class UI {
     }
 
     public void greetings() {
-        String logo =
-                  " ____        _        \n"
+        String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
