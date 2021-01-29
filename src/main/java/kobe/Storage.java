@@ -1,16 +1,10 @@
 package kobe;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.nio.file.Path;
-
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.io.IOException;
 
 public class Storage {
-//    private Path path;
+    //    private Path path;
     private String pathName;
     private TaskList tasks;
     public static String ind = "    ";

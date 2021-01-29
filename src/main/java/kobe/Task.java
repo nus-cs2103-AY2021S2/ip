@@ -41,6 +41,15 @@ class Task {
         this.done = true;
     }
 
+    public static Task setAsDone(Task task) {
+        task.done = true;
+        return task;
+    }
+
+    public boolean getDoneStatus() {
+        return this.done;
+    }
+
     @Override
     public String toString() {
         String doneString = "[ ]";
@@ -71,20 +80,7 @@ class Task {
             } else {
             }
 
-        } else {
-        }
-
-        //handles when condition is passed in as just date/time, or with the by/at in front.
-//        if (!this.condition.equals("")) {
-//            if (this.condition.substring(0, 2).equals("by")) {
-//                conditionString = "(by: " + condition.substring(3) + ")";
-//            } else if (this.condition.substring(0, 2).equals("at")) {
-//                conditionString = "(at: " + condition.substring(3) + ")";
-//            } else  {
-//
-//            }
-//        }
-
+        } else {}
 
         return typeString + doneString + " " + taskName + " " + conditionString;
     }
