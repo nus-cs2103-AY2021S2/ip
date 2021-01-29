@@ -18,6 +18,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a file that is specified in String parameter. If the directory of the file
+     * does not exist, the directory will be created. If the file itself does not exist
+     * the file will be created
+     * @param path an absolute pathway to where the file is located
+     */
     public void loadFile(String path) {
         int indexOfLastSlash = path.lastIndexOf('/');
         String pathDirectory = path.substring(0, indexOfLastSlash);
@@ -37,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads a file provided in the parameter and returns a list of Tasks based on the input on the file
+     * @param file the file to be read from
+     * @return a List of Task that is currently stored in the file
+     */
     public List<Task> initialiseStorage(File file) {
         List<Task> list = new ArrayList<>();
         FileReader fileReader = null;
@@ -104,11 +115,15 @@ public class Storage {
         return task;
     }
 
+    /**
+     * updates the hard drive with the updated list of Task whenever the user exits the program
+     * @param fileName the path directory of the file
+     * @param taskList the updated List of task
+     */
     public void updateHardDrive(String fileName, TaskList taskList) {
         try {
             Files.delete(Paths.get(fileName));
-            Storage storage = new Storage();
-            storage.loadFile(fileName);
+            loadFile(fileName);
             FileWriter fileWriter = new FileWriter(fileName);
             for (int i = 0; i < taskList.getNewStorage().size(); i++) {
                 fileWriter.write(printInHardDrive(taskList.getNewStorage().get(i)));
@@ -135,6 +150,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the file path stored in Storage instance
+     * @return the file path stored in Storage
+     */
     public String getFilePath() {
         return filePath;
     }

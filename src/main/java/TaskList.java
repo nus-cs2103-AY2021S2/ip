@@ -1,15 +1,8 @@
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
-import Exception.*;
+
 
 public class TaskList {
     private List<Task> newStorage;
@@ -19,7 +12,11 @@ public class TaskList {
     }
 
 
-
+    /**
+     * Prints the task in a list format, includes description, task type and whether task is completed
+     * @param num int index of task in the list
+     * @param task the task to be printed out
+     */
     public void printTask(int num, Task task) {
         if (task.getDone()) {
             System.out.println(num + 1 + "." + "[" + task.type + "]" + "[X] " + this.newStorage.get(num).getDescription());
@@ -28,10 +25,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the task which includes description, task type and whether task is completed
+     * @param task the task to be printed out
+     */
     public void printTaskWithNoNum(Task task) {
         System.out.println("[" + task.type + "]" + "[ ] " + task.getDescription());
     }
 
+    /**
+     * Adds a task to the list of task in storage
+     * @param userInput the user input in text string format
+     */
     public void addTask(String userInput) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("Hmm");
@@ -61,17 +66,28 @@ public class TaskList {
         System.out.println("Now you have " + this.newStorage.size() + " tasks in the list.");
     }
 
+    /**
+     * List out of the task that are in the task list storage
+     * @param tasks List of tasks
+     */
     public void listTask(List<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
             printTask(i, tasks.get(i));
         }
     }
 
+    /**
+     * Set a specific task as completed based on the index of task in task list storage
+     * @param value int index of the task in list
+     */
     public void setTaskAsDone(int value) {
         this.newStorage.get(value).setDone(true);
     }
 
-
+    /**
+     * Deletes a task based on string input of user
+     * @param userInput user input in string text
+     */
     public void deleteTask(String userInput) {
         String[] inputBreakdown = userInput.split(" ");
         int taskToBeDeleted = Integer.valueOf(inputBreakdown[1]) - 1;

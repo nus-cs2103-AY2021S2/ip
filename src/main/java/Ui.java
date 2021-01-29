@@ -12,6 +12,9 @@ public class Ui {
         this.parser = parser;
     }
 
+    /**
+     * Allows user to enter string text into the command line
+     */
     public void executeInput() {
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();

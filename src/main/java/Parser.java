@@ -13,6 +13,11 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Returns a boolean if the user inputs "bye"
+     * @param userInput takes in user input as a String
+     * @return a boolean to indicate whether user wants to quit the application
+     */
     public boolean determineAction(String userInput) {
         List<Task> tasks = this.taskList.getNewStorage();
         String[] inputBreakdown = userInput.split(" ");
@@ -36,6 +41,11 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Validate user inputs and throws an exception if user input is invalid
+     * @param userInput takes in user input as a String
+     * @throws DukeException Exception that contains error message
+     */
     public void checkInput (String userInput) throws DukeException {
         String[] input = userInput.split(" ");
         List<String> possibleActionInputs = new ArrayList<>();
