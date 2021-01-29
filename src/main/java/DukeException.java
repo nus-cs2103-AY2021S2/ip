@@ -4,8 +4,8 @@
  */
 public class DukeException extends Exception {
 
-    /** States if the error is unknown */
-    private boolean unknown;
+    /** States if the error is isUnknown */
+    private boolean isUnknown;
 
     /**
      * Creates new DukeException with a description.
@@ -15,9 +15,9 @@ public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
         if (message.equals("unknown")) {
-            unknown = true;
+            isUnknown = true;
         } else {
-            unknown = false;
+            isUnknown = false;
         }
     }
 
@@ -27,7 +27,7 @@ public class DukeException extends Exception {
      * @return String describing the error.
      */
     public String errorMessage() {
-        if (unknown) {
+        if (isUnknown) {
             return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         } else if (this.getMessage().equals("loading error")) {
             return "☹ OOPS!!! No file found.";

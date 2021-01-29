@@ -52,7 +52,7 @@ public class Storage {
                 String[] split = taskLine.split(" ");
                 String taskType = split[0];
                 String taskDone = split[1];
-                boolean done = taskDone.equals("1");
+                boolean isDone = taskDone.equals("1");
                 String task = "";
 
                 int counter;
@@ -94,7 +94,7 @@ public class Storage {
                     toAdd = new ToDo(task);
                 }
 
-                if (done) {
+                if (isDone) {
                     toAdd.completeTask();
                 }
 

@@ -7,7 +7,7 @@ public class Task {
     private String task_details;
 
     /** indicates whether task is completed */
-    private boolean done;
+    private boolean isDone;
 
     /** Creates a task.
      *
@@ -15,13 +15,13 @@ public class Task {
      */
     Task(String details){
         task_details = details;
-        done = false;
+        isDone = false;
     }
 
     // private constructor to maintain Immutability
     protected Task(String details, boolean indicator){
         task_details = details;
-        done = true;
+        isDone = true;
     }
 
     /** returns task details.
@@ -37,7 +37,7 @@ public class Task {
      * @return completion status.
      */
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     /** completes the task.
@@ -53,7 +53,7 @@ public class Task {
      * @return String stating completion status and task details.
      */
     public String taskStatus() {
-        if (done) {
+        if (isDone) {
            return "1 " + task_details;
         } else {
             return "0 " + task_details;
