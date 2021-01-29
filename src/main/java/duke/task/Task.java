@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     private final String input;
     private Task_State state;

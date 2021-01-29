@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.ParseCommands;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 public class Duke {
     private final Ui ui;
     private final Storage fio;

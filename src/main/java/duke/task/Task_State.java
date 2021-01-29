@@ -1,3 +1,5 @@
+package duke.task;
+
 public enum Task_State {
     NOTDONE {
         @Override
