@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeWrongFormatException extends DukeException {
     private final String heading = "     Wrong format! Please follow this format: ";
     private final String deadlineFormat = "deadline (taskName) /by (YYYY-MM-D TIME)";

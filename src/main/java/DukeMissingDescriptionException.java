@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeMissingDescriptionException extends DukeException {
     String command;
 

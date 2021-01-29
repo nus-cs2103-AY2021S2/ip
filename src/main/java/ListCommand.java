@@ -1,3 +1,5 @@
+package duke;
+
 public class ListCommand extends Command {
     /**
      * List out the tasks in the list to user.
