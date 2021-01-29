@@ -1,5 +1,9 @@
 package soonwee.duke;
 
+/**
+ * Represents a Todo instance. A Todo instance will store the
+ * description of the task.
+ */
 public class ToDo extends Task{
 
     public ToDo(String description) {

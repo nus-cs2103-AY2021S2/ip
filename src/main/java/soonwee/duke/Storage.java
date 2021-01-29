@@ -8,22 +8,40 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage instance. A storage instance will create new file,
+ * update file and read its data.
+ */
 public class Storage {
     public String directory;
     public File fileObject;
     public FileWriter fileWriter;
     public TaskList taskList;
 
+    /**
+     * Instantiate Storage with its target directory.
+     */
     public Storage(String directory) {
         this.taskList = createNew();
         this.directory = directory;
         this.fileObject = createFile(directory);
     }
 
+    /**
+     * Create new TaskList instance for this instance.
+     *
+     * @return a TaskList instance
+     */
     public TaskList createNew() {
         return new TaskList();
     }
 
+    /**
+     * Create a file in the specified directory.
+     *
+     * @param directory target directory.
+     * @return new file object
+     */
     public File createFile(String directory) {
         try {
             File fileObject = new File(directory);
@@ -41,9 +59,12 @@ public class Storage {
         return fileObject;
     }
 
+    /**
+     * Read file contents.
+     */
     public void readFile() {
         try {
-            File fileObject = new File("data/tasks.txt");
+            File fileObject = new File("C:\\Users\\songs\\Desktop\\CS2103\\data\\tasks.txt");
             Scanner reader = new Scanner(fileObject);
             while (reader.hasNextLine()) {
                 String data = reader.nextLine();
@@ -56,6 +77,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Process data in file and add them into memory task list.
+     *
+     * @param data input data taken from command.
+     */
     public void processFileData(String data) {
         char taskType = data.charAt(1);
         String task = new String();
@@ -83,9 +109,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write tasks in TaskList into file.
+     */
     public void writeFile() {
         try {
-            FileWriter fileWriter = new FileWriter("data/tasks.txt");
+            FileWriter fileWriter = new FileWriter("C:\\Users\\songs\\Desktop\\CS2103\\data\\tasks.txt");
             for (int i = 0; i < this.taskList.getSize(); i++) {
                 fileWriter.write(this.taskList.getTask(i).toString() + "\n");
             }
