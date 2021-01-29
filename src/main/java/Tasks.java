@@ -18,6 +18,33 @@ public class Tasks {
         System.out.println("Now you have " + numOfTasks() + " items in your list");
     }
 
+    //Second add method which does not print any message
+    public void silentAdd(Task task) {
+        Tasks.add(task);
+    }
+
+    //Returns a taskList of the tasks that have matching keyword.
+    public void findTask(String keyword) {
+        Tasks matches = new Tasks();
+        for (Task t : Tasks) {
+            String task = t.getTaskName();
+            String[] taskName = task.split(" ");
+            if (keyword.equals(taskName[0]) || keyword.equals(taskName[1])
+                    || keyword.equals(taskName[2])) {
+                matches.silentAdd(t);
+            } else if (taskName[0].contains(keyword) || taskName[1].contains(keyword)
+                    || taskName[2].contains(keyword)) {
+                matches.silentAdd(t);
+            }
+        }
+        if (matches.numOfTasks() > 0) {
+            System.out.println("We have found the following tasks");
+            matches.printTasks();
+        } else {
+            System.out.println("Sorry! Could not find any matches :(");
+        }
+    }
+
     //Delete a task
     public void DeleteTask(int idx) {
         System.out.println("Noted. Task removed: \n" + Tasks.get(idx - 1));
