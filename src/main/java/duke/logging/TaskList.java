@@ -10,14 +10,23 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * A TaskList call denotes a system with a list of task and has the ability to make changes to the list.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
+    /**
+     * Construct a TaskList.
+     * @param tasks   A list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Print out all the tasks in the list.
+     */
     public void list() {
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -25,6 +34,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add the task into the list.
+     * @param type                          The type of task to be added into the list.
+     * @param taskDescription               The description of the task.
+     * @param ui                            A user interface.
+     * @return                              The task that has been added to the list.
+     * @throws InvalidDescriptionException  If the format of the command is wrong.
+     * @throws DateTimeParseException       If the format of the dateTime is wrong.
+     */
     public Task addTask(String type, String taskDescription, Ui ui)
             throws InvalidDescriptionException, DateTimeParseException {
         Task task;
@@ -36,9 +54,12 @@ public class TaskList {
                 || (type.equals("event")) && !taskDescription.contains("/at")) {
             throw new InvalidDescriptionException("☹ OOPS!!! The description format of " + type + " is wrong.");
         } else {
-            int index = type.equals("deadline") ? taskDescription.indexOf("/by") : taskDescription.indexOf("/at");
+            int index = type.equals("deadline")
+                    ? taskDescription.indexOf("/by")
+                    : taskDescription.indexOf("/at");
             String taskName = taskDescription.substring(0, index);
-            String dateTimeString = taskDescription.substring(index + 4).strip().replace("/", "-");
+            String dateTimeString = taskDescription.substring(index + 4).strip()
+                    .replace("/", "-");
             LocalDate dateTime = LocalDate.parse(dateTimeString);
 
             if (type.equals("deadline")) {
@@ -52,6 +73,13 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Delete a task from the list.
+     * @param taskDescription               The description of the task.
+     * @param ui                            A user interface.
+     * @return                              The list of tasks remaining.
+     * @throws InvalidDescriptionException  If the format of the command is wrong.
+     */
     public ArrayList<Task> delete(String taskDescription, Ui ui) throws InvalidDescriptionException{
         try {
             int index = Integer.parseInt(taskDescription.substring(0, 1)) - 1;
@@ -62,11 +90,18 @@ public class TaskList {
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
         } catch (IndexOutOfBoundsException ex) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big " +
-                    "or smaller than 0. There are currently " + tasks.size() + " tasks");
+            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big "
+                    + "or smaller than 0. There are currently " + tasks.size() + " tasks");
         }
     }
 
+    /**
+     * Completed a task in the list.
+     * @param taskDescription                 The description of the task.
+     * @param ui                              A user interface.
+     * @return                                The list of tasks.
+     * @throws InvalidDescriptionException    If the format of the command is wrong.
+     */
     public ArrayList<Task> done(String taskDescription, Ui ui) throws InvalidDescriptionException {
         try {
             int index = Integer.parseInt(taskDescription.substring(0, 1)) - 1;
@@ -77,8 +112,8 @@ public class TaskList {
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
         } catch (IndexOutOfBoundsException ex) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big " +
-                    "or smaller than 0. There are currently " + tasks.size() + " tasks");
+            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big "
+                    + "or smaller than 0. There are currently " + tasks.size() + " tasks");
         }
     }
 }
