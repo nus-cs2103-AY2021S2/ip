@@ -1,6 +1,6 @@
 package kelbot;
 
-/*
+/**
  * Categories for the different Commands available
  */
 
