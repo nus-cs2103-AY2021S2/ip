@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class handles the deadlineTasks
+ */
 public class DeadlineTask extends Task {
     LocalDate date;
 

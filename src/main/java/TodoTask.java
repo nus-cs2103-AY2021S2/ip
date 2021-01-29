@@ -1,3 +1,6 @@
+/**
+ * This class handles the TodoTask.
+ */
 public class TodoTask extends Task {
     TodoTask(String task) {
         super(task);
