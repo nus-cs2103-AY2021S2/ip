@@ -44,6 +44,7 @@ class Tasklist implements Iterable<Task> {
 
     /**
      * Lists everything in the task list.
+     *
      * @return String interpretation of the task list.
      */
     public String list() {
