@@ -19,16 +19,18 @@ public class TaskListTest {
         Todo testTask = new Todo("test");
         testTaskList.addTask(testTask);
 
-        assertEquals(testTaskList.hasTasks(), true);
-        assertEquals(testTaskList.getTotalNumberOfTasks(), 1);
-        assertEquals(testTaskList.getTask(1).toString(), testTask.toString());
+        assertEquals(true, testTaskList.hasTasks());
+        assertEquals(1, testTaskList.getTotalNumberOfTasks());
+        assertEquals(testTask.toString(), testTaskList.getTask(1).toString());
     }
 
-    // this test fails with IndexOutOfBoundsException but the program works as expected ...
     @Test
     public void markTaskAsDoneTest_validIndex_success() {
+        Todo testTask = new Todo("test");
+        testTaskList.addTask(testTask);
         testTaskList.markTaskAsDone(1);
 
+        assertEquals(0, testTaskList.getTotalNumberOfTasksUndone());
         assertEquals(testTaskList.getTask(1).convertNotDoneStatusToOne(), 0);
     }
 }
