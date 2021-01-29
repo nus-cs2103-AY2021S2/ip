@@ -1,20 +1,19 @@
 package percy.command;
 
-import percy.exception.PercyException;
-
-import percy.ui.Ui;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import percy.exception.PercyException;
+import percy.ui.Ui;
+
 public class Parser {
-    public static String fullCmd;
+    private static String fullCmd;
 
     public Parser(String fullCmd) {
-        this.fullCmd =  fullCmd.trim().strip();
+        this.fullCmd = fullCmd.trim().strip();
     }
 
     public Command getCommand() throws PercyException {
@@ -41,11 +40,11 @@ public class Parser {
 
     public static int getTaskNumber() {
         String[] splitCommand = fullCmd.split(" ", 2);
-        String TaskNumber = splitCommand[1].trim();
-        return Integer.valueOf(TaskNumber);
+        String taskNumber = splitCommand[1].trim();
+        return Integer.valueOf(taskNumber);
     }
 
-    public static String getTodoDescription()  {
+    public static String getTodoDescription() {
         String[] splitCommand = fullCmd.split(" ", 2);
         String description = "";
         if (splitCommand.length == 2) {
@@ -72,7 +71,7 @@ public class Parser {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(EventCommand.DATE_TIME_PREFIX, 2);
-            String[] dateTime = args[1].trim().split(" ",2);
+            String[] dateTime = args[1].trim().split(" ", 2);
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             return date;
         } catch (IndexOutOfBoundsException e) {
@@ -92,7 +91,7 @@ public class Parser {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(EventCommand.DATE_TIME_PREFIX, 2);
-            String[] dateTime = args[1].trim().split(" ",2);
+            String[] dateTime = args[1].trim().split(" ", 2);
             LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
             return time;
         } catch (IndexOutOfBoundsException e) {
@@ -126,7 +125,7 @@ public class Parser {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
-            String[] dateTime = args[1].trim().split(" ",2);
+            String[] dateTime = args[1].trim().split(" ", 2);
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             return date;
         } catch (IndexOutOfBoundsException e) {
@@ -146,7 +145,7 @@ public class Parser {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
-            String[] dateTime = args[1].trim().split(" ",2);
+            String[] dateTime = args[1].trim().split(" ", 2);
             LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
             return time;
         } catch (IndexOutOfBoundsException e) {

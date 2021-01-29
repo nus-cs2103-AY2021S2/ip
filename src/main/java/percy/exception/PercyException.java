@@ -1,7 +1,7 @@
 package percy.exception;
 
 public class PercyException extends Exception {
-    String s;
+    private String s;
 
     public PercyException() {
     }

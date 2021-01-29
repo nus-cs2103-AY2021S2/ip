@@ -1,33 +1,42 @@
 package percy.command;
 
-import percy.exception.NoDescriptionException;
-import percy.ui.Ui;
-import percy.task.Deadline;
-import percy.task.Task;
-import percy.task.TaskList;
-import percy.storage.Storage;
-
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import percy.exception.NoDescriptionException;
+import percy.storage.Storage;
+import percy.task.Deadline;
+import percy.task.Task;
+import percy.task.TaskList;
+import percy.ui.Ui;
+
+
 public class DeadlineCommand extends Command {
     public static final String COMMAND = "deadline";
 
-    public static final String DATE_TIME_PREFIX =  " /by ";
+    public static final String DATE_TIME_PREFIX = " /by ";
 
-    private String deadlineDescription;
-    private LocalDate date;
-    private LocalTime time;
-
+    /**
+     * User guide for input format.
+     */
     public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
             "deadline: Adds a task that needs to be done before a specific date and time.",
             "Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)",
             "Example: deadline return book /by 2021-01-27 1800-2000"));
 
+    private String deadlineDescription;
+    private LocalDate date;
+    private LocalTime time;
+
+    /**
+     * Constructor for Deadline Command.
+     * @param deadlineDescription the description of the deadline.
+     * @param date the date of deadline.
+     * @param time the time of deadline.
+     */
     public DeadlineCommand(String deadlineDescription, LocalDate date, LocalTime time) {
         super(false);
         this.deadlineDescription = deadlineDescription;
@@ -49,7 +58,7 @@ public class DeadlineCommand extends Command {
             if (deadlineDescription.isEmpty()) {
                 throw new NoDescriptionException("deadline");
             }
-        } catch(NoDescriptionException ex) {
+        } catch (NoDescriptionException ex) {
             Ui.makeMsg(ex.toString());
         }
 

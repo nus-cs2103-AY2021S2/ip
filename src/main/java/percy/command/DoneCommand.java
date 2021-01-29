@@ -3,16 +3,20 @@ package percy.command;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import percy.ui.Ui;
+import percy.storage.Storage;
 import percy.task.Task;
 import percy.task.TaskList;
-import percy.storage.Storage;
+import percy.ui.Ui;
 
 public class DoneCommand extends Command {
     public static final String COMMAND = "done";
 
     private int taskNum;
 
+    /**
+     * Constructs done command.
+     * @param taskNum number of task in the list order.
+     */
     public DoneCommand(int taskNum) {
         super(false);
         this.taskNum = taskNum;

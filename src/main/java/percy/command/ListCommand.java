@@ -1,12 +1,15 @@
 package percy.command;
 
+import percy.storage.Storage;
 import percy.task.TaskList;
 import percy.ui.Ui;
-import percy.storage.Storage;
 
 public class ListCommand extends Command {
     public static final String COMMAND = "list";
 
+    /**
+     * Constructs list command.
+     */
     public ListCommand() {
         super(false);
     }

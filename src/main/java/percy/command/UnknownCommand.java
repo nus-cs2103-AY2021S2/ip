@@ -1,17 +1,19 @@
 package percy.command;
 
 import percy.exception.UnknownCommandException;
+import percy.storage.Storage;
 import percy.task.TaskList;
 import percy.ui.Ui;
-import percy.storage.Storage;
 
 /**
  * A Command meant to handle the event in which an unknown command is given by the user.
  */
 public class UnknownCommand extends Command {
-
+    /**
+     * Constructs unknown command.
+     */
     public UnknownCommand() {
-       super(false);
+        super(false);
     }
 
     /**

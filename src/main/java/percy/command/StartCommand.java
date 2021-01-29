@@ -1,10 +1,11 @@
 package percy.command;
 
+import java.io.IOException;
+
+import percy.storage.Storage;
 import percy.task.TaskList;
 import percy.ui.Ui;
-import percy.storage.Storage;
 
-import java.io.IOException;
 
 public class StartCommand extends Command {
 

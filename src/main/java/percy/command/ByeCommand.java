@@ -1,12 +1,15 @@
 package percy.command;
 
+import percy.storage.Storage;
 import percy.task.TaskList;
 import percy.ui.Ui;
-import percy.storage.Storage;
 
 public class ByeCommand extends Command {
     public static final String COMMAND = "bye";
 
+    /**
+     * Constructs a ByeCommand with isExit as true.
+     */
     public ByeCommand() {
         super(true);
     }

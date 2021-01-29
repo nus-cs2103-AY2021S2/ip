@@ -1,17 +1,21 @@
 package percy.command;
 
+import java.io.IOException;
+
+import percy.storage.Storage;
 import percy.task.Task;
 import percy.task.TaskList;
 import percy.ui.Ui;
-import percy.storage.Storage;
-
-import java.io.IOException;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND = "delete";
 
     private int taskNum;
 
+    /**
+     * Constructs the delete command.
+     * @param taskNum number of the task in the list.
+     */
     public DeleteCommand(int taskNum) {
         super(false);
         this.taskNum = taskNum;

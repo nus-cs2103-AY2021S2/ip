@@ -14,7 +14,7 @@ shadowJar {
 }
 
 repositories {
-    mavenCentral();
+    mavenCentral()
 }
 
 test {

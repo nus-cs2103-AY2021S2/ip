@@ -1,24 +1,21 @@
 package percy.command;
 
-import percy.task.Task;
-import percy.task.TaskList;
-
-import percy.task.Event;
-import percy.ui.Ui;
-import percy.storage.Storage;
-
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import percy.storage.Storage;
+import percy.task.Event;
+import percy.task.Task;
+import percy.task.TaskList;
+import percy.ui.Ui;
+
 
 public class EventCommand extends Command {
     public static final String COMMAND = "event";
     public static final String DATE_TIME_PREFIX = " /at ";
-
     public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
             "event: Adds a task that starts at a specific date and time and ends at a specific date and time.",
             "Parameters: TASK_DESCRIPTION /at DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)",
@@ -28,6 +25,12 @@ public class EventCommand extends Command {
     private LocalDate date;
     private LocalTime time;
 
+    /**
+     * Constructs event command.
+     * @param eventDescription description of event
+     * @param date date of event
+     * @param time time of event
+     */
     public EventCommand(String eventDescription, LocalDate date, LocalTime time) {
         super(false);
         this.eventDescription = eventDescription;
