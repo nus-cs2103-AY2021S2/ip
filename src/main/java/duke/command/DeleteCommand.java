@@ -1,11 +1,11 @@
 package duke.command;
 
+import duke.Storage;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.DukeExceptionType;
-import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
 
 /**
  * Handles deletion of task

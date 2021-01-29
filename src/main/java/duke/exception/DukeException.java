@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class DukeException extends Exception {
     private String command;
-    private DukeExceptionType ExceptionType;
+    private DukeExceptionType exceptionType;
 
     /**
      * Constructor for DukeException
@@ -15,7 +15,7 @@ public class DukeException extends Exception {
     public DukeException(DukeExceptionType exceptionType) {
         super();
         this.command = "";
-        this.ExceptionType = exceptionType;
+        this.exceptionType = exceptionType;
     }
 
     /**
@@ -27,7 +27,7 @@ public class DukeException extends Exception {
     public DukeException(String command, DukeExceptionType exceptionType) {
         super();
         this.command = command;
-        this.ExceptionType = exceptionType;
+        this.exceptionType = exceptionType;
     }
 
     /**
@@ -39,7 +39,7 @@ public class DukeException extends Exception {
     public String toString() {
         String errMsg = "";
 
-        switch (ExceptionType) {
+        switch (exceptionType) {
         case EMPTY_SELECTION:
             errMsg = "☹ OOPS!!! The selection for " + command + " cannot be empty.";
             break;
