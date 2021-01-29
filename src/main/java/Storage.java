@@ -50,14 +50,18 @@ public class Storage {
         }
     }
 
-    public void writeTask(String task) throws DukeException{
-        try {
-            FileWriter fw = new FileWriter(file);
-            fw.write(task);
-            fw.close();
-        }catch(IOException e){
-            throw new DukeException("Error! Couldn't write on file!");
+
+    public void saveTask(Tasks tasks){
+        this.checkIfExist();
+        try{
+            PrintWriter pw = new PrintWriter(file);
+            for(int i = 0; i < tasks.numOfTasks(); i++){
+                pw.println(i + 1 + "." + tasks.getTask(i));
+            }
+            pw.close();
+        }catch (FileNotFoundException e){
+
         }
     }
-
+    
 }
