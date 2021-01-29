@@ -136,4 +136,32 @@ public class Parser {
             return false;
         }
     }
+
+    /**
+     * Checks if the user input is formatted into a correct find command.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
+    public boolean canParseFindCommand(String input) {
+        String[] command = input.split(" ");
+        if (input.equals("find") || input.equals("find ")) {
+            return false;
+        } else if (command.length != 2) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Parses the user input and returns the keyword for a find command.
+     *
+     * @param input User input.
+     * @return Keyword for find.
+     */
+    public String parseKeyword(String input) {
+        String[] command = input.split(" ");
+        return command[1];
+    }
 }

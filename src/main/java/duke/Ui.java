@@ -114,4 +114,14 @@ public class Ui {
         System.out.println("I pray that I will be of use to you.");
         printSpacer();
     }
+
+    public void printFoundTaskList(TaskList taskList) {
+        printSpacer();
+        System.out.println("Here are the tasks that fit your search criteria:");
+        for (int i = 1; i <= taskList.size(); i++) {
+            System.out.println(String.format("%d. ", i) + taskList.getTask(i - 1).toString());
+        }
+        System.out.println("I can only pray that I have been of use to you.");
+        printSpacer();
+    }
 }
