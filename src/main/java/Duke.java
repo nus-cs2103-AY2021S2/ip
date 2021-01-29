@@ -6,6 +6,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke object
+     * @param filePath string that shows the filepath to the file that stores past data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,6 +21,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main Duke program
+     */
     public void run() {
         ui.intro();
         ui.showLine();
