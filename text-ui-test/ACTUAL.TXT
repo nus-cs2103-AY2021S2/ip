@@ -13,27 +13,31 @@ ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
  [T][✘] eat later
- Now you have 2 tasks in the list
+ Now you have 6 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  Got it. I've added this task:
  [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
- Now you have 3 tasks in the list
+ Now you have 7 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  Got it. I've added this task:
  [E][✘] go to buffet (at: Dec 23 2020 23:23)
- Now you have 4 tasks in the list
+ Now you have 8 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  Here are the tasks in your list:
- 1. [T][✘] chill
+ 1. [T][✓] chill
  2. [T][✘] eat later
  3. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
  4. [E][✘] go to buffet (at: Dec 23 2020 23:23)
+ 5. [T][✘] chill
+ 6. [T][✘] eat later
+ 7. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+ 8. [E][✘] go to buffet (at: Dec 23 2020 23:23)
 ____________________________________________________________
 
 ____________________________________________________________
@@ -47,16 +51,50 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Good job on completing this task!
- [D][✓] eat     mee siam (by: Jan 23 2021 20:21)
+ Here are your matching tasks: 
+ 2. [T][✓] eat later
+ 3. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+ 6. [T][✘] eat later
+ 7. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+____________________________________________________________
+
+____________________________________________________________
+ Sorry, there are no matching tasks :( 
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'find' followed by only 1 word to search
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'find' followed by only 1 word to search
+____________________________________________________________
+
+____________________________________________________________
+ Enter a number after command, 'done (number)'
+ or 'delete (number)'
+____________________________________________________________
+
+____________________________________________________________
+ Enter a number after command, 'done (number)'
+ or 'delete (number)'
+____________________________________________________________
+
+____________________________________________________________
+ Enter a number after command, 'done (number)'
+ or 'delete (number)'
 ____________________________________________________________
 
 ____________________________________________________________
  Here are the tasks in your list:
  1. [T][✓] chill
  2. [T][✓] eat later
- 3. [D][✓] eat     mee siam (by: Jan 23 2021 20:21)
+ 3. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
  4. [E][✘] go to buffet (at: Dec 23 2020 23:23)
+ 5. [T][✘] chill
+ 6. [T][✘] eat later
+ 7. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+ 8. [E][✘] go to buffet (at: Dec 23 2020 23:23)
 ____________________________________________________________
 
 ____________________________________________________________
@@ -159,39 +197,38 @@ ____________________________________________________________
 ____________________________________________________________
  I've removed the following task:
  [T][✓] chill
- You now have 3 tasks in the list
+ You now have 7 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  I've removed the following task:
  [T][✓] eat later
- You now have 2 tasks in the list
+ You now have 6 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  I've removed the following task:
- [D][✓] eat     mee siam (by: Jan 23 2021 20:21)
- You now have 1 tasks in the list
+ [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+ You now have 5 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
- I've removed the following task:
- [E][✓] go to buffet (at: Dec 23 2020 23:23)
- You now have 0 tasks in the list
+ Enter a number after command, 'done (number)'
+ or 'delete (number)'
 ____________________________________________________________
 
 ____________________________________________________________
-  No tasks to delete!
+ Enter 'delete' followed by a number between 1 and 5
 ____________________________________________________________
 
 ____________________________________________________________
-  No tasks to complete!
+ Enter 'done' followed by a number between 1 and 5
 ____________________________________________________________
 
 ____________________________________________________________
  Got it. I've added this task:
  [T][✘] chill
- Now you have 1 tasks in the list
+ Now you have 6 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________

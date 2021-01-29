@@ -1,1 +1,6 @@
+E|1|go to buffet|2020-12-23T23:23
+T|0|chill
+T|0|eat later
+D|0|eat     mee siam|2021-01-23T20:21
+E|0|go to buffet|2020-12-23T23:23
 T|0|chill

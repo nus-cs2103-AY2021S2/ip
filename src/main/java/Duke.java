@@ -74,6 +74,12 @@ public class Duke {
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
                             System.out.println(e.getMessage());
                         }
+                    } else if (split[0].equals("find")) {
+                        try {
+                            System.out.println(TaskList.findTask(split[1]));
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
                     } else if (split[0].equals("todo") || split[0].equals("deadline")
                             || split[0].equals("event")) {
                         Task task;

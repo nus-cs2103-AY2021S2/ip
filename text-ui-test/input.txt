@@ -4,7 +4,13 @@ event    go to buffet   /    2020-12-23 23:23
 list
 done 1
 done 2
-done 3
+find eat
+find nothign
+find
+find
+done
+delete
+done
 list
 done 4
 done sdfs
@@ -24,7 +30,7 @@ event sdf / 2020-43-43  24:24
 delete 1
 delete 1
 delete 1
-delete 1
+delete
 delete 0
 done 0
 todo chill

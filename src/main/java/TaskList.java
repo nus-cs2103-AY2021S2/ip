@@ -90,4 +90,41 @@ public class TaskList {
         }
         return tasks.remove(number);
     }
+
+    //try use hmap? so like each time we add a  task, we are mapping each word of the task to the idx of occurence in
+    //the list,then in the harddrive can have a section for hmap and like each word and the idxes separated by a comma.
+    //can be done, may be good in long term, but is painful to code, may take time, which i dont got too much of
+    /**
+     * Returns the String of all the tasks that contain the keyword
+     *
+     * @param keyword word to be used to search the task list
+     * @return String of all the tasks that contain the keyword
+     */
+    public static String findTask(String keyword) {
+        keyword = keyword.trim();
+        String[] split = keyword.split(" ");
+        if (split.length > 1 || keyword.equals("")) {
+            throw new IllegalArgumentException(Ui.lineGetter()
+                    + " Please enter 'find' followed by only 1 word to search\n"
+                    + Ui.lineGetter());
+        }
+        String result = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            String task = tasks.get(i).toString();
+            String[] split1 = task.split(" ");
+            for (int j = 0; j < split1.length; j++) {
+                if (keyword.equals(split1[j])) {
+                    int count = i + 1;
+                    result = result + " " + count + ". " + task + "\n";
+                }
+            }
+        }
+        if (result.equals("")) {
+            return Ui.lineGetter() +  " Sorry, there are no matching tasks :( \n"
+                    + Ui.lineGetter();
+        } else {
+            return Ui.lineGetter() + " Here are your matching tasks: \n"
+                    + result + Ui.lineGetter();
+        }
+    }
 }
