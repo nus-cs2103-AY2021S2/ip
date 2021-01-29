@@ -8,16 +8,16 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     // exception classes
-    public static class InvalidTaskTypeException extends Exception {
-        private static final long serialVersionUID = 2286254111257413392L;
+    public static class UnrecognisedCommandException extends Exception {
+        private static final long serialVersionUID = 6864325922556059437L;
 
-        public InvalidTaskTypeException (String taskType) {
-            super("! Encountered Task Type: " + taskType + " during parsing of command");
+        public UnrecognisedCommandException(String command) {
+            super("! Unrecognised command: " + command + " encountered during parsing.");
         }
     }
 
     public static class EmptySubcommandException extends Exception {
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 6820026755838853943L;
 
         public EmptySubcommandException(String subcommand) {
             super("! The subcommand " + subcommand + " cannot be empty");
@@ -35,7 +35,7 @@ public class Parser {
         return task.toCommand(Parser.delimiter, Parser.parseFormat);
     }
 
-    public static Task commandToTask (String command) throws Parser.InvalidTaskTypeException, 
+    public static Task commandToTask (String command) throws Parser.UnrecognisedCommandException, 
             Task.EmptyDescriptionException {
 
         // format = type :: state :: description :: createdTime :: others
@@ -57,22 +57,41 @@ public class Parser {
                     LocalDateTime.parse(parsedCommand[4], Parser.parseFormat));
 
         default:
-            throw new Parser.InvalidTaskTypeException(parsedCommand[0]);
+            throw new Parser.UnrecognisedCommandException(parsedCommand[0]);
         }
     }
 
-    public static Event parseNewTaskCommand (String command, String subcommand) 
-            throws Parser.EmptySubcommandException, Task.EmptyDescriptionException, 
-            DateTimeParseException {
+    public static Task parseNewCommand (String taskType, String command) 
+            throws Parser.UnrecognisedCommandException, Parser.EmptySubcommandException, 
+            Task.EmptyDescriptionException, DateTimeParseException {
 
-        int subcommandIndex = command.indexOf(subcommand);
+        int subcommandIndex; Task task;
 
-        if (subcommandIndex < 0) {
-            throw new Parser.EmptySubcommandException(subcommand);
+        switch (taskType) {
+        case "todo":
+            task = new ToDo(command);
+            break;
+
+        case "event":
+            subcommandIndex = command.indexOf("/at");
+            if (subcommandIndex < 0) { throw new Parser.EmptySubcommandException("/at"); }
+            task = new Event (command.substring(0, subcommandIndex - 1).trim(), 
+                    LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
+                    Parser.parseFormat));
+            break;
+
+        case "deadline":
+            subcommandIndex = command.indexOf("/by");
+            if (subcommandIndex < 0) { throw new Parser.EmptySubcommandException("/by"); }
+            task = new Deadline (command.substring(0, subcommandIndex - 1).trim(), 
+                    LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
+                    Parser.parseFormat));
+            break;
+
+        default:
+            throw new Parser.UnrecognisedCommandException(taskType);
         }
 
-        return new Event (command.substring(0, subcommandIndex - 1).trim(), 
-                LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
-                Parser.parseFormat));
+        return task;
     }
 }

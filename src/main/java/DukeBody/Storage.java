@@ -37,7 +37,7 @@ public class Storage {
             }
 
             scanner.close();
-        } catch (IOException | Parser.InvalidTaskTypeException | 
+        } catch (IOException | Parser.UnrecognisedCommandException |
                 Task.EmptyDescriptionException E) {
           // empty data
         }

@@ -14,7 +14,7 @@ public class TestParser {
 
     @Test
     public void taskToCommandToTask () throws Event.EmptyDescriptionException,
-            Parser.InvalidTaskTypeException {
+            Parser.UnrecognisedCommandException {
 
         Event event = new Event("testing event", true, LocalDateTime.now(),
                 LocalDateTime.now());
@@ -30,7 +30,7 @@ public class TestParser {
         TaskStub taskStub = new TaskStub("testing task stub", true, LocalDateTime.now());
         String taskCommand = Parser.taskToCommand(taskStub);
 
-        assertThrows(Parser.InvalidTaskTypeException.class, () -> {
+        assertThrows(Parser.UnrecognisedCommandException.class, () -> {
             Parser.commandToTask(taskCommand);
         });
     }

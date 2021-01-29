@@ -36,62 +36,41 @@ public class Duke {
                 switch (command) {
                     case "bye":
                         break user_active;
-                    
+
                     case "list":
-                        for (int i = 0; i < this.tasks.size(); ++ i) {
+                        for (int i = 0; i < this.tasks.size(); ++i) {
                             this.ui.print(i + 1 + ". " + this.tasks.get(i).taskInformation(
                                     Ui.outputFormat));
                         }
 
-                        this.ui.print("You have " + this.tasks.outstandingTasks().size() 
+                        this.ui.print("You have " + this.tasks.outstandingTasks().size()
                                 + " undone tasks.");
                         break;
 
                     case "undone":
                         ArrayList<Task> undoneTasks = this.tasks.outstandingTasks();
 
-                        for (int i = 0; i < undoneTasks.size(); ++ i) {
+                        for (int i = 0; i < undoneTasks.size(); ++i) {
                             this.ui.print(i + 1 + ". " + undoneTasks.get(i).taskInformation(
-                                Ui.outputFormat));
+                                    Ui.outputFormat));
                         }
 
                         break;
-                    
+
                     case "done":
                         int taskIndex = scanner.nextInt();
                         this.tasks.markAsDone(taskIndex);
                         this.ui.markedAsDone(this.tasks.get(taskIndex));
                         break;
-                    
-                    case "todo":
-                        this.tasks.add(new ToDo(scanner.nextLine()));
-                        this.ui.addedTask(this.tasks);
-                        break;
-                    
-                    case "event":
-                        this.tasks.add(Parser.parseNewTaskCommand(
-                                scanner.nextLine().trim(), "/at"));
 
-                        this.ui.addedTask(this.tasks);
-                        break;
-
-                    case "deadline":
-                        this.tasks.add(Parser.parseNewTaskCommand(
-                                scanner.nextLine().trim(), "/by"));
-                        
-                        this.ui.addedTask(this.tasks);
-                        break;
-                    
-                    case "delete":
-                        this.ui.removedTask(this.tasks, this.tasks.remove(
-                                scanner.nextInt() - 1));
-
-                        break;
                     default:
-                        this.ui.confuzzled();
-                    }
+                        this.tasks.add(Parser.parseNewCommand(command, scanner.nextLine()));
+                        this.ui.addedTask(this.tasks);
+                }
             } catch (DateTimeParseException E) {
                 this.ui.print("! Input datetime must be of format yyyy-MM-dd HHmm");
+            } catch (Parser.UnrecognisedCommandException E) {
+                this.ui.confuzzled();
             } catch (Exception E) {
                 this.ui.print(E.getMessage());
             }
