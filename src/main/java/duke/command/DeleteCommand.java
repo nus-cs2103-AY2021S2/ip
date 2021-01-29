@@ -31,13 +31,10 @@ public class DeleteCommand extends Command {
         }
     }
 
-<<<<<<< HEAD
     /**
      * Do not exit the Duke program
      * @return   A signal that indicate a continuation of the Duke program.
      */
-=======
->>>>>>> branch-A-CodingStandard
     @Override
     public boolean isExit() {
         return false;

@@ -9,15 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
     private final LocalDate dateTime;
 
-<<<<<<< HEAD
     /**
      * Construct a deadline.
      * @param isCompleted   Checked if the task is completed.
      * @param taskName     The task name.
      * @param dateTime     The date and time of the deadline.
      */
-=======
->>>>>>> branch-A-CodingStandard
     public Deadline(boolean isCompleted, String taskName, LocalDate dateTime) {
         super('D', isCompleted, taskName);
         this.dateTime = dateTime;

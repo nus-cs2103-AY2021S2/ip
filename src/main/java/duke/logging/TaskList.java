@@ -10,12 +10,9 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-<<<<<<< HEAD
 /**
  * A TaskList call denotes a system with a list of task and has the ability to make changes to the list.
  */
-=======
->>>>>>> branch-A-CodingStandard
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -117,6 +114,23 @@ public class TaskList {
         } catch (IndexOutOfBoundsException ex) {
             throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big "
                     + "or smaller than 0. There are currently " + tasks.size() + " tasks");
+        }
+    }
+
+    public void find(String taskDescription, Ui ui) throws InvalidDescriptionException {
+        if (taskDescription.length() == 0) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The description cannot be empty.");
+        }
+        System.out.println(taskDescription.length());
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.containSubstring(taskDescription.strip())) {
+                matchingTasks.add(task);
+            }
+        }
+        ui.findCommandInteraction(matchingTasks);
+        for (Task task: matchingTasks) {
+            System.out.println("     " + task);
         }
     }
 }

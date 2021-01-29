@@ -4,14 +4,11 @@ package duke.model;
  * A ToDo class denotes a to-do item.
  */
 public class ToDo extends Task {
-<<<<<<< HEAD
     /**
      * Constructs a ToDo.
      * @param isCompleted   Checked if the task is completed.
      * @param taskName     The task name.
      */
-=======
->>>>>>> branch-A-CodingStandard
     public ToDo(Boolean isCompleted, String taskName) {
         super('T', isCompleted, taskName);
     }

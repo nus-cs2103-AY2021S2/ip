@@ -8,15 +8,12 @@ public class Task {
     private boolean isCompleted;
     private final String taskName;
 
-<<<<<<< HEAD
     /**
      * Construct a task.
      * @param taskType    The type of the task.
      * @param isCompleted  Checked if the task is completed.
      * @param taskName    The task name.
      */
-=======
->>>>>>> branch-A-CodingStandard
     public Task(char taskType, boolean isCompleted, String taskName) {
         this.taskType = taskType;
         this.isCompleted = isCompleted;
@@ -36,6 +33,10 @@ public class Task {
      */
     public void completeTask() {
         this.isCompleted = true;
+    }
+
+    public boolean containSubstring(String str) {
+        return this.taskName.contains(str);
     }
 
     /**

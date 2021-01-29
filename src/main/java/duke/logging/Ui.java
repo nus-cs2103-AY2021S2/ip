@@ -98,4 +98,12 @@ public class Ui {
     public void unknownCommandInteraction() throws InvalidInputException {
         throw new InvalidInputException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+
+    public void findCommandInteraction(ArrayList<Task> matchingTasks) {
+        if (matchingTasks.size() == 0) {
+            System.out.println("     ☹ No match found ☹");
+        } else {
+            System.out.println("     Here are the matching tasks in your list:");
+        }
+    }
 }
