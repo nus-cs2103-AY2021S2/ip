@@ -1,6 +1,0 @@
-[T][X] buy bread
-[D][ ] go to work (by: Jan 25 2021 10:00)
-[D][ ] go to work (by: Jan 25 2021 14:00)
-[E][ ] go and sleep (at: Dec 23 2019 23:59)
-[E][ ] go and sleep (at: Dec 23 2019 23:59)
-[E][ ] go and sleep (at: Dec 23 2019 23:59)

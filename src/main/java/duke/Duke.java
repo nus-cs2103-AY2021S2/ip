@@ -1,11 +1,18 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-
-
-
-    private DataHandler storage;
+    private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
@@ -14,10 +21,9 @@ public class Duke {
      *
      * @param filePath path of file storage data
      */
-
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new DataHandler(filePath);
+        storage = new Storage(filePath);
         try {
             tasks = storage.loadData();
         } catch (FileNotFoundException e) {
@@ -28,8 +34,7 @@ public class Duke {
     /**
      * Tries to run Duke after filePath, taskList, storage and ui is given
      */
-
-    public void run() throws DukeException {
+    public void run() throws IOException {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -49,7 +54,6 @@ public class Duke {
      * @param args takes in arguments from user
      * @throws Exception of Duke (ie EmptyEventException)
      */
-
     public static void main(String[] args) throws Exception {
         new Duke("data/tasks.txt").run();
     }

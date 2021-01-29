@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Class Task which keeps track of the details of the task
  * and whether the task is done.

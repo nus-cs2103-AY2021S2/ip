@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Exception where user left out the details of the task to delete.
  */

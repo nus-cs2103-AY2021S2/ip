@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Exception where user keys in alphabet when he is supposed to key in a number.
  */

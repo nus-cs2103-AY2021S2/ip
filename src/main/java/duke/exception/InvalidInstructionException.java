@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Exception where user inputs an invalid task detail.
  */

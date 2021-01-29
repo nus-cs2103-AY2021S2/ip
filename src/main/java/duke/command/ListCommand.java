@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 /**
  * ListCommand class which is a type of Command to be executed.
  */
@@ -21,10 +26,10 @@ public class ListCommand extends Command {
      *
      * @param tasks list of tasks where this new task is added to
      * @param input details of the task
-     * @param dataHandler handles the various tasks according to their type
+     * @param storage handles the various tasks according to their type
      */
 
-    public void execute(TaskList tasks, String input, DataHandler dataHandler) {
+    public void execute(TaskList tasks, String input, Storage storage) {
             tasks.list();
     }
 

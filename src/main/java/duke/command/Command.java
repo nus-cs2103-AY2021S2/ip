@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+
+import java.io.IOException;
+
 /**
  * Abstract class for all various commands.
  */
@@ -9,9 +16,9 @@ public abstract class Command {
      *
      * @param tasks list of tasks where this new task is added to
      * @param input details of the task
-     * @param dataHandler handles the various tasks according to their type
+     * @param storage handles the various tasks according to their type
      */
-    public abstract void execute(TaskList tasks, String input, DataHandler dataHandler);
+    public abstract void execute(TaskList tasks, String input, Storage storage) throws IOException;
 
     /**
      * Checks if it is time to exit Duke.

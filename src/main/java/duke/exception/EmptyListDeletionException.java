@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Exception where user tries to delete item from an empty list.
  */

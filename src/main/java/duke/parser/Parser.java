@@ -1,3 +1,14 @@
+package duke.parser;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ByeCommand;
+import duke.command.ListCommand;
+import duke.command.FindCommand;
+import duke.exception.InvalidInstructionException;
+
 /**
  * Parser class to handle all commands and create the correct command.
  */
@@ -29,7 +40,7 @@ public class Parser {
         } else if (type.equals("find")) {
             c = new FindCommand(input);
         } else if (type.equals("bye")) {
-            c = new ExitCommand(input);
+            c = new ByeCommand(input);
         } else {
             new InvalidInstructionException();
         }

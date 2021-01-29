@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.InvalidInstructionException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
+import java.io.IOException;
+
 /**
  * DoneCommand class which is a type of Command to be executed.
  */
@@ -22,16 +30,17 @@ public class DoneCommand extends Command {
      *
      * @param tasks list of tasks where this new task is added to
      * @param input details of the task
-     * @param dataHandler handles the various tasks according to their type
+     * @param storage handles the various tasks according to their type
+     * @throws IOException in case file is corrupt
      */
 
-    public void execute(TaskList tasks, String input, DataHandler dataHandler) {
+    public void execute(TaskList tasks, String input, Storage storage) throws IOException {
         if (Integer.parseInt(input.split(" ")[1]) > tasks.getSize()) {
             new InvalidInstructionException();
             return;
         } else {
             tasks.markDone(input);
-            dataHandler.saveData(tasks);
+            storage.saveData(tasks);
         }
     }
 

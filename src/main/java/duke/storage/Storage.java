@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,7 +20,7 @@ import java.util.Scanner;
 /**
  * Stores and Retrieves data from a given .txt file and loads it into TaskList.
  */
-public class DataHandler {
+public class Storage {
     String str;
 
     /**
@@ -20,7 +28,7 @@ public class DataHandler {
      *
      * @param filePath path where files are stored and retrieved
      */
-    public DataHandler(String filePath) {
+    public Storage(String filePath) {
         this.str = filePath;
     }
 
@@ -30,20 +38,25 @@ public class DataHandler {
      * @param li TaskList of data to be saved
      * @throws IOException  If file is corrupt
      */
-    public static void saveData(TaskList li) {
+    public static void saveData(TaskList li) throws IOException {
         //potential problem: saveData doesnt update .txt file
-        // when i change done status of item to done
+        //when i change done status of item to done. only updates after bye command
         try {
             Path currPath = Paths.get("");
-            FileWriter fw = new FileWriter(currPath.toAbsolutePath().toString() + "/duke.txt");
-            for (int i = 0; i < li.getSize(); i++) {
-                String write = li.getInd(i) + "\n";
-                fw.write(write);
-            }
-            fw.close();
+            FileWriter fw = new FileWriter(currPath.toAbsolutePath().toString()
+                    + "/src/main/java/duke/duke.txt");
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
+
+        Path currPath = Paths.get("");
+        FileWriter fw = new FileWriter(currPath.toAbsolutePath().toString()
+                + "/src/main/java/duke/duke.txt");
+        for (int i = 0; i < li.getSize(); i++) {
+            String write = li.getInd(i) + "\n";
+            fw.write(write);
+        }
+        fw.close();
     }
 
     /**
@@ -54,7 +67,8 @@ public class DataHandler {
      */
     public static TaskList loadData() throws FileNotFoundException {
         Path currPath = Paths.get("");
-        Path dukePath = Paths.get(currPath.toAbsolutePath().toString() + "/duke.txt");
+        Path dukePath = Paths.get(currPath.toAbsolutePath().toString()
+                + "/src/main/java/duke/duke.txt");
         TaskList list = new TaskList();
 
         if (Files.exists(dukePath)) { //load list data
@@ -141,7 +155,7 @@ public class DataHandler {
                 }
             }
         } else { //create new file in folder
-            File f = new File(currPath.toAbsolutePath().toString() + "/duke.txt");
+            File f = new File(currPath.toAbsolutePath().toString() + "/duke/duke.txt");
         }
         return list;
     }

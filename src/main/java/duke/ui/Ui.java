@@ -1,3 +1,5 @@
+package duke.ui;
+
 /**
  * Ui class which stores all the basic UI stuff like welcome message.
  */

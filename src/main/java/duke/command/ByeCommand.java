@@ -1,8 +1,13 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 /**
- * ExitCommand class which is a type of Command to be executed.
+ * ByeCommand class which is a type of Command to be executed.
  */
 
-public class ExitCommand extends Command {
+public class ByeCommand extends Command {
     String type;
 
     /**
@@ -12,7 +17,7 @@ public class ExitCommand extends Command {
      * @param t details of the task
      *
      */
-    public ExitCommand(String t) {
+    public ByeCommand(String t) {
         this.type = t;
 
     }
@@ -24,10 +29,10 @@ public class ExitCommand extends Command {
      *
      * @param tasks list of tasks where this new task is added to
      * @param input details of the task
-     * @param dataHandler handles the various tasks according to their type
+     * @param storage handles the various tasks according to their type
      */
 
-    public void execute(TaskList tasks, String input, DataHandler dataHandler) {
+    public void execute(TaskList tasks, String input, Storage storage) {
         if (input.equals("bye")) {
             System.out.println(line);
             System.out.println("Bye. Hope to see you again soon!");

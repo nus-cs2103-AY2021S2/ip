@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Exception where user left out the date or time of the task.
  */
