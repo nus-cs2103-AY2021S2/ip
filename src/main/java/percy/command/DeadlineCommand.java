@@ -24,8 +24,8 @@ public class DeadlineCommand extends Command {
      */
     public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
             "deadline: Adds a task that needs to be done before a specific date and time.",
-            "Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)",
-            "Example: deadline return book /by 2021-01-27 1800-2000"));
+            "Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) TIME(HHmm)",
+            "Example: deadline return book /by 2021-01-27"));
 
     private String deadlineDescription;
     private LocalDate date;

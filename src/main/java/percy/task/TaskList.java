@@ -57,4 +57,19 @@ public class TaskList {
     public void deleteTaskFromList(Task task) {
         list.remove(task);
     }
+
+    /**
+     * Filters the task list with tasks with the keyword.
+     * @param keyword the find keyword
+     * @return filtered task list
+     */
+    public ArrayList<Task> findTask(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task t : list) {
+            if (t.getDescription().toLowerCase().contains(keyword)) {
+                filteredTasks.add(t);
+            }
+        }
+        return filteredTasks;
+    }
 }

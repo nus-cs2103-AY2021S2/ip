@@ -33,18 +33,20 @@ public class Parser {
             return new DeleteCommand(getTaskNumber());
         case ByeCommand.COMMAND:
             return new ByeCommand();
+        case FindCommand.COMMAND:
+            return new FindCommand(getKeyword());
         default:
             return new UnknownCommand();
         }
     }
 
-    public static int getTaskNumber() {
+    private static int getTaskNumber() {
         String[] splitCommand = fullCmd.split(" ", 2);
         String taskNumber = splitCommand[1].trim();
         return Integer.valueOf(taskNumber);
     }
 
-    public static String getTodoDescription() {
+    private static String getTodoDescription() {
         String[] splitCommand = fullCmd.split(" ", 2);
         String description = "";
         if (splitCommand.length == 2) {
@@ -53,7 +55,7 @@ public class Parser {
         return description;
     }
 
-    public static String getEventDescription() throws PercyException {
+    private static String getEventDescription() throws PercyException {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(EventCommand.DATE_TIME_PREFIX, 2);
@@ -67,7 +69,7 @@ public class Parser {
         }
     }
 
-    public static LocalDate getEventDate() throws PercyException {
+    private static LocalDate getEventDate() throws PercyException {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(EventCommand.DATE_TIME_PREFIX, 2);
@@ -87,7 +89,7 @@ public class Parser {
         }
     }
 
-    public static LocalTime getEventTime() throws PercyException {
+    private static LocalTime getEventTime() throws PercyException {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(EventCommand.DATE_TIME_PREFIX, 2);
@@ -107,7 +109,7 @@ public class Parser {
         }
     }
 
-    public static String getDeadlineDescription() throws PercyException {
+    private static String getDeadlineDescription() throws PercyException {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
@@ -121,7 +123,7 @@ public class Parser {
         }
     }
 
-    public static LocalDate getDeadlineDate() throws PercyException {
+    private static LocalDate getDeadlineDate() throws PercyException {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
@@ -141,7 +143,7 @@ public class Parser {
         }
     }
 
-    public static LocalTime getDeadlineTime() throws PercyException {
+    private static LocalTime getDeadlineTime() throws PercyException {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
@@ -157,6 +159,18 @@ public class Parser {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The date and time format of a deadline is wrong.");
             arr.addAll(DeadlineCommand.USAGE_GUIDE);
+            throw new PercyException(Ui.makeMsg(arr));
+        }
+    }
+
+    private static String getKeyword() throws PercyException {
+        try {
+            String[] splitCommand = fullCmd.split(" ", 2);
+            return splitCommand[1].trim().toLowerCase();
+        } catch (IndexOutOfBoundsException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The keyword is missing.");
+            arr.addAll(FindCommand.USAGE_GUIDE);
             throw new PercyException(Ui.makeMsg(arr));
         }
     }

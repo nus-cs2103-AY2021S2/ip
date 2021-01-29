@@ -161,4 +161,25 @@ public class Ui {
                 + INDENT + INDENT + t.toString() + "\n"
                 + DIVIDER;
     }
+
+    /**
+     * Make message for searching for task
+     * @param filteredTasks the list with the search results
+     * @return string to be printed
+     */
+    public static String makeSearchResultsMsg(TaskList filteredTasks) {
+        ArrayList<Task> filteredTasksArr = filteredTasks.getTaskList();
+        int taskCount = filteredTasks.getTaskList().size();
+        if (taskCount == 0) {
+            return DIVIDER + INDENT + "There are no matching tasks in your list.\n" + DIVIDER;
+        } else {
+            String s;
+            s = DIVIDER + INDENT + "Here are the matching tasks in your list:\n";
+            for (Task t : filteredTasksArr) {
+                s += INDENT + (filteredTasksArr.indexOf(t) + 1) + "." + t.toString() + "\n";
+            }
+            s += DIVIDER;
+            return s;
+        }
+    }
 }
