@@ -7,7 +7,11 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-
+/**
+ * represents a data storage accessor and mutator with
+ * LogIn functionality to track the credentials of the
+ * current user.
+ */
 public class Storage {
     // members
     private String DirPath;
@@ -23,6 +27,12 @@ public class Storage {
         this.Username = username;
     }
 
+    /**
+     * read the list of tasks from a txt file based on the stored
+     * directory path and username as
+     *      directory_path\\username.txt
+     * @return  TaskList object representing the list of tasks.
+     */
     public TaskList readTasks () {
         TaskList tasks = new TaskList();
 
@@ -44,6 +54,14 @@ public class Storage {
 
         return tasks;
     }
+
+    /**
+     * Saves the user's tasks based on the stored username and
+     * directory path as:
+     *      directory_path\\username.txt
+     * @param tasks     the list of tasks to save.
+     * @throws IOException
+     */
 
     public void saveTasks (TaskList tasks) throws IOException {
 
