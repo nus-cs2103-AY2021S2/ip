@@ -4,17 +4,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Kelbot {
-    
     private Storage storage;
     private TaskList taskList;
     private UI ui;
-    
     /**
      * Initializes Kelbot
      *
      * @param path The file path that Kelbot will read from to load up previous usage
      */
-    
     public Kelbot(java.nio.file.Path path) {
         ui = new UI();
         storage = new Storage(path);
@@ -25,22 +22,18 @@ public class Kelbot {
             taskList = new TaskList();
         }
     }
-    
     /**
      * The main programme that runs after the Kelbot initialization.
      */
-    
     public void run() {
         while (true) {
             try {
                 Parser parser = ui.takeInput();
-                
                 Command command = parser.getCommand();
                 int taskNumber = parser.getTaskNumber();
                 String keyword = parser.getKeyword();
                 String taskName = parser.getTaskName();
                 LocalDate date = parser.getDate();
-                
                 if (command == Command.BYE) {
                     ui.sayGoodbye();
                     break;
@@ -104,21 +97,17 @@ public class Kelbot {
             }
         }
     }
-    
     /**
      * Gets Task List
      *
      * @return Task List
      */
-    
     public TaskList getTaskList() {
         return taskList;
     }
-    
     /**
      * Main programme
      */
-    
     public static void main(String[] args) throws KelbotException {
         java.nio.file.Path path = java.nio.file.Paths.get(".", "data", "Kelbot.txt");
         new Kelbot(path).run();
