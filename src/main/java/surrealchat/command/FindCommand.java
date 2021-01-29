@@ -54,4 +54,14 @@ public class FindCommand extends Command{
         }
         return this.compileSearchResults(searchResults);
     }
+
+    /**
+     * Describes usage of find command.
+     * @return String describing the find command.
+     */
+    public static String displayHelp() {
+        String outputString = "Given a keyword, finds tasks that contain that keyword.\n";
+        outputString += "Format of arguments: find [keyword]\n";
+        return outputString;
+    }
 }

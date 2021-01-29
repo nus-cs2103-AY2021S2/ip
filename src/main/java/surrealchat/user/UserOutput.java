@@ -4,14 +4,14 @@ package surrealchat.user;
  * Handles printing of output.
  */
 public class UserOutput {
-    protected boolean verboseFlag;
+    protected boolean isVerbose;
 
     /**
      * Creates new UserOutput instance.
-     * @param verboseFlag Flag for whether additional output should be printed.
+     * @param isVerbose Flag for whether additional output should be printed.
      */
-    public UserOutput(boolean verboseFlag) {
-        this.verboseFlag = verboseFlag;
+    public UserOutput(boolean isVerbose) {
+        this.isVerbose = isVerbose;
     }
 
     /**
@@ -19,7 +19,7 @@ public class UserOutput {
      */
     public void printInitialGreeting() {
         System.out.println("I am Meme Man. Whoms't be entering the VIMension?");
-        if (this.verboseFlag) {
+        if (this.isVerbose) {
             System.out.println("I speak a lot. For I am verbose!\n");
         } else {
             System.out.println("\n");
@@ -43,11 +43,11 @@ public class UserOutput {
     }
 
     /**
-     * Prints output only if verboseFlag is true.
+     * Prints output only if isVerbose is true.
      * @param output The output to be printed in verbose mode.
      */
     public void printVerbose(String output) {
-        if (this.verboseFlag) {
+        if (this.isVerbose) {
             System.out.println(output);
         }
     }
@@ -56,7 +56,7 @@ public class UserOutput {
      * Prints out the farewell message upon program exiting normally.
      */
     public void printExitProgram() {
-        if (this.verboseFlag) {
+        if (this.isVerbose) {
             System.out.println("Saving tasks now...");
         }
         System.out.println("You have been EJECTED!");

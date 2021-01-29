@@ -60,4 +60,14 @@ public class DeleteCommand extends Command {
         Task deletedTask = taskManagement.deleteTask(taskNumber);
         return this.printOutput(deletedTask, taskManagement.getNumberOfTasks());
     }
+
+    /**
+     * Describes usage of delete command.
+     * @return String describing the delete command.
+     */
+    public static String displayHelp() {
+        String outputString = "Given a task number, deletes that task from list.\n";
+        outputString += "Format of arguments: delete [task number]\n";
+        return outputString;
+    }
 }

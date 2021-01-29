@@ -12,6 +12,8 @@ import surrealchat.command.EditCommand;
 import surrealchat.command.FindCommand;
 import surrealchat.command.DeleteCommand;
 
+import surrealchat.help.HelpMode;
+
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
 
@@ -32,10 +34,10 @@ import java.io.IOException;
  */
 public class SurrealChat {
     protected static final String TASK_FILE_PATH = "tasks.txt";
-    protected UserInput userInput;
-    protected TaskManagement taskManagement;
-    protected FileManagement fileManagement;
-    protected UserOutput userOutput;
+    protected final UserInput userInput;
+    protected final TaskManagement taskManagement;
+    protected final FileManagement fileManagement;
+    protected final UserOutput userOutput;
 
     private SurrealChat(UserInput userInput, TaskManagement taskManagement,
                         FileManagement fileManagement, UserOutput userOutput) {
@@ -48,14 +50,14 @@ public class SurrealChat {
     /**
      * Creates new SurrealChat instance.
      * @param filePath Path of file for save/load.
-     * @param verboseFlag Flag to determine whether to print verbose output.
+     * @param isVerbose Flag to determine whether to print verbose output.
      * @return SurrealChat instance.
      */
-    public static SurrealChat initSurrealChat(File filePath, boolean verboseFlag) {
+    public static SurrealChat initSurrealChat(File filePath, boolean isVerbose) {
         UserInput userInput = new UserInput(new Scanner(System.in));
         TaskManagement taskManagement = new TaskManagement(new ArrayList<Task>());
         FileManagement fileManagement = new FileManagement(filePath);
-        UserOutput userOutput = new UserOutput(verboseFlag);
+        UserOutput userOutput = new UserOutput(isVerbose);
         return new SurrealChat(userInput, taskManagement, fileManagement, userOutput);
     }
 
@@ -67,12 +69,12 @@ public class SurrealChat {
         this.userOutput.printExitProgram();
     }
 
-    private void printEasterEgg(String easterEgg) {
-        this.userOutput.printEasterEggOutput(easterEgg);
-    }
-
     private boolean commandLogic(boolean maintainLoop, String userCommand) {
         switch(userCommand) {
+        case "help":
+            String command = this.userInput.getInputDescription();
+            this.userOutput.printOutput(HelpMode.displayHelp(command));
+            break;
         case "bye":
             this.userInput.checkExcessArguments();
             maintainLoop = false; //Break out of infinite loop
@@ -150,8 +152,8 @@ public class SurrealChat {
      */
     public static void main(String[] args) {
         //Initialise SurrealChat
-        boolean verboseFlag = true;
-        SurrealChat surrealChat = SurrealChat.initSurrealChat(new File(SurrealChat.TASK_FILE_PATH), verboseFlag);
+        boolean isVerbose = true;
+        SurrealChat surrealChat = SurrealChat.initSurrealChat(new File(SurrealChat.TASK_FILE_PATH), isVerbose);
         surrealChat.initialGreeting();
 
         //Try to read from file

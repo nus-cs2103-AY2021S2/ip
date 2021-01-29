@@ -20,4 +20,12 @@ public class VegetalEasterEgg extends EasterEgg {
         outputString += "Meme Man: I taste a vegetal... ANGERY!\n";
         return outputString;
     }
+
+    /**
+     * Describes usage of vegetal easteregg command.
+     * @return String describing the vegetal easteregg command.
+     */
+    public static String displayHelp() {
+        return "Gives a hilarious output. Try it out!.\n";
+    }
 }

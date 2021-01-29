@@ -5,9 +5,16 @@ import surrealchat.task.TaskManagement;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Command object for editing description of Task objects.
+ */
 public class EditCommand extends Command{
     protected final String rawDescription;
 
+    /**
+     * Creates a new EditCommand object
+     * @param rawDescription The task number to edit + /edit tag + new description.
+     */
     public EditCommand(String rawDescription) {
         super("edit");
         this.rawDescription = rawDescription;
@@ -23,6 +30,11 @@ public class EditCommand extends Command{
         return outputString;
     }
 
+    /**
+     * Executes edit command to edit a Task description.
+     * @param taskManagement TaskManagement object where Task to be edited is stored.
+     * @return String to describe the new task.
+     */
     public String execute(TaskManagement taskManagement) {
         if (this.rawDescription.isEmpty()) {
             throw new NoSuchElementException("Did you forget to add the task number and new description? Not stonks!");
@@ -49,5 +61,15 @@ public class EditCommand extends Command{
             throw new ArrayIndexOutOfBoundsException(
                     "Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!");
         }
+    }
+
+    /**
+     * Describes usage of edit command.
+     * @return String describing the edit command.
+     */
+    public static String displayHelp() {
+        String outputString = "Given a task number and new description, edits that task with new description.\n";
+        outputString += "Format of arguments: edit [task number] /edit [new description]\n";
+        return outputString;
     }
 }

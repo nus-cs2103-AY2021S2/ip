@@ -39,6 +39,9 @@ You can key in a single keyword and get a narrowed list of tasks.
 ### Surreal Memes easter eggs
 Keep scrolling to find them.
 
+### Find help for commands
+If you are not sure how a command works, Meme Man will show you the format if you call for his help.
+
 ## Commands related to tasks
 
 ###  Add ToDo task - `todo`
@@ -264,6 +267,23 @@ My search returned nothing. Not stonks!
 ```
 
 ## Other commands
+### Help - `help
+Format: `help COMMAND`
+
+Key this command in along with the name of another command to display how to use the command.
+
+Example usage:
+`help todo`
+
+Expected Outcome:
+```
+Given a description, stores todo task.
+Format of arguments: todo [description]
+```
+Outcome for invalid commands:
+```
+Helper does not recognise command. Not Stonks!
+```
 
 ### Exit - `bye`
 Format: `bye`

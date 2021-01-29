@@ -65,4 +65,15 @@ public class EventCommand extends Command{
         taskManagement.addTask(addedTask);
         return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
     }
+
+    /**
+     * Describes usage of event command.
+     * @return String describing the event command.
+     */
+    public static String displayHelp() {
+        String outputString = "Given a description and event date, stores event task.\n";
+        outputString += "Format of arguments: event [description] /at [event date]\n";
+        outputString += "[event date] must be of the form YYYY-MM-DD\n";
+        return outputString;
+    }
 }

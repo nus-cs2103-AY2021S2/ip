@@ -1,10 +1,6 @@
 package surrealchat.command;
 
-import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
-
-import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Command object for listing out all tasks.
@@ -26,6 +22,16 @@ public class ListCommand extends Command {
         String outputString = "I print the tasks:\n";
         outputString += taskManagement.listOutTasks();
         outputString += "Hmmst've... Stonks\n";
+        return outputString;
+    }
+
+    /**
+     * Describes usage of list command.
+     * @return String describing the list command.
+     */
+    public static String displayHelp() {
+        String outputString = "Displays full list of tasks.\n";
+        outputString += "Format of arguments: list\n";
         return outputString;
     }
 }

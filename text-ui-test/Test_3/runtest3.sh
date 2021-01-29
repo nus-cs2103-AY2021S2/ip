@@ -28,7 +28,7 @@ java -classpath ../../bin SurrealChat < input3.txt > ACTUAL_OK_3.TXT 2>ACTUAL_ER
 # convert to UNIX format
 cp EXPECTED_OK_3.TXT EXPECTED-UNIX_OK_3.TXT
 dos2unix ACTUAL_OK_3.TXT EXPECTED-UNIX_OK_3.TXT
-cp EXPECTED_ERR_2.TXT EXPECTED-UNIX_ERR_3.TXT
+cp EXPECTED_ERR_3.TXT EXPECTED-UNIX_ERR_3.TXT
 dos2unix ACTUAL_ERR_3.TXT EXPECTED-UNIX_ERR_3.TXT
 
 # compare the output to the expected output

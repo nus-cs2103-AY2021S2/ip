@@ -21,4 +21,12 @@ public class OrangEasterEgg extends EasterEgg {
         outputString += "Meme Man: ANGERY!\n";
         return outputString;
     }
+
+    /**
+     * Describes usage of orang easteregg command.
+     * @return String describing the orang easteregg command.
+     */
+    public static String displayHelp() {
+        return "Gives a hilarious output. Try it out!.\n";
+    }
 }

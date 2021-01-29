@@ -67,4 +67,14 @@ public class DoneCommand extends Command{
         Task doneTask = taskManagement.markAsDone(taskNumber);
         return this.printOutput(doneTask);
     }
+
+    /**
+     * Describes usage of done command.
+     * @return String describing the done command.
+     */
+    public static String displayHelp() {
+        String outputString = "Given a task number, toggles whether task is done/undone.\n";
+        outputString += "Format of arguments: done [task number]\n";
+        return outputString;
+    }
 }

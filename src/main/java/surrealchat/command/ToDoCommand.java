@@ -45,4 +45,14 @@ public class ToDoCommand extends Command {
         taskManagement.addTask(addedTask);
         return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
     }
+
+    /**
+     * Describes usage of todo command.
+     * @return String describing the todo command.
+     */
+    public static String displayHelp() {
+        String outputString = "Given a description, stores todo task.\n";
+        outputString += "Format of arguments: todo [description]\n";
+        return outputString;
+    }
 }

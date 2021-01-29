@@ -65,4 +65,15 @@ public class DeadlineCommand extends Command {
         taskManagement.addTask(addedTask);
         return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
     }
+
+    /**
+     * Describes usage of deadline command.
+     * @return String describing the deadline command.
+     */
+    public static String displayHelp() {
+        String outputString = "Given a description and deadline, stores deadline task.\n";
+        outputString += "Format of arguments: deadline [description] /by [deadline]\n";
+        outputString += "[deadline] must be of the form YYYY-MM-DD\n";
+        return outputString;
+    }
 }
