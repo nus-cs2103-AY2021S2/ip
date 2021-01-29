@@ -102,6 +102,10 @@ public class TaskList {
         return newStorage;
     }
 
+    /**
+     * Finds Tasks which description contains a certain keyword
+     * @param keyWord This is the keyword used to filter the list of tasks
+     */
     public void findTasksWithKeyword(String keyWord) {
         List<Task> tasks = this.getNewStorage();
         System.out.println("Here are the matching tasks in your list:");
