@@ -72,8 +72,8 @@ public class Storage {
     }
 
     private Task setUpTask(String type, String done, String description, String dateString) {
-        LocalDate date = LocalDate.of(0,1,1);
-        LocalTime time = LocalTime.of(0,0,0);
+        LocalDate date = LocalDate.of(0, 1, 1);
+        LocalTime time = LocalTime.of(0, 0, 0);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         if (dateString != null) {
@@ -83,16 +83,16 @@ public class Storage {
         }
 
         Task task = new Task();
-        switch(type) {
-            case "T":
-                task = new Todo(description);
-                break;
-            case "E":
-                task = new Event(description, date, time);
-                break;
-            case "D":
-                task = new Deadline(description, date, time);
-                break;
+        switch (type) {
+        case "T":
+            task = new Todo(description);
+            break;
+        case "E":
+            task = new Event(description, date, time);
+            break;
+        case "D":
+            task = new Deadline(description, date, time);
+            break;
         }
 
         if (done.equals("1")) {
