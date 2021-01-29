@@ -37,6 +37,7 @@ public class Duke {
             storage.initialize();
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
+            //TODO change all the output to be manged by ui.
             System.out.println("Error: File does not exists.");
             System.exit(1);
         } catch (SaveFileInvalidFormatException e) {
