@@ -15,8 +15,26 @@ public class Tasks {
         System.out.println("Now you have " + numOfTasks() + " items in your list");
     }
 
+    //Returns a taskList of the tasks that have matching keyword.
+    public void findTask(String keyword) {
+        Tasks matches = new Tasks();
+        for (Task t : Tasks) {
+            Parser parser = new Parser(t.getTaskName());
+            String[] taskName = parser.getTaskName().split(" ");
+            if (keyword.equals(taskName[0]) || keyword.equals(taskName[1])) {
+                matches.addTask(t);
+            }
+        }
+        if(matches.numOfTasks() > 0) {
+            System.out.println("We have found the following tasks");
+            matches.printTasks();
+        }else{
+            System.out.println("Sorry! Could not find any matches :(");
+        }
+    }
+
     //Delete a task
-    public void DeleteTask(int idx){
+    public void DeleteTask(int idx) {
         System.out.println("Noted. Task removed: \n" + Tasks.get(idx - 1));
         Tasks.remove(idx - 1);
         System.out.println("Now you have " + numOfTasks() + " items in your list");
@@ -33,7 +51,7 @@ public class Tasks {
         return Tasks.size();
     }
 
-    public Task getTask(int idx){
+    public Task getTask(int idx) {
         return Tasks.get(idx);
     }
 
