@@ -40,8 +40,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            }
-            catch (DukeException dukeEx) {
+            } catch (DukeException dukeEx) {
                 // Echoes out reason for invalid inputs
                 ui.response(dukeEx.toString());
             }

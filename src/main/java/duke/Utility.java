@@ -31,12 +31,9 @@ public class Utility {
      * @return True if valid, false if invalid
      */
     public static boolean isValidDate(String date) {
-        try
-        {
+        try {
             LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-        catch (DateTimeParseException ex)
-        {
+        } catch (DateTimeParseException ex) {
             return false;
         }
         return true;

@@ -2,7 +2,6 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * TaskList keeps all information of task for the session

@@ -1,2 +1,0 @@
-T | 0 | hello boi
-T | 0 | hello johm
