@@ -77,6 +77,12 @@ public class Ui {
             + tasks.size() + " tasks.");
     }
 
+    public void listTasks (TaskList tasks) {
+        for (int i = 0; i < tasks.size(); ++i) {
+            print(i + 1 + ". " + tasks.get(i).taskInformation(Ui.outputFormat));
+        }
+    }
+
     /**
      * oops! the user did not manage to save his tasks.
      */
