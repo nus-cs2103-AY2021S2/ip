@@ -41,7 +41,8 @@ public class UiHandler {
      */
     public void showMainScreen(Stage stage) {
 
-        //initialize user input, send button and mainlayout
+        //initialize scroll pane, user input, send button and main layout
+        scrollPane = new ScrollPane();
         userInput = new TextField();
         Button sendButton = new Button("Send");
         AnchorPane mainLayout = new AnchorPane();
@@ -85,8 +86,7 @@ public class UiHandler {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        //setup scrollpane and scrollbar
-        scrollPane = new ScrollPane();
+        //setup scroll pane and scrollbar
         scrollPane.setContent(dialogContainer);
         scrollPane.setPrefSize(windowMinWidth - 15, windowMinHeight - 65);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
