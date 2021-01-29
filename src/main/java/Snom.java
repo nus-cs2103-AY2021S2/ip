@@ -43,6 +43,6 @@ public class Snom {
     }
 
     public static void main(String[] args) {
-        new Snom("./src/main/data", "snom.txt").run();
+        new Snom("data", "snom.txt").run();
     }
 }

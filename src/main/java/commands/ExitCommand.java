@@ -10,6 +10,14 @@ public class ExitCommand extends Command{
         super(type);
     }
 
+    /**
+     * Executes exit command
+     *
+     * @param taskList         list of task
+     * @param snomio           I/O of Snom
+     * @param storage          files handler of snom
+     * @throws SnomException   if command execution failed
+     */
     @Override
     public void execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException {
         snomio.showExitMessage();

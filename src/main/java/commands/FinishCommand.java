@@ -11,6 +11,14 @@ public class FinishCommand extends Command{
         super(type);
     }
 
+    /**
+     * Executes finish command.
+     *
+     * @param taskList         list of task
+     * @param snomio           I/O of Snom
+     * @param storage          files handler of snom
+     * @throws SnomException   if command execution failed
+     */
     @Override
     public void execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException {
         int[] finishList = snomio.readContentWithNumbers(type.name());

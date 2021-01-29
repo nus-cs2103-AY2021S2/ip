@@ -25,6 +25,12 @@ public class TaskWithDate extends Task{
         return dateTime;
     }
 
+    /**
+     * Returns a formatted date time.
+     * Eg. Tue 26 Jan 2021 03:33pm
+     *
+     * @return formatted date time
+     */
     public String getDateTimeString(){
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendPattern("E dd MMM yyyy hh:mma")

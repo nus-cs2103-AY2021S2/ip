@@ -5,6 +5,13 @@ import exceptions.SnomException;
 
 public class Parser {
 
+    /**
+     * Returns a command child class based on the given string of command.
+     *
+     * @param commandStr     string of command
+     * @return               Command child classes
+     * @throws SnomException if command is unknown
+     */
     public static Command parse(String commandStr) throws SnomException {
         CommandEnum commandEnum = CommandEnum.getCommand(commandStr);
         switch(commandEnum){

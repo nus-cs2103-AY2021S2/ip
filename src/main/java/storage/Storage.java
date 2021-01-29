@@ -17,7 +17,7 @@ public class Storage {
     private Path path;
 
     public Storage(String directory, String filename){
-        this.path = Paths.get(directory + "/" + filename);
+        this.path = Paths.get(directory, filename);
         createFolder();
         createFile();
     }
