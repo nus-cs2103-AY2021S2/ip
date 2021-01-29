@@ -52,7 +52,7 @@ checkstyle {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
 }
 
 shadowJar {
