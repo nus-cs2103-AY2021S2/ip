@@ -83,6 +83,25 @@ public class Snomio extends PrintWriter {
     }
 
     /**
+     * Prints out the list from searching the keyword.
+     *
+     * @throws SnomException if there is content after the command or there isn't any task in the task list
+     */
+    public void showMatchingTaskList(TaskList taskList) throws SnomException{
+        showLine();
+        if(taskList.getSize() > 0){
+            println("Here are the matching tasks in your list:");
+            for(int i = 0; i < taskList.getSize(); i++){
+                println((i+1) + ". " + taskList.getTask(i).toString());
+            }
+        }else{
+            throw new SnomException("No matching task found.");
+        }
+        showLine();
+        flush();
+    }
+
+    /**
      * Prints out the task added into the taskList and size of current taskList.
      *
      * @param task     task added

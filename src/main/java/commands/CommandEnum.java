@@ -8,6 +8,7 @@ public enum CommandEnum {
     TODO,
     DEADLINE,
     EVENT,
+    FIND,
     NONE;
 
     public static CommandEnum getCommand(String command){

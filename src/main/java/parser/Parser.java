@@ -22,6 +22,8 @@ public class Parser {
                 return new AddCommand(CommandEnum.DEADLINE);
             case EVENT:
                 return new AddCommand(CommandEnum.EVENT);
+            case FIND:
+                return new FindCommand(CommandEnum.FIND);
             default:
                 throw new SnomException("OOPS!!! I'm sorry, but I don't know what '\" + input + \"' means :-(\"");
         }
