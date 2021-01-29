@@ -69,10 +69,10 @@ public class Main {
             ui.printDivider();
             ui.printGreeting();
         } catch (InvalidStorageFilePathException ex) {
-            ui.print("Failed to initialize storage. Exiting...");
+            ui.print(ex.getMessage());
             throw new RuntimeException(ex);
         } catch (IOException ex) {
-            ui.print("Failed to load storage file. Exiting...");
+            ui.print("Failed to load tasks from storage file. Exiting...");
             throw new RuntimeException(ex);
         }
     }

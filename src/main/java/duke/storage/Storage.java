@@ -22,7 +22,7 @@ import java.util.List;
  * Used to read and write to a file.
  */
 public class Storage {
-    private static final String DEFAULT_FILEPATH = "duke.txt";
+    private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 
     private final Path path;
 
@@ -38,17 +38,18 @@ public class Storage {
     /**
      * Creates a {@code Storage} object with the given file path.
      *
-     * @param path file path to read or write to
+     * @param filePath file path to read or write to
      * @throws InvalidStorageFilePathException if the file path is invalid
      */
-    public Storage(String path) throws InvalidStorageFilePathException {
-        if (!isValidFilePath(path)) {
+    public Storage(String filePath) throws InvalidStorageFilePathException {
+        if (!isValidFilePath(filePath)) {
             throw new InvalidStorageFilePathException("The file path of a storage file should end with '.txt'");
         }
         try {
-            this.path = Path.of(path);
+            path = Path.of(filePath);
         } catch (InvalidPathException ex) {
-            throw new InvalidStorageFilePathException("Invalid path detected.");
+            throw new InvalidStorageFilePathException("Failed to initialize storage. This error could be due to"
+                    + "an invalid file path.\nExiting...");
         }
     }
 
@@ -73,6 +74,10 @@ public class Storage {
             return;
         }
         try {
+            // Create directories in the file path that do not exist yet
+            Path pathToParentDirectory = path.getParent();
+            Files.createDirectories(pathToParentDirectory);
+
             List<String> taskStrings = Storage.convertAllTasksToString(taskList);
             Files.write(path, taskStrings);
         } catch (IOException ex) {
