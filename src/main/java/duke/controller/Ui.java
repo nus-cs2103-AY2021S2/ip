@@ -27,12 +27,4 @@ public class Ui {
         return preMessage + "\n" + t + "\n" +
         "Now you have " + size + " tasks in the list.\n";
     }
-
-    /**
-     * Prints the exit message.
-     */
-    public String exit() {
-        return "Bye Bye. Please give me 5-star rating, I still need this job." +
-                "\nMuch thank.";
-    }
 }
