@@ -4,8 +4,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadlines extends Task {
     LocalDate deadLine;
 
-    public Deadlines(String eventName, String deadLine) {
-        super(false, eventName);
+    public Deadlines(boolean isDone, String eventName, String deadLine) {
+        super(isDone, eventName);
         this.deadLine = LocalDate.parse(deadLine);
     }
 

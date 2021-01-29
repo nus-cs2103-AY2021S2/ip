@@ -67,7 +67,7 @@ public class Duke {
                         counter++;
                         String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
                         String[] deadlineSplit = deadlineName.split("/by ");
-                        list.add(new Deadlines(deadlineSplit[0], deadlineSplit[1]));
+                        list.add(new Deadlines(false, deadlineSplit[0], deadlineSplit[1]));
                         System.out.println("Got it. I have added this task:");
                         System.out.println(list.get(counter - 1));
                         System.out.println("You now have " + counter + " task(s) in the list!");
