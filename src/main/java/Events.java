@@ -1,15 +1,15 @@
 public class Events extends Task {
     String time;
 
-    public Events(String eventName, String time) {
+    public Events(boolean isDone, String eventName, String time) {
 
-        super(false, eventName);
+        super(isDone, eventName, "E");
         this.time = time;
     }
 
     @Override
     public String toString() {
 
-        return "[E] " + super.toString() + "(at: " + time + ")";
+        return "[E] " + super.toString() + " (at: " + time + ")";
     }
 }

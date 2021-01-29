@@ -1,15 +1,15 @@
 public class Deadlines extends Task {
     String deadLine;
 
-    public Deadlines(String eventName, String deadLine) {
+    public Deadlines(boolean isDone, String eventName, String deadLine) {
 
-        super(false, eventName);
+        super(isDone, eventName, "D");
         this.deadLine = deadLine;
     }
 
     @Override
     public String toString() {
 
-        return "[D] " + super.toString() + "(by: " + deadLine + ")";
+        return "[D] " + super.toString() + " (by: " + deadLine + ")";
     }
 }

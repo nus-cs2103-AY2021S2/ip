@@ -1,19 +1,51 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
     public static void main(String[] args) {
         int counter = 0;
         ArrayList<Task> list = new ArrayList<>();
+
+        File tasks = new File("./data/duke.txt");
+        try {
+            if (tasks.exists()) {
+                Scanner sc1 = new Scanner(tasks);
+                String data;
+                while (sc1.hasNextLine()) {
+                    data = sc1.nextLine();
+                    String[] dataSplit = data.split(" \\| ");
+                    switch (dataSplit[0]) {
+                        case "T":
+                            list.add(new ToDos(Boolean.parseBoolean(dataSplit[1]), dataSplit[2]));
+                            break;
+                        case "D":
+                            list.add(new Deadlines(Boolean.parseBoolean(dataSplit[1]), dataSplit[2], dataSplit[3]));
+                            break;
+                        case "E":
+                            list.add(new Events(Boolean.parseBoolean(dataSplit[1]), dataSplit[2], dataSplit[3]));
+                    }
+                    counter++;
+                }
+                sc1.close();
+            } else {
+                File directory = new File("./data");
+                if (!directory.exists()) {
+                    directory.mkdir();
+                }
+                tasks.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("An error has occurred while reading duke.txt");
+        }
+
         Scanner sc = new Scanner (System.in);
         System.out.println("Hello! What can I do for you:>");
-        String input;
-        do {
-            input = sc.nextLine();
-            if (input.equals("bye")){
-                break;
-            }
+        String input = sc.nextLine();
+        while (!input.equals("bye")) {
             if (input.equals("list")) {
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println((i + 1) + "." + list.get(i));
@@ -51,7 +83,7 @@ public class Duke {
                         }
                         counter++;
                         String name = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
-                        list.add(new ToDos(name));
+                        list.add(new ToDos(false, name));
                         System.out.println("Got it. I have added this task:");
                         System.out.println(list.get(counter - 1));
                         System.out.println("You now have " + counter + " task(s) in the list!");
@@ -63,8 +95,8 @@ public class Duke {
                         }
                         counter++;
                         String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
-                        String[] deadlineSplit = deadlineName.split("/by ");
-                        list.add(new Deadlines(deadlineSplit[0], deadlineSplit[1]));
+                        String[] deadlineSplit = deadlineName.split(" /by ");
+                        list.add(new Deadlines(false, deadlineSplit[0], deadlineSplit[1]));
                         System.out.println("Got it. I have added this task:");
                         System.out.println(list.get(counter - 1));
                         System.out.println("You now have " + counter + " task(s) in the list!");
@@ -76,8 +108,8 @@ public class Duke {
                         }
                         counter++;
                         String event = String.join(" ",Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
-                        String[] eventSplit = event.split("/at ");
-                        list.add(new Events(eventSplit[0], eventSplit[1]));
+                        String[] eventSplit = event.split(" /at ");
+                        list.add(new Events(false, eventSplit[0], eventSplit[1]));
                         System.out.println("Got it. I have added this task:");
                         System.out.println(list.get(counter - 1));
                         System.out.println("You now have " + counter + " task(s) in the list!");
@@ -86,7 +118,24 @@ public class Duke {
                         System.out.println("You have entered invalid commands, please try again!");
                 }
             }
-        } while (!input.equals("bye"));
+            input = sc.nextLine();
+        }
+
+        try {
+            FileWriter writer = new FileWriter("./data/duke.txt", false);
+            for (Task task : list) {
+                writer.write(task.eventType + " | " + task.isDone + " | " + task.eventName);
+                if (task instanceof Deadlines) {
+                    writer.write(" | " + ((Deadlines) task).deadLine);
+                } else if (task instanceof Events) {
+                    writer.write(" | " + ((Events) task).time);
+                }
+                writer.write(System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error occurred while writer to file.");
+        }
 
         System.out.println("Bye. See you again!");
     }
