@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidInputException;
 import duke.exceptions.UnknownCommandException;
@@ -133,13 +132,22 @@ public class TaskList {
         return task;
     }
 
-    public ArrayList<Task> getFilteredTaskList(String searchString) {
+    /**
+     * Returns a list of tasks that matches any of the search parameters.
+     *
+     * @param searchParameters Strings to compare tasks with.
+     * @return List of tasks.
+     */
+    public ArrayList<Task> getFilteredTaskList(String... searchParameters) {
         ArrayList<Task> filteredArr = new ArrayList<>();
-        searchString = searchString.toLowerCase();
 
         for (Task task : tasks) {
-            if (task.description.toLowerCase().contains(searchString)) {
-                filteredArr.add(task);
+            String taskDescription = task.description.toLowerCase();
+            for (String s : searchParameters) {
+                if (taskDescription.contains(s)) {
+                    filteredArr.add(task);
+                    break;
+                }
             }
         }
 

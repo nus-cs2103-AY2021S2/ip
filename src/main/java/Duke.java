@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.ArrayList;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteInputException;
 import duke.parser.Parser;
@@ -94,7 +93,8 @@ public class Duke {
             }
             break;
         case FIND:
-            ui.showFilteredTasks(taskList.getFilteredTaskList(tokens[1]));
+            String[] searchParameters = tokens[1].toLowerCase().split(" ");
+            ui.showFilteredTasks(taskList.getFilteredTaskList(searchParameters));
             break;
         case LIST:
             ui.showTasks(taskList.getTasks());
