@@ -86,6 +86,16 @@ public class TaskList {
         return newStorage;
     }
 
+    public void findTasksWithKeyword(String keyWord) {
+        List<Task> tasks = this.getNewStorage();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(keyWord)) {
+                printTask(i, tasks.get(i));
+            }
+        }
+    }
+
     public void setNewStorage(List<Task> newStorage) {
         this.newStorage = newStorage;
     }
