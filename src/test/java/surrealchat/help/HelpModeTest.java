@@ -1,6 +1,9 @@
 package surrealchat.help;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import surrealchat.command.DeadlineCommand;
 import surrealchat.command.DeleteCommand;
 import surrealchat.command.DoneCommand;
@@ -12,22 +15,23 @@ import surrealchat.command.ToDoCommand;
 import surrealchat.easteregg.OrangEasterEgg;
 import surrealchat.easteregg.VegetalEasterEgg;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class HelpModeTest {
-    public static final String BYE_HELP = "Quits the program.\n";
-    public static final String TODO_HELP = ToDoCommand.displayHelp();
-    public static final String DEADLINE_HELP = DeadlineCommand.displayHelp();
-    public static final String EVENT_HELP = EventCommand.displayHelp();
-    public static final String DONE_HELP = DoneCommand.displayHelp();
-    public static final String FIND_HELP = FindCommand.displayHelp();
-    public static final String LIST_HELP = ListCommand.displayHelp();
-    public static final String EDIT_HELP = EditCommand.displayHelp();
-    public static final String DELETE_HELP = DeleteCommand.displayHelp();
-    public static final String ORANG_HELP = OrangEasterEgg.displayHelp();
-    public static final String VEGETAL_HELP = VegetalEasterEgg.displayHelp();
+    private static final String BYE_HELP = "Quits the program.\n";
+    private static final String TODO_HELP = ToDoCommand.displayHelp();
+    private static final String DEADLINE_HELP = DeadlineCommand.displayHelp();
+    private static final String EVENT_HELP = EventCommand.displayHelp();
+    private static final String DONE_HELP = DoneCommand.displayHelp();
+    private static final String FIND_HELP = FindCommand.displayHelp();
+    private static final String LIST_HELP = ListCommand.displayHelp();
+    private static final String EDIT_HELP = EditCommand.displayHelp();
+    private static final String DELETE_HELP = DeleteCommand.displayHelp();
+    private static final String ORANG_HELP = OrangEasterEgg.displayHelp();
+    private static final String VEGETAL_HELP = VegetalEasterEgg.displayHelp();
 
 
+    /**
+     * Tests the functionality of displayHelp() method in HelpMode class.
+     */
     @Test
     public void testDisplayHelp() {
         assertEquals(HelpMode.displayHelp("bye"), HelpModeTest.BYE_HELP);

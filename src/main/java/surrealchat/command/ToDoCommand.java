@@ -1,10 +1,10 @@
 package surrealchat.command;
 
+import java.util.NoSuchElementException;
+
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
 import surrealchat.task.ToDoTask;
-
-import java.util.NoSuchElementException;
 
 /**
  * Command object for creating a new ToDoTask object.

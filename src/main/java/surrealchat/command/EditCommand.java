@@ -1,14 +1,14 @@
 package surrealchat.command;
 
+import java.util.NoSuchElementException;
+
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
-
-import java.util.NoSuchElementException;
 
 /**
  * Command object for editing description of Task objects.
  */
-public class EditCommand extends Command{
+public class EditCommand extends Command {
     protected final String rawDescription;
 
     /**

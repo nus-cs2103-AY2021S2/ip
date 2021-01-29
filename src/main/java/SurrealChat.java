@@ -1,33 +1,27 @@
-import surrealchat.easteregg.EasterEgg;
-import surrealchat.easteregg.OrangEasterEgg;
-import surrealchat.easteregg.VegetalEasterEgg;
-
-import surrealchat.command.Command;
-import surrealchat.command.ToDoCommand;
-import surrealchat.command.DeadlineCommand;
-import surrealchat.command.EventCommand;
-import surrealchat.command.DoneCommand;
-import surrealchat.command.ListCommand;
-import surrealchat.command.EditCommand;
-import surrealchat.command.FindCommand;
-import surrealchat.command.DeleteCommand;
-
-import surrealchat.help.HelpMode;
-
-import surrealchat.task.Task;
-import surrealchat.task.TaskManagement;
-
-import surrealchat.user.UserInput;
-import surrealchat.user.UserOutput;
-
-import surrealchat.file.FileManagement;
-
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import java.io.File;
-import java.io.IOException;
+import surrealchat.command.Command;
+import surrealchat.command.DeadlineCommand;
+import surrealchat.command.DeleteCommand;
+import surrealchat.command.DoneCommand;
+import surrealchat.command.EditCommand;
+import surrealchat.command.EventCommand;
+import surrealchat.command.FindCommand;
+import surrealchat.command.ListCommand;
+import surrealchat.command.ToDoCommand;
+import surrealchat.easteregg.EasterEgg;
+import surrealchat.easteregg.OrangEasterEgg;
+import surrealchat.easteregg.VegetalEasterEgg;
+import surrealchat.file.FileManagement;
+import surrealchat.help.HelpMode;
+import surrealchat.task.Task;
+import surrealchat.task.TaskManagement;
+import surrealchat.user.UserInput;
+import surrealchat.user.UserOutput;
 
 /**
  * Handles logic of SurrealChat.
