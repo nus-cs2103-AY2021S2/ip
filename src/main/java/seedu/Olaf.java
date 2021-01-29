@@ -12,12 +12,11 @@ import java.io.IOException;
 public class Olaf {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     public Olaf(String filePath) {
         Storage storage = new Storage(filePath);
 
-        ui = new Ui();
+        Ui ui = new Ui();
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
@@ -30,7 +29,7 @@ public class Olaf {
         new OlafApp(tasks).run();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Olaf("./data/olaf.txt").run();
     }
 }
