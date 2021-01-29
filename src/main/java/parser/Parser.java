@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class Parser {
+    /**
+     * Parses a string input from the user and returns a hashmap of command-value pairs.
+     * @param input User entered string.
+     * @return Hashmap containing command-value pairs
+     */
     public static HashMap<String, String> parseCommand(String input) {
         HashMap<String, String> commandList = new HashMap<>();
         String[] tokens = input.split(" /");

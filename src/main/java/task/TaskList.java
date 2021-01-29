@@ -1,15 +1,15 @@
 package task;
 
-import exception.DukeException;
-import storage.DataStorage;
-import ui.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import exception.DukeException;
+import storage.DataStorage;
+import ui.Ui;
 
 public class TaskList {
     private List<Task> tasks;
@@ -33,7 +33,11 @@ public class TaskList {
         Ui.echo(builder.toString().trim());
     }
 
-    public void listTasks(List<Task> customTaskList) {
+    /**
+     * Lists tasks to the standard input with a custom list.
+     * @param customTaskList custom list of tasks to print.
+     */
+    public static void listTasks(List<Task> customTaskList) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < customTaskList.size(); i++) {
             builder.append(String.format("%d. %s\n", i + 1, customTaskList.get(i).toString()));
@@ -153,6 +157,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks that match a given string
+     * @param commands Commands parsed by the parser.
+     * @throws DukeException If find command is not formatted properly.
+     */
     public void findTasks(HashMap<String, String> commands) throws DukeException {
         String searchTerm = commands.get("info");
 
