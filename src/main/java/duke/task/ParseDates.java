@@ -8,9 +8,8 @@ import java.time.temporal.ChronoField;
 public class ParseDates {
 
     public LocalDateTime parseString(String string) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("[dd/MM/yyyy][yyyy-MM-dd][MMM dd yyyy][dd MM yyyy][ddMMyyyy]");
         DateTimeFormatter dateTimeFormatter1 = new DateTimeFormatterBuilder()
-                .appendPattern("[dd/MM/yyyy][yyyy-MM-dd][MMM dd yyyy][dd MM yyyy][ddMMyyyy]")
+                .appendPattern("[dd/MM/yyyy][yyyy-MM-dd][MMM dd yyyy][dd MMM yyyy][dd MM yyyy][ddMMyyyy]")
                 .optionalStart().appendPattern(" HHmm").optionalEnd()
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                 .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)

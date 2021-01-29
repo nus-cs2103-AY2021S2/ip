@@ -32,7 +32,7 @@ public class ParseCommands {
             command = input.substring(0, first).toUpperCase();
             line = input.substring(first).strip();
         }
-        commandList = changeCommand(command);
+        commandList = changeToCommand(command);
         checkCommand(input, commandList, first, counter);
         parseCommands = new ParseCommands(commandList, line);
         return parseCommands;
@@ -79,7 +79,7 @@ public class ParseCommands {
         }
     }
 
-    public static CommandList changeCommand (String command) throws DukeException {
+    private static CommandList changeToCommand (String command) throws DukeException {
         CommandList commandList;
         try {
             commandList = CommandList.valueOf(command);
@@ -89,7 +89,7 @@ public class ParseCommands {
         return commandList;
     }
 
-    public static void checkCommand(String input, CommandList commandList, int index, int counter) throws DukeException {
+    private static void checkCommand(String input, CommandList commandList, int index, int counter) throws DukeException {
         boolean test = index == -1 || input.substring(index).isBlank();
         switch (commandList) {
         case TODO:
@@ -145,5 +145,13 @@ public class ParseCommands {
 
     public boolean getIsExit() {
         return this.isExit;
+    }
+
+    public CommandList getCommandList() {
+        return commandList;
+    }
+
+    public String getData() {
+        return data;
     }
 }
