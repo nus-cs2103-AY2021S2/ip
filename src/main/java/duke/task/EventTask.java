@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * This class handles the eventTask.
  */
 public class EventTask extends Task {
-    LocalDate date;
+    private LocalDate date;
 
     public EventTask(String task) {
         super(task);

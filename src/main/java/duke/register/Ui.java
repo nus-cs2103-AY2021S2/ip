@@ -1,4 +1,5 @@
 package duke.register;
+
 import java.util.Scanner;
 
 /**
@@ -13,6 +14,7 @@ public class Ui {
 
     /**
      * Gets the command from the user
+     *
      * @return
      */
     public String getCommand() {

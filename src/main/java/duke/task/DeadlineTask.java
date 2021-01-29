@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  * This class handles the deadlineTasks
  */
 public class DeadlineTask extends Task {
-    LocalDate date;
+    private LocalDate date;
 
     public DeadlineTask(String task) {
         super(task);

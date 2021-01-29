@@ -36,8 +36,6 @@ public class Duke {
             Parser p = new Parser(command);
             p.parse();
             String TaskType = p.getTaskType();
-        //    String[] executable = new String[100];
-        //    executable = command.split(" ");
             if (command.equals("bye")) {
                 ui.goodbye();
                 storage.saveTask(taskList);
@@ -45,22 +43,22 @@ public class Duke {
             } else if (command.equals("list")) {
                 taskList.printTasks();
             } else if (p.getCommandLength() > 1) {
-                if (p.getTaskType().equals("done")) {
+                if (TaskType.equals("done")) {
                     taskList.markAsDone(Integer.parseInt(p.getIndex()));
-                } else if (p.getTaskType().equals("delete")) {
+                } else if (TaskType.equals("delete") || TaskType.equals("remove")) {
                     taskList.DeleteTask(Integer.parseInt(p.getIndex()));
-                } else if (p.getTaskType().equals("find")) {
+                } else if (TaskType.equals("find") || TaskType.equals("search")) {
                     taskList.findTask(p.getTaskName());
-                } else if (p.getTaskType().equals("todo")) {
+                } else if (TaskType.equals("todo")) {
                     taskList.addTask(new TodoTask(command));
-                } else if (p.getTaskType().equals("deadline")) {
+                } else if (TaskType.equals("deadline")) {
                     taskList.addTask(new DeadlineTask(command));
-                } else if (p.getTaskType().equals("event")) {
+                } else if (TaskType.equals("event")) {
                     taskList.addTask(new EventTask(command));
                 }
             } else {
-                if (p.getTaskType().equals("todo") || p.getTaskType().equals("deadline")
-                        || p.getTaskType().equals("event")) {
+                if (TaskType.equals("todo") || TaskType.equals("deadline")
+                        || TaskType.equals("event")) {
                     throw new DukeException("Oops!!! Incomplete command :(");
                 } else {
                     throw new DukeException("Oops!!! Invalid Input :(");

@@ -1,7 +1,4 @@
 package duke.task;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -52,15 +49,23 @@ public class TaskList {
 
     //Delete a task
     public void DeleteTask(int idx) {
-        System.out.println("Noted. Task removed: \n" + Tasks.get(idx - 1));
-        Tasks.remove(idx - 1);
-        System.out.println("Now you have " + numOfTasks() + " items in your list");
+        if (idx <= Tasks.size()) {
+            System.out.println("Noted. Task removed: \n" + Tasks.get(idx - 1));
+            Tasks.remove(idx - 1);
+            System.out.println("Now you have " + numOfTasks() + " items in your list");
+        } else {
+            System.out.println("Sorry! The system does not have that many elements. Try again :(");
+        }
     }
 
     //Marks a task as done
     public void markAsDone(int idx) {
-        Tasks.get(idx - 1).markDone();
-        System.out.println("Task " + idx + " is complete:\n" + Tasks.get(idx - 1));
+        if (idx <= Tasks.size()) {
+            Tasks.get(idx - 1).markDone();
+            System.out.println("Task " + idx + " is complete:\n" + Tasks.get(idx - 1));
+        } else {
+            System.out.println("Sorry! The system does not have that many elements. Try again :(");
+        }
     }
 
     //Retrieves the number of tasks
@@ -68,6 +73,7 @@ public class TaskList {
         return Tasks.size();
     }
 
+    //Retrieves the task at the given index
     public Task getTask(int idx) {
         return Tasks.get(idx);
     }

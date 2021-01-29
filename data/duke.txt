@@ -8,5 +8,4 @@ todo print assignment
 deadline do assignment /by 2021-03-15
 todo visit museum
 deadline finish lab /by 2021-06-21
-event attend wedding /at 2021-07-21
-deadline finish lecture /by 2021-05-17
+deadline finish draft \by 2021-03-21
