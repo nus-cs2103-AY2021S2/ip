@@ -1,10 +1,10 @@
-import duke.commands.AddToDoCommand;
-import duke.commands.InvalidCommand;
-import duke.parser.Parser;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import duke.commands.AddToDoCommand;
+import duke.commands.InvalidCommand;
+import duke.parser.Parser;
 
 public class ParserTest {
     @Test
