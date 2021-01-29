@@ -10,23 +10,32 @@ public class Parser {
 
     Parser(String command) {
         this.command = command;
-        commandSeparate = this.command.split(" ");
-        process();
+        commandSeparate = command.split(" ");
     }
 
-    public void process() {
-        this.taskType = commandSeparate[0];
+    public void parseTaskType() {
+        taskType = commandSeparate[0];
+    }
 
-        if (commandSeparate.length > 1) {
-            this.taskName = commandSeparate.length <= 3 ? commandSeparate[1] :
-                    commandSeparate[1] + " " + commandSeparate[2];
-            if (commandSeparate.length > 3) {
-                for (int i = 3; i < commandSeparate.length; i++) {
-                    date += commandSeparate[i] + " ";
-                }
+    public void parseTaskName() {
+        taskName = commandSeparate[1] + " " + commandSeparate[2];
+    }
+
+    public void parseTaskDate() {
+        if (commandSeparate.length <= 3) {
+            date = "";
+        } else {
+            for (int i = 4; i < commandSeparate.length; i++) {
+                date += i == commandSeparate.length - 1
+                        ? commandSeparate[i] : commandSeparate[i] + " ";
             }
         }
+    }
 
+    public void parse() {
+        parseTaskType();
+        parseTaskName();
+        parseTaskDate();
     }
 
     public String getTaskType() {
