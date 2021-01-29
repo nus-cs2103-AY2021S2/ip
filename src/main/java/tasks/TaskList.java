@@ -35,6 +35,22 @@ public class TaskList {
     }
 
     /**
+     * Returns a new task list with task description containing the given keyword
+     *
+     * @param keyword keyword to be searched
+     * @return        new task list
+     */
+    public ArrayList<Task> findTask(String keyword){
+        ArrayList<Task> newList = new ArrayList<>();
+        for(Task task: list){
+            if(task.getDescription().contains(keyword)){
+                newList.add(task);
+            }
+        }
+        return newList;
+    }
+
+    /**
      * Adds the given task to task list, can be a todo, deadline or event task.
      * Then prints out respective messages.
      *
