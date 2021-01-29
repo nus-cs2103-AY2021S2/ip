@@ -71,7 +71,6 @@ public class Ui {
             int number = 1 + i;
             System.out.println("     " + number + ". " + list.get(i));
         }
-
         printDivider();
     }
 
@@ -101,7 +100,7 @@ public class Ui {
     }
 
     /**
-     * Prints a validation message when user deletes a task frp, the list.
+     * Prints a validation message when user deletes a task from the list.
      * @param taskNumber Number of the task that the user wants to delete.
      * @param list List of existing tasks.
      */
@@ -111,6 +110,22 @@ public class Ui {
                 + "        " + list.get(taskNumber)
                 + "\n     Now you have " + (list.size() - 1)
                 + " tasks in the list.");
+        printDivider();
+    }
+
+    /**
+     * Prints a validation message when user finds a task by searching for a keyword.
+     * @param tempList List of tasks containing the keyword.
+     */
+    public void printFindKeyword(List<Task> tempList) {
+        printDivider();
+        System.out.println("     Here are the matching tasks in you list:");
+
+        for (int i = 0; i < tempList.size(); i++) {
+            int number = i + 1;
+            System.out.println("     " + number + ". "
+                    + tempList.get(i));
+        }
         printDivider();
     }
 }

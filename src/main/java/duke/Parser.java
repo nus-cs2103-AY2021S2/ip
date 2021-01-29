@@ -68,6 +68,7 @@ public class Parser {
             }
 
             int taskNumber = Integer.parseInt(userInputArr[1]) - 1;
+
             if (taskNumber < 0 || taskNumber > list.size() - 1) {
                 throw new InvalidTaskNumberException();
             }

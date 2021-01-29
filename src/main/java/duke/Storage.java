@@ -33,7 +33,7 @@ public class Storage {
             File file = new File(filePath);
 
             if (!file.exists()) {
-                file.mkdir();
+                //file.mkdir();
                 file.createNewFile();
             } else {
                 readFileContents(filePath);
@@ -68,7 +68,6 @@ public class Storage {
             if (taskString.startsWith("T")) {
                 taskDescription = taskString.substring(8);
                 task = new ToDo(taskDescription);
-
             } else {
                 taskDescription = taskString.substring(8, indexOfDivider);
                 taskDate = LocalDateTime.parse(taskString.substring(indexOfDivider + 2), df);
@@ -83,10 +82,8 @@ public class Storage {
             if (taskDone.equals("1")) {
                 task.markAsDone();
             }
-
             list.add(task);
         }
-
         return list;
     }
 
@@ -124,7 +121,6 @@ public class Storage {
                     }
                 }
             }
-
             fw.close();
         } catch (IOException e) {
             e.getMessage();

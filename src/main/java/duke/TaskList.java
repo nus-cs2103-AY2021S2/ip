@@ -89,4 +89,29 @@ public class TaskList {
         int taskNumber = Integer.parseInt(userInput.split(" ")[1]) - 1;
         list.remove(taskNumber);
     }
+
+    /**
+     * Finds a task by searching for a keyword.
+     * @param userInput User input of the keyword to be found.
+     * @return List of tasks that contains the keyword.
+     */
+    public List<Task> findTask(String userInput) {
+        String keyword = userInput.split(" ")[1];
+        List<Task> tempList = new ArrayList<>();
+
+        for (Task task : list) {
+            String taskDescription = task.getDescription();
+            String[] taskDescriptionArr = taskDescription.split(" ");
+
+            for (int i = 0; i < taskDescriptionArr.length; i++) {
+                String currWord = taskDescriptionArr[i];
+
+                if (currWord.equals(keyword)) {
+                    tempList.add(task);
+                    break;
+                }
+            }
+        }
+        return tempList;
+    }
 }

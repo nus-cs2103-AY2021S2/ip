@@ -5,6 +5,7 @@ import duke.task.Task;
 
 import java.io.FileNotFoundException;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,6 +21,7 @@ public class Duke {
     /**
      * Constructor for Duke application.
      * Initializes Ui, Storage and TaskList.
+     *
      * @param filePath Filepath of the file that saves tasks.
      */
     public Duke(String filePath) {
@@ -77,10 +79,14 @@ public class Duke {
                     tasks.deleteTask(userInput);
                     break;
 
+                case "find":
+                    List<Task> tempList = tasks.findTask(userInput);
+                    ui.printFindKeyword(tempList);
+                    break;
+
                 default:
                     throw new InvalidInputException();
                 }
-
                 storage.overWriteFile(filePath, tasks.list);
             } catch (DukeException ex) {
                 ui.printDivider();
@@ -88,15 +94,15 @@ public class Duke {
                 ui.printDivider();
             }
         }
-
         sc.close();
     }
 
     /**
      * Main method for Duke application.
+     *
      * @param args Argument fed into the command line.
      */
     public static void main(String[] args) {
-            new Duke("./data/duke.txt").run();
+        new Duke("./data/duke.txt").run();
     }
 }
