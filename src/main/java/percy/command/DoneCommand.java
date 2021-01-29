@@ -10,7 +10,6 @@ import percy.ui.Ui;
 
 public class DoneCommand extends Command {
     public static final String COMMAND = "done";
-
     private int taskNum;
 
     /**
@@ -21,8 +20,6 @@ public class DoneCommand extends Command {
         super(false);
         this.taskNum = taskNum;
     }
-
-
     /**
      * Executes the Todo command which creates a Todo Task.
      *

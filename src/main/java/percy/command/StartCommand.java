@@ -8,7 +8,6 @@ import percy.ui.Ui;
 
 
 public class StartCommand extends Command {
-
     public StartCommand() {
         super(false);
     }

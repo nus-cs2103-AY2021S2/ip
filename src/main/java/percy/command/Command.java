@@ -5,8 +5,6 @@ import java.io.IOException;
 import percy.storage.Storage;
 import percy.task.TaskList;
 
-
-
 public abstract class Command {
     private boolean isExit;
 

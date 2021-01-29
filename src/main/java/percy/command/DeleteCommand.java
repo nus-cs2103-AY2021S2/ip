@@ -9,7 +9,6 @@ import percy.ui.Ui;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND = "delete";
-
     private int taskNum;
 
     /**
@@ -20,7 +19,6 @@ public class DeleteCommand extends Command {
         super(false);
         this.taskNum = taskNum;
     }
-
 
     /**
      * Executes the Todo command which creates a Todo Task.

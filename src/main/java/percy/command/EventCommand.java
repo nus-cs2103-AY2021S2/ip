@@ -38,7 +38,6 @@ public class EventCommand extends Command {
         this.time = time;
     }
 
-
     /**
      * Executes the Todo command which creates a Todo Task.
      *
