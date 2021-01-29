@@ -47,7 +47,8 @@ public class Event extends Task{
     }
 
     public String encode() {
-        return "E" + "|" + super.encode() + "|" + this.time;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return "E" + "|" + super.encode() + "|" + time.format(formatter);
     }
 
     /**

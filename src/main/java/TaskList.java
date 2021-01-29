@@ -12,16 +12,18 @@ public class TaskList {
         String typeOfTask = p.getTypeOfTask();
         Boolean isDone = p.getIsDone();
         String description = p.getDescription();
-        String time = p.getTime();
+        LocalDateTime time = p.getTime();
+//        System.out.println("populate");
+//        System.out.println(p.toString());
 
         switch(typeOfTask) {
-        case "todo":
+        case "T":
             tasks.add(new Todo(description, isDone));
             break;
-        case "deadline":
+        case "D":
             tasks.add(new Deadline(description, isDone, time));
             break;
-        case "event":
+        case "E":
             tasks.add(new Event(description, isDone, time));
             break;
         }

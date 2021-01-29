@@ -1,17 +1,19 @@
+import java.time.LocalDateTime;
+
 public class ListParser {
     private String typeOfTask;
     private Boolean isDone;
     private String description;
-    private String time;
+    private LocalDateTime time;
 
     ListParser() {
         this.typeOfTask = "";
         this.isDone = null;
         this.description = "";
-        this.time = "";
+        this.time = null;
     }
 
-    ListParser(String typeOfTask, Boolean isDone, String description, String time) {
+    ListParser(String typeOfTask, Boolean isDone, String description, LocalDateTime time) {
         this.typeOfTask = typeOfTask;
         this.isDone = isDone;
         this.description = description;
@@ -19,7 +21,7 @@ public class ListParser {
     }
 
     public ListParser parse(String input) {
-        String[] inputSplit = input.split("|", 4);
+        String[] inputSplit = input.split("\\|");
         typeOfTask = inputSplit[0];
         String status = inputSplit[1];
         Boolean isDone;
@@ -27,14 +29,15 @@ public class ListParser {
 
         if (status.equals("DONE")) {
             isDone = true;
-        } else {
+        } else { //status "PENDING"
             isDone = false;
         }
 
         if (inputSplit.length == 4) {
-            time = inputSplit[3];
+            TimeParser timeParser = new TimeParser();
+            time = timeParser.parse(inputSplit[3]);
         } else {
-            time = "";
+            time = null;
         }
         // T|DONE|MSG|TIME
         return new ListParser(typeOfTask, isDone, description, time);
@@ -67,7 +70,12 @@ public class ListParser {
      *
      * @return time
      */
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
+    }
+
+    @Override
+    public String toString() {
+        return "|" + typeOfTask + "|" + isDone + "|" + description + "|" + time + "|";
     }
 }

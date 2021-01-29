@@ -18,7 +18,6 @@ public class Duke {
      */
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
-
         Duke.initiate(s);
     }
 
@@ -28,13 +27,11 @@ public class Duke {
      * @param s Scanner variable for user input.
      */
     public static void initiate(Scanner s) {
-        TaskList taskList = HardDisk.read();
-//        TaskList taskList = new TaskList();
-//        HardDisk.read();
         Duke.Greet();
 
         while(s.hasNextLine()){
             try {
+                TaskList taskList = HardDisk.read();
                 Duke.process(s, taskList);
                 if (shouldExit.equals(true)) {
                     break;

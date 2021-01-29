@@ -15,7 +15,7 @@ public class TimeParser {
 
     public LocalDateTime parse(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime d = LocalDateTime.parse(input, formatter);
-        return d;
+        LocalDateTime time = LocalDateTime.parse(input, formatter);
+        return time;
     }
 }

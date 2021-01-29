@@ -11,14 +11,20 @@ public class HardDisk {
 
     public static void retrieveFilePath() {
         try {
-            String projectRoot = System.getProperty("user.dir");
-            Path directoryPath = Paths.get(projectRoot, "data");
+            String current = System.getProperty("user.dir");
+            Path projectRoot = Paths.get(current).getParent();
+
+            Path directoryPath = Paths.get(projectRoot.toString(),"data");
             Boolean directoryExists = Files.exists(directoryPath);
+
+//            System.out.println(directoryPath);
+
 
             if (directoryExists.equals(false)) {
                 Files.createDirectory(directoryPath);
             }
-            Path file = Paths.get(projectRoot,"data", "Baron.txt");
+
+            Path file = Paths.get(directoryPath.toString(), "Baron.txt");
             Boolean fileExists = Files.exists(file);
             if (fileExists.equals(false)) {
                 Files.createFile(file);
@@ -54,20 +60,20 @@ public class HardDisk {
         TaskList taskList = new TaskList();
         try {
             retrieveFilePath();
-
             List<String> s = Files.readAllLines(filePath);
-
+//            System.out.println(s.size());
 
             for (int i = 0; i < s.size() ; i++) {
                 ListParser p = new ListParser();
                 p = p.parse(s.get(i));
                 taskList.populate(p);
-//                System.out.println(s.get(i));
             }
+
         } catch (IOException e) {
             System.out.println("error here2");
 
         }
+
         return taskList;
     }
 }

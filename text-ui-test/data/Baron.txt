@@ -1,7 +1,0 @@
-T|DONE|read book
-D|DONE|return book |June 6th
-E|DONE|project meeting |Aug 6th 2-4pm
-T|DONE|join sports club
-T|PENDING|borrow book
-D|PENDING|burn book |Jan 27
-E|PENDING|project debrief |Jan 28

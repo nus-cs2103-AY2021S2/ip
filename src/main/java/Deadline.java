@@ -46,7 +46,8 @@ public class Deadline extends Task{
     }
 
     public String encode() {
-        return "D" + "|" + super.encode() + "|" + this.by;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return "D" + "|" + super.encode() + "|" + by.format(formatter);
     }
 
 
