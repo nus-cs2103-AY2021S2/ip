@@ -1,6 +1,8 @@
+import java.util.Scanner;
+
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Scanner;
+import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
@@ -20,7 +22,13 @@ public class FileManager {
         }
     }
 
-    public void writeToFile(String path, String message) throws IOException {
+    public void overwriteToFile(String path, String message) throws IOException {
+        File data = new File(path);
+        if (data.exists()) {
+            PrintWriter pw = new PrintWriter(path);
+            pw.close();
+        }
+
         FileWriter fileWriter = new FileWriter(path);
         fileWriter.write(message);
         fileWriter.close();

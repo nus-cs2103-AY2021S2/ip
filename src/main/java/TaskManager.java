@@ -54,7 +54,7 @@ public class TaskManager {
         return outputString.toString();
     }
 
-    public static void printTaskList(List<Task> taskList) {
+    public void printTaskList() {
         int count = 1;
         System.out.print(UserInterface.line);
         for (Task task : taskList) {

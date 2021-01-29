@@ -30,7 +30,7 @@ public class Application {
             try {
                 checkUserInput(userInput);
                 if (command.equals("list")) {
-                    taskManager.printTaskList(taskManager.getTaskList());
+                    taskManager.printTaskList();
                 }
                 else if (command.equals("done")){
                     Task currentTask = taskManager.getTask(Integer.parseInt(userInput[1]));
@@ -132,4 +132,12 @@ public class Application {
         }
     }
 
+    public void writeDataToStorage() {
+        try {
+            String tasks = taskManager.returnTaskListAsString();
+            fileManager.overwriteToFile(dataDirectoryName + dataFileName, tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
