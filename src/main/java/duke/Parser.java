@@ -2,8 +2,22 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Represents the parser used by the Duke chat bot.
+ * It parses raw user inputs, and convert them into
+ * a suitable Command format for execution.
+ */
 public class Parser {
 
+    /**
+     * Processes the raw user input and converts it
+     * into a friendly Command data type for the
+     * Duke chat bot to execute.
+     *
+     * @param input Raw user input.
+     * @return User input in a Command format.
+     * @throws DukeException If command arguments are misused.
+     */
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ");
         String taskType = inputArr[0].toLowerCase();
