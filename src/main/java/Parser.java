@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 import Exception.DukeException;
 
+import javax.lang.model.type.ArrayType;
+
 public class Parser {
     private TaskList taskList;
     private Storage storage;
@@ -35,6 +37,8 @@ public class Parser {
             taskList.printTask(selectedIndex, tasks.get(selectedIndex));
         } else if (inputBreakdown[0].equals("delete")) {
             taskList.deleteTask(userInput);
+        } else if (inputBreakdown[0].equals("find")) {
+            taskList.findTasksWithKeyword(inputBreakdown[1]);
         } else {
             taskList.addTask(userInput);
         }
@@ -51,14 +55,17 @@ public class Parser {
         List<String> possibleActionInputs = new ArrayList<>();
         List<String> possibleSingleInputs = new ArrayList<>();
         List<String> possibleTaskInputs = new ArrayList<>();
+        List<String> possibleSortInputs = new ArrayList<>();
         possibleActionInputs.add("done");
         possibleActionInputs.add("delete");
+        possibleSortInputs.add("find");
         possibleSingleInputs.add("bye");
         possibleTaskInputs.add("todo");
         possibleTaskInputs.add("event");
         possibleTaskInputs.add("deadline");
         possibleSingleInputs.add("list");
-        if (!possibleActionInputs.contains(input[0]) && !possibleSingleInputs.contains(input[0]) && !possibleTaskInputs.contains(input[0])) {
+        if (!possibleActionInputs.contains(input[0]) && !possibleSingleInputs.contains(input[0])
+                && !possibleTaskInputs.contains(input[0]) && !possibleSortInputs.contains(input[0])) {
             throw new DukeException("user action is not recognised!");
         } else if ((possibleTaskInputs.contains(input[0]) || possibleActionInputs.contains(input[0])) && input.length == 1) {
             throw new DukeException("no description added!");
@@ -91,6 +98,16 @@ public class Parser {
                 } catch (NumberFormatException ex) {
                     throw new DukeException("Enter a number!");
                 }
+            }
+        } else if (possibleSortInputs.contains(input[0])) {
+            if (input.length > 2) {
+                throw new DukeException("You can only search by a single word!");
+            }
+            try {
+                int number = Integer.parseInt(input[1]);
+                throw new DukeException("A number should not be entered for find");
+            } catch (NumberFormatException ex) {
+
             }
         }
     }
