@@ -117,4 +117,22 @@ public class TaskList {
 
         return res;
     }
+
+    /**
+     * Returns a list of tasks that contains the keyword.
+     *
+     * @param keyword The keyword to filter out the irrelevant tasks.
+     * @return A list of tasks containing the keyword.
+     */
+    public List<Task> findTasksWithKeyword(String keyword) {
+        List<Task> resTasks = new ArrayList<>();
+
+        for (Task t: list) {
+            if (t.isKeywordInside(keyword)) {
+                resTasks.add(t);
+            }
+        }
+
+        return resTasks;
+    }
 }

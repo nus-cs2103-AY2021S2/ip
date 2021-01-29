@@ -41,6 +41,18 @@ public class Task {
         return "";
     }
 
+    /**
+     * Returns a boolean indicating whether the keyword is inside the
+     * description or not.
+     *
+     * @param keyword The keyword to check whether it is inside the description.
+     * @return A boolean value indicating whether description contains the keyword
+     * or not.
+     */
+    boolean isKeywordInside(String keyword) {
+        return description.contains(keyword);
+    }
+
     @Override
     public String toString(){
         return String.format("[%s] %s", getStatusIcon(), description);

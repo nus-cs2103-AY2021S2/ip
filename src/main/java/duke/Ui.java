@@ -108,16 +108,34 @@ public class Ui {
      *
      * @param list The list storing the tasks.
      */
-    public void showList(List<Task> list) {
+    public void showCurrentList(List<Task> list) {
         if (list.isEmpty()) {
             System.out.println("There is currently no task in the list.");
         } else {
             System.out.println("Here are the tasks in your list:");
-            int index = 1;
-            for (Task t: list) {
-                System.out.println(index + "." + t);
-                index++;
-            }
+            showListItem(list);
+        }
+    }
+
+    /**
+     * Outputs the task(s) that matches the keyword.
+     *
+     * @param list The list storing the matching tasks.
+     */
+    public void showFindKeywordList(List<Task> list) {
+        if (list.isEmpty()) {
+            System.out.println("There is no task containing the keyword.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            showListItem(list);
+        }
+    }
+
+    private void showListItem(List<Task> list) {
+        int index = 1;
+        for (Task t: list) {
+            System.out.println(index + "." + t);
+            index++;
         }
     }
 }

@@ -32,6 +32,7 @@ public class Statement {
         argsTable.put("bye", 0);
         argsTable.put("done", 1);
         argsTable.put("todo", 1);
+        argsTable.put("find", 1);
         argsTable.put("delete", 1);
         argsTable.put("deadline", 2);
         argsTable.put("event", 2);
@@ -63,6 +64,8 @@ public class Statement {
                 throw new DukeException("OOPS! " + command + " requires the index of the task.");
             case "todo":
                 throw new DukeException("OOPS! " + command + " requires a description.");
+            case "find":
+                throw new DukeException("Please provide a keyword.");
             default:
                 throw new DukeException("OOPS! " + command + " requires a description and a time.");
             }
@@ -100,7 +103,8 @@ public class Statement {
             String preposition = null;
             LocalDate date = null;
 
-            if (parsedArgs.size() == 2) {
+
+            if (parsedArgs.size() >= 2) {
                 first = parsedArgs.get(1).trim();
             }
 
@@ -125,6 +129,8 @@ public class Statement {
                 return new DoneCommand(first);
             case "delete":
                 return new DeleteCommand(first);
+            case "find":
+                return new FindCommand(first);
             case "todo": case "deadline": case "event":
                 return new AddCommand(command, first, preposition, date);
             default:
