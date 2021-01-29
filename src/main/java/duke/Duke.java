@@ -16,7 +16,7 @@ public class Duke {
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
             parser.parse(command);
-            if(command.equals("bye")) {
+            if (command.equals("bye")) {
                 break;
             }
         }

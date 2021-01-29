@@ -7,8 +7,8 @@ import java.util.List;
  * Handle all actions regarding tasks.
  */
 public class TaskList {
-    List<Task> lst;
-    Storage storage;
+    private List<Task> lst;
+    private Storage storage;
 
     /**
      * Construct a list of tasks.
@@ -97,6 +97,10 @@ public class TaskList {
         Ui.list(lst);
     }
 
+    /**
+     * Finds a task that matches a keyword.
+     * @param keyword the keyword to be searched
+     */
     public void findTask(String keyword) {
         List<Task> res = new ArrayList<>();
         for (Task t: lst) {

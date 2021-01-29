@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Handle file I/O.
  */
 public class Storage {
-    File file;
+    private File file;
 
     /**
      * Construct a Storage from a specified filename.
@@ -73,7 +73,6 @@ public class Storage {
      */
     public void write(List<Task> lst) {
         try {
-//            File file = new File(String.valueOf(path));
             FileWriter fileWriter = new FileWriter(this.file);
             for (Task task: lst) {
                 fileWriter.write(task.toString() + '\n');

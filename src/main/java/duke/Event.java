@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * The Event class extends the Task class to store information
  * about an event happening at a specific date.
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate time;
 
     /**

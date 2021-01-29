@@ -4,7 +4,7 @@ package duke;
  * This class translate the user input into commands understandable by Duke.
  */
 public class Parser {
-    TaskList taskList;
+    private TaskList taskList;
 
     /**
      * Construct a Parser from the specified list of task.
@@ -26,7 +26,7 @@ public class Parser {
             taskList.markDone(command.substring(5));
         } else if (command.startsWith("delete")) {
             taskList.deleteTask(command.substring(7));
-        } else if (command.startsWith("find")){
+        } else if (command.startsWith("find")) {
             taskList.findTask(command.substring(5));
         } else {
             taskList.addTask(command);
