@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -14,7 +13,6 @@ public class ParseDates {
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                 .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                 .toFormatter();
-        LocalDateTime date = LocalDateTime.parse(string, dateTimeFormatter1);
-        return date;
+        return LocalDateTime.parse(string, dateTimeFormatter1);
     }
 }

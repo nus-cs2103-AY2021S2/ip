@@ -2,18 +2,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private LocalDateTime localDate;
+    private final LocalDateTime localDate;
 
     public Deadline(String input, String date) {
         super(input);
-        LocalDateTime lDate = new ParseDates().parseString(date);
-        this.localDate = lDate;
+        this.localDate = new ParseDates().parseString(date);
     }
 
     public Deadline(String input, String date, int done) {
         super(input);
-        LocalDateTime lDate = new ParseDates().parseString(date);
-        this.localDate = lDate;
+        this.localDate = new ParseDates().parseString(date);
         if (done == 1) {
             this.doTask();
         }

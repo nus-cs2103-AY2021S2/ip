@@ -15,8 +15,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        String input = scanner.nextLine();
-        return input;
+        return scanner.nextLine();
     }
 
     public void showLine() {
@@ -50,10 +49,10 @@ public class Ui {
         showLine();
     }
 
-    public void showList(ArrayList<Task> arrL) {
+    public void showList(Storage storage) {
         showLine();
-        for (int i = 0; i < arrL.size(); i++) {
-            System.out.println("   " + (i + 1) + ". " + arrL.get(i));
+        for (int i = 0; i < storage.getArrSize(); i++) {
+            System.out.println("   " + (i + 1) + ". " + storage.get(i));
         }
         showLine();
     }

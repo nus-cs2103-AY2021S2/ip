@@ -1,5 +1,5 @@
 public class DukeException extends Exception {
-    private String exception;
+    private final String exception;
 
     public DukeException(String exception) {
         super(exception);

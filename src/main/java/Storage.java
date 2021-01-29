@@ -6,14 +6,17 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SaveToFile {
+public class Storage {
     private FileWriter fio;
     private final File file;
+    private ArrayList<Task> arrL;
 
-    public SaveToFile(ArrayList<Task> arr) {
+    public Storage() {
+        ArrayList<Task> arr = new ArrayList<>();
         File file = initiateFile();
         this.file = file;
         populateList(arr);
+        this.arrL = arr;
         try {
             this.fio = new FileWriter(file);
         } catch (IOException e) {
@@ -91,8 +94,8 @@ public class SaveToFile {
         }
     }
 
-    public void beginClose(ArrayList<Task> arrL) {
-        for (Task task: arrL) {
+    public void beginClose() {
+        for (Task task: this.arrL) {
             writeToFile(task);
         }
     }
@@ -105,5 +108,21 @@ public class SaveToFile {
             e.printStackTrace();
         }
 
+    }
+
+    public void add(Task task) {
+        this.arrL.add(task);
+    }
+
+    public Task remove(int index) {
+        return this.arrL.remove(index);
+    }
+
+    public int getArrSize() {
+        return arrL.size();
+    }
+
+    public Task get(int index) {
+        return this.arrL.get(index);
     }
 }

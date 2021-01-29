@@ -1,5 +1,5 @@
 public class Task {
-    private String input;
+    private final String input;
     private Task_State state;
 
     public Task(String input) {

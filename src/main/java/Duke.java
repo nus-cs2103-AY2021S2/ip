@@ -1,19 +1,10 @@
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.attribute.FileAttribute;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Duke {
-    private Ui ui;
-    SaveToFile fio;
-    private ArrayList<Task> arrL;
+    private final Ui ui;
+    private final Storage fio;
 
     public Duke() {
-        this.arrL = new ArrayList<>();
         this.ui = new Ui();
-        this.fio = new SaveToFile(this.arrL);
+        this.fio = new Storage();
 
     }
 
@@ -22,12 +13,16 @@ public class Duke {
         boolean isExit = false;
 
         while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ParseCommands parseCommands = ParseCommands.parseLine(ui, fullCommand, this.arrL.size());
-            parseCommands.executeCommand(ui, this.arrL);
-            isExit = parseCommands.getIsExit();
+            try {
+                String fullCommand = ui.readCommand();
+                ParseCommands parseCommands = ParseCommands.parseLine(fullCommand, this.fio.getArrSize());
+                parseCommands.executeCommand(ui, this.fio);
+                isExit = parseCommands.getIsExit();
+            } catch (DukeException e) {
+                ui.showError(e.toString());
+            }
         }
-        fio.beginClose(this.arrL);
+        fio.beginClose();
         fio.closeFile();
     }
 
