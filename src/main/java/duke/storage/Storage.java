@@ -16,20 +16,13 @@ import java.util.Scanner;
 public class Storage {
     private FileWriter fio;
     private final File file;
-    private ArrayList<Task> arrL;
+    private final ArrayList<Task> arrL;
 
     public Storage() {
         ArrayList<Task> arr = new ArrayList<>();
-        File file = initiateFile();
-        this.file = file;
+        this.file = initiateFile();
         populateList(arr);
         this.arrL = arr;
-        try {
-            this.fio = new FileWriter(file);
-        } catch (IOException e) {
-            System.out.println("Unable to create FileWriter");
-            e.printStackTrace();
-        }
     }
 
     private File initiateFile () {
@@ -92,6 +85,15 @@ public class Storage {
         }
     }
 
+    private void initialiseFW() {
+        try {
+            this.fio = new FileWriter(file);
+        } catch (IOException e) {
+            System.out.println("Unable to create FileWriter");
+            e.printStackTrace();
+        }
+    }
+
     public void writeToFile(Task task) {
         try {
             this.fio.write(task.taskSave() + "\n");
@@ -102,6 +104,7 @@ public class Storage {
     }
 
     public void beginClose() {
+        this.initialiseFW();
         for (Task task: this.arrL) {
             writeToFile(task);
         }
