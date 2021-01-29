@@ -2,23 +2,21 @@ todo borrow book
 todo read book
 deadline return book /by Sunday
 event meeting /at Monday
+deadline return book /by 2021-01-25
+event meeting /at 2021-01-30 19:00
 list
 todo
 deadline
-event
-finish
-delete
-finish 1
-finish 3 4
-list
-finish 5
-delete 3
+@@ -16,9 +16,9 @@ delete 3
 list
 delete 1 3
 list
 todo borrow book
+todo
 deadline return book /by Sunday
 event meeting /at Monday
 finish 2 4
+event meeting /at 2021-01-30 19:00 asd
+delete 1
 list
 bye

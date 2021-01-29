@@ -15,35 +15,35 @@ Now you have 2 tasks in the list.
 --------------------------------
 --------------------------------
 Got it. I've added this task:
-	[D][ ] return book (by:  Sunday)
+	[D][ ] return book (by: Mon 25 Jan 2021 12:00am)
 Now you have 3 tasks in the list.
 --------------------------------
 --------------------------------
 Got it. I've added this task:
-	[E][ ] meeting (at:  Monday)
+	[E][ ] meeting (at: Sat 30 Jan 2021 07:00pm)
 Now you have 4 tasks in the list.
 --------------------------------
 --------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
 2. [T][ ] read book
-3. [D][ ] return book (by:  Sunday)
-4. [E][ ] meeting (at:  Monday)
+3. [D][ ] return book (by: Mon 25 Jan 2021 12:00am)
+4. [E][ ] meeting (at: Sat 30 Jan 2021 07:00pm)
 --------------------------------
 --------------------------------
-OOPS!!! The description of a TODO cannot be empty.
+Error: OOPS!!! The description of a TODO cannot be empty.
 --------------------------------
 --------------------------------
-OOPS!!! The description of a DEADLINE cannot be empty.
+Error: OOPS!!! The description of a DEADLINE cannot be empty.
 --------------------------------
 --------------------------------
-OOPS!!! The description of a EVENT cannot be empty.
+Error: OOPS!!! The description of a EVENT cannot be empty.
 --------------------------------
 --------------------------------
-Oops! Please at least give one task number to FINISH a task
+Error: Oops! Please at least give one task number to FINISH a task
 --------------------------------
 --------------------------------
-Oops! Please at least give one task number to DELETE a task
+Error: Oops! Please at least give one task number to DELETE a task
 --------------------------------
 --------------------------------
 Great Job! I've marked this task(s) as finish:
@@ -51,64 +51,54 @@ Great Job! I've marked this task(s) as finish:
 --------------------------------
 --------------------------------
 Great Job! I've marked this task(s) as finish:
-	[D][✓] return book (by:  Sunday)
-	[E][✓] meeting (at:  Monday)
+	[D][✓] return book (by: Mon 25 Jan 2021 12:00am)
+	[E][✓] meeting (at: Sat 30 Jan 2021 07:00pm)
 --------------------------------
 --------------------------------
 Here are the tasks in your list:
 1. [T][✓] borrow book
 2. [T][ ] read book
-3. [D][✓] return book (by:  Sunday)
-4. [E][✓] meeting (at:  Monday)
+3. [D][✓] return book (by: Mon 25 Jan 2021 12:00am)
+4. [E][✓] meeting (at: Sat 30 Jan 2021 07:00pm)
 --------------------------------
 --------------------------------
-Oops! You have entered a task number: 5 which is invalid! Please try again!
+Error: Oops! You have entered a task number: 5 which is invalid! Please try again!
 --------------------------------
 --------------------------------
-Noted, I've removed this task
-	[D][✓] return book (by:  Sunday)
+Noted, I've removed this task(s)
+	[D][✓] return book (by: Mon 25 Jan 2021 12:00am)
 --------------------------------
 --------------------------------
 Here are the tasks in your list:
 1. [T][✓] borrow book
 2. [T][ ] read book
-3. [E][✓] meeting (at:  Monday)
+3. [E][✓] meeting (at: Sat 30 Jan 2021 07:00pm)
 --------------------------------
 --------------------------------
-Noted, I've removed this task
+Noted, I've removed this task(s)
 	[T][✓] borrow book
-	[E][✓] meeting (at:  Monday)
+	[E][✓] meeting (at: Sat 30 Jan 2021 07:00pm)
 --------------------------------
 --------------------------------
 Here are the tasks in your list:
 1. [T][ ] read book
 --------------------------------
 --------------------------------
-Got it. I've added this task:
-	[T][ ] borrow book
-Now you have 2 tasks in the list.
+Error: OOPS!!! The description of a TODO cannot be empty.
 --------------------------------
 --------------------------------
-Got it. I've added this task:
-	[D][ ] return book (by:  Sunday)
-Now you have 3 tasks in the list.
+Error: Oops! Please enter a valid date time format [YYYY-MM-DD HH:MM]
 --------------------------------
 --------------------------------
-Got it. I've added this task:
-	[E][ ] meeting (at:  Monday)
-Now you have 4 tasks in the list.
+Error: Oops! Please enter a valid date time format [YYYY-MM-DD HH:MM]
 --------------------------------
 --------------------------------
-Great Job! I've marked this task(s) as finish:
-	[T][✓] borrow book
-	[E][✓] meeting (at:  Monday)
+Noted, I've removed this task(s)
+	[T][ ] read book
 --------------------------------
 --------------------------------
-Here are the tasks in your list:
-1. [T][ ] read book
-2. [T][✓] borrow book
-3. [D][ ] return book (by:  Sunday)
-4. [E][✓] meeting (at:  Monday)
+--------------------------------
+Error: You have no task in your list right now, try adding some and try again :D
 --------------------------------
 --------------------------------
 Ciao! Hope to see you again soon!
