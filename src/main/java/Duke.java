@@ -134,7 +134,7 @@ public class Duke {
     }
 
     /**
-     * Main program to be run.
+     * Runs the application.
      *
      * @param args Input.
      * @throws DukeException If user input is incorrect.
