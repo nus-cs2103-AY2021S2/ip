@@ -19,6 +19,7 @@ public class Parser {
 
 
     public ToDo parseAddTodo(String command) {
+        System.out.println(command.substring(5));
         ToDo newTodo = new ToDo(command.substring(5));
         return newTodo;
     }

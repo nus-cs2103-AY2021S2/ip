@@ -24,7 +24,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        Parser parser = new Parser();
+        parser = new Parser();
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.getTaskList());
