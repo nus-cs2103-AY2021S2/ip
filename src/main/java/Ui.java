@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 public class Ui {
-    BufferedReader reader;
+    private BufferedReader reader;
 
     public Ui() {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
@@ -59,8 +59,8 @@ public class Ui {
     void printList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0;  i < list.size(); i++) {
-            System.out.println( (i+1) + "."  + list.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + "." + list.get(i));
         }
     }
 
@@ -92,8 +92,8 @@ public class Ui {
         ArrayList<Task> list = tasks.getList();
         int listLength = tasks.getListLength();
         System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0;  i < listLength; i++) {
-            System.out.println( (i+1) + "."  + list.get(i));
+        for (int i = 0; i < listLength; i++) {
+            System.out.println((i + 1) + "." + list.get(i));
         }
     }
 }

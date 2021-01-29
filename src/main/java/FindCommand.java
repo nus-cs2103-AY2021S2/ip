@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class FindCommand extends Command {
     protected String[] info;
 

@@ -1,8 +1,5 @@
-import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class Duke {
     private Storage storage;
@@ -19,7 +16,8 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    public void run()  {
+
+    public void run() {
         ui.intro();
         ui.showLine();
         boolean isBye = false;

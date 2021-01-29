@@ -18,7 +18,7 @@ public class Parser {
             return new DeleteCommand(info);
         } else if (info[0].equals("list")) {
             return new PrintCommand(info);
-        } else if (info[0].equals("bye")){
+        } else if (info[0].equals("bye")) {
             return new ByeCommand();
         } else if (info[0].equals("find")) {
             return new FindCommand(info);
