@@ -17,7 +17,7 @@ public class Parser {
     public void process() {
         this.taskType = commandSeparate[0];
 
-        if(commandSeparate.length > 1) {
+        if (commandSeparate.length > 1) {
             this.taskName = commandSeparate.length <= 3 ? commandSeparate[1] :
                     commandSeparate[1] + " " + commandSeparate[2];
             if (commandSeparate.length > 3) {

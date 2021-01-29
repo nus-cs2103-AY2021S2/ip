@@ -8,16 +8,16 @@ public class Duke {
     public Duke(String path) throws IOException {
         ui = new UI();
         storage = new Storage(path);
-        try{
+        try {
             taskList = storage.load();
-        }catch(Exception e) {
+        } catch (Exception e) {
             taskList = new Tasks();
         }
         ui.greetings();
     }
 
     //Uses the UI and runs against various conditions
-    public void process () throws DukeException {
+    public void process() throws DukeException {
         String command;
         while (true) {
             command = ui.getCommand();
@@ -53,6 +53,7 @@ public class Duke {
 
         }
     }
+
     //Main method where duke is initialized
     public static void main(String[] args) throws DukeException, IOException {
         Duke duke = new Duke("data/duke.txt");
