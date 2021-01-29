@@ -9,8 +9,19 @@ import java.io.ObjectOutputStream;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the component of the Duke program
+ * that deals with loading tasks from a file
+ * and saving tasks in a file.
+ */
 public class Storage {
 
+    /**
+     * Returns a TaskList from a save file if it exists,
+     * else creates a new save file and
+     * returns an empty TaskList.
+     * @return a TaskList from a saved file or an empty TaskList.
+     */
     public TaskList readFromFile() {
         File dir = new File("data");
         if (!dir.exists()) {
@@ -40,6 +51,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the contents of a TaskList into a save file.
+     * @param tasks the TaskList to be written into the save file.
+     */
     public void writeToFile(TaskList tasks) {
         File dir = new File("data");
         File saved_tasks = new File(dir, "saved_tasks");

@@ -5,10 +5,21 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents the component of the Duke program
+ * that makes sense of user input.
+ */
 public class Parser {
 
     public static DateTimeFormatter INPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
+    /**
+     * Returns a valid Duke Command after parsing user input.
+     * @param input user input.
+     * @return a valid Duke Command
+     * @throws DukeException when user input
+     *         does not match any valid Duke Commands.
+     */
     public Command parseCommand(String input) throws DukeException {
         String[] arr = input.split(" ");
         try {
@@ -18,6 +29,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a ToDo based on user input.
+     * @param input user input.
+     * @return a ToDo based on user input.
+     * @throws DukeException when user input does not contain
+     *         the description of the ToDo after the command.
+     */
     public ToDo parseToDo(String input) throws DukeException {
         String[] arr = input.split(" ");
         if (arr.length < 2) {
@@ -26,6 +44,15 @@ public class Parser {
         return new ToDo(input.substring(5));
     }
 
+    /**
+     * Returns a Deadline based on user input.
+     * @param input user input.
+     * @return a Deadline based on user input.
+     * @throws DukeException when user input does not contain
+     *         the description of the Deadline after the command,
+     *         the date and time of the Deadline after '/by'
+     *         or when the date and time is not in the correct format.
+     */
     public Deadline parseDeadline(String input) throws DukeException {
         String[] arr = input.split(" ");
         String[] arr2 = input.split(" /by ");
@@ -44,6 +71,15 @@ public class Parser {
         return new Deadline(arr2[0].substring(9), deadlineDate);
     }
 
+    /**
+     * Returns an Event based on user input.
+     * @param input user input.
+     * @return a Event based on user input.
+     * @throws DukeException when user input does not contain
+     *         the description of the Event after the command,
+     *         the date and time of the Event after '/at'
+     *         or when the date and time is not in the correct format.
+     */
     public Event parseEvent(String input) throws DukeException {
         String[] arr = input.split(" ");
         String[] arr3 = input.split(" /at ");
@@ -62,6 +98,15 @@ public class Parser {
         return new Event(arr3[0].substring(6), eventDate);
     }
 
+    /**
+     * Returns a valid int index of the Task
+     * to be marked as done in the TaskList.
+     * @param input user input.
+     * @param taskList list of Tasks that contains the Task to be marked as done.
+     * @return the index of the Task.
+     * @throws DukeException when user input does not contain an int value after the command
+     *         or when the index provided does not correspond to any Task in the TaskList.
+     */
     public int parseDone(String input, TaskList taskList) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
         String[] arr = input.split(" ");
@@ -79,6 +124,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a valid int index of the Task
+     * to be deleted from the TaskList.
+     * @param input user input.
+     * @param taskList list of Tasks that contains the Task to be deleted.
+     * @return the index of the Task.
+     * @throws DukeException when user input does not contain an int value after the command
+     *         or when the index provided does not correspond to any Task in the TaskList.
+     */
     public int parseDelete(String input, TaskList taskList) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
         String[] arr = input.split(" ");
