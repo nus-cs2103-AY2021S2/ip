@@ -9,12 +9,15 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDate dateTime;
 
+<<<<<<< HEAD
     /**
      * Constructs an Event.
      * @param isCompleted   Checked if the task is completed.
      * @param taskName     The task name.
      * @param dateTime     The date and time of the event.
      */
+=======
+>>>>>>> branch-A-CodingStandard
     public Event(boolean isCompleted, String taskName, LocalDate dateTime) {
         super('E', isCompleted, taskName);
         this.dateTime = dateTime;

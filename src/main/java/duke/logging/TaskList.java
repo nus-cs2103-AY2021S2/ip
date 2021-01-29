@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+<<<<<<< HEAD
 /**
  * A TaskList call denotes a system with a list of task and has the ability to make changes to the list.
  */
+=======
+>>>>>>> branch-A-CodingStandard
 public class TaskList {
     private final ArrayList<Task> tasks;
 
