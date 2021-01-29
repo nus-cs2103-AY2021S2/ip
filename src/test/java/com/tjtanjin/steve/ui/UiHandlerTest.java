@@ -9,12 +9,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.tjtanjin.steve.commands.CommandHandler;
+import com.tjtanjin.steve.parser.Parser;
+import com.tjtanjin.steve.storage.StorageHandler;
+import com.tjtanjin.steve.tasks.TaskHandler;
+
 public class UiHandlerTest {
 
     //reused from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final UiHandler uiHandler = new UiHandler();
+    private StorageHandler storageHandler = new StorageHandler("./data/tasks.json");
+    private TaskHandler taskHandler = new TaskHandler(storageHandler);
+    private CommandHandler commandHandler = new CommandHandler(taskHandler);
+    private Parser parser = new Parser(commandHandler);
+    private final UiHandler uiHandler = new UiHandler(parser);
 
     @BeforeEach
     public void setUp() {
@@ -35,13 +44,6 @@ public class UiHandlerTest {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String expected = "Hello from\n" + logo + "\nWhat can I do for you?";
         uiHandler.showWelcome();
-        assertEquals(expected, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    void showDivider_whenInvokePrintln_thenOutputCaptorSuccess() {
-        String expected = "------------------------------------";
-        uiHandler.showDivider();
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 
