@@ -13,13 +13,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * A Storage class denotes a file storage.
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Constructs a storage
+     * @param filePath   he filepath where the data are going to be stored at.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
+    /**
+     * Load the tasks in the file.
+     * @return                         A list of tasks in the file.
+     * @throws FileNotFoundException   If file isn't found.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -42,6 +54,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Overwrite the entire task's file content.
+     * @param tasks         A list of tasks.
+     * @throws IOException  If file cannot be written or open.
+     */
     public void overwrite(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(file);
         for (Task task : tasks) {
@@ -50,6 +67,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Append to the back of the task's file.
+     * @param task          A list of tasks
+     * @throws IOException  If file cannot be written or open.
+     */
     public void append(Task task) throws IOException {
         FileWriter fw = new FileWriter(file, true);
         fw.write(task.generateFileFormatString() + "\n");

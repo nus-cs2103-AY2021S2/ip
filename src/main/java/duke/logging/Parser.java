@@ -2,7 +2,15 @@ package duke.logging;
 
 import duke.command.*;
 
+/**
+ * The Parser class denotes a parser.
+ */
 public class Parser {
+    /**
+     * Parse a certain string and determine which command is being called.
+     * @param fullCommand   The string to be parsed.
+     * @return              A command to be executed.
+     */
     public static Command parse(String[] fullCommand) {
         String type = fullCommand[0];
         String taskDescription = fullCommand[1];
