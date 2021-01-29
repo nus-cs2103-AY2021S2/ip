@@ -4,12 +4,25 @@ import duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Scanner;
 
+/**
+ * Statement class deals with the user's input and make sense of it.
+ * Deals with most of the input errors. Has a table that store number of arguments needed
+ * for each command.
+ */
 public class Statement {
     private final String statement;
     private final Hashtable<String, Integer> argsTable;
 
+    /**
+     * Returns a Statement object that represent the user's input.
+     *
+     * @param statement The user's current input.
+     */
     public Statement(String statement) {
         this.statement = statement;
         argsTable = new Hashtable<>();
@@ -66,6 +79,14 @@ public class Statement {
         return result;
     }
 
+    /**
+     * Returns a Command object after making sense of the user's input.
+     *
+     * @return A Command object representing a command from the user.
+     * @throws DukeException If the format of date provided for event/deadline
+     * is incorrect or there is no '/' to separate description and date of an
+     * event/deadline.
+     */
     public Command parse() throws DukeException{
         try {
             List<String> parsedArgs = parseStatement();

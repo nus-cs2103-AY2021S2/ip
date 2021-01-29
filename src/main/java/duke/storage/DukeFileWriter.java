@@ -5,8 +5,18 @@ import duke.exception.DukeException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * DukeFileWriter deals with writing into the a file.
+ */
 class DukeFileWriter {
 
+    /**
+     * Writes input to the file that is located by the filepath.
+     *
+     * @param filePath The relative address of the file.
+     * @param input Text to be written into the file.
+     * @throws DukeException If an I/O error occurs.
+     */
     void writeFile(String filePath, String input) throws DukeException {
 
         try {

@@ -8,6 +8,10 @@ import duke.Ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Command is used to represent a command from a user. All command has
+ * a execute method to execute the user's input.
+ */
 public abstract class Command {
     protected String command;
     protected String description;
@@ -48,7 +52,7 @@ public abstract class Command {
         }
     }
 
-    boolean checkEquality(String s1, String s2) {
+    private boolean checkEquality(String s1, String s2) {
         if(s1 == null) {
             return s2 == null;
         } else {
@@ -60,7 +64,7 @@ public abstract class Command {
         }
     }
 
-    boolean checkEqualityDate(LocalDate d1, LocalDate d2) {
+    private boolean checkEqualityDate(LocalDate d1, LocalDate d2) {
         if(d1 == null) {
             return d2 == null;
         } else {

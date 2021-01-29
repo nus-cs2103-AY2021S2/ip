@@ -14,8 +14,20 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.FileWriter;
 
+/**
+ * FileReader deals with reading data from the file.
+ */
 class FileReader {
 
+    /**
+     * Returns a list of tasks after reading the data inside the file.
+     * If the file is not created yet, will create a new file and write
+     * as if the list is empty.
+     *
+     * @param path The relative address of the data file.
+     * @return A list of tasks.
+     * @throws DukeException If an I/O error occurs.
+     */
     List<Task> readFile(String path) throws DukeException {
         try {
             File f = new File(path);
@@ -63,7 +75,7 @@ class FileReader {
         }
     }
 
-    Task toTask(String input) {
+    private Task toTask(String input) {
             Scanner sc = new Scanner(input);
             String command = sc.next();
 
