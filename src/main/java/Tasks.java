@@ -33,6 +33,10 @@ public class Tasks {
         return Tasks.size();
     }
 
+    public Task getTask(int idx){
+        return Tasks.get(idx);
+    }
+
     //Prints all the tasks
     public void printTasks() {
         System.out.println("Contents: ");

@@ -1,6 +1,7 @@
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Storage {
@@ -13,7 +14,6 @@ public class Storage {
     public Storage(String filePath) throws IOException {
         this.path = filePath;
         file = new File(filePath);
-        this.checkIfExist();
     }
 
     public void checkIfExist(){
@@ -63,5 +63,5 @@ public class Storage {
 
         }
     }
-    
+
 }
