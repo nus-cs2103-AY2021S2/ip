@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.exception.DukeCommandException;
-
 import java.util.List;
+
+import duke.exception.DukeCommandException;
+import duke.task.Task;
 
 /** An executable command to list down all tracked tasks */
 public class ListCommand extends Command {

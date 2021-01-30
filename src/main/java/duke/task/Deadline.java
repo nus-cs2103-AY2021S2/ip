@@ -60,8 +60,8 @@ public class Deadline extends Task {
     @Override
     public String toSaveInfoString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
-        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " +
-                this.dateTime.format(formatter);
+        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | "
+                + this.dateTime.format(formatter);
     }
 
     /**

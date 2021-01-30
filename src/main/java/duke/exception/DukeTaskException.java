@@ -1,7 +1,7 @@
 package duke.exception;
 
 /** An exception that happened due to chat bot trying to do something task related (eg. creating or removing a task) */
-public class DukeTaskException extends DukeException{
+public class DukeTaskException extends DukeException {
     /**
      * Constructor for DukeTaskException
      *

@@ -1,14 +1,14 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.ToDo;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import duke.exception.DukeTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.exception.DukeTaskException;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /** An object that manage the storing, retrieving and removing of tasks from the chat bot */
 public class TaskManager {
@@ -77,11 +77,11 @@ public class TaskManager {
      * @throws DukeTaskException if there is no task in the list or the index is out of range
      */
     public Task deleteTask(int index) throws DukeTaskException {
-        if (tasks.size() == 0){
+        if (tasks.size() == 0) {
             throw new DukeTaskException("There are no task to be deleted.");
         } else if (index < 0 || index >= tasks.size()) {
-            throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size() +
-                    " (inclusive).");
+            throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size()
+                    + " (inclusive).");
         } else {
             return tasks.remove(index);
         }
@@ -94,11 +94,11 @@ public class TaskManager {
      * @throws DukeTaskException if there is no task in the list or the index is out of range
      */
     public void completeTask(int index) throws DukeTaskException {
-        if (tasks.size() == 0){
+        if (tasks.size() == 0) {
             throw new DukeTaskException("There are no task to be completed.");
         } else if (index < 0 || index >= tasks.size()) {
-            throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size() +
-                    " (inclusive).");
+            throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size()
+                    + " (inclusive).");
         } else {
             Task task = tasks.get(index);
             task.markAsDone();

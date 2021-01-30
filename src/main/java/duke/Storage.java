@@ -1,13 +1,5 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.exception.DukeTaskException;
-import duke.exception.DukeSaveException;
-import duke.exception.DukeLoadException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,6 +8,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exception.DukeLoadException;
+import duke.exception.DukeSaveException;
+import duke.exception.DukeTaskException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /** An utility class that provide read/write related operations */
 public class Storage {

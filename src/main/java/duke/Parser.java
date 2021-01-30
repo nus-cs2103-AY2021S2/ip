@@ -1,20 +1,20 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.FindCommand;
-import duke.command.ToDoCommand;
-import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.ExitCommand;
-import duke.exception.DukeException;
-import duke.exception.DukeCommandException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.exception.DukeCommandException;
+import duke.exception.DukeException;
 
 /** An utility class that translate user inputs into commands executable by the chat bot */
 public class Parser {
@@ -79,8 +79,8 @@ public class Parser {
      * @throws DukeCommandException if the command string has insufficient parameters or invalid date time format
      */
     public static DeadlineCommand parseDeadline(String text) throws DukeCommandException {
-        String validDateTimePattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
-                "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)";
+        String validDateTimePattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-"
+                + "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)";
 
         String params = text.substring(8).stripLeading();
 
@@ -88,12 +88,12 @@ public class Parser {
             throw new DukeCommandException("deadline", params, "The details of a Deadline cannot be empty.");
 
         } else if (!params.contains("/by") || params.split(" /by ").length != 2) {
-            throw new DukeCommandException("deadline", params, "Description and date/time must be given for a " +
-                    "Deadline.");
+            throw new DukeCommandException("deadline", params, "Description and date/time must be given for a "
+                    + "Deadline.");
 
         } else if (!params.split(" /by ")[1].matches(validDateTimePattern)) {
-            throw new DukeCommandException("deadline", params, "Date time format is incorrect, try to follow the " +
-                    "format of dd-mm-yyyy hAM/PM.");
+            throw new DukeCommandException("deadline", params, "Date time format is incorrect, try to follow the "
+                    + "format of dd-mm-yyyy hAM/PM.");
 
         } else {
             String[] splits = params.split(" /by ");
@@ -114,8 +114,8 @@ public class Parser {
      */
     public static EventCommand parseEvent(String text) throws DukeCommandException {
         // Regex pattern matching date-month-year xAM/PM
-        String pattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
-                "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)";
+        String pattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-"
+                + "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)";
 
         String params = text.substring(5).stripLeading();
 
@@ -124,13 +124,13 @@ public class Parser {
 
         } else if (!params.contains("/start") || !params.contains("/end")
                 || params.split(" /start | /end ").length != 3) {
-            throw new DukeCommandException("event", params, "Description, start datetime, and end datetime " +
-                    "must be given for an Event.");
+            throw new DukeCommandException("event", params, "Description, start datetime, and end datetime "
+                    + "must be given for an Event.");
 
         } else if (!params.split(" /start | /end ")[1].matches(pattern)
                 || !params.split(" /start | /end ")[2].matches(pattern)) {
-            throw new DukeCommandException("deadline", params, "Start or end date has incorrect format, try to " +
-                    "follow the format of dd-mm-yyyy hAM/PM.");
+            throw new DukeCommandException("deadline", params, "Start or end date has incorrect format, try to "
+                    + "follow the format of dd-mm-yyyy hAM/PM.");
 
         } else {
             String[] splits = params.split(" /start | /end ");
@@ -154,8 +154,8 @@ public class Parser {
         String params = text.substring(4).stripLeading();
 
         if (!params.matches("-?(0|[1-9]\\d*)")) {
-            throw new DukeCommandException("done", params, "Please provide an actual number for the task you are done" +
-                    " with.");
+            throw new DukeCommandException("done", params, "Please provide an actual number for the task you are done"
+                    + " with.");
         } else {
             return new DoneCommand(Integer.parseInt(params) - 1);
         }
@@ -172,8 +172,8 @@ public class Parser {
         String params = text.substring(6).stripLeading();
 
         if (!params.matches("-?(0|[1-9]\\d*)")) {
-            throw new DukeCommandException("delete", params, "Please provide an actual number for the task you are " +
-                    "deleting.");
+            throw new DukeCommandException("delete", params, "Please provide an actual number for the task you are "
+                    + "deleting.");
         } else {
             return new DeleteCommand(Integer.parseInt(params) - 1);
         }
@@ -187,8 +187,8 @@ public class Parser {
      * @throws DukeCommandException if the parameters are empty or in invalid format
      */
     public static FindCommand parseFind(String text) throws DukeCommandException {
-        String validDatePattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
-                "([1-9][0-9][0-9][0-9])";
+        String validDatePattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-"
+                + "([1-9][0-9][0-9][0-9])";
 
         String params = text.substring(4).stripLeading();
 
@@ -199,16 +199,16 @@ public class Parser {
             throw new DukeCommandException("find", params, "Cannot find by an empty date.");
 
         } else if (params.startsWith("/on") && !params.substring(3).trim().matches(validDatePattern)) {
-            throw new DukeCommandException("find", params, "Date has invalid format, try to " +
-                    "follow the format of dd-mm-yyyy.");
+            throw new DukeCommandException("find", params, "Date has invalid format, try to "
+                    + "follow the format of dd-mm-yyyy.");
 
         } else if (params.contains(" /on ") && params.split(" /on ").length != 2) {
             throw new DukeCommandException("find", params, "Either the query or the search date is missing.");
 
         } else if (params.contains(" /on ") && params.split(" /on ").length == 2
                 && !params.split(" /on ")[1].matches(validDatePattern)) {
-            throw new DukeCommandException("find", params, "Date has invalid format, try to " +
-                    "follow the format of dd-mm-yyyy.");
+            throw new DukeCommandException("find", params, "Date has invalid format, try to "
+                    + "follow the format of dd-mm-yyyy.");
 
         } else if (params.startsWith("/on")) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
