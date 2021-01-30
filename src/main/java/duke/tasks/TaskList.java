@@ -77,8 +77,6 @@ public class TaskList {
     public void markAsDone(int num) {
         tasks.get(num - 1).markAsDone();
     }
-<<<<<<< HEAD
-=======
 
     /**
      * Returns a list of matching tasks.
@@ -104,5 +102,4 @@ public class TaskList {
 
         return newList;
     }
->>>>>>> branch-Level-9
 }

@@ -20,7 +20,7 @@ public class Ui {
         System.out.println();
         System.out.println("☺ Got it. I've added this task:");
         System.out.println(task);
-        System.out.println("Now you have " + num + " duke.tasks in the list.");
+        System.out.println("Now you have " + num + " tasks in the list.");
         System.out.println();
     }
 
