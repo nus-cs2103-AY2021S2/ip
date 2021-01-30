@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.tasks.Task;
-
 import static duke.utils.Messages.MESSAGE_DELETED_TASK;
 import static duke.utils.Messages.MESSAGE_INVALID_INDEX;
 import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
+
+import duke.tasks.Task;
 
 /**
  * Deletes a task.

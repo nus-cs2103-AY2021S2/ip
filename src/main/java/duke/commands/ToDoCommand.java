@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.tasks.ToDoTask;
-
 import static duke.utils.Messages.MESSAGE_ADDED_TASK;
 import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
+
+import duke.tasks.ToDoTask;
 
 /**
  * Creates a ToDo task.

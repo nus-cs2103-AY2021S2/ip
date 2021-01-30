@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.io.PrintStream;
-
 import java.util.Scanner;
 
 /**
@@ -20,6 +19,9 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Creates a {code Ui} object with a standard input reader and a standard output writer.
+     */
     public Ui() {
         in = new Scanner(System.in);
         out = System.out;

@@ -1,23 +1,20 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.CommandResult;
 import duke.commands.InvalidCommandException;
 import duke.commands.InvalidDescriptionException;
 import duke.commands.NoDescriptionException;
-
 import duke.parser.Parser;
-
 import duke.storage.InvalidStorageFilePathException;
 import duke.storage.Storage;
 import duke.storage.StorageException;
-
 import duke.tasks.TaskList;
-
 import duke.ui.Ui;
 
-import java.io.IOException;
 
 /**
  * The main entry point to the chatbot application.
@@ -64,8 +61,7 @@ public class Main {
             ui = new Ui();
             storage = initializeStorage(args);
             taskList = storage.loadTasks();
-
-            // Print the welcome greeting 
+            // Print the welcome greeting
             ui.printDivider();
             ui.printGreeting();
         } catch (InvalidStorageFilePathException ex) {

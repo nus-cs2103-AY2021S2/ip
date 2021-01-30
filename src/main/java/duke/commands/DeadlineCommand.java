@@ -1,12 +1,12 @@
 package duke.commands;
 
-import duke.tasks.DeadlineTask;
+import static duke.utils.Messages.MESSAGE_ADDED_TASK;
+import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static duke.utils.Messages.MESSAGE_ADDED_TASK;
-import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
+import duke.tasks.DeadlineTask;
 
 /**
  * Creates a Deadline task.
@@ -25,12 +25,25 @@ public class DeadlineCommand extends Command {
     private final LocalDate deadlineDate;
     private final LocalTime deadlineTime;
 
+    /**
+     * Creates a {@code DeadlineCommand} object with a deadline date component only.
+     *
+     * @param taskName     name of the task
+     * @param deadlineDate date component of deadline
+     */
     public DeadlineCommand(String taskName, LocalDate deadlineDate) {
         this.taskName = taskName;
         this.deadlineDate = deadlineDate;
         deadlineTime = null;
     }
 
+    /**
+     * Creates a {@code DeadlineCommand} object with the given deadline date and time components.
+     *
+     * @param taskName     name of the task
+     * @param deadlineDate date component of deadline
+     * @param deadlineTime time component of deadline
+     */
     public DeadlineCommand(String taskName, LocalDate deadlineDate, LocalTime deadlineTime) {
         this.taskName = taskName;
         this.deadlineDate = deadlineDate;
