@@ -2,11 +2,9 @@ package kelbot;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -32,7 +30,7 @@ public class MainWindow extends AnchorPane {
         this.kelbot = kelbot;
     }
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Kelbot's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -44,5 +42,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getKelbotDialog(response, kelbotImage)
         );
         userInput.clear();
+    }
+    @FXML
+    private String getTaskList() {
+        return kelbot.getTaskList().toString();
     }
 }

@@ -20,6 +20,10 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Kelbot");
+            stage.setResizable(false);
+            stage.setMinHeight(500.0);
+            stage.setMinWidth(400.0);
             fxmlLoader.<MainWindow>getController().setKelbot(kelbot);
             stage.show();
         } catch (IOException e) {
