@@ -4,6 +4,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -105,9 +106,17 @@ public class Storage {
             e.printStackTrace();
         }
     }
+    public ArrayList<Task> find(String input) {
+        ArrayList<Task> temp = new ArrayList<>();
+        this.tasks.forEach((x) -> {
+            if (x.getInput().toUpperCase().strip().contains(input.toUpperCase().strip())) {
+                temp.add(x);
+            }
+        } );
+        return temp;
+    }
 
-
-    private void writeToFile(Task task) {
+    public void writeToFile(Task task) {
         try {
             this.fio.write(task.taskSave() + "\n");
         } catch (IOException e) {
@@ -145,6 +154,10 @@ public class Storage {
 
     public Task remove(int index) {
         return this.tasks.remove(index);
+    }
+
+    public ArrayList<Task> getArr() {
+        return this.tasks;
     }
 
     public int getArrSize() {

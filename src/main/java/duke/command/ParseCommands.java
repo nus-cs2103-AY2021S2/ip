@@ -12,6 +12,8 @@ import duke.ui.Ui;
  * ParseCommands handles the parsing and execution of the inputs given to the system.
  * ParseCommands needs to validate the input before execution of the command.
  */
+import java.util.ArrayList;
+
 public class ParseCommands {
     private final CommandList command;
     private final String data;
@@ -90,12 +92,16 @@ public class ParseCommands {
             ui.showDone(storage.get(task_No - 1).doTask());
             break;
         case LIST:
-            ui.showList(storage);
+            ui.showList(storage.getArr());
             break;
         case REMOVE:
             int remove_No = Integer.parseInt(this.data);
             Task task = storage.remove(remove_No - 1);
             ui.showRemove(task, storage.getArrSize());
+            break;
+        case FIND:
+            ArrayList<Task> results = storage.find(this.data);
+            ui.showList(results);
             break;
         case BYE:
             this.isExit = true;
@@ -118,8 +124,9 @@ public class ParseCommands {
         boolean test = index == -1 || input.substring(index).isBlank();
         switch (commandList) {
         case TODO:
+        case FIND:
             if (test) {
-                throw new DukeException(" ToDo cannot be empty! :(");
+                throw new DukeException(" Cannot be empty! :(");
             }
             break;
         case DEADLINE:
