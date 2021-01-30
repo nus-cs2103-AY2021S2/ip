@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
 
 
     @Override
-    public void execute(Task task, TaskList taskList, Storage storage) {
+    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // do one final save of task list into storage
         storage.saveTasksToStorage(taskList);
 

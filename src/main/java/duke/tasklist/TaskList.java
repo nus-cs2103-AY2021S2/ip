@@ -31,6 +31,16 @@ public class TaskList {
         Task.decrementNumOfTask();
     }
 
+    public TaskList filterTasks(String searchString) {
+        TaskList filteredTaskList = new TaskList();
+        for (Task task : this.taskList) {
+            if (task.getTaskName().contains(searchString)) {
+                filteredTaskList.addTask(task);
+            }
+        }
+        return filteredTaskList;
+    }
+
     public List<Task> getTaskList() {
         return this.taskList;
     }

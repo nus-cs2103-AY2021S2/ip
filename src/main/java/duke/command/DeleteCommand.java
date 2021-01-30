@@ -7,7 +7,7 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     @Override
-    public void execute(Task task, TaskList taskList, Storage storage) {
+    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // delete task
         taskList.removeTask(task);
 

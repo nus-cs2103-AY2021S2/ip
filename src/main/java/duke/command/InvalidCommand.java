@@ -8,7 +8,7 @@ import duke.ui.Ui;
 public class InvalidCommand extends Command{
 
     @Override
-    public void execute(Task task, TaskList taskList, Storage storage) {
+    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // print invalid task message
         Ui.printInvalidCommandMessage();
     }

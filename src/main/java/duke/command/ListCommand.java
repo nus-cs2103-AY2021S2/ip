@@ -7,7 +7,7 @@ import duke.ui.Ui;
 
 public class ListCommand extends Command {
     @Override
-    public void execute(Task task, TaskList taskList, Storage storage) {
+    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // print taskList
         Ui.printMessage(taskList.toString());
     }

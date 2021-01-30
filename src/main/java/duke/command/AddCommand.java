@@ -7,7 +7,7 @@ import duke.ui.Ui;
 
 public class AddCommand extends Command {
     @Override
-    public void execute(Task task, TaskList taskList, Storage storage) {
+    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // Add task to task list
         taskList.addTask(task);
 
