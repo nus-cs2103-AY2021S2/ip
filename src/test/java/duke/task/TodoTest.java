@@ -17,6 +17,6 @@ class TodoTest {
     @Test
     void createTodo_allFields_success() throws DukeException {
         Task todo = Todo.createTodo(new String[]{"todo", "something something"});
-        assertEquals(todo.getFormattedString(), "TODO /&/ 0 /&/ something something\n");
+        assertEquals(todo.getFormattedStorageString(), "TODO /&/ 0 /&/ something something\n");
     }
 }

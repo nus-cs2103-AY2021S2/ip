@@ -22,10 +22,6 @@ public abstract class Task {
         return isDone ? "[\u2713] " : "[ ] ";
     }
 
-    String getDate() {
-        return "";
-    }
-
     public void markDone() {
         isDone = true;
     }
@@ -35,7 +31,7 @@ public abstract class Task {
      *
      * @return formatted String which is saved in the data file
      */
-    public abstract String getFormattedString();
+    public abstract String getFormattedStorageString();
 
     @Override
     public String toString() {

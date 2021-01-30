@@ -31,6 +31,6 @@ class EventTest {
     @Test
     void createEvent_allFields_success() throws DukeException {
         Task event = Event.createEvent(new String[]{"event", "event title /at 01/01/2001 2359"});
-        assertEquals(event.getFormattedString(), "EVENT /&/ 0 /&/ event title /&/ 2001-01-01T23:59\n");
+        assertEquals(event.getFormattedStorageString(), "EVENT /&/ 0 /&/ event title /&/ 2001-01-01T23:59\n");
     }
 }

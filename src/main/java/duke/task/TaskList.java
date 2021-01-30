@@ -2,8 +2,6 @@ package duke.task;
 
 import duke.DukeException;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -39,23 +37,6 @@ public class TaskList {
             return tasks.remove(taskId);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
-        }
-    }
-
-    /**
-     * Converts string into LocalDateTime object.
-     *
-     * @param date String representing date
-     * @return LocalDateTime object
-     * @throws DukeException if format of the date String is invalid
-     */
-    public static LocalDateTime convertStringToDate(String date) throws DukeException {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            return LocalDateTime.parse(date, formatter);
-        } catch (Exception e) {
-            throw new DukeException("There was something wrong with the format of your date and/or time.\n" +
-                    "Make sure it's in the format <dd/MM/yyyy HHmm>!");
         }
     }
 }

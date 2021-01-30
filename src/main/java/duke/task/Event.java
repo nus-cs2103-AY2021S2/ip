@@ -4,17 +4,16 @@ import duke.DukeException;
 import duke.storage.Storage;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Class containing data and methods specific to a Event task.
  */
 public class Event extends Task {
-    public LocalDateTime date;
+    public DateTime dateTime;
 
-    public Event(String description, LocalDateTime date) {
+    public Event(String description, LocalDateTime dateTime) {
         super(description);
-        this.date = date;
+        this.dateTime = new DateTime(dateTime);
         isDone = false;
     }
 
@@ -33,26 +32,21 @@ public class Event extends Task {
         if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()) {
             throw new DukeException("Looks like your Event order isn't complete...");
         }
-        return new Event(args[0], TaskList.convertStringToDate(args[1]));
+        return new Event(args[0], DateTime.convertStringToDate(args[1]));
     }
 
-    @Override
-    public String getDate() {
-        return " (at: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")) + ")";
-    }
-
-    public String getFormattedString() {
+    public String getFormattedStorageString() {
         return "EVENT"
                 + Storage.splitter
                 + (isDone ? "1" : "0")
                 + Storage.splitter
                 + description
                 + Storage.splitter
-                + date + "\n";
+                + dateTime.getFormattedStorageString() + "\n";
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + getDate() + "\n";
+        return "[E]" + super.toString() + dateTime.getDateTimeForDisplay() + "\n";
     }
 }

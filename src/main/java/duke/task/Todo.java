@@ -25,12 +25,12 @@ public class Todo extends Task {
         return new Todo(command[1]);
     }
 
-    public String getFormattedString() {
+    public String getFormattedStorageString() {
         return "TODO" + Storage.splitter + (isDone ? "1" : "0") + Storage.splitter + description + "\n";
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() + getDate() + "\n";
+        return "[T]" + super.toString() + "\n";
     }
 }

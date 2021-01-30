@@ -105,7 +105,7 @@ public class Storage {
             FileWriter fw = new FileWriter(pathName);
             StringBuilder sb = new StringBuilder();
             for (Task task : tasks) {
-                sb.append(task.getFormattedString());
+                sb.append(task.getFormattedStorageString());
             }
             fw.write(sb.toString());
             fw.close();

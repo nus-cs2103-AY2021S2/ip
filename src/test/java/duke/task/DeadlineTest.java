@@ -31,6 +31,6 @@ class DeadlineTest {
     @Test
     void createDeadline_allFields_success() throws DukeException {
         Task deadline = Deadline.createDeadline(new String[]{"deadline", "deadline title /by 01/01/2001 2359"});
-        assertEquals(deadline.getFormattedString(), "DEADLINE /&/ 0 /&/ deadline title /&/ 2001-01-01T23:59\n");
+        assertEquals(deadline.getFormattedStorageString(), "DEADLINE /&/ 0 /&/ deadline title /&/ 2001-01-01T23:59\n");
     }
 }
