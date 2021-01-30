@@ -18,6 +18,7 @@ public class TaskList {
 
     public void addTask(Task task) {
         taskList.add(task);
+        Task.incrementNumOfTask();
     }
 
     public void removeTask(int taskNumber) {

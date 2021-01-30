@@ -17,8 +17,8 @@ public class Storage {
     /**
      * Loads the task list in the hard drive into duke
      */
-    public void load(TaskList taskList) {
-        DukeFileReader.loadTasksIntoTaskList(taskList.getTaskList());
+    public TaskList load() {
+        return DukeFileReader.loadTasks();
     }
 
     /**

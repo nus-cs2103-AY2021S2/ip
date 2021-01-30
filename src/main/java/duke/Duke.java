@@ -17,10 +17,9 @@ public class Duke {
 
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
-        this.taskList = new TaskList();
         this.ui = new Ui(new Scanner(System.in));
         // loads the internal storage tasks into task list of program
-        storage.load(this.taskList);
+        this.taskList = storage.load();
     }
 
     public void run() {

@@ -14,7 +14,6 @@ public class Deadline extends Task {
     public Deadline(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
         dueBy = LocalDate.parse(getDueDateFromInput(input));
-        Task.incrementNumOfTask();
     }
 
     public Deadline(String name, String dueBy) throws EmptyTaskDukeException {

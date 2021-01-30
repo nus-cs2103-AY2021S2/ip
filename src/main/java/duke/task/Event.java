@@ -15,7 +15,6 @@ public class Event extends Task {
     public Event(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
         dueAt = LocalDate.parse(getDueDateFromInput(input));
-        incrementNumOfTask();
     }
 
     public Event(String name, String dueAt) throws EmptyTaskDukeException {

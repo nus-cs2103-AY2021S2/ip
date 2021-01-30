@@ -5,7 +5,6 @@ import duke.EmptyTaskDukeException;
 public class Todo extends Task {
     public Todo(String input) throws EmptyTaskDukeException {
         super(input);
-        incrementNumOfTask();
     }
 
     @Override

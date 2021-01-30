@@ -5,6 +5,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,8 +16,8 @@ import java.util.Scanner;
 public class DukeFileReader {
     private static final String FILE_PATH = "data" + File.separator + "duke.txt";
 
-    private static List<Task> readTaskListFromInternalStorage() throws FileNotFoundException {
-        List<Task> taskList = new ArrayList<>();
+    private static TaskList readTaskListFromInternalStorage() throws FileNotFoundException {
+        TaskList taskList = new TaskList();
         FileDirectoryChecker.prepareFile(FILE_PATH);
         File f = new File(FILE_PATH);
         Scanner sc = new Scanner(f);
@@ -34,7 +35,7 @@ public class DukeFileReader {
                     if (isTaskDone) {
                         task.setDone();
                     }
-                    taskList.add(task);
+                    taskList.addTask(task);
                 } catch (EmptyTaskDukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -44,7 +45,7 @@ public class DukeFileReader {
                     if (isTaskDone) {
                         task.setDone();
                     }
-                    taskList.add(task);
+                    taskList.addTask(task);
                 } catch (EmptyTaskDukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -54,7 +55,7 @@ public class DukeFileReader {
                     if (isTaskDone) {
                         task.setDone();
                     }
-                    taskList.add(task);
+                    taskList.addTask(task);
                 } catch (EmptyTaskDukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -63,14 +64,13 @@ public class DukeFileReader {
         return taskList;
     }
 
-    public static void loadTasksIntoTaskList(List<Task> programTaskList) {
+    public static TaskList loadTasks() {
         try {
-            List<Task> taskList = readTaskListFromInternalStorage();
-            for (Task task : taskList) {
-                programTaskList.add(task);
-            }
+            TaskList taskList = readTaskListFromInternalStorage();
+            return taskList;
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+        return new TaskList();
     }
 }
