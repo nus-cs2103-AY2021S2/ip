@@ -2,6 +2,13 @@ package duke.parser;
 
 import java.time.LocalDateTime;
 
+/**
+ * Parses hard disk String input.
+ *
+ * @author Oh Jun Ming
+ * @version 1.0
+ */
+
 public class ListParser {
     private String typeOfTask;
     private Boolean isDone;
@@ -22,6 +29,12 @@ public class ListParser {
         this.time = time;
     }
 
+    /**
+     * Parses the String in Hard Disk line by line.
+     *
+     * @param input
+     * @return ListParser
+     */
     public ListParser parse(String input) {
         String[] inputSplit = input.split("\\|");
         typeOfTask = inputSplit[0];
