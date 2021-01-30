@@ -3,7 +3,6 @@ package ekud.command;
 import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.TaskList;
-import ekud.ui.Ui;
 
 /**
  * Abstract base class for all tasks that causes changes to the list of tasks
@@ -23,11 +22,12 @@ public abstract class ModificationCommand extends Command {
      * Save all tasks to disk.
      *
      * @param tasks   The list of tasks.
-     * @param ui      The user interface.
      * @param storage The file writer.
+     * @return Empty string;
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException {
+    public String execute(TaskList tasks, Storage storage) throws EkudException {
         storage.save(tasks);
+        return "";
     }
 }

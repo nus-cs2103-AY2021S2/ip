@@ -4,7 +4,6 @@ import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.Task;
 import ekud.task.TaskList;
-import ekud.ui.Ui;
 
 /**
  * Command that deletes a task on the list.
@@ -25,15 +24,15 @@ public class DeleteCommand extends ModificationCommand {
      * Delete a task by its index.
      *
      * @param tasks   The list of tasks.
-     * @param ui      The user interface.
      * @param storage The file writer.
+     * @return Summary of the task deleted.
+     * @throws EkudException If task saving fails.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException {
+    public String execute(TaskList tasks, Storage storage) throws EkudException {
         Task deletedTask = tasks.remove(index);
-        super.execute(tasks, ui, storage);
-
-        ui.printLines(
+        return String.join(System.lineSeparator(),
+                super.execute(tasks, storage),
                 "Poof! This task is gone:",
                 "\t" + deletedTask.toString(),
                 getTasksLeftString(tasks));

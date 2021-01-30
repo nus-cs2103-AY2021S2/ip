@@ -6,7 +6,6 @@ import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.Deadline;
 import ekud.task.TaskList;
-import ekud.ui.Ui;
 
 /**
  * Command that creates a deadline task.
@@ -26,12 +25,11 @@ public class AddDeadlineCommand extends AddTimedTaskCommand {
      * Execute this task by adding a deadline into the list, followed by common procedures of all add commands.
      *
      * @param tasks   The list of tasks.
-     * @param ui      The user interface.
      * @param storage The file writer.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException {
+    public String execute(TaskList tasks, Storage storage) throws EkudException {
         tasks.add(new Deadline(description, dateTime));
-        super.execute(tasks, ui, storage);
+        return super.execute(tasks, storage);
     }
 }

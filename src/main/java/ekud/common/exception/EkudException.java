@@ -5,6 +5,7 @@ public class EkudException extends Exception {
 
     /**
      * Construct an exception for Ekud.
+     *
      * @param message The exception message.
      */
     public EkudException(String message) {

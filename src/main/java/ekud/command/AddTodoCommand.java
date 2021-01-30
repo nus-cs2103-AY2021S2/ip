@@ -4,7 +4,6 @@ import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.TaskList;
 import ekud.task.ToDo;
-import ekud.ui.Ui;
 
 /**
  * Command that creates a todo task.
@@ -23,12 +22,13 @@ public class AddTodoCommand extends AddCommand {
      * Execute this command by adding a todo into the list, followed by common procedures of all add commands.
      *
      * @param tasks   The list of tasks.
-     * @param ui      The user interface.
      * @param storage The file writer.
+     * @return Summary of the task added.
+     * @throws EkudException If task saving fails.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException {
+    public String execute(TaskList tasks, Storage storage) throws EkudException {
         tasks.add(new ToDo(description));
-        super.execute(tasks, ui, storage);
+        return super.execute(tasks, storage);
     }
 }

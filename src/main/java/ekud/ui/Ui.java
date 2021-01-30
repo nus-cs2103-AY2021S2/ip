@@ -5,8 +5,8 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * The user interface class that handles all the interactions with the user
- * All input and output from the user will go through this class for better abstraction
+ * The user interface class that handles all the interactions with the user All input and output from the user will go
+ * through this class for better abstraction
  */
 public class Ui {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";

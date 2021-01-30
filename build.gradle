@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "ekud.Ekud"
+    mainClassName = "ekud.Main"
 }
 
 shadowJar {
@@ -56,6 +56,6 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
-    standardInput = System.in
-}
+//run{
+//    standardInput = System.in
+//}

@@ -3,7 +3,6 @@ package ekud.command;
 import ekud.storage.Storage;
 import ekud.task.Task;
 import ekud.task.TaskList;
-import ekud.ui.Ui;
 
 /**
  * Command that goes through the entire list and displays all the tasks with descriptions containing a keyword.
@@ -23,12 +22,12 @@ public class FindCommand extends Command {
     /**
      * Prints all tasks with descriptions that contain the specified keyword.
      *
-     * @param tasks the list of tasks.
-     * @param ui the user interface.
-     * @param storage the file writer.
+     * @param tasks   The list of tasks.
+     * @param storage The file writer.
+     * @return String containing all the tasks that matches the keyword.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         TaskList toPrint = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
@@ -36,9 +35,10 @@ public class FindCommand extends Command {
             }
         }
 
-        ui.printLines(toPrint.isEmpty() ? "Nothing found, try another keyword?" : "Here's what I found!");
+        String reply = toPrint.isEmpty() ? "Nothing found, try another keyword?" : "Here's what I found!";
         for (Task task : toPrint) {
-            ui.printLines("\t " + task.toString());
+            reply = String.join(System.lineSeparator(), reply, "\t " + task.toString());
         }
+        return reply;
     }
 }

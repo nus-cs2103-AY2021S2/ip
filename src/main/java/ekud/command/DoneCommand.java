@@ -4,7 +4,6 @@ import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.Task;
 import ekud.task.TaskList;
-import ekud.ui.Ui;
 
 /**
  * Command that marks a task as completed.
@@ -25,15 +24,16 @@ public class DoneCommand extends ModificationCommand {
      * Mark the task at index as done.
      *
      * @param tasks   The list of tasks.
-     * @param ui      The user interface.
      * @param storage The file writer.
+     * @return Summary of the task marked done.
+     * @throws EkudException If task saving fails.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EkudException {
+    public String execute(TaskList tasks, Storage storage) throws EkudException {
         Task doneTask = tasks.markDone(index);
-        super.execute(tasks, ui, storage);
 
-        ui.printLines(
+        return String.join(System.lineSeparator(),
+                super.execute(tasks, storage),
                 "Good job! The task below is marked done!",
                 "\t" + doneTask.toString());
     }

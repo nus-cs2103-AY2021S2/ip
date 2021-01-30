@@ -1,14 +1,12 @@
 package ekud.command;
 
 import java.time.LocalDate;
-import java.util.Vector;
 
 import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
 import ekud.task.Task;
 import ekud.task.TaskList;
 import ekud.task.TaskWithDateTime;
-import ekud.ui.Ui;
 
 /**
  * Command that lists all tasks, optionally filter by date if given.
@@ -38,42 +36,41 @@ public class ListCommand extends Command {
      * Output all tasks if no date specified, tasks due on the day otherwise.
      *
      * @param tasks   The list of tasks.
-     * @param ui      The user interface.
      * @param storage The file writer.
      */
     @Override
-    public void execute(final TaskList tasks, Ui ui, Storage storage) throws EkudException {
+    public String execute(final TaskList tasks, Storage storage) throws EkudException {
         // list command with no arguments
         if (!filter) {
             if (tasks.isEmpty()) {
-                ui.printLines("I know nothing, feed me with something :)");
-                return;
+                return "I know nothing, feed me with something :)";
             }
 
-            ui.printLines("Get working! You need finish these things:");
+            String reply = "Get working! You need finish these things:";
             for (int i = 0; i < tasks.size(); i++) {
-                ui.printLines(String.format("\t %d. %s", i + 1, tasks.get(i).toString()));
+                reply = String.join(System.lineSeparator(),
+                        reply,
+                        String.format("\t %d. %s", i + 1, tasks.get(i).toString()));
             }
-            return;
+            return reply;
         }
 
         // list tasks due on a particular day
-        Vector<TaskWithDateTime> toPrint = new Vector<>();
+        String reply = "";
         for (Task task : tasks) {
             if (task instanceof TaskWithDateTime) {
                 TaskWithDateTime t = (TaskWithDateTime) task;
                 if (t.getDateTime().toLocalDate().equals(date)) {
-                    toPrint.add(t);
+                    reply = String.join(System.lineSeparator(),
+                            reply,
+                            t.toString());
                 }
             }
         }
-        if (toPrint.isEmpty()) {
-            ui.printLines(("You're free for the day!"));
+        if (reply.isBlank()) {
+            return "You're free for the day!";
         } else {
-            ui.printLines("You have these deadlines/events:");
-            for (int i = 0; i < toPrint.size(); i++) {
-                ui.printLines(String.format("\t %d. %s", i + 1, toPrint.get(i).toString()));
-            }
+            return "You have these deadlines/events:%n" + reply;
         }
     }
 }
