@@ -8,7 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-import sharadhr.duke.Task;
+import sharadhr.duke.task.Task;
+import sharadhr.duke.task.TaskList;
 
 /**
  * A class to handle file read/write operations by the Duke program.
@@ -56,31 +57,15 @@ public class Storage
         }
     }
 
-    public void decodeTasks()
+    public void decodeLine(String line)
     {
-        String line;
-        String[] tokens;
-        try
-        {
-            while (!(line = reader.readLine()).isBlank())
-            {
-                tokens = line.split(",");
+        
+    }
+    
+    public TaskList loadFromFile()
+    {
 
-                switch (tokens[0]) {
-                    case "T":
-                        break;
-                    case "D":
-                        break;
-                    case "E":
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+
+        return null;
     }
 }

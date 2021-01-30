@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
-import sharadhr.duke.Task;
+import sharadhr.duke.task.Task;
 
 /**
  * A class to neatly format and write any output from the organiser chat bot,
