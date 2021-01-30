@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
+
+import duke.DukeException;
 
 /**
  * Class containing methods to edit the program's existing task list.

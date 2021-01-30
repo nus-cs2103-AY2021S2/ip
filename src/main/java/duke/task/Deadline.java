@@ -1,21 +1,25 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.storage.Storage;
-
-import java.time.LocalDateTime;
 
 /**
  * Class containing data and methods specific to a Deadline task.
  */
 public class Deadline extends Task {
 
-    public DateTime dateTime;
+    private final DateTime dateTime;
 
+    /**
+     * Creates a Deadline object with a description and a DateTime object.
+     * @param description description of the deadline
+     * @param dateTime DateTime indicating the deadline of the task
+     */
     public Deadline(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = new DateTime(dateTime);
-        isDone = false;
     }
 
     /**
@@ -38,11 +42,11 @@ public class Deadline extends Task {
 
     public String getFormattedStorageString() {
         return "DEADLINE"
-                + Storage.splitter
-                + (isDone ? "1" : "0")
-                + Storage.splitter
-                + description
-                + Storage.splitter
+                + Storage.SPLITTER
+                + (isDone() ? "1" : "0")
+                + Storage.SPLITTER
+                + getDescription()
+                + Storage.SPLITTER
                 + dateTime.getFormattedStorageString() + "\n";
     }
 

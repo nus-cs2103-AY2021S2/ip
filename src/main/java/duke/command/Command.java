@@ -8,5 +8,5 @@ import duke.DukeException;
 public abstract class Command {
     protected String[] command;
 
-    abstract public void process() throws DukeException;
+    public abstract void process() throws DukeException;
 }

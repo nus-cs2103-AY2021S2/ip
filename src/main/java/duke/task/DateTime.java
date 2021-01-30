@@ -1,16 +1,16 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.DukeException;
 
 /**
  * Encapsulates any behaviour related to DateTime objects contained within Deadline and Event tasks.
  */
 public class DateTime {
 
-    LocalDateTime dateTime;
+    private final LocalDateTime dateTime;
 
     public DateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
@@ -28,8 +28,8 @@ public class DateTime {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             return LocalDateTime.parse(date, formatter);
         } catch (Exception e) {
-            throw new DukeException("There was something wrong with the format of your date and/or time.\n" +
-                    "Make sure it's in the format <dd/MM/yyyy HHmm>!");
+            throw new DukeException("There was something wrong with the format of your date and/or time.\n"
+                    + "Make sure it's in the format <dd/MM/yyyy HHmm>!");
         }
     }
 

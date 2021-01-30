@@ -1,20 +1,25 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.storage.Storage;
-
-import java.time.LocalDateTime;
 
 /**
  * Class containing data and methods specific to a Event task.
  */
 public class Event extends Task {
-    public DateTime dateTime;
+    private final DateTime dateTime;
 
+    /**
+     * Creates an Event object with a description and DateTime object.
+     *
+     * @param description description of the event
+     * @param dateTime DateTime indicating the occurrence of the event
+     */
     public Event(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = new DateTime(dateTime);
-        isDone = false;
     }
 
     /**
@@ -37,11 +42,11 @@ public class Event extends Task {
 
     public String getFormattedStorageString() {
         return "EVENT"
-                + Storage.splitter
-                + (isDone ? "1" : "0")
-                + Storage.splitter
-                + description
-                + Storage.splitter
+                + Storage.SPLITTER
+                + (isDone() ? "1" : "0")
+                + Storage.SPLITTER
+                + getDescription()
+                + Storage.SPLITTER
                 + dateTime.getFormattedStorageString() + "\n";
     }
 

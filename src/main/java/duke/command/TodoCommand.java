@@ -1,11 +1,11 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Ui;
-import duke.task.Todo;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.DukeException;
-import duke.storage.Storage;
+import duke.task.Todo;
 
 /**
  * Class containing data and methods specific to a Todo command

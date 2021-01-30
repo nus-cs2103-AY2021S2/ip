@@ -26,7 +26,12 @@ public class Todo extends Task {
     }
 
     public String getFormattedStorageString() {
-        return "TODO" + Storage.splitter + (isDone ? "1" : "0") + Storage.splitter + description + "\n";
+        return "TODO"
+                + Storage.SPLITTER
+                + (isDone() ? "1" : "0")
+                + Storage.SPLITTER
+                + getDescription()
+                + "\n";
     }
 
     @Override

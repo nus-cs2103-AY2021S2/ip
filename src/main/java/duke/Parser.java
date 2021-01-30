@@ -1,10 +1,17 @@
 package duke;
 
-import duke.command.*;
-
 import java.util.Scanner;
 
-import static duke.Ui.displayError;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
  * Parses and processes user input.
@@ -68,7 +75,7 @@ public class Parser {
                 }
                 command.process();
             } catch (DukeException e) {
-                displayError(e.getMessage());
+                Ui.displayError(e.getMessage());
             }
         }
     }

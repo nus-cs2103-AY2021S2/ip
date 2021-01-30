@@ -1,9 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.DukeException;
 
 class EventTest {
 
