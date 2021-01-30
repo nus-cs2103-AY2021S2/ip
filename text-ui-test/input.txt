@@ -1,12 +1,12 @@
 list
-todo borrow_book
-deadline return_book /by Sunday
-event project_meeting /at Mon_2-4pm
+todo 'borrow book'
+deadline "return book" /by Sunday
+event homework /at 05:20
+event birthday /at '11-08-2020 12:20'
 list
 done 1
 list
 done 2
-list
 done 3
 list
 deadline
@@ -18,5 +18,7 @@ excuseme
 delete 2
 list
 delete 1
+list
+deadline "prepare bob's birthday present" /by "20-05-2021 13:14"
 list
 quit
