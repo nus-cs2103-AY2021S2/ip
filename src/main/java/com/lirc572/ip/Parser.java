@@ -1,8 +1,12 @@
 package com.lirc572.ip;
 
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Set;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Contains static methods for parsing commands.
@@ -185,6 +189,24 @@ public class Parser {
                     Ui.printLine("Got it! I've added this task:");
                     Ui.printLine("  " + task);
                     Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                }
+            } else if (tokens[0].equals("find")) {
+                if (tokens.length < 2) {
+                    throw new Exception("Please provide a valid regex expression!");
+                }
+                ArrayList<String> matchedTaskStrings = new ArrayList<>();
+                ArrayList<Integer> matchedTaskIndices = new ArrayList<>();
+                Pattern pattern = Pattern.compile(tokens[1], Pattern.CASE_INSENSITIVE);
+                for (int i = 1; i <= tasks.size(); i++) { // i is one-based!
+                    Matcher matcher = pattern.matcher(tasks.getTaskName(i));
+                    if (matcher.find()) {
+                        matchedTaskStrings.add(tasks.getTaskString(i));
+                        matchedTaskIndices.add(i);
+                    }
+                }
+                Ui.printLine("Here are the matching tasks in your list:");
+                for (int i = 0; i < matchedTaskIndices.size(); i++) {
+                    Ui.printLine(String.format("%d.%s", matchedTaskIndices.get(i), matchedTaskStrings.get(i)));
                 }
             } else {
                 throw new Exception("Unknown command!");

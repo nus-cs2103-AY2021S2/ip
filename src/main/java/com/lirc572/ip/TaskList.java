@@ -110,6 +110,16 @@ public class TaskList {
     }
 
     /**
+     * Returns the name of the specified task.
+     *
+     * @param index The index of the task.
+     * @return The name of the task.
+     */
+    public String getTaskName(int index) {
+        return this.tasks.get(index - 1).getName();
+    }
+
+    /**
      * Deletes the task with the specified index.
      *
      * @param index The index of the task to be deleted (one-based).
