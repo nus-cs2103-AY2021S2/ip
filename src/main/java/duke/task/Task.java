@@ -17,11 +17,11 @@ public class Task {
     private int index;
     private String done;
     private String date;
+
     /**
      * Construct a task object with taskname attached and its index label in the taskList.
      * @param taskName name of the task.
      */
-
     Task(String taskName) {
         this.taskName = taskName;
         this.index = capacity + 1;
@@ -82,6 +82,10 @@ public class Task {
         }
     }
 
+    /**
+     * Delete a task from the task list with the given index label.
+     * @param i the index label of the task.
+     */
     public static void delete(int i) {
         try {
             Task t = taskList.get(i - 1);

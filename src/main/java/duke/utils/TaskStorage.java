@@ -12,11 +12,19 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class handle the saving and loading of the taskList to/from a specific FilePath.
+ */
 public class TaskStorage {
 
 	public static final String FILEPATH = "data/Duke.txt";
 	public static final String DIRECTORY = "data";
 
+	/**
+	 * This method write the content of a taskList to data/Duke.txt.
+	 *
+	 * @return A string display of a successful save.
+	 */
 	public static String writeToFiles() {
 		List<Task> taskList = Task.getTaskList();
 		try {
@@ -34,6 +42,11 @@ public class TaskStorage {
 		return Ui.SUCCESSFULSAVE;
 	}
 
+	/**
+	 * This method load the file from data/Duke.txt and display in a list format when the program starts.
+	 *
+	 * @return the String display of a successful load.
+	 */
 	public static String loadFiles() {
 		String output = Ui.LOADFILE;
 		System.out.println(output);

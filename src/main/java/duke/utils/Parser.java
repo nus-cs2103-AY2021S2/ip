@@ -5,6 +5,9 @@ import duke.exceptions.DukeException;
 import duke.type.CommandType;
 import duke.ui.Ui;
 
+/**
+ * This class extract and process the user input and produce the right command to be executed after parsing.
+ */
 public class Parser {
 	private String input;
 
@@ -12,6 +15,11 @@ public class Parser {
 		this.input = input;
 	}
 
+	/**
+	 * This method process all the user input and create respective command to be executed.
+	 *
+	 * @return the respective command to be executed.
+	 */
 	public final Command parse() {
 		String instruction;
 		String taskName;
