@@ -40,7 +40,8 @@ public class Duke {
                 String fullInput = ui.readCommand();
                 Command c = Parser.parseCommand(fullInput);
                 Task task = Parser.parseTask(fullInput, taskList);
-                c.execute(task, taskList, storage);
+                String taskDescription = Parser.parseDescription(fullInput);
+                c.execute(taskDescription, task, taskList, storage);
                 // check online condition
                 isDukeOnline = c.isDukeOnline();
             } catch (EmptyTaskDukeException e) {

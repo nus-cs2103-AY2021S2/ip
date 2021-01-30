@@ -33,6 +33,8 @@ public class Parser {
             return new ListCommand();
         case "DELETE":
             return new DeleteCommand();
+        case "FIND":
+            return new FindCommand();
         case "HELP":
             return new HelpCommand();
         case "BYE":
@@ -81,7 +83,7 @@ public class Parser {
         return input.split(" ")[0];
     }
 
-    private static String parseDescription(String input) {
+    public static String parseDescription(String input) {
         if (input.split(" ").length == 1) {
             return "";
         }

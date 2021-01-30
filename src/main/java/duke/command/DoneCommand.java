@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(Task task, TaskList taskList, Storage storage) {
+    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // update task to done
         task.setDone();
 

@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(Task task, TaskList taskList, Storage storage) {
+    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // print custom help message
         String allCommands = "todo\n"
                 + "deadline *text* /by yyyy-mm-dd\n"

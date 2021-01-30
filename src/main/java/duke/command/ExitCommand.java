@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      * @param storage the storage instance used to save files into internal storage
      */
     @Override
-    public void execute(Task task, TaskList taskList, Storage storage) {
+    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // do one final save of task list into storage
         storage.saveTasksToStorage(taskList);
 
