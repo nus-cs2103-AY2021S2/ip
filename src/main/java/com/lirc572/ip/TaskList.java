@@ -37,7 +37,7 @@ public class TaskList {
         // Convert task list to a string
         StringBuilder data = new StringBuilder();
         for (Task task : this.tasks) {
-            data.append(task.toSavedString());
+            data.append(task.toSavedString() + "\n");
         }
         return data.toString();
     }
