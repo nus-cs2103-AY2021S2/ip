@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The DukeLevel class is an interactive chat bot that can:
- * - add items to a list
- * - display a list of items which were previously added
- * - mark items in the list as done
- * - remove items from the list
- * - throw exceptions if the input is incorrect
+ * Mister Duke is an interactive chat bot that
+ * keep track of your tasks, deadlines and events
+ * in a list.
+ * It can mark the items in the list as done, and
+ * remove them from the list.
  *
  * @author Shaelyn
  * @version CS2103T 20/21 Semester 2, Individual Project
@@ -33,6 +32,10 @@ public class MisterDuke {
         }
     }
 
+    /**
+     * Runs Mister Duke
+     * @throws IOException when the input is wrong/incomplete
+     */
     public void run() throws IOException {
         storage.load();
         ui.printLine();
@@ -55,17 +58,33 @@ public class MisterDuke {
         storage.save(tasks);
     }
 
+    /**
+     * Main driver function
+     * @param args command line args
+     * @throws IOException when the input is wrong/incomplete
+     */
     public static void main(String[] args) throws IOException {
         new MisterDuke("src\\main\\data\\duke.txt").run();
     }
 }
 
+/** The user interface class is for printing Mister Duke's
+ * responses onto the terminal.
+ *
+ */
 class Ui {
 
+    /**
+     * Prints horizontal line to partition Mister Duke's messages
+     */
     public void printLine() {
         System.out.println("    _________________________________________________");
     }
 
+    /**
+     * Reads user's input
+     * @return user's input as String
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -74,15 +93,25 @@ class Ui {
         return "";
     }
 
+    /**
+     * Displays Mister Duke's welcome message
+     */
     public void showWelcome() {
         System.out.println("     Hello! Nice to meet you, I'm Mister Duke :)");
         System.out.println("     What can I do for you today?");
     }
 
+    /**
+     * Displays Mister Duke's goodbye message
+     */
     public void showGoodbye() {
         System.out.println("     Bye. Hope to see you again soon! :)");
     }
 
+    /**
+     * Displays number of tasks in the list
+     * @param numOfTasks in the list
+     */
     public void showTaskList(int numOfTasks) {
         if (numOfTasks == 1) {
             System.out.println("     Now you have " + numOfTasks + " task in the list.");
@@ -91,16 +120,28 @@ class Ui {
         }
     }
 
+    /**
+     * Informs user that the task input has been added to the list
+     * @param task specified by user that needs to be added to the list
+     */
     public void showTaskAdded(Task task) {
         System.out.println("     Got it. I've added this task: ");
         System.out.println("       " + task.toString());
     }
 
+    /**
+     * Indicates that the specified task has been completed
+     * @param task specified by user that has been completed
+     */
     public void showTaskDone(Task task) {
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("       " + task.toString());
     }
 
+    /**
+     * Lists the tasks
+     * @param tasksArray array list of tasks
+     */
     public void showList(ArrayList<Task> tasksArray) {
         if (tasksArray.isEmpty()) {
             System.out.println("     Your list is empty, there is nothing to do. Yay!");
@@ -112,6 +153,11 @@ class Ui {
         }
     }
 
+    /**
+     * Informs user that the specified task has been removed from the list
+     * @param tasksArray array list of tasks
+     * @param commandNumber the task in the list that will be removed
+     */
     public void showTaskDelete(ArrayList<Task> tasksArray, String commandNumber) {
         if (tasksArray.isEmpty()) {
             System.out.println("     Oops! You have no tasks to delete.");
@@ -123,11 +169,19 @@ class Ui {
         }
     }
 
+    /**
+     * Informs the user of wrong/incomplete input
+     * @param e error message that specifies wrong/incomplete input
+     */
     public void showDefaultError(Exception e) {
         System.out.println(e.getMessage());
     }
 }
 
+/**
+ * The Storage class is for loading and saving the list of tasks
+ * to the local hard disk.
+ */
 class Storage {
     private File txtFile;
 
@@ -140,6 +194,11 @@ class Storage {
         }
     }
 
+    /**
+     * Loads list of tasks from the hard disk into the list of tasks
+     * @return array list of tasks
+     * @throws FileNotFoundException when the file cannot be found on the hard disk
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         Scanner sc = new Scanner(this.txtFile);
         ArrayList<Task> tasksArrayList = new ArrayList<>();
@@ -179,6 +238,12 @@ class Storage {
         return tasksArrayList;
     }
 
+    /**
+     * Saves the list of tasks on to the hard disk after Mister Duke
+     * has been terminated
+     * @param taskArrayList list of tasks
+     * @throws IOException when there is a wrong/incomplete user input
+     */
     public void save(ArrayList<Task> taskArrayList) throws IOException {
         FileWriter fwriter = new FileWriter(this.txtFile);
         for (Task task : taskArrayList) {
@@ -194,6 +259,10 @@ class Storage {
     }
 }
 
+/**
+ * The Parser class takes in the user input, parses it,
+ * then display the corresponding message from Mister Duke
+ */
 class Parser {
     private Ui ui;
     private Storage storage;
@@ -205,6 +274,13 @@ class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * The parse function takes in the user's input (command) and
+     * returns a class that corresponds to the command
+     * @param command user input
+     * @return class that corresponds to the command
+     * @throws DukeException when the user input is wrong/incomplete
+     */
     public static Command parse(String command) throws DukeException {
         String input = command.trim();
         String[] strArray = input.split(" ", 2);
@@ -236,6 +312,9 @@ abstract class Command {
     public abstract boolean isRunning();
 }
 
+/**
+ * When the user inputs a ToDo task, the ToDoCommand is returned
+ */
 class ToDoCommand extends Command {
     private String command;
 
@@ -264,6 +343,9 @@ class ToDoCommand extends Command {
     }
 }
 
+/**
+ * When the user inputs a Deadline task, the DeadlineCommand is returned
+ */
 class DeadlineCommand extends Command {
     private String command;
 
@@ -271,8 +353,14 @@ class DeadlineCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Checks whether the deadline date given by the user is acceptable
+     * in the format dd-mm-yyyy
+     * @param str deadline date given by user
+     * @return true if deadline date is in the format dd-mm-yyyy
+     */
     public boolean isDate(String str) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("DD-MM-yyyy");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             LocalDate.parse(str, dateTimeFormatter);
         } catch (DateTimeParseException dateTimeParseException) {
@@ -312,6 +400,9 @@ class DeadlineCommand extends Command {
     }
 }
 
+/**
+ * When the user inputs an Event task, the EventCommand is returned
+ */
 class EventCommand extends Command {
     private String command;
 
@@ -344,6 +435,10 @@ class EventCommand extends Command {
     }
 }
 
+/**
+ * When the user requests for the current list of tasks,
+ * the ListCommand is called
+ */
 class ListCommand extends Command {
     private String command;
 
@@ -361,6 +456,10 @@ class ListCommand extends Command {
     }
 }
 
+/**
+ * When the user marks a specified task as done,
+ * the DoneCommand is called
+ */
 class DoneCommand extends Command {
     private String command;
 
@@ -382,6 +481,10 @@ class DoneCommand extends Command {
 
 }
 
+/**
+ * When the user deletes a specified task from the task list,
+ * the DeleteCommand is called
+ */
 class DeleteCommand extends Command {
     private String command;
 
@@ -402,6 +505,9 @@ class DeleteCommand extends Command {
 
 }
 
+/**
+ * When the user bids goodbye, the Exit Command is called
+ */
 class ExitCommand extends Command {
     private String command;
 
@@ -453,7 +559,9 @@ class Task {
     }
 
     @Override
-    public String toString() { return "[" + getStatusIcon() + "] " + description; }
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
 }
 
 /**
@@ -485,7 +593,8 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + deadlineBy.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
+        return "[D]" + super.toString() + "(by:" +
+            deadlineBy.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
     }
 }
 
