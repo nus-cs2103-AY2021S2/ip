@@ -29,6 +29,10 @@ public class Ui {
         return in.nextLine();
     }
 
+    public void close() {
+        in.close();
+    }
+
     public void displayIntro() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

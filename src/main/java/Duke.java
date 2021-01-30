@@ -3,12 +3,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Duke {
-    private static final String rightIndent = "  ";
-    private static final String textSpacer = rightIndent + "|" + " ";
-    private static final String responseBoxTop = rightIndent + "_______________________________________________\n";
-    private static final String responseBoxBottom = rightIndent + "|____________________________________________\n"
-            + rightIndent + "                                              \\|\n";
-    private static Scanner sc = new Scanner(System.in);
     private static boolean exit = false;
     private static List<Task> tasks = new ArrayList<>();
 
@@ -19,7 +13,7 @@ public class Duke {
         while (exit == false) {
             processInput(ui.readCommand());
         }
-        sc.close();
+        ui.close();
     }
 
 
