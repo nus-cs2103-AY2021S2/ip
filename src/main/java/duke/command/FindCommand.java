@@ -8,17 +8,17 @@ import duke.task.TaskList;
  */
 
 public class FindCommand extends Command {
-    String type;
+    private String userInput;
 
     /**
      * Handles List commands.
      * Triggers the DataHandler to handle the commands.
      *
-     * @param t details of the task
+     * @param input details of the task
      *
      */
-    public FindCommand(String t) {
-        this.type = t;
+    public FindCommand(String input) {
+        this.userInput = input;
     }
 
     /**

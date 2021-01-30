@@ -1,17 +1,24 @@
 package duke.task;
 
-import duke.exception.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.exception.AlphabetsInsteadOfNumberException;
+import duke.exception.EmptyDateTimeException;
+import duke.exception.EmptyDeadlineException;
+import duke.exception.EmptyDeleteException;
+import duke.exception.EmptyEventException;
+import duke.exception.EmptyListDeletionException;
+import duke.exception.EmptyToDoException;
 
 /**
  * TaskList class which stores all the tasks user keyed in.
  */
 public class TaskList {
     private ArrayList<Task> taskList;
+    private final String line = "------------------------------------------";
 
     /**
      * Creates TaskList which is essentially an ArrayList of Task.
@@ -48,8 +55,6 @@ public class TaskList {
         ArrayList<Task> arr = this.getList();
         return arr.get(i).toString();
     }
-
-    String line = "------------------------------------------";
 
     /**
      * Create new Todo task and add it to taskList.

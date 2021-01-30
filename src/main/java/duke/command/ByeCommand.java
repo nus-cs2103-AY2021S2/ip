@@ -6,23 +6,30 @@ import duke.task.TaskList;
 /**
  * ByeCommand class which is a type of Command to be executed.
  */
-
 public class ByeCommand extends Command {
-    String type;
+    private String userInput;
+    private final String line = "------------------------------------------";
 
     /**
      * Handles Exit commands.
      * Triggers the DataHandler to handle the commands.
      *
-     * @param t details of the task
+     * @param input details of the task
      *
      */
-    public ByeCommand(String t) {
-        this.type = t;
+    public ByeCommand(String input) {
+        this.userInput = input;
 
     }
 
-    String line = "------------------------------------------";
+    /**
+     * Returns the user input of command
+     *
+     * @return user input
+     */
+    public String getUserInput() {
+        return this.userInput;
+    }
 
     /**
      * Executes the Command in DataHandler.

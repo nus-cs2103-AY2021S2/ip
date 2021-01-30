@@ -1,14 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Abstract class for all various commands.
  */
-
 public abstract class Command {
 
     /**

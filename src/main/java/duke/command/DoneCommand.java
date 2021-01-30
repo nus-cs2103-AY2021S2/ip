@@ -1,28 +1,37 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.InvalidInstructionException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * DoneCommand class which is a type of Command to be executed.
  */
 
 public class DoneCommand extends Command {
-    String type;
+    private String userInput;
 
     /**
      * Handles Done commands.
      * Triggers the DataHandler to handle the commands.
      *
-     * @param t details of the task
+     * @param input details of the task
      *
      */
-    public DoneCommand(String t) {
-        this.type = t;
+    public DoneCommand(String input) {
+        this.userInput = input;
 
+    }
+
+    /**
+     * Returns the user input of command
+     *
+     * @return user input
+     */
+    public String getUserInput() {
+        return this.userInput;
     }
 
     /**
