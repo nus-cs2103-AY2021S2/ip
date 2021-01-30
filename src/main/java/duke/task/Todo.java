@@ -9,10 +9,9 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
-    
-    /** 
+    /**
      * Returns a string representation of Todo
-     * 
+     *
      * @return String
      */
     @Override
@@ -20,10 +19,9 @@ public class Todo extends Task {
         return String.format("[T]%s", super.toString());
     }
 
-    
-    /** 
+    /**
      * Returns a string representation of Todo to be saved in data file
-     * 
+     *
      * @return String
      */
     public String toSavedString() {

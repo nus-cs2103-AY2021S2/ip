@@ -1,19 +1,18 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
 
 public class ExitCommand extends Command {
     public ExitCommand() {
         super(true);
     }
 
-  
-    /**   
+    /**
      * Exits programme
-     * 
+     *
      * @param taskList
      * @param ui
      * @param storage

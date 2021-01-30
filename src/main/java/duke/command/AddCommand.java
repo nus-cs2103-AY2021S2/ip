@@ -1,23 +1,28 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
 
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Creates an AddCommand acting on the given task.
+     * isExit is False.
+     *
+     * @param task
+     */
     public AddCommand(Task task) {
         super(false);
         this.task = task;
     }
 
-  
-    /** 
+    /**
      * Adds a new task to taskList
-     * 
+     *
      * @param taskList
      * @param ui
      * @param storage

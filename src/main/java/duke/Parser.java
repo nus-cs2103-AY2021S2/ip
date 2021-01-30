@@ -12,10 +12,10 @@ import duke.task.Event;
 import duke.task.Todo;
 
 public class Parser {
-  
-    /** 
+
+    /**
      * Returns a command based on user input
-     * 
+     *
      * @param userInput
      * @return Command
      * @throws DukeException
@@ -27,7 +27,6 @@ public class Parser {
             return new ExitCommand();
         } else {
             String[] splitInput = userInput.split(" ", 2);
-            
             switch (splitInput[0]) {
 
             case "done":
@@ -77,9 +76,9 @@ public class Parser {
 
             case "find":
                 if (splitInput.length < 2) {
-                  throw new DukeException("Keyword is missing");
+                    throw new DukeException("Keyword is missing");
                 } else {
-                  return new FindCommand(splitInput[1]);
+                    return new FindCommand(splitInput[1]);
                 }
 
             default:
