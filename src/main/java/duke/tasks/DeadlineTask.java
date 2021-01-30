@@ -42,8 +42,8 @@ public class DeadlineTask extends Task {
 
     private String getTimeSaveString() {
         return this.time == null
-        ? ""
-        : " | " + this.time.format(DateTimeFormatter.ofPattern("HHmm"));
+            ? ""
+            : " | " + this.time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     /**
