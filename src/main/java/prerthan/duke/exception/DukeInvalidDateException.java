@@ -3,24 +3,15 @@ package sharadhr.duke.exception;
 /**
  * DukeInvalidDateException
  */
-public class DukeInvalidDateException extends DukeException
-{
+public class DukeInvalidDateException extends DukeException {
     private static final long serialVersionUID = 1967070878565904626L;
 
-    private String dateString;
-    
-    public DukeInvalidDateException(String message, String thrownBy, String dateString)
-    {
-        super("Invalid date format: ", thrownBy);
-        this.dateString = dateString;
+    public DukeInvalidDateException(String thrownBy, String dateString) {
+        super("Invalid date format: " + dateString, thrownBy);
     }
 
-    @Override
-    public String toString()
+    @Override public String toString()
     {
-        return String.format("Message:%s%s%nThrown by:%s%nStack trace:%s", this.getMessage(), 
-                this.dateString,
-                this.thrownBy,
-                getStackTrace());
+        return String.format("%s%nThrown by: %s", this.getMessage(), this.thrownBy);
     }
 }

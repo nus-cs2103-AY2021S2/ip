@@ -1,103 +1,92 @@
 package sharadhr.duke;
 
-import sharadhr.duke.exception.DukeException;
+import java.util.Optional;
+
+import javafx.application.Platform;
+import sharadhr.duke.command.Command;
+import sharadhr.duke.exception.DukeEmptyDetailException;
+import sharadhr.duke.exception.DukeInvalidArgumentException;
+import sharadhr.duke.exception.DukeInvalidCommandException;
+import sharadhr.duke.exception.DukeInvalidDateException;
 import sharadhr.duke.io.Input;
 import sharadhr.duke.io.Output;
 import sharadhr.duke.io.Storage;
+import sharadhr.duke.task.TaskList;
 
 /**
- * 
+ *
  */
 public class Duke
 {
-    static Input reader;
-    static Output writer;
-    static Storage fileRW;
+	public static TaskList tasks;
+	public static Input input;
+	public static Output output;
+	public static Storage fileRW;
+	
+	/**
+	 * Runs the main program loop.
+	 *
+	 * @return {@code false} when the user says 'bye'; otherwise, never returns.
+	 */
+	public static boolean programLoop()
+	{
+		boolean isExit = false;
+		while (!isExit)
+		{
+			try
+			{
+				Optional<Command> possibleCommand = input.nextLine().getCommand();
+				if (!possibleCommand.isPresent())
+				{
+					output.say("Input cannot be empty; please enter a command.");
+					continue;
+				}
+				possibleCommand.get().execute(tasks, fileRW, output);
+				isExit = possibleCommand.get().willTerminate();
+			}
+			catch (DukeInvalidArgumentException | DukeInvalidCommandException | DukeEmptyDetailException
+					| DukeInvalidDateException e)
+			{
+				output.sayError(e);
+			}
+		}
+		return isExit;
+	}
+	
+	/**
+	 * Cleans up objects and quits the program by calling {@link System#exit(int)}.
+	 */
+	public static void exit()
+	{
+		output.sayGoodBye();
+		
+		input.close();
+		output.close();
+		Platform.exit();
+		System.exit(0);
+	}
+	
+	public static void main(String[] args)
+	{
+		// Initialises file and UI I/O
+		fileRW = new Storage("data", "duke.txt");
+		input = new Input();
+		output = new Output();
+		
+		// Greets the user.
+		output.sayHello();
+		
+		// Creates the task list
+		tasks = fileRW.loadFromFile();
+		
+		if (programLoop())
+		{
+			exit();
+		}
+	}
 
-    /**
-     * The program loop that runs whilst the user does not say 'bye'.
-     */
-    public static boolean programLoop()
-    {
-        boolean exitLoop = false;
-        Command command;
-        
-        do {
-            command = Command.whichCommand(reader.nextLine().getFirstToken());
-            exitLoop = command.equals(Command.BYE);
-
-            switch (command)
-            {
-                case TODO:
-                    try
-                    {
-                        Task.addTask(new Todo(reader.inputWithoutFirstToken()));
-                    }
-                    catch (DukeException e)
-                    {
-                        System.err.println("todo detail cannot be empty.");
-                    }
-                    break;
-                case DEADLINE:
-                    Task.addTask(new Deadline(reader.getDetail(), reader.getTime()));
-                    break;
-                case EVENT:
-                    Task.addTask(new Event(reader.getDetail(), reader.getTime()));
-                    break;
-                case LIST:
-                    Task.listTasks();
-                    break;
-                case DONE:
-                    Task.getTaskAtPosition(Integer.parseInt(reader.inputWithoutFirstToken())).markComplete();
-                    break;
-                case DELETE:
-                    Task.deleteTaskAtPosition(Integer.parseInt(reader.inputWithoutFirstToken()));
-                case EMPTY:
-                    continue;
-                case INVALID:
-                    try
-                    {
-                        throw new DukeException();
-                    }
-                    catch (DukeException e)
-                    {
-                        writer.say("Invalid command; try again.");
-                    }
-                case BYE:
-                    break;
-                default:
-                    break;
-            }
-        } while (!exitLoop);
-        return exitLoop;
-    }
-
-    /**
-     * Cleans up objects and quits the program by calling {@link System#exit(int)}.
-     */
-    public static void exit()
-    {
-        writer.sayGoodBye();
-
-        reader.close();
-        writer.close();
-
-        System.exit(0);
-    }
-    
-    public static void main(String[] args)
-    {
-        // Initialises file and UI I/O.
-        fileRW = new Storage("data", "duke.txt");
-        reader = new Input();
-        writer = new Output();
-
-        // Greets the user.
-        writer.sayHello();
-
-        // Creates the task list.
-        Task.createList();
-
-        if (programLoop()) exit();
-    }
+	public String getResponse(String input)
+	{
+		return "";
+	}
 }

@@ -1,7 +1,9 @@
 package sharadhr.duke.command;
 
 import sharadhr.duke.exception.DukeInvalidArgumentException;
+import sharadhr.duke.io.Output;
 import sharadhr.duke.io.Storage;
+import sharadhr.duke.task.Task;
 import sharadhr.duke.task.TaskList;
 
 /**
@@ -9,33 +11,36 @@ import sharadhr.duke.task.TaskList;
  */
 public class DoneCommand extends Command
 {
-    private int position;
-    
-    DoneCommand(String[] commandTokens, int position) throws DukeInvalidArgumentException
-    {
-        super(commandTokens);
-        this.position = position;
-        
-        if (this.argumentTokens.length != 2 || !this.argumentTokens[1].matches("\\d+"))
-            throw new DukeInvalidArgumentException(null, DeleteCommand.class.getSimpleName());
-    }
-    
-    /**
-     * 
-     * @param commandTokens
-     * @throws DukeInvalidArgumentException
-     */
-    public DoneCommand(String[] commandTokens) throws DukeInvalidArgumentException
-    {
-        this(commandTokens, Integer.parseInt(commandTokens[1]));
-    }
-    
-    @Override
-    public void execute(TaskList tasks, Storage storage)
-    {
-        if (!(this.position >= 1) && this.position <= tasks.numberOfTasks())
-        {
-            tasks.deleteTaskAtPosition(position);
-        }
-    }
+	private int position;
+
+	DoneCommand(String[] commandTokens, int position) throws DukeInvalidArgumentException
+	{
+
+		// if (this.argumentTokens.length != 1 || !this.argumentTokens[0].matches("\\d+")) {
+		//     throw new DukeInvalidArgumentException(argument, this.commandName, this.getClass().getSimpleName());
+		// }
+		// this.commandName = CommandName.DONE;
+		// this.position = position;
+	}
+
+	/**
+	 * @param argumentTokens
+	 * @throws DukeInvalidArgumentException
+	 */
+	public DoneCommand(String[] argumentTokens) throws DukeInvalidArgumentException
+	{
+		this(argumentTokens, Integer.parseInt(argumentTokens[1]));
+	}
+
+	@Override public void execute(TaskList tasks, Storage storage, Output output)
+	{
+		if (!(this.position >= 1) && this.position <= tasks.numberOfTasks())
+		{
+			Task toComplete = tasks.getTaskAtPosition(position);
+			if (toComplete.markComplete())
+			{
+				output.sayTaskMarkedComplete(toComplete);
+			}
+		}
+	}
 }
