@@ -23,7 +23,7 @@ public class DukeTest {
     }
 
     @Test
-    public void parseCommandTest() {
+    public void parseCommandTest_givenEventWithDate_commandIsEqual() {
         ParseCommands parseCommandsA = new ParseCommands(CommandList.EVENT, "Eat Cake /at Mar 20 2021");
         try {
             ParseCommands parseCommandsB = ParseCommands.parseLine("eVenT Eat Cake /at Mar 20 2021", 0);

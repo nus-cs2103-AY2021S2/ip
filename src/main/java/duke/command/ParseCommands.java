@@ -50,9 +50,11 @@ public class ParseCommands {
             command = input.substring(0, first).toUpperCase();
             line = input.substring(first).strip();
         }
+
         commandList = changeToCommand(command);
         checkCommand(input, commandList, first, counter);
         parseCommands = new ParseCommands(commandList, line);
+
         return parseCommands;
     }
 
@@ -160,17 +162,20 @@ public class ParseCommands {
             }
             break;
         case LIST:
+            //Fallthrough
         case BYE:
+            //Fallthrough
         default:
             break;
         }
     }
 
+
     /**
      * This method is used to get if the command is an exit command.
      * @return This returns a boolean that shows if the command given is to exit the system
      */
-    public boolean getIsExit() {
+    public boolean canExit() {
         return this.isExit;
     }
 

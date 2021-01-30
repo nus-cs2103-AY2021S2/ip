@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class Storage {
     private FileWriter fio;
     private final File file;
-    private final ArrayList<Task> arrL;
+    private final ArrayList<Task> tasks;
 
     /**
      * This is the Constructor for Storage. Creates a new ArrayList to store Tasks, initiates File and populates list.
@@ -28,7 +28,13 @@ public class Storage {
         ArrayList<Task> arr = new ArrayList<>();
         this.file = initiateFile();
         populateList(arr);
-        this.arrL = arr;
+        this.tasks = arr;
+        try {
+            this.fio = new FileWriter(file);
+        } catch (IOException e) {
+            System.out.println("Unable to create FileWriter");
+            e.printStackTrace();
+        }
     }
 
     private File initiateFile () {
@@ -115,7 +121,7 @@ public class Storage {
      */
     public void beginClose() {
         this.initialiseFW();
-        for (Task task: this.arrL) {
+        for (Task task: this.tasks) {
             writeToFile(task);
         }
     }
@@ -134,18 +140,18 @@ public class Storage {
     }
 
     public void add(Task task) {
-        this.arrL.add(task);
+        this.tasks.add(task);
     }
 
     public Task remove(int index) {
-        return this.arrL.remove(index);
+        return this.tasks.remove(index);
     }
 
     public int getArrSize() {
-        return arrL.size();
+        return tasks.size();
     }
 
     public Task get(int index) {
-        return this.arrL.get(index);
+        return this.tasks.get(index);
     }
 }

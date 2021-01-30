@@ -31,7 +31,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ParseCommands parseCommands = ParseCommands.parseLine(fullCommand, this.fio.getArrSize());
                 parseCommands.executeCommand(ui, this.fio);
-                isExit = parseCommands.getIsExit();
+                isExit = parseCommands.canExit();
             } catch (DukeException e) {
                 ui.showError(e.toString());
             }
