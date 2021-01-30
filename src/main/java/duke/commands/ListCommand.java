@@ -1,10 +1,8 @@
 package duke.commands;
 
-import duke.tasks.TaskList;
-
-import duke.ui.Ui;
-
 import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Responsible for listing the contents of TaskList.
