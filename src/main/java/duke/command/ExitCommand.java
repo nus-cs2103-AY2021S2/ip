@@ -1,6 +1,7 @@
 package duke.command;
 
 
+
 /**
  * Sub-class of command that represents and execute the "bye" instruction of user.
  */

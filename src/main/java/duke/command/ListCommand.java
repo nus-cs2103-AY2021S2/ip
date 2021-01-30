@@ -1,15 +1,17 @@
 package duke.command;
 
-import duke.ui.Ui;
-
 
 /**
  * Sub-class of Command that represents and execute the "list" instruction of user.
  */
+
+import duke.task.TaskList;
+
+
 public class ListCommand extends Command{
 	public ListCommand() {
 		super("", "", "", command -> {
-			Ui.LISTING();
+			TaskList.listing();
 			return false;
 		});
 	}

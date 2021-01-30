@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * A class that store all the possible String format for Duke for code simplicity.
@@ -39,8 +40,6 @@ public class Ui {
     public static final String EMPTY_FILE = "********** Awwww~ You don't have any history of tasks **********\n";
     public static final String SUCESSFUL_LOAD = "***********Sir, here is your past history************";
 
-
-
     public static void doneTask(Task t) {
         System.out.println(Ui.UPPER + "Wah~ You done the task: "
                 + " " + t.toString() + Ui.LOWER);
@@ -62,26 +61,16 @@ public class Ui {
                 + Ui.LOWER;
     }
 
-    /**
-     * Display all the current task and status store in the tasklist.
-     *
-     */
-    public static void LISTING() {
-        System.out.println(UPPER);
-        for (Task task : Task.getTaskList()) {
-            if (task == null) break;
-            System.out.println(task);
-        }
-        System.out.println(LOWER);
-    }
+
 
     public static void DONELOADING() {
         System.out.println(UPPER);
-        for (Task task : Task.getTaskList()) {
+        System.out.println("~~~~~Sir, here is your past history: ");
+        for (Task task : TaskList.getTaskList()) {
             if (task == null) break;
             System.out.println(task);
         }
-        System.out.println("Sir, here is your past history");
+
         System.out.println(LOWER);
     }
 

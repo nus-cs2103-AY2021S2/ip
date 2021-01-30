@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.task.Deadlines;
-import duke.task.Event;
-import duke.task.Todo;
+import duke.task.*;
 import duke.ui.Ui;
+
 
 
 /**
@@ -24,14 +23,15 @@ public class AddCommand extends Command{
 
 
 
+
 	/**
 	 * handle todo command and create a todo task if task is not empty.
 	 * @param task name of the user task.
 	 */
 	private static Boolean handleToDo(String task) {
-
 		if (!task.equals("")) {
 			Todo todo = new Todo(task);
+			TaskList.addTask(todo);
 			System.out.println(Ui.biggerBox(todo));
 		}
 		return false;
@@ -43,6 +43,7 @@ public class AddCommand extends Command{
 
 		if (!date.equals("")) {
 			Deadlines deadlines = new Deadlines(task, date);
+			TaskList.addTask(deadlines);
 			System.out.println(Ui.biggerBox(deadlines));
 		}
 
@@ -54,6 +55,7 @@ public class AddCommand extends Command{
 	private static Boolean handleEvent(String task, String date) {
 		if (!task.equals("") && !date.equals("")) {
 			Event event = new Event(task, date);
+			TaskList.addTask(event);
 			System.out.println(Ui.biggerBox(event));
 
 		}

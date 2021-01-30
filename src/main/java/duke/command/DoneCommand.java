@@ -1,7 +1,8 @@
 package duke.command;
 
 import duke.exceptions.DukeException;
-import duke.task.Task;
+import duke.task.TaskList;
+
 
 
 /**
@@ -11,9 +12,11 @@ import duke.task.Task;
 public class DoneCommand extends Command {
 
 
+
 	public DoneCommand(String task, String date) {
 		super("done", task, date, command -> handleDone(task));
 	}
+
 
 
 	/**
@@ -21,11 +24,10 @@ public class DoneCommand extends Command {
 	 * @param task name of the user task.
 	 */
 	private static Boolean handleDone(String task) {
-
 		if (task.length() > 0) {
 			try {
 				int num = Integer.parseInt(task);
-				Task.done(num);
+				TaskList.done(num);
 			} catch (NumberFormatException e) {
 				DukeException.NumberFormatException();
 			}

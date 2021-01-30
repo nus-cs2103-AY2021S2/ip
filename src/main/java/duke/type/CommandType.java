@@ -11,12 +11,10 @@ public enum CommandType {
 	BYE("bye"),
 	DONE("done"),
 	LIST("list"),
+	FIND("find"),
 	DELETE("delete");
 
 	private final String type;
-
-
-
 
 
 	/**

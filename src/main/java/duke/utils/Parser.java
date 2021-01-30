@@ -64,6 +64,9 @@ public class Parser {
 		case "delete":
 			command = new DeleteCommand(taskName, date);
 			break;
+		case "find":
+			command = new FindCommand(taskName, date);
+			break;
 		default:
 			break;
 		}
@@ -101,7 +104,7 @@ public class Parser {
 	static String extractTask(String input, String command) throws DukeException {
 		String body = input.replaceAll(command, "").trim();
 		switch (command) {
-		case "todo":
+		case "todo": case "find":
 			if (body.equals("")) {
 				throw new DukeException(Ui.EMPTY_TASK);
 			} else {
