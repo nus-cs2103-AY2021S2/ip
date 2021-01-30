@@ -11,10 +11,9 @@ import duke.Ui;
 import duke.Parser;
 import duke.DukeException;
 
-
 import java.io.IOException;
-import java.util.Scanner;
 
+import java.util.Scanner;
 
 public class Duke {
     private Ui ui;

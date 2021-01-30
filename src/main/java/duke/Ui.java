@@ -7,7 +7,6 @@ import duke.Deadline;
 import duke.Event;
 import duke.Duke;
 
-
 public class Ui {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
 

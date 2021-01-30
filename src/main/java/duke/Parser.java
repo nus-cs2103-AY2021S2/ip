@@ -8,6 +8,7 @@ import duke.Event;
 import java.time.Month;
 
 public class Parser {
+
     public String parseDate(String unformattedDate) {
         String[] dateArr = unformattedDate.split(" ");
         String monthString = String.format("%02d", Month.valueOf(dateArr[0].toUpperCase()).getValue());
@@ -16,7 +17,6 @@ public class Parser {
         String formattedDate = year + "-" + monthString + "-" + day;
         return formattedDate;
     }
-
 
     public ToDo parseAddTodo(String command) {
         System.out.println(command.substring(5));
@@ -38,7 +38,6 @@ public class Parser {
     public int parseDeleteCommand(String command) {
         return Integer.parseInt(command.split("")[1]);
     }
-
 
 }
 
