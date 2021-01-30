@@ -1,14 +1,13 @@
 package duke.commands;
 
-import duke.storage.Storage;
-
-import duke.ui.Ui;
-
-import duke.exceptions.*;
-
-import duke.tasks.TaskList;
-
 import java.io.IOException;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.TaskNotFoundException;
+import duke.exceptions.TaskSelectionInvalidException;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Responsible for dealing with the completion of tasks.
