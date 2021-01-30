@@ -18,7 +18,7 @@ public class FindCommand extends Command {
             int matchingResults = 0;
             String output = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.getTasks().size(); i++) {
-                if (tasks.getTasks().get(i).getDescription().contains(this.keyword)) {
+                if (tasks.getTasks().get(i).getDescription().toLowerCase().contains(this.keyword.toLowerCase())) {
                     output += (i + 1)+". " + tasks.getTasks().get(i) + "\n";
                     matchingResults++;
                 }
