@@ -14,6 +14,7 @@ import java.time.format.DateTimeParseException;
  * Parses input from Duke
  */
 public class Parser {
+
     /**
      * Parses user input to return the corresponding command
      * @param input the corresponding command type
