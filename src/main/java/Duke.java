@@ -2,11 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * the agent program to run Duke
+ */
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -88,7 +93,7 @@ public class Duke {
                 } else {
                     title = substr.substring(0, idxOfBy - 1);
                     String deadline = substr.substring(idxOfBy + 4);
-                    newTask = new Deadline(title, deadline);
+                    newTask = new Deadline(title, LocalDate.parse(deadline));
                     tasks.add(newTask);
                 }
                 break;
@@ -99,7 +104,7 @@ public class Duke {
                 } else {
                     title = substr.substring(0, idxOfAt - 1);
                     String time = substr.substring(idxOfAt + 4);
-                    newTask = new Event(title, time);
+                    newTask = new Event(title, LocalDate.parse(time));
                     tasks.add(newTask);
                 }
                 break;
@@ -180,6 +185,9 @@ public class Duke {
         return true;
     }
 
+    /**
+     * prints the farewell message
+     */
     public static void sayBye() {
         printMsg("Bye. Hope to see you again soon!");
     }
@@ -215,6 +223,7 @@ public class Duke {
 
     public static void loadFromFile() throws DukeException {
         // make the folder called data if not found
+
         File dir = new File("./data");
         if (!dir.exists() || !dir.isDirectory()) {
             dir.mkdir();
@@ -226,6 +235,7 @@ public class Duke {
             while (sc.hasNextLine()) {
                 tasks.add(parseTask(sc.nextLine()));
             }
+            sc.close();
         } catch (FileNotFoundException e) {
             throw new DukeException("cannot load from file!");
         }
@@ -247,14 +257,17 @@ public class Duke {
                     r = Pattern.compile(pattern);
                     m = r.matcher(body);
                     if (m.find()) {
-                        return new Deadline(m.group(1), isDone, m.group(2));
+                        LocalDate deadline = LocalDate.parse(m.group(2), DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        return new Deadline(m.group(1), isDone, deadline);
                     }
                 case 'E':
                     pattern = "(.*) \\(at: (.*)\\)";
                     r = Pattern.compile(pattern);
                     m = r.matcher(body);
                     if (m.find()) {
-                        return new Event(m.group(1), isDone, m.group(2));
+                        System.out.println(m.group(2) + ".");
+                        LocalDate time = LocalDate.parse(m.group(2), DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        return new Event(m.group(1), isDone, time);
                     }
                 default:
                     throw new Exception();

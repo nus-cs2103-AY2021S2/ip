@@ -1,0 +1,5 @@
+[E][X] project meeting (at: Oct 15 2019)
+[T][X] sports
+[T][ ] shopping
+[D][ ] return book (by: Oct 15 2019)
+[E][ ] project meeting (at: Oct 15 2019)
