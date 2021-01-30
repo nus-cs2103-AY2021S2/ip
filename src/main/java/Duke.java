@@ -12,10 +12,10 @@ public class Duke {
 
         Storage storage = new Storage(System.getProperty("user.dir") + "/data/duke.txt");
         Parser parser = new Parser();
-        TaskList tasklist = new TaskList(storage, ui);
+        TaskList taskList = new TaskList(storage, ui);
 
         try {
-            storage.loadFileContents(tasklist.tasks);
+            storage.loadFileContents(taskList.tasks);
         } catch (FileNotFoundException e) {
             storage.createFile();
         }
@@ -36,29 +36,29 @@ public class Duke {
                     ui.printBye();
                     break loop;
                 case "list":
-                    tasklist.listTask();
+                    taskList.listTask();
                     break;
                 case "done":
                     taskIndex = Integer.parseInt(result.get(1));
-                    tasklist.doneTask(taskIndex);
+                    taskList.doneTask(taskIndex);
                     break;
                 case "delete":
                     taskIndex = Integer.parseInt(result.get(1));
-                    tasklist.deleteTask(taskIndex);
+                    taskList.deleteTask(taskIndex);
                     break;
                 case "todo":
                     description = result.get(1);
-                    tasklist.addTodo(description);
+                    taskList.addTodo(description);
                     break;
                 case "deadline":
                     description = result.get(1);
                     date = result.get(2);
-                    tasklist.addDeadline(description, date);
+                    taskList.addDeadline(description, date);
                     break;
                 case "event":
                     description = result.get(1);
                     date = result.get(2);
-                    tasklist.addEvent(description, date);
+                    taskList.addEvent(description, date);
                     break;
                 default:
                     ui.printIdkError();
