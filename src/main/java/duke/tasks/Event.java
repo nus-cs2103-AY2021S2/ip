@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.Parser;
-
 import java.time.LocalDate;
+
+import duke.Parser;
 
 /**
  * Represents the subclass of Task. It contains the description of the task and the date of the

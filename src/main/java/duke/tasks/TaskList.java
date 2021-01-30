@@ -1,5 +1,9 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.Parser;
 import duke.commands.SpecificCommandType;
 import duke.exceptions.DukeEmptyListException;
@@ -7,10 +11,6 @@ import duke.exceptions.DukeNoDescriptionException;
 import duke.exceptions.DukeUnknownArgumentsException;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * Represent the TaskList to store all the tasks inputted by the user. Tasklist contains a Ui

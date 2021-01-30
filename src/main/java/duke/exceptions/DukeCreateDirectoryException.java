@@ -4,7 +4,7 @@ package duke.exceptions;
  * Represent the exception when a directory cannot be created.
  */
 public class DukeCreateDirectoryException extends DukeException {
-    String dir;
+    private final String dir;
 
     /**
      * Construct a DukeCreateDirectoryException containing the string representation of the

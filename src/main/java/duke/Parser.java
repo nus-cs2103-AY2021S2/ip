@@ -1,45 +1,45 @@
 package duke;
 
-import duke.commands.SpecificCommandType;
-import duke.commands.BasicCommandType;
-import duke.exceptions.DukeCorruptedStorageException;
-import duke.exceptions.DukeNoDescriptionException;
-import duke.exceptions.DukeUnknownArgumentsException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.commands.BasicCommandType;
+import duke.commands.SpecificCommandType;
+import duke.exceptions.DukeCorruptedStorageException;
+import duke.exceptions.DukeNoDescriptionException;
+import duke.exceptions.DukeUnknownArgumentsException;
 
 /**
  * Represents a Parser class to parse input to specified outputs based on inputs.
  */
 public class Parser {
-    public static final String DEADLINE_COMMAND = "deadline";
+    private static final String DEADLINE_COMMAND = "deadline";
     private static final String DONE_COMMAND = "done";
-    public static final String LIST_COMMAND = "list";
-    public static final String DELETE_COMMAND = "delete";
-    public static final String TODO_COMMAND = "todo";
-    public static final String EVENT_COMMAND = "event";
-    public static final String FIND_COMMAND = "find";
-    public static final int TODO_MIN_ARGUMENTS = 2;
-    public static final int TODO_DESCRIPTION = 5;
-    public static final int ENCODE_DATE_PARAM = 3;
-    public static final int DESCRIPTION_PARAM = 0;
-    public static final String DATE_SEPARATOR = "/";
-    public static final int DATE_INPUT_MIN_ARGUMENTS = 4;
-    public static final int INDEX_PADDING = 1;
-    public static final String TODO_COMMAND_TYPE = "T";
-    public static final String DEADLINE_COMMAND_TYPE = "D";
-    public static final String EVENT_COMMAND_TYPE = "E";
-    public static final String DATA_SEPARATOR = " \\| ";
-    public static final int TODO_COMMAND_TYPE_PARAM = 0;
-    public static final int TODO_DESCRIPTION_PARAM = 2;
-    public static final int IS_DONE_PARAM = 1;
-    public static final String DONE_ENCODING = "1";
-    public static final String NOT_DONE_ENCODING = "0";
-    public static final int DATE_PARAM = 1;
-    public static final int DATE_POSTFIX = 3;
-    public static final int FIND_MIN_ARGUMENTS = 2;
+    private static final String LIST_COMMAND = "list";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String TODO_COMMAND = "todo";
+    private static final String EVENT_COMMAND = "event";
+    private static final String FIND_COMMAND = "find";
+    private static final int TODO_MIN_ARGUMENTS = 2;
+    private static final int TODO_DESCRIPTION = 5;
+    private static final int ENCODE_DATE_PARAM = 3;
+    private static final int DESCRIPTION_PARAM = 0;
+    private static final String DATE_SEPARATOR = "/";
+    private static final int DATE_INPUT_MIN_ARGUMENTS = 4;
+    private static final int INDEX_PADDING = 1;
+    private static final String TODO_COMMAND_TYPE = "T";
+    private static final String DEADLINE_COMMAND_TYPE = "D";
+    private static final String EVENT_COMMAND_TYPE = "E";
+    private static final String DATA_SEPARATOR = " \\| ";
+    private static final int TODO_COMMAND_TYPE_PARAM = 0;
+    private static final int TODO_DESCRIPTION_PARAM = 2;
+    private static final int IS_DONE_PARAM = 1;
+    private static final String DONE_ENCODING = "1";
+    private static final String NOT_DONE_ENCODING = "0";
+    private static final int DATE_PARAM = 1;
+    private static final int DATE_POSTFIX = 3;
+    private static final int FIND_MIN_ARGUMENTS = 2;
 
     /**
      * Return a string representation based on LocalDate.

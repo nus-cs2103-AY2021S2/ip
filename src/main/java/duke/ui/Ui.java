@@ -1,5 +1,10 @@
 package duke.ui;
 
+import java.io.PrintStream;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exceptions.DukeCorruptedStorageException;
 import duke.exceptions.DukeCreateDirectoryException;
 import duke.exceptions.DukeCreateFileException;
@@ -10,15 +15,14 @@ import duke.exceptions.DukeUnknownArgumentsException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-import java.io.PrintStream;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Constructor for ui to using default system.in to read inputs and PrintStream out to
+     * display outputs.
+     */
     public Ui() {
         this.in = new Scanner(System.in);
         this.out = System.out;

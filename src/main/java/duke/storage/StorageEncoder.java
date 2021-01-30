@@ -1,8 +1,8 @@
 package duke.storage;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * Represents an encoder used to encode TaskList into its data representation.

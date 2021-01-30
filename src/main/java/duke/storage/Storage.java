@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.exceptions.DukeCreateDirectoryException;
-import duke.exceptions.DukeCreateFileException;
-import duke.exceptions.DukeSaveFileException;
-import duke.tasks.Task;
-import duke.exceptions.DukeCorruptedStorageException;
-import duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,14 +9,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.DukeCorruptedStorageException;
+import duke.exceptions.DukeCreateDirectoryException;
+import duke.exceptions.DukeCreateFileException;
+import duke.exceptions.DukeSaveFileException;
+import duke.tasks.Task;
+import duke.ui.Ui;
+
 /**
  * Represents the Storage file that is used to store and update the save file.
  */
 public class Storage {
     private static final String DATA_DIR = new File("data").getAbsolutePath();
-    private final File saveFile = new File(DATA_DIR + "/save.txt");
-    private static Storage INSTANCE;
+    private static Storage storage;
     private static final Ui ui = new Ui();
+    private final File saveFile = new File(DATA_DIR + "/save.txt");
 
     private Storage() {
         createDirectory();
@@ -34,10 +34,10 @@ public class Storage {
      * @return a new or existing Storage class.
      */
     public static Storage getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Storage();
+        if (storage == null) {
+            storage = new Storage();
         }
-        return INSTANCE;
+        return storage;
     }
 
     /**
