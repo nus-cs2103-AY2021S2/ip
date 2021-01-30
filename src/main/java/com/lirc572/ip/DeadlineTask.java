@@ -17,7 +17,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructs a new DeadlineTask with the specified name
-     * @param name name of the task
+     * @param name The name of the task
      */
     public DeadlineTask(String name) {
         super(name);
@@ -25,8 +25,8 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructs a new DeadlineTask with the specified name and deadline
-     * @param name name of the task
-     * @param dueTime deadline of the task
+     * @param name The name of the task
+     * @param dueTime The deadline of the task
      */
     public DeadlineTask(String name, String dueTime) {
         super(name);
@@ -35,7 +35,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Sets the deadline of the DeadlineTask
-     * @param dueTime the new deadline
+     * @param dueTime The new deadline
      */
     public void setDueTime(String dueTime) {
         this.dueTime = LocalDateTime.parse(dueTime, this.format);
@@ -43,7 +43,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns the deadline of the DeadlineTask
-     * @return deadline of the DeadlineTask
+     * @return The deadline of the DeadlineTask
      */
     public String getDueTime() {
         return this.dueTime.format(this.format);
@@ -51,7 +51,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns the string representation of the DeadlineTask for storage
-     * @return string representation of the DeadlineTask for storage
+     * @return The string representation of the DeadlineTask for storage
      */
     @Override
     public String toSavedString() {
