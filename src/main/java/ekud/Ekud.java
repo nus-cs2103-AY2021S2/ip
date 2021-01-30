@@ -24,6 +24,13 @@ public class Ekud {
         }
     }
 
+    /**
+     * Process the given command and return a summary if any.
+     *
+     * @param fullCommand The full command to be processed.
+     * @return Summary of the completed transaction.
+     * @throws EkudException If any exceptions are encountered during the execution.
+     */
     public String getResponse(String fullCommand) throws EkudException {
         Command c = Parser.parse(fullCommand);
         return c.execute(tasks, storage);
