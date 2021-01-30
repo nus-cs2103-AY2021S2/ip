@@ -3,15 +3,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.scene.image.Image;
+import javafx.scene.control.Label;
 
 public class Duke {
     private Storage storage;
     private TaskManager taskManager;
     private Ui ui;
 
-    public Duke(String filePath) {
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/image1.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/image2.jpg"));
+
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("./src/main/data/Data.txt");
         taskManager = new TaskManager();
         try {
             ArrayList<String> oldData = storage.load();
@@ -43,7 +48,29 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("./src/main/data/Data.txt").run();
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return input;
+    }
+
+    //public static void main(String[] args) {
+    //    new Duke("./src/main/data/Data.txt").run();
+    //}
 }
