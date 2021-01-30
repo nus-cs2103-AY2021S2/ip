@@ -1,10 +1,9 @@
 package duke.util;
 
-import java.util.List;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * Represents an Event task.
@@ -12,6 +11,15 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     private static final String TYPE = "E";
+
+    private Event(String description, LocalDate date) {
+        super(description, date);
+    }
+
+    private Event(String description, LocalDate date, boolean isDone) {
+        super(description, date);
+        this.isDone = isDone;
+    }
 
     /**
      * Factory method for creating Event task.
@@ -28,7 +36,7 @@ public class Event extends Task {
         }
 
         LocalDate date;
-        
+
         try {
             date = LocalDate.parse(details[1]);
         } catch (DateTimeParseException e) {
@@ -36,15 +44,6 @@ public class Event extends Task {
         }
 
         return new Event(details[0], date);
-    }
-
-    private Event(String description, LocalDate date) {
-        super(description, date);
-    }
-
-    private Event(boolean isDone, String description, LocalDate date) {
-        super(description, date);
-        this.isDone = isDone;
     }
 
     @Override
@@ -71,6 +70,6 @@ public class Event extends Task {
      */
     protected static Event importData(String[] args) {
         boolean isDone = args[1].equals("1");
-        return new Event(isDone, args[2], LocalDate.parse(args[3]));
+        return new Event(args[2], LocalDate.parse(args[3]), isDone);
     }
 }

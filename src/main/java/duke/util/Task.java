@@ -1,7 +1,7 @@
 package duke.util;
 
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Represents a Task.

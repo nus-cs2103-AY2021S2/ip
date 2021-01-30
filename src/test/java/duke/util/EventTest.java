@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
-    
+
     @Test
     public void createEventTest() {
         assertThrows(DukeException.class, () -> Event.createEvent(""));

@@ -20,10 +20,10 @@ public class Parser {
         String command = s[0];
         String args = s.length == 2 ? s[1] : "";
 
-        switch (command) { 
-        case "bye": 
-            break; 
-        case "list": 
+        switch (command) {
+        case "bye":
+            break;
+        case "list":
             break;
         case "done":
             checkValidDone(args);
@@ -49,9 +49,9 @@ public class Parser {
         case "search":
             checkValidSearch(args);
             break;
-        default: 
+        default:
             throw new DukeInputException("I'm sorry, but I don't know what that means :-(");
-        } 
+        }
     }
 
     /**
@@ -60,7 +60,7 @@ public class Parser {
      * @throws DukeInputException If input is invalid.
      */
     public static void checkImportFormat(String input) throws DukeInputException {
-        String[] s = input.split(";",3);
+        String[] s = input.split(";", 3);
 
         if (s.length == 3 && (s[1].equals("0") || s[1].equals("1"))) {
 

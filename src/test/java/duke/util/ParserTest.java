@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class ParserTest {
-    
+
     @Test
     public void parseInputTest() {
         assertThrows(DukeInputException.class, () -> Parser.parseInput(""));
@@ -26,7 +26,7 @@ public class ParserTest {
         assertThrows(DukeInputException.class, () -> Parser.parseInput("done a"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("done 1a2"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("done     1"));
-        
+
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete a"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete 1a2"));

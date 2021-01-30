@@ -1,21 +1,21 @@
 package duke;
 
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.util.Ui;
-import duke.util.Parser;
+import duke.util.Deadline;
 import duke.util.DukeException;
 import duke.util.DukeInputException;
-import duke.util.Task;
-import duke.util.Todo;
-import duke.util.Deadline;
 import duke.util.Event;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Task;
+import duke.util.TaskList;
+import duke.util.Todo;
+import duke.util.Ui;
 
 /**
  * Duke is a task manager.
- * 
- * <p>Currently supports these functionalities:
- * <br>bye 
+ * <p>
+ * Currently supports these functionalities:
+ * <br>bye
  * <br>  - Prompt user to save tasklist. Then closes Duke.
  * <br>list
  * <br>  - List out all task
@@ -52,7 +52,7 @@ public class Duke {
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
-        
+
         try {
             tasks = new TaskList(storage.loadTaskList());
         } catch (DukeException e) {
@@ -60,6 +60,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method. Creates Duke object and calls start().
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/dukeData.txt");
         duke.start();
@@ -87,15 +90,15 @@ public class Duke {
             String args = s.length == 2 ? s[1] : "";
 
             try {
-                switch (command) { 
-                case "bye": 
+                switch (command) {
+                case "bye":
                     if (exit()) {
                         return;
                     }
                     break;
-                case "list": 
+                case "list":
                     ui.displayList(tasks.listOutTask());
-                    break; 
+                    break;
                 case "done":
                     completeTask(args);
                     break;
@@ -125,7 +128,10 @@ public class Duke {
                 case "search":
                     ui.displayList(tasks.search(args));
                     break;
-                } 
+                default:
+                    // Should never reach here unless parser missed an invalid input.
+                    assert false : "Parser missed an invalid input";
+                }
             } catch (DukeException e) {
                 ui.displayError(e);
             }

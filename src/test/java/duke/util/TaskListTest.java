@@ -1,15 +1,15 @@
 package duke.util;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 public class TaskListTest {
-    
-    TaskList lst = new TaskList();
+
+    private TaskList lst = new TaskList();
 
     @Test
     public void deleteTaskTest() throws DukeException {

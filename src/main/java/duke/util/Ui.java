@@ -1,7 +1,7 @@
 package duke.util;
 
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Ui interacts with users to receive input and display output.
@@ -10,7 +10,7 @@ public class Ui {
 
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"   
+            + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String BORDER_LINE = "\t____________________________________________________________";

@@ -1,22 +1,21 @@
 package duke.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * Storage to save tasklist to a text file.
- * 
- * <p>Default path is "data/dukeData.txt".
+ * <p>
+ * Default path is "data/dukeData.txt".
  */
 public class Storage {
-    private File file;
     private static final String DEFAULT_PATH = "data/dukeData.txt";
+    private File file;
 
     /**
      * Create storage with default path "data/dukeData.txt".
@@ -82,7 +81,7 @@ public class Storage {
             }
 
             String[] s = input.split(";");
-            
+
             switch (s[0]) {
             case "T":
                 lst.add(Todo.importData(s));
@@ -93,6 +92,9 @@ public class Storage {
             case "E":
                 lst.add(Event.importData(s));
                 break;
+            default:
+                // Should never reach here unless parser missed an invalid input.
+                assert false : "Parser missed an invalid input";
             }
         }
         return lst;

@@ -1,10 +1,9 @@
 package duke.util;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Wrapper class for tasklist.
@@ -83,7 +82,7 @@ public class TaskList {
         for (Task t : lst) {
             stringlst.add(String.format("%d. %s", counter++, t.toString()));
         }
-        
+
         return stringlst;
     }
 
@@ -138,7 +137,7 @@ public class TaskList {
                     results.add(String.format("%d. %s", i + 1, lst.get(i).toString()));
                 }
             }
-    
+
             return results;
         }
     }

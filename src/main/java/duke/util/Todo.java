@@ -9,6 +9,15 @@ public class Todo extends Task {
 
     private static final String TYPE = "T";
 
+    private Todo(String description) {
+        super(description);
+    }
+
+    private Todo(String description, boolean isDone) {
+        super(description);
+        this.isDone = isDone;
+    }
+
     /**
      * Factory method for creating Todo task.
      * @param description Description of the task
@@ -22,15 +31,6 @@ public class Todo extends Task {
         return new Todo(description);
     }
 
-    private Todo(String description) {
-        super(description);
-    }
-
-    private Todo(boolean isDone, String description) {
-        super(description);
-        this.isDone = isDone;
-    }
-    
     @Override
     public String toString() {
         return String.format("[%s]%s", TYPE, super.toString());
@@ -51,6 +51,6 @@ public class Todo extends Task {
      */
     protected static Todo importData(String[] args) {
         boolean isDone = args[1].equals("1");
-        return new Todo(isDone, args[2]);
+        return new Todo(args[2], isDone);
     }
 }
