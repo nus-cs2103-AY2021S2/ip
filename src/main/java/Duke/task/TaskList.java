@@ -1,9 +1,9 @@
-package Duke.task;
+package duke.task;
 
-import Duke.common.Response;
-import Duke.exception.EmptyDescription;
-import Duke.parser.ListParser;
-import Duke.parser.Parser;
+import duke.common.Response;
+import duke.exception.EmptyDescription;
+import duke.parser.ListParser;
+import duke.parser.Parser;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

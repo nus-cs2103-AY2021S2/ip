@@ -1,4 +1,4 @@
-package Duke.common;
+package duke.common;
 
 /**
  * Stores all generic string responses back to user.

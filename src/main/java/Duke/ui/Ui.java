@@ -1,10 +1,10 @@
-package Duke.ui;
+package duke.ui;
 
-import Duke.common.Response;
-import Duke.exception.EmptyDescription;
-import Duke.exception.InvalidTypeOfTask;
-import Duke.parser.Parser;
-import Duke.task.TaskList;
+import duke.common.Response;
+import duke.exception.EmptyDescription;
+import duke.exception.InvalidTypeOfTask;
+import duke.parser.Parser;
+import duke.task.TaskList;
 
 import java.util.Scanner;
 

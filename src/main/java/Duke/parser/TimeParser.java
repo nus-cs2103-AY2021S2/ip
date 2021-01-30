@@ -1,8 +1,7 @@
-package Duke.parser;
+package duke.parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class TimeParser {
     private LocalDateTime time;

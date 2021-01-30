@@ -1,10 +1,10 @@
-package Duke;
+package duke;
 
-import Duke.exception.EmptyDescription;
-import Duke.exception.InvalidTypeOfTask;
-import Duke.storage.Storage;
-import Duke.task.TaskList;
-import Duke.ui.Ui;
+import duke.exception.EmptyDescription;
+import duke.exception.InvalidTypeOfTask;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.Scanner;

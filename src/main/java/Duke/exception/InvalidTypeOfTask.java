@@ -1,4 +1,4 @@
-package Duke.exception;
+package duke.exception;
 
 /**
  * Represent a invalid TypeOfTask parsed from user input.

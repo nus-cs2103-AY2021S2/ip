@@ -1,8 +1,8 @@
-package Duke.storage;
+package duke.storage;
 
-import Duke.parser.ListParser;
-import Duke.task.Task;
-import Duke.task.TaskList;
+import duke.parser.ListParser;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
