@@ -25,20 +25,6 @@ public class Task {
         return "[ ]";
     }
 
-    public Task taskParser(String record) {
-        if (record.contains("[T]")) {
-
-            if (record.contains("\u2713")) {
-                String[] description = record.split("\u2713 ");
-                String content = description[1];
-                Todo myTodo = new Todo(content);
-                myTodo.markAsDone();
-                return myTodo;
-            }
-        }
-        return new Todo("xxx");
-    }
-
 
     @Override
     public String toString() {
