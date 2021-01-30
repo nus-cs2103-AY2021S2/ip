@@ -154,14 +154,13 @@ public class Parser {
 
                 ArrayList<Task> tt = new ArrayList<>();
 
-                for (Task task : arrayList) {
-                    tt.add(task);
-                }
+                int counterOne = 1;
 
-                for (Iterator<Task> iterator = tt.iterator(); iterator.hasNext();) {
-                    Task ttt = iterator.next();
-                    if(!ttt.description.contains(input.substring(5))) {
-                        iterator.remove();
+                for (Task ttt :arrayList) {
+                    if (ttt.description.contains(input.substring(5))) {
+                        ttt.index = counterOne;
+                        tt.add(ttt);
+                        counterOne++;
                     }
                 }
 
@@ -170,6 +169,11 @@ public class Parser {
                     System.out.print("\n");
                 }
                 System.out.println("--------------------------");
+            }
+            int counterTwo = 1;
+            for (Task s : arrayList) {
+                s.index = counterTwo;
+                counterTwo++;
             }
             new Storage().savingFile(arrayList, path);
         }
