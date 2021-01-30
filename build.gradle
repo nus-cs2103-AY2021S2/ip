@@ -1,7 +1,7 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'java'
-		id 'checkstyle'
+	id 'checkstyle'
 }
 
 jar {
