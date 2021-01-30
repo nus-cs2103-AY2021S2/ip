@@ -1,5 +1,8 @@
 package com.lirc572.ip;
 
+/**
+ * Contains static methods for drawing UI.
+ */
 public class Ui {
 
     /**

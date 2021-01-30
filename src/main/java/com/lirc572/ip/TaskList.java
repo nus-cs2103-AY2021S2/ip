@@ -3,6 +3,9 @@ package com.lirc572.ip;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
+/**
+ * Represents a task list.
+ */
 public class TaskList {
 
     /**

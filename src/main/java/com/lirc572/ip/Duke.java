@@ -3,16 +3,8 @@ package com.lirc572.ip;
 import java.util.Scanner;
 
 /**
- * Todo:
- * - exceptions yet to be handled:
- * - number of tasks > 100
- * - multiple spaces in between tokens
- * - done command
- * - w/o number
- * - number out of range
- * - help command
+ * The entry point of the program.
  */
-
 public class Duke {
 
     /**

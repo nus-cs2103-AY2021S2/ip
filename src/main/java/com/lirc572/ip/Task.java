@@ -1,5 +1,8 @@
 package com.lirc572.ip;
 
+/**
+ * Represents a general task.
+ */
 public class Task {
 
     /**

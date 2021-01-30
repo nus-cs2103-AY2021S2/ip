@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Contains storage related static methods.
+ */
 public class Storage {
 
     /**

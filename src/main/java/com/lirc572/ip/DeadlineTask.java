@@ -3,6 +3,9 @@ package com.lirc572.ip;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task (task with a deadline).
+ */
 public class DeadlineTask extends Task {
 
     /**

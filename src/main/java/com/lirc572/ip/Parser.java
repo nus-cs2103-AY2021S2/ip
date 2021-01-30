@@ -4,6 +4,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Contains static methods for parsing commands.
+ */
 public class Parser {
 
     /**

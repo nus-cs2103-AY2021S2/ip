@@ -3,6 +3,9 @@ package com.lirc572.ip;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task (task with a time).
+ */
 public class EventTask extends Task {
 
     /**
