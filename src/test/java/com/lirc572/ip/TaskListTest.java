@@ -4,8 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests TaskList class.
+ */
 public class TaskListTest {
 
+    /**
+     * Tests TaskList.toSavedString() method.
+     */
     @Test
     public void testToSavedString() {
         TaskList tasks = new TaskList();
