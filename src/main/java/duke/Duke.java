@@ -1,21 +1,18 @@
 package duke;
 
-import duke.commands.*;
-
-import duke.parser.Parser;
-
-import duke.exceptions.*;
-
-import duke.storage.Storage;
-
-import duke.tasks.TaskList;
-
-import duke.ui.Ui;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import java.time.format.DateTimeParseException;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.exceptions.SaveFileInvalidFormatException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
+
 
 /**
  * This class processes command line inputs and edit list of task.
@@ -67,7 +64,7 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (IOException e) {
-                ui.showIOError();
+                ui.showIoError();
             } catch (StringIndexOutOfBoundsException e) {
                 ui.showOutOfBoundsError();
             } catch (DateTimeParseException e) {
@@ -76,6 +73,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to start Duke program.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         String dir = System.getProperty("user.dir");
         new Duke(dir + "/data/Duke.txt").run();
