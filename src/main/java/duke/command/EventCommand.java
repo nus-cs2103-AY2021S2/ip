@@ -11,7 +11,7 @@ import duke.task.Event;
 /**
  * An EventCommand is when the user wants to add an event task to the list
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
 
     private final String description;
     private final LocalDate at;
