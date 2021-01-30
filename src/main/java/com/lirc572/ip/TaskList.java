@@ -54,6 +54,16 @@ public class TaskList {
         return this.tasks.get(index - 1).toString();
     }
 
+    /**
+     * Returns the name of the specified task
+     *
+     * @param index The index of the task
+     * @return The name of the task
+     */
+    public String getTaskName(int index) {
+        return this.tasks.get(index - 1).getName();
+    }
+
     public String delete(int index) {
         String taskString = this.getTaskString(index);
         this.tasks.remove(index - 1);
