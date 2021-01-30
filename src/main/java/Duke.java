@@ -60,6 +60,10 @@ public class Duke {
                     date = result.get(2);
                     tasklist.addEvent(description, date);
                     break;
+                case "find":
+                    description = result.get(1);
+                    tasklist.findTasks(description);
+                    break;
                 default:
                     ui.printIdkError();
                     break;

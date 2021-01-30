@@ -41,6 +41,7 @@ public class Parser {
                             result.add(taskIndex);
                             break;
                         case "todo":
+                        case "find":
                             description = scannedInput;
                             result.add(description);
                             break;

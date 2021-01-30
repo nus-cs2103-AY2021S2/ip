@@ -38,8 +38,16 @@ public class Ui {
     }
 
     public void printList(ArrayList<Task> tasks, int numTasks) {
-        if (numTasks <= 0) {
+        if (numTasks == 0) {
             System.out.println(tab + "Yay! There are no tasks in your list.");
+        } else if (numTasks < 0) {  // print filtered tasks
+            System.out.println(tab + "Here are the matching tasks in your list:");
+            int num = 1;
+            for (Task t : tasks) {
+                System.out.println(
+                        tab + num + "." + t.toString());
+                num++;
+            }
         } else {
             System.out.println(tab + "Here are the tasks in your list:");
             for (int i = 0; i < numTasks; i++) {
@@ -88,6 +96,10 @@ public class Ui {
      */
     public void printNumTasks(int numTasks) {
         System.out.println(tab + "Now you have " + numTasks + " tasks in the list.");
+    }
+
+    public void printFind(ArrayList<Task> tasks, String description) {
+
     }
 
     /**
