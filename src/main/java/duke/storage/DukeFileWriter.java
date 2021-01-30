@@ -4,8 +4,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.ui.Ui;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -44,7 +44,7 @@ public class DukeFileWriter {
             }
             writeToFile(toBeSavedTaskListString, filePath);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            Ui.printError(e.getMessage());
         }
     }
 

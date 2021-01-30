@@ -39,11 +39,14 @@ public class Duke {
             } catch (EmptyTaskDukeException e) {
                 Ui.printError(e.getMessage());
             } catch (NumberFormatException e) {
-                Ui.printError(e.getMessage());
+                Ui.printError(e.getMessage()
+                        + "\nPlease enter a valid task number.");
             } catch (IndexOutOfBoundsException e) {
-                Ui.printError(e.getMessage());
+                Ui.printError(e.getMessage()
+                        + "\nPlease enter a valid task number.");
             } catch (DateTimeParseException e) {
-                Ui.printError(e.getMessage());
+                Ui.printError(e.getMessage()
+                        + "\nPlease enter the date in the correct format.");
             }
 
         }

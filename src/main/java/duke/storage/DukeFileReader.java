@@ -6,11 +6,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class DukeFileReader {
@@ -37,7 +36,7 @@ public class DukeFileReader {
                     }
                     taskList.addTask(task);
                 } catch (EmptyTaskDukeException e) {
-                    System.out.println(e.getMessage());
+                    Ui.printError(e.getMessage());
                 }
             } else if (taskBreakdown[0].equals("D")) {
                 try {
@@ -47,7 +46,7 @@ public class DukeFileReader {
                     }
                     taskList.addTask(task);
                 } catch (EmptyTaskDukeException e) {
-                    System.out.println(e.getMessage());
+                    Ui.printError(e.getMessage());
                 }
             } else if (taskBreakdown[0].equals("E")) {
                 try {
@@ -57,7 +56,7 @@ public class DukeFileReader {
                     }
                     taskList.addTask(task);
                 } catch (EmptyTaskDukeException e) {
-                    System.out.println(e.getMessage());
+                    Ui.printError(e.getMessage());
                 }
             }
         }
@@ -69,7 +68,7 @@ public class DukeFileReader {
             TaskList taskList = readTaskListFromInternalStorage();
             return taskList;
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            Ui.printError(e.getMessage());
         }
         return new TaskList();
     }
