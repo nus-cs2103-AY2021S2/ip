@@ -1,21 +1,20 @@
 package duke;
 
-import duke.exceptions.InvalidFolderException;
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exceptions.InvalidFolderException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * <code>Storage</code> class handles the loading of tasks from the file and saving tasks in the file.
