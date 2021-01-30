@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.exception.DukeCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /** An executable command to find a task by keyword and/or date of occurrence */
 public class FindCommand extends Command {

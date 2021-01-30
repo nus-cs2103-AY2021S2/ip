@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.Storage;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
 import duke.task.Deadline;
-
-import java.time.LocalDateTime;
 
 /** An executable command to create a task with a due date */
 public class DeadlineCommand extends Command {

@@ -1,10 +1,10 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeLoadException;
-
-import java.util.Scanner;
 
 /** A chat bot that can help the user manage their tasks */
 public class Duke {

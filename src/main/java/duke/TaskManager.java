@@ -1,14 +1,14 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.DukeTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
 
 /** An object that manage the storing, retrieving and removing of tasks from the chat bot */
 public class TaskManager {

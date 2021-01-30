@@ -1,5 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -11,10 +15,6 @@ import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /** An utility class that translate user inputs into commands executable by the chat bot */
 public class Parser {

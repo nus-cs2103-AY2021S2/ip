@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.List;
+
+import duke.task.Task;
 
 /** An object that handles the printing of chat bot's messages*/
 public class Ui {

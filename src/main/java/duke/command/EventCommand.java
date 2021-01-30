@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.Storage;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
 import duke.task.Event;
-
-import java.time.LocalDateTime;
 
 /** An executable command to create a task with start date and end date */
 public class EventCommand extends Command {
