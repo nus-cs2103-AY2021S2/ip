@@ -2,23 +2,34 @@ package yoda.ui;
 
 import java.util.Scanner;
 
+/**
+ * Ui class to handle interactions with the user.
+ */
 public class Ui{
+    /** Scanner to scan user input */
     private Scanner s;
-    private final static String HELP_LIST = "";
+    /** Valid inputs that are available to the user */
+    private final static String HELP_LIST = "HELP!";
+    /** Divider to divide between successive instructions */
     private final static String DIVIDER = "--------------------------------";
 
+    /**
+     * Creates a Ui object.
+     */
     public Ui(){
         s = new Scanner(System.in);
     }
 
+    /**
+     * Prints the divider.
+     */
     public void showLine() {
         System.out.println(DIVIDER);
     }
 
-    public void handlePrint(String message) {
-        System.out.println(message);
-    }
-
+    /**
+     * Greets the user when the Yoda chatbot is started up.
+     */
     public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -29,15 +40,25 @@ public class Ui{
         System.out.println("How can I help you?");
     }
 
-    public String readCommand() {
+    /**
+     * Reads the input provided by the user on the command line.
+     * @return Input provided by the user.
+     */
+    public String readInput() {
         return s.nextLine();
     }
 
+    /**
+     * Bids farewell to the user after user is done using the Yoda chatbot.
+     */
     public void exit() {
         System.out.println("Cya!");
     }
 
+    /**
+     * Shows the user the valid commands available to them.
+     */
     public void showHelp() {
-        System.out.println("HELP!");
+        System.out.println(HELP_LIST);
     }
 }
