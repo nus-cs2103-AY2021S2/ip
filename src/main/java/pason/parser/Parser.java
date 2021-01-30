@@ -30,22 +30,24 @@ public class Parser {
         String[] splitInput = input.split(" ");
         String command = splitInput[0].toLowerCase();
         switch (command) {
-            case "bye":
-                return new ByeCommand(input);
-            case "list":
-                return new ListCommand(input);
-            case "todo":
-                return Parser.validateToDo(input);
-            case "deadline":
-                return Parser.validateDeadline(input);
-            case "event":
-                return Parser.validateEvent(input);
-            case "done":
-                return new DoneCommand(input, Integer.parseInt(splitInput[1]));
-            case "delete":
-                return new DeleteCommand(input,  Integer.parseInt(splitInput[1]));
-            default:
-                return new UnknownCommand(input);
+        case "bye":
+            return new ByeCommand(input);
+        case "list":
+            return new ListCommand(input);
+        case "todo":
+            return Parser.validateToDo(input);
+        case "deadline":
+            return Parser.validateDeadline(input);
+        case "event":
+            return Parser.validateEvent(input);
+        case "done":
+            return new DoneCommand(input, Integer.parseInt(splitInput[1]));
+        case "delete":
+            return new DeleteCommand(input,  Integer.parseInt(splitInput[1]));
+        case "find":
+            return new FindCommand(input, splitInput[1]);
+        default:
+            return new UnknownCommand(input);
         }
     }
 
