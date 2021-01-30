@@ -20,11 +20,17 @@ public class Duke {
      */
     private final TaskList tasks;
 
+    /**
+     * Constructs a Duke object
+     */
     public Duke() {
         this.tasks = new TaskList();
         Storage.readFromFile(this.tasks);
     }
 
+    /**
+     * Starts the REPL
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         Ui.printHorizontalLine();
@@ -48,6 +54,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructs a Duke object and run it
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
