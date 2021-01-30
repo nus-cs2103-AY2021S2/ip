@@ -6,14 +6,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Tests Task class.
+ */
 public class TaskTest {
 
+    /**
+     * Tests Task.getName() method.
+     */
     @Test
     public void testGetName() {
         assertEquals("lirc572", new Task("lirc572").getName());
         assertEquals("275cril", new Task("275cril").getName());
     }
 
+    /**
+     * Tests Task.getIsDone() and Task.setIsDone() methods.
+     */
     @Test
     public void testGetIsDone_setIsDone() {
         Task task = new Task("lirc572");
@@ -24,6 +33,9 @@ public class TaskTest {
         assertFalse(task.getIsDone());
     }
 
+    /**
+     * Tests Task.toString() method.
+     */
     @Test
     public void testToString() {
         Task task = new Task("lirc572");
@@ -32,6 +44,9 @@ public class TaskTest {
         assertEquals("[X] lirc572", task.toString());
     }
 
+    /**
+     * Tests Task.toSavedString() method.
+     */
     @Test
     public void testToSavedString() {
         Task task = new Task("lirc572");

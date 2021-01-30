@@ -1,6 +1,13 @@
 package com.lirc572.ip;
 
+/**
+ * Contains static methods for drawing UI.
+ */
 public class Ui {
+
+    /**
+     * The logo of Duke.
+     */
     private static final String logo = " ____        _        \n" +
             "|  _ \\ _   _| | _____ \n" +
             "| | | | | | | |/ / _ \\\n" +
@@ -8,39 +15,51 @@ public class Ui {
             "|____/ \\__,_|_|\\_\\___|";
 
     /**
-     * Print one line with spaces in front
+     * Prints one line of string with spaces in front.
      *
-     * @param line the line to print
+     * @param line The line to print.
      */
     public static void printLine(String line) {
         System.out.println("     " + line);
     }
 
     /**
-     * Print a horizontal line
+     * Prints a horizontal line.
      */
     public static void printHorizontalLine() {
         System.out.println("    " + "____________________________________________________________");
     }
 
     /**
-     * Print an empty line
+     * Prints an empty line.
      */
     public static void printEmptyLine() {
         System.out.println();
     }
 
+    /**
+     * Prints the Duke logo.
+     */
     public static void printLogo() {
         for (String line : logo.split("\n")) {
             printLine(line);
         }
     }
 
+    /**
+     * Prints the specified error message.
+     *
+     * @param errorMessage The error message to print.
+     */
     public static void printError(String errorMessage) {
         printLine("Error: " + errorMessage);
     }
 
+    /**
+     * Prints the error message of the specified Exception.
+     * @param e The Exception whose error message is to be printed.
+     */
     public static void printError(Exception e) {
-        printLine("Error: " + e.getMessage());
+        printError(e.getMessage());
     }
 }

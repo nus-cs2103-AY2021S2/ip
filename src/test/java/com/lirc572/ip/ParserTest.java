@@ -5,8 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests Parser class.
+ */
 public class ParserTest {
 
+    /**
+     * Stringifies an array of Strings
+     *
+     * @param stringArray The String array to be stringified
+     * @return The string representation of the array
+     */
     private String stringifyStringArray(String[] stringArray) {
         StringBuilder result = new StringBuilder("{ ");
         for (String element: stringArray) {
@@ -15,6 +24,9 @@ public class ParserTest {
         return result.substring(0, result.length() - 2) + " }";
     }
 
+    /**
+     * Tests stringifyStringArray() method.
+     */
     @Test
     public void testStringifyStringArray() {
         final String[][] inputs = new String[][]{
@@ -33,6 +45,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests Parser.tokenizeCommand() method.
+     */
     @Test
     public void testTokenizeCommand() {
         final String[] inputs = {
