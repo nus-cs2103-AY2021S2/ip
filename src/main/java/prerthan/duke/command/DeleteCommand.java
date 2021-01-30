@@ -1,24 +1,25 @@
-package sharadhr.duke.command;
+package prerthan.duke.command;
 
-import sharadhr.duke.exception.DukeInvalidArgumentException;
-import sharadhr.duke.exception.DukeInvalidCommandException;
-import sharadhr.duke.io.Storage;
-import sharadhr.duke.task.TaskList;
+import prerthan.duke.IO.Storage;
+import prerthan.duke.exception.DukeInvalidArgumentException;
+import prerthan.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.task.TaskList;
 
 /**
  * A user
  */
-public class DeleteCommand extends Command
-{
+public class DeleteCommand extends Command {
     private int position;
-    
-    DeleteCommand(String[] argumentTokens, int position) throws DukeInvalidArgumentException
-    {
+
+    DeleteCommand(String[] argumentTokens, int position) throws DukeInvalidArgumentException {
         super(argumentTokens);
+        this.commandName = CommandName.DELETE;
         this.position = position;
-        
-        if (this.argumentTokens.length != 2 || !this.argumentTokens[1].matches("\\d+"))
-            throw new DukeInvalidArgumentException(null, DeleteCommand.class.getSimpleName());
+
+        if (this.argumentTokens.length != 1 || !this.argumentTokens[1].matches("\\d+")
+                || Integer.parseInt(this.argumentTokens[1]) <= 1)
+            throw new DukeInvalidArgumentException("Delete command must be of the format: 'delete 12'",
+                    DeleteCommand.class.getSimpleName());
     }
 
     /**
@@ -27,16 +28,13 @@ public class DeleteCommand extends Command
      * @throws NumberFormatException
      * @throws DukeInvalidCommandException
      */
-    public DeleteCommand(String[] commandTokens) throws DukeInvalidArgumentException
-    {
+    public DeleteCommand(String[] commandTokens) throws DukeInvalidArgumentException {
         this(commandTokens, Integer.parseInt(commandTokens[1]));
     }
-    
+
     @Override
-    public void execute(TaskList tasks, Storage storage)
-    {
-        if (!(this.position >= 1) && this.position <= tasks.numberOfTasks())
-        {
+    public void execute(TaskList tasks, Storage storage) {
+        if (!(this.position >= 1) && this.position <= tasks.numberOfTasks()) {
             tasks.deleteTaskAtPosition(position);
         }
     }

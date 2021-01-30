@@ -1,31 +1,29 @@
-package sharadhr.duke.command;
+package prerthan.duke.command;
 
-import sharadhr.duke.exception.DukeInvalidArgumentException;
-import sharadhr.duke.exception.DukeInvalidCommandException;
-import sharadhr.duke.io.Storage;
-import sharadhr.duke.task.TaskList;
+import prerthan.duke.IO.Storage;
+import prerthan.duke.exception.DukeInvalidArgumentException;
+import prerthan.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.task.TaskList;
 
 /**
  * ListCommand
  */
-public class ListCommand extends Command
-{
+public class ListCommand extends Command {
     /**
      * 
      * @param commandTokens
      * @throws DukeInvalidCommandException
      */
-    public ListCommand(String[] commandTokens) throws DukeInvalidArgumentException
-    {
+    public ListCommand(String[] commandTokens) throws DukeInvalidArgumentException {
         super(commandTokens);
-        
+        this.commandName = CommandName.LIST;
+
         if (commandTokens.length != 1)
             throw new DukeInvalidArgumentException(null, ListCommand.class.getSimpleName());
     }
-    
+
     @Override
-    public void execute(TaskList tasks, Storage storage)
-    {
+    public void execute(TaskList tasks, Storage storage) {
         tasks.listTasks();
     }
 }
