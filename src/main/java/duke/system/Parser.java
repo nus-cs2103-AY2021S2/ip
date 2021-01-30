@@ -21,7 +21,8 @@ public class Parser {
         deadline,
         event,
         error,
-        delete
+        delete,
+        find
     }
 
     public Parser() {
@@ -42,7 +43,7 @@ public class Parser {
         String[] result = in.split("\\s");
         String tempArg = "";
         try {
-            if (result[0].equals("done")) {
+            if (result[0].equals("done") || result[0].equals("find")) {
                 tempCommand = result[0];
                 if(result.length <= 1) {
                     throw new DukeException.NoDescriptionException(result[0]);
@@ -73,8 +74,6 @@ public class Parser {
                     }
                 }
             } else {
-//                System.out.println(Arrays.toString(result));
-//                System.out.println(predefinedCommand.valueOf(result[0]));
                 try {
                     tempCommand = String.valueOf(predefinedCommand.valueOf(result[0]));
                 }catch(IllegalArgumentException ex){
@@ -135,6 +134,13 @@ public class Parser {
                 return printPredefinedMessage(newTodo.toString(), inputList);
             case error:
                 return this.argument;
+            case find:
+                String matchedStr = "Here are the tasks in your list:";
+                TaskList tempList = inputList.findItem(this.argument);
+                for (int i = 0; i < tempList.getDukeList().size(); i++) {
+                    matchedStr += "\n" + ((i + 1) + "." + tempList.getDukeList().get(i));
+                }
+                return matchedStr + line;
             case delete:
                 int index = Integer.parseInt(this.argument);
                 ListItem tempItem = inputList.getDukeList().get(index - 1);

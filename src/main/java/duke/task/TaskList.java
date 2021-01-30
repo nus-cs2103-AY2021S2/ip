@@ -43,6 +43,15 @@ public class TaskList {
         this.dukeList.remove(correctIndex);
     }
 
+    public TaskList findItem(String keyword){
+        List<ListItem> tempList = new ArrayList<>();
+        for(ListItem item: dukeList){
+            if(item.getTask().contains(keyword)){
+                tempList.add(item);
+            }
+        }
+        return new TaskList(tempList);
+    }
     @Override
     public String toString(){
         String initStr = "";
