@@ -14,12 +14,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents an object that interacts with I/O according the file path provided,
+ * imports list from local file with <code>loadData</code> and export using <code>writeData</code> accordingly
+ */
 public class Storage {
     private final String filePath;
     public Storage(String path){
         this.filePath = path;
     }
-    public List<ListItem> load() throws DukeException.IOErrorException {
+
+    /**
+     * Reads the list and loop till the end of the file and add corresponding tasks.
+     * @return a list of tasks that can be manipulated later
+     * @throws DukeException.IOErrorException
+     */
+    public List<ListItem> loadData() throws DukeException.IOErrorException {
         List<ListItem> importedList;
         importedList = new ArrayList<>();
         try {
@@ -46,6 +56,11 @@ public class Storage {
         }
     }
 
+    /**
+     * write data to local file
+     * @param input current task list in string form
+     * @throws DukeException.IOErrorException
+     */
     public void writeData(String input) throws DukeException.IOErrorException{
         String statusCode = "";
         try {

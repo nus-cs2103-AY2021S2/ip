@@ -24,6 +24,9 @@ public class Parser {
         delete
     }
 
+    /**
+     * Constructor method that initiates with empty/ null values
+     */
     public Parser() {
         this.command = "";
         this.date = null;
@@ -90,14 +93,18 @@ public class Parser {
         this.date = tempDate;
     }
 
+    /**
+     * Getter method
+     * @return the private variable command
+     */
     public String getCommand() {
         return this.command;
     }
 
-    public String getArgument() {
-        return this.argument;
-    }
-
+    /**
+     * Getter method
+     * @return the private variable argument
+     */
     public String getDate() {
         return this.argument;
     }
