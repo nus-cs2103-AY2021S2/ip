@@ -1,15 +1,14 @@
 package duke.commands;
 
-import duke.exceptions.*;
-
-import duke.tasks.TaskList;
-import duke.tasks.Task;
-
-import duke.ui.Ui;
-
-import duke.storage.Storage;
-
 import java.io.IOException;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.TaskNotFoundException;
+import duke.exceptions.TaskSelectionInvalidException;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Responsible for dealing with the deletion of tasks.
