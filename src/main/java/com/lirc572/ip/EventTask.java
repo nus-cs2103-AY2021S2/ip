@@ -1,8 +1,12 @@
 package com.lirc572.ip;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
+
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
     private LocalDateTime eventTime;
 
     public EventTask(String name) {
@@ -15,17 +19,11 @@ public class EventTask extends Task {
     }
 
     public void setEventTime(String eventTime) {
-        this.eventTime = LocalDateTime.parse(eventTime);
+        this.eventTime = LocalDateTime.parse(eventTime, this.format);
     }
 
     public String getEventTime() {
-        return String.format(
-                "%d %s %s, %s",
-                this.eventTime.getDayOfMonth(),
-                this.eventTime.getMonth(),
-                this.eventTime.getYear(),
-                this.eventTime.toLocalTime()
-        );
+        return this.eventTime.format(this.format);
     }
 
     @Override

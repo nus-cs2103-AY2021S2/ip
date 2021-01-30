@@ -1,8 +1,12 @@
 package com.lirc572.ip;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
+
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
     private LocalDateTime dueTime;
 
     public DeadlineTask(String name) {
@@ -15,17 +19,11 @@ public class DeadlineTask extends Task {
     }
 
     public void setDueTime(String dueTime) {
-        this.dueTime = LocalDateTime.parse(dueTime);
+        this.dueTime = LocalDateTime.parse(dueTime, this.format);
     }
 
     public String getDueTime() {
-        return String.format(
-                "%d %s %s, %s",
-                this.dueTime.getDayOfMonth(),
-                this.dueTime.getMonth(),
-                this.dueTime.getYear(),
-                this.dueTime.toLocalTime()
-        );
+        return this.dueTime.format(this.format);
     }
 
     @Override
