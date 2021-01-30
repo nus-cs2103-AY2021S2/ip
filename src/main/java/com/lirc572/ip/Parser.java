@@ -53,7 +53,8 @@ public class Parser {
                 }
             }
         }
-        return (String[]) tokens.toArray();
+        String[] result = new String[tokens.size()];
+        return tokens.toArray(result);
     }
 
     /**
