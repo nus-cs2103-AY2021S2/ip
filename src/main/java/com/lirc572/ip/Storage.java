@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Storage {
 
@@ -36,12 +37,12 @@ public class Storage {
             Scanner fileReader = new Scanner(fileObj);
             StringBuilder data = new StringBuilder();
             while (fileReader.hasNextLine()) {
-                data.append(fileReader.nextLine());
+                data.append(fileReader.nextLine() + "\n");
             }
             fileReader.close();
             String[] lines = data.toString().split("\n");
             for (String line : lines) {
-                String[] sections = line.split(" | ");
+                String[] sections = line.split(Pattern.quote(" | "));
                 if (sections[0].equals("T")) {
                     Task task = new TodoTask(sections[2]);
                     if (sections[1].equals("1")) {
