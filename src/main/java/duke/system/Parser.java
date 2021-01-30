@@ -22,7 +22,8 @@ public class Parser {
         DEADLINE,
         EVENT,
         ERROR,
-        DELETE
+        DELETE,
+        FIND
     }
 
     /**
@@ -46,7 +47,7 @@ public class Parser {
         String[] result = in.split("\\s");
         String tempArg = "";
         try {
-            if (result[0].equals("done")) {
+            if (result[0].equals("done") || result[0].equals("find")) {
                 tempCommand = result[0];
                 if (result.length <= 1) {
                     throw new DukeException.NoDescriptionException(result[0]);
@@ -77,8 +78,6 @@ public class Parser {
                     }
                 }
             } else {
-//                System.out.println(Arrays.toString(result));
-//                System.out.println(predefinedCommand.valueOf(result[0]));
                 try {
                     tempCommand = String.valueOf(predefinedCommand.valueOf(result[0]));
                 } catch (IllegalArgumentException ex) {
@@ -148,6 +147,13 @@ public class Parser {
             ListItem tempItem = inputList.getListItems().get(index - 1);
             inputList.deleteCommandMutable(index);
             return "Noted. I've removed this task: " + tempItem + "\nNow you have " + inputList.getListItems().size() + " tasks in the list" + LINE;
+        case FIND:
+            String matchedStr = "Here are the tasks in your list:";
+            TaskList tempList = inputList.findItem(this.argument);
+            for (int i = 0; i < tempList.getListItems().size(); i++) {
+                matchedStr += "\n" + ((i + 1) + "." + tempList.getListItems().get(i));
+            }
+            return matchedStr + LINE;
         }
         // every case must return some form of string, therefore break is not required
         return "";

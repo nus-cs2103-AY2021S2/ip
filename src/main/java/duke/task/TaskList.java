@@ -58,6 +58,15 @@ public class TaskList {
         this.listItems.remove(correctIndex);
     }
 
+    public TaskList findItem(String keyword){
+        List<ListItem> tempList = new ArrayList<>();
+        for(ListItem item: listItems){
+            if(item.getTask().contains(keyword)){
+                tempList.add(item);
+            }
+        }
+        return new TaskList(tempList);
+    }
     @Override
     public String toString() {
         String initStr = "";
