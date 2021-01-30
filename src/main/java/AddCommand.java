@@ -20,8 +20,8 @@ public class AddCommand extends Command {
      * @throws DukeException if the provided information is invalid
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(info);
-        ui.addedTask(tasks);
+        return ui.addedTask(tasks);
     }
 }

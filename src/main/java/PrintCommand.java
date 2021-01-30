@@ -20,7 +20,7 @@ public class PrintCommand extends Command {
      * @throws DukeException if the provided inormation is invalid
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printList(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.printList(tasks);
     }
 }

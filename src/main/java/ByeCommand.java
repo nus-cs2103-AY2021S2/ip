@@ -18,8 +18,8 @@ public class ByeCommand extends Command {
      * @throws IOException if no such file exist in the directory the filepath directs to
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         storage.store(tasks);
-        ui.bye();
+        return ui.bye();
     }
 }

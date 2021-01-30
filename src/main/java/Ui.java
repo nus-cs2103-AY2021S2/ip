@@ -20,20 +20,20 @@ public class Ui {
         System.out.println("---------------------------------------");
     }
 
-    void showError(String message) {
-        System.out.println(message);
+    String showError(String message) {
+        return message;
     }
 
-    void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     String readCommand() throws IOException {
         return this.reader.readLine();
     }
 
-    void showLoadingError() {
-        System.out.println("OOPS! The file hasn't been created yet");
+    String showLoadingError() {
+        return "OOPS! The file hasn't been created yet";
     }
 
 
@@ -42,12 +42,15 @@ public class Ui {
      *
      * @param tasks TaskList of all the tasks
      */
-    void addedTask(TaskList tasks) {
+    String addedTask(TaskList tasks) {
         int numberOfTasks = tasks.getListLength();
         Task task = tasks.getList().get(numberOfTasks - 1);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + (numberOfTasks) + " tasks in the list.");
+        String result = "Got it. I've added this task:" + "\n" + "    " + task.toString() + "\n"
+                + "Now you have " + (numberOfTasks) + " tasks in the list.";
+        return result;
+        //System.out.println("Got it. I've added this task:");
+        //System.out.println("    " + task);
+        //System.out.println("Now you have " + (numberOfTasks) + " tasks in the list.");
     }
 
 
@@ -56,12 +59,16 @@ public class Ui {
      *
      * @param tasks TaskList containing all the user's tasks
      */
-    void printList(TaskList tasks) {
+    String printList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
-        System.out.println("Here are the tasks in your list:");
+        String result = "Here are the tasks in your list:";
+        //System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + "." + list.get(i));
+            Task task = list.get(i);
+            result = result + "\n" + (i + 1) + task.toString();
+            //System.out.println((i + 1) + "." + list.get(i));
         }
+        return result;
     }
 
 
@@ -71,10 +78,13 @@ public class Ui {
      * @param task Task that has been removed
      * @param listLength number of tasks left in the list
      */
-    void deletedTask(Task task, int listLength) {
-        System.out.println(" Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + listLength + " tasks in the list.");
+    String deletedTask(Task task, int listLength) {
+        String result = "Noted. I've removed this task:" + "\n" + task.toString() + "\n" + "Now you have "
+                + listLength + " tasks in the list.";
+        return result;
+        //System.out.println("Noted. I've removed this task:");
+        //System.out.println(task);
+        //System.out.println("Now you have " + listLength + " tasks in the list.");
     }
 
 
@@ -83,17 +93,23 @@ public class Ui {
      *
      * @param task Task that has just been completed
      */
-    void didTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("    " + task);
+    String didTask(Task task) {
+        String result = "Nice! I've marked this task as done:" + "\n" + "    " + task.toString();
+        return result;
+        //System.out.println("Nice! I've marked this task as done:");
+        //System.out.println("    " + task);
     }
 
-    void printFilteredList(TaskList tasks) {
+    String printFilteredList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
         int listLength = tasks.getListLength();
-        System.out.println("Here are the matching tasks in your list:");
+        String result = "Here are the matching tasks in your list:";
+        //System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < listLength; i++) {
-            System.out.println((i + 1) + "." + list.get(i));
+            Task task = list.get(i);
+            result = result + "\n" + (i + 1) + task.toString();
+            //System.out.println((i + 1) + "." + list.get(i));
         }
+        return result;
     }
 }

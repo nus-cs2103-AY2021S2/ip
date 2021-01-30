@@ -1,15 +1,26 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 
-public class Duke {
+
+public class TestDuke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    /**
-     * Creates a Duke object
-     * @param filePath string that shows the filepath to the file that stores past data.
-     */
-    public Duke(String filePath) {
+    public TestDuke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -20,27 +31,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the main Duke program
-     */
-    public void run() {
-        ui.intro();
-        ui.showLine();
-        boolean isBye = false;
-        while (!isBye) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                ui.showLine();
-                c.execute(tasks, ui, storage);
-                isBye = c.isBye();
-                ui.showLine();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-
-    }
 
     /**
      * You should have your own function to generate a response to user input.
@@ -54,5 +44,4 @@ public class Duke {
             return ui.showError(e.getMessage());
         }
     }
-
 }
