@@ -17,6 +17,7 @@ public class Parser {
 		this.storage = new Storage();
 		this.mem = this.storage.load();
 		functions = new Hashtable<String, Consumer<String>>();
+		this.initialize();
 		Ui.welcome();
 	}
 
@@ -42,7 +43,6 @@ public class Parser {
 	public void parser(String s) {
 		Scanner sc = new Scanner(s);
 		String inputs = sc.next();
-		this.initialize();
 		if (inputs.equals("list")) {
 			this.list();
 		} else if (inputs.equals("taskson")) {
