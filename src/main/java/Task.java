@@ -1,8 +1,9 @@
 public abstract class Task {
-    private String taskName;
     protected boolean done;
+    private String taskName;
 
-    Task(String name){
+
+    Task(String name) {
         this.done = false;
         this.taskName = name;
     }
@@ -10,23 +11,23 @@ public abstract class Task {
     /**
      * Mark this task as done
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.done = true;
     }
 
     /**
      * Get task name
      */
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
 
     /**
      * Get the status of the task
      */
-    public boolean isDone(){
+    public boolean isDone() {
         return this.done;
     }
 
-   abstract String toSaveFormat();
+    abstract String toSaveFormat();
 }

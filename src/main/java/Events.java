@@ -1,6 +1,6 @@
-public class Events extends Task{
+public class Events extends Task {
     protected String by;
-    Events(String name, String by){
+    Events(String name, String by) {
         super(name);
         this.by = by;
     }
@@ -10,13 +10,13 @@ public class Events extends Task{
      * @return
      */
     @Override
-    public String toSaveFormat(){
-        return "E | " + (isDone() ? "1" : "0") +
-                " | " + this.getTaskName() + " | " + this.by;
+    public String toSaveFormat() {
+        return "E | " + (isDone() ? "1" : "0")
+                + " | " + this.getTaskName() + " | " + this.by;
     }
 
     @Override
-    public String toString(){
-        return "[E]" + (this.done ? "[X] " : "[ ] ") + this.getTaskName() +  " (at: " + this.by + ")";
+    public String toString() {
+        return "[E]" + (this.done ? "[X] " : "[ ] ") + this.getTaskName() + " (at: " + this.by + ")";
     }
 }

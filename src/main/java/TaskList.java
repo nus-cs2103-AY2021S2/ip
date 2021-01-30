@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Manager to manage a list of tasks
  */
 public class TaskList {
-    public static String line = "------------------------------------------------------";
+    private static String line = "------------------------------------------------------";
     private final List<Task> ls = new ArrayList<>();
     private final Storage storage;
 
@@ -16,17 +16,17 @@ public class TaskList {
         this.storage = storage;
     }
 
-    public void addTaskFromFile() throws IOException{
+    public void addTaskFromFile() throws IOException {
         File file = this.storage.getFile();
         Scanner sc = new Scanner(file);
-        while(sc.hasNext()){
+        while (sc.hasNext()){
             String str = sc.nextLine();
             Task task = Parser.parseFileInput(str);
             this.ls.add(task);
         }
     }
 
-    public List<Task> getList(){
+    public List<Task> getList() {
         return this.ls;
     }
 
@@ -43,20 +43,19 @@ public class TaskList {
         System.out.println(res);
     }
     /**
-     * Mark a certain task as done
-     * @param index index of a certain task
+     * Search by keyword
+     * @param keyword of a certain task
      */
 
-    public void  find(String keyword) {
+    public void find(String keyword) {
         String res = "";
-        if(ls.isEmpty()){
+        if (ls.isEmpty()) {
             res = "\t" + line + "No task to find!\n";
-        }
-        else{
+        } else {
             res = "\t" + line + "\n\tHere are the matching tasks in your list:\n";
             List<Task> newList = new ArrayList<>();
-            for(Task task : this.ls){
-                if(task.toString().contains(keyword)){
+            for (Task task : this.ls) {
+                if (task.toString().contains(keyword)) {
                     newList.add(task);
                 }
             }
@@ -96,12 +95,11 @@ public class TaskList {
      * List all the tasks in taskList
      */
 
-    public void  listTask() {
+    public void listTask() {
         String res = "";
         if(ls.isEmpty()){
             res = "\t" + line + "\n\tWell Done! All task has been completed\n";
-        }
-        else{
+        } else {
             res = "\t" + line + "\n\tHere are the tasks in your list:\n";
             for (int i = 0; i < ls.size(); i++) {
                 res += "\t" + (i + 1) + "." + ls.get(i) + "\n";

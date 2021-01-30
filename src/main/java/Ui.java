@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Ui {
     public static String line = "------------------------------------------------------";
@@ -36,7 +33,7 @@ public class Ui {
     /**
      * Print good bye message to user
      */
-    public void bye(){
+    public void bye() {
         System.out.println("\t" + Ui.line + "\n\tBye. Need to go now since I am impeached twice\n\t" + Ui.line);
     }
 

@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 
 public class Storage {
@@ -43,7 +41,7 @@ public class Storage {
 
     public void update(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.file);
-        for(Task task : taskList.getList()){
+        for (Task task : taskList.getList()) {
             fw.write(task.toSaveFormat() + "\n");
 
         }
