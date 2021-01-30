@@ -1,20 +1,28 @@
-package ssagit;
+package ssagit.datevalidator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 public class DateValidatorLocalDate implements DateValidator {
     private DateTimeFormatter dateFormatter;
 
+    /**
+     * DateValidatorLocalDate Constructor.
+     * @param df {@code dateFormatter} object
+     */
     public DateValidatorLocalDate(DateTimeFormatter df) {
         dateFormatter = df;
     }
 
     @Override
+    /**
+     * Checks if date given is valid, in the following order:
+     * date - time - locale;
+     * If all 3 fails, return with invalid, otherwise return results.
+     */
     public boolean isValid(String dateStr) {
         LocalDateTime ldt = null;
 

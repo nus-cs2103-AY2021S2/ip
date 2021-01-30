@@ -1,22 +1,20 @@
 package ssagit;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
+import ssagit.storage.Storage;
 import ssagit.ui.ConsoleUI;
 import ssagit.taskclass.*;
+import ssagit.datevalidator.DateValidator;
+import ssagit.datevalidator.DateValidatorLocalDate;
 
 public class Duke {
     /**
-     * Exception class for missing todoTask descriptor
+     * Exception class for missing todoTask descriptor.
      */
     static class MissingTodoDescriptorException extends Exception {
         public MissingTodoDescriptorException(String errorMessage) {
@@ -25,7 +23,7 @@ public class Duke {
     }
 
     /**
-     * Exception class for unknown input parameters
+     * Exception class for unknown input parameters.
      */
     static class UnknownInputParamException extends Exception {
         public UnknownInputParamException(String errorMessage) {
@@ -33,99 +31,22 @@ public class Duke {
         }
     }
 
-    /**
-     * Removes all content of file and writes the current Tasks available to file
-     * @param taskArr array of Task objects
-     * @param fw FileWriter object of designated text file
-     * @param absolutePath absolute path of file location
-     */
-    static void recreateFile(Task[] taskArr, FileWriter fw, Path absolutePath) {
-        try {
-            new FileOutputStream(absolutePath.toString()).close(); // delete file contents
-            for (Task t : taskArr) {
-                if (t == null) break;
-                fw.write(t.toOutputFileString() + "\n");
-                fw.flush();
-            }
-        } catch (IOException e) {
-            System.out.println("IOException has occurred");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Reads a file into the program and parses each line into a Task and puts it into taskArr
-     * @param taskArr array of Task objects
-     * @param relativePath relative path of file location
-     * @return number of tasks currently available in list (1 index)
-     */
-    static int readTaskListToArray(Task[] taskArr, Path relativePath, DateValidator validator) {
-        int taskIterator = 0;
-        try {
-            List<String> list = Files.readAllLines(Paths.get(relativePath.toString()));
-            String[] taskListStr = list.toArray(new String[list.size()]);
-
-            for (String str : taskListStr) {
-                String[] strArr = str.split(" \\| ");
-                String taskType = strArr[0];
-                String isDoneStr = strArr[1];
-                String taskName = strArr[2];
-
-                if (taskType.equals("todo")) {
-                    taskArr[taskIterator] = new Task(taskName, isDoneStr.equals("done"));
-                } else if (taskType.equals("event")) {
-                    if (validator.isValid(strArr[3].trim())) {
-                        Date eventDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(strArr[3].trim());
-                        taskArr[taskIterator] = new EventTask(taskName, isDoneStr.equals("done"), strArr[3].trim(), eventDate);
-                    } else {
-                        System.out.println("Invalid date format for timed Task");
-                        continue;
-                    }
-                } else if (taskType.equals("deadline")) {
-                    if (validator.isValid(strArr[3].trim())) {
-                        Date deadlineDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(strArr[3].trim());
-                        taskArr[taskIterator] = new DeadlineTask(taskName, isDoneStr.equals("done"), strArr[3].trim(), deadlineDate);
-                    } else {
-                        System.out.println("Invalid date format for timed Task");
-                        continue;
-                    }
-                }
-                taskIterator++;
-            }
-            return taskIterator;
-        } catch (IOException e) {
-            System.out.println("IOException has occurred");
-            e.printStackTrace();
-        } catch (ParseException e) {
-            System.out.println("ParseException has occurred");
-            e.printStackTrace();
-        }
-        return taskIterator;
-    }
-
     public static void main(String[] args) {
         try {
-            /** Handler for all UI stuff */
+            /** Handler for all UI stuff. */
             ConsoleUI ui = new ConsoleUI(System.in);
             ui.introduction();
 
             // inits
-            // Scanner sc = new Scanner(System.in);
             Task[] taskArr = new Task[100];
             String input;
             // date init
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
             DateValidator validator = new DateValidatorLocalDate(dateFormatter);
-            // file init
-            Path relativePath = Paths.get("./ssagit/data/taskList.txt");
-            Path absolutePath = relativePath.toAbsolutePath();
-            File taskList = new File(absolutePath.toString());
-            if (!taskList.exists()) {
-                System.out.println("new file created");
-                taskList.createNewFile(); // creates the file if it doesn't exist
-            }
-            int taskIterator = readTaskListToArray(taskArr, relativePath, validator);
-            FileWriter fw = new FileWriter(absolutePath.toString());
+            // storage init
+            Storage storage = new Storage("./ssagit/data/taskList.txt");
+            int taskIterator = storage.readTaskListToArray(taskArr, validator);
+
             while (true) {
                 input = ui.nextLine();
                 String inputArr[] = input.split(" ");
@@ -167,12 +88,8 @@ public class Duke {
                         }
                     }
                     taskIterator++; // increase task count in list
-                    /** show message to user when task is added */
+                    /** show message to user when task is added. */
                     ui.addTaskMessage(taskArr[taskIterator - 1].toFormattedString(), taskIterator);
-
-                    // add new task to file
-                    fw.append(taskArr[taskIterator - 1].toOutputFileString() + "\n");
-                    fw.flush();
                 } else if (inputArr[0].equals("delete")) {
                     int removeIndex = Integer.parseInt(inputArr[1]);
                     taskIterator--; // reduce task count in list
@@ -181,7 +98,6 @@ public class Duke {
                     for (int i = removeIndex - 1; i < taskArr.length - 1; i++) {
                         taskArr[i] = taskArr[i + 1];
                     }
-                    recreateFile(taskArr, fw, absolutePath);
                 } else {
                     throw new UnknownInputParamException("------------------------------------\n" +
                             ":( OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
@@ -189,18 +105,13 @@ public class Duke {
                 }
             }
             // always ensure file is present before leaving program
-            recreateFile(taskArr, fw, absolutePath);
-            fw.flush();
-            fw.close();
+            storage.writeTasks(taskArr);
             ui.bye();
         } catch (MissingTodoDescriptorException e) {
             System.out.println(e.getMessage());
         } catch (UnknownInputParamException e) {
             System.out.println(e.getMessage());
         } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("IOException has occurred");
             e.printStackTrace();
         }
     }
