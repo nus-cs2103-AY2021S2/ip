@@ -13,7 +13,7 @@ public class Storage {
     private String filePath;
 
     public Storage(String filePath) {
-
+        this.filePath = filePath;
     }
 
     public List<Task> load() throws DukeException {
