@@ -1,15 +1,22 @@
 package duke;
 
-import Commands.*;
-import Exceptions.DukeException;
-import Parser.Parser;
-import Tasks.Deadlines;
-import Tasks.Events;
-import Tasks.Todo;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import commands.AddCommand;
+import commands.ByeCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.ListCommand;
+import exceptions.DukeException;
+import parser.Parser;
+import tasks.Deadlines;
+import tasks.Events;
+import tasks.Todo;
+
 
 public class DukeTest {
     @Test

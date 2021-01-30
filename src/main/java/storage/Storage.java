@@ -1,11 +1,4 @@
-package Storage;
-
-import Exceptions.DukeException;
-import TaskList.TaskList;
-import Tasks.Deadlines;
-import Tasks.DukeTask;
-import Tasks.Events;
-import Tasks.Todo;
+package storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +9,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import exceptions.DukeException;
+import tasklist.TaskList;
+import tasks.Deadlines;
+import tasks.DukeTask;
+import tasks.Events;
+import tasks.Todo;
+
+
 
 public class Storage {
 
@@ -31,7 +33,7 @@ public class Storage {
         return parseFile(this.getFileFromPath());
     }
 
-    public File getFileFromPath() throws DukeException {
+    public File getFileFromPath() {
         if (!Files.exists(this.dataFolder) || !Files.exists(this.dukeTxt)) {
             System.out.println("Oops! You don't seem to have a load file!");
             System.out.println("Creating one now!!\n");
@@ -48,6 +50,12 @@ public class Storage {
         return loadData;
     }
 
+    /**
+     * Parses the txt Duke file
+     * @param data File to be parsed.
+     * @return A List of DukeTasks.
+     * @throws DukeException
+     */
     public List<DukeTask> parseFile(File data) throws DukeException {
         try {
             Scanner reader = new Scanner(data);
@@ -58,7 +66,7 @@ public class Storage {
                 try {
                     switch (taskType) {
                     case ("T"):
-                        String info[] = lineData[1].split(" [|] ", 2);
+                        String[] info = lineData[1].split(" [|] ", 2);
                         if (info[0].equals("1")) {
                             this.loadfile.add(new Todo(info[1], true));
                         } else {
@@ -66,7 +74,7 @@ public class Storage {
                         }
                         break;
                     case ("D"):
-                        String info2[] = lineData[1].split(" [|] ", 3);
+                        String[] info2 = lineData[1].split(" [|] ", 3);
 
                         if (info2[0].equals("1")) {
                             this.loadfile.add(new Deadlines(info2[1], true, info2[2]));
@@ -75,7 +83,7 @@ public class Storage {
                         }
                         break;
                     case ("E"):
-                        String info3[] = lineData[1].split(" [|] ", 3);
+                        String[] info3 = lineData[1].split(" [|] ", 3);
                         String[] information = Events.parseEvent(info3[2]);
                         if (info3[0].equals("1")) {
                             this.loadfile.add(new Events(info3[1], true, information[0],
@@ -85,6 +93,7 @@ public class Storage {
                                     information[1], information[2]));
                         }
                         break;
+                    default:
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("It seems one of your tasks is missing some info:");
@@ -99,6 +108,10 @@ public class Storage {
         return this.loadfile;
     }
 
+    /**
+     * Saves the current TaskList into the load file.
+     * @param updatedList Current TaskList.
+     */
     public void save(TaskList updatedList) {
         List<String> lister = new ArrayList<>();
 

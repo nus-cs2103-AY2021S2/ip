@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 public class DukeTask {
     protected final String name;
@@ -12,12 +12,12 @@ public class DukeTask {
 
         private final String type;
 
-        TaskType(String code){
+        TaskType(String code) {
             this.type = code;
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return this.type;
         }
 
@@ -30,6 +30,12 @@ public class DukeTask {
         this(name, false, type);
     }
 
+    /**
+     * Constructor for DukeTask.
+     * @param name Name of the DukeTask.
+     * @param isDone Boolean of whether Task is done or not.
+     * @param type Type of the DukeTask.
+     */
     public DukeTask(String name, boolean isDone, TaskType type) {
         this.name = name;
         this.isDone = isDone;
@@ -38,7 +44,7 @@ public class DukeTask {
 
     /**
      * Mark the DukeTask as done.
-     * 
+     *
      * @return a new DukeTask who is marked as done.
      */
     public DukeTask markDone() {
@@ -49,16 +55,19 @@ public class DukeTask {
         return (this.isDone) ? "[X]" : "[ ]";
     }
 
+    /**
+     * Formats the DukeTask into a String for the load file.
+     * @return a formatted String.
+     */
     public String formatDuke() {
         Character task = this.type.toType();
         int done = (this.isDone) ? 1 : 0;
         return String.format("%s | %d | %s", task, done, this.name);
     }
 
-    public String getname() {
+    public String getName() {
         return this.name;
     }
-
     @Override
     public String toString() {
         return this.type + this.getStatusIcon() + " " + this.name;

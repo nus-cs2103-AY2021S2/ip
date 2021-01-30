@@ -1,9 +1,9 @@
-package TaskList;
-
-import Tasks.DukeTask;
+package tasklist;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import tasks.DukeTask;
 
 public class TaskList {
     private final List<DukeTask> list;
@@ -53,7 +53,7 @@ public class TaskList {
     public List<DukeTask> find(String word) {
         List<DukeTask> finder = new ArrayList<>();
         for (DukeTask task : this.list) {
-            if (task.getname().contains(word)) {
+            if (task.getName().contains(word)) {
                 finder.add(task);
             }
         }

@@ -1,19 +1,23 @@
-package Commands;
+package commands;
 
-import Storage.Storage;
-import TaskList.TaskList;
-import Tasks.DukeTask;
-import Ui.Ui;
+import storage.Storage;
+import tasklist.TaskList;
+import tasks.DukeTask;
+import ui.Ui;
 
 public class AddCommand extends Command {
-    DukeTask task;
+    private DukeTask task;
 
+    /**
+     * Constructor for the Add Command.
+     * @param task DukeTask we want to add into the TaskList.
+     */
     public AddCommand(DukeTask task) {
         super();
         this.task = task;
     }
 
-     /**
+    /**
       * Executes the Add Command by adding the DukeTask into the TaskList.
       *
       * @param tasklist Duke TaskList object.

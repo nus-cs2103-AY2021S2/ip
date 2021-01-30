@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 import java.time.LocalTime;
 
@@ -7,6 +7,13 @@ public class Events extends DukeTask {
     private final LocalTime start;
     private final LocalTime end;
 
+    /**
+     * Constructor for Event Task.
+     * @param name Name of the Event.
+     * @param day Day of the Event.
+     * @param start Start Time of the Event.
+     * @param end End Time of the Event.
+     */
     public Events(String name, String day, String start, String end) {
         super(name, TaskType.EVENT);
         this.day = day;
@@ -14,6 +21,14 @@ public class Events extends DukeTask {
         this.end = LocalTime.parse(end);
     }
 
+    /**
+     * Constructor for Event Task.
+     * @param name Name of the Event.
+     * @param isDone Boolean of whether Event is done or not.
+     * @param day Day of the Event.
+     * @param start Start Time of the Event.
+     * @param end End Time of the Event.
+     */
     public Events(String name, boolean isDone, String day, String start, String end) {
         super(name, isDone, TaskType.EVENT);
         this.day = day;
@@ -40,7 +55,7 @@ public class Events extends DukeTask {
 
     @Override
     public String toString() {
-        return super.toString() + String.format(" (at: %s)", this.convertDayTime() );
+        return super.toString() + String.format(" (at: %s)", this.convertDayTime());
     }
 
     @Override

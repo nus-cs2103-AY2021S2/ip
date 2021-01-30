@@ -1,29 +1,25 @@
-package Ui;
-
-import TaskList.TaskList;
-import Tasks.DukeTask;
+package ui;
 
 import java.util.List;
 import java.util.Scanner;
 
+import tasklist.TaskList;
+import tasks.DukeTask;
+
 public class Ui {
 
-    public Ui() {
-    }
-
     private final String logo =
-              " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
-
+            " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+    public Ui() { }
 
     public void introduction() {
         System.out.println("Hello from\n" + logo);
-        System.out.println("Please enter the keyword:\n" +
-                "        help\n" + "to see the list of commands\n");
+        System.out.println("Please enter the keyword:\n"
+                + "        help\n" + "to see the list of commands\n");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
     }
 

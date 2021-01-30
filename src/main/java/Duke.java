@@ -1,9 +1,9 @@
-import Commands.Command;
-import Exceptions.DukeException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
-import Parser.Parser;
+import commands.Command;
+import exceptions.DukeException;
+import parser.Parser;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class Duke {
     private Storage storage;
@@ -25,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {
         ui.introduction();
         boolean isExit = false;
@@ -47,13 +50,17 @@ public class Duke {
                 if (e.getMessage().equals("EmptyDetails")) {
                     ui.emptyDetailsError(e.getInfo());
                 }
-                if (e.getMessage().equals("UnknownCommand")){
+                if (e.getMessage().equals("UnknownCommand")) {
                     ui.unknownCommandError();
                 }
             }
         }
     }
 
+    /**
+     * Entry Point of the Duke Program.
+     * @param args Takes in any String Arguments in the Command Prompt.
+     */
     public static void main(String[] args) {
         Duke simulator = new Duke();
         simulator.run();

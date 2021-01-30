@@ -1,10 +1,17 @@
-package Parser;
+package parser;
 
-import Commands.*;
-import Exceptions.DukeException;
-import Tasks.Deadlines;
-import Tasks.Events;
-import Tasks.Todo;
+import commands.AddCommand;
+import commands.ByeCommand;
+import commands.Command;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.FindCommand;
+import commands.HelpCommand;
+import commands.ListCommand;
+import exceptions.DukeException;
+import tasks.Deadlines;
+import tasks.Events;
+import tasks.Todo;
 
 public class Parser {
 
@@ -39,6 +46,7 @@ public class Parser {
             return new DoneCommand(index);
         case ("delete"):
             return new DeleteCommand(index);
+        default:
         }
 
         if (line.equals("todo") || line.equals("deadline") || line.equals("event") || line.equals("find")) {

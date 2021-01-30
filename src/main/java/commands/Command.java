@@ -1,9 +1,10 @@
-package Commands;
+package commands;
 
-import Exceptions.DukeException;
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import exceptions.DukeException;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
+
 
 public abstract class Command {
 

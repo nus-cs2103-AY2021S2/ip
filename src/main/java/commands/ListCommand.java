@@ -1,10 +1,10 @@
-package Commands;
+package commands;
 
-import Storage.Storage;
-import TaskList.TaskList;
-import Ui.Ui;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Executes the List Command by presenting the displaying the DukeTasks in the TaskList.
