@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * This class extract and process the user input and produce the right command to be executed after parsing.
  */
 public class Parser {
-	private String input;
+	private final String input;
 
 	public Parser(String input) {
 		this.input = input;
@@ -81,11 +81,11 @@ public class Parser {
 
 		String instruction = input.trim().toLowerCase().split(" ")[0];
 		if (input.replaceAll(" ", "").equals("")) {
-			throw new DukeException(Ui.EMPTYCOMMAND);
+			throw new DukeException(Ui.EMPTY_COMMAND);
 		}
 
 		if (CommandType.valueOfType(instruction) == null) {
-			throw new DukeException(Ui.COMMANDERROR);
+			throw new DukeException(Ui.COMMAND_ERROR);
 		}
 
 		return instruction;
@@ -100,29 +100,29 @@ public class Parser {
 	 */
 	static String extractTask(String input, String command) throws DukeException {
 		String body = input.replaceAll(command, "").trim();
-		if (command.equals("todo")) {
+		switch (command) {
+		case "todo":
 			if (body.equals("")) {
-				throw new DukeException(Ui.EMPTYTASK);
+				throw new DukeException(Ui.EMPTY_TASK);
 			} else {
 				return body;
 			}
-		} else if (command.equals("done") || command.equals("delete")) {
+		case "done": case "delete":
 			String hasLetter = body.replaceAll("[0-9]", "");
 			if (hasLetter.length() > 0) {
-				throw new DukeException(Ui.KEYINNUMBER);
+				throw new DukeException(Ui.KEY_IN_NUMBER);
 			} else {
 				return body.replaceAll("[^0-9]", "");
 			}
-		} else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
+		case "deadline": case "event":
 			if (body.equals("")) {
-				throw new DukeException(Ui.EMPTYTASK);
+				throw new DukeException(Ui.EMPTY_TASK);
 			} else {
-				String task = body.split("/")[0];
-				return task;
+				return body.split("/")[0];
 			}
-		} else {
+		default:
 			if (body.length() > 0) {
-				throw new DukeException(Ui.COMMANDERROR);
+				throw new DukeException(Ui.COMMAND_ERROR);
 			}
 			return "";
 		}
@@ -139,14 +139,14 @@ public class Parser {
 		String[] parts = body.split("/", 2);
 		if (parts.length == 2) {
 			String date = DateAndTime.converter(parts[1]);
-			if (date.equals(Ui.WRONGDATEFORMAT)) {
-				throw new DukeException(Ui.WRONGDATEFORMAT);
+			if (date.equals(Ui.WRONG_DATE_FORMAT)) {
+				throw new DukeException(Ui.WRONG_DATE_FORMAT);
 			}
 			return date;
 		} else {
 			if (instruction.equals("deadline")
 					|| instruction.equals("event")) {
-				throw new DukeException(Ui.MISSINGDATE);
+				throw new DukeException(Ui.MISSING_DATE);
 			}
 			return "";
 		}

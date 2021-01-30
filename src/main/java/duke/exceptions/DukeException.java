@@ -12,11 +12,13 @@ public class DukeException extends Exception{
     }
 
 
-    public static final void NumberFormatException() {
-        System.out.println(Ui.KEYINNUMBER);
+
+    public static void NumberFormatException() {
+        System.out.println(Ui.KEY_IN_NUMBER);
     }
 
-    public static final void taskErrorException() { System.out.println(Ui.TASKERROR); }
+    public static void taskErrorException() { System.out.println(Ui.TASK_ERROR); }
 
-    public static final void saveToFileError() { System.out.println(Ui.SAVETOFILEERROR);}
+
+    public static void saveToFileError() { System.out.println(Ui.SAVE_TO_FILE_ERROR);}
 }

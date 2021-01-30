@@ -12,20 +12,23 @@ import java.util.List;
  */
 public class Task {
     private static List<Task> taskList = new ArrayList<>();
-    private String taskName;
+    private final String taskName;
     private static int capacity = 0;
     private int index;
-    private String done;
-    private String date;
+
+
+    private String isDone;
+    private final String date;
+
 
     /**
-     * Construct a task object with taskname attached and its index label in the taskList.
+     * Construct a task object with taskName attached and its index label in the taskList.
      * @param taskName name of the task.
      */
     Task(String taskName) {
         this.taskName = taskName;
         this.index = capacity + 1;
-        this.done = " ";
+        this.isDone = " ";
         this.date = "";
         capacity++;
         add(this);
@@ -34,7 +37,7 @@ public class Task {
     Task(String taskName, String done, boolean check) {
         this.taskName = taskName;
         this.index = capacity + 1;
-        this.done = done;
+        this.isDone = done;
         this.date = "";
         capacity++;
         add(this);
@@ -43,7 +46,7 @@ public class Task {
     Task(String taskName, String date) {
         this.taskName = taskName;
         this.index = capacity + 1;
-        this.done = " ";
+        this.isDone = " ";
         this.date = date;
         capacity++;
         add(this);
@@ -52,7 +55,7 @@ public class Task {
     Task(String taskName, String date, String done) {
         this.taskName = taskName;
         this.index = capacity + 1;
-        this.done = done;
+        this.isDone = done;
         this.date = date;
         capacity++;
         add(this);
@@ -75,7 +78,7 @@ public class Task {
     public static void done(int i) {
         try {
             Task t = taskList.get(i - 1);
-            taskList.get(i - 1).done = "X";
+            taskList.get(i - 1).isDone = "X";
             Ui.doneTask(t);
         } catch (IndexOutOfBoundsException e) {
             DukeException.taskErrorException();
@@ -120,7 +123,7 @@ public class Task {
      * @return the List of all tasks stored.
      */
 
-    public static final List<Task> getTaskList() {
+    public static List<Task> getTaskList() {
         return Task.taskList;
     }
 
@@ -130,7 +133,7 @@ public class Task {
      * @return a String representation of the isDone status (X for done).
      */
     public String getDoneStatus() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -155,12 +158,12 @@ public class Task {
      *
      * @return the int representation of the capacity of the taskList.
      */
-    public static final int getCapacity() {
+    public static int getCapacity() {
         return Task.capacity;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %d. %s", done, index, taskName);
+        return String.format("[%s] %d. %s", isDone, index, taskName);
     }
 }

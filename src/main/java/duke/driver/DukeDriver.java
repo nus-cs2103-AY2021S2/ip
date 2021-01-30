@@ -43,10 +43,9 @@ public class DukeDriver {
      * @param message String representation of the message key in by user.
      * @return a boolean to whether to exit the program.
      */
-    private static final boolean inputHandler(String message) {
+    private static boolean inputHandler(String message) {
         Command command = new Parser(message).parse();
-        Boolean end = command.execute();
-        return end;
+        return command.execute();
     }
 
 

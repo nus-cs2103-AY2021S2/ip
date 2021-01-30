@@ -13,11 +13,15 @@ public enum CommandType {
 	LIST("list"),
 	DELETE("delete");
 
-	private String type;
+	private final String type;
+
+
+
+
 
 	/**
 	 * Construct a CommandType object with a String representation of the type.
-	 * @param type
+	 * @param type String representation of the type.
 	 */
 	CommandType(String type) {
 		this.type = type;

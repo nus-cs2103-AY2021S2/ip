@@ -16,7 +16,7 @@ public class TaskStorageTest {
 	@Test
 	void loadFilesTest() {
 		String actualOutput = TaskStorage.loadFiles();
-		String expectedOutput = "********** Awwww~ You don't have any history of tasks **********\n";;
+		String expectedOutput = "********** Awwww~ You don't have any history of tasks **********\n";
 		assertEquals(actualOutput, expectedOutput);
 	}
 
