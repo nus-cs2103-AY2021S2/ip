@@ -20,7 +20,10 @@ then
 fi
 
 # remove saved data
-rm tasks.data
+if [ -e "./tasks.data" ]
+then
+    rm tasks.data
+fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -cp ../bin com.lirc572.ip.Duke < input.txt > ACTUAL.TXT
