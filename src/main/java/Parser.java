@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Parser {
+<<<<<<< HEAD
     protected ArrayList<Task> taskList;
     protected TaskList tasks;
     //user commands
@@ -91,4 +92,7 @@ public class Parser {
         }
     }
 
+=======
+    
+>>>>>>> branch-A-CodingStandard
 }
