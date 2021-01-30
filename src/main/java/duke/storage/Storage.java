@@ -1,22 +1,23 @@
 package duke.storage;
 
-import duke.exceptions.*;
-
-import duke.tasks.*;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import duke.exceptions.SaveFileInvalidFormatException;
+import duke.tasks.DeadlineTask;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.TodoTask;
 
 /**
  * Responsible for reading and editing save file contents.
@@ -97,8 +98,8 @@ public class Storage {
                     String taskDateString = taskDateTime.substring(0, timeIndex).trim();
                     LocalDate taskDate = LocalDate.parse(taskDateString);
                     String taskTimeString = taskDateTime.substring(timeIndex + 1).trim();
-                    LocalTime taskTime = LocalTime.
-                            parse(taskTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                    LocalTime taskTime = LocalTime
+                            .parse(taskTimeString, DateTimeFormatter.ofPattern("HHmm"));
                     task = new DeadlineTask(taskDescription, taskDate, taskTime);
                 }
             } else if (taskType == 'E') {
@@ -124,16 +125,16 @@ public class Storage {
 
                     int endTimeIndex = taskTimeString.indexOf('|');
                     if (endTimeIndex == -1) {
-                        LocalTime taskStartTime = LocalTime.
-                                parse(taskTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                        LocalTime taskStartTime = LocalTime
+                                .parse(taskTimeString, DateTimeFormatter.ofPattern("HHmm"));
                         task = new EventTask(taskDescription, taskDate, taskStartTime);
                     } else {
                         String taskStartTimeString = taskTimeString.substring(0, endTimeIndex).trim();
-                        LocalTime taskStartTime = LocalTime.
-                                parse(taskStartTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                        LocalTime taskStartTime = LocalTime
+                                .parse(taskStartTimeString, DateTimeFormatter.ofPattern("HHmm"));
                         String taskEndTimeString = taskTimeString.substring(endTimeIndex + 1).trim();
-                        LocalTime taskEndTime = LocalTime.
-                                parse(taskEndTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                        LocalTime taskEndTime = LocalTime
+                                .parse(taskEndTimeString, DateTimeFormatter.ofPattern("HHmm"));
                         task = new EventTask(taskDescription, taskDate, taskStartTime, taskEndTime);
                     }
                 }
