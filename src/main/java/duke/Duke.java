@@ -15,9 +15,7 @@ import duke.DukeException;
 import java.io.IOException;
 import java.util.Scanner;
 
-/**
- * The Duke program implements
- */
+
 public class Duke {
     private Ui ui;
     private TaskList tasks;
