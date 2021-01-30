@@ -1,16 +1,13 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.MatchStringNotFoundException;
-
-import duke.ui.Ui;
-
 import duke.storage.Storage;
-
-import duke.tasks.TaskList;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Responsible for finding task.
