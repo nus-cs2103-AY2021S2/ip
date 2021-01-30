@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * Represents a Command and more details for that Command.

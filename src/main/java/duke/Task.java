@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * Parent class of Todo, Event, Deadline
@@ -40,4 +40,8 @@ public class Task {
     }
 
     public String getDescription() { return description; }
+
+    public boolean isDone() {
+        return isDone;
+    }
 }

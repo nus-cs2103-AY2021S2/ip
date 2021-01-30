@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * Represents all types of commands in Duke
