@@ -4,19 +4,35 @@ import duke.exceptions.DukeException;
 import duke.exceptions.DukeIDKException;
 import duke.exceptions.DukeInvalidDesException;
 import duke.exceptions.DukeMissingDesException;
+import duke.handler.Parser;
 import duke.handler.Queries;
 import duke.tasks.*;
+import duke.tasks.Event;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
-    private static boolean exit = false;
-    private static TaskList tasks = new TaskList();
+    private boolean exit = false;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    private static final Ui ui = new Ui();
+    private Duke(String storagePath) {
+        storage = new Storage(storagePath);
+        tasks = storage.load();
+        ui = new Ui();
+    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        new Duke("data/tasks.txt").run();
+    }
+
+    public void run() {
         ui.displayIntro();
         while (exit == false) {
             processInput(ui.readCommand());
@@ -25,7 +41,7 @@ public class Duke {
     }
 
 
-    private static void processInput(String userInput) {
+    private void processInput(String userInput) {
         String keyword_UC = userInput.toUpperCase().split(" ", -1)[0];
         Queries query = Queries.ADD;
         String response = "";
