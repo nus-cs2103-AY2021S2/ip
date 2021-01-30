@@ -24,7 +24,7 @@ public class TaskList {
 
     public Task doneTask(int index) {
         Task task = tasks.get(index - 1);
-        task.markAsDone();
+        task.setDone();
 
         return task;
     }
@@ -33,7 +33,6 @@ public class TaskList {
         if (tasks.isEmpty()) {
             System.out.println("It is empty boss.");
         } else {
-
             System.out.println("You have " + tasks.size() + " task(s) in the list:");
 
             int i = 1;
