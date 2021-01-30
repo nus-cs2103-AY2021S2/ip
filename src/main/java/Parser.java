@@ -18,7 +18,7 @@ public class Parser {
                 throw new DukeException("Deadline description and date cannot be empty!");
             }
 
-            String[] deadlineArgs = commandAndParams[1].split("/by ", 2);
+            String[] deadlineArgs = commandAndParams[1].split(" /by ", 2);
             if (deadlineArgs.length != 2) {
                 throw new DukeException("Deadline command must follow the format: description /by time");
             }
@@ -29,8 +29,8 @@ public class Parser {
                     ? deadlineDateTime[1].substring(0, 2) + ":" + deadlineDateTime[1].substring(2, 4)
                     : "23:59:59";
             try {
-                LocalDateTime parsedEventDateTime = LocalDateTime.parse(deadlineDate + "T" + deadlineTime);
-                parsed = new CommandEvent(deadlineArgs[0], parsedEventDateTime);
+                LocalDateTime parsedDeadlineDateTime = LocalDateTime.parse(deadlineDate + "T" + deadlineTime);
+                parsed = new CommandDeadline(deadlineArgs[0], parsedDeadlineDateTime);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please follow the Date-Time format: YYYY-MM-DD TIME");
             }
@@ -58,7 +58,7 @@ public class Parser {
                 throw new DukeException("Event description and date cannot be empty!");
             }
 
-            String[] eventArgs = commandAndParams[1].split("/at ", 2);
+            String[] eventArgs = commandAndParams[1].split(" /at ", 2);
             if (eventArgs.length != 2) {
                 throw new DukeException("Event command must follow the format: description /at time");
             }

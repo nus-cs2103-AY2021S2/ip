@@ -1,0 +1,4 @@
+T | T | todo
+E | F | event | 2021-01-01T00:00
+D | F | deadline | 2021-01-01T23:59:59
+T | T | final

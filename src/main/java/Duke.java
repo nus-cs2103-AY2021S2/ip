@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Duke {
     private final Ui ui;
-    private final TaskList tasks;
     private final Storage storage;
+    private final TaskList tasks;
 
     public static void main(String[] args) {
 //        String logo =
@@ -28,9 +28,17 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        tasks = new TaskList();
         storage = new Storage();
 
+        TaskList tempTasks;
+        try {
+            tempTasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.printErrorMessage(e);
+            tempTasks = new TaskList();
+        }
+
+        this.tasks = tempTasks;
         run();
     }
 
