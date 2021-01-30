@@ -16,13 +16,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class.
+ * Handles the storing and loading of tasks from file.
+ */
 public class Storage {
     private static String FILE_DIRECTORY = "data";
     private static String FILE_NAME = "tasks.txt";
 
+    /**
+     * Initialises the Storage class.
+     */
     public Storage() {
     }
 
+    /**
+     * Loads stored tasks from file.
+     * If valid tasks exist, add to tasks.
+     *
+     * @throws FileNotFoundException  If file directory or name is not found
+     * @throws PasonException  If the task list contains incorrect format
+     */
     public List<Task> loadTasks() throws FileNotFoundException, PasonException {
         File directory = new File(FILE_DIRECTORY);
         File file = new File(FILE_DIRECTORY + "/" + FILE_NAME);
@@ -53,7 +67,13 @@ public class Storage {
         }
         return tasks;
     }
-
+    /**
+     * Parses the given task entry String.
+     * Returns null if given string is in incorrect format.
+     *
+     * @param text  Text entry to be parsed.
+     * @return Task object parsed from text.
+     */
     public static Task parseFileEntry(String text) {
         String[] splitString = text.split(" \\| ");
         if(splitString[0].equals("T") && splitString.length == 3) {
@@ -80,6 +100,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all tasks back to file.
+     * Uses .toFileFormat() to parse Task.
+     * Overrides current file.
+     *
+     * @param tasks  Tasks list to retrieve tasks from.
+     * @throws IOException  If target file not found.
+     */
     public void saveAllTasks(List<Task> tasks) throws IOException {
         try {
             FileWriter fw = new FileWriter(FILE_DIRECTORY + "/" + FILE_NAME);
@@ -92,6 +120,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends given task to file.
+     * Uses .toFileFormat() to parse Task.
+     * Does not override existing file.
+     *
+     * @param task Task to store to file.
+     * @throws IOException  If target file not found.
+     */
     public void appendTask(Task task) throws IOException {
         try {
             FileWriter fw = new FileWriter(FILE_DIRECTORY + "/" + FILE_NAME, true);

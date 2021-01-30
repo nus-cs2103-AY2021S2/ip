@@ -6,6 +6,7 @@ import pason.tasks.Deadline;
 import pason.tasks.Event;
 import pason.tasks.ToDo;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
@@ -13,30 +14,49 @@ import java.util.regex.Pattern;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class for validating commands and inputs.
+ */
 public class Parser {
+    /**
+     * Parses input string to command type.
+     * Returns the appropriate command to execute.
+     *
+     * @param input  User input to be parsed.
+     * @return Command object or validation method.
+     * @throws Exception  If invalid input or formatting.
+     */
     public static Command parseCommand(String input) throws Exception {
         String[] splitInput = input.split(" ");
         String command = splitInput[0].toLowerCase();
         switch (command) {
-        case "bye":
-            return new ByeCommand(input);
-        case "list":
-            return new ListCommand(input);
-        case "todo":
-            return Parser.validateToDo(input);
-        case "deadline":
-            return Parser.validateDeadline(input);
-        case "event":
-            return Parser.validateEvent(input);
-        case "done":
-            return new DoneCommand(input, Integer.parseInt(splitInput[1]));
-        case "delete":
-            return new DeleteCommand(input,  Integer.parseInt(splitInput[1]));
-        default:
-            return new UnknownCommand(input);
+            case "bye":
+                return new ByeCommand(input);
+            case "list":
+                return new ListCommand(input);
+            case "todo":
+                return Parser.validateToDo(input);
+            case "deadline":
+                return Parser.validateDeadline(input);
+            case "event":
+                return Parser.validateEvent(input);
+            case "done":
+                return new DoneCommand(input, Integer.parseInt(splitInput[1]));
+            case "delete":
+                return new DeleteCommand(input,  Integer.parseInt(splitInput[1]));
+            default:
+                return new UnknownCommand(input);
         }
     }
 
+    /**
+     * Validates format for ToDos.
+     * Returns the validation error, if any.
+     *
+     * @param input  Input to be validated.
+     * @return Command object to be executed.
+     * @throws Exception  If invalid input or formatting.
+     */
     public static Command validateToDo(String input) throws Exception {
         try {
             Pattern p = Pattern.compile("(todo) ([\\w ]*)");
@@ -51,6 +71,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Validates format for Deadlines.
+     * Returns the validation error, if any.
+     *
+     * @param input  Input to be validated.
+     * @return Command object to be executed.
+     * @throws PasonException  If invalid input or formatting.
+     */
     public static Command validateDeadline(String input) throws Exception {
         try {
             String[] splitInput;
@@ -74,6 +102,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Validates format for Events.
+     * Returns the validation error, if any.
+     *
+     * @param input  Input to be validated.
+     * @return Command object to be executed.
+     * @throws PasonException  If invalid input or formatting.
+     */
     public static Command validateEvent(String input) throws Exception {
         try {
             String[] splitInput;
