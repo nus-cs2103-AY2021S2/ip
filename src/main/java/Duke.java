@@ -12,14 +12,16 @@ public class Duke {
     private static boolean exit = false;
     private static List<Task> tasks = new ArrayList<>();
 
-    public static void main(String[] args) {
-        displayIntro();
-        while (exit == false && sc.hasNext()) {
-            processInput(sc.nextLine());
-        }
+    private static final Ui ui = new Ui();
 
+    public static void main(String[] args) {
+        ui.displayIntro();
+        while (exit == false) {
+            processInput(ui.readCommand());
+        }
         sc.close();
     }
+
 
     private static void processInput(String userInput) {
         String keyword_UC = userInput.toUpperCase().split(" ", -1)[0];
@@ -34,7 +36,7 @@ public class Duke {
             switch (query) {
             case BYE:
                 response = "Bye. Hope to see you again soon!";
-                respond(response);
+                ui.respond(response);
                 exit = true;
                 break;
 
@@ -66,7 +68,7 @@ public class Duke {
                     response = "Got it. I've added this task:\n"
                             + " " + toAdd + "\n"
                             + "Now you have " + tasks.size() + " tasks in the list.\n";
-                    respond(response);
+                    ui.respond(response);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException(keyword_UC);
                 }
@@ -80,7 +82,7 @@ public class Duke {
                     tasks.set(taskNum - 1, updatedTask);
                     response = "Nice! I've marked this task as done: \n"
                             + " " + updatedTask + "\n";
-                    respond(response);
+                    ui.respond(response);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException("DONE");
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -95,7 +97,7 @@ public class Duke {
                     tasks.remove(taskNum - 1);
                     response = "Noted. I've removed this task: \n"
                             + " " + task + "\n";
-                    respond(response);
+                    ui.respond(response);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException("DELETE");
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -108,50 +110,16 @@ public class Duke {
                     response += Integer.toString(i + 1) + "."
                             + t + "\n";
                 }
-                respond(response);
+                ui.respond(response);
                 break;
             }
         } catch (DukeException e) {
-            String output = "OOPS! ";
-            if (e instanceof DukeMissingDesException) {
-                output += "The description of "
-                        + ((DukeMissingDesException) e).getKeyword()
-                        + " cannot be empty.";
-            } else if (e instanceof DukeInvalidDesException) {
-                output += "The description of "
-                        + ((DukeInvalidDesException) e).getKeyword()
-                        + " is invalid.";
-            } else {
-                assert (e instanceof DukeIDKException);
-                output += "I don't know what that means.";
-            }
-            respond(output);
+            String output = e.getMessage();
+            ui.respond(output);
         }
 
     }
 
-    private static void displayIntro() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String response = "Hello from\n"
-                + logo + "\n"
-                + "What can I do for you?\n";
-        respond(response);
-    }
-
-    private static void respond(String response) {
-        String indentedResponse = Arrays.stream(response.split("\n"))
-                .map(line -> textSpacer + line)
-                .collect(Collectors.joining("\n")) + "\n";
-        String output = responseBoxTop
-                + indentedResponse
-                + responseBoxBottom;
-
-        System.out.println(output);
-    }
 
 }
 
