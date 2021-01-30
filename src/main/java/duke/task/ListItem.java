@@ -1,20 +1,21 @@
 package duke.task;
 
 public abstract class ListItem {
-    private final boolean doneStatus;
+    private final boolean isDone;
     private final String task;
-    public ListItem(String task){
+
+    public ListItem(String task) {
         this.task = task;
-        this.doneStatus = false;
+        this.isDone = false;
     }
 
-    public ListItem(String task, boolean isDone){
+    public ListItem(String task, boolean isDone) {
         this.task = task;
-        this.doneStatus = isDone;
+        this.isDone = isDone;
     }
 
-    public boolean getDoneStatus() {
-        return this.doneStatus;
+    public boolean getDone() {
+        return this.isDone;
     }
 
     public String getTask() {
@@ -27,6 +28,6 @@ public abstract class ListItem {
 
     @Override
     public String toString() {
-        return (doneStatus == true ? "[X] " : "[ ] ") + this.task;
+        return (isDone == true ? "[X] " : "[ ] ") + this.task;
     }
 }

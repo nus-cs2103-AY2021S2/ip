@@ -21,23 +21,23 @@ public class Deadline extends ListItem {
     }
 
     @Override
-    public ListItem markAsDone(){
+    public ListItem markAsDone() {
         return new Deadline(super.getTask(), (parsedDate == null ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))), true);
     }
 
     @Override
     public String toString() {
-        return "[D]" + (super.getDoneStatus() == true ? "[X] " : "[ ] ") + super.getTask() + " (by: " + (parsedDate == null ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))+ ")";
+        return "[D]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask() + " (by: " + (parsedDate == null ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";
     }
 
-    public String getDate(){
+    public String getDate() {
         return "|" + (parsedDate == null ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
-    public LocalDate parseDate(String input){
+    public LocalDate parseDate(String input) {
         try {
             return LocalDate.parse(input);
-        }catch(DateTimeParseException ex){
+        } catch (DateTimeParseException ex) {
             return null;
         }
     }

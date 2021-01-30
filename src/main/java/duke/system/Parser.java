@@ -1,4 +1,5 @@
 package duke.system;
+
 import duke.system.exception.DukeException;
 import duke.task.*;
 
@@ -9,14 +10,14 @@ public class Parser {
     private static final String LINE = "\n____________________________________________________________";
 
     enum predefinedCommand {
-        list,
-        bye,
-        done,
-        todo,
-        deadline,
-        event,
-        error,
-        delete
+        LIST,
+        BYE,
+        DONE,
+        TODO,
+        DEADLINE,
+        EVENT,
+        ERROR,
+        DELETE
     }
 
     public Parser() {
@@ -33,9 +34,9 @@ public class Parser {
         try {
             if (result[0].equals("done")) {
                 tempCommand = result[0];
-                if(result.length <= 1) {
+                if (result.length <= 1) {
                     throw new DukeException.NoDescriptionException(result[0]);
-                }else{
+                } else {
                     tempArg = result[1];
                 }
             } else if (result[0].equals("todo") || result[0].equals("delete")) {
@@ -66,11 +67,11 @@ public class Parser {
 //                System.out.println(predefinedCommand.valueOf(result[0]));
                 try {
                     tempCommand = String.valueOf(predefinedCommand.valueOf(result[0]));
-                }catch(IllegalArgumentException ex){
+                } catch (IllegalArgumentException ex) {
                     throw new DukeException.UnknownCommandException();
                 }
             }
-        }catch(DukeException ex){
+        } catch (DukeException ex) {
             tempCommand = "error";
             tempArg = ex.getMessage();
         }
@@ -94,41 +95,42 @@ public class Parser {
     public String print(TaskList inputList) {
         predefinedCommand switchVal = predefinedCommand.valueOf(this.command);
         switch (switchVal) {
-            case bye:
-                return "Bye. Hope to see you again soon!";
-            case list:
-                String initStr = "Here are the tasks in your list:";
-                for (int i = 0; i < inputList.getDukeList().size(); i++) {
-                    initStr += "\n" + ((i + 1) + "." + inputList.getDukeList().get(i));
-                }
-                return initStr + LINE;
-            case done:
-                inputList.updateItemMutable(Integer.parseInt(this.argument));
-                return "Nice! I've marked this task as done: \n" + inputList.getDukeList().get(Integer.parseInt(this.argument) - 1) + LINE;
-            case event:
-                Event newEvent = new Event(this.argument, this.date);
-                inputList.addCommandMutable(newEvent);
-                return printPredefinedMessage(newEvent.toString(), inputList);
-            case deadline:
-                Deadline newDeadline = new Deadline(this.argument, this.date);
-                inputList.addCommandMutable(newDeadline);
-                return printPredefinedMessage(newDeadline.toString(), inputList);
-            case todo:
-                Todo newTodo = new Todo(this.argument);
-                inputList.addCommandMutable(newTodo);
-                return printPredefinedMessage(newTodo.toString(), inputList);
-            case error:
-                return this.argument;
-            case delete:
-                int index = Integer.parseInt(this.argument);
-                ListItem tempItem = inputList.getDukeList().get(index - 1);
-                inputList.deleteCommandMutable(index);
-                return "Noted. I've removed this task: " + tempItem + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + LINE;
+        case BYE:
+            return "Bye. Hope to see you again soon!";
+        case LIST:
+            String initStr = "Here are the tasks in your list:";
+            for (int i = 0; i < inputList.getListItems().size(); i++) {
+                initStr += "\n" + ((i + 1) + "." + inputList.getListItems().get(i));
+            }
+            return initStr + LINE;
+        case DONE:
+            inputList.updateItemMutable(Integer.parseInt(this.argument));
+            return "Nice! I've marked this task as done: \n" + inputList.getListItems().get(Integer.parseInt(this.argument) - 1) + LINE;
+        case EVENT:
+            Event newEvent = new Event(this.argument, this.date);
+            inputList.addCommandMutable(newEvent);
+            return printPredefinedMessage(newEvent.toString(), inputList);
+        case DEADLINE:
+            Deadline newDeadline = new Deadline(this.argument, this.date);
+            inputList.addCommandMutable(newDeadline);
+            return printPredefinedMessage(newDeadline.toString(), inputList);
+        case TODO:
+            Todo newTodo = new Todo(this.argument);
+            inputList.addCommandMutable(newTodo);
+            return printPredefinedMessage(newTodo.toString(), inputList);
+        case ERROR:
+            return this.argument;
+        case DELETE:
+            int index = Integer.parseInt(this.argument);
+            ListItem tempItem = inputList.getListItems().get(index - 1);
+            inputList.deleteCommandMutable(index);
+            return "Noted. I've removed this task: " + tempItem + "\nNow you have " + inputList.getListItems().size() + " tasks in the list" + LINE;
         }
+        // every case must return some form of string, therefore break is not required
         return "";
     }
 
     public String printPredefinedMessage(String typeOfTask, TaskList inputList) {
-        return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + LINE;
+        return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getListItems().size() + " tasks in the list" + LINE;
     }
 }

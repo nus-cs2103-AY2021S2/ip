@@ -1,19 +1,19 @@
 package duke.system;
 
 public class Ui {
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("Error in loading the list");
     }
 
-    public void showText(String input){
+    public void showText(String input) {
         System.out.println(input);
     }
 
-    public void showError(String input){
+    public void showError(String input) {
         System.out.println("Error: " + input);
     }
 
-    public void showLine(){
+    public void showLine() {
         System.out.println("____________________________________________________________\n");
     }
 }
