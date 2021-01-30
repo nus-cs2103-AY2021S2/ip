@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
  */
 public class Flamingo {
 
+    /**
+     * Starts the chatbot.
+     */
     public Flamingo() {
         Storage storage = new Storage();
         TaskList tasks;

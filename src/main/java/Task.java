@@ -5,6 +5,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a new Task.
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
