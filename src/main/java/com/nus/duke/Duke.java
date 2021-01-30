@@ -8,25 +8,27 @@ import com.nus.duke.parser.CommandParser;
 import com.nus.duke.storage.TaskListStorage;
 import com.nus.duke.ui.TextUi;
 
-public class Duke {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class Duke extends Application {
 
     private TextUi ui;
     private TaskList taskList;
     private CommandParser parser;
     private TaskListStorage storage;
 
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
     public void run() {
-        this.init();
+        this.initializeDuke();
         this.ui.showWelcomeMessage();
         this.mainLoop();
         this.exit();
     }
 
-    private void init() {
+    private void initializeDuke() {
         this.ui = new TextUi();
         this.storage = new TaskListStorage();
         this.parser = new CommandParser();
@@ -36,6 +38,18 @@ public class Duke {
             this.ui.printToUser(e.getLocalizedMessage());
             this.taskList = new TaskList();
         }
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+        Label l = new Label(
+                "Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        Scene scene = new Scene(new StackPane(l), 640, 480);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        new Duke().run();
     }
 
     private void mainLoop() {

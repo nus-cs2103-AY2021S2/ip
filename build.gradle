@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 group 'com.nus.duke'
@@ -12,13 +13,18 @@ repositories {
     mavenCentral()
 }
 
+javafx {
+    version = "15.0.1"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
 checkstyle {
     toolVersion '8.39'
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 application {
-    mainClassName = "com.nus.duke.Duke"
+    mainClassName = "com.nus.duke.Main"
 }
 
 test {
@@ -28,4 +34,8 @@ test {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+}
+
+run {
+    standardInput(System.in)
 }
