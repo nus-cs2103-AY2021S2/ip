@@ -8,11 +8,11 @@ public class Ui {
     /**
      * The logo of Duke.
      */
-    private static final String logo = " ____        _        \n" +
-            "|  _ \\ _   _| | _____ \n" +
-            "| | | | | | | |/ / _ \\\n" +
-            "| |_| | |_| |   <  __/\n" +
-            "|____/ \\__,_|_|\\_\\___|";
+    private static final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|";
 
     /**
      * Prints one line of string with spaces in front.

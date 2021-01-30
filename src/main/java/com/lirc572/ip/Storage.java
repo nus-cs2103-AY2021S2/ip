@@ -14,7 +14,7 @@ public class Storage {
     /**
      * The name of the file to store data.
      */
-    public static final String fileName = "tasks.data";
+    public static final String FILE_NAME = "tasks.data";
 
     /**
      * Saves the task list to file.
@@ -23,9 +23,9 @@ public class Storage {
      */
     public static void saveToFile(TaskList tasks) {
         try {
-            File fileObj = new File(fileName);
+            File fileObj = new File(FILE_NAME);
             fileObj.createNewFile();
-            FileWriter fileWriter = new FileWriter(fileName);
+            FileWriter fileWriter = new FileWriter(FILE_NAME);
             fileWriter.write(tasks.toSavedString());
             fileWriter.close();
         } catch (IOException e) {
@@ -38,7 +38,7 @@ public class Storage {
      */
     public static void readFromFile(TaskList tasks) {
         try {
-            File fileObj = new File(fileName);
+            File fileObj = new File(FILE_NAME);
             fileObj.createNewFile();
             Scanner fileReader = new Scanner(fileObj);
             StringBuilder data = new StringBuilder();

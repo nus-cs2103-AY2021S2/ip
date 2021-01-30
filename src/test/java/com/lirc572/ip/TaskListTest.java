@@ -1,8 +1,8 @@
 package com.lirc572.ip;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests TaskList class.
