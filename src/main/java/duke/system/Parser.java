@@ -6,7 +6,7 @@ public class Parser {
     private final String command;
     private final String argument;
     private final String date;
-    private final String line = "\n____________________________________________________________";
+    private static final String LINE = "\n____________________________________________________________";
 
     enum predefinedCommand {
         list,
@@ -101,10 +101,10 @@ public class Parser {
                 for (int i = 0; i < inputList.getDukeList().size(); i++) {
                     initStr += "\n" + ((i + 1) + "." + inputList.getDukeList().get(i));
                 }
-                return initStr + line;
+                return initStr + LINE;
             case done:
                 inputList.updateItemMutable(Integer.parseInt(this.argument));
-                return "Nice! I've marked this task as done: \n" + inputList.getDukeList().get(Integer.parseInt(this.argument) - 1) + line;
+                return "Nice! I've marked this task as done: \n" + inputList.getDukeList().get(Integer.parseInt(this.argument) - 1) + LINE;
             case event:
                 Event newEvent = new Event(this.argument, this.date);
                 inputList.addCommandMutable(newEvent);
@@ -123,12 +123,12 @@ public class Parser {
                 int index = Integer.parseInt(this.argument);
                 ListItem tempItem = inputList.getDukeList().get(index - 1);
                 inputList.deleteCommandMutable(index);
-                return "Noted. I've removed this task: " + tempItem + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + line;
+                return "Noted. I've removed this task: " + tempItem + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + LINE;
         }
         return "";
     }
 
     public String printPredefinedMessage(String typeOfTask, TaskList inputList) {
-        return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + line;
+        return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + LINE;
     }
 }
