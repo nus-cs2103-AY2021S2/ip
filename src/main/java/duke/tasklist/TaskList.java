@@ -46,11 +46,11 @@ public class TaskList {
         Task.decrementNumOfTask();
     }
 
-    public TaskList filterTasks(String searchString) {
-        TaskList filteredTaskList = new TaskList();
+    public List<Task> filterTasks(String searchString) {
+        List<Task> filteredTaskList = new ArrayList<>();
         for (Task task : this.taskList) {
             if (task.getTaskName().contains(searchString)) {
-                filteredTaskList.addTask(task);
+                filteredTaskList.add(task);
             }
         }
         return filteredTaskList;
@@ -62,7 +62,7 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String taskListString = "Here are the tasks in your list:\n";
+        String taskListString = "";
         for (int i = 0; i < taskList.size(); i++) {
             String taskString = (i + 1) + ". " + taskList.get(i);
             taskListString = taskListString + taskString

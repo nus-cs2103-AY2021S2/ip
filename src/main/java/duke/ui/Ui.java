@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.task.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -76,6 +77,16 @@ public class Ui {
      */
     public static void printDukeExitMessage() {
         System.out.println(formatMessage("Thanks for using Duke, have a great day ahead!"));
+    }
+
+    public static void printMatchingList(List<Task> taskList) {
+        String taskListString = "Here are the matching results on your list:\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            String taskString = (i + 1) + ". " + taskList.get(i);
+            taskListString = taskListString + taskString
+                    + (i == taskList.size() - 1 ? "" : "\n");
+        }
+        System.out.println(formatMessage(taskListString));
     }
 
     /**
