@@ -113,11 +113,10 @@ public class AddCommand extends Command {
      * Execute and print command according to its command type.
      *
      * @param list Passes TaskList in case of reading and writing to the list.
-     * @param length For printer to call newLiner, make Duke looks nice.
      * @throws DukeException When encounter an error in command argument.
      */
     @Override
-    public void executeAndPrint(TaskList list, int length) throws DukeException {
+    public String executeAndPrint(TaskList list) throws DukeException {
         Task task;
         switch (this.cmdType) {
         case Todo:
@@ -133,9 +132,9 @@ public class AddCommand extends Command {
             throw new DukeException("Unexpected value: " + this.cmdType);
         }
         list.addJob(task);
-        System.out.print("Task added:\n" + StringParser.newLiner(task.toString(), length)
+        return "Task added:\n" + task.toString()
                 + "Now you have " + list.getSize()
-                + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n"));
+                + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
     }
 
     @Override

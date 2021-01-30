@@ -30,12 +30,12 @@ public class Deadline extends Task {
 
     @Override
     public String getSaveType() {
-        return "E";
+        return "D";
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by.format(formatter) + ")";
+                + " (by: " + by.format(formatter) + ")\n";
     }
 }

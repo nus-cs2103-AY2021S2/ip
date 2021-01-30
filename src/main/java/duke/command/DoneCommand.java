@@ -25,11 +25,10 @@ public class DoneCommand extends Command {
      * Execute and print a done command.
      *
      * @param list Passes TaskList in case of reading and writing to the list.
-     * @param length For printer to call newLiner, make Duke looks nice.
      * @throws DukeException When encounter an error in command argument.
      */
     @Override
-    public void executeAndPrint(TaskList list, int length) throws DukeException {
+    public String executeAndPrint(TaskList list) throws DukeException {
         int index;
         try {
             index = Integer.parseInt(command.substring(5)) - 1;
@@ -40,10 +39,10 @@ public class DoneCommand extends Command {
             Task currTask = list.getJob(index);
             currTask.markAsDone();
             list.replaceJob(index, currTask);
-            System.out.print("This task is marked as done: \n"
-                    + StringParser.newLiner(currTask.toString(), length));
+            return "This task is marked as done: \n"
+                    + currTask.toString();
         } else {
-            System.out.print("No such task in the list\n");
+            return "No such task in the list\n";
         }
     }
 

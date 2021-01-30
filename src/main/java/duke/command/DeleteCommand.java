@@ -25,11 +25,10 @@ public class DeleteCommand extends Command {
      * Execute and print a delete command.
      *
      * @param list Passes TaskList in case of reading and writing to the list.
-     * @param length For printer to call newLiner, make Duke looks nice.
      * @throws DukeException When encounter an error in command argument.
      */
     @Override
-    public void executeAndPrint(TaskList list, int length) throws DukeException {
+    public String executeAndPrint(TaskList list) throws DukeException {
         int index;
         try {
             index = Integer.parseInt(command.substring(7)) - 1;
@@ -39,12 +38,12 @@ public class DeleteCommand extends Command {
         if (index < list.getSize() && index >= 0) {
             Task currTask = list.getJob(index);
             list.deleteJob(index);
-            System.out.print("This task is deleted: \n"
-                    + StringParser.newLiner(currTask.toString(), length)
+            return "This task is deleted: \n"
+                    + currTask.toString()
                     + "Now you have " + list.getSize()
-                    + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n"));
+                    + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
         } else {
-            System.out.print("No such task in the list\n");
+            return "No such task in the list\n";
         }
     }
 

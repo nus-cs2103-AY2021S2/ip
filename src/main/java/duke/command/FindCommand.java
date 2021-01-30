@@ -24,11 +24,10 @@ public class FindCommand extends Command {
      * Execute and print a find command.
      *
      * @param list Passes TaskList in case of reading and writing to the list.
-     * @param length For printer to call newLiner, make Duke looks nice.
      * @throws DukeException When encounter an error in command argument.
      */
     @Override
-    public void executeAndPrint(TaskList list, int length) throws DukeException {
+    public String executeAndPrint(TaskList list) throws DukeException {
         if (command.length() <= 5) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
         } else {
@@ -43,10 +42,10 @@ public class FindCommand extends Command {
                     }
                 }
                 if (tempList.getSize() == 0) {
-                    System.out.print("No result found\n");
+                    return "No result found\n";
                 } else {
-                    System.out.print("Here are the matching tasks in the list:\n"
-                            + tempList.formatList(length));
+                    return "Here are the matching tasks in the list:\n"
+                            + tempList.formatList();
                 }
             }
         }

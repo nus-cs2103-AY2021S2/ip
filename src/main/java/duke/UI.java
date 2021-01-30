@@ -10,9 +10,6 @@ import duke.command.Command;
  */
 public class UI {
 
-    // Set the desire length of a line.
-    private static final int LENGTH_OF_LINE = 80;
-
     // Welcome page.
     private static final String welcome = " __________________________ \n"
             + "|  HI! THIS IS             |\n"
@@ -37,44 +34,22 @@ public class UI {
             + "|  Always be with you.     |\n"
             + "|__________________________|\n";
 
-    // Underline.
-    private static final String horizontalLine = StringParser.generateUnderline(LENGTH_OF_LINE);
-
     private static final Scanner sc = new Scanner(System.in);
-    private static TaskList list = new TaskList();
+    static TaskList list = new TaskList();
 
     /**
      * Print DukeException.
      *
      * @param e DukeException.
      */
-    private static void printError(DukeException e) {
-        System.out.print(e.getMessage() + "\n");
+    static String printError(DukeException e) {
+        return e.getMessage() + "\n";
     }
 
     /**
      * Loads the save data and greets.
      */
-    private static void loadAndSayHello() {
-        list = Storage.loadToList();
-        System.out.println(welcome);
-    }
-
-    /**
-     * Saves the data to save data file and says goodbye.
-     */
-    private static void saveAndGoodBye() {
-        Storage.writeToData(list);
-        System.out.println(bye);
-    }
-
-    /**
-     * Main loop for Duke.
-     */
-    public static void mainLoop() {
-        boolean isExit = false;
-        String commandStr;
-        Command command;
+    public static String loadAndSayHello() {
 
         try {
             Storage.init();
@@ -82,25 +57,25 @@ public class UI {
             e.printStackTrace();
         }
 
-        loadAndSayHello();
+        list = Storage.loadToList();
+        return welcome;
+    }
 
-        while (!isExit) {
-            commandStr = sc.nextLine();
+    /**
+     * Saves the data to save data file and says goodbye.
+     */
+    public static String saveAndGoodBye() {
+        Storage.writeToData(list);
+        return bye;
+    }
 
-            System.out.print(horizontalLine);
-            try {
-                command = Parser.parseCommand(commandStr);
-                command.executeAndPrint(list, LENGTH_OF_LINE);
-                isExit = command.isExit();
-                if (!isExit) {
-                    System.out.print(horizontalLine);
-                }
-            } catch (DukeException e) {
-                printError(e);
-                System.out.print(horizontalLine);
-            }
+    public static String respond(String commandStr) {
+        try {
+            Command command = Parser.parseCommand(commandStr);
+            return command.executeAndPrint(list);
+        } catch (DukeException e) {
+            return printError(e);
         }
-        saveAndGoodBye();
     }
 
 }

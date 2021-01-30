@@ -5,8 +5,16 @@ package duke;
  */
 public class Duke {
 
-    public static void main(String[] args) {
-        UI.mainLoop();
+    public static String getGreeting() {
+        return UI.loadAndSayHello();
+    }
+
+    public static String getGoodbye() {
+        return UI.saveAndGoodBye();
+    }
+
+    public String getResponse(String input) {
+        return UI.respond(input);
     }
 
 }

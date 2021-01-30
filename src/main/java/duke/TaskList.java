@@ -45,14 +45,12 @@ public class TaskList {
     /**
      * Formats the list to its output format.
      *
-     * @param length For newLiner.
      * @return String in correct format.
      */
-    public String formatList(int length) {
+    public String formatList() {
         StringBuilder resultStr = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
-            resultStr.append(StringParser.newLiner((i + 1) + "."
-                    + list.get(i).toString(), length));
+            resultStr.append(i + 1).append(".").append(list.get(i).toString());
         }
         return resultStr.toString();
     }
