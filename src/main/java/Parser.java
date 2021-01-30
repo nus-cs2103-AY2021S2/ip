@@ -10,7 +10,6 @@ public class Parser {
 
     /**
      * Parses user input Strings into an arraylist of Strings for easier access.
-     *
      * @param scan the scanner used to scan user input.
      * @return an arraylist of Strings.
      * Elements of the arraylist are in the sequence:

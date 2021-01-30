@@ -3,6 +3,9 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Represents main class for chat bot.
+ */
 public class Duke {
 
     public static void main(String[] args) throws IOException {
