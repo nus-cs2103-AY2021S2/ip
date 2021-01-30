@@ -1,19 +1,25 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class DoneCommandTest {
-    TaskList taskList;
-    DataHandler dataHandler;
+import java.io.IOException;
 
-    String doneInput = "done 1";
-    DoneCommand doneCommand = new DoneCommand(doneInput);
+import org.junit.jupiter.api.Test;
+
+import duke.command.DoneCommand;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
+public class DoneCommandTest {
+    private final TaskList taskList = new TaskList();
+    private final Storage storage = new Storage("");
 
     @Test
-    public void testExecuteDone() {
+    public void testExecuteDone() throws IOException {
         try {
-            doneCommand.execute(taskList, doneInput, dataHandler);
+            String doneInput = "done 1";
+            DoneCommand doneCommand = new DoneCommand(doneInput);
+
+            doneCommand.execute(taskList, doneInput, storage);
         } catch (NullPointerException e) {
             assertEquals("Cannot invoke \"TaskList.getSize()\" because \"tasks\" is null",
                     e.getMessage());
@@ -22,6 +28,9 @@ public class DoneCommandTest {
 
     @Test
     public void testIsExit() {
+        String doneInput = "done 1";
+        DoneCommand doneCommand = new DoneCommand(doneInput);
+
         assertFalse(doneCommand.isExit());
     }
 

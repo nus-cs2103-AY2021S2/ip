@@ -11,7 +11,7 @@ public class ByeCommand extends Command {
     private final String line = "------------------------------------------";
 
     /**
-     * Handles Exit commands.
+     * Handles Bye commands.
      * Triggers the DataHandler to handle the commands.
      *
      * @param input details of the task

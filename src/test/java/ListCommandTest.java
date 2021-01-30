@@ -1,19 +1,23 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class ListCommandTest {
-    TaskList taskList;
-    DataHandler dataHandler;
+import org.junit.jupiter.api.Test;
 
-    String listInput = "foo";
-    ListCommand listCommand = new ListCommand(listInput);
+import duke.command.ListCommand;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
+public class ListCommandTest {
+    private final TaskList taskList = new TaskList();
+    private final Storage storage = new Storage("");
 
     @Test
     public void testExecuteDone() {
         try {
-            listCommand.execute(taskList, listInput, dataHandler);
+            String listInput = "foo";
+            ListCommand listCommand = new ListCommand(listInput);
+
+            listCommand.execute(taskList, listInput, storage);
         } catch (NullPointerException e) {
             assertEquals("Cannot invoke \"TaskList.list()\" because \"tasks\" is null",
                     e.getMessage());
@@ -22,6 +26,9 @@ public class ListCommandTest {
 
     @Test
     public void testIsExit() {
+        String listInput = "foo";
+        ListCommand listCommand = new ListCommand(listInput);
+
         assertFalse(listCommand.isExit());
     }
 
