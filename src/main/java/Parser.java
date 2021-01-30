@@ -31,16 +31,24 @@ public class Parser {
         String nextInput = in.nextLine();
         String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
         try {
-            switch (command) {
-                case "todo" -> todo(nextInput, tasks, ui);
-                case "deadline" -> deadline(nextInput, tasks, ui);
-                case "event" -> event(nextInput, tasks, ui);
-                case "done" -> done(nextInput, tasks, totalTasks, ui);
-                case "delete" -> delete(nextInput, tasks, totalTasks, ui);
-                case "list" -> list(tasks, totalTasks, ui);
-                case "find" -> find(nextInput, tasks, totalTasks, ui);
-                case "bye" -> byeCommand(ui);
-                default -> wrongCommand();
+            if (command.equals("todo")) {
+                todo(nextInput, tasks, ui);
+            } else if (command.equals("deadline")) {
+                deadline(nextInput, tasks, ui);
+            } else if (command.equals("event")) {
+                event(nextInput, tasks, ui);
+            } else if (command.equals("done")) {
+                done(nextInput, tasks, totalTasks, ui);
+            } else if (command.equals("delete")) {
+                delete(nextInput, tasks, totalTasks, ui);
+            } else if (command.equals("list")) {
+                list(tasks, totalTasks, ui);
+            } else if (command.equals("find")) {
+                find(nextInput, tasks, totalTasks, ui);
+            } else if (command.equals("bye")) {
+                byeCommand(ui);
+            } else {
+                wrongCommand();
             }
         } catch (DukeException e) {
             out.println(e);
