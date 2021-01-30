@@ -1,3 +1,5 @@
+package duke.handler;
+
 public enum Queries {
     ADD,
     LIST,

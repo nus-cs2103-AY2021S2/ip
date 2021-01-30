@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class DukeInvalidDesException extends DukeException{
     private String keyword;
     private String message;

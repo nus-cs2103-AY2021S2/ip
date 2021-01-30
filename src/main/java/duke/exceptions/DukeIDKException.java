@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class DukeIDKException extends DukeException{
     private String message;
 

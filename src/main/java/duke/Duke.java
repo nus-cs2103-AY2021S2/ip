@@ -1,6 +1,17 @@
-import java.text.NumberFormat;
-import java.util.*;
-import java.util.stream.Collectors;
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeIDKException;
+import duke.exceptions.DukeInvalidDesException;
+import duke.exceptions.DukeMissingDesException;
+import duke.handler.Queries;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     private static boolean exit = false;
