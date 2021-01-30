@@ -33,7 +33,7 @@ public class Storage {
             File file = new File(filePath);
 
             if (!file.exists()) {
-                //file.mkdir();
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             } else {
                 readFileContents(filePath);

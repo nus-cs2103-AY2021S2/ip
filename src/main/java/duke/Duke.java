@@ -99,7 +99,6 @@ public class Duke {
 
     /**
      * Main method for Duke application.
-     *
      * @param args Argument fed into the command line.
      */
     public static void main(String[] args) {
