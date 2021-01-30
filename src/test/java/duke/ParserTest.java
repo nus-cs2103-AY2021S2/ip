@@ -1,12 +1,13 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
+import duke.task.Event;
 
 class ParserTest {
 
@@ -31,7 +32,7 @@ class ParserTest {
         assertEquals(c, Command.DEADLINE);
     }
     @Test
-    public void parseCommandForEVENTTest() {
+    public void parseCommandForEventTest() {
         Command c = Parser.parseCommand("event");
         assertEquals(c, Command.EVENT);
     }

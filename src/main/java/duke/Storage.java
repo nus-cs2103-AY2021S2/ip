@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,12 +8,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.Task;
+
 /**
  * Used to store to or load from the task lists into the disk
  */
 public class Storage {
 
-    Path filePath;
+    private Path filePath;
 
     /**
      * Creates a storage corresponding to the path.

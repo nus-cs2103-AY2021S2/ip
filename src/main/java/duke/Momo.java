@@ -1,12 +1,10 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
-
 import java.time.format.DateTimeParseException;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 public class Momo {
 
@@ -14,8 +12,8 @@ public class Momo {
     private TaskList tasks;
 
     /**
-     * Create a Momo with an original task list if file path exists.
-     * Create a Momo with empty task list else.
+     * Creates a Momo with an original task list if file path exists.
+     * Creates a Momo with empty task list else.
      *
      * @param filePath the path of the *.txt file including information of existing tasks.
      */
@@ -29,6 +27,9 @@ public class Momo {
         }
     }
 
+    /**
+     * Switches on Momo.
+     */
     public void run() {
         Ui.showInitUi();
         String input;
@@ -65,6 +66,7 @@ public class Momo {
                 case FIND:
                     String keyword = sc.next();
                     Ui.showMatchingResult(tasks.find(keyword));
+                    break;
                 default:
                     String nextInput = sc.nextLine();
                     try {

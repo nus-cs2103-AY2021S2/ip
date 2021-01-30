@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Used by Momo to read or write to the user.
@@ -35,11 +35,11 @@ public class Ui {
      */
     public static void showInitUi() {
         setBoundOfChatBox();
-        String logo = "    __      __      ____ \n" +
-                "   /  \\    /  \\    / __ \\\n" +
-                "  / /\\ \\  / /\\ \\  | |  | |\n" +
-                " / /  \\ \\/ /  \\ \\ | |__| |\n" +
-                "/_/    \\__/    \\_\\ \\____/";
+        String logo = "    __      __      ____ \n"
+                + "   /  \\    /  \\    / __ \\\n"
+                + "  / /\\ \\  / /\\ \\  | |  | |\n"
+                + " / /  \\ \\/ /  \\ \\ | |__| |\n"
+                + "/_/    \\__/    \\_\\ \\____/";
         String greeting = "Hello! I'm Momo\nWhat can I do for you?";
         formatInChatBox(logo);
         formatInChatBox(greeting + '\n');
@@ -63,31 +63,32 @@ public class Ui {
         int n = tasks.size();
         if (n == 0) {
             formatInChatBox("There is no task\n");
-            return ;
+            return;
         }
         StringBuffer buf = new StringBuffer();
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             buf.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        }
         String res = new String(buf);
         formatInChatBox("Here are the tasks in your list:\n" + res);
     }
 
     /**
-     * Informs the user the addition is successful.
+     * Informs the user the searching is successful.
      *
      * @param taskList the list of tasks.
-     * @param task the task that is added.
      */
     public static void showMatchingResult(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         int n = tasks.size();
         if (n == 0) {
             formatInChatBox("There is no matching task\n");
-            return ;
+            return;
         }
         StringBuffer buf = new StringBuffer();
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             buf.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        }
         String res = new String(buf);
         formatInChatBox("Here are the matching tasks in your list:\n" + res);
     }
@@ -156,6 +157,8 @@ public class Ui {
      * @param taskList the list of task.
      */
     public static void showIndexOutOfBoundsError(TaskList taskList) {
-        formatInChatBox("OOPS! Now you have only " + taskList.getTasks().size() + "tasks, please mark/delete the added tasks.");
+        formatInChatBox("OOPS! Now you have only "
+                + taskList.getTasks().size()
+                + "tasks, please mark/delete the added tasks.");
     }
 }

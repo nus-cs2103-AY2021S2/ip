@@ -1,14 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
-import java.util.Locale;
 
 public class Parser {
 
@@ -32,14 +31,14 @@ public class Parser {
      */
     public static Task parseDescription(Command command, String input) throws ParseException {
         switch (command) {
-            case TODO:
-                return parseToDo(input);
-            case DEADLINE:
-                return parseDeadline(input);
-            case EVENT:
-                return parseEvent(input);
-            default:
-                throw new ParseException("the first argument command is not valid.");
+        case TODO:
+            return parseToDo(input);
+        case DEADLINE:
+            return parseDeadline(input);
+        case EVENT:
+            return parseEvent(input);
+        default:
+            throw new ParseException("the first argument command is not valid.");
         }
     }
 
@@ -53,9 +52,12 @@ public class Parser {
      * @throws ParseException if the description is empty.
      */
     private static ToDo parseToDo(String input) throws ParseException {
-        if (input.isEmpty() || input.equals(" "))
+        if (input.isEmpty() || input.equals(" ")) {
             throw new ParseException("OOPS!!! The description of a todo cannot be empty.\n");
-        if (input.charAt(0) == ' ') input = input.substring(1);
+        }
+        if (input.charAt(0) == ' ') {
+            input = input.substring(1);
+        }
         return new ToDo(input);
     }
 
@@ -70,10 +72,13 @@ public class Parser {
      * @throws DateTimeParseException if the format of data time is not correct.
      */
     private static Deadline parseDeadline(String input) throws ParseException, DateTimeParseException {
-        if (input.isEmpty() || input.equals(" "))
+        if (input.isEmpty() || input.equals(" ")) {
             throw new ParseException("OOPS!!! The description of a deadline cannot be empty.\n");
+        }
         if (input.contains("/by ")) {
-            if (input.charAt(0) == ' ') input = input.substring(1);
+            if (input.charAt(0) == ' ') {
+                input = input.substring(1);
+            }
             int endOfDescription = input.indexOf("/by ");
             String description = input.substring(0, endOfDescription);
             String deadline = input.substring(endOfDescription + 4);
@@ -95,10 +100,13 @@ public class Parser {
      * @throws DateTimeParseException if the format of data time is not correct.
      */
     private static Event parseEvent(String input) throws ParseException, DateTimeParseException {
-        if (input.isEmpty() || input.equals(" "))
+        if (input.isEmpty() || input.equals(" ")) {
             throw new ParseException("OOPS!!! The description of an event cannot be empty.\n");
+        }
         if (input.contains("/at ")) {
-            if (input.charAt(0) == ' ') input = input.substring(1);
+            if (input.charAt(0) == ' ') {
+                input = input.substring(1);
+            }
             int endOfDescription = input.indexOf("/at ");
             String description = input.substring(0, endOfDescription);
             String time = input.substring(endOfDescription + 4);

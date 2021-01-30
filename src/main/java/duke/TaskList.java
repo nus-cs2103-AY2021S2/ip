@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Abstracts the list of task.
@@ -63,10 +63,18 @@ public class TaskList {
         return taskToBeMarked;
     }
 
+    /**
+     * Finds list of tasks matches the keyword.
+     *
+     * @param keyword the keyword user inputs.
+     * @return list of tasks containing the keyword.
+     */
     public TaskList find(String keyword) {
         List<Task> res = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) res.add(task);
+            if (task.getDescription().contains(keyword)) {
+                res.add(task);
+            }
         }
         return new TaskList(res);
     }
