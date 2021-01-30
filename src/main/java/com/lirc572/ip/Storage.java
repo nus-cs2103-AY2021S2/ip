@@ -8,12 +8,15 @@ import java.util.regex.Pattern;
 
 public class Storage {
 
+    /**
+     * The name of the file to store data
+     */
     public static final String fileName = "tasks.data";
 
     /**
-     * Save the task list to disk
+     * Saves the task list to file
      *
-     * @param tasks task list
+     * @param tasks The task list to be stored
      */
     public static void saveToFile(TaskList tasks) {
         try {
@@ -28,7 +31,7 @@ public class Storage {
     }
 
     /**
-     *
+     * Reads the task list from file
      */
     public static void readFromFile(TaskList tasks) {
         try {
