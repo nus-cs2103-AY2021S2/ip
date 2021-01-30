@@ -1,9 +1,10 @@
 package soonwee.duke;
-import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Parser {
+
     public static final int TODO = 1;
     public static final int DEADLINE = 2;
     public static final int EVENT = 3;
@@ -31,26 +32,25 @@ public class Parser {
         try {
             if (taskID == TODO) {
                 type = "todo";
-                if(cmd.length() > 4) {
+                if (cmd.length() > 4) {
                     task = cmd.substring(5);
                 }
             } else if (taskID == DEADLINE) {
                 type = "deadline";
                 int seg = cmd.indexOf("/");
-                if(cmd.length() > 8 && seg != -1) {
+                if (cmd.length() > 8 && seg != -1) {
                     task = cmd.substring(9, seg);
                 }
             } else if (taskID == EVENT) {
                 type = "event";
                 int seg = cmd.indexOf("/");
-                if(cmd.length() > 5 && seg != -1) {
+                if (cmd.length() > 5 && seg != -1) {
                     task = cmd.substring(6, seg);
                 }
             }
-            if(task.equals("") && !type.isEmpty()){
-                throw new DukeException(" ☹ OOPS!!! " +
-                    "The description of a " + type + " cannot be empty.");
-            } else if(task.equals("") && type.isEmpty()){
+            if (task.equals("") && !type.isEmpty()) {
+                throw new DukeException(" ☹ OOPS!!! " + "The description of a " + type + " cannot be empty.");
+            } else if (task.equals("") && type.isEmpty()) {
                 throw new DukeException("Please input the correct command.");
             }
         } catch (DukeException de) {
@@ -62,9 +62,9 @@ public class Parser {
     public LocalDateTime dateFormatter(String cmd) {
         int nextChar = -1;
         int nextWord = 4;
-        if(cmd.indexOf("/by") != -1) {
+        if (cmd.indexOf("/by") != -1) {
             nextChar = cmd.indexOf("/by");
-        } else if(cmd.indexOf("/at") != -1) {
+        } else if (cmd.indexOf("/at") != -1) {
             nextChar = cmd.indexOf("/at");
         }
         String date = cmd.substring(nextChar + nextWord);

@@ -1,5 +1,7 @@
 package soonwee.duke;
+
 public class Ui {
+
     public String display;
 
     public Ui () {
@@ -36,9 +38,7 @@ public class Ui {
     }
 
     public Ui printTotalTasks(TaskList tasklist) {
-        return new Ui("Now you have "
-            + tasklist.getSize()
-            + " tasks in the list.");
+        return new Ui("Now you have " + tasklist.getSize() + " tasks in the list.");
     }
 
     @Override

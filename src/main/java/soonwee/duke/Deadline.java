@@ -1,8 +1,9 @@
 package soonwee.duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDateTime by;
 
@@ -14,6 +15,6 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
-            + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+                + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

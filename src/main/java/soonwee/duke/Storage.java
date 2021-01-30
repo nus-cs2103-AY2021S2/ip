@@ -1,17 +1,19 @@
 package soonwee.duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Storage {
+
     public String directory;
     public File fileObject;
-    public FileWriter fileWriter;
     public TaskList taskList;
 
     public Storage(String directory) {
@@ -28,8 +30,7 @@ public class Storage {
         try {
             File fileObject = new File(directory);
             if (fileObject.createNewFile()) {
-                System.out.println("New file created: "
-                    + fileObject.getName());
+                System.out.println("New file created: " + fileObject.getName());
             } else {
                 System.out.println("The file exists. Reading file...");
                 readFile();
@@ -63,7 +64,7 @@ public class Storage {
         int secondSeg = data.indexOf("(");
         int endSeg = data.indexOf(")");
         task = data.substring(7);
-        if(secondSeg != -1 && endSeg != -1) {
+        if (secondSeg != -1 && endSeg != -1) {
             task = data.substring(7, secondSeg);
             time = data.substring(secondSeg + 5, endSeg);
         }
@@ -78,7 +79,7 @@ public class Storage {
                 this.taskList.addTask(new Event(task, formatDate));
             }
         }
-        if(data.charAt(4) == 'X') {
+        if (data.charAt(4) == 'X') {
             taskList.getTask(taskList.tasksList.size() - 1).setCompleted();
         }
     }
