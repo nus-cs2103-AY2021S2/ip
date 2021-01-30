@@ -30,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * Updates the task list for the current chatbot session with the
+     * Updates the task list for the current Duke session with the
      * list of tasks loaded from the specified file
      * @throws DukeException if user command is invalid
      */
@@ -183,15 +183,14 @@ public class TaskList {
      */
     public static ArrayList<String> findMatchingTasks(String keyword) {
         ArrayList<String> matchedTasks = new ArrayList<>();
-        for (int i = 0; i < loadedList.size(); i++) {
-            String currentTask = loadedList.get(i);
-            if (currentTask.indexOf(keyword) != -1) {
-                matchedTasks.add(currentTask);
+        for (int i = 0; i < updatedTaskList.size(); i++) {
+            String currentTask = updatedTaskList.get(i).toString().split(" ", 2)[1];
+            if (currentTask.contains(keyword)) {
+                matchedTasks.add(updatedTaskList.get(i).toString());
             }
         }
         return matchedTasks;
     }
-
 }
 
 

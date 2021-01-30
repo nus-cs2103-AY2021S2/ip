@@ -11,11 +11,10 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
-
     /**
-     * Loads the task list from hardware if it was previously created, else creates
-     * a new task list
-     * @param filePath the file path in which the task list is loaded from, and will be stored into
+     * Initializes a Duke object. If the specified filepath exists, tasks will be loaded
+     * from the file into the current task list. Else, a new task list will be created.
+     * @param filePath from which the tasks will be loaded from
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -29,21 +28,14 @@ public class Duke {
     }
 
     /**
-     * Runs the chatbot and starts taking in user command until user ends session
-     * @throws DukeException if user command is invalid
+     * Returns Duke's response to the user's input and stores any changes to the
+     * task list back to the specified file
+     * @param input supplied by the user
+     * @return response to the user input
+     * @throws DukeException if the user's input is invalid
      */
-    public void run() throws DukeException {
-        while (!isFinished) {
-            String input = ui.readUserCommand();
-            Parser.handleUserCommand(input, ui);
-
-            Storage.store(FILE_PATH_SAVED_TASKS);
-        }
+    public String getResponse(String input) throws DukeException {
+        Storage.store(FILE_PATH_SAVED_TASKS);
+        return Parser.handleUserCommand(input, ui);
     }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke(FILE_PATH_SAVED_TASKS).run();
-    }
-
-
 }

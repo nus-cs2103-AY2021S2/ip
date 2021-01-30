@@ -15,36 +15,32 @@ public class Ui {
     }
 
     /**
-     * Greets the user with a message
+     * Diplays a hello message to the user
      */
-    public static String greetUser() {
+    public static void greetUser() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n" + logo + "\nHow can I help?\n";
+        System.out.println("Hello from\n" + logo + "\nHow can I help?\n");
     }
 
-    public String displayMessage(String message) {
+    public String showMessage(String message) {
         return message;
     }
 
-    public String displayArraylist(ArrayList<String> arraylist) {
+    /**
+     * Displays the contents of an arraylist line by line to the user
+     * @param arraylist to be displayed to the user
+     * @return the contents of the arraylist
+     */
+    public String showArrayList(ArrayList<String> arraylist) {
         String arrayListContents = "";
-        for(int i = 0; i < arraylist.size(); i++) {
+        for (int i = 0; i < arraylist.size(); i++) {
             arrayListContents += arraylist.get(i) + "\n";
         }
         return arrayListContents;
-    }
-
-    /**
-     * Prints out the message that the specified task has been deleted
-     * @param task to be deleted
-     */
-    public void showTaskDeleted(Task task) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(task);
     }
 
     /**
@@ -55,72 +51,22 @@ public class Ui {
     }
 
     /**
-     * Prints out the list of tasks that match the given keyword
-     */
-    public void showMatchingTasks(ArrayList<String> matchedTasks) {
-        for (int i = 0; i < matchedTasks.size(); i++) {
-            System.out.println(matchedTasks.get(i));
-        }
-        System.out.println();
-    }
-
-    /**
-     * Prints out the message that the specified task has been added to the task list
-     */
-    public void showTaskAdded() {
-        System.out.println("added!");
-    }
-
-    /**
-     * Reads the next command-line input supplied by the user
-     * @return the command-line input supplied by the user
-     */
-    public String readUserCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints out a farewell message
+     * Displays a farewell message to the user
      */
     public String showGoodbyeMessage() {
         return "Bye. Hope to see you soon!\n";
     }
 
     /**
-     * Prints out the message that the specified task has been marked as done
-     * @param task that had been marked as done
-     */
-    public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
-        System.out.println();
-    }
-
-    /**
-     * Prints out line-by-line all of the tasks in the task list
+     * Displays line-by-line all of the tasks in the task list
      */
     public String showTaskList() {
         String taskList = "Here are your tasks!\n";
 
         for (int i = 1; i <= TaskList.updatedTaskList.size(); i++) {
             Task task = TaskList.updatedTaskList.get(i - 1);
-            taskList += i;
-            taskList += ".";
-            taskList += task + "\n";
-            //System.out.print(i + ".");
-            //System.out.println(task);
+            taskList += i + "." + task + "\n";
         }
-        //System.out.println();
         return taskList;
-    }
-
-    /**
-     * Prints out the number of tasks in the task list
-     */
-    public void showNumberOfTasks() {
-        int numTasks = TaskList.updatedTaskList.size();
-
-        System.out.println("you have " + numTasks + " tasks in your list");
-        System.out.println();
     }
 }

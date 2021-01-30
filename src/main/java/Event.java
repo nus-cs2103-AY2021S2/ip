@@ -7,8 +7,8 @@ public class Event extends Task {
 
     /**
      * Initializes an Event task object
-     * @param description  refers to the task description
-     * @param at  refers to the date as to which the event occurs
+     * @param description refers to the task description
+     * @param at refers to the date as to which the event occurs
      */
     public Event(String description, String at) {
         super(description);
