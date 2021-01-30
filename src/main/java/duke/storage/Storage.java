@@ -2,6 +2,9 @@ package duke.storage;
 
 import duke.tasklist.TaskList;
 
+/**
+ * Handles storage for Duke
+ */
 public class Storage {
     private String filePath;
 
@@ -11,7 +14,8 @@ public class Storage {
     }
 
     /**
-     * Loads the task list in the hard drive into duke
+     * Loads all tasks from internal storage
+     * @return the task list containing all the tasks from internal storage
      */
     public TaskList load() {
         return DukeFileReader.loadTasks();
@@ -19,7 +23,7 @@ public class Storage {
 
     /**
      * Saves the tasks in task list into internal storage
-     * @param taskList
+     * @param taskList the current instance of task list used by Duke
      */
     public void saveTasksToStorage(TaskList taskList) {
         DukeFileWriter.saveTaskListInInternalStorage(taskList.getTaskList(), filePath);

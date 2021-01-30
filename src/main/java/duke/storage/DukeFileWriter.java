@@ -10,8 +10,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Writes file input into internal storage
+ */
 public class DukeFileWriter {
 
+    /**
+     * Saves the task list into internal storage
+     * @param taskList the current instance of task list used by Duke
+     * @param filePath the file path of the internal storage to save at
+     */
     public static void saveTaskListInInternalStorage(List<Task> taskList, String filePath) {
         try {
             String toBeSavedTaskListString = "";

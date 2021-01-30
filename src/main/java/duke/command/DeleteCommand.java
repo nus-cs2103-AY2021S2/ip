@@ -5,7 +5,17 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command for delete input
+ */
 public class DeleteCommand extends Command {
+
+    /**
+     * Deletes the task from the task list, saves the task list in the internal storage and prints success message
+     * @param task the task to be deleted
+     * @param taskList the current instance of task list used by Duke
+     * @param storage the storage instance used to save files into internal storage
+     */
     @Override
     public void execute(Task task, TaskList taskList, Storage storage) {
         // delete task

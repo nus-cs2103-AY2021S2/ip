@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores all the tasks
+ */
 public class TaskList {
     private List<Task> taskList;
 
@@ -16,16 +19,28 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Adds a task into the task list
+     * @param task the current instance of task list used by Duke
+     */
     public void addTask(Task task) {
         taskList.add(task);
         Task.incrementNumOfTask();
     }
 
+    /**
+     * Removes the task from task list
+     * @param taskNumber the current instance of task list used by Duke
+     */
     public void removeTask(int taskNumber) {
         taskList.remove(taskNumber - 1);
         Task.decrementNumOfTask();
     }
 
+    /**
+     * Removes the task from task list
+     * @param task the current instance of task list used by Duke
+     */
     public void removeTask(Task task) {
         taskList.remove(task);
         Task.decrementNumOfTask();

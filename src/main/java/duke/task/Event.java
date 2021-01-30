@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event task for tasks that are due on a certain date
+ */
 public class Event extends Task {
     private LocalDate dueAt;
 

@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline task for tasks that are due by a certain date
+ */
 public class Deadline extends Task {
     private LocalDate dueBy;
     private static final String DUE_COMMAND = "/by";
@@ -21,6 +24,11 @@ public class Deadline extends Task {
         this.dueBy = LocalDate.parse(dueBy);
     }
 
+    /**
+     * Parses the task name from the input
+     * @param input the input entered by the user
+     * @return trimmed input of the task description
+     */
     private static String getTaskNameFromInput(String input) {
         if (input.contains(DUE_COMMAND)) {
             return input.split(DUE_COMMAND)[0].trim();

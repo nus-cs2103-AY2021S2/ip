@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.exceptions.EmptyTaskDukeException;
 
+/**
+ * Parent class for different types of tasks
+ */
 public class Task {
     private static int numOfTasks;
     private String taskName;
@@ -16,6 +19,9 @@ public class Task {
         }
     }
 
+    /**
+     * Sets task to completed
+     */
     public void setDone() {
         isTaskCompleted = true;
     }
@@ -32,10 +38,16 @@ public class Task {
         return numOfTasks;
     }
 
+    /**
+     * Increments the total number of task by 1
+     */
     public static void incrementNumOfTask() {
         numOfTasks++;
     }
 
+    /**
+     * Decrements the total number of task by 1
+     */
     public static void decrementNumOfTask() {
         numOfTasks--;
     }

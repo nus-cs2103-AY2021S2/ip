@@ -5,7 +5,17 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command for help input
+ */
 public class HelpCommand extends Command {
+
+    /**
+     * Prints help message
+     * @param task
+     * @param taskList
+     * @param storage
+     */
     @Override
     public void execute(Task task, TaskList taskList, Storage storage) {
         // print custom help message

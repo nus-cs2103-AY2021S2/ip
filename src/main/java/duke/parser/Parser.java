@@ -10,10 +10,13 @@ import duke.tasklist.TaskList;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses input from Duke
+ */
 public class Parser {
     /**
-     * Parses user input to determine action taken
-     * @param input
+     * Parses user input to return the corresponding command
+     * @param input the corresponding command type
      */
     public static Command parseCommand(String input) {
         String commandString = parseCommandString(input);
@@ -38,6 +41,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input to return the task
+     * @param input the input given by the user
+     * @param taskList the current instance of task list used by Duke
+     * @return a task object as described in the input
+     * @throws EmptyTaskDukeException when there is an empty description
+     * @throws IndexOutOfBoundsException when user enters a number in the description that does not match the task list
+     * @throws NumberFormatException when user enters a non number into the number field in the description
+     * @throws DateTimeParseException when user enters a bad date format in the description
+     */
     public static Task parseTask(String input, TaskList taskList) throws
             EmptyTaskDukeException, IndexOutOfBoundsException,
             NumberFormatException, DateTimeParseException {

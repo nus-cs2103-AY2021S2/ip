@@ -11,6 +11,9 @@ import duke.ui.Ui;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Handles the core logic of the Duke application
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -23,6 +26,9 @@ public class Duke {
         this.taskList = storage.load();
     }
 
+    /**
+     * Runs the entire logic for Duke
+     */
     public void run() {
         // show welcome message
         ui.printWelcomeMessage();
