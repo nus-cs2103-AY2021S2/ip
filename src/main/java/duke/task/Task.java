@@ -16,13 +16,7 @@ public class Task {
         }
     }
 
-    public String setDone() {
-        setTaskCompleted();
-        return "Nice! I've marked this task as done: \n"
-                + toString();
-    }
-
-    public void setTaskCompleted() {
+    public void setDone() {
         isTaskCompleted = true;
     }
 

@@ -49,13 +49,6 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String setDone() {
-        super.setTaskCompleted();
-        return "Nice! I've marked this deadline as done:\n"
-                + toString();
-    }
-
-    @Override
     public String toString() {
         String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
         return "[D]" + "[" + taskStringCheck + "] " + super.getTaskName()

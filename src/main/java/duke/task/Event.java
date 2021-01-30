@@ -50,13 +50,6 @@ public class Event extends Task {
     }
 
     @Override
-    public String setDone() {
-        super.setTaskCompleted();
-        return "Nice! I've marked this event as done:\n"
-                + toString();
-    }
-
-    @Override
     public String toString() {
         String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
         return "[E]"
