@@ -8,7 +8,7 @@ public class TodoTask extends Task {
     @Override
     public String toSavedString() {
         return String.format(
-                "E | %d | %s",
+                "T | %d | %s",
                 this.getIsDone() ? 1 : 0,
                 this.getName()
         );

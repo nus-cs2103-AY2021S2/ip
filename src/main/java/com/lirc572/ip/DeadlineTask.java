@@ -31,7 +31,7 @@ public class DeadlineTask extends Task {
     @Override
     public String toSavedString() {
         return String.format(
-                "E | %d | %s | %s",
+                "D | %d | %s | %s",
                 this.getIsDone() ? 1 : 0,
                 this.getName(),
                 this.getDueTime()
