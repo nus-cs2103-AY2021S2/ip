@@ -4,14 +4,21 @@ import java.util.ArrayList;
  * Contains the task list.
  */
 public class TaskList {
-    protected ArrayList<Task> tasks;
     protected static int numTasks;
+    protected ArrayList<Task> tasks;
 
+    /**
+     * Creates a task list given existing ArrayList of tasks.
+     * @param tasks ArrayList of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
         numTasks = tasks.size();
     }
 
+    /**
+     * Creates a new empty Task List.
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
         numTasks = 0;

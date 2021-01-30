@@ -1,13 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +16,9 @@ public class Storage {
     protected Path path;
     protected boolean pathExists;
 
+    /**
+     * Creates a new Storage.
+     */
     public Storage() {
         this.currentDirectory = System.getProperty("user.dir");
         this.path = java.nio.file.Paths.get(currentDirectory, "data.txt");

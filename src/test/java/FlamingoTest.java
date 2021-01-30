@@ -1,12 +1,14 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class FlamingoTest {
 
     @Test
-    public void taskListTest(){
+    public void taskListTest() {
         TaskList t = new TaskList(new ArrayList<>());
         t.addTask(new Todo("read book"));
         t.addTask(new Deadline("return book", LocalDate.parse("2021-02-02")));
