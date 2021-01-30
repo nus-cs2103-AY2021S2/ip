@@ -1,23 +1,23 @@
 package duke.storage;
 
-import duke.*;
-import duke.command.CommandType;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.DukeException;
+import duke.command.CommandType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Class which contains methods to initialise and update a data text file in a pre-determined path.
  */
 public class Storage {
-    public static final String splitter = " /&/ ";
+    public static final String SPLITTER = " /&/ ";
     private static ArrayList<Task> tasks;
     private static String pathName;
 
@@ -64,7 +64,7 @@ public class Storage {
      * @throws DukeException if the formatting of Strings in the data file is incorrect
      */
     private static Task convertStringToTask(String taskString) throws DukeException {
-        String[] taskArgs = taskString.split(splitter, 4);
+        String[] taskArgs = taskString.split(SPLITTER, 4);
         try {
             CommandType type = CommandType.valueOf(taskArgs[0]);
             boolean isDone = Integer.parseInt(taskArgs[1]) == 1;
@@ -82,6 +82,8 @@ public class Storage {
             case EVENT:
                 task = new Event(desc, LocalDateTime.parse(taskArgs[3]));
                 break;
+            default:
+                throw new DukeException("Can't convert string from menu to order...");
             }
             if (isDone) {
                 assert task != null;

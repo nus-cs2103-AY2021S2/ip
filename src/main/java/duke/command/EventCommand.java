@@ -1,11 +1,12 @@
 package duke.command;
 
+
+import duke.DukeException;
 import duke.Ui;
+import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.DukeException;
-import duke.storage.Storage;
 
 /**
  * Class containing data and methods specific to a Event command

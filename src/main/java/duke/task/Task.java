@@ -5,12 +5,25 @@ package duke.task;
  */
 public abstract class Task {
 
-    public String description;
-    public boolean isDone;
+    private String description;
+    private boolean isDone;
 
+    /**
+     * Creates a task object and sets isDone to false by default.
+     *
+     * @param description description of task
+     */
     public Task(String description) {
         this.description = description;
         isDone = false;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

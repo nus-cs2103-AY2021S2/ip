@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Class containing data and methods specific to a Find command
@@ -30,7 +30,7 @@ public class FindCommand extends Command {
             String keyword = command[1];
             ArrayList<Task> matchingTasks = new ArrayList<>();
             for (Task task : Storage.getTasks()) {
-                if (task.description.contains(keyword)) {
+                if (task.getDescription().contains(keyword)) {
                     matchingTasks.add(task);
                 }
             }

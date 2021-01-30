@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.Ui;
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.TaskList;
+
 import duke.DukeException;
+import duke.Ui;
 import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Class containing data and methods specific to a Deadline command
