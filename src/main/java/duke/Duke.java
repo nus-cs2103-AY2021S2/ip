@@ -5,17 +5,14 @@ import duke.exceptions.DukeIDKException;
 import duke.exceptions.DukeInvalidDesException;
 import duke.exceptions.DukeMissingDesException;
 import duke.handler.Queries;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
     private static boolean exit = false;
-    private static List<Task> tasks = new ArrayList<>();
+    private static TaskList tasks = new TaskList();
 
     private static final Ui ui = new Ui();
 
@@ -69,10 +66,10 @@ public class Duke {
                     } else {
                         throw new DukeIDKException();
                     }
-                    tasks.add(toAdd);
+                    tasks.addTask(toAdd);
                     response = "Got it. I've added this task:\n"
                             + " " + toAdd + "\n"
-                            + "Now you have " + tasks.size() + " tasks in the list.\n";
+                            + "Now you have " + tasks.getNumOfTasks() + " tasks in the list.\n";
                     ui.respond(response);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException(keyword_UC);
@@ -82,9 +79,9 @@ public class Duke {
             case DONE:
                 try {
                     int taskNum = Integer.parseInt(userInput.split(" ")[1]);
-                    Task task = tasks.get(taskNum - 1);
+                    Task task = tasks.getTask(taskNum);
                     Task updatedTask = task.markDone();
-                    tasks.set(taskNum - 1, updatedTask);
+                    tasks.updateTask(taskNum, updatedTask);
                     response = "Nice! I've marked this task as done: \n"
                             + " " + updatedTask + "\n";
                     ui.respond(response);
@@ -98,8 +95,8 @@ public class Duke {
             case DELETE:
                 try {
                     int taskNum = Integer.parseInt(userInput.split(" ")[1]);
-                    Task task = tasks.get(taskNum - 1);
-                    tasks.remove(taskNum - 1);
+                    Task task = tasks.getTask(taskNum);
+                    tasks.removeTask(taskNum);
                     response = "Noted. I've removed this task: \n"
                             + " " + task + "\n";
                     ui.respond(response);
@@ -110,11 +107,7 @@ public class Duke {
                 }
                 break;
             case LIST:
-                for (int i = 0; i < tasks.size(); i++) {
-                    Task t = tasks.get(i);
-                    response += Integer.toString(i + 1) + "."
-                            + t + "\n";
-                }
+                response += tasks.toString();
                 ui.respond(response);
                 break;
             }
