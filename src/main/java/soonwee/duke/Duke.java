@@ -1,12 +1,13 @@
 package soonwee.duke;
+
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.time.format.DateTimeFormatter;
 
 public class Duke {
+
     public static final int TODO = 1;
     public static final int DEADLINE = 2;
     public static final int EVENT = 3;
@@ -22,19 +23,24 @@ public class Duke {
         System.out.println(display.printBye());
     }
 
-    public static void selectAction() throws IOException{
+    /**
+     * Prompts the user which bot they want to choose.
+     *
+     * @throws IOException if an error occurs.
+     */
+    public static void selectAction() throws IOException {
         BufferedReader input = new
-            BufferedReader(new InputStreamReader(System.in));
+                BufferedReader(new InputStreamReader(System.in));
         String cmd = input.readLine();
         switch (cmd) {
-            case "1":
-                performFirstTask();
-                break;
-            case "2":
-                TaskList temp = performSecondTask();
-                break;
-            default:
-                break;
+        case "1":
+            performFirstTask();
+            break;
+        case "2":
+            TaskList temp = performSecondTask();
+            break;
+        default:
+            break;
         }
         input.close();
     }
@@ -46,7 +52,7 @@ public class Duke {
     public static void performFirstTask() throws IOException {
         String cmd = new String();
         BufferedReader input = new
-            BufferedReader(new InputStreamReader(System.in));
+                BufferedReader(new InputStreamReader(System.in));
         while (true) {
             cmd = input.readLine();
             System.out.println(display.printLine());
@@ -68,7 +74,7 @@ public class Duke {
         String cmd = new String();
         Storage storage = new Storage("data/tasks.txt");
         BufferedReader input = new
-            BufferedReader(new InputStreamReader(System.in));
+                BufferedReader(new InputStreamReader(System.in));
         while (true) {
             cmd = input.readLine();
             System.out.println(display.printLine());
@@ -99,12 +105,11 @@ public class Duke {
         Parser checker = new Parser();
         int taskType = checker.checkTaskType(cmd);
         String task = checker.checkFrontInput(cmd, taskType);
-        if(!task.isEmpty()) {
+        if (!task.isEmpty()) {
             try {
                 if (taskType == -1) {
                     throw new
-                        DukeException("☹ OOPS!!! I'm sorry, " +
-                        "but I don't know what that means :-(");
+                            DukeException("☹ OOPS!!! I'm sorry, " + "but I don't know what that means :-(");
                 } else {
                     if (taskType == TODO) {
                         ToDo newToDo = new ToDo(task);
@@ -128,6 +133,9 @@ public class Duke {
         return taskList;
     }
 
+    /**
+     * Performs addition of task into TaskList.
+     */
     public static void performAddTask(TaskList taskList, Task task) {
         taskList.addTask(task);
         System.out.println("Got it. I've added this task: ");

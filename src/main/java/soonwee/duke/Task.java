@@ -3,7 +3,7 @@ package soonwee.duke;
 public class Task {
 
     public String taskDesc;
-    public boolean isCompleted; //Task 1.3
+    public boolean isCompleted;
 
     public Task(String taskDesc) {
         this.taskDesc = taskDesc;
@@ -15,7 +15,7 @@ public class Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String marked = new String();
         if (this.isCompleted) {
             marked = "X";
