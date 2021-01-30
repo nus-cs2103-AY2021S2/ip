@@ -10,6 +10,11 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Creates a Duke instance with filePath to where data is stored.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) throws IOException {
         storage = new Storage(filePath);
         ui = new Ui();
@@ -21,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke.
+     */
     public void run() {
         ui.greeting();
         boolean isExit = false;
@@ -39,10 +47,9 @@ public class Duke {
         }
     }
 
-  
-    /** 
+    /**
      * Runs Duke programm with data file at data/duke.txt
-     * 
+     *
      * @param args
      * @throws IOException
      */

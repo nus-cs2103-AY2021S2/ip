@@ -1,6 +1,7 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'java'
+	id 'checkstyle'
 }
 
 jar {
@@ -25,4 +26,8 @@ test {
 	testLogging {
 		events "passed", "skipped", "failed"
 	}
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }

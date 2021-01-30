@@ -1,18 +1,18 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
 
 public class ListCommand extends Command {
     public ListCommand() {
         super(false);
     }
 
-    /** 
+    /**
      * Lists all tasks in taskList
-     * 
+     *
      * @param taskList
      * @param ui
      * @param storage
