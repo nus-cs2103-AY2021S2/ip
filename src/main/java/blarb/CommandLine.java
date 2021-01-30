@@ -13,9 +13,14 @@ class CommandLine {
      * @param command     The main command.
      * @param description The description of the main command.
      */
-    public CommandLine(Command command, String description) {
+    public CommandLine(Command command, String ...description) {
         this.command = command;
-        this.description = description;
+        if (description.length > 0) {
+            this.description = description[0];
+        } else {
+            this.description = "";
+        }
+
     }
 
     /**

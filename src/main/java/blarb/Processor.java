@@ -15,7 +15,8 @@ public class Processor {
      * @return Termination status.
      */
     static boolean leave(String input) {
-        return Parser.parse(input).command.equals(Command.BYE);
+        CommandLine cml = Parser.parse(input);
+        return cml.command.equals(Command.BYE) && cml.isSingleCommand();
     }
 
     /**
@@ -32,19 +33,15 @@ public class Processor {
         case DONE:
             try {
                 int index = Integer.parseInt(cml.description) - 1;
-                try {
-                    String output = tasklist.done(index);
-                    try {
-                        storage.refile(tasklist);
-                    } catch (IOException ex) {
-                        outputs[1] = "Cannot access storage.";
-                    }
-                    outputs[0] = output;
-                } catch (IndexOutOfBoundsException ex) {
-                    outputs[0] = "There is no such task.";
-                }
+                String output = tasklist.done(index);
+                outputs[0] = output;
+                storage.refile(tasklist);
+            } catch (IOException ex) {
+                outputs[1] = "Cannot access storage.";
             } catch (ArrayIndexOutOfBoundsException ex) {
                 outputs[0] = "What have you done! More specific!";
+            } catch (IndexOutOfBoundsException ex) {
+                outputs[0] = "There is no such task.";
             } catch (NumberFormatException ex) {
                 outputs[0] = "Done what now? I don't understand";
             }
@@ -52,19 +49,15 @@ public class Processor {
         case DELETE:
             try {
                 int index = Integer.parseInt(cml.description) - 1;
-                try {
-                    String output = tasklist.delete(index);
-                    try {
-                        storage.refile(tasklist);
-                    } catch (IOException ex) {
-                        outputs[1] = "Cannot access storage.";
-                    }
-                    outputs[0] = output;
-                } catch (IndexOutOfBoundsException ex) {
-                    outputs[0] = "There is no such task.";
-                }
+                String output = tasklist.delete(index);
+                outputs[0] = output;
+                storage.refile(tasklist);
+            } catch (IOException ex) {
+                outputs[1] = "Cannot access storage.";
             } catch (ArrayIndexOutOfBoundsException ex) {
                 outputs[0] = "What do you want to hide?";
+            } catch (IndexOutOfBoundsException ex) {
+                outputs[0] = "There is no such task.";
             } catch (NumberFormatException ex) {
                 outputs[0] = "You can't delete your past.";
             }
@@ -76,12 +69,10 @@ public class Processor {
                 }
                 Task task = new ToDo(cml.description);
                 String output = tasklist.add(task);
-                try {
-                    storage.file(task);
-                } catch (IOException ex) {
-                    outputs[1] = "Cannot access storage.";
-                }
                 outputs[0] = output;
+                storage.file(task);
+            } catch (IOException ex) {
+                outputs[1] = "Cannot access storage.";
             } catch (InputMismatchException ex) {
                 outputs[0] = "Todo what?";
             }
@@ -92,20 +83,16 @@ public class Processor {
                     throw new InputMismatchException();
                 }
                 String[] fragments = cml.description.split(" /by ");
-                try {
-                    Task task = new Deadline(fragments[0], fragments[1]);
-                    String output = tasklist.add(task);
-                    try {
-                        storage.file(task);
-                    } catch (IOException ex) {
-                        outputs[1] = "Cannot access storage.";
-                    }
-                    outputs[0] = output;
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    outputs[0] = "Type the deadline, then give the time using \"/by\".";
-                } catch (DateTimeParseException ex) {
-                    outputs[0] = "blarb.Deadline time must be in the format of yyyy-mm-dd.";
-                }
+                Task task = new Deadline(fragments[0], fragments[1]);
+                String output = tasklist.add(task);
+                outputs[0] = output;
+                storage.file(task);
+            } catch (IOException ex) {
+                outputs[1] = "Cannot access storage.";
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                outputs[0] = "Type the deadline, then give the time using \"/by\".";
+            } catch (DateTimeParseException ex) {
+                outputs[0] = "blarb.Deadline time must be in the format of yyyy-mm-dd.";
             } catch (InputMismatchException ex) {
                 outputs[0] = "Someone's having trouble with deadlines.";
             }
@@ -116,18 +103,15 @@ public class Processor {
                     throw new InputMismatchException();
                 }
                 String[] fragments = cml.description.split(" /at ");
-                try {
-                    Task task = new Event(fragments[0], fragments[1]);
-                    String output = tasklist.add(task);
-                    try {
-                        storage.file(task);
-                    } catch (IOException ex) {
-                        outputs[1] = "Cannot access storage.";
-                    }
-                    outputs[0] = output;
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    outputs[0] = "Type the event, then give the time using \"/at\".";
-                }
+                Task task = new Event(fragments[0], fragments[1]);
+                String output = tasklist.add(task);
+                outputs[0] = output;
+                storage.file(task);
+            } catch (IOException ex) {
+                outputs[1] = "Cannot access storage.";
+
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                outputs[0] = "Type the event, then give the time using \"/at\".";
             } catch (InputMismatchException ex) {
                 outputs[0] = "Tell me the event!";
             }
