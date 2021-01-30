@@ -17,6 +17,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructs a new DeadlineTask with the specified name
+     *
      * @param name The name of the task
      */
     public DeadlineTask(String name) {
@@ -25,6 +26,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructs a new DeadlineTask with the specified name and deadline
+     *
      * @param name The name of the task
      * @param dueTime The deadline of the task
      */
@@ -35,6 +37,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Sets the deadline of the DeadlineTask
+     *
      * @param dueTime The new deadline
      */
     public void setDueTime(String dueTime) {
@@ -43,6 +46,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns the deadline of the DeadlineTask
+     *
      * @return The deadline of the DeadlineTask
      */
     public String getDueTime() {
@@ -51,6 +55,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns the string representation of the DeadlineTask for storage
+     *
      * @return The string representation of the DeadlineTask for storage
      */
     @Override
