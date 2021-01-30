@@ -5,13 +5,10 @@ import duke.task.Event;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-<<<<<<< HEAD
+
 /**
  * Sub-class of Command that represents and execute the todo, deadline and event instructions of user.
  */
-=======
-
->>>>>>> branch-A-CodingStandard
 public class AddCommand extends Command{
 	public AddCommand(String instruction, String task, String date) {
 		super(instruction, task, date, command -> {
@@ -26,16 +23,13 @@ public class AddCommand extends Command{
 	}
 
 
-<<<<<<< HEAD
+
 	/**
 	 * handle todo command and create a todo task if task is not empty.
 	 * @param task name of the user task.
 	 */
-	private static final Boolean handleToDo(String task) {
-=======
-
 	private static Boolean handleToDo(String task) {
->>>>>>> branch-A-CodingStandard
+
 		if (!task.equals("")) {
 			Todo todo = new Todo(task);
 			System.out.println(Ui.biggerBox(todo));
