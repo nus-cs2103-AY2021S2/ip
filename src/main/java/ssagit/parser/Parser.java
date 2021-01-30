@@ -13,10 +13,12 @@ import java.util.Date;
 public class Parser {
     ConsoleUI ui;
     boolean isBye;
+    DateValidator validator;
 
-    public Parser(ConsoleUI ui) {
+    public Parser(ConsoleUI ui, DateValidator validator) {
         this.ui = ui;
         this.isBye = false;
+        this.validator = validator;
     }
 
     /**
@@ -44,10 +46,9 @@ public class Parser {
     /**
      * Parses lines of user input and outputs corresponding command.
      * @param tasks List of tasks from file.
-     * @param validator {@code DateValidator} object to check if input dates are valid.
      * @param taskIterator Integer to count number of tasks at a time.
      */
-    public void parseInput(Task[] tasks, DateValidator validator, int taskIterator) {
+    public void parseInput(Task[] tasks, int taskIterator) {
         String input = ui.nextLine();
         String inputArr[] = input.split(" ");
 
