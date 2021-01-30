@@ -1,6 +1,13 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddTaskCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.UnknownCommand;
 
 /**
  * A Parser class to parse inputs given by user into Commands.
