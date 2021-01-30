@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'sharadhr.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "sharadhr.duke.Duke"
+}
+
+run {
+    standardInput = System.in
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

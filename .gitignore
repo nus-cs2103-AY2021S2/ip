@@ -13,5 +13,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+# VS Code files 
+.vscode/
+.classpath
+.project
+.settings/org.eclipse.buildship.core.prefs
+data/duke.txt
