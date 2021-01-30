@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -13,7 +14,6 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
-
 application {
     mainClassName = "duke.Duke"
 }
@@ -23,6 +23,9 @@ shadowJar {
     archiveClassifier = null
 }
 
+checkstyle {
+    toolVersion = '8.29'
+}
 
 run{
     standardInput = System.in
