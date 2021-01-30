@@ -3,29 +3,15 @@ import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
-/**
- * Represents a Parser instance. A Parser instance will validate input at
- * certain point.
- */
 public class Parser {
     public static final int TODO = 1;
     public static final int DEADLINE = 2;
     public static final int EVENT = 3;
 
-    /**
-     * Instantiate Parser.
-     */
     public Parser() {
 
     }
 
-    /**
-     * Returns an integer that represent the type of task that is being passed
-     * in.
-     *
-     * @param data command input by user.
-     * @return integer determining the task type.
-     */
     public int checkTaskType(String data) {
         if (data.indexOf("todo") == 0 && data.contains("todo")) {
             return TODO;
@@ -38,14 +24,7 @@ public class Parser {
         }
     }
 
-    /**
-     * Checks the front input of the command, followed by the description at
-     * the back.
-     *
-     * @param cmd command input by user.
-     * @param taskID task identifier.
-     * @return task description.
-     */
+    //Checking front command
     public String checkFrontInput(String cmd, int taskID) {
         String task = new String();
         String type = new String();
@@ -80,12 +59,6 @@ public class Parser {
         return task;
     }
 
-    /**
-     * Takes in a command and returns the date and time in a LocalDateTime format.
-     *
-     * @param cmd command input by user.
-     * @return datetime in LocalDateTime format.
-     */
     public LocalDateTime dateFormatter(String cmd) {
         int nextChar = -1;
         int nextWord = 4;
