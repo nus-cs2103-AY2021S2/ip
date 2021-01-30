@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Commands recognised by the application
+ */
 public enum Command {
     BYE,
     LIST,

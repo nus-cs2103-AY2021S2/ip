@@ -3,6 +3,14 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * <h1>Duke</h1>
+ * The Duke program implements an application that is able to
+ * read user inputs to record and save user's tasks.
+ *
+ * @author A0200357R Sean Iau Yang
+ * @version A-JavaDoc
+ */
 public class Duke {
     public static final String logo = " ____        _\n"
             + "|  _ \\ _   _| | _____ \n"
