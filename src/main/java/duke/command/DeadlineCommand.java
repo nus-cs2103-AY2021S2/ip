@@ -29,17 +29,18 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes the DeadlineCommand
-     * @param ui the ui to respond to the user's input
-     * @param s The storage to save the tasklist to
+     * @param ui The ui to respond to the user's input
+     * @param s The storage to save the TaskList to
      * @param list The current list of tasks
+     * @return The reply to the DeadlineCommand
      * @throws IOException when the list fails to be saved
      */
-    public void execute(Ui ui, Storage s, TaskList list) throws IOException {
+    public String execute(Ui ui, Storage s, TaskList list) throws IOException {
         Deadline t = new Deadline(this.description, this.by);
         list.addTask(t);
         this.reply = "Got it. I've added this task:\n\t" + t.toString()
                 + "\n\tNow you have " + list.getSize() + " task" + (list.getSize() != 1 ? "s " : " ") + "in the list.";
         s.storeData(list.getList());
-        ui.reply(this.reply);
+        return ui.reply(this.reply);
     }
 }

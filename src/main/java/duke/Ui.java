@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Handles the User input and output
  */
@@ -12,7 +10,7 @@ public class Ui {
             + "\t| | | | | | | |/ / _ \\\n"
             + "\t| |_| | |_| |   <  __/\n"
             + "\t|____/ \\__,_|_|\\_\\___|\n";
-    private static Scanner sc = new Scanner(System.in);
+
     /**
      * Constructor for a Ui.
      */
@@ -22,33 +20,23 @@ public class Ui {
     /**
      * The welcome prompt when Duke is first initialised
      */
-    public void welcome() {
-        reply("Hello from\n" + logo + "\tHello! I'm Duke\n" + "\tWhat can I do for you?");
-    }
-
-    /**
-     * Gets the input from the user
-     * @return a string comprising of the commands from the user.
-     */
-    public String getInput() {
-        return sc.nextLine();
+    public String welcome() {
+        return reply("Hello from Duke! What can I do for you?");
     }
 
     /**
      * Prints the error message for a caught CommandException
      * @param message the error message to be printed
      */
-    public void showError(String message) {
-        reply(message);
+    public String showError(String message) {
+        return reply(message);
     }
 
     /**
      * Replies with indentation and border lines
      * @param reply content of the reply
      */
-    public void reply(String reply) {
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t" + reply);
-        System.out.println("\t____________________________________________________________");
+    public String reply(String reply) {
+        return reply;
     }
 }

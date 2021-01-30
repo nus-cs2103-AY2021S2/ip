@@ -32,11 +32,13 @@ public class Command {
 
     /**
      * Executes the command
-     * @param ui the ui to respond to the user's input
-     * @param s The storage to save the tasklist to
+     * @param ui The ui to respond to the user's input
+     * @param s The storage to save the TaskList to
      * @param list The current list of tasks
-     * @throws IOException when the loading fails
+     * @return The reply to the command
+     * @throws IOException when the list fails to be saved
      */
-    public void execute(Ui ui, Storage s, TaskList list)throws IOException {
+    public String execute(Ui ui, Storage s, TaskList list)throws IOException {
+        return ui.reply("");
     }
 }

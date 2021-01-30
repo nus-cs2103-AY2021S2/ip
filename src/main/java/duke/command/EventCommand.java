@@ -28,19 +28,20 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Executes the command
-     * @param ui the ui to respond to the user's input
-     * @param s The storage to save the tasklist to
+     * Executes the EventCommand
+     * @param ui The ui to respond to the user's input
+     * @param s The storage to save the TaskList to
      * @param list The current list of tasks
-     * @throws IOException when file fails to be saved
+     * @return The reply to the EventCommand
+     * @throws IOException when the file fails to be saved
      */
-    public void execute(Ui ui, Storage s, TaskList list) throws IOException {
+    public String execute(Ui ui, Storage s, TaskList list) throws IOException {
         Event t = new Event(this.description, this.at);
         list.addTask(t);
         this.reply = "Got it. I've added this task:\n\t" + t.toString()
                 + "\n\tNow you have " + list.getSize() + " task" + (list.getSize() != 1 ? "s " : " ") + "in the list.";
         s.storeData(list.getList());
-        ui.reply(this.reply);
+        return ui.reply(this.reply);
     }
 }
 

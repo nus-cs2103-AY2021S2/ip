@@ -20,12 +20,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the command
-     * @param ui the ui to respond to the user's input
-     * @param s The storage to save the tasklist to
+     * Executes the FindCommand
+     * @param ui The ui to respond to the user's input
+     * @param s The storage to save the TaskList to
      * @param list The current list of tasks
+     * @return The reply to the FindCommand
      */
-    public void execute(Ui ui, Storage s, TaskList list) {
+    public String execute(Ui ui, Storage s, TaskList list) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < list.getSize(); i++) {
@@ -39,7 +40,7 @@ public class FindCommand extends Command {
             sb.append("\tYour list is empty!");
         }
         this.reply = sb.toString();
-        ui.reply(this.reply);
+        return ui.reply(this.reply);
     }
 
 }
