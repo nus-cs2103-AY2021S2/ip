@@ -1,19 +1,23 @@
+package duke.task;
+
+import duke.EmptyTaskDukeException;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 
-public class Deadlines extends Task {
+public class Deadline extends Task {
     private LocalDate dueBy;
     private static final String DUE_COMMAND = "/by";
 
-    public Deadlines(String input) throws EmptyTaskDukeException, DateTimeParseException {
+    public Deadline(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
         dueBy = LocalDate.parse(getDueDateFromInput(input));
         Task.incrementNumOfTask();
     }
 
-    public Deadlines(String name, String dueBy) throws EmptyTaskDukeException {
+    public Deadline(String name, String dueBy) throws EmptyTaskDukeException {
         super(name);
         this.dueBy = LocalDate.parse(dueBy);
     }

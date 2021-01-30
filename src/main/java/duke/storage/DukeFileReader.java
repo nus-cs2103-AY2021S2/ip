@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.EmptyTaskDukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -9,7 +17,7 @@ public class DukeFileReader {
 
     private static List<Task> readTaskListFromInternalStorage() throws FileNotFoundException {
         List<Task> taskList = new ArrayList<>();
-        FileDirectoryChecker.doesFileExist(FILE_PATH);
+        FileDirectoryChecker.prepareFile(FILE_PATH);
         File f = new File(FILE_PATH);
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
@@ -22,7 +30,7 @@ public class DukeFileReader {
             String taskName = taskBreakdown[2];
             if (taskBreakdown[0].equals("T")) {
                 try {
-                    Task task = new Todos(taskName);
+                    Task task = new Todo(taskName);
                     if (isTaskDone) {
                         task.setDone();
                     }
@@ -32,7 +40,7 @@ public class DukeFileReader {
                 }
             } else if (taskBreakdown[0].equals("D")) {
                 try {
-                    Task task = new Deadlines(taskName, taskBreakdown[3]);
+                    Task task = new Deadline(taskName, taskBreakdown[3]);
                     if (isTaskDone) {
                         task.setDone();
                     }
@@ -42,7 +50,7 @@ public class DukeFileReader {
                 }
             } else if (taskBreakdown[0].equals("E")) {
                 try {
-                    Task task = new Events(taskName, taskBreakdown[3]);
+                    Task task = new Event(taskName, taskBreakdown[3]);
                     if (isTaskDone) {
                         task.setDone();
                     }

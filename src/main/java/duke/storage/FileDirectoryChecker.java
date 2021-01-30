@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -5,7 +7,7 @@ public class FileDirectoryChecker {
 
     // check if file directory exist, creates a new folder if folder does not exist, creates a new file if file
     // does not exist
-    public static void doesFileExist(String dir) {
+    public static void prepareFile(String dir) {
         File directory = new File(dir);
         File pathDir = directory.getParentFile();
         checkPath(pathDir);

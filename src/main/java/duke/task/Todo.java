@@ -1,7 +1,11 @@
-public class Todos extends Task {
-    public Todos(String input) throws EmptyTaskDukeException {
+package duke.task;
+
+import duke.EmptyTaskDukeException;
+
+public class Todo extends Task {
+    public Todo(String input) throws EmptyTaskDukeException {
         super(input);
-        Task.incrementNumOfTask();
+        incrementNumOfTask();
     }
 
     @Override

@@ -1,20 +1,24 @@
+package duke.task;
+
+import duke.EmptyTaskDukeException;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 
-public class Events extends Task {
+public class Event extends Task {
     private LocalDate dueAt;
 
     private static final String DUE_COMMAND = "/at";
 
-    public Events(String input) throws EmptyTaskDukeException, DateTimeParseException {
+    public Event(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
         dueAt = LocalDate.parse(getDueDateFromInput(input));
-        Task.incrementNumOfTask();
+        incrementNumOfTask();
     }
 
-    public Events(String name, String dueAt) throws EmptyTaskDukeException {
+    public Event(String name, String dueAt) throws EmptyTaskDukeException {
         super(name);
         this.dueAt = LocalDate.parse(dueAt);
     }
