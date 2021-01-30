@@ -9,14 +9,25 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
+/**
+ * Represents a TaskList instance. A TaskList instance will contain a list of
+ * task and it can display, add or remove tasks from it.
+ */
 public class TaskList {
 
     public ArrayList<Task> tasksList;
 
+    /**
+     * Instantiate TaskList instance.
+     */
     public TaskList(){
         this.tasksList = new ArrayList<>();
     }
 
+    /**
+     * Set a certain task to be done.
+     * @param index task number.
+     */
     public void setTaskDone(int index) {
         this.getTask(index - 1).setCompleted();
         System.out.println("Nice! I've marked this task as done: ");
@@ -26,7 +37,7 @@ public class TaskList {
     /**
      * Adds a new task to the Task List.
      *
-     * @param  newTask  New Task.
+     * @param newTask new task.
      */
     public void addTask(Task newTask){
         tasksList.add(newTask);
@@ -35,7 +46,7 @@ public class TaskList {
     /**
      * Gets size of Task List.
      *
-     * @return      updated Task List.
+     * @return updated Task List.
      */
     public int getSize() {
         return this.tasksList.size();
@@ -44,8 +55,8 @@ public class TaskList {
     /**
      * Gets the task at respective index.
      *
-     * @param  index task index.
-     * @return       task at that index.
+     * @param index task index.
+     * @return task at that index.
      */
     public Task getTask(int index){
         return tasksList.get(index);
@@ -54,7 +65,7 @@ public class TaskList {
     /**
      * Removes task at respective index.
      *
-     * @param  index task index.
+     * @param index task index.
      */
     public void removeTask(int index){
         Task temp = this.getTask(index - 1);
@@ -68,7 +79,6 @@ public class TaskList {
 
     /**
      * Displays all tasks.
-     *
      */
     public void displayTasks(){
         System.out.println("Here are the tasks in your list:");

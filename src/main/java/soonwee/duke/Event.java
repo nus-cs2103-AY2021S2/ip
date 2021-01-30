@@ -2,10 +2,19 @@ package soonwee.duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event instance. An Event instance will store the task
+ * name and its starting time.
+ */
 public class Event extends Task{
 
     protected LocalDateTime at;
 
+    /**
+     * Instantiates the Event task.
+     * @param description description of the task
+     * @param at starting time of the task
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
