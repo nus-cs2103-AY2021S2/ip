@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,6 +10,7 @@ import java.util.Scanner;
 public class Duke {
     public static boolean isRunning;
     public static List<Task> taskList;
+    public static final String STORAGE_PATH = "./data/duke.txt";
 
     public static void printDivider() {
         String divider = "____________________________________________________________";
@@ -17,13 +23,88 @@ public class Duke {
         System.out.println(greeting);
     }
 
+    public static List<Task> loadTasksFromFile(String pathname) throws DukeException {
+        List<Task> taskList = new ArrayList<>();
+        File file = new File(pathname);
+        try {
+            if (!file.exists()) {
+                file.getParentFile().mkdir();
+                file.createNewFile();
+                return taskList;
+            }
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+
+        try (BufferedReader reader = Files.newBufferedReader(file.toPath())) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] taskData = line.split("\\|");
+                String taskType = taskData[0];
+                String taskStatus = taskData[1];
+                String taskDescription = taskData[2];
+                Task task = null;
+
+                switch(taskType) {
+                case("T"):
+                    task = new Todo(taskDescription);
+                    break;
+                case("D"):
+                    task = new Deadline(taskDescription, taskData[3]);
+                    break;
+                case("E"):
+                    task = new Event(taskDescription, taskData[3]);
+                    break;
+                }
+
+                if (task != null && taskStatus.equals("1")) {
+                    task.setDone(true);
+                }
+
+                taskList.add(task);
+            }
+
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+        return taskList;
+    }
+
+    public static void saveTaskToFile(List<Task> taskList, String pathname) throws DukeException {
+        StringBuilder taskString = new StringBuilder();
+        for (Task task : taskList) {
+            taskString.append(task.toSaveFormat());
+        }
+        File file = new File(pathname);
+        try {
+            if (!file.exists()) {
+                file.getParentFile().mkdir();
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
+            writer.write(taskString.toString());
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
+
     public static void startDuke() {
         printDivider();
         printGreeting();
-        printDivider();
         isRunning = true;
-        taskList = new ArrayList<>();
+        try {
+            taskList = loadTasksFromFile(STORAGE_PATH);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        printDivider();
     }
+
 
     public static void waitForInput(Scanner in) {
         while (isRunning) {
@@ -86,6 +167,7 @@ public class Duke {
             Todo todo = new Todo(input);
             taskList.add(new Todo(input));
             printAddedTask(todo);
+            saveTaskToFile(taskList, STORAGE_PATH);
         } else {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
@@ -98,6 +180,7 @@ public class Duke {
                 Deadline deadline = new Deadline(inputArr[0], inputArr[1]);
                 taskList.add(deadline);
                 printAddedTask(deadline);
+                saveTaskToFile(taskList, STORAGE_PATH);
             } else {
                 throw new DukeException("☹ OOPS!!! The due date of a deadline cannot be empty.");
             }
@@ -113,6 +196,7 @@ public class Duke {
                 Event event = new Event(inputArr[0], inputArr[1]);
                 taskList.add(event);
                 printAddedTask(event);
+                saveTaskToFile(taskList, STORAGE_PATH);
             } else {
                 throw new DukeException("☹ OOPS!!! The occurrence time of an event cannot be empty.");
             }
@@ -156,6 +240,7 @@ public class Duke {
             Task task = taskList.get(idx);
             task.setDone(true);
             printDoneTask(task);
+            saveTaskToFile(taskList, STORAGE_PATH);
         } else {
             throw new DukeException("☹ OOPS!!! The id of a done command cannot be empty.");
         }
@@ -174,6 +259,7 @@ public class Duke {
             Task task = taskList.get(idx);
             taskList.remove(idx);
             printDeletedTask(task);
+            saveTaskToFile(taskList, STORAGE_PATH);
         } else {
             throw new DukeException("☹t OOPS!!! The id of a delete command cannot be empty.");
         }
