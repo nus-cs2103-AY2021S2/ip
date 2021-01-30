@@ -9,14 +9,14 @@ import java.util.regex.Pattern;
 public class Storage {
 
     /**
-     * The name of the file to store data
+     * The name of the file to store data.
      */
     public static final String fileName = "tasks.data";
 
     /**
-     * Saves the task list to file
+     * Saves the task list to file.
      *
-     * @param tasks The task list to be stored
+     * @param tasks The task list to be stored.
      */
     public static void saveToFile(TaskList tasks) {
         try {
@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Reads the task list from file
+     * Reads the task list from file.
      */
     public static void readFromFile(TaskList tasks) {
         try {

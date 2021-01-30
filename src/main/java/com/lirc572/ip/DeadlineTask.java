@@ -6,29 +6,29 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task {
 
     /**
-     * Format of datetime for parsing and printing
+     * Format of datetime for parsing and printing.
      */
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     /**
-     * The deadline of the task
+     * The deadline of the task.
      */
     private LocalDateTime dueTime;
 
     /**
-     * Constructs a new DeadlineTask with the specified name
+     * Constructs a new DeadlineTask with the specified name.
      *
-     * @param name The name of the task
+     * @param name The name of the task.
      */
     public DeadlineTask(String name) {
         super(name);
     }
 
     /**
-     * Constructs a new DeadlineTask with the specified name and deadline
+     * Constructs a new DeadlineTask with the specified name and deadline.
      *
-     * @param name The name of the task
-     * @param dueTime The deadline of the task
+     * @param name The name of the task.
+     * @param dueTime The deadline of the task.
      */
     public DeadlineTask(String name, String dueTime) {
         super(name);
@@ -36,27 +36,27 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Sets the deadline of the DeadlineTask
+     * Sets the deadline of the DeadlineTask.
      *
-     * @param dueTime The new deadline
+     * @param dueTime The new deadline.
      */
     public void setDueTime(String dueTime) {
         this.dueTime = LocalDateTime.parse(dueTime, this.format);
     }
 
     /**
-     * Returns the deadline of the DeadlineTask
+     * Returns the deadline of the DeadlineTask.
      *
-     * @return The deadline of the DeadlineTask
+     * @return The deadline of the DeadlineTask.
      */
     public String getDueTime() {
         return this.dueTime.format(this.format);
     }
 
     /**
-     * Returns the string representation of the DeadlineTask for storage
+     * Returns the string representation of the DeadlineTask for storage.
      *
-     * @return The string representation of the DeadlineTask for storage
+     * @return The string representation of the DeadlineTask for storage.
      */
     @Override
     public String toSavedString() {

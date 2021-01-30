@@ -3,18 +3,18 @@ package com.lirc572.ip;
 public class TodoTask extends Task {
 
     /**
-     * Constructs a new TodoTask with the specified name
+     * Constructs a new TodoTask with the specified name.
      *
-     * @param name The name of the task
+     * @param name The name of the task.
      */
     public TodoTask(String name) {
         super(name);
     }
 
     /**
-     * Returns the string representation of the TodoTask for storage
+     * Returns the string representation of the TodoTask for storage.
      *
-     * @return The string representation of the TodoTask for storage
+     * @return The string representation of the TodoTask for storage.
      */
     @Override
     public String toSavedString() {

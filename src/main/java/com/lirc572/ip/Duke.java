@@ -16,12 +16,12 @@ import java.util.Scanner;
 public class Duke {
 
     /**
-     * The task list
+     * The task list.
      */
     private final TaskList tasks;
 
     /**
-     * Constructs a Duke object
+     * Constructs a Duke object.
      */
     public Duke() {
         this.tasks = new TaskList();
@@ -29,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Starts the REPL
+     * Starts the REPL.
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
@@ -55,9 +55,9 @@ public class Duke {
     }
 
     /**
-     * Constructs a Duke object and run it
+     * Constructs a Duke object and run it.
      *
-     * @param args Command line arguments
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         new Duke().run();

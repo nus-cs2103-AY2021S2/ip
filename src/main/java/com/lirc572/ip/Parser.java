@@ -7,17 +7,17 @@ import java.util.Set;
 public class Parser {
 
     /**
-     * All exit commands are listed here
+     * All exit commands are listed here.
      */
     private static final Set<String> EXIT_COMMANDS = Set.of(
             "bye", "exit", "quit"
     );
 
     /**
-     * Tokenizes a command
+     * Tokenizes a command.
      *
-     * @param command A line of command
-     * @return The tokenized command as a String array
+     * @param command A line of command.
+     * @return The tokenized command as a String array.
      */
     public static String[] tokenizeCommand(String command) {
         ArrayList<String> tokens = new ArrayList<>();
@@ -59,10 +59,10 @@ public class Parser {
     }
 
     /**
-     * Processes a command
+     * Processes a command.
      *
-     * @param command The command to process
-     * @return Whether the program should continue (<code>true</code> if not an exit command)
+     * @param command The command to process.
+     * @return Whether the program should continue (<code>true</code> if not an exit command).
      */
     public static boolean processCommand(String command, TaskList tasks) throws Exception {
         String[] tokens = tokenizeCommand(command);
