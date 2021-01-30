@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
+import duke.Ui;
 
 /**
  * Contains the task list e.g., it has operations to add/delete tasks in the list.
@@ -37,7 +37,7 @@ public class TaskList {
      *
      * @param order the order of the task to be deleted
      */
-    public String delete(int order) {
+    public String deleteTask(int order) {
         try {
             if (order < 0 || order >= taskList.size()) {
                 throw new DukeException("There's no task "
@@ -56,7 +56,7 @@ public class TaskList {
      *
      * @param order the order of the task to be marked as done
      */
-    public String markDone(int order) {
+    public String markAsDone(int order) {
         try {
             if (order < 0 || order >= taskList.size()) {
                 throw new DukeException("There's no task "
@@ -64,7 +64,7 @@ public class TaskList {
             } else if (taskList.get(order).isDone()) {
                 throw new DukeException("This task has been finished before.");
             }
-            taskList.get(order).markDone();
+            taskList.get(order).markAsDone();
             return Ui.printFormatMessage("Nice! I've marked this task as done:\n"
                     + taskList.get(order).toString());
         } catch (DukeException ex) {

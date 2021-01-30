@@ -50,7 +50,7 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void markDone() {
+    public void markAsDone() {
         done = true;
     }
 

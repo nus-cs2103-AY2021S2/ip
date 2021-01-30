@@ -1,10 +1,16 @@
 package duke;
 
-import duke.task.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.ToDo;
+
 
 /**
  * A duke.Duke chatbot that provides todo-list function for users.
@@ -16,8 +22,6 @@ public class Chatbot {
 
     /**
      * Constructs the chat bot.
-     *
-     * @param taskList the task list given to chat bot
      */
     public Chatbot() {
         storage = new Storage("./data.txt");
@@ -47,7 +51,7 @@ public class Chatbot {
         Task newTask;
         try {
             String[] taskTypeSplit = input.split(" ");
-            Command command = parser.parse(taskTypeSplit);
+            Command command = parser.parseStringToCommand(taskTypeSplit);
             int tempOrder;
             switch (command) {
             case LIST:
@@ -58,14 +62,14 @@ public class Chatbot {
                 }
                 tempOrder = Integer.parseInt(taskTypeSplit[1]);
                 storage.updateFile(taskList);
-                return taskList.markDone(tempOrder - 1);
+                return taskList.markAsDone(tempOrder - 1);
             case DELETE:
                 if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
                     throw new DukeException("The description of delete cannot be empty.");
                 }
                 tempOrder = Integer.parseInt(taskTypeSplit[1]);
                 storage.updateFile(taskList);
-                return taskList.delete(tempOrder - 1);
+                return taskList.deleteTask(tempOrder - 1);
             case FIND:
                 if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
                     throw new DukeException("The description of find cannot be empty.");
