@@ -13,6 +13,7 @@ public class ToDos extends Task {
 
     /**
      * Returns String format of todos
+     *
      * @return String format of todos
      */
     @Override
@@ -22,6 +23,7 @@ public class ToDos extends Task {
 
     /**
      * Returns String of error message for empty description
+     *
      * @return String of error message for empty description
      */
     @Override
@@ -31,6 +33,7 @@ public class ToDos extends Task {
 
     /**
      * Formats data for saving into text file.
+     *
      * @return T | isDone | description
      */
     @Override

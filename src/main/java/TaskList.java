@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Marks task as done by modifying task arraylist and file data.
+     *
      * @param taskIndex arraylist index of the selected task.
      * @throws IOException for modifying data.
      */
@@ -44,6 +45,7 @@ public class TaskList {
     /**
      * Deletes task by removing from task list and file data.
      * Decrements number of tasks.
+     *
      * @param taskIndex arraylist index of the selected task.
      * @throws IOException for deleting from file.
      */
@@ -63,6 +65,7 @@ public class TaskList {
      * Creates ToDos object to add to task list and file data.
      * If description is empty, will print prompt to tell user.
      * If task addition is successful, increments number of tasks.
+     *
      * @param description description of todo.
      * @throws IOException for adding to file.
      */
@@ -85,6 +88,7 @@ public class TaskList {
      * If description is empty, will print prompt to tell user.
      * If date is in wrong format, will print prompt to tell user.
      * If task addition is successful, increments number of tasks.
+     *
      * @param description description of deadline.
      * @param date in YYYY-MM-DD format.
      * @throws IOException for adding to file.
@@ -115,6 +119,7 @@ public class TaskList {
      * If description is empty, will print prompt to tell user.
      * If date is in wrong format, will print prompt to tell user.
      * If task addition is successful, increments number of tasks.
+     *
      * @param description description of event.
      * @param date in YYYY-MM-DD format.
      * @throws IOException for adding to file.

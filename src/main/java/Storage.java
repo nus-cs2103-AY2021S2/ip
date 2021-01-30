@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Creates data directory and text file.
+     *
      * @throws IOException for createDirectories and createFile methods.
      */
     public void createFile() throws IOException {
@@ -39,6 +40,7 @@ public class Storage {
      * adds ToDos/Deadlines/Events objects to arraylist of tasks.
      * Adds data to a StringBuffer.
      * Increments number of tasks accordingly.
+     *
      * @param tasks arraylist to add tasks to.
      * @throws FileNotFoundException if file does not exist yet.
      */
@@ -85,6 +87,7 @@ public class Storage {
      * Writes or appends to file
      * depending on whether there is existing data in the file.
      * Appends text to StringBuffer.
+     *
      * @param data text to be added to the file.
      * @throws IOException for FileWriter.
      */
@@ -106,6 +109,7 @@ public class Storage {
     /**
      * Replaces text in StringBuffer
      * and writes to the file.
+     *
      * @param before text to be replaced.
      * @param after new replacement text.
      * @throws IOException for FileWriter.
@@ -123,6 +127,7 @@ public class Storage {
     /**
      * Deletes specified text from StringBuffer,
      * and writes to the file.
+     *
      * @param data text to be deleted.
      * @throws IOException for FileWriter.
      */
