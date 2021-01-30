@@ -8,7 +8,6 @@ import duke.ui.Ui;
 
 public class ExitCommand extends Command {
 
-
     @Override
     public void execute(Task task, TaskList taskList, Storage storage) {
         // do one final save of task list into storage
