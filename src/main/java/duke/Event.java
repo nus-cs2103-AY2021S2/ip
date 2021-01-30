@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.time.LocalDate;
 
@@ -54,5 +54,24 @@ public class Event extends Task {
     public String toString() {
         return "[E][" + getStatusIcon() + "] " + description + " (at: "
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + timeRange + ")";
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public String getTimeRange() {
+        return timeRange;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else {
+            return obj instanceof Event && description.equals(((Event) obj).getDescription())
+                    && date.equals(((Event) obj).getDate()) && timeRange.equals(((Event) obj).getTimeRange())
+                            && isDone == ((Event) obj).isDone();
+        }
     }
 }

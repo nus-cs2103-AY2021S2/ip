@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * The simplest type of Task with no date and time.
@@ -40,5 +40,15 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return "[T][" + getStatusIcon() + "] " + description;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else {
+            return obj instanceof Todo && description.equals(((Todo) obj).getDescription())
+                    && isDone == ((Todo) obj).isDone();
+        }
     }
 }

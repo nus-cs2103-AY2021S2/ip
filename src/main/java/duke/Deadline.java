@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -58,4 +58,17 @@ public class Deadline extends Task {
                 deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else {
+            return obj instanceof Deadline && description.equals(((Deadline) obj).getDescription())
+                    && deadline.equals(((Deadline) obj).getDeadline()) && isDone == ((Deadline) obj).isDone();
+        }
+    }
 }
