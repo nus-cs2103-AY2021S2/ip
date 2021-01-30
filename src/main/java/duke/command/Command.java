@@ -15,5 +15,5 @@ public abstract class Command {
      * @throws DukeException When encounter an error in command argument.
      */
     public abstract String executeAndPrint(TaskList list) throws DukeException;
-    public abstract boolean isExit();
+
 }

@@ -138,11 +138,6 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    @Override
     public String toString() {
         switch (this.cmdType) {
         case Todo:

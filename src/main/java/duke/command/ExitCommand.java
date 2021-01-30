@@ -20,11 +20,6 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Test usage: this is an EXIT command";
     }

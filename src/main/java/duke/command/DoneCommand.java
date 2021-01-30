@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.StringParser;
 import duke.TaskList;
 import duke.task.Task;
 
@@ -44,11 +43,6 @@ public class DoneCommand extends Command {
         } else {
             return "No such task in the list\n";
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     @Override

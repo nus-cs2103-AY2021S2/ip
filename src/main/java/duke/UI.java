@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.command.Command;
 
@@ -34,8 +33,7 @@ public class UI {
             + "|  Always be with you.     |\n"
             + "|__________________________|\n";
 
-    private static final Scanner sc = new Scanner(System.in);
-    static TaskList list = new TaskList();
+    private static TaskList list = new TaskList();
 
     /**
      * Print DukeException.
@@ -69,6 +67,12 @@ public class UI {
         return bye;
     }
 
+    /**
+     * Responds according to input string.
+     *
+     * @param commandStr Input command string.
+     * @return Duke's respond.
+     */
     public static String respond(String commandStr) {
         try {
             Command command = Parser.parseCommand(commandStr);
