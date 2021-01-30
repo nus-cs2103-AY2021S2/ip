@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * the agent program to run Duke
+ */
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -164,6 +167,9 @@ public class Duke {
         return true;
     }
 
+    /**
+     * prints the farewell message
+     */
     public static void sayBye() {
         printMsg("Bye. Hope to see you again soon!");
     }
