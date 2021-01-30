@@ -1,3 +1,5 @@
+package duke.util;
+
 /**
  * Thrown when errors occur in Duke.
  */

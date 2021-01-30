@@ -1,3 +1,16 @@
+package duke;
+
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Parser;
+import duke.util.DukeException;
+import duke.util.DukeInputException;
+import duke.util.Task;
+import duke.util.Todo;
+import duke.util.Deadline;
+import duke.util.Event;
+
 /**
  * Duke is a task manager.
  * 
