@@ -1,19 +1,26 @@
 package yoda.parser;
 
 import yoda.command.Command;
-import yoda.command.Input;
+import yoda.command.CommandType;
 import yoda.command.AddCommand;
 import yoda.command.EditCommand;
 import yoda.command.ExitCommand;
 import yoda.command.HelpCommand;
 import yoda.command.ListCommand;
 
+/**
+ * Parser class that parses user input to decide the next course of action.
+ */
 public class Parser {
-
+    /**
+     * Parses the input provided by the user to decide how to handle it.
+     * @param input Input provided by the user.
+     * @return Command needed to handle the input provided.
+     */
     public static Command parse(String input) {
         String[] splitInput = input.split(" ", 2);
         splitInput[0] = splitInput[0].toUpperCase();
-        Input command = checkCommand(splitInput[0]);
+        CommandType command = checkCommand(splitInput[0]);
         splitInput[0] = command.name();
         switch(command) {
         case LIST:
@@ -32,12 +39,16 @@ public class Parser {
         }
     }
 
-    private static Input checkCommand(String command) {
+    /**
+     * Checks if the command referred to by the user input is of a valid type.
+     * @param command Command referred to by the user input.
+     * @return Type of command referred to by the user input.
+     */
+    private static CommandType checkCommand(String command) {
         try {
-            return Input.valueOf(command);
+            return CommandType.valueOf(command);
         } catch (IllegalArgumentException e) {
-            return Input.ERROR;
+            return CommandType.ERROR;
         }
     }
-
 }

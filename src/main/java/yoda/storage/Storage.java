@@ -6,15 +6,26 @@ import yoda.task.TaskList;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Storage class to handle storing and retrieval of the tasklist from the hard disk.
+ */
 public class Storage {
+    /** Filepath of the file containing the tasklist */
     String filePath;
 
+    /**
+     * Creates a storage object.
+     * @param filePath Location of file on the hard disk.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasklist from the file specified in filepath.
+     * @return TaskList stored in the file.
+     */
     public TaskList load() {
-        //Dukedata/tasklist.txt
         File tasks = new File(filePath);
         System.out.println("1");
         TaskList taskList = new TaskList(new ArrayList<Task>());
@@ -38,15 +49,16 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the tasklist to the file specified in the filepath.
+     * @param taskList TaskList to be stored in the file.
+     */
     public void write(TaskList taskList) {
         File tasks = new File(filePath);
-        System.out.println("10");
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(tasks);
-            System.out.println("ll");
             ObjectOutputStream objOutputStream = new ObjectOutputStream(fileOutputStream);
             objOutputStream.writeObject(taskList);
-            System.out.println("here");
             objOutputStream.flush();
             objOutputStream.close();
             System.out.println("Wrote to file");
@@ -58,6 +70,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Deserializes the content in the file.
+     * @return TaskList obtained from the deserialization.
+     */
     public TaskList deserialize() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         try {
@@ -73,5 +89,4 @@ public class Storage {
         }
         return taskList;
     }
-
 }
