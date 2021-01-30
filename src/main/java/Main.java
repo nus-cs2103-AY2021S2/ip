@@ -1,9 +1,10 @@
-import simulator.ChatBot;
+import static ui.Ui.printBox;
 
 import java.io.IOException;
+
 import java.util.Scanner;
 
-import static ui.Ui.printBox;
+import simulator.ChatBot;
 
 public class Main {
     public static void main(String[] args) {

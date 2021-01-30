@@ -1,13 +1,12 @@
 package task;
 
-import exception.DukeException;
-
 import static ui.Ui.printBox;
-
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import exception.DukeException;
 
 /**
  * Class <code>Deadline</code> extends <code>Task</code>. It contains date
@@ -18,27 +17,6 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
-    /**
-     * Returns a string of the task's date with the format "dd MM yyyy".
-     *
-     * @return formatted date.
-     */
-    public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-    }
-
-    /**
-     * Return a string of the task's time with the format "hh:mm a".
-     *
-     * @return formatted time.
-     */
-    public String getTime() {
-        if (this.time != null) {
-            return this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
-        } else {
-            return null;
-        }
-    }
 
     /**
      * Contructs a Deadline task with description as specified in <code>description</code>, and the time and
@@ -99,6 +77,28 @@ public class Deadline extends Task {
             } else {
                 throw new DukeException("☹ OOPS!!! Description of Deadline cannot be empty, please check!");
             }
+        }
+    }
+
+    /**
+     * Returns a string of the task's date with the format "dd MM yyyy".
+     *
+     * @return formatted date.
+     */
+    public String getDate() {
+        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    }
+
+    /**
+     * Return a string of the task's time with the format "hh:mm a".
+     *
+     * @return formatted time.
+     */
+    public String getTime() {
+        if (this.time != null) {
+            return this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        } else {
+            return null;
         }
     }
 

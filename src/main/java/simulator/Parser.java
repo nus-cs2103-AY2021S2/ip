@@ -1,8 +1,8 @@
 package simulator;
 
-import ui.Ui;
-
 import java.util.ArrayList;
+
+import ui.Ui;
 
 /**
  * Class <code>Parser</code> deals with making sense of the user command.
@@ -54,7 +54,6 @@ public class Parser {
         } catch (Exception err) {
             Ui.printBox("☹ OOPS!!! Incorrect input, please check!");
         }
-        
         return result;
     }
 
