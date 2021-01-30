@@ -18,8 +18,8 @@ import java.util.Scanner;
 
 public class MisterDuke {
 
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private ArrayList<Task> tasks;
 
     public MisterDuke(String filePath) throws IOException {
@@ -176,6 +176,17 @@ class Ui {
     public void showDefaultError(Exception e) {
         System.out.println(e.getMessage());
     }
+
+    public void showMatchingItems(ArrayList<Task> tasksArray) {
+        if (tasksArray.isEmpty()) {
+            System.out.println("     Oh no! There are no matching tasks :(");
+        } else {
+            System.out.println("     Here are the matching tasks in your list:");
+            for (int i = 0; i < tasksArray.size(); i++) {
+                System.out.println("       " + (i + 1) + ". " + tasksArray.get(i).toString());
+            }
+        }
+    }
 }
 
 /**
@@ -183,7 +194,7 @@ class Ui {
  * to the local hard disk.
  */
 class Storage {
-    private File txtFile;
+    private final File txtFile;
 
     public Storage (String filePath) throws IOException {
         this.txtFile = new File(filePath);
@@ -264,7 +275,7 @@ class Storage {
  * then display the corresponding message from Mister Duke
  */
 class Parser {
-    private Ui ui;
+    private final Ui ui;
     private Storage storage;
     private ArrayList<Task> taskList;
 
@@ -300,6 +311,8 @@ class Parser {
             return new DeleteCommand(command);
         } else if (cmd.equalsIgnoreCase("bye")) {
             return new ExitCommand(command);
+        } else if (cmd.equalsIgnoreCase("find")) {
+            return new FindCommand(command);
         } else {
             throw new DukeException("     Oops! I'm sorry but I don't know what you mean by that :(");
         }
@@ -522,6 +535,33 @@ class ExitCommand extends Command {
 
     public boolean isRunning() {
         return false;
+    }
+}
+
+class FindCommand extends Command {
+    private String command;
+
+    public FindCommand(String command){
+        this.command = command;
+    }
+
+    @Override
+    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+        String input = command.trim();
+        String[] strArray = input.split(" ", 2);
+        String cmd = strArray[0];
+        String keyword = strArray[1];
+        ArrayList<Task> tempTaskList = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.toString().contains(keyword)) {
+                tempTaskList.add(task);
+            }
+        }
+        ui.showMatchingItems(tempTaskList);
+    }
+
+    public boolean isRunning() {
+        return true;
     }
 }
 
