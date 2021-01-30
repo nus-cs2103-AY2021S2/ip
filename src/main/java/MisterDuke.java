@@ -9,8 +9,11 @@ import java.util.Scanner;
  * Mister Duke is an interactive chat bot that
  * keep track of your tasks, deadlines and events
  * in a list.
- * It can mark the items in the list as done, and
- * remove them from the list.
+ * Some things Mister Duke is good at:
+ * - listing the tasks on your list
+ * - marking specified tasks as done
+ * - removing specified tasks from the list
+ * - find matching tasks given a search word/phrase
  *
  * @author Shaelyn
  * @version CS2103T 20/21 Semester 2, Individual Project
@@ -175,6 +178,10 @@ class Ui {
      */
     public void showDefaultError(Exception e) {
         System.out.println(e.getMessage());
+    }
+
+    public void showOutOfBounds() {
+        System.out.println("     Oops! You don't have that many tasks");
     }
 
     public void showMatchingItems(ArrayList<Task> tasksArray) {
@@ -483,9 +490,13 @@ class DoneCommand extends Command {
     @Override
     public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String[] commandArray = command.trim().split(" ");
-        Task completedTask = taskList.get(Integer.parseInt(commandArray[1]) - 1);
-        completedTask.markAsDone();
-        ui.showTaskDone(completedTask);
+        if (Integer.parseInt(commandArray[1]) > taskList.size()) {
+            ui.showOutOfBounds();
+        } else {
+            Task completedTask = taskList.get(Integer.parseInt(commandArray[1]) - 1);
+            completedTask.markAsDone();
+            ui.showTaskDone(completedTask);
+        }
     }
 
     public boolean isRunning() {
@@ -508,8 +519,11 @@ class DeleteCommand extends Command {
     @Override
     public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String[] commandArray = command.trim().split(" ");
-        ui.showTaskDelete(taskList, commandArray[1]);
-        ui.showTaskList(taskList.size());
+        if (Integer.parseInt(commandArray[1]) > taskList.size()) {
+            ui.showOutOfBounds();
+        } else {
+            ui.showTaskDelete(taskList, commandArray[1]);
+        }
     }
 
     public boolean isRunning() {
