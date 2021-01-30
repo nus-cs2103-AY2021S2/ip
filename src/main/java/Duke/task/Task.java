@@ -42,6 +42,10 @@ public class Task {
         return new Task(this.msg, true);
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
     public String encode() {
         if (isDone.equals(true)) {
             return "DONE" + "|" + this.msg;

@@ -5,6 +5,7 @@ import duke.exception.EmptyDescription;
 import duke.parser.ListParser;
 import duke.parser.Parser;
 
+import java.security.spec.RSAOtherPrimeInfo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -75,6 +76,20 @@ public class TaskList {
         int i = Integer.parseInt(p.getDescription()) - 1;
         tasks.set(i, tasks.get(i).setDone());
         enclose(Response.DONE.toString() + tasks.get(i) + "\n");
+    }
+
+    public void find(Parser parser) {
+        String keyword = parser.getDescription();
+        System.out.println(keyword);
+        SearchList searchList = new SearchList();
+        for (int i = 0; i < tasks.size(); i++) {
+            String description = tasks.get(i).getMsg();
+
+            if (description.contains(keyword)) {
+                searchList.add(tasks.get(i));
+            }
+        }
+        searchList.list();
     }
 
     public void list() {

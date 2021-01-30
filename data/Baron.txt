@@ -9,4 +9,4 @@ T|PENDING|join sports club
 T|PENDING|borrow book
 D|PENDING|burn book |01-02-2023 22:34
 E|PENDING|project debrief |03-04-2021 22:11
-T|PENDING|brwef fe
+T|DONE|eat sushi

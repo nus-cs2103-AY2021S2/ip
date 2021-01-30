@@ -56,9 +56,6 @@ public class Duke {
                 taskList = ui.readCommand(taskList, s);
                 shouldExit = ui.getExit();
                 storage.save(taskList.getTasks());
-
-
-
             } catch (EmptyDescription e) {
                 ui.enclose(e.toString());
             } catch (InvalidTypeOfTask e) {

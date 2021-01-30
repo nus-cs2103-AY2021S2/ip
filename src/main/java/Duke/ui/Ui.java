@@ -28,6 +28,10 @@ public class Ui {
         case "list":
             taskList.list();
             break;
+        case "find":
+            ////////////////
+            taskList.find(p);
+            break;
         case "done":
             taskList.markAsDone(p);
             break;
