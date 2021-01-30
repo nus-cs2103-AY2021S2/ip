@@ -16,14 +16,16 @@ public class ByeCommand extends Command {
         this.isBye = true;
     }
 
+
     /**
      * Executes the ByeCommand
-     * @param ui the ui to respond to the user's input
+     * @param ui The ui to respond to the user's input
      * @param s The storage to save the TaskList to
      * @param list The current list of tasks
+     * @return A reply to the ByeCommand
      */
-    public void execute(Ui ui, Storage s, TaskList list) {
-        ui.reply(this.reply);
+    public String execute(Ui ui, Storage s, TaskList list) {
+        return ui.reply(this.reply);
     }
 
 }

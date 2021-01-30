@@ -1,3 +1,3 @@
 todo|Homework|F
 event|Homeschooling |2021-01-26|F
-deadline|lab report |2021-01-28|F
+deadline|lab report |2021-01-28|T
