@@ -1,4 +1,7 @@
-import alice.command.*;
+import alice.command.CommandAdd;
+import alice.command.CommandEcho;
+import alice.command.CommandList;
+import alice.command.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +26,7 @@ public class ParseTest {
 		assertEquals(
 				new CommandAdd(new String[]{"event", "a", "2020/1/2"}),
 				Parser.parse("event a /at 2020/1/2")
-				);
+		);
 	}
 
 	@Test
@@ -45,7 +48,7 @@ public class ParseTest {
 		assertEquals(
 				new CommandList(new String[]{"list"}),
 				Parser.parse("list")
-				);
+		);
 	}
 
 	@Test
@@ -54,7 +57,7 @@ public class ParseTest {
 		assertEquals(
 				new CommandEcho(new String[]{input}),
 				Parser.parse(input)
-				);
+		);
 	}
 
 	@Test
@@ -62,7 +65,7 @@ public class ParseTest {
 		assertEquals(
 				new CommandAdd(new String[]{"event", "a", "2020/1/2"}),
 				Parser.parse("event  a     /at  2020/1/2")
-				);
+		);
 	}
 
 	@Test

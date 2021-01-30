@@ -1,5 +1,10 @@
 import alice.AliceException;
-import alice.task.*;
+import alice.task.Task;
+import alice.task.TaskBuilder;
+import alice.task.TaskDeadline;
+import alice.task.TaskEvent;
+import alice.task.TaskList;
+import alice.task.TaskTodo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -7,7 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskTest {
 
@@ -63,14 +72,14 @@ public class TaskTest {
 
 	@Test
 	void buildTask_invalidArgument_exceptionThrown() {
-		assertThrows(IllegalArgumentException.class, () -> TaskBuilder.buildTask(new String[] {}));
+		assertThrows(IllegalArgumentException.class, () -> TaskBuilder.buildTask(new String[]{}));
 	}
 
 	@Test
 	void buildTask_invalidTime_exceptionThrown() {
 		Exception exception = assertThrows(
 				AliceException.class,
-				() -> TaskBuilder.buildTask(new String[] {"deadline", "deadline a", "abcdefg"}));
+				() -> TaskBuilder.buildTask(new String[]{"deadline", "deadline a", "abcdefg"}));
 		assertTrue(exception.getMessage().contains("Invalid date supplied"));
 	}
 
@@ -78,28 +87,28 @@ public class TaskTest {
 	void buildTask_emptyArguments_exceptionThrown() {
 		assertThrows(
 				IllegalArgumentException.class,
-				() -> TaskBuilder.buildTask(new String[] {"", "", ""}));
+				() -> TaskBuilder.buildTask(new String[]{"", "", ""}));
 	}
 
 	@Test
 	void buildDeadline_invalidArgument_exceptionThrown() {
 		assertThrows(
 				IllegalArgumentException.class,
-				() -> TaskBuilder.buildTask(new String[] {"deadline", "", ""}));
+				() -> TaskBuilder.buildTask(new String[]{"deadline", "", ""}));
 	}
 
 	@Test
 	void buildEvent_invalidArgument_exceptionThrown() {
 		assertThrows(
 				IllegalArgumentException.class,
-				() -> TaskBuilder.buildTask(new String[] {"event", "", ""}));
+				() -> TaskBuilder.buildTask(new String[]{"event", "", ""}));
 	}
 
 	@Test
 	void buildTask_invalidTask_exceptionThrown() {
 		assertThrows(
 				IllegalStateException.class,
-				() -> TaskBuilder.buildTask(new String[] {"state", "abcdefg"})
+				() -> TaskBuilder.buildTask(new String[]{"state", "abcdefg"})
 		);
 	}
 
@@ -107,19 +116,19 @@ public class TaskTest {
 	void compareBuiltTodo_sameTask_equal() {
 		assertEquals(
 				new TaskTodo("abcdefg", false),
-				assertDoesNotThrow(() -> TaskBuilder.buildTask(new String[] {"todo", "abcdefg"})));
+				assertDoesNotThrow(() -> TaskBuilder.buildTask(new String[]{"todo", "abcdefg"})));
 	}
 
 	@Test
 	void compareBuiltDeadline_sameTask_equal() {
-		Task t = assertDoesNotThrow(() -> TaskBuilder.buildTask(new String[] {"deadline", "abcdefg", "2020/1/30"}));
+		Task t = assertDoesNotThrow(() -> TaskBuilder.buildTask(new String[]{"deadline", "abcdefg", "2020/1/30"}));
 		assertEquals(new TaskDeadline("abcdefg", testDate1), t);
 		assertEquals(t.toString(), "[D][\u2718] abcdefg (by: 2020 1 30, Thu)");
 	}
 
 	@Test
 	void compareBuiltEvent_sameTask_equal() {
-		Task t = assertDoesNotThrow(() -> TaskBuilder.buildTask(new String[] {"event", "abcdefg", "2020/1/30"}));
+		Task t = assertDoesNotThrow(() -> TaskBuilder.buildTask(new String[]{"event", "abcdefg", "2020/1/30"}));
 		assertEquals(new TaskEvent("abcdefg", testDate1), t);
 		assertEquals(t.toString(), "[E][\u2718] abcdefg (at: 2020 1 30, Thu)");
 	}

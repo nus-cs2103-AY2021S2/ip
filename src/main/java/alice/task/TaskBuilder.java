@@ -5,7 +5,6 @@ import alice.AliceException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.regex.Pattern;
 
 public class TaskBuilder {
 

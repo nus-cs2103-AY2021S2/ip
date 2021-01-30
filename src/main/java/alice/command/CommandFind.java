@@ -20,7 +20,7 @@ public class CommandFind extends Command {
 
 	@Override
 	public Alice execute(Alice agent) {
-		try{
+		try {
 			String searchString = tokens[1];
 			if (searchString.length() == 0) {
 				throw new IllegalArgumentException();
@@ -32,10 +32,10 @@ public class CommandFind extends Command {
 			if (identified.size() <= 0) {
 				return new Alice("No items found", agent.getData(), agent.getDone(), false);
 			}
-			String response = String.format(String.format(SUCCESS_MESSAGE,
+			String response = String.format(SUCCESS_MESSAGE,
 					IntStream.range(0, identified.size())
 							.mapToObj(i -> (i + 1) + " " + identified.get(i))
-							.collect(Collectors.joining("\n"))));
+							.collect(Collectors.joining("\n")));
 			return new Alice(response, agent.getData(), agent.getDone(), false);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			return new Alice(USAGE, agent.getData(), agent.getDone(), false);

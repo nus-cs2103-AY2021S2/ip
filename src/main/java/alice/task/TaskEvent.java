@@ -38,9 +38,6 @@ public class TaskEvent extends Task {
 			return false;
 		}
 		TaskEvent taskDeadline = (TaskEvent) object;
-		if (!taskDeadline.time.equals(this.time)) {
-			return false;
-		}
-		return true;
+		return taskDeadline.time.equals(this.time);
 	}
 }
