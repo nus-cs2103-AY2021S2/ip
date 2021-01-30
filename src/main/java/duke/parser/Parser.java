@@ -1,5 +1,13 @@
 package duke.parser;
 
+import static duke.utils.Messages.MESSAGE_EMPTY_DESCRIPTION;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
@@ -13,17 +21,7 @@ import duke.commands.InvalidDescriptionException;
 import duke.commands.ListCommand;
 import duke.commands.NoDescriptionException;
 import duke.commands.ToDoCommand;
-
 import duke.utils.InputDateTimeFormat;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static duke.utils.Messages.MESSAGE_EMPTY_DESCRIPTION;
 
 /**
  * Parses user input.
@@ -206,7 +204,7 @@ public class Parser {
             throw new NoDescriptionException("Please indicate a task number to be marked as done.");
         }
         try {
-            int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
+            int index = Integer.parseInt(arguments.strip()) - 1; // Account for 0-based indexing
             return new DoneCommand(index);
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("Please enter a valid task number");
@@ -228,7 +226,7 @@ public class Parser {
             throw new NoDescriptionException("Please indicate a task number to be deleted.");
         }
         try {
-            int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
+            int index = Integer.parseInt(arguments.strip()) - 1; // Account for 0-based indexing
             return new DeleteCommand(index);
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("Please enter a valid task number");

@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.tasks.Task;
-
 import static duke.utils.Messages.MESSAGE_FOUND_TASKS;
 import static duke.utils.Messages.MESSAGE_INDEX_TASK_FORMAT;
 import static duke.utils.Messages.MESSAGE_NO_MATCHES;
+
+import duke.tasks.Task;
 
 /**
  * Finds tasks that contains specific keywords or phrases.

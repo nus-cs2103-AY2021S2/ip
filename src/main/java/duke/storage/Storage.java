@@ -1,24 +1,20 @@
 package duke.storage;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDoTask;
-
 import duke.utils.OutputDateTimeFormat;
-
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Used to read and write to a file.
@@ -143,6 +139,8 @@ public class Storage {
             String eventTaskDescription = arr[3];
             task = new EventTask(taskName, isTaskCompleted, eventTaskDescription);
             break;
+        default:
+            // Should not reach here
         }
         return task;
     }
@@ -171,7 +169,6 @@ public class Storage {
      * @return formatted string describing the task
      */
     public static String convertTaskToString(Task task) {
-        // 
         StringBuilder encodedTaskString = new StringBuilder();
 
         encodedTaskString.append(task.getTaskType());

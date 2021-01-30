@@ -8,12 +8,27 @@ public abstract class Task {
     protected final String name;
     protected boolean isCompleted;
 
+    /**
+     * Constructor to create a {@code Task} object with the given task type and task name,
+     * with the task set to initially not completed.
+     *
+     * @param taskType identifier of the task type
+     * @param name     name of the task
+     */
     public Task(String taskType, String name) {
         this.taskType = taskType;
         this.name = name;
         isCompleted = false;
     }
 
+    /**
+     * Constructor to create a {@code Task} object with the given task type and task name,
+     * with the task set to the boolean isCompleted.
+     *
+     * @param taskType    identifier of the task type
+     * @param name        name of the task
+     * @param isCompleted boolean indicating whether the task has been completed
+     */
     public Task(String taskType, String name, boolean isCompleted) {
         this.taskType = taskType;
         this.name = name;
@@ -23,7 +38,7 @@ public abstract class Task {
     /**
      * Returns the name of the task.
      *
-     * @return name of task
+     * @return name of the task
      */
     public String getName() {
         return name;

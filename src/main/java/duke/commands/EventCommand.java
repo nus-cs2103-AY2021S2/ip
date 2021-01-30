@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.tasks.EventTask;
-
 import static duke.utils.Messages.MESSAGE_ADDED_TASK;
 import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
+
+import duke.tasks.EventTask;
 
 /**
  * Creates an Event task.
@@ -18,6 +18,12 @@ public class EventCommand extends Command {
     private final String taskName;
     private final String eventTime;
 
+    /**
+     * Creates an {@code EventCommand} object with the given event time.
+     *
+     * @param taskName
+     * @param eventTime
+     */
     public EventCommand(String taskName, String eventTime) {
         this.taskName = taskName;
         this.eventTime = eventTime;

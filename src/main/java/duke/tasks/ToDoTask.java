@@ -6,10 +6,23 @@ package duke.tasks;
 public class ToDoTask extends Task {
     public static final String IDENTIFIER = "T";
 
+    /**
+     * Creates a {@code ToDoTask} object with the given task name,
+     * with the task set to initially not completed.
+     *
+     * @param name name of the task
+     */
     public ToDoTask(String name) {
         super(IDENTIFIER, name);
     }
 
+    /**
+     * Creates a {@code ToDoTask} object with the given task name,
+     * with the task set to the boolean isCompleted.
+     *
+     * @param name        name of the task
+     * @param isCompleted boolean indicating whether the task has been completed
+     */
     public ToDoTask(String name, boolean isCompleted) {
         super(IDENTIFIER, name, isCompleted);
     }
