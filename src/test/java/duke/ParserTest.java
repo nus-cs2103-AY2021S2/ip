@@ -3,31 +3,22 @@ package duke;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class ParserTest {
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final Parser parser = new Parser();
-
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
 
     @Test
     public void parseCommandTest_success() throws Exception {
-        assertEquals(Command.TODO, parser.parseCommand("todo"));
+        assertEquals(2, parser.parseCommand("todo"));
     }
 
     @Test
     public void parseCommandTest_exceptionThrown() {
         try {
-            assertEquals(Command.TODO, parser.parseCommand("gg"));
+            assertEquals(2, parser.parseCommand("gg"));
             fail();
         } catch (DukeException error) {
             assertEquals(null, error.getMessage());
