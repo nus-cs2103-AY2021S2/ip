@@ -8,17 +8,26 @@ import duke.task.TaskList;
  */
 
 public class ListCommand extends Command {
-    String type;
+    private String userInput;
 
     /**
      * Handles List commands.
      * Triggers the DataHandler to handle the commands.
      *
-     * @param t details of the task
+     * @param input details of the task
      *
      */
-    public ListCommand(String t) {
-        this.type = t;
+    public ListCommand(String input) {
+        this.userInput = input;
+    }
+
+    /**
+     * Returns the user input of command
+     *
+     * @return user input
+     */
+    public String getUserInput() {
+        return this.userInput;
     }
 
     /**
@@ -28,9 +37,8 @@ public class ListCommand extends Command {
      * @param input details of the task
      * @param storage handles the various tasks according to their type
      */
-
     public void execute(TaskList tasks, String input, Storage storage) {
-            tasks.list();
+        tasks.list();
     }
 
     /**

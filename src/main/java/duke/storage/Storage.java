@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,11 +11,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
+
 /**
  * Stores and Retrieves data from a given .txt file and loads it into TaskList.
  */
 public class Storage {
-    String str;
+    private String filePath;
 
     /**
      * Stores filePath.
@@ -29,7 +30,16 @@ public class Storage {
      * @param filePath path where files are stored and retrieved
      */
     public Storage(String filePath) {
-        this.str = filePath;
+        this.filePath = filePath;
+    }
+
+    /**
+     * Gets filePath.
+     *
+     * @return gets file path of storage location
+     */
+    public String getFilePath() {
+        return this.filePath;
     }
 
     /**
