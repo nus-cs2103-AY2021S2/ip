@@ -16,7 +16,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * The Duke program implements
+ * Duke represents a (CLI) task list application.
+ * It takes in the following types of tasks: todo, deadline, event.
+ * It processes these commands too: list, delete, done, bye
+ * Task lists of individual users are saved locally and retrieved by running this class.
  */
 public class Duke {
     private Ui ui;
@@ -24,6 +27,14 @@ public class Duke {
     private Storage storage;
     private Parser parser;
 
+    /**
+     * Constructor for Duke class.
+     * Initializes Ui object to print Ui.
+     * Initializes parser object to make sense of data passed in and output accordingly.
+     * initializes storage object and initializes user's saved tasklist into a TaskList object.
+     * @exception IOException caught if incorrect filepath that fails to retrieve user's task list.
+     * @param filePath of where user's task list is saved.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -37,10 +48,24 @@ public class Duke {
 
     }
 
+    /**
+     * entry point for the Duke program.
+     * Initializes new Duke object with filePath: "data/tasks.txt" and calls run method.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Processes the user input and print out messages and Ui accordingly.
+     *
+     * @see Scanner
+     * @see Ui
+     * @see Parser
+     * @throws DukeException If invalid task type. Valid tasks types: ToDo, Event, Deadline.
+     * @throws DukeException If there is no message after the todo command.
+     */
     public void run() {
         final String exitCommand = "bye";
         final String listCommand = "list";
