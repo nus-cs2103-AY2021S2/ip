@@ -263,7 +263,6 @@ public class Duke {
 
         Greet();
 
-
         TaskRecord.taskRecorder(path);
         TaskRecord.taskHistory(path);
 
@@ -277,6 +276,5 @@ public class Duke {
         }
 
         TaskRecord.record(taskList, path);
-
     }
 }
