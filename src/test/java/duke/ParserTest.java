@@ -1,11 +1,4 @@
-package java.duke;
-
-import main.java.duke.Command;
-import main.java.duke.Deadline;
-import main.java.duke.DukeCommand;
-import main.java.duke.Event;
-import main.java.duke.Parser;
-import main.java.duke.Task;
+package duke;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,23 +16,32 @@ public class ParserTest {
 
     @Test
     public void parseCommandForDoneTest() {
-        Command c = Parser.parseCommand("done").getCommand();
+        Command c = Parser.parseCommand("done 1").getCommand();
         assertEquals(c, Command.DONE);
     }
     @Test
     public void parseCommandForToDoTest() {
-        Command c = Parser.parseCommand("todo").getCommand();
-        assertEquals(c, Command.TODO);
+        DukeCommand c = Parser.parseCommand("todo todo1");
+        assertEquals(c.getCommand(), Command.TODO);
+        assertEquals(c.getDetails(), "todo1");
+        assertEquals(Parser.parseRemainder(c.getCommand(), c.getDetails()),
+                new Todo("todo1"));
     }
     @Test
     public void parseCommandForDeadlineTest() {
-        Command c = Parser.parseCommand("deadline").getCommand();
-        assertEquals(c, Command.DEADLINE);
+        DukeCommand c = Parser.parseCommand("deadline deadline1 /by 2020-04-13");
+        assertEquals(c.getCommand(), Command.DEADLINE);
+        assertEquals(c.getDetails(), "deadline1 /by 2020-04-13");
+        assertEquals(Parser.parseRemainder(c.getCommand(), c.getDetails()),
+                new Deadline("deadline1", LocalDate.parse("2020-04-13")));
     }
     @Test
     public void parseCommandForEVENTTest() {
-        Command c = Parser.parseCommand("event").getCommand();
-        assertEquals(c, Command.EVENT);
+        DukeCommand c = Parser.parseCommand("event event1 /at 2020-04-13 2-4pm");
+        assertEquals(c.getCommand(), Command.EVENT);
+        assertEquals(c.getDetails(), "event1 /at 2020-04-13 2-4pm");
+        assertEquals(Parser.parseRemainder(c.getCommand(), c.getDetails()),
+                new Event("event1", LocalDate.parse("2020-04-13"), "2-4pm"));
     }
     @Test
     public void parseCommandForListTest() {
