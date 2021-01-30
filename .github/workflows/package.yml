@@ -42,15 +42,12 @@ jobs:
           architecture: x64
       - name: Compile into bin folder
         run: |
-          if [ ! -d "./bin" ]
-          then
-              mkdir ./bin
-          fi
-          if ! javac -cp ./src/main/java -Xlint:none -d ./bin ./src/main/java/com/lirc572/ip/*.java
+          mkdir ./bin
+          javac -cp ./src/main/java -Xlint:none -d ./bin ./src/main/java/com/lirc572/ip/*.java
       - name: Package into JAR
         run: |
           cd ./bin
-          jar cvmf ..\src\main\java\META-INF\MANIFEST.MF duke.jar com\lirc572\ip\*.class
+          jar cvmf ../src/main/java/META-INF/MANIFEST.MF ../duke.jar com/lirc572/ip/*.class
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
