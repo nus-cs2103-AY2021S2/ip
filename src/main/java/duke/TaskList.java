@@ -9,6 +9,7 @@ public class TaskList {
     public TaskList() {
         tasks = new ArrayList<>();
     }
+
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
