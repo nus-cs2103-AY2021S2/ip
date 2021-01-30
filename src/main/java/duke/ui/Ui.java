@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.tasks.TaskList;
-import duke.tasks.Task;
-
 import java.util.Scanner;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 public class Ui {
     public Ui() {}
@@ -73,7 +73,7 @@ public class Ui {
     /**
      * Prints a message to indicate error when editing save file.
      */
-    public void showIOError() {
+    public void showIoError() {
         System.out.println("\t____________________________________________________________\n"
                 + "\tError happened while trying to edit save file.\n"
                 + "\t____________________________________________________________\n");
