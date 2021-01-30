@@ -1,27 +1,9 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Duke {
     private final Ui ui;
     private final Storage storage;
     private final TaskList tasks;
 
     public static void main(String[] args) {
-//        String logo =
-//                "$$    $$                                $$\n" +
-//                "$$    $$                                $$\n" +
-//                "$$    $$   $$$$$$   $$$$$$$    $$$$$$$  $$$$$$$   $$$$$$ $$$$    $$$$$$   $$$$$$$\n" +
-//                "$$$$$$$$  $$    $$  $$    $$  $$        $$    $$  $$   $$   $$        $$  $$    $$\n" +
-//                "$$    $$  $$$$$$$$  $$    $$  $$        $$    $$  $$   $$   $$   $$$$$$$  $$    $$\n" +
-//                "$$    $$  $$        $$    $$  $$        $$    $$  $$   $$   $$  $$    $$  $$    $$\n" +
-//                "$$    $$   $$$$$$$  $$    $$   $$$$$$$  $$    $$  $$   $$   $$   $$$$$$$  $$    $$\n";
-//
-//        System.out.println("Hello from\n" + logo);
-
         Duke duke = new Duke();
 
     }
@@ -65,8 +47,8 @@ public class Duke {
             }
         }
     }
-//    private void shutDown() {
-//        System.out.println("See you soon boss!");
-//        System.exit(0);
-//    }
+    //    private void shutDown() {
+    //        System.out.println("See you soon boss!");
+    //        System.exit(0);
+    //    }
 }

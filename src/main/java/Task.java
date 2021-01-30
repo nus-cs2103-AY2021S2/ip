@@ -13,11 +13,19 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns the String representation of the Task.
+     * @return String representation of the Task.
+     */
     public String toString() {
         String doneIcon = isDone ? "[X]" : "[ ]";
         return "[" + icon + "]" + doneIcon + " " + this.description;
     }
 
+    /**
+     * Returns the save format of the Task.
+     * @return Save format of the Task.
+     */
     public String toLog() {
         String doneIcon = isDone ? "T" : "F";
         return icon + " | " + doneIcon + " | " + this.description;

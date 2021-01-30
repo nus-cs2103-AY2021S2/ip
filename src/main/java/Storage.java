@@ -1,5 +1,9 @@
-import java.io.*;
-import java.lang.reflect.Array;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -7,6 +11,10 @@ public class Storage {
     public Storage() { // default Storage uses current directory as save/load location
     }
 
+    /**
+     * Saves the tasks in taskList into save file "duke_saved_tasks" in the same directory.
+     * @param taskList TaskList containing the tasks to be saved.
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter("duke_saved_tasks");
@@ -24,6 +32,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Builds and return an ArrayList of Tasks from the saved tasks in the save file "duke_saved_tasks" in the same
+     * directory.
+     * @return ArrayList of Tasks from the saved tasks in the save file "duke_saved_tasks"
+     * @throws DukeException Thrown exception when an error occurs during loading, according to the reason specified in
+     * error body.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File("duke_saved_tasks");
@@ -65,6 +80,9 @@ public class Storage {
                         }
                         ret.add(toDo);
                         break;
+
+                    default:
+                        throw new DukeException("Wrong save format, unable to load.");
                     }
 
                     currLine = bufferedReader.readLine();

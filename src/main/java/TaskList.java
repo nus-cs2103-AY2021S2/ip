@@ -15,6 +15,11 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Removes the task specified by the input index from the TaskList.
+     * @param index Index of the file to be deleted.
+     * @return The deleted task.
+     */
     public Task deleteTask(int index) {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
@@ -22,6 +27,11 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Sets the task specified by the input index from the TaskList as done.
+     * @param index Index of the file to be set as done.
+     * @return The done task.
+     */
     public Task doneTask(int index) {
         Task task = tasks.get(index - 1);
         task.setDone();
@@ -29,6 +39,9 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Prints all the tasks in the TaskList.
+     */
     public void printTasks() {
         if (tasks.isEmpty()) {
             System.out.println("It is empty boss.");
@@ -43,6 +56,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all the Tasks with String representation that contains the query term.
+     * @param query
+     */
     public void findTasks(String query) {
         if (tasks.isEmpty()) {
             System.out.println("Oops, the task list is empty boss, there's nothing to find!");

@@ -1,11 +1,15 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
+    protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
     protected LocalDateTime at;
-    protected final static DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
 
+    /**
+     * Initializes an Event Task with the specified description and dateTime.
+     * @param description Description of the Event Task.
+     * @param dateTime Date and Time the Event Task occurs at.
+     */
     public Event(String description, LocalDateTime dateTime) {
         super(description, "E");
         at = dateTime;

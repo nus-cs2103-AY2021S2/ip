@@ -11,15 +11,17 @@ public class Ui {
         return scanner.nextLine();
     }
 
+    /**
+     * Prints the greeting message.
+     */
     public void printGreetings() {
-        String logo =
-                "$$    $$                                $$\n" +
-                        "$$    $$                                $$\n" +
-                        "$$    $$   $$$$$$   $$$$$$$    $$$$$$$  $$$$$$$   $$$$$$ $$$$    $$$$$$   $$$$$$$\n" +
-                        "$$$$$$$$  $$    $$  $$    $$  $$        $$    $$  $$   $$   $$        $$  $$    $$\n" +
-                        "$$    $$  $$$$$$$$  $$    $$  $$        $$    $$  $$   $$   $$   $$$$$$$  $$    $$\n" +
-                        "$$    $$  $$        $$    $$  $$        $$    $$  $$   $$   $$  $$    $$  $$    $$\n" +
-                        "$$    $$   $$$$$$$  $$    $$   $$$$$$$  $$    $$  $$   $$   $$   $$$$$$$  $$    $$\n";
+        String logo = "$$    $$                                $$\n"
+                    + "$$    $$                                $$\n"
+                    + "$$    $$   $$$$$$   $$$$$$$    $$$$$$$  $$$$$$$   $$$$$$ $$$$    $$$$$$   $$$$$$$\n"
+                    + "$$$$$$$$  $$    $$  $$    $$  $$        $$    $$  $$   $$   $$        $$  $$    $$\n"
+                    + "$$    $$  $$$$$$$$  $$    $$  $$        $$    $$  $$   $$   $$   $$$$$$$  $$    $$\n"
+                    + "$$    $$  $$        $$    $$  $$        $$    $$  $$   $$   $$  $$    $$  $$    $$\n"
+                    + "$$    $$   $$$$$$$  $$    $$   $$$$$$$  $$    $$  $$   $$   $$   $$$$$$$  $$    $$\n";
 
         System.out.println("Hello from\n" + logo);
         System.out.println("Greetings Boss, good to see you.\n" + "What can I do for you?\n");
@@ -37,6 +39,10 @@ public class Ui {
         System.out.println(task);
     }
 
+    /**
+     * Prints the error message of the input exception.
+     * @param e The caught error to be printed.
+     */
     public void printErrorMessage(Exception e) {
         System.out.println("Sorry boss something went wrong: ");
         System.out.println(e.getMessage());
