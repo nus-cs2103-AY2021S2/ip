@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Duke instance. A Duke instance will prompt user which bot they
+ * want to use (1. Echo Bot, 2. Tasks List Bot).
+ */
 public class Duke {
 
     public static final int TODO = 1;
@@ -49,6 +53,8 @@ public class Duke {
     /**
      * Performs the first macro task which will echo whatever the user types
      * in and ends when the user types 'bye'.
+     *
+     * @throws IOException if an error occur.
      */
     public static void performFirstTask() throws IOException {
         String cmd = new String();
@@ -69,11 +75,12 @@ public class Duke {
      * Performs the second macro task which can add, delete or mark a task as
      * done. Macro will end when user types in 'bye'.
      *
-     * @return      updated Task List.
+     * @return updated Task List.
+     * @throws IOException if file or directory is not found.
      */
     public static TaskList performSecondTask() throws IOException {
         String cmd = new String();
-        Storage storage = new Storage("data/tasks.txt");
+        Storage storage = new Storage("C:\\Users\\songs\\Desktop\\CS2103\\data\\tasks.txt");
         BufferedReader input = new
                 BufferedReader(new InputStreamReader(System.in));
         while (true) {
@@ -104,7 +111,12 @@ public class Duke {
         return storage.taskList;
     }
 
-
+    /**
+     * Performs the second macro child task which can add, delete or mark a
+     * task as done. Macro will end when user types in 'bye'.
+     *
+     * @return updated Task List.
+     */
     public static TaskList performChildTask(TaskList taskList, String cmd) {
         Parser checker = new Parser();
         int taskType = checker.checkTaskType(cmd);

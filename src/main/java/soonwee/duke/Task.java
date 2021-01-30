@@ -1,15 +1,26 @@
 package soonwee.duke;
 
+/**
+ * Represents a Task instance.
+ */
 public class Task {
 
     public String taskDesc;
     public boolean isCompleted;
 
+    /**
+     * Instantiate a task with its description.
+     *
+     * @param taskDesc task description.
+     */
     public Task(String taskDesc) {
         this.taskDesc = taskDesc;
         this.isCompleted = false;
     }
 
+    /**
+     * Set a task as completed.
+     */
     public void setCompleted(){
         this.isCompleted = true;
     }
