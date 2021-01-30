@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * class that show output from functions.
  */
 public class TaskList {
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> tasks;
     private final Ui ui;
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      * @param ui Ui to be used to output the results from input.
      */
     public TaskList(Storage storage, Ui ui) {
-        taskList = storage.load();
+        tasks = storage.load();
         this.ui = ui;
     }
 
@@ -35,7 +35,7 @@ public class TaskList {
      * @return number of tasks in the TaskList.
      */
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -43,7 +43,7 @@ public class TaskList {
      * @param storage Storage class used for storage in the hardware.
      */
     public void updateSave(Storage storage) {
-        storage.update(taskList);
+        storage.update(tasks);
     }
 
     /**
@@ -52,7 +52,7 @@ public class TaskList {
      */
     public void done(String input) {
         int index = Parser.stringToIndex(input, 5);
-        Task task = taskList.get(index);
+        Task task = tasks.get(index);
         task.done();
         ui.printDoneMsg(task);
     }
@@ -102,12 +102,12 @@ public class TaskList {
      */
     public void deleteTask(String input) throws DukeEmptyListException {
         int index = Parser.stringToIndex(input, 7);
-        if (taskList.isEmpty()) {
+        if (tasks.isEmpty()) {
             throw new DukeEmptyListException();
         }
-        Task task = taskList.get(index);
-        taskList.remove(index);
-        ui.printDeleteMsg(task, taskList.size());
+        Task task = tasks.get(index);
+        tasks.remove(index);
+        ui.printDeleteMsg(task, tasks.size());
     }
 
     /**
@@ -154,15 +154,15 @@ public class TaskList {
         default:
             throw new DukeUnknownArgumentsException();
         }
-        taskList.add(task);
-        ui.printAddMsg(task, taskList.size());
+        tasks.add(task);
+        ui.printAddMsg(task, tasks.size());
     }
 
     /**
      * Print String representation of the TaskList for the user.
      */
     public void print() {
-        this.print(taskList);
+        this.print(tasks);
     }
 
     /**
@@ -181,7 +181,7 @@ public class TaskList {
     public void find(String input) throws DukeNoDescriptionException {
         String description = Parser.parseFindInput(input);
         ArrayList<Task> selectedTask = new ArrayList<>();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             if (task.description.contains(description)) {
                 selectedTask.add(task);
             }

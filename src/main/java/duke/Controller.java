@@ -13,7 +13,7 @@ import duke.ui.Ui;
  */
 public class Controller {
     private static final String END_COMMAND = "bye";
-    private final TaskList taskList;
+    private final TaskList tasks;
     private final Storage storage;
     private final Ui ui;
 
@@ -25,7 +25,7 @@ public class Controller {
     public Controller() {
         this.ui = new Ui();
         storage = Storage.getInstance();
-        taskList = new TaskList(storage, ui);
+        tasks = new TaskList(storage, ui);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Controller {
                 printList();
                 break;
             case DELETE:
-                taskList.deleteTask(input);
+                tasks.deleteTask(input);
                 break;
             case ADD:
                 specificTask(input);
@@ -77,13 +77,13 @@ public class Controller {
             default:
                 throw new DukeUnknownArgumentsException();
             }
-            taskList.updateSave(storage);
+            tasks.updateSave(storage);
         } catch (DukeUnknownArgumentsException e) {
             ui.printErrorMsg(e);
         } catch (NumberFormatException e) {
             ui.printErrorMsg(e);
         } catch (IndexOutOfBoundsException e) {
-            ui.printErrorMsg(e, taskList);
+            ui.printErrorMsg(e, tasks);
         } catch (DukeEmptyListException e) {
             ui.printErrorMsg(e);
         }
@@ -94,7 +94,7 @@ public class Controller {
      * @param input input used to get index to be marked as done.
      */
     private void doneTask(String input) {
-        taskList.done(input);
+        tasks.done(input);
     }
 
     /**
@@ -103,14 +103,14 @@ public class Controller {
      * @throws DukeUnknownArgumentsException if the input contains an unknown command.
      */
     private void specificTask(String input) throws DukeUnknownArgumentsException {
-        taskList.run(input);
+        tasks.run(input);
     }
 
     /**
      * Print the string representation of the TaskList.
      */
     private void printList() {
-        taskList.print();
+        tasks.print();
     }
 
 }

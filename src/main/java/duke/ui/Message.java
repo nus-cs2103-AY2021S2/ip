@@ -49,7 +49,7 @@ public class Message {
     }
 
     public static String getErrorMsg(DukeSaveFileException e) {
-        return e.toString();
+        return INDENT + e.toString();
     }
 
     public static String getDoneMsg(Task task) {
