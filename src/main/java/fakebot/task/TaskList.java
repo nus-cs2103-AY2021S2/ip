@@ -2,10 +2,15 @@ package fakebot.task;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * TaskList Class use to store Task
+ */
 public class TaskList {
     private List<Task> tasks;
 
+    /**
+     * Class constructor specifying the task list.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }

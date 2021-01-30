@@ -3,11 +3,16 @@ package fakebot.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-//Deadline class with Date
+/**
+ * Deadline Task Type
+ */
 public class Deadlines extends Task {
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
 
+    /**
+     * Class constructor specifying the task description, deadline date, deadline time,
+     */
     public Deadlines(String name, LocalDate deadlineDate, LocalTime deadlineTime) {
         super(name);
         this.deadlineDate = deadlineDate;

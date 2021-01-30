@@ -8,6 +8,9 @@ import fakebot.task.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Fakebot class, main class for Fakebot.
+ */
 public class FakeBot {
     private static String OLDLOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -62,6 +65,9 @@ public class FakeBot {
         ui.printBotMessage("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Class constructor specifying save file name and save file path.
+     */
     public FakeBot(String saveFileName, String saveFilePath) {
         storage = new Storage(SAVE_FILE_NAME, SAVE_FILE_PATH);
         taskList = new TaskList(storage.tryReadTaskFile());

@@ -6,11 +6,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Parser class use for processing syntax
+ */
 public class Parser {
 
     private static final String SPLIT_REGEX = "-'@,-@,1'-";
 
+    /**
+     * Enum for different task type.
+     */
     private enum TaskType {TODO, EVENT, DEADLINE}
 
     /**

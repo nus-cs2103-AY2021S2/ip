@@ -3,13 +3,19 @@ package fakebot.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-//Event Class with Date and Duration
+/**
+ * Event Task Type
+ */
 public class Events extends Task {
     private LocalDate startDate;
     private LocalTime startTime;
     private LocalDate endDate;
     private LocalTime endTime;
 
+    /**
+     * Class constructor specifying the task description, event start date, event start time,
+     * event end date, event end time.
+     */
     public Events(String name, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
         super(name);
         this.startDate = startDate;

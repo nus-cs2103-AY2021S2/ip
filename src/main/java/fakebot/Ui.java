@@ -6,14 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Ui Class use for reading and printing data.
+ */
 public class Ui {
+
+    private static String DIVIDER = "____________________________________________________________\n";
+
     private Scanner scanf;
 
+    /**
+     * Class constructor for Ui.
+     */
     public Ui() {
         scanf = new Scanner(System.in);
     }
 
-    private static String DIVIDER = "____________________________________________________________\n";
 
     /**
      * Print Standard Message.

@@ -11,8 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ * Storage class use for storing and loading data from file.
+ */
 public class Storage {
 
+    /**
+     * File name and path to be edit.
+     */
     private String fileToEdit;
 
     /**
