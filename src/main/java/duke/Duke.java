@@ -61,9 +61,8 @@ public class Duke {
                     ui.addTaskMessage(tasks.list, todo);
                 } catch (DukeException e) {
                     System.out.println("OOPS!!! The description of a todo cannot be empty.\n" + horizontalLine);
-                } finally {
-                    break;
                 }
+                break;
             case "deadline":
                 try {
                     parser.isEmptyDesc(inputArr);
@@ -74,9 +73,8 @@ public class Duke {
                     ui.addTaskMessage(tasks.list, deadline);
                 } catch (DukeException e) {
                     System.out.println("OOPS!!! The description of a deadline cannot be empty.\n" + horizontalLine);
-                } finally {
-                    break;
                 }
+                break;
             case "event":
                 try {
                     parser.isEmptyDesc(inputArr);
@@ -87,9 +85,8 @@ public class Duke {
                     ui.addTaskMessage(tasks.list, event);
                 } catch (DukeException e) {
                     System.out.println("OOPS!!! The description of an event cannot be empty.\n" + horizontalLine);
-                } finally {
-                    break;
                 }
+                break;
             default:
                 try {
                     throw new DukeException();

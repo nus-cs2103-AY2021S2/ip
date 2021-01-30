@@ -6,7 +6,7 @@ import java.util.Scanner;
 //user interaction
 public class Ui {
 
-    private static final String horizontalLine = "____________________________________________________________";
+    protected static final String horizontalLine = "____________________________________________________________";
 
     public Ui() {
 
