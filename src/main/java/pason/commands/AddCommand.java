@@ -14,7 +14,9 @@ public class AddCommand extends Command {
 
     public void execute(TaskList tasks, Storage storage, Ui ui) throws Exception {
         tasks.addTask(task);
-        ui.printMessage("Done! I've added a new task:\n\t" + task + "\nNow there are " + tasks.getTasks().size() + " tasks in your list.");
+        ui.printMessage("Done! I've added a new task:\n\t"
+                + task + "\nNow there are " + tasks.getTasks().size()
+                        + " tasks in your list.");
     }
 
     public boolean isExit() {
