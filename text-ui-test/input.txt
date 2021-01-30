@@ -2,7 +2,7 @@ list
 todo 'borrow book'
 deadline "return book" /by Sunday
 event homework /at 05:20
-event birthday /at '11-08-2020 12:20'
+event birthday /at '11-08-2020 13:14'
 list
 done 1
 list
@@ -15,10 +15,19 @@ event
 deadline submit_assignment /by
 event lecture /at
 excuseme
-delete 2
+delete 3
 list
 delete 1
 list
+delete 4
+delete 0
 deadline "prepare bob's birthday present" /by "20-05-2021 13:14"
 list
+event "next birthday" /at '11-08-2021 13:14'
+event "next next birthday" /at '11-08-2022 13:14'
+list
+find next
+find "birthday"
+find "next birthday"
+find xyz
 quit
