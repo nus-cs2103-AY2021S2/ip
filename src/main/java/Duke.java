@@ -17,9 +17,9 @@ public class Duke {
             ui.showLine();
             Command c = Parser.parse(command);
             c.execute(tasks, ui, storage);
+            ui.showLine();
             isExit = c.isExit();
         }
-        ui.exit();
     }
 
     public static void main(String[] args) {

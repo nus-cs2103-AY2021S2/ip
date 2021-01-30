@@ -32,7 +32,6 @@ public class Ui{
     }
 
     public void exit() {
-        s.close();
         System.out.println("Cya!");
     }
 

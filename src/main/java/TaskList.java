@@ -30,17 +30,17 @@ public class TaskList implements Serializable {
     }
 
     public TaskList filterByTask(String type) {
-        if (type == "ToDo") {
+        if (type.equals("ToDo")) {
             return new TaskList(taskList
                     .stream()
                     .filter(p -> p instanceof ToDo)
                     .collect(Collectors.toList()));
-        } else if (type == "Deadline") {
+        } else if (type.equals("Deadline")) {
             return new TaskList(taskList
                     .stream()
                     .filter(p -> p instanceof Deadline)
                     .collect(Collectors.toList()));
-        } else if (type == "Event") {
+        } else if (type.equals("Event")) {
             return new TaskList(taskList
                     .stream()
                     .filter(p -> p instanceof Event)
@@ -52,11 +52,14 @@ public class TaskList implements Serializable {
 
     @Override
     public String toString() {
-        String list = "";
+        StringBuilder list = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             String rank = String.valueOf(i + 1);
-            list = list + rank + "." + taskList.get(i) + "\n";
+            list.append(rank).append(".").append(taskList.get(i));
+            if (i != taskList.size() - 1) {
+                list.append("\n");
+            }
         }
-        return list;
+        return list.toString();
     }
 }

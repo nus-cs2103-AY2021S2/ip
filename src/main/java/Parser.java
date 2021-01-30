@@ -5,7 +5,6 @@ public class Parser {
         splitInput[0] = splitInput[0].toUpperCase();
         Input command = checkCommand(splitInput[0]);
         splitInput[0] = command.name();
-        System.out.println("AAA");
         switch(command) {
         case LIST:
             return new ListCommand(splitInput);
