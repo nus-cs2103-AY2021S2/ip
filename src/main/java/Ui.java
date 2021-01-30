@@ -37,8 +37,16 @@ public class Ui {
     }
 
     public void printList(ArrayList<Task> tasks, int numTasks) {
-        if (numTasks <= 0) {
+        if (numTasks == 0) {
             System.out.println(TAB + "Yay! There are no tasks in your list.");
+        } else if (numTasks < 0) {  // print filtered tasks
+            System.out.println(TAB + "Here are the matching tasks in your list:");
+            int num = 1;
+            for (Task t : tasks) {
+                System.out.println(
+                        TAB + num + "." + t.toString());
+                num++;
+            }
         } else {
             System.out.println(TAB + "Here are the tasks in your list:");
             for (int i = 0; i < numTasks; i++) {

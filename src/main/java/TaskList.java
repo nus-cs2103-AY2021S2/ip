@@ -145,4 +145,21 @@ public class TaskList {
             }
         }
     }
+
+    /**
+     * Creates a filtered list of tasks
+     * whose descriptions contain the specified keyword.
+     * Prints the filtered list of tasks.
+     *
+     * @param description keyword
+     */
+    public void findTasks(String description) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.contains(description)) {
+                filteredTasks.add(t);
+            }
+        }
+        ui.printList(filteredTasks, -1);
+    }
 }

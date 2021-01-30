@@ -36,37 +36,41 @@ public class Duke {
             int taskIndex;
 
             switch (command) {
-            case "bye":
-                ui.printBye();
-                break loop;
-            case "list":
-                taskList.listTask();
-                break;
-            case "done":
-                taskIndex = Integer.parseInt(result.get(1));
-                taskList.doneTask(taskIndex);
-                break;
-            case "delete":
-                taskIndex = Integer.parseInt(result.get(1));
-                taskList.deleteTask(taskIndex);
-                break;
-            case "todo":
-                description = result.get(1);
-                taskList.addTodo(description);
-                break;
-            case "deadline":
-                description = result.get(1);
-                date = result.get(2);
-                taskList.addDeadline(description, date);
-                break;
-            case "event":
-                description = result.get(1);
-                date = result.get(2);
-                taskList.addEvent(description, date);
-                break;
-            default:
-                ui.printIdkError();
-                break;
+                case "bye":
+                    ui.printBye();
+                    break loop;
+                case "list":
+                    taskList.listTask();
+                    break;
+                case "done":
+                    taskIndex = Integer.parseInt(result.get(1));
+                    taskList.doneTask(taskIndex);
+                    break;
+                case "delete":
+                    taskIndex = Integer.parseInt(result.get(1));
+                    taskList.deleteTask(taskIndex);
+                    break;
+                case "todo":
+                    description = result.get(1);
+                    taskList.addTodo(description);
+                    break;
+                case "deadline":
+                    description = result.get(1);
+                    date = result.get(2);
+                    taskList.addDeadline(description, date);
+                    break;
+                case "event":
+                    description = result.get(1);
+                    date = result.get(2);
+                    taskList.addEvent(description, date);
+                    break;
+                case "find":
+                    description = result.get(1);
+                    taskList.findTasks(description);
+                    break;
+                default:
+                    ui.printIdkError();
+                    break;
             }
             ui.printLine();
         }
