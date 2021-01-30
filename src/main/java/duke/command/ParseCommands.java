@@ -8,17 +8,35 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.ui.Ui;
 
+/**
+ * ParseCommands handles the parsing and execution of the inputs given to the system.
+ * ParseCommands needs to validate the input before execution of the command.
+ */
 public class ParseCommands {
-    private final CommandList commandList;
+    private final CommandList command;
     private final String data;
     private boolean isExit;
 
-    public ParseCommands(CommandList commandList, String data) {
-        this.commandList = commandList;
+    /**
+     * This is the constructor for ParseCommands which takes in a command from CommandList, and String of data about
+     * that follows the command.
+     * @param command This is the command that needs to be executed.
+     * @param data This is the data for the corresponding command.
+     */
+    public ParseCommands(CommandList command, String data) {
+        this.command = command;
         this.data = data;
         this.isExit = false;
     }
 
+    /**
+     * This method parses the input given. First by checking if the input is valid, otherwise throws a DukeException.
+     * This returns a valid ParseCommand for execution.
+     * @param input Input given that needs to be parsed
+     * @param counter Number of items in the current task list
+     * @return Returns a valid ParseCommand that can be executed.
+     * @throws DukeException Throws a DukeException if the input given is not valid and cannot be executed.
+     */
     public static ParseCommands parseLine(String input, int counter) throws DukeException {
         int first = input.indexOf(" ");
         ParseCommands parseCommands;
@@ -38,9 +56,14 @@ public class ParseCommands {
         return parseCommands;
     }
 
+    /**
+     * This method takes a valid ParseCommand and executes the command.
+     * @param ui ui to show output of the command execution
+     * @param storage storage for accessing the tasks stored.
+     */
     public void executeCommand(Ui ui, Storage storage) {
         String date;
-        switch (this.commandList) {
+        switch (this.command) {
         case TODO:
             ToDo todo = new ToDo(this.data.strip());
             storage.add(todo);
@@ -143,14 +166,26 @@ public class ParseCommands {
         }
     }
 
+    /**
+     * This method is used to get if the command is an exit command.
+     * @return This returns a boolean that shows if the command given is to exit the system
+     */
     public boolean getIsExit() {
         return this.isExit;
     }
 
-    public CommandList getCommandList() {
-        return commandList;
+    /**
+     * This method is used to get the command stored in the ParseCommand
+     * @return This returns the CommandList command.
+     */
+    public CommandList getCommand() {
+        return command;
     }
 
+    /**
+     * This method is used to get the String data of the task.
+     * @return This returns the String of data for the corresponding task
+     */
     public String getData() {
         return data;
     }

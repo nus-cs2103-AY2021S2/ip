@@ -13,23 +13,22 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This is the Storage class that handles saving tasks to file, reading save file and updating Tasks list.
+ */
 public class Storage {
     private FileWriter fio;
     private final File file;
-    private ArrayList<Task> arrL;
+    private final ArrayList<Task> arrL;
 
+    /**
+     * This is the Constructor for Storage. Creates a new ArrayList to store Tasks, initiates File and populates list.
+     */
     public Storage() {
         ArrayList<Task> arr = new ArrayList<>();
-        File file = initiateFile();
-        this.file = file;
+        this.file = initiateFile();
         populateList(arr);
         this.arrL = arr;
-        try {
-            this.fio = new FileWriter(file);
-        } catch (IOException e) {
-            System.out.println("Unable to create FileWriter");
-            e.printStackTrace();
-        }
     }
 
     private File initiateFile () {
@@ -92,7 +91,17 @@ public class Storage {
         }
     }
 
-    public void writeToFile(Task task) {
+    private void initialiseFW() {
+        try {
+            this.fio = new FileWriter(file);
+        } catch (IOException e) {
+            System.out.println("Unable to create FileWriter");
+            e.printStackTrace();
+        }
+    }
+
+
+    private void writeToFile(Task task) {
         try {
             this.fio.write(task.taskSave() + "\n");
         } catch (IOException e) {
@@ -101,12 +110,19 @@ public class Storage {
         }
     }
 
+    /**
+     * This begins the close procedure by running through all tasks stored and writing to the file.
+     */
     public void beginClose() {
+        this.initialiseFW();
         for (Task task: this.arrL) {
             writeToFile(task);
         }
     }
 
+    /**
+     * This closes the FileWriter used by the chatbot in Storage.
+     */
     public void closeFile () {
         try {
             this.fio.close();

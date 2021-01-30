@@ -3,9 +3,7 @@ package duke;
 import duke.command.CommandList;
 import duke.command.ParseCommands;
 import duke.task.Deadline;
-import duke.task.Task;
 import duke.task.Task_State;
-import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,7 +28,7 @@ public class DukeTest {
         try {
             ParseCommands parseCommandsB = ParseCommands.parseLine("eVenT Eat Cake /at Mar 20 2021", 0);
             assertEquals(parseCommandsA.getData(), parseCommandsB.getData());
-            assertEquals(parseCommandsA.getCommandList(), parseCommandsB.getCommandList());
+            assertEquals(parseCommandsA.getCommand(), parseCommandsB.getCommand());
         } catch (DukeException e) {
             fail();
         }
