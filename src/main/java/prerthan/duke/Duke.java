@@ -1,61 +1,103 @@
-package prerthan.duke;
+package sharadhr.duke;
 
-import prerthan.duke.IO.Input;
-import prerthan.duke.IO.Output;
-import prerthan.duke.IO.Storage;
-import prerthan.duke.task.TaskList;
+import sharadhr.duke.exception.DukeException;
+import sharadhr.duke.io.Input;
+import sharadhr.duke.io.Output;
+import sharadhr.duke.io.Storage;
 
 /**
  * 
  */
-public class Duke {
-    public static TaskList tasks;
-    public static Input input;
-    public static Output output;
-    public static Storage fileRW;
-
-    public boolean run() {
-        return false;
-    }
+public class Duke
+{
+    static Input reader;
+    static Output writer;
+    static Storage fileRW;
 
     /**
-     * Runs the main program loop.
-     * 
-     * @return {@code false} when the user says 'bye'; otherwise, never returns.
+     * The program loop that runs whilst the user does not say 'bye'.
      */
-    public static boolean programLoop() {
+    public static boolean programLoop()
+    {
         boolean exitLoop = false;
-        String command;
+        Command command;
+        
+        do {
+            command = Command.whichCommand(reader.nextLine().getFirstToken());
+            exitLoop = command.equals(Command.BYE);
 
-        input.nextLine();
-        return false;
+            switch (command)
+            {
+                case TODO:
+                    try
+                    {
+                        Task.addTask(new Todo(reader.inputWithoutFirstToken()));
+                    }
+                    catch (DukeException e)
+                    {
+                        System.err.println("todo detail cannot be empty.");
+                    }
+                    break;
+                case DEADLINE:
+                    Task.addTask(new Deadline(reader.getDetail(), reader.getTime()));
+                    break;
+                case EVENT:
+                    Task.addTask(new Event(reader.getDetail(), reader.getTime()));
+                    break;
+                case LIST:
+                    Task.listTasks();
+                    break;
+                case DONE:
+                    Task.getTaskAtPosition(Integer.parseInt(reader.inputWithoutFirstToken())).markComplete();
+                    break;
+                case DELETE:
+                    Task.deleteTaskAtPosition(Integer.parseInt(reader.inputWithoutFirstToken()));
+                case EMPTY:
+                    continue;
+                case INVALID:
+                    try
+                    {
+                        throw new DukeException();
+                    }
+                    catch (DukeException e)
+                    {
+                        writer.say("Invalid command; try again.");
+                    }
+                case BYE:
+                    break;
+                default:
+                    break;
+            }
+        } while (!exitLoop);
+        return exitLoop;
     }
 
     /**
      * Cleans up objects and quits the program by calling {@link System#exit(int)}.
      */
-    public static void exit() {
-        output.sayGoodBye();
+    public static void exit()
+    {
+        writer.sayGoodBye();
 
-        input.close();
-        output.close();
+        reader.close();
+        writer.close();
 
         System.exit(0);
     }
-
-    public static void main(String[] args) {
-        // Initialises file and UI I/O
+    
+    public static void main(String[] args)
+    {
+        // Initialises file and UI I/O.
         fileRW = new Storage("data", "duke.txt");
-        input = new Input();
-        output = new Output();
+        reader = new Input();
+        writer = new Output();
 
         // Greets the user.
-        output.sayHello();
+        writer.sayHello();
 
-        // Creates the task list
-        tasks = new TaskList();
+        // Creates the task list.
+        Task.createList();
 
-        if (programLoop())
-            exit();
+        if (programLoop()) exit();
     }
 }
