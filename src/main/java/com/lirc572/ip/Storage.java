@@ -20,6 +20,7 @@ public class Storage {
             fileObj.createNewFile();
             FileWriter fileWriter = new FileWriter(fileName);
             fileWriter.write(tasks.toSavedString());
+            fileWriter.close();
         } catch (IOException e) {
             Ui.printError(e);
         }
