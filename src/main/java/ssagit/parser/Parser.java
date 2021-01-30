@@ -50,7 +50,7 @@ public class Parser {
      */
     public void parseInput(Task[] tasks, int taskIterator) {
         String input = ui.nextLine();
-        String inputArr[] = input.split(" ");
+        String inputArr[] = input.split(" ", 2);
 
         try {
             switch (inputArr[0]) {
@@ -103,6 +103,18 @@ public class Parser {
                 for (int i = removeIndex - 1; i < tasks.length - 1; i++) {
                     tasks[i] = tasks[i + 1];
                 }
+                break;
+            case "find":
+                String toFind = inputArr[1];
+                String output = "Here are the matching tasks in your list:\n";
+                for (Task t : tasks) {
+                    if (t != null) {
+                        if (t.getTaskName().contains(toFind)) {
+                            output = output + t.toFormattedString() + "\n";
+                        }
+                    }
+                }
+                ui.formatBox(output);
                 break;
             default:
                 throw new UnknownInputParamException("------------------------------------\n" +
