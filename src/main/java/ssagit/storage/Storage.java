@@ -52,14 +52,8 @@ public class Storage {
         int taskIterator = 0;
         try {
             List<String> list = Files.readAllLines(Paths.get(relativePath.toString()), Charset.defaultCharset());
-            for (String str : list) {
-                System.out.println(str);
-            }
-
             String[] taskListStr = list.toArray(new String[list.size()]);
-
             for (String str : taskListStr) {
-                System.out.println("now filling array");
                 String[] strArr = str.split(" \\| ");
                 String taskType = strArr[0];
                 String isDoneStr = strArr[1];
@@ -95,6 +89,10 @@ public class Storage {
         return taskIterator;
     }
 
+    /**
+     * Writes all tasks from an array of {@code Task} objects to file output.
+     * @param taskArr Array of {@code Task} objects.
+     */
     public void writeTasks(Task[] taskArr) {
         try {
             FileWriter fw = new FileWriter(absolutePath.toString());
