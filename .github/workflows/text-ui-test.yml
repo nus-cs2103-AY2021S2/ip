@@ -1,4 +1,8 @@
-on: [ push ]
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags-ignore:
+      - '*' # Push events to matching *
 
 name: Text UI Test
 
