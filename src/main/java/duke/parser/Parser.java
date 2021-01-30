@@ -1,6 +1,12 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
 
 /**
  * Responsible for parsing command line inputs.
