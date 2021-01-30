@@ -89,11 +89,11 @@ public class Ui {
     }
 
     public void printErrorMsg(DukeCreateFileException e) {
-        out.println(e);
+        out.println(Message.getErrorMsg(e));
     }
 
     public void printErrorMsg(DukeCorruptedStorageException e) {
-        out.println(e);
+        out.println(Message.getErrorMsg(e));
     }
 
     public void printErrorMsg(DukeCreateDirectoryException e) {

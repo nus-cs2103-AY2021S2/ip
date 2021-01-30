@@ -1,10 +1,8 @@
 package duke.ui;
 
-import duke.exceptions.DukeSaveFileException;
+import duke.exceptions.*;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeNoDescriptionException;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -49,6 +47,14 @@ public class Message {
     }
 
     public static String getErrorMsg(DukeSaveFileException e) {
+        return INDENT + e.toString();
+    }
+
+    public static String getErrorMsg(DukeCreateFileException e) {
+        return INDENT + e.toString();
+    }
+
+    public static String getErrorMsg(DukeCorruptedStorageException e) {
         return INDENT + e.toString();
     }
 
