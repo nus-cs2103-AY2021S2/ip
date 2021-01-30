@@ -19,6 +19,7 @@ public class Events extends Task {
 
     /**
      * Returns String format of event
+     *
      * @return String format of event
      */
     @Override
@@ -28,6 +29,7 @@ public class Events extends Task {
 
     /**
      * Returns String of error message for empty description
+     *
      * @return String of error message for empty description
      */
     @Override
@@ -37,6 +39,7 @@ public class Events extends Task {
 
     /**
      * Formats data for saving into text file.
+     *
      * @return E | isDone | description | at
      */
     @Override
