@@ -42,6 +42,8 @@ public class Duke {
                 }
             } catch (Exception e) {
                 Ui.printError(e);
+                Ui.printHorizontalLine();
+                Ui.printEmptyLine();
             }
         }
     }

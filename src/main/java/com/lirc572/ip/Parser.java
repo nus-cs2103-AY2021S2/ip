@@ -1,5 +1,6 @@
 package com.lirc572.ip;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -64,7 +65,7 @@ public class Parser {
      * @return whether the program should continue (<code>true</code> if not an exit command)
      */
     public static boolean processCommand(String command, TaskList tasks) throws Exception {
-        String[] tokens = command.split(" ");
+        String[] tokens = tokenizeCommand(command);
         Ui.printHorizontalLine();
         if (EXIT_COMMANDS.contains(command)) {
             Ui.printLine("Bye. Hope to see you again soon!");
@@ -129,11 +130,15 @@ public class Parser {
                     if (tokens[index].equals("/by")) {
                         dueTimeNotProvided = false;
                         if (index + 1 < tokens.length) {
-                            Task task = new DeadlineTask(tokens[1], tokens[index + 1]);
-                            tasks.add(task);
-                            Ui.printLine("Got it! I've added this task:");
-                            Ui.printLine("  " + task);
-                            Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                            try {
+                                Task task = new DeadlineTask(tokens[1], tokens[index + 1]);
+                                tasks.add(task);
+                                Ui.printLine("Got it! I've added this task:");
+                                Ui.printLine("  " + task);
+                                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                            } catch (DateTimeParseException e) {
+                                throw new Exception("Datetime in the wrong format!");
+                            }
                         } else {
                             throw new Exception("Please provide a valid due time!");
                         }
@@ -156,11 +161,15 @@ public class Parser {
                     if (tokens[index].equals("/at")) {
                         eventTimeNotProvided = false;
                         if (index + 1 < tokens.length) {
-                            Task task = new EventTask(tokens[1], tokens[index + 1]);
-                            tasks.add(task);
-                            Ui.printLine("Got it! I've added this task:");
-                            Ui.printLine("  " + task);
-                            Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                            try {
+                                Task task = new EventTask(tokens[1], tokens[index + 1]);
+                                tasks.add(task);
+                                Ui.printLine("Got it! I've added this task:");
+                                Ui.printLine("  " + task);
+                                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                            } catch (DateTimeParseException e) {
+                                throw new Exception("Datetime in the wrong format!");
+                            }
                         } else {
                             throw new Exception("Please provide a valid event time!");
                         }
