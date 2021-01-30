@@ -49,6 +49,16 @@ public class TaskList {
         return tasksList.get(index);
     }
 
+    public void searchText(String cmd) {
+        ArrayList<Task> temporaryList = new ArrayList<>();
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (tasksList.get(i).taskDesc.contains(cmd)) {
+                temporaryList.add(tasksList.get(i));
+            }
+        }
+        displayTasks(temporaryList);
+    }
+
     /**
      * Removes task at respective index.
      *
@@ -70,6 +80,17 @@ public class TaskList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasksList.size(); i++) {
             System.out.println(String.valueOf(i + 1) + "." + tasksList.get(i));
+	}
+    }
+
+    /**
+     * Displays all tasks in the TaskList.
+     * @param taskList temporary task list.
+     */
+    public void displayTasks(ArrayList<Task> taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println(i + 1 + "." + taskList.get(i));
         }
     }
 }

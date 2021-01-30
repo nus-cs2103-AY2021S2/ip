@@ -8,6 +8,7 @@ public class Parser {
     public static final int TODO = 1;
     public static final int DEADLINE = 2;
     public static final int EVENT = 3;
+    public static final int FIND = 4;
 
     public Parser() {
 
@@ -30,7 +31,7 @@ public class Parser {
         String task = new String();
         String type = new String();
         try {
-            if (taskID == TODO) {
+            if (taskID == TODO || taskID == FIND) {
                 type = "todo";
                 if (cmd.length() > 4) {
                     task = cmd.substring(5);
