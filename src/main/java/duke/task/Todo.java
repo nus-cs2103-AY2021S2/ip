@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.EmptyTaskDukeException;
+import duke.exceptions.EmptyTaskDukeException;
 
 public class Todo extends Task {
     public Todo(String input) throws EmptyTaskDukeException {

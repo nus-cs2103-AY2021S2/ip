@@ -1,7 +1,7 @@
 package duke.parser;
 
-import duke.EmptyTaskDukeException;
 import duke.command.*;
+import duke.exceptions.EmptyTaskDukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

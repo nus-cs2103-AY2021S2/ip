@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.EmptyTaskDukeException;
+import duke.exceptions.EmptyTaskDukeException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

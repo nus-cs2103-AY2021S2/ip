@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.EmptyTaskDukeException;
+import duke.exceptions.EmptyTaskDukeException;
 
 public class Task {
     private static int numOfTasks;

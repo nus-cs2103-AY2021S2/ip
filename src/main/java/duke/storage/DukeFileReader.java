@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.EmptyTaskDukeException;
+import duke.exceptions.EmptyTaskDukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
