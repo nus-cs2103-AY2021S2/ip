@@ -1,27 +1,31 @@
 public class Task {
     private String title;
-    private String status;
+    private boolean isDone;
 
-    public Task(String title) {
+    public Task(String title, boolean isDone) {
         this.title = title;
-        this.status = "undone";
+        this.isDone = isDone;
     }
 
-    public boolean isDone() {
-        return status.equals("done");
+    public Task(String title) {
+        this(title, false);
+    }
+
+    public boolean ifDone() {
+        return this.isDone;
     }
 
     /**
      * mark the task as done
      */
     public void done() {
-        this.status = "done";
+        this.isDone = true;
     }
 
     /**
      * @return title of the task with its status
      */
     public String toString() {
-        return "[" + (isDone() ? "X" : " ") + "] " + title;
+        return "[" + (isDone ? "X" : " ") + "] " + title;
     }
 }

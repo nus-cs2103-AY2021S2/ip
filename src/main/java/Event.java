@@ -4,9 +4,13 @@
 public class Event extends Task {
     private String time;
 
-    public Event(String title, String time) {
-        super(title);
+    public Event(String title, boolean isDone, String time) {
+        super(title, isDone);
         this.time = time;
+    }
+
+    public Event(String title, String time) {
+        this(title, false, time);
     }
 
     /**
