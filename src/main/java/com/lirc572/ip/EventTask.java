@@ -38,6 +38,8 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + (this.eventTime != null ? String.format(" (at: %s)", this.getEventTime()) : "");
+        return "[E]"
+                + super.toString()
+                + (this.eventTime != null ? String.format(" (at: %s)", this.getEventTime()) : "");
     }
 }

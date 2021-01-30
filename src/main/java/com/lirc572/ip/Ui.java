@@ -1,11 +1,11 @@
 package com.lirc572.ip;
 
 public class Ui {
-    private static final String logo = " ____        _        \n" +
-            "|  _ \\ _   _| | _____ \n" +
-            "| | | | | | | |/ / _ \\\n" +
-            "| |_| | |_| |   <  __/\n" +
-            "|____/ \\__,_|_|\\_\\___|";
+    private static final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|";
 
     /**
      * Print one line with spaces in front
