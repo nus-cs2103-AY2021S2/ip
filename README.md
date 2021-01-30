@@ -1,6 +1,7 @@
 # Duke project template
 
 ![Text UI Test](https://github.com/lirc572/ip/workflows/Text%20UI%20Test/badge.svg)
+![Package in JAR](https://github.com/lirc572/ip/workflows/Package%20in%20JAR/badge.svg)
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
