@@ -1,7 +1,7 @@
 package duke;
 
-import duke.exceptions.MissingTaskInputException;
 import duke.exceptions.DukeIncompleteInputException;
+import duke.exceptions.MissingTaskInputException;
 import duke.exceptions.UnknownInputException;
 
 /**
@@ -13,7 +13,6 @@ public class Parser {
 
     /** Action input from user that is parsed into an array for checking */
     private String [] parsedAction = null;
-    
     /**
      * Constructor to initialize the Parser object
      */
@@ -38,8 +37,8 @@ public class Parser {
      */
     public void check() throws MissingTaskInputException, DukeIncompleteInputException {
 
-        if (parsedAction[0].equals("todo") || parsedAction[0].equals("deadline") ||
-                parsedAction[0].equals("event")) {
+        if (parsedAction[0].equals("todo") || parsedAction[0].equals("deadline")
+                || parsedAction[0].equals("event")) {
 
             if (parsedAction.length <= 1) {
                 throw new MissingTaskInputException(parsedAction[0]);

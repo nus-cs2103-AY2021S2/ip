@@ -1,14 +1,13 @@
 package duke;
 
+import java.util.List;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownInputException;
-
-import duke.tasks.ToDoTask;
-import duke.tasks.Task;
-import duke.tasks.EventTask;
 import duke.tasks.DeadlineTask;
-
-import java.util.List;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.ToDoTask;
 
 /**
  * Duke class that simulates the running of the Duke Program
@@ -50,9 +49,7 @@ public class Duke {
      */
     public void run() {
         ui.printDivider();
-        
         ui.printWelcome();
-        
         ui.printDivider();
 
         try {
@@ -68,17 +65,12 @@ public class Duke {
                 String[] parsedAction = parser.getParsedAction();
 
                 switch (parsedAction[0]) {
-
-                    case "todo":
+                case "todo":
                     ui.printDivider();
-
                     ui.addPrint();
-
                     ToDoTask todo = tasks.handleToDoTask(action);
-
                     ui.printTask(todo);
                     ui.countTasks(tasks);
-
                     ui.printDivider();
 
                     break;

@@ -6,7 +6,6 @@ package duke.exceptions;
  * It inherit from DukeException class
  */
 public class MissingTaskInputException extends DukeException {
-    
     /**
      * MissingTaskInput class constructor to initialize an instance
      *

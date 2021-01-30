@@ -1,12 +1,12 @@
 package duke;
 
-import duke.exceptions.DukeOnlyIOException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.exceptions.DukeOnlyIoException;
 
 /**
  * Storage class that is used for the reading and writing of the list file
@@ -24,9 +24,9 @@ public class Storage {
 
     /**
      * Storage class constructor to initialize the Storage object
-     * @param
+     * @param filepath is the file path for loading of the file
      */
-    public Storage(String filepath) throws DukeOnlyIOException {
+    public Storage(String filepath) throws DukeOnlyIoException {
 
         try {
 
@@ -39,7 +39,7 @@ public class Storage {
             }
 
         } catch (IOException err) {
-            throw new DukeOnlyIOException();
+            throw new DukeOnlyIoException();
         }
     }
 
@@ -64,9 +64,9 @@ public class Storage {
      * Writes into the current TaskList into file
      *
      * @param list the TaskList
-     * @throws DukeOnlyIOException when there is a IOException
+     * @throws DukeOnlyIoException when there is a IOException
      */
-    public void write(TaskList list) throws DukeOnlyIOException {
+    public void write(TaskList list) throws DukeOnlyIoException {
         try {
 
             this.writer = new FileWriter(file, false);
@@ -75,7 +75,7 @@ public class Storage {
             this.writer.close();
 
         } catch (IOException err) {
-            throw new DukeOnlyIOException();
+            throw new DukeOnlyIoException();
         }
     }
 }

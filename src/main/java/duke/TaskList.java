@@ -1,14 +1,15 @@
 package duke;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.ToDoTask;
 
-import java.time.LocalDate;
+
 
 /**
  * TaskList class contains a list in which stores all the tasks that the user has inputted and not deltted
@@ -17,7 +18,6 @@ public class TaskList {
 
     /** The list of tasks */
     private List<Task> inputList = new ArrayList<>();
-    
     /**
      * TaskList constructor to intialize a new empty TaskList
      */
@@ -132,9 +132,9 @@ public class TaskList {
         int descriptionIndex = action.indexOf("/");
 
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
-        String event =  action.substring(descriptionIndex + 4);
+        String event = action.substring(descriptionIndex + 4);
 
-        EventTask eventTask= new EventTask(description, event);
+        EventTask eventTask = new EventTask(description, event);
 
         this.add(eventTask);
 
@@ -152,9 +152,9 @@ public class TaskList {
         int descriptionIndex = action.indexOf("/");
 
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
-        String deadline =  action.substring(descriptionIndex + 4);
+        String deadline = action.substring(descriptionIndex + 4);
 
-        DeadlineTask deadlineTask= new DeadlineTask(description, deadline);
+        DeadlineTask deadlineTask = new DeadlineTask(description, deadline);
 
         this.add(deadlineTask);
 
@@ -216,7 +216,7 @@ public class TaskList {
                 date = eventTask.getUnformattedTiming();;
             }
 
-            result += type + " | " + status +  " | " + description;
+            result += type + " | " + status + " | " + description;
 
             if (date.equals("")) {
                 result += "\n";
@@ -244,21 +244,22 @@ public class TaskList {
 
                 DeadlineTask deadlineTask = (DeadlineTask) task;
 
-                if (deadlineTask.getDeadlineAsLocalDate().equals(toSearch))
+                if (deadlineTask.getDeadlineAsLocalDate().equals(toSearch)) {
                     result += deadlineTask + "\n";
+                }
 
             } else if (task.getType() == 'E') {
 
                 EventTask eventTask = (EventTask) task;
 
-                if (eventTask.getTimingAsLocalDate().equals(toSearch))
+                if (eventTask.getTimingAsLocalDate().equals(toSearch)) {
                     result += eventTask + "\n";
+                }
             }
         }
 
         return result;
     }
-    
     /**
      * Returns a List of tasks that match the keyword inputted
      *

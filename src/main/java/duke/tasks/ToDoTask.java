@@ -6,7 +6,6 @@ package duke.tasks;
  * Its details include the description
  */
 public class ToDoTask extends Task {
-    
     /**
      * Constructor to initialize the ToDoTask
      *
@@ -15,7 +14,6 @@ public class ToDoTask extends Task {
     public ToDoTask(String description) {
         super(description, "[T]");
     }
-    
     /**
      * toString method of ToDoTask which prints out details of the ToDoTask
      */

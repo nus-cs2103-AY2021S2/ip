@@ -13,7 +13,6 @@ public class Task {
 
     /** type of Task */
     protected String type = "";
-    
     /**
      * @param description the description of the task
      * @param  type the task type
@@ -66,7 +65,6 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
-    
     /**
      * toString method of Task which prints out details of the task
      */

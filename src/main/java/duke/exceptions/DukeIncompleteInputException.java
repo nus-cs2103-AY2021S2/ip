@@ -9,7 +9,6 @@ package duke.exceptions;
  * It inherit from the Java DukeException class
  */
 public class DukeIncompleteInputException extends DukeException {
-    
     /**
      * DukeException constructor used to initialize the Exception
      *

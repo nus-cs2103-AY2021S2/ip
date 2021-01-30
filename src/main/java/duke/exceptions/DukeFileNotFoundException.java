@@ -6,7 +6,6 @@ package duke.exceptions;
  * It inherit from the DukeException class
  */
 public class DukeFileNotFoundException extends DukeException {
-    
     /**
      * DukeFileNotFoundException class constructor
      */

@@ -6,8 +6,7 @@ package duke.exceptions;
  *
  * It inherit from the DukeException class
  */
-public class UnknownInputException  extends DukeException {
-    
+public class UnknownInputException extends DukeException {
     /**
      * UnknownInputException constructor
      */
