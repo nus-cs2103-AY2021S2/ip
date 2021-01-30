@@ -6,15 +6,17 @@ import duke.controller.TaskList;
 import duke.controller.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 public class Duke {
     @FXML
-    private TextArea screen;
+    private ScrollPane scrollPane;
+
+    @FXML
+    private VBox content;
 
     @FXML
     private TextField input;
@@ -33,7 +35,14 @@ public class Duke {
     @FXML
     private void initialize() {
         Ui ui = new Ui();
-        screen.appendText(ui.initialize() + "\n");
+        scrollPane.setContent(content);
+
+        scrollPane.setVvalue(1.0);
+        content.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        content.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
+
+        content.getChildren().add(DialogBox.dukeDialogMaker(ui.initialize() + "\n"));
         try {
             listOfTasks = storage.handleLoad();
         } catch (DukeException e) {
@@ -51,11 +60,10 @@ public class Duke {
     @FXML
     private void onSubmit() {
         String userInput = input.getText();
+        content.getChildren().add(DialogBox.userDialogMaker(userInput));
         try {
-            screen.appendText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " - "
-                    + userInput + "\n");
             if (userInput.equals("list")) {
-                screen.appendText(parser.handleList(listOfTasks));
+                content.getChildren().add(DialogBox.dukeDialogMaker(parser.handleList(listOfTasks)));
             } else {
                 // handle the commands with arguments
                 int spaceIndex = userInput.indexOf(" ");
@@ -87,12 +95,12 @@ public class Duke {
                     textToAppend = "I have no idea what that means, what do you want?\n";
                     break;
                 }
-                screen.appendText(textToAppend + "\n");
+                content.getChildren().add(DialogBox.dukeDialogMaker(textToAppend));
             }
             input.clear();
             storage.handleSave(listOfTasks);
         } catch (DukeException e) {
-            screen.appendText(e.toString() + "\n");
+            e.printStackTrace();
         }
     }
 }
