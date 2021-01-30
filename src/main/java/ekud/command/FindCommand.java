@@ -37,7 +37,7 @@ public class FindCommand extends Command {
 
         String reply = toPrint.isEmpty() ? "Nothing found, try another keyword?" : "Here's what I found!";
         for (Task task : toPrint) {
-            reply = String.join(System.lineSeparator(), reply, "\t " + task.toString());
+            reply = String.join(System.lineSeparator(), reply, "  " + task.toString());
         }
         return reply;
     }

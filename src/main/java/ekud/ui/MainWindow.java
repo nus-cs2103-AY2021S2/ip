@@ -70,7 +70,7 @@ public class MainWindow extends AnchorPane {
         dialogueContainer.getChildren().add(DialogueBox.genUserDialogue(fullCommand, userImage));
 
         try {
-            String reply = ekud.getResponse(fullCommand);
+            String reply = ekud.getResponse(fullCommand).trim();
             dialogueContainer.getChildren().add(DialogueBox.genEkudDialogue(reply, dukeImage));
         } catch (EkudException e) {
             dialogueContainer.getChildren().add(DialogueBox.genEkudDialogue(e.toString(), dukeImage));

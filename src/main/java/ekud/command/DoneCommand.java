@@ -35,6 +35,6 @@ public class DoneCommand extends ModificationCommand {
         return String.join(System.lineSeparator(),
                 super.execute(tasks, storage),
                 "Good job! The task below is marked done!",
-                "\t" + doneTask.toString());
+                "  " + doneTask.toString());
     }
 }

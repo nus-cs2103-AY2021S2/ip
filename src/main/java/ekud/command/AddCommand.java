@@ -32,7 +32,7 @@ public abstract class AddCommand extends ModificationCommand {
         return String.join(System.lineSeparator(),
                 super.execute(tasks, storage),
                 "Okay I remember for you liao:",
-                "\t" + tasks.last(),
+                "  " + tasks.last(),
                 getTasksLeftString(tasks));
     }
 }

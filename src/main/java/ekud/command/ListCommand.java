@@ -50,7 +50,7 @@ public class ListCommand extends Command {
             for (int i = 0; i < tasks.size(); i++) {
                 reply = String.join(System.lineSeparator(),
                         reply,
-                        String.format("\t %d. %s", i + 1, tasks.get(i).toString()));
+                        String.format("  %d. %s", i + 1, tasks.get(i).toString()));
             }
             return reply;
         }
