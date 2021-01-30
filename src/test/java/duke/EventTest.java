@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import Tasks.Events;
+import tasks.Events;
 
 
 public class EventTest {
