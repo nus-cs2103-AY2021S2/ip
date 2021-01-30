@@ -32,6 +32,8 @@ public class Parser {
             return new DoneCommand(input, Integer.parseInt(splitInput[1]));
         case "delete":
             return new DeleteCommand(input,  Integer.parseInt(splitInput[1]));
+        case "find":
+            return new FindCommand(input, splitInput[1]);
         default:
             return new UnknownCommand(input);
         }
