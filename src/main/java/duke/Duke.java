@@ -1,12 +1,13 @@
 package duke;
 
-import duke.exceptions.*;
-import duke.task.Task;
-
 import java.io.FileNotFoundException;
-
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidFolderException;
+import duke.exceptions.InvalidInputException;
+import duke.task.Task;
 
 /**
  * Main class of the <code>Duke</code> application.

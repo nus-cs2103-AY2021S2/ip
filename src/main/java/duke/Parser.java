@@ -1,11 +1,12 @@
 package duke;
 
-import duke.task.Task;
+import java.util.List;
+
 import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.InvalidInputException;
 import duke.exceptions.InvalidTaskNumberException;
 import duke.exceptions.MissingTaskNumberException;
-
-import java.util.List;
+import duke.task.Task;
 
 /**
  * <code>Parser</code> class deals with making sense of the user command.
@@ -48,7 +49,8 @@ public class Parser {
     public void checkUserInput(List<Task> list)
             throws MissingTaskNumberException,
             InvalidTaskNumberException,
-            EmptyDescriptionException {
+            EmptyDescriptionException,
+            InvalidInputException {
         String[] userInputArr = userInput.split(" ");
         String task = userInputArr[0];
 
@@ -73,6 +75,9 @@ public class Parser {
                 throw new InvalidTaskNumberException();
             }
             break;
+
+        default:
+            throw new InvalidInputException();
         }
     }
 }
