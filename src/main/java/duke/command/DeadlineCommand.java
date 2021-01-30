@@ -11,7 +11,7 @@ import duke.task.Deadline;
 /**
  * A DeadlineCommand is the command when the user wants to add a deadline task
  */
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
 
     private final String description;
     private final LocalDate by;
@@ -21,7 +21,7 @@ public class DeadlineCommand extends Command{
      * @param task task description
      * @param by when the task has to be done /by
      */
-    public DeadlineCommand(String task, LocalDate by){
+    public DeadlineCommand(String task, LocalDate by) {
         super("");
         this.description = task;
         this.by = by;

@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -47,7 +46,7 @@ public class Storage {
      * @param list the list of tasks
      * @throws IOException when an invalid filename is used in FileWriter
      */
-    public void storeData(ArrayList<Task> list) throws IOException{
+    public void storeData(ArrayList<Task> list) throws IOException {
         FileWriter file = new FileWriter(this.location);
         for (Task t: list) {
             String data = "";
@@ -81,7 +80,7 @@ public class Storage {
      * @return the list of Tasks as read from the text file
      * @throws FileNotFoundException when the scanner attempts to access an invalid file path
      */
-    public ArrayList<Task> loadData() throws FileNotFoundException{
+    public ArrayList<Task> loadData() throws FileNotFoundException {
         try {
             Scanner sc = new Scanner(path.toFile());
             ArrayList<Task> list = new ArrayList<>();
@@ -89,21 +88,26 @@ public class Storage {
                 String line = sc.nextLine();
                 String[] ar = line.split("\\|");
                 switch (ar[0]) {
-                    case "todo": {
-                        Todo t = new Todo(ar[1]);
-                        list.add(t);
-                        break;
-                    }
-                    case "event": {
-                        list.add(new Event(ar[1], LocalDate.parse(ar[2])));
-                        break;
-                    }
-                    case "deadline": {
-                        list.add(new Deadline(ar[1], LocalDate.parse(ar[2])));
-                        break;
-                    }
+                case "todo": {
+                    Todo t = new Todo(ar[1]);
+                    list.add(t);
+                    break;
                 }
-                if (ar[ar.length - 1].equals("T")) list.get(list.size() - 1).done();
+                case "event": {
+                    list.add(new Event(ar[1], LocalDate.parse(ar[2])));
+                    break;
+                }
+                case "deadline": {
+                    list.add(new Deadline(ar[1], LocalDate.parse(ar[2])));
+                    break;
+                }
+                default: {
+
+                }
+                }
+                if (ar[ar.length - 1].equals("T")) {
+                    list.get(list.size() - 1).done();
+                }
             }
             return list;
         } catch (FileNotFoundException e) {

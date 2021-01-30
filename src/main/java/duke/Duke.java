@@ -38,7 +38,7 @@ public class Duke {
      * Takes user input by line and executes the corresponding command,
      * or prompts the user if the command is not understood with ui.showError()
      */
-    public void run(){
+    public void run() {
         ui.welcome();
         boolean isBye = false;
         while (!isBye) {
@@ -51,7 +51,7 @@ public class Duke {
                 ui.showError(e.getMessage());
             } catch (IOException | NumberFormatException e) {
                 ui.showError("Please enter a valid number!");
-            } catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 ui.showError("You don't have a task at that index!");
             }
         }
