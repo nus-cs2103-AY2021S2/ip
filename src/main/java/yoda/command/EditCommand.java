@@ -1,3 +1,9 @@
+package yoda.command;
+
+import yoda.task.Task;
+import yoda.task.TaskList;
+import yoda.ui.Ui;
+import yoda.storage.Storage;
 public class EditCommand extends Command{
 
     public EditCommand(String[] details){

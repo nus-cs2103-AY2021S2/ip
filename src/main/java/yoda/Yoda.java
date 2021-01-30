@@ -1,15 +1,23 @@
-public class Duke {
+package yoda;
+
+import yoda.task.TaskList;
+import yoda.storage.Storage;
+import yoda.ui.Ui;
+import yoda.command.Command;
+import yoda.parser.Parser;
+
+public class Yoda {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Yoda(String filePath) {
         this.ui = new Ui();
         storage = new Storage(filePath);
         this.tasks = storage.load();
     }
 
-    public void runDuke() {
+    public void runYoda() {
         ui.greet();
         boolean isExit = false;
         while (!isExit) {
@@ -25,7 +33,7 @@ public class Duke {
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
         String filePath = home+"/dukeTasks.txt";
-        Duke duke = new Duke(filePath);
-        duke.runDuke();
+        Yoda duke = new Yoda(filePath);
+        duke.runYoda();
     }
 }

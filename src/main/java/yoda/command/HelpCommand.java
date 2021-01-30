@@ -1,6 +1,12 @@
+package yoda.command;
+
+import yoda.task.TaskList;
+import yoda.ui.Ui;
+import yoda.storage.Storage;
+
 public class HelpCommand extends Command {
 
-    HelpCommand(String[] details) {
+    public HelpCommand(String[] details) {
         super(details);
         taskType = Input.valueOf(details[0]);
     }

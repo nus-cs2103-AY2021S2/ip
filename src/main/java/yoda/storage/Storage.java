@@ -1,6 +1,10 @@
+package yoda.storage;
+
+import yoda.task.Task;
+import yoda.task.TaskList;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Storage {
     String filePath;

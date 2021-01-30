@@ -1,6 +1,16 @@
+package yoda.command;
+
+import yoda.task.Task;
+import yoda.task.ToDo;
+import yoda.task.Deadline;
+import yoda.task.Event;
+import yoda.task.TaskList;
+import yoda.ui.Ui;
+import yoda.storage.Storage;
+
 public class AddCommand extends Command{
 
-    AddCommand(String[] details) {
+    public AddCommand(String[] details) {
         super(details);
         taskType = Input.valueOf(details[0]);
     }
