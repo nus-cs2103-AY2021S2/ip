@@ -1,8 +1,7 @@
 T|DONE|read book
-E|DONE|project meeting |01-04-2021 23:59
-T|PENDING|join sports club
-D|PENDING|burn book |01-02-2023 22:34
-E|PENDING|project debrief |03-04-2021 22:11
+T|DONE|join sports club
+T|DONE|borrow book
+E|DONE|project debrief |03-04-2021 22:11
 T|PENDING|read book
 D|PENDING|return book |06-08-2021 12:00
 E|PENDING|project meeting |01-04-2021 23:59
@@ -10,19 +9,4 @@ T|PENDING|join sports club
 T|PENDING|borrow book
 D|PENDING|burn book |01-02-2023 22:34
 E|PENDING|project debrief |03-04-2021 22:11
-T|PENDING|read book
-D|PENDING|return book |06-08-2021 12:00
-E|PENDING|project meeting |01-04-2021 23:59
-T|PENDING|join sports club
-T|PENDING|borrow book
-D|PENDING|burn book |01-02-2023 22:34
-E|PENDING|project debrief |03-04-2021 22:11
-T|PENDING|read book
-T|PENDING|read book
-T|PENDING|read book
-D|PENDING|return book |06-08-2021 12:00
-E|PENDING|project meeting |01-04-2021 23:59
-T|PENDING|join sports club
-T|PENDING|borrow book
-D|PENDING|burn book |01-02-2023 22:34
-E|PENDING|project debrief |03-04-2021 22:11
+T|PENDING|brwef fe

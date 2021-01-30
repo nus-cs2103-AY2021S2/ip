@@ -1,3 +1,5 @@
+package Duke.task;
+
 /**
  * Represents a Todo.
  * Sub-class of Task.

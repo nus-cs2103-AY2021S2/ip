@@ -1,18 +1,24 @@
+package Duke.ui;
+
+import Duke.common.Response;
+import Duke.exception.EmptyDescription;
+import Duke.exception.InvalidTypeOfTask;
+import Duke.parser.Parser;
+import Duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
     private Boolean shouldExit = false;
 
-    Ui() {
+    public Ui() {
 
     }
-    public void readCommand(TaskList taskList1, Scanner s) throws InvalidTypeOfTask, EmptyDescription {
+    public TaskList readCommand(TaskList taskList1, Scanner s) throws InvalidTypeOfTask, EmptyDescription {
         String input = s.nextLine();
-
         Parser p = new Parser();
         p = p.parse(input);
         String typeofTask = p.getTypeOfTask();
-
         TaskList taskList = taskList1;
 
         switch (typeofTask) {
@@ -36,6 +42,7 @@ public class Ui {
         default:
             throw new InvalidTypeOfTask();
         }
+        return taskList;
     }
 
 

@@ -1,3 +1,5 @@
+package Duke.common;
+
 /**
  * Stores all generic string responses back to user.
  *

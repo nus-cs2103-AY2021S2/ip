@@ -1,3 +1,5 @@
+package Duke.parser;
+
 import java.time.LocalDateTime;
 
 /**
@@ -16,7 +18,7 @@ public class Parser {
      *
      * @return Parser
      */
-    Parser() {
+    public Parser() {
         this.typeOfTask = "";
         this.description = "";
         this.time = null;

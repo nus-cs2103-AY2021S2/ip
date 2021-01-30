@@ -1,3 +1,5 @@
+package Duke.exception;
+
 /**
  * Represent a empty task description parsed from user input.
  *
@@ -5,7 +7,7 @@
  * @version 1.0
  */
 public class EmptyDescription extends DukeException{
-    protected String typeOfTask;
+    public String typeOfTask;
 
     /**
      * Returns EmptyDescription.
@@ -13,7 +15,7 @@ public class EmptyDescription extends DukeException{
      * @param typeOfTask
      * @return EmptyDescription
      */
-    EmptyDescription(String typeOfTask) {
+    public EmptyDescription(String typeOfTask) {
         this.typeOfTask = typeOfTask;
     }
 

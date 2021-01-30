@@ -11,8 +11,4 @@ done 4
 done 2
 done 3
 list
-delete 3
-delete 2
-delete 4
-list
 bye

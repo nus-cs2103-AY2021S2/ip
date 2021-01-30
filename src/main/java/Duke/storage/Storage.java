@@ -1,3 +1,9 @@
+package Duke.storage;
+
+import Duke.parser.ListParser;
+import Duke.task.Task;
+import Duke.task.TaskList;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,15 +17,12 @@ public class Storage {
 
     public  void retrieveFilePath() {
         try {
-            String current = System.getProperty("user.dir");
-            Path projectRoot = Paths.get(current).getParent();
-
-            Path directoryPath = Paths.get(projectRoot.toString(),"data");
+            String home = System.getProperty("user.home");
+            Path directoryPath = Paths.get(home.toString(),"Desktop", "repo", "ip", "data");
             Boolean directoryExists = Files.exists(directoryPath);
             if (directoryExists.equals(false)) {
                 Files.createDirectory(directoryPath);
             }
-
             Path file = Paths.get(directoryPath.toString(), "Baron.txt");
             Boolean fileExists = Files.exists(file);
             if (fileExists.equals(false)) {
@@ -37,15 +40,14 @@ public class Storage {
 
             for(int i = 0; i < taskList.size(); i++) {
                 data = data + taskList.get(i).encode() + "\n";
-
-//                System.out.println("\ncheck file contents");
-//                List s = Files.readAllLines(filePath);
-//                for (int j = 0; j < s.size(); j++) {
-//                    System.out.println(s.get(j));
-//                }
             }
-
             Files.write(filePath, data.getBytes(StandardCharsets.UTF_8));
+
+//            System.out.println("\ncheck file contents");
+//            List s = Files.readAllLines(filePath);
+//            for (int j = 0; j < s.size(); j++) {
+//                System.out.println(s.get(j));
+//            }
 
         } catch (IOException e) {
 

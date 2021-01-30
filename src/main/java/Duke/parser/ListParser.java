@@ -1,3 +1,5 @@
+package Duke.parser;
+
 import java.time.LocalDateTime;
 
 public class ListParser {
@@ -6,7 +8,7 @@ public class ListParser {
     private String description;
     private LocalDateTime time;
 
-    ListParser() {
+    public ListParser() {
         this.typeOfTask = "";
         this.isDone = null;
         this.description = "";

@@ -1,4 +1,11 @@
-import java.io.FileNotFoundException;
+package Duke;
+
+import Duke.exception.EmptyDescription;
+import Duke.exception.InvalidTypeOfTask;
+import Duke.storage.Storage;
+import Duke.task.TaskList;
+import Duke.ui.Ui;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -33,23 +40,25 @@ public class Duke {
      */
     public static void main(String[] args){
         Duke duke = new Duke();
-        duke.initiate();
+        duke.execute();
     }
 
     /**
      * Start Duke chat services.
      */
-    public void initiate() {
+    public void execute() {
         ui.Greet();
         Boolean shouldExit = false;
         Scanner s = new Scanner(System.in);
 
         while(!shouldExit && s.hasNextLine()){
             try {
-                TaskList taskList = storage.load();
-                ui.readCommand(taskList, s);
+                taskList = storage.load();
+                taskList = ui.readCommand(taskList, s);
                 shouldExit = ui.getExit();
                 storage.save(taskList.getTasks());
+
+
 
             } catch (EmptyDescription e) {
                 ui.enclose(e.toString());

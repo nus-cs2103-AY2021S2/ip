@@ -1,3 +1,5 @@
+package Duke.exception;
+
 /**
  * Represent exceptions arising from the Duke program.
  *
