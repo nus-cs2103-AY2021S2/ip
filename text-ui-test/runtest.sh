@@ -19,6 +19,9 @@ then
     exit 1
 fi
 
+# remove saved data
+rm tasks.data
+
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -cp ../bin com.lirc572.ip.Duke < input.txt > ACTUAL.TXT
 
