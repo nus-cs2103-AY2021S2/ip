@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.ToDo;
-import duke.exception.DukeException;
 import duke.exception.DukeCommandException;
+import duke.exception.DukeException;
+import duke.task.ToDo;
 
 /** An executable command to create a basic task with description */
 public class ToDoCommand extends Command {
@@ -31,7 +31,7 @@ public class ToDoCommand extends Command {
             ToDo toDo = taskManager.addToDo(this.desc);
             ui.printAddMsg(toDo, taskManager.getTasksSize());
             Storage.saveTasks(taskManager.getTasks());
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             throw new DukeCommandException("todo", desc, e.getMessage());
         }
     }

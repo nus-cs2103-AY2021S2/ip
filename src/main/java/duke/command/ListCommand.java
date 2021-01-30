@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.exception.DukeCommandException;
+import duke.task.Task;
 
 import java.util.List;
 
