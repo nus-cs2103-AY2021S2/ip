@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 
 
 public class DukeTest {

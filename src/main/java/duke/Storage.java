@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.ToDo;
+
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
@@ -16,6 +23,7 @@ public class Storage {
 
     /**
      * Constructs the storage.
+     *
      * @param filePath the filepath of the storage file
      */
     public Storage(String filePath) {

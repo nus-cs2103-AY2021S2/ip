@@ -1,14 +1,16 @@
-package duke;
+package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
+import duke.Ui;
 
 /**
  * Contains the task list e.g., it has operations to add/delete tasks in the list.
  */
 public class TaskList {
     private final List<Task> taskList;
-    private final Ui ui = new Ui();
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -23,10 +25,10 @@ public class TaskList {
      *
      * @param newTask the new task to be added
      */
-    public void addTask(Task newTask) {
+    public String addTask(Task newTask) {
         taskList.add(newTask);
-        ui.printFormatMessage("\t  Got it. I've added this task:\n\t\t"
-                + newTask.toString() + "\n\t  Now you have " + taskList.size()
+        return Ui.printFormatMessage("Got it. I've added this task:\n"
+                + newTask.toString() + "\nNow you have " + taskList.size()
                 + " taskList in the list.");
     }
 
@@ -35,17 +37,17 @@ public class TaskList {
      *
      * @param order the order of the task to be deleted
      */
-    public void delete(int order) {
+    public String deleteTask(int order) {
         try {
             if (order < 0 || order >= taskList.size()) {
                 throw new DukeException("There's no task "
                         + (order + 1) + " in the list.");
             }
-            ui.printFormatMessage("\t  Noted. I've removed this task:\n"
-                    + "\t\t " + taskList.get(order).toString());
-            taskList.remove(order);
+            Task removedTask = taskList.remove(order);
+            return Ui.printFormatMessage("Noted. I've removed this task:\n"
+                    + removedTask.toString());
         } catch (DukeException ex) {
-            ui.printFormatMessage(ex.toString());
+            return Ui.printFormatMessage(ex.toString());
         }
     }
 
@@ -54,7 +56,7 @@ public class TaskList {
      *
      * @param order the order of the task to be marked as done
      */
-    public void markDone(int order) {
+    public String markAsDone(int order) {
         try {
             if (order < 0 || order >= taskList.size()) {
                 throw new DukeException("There's no task "
@@ -62,11 +64,11 @@ public class TaskList {
             } else if (taskList.get(order).isDone()) {
                 throw new DukeException("This task has been finished before.");
             }
-            taskList.get(order).markDone();
-            ui.printFormatMessage("\t  Nice! I've marked this task as done:\n\t\t "
+            taskList.get(order).markAsDone();
+            return Ui.printFormatMessage("Nice! I've marked this task as done:\n"
                     + taskList.get(order).toString());
         } catch (DukeException ex) {
-            ui.printFormatMessage(ex.toString());
+            return Ui.printFormatMessage(ex.toString());
         }
 
     }
@@ -74,19 +76,19 @@ public class TaskList {
     /**
      * Prints out all the tasks in task list currently.
      */
-    public void printTaskList() {
+    public String printTaskList() {
         try {
             if (taskList.size() == 0) {
                 throw new DukeException("There's currently no task in the list.");
             }
             String taskString = "";
-            taskString += "\t  " + (1) + "." + taskList.get(0).toString();
+            taskString += "" + (1) + "." + taskList.get(0).toString();
             for (int i = 1; i < taskList.size(); i++) {
-                taskString += "\n\t  " + (i + 1) + "." + taskList.get(i).toString();
+                taskString += "\n" + (i + 1) + "." + taskList.get(i).toString();
             }
-            ui.printFormatMessage(taskString);
+            return Ui.printFormatMessage(taskString);
         } catch (DukeException ex) {
-            ui.printFormatMessage(ex.toString());
+            return Ui.printFormatMessage(ex.toString());
         }
 
     }
@@ -96,16 +98,16 @@ public class TaskList {
      *
      * @param list the list given to be print out
      */
-    public void printSpecifiedTasks(List<Task> list) {
+    public String printSpecifiedTasks(List<Task> list) {
         if (list.size() == 0) {
-            return;
+            return "";
         }
         String taskString = "";
-        taskString += "\t  " + (1) + "." + list.get(0).toString();
+        taskString += "" + (1) + "." + list.get(0).toString();
         for (int i = 1; i < list.size(); i++) {
-            taskString += "\n\t  " + (i + 1) + "." + list.get(i).toString();
+            taskString += "\n" + (i + 1) + "." + list.get(i).toString();
         }
-        ui.printFormatMessage(taskString);
+        return Ui.printFormatMessage(taskString);
     }
 
     /**
@@ -113,7 +115,7 @@ public class TaskList {
      *
      * @param target the target keyword
      */
-    public void findTask(String target) {
+    public String findTask(String target) {
         try {
             if (taskList.size() == 0) {
                 throw new DukeException("There's currently no task in the list.");
@@ -125,12 +127,12 @@ public class TaskList {
                 }
             }
             if (targetTasks.size() != 0) {
-                printSpecifiedTasks(targetTasks);
+                return printSpecifiedTasks(targetTasks);
             } else {
                 throw new DukeException("There's currently no task name with \"" + target + "\".");
             }
         } catch (DukeException ex) {
-            ui.printFormatMessage(ex.toString());
+            return Ui.printFormatMessage(ex.toString());
         }
 
     }

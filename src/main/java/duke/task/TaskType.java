@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * An enum with all possible types of tasks.
@@ -14,6 +14,7 @@ public enum TaskType {
 
     /**
      * Returns the type of the task.
+     *
      * @return the task type to be returned
      */
     public String getType() {

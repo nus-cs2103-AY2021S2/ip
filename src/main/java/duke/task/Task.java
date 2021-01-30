@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * The parent class for all types of tasks.
@@ -22,6 +22,7 @@ public class Task {
 
     /**
      * Returns the name of the task.
+     *
      * @return the task name to be returned
      */
     public String getName() {
@@ -30,6 +31,7 @@ public class Task {
 
     /**
      * Returns whether or not the task is done.
+     *
      * @return whether or not the task is done
      */
     public boolean isDone() {
@@ -38,6 +40,7 @@ public class Task {
 
     /**
      * Returns the type of the task.
+     *
      * @return the task type to be returned
      */
     public TaskType getType() {
@@ -47,7 +50,7 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void markDone() {
+    public void markAsDone() {
         done = true;
     }
 
