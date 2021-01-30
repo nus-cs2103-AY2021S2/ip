@@ -7,12 +7,12 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
 import ssagit.ui.ConsoleUI;
+import ssagit.taskclass.*;
 
 public class Duke {
     /**
@@ -136,7 +136,6 @@ public class Duke {
                 } else if (inputArr[0].equals("done")) {
                     int taskNum = Integer.parseInt(inputArr[1]) - 1;
                     taskArr[taskNum].markDone();
-                    // ui.formatBox("Nice! I've marked this task as done:\n" + taskArr[taskNum].toFormattedString());
                     ui.markDone(taskArr[taskNum].toFormattedString());
                 } else if (inputArr[0].equals("todo") || inputArr[0].equals("event") ||
                         inputArr[0].equals("deadline")) {
@@ -168,13 +167,6 @@ public class Duke {
                         }
                     }
                     taskIterator++; // increase task count in list
-                    // print output
-                    /*
-                    String formattedInput = "Got it. I've added this task:\n  ";
-                    formattedInput = formattedInput.concat(taskArr[taskIterator - 1].toFormattedString()).concat("\n");
-                    formattedInput = formattedInput.concat("Now you have " + taskIterator + " tasks in the list.");
-                    ui.formatBox(formattedInput);
-                    */
                     /** show message to user when task is added */
                     ui.addTaskMessage(taskArr[taskIterator - 1].toFormattedString(), taskIterator);
 
@@ -184,12 +176,6 @@ public class Duke {
                 } else if (inputArr[0].equals("delete")) {
                     int removeIndex = Integer.parseInt(inputArr[1]);
                     taskIterator--; // reduce task count in list
-                    /*
-                    String formattedInput = "Got it. I've removed this task:\n  ";
-                    formattedInput = formattedInput.concat(taskArr[removeIndex - 1].toFormattedString()).concat("\n");
-                    formattedInput = formattedInput.concat("Now you have " + taskIterator + " tasks in the list.");
-                    ui.formatBox(formattedInput);
-                    */
                     ui.deleteTaskMessage(taskArr[removeIndex - 1].toFormattedString(), taskIterator);
                     // actually delete the task and move all other tasks forward
                     for (int i = removeIndex - 1; i < taskArr.length - 1; i++) {

@@ -1,4 +1,4 @@
-package ssagit;
+package ssagit.taskclass;
 
 /**
  * Task class, since every task is a 'todoTask' currently, todoTask

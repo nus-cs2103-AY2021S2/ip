@@ -1,4 +1,4 @@
-package ssagit;
+package ssagit.taskclass;
 import java.util.Date;
 
 /**

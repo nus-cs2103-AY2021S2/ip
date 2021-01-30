@@ -1,6 +1,6 @@
 package ssagit.ui;
 
-import ssagit.Task;
+import ssagit.taskclass.Task;
 
 import java.io.InputStream;
 import java.util.Scanner;
