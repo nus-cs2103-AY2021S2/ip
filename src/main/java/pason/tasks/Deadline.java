@@ -12,10 +12,12 @@ public class Deadline extends Task{
     }
 
     public String toFileFormat() {
-        return "D | " + super.toFileFormat() + " | " + this.by;
+        return "D | " + super.toFileFormat()
+                + " | " + this.by;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " " + "(by: " + this.by.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mma")) + ")";
+        return "[D]" + super.toString() + " " + "(by: "
+                + this.by.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mma")) + ")";
     }
 }

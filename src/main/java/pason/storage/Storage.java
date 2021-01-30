@@ -40,10 +40,10 @@ public class Storage {
     public List<Task> loadTasks() throws FileNotFoundException, PasonException {
         File directory = new File(FILE_DIRECTORY);
         File file = new File(FILE_DIRECTORY + "/" + FILE_NAME);
-        if(!directory.exists()) {
+        if (!directory.exists()) {
             directory.mkdir();
         }
-        if(!file.exists()) {
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch(IOException e) {
@@ -63,7 +63,8 @@ public class Storage {
             }
         }
         if(failedImports > 0) {
-            throw new PasonException("There was a problem parsing " + failedImports + " task(s) from the file.");
+            throw new PasonException("There was a problem parsing "
+                    + failedImports + " task(s) from the file.");
         }
         return tasks;
     }
@@ -76,22 +77,24 @@ public class Storage {
      */
     public static Task parseFileEntry(String text) {
         String[] splitString = text.split(" \\| ");
-        if(splitString[0].equals("T") && splitString.length == 3) {
+        if (splitString[0].equals("T") && splitString.length == 3) {
             ToDo newToDo = new ToDo(splitString[2]);
-            if(splitString[1].equals("1")) {
+            if (splitString[1].equals("1")) {
                 newToDo.markAsDone();
             }
             return newToDo;
-        } else if(splitString[0].equals("E") && splitString.length == 4) {
+        } else if (splitString[0].equals("E") && splitString.length == 4) {
             String[] eventDateAndExtra = splitString[3].split(" ");
-            Event newEvent = new Event(splitString[2], LocalDate.parse(eventDateAndExtra[0]), (eventDateAndExtra.length == 1 ? null : eventDateAndExtra[1]));
-            if(splitString[1].equals("1")) {
+            Event newEvent = new Event(splitString[2], LocalDate.parse(eventDateAndExtra[0]),
+                    (eventDateAndExtra.length == 1 ? null : eventDateAndExtra[1]));
+            if (splitString[1].equals("1")) {
                 newEvent.markAsDone();
             }
             return newEvent;
-        } else if(splitString[0].equals("D") && splitString.length == 4) {
-            Deadline newDeadline = new Deadline(splitString[2], LocalDateTime.parse(splitString[3]));
-            if(splitString[1].equals("1")) {
+        } else if (splitString[0].equals("D") && splitString.length == 4) {
+            Deadline newDeadline = new Deadline(splitString[2],
+                    LocalDateTime.parse(splitString[3]));
+            if (splitString[1].equals("1")) {
                 newDeadline.markAsDone();
             }
             return newDeadline;
@@ -110,7 +113,8 @@ public class Storage {
      */
     public void saveAllTasks(List<Task> tasks) throws IOException {
         try {
-            FileWriter fw = new FileWriter(FILE_DIRECTORY + "/" + FILE_NAME);
+            FileWriter fw = new FileWriter(FILE_DIRECTORY
+                    + "/" + FILE_NAME);
             for(int i = 0; i < tasks.size(); i++) {
                 fw.write(tasks.get(i).toFileFormat() + "\n");
             }
@@ -130,7 +134,8 @@ public class Storage {
      */
     public void appendTask(Task task) throws IOException {
         try {
-            FileWriter fw = new FileWriter(FILE_DIRECTORY + "/" + FILE_NAME, true);
+            FileWriter fw = new FileWriter(FILE_DIRECTORY
+                    + "/" + FILE_NAME, true);
             fw.write(task.toFileFormat() + "\n");
             fw.close();
         } catch (IOException e) {

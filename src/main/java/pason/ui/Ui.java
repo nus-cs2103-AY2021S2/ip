@@ -39,7 +39,8 @@ public class Ui {
      * Displays the greeting message.
      */
     public void displayGreeting() {
-        printMessage("Hey! It's PAson, ready to help :)\nHow can I help you today?");
+        printMessage("Hey! It's PAson, ready to help :)\n"
+                + "How can I help you today?");
     }
 
     /**

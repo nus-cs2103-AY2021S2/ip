@@ -61,14 +61,16 @@ public class TaskList {
      */
     public String doneTask(int index) throws PasonException {
         try {
-            if(tasks.get(index - 1).isDone()) {
+            if (tasks.get(index - 1).isDone()) {
                 throw new PasonException("You've already marked this task as done.");
             }
             tasks.get(index - 1).markAsDone();
             storage.saveAllTasks(this.tasks);
-            return "Good job! I've marked this task as done:\n" + tasks.get(index - 1);
+            return "Good job! I've marked this task as done:\n"
+                    + tasks.get(index - 1);
         } catch(IndexOutOfBoundsException e) {
-            throw new PasonException("We couldn't find this task. Please enter the correct task number.");
+            throw new PasonException("We couldn't find this task. "
+                    + "Please enter the correct task number.");
         } catch(Exception e) {
             throw new PasonException(e.getMessage());
         }
@@ -90,7 +92,9 @@ public class TaskList {
                 String removedTask = tasks.get(index).toString();
                 tasks.remove(index);
                 storage.saveAllTasks(tasks);
-                return "Okay! I've removed this task:\n\t" + removedTask + "\nNow there are " + tasks.size() + " tasks in your list.";
+                return "Okay! I've removed this task:\n\t" + removedTask
+                        + "\nNow there are " + tasks.size()
+                        + " tasks in your list.";
             }
         } catch(Exception e) {
             throw new PasonException(e.getMessage());

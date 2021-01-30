@@ -13,10 +13,13 @@ public class Event extends Task {
     }
 
     public String toFileFormat() {
-        return "E | " + super.toFileFormat() + " | " + this.at + (this.extra != null ? " " + this.extra : "");
+        return "E | " + super.toFileFormat()
+                + " | " + this.at + (this.extra != null ? " " + this.extra : "");
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " " + "(at: " + this.at.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + (this.extra != null ? " " + this.extra : "") + ")";
+        return "[E]" + super.toString() + " "
+                + "(at: " + this.at.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                + (this.extra != null ? " " + this.extra : "") + ")";
     }
 }
