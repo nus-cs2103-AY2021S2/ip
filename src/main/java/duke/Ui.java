@@ -78,7 +78,9 @@ public class Ui {
             sb.append("\nIf you would like to remove an item from your menu, type\n" +
                     "    delete <orderNumber>\n\n" +
                     "If you would like to mark an order as complete, type\n" +
-                    "    done <orderNumber>");
+                    "    done <orderNumber>\n\n" +
+                    "If you would like to find orders containing a particular keyword, type\n" +
+                    "    find <keyword>\n");
         }
         display(sb.toString());
     }
