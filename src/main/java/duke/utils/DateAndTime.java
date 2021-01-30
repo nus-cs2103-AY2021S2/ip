@@ -6,24 +6,26 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
 public class DateAndTime {
 
-	public static final String converter(String date) {
+
+	public static String converter(String date) {
 
 		if (isDashFormat(date)) {
 			try {
 				LocalDate d1 = LocalDate.parse(date.trim());
 				return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 			} catch (DateTimeParseException e) {
-				return Ui.WRONGDATEFORMAT;
+				return Ui.WRONG_DATE_FORMAT;
 			}
 		} else {
-			return Ui.WRONGDATEFORMAT;
+			return Ui.WRONG_DATE_FORMAT;
 		}
 	}
 
 
-	private static final boolean isDashFormat(String date) {
+	private static boolean isDashFormat(String date) {
 		String[] dashFormat = date.toLowerCase().split("-", 3);
 		for (String s : dashFormat) {
 			if (!isNumeric(s.trim())) {
@@ -38,7 +40,7 @@ public class DateAndTime {
 			return false;
 		}
 		try {
-			double d = Double.parseDouble(strNum);
+			Double.parseDouble(strNum);
 		} catch (NumberFormatException nfe) {
 			return false;
 		}

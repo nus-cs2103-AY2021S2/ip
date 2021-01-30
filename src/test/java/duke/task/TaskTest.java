@@ -8,17 +8,17 @@ class TaskTest {
 
 	@Test
 	void done() {
-		Task.clearAllTask();
+		TaskList.clearAllTask();
 		Todo task = new Todo("Scratch back", " ");
-		Task.done(1);
+		TaskList.done(1);
 		assertEquals("X", task.getDoneStatus());
 	}
 
 	@Test
 	void delete() {
-		Task.clearAllTask();
+		TaskList.clearAllTask();
 		Todo task = new Todo("Scratch back", " ");
-		Task.delete(1);
-		assertEquals(0, Task.getTaskList().size());
+		TaskList.delete(1);
+		assertEquals(0, TaskList.getTaskList().size());
 	}
 }

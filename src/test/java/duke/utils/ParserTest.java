@@ -20,7 +20,7 @@ public class ParserTest {
 	void extractInstruction_emptyInstruction_Exception() {
 		try {
 			String testInput = "";
-			String actualInstruction = Parser.extractInstruction(testInput);
+			Parser.extractInstruction(testInput);
 			fail();
 		} catch (DukeException e) {
 			assertEquals("Walao, command cannot be empty!", e.getMessage());
@@ -31,7 +31,7 @@ public class ParserTest {
 	void extractInstruction_wrongInstruction_Exception() {
 		try {
 			String testInput = "ANYHOW";
-			String actualInstruction = Parser.extractInstruction(testInput);
+			Parser.extractInstruction(testInput);
 			fail();
 		} catch (DukeException e) {
 			assertEquals("I DON'T KNOW WHAT U SAYING BRO", e.getMessage());
@@ -50,7 +50,7 @@ public class ParserTest {
 	void extractTask_emptyTask_Exception() {
 		try {
 			String testInput = "deadline ";
-			String actualTask = Parser.extractTask(testInput, "deadline");
+			Parser.extractTask(testInput, "deadline");
 			fail();
 		} catch (DukeException e) {
 			assertEquals("Walao!NO TASK!", e.getMessage());
@@ -68,7 +68,7 @@ public class ParserTest {
 	void extractDate_emptyDate_withoutSlash_Exception() {
 		try {
 			String testInput = "deadline project";
-			String actualDate = Parser.extractDate(testInput, "deadline");
+			Parser.extractDate(testInput, "deadline");
 			fail();
 		} catch (DukeException e) {
 			assertEquals("!!!Fill ur date lah (add date with / in yyyy-mm-dd format)!!!", e.getMessage());
@@ -80,7 +80,7 @@ public class ParserTest {
 	void extractDate_wrongDateFormat_Exception1() {
 		try {
 			String testInput = "deadline project/";
-			String actualDate = Parser.extractDate(testInput, "deadline");
+			Parser.extractDate(testInput, "deadline");
 			fail();
 		} catch (DukeException e) {
 			assertEquals("!!!Err, wrong date format.. (yyyy-mm-dd)!!!", e.getMessage());
@@ -91,7 +91,7 @@ public class ParserTest {
 	void extractDate_wrongDateFormat_Exception2() {
 		try {
 			String testInput = "event project/2019";
-			String actualDate = Parser.extractDate(testInput, "event");
+			Parser.extractDate(testInput, "event");
 			fail();
 		} catch (DukeException e) {
 			assertEquals("!!!Err, wrong date format.. (yyyy-mm-dd)!!!", e.getMessage());
