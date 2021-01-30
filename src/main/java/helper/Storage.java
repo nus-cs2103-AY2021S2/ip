@@ -39,7 +39,7 @@ public class Storage {
                 myWriter.write(t.toString() + "\n");
             }
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+//            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             throw new DukeException("Cannot save file");
         }
