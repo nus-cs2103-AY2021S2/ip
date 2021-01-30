@@ -60,16 +60,11 @@ public class Duke {
 
         duke.Greet();
 
-<<<<<<< HEAD
-        TaskRecord.taskRecorder(path);
-        TaskRecord.taskHistory(path);
-=======
-
         Storage dukeBot = new Storage(path);
         dukeBot.taskRecorder();
         dukeBot.taskHistory(path);
         dukeBot.load(taskList);
->>>>>>> branch-A-JavaDoc
+
 
 
         while(!canExit) {
@@ -80,12 +75,8 @@ public class Duke {
             }
         }
 
-<<<<<<< HEAD
-        TaskRecord.record(taskList, path);
-=======
         dukeBot.record(taskList);
         duke.Exit();
 
->>>>>>> branch-A-JavaDoc
     }
 }
