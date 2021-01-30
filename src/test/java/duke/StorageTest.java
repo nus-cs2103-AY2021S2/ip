@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
     @Test
-    public void commandExtractionTest(){
+    public void commandExtractionTest() {
         assertEquals("deadline", new Parser("deadline return book /by Sunday").getCommand());
     }
 }

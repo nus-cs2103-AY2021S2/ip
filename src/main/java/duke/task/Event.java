@@ -14,16 +14,16 @@ public class Event extends ListItem {
     }
 
     @Override
-    public ListItem markAsDone(){
+    public ListItem markAsDone() {
         return new Event(super.getTask(), this.date, true);
     }
 
     @Override
     public String toString() {
-        return "[E]" + (super.getDoneStatus() == true ? "[X] " : "[ ] ") + super.getTask() + " (at: " + date + ")";
+        return "[E]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask() + " (at: " + date + ")";
     }
 
-    public String getDate(){
+    public String getDate() {
         return "|" + date;
     }
 }

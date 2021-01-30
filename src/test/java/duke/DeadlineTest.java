@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
     @Test
-    public void getDateTest(){
+    public void getDate_checkDateFormat() {
         assertEquals("|Sunday", new Deadline("return book", "Sunday").getDate());
     }
 
     @Test
-    public void parseDateTest(){
-        assertEquals("Oct 15 2019", new Deadline("return book", "Sunday").parseDate("2019-10-15").format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+    public void parseDate_unparsableDate_nullReturned() {
+        assertEquals(null, new Deadline("return book", "Sunday").parseDate("Sunday"));
     }
 }

@@ -1,6 +1,6 @@
 package duke.system.exception;
 
-public abstract class DukeException extends Exception{
+public abstract class DukeException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public abstract class DukeException extends Exception{
     }
 
     public static class IOErrorException extends DukeException {
-        public IOErrorException(){
+        public IOErrorException() {
             super("IO Error!");
         }
     }

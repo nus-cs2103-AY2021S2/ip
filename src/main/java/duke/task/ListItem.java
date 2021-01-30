@@ -5,24 +5,25 @@ package duke.task;
  * that requires the subclass to define <code>markAsDone()</code> and <code>getDate()</code>
  */
 public abstract class ListItem {
-    private final boolean doneStatus;
+    private final boolean isDone;
     private final String task;
-    public ListItem(String task){
+
+    public ListItem(String task) {
         this.task = task;
-        this.doneStatus = false;
+        this.isDone = false;
     }
 
-    public ListItem(String task, boolean isDone){
+    public ListItem(String task, boolean isDone) {
         this.task = task;
-        this.doneStatus = isDone;
+        this.isDone = isDone;
     }
 
     /**
      * @return a boolean of the task's status,
      * useful for subclasses that passed the status to parent (this class)
      */
-    public boolean getDoneStatus() {
-        return this.doneStatus;
+    public boolean getDone() {
+        return this.isDone;
     }
 
     public String getTask() {
@@ -35,6 +36,6 @@ public abstract class ListItem {
 
     @Override
     public String toString() {
-        return (doneStatus == true ? "[X] " : "[ ] ") + this.task;
+        return (isDone == true ? "[X] " : "[ ] ") + this.task;
     }
 }
