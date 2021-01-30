@@ -46,7 +46,7 @@ public class DukeException {
             super(DukeString.EXCEPTION_STORAGE_READ_ERROR);
         }
     }
-    
+
     public static class StorageWriteError extends IllegalArgumentException {
         public StorageWriteError() {
             super(DukeString.EXCEPTION_STORAGE_WRITE_ERROR);

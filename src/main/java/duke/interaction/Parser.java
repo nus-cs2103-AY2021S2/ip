@@ -15,7 +15,9 @@ import duke.command.TodoCommand;
 import duke.common.DukeException;
 import duke.common.DukeString;
 
-
+/**
+ * A class that handles the interpretation of the given command to DukeBot.
+ */
 public class Parser {
     private boolean isBye;
 

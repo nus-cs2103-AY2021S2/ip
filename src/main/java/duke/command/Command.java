@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.task.TaskList;
 
+/**
+ * An interface that represents a command that applies when executed.
+ */
 public interface Command {
     /**
      * Returns the result to be printed on executing the command.

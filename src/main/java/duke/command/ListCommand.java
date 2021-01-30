@@ -3,6 +3,9 @@ package duke.command;
 import duke.common.DukeString;
 import duke.task.TaskList;
 
+/**
+ * Represents a command that lists the given tasks in the TaskList.
+ */
 public class ListCommand implements Command {
 
     /**

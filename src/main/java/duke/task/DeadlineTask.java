@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 import duke.common.DukeString;
 
+/**
+ * A class that represents a Task with a given deadline.
+ */
 public class DeadlineTask extends Task {
     private final LocalDateTime deadline;
 

@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import duke.task.DeadlineTask;
 
+/**
+ * Represents a command that adds a DeadlineTask to the given TaskList.
+ */
 public class DeadlineCommand extends AddCommand {
     /**
      * Constructs a new deadline command with the associated content and date, in a deadline task.

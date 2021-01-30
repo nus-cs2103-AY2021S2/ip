@@ -4,6 +4,9 @@ import duke.common.DukeException;
 import duke.common.DukeString;
 import duke.task.TaskList;
 
+/**
+ * Represents a command that marks a given Task as done from a given TaskList.
+ */
 public class DoneCommand implements Command {
     private final int index;
 

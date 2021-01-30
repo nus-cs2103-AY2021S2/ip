@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import duke.task.EventTask;
 
+/**
+ * Represents a command that adds a EventTask to the given TaskList.
+ */
 public class EventCommand extends AddCommand {
     /**
      * Constructs a new event command with the associated content and dates, in a event task.

@@ -7,6 +7,9 @@ import java.util.Scanner;
 import duke.common.DukeException;
 import duke.common.DukeString;
 
+/**
+ * A class that holds a list of Tasks, and the related logic.
+ */
 public class TaskList {
     private final List<Task> tasks;
 
@@ -103,11 +106,16 @@ public class TaskList {
         return out.toString();
     }
 
+    /**
+     * Finds tasks that contain the given string, and outputs a formatted String with the tasks.
+     * @param str the string to search for
+     * @return a formatted version of the tasks
+     */
     public String tasksContaining(String str) {
         StringBuilder out = new StringBuilder();
         int i = 1;
 
-        for (Task task : taskList) {
+        for (Task task : task) {
             if (task.containsTerm(str)) {
                 out.append(i++);
                 out.append(". ");

@@ -1,14 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import java.time.LocalDateTime;
+
 import duke.interaction.Parser;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TaskList;
 import duke.task.TodoTask;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class DukeTest {
     @Test
@@ -22,7 +22,11 @@ public class DukeTest {
 
     @Test
     public void eventSerialisationTest() {
-        EventTask task = new EventTask("test", LocalDateTime.parse("2020-11-01T10:15:30"), LocalDateTime.parse("2020-11-01T10:16:30"));
+        EventTask task = new EventTask(
+                "test",
+                LocalDateTime.parse("2020-11-01T10:15:30"),
+                LocalDateTime.parse("2020-11-01T10:16:30")
+        );
         EventTask newTask = EventTask.deserialise(task.serialise());
         assertEquals(task.toString(), newTask.toString());
         task.markDone();
@@ -35,6 +39,7 @@ public class DukeTest {
         TaskList taskList = new TaskList();
         parser.parseInput("todo a").execute(taskList);
         assertEquals(new TodoTask("a").serialise() + "\n", taskList.serialise());
+        
         parser.parseInput("delete 1").execute(taskList);
         assertEquals("", taskList.serialise());
     }

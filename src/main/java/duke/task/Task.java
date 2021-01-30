@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * An abstract class that contains a pair of description and done status, and the related logic.
+ */
 public abstract class Task {
     protected final String description;
     protected boolean isDone;
@@ -23,6 +26,11 @@ public abstract class Task {
         isDone = true;
     }
 
+    /**
+     * Searches the description for the given term.
+     * @param term the term to search for
+     * @return a boolean containing whether the description contains the term
+     */
     public boolean containsTerm(String term) {
         return this.description.contains(term);
     }

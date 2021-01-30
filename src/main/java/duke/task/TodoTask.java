@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.common.DukeString;
 
+/**
+ * A class that represents a class with only a description.
+ */
 public class TodoTask extends Task {
     /**
      * Constructs a new todo task with the given description

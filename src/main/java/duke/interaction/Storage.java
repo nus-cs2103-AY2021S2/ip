@@ -12,6 +12,9 @@ import java.util.Scanner;
 import duke.common.DukeException;
 import duke.task.TaskList;
 
+/**
+ * A class that handles the read and write of Tasks to disk.
+ */
 public class Storage {
     private final File saveFile;
 

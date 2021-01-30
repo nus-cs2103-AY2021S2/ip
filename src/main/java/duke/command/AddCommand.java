@@ -4,6 +4,9 @@ import duke.common.DukeString;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * An abstract class that, when executed, will add the given Task to the given TaskList.
+ */
 public abstract class AddCommand implements Command {
     private final Task task;
 

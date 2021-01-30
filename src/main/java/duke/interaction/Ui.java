@@ -2,6 +2,9 @@ package duke.interaction;
 
 import duke.common.DukeString;
 
+/**
+ * A class that handles the output to user.
+ */
 public class Ui {
     private Ui() {
     }

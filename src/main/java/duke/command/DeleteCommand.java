@@ -4,6 +4,9 @@ import duke.common.DukeException;
 import duke.common.DukeString;
 import duke.task.TaskList;
 
+/**
+ * Represents a command that deletes a given Task from a given TaskList.
+ */
 public class DeleteCommand implements Command {
     private final int index;
 

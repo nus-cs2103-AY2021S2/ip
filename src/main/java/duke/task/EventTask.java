@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 import duke.common.DukeString;
 
+/**
+ * A class that represents a Task that has a start and end date.
+ */
 public class EventTask extends Task {
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
