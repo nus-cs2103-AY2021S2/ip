@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Exceptions.DukeException;
 import duke.Exceptions.IncorrectNumberException;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public class DoneCommand extends Command {
     private final int taskNum;
@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
             throw new DukeException("Please key in a task number!");
         }
 
-        this.taskNum= Integer.parseInt(description);
+        this.taskNum = Integer.parseInt(description);
     }
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

@@ -2,12 +2,12 @@ package duke.command;
 
 import duke.Exceptions.DukeException;
 import duke.Exceptions.UnknownInputException;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
+import duke.ui.Ui;
 
-public class AddToDoCommand extends Command{
+public class AddToDoCommand extends Command {
     private final ToDo todo;
 
     public AddToDoCommand(String description) throws DukeException {

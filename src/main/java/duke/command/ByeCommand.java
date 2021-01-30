@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Exceptions.DukeException;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public class ByeCommand extends Command {
 

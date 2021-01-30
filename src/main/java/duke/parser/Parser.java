@@ -1,7 +1,17 @@
 package duke.parser;
 
-import duke.Exceptions.*;
-import duke.command.*;
+import duke.Exceptions.DukeException;
+import duke.Exceptions.EmptyLineException;
+import duke.Exceptions.IncorrectTypeException;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddToDoCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.showListCommand;
 
 public class Parser {
 

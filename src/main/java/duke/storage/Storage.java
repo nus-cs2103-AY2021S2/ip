@@ -1,20 +1,18 @@
 package duke.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.Exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileWriter;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import java.time.LocalDateTime;
 
 public class Storage {
     private final File f;
@@ -98,6 +96,7 @@ public class Storage {
                 dateTime = LocalDateTime.parse(description[3]);
                 t = new Event(description[2], dateTime);
                 break;
+            default:
             }
 
             if (description[1].equals("1")) {

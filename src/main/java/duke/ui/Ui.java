@@ -1,9 +1,10 @@
 package duke.ui;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.Task;
+
 
 public class Ui {
     private final Scanner sc;

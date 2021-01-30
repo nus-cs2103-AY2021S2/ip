@@ -2,12 +2,12 @@ package duke.command;
 
 import duke.Exceptions.DukeException;
 import duke.Exceptions.IncorrectNumberException;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.ui.Ui;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private final int taskNum;
 
     public DeleteCommand(String description) throws DukeException {

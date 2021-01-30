@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Exceptions.DukeException;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public class showListCommand extends Command {
 
@@ -16,7 +16,6 @@ public class showListCommand extends Command {
         if (tasks.getNumOfTasks() == 0) {
             throw new DukeException("There are currently no duke.tasks in your list.");
         }
-        
         ui.displayList(tasks.getTasks());
     }
 
