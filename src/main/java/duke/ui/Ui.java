@@ -6,7 +6,7 @@ import duke.task.Task;
 import java.util.Scanner;
 
 public class Ui {
-    private final String name = "Rawrz";
+    private final String CHATBOT_NAME = "Rawrz";
     private final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -23,19 +23,18 @@ public class Ui {
     }
 
     public void showLine() {
-        String border = "___";
-        System.out.println(border);
+        System.out.println("___");
     }
 
     public void showIntro() {
         showLine();
-        System.out.println("   Hello there! I'm " + name + ", always here for you!\n   How can I help you today?");
+        System.out.println("   Hello there! I'm " + CHATBOT_NAME + ", always here for you!\n   How can I help you today?");
         showLine();
     }
 
     public void showGoodbye() {
         showLine();
-        System.out.println("   Bye! Hope to see you again! Rawrz! :)");
+        System.out.println("   Bye! Hope to see you again! " + CHATBOT_NAME + "! :)");
         showLine();
     }
 
@@ -49,7 +48,7 @@ public class Ui {
         showLine();
         System.out.println("   Okay! I've removed this task:");
         System.out.println("      " + task);
-        System.out.println("   Now you have " +noTasks + " tasks in the list");
+        System.out.println("   Now you have " + noTasks + " tasks in the list");
         showLine();
     }
 

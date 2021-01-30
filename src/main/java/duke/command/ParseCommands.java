@@ -9,12 +9,12 @@ import duke.task.ToDo;
 import duke.ui.Ui;
 
 public class ParseCommands {
-    private final CommandList commandList;
+    private final CommandList command;
     private final String data;
     private boolean isExit;
 
-    public ParseCommands(CommandList commandList, String data) {
-        this.commandList = commandList;
+    public ParseCommands(CommandList command, String data) {
+        this.command = command;
         this.data = data;
         this.isExit = false;
     }
@@ -32,15 +32,17 @@ public class ParseCommands {
             command = input.substring(0, first).toUpperCase();
             line = input.substring(first).strip();
         }
+
         commandList = changeToCommand(command);
         checkCommand(input, commandList, first, counter);
         parseCommands = new ParseCommands(commandList, line);
+
         return parseCommands;
     }
 
     public void executeCommand(Ui ui, Storage storage) {
         String date;
-        switch (this.commandList) {
+        switch (this.command) {
         case TODO:
             ToDo todo = new ToDo(this.data.strip());
             storage.add(todo);
@@ -137,18 +139,20 @@ public class ParseCommands {
             }
             break;
         case LIST:
+            //Fallthrough
         case BYE:
+            //Fallthrough
         default:
             break;
         }
     }
 
-    public boolean getIsExit() {
+    public boolean canExit() {
         return this.isExit;
     }
 
-    public CommandList getCommandList() {
-        return commandList;
+    public CommandList getCommand() {
+        return command;
     }
 
     public String getData() {

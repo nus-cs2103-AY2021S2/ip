@@ -16,14 +16,14 @@ import java.util.Scanner;
 public class Storage {
     private FileWriter fio;
     private final File file;
-    private ArrayList<Task> arrL;
+    private ArrayList<Task> Tasks;
 
     public Storage() {
         ArrayList<Task> arr = new ArrayList<>();
         File file = initiateFile();
         this.file = file;
         populateList(arr);
-        this.arrL = arr;
+        this.Tasks = arr;
         try {
             this.fio = new FileWriter(file);
         } catch (IOException e) {
@@ -102,7 +102,7 @@ public class Storage {
     }
 
     public void beginClose() {
-        for (Task task: this.arrL) {
+        for (Task task: this.Tasks) {
             writeToFile(task);
         }
     }
@@ -118,18 +118,18 @@ public class Storage {
     }
 
     public void add(Task task) {
-        this.arrL.add(task);
+        this.Tasks.add(task);
     }
 
     public Task remove(int index) {
-        return this.arrL.remove(index);
+        return this.Tasks.remove(index);
     }
 
     public int getArrSize() {
-        return arrL.size();
+        return Tasks.size();
     }
 
     public Task get(int index) {
-        return this.arrL.get(index);
+        return this.Tasks.get(index);
     }
 }
