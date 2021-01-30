@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
 
 /**
  * A TaskList class to represent a list of tasks.
@@ -190,6 +190,7 @@ public class TaskList {
                 }
             }
             break;
+        default:
         }
         System.out.println("     Got it. I've added this task:\n"
                 + "       " + this.tasks.get(this.tasks.size() - 1).toString() + "\n"
