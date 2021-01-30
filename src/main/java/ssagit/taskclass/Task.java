@@ -21,6 +21,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     /**
      * Function to mark a task as completed
      */
