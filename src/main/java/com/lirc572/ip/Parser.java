@@ -14,10 +14,10 @@ public class Parser {
     );
 
     /**
-     * Tokenize a command
+     * Tokenizes a command
      *
-     * @param command a line of command
-     * @return tokenized command as a String array
+     * @param command A line of command
+     * @return The tokenized command as a String array
      */
     public static String[] tokenizeCommand(String command) {
         ArrayList<String> tokens = new ArrayList<>();
@@ -59,10 +59,10 @@ public class Parser {
     }
 
     /**
-     * Process a command
+     * Processes a command
      *
-     * @param command the command to process
-     * @return whether the program should continue (<code>true</code> if not an exit command)
+     * @param command The command to process
+     * @return Whether the program should continue (<code>true</code> if not an exit command)
      */
     public static boolean processCommand(String command, TaskList tasks) throws Exception {
         String[] tokens = tokenizeCommand(command);
