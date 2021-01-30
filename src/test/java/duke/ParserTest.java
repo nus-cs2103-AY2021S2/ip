@@ -1,11 +1,13 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.Test;
+
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
-import duke.command.ByeCommand;
-import org.junit.Test;
-import static junit.framework.TestCase.assertTrue;
 
 public class ParserTest {
     @Test

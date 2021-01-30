@@ -1,10 +1,11 @@
 package duke;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.task.Task;
 import duke.task.ToDoTask;
-
-import static junit.framework.TestCase.assertEquals;
 
 public class TaskListTest {
     @Test
@@ -12,8 +13,7 @@ public class TaskListTest {
         Task dummyTask = new ToDoTask("dummy task", 1);
         TaskList taskList = new TaskList();
         taskList.addTask(dummyTask);
-        assertEquals("Here are the tasks in your list:\n" +
-                "1. [T][] dummy task\n", taskList.toString());
+        assertEquals("\n1. [T][] dummy task", taskList.toString());
         assertEquals(1, taskList.getSize());
     }
 
