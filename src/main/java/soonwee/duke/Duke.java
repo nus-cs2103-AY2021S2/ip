@@ -10,6 +10,7 @@ public class Duke {
     public static final int TODO = 1;
     public static final int DEADLINE = 2;
     public static final int EVENT = 3;
+    public static final int FIND = 4;
     public static Ui display = new Ui();
 
     /**
@@ -84,6 +85,9 @@ public class Duke {
                 int index = Integer.parseInt(cmd.substring(7));
                 storage.taskList.removeTask(index);
                 storage.writeFile();
+            } else if (cmd.contains("find")) {
+                String text = new Parser().checkFrontInput(cmd, FIND);
+                storage.taskList.searchText(text);
             } else {
                 storage.taskList = performChildTask(storage.taskList, cmd);
                 storage.writeFile();
