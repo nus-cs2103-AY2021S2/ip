@@ -64,6 +64,16 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
     /**
      * Returns a string describing the task list.
      * @return A string which is used to be stored in the file for storage.

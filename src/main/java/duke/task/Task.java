@@ -13,6 +13,10 @@ abstract public class Task {
         this.isDone = isDone;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     /**
      * mark the task as done
      */

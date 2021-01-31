@@ -40,6 +40,8 @@ public class Parser {
                         } else {
                             return new DeleteCommand(fullCommand, taskId);
                         }
+                    case "find":
+                        return new FindCommand(fullCommand, fullCommand.replaceFirst("find ", ""));
                     case "todo", "deadline", "event":
                         Task task = parseTask(parsedCommand[0], fullCommand.replaceFirst(parsedCommand[0] + " ", ""));
                         return new AddCommand(fullCommand, task);
