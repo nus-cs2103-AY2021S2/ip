@@ -4,20 +4,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private final LocalDateTime date;
+    private final LocalDateTime dateTime;
 
-    public Deadline(String description, String date) {
+    /**
+     * Constructs a Deadline task object.
+     * @param description the description of the Deadline task.
+     * @param dateTime the date and time this task is due, in String representation.
+     */
+    public Deadline(String description, String dateTime) {
         super(description);
-        this.date = LocalDateTime.parse(date, FORMATTER);
+        this.dateTime = LocalDateTime.parse(dateTime, FORMATTER);
     }
 
-    public Deadline(String description, LocalDateTime date) {
+    /**
+     * Constructs a Deadline task object.
+     * @param description the description of the Deadline task.
+     * @param dateTime the date and time this task is due, as a LocalDateTime.
+     */
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
-    public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a"));
+    public String getDateTime() {
+        return this.dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a"));
     }
 
     /**
@@ -26,7 +36,7 @@ public class Deadline extends Task {
      * @return String format of this Deadline's date.
      */
     public String getDateToStore() {
-        return this.date.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        return this.dateTime.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     /**
@@ -36,6 +46,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getDate() + ")";
+        return "[D]" + super.toString() + " (by: " + this.getDateTime() + ")";
     }
 }

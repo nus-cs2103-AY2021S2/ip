@@ -9,6 +9,13 @@ public class DoneCommand extends Command {
 
     private int position;
 
+    /**
+     * Creates a DoneCommand object to store the done command input from the user.
+     * @param taskList the current list of Tasks.
+     * @param ui the object in charge of printing user-friendly outputs.
+     * @param storage the object in charge of writing to the local storage file.
+     * @param position the position of the task in the taskList to mark as done.
+     */
     public DoneCommand(TaskList taskList, Ui ui, Storage storage, int position) {
         super(taskList, ui, storage);
         this.position = position;

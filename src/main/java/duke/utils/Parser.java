@@ -31,6 +31,12 @@ public class Parser {
     private final Ui ui;
     private final Storage storage;
 
+    /**
+     * Constructors a Parser object, responsible for parsing input from the user.
+     * @param taskList the list of tasks.
+     * @param ui the object in charge of printing user-friendly outputs.
+     * @param storage the object in charge of writing to the local storage file.
+     */
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;

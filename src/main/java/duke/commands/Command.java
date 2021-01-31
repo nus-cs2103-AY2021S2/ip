@@ -9,7 +9,7 @@ public abstract class Command {
     protected Storage storage;
     protected Ui ui;
 
-    public Command(TaskList taskList, Ui ui, Storage storage) {
+    Command(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;
         this.storage = storage;

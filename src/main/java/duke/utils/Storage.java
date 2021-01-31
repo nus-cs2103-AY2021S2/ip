@@ -16,6 +16,11 @@ public class Storage {
     private final String filepath;
     private final Ui ui;
 
+    /**
+     * Constructs a Storage object responsible for reading and writing to the local storage file.
+     * @param filepath the filepath of the local storage file, as a String.
+     * @param ui the object in charge of printing user-friendly outputs.
+     */
     public Storage(String filepath, Ui ui) {
         this.filepath = filepath;
         this.ui = ui;
