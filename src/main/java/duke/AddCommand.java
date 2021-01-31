@@ -35,7 +35,7 @@ public class AddCommand extends Command {
         }
         if (t != null) {
             tl.add(t);
-            ui.printAddedTask(t);
+            ui.printAddedTask(t, tl);
             Storage.save(tl.toString());
         }
     }

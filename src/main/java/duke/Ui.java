@@ -60,6 +60,11 @@ public class Ui {
      * @param tl task list to be printed.
      */
     public void printTasks(TaskList tl) {
+        if(tl.size() == 0) {
+            String emptyListMsg = "     There are no tasks in your list!\n";
+            System.out.print(LINE + emptyListMsg + LINE);
+            return;
+        }
         int index = 1;
         System.out.print(LINE);
         for (Task t : tl.getList()) {
@@ -69,7 +74,7 @@ public class Ui {
         System.out.print(LINE);
     }
 
-    private String taskListMessage(int numOfTasks) {
+    private String taskListSizeMsg(int numOfTasks) {
         return String.format("     Now you have %d task(s) in the list\n", numOfTasks);
     }
 
@@ -78,10 +83,11 @@ public class Ui {
      *
      * @param t task added to task list.
      */
-    public void printAddedTask(Task t) {
+    public void printAddedTask(Task t, TaskList tl) {
         String addMsg = "     Got it. I've added this task:\n";
         String taskMsg = "\t" + t.toString() + "\n";
-        System.out.print(LINE + addMsg + taskMsg + LINE);
+        String listSizeMsg = taskListSizeMsg(tl.size());
+        System.out.print(LINE + addMsg + taskMsg + listSizeMsg + LINE);
     }
 
     /**
@@ -100,13 +106,25 @@ public class Ui {
      *
      * @param t task deleted.
      */
-    public void printDeletedTask(Task t) {
+    public void printDeletedTask(Task t, TaskList tl) {
         String deleteMsg = "     Noted. I've removed this task:\n";
         String taskMsg = "\t" + t.toString() + "\n";
-        System.out.print(LINE + deleteMsg + taskMsg + LINE);
+        String listSizeMsg = taskListSizeMsg(tl.size());
+        System.out.print(LINE + deleteMsg + taskMsg + listSizeMsg + LINE);
     }
 
+    /**
+     * Print matched tasks as a list.
+     * If list size is zero, print no matching task.
+     *
+     * @param tl list of task to be printed.
+     */
     public void printFoundTasks(TaskList tl) {
+        if(tl.size() == 0) {
+            String noMatchMsg = "     There are no matching task in your list!\n";
+            System.out.print(LINE + noMatchMsg + LINE);
+            return;
+        }
         int index = 1;
         String findMsg = "     Here are the matching tasks in your list:\n";
         System.out.print(LINE);

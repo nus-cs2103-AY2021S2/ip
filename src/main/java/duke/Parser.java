@@ -39,6 +39,9 @@ public class Parser {
         String commandStr = parsedInput[0];
         Command c;
         switch (commandStr) {
+        case "find":
+            c = new FindCommand(parsedInput[1]);
+            break;
         case "list":
             c = new ListCommand();
             break;

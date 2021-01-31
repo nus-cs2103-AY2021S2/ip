@@ -63,6 +63,10 @@ public class TaskList {
         return new ArrayList<Task>(taskList);
     }
 
+    public int size() {
+        return taskList.size();
+    }
+
     /**
      * Returns string format of all task in list.
      *
