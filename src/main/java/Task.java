@@ -19,17 +19,15 @@ public class Task {
      * @return a tick if isDone is true. Else, it will return an empty space.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick or X symbols
+        return (isDone ? "\u2713" : " ");
     }
 
     /**
      * Changes the status of a Task from undone to done.
      * @return a string representation of the Task object with an updated status.
      */
-    public String markAsDone() {
-        isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        return toString();
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     /**
@@ -40,9 +38,5 @@ public class Task {
     public String toString() {
         String indicator = getStatusIcon();
         return "[" + indicator + "]  " + description;
-    }
-
-    public int getTaskType() {
-        return this.taskType;
     }
 }

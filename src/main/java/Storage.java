@@ -40,19 +40,31 @@ public class Storage {
                     String type = myReader.nextLine();
                     if (type.contains("[T]")) {
                         String description = parser.parseTodoDescription(type);
-                        tasks.add(new Todo(description));
+                        Task toAdd = new Todo(description);
+                        if (type.contains("\u2713")) {
+                            toAdd.markAsDone();
+                        }
+                        tasks.add(toAdd);
                     } else if (type.contains("[D]")) {
                         String description = parser.parseDeadlineEventDescription(type);
                         String dateString = parser.parseDateTimeDeadline(type);
                         LocalDate date = LocalDate.parse(dateString,
                                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                        tasks.add(new Deadline(description, date));
+                        Task toAdd = new Deadline(description, date);
+                        if (type.contains("\u2713")) {
+                            toAdd.markAsDone();
+                        }
+                        tasks.add(toAdd);
                     } else if (type.contains("[E]")) {
                         String description = parser.parseDeadlineEventDescription(type);
                         String timeString = parser.parseDateTimeEvent(type);
                         LocalDate time = LocalDate.parse(timeString,
                                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                        tasks.add(new Event(description, time));
+                        Task toAdd = new Event(description, time);
+                        if (type.contains("\u2713")) {
+                            toAdd.markAsDone();
+                        }
+                        tasks.add(toAdd);
                     }
                 }
                 myReader.close();
