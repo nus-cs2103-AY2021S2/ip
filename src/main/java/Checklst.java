@@ -22,30 +22,35 @@ public class Checklst {
 
         while (!input[0].equals("bye")) {
 
-            switch (input[0]) {
-                case "list":
-                    sendOutput(taskList.toString());
-                    break;
-                case "done":
-                    int index = Integer.parseInt(input[1]);
-                    sendOutput("Nice! I've marked this item as done\n\t" + taskList.completeTask(index));
-                    break;
-                case "todo":
-                    Task newTodo = Todo.makeTodo(input[1]);
-                    sendOutput(taskList.add(newTodo));
-                    break;
-                case "event":
-                    Task newEvent = Event.makeEvent(input[1]);
-                    sendOutput(taskList.add(newEvent));
-                    break;
-                case "deadline":
-                    Task newDeadline = Deadline.makeDeadline(input[1]);
-                    sendOutput(taskList.add(newDeadline));
-                    break;
-                default:
-                    sendOutput("Sorry I didn't understand that command!!");
-                    break;
+            try {
+                switch (input[0]) {
+                    case "list":
+                        sendOutput(taskList.toString());
+                        break;
+                    case "done":
+                        int index = Integer.parseInt(input[1]);
+                        sendOutput("Nice! I've marked this item as done\n\t" + taskList.completeTask(index));
+                        break;
+                    case "todo":
+                        Task newTodo = Todo.makeTodo(input[1]);
+                        sendOutput(taskList.add(newTodo));
+                        break;
+                    case "event":
+                        Task newEvent = Event.makeEvent(input[1]);
+                        sendOutput(taskList.add(newEvent));
+                        break;
+                    case "deadline":
+                        Task newDeadline = Deadline.makeDeadline(input[1]);
+                        sendOutput(taskList.add(newDeadline));
+                        break;
+                    default:
+                        sendOutput("Sorry I didn't understand that command!!");
+                        break;
+                }
+            } catch (ChecklstException e) {
+                sendOutput(e.getMessage());
             }
+            
 
 
             input = scanner.nextLine().split(" ", 2);

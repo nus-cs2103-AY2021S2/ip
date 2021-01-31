@@ -7,10 +7,10 @@ public class Deadline extends Task {
      * @param input - Input for the Deadline in the form "{ name } /by { date }".
      * @return - New Deadline object.
      */
-    public static Deadline makeDeadline(String input) {
+    public static Deadline makeDeadline(String input) throws ChecklstException {
         String[] splitInput = input.split(" /by ");
         if (splitInput.length == 1) {
-            // throw input exception
+            throw new ChecklstException("Inproper Deadline format used! Please use { name } /by { deadline }");
         }
 
         return new Deadline(splitInput[0], splitInput[1]);

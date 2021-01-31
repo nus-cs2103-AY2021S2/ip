@@ -9,12 +9,12 @@ public class TaskList {
         return String.format("Added: %s\n\tYou now have %d task(s) in the list!", task, this.taskList.size());
     }
  
-    public Task get(int index) {
-        return this.taskList.get(index);
-    }
-
-    public Task completeTask(int index) {
+    public Task completeTask(int index) throws ChecklstException {
         index--;
+
+        if (index < 0 || index >= this.taskList.size()) {
+            throw new ChecklstException("The task index you have indicated does not exist!");
+        }
 
         Task newTask = taskList.get(index).complete();
         this.taskList.set(index, newTask);

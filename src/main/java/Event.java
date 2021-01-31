@@ -7,10 +7,10 @@ public class Event extends Task {
      * @param input - Input for the Event in the form "{ name } /at { date }".
      * @return - New Event object.
      */
-    public static Event makeEvent(String input) {
+    public static Event makeEvent(String input) throws ChecklstException {
         String[] splitInput = input.split(" /at ");
         if (splitInput.length == 1) {
-            // throw exception
+            throw new ChecklstException("Inproper Event format used! Please use { name } /at { event }");
         }
 
         return new Event(splitInput[0], splitInput[1]);
