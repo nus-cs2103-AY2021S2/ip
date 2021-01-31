@@ -24,7 +24,7 @@ public class Duke {
             tasks = new TaskList();
         }
         parser = new Parser();
-        String greeting = "Hello! I'm duke.Duke\n" + "Please enter list below";
+        String greeting = "Hello! I'm Duke\n" + "Please enter list below";
         ui.dukePrint(greeting);
     }
 
