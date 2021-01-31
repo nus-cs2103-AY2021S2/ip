@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteInputException;
 import duke.parser.Parser;
@@ -15,71 +16,65 @@ import duke.utils.Command;
 public class Duke {
     private final TaskList taskList;
     private final Storage storage;
-    private final Ui ui;
 
     /**
      * Creates a new instance of Duke.
      *
      * @param filePath The save file path.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws DukeException {
         storage = new Storage(filePath);
         taskList = new TaskList();
-        ui = new Ui();
         loadData();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    protected String getResponse(String input) {
+        try {
+            String[] tokens = Parser.splitIntoSubstrings(input);
+            Command command = Parser.parseCommand(tokens);
+            return runUserCommand(command, tokens);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
      * Loads data from save file.
      */
-    public void loadData() {
+    public void loadData() throws DukeException {
         try {
             ArrayList<Task> tasks = storage.load();
             taskList.setTaskList(tasks);
         } catch (IOException e) {
-            ui.showErrorMessage("Sorry something when wrong loading your safe file :(");
-            System.exit(0);
-        } catch (DukeException e) {
-            ui.showErrorMessage(e.getMessage());
-            System.exit(0);
+            throw new DukeException(e.getMessage());
         }
     }
 
     /**
      * Saves data to save file.
      */
-    public void saveData() {
-        try {
-            storage.save(taskList.getTasks());
-        } catch (DukeException e) {
-            ui.showErrorMessage(e.getMessage());
-            System.exit(0);
-        }
+    public void saveData() throws DukeException {
+        storage.save(taskList.getTasks());
     }
 
     /**
      * Processes input after it is parsed by the parser.
      *
-     * @param command Command that is to be excecuted.
+     * @param command Command that is to be executed.
      * @param tokens  Input String split into tokens.
-     * @throws DukeException
+     * @throws DukeException If command cannot be executed.
      */
-    public void runUserCommand(Command command, String[] tokens) throws DukeException {
+    public String runUserCommand(Command command, String[] tokens) throws DukeException {
+        String message;
         switch (command) {
-        case SKIP:
-            break;
         case BYE:
-            ui.showGoodbyeMessage();
+            message = Ui.GOODBYE_MESSAGE;
             System.exit(0);
             break;
         case DONE:
             try {
                 Task task = taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
-                ui.showSuccessfulDoneMessage(task);
+                message = Ui.getSuccessfullyDoneMessage(task);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new IncompleteInputException(command);
             }
@@ -87,43 +82,28 @@ public class Duke {
         case DELETE:
             try {
                 Task task = taskList.delete(Integer.parseInt(tokens[1]) - 1);
-                ui.showSuccessfulDeleteMessage(taskList.getSize(), task);
+                message = Ui.getSuccessfullyDeletedMessage(taskList.getSize(), task);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new IncompleteInputException(command);
             }
             break;
         case FIND:
             String[] searchParameters = tokens[1].toLowerCase().split(" ");
-            ui.showFilteredTasks(taskList.getFilteredTaskList(searchParameters));
+            message = Ui.getFilteredTasksMessage(taskList.getFilteredTaskList(searchParameters));
             break;
         case LIST:
-            ui.showTasks(taskList.getTasks());
+            message = Ui.getAllTasksMessage(taskList.getTasks());
             break;
         default:
             try {
                 Task task = taskList.addTask(command, tokens[1].trim());
-                ui.showAddTaskMessage(taskList.getSize(), task);
+                message = Ui.getSuccessfullyAddedTaskMessage(taskList.getSize(), task);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new IncompleteInputException(command);
             }
         }
 
         saveData();
-    }
-
-    private void run() {
-        ui.showWelcomeMessage();
-
-        while (ui.hasMoreTokens()) {
-            String input = ui.getUserCommand();
-
-            try {
-                String[] tokens = Parser.splitIntoSubstrings(input);
-                Command command = Parser.parseCommand(tokens);
-                runUserCommand(command, tokens);
-            } catch (DukeException e) {
-                ui.showErrorMessage(e.getMessage());
-            }
-        }
+        return message;
     }
 }
