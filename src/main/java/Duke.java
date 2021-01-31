@@ -1,7 +1,7 @@
-import javax.swing.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -103,6 +103,7 @@ public class Duke {
                             flag = true;
                         }
                     }
+                    LocalDate due = LocalDate.parse(dueDate);
                     String taskDescription = "";
                     first = true;
                     for (int i = 1; i < parts.length; ++i) {
@@ -117,7 +118,7 @@ public class Duke {
                             break;
                         }
                     }
-                    Deadline deadline = new Deadline(taskDescription, dueDate);
+                    Deadline deadline = new Deadline(taskDescription, due);
                     store.add(deadline);
                     System.out.println("     " + deadline);
                     System.out.println("     Now you have " + store.size() + " tasks in the list.");
@@ -143,6 +144,7 @@ public class Duke {
                             flag = true;
                         }
                     }
+                    LocalDate date = LocalDate.parse(eventDate);
                     String eventDescription = "";
                     first = true;
                     for (int i = 1; i < parts.length; ++i) {
@@ -157,7 +159,7 @@ public class Duke {
                             break;
                         }
                     }
-                    Event event = new Event(eventDescription, eventDate);
+                    Event event = new Event(eventDescription, date);
                     store.add(event);
                     System.out.println("     " + event);
                     System.out.println("     Now you have " + store.size() + " tasks in the list.");
