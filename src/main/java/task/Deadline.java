@@ -22,16 +22,15 @@ public class Deadline extends Task {
      * Contructs a Deadline task with description as specified in <code>description</code>, and the time and
      * date specified by <code>duration</code> argument.
      *
-     * @param description task description.
-     * @param duration    task duration.
+     * @param str task description.
      * @throws DukeException DukeException if task date or description is empty.
      */
-    public Deadline(String description, String duration) throws DukeException {
+    public Deadline(String... str) throws DukeException {
         this.type = "D";
-        if (description.length() != 0 && duration.length() != 0) {
-            this.description = description;
+        if (str.length >= 1) {
+            this.description = str[0];
 
-            String[] input = duration.split("\\s+");
+            String[] input = str[1].split("\\s+");
             try {
                 this.date = LocalDate.parse(input[0]);
                 this.time = LocalTime.parse(input[1]);
