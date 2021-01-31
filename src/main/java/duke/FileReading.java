@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -25,6 +26,7 @@ public class FileReading {
     /**
      * Reads file and generates a string of the contents.
      * Catches FileNotFoundExceptions.
+     *
      * @param filePath
      * @return
      */
@@ -34,7 +36,7 @@ public class FileReading {
             output = printFileContents(filePath);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
-        } finally{
+        } finally {
             return output;
         }
     }

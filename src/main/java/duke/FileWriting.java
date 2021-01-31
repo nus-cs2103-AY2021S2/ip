@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.FileWriter;
 import java.io.IOException;
 /*
@@ -18,13 +19,14 @@ public class FileWriting {
 
     /**
      * Writes into file and catches IO excpetion.
+     *
      * @param filePath
      * @param string
      */
     protected static void write(String filePath, String string) {
         String file2 = filePath;
         try {
-            writeToFile(file2,string );
+            writeToFile(file2, string);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }

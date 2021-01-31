@@ -10,10 +10,11 @@ public class Storage {
     /**
      * Only constructor for Storage class.
      * Sets the filepath for the stored file.
+     *
      * @param filePath
      */
-    public Storage(String filePath){
-        this.taskListStr="";
+    public Storage(String filePath) {
+        this.taskListStr = "";
         this.filePath = filePath;
     }
 
@@ -21,9 +22,10 @@ public class Storage {
      * Obtains the last save of tasks as a string and stores it as an instance variable.
      * Parses the string and inteprets them as tasks that are stored in the current instance
      * of taskList in Duke.
+     *
      * @param taskList list of current tasks that the duke has.
      */
-    protected void getLastSave(TaskList taskList){
+    protected void getLastSave(TaskList taskList) {
         this.taskListStr = FileReading.readFile(filePath);
         System.out.println("These are the tasks on your todolist");
         System.out.println(taskListStr);
@@ -33,11 +35,12 @@ public class Storage {
     /**
      * Parses string, in the "list" format, and interprets them into commands that the current
      * instance of Duke should have.
+     *
      * @param taskList list of current tasks that the duke has.
      */
-    protected  void addSavedTasks(TaskList taskList){
+    protected void addSavedTasks(TaskList taskList) {
         String[] lines = taskListStr.split("\n");
-        for (int i = 0; i < lines.length ; i++) {
+        for (int i = 0; i < lines.length; i++) {
             if (!lines[i].contains(Duke.line)) {
                 String[] details = lines[i].split(" ", 2);
                 Task currTask;
@@ -58,7 +61,7 @@ public class Storage {
         }
     }
 
-    protected void save(Ui ui, TaskList taskList){
-        FileWriting.write(filePath,ui.listTasks(taskList));
+    protected void save(Ui ui, TaskList taskList) {
+        FileWriting.write(filePath, ui.listTasks(taskList));
     }
 }

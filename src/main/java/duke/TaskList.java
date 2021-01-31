@@ -7,11 +7,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
     protected ArrayList<Task> list = new ArrayList<>();
-    protected TaskList(){
+
+    protected TaskList() {
     }
 
     /**
      * Adds task to the list of tasks.
+     *
      * @param task
      * @return task mainly for the Ui class' use. The user interface (Ui) needs to know the affected.
      * task to inform the user.
@@ -23,6 +25,7 @@ public class TaskList {
 
     /**
      * Sets the task as done.
+     *
      * @param taskNum counting from numer 1, this is the number of the task that is done.
      * @return task mainly for the Ui class' use. The user interface (Ui) needs to know the affected.
      * task to inform the user.
@@ -35,6 +38,7 @@ public class TaskList {
 
     /**
      * Sets the task as deleted
+     *
      * @param num counting from numer 1, this is the number of the task that is deleted.
      * @return task mainly for the Ui class' use. The user interface (Ui) needs to know the affected.
      * task to inform the user.
@@ -48,6 +52,7 @@ public class TaskList {
 
     /**
      * Turns off the duke and ends the program.
+     *
      * @param duke
      */
     protected void bye(Duke duke) {

@@ -1,6 +1,7 @@
 package duke;
 
 /*
+cmd + alt + l reformats code
 Code was refractored after week 2
 Credit of light reuse: James Lee
  */
@@ -19,6 +20,7 @@ public class Duke {
     /**
      * Duke's only constructor that sets in place its components. Namely: the ui,
      * parser, taskList and storage.
+     *
      * @param filePath
      */
     public Duke(String filePath) {
@@ -28,8 +30,10 @@ public class Duke {
         this.taskList = new TaskList();
         this.storage = new Storage(filePath);
     }
+
     /**
      * Shorthand printer
+     *
      * @param s
      */
     protected static void print(String s) {

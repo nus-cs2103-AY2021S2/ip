@@ -20,6 +20,7 @@ public class Task {
     /**
      * Constructor for Task that sets all the instance variables to a default state.
      * eg, name = "";
+     *
      * @param taskLine untouched input from the user
      */
     protected Task(String taskLine) {
@@ -28,23 +29,25 @@ public class Task {
         this.dateTime = "";
         this.date = LocalDate.parse("0000-01-01");
     }
-    protected String status(){
-        String status = isDone ?  "X":  "O";
+
+    protected String status() {
+        String status = isDone ? "X" : "O";
         return status;
     }
-    protected String printNew(){
+
+    protected String printNew() {
         return toString();
     }
 
-    protected String type(){
+    protected String type() {
         return "task";
     }
 
-    protected void setDateTimeLD(String time){
+    protected void setDateTimeLD(String time) {
         try {
             this.date = LocalDate.parse(time);
             this.dateTime = date.getMonth().name() + " " + date.getDayOfMonth() + " " + date.getYear();
-        } catch (Exception e){
+        } catch (Exception e) {
         }
     }
 }

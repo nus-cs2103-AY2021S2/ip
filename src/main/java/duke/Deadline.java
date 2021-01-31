@@ -3,16 +3,17 @@ package duke;
 /**
  * Deadline is a type of task that has a name and a date/time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private String info;
 
     /**
      * Only deadline constructor that checks it's validity and sets the info instance variable.
+     *
      * @param taskLine the entire scanned line from the input
      * @throws ArrayIndexOutOfBoundsException
      * @throws IllegalArgumentException
      */
-    protected Deadline(String taskLine) throws ArrayIndexOutOfBoundsException,IllegalArgumentException{
+    protected Deadline(String taskLine) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         super(taskLine);
         checkTask(taskLine);
         buildInfo();
@@ -20,11 +21,12 @@ public class Deadline extends Task{
 
     /**
      * Checks the validity of the deadline task.
+     *
      * @param taskLine
      * @throws ArrayIndexOutOfBoundsException if there is no body to the deadline task
-     * @throws IllegalArgumentException if there is no '/by' indicator
+     * @throws IllegalArgumentException       if there is no '/by' indicator
      */
-    protected void checkTask(String taskLine) throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
+    protected void checkTask(String taskLine) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         if (taskLine.length() < 2) {
             throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Deadline cannot be empty.");
         } else if (!taskLine.contains("/by")) {
@@ -42,15 +44,17 @@ public class Deadline extends Task{
     }
 
 
-    protected String printNew(){
+    protected String printNew() {
         return "[D][ ] " + info;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return info;
     }
+
     @Override
-    protected String type(){
+    protected String type() {
         return "D";
     }
 }
