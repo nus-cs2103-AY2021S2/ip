@@ -3,7 +3,7 @@ package duke.tasks;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
-    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
             + "[dd-MM-yy HHmm]");
 
     protected String description;

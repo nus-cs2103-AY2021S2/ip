@@ -8,7 +8,7 @@ public class Event extends Task {
 
     public Event(String description, String date) {
         super(description);
-        this.date = LocalDateTime.parse(date, formatter);
+        this.date = LocalDateTime.parse(date, FORMATTER);
     }
 
     public Event(String description, LocalDateTime date) {

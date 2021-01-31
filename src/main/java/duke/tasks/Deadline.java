@@ -8,7 +8,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String date) {
         super(description);
-        this.date = LocalDateTime.parse(date, formatter);
+        this.date = LocalDateTime.parse(date, FORMATTER);
     }
 
     public Deadline(String description, LocalDateTime date) {

@@ -1,14 +1,14 @@
 package duke.commands;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.utils.Storage;
-import duke.utils.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.utils.Storage;
+import duke.utils.Ui;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";

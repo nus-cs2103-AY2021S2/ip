@@ -1,14 +1,13 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.commands.Command;
 import duke.dukeexceptions.DukeException;
 import duke.tasks.TaskList;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.Ui;
-
-
-import java.util.Scanner;
 
 public class Duke {
     private static final String FILE_PATH = "./src/main/java/duke/tasks.txt";
