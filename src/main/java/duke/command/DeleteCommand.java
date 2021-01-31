@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Storage;
+import duke.bot.Storage;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -20,13 +20,13 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the delete command to delete a task from the list
+     * Executes the delete command to delete a task from the list and returns a response message
      *
      * @throws DukeCommandException if there is no tasks to delete, index is out of range, an issue with deleting task
      * from the task list or an issue with saving the deletion to the hard disk
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         if (taskManager.getTasksSize() == 0) {
             throw new DukeCommandException("delete", String.valueOf(index), "There are no task to be deleted.");
         } else if (index < 0 || index >= taskManager.getTasksSize()) {
@@ -35,8 +35,8 @@ public class DeleteCommand extends Command {
         } else {
             try {
                 Task task = taskManager.deleteTask(index);
-                ui.printDeleteMsg(task, taskManager.getTasksSize());
                 Storage.saveTasks(taskManager.getTasks());
+                return ui.constructDeleteMsg(task, taskManager.getTasksSize());
             } catch (DukeException e) {
                 throw new DukeCommandException("delete", String.valueOf(index), e.getMessage());
             }

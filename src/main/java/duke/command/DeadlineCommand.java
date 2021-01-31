@@ -2,7 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
-import duke.Storage;
+import duke.bot.Storage;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -26,17 +26,17 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the Deadline command to create a Deadline task in the list
+     * Executes the Deadline command to create a Deadline task in the list and returns a response message
      *
      * @throws DukeCommandException if there is an issue adding the Deadline into the task list or saving the tasks into
      * hard disk
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         try {
             Deadline deadline = taskManager.addDeadline(this.desc, this.dateTime);
-            ui.printAddMsg(deadline, taskManager.getTasksSize());
             Storage.saveTasks(taskManager.getTasks());
+            return ui.constructAddMsg(deadline, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("deadline", desc, e.getMessage());
         }

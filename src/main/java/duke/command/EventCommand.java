@@ -2,7 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
-import duke.Storage;
+import duke.bot.Storage;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
 import duke.task.Event;
@@ -30,17 +30,17 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Executes the Event command to create an Event task in the list
+     * Executes the Event command to create an Event task in the list and returns a response message
      *
      * @throws DukeCommandException if there is an issue with adding the Event into the list or saving the Event into
      * the hard disk
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         try {
             Event event = taskManager.addEvent(this.desc, this.start, this.end);
-            ui.printAddMsg(event, taskManager.getTasksSize());
             Storage.saveTasks(taskManager.getTasks());
+            return ui.constructAddMsg(event, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("event", desc, e.getMessage());
         }

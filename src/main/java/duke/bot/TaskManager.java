@@ -1,4 +1,4 @@
-package duke;
+package duke.bot;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

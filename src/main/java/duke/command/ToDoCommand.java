@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Storage;
+import duke.bot.Storage;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
 import duke.task.ToDo;
@@ -20,17 +20,17 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Executes the ToDo command to create a ToDo in the list
+     * Executes the ToDo command to create a ToDo in the list and returns a response message
      *
      * @throws DukeCommandException if there is an issue with adding the ToDo into the list or saving the ToDo into the
      * hard disk
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         try {
             ToDo toDo = taskManager.addToDo(this.desc);
-            ui.printAddMsg(toDo, taskManager.getTasksSize());
             Storage.saveTasks(taskManager.getTasks());
+            return ui.constructAddMsg(toDo, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("todo", desc, e.getMessage());
         }

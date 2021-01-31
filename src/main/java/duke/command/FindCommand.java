@@ -37,12 +37,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the Find command to search tasks that matches the keyword and occurs on the target date
+     * Executes the Find command to search tasks that matches the keyword and occurs on the target date, then returns
+     * a response message
      *
      * @throws DukeCommandException if tasks cannot be retrieved
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         List<Task> tasksFound = taskManager.getTasks().stream()
                 .filter(task -> {
                     if (task.getDesc().contains(keyword)) {
@@ -68,6 +69,6 @@ public class FindCommand extends Command {
                 })
                 .collect(Collectors.toList());
 
-        ui.printFoundMsg(tasksFound);
+        return ui.constructFoundMsg(tasksFound);
     }
 }

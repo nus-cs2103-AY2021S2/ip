@@ -7,10 +7,11 @@ public class ExitCommand extends Command {
     /**
      * Executes the exit command to tell the Duke to exit
      *
-     * @throws DukeCommandException
+     * @throws DukeCommandException if there is an issue when the chat bot is closing
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
+        return "";
     }
 
     /**

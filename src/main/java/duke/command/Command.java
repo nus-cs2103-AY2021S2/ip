@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskManager;
-import duke.Ui;
+import duke.bot.TaskManager;
+import duke.bot.Ui;
 import duke.exception.DukeCommandException;
 
 /** An executable comment issued by the user */
@@ -23,11 +23,12 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command
+     * Executes the command and returns a response message
      *
+     * @return A formatted string containing a response message
      * @throws DukeCommandException if any issue happened during the execution of the command
      */
-    public abstract void execute() throws DukeCommandException;
+    public abstract String execute() throws DukeCommandException;
 
     /**
      * Returns a boolean to indicate whether this command will terminate the chat bot

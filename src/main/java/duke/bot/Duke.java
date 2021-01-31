@@ -1,6 +1,4 @@
-package duke;
-
-import java.util.Scanner;
+package duke.bot;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -28,38 +26,35 @@ public class Duke {
         try {
             Storage.loadTasksTo(taskManager);
         } catch (DukeLoadException e) {
-            ui.printError(e.getMessage());
+            ui.constructErrorMsg(e.getMessage());
         }
     }
 
-    /** Lifecycle of Duke */
-    public void run() {
-        ui.printWelcomeMsg(CHATBOT_NAME);
-
-        Scanner scanner = new Scanner(System.in);
-        String line = "";
-
-        while (isActive) {
-            line = scanner.nextLine();
-            try {
-                Command command = Parser.parse(line);
-                command.execute();
-                isActive = !command.willExit();
-            } catch (DukeException e) {
-                ui.printError(e.getMessage());
-            }
-        }
-
-        ui.printGoodbyeMsg();
+    public String getBootupMsg() {
+        return ui.constructWelcomeMsg(CHATBOT_NAME);
     }
 
     /**
-     * Lifecycle of the program
-     *
-     * @param args Command line arguments
+     * Return a response message when given an input command to execute on
+     * @param input A string to be processed as a command
+     * @return A string containing any output message from the bot (if any)
      */
-    public static void main(String[] args) {
-        Duke bot = new Duke();
-        bot.run();
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            String response = command.execute();
+            isActive = !command.willExit();
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String getExitMsg() {
+        return ui.constructGoodbyeMsg();
+    }
+
+    public boolean hasClosed() {
+        return !this.isActive;
     }
 }
