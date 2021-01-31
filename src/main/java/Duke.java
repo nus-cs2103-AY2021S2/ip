@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 public class Duke {
     List<Task> list;
 
@@ -22,13 +23,21 @@ public class Duke {
         System.out.println("Now you have " + String.valueOf(this.list.size()) + " tasks in the list.");
     }
 
+    public void addToBot(Task task){
+        this.list.add(task);
+    }
+
     public void printList(){
         int counter = 1;
+        if(this.list.isEmpty()){
+            System.out.println("There are no tasks!");
+        }
         for(Task element:this.list){
-            System.out.println(String.valueOf(counter) + element);
+            System.out.println(String.valueOf(counter) + ". " + element);
             counter++;
         }
     }
+
 
     public void markTaskAsDone(int id){
         Task task = this.list.get(id-1);

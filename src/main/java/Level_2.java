@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Level_2 {
     public static void main(String[] args) {
