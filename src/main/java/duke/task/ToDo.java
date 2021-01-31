@@ -1,6 +1,6 @@
 package duke.task;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     public ToDo(String content) {
         super(content);
@@ -19,7 +19,7 @@ public class ToDo extends Task{
         } else {
             done = "0";
         }
-        String string = "T|"+ done + "|" + this.getDesc();
+        String string = "T|" + done + "|" + this.getDesc();
         return string;
     }
 }

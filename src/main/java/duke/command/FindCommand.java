@@ -19,7 +19,7 @@ public class FindCommand implements ICommand {
     private String listToString(String keyword) {
         String content = "";
         Integer count = 1;
-        for(Task t: tasks.findTasksWithString(keyword)) {
+        for (Task t: tasks.findTasksWithString(keyword)) {
             content += count.toString() + ".";
             content += t.toString();
             content += "\n";

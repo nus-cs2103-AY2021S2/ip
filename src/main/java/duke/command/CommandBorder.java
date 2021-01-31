@@ -20,7 +20,7 @@ public class CommandBorder implements ICommand {
      *
      * @param parameters input needed to be passed to decoratedCommand.
      */
-    public void execute(String parameters){
+    public void execute(String parameters) {
         System.out.println("-".repeat(40));
         decoratedCommand.execute(parameters);
         System.out.println("-".repeat(40));

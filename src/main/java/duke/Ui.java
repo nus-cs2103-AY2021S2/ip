@@ -7,8 +7,8 @@ import java.util.Scanner;
  * Handles the interaction the user and the program.
  */
 class Ui {
-    Scanner scanner;
-    Ui(){
+    private Scanner scanner;
+    Ui() {
         scanner = new Scanner(System.in);
     }
 
@@ -21,13 +21,13 @@ class Ui {
      *
      * @return String representing the introduction to duke.Duke.
      */
-    protected String getIntro(){
+    protected String getIntro() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String intro ="Hello I'm\n" + logo +"\nWhat can I do for you?\n";
+        String intro = "Hello I'm\n" + logo + "\nWhat can I do for you?\n";
 
         return intro;
     }
@@ -38,7 +38,7 @@ class Ui {
      *
      * @return String representing the error when no lines are inputted.
      */
-    public String showNoMoreLinesError(){
+    public String showNoMoreLinesError() {
         return "Error. No more lines detected. Exiting...";
     }
 }

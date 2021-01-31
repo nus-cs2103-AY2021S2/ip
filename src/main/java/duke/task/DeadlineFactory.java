@@ -1,9 +1,9 @@
 package duke.task;
 
-public class DeadlineFactory extends AbstractTaskFactory{
+public class DeadlineFactory extends AbstractTaskFactory {
     @Override
     public Task createTask(String parameters) throws IllegalArgumentException {
-        String[] inputArray = parameters.split("/by",2);
+        String[] inputArray = parameters.split("/by", 2);
         if (inputArray[0].isBlank()) {
             throw new IllegalArgumentException("Error: Description of deadline cannot be empty");
         } else if (inputArray.length == 1) {
@@ -11,6 +11,6 @@ public class DeadlineFactory extends AbstractTaskFactory{
         }
         String content = inputArray[0];
         String timeRange = inputArray[1];
-        return new Deadline(content,timeRange);
+        return new Deadline(content, timeRange);
     }
 }

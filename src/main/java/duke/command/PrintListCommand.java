@@ -9,7 +9,7 @@ import duke.task.Task;
 public class PrintListCommand implements ICommand {
     private TaskList tasks;
 
-    public PrintListCommand(TaskList tasks){
+    public PrintListCommand(TaskList tasks) {
         this.tasks = tasks;
     }
 
@@ -19,9 +19,9 @@ public class PrintListCommand implements ICommand {
     }
 
     private String listToString() {
-        String content="";
+        String content = "";
         Integer count = 1;
-        for(Task t: tasks.getTasks()) {
+        for (Task t: tasks.getTasks()) {
             content += count.toString() + ".";
             content += t.toString();
             content += "\n";

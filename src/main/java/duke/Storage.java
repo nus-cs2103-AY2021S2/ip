@@ -1,35 +1,46 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.StringBuilder;
 
+import duke.task.Task;
+
+/**
+ * Storage class which reads/writes to files after any changes to the TaskList.
+ */
 public class Storage {
     private static final String FILE_NAME = "duke.txt";
-    private TaskList tasks;
+    private final TaskList tasks;
 
+    /**
+     * Constructor method for Storage class.
+     *
+     * @param tasks TaskList object which contains the current tasks
+     */
     Storage(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Attempts to read the file named "duke.txt". Will print out
+     * error messages if caught.
+     */
     public void read() {
         try {
             FileReader reader = new FileReader(FILE_NAME);
             BufferedReader bufferedReader = new BufferedReader(reader);
             String taskString;
             taskString = bufferedReader.readLine();
-            while(taskString!=null) {
+            while (taskString != null) {
                 String[] taskArray = taskString.split("\\|");
                 this.tasks.addTask(taskArray);
                 taskString = bufferedReader.readLine();
             }
             reader.close();
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("No existing file found.");
 
         } catch (IOException e) {
@@ -37,6 +48,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Attempts to write to the file named "duke.txt". Will throw
+     * IOException if file could not be written.
+     * @throws IOException
+     */
     public void write() throws IOException {
         StringBuilder sb = new StringBuilder();
         for (Task task: tasks.getTasks()) {

@@ -1,14 +1,14 @@
 package duke;
 
-import duke.command.ICommand;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import duke.command.ICommand;
 
 /**
  * Class that maps keywords to appropriate commands.
  */
-public class CommandMap{
+public class CommandMap {
     private Map<String, ICommand> commands;
     private ICommand defaultCommand;
 
@@ -30,7 +30,7 @@ public class CommandMap{
      * @param command Command to be executed.
      */
     public void add(String string, ICommand command) {
-        commands.put(string,command);
+        commands.put(string, command);
     }
 
     /**
@@ -41,7 +41,7 @@ public class CommandMap{
      * @return Command that corresponded with keyword.
      */
     public ICommand get(String string) {
-        ICommand command = commands.getOrDefault(string,defaultCommand);
+        ICommand command = commands.getOrDefault(string, defaultCommand);
         return command;
     }
 }

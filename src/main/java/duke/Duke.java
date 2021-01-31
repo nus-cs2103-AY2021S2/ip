@@ -1,18 +1,34 @@
 package duke;
 
-import duke.command.*;
+import java.util.NoSuchElementException;
+
+import duke.command.AddCommand;
+import duke.command.CommandBorder;
+import duke.command.CommandWrite;
+import duke.command.DefaultCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ICommand;
+import duke.command.PrintCommand;
+import duke.command.PrintListCommand;
 import duke.task.DeadlineFactory;
 import duke.task.EventFactory;
 import duke.task.ToDoFactory;
 
-import java.util.NoSuchElementException;
-
+/**
+ * Main class for Duke app.
+ */
 public class Duke {
     private Storage storage;
     private CommandMap commands;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor method for Duke app. Initialises app to run.
+     */
     public Duke() {
         this.taskList = new TaskList();
         this.storage = new Storage(taskList);
@@ -20,13 +36,20 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    /**
+     * Main method. Args fed in will not accept the behaviour of the application.
+     * @param args Arguments
+     */
     public static void main(String[] args) {
         Duke currentSession = new Duke();
         currentSession.initialiseCommandMap();
         currentSession.run();
     }
 
-    private void run() {
+    /**
+     * Run application and continue to accept inputs.
+     */
+    public void run() {
         ICommand printCommand = new CommandBorder(new PrintCommand());
         printCommand.execute(ui.getIntro());
         try {
@@ -50,23 +73,23 @@ public class Duke {
     private void initialiseCommandMap() {
 
         ICommand doneCommand = new CommandBorder(new DoneCommand(taskList));
-        doneCommand = new CommandWrite(doneCommand,storage);
+        doneCommand = new CommandWrite(doneCommand, storage);
 
-        ICommand listCommand =new CommandBorder(new PrintListCommand(taskList));
+        ICommand listCommand = new CommandBorder(new PrintListCommand(taskList));
 
-        ICommand exitCommand =new CommandBorder(new ExitCommand(taskList));
+        ICommand exitCommand = new CommandBorder(new ExitCommand(taskList));
 
-        ICommand eventCommand = new CommandBorder(new AddCommand(taskList,new EventFactory()));
-        eventCommand = new CommandWrite(eventCommand,storage);
+        ICommand eventCommand = new CommandBorder(new AddCommand(taskList, new EventFactory()));
+        eventCommand = new CommandWrite(eventCommand, storage);
 
-        ICommand deadlineCommand =new CommandBorder(new AddCommand(taskList,new DeadlineFactory()));
-        deadlineCommand = new CommandWrite(deadlineCommand,storage);
+        ICommand deadlineCommand = new CommandBorder(new AddCommand(taskList, new DeadlineFactory()));
+        deadlineCommand = new CommandWrite(deadlineCommand, storage);
 
-        ICommand toDoCommand = new CommandBorder(new AddCommand(taskList,new ToDoFactory()));
-        toDoCommand = new CommandWrite(toDoCommand,storage);
+        ICommand toDoCommand = new CommandBorder(new AddCommand(taskList, new ToDoFactory()));
+        toDoCommand = new CommandWrite(toDoCommand, storage);
 
         ICommand deleteCommand = new CommandBorder(new DeleteCommand(taskList));
-        deleteCommand = new CommandWrite(deleteCommand,storage);
+        deleteCommand = new CommandWrite(deleteCommand, storage);
 
         ICommand findCommand = new CommandBorder(new FindCommand(taskList));
 

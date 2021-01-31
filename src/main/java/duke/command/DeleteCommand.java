@@ -32,7 +32,7 @@ public class DeleteCommand implements ICommand {
 
             System.out.println("Noted. I've removed this task:");
             System.out.println(removedTask.toString());
-            System.out.println(String.format("Now you have %d tasks in the list",tasks.getTasks().size()));
+            System.out.println(String.format("Now you have %d tasks in the list", tasks.getTasks().size()));
         } catch (NumberFormatException e) {
             System.out.println("Error: Invalid argument for delete");
         } catch (IllegalArgumentException e) {
