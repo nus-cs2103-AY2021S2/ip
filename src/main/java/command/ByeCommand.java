@@ -18,7 +18,7 @@ public class ByeCommand implements Command {
      */
     @Override
     public TaskList runCommand(TaskList taskList) {
-       return taskList;
+        return taskList;
     }
 
     /**

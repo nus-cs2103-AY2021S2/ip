@@ -4,9 +4,9 @@ import mike.TaskList;
 import task.Task;
 
 public class DeleteCommand implements Command {
-    int taskIndexToDelete;
-    Task taskToDelete;
-    TaskList taskList;
+    private int taskIndexToDelete;
+    private Task taskToDelete;
+    private TaskList taskList;
 
     /**
      * Constructor for the delete command which takes in the index of the task to delete
@@ -17,7 +17,9 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public boolean isExitCommand() { return false; }
+    public boolean isExitCommand() {
+        return false;
+    }
 
     /**
      * Execute command and deletes the task in the provided taskList
@@ -45,9 +47,9 @@ public class DeleteCommand implements Command {
     @Override
     public String getResponse() {
         return String.format(
-                        "Noted. I've removed this task:  \n  " +
-                        "%s\n" +
-                        "Now you have %d tasks in the list.\n",
-                        this.taskToDelete.toString(), this.taskList.getNumTasks());
+                        "Noted. I've removed this task:  \n  "
+                                + "%s\n"
+                                + "Now you have %d tasks in the list.\n",
+                this.taskToDelete.toString(), this.taskList.getNumTasks());
     }
 }

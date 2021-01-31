@@ -5,9 +5,9 @@ import task.Task;
 
 public class DoneCommand implements Command {
 
-    int taskIndexToDone;
-    Task taskToDone;
-    TaskList taskList;
+    private int taskIndexToDone;
+    private Task taskToDone;
+    private TaskList taskList;
 
     public DoneCommand(int taskIndexToDone) {
         this.taskIndexToDone = taskIndexToDone;
@@ -44,8 +44,8 @@ public class DoneCommand implements Command {
     @Override
     public String getResponse() {
         return String.format(
-                "Nice! I've marked this task as done: \n" +
-                "  %s",
+                "Nice! I've marked this task as done: \n"
+                        + "  %s",
                 this.taskToDone.toString());
 
     }

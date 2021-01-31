@@ -1,13 +1,13 @@
 package command;
-import mike.TaskList;
-import task.DeadlineTask;
 
 import java.time.LocalDateTime;
+
+import mike.TaskList;
+import task.DeadlineTask;
 
 public class DeadlineCommand extends AddCommand {
 
     private final LocalDateTime deadline;
-
     /**
      * Constructor for the DeadlineCommand object that includes a LocalDateTime object to represent the deadline of
      * the task
