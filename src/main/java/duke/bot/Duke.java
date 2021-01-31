@@ -30,6 +30,10 @@ public class Duke {
         }
     }
 
+    public String getBootupMsg() {
+        return ui.constructWelcomeMsg(CHATBOT_NAME);
+    }
+
     /**
      * Return a response message when given an input command to execute on
      * @param input A string to be processed as a command
@@ -44,5 +48,13 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    public String getExitMsg() {
+        return ui.constructGoodbyeMsg();
+    }
+
+    public boolean hasClosed() {
+        return !this.isActive;
     }
 }
