@@ -25,14 +25,14 @@ public class DeleteCommand extends Command {
 
         if (description.isEmpty()) {
             throw new NoSuchElementException(
-                    "Did you forget to put a number for the command you just typed in? Not stonks!");
+                    "Did you forget to put a number for the command you just typed in? Not stonks!\n");
         }
 
         try {
             return Integer.valueOf(description);
         } catch (NumberFormatException e) {
             throw new NumberFormatException(
-                    "Did you put something other than a number or did you put a number incorrectly? Not stonks!");
+                    "Did you put something other than a number or did you put a number incorrectly? Not stonks!\n");
         }
     }
 
@@ -53,14 +53,17 @@ public class DeleteCommand extends Command {
      * @return String output upon successful deletion of Task.
      */
     public String execute(TaskManagement taskManagement) {
-        int taskNumber = this.getInputNumber(this.taskNumberString);
+        try {
+            int taskNumber = this.getInputNumber(this.taskNumberString);
 
-        if (this.checkInvalidTaskNumber(taskNumber, taskManagement)) {
-            throw new IllegalArgumentException("Invalid task number. Not stonks!");
+            if (this.checkInvalidTaskNumber(taskNumber, taskManagement)) {
+                return "Invalid task number. Not stonks!\n";
+            }
+            Task deletedTask = taskManagement.deleteTask(taskNumber);
+            return this.printOutput(deletedTask, taskManagement.getNumberOfTasks());
+        } catch (Exception e) {
+            return e.getMessage();
         }
-
-        Task deletedTask = taskManagement.deleteTask(taskNumber);
-        return this.printOutput(deletedTask, taskManagement.getNumberOfTasks());
     }
 
     /**

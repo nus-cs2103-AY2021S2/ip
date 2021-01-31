@@ -27,13 +27,13 @@ public class DeadlineCommand extends Command {
         try {
             return LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Input date format is incorrect. Not stonks!");
+            throw new IllegalArgumentException("Input date format is incorrect. Not stonks!\n");
         }
     }
 
     private DeadlineTask addDeadline(String taskDescription) {
         if (taskDescription.isEmpty()) {
-            throw new NoSuchElementException("Empty deadline task description. Not stonks!");
+            throw new NoSuchElementException("Empty deadline task description. Not stonks!\n");
         }
 
         //Split the description into description and deadline
@@ -45,7 +45,7 @@ public class DeadlineCommand extends Command {
             return DeadlineTask.createNewDeadlineTask(descriptionSplitArray[0].trim(),
                     deadlineDate);
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
-            throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/by'? Not stonks!");
+            throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/by'? Not stonks!\n");
         }
     }
 
@@ -61,9 +61,13 @@ public class DeadlineCommand extends Command {
      * @return String to be printed upon successful addition of DeadlineTask.
      */
     public String execute(TaskManagement taskManagement) {
-        DeadlineTask addedTask = this.addDeadline(this.rawDescription);
-        taskManagement.addTask(addedTask);
-        return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
+        try {
+            DeadlineTask addedTask = this.addDeadline(this.rawDescription);
+            taskManagement.addTask(addedTask);
+            return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     /**

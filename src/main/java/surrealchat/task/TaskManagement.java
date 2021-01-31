@@ -87,7 +87,7 @@ public class TaskManagement {
         case "E":
             return "event";
         default:
-            throw new InputMismatchException("The task type in task is invalid. Not Stonks!");
+            throw new InputMismatchException("The task type in task is invalid. Not Stonks!\n");
         }
     }
 
@@ -128,7 +128,7 @@ public class TaskManagement {
                 this.addEventFromFile(description, taskDone);
                 break;
             default:
-                throw new InputMismatchException("The task type scanned from file is invalid. Not Stonks!");
+                throw new InputMismatchException("The task type scanned from file is invalid. Not Stonks!\n");
             }
         }
         //Obtain list for printing
@@ -144,13 +144,13 @@ public class TaskManagement {
             return false;
         default:
             throw new InputMismatchException(
-                    "doneInt is not correct. Check the file to see if doneInt is 0 or 1. Not stonks!");
+                    "doneInt is not correct. Check the file to see if doneInt is 0 or 1. Not stonks!\n");
         }
     }
 
     private ToDoTask addToDoFromFile(String taskDescription, boolean isDone) {
         if (taskDescription.isEmpty()) {
-            throw new NoSuchElementException("Empty todo task description. Not stonks!");
+            throw new NoSuchElementException("Empty todo task description. Not stonks!\n");
         }
 
         ToDoTask newTask = ToDoTask.loadToDoTaskFromFile(taskDescription.trim(), isDone);
@@ -162,13 +162,13 @@ public class TaskManagement {
         try {
             return LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Input date format is incorrect. Not stonks!");
+            throw new IllegalArgumentException("Input date format is incorrect. Not stonks!\n");
         }
     }
 
     private DeadlineTask addDeadlineFromFile(String taskDescription, boolean isDone) {
         if (taskDescription.isEmpty()) {
-            throw new NoSuchElementException("Empty deadline task description. Not stonks!");
+            throw new NoSuchElementException("Empty deadline task description. Not stonks!\n");
         }
 
         //Split the description into description and deadline
@@ -182,13 +182,13 @@ public class TaskManagement {
             this.addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
-            throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/by'? Not stonks!");
+            throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/by'? Not stonks!\n");
         }
     }
 
     private EventTask addEventFromFile(String taskDescription, boolean isDone) {
         if (taskDescription.isEmpty()) {
-            throw new NoSuchElementException("Empty event task description. Not stonks!");
+            throw new NoSuchElementException("Empty event task description. Not stonks!\n");
         }
 
         //Split the description into description and event
@@ -202,7 +202,7 @@ public class TaskManagement {
             this.addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
-            throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/at'? Not stonks!");
+            throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/at'? Not stonks!\n");
         }
     }
 
@@ -226,7 +226,7 @@ public class TaskManagement {
     public String listOutTasks() {
         List<Task> rawTaskList = this.getTaskList();
         if (rawTaskList.isEmpty()) {
-            throw new NoSuchElementException("I have nothing to print. Not stonks!");
+            throw new NoSuchElementException("I have nothing to print. Not stonks!\n");
         }
         String outputTasks = "";
         for (int i = 1; i <= rawTaskList.size(); i++) {

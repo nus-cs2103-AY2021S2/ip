@@ -30,13 +30,13 @@ public class DoneCommand extends Command {
         description = description.trim();
         if (description.isEmpty()) {
             throw new NoSuchElementException(
-                    "Did you forget to put a number for the command you just typed in? Not stonks!");
+                    "Did you forget to put a number for the command you just typed in? Not stonks!\n");
         } else {
             try {
                 return Integer.valueOf(description);
             } catch (NumberFormatException e) {
                 throw new NumberFormatException(
-                        "Did you put something other than a number or did you put a number incorrectly? Not stonks!");
+                        "Did you put something other than a number or did you put a number incorrectly? Not stonks!\n");
             }
         }
     }
@@ -48,7 +48,7 @@ public class DoneCommand extends Command {
         } else if (task.getStatusInt() == DoneCommand.TASK_NOT_DONE) {
             outputString += "Not stonks! This task has been marked as undone:\n";
         } else {
-            throw new IllegalArgumentException("Incorrect task done number! It should be 1 or 0. Not stonks!");
+            throw new IllegalArgumentException("Incorrect task done number! It should be 1 or 0. Not stonks!\n");
         }
         outputString += String.format("%s\n", task);
         return outputString;
@@ -60,14 +60,18 @@ public class DoneCommand extends Command {
      * @return String upon successful toggling of Task.
      */
     public String execute(TaskManagement taskManagement) {
-        int taskNumber = this.getInputNumber(this.taskNumberString);
+        try {
+            int taskNumber = this.getInputNumber(this.taskNumberString);
 
-        if (this.checkInvalidTaskNumber(taskNumber, taskManagement)) {
-            throw new IllegalArgumentException("Invalid task number. Not stonks!");
+            if (this.checkInvalidTaskNumber(taskNumber, taskManagement)) {
+                return "Invalid task number. Not stonks!\n";
+            }
+
+            Task doneTask = taskManagement.markAsDone(taskNumber);
+            return this.printOutput(doneTask);
+        } catch (Exception e) {
+            return e.getMessage();
         }
-
-        Task doneTask = taskManagement.markAsDone(taskNumber);
-        return this.printOutput(doneTask);
     }
 
     /**

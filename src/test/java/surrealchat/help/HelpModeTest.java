@@ -16,7 +16,6 @@ import surrealchat.easteregg.OrangEasterEgg;
 import surrealchat.easteregg.VegetalEasterEgg;
 
 public class HelpModeTest {
-    private static final String BYE_HELP = "Quits the program.\n";
     private static final String TODO_HELP = ToDoCommand.displayHelp();
     private static final String DEADLINE_HELP = DeadlineCommand.displayHelp();
     private static final String EVENT_HELP = EventCommand.displayHelp();
@@ -34,7 +33,6 @@ public class HelpModeTest {
      */
     @Test
     public void testDisplayHelp() {
-        assertEquals(HelpMode.displayHelp("bye"), HelpModeTest.BYE_HELP);
         assertEquals(HelpMode.displayHelp("todo"), HelpModeTest.TODO_HELP);
         assertEquals(HelpMode.displayHelp("deadline"), HelpModeTest.DEADLINE_HELP);
         assertEquals(HelpMode.displayHelp("event"), HelpModeTest.EVENT_HELP);

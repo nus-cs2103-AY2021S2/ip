@@ -11,6 +11,9 @@ Based on the Duke chatbot.
 
 ## Features
 
+### GUI Now Available!
+Now comes with a GUI, so you get to see who you are chatting to. Very Stonks!
+
 ### Add tasks of different types
 You can add 3 types of tasks:
 1. ToDo tasks (Fuss-free, own time own target)
@@ -267,7 +270,7 @@ My search returned nothing. Not stonks!
 ```
 
 ## Other commands
-### Help - `help
+### Help - `help`
 Format: `help COMMAND`
 
 Key this command in along with the name of another command to display how to use the command.
@@ -284,11 +287,6 @@ Outcome for invalid commands:
 ```
 Helper does not recognise command. Not Stonks!
 ```
-
-### Exit - `bye`
-Format: `bye`
-
-Key this command in to cause Meme Man to save your tasks and EJECT you... er... I mean leave...
 
 ### List - `list`
 Format: `list`
