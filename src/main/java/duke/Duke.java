@@ -2,23 +2,20 @@ package duke;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.IOException;
-import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,8 +30,8 @@ public class Duke {
 
     static class FastIO extends PrintWriter
     {
-        BufferedReader br;
-        StringTokenizer st;
+        private BufferedReader br;
+        private StringTokenizer st;
 
         public FastIO() {
             super(new BufferedOutputStream(System.out));
@@ -78,13 +75,18 @@ public class Duke {
         }
     }
 
-    public static class Task{
+    public static class Task {
         /** The task that needs to be done, as a String */
         protected String todo;
         /** Whether or not the task is complete */
         protected boolean done;
 
-        public Task(String s) {
+        /**
+         * Instantiates a task.
+         *
+         * @param s
+         */
+        public Task (String s) {
             this.todo = s;
             this.done = false;
         }
@@ -117,7 +119,7 @@ public class Duke {
          * @return inputted date as a String.
          */
         public String dateFormat(LocalDateTime date) {
-            return(date.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmm a")));
+            return (date.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmm a")));
         }
 
         @Override
@@ -135,15 +137,21 @@ public class Duke {
         /** The date/time that the Deadline should be done by */
         private LocalDateTime doneBy;
 
+        /**
+         * Initiates a deadline, time is set to 0000 if no time is provided.
+         *
+         * @param s
+         * @param doneBy
+         */
         public Deadline(String s, String doneBy) {
             super(s);
             String[] split = doneBy.split("\\s+");
             if (split.length == 1) {
-                this.doneBy = LocalDate.parse(doneBy).atTime(0,0);
+                this.doneBy = LocalDate.parse(doneBy).atTime(0, 0);
             } else if (split.length == 2) {
                 this.doneBy = LocalDate.parse(split[0]).atTime(LocalTime.parse(split[1]));
             } else {
-                throw new DateTimeParseException("","",1);
+                throw new DateTimeParseException("", "", 1);
             }
 
         }
@@ -175,15 +183,22 @@ public class Duke {
         /** The time at which the Event happens */
         private LocalDateTime time;
 
+        /**
+         * Initiates a Event, time is set to 0000 if none is provided.
+         *
+         * @param s
+         * @param time
+         * @throws DateTimeParseException
+         */
         public Event(String s, String time) throws DateTimeParseException {
             super(s);
             String[] split = time.split("\\s+");
             if (split.length == 1) {
-                this.time = LocalDate.parse(time).atTime(0,0);
+                this.time = LocalDate.parse(time).atTime(0, 0);
             } else if (split.length == 2) {
                 this.time = LocalDate.parse(split[0]).atTime(LocalTime.parse(split[1]));
             } else {
-                throw new DateTimeParseException("","",1);
+                throw new DateTimeParseException("", "", 1);
             }
         }
 
@@ -257,6 +272,7 @@ public class Duke {
                         }
                         leest.add(event);
                         break;
+                    default:
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -296,7 +312,7 @@ public class Duke {
          * @throws IOException If the file does not exist.
          */
         private void appendToFile(String filePath, String textToAdd) throws IOException {
-            FileWriter fw = new FileWriter(filePath,true);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.write(textToAdd + "\n");
             fw.close();
         }
@@ -480,16 +496,15 @@ public class Duke {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___| uwu\n";
             System.out.println("Hello from\n" + logo);
-
-            System.out.println("Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!\n" +
-                    "What can I do for you? uwu");
+            System.out.println("Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!\n"
+                    + "What can I do for you? uwu");
         }
 
         public void showLoadingError() {
             System.out.println("Something went wrong with the storage loading uwu");
         }
 
-        public void emptyListMessage(){
+        public void emptyListMessage() {
             System.out.println("☹ OOPS!!! Your list is currently empty uwu.");
         }
 
@@ -526,14 +541,25 @@ public class Duke {
             case "invalidDone":
                 System.out.println("☹ OOPS!!! Please indicate a valid task to complete uwu");
                 break;
+            default:
             }
         }
 
+        /**
+         * Returns String for when a task is deleted.
+         *
+         * @param t
+         */
         public void deleteTask(Task t) {
             System.out.println("Noted. I've removed this task uwu:");
             System.out.println(t);
         }
 
+        /**
+         * Returns String for when a task is added.
+         *
+         * @param t
+         */
         public void taskAdded(Task t) {
             System.out.println("Hai. I've added this task:");
             System.out.println("    " + t);
@@ -562,10 +588,16 @@ public class Duke {
             }
         }
 
+        /**
+         * Prints a 'no matching tasks' message if none are found.
+         * Else prints the taks out.
+         *
+         * @param tl The tasklist to be printed.
+         */
         public void showSearchList(TaskList tl) {
             if (tl.isEmpty()) {
-                System.out.println("There are no matching tasks uwu. " +
-                        "(just like how whoever wrote this has no friends.)");
+                System.out.println("There are no matching tasks uwu. "
+                        + "(just like how whoever wrote this has no friends.)");
             } else {
                 System.out.println("Here are the matching tasks in your list uwu: ");
                 int counter = 1;
@@ -578,6 +610,11 @@ public class Duke {
 
     }
 
+    /**
+     * Instantiates a Duke object.
+     *
+     * @param filepath The filepath where the tasklist is stored in the hard disk.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -589,6 +626,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke.
+     */
     public void run() {
         FastIO fio = new FastIO();
         Parser parser = new Parser();
