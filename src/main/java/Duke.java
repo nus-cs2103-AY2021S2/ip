@@ -6,15 +6,9 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo =
-                  " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        Ui ui = new Ui();
         String separator = "------------------\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("No unicode allowed");
+        ui.startUpMessage();
         List<Task> store = null;
         try {
             System.out.println("Loading From File...");
@@ -36,8 +30,7 @@ public class Duke {
                 tokens = splitTokenIntoTwo(line," ", singleTokens);
                 switch(tokens[0]){
                     case "bye":
-                        System.out.println(separator + "Goodbye from\n" + logo);
-                        break;
+                        ui.goodByeMessage();                        break;
                     case "list":
                         printList(store);
                         break;
