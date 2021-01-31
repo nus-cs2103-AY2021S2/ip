@@ -13,7 +13,7 @@ public class ByeCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(MESSAGE_EXIT);
+        return new CommandResult(MESSAGE_EXIT, true);
     }
 
     /**

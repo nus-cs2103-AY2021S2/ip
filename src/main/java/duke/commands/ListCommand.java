@@ -16,7 +16,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         if (taskList.isEmpty()) {
-            return new CommandResult(MESSAGE_EMPTY_TASKLIST);
+            return new CommandResult(MESSAGE_EMPTY_TASKLIST, false);
         } else {
             StringBuilder tasksListAsString = new StringBuilder();
             for (int i = 1; i <= taskList.size(); i++) {
@@ -25,7 +25,7 @@ public class ListCommand extends Command {
                     tasksListAsString.append("\n");
                 }
             }
-            return new CommandResult(MESSAGE_SHOW_TASKLIST + "\n" + tasksListAsString.toString());
+            return new CommandResult(MESSAGE_SHOW_TASKLIST + "\n" + tasksListAsString.toString(), false);
         }
     }
 }

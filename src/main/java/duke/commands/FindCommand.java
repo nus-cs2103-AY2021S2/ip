@@ -33,10 +33,10 @@ public class FindCommand extends Command {
             }
         }
         if (tasksWithSearchWord.length() == 0) {
-            return new CommandResult(MESSAGE_NO_MATCHES);
+            return new CommandResult(MESSAGE_NO_MATCHES, false);
         } else {
             tasksWithSearchWord.deleteCharAt(tasksWithSearchWord.length() - 1);
-            return new CommandResult(MESSAGE_FOUND_TASKS + "\n" + tasksWithSearchWord.toString());
+            return new CommandResult(MESSAGE_FOUND_TASKS + "\n" + tasksWithSearchWord.toString(), false);
         }
     }
 }

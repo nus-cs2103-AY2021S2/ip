@@ -28,9 +28,9 @@ public class DeleteCommand extends Command {
             Task task = taskList.getTask(index);
             taskList.deleteTask(index);
             return new CommandResult(MESSAGE_DELETED_TASK + "\n  " + task.toString() + "\n"
-                    + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()), taskList);
+                    + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()), taskList, false);
         } catch (IndexOutOfBoundsException ex) {
-            return new CommandResult(MESSAGE_INVALID_INDEX);
+            return new CommandResult(MESSAGE_INVALID_INDEX, false);
         }
     }
 }
