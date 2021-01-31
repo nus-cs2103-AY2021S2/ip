@@ -1,16 +1,19 @@
-public class Task {
+public abstract class Task {
     
-    private final String name;
-    private final boolean completed;
+    protected final String name;
+    protected final boolean completed;
 
-    public Task(String name, boolean completed) {
+    protected Task(String name) {
+        this.name = name;
+        this.completed = false;
+    }
+
+    protected Task(String name, boolean completed) {
         this.name = name;
         this.completed = completed;
     }
 
-    public Task complete() {
-        return new Task(this.name, true);
-    }
+    public abstract Task complete();
 
     @Override
     public String toString() {

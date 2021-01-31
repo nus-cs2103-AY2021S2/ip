@@ -17,25 +17,38 @@ public class Checklst {
         sendOutput("Hello I'm Checklst! What can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String[] input = scanner.nextLine().split(" ", 2);
         TaskList taskList = new TaskList();
 
-        while (!input.equals("bye")) {
+        while (!input[0].equals("bye")) {
 
-            if (input.equals("list")) {
-                sendOutput(taskList.toString());
-            } else if (input.substring(0, 4).equals("done")) {
-                int index = Integer.parseInt(input.substring(input.length() - 1)) - 1;
-                Task newTask = taskList.get(index).complete();
-                taskList.replace(index, newTask);
-                sendOutput("Nice! I've marked this item as done\n\t" + newTask);
-            } else {
-                Task task = new Task(input, false);
-                taskList.add(task);
-                sendOutput("Added: " + task);
+            switch (input[0]) {
+                case "list":
+                    sendOutput(taskList.toString());
+                    break;
+                case "done":
+                    int index = Integer.parseInt(input[1]);
+                    sendOutput("Nice! I've marked this item as done\n\t" + taskList.completeTask(index));
+                    break;
+                case "todo":
+                    Task newTodo = Todo.makeTodo(input[1]);
+                    sendOutput(taskList.add(newTodo));
+                    break;
+                case "event":
+                    Task newEvent = Event.makeEvent(input[1]);
+                    sendOutput(taskList.add(newEvent));
+                    break;
+                case "deadline":
+                    Task newDeadline = Deadline.makeDeadline(input[1]);
+                    sendOutput(taskList.add(newDeadline));
+                    break;
+                default:
+                    sendOutput("Sorry I didn't understand that command!!");
+                    break;
             }
 
-            input = scanner.nextLine();
+
+            input = scanner.nextLine().split(" ", 2);
         }
 
         sendOutput("Bye! Hope to see you again!");

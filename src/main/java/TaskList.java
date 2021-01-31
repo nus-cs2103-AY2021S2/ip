@@ -4,16 +4,22 @@ public class TaskList {
     
     private final ArrayList<Task> taskList = new ArrayList<>();
 
-    public void add(Task task) {
+    public String add(Task task) {
         this.taskList.add(task);
-    }
-
-    public void replace(int index, Task newTask) {
-        this.taskList.set(index, newTask);
+        return String.format("Added: %s\n\tYou now have %d task(s) in the list!", task, this.taskList.size());
     }
  
     public Task get(int index) {
         return this.taskList.get(index);
+    }
+
+    public Task completeTask(int index) {
+        index--;
+
+        Task newTask = taskList.get(index).complete();
+        this.taskList.set(index, newTask);
+
+        return newTask;
     }
 
     @Override
