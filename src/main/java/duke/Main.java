@@ -1,25 +1,27 @@
 package duke;
 
-import java.util.Scanner;
+import java.io.IOException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
 
-    /**
-     * The main driver method.
-     * @param args Arguments to the main program.
-     */
-    public static void main(String[] args) {
+    private final Duke duke = new Duke();
 
-        Duke duke = new Duke();
-        Scanner sc = new Scanner(System.in);
-        String input;
-        String output = "";
-
-        while (duke.isRunning()) {
-            input = sc.nextLine();
-            duke.getResponse(input);
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        sc.close();
     }
 }
