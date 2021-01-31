@@ -83,9 +83,9 @@ public class Parser {
                 String eventName = timeArray[0].strip();
                 String time = timeArray[1];
                 String[] timePeriod = time.split("-");
-                String startTime = timePeriod[0];
+                String startTime = timePeriod[0].strip();
                 String date = startTime.substring(0, 10);
-                String endTime = date + timePeriod[1];
+                String endTime = date + " " + timePeriod[1].strip();
                 return new EventCommand(eventName, formatTime(startTime), formatTime(endTime));
             case "find":
                 return new FindCommand(words[1]);
