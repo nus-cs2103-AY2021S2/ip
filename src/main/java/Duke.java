@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -20,20 +22,22 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         List<Task> store = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String filePath = "data/duke.txt";
         try {
             File file = new File(filePath);
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNext()) {
                 String curRecTask = fileScanner.nextLine();
-                String[] items = curRecTask.split("[ |]+");
+                String[] items = curRecTask.split(" \\| ");
                 boolean done = (items[1].equals("1") ? true : false);
                 Task temp = new Todo(items[2]);
-                if (items[0] == "E") {
-                    temp = new Event(items[2], items[3]);
-                } else if (items[0] == "D") {
-                    temp = new Deadline(items[2], items[3]);
+                if (items[0].equals("E")) {
+                    LocalDate date = LocalDate.parse(items[3], formatter);
+                    temp = new Event(items[2], date);
+                } else if (items[0].equals("D")) {
+                    LocalDate date = LocalDate.parse(items[3], formatter);
+                    temp = new Deadline(items[2], date);
                 }
                 if (done) {
                     temp = temp.markAsDone();
@@ -126,6 +130,7 @@ public class Duke {
                             flag = true;
                         }
                     }
+                    LocalDate due = LocalDate.parse(dueDate);
                     String taskDescription = "";
                     first = true;
                     for (int i = 1; i < parts.length; ++i) {
@@ -140,7 +145,7 @@ public class Duke {
                             break;
                         }
                     }
-                    Deadline deadline = new Deadline(taskDescription, dueDate);
+                    Deadline deadline = new Deadline(taskDescription, due);
                     store.add(deadline);
                     System.out.println("     " + deadline);
                     System.out.println("     Now you have " + store.size() + " tasks in the list.");
@@ -165,6 +170,7 @@ public class Duke {
                             flag = true;
                         }
                     }
+                    LocalDate date = LocalDate.parse(eventDate);
                     String eventDescription = "";
                     first = true;
                     for (int i = 1; i < parts.length; ++i) {
@@ -179,7 +185,7 @@ public class Duke {
                             break;
                         }
                     }
-                    Event event = new Event(eventDescription, eventDate);
+                    Event event = new Event(eventDescription, date);
                     store.add(event);
                     System.out.println("     " + event);
                     System.out.println("     Now you have " + store.size() + " tasks in the list.");
