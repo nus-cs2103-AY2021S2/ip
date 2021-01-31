@@ -1,6 +1,13 @@
 package duke;
 
+import java.io.IOException;
+
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.ui.DialogBox;
+import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,7 +20,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
 public class Duke extends Application {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -21,6 +33,19 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    /**
+     * Main class for programme to run.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        try {
+            tasks = storage.loadData();
+        } catch (IOException e) {
+            tasks = new TaskList();
+        }
+    }
 
     @Override
     public void start(Stage stage) {
@@ -74,11 +99,19 @@ public class Duke extends Application {
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -105,7 +138,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -119,11 +152,19 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) throws IOException {
+        ui.showWelcome();
+        Command command = Parser.parse(input);
+        boolean isExit = command.isExit();
+        if (isExit) {
+            return command.execute(tasks, input, storage);
+        }
+        try {
+            return command.execute(tasks, input, storage);
+        } catch (IOException e) {
+            return e.getMessage();
+        }
     }
-
-
 }
 
 

@@ -43,13 +43,12 @@ public class DoneCommand extends Command {
      * @throws IOException in case file is corrupt
      */
 
-    public void execute(TaskList tasks, String input, Storage storage) throws IOException {
+    public String execute(TaskList tasks, String input, Storage storage) throws IOException {
         if (Integer.parseInt(input.split(" ")[1]) > tasks.getSize()) {
             new InvalidInstructionException();
-            return;
+            return "";
         } else {
-            tasks.markDone(input);
-            storage.saveData(tasks);
+            return tasks.markDone(input);
         }
     }
 

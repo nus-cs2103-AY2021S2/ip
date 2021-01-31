@@ -8,14 +8,13 @@ public class Ui {
 
     /**
      * Prints a welcome message.
+     *
+     * @return welcome message
      */
-    public static void showWelcome() {
+    public static String showWelcome() {
         String line = "------------------------------------------";
 
         //introduction screen
-        System.out.println(line);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println(line);
+        return line + "\nHello! I'm Duke\n" + "What can I do for you?\n" + line;
     }
 }

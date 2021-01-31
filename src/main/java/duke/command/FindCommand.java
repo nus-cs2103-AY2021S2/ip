@@ -29,8 +29,8 @@ public class FindCommand extends Command {
      * @param storage handles the various tasks according to their type
      */
 
-    public void execute(TaskList tasks, String input, Storage storage) {
-        tasks.find(input);
+    public String execute(TaskList tasks, String input, Storage storage) {
+        return tasks.find(input);
     }
 
     /**

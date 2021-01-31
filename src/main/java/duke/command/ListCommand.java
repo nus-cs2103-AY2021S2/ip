@@ -37,8 +37,8 @@ public class ListCommand extends Command {
      * @param input details of the task
      * @param storage handles the various tasks according to their type
      */
-    public void execute(TaskList tasks, String input, Storage storage) {
-        tasks.list();
+    public String execute(TaskList tasks, String input, Storage storage) {
+        return tasks.list();
     }
 
     /**
