@@ -140,8 +140,8 @@ public class Duke {
         /**
          * Initiates a deadline, time is set to 0000 if no time is provided.
          *
-         * @param s
-         * @param doneBy
+         * @param s The task.
+         * @param doneBy The date and time to finish the task by.
          */
         public Deadline(String s, String doneBy) {
             super(s);
@@ -186,8 +186,8 @@ public class Duke {
         /**
          * Initiates a Event, time is set to 0000 if none is provided.
          *
-         * @param s
-         * @param time
+         * @param s The task.
+         * @param time The time when the task occurs.
          * @throws DateTimeParseException
          */
         public Event(String s, String time) throws DateTimeParseException {
@@ -227,7 +227,7 @@ public class Duke {
 
     public class Storage {
 
-        /** The path of the storage file where the TaskList is stored*/
+        /** The path of the storage file where the TaskList is stored. */
         private String filePath;
 
         public Storage(String filePath) {
