@@ -78,7 +78,9 @@ public class Storage {
                 badLines++;
                 break;
             }
-            t.isDone = isDone;
+            if (isDone){
+                t.setDone();
+            }
             store.add(t);
         }
         s.close();

@@ -4,7 +4,7 @@ import duke.exception.EmptyArgumentException;
 
 public abstract class Task {
     private final String description;
-    public boolean isDone; //TODO: Figure out if I can restrict access
+    private boolean isDone; //TODO: Figure out if I can restrict access
 
     public Task(String description) throws EmptyArgumentException {
         description = description.trim();
@@ -13,6 +13,10 @@ public abstract class Task {
         }
         this.description = description;
         this.isDone = false;
+    }
+
+    public void setDone(){
+        this.isDone = true;
     }
 
     public String getStatusIcon() {

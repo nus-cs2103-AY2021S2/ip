@@ -74,7 +74,7 @@ public class TaskList {
     }
     private String setDone(int doneIndex){
         Task t = store.get(doneIndex);
-        t.isDone = true;
+        t.setDone();
         return formatOrderedPrint(doneIndex);
     }
     private String delete(int deleteIndex){

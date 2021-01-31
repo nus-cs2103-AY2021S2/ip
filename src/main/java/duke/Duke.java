@@ -47,7 +47,7 @@ public class Duke {
                     case "done":
                         int index = Integer.valueOf(tokens[1]) - 1;
                         Task t = store.get(index);
-                        t.isDone = true;
+                        t.setDone();
                         System.out.println("The following task is now marked as done:\n" +
                                 formatOrderedPrint(store,index));
                         break;
