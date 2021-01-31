@@ -24,7 +24,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
-        return "[D]" + super.toString() + " (duke.task.Deadline: " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (Deadline: " + by.format(formatter) + ")";
     }
 
     @Override

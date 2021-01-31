@@ -16,7 +16,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (duke.task.Event Time: " + eventPeriod + ")";
+        return "[E]" + super.toString() + " (Event Time: " + eventPeriod + ")";
     }
 
     @Override

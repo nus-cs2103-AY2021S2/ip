@@ -23,7 +23,7 @@ public class Storage {
     public static final String FILE_NAME = "duke.txt";
     static int badLines = 0;//Last call bad lines
 
-    public static List<Task> LoadTaskList() throws IOException {
+    public static TaskList LoadTaskList() throws IOException {
         badLines = 0;
         List<Task> store = new ArrayList<>();
         File file = getOrCreateFile();
@@ -84,10 +84,11 @@ public class Storage {
             store.add(t);
         }
         s.close();
-        return store;
+        return new TaskList(store);
     }
 
-    public static void saveTaskList(List<Task> store) throws IOException {
+    public static void saveTaskList(TaskList data) throws IOException {
+        List<Task> store = data.getRawData();
         StringBuilder saveText = new StringBuilder();
         for (Task t: store){
             saveText.append(t.toFileString());

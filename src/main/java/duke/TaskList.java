@@ -8,7 +8,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -18,14 +17,16 @@ public class TaskList {
         DONE,
         DELETE,
     }
-    boolean edited = false;
-    List<Task> store;
-    public TaskList(String[][] tokens) throws EmptyArgumentException, BadDateArgumentException {
-        store = new ArrayList<>();
-        for(String[] args: tokens){
-            addTask(args);
-        }
+    private boolean edited = false;
+    private List<Task> store;
+    public TaskList(List<Task> store) {
+        this.store = store;
     }
+
+    public List<Task> getRawData(){
+        return this.store;
+    }
+
     public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
         String[] args = c.run();
         String results;
@@ -51,8 +52,11 @@ public class TaskList {
         }
         return results;
     }
-    private void markSaved(){
+    public void markSaved(){
         edited = false;
+    }
+    public boolean isEdited(){
+        return this.edited;
     }
     private String addTask(String[] tokens) throws EmptyArgumentException, BadDateArgumentException {
         Task t;
@@ -82,7 +86,7 @@ public class TaskList {
         store.remove(deleteIndex);
         return returnValue;
     }
-    private String getList(){
+    public String getList(){
         StringBuilder builder = new StringBuilder();
         for (int i = 0 ; i < store.size(); i++) {
             builder.append(formatOrderedPrint(i));
@@ -99,6 +103,6 @@ public class TaskList {
         while (i >= size){
             i -= size;
         }
-        return "Entry " + (i+1) + "|" + store.get(i).toString() + "\n";
+        return "Entry " + (i+1) + "|" + store.get(i).toString();
     }
 }
