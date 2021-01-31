@@ -1,10 +1,8 @@
 package com.lirc572.ip;
 
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.Set;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
