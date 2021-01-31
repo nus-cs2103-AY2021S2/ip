@@ -20,7 +20,8 @@ public class DukeTest {
             String[] invalidInputs = {"", " ", "abc", "hello", "add meeting /at 2pm"};
 
             for (String input: invalidInputs){
-                parser.parseOperator(input);
+                parser.parseCommand(input);
+//                parser.parseOperator(input);
                 fail("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException e ) {
@@ -37,7 +38,8 @@ public class DukeTest {
 
             for (String date: invalidDates){
                 String testCommandText = deadlineDescription + date;
-                parser.parseAddDeadline(testCommandText);
+                parser.parseCommand(testCommandText);
+//                parser.parseAddDeadline(testCommandText);
                 fail("OOPS!! Please follow the correct data/time format: yyyy-M-d H:mm");
             }
         } catch (DukeException e ) {
@@ -48,10 +50,11 @@ public class DukeTest {
 
     @Test
     //featureUnderTest_testScenario_expectedBehavior()
-    public void addTask_addTaskInTestList_containedInTestList(){
+    public void addTask_addTaskInTestList_containedInTestList() throws DukeException {
         TaskList tasks = new TaskList();
         Task testTask = new Task("homework");
-        tasks.addTask(testTask);
+        tasks.executeOperation(new TaskAction(testTask, "add"));
+//        tasks.addTask(testTask);
         assertTrue(tasks.getTaskList().contains(testTask));
     }
 }

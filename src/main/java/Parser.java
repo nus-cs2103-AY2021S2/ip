@@ -27,6 +27,51 @@ public class Parser {
         return operators ;
     }
 
+    public TaskManager parseCommand(String userInput) throws DukeException {
+        String operator = parseOperator(userInput);
+        // split command text by its first space into 2 parts
+        String[] taskDetail = userInput.split(" ", 2);
+
+        TaskManager taskManager = new TaskManager(operator);
+        // parse command details according to their operator
+        switch (operator) {
+        case "done":
+            int taskNumberToComplete = parseDone(taskDetail);
+            taskManager =  new TaskManager(operator, Integer.toString(taskNumberToComplete));
+            break;
+
+        case "delete":
+            int taskNumberToDelete = parseDelete(taskDetail);
+            taskManager = new TaskManager(operator, Integer.toString(taskNumberToDelete));
+            break;
+
+        case "todo":
+            String description = parseAddToDo(taskDetail);
+            taskManager = new TaskManager(operator, description);
+            break;
+
+        case "deadline":
+            String[] detailsDeadline = parseAddDeadline(taskDetail);
+            taskManager = new TaskManager(operator, detailsDeadline);
+            break;
+
+        case "event":
+                String[] detailsEvent = parseAddEvent(taskDetail);
+                taskManager = new TaskManager(operator, detailsEvent);
+                break;
+
+        case "list":
+                taskManager = new TaskManager(operator);
+                break;
+
+        case "find":
+            String keyword = parseFindTask(taskDetail);
+            taskManager = new TaskManager(operator, keyword);
+            break;
+        }
+        return taskManager;
+    }
+
     /**
      * Parse the operator input by user.
      *
@@ -34,7 +79,7 @@ public class Parser {
      * @return Extracted operator.
      * @throws DukeException If operator is not valid.
      */
-    public String parseOperator(String userInput) throws DukeException {
+    private String parseOperator(String userInput) throws DukeException {
         // split command text by its first space into 2 parts
         String[] commandParts = userInput.split(" ", 2);
 
@@ -51,28 +96,22 @@ public class Parser {
         return validOperators.contains(operator.toLowerCase());
     }
 
-    private String[] parseCommand(String userInput){
-        String[] commandParts = userInput.split(" ", 2);
-        return commandParts;
-}
 
     /**
      * Return the task number to be marked as done.
      *
-     * @param commandText full text command input by user.
+     * @param taskDetail full text command input by user.
      * @return Task number.
      * @throws DukeException If task number is empty or a non-integer is entered.
      */
-    public int parseDone(String commandText) throws DukeException{
-        // split command text by its first space into 2 parts
-        String[] commandParts = commandText.split(" ", 2);
+    private int parseDone(String[] taskDetail) throws DukeException{
 
         // parse task number
-        if (commandParts.length == 1) {
+        if (taskDetail.length == 1) {
             throw new DukeException("OOPS!!! Please specify the task number.");
         } else {
             try {
-                int taskNo = Integer.valueOf(commandParts[1]);
+                int taskNo = Integer.valueOf(taskDetail[1]);
                 return taskNo;
             } catch (Exception e) {
                 throw new DukeException("OOPS!!! The task cannot be found.");
@@ -83,20 +122,18 @@ public class Parser {
     /**
      * Return the task number to be deleted.
      *
-     * @param commandText full text command input by user.
+     * @param taskDetail full text command input by user.
      * @return Task number.
      * @throws DukeException If task number is empty or a non-integer is entered.
      */
-    public int parseDelete(String commandText) throws DukeException {
-        // split command text by its first space into 2 parts
-        String[] commandParts = commandText.split(" ", 2);
+    private int parseDelete(String[] taskDetail) throws DukeException {
 
         // parse task number
-        if (commandParts.length == 1) {
+        if (taskDetail.length == 1) {
             throw new DukeException("OOPS!!! Please specify the task number.");
         } else {
             try {
-                int taskNo = Integer.valueOf(commandParts[1]);
+                int taskNo = Integer.valueOf(taskDetail[1]);
                 return taskNo;
             } catch (Exception e) {
                 throw new DukeException("OOPS!!! The task cannot be found.");
@@ -107,19 +144,17 @@ public class Parser {
     /**
      * Return the description of a ToDo task to be added specified by user.
      *
-     * @param commandText full text command input by user.
+     * @param taskDetail full text command input by user.
      * @return Description of ToDo.
      * @throws DukeException If description is empty.
      */
-    public String parseAddToDo(String commandText) throws DukeException {
-        // split command text by its first space into 2 parts
-        String[] commandParts = commandText.split(" ", 2);
+    private String parseAddToDo(String[] taskDetail) throws DukeException {
 
         // parse description of ToDo
-        if(commandParts.length == 1 || commandParts[1].isBlank()) {
+        if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else{
-            String description = commandParts[1];
+            String description = taskDetail[1];
             return description;
         }
     }
@@ -127,23 +162,21 @@ public class Parser {
     /**
      * Return the description and due time of a Deadline task to be added specified by user.
      *
-     * @param commandText full text command input by user.
+     * @param taskDetail full text command input by user.
      * @return List containing description and due time of Deadline.
      * @throws DukeException If description is empty or due time does not follow 'yyyy-M-d H:mm' format.
      */
-    public String[] parseAddDeadline(String commandText) throws DukeException {
-        // split command text by its first space into 2 parts
-        String[] commandParts = commandText.split(" ", 2);
+    private String[] parseAddDeadline(String[] taskDetail) throws DukeException {
 
         // parse details of Deadline
-        if(commandParts.length == 1 || commandParts[1].isBlank()) {
+        if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else{
 
             // split details to description and time
-            String[] details = commandParts[1].split(" /by ", 2);
+            String[] details = taskDetail[1].split(" /by ", 2);
             if (details.length == 1 || !isValidTime(details[1])){
-                throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-M-d H:mm");
+                throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-MM-dd HH:mm");
             }
 
             String description = details[0];
@@ -155,21 +188,19 @@ public class Parser {
     /**
      * Return the description and time of an Event task to be added specified by user.
      *
-     * @param commandText full text command input by user.
+     * @param taskDetail full text command input by user.
      * @return List containing description and time of event.
      * @throws DukeException If description is empty or time does not follow 'yyyy-M-d H:mm' format.
      */
-    public String[] parseAddEvent(String commandText) throws DukeException {
-        // split command text by its first space into 2 parts
-        String[] commandParts = commandText.split(" ", 2);
+    private String[] parseAddEvent(String[] taskDetail) throws DukeException {
 
         // parse details of Event
-        if(commandParts.length == 1 || commandParts[1].isBlank()) {
+        if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else{
 
             // split details to description and time
-            String[] details = commandParts[1].split(" /at ", 2);
+            String[] details = taskDetail[1].split(" /at ", 2);
             if (details.length == 1 || !isValidTime(details[1])){
                 throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-MM-dd HH:mm");
             }
@@ -183,20 +214,18 @@ public class Parser {
     /**
      * Return the keyword specified by user.
      *
-     * @param commandText full text command input by user.
+     * @param taskDetail full text command input by user.
      * @return Keyword to be used for finding matching tasks.
      * @throws DukeException If keyword is empty.
      */
-    public String parseFindTask(String commandText) throws DukeException {
-        // split command text by its first space into 2 parts
-        String[] commandParts = commandText.split(" ", 2);
+    private String parseFindTask(String[] taskDetail) throws DukeException {
 
         // parse keyword of task
-        if(commandParts.length == 1 || commandParts[1].isBlank()) {
+        if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! There is no matching task.");
         } else{
-            String keyword = commandParts[1];
-            return commandParts[1];
+            String keyword = taskDetail[1];
+            return keyword;
         }
     }
 
@@ -207,7 +236,7 @@ public class Parser {
      * @return True if the time follows "yyyy-M-d H:mm"; else, return false.
      * @throws DateTimeParseException If time is in invalid format.
      */
-    public boolean isValidTime(String time) throws DateTimeParseException {
+    private boolean isValidTime(String time) throws DateTimeParseException {
         try {
             // convert time from String to LocalDateTime
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm", Locale.ENGLISH);

@@ -33,23 +33,53 @@ public class Ui {
         return fullInputLine;
     }
 
+    public void showResultToUser(TaskList tasks, TaskResult taskResult){
+        String feedbackToUser = taskResult.getFeedbackToUser();
+        TaskList relatedTaskList = taskResult.getTaskList();
+        Task relatedTask = taskResult.getTask();
+        switch (feedbackToUser){
+        case "add":
+            showAddMessage(relatedTask, tasks.getSize());
+            break;
+
+        case "complete":
+            showCompleteMessage(relatedTask);
+            break;
+
+        case "delete":
+            showDeleteMessage(relatedTask, tasks.getSize());
+            break;
+
+        case "display":
+            printMyTask(tasks);
+            break;
+
+       case "find":
+           printMatchingTask(relatedTaskList);
+           break;
+        }
+    }
+
+
     /**
      * Print all tasks contained in a TaskList object.
      *
      * @param taskList TaskList object to be printed.
      */
-    public void printMyTask(TaskList taskList) {
-        System.out.println("---------------------------------------------");
-        System.out.println("Here are the tasks in your list:");
+    private void printMyTask(TaskList taskList) {
 
-        // loop through list and print every task in a new line
-        int len = taskList.getSize();
-        for (int i = 1; i < len + 1; i++) {
-            Task curTask = taskList.getTask(i-1);
-            System.out.println(i + ". " + curTask);
-        }
+            System.out.println("---------------------------------------------");
+            System.out.println("Here are the tasks in your list:");
 
-        System.out.println("---------------------------------------------");
+            // loop through list and print every task in a new line
+            int len = taskList.getSize();
+            ArrayList<Task> tasks = taskList.getTaskList();
+            for (int i = 1; i < len + 1; i++) {
+                Task curTask = tasks.get(i - 1);
+                System.out.println(i + ". " + curTask);
+            }
+
+            System.out.println("---------------------------------------------");
     }
 
     /**
@@ -57,18 +87,20 @@ public class Ui {
      *
      * @param matchingTask List of tasks to be printed.
      */
-    public void printMatchingTask(ArrayList<Task> matchingTask) {
-        System.out.println("---------------------------------------------");
-        System.out.println("Here are the matching tasks in your list:");
+    private void printMatchingTask(TaskList matchingTask) {
 
-        // loop through list and print every task in a new line
-        int len = matchingTask.size();
-        for (int i = 1; i < len + 1; i++) {
-            Task curTask = matchingTask.get(i-1);
-            System.out.println(i + ". " + curTask);
-        }
+            System.out.println("---------------------------------------------");
+            System.out.println("Here are the matching tasks in your list:");
 
-        System.out.println("---------------------------------------------");
+            // loop through list and print every task in a new line
+            int len = matchingTask.getSize();
+        ArrayList<Task> tasks = matchingTask.getTaskList();
+            for (int i = 1; i < len + 1; i++) {
+                Task curTask = tasks.get(i - 1);
+                System.out.println(i + ". " + curTask);
+            }
+
+            System.out.println("---------------------------------------------");
     }
 
     public void showGoodbyeMessage(){
@@ -77,14 +109,14 @@ public class Ui {
         System.out.println("---------------------------------------------");
     }
 
-    public void showCompleteMessage(Task task){
+    private void showCompleteMessage(Task task){
         System.out.println("---------------------------------------------");
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task);
         System.out.println("---------------------------------------------");
     }
 
-    public void showDeleteMessage(Task task, int listSize){
+    private void showDeleteMessage(Task task, int listSize){
         System.out.println("---------------------------------------------");
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task);
@@ -92,7 +124,7 @@ public class Ui {
         System.out.println("---------------------------------------------");
     }
 
-    public void showAddMessage(Task task, int listSize){
+    private void showAddMessage(Task task, int listSize){
         System.out.println("---------------------------------------------");
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);

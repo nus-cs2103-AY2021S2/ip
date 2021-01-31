@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -6,14 +5,58 @@ import java.util.ArrayList;
 public class TaskList {
 
     private ArrayList<Task> taskList;
+    private int totalTask;
 
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
+    public TaskList(ArrayList<Task> myTasks, int totalTask) {
+        this.taskList = myTasks;
+        this.totalTask = totalTask;
+    }
+
     public TaskList(ArrayList<String> myTasks) {
         this.taskList = initialiseList(myTasks);
+        this.totalTask = getSize();
     }
+
+    public TaskResult executeOperation(TaskAction taskAction) throws DukeException {
+        Task relatedTask = taskAction.getRelatedTask();
+        int relatedTaskNumber = taskAction.getRelatedTaskNumber();
+        String keyword = taskAction.getKeyword();
+        String actionType = taskAction.getActionType();
+
+        TaskResult taskResult = new TaskResult();
+        switch (actionType){
+
+        case "add":
+            addTask(relatedTask);
+            taskResult = new TaskResult(relatedTask, "add");
+            break;
+
+        case "complete":
+            relatedTask = markTaskAsDone(relatedTaskNumber);
+            taskResult = new TaskResult(relatedTask, "complete");
+            break;
+
+        case "delete":
+            relatedTask = deleteTask(relatedTaskNumber);
+            taskResult = new TaskResult(relatedTask, "delete");
+            break;
+
+        case "display":
+            taskResult = new TaskResult(new TaskList(this.taskList, this.totalTask), "display");
+            break;
+
+        case "find":
+            TaskList matchingTaskList = findMatchingTask(keyword);
+            taskResult = new TaskResult(matchingTaskList, "find");
+            break;
+        }
+        return taskResult;
+    }
+
 
     private boolean isDone(String icon){
         if (icon.equals("\u2713")){
@@ -98,10 +141,14 @@ public class TaskList {
      * @param taskNumber Order number of the task of interest.
      * @return Task of specified order number.
      */
-    public Task getTask(int taskNumber) {
-        Task task = this.taskList.get(taskNumber);
-        return task;
-    }
+//    public Task getTask(int taskNumber) throws DukeException {
+//        try {
+//            Task task = this.taskList.get(taskNumber);
+//            return task;
+//        } catch (IndexOutOfBoundsException e){
+//            throw new DukeException("OOPS!! The task number is invalid.");
+//        }
+//    }
 
     /**
      * Return the list of tasks in a TaskList.
@@ -117,7 +164,7 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public void addTask(Task task) {
+    private void addTask(Task task) {
         this.taskList.add(task);
     }
 
@@ -127,9 +174,13 @@ public class TaskList {
      * @param taskNumber Order number of the task to be deleted.
      * @return Task deleted.
      */
-    public Task deleteTask(int taskNumber) {
-        Task curTask = this.taskList.remove(taskNumber - 1);
-        return curTask;
+    private Task deleteTask(int taskNumber) throws DukeException {
+        try {
+            Task curTask = this.taskList.remove(taskNumber - 1);
+            return curTask;
+        } catch (IndexOutOfBoundsException e){
+            throw new DukeException("OOPS!! The task number is invalid.");
+        }
     }
 
     /**
@@ -138,10 +189,14 @@ public class TaskList {
      * @param taskNumber Order number of the task to be completed.
      * @return Task marked as done.
      */
-    public Task markTaskAsDone(int taskNumber) {
-        Task curTask = this.taskList.get(taskNumber - 1);
-        curTask.markAsDone();
-        return curTask;
+    private Task markTaskAsDone(int taskNumber) throws DukeException{
+        try {
+            Task curTask = this.taskList.get(taskNumber - 1);
+            curTask.markAsDone();
+            return curTask;
+        } catch (IndexOutOfBoundsException e){
+            throw new DukeException("OOPS!! The task number is invalid.");
+        }
     }
 
     /**
@@ -150,7 +205,7 @@ public class TaskList {
      * @param keyword Keyword to look for in tasks' description.
      * @return List of tasks that have the keyword in their description.
      */
-    public ArrayList<Task> findMatchingTask(String keyword){
+    private TaskList findMatchingTask(String keyword){
         ArrayList<Task> matchingTasks = new ArrayList<> ();
 
         // loop through every task in the list
@@ -161,7 +216,8 @@ public class TaskList {
                 matchingTasks.add(t);
             }
         }
-        return matchingTasks;
+        int totalTask = matchingTasks.size();
+        return new TaskList(matchingTasks, totalTask);
     }
 }
 
