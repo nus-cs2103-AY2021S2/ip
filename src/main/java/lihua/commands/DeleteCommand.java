@@ -1,7 +1,7 @@
 package lihua.commands;
 
-import lihua.tasks.Task;
 import lihua.commons.Messages;
+import lihua.tasks.Task;
 
 /**
  * Command class representing a command to delete a task.
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
         try {
             Task deleted = tasks.removeTask(targetIndex); // IndexOutOfBound Exception should be handled
 
-            String noun = tasks.getSize() <= 1? "task": "tasks";
+            String noun = tasks.getSize() <= 1 ? "task" : "tasks";
             String message = String.format("Got it. I have removed this task from your list:\n---- %s\n"
                             + "Now you have %d %s in total. Good luck.", deleted.toString(), tasks.getSize(), noun);
             return new CommandResult(message);

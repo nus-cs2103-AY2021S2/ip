@@ -1,10 +1,9 @@
 package lihua.tasks;
 
-import org.json.simple.JSONObject;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.json.simple.JSONObject;
 
 /**
  * Represents a lihua.tasks.Deadline item, which is a child of lihua.tasks.Task
@@ -38,7 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String doneMark = isDone? "X": " ";
+        String doneMark = isDone ? "X" : " ";
         return String.format("[D][%s] %s (by: %s)", doneMark, name,
                 by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }

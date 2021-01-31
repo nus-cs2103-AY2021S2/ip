@@ -39,9 +39,10 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.29'
+    toolVersion = '8.39'
 }
 
-run{
+run {
     standardInput = System.in
+    enableAssertions = true
 }

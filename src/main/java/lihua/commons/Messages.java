@@ -1,6 +1,12 @@
 package lihua.commons;
 
-import lihua.commands.*;
+import lihua.commands.AddCommand;
+import lihua.commands.DeleteCommand;
+import lihua.commands.DoneCommand;
+import lihua.commands.ExitCommand;
+import lihua.commands.FindCommand;
+import lihua.commands.HelpCommand;
+import lihua.commands.ListCommand;
 
 /**
  * Messages class containing static messages of Lihua.
@@ -8,8 +14,8 @@ import lihua.commands.*;
 public class Messages {
     /** Hello message */
     public static final String MESSAGE_HELLO =
-            "Hello! My name is Lihua.\n" +
-                    "What can I do for you today? (=V=)";
+            "Hello! My name is Lihua.\n"
+                    + "What can I do for you today? (=V=)";
     /** Help prompt message */
     public static final String MESSAGE_GET_HELP =
             "Sorry, I do not understand your command :')\n"

@@ -6,8 +6,6 @@ import java.time.LocalDate;
  * Command class representing a command to list tasks.
  */
 public class ListCommand extends Command {
-    /** Optional argument indicating the date of tasks to be listed */
-    private final LocalDate date;
     /** Command word for list command */
     public static final String COMMAND_WORD = "list";
     /** Command help information for list command */
@@ -16,6 +14,8 @@ public class ListCommand extends Command {
             + "List down all the tasks on a specific date, if additional date argument is given\n"
             + "---- Example 1: " + COMMAND_WORD + "\n"
             + "---- Example 2: " + COMMAND_WORD + " [yyyy-mm-dd]";
+    /** Optional argument indicating the date of tasks to be listed */
+    private final LocalDate date;
 
     /**
      * Initializes a new ListCommand with a LocalDate.

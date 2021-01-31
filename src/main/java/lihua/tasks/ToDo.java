@@ -20,7 +20,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        String doneMark = isDone? "X": " ";
+        String doneMark = isDone ? "X" : " ";
         return String.format("[T][%s] %s", doneMark, name);
     }
 

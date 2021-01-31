@@ -1,17 +1,21 @@
 package lihua.storage;
 
-import lihua.tasks.Deadline;
-import lihua.tasks.Event;
-import lihua.tasks.Task;
-import lihua.tasks.Tasks;
-import lihua.tasks.ToDo;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.time.LocalDate;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.*;
-import java.time.LocalDate;
+import lihua.tasks.Deadline;
+import lihua.tasks.Event;
+import lihua.tasks.Task;
+import lihua.tasks.Tasks;
+import lihua.tasks.ToDo;
 
 public class Storage {
     /** Default path in which the task data is stored */

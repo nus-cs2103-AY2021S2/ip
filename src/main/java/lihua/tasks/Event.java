@@ -1,9 +1,9 @@
 package lihua.tasks;
 
-import org.json.simple.JSONObject;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import org.json.simple.JSONObject;
 
 /**
  * Represent an lihua.tasks.Event item, which is a child of lihua.tasks.Task
@@ -37,7 +37,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String doneMark = isDone? "X": " ";
+        String doneMark = isDone ? "X" : " ";
         return String.format("[E][%s] %s (at: %s)", doneMark, name,
                 period.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
