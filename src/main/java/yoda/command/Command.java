@@ -11,7 +11,7 @@ public abstract class Command {
     /** Details of user input */
     protected String[] details;
     /** Type of command referred to by user input */
-    protected CommandType taskType;
+    protected CommandType commandType;
     /** Shows if the user is done using the Yoda chatbot */
     protected boolean isExit;
 

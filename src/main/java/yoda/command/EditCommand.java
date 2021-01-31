@@ -15,7 +15,7 @@ public class EditCommand extends Command{
      */
     public EditCommand(String[] details){
         super(details);
-        taskType = CommandType.valueOf(details[0]);
+        commandType = CommandType.valueOf(details[0]);
     }
 
     /**
@@ -28,12 +28,12 @@ public class EditCommand extends Command{
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         int taskToBeEdited = Integer.parseInt(details[1]) - 1;
         Task task = taskList.accessTask(taskToBeEdited);
-        if (taskType == CommandType.DELETE) {
+        if (commandType == CommandType.DELETE) {
             taskList.deleteTask(taskToBeEdited);
             System.out.println("Noted! I've deleted this task:"
                     + task
                     + "Now you have " + taskList.length() + "tasks left in the list!");
-        } else if (taskType == CommandType.DONE) {
+        } else if (commandType == CommandType.DONE) {
             taskList.markTaskAsDone(taskToBeEdited);
             System.out.println("Noice! I've marked this task as done:"
                     + task

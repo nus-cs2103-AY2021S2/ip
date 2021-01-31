@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
  */
 public class TaskList implements Serializable {
     /** List of tasks created by user */
-    private List<Task> taskList;
+    private List<Task> tasks;
 
     /**
      * Creates a TaskList object.
-     * @param taskList List of tasks.
+     * @param tasks List of tasks.
      */
-    public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -25,7 +25,7 @@ public class TaskList implements Serializable {
      * @return Task requested by user
      */
     public Task accessTask(int taskNumber) {
-        return taskList.get(taskNumber);
+        return tasks.get(taskNumber);
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskList implements Serializable {
      * @param task Task to be added.
      */
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList implements Serializable {
      * @param taskNumber Position of task in the list.
      */
     public void markTaskAsDone(int taskNumber) {
-        taskList.get(taskNumber).markAsDone();
+        tasks.get(taskNumber).markAsDone();
     }
 
     /**
@@ -49,7 +49,7 @@ public class TaskList implements Serializable {
      * @param taskNumber Position of task in list.
      */
     public void deleteTask(int taskNumber) {
-        taskList.remove(taskNumber);
+        tasks.remove(taskNumber);
     }
 
     /**
@@ -57,7 +57,7 @@ public class TaskList implements Serializable {
      * @return The number of tasks in the list
      */
     public int length() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -67,17 +67,17 @@ public class TaskList implements Serializable {
      */
     public TaskList filterByTask(String type) {
         if (type.equals("ToDo")) {
-            return new TaskList(taskList
+            return new TaskList(tasks
                     .stream()
                     .filter(p -> p instanceof ToDo)
                     .collect(Collectors.toList()));
         } else if (type.equals("Deadline")) {
-            return new TaskList(taskList
+            return new TaskList(tasks
                     .stream()
                     .filter(p -> p instanceof Deadline)
                     .collect(Collectors.toList()));
         } else if (type.equals("Event")) {
-            return new TaskList(taskList
+            return new TaskList(tasks
                     .stream()
                     .filter(p -> p instanceof Event)
                     .collect(Collectors.toList()));
@@ -93,10 +93,10 @@ public class TaskList implements Serializable {
     @Override
     public String toString() {
         StringBuilder list = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             String rank = String.valueOf(i + 1);
-            list.append(rank).append(".").append(taskList.get(i));
-            if (i != taskList.size() - 1) {
+            list.append(rank).append(".").append(tasks.get(i));
+            if (i != tasks.size() - 1) {
                 list.append("\n");
             }
         }

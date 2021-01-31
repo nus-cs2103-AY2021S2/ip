@@ -18,7 +18,7 @@ public class AddCommand extends Command{
      */
     public AddCommand(String[] details) {
         super(details);
-        taskType = CommandType.valueOf(details[0]);
+        commandType = CommandType.valueOf(details[0]);
     }
 
     /**
@@ -26,7 +26,7 @@ public class AddCommand extends Command{
      * @return Task requested by the user.
      */
     public Task makeTask() {
-        switch(taskType) {
+        switch(commandType) {
         case TODO:
             return new ToDo(details[1]);
         case EVENT:
