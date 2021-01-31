@@ -41,4 +41,9 @@ public class Duke {
     public static Duke init() {
         return new Duke("./data/tasks.txt");
     }
+
+    public static String getWelcomeMessage() {
+        return "Hello! This is Duke\n"
+                + "What can I do for you?";
+    }
 }
