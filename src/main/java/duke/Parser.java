@@ -10,7 +10,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 public class Parser {
-
+    
     /**
      * Returns a Command with enum type by parsing the string of command that the user inputs.
      *

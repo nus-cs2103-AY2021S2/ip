@@ -1,10 +1,11 @@
 package duke;
 
+import duke.task.Task;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
-import duke.task.Task;
+import duke.ui.TextUi;
 
 public class Momo {
 
@@ -22,71 +23,83 @@ public class Momo {
         try {
             tasks = new TaskList(storage.load());
         } catch (ParseException | IOException e) {
-            Ui.showLoadingError();
+            //String s = Ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
+
     /**
-     * Switches on Momo.
+     * Get responses from Momo using the input of users
+     *
+     * @param input input of user
+     * @return answer of Momo
      */
-    public void run() {
-        Ui.showInitUi();
-        String input;
-        Scanner sc = new Scanner(System.in);
-        do {
-            input = sc.next();
+    public String getResponse(String input) {
+        try {
+            int endOfFirstWord = input.indexOf(' ');
+            String restInput = input.substring(endOfFirstWord);
+        } catch (StringIndexOutOfBoundsException e) {
             try {
                 Command command = Parser.parseCommand(input);
-                switch (command) {
-                case BYE:
-                    Ui.showExitUi();
-                    return;
-                case LIST:
-                    Ui.showList(this.tasks);
-                    break;
-                case DONE:
-                    int i = sc.nextInt();
-                    try {
-                        Ui.showSuccessfulMark(tasks.mark(i));
-                    } catch (IndexOutOfBoundsException e) {
-                        Ui.showIndexOutOfBoundsError(tasks);
-                    }
-                    break;
-                case DELETE:
-                    int j = sc.nextInt();
-                    try {
-                        Task taskToBeDeleted = tasks.delete(j);
-                        Ui.showSuccessfulDelete(tasks, taskToBeDeleted);
-                    } catch (IndexOutOfBoundsException e) {
-                        Ui.showIndexOutOfBoundsError(tasks);
-                    }
-                    storage.save(tasks);
-                    break;
-                case FIND:
-                    String keyword = sc.next();
-                    Ui.showMatchingResult(tasks.find(keyword));
-                    break;
-                default:
-                    String nextInput = sc.nextLine();
-                    try {
-                        Task taskToBeAdded = Parser.parseDescription(command, nextInput);
-                        tasks.add(taskToBeAdded);
-                        Ui.showSuccessfulAdd(tasks, taskToBeAdded);
-                        storage.save(tasks);
-                    } catch (ParseException e) {
-                        Ui.formatInChatBox(e.getMsgDes());
-                    } catch (DateTimeParseException e) {
-                        Ui.showDateParseError();
-                    }
-                }
-            } catch (IllegalArgumentException e) {
-                Ui.showGeneralError();
+            } catch (IllegalArgumentException e1) {
+                return TextUi.showGeneralError();
             }
-        } while (true);
+            Command command = Parser.parseCommand(input);
+            switch (command) {
+            case BYE:
+                return TextUi.showExitUi();
+            case LIST:
+                return TextUi.showList(this.tasks);
+            default:
+                return TextUi.showGeneralError();
+            }
+        }
+        try {
+            int endOfFirstWord = input.indexOf(' ');
+            String commandInput = input.substring(0, endOfFirstWord);
+            String restInput = input.substring(endOfFirstWord + 1);
+            System.out.println(restInput);
+            Command command = Parser.parseCommand(commandInput);
+            switch (command) {
+            case DONE:
+                int i = Integer.parseInt(restInput);
+                System.out.println(i);
+                try {
+                    return TextUi.showSuccessfulMark(tasks.mark(i));
+                } catch (IndexOutOfBoundsException e) {
+                    return TextUi.showIndexOutOfBoundsError(tasks);
+                }
+            case DELETE:
+                int j = Integer.parseInt(restInput);
+                try {
+                    Task taskToBeDeleted = tasks.delete(j);
+                    storage.save(tasks);
+                    return TextUi.showSuccessfulDelete(tasks, taskToBeDeleted);
+                } catch (IndexOutOfBoundsException e) {
+                    return TextUi.showIndexOutOfBoundsError(tasks);
+                }
+            case FIND:
+                return TextUi.showMatchingResult(tasks.find(restInput));
+            default:
+                try {
+                    Task taskToBeAdded = Parser.parseDescription(command, restInput);
+                    tasks.add(taskToBeAdded);
+                    storage.save(tasks);
+                    return TextUi.showSuccessfulAdd(tasks, taskToBeAdded);
+                } catch (ParseException e) {
+                    return TextUi.formatInChatBox(e.getMsgDes());
+                } catch (DateTimeParseException e) {
+                    return TextUi.showDateParseError();
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            return TextUi.showGeneralError();
+        }
     }
 
     public static void main(String[] args) {
-        new Momo("data/tasks.txt").run();
+        Momo momo = new Momo("data/tasks.txt");
+        System.out.println(momo.getResponse("done 2\n"));
     }
 }

@@ -1,13 +1,15 @@
-package duke;
+package duke.ui;
 
 import java.util.ArrayList;
 
+import duke.ParseException;
+import duke.TaskList;
 import duke.task.Task;
 
 /**
  * Used by Momo to read or write to the user.
  */
-public class Ui {
+public class TextUi {
 
     private static final StringBuffer boundOfChatBox = new StringBuffer();
 
@@ -15,10 +17,8 @@ public class Ui {
      * Defines the appearance of chat box.
      */
     public static void setBoundOfChatBox() {
-        boundOfChatBox.append('\n');
         int lenOfChatBox = 50;
         boundOfChatBox.append("-".repeat(lenOfChatBox));
-        boundOfChatBox.append('\n');
     }
 
     /**
@@ -26,31 +26,31 @@ public class Ui {
      *
      * @param s contents in the chat box
      */
-    public static void formatInChatBox(String s) {
-        System.out.println(boundOfChatBox + s + boundOfChatBox);
+    public static String formatInChatBox(String s) {
+        return boundOfChatBox + "\n" + s + "\n" + boundOfChatBox;
     }
 
     /**
      * Displays when the Momo inits and starts to run.
+     * @return
      */
-    public static void showInitUi() {
+    public static String showInitUi() {
         setBoundOfChatBox();
-        String logo = "    __      __      ____ \n"
-                + "   /  \\    /  \\    / __ \\\n"
-                + "  / /\\ \\  / /\\ \\  | |  | |\n"
-                + " / /  \\ \\/ /  \\ \\ | |__| |\n"
-                + "/_/    \\__/    \\_\\ \\____/";
+        String logo = "    __       __        ___ \n"
+                + "   /  \\     /  \\      / __ \\\n"
+                + "  / /\\ \\  / /\\ \\    | |   | |\n"
+                + " / /  \\ \\/ /  \\ \\   | |__| |\n"
+                + "/_/    \\_/     \\_\\ \\____/";
         String greeting = "Hello! I'm Momo\nWhat can I do for you?";
-        formatInChatBox(logo);
-        formatInChatBox(greeting + '\n');
+        return formatInChatBox('\n' + greeting + '\n');
     }
 
     /**
      * Displays when Momo receives "bye" command and exits.
      */
-    public static void showExitUi() {
+    public static String showExitUi() {
         String goodbye = "Bye. Hope to see you again soon!\n";
-        formatInChatBox(goodbye);
+        return formatInChatBox(goodbye);
     }
 
     /**
@@ -58,19 +58,18 @@ public class Ui {
      *
      * @param taskList the list of tasks.
      */
-    public static void showList(TaskList taskList) {
+    public static String showList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         int n = tasks.size();
         if (n == 0) {
-            formatInChatBox("There is no task\n");
-            return;
+            return formatInChatBox("There is no task\n");
         }
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < n; i++) {
             buf.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         String res = new String(buf);
-        formatInChatBox("Here are the tasks in your list:\n" + res);
+        return formatInChatBox("Here are the tasks in your list:\n" + res);
     }
 
     /**
@@ -78,19 +77,18 @@ public class Ui {
      *
      * @param taskList the list of tasks.
      */
-    public static void showMatchingResult(TaskList taskList) {
+    public static String showMatchingResult(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         int n = tasks.size();
         if (n == 0) {
-            formatInChatBox("There is no matching task\n");
-            return;
+            return formatInChatBox("There is no matching task\n");
         }
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < n; i++) {
             buf.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         String res = new String(buf);
-        formatInChatBox("Here are the matching tasks in your list:\n" + res);
+        return formatInChatBox("Here are the matching tasks in your list:\n" + res);
     }
 
     /**
@@ -99,8 +97,8 @@ public class Ui {
      * @param taskList the list of the tasks.
      * @param task the task to be added.
      */
-    public static void showSuccessfulAdd(TaskList taskList, Task task) {
-        formatInChatBox("Got it. I've added this task:" + '\n'
+    public static String showSuccessfulAdd(TaskList taskList, Task task) {
+        return formatInChatBox("Got it. I've added this task:" + '\n'
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size() + " tasks in the list.\n");
     }
@@ -110,8 +108,8 @@ public class Ui {
      *
      * @param task the task that is done.
      */
-    public static void showSuccessfulMark(Task task) {
-        formatInChatBox("Nice! I've marked this duke.task as done:\n" + task + "\n");
+    public static String showSuccessfulMark(Task task) {
+        return formatInChatBox("Nice! I've marked this duke.task as done:\n" + task + "\n");
     }
 
     /**
@@ -120,8 +118,8 @@ public class Ui {
      * @param taskList the list of tasks.
      * @param task the task that is deleted.
      */
-    public static void showSuccessfulDelete(TaskList taskList, Task task) {
-        formatInChatBox("Got it. I've removed this duke.task:" + '\n'
+    public static String showSuccessfulDelete(TaskList taskList, Task task) {
+        return formatInChatBox("Got it. I've removed this duke.task:" + '\n'
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size() + " tasks in the list.\n");
     }
@@ -129,26 +127,26 @@ public class Ui {
     /**
      * Informs the user there is error when parsing the date of tasks.
      */
-    public static void showDateParseError() {
-        formatInChatBox("OOPS!!! Please use '/by YYYY-MM-DD' after description.\n");
+    public static String showDateParseError() {
+        return formatInChatBox("OOPS!!! Please use '/by YYYY-MM-DD' after description.\n");
     }
 
     /**
      * Informs the user there is error that Momo cannot understand.
      */
-    public static void showGeneralError() {
+    public static String showGeneralError() {
         try {
             throw new ParseException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         } catch (ParseException e) {
-            formatInChatBox(e.getMsgDes());
+            return formatInChatBox(e.getMsgDes());
         }
     }
 
     /**
      * Informs the user that the loading is unsuccessful.
      */
-    public static void showLoadingError() {
-        formatInChatBox("OOPS!!! Something wrong happens when loading.\n");
+    public static String showLoadingError() {
+        return formatInChatBox("OOPS!!! Something wrong happens when loading.\n");
     }
 
     /**
@@ -156,9 +154,9 @@ public class Ui {
      *
      * @param taskList the list of task.
      */
-    public static void showIndexOutOfBoundsError(TaskList taskList) {
-        formatInChatBox("OOPS! Now you have only "
+    public static String showIndexOutOfBoundsError(TaskList taskList) {
+        return formatInChatBox("OOPS! Now you have only "
                 + taskList.getTasks().size()
-                + "tasks, please mark/delete the added tasks.");
+                + " tasks, please mark/delete the added tasks.");
     }
 }
