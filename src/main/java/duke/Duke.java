@@ -1,14 +1,14 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.TaskManager;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Task;
+import duke.task.TaskManager;
+
 public class Duke {
-    protected static ArrayList<Task> tasks;
     public static final String LINE = (char) 9 + "--------------------------------------------------------------------";
+    protected static ArrayList<Task> tasks;
 
     /**
      * Takes user inputted tasks and passes them to the TaskManager.
@@ -26,7 +26,7 @@ public class Duke {
         System.out.println("Hello! How can I help you?");
 
         Scanner scanner = new Scanner(System.in);
-        tasks  = new ArrayList<>();
+        tasks = new ArrayList<>();
 
         while (scanner.hasNext()) {
             String input = scanner.nextLine();

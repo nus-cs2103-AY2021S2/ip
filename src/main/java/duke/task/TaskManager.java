@@ -1,12 +1,12 @@
 package duke.task;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.Duke;
 import duke.datetime.DateTimeConverter;
 import duke.error.ErrorChecker;
 import duke.file.FileSaver;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class TaskManager {
     protected ArrayList<Task> tasks;
