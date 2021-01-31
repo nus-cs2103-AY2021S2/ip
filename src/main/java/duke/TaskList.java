@@ -7,7 +7,10 @@
  * @author E0424695
  */
 
-package duke;
+package duke.task;
+
+import duke.ui.Ui;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 import java.util.List;

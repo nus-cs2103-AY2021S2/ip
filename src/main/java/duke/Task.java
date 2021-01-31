@@ -8,7 +8,7 @@
  * @author E0424695
  */
 
-package duke;
+package duke.task;
 
 public class Task {
     protected String description;

@@ -1,5 +1,10 @@
 package duke;
 
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.fileSaver.FileSaver;
+import duke.task.TaskList;
+
 public class Duke {
     private TaskList task;
     private Ui ui;
@@ -14,7 +19,7 @@ public class Duke {
         ui.greeting();
         try {
             fs.load(task);
-        } catch (Exception e) {
+        } catch (DukeException e) {
             //TODO: handle exception
             ui.printErrorMessage(e.getMessage());
         }

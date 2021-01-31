@@ -12,8 +12,12 @@
  * @author E0424695
  */
 
-package duke;
+package duke.ui;
 
+import duke.task.*;
+import duke.exception.DukeException;
+import duke.command.Command;
+import duke.fileSaver.FileSaver;
 
 import java.util.Scanner;
 import java.util.ArrayList;
