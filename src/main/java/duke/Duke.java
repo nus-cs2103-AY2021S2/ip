@@ -1,7 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 
 /**
- * the agent program to run Duke
+ * the agent program to run duke.Duke
  */
 public class Duke {
     private static final String FILE_PATH = "./data/duke.txt";

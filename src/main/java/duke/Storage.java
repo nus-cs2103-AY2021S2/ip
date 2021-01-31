@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -64,9 +72,9 @@ public class Storage {
     }
 
     /**
-     * Parses the task string to a Task object.
+     * Parses the task string to a duke.task.Task object.
      * @param str The string which represents a single task.
-     * @return A Task object which represents a task as the string.
+     * @return A duke.task.Task object which represents a task as the string.
      * @throws DukeException Exception if there is error when parsing the task string.
      */
     public Task parseTask(String str) throws DukeException {

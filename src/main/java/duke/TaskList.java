@@ -1,3 +1,7 @@
+package duke;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -52,7 +56,7 @@ public class TaskList {
 
     /**
      * Prints the task list using ui.
-     * @param ui An Ui object which deals with interactions with the user.
+     * @param ui An duke.Ui object which deals with interactions with the user.
      */
     public void printTasks(Ui ui) {
         for (int i = 0; i < getNumOfTasks(); i++) {

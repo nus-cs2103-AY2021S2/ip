@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * exception in the case when the arguments of todo is empty
  */

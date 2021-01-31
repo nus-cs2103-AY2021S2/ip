@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * exception in the case when the command from user is unknown
  */

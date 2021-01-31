@@ -1,3 +1,14 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.EmptyTodoDescriptionException;
+import duke.exception.UnknownCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +20,7 @@ public class Parser {
 
     /**
      * @param fullCommand the user command
-     * @return a Command object which encapsulates the information of a parsed user command
+     * @return a duke.command.Command object which encapsulates the information of a parsed user command
      * @throws DukeException exception when there is an parsing error
      */
     public Command parseCommand(String fullCommand) throws DukeException {
@@ -38,7 +49,7 @@ public class Parser {
             } catch (DukeException e) {
                 throw e;
             } catch (Exception e) {
-                throw new DukeException("Command parsing error!");
+                throw new DukeException("duke.command.Command parsing error!");
             }
         }
     }
@@ -46,7 +57,7 @@ public class Parser {
     /**
      * @param taskType the type of the task
      * @param taskStr part of the user command which represents a task
-     * @return a Task object in the user command
+     * @return a duke.task.Task object in the user command
      * @throws DukeException exception when there is a task parsing error
      */
     private Task parseTask(String taskType, String taskStr) throws DukeException {
@@ -82,7 +93,7 @@ public class Parser {
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            throw new DukeException("Task parsing error!");
+            throw new DukeException("duke.task.Task parsing error!");
         }
     }
 }

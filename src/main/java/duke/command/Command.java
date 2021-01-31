@@ -1,4 +1,11 @@
-abstract class Command {
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
+public abstract class Command {
     private String fullCommand;
 
     public Command(String fullCommand) {
