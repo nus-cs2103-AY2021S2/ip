@@ -1,8 +1,8 @@
 package lihua.tasks;
 
-import org.json.simple.JSONObject;
-
 import java.time.LocalDate;
+
+import org.json.simple.JSONObject;
 
 /**
  * Represent a task in the task list
@@ -49,7 +49,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String doneMark = isDone? "X": " ";
+        String doneMark = isDone ? "X" : " ";
         return String.format("[%s] %s", doneMark, name);
     }
 

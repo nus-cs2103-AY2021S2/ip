@@ -1,14 +1,14 @@
 package lihua.commands;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ExitCommandTest {
     @Test
     public void commandDescription_noGivenInput_descriptionMatches() {
-        String EXPECTED = "bye: Exit the application. Data will be auto-saved.\n"
+        String expected = "bye: Exit the application. Data will be auto-saved.\n"
                 + "---- Example: bye";
-        assertEquals(EXPECTED, ExitCommand.MESSAGE_USAGE);
+        assertEquals(expected, ExitCommand.MESSAGE_USAGE);
     }
 }

@@ -1,9 +1,9 @@
 package lihua.ui;
 
+import java.util.Scanner;
+
 import lihua.commands.CommandResult;
 import lihua.commons.Messages;
-
-import java.util.Scanner;
 
 public class Ui {
     /** Scanner object to read user input string */

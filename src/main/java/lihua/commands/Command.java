@@ -6,7 +6,7 @@ import lihua.tasks.Tasks;
  * Parent class for all commands. This class should be abstract since
  * it is meaningless to initialize instances of 'Command' only.
  */
-abstract public class Command {
+public abstract class Command {
     /** The tasks list to operate on */
     protected Tasks tasks;
     /** The target index of the task list, if applicable */
@@ -41,5 +41,5 @@ abstract public class Command {
      *
      * @return A CommandResult Object containing feedback to user.
      */
-    abstract public CommandResult execute();
+    public abstract CommandResult execute();
 }
