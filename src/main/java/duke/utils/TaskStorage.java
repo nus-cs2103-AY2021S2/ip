@@ -57,24 +57,24 @@ public class TaskStorage {
 			if (!directory.exists()) {
 				System.out.println(Ui.NO_DIRECTORY);
 				directory.mkdir();
-				Ui.SLEEP();
+				Ui.sleep();
 			}
 
 			File file = new File(FILEPATH);
 			if (!file.exists()) {
 				System.out.println(Ui.NO_FILE);
 				file.createNewFile();
-				Ui.SLEEP();
+				Ui.sleep();
 			}
 
 			if (file.length() == 0) {
-				Ui.SLEEP();
+				Ui.sleep();
 				System.out.println(Ui.EMPTY_FILE);
 				return Ui.EMPTY_FILE;
 			}
 
 			restoreTask(file);
-			Ui.DONELOADING();
+			Ui.displayTask();
 		} catch (IOException e) {
 			System.out.println("IO error!: " + e.getMessage());
 		}

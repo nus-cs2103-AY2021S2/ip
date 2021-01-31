@@ -1,18 +1,20 @@
 package duke.command;
 
 
-/**
- * Sub-class of Command that represents and execute the "list" instruction of user.
- */
 
 import duke.task.TaskList;
 
-
-public class ListCommand extends Command{
-	public ListCommand() {
-		super("", "", "", command -> {
-			TaskList.listing();
-			return false;
-		});
-	}
+/**
+ * Sub-class of Command that represents and execute the "list" instruction of user.
+ */
+public class ListCommand extends Command {
+    /**
+     * Create a ListCommand object to carry out listing of tasks.
+     */
+    public ListCommand() {
+        super("", "", "", command -> {
+            TaskList.list();
+            return false;
+        });
+    }
 }

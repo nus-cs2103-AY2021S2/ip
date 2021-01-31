@@ -3,15 +3,14 @@ package duke.task;
 /**
  * sub-class of Task to represents a task with deadline.
  */
-public class Deadlines extends Task{
-
+public class Deadlines extends Task {
 
 
     /**
      * create a deadline task object with given task name and given dates/comments.
      *
      * @param taskName String representation of the name of the task.
-     * @param date String representation of the comments/dates.
+     * @param date     String representation of the comments/dates.
      */
     public Deadlines(String taskName, String date) {
         super(taskName, date);
@@ -29,6 +28,6 @@ public class Deadlines extends Task{
     @Override
     public String toString() {
         return String.format("[D][%s] %d. %s ( %s )", super.getDoneStatus(), super.getIndex(),
-                super.getTaskName(), super.getDate());
+            super.getTaskName(), super.getDate());
     }
 }
