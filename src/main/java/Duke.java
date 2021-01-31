@@ -14,7 +14,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         this.taskList = new TaskList(storage.initialiseStorage(file));
         this.parser = new Parser(this.taskList, storage);
-        this.ui = new Ui(sc,parser);
+        this.ui = new Ui(sc, parser);
 
     }
 
