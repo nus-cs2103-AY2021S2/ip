@@ -1,4 +1,4 @@
-package test;
+package duke;
 
 import duke.TaskList;
 import duke.TaskStorage;
@@ -8,7 +8,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCommandTest {
 
