@@ -1,12 +1,14 @@
+package checklst;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
-import parser.Parser;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import checklst.parser.Parser;
+import checklst.storage.Storage;
+import checklst.task.TaskList;
+import checklst.ui.Ui;
 
 public class Checklst {
     

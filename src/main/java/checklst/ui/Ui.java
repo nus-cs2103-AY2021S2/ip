@@ -1,4 +1,4 @@
-package ui;
+package checklst.ui;
 
 import java.util.Scanner;
 

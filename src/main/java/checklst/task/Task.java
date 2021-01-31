@@ -1,4 +1,4 @@
-package task;
+package checklst.task;
 
 public abstract class Task {
     

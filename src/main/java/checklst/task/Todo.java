@@ -1,6 +1,6 @@
-package task;
+package checklst.task;
 
-import exception.ChecklstException;
+import checklst.exception.ChecklstException;
 
 public class Todo extends Task {
 

@@ -1,4 +1,4 @@
-package exception;
+package checklst.exception;
 
 public class ChecklstException extends Exception {
     

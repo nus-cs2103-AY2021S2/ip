@@ -1,4 +1,4 @@
-package task;
+package checklst.task;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

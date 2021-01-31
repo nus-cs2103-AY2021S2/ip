@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "checklst.Checklst"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "checklst"
     archiveClassifier = null
 }
 

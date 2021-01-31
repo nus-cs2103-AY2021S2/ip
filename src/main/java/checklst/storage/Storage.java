@@ -1,11 +1,11 @@
-package storage;
+package checklst.storage;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import exception.ChecklstException;
+import checklst.exception.ChecklstException;
 
 public class Storage {
     

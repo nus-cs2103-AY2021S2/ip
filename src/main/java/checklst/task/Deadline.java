@@ -1,10 +1,10 @@
-package task;
+package checklst.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import exception.ChecklstException;
+import checklst.exception.ChecklstException;
 
 public class Deadline extends Task {
     

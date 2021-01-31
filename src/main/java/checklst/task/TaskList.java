@@ -1,8 +1,8 @@
-package task;
+package checklst.task;
 
 import java.util.ArrayList;
 
-import exception.ChecklstException;
+import checklst.exception.ChecklstException;
 
 public class TaskList {
     

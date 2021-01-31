@@ -1,13 +1,13 @@
-package parser;
+package checklst.parser;
 
-import task.Event;
-import exception.ChecklstException;
-import storage.Storage;
-import task.Deadline;
-import task.Task;
-import task.TaskList;
-import task.Todo;
-import ui.Ui;
+import checklst.task.Event;
+import checklst.exception.ChecklstException;
+import checklst.storage.Storage;
+import checklst.task.Deadline;
+import checklst.task.Task;
+import checklst.task.TaskList;
+import checklst.task.Todo;
+import checklst.ui.Ui;
 
 public class Parser {
     
