@@ -3,19 +3,33 @@ import java.time.LocalDate;
 import duke.dukeException.DukeException;
 
 public class Event extends Task{
+    /** Event time */
     protected LocalDate at;
 
+    /**
+     * Class constructor specifying event name and duration.
+     */
     public Event(String name, LocalDate at) {
         super(name);
         this.at = at;
     }
 
+    /**
+     * Class constructor specifying event name, duration and status.
+     */
     public Event(String name, LocalDate at, boolean done) {
         super(name);
         this.at = at;
         this.done = done;
     }
 
+    /**
+     * Adds a event to taskList.
+     *
+     * @param count  the current count of tasks in the taskList.
+     * @throws DukeException  If an input or output
+     *                      exception occurred
+     */
     @Override
     public void addTask(int count) throws DukeException {
         if(this.name.equals("")) {
@@ -25,6 +39,11 @@ public class Event extends Task{
         }
     }
 
+    /**
+     * Overrides toString method.
+     *
+     * @return the string representation of an event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.getMonth() + " " + at.getDayOfMonth() + " " + at.getYear() + ")";

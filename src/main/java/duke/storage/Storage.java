@@ -1,5 +1,4 @@
 package duke.storage;
-
 import duke.dukeException.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -12,12 +11,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+    /** The path of the file storing all tasks */
     public String filePath;
 
+    /**
+     * Class constructor.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads data from a given file if it exists, otherwise, creates a new file.
+     * Transforms data to tasks.
+     *
+     * @return an arraylist of tasks.
+     * @throws DukeException and IOException  If an input or output
+     *                      exception occurred
+     */
     public ArrayList<Task> load() throws DukeException, IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         File myObj = new File("data/duke.txt");
@@ -61,7 +72,6 @@ public class Storage {
         } else {
             myObj.createNewFile();
         }
-
         return tasks;
     }
 }

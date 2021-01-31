@@ -4,16 +4,22 @@ import duke.task.*;
 import duke.dukeException.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-
 import java.io.IOException;
 
-
 public class Duke {
+    /** Data related object */
     private Storage storage;
+    /** All tasks */
     private TaskList tasks;
+    /** User interface */
     private Ui ui;
 
+    /**
+     * Class constructor.
+     * Initialises the user interface and data storage.
+     *
+     * @param filePath  the filePath of the data file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +31,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Calls showWelcome to show welcome message.
+     * Then gets command from user and executes the command.
+     * Displays possible error message.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

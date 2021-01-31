@@ -1,5 +1,4 @@
 package duke.command;
-
 import duke.dukeException.DukeException;
 import duke.task.*;
 import java.io.*;
@@ -7,12 +6,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Command {
+    /** The input command by user */
     public String command;
 
+    /**
+     * Class constructor.
+     */
     public Command(String command) {
         this.command = command;
     }
 
+
+    /**
+     * Processes tasks according to the command.
+     *
+     * @param tasks  the tasks before execution.
+     * @throws IOException  If an input or output
+     *                      exception occurred
+     */
     public void execute(TaskList tasks) throws IOException {
         ArrayList<Task> tList = tasks.tasks;
         if(command.equals("list")) {
@@ -164,6 +175,11 @@ public class Command {
         }
     }
 
+    /**
+     * Decides if this is the end of program.
+     *
+     * @return true if command is bye.
+     */
     public boolean isExit() {
         return (command.equals("bye"));
     }

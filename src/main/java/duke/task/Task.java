@@ -1,20 +1,34 @@
 package duke.task;
-
 import duke.dukeException.DukeException;
 
 public class Task {
+    /** Status of the task */
     public boolean done;
+    /** Name of the task */
     public String name;
 
+    /**
+     * Class constructor.
+     */
     public Task(String name) {
         this.done = false;
         this.name = name;
     }
 
+    /**
+     * Sets the status of the current task to completed.
+     */
     public void markAsDone() {
         this.done = true;
     }
 
+    /**
+     * Adds a task to taskList.
+     *
+     * @param count  the current count of tasks in the taskList.
+     * @throws DukeException  If an input or output
+     *                      exception occurred
+     */
     public void addTask(int count) throws DukeException {
         if(this.name.equals("todo")) {
             throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -31,6 +45,11 @@ public class Task {
 
     }
 
+    /**
+     * Overrides toString method.
+     *
+     * @return the string representation of a task.
+     */
     @Override
     public String toString() {
         String outString;
