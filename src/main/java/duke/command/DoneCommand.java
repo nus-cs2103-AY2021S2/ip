@@ -1,3 +1,5 @@
+package duke;
+
 class DoneCommand implements ICommand {
     private TaskList tasks;
 

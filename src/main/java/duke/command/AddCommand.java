@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.AbstractTaskFactory;
+import duke.task.Task;
+
 class AddCommand implements ICommand {
     private TaskList tasks;
     private AbstractTaskFactory taskFactory;

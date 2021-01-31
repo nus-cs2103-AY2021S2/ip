@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Interface for Command.
  *

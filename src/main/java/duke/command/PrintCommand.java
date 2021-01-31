@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Command to print given string.
  */

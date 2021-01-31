@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 /**
  * Wrapper Command that writes all tasks from taskList to file

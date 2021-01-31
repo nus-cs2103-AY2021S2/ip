@@ -1,3 +1,5 @@
+package duke;
+
 class EventFactory extends AbstractTaskFactory{
     @Override
     protected Task createTask(String parameters) throws IllegalArgumentException {

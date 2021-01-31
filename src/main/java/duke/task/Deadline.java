@@ -1,10 +1,12 @@
+package duke;
+
 class Deadline extends Task{
     private String deadline;
 
     /**
-     * Deadline constructor.
+     * duke.Deadline constructor.
      *
-     * @param content Task description
+     * @param content duke.Task description
      * @param deadline The deadline task has to be completed by.
      */
     Deadline(String content,String deadline){

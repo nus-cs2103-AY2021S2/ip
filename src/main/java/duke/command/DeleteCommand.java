@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 class DeleteCommand implements ICommand{
     TaskList tasks;
 

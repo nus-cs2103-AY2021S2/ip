@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 public class FindCommand implements ICommand{
     TaskList tasks;
 

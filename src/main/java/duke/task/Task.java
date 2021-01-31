@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -53,7 +55,7 @@ abstract class Task {
     }
 
     /**
-     * Set Task to be done.
+     * Set duke.Task to be done.
      *
      */
     protected void setDone() {
@@ -63,7 +65,7 @@ abstract class Task {
     /**
      * Gets the task description.
      *
-     * @return Description of Task
+     * @return Description of duke.Task
      */
     protected String getDesc() {
         return this.content;

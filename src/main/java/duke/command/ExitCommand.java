@@ -1,3 +1,5 @@
+package duke;
+
 class ExitCommand implements ICommand {
     private TaskList tasks;
 

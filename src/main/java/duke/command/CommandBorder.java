@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Place borders for each command given.
  */

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Abstract class for the generation of Tasks.
  */
@@ -14,7 +16,7 @@ abstract class AbstractTaskFactory {
      * Generate Tasks depending on the type needed.
      *
      * @param parameters string representation of the task information.
-     * @return Task Task generated.
+     * @return duke.Task duke.Task generated.
      */
     protected Task getTask(String parameters) {
         return this.createTask(parameters);
