@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
     
-    protected final String dueDate;
+    protected final LocalDate dueDate;
 
     /**
      * Factory method to create a new Deadline.
@@ -13,15 +17,22 @@ public class Deadline extends Task {
             throw new ChecklstException("Inproper Deadline format used! Please use { name } /by { deadline }");
         }
 
-        return new Deadline(splitInput[0], splitInput[1]);
+        LocalDate dueDate;
+        try {
+            dueDate = LocalDate.parse(splitInput[1]);
+        } catch (DateTimeParseException e) {
+            throw new ChecklstException("Incorrect DateTime format! Please use YYYY-MM-DD");
+        }
+
+        return new Deadline(splitInput[0], dueDate);
     }
 
-    protected Deadline(String name, String dueDate) {
+    protected Deadline(String name, LocalDate dueDate) {
         super(name);
         this.dueDate = dueDate;
     }
 
-    protected Deadline(String name, boolean completed, String dueDate) {
+    protected Deadline(String name, boolean completed, LocalDate dueDate) {
         super(name, completed);
         this.dueDate = dueDate;
     }
@@ -33,7 +44,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dueDate + ")";
+        return "[D]" + super.toString() + " (by: "
+            + this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
 }
