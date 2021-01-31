@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 /**
  * The Task class represents a single task created by the

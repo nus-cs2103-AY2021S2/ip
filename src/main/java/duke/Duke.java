@@ -1,10 +1,10 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.Command;
-import main.java.duke.subfiles.Parser;
-import main.java.duke.subfiles.Storage;
-import main.java.duke.subfiles.TaskList;
-import main.java.duke.subfiles.Ui;
+import duke.command.Command;
+import duke.subfiles.Parser;
+import duke.subfiles.Storage;
+import duke.subfiles.TaskList;
+import duke.subfiles.Ui;
 
 /**
  * The Duke program is an interactive application which
@@ -43,10 +43,14 @@ public class Duke {
         storage.loadData(taskList);
         while (!isExit) {
             String s = ui.readCommand();
+            ui.showDots();
             Command c = Parser.parse(s);
             c.execute(taskList, ui);
             isExit = c.isExit();
-            ui.showLine();
+
+            if (!isExit) {
+                ui.showLine();
+            }
         }
         storage.saveData(taskList);
         ui.bye();

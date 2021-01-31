@@ -1,13 +1,13 @@
-import main.java.duke.command.AddCommand;
-import main.java.duke.command.DeleteCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.command.ExitCommand;
-import main.java.duke.command.PrintCommand;
-import main.java.duke.subfiles.Parser;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.PrintCommand;
+import duke.subfiles.Parser;
 
 public class ParseTest {
     @Test

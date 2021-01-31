@@ -1,4 +1,4 @@
-package main.java.duke.exceptions;
+package duke.exceptions;
 
 /**
  * The InvalidInputException class is an exception thrown

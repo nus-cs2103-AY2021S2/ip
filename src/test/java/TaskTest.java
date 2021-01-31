@@ -1,15 +1,15 @@
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
-
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class TaskTest {
     @Test

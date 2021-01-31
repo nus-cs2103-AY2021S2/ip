@@ -1,12 +1,12 @@
-package main.java.duke.subfiles;
+package duke.subfiles;
 
-import main.java.duke.command.AddCommand;
-import main.java.duke.command.Command;
-import main.java.duke.command.DeleteCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.command.ExitCommand;
-import main.java.duke.command.FindCommand;
-import main.java.duke.command.PrintCommand;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.PrintCommand;
 
 /**
  * The Parser class parses the user input as a Command.

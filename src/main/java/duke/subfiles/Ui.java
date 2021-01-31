@@ -1,4 +1,4 @@
-package main.java.duke.subfiles;
+package duke.subfiles;
 
 import java.util.Scanner;
 
@@ -27,6 +27,7 @@ public class Ui {
     public void greet() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+        showLine();
     }
 
     /**
@@ -43,8 +44,7 @@ public class Ui {
      * @return The user's input formatted as a String object.
      */
     public String readCommand() {
-        String s = sc.nextLine();
-        return s;
+        return sc.nextLine();
     }
 
     /**
@@ -52,6 +52,13 @@ public class Ui {
      */
     public void showLine() {
         System.out.println("__________");
+    }
+
+    /**
+     * Displays a horizontal line of dots on the GUI.
+     */
+    public void showDots() {
+        System.out.println("..........");
     }
 
     /**

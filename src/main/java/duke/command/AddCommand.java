@@ -1,12 +1,11 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.exceptions.DateFormatException;
-import main.java.duke.exceptions.EmptyDescriptionException;
-import main.java.duke.exceptions.EmptyDateException;
-import main.java.duke.exceptions.InvalidInputException;
-
-import main.java.duke.subfiles.TaskList;
-import main.java.duke.subfiles.Ui;
+import duke.exceptions.DateFormatException;
+import duke.exceptions.EmptyDateException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.InvalidInputException;
+import duke.subfiles.TaskList;
+import duke.subfiles.Ui;
 
 /**
  * The AddCommand class is a command whose execution triggers the

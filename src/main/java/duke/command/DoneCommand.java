@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.exceptions.InvalidInputException;
-import main.java.duke.exceptions.ListOutOfBoundsException;
-import main.java.duke.subfiles.TaskList;
-import main.java.duke.subfiles.Ui;
+import duke.exceptions.InvalidInputException;
+import duke.exceptions.ListOutOfBoundsException;
+import duke.subfiles.TaskList;
+import duke.subfiles.Ui;
 
 /**
  * The DoneCommand class is a command whose execution triggers the

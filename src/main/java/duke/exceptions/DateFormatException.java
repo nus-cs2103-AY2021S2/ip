@@ -1,4 +1,4 @@
-package main.java.duke.exceptions;
+package duke.exceptions;
 
 /**
  * The DateFormatException class is an exception thrown

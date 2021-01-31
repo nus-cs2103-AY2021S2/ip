@@ -1,15 +1,17 @@
-package main.java.duke.subfiles;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke.subfiles;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import main.java.duke.exceptions.DateFormatException;
-import main.java.duke.task.*;
+import duke.exceptions.DateFormatException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * The Storage class manages the loading and storing of tasks.

@@ -1,7 +1,7 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.subfiles.TaskList;
-import main.java.duke.subfiles.Ui;
+import duke.subfiles.TaskList;
+import duke.subfiles.Ui;
 
 /**
  * The FindCommand class is a command whose execution triggers the
