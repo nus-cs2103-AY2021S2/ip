@@ -38,7 +38,7 @@ public class Deadline extends Task {
      */
     @Override
     public String fileString() {
-        int statusNum = this.isDone ? 1 : 0;
-        return "D | " + statusNum + " | " + this.description + " | " + this.by;
+        int statusNum = this.getStatus() ? 1 : 0;
+        return "D | " + statusNum + " | " + this.getDescription() + " | " + this.by;
     }
 }

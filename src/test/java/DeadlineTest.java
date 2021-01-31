@@ -8,7 +8,7 @@ public class DeadlineTest {
     @Test
     public void correctDescription() {
         Deadline deadline = new Deadline("task1", LocalDate.parse("2020-02-02"));
-        assertEquals("task1", deadline.description);
+        assertEquals("task1", deadline.getDescription());
     }
 
     @Test

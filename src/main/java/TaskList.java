@@ -5,8 +5,8 @@ import java.util.ArrayList;
  */
 class TaskList {
 
-    ArrayList<Task> tasks;
-    Ui ui = new Ui();
+    private ArrayList<Task> tasks;
+    private Ui ui = new Ui();
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -61,8 +61,8 @@ class TaskList {
      */
     public void printAddedTask(Task task) {
         System.out.println(this.ui.FORMAT_LINE);
-        System.out.println("Got it. I've added this task to your list:\n" +
-                "   " + task.toString());
+        System.out.println("Got it. I've added this task to your list:\n"
+                + "   " + task.toString());
         System.out.println("Now you have " + this.tasks.size() + " task(s) in the list.");
         System.out.println(this.ui.FORMAT_LINE);
 
@@ -78,8 +78,8 @@ class TaskList {
         Task task = this.tasks.get(index);
         task.markAsDone();
         System.out.println(this.ui.FORMAT_LINE);
-        System.out.println(" Good job! I've marked this task as done:\n" +
-                "   " + task.toString());
+        System.out.println(" Good job! I've marked this task as done:\n"
+                + "   " + task.toString());
         System.out.println(this.ui.FORMAT_LINE);
 
     }
@@ -93,8 +93,8 @@ class TaskList {
         Task task = this.tasks.get(index);
         this.tasks.remove(index);
         System.out.println(this.ui.FORMAT_LINE);
-        System.out.println(" Noted. I've removed this task:\n" +
-                "   " + task.toString());
+        System.out.println(" Noted. I've removed this task:\n"
+                + "   " + task.toString());
         System.out.println("Now you have " + this.tasks.size() + " task(s) in the list.");
         System.out.println(this.ui.FORMAT_LINE);
 

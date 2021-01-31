@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    public LocalDate at;
+    private LocalDate at;
 
     /**
      * Creates an event instance.
@@ -26,8 +26,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -38,7 +38,7 @@ public class Event extends Task {
      */
     @Override
     public String fileString() {
-        int statusNum = this.isDone ? 1 : 0;
-        return "E | " + statusNum + " | " + this.description + " | " + this.at;
+        int statusNum = this.getStatus() ? 1 : 0;
+        return "E | " + statusNum + " | " + this.getDescription() + " | " + this.at;
     }
 }
