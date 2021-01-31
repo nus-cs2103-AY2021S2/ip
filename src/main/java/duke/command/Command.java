@@ -1,9 +1,7 @@
 package duke.command;
 
 import duke.dukeException.DukeException;
-import duke.storage.Storage;
 import duke.task.*;
-import duke.ui.Ui;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ public class Command {
         this.command = command;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks) throws IOException {
         ArrayList<Task> tList = tasks.tasks;
         if(command.equals("list")) {
             System.out.println("     Here are the tasks in your list:");
