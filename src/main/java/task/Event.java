@@ -2,7 +2,9 @@ package task;
 
 import java.time.LocalDate;
 
-
+/**
+ * Event tasks
+ */
 public class Event extends Task {
     protected LocalDate at;
 

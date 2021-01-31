@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles storage
+ */
 public class Storage {
 
     private String filePath;
@@ -16,6 +19,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load the saved tasks (wip)
+     * @return the list of tasks
+     * @throws DukeException
+     */
     public List<Task> load() throws DukeException {
         try {
             File myFile = new File("duke.txt");
@@ -26,6 +34,11 @@ public class Storage {
         return null;
     }
 
+    /**
+     * Save the tasks
+     * @param taskList Tasklist
+     * @throws DukeException
+     */
     public void saveFile(TaskList taskList) throws DukeException {
         try {
             File myFile = new File("duke.txt");

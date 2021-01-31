@@ -4,6 +4,9 @@ import helper.Storage;
 import helper.TaskList;
 import helper.Ui;
 
+/**
+ * Commands for deletes
+ */
 public class DeleteCommand extends Command {
 
     private String deleteString;
@@ -11,6 +14,13 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String s) {
         deleteString = s;
     }
+
+    /**
+     * Delete the task from the tasklist
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index = Integer.parseInt(deleteString) - 1;
