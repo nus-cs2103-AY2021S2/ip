@@ -23,10 +23,6 @@ public class Parser {
      * @throws UnknownCommandException If input cannot be parsed.
      */
     public static Command parseCommand(String[] subStrings) throws UnknownCommandException {
-        if (subStrings[0].isEmpty()) {
-            return Command.SKIP;
-        }
-
         try {
             return Command.valueOf(subStrings[0].trim().toUpperCase());
         } catch (IllegalArgumentException e) {
