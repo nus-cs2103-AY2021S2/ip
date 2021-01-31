@@ -7,8 +7,12 @@ import java.util.ArrayList;
 public class TaskList {
     public ArrayList<Task> list;
 
+
     public TaskList() {
         list = new ArrayList<>();
+    }
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
     }
 
     public void addTask(Task task) {

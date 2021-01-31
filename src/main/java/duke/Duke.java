@@ -10,11 +10,13 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     public Duke(String filePath) {
         ui = new Ui();
-        tasks = new TaskList();
-        storage = new Storage(filePath, tasks);
+        parser = new Parser();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.loadTasks());
     }
 
     public static void main(String[] args) {
@@ -24,7 +26,6 @@ public class Duke {
     public void run() {
 
         Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser();
         ui.greetings();
         boolean continueReading = true;
         while (continueReading) {

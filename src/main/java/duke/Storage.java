@@ -10,27 +10,16 @@ import java.util.Scanner;
 //Save tasks to and load tasks from file
 public class Storage {
 
-    public File savedTasksFile;
+    protected String filePath;
 
-    public Storage(String filePath, TaskList tasks) {
-        try {
-            savedTasksFile = new File(filePath);
-            if (!savedTasksFile.exists()) {
-                if (!savedTasksFile.getParentFile().exists()) {
-                    File parentDir = savedTasksFile.getParentFile();
-                    parentDir.mkdir();
-                }
-                savedTasksFile.createNewFile();
-            }
-            loadTasks(tasks);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Storage(String filePath) {
+        this.filePath = filePath;
+
     }
 
 
     public void saveTasks(ArrayList<Task> list) throws IOException {
-        FileWriter fw = new FileWriter(savedTasksFile);
+        FileWriter fw = new FileWriter(filePath);
         String fileContent = "";
         for (Task task: list) {
             int num;
@@ -58,40 +47,53 @@ public class Storage {
         fw.close();
     }
 
-    public void loadTasks(TaskList tasks) throws FileNotFoundException {
-        Scanner s = new Scanner(savedTasksFile);
-        while (s.hasNextLine()) {
-            String line = s.nextLine();
-            String[] taskArr = line.split(" ; ", 4);
-            char type = taskArr[0].charAt(0);
-            String num = taskArr[1];
-            String description = taskArr[2];
-            if (type == 'T') {
-                Todo todo = new Todo(description);
-                if (num.equals("1")) {
-                    todo.done();
+    public ArrayList<Task> loadTasks() {
+        ArrayList<Task> list = new ArrayList<>();
+        File savedTasksFile = null;
+        try {
+            savedTasksFile = new File(this.filePath);
+            if (!savedTasksFile.exists()) {
+                if (!savedTasksFile.getParentFile().exists()) {
+                    File parentDir = savedTasksFile.getParentFile();
+                    parentDir.mkdir();
                 }
-                tasks.addTask(todo);
-            } else if (type == 'D') {
-                String when = taskArr[3];
-                Deadline deadline = new Deadline(description, when);
-                if (num.equals("1")) {
-                    deadline.done();
-                }
-                tasks.addTask(deadline);
-            } else { //type 'E'
-                String when = taskArr[3];
-                Event event = new Event(description, when);
-                if (num.equals("1")) {
-                    event.done();
-                }
-                tasks.addTask(event);
+                savedTasksFile.createNewFile();
             }
+            Scanner s = new Scanner(savedTasksFile);
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                String[] taskArr = line.split(" ; ", 4);
+                char type = taskArr[0].charAt(0);
+                String num = taskArr[1];
+                String description = taskArr[2];
+                if (type == 'T') {
+                    Todo todo = new Todo(description);
+                    if (num.equals("1")) {
+                        todo.done();
+                    }
+                    list.add(todo);
+                } else if (type == 'D') {
+                    String when = taskArr[3];
+                    Deadline deadline = new Deadline(description, when);
+                    if (num.equals("1")) {
+                        deadline.done();
+                    }
+                    list.add(deadline);
+                } else { //type 'E'
+                    String when = taskArr[3];
+                    Event event = new Event(description, when);
+                    if (num.equals("1")) {
+                        event.done();
+                    }
+                    list.add(event);
+                }
+            }
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        s.close();
+        return list;
     }
-
-    
 }
 
 
