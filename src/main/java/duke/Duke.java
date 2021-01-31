@@ -10,16 +10,19 @@ import duke.Tasks.Todo;
 
 public class Duke {
 
-    /** Storage instance to read and write file */
-    private Storage storage;
-
     /** TaskList instance to store and handle tasks */
     private TaskList tasks;
+
+    /** Storage instance to read and write file */
+    private Storage storage;
 
     /** Ui instance to interact with user */
     private Ui ui;
 
-
+    /** Constructs a new Duke object
+     *
+     * @param path of file
+     */
     public Duke(String path) {
         ui = new Ui();
         tasks = new TaskList();
@@ -42,7 +45,7 @@ public class Duke {
                     readOn = false;
                     break;
                 case "list":
-                    ui.printList(tasks.taskList);
+                    ui.printList(tasks.getTaskList());
                     break;
                 case "done":
                     int n = Integer.parseInt(desc[1]);
@@ -53,26 +56,26 @@ public class Duke {
                 case "todo":
                     Task todo = new Todo(desc[1]);
                     tasks.storeTask(todo);
-                    ui.addedTask(tasks.taskList, todo);
+                    ui.addedTask(tasks.getTaskList(), todo);
                     break;
                 case "event":
                     ui.requestDate();
                     String date = ui.getDate();
                     Task event = new Event(desc[1], date);
                     tasks.storeTask(event);
-                    ui.addedTask(tasks.taskList, event);
+                    ui.addedTask(tasks.getTaskList(), event);
                     break;
                 case "deadline":
                     ui.requestDeadline();
                     String due = ui.getDate();
                     Task deadline = new Deadline(desc[1], due);
                     tasks.storeTask(deadline);
-                    ui.addedTask(tasks.taskList, deadline);
+                    ui.addedTask(tasks.getTaskList(), deadline);
                     break;
                 case "delete":
                     Task task = tasks.getTask(Integer.parseInt(desc[1]));
                     tasks.deleteTask(Integer.parseInt(desc[1]));
-                    ui.deletedTask(tasks.taskList, task);
+                    ui.deletedTask(tasks.getTaskList(), task);
                     break;
                 case "find":
                     tasks.findTasks(desc[1]);

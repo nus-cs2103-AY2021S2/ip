@@ -13,6 +13,11 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    /** Returns tasklist */
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
+    }
+
     /** Retrieves task from TaskList and marks
      * it as completed
      *

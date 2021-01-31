@@ -95,7 +95,7 @@ public class Storage {
      * */
     public String taskListToString(TaskList tasks) {
         String res = "";
-        ArrayList<Task> taskList = tasks.taskList;
+        ArrayList<Task> taskList = tasks.getTaskList();
         for (Task task : taskList) {
             char cat = task.getCat();
             String name = task.getName();
