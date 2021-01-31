@@ -1,5 +1,7 @@
+package switchblade;
+
 /**
- * Task will be used as a parent-class for other sub-classes such as Deadline and myEvent
+ * switchblade.Task will be used as a parent-class for other sub-classes such as switchblade.Deadline and switchblade.myEvent
  *
  * @author leeyueyang
  */
@@ -7,12 +9,12 @@ public class Task {
     protected String description;
     protected boolean completed;
 
-    Task(String description) {
+    public Task(String description) {
         this.description = description.stripLeading().stripTrailing();
         completed = false;
     }
 
-    Task(String description, Boolean completion) {
+    public Task(String description, Boolean completion) {
         this.description = description.stripLeading().stripTrailing();
         this.completed = completion;
     }

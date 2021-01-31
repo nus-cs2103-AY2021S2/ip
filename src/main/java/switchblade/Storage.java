@@ -1,3 +1,5 @@
+package switchblade;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage will be the class used to handle any IO from SwitchBlade to its storage file
+ * switchblade.Storage will be the class used to handle any IO from switchblade.SwitchBlade to its storage file
  *
  * @author leeyueyang
  */
@@ -16,14 +18,14 @@ import java.util.Scanner;
 public class Storage {
 
     /**
-     * Retrieves and interprets information from "SwitchBlade.txt"
+     * Retrieves and interprets information from "switchblade.SwitchBlade.txt"
      *
-     * @return Tasks read from SwitchBlade.txt file
-     * @param directory String of directory containing "SwitchBlade.txt"
-     * @exception FileNotFoundException "SwitchBlade.txt" which contains the data has not been created
+     * @return Tasks read from switchblade.SwitchBlade.txt file
+     * @param directory String of directory containing "switchblade.SwitchBlade.txt"
+     * @exception FileNotFoundException "switchblade.SwitchBlade.txt" which contains the data has not been created
      */
     public static ArrayList<Task> retrieve(String directory) throws FileNotFoundException {
-        String filepath = directory + "/SwitchBlade.txt";
+        String filepath = directory + "/switchblade.SwitchBlade.txt";
         File file = new File(filepath);
         ArrayList<Task> output = new ArrayList<>();
 
@@ -59,14 +61,14 @@ public class Storage {
     }
 
     /**
-     * Takes and interprets information from "SwitchBlade.txt"
+     * Takes and interprets information from "switchblade.SwitchBlade.txt"
      *
-     * @param outputToFile ArrayList of Tasks to be loaded into "SwitchBlade.txt"
-     * @param directory String of directory containing "SwitchBlade.txt"
-     * @exception IOException Error was encountered attempting to write to "SwitchBlade.txt"
+     * @param outputToFile ArrayList of Tasks to be loaded into "switchblade.SwitchBlade.txt"
+     * @param directory String of directory containing "switchblade.SwitchBlade.txt"
+     * @exception IOException Error was encountered attempting to write to "switchblade.SwitchBlade.txt"
      */
     public static void save(ArrayList<Task> outputToFile, String directory) throws IOException {
-        String filepath = directory + "/SwitchBlade.txt";
+        String filepath = directory + "/switchblade.SwitchBlade.txt";
         File file = new File(filepath);
         File folder = new File(directory);
         if (!Files.exists(Path.of(directory))) {

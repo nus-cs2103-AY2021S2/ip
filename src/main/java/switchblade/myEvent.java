@@ -1,5 +1,7 @@
+package switchblade;
+
 /**
- * Tasks with 2 dates will use an Event, class is named myEvent to avoid confusion with Java defined one
+ * Tasks with 2 dates will use an Event, class is named switchblade.myEvent to avoid confusion with Java defined one
  *
  * @author leeyueyang
  */

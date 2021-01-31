@@ -1,5 +1,7 @@
+package switchblade;
+
 /**
- * Tasks with 1 datetime will use a Deadline object
+ * Tasks with 1 datetime will use a switchblade.Deadline object
  *
  * @author leeyueyang
  */

@@ -1,5 +1,7 @@
+package switchblade;
+
 /**
- * Parser will be used to manipulate any String to retrieve the desired output
+ * switchblade.Parser will be used to manipulate any String to retrieve the desired output
  *
  * @author leeyueyang
  */
@@ -27,7 +29,7 @@ public class Parser {
     /**
      *
      * @param input String to be manipulated
-     * @return Datetime String for Deadline type Tasks
+     * @return Datetime String for switchblade.Deadline type Tasks
      */
     public static String findDeadlineDatetime(String input) {
         // split by /at and /to

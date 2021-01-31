@@ -1,4 +1,9 @@
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import switchblade.Parser;
+import switchblade.Task;
+import switchblade.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

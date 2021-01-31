@@ -1,3 +1,5 @@
+package switchblade;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -41,7 +43,7 @@ public class DateTime {
     }
 
     /**
-     * Used when user needs an output to the Ui
+     * Used when user needs an output to the switchblade.Ui
      *
      * @return Pretty prints the date and if applicable, time stored in this object
      */

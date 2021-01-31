@@ -16,6 +16,6 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 
-text-ui-test/ip/data/SwitchBlade.txt
+text-ui-test/ip/data/switchblade.SwitchBlade.txt
 
 src/main/java/META-INF/

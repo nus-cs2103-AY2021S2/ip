@@ -1,3 +1,5 @@
+package switchblade;
+
 import java.util.ArrayList;
 
 /**
@@ -31,7 +33,7 @@ public class Ui {
     }
 
     public static void init() {
-        System.out.println("Hello! I'm SwitchBlade and I aim to do everything you want me to do!");
+        System.out.println("Hello! I'm switchblade.SwitchBlade and I aim to do everything you want me to do!");
     }
 
     public static void initRetrieveList(myList taskList) {
