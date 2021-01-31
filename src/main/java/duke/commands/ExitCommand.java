@@ -14,15 +14,16 @@ public class ExitCommand extends Command {
     public ExitCommand() {}
 
     /**
-     * Prints goodbye message before stopping the program.
+     * Returns goodbye message before stopping the program.
      *
      * @param tasks TaskList containing tasks.
      * @param ui Ui for system outputs.
      * @param storage Storage for saving contents into file.
+     * @return Goodbye message string.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showByeMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.getByeMessage();
     }
 
     /**
