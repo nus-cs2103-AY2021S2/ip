@@ -33,7 +33,7 @@ public class Duke {
     }
 
     public void run() {
-        ui.greeting();
+        ui.printGreetingMsg();
 
         boolean isExit = false;
         while(!isExit) {

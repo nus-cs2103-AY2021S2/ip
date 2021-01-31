@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Prints greeting message when users start Duke.
      */
-    public void greeting() {
+    public void printGreetingMsg() {
         printLine();
         String logo = "      ____        _        \n"
                 + "     |  _ \\ _   _| | _____ \n"
