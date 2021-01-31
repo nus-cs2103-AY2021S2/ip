@@ -52,4 +52,8 @@ public class TaskList {
         return taskListOutput;
     }
 
+    protected ArrayList<Task> getTaskList() {
+        return this.taskList;
+    }
+
 }

@@ -37,7 +37,7 @@ public class Checklst {
                     continue;
                 }
                 input = command.split(" ", 2);
-                this.parser.parse(input, ui, taskList, storage);
+                this.parser.parseHistoryCommand(input, taskList);
             }
             this.ui.sendOutput("History successfully restored!");
         } catch (InvalidPathException | IOException e) {

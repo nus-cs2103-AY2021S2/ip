@@ -1,5 +1,7 @@
 package task;
 
+import exception.ChecklstException;
+
 public class Todo extends Task {
 
     /**
@@ -7,7 +9,10 @@ public class Todo extends Task {
      * @param name - Name of Todo.
      * @return - Todo Object.
      */
-    public static Todo makeTodo(String name) {
+    public static Todo makeTodo(String name) throws ChecklstException {
+        if (name.equals("")) {
+            throw new ChecklstException("Todo needs a name!");
+        }
         return new Todo(name);
     }
     

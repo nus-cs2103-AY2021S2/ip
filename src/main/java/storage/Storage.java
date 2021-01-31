@@ -31,4 +31,8 @@ public class Storage {
         }
     }
 
+    protected ArrayList<String> getCommandHistory() {
+       return this.commandHistory;
+    }
+
 }
