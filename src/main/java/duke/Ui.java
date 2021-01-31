@@ -9,10 +9,17 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Reads the user command.
+     * @return The full user command.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints greeting message when users start Duke.
+     */
     public void greeting() {
         printLine();
         String logo = "      ____        _        \n"
@@ -26,14 +33,24 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints messages with proper indentations.
+     * @param msg The message that will be printed on the screen and visible to users.
+     */
     public void printMsg(String msg) {
         System.out.println("     " + msg);
     }
 
+    /**
+     * Prints a line with proper indentations.
+     */
     public void printLine() {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints bye message when users quiting Duke.
+     */
     public void sayBye() {
         printMsg("Bye. Hope to see you again soon!");
     }
