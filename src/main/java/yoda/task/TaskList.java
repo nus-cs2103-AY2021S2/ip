@@ -61,9 +61,10 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Filters the tasks in the list by the type requested.
+     * Filters the tasks in the list by the type or keyword requested.
      * @param type Type of task requested.
-     * @return List containing only the type of task requested.
+     * @return TaskList containing tasks of the type requested or tasks with the
+     * keyword requested.
      */
     public TaskList filterByTask(String type) {
         if (type.equals("ToDo")) {
@@ -82,7 +83,11 @@ public class TaskList implements Serializable {
                     .filter(p -> p instanceof Event)
                     .collect(Collectors.toList()));
         } else {
-            return this;
+            String formattedType = type.toLowerCase();
+            return new TaskList(tasks
+                    .stream()
+                    .filter(p -> p.toString().toLowerCase().contains(formattedType))
+                    .collect(Collectors.toList()));
         }
     }
 

@@ -18,33 +18,37 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Lists all the tasks in the TaskList or only the tasks of the type requested by the user.
+     * Lists tasks based on the information given by the user.
      * @param taskList TaskList associated with the ListCommand being executed.
      * @param ui Ui associated with the ListCommand being executed.
      * @param storage Storage associated with the ListCommand being executed.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (details.length == 1) {
-            System.out.println("Here are all the tasks in your list\n" + taskList);
+        if (details[0] == "FIND") {
+            System.out.println("Here are the matching tasks in your list:\n"
+                    + taskList.filterByTask(details[1]));
         } else {
-            switch(details[1].replaceAll("\\s", "")) {
-            case "-d":
-                System.out.println("These are the deadlines in your list:\n"
-                        + taskList.filterByTask("Deadline"));
-                break;
-            case "-e":
-                System.out.println("These are the events in your list:\n"
-                        + taskList.filterByTask("Event"));
-                break;
-            case "-t":
-                System.out.println("These are the todos in your list:\n"
-                        + taskList.filterByTask("ToDo"));
-                break;
-            default:
-                System.out.println("Bruh! Only use -d, -e, -t to get the specific type"
-                        + "of task you want!");
+            if (details.length == 1) {
+                System.out.println("Here are all the tasks in your list\n" + taskList);
+            } else {
+                switch (details[1]) {
+                case "-d":
+                    System.out.println("These are the deadlines in your list:\n"
+                            + taskList.filterByTask("Deadline"));
+                    break;
+                case "-e":
+                    System.out.println("These are the events in your list:\n"
+                            + taskList.filterByTask("Event"));
+                    break;
+                case "-t":
+                    System.out.println("These are the todos in your list:\n"
+                            + taskList.filterByTask("ToDo"));
+                    break;
+                default:
+                    System.out.println("Bruh! Only use -d, -e, -t to get the "
+                            + "specific type of task you want!");
+                }
             }
         }
     }
-
 }

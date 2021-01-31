@@ -24,6 +24,7 @@ public class Parser {
         splitInput[0] = command.name();
         switch(command) {
         case LIST:
+        case FIND:
             return new ListCommand(splitInput);
         case TODO:
         case DEADLINE:
