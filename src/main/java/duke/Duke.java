@@ -19,6 +19,7 @@ public class Duke {
     /** Ui instance to interact with user */
     private Ui ui;
 
+
     public Duke(String path) {
         ui = new Ui();
         tasks = new TaskList();
@@ -38,46 +39,46 @@ public class Duke {
                 String action = desc[0];
                 switch (action) {
                 case "bye":
-                        readOn = false;
-                        break;
+                    readOn = false;
+                    break;
                 case "list":
-                        ui.printList(tasks.taskList);
-                        break;
+                    ui.printList(tasks.taskList);
+                    break;
                 case "done":
-                        int n = Integer.parseInt(desc[1]);
-                        Task t = tasks.getTask(n);
-                        tasks.markComplete(n);
-                        ui.checkedTask(t);
-                        break;
+                    int n = Integer.parseInt(desc[1]);
+                    Task t = tasks.getTask(n);
+                    tasks.markComplete(n);
+                    ui.checkedTask(t);
+                    break;
                 case "todo":
-                        Task todo = new Todo(desc[1]);
-                        tasks.storeTask(todo);
-                        ui.addedTask(tasks.taskList, todo);
-                        break;
+                    Task todo = new Todo(desc[1]);
+                    tasks.storeTask(todo);
+                    ui.addedTask(tasks.taskList, todo);
+                    break;
                 case "event":
-                        ui.requestDate();
-                        String date = ui.getDate();
-                        Task event = new Event(desc[1], date);
-                        tasks.storeTask(event);
-                        ui.addedTask(tasks.taskList, event);
-                        break;
+                    ui.requestDate();
+                    String date = ui.getDate();
+                    Task event = new Event(desc[1], date);
+                    tasks.storeTask(event);
+                    ui.addedTask(tasks.taskList, event);
+                    break;
                 case "deadline":
-                        ui.requestDeadline();
-                        String due = ui.getDate();
-                        Task deadline = new Deadline(desc[1], due);
-                        tasks.storeTask(deadline);
-                        ui.addedTask(tasks.taskList, deadline);
-                        break;
+                    ui.requestDeadline();
+                    String due = ui.getDate();
+                    Task deadline = new Deadline(desc[1], due);
+                    tasks.storeTask(deadline);
+                    ui.addedTask(tasks.taskList, deadline);
+                    break;
                 case "delete":
-                        Task task = tasks.getTask(Integer.parseInt(desc[1]));
-                        tasks.deleteTask(Integer.parseInt(desc[1]));
-                        ui.deletedTask(tasks.taskList, task);
-                        break;
+                    Task task = tasks.getTask(Integer.parseInt(desc[1]));
+                    tasks.deleteTask(Integer.parseInt(desc[1]));
+                    ui.deletedTask(tasks.taskList, task);
+                    break;
                 case "find":
-                        tasks.findTasks(desc[1]);
-                        break;
+                    tasks.findTasks(desc[1]);
+                    break;
                 default:
-                        throw new UnclearInputException();
+                    throw new UnclearInputException();
                 }
             } catch (MissingInputException e) {
                 System.out.println((e.getMessage()));

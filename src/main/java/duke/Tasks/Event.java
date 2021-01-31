@@ -7,6 +7,12 @@ public class Event extends Task {
     /** Time of event */
     protected LocalDate time;
 
+    /** Constructs a new event
+     *
+     * @param name of event
+     * @param time of event
+     * */
+
     public Event(String name, String time) {
         super(name);
         this.time = LocalDate.parse(time);
@@ -32,6 +38,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + this.cat + "] " + super.toString() + " (at: " + this.getFormattedTime() + ")" ;
+        return "[" + this.cat + "] " + super.toString() + " (at: " + this.getFormattedTime() + ")";
     }
 }

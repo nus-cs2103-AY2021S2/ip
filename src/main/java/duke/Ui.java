@@ -1,13 +1,14 @@
 package duke;
 
-import duke.Tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.Tasks.Task;
+
+
 public class Ui {
     /** Scanner instance to scan user input*/
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
     }
@@ -54,19 +55,19 @@ public class Ui {
 
     /** Prints tasks in TaskList
      *
-     * @param TaskList
+     * @param taskList of tasks to print
      * */
     public void printList(ArrayList<Task> taskList) {
         String msg = "Duchess: Here are the tasks in your list:";
-        for(int i = 0; i < taskList.size(); i++) {
-            msg+= "\n" +  (i + 1) + ". " + taskList.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            msg += "\n" + (i + 1) + ". " + taskList.get(i);
         }
         System.out.println(msg);
     }
 
     /** Prints message when task is checked off successfully
      *
-     * @param Task to be checked
+     * @param task to be checked
      * */
     public void checkedTask(Task task) {
         System.out.println("Duchess: Woohoo I've checked off this task:" + "\n" + task);
@@ -74,18 +75,18 @@ public class Ui {
 
     /** Prints message when task is successfully deleted
      *
-     * @param TaskList
-     * @param Task to be deleted
+     * @param taskList of tasks
+     * @param task to be deleted
      * */
     public void deletedTask(ArrayList<Task> taskList, Task task) {
         System.out.println("Duchess: As requested, i have removed this task:" + "\n"
-                + task + "\n" + "U have " +  taskList.size() + " tasks in the list now :)");
+                + task + "\n" + "U have " + taskList.size() + " tasks in the list now :)");
     }
 
     /** Prints message when task is successfully added
      *
-     * @param TaskList
-     * @param Task to be added
+     * @param taskList of tasks
+     * @param task to be added
      * */
     public void addedTask(ArrayList<Task> taskList, Task task) {
         System.out.println("Duchess: Great! I have added:" + "\n" + task + "\n" + "U have " + taskList.size()
