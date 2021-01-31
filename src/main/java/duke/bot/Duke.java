@@ -58,7 +58,7 @@ public class Duke {
             Command command = Parser.parse(input);
             String response = command.execute();
             isActive = !command.willExit();
-            return "Duke heard: " + response;
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
