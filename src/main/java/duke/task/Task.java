@@ -15,7 +15,7 @@ public class Task {
         this.done = true;
     }
 
-    public void addTask(int count) throws DukeException, DukeException {
+    public void addTask(int count) throws DukeException {
         if(this.name.equals("todo")) {
             throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
@@ -26,6 +26,7 @@ public class Task {
             } else {
                 System.out.println("     Now you have " + count + " tasks in the list.");
             }
+
         }
 
     }

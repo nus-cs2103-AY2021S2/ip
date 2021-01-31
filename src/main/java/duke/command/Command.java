@@ -87,8 +87,8 @@ public class Command {
         }else if(command.split(" ")[0].equals("todo")) {
             int iend = command.indexOf(" ");
             String n = command.substring(iend+1);
-            tList.add(new ToDo(n));
             try{
+                tList.add(new ToDo(n));
                 tList.get(tList.size()-1).addTask(tList.size());
                 BufferedWriter writer = new BufferedWriter(
                         new FileWriter("data/duke.txt", true));
@@ -96,9 +96,7 @@ public class Command {
                 writer.close();
                 tasks.tasks = tList;
             } catch(DukeException e){
-                System.out.println("    ____________________________________________________________");
                 System.out.println(e.getMessage());
-                System.out.println("    ____________________________________________________________");
             }
         } else if(command.split(" ")[0].equals("deadline")) {
             try{
@@ -118,14 +116,10 @@ public class Command {
                 tasks.tasks = tList;
             }
             catch(DukeException e){
-                System.out.println("    ____________________________________________________________");
                 System.out.println(e.getMessage());
-                System.out.println("    ____________________________________________________________");
             }
             catch(StringIndexOutOfBoundsException e){
-                System.out.println("    ____________________________________________________________");
                 System.out.println("     ☹ OOPS!!! The due date of a deadline cannot be empty. (Format: /by + date[YYYY-MM-DD])");
-                System.out.println("    ____________________________________________________________");
             }
         } else if(command.split(" ")[0].equals("event")) {
             try{
@@ -144,14 +138,11 @@ public class Command {
                 writer.close();
                 tasks.tasks = tList;
             } catch(DukeException e){
-                System.out.println("    ____________________________________________________________");
                 System.out.println(e.getMessage());
-                System.out.println("    ____________________________________________________________");
             }
             catch(StringIndexOutOfBoundsException e){
-                System.out.println("    ____________________________________________________________");
                 System.out.println("     ☹ OOPS!!! The start and end date of an event cannot be empty.(Format: /at + duration[YYYY-MM-DD])");
-                System.out.println("    ____________________________________________________________");
+
             }
         } else if(command.split(" ")[0].equals("find")) {
             String match = command.split(" ")[1];
