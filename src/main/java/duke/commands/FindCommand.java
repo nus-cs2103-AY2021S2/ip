@@ -25,14 +25,15 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Prints a list of tasks that matches given word in command line.
+     * Returns a string listing the tasks that matches given word in command line.
      *
      * @param tasks TasksList to find from.
      * @param ui Ui for system outputs.
      * @param storage Storage for saving contents into file.
+     * @return String of tasks matching given word in command line.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList matchList = new TaskList(new ArrayList<Task>());
         String matchString = fullCommand.substring(4).trim();
         if (matchString.isEmpty()) {
@@ -45,9 +46,9 @@ public class FindCommand extends Command {
             }
         }
         if (matchList.size() != 0) {
-            ui.showMatchList(matchList);
+            return ui.getMatchList(matchList);
         } else {
-            ui.showNoMatch();
+            return ui.getNoMatchString();
         }
     }
 
