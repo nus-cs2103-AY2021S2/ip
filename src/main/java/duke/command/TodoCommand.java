@@ -35,7 +35,7 @@ public class TodoCommand implements Command {
      * @throws DukeException if the format of the Todo command is invalid.
      */
     @Override
-    public void run(Storage storage, TaskList taskList) throws DukeException {
+    public String run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle todo without parameters
             throw new DukeException("Sorry human, please enter a name for this task.");
         }
@@ -44,7 +44,7 @@ public class TodoCommand implements Command {
 
         taskList.add(newTodoTask);
         storage.saveTaskList(taskList);
-        ui.printAddToList(newTodoTask, taskList);
+        return ui.returnAddToListMsg(newTodoTask, taskList);
     }
 
 }

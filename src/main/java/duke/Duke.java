@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 
 /**
@@ -10,7 +8,6 @@ import duke.command.Command;
  * It prints the action reply to the CLI.
  */
 public class Duke {
-    private static final String PATH_NAME = "./data/saved_task_list.txt";
     private Ui ui;
     private Storage storage;
     private TaskList taskList = new TaskList();
@@ -24,44 +21,28 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+    }
 
+    // todo javadocs
+    public String initializeStart() {
         try {
             storage.initializeTaskList(taskList);
+            return ui.returnGreeting();
         } catch (DukeException e) {
-            ui.printDukeException(e);
+            return ui.returnDukeExceptionMsg(e);
         }
     }
 
-    /**
-     * Processes user input.
-     */
-    public void run() {
-        ui.printGreeting();
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            try {
-                Command toRun = parser.parse(input);
-                toRun.run(storage, taskList);
-            } catch (DukeException e) {
-                ui.printDukeException(e);
-            }
-            if (sc.hasNextLine()) {
-                input = sc.nextLine();
-            } else {
-                break;
-            }
-        }
-        sc.close();
-
-        if (input.equals("bye")) {
-            ui.printBye();
+    // todo javadocs
+    public String getResponse(String input) {
+        try {
+            Command toRun = parser.parse(input);
+            return toRun.run(storage, taskList);
+        } catch (DukeException e) {
+            return ui.returnDukeExceptionMsg(e);
         }
     }
 
-    public static void main(String[] args) {
-        new Duke(PATH_NAME).run();
-    }
 
 }
 

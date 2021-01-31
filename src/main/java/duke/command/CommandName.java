@@ -10,5 +10,6 @@ public enum CommandName {
     TODO,
     EVENT,
     DEADLINE,
-    FIND
+    FIND,
+    BYE
 }

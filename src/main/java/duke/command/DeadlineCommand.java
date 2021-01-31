@@ -40,7 +40,7 @@ public class DeadlineCommand implements Command {
      * @throws DukeException if the format of the Deadline command are invalid.
      */
     @Override
-    public void run(Storage storage, TaskList taskList) throws DukeException {
+    public String run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle deadline without parameters
             throw new DukeException(ui.deadlineFormatError());
         }
@@ -55,7 +55,7 @@ public class DeadlineCommand implements Command {
 
             taskList.add(newDeadlineTask);
             storage.saveTaskList(taskList);
-            ui.printAddToList(newDeadlineTask, taskList);
+            return ui.returnAddToListMsg(newDeadlineTask, taskList);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ui.deadlineFormatError());
         } catch (DateTimeParseException e) {

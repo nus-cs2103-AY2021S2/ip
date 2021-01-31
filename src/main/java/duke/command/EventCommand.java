@@ -39,7 +39,7 @@ public class EventCommand implements Command {
      * @throws DukeException if the format of the Event command is invalid.
      */
     @Override
-    public void run(Storage storage, TaskList taskList) throws DukeException {
+    public String run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle event without parameters
             throw new DukeException(ui.eventFormatError());
         }
@@ -53,7 +53,7 @@ public class EventCommand implements Command {
             EventTask newEventTask = new EventTask(eTaskName, ldt);
             taskList.add(newEventTask);
             storage.saveTaskList(taskList);
-            ui.printAddToList(newEventTask, taskList);
+            return ui.returnAddToListMsg(newEventTask, taskList);
         } catch (ArrayIndexOutOfBoundsException e) { // handle wrong formats
             throw new DukeException(ui.eventFormatError());
         } catch (DateTimeParseException e) {

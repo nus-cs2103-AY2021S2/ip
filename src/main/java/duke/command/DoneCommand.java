@@ -36,7 +36,7 @@ public class DoneCommand implements Command {
      * @throws DukeException if the format of the Done command is invalid.
      */
     @Override
-    public void run(Storage storage, TaskList taskList) throws DukeException {
+    public String run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length > 2) { // too many parameters (>1)
             throw new DukeException(ui.doneCmdTooManyArgsError());
         }
@@ -49,16 +49,15 @@ public class DoneCommand implements Command {
             throw new DukeException(ui.doneCmdInvalidArgsError());
         }
 
-        if (fullCmd.length() > 5) {
-            int taskIndex = Integer.parseInt(fullCmdStrArray[1]) - 1;
-            if (taskIndex > taskList.getSize() - 1 || taskIndex < 0) {
-                throw new DukeException("Sorry human, that task does not seem to exist.");
-            }
-            Task doneTask = taskList.getIndex(taskIndex);
-            doneTask.markDone();
-            storage.saveTaskList(taskList);
-            ui.printDoneMessage(doneTask);
+        int taskIndex = Integer.parseInt(fullCmdStrArray[1]) - 1;
+        if (taskIndex > taskList.getSize() - 1 || taskIndex < 0) {
+            throw new DukeException("Sorry human, that task does not seem to exist.");
         }
+        Task doneTask = taskList.getIndex(taskIndex);
+        doneTask.markDone();
+        storage.saveTaskList(taskList);
+        return ui.returnDoneMsg(doneTask);
+
     }
 
 }
