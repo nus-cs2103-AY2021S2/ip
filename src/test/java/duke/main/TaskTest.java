@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
  */
 public class TaskTest {
     @Test
-    public void testStringConversion(){
+    public void testStringConversion() {
         Task task = new Task("test");
         assertEquals("[ ] test", task.toString());
     }
 
     @Test
-    public void testInfoToStoreConversion(){
+    public void testInfoToStoreConversion() {
         Task task = new Task("test");
         assertEquals("0 | test", task.infoToStore());
     }

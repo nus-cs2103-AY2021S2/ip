@@ -5,7 +5,7 @@ package duke.main;
  *
  * Todos are tasks without any date/time attached to it.
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Constructor for todo class object
@@ -41,7 +41,7 @@ public class Todo extends Task{
     @Override
     public String infoToStore() {
         String divider = " | ";
-        return "T" +  divider
+        return "T" + divider
                 + (isDone ? "1" : "0") + divider
                 + description;
     }

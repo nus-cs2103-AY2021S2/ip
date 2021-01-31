@@ -1,5 +1,7 @@
 package duke.parser;
 
+import java.util.Locale;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.CommandOption;
@@ -12,7 +14,6 @@ import duke.main.DukeException;
 import duke.main.Event;
 import duke.main.Task;
 import duke.main.Todo;
-import java.util.Locale;
 
 /**
  * Parses the user input and return corresponding Command objects for execution.
@@ -40,7 +41,7 @@ public class Parser {
      * @throws DukeException thrown if user enters a valid command but invalid related information
      *                       or an invalid command
      */
-    public Command parseMessage(String message) throws DukeException{
+    public Command parseMessage(String message) throws DukeException {
         String[] msgArray = message.split(" ", 2);
         String commandWord = msgArray[0].strip();
         String otherInfo = null;
@@ -75,8 +76,7 @@ public class Parser {
             default:
                 throw new DukeException("Unexpected value: " + commandEnum);
             }
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw new DukeException("I do not understand this command.");
         }
 
@@ -99,10 +99,9 @@ public class Parser {
             throw new DukeException("Please enter a task index.");
         }
 
-        try{
+        try {
             index = Integer.parseInt(taskIndex);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException("Task index entered is not an integer.");
         }
         return index;
@@ -137,21 +136,21 @@ public class Parser {
             String description = temp[0].strip();
             String time = temp[1].strip();
             if (description.equals("") || time.equals("")) {
-                throw new DukeException("Please provide a description or a by date " +
-                        "when creating deadline.");
+                throw new DukeException("Please provide a description or a by date "
+                        + "when creating deadline.");
             }
             return new String[] {description, time};
         } catch (NullPointerException e) {
-            throw new DukeException("Please provide the relevant information " +
-                    "when creating a task.");
+            throw new DukeException("Please provide the relevant information "
+                    + "when creating a task.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Please use /by when creating deadline or " +
-                    "/at when creating event.");
+            throw new DukeException("Please use /by when creating deadline or "
+                    + "/at when creating event.");
         }
     }
 
     private Command preFindTask(String keyword) throws DukeException {
-        if (keyword == null || keyword.equals(" ") || keyword.equals("") ) {
+        if (keyword == null || keyword.equals(" ") || keyword.equals("")) {
             throw new DukeException("Please enter a keyword when finding the task.");
         }
         return new FindCommand(keyword);

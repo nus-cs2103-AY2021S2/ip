@@ -7,22 +7,22 @@ import java.util.Scanner;
  */
 public class UI {
     private static final String[] greet = {
-            " ____        _        ",
-            "|  _ \\ _   _| | _____ ",
-            "| | | | | | | |/ / _ \\",
-            "| |_| | |_| |   <  __/",
-            "|____/ \\__,_|_|\\_\\___|\n",
-            "Greetings! I'm Your Personal Assistant Duke:)",
-            "What can I do for you today?"
+        " ____        _        ",
+        "|  _ \\ _   _| | _____ ",
+        "| | | | | | | |/ / _ \\",
+        "| |_| | |_| |   <  __/",
+        "|____/ \\__,_|_|\\_\\___|\n",
+        "Greetings! I'm Your Personal Assistant Duke:)",
+        "What can I do for you today?"
     };
 
     private static final String[] exit = {
-            "Bye. Nice to meet you and hope to see you again soon!"
+        "Bye. Nice to meet you and hope to see you again soon!"
     };
 
     private static final String border =
-            "    ____________________________________________________________" +
-                    "_______________\n";
+        "    ____________________________________________________________"
+            + "_______________\n";
 
     private static final String indent = "     ";
 

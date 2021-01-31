@@ -7,7 +7,7 @@ import duke.tasklist.TaskList;
 /**
  * Deletes a task to the taskList.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int taskIndexToDelete;
 
     /**
