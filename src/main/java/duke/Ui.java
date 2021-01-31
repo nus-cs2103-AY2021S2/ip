@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -17,7 +19,7 @@ class Ui {
     /**
      * Generates the string representation of the introduction.
      *
-     * @return String representing the introduction to Duke.
+     * @return String representing the introduction to duke.Duke.
      */
     protected String getIntro(){
         String logo = " ____        _        \n"
@@ -31,7 +33,7 @@ class Ui {
     }
 
     /**
-     * Command that prints the list existing in TaskList.
+     * Command that prints the list existing in duke.TaskList.
      * (Only applicable if inputs are fed via file direction)
      *
      * @return String representing the error when no lines are inputted.

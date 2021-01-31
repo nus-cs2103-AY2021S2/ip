@@ -1,9 +1,11 @@
-package duke;
+package duke.command;
 
-class DoneCommand implements ICommand {
+import duke.TaskList;
+
+public class DoneCommand implements ICommand {
     private TaskList tasks;
 
-    DoneCommand(TaskList tasks) {
+    public DoneCommand(TaskList tasks) {
         this.tasks = tasks;
     }
 

@@ -1,8 +1,8 @@
-package duke;
+package duke.task;
 
-class EventFactory extends AbstractTaskFactory{
+public class EventFactory extends AbstractTaskFactory{
     @Override
-    protected Task createTask(String parameters) throws IllegalArgumentException {
+    public Task createTask(String parameters) throws IllegalArgumentException {
         String[] inputArray = parameters.split("/at",2);
 
         if (inputArray[0].isBlank()) {

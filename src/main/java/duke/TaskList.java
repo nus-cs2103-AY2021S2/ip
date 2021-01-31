@@ -1,24 +1,31 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class TaskList {
+public class TaskList {
     private ArrayList<Task> list;
     private boolean isDone;
 
-    TaskList() {
+    public TaskList() {
         list = new ArrayList<>();
         isDone = false;
     }
 
-    protected ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
         return this.list;
     }
 
-    protected void addTask(Task content) {
+    public void addTask(Task content) {
         list.add(content);
     }
 
-    protected void addTask(String[] tasks) {
+    public void addTask(String[] tasks) {
         String type = tasks[0].strip();
         String done = tasks[1].strip();
         String desc = tasks[2].strip();
@@ -43,17 +50,17 @@ class TaskList {
         }
     }
 
-    protected void setTaskDone(int count) throws IllegalArgumentException {
+    public void setTaskDone(int count) throws IllegalArgumentException {
         if (count > list.size() || count <= 0) {
-            throw new IllegalArgumentException("Error: Task number out of range.");
+            throw new IllegalArgumentException("Error: duke.task.Task number out of range.");
         } else {
             list.get(count-1).setDone();
         }
     }
 
-    protected Task deleteTask(int count) throws IllegalArgumentException {
+    public Task deleteTask(int count) throws IllegalArgumentException {
         if (count > list.size() || count <= 0) {
-            throw new IllegalArgumentException("Error: Task number out of range.");
+            throw new IllegalArgumentException("Error: duke.task.Task number out of range.");
         } else {
             Task removedTask = list.remove(count-1);
             return removedTask;
@@ -75,7 +82,7 @@ class TaskList {
         this.isDone = true;
     }
 
-    protected boolean hasExited() {
+    public boolean hasExited() {
         return this.isDone;
     }
 

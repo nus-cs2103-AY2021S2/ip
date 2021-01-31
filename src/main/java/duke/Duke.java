@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.*;
+import duke.task.DeadlineFactory;
+import duke.task.EventFactory;
+import duke.task.ToDoFactory;
+
 import java.util.NoSuchElementException;
 
 public class Duke {

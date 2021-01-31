@@ -1,9 +1,9 @@
-package duke;
+package duke.command;
 
 /**
  * Place borders for each command given.
  */
-class CommandBorder implements ICommand {
+public class CommandBorder implements ICommand {
     private ICommand decoratedCommand;
 
     /**
@@ -11,7 +11,7 @@ class CommandBorder implements ICommand {
      *
      * @param decoratedCommand Command to be wrapped.
      */
-    CommandBorder(ICommand decoratedCommand) {
+    public CommandBorder(ICommand decoratedCommand) {
         this.decoratedCommand = decoratedCommand;
     }
 

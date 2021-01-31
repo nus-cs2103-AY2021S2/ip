@@ -1,9 +1,9 @@
-package duke;
+package duke.command;
 
 /**
  * Command to print given string.
  */
-class PrintCommand implements ICommand{
+public class PrintCommand implements ICommand {
     /**
      * Execute the printing of given input.
      *

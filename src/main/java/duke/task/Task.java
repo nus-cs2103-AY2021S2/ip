@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
  * Abstract class for tasks. Contains information about the task description and
  * whether is has been carried out.
  */
-abstract class Task {
+public abstract class Task {
     private String content;
     private boolean isDone;
 
@@ -17,7 +17,7 @@ abstract class Task {
      *
      * @param content description of the task.
      */
-    Task(String content) {
+    public Task(String content) {
         this.content = content;
         this.isDone = false;
     }
@@ -45,7 +45,7 @@ abstract class Task {
     abstract public String toFileString();
 
 
-    String parseDate(String string){
+    public String parseDate(String string){
         try{
             LocalDate date = LocalDate.parse(string);
             return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -55,19 +55,19 @@ abstract class Task {
     }
 
     /**
-     * Set duke.Task to be done.
+     * Set duke.task.Task to be done.
      *
      */
-    protected void setDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
     /**
      * Gets the task description.
      *
-     * @return Description of duke.Task
+     * @return Description of duke.task.Task
      */
-    protected String getDesc() {
+    public String getDesc() {
         return this.content;
     }
 
@@ -76,7 +76,7 @@ abstract class Task {
      *
      * @return Boolean representation of whether task is done or not.
      */
-    protected boolean getDone() {
+    public boolean getDone() {
         return this.isDone;
     }
 }

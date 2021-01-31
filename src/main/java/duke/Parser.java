@@ -1,7 +1,9 @@
+package duke;
+
 /**
- * Parser class used to parse input into appropriate formats.
+ * duke.Parser class used to parse input into appropriate formats.
  */
-class Parser {
+public class Parser {
     /**
      * Parse given line into an array where the first element is a keyword.
      *

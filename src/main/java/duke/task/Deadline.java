@@ -1,15 +1,15 @@
-package duke;
+package duke.task;
 
-class Deadline extends Task{
-    private String deadline;
+public class Deadline extends Task{
+    private final String deadline;
 
     /**
-     * duke.Deadline constructor.
+     * duke.task.Deadline constructor.
      *
-     * @param content duke.Task description
+     * @param content duke.task.Task description
      * @param deadline The deadline task has to be completed by.
      */
-    Deadline(String content,String deadline){
+    public Deadline(String content,String deadline){
         super(content);
         this.deadline = deadline;
     }
@@ -27,7 +27,6 @@ class Deadline extends Task{
         } else {
             done = "0";
         }
-        String string = "D|"+ done + "|" + this.getDesc()+ "|" + this.deadline;
-        return string;
+        return "D|"+ done + "|" + this.getDesc()+ "|" + this.deadline;
     }
 }

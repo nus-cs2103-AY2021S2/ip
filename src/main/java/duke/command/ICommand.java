@@ -1,15 +1,15 @@
-package duke;
+package duke.command;
 
 /**
  * Interface for Command.
  *
  */
-interface ICommand {
+public interface ICommand {
     /**
      * Execute given action based on the command.
      *
      * @param parameters input required by the Command. See implementations of Command
      *                   for more information.
      */
-    void execute(String parameters);
+    public void execute(String parameters);
 }

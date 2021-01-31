@@ -1,6 +1,6 @@
-package duke;
+package duke.task;
 
-class Event extends Task{
+public class Event extends Task{
     private String timeRange;
 
     public Event(String content,String timeRange){

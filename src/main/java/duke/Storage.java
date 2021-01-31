@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -5,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.StringBuilder;
 
-class Storage {
+public class Storage {
     private static final String FILE_NAME = "duke.txt";
     private TaskList tasks;
 
@@ -13,7 +17,7 @@ class Storage {
         this.tasks = tasks;
     }
 
-    protected void read() {
+    public void read() {
         try {
             FileReader reader = new FileReader(FILE_NAME);
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -21,9 +25,6 @@ class Storage {
             taskString = bufferedReader.readLine();
             while(taskString!=null) {
                 String[] taskArray = taskString.split("\\|");
-                for (String s : taskArray) {
-                    System.out.println(s);
-                }
                 this.tasks.addTask(taskArray);
                 taskString = bufferedReader.readLine();
             }
@@ -36,7 +37,7 @@ class Storage {
         }
     }
 
-    protected void write() throws IOException {
+    public void write() throws IOException {
         StringBuilder sb = new StringBuilder();
         for (Task task: tasks.getTasks()) {
             sb.append(task.toFileString());

@@ -1,6 +1,8 @@
-package duke;
+package duke.command;
 
-class ExitCommand implements ICommand {
+import duke.TaskList;
+
+public class ExitCommand implements ICommand {
     private TaskList tasks;
 
     public ExitCommand(TaskList tasks) {

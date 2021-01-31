@@ -1,14 +1,15 @@
-package duke;
+package duke.command;
 
+import duke.TaskList;
 import duke.task.Task;
 
 /**
  * Command that prints the list existing in duke.TaskList.
  */
-class PrintListCommand implements ICommand {
+public class PrintListCommand implements ICommand {
     private TaskList tasks;
 
-    PrintListCommand(TaskList tasks){
+    public PrintListCommand(TaskList tasks){
         this.tasks = tasks;
     }
 

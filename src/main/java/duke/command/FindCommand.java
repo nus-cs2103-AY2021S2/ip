@@ -1,9 +1,10 @@
-package duke;
+package duke.command;
 
+import duke.TaskList;
 import duke.task.Task;
 
-public class FindCommand implements ICommand{
-    TaskList tasks;
+public class FindCommand implements ICommand {
+    private TaskList tasks;
 
     public FindCommand(TaskList tasks) {
         this.tasks = tasks;
