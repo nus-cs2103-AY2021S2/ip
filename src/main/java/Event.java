@@ -1,4 +1,4 @@
-public class Event extends Task{
+public class Event extends Task implements DueDate{
     protected String by;
 
     public Event(String description, String by) {
@@ -13,6 +13,11 @@ public class Event extends Task{
 
     public Event markAsDone() {
         return new Event(this.description, true, this.by);
+    }
+
+    @Override
+    public String getDueDate() {
+        return this.by;
     }
 
     @Override
