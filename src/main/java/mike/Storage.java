@@ -15,7 +15,7 @@ import java.util.List;
  * Used to store or load from the task lists into the disk
  */
 public class Storage {
-    Path filePath;
+    private Path filePath;
 
     /**
      * Creates a Storage object corresponding to the path
