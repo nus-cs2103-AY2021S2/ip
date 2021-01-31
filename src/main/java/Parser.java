@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import main.java.Ui;
 
 public class Parser {
 
@@ -66,7 +67,7 @@ public class Parser {
         }
     };
 
-    public static void read(String input) throws DukeException, Exception{
+    public static void read() throws DukeException, Exception{
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -156,12 +157,6 @@ public class Parser {
                 throw new InvalidArgument("Your input is invalid, Please try again");
             }
         }
-    }
-
-    public static void markDone(int i) {
-        Task task = taskList().get(i-1);
-        task.done();
-        System.out.println("Nice! I've marked this task as done: " + "\n" + task.toString());
     }
 
 }
