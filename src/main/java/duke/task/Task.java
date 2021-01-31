@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.dukeException.DukeException;
+
 public class Task {
     public boolean done;
     public String name;
@@ -11,7 +15,7 @@ public class Task {
         this.done = true;
     }
 
-    public void addTask(int count) throws DukeException{
+    public void addTask(int count) throws DukeException, DukeException {
         if(this.name.equals("todo")) {
             throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
