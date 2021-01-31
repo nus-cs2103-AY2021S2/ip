@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    public String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -21,7 +21,7 @@ public class Storage {
     /**
      * Reads tasks from a file.
      *
-     * @return An ArrayList<Task> containing the tasks read from the file.
+     * @return An ArrayList of Task Objects containing the tasks read from the file.
      */
     public ArrayList<Task> readTasksFromFile() throws FileNotFoundException {
         File f = new File(this.filePath); // create a File for the given file path
@@ -66,7 +66,7 @@ public class Storage {
     /**
      * Writes tasks to a file.
      *
-     * @param tasks An ArrayList<Task> containing the tasks to be written to the file.
+     * @param tasks An ArrayList of Task objects containing the tasks to be written to the file.
      */
     public void writeTasksToFile(ArrayList<Task> tasks) throws IOException {
 
@@ -85,6 +85,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Convert the String of a number into a boolean.
+     *
+     * @param numString String having value "1" or "0".
+     * */
     public Boolean convertToBool(String numString) {
         if (numString.equals("1")) {
             return true;

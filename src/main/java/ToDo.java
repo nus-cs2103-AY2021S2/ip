@@ -30,7 +30,7 @@ public class ToDo extends Task {
      */
     @Override
     public String fileString() {
-        int statusNum = this.isDone ? 1 : 0;
-        return "T | " + statusNum + " | " + this.description;
+        int statusNum = this.getStatus() ? 1 : 0;
+        return "T | " + statusNum + " | " + this.getDescription();
     }
 }

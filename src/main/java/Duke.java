@@ -6,9 +6,9 @@ import java.util.Scanner;
  * A personal task managing chatbot project.
  */
 public class Duke {
-    public TaskList tasks;
-    public Storage storage;
-    public Ui ui;
+    private TaskList tasks;
+    private Storage storage;
+    private Ui ui;
 
     Duke() {
         this.ui = new Ui();

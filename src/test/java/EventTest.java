@@ -8,7 +8,7 @@ public class EventTest {
     @Test
     public void correctDescription() {
         Event event = new Event("task1", LocalDate.parse("2020-02-02"));
-        assertEquals("task1", event.description);
+        assertEquals("task1", event.getDescription());
     }
 
     @Test

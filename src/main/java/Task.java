@@ -2,8 +2,8 @@
  * Represents a Task consisting of a description and completion status.
  */
 public class Task {
-    public String description;
-    public boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Creates a task instance.
@@ -16,12 +16,21 @@ public class Task {
     }
 
     /**
+     * Retrieves the completion status of the task
+     *
+     * @return Boolean indicating the completion status of the task
+     */
+    public boolean getStatus() {
+        return this.isDone;
+    }
+
+    /**
      * Retrieves the status symbol of the task depending on the completion status
      *
      * @return String with ths status character
      */
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " "); //return tick or X symbols
+        return (this.isDone ? "X" : " ");
     }
 
     /**
