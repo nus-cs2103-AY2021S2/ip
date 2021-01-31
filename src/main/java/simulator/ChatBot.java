@@ -8,40 +8,48 @@ import task.*;
 
 import ui.Ui;
 
+import static ui.Ui.printBox;
+
 public class ChatBot {
     private TaskList tasklist;
     private Storage storage;
     private Parser parser;
 
     public ChatBot() {
-        Ui.printBox(Ui.WELCOME_MSG + Ui.LOGO);
         storage = new Storage();
         parser = new Parser();
         tasklist = new TaskList();
+
     }
 
-    public void startUp() {
+    public String startup() {
         tasklist = storage.load(tasklist);
-        Ui.printBox(Ui.GREETING_MSG);
+        if (tasklist.size() == 0) {
+            return Ui.formatBox(Ui.INDENT_32_SPACES + "No Save Record Detected... \n"
+                    + Ui.INDENT_32_SPACES + "     Creating New List! :)");
+        } else {
+            return Ui.formatBox(Ui.INDENT_32_SPACES + "Saved Record Detected... \n"
+                    + Ui.INDENT_32_SPACES + "     Retrieving List! :)");
+        }
     }
 
-    public void save() throws IOException {
-        storage.save(tasklist);
+    public String save() throws IOException {
+       return storage.save(tasklist);
     }
 
-    public void process(String input) {
+    public String process(String input) {
         ArrayList<String> parsedInput = parser.parseInput(input);
         try {
             String command = parsedInput.get(0);
             if (command.equals("list")) {
-                Ui.printList(tasklist);
+                return Ui.printList(tasklist);
             } else {
                 if (command.equals("done")) {
                     int index = Integer.parseInt(parsedInput.get(1));
-                    tasklist.completeTask(index);
+                    return tasklist.completeTask(index);
                 } else if (command.equals("delete")) {
                     int index = Integer.parseInt(parsedInput.get(1));
-                    tasklist.deleteTask(index);
+                    return tasklist.deleteTask(index);
                 } else {
                     String description = parsedInput.get(1);
                     Task newTask;
@@ -49,28 +57,30 @@ public class ChatBot {
                     switch (command) {
                     case "todo":
                         newTask = new Todo(description);
-                        tasklist.addTask(newTask);
-                        break;
+                        return tasklist.addTask(newTask);
                     case "deadline":
                         duration = parsedInput.get(2);
                         newTask = new Deadline(description, duration);
-                        tasklist.addTask(newTask);
-                        break;
+                        return tasklist.addTask(newTask);
                     case "event":
                         duration = parsedInput.get(2);
                         newTask = new Event(description, duration);
-                        tasklist.addTask(newTask);
-                        break;
+                        return tasklist.addTask(newTask);
+                    case "bye" :
+                        try {
+                            return this.save();
+                        } catch (IOException ex) {
+                            return ex.getMessage();
+                        }
                     default:
-                        Ui.printBox("☹ OOPS!!! Incorrect input, please check!");
-                        break;
+                        return "☹ OOPS!!! Incorrect input, please check!";
                     }
                 }
             }
         } catch (DukeException err) {
-            Ui.printBox(err.getMessage());
+            return err.getMessage();
         } catch (Exception err) {
-            Ui.printBox("☹ OOPS!!! Incorrect input, please check!");
+            return "☹ OOPS!!! Incorrect input, please check!";
         }
     }
 

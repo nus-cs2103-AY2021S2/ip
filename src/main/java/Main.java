@@ -1,29 +1,31 @@
-import simulator.ChatBot;
-
 import java.io.IOException;
-import java.util.Scanner;
 
-import static ui.Ui.printBox;
+import gui.Gui;
+import gui.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class Main {
-    public static void main(String[] args) {
-        ChatBot cb = new ChatBot();
-        cb.startUp();
+/**
+ * A GUI for Duke using FXML.
+ */
+public class Main extends Application {
 
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+    private Gui gui = new Gui();
 
-        while (!input.equals(("bye"))) {
-            cb.process(input);
-            input = sc.nextLine();
-        }
-
+    @Override
+    public void start(Stage stage) {
         try {
-            cb.save();
-        } catch (IOException ex) {
-            printBox(ex.getMessage());
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(gui);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-
     }
 }
