@@ -20,8 +20,9 @@ public class ExitCommand extends Command {
      *  @param tm TaskManager Object from Duke.
      *  @param st Storage Object from Duke.
      */
-    public void execute(Ui ui, TaskManager tm, Storage st) {
+    public String execute(Ui ui, TaskManager tm, Storage st) {
         ui.showByeBye();
+        return "Thanks for using me!";
     }
 
     @Override

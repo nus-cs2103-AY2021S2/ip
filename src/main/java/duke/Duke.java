@@ -44,6 +44,23 @@ public class Duke {
         }
     }
 
+    public String getResponse(String command) {
+        String res;
+        try {
+            Command c = Parser.parse(command);
+            res = c.execute(ui, tm, st);
+        } catch (DukeException e) {
+            res = e.getMessage();
+        }
+        return res;
+    }
+
+
+    public static Duke init(String filePath) {
+        return new Duke(filePath);
+    }
+
+
     public static void main(String[] args) {
         new Duke("./data/tasks.txt").run();
     }

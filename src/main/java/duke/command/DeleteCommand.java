@@ -24,9 +24,10 @@ public class DeleteCommand extends Command {
      *  @param ui Ui Object from Duke.
      *  @param tm TaskManager Object from Duke.
      *  @param st Storage Object from Duke.
+     *  @return Command response.
      *  @throws DukeException If any error arises from execution.
      */
-    public void execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
+    public String execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
         Task t = tm.deleteTask(taskIndex);
         st.save(tm);
 
@@ -34,5 +35,12 @@ public class DeleteCommand extends Command {
         ui.println("       " + t.toString());
         ui.println(String.format("    Now you have %d task(s)",
                 tm.getSize()));
+
+        String res = "The following task has been removed: \n";
+        res += t.toString() + "\n";
+        res += String.format("Now you have %d task(s)",
+                tm.getSize());
+        return res;
+
     }
 }

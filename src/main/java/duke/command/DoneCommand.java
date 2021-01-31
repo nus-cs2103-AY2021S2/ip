@@ -24,13 +24,18 @@ public class DoneCommand extends Command {
      *  @param ui Ui Object from Duke.
      *  @param tm TaskManager Object from Duke.
      *  @param st Storage Object from Duke.
+     *  @return Command response.
      *  @throws DukeException If any error arises from execution.
      */
-    public void execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
+    public String execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
         Task t = tm.markTaskAsDone(taskIndex);
         st.save(tm);
 
         ui.println("    Marked as Done: ");
         ui.println("      " + t.toString());
+
+        String res = "Marked as Done: \n";
+        res += t.toString();
+        return res;
     }
 }

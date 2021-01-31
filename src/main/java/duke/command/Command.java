@@ -11,5 +11,5 @@ public abstract class Command {
         return false;
     }
 
-    public abstract void execute(Ui ui, TaskManager tm, Storage st) throws DukeException;
+    public abstract String execute(Ui ui, TaskManager tm, Storage st) throws DukeException;
 }
