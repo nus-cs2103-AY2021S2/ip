@@ -1,18 +1,14 @@
-public class Task {
+abstract public class Task {
     private String title;
     private boolean isDone;
 
+    /**
+     * @param title the title of the task
+     * @param isDone the status of the task
+     */
     public Task(String title, boolean isDone) {
         this.title = title;
         this.isDone = isDone;
-    }
-
-    public Task(String title) {
-        this(title, false);
-    }
-
-    public boolean ifDone() {
-        return this.isDone;
     }
 
     /**
