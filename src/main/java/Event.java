@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
     
     protected String time;
@@ -21,7 +25,14 @@ public class Event extends Task {
         }
 
         eventTime = eventTime.substring(1);
-        System.out.println(eventTime);
+        LocalDate actualTime;    
+        try {   
+            actualTime = LocalDate.parse(eventTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter your date in YYYY-MM-DD format!!!");
+        }
+
+        System.out.println(actualTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         return new Event(eventName, eventTime);
     }
 
