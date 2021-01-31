@@ -9,6 +9,6 @@ public class TimeDurationInvalidException extends DukeException {
      * for invalid start and end time of task.
      */
     public TimeDurationInvalidException() {
-        super("\tPlease enter a valid start and end time duration\n\t(start time < end time).\n");
+        super("Please enter a valid start and end time duration (start time < end time).");
     }
 }
