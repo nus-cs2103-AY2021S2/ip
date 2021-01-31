@@ -1,32 +1,38 @@
-package duke;
+package duke.command;
 
 import java.io.IOException;
 
-/**
- * Represents a delete command keyed in by the user.
- */
-public class DeleteCommand extends Command {
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskManager;
+import duke.Ui;
+import duke.task.Task;
 
-    DeleteCommand(String[] parsedCommand) {
+/**
+ * Represents a done command keyed in by the user.
+ */
+public class DoneCommand extends Command {
+
+    public DoneCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 
     /**
-     * Executes the delete command by removing the task from the list, printing the deleted task to the user and
+     * Executes the done command by marking the task as completed, printing the completed task to the user and
      * updating the stored file.
      *
      * @param taskManager TaskManager object that maintains the list of tasks.
      * @param ui Ui object that handles user interaction.
      * @param storage Storage object that handles the updating of stored file.
-     * @return String string to output to user
+     * @return String string to output to user.
      * @throws IOException If the list of tasks are not in the correct storage format.
      * @throws DukeException If the task number specified as done is not valid.
      */
     public String execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException, IOException {
         String taskNumber = super.parsedCommand[1];
-        Task completedTask = taskManager.delete(Integer.parseInt(taskNumber));
+        Task doneTask = taskManager.done(Integer.parseInt(taskNumber));
         storage.store(taskManager.retrieveTasksforStorage());
-        return ui.showRemovedTask(completedTask, taskManager.getNumOfTasks());
-    }
+        return ui.showDoneTask(doneTask);
 
+    }
 }

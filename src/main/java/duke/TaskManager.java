@@ -1,13 +1,17 @@
 package duke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class TaskManager {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private ArrayList<Task> list = new ArrayList<>(100);
-
-
 
     public Task add(String type, String task, boolean isCompleted) {
         if (type.equals(TODO)) {
@@ -89,7 +93,7 @@ public class TaskManager {
     public ArrayList<Task> retrieveMatchingTasks(String keyword) {
         ArrayList<Task> taskList = new ArrayList<>();
         for (Task task : list) {
-            if (task.description.contains(keyword)) {
+            if (task.getDescription().contains(keyword)) {
                 taskList.add(task);
             }
         }

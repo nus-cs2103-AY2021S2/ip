@@ -1,11 +1,15 @@
-package duke;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskManager;
+import duke.Ui;
 
 /**
  * Represents a list command keyed in by the user.
  */
 public class ListCommand extends Command {
 
-    ListCommand(String[] parsedCommand) {
+    public ListCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 

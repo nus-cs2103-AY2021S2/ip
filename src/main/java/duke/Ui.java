@@ -1,23 +1,16 @@
 package duke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.task.Task;
+
 public class Ui {
-    public String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n" + "What can I do for you?");
-        System.out.println("");
-        return logo;
-    }
 
     public String showError(String error) {
         System.out.println(error);
         System.out.println("");
-        return error + "/n";
+        return error + "\n";
     }
 
     public String showAddedTask(Task task, int numOfTasks) {

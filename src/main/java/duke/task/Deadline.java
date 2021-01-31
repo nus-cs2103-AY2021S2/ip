@@ -1,4 +1,5 @@
-package duke;
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +12,7 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
-    Deadline(String description, boolean isCompleted, String deadline) {
+    public Deadline(String description, boolean isCompleted, String deadline) {
         super(description, isCompleted);
         String[] dateAndTime = deadline.split(" ");
         String date = dateAndTime[0];

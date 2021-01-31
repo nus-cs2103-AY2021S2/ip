@@ -4,7 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.command.Command;
 import javafx.scene.image.Image;
+
 
 
 public class Duke {

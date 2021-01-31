@@ -1,5 +1,12 @@
-package duke;
+package duke.command;
+
 import java.io.IOException;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskManager;
+import duke.Ui;
+
 
 /**
  * Represents a command keyed in by the user.
@@ -21,7 +28,7 @@ public abstract class Command {
      * @throws IOException If the list of tasks are not in the correct storage format.
      * @throws DukeException If the task number specified to mark done or delete is not a valid task number.
      */
-    abstract String execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract String execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException, IOException;
 
     public boolean isExit() {
         return false;

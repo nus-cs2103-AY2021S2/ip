@@ -1,12 +1,18 @@
-package duke;
+package duke.command;
+
 import java.io.IOException;
+
+import duke.Storage;
+import duke.TaskManager;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * Represents an add command keyed in by the user.
  */
 public class AddCommand extends Command {
 
-    AddCommand(String[] parsedCommand) {
+    public AddCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 

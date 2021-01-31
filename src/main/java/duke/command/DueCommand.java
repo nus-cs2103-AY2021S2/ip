@@ -1,13 +1,19 @@
-package duke;
+package duke.command;
 
 import java.util.ArrayList;
+
+import duke.Storage;
+import duke.TaskManager;
+import duke.Ui;
+import duke.task.Task;
+
 
 /**
  * Represents a due command keyed in by the user.
  */
 public class DueCommand extends Command {
 
-    DueCommand(String[] parsedCommand) {
+    public DueCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 

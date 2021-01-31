@@ -1,10 +1,16 @@
-package duke;
+package duke.command;
 
 import java.util.ArrayList;
 
+import duke.Storage;
+import duke.TaskManager;
+import duke.Ui;
+import duke.task.Task;
+
+
 public class FindCommand extends Command {
 
-    FindCommand(String[] parsedCommand) {
+    public FindCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 

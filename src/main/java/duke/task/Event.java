@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +10,7 @@ public class Event extends Task {
     protected LocalDate date;
     protected String duration;
 
-    Event(String description, boolean isCompleted, String time) {
+    public Event(String description, boolean isCompleted, String time) {
         super(description, isCompleted);
         String[] dateDuration = time.split(" ");
         String eventDate = dateDuration[0];

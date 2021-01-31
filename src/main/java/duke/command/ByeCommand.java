@@ -1,11 +1,15 @@
-package duke;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskManager;
+import duke.Ui;
 
 /**
  * Represents a bye command keyed in by the user.
  */
 public class ByeCommand extends Command {
 
-    ByeCommand(String[] parsedAction) {
+    public ByeCommand(String[] parsedAction) {
         super(parsedAction);
     }
 

@@ -1,4 +1,5 @@
-package duke;
+package duke.task;
+
 import java.time.LocalDate;
 
 /**
@@ -29,6 +30,10 @@ public class Task {
 
     public LocalDate getTaskDate() {
         return null;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     /**
