@@ -24,18 +24,31 @@ public class Duke {
                 String[] line = command.split(" ");
                 int length = line.length;
                 if (length == 1) {
-                    throw new TodoException(":( OOPS!!! The description of a todo cannot be empty.");
+                    throw new TodoException("Oops! The description for Todo cannot be empty.");
                 }
                 System.out.println("Got it. I've added this task:");
                 String description = "";
+                String date = "";
+                String time = "";
+                boolean isDesc = true;
+                boolean isDate = true;
                 for (int i = 1; i < length; i++) {
-                    if (i + 1 != length) {
-                        description += line[i] + " ";
+                    if (line[i].equals("/at")) {
+                        isDesc = false;
+                    } else if (isDesc) {
+                        if (i + 1 == length) {
+                            description += line[i];
+                        } else {
+                            description += line[i] + " ";
+                        }
+                    } else if (isDate) {
+                        date += line[i];
+                        isDate = false;
                     } else {
-                        description += line[i];
+                        time += line[i];
                     }
                 }
-                Todo todo = new Todo(description);
+                Todo todo = new Todo(description, date, time);
                 tasks.add(todo);
                 System.out.println(todo.toString());
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -43,30 +56,31 @@ public class Duke {
                 String[] line = command.split(" ");
                 int length = line.length;
                 if (length == 1) {
-                    throw new DeadlineException(":( OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DeadlineException("Oops! The description for Deadline cannot be empty.");
                 }
                 System.out.println("Got it. I've added this task:");
                 String description = "";
                 String date = "";
+                String time = "";
                 boolean isDesc = true;
+                boolean isDate = true;
                 for (int i = 1; i < length; i++) {
                     if (line[i].equals("/by")) {
                         isDesc = false;
-                    } else if (i + 1 == length) {
-                        if (isDesc) {
+                    } else if (isDesc) {
+                        if (i + 1 == length) {
                             description += line[i];
                         } else {
-                            date += line[i];
-                        }
-                    } else {
-                        if (isDesc) {
                             description += line[i] + " ";
-                        } else {
-                            date += line[i] + " ";
                         }
+                    } else if (isDate) {
+                        date += line[i];
+                        isDate = false;
+                    } else {
+                        time += line[i];
                     }
                 }
-                Deadline deadline = new Deadline(description, date);
+                Deadline deadline = new Deadline(description, date, time);
                 tasks.add(deadline);
                 System.out.println(deadline.toString());
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -74,30 +88,31 @@ public class Duke {
                 String[] line = command.split(" ");
                 int length = line.length;
                 if (length == 1) {
-                    throw new EventException(":( OOPS!!! The description of a event cannot be empty.");
+                    throw new EventException("Oops! The description for Event cannot be empty.");
                 }
                 System.out.println("Got it. I've added this task:");
                 String description = "";
+                String date = "";
                 String time = "";
                 boolean isDesc = true;
+                boolean isDate = true;
                 for (int i = 1; i < length; i++) {
                     if (line[i].equals("/at")) {
                         isDesc = false;
-                    } else if (i + 1 == length) {
-                        if (isDesc) {
+                    } else if (isDesc) {
+                        if (i + 1 == length) {
                             description += line[i];
                         } else {
-                            time += line[i];
-                        }
-                    } else {
-                        if (isDesc) {
                             description += line[i] + " ";
-                        } else {
-                            time += line[i] + " ";
                         }
+                    } else if (isDate) {
+                        date += line[i];
+                        isDate = false;
+                    } else {
+                        time += line[i];
                     }
                 }
-                Event event = new Event(description, time);
+                Event event = new Event(description, date, time);
                 tasks.add(event);
                 System.out.println(event.toString());
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -118,101 +133,9 @@ public class Duke {
                 System.out.println("Bye! Hope to see you again soon!");
                 break;
             } else {
-                throw new UnknownException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new UnknownException("Oops! I'm sorry, but I don't know what that means!");
             }
         }
         System.exit(0);
-    }
-}
-
-class Task {
-    private String description;
-    private Boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    @Override
-    public String toString() {
-        if (this.isDone) {
-            return "[X] " + this.description;
-        } else {
-            return "[ ] " + this.description;
-        }
-    }
-}
-
-class Todo extends Task {
-    public Todo(String description) {
-        super(description);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-
-class Deadline extends Task {
-    private String date;
-
-    public Deadline(String description, String date) {
-        super(description);
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.date + ")";
-    }
-}
-
-class Event extends Task {
-    private String time;
-
-    public Event(String description, String time) {
-        super(description);
-        this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.time + ")";
-    }
-}
-
-class DukeException extends Exception {
-    public DukeException(String error) {
-        super(error);
-    }
-}
-
-class TodoException extends DukeException {
-    public TodoException(String error) {
-        super(error);
-    }
-}
-
-class DeadlineException extends DukeException {
-    public DeadlineException(String error) {
-        super(error);
-    }
-}
-
-class EventException extends DukeException {
-    public EventException(String error) {
-        super(error);
-    }
-}
-
-class UnknownException extends DukeException {
-    public UnknownException(String error) {
-        super(error);
     }
 }
