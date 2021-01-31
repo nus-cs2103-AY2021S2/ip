@@ -27,6 +27,14 @@ class Task {
         this.isDone = done;
     }
 
+    public String getDate() {
+        return this.date;
+    }
+
+    public String getTime() {
+        return this.time;
+    }
+
     public Task markAsDone() {
         return new Task(description, date, time, symbol, isAt, true);
     }
