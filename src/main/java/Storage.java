@@ -65,6 +65,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             File file = new File(filePath);
             try {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
