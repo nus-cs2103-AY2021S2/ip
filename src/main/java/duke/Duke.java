@@ -5,9 +5,13 @@ import java.util.Scanner;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeLoadException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /** A chat bot that can help the user manage their tasks */
-public class Duke {
+public class Duke extends Application {
     /** Name of the chat bot */
     private static final String CHATBOT_NAME = "Mantaro";
     /** Determine whether the chat bot continue to run */
@@ -53,13 +57,21 @@ public class Duke {
         ui.printGoodbyeMsg();
     }
 
-    /**
-     * Lifecycle of the program
-     *
-     * @param args Command line arguments
-     */
-    public static void main(String[] args) {
-        Duke bot = new Duke();
-        bot.run();
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+        stage.setScene(scene);
+        stage.show();
     }
+
+//    /**
+//     * Lifecycle of the program
+//     *
+//     * @param args Command line arguments
+//     */
+//    public static void main(String[] args) {
+//        Duke bot = new Duke();
+//        bot.run();
+//    }
 }
