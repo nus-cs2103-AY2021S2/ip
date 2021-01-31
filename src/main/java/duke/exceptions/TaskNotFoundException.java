@@ -9,6 +9,6 @@ public class TaskNotFoundException extends DukeException {
      * for selecting task index outside of TaskList size.
      */
     public TaskNotFoundException() {
-        super("\tTask not in list.\n");
+        super("Task not in list.");
     }
 }
