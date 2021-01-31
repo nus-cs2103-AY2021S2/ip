@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
      */
     public HelpCommand(String[] details) {
         super(details);
-        taskType = CommandType.valueOf(details[0]);
+        commandType = CommandType.valueOf(details[0]);
     }
 
     /**
@@ -27,7 +27,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (taskType == CommandType.ERROR) {
+        if (commandType == CommandType.ERROR) {
             System.out.println("That is not a valid command! Here's some help!");
         }
         ui.showHelp();
