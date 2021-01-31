@@ -1,5 +1,11 @@
 package duke.utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
@@ -16,21 +22,21 @@ import duke.dukeexceptions.InvalidDateTimeException;
 import duke.dukeexceptions.InvalidIndexInputException;
 import duke.tasks.TaskList;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Parser {
-    private static final Pattern checkNum = Pattern.compile("^[0-9]$");
-    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
             + "[dd-MM-yy HHmm]");
+    private static final Pattern checkNum = Pattern.compile("^[0-9]$");
 
     private final TaskList taskList;
     private final Ui ui;
     private final Storage storage;
 
+    /**
+     * Constructors a Parser object, responsible for parsing input from the user.
+     * @param taskList the list of tasks.
+     * @param ui the object in charge of printing user-friendly outputs.
+     * @param storage the object in charge of writing to the local storage file.
+     */
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;
@@ -54,32 +60,32 @@ public class Parser {
         String command = commandAndInput[0];
 
         switch (command) {
-            case ToDoCommand.COMMAND_WORD:
-                return prepareToDo(commandAndInput);
+        case ToDoCommand.COMMAND_WORD:
+            return prepareToDo(commandAndInput);
 
-            case DeadlineCommand.COMMAND_WORD:
-                return prepareDeadline(commandAndInput);
+        case DeadlineCommand.COMMAND_WORD:
+            return prepareDeadline(commandAndInput);
 
-            case EventCommand.COMMAND_WORD:
-                return prepareEvent(commandAndInput);
+        case EventCommand.COMMAND_WORD:
+            return prepareEvent(commandAndInput);
 
-            case FindCommand.COMMAND_WORD:
-                return prepareFind(commandAndInput);
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(commandAndInput);
 
-            case DoneCommand.COMMAND_WORD:
-                return prepareDone(commandAndInput);
+        case DoneCommand.COMMAND_WORD:
+            return prepareDone(commandAndInput);
 
-            case DeleteCommand.COMMAND_WORD:
-                return prepareDelete(commandAndInput);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(commandAndInput);
 
-            case ListCommand.COMMAND_WORD:
-                return prepareList();
+        case ListCommand.COMMAND_WORD:
+            return prepareList();
 
-            case ByeCommand.COMMAND_WORD:
-                return prepareExit();
+        case ByeCommand.COMMAND_WORD:
+            return prepareExit();
 
-            default:
-                return prepareHelp();
+        default:
+            return prepareHelp();
         }
     }
 
@@ -98,7 +104,7 @@ public class Parser {
             taskInputAndDate[1] = taskInputAndDate[1].trim();
 
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), formatter);
+                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
                 return new DeadlineCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeException();
@@ -117,7 +123,7 @@ public class Parser {
             taskInputAndDate[1] = taskInputAndDate[1].trim();
 
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), formatter);
+                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
                 return new EventCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeException();
@@ -153,7 +159,7 @@ public class Parser {
         } else {
             int position = calcListPos(arguments[1], arguments[0]);
 
-            if (this.taskList.getList().size() == 0){
+            if (this.taskList.getList().size() == 0) {
                 throw new InvalidIndexInputException("You have already done all tasks!");
             } else if (position >= this.taskList.getList().size() || position < 0) {
                 throw new InvalidIndexInputException("Please input an index from 1 to "
@@ -170,7 +176,7 @@ public class Parser {
         } else {
             int position = calcListPos(arguments[1], arguments[0]);
 
-            if (this.taskList.getList().size() == 0){
+            if (this.taskList.getList().size() == 0) {
                 throw new InvalidIndexInputException("There are no tasks to delete!");
             } else if (position >= this.taskList.getList().size() || position < 0) {
                 throw new InvalidIndexInputException("Please input an index from 1 to "

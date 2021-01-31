@@ -1,19 +1,26 @@
 package duke.commands;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.utils.Storage;
-import duke.utils.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.utils.Storage;
+import duke.utils.Ui;
+
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     private String toFind;
 
+    /**
+     * Creates a FindCommand object to store the find command input from the user.
+     * @param taskList the current list of Tasks.
+     * @param ui the object in charge of printing user-friendly outputs.
+     * @param storage the object in charge of writing to the local storage file.
+     * @param toFind the phrase to search in all the tasks.
+     */
     public FindCommand(TaskList taskList, Ui ui, Storage storage, String toFind) {
         super(taskList, ui, storage);
         this.toFind = toFind;
