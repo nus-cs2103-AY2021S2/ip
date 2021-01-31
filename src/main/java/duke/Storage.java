@@ -3,6 +3,8 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,21 +15,27 @@ import java.util.Scanner;
  * Handle file I/O.
  */
 public class Storage {
-    private File file;
+    private final Path storagePath;
+    private List<String> taskLst;
 
     /**
-     * Construct a Storage from a specified filename.
-     * @param name the filename
+     * Construct a Storage from a specified filepath.
+     * @param storagePath the specified path
      */
-    Storage(String name) {
+    public Storage(Path storagePath) {
+        this.storagePath = storagePath;
         try {
-            this.file = new File(name);
-            if (file.createNewFile()) {
-                System.out.println("Created file: " + file.getName());
+            Path parent = storagePath.getParent();
+            Files.createDirectories(parent);
+
+            if(!Files.exists(storagePath)) {
+                Files.createFile(storagePath);
             }
 
+            taskLst = Files.readAllLines(storagePath);
+
         } catch (IOException err) {
-            Ui.printException(new DukeException(err.getMessage()));
+            System.out.println("File read error: " + err.getMessage());
         }
     }
 
@@ -35,51 +43,55 @@ public class Storage {
      * Read tasks stored in the file.
      * @return the list of tasks read
      */
-    public List<Task> read() {
-        List<Task> lst = new ArrayList<>();
-        try {
-            Scanner sc = new Scanner(this.file);
-            while (sc.hasNextLine()) {
-                String str = sc.nextLine();
-                char type = str.charAt(1);
-                char status = str.charAt(3);
-                String desc = str.substring(7);
-                if (type == 'T') {
-                    lst.add(new ToDo(desc));
-                } else if (type == 'D') {
-                    int index = desc.indexOf('(');
-                    String name = desc.substring(0, index);
-                    String time = desc.substring(index + 5, desc.length() - 1);
-                    lst.add(new Deadline(name, LocalDate.parse(time, DateTimeFormatter.ofPattern("MMM dd yyyy"))));
-                } else if (type == 'E') {
-                    int index = desc.indexOf('(');
-                    String name = desc.substring(0, index);
-                    String time = desc.substring(index + 5, desc.length() - 1);
-                    lst.add(new Event(name, LocalDate.parse(time, DateTimeFormatter.ofPattern("MMM dd yyyy"))));
-                }
-                if (status == 'X') {
-                    lst.get(lst.size() - 1).markDone();
-                }
+    public ArrayList<Task> read() {
+        ArrayList<Task> lst = new ArrayList<>();
+        for(String line: this.taskLst) {
+            char type = line.charAt(1);
+            String desc = line.substring(7);
+            int index;
+            String name, time;
+            char done = line.charAt(3);
+            switch (type) {
+            case 'T':
+                lst.add(new ToDo(desc));
+                break;
+            case 'D':
+                index = desc.indexOf('(');
+                name = desc.substring(0, index);
+                time = desc.substring(index + 5, desc.length() - 1);
+                lst.add(new Deadline(name, LocalDate.parse(time, DateTimeFormatter.ofPattern("MMM dd yyyy"))));
+                break;
+            case 'E':
+                index = desc.indexOf('(');
+                name = desc.substring(0, index);
+                time = desc.substring(index + 5, desc.length() - 1);
+                lst.add(new Event(name, LocalDate.parse(time, DateTimeFormatter.ofPattern("MMM dd yyyy"))));
+                break;
+            default:
+                System.out.println("Task undetermined");
+                break;
             }
-        } catch (IOException err) {
-            Ui.printException(new DukeException(err.getMessage()));
+            if (done == 'X') {
+                lst.get(lst.size() - 1).markDone();
+            }
         }
         return lst;
     }
 
     /**
      * Write all tasks to given file.
-     * @param lst list of tasks to be written
+     * @param taskList list of tasks to be written
      */
-    public void write(List<Task> lst) {
+    public void write(TaskList taskList) {
         try {
-            FileWriter fileWriter = new FileWriter(this.file);
-            for (Task task: lst) {
-                fileWriter.write(task.toString() + '\n');
+            File storageFile = new File(String.valueOf(storagePath));
+            FileWriter fileWriter = new FileWriter(storageFile);
+            for (int i = 0; i < taskList.size(); i++) {
+                fileWriter.write(taskList.get(i).toString() + '\n');
             }
             fileWriter.close();
         } catch (IOException err) {
-            Ui.printException(new DukeException(err.getMessage()));
+            System.out.println(err.getMessage());
         }
     }
 }

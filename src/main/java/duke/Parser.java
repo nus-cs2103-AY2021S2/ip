@@ -4,32 +4,36 @@ package duke;
  * This class translate the user input into commands understandable by Duke.
  */
 public class Parser {
-    private TaskList taskList;
-
-    /**
-     * Construct a Parser from the specified list of task.
-     */
-    Parser(TaskList taskList) {
-        this.taskList = taskList;
-    }
 
     /**
      * Parse the user input.
      * @param command input entered by user
      */
-    void parse(String command) {
-        if (command.equals("bye")) {
-            Ui.exit();
-        } else if (command.equals("list")) {
-            taskList.listTask();
-        } else if (command.startsWith("done")) {
-            taskList.markDone(command.substring(5));
-        } else if (command.startsWith("delete")) {
-            taskList.deleteTask(command.substring(7));
-        } else if (command.startsWith("find")) {
-            taskList.findTask(command.substring(5));
-        } else {
-            taskList.addTask(command);
+    public static String parse(String command, TaskList taskList, Storage storage) throws DukeException {
+        command = command.trim();
+        String type = command.substring(0, command.indexOf(" "));
+        String desc = command.substring(command.indexOf(" ") + 1,
+                ((!command.contains("/")) ? command.length() : command.indexOf("/")));
+        String time = command.substring(command.indexOf("/") + 4);
+        String ret;
+        if (type.equals("todo")) {
+            ret = Executor.add(taskList, type, desc);
+        } else if (type.equals("deadline") || type.equals("event")) {
+            ret = Executor.add(taskList, type, desc, time);
+        } else if (type.equals("done")) {
+            ret = Executor.markDone(taskList, Integer.parseInt(desc));
+        } else if (type.equals("delete")) {
+            ret = Executor.delete(taskList, Integer.parseInt(desc));
+        } else if (type.equals("find")) {
+            ret = Executor.find(taskList, desc);
+        } else if (type.equals("list")) {
+            ret = Executor.list(taskList);
+        } else if (type.equals("bye")) {
+            ret = Executor.exit(taskList, storage);
         }
+        else {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+        return ret;
     }
 }
