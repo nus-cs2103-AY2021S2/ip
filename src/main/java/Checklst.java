@@ -28,8 +28,12 @@ public class Checklst {
                         sendOutput(taskList.toString());
                         break;
                     case "done":
-                        int index = Integer.parseInt(input[1]);
-                        sendOutput("Nice! I've marked this item as done\n\t" + taskList.completeTask(index));
+                        int doneIndex = Integer.parseInt(input[1]);
+                        sendOutput("Nice! I've marked this task as done!\n\t" + taskList.completeTask(doneIndex));
+                        break;
+                    case "delete":
+                        int deleteIndex = Integer.parseInt(input[1]);
+                        sendOutput("Alright! I've deleted this task!\n\t" + taskList.deleteTask(deleteIndex));
                         break;
                     case "todo":
                         Task newTodo = Todo.makeTodo(input[1]);

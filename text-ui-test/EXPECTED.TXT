@@ -6,34 +6,52 @@
 	You now have 1 task(s) in the list!
 	----------------------------------------
 	----------------------------------------
-	Added: [E][] Event1 (at: Sunday 2pm
+	Added: [E][] Event1 (at: Sunday 2pm)
 	You now have 2 task(s) in the list!
 	----------------------------------------
 	----------------------------------------
-	Added: [D][] Deadline1 (by: Saturday 2359
+	Added: [D][] Deadline1 (by: Saturday 2359)
 	You now have 3 task(s) in the list!
 	----------------------------------------
 	----------------------------------------
+	Added: [T][] Todo2
+	You now have 4 task(s) in the list!
+	----------------------------------------
+	----------------------------------------
 	1. [T][] Todo1
-	2. [E][] Event1 (at: Sunday 2pm
-	3. [D][] Deadline1 (by: Saturday 2359
+	2. [E][] Event1 (at: Sunday 2pm)
+	3. [D][] Deadline1 (by: Saturday 2359)
+	4. [T][] Todo2
 	----------------------------------------
 	----------------------------------------
-	Nice! I've marked this item as done
-	[E][X] Event1 (at: Sunday 2pm
+	Nice! I've marked this task as done!
+	[E][X] Event1 (at: Sunday 2pm)
 	----------------------------------------
 	----------------------------------------
-	Nice! I've marked this item as done
-	[D][X] Deadline1 (by: Saturday 2359
+	Alright! I've deleted this task!
+	[E][X] Event1 (at: Sunday 2pm)
 	----------------------------------------
 	----------------------------------------
-	Nice! I've marked this item as done
+	Nice! I've marked this task as done!
+	[T][X] Todo2
+	----------------------------------------
+	----------------------------------------
+	Nice! I've marked this task as done!
 	[T][X] Todo1
 	----------------------------------------
 	----------------------------------------
 	1. [T][X] Todo1
-	2. [E][X] Event1 (at: Sunday 2pm
-	3. [D][X] Deadline1 (by: Saturday 2359
+	2. [D][] Deadline1 (by: Saturday 2359)
+	3. [T][X] Todo2
+	----------------------------------------
+	----------------------------------------
+	Inproper Event format used! Please use { name } /at { event }
+	----------------------------------------
+	----------------------------------------
+	Inproper Deadline format used! Please use { name } /by { deadline }
+	----------------------------------------
+	----------------------------------------
+	Sorry I didn't understand that command!!
 	----------------------------------------
 	----------------------------------------
 	Bye! Hope to see you again!

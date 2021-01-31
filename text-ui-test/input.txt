@@ -1,9 +1,14 @@
 todo Todo1
 event Event1 /at Sunday 2pm
 deadline Deadline1 /by Saturday 2359
+todo Todo2
 list
 done 2
+delete 2
 done 3
 done 1
 list
+event ErrorEvent
+deadline ErrorDeadline
+gibberish
 bye

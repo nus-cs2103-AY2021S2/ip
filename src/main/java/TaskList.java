@@ -22,6 +22,19 @@ public class TaskList {
         return newTask;
     }
 
+    public Task deleteTask(int index) throws ChecklstException {
+        index--; 
+
+        if (index < 0 || index >= this.taskList.size()) {
+            throw new ChecklstException("The task index you have indicated does not exist!");
+        }
+
+        Task newTask = taskList.get(index);
+        this.taskList.remove(index);
+
+        return newTask;
+    }
+
     @Override
     public String toString() {
         if (taskList.size() == 0) {
