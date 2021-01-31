@@ -1,51 +1,46 @@
 package duke;
 
 import java.io.IOException;
+import java.util.List;
 
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.CommandResult;
-import duke.commands.InvalidCommandException;
-import duke.commands.InvalidDescriptionException;
-import duke.commands.NoDescriptionException;
-import duke.parser.Parser;
 import duke.storage.InvalidStorageFilePathException;
 import duke.storage.Storage;
-import duke.storage.StorageException;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * The main entry point to the chatbot application.
  * Initializes the application and starts user interaction.
  */
-public class Main {
+public class Main extends Application {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
 
-    /**
-     * Entry point of the application.
-     *
-     * @param args an optional user-specified filepath used to initialize the storage
-     */
-    public static void main(String[] args) {
-        new Main().run(args);
-    }
+    @Override
+    public void init() throws Exception {
+        super.init();
+        
+        // Get the command line argument
+        Application.Parameters applicationParameters = getParameters();
+        List<String> parameters = applicationParameters.getUnnamed();
+        String[] args = parameters.toArray(new String[0]);
 
-    /**
-     * Runs the application until user terminates with an exit command.
-     *
-     * @param args an optional user-specified filepath used to initialize the storage
-     */
-    public void run(String[] args) {
         // Initialize the required components
         initialize(args);
+    }
 
-        // Run infinite loop asking for user command until user enter exit command
-        runLoop();
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Start the ui and show the GUI
+        ui.start(primaryStage);
+    }
 
+    @Override
+    public void stop() throws Exception {
         // Exit the program
         exit();
     }
@@ -58,9 +53,10 @@ public class Main {
     private void initialize(String[] args) {
         try {
             // Initialize the required components
-            ui = new Ui();
             storage = initializeStorage(args);
             taskList = storage.loadTasks();
+            ui = new Ui(storage, taskList);
+            
             // Print the welcome greeting
             ui.printDivider();
             ui.printGreeting();
@@ -96,59 +92,6 @@ public class Main {
         } else {
             // Using the default file path as user did not specify a file path
             return new Storage();
-        }
-    }
-
-    /**
-     * Runs the loop asking for user commands and execute the command until user enters exit command.
-     */
-    private void runLoop() {
-        Command command = null;
-        do {
-            try {
-                // Ask for user input
-                ui.printDivider();
-                String userInput = ui.getUserInput();
-                ui.printDivider();
-
-                // Parse the user input into an executable command
-                command = new Parser().parseCommand(userInput);
-
-                // Execute the command
-                CommandResult commandResult = executeCommand(command);
-
-                // Update the cached task list and save it to file
-                storage.saveTasksIfPresent(commandResult.getUpdatedTaskList());
-                updateTaskListIfPresent(commandResult.getUpdatedTaskList());
-
-                // Print the message for the user
-                ui.print(commandResult.getMessageForUser());
-            } catch (InvalidCommandException | StorageException | InvalidDescriptionException
-                    | NoDescriptionException ex) {
-                ui.print(ex.getMessage());
-            }
-        } while (!ByeCommand.isByeCommand(command));
-    }
-
-    /**
-     * Executes the command and return a CommandResult instance.
-     *
-     * @param command user command
-     * @return result command
-     */
-    private CommandResult executeCommand(Command command) {
-        command.setTaskList(taskList);
-        return command.execute();
-    }
-
-    /**
-     * Update the cached task list if it was modified by the previous command.
-     *
-     * @param taskList updated task list
-     */
-    private void updateTaskListIfPresent(TaskList taskList) {
-        if (taskList != null) {
-            this.taskList = taskList;
         }
     }
 }
