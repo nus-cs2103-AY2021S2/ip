@@ -23,7 +23,6 @@ public class Main extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        
         // Get the command line argument
         Application.Parameters applicationParameters = getParameters();
         List<String> parameters = applicationParameters.getUnnamed();
@@ -39,12 +38,6 @@ public class Main extends Application {
         ui.start(primaryStage);
     }
 
-    @Override
-    public void stop() throws Exception {
-        // Exit the program
-        exit();
-    }
-
     /**
      * Initializes the required components and prints the welcome greeting.
      *
@@ -56,25 +49,9 @@ public class Main extends Application {
             storage = initializeStorage(args);
             taskList = storage.loadTasks();
             ui = new Ui(storage, taskList);
-            
-            // Print the welcome greeting
-            ui.printDivider();
-            ui.printGreeting();
-        } catch (InvalidStorageFilePathException ex) {
-            ui.print(ex.getMessage());
-            throw new RuntimeException(ex);
-        } catch (IOException ex) {
-            ui.print("Failed to load tasks from storage file. Exiting...");
-            throw new RuntimeException(ex);
+        } catch (InvalidStorageFilePathException | IOException ex) {
+            System.exit(1);
         }
-    }
-
-    /**
-     * Prints the exit message
-     */
-    private void exit() {
-        ui.printExitMessage();
-        ui.printDivider();
     }
 
     /**

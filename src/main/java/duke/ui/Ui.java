@@ -1,8 +1,5 @@
 package duke.ui;
 
-import java.io.PrintStream;
-import java.util.Scanner;
-
 import duke.DialogBox;
 
 import duke.commands.*;
@@ -33,9 +30,6 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
 
-    private final Scanner in;
-    private final PrintStream out;
-
     private Storage storage;
     private TaskList taskList;
     
@@ -47,17 +41,7 @@ public class Ui {
     private Button sendButton;
     private Scene scene;
     
-    /**
-     * Creates a {code Ui} object with a standard input reader and a standard output writer.
-     */
-    public Ui() {
-        in = new Scanner(System.in);
-        out = System.out;
-    }
-
     public Ui(Storage storage, TaskList taskList) {
-        in = new Scanner(System.in);
-        out = System.out;
         this.storage = storage;
         this.taskList = taskList;
     }
@@ -69,14 +53,8 @@ public class Ui {
     }
 
     public void loadUiComponents() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
         // Create a new Label control
-        Label welcomeMsg = new Label(String.format("Hello! I'm\n%s\nWhat can I do for you?", logo));
+        Label welcomeMsg = new Label(String.format("Hello! I'm\n%s\nWhat can I do for you?", LOGO));
         welcomeMsg.setWrapText(true);
 
         scrollPane = new ScrollPane();
@@ -148,6 +126,7 @@ public class Ui {
             // Execute the command
             CommandResult commandResult = executeCommand(command);
             
+            // If the command is to exit the program
             if (commandResult.getMessageForUser().equals("Exiting...")) {
                 primaryStage.hide();
                 System.exit(0);
@@ -157,7 +136,7 @@ public class Ui {
             storage.saveTasksIfPresent(commandResult.getUpdatedTaskList());
             updateTaskListIfPresent(commandResult.getUpdatedTaskList());
 
-            // Print the message for the user
+            // Return the message for the user
             return commandResult.getMessageForUser();
         } catch (InvalidCommandException | StorageException | InvalidDescriptionException
                 | NoDescriptionException ex) {
@@ -185,45 +164,5 @@ public class Ui {
         if (taskList != null) {
             this.taskList = taskList;
         }
-    }
-
-    /**
-     * Reads the user input string.
-     *
-     * @return full user input string
-     */
-    public String getUserInput() {
-        return in.nextLine();
-    }
-
-    /**
-     * Prints a horizontal line dividing separate messages.
-     */
-    public void printDivider() {
-        out.println(DIVIDER);
-    }
-
-    /**
-     * Prints the welcome greeting.
-     */
-    public void printGreeting() {
-        String welcomeMsg = String.format("Hello! I'm\n%s\nWhat can I do for you?", LOGO);
-        out.println(welcomeMsg);
-    }
-
-    /**
-     * Prints the exit message.
-     */
-    public void printExitMessage() {
-        out.println(MESSAGE_EXIT);
-    }
-
-    /**
-     * Prints the message to be shown to the user to the console.
-     *
-     * @param messageForUser message to be shown to user
-     */
-    public void print(String messageForUser) {
-        out.println(messageForUser);
     }
 }
