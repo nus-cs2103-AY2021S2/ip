@@ -1,4 +1,6 @@
-public class EmptyArgument extends Exception{
+package duke.exception;
+
+public class EmptyArgumentException extends Exception{
 
     /**
      *

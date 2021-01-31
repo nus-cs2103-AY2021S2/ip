@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidCommandException extends Exception {
 
     private String badCommand;
@@ -10,6 +12,6 @@ public class InvalidCommandException extends Exception {
     
     @Override
     public String getMessage() {
-        return "Command '" + badCommand + "' is not recognized.";
+        return "Command.Command '" + badCommand + "' is not recognized.";
     }
 }

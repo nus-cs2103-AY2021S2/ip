@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     String logo =
               " ____        _        \n" //TODO: Figure out if this is allowed by style

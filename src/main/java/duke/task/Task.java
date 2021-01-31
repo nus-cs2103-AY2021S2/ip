@@ -1,11 +1,15 @@
+package duke.task;
+
+import duke.exception.EmptyArgumentException;
+
 public abstract class Task {
     private final String description;
-    protected boolean isDone;
+    public boolean isDone; //TODO: Figure out if I can restrict access
 
-    public Task(String description) throws EmptyArgument {
+    public Task(String description) throws EmptyArgumentException {
         description = description.trim();
         if (description.isEmpty()){
-            throw new EmptyArgument();
+            throw new EmptyArgumentException();
         }
         this.description = description;
         this.isDone = false;
@@ -21,7 +25,7 @@ public abstract class Task {
                 description;
     }
 
-    abstract String toFileString();
+    public abstract String toFileString();
 
     @Override
     public int hashCode(){

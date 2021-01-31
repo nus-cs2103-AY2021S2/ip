@@ -1,5 +1,9 @@
+package duke.task;
+
+import duke.exception.EmptyArgumentException;
+
 public class ToDos extends Task{
-    public ToDos(String description) throws EmptyArgument {
+    public ToDos(String description) throws EmptyArgumentException {
         super(description);
     }
 
@@ -9,7 +13,7 @@ public class ToDos extends Task{
     }
 
     @Override
-    String toFileString() {
+    public String toFileString() {
         return "T," + super.toBaseFileString();
     }
 }

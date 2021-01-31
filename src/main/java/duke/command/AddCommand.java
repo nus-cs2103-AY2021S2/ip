@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.TaskList.Action;
+
 public class AddCommand extends Command{
     String[] args;
 
@@ -6,12 +11,12 @@ public class AddCommand extends Command{
     }
 
     @Override
-    String[] run() {
+    public String[] run() {
         return args;
     }
 
     @Override
-    TaskList.Action getType() {
-        return TaskList.Action.ADD;
+    public Action getType() {
+        return Action.ADD;
     }
 }

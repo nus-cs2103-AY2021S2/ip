@@ -1,3 +1,13 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.BadDateArgumentException;
+import duke.exception.EmptyArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDos;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +20,13 @@ public class TaskList {
     }
     boolean edited = false;
     List<Task> store;
-    public TaskList(String[][] tokens) throws EmptyArgument, BadDateArgumentException {
+    public TaskList(String[][] tokens) throws EmptyArgumentException, BadDateArgumentException {
         store = new ArrayList<>();
         for(String[] args: tokens){
             addTask(args);
         }
     }
-    public String run(Command c) throws EmptyArgument, BadDateArgumentException {
+    public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
         String[] args = c.run();
         String results;
         switch(c.getType()){
@@ -44,7 +54,7 @@ public class TaskList {
     private void markSaved(){
         edited = false;
     }
-    private String addTask(String[] tokens) throws EmptyArgument, BadDateArgumentException {
+    private String addTask(String[] tokens) throws EmptyArgumentException, BadDateArgumentException {
         Task t;
         switch(tokens[0]){
         case "D":

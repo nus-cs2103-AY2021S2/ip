@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.EmptyArgumentException;
+import duke.exception.BadDateArgumentException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,7 +10,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, String by) throws EmptyArgument, BadDateArgumentException {
+    public Deadline(String description, String by) throws EmptyArgumentException, BadDateArgumentException {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
         try {
@@ -19,7 +24,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
-        return "[D]" + super.toString() + " (Deadline: " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (duke.task.Deadline: " + by.format(formatter) + ")";
     }
 
     @Override

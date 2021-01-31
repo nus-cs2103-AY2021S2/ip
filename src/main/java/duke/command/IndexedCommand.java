@@ -1,3 +1,5 @@
+package duke.command;
+
 abstract class IndexedCommand extends Command{
     private final int index;
     public IndexedCommand(int position){
@@ -5,7 +7,7 @@ abstract class IndexedCommand extends Command{
     }
 
     @Override
-    String[] run() {
+    public String[] run() {
         return new String[]{String.valueOf(index)};
     }
 }

@@ -1,3 +1,13 @@
+package duke;
+
+import duke.exception.BadDateArgumentException;
+import duke.exception.EmptyArgumentException;
+import duke.exception.InvalidCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDos;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Arrays;
@@ -60,7 +70,7 @@ public class Duke {
                         break;
                     case "delete":
                         int deleteIndex = Integer.valueOf(tokens[1]) - 1;
-                        System.out.println("Deleting the following Task:");
+                        System.out.println("Deleting the following duke.task.Task:");
                         System.out.println(formatOrderedPrint(store, deleteIndex));
                         store.remove(deleteIndex);
                         System.out.println("Done");
@@ -69,11 +79,11 @@ public class Duke {
                         throw new InvalidCommandException(tokens[0]);
                 }
             } catch (ParseException e) {
-                System.out.println("Command has invalid parsing.");
+                System.out.println("Command.Command has invalid parsing.");
                 System.out.println(e.getMessage());
             } catch (InvalidCommandException e){
                 System.out.println(e.getMessage());
-            } catch(EmptyArgument e){
+            } catch(EmptyArgumentException e){
                 System.out.println("Cannot have empty argument");
             } catch (BadDateArgumentException e) {
                 System.out.println("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044");
