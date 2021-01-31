@@ -1,12 +1,13 @@
-class Task {
+abstract class Task {
     protected boolean isCompleted = false;
 
-    private final String description;
+    protected final String description;
 
     public Task(String descr) throws EmptyArgumentException {
           if(descr.isEmpty()) throw new EmptyArgumentException();
           description = descr;
     }
+    public abstract String getFileString();
 
     private char getStatusIcon() { return isCompleted ? 'X' : ' '; }
 

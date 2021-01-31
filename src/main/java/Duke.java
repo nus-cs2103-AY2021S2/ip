@@ -1,23 +1,31 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Duke {
     private static List<Task> tasks = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
-    public static void main(String[] args) throws EmptyArgumentException, InvalidCommandException {
+    private static final String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+    public static void main(String[] args) throws EmptyArgumentException, InvalidCommandException, IOException {
         String logo =
                 " ____        _        \n"
                         + "|  _ \\ _   _| | _____ \n"
                         + "| | | | | | | |/ / _ \\\n"
                         + "| |_| | |_| |   <  __/\n"
                         + "|____/ \\__,_|_|\\_\\___|\n";
+        load();
         System.out.println("Hi Im Duke, how may I help you?");
         while(true) {
             try {
                 String cmd = sc.next();
                 if (cmd.equals("bye")) {
                     byeUser(logo);
+                    save(tasks);
                     break;
                 } else if (cmd.equals("list")) {
                     listItems();
@@ -32,15 +40,59 @@ public class Duke {
                     String eventDescription = sc.nextLine();
                     addItem(typeOfEvent, eventDescription);
                 }
-            }
-            catch (InvalidCommandException e) {
+            } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
-            }
-            catch (EmptyArgumentException e) {
+            } catch (EmptyArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
+
+    private static void save(List<Task> tasks) throws IOException {
+        FileWriter writer = new FileWriter(filePath);
+        for(Task task : tasks) {
+            System.out.println("hi");
+            writer.write(convertToFileFormat(task)+'\n');
+        }
+        writer.close();
+    }
+    private static Task convertToTaskFormat(String line) throws EmptyArgumentException {
+        String[] arr = line.split(Pattern.quote(" | "));
+        Task task;
+        if(arr[0].charAt(0) == 'T') task = new Todos(arr[2].trim());
+        else if(arr[0].charAt(0) == 'E') task = new Event(arr[2].trim());
+        else task = new Deadline(arr[2]);
+        if(arr[1].trim().charAt(0) == '1') task.isCompleted = true;
+        else task.isCompleted = false;
+        return task;
+    }
+    private static String convertToFileFormat(Task task) {
+        String fileString = "";
+        if(task instanceof Todos) fileString += "T | ";
+        else if(task instanceof Deadline) fileString += "D | ";
+        else if(task instanceof Event) fileString += "E | ";
+        if(task.isCompleted) fileString += "1 | ";
+        else fileString += "0 | ";
+        fileString += task.description;
+        return fileString;
+    }
+    private static void load() throws IOException, EmptyArgumentException {
+        try {
+            File file = new File(filePath);
+            Scanner sc = new Scanner(file);
+            while(sc.hasNext()) {
+                String line = sc.nextLine();
+                Task task = convertToTaskFormat(line);
+                tasks.add(task);
+                System.out.println("hi");
+            }
+        }
+        catch(FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
     private static void addItem(String typeOfEvent, String eventDescription) throws EmptyArgumentException, InvalidCommandException {
         if(typeOfEvent.equals("todo")) {
