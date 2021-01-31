@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import surrealchat.command.Command;
 import surrealchat.command.DeadlineCommand;
@@ -20,161 +19,121 @@ import surrealchat.file.FileManagement;
 import surrealchat.help.HelpMode;
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
-import surrealchat.user.UserInput;
-import surrealchat.user.UserOutput;
 
 /**
  * Handles logic of SurrealChat.
  */
 public class SurrealChat {
     protected static final String TASK_FILE_PATH = "tasks.txt";
-    protected final UserInput userInput;
     protected final TaskManagement taskManagement;
     protected final FileManagement fileManagement;
-    protected final UserOutput userOutput;
 
-    private SurrealChat(UserInput userInput, TaskManagement taskManagement,
-                        FileManagement fileManagement, UserOutput userOutput) {
-        this.userInput = userInput;
+    private SurrealChat(TaskManagement taskManagement,
+                        FileManagement fileManagement) {
         this.taskManagement = taskManagement;
         this.fileManagement = fileManagement;
-        this.userOutput = userOutput;
+        this.loadFile();
     }
 
     /**
      * Creates new SurrealChat instance.
      * @param filePath Path of file for save/load.
-     * @param isVerbose Flag to determine whether to print verbose output.
      * @return SurrealChat instance.
      */
-    public static SurrealChat initSurrealChat(File filePath, boolean isVerbose) {
-        UserInput userInput = new UserInput(new Scanner(System.in));
+    public static SurrealChat initSurrealChat(File filePath) {
         TaskManagement taskManagement = new TaskManagement(new ArrayList<Task>());
         FileManagement fileManagement = new FileManagement(filePath);
-        UserOutput userOutput = new UserOutput(isVerbose);
-        return new SurrealChat(userInput, taskManagement, fileManagement, userOutput);
+        return new SurrealChat(taskManagement, fileManagement);
     }
 
-    private void initialGreeting() {
-        this.userOutput.printInitialGreeting();
-    }
-
-    private void exitProgram() {
-        this.userOutput.printExitProgram();
-    }
-
-    private boolean commandLogic(boolean maintainLoop, String userCommand) {
-        switch(userCommand) {
-        case "help":
-            String command = this.userInput.getInputDescription();
-            this.userOutput.printOutput(HelpMode.displayHelp(command));
-            break;
-        case "bye":
-            this.userInput.checkExcessArguments();
-            maintainLoop = false; //Break out of infinite loop
-            break;
-        case "list":
-            this.userInput.checkExcessArguments();
-            Command listCommand = new ListCommand();
-            String outputList = listCommand.execute(this.taskManagement);
-            this.userOutput.printOutput(outputList);
-            break;
-        case "todo":
-            String description = this.userInput.getInputDescription();
-            Command addToDoCommand = new ToDoCommand(description);
-            String outputString = addToDoCommand.execute(this.taskManagement);
-            this.userOutput.printOutput(outputString);
-            break;
-        case "deadline":
-            description = this.userInput.getInputDescription();
-            Command addDeadlineCommand = new DeadlineCommand(description);
-            outputString = addDeadlineCommand.execute(this.taskManagement);
-            this.userOutput.printOutput(outputString);
-            break;
-        case "event":
-            description = this.userInput.getInputDescription();
-            Command addEventCommand = new EventCommand(description);
-            outputString = addEventCommand.execute(this.taskManagement);
-            this.userOutput.printOutput(outputString);
-            break;
-        case "edit":
-            description = this.userInput.getInputDescription(); //Get raw form
-            Command editCommand = new EditCommand(description);
-            outputString = editCommand.execute(this.taskManagement);
-            this.userOutput.printOutput(outputString);
-            break;
-        case "done":
-            String taskNumberString = this.userInput.getInputDescription(); //Get raw form
-            Command doneCommand = new DoneCommand(taskNumberString);
-            outputString = doneCommand.execute(this.taskManagement);
-            this.userOutput.printOutput(outputString);
-            break;
-        case "delete":
-            taskNumberString = this.userInput.getInputDescription(); //Get raw form
-            Command deleteCommand = new DeleteCommand(taskNumberString);
-            outputString = deleteCommand.execute(this.taskManagement);
-            this.userOutput.printOutput(outputString);
-            break;
-        case "find":
-            String keyword = this.userInput.getInputDescription();
-            Command findCommand = new FindCommand(keyword);
-            outputString = findCommand.execute(this.taskManagement);
-            this.userOutput.printOutput(outputString);
-            break;
-        case "orang":
-            this.userInput.checkExcessArguments();
-            EasterEgg orangEasterEgg = new OrangEasterEgg();
-            outputString = orangEasterEgg.execute();
-            this.userOutput.printEasterEggOutput(outputString);
-            break;
-        case "vegetal":
-            this.userInput.checkExcessArguments();
-            EasterEgg vegetalEasterEgg = new VegetalEasterEgg();
-            outputString = vegetalEasterEgg.execute();
-            this.userOutput.printEasterEggOutput(outputString);
-            break;
-        default:
-            this.userInput.scannerNextLine(); //Clear input line
-            throw new UnsupportedOperationException("Command not recognised. Not stonks!");
-        }
-        return maintainLoop;
+    private String[] splitString(String inputString) {
+        return inputString.split(" ");
     }
 
     /**
-     * The driver code for Meme Man chatbot.
-     * @param args - Optional argument
+     * Generates output to be printed based on what command is executed.
+     * @param inputString The entire command, inclusive of arguments if any.
+     * @return Output to be printed.
      */
-    public static void main(String[] args) {
-        //Initialise SurrealChat
-        boolean isVerbose = true;
-        SurrealChat surrealChat = SurrealChat.initSurrealChat(new File(SurrealChat.TASK_FILE_PATH), isVerbose);
-        surrealChat.initialGreeting();
+    public String commandLogic(String inputString) {
+        String[] separatedWords = this.splitString(inputString);
+        String userCommand = separatedWords[0];
+        String restOfInput = "";
 
-        //Try to read from file
+        //Reorganise the remainder of input.
+        for (int i = 1; i < separatedWords.length; i++) {
+            restOfInput += separatedWords[i];
+        }
+        restOfInput = restOfInput.trim();
+
+        //Generate output
+        switch(userCommand) {
+        case "help":
+            return HelpMode.displayHelp(restOfInput);
+        case "list":
+            Command listCommand = new ListCommand();
+            String outputList = listCommand.execute(this.taskManagement);
+            return outputList;
+        case "todo":
+            Command addToDoCommand = new ToDoCommand(restOfInput);
+            String outputString = addToDoCommand.execute(this.taskManagement);
+            return outputString;
+        case "deadline":
+            Command addDeadlineCommand = new DeadlineCommand(restOfInput);
+            outputString = addDeadlineCommand.execute(this.taskManagement);
+            return outputString;
+        case "event":
+            Command addEventCommand = new EventCommand(restOfInput);
+            outputString = addEventCommand.execute(this.taskManagement);
+            return outputString;
+        case "edit":
+            Command editCommand = new EditCommand(restOfInput);
+            outputString = editCommand.execute(this.taskManagement);
+            return outputString;
+        case "done":
+            Command doneCommand = new DoneCommand(restOfInput);
+            outputString = doneCommand.execute(this.taskManagement);
+            return outputString;
+        case "delete":
+            Command deleteCommand = new DeleteCommand(restOfInput);
+            outputString = deleteCommand.execute(this.taskManagement);
+            return outputString;
+        case "find":
+            Command findCommand = new FindCommand(restOfInput);
+            outputString = findCommand.execute(this.taskManagement);
+            return outputString;
+        case "orang":
+            EasterEgg orangEasterEgg = new OrangEasterEgg();
+            outputString = orangEasterEgg.execute();
+            return outputString;
+        case "vegetal":
+            EasterEgg vegetalEasterEgg = new VegetalEasterEgg();
+            outputString = vegetalEasterEgg.execute();
+            return outputString;
+        default:
+            return "Command not recognised. Not stonks!\n";
+        }
+    }
+
+    /**
+     * Loads the tasks from file.
+     */
+    public void loadFile() {
         try {
-            List<String> fileLines = surrealChat.fileManagement.loadTaskFile();
-            String loadString = surrealChat.taskManagement.parseFileLines(fileLines);
-            surrealChat.userOutput.printVerbose(loadString);
+            List<String> fileLines = this.fileManagement.loadTaskFile();
+            this.taskManagement.parseFileLines(fileLines);
         } catch (IOException e) {
-            surrealChat.userOutput.printException(e);
+            return;
         }
+    }
 
-        //Read user commands
-        String userCommand;
-        boolean maintainLoop = true;
-        while (maintainLoop) {
-            userCommand = surrealChat.userInput.getInputCommand();
-            try {
-                maintainLoop = surrealChat.commandLogic(maintainLoop, userCommand);
-            } catch (Exception e) {
-                surrealChat.userOutput.printException(e);
-            }
-        }
-
-        //Save and exit
-        List<String> fileTaskList = surrealChat.taskManagement.convertTasksForFile();
-        surrealChat.fileManagement.saveTasksToFile(fileTaskList);
-        surrealChat.userInput.closeScanner();
-        surrealChat.exitProgram();
+    /**
+     * Saves the tasks into file.
+     * @return A string indicating that tasks are being saved.
+     */
+    public String saveFile() {
+        List<String> fileTaskList = this.taskManagement.convertTasksForFile();
+        this.fileManagement.saveTasksToFile(fileTaskList);
+        return "Saving tasks now...\n";
     }
 }

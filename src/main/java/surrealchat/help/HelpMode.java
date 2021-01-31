@@ -22,8 +22,6 @@ public class HelpMode {
      */
     public static String displayHelp(String command) {
         switch(command.trim()) {
-        case "bye":
-            return "Quits the program.\n";
         case "todo":
             return ToDoCommand.displayHelp();
         case "deadline":
@@ -45,7 +43,7 @@ public class HelpMode {
         case "vegetal":
             return VegetalEasterEgg.displayHelp();
         default:
-            throw new IllegalArgumentException("Helper does not recognise command. Not Stonks!");
+            return "Helper does not recognise command. Not Stonks!\n";
         }
     }
 }

@@ -1,5 +1,7 @@
 package surrealchat.command;
 
+import java.util.NoSuchElementException;
+
 import surrealchat.task.TaskManagement;
 
 /**
@@ -19,10 +21,14 @@ public class ListCommand extends Command {
      * @return String of list of all Tasks.
      */
     public String execute(TaskManagement taskManagement) {
-        String outputString = "I print the tasks:\n";
-        outputString += taskManagement.listOutTasks();
-        outputString += "Hmmst've... Stonks\n";
-        return outputString;
+        try {
+            String outputString = "I print the tasks:\n";
+            outputString += taskManagement.listOutTasks();
+            outputString += "Hmmst've... Stonks\n";
+            return outputString;
+        } catch (NoSuchElementException e) {
+            return e.getMessage();
+        }
     }
 
     /**

@@ -1,7 +1,5 @@
 package surrealchat.command;
 
-import java.util.NoSuchElementException;
-
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
 
@@ -37,7 +35,7 @@ public class EditCommand extends Command {
      */
     public String execute(TaskManagement taskManagement) {
         if (this.rawDescription.isEmpty()) {
-            throw new NoSuchElementException("Did you forget to add the task number and new description? Not stonks!");
+            return "Did you forget to add the task number and new description? Not stonks!\n";
         }
         //Split the description into task number and description
         String[] descriptionSplitArray = this.rawDescription.split("/edit");
@@ -47,19 +45,17 @@ public class EditCommand extends Command {
 
             //Edit task description
             if (this.checkInvalidTaskNumber(taskNumber, taskManagement)) {
-                throw new IllegalArgumentException("Invalid task number. Not stonks!");
+                return "Invalid task number. Not stonks!\n";
             } else if (newDescription.isEmpty()) {
-                throw new IllegalArgumentException("No description provided for editing. Not stonks!");
+                return "No description provided for editing. Not stonks!\n";
             } else {
                 Task editedTask = taskManagement.editDescription(taskNumber, newDescription);
                 return this.printOutput(editedTask);
             }
         } catch (NumberFormatException e) { //Can happen if clean split does not occur.
-            throw new NumberFormatException(
-                    "Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!");
+            return "Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!\n";
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur.
-            throw new ArrayIndexOutOfBoundsException(
-                    "Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!");
+            return "Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!\n";
         }
     }
 

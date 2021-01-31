@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     private String compileSearchResults(List<Task> searchResults) {
         String outputString = "";
         if (searchResults.isEmpty()) {
-            throw new NoSuchElementException("My search returned nothing. Not stonks!");
+            throw new NoSuchElementException("My search returned nothing. Not stonks!\n");
         }
         outputString += "Here are my search results:\n";
         for (int i = 1; i <= searchResults.size(); i++) {
@@ -42,7 +42,7 @@ public class FindCommand extends Command {
      */
     public String execute(TaskManagement taskManagement) {
         if (keyword.isEmpty()) {
-            throw new IllegalArgumentException("No keyword given! Not stonks!");
+            return "No keyword given! Not stonks!\n";
         }
         List<Task> searchResults = new ArrayList<Task>();
         List<Task> allTasks = taskManagement.getTaskList();
@@ -52,7 +52,11 @@ public class FindCommand extends Command {
                 searchResults.add(task);
             }
         }
-        return this.compileSearchResults(searchResults);
+        try {
+            return this.compileSearchResults(searchResults);
+        } catch (NoSuchElementException e) {
+            return e.getMessage();
+        }
     }
 
     /**

@@ -23,7 +23,7 @@ public class ToDoCommand extends Command {
 
     private ToDoTask addToDo(String taskDescription) {
         if (taskDescription.isEmpty()) {
-            throw new NoSuchElementException("Empty todo task description. Not stonks!");
+            throw new NoSuchElementException("Empty todo task description. Not stonks!\n");
         }
 
         return ToDoTask.createNewToDoTask(taskDescription.trim());
@@ -41,9 +41,13 @@ public class ToDoCommand extends Command {
      * @return String to be printed upon successful addition of DeadlineTask.
      */
     public String execute(TaskManagement taskManagement) {
-        ToDoTask addedTask = this.addToDo(this.taskDescription);
-        taskManagement.addTask(addedTask);
-        return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
+        try {
+            ToDoTask addedTask = this.addToDo(this.taskDescription);
+            taskManagement.addTask(addedTask);
+            return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     /**
