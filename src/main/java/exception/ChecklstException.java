@@ -1,3 +1,5 @@
+package exception;
+
 public class ChecklstException extends Exception {
     
     /**

@@ -1,7 +1,11 @@
+package storage;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+
+import exception.ChecklstException;
 
 public class Storage {
     

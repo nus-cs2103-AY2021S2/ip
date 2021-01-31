@@ -1,3 +1,14 @@
+package parser;
+
+import task.Event;
+import exception.ChecklstException;
+import storage.Storage;
+import task.Deadline;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+import ui.Ui;
+
 public class Parser {
     
     public void parse(String[] input, Ui ui, TaskList taskList, Storage storage) {
@@ -35,7 +46,7 @@ public class Parser {
                     throw new ChecklstException("Sorry I didn't understand that command!!");
             }
         } catch (ChecklstException e) {
-            storage.removeLastCommand();
+            storage.removeLastCommand(); // Remove invalid commands
             ui.sendOutput(e.getMessage());
         }
     }
