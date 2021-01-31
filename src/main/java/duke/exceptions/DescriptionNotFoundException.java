@@ -9,6 +9,6 @@ public class DescriptionNotFoundException extends DukeException {
      * no indication of task description.
      */
     public DescriptionNotFoundException() {
-        super("\tPlease provide description for your task.\n");
+        super("Please provide description for your task.");
     }
 }
