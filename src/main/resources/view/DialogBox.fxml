@@ -10,7 +10,7 @@
    <children>
       <javafx.scene.layout.HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.65" prefWidth="400.0" spacing="10.0" style="-fx-border-color: #000000; -fx-border-radius: 15px; -fx-background-color: #000000; -fx-background-radius: 15px;">
           <children>
-              <Label fx:id="dialog" prefHeight="68.0" prefWidth="383.0" text="Label" wrapText="true" />
+              <Label fx:id="dialog" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefWidth="383.0" text="Label" wrapText="true" />
           </children>
           <padding>
               <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
