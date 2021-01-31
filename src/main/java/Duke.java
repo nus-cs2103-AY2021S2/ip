@@ -1,20 +1,41 @@
 import java.util.List;
 import java.util.ArrayList;
+
+/**
+ * Returns a Duke bot that stores the tasks given by the user.
+ */
 public class Duke {
+    /** Tasks stored in this list */
     List<Task> list;
 
     public Duke(){
         this.list = new ArrayList<>();
     }
+
+    /**
+     * Sends a greeting to the user.
+     */
     public void greet(){
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
     }
 
+    /**
+     * Echos the user input.
+     *
+     * @param input User input given.
+     */
+
     public void echo(String input){
         System.out.println(input);
 
     }
+
+    /**
+     * Adds the given task to the Duke bot list, informs the user and prints the number of tasks in the bot list.
+     *
+     * @param task Task object created from user input.
+     */
 
     public void addToList(Task task){
         this.list.add(task);
@@ -23,10 +44,19 @@ public class Duke {
         System.out.println("Now you have " + String.valueOf(this.list.size()) + " tasks in the list.");
     }
 
+    /**
+     * Adds the given task to the Duke bot list quietly.
+     *
+     * @param task Task object created from user input.
+     */
+
     public void addToBot(Task task){
         this.list.add(task);
     }
 
+    /**
+     * Prints the tasks in the bot list.
+     */
     public void printList(){
         int counter = 1;
         if(this.list.isEmpty()){
@@ -38,7 +68,11 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Marks a task specified in the bot list as done.
+     *
+     * @param id The position ,1-th based, of the task to be marked done in the bot list.
+     */
     public void markTaskAsDone(int id){
         Task task = this.list.get(id-1);
         task.markDone();
@@ -46,6 +80,11 @@ public class Duke {
         System.out.println("  [X] "+ task.content);
     }
 
+    /**
+     * Deletes a task specified in the bot list.
+     *
+     * @param id The position ,1-th based, of the task to be marked done in the bot list.
+     */
     public void deleteTask(int id){
         Task task = this.list.get(id-1);
         this.list.remove(id-1);
