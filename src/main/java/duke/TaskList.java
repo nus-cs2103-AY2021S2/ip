@@ -30,7 +30,7 @@ public class TaskList {
      * @return the retrieved task
      */
     public Task get(int index) {
-        return this.lst.remove(index);
+        return this.lst.get(index);
     }
 
     /**

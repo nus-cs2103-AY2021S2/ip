@@ -42,7 +42,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            String response = Parser.parse(input, taskList, storage);
+            String response = Parser.parse(input, this.taskList, this.storage);
             if (response.contains("Bye")) {
                 Platform.exit();
             }
