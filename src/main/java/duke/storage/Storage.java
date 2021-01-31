@@ -26,11 +26,9 @@ public class Storage {
 
     /**
      * Stores filePath.
-     *
-     * @param filePath path where files are stored and retrieved
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() {
+        this.filePath = System.getProperty("user.dir") + "/data/duke.txt";
     }
 
     /**
@@ -75,7 +73,7 @@ public class Storage {
      * @return list TaskList of all loaded data
      * @throws FileNotFoundException  If file cannot be found in path
      */
-    public static TaskList loadData() throws FileNotFoundException {
+    public static TaskList loadData() throws FileNotFoundException, IOException {
         Path currPath = Paths.get("");
         Path dukePath = Paths.get(currPath.toAbsolutePath().toString()
                 + "/src/main/java/duke/duke.txt");

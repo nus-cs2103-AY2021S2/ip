@@ -41,21 +41,20 @@ public class AddCommand extends Command {
      * @param storage handles the various tasks according to their type
      * @throws IOException in case file is corrupt
      */
-    public void execute(TaskList tasks, String input, Storage storage) throws IOException {
+    public String execute(TaskList tasks, String input, Storage storage) throws IOException {
         String type = input.split(" ")[0];
 
         if (type.equals("todo")) {
-            tasks.addToDo(input);
-            storage.saveData(tasks);
+            System.out.println(tasks);
+            System.out.println(input);
+            return tasks.addToDo(input);
         } else if (type.equals("deadline")) {
-            tasks.addDeadline(input);
-            storage.saveData(tasks);
+            return tasks.addDeadline(input);
         } else if (type.equals("event")) {
-            tasks.addEvent(input);
-            storage.saveData(tasks);
+            return tasks.addEvent(input);
         } else {
             new InvalidInstructionException();
-            return;
+            return "";
         }
     }
 

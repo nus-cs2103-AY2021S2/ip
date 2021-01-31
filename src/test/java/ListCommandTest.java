@@ -9,7 +9,7 @@ import duke.task.TaskList;
 
 public class ListCommandTest {
     private final TaskList taskList = new TaskList();
-    private final Storage storage = new Storage("");
+    private final Storage storage = new Storage();
 
     @Test
     public void testExecuteDone() {

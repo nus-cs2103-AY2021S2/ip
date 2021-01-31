@@ -11,7 +11,7 @@ import duke.task.TaskList;
 
 public class AddCommandTest {
     private final TaskList taskList = new TaskList();
-    private final Storage storage = new Storage("");
+    private final Storage storage = new Storage();
 
     @Test
     public void testExecuteTodo() throws IOException {

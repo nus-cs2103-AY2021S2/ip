@@ -39,13 +39,8 @@ public class ByeCommand extends Command {
      * @param storage handles the various tasks according to their type
      */
 
-    public void execute(TaskList tasks, String input, Storage storage) {
-        if (input.equals("bye")) {
-            System.out.println(line);
-            System.out.println("Bye. Hope to see you again soon!");
-            System.out.println(line);
-            return;
-        }
+    public String execute(TaskList tasks, String input, Storage storage) {
+        return line + "\n" + "Bye. Hope to see you again soon!\n" + line;
     }
 
     /**

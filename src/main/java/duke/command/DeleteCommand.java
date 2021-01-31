@@ -39,13 +39,12 @@ public class DeleteCommand extends Command {
      * @param storage handles the various tasks according to their type
      * @throws IOException in case file is corrupt
      */
-    public void execute(TaskList tasks, String input, Storage storage) throws IOException {
+    public String execute(TaskList tasks, String input, Storage storage) throws IOException {
         if (Integer.parseInt(input.split(" ")[1]) > tasks.getSize()) {
             new InvalidInstructionException();
-            return;
+            return "";
         } else {
-            tasks.delete(input);
-            storage.saveData(tasks);
+            return tasks.delete(input);
         }
     }
 
