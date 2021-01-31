@@ -33,7 +33,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         // Start the ui and show the GUI
         ui.start(primaryStage);
     }
@@ -50,6 +50,7 @@ public class Main extends Application {
             taskList = storage.loadTasks();
             ui = new Ui(storage, taskList);
         } catch (InvalidStorageFilePathException | IOException ex) {
+            // Exit the application if there is an error loading the storage file or reading from the file
             System.exit(1);
         }
     }

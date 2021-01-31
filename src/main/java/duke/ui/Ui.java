@@ -1,8 +1,15 @@
 package duke.ui;
 
+import java.io.IOException;
+
+import duke.Main;
 import duke.MainWindow;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -15,16 +22,22 @@ public class Ui {
 
     private Storage storage;
     private TaskList taskList;
-    private MainWindow mainWindow;
-    
+
     public Ui(Storage storage, TaskList taskList) {
         this.storage = storage;
         this.taskList = taskList;
     }
-    
+
     public void start(Stage primaryStage) {
-        mainWindow = new MainWindow(storage, taskList, primaryStage);
-        mainWindow.show();
-        mainWindow.loadUiComponents();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            VBox vBox = fxmlLoader.load();
+            Scene scene = new Scene(vBox);
+            primaryStage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setComponents(storage, taskList, primaryStage);
+            primaryStage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

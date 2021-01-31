@@ -5,105 +5,64 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.tasks.TaskList;
-import javafx.scene.Scene;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MainWindow {
+public class MainWindow extends VBox {
     private Storage storage;
     private TaskList taskList;
     private Stage primaryStage;
-    
-    private AnchorPane mainLayout;
+    @FXML
     private ScrollPane scrollPane;
+    @FXML
     private VBox dialogContainer;
+    @FXML
     private TextField userInput;
+    @FXML
     private Button sendButton;
-    private Scene scene;
+
+    /**
+     * This method is called to initialize a controller after its root element has been completely processed.
+     */
+    @FXML
+    public void initialize() {
+        // Set the scroll pane to automatically scroll down when the text reaches the bottom
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
     
-    public MainWindow(Storage storage, TaskList taskList, Stage primaryStage) {
+    public void setComponents(Storage storage, TaskList taskList, Stage primaryStage) {
         this.storage = storage;
         this.taskList = taskList;
         this.primaryStage = primaryStage;
-    }
-    
-    public void show() {
-        primaryStage.show();
+        loadAdditionalConstraints();
     }
 
-    public void loadUiComponents() {
+    public void loadAdditionalConstraints() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         // Create a new Label control
-        Label welcomeMsg = new Label(String.format("Hello! I'm\n%s\nWhat can I do for you?", logo));
-        welcomeMsg.setWrapText(true);
-
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(welcomeMsg, scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-        primaryStage.setScene(scene);
+        String welcomeMsg = String.format("Hello! I'm\n%s\nWhat can I do for you?", logo);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg));
 
         primaryStage.setTitle("Duke");
-        primaryStage.setResizable(false);
         primaryStage.setMinWidth(400.0);
-        primaryStage.setMinHeight(600.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385.0, 535.0);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        // setting vvalue to vmax so that the scroll position is at the bottom initially
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg));
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        primaryStage.setMinHeight(500.0);
     }
 
+    @FXML
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String input = userInput.getText();
+        String response = getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText),
-                DialogBox.getDukeDialog(dukeText)
+                DialogBox.getUserDialog(input),
+                DialogBox.getDukeDialog(response)
         );
         userInput.clear();
     }
