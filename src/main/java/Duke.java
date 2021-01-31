@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -6,9 +5,9 @@ import java.util.Scanner;
  * Contains main driver class to run the Duke program
  */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    Storage storage;
+    TaskList tasks;
+    Ui ui;
 
 
     public Duke(String filePath) {
