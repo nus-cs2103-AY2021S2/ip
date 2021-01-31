@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +23,8 @@ public class Duke {
             try {
                 if (input.equals("list")) {
                     listTasks();
+                } else if (input.equals("save")) {
+                    save();
                 } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
                     if (input.length() <= 5) {
                         throw new DukeException("☹ OOPS!!! Please enter a task id to complete!");
@@ -93,6 +98,18 @@ public class Duke {
         this.taskList.remove(realId);
         System.out.println(makeOutput("Noted. I've removed this task:\n\t"
             + task + String.format("\nNow you have %d tasks in the list.", this.taskList.size())));
+    }
+
+    public void save() {
+        try (PrintStream out = new PrintStream(new FileOutputStream("./data/duke.txt"))) {
+            String output = taskList.toString()
+                .replace(", ", "\n");
+            output = output.substring(0, output.length() - 1).substring(1);
+            out.print(output);
+            System.out.println(makeOutput("File successfully saved!"));
+        } catch (FileNotFoundException e) {
+            System.out.println(makeOutput(e.getMessage()));
+        }
     }
 
 }
