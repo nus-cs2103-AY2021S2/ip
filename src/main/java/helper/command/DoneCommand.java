@@ -5,6 +5,9 @@ import helper.Storage;
 import helper.TaskList;
 import helper.Ui;
 
+/**
+ * Commands for done
+ */
 public class DoneCommand extends Command {
 
     private String doneString;
@@ -13,6 +16,12 @@ public class DoneCommand extends Command {
         doneString = s;
     }
 
+    /**
+     * Set the task as done
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index = Integer.parseInt(doneString) - 1;

@@ -11,6 +11,9 @@ import task.Todo;
 
 import java.time.LocalDate;
 
+/**
+ * Commands for adds (todo..., deadline..., event...)
+ */
 public class AddCommand extends Command {
 
     private final String whichAdd;
@@ -21,6 +24,13 @@ public class AddCommand extends Command {
         addString = s2;
     }
 
+    /**
+     * Executes the parsed command
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (whichAdd) {
             case "todo":

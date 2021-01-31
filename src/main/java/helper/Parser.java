@@ -2,27 +2,16 @@ package helper;
 
 import helper.command.*;
 
-import task.Deadline;
-import task.Event;
-import task.Todo;
-
-import java.time.LocalDate;
-
+/**
+ * Parsing class
+ */
 public class Parser {
-
-    private Command parseAddsAndDeletes(String s) {
-        return null;
-    }
-
-    private String getFirstWord(String s) {
-        int index = s.indexOf(' ');
-        if (index > -1) {
-            return s.substring(0, index);
-        } else {
-            return s;
-        }
-    }
-
+    /**
+     * Parses the user input for duke
+     * @param s User input
+     * @return Command to execute
+     * @throws DukeException
+     */
     public Command parse(String s) throws DukeException {
         String[] strings = s.split(" ", 2);
         String firstWord = strings[0];

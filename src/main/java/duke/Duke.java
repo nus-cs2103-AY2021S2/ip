@@ -6,7 +6,9 @@ import helper.command.Command;
 
 import java.util.Scanner;
 
-
+/**
+ * Main class
+ */
 public class Duke {
 
     private Storage storage;
@@ -14,6 +16,10 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Initializing duke
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -38,6 +44,9 @@ public class Duke {
         new Duke("duke.txt").loop();
     }
 
+    /**
+     * The loop to accept commands
+     */
     public void loop() {
         Scanner input = new Scanner(System.in);
         boolean isExit = false;

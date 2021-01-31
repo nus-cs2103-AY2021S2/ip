@@ -5,6 +5,9 @@ import helper.Storage;
 import helper.TaskList;
 import helper.Ui;
 
+/**
+ * Commands
+ */
 public abstract class Command {
 
     protected boolean isExit;
