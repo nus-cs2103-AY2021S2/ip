@@ -48,12 +48,8 @@ public class Task {
     /** Return cross if task is completed
      * @return
      */
-    public String checkStatus() {
-        return (this.isCompleted ? "\u2718" : " ");
-    }
-
     public String getStatus() {
-        return (this.isCompleted ? "\u2718" : " ");
+        return (this.isCompleted ? "\u2713" : "\u2718");
     }
 
     /** Return description of task
@@ -104,6 +100,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatus() + "] " + this.getTaskName();
+        return this.getTaskName() + "[" + this.getStatus() + "] ";
     }
 }

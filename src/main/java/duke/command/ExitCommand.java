@@ -13,19 +13,14 @@ public class ExitCommand extends Command {
      * Constructor to create exit command object
      */
     public ExitCommand() {
-        super(null, null);
-        this.isExit = true;
+        super("exit");
     }
 
     /** Terminate the whole program
-     * @param tasklist
-     * @param ui
-     * @param storage
      * @return
      */
     @Override
-    public TaskList execute(TaskList tasklist, UI ui, DataStorage storage) {
-        ui.displayEndMessage();
-        return null;
+    public String execute() {
+        return ui.displayEndMessage();
     }
 }

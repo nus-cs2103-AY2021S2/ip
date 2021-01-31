@@ -1,5 +1,6 @@
 package duke.parser;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -19,17 +20,14 @@ import duke.exception.DukeException;
  * A class to handle all user input
  */
 public class Parser {
-
-    private static UI ui = new UI();
-    private static DataStorage storage = new DataStorage();
-    private static TaskList taskList = new TaskList();
+    //  private static DataStorage storage = new DataStorage();
+  //  private static TaskList taskList = new TaskList();
 
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
     //Global Variable
     private static String taskName;
-    private static boolean isFirstLaunch = true;
 
 
     /** Call onto the respective command classes to handle different cases of command
@@ -38,18 +36,13 @@ public class Parser {
      * @return boolean
      * @throws DukeException
      */
-    public static boolean parse(TaskList list, String input) throws DukeException {
-        if (isFirstLaunch) {
-            taskList = list;
-            isFirstLaunch = false;
-        }
+    public static String parse(TaskList list, String input) throws DukeException, IOException {
 
         if (input.equals("bye")) {
             ExitCommand ec = new ExitCommand();
-            return ec.isExit();
+            return ec.toString();
         }
         String [] commandArray = input.split("\\s+");
-        int size = taskList.getTaskListArray().size();
 
         String [] userInputArray = separateUserInput(input);
         String type = userInputArray[0];
@@ -59,33 +52,32 @@ public class Parser {
             if (userInput.isBlank()) {
                 throw new DukeException("Please input task description to be searched.");
             } else {
-                SearchCommand sc = new SearchCommand(userInput, taskList);
-                sc.execute(taskList, ui, null);
+                SearchCommand sc = new SearchCommand(userInput);
+                return sc.execute();
             }
         }
-        else if (commandArray[0].equals("list") && isValidTaskNumber(0, "list" , size)) {
-            ListCommand lc = new ListCommand(null, taskList);
-            lc.execute(taskList, ui, null);
-        } else if (commandArray[0].equals("delete")
-                && isValidTaskNumber(Integer.parseInt(commandArray[1]) - 1, "delete", size)) {
-            DeleteCommand dc = new DeleteCommand(commandArray[1], taskList);
-            dc.execute(taskList, ui, storage);
-        } else if (commandArray[0].equals("done")
-                && isValidTaskNumber(Integer.parseInt(commandArray[1]) - 1, "done", size)) {
-            DoneCommand doneCommand = new DoneCommand(commandArray[1], taskList);
-            taskList = doneCommand.execute(taskList, ui, storage);
+        else if (commandArray[0].equals("list")) {
+            ListCommand lc = new ListCommand(null);
+            return lc.execute();
+        } else if (commandArray[0].equals("delete")) {
+            DeleteCommand dc = new DeleteCommand(commandArray[1]);
+            return dc.execute();
+        } else if (commandArray[0].equals("done")) {
+            DoneCommand doneCommand = new DoneCommand(commandArray[1]);
+             return doneCommand.execute();
         } else {
-
-            AddCommand ac = new AddCommand(userInput, taskList);
 
             switch (type) {
             case ("todo"):
+                AddCommand ac = new AddCommand(userInput, "todo", null,null,null);
+
                 if (userInput.isBlank()) {
                     throw new DukeException("OOPS!!! The description of a " + type + " cannot be empty.");
                 }
-                taskList = ac.execute(taskList, ui, storage, "todo", null, null , null);
-                break;
+                return ac.execute();
+
             case ("deadline"):
+
                 String [] dateTime = separateDueDate(input, "deadline");
 
                 LocalDate date = LocalDate.parse(dateTime[0], dateFormatter);
@@ -96,9 +88,9 @@ public class Parser {
                     time = LocalTime.parse(dateTime[1], timeFormatter);
                 }
 
-                ac = new AddCommand(taskName, taskList);
-                taskList = ac.execute(taskList, ui, storage, "deadlines", date, time, null);
-                break;
+                AddCommand addc = new AddCommand(userInput, "deadline", date,time,null);
+                return addc.execute();
+
             case ("event"):
 
                 String []dateTimeArray = separateDueDate(input, "event");
@@ -108,14 +100,13 @@ public class Parser {
                 LocalTime startTime = LocalTime.parse(timeArray[0], timeFormatter);
                 LocalTime endTime = LocalTime.parse(timeArray[1], timeFormatter);
 
-                ac = new AddCommand(taskName, taskList);
-                taskList = ac.execute(taskList, ui, storage, "events", startDate, startTime, endTime);
-                break;
+                AddCommand addCommand = new AddCommand(taskName, "events", startDate, startTime, endTime);
+                return addCommand.execute();
+
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
-        return false;
     }
 
 

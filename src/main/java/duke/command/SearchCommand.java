@@ -7,13 +7,12 @@ import duke.exception.DukeException;
 
 public class SearchCommand extends Command {
 
-    public SearchCommand(String input, TaskList taskList) {
-        super(input.trim(), taskList);
+    public SearchCommand(String input) {
+        super(input.trim());
     }
 
     @Override
-    public TaskList execute(TaskList tasks, UI ui, DataStorage storage) throws DukeException {
-        tasks.findTask(input,tasks);
-        return tasks;
+    public String execute() throws DukeException {
+        return tasklist.findTask(input, this.tasklist);
     }
 }
