@@ -24,8 +24,13 @@ public class Checklst {
 
             if (input.equals("list")) {
                 sendOutput(taskList.toString());
+            } else if (input.substring(0, 4).equals("done")) {
+                int index = Integer.parseInt(input.substring(input.length() - 1)) - 1;
+                Task newTask = taskList.get(index).complete();
+                taskList.replace(index, newTask);
+                sendOutput("Nice! I've marked this item as done\n\t" + newTask);
             } else {
-                Task task = new Task(input);
+                Task task = new Task(input, false);
                 taskList.add(task);
                 sendOutput("Added: " + task);
             }

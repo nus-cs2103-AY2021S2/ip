@@ -8,6 +8,14 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    public void replace(int index, Task newTask) {
+        this.taskList.set(index, newTask);
+    }
+ 
+    public Task get(int index) {
+        return this.taskList.get(index);
+    }
+
     @Override
     public String toString() {
         if (taskList.size() == 0) {
