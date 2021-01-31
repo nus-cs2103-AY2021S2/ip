@@ -78,7 +78,8 @@ public class TaskList {
                 task.setStatus(true);
                 finishedTasks[i] = task;
             }catch(IndexOutOfBoundsException e){
-                throw new SnomException("Oops! You have entered a task number: " + taskNums[i] + " which is invalid! Please try again!");
+                throw new SnomException("Oops! You have entered a task number: "
+                        + taskNums[i] + " which is invalid! Please try again!");
             }
         }
         return finishedTasks;
@@ -101,7 +102,8 @@ public class TaskList {
                 list.remove(task);
                 deletedTasks[i] = task;
             }catch(IndexOutOfBoundsException e){
-                throw new SnomException("Oops! You have entered a task number: " + taskNums[i] + " which is invalid! Please try again!");
+                throw new SnomException("Oops! You have entered a task number: "
+                        + taskNums[i] + " which is invalid! Please try again!");
             }
         }
         return deletedTasks;
