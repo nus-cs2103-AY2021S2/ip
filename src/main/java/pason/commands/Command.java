@@ -5,7 +5,7 @@ import pason.tasks.TaskList;
 import pason.ui.Ui;
 
 public abstract class Command {
-    public String command;
+    private String command;
     public Command(String command) {
         this.command = command;
     }

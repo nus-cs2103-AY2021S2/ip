@@ -1,28 +1,28 @@
 package pason.storage;
 
-import pason.exceptions.PasonException;
-import pason.tasks.Deadline;
-import pason.tasks.Event;
-import pason.tasks.Task;
-import pason.tasks.ToDo;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import pason.exceptions.PasonException;
+import pason.tasks.Deadline;
+import pason.tasks.Event;
+import pason.tasks.Task;
+import pason.tasks.ToDo;
+
 /**
  * Storage class.
  * Handles the storing and loading of tasks from file.
  */
 public class Storage {
-    private static String FILE_DIRECTORY = "data";
-    private static String FILE_NAME = "tasks.txt";
+    private static final String FILE_DIRECTORY = "data";
+    private static final String FILE_NAME = "tasks.txt";
 
     /**
      * Initialises the Storage class.
@@ -46,7 +46,7 @@ public class Storage {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-            } catch(IOException e) {
+            } catch (IOException e) {
                 throw new PasonException(e.getMessage());
             }
         }
@@ -56,13 +56,13 @@ public class Storage {
         int failedImports = 0;
         while (s.hasNext()) {
             task = parseFileEntry(s.nextLine());
-            if(task != null) {
+            if (task != null) {
                 tasks.add(task);
             } else {
                 failedImports++;
             }
         }
-        if(failedImports > 0) {
+        if (failedImports > 0) {
             throw new PasonException("There was a problem parsing "
                     + failedImports + " task(s) from the file.");
         }
@@ -84,9 +84,9 @@ public class Storage {
             }
             return newToDo;
         } else if (splitString[0].equals("E") && splitString.length == 4) {
-            String[] eventDateAndExtra = splitString[3].split(" ");
-            Event newEvent = new Event(splitString[2], LocalDate.parse(eventDateAndExtra[0]),
-                    (eventDateAndExtra.length == 1 ? null : eventDateAndExtra[1]));
+            String[] eventDate = splitString[3].split(" ");
+            Event newEvent = new Event(splitString[2],
+                    LocalDate.parse(eventDate[0]), (eventDate.length == 1 ? null : eventDate[1]));
             if (splitString[1].equals("1")) {
                 newEvent.markAsDone();
             }
@@ -115,7 +115,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(FILE_DIRECTORY
                     + "/" + FILE_NAME);
-            for(int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 fw.write(tasks.get(i).toFileFormat() + "\n");
             }
             fw.close();

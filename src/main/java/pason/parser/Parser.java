@@ -1,18 +1,24 @@
 package pason.parser;
 
-import pason.commands.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import pason.commands.AddCommand;
+import pason.commands.ByeCommand;
+import pason.commands.Command;
+import pason.commands.DeleteCommand;
+import pason.commands.DoneCommand;
+import pason.commands.FindCommand;
+import pason.commands.ListCommand;
+import pason.commands.UnknownCommand;
 import pason.exceptions.PasonException;
 import pason.tasks.Deadline;
 import pason.tasks.Event;
 import pason.tasks.ToDo;
-
-import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parser class for validating commands and inputs.
@@ -43,7 +49,7 @@ public class Parser {
         case "done":
             return new DoneCommand(input, Integer.parseInt(splitInput[1]));
         case "delete":
-            return new DeleteCommand(input,  Integer.parseInt(splitInput[1]));
+            return new DeleteCommand(input, Integer.parseInt(splitInput[1]));
         case "find":
             return new FindCommand(input, splitInput[1]);
         default:
@@ -68,7 +74,7 @@ public class Parser {
             }
             ToDo newToDo = new ToDo(m.group(2));
             return new AddCommand(input, newToDo);
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
@@ -100,10 +106,10 @@ public class Parser {
                 throw new PasonException("You've entered an invalid format. "
                         + "Please use: deadline <description> /by <when>");
             }
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new PasonException("Oops! You've entered an invalid date and time format.\n"
                     + "Please use: dd/mm/yyyy hh:mm");
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new PasonException(e.getMessage());
         }
     }
@@ -124,8 +130,7 @@ public class Parser {
                 String[] dateAndTime = splitInput[1].split(" ");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate eventDate = LocalDate.parse(dateAndTime[0], formatter);
-                Event newEvent = new Event(splitInput[0], eventDate,
-                        (dateAndTime.length == 1 ? null : dateAndTime[1]));
+                Event newEvent = new Event(splitInput[0], eventDate, (dateAndTime.length == 1 ? null : dateAndTime[1]));
                 return new AddCommand(input, newEvent);
             } else if (splitInput.length == 1) {
                 System.out.println(splitInput[0]);
@@ -138,10 +143,10 @@ public class Parser {
                 throw new PasonException("You've entered an invalid format. "
                         + "Please use: event <description> /at <when>");
             }
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new PasonException("Oops! You've entered an invalid date format.\n"
                     + "Please use: dd/mm/yyyy");
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new PasonException(e.getMessage());
         }
     }

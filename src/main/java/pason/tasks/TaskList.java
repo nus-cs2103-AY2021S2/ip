@@ -1,10 +1,10 @@
 package pason.tasks;
 
-import pason.exceptions.PasonException;
-import pason.storage.Storage;
-
 import java.io.IOException;
 import java.util.List;
+
+import pason.exceptions.PasonException;
+import pason.storage.Storage;
 
 /**
  * TaskList class for managing all tasks.
@@ -68,10 +68,10 @@ public class TaskList {
             storage.saveAllTasks(this.tasks);
             return "Good job! I've marked this task as done:\n"
                     + tasks.get(index - 1);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new PasonException("We couldn't find this task. "
                     + "Please enter the correct task number.");
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new PasonException(e.getMessage());
         }
     }
@@ -86,7 +86,7 @@ public class TaskList {
     public String deleteTask(int index) throws PasonException {
         index = index - 1;
         try {
-            if(index > tasks.size() - 1 || index < 0) {
+            if (index > tasks.size() - 1 || index < 0) {
                 throw new PasonException("You've entered an invalid task number.");
             } else {
                 String removedTask = tasks.get(index).toString();
@@ -96,7 +96,7 @@ public class TaskList {
                         + "\nNow there are " + tasks.size()
                         + " tasks in your list.";
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new PasonException(e.getMessage());
         }
     }

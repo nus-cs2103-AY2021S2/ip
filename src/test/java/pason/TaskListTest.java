@@ -1,14 +1,13 @@
 package pason;
 
-import pason.exceptions.PasonException;
-import pason.parser.Parser;
-import org.junit.Test;
-import pason.storage.Storage;
-import pason.tasks.TaskList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+
+import pason.exceptions.PasonException;
+import pason.storage.Storage;
+import pason.tasks.TaskList;
 
 public class TaskListTest {
     @Test

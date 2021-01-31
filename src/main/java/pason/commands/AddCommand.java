@@ -7,11 +7,18 @@ import pason.ui.Ui;
 
 public class AddCommand extends Command {
     protected Task task;
+
+    /**
+     * Initialises the AddCommand.
+     */
     public AddCommand(String command, Task task) {
         super(command);
         this.task = task;
     }
 
+    /**
+     * Executes the command.
+     */
     public void execute(TaskList tasks, Storage storage, Ui ui) throws Exception {
         tasks.addTask(task);
         ui.printMessage("Done! I've added a new task:\n\t"

@@ -1,16 +1,14 @@
 package pason.ui;
 
-import pason.exceptions.PasonException;
-
-import java.util.Scanner;
 import java.io.InputStream;
+import java.util.Scanner;
 
 /**
  * Ui class for managing outputs and inputs.
  */
 public class Ui {
-    private final Scanner scanner;
     public static final String DIVIDER = "============================================================";
+    private final Scanner scanner;
 
     /**
      * Initialises the Ui object and the scanner class.
@@ -26,9 +24,8 @@ public class Ui {
      *
      * @return user input if exists or null if has no more input.
      */
-    public String readCommand()
-    {
-        if(scanner.hasNext()) {
+    public String readCommand() {
+        if (scanner.hasNext()) {
             return scanner.nextLine();
         } else {
             return null;
@@ -47,7 +44,6 @@ public class Ui {
      * Prints message with formatted divider.
      *
      * @param message  String to be printed.
-     * @return String formatted with top and bottom border.
      */
     public void printMessage(String message) {
         System.out.println(DIVIDER);

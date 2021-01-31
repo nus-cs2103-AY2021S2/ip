@@ -4,6 +4,9 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initialises the Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

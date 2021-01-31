@@ -5,12 +5,18 @@ import pason.tasks.TaskList;
 import pason.ui.Ui;
 
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
+    /**
+     * Initialises the FindCommand.
+     */
     public FindCommand(String command, String keyword) {
         super(command);
         this.keyword = keyword;
     }
 
+    /**
+     * Exxecutes the command.
+     */
     public void execute(TaskList tasks, Storage storage, Ui ui) {
         if (tasks.getTasks().size() == 0) {
             ui.printMessage("There are no tasks in your list. Time to add some!");
@@ -19,12 +25,12 @@ public class FindCommand extends Command {
             String output = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.getTasks().size(); i++) {
                 if (tasks.getTasks().get(i).getDescription().toLowerCase().contains(this.keyword.toLowerCase())) {
-                    output += (i + 1)+". " + tasks.getTasks().get(i) + "\n";
+                    output += (i + 1) + ". " + tasks.getTasks().get(i) + "\n";
                     matchingResults++;
                 }
             }
             if (matchingResults == 0) {
-               ui.printMessage("There are no matching tasks with that keyword.");
+                ui.printMessage("There are no matching tasks with that keyword.");
             } else {
                 ui.printMessage(output);
             }

@@ -7,22 +7,28 @@ import pason.ui.Ui;
 
 public class Pason {
     private TaskList tasks;
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
 
+    /**
+     * Main Pason method.
+     */
     public Pason() {
         storage = new Storage();
         ui = new Ui(System.in);
         try {
             tasks = new TaskList(storage);
-        } catch(PasonException e) {
+        } catch (PasonException e) {
             ui.printMessage(e.getMessage());
-        } catch(Exception e) {
+        } catch (Exception e) {
             ui.printMessage(e.getMessage());
         }
 
     }
 
+    /**
+     * Runs greeting message and accepts input.
+     */
     public void run() {
         ui.displayGreeting();
         boolean isExit = false;
@@ -32,7 +38,7 @@ public class Pason {
                 Command command = Parser.parseCommand(inputCommand);
                 command.execute(tasks, storage, ui);
                 isExit = command.isExit();
-            } catch(PasonException e) {
+            } catch (PasonException e) {
                 ui.printMessage(e.getMessage());
             } catch (Exception e) {
                 ui.printMessage(e.getMessage());
