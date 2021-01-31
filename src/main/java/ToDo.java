@@ -7,9 +7,9 @@ public class ToDo extends Task{
     @Override
     public String toString() {
         if(!this.done){
-            return "[T][ ] " + super.toString();
+            return "T | 0 | " + super.toString();
         }else {
-            return "[T][X] " + super.toString();
+            return "T | 1 | " + super.toString();
         }
     }
 }
