@@ -42,7 +42,7 @@ public class FindCommand extends Command {
      * @throws DukeCommandException if tasks cannot be retrieved
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         List<Task> tasksFound = taskManager.getTasks().stream()
                 .filter(task -> {
                     if (task.getDesc().contains(keyword)) {
@@ -68,6 +68,6 @@ public class FindCommand extends Command {
                 })
                 .collect(Collectors.toList());
 
-        ui.printFoundMsg(tasksFound);
+        return ui.constructFoundMsg(tasksFound);
     }
 }

@@ -26,11 +26,11 @@ public class ToDoCommand extends Command {
      * hard disk
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         try {
             ToDo toDo = taskManager.addToDo(this.desc);
-            ui.printAddMsg(toDo, taskManager.getTasksSize());
             Storage.saveTasks(taskManager.getTasks());
+            return ui.constructAddMsg(toDo, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("todo", desc, e.getMessage());
         }

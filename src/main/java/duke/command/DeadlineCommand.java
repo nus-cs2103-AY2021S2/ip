@@ -32,11 +32,11 @@ public class DeadlineCommand extends Command {
      * hard disk
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         try {
             Deadline deadline = taskManager.addDeadline(this.desc, this.dateTime);
-            ui.printAddMsg(deadline, taskManager.getTasksSize());
             Storage.saveTasks(taskManager.getTasks());
+            return ui.constructAddMsg(deadline, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("deadline", desc, e.getMessage());
         }

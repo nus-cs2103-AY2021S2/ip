@@ -36,11 +36,11 @@ public class EventCommand extends Command {
      * the hard disk
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         try {
             Event event = taskManager.addEvent(this.desc, this.start, this.end);
-            ui.printAddMsg(event, taskManager.getTasksSize());
             Storage.saveTasks(taskManager.getTasks());
+            return ui.constructAddMsg(event, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("event", desc, e.getMessage());
         }

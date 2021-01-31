@@ -27,7 +27,7 @@ public abstract class Command {
      *
      * @throws DukeCommandException if any issue happened during the execution of the command
      */
-    public abstract void execute() throws DukeCommandException;
+    public abstract String execute() throws DukeCommandException;
 
     /**
      * Returns a boolean to indicate whether this command will terminate the chat bot

@@ -14,10 +14,8 @@ public class Ui {
      *
      * @param msg Message to be displayed
      */
-    public void printMsg(String msg) {
-        System.out.println(BORDER);
-        System.out.println(msg);
-        System.out.println(BORDER + "\n");
+    public String constructMsg(String msg) {
+        return BORDER + "\n" + msg + "\n" + BORDER + "\n";
     }
 
     /**
@@ -25,13 +23,13 @@ public class Ui {
      *
      * @param botName Name of the chat bot to greet with
      */
-    public void printWelcomeMsg(String botName) {
-        printMsg(String.format("Meow, I'm %s\nWhat can I do for you today?", botName));
+    public String constructWelcomeMsg(String botName) {
+        return constructMsg(String.format("Meow, I'm %s\nWhat can I do for you today?", botName));
     }
 
     /** Displays a default exit message */
-    public void printGoodbyeMsg() {
-        printMsg("Meow. Hope to see you again soon!");
+    public String constructGoodbyeMsg() {
+        return constructMsg("Meow. Hope to see you again soon!");
     }
 
     /**
@@ -40,12 +38,17 @@ public class Ui {
      * @param task Task that was added
      * @param tasksSize Number of total tasks after adding that new task
      */
-    public void printAddMsg(Task task, int tasksSize) {
-        System.out.println(BORDER);
-        System.out.println("Got it meow. I've added this task:");
-        System.out.printf("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
-        System.out.printf("Now you have %d tasks in the list.\n", tasksSize);
-        System.out.println(BORDER + "\n");
+    public String constructAddMsg(Task task, int tasksSize) {
+        String msg = "Got it meow. I've added this task:\n" + String.format("  [%s][%s] %s\n", task.getTypeSymbol(),
+                task.getStatusSymbol(), task.getDesc()) + String.format("Now you have %d tasks in the list.\n",
+                tasksSize);
+
+        return constructMsg(msg);
+//        System.out.println(BORDER);
+//        System.out.println("Got it meow. I've added this task:");
+//        System.out.printf("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
+//        System.out.printf("Now you have %d tasks in the list.\n", tasksSize);
+//        System.out.println(BORDER + "\n");
     }
 
     /**
@@ -54,12 +57,16 @@ public class Ui {
      * @param index Index of the completed task in the list
      * @param task Task that was completed
      */
-    public void printDoneMsg(int index, Task task) {
-        System.out.println(BORDER);
-        System.out.println("Good job meow, I've marked this task as done:");
-        System.out.printf("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+    public String constructDoneMsg(int index, Task task) {
+        String msg = "Good job meow, I've marked this task as done:\n" + String.format("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
                 task.getDesc());
-        System.out.println(BORDER + "\n");
+
+        return constructMsg(msg);
+//        System.out.println(BORDER);
+//        System.out.println("Good job meow, I've marked this task as done:");
+//        System.out.printf("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+//                task.getDesc());
+//        System.out.println(BORDER + "\n");
     }
 
     /**
@@ -68,13 +75,18 @@ public class Ui {
      * @param task Task that was deleted
      * @param tasksSize Number of total tasks left after deleting that task
      */
-    public void printDeleteMsg(Task task, int tasksSize) {
-        System.out.println(BORDER);
-        System.out.println("Noted meow. I've removed this task:");
-        System.out.printf("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(),
-                task.getDesc());
-        System.out.printf("Now you have %d tasks in the list.\n", tasksSize);
-        System.out.println(BORDER + "\n");
+    public String constructDeleteMsg(Task task, int tasksSize) {
+        String msg = "Noted meow. I've removed this task:\n" + String.format("  [%s][%s] %s\n", task.getTypeSymbol(),
+                task.getStatusSymbol(), task.getDesc()) + String.format("Now you have %d tasks in the list.\n", tasksSize);
+
+        return constructMsg(msg);
+
+//        System.out.println(BORDER);
+//        System.out.println("Noted meow. I've removed this task:");
+//        System.out.printf("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(),
+//                task.getDesc());
+//        System.out.printf("Now you have %d tasks in the list.\n", tasksSize);
+//        System.out.println(BORDER + "\n");
     }
 
     /**
@@ -82,14 +94,23 @@ public class Ui {
      *
      * @param tasks A list of tasks as search results
      */
-    public void printFoundMsg(List<Task> tasks) {
-        System.out.println(BORDER);
-        System.out.println("Meow, here are the matching tasks in your list:");
+    public String constructFoundMsg(List<Task> tasks) {
+        String msg = "Meow, here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            System.out.printf("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
+            msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+                    task.getDesc());
         }
-        System.out.println(BORDER + "\n");
+
+        return constructMsg(msg);
+
+//        System.out.println(BORDER);
+//        System.out.println("Meow, here are the matching tasks in your list:");
+//        for (int i = 0; i < tasks.size(); i++) {
+//            Task task = tasks.get(i);
+//            System.out.printf("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
+//        }
+//        System.out.println(BORDER + "\n");
     }
 
     /**
@@ -97,14 +118,23 @@ public class Ui {
      *
      * @param tasks List of tasks
      */
-    public void printTaskList(List<Task> tasks) {
-        System.out.println(BORDER);
-        System.out.println("Meow, here are the tasks in your list:");
+    public String constructTaskList(List<Task> tasks) {
+        String msg = "Meow, here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            System.out.printf("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
+            msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+                    task.getDesc());
         }
-        System.out.println(BORDER + "\n");
+
+        return constructMsg(msg);
+
+//        System.out.println(BORDER);
+//        System.out.println("Meow, here are the tasks in your list:");
+//        for (int i = 0; i < tasks.size(); i++) {
+//            Task task = tasks.get(i);
+//            System.out.printf("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
+//        }
+//        System.out.println(BORDER + "\n");
     }
 
     /**
@@ -112,7 +142,7 @@ public class Ui {
      *
      * @param msg Error message
      */
-    public void printError(String msg) {
-        printMsg(String.format("ERROR MEOW! %s", msg));
+    public String constructErrorMsg(String msg) {
+        return constructMsg(String.format("ERROR MEOW! %s", msg));
     }
 }

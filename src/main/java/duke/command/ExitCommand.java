@@ -10,7 +10,8 @@ public class ExitCommand extends Command {
      * @throws DukeCommandException
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
+        return "";
     }
 
     /**

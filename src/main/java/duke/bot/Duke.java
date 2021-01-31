@@ -28,13 +28,13 @@ public class Duke {
         try {
             Storage.loadTasksTo(taskManager);
         } catch (DukeLoadException e) {
-            ui.printError(e.getMessage());
+            ui.constructErrorMsg(e.getMessage());
         }
     }
 
     /** Lifecycle of Duke */
     public void run() {
-        ui.printWelcomeMsg(CHATBOT_NAME);
+        ui.constructWelcomeMsg(CHATBOT_NAME);
 
         Scanner scanner = new Scanner(System.in);
         String line = "";
@@ -46,14 +46,21 @@ public class Duke {
                 command.execute();
                 isActive = !command.willExit();
             } catch (DukeException e) {
-                ui.printError(e.getMessage());
+                ui.constructErrorMsg(e.getMessage());
             }
         }
 
-        ui.printGoodbyeMsg();
+        ui.constructGoodbyeMsg();
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command command = Parser.parse(input);
+            String response = command.execute();
+            isActive = !command.willExit();
+            return "Duke heard: " + response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

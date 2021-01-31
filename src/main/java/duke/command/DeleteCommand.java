@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
      * from the task list or an issue with saving the deletion to the hard disk
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         if (taskManager.getTasksSize() == 0) {
             throw new DukeCommandException("delete", String.valueOf(index), "There are no task to be deleted.");
         } else if (index < 0 || index >= taskManager.getTasksSize()) {
@@ -35,8 +35,8 @@ public class DeleteCommand extends Command {
         } else {
             try {
                 Task task = taskManager.deleteTask(index);
-                ui.printDeleteMsg(task, taskManager.getTasksSize());
                 Storage.saveTasks(taskManager.getTasks());
+                return ui.constructDeleteMsg(task, taskManager.getTasksSize());
             } catch (DukeException e) {
                 throw new DukeCommandException("delete", String.valueOf(index), e.getMessage());
             }

@@ -13,8 +13,8 @@ public class ListCommand extends Command {
      * @throws DukeCommandException if there is an issue retrieving tasks from the list or printing it through the Ui
      */
     @Override
-    public void execute() throws DukeCommandException {
+    public String execute() throws DukeCommandException {
         List<Task> tasks = taskManager.getTasks();
-        ui.printTaskList(tasks);
+        return ui.constructTaskList(tasks);
     }
 }
