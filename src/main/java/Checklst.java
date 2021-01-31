@@ -18,9 +18,18 @@ public class Checklst {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        TaskList taskList = new TaskList();
 
         while (!input.equals("bye")) {
-            sendOutput(input);
+
+            if (input.equals("list")) {
+                sendOutput(taskList.toString());
+            } else {
+                Task task = new Task(input);
+                taskList.add(task);
+                sendOutput("Added: " + task);
+            }
+
             input = scanner.nextLine();
         }
 
