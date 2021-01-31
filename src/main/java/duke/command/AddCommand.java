@@ -3,7 +3,6 @@ package duke.command;
 import java.time.LocalDate;
 
 import duke.Storage;
-import duke.Ui;
 import duke.Utility;
 import duke.exception.DukeException;
 import duke.exception.DukeExceptionType;
@@ -45,7 +44,7 @@ public class AddCommand extends Command {
     private void todoProcess(String taskName, TaskList tasks) {
         Task task = new ToDo(taskName);
         tasks.add(task);
-        output = "Got it. I've added this task: \n\t  "
+        output = "Got it. I've added this task: \n"
                 + task.toString() + getRemainingTasks(tasks);
     }
 
@@ -55,7 +54,7 @@ public class AddCommand extends Command {
         }
         Task task = new Event(description, LocalDate.parse(date));
         tasks.add(task);
-        output = "Got it. I've added this task: \n\t  "
+        output = "Got it. I've added this task: \n"
                 + task.toString() + getRemainingTasks(tasks);
     }
 
@@ -65,24 +64,23 @@ public class AddCommand extends Command {
         }
         Task task = new Deadline(description, LocalDate.parse(date));
         tasks.add(task);
-        output = "Got it. I've added this task: \n\t  "
+        output = "Got it. I've added this task: \n"
                 + task.toString() + getRemainingTasks(tasks);
     }
 
     private String getRemainingTasks(TaskList tasks) {
-        return "\n\tNow you have " + tasks.size() + " tasks in the list.";
+        return "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
      * Adds task to TaskList, saves to storage file and outputs response to terminal
      *
      * @param tasks TaskList
-     * @param ui Ui instance
      * @param storage Storage instance
      * @throws DukeException If invalid date given for event or deadline task
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         switch (command) {
         case "todo":
             todoProcess(description, tasks);
@@ -97,7 +95,6 @@ public class AddCommand extends Command {
             break;
         }
         storage.save(tasks);
-        ui.response(output);
     }
 
     /**

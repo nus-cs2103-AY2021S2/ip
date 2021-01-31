@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -45,13 +44,11 @@ public class FindCommand extends Command {
      * Outputs list of keyword-matched tasks
      *
      * @param tasks TaskList
-     * @param ui Ui instance
      * @param storage Storage instance
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         output = getMatchedTaskListContents(tasks);
-        ui.response(output);
     }
 
     /**

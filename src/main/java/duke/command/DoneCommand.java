@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.DukeExceptionType;
 import duke.task.Task;
@@ -36,19 +35,17 @@ public class DoneCommand extends Command {
      * Marks task as done TaskList, saves to storage file and outputs response to terminal
      *
      * @param tasks TaskList
-     * @param ui Ui instance
      * @param storage Storage instance
      * @throws DukeException If invalid selection given
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         if (Integer.parseInt(description) > tasks.size() || Integer.parseInt(description) <= 0) {
             // Selection out of taskList range
             throw new DukeException(command, DukeExceptionType.SELECTION_EXCEED_RANGE);
         }
         doneProcess(description, tasks);
         storage.save(tasks);
-        ui.response(output);
     }
 
     /**

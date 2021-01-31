@@ -16,6 +16,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Sets up program to run MainWindow on start
+     *
+     * @param stage Stage to show
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -24,10 +29,10 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().welcomeUser();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Unable to get");
         }
     }
 }

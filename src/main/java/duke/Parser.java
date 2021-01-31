@@ -25,7 +25,7 @@ public class Parser {
     public static Command parse(String text) throws DukeException {
         String command = command(text);
         String description = description(text);
-        Command commandType = null;
+        Command commandType;
 
         // Throws exception for ToDo, find, Event and Deadline commands
         if (command.equals("todo") || command.equals("event") || command.equals("deadline")) {

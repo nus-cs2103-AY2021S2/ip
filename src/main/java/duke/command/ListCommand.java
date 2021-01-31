@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -35,13 +34,11 @@ public class ListCommand extends Command {
      * Outputs list of tasks to terminal
      *
      * @param tasks TaskList
-     * @param ui Ui instance
      * @param storage Storage instance
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         output = getTaskListContents(tasks);
-        ui.response(output);
     }
 
     /**
