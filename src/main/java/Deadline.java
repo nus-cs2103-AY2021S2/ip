@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
     protected String dueDate;
@@ -21,6 +25,14 @@ public class Deadline extends Task {
         }
 
         deadlineDueDate = deadlineDueDate.substring(1);
+        LocalDate actualDueDate;
+        try {
+            actualDueDate = LocalDate.parse(deadlineDueDate);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter your date in YYYY-MM-DD format!!!");
+        }
+
+        System.out.println(actualDueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         return new Deadline(deadlineName, deadlineDueDate);
     }
 
