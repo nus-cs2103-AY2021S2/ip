@@ -1,12 +1,12 @@
 package command;
 
-import mike.TaskList;
-import task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindCommand implements Command{
+import mike.TaskList;
+import task.Task;
+
+public class FindCommand implements Command {
     private String keyword;
     private TaskList taskList;
     private List<Task> foundTasks = new ArrayList<>();
@@ -16,7 +16,9 @@ public class FindCommand implements Command{
     }
 
     @Override
-    public boolean isExitCommand(){ return false; }
+    public boolean isExitCommand() {
+        return false;
+    }
 
     @Override
     public TaskList runCommand(TaskList taskList) {

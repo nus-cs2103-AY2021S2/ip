@@ -19,7 +19,9 @@ public abstract class AddCommand implements Command {
      * @return value of isExitCommand in Command.Command objects
      */
     @Override
-    public boolean isExitCommand() { return false; }
+    public boolean isExitCommand() {
+        return false;
+    }
 
     /**
      * Add task to task list provided
@@ -41,9 +43,9 @@ public abstract class AddCommand implements Command {
     @Override
     public String getResponse() {
         return String.format(
-                "Got it. I've added this task: \n" +
-                "       %s\n" +
-                "Now you have %d tasks in the list.",
+                "Got it. I've added this task: \n"
+                        + "       %s\n"
+                        + "Now you have %d tasks in the list.",
                 this.taskToAdd.toString(), this.taskList.getNumTasks());
     }
 }

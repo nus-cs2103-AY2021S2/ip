@@ -1,21 +1,25 @@
 package mike;
 
-import command.*;
-import exception.MikeInvalidInputException;
-import org.junit.Test;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
 import java.util.Scanner;
-import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import command.Command;
+import command.DeadlineCommand;
+import command.EventCommand;
+import command.ListCommand;
+import command.TodoCommand;
+import exception.MikeInvalidInputException;
 
 public class ParserTest {
     @Test
-    public void ParserTest() {
+    public void parserCommandTest() {
         Scanner scanner = null;
         Command actualCommand = null;
         try {
-            scanner = new Scanner(new File(System.getProperty("user.dir") + "/test.txt"));
+            scanner = new Scanner(new File(System.getProperty("user.dir") + "/src/test/test.txt"));
             actualCommand = Parser.parseInput(scanner);
             if (!(actualCommand instanceof ListCommand)) {
                 throw new MikeInvalidInputException("failed");

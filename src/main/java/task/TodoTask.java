@@ -2,6 +2,10 @@ package task;
 
 public class TodoTask extends Task {
 
+    /**
+     * Constructs new task with provided taskDescription and deadline
+     * @param taskDescription description of task
+     */
     public TodoTask(String taskDescription) {
         this.taskDescription = taskDescription;
         this.taskType = 'T';

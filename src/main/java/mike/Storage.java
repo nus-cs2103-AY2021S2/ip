@@ -1,12 +1,11 @@
 package mike;
 
-import exception.MikeCommandExecutionException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import exception.MikeCommandExecutionException;
 
 public class Storage {
     private File listFile;
@@ -35,7 +34,11 @@ public class Storage {
         }
     }
 
-    public TaskList readListFromFile(){
+    /**
+     * Reads list from saved .txt file
+     * @return TaskList object representation of task list saved in file
+     */
+    public TaskList readListFromFile() {
         TaskList taskList = new TaskList();
         try {
             if (!this.listFile.exists()) {
@@ -43,7 +46,7 @@ public class Storage {
                 this.listFile.createNewFile();
             }
             Scanner scanner = new Scanner(this.listFile);
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 taskList.strToTask(scanner.nextLine());
             }
         } catch (MikeCommandExecutionException e) {

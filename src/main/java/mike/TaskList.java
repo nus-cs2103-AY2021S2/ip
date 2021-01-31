@@ -1,16 +1,16 @@
 package mike;
 
-import exception.MikeCommandExecutionException;
-import task.DeadlineTask;
-import task.EventTask;
-import task.TodoTask;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import exception.MikeCommandExecutionException;
+import task.DeadlineTask;
+import task.EventTask;
+import task.TodoTask;
 
 public class TaskList {
     private List<task.Task> taskList;
@@ -75,30 +75,30 @@ public class TaskList {
         boolean isDoneTask = matcher.group(3).equals("X");
 
         switch(matcher.group(2)) {
-            case "T":
-                this.addTaskToList(new TodoTask(matcher.group(4)));
-                break;
+        case "T":
+            this.addTaskToList(new TodoTask(matcher.group(4)));
+            break;
 
-            case "E":
-                pattern = Pattern.compile("(.+) (?=\\(at: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d " +
-                        "\\w\\w)\\))");
-                descriptionMatcher = pattern.matcher(matcher.group(4));
-                descriptionMatcher.find();
-                dateTimeObject = LocalDateTime.parse(descriptionMatcher.group(2), format);
-                this.addTaskToList(new EventTask(descriptionMatcher.group(1), dateTimeObject));
-                break;
+        case "E":
+            pattern = Pattern.compile("(.+) (?=\\(at: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d "
+                    + "\\w\\w)\\))");
+            descriptionMatcher = pattern.matcher(matcher.group(4));
+            descriptionMatcher.find();
+            dateTimeObject = LocalDateTime.parse(descriptionMatcher.group(2), format);
+            this.addTaskToList(new EventTask(descriptionMatcher.group(1), dateTimeObject));
+            break;
 
-            case "D":
-                pattern = Pattern.compile("(.+) (?=\\(by: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d " +
-                        "\\w\\w)\\))");
-                descriptionMatcher = pattern.matcher(matcher.group(4));
-                descriptionMatcher.find();
-                dateTimeObject = LocalDateTime.parse(descriptionMatcher.group(2), format);
-                this.addTaskToList(new DeadlineTask(descriptionMatcher.group(1), dateTimeObject));
-                break;
+        case "D":
+            pattern = Pattern.compile("(.+) (?=\\(by: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d "
+                    + "\\w\\w)\\))");
+            descriptionMatcher = pattern.matcher(matcher.group(4));
+            descriptionMatcher.find();
+            dateTimeObject = LocalDateTime.parse(descriptionMatcher.group(2), format);
+            this.addTaskToList(new DeadlineTask(descriptionMatcher.group(1), dateTimeObject));
+            break;
 
-            default:
-                throw new MikeCommandExecutionException("strToTask error","No such task type");
+        default:
+            throw new MikeCommandExecutionException("strToTask error", "No such task type");
         }
         if (isDoneTask) {
             this.getNthTask(Integer.parseInt(matcher.group(1))).completeTask();

@@ -30,8 +30,8 @@ public class ListCommand implements Command {
     @Override
     public String getResponse() {
         return String.format(
-                "Here are the tasks in your list:\n" +
-                "%s",
+                "Here are the tasks in your list:\n"
+                        + "%s",
                 this.taskList.toString());
     }
 }
