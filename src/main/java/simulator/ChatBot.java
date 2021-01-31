@@ -1,10 +1,16 @@
 package simulator;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import exception.DukeException;
-import task.*;
+
+import task.Event;
+import task.TaskList;
+import task.Deadline;
+import task.Todo;
+import task.Task;
 
 import ui.Ui;
 

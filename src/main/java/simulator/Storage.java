@@ -1,14 +1,21 @@
 package simulator;
 
 import exception.DukeException;
-import task.*;
-import ui.Ui;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+
 import java.util.Scanner;
+
+import ui.Ui;
 
 /**
  * Class <code>Storage</code> deals with loading tasks from file and saving taks in the file.
@@ -44,12 +51,10 @@ public class Storage {
                     String command = content[0];
                     String status = content[1];
                     Task task;
-
                     if (command.equals("T")) {
                         task = new Todo(status, content[2]);
                     } else {
                         String[] description = content[2].split("@");
-                        
                         if (command.equals("D")) {
                             task = new Deadline(status, description);
                         } else {

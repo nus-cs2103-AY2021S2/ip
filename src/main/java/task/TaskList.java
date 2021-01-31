@@ -1,9 +1,8 @@
 package task;
 
-import ui.Ui;
-
 import java.util.ArrayList;
 
+import ui.Ui;
 /**
  * Class <code>TaskList</code> represents a list of <code>Task</code>object using <code>ArrayList</code>.
  * Contains <code>addTask</code> and <code>deleteTask</code> which can add/delete tasks in the list.
