@@ -1,21 +1,20 @@
 package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
-
 import duke.task.TaskList;
 
-import duke.Ui;
 
 /**
  * ExitCommand represent a command to exit from the program.
  */
-class ExitCommand extends Command{
+class ExitCommand extends Command {
 
     /**
      * Returns a ExitCommand object to exit from the program.
      */
     ExitCommand() {
-        super(null, null, null,null, true);
+        super(null, null, null, null, true);
     }
 
     /**

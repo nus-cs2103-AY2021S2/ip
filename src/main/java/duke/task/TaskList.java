@@ -46,7 +46,7 @@ public class TaskList {
      *
      * @param task The task to be added.
      */
-    public void add(Task task){
+    public void add(Task task) {
         list.add(task);
     }
 
@@ -76,7 +76,7 @@ public class TaskList {
      * @throws DukeException If num is smaller or equal 0 or num is bigger than the
      * size of the list.
      */
-    public Task markTaskAsDone(String num) throws DukeException{
+    public Task markTaskAsDone(String num) throws DukeException {
         int index = Integer.valueOf(num) - 1;
 
         if (index < 0 || index >= list.size()) {

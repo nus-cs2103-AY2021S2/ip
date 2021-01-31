@@ -1,18 +1,16 @@
 package duke.command;
 
-import duke.exception.DukeException;
-
-import duke.storage.Storage;
-
-import duke.task.TaskList;
-import duke.task.Task;
-
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
 
 /**
  * DoneCommand represent a command to mark a task as done.
  */
-class DoneCommand extends Command{
+class DoneCommand extends Command {
 
     /**
      * Returns a DoneCommand object to mark the given task as done.
@@ -20,7 +18,7 @@ class DoneCommand extends Command{
      * @param index The index of the task to be mark as done.
      */
     DoneCommand(String index) {
-        super(null, index, null,null, false);
+        super(null, index, null, null, false);
     }
 
     /**

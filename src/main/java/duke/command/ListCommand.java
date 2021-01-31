@@ -1,15 +1,13 @@
 package duke.command;
 
-import duke.storage.Storage;
-
-import duke.task.TaskList;
-
 import duke.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 /**
  * ListCommand represent a command to list out all the current tasks in the list.
  */
-class ListCommand extends Command{
+class ListCommand extends Command {
 
     /**
      * Returns a ListCommand to list out tasks in the list.

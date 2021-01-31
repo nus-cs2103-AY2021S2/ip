@@ -1,15 +1,12 @@
 package duke.command;
 
 import duke.Ui;
-
 import duke.exception.DukeException;
-
 import duke.storage.Storage;
-
-import duke.task.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
 
 import java.time.LocalDate;
@@ -17,7 +14,7 @@ import java.time.LocalDate;
 /**
  * AddCommand represent a command to add a task into the list.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     /**
      * Returns an AddCommand object that will add a Task into the list.

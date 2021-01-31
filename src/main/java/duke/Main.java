@@ -1,20 +1,22 @@
- package duke;
+package duke;
 
- import duke.command.Statement;
- import duke.command.Command;
+import duke.command.Command;
+import duke.command.Statement;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
- import duke.storage.Storage;
-
- import duke.task.TaskList;
-
- import duke.exception.DukeException;
-
- public class Main {
+public class Main {
 
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Returns a Main object representing the chatbox.
+     *
+     * @param filePath The filepath storing the data.
+     */
     public Main(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +28,9 @@
         }
     }
 
+    /**
+     * Initialize the program by start taking in inputs.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

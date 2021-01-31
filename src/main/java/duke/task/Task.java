@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.util.Scanner;
-
 /**
  * Task is a parent class of three subclasses: Todo, Event and Deadline.
  * Task has a description of the task and a boolean
@@ -27,7 +25,7 @@ public class Task {
     /**
      * Changes the field isDone to true.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
 
@@ -54,7 +52,7 @@ public class Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
 

@@ -21,7 +21,7 @@ public class Event extends Task {
     public Event(String description, String preposition, LocalDate date) {
         super(description);
         this.preposition = preposition;
-        this.date =date;
+        this.date = date;
     }
 
     /**

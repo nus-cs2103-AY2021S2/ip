@@ -4,14 +4,14 @@ package duke.task;
  * Todo extends from class Task and represent task that
  * the user is planning to do without a certain deadline.
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Returns a Todo object that represent the task.
      *
      * @param description Description of the task.
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description);
     }
 
@@ -27,7 +27,7 @@ public class Todo extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("[T][%s] %s", getStatusIcon(), description);
     }
 }

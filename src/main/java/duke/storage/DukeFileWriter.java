@@ -25,7 +25,7 @@ class DukeFileWriter {
             fw.write(input);
             fw.close();
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
     }

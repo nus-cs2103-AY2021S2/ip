@@ -1,7 +1,6 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -100,7 +99,7 @@ class FileReader {
             case "event":
                 return new Event(first, preposition, date);
             case "deadline":
-                return  new Deadline(first, preposition, date);
+                return new Deadline(first, preposition, date);
             default:
                 return null;
             }

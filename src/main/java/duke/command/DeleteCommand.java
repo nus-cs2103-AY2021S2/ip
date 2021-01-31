@@ -1,18 +1,16 @@
 package duke.command;
 
-import duke.exception.DukeException;
-
-import duke.storage.Storage;
-
-import duke.task.TaskList;
-import duke.task.Task;
-
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
 
 /**
  * DeleteCommand represent a command to delete a task from the list.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
 
     /**
@@ -21,7 +19,7 @@ public class DeleteCommand extends Command{
      * @param index The index of the task to be deleted.
      */
     public DeleteCommand(String index) {
-        super(null, index, null,null, false);
+        super(null, index, null, null, false);
     }
 
     /**

@@ -1,15 +1,13 @@
 package duke.command;
 
 import duke.Ui;
-
 import duke.storage.Storage;
-
 import duke.task.TaskList;
 
 /**
  * FindCommand represent a command to find task(s) that matches the keyword.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     /**
      * Returns a FindCommand object that will find all the tasks

@@ -47,7 +47,8 @@ public class Statement {
         List<String> result = new ArrayList<>();
         result.add(command);
 
-        if (!argsTable.containsKey(command)) {//unknown command
+        if (!argsTable.containsKey(command)) {
+            //unknown command
             throw new DukeException("Sorry, but I don't know what " + command + " means. :(");
         }
 
@@ -59,7 +60,7 @@ public class Statement {
         }
 
         if (!sc.hasNext()) {
-            switch(command){
+            switch(command) {
             case "done": case "delete":
                 throw new DukeException("OOPS! " + command + " requires the index of the task.");
             case "todo":
@@ -94,7 +95,7 @@ public class Statement {
      * is incorrect or there is no '/' to separate description and date of an
      * event/deadline.
      */
-    public Command parse() throws DukeException{
+    public Command parse() throws DukeException {
         try {
             List<String> parsedArgs = parseStatement();
             String command = parsedArgs.get(0);
@@ -136,7 +137,7 @@ public class Statement {
             default:
                 return null;
             }
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("Date must be in the format yyyy-mm-dd.");
         }
 
