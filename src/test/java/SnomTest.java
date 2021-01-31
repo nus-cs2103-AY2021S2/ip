@@ -21,22 +21,6 @@ public class SnomTest {
     }
 
     @Test
-    public void exitCommandTest() {
-        Command command = new AddCommand(CommandEnum.TODO);
-        boolean expectedBoolean = false;
-        assertEquals(command.isExit(), expectedBoolean);
-
-        command = new ExitCommand(CommandEnum.BYE);
-        expectedBoolean = true;
-        assertEquals(command.isExit(), expectedBoolean);
-    }
-
-    @Test
-    public void parseCommandTest() throws SnomException {
-        assertEquals(Parser.parse("TODO").isExit(), new AddCommand(CommandEnum.TODO).isExit());
-    }
-
-    @Test
     public void storageTest() throws SnomException {
         Storage storage = new Storage("./src/main/data", "snom.txt");
         TaskList taskList = new TaskList(storage.readFile());

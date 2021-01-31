@@ -6,12 +6,13 @@ import tasks.TaskList;
 import ui.Snomio;
 
 public abstract class Command {
-    CommandEnum type;
+    CommandEnum commandType;
+    String content;
 
-    public Command(CommandEnum type){
-        this.type = type;
+    public Command(CommandEnum commandType, String content){
+        this.commandType = commandType;
+        this.content = content;
     }
 
-    public abstract void execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException;
-    public abstract boolean isExit();
+    public abstract CommandResponse execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException;
 }

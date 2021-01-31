@@ -1,4 +1,5 @@
 import commands.Command;
+import commands.CommandResponse;
 import exceptions.SnomException;
 import parser.Parser;
 import storage.Storage;
@@ -26,23 +27,20 @@ public class Snom {
         }
     }
 
-    public void run(){
-        snomio.showWelcomeMsg();
-        boolean isExit = false;
-        while(!isExit){
-            try {
-                String commandStr = snomio.readWord();
-                Command command = Parser.parse(commandStr);
-                command.execute(taskList, snomio, storage);
-                isExit = command.isExit();
-            } catch (SnomException e) {
-                snomio.showError(e.getMessage());
-            }
+    /**
+     * Returns {@code CommandResponse} with the response message and whether to exit after command
+     *
+     * @param userInput String of user input
+     * @return          CommandResponse
+     */
+    public CommandResponse getResponse(String userInput) {
+        try {
+            Command command = Parser.parse(userInput);
+            CommandResponse response = command.execute(taskList, snomio, storage);
+            return response;
+        } catch (SnomException e) {
+            return new CommandResponse(e.getMessage(), false);
         }
-        snomio.close();
     }
 
-    public static void main(String[] args) {
-        new Snom("data", "snom.txt").run();
-    }
 }

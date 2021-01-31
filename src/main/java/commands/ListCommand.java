@@ -6,8 +6,8 @@ import tasks.TaskList;
 import ui.Snomio;
 
 public class ListCommand extends Command{
-    public ListCommand(CommandEnum type) {
-        super(type);
+    public ListCommand(CommandEnum commandType, String content) {
+        super(commandType, content);
     }
 
     /**
@@ -16,15 +16,11 @@ public class ListCommand extends Command{
      * @param taskList         list of task
      * @param snomio           I/O of Snom
      * @param storage          files handler of snom
+     * @return CommandResponse response after command execution
      * @throws SnomException   if command execution failed
      */
     @Override
-    public void execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException {
-        snomio.showTaskList(taskList);
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
+    public CommandResponse execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException {
+        return new CommandResponse(snomio.showTaskList(taskList), false);
     }
 }

@@ -19,6 +19,11 @@ public class Snomio extends PrintWriter {
     private BufferedReader reader;
     private StringTokenizer tokenizer;
 
+    public Snomio(){
+        super(new BufferedOutputStream(System.out));
+        reader = new BufferedReader(new InputStreamReader(System.in));
+    }
+
     public Snomio(InputStream is, OutputStream os){
         super(new BufferedOutputStream(os));
         reader = new BufferedReader(new InputStreamReader(is));
@@ -52,34 +57,32 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * Prints the welcome message of Snom on startup.
+     * Returns the welcome message of Snom on startup.
+     *
+     * @return String welcome message
      */
-    public void showWelcomeMsg(){
-        showLine();
-        println("Bonjour! I'm Snom! *squish*");
-        println("Try giving me some commands, I might be able to do something!");
-        println("[type 'bye' to exit program]");
-        showLine();
-        flush();
+    public String showWelcomeMsg(){
+        return "Bonjour! I'm Snom! *squish*\n"
+                + "Try giving me some commands, I might be able to do something!\n"
+                + "[type 'bye' to exit program]";
     }
 
     /**
-     * Prints out the entire task list.
+     * Returns a message containing the entire task list.
      *
+     * @return String        string of entire task List
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
-    public void showTaskList(TaskList taskList) throws SnomException{
-        showLine();
+    public String showTaskList(TaskList taskList) throws SnomException{
         if(taskList.getSize() > 0){
-            println("Here are the tasks in your list:");
+            String message = "Here are the tasks in your list:\n";
             for(int i = 0; i < taskList.getSize(); i++){
-                println((i+1) + ". " + taskList.getTask(i).toString());
+                message += (i+1) + ". " + taskList.getTask(i).toString() + "\n";
             }
+            return message;
         }else{
             throw new SnomException("You have no task in your list right now, try adding some and try again :D");
         }
-        showLine();
-        flush();
     }
 
     /**
@@ -102,58 +105,53 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * Prints out the task added into the taskList and size of current taskList.
+     * Returns the task added into the taskList and size of current taskList.
      *
      * @param task     task added
      * @param listSize task list size
+     * @return String  task added into taskList
      */
-    public void showTaskAdded(Task task, int listSize){
-        showLine();
-        println("Got it. I've added this task:");
-        println("\t" + task.toString());
-        println("Now you have " + listSize + " tasks in the list.");
-        showLine();
-        flush();
+    public String showTaskAdded(Task task, int listSize){
+        return "Got it. I've added this task:\n"
+                + "\t" + task.toString() + "\n"
+                + "Now you have " + listSize + " tasks in the list.";
     }
 
     /**
-     * Prints the list of recent finished tasks.
+     * Returns the list of recent finished tasks.
      *
      * @param finishedTasks list of finished tasks
+     * @return String       recent finished tasks
      */
-    public void showFinishedTasks(Task[] finishedTasks) {
-        showLine();
-        println("Great Job! I've marked this task(s) as finish:");
+    public String showFinishedTasks(Task[] finishedTasks) {
+        String message = "Great Job! I've marked this task(s) as finish:\n";
         for(Task task: finishedTasks){
-            println("\t" + task.toString());
+            message += "\t" + task.toString() + "\n";
         }
-        showLine();
-        flush();
+        return message;
     }
 
     /**
-     * Prints the list of recently deleted tasks.
+     * Returns the list of recently deleted tasks.
      *
      * @param deletedTasks list of deleted tasks
+     * @return String      recent deleted tasks
      */
-    public void showDeletedTasks(Task[] deletedTasks) {
-        showLine();
-        println("Noted, I've removed this task(s)");
+    public String showDeletedTasks(Task[] deletedTasks) {
+        String message = "Noted, I've removed this task(s)\n";
         for(Task task: deletedTasks){
-            println("\t" + task.toString());
+            message += "\t" + task.toString() + "\n";
         }
-        showLine();
-        flush();
+        return message;
     }
 
     /**
-     * Prints exit message.
+     * Returns exit message.
+     *
+     * @return String exit message
      */
-    public void showExitMessage(){
-        showLine();
-        println("Ciao! Hope to see you again soon!");
-        showLine();
-        flush();
+    public String showExitMessage(){
+        return "Ciao! Hope to see you again soon!";
     }
 
     /**

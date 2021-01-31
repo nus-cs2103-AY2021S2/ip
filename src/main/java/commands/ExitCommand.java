@@ -6,8 +6,8 @@ import tasks.TaskList;
 import ui.Snomio;
 
 public class ExitCommand extends Command{
-    public ExitCommand(CommandEnum type) {
-        super(type);
+    public ExitCommand(CommandEnum commandType, String content) {
+        super(commandType, content);
     }
 
     /**
@@ -17,14 +17,10 @@ public class ExitCommand extends Command{
      * @param snomio           I/O of Snom
      * @param storage          files handler of snom
      * @throws SnomException   if command execution failed
+     * @return CommandResponse response after command execution
      */
     @Override
-    public void execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException {
-        snomio.showExitMessage();
-    }
-
-    @Override
-    public boolean isExit() {
-        return true;
+    public CommandResponse execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException {
+        return new CommandResponse(snomio.showExitMessage(), true);
     }
 }
