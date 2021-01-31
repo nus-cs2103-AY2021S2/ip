@@ -58,6 +58,10 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        return input;
+    }
+
     public static void main(String[] args) {
         new Duke().run();
     }
