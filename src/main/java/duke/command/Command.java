@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskManager;
-import duke.Ui;
 import duke.exception.DukeException;
 
 public abstract class Command {
@@ -11,5 +10,5 @@ public abstract class Command {
         return false;
     }
 
-    public abstract void execute(Ui ui, TaskManager tm, Storage st) throws DukeException;
+    public abstract String execute(TaskManager tm, Storage st) throws DukeException;
 }
