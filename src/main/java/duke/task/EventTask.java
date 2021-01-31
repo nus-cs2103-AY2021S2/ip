@@ -56,7 +56,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
-        return String.format("[E][%s] %s (by: %s)",
+        return String.format("[E][%s] %s (at: %s)",
                 done == Status.DONE ? "X" : " ",
                 name,
                 duration.format(formatter));
