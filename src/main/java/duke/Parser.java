@@ -9,13 +9,18 @@ import java.util.List;
 
 public class Parser {
     public static Command parse(String line) throws ParseException, InvalidCommandException {
+        line = line.trim();
         Command c = null;
-        String singleTokens[] = {"bye", "list"};
+        String singleTokens[] = {"bye", "list", "exit", "ls"};
         String[] tokens = splitTokenIntoTwo(line, " ", singleTokens);
-        switch (tokens[0]) {
+        switch (tokens[0].toLowerCase()) {
+        case "exit":
+            //Fall-through
         case "bye":
             //Leave as null
             break;
+        case "ls":
+            //Fall-through
         case "list":
             c = new ListCommand();
             break;
@@ -33,6 +38,12 @@ public class Parser {
             tokens = splitTokenIntoTwo(tokens[1], " /at ");
             c = new AddCommand(new String[]{"E", tokens[0], tokens[1]});
             break;
+        case "rm":
+            //Fall-through
+        case "remove":
+            //Fall-through
+        case "del":
+            //Fall-through
         case "delete":
             c = new DeleteCommand(Integer.parseInt(tokens[1]));
             break;
