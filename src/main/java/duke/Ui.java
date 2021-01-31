@@ -1,6 +1,11 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.BadDateArgumentException;
+import duke.exception.EmptyArgumentException;
+import duke.exception.InvalidCommandException;
+
+import java.text.ParseException;
 
 public class Ui {
     private String logo =
@@ -44,5 +49,21 @@ public class Ui {
             System.out.println(data);
             break;
         }
+    }
+    //TODO: Figure out if this overloading is acceptable from a coding style perspective.
+    public void handleException(ParseException e){
+        System.out.println("Command has invalid parsing.");
+        System.out.println(e.getMessage());
+    }
+    public void handleException(InvalidCommandException e){
+        System.out.println(e.getMessage());
+    }
+    public void handleException(EmptyArgumentException e){
+        System.out.println("Cannot have empty argument");
+        System.out.println(e.getMessage());
+    }
+    public void handleException(BadDateArgumentException e) {
+        System.out.println("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044");
+        System.out.println(e.getMessage());
     }
 }

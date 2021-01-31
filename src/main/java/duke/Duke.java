@@ -35,14 +35,13 @@ public class Duke {
                 String data = store.run(c);
                 ui.commandMessage(c,data);
             } catch (ParseException e) {
-                System.out.println("Command has invalid parsing.");
-                System.out.println(e.getMessage());
+                ui.handleException(e);
             } catch (InvalidCommandException e){
-                System.out.println(e.getMessage());
+                ui.handleException(e);
             } catch(EmptyArgumentException e){
-                System.out.println("Cannot have empty argument");
+                ui.handleException(e);
             } catch (BadDateArgumentException e) {
-                System.out.println("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044");
+                ui.handleException(e);
             } finally {
                 if(store.isEdited()){
                     try {
