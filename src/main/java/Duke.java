@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
@@ -10,7 +9,8 @@ public class Duke {
      * Constructor for the Duke object
      */
 
-    public Duke(String filePath) {
+
+    public Duke(){
         this.ui = new Ui();
         this.storage = new Storage();
         this.taskList = new TaskList(storage);
@@ -21,9 +21,8 @@ public class Duke {
      */
 
     public void exit() throws IOException {
-        this.ui.bye();
+        Ui.bye();
         this.storage.update(this.taskList);
-        System.exit(0);
     }
 
     /**
@@ -32,30 +31,15 @@ public class Duke {
 
     public void run() throws IOException {
         this.storage.createFile();
-        this.ui.greeting();
-        Scanner scanner = new Scanner(System.in);
+        Ui.greeting();
         this.taskList.addTaskFromFile();
-        while (scanner.hasNext()) {
-            try {
-                String input = scanner.nextLine();
-                if (input.equals("bye")) {
-                    this.exit();
-                } else {
-                    Parser parser = new Parser(this.taskList);
-                    parser.parseUserCommand(input);
-                }
-
-            } catch (DukeException | IOException e) {
-                System.out.println(e.getMessage());
-                break;
-            }
-
-
-        }
     }
 
 
-    public static void main(String[] args) throws IOException {
-        new Duke("data/Duke.txt").run();
+    public String getResponse(String input) throws IOException, DukeException {
+        Parser parser = new Parser(this.taskList);
+        System.out.println(this.taskList);
+        return parser.parseUserCommand(input);
     }
+
 }

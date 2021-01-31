@@ -53,24 +53,26 @@ public class Parser {
      * Parse input from user and add the task to taskList
      * @param commandFromUser
      */
-    public void parseUserCommand(String commandFromUser) throws IOException, DukeException {
+    public String parseUserCommand(String commandFromUser) throws DukeException {
         if (commandFromUser.equals("list")) {
-            this.taskList.listTask();
+            return this.taskList.listTask();
+
         }
         else if (commandFromUser.split(" ")[0].equals("done")) {
             int index = Integer.parseInt(commandFromUser.split(" ")[1]);
-            this.taskList.finishTask(index);
+            return this.taskList.finishTask(index);
+
         }
         else if (commandFromUser.split(" ")[0].equals("delete")) {
             int index = Integer.parseInt(commandFromUser.split(" ")[1]);
-            this.taskList.deleteTask(index);
+            return this.taskList.deleteTask(index);
         }
         else if (commandFromUser.split(" ")[0].equals("todo")) {
             if (commandFromUser.split(" ").length == 1) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             String res = commandFromUser.split("todo ")[1];
-            this.taskList.addTask(new ToDo(res));
+            return this.taskList.addTask(new ToDo(res));
         }
         else if (commandFromUser.split(" ")[0].equals("deadline")) {
             String[] res = (commandFromUser.split("deadline ")[1]).split(" /by ");
@@ -80,19 +82,19 @@ public class Parser {
             String description = res[0];
             String by = res[1];
             Task task = new Deadlines(description, by, false);
-            this.taskList.addTask(task);
+            return this.taskList.addTask(task);
         }
 
         else if (commandFromUser.split(" ")[0].equals("event")) {
             String[] res = (commandFromUser.split("event ")[1]).split(" /at ");
             String description = res[0];
             String by = res[1];
-            this.taskList.addTask(new Events(description, by));
+            return this.taskList.addTask(new Events(description, by));
         }
 
         else if (commandFromUser.split(" ")[0].equals("find")) {
             String keyword = commandFromUser.split(" ")[1];
-            this.taskList.find(keyword);
+            return this.taskList.find(keyword);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

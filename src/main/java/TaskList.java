@@ -8,7 +8,6 @@ import java.util.Scanner;
  * Manager to manage a list of tasks
  */
 public class TaskList {
-    private static String line = "------------------------------------------------------";
     private final List<Task> ls = new ArrayList<>();
     private final Storage storage;
 
@@ -35,24 +34,24 @@ public class TaskList {
      * Adds a given task to the list.
      * @param task given task
      */
-    public void addTask(Task task) {
-        String res = "\t" + line + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";
+    public String addTask(Task task) {
+        String res = "\t" + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";
         this.ls.add(task);
         int numOfTasks = ls.size();
-        res += "\tNow you have " + numOfTasks + " tasks in the list\n\t" + line;
-        System.out.println(res);
+        res += "\tNow you have " + numOfTasks + " tasks in the list\n\t";
+        return res;
     }
     /**
      * Search by keyword
      * @param keyword of a certain task
      */
 
-    public void find(String keyword) {
+    public String find(String keyword) {
         String res = "";
         if (ls.isEmpty()) {
-            res = "\t" + line + "No task to find!\n";
+            res += "\t" + "No task to find!\n";
         } else {
-            res = "\t" + line + "\n\tHere are the matching tasks in your list:\n";
+            res = "\t" + "\n\tHere are the matching tasks in your list:\n";
             List<Task> newList = new ArrayList<>();
             for (Task task : this.ls) {
                 if (task.toString().contains(keyword)) {
@@ -64,15 +63,14 @@ public class TaskList {
             }
         }
 
-        res += "\t" + line;
-        System.out.println(res);
+        return res;
     }
 
-    public void finishTask(int index) {
+    public String finishTask(int index) {
         Task task = this.ls.get(index - 1);
         task.markAsDone();
-        String res = "\t" + line + "\n\t" + "Nice! I've marked this task as done: \n\t\t" + task + "\n\t" + line;
-        System.out.println(res);
+        String res = "\t" + "\n\t" + "Nice! I've marked this task as done: \n\t\t" + task + "\n\t";
+        return res;
 
     }
 
@@ -81,13 +79,13 @@ public class TaskList {
      * @param index index of a certain task
      */
 
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task task = this.ls.get(index - 1);
         this.ls.remove(index-1);
         int len = this.ls.size();
-        String res = "\t" + line + "\n\t" + " Noted. I've removed this task:\n\t\t" + task +
-                "\n\tNow you have " + len +" tasks in the list.\n\t" + line;
-        System.out.println(res);
+        String res = "\t" + "\n\t" + " Noted. I've removed this task:\n\t\t" + task +
+                "\n\tNow you have " + len +" tasks in the list.\n\t";
+        return res;
 
     }
 
@@ -95,19 +93,27 @@ public class TaskList {
      * List all the tasks in taskList
      */
 
-    public void listTask() {
+    public String listTask() {
         String res = "";
         if(ls.isEmpty()){
-            res = "\t" + line + "\n\tWell Done! All task has been completed\n";
+            res = "\t" + "\n\tWell Done! All task has been completed\n";
         } else {
-            res = "\t" + line + "\n\tHere are the tasks in your list:\n";
+            res = "\t" + "\n\tHere are the tasks in your list:\n";
             for (int i = 0; i < ls.size(); i++) {
                 res += "\t" + (i + 1) + "." + ls.get(i) + "\n";
             }
         }
 
-        res += "\t" + line;
-        System.out.println(res);
+        return res;
+    }
+
+    @Override
+    public String toString(){
+        String res = "";
+        for(Task task : this.ls){
+            res += task.toString() + "\n";
+        }
+        return res;
     }
 }
 
