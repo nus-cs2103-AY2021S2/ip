@@ -37,19 +37,21 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Returns the string to indicate successful addition of task.
      * Adds the specified task into the TaskList given by command line
      * and save changes into the save file.
      *
      * @param tasks TaskList to add task into.
      * @param ui Ui for system outputs.
      * @param storage Storage for saving contents into file.
+     * @return Successful addition of task string.
      * @throws DukeException If error happens while adding task.
      * @throws DateTimeParseException If date and time format in command is incorrect.
      * @throws StringIndexOutOfBoundsException If format in command is incorrect.
      * @throws IOException If error happens while saving contents into file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException,
             DateTimeParseException, StringIndexOutOfBoundsException, IOException {
         Task temp;
         String description;
@@ -133,8 +135,8 @@ public class AddCommand extends Command {
             throw new CommandNotValidException();
         }
         tasks.add(temp);
-        ui.showAddTask(tasks, temp);
         storage.save(tasks);
+        return ui.getAddTaskString(tasks, temp);
     }
 
     /**
