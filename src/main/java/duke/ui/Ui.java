@@ -5,36 +5,19 @@ import java.util.Scanner;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Responsible for handling output messages.
+ */
 public class Ui {
     public Ui() {}
 
     /**
-     * Prints the welcome message.
-     */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        showGreeting();
-    }
-
-    private void showGreeting() {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tHello! I'm Duke\n\tWhat can I do for you?\n"
-                + "\t____________________________________________________________\n");
-    }
-
-    /**
-     * Prints the specified error message.
+     * Returns the Duke greeting message.
      *
-     * @param message Message given by the error.
+     * @return Duke greeting message.
      */
-    public void showError(String message) {
-        System.out.println("\t____________________________________________________________\n"
-                + message + "\t____________________________________________________________\n");
+    public String getGreeting() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
@@ -48,129 +31,154 @@ public class Ui {
     }
 
     /**
-     * Prints the full list of Task in TaskList, numbered in increasing order.
+     * Returns the string listing tasks in TaskList, numbered in increasing order.
      *
      * @param tasks TaskList to be printed.
+     * @return String listing tasks in TaskList.
      */
-    public void showTasks(TaskList tasks) {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tHere are the tasks in your list:");
+    public String getListOfTasks(TaskList tasks) {
+        String taskListString = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + "." + tasks.getTask(i).toString());
+            taskListString += (i + 1) + "." + tasks.getTask(i).toString() + "\n";
         }
-        System.out.println("\t____________________________________________________________\n");
+        return taskListString;
     }
 
     /**
-     * Prints a message to indicate TaskList is empty.
+     * Returns a message to indicate TaskList is empty.
+     *
+     * @return String indicating an empty TaskList.
      */
-    public void showEmptyList() {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tThere are no items in your list.\n"
-                + "\t____________________________________________________________\n");
+    public String getEmptyListString() {
+        return "There are no items in your list.";
     }
 
     /**
-     * Prints a message to indicate error when editing save file.
+     * Returns a message to indicate error when editing save file.
+     *
+     * @return String indicating error when editing save file.
      */
-    public void showIoError() {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tError happened while trying to edit save file.\n"
-                + "\t____________________________________________________________\n");
+    public String getIoErrorString() {
+        return "Error happened while trying to edit save file.";
     }
 
     /**
-     * Prints a message to indicate invalid date input.
+     * Returns a message to indicate invalid date input.
+     *
+     * @return String to indicating invalid date input.
      */
-    public void showOutOfBoundsError() {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tPlease enter the date (DD/MM/YYYY) with optional\n"
-                + "\ttime (in 24 hours format) after \"/by\" for Deadline Tasks\n"
-                + "\tor date with optional start and end time after \"/at\" \n"
-                + "\tfor Event Tasks.\n"
-                + "\t____________________________________________________________\n");
+    public String getOutOfBoundsErrorString() {
+        return "Please enter the date (DD/MM/YYYY) with optional"
+                + "time (in 24 hours format) after \"/by\" for Deadline Tasks "
+                + "or date with optional start and end time after \"/at\" "
+                + "for Event Tasks.";
     }
 
     /**
-     * Prints a message to indicate invalid date input format.
+     * Returns a message to indicate invalid date input format.
+     *
+     * @return String indicating invalid date input format.
      */
-    public void showDateTimeParseError() {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tPlease enter in DD/MM/YYYY format (eg. 02/04/2000) for dates\n"
-                + "\tand in 24 hour format (eg. 1830) for times.\n"
-                + "\t____________________________________________________________\n");
+    public String getDateTimeParseErrorString() {
+        return "Please enter in DD/MM/YYYY format (eg. 02/04/2000) for dates "
+                + "and in 24 hour format (eg. 1830) for times.";
     }
 
     /**
-     * Prints a message to indicate successful task addition.
+     * Returns a message to indicate successful task addition.
      *
      * @param tasks TaskList containing the Task.
      * @param task Task that is added.
+     * @return String to indicate successful task addition.
      */
-    public void showAddTask(TaskList tasks, Task task) {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tGot it. I've added this task:\n"
-                + "\t   " + task.toString() + "\n"
-                + "\tNow you have " + tasks.size() + " tasks in the list.\n"
-                + "\t____________________________________________________________\n");
+    public String getAddTaskString(TaskList tasks, Task task) {
+        return "Got it. I've added this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
-     * Prints a message to indicate successful task deletion.
+     * Returns a message to indicate successful task deletion.
      *
      * @param tasks TaskList that contained the Task.
      * @param task Task that has been deleted.
+     * @return String to indicate successful task deletion.
      */
-    public void showDeleteTask(TaskList tasks, Task task) {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tNoted. I've removed this task:\n"
-                + "\t   " + task.toString() + "\n"
-                + "\tNow you have " + tasks.size() + " tasks in the list.\n"
-                + "\t____________________________________________________________\n");
+    public String getDeleteTaskString(TaskList tasks, Task task) {
+        return "Noted. I've removed this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
-     * Prints a message to indicate successful task completion.
+     * Returns a message to indicate successful task completion.
      *
      * @param tasks TaskList containing the Task to be completed.
      * @param index Index of the task in TaskList.
+     * @return String to indicate successful task completion.
      */
-    public void showDoneTask(TaskList tasks, int index) {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tNice! I've marked this task as done:\n\t\t"
-                + tasks.getTask(index - 1).toString() + "\n"
-                + "\t____________________________________________________________\n");
+    public String getDoneTaskString(TaskList tasks, int index) {
+        return "Nice! I've marked this task as done:\n"
+                + tasks.getTask(index - 1).toString();
     }
 
     /**
-     * Prints the goodbye message.
+     * Returns the goodbye message.
+     *
+     * @return Goodbye message string.
      */
-    public void showByeMessage() {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tBye. Hope to see you again soon!\n"
-                + "\t____________________________________________________________\n");
+    public String getByeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the list of tasks matching specified input.
+     * Returns a string listing the tasks matching specified input.
      *
      * @param tasks List of task that contains the matched input.
+     * @return String listing the tasks matching specified input.
      */
-    public void showMatchList(TaskList tasks) {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tHere are the matching tasks in your list:");
+    public String getMatchList(TaskList tasks) {
+        String matchString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + "." + tasks.getTask(i).toString());
+            matchString += (i + 1) + "." + tasks.getTask(i).toString() + "\n";
         }
-        System.out.println("\t____________________________________________________________\n");
+        return matchString;
     }
 
     /**
-     * Prints a message indicating no match in TaskList.
+     * Returns a message indicating no match in TaskList.
+     *
+     * @return String to indicate no match in TaskList.
      */
-    public void showNoMatch() {
-        System.out.println("\t____________________________________________________________\n"
-                + "\tNo tasks matched your word.\n"
-                + "\t____________________________________________________________\n");
+    public String getNoMatchString() {
+        return "No tasks matched your word.";
+    }
+
+    /**
+     * Prints a message indicating file does not exists.
+     */
+    public void showFileNotFound() {
+        System.out.println("Error: File does not exists.");
+    }
+
+    /**
+     * Prints a message indicating invalid content format in save file.
+     */
+    public void showInvalidSaveFileFormat() {
+        System.out.println("Error: Invalid content format in save file");
+    }
+
+    /**
+     * Prints a message indicating invalid date time format in save file.
+     */
+    public void showInvalidSaveFileDateTimeFormat() {
+        System.out.println("Error: Invalid date time format in save file or no date time stated");
+    }
+
+    /**
+     * Prints a message indicating error while creating save file.
+     */
+    public void showFileCreationError() {
+        System.out.println("Error happened while trying to create save file");
     }
 }
