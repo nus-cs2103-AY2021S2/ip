@@ -1,3 +1,5 @@
+import main.java.Ui;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
@@ -5,13 +7,6 @@ import java.io.*;
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<Task>();
 
-    public static void greet() {
-        System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
-    }
-
-    public static void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
     public static void addTask(Task newTask) {
         taskList.add(newTask);
         System.out.println("Got it. I've added this task:" + "\n" + newTask.toString() +
@@ -66,14 +61,8 @@ public class Duke {
         };
 
     public static void main(String[] args) throws DukeException, Exception {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        greet();
         Scanner sc = new Scanner(System.in);
+        Ui.greet();
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
             if(input.equals(""))
@@ -150,7 +139,7 @@ public class Duke {
                 addTask(task);
 
             } else if (input.equals("bye")) {
-                exit();
+                Ui.exit();
                 break;
             } else if (input.equals("list")) {
                 listTask();
