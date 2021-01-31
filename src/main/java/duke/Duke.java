@@ -2,6 +2,10 @@ package duke;
 
 import java.util.List;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownInputException;
 import duke.tasks.DeadlineTask;
@@ -12,7 +16,7 @@ import duke.tasks.ToDoTask;
 /**
  * Duke class that simulates the running of the Duke Program
  */
-public class Duke {
+public class Duke extends Application {
 
     /** Storage instance that is used by Duke during run for loading and writing of file*/
     private Storage storage;
@@ -23,15 +27,15 @@ public class Duke {
     /** Ui instance used by Duke during run to interact with User */
     private Ui ui;
 
+    private String filePath = "./data/tasks.txt";
     /**
      * Constructor for the Duke class
      */
-    public Duke(String filePath) {
+    public Duke() {
 
         ui = new Ui();
 
         try {
-
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
 
@@ -187,6 +191,7 @@ public class Duke {
 
             ui.printDivider();
         }
+        
     }
 
     /**
@@ -194,6 +199,15 @@ public class Duke {
      * @param args variable arguments
      */
     public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
+        new Duke().run();
+    }
+    
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }

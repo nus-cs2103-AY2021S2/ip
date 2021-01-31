@@ -29,14 +29,14 @@ public class Storage {
     public Storage(String filepath) throws DukeOnlyIoException {
 
         try {
-
             this.file = new File(filepath);
-            sc = new Scanner(this.file);
-
+            
             if (!this.file.exists()) {
                 this.file.getParentFile().mkdir();
                 this.file.createNewFile();
             }
+    
+            sc = new Scanner(this.file);
 
         } catch (IOException err) {
             throw new DukeOnlyIoException();
