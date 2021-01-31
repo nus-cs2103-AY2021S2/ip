@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskHandler;
-import duke.Ui;
 import duke.exceptions.ChatBotException;
 
 /**
@@ -15,13 +14,13 @@ public class ByeCommand extends ChatBotCommand {
     /**
      * Returns terminating message of the chat bot.
      *
-     * @param ui Ui object.
      * @param th TaskHandler.
      * @param storage Storage to write and read file.
+     * @return Command response.
      * @throws ChatBotException if encounters error.
      */
-    public void runTask(Ui ui, TaskHandler th, Storage storage) throws ChatBotException {
-        ui.goodbye();
+    public String runTask(TaskHandler th, Storage storage) throws ChatBotException {
+        return "Bye. Hope to see you again soon!";
     }
 
     @Override
