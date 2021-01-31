@@ -15,6 +15,7 @@ public class Mike {
     /**
      * Create a Mike Object with a taskList from an existing file
      * Otherwise creates a Mike Object with an empty taskList
+     *
      * @param filePath the path of the *.txt file holding information of existing tasks
      */
     public Mike(String filePath) {
