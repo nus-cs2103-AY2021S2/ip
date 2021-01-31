@@ -14,18 +14,19 @@ public class ListCommand extends Command {
     public ListCommand() {}
 
     /**
-     * Lists the tasks in TaskList, shows the overview of all tasks.
+     * Returns the list of tasks in TaskList.
      *
      * @param tasks TaskList to be listed.
      * @param ui Ui for system outputs.
      * @param storage Storage for saving contents into file.
+     * @return String listing the tasks in TaskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
-            ui.showEmptyList();
+            return ui.getEmptyListString();
         } else {
-            ui.showTasks(tasks);
+            return ui.getListOfTasks(tasks);
         }
     }
 
