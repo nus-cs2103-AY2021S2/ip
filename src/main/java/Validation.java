@@ -23,7 +23,7 @@ public class Validation {
             first = command;
         }
 
-        if(!commands.contains(first.toLowerCase())){
+        if (!commands.contains(first.toLowerCase())) {
             throw new DukeException(":( OOPS! I'm sorry, but I don't know what that means :-(");
         } else {
             String[] secondValidation = new String[] {"todo", "deadline", "event", "done", "delete", "find"};
@@ -31,8 +31,8 @@ public class Validation {
 
             if (secondListOfCommands.contains(first.toLowerCase())) {
                 if (index <= -1 || command.substring(index).isBlank()) {
-                    throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete/find " +
-                            "cannot be empty!!");
+                    throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete/find "
+                             + "cannot be empty!!");
                 }
             }
         }
@@ -57,7 +57,7 @@ public class Validation {
      * @throws DukeException On invalid input. Task does not exist.
      */
     public static void checkValidRange(int taskSize, int chosenNumber) throws DukeException {
-        if(chosenNumber > taskSize) {
+        if (chosenNumber > taskSize) {
             throw new DukeException(":( OOPS! This task does not exist! Use 'list' to check your task numbers!");
         }
     }

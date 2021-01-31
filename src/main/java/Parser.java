@@ -14,6 +14,12 @@ public class Parser {
     protected int findSlash;
     protected int taskIdentifier;
 
+    /**
+     * Creates a new instance of a Parser to make sense of user command.
+     * @param storage Storage of tasks on hard disk.
+     * @param tasks List of user's tasks.
+     * @param ui Ui for user interaction.
+     */
     public Parser(Storage storage, TaskList tasks, Ui ui) {
         this.storage = storage;
         this.tasks = tasks;
@@ -107,7 +113,10 @@ public class Parser {
         }
     }
 
-    public void handleFind(){
+    /**
+     * Handles the Find command.
+     */
+    public void handleFind() {
         String keyword = command.substring(index + 1);
         tasks.findWithKeyword(keyword);
     }
@@ -145,6 +154,8 @@ public class Parser {
                 case "find":
                     handleFind();
                     break;
+                default:
+                    break;
                 }
             } else {
                 switch (command) {
@@ -154,6 +165,8 @@ public class Parser {
                 case "list":
                     ui.responseToList(tasks.getSize());
                     tasks.list();
+                    break;
+                default:
                     break;
                 }
             }

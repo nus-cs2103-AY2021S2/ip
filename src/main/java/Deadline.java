@@ -8,10 +8,15 @@ import java.time.format.DateTimeFormatter;
  * of a LocalDate.
  */
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDate by;
 
+    /**
+     * Creates a Deadline with the description and date by which the task should be completed.
+     * @param name Description of the Deadline.
+     * @param by The date by which the task should be completed.
+     */
     public Deadline(String name, LocalDate by) {
         super(name);
         this.by = by;

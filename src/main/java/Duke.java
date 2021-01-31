@@ -6,6 +6,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a new instance of Duke.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
@@ -19,7 +22,7 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         Scanner scan = new Scanner(System.in);
-        Parser parser = new Parser(storage,tasks,ui);
+        Parser parser = new Parser(storage, tasks, ui);
 
         while (true) {
             String command = scan.nextLine();

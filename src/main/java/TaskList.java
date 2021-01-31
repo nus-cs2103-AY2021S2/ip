@@ -8,7 +8,11 @@ public class TaskList {
 
     protected List<Task> tasks;
 
-    public TaskList(List<Task> tasks){
+    /**
+     * Creates a TaskList.
+     * @param tasks Tasks to be added into the TaskList.
+     */
+    public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -46,6 +50,10 @@ public class TaskList {
         return tasks.get(taskNumber);
     }
 
+    /**
+     * Finds the tasks that contain the keyword input by user.
+     * @param keyword Keyword input by user.
+     */
     public void findWithKeyword(String keyword) {
         int numberOfMatches = 0;
         int tracker = 0;

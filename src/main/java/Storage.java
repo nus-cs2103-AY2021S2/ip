@@ -1,14 +1,15 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 /**
  * Storage handles the loading of tasks from the file and making changes
@@ -21,6 +22,10 @@ public class Storage {
     protected boolean isFileOriginallyPresent;
     protected DateValidation validate;
 
+    /**
+     * Creates a new instance of Storage for a user.
+     * @param path Path of file that is to be saved on the hard disk.
+     */
     public Storage(String path) {
         this.path = path;
         this.localFile = new File(path);
@@ -105,6 +110,8 @@ public class Storage {
                     }
                     tasks.add(event);
                     break;
+                default:
+                    break;
                 }
             }
         }
@@ -130,7 +137,7 @@ public class Storage {
         }
 
         tempFile.close();
-        copyFile(temp,localFile);
+        copyFile(temp, localFile);
         temp.delete();
     }
 
