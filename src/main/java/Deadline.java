@@ -1,4 +1,4 @@
-public class Deadline extends Task {
+public class Deadline extends Task implements DueDate {
     protected String by;
 
     public Deadline(String description, String by) {
@@ -13,6 +13,11 @@ public class Deadline extends Task {
 
     public Deadline markAsDone() {
         return new Deadline(this.description, true, this.by);
+    }
+
+    @Override
+    public String getDueDate() {
+        return this.by;
     }
 
     @Override

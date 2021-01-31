@@ -12,6 +12,14 @@ public class Task {
         this.isDone = isCompleted;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean isCompleted() {
+        return this.isDone;
+    }
+
     public String isDone() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

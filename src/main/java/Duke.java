@@ -1,15 +1,18 @@
-import javax.swing.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____         _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("    ____________________________________________________________");
         System.out.println("     Hello! I'm Duke");
@@ -17,6 +20,30 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         List<Task> store = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
+        String filePath = "data/duke.txt";
+        try {
+            File file = new File(filePath);
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNext()) {
+                String curRecTask = fileScanner.nextLine();
+                String[] items = curRecTask.split("[ |]+");
+                boolean done = (items[1].equals("1") ? true : false);
+                Task temp = new Todo(items[2]);
+                if (items[0] == "E") {
+                    temp = new Event(items[2], items[3]);
+                } else if (items[0] == "D") {
+                    temp = new Deadline(items[2], items[3]);
+                }
+                if (done) {
+                    temp = temp.markAsDone();
+                }
+                store.add(temp);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("     There is no existing task list. Please create one.");
+        }
+
         while (sc.hasNextLine()) {
             try {
                 String input = sc.nextLine();
@@ -35,9 +62,8 @@ public class Duke {
                     }
                 } else if (parts[0].equals("done")) {
                     if (parts.length == 1) {
-                        System.out.println("     ☹ OOPS!!! The " +
+                        throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
                                 "description of done cannot be empty.");
-                        throw new InsufficientArgumentsException();
                     }
                     int taskDone = Integer.parseInt(parts[1]);
                     int count = 1;
@@ -51,9 +77,8 @@ public class Duke {
                     }
                 } else if (parts[0].equals("delete")) {
                     if (parts.length == 1) {
-                        System.out.println("     ☹ OOPS!!! The " +
+                        throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
                                 "description of delete cannot be empty.");
-                        throw new InsufficientArgumentsException();
                     }
                     int taskToDelete = Integer.parseInt(parts[1]);
                     System.out.println("     Noted. I've removed this task: ");
@@ -62,9 +87,8 @@ public class Duke {
                     System.out.println("     Now you have " + store.size() + " tasks in the list.");
                 } else if (parts[0].equals("todo")) {
                     if (parts.length == 1) {
-                        System.out.println("     ☹ OOPS!!! The " +
+                        throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
                                 "description of a todo cannot be empty.");
-                        throw new InsufficientArgumentsException();
                     }
                     System.out.println("     Got it. I've added this task:");
                     String taskDescription = "";
@@ -83,9 +107,8 @@ public class Duke {
                     System.out.println("     Now you have " + store.size() + " tasks in the list.");
                 } else if (parts[0].equals("deadline")) {
                     if (parts.length == 1) {
-                        System.out.println("     ☹ OOPS!!! The " +
+                        throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
                                 "description of a deadline cannot be empty.");
-                        throw new InsufficientArgumentsException();
                     }
                     System.out.println("     Got it. I've added this task:");
                     boolean flag = false, first = true;
@@ -123,9 +146,8 @@ public class Duke {
                     System.out.println("     Now you have " + store.size() + " tasks in the list.");
                 } else if (parts[0].equals("event")) {
                     if (parts.length == 1) {
-                        System.out.println("     ☹ OOPS!!! The " +
+                        throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
                                 "description of an event cannot be empty.");
-                        throw new InsufficientArgumentsException();
                     }
                     System.out.println("     Got it. I've added this task:");
                     boolean flag = false, first = true;
@@ -162,13 +184,47 @@ public class Duke {
                     System.out.println("     " + event);
                     System.out.println("     Now you have " + store.size() + " tasks in the list.");
                 } else {
-                    System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    throw new WrongArgumentException();
+                    throw new WrongArgumentException("     ☹ OOPS!!! I'm sorry, " +
+                            "but I don't know what that means :-(");
                 }
                 System.out.println("    ____________________________________________________________");
+                if (parts[0].equals("event") || parts[0].equals("deadline")
+                    || parts[0].equals("todo") || parts[0].equals("done")
+                        || parts[0].equals("delete")) {
+                    try {
+                        FileWriter fw = new FileWriter(filePath);
+                        for (Task t : store) {
+                            String rmb = "";
+                            if (t instanceof Event) {
+                                rmb += "E";
+                            } else if (t instanceof Deadline) {
+                                rmb += "D";
+                            } else if (t instanceof Todo) {
+                                rmb += "T";
+                            }
+                            rmb += " | ";
+                            if (t.isCompleted()) {
+                                rmb += "1";
+                            } else {
+                                rmb += "0";
+                            }
+                            rmb += " | ";
+                            rmb += t.getDescription();
+                            if (t instanceof DueDate) {
+                                rmb += " | ";
+                                rmb += ((DueDate) t).getDueDate();
+                            }
+                            fw.write(rmb + "\n");
+                        }
+                        fw.close();
+                    } catch (IOException e) {
+                    }
+                }
             } catch(WrongArgumentException e) {
+                System.out.println(e.getMessage());
                 System.out.println("    ____________________________________________________________");
             } catch (InsufficientArgumentsException e) {
+                System.out.println(e.getMessage());
                 System.out.println("    ____________________________________________________________");
             }
         }

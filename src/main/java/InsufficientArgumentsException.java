@@ -1,5 +1,5 @@
 public class InsufficientArgumentsException extends Exception {
-    public InsufficientArgumentsException() {
-        super();
+    public InsufficientArgumentsException(String e) {
+        super(e);
     }
 }
