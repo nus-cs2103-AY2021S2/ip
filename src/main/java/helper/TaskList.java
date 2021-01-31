@@ -20,7 +20,6 @@ public class TaskList {
         return taskList.get(index);
     }
 
-
     public void add(Task task) {
         taskList.add(task);
     }
