@@ -30,14 +30,14 @@ public class EditCommand extends Command{
         Task task = taskList.accessTask(taskToBeEdited);
         if (commandType == CommandType.DELETE) {
             taskList.deleteTask(taskToBeEdited);
-            System.out.println("Noted! I've deleted this task:"
+            System.out.println("Noted! I've deleted this task:\n"
                     + task
-                    + "Now you have " + taskList.length() + "tasks left in the list!");
+                    + "\nNow you have " + taskList.length() + " tasks left in the list!");
         } else if (commandType == CommandType.DONE) {
             taskList.markTaskAsDone(taskToBeEdited);
-            System.out.println("Noice! I've marked this task as done:"
+            System.out.println("Noice! I've marked this task as done:\n"
                     + task
-                    + "Now you have " + taskList.length() + "tasks left in the list!");
+                    + "\nNow you have " + taskList.length() + " tasks left in the list!");
         }
         storage.write(taskList);
     }
