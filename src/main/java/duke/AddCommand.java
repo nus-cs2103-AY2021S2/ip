@@ -17,13 +17,15 @@ public class AddCommand extends Command {
      * @param taskManager TaskManager object that maintains the list of tasks.
      * @param ui Ui object that handles user interaction.
      * @param storage Storage object that handles the updating of stored file.
+     * @return String string to output to user
      * @throws IOException If the list of tasks are not in the correct storage format.
      */
-    public void execute(TaskManager taskManager, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskManager taskManager, Ui ui, Storage storage) throws IOException {
         String taskType = super.parsedCommand[0];
         String description = super.parsedCommand[1];
         Task addedTask = taskManager.add(taskType, description, false);
-        ui.showAddedTask(addedTask, taskManager.getNumOfTasks());
         storage.store(taskManager.retrieveTasksforStorage());
+        return ui.showAddedTask(addedTask, taskManager.getNumOfTasks());
+
     }
 }

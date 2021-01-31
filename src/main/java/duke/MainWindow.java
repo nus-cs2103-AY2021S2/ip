@@ -1,4 +1,5 @@
-import duke.Duke;
+package duke;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,12 +24,22 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/image1.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/image2.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/image1.jpg"));
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/image2.jpg"));
+
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static final String WELCOME_MESSAGE = "Hello from\n" + LOGO + "\n" + "What can I do for you?";
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage));
     }
 
     public void setDuke(Duke d) {

@@ -17,10 +17,11 @@ public abstract class Command {
      * @param taskManager TaskManager object that maintains the list of tasks.
      * @param ui Ui object that handles user interaction.
      * @param storage Storage object that handles the updating of stored file.
+     * @return String string to output to user
      * @throws IOException If the list of tasks are not in the correct storage format.
      * @throws DukeException If the task number specified to mark done or delete is not a valid task number.
      */
-    abstract void execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException, IOException;
+    abstract String execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException, IOException;
 
     public boolean isExit() {
         return false;

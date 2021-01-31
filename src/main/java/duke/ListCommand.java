@@ -15,8 +15,9 @@ public class ListCommand extends Command {
      * @param taskManager TaskManager object that maintains the list of tasks.
      * @param ui Ui object that handles user interaction.
      * @param storage Storage object that handles the updating of stored file.
+     * @return String string to output to user.
      */
-    public void execute(TaskManager taskManager, Ui ui, Storage storage) {
-        ui.showAllTasks(taskManager.getList());
+    public String execute(TaskManager taskManager, Ui ui, Storage storage) {
+        return ui.showAllTasks(taskManager.getList());
     }
 }

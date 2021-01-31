@@ -17,10 +17,11 @@ public class DueCommand extends Command {
      * @param taskManager TaskManager object that maintains the list of tasks.
      * @param ui Ui object that handles user interaction.
      * @param storage Storage object that handles the updating of stored file.
+     * @return String string to output to user.
      */
-    public void execute(TaskManager taskManager, Ui ui, Storage storage) {
+    public String execute(TaskManager taskManager, Ui ui, Storage storage) {
         String date = parsedCommand[1];
         ArrayList<Task> list = taskManager.getTasksOn(date);
-        ui.showDueTasks(list, date);
+        return ui.showDueTasks(list, date);
     }
 }

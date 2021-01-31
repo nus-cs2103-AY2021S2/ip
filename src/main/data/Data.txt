@@ -1,8 +1,5 @@
-D | 0 | go for a swim   | 2020-10-10 18:00
-E | 1 | go for a jog   | 2020-10-11 24pm
-T | 0 | eat
 T | 0 | run
 T | 1 | eat
-D | 0 | go run   | 2020-10-11 17:00
+D | 0 | go run    | 2020-10-11 17:00
 T | 0 | run
 T | 0 | eat

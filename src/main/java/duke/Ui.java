@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Ui {
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,64 +11,63 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\n" + "What can I do for you?");
         System.out.println("");
+        return logo;
     }
 
-    public void showError(String error) {
+    public String showError(String error) {
         System.out.println(error);
         System.out.println("");
+        return error + "/n";
     }
 
-    public void showAddedTask(Task task, int numOfTasks) {
-        System.out.println("Got it. I've added this task:\n" + task
-                + "\nNow you have " + numOfTasks + " tasks in the list.");
-        System.out.println("");
+    public String showAddedTask(Task task, int numOfTasks) {
+        return "Got it. I've added this task:\n" + task
+                + "\nNow you have " + numOfTasks + " tasks in the list. \n";
     }
 
-    public void showRemovedTask(Task task, int numOfTasks) {
-        System.out.println("Noted. I've removed this task:\n"
-                + task + "\nNow you have " + numOfTasks + " tasks in the list.");
-        System.out.println("");
+    public String showRemovedTask(Task task, int numOfTasks) {
+        return "Noted. I've removed this task:\n"
+                + task + "\nNow you have " + numOfTasks + " tasks in the list. \n";
     }
 
-    public void showDoneTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task);
-        System.out.println("");
+    public String showDoneTask(Task task) {
+        return "Nice! I've marked this task as done:\n" + task + "\n";
     }
 
-    public void showAllTasks(ArrayList<Task> list) {
+    public String showAllTasks(ArrayList<Task> list) {
         if (list.size() == 0) {
-            System.out.println("There are no tasks in your list.");
+            return "There are no tasks in your list. \n";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String result = "Here are the tasks in your list: \n";
             for (int i = 0; i < list.size(); i++) {
-                System.out.println((i + 1) + "." + list.get(i));
+                result += String.valueOf(i + 1) + "." + list.get(i).toString() + "\n";
             }
-            System.out.println("");
+            return result;
         }
     }
 
-    public void showByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showByeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public void showDueTasks(ArrayList<Task> list, String date) {
+    public String showDueTasks(ArrayList<Task> list, String date) {
         LocalDate currentDate = LocalDate.parse(date);
-        System.out.println("Here are the tasks due on " + currentDate + ": ");
+        String result = "Here are the tasks due on " + String.valueOf(currentDate) + ": " + "\n";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i));
+            result += String.valueOf(i + 1) + ". " + list.get(i).toString() + "\n";
         }
-        System.out.println("");
+        return result;
     }
 
-    public void showMatchingTasks(ArrayList<Task> list) {
+    public String showMatchingTasks(ArrayList<Task> list) {
         if (list.size() == 0) {
-            System.out.println("Sorry! There are no matching task.");
+            return "Sorry! There are no matching task.";
         } else {
-            System.out.println("Here are the matching tasks in your list: ");
+            String result = "Here are the matching tasks in your list: " + "\n";
             for (int i = 0; i < list.size(); i++) {
-                System.out.println((i + 1) + ". " + list.get(i));
+                result += String.valueOf(i + 1) + ". " + list.get(i).toString() + "\n";
             }
+            return result;
         }
-        System.out.println("");
     }
 }
