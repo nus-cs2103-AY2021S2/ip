@@ -49,9 +49,9 @@ public class TaskList {
      *
      * @param task task being added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         tasklist.add(task);
-        Ui.printBox(Ui.ADD_MSG + task + "\n \n" + getTally());
+        return Ui.ADD_MSG + task + "\n" + this.getTally();
     }
 
     /**
@@ -59,10 +59,10 @@ public class TaskList {
      *
      * @param index index of task.
      */
-    public void completeTask(int index) {
+    public String completeTask(int index) {
         Task task = tasklist.get(index - 1);
         task.complete();
-        Ui.printBox(Ui.MARK_MSG + "      " + task);
+        return Ui.MARK_MSG + "      " + task;
     }
 
     /**
@@ -71,10 +71,10 @@ public class TaskList {
      * @param index index of task
      */
 
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         String task = tasklist.get(index - 1).toString();
         tasklist.remove(index - 1);
-        Ui.printBox(Ui.DELETE_MSG + task + "\n \n" + getTally());
+        return Ui.DELETE_MSG + task + "\n \n" + getTally();
     }
 
     /**

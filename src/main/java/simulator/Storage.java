@@ -76,7 +76,7 @@ public class Storage {
      * @param list tasks saved
      * @throws IOException IOException if file not found
      */
-    public void save(TaskList list) throws IOException {
+    public String save(TaskList list) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(data));
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
@@ -98,8 +98,9 @@ public class Storage {
             }
             writer.newLine();
         }
-        Ui.printBox("List Saved Successfully!\n"
-                + "     " + Ui.EXIT_MSG);
+
         writer.close();
+        return "Task List Saved Successfully!\n"
+                + Ui.EXIT_MSG;
     }
 }
