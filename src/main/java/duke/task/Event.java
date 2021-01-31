@@ -17,10 +17,10 @@ public class Event extends Task{
     /**
      * Class constructor specifying event name, duration and status.
      */
-    public Event(String name, LocalDate at, boolean done) {
+    public Event(String name, LocalDate at, boolean isDone) {
         super(name);
         this.at = at;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Event extends Task{
      */
     @Override
     public void addTask(int count) throws DukeException {
-        if(this.name.equals("")) {
+        if (this.name.equals("event")) {
             throw new DukeException("     ☹ OOPS!!! The description of an event cannot be empty.");
         } else {
             super.addTask(count);

@@ -12,9 +12,9 @@ public class ToDo extends Task{
     /**
      * Class constructor specifying name and status.
      */
-    public ToDo(String name, boolean done) {
+    public ToDo(String name, boolean isDone) {
         super(name);
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -26,7 +26,7 @@ public class ToDo extends Task{
      */
     @Override
     public void addTask(int count) throws DukeException{
-        if(this.name.equals("todo")) {
+        if (this.name.equals("todo")) {
             throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
             super.addTask(count);

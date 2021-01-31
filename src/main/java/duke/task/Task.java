@@ -3,7 +3,7 @@ import duke.dukeException.DukeException;
 
 public class Task {
     /** Status of the task */
-    public boolean done;
+    public boolean isDone;
     /** Name of the task */
     public String name;
 
@@ -11,7 +11,7 @@ public class Task {
      * Class constructor.
      */
     public Task(String name) {
-        this.done = false;
+        this.isDone = false;
         this.name = name;
     }
 
@@ -19,7 +19,7 @@ public class Task {
      * Sets the status of the current task to completed.
      */
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Task {
      *                      exception occurred
      */
     public void addTask(int count) throws DukeException {
-        if(this.name.equals("todo")) {
+        if (this.name.equals("todo")) {
             throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
             System.out.println("     Got it. I've added this task:");
@@ -53,7 +53,7 @@ public class Task {
     @Override
     public String toString() {
         String outString;
-        if(this.done) {
+        if (this.isDone) {
             outString = "[X] " + this.name;
         } else {
             outString = "[ ] " + this.name;

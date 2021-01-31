@@ -17,10 +17,10 @@ public class Deadline extends Task{
     /**
      * Class constructor specifying deadline name, due date and status.
      */
-    public Deadline(String name, LocalDate by, boolean done) {
+    public Deadline(String name, LocalDate by, boolean isDone) {
         super(name);
         this.by = by;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Deadline extends Task{
      */
     @Override
     public void addTask(int count) throws DukeException {
-        if(this.name.equals("")) {
+        if (this.name.equals("deadline")) {
             throw new DukeException("     ☹ OOPS!!! The description of a deadline cannot be empty.");
         } else {
             super.addTask(count);
