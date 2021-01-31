@@ -11,6 +11,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String s) {
         deleteString = s;
     }
+
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index = Integer.parseInt(deleteString) - 1;

@@ -2,12 +2,6 @@ package helper;
 
 import helper.command.*;
 
-import task.Deadline;
-import task.Event;
-import task.Todo;
-
-import java.time.LocalDate;
-
 public class Parser {
 
     private Command parseAddsAndDeletes(String s) {
@@ -23,8 +17,8 @@ public class Parser {
         }
     }
 
-    public Command parse(String s) throws DukeException {
-        String[] strings = s.split(" ", 2);
+    public Command parse(String stringCommand) throws DukeException {
+        String[] strings = stringCommand.split(" ", 2);
         String firstWord = strings[0];
         try {
             switch (firstWord) {
