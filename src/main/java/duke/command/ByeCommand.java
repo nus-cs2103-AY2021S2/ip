@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -24,13 +23,11 @@ public class ByeCommand extends Command {
      * Outputs response to terminal
      *
      * @param tasks TaskList
-     * @param ui Ui instance
      * @param storage Storage instance
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         output = "Bye. Hope to see you again soon!";
-        ui.response(output);
     }
 
     /**

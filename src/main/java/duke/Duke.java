@@ -5,49 +5,54 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
- * Driver class for Duke program
+ * Duke information consisting of storage and tasks
  */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private static Storage storage;
+    private static TaskList tasks;
 
     /**
-     * Constructor for Duke class
-     *
-     * @param filePath Path directory to where storage file is located in
+     * Constructor for Duke
      */
-    public Duke(String filePath) {
-        ui = new Ui();
+    public Duke() {
+        initializeDuke(System.getProperty("user.dir") + "/data/duke.txt");
+    }
+
+    /**
+     * Sets up the data file storage path
+     *
+     * @param filePath File path directory
+     */
+    public void initializeDuke(String filePath) {
         storage = new Storage(filePath);
 
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException dukeEx) {
-            ui.response(dukeEx.toString());
             tasks = new TaskList();
         }
     }
 
     /**
-     * Initializes the program to start reading commands given by user and responds accordingly
+     * Receives response from duke, depending on command
+     *
+     * @param input Input from user
+     * @return A string response from Duke
+     * @throws DukeException If there is parsing errors
      */
-    public void run() {
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.fullCommand();
-            try {
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException dukeEx) {
-                // Echoes out reason for invalid inputs
-                ui.response(dukeEx.toString());
-            }
+    public String getResponse(String input) throws DukeException {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, storage);
+            return "Duke:\n" + c.getResponse();
+        } catch (DukeException dukeEx) {
+            return "Duke:\n" + dukeEx.toString();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke(System.getProperty("user.dir") + "/data/duke.txt").run();
+    public String welcomeMessage() {
+        String output = "Duke:\n Hello! I'm Duke\n"
+                + "What can I do for you?";
+        return output;
     }
 }
