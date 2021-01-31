@@ -26,6 +26,15 @@ public class Ui {
     public void prompt(){
         System.out.print(separator + "Listening to your input: ");
     }
+    public void loadStart(){
+        System.out.println("Loading From File...");
+    }
+    public void loadSuccess(){
+        System.out.println("Loaded");
+    }
+    public void loadFail(){
+        System.out.println("Failed to Load file. Aborting.");
+    }
     public void dumpState(TaskList store){
         System.out.println("Unable to save list. Dumping ...");
         System.out.print(store.getList());

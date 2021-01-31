@@ -13,13 +13,13 @@ public class Duke {
     public static void main(String[] args) {
         Ui ui = new Ui();
         ui.startUpMessage();
-        TaskList store = null;
+        TaskList store;
         try {
-            System.out.println("Loading From File...");
+            ui.loadStart();
             store = Storage.LoadTaskList();
-            System.out.println("Loaded");
+            ui.loadSuccess();
         } catch (IOException e) {
-            System.out.println("Failed to Load file. Aborting.");
+            ui.loadFail();
             return;
         }
         Scanner in = new Scanner(System.in);
