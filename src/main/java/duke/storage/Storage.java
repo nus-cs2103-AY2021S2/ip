@@ -26,10 +26,9 @@ public class Storage {
 
     /**
      * Stores filePath.
-     *
-     * @param filePath path where files are stored and retrieved
      */
-    public Storage(String filePath) {
+    public Storage() {
+        this.filePath = System.getProperty("user.dir") + "/data/duke.txt";
         this.filePath = filePath;
     }
 

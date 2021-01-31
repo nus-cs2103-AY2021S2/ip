@@ -11,7 +11,7 @@ import duke.task.TaskList;
 
 public class DeleteCommandTest {
     private final TaskList taskList = new TaskList();
-    private final Storage storage = new Storage("");
+    private final Storage storage = new Storage();
 
     @Test
     public void testExecuteDone() throws IOException {
