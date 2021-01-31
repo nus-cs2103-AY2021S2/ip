@@ -9,21 +9,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.tjtanjin.steve.commands.CommandHandler;
-import com.tjtanjin.steve.parser.Parser;
-import com.tjtanjin.steve.storage.StorageHandler;
-import com.tjtanjin.steve.tasks.TaskHandler;
+import javafx.scene.layout.AnchorPane;
 
-public class UiHandlerTest {
+public class UiHandlerTest extends AnchorPane {
 
     //reused from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private StorageHandler storageHandler = new StorageHandler("./data/tasks.json");
-    private TaskHandler taskHandler = new TaskHandler(storageHandler);
-    private CommandHandler commandHandler = new CommandHandler(taskHandler);
-    private Parser parser = new Parser(commandHandler);
-    private final UiHandler uiHandler = new UiHandler(parser);
+    private final UiHandler uiHandler = new UiHandler();
 
     @BeforeEach
     public void setUp() {

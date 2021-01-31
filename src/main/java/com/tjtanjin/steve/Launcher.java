@@ -13,6 +13,6 @@ public class Launcher {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        Application.launch(Steve.class, args);
+        Application.launch(Main.class, args);
     }
 }

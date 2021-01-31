@@ -1,106 +1,49 @@
 package com.tjtanjin.steve.ui;
 
-import com.tjtanjin.steve.parser.Parser;
+import com.tjtanjin.steve.Steve;
 
-import javafx.scene.Scene;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
- * UiHandler sits between the user and the parser, working directly with both parties to communicate
- * responses.
+ * Controller for UiHandler. Provides the layout for the other controls.
  */
-public class UiHandler {
+public class UiHandler extends AnchorPane {
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private VBox dialogContainer;
+    @FXML
+    private TextField userInput;
+    @FXML
+    private Button sendButton;
 
-    private static final VBox DIALOG_CONTAINER = new VBox();
-    private static ScrollPane scrollPane;
-    private static TextField userInput;
-    private final Parser PARSER;
-    private final Image USER = new Image(getClass().getResourceAsStream("/images/user.png"));
-    private final Image STEVE = new Image(getClass().getResourceAsStream("/images/steve.png"));
+    private Steve steve;
+
+    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image STEVE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/steve.png"));
 
     /**
-     * Constructor for UiHandler.
-     *
-     * @param parser parser to process user input
+     * Initialize ui window.
      */
-    public UiHandler(Parser parser) {
-        this.PARSER = parser;
+    @FXML
+    public void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showWelcome();
     }
 
     /**
-     * Shows the window of the application to the user.
+     * Set private attribute Steve.
      *
-     * @param stage stage to show user
+     * @param steve steve parsed from main class
      */
-    public void showMainScreen(Stage stage) {
-
-        //initialize scroll pane, user input, send button and main layout
-        scrollPane = new ScrollPane();
-        userInput = new TextField();
-        Button sendButton = new Button("Send");
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        //initialize and setup scene
-        Scene scene = new Scene(mainLayout);
-        stage.setScene(scene);
-        stage.show();
-
-        //setup default height and width
-        double windowMinHeight = 700;
-        double windowMinWidth = 500;
-        double windowMaxHeight = 1400;
-        double windowMaxWidth = 1000;
-        double dialogContainerMinWidth = windowMinWidth - 175;
-        double dialogContainerMaxWidth = windowMaxWidth - 175;
-
-        //setup main window
-        stage.setTitle("Steve");
-        stage.setResizable(false);
-        stage.setMinHeight(windowMinHeight);
-        stage.setMinWidth(windowMinWidth);
-        stage.setMaxHeight(windowMaxHeight);
-        stage.setMaxWidth(windowMaxWidth);
-        mainLayout.setPrefSize(windowMinWidth, windowMinHeight);
-
-        //setup dialog container (chat messages)
-        DIALOG_CONTAINER.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        DIALOG_CONTAINER.setPrefWidth(dialogContainerMinWidth);
-        DIALOG_CONTAINER.setMinWidth(dialogContainerMinWidth);
-        DIALOG_CONTAINER.setMaxWidth(dialogContainerMaxWidth);
-
-        //setup user input text area
-        userInput.setPrefWidth(windowMinWidth - 75);
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //setup send button
-        sendButton.setPrefWidth(70.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        //setup scroll pane and scrollbar
-        scrollPane.setContent(DIALOG_CONTAINER);
-        scrollPane.setPrefSize(windowMinWidth - 15, windowMinHeight - 65);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        DIALOG_CONTAINER.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //captures user input and calls the function responsible for handling it
-        sendButton.setOnMouseClicked((event) -> handleUserInput(userInput.getText()));
-        userInput.setOnAction((event) -> handleUserInput(userInput.getText()));
+    public void setSteve(Steve steve) {
+        this.steve = steve;
     }
 
     /**
@@ -116,8 +59,7 @@ public class UiHandler {
      * @param info information to print
      */
     public void showInfo(String info) {
-        Label text = new Label(info);
-        DIALOG_CONTAINER.getChildren().add(DialogBox.getSteveDialog(text, new ImageView(STEVE)));
+        dialogContainer.getChildren().add(DialogBox.getSteveDialog(info.split(" ", 2)[1], STEVE_IMAGE));
     }
 
     /**
@@ -126,22 +68,20 @@ public class UiHandler {
      * @param msg error message to print
      */
     public void showError(String msg) {
-        Label text = new Label(msg);
-        DIALOG_CONTAINER.getChildren().add(DialogBox.getSteveDialog(text, new ImageView(STEVE)));
+        dialogContainer.getChildren().add(DialogBox.getSteveDialog(msg, STEVE_IMAGE));
     }
 
     /**
      * Handles the dialog container. Clears the user input after processing.
-     *
-     * @param input input given by the user
      */
-    private void handleUserInput(String input) {
-        Label text = new Label("\n" + userInput.getText());
-        DIALOG_CONTAINER.getChildren().add(
-                DialogBox.getUserDialog(text, new ImageView(USER))
+    @FXML
+    private void handleUserInput() {
+        String input = userInput.getText();
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog("\n" + input, USER_IMAGE)
         );
         userInput.clear();
-        showResponse(PARSER.parseInput(input));
+        showResponse(steve.getParser().parseInput(input));
     }
 
     /**
