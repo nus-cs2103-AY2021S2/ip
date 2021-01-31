@@ -26,6 +26,11 @@ public class Duke {
         String res;
         try {
             Command c = Parser.parse(command);
+
+            if (c.isExit()) {
+                return "";
+            }
+
             res = c.execute(tm, st);
         } catch (DukeException e) {
             res = "Error: " + e.getMessage();
@@ -36,5 +41,4 @@ public class Duke {
     public static Duke init() {
         return new Duke("./data/tasks.txt");
     }
-
 }
