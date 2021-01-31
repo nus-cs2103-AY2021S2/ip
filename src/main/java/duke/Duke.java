@@ -8,16 +8,20 @@ import duke.task.TaskList;
  * Driver class for Duke program
  */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private static Storage storage;
+    private static TaskList tasks;
+    private static Ui ui;
+
+    public Duke() {
+        initializeDuke(System.getProperty("user.dir") + "/data/duke.txt");
+    }
 
     /**
      * Constructor for Duke class
      *
      * @param filePath Path directory to where storage file is located in
      */
-    public Duke(String filePath) {
+    public void initializeDuke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
 
@@ -32,7 +36,7 @@ public class Duke {
     /**
      * Initializes the program to start reading commands given by user and responds accordingly
      */
-    public void run() {
+    public static void run() {
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.fullCommand();
@@ -48,6 +52,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(System.getProperty("user.dir") + "/data/duke.txt").run();
+        run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
