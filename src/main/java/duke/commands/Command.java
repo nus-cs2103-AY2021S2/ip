@@ -12,15 +12,17 @@ import duke.ui.Ui;
  */
 public abstract class Command {
     /**
-     * Executes the command specified in the commannd line input.
+     * Executes the command specified in the command line input and returns
+     * appropriate message string.
      *
      * @param tasks TaskList containing tasks.
      * @param ui Ui for system outputs.
      * @param storage Storage for saving contents into file.
+     * @return Message string.
      * @throws IOException If error happens while saving contents into save file.
      * @throws DukeException If error happens while executing command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException;
 
     /**
      * Returns if program should exit after this command.
