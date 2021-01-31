@@ -1,7 +1,11 @@
 import java.io.IOException;
 import java.time.LocalDate;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
 
@@ -177,4 +181,8 @@ public class Duke {
         new Duke("duke.txt").run();
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+    }
 }
