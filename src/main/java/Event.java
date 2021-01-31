@@ -1,7 +1,7 @@
 class Event extends Task {
 
     public Event(String description, String date, String time) {
-        super(description, date, time, true);
+        super(description, date, time, "[E]", true);
     }
 
     @Override
@@ -78,10 +78,5 @@ class Event extends Task {
             end += "am";
         }
         return start + "-" + end;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString();
     }
 }

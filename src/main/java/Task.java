@@ -5,19 +5,30 @@ class Task {
     private String description;
     private final String date;
     private final String time;
+    private final String symbol;
     private boolean isAt;
     private boolean isDone;
 
-    public Task(String description, String date, String time, boolean flag) {
+    public Task(String description, String date, String time, String symbol, boolean flag) {
         this.description = description;
         this.date = date;
         this.time = time;
+        this.symbol = symbol;
         this.isAt = flag;
         this.isDone = false;
     }
 
-    public void markAsDone() {
-        this.isDone = true;
+    public Task(String description, String date, String time, String symbol, boolean flag, boolean done) {
+        this.description = description;
+        this.date = date;
+        this.time = time;
+        this.symbol = symbol;
+        this.isAt = flag;
+        this.isDone = done;
+    }
+
+    public Task markAsDone() {
+        return new Task(description, date, time, symbol, isAt, true);
     }
 
     public String dateFormatter(String date) {
@@ -103,9 +114,9 @@ class Task {
         }
         copy = this.description + copy;
         if (this.isDone) {
-            return "[X] " + copy;
+            return symbol + "[X] " + copy;
         } else {
-            return "[ ] " + copy;
+            return symbol + "[ ] " + copy;
         }
     }
 }
