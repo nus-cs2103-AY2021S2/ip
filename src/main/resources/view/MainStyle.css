@@ -1,0 +1,5 @@
+.anchorPane {
+    -fx-background-image:url("../images/DaTree.jpg");
+    -fx-background-size: cover;
+    -fx-background: transparent;
+}
