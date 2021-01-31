@@ -1,11 +1,11 @@
 package duke.error;
 
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.Duke;
 import duke.datetime.DateTimeConverter;
 import duke.task.Task;
-
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class ErrorChecker {
     protected String input;
@@ -83,12 +83,12 @@ public class ErrorChecker {
                         + new IllegalFindException(ex.getMessage()).toString() + "\n" + Duke.LINE);
             } else {
                 System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
-                        + new IllegalTaskException(ex.getMessage(), taskType).toString() + "\n" +  Duke.LINE);
+                        + new IllegalTaskException(ex.getMessage(), taskType).toString() + "\n" + Duke.LINE);
                 return false;
             }
         } catch (IndexOutOfBoundsException ex) {
             System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
-                    + new OutOfBoundsDoneDeleteException(ex.getMessage()).toString() + "\n" +  Duke.LINE);
+                    + new OutOfBoundsDoneDeleteException(ex.getMessage()).toString() + "\n" + Duke.LINE);
             return false;
         } catch (DateTimeParseException ex) {
             if (input.startsWith("deadline")) {
@@ -97,7 +97,7 @@ public class ErrorChecker {
                         + "Please re-enter with the format DD-MM-YYYY!\n" + Duke.LINE);
             } else {
                 System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
-                        + "Oops, I don't understand that date format!\n"  + (char) 9 + (char) 9
+                        + "Oops, I don't understand that date format!\n" + (char) 9 + (char) 9
                         + "Please re-enter with the format DD-MM-YYYY /from H AM/PM /to H AM/PM!\n" + Duke.LINE);
             }
             return false;

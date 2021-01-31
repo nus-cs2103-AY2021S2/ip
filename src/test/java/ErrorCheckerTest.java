@@ -1,9 +1,9 @@
-import duke.error.ErrorChecker;
+import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import duke.error.ErrorChecker;
 
 public class ErrorCheckerTest {
     @Test

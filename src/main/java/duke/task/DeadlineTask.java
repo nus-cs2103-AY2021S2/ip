@@ -3,13 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 
 public class DeadlineTask extends Task {
-//    protected String by;
     protected LocalDate by;
-
-//    public DeadlineTask(String description, String by) {
-//        super(description);
-//        this.by = by;
-//    }
 
     public DeadlineTask(String description, LocalDate by) {
         super(description);
