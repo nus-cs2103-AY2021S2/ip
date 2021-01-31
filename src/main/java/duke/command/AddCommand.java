@@ -16,32 +16,33 @@ import duke.task.Task;
 
 public class AddCommand extends Command {
 
+    private String type;
+    private LocalDate dueDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
+
     /**
      * Constructor to create add command object
      */
-    public AddCommand(String input, TaskList taskList) {
-        super(input, taskList);
+    public AddCommand(String input, String type, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        super(input);
+        this.type= type;
+        this.dueDate =date;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /** Add task into task list and return task list
-     * @param tasklist
-     * @param ui
-     * @param storage
-     * @param type
-     * @param dueDate
-     * @param startTime
-     * @param endTime
      * @return TaskList
      * @throws DukeException
      */
-    public TaskList execute(TaskList tasklist, UI ui, DataStorage storage, String type, LocalDate dueDate,
-                            LocalTime startTime, LocalTime endTime) throws DukeException {
+
+    public String execute() throws DukeException {
         switch (type) {
         case ("todo"):
             tasklist.addToDo(this.input);
             break;
         case ("deadlines"):
-            System.out.println("hehe " + this.input);
             tasklist.addDeadline(this.input, dueDate, startTime);
             break;
         case ("events"):
@@ -51,13 +52,11 @@ public class AddCommand extends Command {
             break;
         }
 
-        ArrayList<Task> taskArrayList = tasklist.getTaskListArray();
-        int currentSize = taskArrayList.size();
+        int currentSize = tasklist.getTaskListArray().size()-1;
+        DataStorage.save(tasklist.getTaskListArray());
 
-        ui.displayAddedTaskMessage(tasklist.getTask(currentSize - 1), currentSize);
-        storage.save(tasklist.getTaskListArray());
-
-        return tasklist;
+        return ui.displayAddedTaskMessage(tasklist.getTask(currentSize), currentSize+1);
     }
+
 
 }

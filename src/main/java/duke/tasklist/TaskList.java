@@ -51,38 +51,52 @@ public class TaskList {
     /**
      * Print out all task in array list
      * @param type
+     * @return
      */
-    public void showAllTask(String type) {
+    public String showAllTask(String type) {
         ArrayList<Task> taskList;
+        String allTask = "";
 
         if (type.equals("find")) {
-            ui.printFindHeader();
             taskList = findTaskArraylist;
         } else {
-            ui.printListHeader();
             taskList = taskArraylist;
         }
-        for (int i = 0; i < taskList.size(); i++) {
-            ui.printTask(i, taskList.get(i));
+
+        if(taskList.size() >0) {
+            if(type.equals("find")) {
+                allTask = ui.printFindHeader();
+            }else{
+                allTask = ui.printListHeader();
+            }
+
+            for (int i = 0; i < taskList.size(); i++) {
+                allTask = allTask + "\n" + ui.printTask(i, taskList.get(i));
+            }
+        }else{
+            allTask = ui.printNoTaskMessage();
         }
-        ui.displayLines();
+        return allTask;
     }
 
     /** Update specific task to completed
      * @param index  position(index) of task in array list
+     * @return
      */
-    public void markAsDone(int index) {
+    public String markAsDone(int index) {
         taskArraylist.get(index).setCompleted();
-        ui.displayDoneTaskMessage(taskArraylist.get(index));
         taskArraylist.get(index).setCompleted();
+        return ui.displayDoneTaskMessage(taskArraylist.get(index));
     }
 
     /** Delete specific task given the index of task in array list
      * @param index  position(index) of task in array list
+     * @return
      */
-    public void deleteTask(int index) {
-        ui.displayDeletedTaskMessage(taskArraylist.get(index));
+    public String deleteTask(int index) {
+        String output = ui.displayDeletedTaskMessage(taskArraylist.get(index));
         taskArraylist.remove(index);
+        return output;
     }
 
     /** Return arraylist of task
@@ -102,8 +116,9 @@ public class TaskList {
     /** Find task in array list of task
      * @param input
      * @param t tasklist
+     * @return
      */
-    public void findTask(String input, TaskList t) {
+    public String findTask(String input, TaskList t) {
         findTaskArraylist.clear();
         taskArraylist = t.getTaskListArray();
         for (int i = 0; i < taskArraylist.size(); i++) {
@@ -111,7 +126,7 @@ public class TaskList {
                 findTaskArraylist.add(taskArraylist.get(i));
             }
         }
-        showAllTask("find");
+        return showAllTask("find");
     }
 
     /** Return specific task given the index of task in array list
