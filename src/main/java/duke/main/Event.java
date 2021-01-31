@@ -5,7 +5,7 @@ package duke.main;
  *
  * Events are tasks that start at a specific time and ends at a specific time
  */
-public class Event extends Task{
+public class Event extends Task {
     protected String at;
 
     /**
@@ -45,7 +45,7 @@ public class Event extends Task{
     @Override
     public String infoToStore() {
         String divider = " | ";
-        return "E" +  divider
+        return "E" + divider
                 + (isDone ? "1" : "0") + divider
                 + description + divider
                 + at;

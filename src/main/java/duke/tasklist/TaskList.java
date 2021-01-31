@@ -1,8 +1,10 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.main.DukeException;
 import duke.main.Task;
-import java.util.ArrayList;
+
 
 /**
  * Contains the task list and functions related to modifying it.
@@ -52,11 +54,11 @@ public class TaskList {
         Task task = tasks.remove(index);
 
         String[] res = new String[] {
-                "On your command! I have removed this task:",
-                "  " + task.toString(),
-                "Now you have " + tasks.size() + " " +
-                        (tasks.size() > 1 ? "tasks" : "task") +
-                        " in the list."
+            "On your command! I have removed this task:",
+            "  " + task.toString(),
+            "Now you have " + tasks.size() + " "
+                + (tasks.size() > 1 ? "tasks" : "task")
+                + " in the list."
         };
         return res;
     }
@@ -79,8 +81,8 @@ public class TaskList {
         }
 
         String[] res = new String[] {
-                "Wonderful! You have completed this task:",
-                "  " + task.toString()
+            "Wonderful! You have completed this task:",
+            "  " + task.toString()
         };
         return res;
     }
@@ -94,11 +96,11 @@ public class TaskList {
         tasks.add(newTask);
 
         String[] res = new String[] {
-                "Roger that! Added new task:",
-                " " + newTask.toString(),
-                "Now you have " + tasks.size() + " " +
-                        (tasks.size() > 1 ? "tasks" : "task") +
-                        " in the list."
+            "Roger that! Added new task:",
+            " " + newTask.toString(),
+            "Now you have " + tasks.size() + " "
+                + (tasks.size() > 1 ? "tasks" : "task")
+                + " in the list."
         };
         return res;
     }
@@ -116,7 +118,7 @@ public class TaskList {
             res[0] = "Hi! This is your todo list:";
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                res[i+1] = " " + (i + 1) + "." + task.toString();
+                res[i + 1] = " " + (i + 1) + "." + task.toString();
             }
         }
         return res;

@@ -3,7 +3,7 @@ package duke.main;
 /**
  * Exception class for project duke.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * Constructor.
      * @param errorMessage specific error message for the exception created

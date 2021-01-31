@@ -1,17 +1,19 @@
 package duke.storage;
 
-import duke.main.Deadline;
-import duke.main.DukeException;
-import duke.main.Event;
-import duke.main.Task;
-import duke.main.Todo;
-import duke.tasklist.TaskList;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import duke.main.Deadline;
+import duke.main.DukeException;
+import duke.main.Event;
+import duke.main.Task;
+import duke.main.Todo;
+import duke.tasklist.TaskList;
+
 
 /**
  * Stores the task list and implements functions for saving and loading.
@@ -20,9 +22,9 @@ public class Storage {
     private static TaskList taskList;
     private static String rootProject = System.getProperty("user.dir");
     private static Path dataFilePath =
-            Paths.get(rootProject,"src", "main", "java", "duke", "data", "duke.txt");
+        Paths.get(rootProject, "src", "main", "java", "duke", "data", "duke.txt");
     private static Path dataFolderPath =
-            Paths.get(rootProject,"src", "main", "java", "duke", "data");
+        Paths.get(rootProject, "src", "main", "java", "duke", "data");
 
     /**
      * Initializes the storage class
@@ -48,7 +50,7 @@ public class Storage {
     private static void saveData(Path filePath, ArrayList<Task> tasks) throws DukeException {
         try {
             ArrayList<String> tasksInfoToStore = new ArrayList<>();
-            for(Task task : tasks) {
+            for (Task task : tasks) {
                 tasksInfoToStore.add(task.infoToStore());
             }
             Files.write(filePath, tasksInfoToStore);
@@ -64,9 +66,9 @@ public class Storage {
         try {
             BufferedReader br = Files.newBufferedReader(filePath);
             String line;
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 Task task = stringToTask(line);
-                if(task != null) {
+                if (task != null) {
                     res.add(task);
                 }
             }
@@ -96,12 +98,13 @@ public class Storage {
             String by = taskInfoArr[3].strip();
             res = new Deadline(description, isDone, by);
             break;
+        default:
+            throw new DukeException("Invalid Taskinfo found in storage.");
         }
         return res;
     }
 
-    private static void storageExistOrCreate()
-            throws DukeException{
+    private static void storageExistOrCreate() throws DukeException {
         try {
             if (Files.notExists(dataFilePath)) {
                 if (Files.notExists(dataFolderPath)) {

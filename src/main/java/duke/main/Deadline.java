@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  *
  * Deadlines are tasks that need to be done before a specific date/time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate by;
 
     /**
@@ -61,7 +61,7 @@ public class Deadline extends Task{
     @Override
     public String infoToStore() {
         String divider = " | ";
-        return "D" +  divider
+        return "D" + divider
                 + (isDone ? "1" : "0") + divider
                 + description + divider
                 + by;

@@ -5,7 +5,7 @@ import duke.tasklist.TaskList;
 /**
  * Lists all tasks in the taskList.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Constructor.

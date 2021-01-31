@@ -49,7 +49,7 @@ public class Duke {
 
     private void runUntilExit() {
         String message = ui.getUserInput();
-        while(!message.equalsIgnoreCase("bye")) {
+        while (!message.equalsIgnoreCase("bye")) {
             try {
                 Command command = new Parser().parseMessage(message);
                 String[] result = command.execute();
