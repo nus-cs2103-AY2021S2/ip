@@ -10,6 +10,12 @@ public class FindCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
+    /**
+     * Create and initialize a Find Command.
+     *
+     * @param fullCmd The full user input in String form.
+     * @param ui The ui object responsible for displaying find messages to the CLI.
+     */
     public FindCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ", 2);

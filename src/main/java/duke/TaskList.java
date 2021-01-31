@@ -27,6 +27,13 @@ public class TaskList {
         this.taskList.remove(i);
     }
 
+    /**
+     * Returns a TaskList of all tasks containing the keyword.
+     *
+     * @param keyword The keyword the user wants to search for.
+     * @return Tasklist of all tasks containing the keyword.
+     * @throws DukeException if no task containing the keyword exists.
+     */
     public TaskList find(String keyword) throws DukeException {
         TaskList toReturn = new TaskList();
         for (Task t : this.taskList) {
