@@ -2,10 +2,10 @@ import java.io.IOException;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasklist;
     private final Ui ui;
     private final Parser parser;
+    private Storage storage;
+    private TaskList tasklist;
 
     public Duke(String filePath) {
         this.ui = new Ui();
@@ -18,6 +18,10 @@ public class Duke {
             ui.showLoadingError();
             tasklist = new TaskList();
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("src\\main\\java\\taskList.txt").run();
     }
 
     /**
@@ -36,7 +40,7 @@ public class Duke {
                 Command c = parser.parse(fullCommand);
                 c.execute(tasklist, ui, storage);
                 isExit = c.isExit();
-            } catch (IOException e){
+            } catch (IOException e) {
                 ui.showLoadingError();
             } catch (DukeException | RuntimeException e) {
                 ui.showError(e.getMessage());
@@ -47,9 +51,5 @@ public class Duke {
 
         ui.showExit();
         ui.showLine();
-    }
-
-    public static void main(String[] args) {
-        new Duke("src\\main\\java\\taskList.txt").run();
     }
 }

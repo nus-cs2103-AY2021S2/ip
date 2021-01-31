@@ -1,6 +1,7 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
@@ -8,13 +9,13 @@ public class ParserTest {
 
     @Test
     public void testParse() throws DukeException {
-        assertTrue(p.parse("list") instanceof PrintListCommand);
-        assertTrue(p.parse("todo run") instanceof AddCommand);
-        assertTrue(p.parse("done 1") instanceof DoneCommand);
-        assertTrue(p.parse("delete 1") instanceof DeleteCommand);
-        assertTrue(p.parse("deadline run /by 1999-12-19 23:24") instanceof AddCommand);
-        assertTrue(p.parse("event run /at 1999-12-19 23:21") instanceof AddCommand);
-        assertTrue(p.parse("bye") instanceof ExitCommand);
+        Assertions.assertTrue(p.parse("list") instanceof PrintListCommand);
+        Assertions.assertTrue(p.parse("todo run") instanceof AddCommand);
+        Assertions.assertTrue(p.parse("done 1") instanceof DoneCommand);
+        Assertions.assertTrue(p.parse("delete 1") instanceof DeleteCommand);
+        Assertions.assertTrue(p.parse("deadline run /by 1999-12-19 23:24") instanceof AddCommand);
+        Assertions.assertTrue(p.parse("event run /at 1999-12-19 23:21") instanceof AddCommand);
+        Assertions.assertTrue(p.parse("bye") instanceof ExitCommand);
         try {
             p.parse("asd");
         } catch (Exception e) {

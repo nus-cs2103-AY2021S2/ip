@@ -13,7 +13,8 @@ public class Parser {
 
     /**
      * Checks whether the command is invalid
-     * @param taskType the first word of the input
+     *
+     * @param taskType the first word of the input.
      * @throws InvalidCommandException is thrown when there is an error related to unknown command
      */
     void invalidCommandChecker(String taskType) throws InvalidCommandException {
@@ -26,8 +27,9 @@ public class Parser {
 
     /**
      * Checks whether the command has an empty description
+     *
      * @param tokens specifies an array of the user input
-     * @throws EmptyDescriptionException  is thrown when there is an error related to an empty description after a command
+     * @throws EmptyDescriptionException is thrown when there is an error related to an empty description after a command
      */
     void emptyDescriptionChecker(String[] tokens) throws EmptyDescriptionException {
         if (tokens.length < 2) {
@@ -37,6 +39,7 @@ public class Parser {
 
     /**
      * Converts the date to a suitable format so that the program is able to understand
+     *
      * @param date Date in the format of yyyy-mm-dd
      * @return Returns the date in (MMM d yyyy) format in String
      */
@@ -47,6 +50,7 @@ public class Parser {
 
     /**
      * Converts the time to a suitable format so that the program is able to understand
+     *
      * @param time time in the format of (hh:mm) in 24 hour time
      * @return Returns the time in (hh:mm a) format in String
      */
@@ -57,6 +61,7 @@ public class Parser {
 
     /**
      * Makes sense of the command given in string for the program to be able to take action
+     *
      * @param fullCommand the entire string of the user input
      * @return Returns a <code>Command</code> that specifies what the user is asking the program to do
      * @throws DukeException is thrown when there is an error related to duke

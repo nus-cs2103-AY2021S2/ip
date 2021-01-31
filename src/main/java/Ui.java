@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Prints the error message
+     *
      * @param message the error message in String
      */
     public void showError(String message) {
@@ -36,6 +37,7 @@ public class Ui {
 
     /**
      * Takes in user input
+     *
      * @return the full user command in String
      */
     public String readCommand() {
@@ -67,6 +69,7 @@ public class Ui {
 
     /**
      * Prints the <code>Tasks</code> in a TaskList
+     *
      * @param tasklist stores the <code>Task</code> in an ArrayList
      */
     void printList(TaskList tasklist) {
@@ -81,6 +84,7 @@ public class Ui {
 
     /**
      * Prints a message to indicate that the task is marked
+     *
      * @param task the <code>Task</code>> to be marked
      */
     void showMarkTask(Task task) {
@@ -89,7 +93,8 @@ public class Ui {
 
     /**
      * Prints a message to indicate that the task is deleted
-     * @param tasklist stores the <code>Task</code> in an ArrayList
+     *
+     * @param tasklist  stores the <code>Task</code> in an ArrayList
      * @param taskIndex indicates the <code>Task</code> index in the ArrayList
      */
     void showDeleteTask(TaskList tasklist, int taskIndex) {
@@ -99,6 +104,7 @@ public class Ui {
 
     /**
      * Prints the added <code>Task</code> to the ArrayList
+     *
      * @param tasklist stores the <code>Task</code> in an ArrayList
      */
     void showAddTask(TaskList tasklist) {

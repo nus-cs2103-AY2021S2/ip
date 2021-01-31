@@ -14,6 +14,7 @@ public class Task {
 
     /**
      * Gets the status of the <code>Task</code>> to determine if it is done.
+     *
      * @return a String of a Tick symbol if it is done and a Cross symbol if it is not
      */
     public String getStatusIcon() {
@@ -23,12 +24,12 @@ public class Task {
     /**
      * Marks the <code>Task</code> as done
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
