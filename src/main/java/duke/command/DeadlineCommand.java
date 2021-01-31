@@ -1,16 +1,15 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
+import duke.exception.DescriptionMissingException;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.exception.DukeException;
-import duke.exception.DescriptionMissingException;
-import duke.exception.InvalidDateTimeException;
-import duke.parser.Parser;
-
-
-import java.time.LocalDateTime;
 
 /**
  * A class represents a DeadlineCommand.

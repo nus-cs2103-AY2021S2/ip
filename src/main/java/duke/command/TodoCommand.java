@@ -1,10 +1,10 @@
 package duke.command;
 
+import duke.exception.DescriptionMissingException;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.exception.DescriptionMissingException;
 
 /**
  * A class represents a TodoCommand.

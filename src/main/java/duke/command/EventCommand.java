@@ -1,15 +1,15 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
+import duke.exception.DescriptionMissingException;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.exception.DukeException;
-import duke.exception.DescriptionMissingException;
-import duke.exception.InvalidDateTimeException;
-import duke.parser.Parser;
-
-import java.time.LocalDateTime;
 
 /**
  * A class represents an EventCommand.
@@ -50,9 +50,9 @@ public class EventCommand extends AddCommand {
             throw new DescriptionMissingException("Argument missing!");
         }
         String name = nameAndDate[0].strip();
-        String Date = nameAndDate[1].strip();
+        String date = nameAndDate[1].strip();
 
-        LocalDateTime startTime = Parser.parseDateTime(Date);
+        LocalDateTime startTime = Parser.parseDateTime(date);
         return new Event(name, startTime);
     }
 }

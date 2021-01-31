@@ -26,7 +26,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + cutOffTime.format(DateTimeFormatter.ofPattern("MMM dd yyy HH:mm"))+ ")";
+                + cutOffTime.format(DateTimeFormatter.ofPattern("MMM dd yyy HH:mm")) + ")";
     }
 
     /**

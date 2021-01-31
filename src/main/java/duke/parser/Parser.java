@@ -1,5 +1,11 @@
 package duke.parser;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -9,16 +15,10 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
-
-import duke.exception.DukeException;
 import duke.exception.CommandNotFoundException;
+import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * A class represents a Parser.

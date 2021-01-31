@@ -1,11 +1,12 @@
 package duke;
 
 import duke.command.Command;
-import duke.parser.Parser;
-import duke.task.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 
 /**
  * A class represents the Duke bot.
