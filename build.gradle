@@ -29,11 +29,15 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "mike.Mike"
+}
+
+test {
+    useJUnitPlatform()
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "mike"
     archiveClassifier = null
 }
 
