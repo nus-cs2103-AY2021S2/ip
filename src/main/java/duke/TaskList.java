@@ -150,7 +150,7 @@ public class TaskList {
     public DeadlineTask handleDeadlineTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
-
+        
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
         String deadline = action.substring(descriptionIndex + 4);
 
@@ -237,7 +237,7 @@ public class TaskList {
     public String findOnDateTasks(String date) {
 
         LocalDate toSearch = LocalDate.parse(date);
-        String result = "";
+        String result = "Here are the tasks due on the date: \n";
 
         for (Task task: inputList) {
             if (task.getType() == 'D') {

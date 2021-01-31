@@ -15,41 +15,21 @@ public class Ui {
      */
     public Ui() {
     }
-
-    /**
-     * Returns A string which is the user input.
-     *
-     * @return user input.
-     */
-    public String read() {
-        Scanner sc = new Scanner(System.in);
-        String action = sc.nextLine();
-
-        return action;
-    }
-
-    /**
-     * Prints the divider line.
-     */
-    public void printDivider() {
-        String divider = "    ___________________________________________";
-        System.out.println(divider);
-    }
-
+    
     /**
      * Prints the welcome message.
      */
-    public void printWelcome() {
-        String introduction = "     Hello! I'm Duke\n" + "     What can I do for you?";
-        System.out.println(introduction);
+    public static String printWelcome() {
+        String introduction = "     Hello! I'm Duke\n" + "     What can I do for you?\n";
+        return introduction;
     }
 
     /**
      * Prints the goodbye message.
      */
-    public void printBye() {
-        String farewell = "     Bye. Hope to see you again soon!";
-        System.out.println(farewell);
+    public static String printBye() {
+        String farewell = "     Bye. Hope to see you again soon!\n";
+        return farewell;
     }
 
     /**
@@ -57,8 +37,9 @@ public class Ui {
      *
      * @param task  A task.
      */
-    public void printTask(Task task) {
-        System.out.println(task);
+    public String printTask(Task task) {
+        return task.toString() + "\n";
+        //System.out.println(task);
     }
 
     /**
@@ -66,25 +47,25 @@ public class Ui {
      *
      * @param str A string
      */
-    public void print(String str) {
-        System.out.println(str);
+    public String print(String str) {
+        return str;
     }
 
     /**
      * Prints the message when a task is added.
      */
-    public void addPrint() {
-        String printAddTask = "     Got it. I've added this task: ";
-        System.out.println(printAddTask);
+    public String addPrint() {
+        String printAddTask = "     Got it. I've added this task: \n";
+        return printAddTask;
     }
 
     /**
      * Prints the error when attempting to load file message.
      */
-    public void showLoadingError() {
-
-        String unableToLoad = "     Unable to load file. Creating new one";
-        System.out.println(unableToLoad);
+    public String showLoadingError() {
+    
+        String unableToLoad = "     Unable to load file. Creating new one\n";
+        return unableToLoad;
     }
 
     /**
@@ -92,57 +73,57 @@ public class Ui {
      *
      * @param list Tasklist
      */
-    public void countTasks(TaskList list) {
-
-        String countTasksMessage = "     Now you have " + list.getList().size() + " tasks in the list.";
-        System.out.println(countTasksMessage);
+    public String countTasks(TaskList list) {
+        String countTasksMessage = "     Now you have " + list.getList().size() + " tasks in the list. \n";
+        return countTasksMessage;
     }
 
     /**
      * Prints the message when a task is removed.
      */
-    public static void printRemoved() {
+    public static String printRemoved() {
 
-        String removeTasksMessage = "     Noted. I've removed this task: ";
-        System.out.println(removeTasksMessage);
+        String removeTasksMessage = "     Noted. I've removed this task: \n";
+        return removeTasksMessage;
     }
 
     /**
      * Prints the message when a task is marked.
      */
-    public static void printMarked() {
+    public static String printMarked() {
 
-        String taskMarkedMessage = "     Nice! I've marked this task as done:";
-        System.out.println(taskMarkedMessage);
+        String taskMarkedMessage = "     Nice! I've marked this task as done:\n";
+        return taskMarkedMessage;
     }
     /**
      * @param list the Task list to be printed
      * Prints out the current task list
      */
-    public void printList(List<Task> list) {
+    public String printList(List<Task> list) {
+        String printedList = "";
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            System.out.println("      " + (i + 1) + "." + task.toString().trim());
+            printedList += "      " + (i + 1) + "." + task.toString().trim() + "\n";
         }
+        return printedList;
     }
     /**
      * Prints out the number of tasks inside the TaskList on list command.
      *
      * @param list The tasklist.
      */
-    public void printStored(TaskList list) {
+    public String printStored(TaskList list) {
         List<Task> taskList = list.getList();
 
-        String taskListMessage = "     Here are the tasks in your list:";
-        System.out.println(taskListMessage);
+        String taskListMessage = "     Here are the tasks in your list:\n";
 
-        this.printList(taskList);
+        return taskListMessage + this.printList(taskList);
     }
     /**
      * Prints out the matching message when user is finding for a keyword in the list
      */
-    public void printMatching() {
-        String printMatchingMessage = "     Here are the matching tasks in your list: ";
-        System.out.println(printMatchingMessage);
+    public String printMatching() {
+        String printMatchingMessage = "     Here are the matching tasks in your list: \n";
+        return printMatchingMessage;
     }
 }

@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,7 +23,7 @@ import duke.tasks.ToDoTask;
 /**
  * Duke class that simulates the running of the Duke Program
  */
-public class Duke extends Application {
+public class Duke{
 
     /** Storage instance that is used by Duke during run for loading and writing of file*/
     private Storage storage;
@@ -36,15 +35,6 @@ public class Duke extends Application {
     private Ui ui;
 
     private String filePath = "./data/tasks.txt";
-    
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/cat3.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/cat2.jpg"));
 
     /**
      * Constructor for the Duke class
@@ -64,255 +54,111 @@ public class Duke extends Application {
 
         }
     }
-
+    
     /**
-     * Runs the Duke Program. The Duke Program will watch for user input and react accordingly to the
-     * user input in this method
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.printDivider();
-        ui.printWelcome();
-        ui.printDivider();
-
+    protected String getResponse(String input) {
+        String toReply="";
         try {
-            boolean carryOn = true;
-
-            while (carryOn) {
-
-                String action = ui.read();
-
-                Parser parser = new Parser(action);
+                Parser parser = new Parser(input);
                 parser.check();
-
-                String[] parsedAction = parser.getParsedAction();
-
-                switch (parsedAction[0]) {
+            
+                String[] parsedInput = parser.getParsedAction();
+                
+                switch (parsedInput[0]) {
                 case "todo":
-                    ui.printDivider();
-                    ui.addPrint();
-                    ToDoTask todo = tasks.handleToDoTask(action);
-                    ui.printTask(todo);
-                    ui.countTasks(tasks);
-                    ui.printDivider();
+                    toReply += ui.addPrint();
+                    ToDoTask todo = tasks.handleToDoTask(input);
+                    toReply += ui.printTask(todo);
+                    toReply += ui.countTasks(tasks);
 
                     break;
 
                 case "deadline":
-                    ui.printDivider();
+                    
+                    toReply += ui.addPrint();
 
-                    ui.addPrint();
+                    DeadlineTask deadlineTask = tasks.handleDeadlineTask(input);
+    
+                    toReply += ui.printTask(deadlineTask);
+                    toReply += ui.countTasks(tasks);
 
-                    DeadlineTask deadlineTask = tasks.handleDeadlineTask(action);
-
-                    ui.printTask(deadlineTask);
-                    ui.countTasks(tasks);
-
-                    ui.printDivider();
                     break;
 
                 case "event":
-                    ui.printDivider();
+    
+                    toReply += ui.addPrint();
 
-                    ui.addPrint();
+                    EventTask eventTask = tasks.handleEventTask(input);
+    
+                    toReply += ui.printTask(eventTask);
+                    toReply += ui.countTasks(tasks);
 
-                    EventTask eventTask = tasks.handleEventTask(action);
-
-                    ui.printTask(eventTask);
-                    ui.countTasks(tasks);
-
-                    ui.printDivider();
                     break;
 
                 case "list":
-                    ui.printDivider();
-
-                    ui.printStored(tasks);
-
-                    ui.printDivider();
+                    toReply += ui.printStored(tasks);
 
                     break;
 
                 case "done":
-                    int number = Integer.valueOf(parsedAction[1]);
-                    ui.printDivider();
-
-                    ui.printMarked();
+                    int number = Integer.valueOf(parsedInput[1]);
+    
+                    toReply += ui.printMarked();
 
                     Task completed = tasks.handleDone(number);
+    
+                    toReply += ui.printTask(completed);
 
-                    ui.printTask(completed);
-
-                    ui.printDivider();
                     break;
 
                 case "check":
-                    ui.printDivider();
 
-                    String result = tasks.findOnDateTasks((parsedAction[1]));
-
-                    ui.print(result);
-
-                    ui.printDivider();
-
+                    String result = tasks.findOnDateTasks((parsedInput[1]));
+    
+                    toReply += ui.print(result);
                     break;
 
                 case "bye":
-                    carryOn = false;
-
+                    toReply += Ui.printBye();
                     break;
 
                 case "delete":
-                    int index = Integer.valueOf(parsedAction[1]);
-
-                    ui.printDivider();
-
-                    ui.printRemoved();
+                    int index = Integer.valueOf(parsedInput[1]);
+    
+                    toReply += ui.printRemoved();
 
                     Task task = tasks.handleDelete(index);
+    
+                    toReply += ui.printTask(task);
+                    toReply += ui.countTasks(tasks);
 
-                    ui.printTask(task);
-                    ui.countTasks(tasks);
-
-                    ui.printDivider();
                     break;
 
                 case "find":
-                    String keyword = parsedAction[1];
-
-                    ui.printDivider();
-                    ui.printMatching();
+                    String keyword = parsedInput[1];
+    
+                    toReply += ui.printMatching();
 
                     List<Task> matches = tasks.getMatch(keyword);
-
-                    ui.printList(matches);
-                    ui.printDivider();
+    
+                    toReply += ui.printList(matches);
 
                     break;
 
                 default:
                     throw new UnknownInputException();
                 }
-            }
-
-            ui.printDivider();
-
-            ui.printBye();
-
-            ui.printDivider();
-
+                
             storage.write(tasks);
-
+        
         } catch (DukeException e) {
-            ui.printDivider();
-
-            ui.print(e.getMessage());
-
-            ui.printDivider();
+            return e.getMessage();
         }
-        
-    }
-
-    /**
-     * main driver method to run the Duke program
-     * @param args variable arguments
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
     
-    @Override
-    public void start(Stage stage) {
-    
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-    
-        userInput = new TextField();
-        sendButton = new Button("Send");
-    
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-    
-        scene = new Scene(mainLayout);
-    
-        stage.setScene(scene);
-        stage.show();
-    
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-    
-        mainLayout.setPrefSize(400.0, 600.0);
-    
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-    
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-    
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-    
-        userInput.setPrefWidth(325.0);
-    
-        sendButton.setPrefWidth(55.0);
-    
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-    
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-    
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-    
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-    
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-    
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-    
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        
-        return textToAdd;
-    }
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
-    
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return toReply;
     }
     
 }
