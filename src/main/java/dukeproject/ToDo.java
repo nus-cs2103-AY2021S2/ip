@@ -1,9 +1,9 @@
-package Duke;
+package dukeproject;
 
 /**
  * Represents a todo task where we can specific a task with description.
  * A todo object corresponds to a task with a description.
- * 
+ *
  * X means that the task has been completed.
  */
 public class ToDo extends Task {
@@ -20,7 +20,7 @@ public class ToDo extends Task {
     /**
      * Constructor for the Deadline task, specifying the description of the task and
      * whether the task has been completed.
-     * 
+     *
      * @param description Description of the to do task.
      * @param isDone Determine whether the task is done or not.
      */

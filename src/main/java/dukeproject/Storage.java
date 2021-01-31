@@ -1,4 +1,4 @@
-package Duke;
+package dukeproject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** 
+/**
  * Represents the storage where the program stores the list of tasks on.
  */
 public class Storage {
@@ -20,7 +20,7 @@ public class Storage {
             throw new DukeException("Error during file creation");
         }
     }
-    
+
     // Create the folder if it has not been created before
     private boolean createFolder() {
         File folder = new File("data");
@@ -45,14 +45,14 @@ public class Storage {
                 }
             } catch (IOException ex) {
                 return false;
-            }   
+            }
         }
         return true;
     }
 
     /**
      * Rewrite the entire file from the file path based on the task list given.
-     * 
+     *
      * @param taskList A list of task.
      * @throws FileNotFoundException If the file cannot be found.
      */
@@ -66,7 +66,7 @@ public class Storage {
             for (int index = 0; index < taskList.size(); index++) {
                 fileWriter.write(taskList.get(index).toString() + "\n");
             }
-            
+
             fileWriter.close();
         } catch (Exception ex) {
             throw new FileNotFoundException();
@@ -75,16 +75,16 @@ public class Storage {
 
     /**
      * Load and return the file content from the task file.
-     * 
+     *
      * @return An array list representing the file contents.
      * @throws FileNotFoundException If the file cannot be found.
      */
     public ArrayList<String> loadFileContent() throws FileNotFoundException {
-        
+
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
         ArrayList<String> contents = new ArrayList<>();
-        
+
         // Store each line as a separate value in the array
         while (sc.hasNextLine()) {
             contents.add(sc.nextLine());

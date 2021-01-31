@@ -1,4 +1,4 @@
-package Duke;
+package dukeproject;
 
 import java.time.LocalDateTime;
 

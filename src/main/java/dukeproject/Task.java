@@ -1,8 +1,8 @@
-package Duke;
+package dukeproject;
 
 /**
  * Represents a task with a description and whether the task has been done.
- * 
+ *
  * X for the isDone parameter means that the event has been completed.
  */
 public class Task {
@@ -21,7 +21,7 @@ public class Task {
 
     /**
      * Constructor for the task, specifying the description and whether the task is done.
-     * 
+     *
      * @param description Description of the task.
      */
     public Task(String description, boolean isDone) {
@@ -38,7 +38,7 @@ public class Task {
 
     /**
      * Get the status icon depending on whether the task is done or not.
-     * 
+     *
      * @return Symbol "X" if it is done, else returns an empty string " ".
      */
     public String getStatusIcon() {
@@ -47,24 +47,24 @@ public class Task {
 
     /**
      * Returns a message that a task has been successfully added.
-     * 
+     *
      * @param taskListSize Size / Length of the task list.
      * @return A message to describe that the task has been successfully added.
      */
     public String successMessage(int taskListSize) {
-        return String.format("Got it. I've added this task:\n" 
+        return String.format("Got it. I've added this task:\n"
                 + "  %s\n" + "Now you have %d tasks in the list.\n",
                 this.toString(), taskListSize);
     }
 
     /**
      * Returns a message that a task has been successfully deleted.
-     * 
+     *
      * @param taskListSize Size / Length of the task list.
      * @return A message to describe that the task has been successfully deleted.
      */
     public String deleteMessage(int taskListSize) {
-        return String.format("Noted. I've removed this task:\n" 
+        return String.format("Noted. I've removed this task:\n"
                 + "  %s\n" + "Now you have %d tasks in the list.\n",
                 this.toString(), taskListSize);
     }

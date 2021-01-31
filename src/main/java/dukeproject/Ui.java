@@ -1,8 +1,8 @@
-package Duke;
+package dukeproject;
 
 public class Ui {
 
-    // Initial greetings when the user first open duke
+    /** Shows initial greetings when the user first open duke */
     public void showInitialGreeting() {
         String initialGreeting = "Hello I'm Duke \n"
                 + "What can I do for you? \n";
@@ -44,16 +44,26 @@ public class Ui {
         System.out.println("Please enter a valid task number");
     }
 
-    // Success Message
+    /**
+     * Prints a success message after marking a task as done.
+     *
+     * @param taskList List of all the task.
+     * @param taskIndex Index of the task this message is for.
+     */
     public void printTaskSuccess(TaskList taskList, int taskIndex) {
         System.out.println("Nice! I've marked this task as done:\n "
                 + "   " + taskList.get(taskIndex - 1).toString() + "\n");
     }
 
+    /**
+     * Prints the list of task for the user.
+     *
+     * @param taskList List of all the task.
+     */
     // Print the entire list of task
     public void printTaskList(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
-                
+
         // Shows the list of user inputs with its numbering starting from 1
         for (int index = 0; index < taskList.size(); index++) {
             System.out.println(index + 1 + ". " + taskList.get(index).toString());
@@ -61,12 +71,17 @@ public class Ui {
         System.out.println(); // Blank line
     }
 
-    // Print the entire list of task
+    /**
+     * PrintS the list of tasks that matches the keyword.
+     *
+     * @param taskList List of task.
+     * @param keyword Keyword to search for.
+     */
     public void printKeywordTaskList(TaskList taskList, String keyword) {
         System.out.println("Here are the matching tasks in your list:");
 
         int counter = 1;
-                
+
         // Shows the list of user inputs with its numbering starting from 1
         for (int index = 0; index < taskList.size(); index++) {
             /* Only print the listing and increment the counter if the task descriptions
@@ -84,7 +99,7 @@ public class Ui {
         System.out.println(); // Blank line
     }
 
-    // General Printing 
+    // General Printing
     public void generalPrint(String stringToPrint) {
         System.out.println(stringToPrint);
     }

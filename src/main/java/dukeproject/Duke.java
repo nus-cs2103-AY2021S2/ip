@@ -1,16 +1,16 @@
-package Duke;
+package dukeproject;
 
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
-* The Duke application is a to do list application where users are able to 
+* The Duke application is a to do list application where users are able to
 * create, remove and see their to do list.
 *
 * @author  Low En Haoa
 * @version 0.1
-* @since   2021-01-26 
+* @since   2021-01-26
 */
 public class Duke {
 
@@ -18,12 +18,38 @@ public class Duke {
     private TaskList taskList;
     private final Ui ui;
 
-    public static void main(String[] args)  {
+    /**
+     * Returns the duke object with access to the data in the file path.
+     * If the data is not empty, load the file content into the task list.
+     * Else, load an empty task list where the user can start using the application.
+     *
+     * @param filePath File path in the hard disk to store the current task list.
+     * @throws DukeException for any error.
+     */
+    public Duke(String filePath) throws DukeException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+
         try {
-			new Duke("data/duke.txt").run();
-		} catch (DukeException e) {
-			System.out.println("Error on the duke application");
-		}
+            taskList = new TaskList(storage.loadFileContent());
+        } catch (FileNotFoundException | DukeException ex) {
+            ui.printLoadingError();
+            taskList = new TaskList();
+        } catch (Exception ex) {
+            throw new DukeException();
+        }
+    }
+
+    /**
+     * Runs the duke application.
+     * @param args
+     */
+    public static void main(String[] args) {
+        try {
+            new Duke("data/duke.txt").run();
+        } catch (DukeException e) {
+            System.out.println("Error on the duke application");
+        }
     }
 
     /**
@@ -31,7 +57,7 @@ public class Duke {
      * Runs a while loop that only terminates when the user inputs "bye".
      * Check for keywords at the start of the input such as "list", "todo", "deadline",
      * "events" and perform different action base on it.
-     * 
+     *
      * @throws DukeException If there is any error with duke.
      */
     public void run() throws DukeException {
@@ -85,13 +111,13 @@ public class Duke {
                     }
 
                     // Get the description and date from the user's input
-                    StringDatePair output = new Parser().parse(userInput, Parser.commandType.INPUT_DEADLINE);
+                    StringDatePair output = new Parser().parse(userInput, Parser.CommandType.INPUT_DEADLINE);
 
                     // Add a deadline task
                     Deadline newDeadlineTask = new Deadline(output.getString(), output.getDate());
                     taskList.add(newDeadlineTask);
                     storage.writeToFile(taskList);
-                    
+
                     // Print a success message
                     ui.generalPrint(newDeadlineTask.successMessage(taskList.size()));
                 } catch (StringIndexOutOfBoundsException ex) {
@@ -99,7 +125,7 @@ public class Duke {
                     ui.printDescriptionError();
                 } catch (FileNotFoundException ex) {
                     // File is empty
-                   ui.printFileError();
+                    ui.printFileError();
                 } catch (DateTimeParseException ex) {
                     // Datetime value parsed is not of format "yyyy-MM-dd HHmm"
                     ui.printDateFormatError();
@@ -110,15 +136,15 @@ public class Duke {
                     if (userInput.substring(5).isBlank()) {
                         throw new StringIndexOutOfBoundsException();
                     }
-                    
+
                     // Get the description and date from the user's input
-                    StringDatePair output = new Parser().parse(userInput, Parser.commandType.INPUT_EVENT);
+                    StringDatePair output = new Parser().parse(userInput, Parser.CommandType.INPUT_EVENT);
 
                     // Add a deadline task
                     Event newEventTask = new Event(output.getString(), output.getDate());
                     taskList.add(newEventTask);
                     storage.writeToFile(taskList);
-                    
+
                     // Print a success message
                     ui.generalPrint(newEventTask.successMessage(taskList.size()));
                 } catch (StringIndexOutOfBoundsException ex) {
@@ -126,7 +152,7 @@ public class Duke {
                     ui.printDescriptionError();
                 } catch (FileNotFoundException ex) {
                     // File is empty
-                   ui.printFileError();
+                    ui.printFileError();
                 } catch (DateTimeParseException ex) {
                     // Datetime value parsed is not of format "yyyy-MM-dd HHmm"
                     ui.printDateFormatError();
@@ -165,7 +191,7 @@ public class Duke {
                 } catch (FileNotFoundException ex) {
                     // File is empty
                     ui.printFileError();
-                } 
+                }
             } else if (userInput.startsWith("find")) {
                 // Find a return a list of task that is related to the keyword
                 String keyword = new Parser().parseForFind(userInput);
@@ -176,27 +202,5 @@ public class Duke {
             }
         }
         sc.close();
-    }
-
-    /**
-     * Returns the duke object with access to the data in the file path.
-     * If the data is not empty, load the file content into the task list.
-     * Else, load an empty task list where the user can start using the application.
-     *
-     * @param filePath File path in the hard disk to store the current task list.
-     * @throws DukeException for any error.
-     */
-    public Duke(String filePath) throws DukeException {
-        ui = new Ui();
-        storage = new Storage(filePath);
-
-        try {
-            taskList = new TaskList(storage.loadFileContent());
-        } catch (FileNotFoundException | DukeException ex) {
-            ui.printLoadingError();
-            taskList = new TaskList();
-        } catch (Exception ex) {
-            throw new DukeException();
-        }
     }
 }

@@ -1,13 +1,14 @@
-package Duke;
+
+package dukeproject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a deadline task where we can specific a task to be completed by a certain date time.
- * A deadline object corresponds to a task with a description and 
+ * A deadline object corresponds to a task with a description and
  * a datetime for the task to be completed.
- * 
+ *
  * X means that the task has been completed.
  */
 public class Deadline extends Task {
@@ -44,8 +45,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)",
-            super.getStatusIcon(), 
-            super.toString(), 
+            super.getStatusIcon(),
+            super.toString(),
             by.format(DateTimeFormatter.ofPattern("d MMM yyyy - HHmm")));
     }
 }

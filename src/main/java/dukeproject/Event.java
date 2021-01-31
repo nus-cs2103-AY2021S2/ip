@@ -1,13 +1,13 @@
-package Duke;
+package dukeproject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a event task where we can specific a task to be completed at a certain date time.
- * An event object corresponds to a task with a description and 
+ * An event object corresponds to a task with a description and
  * a datetime for the event to be completed.
- * 
+ *
  * X means that the event has been completed.
  */
 public class Event extends Task {
@@ -43,8 +43,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", 
-            super.getStatusIcon(), super.toString(), 
+        return String.format("[E][%s] %s (at: %s)",
+            super.getStatusIcon(), super.toString(),
             at.format(DateTimeFormatter.ofPattern("d MMM yyyy - HHmm")));
     }
 }
