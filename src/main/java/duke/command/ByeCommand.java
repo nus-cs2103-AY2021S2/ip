@@ -40,7 +40,7 @@ public class ByeCommand extends Command {
      */
 
     public String execute(TaskList tasks, String input, Storage storage) {
-        return line + "\n" + "Bye. Hope to see you again soon!\n" + line;
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

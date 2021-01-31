@@ -29,6 +29,7 @@ public class FindCommand extends Command {
      * @param tasks list of tasks where this new task is added to
      * @param input details of the task
      * @param storage handles the various tasks according to their type
+     * @throws DukeException in case input is invalid
      */
 
     public String execute(TaskList tasks, String input, Storage storage) throws DukeException {

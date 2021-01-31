@@ -150,8 +150,10 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response from user
+     *
+     * @param input user's response
+     * @return Duke's reply
      */
     String getResponse(String input) {
         ui.showWelcome();

@@ -12,10 +12,7 @@ public class Ui {
      * @return welcome message
      */
     public static String showWelcome() {
-        String line = "------------------------------------------";
-
-        //introduction screen
-        return line + "\nHello! I'm Duke\n" + "What can I do for you?\n" + line;
+        return "Hello! I'm Duke\n" + "What can I do for you?";
     }
     /**
      * Prints an exit message.
@@ -23,9 +20,7 @@ public class Ui {
      * @return exit message
      */
     public String exitDuke() {
-        String line = "------------------------------------------";
-
-        return line + "\n" + "Bye. Hope to see you again soon!\n" + line;
+        return "Bye. Hope to see you again soon!";
 
     }
 }

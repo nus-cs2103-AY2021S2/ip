@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -65,7 +64,6 @@ public class TaskList {
      *
      * @param input Details of Todo task
      * @return reply from Duke as String
-     * @throws IOException when user keys in invalid storage location
      * @throws DukeException If task has no details
      */
     public String addToDo(String input) throws DukeException { //when user keys in todo abc
@@ -75,9 +73,9 @@ public class TaskList {
             this.taskList.add(t);
             storage.saveData(this);
 
-            return line + "\nGot it. I've added this task:\n"
+            return "Got it. I've added this task:\n"
                     + t + "\nNow you have " + this.taskList.size()
-                    + " tasks in the list.\n" + line;
+                    + " tasks in the list.";
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyToDoException();
         }
@@ -121,9 +119,9 @@ public class TaskList {
             this.taskList.add(t);
             storage.saveData(this);
 
-            return line + "\nGot it. I've added this task:\n"
+            return "Got it. I've added this task:\n"
                     + t + "\nNow you have " + this.taskList.size()
-                    + " tasks in the list.\n" + line;
+                    + " tasks in the list.";
         } catch (DateTimeParseException e) {
             throw new EmptyDateTimeException();
         }
@@ -166,13 +164,12 @@ public class TaskList {
             storage.saveData(this);
 
             this.taskList.add(t);
-            return line + "\nGot it. I've added this task:\n"
+            return "Got it. I've added this task:\n"
                     + t + "\nNow you have " + this.taskList.size()
-                    + " tasks in the list.\n" + line;
+                    + " tasks in the list.";
         } catch (DateTimeParseException e) {
             throw new EmptyDateTimeException();
         }
-
     }
 
     /**
@@ -190,15 +187,14 @@ public class TaskList {
      * Mark an item as done in taskList.
      *
      * @return reply from Duke as String
-     * @throws IOException When user keys in invalid storage location
      */
     public String markDone(String input) {
         int index = Integer.parseInt(input.split(" ")[1]) - 1;
         this.taskList.get(index).setDone();
         storage.saveData(this);
 
-        return line + "\nNice! I've marked this task as done:\n"
-                + this.taskList.get(index) + "\n" + line;
+        return "Nice! I've marked this task as done:\n"
+                + this.taskList.get(index);
     }
 
     /**
@@ -206,7 +202,7 @@ public class TaskList {
      *
      * @param input Task to be deleted
      * @return reply from Duke as String
-     * @throws IOException When user keys in invalid storage location
+     * @throws DukeException in case input is invalid
      * @throws ArrayIndexOutOfBoundsException If event has no details
      * @throws NumberFormatException If alphabets were given instead of numbers
      * @throws IndexOutOfBoundsException If task has nothing to be deleted
@@ -236,9 +232,9 @@ public class TaskList {
         this.taskList.remove(index);
         storage.saveData(this);
 
-        return line + "\nNoted. I've removed this task:\n"
+        return "Noted. I've removed this task:\n"
                 + this.taskList.get(index) + "\nNow you have "
-                + this.taskList.size() + " tasks in the list.\n" + line;
+                + this.taskList.size() + " tasks in the list.";
     }
 
     /**
@@ -247,11 +243,11 @@ public class TaskList {
      * @return reply from Duke as String
      */
     public String list() {
-        String toPrint = line + "\nHere are the tasks in your list:\n";
+        String toPrint = "Here are the tasks in your list:\n";
         for (int i = 1; i < this.taskList.size() + 1; i++) {
             toPrint += i + "." + this.taskList.get(i - 1) + "\n";
         }
-        return toPrint + line;
+        return toPrint;
     }
 
     /**
@@ -259,6 +255,7 @@ public class TaskList {
      *
      * @param input input of the item to be found
      * @return reply from Duke as String
+     * @throws DukeException in case input is invalid
      * @throws ArrayIndexOutOfBoundsException If user does not input what to find
      */
     public String find(String input) throws DukeException {
@@ -268,7 +265,7 @@ public class TaskList {
             throw new EmptyDeleteException();
         }
         String item = input.split(" ", 2)[1];
-        String toPrint = line + "\nHere are the matching tasks in your list:\n";
+        String toPrint = "Here are the matching tasks in your list:\n";
         int counter = 1;
         ArrayList<Task> list = this.taskList;
         for (int i = 0; i < this.taskList.size(); i++) {
@@ -278,6 +275,6 @@ public class TaskList {
                 counter++;
             }
         }
-        return toPrint + line;
+        return toPrint;
     }
 }
