@@ -62,8 +62,9 @@ public class Parser {
             }
 
         } else if (description.toLowerCase().contains(FindCommand)) {
-            
-
+            String[] seg = description.split(" ");
+            String keyword = seg[seg.length - 1];
+            tasks.findTask(keyword);
 
         } else if (description.toLowerCase().contains(Deadlines)) {
             try {

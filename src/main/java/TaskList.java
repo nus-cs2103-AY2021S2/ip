@@ -14,7 +14,7 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
-    public  Integer numberOfTask() {
+    public int numberOfTask() {
         return taskList.size();
     }
 
@@ -180,6 +180,46 @@ public class TaskList {
         taskList.remove(index - 1);
 
     }
+
+    /**
+     * Finds tasks by searching for a keyword.
+     * Prints the list of tasks with description containing the keyword.
+     *
+     * @param keyword within a task description
+     */
+
+    public void findTask(String keyword) {
+        ArrayList<Task> searchResults = new ArrayList<>();
+        if (taskList.size() == 0) {
+            System.out.println("____________________________________________________________\n"
+                    + "You have no task for now, yay!\n"
+                    + "____________________________________________________________");
+        } else {
+            int i = 1;
+            for (Task t : taskList) {
+                if (t.getDescription().contains(keyword)) {
+                    searchResults.add(t);
+                }
+                }
+            }
+        if (searchResults.size() == 0) {
+            System.out.println("____________________________________________________________\n"
+                    + "You have no matching task in the list\n"
+                    + "____________________________________________________________");
+        } else {
+            System.out.println("____________________________________________________________\n"
+                    + (searchResults.size() == 1 ? "Here is the matching task in your list: \n"
+                    : "Here are the matching tasks in your list: \n"));
+
+            int i = 1;
+            for (Task t : searchResults) {
+                System.out.println(i + ". "
+                        + t.toString());
+                i++;
+            }
+
+        }
+        }
 
 
 }
