@@ -1,11 +1,10 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import duke.command.DeleteCommand;
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -14,15 +13,14 @@ public class DeleteCommandTest {
     private final Storage storage = new Storage();
 
     @Test
-    public void testExecuteDone() throws IOException {
+    public void testExecuteDelete() throws DukeException {
         try {
             String deleteInput = "delete 1";
             DeleteCommand deleteCommand = new DeleteCommand(deleteInput);
 
             deleteCommand.execute(taskList, deleteInput, storage);
-        } catch (NullPointerException e) {
-            assertEquals("Cannot invoke \"TaskList.getSize()\" because \"tasks\" is null",
-                    e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            assertEquals("Index 0 out of bounds for length 0", e.getMessage());
         }
     }
 

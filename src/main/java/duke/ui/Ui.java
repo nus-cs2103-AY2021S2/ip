@@ -17,4 +17,15 @@ public class Ui {
         //introduction screen
         return line + "\nHello! I'm Duke\n" + "What can I do for you?\n" + line;
     }
+    /**
+     * Prints an exit message.
+     *
+     * @return exit message
+     */
+    public String exitDuke() {
+        String line = "------------------------------------------";
+
+        return line + "\n" + "Bye. Hope to see you again soon!\n" + line;
+
+    }
 }

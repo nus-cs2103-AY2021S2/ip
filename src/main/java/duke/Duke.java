@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -101,7 +102,7 @@ public class Duke extends Application {
         sendButton.setOnMouseClicked((event) -> {
             try {
                 handleUserInput();
-            } catch (IOException e) {
+            } catch (IOException | DukeException e) {
                 e.printStackTrace();
             }
         });
@@ -109,7 +110,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             try {
                 handleUserInput();
-            } catch (IOException e) {
+            } catch (IOException | DukeException e) {
                 e.printStackTrace();
             }
         });
@@ -138,7 +139,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() throws IOException, DukeException {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -152,101 +153,18 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) throws IOException {
+    String getResponse(String input) {
         ui.showWelcome();
-        Command command = Parser.parse(input);
-        boolean isExit = command.isExit();
-        if (isExit) {
-            return command.execute(tasks, input, storage);
-        }
         try {
+            Command command = Parser.parse(input);
+            boolean isExit = command.isExit();
+            if (isExit) {
+                ui.exitDuke();
+            }
+
             return command.execute(tasks, input, storage);
-        } catch (IOException e) {
+        } catch (DukeException | IOException e) {
             return e.getMessage();
         }
     }
 }
-
-
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
-//import java.util.Scanner;
-//
-//import duke.command.Command;
-//import duke.parser.Parser;
-//import duke.storage.Storage;
-//import duke.task.TaskList;
-//import duke.ui.Ui;
-//import javafx.scene.Scene;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.ScrollPane;
-//import javafx.scene.control.TextField;
-//import javafx.scene.image.Image;
-//import javafx.scene.layout.VBox;
-
-
-
-
-//public class Duke {
-//    private Storage storage;
-//    private TaskList tasks;
-//    private Ui ui;
-//
-//    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
-//    private Scene scene;
-//
-//    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-//
-//    /**
-//     * Main class for programme to run.
-//     */
-//    public Duke() {
-//        ui = new Ui();
-//        storage = new Storage();
-//        try {
-//            tasks = storage.loadData();
-//        } catch (FileNotFoundException e) {
-//            tasks = new TaskList();
-//        }
-//    }
-//
-//    /**
-//     * Tries to run Duke after filePath, taskList, storage and ui is given
-//     */
-//    public void run() throws IOException {
-//        ui.showWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            Scanner sc = new Scanner(System.in);
-//            while (!isExit) {
-//                String fullCommand = sc.nextLine();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, fullCommand, storage);
-//                isExit = c.isExit();
-//            }
-//        }
-//    }
-//
-//    /**
-//     * You should have your own function to generate a response to user input.
-//     * Replace this stub with your completed method.
-//     */
-//    public String getResponse(String input) {
-//        return "Duke heard: " + input;
-//    }
-//
-//    /**
-//     * Entry point for Duke to start.
-//     *
-//     * @param args Args.
-//     * @throws IOException If file does not exist
-//     */
-//    public static void main(String[] args) throws IOException {
-//        new Duke().run();
-//    }
-//}
-

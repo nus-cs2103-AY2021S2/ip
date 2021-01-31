@@ -1,8 +1,7 @@
 package duke.command;
 
-import java.io.IOException;
-
-import duke.exception.InvalidInstructionException;
+import duke.exception.DukeException;
+import duke.exception.EmptyDeleteException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -37,14 +36,14 @@ public class DeleteCommand extends Command {
      * @param tasks list of tasks where this new task is added to
      * @param input details of the task
      * @param storage handles the various tasks according to their type
-     * @throws IOException in case file is corrupt
+     * @throws DukeException in case there is no input
      */
-    public String execute(TaskList tasks, String input, Storage storage) throws IOException {
-        if (Integer.parseInt(input.split(" ")[1]) > tasks.getSize()) {
-            new InvalidInstructionException();
-            return "";
-        } else {
+    public String execute(TaskList tasks, String input, Storage storage) throws DukeException {
+        try {
+            String temp = input.split(" ", 2)[1];
             return tasks.delete(input);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyDeleteException();
         }
     }
 

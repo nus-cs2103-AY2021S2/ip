@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
 import duke.ui.DialogBox;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
@@ -49,9 +50,10 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      *
      * @throws IOException User keys in invalid storage location
+     * @throws DukeException invalid user input
      */
     @FXML
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() throws IOException, DukeException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

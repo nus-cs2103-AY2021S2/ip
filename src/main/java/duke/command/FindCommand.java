@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.InvalidInstructionException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -29,8 +31,13 @@ public class FindCommand extends Command {
      * @param storage handles the various tasks according to their type
      */
 
-    public String execute(TaskList tasks, String input, Storage storage) {
-        return tasks.find(input);
+    public String execute(TaskList tasks, String input, Storage storage) throws DukeException {
+        try {
+            String temp = input.split(" ", 2) [1];
+            return tasks.find(input);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInstructionException();
+        }
     }
 
     /**

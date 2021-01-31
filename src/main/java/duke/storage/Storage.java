@@ -46,25 +46,21 @@ public class Storage {
      * @param li TaskList of data to be saved
      * @throws IOException  If file is corrupt
      */
-    public static void saveData(TaskList li) throws IOException {
+    public static void saveData(TaskList li) {
         //potential problem: saveData doesnt update .txt file
         //when i change done status of item to done. only updates after bye command
         try {
             Path currPath = Paths.get("");
             FileWriter fw = new FileWriter(currPath.toAbsolutePath().toString()
                     + "/src/main/java/duke/duke.txt");
+            for (int i = 0; i < li.getSize(); i++) {
+                String write = li.getInd(i) + "\n";
+                fw.write(write);
+            }
+            fw.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
-
-        Path currPath = Paths.get("");
-        FileWriter fw = new FileWriter(currPath.toAbsolutePath().toString()
-                + "/src/main/java/duke/duke.txt");
-        for (int i = 0; i < li.getSize(); i++) {
-            String write = li.getInd(i) + "\n";
-            fw.write(write);
-        }
-        fw.close();
     }
 
     /**
@@ -73,7 +69,7 @@ public class Storage {
      * @return list TaskList of all loaded data
      * @throws FileNotFoundException  If file cannot be found in path
      */
-    public static TaskList loadData() throws FileNotFoundException, IOException {
+    public static TaskList loadData() throws IOException {
         Path currPath = Paths.get("");
         Path dukePath = Paths.get(currPath.toAbsolutePath().toString()
                 + "/src/main/java/duke/duke.txt");

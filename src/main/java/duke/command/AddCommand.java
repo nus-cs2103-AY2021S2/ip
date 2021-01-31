@@ -1,8 +1,6 @@
 package duke.command;
 
-import java.io.IOException;
-
-import duke.exception.InvalidInstructionException;
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -39,23 +37,23 @@ public class AddCommand extends Command {
      * @param tasks list of tasks where this new task is added to
      * @param input details of the task
      * @param storage handles the various tasks according to their type
-     * @throws IOException in case file is corrupt
+     * @throws DukeException in case input is invalid
      */
-    public String execute(TaskList tasks, String input, Storage storage) throws IOException {
+    public String execute(TaskList tasks, String input, Storage storage) {
         String type = input.split(" ")[0];
 
-        if (type.equals("todo")) {
-            System.out.println(tasks);
-            System.out.println(input);
-            return tasks.addToDo(input);
-        } else if (type.equals("deadline")) {
-            return tasks.addDeadline(input);
-        } else if (type.equals("event")) {
-            return tasks.addEvent(input);
-        } else {
-            new InvalidInstructionException();
-            return "";
+        try {
+            if (type.equals("todo")) {
+                return tasks.addToDo(input);
+            } else if (type.equals("deadline")) {
+                return tasks.addDeadline(input);
+            } else if (type.equals("event")) {
+                return tasks.addEvent(input);
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
         }
+        return "";
     }
 
     /**

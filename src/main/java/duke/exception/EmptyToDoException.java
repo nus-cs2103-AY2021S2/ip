@@ -3,14 +3,13 @@ package duke.exception;
 /**
  * Exception where user left out the details of the task.
  */
-public class EmptyToDoException {
+public class EmptyToDoException extends DukeException {
 
     /**
      * Method to throw the Exception.
      */
     public EmptyToDoException() {
-        System.out.println("------------------------------------------\n"
-                + "☹ OOPS!!! The description of a todo cannot be empty.\n"
-                + "------------------------------------------");
+        super("The description of a todo cannot be empty.\n"
+                + "Try 'todo read a book'");
     }
 }

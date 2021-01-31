@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.exception.AlphabetsInsteadOfNumberException;
+import duke.exception.DukeException;
 import duke.exception.EmptyDateTimeException;
 import duke.exception.EmptyDeadlineException;
 import duke.exception.EmptyDeleteException;
@@ -65,31 +66,30 @@ public class TaskList {
      * @param input Details of Todo task
      * @return reply from Duke as String
      * @throws IOException when user keys in invalid storage location
-     * @throws ArrayIndexOutOfBoundsException If task has no details
+     * @throws DukeException If task has no details
      */
-    public String addToDo(String input) throws IOException { //when user keys in todo abc
+    public String addToDo(String input) throws DukeException { //when user keys in todo abc
         String[] temp = input.split(" ", 2);
         try {
             Task t = new Todo(temp[1]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            new EmptyToDoException();
-        }
-        Task t = new Todo(temp[1]);
-        this.taskList.add(t);
-        storage.saveData(this);
+            this.taskList.add(t);
+            storage.saveData(this);
 
-        return line + "\nGot it. I've added this task:\n"
-                + t + "\nNow you have " + this.taskList.size()
-                + " tasks in the list.\n" + line;
+            return line + "\nGot it. I've added this task:\n"
+                    + t + "\nNow you have " + this.taskList.size()
+                    + " tasks in the list.\n" + line;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyToDoException();
+        }
+
     }
 
     /**
      * Adds given task to taskList.
      *
      * @param input Task to be added
-     * @throws IOException When user keys in invalid storage location
      */
-    public void addToDo(Task input) throws IOException { //when loading fr data [T][ ] abc
+    public void addToDo(Task input) { //when loading fr data [T][ ] abc
         this.taskList.add(input);
         storage.saveData(this);
 
@@ -100,44 +100,42 @@ public class TaskList {
      *
      * @param input Details of Deadline task
      * @return reply from Duke as String
-     * @throws IOException When user keys in invalid storage location
+     * @throws DukeException When user keys in invalid input
      * @throws ArrayIndexOutOfBoundsException If task has no details
      * @throws DateTimeParseException If task has no date or time
      */
-    public String addDeadline(String input) throws IOException { //when user keys in deadline abc
-        String[] temp = input.split(" ", 2);
+    public String addDeadline(String input) throws DukeException { //when user keys in deadline abc
         try {
-            Task t = new Todo(temp[1]);
+            String temp = input.split(" ", 2) [1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            new EmptyDeadlineException();
+            throw new EmptyDeadlineException();
         }
+        String[] temp = input.split(" ", 2);
         String data = temp[1];
         String description = data.split(" /by ", 2)[0];
         String by = data.split(" /by ", 2)[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
             LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
+            Task t = new Deadline(description, dateTime);
+            this.taskList.add(t);
+            storage.saveData(this);
 
+            return line + "\nGot it. I've added this task:\n"
+                    + t + "\nNow you have " + this.taskList.size()
+                    + " tasks in the list.\n" + line;
         } catch (DateTimeParseException e) {
-            new EmptyDateTimeException();
+            throw new EmptyDateTimeException();
         }
-        LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
-        Task t = new Deadline(description, dateTime);
-        this.taskList.add(t);
-        storage.saveData(this);
 
-        return line + "\nGot it. I've added this task:\n"
-                + t + "\nNow you have " + this.taskList.size()
-                + " tasks in the list.\n" + line;
     }
 
     /**
      * Adds given task to taskList.
      *
      * @param input Task to be added
-     * @throws IOException When user keys in invalid storage location
      */
-    public void addDeadline(Task input) throws IOException { //when loading fr data [D][ ] abc
+    public void addDeadline(Task input) { //when loading fr data [D][ ] abc
         this.taskList.add(input);
         storage.saveData(this);
     }
@@ -147,44 +145,42 @@ public class TaskList {
      *
      * @param input Details of Event task
      * @return reply from Duke as String
-     * @throws IOException When user keys in invalid storage location
+     * @throws DukeException When user keys in invalid input
      * @throws ArrayIndexOutOfBoundsException If task has no details
      * @throws DateTimeParseException If task has no date or time
      */
-    public String addEvent(String input) throws IOException { ////when user keys in event abc
-        String[] temp = input.split(" ", 2);
+    public String addEvent(String input) throws DukeException { ////when user keys in event abc
         try {
-            Task t = new Todo(temp[1]);
+            String temp = input.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            new EmptyEventException();
+            throw new EmptyEventException();
         }
+        String[] temp = input.split(" ", 2);
         String data = temp[1];
         String description = data.split(" /at ", 2)[0];
         String at = data.split(" /at ", 2)[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
             LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
+            Task t = new Event(description, dateTime);
+            storage.saveData(this);
 
+            this.taskList.add(t);
+            return line + "\nGot it. I've added this task:\n"
+                    + t + "\nNow you have " + this.taskList.size()
+                    + " tasks in the list.\n" + line;
         } catch (DateTimeParseException e) {
-            new EmptyDateTimeException();
+            throw new EmptyDateTimeException();
         }
-        LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
-        Task t = new Event(description, dateTime);
-        storage.saveData(this);
 
-        this.taskList.add(t);
-        return line + "\nGot it. I've added this task:\n"
-                + t + "\nNow you have " + this.taskList.size()
-                + " tasks in the list.\n" + line;
     }
 
     /**
      * Adds given task to taskList.
      *
      * @param input Task to be added
-     * @throws IOException When user keys in invalid storage location
      */
-    public void addEvent(Task input) throws IOException { //when loading fr data [E][ ] abc
+    public void addEvent(Task input) { //when loading fr data [E][ ] abc
         this.taskList.add(input);
         storage.saveData(this);
 
@@ -196,7 +192,7 @@ public class TaskList {
      * @return reply from Duke as String
      * @throws IOException When user keys in invalid storage location
      */
-    public String markDone(String input) throws IOException {
+    public String markDone(String input) {
         int index = Integer.parseInt(input.split(" ")[1]) - 1;
         this.taskList.get(index).setDone();
         storage.saveData(this);
@@ -215,27 +211,27 @@ public class TaskList {
      * @throws NumberFormatException If alphabets were given instead of numbers
      * @throws IndexOutOfBoundsException If task has nothing to be deleted
      */
-    public String delete(String input) throws IOException {
-        String[] temp = input.split(" ", 2);
-
+    public String delete(String input) throws DukeException {
         try {
-            Task t = new Todo(temp[1]);
+            String temp = input.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            new EmptyDeleteException();
+            throw new EmptyDeleteException();
         }
 
         try {
+            String[] temp = input.split(" ", 2);
             this.taskList.get(Integer.parseInt(temp[1]) - 1);
         } catch (NumberFormatException e) {
-            new AlphabetsInsteadOfNumberException();
+            throw new AlphabetsInsteadOfNumberException();
         }
 
         try {
+            String[] temp = input.split(" ", 2);
             this.taskList.get(Integer.parseInt(temp[1]) - 1);
         } catch (IndexOutOfBoundsException e) {
-            new EmptyListDeletionException();
+            throw new EmptyListDeletionException();
         }
-
+        String[] temp = input.split(" ", 2);
         int index = Integer.parseInt(temp[1]) - 1;
         this.taskList.remove(index);
         storage.saveData(this);
@@ -265,11 +261,11 @@ public class TaskList {
      * @return reply from Duke as String
      * @throws ArrayIndexOutOfBoundsException If user does not input what to find
      */
-    public String find(String input) {
+    public String find(String input) throws DukeException {
         try {
-            String[] arr = input.split(" ", 2);
+            String temp = input.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            new EmptyDeleteException();
+            throw new EmptyDeleteException();
         }
         String item = input.split(" ", 2)[1];
         String toPrint = line + "\nHere are the matching tasks in your list:\n";

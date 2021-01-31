@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -17,7 +18,7 @@ public abstract class Command {
      * @param input details of the task
      * @param storage handles the various tasks according to their type
      */
-    public abstract String execute(TaskList tasks, String input, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, String input, Storage storage) throws IOException, DukeException;
 
     /**
      * Checks if it is time to exit Duke.
