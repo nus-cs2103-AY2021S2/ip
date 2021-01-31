@@ -23,7 +23,7 @@ public class ParserTest {
 			Parser.extractInstruction(testInput);
 			fail();
 		} catch (DukeException e) {
-			assertEquals("Walao, command cannot be empty!", e.getMessage());
+			assertEquals("!!!Walao, command cannot be empty!!!", e.getMessage());
 		}
 	}
 
@@ -34,7 +34,7 @@ public class ParserTest {
 			Parser.extractInstruction(testInput);
 			fail();
 		} catch (DukeException e) {
-			assertEquals("I DON'T KNOW WHAT U SAYING BRO", e.getMessage());
+			assertEquals("!!!!!!!I DON'T KNOW WHAT U SAYING BRO!!!!!!!", e.getMessage());
 		}
 	}
 
@@ -53,7 +53,7 @@ public class ParserTest {
 			Parser.extractTask(testInput, "deadline");
 			fail();
 		} catch (DukeException e) {
-			assertEquals("Walao!NO TASK!", e.getMessage());
+			assertEquals("!!!!!!!!!Walao!NO TASK!!!!!!!!!!", e.getMessage());
 		}
 	}
 

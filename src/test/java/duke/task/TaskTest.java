@@ -10,6 +10,7 @@ class TaskTest {
 	void done() {
 		TaskList.clearAllTask();
 		Todo task = new Todo("Scratch back", " ");
+		TaskList.addTask(task);
 		TaskList.done(1);
 		assertEquals("X", task.getDoneStatus());
 	}
@@ -18,6 +19,7 @@ class TaskTest {
 	void delete() {
 		TaskList.clearAllTask();
 		Todo task = new Todo("Scratch back", " ");
+		TaskList.addTask(task);
 		TaskList.delete(1);
 		assertEquals(0, TaskList.getTaskList().size());
 	}
