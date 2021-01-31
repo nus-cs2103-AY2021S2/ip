@@ -37,8 +37,8 @@ public class Executor {
                 + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public static String find(TaskList taskList, String keyword) {
-        return taskList.find(keyword).toString();
+    public static String find(TaskList taskList, String ... keywords) {
+        return taskList.find(keywords).toString();
     }
 
     public static String list(TaskList taskList) {

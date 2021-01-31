@@ -5,9 +5,6 @@ package duke;
  */
 public class Parser {
 
-    public static int indexDetermine(String command, String key) {
-        return (!command.contains(key)) ? command.length() : command.indexOf(key);
-    }
     /**
      * Parse the user input.
      * @param command input entered by user
@@ -42,11 +39,7 @@ public class Parser {
         } else if (type.equals("delete")) {
             return Executor.delete(taskList, Integer.parseInt(desc) - 1);
         } else if (type.equals("find")) {
-            return Executor.find(taskList, desc);
-        } else if (type.equals("list")) {
-            return Executor.list(taskList);
-        } else if (type.equals("bye")) {
-            return Executor.exit(taskList, storage);
+            return Executor.find(taskList, desc.split(" "));
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
