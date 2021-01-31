@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import duke.Storage;
 import duke.TaskManager;
-import duke.Ui;
 import duke.task.Task;
 
 public class ListCommand extends Command {
@@ -19,15 +18,11 @@ public class ListCommand extends Command {
     /**
      *  Executes ListCommand.
      *
-     *  @param ui Ui Object from Duke.
      *  @param tm TaskManager Object from Duke.
      *  @param st Storage Object from Duke.
      */
-    public String execute(Ui ui, TaskManager tm, Storage st) {
+    public String execute(TaskManager tm, Storage st) {
         ArrayList<Task> tasks = tm.getTasks();
-        ui.println("Listing all tasks: ");
-        ui.showTasks(tasks);
-
         StringBuilder res = new StringBuilder("Listing all matching tasks: \n");
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;

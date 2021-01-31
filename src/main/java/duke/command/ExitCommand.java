@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskManager;
-import duke.Ui;
 
 public class ExitCommand extends Command {
 
@@ -16,12 +15,10 @@ public class ExitCommand extends Command {
     /**
      *  Executes ExitCommand.
      *
-     *  @param ui Ui Object from Duke.
      *  @param tm TaskManager Object from Duke.
      *  @param st Storage Object from Duke.
      */
-    public String execute(Ui ui, TaskManager tm, Storage st) {
-        ui.showByeBye();
+    public String execute(TaskManager tm, Storage st) {
         return "Thanks for using me!";
     }
 

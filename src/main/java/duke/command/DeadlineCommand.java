@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import duke.Storage;
 import duke.TaskManager;
-import duke.Ui;
 import duke.exception.DukeException;
 
 public class DeadlineCommand extends Command {
@@ -25,18 +24,14 @@ public class DeadlineCommand extends Command {
     /**
      *  Executes DeadlineCommand.
      *
-     *  @param ui Ui Object from Duke.
      *  @param tm TaskManager Object from Duke.
      *  @param st Storage Object from Duke.
      *  @return Command response.
      *  @throws DukeException If any error arises from execution.
      */
-    public String execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
+    public String execute(TaskManager tm, Storage st) throws DukeException {
         tm.addDeadlineTask(name, date);
         st.save(tm);
-        ui.println("    added: " + name);
-        ui.println(String.format("    Now you have %d task(s)",
-                tm.getSize()));
         String res = String.format("added: %s\n Now you have %d task(s)",
                 name,
                 tm.getSize());
