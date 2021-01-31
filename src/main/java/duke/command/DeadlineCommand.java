@@ -2,7 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
-import duke.Storage;
+import duke.bot.Storage;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
 import duke.task.Deadline;

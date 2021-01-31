@@ -1,4 +1,4 @@
-package duke;
+package duke.bot;
 
 import java.util.Scanner;
 
@@ -56,14 +56,4 @@ public class Duke {
     public String getResponse(String input) {
         return "Duke heard: " + input;
     }
-
-//    /**
-//     * Lifecycle of the program
-//     *
-//     * @param args Command line arguments
-//     */
-//    public static void main(String[] args) {
-//        Duke bot = new Duke();
-//        bot.run();
-//    }
 }

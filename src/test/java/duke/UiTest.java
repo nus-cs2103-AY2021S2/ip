@@ -1,5 +1,6 @@
 package duke;
 
+import duke.bot.Ui;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;

@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskManager;
-import duke.Ui;
+import duke.bot.TaskManager;
+import duke.bot.Ui;
 import duke.exception.DukeCommandException;
 
 /** An executable comment issued by the user */
