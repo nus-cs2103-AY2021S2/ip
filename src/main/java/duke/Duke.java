@@ -6,7 +6,6 @@ import duke.exceptions.ChatBotException;
 public class Duke {
     private Storage storage;
     private TaskHandler th;
-    private Ui ui;
 
     /**
      *  ChatBot constructor.
@@ -14,42 +13,33 @@ public class Duke {
      *  @param filePath Relative filepath to persistent storage.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         th = new TaskHandler();
         try {
             th.loadTaskList(storage.loadTaskList());
         } catch (ChatBotException e) {
             th.clearTaskList();;
-            ui.errorLine(e.getMessage());
         }
     }
 
-    /**
-     * Runs the ChatBot Program.
-     */
-    private void run() {
-        ui.greeting();
-
+    public String getResponse(String input) {
+        String output;
         boolean isExit = false;
-        while (!isExit) {
+        try {
+            ChatBotCommand c = Parser.parse(input);
 
-            try {
-                String command = ui.nextCommand();
-                ui.linkBreaker();
-                ChatBotCommand c = Parser.parse(command);
-                c.runTask(ui, th, storage);
-                isExit = c.isTerminated();
-
-            } catch (ChatBotException e) {
-                ui.errorLine(e.getMessage());
-            } finally {
-                ui.linkBreaker();
+            if (c.isTerminated()) {
+                return "";
             }
-
+            output = c.runTask(th, storage);
+        } catch (ChatBotException e) {
+            output = "Error: " + e.getMessage();
         }
+        return output;
     }
-    public static void main(String[] args) {
-        new Duke("./data/taskData.txt").run();
+
+    public static String getWelcomeMessage() {
+        return "Hello! I'm Duke\n"
+                + "What can I do for you?";
     }
 }
