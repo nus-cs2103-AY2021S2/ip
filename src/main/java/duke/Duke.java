@@ -48,6 +48,10 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Main method of Duke Project
+     */
     public static void main(String[] args) {
         String filePath = System.getProperty("user.dir") + "/data/Duke.txt";
         new Duke(filePath).run();
