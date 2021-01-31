@@ -18,7 +18,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TaskListFileUtils {
+public class Storage {
     public static final String FILE_DIR = "data";
     public static final String FILE_NAME = "duke.txt";
     static int badLines = 0;//Last call bad lines

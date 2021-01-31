@@ -22,7 +22,7 @@ public class Duke {
         List<Task> store = null;
         try {
             System.out.println("Loading From File...");
-            store = TaskListFileUtils.LoadTaskList();
+            store = Storage.LoadTaskList();
             System.out.println("Loaded");
         } catch (IOException e) {
             System.out.println("Failed to Load file. Aborting.");
@@ -91,7 +91,7 @@ public class Duke {
                 int newHash = store.hashCode();
                 if(newHash != hash){
                     try {
-                        TaskListFileUtils.saveTaskList(store);
+                        Storage.saveTaskList(store);
                     } catch (IOException e) {
                         System.out.println("Unable to save list. Dumping ...");
                         printList(store);
