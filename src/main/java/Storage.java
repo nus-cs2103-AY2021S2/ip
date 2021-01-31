@@ -30,7 +30,7 @@ public class Storage {
         File file = new File(filePath);
         if (!file.exists()) {
             File directory = new File("data");
-            file.mkdirs();
+            directory.mkdirs();
             file.createNewFile();
             System.out.println("     Welcome! New user :)");
             System.out.println("     What can I do for you?");
