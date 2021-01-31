@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
     
-    protected final String dateTime;
+    protected final LocalDate dateTime;
 
     /**
      * Factory method to create a new Event.
@@ -13,15 +17,22 @@ public class Event extends Task {
             throw new ChecklstException("Inproper Event format used! Please use { name } /at { event }");
         }
 
-        return new Event(splitInput[0], splitInput[1]);
+        LocalDate dateTime;
+        try {
+            dateTime = LocalDate.parse(splitInput[1]);
+        } catch (DateTimeParseException e) {
+            throw new ChecklstException("Incorrect DateTime format! Please use YYYY-MM-DD");
+        }
+
+        return new Event(splitInput[0], dateTime);
     }
 
-    protected Event(String name, String dateTime) {
+    protected Event(String name, LocalDate dateTime) {
         super(name);
         this.dateTime = dateTime;
     }
 
-    protected Event(String name, boolean completed, String dateTime) {
+    protected Event(String name, boolean completed, LocalDate dateTime) {
         super(name, completed);
         this.dateTime = dateTime;
     }
@@ -33,7 +44,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateTime + ")";
+        return "[E]" + super.toString() + " (at: " 
+            + this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
 }
