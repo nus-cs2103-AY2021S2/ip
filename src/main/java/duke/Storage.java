@@ -1,16 +1,17 @@
 package duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.Tasks.Deadline;
 import duke.Tasks.Event;
 import duke.Tasks.Task;
 import duke.Tasks.Todo;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Storage {
 
@@ -21,8 +22,13 @@ public class Storage {
     private File dataFile;
 
     /** Tasklist instance to store and handle tasks */
-    public TaskList tasks;
+    private TaskList tasks;
 
+    /** Constructs a new Storage objective
+     *
+     * @param path of the file
+     * @param tasks in tasklist
+     */
     public Storage(String path, TaskList tasks) {
         dataFile = new File(path);
         try {
@@ -41,14 +47,14 @@ public class Storage {
     /**
      * Reads a file and stores tasks in TaskList
      *
-     * @param TaskList to store tasks
+     * @param taskList to store tasks
      * */
     public void fileToList(TaskList taskList) {
         try {
             Scanner reader = new Scanner(dataFile);
             while (reader.hasNextLine()) {
                 String data = reader.nextLine();
-                String arr[] = data.split(" : ", 4);
+                String[] arr = data.split(" : ", 4);
                 String cat = arr[0];
                 String completed = arr[1];
                 String des = arr[2];
@@ -84,13 +90,13 @@ public class Storage {
     /**
      * Goes through TaskList and parses task into string
      *
-     * @param TaskList
+     * @param tasks tasklist
      * @return String of tasks
      * */
     public String taskListToString(TaskList tasks) {
         String res = "";
         ArrayList<Task> taskList = tasks.taskList;
-        for(Task task : taskList) {
+        for (Task task : taskList) {
             char cat = task.getCat();
             String name = task.getName();
             int checked;
@@ -116,7 +122,7 @@ public class Storage {
 
     /** Writes the tasks in TaskList to file
      *
-     * @param TaskList
+     * @param taskList tasks to be written
      * @throws IOException if there is an IO exception
      * */
     public void write(TaskList taskList) {
@@ -124,7 +130,7 @@ public class Storage {
             writer = new FileWriter(dataFile);
             writer.write(taskListToString(taskList));
             writer.close();
-        } catch  (IOException e) {
+        } catch (IOException e) {
             System.out.println((e.getMessage()));
         }
     }

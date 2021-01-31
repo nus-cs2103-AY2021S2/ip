@@ -2,7 +2,6 @@ package duke;
 
 import duke.Exceptions.MissingInputException;
 import duke.Exceptions.MissingTaskException;
-import duke.Exceptions.UnclearInputException;
 
 public class Parser {
 
@@ -20,11 +19,11 @@ public class Parser {
     public void parse(String cmd) throws MissingInputException, MissingTaskException {
         arr = cmd.split(" ", 2);
         String action = arr[0];
-        if(action.equals("deadline") || action.equals("event") || action.equals("todo")) {
+        if (action.equals("deadline") || action.equals("event") || action.equals("todo")) {
             if (arr.length <= 1) {
                 throw new MissingInputException(action);
             }
-        } else if(action.equals("done") || action.equals("delete")) {
+        } else if (action.equals("done") || action.equals("delete")) {
             if (arr.length <= 1) {
                 throw new MissingTaskException();
             }
@@ -34,7 +33,7 @@ public class Parser {
     /**
      * Get command from user input
      *
-     * @param user input
+     * @param cmd user input
      * @return a string
      * */
     public String[] getDesc(String cmd) {

@@ -2,6 +2,11 @@ package duke.Tasks;
 
 public class Todo extends Task {
 
+    /** Constructs new Todo task
+     *
+     * @param name todo task name
+     */
+
     public Todo(String name) {
         super(name);
         this.cat = 'T';
@@ -9,6 +14,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[" + this.cat + "] " + super.toString() ;
+        return "[" + this.cat + "] " + super.toString();
     }
 }

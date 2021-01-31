@@ -10,6 +10,10 @@ public class Task {
     /** Label the category of the task */
     protected char cat;
 
+    /** Constructs a new task
+     *
+     * @param name of task
+     */
     public Task(String name) {
         this.name = name;
         this.isCompleted = false;

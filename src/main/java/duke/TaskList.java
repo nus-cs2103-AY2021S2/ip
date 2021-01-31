@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.Tasks.Task;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class TaskList {
     /** Array list of tasks */
-    public ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -16,16 +16,16 @@ public class TaskList {
     /** Retrieves task from TaskList and marks
      * it as completed
      *
-     * @param Position of task in TaskList
+     * @param index position of task in TaskList
      * */
-    public void markComplete(int n) {
-        Task temp = this.taskList.get(n - 1);
+    public void markComplete(int index) {
+        Task temp = this.taskList.get(index - 1);
         temp.checkTask();
     }
 
     /** Removes task from TaskList
      *
-     * @param Position of task in TaskList
+     * @param task index of task in TaskList
      * */
     public void deleteTask(int task) {
         this.taskList.remove(task - 1);
@@ -33,7 +33,7 @@ public class TaskList {
 
     /** Adds new task to TaskList
      *
-     * @param new Task
+     * @param task to be added
      * */
     public void storeTask(Task task) {
         this.taskList.add(task);
@@ -41,24 +41,28 @@ public class TaskList {
 
     /** Retrieves and returns task from TaskList
      *
-     * @param Position of task in TaskList
+     * @param index of task in TaskList
      * @return Chosen Task*/
-    public Task getTask(int n) {
-        return this.taskList.get(n - 1);
+    public Task getTask(int index) {
+        return this.taskList.get(index - 1);
     }
 
+    /** Find tasks that macthes the given string
+     *
+     * @param s string to search for
+     */
     public void findTasks(String s) {
         ArrayList<Task> matched = new ArrayList<>();
-        for(Task t : taskList) {
+        for (Task t : taskList) {
             String name = t.getName();
-            if(name.contains(s)) {
+            if (name.contains(s)) {
                 matched.add(t);
             }
         }
-        if(matched.size() >= 1) {
+        if (matched.size() >= 1) {
             String msg = "Duchess: Here are the matching tasks in your list:";
-            for(int i = 0; i < matched.size(); i++) {
-                msg+= "\n" +  (i + 1) + ". " + matched.get(i);
+            for (int i = 0; i < matched.size(); i++) {
+                msg += "\n" + (i + 1) + ". " + matched.get(i);
             }
             System.out.println(msg);
         } else {
