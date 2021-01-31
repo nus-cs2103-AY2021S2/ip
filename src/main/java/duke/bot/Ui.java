@@ -6,11 +6,8 @@ import duke.task.Task;
 
 /** An object that handles the printing of chat bot's messages*/
 public class Ui {
-    /** Borderlines to contain a display message*/
-    private static final String BORDER = "___________________________________________________________";
-
     /**
-     * Displays a message
+     * Constructs a message
      *
      * @param msg Message to be displayed
      */
@@ -19,7 +16,7 @@ public class Ui {
     }
 
     /**
-     * Displays a default welcome message
+     * Constructs a default welcome message
      *
      * @param botName Name of the chat bot to greet with
      */
@@ -27,13 +24,13 @@ public class Ui {
         return constructMsg(String.format("Meow, I'm %s\nWhat can I do for you today?", botName));
     }
 
-    /** Displays a default exit message */
+    /** Constructs a default exit message */
     public String constructGoodbyeMsg() {
         return constructMsg("Meow. Hope to see you again soon!");
     }
 
     /**
-     * Displays a message to indicate the addition of a new task
+     * Constructs a message to indicate the addition of a new task
      *
      * @param task Task that was added
      * @param tasksSize Number of total tasks after adding that new task
@@ -46,31 +43,32 @@ public class Ui {
     }
 
     /**
-     * Displays a message to indicate the completion of a task
+     * Constructs a message to indicate the completion of a task
      *
      * @param index Index of the completed task in the list
      * @param task Task that was completed
      */
     public String constructDoneMsg(int index, Task task) {
-        String msg = "Good job meow, I've marked this task as done:\n" + String.format("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
-                task.getDesc());
+        String msg = "Good job meow, I've marked this task as done:\n" + String.format("%d.[%s][%s] %s\n", index + 1,
+                task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
         return constructMsg(msg);
     }
 
     /**
-     * Displays a message to indicate the deletion of a task
+     * Constructs a message to indicate the deletion of a task
      *
      * @param task Task that was deleted
      * @param tasksSize Number of total tasks left after deleting that task
      */
     public String constructDeleteMsg(Task task, int tasksSize) {
         String msg = "Noted meow. I've removed this task:\n" + String.format("  [%s][%s] %s\n", task.getTypeSymbol(),
-                task.getStatusSymbol(), task.getDesc()) + String.format("Now you have %d tasks in the list.\n", tasksSize);
+                task.getStatusSymbol(), task.getDesc()) + String.format("Now you have %d tasks in the list.\n",
+                tasksSize);
         return constructMsg(msg);
     }
 
     /**
-     * Display the tasks from the search result
+     * Constructs a message containing all tasks found from the search
      *
      * @param tasks A list of tasks as search results
      */
@@ -85,7 +83,7 @@ public class Ui {
     }
 
     /**
-     * Displays all tasks currently in the list
+     * Constructs a message containing all tasks found in the list
      *
      * @param tasks List of tasks
      */
@@ -100,7 +98,7 @@ public class Ui {
     }
 
     /**
-     * Displays an error message
+     * Constructs an error message
      *
      * @param msg Error message
      */

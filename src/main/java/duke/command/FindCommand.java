@@ -37,7 +37,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the Find command to search tasks that matches the keyword and occurs on the target date
+     * Executes the Find command to search tasks that matches the keyword and occurs on the target date, then returns
+     * a response message
      *
      * @throws DukeCommandException if tasks cannot be retrieved
      */

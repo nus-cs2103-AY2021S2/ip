@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the Deadline command to create a Deadline task in the list
+     * Executes the Deadline command to create a Deadline task in the list and returns a response message
      *
      * @throws DukeCommandException if there is an issue adding the Deadline into the task list or saving the tasks into
      * hard disk

@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the delete command to delete a task from the list
+     * Executes the delete command to delete a task from the list and returns a response message
      *
      * @throws DukeCommandException if there is no tasks to delete, index is out of range, an issue with deleting task
      * from the task list or an issue with saving the deletion to the hard disk

@@ -23,7 +23,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command
+     * Executes the command and returns a response message
      *
      * @throws DukeCommandException if any issue happened during the execution of the command
      */

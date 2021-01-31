@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the Done command to complete the task that existed in the list
+     * Executes the Done command to complete the task that existed in the list and returns a response message
      *
      * @throws DukeCommandException if there is no tasks to be completed, invalid task index, an issue with saving the
      * task's completion or an issue with updating the task's completion status

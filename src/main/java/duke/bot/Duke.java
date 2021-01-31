@@ -1,7 +1,5 @@
 package duke.bot;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeLoadException;
@@ -32,27 +30,11 @@ public class Duke {
         }
     }
 
-    /** Lifecycle of Duke */
-    public void run() {
-        ui.constructWelcomeMsg(CHATBOT_NAME);
-
-        Scanner scanner = new Scanner(System.in);
-        String line = "";
-
-        while (isActive) {
-            line = scanner.nextLine();
-            try {
-                Command command = Parser.parse(line);
-                command.execute();
-                isActive = !command.willExit();
-            } catch (DukeException e) {
-                ui.constructErrorMsg(e.getMessage());
-            }
-        }
-
-        ui.constructGoodbyeMsg();
-    }
-
+    /**
+     * Return a response message when given an input command to execute on
+     * @param input A string to be processed as a command
+     * @return A string containing any output message from the bot (if any)
+     */
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);

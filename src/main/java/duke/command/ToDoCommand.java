@@ -20,7 +20,7 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Executes the ToDo command to create a ToDo in the list
+     * Executes the ToDo command to create a ToDo in the list and returns a response message
      *
      * @throws DukeCommandException if there is an issue with adding the ToDo into the list or saving the ToDo into the
      * hard disk

@@ -30,7 +30,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Executes the Event command to create an Event task in the list
+     * Executes the Event command to create an Event task in the list and returns a response message
      *
      * @throws DukeCommandException if there is an issue with adding the Event into the list or saving the Event into
      * the hard disk
