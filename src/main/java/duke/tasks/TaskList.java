@@ -19,7 +19,13 @@ public class TaskList {
         tasks.remove(taskIndex - 1);
     }
 
-    public void updateTask(int taskIndex, Task task) {
+    public void markDone(int taskIndex) {
+        Task task = tasks.get(taskIndex - 1);
+        Task updatedTask = task.markDone();
+        updateTask(taskIndex, updatedTask);
+    }
+
+    private void updateTask(int taskIndex, Task task) {
         tasks.set(taskIndex - 1, task);
     }
 

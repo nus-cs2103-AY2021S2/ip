@@ -22,8 +22,8 @@ public class Parser {
         default:
             throw new IllegalStateException("Unexpected value: " + splitInput[0]);
         }
-        return splitInput[1].equals("0")
-                ? task
-                : task.markDone();
+        return splitInput[1].equals("X")
+                ? task.markDone()
+                : task;
     }
 }

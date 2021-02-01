@@ -1,12 +1,14 @@
 package duke.tasks;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
 
-    public Task(String description) {
+    public Task(String description, String type) {
         this.description = description;
         this.isDone = false;
+        this.type = type;
     }
 
     public Task markDone() {
@@ -14,8 +16,20 @@ public class Task {
         return this;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); //return tick or X symbols
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
