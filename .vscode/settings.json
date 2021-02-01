@@ -1,5 +1,10 @@
 {
 	"java.format.settings.url": "checkstyle.xml",
 	"java.checkstyle.configuration": "${workspaceFolder}\\cs2030_checks.xml",
-	"cmake.configureOnOpen": false
+	"cmake.configureOnOpen": false,
+	"java.configuration.updateBuildConfiguration": "interactive"
+	// "java.project.referencedLibraries": [
+	// 	"lib/**/*.jar",
+	// 	"c:\\Users\\junxi\\Downloads\\junit-platform-console-standalone-1.7.0-M1.jar"
+	// ]
 }

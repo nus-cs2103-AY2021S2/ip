@@ -8,6 +8,6 @@ public class ParserTest {
 
     @Test
     void test() {
-        assertTrue(2, 2);
+        assertEquals(2, 2);
     }
 }

@@ -19,9 +19,4 @@ public class Deadline extends Task {
         }
     }
 
-    @Test
-    void tes() {
-        assertEquals(2, 2);
-    }
-
 }
