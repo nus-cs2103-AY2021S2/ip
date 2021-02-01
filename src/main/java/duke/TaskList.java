@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,7 +36,7 @@ class TaskList {
     public void listTask() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
-            main.java.Task currTask = taskList.get(i);
+            Task currTask = taskList.get(i);
             System.out.println(i + 1 + "." + currTask);
         }
     }
