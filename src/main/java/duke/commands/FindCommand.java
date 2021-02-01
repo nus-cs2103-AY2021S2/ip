@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskHandler;
 import duke.exceptions.ChatBotException;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 public class FindCommand extends ChatBotCommand {
     private String keyWord;
