@@ -6,7 +6,7 @@ import duke.Ui;
 
 public class FindTaskCommand extends Command {
 
-    String keyword;
+    private String keyword;
 
     public FindTaskCommand(String keyword) {
         this.keyword = keyword;

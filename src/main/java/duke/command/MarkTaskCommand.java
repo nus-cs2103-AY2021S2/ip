@@ -6,7 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 
 public class MarkTaskCommand extends Command {
-    int indexToMarkDone;
+
+    private int indexToMarkDone;
+
     public MarkTaskCommand(int indexToMarkDone) {
         this.indexToMarkDone = indexToMarkDone;
     }

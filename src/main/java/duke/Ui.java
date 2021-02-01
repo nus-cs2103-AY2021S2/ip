@@ -7,12 +7,8 @@ import java.util.Scanner;
  * and print out things to display.
  */
 public class Ui {
-    /**
-     * Handles the User interface interactions with the user. Trims the command,
-     * prints out something to display.
-     */
 
-    /** logo for welcome message. */
+    /*logo for welcome message.*/
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -21,7 +17,7 @@ public class Ui {
     private static final String DIVIDER =
             "\n_______________________________________________________\n";
 
-    private Scanner scForCommandLine= new Scanner(System.in);
+    private Scanner scForCommandLine = new Scanner(System.in);
 
     /**
      * displays the welcome message when first starting duke.
@@ -34,9 +30,10 @@ public class Ui {
 
     /**
      * gets a line of user input from Command line, trimmed.
+     *
      * @return String containing a line input from user.
      */
-    public String getUserCommand(){
+    public String getUserCommand() {
         String input;
         do {
             input = scForCommandLine.nextLine().trim();
@@ -46,6 +43,7 @@ public class Ui {
 
     /**
      * Ignores input if string does not contain any non-space characters. ( Could have multiple spaces,tabs etc)
+     *
      * @return true a boolean value to indicate if the string is to be ignored.
      */
     public boolean shouldIgnore(String input) {
@@ -57,12 +55,11 @@ public class Ui {
     }
 
 
-
     /**
      * Prints all the tasks stored on the TaskList.
      */
 
-    public void showUserAllTasks(TaskList listOfTasks){
+    public void showUserAllTasks(TaskList listOfTasks) {
         int counter = 1;
         for (Task currentTask : listOfTasks) {
             System.out.println(counter + "." + currentTask);

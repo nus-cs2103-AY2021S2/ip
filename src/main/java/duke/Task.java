@@ -16,7 +16,7 @@ public abstract class Task {
      * @param letterCode the letter Code to indicate the type of Task ( for text-ui displaying )
      */
 
-    public Task(String description,String letterCode) {
+    public Task(String description, String letterCode) {
         this.description = description;
         this.letterCode = letterCode;
         this.isDone = false;
@@ -27,14 +27,16 @@ public abstract class Task {
      * tick means the task is done. X means the task is not yet done .
      * @return tick or X symbol
      */
+
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     /**
      * set the state of the task to be done.
      */
-    public void markAsDone(){
+
+    public void markAsDone() {
         isDone = true;
     }
 
@@ -43,7 +45,7 @@ public abstract class Task {
      * @return letter code of the type of Task
      */
 
-    public String getLetterCode(){
+    public String getLetterCode() {
         return this.letterCode;
     }
 
@@ -55,7 +57,7 @@ public abstract class Task {
 
     public String getSavedStringFormat() {
         String s = (isDone) ? "1" : "0";
-        return letterCode + " | " +  s + " | " + description;
+        return letterCode + " | " + s + " | " + description;
     }
 
     /**

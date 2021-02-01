@@ -6,11 +6,18 @@ import java.time.format.DateTimeFormatter;
 /**
  * A Task with a deadline to complete.
  */
-public class Deadline extends Task {
+public class Deadline extends duke.Task {
     private String by;
     private LocalDate dateOfDeadline;
 
-    public Deadline(String description,String by) {
+    /**
+     * Constructor.
+     *
+     * @param description description of the task
+     * @param by the string containing a date of the deadline.
+     */
+
+    public Deadline(String description, String by) {
         super(description, "D");
         String dateString = Parser.extractDate(by);
         if (!dateString.equals("")) {
@@ -22,14 +29,25 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Gets the string representation of the task, with all dates converted to format MMM d yyyy.
+     *
+     * @return string representation of the task.
+     */
+
     @Override
     public String toString() {
         String dateString = Parser.extractDate(by);
-        String convertedDateString = dateOfDeadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));  // convert the format
-        String modified_by = by.replaceAll(dateString, convertedDateString);
-        return super.toString() + " (by: " + modified_by + ")";
+        String convertedDateString = dateOfDeadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String modifiedBy = by.replaceAll(dateString, convertedDateString);
+        return super.toString() + " (by: " + modifiedBy + ")";
     }
 
+    /**
+     * Gets the string representation used to save the task in the hard disk.
+     *
+     * @return string representation to be saved in the hard disk.
+     */
 
     @Override
     public String getSavedStringFormat() {

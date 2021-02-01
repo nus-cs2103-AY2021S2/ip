@@ -1,35 +1,43 @@
 package duke;
 
-import duke.command.*;
-
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindTaskCommand;
+import duke.command.ListCommand;
+import duke.command.MarkTaskCommand;
+
+
 
 /**
  * A Parser that provides certain key parsing methods on a input String to infer the relevant action to take,
  * which will be represented and returned as Command objects. Also has various static methods for searching strings
  * for date in broad format i.e ( yyyy-MM-dd).
- *
  */
+
 public class Parser {
 
-    /** Stores the string to Parse */
+    /* Pattern to get the first word of the String */
+    private static final Pattern GET_KEYWORD = Pattern.compile("(\\S+).*");
+
+    /*Keywords for each command type*/
+    private static final String ADD_DEADLINE_COMMAND = "deadline";
+    private static final String ADD_EVENT_COMMAND = "event";
+    private static final String ADD_TODO_COMMAND = "todo";
+    private static final String DELETE_TASK_COMMAND = "delete";
+    private static final String LIST_COMMAND = "list";
+    private static final String MARK_DONE_COMMAND = "done";
+    private static final String EXIT_COMMAND = "bye";
+    private static final String FIND_COMMAND = "find";
+
+    /* Stores the string to Parse*/
     private String inputCommand;
-
-    /** Keywords for each command type*/
-    private final static String ADD_DEADLINE_COMMAND  = "deadline";
-    private final static String ADD_EVENT_COMMAND  = "event";
-    private final static String ADD_TODO_COMMAND = "todo";
-    private final static String DELETE_TASK_COMMAND = "delete";
-    private final static String LIST_COMMAND = "list";
-    private final static String MARK_DONE_COMMAND = "done";
-    private final static String EXIT_COMMAND = "bye";
-    private final static String FIND_COMMAND = "find";
-
-    /** Pattern to get the first word of the String */
-    private static Pattern GET_KEYWORD = Pattern.compile("(\\S+).*");
 
     /**
      * Constructor for a Parser Object.
@@ -41,21 +49,83 @@ public class Parser {
     }
 
     /**
+     * Static method for parsing a special string representation of a Task which is used
+     * to store the Task in hard disk. Returns the corresponding Task.
+     *
+     * @param input String representation of Task as it is stored in the hard disk.
+     * @return the corresponding Task.
+     */
+    public static Task parseTaskFromStoredFormat(String input) {
+        String[] fields = input.split(" \\| ");
+        String commandCode = fields[0];
+        Task parsedTask;
+        switch (commandCode) {
+        case ("T"):
+            parsedTask = new ToDo(fields[2]);
+            break;
+        case ("D"):
+            parsedTask = new Deadline(fields[2], fields[3]);
+            break;
+        case ("E"):
+            parsedTask = new Event(fields[2], fields[3]);
+            break;
+        //default case throw a ParseError to be defined later...
+        default:
+            parsedTask = null;
+        }
+        boolean isDone = (Integer.parseInt(fields[1]) == 1);
+        if (isDone && (parsedTask != null)) {
+            parsedTask.markAsDone();
+        }
+        return parsedTask;
+    }
+
+    /**
+     * Extracts date within the string in the format d - d - d, d stand for arbitrary number of digits.
+     *
+     * @param input string to be parsed.
+     * @return The subtring containing the date only.
+     */
+
+    public static String extractDate(String input) {
+        String regex = "\\d+[-]\\d+[-]\\d+";
+        Pattern datePattern = Pattern.compile(regex);
+        Matcher m = datePattern.matcher(input);
+        if (m.find()) {
+            return m.group(0);
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * parses the date and returns the string containing the date if it is of broad format ( yyyy-MM-dd)
+     *
+     * @param input string to be parsed.
+     * @return string containing the date.
+     */
+
+    public static LocalDate parseDate(String input) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+        return LocalDate.parse(input, dateTimeFormatter);
+    }
+
+    /**
      * Parses the variable string to determine what type of Command Object should be created.
      *
      * @return A Command Object that represents the relevant action to execute,
      * @throws DukeException when the input String does not match any of the known command formats.
      */
 
-    public Command parseCommand() throws DukeException{
+    public Command parseCommand() throws DukeException {
         String command = getKeyWord(inputCommand).toLowerCase();
         Task t;
-        switch(command) {
+        switch (command) {
         case ADD_DEADLINE_COMMAND:
             return parseAddDeadline(inputCommand);
         case ADD_EVENT_COMMAND:
             return parseAddEvent(inputCommand);
-        case ADD_TODO_COMMAND :
+        case ADD_TODO_COMMAND:
             return parseAddToDo(inputCommand);
         case DELETE_TASK_COMMAND:
             return parseDelete(inputCommand);
@@ -80,7 +150,7 @@ public class Parser {
      * @throws DukeException the string is not of the correct Exit Command format.
      */
     public Command parseExitCommand(String inputCommand) throws DukeException {
-        String regex = EXIT_COMMAND +"\\s*";
+        String regex = EXIT_COMMAND + "\\s*";
         if (!inputCommand.toLowerCase().matches(regex)) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -96,22 +166,20 @@ public class Parser {
      */
 
     public Command parseListCommand(String inputCommand) throws DukeException {
-        String regex = LIST_COMMAND +"\\s*";
+        String regex = LIST_COMMAND + "\\s*";
         if (!inputCommand.toLowerCase().matches(regex)) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         return new ListCommand();
     }
 
-
-
     /**
      * Parses the input to see if it is of the MsrkTaskCommand format,
      * if so returns the Command to mark task as done.
      *
      * @param input string to be Parsed.
-     * @return  Mark Task Command.
-     * @throws DukeException  When the Command cannot be parsed.
+     * @return Mark Task Command.
+     * @throws DukeException When the Command cannot be parsed.
      */
 
     public Command parseMarkDone(String input) throws DukeException {
@@ -131,6 +199,9 @@ public class Parser {
         return new MarkTaskCommand(indexToMarkDone);
     }
 
+
+    // Methods for extracting dates and formatting dates.
+
     /**
      * Parses the input to see if it is of the DeleteCommand format,
      * if so returns the Command to mark task as done.
@@ -140,7 +211,7 @@ public class Parser {
      * @throws DukeException when the delete is of the incorrect format.
      */
 
-    public Command parseDelete(String input) throws DukeException{
+    public Command parseDelete(String input) throws DukeException {
         //for the case when "delete" is followed by variable number of space.
         if (input.toLowerCase().matches("^delete\\s*$")) {
             throw new DukeException("The input cannot be empty.");
@@ -148,7 +219,7 @@ public class Parser {
         String regex = "^delete\\s+([0-9]+)$"; //delete followed by at least one space and one number.
         Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = patternToMatch.matcher(input);
-        if (!m.matches()){
+        if (!m.matches()) {
             throw new DukeException("The input for delete must be integer.");
         }
         int indexToDelete = Integer.parseInt(m.group(1));
@@ -164,14 +235,14 @@ public class Parser {
      * @throws DukeException command Todo is  of the incorrect format.
      */
 
-    public Command parseAddToDo (String input) throws DukeException{
+    public Command parseAddToDo(String input) throws DukeException {
         if (input.toLowerCase().matches("^todo\\s*$")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         String regex = "^todo\\s+(.+)$";
         Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = patternToMatch.matcher(input);
-        if (!m.matches()){
+        if (!m.matches()) {
             throw new DukeException("The todo is of incorrect format.");
         }
         String description = m.group(1);
@@ -195,12 +266,12 @@ public class Parser {
         String regex = "^deadline\\s+(.+)\\s+/by\\s+(.+)$";
         Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = patternToMatch.matcher(input);
-        if (!m.matches()){
+        if (!m.matches()) {
             throw new DukeException("The deadline is of incorrect format.");
         }
         String description = m.group(1);
         String by = m.group(2);
-        Task t = new Deadline(description,by);
+        Task t = new Deadline(description, by);
         return new AddCommand(t);
     }
 
@@ -212,7 +283,7 @@ public class Parser {
      * @throws DukeException when the event command is of incorrect format.
      */
 
-    public Command parseAddEvent(String input) throws DukeException{
+    public Command parseAddEvent(String input) throws DukeException {
         if (input.toLowerCase().matches("^event\\s*$")) {
             throw new DukeException("The description of a event cannot be empty.");
         }
@@ -224,14 +295,14 @@ public class Parser {
         }
         String description = m.group(1);
         String at = m.group(2);
-        Task t = new Event(description,at);
+        Task t = new Event(description, at);
         return new AddCommand(t);
     }
 
     /**
      * Returns the first word of a string.
      *
-     * @param inputCommand
+     * @param inputCommand The string to extract the first word from.
      * @return the first word of the string.
      */
 
@@ -241,81 +312,17 @@ public class Parser {
         return m.group(1);
     }
 
-
-
-
     /**
-     * Static method for parsing a special string representation of a Task which is used
-     * to store the Task in hard disk. Returns the corresponding Task.
+     * Parses the input to see if it fits the Find Command format,
+     * if so returns the Command class to find the task.
      *
-     * @param input String representation of Task as it is stored in the hard disk.
-     * @return the corresponding Task.
+     * @param input input to parse.
+     * @return A FindCommand
+     * @throws DukeException when the find Command is of incorrect format.
      */
-    public static Task parseTaskFromStoredFormat(String input){
-        String[] fields = input.split(" \\| ");
-        String commandCode = fields[0];
-        Task parsedTask;
-        switch(commandCode) {
-        case("T"):
-            parsedTask = new ToDo(fields[2]);
-            break;
-        case("D"):
-            parsedTask = new Deadline(fields[2],fields[3]);
-            break;
-        case("E"):
-            parsedTask = new Event(fields[2],fields[3]);
-            break;
-            //default case throw a ParseError to be defined later...
-        default:
-            parsedTask = null;
-        }
-        boolean isDone = (Integer.parseInt(fields[1]) == 1);
-        if (isDone && (parsedTask != null)) {
-            parsedTask.markAsDone();
-        }
-        return parsedTask;
-    }
-
-
-    // Methods for extracting dates and formatting dates.
-
-
-    /**
-     * Extracts date within the string in the format d - d - d, d stand for arbitrary number of digits.
-     * @param input string to be parsed.
-     * @return The subtring containing the date only.
-     */
-
-    public static String extractDate(String input){
-        String regex = "\\d+[-]\\d+[-]\\d+";
-        Pattern datePattern  = Pattern.compile(regex);
-        Matcher m = datePattern.matcher(input);
-        if(m.find()){
-            return m.group(0);
-        } else {
-            return "";
-        }
-    }
-
-    /**
-     * parses the date and returns the string containing the date if it is of broad format ( yyyy-MM-dd)
-     * @param input string to be parsed.
-     * @return string containing the date.
-     */
-
-    public static LocalDate parseDate (String input) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-M-d");
-        return LocalDate.parse(input,dateTimeFormatter);
-    }
-
-    public static class ParseException extends Exception {
-        ParseException(String message){
-            super(message);
-        }
-    }
 
     public Command parseFindCommand(String input) throws DukeException {
-        if (input.toLowerCase().matches("^" + FIND_COMMAND +"\\s*$")) {
+        if (input.toLowerCase().matches("^" + FIND_COMMAND + "\\s*$")) {
             throw new DukeException("The description of a find Command cannot be empty.");
         }
         String regex = "(\\S+)\\s+(.+)";
@@ -323,5 +330,11 @@ public class Parser {
         Matcher m = pattern.matcher(input);
         m.matches();
         return new FindTaskCommand(m.group(2).trim());
+    }
+
+    public static class ParseException extends Exception {
+        ParseException(String message) {
+            super(message);
+        }
     }
 }

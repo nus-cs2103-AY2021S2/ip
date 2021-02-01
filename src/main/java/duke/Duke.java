@@ -1,13 +1,9 @@
 package duke;
 
-import duke.command.Command;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.io.File;
-import java.util.List;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import java.io.IOException;
+
+import duke.command.Command;
 
 /**
  * main class containing the Duke Chatbot main logic.
@@ -15,18 +11,29 @@ import java.util.regex.Matcher;
 
 public class Duke {
     private static Storage storage;
+    private TaskList tasks;
     private Ui ui;
-    TaskList tasks;
 
     Duke() {
         this.storage = initializeStorage();
         this.ui = new Ui();
         try {
             tasks = new TaskList(storage.loadStorage());
-        } catch ( DukeException err) {
+        } catch (DukeException err) {
             System.out.println(err.getMessage());
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * Creates a Duke Chatbot and runs it.
+     *
+     * @param args
+     */
+
+    public static void main(String[] args) {
+        Duke chatbot = new Duke();
+        chatbot.run();
     }
 
     private Storage initializeStorage() {
@@ -45,6 +52,9 @@ public class Duke {
         return new Storage("data/duke.txt");
     }
 
+    /**
+     * Executes the main logic of Duke Chatbot.
+     */
 
     public void run() {
         ui.displayWelcomeMessage();
@@ -60,10 +70,5 @@ public class Duke {
                 System.out.println("OOPS!!! " + e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Duke chatbot  = new Duke();
-        chatbot.run();
     }
 }
