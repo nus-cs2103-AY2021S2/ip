@@ -1,4 +1,4 @@
-package dbot.command.parser;
+package dbot.parser;
 
 import dbot.command.*;
 import dbot.exception.DukeException;

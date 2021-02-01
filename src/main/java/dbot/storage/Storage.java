@@ -1,6 +1,6 @@
 package dbot.storage;
 
-import dbot.command.parser.Parser;
+import dbot.parser.Parser;
 import dbot.command.Command;
 import dbot.exception.DukeException;
 import dbot.tasklist.TaskList;
