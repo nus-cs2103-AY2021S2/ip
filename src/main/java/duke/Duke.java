@@ -26,6 +26,7 @@ public class Duke {
         ui.runUi(task, fs);
         ui.close();
     }
+
     public static void main(String[] args) {
         new Duke("data", "duke.txt").run();
     }
