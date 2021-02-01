@@ -59,6 +59,20 @@ public class Parser {
                 }
                 int taskToDelete = Integer.parseInt(parts[1]);
                 return new Parser("delete", null, null, taskToDelete);
+            } else if (parts[0].equals("find")) {
+                if (parts.length == 1) {
+                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
+                            "description of find cannot be empty.");
+                }
+                String toFind = "";
+                for (int i = 1; i < parts.length; ++i) {
+                    if (i != parts.length - 1) {
+                        toFind += parts[i] + " ";
+                    } else {
+                        toFind += parts[i];
+                    }
+                }
+                return new Parser("find", toFind, null, -1);
             } else if (parts[0].equals("todo")) {
                 if (parts.length == 1) {
                     throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
@@ -87,11 +101,9 @@ public class Parser {
                         "but I don't know what that means :-(");
             }
         } catch (InsufficientArgumentsException e) {
-            System.out.println(e.getMessage());
-            return new Parser("", null, null, -1);
+            return new Parser("", e.getMessage(), null, -1);
         } catch (WrongArgumentException e) {
-            System.out.println(e.getMessage());
-            return new Parser("", null, null, -1);
+            return new Parser("", e.getMessage(), null, -1);
         }
     }
 
