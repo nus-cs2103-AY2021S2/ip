@@ -1,5 +1,8 @@
 import duke.commands.DukeCommand;
-import duke.exceptions.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeExceptionFileNotAccessible;
+import duke.exceptions.DukeExceptionFileNotWritable;
+import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -8,7 +11,7 @@ public class Duke {
 
     private FileLoader loader;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui = new Ui();
     private boolean isLocalTaskList; // in event file cannot be written to
 
     /**
@@ -21,7 +24,6 @@ public class Duke {
      *                 Does not need to be initialized beforehand.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         ui.showWelcomeScreen();
         isLocalTaskList = false;
         try {
