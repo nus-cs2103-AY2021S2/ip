@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 
+
 /**
  * User interface class for Duke's interaction with users, send messages etc.
  */
@@ -37,7 +38,7 @@ public class Ui {
     /**
      * Prints message when user adds a task to list
      * @param list list of tasks
-     * @param addedTask
+     * @param addedTask task that is added
      */
     public void addTaskMessage(ArrayList<Task> list, Task addedTask) {
         System.out.println("Got it. I've added this task:");
@@ -58,6 +59,16 @@ public class Ui {
         System.out.println(horizontalLine);
     }
 
+
+    /**
+     * Prints message when user checks a task as done
+     * @param task task that is checked as done
+     */
+    public void checkAsDoneMessage(Task task) {
+        System.out.println("Nice! I've marked this task as done:\n" + task);
+        System.out.println(horizontalLine);
+    }
+
     /**
      * Prints message when user requests for tasks in list
      * @param list list of tasks
@@ -73,12 +84,28 @@ public class Ui {
     }
 
     /**
-     * Prints message when user checks a task as done
-     * @param task task that is checked as done
+     * Prints matching tasks in list
+     * @param keyword keyword to search for in list
+     * @param list list of tasks
      */
-    public void checkAsDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task);
+    public void findTask(String keyword, ArrayList<Task> list) {
+        ArrayList<Task> newList = new ArrayList<>();
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                newList.add(task);
+            }
+        }
+        if (newList.size() == 0) {
+            System.out.println("No matching tasks found. :^S");
+        }
+        else {
+            for (Task task : newList) {
+                if (task.getDescription().contains(keyword)) {
+                    System.out.println(task);
+                }
+            }
+        }
         System.out.println(horizontalLine);
     }
-
 }
