@@ -87,6 +87,16 @@ class Task {
         return this.done;
     }
 
+    /**
+     * Gets the task name
+     *
+     * @return  the task name of that task
+     */
+    public String getTaskName() {
+        return this.taskName;
+    }
+
+
 
     /**
      * Rewrites the task into a formatted string that is understood by the parser.

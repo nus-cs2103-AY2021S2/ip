@@ -160,4 +160,19 @@ public class TaskList {
         }
     }
 
+    public void findTask(String keyword, Ui ui) {
+        ui.showLine();
+        System.out.print(ui.ind() + "Kobe has found these tasks in your list:\n");
+        String currentTaskName = "";
+        int counter = 1;
+        for (int i = 0; i < tasks.size(); i++) {
+            currentTaskName = tasks.get(i).getTaskName();
+            if (currentTaskName.indexOf(keyword) != -1) {
+                System.out.println(ui.ind() + counter + ": " + tasks.get(i).toString());
+                counter++;
+            }
+        }
+        ui.showLine();
+    }
+
 }

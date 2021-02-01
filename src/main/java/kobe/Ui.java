@@ -29,6 +29,15 @@ public class Ui {
     }
 
     /**
+     * To print a line with indentation.
+     *
+     * @return  a line with indentation
+     */
+    String ind() {
+        return ind;
+    }
+
+    /**
      * To display an error message in the context of Kobe
      */
     void showLoadingError() {
