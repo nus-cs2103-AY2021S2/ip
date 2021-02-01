@@ -1,4 +1,4 @@
-[T][✓] read book
-[D][✘] return book  (by: Jan 25 2021)
-[E][✘] project meeting  (at: Jan 28 2021)
-[T][✘] join sports club
+[T][?]read books
+[D][?]return books  (by: Jan 25 2021)
+[E][?]drinks  (at: Feb 01 2021)
+[T][?]join sports club

@@ -1,16 +1,16 @@
 package mike;
 
 import mike.task.Task;
+import mike.ui.TextUi;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 public class Mike {
 
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private TextUi ui;
 
     /**
      * Create a Mike Object with a taskList from an existing file
@@ -20,7 +20,7 @@ public class Mike {
      */
     public Mike(String filePath) {
         this.storage = new Storage(filePath);
-        this.ui = new Ui();
+        this.ui = new TextUi();
         try {
             taskList = new TaskList(storage.load());
         } catch (ParseException e) {
@@ -31,68 +31,76 @@ public class Mike {
         }
     }
 
-    public void run() {
-        ui.init();
-        Scanner sc = new Scanner(System.in);
-        do {
-            String input = sc.next();
+    public String getResponse(String input) {
+        try {
+            int endIndOfCommand = input.indexOf(' ');
+            String descriptionInput = input.substring(endIndOfCommand);
+        } catch (StringIndexOutOfBoundsException e) {
             try {
                 Command command = Parser.parseCommand(input);
                 switch (command) {
                 case BYE:
-                    ui.exit();
-                    return;
+                    return ui.exit();
                 case LIST:
                     try {
-                        ui.showList(taskList);
-                    } catch (NullPointerException e) {
-                        ui.showListError();
+                        return ui.showList(taskList);
+                    } catch (NullPointerException e2) {
+                        return ui.showListError();
                     }
-                    break;
-                case DONE:
-                    int i = sc.nextInt();
-                    try {
-                        ui.showMarkSuccess(taskList.mark(i));
-                    } catch (IndexOutOfBoundsException e) {
-                        ui.showIndexOutOfBoundsError(taskList);
-                    }
-                    break;
-                case DELETE:
-                    int k = sc.nextInt();
-                    try {
-                        Task deletedTask = taskList.delete(k);
-                        ui.showDeleteSuccess(taskList, deletedTask);
-                    } catch (IndexOutOfBoundsException e) {
-                        ui.showIndexOutOfBoundsError(taskList);
-                    }
-                    break;
-                case FIND:
-                    String keyword = sc.next();
-                    ui.showMatchingResults(taskList.find(keyword));
-                    break;
                 default:
-                    String description = sc.nextLine();
-                    try {
-                        Task addedTask = Parser.parseDescription(command, description);
-                        taskList.add(addedTask);
-                        ui.showAddSuccess(taskList, addedTask);
-                        storage.save(taskList);
-                    } catch (ParseException e) {
-                        ui.showError(e);
-                    } catch (IOException e) {
-                        ui.showIOError(e);
-                    } catch (DateTimeParseException e) {
-                        ui.showDateTimeParseError(e);
-                    }
+                    return ui.showGeneralError();
                 }
-            } catch (IllegalArgumentException e) {
-                ui.showGeneralError();
+            } catch (IllegalArgumentException e2) {
+                return ui.showGeneralError();
             }
-        } while (true);
+        }
+
+        try {
+            int endIndOfCommand = input.indexOf(' ');
+            String commandInput = input.substring(0, endIndOfCommand);
+            String descriptionInput = input.substring(endIndOfCommand + 1);
+            System.out.println(descriptionInput);
+            Command command = Parser.parseCommand(commandInput);
+            switch (command) {
+            case DONE:
+                try {
+                    int i = Integer.parseInt(descriptionInput);
+                    return ui.showMarkSuccess(taskList.mark(i));
+                } catch (IndexOutOfBoundsException e) {
+                    return ui.showIndexOutOfBoundsError(taskList);
+                }
+            case DELETE:
+                try {
+                    int k = Integer.parseInt(descriptionInput);
+                    Task deletedTask = taskList.delete(k);
+                    return ui.showDeleteSuccess(taskList, deletedTask);
+                } catch (IndexOutOfBoundsException e) {
+                    return ui.showIndexOutOfBoundsError(taskList);
+                }
+            case FIND:
+                return ui.showMatchingResults(taskList.find(descriptionInput));
+            default:
+                try {
+                    Task addedTask = Parser.parseDescription(command, descriptionInput);
+                    taskList.add(addedTask);
+                    String response = ui.showAddSuccess(taskList, addedTask);
+                    storage.save(taskList);
+                    return response;
+                } catch (ParseException e) {
+                    return ui.showError(e);
+                } catch (IOException e) {
+                    return ui.showIOError(e);
+                } catch (DateTimeParseException e) {
+                    return ui.showDateTimeParseError(e);
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            return ui.showGeneralError();
+        }
     }
 
     public static void main(String[] args) {
-        new Mike("data/tasks.txt").run();
+        Mike mike = new Mike("data/tasks.txt");
     }
 
 }

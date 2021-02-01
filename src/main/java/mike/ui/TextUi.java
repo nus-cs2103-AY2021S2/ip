@@ -1,5 +1,7 @@
-package mike;
+package mike.ui;
 
+import mike.ParseException;
+import mike.TaskList;
 import mike.task.Task;
 
 import java.io.IOException;
@@ -8,7 +10,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Used by Mike to relay information to the user
  */
-public class Ui {
+public class TextUi {
     private final StringBuilder lengthOfChatBox = new StringBuilder();
 
     /**
@@ -27,23 +29,23 @@ public class Ui {
      *
      * @param s the String Object to be formatted
      */
-    public void formatInChatBox(String s) {
-        System.out.println(lengthOfChatBox + s + lengthOfChatBox);
+    public String formatInChatBox(String s) {
+        return lengthOfChatBox + s + lengthOfChatBox;
     }
 
     /**
      * Initializes the Ui Object
      */
-    public void init() {
+    public String init() {
         setLengthOfChatBox();
-        formatInChatBox("Hello I'm Mike.\nWhat can I do for you?\n");
+        return formatInChatBox("Hello I'm Mike.\nWhat can I do for you?\n");
     }
 
     /**
      * Displays when the "bye" command is received and exits
      */
-    public void exit() {
-        formatInChatBox("Bye. Hope to see you again soon!\n");
+    public String exit() {
+        return formatInChatBox("Bye. Hope to see you again soon!\n");
     }
 
     /**
@@ -51,7 +53,7 @@ public class Ui {
      *
      * @param taskList the TaskList to be listed
      */
-    public void showList(TaskList taskList) {
+    public String showList(TaskList taskList) {
         int numOfText = taskList.size();
         StringBuilder output = new StringBuilder();
 
@@ -64,48 +66,49 @@ public class Ui {
                 output.append(i + 1).append(". ").append(currentTask).append("\n");
             }
         }
-        formatInChatBox(output.toString());
+        return formatInChatBox(output.toString());
     }
 
     /**
      * Informs user that the addition of the task is successful
      *
      * @param taskList the list of tasks
-     * @param task the task to be added to the taskList
+     * @param task     the task to be added to the taskList
      */
-    public void showAddSuccess(TaskList taskList, Task task) {
-        formatInChatBox("Got it. I've added this task:\n  " + task + "\n Now you have "
+    public String showAddSuccess(TaskList taskList, Task task) {
+        return formatInChatBox("Got it. I've added this task:\n  " + task + "\n Now you have "
                 + taskList.size() + " tasks in the list.");
     }
 
     /**
      * Informs user that the marking of the task is successful
+     *
      * @param task the task to be marked asa done
      */
-    public void showMarkSuccess(Task task) {
-        formatInChatBox("Nice! I've marked this task as done: \n" + task);
+    public String showMarkSuccess(Task task) {
+        return formatInChatBox("Nice! I've marked this task as done: \n" + task);
     }
 
     /**
      * Informs user that the deletion of the task is successful
      *
      * @param taskList the list of tasks
-     * @param task the task to be deleted
+     * @param task     the task to be deleted
      */
-    public void showDeleteSuccess(TaskList taskList, Task task) {
-        formatInChatBox("Noted. I've removed this task:\n  " + task
+    public String showDeleteSuccess(TaskList taskList, Task task) {
+        return formatInChatBox("Noted. I've removed this task:\n  " + task
                 + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
-    
-    public void showError(ParseException e) {
-        formatInChatBox(e.getMessage());
+
+    public String showError(ParseException e) {
+        return formatInChatBox(e.getMessage());
     }
 
-    public void showLoadingError(ParseException e) {
-        formatInChatBox(e.getMessage());
+    public String showLoadingError(ParseException e) {
+        return formatInChatBox(e.getMessage());
     }
 
-    public void showMatchingResults(TaskList matchingResults) {
+    public String showMatchingResults(TaskList matchingResults) {
         String output = "";
         if (matchingResults.isEmpty()) {
             output += "OOP!!! There are no matching tasks in your list";
@@ -116,30 +119,30 @@ public class Ui {
             }
         }
 
-        formatInChatBox(output);
+       return formatInChatBox(output);
     }
 
-    public void showIndexOutOfBoundsError(TaskList taskList) {
-        formatInChatBox("OOPS!!! You only have " + taskList.size() + " tasks, please enter an index within the range");
+    public String showIndexOutOfBoundsError(TaskList taskList) {
+        return formatInChatBox("OOPS!!! You only have " + taskList.size() + " tasks, please enter an index within the range");
     }
 
-    public void showIOError(IOException e) {
-        formatInChatBox(e.getMessage());
+    public String showIOError(IOException e) {
+        return formatInChatBox(e.getMessage());
     }
 
-    public void showDateTimeParseError(DateTimeParseException e) {
-        formatInChatBox(e.getMessage());
+    public String showDateTimeParseError(DateTimeParseException e) {
+        return formatInChatBox(e.getMessage());
     }
 
-    public void showGeneralError() {
+    public String showGeneralError() {
         try {
             throw new ParseException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         } catch (ParseException e) {
-            formatInChatBox(e.getMessage());
+            return formatInChatBox(e.getMessage());
         }
     }
 
-    public void showListError() {
-        formatInChatBox("OOPS!!! The list is empty.");
+    public String showListError() {
+        return formatInChatBox("OOPS!!! The list is empty.");
     }
 }
