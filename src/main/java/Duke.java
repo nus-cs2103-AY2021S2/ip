@@ -10,10 +10,16 @@ import java.io.IOException;
  * - Error checking for IO
  */
 public class Duke {
+
+    private static Ui ui = new Ui();
     private Storage storage;
     private TaskList taskList;
-    private static Ui ui = new Ui();
 
+    /**
+     * Constructor method.
+     * @param filePath to the hard drive file
+     * @throws IOException if error in user IO
+     */
     public Duke(String filePath) throws IOException {
         this.storage = new Storage(filePath);
         try {

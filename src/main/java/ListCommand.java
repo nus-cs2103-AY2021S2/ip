@@ -1,7 +1,7 @@
 /**
  * Command for showing the entire list of tasks.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     private String command;
 
@@ -9,7 +9,7 @@ public class ListCommand extends Command{
      * Constructor method
      * @param command user command input
      */
-    public ListCommand(String command){
+    public ListCommand(String command) {
         this.command = command;
     }
 

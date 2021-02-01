@@ -1,7 +1,7 @@
 /**
  * To do command that creates a to do task.
  */
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
 
     private String command;
 
@@ -48,3 +48,4 @@ public class TodoCommand extends Command{
         return false;
     }
 }
+

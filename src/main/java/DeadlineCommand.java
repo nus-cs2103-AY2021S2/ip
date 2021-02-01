@@ -13,7 +13,7 @@ public class DeadlineCommand extends Command {
      * Constructor method.
      * @param command input command from user.
      */
-    public DeadlineCommand(String command){
+    public DeadlineCommand(String command) {
         this.command = command;
     }
 
@@ -26,7 +26,8 @@ public class DeadlineCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the commands available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+            DukeWrongInputException {
         String description = "";
         String deadline = "";
         boolean foundBy = false;
@@ -47,13 +48,14 @@ public class DeadlineCommand extends Command {
             }
         }
         deadline = deadline.trim();
-        if (isDate(deadline)){
+        if (isDate(deadline)) {
             LocalDate dateDeadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             Deadline newDeadline = new Deadline(description, dateDeadline);
             taskList.add(newDeadline);
             ui.showTaskAdded(newDeadline);
         } else {
-            throw new DukeWrongInputException("OOPS!!! Please enter your deadline in the format: deadline /by yyyy-mm-dd :-(");
+            throw new DukeWrongInputException(
+                    "OOPS!!! Please enter your deadline in the format: deadline /by yyyy-mm-dd :-(");
         }
     }
 

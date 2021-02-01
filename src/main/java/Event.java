@@ -21,7 +21,7 @@ public class Event extends Task {
      * @param timeslot
      * @param isDone
      */
-    public Event(String description, String timeslot, boolean isDone){
+    public Event(String description, String timeslot, boolean isDone) {
         super(description, isDone);
         this.timeslot = timeslot;
     }

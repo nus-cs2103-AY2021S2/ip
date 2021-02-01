@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * @param description task description.
      * @param deadline LocalDate object that describes the deadline.
      */
-    public Deadline(String description, LocalDate deadline){
+    public Deadline(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
     }
@@ -25,7 +25,7 @@ public class Deadline extends Task {
      * @param deadline LocalDate object that describes the deadline.
      * @param isDone task done status.
      */
-    public Deadline(String description, LocalDate deadline, boolean isDone){
+    public Deadline(String description, LocalDate deadline, boolean isDone) {
         super(description, isDone);
         this.deadline = deadline;
     }
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      * Getter method for task deadline.
      * @return string of task deadline
      */
-    public LocalDate getDeadline(){
+    public LocalDate getDeadline() {
         return this.deadline;
     }
 
@@ -43,7 +43,7 @@ public class Deadline extends Task {
      * @param deadline new deadline to be changed to
      * @return the new deadline
      */
-    public LocalDate changeDeadline(LocalDate deadline){
+    public LocalDate changeDeadline(LocalDate deadline) {
         this.deadline = deadline;
         return this.deadline;
     }

@@ -33,7 +33,7 @@ public class EventCommand extends Command {
             throw new DukeMissingInputException("OOPS!!! The description of an event cannot be empty.");
         } else {
             for (int i = 1; i < commandArr.length; i++) {
-                if (commandArr[i].equals("/at")){
+                if (commandArr[i].equals("/at")) {
                     foundAt = true;
                     continue;
                 }

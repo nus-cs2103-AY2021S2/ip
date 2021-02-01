@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,12 +35,12 @@ public class Storage {
      * Loads hard drive from the file
      * @throws FileNotFoundException if file is not found at target location.
      */
-    public List<Task> load() throws FileNotFoundException {
+    public List<Task> load() throws IOException {
         Scanner sc = new Scanner(this.hardDrive);
         List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
             String[] entry = sc.nextLine().split(" / ");
-            switch (entry[0]){
+            switch (entry[0]) {
             case "T":
                 tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
                 break;
@@ -46,6 +51,8 @@ public class Storage {
                 LocalDate deadline = LocalDate.parse(entry[3], DateTimeFormatter.ofPattern("yyyy-mm-DD"));
                 tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
                 break;
+            default:
+                throw new IOException("File Error: wrong data format in hard drive");
             }
         }
         sc.close();
@@ -63,11 +70,11 @@ public class Storage {
             if (t instanceof Todo) {
                 fw.write(String.format("T / %s / %s%n", t.getIsDone(), t.getDescription()));
             } else if (t instanceof Event) {
-                fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(),
-                        ((Event) t).getTimeslot()));
+                fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(), (
+                        (Event) t).getTimeslot()));
             } else if (t instanceof Deadline) {
-                fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(),
-                        ((Deadline) t).getDeadline().toString()));
+                fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(), (
+                        (Deadline) t).getDeadline().toString()));
             }
         }
         fw.close();

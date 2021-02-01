@@ -16,7 +16,7 @@ public class DukeMissingInputException extends Exception {
      * @return Returns the original message passed in.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.getMessage();
     }
 }

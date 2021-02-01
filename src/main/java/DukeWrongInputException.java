@@ -1,7 +1,7 @@
 /**
  * Exception when there is a wrong input from the user.
  */
-public class DukeWrongInputException extends Exception{
+public class DukeWrongInputException extends Exception {
     /**
      * Constructor method for Duke's Missing Input Exception.
      * @param message Takes in a String message.
@@ -15,7 +15,7 @@ public class DukeWrongInputException extends Exception{
      * @return Returns the original message passed in.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.getMessage();
     }
 }

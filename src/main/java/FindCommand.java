@@ -1,4 +1,4 @@
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String command;
 
@@ -24,7 +24,7 @@ public class FindCommand extends Command{
      * @return boolean value for whether command is an exit command.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

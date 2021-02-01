@@ -11,7 +11,8 @@ public abstract class Command {
      * @throws DukeMissingInputException If todo, deadline or event is missing detail description.
      * @throws DukeWrongInputException If user input is not any of the commands available.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+            DukeWrongInputException;
 
     /**
      * Abstract method that indicates if particular method is an exit command.

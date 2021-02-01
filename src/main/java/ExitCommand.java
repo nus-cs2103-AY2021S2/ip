@@ -9,7 +9,7 @@ public class ExitCommand extends Command {
      * Constructor method
      * @param command user input command
      */
-    public ExitCommand(String command){
+    public ExitCommand(String command) {
         this.command = command;
     }
 
@@ -22,7 +22,8 @@ public class ExitCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+            DukeWrongInputException {
         return;
     }
 
