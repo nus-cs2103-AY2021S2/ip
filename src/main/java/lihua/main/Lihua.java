@@ -25,10 +25,17 @@ public class Lihua {
         parser = new Parser();
     }
 
+    /**
+     * Gets the response from the user.
+     *
+     * @param userInput User's input string.
+     * @return A string containing feedback for the user.
+     * If user sends a terminating signal, the method returns null.
+     */
     public String getResponse(String userInput) {
         Command command = parser.parseUserInput(userInput);
         if (ExitCommand.isExit(command)) {
-            exit();
+            System.exit(0);
         }
         CommandResult result = executeCommand(command);
         return result.getFeedBack();
@@ -52,9 +59,5 @@ public class Lihua {
             ui.showFeedbackToUser(e.getMessage());
             throw new RuntimeException(e);
         }
-    }
-
-    private void exit() {
-        System.exit(0);
     }
 }
