@@ -36,10 +36,8 @@ public class Storage {
 
     /**
      * Processes the tasks stored in the data file and loads them to the program.
-     *
-     * @throws DukeException if the Strings saved in the data file are unable to be processed
      */
-    public static void initialiseList() throws DukeException {
+    public static void initialiseList() {
         tasks = new ArrayList<>();
         File f = new File(pathName);
         try {
@@ -52,7 +50,7 @@ public class Storage {
                 }
             }
         } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+            e.printStackTrace();
         }
     }
 

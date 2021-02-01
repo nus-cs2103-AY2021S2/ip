@@ -1,17 +1,6 @@
 package duke;
 
-import java.util.Scanner;
-
-import duke.command.Command;
-import duke.command.CommandType;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.command.*;
 
 /**
  * Parses and processes user input.
@@ -36,47 +25,44 @@ public class Parser {
     /**
      * Parses user input line-by-line and processes user input accordingly.
      */
-    public static void parseAndProcessInput() {
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine().trim();
-            if (input.equals("bye")) {
+    public static void parseAndProcess(String input) {
+        input = input.trim();
+        String[] args = input.split(" ", 2);
+        Command command;
+        try {
+            CommandType type = getCommandType(args[0]);
+            switch (type) {
+            case BYE:
+                command = new ByeCommand();
                 break;
+            case LIST:
+                command = new ListCommand();
+                break;
+            case DONE:
+                command = new DoneCommand(args);
+                break;
+            case TODO:
+                command = new TodoCommand(args);
+                break;
+            case EVENT:
+                command = new EventCommand(args);
+                break;
+            case DEADLINE:
+                command = new DeadlineCommand(args);
+                break;
+            case DELETE:
+                command = new DeleteCommand(args);
+                break;
+            case FIND:
+                command = new FindCommand(args);
+                break;
+            case INVALID:
+            default:
+                command = new InvalidCommand();
             }
-            String[] args = input.split(" ", 2);
-            Command command;
-            try {
-                CommandType type = getCommandType(args[0]);
-                switch (type) {
-                case LIST:
-                    command = new ListCommand();
-                    break;
-                case DONE:
-                    command = new DoneCommand(args);
-                    break;
-                case TODO:
-                    command = new TodoCommand(args);
-                    break;
-                case EVENT:
-                    command = new EventCommand(args);
-                    break;
-                case DEADLINE:
-                    command = new DeadlineCommand(args);
-                    break;
-                case DELETE:
-                    command = new DeleteCommand(args);
-                    break;
-                case FIND:
-                    command = new FindCommand(args);
-                    break;
-                case INVALID:
-                default:
-                    command = new InvalidCommand();
-                }
-                command.process();
-            } catch (DukeException e) {
-                Ui.displayError(e.getMessage());
-            }
+            command.process();
+        } catch (DukeException e) {
+            Ui.displayError(e.getMessage());
         }
     }
 }

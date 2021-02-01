@@ -1,0 +1,21 @@
+.dialogBox {
+    -fx-background-insets: 5;
+    -fx-border-insets: 5;
+    -fx-padding: 10;
+}
+
+.dialog {
+    -fx-background-radius: 25;
+    -fx-padding: 10;
+    -fx-font-size: 15;
+    -fx-background-color: gold;
+}
+
+.background {
+    -fx-background-color: red
+}
+
+.button {
+    -fx-background-color: gold;
+    -fx-background-radius: 20;
+}

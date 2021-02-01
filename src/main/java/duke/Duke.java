@@ -5,21 +5,18 @@ import duke.storage.Storage;
 public class Duke {
     private static final String PATHNAME = "./data.txt";
 
+    public Duke() {
+        Storage.initialisePath(PATHNAME);
+        Storage.initialiseList();
+    }
+
     /**
-     * Runs Duke program.
-     *
-     * @param args arguments passed into the program
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        try {
-            Ui.displayWelcome();
-            Storage.initialisePath(PATHNAME);
-            Storage.initialiseList();
-            Parser.parseAndProcessInput();
-            Ui.displayFarewell();
-        } catch (Exception e) {
-            Ui.displayError(e.getMessage());
-        }
+    String getResponse(String input) {
+        Parser.parseAndProcess(input);
+        return Ui.getNextResponse();
     }
 }
 
