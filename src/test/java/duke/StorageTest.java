@@ -1,10 +1,11 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
-import org.junit.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
     @Test

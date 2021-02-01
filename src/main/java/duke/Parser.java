@@ -70,16 +70,7 @@ public class Parser {
     }
 
     private static String formatTaskDetails(String taskCommand, String input) {
-        input = input.replaceFirst(taskCommand + " ", "");
-        String taskStr;
-
-        if (taskCommand.equals("event")) {
-            taskStr = input.split(" /at")[0].replaceFirst("event ", "");
-        } else if (taskCommand.equals("deadline")) {
-            taskStr = input.split(" /by")[0].replaceFirst("deadline ", "");
-        } else {
-            taskStr = input;
-        }
+        String taskStr = input.replaceFirst(taskCommand + " ", "");
         return taskStr;
     }
 

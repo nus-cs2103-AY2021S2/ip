@@ -16,7 +16,7 @@ public class Duke {
      *
      */
     public Duke() {
-        this.storage = new Storage();
+        this.storage = null;
         String filePath = System.getProperty("user.dir") + "/data/Duke.txt";
         initialiseDuke(filePath);
     }
