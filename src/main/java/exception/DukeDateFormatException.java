@@ -3,7 +3,7 @@ package exception;
 /**
  * Duke date format exception.
  */
-public class DukeDateFormatException extends  DukeException{
+public class DukeDateFormatException extends DukeException {
     /**
      * Instantiates a new Duke date format exception.
      */

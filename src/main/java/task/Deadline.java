@@ -6,19 +6,19 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
+    /**
+     * The constant parseFormat.
+     */
+    private static final String parseFormat = "dd/MM/yyyy, hh:mma";
+    /**
+     * The constant outputFormat.
+     */
+    private static final String outputFormat = "dd MMM yyyy, hh:mma";
     /**
      * Datetime of the task deadline.
      */
     protected LocalDateTime by;
-    /**
-     * The constant parseFormat.
-     */
-    public static String parseFormat = "dd/MM/yyyy, hh:mma";
-    /**
-     * The constant outputFormat.
-     */
-    public static String outputFormat = "dd MMM yyyy, hh:mma";
 
     /**
      * Instantiates a new deadline task.
