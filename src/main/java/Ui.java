@@ -56,12 +56,11 @@ public class Ui {
             ArrayList<Task> taskList = tasks.getList();
             String msg = "     Nice! I've marked this task as done:\n";
             int taskDone = parser.getTaskIdx();
-            for (Task t : taskList) {
-                if (count == taskDone) {
-                    taskList.set(count - 1, taskList.get(count - 1).markAsDone());
-                    msg += "     " + taskList.get(count - 1);
+            for (int i = 0; i < taskList.size(); ++i) {
+                if (i == taskDone - 1) {
+                    taskList.set(i, taskList.get(i).markAsDone());
+                    msg += "     " + taskList.get(i);
                 }
-                count++;
             }
             System.out.println(this.format(msg));
             return new TaskList(taskList);
