@@ -7,17 +7,28 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//Save tasks to and load tasks from file
+/**
+ * Storage class to save tasks to and load tasks from file on local machine.
+ */
 public class Storage {
 
     protected String filePath;
 
+    /**
+     * Constructor for Storage class.
+     * Initializes a Storage object that contains filePath
+     * @param filePath file path to file where user wants his task list saved and loaded.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
 
     }
 
-
+    /**
+     * Saves tasks to file locally.
+     * @param list list of Task objects.
+     * @throws IOException if file path cannot be found
+     */
     public void saveTasks(ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         String fileContent = "";
@@ -47,6 +58,10 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads tasks from file locally
+     * @return an ArrayList of Task objects
+     */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> list = new ArrayList<>();
         File savedTasksFile = null;
