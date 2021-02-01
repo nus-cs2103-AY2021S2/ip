@@ -1,0 +1,4 @@
+T | done | eat
+T | not done | drink
+E | not done | event lunch  | Wed Feb 12 12:20:00 SGT 2020
+D | not done | deadline lunch  | Sat Dec 12 20:12:00 SGT 2020
