@@ -29,11 +29,12 @@ public class EventCommand extends Command {
 
     /**
      * Adds an Event task with previously specified description and dateTime to taskList.
+     * @return confirmation message for added Deadline Task.
      */
     @Override
-    public void execute() {
+    public String execute() {
         Event e = new Event(this.task, this.dateTime);
-        System.out.println("Got it. I've added this task:\n" + e);
         this.taskList.addTask(e);
+        return "Got it. I've added this task:\n" + e;
     }
 }

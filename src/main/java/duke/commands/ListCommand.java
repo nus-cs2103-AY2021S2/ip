@@ -13,9 +13,10 @@ public class ListCommand extends Command {
 
     /**
      * Prints all tasks in taskList.
+     * @return String representation of all tasks in taskList.
      */
     @Override
-    public void execute() {
-        this.taskList.printList();
+    public String execute() {
+        return this.taskList.getListInString();
     }
 }

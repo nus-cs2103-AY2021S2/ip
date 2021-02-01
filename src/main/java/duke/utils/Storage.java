@@ -52,7 +52,7 @@ public class Storage {
                 this.nonEmptyFile();
                 List<Task> converted = FileTaskStringConverter.allStringToAllTask(txt);
                 TaskList taskList = new TaskList(converted);
-                taskList.printList();
+                taskList.getListInString();
                 return taskList;
             }
         } catch (FileNotFoundException e) {

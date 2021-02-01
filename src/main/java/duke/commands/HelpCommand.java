@@ -12,7 +12,8 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        this.ui.showHelp();
+    public String execute() {
+        return "Valid commands include the following:\n" + "'todo', 'deadline', 'event', 'list', 'delete', 'bye'\n"
+                + "Please start your input with one of the above commands!";
     }
 }

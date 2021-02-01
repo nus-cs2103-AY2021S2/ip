@@ -15,16 +15,17 @@ public class ByeCommand extends Command {
 
     /**
      * Saves all Tasks in taskList to local file, and then prints exit message.
+     * @return exit message to be displayed.
      */
     @Override
-    public void execute() {
+    public String execute() {
         try {
             this.storage.writeToFile(this.taskList);
 
-            String endMessage = "Bye. Hope to see you again soon!";
-            this.ui.showMsg(endMessage);
+            return "Bye. Hope to see you again soon!";
         } catch (IOException e) {
             this.ui.showError(e.getMessage());
+            return e.getMessage();
         }
     }
 

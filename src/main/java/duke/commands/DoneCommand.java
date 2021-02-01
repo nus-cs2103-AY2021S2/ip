@@ -23,11 +23,11 @@ public class DoneCommand extends Command {
 
     /**
      * Marks Task at previously specified position of tasklist as done, before printing a confirmation message.
+     * @return message confirming that indicated task is set as done.
      */
     @Override
-    public void execute() {
+    public String execute() {
         this.taskList.setTaskDone(this.position);
-        System.out.println("Nice! I've marked this task as done:");
-        this.taskList.printTask(this.position);
+        return "Nice! I've marked this task as done:\n" + this.taskList.getList().get(this.position);
     }
 }

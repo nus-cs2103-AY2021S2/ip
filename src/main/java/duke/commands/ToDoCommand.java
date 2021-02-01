@@ -24,11 +24,12 @@ public class ToDoCommand extends Command {
 
     /**
      * Adds a ToDo task with previously specified description to taskList.
+     * @return message confirming that indicated ToDo task is added.
      */
     @Override
-    public void execute() {
+    public String execute() {
         ToDo t = new ToDo(this.todo);
-        System.out.println("Got it. I've added this task:\n" + t);
         this.taskList.addTask(t);
+        return "Got it. I've added this task:\n" + t;
     }
 }

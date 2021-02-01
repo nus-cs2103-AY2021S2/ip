@@ -15,7 +15,7 @@ public abstract class Command {
         this.storage = storage;
     }
 
-    public abstract void execute();
+    public abstract String execute();
 
     /**
      * Returns signal to indicate if command is end of program.

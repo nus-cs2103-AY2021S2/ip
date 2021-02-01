@@ -24,12 +24,13 @@ public class DeleteCommand extends Command {
     /**
      * Deletes Task at the previously specified position in the taskList.
      * Thereafter, prints confirmation and remaining number of tasks.
+     * @return message confirming that indicated task is deleted.
      */
     @Override
-    public void execute() {
-        System.out.println("Noted. I've removed this task:");
-        this.taskList.printTask(this.position);
+    public String execute() {
+        String msg = "Noted. I've removed this task:\n" + this.taskList.getList().get(this.position);
+        String numTasksLeft = "Now you have " + this.taskList.getList().size() + " tasks in the list.";
         this.taskList.deleteTask(this.position);
-        this.taskList.printNumTasksInList();
+        return msg + numTasksLeft;
     }
 }

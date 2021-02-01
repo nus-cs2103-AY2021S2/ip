@@ -29,11 +29,13 @@ public class DeadlineCommand extends Command {
 
     /**
      * Adds a Deadline task with previously specified description and dateTime to taskList.
+     * @return confirmation message for added Deadline Task.
      */
     @Override
-    public void execute() {
+    public String execute() {
         Deadline d = new Deadline(this.task, this.dateTime);
-        System.out.println("Got it. I've added this task:\n" + d);
+        String msg = "Got it. I've added this task:\n" + d;
         this.taskList.addTask(d);
+        return msg;
     }
 }

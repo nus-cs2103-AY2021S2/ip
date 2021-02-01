@@ -30,24 +30,27 @@ public class FindCommand extends Command {
      * Searches TaskList for Tasks with descriptions matching toFind String.
      * If there exist such Tasks, prints these Tasks.
      * Else, display message indicating no matching Tasks.
+     * @return message showing all the relevant Tasks.
      */
     @Override
-    public void execute() {
+    public String execute() {
         Pattern p = Pattern.compile(toFind, Pattern.CASE_INSENSITIVE);
         List<Task> results = searchList(p);
         if (results.size() == 0) {
-            this.ui.showMsg("There are no tasks matching your input :(");
+            return "There are no tasks matching your input :(";
         } else {
-            this.ui.showMsg("These are the search results:");
-            printList(results);
+            return printList(results).toString();
         }
     }
 
-    private void printList(List<Task> results) {
+    private StringBuilder printList(List<Task> results) {
+        StringBuilder sb = new StringBuilder("These are the search results:");
         int counter = 1;
         for (Task t : results) {
-            this.ui.showMsg(counter + ". " + t.toString());
+            sb.append("\n" + counter + ". " + t.toString());
+            counter++;
         }
+        return sb;
     }
 
     private List<Task> searchList(Pattern regEx) {
