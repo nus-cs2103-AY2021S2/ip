@@ -58,7 +58,7 @@ public class UiHandler extends AnchorPane {
      *
      * @param info information to print
      */
-    public void showInfo(String info) {
+    private void showInfo(String info) {
         dialogContainer.getChildren().add(DialogBox.getSteveDialog(info.split(" ", 2)[1], STEVE_IMAGE));
     }
 
@@ -67,8 +67,17 @@ public class UiHandler extends AnchorPane {
      *
      * @param msg error message to print
      */
-    public void showError(String msg) {
+    private void showError(String msg) {
         dialogContainer.getChildren().add(DialogBox.getSteveDialog(msg, STEVE_IMAGE));
+    }
+
+    /**
+     * Terminates the program with a final message.
+     *
+     * @param crashMsg message to print before termination
+     */
+    private void showTerminate(String crashMsg) {
+        dialogContainer.getChildren().add(DialogBox.getSteveDialog(crashMsg, STEVE_IMAGE));
     }
 
     /**
@@ -82,6 +91,10 @@ public class UiHandler extends AnchorPane {
         );
         userInput.clear();
         showResponse(steve.getParser().parseInput(input));
+        //special case of termination command
+        if (input.split(" ", 2)[0].equalsIgnoreCase("BYE")) {
+            System.exit(0);
+        }
     }
 
     /**
@@ -92,18 +105,10 @@ public class UiHandler extends AnchorPane {
     public void showResponse(String response) {
         if (response.startsWith("Error:")) {
             showError(response);
+        } else if (response.startsWith("Terminated: ")) {
+            showTerminate(response);
         } else {
             showInfo(response);
         }
-    }
-
-    /**
-     * Terminates the program with a final message.
-     *
-     * @param crashMsg message to print before termination
-     */
-    public static void terminate(String crashMsg) {
-        System.out.println(crashMsg);
-        System.exit(0);
     }
 }

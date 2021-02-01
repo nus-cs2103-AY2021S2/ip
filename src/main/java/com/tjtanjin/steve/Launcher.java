@@ -8,7 +8,7 @@ import javafx.application.Application;
 public class Launcher {
 
     /**
-     * Launches the Steve class.
+     * Launches the Main class.
      *
      * @param args command line arguments
      */

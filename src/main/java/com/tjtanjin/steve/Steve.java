@@ -6,7 +6,7 @@ import com.tjtanjin.steve.storage.StorageHandler;
 import com.tjtanjin.steve.tasks.TaskHandler;
 
 /**
- * Steve is a project that eventually builds into a personal assistant chat bot.
+ * Steve class creates and allocates all key objects.
  */
 public class Steve {
 

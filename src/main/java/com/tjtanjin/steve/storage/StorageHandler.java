@@ -29,6 +29,9 @@ public class StorageHandler {
     private final String PATH;
     private JSONArray taskList = new JSONArray();
 
+    //special case of storage knowing ui handler since a critical error involves immediate termination
+    private final UiHandler uiHandler = new UiHandler();
+
     /**
      * Constructor for StorageHandler.
      *
@@ -52,8 +55,8 @@ public class StorageHandler {
             tasksFile.getParentFile().mkdirs();
             tasksFile.createNewFile();
         } catch (IOException e) {
-            UiHandler.terminate("Terminated: "
-                    + "Application has no permission to create storage file.");
+            uiHandler.showResponse("Terminated: Steve has no permission"
+                    + "to create storage file. Please check and restart the application.");
         }
 
         //JSON parser object to parse read file

@@ -43,7 +43,7 @@ public class UiHandlerTest extends AnchorPane {
     @Test
     void showInfo_whenInvokePrintln_thenOutputCaptorSuccess() {
         String expected = "Test print information message!";
-        uiHandler.showInfo(expected);
+        uiHandler.showResponse(expected);
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 
@@ -51,7 +51,7 @@ public class UiHandlerTest extends AnchorPane {
     void showError_whenInvokePrintln_thenOutputCaptorSuccess() {
         String errMsg = "Test print error message!";
         String expected = "Error: " + "Test print error message!";
-        uiHandler.showError(errMsg);
+        uiHandler.showResponse(errMsg);
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 }

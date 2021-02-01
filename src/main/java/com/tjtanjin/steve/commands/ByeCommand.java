@@ -1,7 +1,5 @@
 package com.tjtanjin.steve.commands;
 
-import com.tjtanjin.steve.ui.UiHandler;
-
 /**
  * Entry point for handling logic and execution of bye command.
  */
@@ -28,7 +26,7 @@ public class ByeCommand {
     /**
      * Exits the program.
      */
-    public void execute() {
-        UiHandler.terminate("Good bye, see you soon! :D");
+    public String execute() {
+        return "Terminated: Good bye, see you soon! :D";
     }
 }

@@ -77,8 +77,7 @@ public class Parser {
         try {
             switch (Cmd.valueOf(command)) {
             case BYE:
-                BYE_COMMAND.execute();
-                return null;
+                return BYE_COMMAND.execute();
             case DEADLINE:
                 String deadlineTaskName = parseTaskName(input);
                 LocalDate[] deadlineTaskDates = parseTaskDates(input);
@@ -134,7 +133,7 @@ public class Parser {
      * @param input input provided by user
      * @return index of task
      */
-    public int parseIndex(String cmd, String input)
+    private int parseIndex(String cmd, String input)
             throws SteveInvalidFormatException, SteveInvalidParamsException {
         String[] parsedString = input.split("\\s+");
 
@@ -161,7 +160,7 @@ public class Parser {
      * @param input input provided by user
      * @return name of task
      */
-    public String parseTaskName(String input) throws SteveInvalidFormatException {
+    private String parseTaskName(String input) throws SteveInvalidFormatException {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails;
@@ -202,7 +201,7 @@ public class Parser {
      * @param input input provided by user
      * @return array of dates for task
      */
-    public LocalDate[] parseTaskDates(String input) throws SteveInvalidFormatException {
+    private LocalDate[] parseTaskDates(String input) throws SteveInvalidFormatException {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails = parsedString[1];
