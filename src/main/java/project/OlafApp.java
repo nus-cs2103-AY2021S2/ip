@@ -1,20 +1,19 @@
-package seedu;
+package project;
 
-import seedu.common.PrintText;
-import seedu.io.Parser;
-import seedu.io.Ui;
-import seedu.storage.Storage;
-import seedu.task.Deadline;
-import seedu.task.Event;
-import seedu.task.Task;
-import seedu.task.TaskList;
-import seedu.task.Todo;
+import project.common.PrintText;
+import project.io.Parser;
+import project.io.Ui;
+import project.storage.Storage;
+import project.task.Deadline;
+import project.task.Event;
+import project.task.Task;
+import project.task.TaskList;
+import project.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * Handles application logic.

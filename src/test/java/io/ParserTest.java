@@ -1,6 +1,6 @@
 package io;
 
-import seedu.io.Parser;
+import project.io.Parser;
 
 import org.junit.jupiter.api.Test;
 

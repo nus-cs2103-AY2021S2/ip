@@ -1,8 +1,8 @@
-package seedu.io;
+package project.io;
 
-import seedu.common.PrintText;
-import seedu.task.Task;
-import seedu.task.TaskList;
+import project.common.PrintText;
+import project.task.Task;
+import project.task.TaskList;
 
 /**
  * Handles UI responses.

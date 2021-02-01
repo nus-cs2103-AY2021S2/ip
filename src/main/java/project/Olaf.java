@@ -1,8 +1,8 @@
-package seedu;
+package project;
 
-import seedu.io.Ui;
-import seedu.storage.Storage;
-import seedu.task.TaskList;
+import project.io.Ui;
+import project.storage.Storage;
+import project.task.TaskList;
 
 import java.io.IOException;
 

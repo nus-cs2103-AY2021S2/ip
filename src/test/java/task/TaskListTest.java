@@ -1,8 +1,8 @@
 package task;
 
 import org.junit.jupiter.api.Test;
-import seedu.task.TaskList;
-import seedu.task.Todo;
+import project.task.TaskList;
+import project.task.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

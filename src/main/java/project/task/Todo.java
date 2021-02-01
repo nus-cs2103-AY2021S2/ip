@@ -1,4 +1,4 @@
-package seedu.task;
+package project.task;
 
 /**
  * Represents a todo task in the application.

@@ -1,4 +1,4 @@
-package seedu.common;
+package project.common;
 
 /**
  * All the {@code String} constants commonly used in the application.

@@ -1,4 +1,4 @@
-package seedu.io;
+package project.io;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

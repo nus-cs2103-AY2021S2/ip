@@ -1,4 +1,4 @@
-package seedu.task;
+package project.task;
 
 // adapted from partial solution on the module webpage
 

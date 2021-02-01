@@ -1,6 +1,6 @@
-package seedu.storage;
+package project.storage;
 
-import seedu.task.*;
+import project.task.*;
 
 import java.io.File;
 import java.io.IOException;

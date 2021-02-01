@@ -1,4 +1,4 @@
-package seedu.task;
+package project.task;
 
 import java.util.ArrayList;
 import java.util.List;

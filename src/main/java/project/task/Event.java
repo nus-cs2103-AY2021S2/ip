@@ -1,4 +1,4 @@
-package seedu.task;
+package project.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
