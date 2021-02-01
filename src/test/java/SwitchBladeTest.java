@@ -32,10 +32,9 @@ public class SwitchBladeTest {
         ArrayList<Task> taskArr = new ArrayList<>();
 
         taskArr.add(t);
-        Ui.addedTask(taskArr);
 
-        assertEquals("Added to list:\n" + t + "\nYou now have " + taskArr.size() + " tasks\n\n"
-                , outContent.toString());
+        assertEquals("Added to list:\n" + t + "\nYou now have " + taskArr.size() + " tasks\n"
+                , Ui.addedTask(taskArr));
     }
 
     @Test

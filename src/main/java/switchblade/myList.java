@@ -16,49 +16,50 @@ public class myList {
         taskList = new ArrayList<>();
     }
 
-    public void addTask(String taskDescription) {
+    public String addTask(String taskDescription) {
         Task task = new Task(taskDescription);
 
         taskList.add(task);
-        Ui.addedTask(taskList);
         this.save();
+        return Ui.addedTask(taskList);
     }
 
-    public void addDeadline(String description, String datetime) {
+    public String addDeadline(String description, String datetime) {
         Deadline deadline = new Deadline(description, datetime);
 
         taskList.add(deadline);
-        Ui.addedTask(taskList);
         this.save();
+        return Ui.addedTask(taskList);
     }
 
-    public void addEvent(String description, String startDatetime, String endDatetime) {
+    public String addEvent(String description, String startDatetime, String endDatetime) {
         myEvent event = new myEvent(description, startDatetime, endDatetime);
 
         taskList.add(event);
-        Ui.addedTask(taskList);
         this.save();
+        return Ui.addedTask(taskList);
     }
 
-    public void markCompleted(int index) {
+    public String markCompleted(int index) {
         taskList.get(index).markCompleted();
-        Ui.completedTask();
         this.save();
+        return Ui.completedTask();
     }
 
-    public void delete(int index) {
+    public String delete(int index) {
         taskList.remove(index);
-        Ui.removeTask(taskList);
         this.save();
+
+        return Ui.removeTask(taskList);
     }
 
-    public void retrieve()  {
+    public String retrieve()  {
         try {
             String filepath = "./ip/data";
             taskList = Storage.retrieve(filepath);
-            Ui.initRetrieveList(this);
+            return Ui.initRetrieveList(this);
         } catch (FileNotFoundException e) {
-            Ui.fileNotFound();
+            return Ui.fileNotFound();
         }
     }
 
