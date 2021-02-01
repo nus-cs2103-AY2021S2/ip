@@ -19,6 +19,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 # data txt file for every user
 /data/tasks.txt
 
-gradlew.bat
-gradlew
-CONTRIBUTORS.md
+
