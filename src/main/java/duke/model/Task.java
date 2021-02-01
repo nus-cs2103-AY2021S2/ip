@@ -45,6 +45,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%c] %s", isCompleted ? 'X': ' ', this.taskName);
+        return String.format("[%c] %s", isCompleted ? 'X' : ' ', this.taskName);
     }
 }

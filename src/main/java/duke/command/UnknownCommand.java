@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.exception.InvalidInputException;
 import duke.logging.Storage;
 import duke.logging.TaskList;
 import duke.logging.Ui;
-import duke.exception.InvalidInputException;
 
 /**
  * The UnknownCommand class denotes an unknown command to the Duke chat bot.

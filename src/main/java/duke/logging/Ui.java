@@ -1,10 +1,10 @@
 package duke.logging;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exception.InvalidInputException;
 import duke.model.Task;
-
-import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * A Ui class denotes a user interface system.

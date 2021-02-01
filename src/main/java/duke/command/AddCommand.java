@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
+
 import duke.logging.Storage;
 import duke.logging.TaskList;
 import duke.logging.Ui;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * The AddCommand class denotes an add command to the Duke chat bot.
@@ -39,8 +39,8 @@ public class AddCommand extends Command {
                 storage.append(taskList.addTask("todo", taskDescription, ui));
             }
         } catch (DateTimeParseException e) {
-            System.out.println("     The date time format is wrong. " +
-                    "It supposed to be yyyy-MM-dd or yyyy/MM/dd");
+            System.out.println("     The date time format is wrong. "
+                    + "It supposed to be yyyy-MM-dd or yyyy/MM/dd");
         } catch (Exception e) {
             System.out.println("     " + e.getMessage());
         }

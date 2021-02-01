@@ -1,13 +1,14 @@
 package duke.logging;
 
-import duke.command.ByeCommand;
-import duke.command.ListCommand;
 import duke.command.AddCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.UnknownCommand;
+import duke.command.ByeCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.UnknownCommand;
+
 
 /**
  * The Parser class denotes a parser.

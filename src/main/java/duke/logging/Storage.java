@@ -1,17 +1,17 @@
 package duke.logging;
 
-import duke.model.Deadline;
-import duke.model.Event;
-import duke.model.Task;
-import duke.model.ToDo;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.model.Deadline;
+import duke.model.Event;
+import duke.model.Task;
+import duke.model.ToDo;
 
 /**
  * A Storage class denotes a file storage.

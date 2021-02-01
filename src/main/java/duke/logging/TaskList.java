@@ -1,14 +1,14 @@
 package duke.logging;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.exception.InvalidDescriptionException;
 import duke.model.Deadline;
 import duke.model.Event;
 import duke.model.Task;
 import duke.model.ToDo;
-
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * A TaskList call denotes a system with a list of task and has the ability to make changes to the list.
@@ -80,7 +80,7 @@ public class TaskList {
      * @return                              The list of tasks remaining.
      * @throws InvalidDescriptionException  If the format of the command is wrong.
      */
-    public ArrayList<Task> delete(String taskDescription, Ui ui) throws InvalidDescriptionException{
+    public ArrayList<Task> delete(String taskDescription, Ui ui) throws InvalidDescriptionException {
         try {
             int index = Integer.parseInt(taskDescription.substring(0, 1)) - 1;
             Task task = tasks.get(index);

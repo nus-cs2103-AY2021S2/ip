@@ -1,14 +1,14 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.logging.Parser;
 import duke.logging.Storage;
 import duke.logging.TaskList;
 import duke.logging.Ui;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
 
 /**
  * A personal chat bot that helps a person keep track of various things.
