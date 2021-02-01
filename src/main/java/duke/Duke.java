@@ -58,6 +58,18 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        Command cmd = Parser.parse(input);
+        String resp = cmd.execute(taskLst);
+        storage.saveTaskLst(taskLst);
+        return resp;
+    }
+
+    public boolean isExitInput(String input) {
+        Command cmd = Parser.parse(input);
+        return cmd.isExit();
+    }
+
     public static void main(String[] args) {
         new Duke().run();
     }
