@@ -24,6 +24,6 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
-        return TOP_BORDER + "\n" + PADDING + super.getMessage() + "\n" + BTM_BORDER;
+        return super.getMessage();
     }
 }

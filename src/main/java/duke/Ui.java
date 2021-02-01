@@ -6,26 +6,15 @@ import duke.task.Task;
  *  The Ui class encapsulates methods to handle text displays to the CLI.
  */
 public class Ui {
-    private static final String TOP_BORDER = "╭------------------------------------------------------╮";
-    private static final String BTM_BORDER = "╰|╱ ---------------------------------------------------╯";
     private static final String PADDING = "  ";
 
     /**
-     * Prints the chatbot's greeting message when a user starts the chatbot.
+     * Returns the chatbot's greeting message when a user starts the chatbot.
      */
-    public static void printGreeting() {
-        String logo = "              .--.    .-.         .-.   \n"
-                + "             : .-'    : :         : :   \n"
-                + " .--.  .--.  : `;.--. : `-.  .--. : `-. \n"
-                + "'  ..'' .; ; : :' '_.'' .; :' '_.'' .; :\n"
-                + "`.__.'`.__,_;:_;`.__.'`.__.'`.__.'`.__.'";
-        System.out.println(logo);
-        String greeting = " ╭------------------------------------------------------------------╮\n"
-                + " |  Hello! I'm cafebeb, here to help you keep track of measly tasks |\n"
-                + " |  in your mundane human life. How may I help you today?           |\n"
-                + " ╰|╱ ---------------------------------------------------------------╯\n";
-
-        System.out.println(greeting);
+    public String returnGreeting() {
+        String greeting = "Hello! I'm Chandler, here to help you keep track of measly tasks"
+                + " in your mundane human life. How may I help you today?";
+        return greeting;
     }
 
     /**
@@ -35,8 +24,6 @@ public class Ui {
      */
     public String listCmdError() {
         String errorMsg = "Sorry human, I do not understand your command."
-                + "\n"
-                + PADDING
                 + "To access your list, enter 'list' with no additional descriptions.";
         return errorMsg;
     }
@@ -48,8 +35,6 @@ public class Ui {
      */
     public String doneCmdTooManyArgsError() {
         String errorMsg = "Sorry human, please enter only one task for me to mark as complete."
-                + "\n"
-                + PADDING
                 + "I am unable to process more than one task at one time.";
         return errorMsg;
     }
@@ -71,9 +56,7 @@ public class Ui {
      */
     public String doneCmdInvalidArgsError() {
         String errorMsg = "Sorry human, please enter the number of the task you want me to"
-                + "\n"
-                + PADDING
-                + "mark as complete.";
+                + " mark as complete.";
         return errorMsg;
     }
 
@@ -85,7 +68,6 @@ public class Ui {
     public String eventFormatError() {
         String eErrorMsg = "Invalid format. Please enter as such:"
                 + "\n"
-                + PADDING
                 + "event <EVENT_NAME> /at <EVENT_TIME>";
         return eErrorMsg;
     }
@@ -98,7 +80,6 @@ public class Ui {
     public String deadlineFormatError() {
         String dErrorMsg = "Invalid format. Please enter as such:"
                 + "\n"
-                + PADDING
                 + "deadline <TASK_NAME> /by <DEADLINE_TIME>";
         return dErrorMsg;
     }
@@ -111,7 +92,6 @@ public class Ui {
     public String dateFormatError() {
         String dateErrorMsg = "Invalid date format. Please enter as such:"
                 + "\n"
-                + PADDING
                 + "yyyy-MM-dd HHmm (e.g. 2019-10-15 1800)";
         return dateErrorMsg;
     }
@@ -124,62 +104,56 @@ public class Ui {
     public String deleteCmdTooManyArgsError() {
         String errorMsg = "Sorry human, please enter only one task for me to delete."
                 + "\n"
-                + PADDING
                 + "I am unable to process more than one task at one time.";
         return errorMsg;
     }
 
     /**
-     * Prints error message from DukeException.
+     * Returns error message from DukeException.
      *
      * @param e DukeException.
      */
-    public void printDukeException(DukeException e) {
-        System.out.println(e);
+    public String returnDukeExceptionMsg(DukeException e) {
+        return e.toString();
     }
 
     /**
-     * Prints deleted task message.
+     * Returns deleted task message.
      *
      * @param task Task that has just been deleted.
      * @param taskList List of all tasks.
      */
-    public void printDeletedMessage(Task task, TaskList taskList) {
-        System.out.println(TOP_BORDER);
-        System.out.println(PADDING + "Task has been deleted.");
-        System.out.println(PADDING + "Just like you will be deleted someday too.");
-        System.out.println(PADDING + PADDING + task);
-        System.out.println(PADDING + "Now you have " + taskList.getSize()
-                + (taskList.getSize() == 1 ? " task " : " tasks ") + "in your list.");
-        System.out.println(BTM_BORDER);
+    public String returnDeletedMsg(Task task, TaskList taskList) {
+        return "Task has been deleted." + "\n"
+                + "Just like you will be deleted someday too." + "\n"
+                + PADDING + task + "\n"
+                + "Now you have " + taskList.getSize()
+                + (taskList.getSize() == 1 ? " task " : " tasks ") + "in your list." + "\n";
     }
 
     /**
-     * Prints completed task message.
+     * Returns completed task message.
      *
      * @param task Task that has just been marked as done.
      */
-    public void printDoneMessage(Task task) {
-        System.out.println(TOP_BORDER);
-        System.out.println(PADDING + "Well done human on completing " + task.getTaskName() + "!");
-        System.out.println(PADDING + "I have marked it as done.");
-        System.out.println(PADDING + PADDING + task);
-        System.out.println(BTM_BORDER);
+    public String returnDoneMsg(Task task) {
+        return "Well done human on completing " + task.getTaskName() + "!" + "\n"
+                + "I have marked it as done." + "\n"
+                + PADDING + task + "\n";
     }
 
 
     /**
-     * Prints all tasks.
+     * Returns all tasks.
      *
      * @param taskList List of all tasks.
      */
-    public void printList(TaskList taskList) {
-        System.out.println(TOP_BORDER);
-        System.out.println(PADDING + "Here are the tasks in your list:");
+    public String returnList(TaskList taskList) {
+        String toReturn = "Here are the tasks in your list:" + "\n";
         for (int i = 1; i <= taskList.getSize(); i++) {
-            System.out.println(PADDING + i + ". " + taskList.getIndex(i - 1));
+            toReturn += (i + ". " + taskList.getIndex(i - 1)) + "\n";
         }
-        System.out.println(BTM_BORDER);
+        return toReturn;
     }
 
     /**
@@ -188,22 +162,18 @@ public class Ui {
      * @param task Task that has just been added to list.
      * @param taskList List of all tasks.
      */
-    public void printAddToList(Task task, TaskList taskList) {
-        System.out.println(TOP_BORDER);
-        System.out.println(PADDING + "Got it: I've added this task:");
-        System.out.println(PADDING + PADDING + task);
-        System.out.println(PADDING + "Now you have " + taskList.getSize()
-                + (taskList.getSize() == 1 ? " task " : " tasks ") + "in your list.");
-        System.out.println(BTM_BORDER);
+    public String returnAddToListMsg(Task task, TaskList taskList) {
+        return "Got it: I've added this task:" + "\n"
+                + PADDING + task + "\n"
+                + "Now you have " + taskList.getSize()
+                + (taskList.getSize() == 1 ? " task " : " tasks ") + "in your list." + "\n";
     }
 
     /**
-     * Prints goodbye message.
+     * Returns goodbye message.
      */
-    public void printBye() {
-        String farewell = " ╭---------------------------------------╮\n"
-                + " |  Bye! Hope you complete your tasks!   |\n"
-                + " ╰|╱ ------------------------------------╯";
-        System.out.println(farewell);
+    public String returnBye() {
+        String farewell = "Bye! Hope you complete your tasks!";
+        return farewell;
     }
 }

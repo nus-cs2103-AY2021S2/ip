@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandName;
 import duke.command.DeadlineCommand;
@@ -53,6 +54,9 @@ public class Parser {
             break;
         case FIND:
             toRun = new FindCommand(fullCmd, ui);
+            break;
+        case BYE:
+            toRun = new ByeCommand(fullCmd, ui);
             break;
         default:
             throw new DukeException("Sorry human, I have not been trained to process that command.");

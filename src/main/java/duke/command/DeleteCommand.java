@@ -34,7 +34,7 @@ public class DeleteCommand implements Command {
      * @throws DukeException if the format of the Delete command is invalid.
      */
     @Override
-    public void run(Storage storage, TaskList taskList) throws DukeException {
+    public String run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length > 2) { // too many parameters (>1)
             throw new DukeException(ui.deleteCmdTooManyArgsError());
         }
@@ -59,6 +59,6 @@ public class DeleteCommand implements Command {
         Task deletedTask = taskList.getIndex(taskIndex);
         taskList.removeIndex(taskIndex);
         storage.saveTaskList(taskList);
-        ui.printDeletedMessage(deletedTask, taskList);
+        return ui.returnDeletedMsg(deletedTask, taskList);
     }
 }

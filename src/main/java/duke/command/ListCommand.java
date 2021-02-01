@@ -33,10 +33,10 @@ public class ListCommand implements Command {
      * @throws DukeException if the format of the List command is invalid.
      */
     @Override
-    public void run(Storage storage, TaskList taskList) throws DukeException {
+    public String run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length > 1) { // handle commands such as "list abc", "list 1 2 3"
             throw new DukeException(ui.listCmdError());
         }
-        ui.printList(taskList);
+        return ui.returnList(taskList);
     }
 }

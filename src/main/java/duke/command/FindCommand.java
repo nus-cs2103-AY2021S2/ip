@@ -22,12 +22,12 @@ public class FindCommand implements Command {
         this.ui = ui;
     }
     @Override
-    public void run(Storage storage, TaskList taskList) throws DukeException {
+    public String run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle find without parameters
             throw new DukeException("Sorry human, please tell me what to find.");
         }
         String toFind = fullCmdStrArray[1];
         TaskList matchingTasks = taskList.find(toFind);
-        ui.printList(matchingTasks);
+        return ui.returnList(matchingTasks);
     }
 }
