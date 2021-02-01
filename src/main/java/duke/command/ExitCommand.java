@@ -30,16 +30,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
-        this.outputMessage = " Bye. Hope to see you again soon!";
-    }
-
-    /**
-     * Determines if whether the Duke Bot should continue processing the user input
-     *
-     * @return False
-     */
-    @Override
-    public boolean continueInput() {
-        return false;
+        this.outputMessage = "Bye. Hope to see you again soon!";
     }
 }

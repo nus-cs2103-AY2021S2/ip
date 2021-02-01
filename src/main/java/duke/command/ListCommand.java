@@ -24,7 +24,7 @@ public class ListCommand extends Command {
     }
 
     private void retrieveList(TaskList taskList) {
-        StringBuilder currText = new StringBuilder(" Here are the tasks in your list:");
+        StringBuilder currText = new StringBuilder("Here are the tasks in your list:");
 
         for (int num = 1; num <= taskList.size(); num++) {
             Task currentTask = taskList.get(num - 1);
@@ -43,15 +43,5 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage) {
         retrieveList(tasks);
-    }
-
-    /**
-     * Determines if whether the Duke Bot should continue processing the user input
-     *
-     * @return True
-     */
-    @Override
-    public boolean continueInput() {
-        return true;
     }
 }

@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     }
 
     private void retrieveMatchingTasks(TaskList taskList) {
-        StringBuilder currText = new StringBuilder(" Here are the matching tasks in your list:");
+        StringBuilder currText = new StringBuilder("Here are the matching tasks in your list:");
         int index = 0;
 
         for (int num = 1; num <= taskList.size(); num++) {
@@ -54,15 +54,5 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage) {
         retrieveMatchingTasks(tasks);
-    }
-
-    /**
-     * Determines if whether the Duke Bot should continue processing the user input
-     *
-     * @return True
-     */
-    @Override
-    public boolean continueInput() {
-        return true;
     }
 }

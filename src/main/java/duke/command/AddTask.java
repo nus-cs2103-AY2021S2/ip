@@ -34,10 +34,10 @@ public class AddTask extends Command {
     }
 
     private void handleNewTask(TaskList taskList) throws DukeException {
-        Task newTask = null;
-        this.outputMessage = " Got it. I've added this task: \n";
+        Task newTask = new Task();
+        this.outputMessage = "Got it. I've added this task: \n";
 
-        switch (commandType) {
+        switch (this.commandType) {
         case "event":
             formatDateTime();
             newTask = new Event(this.commandDetails,
@@ -56,19 +56,17 @@ public class AddTask extends Command {
         }
         taskList.add(newTask);
 
-        if (newTask != null) {
-            this.outputMessage += "\t  " + newTask.toString() + "\n\t Now you have "
-                    + taskList.size() + " tasks in the list.";
-        }
+        this.outputMessage += "\t  " + newTask.toString() + "\n\t Now you have "
+                + taskList.size() + " tasks in the list.";
     }
 
     private void formatDateTime() throws DukeException {
         String[] result;
 
-        if (commandType.equals("event")) {
-            result = commandDetails.trim().split(" /at ");
+        if (this.commandType.equals("event")) {
+            result = this.commandDetails.trim().split(" /at ");
         } else {
-            result = commandDetails.trim().split(" /by ");
+            result = this.commandDetails.trim().split(" /by ");
         }
 
         this.dateTime = result[1];
@@ -99,15 +97,5 @@ public class AddTask extends Command {
     public void execute(TaskList tasks, Storage storage) throws DukeException {
         handleNewTask(tasks);
         storage.saveData(tasks);
-    }
-
-    /**
-     * Determines if whether the Duke Bot should continue processing the user input
-     *
-     * @return True
-     */
-    @Override
-    public boolean continueInput() {
-        return true;
     }
 }

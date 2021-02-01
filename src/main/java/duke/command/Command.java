@@ -32,13 +32,6 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Storage storage) throws DukeException;
 
-    /**
-     * Determines if whether the Duke Bot should continue processing the user input
-     *
-     * @return Boolean result (true or false)
-     */
-    public abstract boolean continueInput();
-
     public String getMessage() {
         return this.outputMessage;
     }

@@ -24,6 +24,11 @@ public class Storage {
     private final String fileDirectory;
     private final String pathDirectory;
 
+    public Storage() {
+        this.fileDirectory = "";
+        this.pathDirectory = "";
+    }
+
     /**
      * Storage class constructor
      *
