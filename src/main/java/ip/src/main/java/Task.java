@@ -1,7 +1,9 @@
+package ip.src.main.java;
+
 public class Task {
     //int id;
     String content;
-    boolean done = false;
+    public boolean done = false;
     public Task(String content) {
         //this.id = id;
         this.content = content;

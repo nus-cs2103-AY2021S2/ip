@@ -1,3 +1,4 @@
+package ip.src.main.java;
 public class Ui {
     protected Duke bot;
 

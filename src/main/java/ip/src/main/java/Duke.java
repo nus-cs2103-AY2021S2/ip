@@ -1,3 +1,4 @@
+package ip.src.main.java;
 
 /**
  * Returns a Duke bot that stores the tasks given by the user.
@@ -49,6 +50,7 @@ public class Duke {
      */
 
     public void addToBot(Task task){
+
         this.list.addTask(task);
     }
 
