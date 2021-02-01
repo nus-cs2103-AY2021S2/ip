@@ -1,6 +1,12 @@
 package duke.component;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 
 import duke.exception.EmptyDescriptionException;
 import duke.exception.UnknownCommandException;
@@ -47,32 +53,10 @@ public class Parser {
             return new AddCommand(td);
         }
         case "deadline": {
-            int slash = command.indexOf("/by");
-            if (slash == -1) {
-                throw new WrongFormatException();
-            }
-            else if (slash <= 10 || parameters.length <= 2) {
-                throw new EmptyDescriptionException("deadline");
-            }
-            String name = command.substring(9, slash - 1);
-            String date = command.substring(slash + 4, command.length());
-
-            Deadline dl = new Deadline(name, date);
-            return new AddCommand(dl);
+            return parseDeadline(command);
         }
         case "event": {
-            int slash = command.indexOf("/at");
-            if (slash == -1) {
-                throw new WrongFormatException();
-            }
-            else if (slash <= 7 || parameters.length <= 2) {
-                throw new EmptyDescriptionException("event");
-            }
-            String name = command.substring(6, slash - 1);
-            String date = command.substring(slash + 4, command.length());
-
-            Event e = new Event(name, date);
-            return new AddCommand(e);
+            return parseEvent(command);
         }
         case "find": {
             if (command.length() <= 5) {
@@ -85,5 +69,35 @@ public class Parser {
             throw new UnknownCommandException();
         }
         }
+    }
+
+    public static AddCommand parseDeadline(String command) throws WrongFormatException, EmptyDescriptionException {
+        int slash = command.indexOf("/by");
+        if (slash == -1) {
+            throw new WrongFormatException();
+        }
+        else if (slash <= 10 || command.split(" ").length <= 2) {
+            throw new EmptyDescriptionException("deadline");
+        }
+        String name = command.substring(9, slash - 1);
+        String date = command.substring(slash + 4, command.length());
+
+        Deadline dl = new Deadline(name, date);
+        return new AddCommand(dl);
+    }
+
+    public static AddCommand parseEvent(String command) throws WrongFormatException, EmptyDescriptionException {
+        int slash = command.indexOf("/at");
+        if (slash == -1) {
+            throw new WrongFormatException();
+        }
+        else if (slash <= 7 || command.split(" ").length <= 2) {
+            throw new EmptyDescriptionException("event");
+        }
+        String name = command.substring(6, slash - 1);
+        String date = command.substring(slash + 4, command.length());
+
+        Event e = new Event(name, date);
+        return new AddCommand(e);
     }
 }
