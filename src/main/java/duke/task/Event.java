@@ -58,4 +58,25 @@ public class Event extends Task {
 	public String encode() {
 		return String.format("E | %s | %s | %s", this.isDone ? "1" : "0", this.description, this.getDateTime());
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Event)) {
+			return false;
+		}
+		Event other = (Event) o;
+		return this.description.equals(other.description) && this.isDone == other.isDone && this.date.equals(other.date)
+				&& (this.time == null || this.time.equals(other.time));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + (isDone ? 1 : 0);
+		return result;
+	}
 }
