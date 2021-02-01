@@ -78,7 +78,7 @@ public class UiHandler extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog("\n" + input, USER_IMAGE)
+                DialogBox.getUserDialog(input, USER_IMAGE)
         );
         userInput.clear();
         showResponse(steve.getParser().parseInput(input));

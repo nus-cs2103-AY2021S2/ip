@@ -31,6 +31,8 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<UiHandler>getController().setSteve(steve);
             stage.show();
+            stage.setTitle("Steve");
+            stage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
