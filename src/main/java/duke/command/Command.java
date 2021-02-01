@@ -2,18 +2,16 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * An abstract base class of executable commands.
  */
 public abstract class Command {
 
-    /**
-     * Indicator used to differentiate exit command
-     */
-    private boolean shouldExit;
+    /** Indicator used to differentiate exit command */
+    private final boolean shouldExit;
 
     public Command() {
         this.shouldExit = false;

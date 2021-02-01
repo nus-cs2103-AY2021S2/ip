@@ -1,28 +1,41 @@
 package duke.task;
 
-import duke.DukeHelper;
-
 import java.time.LocalDate;
 
+import duke.DukeHelper;
+
 /**
- * Represents a Deadline task.
+ * Represents a Deadline {@code Task}.
  */
 public class Deadline extends Task {
 
     private LocalDate by;
 
-    public LocalDate getBy() {
-        return by;
-    }
-
+    /**
+     * Constructor for Deadline {@code Task}, specifying the description and due date.
+     *
+     * @param description description of the deadline
+     * @param by due date of the deadline
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * Constructor for Deadline {@code Task}, specifying the task's status, description and due date.
+     *
+     * @param done integer value to indicate the deadline's status
+     * @param description description of the deadline
+     * @param by due date of the deadline
+     */
     public Deadline(int done, String description, String by) {
         super(done, description);
         this.by = LocalDate.parse(by);
+    }
+
+    public LocalDate getBy() {
+        return by;
     }
 
     @Override

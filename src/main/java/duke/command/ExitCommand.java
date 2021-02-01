@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Terminates the program.
@@ -15,6 +15,7 @@ public class ExitCommand extends Command {
 
     /**
      * Terminates the program and prints a farewell message to the user.
+     *
      * @param taskList user's task list
      * @param ui text UI object
      * @param storage storage object

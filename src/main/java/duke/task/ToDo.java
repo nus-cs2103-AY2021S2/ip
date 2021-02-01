@@ -1,11 +1,25 @@
 package duke.task;
 
+/**
+ * Represents a ToDo {@code Task}.
+ */
 public class ToDo extends Task {
 
+    /**
+     * Constructor for ToDo, specifying the description.
+     *
+     * @param description description of the todo
+     */
     public ToDo(String description) {
         super(description);
     }
 
+    /**
+     * Constructor for ToDo, specifying the task's status and description.
+     *
+     * @param done integer value to indicate the todo's status
+     * @param description description of the todo
+     */
     public ToDo(int done, String description) {
         super(done, description);
     }

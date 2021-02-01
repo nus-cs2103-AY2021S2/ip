@@ -11,6 +11,7 @@ public class DukeHelper {
 
     /**
      * Returns a formatted date String.
+     *
      * @param date date to be formatted
      * @return formatted date String
      */
@@ -21,10 +22,11 @@ public class DukeHelper {
 
     /**
      * Returns a formatted date String.
+     *
      * @param dateString a date String to be formatted
      * @return formatted date String
      */
-    public static String formatDate(String dateString) {
+    public static String formatDateString(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         LocalDate date = LocalDate.parse(dateString);
         return date.format(formatter);
@@ -32,9 +34,10 @@ public class DukeHelper {
 
     /**
      * Returns true if the String is a valid date.
+     *
      * @param dateString a date String to be checked
      */
-    public static boolean isValidDate(String dateString) {
+    public static boolean validDateChecker(String dateString) {
         try {
             LocalDate.parse(dateString);
             return true;
@@ -45,13 +48,14 @@ public class DukeHelper {
 
     /**
      * Returns true if the String is a number.
+     *
      * @param numberString a number String to be checked
      */
-    public static boolean isNumeric(String numberString) {
+    public static boolean numericChecker(String numberString) {
         try {
             Integer.parseInt(numberString);
             return true;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }

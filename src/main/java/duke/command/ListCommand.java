@@ -9,9 +9,9 @@ import duke.task.TaskList;
 /**
  * Lists all the tasks in the list to the user.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
-    private String date;
+    private final String date;
 
     public ListCommand() {
         this.date = null;
@@ -23,6 +23,7 @@ public class ListCommand extends Command{
 
     /**
      * Performs listing and printing of tasks to the user.
+     *
      * @param taskList user's task list
      * @param ui text UI object
      * @param storage storage object
@@ -39,12 +40,13 @@ public class ListCommand extends Command{
         TaskList printTaskList = taskList.clone();
         //If there is date in the duke.command, only display the events or deadlines on the particular date.
         if (date != null) {
-            if(!date.isEmpty() || !date.isBlank())
+            if (!date.isEmpty() || !date.isBlank()) {
                 printTaskList = printTaskList.filterByDate(date);
+            }
         }
 
         if (printTaskList.size() <= 0) {
-            throw new DukeException(String.format("You have no task on %s.", DukeHelper.formatDate(date)));
+            throw new DukeException(String.format("You have no task on %s.", DukeHelper.formatDateString(date)));
         }
 
         ui.showListMessage(printTaskList, false);
