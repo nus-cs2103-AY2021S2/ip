@@ -27,16 +27,16 @@ public class Duke {
     /**
      * Default constructor for the Duke class.
      */
-    public Duke(String path, String filename) {
+    public Duke() {
         taskList = new TaskList();
-        storage = new Storage(path, filename);
+        storage = new Storage("../data/", "duke.txt");
         ui = new Ui();
     }
 
     /**
      * Runs the Duke program.
      */
-    public void run() {
+    private void run() {
         boolean isExit = false;
 
         ui.greet();
@@ -56,6 +56,22 @@ public class Duke {
         ui.bye();
     }
 
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * Generates a response to user input.
+     */
+    public String getResponse(String input) {
+        Command c = Parser.parse(input);
+        return c.execute(taskList, ui);
+    }
+
     /**
      * The main method which is executed when the Duke program
      * is executed.
@@ -63,7 +79,7 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke("../data/", "duke.txt").run();
+        new Duke().run();
     }
 
 }

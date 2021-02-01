@@ -37,12 +37,13 @@ public class AddCommand extends Command {
      *           interactions with the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         try {
-            taskList.addTask(command);
+            return taskList.addTask(command);
         } catch (EmptyDescriptionException | EmptyDateException | InvalidInputException
                 | DateFormatException e) {
             ui.showError(e.getMessage());
+            return e.getMessage();
         }
     }
 

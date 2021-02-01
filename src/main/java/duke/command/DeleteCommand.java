@@ -35,11 +35,12 @@ public class DeleteCommand extends Command {
      *           interactions with the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         try {
-            taskList.deleteTask(command);
+            return taskList.deleteTask(command);
         } catch (InvalidInputException | ListOutOfBoundsException e) {
             ui.showError(e.getMessage());
+            return e.getMessage();
         }
     }
 

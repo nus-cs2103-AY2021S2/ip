@@ -29,8 +29,8 @@ public class ExitCommand extends Command {
      *           interactions with the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-
+    public String execute(TaskList taskList, Ui ui) {
+        return "";
     }
 
     /**
