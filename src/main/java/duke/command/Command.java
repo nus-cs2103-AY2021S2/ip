@@ -32,7 +32,7 @@ public abstract class Command {
      * @param ui A Ui object which the current program is using to manage
      *           interactions with the user.
      */
-    public abstract void execute(TaskList taskList, Ui ui);
+    public abstract String execute(TaskList taskList, Ui ui);
 
     /**
      * Returns true if the command is an ExitCommand, and false otherwise.

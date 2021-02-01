@@ -9,11 +9,9 @@ import duke.subfiles.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -77,6 +75,14 @@ public class Duke extends Application {
         ui.bye();
     }
 
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
     /**
      * The main method which is executed when the Duke program
      * is executed.
@@ -93,11 +99,11 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
@@ -108,8 +114,7 @@ public class Duke extends Application {
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
-        c.execute(taskList, ui);
-        return "Duke heard: " + input;
+        return c.execute(taskList, ui);
     }
 
     @Override

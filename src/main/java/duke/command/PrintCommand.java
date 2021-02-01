@@ -34,16 +34,17 @@ public class PrintCommand extends Command {
      *           interactions with the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         String[] sArray = command.split(" ");
 
         if (sArray.length == 1) {
-            taskList.printTasks();
+            return taskList.printTasks();
         } else {
             try {
-                taskList.printTasksOnDate(sArray[1]);
+                return taskList.printTasksOnDate(sArray[1]);
             } catch (DateFormatException e) {
                 ui.showError(e.getMessage());
+                return e.getMessage();
             }
         }
     }

@@ -1,9 +1,5 @@
 package duke.subfiles;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-
 import duke.exceptions.DateFormatException;
 import duke.exceptions.EmptyDateException;
 import duke.exceptions.EmptyDescriptionException;
@@ -13,6 +9,10 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * The TaskList class contains a list of tasks created by
@@ -123,7 +123,7 @@ public class TaskList {
      * @throws DateFormatException If the specified date is incorrectly
      *                             formatted.
      */
-    public void addTask(String s)
+    public String addTask(String s)
             throws EmptyDescriptionException, EmptyDateException, InvalidInputException,
             DateFormatException {
         String command = s.split(" ", 2)[0];
@@ -142,9 +142,11 @@ public class TaskList {
             throw new InvalidInputException();
         }
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.get(tasks.size() - 1).toString());
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String output = "Got it. I've added this task:\n"
+                + tasks.get(tasks.size() - 1).toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -179,12 +181,15 @@ public class TaskList {
      * Prints the list of tasks added by the user till this point,
      * based on the order they were added by the user.
      */
-    public void printTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public String printTasks() {
+        String output = "Here are the tasks in your list:";
         for (int i = 1; i < tasks.size() + 1; i++) {
             Task task = tasks.get(i - 1);
-            System.out.println(i + ". " + task.toString());
+            output += ("\n" + i + ". " + task.toString());
         }
+
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -194,8 +199,10 @@ public class TaskList {
      *
      * @param date The date specified by the user.
      */
-    private void printDeadlinesOnDate(LocalDate date) {
+    private String printDeadlinesOnDate(LocalDate date) {
+        String output;
         ArrayList<Deadline> deadlines = new ArrayList<>();
+
         for (Task t : tasks) {
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
@@ -206,15 +213,18 @@ public class TaskList {
         }
 
         if (deadlines.size() == 0) {
-            System.out.println("You have no deadlines due on " + date.toString() + ".");
+            output = "You have no deadlines due on " + date.toString() + ".";
         } else {
             int i = 1;
-            System.out.println("Here are the deadlines due on " + date.toString() + ":");
+            output = "Here are the deadlines due on " + date.toString() + ":";
             for (Deadline d : deadlines) {
-                System.out.println(i + ". " + d.toString());
+                output += ("\n" + i + ". " + d.toString());
                 i++;
             }
         }
+
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -224,8 +234,10 @@ public class TaskList {
      *
      * @param date The date specified by the user.
      */
-    private void printEventsOnDate(LocalDate date) {
+    private String printEventsOnDate(LocalDate date) {
+        String output;
         ArrayList<Event> events = new ArrayList<>();
+
         for (Task t : tasks) {
             if (t instanceof Event) {
                 Event e = (Event) t;
@@ -236,15 +248,18 @@ public class TaskList {
         }
 
         if (events.size() == 0) {
-            System.out.println("You have no events due on " + date.toString() + ".");
+            output = "You have no events due on " + date.toString() + ".";
         } else {
             int i = 1;
-            System.out.println("Here are the events due on " + date.toString() + ":");
+            output = "Here are the events due on " + date.toString() + ":";
             for (Event e : events) {
-                System.out.println(i + ". " + e.toString());
+                output += ("\n" + i + ". " + e.toString());
                 i++;
             }
         }
+
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -256,11 +271,12 @@ public class TaskList {
      * @throws DateFormatException If the specified date is incorrectly
      *                             formatted.
      */
-    public void printTasksOnDate(String s) throws DateFormatException {
+    public String printTasksOnDate(String s) throws DateFormatException {
         try {
             LocalDate date = LocalDate.parse(s);
-            printDeadlinesOnDate(date);
-            printEventsOnDate(date);
+            String outputUpper = printDeadlinesOnDate(date);
+            String outputLower = printEventsOnDate(date);
+            return outputUpper + "\n" + outputLower;
         } catch (DateTimeParseException e) {
             throw new DateFormatException();
         }
@@ -273,10 +289,11 @@ public class TaskList {
      *
      * @param s User input containing the keyword.
      */
-    public void findTasksWithKeyword(String s) {
+    public String findTasksWithKeyword(String s) {
         String keyword = s.split(" ", 2)[1].toLowerCase();
-
+        String output;
         ArrayList<Task> matchingTasks = new ArrayList<>();
+
         for (Task t : tasks) {
             if (t.getName().toLowerCase().contains(keyword)) {
                 matchingTasks.add(t);
@@ -284,15 +301,18 @@ public class TaskList {
         }
 
         if (matchingTasks.size() == 0) {
-            System.out.println("You have no matching tasks in your list.");
+            output = "You have no matching tasks in your list.";
         } else {
             int i = 1;
-            System.out.println("Here are the matching tasks in your list:");
+            output = "Here are the matching tasks in your list:";
             for (Task t : matchingTasks) {
-                System.out.println(i + ". " + t.toString());
+                output += ("\n" + i + ". " + t.toString());
                 i++;
             }
         }
+
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -307,7 +327,7 @@ public class TaskList {
      * @throws ListOutOfBoundsException If the user provided an index which is
      *                                  not in the list.
      */
-    public void markDone(String s)
+    public String markDone(String s)
             throws InvalidInputException, ListOutOfBoundsException {
         int index;
         try {
@@ -319,8 +339,11 @@ public class TaskList {
 
         try {
             tasks.get(index).setDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks.get(index).toString());
+
+            String output = "Nice! I've marked this task as done:\n"
+                    + tasks.get(index).toString();
+            System.out.println(output);
+            return output;
         } catch (IndexOutOfBoundsException e) {
             throw new ListOutOfBoundsException(tasks.size());
         }
@@ -338,7 +361,7 @@ public class TaskList {
      * @throws ListOutOfBoundsException If the user provided an index which is
      *                                  not in the list.
      */
-    public void deleteTask(String s) throws InvalidInputException, ListOutOfBoundsException {
+    public String deleteTask(String s) throws InvalidInputException, ListOutOfBoundsException {
         int index;
         try {
             String[] sArray = s.split(" ");
@@ -349,9 +372,12 @@ public class TaskList {
 
         try {
             Task t = tasks.remove(index);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(t.toString());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+            String output = "Noted. I've removed this task:\n"
+                    + t.toString() + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.";
+            System.out.println(output);
+            return output;
         } catch (IndexOutOfBoundsException e) {
             throw new ListOutOfBoundsException(tasks.size());
         }

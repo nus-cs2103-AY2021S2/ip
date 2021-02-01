@@ -35,11 +35,12 @@ public class DoneCommand extends Command {
      *           interactions with the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         try {
-            taskList.markDone(command);
+            return taskList.markDone(command);
         } catch (InvalidInputException | ListOutOfBoundsException e) {
             ui.showError(e.getMessage());
+            return e.getMessage();
         }
     }
 

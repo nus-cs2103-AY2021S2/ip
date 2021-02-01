@@ -33,8 +33,8 @@ public class FindCommand extends Command {
      *           interactions with the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        taskList.findTasksWithKeyword(command);
+    public String execute(TaskList taskList, Ui ui) {
+        return taskList.findTasksWithKeyword(command);
     }
 
     /**
