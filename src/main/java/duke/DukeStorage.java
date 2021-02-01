@@ -1,12 +1,5 @@
 package duke;
 
-import exception.DukeDateFormatException;
-import exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,19 +10,26 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+import exception.DukeDateFormatException;
+import exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 /**
  * Duke storage object. Handles storing, loading, and unloading of task history
  */
 public class DukeStorage {
     /**
-     * File name.
-     */
-    protected String fileName;
-    /**
      * Datetime parsed format.
      */
-    public static DateTimeFormatter format = DateTimeFormatter
+    private static final DateTimeFormatter format = DateTimeFormatter
             .ofPattern("dd/MM/yyyy, hh:mma", Locale.US);
+    /**
+     * Name of file being stored.
+     */
+    protected String fileName;
 
     /**
      * Instantiates a new Duke storage.
@@ -153,12 +153,16 @@ public class DukeStorage {
                         + ((Event) t).getSimpleAt();
                 break;
             }
+            default:
+                break;
             }
             content.append(currTask);
             content.append("\n");
         }
         FileWriter fw = new FileWriter(this.fileName);
-        if (content.length() == 0) return;
+        if (content.length() == 0) {
+            return;
+        }
         fw.write(content.substring(0, content.toString().length() - 1));
         fw.close();
     }

@@ -11,13 +11,15 @@ public class DukeException extends Exception {
     /**
      * duke.Duke message dividers.
      */
-    public final static String DIVIDER1 = "\n═══════════════════════════╣"
-            + "DUKE╠═══════════════════════════\n";
+    public static final String DIVIDER_FRONT = "\n══════════════════"
+            + "═════════╣DUKE╠═══════"
+            + "════════════════════\n";
     /**
      * duke.Duke message dividers.
      */
-    public final static String DIVIDER2 = "\n════════════════════════════"
-            + "════════════════════════════════\n";
+    public static final String DIVIDER_BACK = "\n══════════════════"
+            + "══════════════════════"
+            + "════════════════════\n";
 
     /**
      * Instantiates a new duke.Duke exception.
@@ -30,8 +32,8 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return DIVIDER1 + Color.YELLOW_BOLD + Emoji.ERROR + Color.RESET + " "
+        return DIVIDER_FRONT + Color.YELLOW_BOLD + Emoji.ERROR + Color.RESET + " "
                 + this.getMessage() + " " + Color.YELLOW_BOLD
-                + Emoji.ERROR + Color.RESET + DIVIDER2;
+                + Emoji.ERROR + Color.RESET + DIVIDER_BACK;
     }
 }

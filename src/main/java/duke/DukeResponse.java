@@ -6,43 +6,42 @@ import misc.Color;
 import misc.Emoji;
 import task.Task;
 
-import java.util.ArrayList;
-
 /**
  * Duke response object.
  */
 public class DukeResponse {
     /**
-     * Last output message.
+     * Duke message dividers.
      */
-    protected String currentMessage;
-
+    public static final String DIVIDER_FRONT = "\n═════════════"
+            + "══════════════╣DUKE╠════"
+            + "═══════════════════════\n";
     /**
      * Duke message dividers.
      */
-    public final static String DIVIDER1 = "\n═══════════════════════════╣"
-            + "DUKE╠═══════════════════════════\n";
-    /**
-     * Duke message dividers.
-     */
-    public final static String DIVIDER2 = "\n════════════════════════════"
-            + "════════════════════════════════\n";
+    public static final String DIVIDER_BACK = "\n═══════════════"
+            + "══════════════════════"
+            + "═══════════════════════\n";
     /**
      * Duke task add headers.
      */
-    public final static String TASK_ADD_HEADER = "Alrighty! I've added this task:\n";
+    public static final String TASK_ADD_HEADER = "Alrighty! I've added this task:\n";
     /**
      * Duke task delete headers.
      */
-    public final static String TASK_DELETE_HEADER = "Gotcha! I've removed this task:\n";
+    public static final String TASK_DELETE_HEADER = "Gotcha! I've removed this task:\n";
     /**
      * Duke task footer1.
      */
-    public final static String TASK_FOOTER1 = "\nNow you have ";
+    public static final String TASK_FOOTER1 = "\nNow you have ";
     /**
      * Duke task footer2.
      */
-    public final static String TASK_FOOTER2 = " tasks in the list.";
+    public static final String TASK_FOOTER2 = " tasks in the list.";
+    /**
+     * Last output message.
+     */
+    protected String currentMessage;
 
     /**
      * Instantiates a new Duke response.
@@ -139,7 +138,7 @@ public class DukeResponse {
      * Print message.
      */
     public void printMessage() {
-        System.out.println(DIVIDER1 + this.currentMessage + DIVIDER2);
+        System.out.println(DIVIDER_FRONT + this.currentMessage + DIVIDER_BACK);
     }
 
 }

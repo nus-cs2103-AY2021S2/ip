@@ -9,11 +9,11 @@ public class Task {
     /**
      * task.Task description.
      */
-    public String description;
+    protected String description;
     /**
      * task.Task completion status.
      */
-    public boolean isDone;
+    protected boolean isDone;
 
     /**
      * Instantiates a new task.Task.

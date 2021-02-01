@@ -1,11 +1,5 @@
 package duke;
 
-import exception.*;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,10 +7,26 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import exception.DukeDateFormatException;
+import exception.DukeException;
+import exception.DukeMissingArgumentsException;
+import exception.DukeMissingTaskException;
+import exception.DukeNoInputException;
+import exception.DukeUnknownInputException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 /**
  * Handles duke operations and parses input commands.
  */
 public class Duke {
+    /**
+     * Datetime parsed format.
+     */
+    private static final DateTimeFormatter format = DateTimeFormatter
+            .ofPattern("dd/MM/yyyy, hh:mma", Locale.US);
     /**
      * DukeResponse object to handle responses.
      */
@@ -30,12 +40,6 @@ public class Duke {
      * DukeTaskList to handle task list operations.
      */
     private final DukeTaskList dukeTaskList;
-
-    /**
-     * Datetime parsed format.
-     */
-    public static DateTimeFormatter format = DateTimeFormatter
-            .ofPattern("dd/MM/yyyy, hh:mma", Locale.US);
 
     /**
      * Instantiates a new duke.
