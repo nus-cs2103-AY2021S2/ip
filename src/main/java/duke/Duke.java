@@ -8,9 +8,17 @@ import duke.task.TaskList;
  * Driver class for Duke project
  */
 public class Duke {
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+
+    /**
+     *
+     */
+    public Duke() {
+        this.storage = null;
+        String filePath = System.getProperty("user.dir") + "/data/Duke.txt";
+        new Duke(filePath);
+    }
 
     /**
      * Duke class constructor
@@ -18,42 +26,35 @@ public class Duke {
      * @param filePath Path directory to location of storage file
      */
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-
         try {
-            tasks = new TaskList(storage.loadData());
+            this.storage = new Storage(filePath);
+            this.tasks = new TaskList(this.storage.loadData());
         } catch (DukeException ex) {
-            ui.display(ex.getMessage());
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
     /**
      * Starts up the Duke Bot program, read and response to user various inputs accordingly
      */
-    public void run() {
-        boolean continueInput = true;
-
-        while (continueInput) {
-            String input = ui.nextCommand();
-
-            try {
-                Command command = Parser.parse(input);
-                command.execute(tasks, ui, storage);
-                continueInput = command.continueInput();
-            } catch (DukeException ex) {
-                ui.display(ex.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(this.tasks, this.storage);
+            return "Duke:\n" + command.getMessage();
+        } catch (DukeException ex) {
+            return "Duke:\n" + ex.getMessage();
         }
     }
 
-
     /**
-     * Main method of Duke Project
+     * *
+     * @return
      */
-    public static void main(String[] args) {
-        String filePath = System.getProperty("user.dir") + "/data/Duke.txt";
-        new Duke(filePath).run();
+    public String welcomeUser() {
+        String output = "Duke:\n Hello! I'm Duke\n"
+                + "What can I do for you?";
+        return output;
     }
 }
+

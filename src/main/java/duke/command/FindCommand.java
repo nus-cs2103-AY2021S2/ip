@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -33,7 +32,7 @@ public class FindCommand extends Command {
             Task currentTask = taskList.get(num - 1);
             String description = currentTask.getDescription();
 
-            if(ignoreCase(description, this.commandDetails)) {
+            if (ignoreCase(description, this.commandDetails)) {
                 index++;
                 currText.append("\n\t ").append(index).append(".").append(currentTask.toString());
             }
@@ -50,13 +49,11 @@ public class FindCommand extends Command {
      * Display the result as output message in the command line
      *
      * @param tasks TaskList
-     * @param ui Instance of Ui
      * @param storage Instance of Storage
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         retrieveMatchingTasks(tasks);
-        ui.display(outputMessage);
     }
 
     /**

@@ -1,13 +1,17 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.Storage;
-import duke.task.*;
-import duke.Ui;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.Storage;
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * AddTask handles the addition of event, deadline and todo tasks to the list only
@@ -88,15 +92,13 @@ public class AddTask extends Command {
      * Adds task to TaskList, save the updated TaskList into data file and output message to the command line
      *
      * @param tasks TaskList
-     * @param ui Instance of Ui
      * @param storage Instance of Storage
      * @throws DukeException If the input is invalid date format
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         handleNewTask(tasks);
         storage.saveData(tasks);
-        ui.display(this.outputMessage);
     }
 
     /**

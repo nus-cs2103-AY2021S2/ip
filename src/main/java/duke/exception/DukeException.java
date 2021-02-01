@@ -36,23 +36,22 @@ public class DukeException extends Exception {
             errorMsg = "☹ OOPS!!! The integer value is invalid (negative, 0 or out of task list range) :-(";
             break;
         case INVALID_DATETIME:
-            errorMsg = "☹ OOPS!!! Invalid date has been detected :-( " +
-                    "Pls key in a valid date in MMM dd yyyy format (i.e. Oct 15 2019) !!!";
+            errorMsg = "☹ OOPS!!! Invalid date has been detected :-( "
+                    + "Pls key in a valid date in MMM dd yyyy format (i.e. Oct 15 2019) !!!";
             break;
         case BLANK_DESCRIPTION:
-            errorMsg = "☹ OOPS!!! The description of a " + this.taskType +
-                    " cannot be empty :-(";
+            errorMsg = "☹ OOPS!!! The description of a " + this.taskType + " cannot be empty :-(";
             break;
         case LOADING_ERROR:
             errorMsg = "☹ OOPS!!! The file cannot be loaded and a new file will be created !!!";
             break;
         case SAVING_ERROR:
-            errorMsg = "☹ OOPS!!! Unfortunately, file saving to Duke.txt is not working at the moment :-( " +
-                    "Pls kindly try again later !!!";
+            errorMsg = "☹ OOPS!!! Unfortunately, file saving to Duke.txt is not working at the moment :-( "
+                    + "Pls kindly try again later !!!";
             break;
         case INVALID_FILE_CONFIGURATION:
-            errorMsg = "☹ OOPS!!! Unfortunately, file configuration is not working at the moment :-( " +
-                    "Pls restart (exit and start again) the Duke Bot !!!";
+            errorMsg = "☹ OOPS!!! Unfortunately, file configuration is not working at the moment :-( "
+                    + "Pls restart (exit and start again) the Duke Bot !!!";
             break;
         default:
             break;

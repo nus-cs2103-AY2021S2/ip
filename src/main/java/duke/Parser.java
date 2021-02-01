@@ -1,10 +1,17 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.*;
-
 import java.util.Collections;
 import java.util.HashSet;
+
+import duke.command.AddTask;
+import duke.command.Command;
+import duke.command.DeleteTask;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 
 /**
  * Parser class which translates input of user to task command, task description and date
@@ -51,20 +58,20 @@ public class Parser {
         return commandType;
     }
 
-     private static String formatInput(String taskCommand, String input)  throws DukeException {
-         String taskStr = "";
+    private static String formatInput(String taskCommand, String input) throws DukeException {
+        String taskStr = "";
 
-         if (!taskCommand.equals("bye") && !taskCommand.equals("list")) {
-             checkValidInput(taskCommand);
-             taskStr = formatTaskDetails(taskCommand, input);
-             checkBlankDescription(taskCommand, taskStr);
-         }
-         return taskStr;
-     }
+        if (!taskCommand.equals("bye") && !taskCommand.equals("list")) {
+            checkValidInput(taskCommand);
+            taskStr = formatTaskDetails(taskCommand, input);
+            checkBlankDescription(taskCommand, taskStr);
+        }
+        return taskStr;
+    }
 
     private static String formatTaskDetails(String taskCommand, String input) {
         input = input.replaceFirst(taskCommand + " ", "");
-        String taskStr = "";
+        String taskStr;
 
         if (taskCommand.equals("event")) {
             taskStr = input.split(" /at")[0].replaceFirst("event ", "");

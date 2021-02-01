@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Storage;
+import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.Ui;
 
 /**
  * Abstract command class that can be inherited by various commands
@@ -28,11 +27,10 @@ public abstract class Command {
      * Execute the command accordingly
      *
      * @param tasks TaskList
-     * @param ui Instance of Ui
      * @param storage Instance of Storage
      * @throws DukeException If there is an invalid input value from the user
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      * Determines if whether the Duke Bot should continue processing the user input
@@ -40,4 +38,8 @@ public abstract class Command {
      * @return Boolean result (true or false)
      */
     public abstract boolean continueInput();
+
+    public String getMessage() {
+        return this.outputMessage;
+    }
 }

@@ -1,9 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
 import duke.task.Task;
-import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * ListCommand handles the retrieval of all the tasks in the TaskList as requested by the user
@@ -39,13 +38,11 @@ public class ListCommand extends Command {
      * Output the whole TaskList as message to the command line
      *
      * @param tasks TaskList
-     * @param ui Instance of Ui
      * @param storage Instance of Storage
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         retrieveList(tasks);
-        ui.display(outputMessage);
     }
 
     /**

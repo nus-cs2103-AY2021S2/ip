@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.exception.*;
 import duke.Storage;
-import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import duke.task.Task;
-import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * DeleteTask handles the deletion of event, deadline and todo tasks to the list only
@@ -36,19 +36,17 @@ public class DeleteTask extends Command {
      * Delete selected task from the TaskList, save the updated TaskList into file and output message to command line
      *
      * @param tasks TaskList
-     * @param ui Instance of Ui
      * @param storage Instance of Storage
      * @throws DukeException If the integer input is out of list range (negative, 0 or greater than TaskList size)
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         if (index <= 0 || index > tasks.size()) {
             throw new DukeException(ExceptionType.INVALID_INTEGER, "");
         }
 
         handleDeleteTask(tasks);
         storage.saveData(tasks);
-        ui.display(outputMessage);
     }
 
     /**
