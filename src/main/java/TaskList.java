@@ -5,11 +5,17 @@ public class TaskList {
     protected ArrayList<Task> list;
     protected int size;
 
+    /**
+     * Contructor to create a new TaskList
+     */
     public TaskList() {
         this.list = new ArrayList<>();
         this.size = 0;
     }
 
+    /**
+     * Contructor to create the previous TaskList
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
         this.size = list.size();
@@ -63,6 +69,14 @@ public class TaskList {
         }
     }
 
+    public String listStrTask() {
+        String respone = "";
+        for (int i = 0; i < size; i++) {
+            respone = respone + (i + 1) + "." + list.get(i) + "\n";
+        }
+        return respone;
+    }
+
     /**
      * Find the tasks which has similar name to the string.
      *
@@ -80,6 +94,25 @@ public class TaskList {
     }
 
     /**
+     * Find the tasks which has similar name to the string.
+     *
+     * @param task
+     * @return task found
+     */
+    public String findStrTask(String task) {
+        int num = 1;
+        String respone = "";
+
+        for (int i = 0; i < size; i++) {
+            String string = list.get(i).toString();
+            if (string.contains(task)) {
+                respone = respone + num++ + "." + string + "\n";
+            }
+        }
+        return respone;
+    }
+
+    /**
      * Search for tasks which take place at that timing.
      *
      * @param time string to be searched.
@@ -93,6 +126,25 @@ public class TaskList {
                 System.out.println(num++ + "." + string);
             }
         }
+    }
+
+    /**
+     * Search for tasks which take place at that timing.
+     *
+     * @param time
+     * @return task found
+     */
+    public String dateStrTask(String time) {
+        int num = 1;
+        String respone = "";
+
+        for (int i = 0; i < size; i++) {
+            String string = list.get(i).toString();
+            if (string.contains(time)) {
+                respone = respone + num++ + "." + string + "\n";
+            }
+        }
+        return respone;
     }
 
 }

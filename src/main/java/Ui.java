@@ -1,64 +1,84 @@
-import java.util.Scanner;
 
 public class Ui {
 
-    protected Scanner scanner;
+    protected String respone;
 
-    public Ui() {
-        scanner = new Scanner(System.in);
+    /**
+     * Respone when the user activated Duke.
+     *
+     * @return welcome
+     */
+    public String showWelcome() {
+        respone = "-------------------------------"
+                + "--------------------------------\n"
+                + "Hello! I'm Duke\n" + "What can I do for you?\n"
+                + "-------------------------------"
+                + "--------------------------------";
+        return respone;
     }
 
-    public void showWelcome() {
-        System.out.println("-------------------------------" +
-                "--------------------------------");
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        System.out.println("-------------------------------" +
-                "--------------------------------");
+    /**
+     * Respone when there is a error
+     *
+     * @param error
+     * @return error
+     */
+    public String showError(String error) {
+        respone = error;
+        return respone;
     }
 
-    public void showError(String error) {
-        System.out.println(error);
+    /**
+     * Respone when user said bye.
+     *
+     * @return goodbye
+     */
+    public String showGoodBye() {
+        respone = "Bye. Hope to see you again soon";
+        return respone;
     }
 
-    public String readCommand() {
-        return scanner.nextLine();
+    /**
+     * Line to divide the text box.
+     *
+     * @return line
+     */
+    public String showLine() {
+        respone = "-------------------------------------";
+        return respone;
     }
 
-    public void showGoodBye() {
-        System.out.println("Bye. Hope to see you again soon");
+    public String showList() {
+        respone = "Here are the tasks in your list:";
+        return respone;
     }
 
-    public void showLine() {
-        System.out.println("-------------------------------" +
-                "--------------------------------");
-    }
-
-    public void showList() {
-        System.out.println("Here are the tasks in your list:");
-    }
-
-    public void showAdd(Task t, int size) {
-        System.out.println("Got it. I've added this task:\n"
+    public String showAdd(Task t, int size) {
+        respone = "Got it. I've added this task:\n"
                 + "  " + t + "\nNow you have "
-                + size + " tasks in the list.");
+                + size + " tasks in the list.";
+        return respone;
     }
 
-    public void showDone(Task t){
-        System.out.println("Nice! I've marked this task as done:\n  " + t);
+    public String showDone(Task t) {
+        respone = "Nice! I've marked this task as done:\n  " + t;
+        return respone;
     }
 
-    public void showDelete(Task t, int size) {
-        System.out.println("Noted. I've removed this task:\n  "
+    public String showDelete(Task t, int size) {
+        respone = "Noted. I've removed this task:\n  "
                 + t + "\nNow you have "
-                + size + " tasks in the list.");
+                + size + " tasks in the list.";
+        return respone;
     }
 
-    public void showFind() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFind() {
+        respone = "Here are the matching tasks in your list:";
+        return respone;
     }
 
-    public void showDate(String time) {
-        System.out.println("Here are the tasks occurring on " + time + " in your list:");
+    public String showDate(String time) {
+        respone = "Here are the tasks occurring on " + time + " in your list:";
+        return respone;
     }
-
 }

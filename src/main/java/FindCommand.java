@@ -5,13 +5,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String respone;
         if (info.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
+            throw new DukeException("OOPS!!! The description cannot be empty.");
         } else {
-            ui.showFind();
-            tasks.findTask(info);
+            respone = ui.showFind() + "\n" + tasks.findStrTask(info);
         }
+        return respone;
     }
 
     @Override

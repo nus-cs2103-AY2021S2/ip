@@ -1,6 +1,7 @@
 public abstract class Command {
 
-    protected String action, info;
+    protected String action;
+    protected String info;
 
     public Command(String action, String info) {
         this.action = action;
@@ -16,7 +17,7 @@ public abstract class Command {
      * @param storage
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
 
