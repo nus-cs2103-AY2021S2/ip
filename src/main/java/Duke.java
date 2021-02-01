@@ -6,13 +6,20 @@ import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
 
     private FileLoader loader;
     private TaskList tasks;
     private final Ui ui = new Ui();
     private boolean isLocalTaskList; // in event file cannot be written to
+
+
+    public Duke() {}
 
     /**
      * Initializes the main program given directory used to save user tasks.
@@ -71,5 +78,14 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("./dukeData/tasks.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }
