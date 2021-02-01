@@ -1,15 +1,65 @@
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.File;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
 
 public class Duke {
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private String filePath = "";
+
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.ui.greet();
+        this.storage = new Storage(filePath);
+        this.filePath = filePath;
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        while (!this.ui.shouldExit() && this.ui.hasNext()) {
+            this.tasks = ui.process(this.tasks);
+            try {
+                FileWriter fw = new FileWriter(this.filePath);
+                for (Task t : this.tasks.getList()) {
+                    String rmb = "";
+                    if (t instanceof Event) {
+                        rmb += "E";
+                    } else if (t instanceof Deadline) {
+                        rmb += "D";
+                    } else if (t instanceof Todo) {
+                        rmb += "T";
+                    }
+                    rmb += " | ";
+                    if (t.isCompleted()) {
+                        rmb += "1";
+                    } else {
+                        rmb += "0";
+                    }
+                    rmb += " | ";
+                    rmb += t.getDescription();
+                    if (t instanceof DueDate) {
+                        rmb += " | ";
+                        rmb += ((DueDate) t).getDueDate();
+                    }
+                    fw.write(rmb + "\n");
+                }
+                fw.close();
+            } catch (IOException e) {
+            }
+        }
+    }
+
     public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
+    /*public static void main(String[] args) {
         String logo = " ____         _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
@@ -234,5 +284,5 @@ public class Duke {
                 System.out.println("    ____________________________________________________________");
             }
         }
-    }
+    }*/
 }
