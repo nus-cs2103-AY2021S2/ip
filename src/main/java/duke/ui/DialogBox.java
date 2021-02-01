@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
@@ -15,8 +18,10 @@ import java.util.Collections;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+    @FXML
+    private ImageView displayPicture;
 
-    private DialogBox(String text) {
+    private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -26,6 +31,7 @@ public class DialogBox extends HBox {
             ex.printStackTrace();
         }
         dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     private void flip() {
@@ -35,12 +41,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text) {
-        var db = new DialogBox(text);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

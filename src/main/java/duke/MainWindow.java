@@ -5,10 +5,12 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.tasks.TaskList;
+import duke.ui.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -24,12 +26,17 @@ public class MainWindow extends VBox {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    
+    private Image userImage;
+    private Image dukeImage;
 
     /**
      * This method is called to initialize a controller after its root element has been completely processed.
      */
     @FXML
     public void initialize() {
+        userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
+        dukeImage = new Image(getClass().getResourceAsStream("/images/duke.png"));
         // Set the scroll pane to automatically scroll down when the text reaches the bottom
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
@@ -48,12 +55,13 @@ public class MainWindow extends VBox {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         // Create a new Label control
-        String welcomeMsg = String.format("Hello! I'm\n%s\nWhat can I do for you?", logo);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg));
+        String welcomeMsg = "Hello! I'm Duke.\nWhat can I do for you?";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg, dukeImage));
 
         primaryStage.setTitle("Duke");
         primaryStage.setMinWidth(400.0);
         primaryStage.setMinHeight(500.0);
+        
     }
 
     @FXML
@@ -61,8 +69,8 @@ public class MainWindow extends VBox {
         String input = userInput.getText();
         String response = getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input),
-                DialogBox.getDukeDialog(response)
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }
