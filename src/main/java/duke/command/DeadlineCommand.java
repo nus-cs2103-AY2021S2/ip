@@ -33,9 +33,10 @@ public class DeadlineCommand extends AddCommand {
      * @throws DukeException If error occurs during the process.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Deadline deadline = getTask();
         super.addThisTask(tasks, deadline, storage);
+        return ui.addTaskResponse(deadline, tasks);
     }
 
     @Override

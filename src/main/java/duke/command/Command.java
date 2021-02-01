@@ -16,7 +16,7 @@ public abstract class Command {
      * @param storage Storage path that is going to be updated.
      * @throws DukeException If error occurs during the process.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns false if this command is not ExitCommand.

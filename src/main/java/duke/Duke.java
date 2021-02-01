@@ -6,16 +6,19 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-
 /**
  * A class represents the Duke bot.
  */
 public class Duke {
     private TaskList tasks;
-    private final Storage storage;
-    private final Ui ui;
+    private Storage storage;
+    private Ui ui;
 
+    /**
+     * An empty constructor for the Duke bot.
+     */
+    public Duke() {
+    }
     /**
      * Constructs a Duke bot.
      * @param filePath The file path to store the tasks.
@@ -29,7 +32,6 @@ public class Duke {
             System.out.println(e.getMessage());
         }
     }
-
     /**
      * Main method to lunch the bot.
      * @param args Arguments of the main method.
@@ -53,8 +55,22 @@ public class Duke {
                 isOver = command.isExit();
                 ui.printLine();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showErrorMessage(e.getMessage());
             }
+        }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parseCommand(input);
+            String response = command.execute(tasks, ui, storage);
+            return response;
+        } catch (DukeException e) {
+            return ui.showErrorMessage(e.getMessage());
         }
     }
 }
