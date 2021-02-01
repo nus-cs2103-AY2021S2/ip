@@ -1,4 +1,5 @@
 {
 	"java.format.settings.url": "checkstyle.xml",
-	"java.checkstyle.configuration": "${workspaceFolder}\\cs2030_checks.xml"
+	"java.checkstyle.configuration": "${workspaceFolder}\\cs2030_checks.xml",
+	"cmake.configureOnOpen": false
 }
