@@ -1,11 +1,16 @@
-import java.util.ArrayList;
-
+/**
+ * Driver class. Creating a Duke object runs the application.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Duke constructor specifying the file path to save the task list to.
+     * @param filePath File path to save task list to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -13,10 +18,17 @@ public class Duke {
         storage.readFromStorage(taskList);
     }
 
+    /**
+     * Runs Duke application.
+     */
     public void run() {
         ui.runUi(taskList, storage);
     }
 
+    /**
+     * Driver code. Creates and runs Duke.
+     * @param args Commandline arguments. Not used. 
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
