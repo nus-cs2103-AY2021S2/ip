@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class DoneCommand extends Command {
     protected String[] info;
 
@@ -20,8 +22,9 @@ public class DoneCommand extends Command {
      * @throws DukeException if the information given is invalid
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         Task task = tasks.done(info);
+        storage.store(tasks);
         return ui.didTask(task);
     }
 }

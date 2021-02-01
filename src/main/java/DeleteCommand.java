@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class DeleteCommand extends Command {
     protected String[] info;
 
@@ -22,9 +24,10 @@ public class DeleteCommand extends Command {
      * @throws DukeException if the provided information is invalid
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         Task task = tasks.delete(info);
         int listLength = tasks.getListLength();
+        storage.store(tasks);
         return ui.deletedTask(task, listLength);
     }
 }
