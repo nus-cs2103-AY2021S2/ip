@@ -54,6 +54,11 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Gets the response, use for Duke GUI.
+     * @param command The type of command.
+     * @return The output shows to the user screen.
+     */
     public String getResponse(String command) {
         if (command.equalsIgnoreCase(Command.LIST.getAction())) {
             ArrayList<Task> list = taskList.getList();
@@ -94,7 +99,7 @@ public class Duke {
                 return e.getMessage();
             }
         } else if (command.toLowerCase().startsWith(Command.FIND.getAction())) {
-            String keyword = command.substring(5);
+            String[] keyword = command.substring(5).split(" ");
             ArrayList<Task> filter = taskList.findTask(keyword);
             if (filter.isEmpty()) {
                 return Constants.FIND_FAIL;
@@ -157,7 +162,7 @@ public class Duke {
                     ui.printResponse(e.getMessage());
                 }
             } else if (command.toLowerCase().startsWith(Command.FIND.getAction())) {
-                String keyword = command.substring(5);
+                String[] keyword = command.substring(5).split(" ");
                 ArrayList<Task> filter = taskList.findTask(keyword);
                 ui.printMatchedTask(filter);
             } else {

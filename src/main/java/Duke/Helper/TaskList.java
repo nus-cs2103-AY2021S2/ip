@@ -115,16 +115,18 @@ public class TaskList {
 
     /**
      * Finds all the tasks that contains the keyword.
-     * @param keyword The word that need to find.
+     * @param keywords A list of words that need to find.
      * @return A list of tasks containing the keyword.
      */
-    public ArrayList<Task> findTask(String keyword) {
+    public ArrayList<Task> findTask(String... keywords) {
         ArrayList<Task> result = new ArrayList<>();
-        for (Task task : list) {
-            String description = task.getDescription();
-            String time = task.getTime();
-            if (description.contains(keyword) || time.contains(keyword)) {
-                result.add(task);
+        for (String keyword : keywords) {
+            for (Task task : list) {
+                String description = task.getDescription();
+                String time = task.getTime();
+                if (description.contains(keyword) || time.contains(keyword)) {
+                    result.add(task);
+                }
             }
         }
         return result;
