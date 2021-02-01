@@ -5,27 +5,30 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 /**
- * Responsible for methods printing to CLI.
+ * Responsible for methods setting and sending appropriate responses to GUI.
  */
 public class Ui {
     private static String response;
 
     /**
      * Returns welcome message.
+     *
      * @return welcome message at the start of application
      */
     public static String welcomeString() {
         return "Welcome!\n"
-                        + "I'm Ronald, the best McSpicy ever.\n"
-                        + "What can I do for you today?";
+                + "I'm Ronald, the best McSpicy ever.\n"
+                + "What can I do for you today?";
     }
 
     /**
      * Prints farewell message.
      */
     public static void displayFarewell() {
-        Ui.response = "Thanks for coming, we hope to see you again!\n"
+        String str = "Thanks for coming, we hope to see you again!\n"
                 + "We will be closing shortly...";
+        assignResponse(str);
+
     }
 
     /**
@@ -56,7 +59,7 @@ public class Ui {
                     + "If you would like to find orders containing a particular keyword, type\n"
                     + "[find <keyword>]\n");
         }
-        Ui.response = sb.toString();
+        assignResponse(sb.toString());
     }
 
     /**
@@ -75,7 +78,7 @@ public class Ui {
                 sb.append(formattedTask);
             }
         }
-        Ui.response = sb.toString();
+        assignResponse(sb.toString());
     }
 
     /**
@@ -90,7 +93,7 @@ public class Ui {
                 + "\nYou now have "
                 + tasks.size()
                 + " order(s)!";
-        Ui.response = str;
+        assignResponse(str);
     }
 
     /**
@@ -104,7 +107,7 @@ public class Ui {
                 + "Here you go, I've removed this item from your order list!\n\n    "
                 + task
                 + "\nYou have " + tasks.size() + " order(s) left!";
-        Ui.response = str;
+        assignResponse(str);
     }
 
     /**
@@ -113,16 +116,20 @@ public class Ui {
      * @param task task that was marked as done
      */
     public static void displayDone(Task task) {
-        Ui.response = "Your order has been served!\n\n  " + task;
+        assignResponse("Your order has been served!\n\n  " + task);
     }
 
     /**
-     * Prints errors.
+     * Prints error.
      *
      * @param msg error message
      */
     public static void displayError(String msg) {
-        Ui.response ="Oops!\n" + msg;
+        assignResponse("Oops!\n" + msg);
+    }
+
+    private static void assignResponse(String s) {
+        Ui.response = s;
     }
 
     public static String getNextResponse() {

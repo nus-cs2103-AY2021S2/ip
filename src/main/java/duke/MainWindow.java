@@ -10,7 +10,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -30,6 +33,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mcspicy.png"));
     private Image welcomeImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
+
+    /**
+     * Initialises MainWindow object with welcome message and logo.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -37,7 +44,7 @@ public class MainWindow extends AnchorPane {
         ImageView logo = new ImageView(welcomeImage);
         logo.setFitWidth(100);
         logo.setPreserveRatio(true);
-        logo.setY(20);
+        logo.setTranslateX(10);
         dialogContainer.setAlignment(Pos.BASELINE_CENTER);
         dialogContainer.getChildren().addAll(
                 logo, DialogBox.getDukeDialog(Ui.welcomeString(), dukeImage)

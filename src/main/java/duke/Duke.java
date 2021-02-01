@@ -5,14 +5,19 @@ import duke.storage.Storage;
 public class Duke {
     private static final String PATHNAME = "./data.txt";
 
+    /**
+     * Initialises Duke application with default data file path and populates task list.
+     */
     public Duke() {
         Storage.initialisePath(PATHNAME);
         Storage.initialiseList();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response based on input.
+     *
+     * @param input user input
+     * @return response that is to be printed onto GUI
      */
     String getResponse(String input) {
         Parser.parseAndProcess(input);

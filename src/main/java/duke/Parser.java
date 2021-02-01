@@ -1,6 +1,16 @@
 package duke;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
  * Parses and processes user input.
@@ -23,7 +33,7 @@ public class Parser {
     }
 
     /**
-     * Parses user input line-by-line and processes user input accordingly.
+     * Parses user input and processes user input accordingly.
      */
     public static void parseAndProcess(String input) {
         input = input.trim();
