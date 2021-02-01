@@ -1,0 +1,4 @@
+E | 1 | play | 2021-05-17
+T | 0 | read books
+D | 0 | project submission | 2021-03-09
+E | 1 | project meeting | 2021-02-01
