@@ -121,6 +121,21 @@ public class Parser {
             }
             break;
 
+        case "find":
+            String searchString = sc.nextLine().strip();
+            outputString.append("    ____________________________________________________________\n");
+            outputString.append("     the following tasks were found: \n");
+            int j = 1;
+            for (int i = 0; i < taskList.taskList.size(); i++) {
+                Task task = taskList.taskList.get(i);
+                if (task.taskName.contains(searchString)) {
+                    outputString.append(j + "." + task.toString() + "\n");
+                    j++;
+                }
+            }
+            outputString.append("    ____________________________________________________________\n");
+            break;
+
         case "bye":
             try {
                 storage.writeToStorage(taskList);
