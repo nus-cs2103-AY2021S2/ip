@@ -1,21 +1,17 @@
 package jaryl.duke;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Duke chatbot for CS2103T Individual Project
@@ -27,11 +23,10 @@ public class Duke extends Application {
     private ArrayList<Task> tasksList;
     private Output output;
 
-    private ScrollPane scrollPane;
     private VBox dialogContainer;
+    private ScrollPane scrollPane;
     private TextField userInput;
     private Button sendButton;
-    private Scene scene;
 
     /**
      * Constructor to instantiate a new Duke object
@@ -50,23 +45,23 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        scrollPane = new ScrollPane();
 
         scrollPane.setContent(dialogContainer);
 
+        sendButton = new Button(">");
         userInput = new TextField();
-        sendButton = new Button("Send");
 
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.getChildren().addAll(scrollPane, userInput, sendButton);
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(500.0);
         stage.setMinWidth(400.0);
+        stage.setMinHeight(500.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        anchorPane.setPrefSize(400.0, 600.0);
 
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -82,34 +77,28 @@ public class Duke extends Application {
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
+        stage.setScene(new Scene(anchorPane));
         stage.show();
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
 
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
 
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-
     }
 
     private void handleUserInput() {
-        Label userResponse = new Label(userInput.getText());
         Label dukeResponse = new Label(getResponse(userInput.getText()));
+        Label userResponse = new Label(userInput.getText());
         dialogContainer.getChildren().addAll(
                 Dialog.getUserResponse(userResponse.toString()),
                 Dialog.getDukeResponse(dukeResponse.toString())
@@ -125,41 +114,41 @@ public class Duke extends Application {
      * Entry point into Duke chatbot
      */
     public String run(String input) {
-        String resp = "";
-        output.printWelcomeMsg();
+        String resp = output.printWelcomeMsg();
 
         try {
             Command cmd = Command.valueOf(input.split(" ")[0].toUpperCase());
 
             switch (cmd) {
                 case EXIT:
-                    output.printByeMsg();
+                    Platform.exit();
+                    System.exit(0);
                     break;
                 case LIST:
-                    output.listAction(tasksList);
+                    resp = output.listAction(tasksList);
                     break;
                 case DONE:
-                    output.doneAction(tasksList, input, dataManager);
+                    resp = output.doneAction(tasksList, input, dataManager);
                     break;
                 case TODO:
                 case DEADLINE:
                 case EVENT:
-                    output.addAction(tasksList, input, dataManager);
+                    resp = output.addAction(tasksList, input, dataManager);
                     break;
                 case DELETE:
-                    output.deleteAction(tasksList, input, dataManager);
+                    resp = output.deleteAction(tasksList, input, dataManager);
                     break;
                 case FIND:
-                    output.findAction(tasksList, input);
+                    resp = output.findAction(tasksList, input);
                     break;
                 case HELP:
-                    output.sendHelp();
+                    resp = output.sendHelp();
                     break;
             }
         } catch (IllegalArgumentException e) {
-            output.printIllegalArgumentError();
+            resp = output.printIllegalArgumentError();
         } catch (DukeException e1) {
-            System.out.println(e1);
+            resp = e1.toString();
         }
         return resp;
     }
