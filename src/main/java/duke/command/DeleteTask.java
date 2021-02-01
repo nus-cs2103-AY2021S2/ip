@@ -48,14 +48,4 @@ public class DeleteTask extends Command {
         handleDeleteTask(tasks);
         storage.saveData(tasks);
     }
-
-    /**
-     * Determines if whether the Duke Bot should continue processing the user input
-     *
-     * @return True
-     */
-    @Override
-    public boolean continueInput() {
-        return true;
-    }
 }

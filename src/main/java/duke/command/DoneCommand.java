@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
     private void markDoneTask(TaskList taskList) {
         Task doneTask = taskList.get(this.index - 1);
         doneTask.markAsDone();
-        this.outputMessage = " Nice! I've marked this task as done:\n" + "\t  " + doneTask.toString();
+        this.outputMessage = "Nice! I've marked this task as done:\n" + "\t  " + doneTask.toString();
     }
 
     /**
@@ -48,15 +48,5 @@ public class DoneCommand extends Command {
 
         markDoneTask(tasks);
         storage.saveData(tasks);
-    }
-
-    /**
-     * Determines if whether the Duke Bot should continue processing the user input
-     *
-     * @return True
-     */
-    @Override
-    public boolean continueInput() {
-        return true;
     }
 }
