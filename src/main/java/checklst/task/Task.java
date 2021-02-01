@@ -1,5 +1,8 @@
 package checklst.task;
 
+/**
+ * The Task class is an abstract skeleton that all Tasks (Todo, Event, Deadline) inherit from.
+ */
 public abstract class Task {
     
     protected final String name;
@@ -15,6 +18,10 @@ public abstract class Task {
         this.completed = completed;
     }
 
+    /**
+     * Returns a new Task object which has been completed.
+     * @return New completed Task.
+     */
     public abstract Task complete();
 
     @Override

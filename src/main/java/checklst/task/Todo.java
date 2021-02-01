@@ -2,10 +2,13 @@ package checklst.task;
 
 import checklst.exception.ChecklstException;
 
+/**
+ * The Deadline class represents a basic Task.
+ */
 public class Todo extends Task {
 
     /**
-     * Factory method to make Todo and handle input.
+     * Creates a Todo Object.
      * @param name - Name of Todo.
      * @return - Todo Object.
      */

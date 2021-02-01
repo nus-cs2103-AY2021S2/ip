@@ -6,14 +6,17 @@ import java.time.format.DateTimeParseException;
 
 import checklst.exception.ChecklstException;
 
+/**
+ * The Event class represents a Task which has a specific DateTime.
+ */
 public class Event extends Task {
     
     protected final LocalDate dateTime;
 
     /**
-     * Factory method to create a new Event.
-     * @param input - Input for the Event in the form "{ name } /at { date }".
-     * @return - New Event object.
+     * Creates a new Event object.
+     * @param input Input for the Event in the form "{ name } /at { date }".
+     * @return New Event object.
      */
     public static Event makeEvent(String input) throws ChecklstException {
         String[] splitInput = input.split(" /at ");

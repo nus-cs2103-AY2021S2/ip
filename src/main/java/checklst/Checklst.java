@@ -10,23 +10,28 @@ import checklst.storage.Storage;
 import checklst.task.TaskList;
 import checklst.ui.Ui;
 
+/**
+ * The Checklst Class represents the entry point of the Checklst Program.
+ */
 public class Checklst {
     
+    /**
+     * The main function of the Checklst Program.
+     * Creates and initializes an instance of Checklst and runs it.
+     * @param args CLI Arguments.
+     */
     public static void main(String[] args) {
         Checklst checklst = new Checklst();
         checklst.run();
     }
 
-    Ui ui;
-    Parser parser;
-    Storage storage;
+    private final Ui ui = new Ui();
+    private final Parser parser = new Parser();
+    private final Storage storage = new Storage();
 
-    public Checklst() {
-        ui = new Ui();
-        parser = new Parser();
-        storage = new Storage();
-    }
-
+    /**
+     * Main function to run the Checklst Program.
+     */
     public void run() {
 
         TaskList taskList = new TaskList();

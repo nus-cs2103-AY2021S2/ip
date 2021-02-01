@@ -6,14 +6,17 @@ import java.time.format.DateTimeParseException;
 
 import checklst.exception.ChecklstException;
 
+/** 
+ * The Deadline class represents a Task with a specific Deadline.
+ */
 public class Deadline extends Task {
     
     protected final LocalDate dueDate;
 
     /**
-     * Factory method to create a new Deadline.
-     * @param input - Input for the Deadline in the form "{ name } /by { date }".
-     * @return - New Deadline object.
+     * Creates a new Deadline object.
+     * @param input Input for the Deadline in the form "{ name } /by { date }".
+     * @return New Deadline object.
      */
     public static Deadline makeDeadline(String input) throws ChecklstException {
         String[] splitInput = input.split(" /by ");

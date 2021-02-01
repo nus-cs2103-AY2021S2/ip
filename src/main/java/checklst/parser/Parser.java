@@ -9,8 +9,18 @@ import checklst.task.TaskList;
 import checklst.task.Todo;
 import checklst.ui.Ui;
 
+/**  
+ * The Parser class makes sense of inputs and runs the respective follow up methods.
+ */
 public class Parser {
     
+    /**
+     * Processes input commands and calls the respective command methods.
+     * @param input Input string.
+     * @param ui Ui instance for output.
+     * @param taskList TaskList instance for manipulating tasks.
+     * @param storage Storage instance for saving of commands.
+     */
     public void parse(String[] input, Ui ui, TaskList taskList, Storage storage) {
         storage.addCommand(input);
         try {
@@ -51,6 +61,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes input commands from the saved history and calls the respective command methods
+     * but without ui output or storage.
+     * @param input Input string.
+     * @param storage Storage instance for saving of commands.
+     */
     public void parseHistoryCommand(String[] input, TaskList taskList) {
         try {
             switch (input[0]) {
