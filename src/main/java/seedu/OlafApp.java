@@ -61,14 +61,9 @@ public class OlafApp {
             if (command.equalsIgnoreCase("bye")) {
                 this.stop();
             } else if (command.equalsIgnoreCase("list")) {
-                // todo: use try catch here and make list printing a ui method
+                // todo: use try catch here
                 if (taskList.hasTasks()) {
-                    // print iteratively if there are tasks in the list
-                    System.out.println(PrintText.BORDER
-                            + "  Here are all the tasks in your list:\n\n"
-                            + taskList.toString());
-                    System.out.printf("  Only %s tasks left to be done!\n%s",
-                            taskList.getTotalNumberOfTasksUndone(), PrintText.BORDER);
+                    ui.showList(taskList);
                 } else {
                     System.out.println(PrintText.EMPTY_TASKLIST_ERROR);
                 }
