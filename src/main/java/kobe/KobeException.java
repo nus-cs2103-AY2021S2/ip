@@ -3,7 +3,6 @@ package kobe;
 abstract class KobeException extends RuntimeException {
 
     private String errMsg;
-//    private Throwable cause;
 
     /**
      * Constructor for all exceptions pertaining to Kobe.
@@ -14,11 +13,6 @@ abstract class KobeException extends RuntimeException {
         this.errMsg = errMsg;
     }
 
-//    public KobeException(String errMsg, Throwable cause) {
-//        this.errMsg = errMsg;
-//        this.cause = cause;
-//    }
-
     /**
      * Gets the error message
      *
@@ -28,10 +22,5 @@ abstract class KobeException extends RuntimeException {
     public String getMessage() {
         return errMsg;
     }
-
-//    //Getter
-//    public Throwable getCause() {
-//        return cause;
-//    }
 
 }

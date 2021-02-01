@@ -30,10 +30,6 @@ public class TaskList {
         return this.tasks.get(taskNumber);
     }
 
-//    private void add(Task task) {
-//        this.tasks.add(task);
-//    }
-
     /**
      * Gets the size of the TaskList.
      *
@@ -64,7 +60,6 @@ public class TaskList {
             System.out.println(ind + "Kobe added this task:\n" + ind + ind +
                     currentTask);
         } catch (ParseException | NullPointerException e) { //not in the format
-//            tasks.add(new Task(echoedText, type, condition));
             currentTask = new Task(echoedText, type, condition);
             this.tasks.add(currentTask);
             System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
@@ -82,19 +77,12 @@ public class TaskList {
 
         String[] intoParts1 = text.split("\\[", 2);
         String type = intoParts1[1].substring(0, 1);
-//        System.out.println(Arrays.toString(intoParts1));
-//        System.out.println("Type: " + type);
 
         String[] intoParts2 = intoParts1[1].split("\\[", 2);
         String isItDone = intoParts2[1].substring(0, 1);
-//        System.out.println(Arrays.toString(intoParts2));
-//        System.out.println("Done: " + isItDone);
 
         String[] intoParts3 = intoParts2[1].split("\\]", 2);
         String taskName = intoParts3[1].substring(1);
-//        System.out.println("intoParts3: " + Arrays.toString(intoParts3));
-//        System.out.println("Task: " + currentTask);
-//        System.out.println("length: " + intoParts3[1].split(":", 2).length);
 
         String condition = "";
 
@@ -103,16 +91,12 @@ public class TaskList {
             intoParts3 = intoParts3[1].substring(1).split("\\(", 2);
             String taskNameStr = intoParts3[0].substring(0);
             taskName = taskNameStr.substring(0, taskNameStr.length() - 1); //to fix extra space formed at the end
-//            System.out.println("NewTask: " + taskName);
 
             //Getting the condition
             String[] intoParts4 = intoParts3[1].split(": ", 2);
-//            System.out.println("intoParts4: " + Arrays.toString(intoParts4));
             String[] intoParts5 = intoParts4[1].split("\\)", 2);
 
             condition = intoParts5[0].substring(0);
-//            System.out.println(Arrays.toString(intoParts5));
-//            System.out.println("Condition: " + condition);
         } else {
         }
 

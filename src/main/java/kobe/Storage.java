@@ -4,7 +4,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class Storage {
-    //    private Path path;
     private String pathName;
     private TaskList tasks;
     public static String ind = "    ";
@@ -20,7 +19,6 @@ public class Storage {
      * @param ui  the user interface to inform the user of the outcome
      */
     Storage(String pathName, TaskList tasks, Ui ui) {
-//        this.path = path;
         this.pathName = pathName;
 
         //Read line by line of the storage file
@@ -34,7 +32,7 @@ public class Storage {
                 isFileEmpty = false;
                 System.out.println(readLine);
 
-                tasks.addItemByString(readLine); //PARSER //Actaully add the task //Parser
+                tasks.addItemByString(readLine);
                 readLine = br.readLine();
             }
 

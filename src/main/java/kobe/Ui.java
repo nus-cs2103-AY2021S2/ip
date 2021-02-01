@@ -10,7 +10,6 @@ public class Ui {
      */
     Ui() {
         System.out.println(line + "Hello! I'm Kobe\n" + ind + "What can I do for you?\n" + line);
-
     }
 
     /**

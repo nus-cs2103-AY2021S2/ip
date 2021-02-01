@@ -30,13 +30,9 @@ public class Parser {
             String type = text;
             String condition = "";
 
-
             String[] commandArrFirst2Parts = command.split(" ", 2);
-
-////        Check for correct splitting
-//          System.out.println("First2Parts: " + Arrays.toString(commandArrFirst2Parts));
             String firstWord = commandArrFirst2Parts[0];
-//
+
             if (commandArrFirst2Parts.length == 1) {
                 if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
                     String errMessage = "Oh no! Kobe doesn't want your " + firstWord + " to be empty!";
@@ -48,10 +44,6 @@ public class Parser {
             }
 
             String[] commandArrSecond2Parts = commandArrFirst2Parts[1].split(" /", 2);
-
-            //                //Check for correct splitting
-            //                System.out.println("Second2Parts: " + Arrays.toString(commandArrSecond2Parts));
-
 
             taskName = commandArrSecond2Parts[0];
 
