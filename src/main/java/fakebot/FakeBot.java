@@ -3,6 +3,8 @@ package fakebot;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javafx.application.Application;
+
 import fakebot.command.Command;
 import fakebot.command.CommandException;
 import fakebot.command.CommandType;
@@ -11,12 +13,15 @@ import fakebot.task.Events;
 import fakebot.task.Task;
 import fakebot.task.TaskList;
 import fakebot.task.ToDos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 
 /**
  * Fakebot class, main class for Fakebot.
  */
-public class FakeBot {
+public class FakeBot extends Application {
     private static final String OLD_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -50,6 +55,13 @@ public class FakeBot {
     private TaskList taskList;
     private Storage storage;
 
+
+    /**
+     * Class constructor specifying save file name and save file path.
+     */
+    public FakeBot() {
+        this(SAVE_FILE_PATH, SAVE_FILE_NAME);
+    }
     /**
      * Class constructor specifying save file name and save file path.
      */
@@ -307,7 +319,9 @@ public class FakeBot {
      *
      * @param args class input.
      */
+    /*
     public static void main(String[] args) {
+
         ui = new Ui();
         FakeBot fakeBot = new FakeBot(SAVE_FILE_NAME, SAVE_FILE_PATH);
         fakeBot.printHelloMessage();
@@ -325,5 +339,14 @@ public class FakeBot {
             continueProgram = fakeBot.processCommand(command);
         }
         ui.printBotMessage("Bye. Hope to see you again soon!");
+    }
+    */
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        primaryStage.setScene(scene); // Setting the stage to show our screen
+        primaryStage.show(); // Render the stage.
     }
 }
