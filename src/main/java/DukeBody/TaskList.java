@@ -1,7 +1,8 @@
-package DukeBody;
+package dukebody;
 
-import DukeTask.*;
 import java.util.ArrayList;
+
+import duketask.Task;
 
 /**
  * ArrayList derived class representing a list of tasks with
@@ -15,7 +16,7 @@ public class TaskList extends ArrayList<Task> {
         TaskList undone = new TaskList();
 
         for (Task task: this) {
-            if (! task.isDone()) {
+            if (!task.isDone()) {
                 undone.add(task);
             }
         }
@@ -36,7 +37,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     // mutators
-    public void markAsDone (int taskIndex) throws IndexOutOfBoundsException, 
+    public void markAsDone (int taskIndex) throws IndexOutOfBoundsException,
             Task.MarkedAsDoneException {
         this.get(taskIndex).markAsDone();
     }

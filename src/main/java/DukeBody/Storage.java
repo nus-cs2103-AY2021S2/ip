@@ -1,11 +1,12 @@
-package DukeBody;
+package dukebody;
 
-import DukeTask.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import duketask.Task;
 
 /**
  * represents a data storage accessor and mutator with
@@ -14,17 +15,17 @@ import java.util.Scanner;
  */
 public class Storage {
     // members
-    private String DirPath;
-    private String Username;
+    private String dirpath;
+    private String username;
 
     public Storage (String username) {
-        this(Paths.get("").toAbsolutePath().toString() + File.separator + "src" 
+        this(Paths.get("").toAbsolutePath().toString() + File.separator + "src"
                 + File.separator + "main" + File.separator + "data", username);
     }
 
     public Storage (String dirPath, String username) {
-        this.DirPath = dirPath;
-        this.Username = username;
+        this.dirpath = dirPath;
+        this.username = username;
     }
 
     /**
@@ -37,9 +38,9 @@ public class Storage {
         TaskList tasks = new TaskList();
 
         try {
-            File dataFile = new File(this.DirPath + File.separator 
-                    + this.Username + ".txt");
-                
+            File dataFile = new File(this.dirpath + File.separator
+                    + this.username + ".txt");
+
             Scanner scanner = new Scanner(dataFile);
 
             while (scanner.hasNextLine()) {
@@ -47,8 +48,8 @@ public class Storage {
             }
 
             scanner.close();
-        } catch (IOException | Parser.UnrecognisedCommandException |
-                Task.EmptyDescriptionException E) {
+        } catch (IOException | Parser.UnrecognisedCommandException
+                | Task.EmptyDescriptionException E) {
           // empty data
         }
 
@@ -65,15 +66,15 @@ public class Storage {
 
     public void saveTasks (TaskList tasks) throws IOException {
 
-        File dataDirectory = new File(this.DirPath);
+        File dataDirectory = new File(this.dirpath);
 
-        if (! dataDirectory.exists()) {
+        if (!dataDirectory.exists()) {
             dataDirectory.mkdir();
         }
 
-        FileWriter writer = new FileWriter(this.DirPath + File.separator 
-                + this.Username + ".txt");
-  
+        FileWriter writer = new FileWriter(this.dirpath + File.separator
+                + this.username + ".txt");
+
         for (Task task: tasks) {
             writer.write(Parser.taskToCommand(task) + "\n");
         }

@@ -1,9 +1,13 @@
-package DukeBody;
+package dukebody;
 
-import DukeTask.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duketask.Deadline;
+import duketask.Event;
+import duketask.Task;
+import duketask.ToDo;
 
 
 public class Parser {
@@ -34,7 +38,7 @@ public class Parser {
 
     // members
     private static String delimiter = " :: ";
-    protected final static DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(
+    private static DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HHmm");
 
     // methods
@@ -55,7 +59,7 @@ public class Parser {
      * @throws Parser.UnrecognisedCommandException
      * @throws Task.EmptyDescriptionException
      */
-    public static Task commandToTask (String command) throws Parser.UnrecognisedCommandException, 
+    public static Task commandToTask (String command) throws Parser.UnrecognisedCommandException,
             Task.EmptyDescriptionException {
 
         // format = type :: state :: description :: createdTime :: others
@@ -93,11 +97,12 @@ public class Parser {
      * @throws Task.EmptyDescriptionException
      * @throws DateTimeParseException
      */
-    public static Task parseNewCommand (String taskType, String command) 
-            throws Parser.UnrecognisedCommandException, Parser.EmptySubcommandException, 
+    public static Task parseNewCommand (String taskType, String command)
+            throws Parser.UnrecognisedCommandException, Parser.EmptySubcommandException,
             Task.EmptyDescriptionException, DateTimeParseException {
 
-        int subcommandIndex; Task task;
+        int subcommandIndex;
+        Task task;
 
         switch (taskType) {
         case "todo":
@@ -106,16 +111,22 @@ public class Parser {
 
         case "event":
             subcommandIndex = command.indexOf("/at");
-            if (subcommandIndex < 0) { throw new Parser.EmptySubcommandException("/at"); }
-            task = new Event (command.substring(0, subcommandIndex - 1).trim(), 
+            if (subcommandIndex < 0) {
+                throw new Parser.EmptySubcommandException("/at");
+            }
+
+            task = new Event (command.substring(0, subcommandIndex - 1).trim(),
                     LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
                     Parser.parseFormat));
             break;
 
         case "deadline":
             subcommandIndex = command.indexOf("/by");
-            if (subcommandIndex < 0) { throw new Parser.EmptySubcommandException("/by"); }
-            task = new Deadline (command.substring(0, subcommandIndex - 1).trim(), 
+            if (subcommandIndex < 0) {
+                throw new Parser.EmptySubcommandException("/by");
+            }
+
+            task = new Deadline (command.substring(0, subcommandIndex - 1).trim(),
                     LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
                     Parser.parseFormat));
             break;

@@ -1,9 +1,9 @@
-package DukeBody;
+package dukebody;
 
-import DukeTask.*;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
+import duketask.Task;
 
 public class Duke {
     private Ui ui;
@@ -21,7 +21,7 @@ public class Duke {
 
         this.ui.storageReading(this.username);
         this.tasks = this.storage.readTasks();
-        
+
         this.ui.brace();
     }
 

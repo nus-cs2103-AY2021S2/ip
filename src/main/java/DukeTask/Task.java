@@ -1,4 +1,4 @@
-package DukeTask;
+package duketask;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,13 +51,13 @@ public abstract class Task {
      * @param createdDateTime   the datetime at which the task is created.
      * @throws Task.EmptyDescriptionException
      */
-    public Task (String description, boolean isDone, LocalDateTime createdDateTime) 
+    public Task (String description, boolean isDone, LocalDateTime createdDateTime)
             throws Task.EmptyDescriptionException {
-        
+
         if (description.isEmpty()) {
             throw new Task.EmptyDescriptionException();
         }
-        
+
         this.state = (isDone ? TaskState.done : TaskState.undone);
         this.description = description;
         this.createdDateTime = createdDateTime;
@@ -92,8 +92,8 @@ public abstract class Task {
      *              specified outputFormat.
      */
     public String taskInformation (DateTimeFormatter outputFormat) {
-        return "[" + (this.state == TaskState.done ? "X" : " ") 
-                + "] " + this.description + " [ created: " 
+        return "[" + (this.state == TaskState.done ? "X" : " ")
+                + "] " + this.description + " [ created: "
                 + this.createdDateTime.format(outputFormat) + " ]";
     }
 
@@ -124,6 +124,10 @@ public abstract class Task {
 
         case undone:
             this.state = TaskState.done;
+            break;
+
+        default:
+            return;
         }
     }
 }

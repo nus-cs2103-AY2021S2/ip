@@ -1,4 +1,4 @@
-package DukeTask;
+package duketask;
 
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;

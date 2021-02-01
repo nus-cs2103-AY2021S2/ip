@@ -1,11 +1,10 @@
-package DukeBody;
+package dukebody;
 
-import DukeTask.Task;
-import DukeTask.Event;
-import DukeTask.TaskStub;
+import duketask.Task;
+import duketask.Event;
+import duketask.TaskStub;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

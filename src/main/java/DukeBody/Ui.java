@@ -1,13 +1,14 @@
-package DukeBody;
+package dukebody;
 
-import DukeTask.*;
 import java.time.format.DateTimeFormatter;
+
+import duketask.Task;
 
 /**
  * Class handler for Duke output formatting.
  */
 public class Ui {
-    public final static DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(
+    public final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(
         "eee, dd MMM yyyy HH:mm a");
 
     /**
@@ -36,8 +37,8 @@ public class Ui {
      * greet the users in a flashy and welcoming manner.
      */
     public void greet () {
-        print("I am", 
-                " ____        _        ", 
+        print("I am",
+                " ____        _        ",
                 "|  _ \\ _   _| | _____ ",
                 "| | | | | | | |/ / _ \\",
                 "| |_| | |_| |   <  __/",
@@ -52,7 +53,7 @@ public class Ui {
      */
     public void addedTask (TaskList tasks) {
         print("Added task:");
-        print(tasks.get(tasks.size() - 1).taskInformation(Ui.outputFormat));
+        print(tasks.get(tasks.size() - 1).taskInformation(outputFormat));
         print("You now have " + tasks.size() + " tasks.");
     }
 
@@ -63,7 +64,7 @@ public class Ui {
      */
     public void markedAsDone (Task task) {
         print("Woohoo the task has been marked as done:");
-        print(task.taskInformation(Ui.outputFormat));
+        print(task.taskInformation(outputFormat));
     }
 
     /**
@@ -73,13 +74,13 @@ public class Ui {
      * @param task      the task to be removed.
      */
     public void removedTask (TaskList tasks, Task task) {
-        print("Removed task:", task.taskInformation(Ui.outputFormat), "You now have " 
+        print("Removed task:", task.taskInformation(outputFormat), "You now have "
             + tasks.size() + " tasks.");
     }
 
     public void listTasks (TaskList tasks) {
         for (int i = 0; i < tasks.size(); ++i) {
-            print(i + 1 + ". " + tasks.get(i).taskInformation(Ui.outputFormat));
+            print(i + 1 + ". " + tasks.get(i).taskInformation(outputFormat));
         }
     }
 
