@@ -1,3 +1,5 @@
+package lihua.main;
+
 import lihua.commands.Command;
 import lihua.commands.CommandResult;
 import lihua.commands.ExitCommand;
@@ -14,15 +16,6 @@ public class Lihua {
     private Storage storage;
     /** Ui object */
     private Ui ui;
-
-    /**
-     * Entry point of the application.
-     *
-     * @param args Lunch arguments of the main method.
-     */
-    public static void main(String[] args) {
-        new Lihua().run(args);
-    }
 
     /**
      * Runs the application.

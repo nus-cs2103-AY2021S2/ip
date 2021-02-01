@@ -9,12 +9,12 @@ import lihua.commands.HelpCommand;
 import lihua.commands.ListCommand;
 
 /**
- * Messages class containing static messages of Lihua.
+ * Messages class containing static messages of lihua.entry.Lihua.
  */
 public class Messages {
     /** Hello message */
     public static final String MESSAGE_HELLO =
-            "Hello! My name is Lihua.\n"
+            "Hello! My name is lihua.entry.Lihua.\n"
                     + "What can I do for you today? (=V=)";
     /** Help prompt message */
     public static final String MESSAGE_GET_HELP =
@@ -25,7 +25,7 @@ public class Messages {
             "-------------------------------------------------";
     /** Exit message */
     public static final String MESSAGE_INFORM_EXIT =
-            "Exiting Lihua as requested...\n"
+            "Exiting lihua.entry.Lihua as requested...\n"
                     + "Goodbye! Hope to see you again soon! (=V=)";
     /** Adding task failure message */
     public static final String MESSAGE_REPORTING_ADDING_FAILURE =

@@ -1,3 +1,5 @@
+package lihua.main;
+
 import javafx.application.Application;
 
 /**
