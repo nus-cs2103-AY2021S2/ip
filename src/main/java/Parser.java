@@ -161,6 +161,25 @@ public class Parser {
                 ui.replace(deletedTask.toString());
                 Integer numOfTasks = taskList.numOfTasks();
                 ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
+                Integer numOfTask = taskList.numOfTasks();
+                ui.replace("Now you have " + numOfTask.toString() + " tasks in the list.");
+            } else if (command.contains("find")) {
+                String[] line = command.split(" ");
+                int length = line.length;
+                if (length == 1) {
+                    throw new FindException("Oops! The description for Find cannot be empty.");
+                }
+                ui.replace("Here are the matching tasks in your list:");
+                String word = line[1];
+                for (int i = 0; i < taskList.numOfTasks(); i++) {
+                    Task task = taskList.getTask(i);
+                    String description = task.toString();
+                    Integer num = 1;
+                    if (description.contains(word)) {
+                        ui.replace(num.toString() + description);
+                        num++;
+                    }
+                }
             } else if (command.equals("bye")) {
                 ui.replace("Bye! Hope to see you again soon!");
                 this.isFinished = true;
