@@ -11,6 +11,14 @@ public class Storage {
     public static String line = ind + "____________________________________________________________\n" + ind;
     public static String line2 = ind + "____________________________________________________________\n";
 
+
+    /**
+     * Constructor for Storage object.
+     *
+     * @param pathName  the name of the path where the text file is stored
+     * @param tasks  the list of tasks to be retrieved and written
+     * @param ui  the user interface to inform the user of the outcome
+     */
     Storage(String pathName, TaskList tasks, Ui ui) {
 //        this.path = path;
         this.pathName = pathName;
@@ -43,15 +51,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * To save the TaskList into the text file
+     */
     //UPDATE THE KOBE.TXT FILE
     public void saveFile() {
-//        java.nio.file.Path path = java.nio.file.Paths.get("home/ip/src/main/data/kobe.txt");
-//        java.nio.file.Path path = java.nio.file.Paths.get(home + "/ip/src/main/data");
-//        boolean directoryExists = java.nio.file.Files.exists(path);
-//        System.out.println("Directory Home: " + home);
-//        System.out.println("Directory: " + path.toString());
-//        System.out.println("Directory exists?: " + directoryExists);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.pathName,
                 StandardCharsets.US_ASCII))) {
 

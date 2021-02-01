@@ -2,7 +2,15 @@ package kobe;
 
 public class Parser {
 
-
+    /**
+     * Reads and interprets the user input command to subsequently call
+     * the addItem method in the Task class corresponding to the command.
+     *
+     * @param command  the error message
+     * @param tasks  the current TaskList object
+     * @param storage  the current Storage object
+     * @param ui  the user interface to inform the user of the outcome
+     */
     public static void readInput(String command, TaskList tasks, Storage storage, Ui ui) {
         String[] commandArr = command.split(" ");
         String text = commandArr[0];
