@@ -1,15 +1,37 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import java.time.format.DateTimeParseException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 /**
  * Class that runs the entire Duke application
  */
-public class Duke {
+public class Duke extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        helloWorld.setFont(new Font("Arial", 50));
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+        /*
+        Stage s = new Stage();
+        Label l = new Label("sdf");
+        s.setScene(new Scene((l)));
+        s.show();*/
+    }
 
     private static final String FOLDER_PATH = "../src/main/java/data/";
     private static final String FILE_NAME = "All Tasks.txt";
