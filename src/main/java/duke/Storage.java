@@ -12,12 +12,23 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the storage for user's task list.
+ * Reads and writes data into user's saved file that stores task list.
+ */
 public class Storage {
     private String filePath;
     private Parser parser = new Parser();
 
-
-    Storage(String filePath) throws IOException {
+    /**
+     * Constructor for Storage object.
+     * Makes file tasks.txt if non-existent. Else, validates existence of file
+     * @param filePath
+     * @throws IOException if filePath is not "data/tasks.txt"
+     * @see Files
+     * @see Paths
+     */
+    public Storage(String filePath) throws IOException {
         String parentPath = filePath.split("tasks.txt")[0];
         if (!Files.exists(Paths.get(parentPath))) {
             Files.createDirectories(Paths.get(parentPath));
@@ -28,6 +39,20 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns user's task list that is in the saved file on user's local disk.
+     * Initializes objects using the String data in tasks.txt file.
+     * Parses the data saved and adds correct form of tasks in the TaskList object
+     * @return ArrayList of user's tasks.
+     * @throws IOException if incorrect data in file or incorrectly parsed.
+     * @see Parser
+     * @see TaskList
+     * @see Task
+     * @see ToDo
+     * @see Event
+     * @see Deadline
+     * @see Paths
+     */
     public ArrayList<Task> getTaskList() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         List<String> fileLines = Files.readAllLines(Paths.get(filePath));
@@ -63,6 +88,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes user's task list into tasks.txt local file.
+     * If the task list isnt been able to be written into filePath, IOException thrown.
+     * @param data : the user's task list
+     */
     public void writeData(List<Task> data) {
         String stringOfData = "";
         for (int i = 0; i < data.size(); i++) {
