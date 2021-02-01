@@ -1,5 +1,9 @@
 package duke.subfiles;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.exceptions.DateFormatException;
 import duke.exceptions.EmptyDateException;
 import duke.exceptions.EmptyDescriptionException;
@@ -9,10 +13,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * The TaskList class contains a list of tasks created by
@@ -182,14 +182,14 @@ public class TaskList {
      * based on the order they were added by the user.
      */
     public String printTasks() {
-        String output = "Here are the tasks in your list:";
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         for (int i = 1; i < tasks.size() + 1; i++) {
             Task task = tasks.get(i - 1);
-            output += ("\n" + i + ". " + task.toString());
+            output.append("\n").append(i).append(". ").append(task.toString());
         }
 
         System.out.println(output);
-        return output;
+        return output.toString();
     }
 
     /**
@@ -200,7 +200,7 @@ public class TaskList {
      * @param date The date specified by the user.
      */
     private String printDeadlinesOnDate(LocalDate date) {
-        String output;
+        StringBuilder output;
         ArrayList<Deadline> deadlines = new ArrayList<>();
 
         for (Task t : tasks) {
@@ -213,18 +213,18 @@ public class TaskList {
         }
 
         if (deadlines.size() == 0) {
-            output = "You have no deadlines due on " + date.toString() + ".";
+            output = new StringBuilder("You have no deadlines due on " + date.toString() + ".");
         } else {
             int i = 1;
-            output = "Here are the deadlines due on " + date.toString() + ":";
+            output = new StringBuilder("Here are the deadlines due on " + date.toString() + ":");
             for (Deadline d : deadlines) {
-                output += ("\n" + i + ". " + d.toString());
+                output.append("\n").append(i).append(". ").append(d.toString());
                 i++;
             }
         }
 
         System.out.println(output);
-        return output;
+        return output.toString();
     }
 
     /**
@@ -235,7 +235,7 @@ public class TaskList {
      * @param date The date specified by the user.
      */
     private String printEventsOnDate(LocalDate date) {
-        String output;
+        StringBuilder output;
         ArrayList<Event> events = new ArrayList<>();
 
         for (Task t : tasks) {
@@ -248,18 +248,18 @@ public class TaskList {
         }
 
         if (events.size() == 0) {
-            output = "You have no events due on " + date.toString() + ".";
+            output = new StringBuilder("You have no events due on " + date.toString() + ".");
         } else {
             int i = 1;
-            output = "Here are the events due on " + date.toString() + ":";
+            output = new StringBuilder("Here are the events due on " + date.toString() + ":");
             for (Event e : events) {
-                output += ("\n" + i + ". " + e.toString());
+                output.append("\n").append(i).append(". ").append(e.toString());
                 i++;
             }
         }
 
         System.out.println(output);
-        return output;
+        return output.toString();
     }
 
     /**
@@ -291,7 +291,7 @@ public class TaskList {
      */
     public String findTasksWithKeyword(String s) {
         String keyword = s.split(" ", 2)[1].toLowerCase();
-        String output;
+        StringBuilder output;
         ArrayList<Task> matchingTasks = new ArrayList<>();
 
         for (Task t : tasks) {
@@ -301,18 +301,18 @@ public class TaskList {
         }
 
         if (matchingTasks.size() == 0) {
-            output = "You have no matching tasks in your list.";
+            output = new StringBuilder("You have no matching tasks in your list.");
         } else {
             int i = 1;
-            output = "Here are the matching tasks in your list:";
+            output = new StringBuilder("Here are the matching tasks in your list:");
             for (Task t : matchingTasks) {
-                output += ("\n" + i + ". " + t.toString());
+                output.append("\n").append(i).append(". ").append(t.toString());
                 i++;
             }
         }
 
         System.out.println(output);
-        return output;
+        return output.toString();
     }
 
     /**
