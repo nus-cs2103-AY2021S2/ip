@@ -17,34 +17,34 @@ import duke.tasks.TodoTask;
  * Represents a task handler that handles the tasks
  */
 public class TaskHandler {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     public TaskHandler() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public void clearTaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return this.tasks;
     }
 
     public int getLength() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     public void addTodoTask(String taskName) {
-        taskList.add(new TodoTask(taskName));
+        tasks.add(new TodoTask(taskName));
     }
 
     public void addDeadlineTask(String taskName, LocalDate deadline) {
-        taskList.add(new DeadlineTask(taskName, deadline));
+        tasks.add(new DeadlineTask(taskName, deadline));
     }
 
     public void addEventTask(String taskName, LocalDateTime startTime, LocalDateTime endTime) {
-        taskList.add(new EventTask(taskName, startTime, endTime));
+        tasks.add(new EventTask(taskName, startTime, endTime));
     }
 
     /**
@@ -54,7 +54,7 @@ public class TaskHandler {
      */
     public Task taskIsDone(int index) throws IndexOutOfRangeException, TaskDoneException {
         try {
-            Task task = taskList.get(index - 1);
+            Task task = tasks.get(index - 1);
             if (!task.getIsDone()) {
                 task.taskDone();
                 return task;
@@ -73,8 +73,8 @@ public class TaskHandler {
      */
     public Task deleteTask(int index) throws IndexOutOfRangeException {
         try {
-            Task task = taskList.get(index - 1);
-            taskList.remove(index - 1);
+            Task task = tasks.get(index - 1);
+            tasks.remove(index - 1);
             return task;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfRangeException();
@@ -88,7 +88,7 @@ public class TaskHandler {
      */
     public ArrayList<Task> findTask(String keyWord) {
         ArrayList<Task> matchTasks = new ArrayList<>();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             if (task.getTaskName().contains(keyWord)) {
                 matchTasks.add(task);
             }
@@ -116,7 +116,7 @@ public class TaskHandler {
                 if (isDone) {
                     task.taskDone();
                 }
-                this.taskList.add(task);
+                this.tasks.add(task);
                 break;
             }
             case "D": {
@@ -125,7 +125,7 @@ public class TaskHandler {
                 if (isDone) {
                     task.taskDone();
                 }
-                this.taskList.add(task);
+                this.tasks.add(task);
                 break;
             }
             case "E": {
@@ -135,7 +135,7 @@ public class TaskHandler {
                 if (isDone) {
                     task.taskDone();
                 }
-                this.taskList.add(task);
+                this.tasks.add(task);
                 break;
             }
             default: {
