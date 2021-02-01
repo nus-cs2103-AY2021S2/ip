@@ -35,10 +35,21 @@ class Task {
         return this.time;
     }
 
+    /*
+     * Change the done status of a task.
+     *
+     * @return The same task with a changed done status.
+     */
     public Task markAsDone() {
         return new Task(description, date, time, symbol, isAt, true);
     }
 
+    /*
+     * Convert the date from "DD/MM/YYYY" format to "D MMM YYYY" format.
+     *
+     * @param date Date in "DD/MM/YYYY" format.
+     * @return Date in "D MMM YYYY" format.
+     */
     public String dateFormatter(String date) {
         String year = "";
         String month = "";
@@ -67,6 +78,14 @@ class Task {
         return ld.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
+    /*
+     * Convert time from 24h format to 12h format.
+     * Separate hour and minute by adding a colon.
+     * Add am or pm depending on time of the day.
+     *
+     * @param time Time in 24h format.
+     * @return Time in 12h format.
+     */
     public String timeFormatter(String time) {
         char[] cArr = time.toCharArray();
         Integer tensHour = cArr[0] - '0';

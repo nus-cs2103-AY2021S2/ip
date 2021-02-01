@@ -1,3 +1,6 @@
+/*
+ * Deal with making sense of users' commands.
+ */
 public class Parser {
     private String command;
     private TaskList taskList;
@@ -11,14 +14,31 @@ public class Parser {
         this.isFinished = false;
     }
 
+    /*
+     * Add a new command to be dealt with.
+     *
+     * @param command New command.
+     */
     public void insertCommand(String command) {
         this.command = command;
     }
 
+    /*
+     * Check if Parser is done dealing with all commands.
+     *
+     * @return Done status.
+     */
     public boolean isFinished() {
         return this.isFinished;
     }
 
+    /*
+     * Deal with the current command.
+     * Pick the appropriate response.
+     * Pass the response to the Ui to handle.
+     * In the case of a bad command, a relevant exception is thrown.
+     * The exception is caught and the relevant message is printed.
+     */
     public void process() {
         try {
             if (command.equals("list")) {

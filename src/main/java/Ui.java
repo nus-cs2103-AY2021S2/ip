@@ -1,3 +1,6 @@
+/*
+ * Deal with interactions with the users.
+ */
 public class Ui {
     private String response;
 
@@ -14,10 +17,19 @@ public class Ui {
         response = statement;
     }
 
+    /*
+     * Respond with the current response.
+     */
     public void reply() {
         System.out.println(response);
     }
 
+    /*
+     * Replace the current response with a new one.
+     * Respond with the new response.
+     *
+     * @param statement The new response that will replace the current one.
+     */
     public void replace(String statement) {
         response = statement;
         System.out.println(response);

@@ -1,9 +1,22 @@
+/*
+ * A type of Task.
+ */
 class Event extends Task {
 
     public Event(String description, String date, String time) {
         super(description, date, time, "[E]", true);
     }
 
+    /*
+     * Convert time from 24h format to 12h format.
+     * Separate hour and minute by adding a colon.
+     * Add am or pm depending on time of the day.
+     * Override Task's timeFormatter since Event has a start and
+     * end time while Task only has a start time.
+     *
+     * @param time Time in 24h format.
+     * @return Time in 12h format.
+     */
     @Override
     public String timeFormatter(String time) {
         String[] sArr = time.split("-");
