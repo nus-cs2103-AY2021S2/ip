@@ -30,6 +30,6 @@ public class UiTest {
     @Test
     public void exitTest() {
         ui.exit();
-        assertEquals("Bye. Till next time!"+System.lineSeparator()+Ui.horizontalLine, outputStreamCaptor.toString().trim());
+        assertEquals("Bye. Till next time!"+System.lineSeparator()+Ui.HORIZONTAL_RULE, outputStreamCaptor.toString().trim());
     }
 }

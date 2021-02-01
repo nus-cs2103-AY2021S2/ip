@@ -18,7 +18,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public char type() {
+    public char getType() {
         return this.type;
     }
 
