@@ -53,6 +53,10 @@ public class Duke {
                 Task deletedTask = tasks.deleteTask(numDelete);
                 ui.deleteTaskMessage(tasks.list, deletedTask);
                 break;
+            case "find":
+                String keyword = inputArr[1];
+                ui.findTask(keyword, tasks.list);
+                break;
             case "todo":
                 try {
                     parser.isEmptyDesc(inputArr);

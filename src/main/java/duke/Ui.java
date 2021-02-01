@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 //user interaction
@@ -38,6 +39,11 @@ public class Ui {
         System.out.println(horizontalLine);
     }
 
+    public void checkAsDoneMessage(Task task) {
+        System.out.println("Nice! I've marked this task as done:\n" + task);
+        System.out.println(horizontalLine);
+    }
+
     public void listAllTasks(ArrayList<Task> list) {
         System.out.println("Here are the tasks in your list:");
         int num = 1;
@@ -48,9 +54,24 @@ public class Ui {
         System.out.println(horizontalLine);
     }
 
-    public void checkAsDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task);
+    public void findTask(String keyword, ArrayList<Task> list) {
+        ArrayList<Task> newList = new ArrayList<>();
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                newList.add(task);
+            }
+        }
+        if (newList.size() == 0) {
+            System.out.println("No matching tasks found. :^S");
+        }
+        else {
+            for (Task task : newList) {
+                if (task.getDescription().contains(keyword)) {
+                    System.out.println(task);
+                }
+            }
+        }
         System.out.println(horizontalLine);
     }
-
 }

@@ -12,7 +12,7 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
         this.localBy = LocalDate.parse(by);
-        type = 'D';
+        this.type = 'D';
     }
 
     public String getBy() {
