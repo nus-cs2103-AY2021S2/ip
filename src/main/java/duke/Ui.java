@@ -23,10 +23,11 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
-    public void printTasks(TaskList userList) {
+    public void printTaskList(TaskList userList) {
         for (int i = 0; i < userList.getTaskListSize(); i++) {
             System.out.println(i + 1 + "." + userList.getTask(i).toString());
         }
+        System.out.println(HORIZONTAL_RULE);
     }
 
     public void printDoneTask(TaskList userTaskList, int taskNumber) {
