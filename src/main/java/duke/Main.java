@@ -31,6 +31,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Pauses for 2 seconds then exits the program if no other threads are running.
+     */
     public static void exit() {
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event -> {

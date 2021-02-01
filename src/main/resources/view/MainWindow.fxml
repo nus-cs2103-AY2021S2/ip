@@ -9,7 +9,7 @@
         <Button fx:id="sendButton" layoutX="314.0" AnchorPane.bottomAnchor="5.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutX="12.0" layoutY="12.0" prefHeight="636.0" prefWidth="377.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="652.0" prefWidth="410.0" />
+                <VBox fx:id="dialogContainer" prefHeight="652.0" prefWidth="358.0" />
             </content>
         </ScrollPane>
     </children>
