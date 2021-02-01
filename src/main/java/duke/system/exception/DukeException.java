@@ -20,8 +20,8 @@ public abstract class DukeException extends Exception {
         }
     }
 
-    public static class IOErrorException extends DukeException {
-        public IOErrorException() {
+    public static class InputOutputErrorException extends DukeException {
+        public InputOutputErrorException() {
             super("IO Error!");
         }
     }

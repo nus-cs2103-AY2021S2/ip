@@ -1,11 +1,5 @@
 package duke.system;
 
-import duke.system.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ListItem;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.system.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ListItem;
+import duke.task.Todo;
 
 /**
  * Represents an object that interacts with I/O according the file path provided,
@@ -28,9 +28,9 @@ public class Storage {
     /**
      * Reads the list and loop till the end of the file and add corresponding tasks.
      * @return a list of tasks that can be manipulated later
-     * @throws DukeException.IOErrorException
+     * @throws DukeException.InputOutputErrorException
      */
-    public List<ListItem> loadData() throws DukeException.IOErrorException {
+    public List<ListItem> loadData() throws DukeException.InputOutputErrorException {
         List<ListItem> importedList;
         importedList = new ArrayList<>();
         try {
@@ -48,28 +48,30 @@ public class Storage {
                 case "E":
                     importedList.add(new Event(result[2], result[3], result[1] == "1"));
                     break;
+                default:
+                    break;
                 }
             }
             s.close();
             return importedList;
         } catch (FileNotFoundException ex) {
-            throw new DukeException.IOErrorException();
+            throw new DukeException.InputOutputErrorException();
         }
     }
 
     /**
      * write data to local file
      * @param input current task list in string form
-     * @throws DukeException.IOErrorException
+     * @throws DukeException.InputOutputErrorException
      */
-    public void writeData(String input) throws DukeException.IOErrorException {
+    public void writeData(String input) throws DukeException.InputOutputErrorException {
         String statusCode = "";
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
             fw.write(input);
             fw.close();
         } catch (IOException ex) {
-            throw new DukeException.IOErrorException();
+            throw new DukeException.InputOutputErrorException();
         }
     }
 }
