@@ -1,16 +1,8 @@
 package duke;
 
-import duke.Task;
-import duke.ToDo;
-import duke.Event;
-import duke.Deadline;
-import duke.Parser;
-
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +11,13 @@ import java.util.List;
  * Reads and writes data into user's saved file that stores task list.
  */
 public class Storage {
-    private String filePath;
-    private Parser parser = new Parser();
+    private final String filePath;
+    private final Parser parser = new Parser();
 
     /**
      * Constructor for Storage object.
      * Makes file tasks.txt if non-existent. Else, validates existence of file
+     *
      * @param filePath
      * @throws IOException if filePath is not "data/tasks.txt"
      * @see Files
@@ -45,6 +38,7 @@ public class Storage {
      * Returns user's task list that is in the saved file on user's local disk.
      * Initializes objects using the String data in tasks.txt file.
      * Parses the data saved and adds correct form of tasks in the TaskList object
+     *
      * @return ArrayList of user's tasks.
      * @throws IOException if incorrect data in file or incorrectly parsed.
      * @see Parser
@@ -93,6 +87,7 @@ public class Storage {
     /**
      * Writes user's task list into tasks.txt local file.
      * If the task list isnt been able to be written into filePath, IOException thrown.
+     *
      * @param data : the user's task list
      */
     public void writeData(List<Task> data) {

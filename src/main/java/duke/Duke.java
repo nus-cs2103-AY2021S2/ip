@@ -1,16 +1,5 @@
 package duke;
 
-import duke.Task;
-import duke.TaskList;
-import duke.ToDo;
-import duke.Deadline;
-import duke.Event;
-import duke.Duke;
-import duke.Storage;
-import duke.Ui;
-import duke.Parser;
-import duke.DukeException;
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -26,21 +15,12 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
     private final Parser parser;
-    private final String EXIT_COMMAND = "bye";
-    private final String LIST_COMMAND = "list";
-    private final String DONE_COMMAND = "done";
-    private final String DELETE_COMMAND = "delete";
-    private final String ADD_TODO_COMMAND = "todo";
-    private final String ADD_DEADLINE_COMMAND = "deadline";
-    private final String ADD_EVENT_COMMAND = "event";
-    private final String FIND_COMMAND = "find";
 
     /**
      * Constructor for Duke class.
      * Initializes Ui object to print Ui.
      * Initializes parser object to make sense of data passed in and output accordingly.
-     * initializes storage object and initializes user's saved tasklist into a TaskList object.
-     * @exception IOException caught if incorrect filepath that fails to retrieve user's task list.
+     * initializes storage object and initializes user's saved task list into a TaskList object.
      * @param filePath of where user's task list is saved.
      */
     public Duke(String filePath) {
@@ -53,13 +33,13 @@ public class Duke {
         catch (IOException e) {
             System.err.println(e.getMessage());
         }
-
     }
 
     /**
      * entry point for the Duke program.
      * Initializes new Duke object with filePath: "data/tasks.txt" and calls run method.
-     * @param args
+     *
+     * @param args arguments for main method
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
@@ -67,6 +47,7 @@ public class Duke {
 
     /**
      * Processes the user input and print out messages and Ui accordingly.
+     *
      * @throws DukeException If invalid command. Valid commands: todo, event, deadline, delete, done, list, bye
      * @throws DukeException If there is no message after the todo command.
      * @see Scanner
@@ -83,6 +64,14 @@ public class Duke {
             Task newTask;
             ui.printHorizontalRule();
             try {
+                final String EXIT_COMMAND = "bye";
+                final String LIST_COMMAND = "list";
+                final String DONE_COMMAND = "done";
+                final String DELETE_COMMAND = "delete";
+                final String ADD_TODO_COMMAND = "todo";
+                final String ADD_DEADLINE_COMMAND = "deadline";
+                final String ADD_EVENT_COMMAND = "event";
+                final String FIND_COMMAND = "find";
                 switch (commandArr[0]) {
                 case EXIT_COMMAND:
                     ui.printExitMessage();

@@ -1,9 +1,5 @@
 package duke;
 
-import duke.Task;
-import duke.ToDo;
-import duke.Deadline;
-import duke.Event;
 import java.time.Month;
 import java.util.ArrayList;
 
@@ -15,6 +11,7 @@ public class Parser {
 
     /**
      * Returns formattedDate in "yyyy-MM-DD" format from unformatted "month day yyyy".
+     *
      * @param unformattedDate String in "month day year" format.
      * @return formatted date in "yyyy-MM-DD" format.
      */
@@ -29,6 +26,7 @@ public class Parser {
 
     /**
      * Processes a "todo" command and returns a ToDo object.
+     *
      * @param command command passed in by the user.
      * @return ToDo object.
      * @see Deadline
@@ -41,6 +39,7 @@ public class Parser {
 
     /**
      * Processes a "deadline" command and returns a Deadline object.
+     *
      * @param command command passed in by the user.
      * @return Deadline object.
      * @see Deadline
@@ -52,6 +51,7 @@ public class Parser {
 
     /**
      * Processes a "event" command and returns an Event object.
+     *
      * @param command command passed in by the user.
      * @return Event object.
      * @see Event
@@ -64,6 +64,7 @@ public class Parser {
 
     /**
      * Processes a "delete" command and returns the index of the Task to be deleted from Task List.
+     *
      * @param command command passed in by the user.
      * @return Index of Task to be deleted.
      */
@@ -73,15 +74,16 @@ public class Parser {
 
     /**
      * Processes a "find" command and returns a TaskList object containing all Tasks that match the string searched.
-     * @param command command passed in by the user.
+     *
+     * @param command  command passed in by the user.
      * @param userList TaskList of the user.
      * @return TaskList containing tasks for which the keywords are matched.
      */
-    public TaskList parseFindCommand(String command, TaskList userList){
+    public TaskList parseFindCommand(String command, TaskList userList) {
         String keywords = command.substring(5);
         ArrayList<Task> results = new ArrayList<>();
-        for(Task task : userList.getTaskList()){
-            if(task.getTaskDetail().contains(keywords)){
+        for (Task task : userList.getTaskList()) {
+            if (task.getTaskDetail().contains(keywords)) {
                 results.add(task);
             }
         }

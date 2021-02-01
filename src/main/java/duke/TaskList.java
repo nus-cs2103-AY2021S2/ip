@@ -1,6 +1,5 @@
 package duke;
 
-import duke.Task;
 import java.util.ArrayList;
 
 /**
@@ -8,10 +7,11 @@ import java.util.ArrayList;
  * Task objects are stored in the object
  */
 public class TaskList {
-    private ArrayList<Task> userList;
+    private final ArrayList<Task> userList;
 
     /**
      * Constructor for TaskList
+     *
      * @param userList is an arrayList of Tasks
      * @see ArrayList
      */
@@ -29,6 +29,7 @@ public class TaskList {
 
     /**
      * Returns the user's TaskList.
+     *
      * @return userList.
      */
     public ArrayList<Task> getTaskList() {
@@ -37,6 +38,7 @@ public class TaskList {
 
     /**
      * Returns size of the taskList.
+     *
      * @return length of the user's list.
      */
     public int getTaskListSize() {
@@ -45,6 +47,7 @@ public class TaskList {
 
     /**
      * Returns task at specified index.
+     *
      * @param index Task at the index in the TaskList.
      * @return Task task at given index.
      */
@@ -54,6 +57,7 @@ public class TaskList {
 
     /**
      * Adds a task into the TaskList.
+     *
      * @param task task to be added into the list.
      */
     public void addTask(Task task) {
@@ -62,6 +66,7 @@ public class TaskList {
 
     /**
      * Removes a task at the particular index of the task list.
+     *
      * @param taskNumber index of the task to be deleted in the task list.
      * @return The task that got removed.
      */

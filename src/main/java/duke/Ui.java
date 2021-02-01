@@ -1,15 +1,7 @@
 package duke;
 
-import duke.Task;
-import duke.TaskList;
-import duke.ToDo;
-import duke.Deadline;
-import duke.Event;
-import duke.Duke;
-
 /**
  * Represents the Ui of Duke CLI application with methods to print the output according to the input given.
- *
  */
 public class Ui {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
@@ -37,6 +29,7 @@ public class Ui {
 
     /**
      * Prints the tasks is users TaskList line by line
+     *
      * @param userList TaskList of the user
      */
     public void printTaskList(TaskList userList) {
@@ -48,8 +41,9 @@ public class Ui {
 
     /**
      * Prints the message when a task is assigned as "done".
+     *
      * @param userTaskList TaskList of the user.
-     * @param taskNumber Task number in the list that was marked as done.
+     * @param taskNumber   Task number in the list that was marked as done.
      * @see TaskList
      * @see Task
      */
@@ -63,8 +57,9 @@ public class Ui {
 
     /**
      * Prints the message when a task is added to the Task list.
+     *
      * @param userTaskList Task list of the user.
-     * @param task Task to be added to the Task list.
+     * @param task         Task to be added to the Task list.
      * @see TaskList
      * @see Task
      */
@@ -78,8 +73,9 @@ public class Ui {
 
     /**
      * Prints the message when task is deleted from Task List.
+     *
      * @param userTaskList Task list of the user.
-     * @param taskNumber Task to be added to the Task list.
+     * @param taskNumber   Task to be added to the Task list.
      */
     public void printDeletedTask(TaskList userTaskList, int taskNumber) {
         Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
@@ -91,10 +87,10 @@ public class Ui {
 
     public void printFoundTasks(TaskList tasksFound) {
         System.out.println("Here are the matching tasks in your list:");
-        if(tasksFound.getTaskListSize() == 0){
+        if (tasksFound.getTaskListSize() == 0) {
             System.out.println("Sorry. No tasks found :-(");
         }
-        else{
+        else {
             this.printTaskList(tasksFound);
         }
     }
