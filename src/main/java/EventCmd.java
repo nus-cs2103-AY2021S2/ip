@@ -29,7 +29,7 @@ public class EventCmd extends Command {
         try {
             date = format.parse(inputDate);
         } catch (Exception e) {
-            throw new DuckieException("please enter date in the format dd-mm-yyyy");
+            throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
         }
         Event tempE = new Event(strE[0], date);
         lst.addTask(tempE);

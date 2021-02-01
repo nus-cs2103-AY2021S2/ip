@@ -12,24 +12,24 @@ public class Parser {
         this.storage = storage;
     }
 
-    public static Command parse(String command) throws DuckieException {
-        String[] commandArr = command.trim().split(" ");
-        command = command.trim();
+    public static Command parse(String cmd) throws DuckieException {
+        String[] commandArr = cmd.trim().split(" ");
+        cmd = cmd.trim();
         switch(commandArr[0]) {
             case "list":
-                return new ListCmd(command);
-            case "done":
-                return new DoneCmd(command);
+                return new ListCmd(cmd);
             case "todo":
-                return new ToDoCmd(command);
+                return new ToDoCmd(cmd);
             case "event":
-                return new EventCmd(command);
+                return new EventCmd(cmd);
             case "deadline":
-                return new DeadlineCmd(command);
+                return new DeadlineCmd(cmd);
+            case "done":
+                return new DoneCmd(cmd);
             case "delete":
-                return new DeleteCmd(command);
+                return new DeleteCmd(cmd);
             case "bye":
-                return new ByeCmd(command);
+                return new ByeCmd(cmd);
             default:
                 throw new DuckieException("please start with 'list', 'todo', 'event', deadline', 'delete', 'done' or 'bye'");
         }
