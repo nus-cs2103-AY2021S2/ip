@@ -1,3 +1,5 @@
+package duke.exception;
+
 @SuppressWarnings("serial")
 public class AddEventCommandParseException extends Exception {
 	public AddEventCommandParseException() {

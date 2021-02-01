@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.TaskType;
+import duke.exception.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 public class Parser {
 
     public static Task parseAsTask(String str) {
