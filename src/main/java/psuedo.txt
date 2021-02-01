@@ -1,0 +1,92 @@
+//duke class
+
+//task-related objects:
+1) Task
+2) Todo extends Task
+3) Events extends Task
+4) Deadlines extends Task
+5) TaskList, keep track of Tasks in current loop -> trackChanges property
+
+//error classes
+1) BaseException (abstract)
+2) DukeException extends BaseException -> Command Errors
+3) RWException (abstract)
+4) IOdukeException extends RWexception -> IO errors : Incorrect Input, Unable to Load Tasks
+
+
+
+
+//PrintIntro()
+**welcome to duke**
+Instructions
+
+//ReadTaskFile() -> output boolean flag, output TaskList
+try{ read in, create TaskList by creating Tasks }
+catch{ IOdukeException error }
+Handle -> File Not Existing
+Handle -> Folder not Existing
+
+
+//SaveTaskFile() -> output boolean flag
+try{ write out}
+catch{ IOdukeException error }
+
+//PrintOut()
+printout out String that needs to be printed
+check if TaskList has changed, if yes then SaveTaskFile
+
+//CommandHandler(TaskList)
+additional commands: list -> PrintOut()
+deadline, event, todo, done -> TaskListUpdater(TaskList, command)
+}
+
+//TaskListUpdater(TaskList){
+    TaskList.addTask(command)
+    SaveTaskFile();
+}
+
+
+//PVSM()
+PrintIntro()
+-read from file, get taskList
+- TaskFile obj Create
+while(contFlag){
+        System.out.println("Reading Tasks From Directory, Proceed? (Y/N)";
+        try{
+            if(input.equals('Y') || input.equals('N')){
+                if(input.equals('N'){contFlag == false);
+                if(input.equals('Y'){
+                    if(assign Taskfile to this ReadTaskFile() -> TaskFile){
+                        System.out.println("Tasks Successfully Loaded");
+                        contFlag == false;
+                     }
+                    else{
+                        throw -> Unable to Load tasks
+                        contFlag == true;
+                    }
+                }
+
+            }
+            else{
+                throw -> incorrect input error
+                contFlag == true;
+            }
+        }
+        catch{
+            printstack error
+
+        }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
