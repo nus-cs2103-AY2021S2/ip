@@ -32,6 +32,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Method to insert DukeBot into the window.
+     * @param d the DukeBot to insert
+     */
     public void setDuke(DukeBot d) {
         duke = d;
     }

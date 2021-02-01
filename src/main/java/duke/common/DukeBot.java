@@ -51,6 +51,11 @@ public class DukeBot {
         }
     }
 
+    /**
+     * Gets the appropriate response from Duke given an input.
+     * @param input the input to Duke
+     * @return the reply from Duke, if applicable. Otherwise, the error from Duke
+     */
     public String getResponse(String input) {
         try {
             Command command = parser.parseInput(input);
