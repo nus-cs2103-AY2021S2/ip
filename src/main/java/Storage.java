@@ -7,9 +7,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Duke's Storage. Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     File dukeDataFile;
 
+    /**
+     * Class constructor specifying the file path to save the task list to. If the file does not exist,
+     * creates the data file. If the directory does not exist, creates the directory, then creates the file inside.
+     * @param filePath File path to open or create that will store the data file for the task list.
+     */
     public Storage(String filePath) {
         Path path = Paths.get(filePath);
         dukeDataFile = new File(filePath);
@@ -28,6 +36,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads tasks from this storage object's data file and populates
+     * the specified TaskList with the read data, if any.
+     * @param taskList The specified TaskList object to be written to.
+     */
     public void readFromStorage(TaskList taskList) {
         try {
             Scanner fileScanner = new Scanner(dukeDataFile);
@@ -70,6 +83,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes tasks from the specified TaskList to this storage object's data file, overwriting the current data.
+     * @param taskList The specified TaskList object to read from.
+     * @throws IOException If writing to the file fails.
+     */
     public void writeToStorage(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(dukeDataFile);
         taskList.taskList.forEach(task -> {
