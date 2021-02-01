@@ -23,7 +23,12 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
-    // todo javadocs
+
+    /**
+     * Initializes the Chatbot when the program is just opened. Greets user and populates tasklist.
+     *
+     * @return Greeting message if successfully launched, error message otherwise.
+     */
     public String initializeStart() {
         try {
             storage.initializeTaskList(taskList);
@@ -33,7 +38,12 @@ public class Duke {
         }
     }
 
-    // todo javadocs
+    /**
+     * Handles Chatbot's response to a user input.
+     *
+     * @param input User input.
+     * @return Chatbot's response as String.
+     */
     public String getResponse(String input) {
         try {
             Command toRun = parser.parse(input);
