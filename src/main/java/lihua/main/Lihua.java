@@ -10,41 +10,29 @@ import lihua.ui.Ui;
 
 // Design idea adapted from https://github.com/se-edu/addressbook-level2
 public class Lihua {
-    /** Task list */
-    private Tasks tasks;
-    /** Storage object */
-    private Storage storage;
-    /** Ui object */
-    private Ui ui;
+    private final Tasks tasks;
+    private final Storage storage;
+    private final Ui ui;
+    private final Parser parser;
 
     /**
-     * Runs the application.
-     *
-     * @param args Lunch arguments of the main method.
+     * Constructor for Lihua. Initializing necessary fields.
      */
-    public void run(String[] args) {
-        start(args);
-        runCommandLoopUntilExitCommand();
-        exit();
+    public Lihua() {
+        ui = new Ui();
+        storage = new Storage();
+        tasks = storage.load();
+        parser = new Parser();
     }
 
-    public String getResponse(String input) {
-        return "Lihua heard: " + input;
+    public String getResponse(String userInput) {
+        Command command = parser.parseUserInput(userInput);
+        if (ExitCommand.isExit(command)) {
+            exit();
+        }
+        CommandResult result = executeCommand(command);
+        return result.getFeedBack();
     }
-
-    /**
-     * Runs command loop until the user inputs a exit command.
-     */
-    private void runCommandLoopUntilExitCommand() {
-        Command command;
-        do {
-            String userInput = ui.getUserInput();
-            command = new Parser().parseUserInput(userInput);
-            CommandResult result = executeCommand(command);
-            ui.showFeedbackToUser(result);
-        } while (!ExitCommand.isExit(command));
-    }
-
     /**
      * Executes the command argument. If successful then saves the current task list.
      * If there are unchecked exception then shows user the error message and throws an RuntimeException.
@@ -66,25 +54,6 @@ public class Lihua {
         }
     }
 
-    /**
-     * Starts the application.
-     *
-     * @param args The launch arguments of the main method.
-     */
-    private void start(String[] args) {
-        try {
-            ui = new Ui();
-            storage = new Storage();
-            tasks = storage.load();
-            ui.printHello();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Exits the application with status code 0
-     */
     private void exit() {
         System.exit(0);
     }

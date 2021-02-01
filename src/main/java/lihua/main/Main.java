@@ -13,13 +13,13 @@ import lihua.ui.MainWindow;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    private static final String GUI_RESOURCE_PATH = "/view/MainWindow.fxml";
     private Lihua lihua = new Lihua();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(GUI_RESOURCE_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);

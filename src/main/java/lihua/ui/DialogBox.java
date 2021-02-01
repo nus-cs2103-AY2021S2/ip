@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets a dialog box object containing the bot response.
+     *
+     * @param text Bot response.
+     * @param img Bot img.
+     * @return A new DialogBox containing the input information.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets a flipped dialog box object containing the human message.
+     *
+     * @param text Human input.
+     * @param img Human message content.
+     * @return A new DialogBox containing the input information.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

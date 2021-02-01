@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import lihua.commons.Messages;
 import lihua.main.Lihua;
 
 /**
@@ -34,6 +35,14 @@ public class MainWindow extends AnchorPane {
 
     public void setLihua(Lihua lihua) {
         this.lihua = lihua;
+        sendWelcomMessage();
+    }
+
+    /**
+     * Bot sends a welcome message to the user.
+     */
+    public void sendWelcomMessage() {
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Messages.MESSAGE_HELLO, dukeImage));
     }
 
     /**
