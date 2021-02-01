@@ -1,4 +1,4 @@
-package ui;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
