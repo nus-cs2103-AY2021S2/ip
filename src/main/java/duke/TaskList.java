@@ -15,7 +15,7 @@ public class TaskList {
 
 	public TaskList(List<Task> tasks) {
 		this.tasks = new ArrayList<>();
-		tasks.addAll(tasks);
+		this.tasks.addAll(tasks);
 	}
 
 	public List<String> encode() {
