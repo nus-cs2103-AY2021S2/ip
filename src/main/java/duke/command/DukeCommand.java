@@ -15,6 +15,7 @@ public enum DukeCommand {
 
     /**
      * Returns a boolean to indicate whether the user's input is valid.
+     *
      * @param value input command from the user
      * @return the boolean to indicate whether is it a valid command
      */

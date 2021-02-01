@@ -4,20 +4,17 @@ import duke.command.Command;
 import duke.task.TaskList;
 
 /**
- * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ * Duke is a Personal Assistant Chat Bot that helps a person to keep track of various things.
  * Initialize the application and start interacting with users.
  */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
+    private final Ui ui;
 
     /**
-     * Initialize the required objects and tries to loads up the data from the storage file, otherwise a new storage file will be created.
+     * Initialize the required objects and tries to loads up the data from the storage file,
+     * otherwise a new storage file will be created.
      *
      * @param filePath the path to the storage file
      */
@@ -32,8 +29,13 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     /**
-     * Prints welcome message and reads the user inputs and execute the respective command. Exit when the user types 'bye'.
+     * Prints welcome message and reads the user inputs and execute the respective command.
+     * Exit when the user types 'bye'.
      */
     public void run() {
         ui.showWelcome();

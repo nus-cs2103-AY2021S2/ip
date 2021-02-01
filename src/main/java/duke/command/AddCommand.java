@@ -11,14 +11,15 @@ import duke.task.TaskList;
  */
 public class AddCommand extends Command {
 
-    private Task task;
+    private final Task task;
 
     public AddCommand(Task task) {
         this.task = task;
     }
 
     /**
-     * Performs adding of task into the task list, prints a message to the user and saving the file to storage.
+     * Performs adding of {@code Task} into the task list, prints a message to the user then save the file to storage.
+     *
      * @param taskList user's task list
      * @param ui text UI object
      * @param storage storage object

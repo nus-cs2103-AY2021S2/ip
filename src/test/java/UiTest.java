@@ -1,14 +1,13 @@
-import duke.Ui;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.Ui;
 
 public class UiTest {
     private final PrintStream standardOut = System.out;
@@ -28,16 +27,17 @@ public class UiTest {
     @Test
     public void showWelcomeTest() {
         ui.showWelcome();
-        assertEquals("____________________________________________________________\n" +
-                "Hello! I'm Duke\n" +
-                "What can I do for you?\n" +
-                "____________________________________________________________", outputStreamCaptor.toString().trim());
+        assertEquals("____________________________________________________________\n"
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?\n"
+                + "____________________________________________________________", outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void showLineTest() {
         ui.showLine();
-        assertEquals("____________________________________________________________", outputStreamCaptor.toString().trim());
+        assertEquals("____________________________________________________________",
+                    outputStreamCaptor.toString().trim());
     }
 
     @Test
