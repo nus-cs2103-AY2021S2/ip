@@ -11,9 +11,9 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        System.out.println("Hello! I'm Duke! \n " +
+        System.out.println("Hello! I'm Duke! \n" +
                 "What would you like to do today? \n" +
-                "********************************");
+                "***********************************");
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -28,8 +28,18 @@ public class Duke {
                         task.markDone() +
                         "\n");
             } else {
-                list.add(new Task(input));
-                System.out.println("added: " + input + "\n");
+                Task task;
+                if (input.contains("todo")) {
+                    task = new ToDo(input);
+                } else if (input.contains("deadline")) {
+                    task = new Deadline(input);
+                } else {
+                    task = new Event(input);
+                }
+                list.add(task);
+                System.out.println("I'll take note! \n  added: " +
+                        task + "\nNow you have " + list.size() +
+                        " task(s) in the list. \n" );
             }
             input = sc.nextLine();
         }
@@ -44,26 +54,4 @@ public class Duke {
     }
 }
 
-class Task {
-    String task;
-    boolean isDone;
 
-    Task(String task) {
-        this.task = task;
-        isDone = false;
-    }
-
-    Task markDone() {
-        isDone = true;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        if (isDone) {
-            return "[X] " + task;
-        } else {
-            return "[ ] " + task;
-        }
-    }
-}
