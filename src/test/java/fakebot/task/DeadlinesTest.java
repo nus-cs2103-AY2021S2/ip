@@ -1,22 +1,24 @@
 package fakebot.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 
 class DeadlinesTest {
-    String taskName = "Test";
-    String dateString = "2000-10-01";
-    String timeString = "01:04";
+    private String taskName = "Test";
+    private String dateString = "2000-10-01";
+    private String timeString = "01:04";
+
     @Test
     public void getTaskName_equal() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
         Deadlines deadline = new Deadlines(taskName, date, time);
-        assertEquals(taskName, deadline.getTaskName(),"Task Name does not match");
+        assertEquals(taskName, deadline.getTaskName(), "Task Name does not match");
     }
 
     @Test
@@ -33,7 +35,7 @@ class DeadlinesTest {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
         Deadlines deadline = new Deadlines(taskName, date, time);
-        assertEquals(dateString, deadline.getDeadlineDate(),"Deadline Date does not match");
+        assertEquals(dateString, deadline.getDeadlineDate(), "Deadline Date does not match");
     }
 
     @Test
@@ -41,6 +43,6 @@ class DeadlinesTest {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
         Deadlines deadline = new Deadlines(taskName, date, time);
-        assertEquals(timeString, deadline.getDeadlineTime(),"Deadline Time does not match");
+        assertEquals(timeString, deadline.getDeadlineTime(), "Deadline Time does not match");
     }
 }

@@ -1,17 +1,18 @@
 package fakebot;
 
-import fakebot.task.TaskList;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import fakebot.task.TaskList;
+
 
 /**
  * Ui Class use for reading and printing data.
  */
 public class Ui {
 
-    private static String DIVIDER = "____________________________________________________________\n";
+    private static final String DIVIDER = "____________________________________________________________\n";
 
     private Scanner scanf;
 
@@ -24,7 +25,7 @@ public class Ui {
 
 
     /**
-     * Print Standard Message.
+     * Prints Standard Message.
      *
      * @param message Message to print.
      */
@@ -34,7 +35,7 @@ public class Ui {
     }
 
     /**
-     * Print List of String.
+     * Prints List of String.
      *
      * @param startingMessage Starting message to print before the list.
      * @param messages        List of String to print.
@@ -53,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Print List of Task.
+     * Prints List of Task.
      *
      * @param taskList List of Task to print.
      */
@@ -66,7 +67,7 @@ public class Ui {
     }
 
     /**
-     * Print Message.
+     * Prints Message.
      *
      * @param message message to print.
      */
@@ -75,7 +76,7 @@ public class Ui {
     }
 
     /**
-     * Read Line from IO.
+     * Reads Line from IO.
      *
      * @return Return String read from input.
      */

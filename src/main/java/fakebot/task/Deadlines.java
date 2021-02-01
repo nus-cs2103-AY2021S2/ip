@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Deadline Task Type
+ * Deadline Task Type.
  */
 public class Deadlines extends Task {
     private LocalDate deadlineDate;
@@ -21,7 +21,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Get Task Deadline Date.
+     * Returns Task Deadline Date.
      *
      * @return Return Deadline Date as String.
      */
@@ -30,7 +30,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Get Task Deadline Time.
+     * Returns Task Deadline Time.
      *
      * @return Return Deadline Time as String.
      */

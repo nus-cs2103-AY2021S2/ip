@@ -25,7 +25,7 @@ public class Events extends Task {
     }
 
     /**
-     * Get Task Start Date.
+     * Returns Task Start Date.
      *
      * @return Return Start Date as String.
      */
@@ -34,7 +34,7 @@ public class Events extends Task {
     }
 
     /**
-     * Get Task Start Time.
+     * Returns Task Start Time.
      *
      * @return Return Start Time as String.
      */
@@ -43,7 +43,7 @@ public class Events extends Task {
     }
 
     /**
-     * Get Task End Date.
+     * Returns Task End Date.
      *
      * @return Return End Date as String.
      */
@@ -52,7 +52,7 @@ public class Events extends Task {
     }
 
     /**
-     * Get Task End Time.
+     * Returns Task End Time.
      *
      * @return Return End Time as String.
      */
@@ -64,7 +64,7 @@ public class Events extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: "
-                + printDateFormat.format(startDate) + " " + printTimeFormat.format(startTime) + " to " +
-                printDateFormat.format(endDate) + " " + printTimeFormat.format(endTime) + ")";
+                + printDateFormat.format(startDate) + " " + printTimeFormat.format(startTime) + " to "
+                + printDateFormat.format(endDate) + " " + printTimeFormat.format(endTime) + ")";
     }
 }
