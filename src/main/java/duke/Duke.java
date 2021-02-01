@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 
 public class Duke {
@@ -20,32 +18,26 @@ public class Duke {
         greet();
     }
 
-    public void executeCommand(Command command) throws DukeException {
-        command.execute(this.list);
+    public String executeCommand(Command command) throws DukeException {
+        return command.execute(this.list);
     }
 
     private void greet() {
         Ui.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
+
     /**
-     * Initializes a Duke object to execute commands that are passed in by the user.
+     *  Provides responses to commands that are passed in by the user.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            String input = scanner.nextLine();
-            Command command;
-            try {
-                command = Parser.handleInput(input);
-                duke.executeCommand(command);
-                if (command.isExit()) {
-                    break;
-                }
-            } catch (DukeException e) {
-                Ui.printWithStyle(e.getMessage());
-            }
+    public String getResponse(String input) {
+        Command command;
+        try {
+            command = Parser.handleInput(input);
+            return this.executeCommand(command);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
+
 }

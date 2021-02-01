@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.TaskList;
-import duke.Ui;
 
 public class ByeCommand extends Command {
     public ByeCommand(String[] commandSplit) {
@@ -14,8 +13,8 @@ public class ByeCommand extends Command {
      * @param list the task list.
      * @throws DukeException if failed to rewrite tasks.
      */
-    public void execute(TaskList list) throws DukeException {
+    public String execute(TaskList list) throws DukeException {
         list.rewriteTasks();
-        Ui.printWithStyle("Bye. Hope to see you again soon!");
+        return ("Bye. Hope to see you again soon!");
     }
 }

@@ -37,4 +37,33 @@ public class Ui {
         System.out.println("    " + output);
         System.out.println("    ________________________________________________________________");
     }
+
+    /**
+     * Formats the array of input strings to an output string in which each input string is in a new line.
+     */
+    public static String formatStringArray(String[] input) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < input.length; i++) {
+            output.append(input[i]);
+            if (i != input.length - 1) {
+                output.append(System.getenv(System.lineSeparator()));
+            }
+        }
+        return output.toString();
+    }
+
+    /**
+     * Formats the List of input strings to an output string in which each input string is in a new line.
+     */
+    public static String formatStringArray(List<String> input) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < input.size(); i++) {
+            output.append(input.get(i));
+            if (i != input.size() - 1) {
+                output.append(System.getenv(System.lineSeparator()));
+            }
+        }
+        return output.toString();
+    }
+
 }

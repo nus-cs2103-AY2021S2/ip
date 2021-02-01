@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
@@ -25,7 +26,7 @@ public class ListCommand extends Command {
      * @throws DukeException if an incorrect date format is provided.
      */
     @Override
-    public void execute(TaskList list) throws DukeException {
+    public String execute(TaskList list) throws DukeException {
         //Check if command includes an optional date argument
         boolean hasDate = commandSplit.length > 1;
         if (hasDate) {
@@ -37,11 +38,15 @@ public class ListCommand extends Command {
             } catch (DateTimeParseException e) {
                 throw new DukeException("Incorrect date format. " + e.getMessage());
             }
+            //Filter Tasks from TaskList against the date provided
             ArrayList<Task> matchedTasks = list.filter(x -> !x.getDate().equals(LocalDate.MIN)
                     && x.getDate().equals(queryDate));
-            Ui.printWithStyle(matchedTasks.stream().map(Task::toString).collect(Collectors.toList()));
+            //Map each filtered Task with Task.toString()
+            List<String> taskStrings = matchedTasks.stream().map(Task::toString).collect(Collectors.toList());
+            return Ui.formatStringArray(taskStrings);
+
         } else {
-            list.printList();
+            return list.formatList();
         }
     }
 }

@@ -24,10 +24,10 @@ public class TaskList {
      * Adds a task to the list of tasks and prints to console the number of tasks in the list.
      * @param task task to be added to list
      */
-    public void add(Task task) throws DukeException {
+    public String add(Task task) throws DukeException {
         this.list.add(task);
         storage.writeTaskToFile(task);
-        Ui.printWithStyle(new String[] {
+        return Ui.formatStringArray(new String[] {
             "Got it. I've added this task:",
             "    " + task.toString(),
             "Now you have " + this.list.size() + " tasks in the list."
@@ -39,30 +39,31 @@ public class TaskList {
      * @param taskNumber task number of the task to be marked as done.
      * @throws DukeException if failed to rewrite tasks to storage.
      */
-    public void done(int taskNumber) throws DukeException {
-        this.list.get(taskNumber - 1).done();
+    public String done(int taskNumber) throws DukeException {
+        String doneMsg = this.list.get(taskNumber - 1).done();
         rewriteTasks();
+        return doneMsg;
     }
 
     /**
      * Removes a task from the list and prints to console number of tasks left in the list.
      * @param taskNumber task number of task to be removed.
      */
-    public void remove(int taskNumber) throws DukeException {
-        Ui.printWithStyle(new String[] {
+    public String remove(int taskNumber) throws DukeException {
+        this.list.remove(taskNumber - 1);
+        //Rewrite all tasks
+        rewriteTasks();
+        return Ui.formatStringArray(new String[] {
             "Noted. I've removed this task:",
             this.list.get(taskNumber - 1).toString(),
             "Now you have " + (this.list.size() - 1) + " tasks in the list."
         });
-        this.list.remove(taskNumber - 1);
-        //Rewrite all tasks
-        rewriteTasks();
     }
 
     /**
      * Prints to console all tasks that are present in the list.
      */
-    public void printList() {
+    public String formatList() {
         String[] printedArray = new String[this.list.size() + 1];
         printedArray[0] = "Here are the tasks in your list:";
         for (int i = 0; i < this.list.size(); i++) {
@@ -70,7 +71,7 @@ public class TaskList {
                     + this.list.get(i).toString();
             printedArray[i + 1] = listEntry;
         }
-        Ui.printWithStyle(printedArray);
+        return Ui.formatStringArray(printedArray);
     }
 
     /**

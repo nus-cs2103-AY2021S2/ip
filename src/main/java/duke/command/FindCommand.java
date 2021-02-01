@@ -20,11 +20,11 @@ public class FindCommand extends Command {
      * @param list the task list.
      */
     @Override
-    public void execute(TaskList list) {
+    public String execute(TaskList list) {
         String keyword = Helper.join(this.commandSplit, 1);
         ArrayList<Task> filteredList = list.filter(task -> task.isDescriptionContainsString(keyword));
         List<String> tasksAsString = filteredList.stream().map(Task::toString).collect(Collectors.toList());
         tasksAsString.add(0, "Found " + tasksAsString.size() + " matching task(s):");
-        Ui.printWithStyle(tasksAsString);
+        return Ui.formatStringArray(tasksAsString.toArray(new String[0]));
     }
 }

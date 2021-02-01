@@ -24,9 +24,9 @@ public abstract class Task {
     /**
     * Marks the task as done and prints out to console that task is done.
     */
-    public void done() {
+    public String done() {
         this.isDone = true;
-        Ui.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
+        return Ui.formatStringArray(new String[] {"Nice! I've marked this task as done:", this.toString()});
     }
 
     public boolean isDescriptionContainsString(String input) {

@@ -20,26 +20,26 @@ public class AddCommand extends Command {
      * @throws DukeException if adding a task failed.
      */
     @Override
-    public void execute(TaskList list) throws DukeException {
+    public String execute(TaskList list) throws DukeException {
         String keyword = commandSplit[0];
         if (keyword.equals("deadline")) {
             try {
-                addDeadline(list);
+                return addDeadline(list);
             } catch (TaskException e) {
                 throw new DukeException("Failed to add deadline to tasks. " + e.getMessage());
             }
         } else if (keyword.equals("todo")) {
-            addToDo(list);
+            return addToDo(list);
         } else {
             try {
-                addEvent(list);
+                return addEvent(list);
             } catch (TaskException e) {
                 throw new DukeException("Failed to add event to tasks. " + e.getMessage());
             }
         }
     }
 
-    private void addDeadline(TaskList list) throws DukeException, TaskException {
+    private String addDeadline(TaskList list) throws DukeException, TaskException {
         String[] userInputSplit = this.commandSplit;
         //Index of /by keyword
         int byIndex = 0;
@@ -58,19 +58,19 @@ public class AddCommand extends Command {
         }
         String task = Helper.join(userInputSplit, 1, byIndex - 1);
         String date = Helper.join(userInputSplit, byIndex + 1, userInputSplit.length - 1);
-        list.add(new Deadline(task, date));
+        return list.add(new Deadline(task, date));
     }
 
-    private void addToDo(TaskList list) throws DukeException {
+    private String addToDo(TaskList list) throws DukeException {
         String[] userInputSplit = this.commandSplit;
         if (userInputSplit.length <= 1) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         String task = Helper.join(userInputSplit, 1, userInputSplit.length - 1);
-        list.add(new ToDo(task));
+        return list.add(new ToDo(task));
     }
 
-    private void addEvent(TaskList list) throws DukeException, TaskException {
+    private String addEvent(TaskList list) throws DukeException, TaskException {
         String[] userInputSplit = this.commandSplit;
         //Index of /at keyword
         int atIndex = 0;
@@ -89,6 +89,6 @@ public class AddCommand extends Command {
         }
         String task = Helper.join(userInputSplit, 1, atIndex - 1);
         String date = Helper.join(userInputSplit, atIndex + 1, userInputSplit.length - 1);
-        list.add(new Event(task, date));
+        return list.add(new Event(task, date));
     }
 }

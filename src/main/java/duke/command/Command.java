@@ -15,5 +15,5 @@ public abstract class Command {
         return this.commandSplit.length == 1 && this.commandSplit[0].equals("bye");
     }
 
-    public abstract void execute(TaskList list) throws DukeException;
+    public abstract String execute(TaskList list) throws DukeException;
 }

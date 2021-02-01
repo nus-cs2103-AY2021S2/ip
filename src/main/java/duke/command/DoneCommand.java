@@ -15,10 +15,10 @@ public class DoneCommand extends Command {
      * @throws DukeException if failed to mark task as done.
      */
     @Override
-    public void execute(TaskList list) throws DukeException {
+    public String execute(TaskList list) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(commandSplit[1]);
-            list.done(taskNumber);
+            return list.done(taskNumber);
         } catch (Exception e) {
             throw new DukeException("Please enter a valid task number to mark a task as done.");
         }
