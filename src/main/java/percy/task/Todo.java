@@ -1,6 +1,6 @@
 package percy.task;
 
-public class Todo extends Task{
+public class Todo extends Task {
     public static final String PREFIX = "T";
 
     public Todo(String description) {

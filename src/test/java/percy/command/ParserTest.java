@@ -1,8 +1,6 @@
 package percy.command;
 
 import percy.exception.PercyException;
-import percy.command.ByeCommand;
-import percy.command.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertThat;
