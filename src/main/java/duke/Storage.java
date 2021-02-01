@@ -64,7 +64,7 @@ class Storage {
      *
      * @param file the text file in which the task list is created from
      * @param taskList the corresponding task list to copy the text file over
-     * @throws IOException
+     * @throws IOException whenever an issue with reading the file arises
      */
     public static void convert(File file, ArrayList<Task> taskList) throws IOException{
         Scanner scan = new Scanner(file);
