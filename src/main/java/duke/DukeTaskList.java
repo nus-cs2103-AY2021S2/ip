@@ -25,7 +25,7 @@ public class DukeTaskList {
     /**
      * Add new task into task list.
      *
-     * @param t the t
+     * @param t the added task.
      */
     protected void add(Task t) {
         taskList.add(t);
@@ -34,7 +34,7 @@ public class DukeTaskList {
     /**
      * Remove a task from task list.
      *
-     * @param i the
+     * @param i the index of the task to be removed.
      */
     protected void remove(int i) {
         taskList.remove(i);
@@ -43,7 +43,7 @@ public class DukeTaskList {
     /**
      * Gets the number of tasks in the task list.
      *
-     * @return the int
+     * @return the size of the task list.
      */
     protected int size() {
         return taskList.size();
@@ -53,7 +53,7 @@ public class DukeTaskList {
      * Get task based on index.
      *
      * @param i the
-     * @return the task
+     * @return the task at the given index.
      */
     protected Task get(int i) {
         return taskList.get(i);
@@ -62,7 +62,7 @@ public class DukeTaskList {
     /**
      * Gets task list.
      *
-     * @return the task list
+     * @return the current task list.
      */
     protected ArrayList<Task> getTaskList() {
         return this.taskList;
