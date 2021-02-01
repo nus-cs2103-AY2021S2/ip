@@ -11,6 +11,13 @@ class Task {
     private LocalDate date;
     private boolean isConditionLocalDate;
 
+    /**
+     * Constructor for Task.
+     *
+     * @param taskName  the name of the task
+     * @param type  the type of the task (todo, deadline or event)
+     * @param condition  the condition of any deadline or event task, taken in in the form of a String
+     */
     public Task(String taskName, String type, String condition) {
         this.done = false;
         this.taskName = taskName;
@@ -19,6 +26,14 @@ class Task {
         this.isConditionLocalDate = false;
     }
 
+    /**
+     * Constructor for Task.
+     *
+     * @param done  adds a task that is marked as done ('[X]')
+     * @param taskName  the name of the task
+     * @param type  the type of the task (todo, deadline or event)
+     * @param condition  the condition of any deadline or event task, taken in in the form of a String
+     */
     public Task(boolean done, String taskName, String type, String condition) {
         this.done = done;
         this.taskName = taskName;
@@ -27,6 +42,14 @@ class Task {
         this.isConditionLocalDate = false;
     }
 
+    /**
+     * Constructor for Task.
+     *
+     * @param done  adds a task that is marked as done ('[X]')
+     * @param taskName  the name of the task
+     * @param type  the type of the task (todo, deadline or event)
+     * @param date  the date of any deadline or event task, taken in in the form of a LocalDate.
+     */
     public Task(boolean done, String taskName, String type, LocalDate date) {
         this.done = done;
         this.taskName = taskName;
@@ -37,15 +60,29 @@ class Task {
 
     }
 
+    /**
+     * Marks the task as done ('[X]')
+     */
     public void markAsDone() {
         this.done = true;
     }
 
+    /**
+     * Sets the task as done ('[X]')
+     *
+     * @param task  the task to be marked as done
+     * @return the task that has been marked as done
+     */
     public static Task setAsDone(Task task) {
         task.done = true;
         return task;
     }
 
+    /**
+     * Gets the status of the task (if it is done or not)
+     *
+     * @return  a boolean indicating if the task is done or not
+     */
     public boolean getDoneStatus() {
         return this.done;
     }
