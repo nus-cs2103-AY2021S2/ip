@@ -1,11 +1,16 @@
 package fakebot;
 
-import fakebot.task.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import fakebot.task.Deadlines;
+import fakebot.task.Events;
+import fakebot.task.Task;
+import fakebot.task.TaskList;
+import fakebot.task.ToDos;
+
 /**
  * Parser class use for processing syntax
  */
@@ -16,15 +21,17 @@ public class Parser {
     /**
      * Enum for different task type.
      */
-    private enum TaskType {TODO, EVENT, DEADLINE}
+    private enum TaskType {
+        TODO, EVENT, DEADLINE
+    }
 
     /**
-     * Convert Task to String.
+     * Converts Task to String.
      *
      * @param stringList List of string to be converted to string.
      * @return Return string.
      */
-    public static String convertStringsToString(List<String> stringList) {
+    public static String convertStringListToString(List<String> stringList) {
         StringBuilder builder = new StringBuilder();
         for (String s : stringList) {
             builder.append(s);
@@ -34,12 +41,12 @@ public class Parser {
     }
 
     /**
-     * Convert Task to String.
+     * Converts Task to String.
      *
      * @param task Task to be parsed to string.
      * @return Return parsed Task.
      */
-    public static String convertTaskTOString(Task task) {
+    public static String convertTaskToString(Task task) {
         StringBuilder currentString = new StringBuilder();
         if (task instanceof ToDos) {
             currentString.append(TaskType.TODO.name());
@@ -78,7 +85,7 @@ public class Parser {
     }
 
     /**
-     * Convert List of Task to List of String.
+     * Converts List of Task to List of String.
      *
      * @param taskList string of list.
      * @return Return list of String parsed from list of Task.
@@ -88,13 +95,13 @@ public class Parser {
 
         for (int i = 0; i < taskList.getSize(); i++) {
             Task currentTask = taskList.getTask(i);
-            strings.add(convertTaskTOString(currentTask));
+            strings.add(convertTaskToString(currentTask));
         }
         return strings;
     }
 
     /**
-     * Convert String to Task.
+     * Converts String to Task.
      *
      * @param string Parsed Task.
      * @return Return task parsed from string.
@@ -107,22 +114,24 @@ public class Parser {
             currentTask = new ToDos(parts[2]);
             break;
         case EVENT:
-            currentTask = new Events(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4])
-                    , LocalDate.parse(parts[5]), LocalTime.parse(parts[6]));
+            currentTask = new Events(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]),
+                    LocalDate.parse(parts[5]), LocalTime.parse(parts[6]));
             break;
         case DEADLINE:
             currentTask = new Deadlines(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]));
             break;
+        default: break;
         }
 
-        if (Boolean.parseBoolean(parts[1]))
+        if (Boolean.parseBoolean(parts[1])) {
             currentTask.markComplete();
+        }
 
         return currentTask;
     }
 
     /**
-     * Convert List of String to List of Task.
+     * Converts List of String to List of Task.
      *
      * @param stringList string of list.
      * @return Return list of Task parsed from list of string.

@@ -1,7 +1,7 @@
 package fakebot.command;
 
 /**
- * Command Class
+ * Command Class.
  */
 public class Command {
     private CommandType type;
@@ -24,7 +24,7 @@ public class Command {
     }
 
     /**
-     * Get Command Type.
+     * Returns Command Type.
      *
      * @return CommandType of the Command.
      */
@@ -33,7 +33,7 @@ public class Command {
     }
 
     /**
-     * Get Command Description Type.
+     * Returns Command Description Type.
      *
      * @return Description of the Command.
      */

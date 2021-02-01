@@ -1,7 +1,7 @@
 package fakebot.command;
 
 /**
- * Command Exception Class
+ * Command Exception Class.
  */
 public class CommandException extends Exception {
 

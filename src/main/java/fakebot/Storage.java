@@ -1,8 +1,5 @@
 package fakebot;
 
-import fakebot.task.Task;
-import fakebot.task.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import fakebot.task.Task;
+import fakebot.task.TaskList;
 
 
 /**
@@ -34,7 +34,7 @@ public class Storage {
     }
 
     /**
-     * Create Directory if file path doesn't exist.
+     * Creates Directory if file path doesn't exist.
      *
      * @param filePath path of file.
      * @return Return path created, return empty path if path is invalid.
@@ -52,12 +52,12 @@ public class Storage {
     }
 
     /**
-     * Write Tasks to File.
+     * Writes Tasks to File.
      *
      * @param taskList Tasks to write to file.
      */
     public void writeTasksToFIle(TaskList taskList) {
-        String textToAdd = Parser.convertStringsToString(Parser.convertTasksToStrings(taskList));
+        String textToAdd = Parser.convertStringListToString(Parser.convertTasksToStrings(taskList));
         try {
             writeToFile(textToAdd);
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class Storage {
     }
 
     /**
-     * Write String to File.
+     * Writes String to File.
      *
      * @param textToAdd write text to file.
      */
@@ -77,7 +77,7 @@ public class Storage {
     }
 
     /**
-     * Read Task from File.
+     * Reads Task from File.
      *
      * @return Return list of task read from File.
      */
@@ -93,7 +93,7 @@ public class Storage {
     }
 
     /**
-     * Read String from File.
+     * Reads String from File.
      *
      * @return Return list of string read from File.
      */

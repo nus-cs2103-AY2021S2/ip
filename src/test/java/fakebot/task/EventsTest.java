@@ -1,18 +1,20 @@
 package fakebot.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 
 class EventsTest {
-    String taskName = "Test";
-    String startDateString = "2000-10-01";
-    String startTimeString = "01:04";
-    String endDateString = "2011-10-01";
-    String endTimeString = "04:04";
+    private String taskName = "Test";
+    private String startDateString = "2000-10-01";
+    private String startTimeString = "01:04";
+    private String endDateString = "2011-10-01";
+    private String endTimeString = "04:04";
+
     @Test
     public void getTaskName_equal() {
         LocalDate startDate = LocalDate.parse(startDateString);
@@ -20,8 +22,9 @@ class EventsTest {
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
         Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        assertEquals(taskName, event.getTaskName(),"Task Name does not match");
+        assertEquals(taskName, event.getTaskName(), "Task Name does not match");
     }
+
     @Test
     public void markComplete_success() {
         LocalDate startDate = LocalDate.parse(startDateString);
@@ -40,7 +43,7 @@ class EventsTest {
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
         Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        assertEquals(startDateString, event.getStartDate(),"Start Date does not match");
+        assertEquals(startDateString, event.getStartDate(), "Start Date does not match");
     }
 
     @Test
@@ -50,7 +53,7 @@ class EventsTest {
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
         Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        assertEquals(startTimeString, event.getStartTime(),"Start Time does not match");
+        assertEquals(startTimeString, event.getStartTime(), "Start Time does not match");
     }
 
     @Test
@@ -60,7 +63,7 @@ class EventsTest {
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
         Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        assertEquals(endDateString, event.getEndDate(),"End Date does not match");
+        assertEquals(endDateString, event.getEndDate(), "End Date does not match");
     }
 
     @Test
@@ -70,6 +73,6 @@ class EventsTest {
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
         Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        assertEquals(endTimeString, event.getEndTime(),"End Time does not match");
+        assertEquals(endTimeString, event.getEndTime(), "End Time does not match");
     }
 }

@@ -1,20 +1,21 @@
 package fakebot.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TaskListTest {
 
-    String description_1 = "test1";
-    String description_2 = "test2";
+    private String description1 = "test1";
+    private String description2 = "test2";
+
     @Test
     void getTask_equal() {
         TaskList taskList = new TaskList(new ArrayList<>());
-        Task test1 = new ToDos(description_1);
-        Task test2 = new ToDos(description_2);
+        Task test1 = new ToDos(description1);
+        Task test2 = new ToDos(description2);
         taskList.addTask(test1);
         taskList.addTask(test2);
         assertEquals(test1, taskList.getTask(0), "Task index do not match");
@@ -24,7 +25,7 @@ class TaskListTest {
     @Test
     void addTask_success() {
         TaskList taskList = new TaskList(new ArrayList<>());
-        Task test1 = new ToDos(description_1);
+        Task test1 = new ToDos(description1);
         taskList.addTask(test1);
         assertEquals(1, taskList.getSize(), "Task is not added");
     }
@@ -32,7 +33,7 @@ class TaskListTest {
     @Test
     void removeTask_success() {
         TaskList taskList = new TaskList(new ArrayList<>());
-        Task test1 = new ToDos(description_1);
+        Task test1 = new ToDos(description1);
         taskList.addTask(test1);
         taskList.removeTask(0);
         assertEquals(0, taskList.getSize(), "Task is not removed");
@@ -41,7 +42,7 @@ class TaskListTest {
     @Test
     void getSize_success() {
         TaskList taskList = new TaskList(new ArrayList<>());
-        Task test1 = new ToDos(description_1);
+        Task test1 = new ToDos(description1);
         taskList.addTask(test1);
         taskList.addTask(test1);
         taskList.addTask(test1);
@@ -51,8 +52,8 @@ class TaskListTest {
     @Test
     void find_success() {
         TaskList taskList = new TaskList(new ArrayList<>());
-        Task test1 = new ToDos(description_1);
-        Task test2 = new ToDos(description_2);
+        Task test1 = new ToDos(description1);
+        Task test2 = new ToDos(description2);
         taskList.addTask(test1);
         taskList.addTask(test2);
         taskList.addTask(test1);

@@ -16,7 +16,7 @@ public class TaskList {
     }
 
     /**
-     * Get Task at Index i.
+     * Returns Task at Index i.
      *
      * @param i Index of Task.
      * @return Return Task.
@@ -26,7 +26,7 @@ public class TaskList {
     }
 
     /**
-     * Add task to task list.
+     * Adds task to task list.
      *
      * @param task Task to add to TaskList.
      */
@@ -35,7 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Remove Task index i.
+     * Removes Task index i.
      *
      * @param i Index of Task to be removed.
      */
@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Get size of task list.
+     * Returns size of task list.
      *
      * @return Return Size of Task List.
      */
@@ -53,10 +53,10 @@ public class TaskList {
     }
 
     /**
-     * Find all task that contain search string
+     * Finds all task that contain search string.
      *
-     * @param search String to search
-     * @return Return list of task that contain search string
+     * @param search String to search.
+     * @return Return list of task that contain search string.
      */
     public List<Task> find(String search) {
         List<Task> foundTask = new ArrayList<>();

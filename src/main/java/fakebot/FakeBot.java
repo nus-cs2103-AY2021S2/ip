@@ -1,24 +1,29 @@
 package fakebot;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import fakebot.command.Command;
 import fakebot.command.CommandException;
 import fakebot.command.CommandType;
-import fakebot.task.*;
+import fakebot.task.Deadlines;
+import fakebot.task.Events;
+import fakebot.task.Task;
+import fakebot.task.TaskList;
+import fakebot.task.ToDos;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Fakebot class, main class for Fakebot.
  */
 public class FakeBot {
-    private static String OLDLOGO = " ____        _        \n"
+    private static final String OLD_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static String LOGO = " ______      _  ________   ____   ____ _______ \n"
+    private static final String LOGO = " ______      _  ________   ____   ____ _______ \n"
             + "|  ____/ \\  | |/ /  ____| |  _ \\ / __ \\__   __|\n"
             + "| |__ /  \\  | ' /| |__    | |_) | |  | | | |   \n"
             + "|  __/ /\\ \\ |  < |  __|   |  _ <| |  | | | |\n"
@@ -26,44 +31,24 @@ public class FakeBot {
             + "|_|/_/    \\_\\_|\\_\\______| |____/ \\____/  |_|\n";
 
 
-    private static String EXIT_COMMAND = "bye";
-    private static String LIST_COMMAND = "list";
-    private static String DONE_COMMAND = "done";
-    private static String TODO_COMMAND = "todo";
-    private static String DEADLINE_COMMAND = "deadline";
-    private static String DEADLINE_SPLIT_REGEX = " /by ";
-    private static String EVENT_COMMAND = "event";
-    private static String EVENT_SPLIT_REGEX = " /at ";
-    private static String DELETE_COMMAND = "delete";
-    private static String FIND_COMMAND = "find";
+    private static final String EXIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String DEADLINE_SPLIT_REGEX = " /by ";
+    private static final String EVENT_COMMAND = "event";
+    private static final String EVENT_SPLIT_REGEX = " /at ";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
-    private static String SAVE_FILE_PATH = "/data/";
-    private static String SAVE_FILE_NAME = "savedHistory.txt";
+    private static final String SAVE_FILE_PATH = "/data/";
+    private static final String SAVE_FILE_NAME = "savedHistory.txt";
 
     private static Ui ui;
 
     private TaskList taskList;
     private Storage storage;
-
-    public static void main(String[] args) {
-        ui = new Ui();
-        FakeBot fakeBot = new FakeBot(SAVE_FILE_NAME, SAVE_FILE_PATH);
-        fakeBot.printHelloMessage();
-
-        boolean continueProgram = true;
-        while (continueProgram) {
-            String reply = ui.readLine();
-            Command command;
-            try {
-                command = fakeBot.validateCommand(reply);
-            } catch (CommandException e) {
-                ui.printBotMessage(e.getMessage());
-                continue;
-            }
-            continueProgram = fakeBot.processCommand(command);
-        }
-        ui.printBotMessage("Bye. Hope to see you again soon!");
-    }
 
     /**
      * Class constructor specifying save file name and save file path.
@@ -74,21 +59,21 @@ public class FakeBot {
     }
 
     /**
-     * Save History to Storage.
+     * Saves History to Storage.
      */
     public void saveHistory() {
         storage.writeTasksToFIle(taskList);
     }
 
     /**
-     * Print Hello Message used at the start of the project.
+     * Prints Hello Message used at the start of the project.
      */
     public void printHelloMessage() {
         ui.printBotMessage("Hello from\n" + LOGO + "What can I do for you?");
     }
 
     /**
-     * Print message to show that the task is done.
+     * Prints message to show that the task is done.
      *
      * @param task Task to print.
      */
@@ -98,7 +83,7 @@ public class FakeBot {
 
 
     /**
-     * Print message to show that the task is deleted and print the remaining number of task left.
+     * Prints message to show that the task is deleted and print the remaining number of task left.
      *
      * @param task Deleted Task.
      */
@@ -108,7 +93,7 @@ public class FakeBot {
     }
 
     /**
-     * Print message to show that the task is deleted and print the remaining number of task left.
+     * Prints message to show that the task is deleted and print the remaining number of task left.
      *
      * @param task Added Task.
      */
@@ -143,17 +128,20 @@ public class FakeBot {
             break;
         case DELETE:
             processDeleteCommand(command);
+            break;
         case FIND:
             ui.printTasks(new TaskList(taskList.find(command.getDescription())));
             break;
+        default: break;
         }
 
         return true;
     }
 
     /**
-     * Process Done Command
-     * @param command Command to Process
+     * Process Done Command.
+     *
+     * @param command Command to Process.
      */
     private void processDoneCommand(Command command) {
         int doneIndex = Integer.parseInt(command.getDescription()) - 1;
@@ -163,8 +151,9 @@ public class FakeBot {
     }
 
     /**
-     * Process Todos Command
-     * @param command Command to Process
+     * Process Todos Command.
+     *
+     * @param command Command to Process.
      */
     private void processTodoCommand(Command command) {
         ToDos todoTask = new ToDos(command.getDescription());
@@ -174,23 +163,25 @@ public class FakeBot {
     }
 
     /**
-     * Process Deadline Command
-     * @param command Command to Process
+     * Process Deadline Command.
+     *
+     * @param command Command to Process.
      */
     private void processDeadlineCommand(Command command) {
-        String[] deadlineDetalis = command.getDescription().split(DEADLINE_SPLIT_REGEX);
-        String[] dates = deadlineDetalis[1].split(" ");
+        String[] deadlineDetails = command.getDescription().split(DEADLINE_SPLIT_REGEX);
+        String[] dates = deadlineDetails[1].split(" ");
         LocalDate date = LocalDate.parse(dates[0]);
         LocalTime time = LocalTime.parse(dates[1]);
-        Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date, time);
+        Deadlines deadlineTask = new Deadlines(deadlineDetails[0], date, time);
         taskList.addTask(deadlineTask);
         printAddedTaskMessage(deadlineTask);
         saveHistory();
     }
 
     /**
-     * Process Event Command
-     * @param command Command to Process
+     * Process Event Command.
+     *
+     * @param command Command to Process.
      */
     private void processEventCommand(Command command) {
         String[] eventDetails = command.getDescription().split(EVENT_SPLIT_REGEX);
@@ -206,8 +197,9 @@ public class FakeBot {
     }
 
     /**
-     * Process Delete Command
-     * @param command Command to Process
+     * Process Delete Command.
+     *
+     * @param command Command to Process.
      */
     private void processDeleteCommand(Command command) {
         int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
@@ -218,7 +210,7 @@ public class FakeBot {
     }
 
     /**
-     * Validate User Input.
+     * Validates User Input.
      *
      * @param command Command String that is yet to be parsed.
      */
@@ -270,11 +262,11 @@ public class FakeBot {
             } else if (commandName.equals(TODO_COMMAND)) {
                 return new Command(CommandType.TODO, description);
             } else if (commandName.equals(DEADLINE_COMMAND)) {
-                if (!description.contains(DEADLINE_SPLIT_REGEX))
+                if (!description.contains(DEADLINE_SPLIT_REGEX)) {
                     throw new CommandException("☹ OOPS!!! The description of a "
                             + DEADLINE_COMMAND + " must contain Date indicated by \""
                             + DEADLINE_SPLIT_REGEX + "\".");
-
+                }
                 try {
                     String[] deadlineDetails = description.split(DEADLINE_SPLIT_REGEX);
                     String[] dates = deadlineDetails[1].split(" ");
@@ -288,10 +280,10 @@ public class FakeBot {
 
                 return new Command(CommandType.DEADLINE, description);
             } else if (commandName.equals(EVENT_COMMAND)) {
-                if (!description.contains(EVENT_SPLIT_REGEX))
+                if (!description.contains(EVENT_SPLIT_REGEX)) {
                     throw new CommandException("☹ OOPS!!! The description of a " + EVENT_COMMAND
                             + " must contain Date and Duration indicated by \"" + EVENT_SPLIT_REGEX + "\".");
-
+                }
                 try {
                     String[] eventDetails = description.split(EVENT_SPLIT_REGEX);
                     String[] dates = eventDetails[1].split(" ");
@@ -307,5 +299,31 @@ public class FakeBot {
             }
         }
         throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+
+    /**
+     * Main method of the programs.
+     *
+     * @param args class input.
+     */
+    public static void main(String[] args) {
+        ui = new Ui();
+        FakeBot fakeBot = new FakeBot(SAVE_FILE_NAME, SAVE_FILE_PATH);
+        fakeBot.printHelloMessage();
+
+        boolean continueProgram = true;
+        while (continueProgram) {
+            String reply = ui.readLine();
+            Command command;
+            try {
+                command = fakeBot.validateCommand(reply);
+            } catch (CommandException e) {
+                ui.printBotMessage(e.getMessage());
+                continue;
+            }
+            continueProgram = fakeBot.processCommand(command);
+        }
+        ui.printBotMessage("Bye. Hope to see you again soon!");
     }
 }
