@@ -42,6 +42,9 @@ public class Parser {
                     storage.saveToFile();
                     ui.sendOutput("History sucessfully saved!");
                     break;
+                case "find":
+                    ui.sendOutput("Here are the matching tasks in your list!\n\t" + taskList.findTask(input[1]));
+                    break;
                 default:
                     throw new ChecklstException("Sorry I didn't understand that command!!");
             }
