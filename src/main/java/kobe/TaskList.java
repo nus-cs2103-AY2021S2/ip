@@ -13,10 +13,19 @@ public class TaskList {
     public static String line = ind + "____________________________________________________________\n" + ind;
     public static String line2 = ind + "____________________________________________________________\n";
 
+    /**
+     * Constructor for TaskList.
+     */
     TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Gets the task associated to the task number in the TaskList.
+     *
+     * @param taskNumber  refers to the task number of the corresponding task in the TaskList
+     * @return  the task associated to the task number in the TaskList.
+     */
     public Task get(int taskNumber) {
         return this.tasks.get(taskNumber);
     }
@@ -25,10 +34,22 @@ public class TaskList {
 //        this.tasks.add(task);
 //    }
 
+    /**
+     * Gets the size of the TaskList.
+     *
+     * @return  the size of the TaskList.
+     */
     public int size() {
         return this.tasks.size();
     }
 
+    /**
+     * Adds a task into the TaskList, based on the command typed by the user.
+     *
+     * @param echoedText  the name of the task
+     * @param type  the type of the task
+     * @param condition  the condition of the task
+     */
     public void addItem(String echoedText, String type, String condition) {
         //Recognise if condition is time
         DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -52,7 +73,11 @@ public class TaskList {
         System.out.println(ind + "Kobe sees that you have " + this.tasks.size() + " task(s) in the list.\n" + line);
     }
 
-    //Can put in Parser
+    /**
+     * Adds a task into the TaskList, based on the formatted command string read from the saved file
+     *
+     * @param text  the line of formatted command string from the saved file
+     */
     public void addItemByString(String text) {
 
         String[] intoParts1 = text.split("\\[", 2);
@@ -117,6 +142,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as completed
+     *
+     * @param taskNumber  the task number associated to the task that has been completed
+     * @param ui  the user interface to inform the user of the outcome
+     */
     public void completeTask(int taskNumber, Ui ui) {
         this.tasks.get(taskNumber).markAsDone();
         System.out.print(line + "Nice work! Kobe will mark your task as done!\n" + ind);
@@ -124,6 +155,12 @@ public class TaskList {
         ui.showLine();
     }
 
+    /**
+     * Deletes a task
+     *
+     * @param taskNumber  the task number associated to the task that has been completed
+     * @param ui  the user interface to inform the user of the outcome
+     */
     public void deleteTask(int taskNumber, Ui ui) {
         if (this.tasks.isEmpty()) { //Managing empty lists from the start
             System.out.print(ui.line() + "Kobe sees no more tasks from the list!\n" + line + "\n");

@@ -87,6 +87,10 @@ class Task {
         return this.done;
     }
 
+
+    /**
+     * Rewrites the task into a formatted string that is understood by the parser.
+     */
     @Override
     public String toString() {
         String doneString = "[ ]";
