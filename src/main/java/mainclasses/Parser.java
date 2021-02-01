@@ -1,6 +1,9 @@
+package mainclasses;
+
 import java.util.ArrayList;
 import java.util.List;
-import Exception.DukeException;
+
+import exception.DukeException;
 
 
 public class Parser {
@@ -18,29 +21,24 @@ public class Parser {
      * @param userInput takes in user input as a String
      * @return a boolean to indicate whether user wants to quit the application
      */
-    public boolean determineAction(String userInput) {
+    public String determineAction(String userInput) {
         List<Task> tasks = this.taskList.getNewStorage();
         String[] inputBreakdown = userInput.split(" ");
         if (inputBreakdown[0].equals("bye")) {
-            indentInput("Bye. Hope to see you again!");
             storage.updateHardDrive(storage.getFilePath(), this.taskList);
-            return false;
+            return ("Bye. Hope to see you again!");
         } else if (inputBreakdown[0].equals("list")) {
-            System.out.println("Here are the tasks in your list:");
-            taskList.listTask(tasks);
+            return taskList.listTask(tasks);
         } else if (inputBreakdown[0].equals("done")) {
-            System.out.println("Nice! I've marked this task as done:");
             int selectedIndex = Integer.valueOf(inputBreakdown[1]) - 1;
-            taskList.setTaskAsDone(selectedIndex);
-            taskList.printTask(selectedIndex, tasks.get(selectedIndex));
+            return taskList.setTaskAsDone(selectedIndex);
         } else if (inputBreakdown[0].equals("delete")) {
-            taskList.deleteTask(userInput);
+            return taskList.deleteTask(userInput);
         } else if (inputBreakdown[0].equals("find")) {
-            taskList.findTasksWithKeyword(inputBreakdown[1]);
+            return taskList.findTasksWithKeyword(inputBreakdown[1]);
         } else {
-            taskList.addTask(userInput);
+            return taskList.addTask(userInput);
         }
-        return true;
     }
 
     /**
@@ -65,7 +63,8 @@ public class Parser {
         if (!possibleActionInputs.contains(input[0]) && !possibleSingleInputs.contains(input[0])
                 && !possibleTaskInputs.contains(input[0]) && !possibleSortInputs.contains(input[0])) {
             throw new DukeException("user action is not recognised!");
-        } else if ((possibleTaskInputs.contains(input[0]) || possibleActionInputs.contains(input[0])) && input.length == 1) {
+        } else if ((possibleTaskInputs.contains(input[0]) || possibleActionInputs.contains(input[0]))
+                && input.length == 1) {
             throw new DukeException("no description added!");
         } else if (possibleSingleInputs.contains(input[0]) && input.length > 1) {
             throw new DukeException("no description should be added for this command!");
@@ -83,6 +82,8 @@ public class Parser {
                 } else {
                     break;
                 }
+            default:
+                throw new DukeException("No input found!");
             }
         } else if (possibleActionInputs.contains(input[0])) {
             if (input.length > 2) {
@@ -105,7 +106,7 @@ public class Parser {
                 int number = Integer.parseInt(input[1]);
                 throw new DukeException("A number should not be entered for find");
             } catch (NumberFormatException ex) {
-
+                System.out.println("Finding...");
             }
         }
     }

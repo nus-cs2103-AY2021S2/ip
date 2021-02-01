@@ -1,5 +1,6 @@
+package mainclasses;
+
 import java.io.File;
-import java.util.Scanner;
 
 public class Duke {
     private Ui ui;
@@ -11,24 +12,18 @@ public class Duke {
         this.storage = new Storage(filePath);
         storage.loadFile(filePath);
         File file = new File(filePath);
-        Scanner sc = new Scanner(System.in);
         this.taskList = new TaskList(storage.initialiseStorage(file));
         this.parser = new Parser(this.taskList, storage);
-        this.ui = new Ui(sc, parser);
+        this.ui = new Ui(parser);
 
     }
 
-    public void run() {
-        this.ui.executeInput();
+    public String getResponse(String input) {
+        return this.ui.executeInput(input);
     }
 
 
-    public static void main(String[] args) {
 
-        new Duke("./data/tasks.txt").run();
-
-
-    }
 
 
 }
