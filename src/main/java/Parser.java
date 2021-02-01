@@ -126,8 +126,8 @@ public class Parser {
             outputString.append("    ____________________________________________________________\n");
             outputString.append("     the following tasks were found: \n");
             int j = 1;
-            for (int i = 0; i < taskList.taskList.size(); i++) {
-                Task task = taskList.taskList.get(i);
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
                 if (task.taskName.contains(searchString)) {
                     outputString.append(j + "." + task.toString() + "\n");
                     j++;
