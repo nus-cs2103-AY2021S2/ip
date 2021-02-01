@@ -14,9 +14,10 @@ public class EventTask extends Task {
 
     /**
      * Constructs a new event task with the given description and dates.
-     * @param desc the description of the task
-     * @param start the start date of the event
-     * @param end the end date of the event
+     *
+     * @param desc the description of the task.
+     * @param start the start date of the event.
+     * @param end the end date of the event.
      */
     public EventTask(final String desc, final LocalDateTime start, final LocalDateTime end) {
         super(desc);
@@ -45,8 +46,9 @@ public class EventTask extends Task {
 
     /**
      * Constructs a new EventTask given the serialised input read from storage.
-     * @param input the serialised input to be parsed
-     * @return a new EventTask with the associated fields
+     *
+     * @param input the serialised input to be parsed.
+     * @return a new EventTask with the associated fields.
      */
     public static EventTask deserialise(String input) {
         String[] tokens = input.split("\255");

@@ -13,8 +13,9 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructs a new deadline task with the given description and date.
-     * @param desc the description of the task
-     * @param date the date of the deadline
+     *
+     * @param desc the description of the task.
+     * @param date the date of the deadline.
      */
     public DeadlineTask(final String desc, final LocalDateTime date) {
         super(desc);
@@ -40,8 +41,9 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructs a new DeadlineTask given the serialised input read from storage.
-     * @param input the serialised input to be parsed
-     * @return a new DeadlineTask with the associated fields
+     *
+     * @param input the serialised input to be parsed.
+     * @return a new DeadlineTask with the associated fields.
      */
     public static DeadlineTask deserialise(String input) {
         String[] tokens = input.split("\255");

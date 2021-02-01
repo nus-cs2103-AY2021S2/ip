@@ -14,6 +14,7 @@ public abstract class Task {
 
     /**
      * Serialise this task into a format that can be saved.
+     *
      * Implementation dependent.
      * @return a serialised version of the task, implementation dependent.
      */
@@ -28,8 +29,9 @@ public abstract class Task {
 
     /**
      * Searches the description for the given term.
-     * @param term the term to search for
-     * @return a boolean containing whether the description contains the term
+     *
+     * @param term the term to search for.
+     * @return a boolean containing whether the description contains the term.
      */
     public boolean containsTerm(String term) {
         return this.description.contains(term);

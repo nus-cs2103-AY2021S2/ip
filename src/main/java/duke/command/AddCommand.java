@@ -12,7 +12,8 @@ public abstract class AddCommand implements Command {
 
     /**
      * Constructor accessible by subclasses.
-     * @param task the task to be added to the task list
+     *
+     * @param task the task to be added to the task list.
      */
     protected AddCommand(final Task task) {
         this.task = task;
@@ -20,8 +21,9 @@ public abstract class AddCommand implements Command {
 
     /**
      * Adds the associated task to the task list.
-     * @param taskList the task list to be modified by the command
-     * @return a formatted message to be output to the user
+     *
+     * @param taskList the task list to be modified by the command.
+     * @return a formatted message to be output to the user.
      */
     @Override
     public String execute(final TaskList taskList) {

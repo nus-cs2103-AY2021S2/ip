@@ -19,8 +19,9 @@ public class DukeBot {
 
     /**
      * Constructs a new DukeBot with the associated input scanner, saving to the specified path.
-     * @param sc the scanner with the input stream to be parsed
-     * @param path the path of the save file for persistent storage
+     *
+     * @param sc the scanner with the input stream to be parsed.
+     * @param path the path of the save file for persistent storage.
      */
     public DukeBot(final Scanner sc, final String path) {
         this.scanner = sc;

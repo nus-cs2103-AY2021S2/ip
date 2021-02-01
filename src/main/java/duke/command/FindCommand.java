@@ -11,6 +11,7 @@ public class FindCommand implements Command {
 
     /**
      * Constructs a new FindCommand with the given String to search for.
+     *
      * @param str the string to search the TaskList for.
      */
     public FindCommand(String str) {
@@ -19,7 +20,8 @@ public class FindCommand implements Command {
 
     /**
      * Finds the given String in Tasks from the given TaskList.
-     * @param taskList the TaskList to search through
+     *
+     * @param taskList the TaskList to search through.
      * @return a formatted String, that contains the matching tasks, if any.
      */
     @Override

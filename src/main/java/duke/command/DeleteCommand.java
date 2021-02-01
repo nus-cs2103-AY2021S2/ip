@@ -12,7 +12,8 @@ public class DeleteCommand implements Command {
 
     /**
      * Constructs a new delete command with the specified index.
-     * @param idx the index of the task to be deleted
+     *
+     * @param idx the index of the task to be deleted.
      */
     public DeleteCommand(final int idx) {
         this.index = idx;
@@ -20,8 +21,9 @@ public class DeleteCommand implements Command {
 
     /**
      * Deletes the task associated with the index, if valid.
-     * @param taskList the task list to be modified by the command
-     * @return a formatted message to be output to the user
+     *
+     * @param taskList the task list to be modified by the command.
+     * @return a formatted message to be output to the user.
      */
     @Override
     public String execute(final TaskList taskList) {

@@ -11,6 +11,7 @@ public class Ui {
 
     /**
      * Prints the given message with a separator.
+     *
      * @param msg the message to be printed.
      */
     public static void printOut(final String msg) {
@@ -21,6 +22,7 @@ public class Ui {
 
     /**
      * Prints the given error with a special separator.
+     * 
      * @param msg the message to be printed.
      */
     public static void printErr(final String msg) {

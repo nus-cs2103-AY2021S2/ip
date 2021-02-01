@@ -26,9 +26,10 @@ public class TaskList {
 
     /**
      * Constructs a new TaskList with the given input read from storage.
-     * @param input the serialised save file as read from storage
-     * @return a new TaskList populated with the Tasks as read from storage
-     * @throws DukeException.StorageReadError if the serialised save file is malformed
+     *
+     * @param input the serialised save file as read from storage.
+     * @return a new TaskList populated with the Tasks as read from storage.
+     * @throws DukeException.StorageReadError if the serialised save file is malformed.
      */
     public static TaskList deserialise(Scanner input) throws DukeException.StorageReadError {
         List<Task> list = new ArrayList<>();
@@ -59,7 +60,8 @@ public class TaskList {
 
     /**
      * Adds the given task to the list.
-     * @param task the task to be added to the list
+     *
+     * @param task the task to be added to the list.
      */
     public void addTask(final Task task) {
         tasks.add(task);
@@ -67,8 +69,9 @@ public class TaskList {
 
     /**
      * Marks the task at the given index as done.
-     * @param idx the index of the task to be marked as done
-     * @return the String format of the specified task
+     *
+     * @param idx the index of the task to be marked as done.
+     * @return the String format of the specified task.
      */
     public String doneTask(final int idx) {
         tasks.get(idx - 1).markDone();
@@ -77,8 +80,9 @@ public class TaskList {
 
     /**
      * Deletes the task at the given index.
-     * @param idx the index of the task to be deleted
-     * @return the String format of the deleted task
+     *
+     * @param idx the index of the task to be deleted.
+     * @return the String format of the deleted task.
      */
     public String deleteTask(final int idx) {
         return tasks.remove(idx - 1).toString();
@@ -86,7 +90,8 @@ public class TaskList {
 
     /**
      * Getter for the size of the list.
-     * @return the number of tasks in the list
+     *
+     * @return the number of tasks in the list.
      */
     public int size() {
         return tasks.size();
@@ -94,7 +99,8 @@ public class TaskList {
 
     /**
      * Serialises the tasks in the list, each task on a newline.
-     * @return the serialised version of the tasks in the list
+     *
+     * @return the serialised version of the tasks in the list.
      */
     public String serialise() {
         StringBuilder out = new StringBuilder();
@@ -108,8 +114,9 @@ public class TaskList {
 
     /**
      * Finds tasks that contain the given string, and outputs a formatted String with the tasks.
-     * @param str the string to search for
-     * @return a formatted version of the tasks
+     *
+     * @param str the string to search for.
+     * @return a formatted version of the tasks.
      */
     public String tasksContaining(String str) {
         StringBuilder out = new StringBuilder();
