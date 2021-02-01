@@ -16,20 +16,20 @@ public class Ui {
         return output; // for testing
     }
 
-    protected void doTask(Task task) {
-        System.out.format(Duke.line + "\n Nice! I've marked this task as done: " +
+    protected String doTask(Task task) {
+        return String.format(Duke.line + "\n Nice! I've marked this task as done: " +
                 "\n [%s] [%s] %s" +
                 "\n" + Duke.line, task.type(), task.status(), task.toString());
     }
 
-    protected void delete(Task task, int size) {
+    protected String delete(Task task, int size) {
         String deleted = "[" + task.type() + "]" + "[" + task.status() + "] " + task.toString();
-        System.out.format("%s\nNoted. I've removed this task: \n %s\nNow you have %d tasks in the list\n%s",
+        return String.format("%s\nNoted. I've removed this task: \n %s\nNow you have %d tasks in the list\n%s",
                 Duke.line, deleted, size, Duke.line);
     }
 
-    protected void bye() {
-        Duke.print(Duke.line + "\n" + " Bye. Hope to see you again soon!" + "\n" + Duke.line);
+    protected String bye() {
+        return Duke.line + "\n" + " Bye. Hope to see you again soon!" + "\n" + Duke.line;
     }
 
     protected String listTasks(TaskList taskList) throws ArrayIndexOutOfBoundsException {
@@ -44,22 +44,21 @@ public class Ui {
         return output; // for storage
     }
 
-    protected void printListTasks(TaskList taskList) {
+    protected String printListTasks(TaskList taskList) {
         String output = listTasks(taskList);
-        System.out.println(output);
+        return output;
     }
 
-    protected void find(TaskList taskList, String currLine) {
+    protected String find(TaskList taskList, String currLine) {
         String output = "Here are the matching tasks in your list \n";
         String toFind = currLine.split("find")[1].strip();
         String[] tasksByLine = listTasks(taskList).split("\n");
         for (String line : tasksByLine) {
             if (line.contains(toFind)) {
-                System.out.println(line);
+                output += line + "\n";
             }
         }
-
-
+        return output;
     }
 
 }
