@@ -39,6 +39,9 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         duke.getStorage().loadData(duke.getTaskList());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hello! What can I do for you?", dukeImage)
+        );
     }
 
     /**
@@ -62,7 +65,8 @@ public class MainWindow extends AnchorPane {
                 Platform.exit();
             } catch (InterruptedException e) {
                 dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(e.getMessage(), dukeImage));
+                        DialogBox.getUserDialog(e.getMessage(), dukeImage)
+                );
             }
         }
     }
