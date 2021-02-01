@@ -16,7 +16,7 @@ public class Commands {
         storage.saveFile();
         System.out.println(line + "Bye. Kobe saved your list.\n" + ind
                 + "Kobe hopes to see you again soon!\n" + line);
-        System.exit();
+        System.exit(0);
     }
 
     /**
