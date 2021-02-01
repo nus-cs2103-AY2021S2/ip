@@ -10,6 +10,7 @@ import duke.exceptions.DukeEmptyListException;
 import duke.exceptions.DukeNoDescriptionException;
 import duke.exceptions.DukeUnknownArgumentsException;
 import duke.storage.Storage;
+import duke.ui.Message;
 import duke.ui.Ui;
 
 /**
@@ -50,11 +51,12 @@ public class TaskList {
      * Mark the task based on the input as done.
      * @param input input used to get index of task to be marked as done.
      */
-    public void done(String input) {
+    public String done(String input) {
         int index = Parser.stringToIndex(input, 5);
         Task task = tasks.get(index);
         task.done();
-        ui.printDoneMsg(task);
+        return Message.getDoneMsg(task);
+        //ui.printDoneMsg(task);
     }
 
     /**
@@ -100,14 +102,14 @@ public class TaskList {
      * @param input input used to get index of Task to be deleted.
      * @throws DukeEmptyListException when the TaskList is empty.
      */
-    public void deleteTask(String input) throws DukeEmptyListException {
+    public String deleteTask(String input) throws DukeEmptyListException {
         int index = Parser.stringToIndex(input, 7);
         if (tasks.isEmpty()) {
             throw new DukeEmptyListException();
         }
         Task task = tasks.get(index);
         tasks.remove(index);
-        ui.printDeleteMsg(task, tasks.size());
+        return Message.getDeleteMsg(task, tasks.size());
     }
 
     /**
@@ -116,29 +118,33 @@ public class TaskList {
      * @throws DukeUnknownArgumentsException when the input arguments for the creation of the
      *     Task is unknown.
      */
-    public void run(String input) throws DukeUnknownArgumentsException {
+    public String run(String input) throws DukeUnknownArgumentsException {
+        String output;
         try {
             SpecificCommandType command = Parser.inputToSpecificCommand(input);
             switch (command) {
             case TODO:
             case EVENT:
             case DEADLINE:
-                add(input, command);
+                output = add(input, command);
                 break;
             case FIND:
-                find(input);
+                output = find(input);
                 break;
             default:
                 throw new DukeUnknownArgumentsException();
             }
         } catch (DukeNoDescriptionException e) {
-            ui.printErrorMsg(e);
+            return Message.getErrorMsg(e);
+            //ui.printErrorMsg(e);
         } catch (DateTimeParseException e) {
-            ui.printErrorMsg(e);
+            return Message.getErrorMsg(e);
+            //ui.printErrorMsg(e);
         }
+        return output;
     }
 
-    private void add(String input, SpecificCommandType command) throws DukeNoDescriptionException,
+    private String add(String input, SpecificCommandType command) throws DukeNoDescriptionException,
             DateTimeParseException, DukeUnknownArgumentsException {
         Task task;
         switch (command) {
@@ -155,22 +161,24 @@ public class TaskList {
             throw new DukeUnknownArgumentsException();
         }
         tasks.add(task);
-        ui.printAddMsg(task, tasks.size());
+        return Message.getAddMsg(task, tasks.size());
+        //ui.printAddMsg(task, tasks.size());
     }
 
     /**
      * Print String representation of the TaskList for the user.
      */
-    public void print() {
-        this.print(tasks);
+    public String print() {
+        return this.print(tasks);
     }
 
     /**
      * Print the task in the specified tasklist.
      * @param tasks the tasklist used for printing.
      */
-    private void print(ArrayList<Task> tasks) {
-        ui.printTaskList(tasks);
+    private String print(ArrayList<Task> tasks) {
+        //ui.printTaskList(tasks);
+        return Message.getTaskListMsg(tasks);
     }
 
     /**
@@ -178,7 +186,7 @@ public class TaskList {
      * @param input used to get the description to print the tasks with the description.
      * @throws DukeNoDescriptionException when the description given is empty.
      */
-    public void find(String input) throws DukeNoDescriptionException {
+    public String find(String input) throws DukeNoDescriptionException {
         String description = Parser.parseFindInput(input);
         ArrayList<Task> selectedTask = new ArrayList<>();
         for (Task task : tasks) {
@@ -186,6 +194,7 @@ public class TaskList {
                 selectedTask.add(task);
             }
         }
-        ui.printFindMsg(selectedTask);
+        return Message.getFindMsg(selectedTask);
+        //ui.printFindMsg(selectedTask);
     }
 }
