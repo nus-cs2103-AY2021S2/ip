@@ -1,7 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Used to test Todo, a subclass of Task.

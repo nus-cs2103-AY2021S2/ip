@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Manages the exchange of user input and program output.
  */
 public class Ui {
-    public static final String logo = " ____        _        \n"
+    public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -31,7 +31,7 @@ public class Ui {
      */
     public void initialise(TaskList tasks) {
         this.tasks = tasks;
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         System.out.println("Please input a command.");
     }
 
