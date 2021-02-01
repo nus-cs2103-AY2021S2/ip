@@ -13,7 +13,7 @@ public class TestParser {
 
     @Test
     public void taskToCommandToTask () throws Event.EmptyDescriptionException,
-            Parser.UnrecognisedCommandException {
+            Duke.UnrecognisedCommandException {
 
         Event event = new Event("testing event", true, LocalDateTime.now(),
                 LocalDateTime.now());
@@ -29,7 +29,7 @@ public class TestParser {
         TaskStub taskStub = new TaskStub("testing task stub", true, LocalDateTime.now());
         String taskCommand = Parser.taskToCommand(taskStub);
 
-        assertThrows(Parser.UnrecognisedCommandException.class, () -> {
+        assertThrows(Duke.UnrecognisedCommandException.class, () -> {
             Parser.commandToTask(taskCommand);
         });
     }

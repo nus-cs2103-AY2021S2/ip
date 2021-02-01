@@ -17,7 +17,7 @@ public abstract class Task {
         private static final long serialVersionUID = -365632185953600895L;
 
         public EmptyDescriptionException() {
-            super("! Task description cannot be empty.");
+            super("task description cannot be empty! no sense...");
         }
     }
 
@@ -29,7 +29,7 @@ public abstract class Task {
         private static final long serialVersionUID = -7397628460804553793L;
 
         public MarkedAsDoneException() {
-            super("! The task has already been marked as done.");
+            super("trickery! task has already been marked done by dogeDuke...");
         }
     }
 

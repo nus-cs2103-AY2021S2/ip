@@ -11,31 +11,6 @@ import duketask.ToDo;
 
 
 public class Parser {
-    // exception classes
-    /**
-     * Exception thrown when an unrecognised command is provided by the
-     * user during parsing.
-     */
-    public static class UnrecognisedCommandException extends Exception {
-        private static final long serialVersionUID = 6864325922556059437L;
-
-        public UnrecognisedCommandException(String command) {
-            super("! Unrecognised command: " + command + " encountered during parsing.");
-        }
-    }
-
-    /**
-     * Exception thrown when an empty input is provided by the user where
-     * a subcommand is expected.
-     */
-    public static class EmptySubcommandException extends Exception {
-        private static final long serialVersionUID = 6820026755838853943L;
-
-        public EmptySubcommandException(String subcommand) {
-            super("! The subcommand " + subcommand + " cannot be empty");
-        }
-    }
-
     // members
     private static String delimiter = " :: ";
     private static DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(
@@ -56,10 +31,10 @@ public class Parser {
      * Returns the task object represented by a string command.
      * @param command   the string command to be parsed to derive the task information
      * @return          the task object associated with the string command.
-     * @throws Parser.UnrecognisedCommandException
+     * @throws Duke.UnrecognisedCommandException
      * @throws Task.EmptyDescriptionException
      */
-    public static Task commandToTask (String command) throws Parser.UnrecognisedCommandException,
+    public static Task commandToTask (String command) throws Duke.UnrecognisedCommandException,
             Task.EmptyDescriptionException {
 
         // format = type :: state :: description :: createdTime :: others
@@ -81,7 +56,7 @@ public class Parser {
                     LocalDateTime.parse(parsedCommand[4], Parser.parseFormat));
 
         default:
-            throw new Parser.UnrecognisedCommandException(parsedCommand[0]);
+            throw new Duke.UnrecognisedCommandException(parsedCommand[0]);
         }
     }
 
@@ -92,13 +67,13 @@ public class Parser {
      *                      as /at in event and /by in deadline task creations.
      * @return      the task object in default undone state and created at the
      *              current datetime.
-     * @throws Parser.UnrecognisedCommandException
-     * @throws Parser.EmptySubcommandException
+     * @throws Duke.UnrecognisedCommandException
+     * @throws Duke.ExpectedSubcommandException
      * @throws Task.EmptyDescriptionException
      * @throws DateTimeParseException
      */
     public static Task parseNewCommand (String taskType, String command)
-            throws Parser.UnrecognisedCommandException, Parser.EmptySubcommandException,
+            throws Duke.UnrecognisedCommandException, Duke.ExpectedSubcommandException,
             Task.EmptyDescriptionException, DateTimeParseException {
 
         int subcommandIndex;
@@ -112,7 +87,7 @@ public class Parser {
         case "event":
             subcommandIndex = command.indexOf("/at");
             if (subcommandIndex < 0) {
-                throw new Parser.EmptySubcommandException("/at");
+                throw new Duke.ExpectedSubcommandException("/at");
             }
 
             task = new Event (command.substring(0, subcommandIndex - 1).trim(),
@@ -123,7 +98,7 @@ public class Parser {
         case "deadline":
             subcommandIndex = command.indexOf("/by");
             if (subcommandIndex < 0) {
-                throw new Parser.EmptySubcommandException("/by");
+                throw new Duke.ExpectedSubcommandException("/by");
             }
 
             task = new Deadline (command.substring(0, subcommandIndex - 1).trim(),
@@ -132,7 +107,7 @@ public class Parser {
             break;
 
         default:
-            throw new Parser.UnrecognisedCommandException(taskType);
+            throw new Duke.UnrecognisedCommandException(taskType);
         }
 
         return task;
