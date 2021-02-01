@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    protected static final String horizontalLine = "____________________________________________________________";
+    protected static final String HORIZONTAL_RULE = "____________________________________________________________";
 
     /**
      * Constructor for Ui class.
@@ -32,7 +32,7 @@ public class Ui {
      */
     public void exit() {
         System.out.println("Bye. Till next time!");
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_RULE);
     }
 
     /**
@@ -44,7 +44,7 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println(addedTask);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_RULE);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Ui {
         System.out.println("Noted. I've removed this task:");
         System.out.println(deletedTask);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_RULE);
     }
 
 
@@ -66,7 +66,7 @@ public class Ui {
      */
     public void checkAsDoneMessage(Task task) {
         System.out.println("Nice! I've marked this task as done:\n" + task);
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_RULE);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Ui {
             System.out.println(String.format("%d. %s", num, task));
             num++;
         }
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_RULE);
     }
 
     /**
@@ -106,6 +106,6 @@ public class Ui {
                 }
             }
         }
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_RULE);
     }
 }

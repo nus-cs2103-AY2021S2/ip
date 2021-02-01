@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private static final String horizontalLine = "____________________________________________________________";
+    private static final String HORIZONTAL_RULE = "____________________________________________________________";
 
     private Storage storage;
     private TaskList tasks;
@@ -81,7 +81,7 @@ public class Duke {
                     tasks.addTask(todo);
                     ui.addTaskMessage(tasks.list, todo);
                 } catch (DukeException e) {
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.\n" + horizontalLine);
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.\n" + HORIZONTAL_RULE);
                 }
                 break;
             case "deadline":
@@ -93,7 +93,7 @@ public class Duke {
                     tasks.addTask(deadline);
                     ui.addTaskMessage(tasks.list, deadline);
                 } catch (DukeException e) {
-                    System.out.println("OOPS!!! The description of a deadline cannot be empty.\n" + horizontalLine);
+                    System.out.println("OOPS!!! The description of a deadline cannot be empty.\n" + HORIZONTAL_RULE);
                 }
                 break;
             case "event":
@@ -105,14 +105,14 @@ public class Duke {
                     tasks.addTask(event);
                     ui.addTaskMessage(tasks.list, event);
                 } catch (DukeException e) {
-                    System.out.println("OOPS!!! The description of an event cannot be empty.\n" + horizontalLine);
+                    System.out.println("OOPS!!! The description of an event cannot be empty.\n" + HORIZONTAL_RULE);
                 }
                 break;
             default:
                 try {
                     throw new DukeException();
                 } catch (DukeException e) {
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + horizontalLine);
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + HORIZONTAL_RULE);
                 }
             }
         }

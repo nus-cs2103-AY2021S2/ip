@@ -6,3 +6,4 @@ T ; 0 ; watch movie with friends
 T ; 1 ; run 5km
 T ; 1 ; sleep
 T ; 0 ; eat icecream
+T ; 0 ; play valorant with friends

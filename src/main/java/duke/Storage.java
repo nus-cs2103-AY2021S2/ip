@@ -3,7 +3,6 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,7 +34,7 @@ public class Storage {
         for (Task task: list) {
             int num;
             String description = task.getDescription();
-            char type = task.type();
+            char type = task.getType();
             if (!task.getDoneStatus()) {
                 num = 0;
             }

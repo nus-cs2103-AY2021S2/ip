@@ -33,11 +33,12 @@ public class Task {
         this.isDone = true;
     }
 
+
     /**
      * Returns the type of this task
      * @return Type of this task as char
      */
-    public char type() {
+    public char getType() {
         return this.type;
     }
 
