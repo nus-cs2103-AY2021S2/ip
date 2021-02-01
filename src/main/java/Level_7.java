@@ -42,7 +42,7 @@ public class Level_7 {
 
     private static void updateFile(String filePath, Duke bot) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for(Task element:bot.list) {
+        for(Task element:bot.list.list) {
             fw.write(element.toString() + "\n");
 
         }

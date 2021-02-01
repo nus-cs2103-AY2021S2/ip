@@ -1,15 +1,13 @@
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Returns a Duke bot that stores the tasks given by the user.
  */
 public class Duke {
-    /** Tasks stored in this list */
-    List<Task> list;
+    /** Tasks stored in this task list object */
+    TaskList list;
 
     public Duke(){
-        this.list = new ArrayList<>();
+        this.list = new TaskList();
     }
 
     /**
@@ -38,7 +36,7 @@ public class Duke {
      */
 
     public void addToList(Task task){
-        this.list.add(task);
+        this.list.addTask(task);
         System.out.println("Got it. I've added this task: ");
         System.out.println("    " + task);
         System.out.println("Now you have " + String.valueOf(this.list.size()) + " tasks in the list.");
@@ -51,21 +49,18 @@ public class Duke {
      */
 
     public void addToBot(Task task){
-        this.list.add(task);
+        this.list.addTask(task);
     }
 
     /**
      * Prints the tasks in the bot list.
      */
     public void printList(){
-        int counter = 1;
-        if(this.list.isEmpty()){
+
+        if(this.list.Empty()){
             System.out.println("There are no tasks!");
         }
-        for(Task element:this.list){
-            System.out.println(String.valueOf(counter) + ". " + element);
-            counter++;
-        }
+        this.list.printTasks();
     }
 
     /**
@@ -74,7 +69,7 @@ public class Duke {
      * @param id The position ,1-th based, of the task to be marked done in the bot list.
      */
     public void markTaskAsDone(int id){
-        Task task = this.list.get(id-1);
+        Task task = this.list.getTask(id-1);
         task.markDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  [X] "+ task.content);
@@ -86,7 +81,7 @@ public class Duke {
      * @param id The position ,1-th based, of the task to be marked done in the bot list.
      */
     public void deleteTask(int id){
-        Task task = this.list.get(id-1);
+        Task task = this.list.getTask(id-1);
         this.list.remove(id-1);
         System.out.println("Noted. I've removed this task: ");
         System.out.println("    " + task);
