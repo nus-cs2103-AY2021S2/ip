@@ -1,46 +1,142 @@
 package duck;
 
-import duck.operation.Command;
+import duck.operation.CommandGui;
+import duck.operation.Gui;
 import duck.operation.Parser;
 import duck.operation.Storage;
-import duck.operation.Ui;
 import duck.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.IOException;
 
-public class Duke {
+public class Duke extends Application{
+
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private Gui gui;
 
-    /**
-     * initialize Duck object
-     * @param filePath the path of the file containing data of tasks
-     * @throws IOException
-     */
-    public Duke(String filePath) throws IOException {
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
-        ui = new Ui();
-    }
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
-    /**
-     * Realize the duck program, record and change the list of tasks
-     * @throws IOException
-     */
-    public void run() throws IOException {
-        ui.showWelcome();
-        String fullCommand = "";
-        do {
-            fullCommand = ui.readCommand();
-            Command c = Parser.parse(fullCommand);
-            c.execute(tasks, ui, storage);
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-        } while (!fullCommand.equals("bye"));
-    }
 
-    public static void main(String[] args) throws IOException {
+    @Override
+    public void start(Stage stage) throws IOException {
         String filePathOfData = ".\\data\\duke.txt";
-        new Duke(filePathOfData).run();
+        storage = new Storage(filePathOfData);
+        tasks = new TaskList(storage.load());
+        gui = new Gui();
+
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(800.0);
+        stage.setMinWidth(600.0);
+
+        mainLayout.setPrefSize(600.0, 800.0);
+
+        scrollPane.setPrefSize(585, 735);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(525.0);
+
+        sendButton.setPrefWidth(155.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(gui.showWelcome());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        userInput.setOnAction((event) -> {
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
+
+
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() throws IOException {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * function to generate a response to user input.
+     * @param input String input text to show
+     * @return the specified text
+     */
+    private String getResponse(String input) throws IOException {
+        CommandGui c = Parser.parse(input);
+
+        return  c.execute(tasks, gui, storage);
+    }
+
+
+
 }

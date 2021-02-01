@@ -6,7 +6,7 @@ public class Parser {
      * @param fullCommand
      * @return Command class
      */
-    public static Command parse(String fullCommand) {
+    public static CommandGui parse(String fullCommand) {
         String[] commandSplit = fullCommand.split(" ");
         String description;
         try {
@@ -14,6 +14,6 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             description = null;
         }
-        return new Command(commandSplit[0], description);
+        return new CommandGui(commandSplit[0], description);
     }
 }

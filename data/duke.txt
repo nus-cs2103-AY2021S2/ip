@@ -1,5 +1,7 @@
 T | 0 | adhsjnc
 T | 0 | havjds
-E | 0 | hjsaknvsdz | 2022-12-01
+E | 1 | hjsaknvsdz | 2022-12-01
 T | 0 | afjnca
 T | 0 | avshdja
+T | 0 | null
+T | 1 | homework
