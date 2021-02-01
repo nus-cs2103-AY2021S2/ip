@@ -6,6 +6,7 @@ import duke.Deadline;
 import duke.Event;
 
 import java.time.Month;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -39,5 +40,16 @@ public class Parser {
         return Integer.parseInt(command.split("")[1]);
     }
 
+    public TaskList parseFindCommand(String command, TaskList userList){
+        String keywords = command.substring(5);
+        ArrayList<Task> results = new ArrayList<>();
+        for(Task task : userList.getTaskList()){
+            if(task.getTaskDetail().contains(keywords)){
+                results.add(task);
+            }
+        }
+        return new TaskList(results);
+
+    }
 }
 

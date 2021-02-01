@@ -7,6 +7,8 @@ import duke.Deadline;
 import duke.Event;
 import duke.Duke;
 
+import java.util.ArrayList;
+
 public class Ui {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
 
@@ -26,6 +28,7 @@ public class Ui {
         for (int i = 0; i < userList.getTaskListSize(); i++) {
             System.out.println(i + 1 + "." + userList.getTask(i).toString());
         }
+        System.out.println(HORIZONTAL_RULE);
     }
 
     public void printDoneTask(TaskList userTaskList, int taskNumber) {
@@ -44,7 +47,7 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
-    public static void printDeletedTask(TaskList userTaskList, int taskNumber) {
+    public void printDeletedTask(TaskList userTaskList, int taskNumber) {
         Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
         System.out.println("Noted. I've removed this task");
         System.out.println(taskToBeDeleted);
@@ -52,4 +55,13 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    public void printFoundTasks(TaskList tasksFound) {
+        System.out.println("Here are the matching tasks in your list:");
+        if(tasksFound.getTaskListSize() == 0){
+            System.out.println("Sorry. No tasks found :-(");
+        }
+        else{
+            this.printTasks(tasksFound);
+        }
+    }
 }

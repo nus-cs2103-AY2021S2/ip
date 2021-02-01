@@ -13,6 +13,7 @@ import duke.DukeException;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -46,6 +47,7 @@ public class Duke {
         final String addTodoCommand = "todo";
         final String addDeadlineCommand = "deadline";
         final String addEventCommand = "event";
+        final String findCommand = "find";
         ui.printWelcomeGreeting();
         Scanner sc = new Scanner(System.in);
         boolean isBye = false;
@@ -66,7 +68,6 @@ public class Duke {
                     break;
                 case listCommand:
                     ui.printTasks(tasks);
-                    ui.printHorizontalRule();
                     break;
                 case doneCommand:
                     int taskNumber = Integer.parseInt(commandArr[1]);
@@ -92,6 +93,10 @@ public class Duke {
                 case deleteCommand:
                     int taskNumToBeDeleted = parser.parseDeleteCommand(command);
                     ui.printDeletedTask(tasks, taskNumToBeDeleted);
+                    break;
+                case findCommand:
+                    TaskList tasksFound = parser.parseFindCommand(command, tasks);
+                    ui.printFoundTasks(tasksFound);
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
