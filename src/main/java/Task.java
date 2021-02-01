@@ -7,14 +7,12 @@ public abstract class Task {
         this.done = false;
     }
 
-    public boolean MarkAsDone() {
+    public void markAsDone() {
         this.done = true;
-        return true;
     }
 
-    public boolean MarkAsNotDone() {
+    public void markAsNotDone() {
         this.done = false;
-        return false;
     }
 
     @Override

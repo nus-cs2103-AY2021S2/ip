@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Ui {
-    private boolean done;
+    private boolean isDone;
     public void runUi(TaskList taskList, Storage storage) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,7 +19,7 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();
 
-        while (!done) {
+        while (!isDone) {
             String nextCommand = sc.next();
             String nextOutput = parser.parse(nextCommand, taskList, storage, sc, this);
             System.out.println(nextOutput);
@@ -28,6 +28,6 @@ public class Ui {
     }
 
     public void end() {
-        done = true;
+        isDone = true;
     }
 }

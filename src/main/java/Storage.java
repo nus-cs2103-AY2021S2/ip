@@ -38,7 +38,7 @@ public class Storage {
                     taskArgs = taskArgs[1].split(" ", 2);
                     Task newToDo = new ToDo(taskArgs[1]);
                     if (taskArgs[0].equals("done")) {
-                        newToDo.MarkAsDone();
+                        newToDo.markAsDone();
                     }
                     taskList.taskList.add(newToDo);
                     break;
@@ -47,7 +47,7 @@ public class Storage {
                     taskArgs = taskArgs[1].split(" ", 4);
                     Task newDeadline = new Deadline(taskArgs[3], taskArgs[0] + " " + taskArgs[1]);
                     if (taskArgs[2].equals("done")) {
-                        newDeadline.MarkAsDone();
+                        newDeadline.markAsDone();
                     }
                     taskList.taskList.add(newDeadline);
                     break;
@@ -56,7 +56,7 @@ public class Storage {
                     taskArgs = taskArgs[1].split(" ", 4);
                     Task newEvent = new Event(taskArgs[3], taskArgs[0] + " " + taskArgs[1]);
                     if (taskArgs[2].equals("done")) {
-                        newEvent.MarkAsDone();
+                        newEvent.markAsDone();
                     }
                     taskList.taskList.add(newEvent);
                     break;

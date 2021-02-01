@@ -80,7 +80,7 @@ public class Parser {
                 outputString.append("    ____________________________________________________________\n" +
                         "     task.done = true:\n");
                 Task targetTask = taskList.taskList.get(doneTarget - 1);
-                targetTask.MarkAsDone();
+                targetTask.markAsDone();
                 outputString.append("       " + targetTask + "\n");
                 outputString.append("    ____________________________________________________________\n");
 
