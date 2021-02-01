@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -86,12 +86,12 @@ public class Parser{
 
     private String[] processToDo(String input) throws DukeException {
         String[] result = new String[2];
-        String processedInput = input.substring(5);
         if (input.length() <= 4) {
             throw new DukeException("Invalid input, description of todo cannot be empty");
         } else if (input.charAt(4) != ' ') {
             throw new DukeException("Invalid description of todo");
         }
+        String processedInput = input.substring(5);
         result[0] = "todo";
         result[1] = processedInput;
         return result;

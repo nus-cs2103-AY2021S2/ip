@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 /**
  * This class represents a todo task.

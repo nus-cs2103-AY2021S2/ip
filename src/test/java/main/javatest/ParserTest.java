@@ -1,7 +1,7 @@
 package main.javatest;
 
-import main.java.DukeException;
-import main.java.Parser;
+import duke.DukeException;
+import duke.Parser;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ParserTest {
 
     @Test
-    public void ParserEvent() {
+    public void parserEvent() {
         Parser parser = new Parser();
-        String[] actual = {"event","Dinner","2019-12-11"};
+        String[] actual = {"event", "Dinner", "2019-12-11"};
         try {
             assertEquals(actual[0], parser.processCommand("event Dinner /at 2019-12-11")[0]);
         } catch (DukeException e) {
@@ -20,7 +20,7 @@ public class ParserTest {
     }
 
     @Test
-    public void ParserDeadline() {
+    public void parserDeadline() {
         Parser parser = new Parser();
         try {
             assertEquals(null, parser.processCommand("deadline Dinner 2019-12-11"));
@@ -31,14 +31,14 @@ public class ParserTest {
     }
 
     @Test
-    public void ParserToDo() {
+    public void parserToDo() {
         Parser parser = new Parser();
         try {
             assertEquals(null, parser.processCommand("todo"));
             fail();
         } catch (DukeException e) {
-            assertEquals(new DukeException("Invalid input, description " +
-                    "of todo cannot be empty").toString(),e.toString());
+            assertEquals(new DukeException("Invalid input, description "
+                    + "of todo cannot be empty").toString(), e.toString());
         }
     }
 }

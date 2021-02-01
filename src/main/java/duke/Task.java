@@ -1,13 +1,13 @@
-package main.java;
+package duke;
 import java.time.LocalDate;
 
 /**
  * The class in which Deadline, Event and ToDo inherits from.
  * It contains several common methods shared by all subclasses.
  */
-abstract class Task {
-    protected final String taskName;
-    protected boolean isDone;
+public abstract class Task {
+    public final String taskName;
+    public boolean isDone;
 
 
     public Task(String taskName) {
