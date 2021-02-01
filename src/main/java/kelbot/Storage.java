@@ -32,8 +32,6 @@ public class Storage {
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 TaskList taskList = new TaskList((ArrayList<Task>) ois.readObject());
                 ois.close();
-                System.out.println("Here is your task list from your previous Kelbot usage");
-                System.out.println(taskList);
                 return taskList;
             } catch (Exception ex) {
                 ex.printStackTrace();

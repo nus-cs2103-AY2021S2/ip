@@ -1,7 +1,5 @@
 package kelbot;
 
-import java.util.Scanner;
-
 public class UI {
     /**
      * Initializes UI
@@ -49,7 +47,11 @@ public class UI {
      * @return String to be printed
      */
     public String printAdd(Task task, int taskListSize) {
-        return "Okay! I have added:\n" + task + "\nNow there are " + taskListSize + " tasks on the list";
+        if (taskListSize == 1) {
+            return "Okay! I have added:\n" + task + "\nNow there is " + taskListSize + " task on the list";
+        } else {
+            return "Okay! I have added:\n" + task + "\nNow there are " + taskListSize + " tasks on the list";
+        }
     }
     /**
      * Prints the relevant tasks from given task list

@@ -43,6 +43,19 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+    /**
+     * On init, add a DialogBox that recaps what the user already has on their list
+     * @param taskList The tasklist to be printed
+     */
+    @FXML void init(String taskList) {
+        String toPrint = "";
+        if (taskList.equals("")) {
+            toPrint = "Welcome to Kelbot, I can help you track your tasks!";
+        } else {
+            toPrint = "Here are your tasks from your last usage!\n" + taskList;
+        }
+        dialogContainer.getChildren().add(DialogBox.getKelbotDialog(toPrint, kelbotImage));
+    }
     @FXML
     private String getTaskList() {
         return kelbot.getTaskList().toString();

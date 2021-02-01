@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     private Command command;
-    private int taskNumber = 0;
+    private Integer taskNumber = Integer.MAX_VALUE;
     private String keyword = "";
     private String taskName = "";
     private LocalDate date = null;
@@ -80,7 +80,7 @@ public class Parser {
         return keyword;
     }
 
-    public int getTaskNumber() {
+    public Integer getTaskNumber() {
         return taskNumber;
     }
 

@@ -87,9 +87,9 @@ public class TaskList {
         String result = "";
         for (int i = 1; i <= taskList.size(); i++) {
             if (i == taskList.size()) {
-                result += i + "." + taskList.get(i - 1);
+                result += i + ". " + taskList.get(i - 1);
             } else {
-                result += i + "." + taskList.get(i - 1) + "\n";
+                result += i + ". " + taskList.get(i - 1) + "\n";
             }
         }
         return result;

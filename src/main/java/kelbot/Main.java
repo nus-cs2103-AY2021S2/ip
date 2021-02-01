@@ -25,6 +25,7 @@ public class Main extends Application {
             stage.setMinHeight(500.0);
             stage.setMinWidth(400.0);
             fxmlLoader.<MainWindow>getController().setKelbot(kelbot);
+            fxmlLoader.<MainWindow>getController().init(kelbot.getTaskList().toString());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
