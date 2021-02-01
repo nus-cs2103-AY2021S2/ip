@@ -1,4 +1,4 @@
-class Event extends Task {
+public class Event extends Task {
 
     public Event(String description, String date, String time) {
         super(description, date, time, "[E]", true);

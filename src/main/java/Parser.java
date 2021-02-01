@@ -91,8 +91,8 @@ public class Parser {
                 Deadline deadline = new Deadline(description, date, time);
                 taskList.addTask(deadline);
                 ui.replace(deadline.toString());
-                Integer numOfTask = taskList.numOfTasks();
-                ui.replace("Now you have " + numOfTask.toString() + " tasks in the list.");
+                Integer numOfTasks = taskList.numOfTasks();
+                ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
             } else if (command.contains("event")) {
                 String[] line = command.split(" ");
                 int length = line.length;
@@ -124,8 +124,8 @@ public class Parser {
                 Event event = new Event(description, date, time);
                 taskList.addTask(event);
                 ui.replace(event.toString());
-                Integer numOfTask = taskList.numOfTasks();
-                ui.replace("Now you have " + numOfTask.toString() + " tasks in the list.");
+                Integer numOfTasks = taskList.numOfTasks();
+                ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
             } else if (command.contains("done")) {
                 String[] line = command.split(" ");
                 int number = Integer.parseInt(line[1]) - 1;
@@ -139,8 +139,8 @@ public class Parser {
                 int number = Integer.parseInt(line[1]) - 1;
                 Task deletedTask = taskList.deleteTask(number);
                 ui.replace(deletedTask.toString());
-                Integer numOfTask = taskList.numOfTasks();
-                ui.replace("Now you have " + numOfTask.toString() + " tasks in the list.");
+                Integer numOfTasks = taskList.numOfTasks();
+                ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
             } else if (command.equals("bye")) {
                 ui.replace("Bye! Hope to see you again soon!");
                 this.isFinished = true;

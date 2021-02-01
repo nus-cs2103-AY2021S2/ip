@@ -1,4 +1,4 @@
-class UnknownException extends DukeException {
+public class UnknownException extends DukeException {
     public UnknownException(String error) {
         super(error);
     }
