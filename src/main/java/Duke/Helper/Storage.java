@@ -37,6 +37,7 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
             while (sc.hasNextLine()) {
                 String currLine = sc.nextLine();
+                //System.out.println(currLine);
                 String[] information = currLine.split("\\|");
                 if (information[0].charAt(0) == 'T') {
                     Task newTask = new Todo(information[2]);
