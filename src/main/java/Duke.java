@@ -30,8 +30,16 @@ public class Duke {
         storage.writeListIntoFile();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
+//    public static void main(String[] args) throws IOException {
+//        new Duke().run();
+//    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
 
