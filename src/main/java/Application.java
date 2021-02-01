@@ -54,20 +54,21 @@ public class Application {
                         newTask = new Todo(userInput[1]);
                         break;
                     case "deadline": {
-                        String[] deadlineParams = userInput[1].split(" /");
-                        newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
+                        String[] deadlineParams = userInput[1].split(" /by ");
+                        String[] dateAndTime = deadlineParams[1].split(" ");
+                        newTask = new Deadline(deadlineParams[0], dateAndTime[0], dateAndTime[1]);
                         break;
                     }
                     case "event": {
-                        String[] deadlineParams = userInput[1].split(" /");
-                        newTask = new Event(deadlineParams[0], deadlineParams[1]);
+                        String[] eventParams = userInput[1].split(" /at ");
+                        String[] dateAndTime = eventParams[1].split(" ");
+                        newTask = new Event(eventParams[0], dateAndTime[0], dateAndTime[1]);
                         break;
                     }
                     }
                     taskManager.addTask(newTask);
                     System.out.println(UserInterface.line + "\tOne more task added to the hustle:\n\t\t" + newTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + UserInterface.line);
                 }
-
             } catch (ToDoBeastException e) {
                 System.out.println(UserInterface.line + "\t" + e.getMessage() + "\n" + UserInterface.line);
             } finally {
