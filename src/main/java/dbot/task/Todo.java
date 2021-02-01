@@ -1,9 +1,9 @@
-package duke.commands;
+package dbot.task;
 
-import duke.tasks.Task;
+import dbot.task.Task;
 
 /**
- * An implementation of the duke.tasks.Task class that represents To-Do Tasks.
+ * An implementation of the duke.task.Task class that represents To-Do Tasks.
  * <p>
  * To-Do tasks are tasks that only take a description and track whether they are done or not.
  * <p>
@@ -24,7 +24,7 @@ public class Todo extends Task {
      * @return A String that can be used to construct an equivalent Task.
      */
     @Override
-    public String getConstructorString() {
+    public String getFullDescription() {
         return getDescription();
     }
 

@@ -1,12 +1,12 @@
-package duke.commands;
+package dbot.task;
 
-import duke.tasks.Task;
+import dbot.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * An implementation of the duke.tasks.Task class that represents duke.commands.Event Tasks.
+ * An implementation of the duke.task.Task class that represents duke.commands.Event Tasks.
  * <p>
  * duke.commands.Event tasks are tasks that take a description, track whether they are done or not,
  * and take an /at parameter, specifying the Date & Location of the duke.commands.Event.
@@ -19,9 +19,9 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description);
-        this.at = LocalDate.parse(at.strip());
+        this.at = at;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Event extends Task {
      * @return A String that can be used to construct an equivalent Task.
      */
     @Override
-    public String getConstructorString() {
+    public String getFullDescription() {
         return getDescription() + " /at " + at;
     }
 

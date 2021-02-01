@@ -1,7 +1,7 @@
-package duke.tasks;
+package dbot.task;
 
 /**
- * A base abstract class whose instances represent a unique duke.tasks.Task.
+ * A base abstract class whose instances represent a unique duke.task.Task.
  *
  * @author Douglas Wei Jing Allwood
  * @author douglas_allwood@u.nus.edu
@@ -20,7 +20,7 @@ public abstract class Task {
      *
      * @return A string containing this task's status icon
      */
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         String icon = isDone ? "\u2713" : "\u2718";
         return ("[" + icon + "]"); //return tick or X symbols within square brackets
     }
@@ -38,22 +38,22 @@ public abstract class Task {
      *
      * @return A String that can be used to construct an equivalent Task.
      */
-    public abstract String getConstructorString();
+    public abstract String getFullDescription();
 
     /**
      * Returns the isDone instance variable.
      *
      * @return The boolean isDone instance variable.
      */
-    public boolean getIsDone() {
+    public boolean getDone() {
         return isDone;
     }
 
     /**
      * Marks a task as done.
      */
-    public void markAsDone() {
-        this.isDone = true;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -63,6 +63,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + " " + this.description;
+        return getStatusIcon() + " " + getDescription();
     }
 }

@@ -1,12 +1,12 @@
-package duke.commands;
+package dbot.task;
 
-import duke.tasks.Task;
+import dbot.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * An implementation of the duke.tasks.Task class that represents duke.commands.Deadline Tasks.
+ * An implementation of the duke.task.Task class that represents duke.commands.Deadline Tasks.
  * <p>
  * duke.commands.Deadline tasks are tasks that take a description, track whether they are done or not,
  * and take a /by parameter, specifying the duke.commands.Deadline time of the duke.commands.Deadline.
@@ -19,9 +19,9 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate by) {
         super(description);
-        this.by = LocalDate.parse(by.strip());
+        this.by = by;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Deadline extends Task {
      * @return A String that can be used to construct an equivalent Task.
      */
     @Override
-    public String getConstructorString() {
+    public String getFullDescription() {
         return getDescription() + " /by " + by;
     }
 
