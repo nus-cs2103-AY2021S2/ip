@@ -3,6 +3,10 @@ package duke;
 import duke.commands.ChatBotCommand;
 import duke.exceptions.ChatBotException;
 
+/**
+ * The Duke program is an interactive application which
+ * enables users to store and modify their tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskHandler th;
@@ -22,6 +26,11 @@ public class Duke {
         }
     }
 
+    /**
+     *  Prints the response from the bot.
+     *
+     *  @param input user input.
+     */
     public String getResponse(String input) {
         String output;
         boolean isExit = false;

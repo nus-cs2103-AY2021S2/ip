@@ -10,6 +10,11 @@ import duke.exceptions.ChatBotException;
 public class TodoCommand extends ChatBotCommand {
     private String taskName;
 
+    /**
+     * Default constructor for the todoCommand class.
+     *
+     * @param taskName String that stores task name.
+     */
     public TodoCommand(String taskName) {
         this.taskName = taskName;
     }

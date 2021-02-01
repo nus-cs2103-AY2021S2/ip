@@ -11,6 +11,11 @@ import duke.tasks.Task;
 public class DoneCommand extends ChatBotCommand {
     private int index;
 
+    /**
+     * Default constructor for the DoneCommand class.
+     *
+     * @param index the index of the task that is done in the list.
+     */
     public DoneCommand(int index) {
         this.index = index;
     }

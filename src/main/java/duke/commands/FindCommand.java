@@ -10,6 +10,11 @@ import duke.tasks.Task;
 public class FindCommand extends ChatBotCommand {
     private String keyWord;
 
+    /**
+     * Default constructor for the FindCommand class.
+     *
+     * @param keyWord the word that is to be searched in the list.
+     */
     public FindCommand(String keyWord) {
         this.keyWord = keyWord;
     }

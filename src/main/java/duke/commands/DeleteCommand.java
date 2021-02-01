@@ -11,6 +11,11 @@ import duke.tasks.Task;
 public class DeleteCommand extends ChatBotCommand {
     private int index;
 
+    /**
+     * Default constructor for the DeleteCommand class.
+     *
+     * @param index the index of the task to be deleted in the list.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

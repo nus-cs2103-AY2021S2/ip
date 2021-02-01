@@ -34,7 +34,6 @@ public class EventCommand extends ChatBotCommand {
      * @return Command response.
      * @throws ChatBotException if encounters error.
      */
-
     public String runTask(TaskHandler th, Storage storage) throws ChatBotException {
         th.addEventTask(taskName, startTime, endTime);
         storage.writeToFile(th);

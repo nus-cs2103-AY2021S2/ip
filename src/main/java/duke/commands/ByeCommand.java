@@ -8,6 +8,9 @@ import duke.exceptions.ChatBotException;
  * Represents a terminating command line
  */
 public class ByeCommand extends ChatBotCommand {
+    /**
+     * Default constructor for the ByeCommand class.
+     */
     public ByeCommand() {
     }
 

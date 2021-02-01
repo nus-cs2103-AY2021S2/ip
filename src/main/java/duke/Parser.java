@@ -14,11 +14,7 @@ import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
-import duke.exceptions.ChatBotException;
-import duke.exceptions.InvalidCommandTypeException;
-import duke.exceptions.InvalidDateFormatException;
-import duke.exceptions.InvalidTimeFormatException;
-
+import duke.exceptions.*;
 
 
 public class Parser {
@@ -50,7 +46,6 @@ public class Parser {
      *  @return ChatBotCommand object.
      *  @throws ChatBotException when encounters an error.
      */
-
     public static ChatBotCommand parse(String command) throws ChatBotException {
         String[] words = command.strip().split(" ", 2);
         String commandType = words[0];
@@ -72,21 +67,33 @@ public class Parser {
             case "list":
                 return new ListCommand();
             case "todo":
-                return new TodoCommand(words[1]);
+                if (words.length < 2) {
+                    throw new MissingDescriptionException("todo");
+                } else {
+                    return new TodoCommand(words[1]);
+                }
             case "deadline":
                 String[] deadlineArray = words[1].split(" /by ");
-                String ddlName = deadlineArray[0].strip();
-                String deadline = deadlineArray[1].strip();
-                return new DeadlineCommand(ddlName, formatDate(deadline));
+                if (deadlineArray.length < 2) {
+                    throw new MissingDescriptionException("deadline");
+                } else {
+                    String ddlName = deadlineArray[0].strip();
+                    String deadline = deadlineArray[1].strip();
+                    return new DeadlineCommand(ddlName, formatDate(deadline));
+                }
             case "event":
                 String[] timeArray = words[1].split(" /at ");
-                String eventName = timeArray[0].strip();
-                String time = timeArray[1];
-                String[] timePeriod = time.split("-");
-                String startTime = timePeriod[0].strip();
-                String date = startTime.substring(0, 10);
-                String endTime = date + " " + timePeriod[1].strip();
-                return new EventCommand(eventName, formatTime(startTime), formatTime(endTime));
+                if (timeArray.length < 2) {
+                    throw new MissingDescriptionException("event");
+                } else {
+                    String eventName = timeArray[0].strip();
+                    String time = timeArray[1];
+                    String[] timePeriod = time.split("-");
+                    String startTime = timePeriod[0].strip();
+                    String date = startTime.substring(0, 10);
+                    String endTime = date + " " + timePeriod[1].strip();
+                    return new EventCommand(eventName, formatTime(startTime), formatTime(endTime));
+                }
             case "find":
                 return new FindCommand(words[1]);
             case "done":

@@ -11,6 +11,10 @@ import duke.tasks.Task;
  * Represents a list command line
  */
 public class ListCommand extends ChatBotCommand {
+
+    /**
+     * Default constructor for the ByeCommand class.
+     */
     public ListCommand() {
     }
 
