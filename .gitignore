@@ -19,3 +19,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 text-ui-test/ip/data/switchblade.SwitchBlade.txt
 
 src/main/java/META-INF/
+
+ip/data/switchblade.SwitchBlade.txt
