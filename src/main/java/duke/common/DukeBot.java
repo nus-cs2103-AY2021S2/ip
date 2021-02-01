@@ -12,18 +12,15 @@ import duke.task.TaskList;
  * Instance of duke that keeps track of the current state.
  */
 public class DukeBot {
-    private final Scanner scanner;
     private final Parser parser;
     private final Storage storage;
     private final TaskList taskList;
 
     /**
      * Constructs a new DukeBot with the associated input scanner, saving to the specified path.
-     * @param sc the scanner with the input stream to be parsed
      * @param path the path of the save file for persistent storage
      */
-    public DukeBot(final Scanner sc, final String path) {
-        this.scanner = sc;
+    public DukeBot(final String path) {
         this.parser = new Parser();
         this.storage = new Storage(path);
         this.taskList = this.storage.readTasks();
@@ -32,7 +29,7 @@ public class DukeBot {
     /**
      * Starts the input loop with the associated input stream, ending only on a bye command.
      */
-    public void run() {
+    public void run(Scanner scanner) {
         Command command;
 
         Ui.printOut(DukeString.MESSAGE_WELCOME);
@@ -51,6 +48,22 @@ public class DukeBot {
                 Ui.printErr(e.getMessage());
             }
 
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = parser.parseInput(input);
+            String out = command.execute(taskList);
+            this.storage.writeTasks(taskList);
+            return out;
+        } catch (DukeException.InvalidCommand
+                | DukeException.InvalidTask
+                | DukeException.EmptyDescription
+                | DukeException.EmptyDeadlineDate
+                | DukeException.EmptyEventDate
+                | DukeException.InvalidEventEnd e) {
+            return e.getMessage();
         }
     }
 }

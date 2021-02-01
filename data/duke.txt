@@ -1,3 +1,4 @@
-deadlineÂ­falseÂ­aÂ­2020-11-01T10:15:30
-eventÂ­falseÂ­bÂ­2020-11-01T10:15:30Â­2020-11-01T10:15:31
-todoÂ­falseÂ­a
+todo­false­a
+todo­true­b
+deadline­false­return book­2020-11-01T10:15:30
+event­true­project meeting­2020-11-01T10:15:30­2020-11-01T10:20:30
