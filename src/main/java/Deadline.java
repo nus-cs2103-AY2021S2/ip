@@ -21,6 +21,7 @@ public class Deadline extends Task {
             localTime = LocalTime.of(time/100, time % 100);
         } else {
             localTime = LocalTime.MIDNIGHT;
+            this.deadLine += " 0000";
         }
     }
 
@@ -32,6 +33,6 @@ public class Deadline extends Task {
 
     @Override
     public String generateDataString() {
-        return "deadline" + taskName + deadLine + (done ? "done" : "notDone");
+        return "deadline " + deadLine + (done ? " done " : " notDone ") + taskName;
     }
 }

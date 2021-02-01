@@ -21,6 +21,7 @@ public class Event extends Task {
             localTime = LocalTime.of(time/100, time % 100);
         } else {
             localTime = LocalTime.MIDNIGHT;
+            this.eventTime += " 0000";
         }
     }
 
@@ -32,6 +33,6 @@ public class Event extends Task {
 
     @Override
     public String generateDataString() {
-        return "event" + taskName + eventTime + (done ? "done" : "notDone");
+        return "event " + eventTime + (done ? " done " : " notDone ") + taskName;
     }
 }

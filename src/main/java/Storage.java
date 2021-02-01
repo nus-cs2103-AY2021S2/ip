@@ -2,26 +2,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Storage {
     File dukeDataFile;
 
     public Storage(String filePath) {
-        File dataDir = new File("data");
-        if (!(dataDir.exists() && dataDir.isDirectory())) {
-            if (!dataDir.mkdir()) {
-                System.out.println("Data dir not created.");
-            }
-        }
+        Path path = Paths.get(filePath);
         dukeDataFile = new File(filePath);
-        if (!dukeDataFile.exists()) {
+        if (!Files.exists(path)) {
             try {
-                if (!dukeDataFile.createNewFile()) {
-                    System.out.println("File not created.");
-                }
+                dukeDataFile.createNewFile();
             } catch (IOException e) {
-                System.out.println("IOException caught: " + e.getMessage());
+                try {
+                    Path dirPath = Paths.get("data/");
+                    Files.createDirectories(dirPath);
+                    dukeDataFile.createNewFile();
+                } catch (IOException ex) {
+                    System.out.println("IOException caught: " + ex.getMessage());
+                }
             }
         }
     }
@@ -30,29 +32,30 @@ public class Storage {
         try {
             Scanner fileScanner = new Scanner(dukeDataFile);
             while (fileScanner.hasNext()) {
-                switch (fileScanner.next()) {
+                String[] taskArgs = fileScanner.nextLine().split(" ", 2);
+                switch (taskArgs[0]) {
                 case "todo":
-                    String[] todoArgs = fileScanner.nextLine().split(" ");
-                    Task newToDo = new ToDo(todoArgs[0]);
-                    if (todoArgs[1].equals("done")) {
+                    taskArgs = taskArgs[1].split(" ", 2);
+                    Task newToDo = new ToDo(taskArgs[1]);
+                    if (taskArgs[0].equals("done")) {
                         newToDo.MarkAsDone();
                     }
                     taskList.taskList.add(newToDo);
                     break;
 
                 case "deadline":
-                    String[] deadlineArgs = fileScanner.nextLine().split(" ");
-                    Task newDeadline = new Deadline(deadlineArgs[0], deadlineArgs[1]);
-                    if (deadlineArgs[2].equals("done")) {
+                    taskArgs = taskArgs[1].split(" ", 4);
+                    Task newDeadline = new Deadline(taskArgs[3], taskArgs[0] + " " + taskArgs[1]);
+                    if (taskArgs[2].equals("done")) {
                         newDeadline.MarkAsDone();
                     }
                     taskList.taskList.add(newDeadline);
                     break;
 
                 case "event":
-                    String[] eventArgs = fileScanner.nextLine().split(" ");
-                    Task newEvent = new Event(eventArgs[0], eventArgs[1]);
-                    if (eventArgs[2].equals("done")) {
+                    taskArgs = taskArgs[1].split(" ", 4);
+                    Task newEvent = new Event(taskArgs[3], taskArgs[0] + " " + taskArgs[1]);
+                    if (taskArgs[2].equals("done")) {
                         newEvent.MarkAsDone();
                     }
                     taskList.taskList.add(newEvent);
@@ -76,5 +79,6 @@ public class Storage {
                 System.out.println("IOException thrown.");
             }
         });
+        fw.close();
     }
 }

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Parser {
@@ -23,7 +24,7 @@ public class Parser {
                         "    ____________________________________________________________\n");
                 break;
             }
-            ToDo nextToDo = new ToDo(scanTest);
+            ToDo nextToDo = new ToDo(scanTest.strip());
             taskList.taskList.add(nextToDo);
             outputString.append("    ____________________________________________________________\n" +
                     "     task.add:\n");
@@ -36,7 +37,7 @@ public class Parser {
             String[] deadLineArgs = sc.nextLine().split(" /by ");
 
             try {
-                Deadline nextDeadLine = new Deadline(deadLineArgs[0], deadLineArgs[1]);
+                Deadline nextDeadLine = new Deadline(deadLineArgs[0].strip(), deadLineArgs[1]);
                 taskList.taskList.add(nextDeadLine);
                 outputString.append("    ____________________________________________________________\n" +
                         "     task.add:\n");
@@ -47,6 +48,10 @@ public class Parser {
                 outputString.append("    ____________________________________________________________\n");
                 outputString.append("     Error: Deadline entry format incorrect.\n");
                 outputString.append("    ____________________________________________________________\n");
+            } catch (DateTimeParseException e) {
+                outputString.append("    ____________________________________________________________\n");
+                outputString.append("     Error: Deadline entry format incorrect.\n");
+                outputString.append("    ____________________________________________________________\n");
             }
             break;
 
@@ -54,7 +59,7 @@ public class Parser {
             String[] eventArgs = sc.nextLine().split(" /at ");
 
             try {
-                Event nextEvent = new Event(eventArgs[0], eventArgs[1]);
+                Event nextEvent = new Event(eventArgs[0].strip(), eventArgs[1]);
                 taskList.taskList.add(nextEvent);
                 outputString.append("    ____________________________________________________________\n" +
                         "     task.add:\n");

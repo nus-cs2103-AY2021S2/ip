@@ -10,6 +10,6 @@ public class ToDo extends Task {
 
     @Override
     public String generateDataString() {
-        return "todo" + taskName + (done ? "done" : "notDone");
+        return "todo " + (done ? "done " : "notDone ") + taskName;
     }
 }
