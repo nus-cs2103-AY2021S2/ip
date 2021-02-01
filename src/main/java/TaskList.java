@@ -7,7 +7,7 @@ public class TaskList {
 
     /**
      * Initialises a newly created TaskList object
-     * so that it represents an empty List<Task>.
+     * so that it represents an empty List of Task.
      */
     public TaskList() {
         this.list = new ArrayList<Task>();
