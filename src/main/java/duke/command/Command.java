@@ -32,6 +32,11 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Storage storage) throws DukeException;
 
+    /**
+     * Used for displaying of output message in GUI
+     *
+     * @return Message details in string format
+     */
     public String getMessage() {
         return this.outputMessage;
     }

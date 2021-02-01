@@ -7,13 +7,16 @@ public class Task {
     protected final String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task class
+     */
     public Task() {
         this.description = "";
         this.isDone = false;
     }
 
     /**
-     * Constructor for Task class
+     * Overloaded Constructor for Task class
      *
      * @param description Details of the task
      */

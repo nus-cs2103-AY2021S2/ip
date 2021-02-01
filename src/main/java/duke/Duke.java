@@ -11,6 +11,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Duke class constructor
+     *
+     */
     public Duke() {
         this.storage = new Storage();
         String filePath = System.getProperty("user.dir") + "/data/Duke.txt";
@@ -18,7 +22,7 @@ public class Duke {
     }
 
     /**
-     * Duke class constructor
+     * Initialisation of Duke
      *
      * @param filePath Path directory to location of storage file
      */
@@ -32,7 +36,10 @@ public class Duke {
     }
 
     /**
-     * Starts up the Duke Bot program, read and response to user various inputs accordingly
+     * Read and response to different inputs provided by the user accordingly
+     *
+     * @param input Text entered by the user in the GUI
+     * @return Response message in string format
      */
     public String getResponse(String input) throws DukeException {
         try {
@@ -44,9 +51,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Greeting message from Duke Bot
+     *
+     * @return Greeting message in String format
+     */
     public String greetUser() {
-        String greeting = "Duke:\n Hello! I'm Duke\n" + "What can I do for you?";
-        return greeting;
+        return "Duke:\n Hello! I'm Duke\n" + "What can I do for you?";
     }
 }
 

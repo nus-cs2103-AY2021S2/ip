@@ -24,13 +24,16 @@ public class Storage {
     private final String fileDirectory;
     private final String pathDirectory;
 
+    /**
+     * Storage class constructor
+     */
     public Storage() {
         this.fileDirectory = "";
         this.pathDirectory = "";
     }
 
     /**
-     * Storage class constructor
+     * Storage class overloaded constructor
      *
      * @param fileDirectory Location where the list of tasks will be stored
      */
