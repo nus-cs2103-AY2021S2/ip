@@ -49,6 +49,7 @@ public class Storage {
      * @throws DukeException If fail to write the file.
      */
     public void updateTaskList(TaskList taskList) throws DukeException {
+
         try {
             ArrayList<Task> tasks = taskList.getTaskList();
 

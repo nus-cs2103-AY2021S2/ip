@@ -7,3 +7,4 @@ D | ✓ | homework | Jan 10 2021 10:00 am
 E | ✓ | 2020 | Oct 11 2021 09:00 am
 E | ✘ | meeting | Oct 11 2021 11:00 am
 E | ✘ | meeting | Jan 1 2021 01:00 am
+T | ✘ | hw1
