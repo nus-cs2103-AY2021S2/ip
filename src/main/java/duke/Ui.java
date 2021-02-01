@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.util.Scanner;
 
@@ -17,7 +17,7 @@ public class Ui {
     /**
      * Initialises user interface using scanner to obtain user input.
      *
-     * @param sc Scanner for user input.
+     * @param scanner Scanner for user input.
      */
     public Ui(Scanner scanner) {
         this.scanner = scanner;

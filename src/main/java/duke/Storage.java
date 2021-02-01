@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.util.List;
 import java.util.ArrayList;
