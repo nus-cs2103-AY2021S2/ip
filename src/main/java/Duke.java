@@ -1,7 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
-
 public class Duke {
 
     private Storage storage;
@@ -18,25 +16,17 @@ public class Duke {
         }
     }
 
-    public void run() throws FileNotFoundException {
-        ui.showGreetings();
-        Scanner scanner = new Scanner(System.in);
-        String command = scanner.nextLine();
+    public String getResponse(String input) throws FileNotFoundException {
         Parser parser = new Parser(storage, ui, tasks);
-
-        while (!Parser.hasExited(command)) {
-            parser.parseCommand(command);
-            command = scanner.nextLine();
-        }
-
-        if (Parser.hasExited(command)) {
-            ui.showExit();
+        if (Parser.hasSaved(input)) {
+            // TERMINATE APP
             storage.save(tasks.list);
+            return ui.showSave();
+        } else {
+            return parser.parseCommand(input);
         }
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        new Duke("duke.txt").run();
     }
 
 }
+
+

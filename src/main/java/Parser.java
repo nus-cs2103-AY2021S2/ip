@@ -48,31 +48,34 @@ public class Parser {
         return command.substring(5);
     }
 
-    static boolean hasExited(String command) {
-        return command.equals("bye");
+    static boolean hasSaved(String command) {
+        return command.equals("save");
     }
 
-    public void parseCommand(String command) {
+    public String parseCommand(String command) {
         String commandType = Parser.parseCommandType(command);
         try {
             if (commandType.equals("list")) {
                 // SHOW LIST
-                this.ui.showList(tasks.list);
+                return this.ui.showList(tasks.list);
+            } else if (commandType.equals("clear")) {
+                tasks.list.clear();
+                return ui.showClear();
             } else if (commandType.equals("done")) {
                 // MARK TASK AS COMPLETE
                 int taskIndex = Parser.parseTaskIndex(command) - 1;
                 Task completedTask = tasks.list.get(taskIndex);
                 completedTask.markAsDone();
-                ui.showDone(completedTask);
+                return ui.showDone(completedTask);
             } else if (commandType.equals("todo")) {
                 // ADD TODO TASK
                 try {
                     String description = Parser.parseTodoDescription(command);
                     Task task = new Todo(description);
                     tasks.addTask(task);
-                    ui.showAddTask(tasks.list);
+                    return ui.showAddTask(tasks.list);
                 } catch (StringIndexOutOfBoundsException e) {
-                    ui.showInvalidTodo();
+                    return ui.showInvalidTodo();
                 }
             } else if (commandType.equals("deadline")) {
                 // ADD DEADLINE TASK
@@ -80,19 +83,19 @@ public class Parser {
                 LocalDate deadlineDate = Parser.parseDeadlineDate(command); // INPUT DATE IS YYYY-MM-DD
                 Task task = new Deadline(deadlineDescription, deadlineDate);
                 tasks.addTask(task);
-                ui.showAddTask(tasks.list);
+                return ui.showAddTask(tasks.list);
             } else if (commandType.equals("event")) {
                 // ADD EVENT TASK
                 String eventDescription = Parser.parseEventDescription(command);
                 String eventDate = Parser.parseEventDate(command);
                 Task task = new Event(eventDescription, eventDate);
                 tasks.addTask(task);
-                ui.showAddTask(tasks.list);
+                return ui.showAddTask(tasks.list);
             } else if (commandType.equals("delete")) {
                 int taskIndex = Parser.parseTaskIndex(command) - 1;
                 Task deletedTask = tasks.list.get(taskIndex);
                 tasks.removeTask(taskIndex);
-                ui.showDeleteTask(tasks.list, deletedTask);
+                return ui.showDeleteTask(tasks.list, deletedTask);
             } else if (commandType.equals("find")) {
                 String keyword = Parser.parseKeyword(command);
                 ArrayList<Task> matchingTasks = new ArrayList<>();
@@ -101,12 +104,12 @@ public class Parser {
                         matchingTasks.add(task);
                     }
                 }
-                ui.showMatchingTasks(matchingTasks);
+                return ui.showMatchingTasks(matchingTasks);
             } else {
                 throw new DukeException(ui.showInvalidCommand());
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
