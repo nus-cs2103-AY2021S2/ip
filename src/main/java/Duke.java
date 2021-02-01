@@ -36,7 +36,7 @@ public class Duke {
         while (i < numTasks) {
             Task t = tasks[i];
             i++;
-            listTasksMessage += String.valueOf(i) + ". " + t.toString() + "\n";
+            listTasksMessage += i + ". " + t.toString() + "\n";
         }
         printMessage(listTasksMessage);
     }
@@ -74,7 +74,7 @@ public class Duke {
         tasks[numTasks] = t;
         String addTaskMessage = "Got it. I've added this task: \n   " + tasks[numTasks].toString() + "\n";
         numTasks++;
-        addTaskMessage += "Now you have " + String.valueOf(numTasks) + " task";
+        addTaskMessage += "Now you have " + numTasks + " task";
         addTaskMessage += numTasks == 1 ? "" : "s";
         addTaskMessage += " in the list.";
         printMessage(addTaskMessage);
@@ -100,7 +100,7 @@ public class Duke {
         }
 
         numTasks--;
-        deleteTaskMessage += "Now you have " + String.valueOf(numTasks) + " task";
+        deleteTaskMessage += "Now you have " + numTasks + " task";
         deleteTaskMessage += numTasks == 1 ? "" : "s";
         deleteTaskMessage += " in the list.";
         printMessage(deleteTaskMessage);
@@ -114,22 +114,22 @@ public class Duke {
 
 
         switch (userCommand) {
-            case "list":
-                listTasks();
-                break;
-            case "done":
-                doTask(userDescription);
-                break;
-            case "delete":
-                deleteTask(userDescription);
-                break;
-            case "todo": //Fallthrough
-            case "deadline": //Fallthrough
-            case "event":
-                addTask(userCommand, userDescription);
-                break;
-            default:
-                printMessage("Oops, the command '" + userCommand + "' is not recognised.");
+        case "list":
+            listTasks();
+            break;
+        case "done":
+            doTask(userDescription);
+            break;
+        case "delete":
+            deleteTask(userDescription);
+            break;
+        case "todo": //Fallthrough
+        case "deadline": //Fallthrough
+        case "event":
+            addTask(userCommand, userDescription);
+            break;
+        default:
+            printMessage("Oops, the command '" + userCommand + "' is not recognised.");
         }
     }
 
