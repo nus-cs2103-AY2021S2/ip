@@ -81,7 +81,7 @@ public class Ui {
      * @param userTaskList Task list of the user.
      * @param taskNumber Task to be added to the Task list.
      */
-    public static void printDeletedTask(TaskList userTaskList, int taskNumber) {
+    public void printDeletedTask(TaskList userTaskList, int taskNumber) {
         Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
         System.out.println("Noted. I've removed this task");
         System.out.println(taskToBeDeleted);
@@ -89,4 +89,13 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    public void printFoundTasks(TaskList tasksFound) {
+        System.out.println("Here are the matching tasks in your list:");
+        if(tasksFound.getTaskListSize() == 0){
+            System.out.println("Sorry. No tasks found :-(");
+        }
+        else{
+            this.printTaskList(tasksFound);
+        }
+    }
 }

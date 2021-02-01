@@ -5,12 +5,14 @@ import duke.ToDo;
 import duke.Deadline;
 import duke.Event;
 import java.time.Month;
+import java.util.ArrayList;
 
 /**
  * Represents a parser that makes sense of user input by reformatting data, making objects etc.
  * Processes commands and returns parsed information
  */
 public class Parser {
+
     /**
      * Returns formattedDate in "yyyy-MM-DD" format from unformatted "month day yyyy".
      * @param unformattedDate String in "month day year" format.
@@ -68,5 +70,24 @@ public class Parser {
     public int parseDeleteCommand(String command) {
         return Integer.parseInt(command.split("")[1]);
     }
+
+    /**
+     * Processes a "find" command and returns a TaskList object containing all Tasks that match the string searched.
+     * @param command command passed in by the user.
+     * @param userList TaskList of the user.
+     * @return TaskList containing tasks for which the keywords are matched.
+     */
+    public TaskList parseFindCommand(String command, TaskList userList){
+        String keywords = command.substring(5);
+        ArrayList<Task> results = new ArrayList<>();
+        for(Task task : userList.getTaskList()){
+            if(task.getTaskDetail().contains(keywords)){
+                results.add(task);
+            }
+        }
+        return new TaskList(results);
+
+    }
+
 }
 

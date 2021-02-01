@@ -11,7 +11,6 @@ import duke.Ui;
 import duke.Parser;
 import duke.DukeException;
 
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -23,10 +22,18 @@ import java.util.Scanner;
  */
 
 public class Duke {
-    private Ui ui;
+    private final Ui ui;
     private TaskList tasks;
     private Storage storage;
-    private Parser parser;
+    private final Parser parser;
+    private final String EXIT_COMMAND = "bye";
+    private final String LIST_COMMAND = "list";
+    private final String DONE_COMMAND = "done";
+    private final String DELETE_COMMAND = "delete";
+    private final String ADD_TODO_COMMAND = "todo";
+    private final String ADD_DEADLINE_COMMAND = "deadline";
+    private final String ADD_EVENT_COMMAND = "event";
+    private final String FIND_COMMAND = "find";
 
     /**
      * Constructor for Duke class.
@@ -60,21 +67,13 @@ public class Duke {
 
     /**
      * Processes the user input and print out messages and Ui accordingly.
-     *
+     * @throws DukeException If invalid command. Valid commands: todo, event, deadline, delete, done, list, bye
+     * @throws DukeException If there is no message after the todo command.
      * @see Scanner
      * @see Ui
      * @see Parser
-     * @throws DukeException If invalid task type. Valid tasks types: ToDo, Event, Deadline.
-     * @throws DukeException If there is no message after the todo command.
      */
     public void run() {
-        final String EXIT_COMMAND = "bye";
-        final String LIST_COMMAND = "list";
-        final String DONE_COMMAND = "done";
-        final String DELETE_COMMAND = "delete";
-        final String ADD_TODO_COMMAND = "todo";
-        final String ADD_DEADLINE_COMMAND = "deadline";
-        final String ADD_EVENT_COMMAND = "event";
         ui.printWelcomeGreeting();
         Scanner sc = new Scanner(System.in);
         boolean isBye = false;
@@ -118,6 +117,10 @@ public class Duke {
                 case DELETE_COMMAND:
                     int taskNumToBeDeleted = parser.parseDeleteCommand(command);
                     ui.printDeletedTask(tasks, taskNumToBeDeleted);
+                    break;
+                case FIND_COMMAND:
+                    TaskList tasksFound = parser.parseFindCommand(command, tasks);
+                    ui.printFoundTasks(tasksFound);
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
