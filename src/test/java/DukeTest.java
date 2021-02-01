@@ -3,12 +3,14 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.Test;
+
 import duke.interaction.Parser;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TaskList;
 import duke.task.TodoTask;
-import org.junit.jupiter.api.Test;
+
 
 public class DukeTest {
     @Test
@@ -39,7 +41,7 @@ public class DukeTest {
         TaskList taskList = new TaskList();
         parser.parseInput("todo a").execute(taskList);
         assertEquals(new TodoTask("a").serialise() + "\n", taskList.serialise());
-        
+
         parser.parseInput("delete 1").execute(taskList);
         assertEquals("", taskList.serialise());
     }

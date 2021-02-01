@@ -115,7 +115,7 @@ public class TaskList {
         StringBuilder out = new StringBuilder();
         int i = 1;
 
-        for (Task task : task) {
+        for (Task task : tasks) {
             if (task.containsTerm(str)) {
                 out.append(i++);
                 out.append(". ");
