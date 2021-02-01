@@ -24,8 +24,8 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        System.out.println("Hello! I'm Duke\n"
+                + "What can I do for you?");
 
         return new Ui();
     }
@@ -87,12 +87,12 @@ public class Ui {
      */
     public static void throwIllegalArgumentEx(String command) throws IllegalArgumentException {
         if (command.length() > 0) {
-            throw new IllegalArgumentException("That is not a valid command!\n" +
-                    "These are the possible commands:\n" +
-                    "\"list\" \"done\" \"delete\" \"todo\" \"deadline\" \"event\" \"bye\"");
+            throw new IllegalArgumentException("That is not a valid command!\n"
+                    + "These are the possible commands:\n"
+                    + "\"list\" \"done\" \"delete\" \"todo\" \"deadline\" \"event\" \"bye\"");
         } else {
-            throw new IllegalArgumentException("What are you trying to say?\n" +
-                    "Please enter something ...");
+            throw new IllegalArgumentException("What are you trying to say?\n"
+                    + "Please enter something ...");
         }
     }
 }

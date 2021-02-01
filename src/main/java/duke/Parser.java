@@ -99,8 +99,8 @@ public class Parser {
         try {
             int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
             Task currTask = tasks.remove(taskNum);
-            System.out.println("See la. It's deleted.\n" + currTask +
-                    "\nYou currently have " + tasks.size() + " task(s) in the list.");
+            System.out.println("See la. It's deleted.\n" + currTask
+                    + "\nYou currently have " + tasks.size() + " task(s) in the list.");
             if (storage != null) {
                 storage.deleteTask(taskNum);
             }
@@ -122,8 +122,8 @@ public class Parser {
      */
     private void addTask(Task task) {
         tasks.add(task);
-        System.out.println("Your task has been added: " + task +
-                "\nYou currently have " + tasks.size() + " task(s) in the list.");
+        System.out.println("Your task has been added: " + task
+                + "\nYou currently have " + tasks.size() + " task(s) in the list.");
     }
 
     private void handleFind(String command) {

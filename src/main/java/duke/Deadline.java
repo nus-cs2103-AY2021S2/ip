@@ -53,11 +53,11 @@ public class Deadline extends Task {
         if (byDateTime == null && byDate == null) {
             return "[D]" + super.toString() + " (by: " + by + ")";
         } else if (byDateTime != null) {
-            return "[D]" + super.toString() +
-                    " (by: " + byDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, ha")) + ")";
+            return "[D]" + super.toString()
+                    + " (by: " + byDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, ha")) + ")";
         } else {
-            return "[D]" + super.toString() +
-                    " (by: " + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+            return "[D]" + super.toString()
+                    + " (by: " + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
         }
     }
 }

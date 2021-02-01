@@ -6,6 +6,10 @@ package duke;
  * The list is saved by the Storage object at "./data/duke.txt".
  */
 public class Duke {
+    /**
+     * Starts Duke with instance of Ui, Storage, TaskList, and Parser to receive input and serve output.
+     * @param args
+     */
     public static void main(String[] args) {
         Ui ui = Ui.startUi();
 
