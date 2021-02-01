@@ -14,10 +14,17 @@ public class Duke {
 
     /**
      * Entry point for the Duke program
+     *
      * @param args Command line arguments which are not used. Do not waste your effort.
      */
     public static void main(String[] args) {
+        run();
+    }
 
+    /**
+     * Runs the Duke chatbot loop
+     */
+    public static void run() {
         startup();
         Ui.greet();
 
