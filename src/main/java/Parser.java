@@ -92,8 +92,8 @@ public class Parser {
                 int doneTarget = sc.nextInt();
                 outputString.append("    ____________________________________________________________\n" +
                         "     task.done = true:\n");
-                Task targetTask = taskList.get(doneTarget - 1);
-                targetTask.MarkAsDone();
+                Task targetTask = taskList.taskList.get(doneTarget - 1);
+                targetTask.markAsDone();
                 outputString.append("       " + targetTask + "\n");
                 outputString.append("    ____________________________________________________________\n");
 

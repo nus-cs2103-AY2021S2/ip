@@ -5,7 +5,7 @@ import java.util.Scanner;
  * passing it to the Parser and printing the resultant output string.
  */
 public class Ui {
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Runs the UI object with the specified TaskList to edit and Storage to store taskList when the application ends.
@@ -29,7 +29,7 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();
 
-        while (!done) {
+        while (!isDone) {
             String nextCommand = sc.next();
             String nextOutput = parser.parse(nextCommand, taskList, storage, sc, this);
             System.out.println(nextOutput);
@@ -41,6 +41,6 @@ public class Ui {
      * Toggles an inner boolean to end the loop that reads user commands.
      */
     public void end() {
-        done = true;
+        isDone = true;
     }
 }
