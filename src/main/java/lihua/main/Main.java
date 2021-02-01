@@ -22,6 +22,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(GUI_RESOURCE_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Lihua");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setLihua(lihua);
             stage.show();
