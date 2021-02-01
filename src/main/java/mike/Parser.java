@@ -12,6 +12,7 @@ import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.EventCommand;
+import command.ExceptionCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.TodoCommand;
@@ -33,13 +34,13 @@ public class Parser {
      *
      * @return Command.Command type object with parameters entered by user
      */
-    public static Command parseInput(Scanner scanner) throws MikeInvalidInputException {
-        String userInput = scanner.nextLine();
+    public static Command parseInput(String userInput){
+//        String userInput = scanner.nextLine();
+        String errMsg;
         String[] userInputArr = userInput.split(" ");
         Pattern pattern;
         Matcher matcher;
 
-        /*TODO: abstract out try catches and use string error message instead*/
         switch (userInputArr[0].toLowerCase()) {
         case BYE_COMMAND:
             return new ByeCommand();
@@ -51,10 +52,10 @@ public class Parser {
             try {
                 return new DoneCommand(Integer.parseInt(userInputArr[1]));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new MikeInvalidInputException(
-                        " ☹ OOPS!!! Input does not match Done command format. eg.\n"
-                                + "   Done <index of task to mark completed>");
+                errMsg = " ☹ OOPS!!! Input does not match Done command format. eg.\n"
+                                + "   Done <index of task to mark completed>";
             }
+            break;
 
         case TODO_COMMAND:
             pattern = Pattern.compile("(?i)todo (.+)");
@@ -62,10 +63,10 @@ public class Parser {
             if (matcher.find()) {
                 return new TodoCommand(matcher.group(1));
             } else {
-                throw new MikeInvalidInputException(
-                        " ☹ OOPS!!! Input does not match Todo command format. eg.\n"
-                                + "   todo <description>");
+                errMsg = " ☹ OOPS!!! Input does not match Todo command format. eg.\n"
+                                + "   todo <description>";
             }
+            break;
 
         case EVENT_COMMAND:
             try {
@@ -78,10 +79,10 @@ public class Parser {
 
                 return new EventCommand(matcher.group(1), dateTimeObject);
             } catch (IllegalStateException e) {
-                throw new MikeInvalidInputException(
-                        " ☹ OOPS!!! Input does not match Event command format. eg.\n"
-                                + "   event <description> /at <dd-MM-yyyy> <hh:mm>");
+                errMsg = " ☹ OOPS!!! Input does not match Event command format. eg.\n"
+                                + "   event <description> /at <dd-MM-yyyy> <hh:mm>";
             }
+            break;
 
         case DEADLINE_COMMAND:
             try {
@@ -94,19 +95,19 @@ public class Parser {
 
                 return new DeadlineCommand(matcher.group(1), dateTimeObject);
             } catch (IllegalStateException e) {
-                throw new MikeInvalidInputException(
-                        " ☹ OOPS!!! Input does not match Deadline command format. eg.\n"
-                                + "   deadline <description> /by <deadline>");
+                errMsg = " ☹ OOPS!!! Input does not match Deadline command format. eg.\n"
+                                + "   deadline <description> /by <deadline>";
             }
+            break;
 
         case DELETE_COMMAND:
             try {
                 return new DeleteCommand(Integer.parseInt(userInputArr[1]));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new MikeInvalidInputException(
-                        " ☹ OOPS!!! Input does not match Delete command format. eg.\n"
-                                + "   Delete <index of task to delete>");
+                errMsg = " ☹ OOPS!!! Input does not match Delete command format. eg.\n"
+                                + "   Delete <index of task to delete>";
             }
+            break;
 
         case FIND_COMMAND:
             try {
@@ -117,14 +118,15 @@ public class Parser {
 
                 return new FindCommand(matcher.group(1));
             } catch (IllegalStateException e) {
-                throw new MikeInvalidInputException(
-                        " ☹ OOPS!!! Input does not match Find command format. eg.\n"
-                                + "   find <keyword> ");
+                errMsg = " ☹ OOPS!!! Input does not match Find command format. eg.\n"
+                                + "   find <keyword> ";
             }
+            break;
 
         default:
-            throw new MikeInvalidInputException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+            errMsg = " OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
+        return new ExceptionCommand(errMsg);
     }
 }
 
