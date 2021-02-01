@@ -1,29 +1,32 @@
-package main.java;
+package main.java.command;
+
+import main.java.classes.DuckieException;
+import main.java.classes.Storage;
+import main.java.classes.TaskList;
+import main.java.classes.Ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class EventCmd extends Command {
+public class DeadlineCmd extends Command {
     private String cmd;
 
-    public EventCmd(String cmd){
+    public DeadlineCmd(String cmd){
         this.cmd = cmd;
     }
 
     @Override
     public void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         //String[] cmdArr = cmd.trim().split(" ");
-        if (!cmd.contains("/at")) {
-            throw new DuckieException("oops! please specify the time of your event using '/at'");
+        if (!cmd.contains("/by")) {
+            throw new DuckieException("oops! please specify deadline using '/by'");
         }
 
-        //System.out.println(line);
         //ui.customLine();
-        //String[] cmdArr = cmd.trim().split(" ");
-        String[] strE = cmd.trim().split("/at", 2);
-
-        String inputDate = strE[1].trim();
+        //System.out.println(line);
+        String[] strD = cmd.trim().split("/by", 2);
+        String inputDate = strD[1].trim();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
         Date date;
         try {
@@ -31,10 +34,11 @@ public class EventCmd extends Command {
         } catch (Exception e) {
             throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
         }
-        Event tempE = new Event(strE[0], date);
-        lst.addTask(tempE);
+        Deadline tempD = new Deadline(strD[0], date);
+
+        lst.addTask(tempD);
         System.out.println("ok! i've added this task:");
-        System.out.println(tempE.toString());
+        System.out.println(tempD.toString());
 
         if (lst.getListSize() == 0) {
             System.out.println("there are no tasks in your list!");
@@ -43,8 +47,8 @@ public class EventCmd extends Command {
         } else {
             System.out.println("you have " + lst.getListSize() + " tasks in your list! keep working!");
         }
-        //System.out.println(line);
         //ui.customLine();
+       // System.out.println(line);
     }
 
     @Override

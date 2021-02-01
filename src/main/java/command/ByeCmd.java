@@ -1,4 +1,9 @@
-package main.java;
+package main.java.command;
+
+import main.java.classes.DuckieException;
+import main.java.classes.Storage;
+import main.java.classes.TaskList;
+import main.java.classes.Ui;
 
 public class ByeCmd extends Command {
 

@@ -1,27 +1,34 @@
-package main.java;
+package main.java.command;
+
+import main.java.classes.DuckieException;
+import main.java.classes.Storage;
+import main.java.classes.TaskList;
+import main.java.classes.Ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class DeadlineCmd extends Command {
+public class EventCmd extends Command {
     private String cmd;
 
-    public DeadlineCmd(String cmd){
+    public EventCmd(String cmd){
         this.cmd = cmd;
     }
 
     @Override
     public void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         //String[] cmdArr = cmd.trim().split(" ");
-        if (!cmd.contains("/by")) {
-            throw new DuckieException("oops! please specify deadline using '/by'");
+        if (!cmd.contains("/at")) {
+            throw new DuckieException("oops! please specify the time of your event using '/at'");
         }
 
-        //ui.customLine();
         //System.out.println(line);
-        String[] strD = cmd.trim().split("/by", 2);
-        String inputDate = strD[1].trim();
+        //ui.customLine();
+        //String[] cmdArr = cmd.trim().split(" ");
+        String[] strE = cmd.trim().split("/at", 2);
+
+        String inputDate = strE[1].trim();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
         Date date;
         try {
@@ -29,11 +36,10 @@ public class DeadlineCmd extends Command {
         } catch (Exception e) {
             throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
         }
-        Deadline tempD = new Deadline(strD[0], date);
-
-        lst.addTask(tempD);
+        Event tempE = new Event(strE[0], date);
+        lst.addTask(tempE);
         System.out.println("ok! i've added this task:");
-        System.out.println(tempD.toString());
+        System.out.println(tempE.toString());
 
         if (lst.getListSize() == 0) {
             System.out.println("there are no tasks in your list!");
@@ -42,8 +48,8 @@ public class DeadlineCmd extends Command {
         } else {
             System.out.println("you have " + lst.getListSize() + " tasks in your list! keep working!");
         }
+        //System.out.println(line);
         //ui.customLine();
-       // System.out.println(line);
     }
 
     @Override

@@ -1,4 +1,6 @@
-package main.java;
+package main.java.classes;
+
+import main.java.classes.Task;
 
 import java.util.ArrayList;
 

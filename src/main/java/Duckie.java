@@ -1,6 +1,9 @@
 package main.java;
 
 
+import main.java.classes.*;
+import main.java.command.Command;
+
 import java.io.IOException;
 
 public class Duckie {

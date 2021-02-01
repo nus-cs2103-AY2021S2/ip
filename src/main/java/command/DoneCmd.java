@@ -1,4 +1,6 @@
-package main.java;
+package main.java.command;
+
+import main.java.classes.*;
 
 public class DoneCmd extends Command {
 

@@ -1,4 +1,8 @@
-package main.java;
+package main.java.classes;
+
+import main.java.command.Deadline;
+import main.java.command.Event;
+import main.java.command.ToDo;
 
 import java.io.File;
 import java.io.FileWriter;
