@@ -36,6 +36,6 @@ public class FindCommand {
      * @return string response after operation is done
      */
     public String execute(String taskName) {
-        return TASK_HANDLER.findTask(taskName);
+        return TASK_HANDLER.findTask(taskName.split(" "));
     }
 }

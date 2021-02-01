@@ -173,8 +173,10 @@ public class Parser {
                 taskName = taskDetails.trim();
             } else if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
                 taskName = taskDetails.split("/by", 2)[0].trim();
-            } else {
+            } else if (taskType.toUpperCase().equals(Cmd.EVENT.toString())) {
                 taskName = taskDetails.split("/from", 2)[0].trim();
+            } else {
+                taskName = parsedString[1];
             }
             return taskName;
         } catch (IndexOutOfBoundsException e) {
