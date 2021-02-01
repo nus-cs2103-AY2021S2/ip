@@ -218,7 +218,7 @@ public class Duke {
                 lineRead = reader.readLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            return result;
         }
         return result;
     }

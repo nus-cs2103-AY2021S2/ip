@@ -1,3 +1,0 @@
-T/0/stuff
-E/0/study/school
-D/1/hmwk/tmr
