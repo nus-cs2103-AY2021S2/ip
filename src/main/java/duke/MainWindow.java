@@ -1,11 +1,16 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.CommandResult;
+import duke.commands.InvalidCommandException;
+import duke.commands.InvalidDescriptionException;
+import duke.commands.NoDescriptionException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.tasks.TaskList;
 import duke.ui.DialogBox;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -26,7 +31,7 @@ public class MainWindow extends VBox {
     private TextField userInput;
     @FXML
     private Button sendButton;
-    
+
     private Image userImage;
     private Image dukeImage;
 
@@ -40,7 +45,7 @@ public class MainWindow extends VBox {
         // Set the scroll pane to automatically scroll down when the text reaches the bottom
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
-    
+
     public void setComponents(Storage storage, TaskList taskList, Stage primaryStage) {
         this.storage = storage;
         this.taskList = taskList;
@@ -48,20 +53,17 @@ public class MainWindow extends VBox {
         loadAdditionalConstraints();
     }
 
+    /**
+     * Adds some constraints to the primary stage that shows the application and
+     * adds the welcome message label.
+     */
     public void loadAdditionalConstraints() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        // Create a new Label control
         String welcomeMsg = "Hello! I'm Duke.\nWhat can I do for you?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg, dukeImage));
 
         primaryStage.setTitle("Duke");
         primaryStage.setMinWidth(400.0);
         primaryStage.setMinHeight(500.0);
-        
     }
 
     @FXML
@@ -121,7 +123,7 @@ public class MainWindow extends VBox {
             this.taskList = taskList;
         }
     }
-    
+
     private void handleExit() {
         primaryStage.hide();
         System.exit(0);

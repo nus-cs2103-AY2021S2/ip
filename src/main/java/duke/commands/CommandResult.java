@@ -50,27 +50,35 @@ public class CommandResult {
     public TaskList getUpdatedTaskList() {
         return updatedTaskList;
     }
-    
+
     public boolean isExitingProgram() {
         return isExiting;
     }
 
+    /**
+     * Compares this {@code CommandResult} to the specified object. The result if true if and only if the
+     * argument is not null and  is a {@code CommandResult} object that has the same message for user and
+     * the same updated taskList.
+     *
+     * @param obj The object to compare this {@code CommandResult} against
+     * @return true if the given object represents a {@code CommandResult} equivalent to this CommandResult,
+     * false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof CommandResult) {
-            CommandResult objCommandResult = (CommandResult) obj;
-            if (!messageForUser.equals(objCommandResult.messageForUser)) {
-                return false;
-            }
-            if (updatedTaskList != null && objCommandResult.updatedTaskList != null) {
-                return updatedTaskList.equals(objCommandResult.updatedTaskList);
-            } else {
-                return updatedTaskList == null && objCommandResult.updatedTaskList == null;
-            }
-        } else {
+        }
+        if (!(obj instanceof CommandResult)) {
             return false;
         }
+        CommandResult objCommandResult = (CommandResult) obj;
+        if (!messageForUser.equals(objCommandResult.messageForUser)) {
+            return false;
+        }
+        if (updatedTaskList != null && objCommandResult.updatedTaskList != null) {
+            return updatedTaskList.equals(objCommandResult.updatedTaskList);
+        }
+        return updatedTaskList == null && objCommandResult.updatedTaskList == null;
     }
 }

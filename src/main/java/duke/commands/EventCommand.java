@@ -18,12 +18,6 @@ public class EventCommand extends Command {
     private final String taskName;
     private final String eventTime;
 
-    /**
-     * Creates an {@code EventCommand} object with the given event time.
-     *
-     * @param taskName
-     * @param eventTime
-     */
     public EventCommand(String taskName, String eventTime) {
         this.taskName = taskName;
         this.eventTime = eventTime;

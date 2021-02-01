@@ -22,11 +22,22 @@ public class Ui {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Creates a {@code Ui} object that handles the GUI.
+     *
+     * @param storage storage object that handles file operations
+     * @param taskList the loaded task list from storage
+     */
     public Ui(Storage storage, TaskList taskList) {
         this.storage = storage;
         this.taskList = taskList;
     }
 
+    /**
+     * Starts the GUI.
+     *
+     * @param primaryStage the primary stage of the application
+     */
     public void start(Stage primaryStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));

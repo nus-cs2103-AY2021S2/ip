@@ -15,14 +15,4 @@ public class ByeCommand extends Command {
     public CommandResult execute() {
         return new CommandResult(MESSAGE_EXIT, true);
     }
-
-    /**
-     * Checks if a command is an instance of ByeCommand.
-     *
-     * @param command user command
-     * @return true if command is an instance of ByeCommand, else false
-     */
-    public static boolean isByeCommand(Command command) {
-        return command instanceof ByeCommand;
-    }
 }
