@@ -83,7 +83,7 @@ public class Parser {
                     break;
                 }
             default:
-                throw new DukeException("No input found!");
+                System.out.println("Todo entered by user!");
             }
         } else if (possibleActionInputs.contains(input[0])) {
             if (input.length > 2) {

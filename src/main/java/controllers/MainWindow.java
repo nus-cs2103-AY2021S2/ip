@@ -1,7 +1,7 @@
 package controllers;
 
-import controllers.DialogBox;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -9,10 +9,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import mainclasses.Duke;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -49,6 +53,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        String initialResponse = "Hello! I'm Benny \n" + "What can I do for you?";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(initialResponse, dukeImage));
     }
 }
-

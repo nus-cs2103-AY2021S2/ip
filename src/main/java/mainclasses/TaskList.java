@@ -74,7 +74,7 @@ public class TaskList {
     public String listTask(List<Task> tasks) {
         String newListString = "";
         for (int i = 0; i < tasks.size(); i++) {
-            newListString.concat(printTask(i, tasks.get(i)) + "\n");
+            newListString += (printTask(i, tasks.get(i)) + "\n");
         }
         return ("Here are the tasks in your list: \n") + newListString;
     }
@@ -114,7 +114,7 @@ public class TaskList {
         String newStringLine = "Here are the matching tasks in your list:" + "\n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyWord)) {
-                newStringLine.concat(printTask(i, tasks.get(i)) + "\n");
+                newStringLine += (printTask(i, tasks.get(i)) + "\n");
             }
         }
         return newStringLine;

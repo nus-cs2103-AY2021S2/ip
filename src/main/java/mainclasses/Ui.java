@@ -33,9 +33,8 @@ public class Ui {
     /**
      * Initialise the first dialog from Duke
      */
-    public void printStatements() {
-        System.out.println("Hello! I'm Benny");
-        System.out.println("What can I do for you?");
+    public String initialStatements() {
+        return ("Hello! I'm Benny \n") + ("What can I do for you?");
     }
 
 

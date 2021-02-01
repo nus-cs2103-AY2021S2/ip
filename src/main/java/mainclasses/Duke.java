@@ -22,6 +22,10 @@ public class Duke {
         return this.ui.executeInput(input);
     }
 
+    public String getInitialGreeting() {
+        return this.ui.initialStatements();
+    }
+
 
 
 
