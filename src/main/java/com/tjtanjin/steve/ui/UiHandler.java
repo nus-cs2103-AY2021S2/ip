@@ -3,6 +3,7 @@ package com.tjtanjin.steve.ui;
 import com.tjtanjin.steve.Steve;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -24,6 +25,7 @@ public class UiHandler extends AnchorPane {
     private Button sendButton;
 
     private Steve steve;
+    public static FXMLLoader fxmlLoader;
 
     private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image STEVE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/steve.png"));
@@ -42,8 +44,9 @@ public class UiHandler extends AnchorPane {
      *
      * @param steve steve parsed from main class
      */
-    public void setSteve(Steve steve) {
+    public void setSteve(Steve steve, FXMLLoader loader) {
         this.steve = steve;
+        fxmlLoader = loader;
     }
 
     /**
