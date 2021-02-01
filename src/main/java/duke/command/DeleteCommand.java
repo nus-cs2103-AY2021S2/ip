@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
         if (task.length() > 0 && date.equals("")) {
             try {
                 int num = Integer.parseInt(task);
-                TaskList.delete(num);
+                TaskList.deleteTask(num);
             } catch (NumberFormatException e) {
                 DukeException.numberFormatException();
             }

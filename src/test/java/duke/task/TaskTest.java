@@ -1,8 +1,9 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskTest {
 
@@ -20,7 +21,7 @@ class TaskTest {
         TaskList.clearAllTask();
         Todo task = new Todo("Scratch back", " ");
         TaskList.addTask(task);
-        TaskList.delete(1);
+        TaskList.deleteTask(1);
         assertEquals(0, TaskList.getTaskList().size());
     }
 }

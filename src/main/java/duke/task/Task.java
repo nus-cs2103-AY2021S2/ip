@@ -25,6 +25,13 @@ public class Task {
 
     }
 
+    Task(String taskName, String isDone, boolean check) {
+        this.taskName = taskName;
+        this.index = capacity + 1;
+        this.isDone = isDone;
+        this.date = "";
+        capacity++;
+    }
 
     Task(String taskName, String date) {
         this.taskName = taskName;

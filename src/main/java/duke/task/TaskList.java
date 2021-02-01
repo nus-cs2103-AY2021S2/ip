@@ -9,17 +9,13 @@ import duke.ui.Ui;
 
 
 public class TaskList {
-    private static List<Task> taskList = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
-    private List<Task> list;
 
-    public TaskList() {
-        this.list = new ArrayList<>();
-    }
 
 
     public static void addTask(Task t) {
-        taskList.add(t);
+        tasks.add(t);
     }
 
 
@@ -29,8 +25,8 @@ public class TaskList {
      */
     public static void markDone(int i) {
         try {
-            Task t = taskList.get(i - 1);
-            taskList.get(i - 1).markDone();
+            Task t = tasks.get(i - 1);
+            tasks.get(i - 1).markDone();
             Ui.doneTask(t);
         } catch (IndexOutOfBoundsException e) {
             DukeException.taskErrorException();
@@ -42,10 +38,10 @@ public class TaskList {
      * @param keyword keyword that the user want to search.
      * @return the matched tasks according to the keyword in String.
      */
-    public static String find(String keyword) {
+    public static String findTasks(String keyword) {
         int index = 1;
         StringBuilder sb = new StringBuilder("");
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             String taskName = task.getTaskName();
             if (taskName.contains(keyword)) {
                 String prefix = task.toString().substring(0, 6);
@@ -67,9 +63,9 @@ public class TaskList {
     /**
      * Display all the tasks in the list.
      */
-    public static void list() {
+    public static void listTasks() {
         System.out.println(Ui.UPPER);
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             if (task == null) {
                 break;
             }
@@ -82,12 +78,12 @@ public class TaskList {
      * Delete a task in the task list with the given index.
      * @param i the index labelling of the task.
      */
-    public static void delete(int i) {
+    public static void deleteTask(int i) {
         try {
-            Task t = taskList.get(i - 1);
-            taskList.remove(i - 1);
+            Task t = tasks.get(i - 1);
+            tasks.remove(i - 1);
             Ui.deleteTask(t);
-            for (Task task : taskList) {
+            for (Task task : tasks) {
                 if (task.getIndex() > i) {
                     task.changeIndex(task.getIndex() - 1);
                 }
@@ -98,11 +94,11 @@ public class TaskList {
     }
 
     public static void clearAllTask() {
-        taskList.clear();
+        tasks.clear();
     }
 
     public static List<Task> getTaskList() {
-        return taskList;
+        return tasks;
     }
 
 }
