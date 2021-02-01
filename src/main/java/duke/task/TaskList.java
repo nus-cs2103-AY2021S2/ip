@@ -7,11 +7,8 @@ import duke.exceptions.DukeException;
 import duke.ui.Ui;
 
 
-
 public class TaskList {
     private static List<Task> tasks = new ArrayList<>();
-
-
 
 
     public static void addTask(Task t) {
@@ -21,6 +18,7 @@ public class TaskList {
 
     /**
      * This method marks a task in the list as done.
+     *
      * @param i index labelling of the task in list.
      */
     public static void markDone(int i) {
@@ -35,6 +33,7 @@ public class TaskList {
 
     /**
      * This method finds all relevant tasks according to the keyword.
+     *
      * @param keyword keyword that the user want to search.
      * @return the matched tasks according to the keyword in String.
      */
@@ -76,6 +75,7 @@ public class TaskList {
 
     /**
      * Delete a task in the task list with the given index.
+     *
      * @param i the index labelling of the task.
      */
     public static void deleteTask(int i) {
@@ -99,6 +99,15 @@ public class TaskList {
 
     public static List<Task> getTaskList() {
         return tasks;
+    }
+
+
+    /**
+     * Obtain the total number of tasks in the list.
+     * @return the number of tasks in the list.
+     */
+    public static int getTasksSize() {
+        return tasks.size();
     }
 
 }

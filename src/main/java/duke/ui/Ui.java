@@ -67,7 +67,7 @@ public class Ui {
     public static String biggerBox(Task t) {
         return Ui.UPPER + "Added liao: "
             + t.toString() + Ui.LINEBREAK
-            + "You have " + Task.getCapacity() + " tasks in the list!"
+            + "You have " + TaskList.getTasksSize() + " tasks in the list!"
             + Ui.LOWER;
     }
 

@@ -27,8 +27,8 @@ public class DukeDriver {
 
         while (sc.hasNext()) {
             String message = sc.nextLine();
-            boolean bye = inputHandler(message);
-            if (bye) {
+            boolean willExit = inputHandler(message);
+            if (willExit) {
                 break;
             }
         }

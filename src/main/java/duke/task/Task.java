@@ -5,7 +5,6 @@ package duke.task;
  * A class that store the task that user key in.
  */
 public class Task {
-    private static int capacity = 0;
     private final String taskName;
     private int index;
     private String isDone;
@@ -18,35 +17,30 @@ public class Task {
      */
     Task(String taskName) {
         this.taskName = taskName;
-        this.index = capacity + 1;
+        this.index = TaskList.getTasksSize() + 1;
         this.isDone = " ";
         this.date = "";
-        capacity++;
-
     }
 
     Task(String taskName, String isDone, boolean check) {
         this.taskName = taskName;
-        this.index = capacity + 1;
+        this.index = TaskList.getTasksSize() + 1;
         this.isDone = isDone;
         this.date = "";
-        capacity++;
     }
 
     Task(String taskName, String date) {
         this.taskName = taskName;
-        this.index = capacity + 1;
+        this.index = TaskList.getTasksSize() + 1;
         this.isDone = " ";
         this.date = date;
-        capacity++;
     }
 
     Task(String taskName, String date, String done) {
         this.taskName = taskName;
-        this.index = capacity + 1;
+        this.index = TaskList.getTasksSize() + 1;
         this.isDone = done;
         this.date = date;
-        capacity++;
     }
 
 
@@ -98,14 +92,7 @@ public class Task {
         return date;
     }
 
-    /**
-     * get the current capacity of the taskList.
-     *
-     * @return the int representation of the capacity of the taskList.
-     */
-    public static int getCapacity() {
-        return Task.capacity;
-    }
+
 
     @Override
     public String toString() {
