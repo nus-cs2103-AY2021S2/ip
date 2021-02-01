@@ -42,7 +42,7 @@ public class Helper {
         for (int i = 0; i < input.length; i++) {
             output.append(input[i]);
             if (i != input.length - 1) {
-                output.append(System.getenv(System.lineSeparator()));
+                output.append(System.lineSeparator());
             }
         }
         return output.toString();

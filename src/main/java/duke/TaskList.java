@@ -28,6 +28,7 @@ public class TaskList {
         storage.writeTaskToFile(task);
         return Helper.formatStringArray(new String[] {
             "Got it. I've added this task:",
+            System.lineSeparator(),
             "    " + task.toString(),
             "Now you have " + this.list.size() + " tasks in the list."
         });
@@ -54,6 +55,7 @@ public class TaskList {
         rewriteTasks();
         return Helper.formatStringArray(new String[] {
             "Noted. I've removed this task:",
+            System.lineSeparator(),
             this.list.get(taskNumber - 1).toString(),
             "Now you have " + (this.list.size() - 1) + " tasks in the list."
         });
@@ -64,7 +66,7 @@ public class TaskList {
      */
     public String formatList() {
         String[] printedArray = new String[this.list.size() + 1];
-        printedArray[0] = "Here are the tasks in your list:";
+        printedArray[0] = "Here are the tasks in your list:" + System.lineSeparator();
         for (int i = 0; i < this.list.size(); i++) {
             String listEntry = String.valueOf(i + 1) + "."
                     + this.list.get(i).toString();
