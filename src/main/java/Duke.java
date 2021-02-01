@@ -1,12 +1,21 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    private static final String currdir = System.getProperty("user.dir");
+    private static final Path path = Paths.get(currdir, "data");
+    private static final Path file = Paths.get(currdir, "data", "duke.txt");
+
+    public static void main(String[] args) throws IOException {
+        Duke duke = new Duke();
+        ArrayList<Task> tasks = duke.loadtasks();
         System.out.println("Hello! I'm Duke. What can I do for you?\n");
         Scanner scanner = new Scanner(System.in);
-        Duke duke = new Duke();
-        duke.chat(scanner);
+        duke.chat(scanner, tasks);
     }
 
     abstract class Task {
@@ -115,8 +124,55 @@ public class Duke {
         }
     }
 
-    public void chat(Scanner scanner) {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public void savetasks(ArrayList<Task> tasks) throws IOException {
+        try {
+            String string = "";
+            for (int i = 0; i < tasks.size(); i++) {
+                string += tasks.get(i) + "\n";
+            }
+            Files.writeString(file, string);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public ArrayList<Task> loadtasks() throws IOException {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        try {
+            if (!Files.exists(path)) {
+                Files.createDirectory(path);
+            }
+            if (!Files.exists(file)) {
+                Files.createFile(file);
+            }
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String task = sc.nextLine();
+                if (task.startsWith("[T]")) {
+                    boolean done = task.charAt(4) == 'X';
+                    tasks.add(new ToDo(task.substring(7), done));
+                } else if (task.startsWith("[E]")) {
+                    boolean done = task.charAt(4) == 'X';
+                    int index = task.indexOf('(');
+                    int endindex = task.indexOf(')');
+                    tasks.add(new Event(task.substring(7, index - 1), task.substring(index + 4, endindex), done));
+                } else {
+                    boolean done = task.charAt(4) == 'X';
+                    int index = task.indexOf('(');
+                    int endindex = task.indexOf(')');
+                    tasks.add(new Event(task.substring(7, index - 1), task.substring(index + 4, endindex), done));
+                }
+            }
+            sc.close();
+            return tasks;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return tasks;
+    }
+
+    public void chat(Scanner scanner, ArrayList<Task> tasks) throws IOException {
+        //ArrayList<Task> tasks = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
@@ -173,5 +229,6 @@ public class Duke {
                 System.out.println(nsce);
             }
         }
+        savetasks(tasks);
     }
 }
