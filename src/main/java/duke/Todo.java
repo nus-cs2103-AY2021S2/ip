@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * A subclass of Task, used for tasks with no timing.
