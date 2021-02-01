@@ -45,3 +45,9 @@ run{
     enableAssertions = true
     standardInput = System.in
 }
+
+task hello {
+    doLast {
+        println 'Hello world!'
+    }
+}
