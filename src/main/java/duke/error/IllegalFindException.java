@@ -17,7 +17,6 @@ public class IllegalFindException extends StringIndexOutOfBoundsException {
      */
     @Override
     public String toString() {
-        return "You forgot to enter the keyword to search for!\n"
-                + (char) 9 + (char) 9 + "Please re-enter!";
+        return "You forgot to enter the keyword to search for!\n" + "Please re-enter!";
     }
 }

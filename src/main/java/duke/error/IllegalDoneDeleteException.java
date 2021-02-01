@@ -22,9 +22,9 @@ public class IllegalDoneDeleteException extends StringIndexOutOfBoundsException 
     @Override
     public String toString() {
         if (taskType.equals("done")) {
-            return "You forgot to enter the task to mark as done!\n" + (char) 9 + (char) 9 + "Please re-enter!";
+            return "You forgot to enter the task to mark as done!\n" + "Please re-enter!";
         } else {
-            return "You forgot to enter the task to delete!\n" + (char) 9 + (char) 9 + "Please re-enter!";
+            return "You forgot to enter the task to delete!\n" + "Please re-enter!";
         }
     }
 }

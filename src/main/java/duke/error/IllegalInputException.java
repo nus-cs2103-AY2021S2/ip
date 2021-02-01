@@ -17,6 +17,6 @@ public class IllegalInputException extends IllegalArgumentException {
      */
     @Override
     public String toString() {
-        return "I don't understand what you just entered >.<\n" + (char) 9 + (char) 9 + "Please re-enter!";
+        return "I don't understand what you just entered >.<\n" + "Please re-enter!";
     }
 }
