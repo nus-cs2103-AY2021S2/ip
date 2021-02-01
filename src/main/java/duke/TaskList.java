@@ -1,10 +1,8 @@
 package duke;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * The class that contains the task list. It has operations to add/delete

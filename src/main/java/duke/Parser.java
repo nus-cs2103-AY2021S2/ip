@@ -1,13 +1,11 @@
 package duke;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * The class that deals with making sense of the user command
  */
-public class Parser{
+public class Parser {
 
     /**
      * The main method that reads the input from the user.

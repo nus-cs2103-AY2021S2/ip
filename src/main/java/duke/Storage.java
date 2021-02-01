@@ -2,9 +2,9 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 /**
  * The class that deals with loading tasks from the file and saving tasks in the file.
@@ -14,9 +14,9 @@ class Storage {
     /**
      * Creates a new text file so that the list of tasks can be saved on the hard disk.
      */
-    public static void createFile() throws java.io.IOException  {
-        new File("./data").mkdirs();
+    public static void createFile() throws java.io.IOException {
         File textFile = new File("./data/duke.txt");
+        new File("./data").mkdirs();
         textFile.delete();
         textFile.createNewFile();
     }
@@ -66,7 +66,7 @@ class Storage {
      * @param taskList the corresponding task list to copy the text file over
      * @throws IOException whenever an issue with reading the file arises
      */
-    public static void convert(File file, ArrayList<Task> taskList) throws IOException{
+    public static void convert(File file, ArrayList<Task> taskList) throws IOException {
         Scanner scan = new Scanner(file);
         while (scan.hasNext()) {
             String[] parsed = splitter(scan.nextLine());
@@ -105,7 +105,7 @@ class Storage {
     }
 
     private static LocalDate dateConverter(String date) {
-        String month = date.substring(0,3);
+        String month = date.substring(0, 3);
         String day = date.split(" ")[1];
         String year = date.split(" ")[2];
         String numericalMonth = " ";
