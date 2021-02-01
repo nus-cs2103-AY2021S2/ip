@@ -1,3 +1,6 @@
+/**
+ * Task is a parent class for inheriting by specific tasks
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

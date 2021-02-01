@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Storage loads existing tasks from the file and saves tasks to the file when required
+ */
 public class Storage {
     private String filePath;
 

@@ -1,5 +1,8 @@
 import java.time.LocalDate;
 
+/**
+ * Parser makes sense of the user command and act accordingly
+ */
 public class Parser {
     private String taskType;
     private String description;

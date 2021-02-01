@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is a Task object that is define by a due date
+ */
 public class Deadline extends Task implements DueDate {
     protected LocalDate time;
 

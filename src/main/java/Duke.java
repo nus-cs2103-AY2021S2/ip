@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
+/**
+ * Duke allows the user to maintain a list of tasks
+ */
 public class Duke {
 
     private Storage storage;

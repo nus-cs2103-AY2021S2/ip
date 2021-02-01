@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * TaskList stores a list of Task Objects
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 

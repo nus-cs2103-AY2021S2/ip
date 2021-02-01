@@ -1,3 +1,6 @@
+/**
+ * Todo is a Task object that does not have a due date
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
