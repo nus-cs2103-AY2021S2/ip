@@ -19,17 +19,20 @@ public class Duckie {
         }
     }
 
-    public void run() throws IOException, DuckieException {
+    public void run() throws IOException {
         storage.loadTasks();
         ui.startMessage();
         boolean isEnd = false;
         while (!isEnd) {
-            String fullInput = ui.readInput();
-            ui.customLine();
-            Command c = Parser.parse(fullInput);
-            c.execute(lst, ui, storage);
-            isEnd = c.isEnd();
-
+            try {
+                String fullInput = ui.readInput();
+                ui.customLine();
+                Command c = Parser.parse(fullInput);
+                c.execute(lst, ui, storage);
+                isEnd = c.isEnd();
+            } catch (DuckieException e) {
+                e.printStackTrace();
+            }
         }
         storage.saveTasks(lst.getTaskList());
         ui.endMessage();
