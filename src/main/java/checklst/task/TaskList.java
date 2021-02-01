@@ -1,6 +1,8 @@
 package checklst.task;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import checklst.exception.ChecklstException;
 
@@ -9,7 +11,18 @@ import checklst.exception.ChecklstException;
  */
 public class TaskList {
     
-    private final ArrayList<Task> taskList = new ArrayList<>();
+    private final List<Task> taskList;
+
+    /**
+     * Creates a new TaskList object. 
+     */
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
+
+    private TaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     /**
      * Adds a Task to the TaskList.
@@ -59,6 +72,24 @@ public class TaskList {
         return newTask;
     }
 
+    /**
+     * Returns a TaskList with the filtered tasks.
+     * @param input String to filter by.
+     * @return Filtered TaskList
+     * @throws ChecklstException Exception when no items are found.
+     */
+    public TaskList findTask(String input) throws ChecklstException {
+        List<Task> filteredList = this.taskList.stream()
+            .filter(x -> x.name.contains(input))
+            .collect(Collectors.toList());
+        
+        if (filteredList.size() == 0) {
+            throw new ChecklstException("No results found!!");
+        }
+
+        return new TaskList(filteredList);
+    }
+
     @Override
     public String toString() {
         if (taskList.size() == 0) {
@@ -72,7 +103,7 @@ public class TaskList {
         return taskListOutput;
     }
 
-    protected ArrayList<Task> getTaskList() {
+    protected List<Task> getTaskList() {
         return this.taskList;
     }
 
