@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+}
+
+archivesBaseName = 'Duke'
+mainClassName = 'duke.Duke'
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+}
