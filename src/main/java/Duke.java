@@ -1,7 +1,4 @@
-import main.java.Ui;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.*;
+package main.java;
 
 public class Duke {
 

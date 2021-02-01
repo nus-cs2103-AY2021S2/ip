@@ -1,10 +1,9 @@
+package main.java;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import main.java.Ui;
 
 public class Parser {
 
@@ -12,6 +11,10 @@ public class Parser {
 
     public Parser() {
 
+    }
+
+    public static ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     public static void addTask(Task newTask) {
@@ -40,9 +43,9 @@ public class Parser {
         System.out.println("Nice! I've marked this task as done: " + "\n" + task.toString());
     }
 
-    public static void saveTaskList() {
+    /*public static void saveTaskList() {
         try {
-            File file = new File("src\\main\\duke.txt");
+            File file = new File("src\\main\\main.java.duke.txt");
             FileWriter fw = new FileWriter(file);
             //PrintWriter pw = new PrintWriter(file);
             for (int i = 0; i < taskList.size(); ++i) {
@@ -53,12 +56,12 @@ public class Parser {
         } catch (Exception ex) {
             System.out.println("error" + ex.getMessage());
         }
-    }
+    }*/
 
     public static void loadTaskList() throws Exception {
         String line  = null;
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\main\\duke.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\main.java.duke\\main.java.duke.txt"));
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
@@ -150,7 +153,7 @@ public class Parser {
             } else if (input.equals("list")) {
                 listTask();
             } else if (input.equals("save")) {
-                saveTaskList();
+                Storage.saveTaskList();
             } else if (input.equals("load")) {
                 loadTaskList();
             } else {
