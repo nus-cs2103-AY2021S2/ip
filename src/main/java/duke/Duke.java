@@ -1,8 +1,7 @@
 package duke;
 
-import java.util.Scanner;
-
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * An interactive chat bot made for CS2103 individual project.
@@ -11,6 +10,9 @@ public class Duke {
     protected Ui ui;
     protected TaskList tasks;
 
+    /**
+     * Initialises Duke.
+     */
     public Duke() {
         this.ui = new Ui(new Scanner(System.in));
         this.tasks = new TaskList();

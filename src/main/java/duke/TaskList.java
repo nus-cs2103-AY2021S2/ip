@@ -1,9 +1,8 @@
 package duke;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles initialisation and maintenance of task list.
