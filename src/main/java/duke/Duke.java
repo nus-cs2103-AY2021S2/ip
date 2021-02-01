@@ -3,6 +3,11 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
+ * The types of tasks the user can add are: todo, deadline, event.
+ * The user can also delete, check as done, and list tasks.
+ */
 public class Duke {
 
     private static final String horizontalLine = "____________________________________________________________";
@@ -12,6 +17,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for Duke class.
+     * Initializes Ui, Parser, Storage and TaskList objects.
+     * @param filePath file path to file where user wants his task list saved and loaded.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -19,12 +29,18 @@ public class Duke {
         tasks = new TaskList(storage.loadTasks());
     }
 
+    /**
+     * Initializes a Duke object with specified file path and calls run method.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Processes user input and interacts with Ui and TaskList objects.
+     */
     public void run() {
-
         Scanner sc = new Scanner(System.in);
         ui.greetings();
         boolean continueReading = true;
