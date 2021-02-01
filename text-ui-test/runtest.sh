@@ -5,9 +5,9 @@
 ## IT IS RUN, AND NOT WHERE THE FILE IS LOCATED
 
 # create bin directory if it doesn't exist
-if [ ! -d "../bin" ]
+if [ ! -d "../bin/dbot" ]
 then
-    mkdir ../bin
+    mkdir ../bin/dbot
 fi
 
 # delete output from previous run
@@ -17,14 +17,14 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../../out/production/CS2103 -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp ../../out/production/CS2103 -Xlint:none -d ../bin/dbot ../src/main/java/dbot/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin/dbot DBot < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
