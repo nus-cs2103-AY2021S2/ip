@@ -9,7 +9,7 @@ import lihua.commands.HelpCommand;
 import lihua.commands.ListCommand;
 
 /**
- * Messages class containing static messages of Lihua.
+ * Messages class containing static messages of lihua.entry.Lihua.
  */
 public class Messages {
     /** Hello message */
