@@ -5,7 +5,13 @@ import java.time.LocalDate;
  * Class that deals with interactions with the user.
  */
 class Ui {
-    
+
+    /**
+     * This method will process the command and call other methods
+     *
+     * @param input the processed data input
+     * @param taskList the taskList which stores the task
+     */
     protected void processCommand(String[] input, TaskList taskList) {
         try {
             if (input[0].equals("list")) {
