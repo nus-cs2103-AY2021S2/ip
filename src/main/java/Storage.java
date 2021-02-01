@@ -49,7 +49,7 @@ public class Storage {
             String[] sArr = s.split("\\|", 4);
 
             if (sArr[0].trim().equals("D")) {
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+                SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
                 Date date = null;
                 try {
                     date = format.parse(sArr[3].trim());
@@ -65,7 +65,7 @@ public class Storage {
                 }
                 AL.add(tempD);
             } else if (sArr[0].trim().equals("E")) {
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+                SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
                 Date date = null;
                 try {
                     date = format.parse(sArr[3].trim());
