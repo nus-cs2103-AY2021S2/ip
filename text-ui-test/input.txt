@@ -1,14 +1,19 @@
 todo go work
-deadline project /by Thurs
-event dinner at mcdonalds /at Sun 8-10
-todo
-deadline
-deadline homework
-event
-event sleep
+deadline do project /by 2019-01-31
+deadline go work /by 2012-05-31
+event interview /at 2022-01-31
+event sleep /at 2019-01-31
+ded
+deadline di sod
+event 111
+event holiday /at 2019-1-31
 list
-done 1
-done 4
-done a
-don
+done 2
+done 3
+done 89
+list
+show 2019-01-31
+show 2022-01-31
+show 2069-04-20
+show 222222-3-111111
 bye

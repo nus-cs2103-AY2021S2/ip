@@ -1,15 +1,13 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DukeList {
     private ArrayList<Task> list;
 
     public DukeList() {
-        this.list = new ArrayList<Task>();
+        this.list = new ArrayList<>();
     }
 
     public void add(Task item) {
@@ -44,12 +42,33 @@ public class DukeList {
     }
 
     /**
+     * Prints all task on a given day
+     * @param day yyyy-mm-dd format
+     */
+    public void showTaskOnDay(LocalDate day) {
+        int counter = 1;
+        for (Task curr : list) {
+            if (curr instanceof Deadlines) {
+                if (((Deadlines) curr).getBy().equals(day)) {
+                    System.out.println(counter + "." +curr);
+                    counter++;
+                }
+            } else if (curr instanceof Events) {
+                if (((Events) curr).getDuration().equals(day)) {
+                    System.out.println(counter + "." + curr);
+                    counter++;
+                }
+            }
+        }
+    }
+
+    /**
      * Prints DukeList object
      */
     public void printAll() {
         int size = list.size();
         for (int i = 0; i < size; i++) {
-            System.out.println(Integer.toString(i + 1) + "." + list.get(i));
+            System.out.println((i + 1) + "." + list.get(i));
         }
     }
 

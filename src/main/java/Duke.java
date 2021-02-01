@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -38,7 +41,7 @@ public class Duke {
             if (input.equals("bye")) {
                 try {
                     list.writeToFile(path);
-                    System.out.println(topBound + "Good bye! Stay calm and keep coding o7" + bottomBound);
+                    System.out.println(topBound + "Good bye! Stay calm and keep coding o7." + bottomBound);
                     sc.close();
                 } catch (IOException e) {
                     System.out.println("Error in saving list!");
@@ -46,7 +49,7 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 System.out.println(bound);
-                System.out.println("Here are the tasks in your list");
+                System.out.println("Here are the tasks in your list:");
                 list.printAll();
                 System.out.println(topBound);
             } else if (arr[0].startsWith("done")) {
@@ -58,11 +61,11 @@ public class Duke {
                             + bottomBound);
                 } catch (IndexOutOfBoundsException e) {
                     // Task number x does not exist
-                    System.out.println(topBound + "Task does not exist and can not be completed!" + bottomBound);
+                    System.out.println(topBound + "Uh oh! Task does not exist and can not be completed!" + bottomBound);
                 } catch (NumberFormatException e) {
                     // parameter for done is not an Integer
-                    System.out.println(topBound + "done must be followed by an Integer ie. done 1. Try again!"
-                            + bottomBound);
+                    System.out.println(topBound + "Uh oh! done must be followed by an Integer ie. done 1.\nTry again!"
+                        + bottomBound);
                 }
             } else if (arr[0].startsWith("todo")) {
                 try {
@@ -85,16 +88,18 @@ public class Duke {
                     if (taskName.equals("")) {
                         throw new DukeException("deadline");
                     }
-                    Deadlines curr = new Deadlines(taskName, arr[1].replaceFirst("by", "")
-                            .stripLeading());
+                    LocalDate d = LocalDate.parse(arr[1].replaceFirst("by", "").stripLeading());
+                    Deadlines curr = new Deadlines(taskName, d);
                     list.add(curr);
                     System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
                             + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
                 } catch (DukeException e) {
                     // command came without a description
                     System.out.println(topBound + e.getMessage() + bottomBound);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(topBound + "deadline must include '/by time'. Try again!" + bottomBound);
+                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+                    // command came without proper date time format
+                    System.out.println(topBound
+                            + "Uh Oh! event must include '/at YYYY-MM-DD'.\nTry again!" + bottomBound);
                 }
             } else if (arr[0].startsWith("event")) {
                 try {
@@ -102,15 +107,18 @@ public class Duke {
                     if (taskName.equals("")) {
                         throw new DukeException("event");
                     }
-                    Events curr = new Events(taskName, arr[1].replaceFirst("at", "").stripLeading());
+                    LocalDate d = LocalDate.parse(arr[1].replaceFirst("at", "").stripLeading());
+                    Events curr = new Events(taskName, d);
                     list.add(curr);
                     System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
                             + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
                 } catch (DukeException e) {
                     // command came without a description
                     System.out.println(topBound + e.getMessage() + bottomBound);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(topBound + "event must include '/at duration'. Try again!" + bottomBound);
+                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+                    // command came without proper date time format
+                    System.out.println(topBound
+                            + "Uh Oh! event must include '/at YYYY-MM-DD'.\nTry again!" + bottomBound);
                 }
             } else if (arr[0].startsWith("delete")) {
                 try {
@@ -122,15 +130,26 @@ public class Duke {
                             + list.noOfTasks() + " tasks left in the list." + bottomBound);
                 } catch (IndexOutOfBoundsException e) {
                     // task number x does not exist
-                    System.out.println(topBound + "Task does not exist and cannot be deleted!" + bottomBound);
+                    System.out.println(topBound + "Uh Oh! Task does not exist and cannot be deleted!" + bottomBound);
                 } catch (NumberFormatException e) {
                     // parameter for delete is not an Integer
-                    System.out.println(topBound + "delete must be followed by an Integer, ie. delete 1. Try again!"
-                            + bottomBound);
+                    System.out.println(topBound
+                            + "Uh Oh! delete must be followed by an Integer, ie. delete 1.\nTry again!" + bottomBound);
+                }
+            } else if (arr[0].startsWith("show")) {
+                try {
+                    LocalDate day = LocalDate.parse(arr[0].replaceFirst("show", "").stripLeading());
+                    System.out.println(topBound + "Here are your tasks on " +
+                            day.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":");
+                    list.showTaskOnDay(day);
+                    System.out.println(bound);
+                } catch (DateTimeParseException e) {
+                    System.out.println(topBound
+                            + "Uh Oh! show must be followed by a date in YYYY-MM-DD format.\nTry again!" + bottomBound);
                 }
             } else {
                 // unknown command
-                System.out.println(topBound + "OOPS!!! I'm sorry, but I don't know what that means :-(" + bottomBound);
+                System.out.println(topBound + "Uh Oh! I'm sorry, but I don't know what that means." + bottomBound);
             }
         }
     }
@@ -152,17 +171,17 @@ public class Duke {
             } else if (currArray[0].equals("D")) {
                 Deadlines currTask;
                 if (currArray[1].equals("0")) {
-                    currTask = new Deadlines(currArray[2], currArray[3]);
+                    currTask = new Deadlines(currArray[2], LocalDate.parse(currArray[3]));
                 } else {
-                    currTask = new Deadlines(currArray[2], currArray[3], true);
+                    currTask = new Deadlines(currArray[2], LocalDate.parse(currArray[3]), true);
                 }
                 list.add(currTask);
             } else if (currArray[0].equals("E")) {
                 Events currTask;
                 if (currArray[1].equals("0")) {
-                    currTask = new Events(currArray[2], currArray[3]);
+                    currTask = new Events(currArray[2], LocalDate.parse(currArray[3]));
                 } else {
-                    currTask = new Events(currArray[2], currArray[3], true);
+                    currTask = new Events(currArray[2], LocalDate.parse(currArray[3]), true);
                 }
                 list.add(currTask);
             }
