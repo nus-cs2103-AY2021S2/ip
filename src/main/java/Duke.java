@@ -5,10 +5,12 @@ import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 // Courtesy of https://se-education.org/guides/tutorials/javaFxPart2.html
+import duke.ui.Ui;
+import duke.ui.UiGui;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,13 +19,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
 
     private FileLoader loader;
     private TaskList tasks;
-    private final Ui ui = new Ui();
+    private Ui ui;
     private boolean isLocalTaskList; // in event file cannot be written to
 
     // JavaFX
@@ -33,19 +36,19 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
+    private static final Font FONT = new Font("Consolas", 10);
 
-    public Duke() {}
+    public Duke() {
+    }
 
     /**
      * Initializes the main program given directory used to save user tasks.
      *
      * Attempts to load the task list from the file, displaying the status
      * of the task list depending on load success.
-     *
-     * @param filePath UNIX-like directory path to file.
-     *                 Does not need to be initialized beforehand.
      */
-    public Duke(String filePath) {
+    private void initDuke() {
+        String filePath = "./dukeData/tasks.txt";
         ui.showWelcomeScreen();
         isLocalTaskList = false;
         try {
@@ -69,36 +72,11 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * Executes the main REPL for the program.
-     */
-    public void run() {
-        boolean isProgramTerminating = false;
-        while (!isProgramTerminating) {
-            try {
-                String input = ui.getUserInput(">>> ");
-                DukeCommand cmd = DukeCommand.parse(input);
-                cmd.execute(tasks, ui, loader);
-                isProgramTerminating = cmd.isExit();
-            } catch (DukeExceptionFileNotWritable e) {
-                if (isLocalTaskList) {
-                    continue;
-                }
-                ui.showError(e);
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("./dukeData/tasks.txt").run();
-    }
-
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        ui = new UiGui(dialogContainer);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -114,11 +92,11 @@ public class Duke extends Application {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600);
-        stage.setMinWidth(400);
+        stage.setMinWidth(600);
 
-        mainLayout.setPrefSize(400, 600);
+        mainLayout.setPrefSize(600, 600);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(585, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
@@ -126,7 +104,7 @@ public class Duke extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325);
+        userInput.setPrefWidth(525);
 
         sendButton.setPrefWidth(55);
 
@@ -137,22 +115,34 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+        initDuke();
+
     }
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
+    private void handleUserInput() {
+        try {
+            String input = userInput.getText();
+            DukeCommand cmd = DukeCommand.parse(input);
+            cmd.execute(tasks, ui, loader);
+            if (cmd.isExit()) {
+                Platform.exit();
+            }
+        } catch (DukeExceptionFileNotWritable e) {
+            if (!isLocalTaskList) {
+                ui.showError(e);
+            }
+        } catch (DukeException e) {
+            ui.showError(e);
+        }
+        userInput.clear();
     }
 }
