@@ -95,11 +95,10 @@ public class Duke {
             case DONE:
                 try {
                     int taskNum = Integer.parseInt(userInput.split(" ")[1]);
-                    Task task = tasks.getTask(taskNum);
-                    Task updatedTask = task.markDone();
-                    tasks.updateTask(taskNum, updatedTask);
+                    tasks.markDone(taskNum);
+                    Task taskUpdated = tasks.getTask(taskNum);
                     response = "Nice! I've marked this task as done: \n"
-                            + " " + updatedTask + "\n";
+                            + " " + taskUpdated + "\n";
                     ui.respond(response);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException("DONE");
