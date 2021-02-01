@@ -9,6 +9,9 @@ public class Parser {
     private LocalDate due;
     private int num;
 
+    /**
+     * Constructs an empty Parser
+     */
     public Parser() {
         this.taskType = null;
         this.description = null;
@@ -16,6 +19,13 @@ public class Parser {
         this.num = -1;
     }
 
+    /**
+     * Constructs a Parser with details on the Task of concern
+     * @param taskType type of task
+     * @param description description of task
+     * @param due due date of task
+     * @param num the index of the task of concern
+     */
     private Parser(String taskType, String description, LocalDate due, int num) {
         this.taskType = taskType;
         this.description = description;
@@ -23,6 +33,11 @@ public class Parser {
         this.num = num;
     }
 
+    /**
+     * Makes sense of the command entered by user
+     * @param input Command entered by user
+     * @return A Parser containing details of the task of concern
+     */
     public Parser parse(String input) {
         try {
             String[] parts = input.split(" ");
@@ -80,6 +95,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the type for the task of concern
+     * @param parts Array containing the command entered by the user
+     * @param delimiter String used for identifying due date of the task
+     * @return Description of the task
+     */
     private String getDescription(String[] parts, String delimiter) {
         String description = "";
         boolean first = true;
@@ -98,6 +119,12 @@ public class Parser {
         return description;
     }
 
+    /**
+     * Obtains the due date of the task of concern
+     * @param parts Array containing the command entered by the user
+     * @param delimiter String used for identifying due date of the task
+     * @return Due date of the task of concern
+     */
     private LocalDate getDueDate(String[] parts, String delimiter) {
         boolean flag = false, first = true;
         String dueDate = "";
@@ -117,18 +144,34 @@ public class Parser {
         return LocalDate.parse(dueDate);
     }
 
+    /**
+     * Returns a string about the type of task
+     * @return Type of task
+     */
     public String getTaskType() {
         return this.taskType;
     }
 
+    /**
+     * Returns a string containing description of the task of concern
+     * @return Description of task
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Returns the due date of the task of concern
+     * @return Due date of the task
+     */
     public LocalDate getDueDate() {
         return this.due;
     }
 
+    /**
+     * Returns the index of the task of concern within the TaskList
+     * @return Index of the task of concern within the TaskList
+     */
     public int getTaskIdx() {
         return this.num;
     }
