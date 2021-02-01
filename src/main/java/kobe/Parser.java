@@ -15,16 +15,22 @@ public class Parser {
         String[] commandArr = command.split(" ");
         String text = commandArr[0];
 
+//        switch (text) {
         if (text.equals("bye")) {
+//            case "bye":
             Commands.goodbye(storage);
+//            case "list":
         } else if (text.equals("list")) {
             Commands.showList(tasks, ui);
+//            case "done":
         } else if (text.equals("done")) {
             int taskNumber = Integer.parseInt(commandArr[1]) - 1;
             tasks.completeTask(taskNumber, ui);
+//            case "delete":
         } else if (text.equals("delete")) {
             int taskNumber = Integer.parseInt(commandArr[1]) - 1;
             tasks.deleteTask(taskNumber, ui);
+//            default:
         } else {
             String taskName = "";
             String type = text;
