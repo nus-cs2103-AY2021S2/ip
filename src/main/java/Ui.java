@@ -73,6 +73,26 @@ public class Ui {
             msg += "     Now you have " + tasks.size() + " tasks in the list.";
             System.out.println(this.format(msg));
             return tasks;
+        } else if (parser.getTaskType().equals("find")) {
+            String toFind = parser.getDescription();
+            ArrayList<Task> taskList = tasks.getList();
+            String msg = "     Here are the matching tasks in your list:\n";
+            boolean first = true;
+            for (int i = 0; i < taskList.size(); ++i) {
+                if (taskList.get(i).getDescription().contains(toFind)) {
+                    if (first) {
+                        msg += "     " + (i + 1) + "." + taskList.get(i).toString();
+                        first = false;
+                    } else {
+                        msg += "\n     " + (i + 1) + "." + taskList.get(i).toString();
+                    }
+                }
+            }
+            if (first) {
+                msg = "     There are no matching tasks";
+            }
+            System.out.println(this.format(msg));
+            return tasks;
         } else if (parser.getTaskType().equals("todo")) {
             String msg = "     Got it. I've added this task:\n";
             String taskDescription = parser.getDescription();
@@ -101,6 +121,8 @@ public class Ui {
             msg += "     Now you have " + tasks.size() + " tasks in the list.";
             System.out.println(this.format(msg));
             return tasks;
+        } else {
+            System.out.println(this.format(parser.getDescription()));
         }
         return tasks;
     }
