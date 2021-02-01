@@ -24,10 +24,6 @@ public class Task {
         this.isDone = true;
     }
 
-    public void markAsUndone() {
-        this.isDone = false;
-    }
-
     public String getStatusIcon() {
         //return tick or X symbols
         return (isDone ? "\u2713" : "\u2718");

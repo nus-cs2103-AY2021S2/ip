@@ -68,40 +68,37 @@ public class Duke {
      * @throws DukeException If there is no message after the todo command.
      */
     public void run() {
-        final String exitCommand = "bye";
-        final String listCommand = "list";
-        final String doneCommand = "done";
-        final String deleteCommand = "delete";
-        final String addTodoCommand = "todo";
-        final String addDeadlineCommand = "deadline";
-        final String addEventCommand = "event";
+        final String EXIT_COMMAND = "bye";
+        final String LIST_COMMAND = "list";
+        final String DONE_COMMAND = "done";
+        final String DELETE_COMMAND = "delete";
+        final String ADD_TODO_COMMAND = "todo";
+        final String ADD_DEADLINE_COMMAND = "deadline";
+        final String ADD_EVENT_COMMAND = "event";
         ui.printWelcomeGreeting();
         Scanner sc = new Scanner(System.in);
         boolean isBye = false;
         while (!isBye) {
-            //task taken in
             String command = sc.nextLine();
             String[] commandArr = command.split(" ");
             Task newTask;
             ui.printHorizontalRule();
             try {
                 switch (commandArr[0]) {
-                case exitCommand:
+                case EXIT_COMMAND:
                     ui.printExitMessage();
                     sc.close();
-                    //add data back into the file
                     storage.writeData(tasks.getTaskList());
                     isBye = true;
                     break;
-                case listCommand:
-                    ui.printTasks(tasks);
-                    ui.printHorizontalRule();
+                case LIST_COMMAND:
+                    ui.printTaskList(tasks);
                     break;
-                case doneCommand:
+                case DONE_COMMAND:
                     int taskNumber = Integer.parseInt(commandArr[1]);
                     ui.printDoneTask(tasks, taskNumber);
                     break;
-                case addTodoCommand:
+                case ADD_TODO_COMMAND:
                     if (commandArr.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -110,15 +107,15 @@ public class Duke {
                         ui.printAddedTask(tasks, newTask);
                     }
                     break;
-                case addDeadlineCommand:
+                case ADD_DEADLINE_COMMAND:
                     newTask = parser.parseAddDeadline(command);
                     ui.printAddedTask(tasks, newTask);
                     break;
-                case addEventCommand:
+                case ADD_EVENT_COMMAND:
                     newTask = parser.parseAddEvent(command);
                     ui.printAddedTask(tasks, newTask);
                     break;
-                case deleteCommand:
+                case DELETE_COMMAND:
                     int taskNumToBeDeleted = parser.parseDeleteCommand(command);
                     ui.printDeletedTask(tasks, taskNumToBeDeleted);
                     break;

@@ -39,10 +39,11 @@ public class Ui {
      * Prints the tasks is users TaskList line by line
      * @param userList TaskList of the user
      */
-    public void printTasks(TaskList userList) {
+    public void printTaskList(TaskList userList) {
         for (int i = 0; i < userList.getTaskListSize(); i++) {
             System.out.println(i + 1 + "." + userList.getTask(i).toString());
         }
+        System.out.println(HORIZONTAL_RULE);
     }
 
     /**
