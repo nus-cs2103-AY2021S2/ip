@@ -35,27 +35,31 @@ public class Duke {
 
         System.out.println(topBound + logo + "\nHello! I'm Duke\nWhat can I do for you today?" + bottomBound);
 
-        while (sc.hasNextLine()) {
+         inputLoop: while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] arr = input.split("/");
-            if (input.equals("bye")) {
+            String[] commandArray = input.split(" ", 2); //extracts the command word from the rest of the input
+            String commandWord = commandArray[0];
+
+            switch (commandWord) {
+            case "bye":
                 try {
                     list.writeToFile(path);
                     System.out.println(topBound + "Good bye! Stay calm and keep coding o7." + bottomBound);
                     sc.close();
+
                 } catch (IOException e) {
                     System.out.println("Error in saving list!");
                 }
-                break;
-            } else if (input.equals("list")) {
+                break inputLoop;
+            case "list":
                 System.out.println(bound);
                 System.out.println("Here are the tasks in your list:");
                 list.printAll();
                 System.out.println(topBound);
-            } else if (arr[0].startsWith("done")) {
+                break;
+            case "done":
                 try {
-                    String[] doneArr = arr[0].split(" ");
-                    int x = Integer.parseInt(doneArr[1]) - 1;
+                    int x = Integer.parseInt(commandArray[1]) - 1;
                     list.done(x);
                     System.out.println(topBound + "Good job! I've marked this task as done:\n" + "  " + list.get(x)
                             + bottomBound);
@@ -65,65 +69,18 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     // parameter for done is not an Integer
                     System.out.println(topBound + "Uh oh! done must be followed by an Integer ie. done 1.\nTry again!"
-                        + bottomBound);
+                            + bottomBound);
                 }
-            } else if (arr[0].startsWith("todo")) {
+                break;
+            case "reset":
+                System.out.println(bound);
+                list.deleteAll();
+                System.out.println("All tasks deleted!");
+                System.out.println(topBound);
+                break;
+            case "delete":
                 try {
-                    String taskName = input.replaceFirst("todo", "").stripLeading();
-                    if (taskName.equals("")) {
-                        throw new DukeException("todo");
-                    }
-                    ToDos curr = new ToDos(taskName);
-                    list.add(curr);
-                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
-                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
-                } catch (DukeException e) {
-                    // command came without a description
-                    System.out.println(topBound + e.getMessage() + bottomBound);
-                }
-            } else if (arr[0].startsWith("deadline")) {
-                try {
-                    String taskName = arr[0].replaceFirst("deadline", "").stripLeading()
-                            .stripTrailing();
-                    if (taskName.equals("")) {
-                        throw new DukeException("deadline");
-                    }
-                    LocalDate d = LocalDate.parse(arr[1].replaceFirst("by", "").stripLeading());
-                    Deadlines curr = new Deadlines(taskName, d);
-                    list.add(curr);
-                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
-                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
-                } catch (DukeException e) {
-                    // command came without a description
-                    System.out.println(topBound + e.getMessage() + bottomBound);
-                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-                    // command came without proper date time format
-                    System.out.println(topBound
-                            + "Uh Oh! event must include '/at YYYY-MM-DD'.\nTry again!" + bottomBound);
-                }
-            } else if (arr[0].startsWith("event")) {
-                try {
-                    String taskName = arr[0].replaceFirst("event", "").stripLeading().stripTrailing();
-                    if (taskName.equals("")) {
-                        throw new DukeException("event");
-                    }
-                    LocalDate d = LocalDate.parse(arr[1].replaceFirst("at", "").stripLeading());
-                    Events curr = new Events(taskName, d);
-                    list.add(curr);
-                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
-                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
-                } catch (DukeException e) {
-                    // command came without a description
-                    System.out.println(topBound + e.getMessage() + bottomBound);
-                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-                    // command came without proper date time format
-                    System.out.println(topBound
-                            + "Uh Oh! event must include '/at YYYY-MM-DD'.\nTry again!" + bottomBound);
-                }
-            } else if (arr[0].startsWith("delete")) {
-                try {
-                    String str = arr[0].replaceFirst("delete", "").stripLeading();
-                    int x = Integer.parseInt(str) - 1;
+                    int x = Integer.parseInt(commandArray[1]) - 1;
                     Task curr = list.get(x);
                     list.delete(x);
                     System.out.println(topBound + "Got it! I've removed this task:\n" + " " + curr + "\n" + "You have "
@@ -136,20 +93,85 @@ public class Duke {
                     System.out.println(topBound
                             + "Uh Oh! delete must be followed by an Integer, ie. delete 1.\nTry again!" + bottomBound);
                 }
-            } else if (arr[0].startsWith("show")) {
+                break;
+            case "todo":
                 try {
-                    LocalDate day = LocalDate.parse(arr[0].replaceFirst("show", "").stripLeading());
+                    String[] parametersArray = commandArray[1].split("/");
+                    String taskName = parametersArray[0].stripTrailing();
+                    if (taskName.equals("")) {
+                        throw new DukeException("todo");
+                    }
+                    ToDos curr = new ToDos(taskName);
+                    list.add(curr);
+                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
+                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                } catch (DukeException e) {
+                    // command came without a description
+                    System.out.println(topBound + e.getMessage() + bottomBound);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(topBound
+                            + "Uh Oh! todo must include a name of the task.\nTry again!" + bottomBound);
+                }
+                break;
+            case "deadline":
+                try {
+                    String[] parametersArray = commandArray[1].split("/");
+                    String taskName = parametersArray[0].stripTrailing();
+                    if (taskName.equals("")) {
+                        throw new DukeException("deadline");
+                    }
+                    LocalDate d = LocalDate.parse(parametersArray[1].replaceFirst("by", "")
+                            .stripLeading());
+                    Deadlines curr = new Deadlines(taskName, d);
+                    list.add(curr);
+                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
+                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                } catch (DukeException e) {
+                    // command came without a description
+                    System.out.println(topBound + e.getMessage() + bottomBound);
+                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+                    // command came without proper date time format
+                    System.out.println(topBound
+                            + "Uh Oh! event must include '/at YYYY-MM-DD'.\nTry again!" + bottomBound);
+                }
+                break;
+            case "event":
+                try {
+                    String[] parametersArray = commandArray[1].split("/");
+                    String taskName = parametersArray[0].stripTrailing();
+                    if (taskName.equals("")) {
+                        throw new DukeException("event");
+                    }
+                    LocalDate d = LocalDate.parse(parametersArray[1].replaceFirst("at", "")
+                            .stripLeading());
+                    Events curr = new Events(taskName, d);
+                    list.add(curr);
+                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
+                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                } catch (DukeException e) {
+                    // command came without a description
+                    System.out.println(topBound + e.getMessage() + bottomBound);
+                } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+                    // command came without proper date time format
+                    System.out.println(topBound
+                            + "Uh Oh! event must include '/at YYYY-MM-DD'.\nTry again!" + bottomBound);
+                }
+                break;
+            case "show":
+                try {
+                    LocalDate day = LocalDate.parse(commandArray[1].replaceFirst("show", "").stripLeading());
                     System.out.println(topBound + "Here are your tasks on " +
                             day.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":");
                     list.showTaskOnDay(day);
                     System.out.println(bound);
-                } catch (DateTimeParseException e) {
+                } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
                     System.out.println(topBound
                             + "Uh Oh! show must be followed by a date in YYYY-MM-DD format.\nTry again!" + bottomBound);
                 }
-            } else {
-                // unknown command
+                break;
+            default:
                 System.out.println(topBound + "Uh Oh! I'm sorry, but I don't know what that means." + bottomBound);
+                break;
             }
         }
     }
@@ -159,7 +181,7 @@ public class Duke {
         while (s.hasNextLine()) {
             String curr = s.nextLine();
             String[] currArray = curr.split("\\|");
-
+            
             if (currArray[0].equals("T")) {
                 ToDos currTask;
                 if (currArray[1].equals("0")) {

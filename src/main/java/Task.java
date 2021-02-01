@@ -3,25 +3,25 @@ public class Task {
      * Task class stores a String as name of the task and boolean indicating task completion
      */
 
-    private String taskName;
-    private boolean done;
+    private final String taskName;
+    private boolean isDone;
 
     public Task(String name) {
         this.taskName = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     public Task(String name, boolean isDone) {
         this.taskName = name;
-        this.done = isDone;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {
-        done = true;
+        isDone = true;
     }
 
-    public boolean isDone() {
-        return done;
+    public boolean isTaskDone() {
+        return isDone;
     }
 
     public String getTaskName() {
@@ -30,7 +30,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[X] " + taskName;
         } else {
             return "[ ] " + taskName;

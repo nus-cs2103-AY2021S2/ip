@@ -5,13 +5,16 @@ import java.util.ArrayList;
 
 public class DukeList {
     private ArrayList<Task> list;
+    private int size;
 
     public DukeList() {
         this.list = new ArrayList<>();
+        this.size = 0;
     }
 
     public void add(Task item) {
         list.add(item);
+        size++;
     }
 
     public void done(int x) {
@@ -19,7 +22,7 @@ public class DukeList {
     }
 
     public int noOfTasks() {
-        return list.size();
+        return size;
     }
 
     /**
@@ -30,6 +33,14 @@ public class DukeList {
 
     public void delete(int x) {
         list.remove(x);
+        size--;
+    }
+
+    public void deleteAll() {
+        for (int i = size - 1; i >= 0; i--) {
+            list.remove(i);
+        }
+        size = 0;
     }
 
     /**
@@ -66,31 +77,29 @@ public class DukeList {
      * Prints DukeList object
      */
     public void printAll() {
-        int size = list.size();
         for (int i = 0; i < size; i++) {
             System.out.println((i + 1) + "." + list.get(i));
         }
     }
 
     public void writeToFile(String filePath) throws IOException {
-        int size = list.size();
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < size; i++) {
             Task curr = list.get(i);
             if (curr instanceof ToDos) {
-                if (curr.isDone()) {
+                if (curr.isTaskDone()) {
                     fw.write("T|1|" + curr.getTaskName() + "\n");
                 } else {
                     fw.write("T|0|" + curr.getTaskName() + "\n");
                 }
             } else if (curr instanceof  Events) {
-                if (curr.isDone()) {
+                if (curr.isTaskDone()) {
                     fw.write("E|1|" + curr.getTaskName() + "|" + ((Events) curr).getDuration() + "\n");
                 } else {
                     fw.write("E|0|" + curr.getTaskName() + "|" + ((Events) curr).getDuration() + "\n");
                 }
             } else {
-                if (curr.isDone()) {
+                if (curr.isTaskDone()) {
                     fw.write("D|1|" + curr.getTaskName() + "|" +  ((Deadlines) curr).getBy() + "\n");
                 } else {
                     fw.write("D|0|" + curr.getTaskName() + "|" +  ((Deadlines) curr).getBy() + "\n");

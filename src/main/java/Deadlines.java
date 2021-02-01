@@ -3,24 +3,24 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Task {
 
-    private LocalDate by;
+    private final LocalDate deadline;
 
-    public Deadlines(String name, LocalDate by) {
+    public Deadlines(String name, LocalDate deadline) {
         super(name);
-        this.by = by;
+        this.deadline = deadline;
     }
 
-    public Deadlines(String name, LocalDate by, boolean isDone) {
+    public Deadlines(String name, LocalDate deadline, boolean isDone) {
         super(name, isDone);
-        this.by = by;
+        this.deadline = deadline;
     }
 
     public LocalDate getBy() {
-        return by;
+        return deadline;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Events extends Task {
 
-    private LocalDate duration;
+    private final LocalDate duration;
 
     public Events(String name, LocalDate duration) {
         super(name);

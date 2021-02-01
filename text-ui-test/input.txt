@@ -1,19 +1,24 @@
 todo go work
-deadline do project /by 2019-01-31
-deadline go work /by 2012-05-31
-event interview /at 2022-01-31
-event sleep /at 2019-01-31
-ded
-deadline di sod
-event 111
-event holiday /at 2019-1-31
+deadline do homework /by 2021-01-01
+event go school /at 2021-01-01
+event go eat /at 2021-01-01
 list
-done 2
-done 3
-done 89
+done 1
+delete 3
 list
-show 2019-01-31
-show 2022-01-31
-show 2069-04-20
-show 222222-3-111111
+show 2021-01-01
+show 2222222222
+todo
+deadline
+event
+done
+delete
+deadline no date check
+event no date check
+done 99
+delete 99
+fuck
+you
+list
+reset
 bye
