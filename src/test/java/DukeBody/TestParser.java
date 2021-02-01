@@ -21,8 +21,8 @@ public class TestParser {
         String taskCommand = Parser.taskToCommand(event);
         Task reconstructedTask = Parser.commandToTask(taskCommand);
 
-        assertEquals(event.taskInformation(Parser.parseFormat),
-                reconstructedTask.taskInformation(Parser.parseFormat));
+        assertEquals(Parser.taskToCommand(reconstructedTask),
+                Parser.taskToCommand(event));
     }
 
     public void taskToCommandToTask_exceptionThrown () throws Event.EmptyDescriptionException {

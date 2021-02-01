@@ -4,14 +4,20 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import duketask.Task;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private String username;
 
     public Duke (String username) {
+        super();
+
         this.ui = new Ui();
         this.ui.brace();
         this.ui.greet();

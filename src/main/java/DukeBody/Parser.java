@@ -39,7 +39,7 @@ public class Parser {
     // members
     private static String delimiter = " :: ";
     private static DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(
-            "yyyy-MM-dd HHmm");
+        "yyyy-MM-dd HHmm");
 
     // methods
     /**
