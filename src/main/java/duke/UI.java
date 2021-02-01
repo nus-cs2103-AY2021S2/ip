@@ -10,7 +10,7 @@ import duke.command.Command;
 public class UI {
 
     // Welcome page.
-    private static final String welcome = " __________________________ \n"
+    private static final String WELCOME = " __________________________ \n"
             + "|  HI! THIS IS             |\n"
             + "|   ____        _          |\n"
             + "|  |  _ \\ _   _| | _____   |\n"
@@ -22,7 +22,7 @@ public class UI {
             + "|__________________________|\n";
 
     // Goodbye page.
-    private static final String bye = " __________________________ \n"
+    private static final String BYE = " __________________________ \n"
             + "|  GOOD BYE!               |\n"
             + "|   ____        _          |\n"
             + "|  |  _ \\ _   _| | _____   |\n"
@@ -56,7 +56,7 @@ public class UI {
         }
 
         list = Storage.loadToList();
-        return welcome;
+        return WELCOME;
     }
 
     /**
@@ -64,7 +64,7 @@ public class UI {
      */
     public static String saveAndGoodBye() {
         Storage.writeToData(list);
-        return bye;
+        return BYE;
     }
 
     /**

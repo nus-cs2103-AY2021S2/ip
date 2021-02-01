@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     private final String command;
 
     /**
-     * Delete command builder.
+     * Constructs a delete command.
      *
      * @param command Input string.
      */

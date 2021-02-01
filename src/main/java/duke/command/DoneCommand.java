@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     private final String command;
 
     /**
-     * Done command builder.
+     * Constructs a done command.
      *
      * @param command Input string.
      */

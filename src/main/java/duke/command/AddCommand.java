@@ -20,7 +20,7 @@ public class AddCommand extends Command {
     private final CommandType cmdType;
 
     /**
-     * Add command builder.
+     * Constructs an add command.
      *
      * @param command Input string.
      * @param cmdType Determine whether this command is TODO, EVENT or DEADLINE.
@@ -31,7 +31,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Check the validity of this command and build a todo task.
+     * Checks the validity of this command and build a todo task.
      *
      * @return Todo task.
      * @throws DukeException When command argument is invalid.
@@ -50,7 +50,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Check the validity of this command and build a event task.
+     * Checks the validity of this command and build a event task.
      *
      * @return Event task.
      * @throws DukeException When command argument is invalid.
@@ -80,7 +80,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Check the validity of this command and build a deadline task.
+     * Checks the validity of this command and build a deadline task.
      *
      * @return Deadline task.
      * @throws DukeException When command argument is invalid.
@@ -110,7 +110,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute and print command according to its command type.
+     * Executes and prints command according to its command type.
      *
      * @param list Passes TaskList in case of reading and writing to the list.
      * @throws DukeException When encounter an error in command argument.

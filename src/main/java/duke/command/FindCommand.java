@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     private final String command;
 
     /**
-     * Find command builder.
+     * Constructs a find command.
      *
      * @param command Input string.
      */
