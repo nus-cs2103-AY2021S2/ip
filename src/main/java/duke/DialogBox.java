@@ -10,10 +10,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -35,15 +39,17 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Allows dialog box to scale its height according to text contents
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setFitHeight(75);
-        displayPicture.setFitWidth(75);
+
+        // Clips image into circle
         Circle clip = new Circle();
-        clip.setCenterY(37.5);
-        clip.setCenterX(37.5);
-        clip.setRadius(37.5);
+        clip.setCenterY(35);
+        clip.setCenterX(35);
+        clip.setRadius(35);
         displayPicture.setClip(clip);
     }
 

@@ -27,7 +27,7 @@ public class DeadlineCommand extends Command {
     public void process() throws DukeException {
         Task task = Deadline.createDeadline(command);
         TaskList.addTask(task, Storage.getTasks());
-        Ui.displayAddedTask(task, Storage.getTasks());
         Storage.updateDataFile();
+        Ui.displayAddedTask(task, Storage.getTasks());
     }
 }

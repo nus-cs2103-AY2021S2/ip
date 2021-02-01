@@ -1,12 +1,16 @@
 package duke;
 
+import java.util.concurrent.CompletableFuture;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,11 +28,20 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
-
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mcspicy.png"));
+    private Image welcomeImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        ImageView logo = new ImageView(welcomeImage);
+        logo.setFitWidth(100);
+        logo.setPreserveRatio(true);
+        logo.setY(20);
+        dialogContainer.setAlignment(Pos.BASELINE_CENTER);
+        dialogContainer.getChildren().addAll(
+                logo, DialogBox.getDukeDialog(Ui.welcomeString(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -43,10 +56,24 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        DialogBox userDb = DialogBox.getUserDialog(input, userImage);
+        DialogBox dukeDb = DialogBox.getDukeDialog(response, dukeImage);
+
+        HBox.setHgrow(userDb, Priority.ALWAYS);
+        HBox.setHgrow(dukeDb, Priority.ALWAYS);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                userDb, dukeDb
         );
         userInput.clear();
+        if (input.equalsIgnoreCase("bye")) {
+            CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            cf.thenRun(Platform::exit).thenRun(() -> System.exit(0));
+        }
     }
 }

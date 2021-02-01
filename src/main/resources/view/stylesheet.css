@@ -1,9 +1,21 @@
 .dialogBox {
     -fx-background-insets: 5;
-    -fx-background-radius: 25;
     -fx-border-insets: 5;
-    -fx-border-radius: 25;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 5, 0.4, 0.0, 0.0);
-    -fx-font-size: 15;
     -fx-padding: 10;
+}
+
+.dialog {
+    -fx-background-radius: 25;
+    -fx-padding: 10;
+    -fx-font-size: 15;
+    -fx-background-color: gold;
+}
+
+.background {
+    -fx-background-color: red
+}
+
+.button {
+    -fx-background-color: gold;
+    -fx-background-radius: 20;
 }

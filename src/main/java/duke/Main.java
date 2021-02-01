@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -23,6 +24,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setTitle("Duke");
             stage.setScene(scene);
+            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
