@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -58,7 +58,7 @@ public class Parser {
         }
     }*/
 
-    public static void loadTaskList() throws Exception {
+    /*public static void loadTaskList() throws Exception {
         String line  = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\main.java.duke\\main.java.duke.txt"));
@@ -68,7 +68,7 @@ public class Parser {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    };
+    };*/
 
     public static void read() throws DukeException, Exception{
         Scanner sc = new Scanner(System.in);
@@ -155,7 +155,7 @@ public class Parser {
             } else if (input.equals("save")) {
                 Storage.saveTaskList();
             } else if (input.equals("load")) {
-                loadTaskList();
+                Storage.loadTaskList();
             } else {
                 throw new InvalidArgument("Your input is invalid, Please try again");
             }

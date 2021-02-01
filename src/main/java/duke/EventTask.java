@@ -1,13 +1,13 @@
-package main.java;
+package main.java.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class DeadlineTask extends Task {
+public class EventTask extends Task {
 
     protected String time;
 
-    public DeadlineTask(String description, String time) {
+    public EventTask(String description, String time) {
         super(description);
         this.time = time;
     }
@@ -22,7 +22,6 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + convertDateTime() + ")";
+        return "[E]" + super.toString() + " (at: " + convertDateTime() + ")";
     }
-
 }

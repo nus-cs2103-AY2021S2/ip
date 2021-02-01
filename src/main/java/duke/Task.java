@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 public class Task {
 
@@ -16,7 +16,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String done = this.isDone? "X" : " ";
+        String done = this.isDone? "\u2713" : "X";
         return "[" + done + "] " + this.description;
     }
 
