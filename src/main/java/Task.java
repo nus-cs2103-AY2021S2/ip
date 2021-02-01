@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-class Task {
+public class Task {
     private String description;
     private final String date;
     private final String time;
