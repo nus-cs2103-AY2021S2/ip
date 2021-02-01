@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import Exception.DukeException;
 
-import javax.lang.model.type.ArrayType;
 
 public class Parser {
     private TaskList taskList;
