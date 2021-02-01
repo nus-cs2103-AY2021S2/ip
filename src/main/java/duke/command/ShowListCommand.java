@@ -1,16 +1,16 @@
-package duke.command;
+package main.java.duke.command;
 
 import java.util.ArrayList;
 
-import duke.maincomponents.Storage;
-import duke.maincomponents.TaskList;
-import duke.maincomponents.Ui;
-import duke.task.Task;
+import main.java.duke.maincomponents.Storage;
+import main.java.duke.maincomponents.TaskList;
+import main.java.duke.maincomponents.Ui;
+import main.java.duke.task.Task;
 
 
 
 /**
- * ShowListCommand, which shows the tasks on duke Task List when executed
+ * ShowListCommand, which shows the tasks on main.java.duke Task List when executed
  */
 public class ShowListCommand implements Command {
     /**
@@ -20,7 +20,7 @@ public class ShowListCommand implements Command {
     }
 
     /**
-     * Executes ShowListCommand, which shows the tasks on duke Task List
+     * Executes ShowListCommand, which shows the tasks on main.java.duke Task List
      * @param dukeTaskList give dukeTaskList
      * @param dukeUi give dukeUi
      * @param dukeStorage give dukeStorage

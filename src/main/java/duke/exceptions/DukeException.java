@@ -1,4 +1,4 @@
-package duke.exceptions;
+package main.java.duke.exceptions;
 
 /**
  * Duke Exception, which is the exception Duke Components will throw

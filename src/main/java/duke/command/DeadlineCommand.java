@@ -1,12 +1,12 @@
-package duke.command;
+package main.java.duke.command;
 
 import java.util.ArrayList;
 
-import duke.maincomponents.TaskList;
-import duke.exceptions.DukeException;
-import duke.maincomponents.Storage;
-import duke.maincomponents.Ui;
-import duke.task.Task;
+import main.java.duke.maincomponents.TaskList;
+import main.java.duke.exceptions.DukeException;
+import main.java.duke.maincomponents.Storage;
+import main.java.duke.maincomponents.Ui;
+import main.java.duke.task.Task;
 
 /**
  * Deadline Command, which adds a deadline task to Duke's TaskList when executed
