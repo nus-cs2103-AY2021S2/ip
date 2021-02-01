@@ -1,0 +1,28 @@
+.scroll-pane > .viewport {
+   -fx-background-color: LAVENDER;
+}
+
+.label {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #555555;
+}
+
+.text-field {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.button:hover {
+    -fx-background-color: #bbbbbb;
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: #bbbbbb;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-insets: 3;
+}
+

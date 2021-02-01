@@ -23,6 +23,6 @@ public class HelpCommand extends Command {
                 + DeleteCommand.MESSAGE_USAGE + "\n\n"
                 + FindCommand.MESSAGE_USAGE + "\n\n"
                 + HelpCommand.MESSAGE_USAGE;
-        return new CommandResult(helpMessage);
+        return new CommandResult(helpMessage, false);
     }
 }

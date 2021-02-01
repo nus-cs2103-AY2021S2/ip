@@ -8,15 +8,17 @@ import duke.tasks.TaskList;
 public class CommandResult {
     private final String messageForUser;
     private final TaskList updatedTaskList;
+    private final boolean isExiting;
 
     /**
      * Creates a {@code CommandResult} object without an updated task list.
      *
      * @param messageForUser message string to show to user
      */
-    public CommandResult(String messageForUser) {
+    public CommandResult(String messageForUser, boolean isExiting) {
         this.messageForUser = messageForUser;
         updatedTaskList = null;
+        this.isExiting = isExiting;
     }
 
     /**
@@ -25,9 +27,10 @@ public class CommandResult {
      * @param messageForUser  message string to show to user
      * @param updatedTaskList updated task list after execution of a command
      */
-    public CommandResult(String messageForUser, TaskList updatedTaskList) {
+    public CommandResult(String messageForUser, TaskList updatedTaskList, boolean isExiting) {
         this.messageForUser = messageForUser;
         this.updatedTaskList = updatedTaskList;
+        this.isExiting = isExiting;
     }
 
     /**
@@ -46,6 +49,10 @@ public class CommandResult {
      */
     public TaskList getUpdatedTaskList() {
         return updatedTaskList;
+    }
+    
+    public boolean isExitingProgram() {
+        return isExiting;
     }
 
     @Override

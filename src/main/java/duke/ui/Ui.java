@@ -1,69 +1,43 @@
 package duke.ui;
 
-import java.io.PrintStream;
-import java.util.Scanner;
+import java.io.IOException;
+
+import duke.Main;
+import duke.MainWindow;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Handles the input/output of the application.
  * Responsible for getting user input and printing messages to the console.
  */
 public class Ui {
-    private static final String DIVIDER = "------------------------------------------------------------";
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
 
-    private final Scanner in;
-    private final PrintStream out;
+    private Storage storage;
+    private TaskList taskList;
 
-    /**
-     * Creates a {code Ui} object with a standard input reader and a standard output writer.
-     */
-    public Ui() {
-        in = new Scanner(System.in);
-        out = System.out;
+    public Ui(Storage storage, TaskList taskList) {
+        this.storage = storage;
+        this.taskList = taskList;
     }
 
-    /**
-     * Reads the user input string.
-     *
-     * @return full user input string
-     */
-    public String getUserInput() {
-        return in.nextLine();
-    }
-
-    /**
-     * Prints a horizontal line dividing separate messages.
-     */
-    public void printDivider() {
-        out.println(DIVIDER);
-    }
-
-    /**
-     * Prints the welcome greeting.
-     */
-    public void printGreeting() {
-        String welcomeMsg = String.format("Hello! I'm\n%s\nWhat can I do for you?", LOGO);
-        out.println(welcomeMsg);
-    }
-
-    /**
-     * Prints the exit message.
-     */
-    public void printExitMessage() {
-        out.println(MESSAGE_EXIT);
-    }
-
-    /**
-     * Prints the message to be shown to the user to the console.
-     *
-     * @param messageForUser message to be shown to user
-     */
-    public void print(String messageForUser) {
-        out.println(messageForUser);
+    public void start(Stage primaryStage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            VBox vBox = fxmlLoader.load();
+            Scene scene = new Scene(vBox);
+            fxmlLoader.<MainWindow>getController().setComponents(storage, taskList, primaryStage);
+            scene.getStylesheets().add(Main.class.getResource("/view/Background.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
