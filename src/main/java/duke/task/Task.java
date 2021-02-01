@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 
-import duke.Ui;
+import duke.Helper;
 
 /**
  * Skeleton class for all tasks.
@@ -26,7 +26,7 @@ public abstract class Task {
     */
     public String done() {
         this.isDone = true;
-        return Ui.formatStringArray(new String[] {"Nice! I've marked this task as done:", this.toString()});
+        return Helper.formatStringArray(new String[] {"Nice! I've marked this task as done:", this.toString()});
     }
 
     public boolean isDescriptionContainsString(String input) {

@@ -15,17 +15,11 @@ public class Duke {
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }
-        greet();
     }
 
     public String executeCommand(Command command) throws DukeException {
         return command.execute(this.list);
     }
-
-    private void greet() {
-        Ui.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
-    }
-
 
     /**
      *  Provides responses to commands that are passed in by the user.

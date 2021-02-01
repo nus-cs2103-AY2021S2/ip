@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import duke.DukeException;
 import duke.Helper;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
 
 public class ListCommand extends Command {
@@ -43,7 +42,7 @@ public class ListCommand extends Command {
                     && x.getDate().equals(queryDate));
             //Map each filtered Task with Task.toString()
             List<String> taskStrings = matchedTasks.stream().map(Task::toString).collect(Collectors.toList());
-            return Ui.formatStringArray(taskStrings);
+            return Helper.formatStringArray(taskStrings);
 
         } else {
             return list.formatList();

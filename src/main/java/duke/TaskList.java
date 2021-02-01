@@ -16,7 +16,6 @@ public class TaskList {
      */
     public TaskList() throws DukeException {
         this.storage = new Storage();
-        Ui.printWithStyle("Reading tasks from file...");
         this.list = storage.readTasksFromFile();
     }
 
@@ -27,7 +26,7 @@ public class TaskList {
     public String add(Task task) throws DukeException {
         this.list.add(task);
         storage.writeTaskToFile(task);
-        return Ui.formatStringArray(new String[] {
+        return Helper.formatStringArray(new String[] {
             "Got it. I've added this task:",
             "    " + task.toString(),
             "Now you have " + this.list.size() + " tasks in the list."
@@ -53,7 +52,7 @@ public class TaskList {
         this.list.remove(taskNumber - 1);
         //Rewrite all tasks
         rewriteTasks();
-        return Ui.formatStringArray(new String[] {
+        return Helper.formatStringArray(new String[] {
             "Noted. I've removed this task:",
             this.list.get(taskNumber - 1).toString(),
             "Now you have " + (this.list.size() - 1) + " tasks in the list."
@@ -71,7 +70,7 @@ public class TaskList {
                     + this.list.get(i).toString();
             printedArray[i + 1] = listEntry;
         }
-        return Ui.formatStringArray(printedArray);
+        return Helper.formatStringArray(printedArray);
     }
 
     /**

@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import duke.Helper;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
 
 public class FindCommand extends Command {
@@ -25,6 +24,6 @@ public class FindCommand extends Command {
         ArrayList<Task> filteredList = list.filter(task -> task.isDescriptionContainsString(keyword));
         List<String> tasksAsString = filteredList.stream().map(Task::toString).collect(Collectors.toList());
         tasksAsString.add(0, "Found " + tasksAsString.size() + " matching task(s):");
-        return Ui.formatStringArray(tasksAsString.toArray(new String[0]));
+        return Helper.formatStringArray(tasksAsString.toArray(new String[0]));
     }
 }
