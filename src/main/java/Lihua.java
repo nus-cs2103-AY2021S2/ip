@@ -35,6 +35,10 @@ public class Lihua {
         exit();
     }
 
+    public String getResponse(String input) {
+        return "Lihua heard: " + input;
+    }
+
     /**
      * Runs command loop until the user inputs a exit command.
      */
