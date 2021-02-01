@@ -19,6 +19,16 @@ public abstract class Task {
     protected LocalTime time;
 
     /**
+     * Formats the output date for the String representation of some Task objects.
+     */
+    protected DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
+    /**
+     * Formats the output date for the String representation of some Task objects.
+     */
+    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh mm");
+
+    /**
      * Constructor for a Task object.
      * @param description Describes what the task is.
      */
@@ -49,16 +59,6 @@ public abstract class Task {
     public LocalTime getTime() {
         return time;
     }
-
-    /**
-     * Formats the output date for the String representation of some Task objects.
-     */
-    protected DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
-
-    /**
-     * Formats the output date for the String representation of some Task objects.
-     */
-    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh mm");
 
     /**
      * Returns the description of the Task.
@@ -105,4 +105,5 @@ public abstract class Task {
     public String toString() {
         return "[" + this.getInitial() + "]" + this.statusIcon() + description;
     }
+
 }

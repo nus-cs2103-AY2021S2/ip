@@ -8,19 +8,19 @@ public class UiTest {
 
     @Test
     public void CorrectTaskFormat_TypesOfTasks_FormatOfTask() {
-        assertEquals("todo *description of task*", Ui.CorrectTaskFormat("todo"));
+        assertEquals("todo *description of task*", Ui.correctTaskFormat("todo"));
     }
 
     @Test
     public void InvalidNumberExceptionMessage_CorrectMessageOutput() {
         assertEquals(LINE + SPACE + "ERROR! D: Please give a number greater than zero and smaller than the total number of tasks" + LINE,
-                Ui.InvalidNumberExceptionMessage());
+                Ui.invalidNumberExceptionMessage());
     }
 
     @Test
     public void InvalidKeywordExceptionMessage_CorrectMessageOutput() {
         assertEquals(LINE + SPACE + "The supported keywords are: todo, deadline, event, done, list, delete, bye only." + LINE,
-                Ui.InvalidKeywordExceptionMessage());
+                Ui.invalidKeywordExceptionMessage());
     }
 
 }

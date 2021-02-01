@@ -29,7 +29,7 @@ public class Parser {
                     break;
                 case "event":
                     checkSplLength(spl, 2, "event");
-                    String[] spl4 =spl[1].split(" /at ", 2);
+                    String[] spl4 = spl[1].split(" /at ", 2);
                     checkSplLength(spl4, 2, "event");
                     String[] spl5 = spl4[1].split(" ", 2);
                     checkSplLength(spl5, 2, "event");
@@ -39,6 +39,7 @@ public class Parser {
                     checkSplLength(spl, 2, "done");
                     isInt(spl[1]);
                     TaskList.processDone(spl);
+                    break;
                 case "list":
                     checkSplLength(spl, 1, "list");
                     TaskList.processList();
@@ -58,7 +59,7 @@ public class Parser {
                     TaskList.processFind(spl);
                     break;
                 default:
-                    throw new InvalidKeywordException(Ui.InvalidKeywordExceptionMessage());
+                    throw new InvalidKeywordException(Ui.invalidKeywordExceptionMessage());
                 }
             } catch (InvalidTaskFormatException e) {
                 e.printMessage();
@@ -79,10 +80,10 @@ public class Parser {
         try {
             int x = Integer.parseInt(s);
             if (x > TaskList.getCount()) {
-                throw new InvalidNumberException(Ui.InvalidNumberExceptionMessage());
+                throw new InvalidNumberException(Ui.invalidNumberExceptionMessage());
             }
-        } catch (NumberFormatException e){
-            throw new InvalidNumberException(Ui.InvalidNumberExceptionMessage());
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(Ui.invalidNumberExceptionMessage());
         }
     }
 
@@ -96,7 +97,7 @@ public class Parser {
      */
     static void checkSplLength(String[] spl, int x, String task) throws InvalidTaskFormatException {
         if (spl.length != x) {
-            throw new InvalidTaskFormatException(Ui.InvalidTaskFormatExceptionMessage(task));
+            throw new InvalidTaskFormatException(Ui.invalidTaskFormatExceptionMessage(task));
         }
     }
 }

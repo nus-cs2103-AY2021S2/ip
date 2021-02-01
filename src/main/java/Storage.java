@@ -2,9 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 /**
  * Stores the task list so that it can be recovered even after the user exits from the program.
@@ -23,22 +23,22 @@ public class Storage {
         while (s.hasNext()) {
             count++;
             String[] spl = s.nextLine().split("@@@", 5);
-            Task to_add;
+            Task toAdd;
             switch(spl[0]) {
             case "T":
-                to_add = new Todo(spl[2]);
+                toAdd = new Todo(spl[2]);
                 break;
             case "D":
-                to_add = new Deadline(spl[2], LocalDate.parse(spl[3]), LocalTime.parse(spl[4]));
+                toAdd = new Deadline(spl[2], LocalDate.parse(spl[3]), LocalTime.parse(spl[4]));
                 break;
             default: // Default is the case "E"
-                to_add = new Event(spl[2], LocalDate.parse(spl[3]), LocalTime.parse(spl[4]));
+                toAdd = new Event(spl[2], LocalDate.parse(spl[3]), LocalTime.parse(spl[4]));
             }
 
             if (spl[1].equals("1")) {
-                to_add.finished();
+                toAdd.finished();
             }
-            TaskList.getStorage().add(to_add);
+            TaskList.getStorage().add(toAdd);
         }
         return count;
     }

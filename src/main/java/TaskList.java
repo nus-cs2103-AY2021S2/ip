@@ -23,7 +23,9 @@ public class TaskList {
      * Getter that returns the Array List of tasks.
      * @return The variable storage.
      */
-    static ArrayList<Task> getStorage() { return storage; }
+    static ArrayList<Task> getStorage() {
+        return storage;
+    }
 
     /**
      * Checks if the folder and file to store the data are present.
@@ -109,8 +111,8 @@ public class TaskList {
      */
     static void processDelete(String[] spl) {
         int num = Integer.parseInt(spl[1]);
-        Task t = storage.get(num-1);
-        storage.remove(num-1);
+        Task t = storage.get(num - 1);
+        storage.remove(num - 1);
         count--;
         Ui.outputMessageDelete(t);
     }

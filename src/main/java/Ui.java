@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class Ui {
     /** Constants that help in the formatting of the printed messages. */
     private static final String SPACE = "     ";
-    private static final String LINE = "\n     <<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n";
+    private static final String LINE = "\n     <<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>"
+            + "<<>><<>><<>><<>><<>><<>><<>><<>><<>>\n";
 
     /**
      * Message to be printed when the program starts.
@@ -19,15 +20,16 @@ public class Ui {
      * Message to be printed if any number that has to be inputted is invalid.
      * @return The error message string.
      */
-    public static String InvalidNumberExceptionMessage() {
-        return LINE + SPACE + "ERROR! D: Please give a number greater than zero and smaller than the total number of tasks" + LINE;
+    public static String invalidNumberExceptionMessage() {
+        return LINE + SPACE + "ERROR! D: Give a number greater than zero and smaller than the total number of tasks"
+                + LINE;
     }
 
     /**
      * Message to be printed if the keyword that has been inputted is invalid.
      * @return The error message string.
      */
-    public static String InvalidKeywordExceptionMessage() {
+    public static String invalidKeywordExceptionMessage() {
         return LINE + SPACE + "The supported keywords are: todo, deadline, event, done, list, delete, bye only." + LINE;
     }
 
@@ -36,9 +38,9 @@ public class Ui {
      * @param task The type of task that had the wrong format.
      * @return The error message string.
      */
-    public static String InvalidTaskFormatExceptionMessage(String task) {
-        return LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task +
-                "\n" + SPACE + "The expected format for the task is: " + Ui.CorrectTaskFormat(task) + LINE;
+    public static String invalidTaskFormatExceptionMessage(String task) {
+        return LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task
+                + "\n" + SPACE + "The expected format for the task is: " + Ui.correctTaskFormat(task) + LINE;
     }
 
     /**
@@ -46,7 +48,7 @@ public class Ui {
      * @param task The task for which we want the format for.
      * @return A string explaining the format of the task.
      */
-    public static String CorrectTaskFormat(String task) {
+    public static String correctTaskFormat(String task) {
         switch(task) {
         case "todo":
             return "todo *description of task*";
@@ -71,7 +73,8 @@ public class Ui {
      * @param task The Task object that has been created with the user input.
      */
     public static void outputMessageDone(Task task) {
-        System.out.println(LINE + SPACE + "Good job! Another Task completed! I have marked it as done:\n" + SPACE + task + LINE);
+        System.out.println(LINE + SPACE + "Good job! Another Task completed! I have marked it as done:\n" + SPACE
+                + task + LINE);
     }
 
     /**
@@ -90,7 +93,7 @@ public class Ui {
     public static void outputMessageList(ArrayList<Task> storage, int count) {
         System.out.println(LINE);
         for (int i = 1; i <= count; i++) {
-            System.out.println(SPACE + i + ". " + storage.get(i-1));
+            System.out.println(SPACE + i + ". " + storage.get(i - 1));
         }
         System.out.println(LINE);
     }
