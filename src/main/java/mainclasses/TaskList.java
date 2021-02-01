@@ -1,3 +1,5 @@
+package mainclasses;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -17,11 +19,11 @@ public class TaskList {
      * @param num int index of task in the list
      * @param task the task to be printed out
      */
-    public void printTask(int num, Task task) {
+    public String printTask(int num, Task task) {
         if (task.getDone()) {
-            System.out.println(num + 1 + "." + "[" + task.type + "]" + "[X] " + this.newStorage.get(num).getDescription());
+            return num + 1 + "." + "[" + task.type + "]" + "[X] " + this.newStorage.get(num).getDescription();
         } else {
-            System.out.println(num + 1 + "." + "[" + task.type + "]" + "[ ] " + this.newStorage.get(num).getDescription());
+            return num + 1 + "." + "[" + task.type + "]" + "[ ] " + this.newStorage.get(num).getDescription();
         }
     }
 
@@ -29,15 +31,15 @@ public class TaskList {
      * Prints the task which includes description, task type and whether task is completed
      * @param task the task to be printed out
      */
-    public void printTaskWithNoNum(Task task) {
-        System.out.println("[" + task.type + "]" + "[ ] " + task.getDescription());
+    public String printTaskWithNoNum(Task task) {
+        return "[" + task.type + "]" + "[ ] " + task.getDescription();
     }
 
     /**
      * Adds a task to the list of task in storage
      * @param userInput the user input in text string format
      */
-    public void addTask(String userInput) {
+    public String addTask(String userInput) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("Hmm");
         Task task;
@@ -61,41 +63,42 @@ public class TaskList {
             task = new Event(description, date, time);
         }
         newStorage.add(task);
-        System.out.println("Got it. I've added this task: ");
-        printTaskWithNoNum(task);
-        System.out.println("Now you have " + this.newStorage.size() + " tasks in the list.");
+        return ("Got it. I've added this task: \n") + printTaskWithNoNum(task) + "\n"
+                + ("Now you have " + this.newStorage.size() + " tasks in the list.");
     }
 
     /**
      * List out of the task that are in the task list storage
      * @param tasks List of tasks
      */
-    public void listTask(List<Task> tasks) {
+    public String listTask(List<Task> tasks) {
+        String newListString = "";
         for (int i = 0; i < tasks.size(); i++) {
-            printTask(i, tasks.get(i));
+            newListString += (printTask(i, tasks.get(i)) + "\n");
         }
+        return ("Here are the tasks in your list: \n") + newListString;
     }
 
     /**
      * Set a specific task as completed based on the index of task in task list storage
      * @param value int index of the task in list
      */
-    public void setTaskAsDone(int value) {
+    public String setTaskAsDone(int value) {
         this.newStorage.get(value).setDone(true);
+        return ("Nice! I've marked this task as done: \n") + printTask(value, newStorage.get(value));
     }
 
     /**
      * Deletes a task based on string input of user
      * @param userInput user input in string text
      */
-    public void deleteTask(String userInput) {
+    public String deleteTask(String userInput) {
         String[] inputBreakdown = userInput.split(" ");
         int taskToBeDeleted = Integer.valueOf(inputBreakdown[1]) - 1;
         Task task = this.newStorage.get(taskToBeDeleted);
         this.newStorage.remove(taskToBeDeleted);
-        System.out.println("Noted. I've removed this task:");
-        printTaskWithNoNum(task);
-        System.out.println("Now you have " + this.newStorage.size() + " tasks in the list.");
+        return ("Noted. I've removed this task: \n") + printTaskWithNoNum(task) + "\n"
+                + ("Now you have " + this.newStorage.size() + " tasks in the list.");
     }
 
     public List<Task> getNewStorage() {
@@ -106,14 +109,15 @@ public class TaskList {
      * Finds Tasks which description contains a certain keyword
      * @param keyWord This is the keyword used to filter the list of tasks
      */
-    public void findTasksWithKeyword(String keyWord) {
+    public String findTasksWithKeyword(String keyWord) {
         List<Task> tasks = this.getNewStorage();
-        System.out.println("Here are the matching tasks in your list:");
+        String newStringLine = "Here are the matching tasks in your list:" + "\n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyWord)) {
-                printTask(i, tasks.get(i));
+                newStringLine += (printTask(i, tasks.get(i)) + "\n");
             }
         }
+        return newStringLine;
     }
 
     public void setNewStorage(List<Task> newStorage) {
