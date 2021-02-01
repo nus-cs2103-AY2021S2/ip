@@ -1,16 +1,20 @@
 package duke.task;
 
-import duke.Ui;
-
 import java.time.LocalDate;
+
+import duke.Ui;
 
 /**
  * Skeleton class for all tasks.
  */
 public abstract class Task {
-    String description;
-    boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
+    /**
+     * Initializes an undone task with the given description.
+     * @param description description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

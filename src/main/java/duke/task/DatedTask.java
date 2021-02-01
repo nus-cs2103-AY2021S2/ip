@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public abstract class DatedTask extends Task {
-    LocalDate date;
+    protected LocalDate date;
 
     /**
      * Checks if the provided date is of correct format then creates a new DatedTask with the specified

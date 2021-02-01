@@ -1,13 +1,16 @@
 package duke;
 
-import duke.command.Command;
-
 import java.util.Scanner;
+
+import duke.command.Command;
 
 public class Duke {
     /** Stores list of tasks */
-    TaskList list;
+    private TaskList list;
 
+    /**
+     * Initializes a Duke object with an empty TaskList.
+     */
     public Duke() {
         try {
             this.list = new TaskList();
@@ -25,6 +28,9 @@ public class Duke {
         Ui.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
+    /**
+     * Initializes a Duke object to execute commands that are passed in by the user.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner scanner = new Scanner(System.in);

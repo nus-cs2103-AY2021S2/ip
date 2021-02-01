@@ -1,8 +1,5 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.TaskException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,10 +10,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Task;
+import duke.task.TaskException;
+
 public class Storage {
     private static final String LIST_FILE_PATH = "storage/";
     private static final String LIST_FILE = LIST_FILE_PATH + "list.txt";
 
+    /**
+     * Creates the storage file directory in filesystem if it does not exist.
+     * @throws DukeException when fail to create directory.
+     */
     public Storage() throws DukeException {
         //Create directory if not exist
         Path path = Paths.get(LIST_FILE_PATH);

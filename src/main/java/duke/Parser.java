@@ -1,19 +1,19 @@
 package duke;
 
+import java.util.regex.Pattern;
+
 import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
 import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.FindCommand;
-import duke.task.Task;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.ToDo;
+import duke.task.Task;
 import duke.task.TaskException;
-
-import java.util.regex.Pattern;
+import duke.task.ToDo;
 
 public class Parser {
 

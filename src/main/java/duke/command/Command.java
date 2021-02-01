@@ -5,7 +5,7 @@ import duke.TaskList;
 
 public abstract class Command {
     /** User command that is split by spaces */
-    String[] commandSplit;
+    protected String[] commandSplit;
 
     public Command(String[] commandSplit) {
         this.commandSplit = commandSplit;

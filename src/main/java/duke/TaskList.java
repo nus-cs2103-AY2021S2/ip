@@ -1,15 +1,19 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class TaskList {
-    ArrayList<Task> list;
-    Storage storage;
+import duke.task.Task;
 
+public class TaskList {
+    private ArrayList<Task> list;
+    private Storage storage;
+
+    /**
+     * Reads task from storage and stores into an ArrayList
+     * @throws DukeException if fail to read tasks from storage
+     */
     public TaskList() throws DukeException {
         this.storage = new Storage();
         Ui.printWithStyle("Reading tasks from file...");
@@ -24,9 +28,9 @@ public class TaskList {
         this.list.add(task);
         storage.writeTaskToFile(task);
         Ui.printWithStyle(new String[] {
-                "Got it. I've added this task:",
-                "    " + task.toString(),
-                "Now you have " + this.list.size() + " tasks in the list."
+            "Got it. I've added this task:",
+            "    " + task.toString(),
+            "Now you have " + this.list.size() + " tasks in the list."
         });
     }
 
@@ -46,9 +50,9 @@ public class TaskList {
      */
     public void remove(int taskNumber) throws DukeException {
         Ui.printWithStyle(new String[] {
-                "Noted. I've removed this task:",
-                this.list.get(taskNumber - 1).toString(),
-                "Now you have " + (this.list.size() - 1) + " tasks in the list."
+            "Noted. I've removed this task:",
+            this.list.get(taskNumber - 1).toString(),
+            "Now you have " + (this.list.size() - 1) + " tasks in the list."
         });
         this.list.remove(taskNumber - 1);
         //Rewrite all tasks
@@ -62,8 +66,8 @@ public class TaskList {
         String[] printedArray = new String[this.list.size() + 1];
         printedArray[0] = "Here are the tasks in your list:";
         for (int i = 0; i < this.list.size(); i++) {
-            String listEntry = String.valueOf(i + 1) + "." +
-                    this.list.get(i).toString();
+            String listEntry = String.valueOf(i + 1) + "."
+                    + this.list.get(i).toString();
             printedArray[i + 1] = listEntry;
         }
         Ui.printWithStyle(printedArray);
