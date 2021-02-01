@@ -30,12 +30,12 @@ public class Storage {
     /**
      * Default constructor for the Storage class.
      *
-     * @param path The path leading to the save file.
-     * @param filename The name of the save file.
+     * @param filenames The path leading to and the name of the save file.
      */
-    public Storage(String path, String filename) {
-        this.path = path;
-        this.filename = filename;
+    @SafeVarargs
+    public Storage(String... filenames) {
+        this.path = filenames[0];
+        this.filename = filenames[1];
     }
 
     /**
