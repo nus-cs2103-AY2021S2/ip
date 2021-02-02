@@ -47,10 +47,14 @@ public class myList {
     }
 
     public String delete(int index) {
-        taskList.remove(index);
-        this.save();
 
-        return Ui.removeTask(taskList);
+        if (index < taskList.size()) {
+            taskList.remove(index);
+            this.save();
+            return Ui.removeTask(taskList);
+        } else {
+            return Ui.taskNotFoundError();
+        }
     }
 
     public String retrieve()  {

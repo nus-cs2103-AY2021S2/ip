@@ -10,9 +10,7 @@ import java.util.ArrayList;
 public class Ui {
 
 
-    public static String fileError() {
-        return "Some errors were encountered with the file";
-    }
+
 
     public static String addedTask(ArrayList<Task> taskList) {
         // Retrieve last task in list and print it
@@ -41,7 +39,7 @@ public class Ui {
     }
 
     public static String initialise() {
-        return "Hello! I'm switchblade.SwitchBlade and I aim to do everything you want me to do!";
+        return "Hello! I'm SwitchBlade and I aim to do everything you want me to do!";
     }
 
     public static String initRetrieveList(myList taskList) {
@@ -51,15 +49,18 @@ public class Ui {
         } else {
             return "";
         }
-
-    }
-
-    public static String argumentError() {
-        return "Too many arguments, please give me just 1 task to mark as completed";
     }
 
     public static String unknownCommand() {
         return "Unfortunately I don't know what you want me to do :L";
+    }
+
+    public static String fileError() {
+        return "Some errors were encountered with the file";
+    }
+
+    public static String argumentError() {
+        return "Too many arguments, please give me just 1 task to mark as completed";
     }
 
     public static String todoError() {
@@ -77,6 +78,10 @@ public class Ui {
                 "with deadline datetime given in 24hr format";
     }
 
+    public static String taskNotFoundError() {
+        return "It seems like nothing you specified exists :(";
+    }
+
     public static String printList(myList taskList) {
         return "Here's your list of tasks!" + taskList.toString();
     }
@@ -89,12 +94,14 @@ public class Ui {
             sb.append(t);
         }
 
-        return sb.toString();
+        if (sb.toString().length() > 0) {
+            return sb.toString();
+        } else {
+            return taskNotFoundError();
+        }
     }
 
     public static String shutdown() {
         return "See you soon!";
     }
-
-
 }
