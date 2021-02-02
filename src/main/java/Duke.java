@@ -11,7 +11,7 @@ import java.nio.file.Paths;
  */
 public class Duke {
 
-    private static final String FOLDER_PATH = "../src/main/java/data/";
+    private static final String FOLDER_PATH = "./src/main/java/data/";
     private static final String FILE_NAME = "All Tasks.txt";
 
     /**
