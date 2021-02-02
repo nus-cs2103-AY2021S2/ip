@@ -12,81 +12,68 @@ public class Parser {
      * @param listOfTasks the list of tasks for the user.
      * @param textInput the command that was given by the user.
      */
-    public void executeCommand(TaskList listOfTasks, String textInput) {
+    public String executeCommand(TaskList listOfTasks, String textInput) {
+        String output = "";
         if (textInput.toLowerCase().equals("list")) {
             int i = 1;
-            System.out.println("\t_____________________________________________________________");
-            System.out.println("\t Here are the tasks in your list:");
+            output += "\t Here are the tasks in your list:\n";
             for (Task task : listOfTasks) {
-                System.out.println("\t " + i + "." + task);
+                output += "\t " + i + "." + task + "\n";
                 i++;
             }
-            System.out.println("\t_____________________________________________________________");
         } else if (textInput.startsWith("done ")) {
             try {
                 int i = Integer.parseInt(textInput.substring(5));
                 Task task = listOfTasks.get(i - 1);
                 task.completeTask();
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t Nice! I've marked this task as done:");
-                System.out.println("\t   " + task);
-                System.out.println("\t_____________________________________________________________");
+                output += "\t Nice! I've marked this task as done:\n";
+                output += "\t   " + task + "\n";
             } catch (NumberFormatException e) {
-                System.out.println("INVALID COMMAND!");
+                output += "INVALID COMMAND!\n";
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("INVALID COMMAND!");
+                output += "INVALID COMMAND!\n";
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("INVALID COMMAND!");
+                output += "INVALID COMMAND!\n";
             }
         } else if (textInput.startsWith("delete ")) {
             try {
                 int i = Integer.parseInt(textInput.substring(7));
                 Task task = listOfTasks.get(i - 1);
                 listOfTasks.remove(i - 1);
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t Noted. I've removed this task:");
-                System.out.println("\t   " + task);
-                System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
-                System.out.println("\t_____________________________________________________________");
+                output += "\t Noted. I've removed this task:\n";
+                output += "\t   " + task + "\n";
+                output += "\t Now you have " + listOfTasks.size() + " tasks in the list.\n";
             } catch (NumberFormatException e) {
-                System.out.println("INVALID COMMAND!");
+                output += "INVALID COMMAND!\n";
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("INVALID COMMAND!");
+                output += "INVALID COMMAND!\n";
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("INVALID COMMAND!");
+                output += "INVALID COMMAND!\n";
             }
         } else if (textInput.startsWith("find ")) {
             String textToFind = textInput.substring(5);
             if (!textToFind.isBlank()) {
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t Here are the matching tasks in your list:");
+                output += "\t Here are the matching tasks in your list:\n";
                 int i = 1;
                 for (Task task : listOfTasks) {
                     if (task.contains(textToFind)) {
-                        System.out.println("\t " + i + ". " + task);
+                        output += "\t " + i + ". " + task + "\n";
                     }
                     i++;
                 }
-                System.out.println("\t_____________________________________________________________");
             } else {
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t ☹ OOPS!!! The description of find cannot be empty.");
-                System.out.println("\t_____________________________________________________________");
+                output += "\t OOPS!!! The description of find cannot be empty.\n";
             }
         } else if (textInput.startsWith("todo")) {
             try {
                 textInput = textInput.substring(5);
                 Task task = new ToDo(textInput);
                 listOfTasks.add(task);
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t Got it. I've added this task:");
-                System.out.println("\t   " + task);
-                System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
-                System.out.println("\t_____________________________________________________________");
+                output += "\t Got it. I've added this task:\n";
+                output += "\t   " + task + "\n";
+                output += "\t Now you have " + listOfTasks.size() + " tasks in the list.\n";
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t ☹ OOPS!!! The description of a todo cannot be empty.");
-                System.out.println("\t_____________________________________________________________");
+                output += "\t OOPS!!! The description of a todo cannot be empty.\n";
             }
         } else if (textInput.startsWith("deadline")) {
             try {
@@ -97,20 +84,16 @@ public class Parser {
                     LocalDate localDate = LocalDate.parse(dateInfo);
                     Task task = new Deadline(textInput.substring(0, index - 1), localDate);
                     listOfTasks.add(task);
-                    System.out.println("\t_____________________________________________________________");
-                    System.out.println("\t Got it. I've added this task:");
-                    System.out.println("\t   " + task);
-                    System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
-                    System.out.println("\t_____________________________________________________________");
+                    output += "\t Got it. I've added this task:\n";
+                    output += "\t   " + task + "\n";
+                    output += "\t Now you have " + listOfTasks.size() + " tasks in the list.\n";
                 } else {
-                    System.out.println("INVALID COMMAND!");
+                    output += "INVALID COMMAND!\n";
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t ☹ OOPS!!! The description of a deadline cannot be empty.");
-                System.out.println("\t_____________________________________________________________");
+                output += "\t OOPS!!! The description of a deadline cannot be empty.\n";
             } catch (DateTimeParseException e) {
-                System.out.println("INVALID COMMAND!");
+                output += "INVALID COMMAND!\n";
             }
         } else if (textInput.startsWith("event")) {
             try {
@@ -124,28 +107,24 @@ public class Parser {
                         LocalDate endDate = LocalDate.parse(dateInfo.substring(index2 + 3));
                         Task task = new Event(textInput.substring(0, index - 1), startDate, endDate);
                         listOfTasks.add(task);
-                        System.out.println("\t_____________________________________________________________");
-                        System.out.println("\t Got it. I've added this task:");
-                        System.out.println("\t   " + task);
-                        System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
-                        System.out.println("\t_____________________________________________________________");
+                        output += "\t Got it. I've added this task:\n";
+                        output += "\t   " + task + "\n";
+                        output += "\t Now you have " + listOfTasks.size() + " tasks in the list.\n";
                     } else {
-                        System.out.println("INVALID COMMAND!");
+                        output += "INVALID COMMAND!\n";
                     }
                 } else {
-                    System.out.println("INVALID COMMAND!");
+                    output += "INVALID COMMAND!\n";
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t ☹ OOPS!!! The description of a event cannot be empty.");
-                System.out.println("\t_____________________________________________________________");
+                output += "\t OOPS!!! The description of a event cannot be empty.\n";
             } catch (DateTimeParseException e) {
-                System.out.println("INVALID COMMAND!");
+                output += "INVALID COMMAND!\n";
             }
         } else {
-            System.out.println("\t_____________________________________________________________");
-            System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            System.out.println("\t_____________________________________________________________");
+            output += "\t OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
+
+        return output;
     }
 }
