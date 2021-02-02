@@ -1,6 +1,10 @@
 package duke;
 
 import java.io.IOException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import duke.command.Command;
 
@@ -42,7 +46,7 @@ public class Duke {
      * Gets a response from the chat bot based on an input string.
      * @param input Input to the chat bot from a user.
      */
-    public void getResponse(String input) {
+    public String getResponse(String input) {
         Command command;
         ui.printLine();
         try {
@@ -50,11 +54,17 @@ public class Duke {
             isRunning = !command.shouldExit();
             taskList = command.execute(taskList);
             storageHandler.write(taskList);
-            ui.printResponse(command.getResponse());
-            ui.printLine();
+            // ui.printResponse(command.getResponse());
+            // ui.printLine();
+            return command.getResponse();
         } catch (DukeException | IOException e) {
             ui.printResponse(e.toString());
+            return e.toString();
         }
+    }
+
+    public Ui getUi() {
+        return ui;
     }
 
 }
