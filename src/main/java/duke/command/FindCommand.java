@@ -22,13 +22,13 @@ public class FindCommand extends Command {
             if (parser.canParseFindCommand(input)) {
                 String keyword = parser.parseKeyword(input);
                 TaskList tempTaskList = new TaskList();
-                for (int i = 0; i < taskList.size(); i++) {
+                for (int i = 0; i < taskList.getSize(); i++) {
                     Task task = taskList.getTask(i);
                     if (task.hasKeyWord(keyword)) {
                         tempTaskList.addTask(task);
                     }
                 }
-                if (tempTaskList.size() == 0) {
+                if (tempTaskList.getSize() == 0) {
                     throw new NoSuchKeywordException(keyword);
                 } else {
                     ui.printFoundTaskList(tempTaskList);
