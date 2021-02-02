@@ -1,21 +1,21 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Storage class handles any operations by Duke that involves writing or reading from a file.
  */
 public class Storage {
-    public String filePath;
-    
+    private String filePath;
+
     Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -50,7 +50,7 @@ public class Storage {
             FileWriter fw = new FileWriter(temp);
 
             //copy all lines except line to be deleted to temp
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 //skip the line to be deleted
                 if (ctr != index) {
                     fw.write(sc.nextLine() + System.lineSeparator());
@@ -85,7 +85,7 @@ public class Storage {
             FileWriter fw = new FileWriter(temp);
 
             //copy all lines except line to be edited to temp
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 //change line to be edited
                 if (ctr != index) {
                     fw.write(sc.nextLine() + System.lineSeparator());

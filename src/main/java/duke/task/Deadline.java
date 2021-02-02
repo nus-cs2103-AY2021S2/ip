@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
  * Represents a task with a specified deadline.
  */
 public class Deadline extends Task {
+    private static final int DATE_LENGTH = 10;
     protected LocalDate date;
     protected String time;
-    static int DATE_LENGTH = 10;
 
     public Deadline(String task, String by) {
         super(task);
@@ -31,7 +31,7 @@ public class Deadline extends Task {
     public String fileString() {
         return "D | " + this.done + " | " + this.task + " | " + this.date + this.time;
     }
-    
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (By: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "

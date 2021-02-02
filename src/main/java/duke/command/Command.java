@@ -9,12 +9,16 @@ import duke.Ui;
  * Parent abstract class to represent a command.
  */
 public abstract class Command {
-    String arguments;
-    boolean isExit;
+    private String arguments;
+    private boolean isExit;
 
-    public Command(String arguments) {
+    protected Command(String arguments) {
         this.arguments = arguments;
         this.isExit = false;
+    }
+
+    public void setExit(boolean exit) {
+        this.isExit = exit;
     }
 
     public String getArguments() {
