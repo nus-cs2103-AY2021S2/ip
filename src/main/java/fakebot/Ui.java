@@ -1,21 +1,22 @@
 package fakebot;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import fakebot.command.Command;
 import fakebot.command.CommandException;
-import fakebot.task.TaskList;
+import fakebot.ui.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -34,6 +35,9 @@ public class Ui extends Application {
     private Button sendButton;
     private Scene scene;
 
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Logo.png"));
+    private Image fakeBotImage = new Image(this.getClass().getResourceAsStream("/images/wolf.png"));
+
     private FakeBot fakeBot;
 
     /**
@@ -48,8 +52,7 @@ public class Ui extends Application {
     //Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
+        //Setting up required components
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -63,15 +66,15 @@ public class Ui extends Application {
 
         scene = new Scene(mainLayout);
 
-        //Step 2. Formatting the window to look as expected
+        //Formatting the window to look as expected
         stage.setTitle("FakeBot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(500.0, 600.0);
+        mainLayout.setPrefSize(600.0, 600.0);
 
-        scrollPane.setPrefSize(485, 535);
+        scrollPane.setPrefSize(585, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -81,7 +84,7 @@ public class Ui extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(425.0);
+        userInput.setPrefWidth(525.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -95,36 +98,36 @@ public class Ui extends Application {
 
         //Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            processUserInput(userInput.getText());
+            handleUserInput(userInput.getText());
             userInput.clear();
         });
 
         userInput.setOnAction((event) -> {
-            processUserInput(userInput.getText());
+            handleUserInput(userInput.getText());
             userInput.clear();
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        // more code to be added here later
+        //Creating hello text
         addTextToContainer(fakeBot.getHelloMessage());
         stage.setScene(scene);
         stage.show();
 
     }
 
-    private void processUserInput(String userInput){
+    private void handleUserInput(String userInput){
         Command command;
         try {
             command = fakeBot.validateCommand(userInput);
         } catch (CommandException e) {
-            addTextToContainer(e.getMessage());
+            addTextToContainer(userInput, e.getMessage());
             return;
         }
-        String text = fakeBot.processCommand(command);
-        if(text.length() > 0) {
-            addTextToContainer((text));
+        String outputText = fakeBot.processCommand(command);
+        if(outputText.length() > 0) {
+            addTextToContainer(userInput, outputText);
         }
     }
 
@@ -135,14 +138,13 @@ public class Ui extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-
         Label textToAdd = new Label(text);
         textToAdd.setFont(Font.font ("Courier New", 12));
         textToAdd.setWrapText(true);
 
-
         return textToAdd;
     }
+
 
     /**
      * Add text to container
@@ -150,13 +152,30 @@ public class Ui extends Application {
      * @param text text to be add to Container
      */
     private void addTextToContainer(String text) {
-        dialogContainer.getChildren().add(getDialogLabel(text));
+        Label userText = getDialogLabel(text);
+        dialogContainer.getChildren().add(DialogBox.getFakebotDialog(userText, new ImageView(fakeBotImage)));
     }
+
     /**
-     * Reads Line from IO.
+     * Add text to container
      *
-     * @return Return String read from input.
+     * @param inputText inputText to be add to Container
+     * @param outputText outputText to be add to Container
      */
+    private void addTextToContainer(String inputText, String outputText) {
+
+        Label userText = getDialogLabel(inputText);
+        Label fakebotText = getDialogLabel(outputText);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getFakebotDialog(fakebotText, new ImageView(fakeBotImage))
+        );
+    }
+        /**
+         * Reads Line from IO.
+         *
+         * @return Return String read from input.
+         */
     public String readLine() {
         String input = scanf.nextLine();
         return input;
