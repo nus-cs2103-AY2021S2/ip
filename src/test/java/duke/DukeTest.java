@@ -3,10 +3,10 @@ package duke;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.task.Task;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {

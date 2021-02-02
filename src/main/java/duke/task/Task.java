@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
     private String type;
     private String preposition;
     private LocalDate date;
@@ -23,7 +23,7 @@ public class Task {
      */
     public Task(String type, String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
         this.type = type;
         this.date = null;
     }
@@ -38,7 +38,7 @@ public class Task {
      */
     public Task(String type, String name, String date, String preposition) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
         this.type = type;
         this.date = LocalDate.parse(date);
         this.preposition = preposition;
@@ -59,7 +59,7 @@ public class Task {
      * @return the status of the <code>Task</code>
      */
     public boolean getDone() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -85,7 +85,7 @@ public class Task {
      * This method set the <code>Task</code> status to done.
      */
     public void setDone() {
-        this.done = true;    
+        this.isDone = true;
     }
 
     /**
@@ -99,14 +99,14 @@ public class Task {
         if (type.equals("E") || type.equals("D")) {
             return String.format("[%s][%s] %s (%s: %s)",
                     type,
-                    done ? "X" : " ",
+                    (isDone) ? "X" : " ",
                     name,
                     preposition,
                     date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         } else {
             return String.format("[%s][%s] %s",
                     type,
-                    done ? "X" : " ",
+                    (isDone) ? "X" : " ",
                     name);
         }
     }
@@ -119,7 +119,7 @@ public class Task {
      * @return a string that is formatted for writing
      */
     public String toSaveFormat() {
-        String line = type + " | " + (done ? "1" : "0") + " | " + name;
+        String line = type + " | " + (isDone ? "1" : "0") + " | " + name;
         if (type.equals("E") || type.equals("D")) {
             line += " | " + date + " | " + preposition;
         }
