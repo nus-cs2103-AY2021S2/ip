@@ -1,7 +1,9 @@
 package dukeproject;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a parser to make sense of string inputs.
@@ -15,7 +17,207 @@ public class Parser {
     }
 
     /**
+     * Reads and understand the user inputs.
      *
+     * @param userInput User input from the GUI.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param taskList Represents the list of task.
+     * @return A boolean on whether the application should continue running.
+     */
+    public boolean parseUserInput(String userInput, Ui ui, Storage storage, TaskList taskList) {
+        if (userInput.equals("bye")) {
+            // Exit when the user inputs "bye"
+            ui.goodByeMessage();
+            return false;
+        } else if (userInput.equals("list")) {
+            ui.printTaskList(taskList);
+        } else if (userInput.startsWith("todo")) {
+            // Create a new to do task base on command information
+            parseToDoCommand(userInput, ui, storage, taskList);
+        } else if (userInput.startsWith("deadline")) {
+            // Create a new deadline task base on command information
+            parseDeadlineCommand(userInput, ui, storage, taskList);
+        } else if (userInput.startsWith("event")) {
+            // Create a new event task base on command information
+            parseEventCommand(userInput, ui, storage, taskList);
+        } else if (userInput.startsWith("done")) {
+            // Mark the event as done
+            parseDoneCommand(userInput, ui, storage, taskList);
+        } else if (userInput.startsWith("delete")) {
+            // Delete the associated event
+            parseDeleteCommand(userInput, ui, storage, taskList);
+        } else if (userInput.startsWith("find")) {
+            // Find a return a list of task that is related to the keyword
+            String keyword = new Parser().parseForFind(userInput);
+            ui.printKeywordTaskList(taskList, keyword);
+        } else {
+            // Unable to detect the user's input
+            ui.printUnreadableError();
+        }
+        return true;
+    }
+
+    /**
+     * Understands the to do command by the user.
+     *
+     * @param command Represents the command that the user has given.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param taskList Represents the list of task.
+     */
+    public void parseToDoCommand(String command, Ui ui, Storage storage, TaskList taskList) {
+        try {
+            // Catch error where the user put empty spaces as description
+            if (command.substring(5).isBlank()) {
+                throw new StringIndexOutOfBoundsException();
+            }
+
+            ToDo newToDoTask = new ToDo(command.substring(5));
+            taskList.add(newToDoTask);
+            storage.writeToFile(taskList);
+
+            // Print a success message
+            ui.generalPrint(newToDoTask.successMessage(taskList.size()));
+        } catch (StringIndexOutOfBoundsException ex) {
+            // Description is empty
+            ui.printDescriptionError();
+        } catch (FileNotFoundException ex) {
+            // File is empty
+            ui.printFileError();
+        }
+    }
+
+    /**
+     * Understands the deadline command by the user.
+     *
+     * @param command Represents the command that the user has given.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param taskList Represents the list of task.
+     */
+    public void parseDeadlineCommand(String command, Ui ui, Storage storage, TaskList taskList) {
+        try {
+            // Catch error where the user put empty spaces as description
+            if (command.substring(9).isBlank()) {
+                throw new StringIndexOutOfBoundsException();
+            }
+
+            // Get the description and date from the user's input
+            StringDatePair output = new Parser().parse(command, Parser.CommandType.INPUT_DEADLINE);
+
+            // Add a deadline task
+            Deadline newDeadlineTask = new Deadline(output.getString(), output.getDate());
+            taskList.add(newDeadlineTask);
+            storage.writeToFile(taskList);
+
+            // Print a success message
+            ui.generalPrint(newDeadlineTask.successMessage(taskList.size()));
+        } catch (StringIndexOutOfBoundsException ex) {
+            // Description is empty
+            ui.printDescriptionError();
+        } catch (FileNotFoundException ex) {
+            // File is empty
+            ui.printFileError();
+        } catch (DateTimeParseException ex) {
+            // Datetime value parsed is not of format "yyyy-MM-dd HHmm"
+            ui.printDateFormatError();
+        }
+    }
+
+    /**
+     * Understands the event command by the user.
+     *
+     * @param command Represents the command that the user has given.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param taskList Represents the list of task.
+     */
+    public void parseEventCommand(String command, Ui ui, Storage storage, TaskList taskList) {
+        try {
+            // Catch error where the user put empty spaces as description
+            if (command.substring(5).isBlank()) {
+                throw new StringIndexOutOfBoundsException();
+            }
+
+            // Get the description and date from the user's input
+            StringDatePair output = new Parser().parse(command, Parser.CommandType.INPUT_EVENT);
+
+            // Add a deadline task
+            Event newEventTask = new Event(output.getString(), output.getDate());
+            taskList.add(newEventTask);
+            storage.writeToFile(taskList);
+
+            // Print a success message
+            ui.generalPrint(newEventTask.successMessage(taskList.size()));
+        } catch (StringIndexOutOfBoundsException ex) {
+            // Description is empty
+            ui.printDescriptionError();
+        } catch (FileNotFoundException ex) {
+            // File is empty
+            ui.printFileError();
+        } catch (DateTimeParseException ex) {
+            // Datetime value parsed is not of format "yyyy-MM-dd HHmm"
+            ui.printDateFormatError();
+        }
+    }
+
+    /**
+     * Understands the done command by the user.
+     *
+     * @param command Represents the command that the user has given.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param taskList Represents the list of task.
+     */
+    public void parseDoneCommand(String command, Ui ui, Storage storage, TaskList taskList) {
+        try {
+            // Mark the task as done based on the number given after the "done" input
+            int taskIndex = Integer.parseInt(command.substring(5));
+
+            // Mark the task as done
+            taskList.get(taskIndex - 1).markAsDone();
+            storage.writeToFile(taskList);
+
+            // Print success message that the task was marked as done
+            ui.printTaskSuccess(taskList, taskIndex);
+        } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+            // Task number is empty
+            ui.printTaskNumError();
+        } catch (FileNotFoundException ex) {
+            // File is empty
+            ui.printFileError();
+        }
+    }
+
+    /**
+     * Understands the delete command by the user.
+     *
+     * @param command Represents the command that the user has given.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param taskList Represents the list of task.
+     */
+    public void parseDeleteCommand(String command, Ui ui, Storage storage, TaskList taskList) {
+        try {
+            // Delete task
+            int taskIndex = Integer.parseInt(command.substring(7)) - 1;
+            Task taskToBeRemoved = taskList.get(taskIndex);
+
+            // Remove the appropriate task away from the list of task
+            taskList.remove(taskIndex);
+            storage.writeToFile(taskList);
+            ui.generalPrint(taskToBeRemoved.deleteMessage(taskList.size()));
+        } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+            // Task number is empty
+            ui.printTaskNumError();
+        } catch (FileNotFoundException ex) {
+            // File is empty
+            ui.printFileError();
+        }
+    }
+
+    /**
      * Returns an object which contains the description and date of a task.
      *
      * @param fullCommand The input that the parser will try to make sense of.

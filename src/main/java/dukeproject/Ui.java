@@ -2,6 +2,10 @@ package dukeproject;
 
 public class Ui {
 
+    Ui() {
+        this.showInitialGreeting();
+    }
+
     /** Shows initial greetings when the user first open duke */
     public void showInitialGreeting() {
         String initialGreeting = "Hello I'm Duke \n"
