@@ -1,4 +1,4 @@
-package ssagit.taskclass;
+package duke.taskclass;
 
 /**
  * Task class, since every task is a 'todoTask' currently, todoTask

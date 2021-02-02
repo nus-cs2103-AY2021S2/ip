@@ -1,14 +1,14 @@
-package ssagit;
+package duke;
 
 import java.util.Locale;
 import java.time.format.DateTimeFormatter;
 
-import ssagit.parser.Parser;
-import ssagit.storage.Storage;
-import ssagit.ui.ConsoleUI;
-import ssagit.taskclass.*;
-import ssagit.datevalidator.DateValidator;
-import ssagit.datevalidator.DateValidatorLocalDate;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.ConsoleUI;
+import duke.taskclass.*;
+import duke.datevalidator.DateValidator;
+import duke.datevalidator.DateValidatorLocalDate;
 
 public class Duke {
 
@@ -24,11 +24,13 @@ public class Duke {
             /** Create tasks */
             Task[] tasks = new Task[100];
             /** Initialize file IO */
-            Storage storage = new Storage("./ssagit/data/taskList.txt");
+            // System.out.println("Working Directory = " + System.getProperty("user.dir"));
+            Storage storage = new Storage("./src/main/java/duke/data/taskList.txt");
             int taskIterator = storage.readTaskListToArray(tasks, validator);
+            System.out.println("Num tasks: " + taskIterator);
 
             while (parser.getIsBye() == false) {
-                parser.parseInput(tasks, taskIterator);
+                taskIterator = parser.parseInput(tasks, taskIterator);
             }
             storage.writeTasks(tasks);
             ui.bye();

@@ -1,4 +1,4 @@
-package ssagit.datevalidator;
+package duke.datevalidator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

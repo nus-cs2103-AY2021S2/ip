@@ -1,9 +1,9 @@
-package ssagit.storage;
+package duke.storage;
 
-import ssagit.datevalidator.DateValidator;
-import ssagit.taskclass.DeadlineTask;
-import ssagit.taskclass.EventTask;
-import ssagit.taskclass.Task;
+import duke.datevalidator.DateValidator;
+import duke.taskclass.DeadlineTask;
+import duke.taskclass.EventTask;
+import duke.taskclass.Task;
 
 import java.io.File;
 import java.io.FileWriter;

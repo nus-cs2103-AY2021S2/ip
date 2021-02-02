@@ -1,9 +1,9 @@
-package ssagit.Task;
+package duke.Task;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ssagit.taskclass.Task;
+import duke.taskclass.Task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
