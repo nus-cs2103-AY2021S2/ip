@@ -28,6 +28,12 @@ public abstract class Task {
         return this.taskName;
     }
 
+    /**
+     * Takes in a LocalDate object and returns the date of the object in a special format.
+     *
+     * @param date the LocalDate object to print the date of.
+     * @return the string representation of the date of the object in the special format.
+     */
     public static String printDate(LocalDate date) {
         String month = date.getMonth().toString().substring(0, 3);
         String[] splitDate = date.toString().split("-");
@@ -36,7 +42,6 @@ public abstract class Task {
         return month.substring(0, 1) + month.substring(1, 3).toLowerCase()
                 + " " + day + " " + year;
     }
-
     public boolean isComplete() {
         return this.isDone;
     }

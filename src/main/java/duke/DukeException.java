@@ -19,7 +19,7 @@ public class DukeException extends Exception {
     /**
      * When printed, the exception will return the error message.
      *
-     * @return the error that causes the exception
+     * @return the error message.
      */
     @Override
     public String toString() {
