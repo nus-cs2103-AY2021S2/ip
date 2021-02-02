@@ -12,15 +12,11 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
     @FXML
-    private AnchorPane anchorPane;
-    @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
