@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,6 +9,8 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
+
 import java.io.IOException;  // Import the IOException class to handle errors
 
 public class Duke {
@@ -27,7 +31,7 @@ public class Duke {
         int c = 0;
 
 //        Initialize Task container
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = fetchTasks();
         int taskNumber = 0;
 
 
@@ -168,7 +172,6 @@ public class Duke {
         String currDir = System.getProperty("user.dir");
         String expectedDir = currDir + "/data";
 
-
         try {
 //            Creates directory if doesn't exist
             Files.createDirectories(Paths.get(expectedDir));
@@ -178,17 +181,16 @@ public class Duke {
                 String result;
 
                 Class taskType = task.getClass();
-                boolean taskStatus = task.done;
+                boolean taskStatus = task.isDone;
                 String description = task.name;
 
                 if (taskType.equals(Event.class)) {
-                    result = "E" + " | " +  (taskStatus ? "1" : "0") + " | " + description + " | " + ((Event) task).at;
+                    result = "E" + "/" +  (taskStatus ? "1" : "0") + "/" + description + "/" + ((Event) task).at;
                 } else if (taskType.equals(Deadline.class)) {
-                    result = "D" + " | " +  (taskStatus ? "1" : "0") + " | " + description + " | " + ((Deadline) task).by;
+                    result = "D" + "/" +  (taskStatus ? "1" : "0") + "/" + description + "/" + ((Deadline) task).by;
                 } else {
-                    result = "T" + " | " +  (taskStatus ? "1" : "0") + " | " + description;
+                    result = "T" + "/" +  (taskStatus ? "1" : "0") + "/" + description;
                 }
-
                 writer.write(result + "\n");
             }
             writer.close();

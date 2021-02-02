@@ -9,10 +9,12 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public Deadline(String name, LocalDate by, Boolean isDone) {
+
+    public Deadline(String name, LocalDate by, Boolean isDone
         super(name, isDone);
         this.by = by;
     }
+
 
     public String processDate(LocalDate originalDate) {
 //        LocalDate date = LocalDate.parse(originalDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -25,7 +27,7 @@ public class Deadline extends Task {
 
         return result;
     }
-
+                    
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + processDate(by) + ")";
