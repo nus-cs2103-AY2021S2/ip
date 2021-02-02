@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private static final String LINE_PREFIX = "|| ";
+    private static final String LINE_PREFIX = ">>> : ";
 
     private final Scanner in;
     private final PrintStream out;
@@ -21,15 +21,8 @@ public class Ui {
     }
 
     public String getUserCommand() {
-        this.out.print(LINE_PREFIX + "Enter command: ");
-        String fullInputLine = this.in.nextLine();
-
-        // silently consume all ignored lines
-        while (shouldIgnore(fullInputLine)) {
-            fullInputLine = this.in.nextLine();
-        }
-
-        showToUser("[Command entered:" + fullInputLine + "]");
-        return fullInputLine;
+        this.out.print(LINE_PREFIX);
+        String rawInput = this.in.nextLine();
+        return rawInput;
     }
 }
