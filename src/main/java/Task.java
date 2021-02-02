@@ -13,12 +13,20 @@ public class Task {
         return (isDone ? "\u2713" : " "); //return tick if done
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     public void markAsDone() {
         isDone = true;
     }
 
     public String getTaskType() {
         return taskType;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
