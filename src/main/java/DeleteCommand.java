@@ -1,10 +1,20 @@
+/**
+ * Represents a command involving the deletion of a task.
+ */
 public class DeleteCommand extends Command {
     private int taskno;
 
+    /**
+     * Constructor for DeleteCommand.
+     * @param taskno Number corresponding to the task to be deleted.
+     */
     DeleteCommand(int taskno) {
         this.taskno = taskno;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
         String task = tasks.get(this.taskno - 1).toString();
@@ -13,11 +23,20 @@ public class DeleteCommand extends Command {
         storage.savetasks(tasks);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     boolean isExit() {
         return false;
     }
 
+    /**
+     * Checks the equivalence of DeleteCommand this and Object obj.
+     * If obj is an instance of the DeleteCommand class and all attributes are equivalent, it is equivalent to this.
+     * @param obj the object which will be compared to this.
+     * @return Indication of whether obj is equivalent to this.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

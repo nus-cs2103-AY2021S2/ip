@@ -1,4 +1,11 @@
+/**
+ * Represents a command involving the display of saved tasks.
+ */
 public class ListCommand extends Command {
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
         String list = "";
@@ -8,11 +15,20 @@ public class ListCommand extends Command {
         ui.list(list);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     boolean isExit() {
         return false;
     }
 
+    /**
+     * Checks the equivalence of ListCommand this and Object obj.
+     * If obj is an instance of the ListCommand class and all attributes are equivalent, it is equivalent to this.
+     * @param obj the object which will be compared to this.
+     * @return Indication of whether obj is equivalent to this.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
