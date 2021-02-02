@@ -23,7 +23,7 @@ public class Event extends Task {
     public static Event newInstance(HashMap<String, String> argMap)
             throws NoSuchElementException, DateTimeParseException {
         if (!argMap.containsKey("desc")) {
-            throw new NoSuchElementException("Error: The description for todo cannot be empty.");
+            throw new NoSuchElementException("The description for todo cannot be empty.");
         }
 
         String desc = argMap.get("desc");

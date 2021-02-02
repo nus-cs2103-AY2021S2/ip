@@ -26,7 +26,7 @@ public class Deadline extends Task {
     public static Deadline newInstance(HashMap<String, String> argMap)
             throws NoSuchElementException, DateTimeParseException {
         if (!argMap.containsKey("desc")) {
-            throw new NoSuchElementException("Error: The description for todo cannot be empty.");
+            throw new NoSuchElementException("The description for todo cannot be empty.");
         }
 
         String desc = argMap.get("desc");
