@@ -19,29 +19,38 @@ public class Maya extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image maya = new Image(this.getClass().getResourceAsStream("/images/maya.jpg"));
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/tucker.jpg"));
+    private final Image maya = new Image(this.getClass().getResourceAsStream("/images/maya.jpg"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/tucker.jpg"));
 
+    private String filePath = "data/task.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
     @Override
     public void start(Stage stage) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+
+        try {
+            taskList = storage.load();
+        } catch(UnknownCommandException | NoSuchElementException
+                | ArrayIndexOutOfBoundsException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
@@ -86,13 +95,8 @@ public class Maya extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
+        userInput.setOnAction((event) -> handleUserInput());
     }
 
     /**
@@ -125,10 +129,11 @@ public class Maya extends Application {
     }
 
     private String getResponse(String input) {
-        return "Maya heard: " + input;
-//        ui.showLine();
-//        Scanner sc = new Scanner(System.in);
-//        Parser.parse(command, sc, ui, taskList, storage);
+        try {
+            return Parser.parse(input, ui, taskList, storage);
+        } catch (UnknownCommandException | IOException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -145,41 +150,31 @@ public class Maya extends Application {
 
         try {
             taskList = storage.load();
-        } catch (IOException e) {
-            ui.showError(e.getMessage());
-        } catch (UnknownCommandException e) {
-            ui.showError(e.getMessage());
-        }
 
-        ui.showWelcome();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            try {
+            ui.showWelcome();
+            Scanner sc = new Scanner(System.in);
+            while (sc.hasNext()) {
                 String command = sc.next();
                 ui.showLine();
 
-                Parser.parse(command, sc, ui, taskList, storage);
+                System.out.println(Parser.parse(command, ui, taskList, storage));
 
                 // To exit the program with the command "bye"
                 if (command.equals("bye")) {
                     break;
                 }
-            } catch (UnknownCommandException e) {
-                ui.showError(e.getMessage());
-            } catch (NoSuchElementException e) {
-                ui.showError(e.getMessage());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showError(e.getMessage());
-            } catch (IOException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
             }
+            sc.close();
+        } catch(UnknownCommandException | NoSuchElementException
+                | ArrayIndexOutOfBoundsException | IOException e){
+            System.out.println(e.getMessage());
+        } finally{
+            ui.showLine();
         }
-        sc.close();
     }
 
     public static void main(String[] args) {
+        System.out.println("main");
         new Maya().run("data/task.txt");
     }
 }

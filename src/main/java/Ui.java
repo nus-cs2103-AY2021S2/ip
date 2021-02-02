@@ -4,7 +4,7 @@ public class Ui {
     /**
      * Prints the logo and welcome messages.
      */
-    void showWelcome() {
+    String showWelcome() {
         String logo = "          ____                               \n"
                 + "        ,'  , `.                                   \n"
                 + "     ,-+-,.' _ |                                   \n"
@@ -21,32 +21,21 @@ public class Ui {
                 + "'---'           `--`---'        \\  ' ; `--`---'    \n"
                 + "                                 `--` ";
 
-        System.out.println(logo);
-
-        System.out.println("    ____________________________________");
-        System.out.println("    Hello, I'm Maya! \n    What can I do for you?");
-        System.out.println("    ____________________________________");
+        return String.format(logo + "Hello, I'm Maya! \n    What can I do for you?");
     }
 
     /**
      * Prints the line separator.
      */
-    void showLine() {
-        System.out.println("    ____________________________________");
+    String showLine() {
+        return "    ____________________________________";
     }
 
     /**
      * Prints the exit message.
      */
-    void showBye() {
-        System.out.println("    Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Prints the error message.
-     */
-    void showError(String err) {
-        System.out.println("    " + err);
+    String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -56,18 +45,35 @@ public class Ui {
      * @param isSearch a boolean representing whether
      *                 this command is a search command.
      */
-    void showList(List<Task> list, boolean isSearch) {
+    String showList(List<Task> list, boolean isSearch) {
         if (isSearch) {
             if (list.isEmpty()) {
-                System.out.println("    Sorry, there are no matching tasks in your list");
+                return "Sorry, there are no matching tasks in your list";
             } else {
-                System.out.println("    Here are matching tasks in your list:");
+                return "Here are matching tasks in your list:";
             }
         } else {
-            System.out.println("    Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+            for (int i = 1; i <= list.size(); i++) {
+                sb.append(i + ". " + list.get(i - 1) + "\n");
+            }
+            System.out.println("skfj");
+            System.out.println(sb.toString());
+            return sb.toString();
         }
-        for (int i = 1; i <= list.size(); i++) {
-            System.out.printf("    %d.%s\n", i, list.get(i - 1));
-        }
+    }
+
+    String showDone(Task task) {
+        return String.format("Nice! I've marked this task as done:\n%s", task);
+    }
+
+    String showAddTask(Task task, int listSize) {
+        return String.format("Got it. I've added this task:\n"
+                + "%s\nNow you have %d tasks in the list.\n", task, listSize);
+    }
+
+    String showRemoveTask(Task task, int listSize) {
+        return String.format("Noted. I've removed this task:\n"
+                + "%s\nNow you have %d tasks in the list.\n", task, listSize);
     }
 }

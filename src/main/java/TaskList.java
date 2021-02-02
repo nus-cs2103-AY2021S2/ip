@@ -33,13 +33,11 @@ public class TaskList {
      *
      * @param task a Task object to be added into the TaskList
      */
-    void addTask(Task task) {
+    Task addTask(Task task) {
         list.add(task);
         listSize++;
 
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("        " + task);
-        System.out.printf("    Now you have %d tasks in the list.\n", listSize);
+        return task;
     }
 
     /**
@@ -49,14 +47,12 @@ public class TaskList {
      *
      * @param index the 1-based index of the Task object to be removed.
      */
-    void removeTask(int index) {
+    Task removeTask(int index) {
         Task temp = list.get(index - 1);
         list.remove(index - 1);
         listSize--;
 
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("        " + temp);
-        System.out.printf("    Now you have %d tasks in the list.\n", listSize);
+        return temp;
     }
 
     /**
@@ -65,11 +61,10 @@ public class TaskList {
      *
      * @param index the 1-based index of the Task object to be removed.
      */
-    void markTaskAsDone(int index) {
+    Task markTaskAsDone(int index) {
         Task temp = list.get(index - 1);
         temp.markAsDone();
-        System.out.println("    Nice! I've marked this task as done:");
-        System.out.println("        " + temp);
+        return temp;
     }
 
     /**
