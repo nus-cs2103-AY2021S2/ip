@@ -1,3 +1,6 @@
-D, 0, return book, Sunday
 D, 0, return book, 2019-10-15 18:21
-T, 0, has
+D, 0, dance, Monday 4pm
+D, 0, play soccer, Friday 6pm
+T, 0, help 
+D, 0, submit ip, Wednesday 2359
+E, 0, finish ip, tmr 1pm

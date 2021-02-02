@@ -16,31 +16,34 @@ public class TaskList {
         this.isAlive = true;
     }
 
-    private void echoNoOfTask() {
-        System.out.println("\t\tNow you have " + getNoOfTasks() + " tasks in the list\n");
+    private String echoNoOfTask() {
+        String noOfTasksText = "Now you have " + getNoOfTasks() + " tasks in the list\n";
+        return noOfTasksText;
     }
 
-    public void addTask(Task task) {
+    public String addTask(Task task) {
+        String addStatus;
         this.list.add(task);
-        System.out.println("\t\tOkay I have added this task:\n\t\t\t" + task);
-        echoNoOfTask();
+        addStatus = "Okay I have added this task: \n" + task + "\n" + echoNoOfTask();
+        return addStatus;
     }
 
-    public void deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) throws DukeException {
+        String deleteStatus;
         if (index < 1 || index > getNoOfTasks()) {
             throw new DukeException("There is no such task number!");
         }
         Task task = list.get(index - 1);
         this.list.remove(index - 1);
-        System.out.println("\t\tOkay, I've I have removed this task:\n\t\t\t" + task);
-        echoNoOfTask();
+        deleteStatus = "Okay, I've I have removed this task: \n" + task + "\n" + echoNoOfTask();
+        return deleteStatus;
     }
 
     public int getNoOfTasks() {
         return list.size();
     }
 
-    public void findTasks(String toFind) {
+    public String findTasks(String toFind) {
         ArrayList<Task> newList = new ArrayList<>();
         for (Task t : this.list) {
             if (t.taskDescription.contains(toFind)) {
@@ -49,35 +52,32 @@ public class TaskList {
         }
         String text = "";
         if (newList.size() == 0) {
-            System.out.println("\t\tFound no related tasks");
+            System.out.println("Found no related tasks");
         } else {
-            text += "\t\tHere are the tasks in your list:\n";
+            text += "Here are the tasks in your list:\n";
             for (int i = 0; i < newList.size(); i++) {
-                text += "\t\t" +
-                        (i+1) +
+                text += (i+1) +
                         ". " +
-                        newList.get(i) +
-                        "\n";
+                        newList.get(i);
             }
-            System.out.println(text);
         }
+        return text;
     }
 
-    public void displayTasks() {
+    public String displayTasks() {
         String text = "";
         if (list.size() == 0) {
-            System.out.println("\t\tThere are no tasks");
+            text = "There are no tasks";
         } else {
-            text += "\t\tHere are the tasks in your list:\n";
+            text += "Here are the tasks in your list:\n";
             for (int i = 0; i < list.size(); i++) {
-                text += "\t\t" +
-                        (i+1) +
+                text += (i+1) +
                         ". " +
                         list.get(i) +
                         "\n";
             }
-            System.out.println(text);
         }
+        return text;
     }
 
     //TODO consider throwing an exception (eg. DukeException)
@@ -85,18 +85,20 @@ public class TaskList {
         throw new DukeException("Sorry I do not understand that!");
     }
 
-    public void markAsDone(int num) throws DukeException{
+    public String markAsDone(int num) throws DukeException{
         //TODO consider adding assertion/exception here(to prevent indexing issues)
+        String markStatus;
         if (getNoOfTasks() == 0) {
-            System.out.println("\t\tThere are no tasks in the list to mark as done!");
+            markStatus = "There are no tasks in the list to be marked as done!";
         } else {
             try {
                 list.get(num - 1).markAsDone();
-                System.out.println("\t\tOkay! I've marked this task as done:\n\t\t" + list.get(num - 1) + "\n");
+                markStatus = "Okay! I've marked this task as done:\n" + list.get(num - 1);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\t\tOnly Enter natural numbers (i.e. 1,2,3..) not more than " + getNoOfTasks());
             }
         }
+        return markStatus;
     }
 
     @Override

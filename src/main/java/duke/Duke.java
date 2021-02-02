@@ -31,49 +31,31 @@ public class Duke {
 
     /**
      * This is the driver of the program.
-     * Parser class in initialised here and user inputs are parsed to
-     * perform the necessary actions. DukeExceptions are caught and handled here
+     * Parser class in initialised here and user inputs are parsed and
+     * processed to generate a response.
+     * DukeExceptions are caught and handled here
      */
-    public void run() {
-        this.ui.welcomeMsg();
+    public String run2 (String input) {
+        String dukeResponse;
         Parser exec = new Parser(taskList);
-        Scanner sc = new Scanner(System.in);
-        String command;
-
-        while (sc.hasNext()) {
-            command = sc.nextLine();
-            try {
-                exec.executeCommand(command);
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-            if (!exec.isAlive) {
-                try {
-                    this.storage.saveFile(this.taskList.list);
-                    ui.byeMsg();
-                    sc.close();
-                    break;
-                }
-                catch (DukeException e) {
-                    ui.showError(e.getMessage());
-                    break;
-                }
-
-            }
-
+        try {
+            dukeResponse = exec.executeCommand(input);
+        } catch (DukeException e) {
+            dukeResponse = e.getMessage();
         }
+        if (exec.isExit) {
+            try {
+                this.storage.saveFile(this.taskList.list);
+            } catch (DukeException e) {
+                dukeResponse = e.getMessage();
+            }
+        }
+        return dukeResponse;
+
     }
 
-//    public static void main(String[] args) {
-//        new Duke().run();
-//        Application.launch(args);
-//    }
-
-
-
-
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return run2(input);
     }
 
 

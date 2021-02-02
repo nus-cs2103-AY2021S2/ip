@@ -6,7 +6,7 @@ package duke;
 
 public class Parser {
     public TaskList taskList;
-    public boolean isAlive;
+    public boolean isExit;
 
     /**
      * Instantiates the Parser with attributes.
@@ -14,7 +14,7 @@ public class Parser {
      */
     public Parser (TaskList taskList) {
         this.taskList = taskList;
-        this.isAlive = true;
+        this.isExit = false;
     }
 
     /**
@@ -22,33 +22,34 @@ public class Parser {
      * @param command the command given by the user
      * @throws DukeException an exception due to errors in parsing text
      */
-    public void executeCommand(String command) throws DukeException {
+    public String executeCommand(String command) throws DukeException {
         String arr[] = command.split(" ", 2);
         String firstWord = arr[0];
-        String time;
+        String reply = "";
         switch (firstWord) {
         case "bye":
-            this.isAlive = false;
+            this.isExit = true;
+            reply = "bye";
             break;
         case "list":
-            taskList.displayTasks();
+            reply = taskList.displayTasks();
             break;
         case "done":
             try {
                 String num = arr[1];
                 //TODO exception handling if num is not a number
-                taskList.markAsDone(Integer.valueOf(num));
+                reply = taskList.markAsDone(Integer.valueOf(num));
             } catch (NumberFormatException e) {
                 throw new DukeException("Enter an integer only");
             }
         case "find":
             String toFind = arr[1];
-            taskList.findTasks(toFind);
+            reply = taskList.findTasks(toFind);
             break;
         case "delete":
             try {
                 String num = arr[1];
-                taskList.deleteTask(Integer.valueOf(num));
+                reply = taskList.deleteTask(Integer.valueOf(num));
             } catch (NumberFormatException e) {
                 throw new DukeException("Enter an integer only");
             }
@@ -58,26 +59,27 @@ public class Parser {
                 throw new DukeException("Sorry, description of a todo cannot be empty");
             }
             String toDo = arr[1];
-            taskList.addTask(new ToDo(toDo));
+            reply = taskList.addTask(new ToDo(toDo));
             break;
         case "deadline":
             if (arr.length == 1) {
                 throw new DukeException("Sorry description of a deadline cannot be empty");
             }
             String deadline = arr[1];
-            taskList.addTask(new Deadline(getMsg(deadline, " /by "), getDateTime(deadline, " /by ")));
+            reply = taskList.addTask(new Deadline(getMsg(deadline, " /by "), getDateTime(deadline, " /by ")));
             break;
         case "event":
             if (arr.length == 1) {
                 throw new DukeException("Sorry description of an event cannot be empty");
             }
             String event = arr[1];
-            taskList.addTask(new Event(getMsg(event, " /at "), getDateTime(event, " /at ")));
+            reply = taskList.addTask(new Event(getMsg(event, " /at "), getDateTime(event, " /at ")));
             break;
         default:
             taskList.complain();
 
         }
+        return reply;
     }
 
 

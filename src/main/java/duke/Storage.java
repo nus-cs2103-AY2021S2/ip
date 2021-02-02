@@ -117,7 +117,7 @@ public class Storage {
             if (arr.length != 4) {
                 throw new DukeException("Read invalid Event task from the file");
             }
-            result = new Deadline(arr[2], arr[3]);
+            result = new Event(arr[2], arr[3]);
             if (Integer.valueOf(arr[1]) == 1) {
                 result.isDone = true;
             }
