@@ -9,11 +9,6 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command {
     /**
-     * Constructs a ExitCommand object.
-     */
-    public ExitCommand() {}
-
-    /**
      * Returns goodbye message before stopping the program.
      *
      * @param tasks TaskList containing tasks.
