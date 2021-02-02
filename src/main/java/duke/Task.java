@@ -23,12 +23,20 @@ public class Task {
     }
 
     /**
-     * This method is used to return the Task object after setting isDone to true.
-     * @return Current instance of Task object.
+     * This method is used to return the <code>Task</code> object after setting isDone to true.
+     * @return Current instance of <code>Task</code> object.
      */
     public Task markAsDone() {
         isDone = true;
         return this;
+    }
+
+    /**
+     * This method is used to return the description of the <code>Task</code>.
+     * @return Description of the current instance of <code>Task</code> object.
+     */
+    public String getDescription() {
+        return description;
     }
 
     @Override
