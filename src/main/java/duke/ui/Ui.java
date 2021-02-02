@@ -32,6 +32,7 @@ public class Ui {
         this(System.in, System.out);
     }
 
+    // Varargs used here
     public void display(String... msg) {
         out.println(BORDER);
         for (String m : msg) {
