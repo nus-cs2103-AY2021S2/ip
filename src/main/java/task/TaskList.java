@@ -25,24 +25,24 @@ public class TaskList {
     /**
      * Lists tasks to the standard output.
      */
-    public void listTasks() {
+    public void listTasks(Ui ui) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             builder.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }
-        Ui.echo(builder.toString().trim());
+        ui.setResponse(builder.toString().trim());
     }
 
     /**
      * Lists tasks to the standard input with a custom list.
      * @param customTaskList custom list of tasks to print.
      */
-    public static void listTasks(List<Task> customTaskList) {
+    public static void listTasks(List<Task> customTaskList, Ui ui) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < customTaskList.size(); i++) {
             builder.append(String.format("%d. %s\n", i + 1, customTaskList.get(i).toString()));
         }
-        Ui.echo(builder.toString().trim());
+        ui.setResponse(builder.toString().trim());
     }
 
     /**
@@ -50,7 +50,7 @@ public class TaskList {
      * @param commands Commands parsed by the parser.
      * @throws DukeException If todo is not formatted properly.
      */
-    public void addTodo(HashMap<String, String> commands) throws DukeException {
+    public void addTodo(HashMap<String, String> commands, Ui ui) throws DukeException {
         String taskName = commands.get("info");
         if (taskName == "") {
             throw new DukeException("Todo tasks should be formatted as such: todo [task name].");
@@ -59,7 +59,7 @@ public class TaskList {
         Task todoTask = new Todo(taskName);
         tasks.add(todoTask);
 
-        Ui.echo(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
+        ui.setResponse(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
     }
 
     /**
@@ -67,7 +67,7 @@ public class TaskList {
      * @param commands Commands parsed by the parser.
      * @throws DukeException If Event is not formatted properly.
      */
-    public void addEvent(HashMap<String, String> commands) throws DukeException {
+    public void addEvent(HashMap<String, String> commands, Ui ui) throws DukeException {
         String eventName = commands.get("info");
         String timeStr = commands.get("at");
 
@@ -79,7 +79,7 @@ public class TaskList {
         Event eventTask = new Event(eventName, timeOfEvent);
         tasks.add(eventTask);
 
-        Ui.echo(String.format("Added a deadline for you:\n%s\n%s",
+        ui.setResponse(String.format("Added a deadline for you:\n%s\n%s",
                 eventTask.toString(), getNumberOfTasksString(tasks)));
     }
     /**
@@ -87,7 +87,7 @@ public class TaskList {
      * @param commands Commands parsed by the parser.
      * @throws DukeException If Deadline is not formatted properly.
      */
-    public void addDeadline(HashMap<String, String> commands) throws DukeException {
+    public void addDeadline(HashMap<String, String> commands, Ui ui) throws DukeException {
         String deadlineName = commands.get("info");
         String deadlineTimeStr = commands.get("by");
 
@@ -100,7 +100,7 @@ public class TaskList {
 
         tasks.add(deadlineTask);
 
-        Ui.echo(String.format("Added a deadline for you:\n%s\n%s",
+        ui.setResponse(String.format("Added a deadline for you:\n%s\n%s",
                 deadlineTask.toString(), getNumberOfTasksString(tasks)));
     }
 
@@ -109,7 +109,7 @@ public class TaskList {
      * @param commands Commands parsed by the parser.
      * @throws DukeException If Delete command is not formatted properly.
      */
-    public void deleteTask(HashMap<String, String> commands) throws DukeException {
+    public void deleteTask(HashMap<String, String> commands, Ui ui) throws DukeException {
         String taskToDeleteStr = commands.get("info");
 
         if (taskToDeleteStr == "") {
@@ -120,7 +120,7 @@ public class TaskList {
             int taskIdx = Integer.parseInt(taskToDeleteStr) - 1;
             Task taskToDelete = tasks.get(taskIdx);
             tasks.remove(taskToDelete);
-            Ui.echo(String.format("I've removed this task from your list\n%s", taskToDelete.toString()));
+            ui.setResponse(String.format("I've removed this task from your list\n%s", taskToDelete.toString()));
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
             throw new DukeException("Please delete a task that exists in the list. "
                     + "Task numbers that are 0 or lesser, "
@@ -136,7 +136,7 @@ public class TaskList {
      * @param commands Commands parsed by the parser.
      * @throws DukeException If "mark as done" command is not formatted properly.
      */
-    public void markTaskAsDone(HashMap<String, String> commands) throws DukeException {
+    public void markTaskAsDone(HashMap<String, String> commands, Ui ui) throws DukeException {
         String taskToMarkAsDoneStr = commands.get("info");
 
         if (taskToMarkAsDoneStr == "") {
@@ -146,7 +146,7 @@ public class TaskList {
         try {
             int taskIdx = Integer.parseInt(taskToMarkAsDoneStr) - 1;
             tasks.get(taskIdx).setDone();
-            Ui.echo(String.format("Nice! This task is done :)\n%s", tasks.get(taskIdx).toString()));
+            ui.setResponse(String.format("Nice! This task is done :)\n%s", tasks.get(taskIdx).toString()));
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
             throw new DukeException("Please mark a task that exists in the list as done. "
                     + "Task numbers that are 0 or lesser, "
@@ -162,7 +162,7 @@ public class TaskList {
      * @param commands Commands parsed by the parser.
      * @throws DukeException If find command is not formatted properly.
      */
-    public void findTasks(HashMap<String, String> commands) throws DukeException {
+    public void findTasks(HashMap<String, String> commands, Ui ui) throws DukeException {
         String searchTerm = commands.get("info");
 
         if (searchTerm == "") {
@@ -174,8 +174,8 @@ public class TaskList {
                 foundList.add(task);
             }
         }
-        Ui.echo("Here are the tasks we found:");
-        listTasks(foundList);
+        ui.setResponse("Here are the tasks we found:");
+        listTasks(foundList, ui);
     }
 
     /**
