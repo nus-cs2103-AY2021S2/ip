@@ -1,9 +1,12 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        final String PATH = "./data/duke.txt";
+
         Scanner input = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        Storage storage = new Storage(PATH);
+        TaskList taskList = new TaskList(storage.loadData());
 
         //Duke starts up with an introduction
         System.out.println("Hey, I'm Duke!\n" + "How can I help you?");
@@ -67,6 +70,7 @@ public class Duke {
                 }
                 taskList.addTask(item);
             }
+            storage.writeToFile(taskList.getList());
         }
     }
 }

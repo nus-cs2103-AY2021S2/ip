@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class TaskList {
     protected ArrayList<Task> taskList;
 
-    public TaskList() {
-        taskList = new ArrayList<>();
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
     public void addTask(Task task){
@@ -33,7 +33,15 @@ public class TaskList {
         return taskList.size();
     }
 
+    public ArrayList<Task> getList() {
+        return taskList;
+    }
+
     public void printList() {
+        if (taskList.size() == 0) {
+            System.out.println("Looks like you have no tasks currently. Add some tasks!");
+        }
+
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             Task item = taskList.get(i);
