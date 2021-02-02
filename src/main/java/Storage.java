@@ -1,16 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileWriter;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.List;
-
+import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Storage {
-    File file;
+    private File file;
 
     /**
      * Initialises a newly created Storage object
@@ -46,9 +44,9 @@ public class Storage {
 
     /**
      * Parses the contents of the TaskList in the specified file
-     * and translates the file into a List<Task> object.
+     * and translates the file into a List of Task object.
      *
-     * @return a List<Task> containing the Task objects as specified in the file.
+     * @return a List of Task containing the Task objects as specified in the file.
      * @throws FileNotFoundException if file specified by the path is not found.
      * @throws UnknownCommandException if the tag stored in the TaskList
      *                                      does not correspond to Todo, Deadline or Event.
@@ -79,7 +77,6 @@ public class Storage {
         }
 
         sc.close();
-        
         return list;
     }
 
@@ -97,7 +94,7 @@ public class Storage {
     /**
      * Overwrites the file with the new updated TaskList.
      *
-     * @param list a List<Task> object derived from TaskList
+     * @param list a List of Task object derived from TaskList
      *             with the updated Task objects.
      * @throws IOException if an I/O error occurred.
      */
@@ -138,10 +135,14 @@ public class Storage {
             return String.format("T : %d : %s\n", isDone, task.name);
         } else if (task instanceof Deadline) {
             return String.format("D : %d : %s : %s\n", isDone,
-                    task.name, ((Deadline) task).time);
+                    task.name, ((Deadline) task).getTime());
         } else {
             return String.format("E : %d : %s : %s\n", isDone,
-                    task.name, ((Event) task).time);
+                    task.name, ((Event) task).getTime());
         }
+    }
+
+    File getFile() {
+        return file;
     }
 }

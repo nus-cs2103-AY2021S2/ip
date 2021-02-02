@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
-    LocalDate time;
+public class Event extends Task {
+    private LocalDate time;
 
     /**
      * Initialises a newly created Event object
@@ -43,5 +43,9 @@ public class Event extends Task{
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(),
                 time.format(DateTimeFormatter.ofPattern("dd MMM yyy")));
+    }
+
+    LocalDate getTime() {
+        return this.time;
     }
 }

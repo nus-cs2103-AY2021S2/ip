@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    List<Task> list;
-    int listSize;
+    private List<Task> list;
+    private int listSize;
 
     /**
      * Initialises a newly created TaskList object
@@ -19,7 +19,7 @@ public class TaskList {
      * so that it represents a List of Tasks
      * as given in the argument list.
      *
-     * @param list a List<Task> containing Task objects.
+     * @param list a List of Task containing Task objects.
      */
     public TaskList(List<Task> list) {
         this.list = list;
@@ -76,16 +76,24 @@ public class TaskList {
      * Returns the tasks in the list that matches the keyword argument.
      *
      * @param keyword the keyword to search for a Task.
-     * @return a List<Task> containing all matching tasks.
+     * @return a List of Task containing all matching tasks.
      */
     List<Task> searchTask(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
 
         for (Task t : list) {
-            if(t.name.contains(keyword)) {
+            if (t.name.contains(keyword)) {
                 matchingTasks.add(t);
             }
         }
         return matchingTasks;
+    }
+
+    List<Task> getList() {
+        return this.list;
+    }
+
+    int getListSize() {
+        return this.listSize;
     }
 }
