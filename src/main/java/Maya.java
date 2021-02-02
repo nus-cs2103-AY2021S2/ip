@@ -1,5 +1,10 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -9,6 +14,12 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Maya extends Application{
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -30,15 +41,6 @@ public class Maya extends Application{
         } catch (UnknownCommandException e) {
             ui.showError(e.getMessage());
         }
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
     }
 
     /**
@@ -79,5 +81,14 @@ public class Maya extends Application{
 
     public static void main(String[] args) {
         new Maya("data/task.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
