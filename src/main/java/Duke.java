@@ -10,15 +10,22 @@ import java.util.HashMap;
 
 import exception.DukeException;
 import exception.DukeInvalidInputException;
+import gui.MainWindow;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
+
     protected static Storage storage = new Storage();
     protected static TaskList taskList = new TaskList(storage);
 
     /**
      * Entry point for program
-     * @param args command line arguments
-     * @throws IOException When file cannot be read.
+     * 
+     * @param args
+     *                 command line arguments
+     * @throws IOException
+     *                         When file cannot be read.
      */
     public static void main(String[] args) throws IOException {
 
@@ -30,6 +37,14 @@ public class Duke {
 
         chatLoop(System.in, System.out);
 
+    }
+
+    MainWindow window = new MainWindow();
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        window.createChatWindow();
+        primaryStage.setScene(window.getScene());
     }
 
     protected static void chatLoop(InputStream in, OutputStream out) throws IOException {
