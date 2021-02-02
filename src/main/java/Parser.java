@@ -37,8 +37,8 @@ public class Parser {
         try {
             return Integer.parseInt(Parser.trimWhiteSpaces(input));
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(Ui.lineGetter() +
-                    " Enter a number after command, 'done (number)'\n or 'delete (number)'\n"
+            throw new NumberFormatException(Ui.lineGetter()
+                     + " Enter a number after command, 'done (number)'\n or 'delete (number)'\n"
                      + Ui.lineGetter());
         }
     }

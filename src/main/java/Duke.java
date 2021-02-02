@@ -34,7 +34,9 @@ public class Duke {
             try {
                 Files.createDirectory(Paths.get(FOLDER_PATH));
                 TaskList.setList(new ArrayList<Task>());
-            } catch (IOException e1){}
+            } catch (IOException e1){
+                System.out.println(Ui.lineGetter() + " Cannot create new directory\n" + Ui.lineGetter());
+            }
             //shld just be ioexception, shldnt come to this catch block
             //File f = new File(relPath); //no need to create file here will get auto created when writing
         }

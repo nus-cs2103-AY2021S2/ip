@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Represents the accessing a file to write and read.
@@ -16,7 +15,7 @@ public class FileAccessor {
      *
      * @param path Specify the path where the file with data exists.
      * @param tasks ArrayList to save the tasks from hard drive to.
-     * @return ArrayList<Task> list of tasks saved in path.
+     * @return ArrayList of tasks saved in path.
      * @throws FileNotFoundException if file at path does not exist.
      * @throws IllegalArgumentException if data in file is not in the correct format.
      */
@@ -65,15 +64,16 @@ public class FileAccessor {
                 done = "1";
             }
             if (task instanceof Todo) {
-                Todo todo = (Todo)task;
+                Todo todo = (Todo) task;
                 taskToWrite = taskToWrite + "T|" + done + "|" + todo.task + System.lineSeparator();
                 //'\n' may not work in all OS, use the System.lineSeparator()
             } else if (task instanceof Deadline) {
-                Deadline deadline = (Deadline)task;
+                Deadline deadline = (Deadline) task;
                 taskToWrite =
-                        taskToWrite + "D|" + done + "|" + deadline.task + "|" + deadline.getDeadline() + System.lineSeparator();
+                        taskToWrite + "D|" + done + "|" + deadline.task + "|" + deadline.getDeadline()
+                                + System.lineSeparator();
             } else {
-                Event event = (Event)task;
+                Event event = (Event) task;
                 taskToWrite =
                         taskToWrite + "E|" + done + "|" + event.task + "|" + event.getEvent() + System.lineSeparator();
             }

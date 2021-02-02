@@ -18,7 +18,7 @@ public class TaskList {
     /**
      * Returns an ArrayList of the tasks so far.
      *
-     * @return ArrayList<Task> tasks so far.
+     * @return ArrayList of tasks so far.
      */
     public static ArrayList<Task> getList() {
         //prob with this is can change value as pass by ref
@@ -120,7 +120,7 @@ public class TaskList {
             }
         }
         if (result.equals("")) {
-            return Ui.lineGetter() +  " Sorry, there are no matching tasks :( \n"
+            return Ui.lineGetter() + " Sorry, there are no matching tasks :(\n"
                     + Ui.lineGetter();
         } else {
             return Ui.lineGetter() + " Here are your matching tasks: \n"
