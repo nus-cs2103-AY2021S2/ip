@@ -2,38 +2,68 @@ ____________________________________________________________
 Pai Kia Bot: Eh harlo! Call me Pai Kia Bot.
 Pai Kia Bot: What you want?
 ____________________________________________________________
-Your response: 
+You: todo read book
 ____________________________________________________________
-Pai Kia Bot: ok i added this task chop chop: [T][ ] read book
+Paikia Bot: ok i just help u added this todo -- [T][ ] read book
+Paikia Bot: now u got 1 item(s) in your list ah
 ____________________________________________________________
-Your response: 
+You: deadline return book /by June 6th
 ____________________________________________________________
-Pai Kia Bot: ok i added this task chop chop: [D][ ] return book (by: June 6th)
+Paikia Bot: ok i just help u added this deadline -- [D][ ] return book (by June 6th)
+Paikia Bot: now u got 2 item(s) in your list ah
 ____________________________________________________________
-Your response: 
+You: event project meeting /at Aug 6th 2-4pm
 ____________________________________________________________
-Pai Kia Bot: ok i added this task chop chop: [E][ ] project meeting (at: Aug 6th 2-4pm)
+Paikia Bot: ok i just help u added this event -- [E][ ] project meeting (at Aug 6th 2-4pm)
+Paikia Bot: now u got 3 item(s) in your list ah
 ____________________________________________________________
-Your response: 
+You: list
 ____________________________________________________________
-Pai Kia Bot: i send u your task list ah
-1.[T][ ] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+1. [T][ ] read book
+2. [D][ ] return book (by June 6th)
+3. [E][ ] project meeting (at Aug 6th 2-4pm)
 ____________________________________________________________
-Your response: 
+You: done 2
 ____________________________________________________________
-Pai Kia Bot: ok i give this task a done chop: [D][x] return book (by: June 6th)
+Paikia Bot: ok i just help u checked this task as done -- [D][X] return book (by June 6th)
 ____________________________________________________________
-Your response: 
+You: list
 ____________________________________________________________
-Pai Kia Bot: i send u your task list ah
-1.[T][ ] read book
-2.[D][x] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+1. [T][ ] read book
+2. [D][X] return book (by June 6th)
+3. [E][ ] project meeting (at Aug 6th 2-4pm)
 ____________________________________________________________
-Your response: 
+You: todo
+____________________________________________________________
+Paikia Bot: you want to add what todo task, limpeh need more information ah. input 'todo <info>. eg, todo read book
+____________________________________________________________
+You: deadline
+____________________________________________________________
+Paikia Bot: you want to add what deadline task, limpeh need more information ah. input 'deadline <info> <date>. eg, deadline return book /by 10 Aug
+____________________________________________________________
+You: deadline return another book
+____________________________________________________________
+Paikia Bot: i dun see any date inputs leh. to add date input, use '/<date>'. eg, deadline return book /by 10 Aug
+____________________________________________________________
+You: event
+____________________________________________________________
+Paikia Bot: you want to add what event task, limpeh need more information ah. input 'event <info> /<date>. eg, event bookfest /at 24 Aug 1pm
+____________________________________________________________
+You: event another project meeting
+____________________________________________________________
+Paikia Bot: i dun see any date inputs leh. to add date input, use '/<date>'. eg, event bookfest /at 24 Aug 1pm
+____________________________________________________________
+You: lmao
+____________________________________________________________
+Paikia Bot: wrong input format leh, can try again onot?
+____________________________________________________________
+You: list
+____________________________________________________________
+1. [T][ ] read book
+2. [D][X] return book (by June 6th)
+3. [E][ ] project meeting (at Aug 6th 2-4pm)
 ____________________________________________________________
 You: bye
+____________________________________________________________
 Pai Kia Bot: Leave so soon ah? Limpeh sleep first, if got no issue don't disturb me.
 ____________________________________________________________

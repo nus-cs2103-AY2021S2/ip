@@ -4,4 +4,11 @@ event project meeting /at Aug 6th 2-4pm
 list
 done 2
 list
+todo
+deadline
+deadline return another book
+event
+event another project meeting
+lmao
+list
 bye

@@ -13,18 +13,19 @@ public class MyDuke {
 
         System.out.print("You: ");
         String input = sc.nextLine();
+        System.out.println(input);
 
         // level-1
         while (!input.equals("bye")) {
 
-            String[] inputArr = input.split(" ", 2); //improved implementation
-            System.out.println(inputArr[0]);
+            String[] inputArr = input.split(" ", 2); // improved implementation
+            // System.out.println(inputArr[0]);
             // Level-2 implementation
             if (input.equals("list")) {
                 int counter = 1;
                 String[] tempArr = new String[100];
-                if (list.isEmpty()) { //improved implementation in case list is empty, gives a clear output
-                    print("Paikia Bot: eh list is empty leh."); 
+                if (list.isEmpty()) { // improved implementation in case list is empty, gives a clear output
+                    print("Paikia Bot: eh list is empty leh.");
                 } else {
                     for (Task t : list) { // changed String s to Task t
                         tempArr[counter - 1] = counter + ". " + t.toString();
@@ -32,57 +33,72 @@ public class MyDuke {
                     }
                     print(tempArr);
                 }
-                
+
             } else if (inputArr[0].equals("done")) { // level-3 addition
-                if (inputArr.length == 1) { // if no arg, error management
-                    print("Paikia Bot: you done what task, limpeh need more information ah. input 'done <task number>. eg, done 3");
-                } else {
-                    int ref = Integer.parseInt(inputArr[1]); //error management: input ref may exceed total number of task in list, KIV
+
+                try {
+                    indexChecker(inputArr);
+                    int ref = Integer.parseInt(inputArr[1]);
                     list.set(ref - 1, list.get(ref - 1).setAsDone());
                     print("Paikia Bot: ok i just help u checked this task as done -- " + list.get(ref - 1).toString());
+                } catch (NoIndexException e) {
+                    print(e.getMessage());
+                } catch (IndexOutOfBoundsException e) {
+                    print("Paikia Bot: the number that you inputted ah, is more than the number of tasks in your list leh, try again pls ah");
+                } catch (NumberFormatException e) {
+                    print("Paikia Bot: ur input after 'done' is invalid, reminder that it should be a single integer"
+                            + "and remember to not leave a space after your input. eg, done 3");
                 }
+
             } else if (inputArr[0].equals("todo")) {
-                if (inputArr.length == 1) { // if no arg, error management
-                    print("Paikia Bot: you want to add what todo task, limpeh need more information ah. input 'todo <info>. eg, todo read book");
-                } else {
+
+                try {
+                    todoChecker(inputArr);
                     ToDo td = new ToDo(inputArr[1], false);
                     list.add(td);
-                    print(new String[] {
-                        "Paikia Bot: ok i just help u added this todo -- " + td.toString(),
-                        "Paikia Bot: now u got " + list.size() + " item(s) in your list ah"
-                    });
+                    print(new String[] { "Paikia Bot: ok i just help u added this todo -- " + td.toString(),
+                            "Paikia Bot: now u got " + list.size() + " item(s) in your list ah" });
+                } catch (NoToDoException e) {
+                    print(e.getMessage());
+
                 }
             } else if (inputArr[0].equals("event")) {
-                if (inputArr.length == 1) { // if no arg, error management
-                    print("Paikia Bot: you want to add what event task, limpeh need more information ah. input 'todo <info>. eg, todo read book");
-                } else {
-                    String[] temp = inputArr[1].split("/", 2); //warning, error management required
+
+                try {
+                    eventChecker(inputArr);
+                    String[] temp = inputArr[1].split("/", 2);
                     Event e = new Event(temp[1], temp[0], false);
                     list.add(e);
-                    print(new String[] {
-                        "Paikia Bot: ok i just help u added this event -- " + e.toString(),
-                        "Paikia Bot: now u got " + list.size() + " item(s) in your list ah"
-                    });
+                    print(new String[] { "Paikia Bot: ok i just help u added this event -- " + e.toString(),
+                            "Paikia Bot: now u got " + list.size() + " item(s) in your list ah" });
+                } catch (NoEventException e) {
+                    print(e.getMessage());
+                } catch (NoDateException e) {
+                    print(e.getMessage());
                 }
+
             } else if (inputArr[0].equals("deadline")) {
-                if (inputArr.length == 1) { // if no arg, error management
-                    print("Paikia Bot: you want to add what deadline task, limpeh need more information ah. input 'todo <info>. eg, todo read book");
-                } else {
-                    String[] temp = inputArr[1].split("/", 2); //warning, error management required
+
+                try {
+                    deadlineChecker(inputArr);
+                    String[] temp = inputArr[1].split("/", 2);
                     Deadline d = new Deadline(temp[1], temp[0], false);
                     list.add(d);
-                    print(new String[] {
-                        "Paikia Bot: ok i just help u added this deadline -- " + d.toString(),
-                        "Paikia Bot: now u got " + list.size() + " item(s) in your list ah"
-                    });
+                    print(new String[] { "Paikia Bot: ok i just help u added this deadline -- " + d.toString(),
+                            "Paikia Bot: now u got " + list.size() + " item(s) in your list ah" });
+                } catch (NoDeadlineException e) {
+                    print(e.getMessage());
+                } catch (NoDateException e) {
+                    print(e.getMessage());
                 }
-            }
-            else {
+
+            } else {
                 print("Paikia Bot: wrong input format leh, can try again onot?");
             }
 
             System.out.print("You: ");
             input = sc.nextLine();
+            System.out.println(input);
         }
         print("Pai Kia Bot: Leave so soon ah? Limpeh sleep first, if got no issue don't disturb me.");
     }
@@ -103,6 +119,40 @@ public class MyDuke {
 
         }
         System.out.println(DASH);
+    }
+
+    static void indexChecker(String[] inputArr) throws NoIndexException {
+        if (inputArr.length == 1) {
+            throw new NoIndexException(
+                    "Paikia Bot: you done what task, limpeh need more information ah. input 'done <task number>'. eg, done 3");
+        }
+    }
+
+    static void todoChecker(String[] inputArr) throws NoToDoException {
+        if (inputArr.length == 1) {
+            throw new NoToDoException(
+                    "Paikia Bot: you want to add what todo task, limpeh need more information ah. input 'todo <info>. eg, todo read book");
+        }
+    }
+
+    static void eventChecker(String[] inputArr) throws NoEventException, NoDateException {
+        if (inputArr.length == 1) {
+            throw new NoEventException(
+                    "Paikia Bot: you want to add what event task, limpeh need more information ah. input 'event <info> /<date>. eg, event bookfest /at 24 Aug 1pm");
+        } else if (inputArr[1].split("/", 2).length == 1) {
+            throw new NoDateException(
+                    "Paikia Bot: i dun see any date inputs leh. to add date input, use '/<date>'. eg, event bookfest /at 24 Aug 1pm");
+        }
+    }
+
+    static void deadlineChecker(String[] inputArr) throws NoDeadlineException, NoDateException {
+        if (inputArr.length == 1) {
+            throw new NoDeadlineException(
+                    "Paikia Bot: you want to add what deadline task, limpeh need more information ah. input 'deadline <info> <date>. eg, deadline return book /by 10 Aug");
+        } else if (inputArr[1].split("/", 2).length == 1) {
+            throw new NoDateException(
+                    "Paikia Bot: i dun see any date inputs leh. to add date input, use '/<date>'. eg, deadline return book /by 10 Aug");
+        }
     }
 
 }
@@ -138,7 +188,7 @@ class Task {
 class ToDo extends Task {
 
     ToDo(String s, boolean b) {
-        super(s,b);
+        super(s, b);
     }
 
     ToDo setAsDone() {
@@ -159,7 +209,7 @@ class Deadline extends Task {
     String deadline;
 
     Deadline(String deadline, String s, boolean b) {
-        super(s,b);
+        super(s, b);
         this.deadline = deadline;
     }
 
@@ -181,7 +231,7 @@ class Event extends Task {
     String date;
 
     Event(String date, String s, boolean b) {
-        super(s,b);
+        super(s, b);
         this.date = date;
     }
 
@@ -196,5 +246,42 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(" + this.date + ")";
+    }
+}
+
+class MyDukeException extends Exception {
+
+    MyDukeException(String s) {
+        super(s);
+    }
+}
+
+class NoIndexException extends MyDukeException {
+    NoIndexException(String s) {
+        super(s);
+    }
+}
+
+class NoToDoException extends MyDukeException {
+    NoToDoException(String s) {
+        super(s);
+    }
+}
+
+class NoEventException extends MyDukeException {
+    NoEventException(String s) {
+        super(s);
+    }
+}
+
+class NoDeadlineException extends MyDukeException {
+    NoDeadlineException(String s) {
+        super(s);
+    }
+}
+
+class NoDateException extends MyDukeException {
+    NoDateException(String s) {
+        super(s);
     }
 }
