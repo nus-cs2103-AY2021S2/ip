@@ -21,3 +21,9 @@ src/main/java/Event.class
 src/main/java/Task.class
 src/main/java/ToDo.class
 text-ui-test/output.txt
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

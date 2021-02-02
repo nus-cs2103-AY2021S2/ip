@@ -5,7 +5,7 @@ import java.io.File;
 public class Duke {
     public static final Scanner sc = new Scanner(System.in);
     public static TaskList tasks;
-    public static FileHandler fh; 
+    public static FileHandler fh;
     public static Ui ui;
 
     public Duke() {
