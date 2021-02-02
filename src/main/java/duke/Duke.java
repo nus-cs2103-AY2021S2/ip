@@ -55,4 +55,17 @@ class Duke {
     public String process(String[] processedInput) {
         return this.ui.processCommand(processedInput, this.taskList);
     }
+
+    public String getResponse(String input) {
+        Duke iceBear = new Duke();
+        if (input.equals("bye")) {
+            return "Bye. Hope to see you again soon!";
+        }
+        try {
+            String[] processedText = iceBear.processCommand(input);
+            return iceBear.process(processedText);
+        } catch (DukeException exception) {
+            return exception.toString();
+        }
+    }
 }
