@@ -14,14 +14,20 @@ import fakebot.task.Task;
 import fakebot.task.TaskList;
 import fakebot.task.ToDos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
 /**
  * Fakebot class, main class for Fakebot.
  */
-public class FakeBot extends Application {
+public class FakeBot{
     private static final String OLD_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -55,7 +61,6 @@ public class FakeBot extends Application {
     private TaskList taskList;
     private Storage storage;
 
-
     /**
      * Class constructor specifying save file name and save file path.
      */
@@ -78,124 +83,128 @@ public class FakeBot extends Application {
     }
 
     /**
-     * Prints Hello Message used at the start of the project.
+     * Returns Hello Message used at the start of the project.
+     *
+     * @return Returns Hello Message
      */
-    public void printHelloMessage() {
-        ui.printBotMessage("Hello from\n" + LOGO + "What can I do for you?");
+    public String getHelloMessage() {
+        return Parser.getBotMPrintMessage("Hello from\n" + LOGO + "What can I do for you?");
     }
 
     /**
-     * Prints message to show that the task is done.
+     * Returns message to show that the task is done.
      *
      * @param task Task to print.
+     * @return Returns Done Message
      */
-    public void printDoneMessage(Task task) {
-        ui.printBotMessage("Nice! I've marked this task as done:\n " + task.toString());
+    public String getDoneMessage(Task task) {
+        return Parser.getBotMPrintMessage("Nice! I've marked this task as done:\n " + task.toString());
     }
 
 
     /**
-     * Prints message to show that the task is deleted and print the remaining number of task left.
+     * Returns message to show that the task is deleted and print the remaining number of task left.
      *
      * @param task Deleted Task.
+     * @return Returns Delete Message
      */
-    public void printDeleteMessage(Task task) {
-        ui.printBotMessage("Noted. I've removed this task:\n " + task.toString()
+    public String getDeleteMessage(Task task) {
+        return Parser.getBotMPrintMessage("Noted. I've removed this task:\n " + task.toString()
                 + "\nNow you have " + taskList.getSize() + " tasks in the list.");
     }
 
     /**
-     * Prints message to show that the task is deleted and print the remaining number of task left.
+     * Returns message to show that the task is deleted and print the remaining number of task left.
      *
      * @param task Added Task.
+     * @return Returns Added Task Message
      */
-    public void printAddedTaskMessage(Task task) {
-        ui.printBotMessage("Got it. I've added this task: \n  " + task.toString()
+    public String getAddedTaskMessage(Task task) {
+        return Parser.getBotMPrintMessage("Got it. I've added this task: \n  " + task.toString()
                 + "\nNow you have " + taskList.getSize() + " tasks in the list.");
     }
 
     /**
      * Process Command given by user.
+     * Returns process command result message
      *
      * @param command Total number of Task Left.
+     * @return Returns process command result message
      */
-    public boolean processCommand(Command command) {
+    public String processCommand(Command command) {
         switch (command.getCommand()) {
         case BYE:
-            return false;
+            return "";
         case LIST:
-            ui.printTasks(taskList);
-            break;
+            return Parser.getTaskListPrintMessage(taskList);
         case DONE:
-            processDoneCommand(command);
-            break;
+            return processDoneCommand(command);
         case TODO:
-            processTodoCommand(command);
-            break;
+            return processTodoCommand(command);
         case DEADLINE:
-            processDeadlineCommand(command);
-            break;
+            return processDeadlineCommand(command);
         case EVENT:
-            processEventCommand(command);
-            break;
+            return processEventCommand(command);
         case DELETE:
-            processDeleteCommand(command);
-            break;
+            return processDeleteCommand(command);
         case FIND:
-            ui.printTasks(new TaskList(taskList.find(command.getDescription())));
-            break;
+            return Parser.getTaskListPrintMessage(new TaskList(taskList.find(command.getDescription())));
         default: break;
         }
 
-        return true;
+        return "";
     }
 
     /**
      * Process Done Command.
      *
      * @param command Command to Process.
+     * @return Returns process Done command result message
      */
-    private void processDoneCommand(Command command) {
+    private String processDoneCommand(Command command) {
         int doneIndex = Integer.parseInt(command.getDescription()) - 1;
         taskList.getTask(doneIndex).markComplete();
-        printDoneMessage(taskList.getTask(doneIndex));
         saveHistory();
+        return getDoneMessage(taskList.getTask(doneIndex));
     }
 
     /**
      * Process Todos Command.
      *
      * @param command Command to Process.
+     * @return Returns process ToDos command result message
      */
-    private void processTodoCommand(Command command) {
+    private String processTodoCommand(Command command) {
         ToDos todoTask = new ToDos(command.getDescription());
         taskList.addTask(todoTask);
-        printAddedTaskMessage(todoTask);
         saveHistory();
+        return getAddedTaskMessage(todoTask);
     }
 
     /**
      * Process Deadline Command.
      *
      * @param command Command to Process.
+     * @return Returns process Deadline command result message
      */
-    private void processDeadlineCommand(Command command) {
+    private String processDeadlineCommand(Command command) {
         String[] deadlineDetails = command.getDescription().split(DEADLINE_SPLIT_REGEX);
         String[] dates = deadlineDetails[1].split(" ");
         LocalDate date = LocalDate.parse(dates[0]);
         LocalTime time = LocalTime.parse(dates[1]);
         Deadlines deadlineTask = new Deadlines(deadlineDetails[0], date, time);
         taskList.addTask(deadlineTask);
-        printAddedTaskMessage(deadlineTask);
         saveHistory();
+        return getAddedTaskMessage(deadlineTask);
     }
 
     /**
      * Process Event Command.
      *
      * @param command Command to Process.
+     * @return Returns process Event command result message
      */
-    private void processEventCommand(Command command) {
+    private String processEventCommand(Command command) {
         String[] eventDetails = command.getDescription().split(EVENT_SPLIT_REGEX);
         String[] eventDates = eventDetails[1].split(" ");
         LocalDate startDate = LocalDate.parse(eventDates[0]);
@@ -204,8 +213,8 @@ public class FakeBot extends Application {
         LocalTime endTime = LocalTime.parse(eventDates[3]);
         Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
         taskList.addTask(eventTask);
-        printAddedTaskMessage(eventTask);
         saveHistory();
+        return getAddedTaskMessage(eventTask);
     }
 
     /**
@@ -213,12 +222,12 @@ public class FakeBot extends Application {
      *
      * @param command Command to Process.
      */
-    private void processDeleteCommand(Command command) {
+    private String processDeleteCommand(Command command) {
         int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
         Task deletedTask = taskList.getTask(deleteIndex);
         taskList.removeTask(deleteIndex);
-        printDeleteMessage(deletedTask);
         saveHistory();
+        return getDeleteMessage(deletedTask);
     }
 
     /**
@@ -341,12 +350,4 @@ public class FakeBot extends Application {
         ui.printBotMessage("Bye. Hope to see you again soon!");
     }
     */
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        primaryStage.setScene(scene); // Setting the stage to show our screen
-        primaryStage.show(); // Render the stage.
-    }
 }

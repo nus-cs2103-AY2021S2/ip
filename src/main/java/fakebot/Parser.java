@@ -16,6 +16,7 @@ import fakebot.task.ToDos;
  */
 public class Parser {
 
+    private static final String DIVIDER = "____________________________________________________________\n";
     private static final String SPLIT_REGEX = "-'@,-@,1'-";
 
     /**
@@ -144,4 +145,49 @@ public class Parser {
         }
         return tasks;
     }
+
+
+
+    /**
+     * Returns Standard Print Message.
+     *
+     * @param message Message to print.
+     */
+    public static String getBotMPrintMessage(String message) {
+        String printMessage = DIVIDER + message + "\n" + DIVIDER;
+        return printMessage;
+    }
+
+    /**
+     * Returns List of String Print Message.
+     *
+     * @param startingMessage Starting message to print before the list.
+     * @param messages        List of String to print.
+     */
+    public static String getStringListPrintMessage(String startingMessage, List<String> messages) {
+        StringBuilder printMessage = new StringBuilder(DIVIDER);
+        printMessage.append(startingMessage);
+        for (int i = 1; i <= messages.size(); i++) {
+            printMessage.append(i);
+            printMessage.append(".");
+            printMessage.append(messages.get(i - 1));
+            printMessage.append("\n");
+        }
+        printMessage.append(DIVIDER);
+        return printMessage.toString();
+    }
+
+    /**
+     * Returns List of Task Print Message.
+     *
+     * @param taskList List of Task to convert.
+     */
+    public static String getTaskListPrintMessage(TaskList taskList) {
+        List<String> messages = new ArrayList<>();
+        for (int i = 0; i < taskList.getSize(); i++) {
+            messages.add(taskList.getTask(i).toString());
+        }
+        return getStringListPrintMessage("Here are the tasks in your list:\n", messages);
+    }
+
 }
