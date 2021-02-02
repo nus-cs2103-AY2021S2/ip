@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 public class Duke {
@@ -22,6 +24,9 @@ public class Duke {
             // TERMINATE APP
             storage.save(tasks.list);
             return ui.showSave();
+        } else if (Parser.hasExited(input)) {
+            Platform.exit();
+            return "";
         } else {
             return parser.parseCommand(input);
         }

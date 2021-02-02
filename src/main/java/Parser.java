@@ -52,6 +52,9 @@ public class Parser {
         return command.equals("save");
     }
 
+    static boolean hasExited(String command) {
+        return command.equals("exit"); }
+
     public String parseCommand(String command) {
         String commandType = Parser.parseCommandType(command);
         try {
@@ -59,6 +62,7 @@ public class Parser {
                 // SHOW LIST
                 return this.ui.showList(tasks.list);
             } else if (commandType.equals("clear")) {
+                // CLEAR LIST
                 tasks.list.clear();
                 return ui.showClear();
             } else if (commandType.equals("done")) {
@@ -92,11 +96,13 @@ public class Parser {
                 tasks.addTask(task);
                 return ui.showAddTask(tasks.list);
             } else if (commandType.equals("delete")) {
+                // DELETE A TASK
                 int taskIndex = Parser.parseTaskIndex(command) - 1;
                 Task deletedTask = tasks.list.get(taskIndex);
                 tasks.removeTask(taskIndex);
                 return ui.showDeleteTask(tasks.list, deletedTask);
             } else if (commandType.equals("find")) {
+                // SEARCH FOR TASK USING KEYWORD
                 String keyword = Parser.parseKeyword(command);
                 ArrayList<Task> matchingTasks = new ArrayList<>();
                 for (Task task : tasks.list) {
