@@ -1,9 +1,6 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeIDKException;
-import duke.exceptions.DukeInvalidDesException;
-import duke.exceptions.DukeMissingDesException;
+import duke.exceptions.*;
 import duke.handler.Parser;
 import duke.handler.Queries;
 import duke.tasks.*;
@@ -12,6 +9,9 @@ import duke.tasks.Event;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +21,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(" d.MMM.yyyy HH:mm");
 
     private Duke(String storagePath) {
         storage = new Storage(storagePath);
@@ -70,7 +72,8 @@ public class Duke {
                         } else {
                             throw new DukeInvalidDesException(keyword_UC);
                         }
-                        toAdd = new Deadline(info[0], info[1]);
+                        LocalDateTime dateTime = LocalDateTime.parse(info[1], DATE_TIME_FORMATTER);
+                        toAdd = new Deadline(info[0], dateTime);
                     } else if (keyword_UC.equals("EVENT")) {
                         String[] info = userInput.split(" ", 2);
                         if (info[1].contains("/at")) {
@@ -78,7 +81,8 @@ public class Duke {
                         } else {
                             throw new DukeInvalidDesException(keyword_UC);
                         }
-                        toAdd = new Event(info[0], info[1]);
+                        LocalDateTime dateTime = LocalDateTime.parse(info[1], DATE_TIME_FORMATTER);
+                        toAdd = new Event(info[0], dateTime);
                     } else {
                         throw new DukeIDKException();
                     }
@@ -90,6 +94,8 @@ public class Duke {
                     storage.addTask(toAdd);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException(keyword_UC);
+                } catch (DateTimeParseException e) {
+                    throw new DukeDateTimeException();
                 }
                 break;
 
