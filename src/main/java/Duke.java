@@ -50,7 +50,7 @@ public class Duke {
                         continue;
                     }
                     wholeTask = commandArr[1];
-                    String[] taskArr = wholeTask.split("/");
+                    String[] taskArr = wholeTask.split("/by ");
                     item = new Deadline(taskArr[0], taskArr[1]);
                     break;
                 }
@@ -60,7 +60,7 @@ public class Duke {
                         continue;
                     }
                     wholeTask = commandArr[1];
-                    String[] taskArr = wholeTask.split("/");
+                    String[] taskArr = wholeTask.split("/at ");
                     item = new Event(taskArr[0], taskArr[1]);
                     break;
                 }
