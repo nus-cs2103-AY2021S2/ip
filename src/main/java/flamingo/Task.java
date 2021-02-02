@@ -1,12 +1,14 @@
+package flamingo;
+
 /**
- * Represents a Task.
+ * Represents a flamingo.Task.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Creates a new Task.
+     * Creates a new flamingo.Task.
      * @param description Description of the task.
      */
     public Task(String description) {

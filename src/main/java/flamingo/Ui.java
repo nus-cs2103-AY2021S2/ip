@@ -1,3 +1,5 @@
+package flamingo;
+
 /**
  * Contains interactions with user.
  */

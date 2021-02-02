@@ -1,3 +1,5 @@
+package flamingo;
+
 import java.util.ArrayList;
 
 /**
@@ -17,11 +19,15 @@ public class TaskList {
     }
 
     /**
-     * Creates a new empty Task List.
+     * Creates a new empty flamingo.Task List.
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
         numTasks = 0;
+    }
+
+    public static int getNumTasks() {
+        return numTasks;
     }
 
     /**
@@ -40,7 +46,7 @@ public class TaskList {
     /**
      * Adds a task to the ArrayList.
      *
-     * @param task Task from user input.
+     * @param task flamingo.Task from user input.
      */
     public String addTask(Task task) {
         tasks.add(numTasks, task);
@@ -81,7 +87,7 @@ public class TaskList {
      *
      * @param keyword Keyword from user input.
      */
-    public String findString(String keyword) {
+    public String findTask(String keyword) {
         boolean hasMatch = false;
         ArrayList<Task> matches = new ArrayList<>();
         ArrayList<Integer> taskNumber = new ArrayList<>();
@@ -103,7 +109,7 @@ public class TaskList {
             for (int j = 0; j < matches.size(); j++) {
                 listOfMatches += taskNumber.get(j) + ". " + matches.get(j) + "\n";
             }
-            return "Bingo Flamingo! I've found these matching results:\n"
+            return "Bingo Flamingo! I've found these matches:\n"
                     + listOfMatches;
         } else {
             return "Oh no Flamingo! No matches were found.";

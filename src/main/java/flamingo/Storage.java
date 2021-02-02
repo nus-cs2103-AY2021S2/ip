@@ -1,3 +1,5 @@
+package flamingo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,7 +19,7 @@ public class Storage {
     protected boolean pathExists;
 
     /**
-     * Creates a new Storage.
+     * Creates a new flamingo.Storage.
      */
     public Storage() {
         this.currentDirectory = System.getProperty("user.dir");
@@ -25,11 +27,15 @@ public class Storage {
         this.pathExists = java.nio.file.Files.exists(path);
     }
 
+    public boolean getPathExists() {
+        return pathExists;
+    }
+
     /**
      * Transfers contents from tasks ArrayList to data.txt file.
      * If data.txt file exists, the previous content is cleared.
      *
-     * @param tasks TaskList of tasks.
+     * @param tasks flamingo.TaskList of tasks.
      * @throws IOException If data cannot be saved into file.
      */
     public void saveData(TaskList tasks) throws IOException {

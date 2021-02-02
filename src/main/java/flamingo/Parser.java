@@ -1,3 +1,5 @@
+package flamingo;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,6 +38,7 @@ public class Parser {
 
     /**
      * Makes sense of the user input.
+     * Calls the correct function depending on the user input.
      *
      * @param userInput User input.
      * @throws Exception If user input is unknown.
@@ -87,7 +90,7 @@ public class Parser {
                 throw new IllegalArgumentException();
             }
             String keyword = userInput.substring(5);
-            return tasks.findString(keyword);
+            return tasks.findTask(keyword);
         } else {
             throw new Exception();
         }

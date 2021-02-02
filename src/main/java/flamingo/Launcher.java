@@ -1,3 +1,5 @@
+package flamingo;
+
 import javafx.application.Application;
 
 /**
