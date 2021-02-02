@@ -9,6 +9,10 @@ public class Flamingo {
     private static Storage storage = new Storage();
     private static TaskList tasks;
 
+    /**
+     * Loads tasks if the data text file exists.
+     * Else, create a new Task List.
+     */
     public Flamingo() {
         try {
             tasks = new TaskList(storage.loadData());

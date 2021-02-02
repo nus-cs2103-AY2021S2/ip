@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/smile.png"));
     private Image botImage = new Image(this.getClass().getResourceAsStream("/images/flamingo.png"));
 
+    /**
+     * Initialises the chat bot.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
