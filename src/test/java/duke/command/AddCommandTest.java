@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
 import duke.StorageStub;
-import duke.Ui;
 import duke.task.TaskList;
 import duke.task.Todo;
 
@@ -37,7 +36,7 @@ public class AddCommandTest {
     @Test
     public void testExecute() throws DukeException, IOException {
         AddCommand addCmd = new AddCommand(new Todo("borrow book"));
-        addCmd.execute(new TaskList(), new Ui(), new StorageStub());
+        addCmd.execute(new TaskList(), new StorageStub());
         String expectedOutput = String.format("%s\n%s\n%s\n",
                 "    Got it. I've added this task:",
                 "        [T][ ] borrow book",

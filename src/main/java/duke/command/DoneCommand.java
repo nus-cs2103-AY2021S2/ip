@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 public class DoneCommand extends Command {
@@ -26,7 +25,9 @@ public class DoneCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         taskList.markDone(idx);
+        storage.write(taskList.toDataString());
+        return String.format("Yay you're completed task %d!", idx + 1);
     }
 }
