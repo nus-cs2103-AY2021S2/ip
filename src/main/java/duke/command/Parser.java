@@ -7,8 +7,21 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Encapsulates a utility parser that parses task from the saved file and 
+ * commands inputted by the user.
+ *
+ * @author Aaron Saw Min Sern
+ */
 public class Parser {
 
+	/**
+	 * Returns a task decoded from the encoded string representation of task.
+	 * This parser will return null on invalid encoded strings.
+	 *
+	 * @param	str		the encoded string representation of task
+	 * @return			the task corresponding to the encoded representation
+	 */
     public static Task parseAsTask(String str) {
         final String[] tokens = str.split(" \\| ");
         String[] datetime;
@@ -46,6 +59,13 @@ public class Parser {
         }
     }
 
+	/**
+	 * Returns a command decoded from the string inputted by the users.
+	 * This parser will throw Exceptions on invalid input strings.
+	 *
+	 * @param	fullCommand	the encoded string representation of task
+	 * @return				the task corresponding to the encoded representation
+	 */
 	public static Command parseCommand(String fullCommand) throws Exception {
 		final String[] tokens = fullCommand.strip().split("\\s+", 2);
 		final String command = tokens[0];

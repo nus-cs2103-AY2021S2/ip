@@ -5,16 +5,26 @@ import java.util.Scanner;
 import duke.command.Command;
 import duke.command.Parser;
 
+/**
+ * Encapsulates Duke, the chatbot application.
+ *
+ * @author Aaron Saw Min Sern
+ */
 public class Duke {
     private final Ui ui;
     private final Storage storage;
     private final TaskList tasks;
 
+    /**
+     * Sole constructor for class Duke.
+     *
+     * @param   filePath    the file path location at which Duke stores data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         TaskList loaded = storage.loadFile();
-        if (loaded == null) { // No files exist or file is corrupted
+        if (loaded == null) {
             tasks = new TaskList();
             storage.createDirectoryAndFile();
         } else {
@@ -22,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program. This method is the starting point of the program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -48,6 +61,11 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the program with the file path location of "./data/task.txt".
+     *
+     * @param   args    unused
+     */
     public static void main(final String[] args) {
         new Duke("./data/tasks.txt").run();
     }
