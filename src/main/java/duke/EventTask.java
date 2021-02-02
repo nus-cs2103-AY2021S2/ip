@@ -9,13 +9,6 @@ public class EventTask extends Task {
     /** Time of event **/
     private String time;
 
-//    public EventTask(String description, boolean isDone, String at) {
-//        super(description);
-//        super.isDone = false;
-//        this.at = at;
-//        this.atDate = null;
-//    }
-
     /**
      * Constructs an EventTask object.
      * @param description Descriptions of the event
@@ -52,7 +45,7 @@ public class EventTask extends Task {
     @Override
     public String getTaskDetails() {
         String divider = " | ";
-        return "E" +  divider
+        return "E" + divider
                 + (isDone ? "1" : "0") + divider
                 + description + divider
                 + atDate + divider + time;

@@ -1,10 +1,9 @@
 package duke;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = null;

@@ -1,6 +1,11 @@
 package duke;
 
 public class ToDoTask extends Task {
+    /**
+     * Creates a ToDoTask object.
+     * @param description
+     * @param isDone
+     */
     public ToDoTask(String description, boolean isDone) {
         super(description);
         super.isDone = isDone;
@@ -14,7 +19,7 @@ public class ToDoTask extends Task {
     @Override
     public String getTaskDetails() {
         String divider = " | ";
-        return "T" +  divider
+        return "T" + divider
                 + (isDone ? "1" : "0") + divider
                 + description;
     }

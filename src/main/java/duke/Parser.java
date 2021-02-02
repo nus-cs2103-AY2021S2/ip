@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -66,7 +65,7 @@ public class Parser {
             default:
                 throw(new IllegalArgumentException());
             }
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw new DukeException("Please enter a legit command...");
         }
     }

@@ -1,7 +1,14 @@
-import duke.*;
-
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.Ui;
+
 
 // potential exceptions to catch:
 // 1) deleting a non-existent task
@@ -25,8 +32,7 @@ public class Duke {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.loadData());
             parser = new Parser(tasks);
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -63,7 +69,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        Duke duke = new Duke(Storage.saveFilePath);
+        Duke duke = new Duke(Storage.getSaveFilePath());
         duke.run();
     }
 }
