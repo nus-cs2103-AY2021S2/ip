@@ -31,17 +31,23 @@ public class Task {
         this.date = strArr[3];
     }
 
-    protected String formatDate(String newDate) {
-        // Looks for inputs with the format yyyy-mm-dd also works with / or . as the
-        // separator.
+    /**
+     * Looks for inputs with the format yyyy-mm-dd and changes them to the MMM dd
+     * yyyy format.
+     * 
+     * @param date The date to be changed.
+     * @return The newly formatted date.
+     */
+    protected String formatDate(String date) {
+        //
         String regex = "(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])";
-        Matcher m = Pattern.compile(regex).matcher(newDate);
+        Matcher m = Pattern.compile(regex).matcher(date);
         if (m.find()) {
             LocalDate tempDate = LocalDate.parse(m.group(0));
             String dateFormat = tempDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-            return newDate.replaceAll(regex, dateFormat);
+            return date.replaceAll(regex, dateFormat);
         } else {
-            return newDate;
+            return date;
         }
     }
 

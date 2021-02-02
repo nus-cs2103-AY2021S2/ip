@@ -42,22 +42,27 @@ public class Storage {
     public List<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
-        List<Task> tempTask = new ArrayList<>();
+        List<Task> tempTasks = new ArrayList<>();
         while (s.hasNextLine()) {
             String[] strArr = s.nextLine().split(" \\| ");
             String type = strArr[0];
-            if (type.equals("T")) {
-                tempTask.add(new ToDo(strArr));
-            } else if (type.equals("D")) {
-                tempTask.add(new Deadline(strArr));
-            } else if (type.equals("E")) {
-                tempTask.add(new Event(strArr));
-            } else {
+            switch (type) {
+            case "T":
+                tempTasks.add(new ToDo(strArr));
+                break;
+            case "D":
+                tempTasks.add(new Deadline(strArr));
+                break;
+            case "E":
+                tempTasks.add(new Event(strArr));
+                break;
+            default:
                 System.out.println("Error");
+                break;
             }
         }
         s.close();
-        return tempTask;
+        return tempTasks;
     }
 
 }

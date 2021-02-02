@@ -6,11 +6,11 @@ import java.util.List;
 public class Ui {
 
     public Ui() {
-        textWarper("Hello! I'm Duke \nWhat can I do for you?");
+        textWrapper("Hello! I'm Duke \nWhat can I do for you?");
     }
 
     public void showBye() {
-        textWarper("Bye. Hope to see you again soon!\n");
+        textWrapper("Bye. Hope to see you again soon!\n");
     }
 
     /**
@@ -21,7 +21,7 @@ public class Ui {
     public void showList(TaskList tasks) {
         String out = "Here are the tasks in your list: \n";
         out += printList(tasks);
-        textWarper(out);
+        textWrapper(out);
     }
 
     /**
@@ -33,19 +33,19 @@ public class Ui {
      */
     public void showFind(TaskList tasks, String toFind) {
         String out;
-        List<Task> tempList = new ArrayList<>();
+        List<Task> tempTasks = new ArrayList<>();
         for (Task t : tasks.getTasks()) {
             if (t.getName().contains(toFind)) {
-                tempList.add(t);
+                tempTasks.add(t);
             }
         }
-        if (!tempList.isEmpty()) {
+        if (!tempTasks.isEmpty()) {
             out = "Here are the matching tasks in your list: \n";
-            out += printList(new TaskList(tempList));
+            out += printList(new TaskList(tempTasks));
         } else {
             out = "Nothing in the list matches\n";
         }
-        textWarper(out);
+        textWrapper(out);
     }
 
     /**
@@ -57,20 +57,20 @@ public class Ui {
     public void showDone(String input, TaskList tasks) {
         String out = "Nice! I've marked this task as done: \n  ";
         out += tasks.get(getIndex(input));
-        textWarper(out);
+        textWrapper(out);
     }
 
     /**
      * Prints out confirmations that the Task was added to the TaskList.
      * 
      * @param tasks The TaskList to be added to.
-     * @param temp  The Task to be added.
+     * @param task  The Task to be added.
      */
-    public void showTaskAdded(TaskList tasks, Task temp) {
+    public void showTaskAdded(TaskList tasks, Task task) {
         String out = "Got it. I've added this task:\n ";
-        out += temp.toString() + "\n";
+        out += task.toString() + "\n";
         out += String.format("Now you have %d tasks in the list.", tasks.size() + 1);
-        textWarper(out);
+        textWrapper(out);
     }
 
     /**
@@ -83,23 +83,23 @@ public class Ui {
         String out = "Noted. I've removed this task: \n  ";
         out += tasks.get(getIndex(input)) + "\n";
         out += String.format("Now you have %d tasks in the list.", tasks.size() - 1);
-        textWarper(out);
+        textWrapper(out);
     }
 
     public void showDukeTaskError() {
-        textWarper("☹ OOPS!!! The description of a task cannot be empty.");
+        textWrapper("☹ OOPS!!! The description of a task cannot be empty.");
     }
 
     public void showDukeGeneralError() {
-        textWarper("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        textWrapper("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     public void showDukeEmptyListError() {
-        textWarper("You have nothing in the list!");
+        textWrapper("You have nothing in the list!");
     }
 
     public void showLoadingError() {
-        textWarper("This file cant be loaded! Creating a new file called duke.txt in CWD");
+        textWrapper("This file cant be loaded! Creating a new file called duke.txt in CWD");
     }
 
     public int getIndex(String input) {
@@ -115,7 +115,7 @@ public class Ui {
         return printStr.toString();
     }
 
-    private void textWarper(String a) {
+    private void textWrapper(String a) {
         System.out.println("____________________________________________________________");
         System.out.println(a);
         System.out.println("____________________________________________________________");
