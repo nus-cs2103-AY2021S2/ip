@@ -14,6 +14,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private VBox dialogContainer;
     @FXML
+    private VBox dukeGreeting;
+    @FXML
     private TextField userInput;
     @FXML
     private Button sendButton;
@@ -25,6 +27,12 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        String greetingMessage = "Hello! I'm Duke\n" + "What can I do for you?";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingMessage, dukeImage));
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // never show a vertical ScrollBar
+        scrollPane.setFitToWidth(true); // set content width to viewport width
+        scrollPane.setPannable(true); // allow scrolling via mouse dragging
+//        scrollPane.vvalueProperty().bind(dialogContainer);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -39,12 +47,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws DukeException {
         String input = userInput.getText();
-
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
         userInput.clear();
     }
 }

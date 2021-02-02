@@ -16,7 +16,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-//            duke = new Duke(System.getProperty("user.dir") + "/data/tasks.txt");
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
@@ -25,9 +24,6 @@ public class Main extends Application {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-//        } catch (DukeException e){
-//            e.printStackTrace();
-//        }
         }
     }
 }

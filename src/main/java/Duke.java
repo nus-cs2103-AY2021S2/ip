@@ -31,39 +31,37 @@ public class Duke {
     }
 
     public static void main(String[] launchArgs) throws DukeException {
-        new Duke(System.getProperty("user.dir") + "/data/tasks.txt").run();
-//        new Duke(System.getProperty("user.dir") + "/data/tasks.txt");
-//        Duke(System.getProperty("user.dir") + "/data/tasks.txt");
+//        new Duke(System.getProperty("user.dir") + "/data/tasks.txt").run();
+        new Duke(System.getProperty("user.dir") + "/data/tasks.txt");
     }
 
-    private void run() throws DukeException {
-        runCommandLoopUntilExit();
-        exit();
-    }
-
-    private void runCommandLoopUntilExit() {
-        String commandText = "";
-        do {
-            // take user input
-            commandText = ui.getUserCommand();
-
-            // identify operator and execute command accordingly
-            if (commandText.equals("bye")){
-                break;
-            }
-            try {
-                Parser commandParser = new Parser();
-                TaskManager taskManager = commandParser.parseCommand(commandText);
-                TaskResult result = executeCommand(taskManager);
-                storage.updateTaskList(tasks);
-                ui.showResultToUser(tasks, result);
-
-            } catch (DukeException e) {
-                ui.showErrorMessage(e.getMessage());
-            }
-        } while (!commandText.equals("bye"));
-    }
-
+//    private void run() throws DukeException {
+//        runCommandLoopUntilExit();
+//        exit();
+//    }
+//
+//    private void runCommandLoopUntilExit() {
+//        String commandText = "";
+//        do {
+//            // take user input
+//            commandText = ui.getUserCommand();
+//
+//            // identify operator and execute command accordingly
+//            if (commandText.equals("bye")){
+//                break;
+//            }
+//            try {
+//                Parser commandParser = new Parser();
+//                TaskManager taskManager = commandParser.parseCommand(commandText);
+//                TaskResult result = executeCommand(taskManager);
+//                storage.updateTaskList(tasks);
+//                ui.showResultToUser(tasks, result);
+//
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e.getMessage());
+//            }
+//        } while (!commandText.equals("bye"));
+//    }
 
     private TaskResult executeCommand(TaskManager taskManager) throws DukeException {
             TaskAction action = taskManager.execute();
