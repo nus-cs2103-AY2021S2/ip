@@ -28,18 +28,15 @@ public class Parser {
     private static final Pattern checkNum = Pattern.compile("^[0-9]$");
 
     private final TaskList taskList;
-    private final Ui ui;
     private final Storage storage;
 
     /**
      * Constructors a Parser object, responsible for parsing input from the user.
      * @param taskList the list of tasks.
-     * @param ui the object in charge of printing user-friendly outputs.
      * @param storage the object in charge of writing to the local storage file.
      */
-    public Parser(TaskList taskList, Ui ui, Storage storage) {
+    public Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
-        this.ui = ui;
         this.storage = storage;
     }
 
@@ -90,7 +87,7 @@ public class Parser {
     }
 
     private Command prepareToDo(String[] arguments) {
-        return new ToDoCommand(this.taskList, this.ui, this.storage, arguments[1]);
+        return new ToDoCommand(this.taskList, this.storage, arguments[1]);
     }
 
     private Command prepareDeadline(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException {
@@ -105,7 +102,7 @@ public class Parser {
 
             try {
                 LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
-                return new DeadlineCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
+                return new DeadlineCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeException();
             }
@@ -124,7 +121,7 @@ public class Parser {
 
             try {
                 LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
-                return new EventCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
+                return new EventCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeException();
             }
@@ -138,7 +135,7 @@ public class Parser {
             if (this.taskList.getList().size() == 0) {
                 throw new EmptyListException();
             } else {
-                return new FindCommand(this.taskList, this.ui, this.storage, arguments[1]);
+                return new FindCommand(this.taskList, this.storage, arguments[1]);
             }
         }
     }
@@ -165,7 +162,7 @@ public class Parser {
                 throw new InvalidIndexInputException("Please input an index from 1 to "
                         + this.taskList.getList().size() + "!");
             } else {
-                return new DoneCommand(this.taskList, this.ui, this.storage, position);
+                return new DoneCommand(this.taskList, this.storage, position);
             }
         }
     }
@@ -182,20 +179,20 @@ public class Parser {
                 throw new InvalidIndexInputException("Please input an index from 1 to "
                         + this.taskList.getList().size() + "!");
             } else {
-                return new DeleteCommand(this.taskList, this.ui, this.storage, position);
+                return new DeleteCommand(this.taskList, this.storage, position);
             }
         }
     }
 
     private Command prepareList() {
-        return new ListCommand(this.taskList, this.ui, this.storage);
+        return new ListCommand(this.taskList, this.storage);
     }
 
     private Command prepareExit() {
-        return new ByeCommand(this.taskList, this.ui, this.storage);
+        return new ByeCommand(this.taskList, this.storage);
     }
 
     private Command prepareHelp() {
-        return new HelpCommand(this.taskList, this.ui, this.storage);
+        return new HelpCommand(this.taskList, this.storage);
     }
 }

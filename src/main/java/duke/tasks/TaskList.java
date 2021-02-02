@@ -27,25 +27,29 @@ public class TaskList {
      * Prints the list of tasks.
      * If the list is empty, a statement indicating so will be printed.
      */
-    public void printList() {
+    public String getListInString () {
         if (this.taskList.size() == 0) {
-            printEmptyList();
+            return getEmptyListInString();
         } else {
-            printNonEmptyList();
+            return getNonEmptyListInString().toString();
         }
     }
 
-    private void printEmptyList() {
+    private String getEmptyListInString() {
         System.out.println("You have completed all tasks!");
+        return "You have completed all tasks!";
     }
 
-    private void printNonEmptyList() {
+    private StringBuilder getNonEmptyListInString() {
         System.out.println("Here are the tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
         int counter = 1;
         for (Task t : this.taskList) {
             System.out.println(counter + ". " + t);
+            sb.append("\n" + counter + ". " + t);
             counter++;
         }
+        return sb;
     }
 
     /**
