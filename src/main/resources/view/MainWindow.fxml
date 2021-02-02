@@ -3,14 +3,20 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" styleClass="anchorPane" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
     <children>
+      <AnchorPane opacity="0.95" prefHeight="600.0" prefWidth="400.0" styleClass="anchorPane">
+         <effect>
+            <BoxBlur height="2.5" width="2.5" />
+         </effect>
+      </AnchorPane>
       <GridPane layoutY="558.0" style="-fx-border-color: #000000; -fx-border-radius: 5px; -fx-border-width: 1px;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -20,11 +26,11 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-              <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" promptText="Enter command here" style="-fx-background-color: transparent; -fx-text-fill: #FFFFFF;" />
+              <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" promptText="How can I help you today?" style="-fx-background-color: transparent; -fx-text-fill: #FFFFFF;" />
               <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: transparent; -fx-text-fill: #FFFFFF;" text="Send" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: transparent;" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: transparent; -fx-background: transparent" vvalue="1.0">
             <content>
                 <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
             </content>
