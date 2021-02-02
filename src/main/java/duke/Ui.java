@@ -34,7 +34,7 @@ public class Ui {
     public void showFind(TaskList tasks, String toFind) {
         String out;
         List<Task> tempTasks = new ArrayList<>();
-        for (Task t : tasks.getTasks()) {
+        for (Task t : tasks) {
             if (t.getName().contains(toFind)) {
                 tempTasks.add(t);
             }
