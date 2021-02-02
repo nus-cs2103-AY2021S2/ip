@@ -9,14 +9,14 @@ import duke.task.TaskList;
  * during the running of the program and change the status of the status
  * of command as wants to exit, and hence terminates the program.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     /**
      * Constructor for ByeCommand object
      *
      * @param userMessage The message that the user inputs for further execution.
      */
-    public ByeCommand(String userMessage){
+    public ByeCommand(String userMessage) {
         super(userMessage);
     }
 
@@ -27,7 +27,7 @@ public class ByeCommand extends Command{
      * @param taskList The current taskList in the program.
      * @param ui The current ui in the program.
      */
-    public void execute(TaskList taskList, Ui ui){
+    public void execute(TaskList taskList, Ui ui) {
         exit = true;
         ui.display("Bye! Hope to see you again soon.");
     }

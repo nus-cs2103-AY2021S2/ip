@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
  * Represents a event task as a special case of task. A <code>event</code> object has three
  * fields, which are the task name, due time and done-status. e.g., <code>go to school, 2020-01-01 19:00, false</code>
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime at;
 
 
@@ -27,8 +27,8 @@ public class Event extends Task{
      * @param at The deadline time of the event task in String type.
      * @param status The done-status of the event task.
      */
-    public Event(String description, String at, boolean status){
-        super(description,status);
+    public Event(String description, String at, boolean status) {
+        super(description, status);
         this.at = stringToDatetime(at);
     }
 
@@ -40,16 +40,16 @@ public class Event extends Task{
      * @param at The deadline time of the event task in LocalDateTime type.
      * @param status The done-status of the event task.
      */
-    public Event(String description, LocalDateTime at, boolean status){
-        super(description,status);
+    public Event(String description, LocalDateTime at, boolean status) {
+        super(description, status);
         this.at = at;
     }
 
-    private LocalDateTime stringToDatetime(String at){
-        return LocalDateTime.parse(at,DF1);
+    private LocalDateTime stringToDatetime(String at) {
+        return LocalDateTime.parse(at, DF1);
     }
 
-    private String datetimeToString(LocalDateTime at){
+    private String datetimeToString(LocalDateTime at) {
         return DF2.format(at);
     }
 
@@ -58,7 +58,7 @@ public class Event extends Task{
      * Get the event time as a LocalDateTime object.
      * @return the the event time as a LocalDateTime object.
      */
-    public LocalDateTime getAt(){
+    public LocalDateTime getAt() {
         return at;
     }
 

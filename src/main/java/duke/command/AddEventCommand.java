@@ -9,14 +9,14 @@ import duke.task.TaskList;
  * When the parser calls it, it will receive the requests from the users
  * during the running of the program and starts add new events to the task list.
  */
-public class AddEventCommand extends Command{
+public class AddEventCommand extends Command {
 
     /**
      * Constructor for AddEventCommand object
      *
      * @param userMessage The message that the user inputs for further execution.
      */
-    public AddEventCommand(String userMessage){
+    public AddEventCommand(String userMessage) {
         super(userMessage);
     }
 
@@ -44,9 +44,9 @@ public class AddEventCommand extends Command{
         String at = userMessage.substring(dateIndex + 4);
         Event event;
 
-        try{
-            event = new Event(eventName,at);
-        } catch (Exception e){
+        try {
+            event = new Event(eventName, at);
+        } catch (Exception e) {
             throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
         }
 

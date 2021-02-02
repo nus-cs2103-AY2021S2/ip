@@ -1,6 +1,5 @@
 package duke.task;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
 /**
  * Represents a task. A <code>task</code> object has two
  * fields, which are the task name and done-status.
@@ -18,7 +17,7 @@ public class Task {
      * that has no name and done-status as undone.
      *
      */
-    public Task(){
+    public Task() {
         taskName = "";
         isDone = false;
     }
@@ -27,7 +26,7 @@ public class Task {
      *
      * @param taskName The name of the task.
      */
-    public Task(String taskName){
+    public Task(String taskName) {
         this.taskName = taskName;
         isDone = false;
     }
@@ -37,7 +36,7 @@ public class Task {
      * @param taskName The name of the task.
      * @param status The done-status of the task.
      */
-    public Task(String taskName, boolean status){
+    public Task(String taskName, boolean status) {
         this.taskName = taskName;
         isDone = status;
     }
@@ -57,7 +56,7 @@ public class Task {
      *
      * @return returns the task's done-status, if done then true, otherwise false.
      */
-    public boolean getStatus(){
+    public boolean getStatus() {
         return isDone;
     }
 
@@ -66,7 +65,7 @@ public class Task {
      *
      * @return returns the name of the task as a string.
      */
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
 
@@ -75,7 +74,7 @@ public class Task {
      *
      * @return returns the name of the task as a string in a specific format.
      */
-    public String toString(){
+    public String toString() {
         return this.taskName;
     }
 
@@ -83,7 +82,7 @@ public class Task {
     /**
      * Set the task as done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 

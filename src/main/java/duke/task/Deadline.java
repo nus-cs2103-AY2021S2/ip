@@ -23,8 +23,8 @@ public class Deadline extends Task {
      * @param by The deadline time of the deadline task in String type.
      * @param status The done-status of the deadline task.
      */
-    public Deadline(String description, String by, boolean status){
-        super(description,status);
+    public Deadline(String description, String by, boolean status) {
+        super(description, status);
         this.by = stringToDatetime(by);
     }
 
@@ -35,17 +35,17 @@ public class Deadline extends Task {
      * @param by The deadline time of the deadline task in LocalDateTime type.
      * @param status The done-status of the deadline task.
      */
-    public Deadline(String description, LocalDateTime by, boolean status){
-        super(description,status);
+    public Deadline(String description, LocalDateTime by, boolean status) {
+        super(description, status);
         this.by = by;
     }
 
 
-    private LocalDateTime stringToDatetime(String by){
-        return LocalDateTime.parse(by,DF1);
+    private LocalDateTime stringToDatetime(String by) {
+        return LocalDateTime.parse(by, DF1);
     }
 
-    private String datetimeToString(LocalDateTime by){
+    private String datetimeToString(LocalDateTime by) {
         return DF2.format(by);
     }
 
@@ -55,7 +55,7 @@ public class Deadline extends Task {
      * Get the deadline time as a LocalDateTime object.
      * @return the the deadline time as a LocalDateTime object.
      */
-    public LocalDateTime getBy(){
+    public LocalDateTime getBy() {
         return by;
     }
 

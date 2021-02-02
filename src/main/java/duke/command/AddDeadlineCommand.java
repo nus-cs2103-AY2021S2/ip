@@ -1,7 +1,6 @@
 package duke.command;
-
-import duke.ui.Ui;
 import duke.exception.DukeException;
+import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.TaskList;
 /**
@@ -9,14 +8,14 @@ import duke.task.TaskList;
  * When the parser calls it, it will receive the requests from the users
  * during the running of the program and starts add new deadlines to the task list.
  */
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
 
     /**
      * Constructor for AddDeadlineCommand object
      *
      * @param userMessage The message that the user inputs for further execution.
      */
-    public AddDeadlineCommand(String userMessage){
+    public AddDeadlineCommand(String userMessage) {
         super(userMessage);
     }
 
@@ -45,9 +44,9 @@ public class AddDeadlineCommand extends Command{
         String deadlineName = userMessage.substring(spaceIndex + 1,dateIndex - 1);
         String by = userMessage.substring(dateIndex + 4);
         Deadline deadline;
-        try{
-            deadline = new Deadline(deadlineName,by);
-        } catch (Exception e){
+        try {
+            deadline = new Deadline(deadlineName, by);
+        } catch (Exception e) {
             throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
         }
         taskList.addTasks(deadline);

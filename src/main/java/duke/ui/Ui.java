@@ -12,7 +12,7 @@ public class Ui {
      * @param keyboard A scanner that will take the user input.
      * @return message The user input will be transformed into a String named message.
      */
-    public String readCommand(Scanner keyboard){
+    public String readCommand(Scanner keyboard) {
         String message = new String();
         System.out.println("****************** User Message *****************");
         if (keyboard.hasNextLine()) {
@@ -24,7 +24,7 @@ public class Ui {
     /**
      * Print out the welcome message when the program starts.
      */
-    public void welcome(){
+    public void welcome() {
         display("Hello! I am Duke!\nWhat can I do for you?");
     }
     /**
@@ -32,7 +32,7 @@ public class Ui {
      *
      * @param botMessage The string that the robot (program) wants to show.
      */
-    public void display(String botMessage){
+    public void display(String botMessage) {
         System.out.println("**************** Chatbot Message ****************");
         System.out.println(botMessage);
         System.out.println("*************************************************");

@@ -10,14 +10,14 @@ import java.util.LinkedList;
  * When the parser calls it, it will receive the requests from the users
  * during the running of the program and starts to list all the tasks.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Constructor for ListCommand object
      *
      * @param userMessage The message that the user inputs for further execution.
      */
-    public ListCommand(String userMessage){
+    public ListCommand(String userMessage) {
         super(userMessage);
     }
 
@@ -27,7 +27,7 @@ public class ListCommand extends Command{
      * @param taskList The current taskList in the program.
      * @param ui The current ui in the program.
      */
-    public void execute(TaskList taskList, Ui ui){
+    public void execute(TaskList taskList, Ui ui) {
         int numOfTasks = taskList.getNumOfTasks();
         // Exception case
         if (numOfTasks == 0) {

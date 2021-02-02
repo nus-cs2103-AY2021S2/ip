@@ -18,7 +18,7 @@ public class TaskList {
      * and the number of tasks as 0.
      *
      */
-    public TaskList(){
+    public TaskList() {
         Tasks = new LinkedList<Task>();
         numOfTasks = 0;
     }
@@ -29,7 +29,7 @@ public class TaskList {
      *
      * @return the number of tasks in the TaskList object.
      */
-    public int getNumOfTasks(){
+    public int getNumOfTasks() {
         return numOfTasks;
     }
 
@@ -40,7 +40,7 @@ public class TaskList {
      *
      * @return LinkedList of current tasks.
      */
-    public LinkedList<Task> getTasks(){
+    public LinkedList<Task> getTasks() {
         return Tasks;
     }
 
@@ -50,7 +50,7 @@ public class TaskList {
      *
      * @param task the task you want to add.
      */
-    public void addTasks(Task task){
+    public void addTasks(Task task) {
         Tasks.add(task);
         numOfTasks++;
     }
@@ -59,7 +59,7 @@ public class TaskList {
      *
      * @param task the task you want to delete.
      */
-    public void delete(Task task){
+    public void delete(Task task) {
         int taskIndex = Tasks.indexOf(task);
         Tasks.remove(taskIndex);
         numOfTasks -= 1;

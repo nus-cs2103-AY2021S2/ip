@@ -4,19 +4,18 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
-import java.util.LinkedList;
 /**
  * It is a command object extends from Command for the Duke program.
  * When the parser calls it, it will receive the requests from the users
  * during the running of the program and starts add new todos to the task list.
  */
-public class AddToDoCommand extends Command{
+public class AddToDoCommand extends Command {
     /**
      * Constructor for AddToDoCommand object
      *
      * @param userMessage The message that the user inputs for further execution.
      */
-    public AddToDoCommand(String userMessage){
+    public AddToDoCommand(String userMessage) {
         super(userMessage);
     }
 

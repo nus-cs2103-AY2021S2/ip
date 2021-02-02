@@ -13,12 +13,12 @@ public class Command {
     protected String userMessage;
     protected static boolean exit;
 
-    public Command(String userMessage){
+    public Command(String userMessage) {
         this.userMessage = userMessage;
         exit = false;
     }
 
-    public boolean isExit(){
+    public boolean isExit() {
         return exit;
     }
 

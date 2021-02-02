@@ -6,7 +6,7 @@ package duke.task;
  * fields, which are the task name and done-status. e.g., <code>go to school, false</code>
  */
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * Constructor for ToDo object
      * @param description The name of the todo task.
@@ -21,8 +21,8 @@ public class ToDo extends Task{
      * @param description The name of the todo task.
      * @param status The done-status of the todo task.
      */
-    public ToDo(String description, boolean status){
-        super(description,status);
+    public ToDo(String description, boolean status) {
+        super(description, status);
     }
 
 

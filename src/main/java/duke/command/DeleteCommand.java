@@ -50,7 +50,7 @@ public class DeleteCommand extends Command {
             ui.display(botMessage);
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! The description of a delete is wrong.");
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The event index of a delete is wrong.");
         }
     }

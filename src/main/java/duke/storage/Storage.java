@@ -1,6 +1,9 @@
 package duke.storage;
-import duke.task.*;
-
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,6 +11,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 /**
  * Represents a storage object that responsible for the read and save tasks file for Duke.
  */
@@ -24,7 +28,7 @@ public class Storage {
      * @param filePath The file path of the txt file that stores the tasks. eg. ./data/duke.txt
      * @param dirPath The directory path of the txt file. eg. ./data
      */
-    public Storage(String filePath, String dirPath){
+    public Storage(String filePath, String dirPath) {
         this.filePath = filePath;
         this.dirPath = dirPath;
     }
@@ -40,15 +44,15 @@ public class Storage {
      */
     public TaskList readTasks(TaskList taskList) throws FileNotFoundException {
         File f = new File(dirPath);
-        if ( ! f.exists()){
+        if (!f.exists()) {
             existDir = f.mkdir();
         }
-        try{
+        try {
             f = new File(filePath);
-            if ( ! f.exists()){
+            if (!f.exists()) {
                 existFile = f.createNewFile();
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new FileNotFoundException();
         }
 
@@ -60,11 +64,11 @@ public class Storage {
             boolean status = Integer.parseInt(info.substring(0,1)) == 1;
             String type = info.substring(3,4);
 
-            if (type.equals("T")){
+            if (type.equals("T")) {
                 String name = info.substring(5);
-                ToDo todo = new ToDo(name,status);
+                ToDo todo = new ToDo(name, status);
                 taskList.addTasks(todo);
-            } else if(type.equals("D")){
+            } else if (type.equals("D")) {
                 int endNameIndex = info.indexOf("(");
                 int endTimeIndex = info.length() - 1;
                 String name = info.substring(5 , endNameIndex - 1);
@@ -72,7 +76,7 @@ public class Storage {
                 LocalDateTime byTime = LocalDateTime.parse(by,df);
                 Deadline deadline = new Deadline(name, byTime, status);
                 taskList.addTasks(deadline);
-            } else if(type.equals("E")){
+            } else if (type.equals("E")) {
                 int endNameIndex = info.indexOf("(");
                 int endTimeIndex = info.length() - 1;
                 String name = info.substring(5 , endNameIndex - 1);
@@ -101,8 +105,8 @@ public class Storage {
             String textToAppend = builder.toString();
             fw.write(textToAppend);
             fw.close();
-        } else{
-            for (Task task:taskList.getTasks()){
+        } else {
+            for (Task task:taskList.getTasks()) {
                 int status = task.getStatus() ? 1 : 0;
                 builder.append(status);
                 builder.append("|");
