@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.HashMap;
 
 import exception.DukeException;
@@ -8,23 +10,15 @@ import ui.Ui;
 
 
 public class Duke {
-    private static TaskList tasks;
-    private static DataStorage storage;
-    private static boolean shouldRun = true;
+    private TaskList tasks;
+    private DataStorage storage;
+    private boolean shouldRun = true;
 
-    /**
-     * Entry point for the Duke program
-     *
-     * @param args Command line arguments which are not used. Do not waste your effort.
-     */
-    public static void main(String[] args) {
-        run();
-    }
 
     /**
      * Runs the Duke chatbot loop
      */
-    public static void run() {
+    public void getResponse() {
         startup();
         Ui.greet();
 
@@ -86,7 +80,7 @@ public class Duke {
     /**
      * Initialises the Duke program's backing store and reads any tasks that might be in the file.
      */
-    public static void startup() {
+    public void startup() {
         try {
             storage = new DataStorage();
             storage.createBackingStoreIfNotExists();
@@ -100,7 +94,7 @@ public class Duke {
     /**
      * Shuts down the Duke program gracefully after writing any tasks in memory to the backing store.
      */
-    public static void shutdown() {
+    public void shutdown() {
         tasks.persist(storage);
     }
 }
