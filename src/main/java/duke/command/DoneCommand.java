@@ -27,7 +27,7 @@ public class DoneCommand extends IndexCommand {
      * @throws DukeException If error occurs during the process.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int index = getIndex();
         if (index < tasks.size()) {
             Task completedTask = tasks.get(index);
@@ -35,6 +35,7 @@ public class DoneCommand extends IndexCommand {
             storage.updateInFile(tasks);
             System.out.println(" Marked. How cool is that?");
             System.out.println("  " + completedTask);
+            return ui.completeTaskResponse(completedTask);
         } else {
             throw new TaskIndexOutOfBoundException("There is no task numbered " + (index + 1) + "!");
         }

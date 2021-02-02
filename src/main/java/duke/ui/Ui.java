@@ -2,7 +2,6 @@ package duke.ui;
 
 import duke.task.TaskList;
 import duke.task.Task;
-
 import java.util.Scanner;
 
 /**
@@ -68,5 +67,44 @@ public class Ui {
             Task tempTask = tasks.get(i);
             System.out.println(" " + (i + 1) + "." + tempTask);
         }
+    }
+
+    public String addTaskResponse(Task task, TaskList tasks) {
+        return "Added:\n" + "  " + task.toString() + "\n" + " Now you have " + tasks.size() + " tasks.";
+    }
+
+    public String deleteTaskResponse(Task task, TaskList tasks) {
+        return "Removed:\n" + "  " + task.toString() + "\n" + " Now you have " + tasks.size() + " tasks.";
+    }
+
+    public String completeTaskResponse(Task task) {
+        return "Marked:\n" + "  " + task.toString();
+    }
+
+    public String exitResponse() {
+        return "See ya bro.";
+    }
+
+    public String listTasksResponse(TaskList tasks) {
+        String response = " Here are the tasks:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            String thisTask = (i + 1) + ". " + tasks.get(i).toString() + "\n";
+            response += thisTask;
+        }
+        return response;
+    }
+
+    public String listMatchingTasksResponse(TaskList matchingTasks) {
+        String response = " Here are the tasks:\n";
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            String thisTask = (i + 1) + ". " + matchingTasks.get(i).toString() + "\n";
+            response += thisTask;
+        }
+        return response;
+    }
+
+    public String showErrorMessage(String message) {
+        System.out.println(message);
+        return message;
     }
 }

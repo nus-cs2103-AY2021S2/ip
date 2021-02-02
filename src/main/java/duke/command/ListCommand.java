@@ -15,8 +15,9 @@ public class ListCommand extends Command {
      * @param storage Storage path that is going to be updated.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.listTasks(tasks);
+        return ui.listTasksResponse(tasks);
     }
 
     /**

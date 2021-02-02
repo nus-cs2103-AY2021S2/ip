@@ -27,7 +27,7 @@ public class DeleteCommand extends IndexCommand {
      * @throws DukeException If error occurs during the process.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int index = getIndex();
         if (index < tasks.size()) {
             Task removingTask = tasks.get(index);
@@ -36,6 +36,7 @@ public class DeleteCommand extends IndexCommand {
             System.out.println(" Following task is removed:");
             System.out.println("  " + removingTask);
             System.out.println(" Now you have " + tasks.size() + " tasks.");
+            return ui.deleteTaskResponse(removingTask, tasks);
         } else {
             throw new TaskIndexOutOfBoundException("There is no task numbered " + (index + 1) + "!");
         }

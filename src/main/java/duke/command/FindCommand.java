@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * @throws DukeException If error occurs during the process.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String keyword = fullCommand.substring(4).strip();
         if (keyword.equals("")) {
             throw new DescriptionMissingException("Argument missing!");
@@ -43,6 +43,7 @@ public class FindCommand extends Command {
             }
         }
         ui.listMatchingTasks(matchingTasks);
+        return ui.listMatchingTasksResponse(matchingTasks);
     }
 
     /**

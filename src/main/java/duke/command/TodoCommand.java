@@ -28,9 +28,10 @@ public class TodoCommand extends AddCommand {
      * @throws DescriptionMissingException If the input is not complete.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DescriptionMissingException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DescriptionMissingException {
         Todo todo = getTask();
         super.addThisTask(tasks, todo, storage);
+        return ui.addTaskResponse(todo, tasks);
     }
 
     @Override
