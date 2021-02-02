@@ -69,7 +69,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a task into the TaskList, based on the formatted command string read from the saved file
+     * Adds a task into the TaskList,
+     * based on the formatted command string read from the saved text file
      *
      * @param text  the line of formatted command string from the saved file
      */
