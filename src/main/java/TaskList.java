@@ -5,11 +5,17 @@ public class TaskList {
     protected ArrayList<Task> list;
     protected int size;
 
+    /**
+     * Contructor to create a new TaskList
+     */
     public TaskList() {
         this.list = new ArrayList<>();
         this.size = 0;
     }
 
+    /**
+     * Contructor to create the previous TaskList
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
         this.size = list.size();
@@ -57,42 +63,50 @@ public class TaskList {
     /**
      * Show all the tasks in the list.
      */
-    public void listTask() {
+    public String listTask() {
+        String respone = "";
         for (int i = 0; i < size; i++) {
-            System.out.println((i + 1) + "." + list.get(i));
+            respone = respone + (i + 1) + "." + list.get(i) + "\n";
         }
+        return respone;
     }
 
     /**
      * Find the tasks which has similar name to the string.
      *
-     * @param task string to be searched.
+     * @param task
+     * @return task found
      */
-    public void findTask(String task) {
+    public String findTask(String task) {
         int num = 1;
+        String respone = "";
 
         for (int i = 0; i < size; i++) {
             String string = list.get(i).toString();
             if (string.contains(task)) {
-                System.out.println(num++ + "." + string);
+                respone = respone + num++ + "." + string + "\n";
             }
         }
+        return respone;
     }
 
     /**
      * Search for tasks which take place at that timing.
      *
-     * @param time string to be searched.
+     * @param time
+     * @return task found
      */
-    public void dateTask(String time) {
+    public String searchDateTask(String time) {
         int num = 1;
+        String respone = "";
 
         for (int i = 0; i < size; i++) {
             String string = list.get(i).toString();
             if (string.contains(time)) {
-                System.out.println(num++ + "." + string);
+                respone = respone + num++ + "." + string + "\n";
             }
         }
+        return respone;
     }
 
 }

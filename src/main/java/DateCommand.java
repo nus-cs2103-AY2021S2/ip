@@ -9,21 +9,23 @@ public class DateCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String time;
+        String respone;
 
         if (info.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
+            throw new DukeException("OOPS!!! The description cannot be empty.");
         } else {
             try {
                 LocalDate date = LocalDate.parse(info);
                 time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             } catch (DateTimeParseException e) {
-                throw new DukeException("☹ OOPS!!! The timing is not in the correct format.");
+                throw new DukeException("OOPS!!! The timing is not in the correct format.");
             }
-            ui.showDate(time);
-            tasks.dateTask(time);
+            respone = ui.showDate(time) + "\n" + tasks.searchDateTask(time);
         }
+
+        return respone;
     }
 
     @Override

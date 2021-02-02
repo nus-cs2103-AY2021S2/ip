@@ -1,9 +1,9 @@
 import java.io.File;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Storage {
 
@@ -23,7 +23,10 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filepath);
             int size = tasks.size();
-            String string, task, time;
+
+            String string;
+            String task;
+            String time;
 
             for (int i = 0; i < size; i++) {
                 string = tasks.get(i).toString();
@@ -40,7 +43,7 @@ public class Storage {
 
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS!!! There is an error in storing the file.");
+            throw new DukeException("OOPS!!! There is an error in storing the file.");
         }
     }
 
@@ -54,9 +57,17 @@ public class Storage {
         try {
             File f = new File(filepath);
             Scanner scan = new Scanner(f);
+
             ArrayList<Task> list = new ArrayList<>();
-            String string, info, temp, time;
-            char action, done;
+
+            String string;
+            String info;
+            String temp;
+            String time;
+
+            char action;
+            char done;
+
             Task task;
 
             while (scan.hasNext()) {
@@ -83,7 +94,7 @@ public class Storage {
                 } else if (action == 'E') {
                     task = new Event(info, time);
                 } else {
-                    throw new DukeException("☹ OOPS!!! There is an error in loading the file.");
+                    throw new DukeException("OOPS!!! There is an error in loading the file.");
                 }
 
                 if (done == 'X') {
@@ -94,7 +105,7 @@ public class Storage {
 
             return list;
         } catch (FileNotFoundException e) {
-            throw new DukeException("☹ OOPS!!! There is an error in loading the file.");
+            throw new DukeException("OOPS!!! There is an error in loading the file.");
         }
     }
 

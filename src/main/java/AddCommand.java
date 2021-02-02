@@ -5,8 +5,10 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String task, time;
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String task;
+        String time;
+        String respone;
         int size;
         Task t;
 
@@ -24,8 +26,10 @@ public class AddCommand extends Command {
         tasks.addTask(action, task, time);
         size = tasks.size;
         t = (tasks.list).get(size - 1);
-        ui.showAdd(t, size);
+
+        respone = ui.showAddMessage(t, size);
         storage.store(tasks.list);
+        return respone;
     }
 
     public boolean isExit() {

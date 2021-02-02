@@ -1,45 +1,39 @@
+
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    /**
+     * Constructor to set up Duke with previously stored file.
+     */
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("Duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("Duke.txt").run();
-    }
-
     /**
-     * Main body of Duke program.
      * Command is created by parsing the input and then executed.
      * Error message is shown if there is DukeException.
+     *
+     * @param input
+     * @return
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        String respone;
+        try {
+            Command c = Parser.getCommand(input);
+            respone = c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            respone = ui.showError(e.getMessage());
         }
+        return respone;
     }
 
 }

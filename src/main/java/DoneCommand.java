@@ -5,25 +5,28 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int num;
-        Task t;
+        Task task;
+        String respone;
 
         try {
             num = Integer.parseInt(info);
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ OOPS!!! There is no such task number.");
+            throw new DukeException("OOPS!!! There is no such task number.");
         }
 
         if (num > tasks.size || num == 0) {
-            throw new DukeException("☹ OOPS!!! There is no such task number.");
+            throw new DukeException("OOPS!!! There is no such task number.");
         } else {
             num--;
             tasks.doneTask(num);
-            t = tasks.list.get(num);
-            ui.showDone(t);
+            task = tasks.list.get(num);
+            respone = ui.showDone(task);
             storage.store(tasks.list);
         }
+
+        return respone;
     }
 
     @Override

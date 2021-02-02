@@ -1,7 +1,14 @@
 public abstract class Command {
 
-    protected String action, info;
+    protected String action;
+    protected String info;
 
+    /**
+     * Constructor to form a command with execute.
+     *
+     * @param action command
+     * @param info detail
+     */
     public Command(String action, String info) {
         this.action = action;
         this.info = info;
@@ -16,7 +23,7 @@ public abstract class Command {
      * @param storage
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
 
