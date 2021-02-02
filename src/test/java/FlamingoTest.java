@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import flamingo.*;
 import org.junit.jupiter.api.Test;
 
 public class FlamingoTest {
@@ -14,14 +15,14 @@ public class FlamingoTest {
         t.addTask(new Deadline("return book", LocalDate.parse("2021-02-02")));
         t.deleteTask(1);
         t.markAsDone(1);
-        assertEquals(1, t.numTasks);
+        assertEquals(1, t.getNumTasks());
     }
 
     @Test
     public void getTaskStatusTest() {
         Task t = new Task("read book");
         assertEquals("0", t.getStatusAsNumber());
-        t.isDone = true;
+        t.markAsDone();
         assertEquals("1", t.getStatusAsNumber());
     }
 
@@ -29,6 +30,6 @@ public class FlamingoTest {
     public void openFileTest() throws Exception {
         Storage s = new Storage();
         s.loadData();
-        assertEquals(false, s.pathExists);
+        assertEquals(false, s.getPathExists());
     }
 }
