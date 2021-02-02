@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -9,71 +8,69 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
-    public static void main(String[] args) {
-        Duke duke = new Duke(FILE_PATH, FILE_NAME);
-        duke.doCommand();
-    }
-
-    public Duke(String filePath, String fileName) {
+    private Duke(String filePath, String fileName) {
         ui = new Ui();
         storage = new Storage(filePath, fileName);
         taskList = new TaskList(storage.readPreviousFile());
     }
 
+    public static Duke start(){
+        return new Duke(FILE_PATH, FILE_NAME);
+    }
+
     /**
      * Process command given by user.
      */
-    private void doCommand() {
-        Scanner sc = new Scanner(System.in);
-        ui.printGreetings();
+    public String doCommand(String word) {
+        String result;
 
-        while (sc.hasNext()) {
-            String word = sc.nextLine();
-            String[] tmp = word.split(" ");
-            String command = tmp[0];
-            if (word.equals("bye")) {
-                ui.printBye();
-                break;
-            } else if (word.equals("list")) {
-                doList();
-            } else if (command.equals("done")) {
-                int index = Integer.parseInt(tmp[1]);
-                doDone(index);
-            } else if (command.equals("delete")) {
-                int index = Integer.parseInt(tmp[1]);
-                doDelete(index);
-            } else if (command.equals("find")) {
-                doFind(word);
-            } else {
-                doTask(word);
-            }
-            storage.saveTasks(taskList);
+        String[] tmp = word.split(" ");
+        String command = tmp[0];
+        if (word.equals("bye")) {
+            result = ui.getBye();
+        } else if (word.equals("list")) {
+            result = doList();
+        } else if (command.equals("done")) {
+            int index = Integer.parseInt(tmp[1]);
+            result = doDone(index);
+        } else if (command.equals("delete")) {
+            int index = Integer.parseInt(tmp[1]);
+            result = doDelete(index);
+        } else if (command.equals("find")) {
+            result = doFind(word);
+        } else {
+            result = doTask(word);
         }
+        storage.saveTasks(taskList);
+        return result;
     }
 
     /**
      * Process command list given by user.
      */
-    private void doList() {
+    private String doList() {
+        String result = "";
         for (int i=0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            ui.printList(i, task);
+            result += ui.getList(i, task);
+            result += "\n";
         }
+        return result;
     }
 
     /**
      * Process command done given by user.
      * @param index Index of task from TaskList
      */
-    private void doDone(int index) {
+    private String doDone(int index) {
         try {
             Task currTask = taskList.get(index - 1);
             currTask = currTask.doTask();
             taskList.set(index - 1, currTask);
-            ui.printDoneSuccess(currTask);
+            return ui.getDoneSuccess(currTask);
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            ui.printDoneFail();
+            return ui.getDoneFail();
         }
     }
 
@@ -81,14 +78,14 @@ public class Duke {
      * Process command delete given by user.
      * @param index Index of task from TaskList
      */
-    private void doDelete(int index) {
+    private String doDelete(int index) {
         try {
             Task currTask = taskList.get(index - 1);
             taskList.remove(index - 1);
-            ui.printDeleteSuccess(currTask, taskList.size());
+            return ui.getDeleteSuccess(currTask, taskList.size());
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            ui.printDeleteFail();
+            return ui.getDeleteFail();
         }
     }
 
@@ -96,13 +93,13 @@ public class Duke {
      * Process command find given by user.
      * @param word String inputted by user.
      */
-    private void doFind(String word){
+    private String doFind(String word){
         try {
             String toSearch = word.substring(5);
             List<Task> searchedTaskList = taskList.find(toSearch);
-            ui.printFindSuccess(searchedTaskList);
+            return ui.getFindSuccess(searchedTaskList);
         } catch (StringIndexOutOfBoundsException e) {
-            ui.printFindFail(new NoMeaningException(
+            return ui.getFindFail(new NoMeaningException(
                     "☹ OOPS!!! The description of a find cannot be empty."));
         }
     }
@@ -111,22 +108,22 @@ public class Duke {
      * Process task type command given by user.
      * @param word the whole sentences entered by the user
      */
-    private void doTask(String word) {
+    private String doTask(String word) {
         try {
             String[] tmp = word.split(" ");
             String command = tmp[0];
             if (command.equals("todo")) {
-                doToDo(word);
+                return doToDo(word);
             } else if (command.equals("deadline")) {
-                doDeadline(word);
+                return doDeadline(word);
             } else if (command.equals("event")) {
-                doEvent(word);
+                return doEvent(word);
             } else {
                 throw new NoMeaningException(
                         "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (NoMeaningException e){
-            ui.printTaskFail(e);
+            return ui.getTaskFail(e);
         }
     }
 
@@ -134,12 +131,12 @@ public class Duke {
      * Process task command todo given by user.
      * @param word the whole sentences entered by the user
      */
-    private void doToDo(String word) throws NoMeaningException {
+    private String doToDo(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(5);
             ToDo todo = new ToDo(realWord);
             taskList.add(todo);
-            doTaskFinally(todo);
+            return doTaskFinally(todo);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException(
                     "☹ OOPS!!! The description of a todo cannot be empty.");
@@ -150,7 +147,7 @@ public class Duke {
      * Process task command deadline given by user.
      * @param word the whole sentences entered by the user
      */
-    private void doDeadline(String word) throws NoMeaningException {
+    private String doDeadline(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(9);
             String[] deadlineWords = realWord.split("/by");
@@ -162,7 +159,7 @@ public class Duke {
             LocalTime deadlineHour = LocalTime.parse(deadlineDateHours[2]);
             Deadline deadline = new Deadline(deadlineWord, deadlineDate, deadlineHour);
             taskList.add(deadline);
-            doTaskFinally(deadline);
+            return doTaskFinally(deadline);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException(
                     "☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -173,7 +170,7 @@ public class Duke {
      * Process task command event given by user.
      * @param word the whole sentences entered by the user
      */
-    private void doEvent(String word) throws NoMeaningException {
+    private String doEvent(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(6);
             String[] eventWords = realWord.split("/at");
@@ -185,7 +182,7 @@ public class Duke {
             LocalTime eventHour = LocalTime.parse(eventDateHours[2]);
             Event event = new Event(eventWord, eventDate, eventHour);
             taskList.add(event);
-            doTaskFinally(event);
+            return doTaskFinally(event);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException(
                     "☹ OOPS!!! The description of a event cannot be empty.");
@@ -196,7 +193,7 @@ public class Duke {
      * Process task typed command after all the above functions.
      * @param task Task to print
      */
-    private void doTaskFinally(Task task) {
-        ui.printTaskFinally(task, taskList.size());
+    private String doTaskFinally(Task task) {
+        return ui.getTaskFinally(task, taskList.size());
     }
 }
