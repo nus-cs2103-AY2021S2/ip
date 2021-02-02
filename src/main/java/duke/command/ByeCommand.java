@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Exceptions.DukeException;
-import duke.storage.Storage;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class ByeCommand extends Command {
 
@@ -12,8 +12,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.goodbyeMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.goodbyeMessage();
     }
 
     @Override

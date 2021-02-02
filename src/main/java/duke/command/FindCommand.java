@@ -2,11 +2,11 @@ package duke.command;
 
 import java.util.ArrayList;
 
-import duke.Exceptions.DukeException;
-import duke.storage.Storage;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class FindCommand extends Command {
     private final String keyword;
@@ -20,10 +20,11 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> newTasks = tasks.findMatchingTasks(this.keyword);
-        ui.displayMatchingTasks(newTasks);
+        String result = ui.displayMatchingTasks(newTasks);
         storage.saveTasks(tasks.getTasks());
+        return result;
     }
 
     @Override

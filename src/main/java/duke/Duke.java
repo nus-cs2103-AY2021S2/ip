@@ -1,12 +1,8 @@
 package duke;
 
-import duke.Exceptions.DukeException;
+import duke.exceptions.DukeException;
 import duke.command.Command;
-import duke.parser.Parser;
-import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
-
 
 public class Duke {
     private final Storage storage;
@@ -20,36 +16,37 @@ public class Duke {
      */
     public Duke() throws DukeException {
         ui = new Ui();
-        ui.welcomeMessage();
         storage = new Storage();
         try {
             tasks = new TaskList(storage.displayTasks());
         } catch (DukeException e) {
-            ui.printExceptions(e.getMessage());
             tasks = new TaskList();
 
         }
     }
 
     /**
-     * Runs the program.
+     * Returns the response from Duke
+     *
+     * @param input User input.
+     * @return the description of the output.
+     * @throws DukeException if there exists an exception from executing the functions.
      */
-    public void run() {
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String str = ui.readCommand();
-                Command cmd = Parser.parseTask(str);
-                cmd.execute(tasks, ui, storage);
-                isExit = cmd.isExit();
-            } catch (DukeException e) {
-                ui.printExceptions(e.getMessage());
-            }
+    public String getResponse(String input) throws DukeException {
+        try {
+            Command cmd = Parser.parseTask(input);
+            return cmd.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
-
-    public static void main(String[] args) throws DukeException {
-        new Duke().run();
+    /**
+     * Displays the welcome message.
+     *
+     * @return a String containing the welcome message.
+     */
+    public String welcomeMessage() {
+        return "Hello from Duke!\n" + "\nWhat can I do for you?";
     }
 }

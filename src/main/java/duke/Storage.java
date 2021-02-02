@@ -1,4 +1,4 @@
-package duke.storage;
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Exceptions.DukeException;
+import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;

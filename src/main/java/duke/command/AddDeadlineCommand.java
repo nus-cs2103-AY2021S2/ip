@@ -3,13 +3,13 @@ package duke.command;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.Exceptions.DukeException;
-import duke.Exceptions.MissingDateException;
-import duke.Exceptions.UnknownInputException;
-import duke.storage.Storage;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.MissingDateException;
+import duke.exceptions.UnknownInputException;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class AddDeadlineCommand extends Command {
     private final Deadline deadline;
@@ -30,11 +30,13 @@ public class AddDeadlineCommand extends Command {
         this.deadline = new Deadline(name[0], dateTime);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(this.deadline);
-        ui.displayAddedTask(this.deadline, tasks.getNumOfTasks());
+        String result = ui.displayAddedTask(this.deadline, tasks.getNumOfTasks());
         storage.saveTasks(tasks.getTasks());
+        return result;
     }
+
 
     public boolean isExit() {
         return false;

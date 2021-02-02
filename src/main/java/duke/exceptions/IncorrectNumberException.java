@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 public class IncorrectNumberException extends DukeException {
     public IncorrectNumberException(int num) {

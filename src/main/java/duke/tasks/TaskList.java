@@ -2,7 +2,7 @@ package duke.tasks;
 
 import java.util.ArrayList;
 
-import duke.Exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 
 public class TaskList {

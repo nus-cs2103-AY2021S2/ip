@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Exceptions.DukeException;
-import duke.Exceptions.IncorrectNumberException;
-import duke.storage.Storage;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.IncorrectNumberException;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class DoneCommand extends Command {
     private final int taskNum;
@@ -16,10 +16,11 @@ public class DoneCommand extends Command {
 
         this.taskNum = Integer.parseInt(description);
     }
+
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getNumOfTasks() == 0) {
-            throw new DukeException("There are currently no duke.tasks in your list.");
+            throw new DukeException("There are currently no tasks in your list.");
         }
 
         if (taskNum < 1 || taskNum > tasks.getNumOfTasks()) {
@@ -27,8 +28,9 @@ public class DoneCommand extends Command {
         }
 
         tasks.markAsDone(taskNum);
-        ui.displayDoneTask(tasks.getTask(taskNum));
+        String result = ui.displayDoneTask(tasks.getTask(taskNum));
         storage.saveTasks(tasks.getTasks());
+        return result;
     }
 
     @Override

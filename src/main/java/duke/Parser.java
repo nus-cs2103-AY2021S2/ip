@@ -1,8 +1,8 @@
-package duke.parser;
+package duke;
 
-import duke.Exceptions.DukeException;
-import duke.Exceptions.EmptyLineException;
-import duke.Exceptions.IncorrectTypeException;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyLineException;
+import duke.exceptions.IncorrectTypeException;
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;

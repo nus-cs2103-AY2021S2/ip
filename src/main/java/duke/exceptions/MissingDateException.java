@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 public class MissingDateException extends DukeException {
     public MissingDateException(String message) {

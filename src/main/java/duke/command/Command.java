@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.Exceptions.DukeException;
-import duke.storage.Storage;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public abstract class Command {
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
 }

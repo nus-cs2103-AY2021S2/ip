@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 public class IncorrectTypeException extends DukeException {
     public IncorrectTypeException(String message) {
