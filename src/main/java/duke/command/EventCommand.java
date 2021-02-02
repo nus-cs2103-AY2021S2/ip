@@ -19,11 +19,11 @@ public class EventCommand extends Command {
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        if (arguments.isBlank()) {
+        if (getArguments().isBlank()) {
             throw new DukeException("I apologize, please input description and time for 'event'.");
         } else {
-            String[] split = arguments.split("/at");
-            if (arguments.equals(split[0])) {
+            String[] split = getArguments().split("/at");
+            if (getArguments().equals(split[0])) {
                 throw new DukeException("I apologize, please use '/at' argument to specify time for 'event'.");
             } else {
                 Task newTask = new Event(split[0].strip(), split[1].strip());

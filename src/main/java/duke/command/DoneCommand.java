@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) {
-        int doneIndex = Integer.parseInt(arguments) - 1;
+        int doneIndex = Integer.parseInt(getArguments()) - 1;
         Task toDo = taskList.get(doneIndex);
         toDo.doTask();
         storage.markDoneInFile(doneIndex);
