@@ -35,7 +35,9 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String name, String dueTime) {
         super(name);
-        this.setDueTime(dueTime);
+        if (dueTime != null) {
+            this.setDueTime(dueTime);
+        }
     }
 
     /**
@@ -53,7 +55,7 @@ public class DeadlineTask extends Task {
      * @return The deadline of the DeadlineTask.
      */
     public String getDueTime() {
-        return this.dueTime.format(this.format);
+        return this.dueTime == null ? null : this.dueTime.format(this.format);
     }
 
     /**
@@ -67,7 +69,7 @@ public class DeadlineTask extends Task {
                 "D | %d | %s | %s",
                 this.getIsDone() ? 1 : 0,
                 this.getName(),
-                this.getDueTime()
+                this.getDueTime() == null ? "null" : this.getDueTime()
         );
     }
 

@@ -35,7 +35,9 @@ public class EventTask extends Task {
      */
     public EventTask(String name, String eventTime) {
         super(name);
-        this.setEventTime(eventTime);
+        if (eventTime != null) {
+            this.setEventTime(eventTime);
+        }
     }
 
     /**
@@ -52,7 +54,7 @@ public class EventTask extends Task {
      * @return The time of the EventTask.
      */
     public String getEventTime() {
-        return this.eventTime.format(this.format);
+        return this.eventTime == null ? null : this.eventTime.format(this.format);
     }
 
     /**
@@ -66,7 +68,7 @@ public class EventTask extends Task {
                 "E | %d | %s | %s",
                 this.getIsDone() ? 1 : 0,
                 this.getName(),
-                this.getEventTime()
+                this.getEventTime() == null ? "null" : this.getEventTime()
         );
     }
 
