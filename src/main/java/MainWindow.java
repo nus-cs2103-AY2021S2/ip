@@ -20,6 +20,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -30,6 +31,11 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(Ui.showGreeting(), dukeImage)
+        );
+        String input = userInput.getText();
+        Ui.load(input);
     }
 
     /**
