@@ -6,6 +6,8 @@ public class Duke {
     private final Parser parser;
     private Storage storage;
     private TaskList tasklist;
+    private String message = "";
+    boolean isExit = false;
 
     public Duke(String filePath) {
         this.ui = new Ui();
@@ -20,36 +22,40 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("src\\main\\java\\taskList.txt").run();
-    }
-
     /**
      * Runs the program
      */
-    public void run() {
-        ui.showLine();
-        ui.showWelcome();
-        ui.showLine();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = parser.parse(fullCommand);
-                c.execute(tasklist, ui, storage);
-                isExit = c.isExit();
-            } catch (IOException e) {
-                ui.showLoadingError();
-            } catch (DukeException | RuntimeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public void run(String fullCommand) {
+        String pendingMessage;
+        try {
+            Command c = parser.parse(fullCommand);
+            pendingMessage = c.execute(tasklist, ui, storage);
+            message = pendingMessage;
+            isExit = c.isExit();
+        } catch (IOException e) {
+            message = ui.showLoadingError();
+        } catch (DukeException | RuntimeException e) {
+            message = ui.showError(e.getMessage());
         }
+    }
 
-        ui.showExit();
-        ui.showLine();
+    public String getLine() {
+        return ui.showLine();
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String welcomeMessage() {
+        return ui.showLine() + "\n" + ui.showWelcome() + "\n" + ui.showLine();
+    }
+
+    public String exitMessage() {
+        return ui.showExit() + "\n" + ui.showLine();
+    }
+
+    public boolean getExitStatus() {
+        return isExit;
     }
 }

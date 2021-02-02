@@ -18,12 +18,16 @@ public class AddCommand extends Command {
      * @param tasklist contains the task list and operations to manipulate the list
      * @param ui       deals with interactions with the user
      * @param storage  deals with loading tasks from the file and saving tasks in the file
+     * @return String that consists of a message for added task
      * @throws IOException is thrown when there is an error related to input and output
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
+        String message;
         tasklist.addTask(task);
-        ui.showAddTask(tasklist);
+        message = ui.showAddTask(tasklist);
         storage.writeToFile(tasklist);
+
+        return message;
     }
 }

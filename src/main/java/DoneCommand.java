@@ -19,13 +19,17 @@ public class DoneCommand extends Command {
      * @param tasklist contains the task list and operations to manipulate the list
      * @param ui       deals with interactions with the user
      * @param storage  deals with loading tasks from the file and saving tasks in the file
+     * @return String that consists of done message
      * @throws IOException   is thrown when there is an error related to input and output
      * @throws DukeException is thrown when there is an error related to duke
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException, DukeException {
+        String message;
         tasklist.markTask(taskIndex);
-        ui.showMarkTask(tasklist.getList().get(taskIndex));
+        message = ui.showMarkTask(tasklist.getList().get(taskIndex));
         storage.writeToFile(tasklist);
+
+        return message;
     }
 }

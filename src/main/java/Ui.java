@@ -13,102 +13,116 @@ public class Ui {
     }
 
     /**
-     * Prints a line
+     * To output a line that consists of -
+     *
+     * @return String that consists of -
      */
-    public void showLine() {
-        System.out.println("------------------------------------------------");
+    public String showLine() {
+        return "------------------------------------------------";
     }
 
     /**
-     * Prints the error message
+     * To output an error message
      *
      * @param message the error message in String
+     * @return String message
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
-     * Prints to indicate that the file is unable to be loaded
-     */
-    public void showLoadingError() {
-        System.out.println("Unable to load file!");
-    }
-
-    /**
-     * Takes in user input
+     * To indicate that the file is unable to be loaded
      *
-     * @return the full user command in String
+     * @return String that states unable to load file
      */
-    public String readCommand() {
-        return sc.nextLine();
+    public String showLoadingError() {
+        return "Unable to load file!";
+    }
+
+//    /**
+//     * Takes in user input
+//     *
+//     * @return the full user command in String
+//     */
+//    public String readCommand() {
+//        return sc.nextLine();
+//    }
+
+    /**
+     * To output a welcome message
+     *
+     * @return String of welcome message
+     */
+    public String showWelcome() {
+        String message = "Hi! I'm Timmy!\nWhat can Timmy note down for you today?";
+        message = message + "\nPlease type in any of these format!" + "\ntodo [title]"
+                + "\nevent [title] /at [yyyy-mm-dd] [HH:MM]" + "\ndeadline [title] /by [yyyy-mm-dd] [HH:MM]"
+                + "\nlist" + "\ndelete [index]" + "\ndone [index]";
+        return message;
     }
 
     /**
-     * Prints a welcome message
+     * To output an exit message
+     *
+     * @return String of an exit message
      */
-    public void showWelcome() {
-        System.out.println("Hi! I'm Timmy!\nWhat can Timmy note down for you today?");
-        System.out.println("Please type in any of these format!");
-        System.out.println("todo [title]");
-        System.out.println("event [title] /at [yyyy-mm-dd] [HH:MM]");
-        System.out.println("deadline [title] /by [yyyy-mm-dd] [HH:MM]");
-        System.out.println("list");
-        System.out.println("delete [index]");
-        System.out.println("done [index]");
+    public String showExit() {
+        return "Bye! Hope to see you again!";
     }
 
     /**
-     * Prints the exit message
-     */
-    public void showExit() {
-        sc.close();
-
-        System.out.println("Bye! Hope to see you again!");
-    }
-
-    /**
-     * Prints the <code>Tasks</code> in a TaskList
+     * To output the <code>Tasks</code> in a TaskList
      *
      * @param tasklist stores the <code>Task</code> in an ArrayList
+     * @return String to consists of <code>Task</code> in an ArrayList
      */
-    void printList(TaskList tasklist) {
-        System.out.println("Here are the tasks in your list:");
+    public String printList(TaskList tasklist) {
+        String message = "Here are the tasks in your list:\n";
 
         ArrayList<Task> tasks = tasklist.getList();
 
         for (int j = 0; j < tasks.size(); j++) {
-            System.out.println(j + 1 + "." + tasks.get(j).toString());
+            message = message + (j + 1) + "." + tasks.get(j).toString() + "\n";
         }
+
+        return message;
     }
 
     /**
-     * Prints a message to indicate that the task is marked
+     * To ouput a message to indicate that the task is marked
      *
      * @param task the <code>Task</code>> to be marked
+     * @return String that indicates the <code>Task</code>> to be marked
      */
-    void showMarkTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task.toString());
+    public String showMarkTask(Task task) {
+        return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
     /**
-     * Prints a message to indicate that the task is deleted
+     * To output a message to indicate that the task is deleted
      *
      * @param tasklist  stores the <code>Task</code> in an ArrayList
      * @param taskIndex indicates the <code>Task</code> index in the ArrayList
+     * @return String that consists of deleted tasks
      */
-    void showDeleteTask(TaskList tasklist, int taskIndex) {
-        System.out.println("Ok! I've removed this task:\n" + tasklist.getList().get(taskIndex).toString());
-        System.out.println("Currently, you have " + (tasklist.getList().size() - 1) + " task(s) in the list!");
+    public String showDeleteTask(TaskList tasklist, int taskIndex) {
+        String message = "Ok! I've removed this task:\n" + tasklist.getList().get(taskIndex).toString() + "\n";
+        message = message + "Currently, you have " + (tasklist.getList().size() - 1) + " task(s) in the list!";
+
+        return message;
     }
 
     /**
-     * Prints the added <code>Task</code> to the ArrayList
+     * To output the added <code>Task</code> to the ArrayList
      *
      * @param tasklist stores the <code>Task</code> in an ArrayList
+     * @return String that consists of the task added
      */
-    void showAddTask(TaskList tasklist) {
-        System.out.println("Ok! I've added this task:\n" + tasklist.getList().get(tasklist.getList().size() - 1).toString());
-        System.out.println("Currently, you have " + tasklist.getList().size() + " task(s) in the list!");
+    public String showAddTask(TaskList tasklist) {
+        String message = "Ok! I've added this task:\n" + tasklist.getList().get(tasklist.getList().size() - 1).toString();
+        message = message + "\nCurrently, you have " + tasklist.getList().size() + " task(s) in the list!";
+
+        return message;
     }
 }

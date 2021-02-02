@@ -18,12 +18,14 @@ public class FindCommand extends Command {
      * @param tasklist contains the task list and operations to manipulate the list
      * @param ui       deals with interaction with the user
      * @param storage  deals with loading tasks from a file and saving into it
+     * @return String that consists of found tasks
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
         ArrayList<Task> matchingArrayList = tasklist.findTask(this.keyWord);
         TaskList matchingList = new TaskList(matchingArrayList);
-        ui.printList(matchingList);
+
+        return ui.printList(matchingList);
     }
 }
 
