@@ -42,6 +42,6 @@ public class Duckie {
     }
 
     public static void main(String[] args) throws IOException, DuckieException {
-        new Duckie("src/duckie.txt").run();
+        new Duckie("duckie.txt").run();
     }
 }

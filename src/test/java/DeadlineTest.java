@@ -1,10 +1,8 @@
-import main.java.classes.Task;
 import main.java.command.Deadline;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
