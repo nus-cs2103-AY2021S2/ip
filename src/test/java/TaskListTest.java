@@ -1,11 +1,13 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.PrintStream;
-import java.io.ByteArrayOutputStream;
 
 public class TaskListTest {
     private final PrintStream standardOut = System.out;
@@ -21,9 +23,9 @@ public class TaskListTest {
         TaskList list = new TaskList();
         list.addTask(new Todo("eat"));
 
-        assertEquals("    Got it. I've added this task:\n" +
-                            "        [T][ ] eat\n" +
-                            "    Now you have 1 tasks in the list.\n",
+        assertEquals("    Got it. I've added this task:\n"
+                        + "        [T][ ] eat\n"
+                        + "    Now you have 1 tasks in the list.\n",
                             outputStreamCaptor.toString());
     }
 

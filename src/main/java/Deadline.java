@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    LocalDate time;
+    private LocalDate time;
 
     /**
      * Initialises a newly created Deadline object
@@ -43,5 +43,9 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),
                 time.format(DateTimeFormatter.ofPattern("dd MMM yyy")));
+    }
+
+    LocalDate getTime() {
+        return this.time;
     }
 }

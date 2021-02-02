@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -24,13 +23,13 @@ public class Parser {
             ui.showBye();
             break;
         case "list":
-            ui.showList(taskList.list, false);
+            ui.showList(taskList.getList(), false);
             break;
         case "done":
             // To get the index
             int index = sc.nextInt();
             taskList.markTaskAsDone(index);
-            storage.writeToFile(taskList.list);
+            storage.writeToFile(taskList.getList());
             break;
         case "todo":
             String name = sc.nextLine();
@@ -47,9 +46,9 @@ public class Parser {
             String desc = sc.nextLine();
             if (!desc.equals("")) {
                 String[] split = desc.split("/by", 2);
-                    Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
-                    taskList.addTask(deadline);
-                    storage.appendToFile(deadline);
+                Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
+                taskList.addTask(deadline);
+                storage.appendToFile(deadline);
             } else {
                 throw new NoSuchElementException("☹ OOPS!!! The description of"
                         + " a deadline cannot be empty.");
@@ -79,7 +78,7 @@ public class Parser {
             // To get the index
             int i = sc.nextInt();
             taskList.removeTask(i);
-            storage.writeToFile(taskList.list);
+            storage.writeToFile(taskList.getList());
             break;
         default:
             throw new UnknownCommandException();

@@ -1,19 +1,18 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 import java.io.IOException;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Maya extends Application{
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+//import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Maya extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -57,7 +56,7 @@ public class Maya extends Application{
                 String command = sc.next();
                 ui.showLine();
 
-                Parser.parse(command, sc, ui, taskList, storage );
+                Parser.parse(command, sc, ui, taskList, storage);
 
                 // To exit the program with the command "bye"
                 if (command.equals("bye")) {
