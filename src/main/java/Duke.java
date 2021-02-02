@@ -50,12 +50,19 @@ public class Duke {
                         n++;
                     }
 
-                } else if (input.contains("deadline")) {
+                } else if (input.length() >= 8 && input.substring(0,8).equals("deadline")) {
                     items.add(new Deadline(input.substring(8)));
-                } else if (input.contains("todo")) {
+                } else if (input.length() >= 4 && input.substring(0,4).equals("todo")) {
                     items.add(new Todo(input.substring(4)));
-                } else if (input.contains("event")) {
+                } else if (input.length() >= 5 && input.substring(0,5).equals("event")) {
                     items.add(new Event(input.substring(5)));
+                } else if (input.length() >= 6 && input.substring(0,6).equals("delete")) {
+                    int taskToDelete = Integer.parseInt(input.substring(7));
+                    Task toRemove = items.get(taskToDelete - 1);
+                    items.remove(taskToDelete - 1);
+                    System.out.println("Noted. I've removed this task:\n  "
+                                       + toRemove + "\nNow you have " + items.size() + " tasks in the list.");
+
                 } else {
                     items.add(new Task(input));
                 }
@@ -79,8 +86,10 @@ public class Duke {
             throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
         } else if (input.length() == 5 && input.equals("event")) {
             throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
-        } else if (input.substring(0,4).equals("blah")) {
+        } else if (input.length() >= 4 && input.substring(0,4).equals("blah")) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (input.isBlank()) {
+            throw new DukeException(" ☹ OOPS!!! A Task cannot be empty.");
         } else {}
     }
 }
