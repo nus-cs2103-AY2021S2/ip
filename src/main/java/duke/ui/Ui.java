@@ -9,8 +9,6 @@ import duke.tasks.TaskList;
  * Responsible for handling output messages.
  */
 public class Ui {
-    public Ui() {}
-
     /**
      * Returns the Duke greeting message.
      *
