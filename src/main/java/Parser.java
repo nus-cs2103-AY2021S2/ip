@@ -5,7 +5,14 @@ import java.util.ArrayList;
  * Makes sense of the user command
  */
 public class Parser {
-
+    private static int TODO_TASK_INDEX = 5;
+    private static int KEYWORD_INDEX = 5;
+    private static int COMPLETED_TASK_INDEX = 5;
+    private static int DELETE_TASK_INDEX = 7;
+    private static int EVENT_TASK_INDEX = 6;
+    private static int EVENT_DATE_INDEX = 3;
+    private static int DEADLINE_TASK_INDEX = 9;
+    private static int DEADLINE_DATE_INDEX = 3;
     /**
      * Returns the response to the user's input
      * @param input input supplied by the user
@@ -69,7 +76,7 @@ public class Parser {
     }
 
     public static String getKeyword(String input) {
-        return input.substring(5);
+        return input.substring(KEYWORD_INDEX);
     }
 
     /**
@@ -78,7 +85,7 @@ public class Parser {
      * @return the task description of the completed task
      */
     public static Task getFinishedTask(String input) {
-        int taskNumber = Integer.parseInt(input.substring(5));
+        int taskNumber = Integer.parseInt(input.substring(COMPLETED_TASK_INDEX));
         return TaskList.updatedTaskList.get(taskNumber - 1);
     }
 
@@ -88,7 +95,7 @@ public class Parser {
      * @return task number to be deleted
      */
     public static int getTaskNumberToBeDeleted(String input) {
-        return Integer.parseInt(input.substring(7));
+        return Integer.parseInt(input.substring(DELETE_TASK_INDEX));
     }
 
     /**
@@ -106,7 +113,7 @@ public class Parser {
      * @return todo task description
      */
     public static String getTodoTask(String input) {
-        return input.substring(5);
+        return input.substring(TODO_TASK_INDEX);
     }
 
     /**
@@ -115,7 +122,7 @@ public class Parser {
      * @return event task description
      */
     public static String getEventTask(String input) {
-        return input.substring(6).split("/")[0];
+        return input.substring(EVENT_TASK_INDEX).split("/")[0];
     }
 
     /**
@@ -124,7 +131,7 @@ public class Parser {
      * @return event date
      */
     public static String getEventDate(String input) {
-        return input.substring(6).split("/")[1].substring(3);
+        return input.substring(EVENT_TASK_INDEX).split("/")[1].substring(EVENT_DATE_INDEX);
     }
 
     /**
@@ -133,7 +140,7 @@ public class Parser {
      * @return deadline task description
      */
     public static String getDeadlineTask(String input) {
-        return input.substring(9).split("/", 2)[0];
+        return input.substring(DELETE_TASK_INDEX).split("/", 2)[0];
     }
 
     /**
@@ -142,8 +149,8 @@ public class Parser {
      * @return deadline date
      */
     public static LocalDate getDeadlineDate(String input) {
-        return LocalDate.parse(input.substring(9).split("/", 2)[1].substring(3)
-                .replaceAll("/", "-"));
+        return LocalDate.parse(input.substring(DEADLINE_TASK_INDEX).split("/", 2)[1]
+                .substring(DEADLINE_DATE_INDEX).replaceAll("/", "-"));
     }
 
 }
