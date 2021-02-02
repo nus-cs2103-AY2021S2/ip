@@ -14,6 +14,17 @@ public class Task {
         return doneTask;
     }
 
+    public String getSaveText() {
+        StringBuilder sb = new StringBuilder();
+        if (isDone) {
+            sb.append("1 | ");
+        } else {
+            sb.append("0 | ");
+        }
+        sb.append(this.name);
+        return sb.toString();
+    }
+
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
