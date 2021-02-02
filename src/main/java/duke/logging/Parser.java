@@ -19,9 +19,17 @@ public class Parser {
      * @param fullCommand   The string to be parsed.
      * @return              A command to be executed.
      */
-    public static Command parse(String[] fullCommand) {
-        String type = fullCommand[0];
-        String taskDescription = fullCommand[1];
+    public static Command parse(String fullCommand) {
+        String type;
+        String taskDescription;
+        if (fullCommand.contains(" ")) {
+            int commandStrLength = fullCommand.indexOf(" ");
+            type = fullCommand.substring(0, commandStrLength);
+            taskDescription = fullCommand.substring(commandStrLength + 1, fullCommand.length());
+        } else {
+            type = fullCommand;
+            taskDescription = "";
+        }
 
         if (type.equals("list")) {
             return new ListCommand(taskDescription);

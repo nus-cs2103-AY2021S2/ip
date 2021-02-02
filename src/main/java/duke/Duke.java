@@ -2,7 +2,6 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.command.Command;
 import duke.logging.Parser;
@@ -20,11 +19,10 @@ public class Duke {
 
     /**
      * Constructs a Duke chat bot.
-     * @param filePath The filepath where the data are going to be stored at.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -33,30 +31,31 @@ public class Duke {
     }
 
     /**
-     * Run the Duke chat bot.
+     * Execute the Duke chat bot.
+     * @param input The command string.
+     * @return      The response string.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.showWelcome(tasks);
-        while (sc.hasNext()) {
-            try {
-                String[] fullCommand = ui.readCommand(sc);
-                ui.printLine();
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                if (command.isExit()) {
-                    break;
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            } finally {
-                ui.printLine();
-            }
+    public String run(String input) {
+        try {
+            String message = ui.printLine();
+            Command command = Parser.parse(input);
+            message += ("\n" + command.execute(tasks, ui, storage));
+            message += ("\n" + ui.printLine());
+            System.out.println(message);
+            return message;
+        } catch (Exception e) {
+            return e.getMessage();
+        } finally {
+            ui.printLine();
         }
-        sc.close();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    /**
+     * Get response from running the Duke program.
+     * @param input  The command string.
+     * @return       The response string.
+     */
+    public String getResponse(String input) {
+        return new Duke().run(input);
     }
 }

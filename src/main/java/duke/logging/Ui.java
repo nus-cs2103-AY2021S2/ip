@@ -1,7 +1,6 @@
 package duke.logging;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.exception.InvalidInputException;
 import duke.model.Task;
@@ -29,85 +28,72 @@ public class Ui {
 
     /**
      * Print a straight line.
+     * @return       A straight line.
      */
-    public void printLine() {
-        System.out.println("     _______________________________________");
-    }
-
-    /**
-     * Read the user input.
-     * @param sc  A scanner to read user input.
-     * @return    The user input.
-     */
-    public String[] readCommand(Scanner sc) {
-        String[] userInput = new String[2];
-        userInput[0] = sc.next();
-        userInput[1] = sc.nextLine().strip();
-        return userInput;
+    public String printLine() {
+        return "     _______________________________________";
     }
 
     /**
      * An add command interaction which complements with the add command.
      * @param task    The task to be added to the list.
      * @param tasks   The list of tasks in Duke chat bot.
+     * @return        The message replied by Duke chat bot.
      */
-    public void addCommandInteraction(Task task, ArrayList<Task> tasks) {
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("     " + task);
-        System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
+    public String addCommandInteraction(Task task, ArrayList<Task> tasks) {
+        return "     Got it. I've added this task:\n     " + task + "\n     Now you have "
+                + tasks.size() + " task(s) in the list";
     }
 
     /**
      * A delete command interaction which complements with the delete command.
-     * @param task    The task to be added to the list.
-     * @param tasks   The list of tasks in Duke chat bot.
+     * @param task     The task to be added to the list.
+     * @param tasks    The list of tasks in Duke chat bot.
+     * @return         The message replied by Duke chat bot.
      */
-    public void deleteCommandInteraction(Task task, ArrayList<Task> tasks) {
-        System.out.println("     Noted. I've removed this task: ");
-        System.out.println("     " + task);
-        System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
+    public String deleteCommandInteraction(Task task, ArrayList<Task> tasks) {
+        return "     Noted. I've removed this task:\n     " + task + "\n     Now you have "
+                + tasks.size() + " task(s) in the list";
     }
 
     /**
      * A done command interaction which complements with the done command.
      * @param task    The task to be added to the list.
+     * @return        The message replied by Duke chat bot.
      */
-    public void doneCommandInteraction(Task task) {
-        System.out.println("     Nice! I've marked this task as done:\n     " + task);
-    }
-
-    /**
-     * A list command interaction which complements with the list command.
-     * @param task    The task to be added to the list.
-     */
-    public void listCommandInteraction(TaskList task) {
-        task.list();
+    public String doneCommandInteraction(Task task) {
+        return "     Nice! I've marked this task as done:\n     " + task;
     }
 
     /**
      * A bye command interaction which complements with the bye command.
      */
-    public void byeCommandInteraction() {
-        System.out.println("     Bye. Hope to see you again soon!");
+    public String byeCommandInteraction() {
+        return "     Bye. Hope to see you again soon!";
     }
 
     /**
      * A unknown command interaction which complements with an unknown command.
      * @throws InvalidInputException  Always throws an InvalidInputException.
      */
-    public void unknownCommandInteraction() throws InvalidInputException {
-        throw new InvalidInputException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String unknownCommandInteraction() throws InvalidInputException {
+        throw new InvalidInputException("     OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
      * A find command interaction which complements with a find command.
      * @param matchingTasks    All the matching tasks found.
+     * @return        The message replied by Duke chat bot.
      */
-    public void findCommandInteraction(ArrayList<Task> matchingTasks) {
+    public String findCommandInteraction(ArrayList<Task> matchingTasks) {
         if (matchingTasks.size() == 0) {
-            System.out.println("     ☹ No match found ☹");
+            return "     No match found";
         } else {
-            System.out.println("     Here are the matching tasks in your list:");
+            String message = "     Here are the matching tasks in your list:";
+            for (Task task: matchingTasks) {
+                message += ("     " + task);
+            }
+            return message;
         }
     }
 }

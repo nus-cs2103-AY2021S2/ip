@@ -1,9 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.InvalidDescriptionException;
 import duke.logging.Storage;
 import duke.logging.TaskList;
 import duke.logging.Ui;
+import duke.model.Task;
 
 /**
  * The FindCommand class denotes a find command to the Duke chat bot.
@@ -19,18 +22,19 @@ public class FindCommand extends Command {
 
     /**
      * Executing the command
-     * @param taskList A list of recorded tasks.
-     * @param ui       A user interface.
-     * @param storage  A list of recorded user inputs data.
+     * @param taskList The list of recorded tasks.
+     * @param ui       The user interface.
+     * @param storage  The list of recorded user inputs data.
+     * @return         The message replied by Duke chat bot.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            taskList.find(taskDescription, ui);
+            ArrayList<Task> matchingTasks = taskList.find(taskDescription);
+            return ui.findCommandInteraction(matchingTasks);
         } catch (InvalidDescriptionException ex) {
-            System.out.println("     " + ex.getMessage());
+            return "     " + ex.getMessage();
         }
-
     }
 
     /**

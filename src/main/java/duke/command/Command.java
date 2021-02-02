@@ -23,8 +23,9 @@ public abstract class Command {
      * @param taskList A list of recorded tasks.
      * @param ui       A user interface.
      * @param storage  A list of recorded user inputs data.
+     * @return         The message replied by Duke chat bot.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Determine whether the command will terminate the program.

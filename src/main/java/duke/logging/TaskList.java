@@ -1,5 +1,6 @@
 package duke.logging;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -27,32 +28,34 @@ public class TaskList {
     /**
      * Print out all the tasks in the list.
      */
-    public void list() {
-        System.out.println("     Here are the tasks in your list:");
+    public String list() {
+        String message = "     Here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.get(i));
+            message += "\n" + "     " + (i + 1) + "." + tasks.get(i);
         }
+        return message;
     }
 
     /**
-     * Add the task into the list.
-     * @param type                          The type of task to be added into the list.
-     * @param taskDescription               The description of the task.
-     * @param ui                            A user interface.
-     * @return                              The task that has been added to the list.
-     * @throws InvalidDescriptionException  If the format of the command is wrong.
-     * @throws DateTimeParseException       If the format of the dateTime is wrong.
+     * Add a task into the list of tasks.
+     * @param type                         The type of task.
+     * @param taskDescription              The description of the task.
+     * @param storage                      The storage information containing the list of tasks information.
+     * @return                             The updated list of tasks.
+     * @throws InvalidDescriptionException If description format is wrong.
+     * @throws DateTimeParseException      If datetime format is wrong.
+     * @throws IOException                 If inputting information into the storage post an error.
      */
-    public Task addTask(String type, String taskDescription, Ui ui)
-            throws InvalidDescriptionException, DateTimeParseException {
+    public ArrayList<Task> addTask(String type, String taskDescription, Storage storage)
+            throws InvalidDescriptionException, DateTimeParseException, IOException {
         Task task;
         if (taskDescription.length() == 0) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The description of " + type + " cannot be empty.");
+            throw new InvalidDescriptionException("OOPS!!! The description of " + type + " cannot be empty.");
         } else if (type.equals("todo")) {
             task = new ToDo(false, taskDescription);
         } else if ((type.equals("deadline") && !taskDescription.contains("/by"))
                 || (type.equals("event")) && !taskDescription.contains("/at")) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The description format of " + type + " is wrong.");
+            throw new InvalidDescriptionException("OOPS!!! The description format of " + type + " is wrong.");
         } else {
             int index = type.equals("deadline")
                     ? taskDescription.indexOf("/by")
@@ -69,45 +72,59 @@ public class TaskList {
             }
         }
         tasks.add(task);
-        ui.addCommandInteraction(task, tasks);
-        return task;
+        storage.append(task);
+        return tasks;
     }
 
     /**
-     * Delete a task from the list.
-     * @param taskDescription               The description of the task.
-     * @param ui                            A user interface.
-     * @return                              The list of tasks remaining.
-     * @throws InvalidDescriptionException  If the format of the command is wrong.
+     * Get the indicated task.
+     * @param index                          The index of the task.
+     * @return                               The indicated task.
+     * @throws InvalidDescriptionException   If index > tasks.size()
      */
-    public ArrayList<Task> delete(String taskDescription, Ui ui) throws InvalidDescriptionException {
+    public Task getTask(int index) throws InvalidDescriptionException {
         try {
-            int index = Integer.parseInt(taskDescription.substring(0, 1)) - 1;
-            Task task = tasks.get(index);
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException ex) {
+            throw ex;
+        }
+    }
+
+    /**
+     * Delete a task from the list of tasks.
+     * @param index                           The index of the task.
+     * @param storage                         The storage information containing the list of tasks information.
+     * @return                                The updated list of tasks.
+     * @throws InvalidDescriptionException    If description format is wrong.
+     * @throws IOException                    If inputting information into the storage post an error.
+     */
+    public ArrayList<Task> delete(int index, Storage storage) throws InvalidDescriptionException, IOException {
+        try {
+            Task task = this.getTask(index);
             tasks.remove(index);
-            ui.deleteCommandInteraction(task, tasks);
+            storage.overwrite(tasks);
             return tasks;
         } catch (NumberFormatException ex) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
+            throw new InvalidDescriptionException("OOPS!!! The task description is wrong");
         } catch (IndexOutOfBoundsException ex) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big "
+            throw new InvalidDescriptionException("OOPS!!! The number you entered is either too big "
                     + "or smaller than 0. There are currently " + tasks.size() + " tasks");
         }
     }
 
     /**
-     * Completed a task in the list.
-     * @param taskDescription                 The description of the task.
-     * @param ui                              A user interface.
-     * @return                                The list of tasks.
-     * @throws InvalidDescriptionException    If the format of the command is wrong.
+     * Complete a task from the list of tasks.
+     * @param index                          The index of the task.
+     * @param storage                        The storage information containing the list of tasks information.
+     * @return                               The updated list of tasks
+     * @throws InvalidDescriptionException   If description format is wrong.
+     * @throws IOException                   If inputting information into the storage post an error.
      */
-    public ArrayList<Task> done(String taskDescription, Ui ui) throws InvalidDescriptionException {
+    public ArrayList<Task> done(int index, Storage storage) throws InvalidDescriptionException, IOException {
         try {
-            int index = Integer.parseInt(taskDescription.substring(0, 1)) - 1;
-            Task task = tasks.get(index);
+            Task task = this.getTask(index);
             task.completeTask();
-            ui.doneCommandInteraction(task);
+            storage.overwrite(tasks);
             return tasks;
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
@@ -118,14 +135,14 @@ public class TaskList {
     }
 
     /**
-     * Find a task that has it's name matching the task description.
-     * @param taskDescription                 The description of the task.
-     * @param ui                              A user interface.
-     * @throws InvalidDescriptionException    If the task description is empty.
+     * Find a task from the list of tasks.
+     * @param taskDescription               The description of the task.
+     * @return                              The list of tasks matching the task description.
+     * @throws InvalidDescriptionException  If the description is empty.
      */
-    public void find(String taskDescription, Ui ui) throws InvalidDescriptionException {
+    public ArrayList<Task> find(String taskDescription) throws InvalidDescriptionException {
         if (taskDescription.length() == 0) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The description cannot be empty.");
+            throw new InvalidDescriptionException("OOPS!!! The description cannot be empty.");
         }
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task: tasks) {
@@ -133,9 +150,6 @@ public class TaskList {
                 matchingTasks.add(task);
             }
         }
-        ui.findCommandInteraction(matchingTasks);
-        for (Task task: matchingTasks) {
-            System.out.println("     " + task);
-        }
+        return matchingTasks;
     }
 }
