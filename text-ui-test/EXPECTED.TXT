@@ -4,6 +4,36 @@ Pai Kia Bot: What you want?
 ____________________________________________________________
 Your response: 
 ____________________________________________________________
-Pai Kia Bot: ok i added this task chop chop: [T][ ] borrow book
+Pai Kia Bot: ok i added this task chop chop: [T][ ] read book
 ____________________________________________________________
 Your response: 
+____________________________________________________________
+Pai Kia Bot: ok i added this task chop chop: [D][ ] return book (by: June 6th)
+____________________________________________________________
+Your response: 
+____________________________________________________________
+Pai Kia Bot: ok i added this task chop chop: [E][ ] project meeting (at: Aug 6th 2-4pm)
+____________________________________________________________
+Your response: 
+____________________________________________________________
+Pai Kia Bot: i send u your task list ah
+1.[T][ ] read book
+2.[D][ ] return book (by: June 6th)
+3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+____________________________________________________________
+Your response: 
+____________________________________________________________
+Pai Kia Bot: ok i give this task a done chop: [D][x] return book (by: June 6th)
+____________________________________________________________
+Your response: 
+____________________________________________________________
+Pai Kia Bot: i send u your task list ah
+1.[T][ ] read book
+2.[D][x] return book (by: June 6th)
+3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+____________________________________________________________
+Your response: 
+____________________________________________________________
+You: bye
+Pai Kia Bot: Leave so soon ah? Limpeh sleep first, if got no issue don't disturb me.
+____________________________________________________________
