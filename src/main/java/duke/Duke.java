@@ -4,6 +4,21 @@ import java.io.IOException;
 
 import duke.command.Command;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+
+
+
 /**
  * Duke is a basic to-do list application.
  */
@@ -24,29 +39,21 @@ public class Duke {
         }
     }
 
-    /**
-     * The driver method to run a created Duke object that responds to user input.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCmd = ui.readCommand();
-                Command parsedCmd = Parser.parse(fullCmd);
-                parsedCmd.execute(storage, ui, taskList);
-                isExit = parsedCmd.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
-        }
+    public Ui getUi() {
+        return this.ui;
     }
 
     /**
-     * Main method which initializes and runs Duke.
-     * @param args Unused.
+     * Parses and subsequently executes the given command input String.
+     *
+     * @return String output to be displayed
      */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    String getResponse(String input) {
+        try {
+            Command parsedCmd = Parser.parse(input);
+            return parsedCmd.execute(storage, ui, taskList);
+        } catch (DukeException e) {
+            return ui.showError(e);
+        }
     }
 }

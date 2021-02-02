@@ -28,24 +28,24 @@ public class Ui {
     /**
      * Prints the Welcome message to output.
      */
-    public void showWelcome() {
-        System.out.println("Greetings. My name is I-01B, but you may call me DUKE.");
-        System.out.println("What can I assist you with?");
+    public String showWelcome() {
+        return "Greetings. My name is I-01B, but you may call me DUKE. \n" +
+          "What can I assist you with?";
     }
 
     /**
      * Prints the error to output.
      * @param e error to be printed.
      */
-    public void showError(Throwable e) {
-        System.out.println("Error: " + e);
+    public String showError(Throwable e) {
+        return "Error: " + e.toString();
     }
 
     /**
      * Prints the given message to output.
      * @param message String to be printed.
      */
-    public void print(String message) {
-        System.out.println(message);
+    public String print(String message) {
+        return message;
     }
 }
