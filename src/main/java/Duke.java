@@ -3,6 +3,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;  // Import the File class
@@ -84,7 +87,9 @@ public class Duke {
                     try{
                         String name = getEventOrDeadlineName(input);
                         String by = getEventOrDeadlineAttribute(input);
-                        Deadline deadline = new Deadline(name, by);
+//                        /by String, /by
+                        LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        Deadline deadline = new Deadline(name, date);
                         tasks.add(deadline);
 
                         System.out.println("\n---------------------------------------" );
@@ -212,7 +217,9 @@ public class Duke {
                     Event event = new Event(data[2], data[3], isDone);
                     result.add(event);
                 } else if (taskType == 'D') {
-                    Deadline deadline = new Deadline(data[2], data[3], isDone);
+                    String unparsedDate = data[3];
+                    LocalDate date = LocalDate.parse(unparsedDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    Deadline deadline = new Deadline(data[2], date, isDone);
                     result.add(deadline);
                 } else {
                     Todo todo = new Todo(data[2], isDone);
