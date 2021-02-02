@@ -87,6 +87,7 @@ public class Duke {
                             + " " + toAdd + "\n"
                             + "Now you have " + tasks.getNumOfTasks() + " tasks in the list.\n";
                     ui.respond(response);
+                    storage.addTask(toAdd);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException(keyword_UC);
                 }
@@ -96,10 +97,11 @@ public class Duke {
                 try {
                     int taskNum = Integer.parseInt(userInput.split(" ")[1]);
                     tasks.markDone(taskNum);
-                    Task taskUpdated = tasks.getTask(taskNum);
+                    Task updatedTask = tasks.getTask(taskNum);
                     response = "Nice! I've marked this task as done: \n"
-                            + " " + taskUpdated + "\n";
+                            + " " + updatedTask+ "\n";
                     ui.respond(response);
+                    storage.markDoneInStorage(updatedTask, taskNum);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException("DONE");
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -115,6 +117,7 @@ public class Duke {
                     response = "Noted. I've removed this task: \n"
                             + " " + task + "\n";
                     ui.respond(response);
+                    storage.delete(taskNum);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeMissingDesException("DELETE");
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
