@@ -12,7 +12,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.utils.Command;
-import duke.utils.DateTime;
 
 /**
  * Manages storage information for the program.
@@ -60,12 +59,19 @@ public class Storage {
                 Command taskType = Command.valueOf(tokens[0]);
                 Task task;
 
+                String date;
+                String time;
+
                 switch (taskType) {
                 case EVENT:
-                    task = new Event(tokens[2], DateTime.parseDate(tokens[3]));
+                    date = tokens[3];
+                    time = tokens.length < 5 ? "" : " " + tokens[4];
+                    task = new Event(tokens[2], date + time);
                     break;
                 case DEADLINE:
-                    task = new Deadline(tokens[2], DateTime.parseDate(tokens[3]));
+                    date = tokens[3];
+                    time = tokens.length < 5 ? "" : " " + tokens[4];
+                    task = new Deadline(tokens[2], date + time);
                     break;
                 case TODO:
                     task = new Todo(tokens[2]);

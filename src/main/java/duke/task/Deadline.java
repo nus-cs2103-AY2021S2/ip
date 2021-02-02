@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import duke.utils.DateTime;
 
@@ -11,31 +12,37 @@ public class Deadline extends Task {
     /**
      * Date the task is to be completed by.
      */
-    protected LocalDate by;
+    protected LocalDate date;
+    protected LocalTime time;
 
     /**
      * Creates new instance of deadline.
      *
      * @param description Description of deadline.
-     * @param by          Date the task is to be completed by.
+     * @param dateTime Date and time the task is to be completed by.
      */
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, String dateTime) {
         super(description);
-        this.by = by;
+        date = DateTime.parseDate(dateTime);
+        time = DateTime.parseTime(dateTime);
     }
 
     @Override
     public String serialise() {
         String type = "DEADLINE";
         StringBuilder sb = new StringBuilder();
-        sb.append(type).append('|').append(isDone).append('|')
-            .append(description).append('|').append(DateTime.serialiseDate(by));
+        sb.append(type).append('|')
+            .append(isDone).append('|')
+            .append(description).append('|')
+            .append(DateTime.serialiseDate(date)).append('|')
+            .append(DateTime.getTimeAsString(time));
 
         return sb.toString();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTime.getDate(by) + ")";
+        String timeString = time == null ? "" : " " + time.toString();
+        return String.format("[D] %s (by: %s%s)", super.toString(), DateTime.getDateAsString(date), timeString);
     }
 }

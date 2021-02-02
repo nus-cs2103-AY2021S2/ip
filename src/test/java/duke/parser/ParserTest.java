@@ -8,12 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void parseCommand_emptyCommand_success() throws UnknownCommandException {
-        String[] tokens = {"", ""};
-        assertEquals(Command.SKIP, Parser.parseCommand(tokens));
-    }
-
-    @Test
     public void parseCommand_validCommand_success() throws UnknownCommandException {
         String[] todo = {"todo", ""};
         String[] deadline = {"deadline", ""};
