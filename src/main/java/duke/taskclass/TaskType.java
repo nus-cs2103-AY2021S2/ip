@@ -1,4 +1,4 @@
-package ssagit.taskclass;
+package duke.taskclass;
 
 public enum TaskType {
     TODO,

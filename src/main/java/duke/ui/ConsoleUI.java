@@ -1,6 +1,6 @@
-package ssagit.ui;
+package duke.ui;
 
-import ssagit.taskclass.Task;
+import duke.taskclass.Task;
 
 import java.io.InputStream;
 import java.util.Scanner;

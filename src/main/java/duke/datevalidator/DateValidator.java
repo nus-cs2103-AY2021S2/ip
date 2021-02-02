@@ -1,4 +1,4 @@
-package ssagit.datevalidator;
+package duke.datevalidator;
 
 /**
  * Interface to validate String date input

@@ -1,10 +1,10 @@
-package ssagit.parser;
+package duke.parser;
 
-import ssagit.datevalidator.DateValidator;
-import ssagit.taskclass.DeadlineTask;
-import ssagit.taskclass.EventTask;
-import ssagit.taskclass.Task;
-import ssagit.ui.ConsoleUI;
+import duke.datevalidator.DateValidator;
+import duke.taskclass.DeadlineTask;
+import duke.taskclass.EventTask;
+import duke.taskclass.Task;
+import duke.ui.ConsoleUI;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,8 +47,9 @@ public class Parser {
      * Parses lines of user input and outputs corresponding command.
      * @param tasks List of tasks from file.
      * @param taskIterator Integer to count number of tasks at a time.
+     * @return New number of tasks after any addition or deletion.
      */
-    public void parseInput(Task[] tasks, int taskIterator) {
+    public Integer parseInput(Task[] tasks, int taskIterator) {
         String input = ui.nextLine();
         String inputArr[] = input.split(" ", 2);
 
@@ -59,6 +60,7 @@ public class Parser {
                 break;
             case "list":
                 ui.list(tasks);
+                System.out.println("Num tasks: " + taskIterator);
                 break;
             case "done":
                 int taskNum = Integer.parseInt(inputArr[1]) - 1;
@@ -94,10 +96,12 @@ public class Parser {
                         tasks[taskIterator] = new Task(firstHalf[1], false);
                     }
                 }
+                taskIterator = taskIterator + 1;
+                ui.addTaskMessage(tasks[taskIterator - 1].toFormattedString(), taskIterator);
                 break;
             case "delete":
                 int removeIndex = Integer.parseInt(inputArr[1]);
-                taskIterator--; // reduce task count in list
+                taskIterator = taskIterator - 1; // reduce task count in list
                 ui.deleteTaskMessage(tasks[removeIndex - 1].toFormattedString(), taskIterator);
                 // actually delete the task and move all other tasks forward
                 for (int i = removeIndex - 1; i < tasks.length - 1; i++) {
@@ -128,5 +132,7 @@ public class Parser {
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
+
+        return taskIterator;
     }
 }

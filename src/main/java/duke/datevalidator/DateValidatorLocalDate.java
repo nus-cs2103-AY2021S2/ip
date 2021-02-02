@@ -1,4 +1,4 @@
-package ssagit.datevalidator;
+package duke.datevalidator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
