@@ -1,7 +1,45 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+file loaded!
+yo im Duckie! quack quack
+what can i do for ya ;)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+ok! i've added this task:
+[T][ ] eat
+you have 1 task in your list! keep working!
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+ok! i've added this task:
+[D][ ] deadline project  (by: Sat Dec 12 23:56:00 SGT 2020)
+you have 2 tasks in your list! keep working!
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+ok! i've added this task:
+[E][ ] event conference  (at: Fri Mar 12 12:00:00 SGT 2021)
+you have 3 tasks in your list! keep working!
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+get to work! these are the tasks in your list:
+1.[T][ ] eat
+2.[D][ ] deadline project  (by: Sat Dec 12 23:56:00 SGT 2020)
+3.[E][ ] event conference  (at: Fri Mar 12 12:00:00 SGT 2021)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+cool! this task is marked as done:
+[T][✘] eat
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+ok! i've deleted this task:
+[D][ ] deadline project  (by: Sat Dec 12 23:56:00 SGT 2020)
+yay! you have 2 tasks left to do!
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+get to work! these are the tasks in your list:
+1.[T][✘] eat
+2.[E][ ] event conference  (at: Fri Mar 12 12:00:00 SGT 2021)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)
+goodbye! c ya soon ;)
+:) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)

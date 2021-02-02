@@ -2,7 +2,7 @@ package main.java;
 
 
 import main.java.classes.*;
-import main.java.command.Command;
+import main.java.command.*;
 
 import java.io.IOException;
 
