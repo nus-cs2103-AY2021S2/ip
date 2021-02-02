@@ -1,14 +1,12 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.FileIoException;
-
 import duke.tasks.TaskList;
-
-import java.io.IOException;
 
 /**
  * Duke main class
@@ -19,7 +17,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Duke object
+     * Creates a Duke object and retrieves stored takes from disk if present
      *
      * @param filePath Path where task are stored in disk
      */
@@ -35,7 +33,7 @@ public class Duke {
         }
     }
 
-    public void run() throws DukeException, IOException {
+    private void run() throws DukeException, IOException {
         ui.printWelcomeText();
         boolean isBye = false;
 

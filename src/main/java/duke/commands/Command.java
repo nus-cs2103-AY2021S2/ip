@@ -1,15 +1,14 @@
 package duke.commands;
 
-import duke.tasks.TaskList;
-
 import duke.Ui;
+import duke.tasks.TaskList;
 
 /**
  * Abstract class for all commands
  */
 public abstract class Command {
-    CommandType type;
-    Ui ui;
+    protected CommandType type;
+    protected Ui ui;
 
     /**
      * Command constructor

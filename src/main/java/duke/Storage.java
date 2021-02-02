@@ -1,31 +1,29 @@
 package duke;
 
-import duke.exceptions.FileIoException;
-
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Todo;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exceptions.FileIoException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+
 
 /**
  * Storage class to load and save list of tasks into a text file
  */
 public class Storage {
+    private static DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private String path;
     private File file;
-    private static DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
      * Storage constructor
@@ -73,8 +71,9 @@ public class Storage {
                 } else {
                     if (taskType.equals("T")) {
                         list.add(new Todo(taskName, isCompleted));
-                    } else
+                    } else {
                         throw new FileIoException();
+                    }
                 }
 
             }

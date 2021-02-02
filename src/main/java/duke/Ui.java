@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Ui class to manage user input and Duke output
@@ -97,6 +97,11 @@ public class Ui {
                 + SPACE + "Now you have " + size + " task(s) in the list.\n" + DIVIDER);
     }
 
+    /**
+     * Prints tasks in given search result list
+     *
+     * @param taskList Given list of tasks
+     */
     public void printSearchResults(TaskList taskList) {
         if (taskList.size() == 0) {
             System.out.println(DIVIDER + SPACE + "There are no matching results D:\n" + DIVIDER);

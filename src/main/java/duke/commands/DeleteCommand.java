@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.tasks.TaskList;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * Command for deleting tasks from list
