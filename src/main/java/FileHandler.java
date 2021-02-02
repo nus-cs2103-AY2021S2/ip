@@ -24,7 +24,7 @@ public class FileHandler {
      * @throws DukeException if the command is not "T" (for ToDo),
      * "D" (for Deadline) or "E" (for Event)
      */
-    public TaskList handleFileCommand(String command, TaskList tasks) throws DukeException { //T # 1 # read book # June 6th
+    public TaskList handleFileCommand(String command, TaskList tasks) throws DukeException {
         String[] inputs = command.split(" # ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         String action = inputs[0];
