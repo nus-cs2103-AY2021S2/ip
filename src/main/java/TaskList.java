@@ -20,16 +20,17 @@ public class TaskList {
    * Iterates the arraylist and outputs each tasks inside.
    */
 
-  public void list() {
+  public String list() {
     int i = 1;
-    System.out.println(" ___________________________________________");
-    System.out.println("Here are the tasks in your list:");
+    StringBuilder output = new StringBuilder("\tHere are the tasks in your list:\n");
     for (Task task : tasklist) {
-      System.out.println(i + ". " + task);
+      output.append(i + ". " + task + "\n");
       i++;
     }
-    System.out.println(" ___________________________________________");
+    return output.toString();
   }
+
+
 
   public void addList(Task input) {
     this.tasklist.add(input);
@@ -39,18 +40,18 @@ public class TaskList {
    * delete the tasks from the arraylist and output the notification text.
    */
 
-  public void delete(int num) {
+  public String delete(int num) {
     Task task = this.tasklist.remove(num - 1);
-    System.out.println("Noted. I've removed this task: ");
-    System.out.println(task);
-    System.out.println("Now you have " + this.tasklist.size() + " tasks in the list.");
+    String output = "\tNoted. I've removed this task: \n" + task + "\n" +
+            "Now you have " + this.tasklist.size() + " tasks in the list.";
+    return output;
   }
 
   /**
    * Outputs matching taks in the arraylist to a keyword
    */
 
-  public void findtask(String keyword) {
+  public String findtask(String keyword) {
     ArrayList<Task> list = new ArrayList<>();
     int i = 1;
     for (Task t : this.tasklist) {
@@ -58,13 +59,14 @@ public class TaskList {
         list.add(t);
       }
     }
-    System.out.println(" ___________________________________________");
-    System.out.println("Here are the tasks in your matching list:");
+    StringBuilder output = new StringBuilder("Here are the tasks in your matching list: \n");
     for (Task task : list) {
-      System.out.println(i + ". " + task);
+      output.append(i + ". " + task);
       i++;
     }
-    System.out.println(" ___________________________________________");
+    return output.toString();
   }
 
+
 }
+

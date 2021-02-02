@@ -1,64 +1,73 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
 
-  public Parser() {
+  protected Storage store;
+  protected TaskList tasklist;
+  private Ui ui;
 
+  public Parser(Storage storage, TaskList tasks) {
+    this.ui = new Ui();
+    store = storage;
+    tasklist = tasks;
   }
 
   /**
    * Reads in the input by the user from the commandline and processes it.
    */
 
-  public void userinput(TaskList tasklist, Storage store) throws IOException, DescriptionError {
-    Scanner scan = new Scanner(System.in);
-    while (scan.hasNext()) {
-      String input = scan.nextLine();
+  public String userinput(String command) throws IOException, DescriptionError {
+      String input = command;
+      String outputMessage = "";
       if (input.equals("bye")) {
-        Ui ui = new Ui();
-        ui.bye();
+        outputMessage = ui.bye();
       } else if (input.equals("list")) {
-        tasklist.list();
+        outputMessage = tasklist.list();
       } else if (input.split(" ")[0].equals("done")) {
-        done(input, tasklist);
+        outputMessage = done(input, tasklist, outputMessage);
         store.save(tasklist.getTasklist());
       } else if (input.split(" ")[0].equals("find")) {
-        tasklist.findtask(input.split(" ")[1]);
+        outputMessage = tasklist.findtask(input.split(" ")[1]);
       } else if (input.split(" ")[0].equals("todo")) {
-        todo(input, tasklist);
+        outputMessage = todo(input, tasklist, outputMessage);
         store.save(tasklist.getTasklist());
       } else if (input.split(" ")[0].equals("deadline")) {
-        deadline(input, tasklist);
+        outputMessage = deadline(input, tasklist,outputMessage);
         store.save(tasklist.getTasklist());
       } else if (input.split(" ")[0].equals("event")) {
-        event(input, tasklist);
+        outputMessage = event(input, tasklist, outputMessage);
         store.save(tasklist.getTasklist());
       } else if (input.split(" ")[0].equals("delete")) {
-        deleteTask(input, tasklist);
+        outputMessage = deleteTask(input, tasklist,outputMessage);
         store.save(tasklist.getTasklist());
       } else {
         try {
           throw new UnknownInputError("☹ OOPS!!! I'm sorry, "
                      + "but I don't know what that means :-(");
         } catch (UnknownInputError e) {
-          System.out.println(e.getMessage());
+          outputMessage += e.getMessage();
         }
       }
+      return outputMessage;
     }
 
-  }
+
 
   /**
    * Handles "done" command by the user by marking the tasks with "x".
    */
 
-  public void done(String input, TaskList taskList) {
+  public String done(String input, TaskList taskList, String output) {
     try {
       if (input.length() == 4) {
+        output = "☹ OOPS!!! The description of a done task cannot be empty.";
         throw new DescriptionError("☹ OOPS!!! The description of a done task cannot be empty.");
       }
       if (input.split(" ").length > 2) {
+        output = "☹ OOPS!!! I'm sorry,"
+                + " but I don't know what that means :-(";
         throw new UnknownInputError("☹ OOPS!!! I'm sorry,"
                             + " but I don't know what that means :-(");
       }
@@ -67,24 +76,24 @@ public class Parser {
         throw new NumberFormatException();
       }
       if (Integer.parseInt(input.split(" ")[1]) > taskList.getTasklist().size()) {
+        output = "☹ OOPS!!! The task is not in the list.";
         throw new DescriptionError("☹ OOPS!!! The task is not in the list.");
       }
       if (input.split(" ").length == 2 && Integer.parseInt(input.split(" ")[1])
               / Integer.parseInt(input.split(" ")[1]) == 1) {
         taskList.getTasklist().get((Integer.parseInt(input.split(" ")[1]) - 1)).taskDone();
-        System.out.println(" ___________________________________________");
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(taskList.getTasklist().get((Integer.parseInt(input.split(" ")[1]) - 1)));
-        System.out.println(" ___________________________________________");
+
+        output = "Nice! I've marked this task as done: "
+                + taskList.getTasklist().get((Integer.parseInt(input.split(" ")[1]) - 1));
       }
     } catch (DescriptionError | UnknownInputError | NumberFormatException e) {
       if (e instanceof NumberFormatException) {
-        System.out.println("☹ OOPS!!! The description of a done task needs to be an integer.");
+        output = "☹ OOPS!!! The description of a done task needs to be an integer.";
       } else {
-        System.out.println(e.getMessage());
+        output = e.getMessage();
       }
     }
-
+    return output;
   }
 
   public String inputEventDescription(String input) {
@@ -104,22 +113,23 @@ public class Parser {
    * Handles todo command by the user by creating a todo object and placing it into the arraylist.
    */
 
-  public void todo(String input, TaskList taskList) throws DescriptionError {
+  public String todo(String input, TaskList taskList, String output) throws DescriptionError {
     try {
       if (input.length() == 4) {
+        output += "☹ OOPS!!! The description of a todo cannot be empty.";
         throw new DescriptionError("☹ OOPS!!! The description of a todo cannot be empty.");
       }
     } catch (DescriptionError e) {
-      System.out.println(e.getMessage());
+      output += e.getMessage();
     }
     if (input.length() != 4) {
       String inputDes = this.inputEventDescription(input);
       Todo task = new Todo(inputDes);
-      System.out.println(" ___________________________________________");
-      System.out.println("Got it. I've added this task: ");
+      output += "Got it. I've added this task: " + "\n";
       taskList.getTasklist().add(task);
-      System.out.println("Now you have " + taskList.getTasklist().size() + " tasks in the list.");
+      output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
     }
+    return output;
   }
 
 
@@ -127,63 +137,71 @@ public class Parser {
    * Handles deadline command by the user by creating a deadline object.
    */
 
-  public void deadline(String input, TaskList taskList) {
+  public String deadline(String input, TaskList taskList, String output) {
     try {
       if (input.length() == 8) {
+        output += "☹ OOPS!!! The description of a "
+                + "deadline cannot be empty.";
         throw new DescriptionError("☹ OOPS!!! The description of a "
                 + "deadline cannot be empty.");
       }
     } catch (DescriptionError e) {
-      System.out.println(e.getMessage());
+      output += e.getMessage();
     }
     if (input.length() != 8) {
       Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
                       input.split("/by ")[1]);
       if (task.dateError) {
-        return;
+        return "";
       } else {
-        System.out.println("Got it. I've added this task: ");
+        output += "Got it. I've added this task: " + "\n";
         taskList.addList(task);
-        System.out.println(task);
-        System.out.println("Now you have " + taskList.getTasklist().size() + " tasks in the list.");
+        output += task + "\n";
+        output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
       }
     }
+    return output;
   }
 
   /**
    * Handles event command by the user by creating event object and placing it into the arraylist.
    */
 
-  public void event(String input, TaskList taskList) {
+  public String event(String input, TaskList taskList, String output) {
     try {
       if (input.length() == 5) {
+        output += "☹ OOPS!!! The description of a event cannot be empty.";
         throw new DescriptionError("☹ OOPS!!! The description of a event cannot be empty.");
       }
     } catch (DescriptionError e) {
-      System.out.println(e.getMessage());
+      output += e.getMessage();
     }
     if (input.length() != 5) {
-      System.out.println(input.split("/at")[1]);
       Event task = new Event(input.split(" ")[1] + " " + input.split(" ")[2],
                       input.split("/at ")[1]);
-      System.out.println("Got it. I've added this task: ");
+      output += "Got it. I've added this task: " + "\n";
       taskList.getTasklist().add(task);
-      System.out.println(task);
-      System.out.println("Now you have " + taskList.getTasklist().size() + " tasks in the list.");
+      output += task + "\n";
+      output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
     }
+    return output;
   }
 
   /**
    * Handles delete ommand by the user by removing the tasks inside the arraylist.
    */
 
-  public void deleteTask(String input, TaskList taskList) {
+  public String deleteTask(String input, TaskList taskList,String output) {
     try {
       if (input.length() == 4) {
+        output +="☹ OOPS!!! The description of "
+                + "a delete task cannot be empty.";
         throw new DescriptionError("☹ OOPS!!! The description of "
                           + "a delete task cannot be empty.");
       }
       if (input.split(" ").length > 2) {
+        output += "☹ OOPS!!! I'm sorry,"
+                + " but I don't know what that means :-(";
         throw new UnknownInputError("☹ OOPS!!! I'm sorry,"
                           + " but I don't know what that means :-(");
       }
@@ -200,11 +218,12 @@ public class Parser {
       }
     } catch (DescriptionError | UnknownInputError | NumberFormatException e) {
       if (e instanceof NumberFormatException) {
-        System.out.println("☹ OOPS!!! The description of a done task needs to be an integer.");
+        output += "☹ OOPS!!! The description of a done task needs to be an integer.";
       } else {
-        System.out.println(e.getMessage());
+        output += e.getMessage();
       }
     }
+    return output;
   }
 
 

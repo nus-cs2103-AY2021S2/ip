@@ -1,13 +1,26 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.application.Application;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
+import java.io.IOException;
 
 
 public class Duke {
 
   protected ArrayList<Task> tasklist;
-  private Storage storage;
-  private TaskList tasks;
+  protected Storage storage;
+  protected TaskList tasks;
   private Ui ui;
 
   /**
@@ -15,8 +28,9 @@ public class Duke {
    * @ param filePath The path storing all the past tasklist not deleted by the user
    */
 
-  public Duke(String filePath) throws IOException {
-    storage = new Storage(filePath);
+  public Duke() throws IOException {
+    ui = new Ui();
+    storage = new Storage("duke.txt");
     try {
       tasks = new TaskList(storage.load());
       System.out.println(tasks.getTasklist());
@@ -25,15 +39,18 @@ public class Duke {
     }
   }
 
+  public String getResponse(String input) throws IOException {
+    return ui.readUserInput(input,storage,tasks);
+  }
+
   /**
    * Outputs the greeting and initiaties the userinput parase command to take in inputs from usher.
    */
 
   public void run() throws IOException, DescriptionError {
-    ui = new Ui();
     ui.greeting();
-    Parser parse = new Parser();
-    parse.userinput(tasks, storage);
+    //Parser parse = new Parser();
+    //parse.userinput(tasks, storage);
   }
 
   public void listtask() {
@@ -45,7 +62,7 @@ public class Duke {
    */
 
   public static void main(String[] args) throws DescriptionError, UnknownInputError, IOException {
-    Duke duke = new Duke("duke.text");
+    Duke duke = new Duke();
     duke.run();
 
   }

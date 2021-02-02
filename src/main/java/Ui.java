@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Ui {
 
   public Ui() {
@@ -8,10 +10,9 @@ public class Ui {
    * Outputs the customied bye message when user inputs bye command.
    */
 
-  public void bye() {
-    System.out.println(" ___________________________________________");
-    System.out.println("Bye. Hope to see you again soon!");
-    System.out.println(" ___________________________________________");
+  public String bye() {
+    String msg = "Bye. Hope to see you again soon!";
+    return msg;
   }
 
   /**
@@ -29,6 +30,15 @@ public class Ui {
     System.out.println(" ___________________________________________");
   }
 
-
+  public String readUserInput(String command, Storage storage, TaskList tasks) throws IOException {
+    Parser parser = new Parser(storage, tasks);
+    String output = "";
+    try {
+      output = parser.userinput(command);
+    } catch (IOException | DescriptionError e) {
+      output += e.getMessage();
+    }
+    return output;
+  }
 
 }
