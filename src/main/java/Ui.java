@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Ui {
     /**
      * Prints the logo and welcome messages.
@@ -45,5 +47,27 @@ public class Ui {
      */
     void showError(String err) {
         System.out.println("    " + err);
+    }
+
+    /**
+     * Prints the given list argument.
+     *
+     * @param list the List<Task> to be displayed.
+     * @param isSearch a boolean representing whether
+     *                 this command is a search command.
+     */
+    void showList(List<Task> list, boolean isSearch) {
+        if (isSearch) {
+            if (list.isEmpty()) {
+                System.out.println("    Sorry, there are no matching tasks in your list");
+            } else {
+                System.out.println("    Here are matching tasks in your list:");
+            }
+        } else {
+            System.out.println("    Here are the tasks in your list:");
+        }
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.printf("    %d.%s\n", i, list.get(i - 1));
+        }
     }
 }

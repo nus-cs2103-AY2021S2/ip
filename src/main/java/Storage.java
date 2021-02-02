@@ -2,10 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
+
 import java.nio.file.Paths;
 
 public class Storage {
@@ -119,7 +120,7 @@ public class Storage {
      * @throws IOException if an I/O error occurred.
      */
     void appendToFile(Task task) throws IOException {
-        // create a FileWriter in append mode
+        // Create a FileWriter in append mode
         FileWriter fw = new FileWriter(file.getAbsolutePath(), true);
         fw.write(this.translateTask(task));
         fw.close();
@@ -136,9 +137,11 @@ public class Storage {
         if (task instanceof Todo) {
             return String.format("T : %d : %s\n", isDone, task.name);
         } else if (task instanceof Deadline) {
-            return String.format("D : %d : %s : %s\n", isDone, task.name, ((Deadline) task).time);
+            return String.format("D : %d : %s : %s\n", isDone,
+                    task.name, ((Deadline) task).time);
         } else {
-            return String.format("E : %d : %s : %s\n", isDone, task.name, ((Event) task).time);
+            return String.format("E : %d : %s : %s\n", isDone,
+                    task.name, ((Event) task).time);
         }
     }
 }

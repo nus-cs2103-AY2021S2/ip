@@ -1,11 +1,11 @@
 import java.io.IOException;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Parser {
-
     /**
-     * Parses the user command and instructs the tasklist, ui or sc
+     * Parses the user command and instructs the taskList, ui or sc
      * to carry out different functions according to the command argument.
      *
      * @param command user input
@@ -24,7 +24,7 @@ public class Parser {
             ui.showBye();
             break;
         case "list":
-            taskList.displayList();
+            ui.showList(taskList.list, false);
             break;
         case "done":
             // To get the index
@@ -39,7 +39,8 @@ public class Parser {
                 taskList.addTask(todo);
                 storage.appendToFile(todo);
             } else {
-                throw new NoSuchElementException("    ☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                        + " a todo cannot be empty.");
             }
             break;
         case "deadline":
@@ -49,29 +50,39 @@ public class Parser {
                     Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
                     taskList.addTask(deadline);
                     storage.appendToFile(deadline);
-                } else {
-                    throw new NoSuchElementException("    ☹ OOPS!!! The description of a deadline cannot be empty.");
-                }
-                break;
-            case "event":
-                String description = sc.nextLine();
-                if (!description.equals("")) {
-                    String[] split = description.split("/at", 2);
-                    Event event = new Event(split[0].trim(), split[1].trim());
-                    taskList.addTask(event);
-                    storage.appendToFile(event);
-                } else {
-                    throw new NoSuchElementException("    ☹ OOPS!!! The description of an event cannot be empty.");
-                }
-                break;
-            case "delete":
-                // To get the index
-                int i = sc.nextInt();
-                taskList.removeTask(i);
-                storage.writeToFile(taskList.list);
-                break;
-            default:
-                throw new UnknownCommandException();
+            } else {
+                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                        + " a deadline cannot be empty.");
+            }
+            break;
+        case "event":
+            String description = sc.nextLine();
+            if (!description.equals("")) {
+                String[] split = description.split("/at", 2);
+                Event event = new Event(split[0].trim(), split[1].trim());
+                taskList.addTask(event);
+                storage.appendToFile(event);
+            } else {
+                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                        + " an event cannot be empty.");
+            }
+            break;
+        case "find":
+            String searchString = sc.nextLine();
+            if (!searchString.equals("")) {
+                ui.showList(taskList.searchTask(searchString.trim()), true);
+            } else {
+                throw new NoSuchElementException("    ☹ OOPS!!! The search keyword cannot be empty.");
+            }
+            break;
+        case "delete":
+            // To get the index
+            int i = sc.nextInt();
+            taskList.removeTask(i);
+            storage.writeToFile(taskList.list);
+            break;
+        default:
+            throw new UnknownCommandException();
         }
     }
 }
