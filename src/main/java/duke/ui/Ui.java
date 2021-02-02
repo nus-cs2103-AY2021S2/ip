@@ -1,8 +1,9 @@
 package duke.ui;
 
-import duke.task.TaskList;
-import duke.task.Task;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * A class represents a UI.
@@ -61,6 +62,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints all the tasks that matches.
+     * @param tasks The matching TaskList to be printed.
+     */
     public void listMatchingTasks(TaskList tasks) {
         System.out.println(" Here are the matching tasks: ");
         for (int i = 0; i < tasks.size(); i++) {

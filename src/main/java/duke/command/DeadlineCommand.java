@@ -40,13 +40,11 @@ public class DeadlineCommand extends AddCommand {
     }
 
     @Override
-    protected Deadline getTask()
-            throws DescriptionMissingException, InvalidDateTimeException {
+    protected Deadline getTask() throws DescriptionMissingException, InvalidDateTimeException {
         String nameDeadline = fullCommand.substring(8).strip();
         if (nameDeadline.equals("")) {
             throw new DescriptionMissingException("Argument missing!");
         }
-
         String[] nameAndDeadline = nameDeadline.split("/by");
         if (nameAndDeadline.length < 2) {
             throw new DescriptionMissingException("Argument missing!");
