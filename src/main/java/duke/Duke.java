@@ -500,16 +500,10 @@ public class Duke extends Application {
         }
 
         /**
-         * Greets the user with a fancy image.
+         * Greets the user.
          */
         public String greet() {
-            return ( "Hello from\n"
-                    + " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___| uwu\n"
-                    + "Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!\n"
+            return ("Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!\n"
                     + "What can I do for you? uwu");
         }
 
@@ -725,6 +719,9 @@ public class Duke extends Application {
                     DialogBox.getUserDialog(userText, user),
                     DialogBox.getDukeDialog(dukeText, duke)
             );
+            if (userText.equals("bye")) {
+                stage.close();
+            }
             userInput.clear();
         });
 
@@ -736,6 +733,9 @@ public class Duke extends Application {
                     DialogBox.getUserDialog(userText, user),
                     DialogBox.getDukeDialog(dukeText, duke)
             );
+            if (userText.equals("bye")) {
+                stage.close();
+            }
             userInput.clear();
         });
 
