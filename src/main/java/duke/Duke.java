@@ -88,7 +88,7 @@ public class Duke {
                 }
             } else {
                 try {
-                    throwDK();
+                    throwDontKnowException();
                 } catch (DukeException ex) {
                     ui.printFormatted(ex.getMessage());
                 }
@@ -100,7 +100,7 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
-    public static void throwDK() throws DukeException {
+    public static void throwDontKnowException() throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
