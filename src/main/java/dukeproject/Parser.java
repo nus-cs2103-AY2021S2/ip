@@ -49,8 +49,7 @@ public class Parser {
             parseDeleteCommand(userInput, ui, storage, taskList);
         } else if (userInput.startsWith("find")) {
             // Find a return a list of task that is related to the keyword
-            String keyword = new Parser().parseForFind(userInput);
-            ui.printKeywordTaskList(taskList, keyword);
+            parseForFind(userInput, ui, taskList);
         } else {
             // Unable to detect the user's input
             ui.printUnreadableError();
@@ -78,7 +77,7 @@ public class Parser {
             storage.writeToFile(taskList);
 
             // Print a success message
-            ui.generalPrint(newToDoTask.successMessage(taskList.size()));
+            ui.printWithSpace(newToDoTask.successMessage(taskList.size()));
         } catch (StringIndexOutOfBoundsException ex) {
             // Description is empty
             ui.printDescriptionError();
@@ -112,7 +111,7 @@ public class Parser {
             storage.writeToFile(taskList);
 
             // Print a success message
-            ui.generalPrint(newDeadlineTask.successMessage(taskList.size()));
+            ui.printWithSpace(newDeadlineTask.successMessage(taskList.size()));
         } catch (StringIndexOutOfBoundsException ex) {
             // Description is empty
             ui.printDescriptionError();
@@ -149,7 +148,7 @@ public class Parser {
             storage.writeToFile(taskList);
 
             // Print a success message
-            ui.generalPrint(newEventTask.successMessage(taskList.size()));
+            ui.printWithSpace(newEventTask.successMessage(taskList.size()));
         } catch (StringIndexOutOfBoundsException ex) {
             // Description is empty
             ui.printDescriptionError();
@@ -207,13 +206,27 @@ public class Parser {
             // Remove the appropriate task away from the list of task
             taskList.remove(taskIndex);
             storage.writeToFile(taskList);
-            ui.generalPrint(taskToBeRemoved.deleteMessage(taskList.size()));
+            ui.printWithSpace(taskToBeRemoved.deleteMessage(taskList.size()));
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
             // Task number is empty
             ui.printTaskNumError();
         } catch (FileNotFoundException ex) {
             // File is empty
             ui.printFileError();
+        }
+    }
+
+    /**
+     * Parse a find command.
+     *
+     * @param command Command / input to find.
+     */
+    public void parseForFind(String command, Ui ui, TaskList taskList) {
+        try {
+            String keyword = command.substring(5);
+            ui.printKeywordTaskList(taskList, keyword);
+        } catch (Exception ex) {
+            ui.printFindError();
         }
     }
 
@@ -275,14 +288,5 @@ public class Parser {
             return new StringDatePair(description, at);
         }
         return null;
-    }
-
-    /**
-     * Parse a find command.
-     * @param fullCommand Command / input for find.
-     * @return The keyword for the find command.
-     */
-    public String parseForFind(String fullCommand) {
-        return fullCommand.substring(5);
     }
 }

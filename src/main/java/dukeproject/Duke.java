@@ -2,11 +2,13 @@ package dukeproject;
 
 import java.io.FileNotFoundException;
 
+import javafx.scene.control.TextArea;
+
 /**
 * The Duke application is a to do list application where users are able to
 * create, remove and see their to do list.
 *
-* @author  Low En Haoa
+* @author  Low En Hao
 * @version 0.1
 * @since   2021-01-26
 */
@@ -14,7 +16,7 @@ public class Duke {
 
     private final Storage storage;
     private TaskList taskList;
-    private final Ui ui;
+    private Ui ui = null;
 
     /**
      * Returns the duke object with access to the data in the file path.
@@ -25,17 +27,19 @@ public class Duke {
      * @throws DukeException for any error.
      */
     public Duke(String filePath) throws DukeException {
-        ui = new Ui();
         storage = new Storage(filePath);
 
         try {
             taskList = new TaskList(storage.loadFileContent());
         } catch (FileNotFoundException | DukeException ex) {
-            ui.printLoadingError();
             taskList = new TaskList();
         } catch (Exception ex) {
             throw new DukeException();
         }
+    }
+
+    public void setUi(TextArea textOutput) {
+        ui = new Ui(textOutput);
     }
 
     /**
