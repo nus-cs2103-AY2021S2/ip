@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.TaskList;
 import duke.task.Task;
 /**
@@ -41,7 +42,10 @@ public class DeleteCommand implements Command {
      * @param taskList List of tasks to be used for execution of the command.
      * @return List of tasks after the execution of the command.
      */
-    public TaskList execute(TaskList taskList) {
+    public TaskList execute(TaskList taskList) throws DukeException {
+        if (deletedID > taskList.getSize()) {
+            throw new DukeException("Please enter a valid number that is on the task list");
+        }
         deletedTask = taskList.getTask(deletedID);
         taskList.removeTask(deletedID);
         numTasks = taskList.getSize();

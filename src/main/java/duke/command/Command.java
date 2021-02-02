@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.TaskList;
 /**
  * An interface for commands that the user inputs.
@@ -23,5 +24,5 @@ public interface Command {
      * @param taskList List of tasks to be used for execution of the command.
      * @return List of tasks after the execution of the command.
      */
-    TaskList execute(TaskList taskList);
+    TaskList execute(TaskList taskList) throws DukeException;
 }

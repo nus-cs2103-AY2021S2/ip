@@ -38,10 +38,14 @@ public class Parser {
         case "bye":
             return new ByeCommand();
         case "done":
+            Command returnCommand;
             if (processedInput.length == 1) {
-                throw new DukeException("Please enter a duke.task number to mark done");
+                throw new DukeException("Please enter valid numerical input to mark done");
+            } else if (!processedInput[1].matches("[0-9]+")) {
+                throw new DukeException("Please enter a valid task number to mark done");
+            } else {
+                return new DoneCommand(Integer.parseInt(processedInput[1]));
             }
-            return new DoneCommand(Integer.parseInt(processedInput[1]));
         case "todo":
             return new AddToDo(command, description);
         case "event":
@@ -60,13 +64,16 @@ public class Parser {
             }
         case "delete":
             if (processedInput.length == 1) {
-                throw new DukeException("Please enter a duke.task number to delete");
+                throw new DukeException("Please enter a task number to delete");
+            } else if (!processedInput[1].matches("[0-9]+")) {
+                throw new DukeException("Please enter a valid task number to delete");
+            } else {
+                return new DeleteCommand(Integer.parseInt(processedInput[1]));
             }
-            return new DeleteCommand(Integer.parseInt(processedInput[1]));
         case "find":
             return new FindCommand(processedInput[1]);
         default:
-            throw new DukeException("Invalid duke.command. Please enter a valid one");
+            throw new DukeException("Invalid command. Please enter a valid one");
         }
     }
 

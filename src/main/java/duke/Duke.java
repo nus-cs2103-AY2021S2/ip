@@ -54,12 +54,9 @@ public class Duke {
             isRunning = !command.shouldExit();
             taskList = command.execute(taskList);
             storageHandler.write(taskList);
-            // ui.printResponse(command.getResponse());
-            // ui.printLine();
             return command.getResponse();
         } catch (DukeException | IOException e) {
-            ui.printResponse(e.toString());
-            return e.toString();
+            return e.getMessage();
         }
     }
 

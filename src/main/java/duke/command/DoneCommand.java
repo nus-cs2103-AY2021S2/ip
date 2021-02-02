@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.TaskList;
 /**
  * Represents a command that marks tasks on the task list as done.
@@ -30,7 +31,7 @@ public class DoneCommand implements Command {
      * @return The reply message for this command.
      */
     public String getResponse() {
-        return "Nice! I've marked this duke.task as done:\n  " + response;
+        return "Nice! I've marked this task as done:\n  " + response;
     }
 
     /**
@@ -38,7 +39,10 @@ public class DoneCommand implements Command {
      * @param taskList List of tasks to be used for execution of the command.
      * @return List of tasks after the execution of the command.
      */
-    public TaskList execute(TaskList taskList) {
+    public TaskList execute(TaskList taskList) throws DukeException {
+        if (id > taskList.getSize()) {
+            throw new DukeException("Please enter a valid number that is on the task list");
+        }
         taskList.markDone(id);
         response = taskList.getTask(id).toString();
         return taskList;
