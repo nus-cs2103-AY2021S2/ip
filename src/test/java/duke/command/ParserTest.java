@@ -51,35 +51,35 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_invalidAddCommand_ExceptionThrow() {
+    public void parseCommand_invalidAddCommand_exceptionThrow() {
         String input = "todo";
         Throwable exception = assertThrows(AddToDoCommandParseException.class, () -> Parser.parseCommand(input));
         assertEquals(exception.getMessage(), "\tPlease follow this format \"todo <task>\".");
     }
 
     @Test
-    public void parseCommand_invalidListCommand_ExceptionThrow() {
+    public void parseCommand_invalidListCommand_exceptionThrow() {
         String input = "list asdf";
         Throwable exception = assertThrows(ListCommandParseException.class, () -> Parser.parseCommand(input));
         assertEquals(exception.getMessage(), "\tPlease follow this format \"list\".");
     }
 
     @Test
-    public void parseCommand_invalidDoneCommand_ExceptionThrow() {
+    public void parseCommand_invalidDoneCommand_exceptionThrow() {
         String input = "done asdf";
         Throwable exception = assertThrows(NumberFormatException.class, () -> Parser.parseCommand(input));
         assertEquals(exception.getMessage(), "\tOops! Please input a number.");
     }
 
     @Test
-    public void parseCommand_UnknownCommand_ExceptionThrow() {
+    public void parseCommand_unknownCommand_exceptionThrow() {
         String input = "asfasdaasfd";
         Throwable exception = assertThrows(UnknownCommandParseException.class, () -> Parser.parseCommand(input));
         assertEquals(exception.getMessage(), "\tOops! Sorry, I do not know what that means.");
     }
 
     @Test
-    public void parseCommand_EmptyCommand_ExceptionThrow() {
+    public void parseCommand_emptyCommand_exceptionThrow() {
         String input = "";
         Throwable exception = assertThrows(UnknownCommandParseException.class, () -> Parser.parseCommand(input));
         assertEquals(exception.getMessage(), "\tOops! Sorry, I do not know what that means.");
