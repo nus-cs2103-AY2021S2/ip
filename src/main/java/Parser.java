@@ -1,3 +1,6 @@
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class Parser {
     private static final String EXIT_COMMAND = "bye";
 
@@ -32,6 +35,27 @@ public class Parser {
             taskList.addTask(input);
         }
         return false;
+    }
+
+    public String execute(String input, TaskList tasks, Storage storage) {
+        if (input.equals(EXIT_COMMAND)) {
+            // close program
+            return Ui.sayGoodbye();
+        } else if (input.equals("list")) {
+            // show everything in the list
+            return tasks.iterateList();
+        } else if (input.split(" ", 2)[0].equals("done")) {
+            // mark task with the given index as completed
+            return tasks.markAsDone(input.split(" ", 2)[1]);
+        } else if (input.split(" ", 2)[0].equals("delete")) {
+            return tasks.deleteTask(input.split(" ", 2)[1]);
+        } else if (input.split(" ", 2)[0].equals("find")) {
+            return tasks.searchTask(input.split(" ", 2)[1]);
+        } else {
+            // add new task to list
+            return tasks.addTask(input);
+        }
+        //return "I don't understand you man...";
     }
 
 }

@@ -18,8 +18,9 @@ public class Ui {
      * Prints a goodbye message on the console when Duke is closed after detecting
      * the exit command.
      */
-    public static void sayGoodbye() {
+    public static String sayGoodbye() {
         System.out.println("Bye, see you soon! Don't miss me too much.");
+        return "Bye, see you soon! Don't miss me too much.";
     }
 
     /**
