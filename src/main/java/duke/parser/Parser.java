@@ -13,11 +13,6 @@ import duke.commands.ListCommand;
  */
 public class Parser {
     /**
-     * Constructs a Parser object.
-     */
-    public Parser() {}
-
-    /**
      * Returns the type of Command indicated by the user input.
      *
      * @param fullCommand User input to be parsed.
