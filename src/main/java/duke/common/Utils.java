@@ -1,4 +1,4 @@
-package duke;
+package duke.common;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Helper methods used to validate and format inputs.
  */
-public class DukeHelper {
+public class Utils {
 
     /**
      * Returns a formatted date String.

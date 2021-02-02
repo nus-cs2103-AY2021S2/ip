@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.Storage;
-import duke.Ui;
-import duke.task.TaskList;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Terminates the program.

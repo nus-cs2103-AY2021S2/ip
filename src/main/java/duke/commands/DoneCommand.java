@@ -1,10 +1,10 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Mark a task as done from the list based on given index, or mark everything as done from the list.

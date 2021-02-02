@@ -1,9 +1,9 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * An abstract base class of executable commands.
