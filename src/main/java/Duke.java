@@ -7,20 +7,6 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
 
-    /*
-    public static void main(String[] args) {
-        try {
-            new Duke("./data/duke.txt").run();
-        } catch (DukeExceptionFolder e) {
-            Ui.showMessage(e.getMessage());
-            return;
-        } catch (DukeExceptionCorruptedData e) {
-            Ui.showMessage(e.getMessage());
-            return;
-        }
-    }
-    */
-
     public String getResponse(String command) {
         String output = "";
         if (command.equals("bye")) {
