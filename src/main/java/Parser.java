@@ -20,6 +20,12 @@ public class Parser {
             command = new DoneCommand(Integer.parseInt(input.substring(5)));
         } else if (input.startsWith("delete")) {
             command = new DeleteCommand(Integer.parseInt(input.substring(7)));
+        } else if (input.startsWith("find")) {
+            try {
+                command = new FindCommand(input.substring(5));
+            } catch (Exception e) {
+                throw new IncompleteCommandException();
+            }
         } else if (input.startsWith("todo")) {
             try {
                 command = new ToDoCommand(input.substring(5));

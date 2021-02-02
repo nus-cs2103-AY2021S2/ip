@@ -11,6 +11,7 @@ public class ParserTest {
         assertEquals(new ListCommand(), Parser.parse("list"));
         assertEquals(new DoneCommand(1), Parser.parse("done 1"));
         assertEquals(new DeleteCommand(1), Parser.parse("delete 1"));
+        assertEquals(new FindCommand("hello"), Parser.parse("find hello"));
         assertEquals(new ToDoCommand("homework"), Parser.parse("todo homework"));
         assertEquals(new EventCommand("concert", "2020-12-09"),
                      Parser.parse("event concert /at 2020-12-09"));

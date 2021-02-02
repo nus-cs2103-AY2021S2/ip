@@ -23,6 +23,10 @@ The description cannot be empty.
 
 I'm sorry, but I don't know what that means :(
 
+Here are the matching tasks in your list:
+1.[T][ ] borrow book
+2.[D][ ] return book (by: Jan 15 2021)
+
 Noted. I've removed this task:
 [D][ ] return book (by: Jan 15 2021)
 Now you have 2 tasks in the list.
