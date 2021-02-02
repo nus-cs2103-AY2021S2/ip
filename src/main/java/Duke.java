@@ -1,7 +1,9 @@
+import java.time.LocalDate;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -52,47 +54,59 @@ public class Duke {
 
     class Deadline extends Task {
         private String name;
-        private String deadline;
+        private LocalDate deadline;
         private boolean done;
 
         Deadline(String name, String deadline) {
             this.name = name;
-            this.deadline = deadline;
+            this.deadline = LocalDate.parse(deadline);
             this.done = false;
         }
 
         Deadline(String name, String deadline, boolean done) {
             this.name = name;
+            this.deadline = LocalDate.parse(deadline);
+            this.done = done;
+        }
+
+        Deadline(String name, LocalDate deadline, boolean done) {
+            this.name = name;
             this.deadline = deadline;
             this.done = done;
         }
 
         @Override
         Task done() {
-            return new Deadline(this.name, this.deadline, true);
+            return new Deadline(this.name, this.deadline.toString(), true);
         }
 
         @Override
         public String toString() {
             if (this.done) {
-                return String.format("[D][X] %s (by:%s)", this.name, this.deadline);
+                return String.format("[D][X] %s (by: %s)", this.name, this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
             }
-            return String.format("[D][ ] %s (by:%s)", this.name, this.deadline);
+            return String.format("[D][ ] %s (by: %s)", this.name, this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
         }
     }
 
     class Event extends Task {
         private String name;
-        private String duration;
+        private LocalDate duration;
         private boolean done;
 
         Event(String name, String duration) {
             this.name = name;
-            this.duration = duration;
+            this.duration = LocalDate.parse(duration);
             this.done = false;
         }
 
         Event(String name, String duration, boolean done) {
+            this.name = name;
+            this.duration = LocalDate.parse(duration);
+            this.done = done;
+        }
+
+        Event(String name, LocalDate duration, boolean done) {
             this.name = name;
             this.duration = duration;
             this.done = done;
@@ -100,15 +114,15 @@ public class Duke {
 
         @Override
         Task done() {
-            return new Event(this.name, this.duration, true);
+            return new Event(this.name, this.duration.toString(), true);
         }
 
         @Override
         public String toString() {
             if (this.done) {
-                return String.format("[E][X] %s (at:%s)", this.name, this.duration);
+                return String.format("[E][X] %s (at: %s)", this.name, this.duration.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
             }
-            return String.format("[E][ ] %s (at:%s)", this.name, this.duration);
+            return String.format("[E][ ] %s (at: %s)", this.name, this.duration.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
         }
     }
 
@@ -148,27 +162,31 @@ public class Duke {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
-                if (task.startsWith("[T]")) {
-                    boolean done = task.charAt(4) == 'X';
-                    tasks.add(new ToDo(task.substring(7), done));
-                } else if (task.startsWith("[E]")) {
-                    boolean done = task.charAt(4) == 'X';
-                    int index = task.indexOf('(');
-                    int endindex = task.indexOf(')');
-                    tasks.add(new Event(task.substring(7, index - 1), task.substring(index + 4, endindex), done));
-                } else {
-                    boolean done = task.charAt(4) == 'X';
-                    int index = task.indexOf('(');
-                    int endindex = task.indexOf(')');
-                    tasks.add(new Event(task.substring(7, index - 1), task.substring(index + 4, endindex), done));
+                if (!task.isEmpty()) {
+                    if (task.startsWith("[T]")) {
+                        boolean done = task.charAt(4) == 'X';
+                        tasks.add(new ToDo(task.substring(7), done));
+                    } else if (task.startsWith("[E]")) {
+                        boolean done = task.charAt(4) == 'X';
+                        int index = task.indexOf('(');
+                        int endindex = task.indexOf(')');
+                        LocalDate date = LocalDate.parse(task.substring(index + 5, endindex), DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        tasks.add(new Event(task.substring(7, index - 1), date, done));
+                    } else {
+                        boolean done = task.charAt(4) == 'X';
+                        int index = task.indexOf('(');
+                        int endindex = task.indexOf(')');
+                        LocalDate date = LocalDate.parse(task.substring(index + 5, endindex), DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        tasks.add(new Event(task.substring(7, index - 1), date, done));
+                    }
                 }
             }
             sc.close();
             return tasks;
         } catch (Exception e) {
             System.out.println(e);
+            throw e;
         }
-        return tasks;
     }
 
     public void chat(Scanner scanner, ArrayList<Task> tasks) throws IOException {
@@ -177,6 +195,7 @@ public class Duke {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
+                scanner.close();
                 break;
             } else if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
@@ -207,7 +226,7 @@ public class Duke {
             } else if (input.startsWith("event")) {
                 try {
                     int index = input.indexOf("/at");
-                    Task newtask = new Event(input.substring(6, index - 1), input.substring(index + 3));
+                    Task newtask = new Event(input.substring(6, index - 1), input.substring(index + 4));
                     tasks.add(newtask);
                     System.out.println(String.format("Got it. I've added this task:\n%s\nNow you have %s tasks in the list.", newtask.toString(), tasks.size()));
                 } catch (Exception e) {
@@ -217,7 +236,7 @@ public class Duke {
             } else if (input.startsWith("deadline")) {
                 try {
                     int index = input.indexOf("/by");
-                    Task newtask = new Deadline(input.substring(9, index - 1), input.substring(index + 3));
+                    Task newtask = new Deadline(input.substring(9, index - 1), input.substring(index + 4));
                     tasks.add(newtask);
                     System.out.println(String.format("Got it. I've added this task:\n%s\nNow you have %s tasks in the list.", newtask.toString(), tasks.size()));
                 } catch (Exception e) {
