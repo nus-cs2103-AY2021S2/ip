@@ -7,8 +7,8 @@ public class DeadlineCommand extends Command {
     public static final String COMMAND = "deadline";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/by)/by\\W(.*)");
     private static final String ERROR_MESSAGE =
-            "☹ Sorry, please enter a valid description and datetime for the deadline\n\t" +
-            "Command: deadline [description] /by [deadline]";
+            "☹ Sorry, please enter a valid description and datetime for the deadline\n"
+            + "\tCommand: deadline [description] /by [deadline]";
     private final String description;
     private final LocalDateTime by;
 
@@ -23,7 +23,9 @@ public class DeadlineCommand extends Command {
         taskList.addTask(newTask);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("Got it. I've added this task:\n\t").append(newTask).append("\nNow you have ")
+        builder.append("Got it. I've added this task:\n\t")
+                .append(newTask)
+                .append("\nNow you have ")
                 .append(taskList.getSize());
         if (taskList.getSize() == 1) {
             builder.append(" task");

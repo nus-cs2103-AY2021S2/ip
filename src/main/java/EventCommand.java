@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 public class EventCommand extends Command {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=\\/at)\\/at\\W(.*)");
+    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid  and datetime for the event.\n"
+            + "\tCommand: event [description] /at [datetime]";
     private static Matcher matcher;
 
     public static final String COMMAND = "event";
@@ -23,7 +25,9 @@ public class EventCommand extends Command {
         taskList.addTask(newTask);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("Got it. I've added this task:\n\t").append(newTask).append("\nNow you have ")
+        builder.append("Got it. I've added this task:\n\t")
+                .append(newTask)
+                .append("\nNow you have ")
                 .append(taskList.getSize());
         if (taskList.getSize() == 1) {
             builder.append(" task");
@@ -42,8 +46,7 @@ public class EventCommand extends Command {
         matcher = COMMAND_FORMAT.matcher(input);
 
         if (!matcher.matches()) {
-            throw new DukeException("☹ Sorry, please enter a valid  and datetime for the event.\n\t" +
-                    "Command: event [description] /at [datetime]");
+            throw new DukeException(ERROR_MESSAGE);
         }
 
         String description = matcher.group(1);

@@ -19,7 +19,7 @@ public abstract class Command {
     }
 
     /**
-     * Returns boolean value indicating if any tasks are updated.
+     * Returns boolean value indicating if any tasks are updated and requires client to save updated data to file.
      *
      * @return True if tasks are updated, else false.
      */

@@ -1,6 +1,7 @@
 public class ListCommand extends Command {
 
     public static final String COMMAND = "list";
+
     public ListCommand() {
     }
 
@@ -15,7 +16,11 @@ public class ListCommand extends Command {
         builder.append("Here are the tasks in your list:\n");
         int numbering = 1;
         for (Task task: taskList.getList()) {
-            builder.append("\t").append(numbering++).append(".").append(task).append("\n");
+            builder.append("\t")
+                    .append(numbering++)
+                    .append(".")
+                    .append(task)
+                    .append("\n");
         }
 
         if (numbering == 1) {

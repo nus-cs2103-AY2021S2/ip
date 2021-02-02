@@ -2,7 +2,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND = "find";
     private final String keyword;
-    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a keyword to search for.\n\tCommand: find [keyword]";
+    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a keyword to search for.\n"
+            + "\tCommand: find [keyword]";
 
     private FindCommand(String keyword) {
         this.keyword = keyword;
@@ -20,7 +21,11 @@ public class FindCommand extends Command {
         int numbering = 1;
         for (Task task: taskList.getList()) {
             if (task.containsText(keyword)) {
-                builder.append("\t").append(numbering++).append(".").append(task).append("\n");
+                builder.append("\t")
+                        .append(numbering++)
+                        .append(".")
+                        .append(task)
+                        .append("\n");
             }
         }
 

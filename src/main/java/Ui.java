@@ -5,7 +5,8 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String WELCOME_MESSAGE = "Hello! I'm Duke.\nWhat can I do for you today?";
+    private final String WELCOME_MESSAGE = "Hello! I'm Duke.\n"
+            + "What can I do for you today?";
     private final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private final String REPLY_TOP_OUTLINE = "========================================";
     private final String REPLY_BOTTOM_OUTLINE = "========================================\n";
