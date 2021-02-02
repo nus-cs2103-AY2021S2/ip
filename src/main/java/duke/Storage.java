@@ -27,7 +27,7 @@ public class Storage {
      */
     public void save(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (Task t : taskList.getTasks()) {
+        for (Task t : taskList) {
             fw.write(t.storeString() + "\n");
         }
         fw.close();

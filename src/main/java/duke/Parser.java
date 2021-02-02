@@ -100,7 +100,7 @@ public class Parser {
     private String getCommand(String input) throws DukeTaskException {
         try {
             String[] arr = input.split(" ", 2);
-            return arr[0];
+            return arr[0].toLowerCase();
         } catch (Exception e) {
             throw new DukeTaskException("");
         }
