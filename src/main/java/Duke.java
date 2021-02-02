@@ -11,21 +11,34 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\n"+ "What can I do for you?");
-        ArrayList<String> items = new ArrayList<>();
+        ArrayList<Task> items = new ArrayList<>();
 
         while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 bye();
                 break;
+            } else if (input.contains("done")) {
+                System.out.println("Nice! I've marked this task as done: ");
+
+                int taskNum = Integer.parseInt(input.substring(5));
+                String name = items.get(taskNum - 1).getDescription();
+
+                items.remove(taskNum - 1);
+                Task markDone = new Task(name, true);
+                items.add(taskNum - 1, markDone);
+
+                System.out.println(markDone);
+
             } else if (input.equals("list")) {
                 int n = 1;
-                for (String item : items) {
+                System.out.println("Here are the tasks in your list:");
+                for (Task item : items) {
                     System.out.println( n + ". " + item);
                     n++;
                 }
             } else {
-                items.add(input);
+                items.add(new Task(input));
             }
         }
     }
