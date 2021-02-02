@@ -7,9 +7,10 @@ import com.tanboonji.duke.model.ToDo;
 public class ToDoCommand extends Command {
 
     public static final String COMMAND = "todo";
-    private final String description;
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a description for the todo.\n"
             + "\tCommand: todo [description]";
+
+    private final String description;
 
     private ToDoCommand(String description) {
         this.description = description;

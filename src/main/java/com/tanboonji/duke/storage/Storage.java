@@ -1,22 +1,23 @@
 package com.tanboonji.duke.storage;
 
-import com.tanboonji.duke.exception.DukeException;
-import com.tanboonji.duke.model.TaskList;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.model.TaskList;
+
 public class Storage {
 
-    private final String fileDir;
-    private final String LOAD_ERROR_MESSAGE =
+    private static final String LOAD_ERROR_MESSAGE =
             "☹ Sorry, something went wrong while I was loading saved data from file.";
-    private final String SAVE_ERROR_MESSAGE = "☹ Sorry, something went wrong while I was saving data to file.";
+    private static final String SAVE_ERROR_MESSAGE = "☹ Sorry, something went wrong while I was saving data to file.";
+
+    private final String fileDir;
 
     public Storage(String fileDir) {
         this.fileDir = fileDir;

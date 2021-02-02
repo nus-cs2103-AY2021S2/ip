@@ -1,20 +1,20 @@
 package com.tanboonji.duke.parser;
 
-import com.tanboonji.duke.command.Command;
-import com.tanboonji.duke.command.ListCommand;
-import com.tanboonji.duke.command.FindCommand;
-import com.tanboonji.duke.command.ToDoCommand;
-import com.tanboonji.duke.command.EventCommand;
-import com.tanboonji.duke.command.DeadlineCommand;
-import com.tanboonji.duke.command.DoneCommand;
-import com.tanboonji.duke.command.DeleteCommand;
-import com.tanboonji.duke.command.HelpCommand;
-import com.tanboonji.duke.command.ByeCommand;
-import com.tanboonji.duke.command.InvalidCommand;
-import com.tanboonji.duke.exception.DukeException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.tanboonji.duke.command.ByeCommand;
+import com.tanboonji.duke.command.Command;
+import com.tanboonji.duke.command.DeadlineCommand;
+import com.tanboonji.duke.command.DeleteCommand;
+import com.tanboonji.duke.command.DoneCommand;
+import com.tanboonji.duke.command.EventCommand;
+import com.tanboonji.duke.command.FindCommand;
+import com.tanboonji.duke.command.HelpCommand;
+import com.tanboonji.duke.command.InvalidCommand;
+import com.tanboonji.duke.command.ListCommand;
+import com.tanboonji.duke.command.ToDoCommand;
+import com.tanboonji.duke.exception.DukeException;
 
 public class CommandParser {
 

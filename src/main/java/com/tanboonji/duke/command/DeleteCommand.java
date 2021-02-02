@@ -6,11 +6,11 @@ import com.tanboonji.duke.model.Task;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND = "delete";
-    private final String HEADER = "Noted! I've removed this task:\n\t";
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number.\n"
             + "\tCommand: delete [task number]";
+    private static final String HEADER = "Noted! I've removed this task:\n\t";
 
-    private int taskIndex;
+    private final int taskIndex;
 
     private DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;

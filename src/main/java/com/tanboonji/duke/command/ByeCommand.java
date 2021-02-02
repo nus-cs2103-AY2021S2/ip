@@ -3,7 +3,7 @@ package com.tanboonji.duke.command;
 public class ByeCommand extends Command {
 
     public static final String COMMAND = "bye";
-    private final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     public ByeCommand() {
     }

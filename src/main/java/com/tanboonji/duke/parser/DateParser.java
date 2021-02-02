@@ -1,29 +1,29 @@
 package com.tanboonji.duke.parser;
 
-import com.tanboonji.duke.exception.DukeException;
-
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
+import com.tanboonji.duke.exception.DukeException;
+
 public class DateParser {
 
     private static final String DATE_FORMAT = "[dd/MM/yyyy][dd-MM-yyyy][dd.MM.yyyy]";
-    private static final String TIME_FORMAT = "[HHmm][mmHH]";
-    private static final String OUTPUT_FORMAT = "dd MMM yyyy HHmm";
     private static final DateTimeFormatter DATE_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern(DATE_FORMAT)
             .toFormatter();
+    private static final String OUTPUT_FORMAT = "dd MMM yyyy HHmm";
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_FORMAT);
+    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid time format.";
+    private static final String TIME_FORMAT = "[HHmm][mmHH]";
     private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern(TIME_FORMAT)
             .toFormatter();
-    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_FORMAT);
-    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid time format.";
 
     /**
      * Parses input from String class to LocalDateTime class.

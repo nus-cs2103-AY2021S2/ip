@@ -1,25 +1,23 @@
 package com.tanboonji.duke.command;
 
-import com.tanboonji.duke.exception.DukeException;
-import com.tanboonji.duke.model.Task;
-import com.tanboonji.duke.model.Event;
-import com.tanboonji.duke.parser.DateParser;
-
 import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.model.Event;
+import com.tanboonji.duke.model.Task;
+import com.tanboonji.duke.parser.DateParser;
+
 public class EventCommand extends Command {
 
+    public static final String COMMAND = "event";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=\\/at)\\/at\\W(.*)");
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid  and datetime for the event.\n"
             + "\tCommand: event [description] /at [datetime]";
-    private static Matcher matcher;
 
-    public static final String COMMAND = "event";
-
-    private String description;
-    private LocalDateTime at;
+    private final String description;
+    private final LocalDateTime at;
 
     private EventCommand(String description, LocalDateTime at) {
         this.description = description;
@@ -50,7 +48,7 @@ public class EventCommand extends Command {
     }
 
     public static EventCommand parseArguments(String input) throws DukeException {
-        matcher = COMMAND_FORMAT.matcher(input);
+        Matcher matcher = COMMAND_FORMAT.matcher(input);
 
         if (!matcher.matches()) {
             throw new DukeException(ERROR_MESSAGE);

@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
             + "\t\t- help\n"
             + "\t\t- bye\n";
 
-    private boolean showError;
+    private final boolean showError;
 
     public HelpCommand(boolean showError) {
         this.showError = showError;

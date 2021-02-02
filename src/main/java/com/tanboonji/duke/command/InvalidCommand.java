@@ -2,7 +2,7 @@ package com.tanboonji.duke.command;
 
 public class InvalidCommand extends Command {
 
-    String errorMessage;
+    private final String errorMessage;
 
     public InvalidCommand(String errorMessage) {
         this.errorMessage = errorMessage;

@@ -1,8 +1,8 @@
 package com.tanboonji.duke.model;
 
-import com.tanboonji.duke.parser.DateParser;
-
 import java.time.LocalDateTime;
+
+import com.tanboonji.duke.parser.DateParser;
 
 public class Deadline extends Task {
 

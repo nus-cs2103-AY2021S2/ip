@@ -6,9 +6,9 @@ import com.tanboonji.duke.model.Task;
 public class DoneCommand extends Command {
 
     public static final String COMMAND = "done";
-    private final String HEADER = "Nice! I've marked this task as done:\n\t";
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number.\n"
             + "\tCommand: done [task number]";
+    private static final String HEADER = "Nice! I've marked this task as done:\n\t";
 
     private final int taskIndex;
 

@@ -1,5 +1,7 @@
 package com.tanboonji.duke;
 
+import java.util.Scanner;
+
 import com.tanboonji.duke.command.Command;
 import com.tanboonji.duke.command.HelpCommand;
 import com.tanboonji.duke.exception.DukeException;
@@ -7,8 +9,6 @@ import com.tanboonji.duke.model.TaskList;
 import com.tanboonji.duke.parser.CommandParser;
 import com.tanboonji.duke.storage.Storage;
 import com.tanboonji.duke.ui.Ui;
-
-import java.util.Scanner;
 
 public class Duke {
 

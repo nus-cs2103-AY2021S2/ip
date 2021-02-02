@@ -6,9 +6,10 @@ import com.tanboonji.duke.model.Task;
 public class FindCommand extends Command {
 
     public static final String COMMAND = "find";
-    private final String keyword;
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a keyword to search for.\n"
             + "\tCommand: find [keyword]";
+
+    private final String keyword;
 
     private FindCommand(String keyword) {
         this.keyword = keyword;
