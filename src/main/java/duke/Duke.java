@@ -2,6 +2,12 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.task.TaskList;
+import duke.util.*;
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.WrongCommandDukeException;
+
 public class Duke {
     private TaskList tasks;
     private Storage storage;

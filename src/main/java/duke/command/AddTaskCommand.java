@@ -1,7 +1,15 @@
-package duke;
+package duke.command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.exception.DukeException;
+import duke.exception.WrongFormatDukeException;
 
 public class AddTaskCommand extends Command {
 

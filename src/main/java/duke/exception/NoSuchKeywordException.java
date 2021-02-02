@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 public class NoSuchKeywordException extends DukeException {
     private final String keyword;

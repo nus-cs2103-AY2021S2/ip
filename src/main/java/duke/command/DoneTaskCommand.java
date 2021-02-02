@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.exception.WrongFormatDukeException;
 
 public class DoneTaskCommand extends Command {
 

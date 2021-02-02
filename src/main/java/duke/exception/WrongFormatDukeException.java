@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 public class WrongFormatDukeException extends DukeException {
     private final String todo = "todo (task description)";

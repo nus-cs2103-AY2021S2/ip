@@ -1,4 +1,8 @@
-package duke;
+package duke.util;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.exception.DukeException;
 
 public class Ui {
     private final String spacer = "----------------------------------------------------";
