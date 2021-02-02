@@ -1,8 +1,15 @@
 package dbot.parser;
 
-import dbot.command.*;
-import dbot.exception.DukeException;
 import dbot.command.Command;
+import dbot.command.DeadlineCommand;
+import dbot.command.DeleteCommand;
+import dbot.command.DoneCommand;
+import dbot.command.EventCommand;
+import dbot.command.ExitCommand;
+import dbot.command.HelpCommand;
+import dbot.command.ListCommand;
+import dbot.command.TodoCommand;
+import dbot.exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
