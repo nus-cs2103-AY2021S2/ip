@@ -6,7 +6,7 @@ package duke.exceptions;
 public class DukeUnknownArgumentsException extends DukeException {
 
     /**
-     * Return the string representation for the cause of DukeUnknownArgumentsException.
+     * Returns the string representation for the cause of DukeUnknownArgumentsException.
      * @return string representation for the cause of the exception.
      */
     @Override

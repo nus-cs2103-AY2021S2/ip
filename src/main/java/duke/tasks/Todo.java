@@ -6,7 +6,7 @@ package duke.tasks;
 public class Todo extends Task {
 
     /**
-     * Construct Todo subclass of Task containing the description of the Task.
+     * Constructs Todo subclass of Task containing the description of the Task.
      * @param description description of the Todo.
      */
     public Todo(String description) {
@@ -14,7 +14,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Return data representation of the Task, encoded to be saved in save file.
+     * Returns data representation of the Task, encoded to be saved in save file.
      * @return encoded form of Todo for save file.
      */
     @Override
@@ -23,7 +23,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Return string representation of Todo.
+     * Returns string representation of Todo.
      * @return type of Todo, whether it is done, description of Todo.
      */
     @Override

@@ -7,7 +7,7 @@ public class DukeNoDescriptionException extends DukeException {
     private final String command;
 
     /**
-     * Construct a DukeNoDescriptionException that contains the command type.
+     * Constructs a DukeNoDescriptionException that contains the command type.
      * @param command string representation of the command type.
      */
     public DukeNoDescriptionException(String command) {
@@ -15,7 +15,7 @@ public class DukeNoDescriptionException extends DukeException {
     }
 
     /**
-     * Return string representation for the cause of the DukeNoDescriptionException.
+     * Returns string representation for the cause of the DukeNoDescriptionException.
      * @return string representation for the cause of the exception.
      */
     public String toString() {

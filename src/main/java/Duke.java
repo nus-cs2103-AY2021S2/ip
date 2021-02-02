@@ -2,7 +2,7 @@ import duke.Controller;
 
 public class Duke {
     /**
-     * Start the Duke program.
+     * Starts the Duke program.
      * @param args command line arguments.
      */
     public static void main(String[] args) {

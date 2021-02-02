@@ -15,6 +15,9 @@ import duke.exceptions.DukeUnknownArgumentsException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Ui class that interacts with user, by taking in the user's input and returns the output.
+ */
 public class Ui {
     private final Scanner in;
     private final PrintStream out;

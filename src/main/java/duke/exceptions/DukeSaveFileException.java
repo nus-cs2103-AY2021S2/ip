@@ -6,7 +6,7 @@ package duke.exceptions;
 public class DukeSaveFileException extends DukeException {
 
     /**
-     * Return a string representation for the cause of DukeSaveFileException.
+     * Returns a string representation for the cause of DukeSaveFileException.
      * @return string representation for the cause of the exception.
      */
     @Override

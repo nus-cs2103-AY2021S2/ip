@@ -12,8 +12,8 @@ public class Deadline extends Task {
     private final LocalDate deadline;
 
     /**
-     * Construct a Deadline Task that contains the description of the task and its deadline.
-     * Default with the task being not done.
+     * Constructs a Deadline Task that contains the description of the task and its deadline.
+     * Defaults with the task being not done.
      * @param description description of the task.
      * @param deadline deadline for the task.
      */
@@ -23,7 +23,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return string representation of encoded data for the task so it can be saved.
+     * Returns string representation of encoded data for the task so it can be saved.
      * @return string representation of the data of the task.
      */
     @Override
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return string representation the task.
+     * Returns string representation the task.
      * @return type of the task, whether the task is done, task's description, and task's deadline.
      */
     @Override

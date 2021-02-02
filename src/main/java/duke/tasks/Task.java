@@ -9,7 +9,7 @@ public abstract class Task {
     protected final String description;
 
     /**
-     * Construct a Task that contains the description and defaulted as not done.
+     * Constructs a Task that contains the description and defaulted as not done.
      * @param description description of the Task.
      */
     public Task(String description) {
@@ -18,14 +18,14 @@ public abstract class Task {
     }
 
     /**
-     * Set the task as done.
+     * Sets the task as done.
      */
     public void done() {
         isDone = true;
     }
 
     /**
-     * Return a data representation of the task to be saved in the save.txt file.
+     * Returns a data representation of the task to be saved in the save.txt file.
      * @return data representation of Task.
      */
     public String data() {
@@ -34,7 +34,7 @@ public abstract class Task {
     }
 
     /**
-     * Return string representation of the Task to be shown to the user.
+     * Returns string representation of the Task to be shown to the user.
      * @return string representation of the Task.
      */
     @Override

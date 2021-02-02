@@ -11,6 +11,9 @@ import duke.exceptions.DukeSaveFileException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Message class used to create output strings for UI class to be shown as output of Duke.
+ */
 public class Message {
     private static final String INDENT = "\t";
     private static final String NEWLINE = System.lineSeparator();

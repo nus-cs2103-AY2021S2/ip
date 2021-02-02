@@ -13,7 +13,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Represent the TaskList to store all the tasks inputted by the user. Tasklist contains a Ui
+ * Represents the TaskList to store all the tasks inputted by the user. Tasklist contains a Ui
  * class that show output from functions.
  */
 public class TaskList {
@@ -21,7 +21,7 @@ public class TaskList {
     private final Ui ui;
 
     /**
-     * Construct TaskList containing an ArrayList of Task and the Ui.
+     * Constructs TaskList containing an ArrayList of Task and the Ui.
      * @param storage Use to load the latest TaskList from save file.
      * @param ui Ui to be used to output the results from input.
      */
@@ -31,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * Return number of tasks.
+     * Returns number of tasks.
      * @return number of tasks in the TaskList.
      */
     public int size() {
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * Update the save file in the hardware.
+     * Updates the save file in the hardware.
      * @param storage Storage class used for storage in the hardware.
      */
     public void updateSave(Storage storage) {
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task based on the input as done.
+     * Marks the task based on the input as done.
      * @param input input used to get index of task to be marked as done.
      */
     public void done(String input) {
@@ -58,7 +58,7 @@ public class TaskList {
     }
 
     /**
-     * Return a Todo Task that will be added to this TaskList.
+     * Returns a Todo Task that will be added to this TaskList.
      * @param input input used to get the description for the task.
      * @return Todo task with the description.
      * @throws DukeNoDescriptionException if the description of the todo command is empty.
@@ -69,7 +69,7 @@ public class TaskList {
     }
 
     /**
-     * Return Deadline subclass of Task that will be added to this TaskList.
+     * Returns Deadline subclass of Task that will be added to this TaskList.
      * @param input input used to get the description and deadline of the Deadline task.
      * @return Deadline task with the description and deadline.
      * @throws DukeNoDescriptionException if the description of the deadline is empty.
@@ -83,7 +83,7 @@ public class TaskList {
     }
 
     /**
-     * Return Event subclass of Task that will be added to this TaskList.
+     * Returns Event subclass of Task that will be added to this TaskList.
      * @param input input used to get the description and event time of the Event task.
      * @return Event task with description and event time.
      * @throws DukeNoDescriptionException when the description of the Event is empty.
@@ -96,7 +96,7 @@ public class TaskList {
     }
 
     /**
-     * Delete Task from TaskList of index using input.
+     * Deletes Task from TaskList of index using input.
      * @param input input used to get index of Task to be deleted.
      * @throws DukeEmptyListException when the TaskList is empty.
      */
@@ -111,7 +111,7 @@ public class TaskList {
     }
 
     /**
-     * Decide whether the input is to add a new task or find tasks in the existing tasklist.
+     * Decides whether the input is to add a new task or find tasks in the existing tasklist.
      * @param input input used to get the relevant information of Task.
      * @throws DukeUnknownArgumentsException when the input arguments for the creation of the
      *     Task is unknown.
@@ -159,22 +159,22 @@ public class TaskList {
     }
 
     /**
-     * Print String representation of the TaskList for the user.
+     * Prints String representation of the TaskList for the user.
      */
     public void print() {
         this.print(tasks);
     }
 
     /**
-     * Print the task in the specified tasklist.
-     * @param tasks the tasklist used for printing.
+     * Prints the task in the specified tasklist.
+     * @param tasks the tasks used for printing.
      */
     private void print(ArrayList<Task> tasks) {
         ui.printTaskList(tasks);
     }
 
     /**
-     * Print tasks that contain input description.
+     * Prints tasks that contain input description.
      * @param input used to get the description to print the tasks with the description.
      * @throws DukeNoDescriptionException when the description given is empty.
      */

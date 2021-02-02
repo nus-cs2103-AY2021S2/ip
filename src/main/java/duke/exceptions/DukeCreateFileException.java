@@ -1,12 +1,12 @@
 package duke.exceptions;
 
 /**
- * Represent the exception when the save file cannot be created.
+ * Represents the exception when the save file cannot be created.
  */
 public class DukeCreateFileException extends DukeException {
 
     /**
-     * Return string representation for the cause of DukeCreateFileException.
+     * Returns string representation for the cause of DukeCreateFileException.
      * @return string representation for the cause of the exception.
      */
     @Override

@@ -18,7 +18,7 @@ import duke.tasks.Todo;
 public class StorageDecoder {
 
     /**
-     * Return ArrayList of Task decoded from the save file.
+     * Returns ArrayList of Task decoded from the save file.
      * @param encodeTasks data representation of the TaskList from save file.
      * @return ArrayList of Task from the encodeTasks.
      * @throws DukeCorruptedStorageException when the encodedTasks does not conform with the
@@ -46,7 +46,7 @@ public class StorageDecoder {
     }
 
     /**
-     * Return Todo Task based on a single line of the encodedTask.
+     * Returns Todo Task based on a single line of the encodedTask.
      * @param encodedTask data representation of a single Todo Task from save file.
      * @return Todo Task based on the encodedTask.
      * @throws DukeCorruptedStorageException when the Task does not fit the format of a Todo Task.
@@ -62,7 +62,7 @@ public class StorageDecoder {
     }
 
     /**
-     * Return either Event or Deadline Task based on the single line encodedTask, based on
+     * Returns either Event or Deadline Task based on the single line encodedTask, based on
      * AddCommandType.
      * @param command AddCommandType used to distinguish between Event and Deadline.
      * @param encodedTask data representation of the Event or Dateline from save file.

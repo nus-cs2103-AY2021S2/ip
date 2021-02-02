@@ -30,7 +30,7 @@ public class Storage {
     }
 
     /**
-     * Return a new Storage or an existing one.
+     * Returns a new Storage or an existing one.
      * @return a new or existing Storage class.
      */
     public static Storage getInstance() {
@@ -41,7 +41,7 @@ public class Storage {
     }
 
     /**
-     * Update the save file in the hardware with the new TaskList.
+     * Updates the save file in the hardware with the new TaskList.
      * @param tasks The TaskList used to update the save file.
      */
     public void update(ArrayList<Task> tasks) {
@@ -55,7 +55,7 @@ public class Storage {
     }
 
     /**
-     * Return an ArrayList of Task from the save file.
+     * Returns an ArrayList of Task from the save file.
      * @return an ArrayList of Task from the save file.
      */
     public ArrayList<Task> load() {
@@ -78,7 +78,7 @@ public class Storage {
     }
 
     /**
-     * Create a data directory from source unless it already exists.
+     * Creates a data directory from source unless it already exists.
      */
     private void createDirectory() {
         Path dataPath = Paths.get(DATA_DIR);

@@ -12,7 +12,7 @@ public class Event extends Task {
     private final LocalDate eventTime;
 
     /**
-     * Construct a Event class that contains the description of the task and the date of the event.
+     * Constructs a Event class that contains the description of the task and the date of the event.
      * @param description description of the Event.
      * @param eventTime date when the Event occurs.
      */
@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return data representation of the Event to be saved into the save file.
+     * Returns data representation of the Event to be saved into the save file.
      * @return data representation of the Event.
      */
     @Override
@@ -31,7 +31,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return string representation of the Event that will be shown to the user.
+     * Returns string representation of the Event that will be shown to the user.
      * @return the event type, whether it is done, the event's description and the event's date.
      */
     @Override

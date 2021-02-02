@@ -18,9 +18,9 @@ public class Controller {
     private final Ui ui;
 
     /**
-     * Construct a Controller class. Defaulted with UI used to get user inputs and show outputs,
-     * Storage used to get savefile from data directory, and tasklist from the save file or a new
-     * tasklist.
+     * Constructs a Controller class. Defaulted with UI used to get user inputs and show outputs,
+     * Storage used to get save file from data directory, and tasklist from the save file or a new
+     * task list.
      */
     public Controller() {
         this.ui = new Ui();
@@ -46,7 +46,7 @@ public class Controller {
     }
 
     /**
-     * Handle inputs from user.
+     * Handles inputs from user.
      * @param input User inputs.
      */
     private void handleInput(String input) {
@@ -55,7 +55,7 @@ public class Controller {
     }
 
     /**
-     * Execute User inputs based on the commandType.
+     * Executes User inputs based on the commandType.
      * @param input user input used based on commandType.
      * @param command commandType used to differentiate how input is used.
      */
@@ -90,7 +90,7 @@ public class Controller {
     }
 
     /**
-     * Mark specified task based on input as done.
+     * Marks specified task based on input as done.
      * @param input input used to get index to be marked as done.
      */
     private void doneTask(String input) {
@@ -98,7 +98,7 @@ public class Controller {
     }
 
     /**
-     * Add task based on input to the TaskList.
+     * Adds task based on input to the TaskList.
      * @param input input used to get specific information of the task to be added.
      * @throws DukeUnknownArgumentsException if the input contains an unknown command.
      */
@@ -107,7 +107,7 @@ public class Controller {
     }
 
     /**
-     * Print the string representation of the TaskList.
+     * Prints the string representation of the TaskList.
      */
     private void printList() {
         tasks.print();

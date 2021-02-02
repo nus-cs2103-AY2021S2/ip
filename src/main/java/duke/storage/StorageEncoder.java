@@ -11,7 +11,7 @@ public class StorageEncoder {
     private static final String NEW_LINE = "\n";
 
     /**
-     * Return data representation of TaskList encoded using the tasks.
+     * Returns data representation of TaskList encoded using the tasks.
      * @param tasks TaskList used to be encoded to be saved in save file.
      * @return encoded representation for the save file.
      */
