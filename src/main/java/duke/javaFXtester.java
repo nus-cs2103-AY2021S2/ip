@@ -14,9 +14,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 
-
-
-@SuppressWarnings("checkstyle:Regexp")
 public class javaFXtester extends Application {
 
     private ScrollPane scrollPane;

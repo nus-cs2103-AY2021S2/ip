@@ -21,12 +21,34 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+//import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class Duke {
+
+
+
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/User.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/Duwuke.jpg"));
 
     static class FastIO extends PrintWriter
     {
@@ -384,85 +406,78 @@ public class Duke {
     public class Parser {
 
         /**
-         * Parses a given input and performs actions as necessary based on the input.
+         * Parses a given input and returns Strings as necessary based on the input.
          * The main driver of the Duke class.
          *
          * @param leest The current TaskList.
          * @param input Input that is being read in.
          */
-        public void parse(TaskList leest, String input) {
+        public String parse(TaskList leest, String input) {
 
             String[] split = input.split("\\s+");
 
             switch (split[0]) {
             case "list":
                 if (leest.size() == 0) {
-                    ui.emptyListMessage();
+                    return ui.emptyListMessage();
                 } else {
-                    ui.showList(leest);
+                    return ui.showList(leest);
                 }
-                break;
             case "done":
                 try {
                     int done = Integer.parseInt(split[1]) - 1;
                     leest.get(done).setDone();
-                    ui.setDone(leest.get(done));
                     storage.saveAsFile(leest);
+                    return ui.setDone(leest.get(done));
                 } catch (Exception e) {
-                    ui.errorMessage("invalidDone");
+                    return ui.errorMessage("invalidDone");
                 }
-                break;
             case "bye":
-                ui.byeBye();
-                return;
+                return ui.byeBye();
             case "todo":
                 try {
                     leest.add(new Task(input.substring(5)));
-                    ui.taskAdded(leest.get(leest.size() - 1));
-                    ui.showTaskListSize(leest.size());
                     storage.saveAsFile(leest);
+                    return (ui.taskAdded(leest.get(leest.size() - 1)) + "\n"
+                            + ui.showTaskListSize(leest.size()));
                 } catch (Exception e) {
-                    ui.errorMessage("invalidTodo");
+                    return ui.errorMessage("invalidTodo");
                 }
-                break;
             case "deadline":
                 try {
                     String[] splitagain = input.substring(9).split("/by");
                     leest.add(new Deadline(splitagain[0], splitagain[1].substring(1)));
-                    ui.taskAdded(leest.get(leest.size() - 1));
-                    ui.showTaskListSize(leest.size());
                     storage.saveAsFile(leest);
+                    return (ui.taskAdded(leest.get(leest.size() - 1)) + "\n"
+                        + ui.showTaskListSize(leest.size()));
                 } catch (DateTimeParseException de) {
-                    ui.errorMessage("dateTimeError");
+                    return ui.errorMessage("dateTimeError");
                 } catch (Exception e) {
-                    ui.errorMessage("invalidDeadline");
+                    return ui.errorMessage("invalidDeadline");
                 }
-                break;
             case "event":
                 try {
                     String[] splitagain2 = input.substring(6).split("/at");
                     leest.add(new Event(splitagain2[0], splitagain2[1].substring(1)));
-                    ui.taskAdded(leest.get(leest.size() - 1));
-                    ui.showTaskListSize(leest.size());
                     storage.saveAsFile(leest);
+                    return (ui.taskAdded(leest.get(leest.size() - 1)) + "\n"
+                            + ui.showTaskListSize(leest.size()));
                 } catch (DateTimeParseException de) {
-                    ui.errorMessage("dateTimeError");
+                    return ui.errorMessage("dateTimeError");
                 } catch (Exception e) {
                     //System.out.println(e);
-                    ui.errorMessage("invalidEvent");
+                    return ui.errorMessage("invalidEvent");
                 }
-                break;
             case "delete":
                 try {
                     Task toDelete = leest.get(Integer.parseInt(split[1]) - 1);
-                    ui.deleteTask(toDelete);
                     leest.remove(toDelete);
-                    ui.showTaskListSize(leest.size());
                     storage.saveAsFile(leest);
+                    return (ui.deleteTask(toDelete) + "\n"
+                            + ui.showTaskListSize(leest.size()));
                 } catch (Exception e) {
-                    ui.errorMessage("invalidDelete");
+                    return ui.errorMessage("invalidDelete");
                 }
-                break;
             case "find":
                 String toFind = input.substring(5);
                 TaskList toReturn = new TaskList();
@@ -471,11 +486,9 @@ public class Duke {
                         toReturn.add(t);
                     }
                 }
-                ui.showSearchList(toReturn);
-                break;
+                return ui.showSearchList(toReturn);
             default:
-                ui.errorMessage("unknownInput");
-                break;
+                return ui.errorMessage("unknownInput");
             }
         }
     }
@@ -489,27 +502,27 @@ public class Duke {
         /**
          * Greets the user with a fancy image.
          */
-        public void greet() {
-            String logo = " ____        _        \n"
+        public String greet() {
+            return ( "Hello from\n"
+                    + " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___| uwu\n";
-            System.out.println("Hello from\n" + logo);
-            System.out.println("Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!\n"
+                    + "|____/ \\__,_|_|\\_\\___| uwu\n"
+                    + "Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!\n"
                     + "What can I do for you? uwu");
         }
 
-        public void showLoadingError() {
-            System.out.println("Something went wrong with the storage loading uwu");
+        public String showLoadingError() {
+            return ("Something went wrong with the storage loading uwu");
         }
 
-        public void emptyListMessage() {
-            System.out.println("☹ OOPS!!! Your list is currently empty uwu.");
+        public String emptyListMessage() {
+            return ("☹ OOPS!!! Your list is currently empty uwu.");
         }
 
-        public void showTaskListSize(int listSize) {
-            System.out.println("Now you have " + listSize + " task(s) in the list uwu");
+        public String showTaskListSize(int listSize) {
+            return ("Now you have " + listSize + " task(s) in the list uwu");
         }
 
         /**
@@ -517,31 +530,25 @@ public class Duke {
          *
          * @param s The error message to be printed.
          */
-        public void errorMessage(String s) {
+        public String errorMessage(String s) {
             switch (s) {
             case "unknownInput":
-                System.out.println("☹ OOPS!!! Sumimasen, but I don't know what that means T^T");
-                break;
+                return ("☹ OOPS!!! Sumimasen, but I don't know what that means T^T");
             case "invalidDelete":
-                System.out.println("☹ OOPS!!! Please indicate a valid task to delete uwu");
-                break;
+                return ("☹ OOPS!!! Please indicate a valid task to delete uwu");
             case "invalidEvent":
-                System.out.println("☹ OOPS!!! Please define your event properly uwu.");
-                break;
+                return ("☹ OOPS!!! Please define your event properly uwu.");
             case "dateTimeError":
-                System.out.println("☹ OOPS!!! Please define your todo date/time in the " +
+                return ("☹ OOPS!!! Please define your todo date/time in the " +
                         "YYYY-MM-DD HH:MM format uwu.");
-                break;
             case "invalidDeadline":
-                System.out.println("☹ OOPS!!! Please define your deadline properly uwu.");
-                break;
+                return ("☹ OOPS!!! Please define your deadline properly uwu.");
             case "invalidTodo":
-                System.out.println("☹ OOPS!!! Please define your todo properly uwu.");
-                break;
+                return ("☹ OOPS!!! Please define your todo properly uwu.");
             case "invalidDone":
-                System.out.println("☹ OOPS!!! Please indicate a valid task to complete uwu");
-                break;
+                return ("☹ OOPS!!! Please indicate a valid task to complete uwu");
             default:
+                return "Something went really really wrong uwu.";
             }
         }
 
@@ -550,9 +557,8 @@ public class Duke {
          *
          * @param t
          */
-        public void deleteTask(Task t) {
-            System.out.println("Noted. I've removed this task uwu:");
-            System.out.println(t);
+        public String deleteTask(Task t) {
+            return ("Noted. I've removed this task uwu:\n" + t);
         }
 
         /**
@@ -560,18 +566,16 @@ public class Duke {
          *
          * @param t
          */
-        public void taskAdded(Task t) {
-            System.out.println("Hai. I've added this task:");
-            System.out.println("    " + t);
+        public String taskAdded(Task t) {
+            return ("Hai. I've added this task:\n" + t);
         }
 
-        public void byeBye() {
-            System.out.println("Bye, hope to see you again! uwu");
+        public String byeBye() {
+            return ("Bye, hope to see you again! uwu");
         }
 
-        public void setDone(Task t) {
-            System.out.println("Sugoi! I've marked this task as done uwu:");
-            System.out.println(t);
+        public String setDone(Task t) {
+            return ("Sugoi! I've marked this task as done uwu:\n" + t);
         }
 
         /**
@@ -579,13 +583,14 @@ public class Duke {
          *
          * @param tl The TaskList to be printed.
          */
-        public void showList(TaskList tl) {
-            System.out.println("Here are the tasks in your list uwu:");
+        public String showList(TaskList tl) {
+            String toReturn = ("Here are the tasks in your list uwu:\n");
             int counter = 1;
             for (Task t : tl.getList()) {
-                System.out.println(counter + ". " + t);
+                toReturn += (counter + ". " + t + "\n");
                 counter++;
             }
+            return toReturn;
         }
 
         /**
@@ -594,17 +599,18 @@ public class Duke {
          *
          * @param tl The tasklist to be printed.
          */
-        public void showSearchList(TaskList tl) {
+        public String showSearchList(TaskList tl) {
             if (tl.isEmpty()) {
-                System.out.println("There are no matching tasks uwu. "
+                return ("There are no matching tasks uwu. "
                         + "(just like how whoever wrote this has no friends.)");
             } else {
-                System.out.println("Here are the matching tasks in your list uwu: ");
+                String toReturn = ("Here are the matching tasks in your list uwu: ");
                 int counter = 1;
                 for (Task t : tl.getList()) {
-                    System.out.println(counter + ". " + t);
+                    toReturn += (counter + ". " + t + "\n");
                     counter++;
                 }
+                return toReturn;
             }
         }
 
@@ -612,12 +618,10 @@ public class Duke {
 
     /**
      * Instantiates a Duke object.
-     *
-     * @param filepath The filepath where the tasklist is stored in the hard disk.
      */
-    public Duke(String filepath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filepath);
+        storage = new Storage("test/duke.txt");
 
         try {
             taskList = storage.load();
@@ -633,19 +637,113 @@ public class Duke {
         FastIO fio = new FastIO();
         Parser parser = new Parser();
 
-        ui.greet();
+        //ui.greet();
 
         // Continuously read input and performs commands until the user enters "bye"
-        while (true) {
-            String input = fio.nextLine();
-            parser.parse(taskList, input);
-            if (input.equals("bye")) {
-                break;
-            }
-        }
+        //while (true) {
+        //    String input = fio.nextLine();
+        //    parser.parse(taskList, input);
+        //    if (input.equals("bye")) {
+        //
+        //        break;
+        //    }
+        //}
     }
 
-    public static void main(String[] args) {
-        new Duke("test/duke.txt").run();
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
+
+    private void handleUserInput() {
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
+        );
+        userInput.clear();
+    }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Parser parser = new Parser();
+
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.greet(), duke));
+
+        sendButton.setOnMouseClicked((event) -> {
+            String userText = userInput.getText();
+            String dukeText = parser.parse(taskList, userInput.getText());
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, user),
+                    DialogBox.getDukeDialog(dukeText, duke)
+            );
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            //handleUserInput();
+            String userText = userInput.getText();
+            String dukeText = parser.parse(taskList, userInput.getText());
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, user),
+                    DialogBox.getDukeDialog(dukeText, duke)
+            );
+            userInput.clear();
+        });
+
+        dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
+
+    }
+
+    //public static void main(String[] args) {
+    //   new Duke("test/duke.txt").run();
+    //}
 }

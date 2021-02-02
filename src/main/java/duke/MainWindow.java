@@ -20,17 +20,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private javaFXtester duke;
+    private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duwuke.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(javaFXtester d) {
+    public void setDuke(Duke d) {
         duke = d;
     }
 
