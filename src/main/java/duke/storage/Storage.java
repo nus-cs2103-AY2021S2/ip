@@ -1,10 +1,10 @@
 package duke.storage;
 
-import duke.duke.Duke;
-import duke.tasks.TaskList;
-
 import java.io.File;
 import java.io.IOException;
+
+import duke.duke.Duke;
+import duke.tasks.TaskList;
 
 /**
  * Used to read and write to a file.

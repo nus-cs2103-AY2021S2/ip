@@ -18,11 +18,18 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private final TaskList list;
 
+    /**
+     * Creates a {@code Duke} object with an empty task list.
+     */
     public Duke() {
         this.list = new TaskList();
 
     }
 
+    /**
+     * Creates a {@code Duke} object with a task list.
+     * @param list task list
+     */
     public Duke(TaskList list) {
         this.list = list;
     }
@@ -45,6 +52,8 @@ public class Duke {
         case "event":
             task = new Event(message, date);
             break;
+        default:
+            Ui.print("No task added");
         }
 
         list.addItem(task);

@@ -1,14 +1,14 @@
 package duke.storage;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.TaskList;
-import duke.tasks.Todo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 public class FileReading {
 

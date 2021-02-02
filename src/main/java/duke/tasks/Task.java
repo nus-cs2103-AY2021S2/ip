@@ -8,6 +8,12 @@ public abstract class Task {
     protected final String type;
     protected boolean isDone;
 
+    /**
+     * Creates a {@code Task} object with a task description, task type,
+     * with task initially set to not done status.
+     * @param description task description
+     * @param type type of task
+     */
     public Task(String description, String type) {
         this.description = description;
         this.type = type;
@@ -53,6 +59,11 @@ public abstract class Task {
         return isDone;
     }
 
+    /**
+     * Checks if task contains a keyword.
+     * @param keyword keyword
+     * @return true if task contains the keyword, false otherwise
+     */
     public boolean contains(String keyword) {
         String[] descriptionArray = this.description.split(" ");
         for (String s : descriptionArray) {

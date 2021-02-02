@@ -1,5 +1,8 @@
 package duke.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -9,17 +12,11 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
-
 import duke.duke.Duke;
-
 import duke.exceptions.InvalidArgumentException;
 import duke.exceptions.InvalidCommandException;
-
 import duke.utils.DateValidator;
 import duke.utils.DateValidatorUsingDateFormat;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Parses user input.
@@ -106,7 +103,7 @@ public class Parser {
                 }
                 String[] s = a[0].split(" ", 2);
 
-                if(s.length == 1) {
+                if (s.length == 1) {
                     throw new InvalidArgumentException("Please input task description!\n");
                 }
                 String eventTime = a[1].strip();
@@ -115,6 +112,8 @@ public class Parser {
             case "find":
                 userCommand = new FindCommand(userInputArray[1]);
                 break;
+            default:
+                throw new InvalidCommandException("Invalid Command!\n");
             }
         }
         return userCommand;
