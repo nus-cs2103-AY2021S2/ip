@@ -8,21 +8,10 @@ import java.util.Scanner;
  */
 public class Output {
     /**
-     * Prints a line as a separator
-     * @return returns the line as a String
-     */
-    public String addLine() {
-        return "    ----------------------------------------------------------------------------------------------------------------------------------------------------------";
-    }
-
-    /**
      * Prints welcome message
      */
-    public void printWelcomeMsg() {
-        System.out.println(addLine());
-        System.out.println("    Hello! I'm Duke, your friendly chatbot.\n    What can I do for you today?\n");
-        printListCommands();
-        System.out.println(addLine() + "\n");
+    public String printWelcomeMsg() {
+        return "Hello! I'm Duke, your friendly chatbot. What can I do for you today? Type help for more information.";
     }
 
     /**
@@ -30,51 +19,27 @@ public class Output {
      * @param task      the task to be added
      * @param numTasks  total number of existing tasks
      */
-    public void printAddedTask(Task task, int numTasks) {
-        System.out.println(addLine());
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + task);
-        System.out.println("    Now you have " + numTasks + " tasks in the list.");
-        System.out.println(addLine() + "\n");
-    }
-
-    /**
-     * Prints a list of valid commands
-     */
-    public void printListCommands() {
-        System.out.println("    1. list                                   Lists out all existing tasks                              (e.g. list)");
-        System.out.println("    2. done <task number>                     Marks the specified task number as done/undone            (e.g. done 2)");
-        System.out.println("    3. find <keyword>                         Finds any existing tasks containing the given keyword     (e.g. find homework)");
-        System.out.println("    4. todo <todo message>                    Adds the specified todo to the list                       (e.g. todo homework)");
-        System.out.println("    5. deadline <deadline message> <date>     Adds the specified deadline to the list                   (e.g. deadline return book /by 02/12/2020 4pm)");
-        System.out.println("    6. event <event message> <date>           Adds the specified event to the list                      (e.g. event project meeting /at 02/12/2020 4pm)");
-        System.out.println("    7. delete <task number>                   Deletes the specified task number from the list           (e.g. delete 2)");
-        System.out.println("    8. help                                   Prints help information                                   (e.g. help)");
-        System.out.println("    9. exit                                   Terminate Duke                                            (e.g. bye)");
+    public String printAddedTask(Task task, int numTasks) {
+        return "Got it. I've added this task:\n\t" + task + "\nNow you have " + numTasks + " tasks in the list.";
     }
 
     /**
      * Handles help command
      */
-    public void sendHelp() {
-        System.out.println(addLine());
-        System.out.println("    Duke has sent help! Here is a list of valid commands:\n");
-        printListCommands();
-        System.out.println(addLine() + "\n");
+    public String sendHelp() {
+        return ("Duke has sent help! Here are a list of commands you can use:\n1. list\n2. done\n" +
+                "3. find\n4. todo\n" + "5. deadline\n6. event\n" + "7. delete\n8. help\n9. exit");
     }
 
     /**
      * Prints message upon successfully marking a task done
      * @param task  the task to be marked done
      */
-    public void printDoneMsg(Task task) {
-        System.out.println(addLine());
+    public String printDoneMsg(Task task) {
         if(task.getStatusIcon().equals("\u2713"))
-            System.out.println("    Nice! I've marked this task as done:");
+            return "Nice! I've marked this task as done: \n\t" + task;
         else
-            System.out.println("    Noted. I've marked this task as undone:");
-        System.out.println("      " + task);
-        System.out.println(addLine() + "\n");
+            return "Noted. I've marked this task as undone: \n\t" + task;
     }
 
     /**
@@ -82,72 +47,47 @@ public class Output {
      * @param task      the task to be deleted
      * @param numTasks  total number of existing tasks
      */
-    public void printDeleteMsg(Task task, int numTasks) {
-        System.out.println(addLine());
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("      " + task);
-        System.out.println("    Now you have " + numTasks + " tasks in the list.");
-        System.out.println(addLine() + "\n");
-    }
-
-    /**
-     * Prints message upon terminating the program with Exit command
-     * @return  exit confirmation
-     */
-    public boolean printByeMsg() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print(addLine() + "\n    Are you sure you'd like to exit? (Y/N): ");
-        String input = sc.next();
-        while(true) {
-            if(input.equals("Y") || input.equals("y")) {
-                System.out.println(addLine() + "\n    Bye. Hope to see you again soon!\n" + addLine());
-                return true;
-            } else if(input.equals("N") || input.equals("n")) {
-                System.out.println(addLine() + "\n    You're most welcomed to stay on!\n" + addLine());
-                return false;
-            } else {
-                System.out.print(addLine() + "\n    Are you sure you'd like to exit? (Y/N): ");
-                input = sc.next();
-            }
-        }
+    public String printDeleteMsg(Task task, int numTasks) {
+        return "Noted. I've removed this task: \n\t" + task + "\nNow you have " + numTasks + " tasks in the list.";
     }
 
     /**
      * Prints message for user query
      */
-    public void printFind(ArrayList<Task> foundTasks, String query) {
-        System.out.println(addLine());
+    public String printFind(ArrayList<Task> foundTasks, String query) {
+        StringBuilder sb = new StringBuilder();
         if (foundTasks.size() == 0) {
-            System.out.println("    ☹ OOPS! No tasks found for the query: " + query);
+            return "☹ OOPS! No tasks found for the query: \n\t" + query;
         }
         for (Task t : foundTasks) {
-            System.out.println("    " + t);
+            sb.append(t);
         }
-        System.out.println(addLine() + "\n");
+        return sb.toString();
     }
 
     /**
      * Prints message when user inputs an illegal argument
      */
-    public void printIllegalArgumentError() {
-        System.out.println(addLine() + "\n    ☹ OOPS! I'm sorry, but I don't know what that means :(" + "\n" + addLine() + "\n");
+    public String printIllegalArgumentError() {
+        return "☹ OOPS! I'm sorry, but I don't know what that means :(";
     }
 
     /**
      * Handles list command
      * @param tasksList list of tasks
      */
-    public void listAction(ArrayList<Task> tasksList) throws DukeException {
+    public String listAction(ArrayList<Task> tasksList) throws DukeException {
+        StringBuilder sb = new StringBuilder();
         if(tasksList.size() == 0) {
             throw new EmptyListException();
         }
 
-        System.out.println(addLine());
         for(int i = 1; i <= tasksList.size(); i++) {
             Task task = tasksList.get(i - 1);
-            System.out.println("    " + i + ". " + task);
+            sb.append(i + ". " + task + "\n");
         }
-        System.out.println(addLine() + "\n");
+
+        return sb.toString();
     }
 
     /**
@@ -156,7 +96,7 @@ public class Output {
      * @param input         user input
      * @param dataManager   data manager which handles reading/writing data
      */
-    public void doneAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
+    public String doneAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String[] params = input.split(" ");
 
         if (params.length < 2) {
@@ -167,8 +107,8 @@ public class Output {
         Task done = tasksList.get(Integer.parseInt(params[1]) - 1);
         done.toggleStatus();
 
-        printDoneMsg(done);
         dataManager.writeToFile(tasksList);
+        return(printDoneMsg(done));
     }
 
     /**
@@ -177,7 +117,7 @@ public class Output {
      * @param input         user input
      * @param dataManager   data manager which handles reading/writing data
      */
-    public void addAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
+    public String addAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String taskDesc = "", dateTime = "";
         String[] checkFormat;
         String[] params = input.split(" ");
@@ -189,8 +129,8 @@ public class Output {
             Todo todo = new Todo(taskDesc);
 
             tasksList.add(todo);
-            printAddedTask(todo, tasksList.size());
             dataManager.writeToFile(tasksList);
+            return printAddedTask(todo, tasksList.size());
         } else if(params[0].equals("deadline")) {
             checkFormat = input.split(" /by ");
 
@@ -202,8 +142,8 @@ public class Output {
             Deadline deadline = new Deadline(taskDesc, dateTime);
 
             tasksList.add(deadline);
-            printAddedTask(deadline, tasksList.size());
             dataManager.writeToFile(tasksList);
+            return printAddedTask(deadline, tasksList.size());
         } else if(params[0].equals("event")) {
             checkFormat = input.split(" /at ");
 
@@ -215,9 +155,10 @@ public class Output {
             Event event = new Event(taskDesc, dateTime);
 
             tasksList.add(event);
-            printAddedTask(event, tasksList.size());
             dataManager.writeToFile(tasksList);
+            return printAddedTask(event, tasksList.size());
         }
+        return null;
     }
 
     /**
@@ -226,7 +167,7 @@ public class Output {
      * @param input         user input
      * @param dataManager   data manager which handles reading/writing data
      */
-    public void deleteAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
+    public String deleteAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String[] params = input.split(" ");
 
         if (params.length < 2) {
@@ -236,8 +177,8 @@ public class Output {
         }
         Task delete = tasksList.remove(Integer.parseInt(params[1]) - 1);
 
-        printDeleteMsg(delete, tasksList.size());
         dataManager.writeToFile(tasksList);
+        return printDeleteMsg(delete, tasksList.size());
     }
 
     /**
@@ -245,7 +186,7 @@ public class Output {
      * @param tasksList     list of tasks
      * @param input         user input
      */
-    public void findAction(ArrayList<Task> tasksList, String input) throws DukeException {
+    public String findAction(ArrayList<Task> tasksList, String input) throws DukeException {
         String[] params = input.split(" ");
         String toFind = "";
         ArrayList<Task> foundTasks = new ArrayList<>();
@@ -261,6 +202,6 @@ public class Output {
             }
         }
 
-        printFind(foundTasks, toFind);
+        return printFind(foundTasks, toFind);
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox"
          xmlns="http://javafx.com/javafx/">
@@ -22,7 +22,7 @@
             </HBox.margin>
         </Label>
         <HBox>
-            <Circle fx:id="profilePicture" pickOnBounds="true" radius="30"/>
+            <ImageView fx:id="displayPic" pickOnBounds="true" preserveRatio="true" fitHeight="99.0" fitWidth="99.0" />
             <padding>
                 <Insets left="8.0" right="8.0"/>
             </padding>
