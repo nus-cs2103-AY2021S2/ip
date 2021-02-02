@@ -87,12 +87,11 @@ public class Duke {
      * @return a short description of the excception.
      */
     public String showError(Exception e) {
-        // System.out.println(e);
-        return e.toString();
+        return e.getMessage();
     }
 
     /**
-     * Prints a greeting message.
+     * Returns a greeting message string.
      */
     public String greet() {
         return MESSAGE_COMMAND_GREET;
