@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -30,6 +34,31 @@ public class Oracle {
                         + "      -~:;===;======;=;;;:::~-,\n"
                         + "        .-~~::::;:::::~:~--.\n";
         System.out.println(logo + "\nGreetings Neo, what can the Oracle do for you?");
+
+        //load file if available
+        try {
+            File store = new File("./oracale_data.txt");
+            Scanner myReader = new Scanner(store);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] sorted = data.split("\u001E");
+                Boolean isDone = sorted[1].equals("T");
+                switch (sorted[0]){
+                    case "T":
+                        db.add(new Todo(isDone, sorted[2]));
+                        break;
+                    case "D":
+                        db.add(new Deadline(isDone, sorted[2], sorted[3]));
+                        break;
+                    case "E":
+                        db.add(new Event(isDone, sorted[2], sorted[3]));
+                }
+            }
+            System.out.println("Loaded stored information from ./oracle_data.txt");
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not find the storage file, starting fresh database");
+        }
 
         // SCANNER takes input from user in a while loop, parses input using a series of if-else statements
         Scanner S = new Scanner(System.in);
@@ -130,6 +159,19 @@ public class Oracle {
             else {
                 System.out.println("Your words are unclear, Neo");
             }
+        }
+
+        // store data
+        try {
+            FileWriter myWriter = new FileWriter("./oracle_data.txt");
+            for (Task task : db){
+                myWriter.write(task.toStorage()+ '\n');
+            }
+            myWriter.close();
+            System.out.println("Successfully saved the information");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }
