@@ -47,6 +47,15 @@ public class Ui {
     }
 
     /**
+     * Reminds user of saved tasks found.
+     * @param string Saved tasks found.
+     */
+    void find(String string) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(string);
+    }
+
+    /**
      * Reminds user that a task has been saved.
      * @param task Saved task.
      * @param tasks Number of tasks after saving.

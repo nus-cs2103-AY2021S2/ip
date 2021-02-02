@@ -5,6 +5,7 @@ event project meeting /at 2021-01-18
 list
 todo
 blah
+find book
 delete 2
 list
 bye
