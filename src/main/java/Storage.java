@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Loads and saves tasks from and into the specified file
  */
 public class Storage {
-    protected static ArrayList<String> tasksLoaded = new ArrayList<>();
+    protected static ArrayList<String> loadedTasks = new ArrayList<>();
     protected String filePath;
 
     /**
@@ -30,9 +30,11 @@ public class Storage {
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String task = s.nextLine();
-            tasksLoaded.add(task);
+            loadedTasks.add(task);
         }
-        return tasksLoaded;
+        assert loadedTasks.size() >= 0 : "The list of tasks loaded from the specified file "
+                + "must have size >= 0";
+        return loadedTasks;
     }
 
     /**

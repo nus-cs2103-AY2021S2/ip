@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     protected static ArrayList<Task> updatedTaskList;
-    protected static ArrayList<String> loadedList;
+    protected static ArrayList<String> loadedTaskList;
 
     /**
      * Initializes a TaskList object in the situation where the specified
@@ -25,7 +25,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<String> loadedList) throws DukeException {
         updatedTaskList = new ArrayList<>();
-        TaskList.loadedList = loadedList;
+        TaskList.loadedTaskList = loadedList;
         updateTaskList();
     }
 
@@ -35,8 +35,8 @@ public class TaskList {
      * @throws DukeException if user command is invalid
      */
     public static void updateTaskList() throws DukeException {
-        for (int i = 0; i < loadedList.size(); i++) {
-            String storedTaskString = loadedList.get(i);
+        for (int i = 0; i < loadedTaskList.size(); i++) {
+            String storedTaskString = loadedTaskList.get(i);
             if (storedTaskString.startsWith("[T]")) {
                 String task = getTodoTask(storedTaskString);
 

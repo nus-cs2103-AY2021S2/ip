@@ -25,10 +25,6 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     @FXML
     private ScrollPane scrollPane;
-    @FXML
-    public void initialize() {
-        scrollPane.vvalueProperty().bind(dialog.heightProperty());
-    }
 
     private DialogBox(String text, Image img) {
         try {
@@ -42,6 +38,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setWrapText(true);
+        scrollPane.setFitToWidth(true);
         displayPicture.setImage(img);
     }
 
