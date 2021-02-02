@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefWidth="600.0" maxHeight="Infinity" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox fx:id="vbox" alignment="TOP_RIGHT" maxWidth="-Infinity" prefWidth="400.0" maxHeight="Infinity">
+           <children>
+                <Label fx:id="senderName" alignment="TOP_RIGHT" contentDisplay="CENTER" text="Label" wrapText="true">
+                 <font>
+                    <Font name="System Bold" size="12.104348182678223" />
+                 </font>
+              </Label>
+                <Label fx:id="messageContent" alignment="TOP_RIGHT" contentDisplay="CENTER" text="Label" textAlignment="RIGHT" wrapText="true" maxHeight="Infinity"/>
+           </children>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
+        </VBox>
+          <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+           <HBox.margin>
+              <Insets left="20.0" right="10.0" />
+           </HBox.margin>
+        </ImageView>
+     </children>
+    <padding>
+        <Insets bottom="20.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
