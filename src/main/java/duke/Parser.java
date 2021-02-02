@@ -3,8 +3,6 @@ package duke;
 import java.time.LocalDate;
 
 public class Parser {
-    private final Ui ui = new Ui();
-
     public Command parseCommand(String input) throws DukeException {
         String[] inputBreakdown = input.split(" ", 2);
         try {
@@ -43,8 +41,8 @@ public class Parser {
 
     public Event parseEventCommand(String input) throws DukeException {
         checkEmptyInput(input);
-        String[] args = input.substring(6).split(" /at ");
-        return new Event(args[0], args[1]);
+        String[] args = input.substring(6).split(" /on ");
+        return new Event(args[0], LocalDate.parse(args[1]));
     }
 
     public boolean checkEmptyInput(String input) throws DukeException {

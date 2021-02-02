@@ -1,15 +1,18 @@
 package duke;
 
-public class Event extends Task {
-    protected String timing;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String location) {
+public class Event extends Task {
+    private LocalDate date;
+
+    public Event(String description, LocalDate date) {
         super(description);
-        this.timing = timing;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "E | " + super.toString() + " | " + timing;
+        return "E | " + super.toString() + " | " + date.format(DateTimeFormatter.ofPattern("dd MMM YYYY"));
     }
 }

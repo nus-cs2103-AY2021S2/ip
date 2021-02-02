@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDate date;
+    private LocalDate date;
 
     public Deadline(String description, LocalDate date) {
         super(description);

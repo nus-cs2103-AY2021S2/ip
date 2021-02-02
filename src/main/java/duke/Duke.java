@@ -4,12 +4,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
-    public static final String logo = " ____        _\n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String divider = "____________________________________________________________\n";
     public static final String filePath = "data/duke.txt";
 
     private Storage storage;
@@ -20,7 +14,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, ui);
         try {
             tasks = new TaskList(storage.load());
         } catch(DukeException error) {
@@ -30,75 +24,47 @@ public class Duke {
     }
 
     public void run() {
-        ui.showWelcome();
-
         Scanner sc = new Scanner(System.in);
-
+        ui.showWelcome();
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
             try {
                 Command command = parser.parseCommand(input);
                 switch(command) {
                     case BYE:
-                        ui.showGoodBye();
+                        ui.showGoodbye();
                         storage.save(tasks);
                         break;
                     case LIST:
                         ui.showTasks(tasks);
                         break;
                     case DONE:
-                        try {
-                            int index = parser.parseDoneCommand(input);
-                            ui.showMessage("Nice! I've marked this task as done:\n  " + tasks.markTaskAsDone(index));
-                            storage.save(tasks);
-                        } catch (DukeException error) {
-                            ui.showErrorMessage("Please select a valid item to mark as done.");
-                        } catch (IndexOutOfBoundsException error) {
-                            ui.showErrorMessage("Selected item does not exist.");
-                        }
+                        int taskToMarkAsDone = parser.parseDoneCommand(input);
+                        ui.showMessage("Nice! I've marked this task as done:\n  " + tasks.markTaskAsDone(taskToMarkAsDone));
+                        storage.save(tasks);
                         break;
                     case DELETE:
-                        try {
-                            int index = parser.parseDeleteCommand(input);
-                            ui.showMessage("Noted. I've removed this task:\n  " + tasks.deleteTask(index) + "\nNow you have " + tasks.getSize() + " tasks in the list.");
-                            storage.save(tasks);
-                        } catch (DukeException error) {
-                            ui.showErrorMessage("Please select an item to delete.");
-                        } catch (IndexOutOfBoundsException error) {
-                            ui.showErrorMessage("Selected item does not exist.");
-                        }
+                        int taskToDelete = parser.parseDeleteCommand(input);
+                        ui.showMessage("Noted. I've removed this task:\n  " + tasks.deleteTask(taskToDelete) + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                        storage.save(tasks);
                         break;
                     case TODO:
-                        try {
-                            Todo curr = parser.parseTodoCommand(input);
-                            tasks.addTask(curr);
-                            ui.showMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
-                            storage.save(tasks);
-                        } catch (DukeException error) {
-                            ui.showErrorMessage("The description of a todo cannot be empty.");
-                        }
+                        Todo newTodo = parser.parseTodoCommand(input);
+                        tasks.addTask(newTodo);
+                        ui.showMessage("Got it. I've added this task:\n  " + newTodo + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                        storage.save(tasks);
                         break;
                     case DEADLINE:
-                        try {
-                            Deadline curr = parser.parseDeadlineCommand(input);
-                            tasks.addTask(curr);
-                            ui.showMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
-                            storage.save(tasks);
-                        } catch (DukeException error) {
-                            ui.showErrorMessage("The description of a deadline cannot be empty");
-                        } catch(DateTimeParseException error) {
-                            ui.showErrorMessage("The date provided is invalid");
-                        }
+                        Deadline newDeadline = parser.parseDeadlineCommand(input);
+                        tasks.addTask(newDeadline);
+                        ui.showMessage("Got it. I've added this task:\n  " + newDeadline + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                        storage.save(tasks);
                         break;
                     case EVENT:
-                        try {
-                            Event curr = parser.parseEventCommand(input);
-                            tasks.addTask(curr);
-                            ui.showMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
-                            storage.save(tasks);
-                        } catch (DukeException error) {
-                            ui.showErrorMessage("The description of an event cannot be empty");
-                        }
+                        Event newEvent = parser.parseEventCommand(input);
+                        tasks.addTask(newEvent);
+                        ui.showMessage("Got it. I've added this task:\n  " + newEvent + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                        storage.save(tasks);
                         break;
                     case HELP:
                         ui.showHelpMessage();
@@ -106,6 +72,10 @@ public class Duke {
                 }
             } catch(DukeException error) {
                 ui.showInputError();
+            } catch(DateTimeParseException error) {
+                ui.showErrorMessage("The date provided is invalid");
+            } catch (IndexOutOfBoundsException error) {
+                ui.showErrorMessage("Selected item does not exist.");
             }
         }
     }

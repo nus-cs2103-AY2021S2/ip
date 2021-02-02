@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    protected String filePath;
-    private static final Ui ui = new Ui();
+    private String filePath;
+    private Ui ui;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
+        this.ui = ui;
     }
 
     public void save(TaskList taskList) {
@@ -38,40 +39,41 @@ public class Storage {
     public List<Task> load() throws DukeException {
         List<Task> data = new ArrayList<>();
         try {
-            File txt = new File(this.filePath);
-            if(!txt.exists()) {
-                File parentDir = txt.getParentFile();
-                if(!parentDir.exists()) {
-                    parentDir.mkdir();
+            File file = new File(this.filePath);
+            if(!file.exists()) {
+                File parentDirectory = file.getParentFile();
+                if(!parentDirectory.exists()) {
+                    parentDirectory.mkdir();
                 }
-                txt.createNewFile();
+                file.createNewFile();
             }
-            Scanner myReader = new Scanner(txt);
-            while(myReader.hasNextLine()) {
-                String[] taskInfo = myReader.nextLine().split(" \\| ");
-                Task curr;
+            Scanner fileReader = new Scanner(file);
+            while(fileReader.hasNextLine()) {
+                String[] taskInfo = fileReader.nextLine().split(" \\| ");
+                Task currentTask;
                 switch(taskInfo[0]) {
                     case "T":
-                        curr = new Todo(taskInfo[2]);
+                        currentTask = new Todo(taskInfo[2]);
                         if(taskInfo[1].equals("\u2713")) {
-                            curr.markAsDone();
+                            currentTask.markAsDone();
                         }
-                        data.add(curr);
+                        data.add(currentTask);
                         break;
                     case "D":
-                        String localDate = taskInfo[3].replaceAll(" ", "-");
-                        curr = new Deadline(taskInfo[2], LocalDate.parse(localDate, DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
+                        String deadlineDate = taskInfo[3].replaceAll(" ", "-");
+                        currentTask = new Deadline(taskInfo[2], LocalDate.parse(deadlineDate, DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
                         if(taskInfo[1].equals("\u2713")) {
-                            curr.markAsDone();
+                            currentTask.markAsDone();
                         }
-                        data.add(curr);
+                        data.add(currentTask);
                         break;
                     case "E":
-                        curr = new Event(taskInfo[2], taskInfo[3]);
+                        String eventDate = taskInfo[3].replaceAll(" ", "-");
+                        currentTask = new Event(taskInfo[2], LocalDate.parse(eventDate, DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
                         if(taskInfo[1].equals("\u2713")) {
-                            curr.markAsDone();
+                            currentTask.markAsDone();
                         }
-                        data.add(curr);
+                        data.add(currentTask);
                         break;
                 }
             }
