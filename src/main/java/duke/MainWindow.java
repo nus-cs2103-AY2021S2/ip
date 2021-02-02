@@ -10,7 +10,6 @@ import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.tasks.TaskList;
 import duke.ui.DialogBox;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -19,6 +18,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * The Main Window. Provides the basic application layout.
+ */
 public class MainWindow extends VBox {
     private Storage storage;
     private TaskList taskList;
@@ -36,16 +38,24 @@ public class MainWindow extends VBox {
     private Image dukeImage;
 
     /**
-     * This method is called to initialize a controller after its root element has been completely processed.
+     * Sets up the avatar icons.
      */
     @FXML
     public void initialize() {
         userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
         dukeImage = new Image(getClass().getResourceAsStream("/images/duke.png"));
+
         // Set the scroll pane to automatically scroll down when the text reaches the bottom
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Set up the required components for the MainWindow.
+     *
+     * @param storage {@code Storage} object that handles file operations.
+     * @param taskList The loaded task list from storage.
+     * @param primaryStage The primary stage of the application.
+     */
     public void setComponents(Storage storage, TaskList taskList, Stage primaryStage) {
         this.storage = storage;
         this.taskList = taskList;
@@ -105,8 +115,8 @@ public class MainWindow extends VBox {
     /**
      * Executes the command and return a CommandResult instance.
      *
-     * @param command user command
-     * @return result command
+     * @param command User command.
+     * @return Result command.
      */
     private CommandResult executeCommand(Command command) {
         command.setTaskList(taskList);
@@ -116,7 +126,7 @@ public class MainWindow extends VBox {
     /**
      * Update the cached task list if it was modified by the previous command.
      *
-     * @param taskList updated task list
+     * @param taskList Updated task list.
      */
     private void updateTaskListIfPresent(TaskList taskList) {
         if (taskList != null) {

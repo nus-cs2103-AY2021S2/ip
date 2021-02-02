@@ -11,7 +11,7 @@ public abstract class Command {
     /**
      * Sets the current instance of task list that the command will operate on.
      *
-     * @param taskList the current instance of task list
+     * @param taskList The current instance of task list.
      */
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
@@ -20,7 +20,7 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @return result command
+     * @return Result command.
      */
     public abstract CommandResult execute();
 }

@@ -20,8 +20,8 @@ public class ToDoTask extends Task {
      * Creates a {@code ToDoTask} object with the given task name,
      * with the task set to the boolean isCompleted.
      *
-     * @param name        name of the task
-     * @param isCompleted boolean indicating whether the task has been completed
+     * @param name        Name of the task.
+     * @param isCompleted Boolean indicating whether the task has been completed.
      */
     public ToDoTask(String name, boolean isCompleted) {
         super(IDENTIFIER, name, isCompleted);
@@ -29,7 +29,7 @@ public class ToDoTask extends Task {
 
     @Override
     public String getTaskType() {
-        return taskType;
+        return TASK_TYPE;
     }
 
     @Override

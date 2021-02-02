@@ -1,6 +1,15 @@
 package duke.parser;
 
 import static duke.utils.Messages.MESSAGE_EMPTY_DESCRIPTION;
+import static duke.utils.Messages.MESSAGE_ENTER_COMMAND;
+import static duke.utils.Messages.MESSAGE_FOLLOW_USAGE;
+import static duke.utils.Messages.MESSAGE_INDICATE_TASK;
+import static duke.utils.Messages.MESSAGE_INVALID_COMMAND;
+import static duke.utils.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static duke.utils.Messages.MESSAGE_INVALID_SYNTAX;
+import static duke.utils.Messages.MESSAGE_INVALID_TASK_INDEX;
+import static duke.utils.Messages.MESSAGE_INVALID_TIME_FORMAT;
+import static duke.utils.Messages.MESSAGE_MISSING_SEARCH_WORD;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -35,18 +44,18 @@ public class Parser {
     /**
      * Parses user input into a command.
      *
-     * @param userInput full user input string
-     * @return user command
-     * @throws InvalidCommandException     if the user pass in an unrecognized command
-     * @throws InvalidDescriptionException if the format of the arguments do not match the command
-     * @throws NoDescriptionException      if the arguments is empty when further information is required
+     * @param userInput Full user input string.
+     * @return A user command.
+     * @throws InvalidCommandException     If the user pass in an unrecognized command.
+     * @throws InvalidDescriptionException If the format of the arguments do not match the command.
+     * @throws NoDescriptionException      If the arguments is empty when further information is required.
      */
     public Command parseCommand(String userInput) throws InvalidCommandException,
             InvalidDescriptionException, NoDescriptionException {
         Matcher matcher = USER_COMMAND_FORMAT.matcher(userInput.strip());
 
         if (!matcher.matches()) {
-            throw new InvalidCommandException("Please enter a command.");
+            throw new InvalidCommandException(MESSAGE_ENTER_COMMAND);
         }
 
         // Get the command word as captured by the named-capturing group
@@ -74,16 +83,16 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return parseArgumentsForFind(arguments);
         default:
-            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException(MESSAGE_INVALID_COMMAND);
         }
     }
 
     /**
      * Parses the arguments for the todo command.
      *
-     * @param arguments user input arguments string
-     * @return {@code ToDoCommand}
-     * @throws NoDescriptionException if the description of the task is empty
+     * @param arguments User input arguments string.
+     * @return {@code ToDoCommand}.
+     * @throws NoDescriptionException If the description of the task is empty.
      */
     private Command parseArgumentsForToDo(String arguments) throws NoDescriptionException {
         if (arguments.isBlank()) {
@@ -95,10 +104,10 @@ public class Parser {
     /**
      * Parses the arguments for the deadline command.
      *
-     * @param arguments user input arguments string
-     * @return {@code DeadlineCommand}
-     * @throws NoDescriptionException      if the description of the task is empty
-     * @throws InvalidDescriptionException if the format of the deadline is invalid
+     * @param arguments User input arguments string.
+     * @return {@code DeadlineCommand}.
+     * @throws NoDescriptionException      If the description of the task is empty.
+     * @throws InvalidDescriptionException If the format of the deadline is invalid.
      */
     private Command parseArgumentsForDeadline(String arguments) throws NoDescriptionException,
             InvalidDescriptionException {
@@ -106,8 +115,8 @@ public class Parser {
             throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         }
         if (!arguments.contains("/by")) {
-            throw new InvalidDescriptionException("Invalid description syntax. "
-                    + "Please follow the usage as shown below:\n"
+            throw new InvalidDescriptionException(MESSAGE_INVALID_SYNTAX + "\n"
+                    + MESSAGE_FOLLOW_USAGE + "\n"
                     + DeadlineCommand.MESSAGE_USAGE);
         }
         // Split the user input into the task name and the datetime string
@@ -132,35 +141,35 @@ public class Parser {
     }
 
     /**
-     * Parses the input date string format into a {@code LocalDate} object
+     * Parses the input date string format into a {@code LocalDate} object.
      *
-     * @param dateString user input date string
-     * @return {@code LocalDate} object representing the date
-     * @throws InvalidDescriptionException if the format of the date is invalid
+     * @param dateString User input date string.
+     * @return {@code LocalDate} object representing the date.
+     * @throws InvalidDescriptionException If the format of the date is invalid.
      */
     private static LocalDate parseDate(String dateString) throws InvalidDescriptionException {
         try {
             return LocalDate.parse(dateString, InputDateTimeFormat.INPUT_DATE_FORMAT);
         } catch (DateTimeParseException ex) {
-            throw new InvalidDescriptionException("Unable to parse date. "
-                    + "Please follow the usage as shown below:\n"
+            throw new InvalidDescriptionException(MESSAGE_INVALID_DATE_FORMAT + "\n"
+                    + MESSAGE_FOLLOW_USAGE + "\n"
                     + DeadlineCommand.MESSAGE_USAGE);
         }
     }
 
     /**
-     * Parses the input time string format into a {@code LocalTime} object
+     * Parses the input time string format into a {@code LocalTime} object.
      *
-     * @param timeString user input time string
-     * @return {@code LocalTime} object representing the time
-     * @throws InvalidDescriptionException if the format of the time is invalid
+     * @param timeString User input time string.
+     * @return {@code LocalTime} object representing the time.
+     * @throws InvalidDescriptionException If the format of the time is invalid.
      */
     private static LocalTime parseTime(String timeString) throws InvalidDescriptionException {
         try {
             return LocalTime.parse(timeString, InputDateTimeFormat.INPUT_TIME_FORMAT);
         } catch (DateTimeParseException ex) {
-            throw new InvalidDescriptionException("Unable to parse time. "
-                    + "Please follow the usage as shown below:\n"
+            throw new InvalidDescriptionException(MESSAGE_INVALID_TIME_FORMAT + "\n"
+                    + MESSAGE_FOLLOW_USAGE + "\n"
                     + DeadlineCommand.MESSAGE_USAGE);
         }
     }
@@ -168,10 +177,10 @@ public class Parser {
     /**
      * Parses the arguments for the event command.
      *
-     * @param arguments user input arguments string
-     * @return {@code EventCommand}
-     * @throws NoDescriptionException      if the description of the task is empty
-     * @throws InvalidDescriptionException if the format of the event time is invalid
+     * @param arguments User input arguments string.
+     * @return {@code EventCommand}.
+     * @throws NoDescriptionException      If the description of the task is empty.
+     * @throws InvalidDescriptionException If the format of the event time is invalid.
      */
     private Command parseArgumentsForEvent(String arguments) throws NoDescriptionException,
             InvalidDescriptionException {
@@ -179,9 +188,9 @@ public class Parser {
             throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         }
         if (!arguments.contains("/at")) {
-            throw new InvalidDescriptionException("Invalid description syntax. "
-                    + "Please follow the usage as shown below:\n"
-                    + "Usage: event <task_description> /at <event_time>");
+            throw new InvalidDescriptionException(MESSAGE_INVALID_SYNTAX + "\n"
+                    + MESSAGE_FOLLOW_USAGE + "\n"
+                    + EventCommand.MESSAGE_USAGE);
         }
         String[] eventInputArr = arguments.split("/at");
         String eventTaskName = eventInputArr[0].strip();
@@ -192,50 +201,57 @@ public class Parser {
     /**
      * Parses the arguments for the done command.
      *
-     * @param arguments user input arguments string
-     * @return {@code DoneCommand}
-     * @throws InvalidDescriptionException if the description is not a valid index
-     * @throws NoDescriptionException      if the description of the task is empty
-     * @throws IndexOutOfBoundsException   if the specified task number is outside of range
+     * @param arguments User input arguments string.
+     * @return {@code DoneCommand}.
+     * @throws InvalidDescriptionException If the description is not a valid index.
+     * @throws NoDescriptionException      If the task number is missing.
+     * @throws IndexOutOfBoundsException   If the specified task number is outside of range.
      */
     private Command parseArgumentsForDone(String arguments) throws InvalidDescriptionException,
             NoDescriptionException, IndexOutOfBoundsException {
         if (arguments.isBlank()) {
-            throw new NoDescriptionException("Please indicate a task number to be marked as done.");
+            throw new NoDescriptionException(MESSAGE_INDICATE_TASK);
         }
         try {
             int index = Integer.parseInt(arguments.strip()) - 1; // Account for 0-based indexing
             return new DoneCommand(index);
         } catch (NumberFormatException ex) {
-            throw new InvalidDescriptionException("Please enter a valid task number");
+            throw new InvalidDescriptionException(MESSAGE_INVALID_TASK_INDEX);
         }
     }
 
     /**
      * Parses the arguments for the delete command.
      *
-     * @param arguments user input arguments string
-     * @return {@code DeleteCommand}
-     * @throws InvalidDescriptionException if the description is not a valid index
-     * @throws NoDescriptionException      if the description of the task is empty
-     * @throws IndexOutOfBoundsException   if the specified task number is outside of range
+     * @param arguments User input arguments string.
+     * @return {@code DeleteCommand}.
+     * @throws InvalidDescriptionException If the description is not a valid index.
+     * @throws NoDescriptionException      If the task number is missing.
+     * @throws IndexOutOfBoundsException   If the specified task number is outside of range.
      */
     private Command parseArgumentsForDelete(String arguments) throws InvalidDescriptionException,
             NoDescriptionException, IndexOutOfBoundsException {
         if (arguments.isBlank()) {
-            throw new NoDescriptionException("Please indicate a task number to be deleted.");
+            throw new NoDescriptionException(MESSAGE_INDICATE_TASK);
         }
         try {
             int index = Integer.parseInt(arguments.strip()) - 1; // Account for 0-based indexing
             return new DeleteCommand(index);
         } catch (NumberFormatException ex) {
-            throw new InvalidDescriptionException("Please enter a valid task number");
+            throw new InvalidDescriptionException(MESSAGE_INVALID_TASK_INDEX);
         }
     }
 
+    /**
+     * Parses the arguments for the find command.
+     *
+     * @param arguments User input arguments string.
+     * @return {@code FindCommand}.
+     * @throws NoDescriptionException If the search word is missing.
+     */
     private Command parseArgumentsForFind(String arguments) throws NoDescriptionException {
         if (arguments.isBlank()) {
-            throw new NoDescriptionException("Please enter a search word or phrase!");
+            throw new NoDescriptionException(MESSAGE_MISSING_SEARCH_WORD);
         }
         return new FindCommand(arguments);
     }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTaskTest {
-    private static final String taskName = "Read Book";
+    private static String taskName = "Read Book";
 
     @Test
     public void testStringConversion() {

@@ -23,4 +23,13 @@ public class Messages {
     public static final String MESSAGE_HELP = "Here are the list of available commands:";
 
     public static final String MESSAGE_EMPTY_DESCRIPTION = "OOPS!!! The description of a task cannot be empty.";
+    public static final String MESSAGE_ENTER_COMMAND = "Please enter a command.";
+    public static final String MESSAGE_INVALID_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String MESSAGE_INVALID_SYNTAX = "Invalid description syntax.";
+    public static final String MESSAGE_FOLLOW_USAGE = "Please follow the usage as shown below:";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Unable to parse date.";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Unable to parse time.";
+    public static final String MESSAGE_INDICATE_TASK = "Please indicate a task number.";
+    public static final String MESSAGE_INVALID_TASK_INDEX = "Please enter a valid task number";
+    public static final String MESSAGE_MISSING_SEARCH_WORD = "Please enter a search word or phrase!";
 }

@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class EventTaskTest {
-    private static final String taskName = "Project Meeting";
-    private static final String eventTime = "Friday 2-4pm";
+    private static String taskName = "Project Meeting";
+    private static String eventTime = "Friday 2-4pm";
 
     @Test
     public void testStringConversion() {

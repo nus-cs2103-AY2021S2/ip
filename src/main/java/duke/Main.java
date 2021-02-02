@@ -7,7 +7,6 @@ import duke.storage.InvalidStorageFilePathException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -41,7 +40,7 @@ public class Main extends Application {
     /**
      * Initializes the required components and prints the welcome greeting.
      *
-     * @param args an optional user-specified filepath used to initialize the storage
+     * @param args An optional user-specified filepath used to initialize the storage.
      */
     private void initialize(String[] args) {
         try {
@@ -59,9 +58,9 @@ public class Main extends Application {
      * Initializes the storage using the specified filepath. If user did not specify a filepath,
      * then the default filepath will be used.
      *
-     * @param args an optional user-specified filepath used to initialize the storage
-     * @return a Storage object that is used to read and write to a file
-     * @throws InvalidStorageFilePathException if the specified filepath is invalid
+     * @param args An optional user-specified filepath used to initialize the storage.
+     * @return A {@code Storage} object that is used to read and write to a file.
+     * @throws InvalidStorageFilePathException If the specified filepath is invalid.
      */
     private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
         if (args.length > 0) {

@@ -6,15 +6,13 @@ import duke.Main;
 import duke.MainWindow;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Handles the input/output of the application.
- * Responsible for getting user input and printing messages to the console.
+ * Manages the UI component of the application.
  */
 public class Ui {
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
@@ -25,8 +23,8 @@ public class Ui {
     /**
      * Creates a {@code Ui} object that handles the GUI.
      *
-     * @param storage storage object that handles file operations
-     * @param taskList the loaded task list from storage
+     * @param storage {@code Storage} object that handles file operations.
+     * @param taskList The loaded task list from storage.
      */
     public Ui(Storage storage, TaskList taskList) {
         this.storage = storage;
@@ -36,7 +34,7 @@ public class Ui {
     /**
      * Starts the GUI.
      *
-     * @param primaryStage the primary stage of the application
+     * @param primaryStage The primary stage of the application.
      */
     public void start(Stage primaryStage) {
         try {

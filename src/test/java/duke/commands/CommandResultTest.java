@@ -16,34 +16,35 @@ import duke.tasks.TaskList;
 public class CommandResultTest {
     @Test
     public void getMessageForUser_emptyMessage_success() {
-        assertEquals("", new CommandResult("").getMessageForUser());
+        assertEquals("", new CommandResult("", true).getMessageForUser());
     }
 
     @Test
     public void getMessageForUser_nonEmptyMessage_success() {
-        assertEquals("Working", new CommandResult("Working").getMessageForUser());
+        assertEquals("Working", new CommandResult("Working", true).getMessageForUser());
     }
 
     @Test
     public void getUpdatedTaskList_nullInput_nullReturned() {
-        assertNull(new CommandResult("", null).getUpdatedTaskList());
+        assertNull(new CommandResult("", true).getUpdatedTaskList());
     }
 
     @Test
     public void getUpdatedTaskList_nonEmptyTaskList_success() {
         TaskListStub taskListStub = new TaskListStub();
-        assertEquals(taskListStub, new CommandResult("", taskListStub).getUpdatedTaskList());
+        assertEquals(taskListStub, new CommandResult("", taskListStub, true).getUpdatedTaskList());
     }
 
     @Test
     public void equals() {
-        CommandResult commandResult = new CommandResult("Message: completed");
+        CommandResult commandResult = new CommandResult("Message: completed", true);
 
-        assertTrue(commandResult.equals(new CommandResult("Message: completed")));
-        assertTrue(commandResult.equals(new CommandResult("Message: completed", null)));
+        assertTrue(commandResult.equals(new CommandResult("Message: completed", true)));
+        assertTrue(commandResult.equals(new CommandResult("Message: completed", true)));
 
-        assertFalse(commandResult.equals(new CommandResult("Message: not completed")));
-        assertFalse(commandResult.equals(new CommandResult("Message: completed", new TaskListStub())));
+        assertFalse(commandResult.equals(new CommandResult("Message: not completed", true)));
+        assertFalse(commandResult.equals(new CommandResult("Message: completed",
+                new TaskListStub(), true)));
         assertFalse(commandResult.equals(1));
     }
 

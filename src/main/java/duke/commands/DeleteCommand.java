@@ -16,19 +16,26 @@ public class DeleteCommand extends Command {
             + "Usage: delete <task_number>\n"
             + "Example: delete 2";
 
-    private final int index;
+    private final int INDEX;
 
+    /**
+     * Creates a {@code DeleteCommand} object with the index of the task in the task list to be deleted.
+     *
+     * @param index Index of the task to be deleted.
+     */
     public DeleteCommand(int index) {
-        this.index = index;
+        INDEX = index;
     }
 
     @Override
     public CommandResult execute() {
         try {
-            Task task = taskList.getTask(index);
-            taskList.deleteTask(index);
-            return new CommandResult(MESSAGE_DELETED_TASK + "\n  " + task.toString() + "\n"
-                    + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()), taskList, false);
+            Task task = taskList.getTask(INDEX);
+            taskList.deleteTask(INDEX);
+            String messageForUser = MESSAGE_DELETED_TASK + "\n"
+                    + "  " + task.toString() + "\n"
+                    + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size());
+            return new CommandResult(messageForUser, taskList, false);
         } catch (IndexOutOfBoundsException ex) {
             return new CommandResult(MESSAGE_INVALID_INDEX, false);
         }

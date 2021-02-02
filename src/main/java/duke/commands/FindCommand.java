@@ -16,10 +16,15 @@ public class FindCommand extends Command {
             + "Usage: find <keyword_or_phrase>"
             + "Example: find book";
 
-    private final String searchWord;
+    private final String SEARCH_WORD;
 
+    /**
+     * Creates a {@code FindCommand} object with the given search word or phrase.
+     *
+     * @param searchWord Keyword or phrase to be used for filtering.
+     */
     public FindCommand(String searchWord) {
-        this.searchWord = searchWord;
+        SEARCH_WORD = searchWord;
     }
 
     @Override
@@ -27,7 +32,7 @@ public class FindCommand extends Command {
         StringBuilder tasksWithSearchWord = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.getTask(i - 1);
-            if (task.getName().contains(searchWord)) {
+            if (task.getName().contains(SEARCH_WORD)) {
                 tasksWithSearchWord.append(String.format(MESSAGE_INDEX_TASK_FORMAT, i, taskList.getTask(i - 1)));
                 tasksWithSearchWord.append("\n");
             }
@@ -36,7 +41,8 @@ public class FindCommand extends Command {
             return new CommandResult(MESSAGE_NO_MATCHES, false);
         } else {
             tasksWithSearchWord.deleteCharAt(tasksWithSearchWord.length() - 1);
-            return new CommandResult(MESSAGE_FOUND_TASKS + "\n" + tasksWithSearchWord.toString(), false);
+            String messageForUser = MESSAGE_FOUND_TASKS + "\n" + tasksWithSearchWord.toString();
+            return new CommandResult(messageForUser, false);
         }
     }
 }

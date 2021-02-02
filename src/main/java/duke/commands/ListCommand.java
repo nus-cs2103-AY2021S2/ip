@@ -25,7 +25,8 @@ public class ListCommand extends Command {
                     tasksListAsString.append("\n");
                 }
             }
-            return new CommandResult(MESSAGE_SHOW_TASKLIST + "\n" + tasksListAsString.toString(), false);
+            String messageForUser = MESSAGE_SHOW_TASKLIST + "\n" + tasksListAsString.toString();
+            return new CommandResult(messageForUser, false);
         }
     }
 }

@@ -11,10 +11,10 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTaskTest {
-    private static final String taskName = "Return Book";
-    private static final LocalDate date = LocalDate.parse("24/1/2021",
+    private static String taskName = "Return Book";
+    private static LocalDate date = LocalDate.parse("24/1/2021",
             DateTimeFormatter.ofPattern("d/M/y"));
-    private static final LocalTime time = LocalTime.parse("1800",
+    private static LocalTime time = LocalTime.parse("1800",
             DateTimeFormatter.ofPattern("HHmm"));
 
     @Test

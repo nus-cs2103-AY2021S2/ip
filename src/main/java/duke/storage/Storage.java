@@ -21,13 +21,18 @@ import duke.utils.OutputDateTimeFormat;
  */
 public class Storage {
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
+    private static final String MESSAGE_INVALID_FILEPATH = "The file path of a storage file should end with '.txt'";
+    private static final String MESSAGE_FAILED_INITIALIZATION = "Failed to initialize storage." + "\n"
+            + "This error could be due to an invalid file path." + "\n"
+            + "Exiting...";
+    private static final String MESSAGE_ERROR_WRITING_TO_FILE = "Error writing data to file: ";
 
-    private final Path path;
+    private final Path PATH;
 
     /**
      * Creates a {@code Storage} object with the default file path.
      *
-     * @throws InvalidStorageFilePathException if the default file path is invalid
+     * @throws InvalidStorageFilePathException If the default file path is invalid.
      */
     public Storage() throws InvalidStorageFilePathException {
         this(DEFAULT_FILEPATH);
@@ -36,26 +41,25 @@ public class Storage {
     /**
      * Creates a {@code Storage} object with the given file path.
      *
-     * @param filePath file path to read or write to
-     * @throws InvalidStorageFilePathException if the file path is invalid
+     * @param filePath File path to read or write to.
+     * @throws InvalidStorageFilePathException If the file path is invalid.
      */
     public Storage(String filePath) throws InvalidStorageFilePathException {
         if (!isValidFilePath(filePath)) {
-            throw new InvalidStorageFilePathException("The file path of a storage file should end with '.txt'");
+            throw new InvalidStorageFilePathException(MESSAGE_INVALID_FILEPATH);
         }
         try {
-            path = Path.of(filePath);
+            PATH = Path.of(filePath);
         } catch (InvalidPathException ex) {
-            throw new InvalidStorageFilePathException("Failed to initialize storage. This error could be due to"
-                    + "an invalid file path.\nExiting...");
+            throw new InvalidStorageFilePathException(MESSAGE_FAILED_INITIALIZATION);
         }
     }
 
     /**
      * Checks if a file indicated by the given file path is text file.
      *
-     * @param filePath file path to be checked
-     * @return true if the file path ends with '.txt', else false
+     * @param filePath File path to be checked.
+     * @return True if the file path ends with '.txt', else false.
      */
     private static boolean isValidFilePath(String filePath) {
         return filePath.endsWith(".txt");
@@ -64,8 +68,8 @@ public class Storage {
     /**
      * Saves the list of tasks by writing into the file if the list if updated by the previous command.
      *
-     * @param taskList updated task list
-     * @throws StorageException if an error occurs while writing to the file
+     * @param taskList Updated task list.
+     * @throws StorageException If an error occurs while writing to the file.
      */
     public void saveTasksIfPresent(TaskList taskList) throws StorageException {
         if (taskList == null) {
@@ -73,28 +77,28 @@ public class Storage {
         }
         try {
             // Create directories in the file path that do not exist yet
-            Path pathToParentDirectory = path.getParent();
+            Path pathToParentDirectory = PATH.getParent();
             Files.createDirectories(pathToParentDirectory);
 
             List<String> taskStrings = Storage.convertAllTasksToString(taskList);
-            Files.write(path, taskStrings);
+            Files.write(PATH, taskStrings);
         } catch (IOException ex) {
-            throw new StorageException("Error writing data to file: " + path);
+            throw new StorageException(MESSAGE_ERROR_WRITING_TO_FILE + PATH);
         }
     }
 
     /**
      * Loads the list of tasks found in the file and parses the tasks into an operational format.
      *
-     * @return {@code TaskList} that represents the current list of tasks in the file
-     * @throws IOException if an error occurs while reading from the file
+     * @return {@code TaskList} that represents the current list of tasks in the file.
+     * @throws IOException If an error occurs while reading from the file.
      */
     public TaskList loadTasks() throws IOException {
         TaskList taskList = new TaskList();
-        if (!Files.exists(path) || !Files.isRegularFile(path)) {
+        if (!Files.exists(PATH) || !Files.isRegularFile(PATH)) {
             return taskList;
         }
-        List<String> taskStrings = Files.readAllLines(path);
+        List<String> taskStrings = Files.readAllLines(PATH);
         for (String s : taskStrings) {
             taskList.addTask(Storage.convertStringToTask(s));
         }
@@ -104,8 +108,8 @@ public class Storage {
     /**
      * Converts a task string into a {@code Task} object.
      *
-     * @param taskString task string to be converted
-     * @return {@code Task}
+     * @param taskString Task string to be converted.
+     * @return {@code Task}.
      */
     public static Task convertStringToTask(String taskString) {
         Task task = null;
@@ -141,6 +145,7 @@ public class Storage {
             break;
         default:
             // Should not reach here
+            throw new RuntimeException();
         }
         return task;
     }
@@ -148,8 +153,8 @@ public class Storage {
     /**
      * Converts a list of tasks into a list of strings formatted to be stored in a file.
      *
-     * @param taskList task list to be converted
-     * @return a list of formatted task strings
+     * @param taskList Task list to be converted.
+     * @return A list of formatted task strings.
      */
     public static List<String> convertAllTasksToString(TaskList taskList) {
         List<String> taskStrings = new ArrayList<>();
@@ -165,8 +170,8 @@ public class Storage {
      * String format: "taskType | taskStatus | taskName", with an additional " | additionalInfo]"
      * depending on the type of the task.
      *
-     * @param task task object to be converted
-     * @return formatted string describing the task
+     * @param task Task object to be converted.
+     * @return Formatted string describing the task.
      */
     public static String convertTaskToString(Task task) {
         StringBuilder encodedTaskString = new StringBuilder();
@@ -179,15 +184,19 @@ public class Storage {
 
         encodedTaskString.append(task.getName());
 
-        if (task.getTaskType().equals("D")) {
+        switch (task.getTaskType()) {
+        case "D":
             DeadlineTask deadlineTask = (DeadlineTask) task;
             encodedTaskString.append(" | ");
             encodedTaskString.append(deadlineTask.getDeadline());
-        } else if (task.getTaskType().equals("E")) {
+            return encodedTaskString.toString();
+        case "E":
             EventTask eventTask = (EventTask) task;
             encodedTaskString.append(" | ");
             encodedTaskString.append(eventTask.getEventTime());
+            return encodedTaskString.toString();
+        default:
+            return encodedTaskString.toString();
         }
-        return encodedTaskString.toString();
     }
 }
