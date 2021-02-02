@@ -41,7 +41,7 @@ public class Duke {
             Command command = Parser.parse(input);
             message += ("\n" + command.execute(tasks, ui, storage));
             message += ("\n" + ui.printLine());
-            System.out.println(message);
+            System.out.println(message); // For CLI
             return message;
         } catch (Exception e) {
             return e.getMessage();
