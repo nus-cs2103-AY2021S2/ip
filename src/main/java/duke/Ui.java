@@ -12,11 +12,6 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String divider = "____________________________________________________________\n";
-    private final Scanner in;
-
-    public Ui() {
-        in = new Scanner(System.in);
-    }
 
     /**
      * This method is used to output an input error message.
@@ -51,7 +46,7 @@ public class Ui {
     /**
      * This method is used to output the goodbye message.
      */
-    public void showGoodBye() {
+    public void showGoodbye() {
         showMessage("Bye. Hope to see you again soon!");
     }
 
@@ -61,13 +56,13 @@ public class Ui {
      */
     public void showHelpMessage() {
         showMessage("List of Available Commands:\n" +
-                "bye\t\t\t\t\t\t\t\t\t->\tTo exit application\n" +
-                "list\t\t\t\t\t\t\t\t->\tTo list tasks\n" +
-                "done <index>\t\t\t\t\t\t->\tTo mark task as done \n" +
-                "delete <index>\t\t\t\t\t\t->\tTo delete task\n" +
-                "todo <description>\t\t\t\t\t->\tTo create todo\n" +
-                "deadline <description> <date>\t\t->\tTo create deadline\n" +
-                "event <description> <date/time>\t\t->\tTo create event");
+                "bye -> To exit application\n" +
+                "list -> To list tasks\n" +
+                "done [index] -> To mark task as done \n" +
+                "delete [index] -> To delete task\n" +
+                "todo [description] -> To create todo\n" +
+                "deadline [description] /by [date] -> To create deadline\n" +
+                "event [description] /on [date] -> To create event");
     }
 
     /**

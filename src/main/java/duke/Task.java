@@ -5,8 +5,8 @@ package duke;
  * description supplied by the user. eg., <code>running</code>
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;

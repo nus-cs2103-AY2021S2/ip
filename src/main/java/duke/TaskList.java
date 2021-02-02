@@ -8,7 +8,7 @@ import java.util.List;
  * @see Task
  */
 public class TaskList {
-    protected List<Task> tasks;
+    private List<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();
