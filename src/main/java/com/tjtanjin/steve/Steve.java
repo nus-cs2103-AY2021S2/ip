@@ -10,7 +10,7 @@ import com.tjtanjin.steve.tasks.TaskHandler;
  */
 public class Steve {
 
-    private final Parser parser;
+    private final Parser PARSER;
 
     /**
      * Constructor for Steve which stores initializes key classes and stores parser to be used by UiHandler.
@@ -19,7 +19,7 @@ public class Steve {
         StorageHandler storageHandler = new StorageHandler("./data/tasks.json");
         TaskHandler taskHandler = new TaskHandler(storageHandler);
         CommandHandler commandHandler = new CommandHandler(taskHandler);
-        this.parser = new Parser(commandHandler);
+        this.PARSER = new Parser(commandHandler);
     }
 
     /**
@@ -27,6 +27,6 @@ public class Steve {
      * @return parser
      */
     public Parser getParser() {
-        return this.parser;
+        return this.PARSER;
     }
 }

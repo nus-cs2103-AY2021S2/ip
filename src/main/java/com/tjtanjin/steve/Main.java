@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final Steve steve = new Steve();
+    private final Steve STEVE = new Steve();
 
     /**
      * Overrides default start method of application in javafx.
@@ -29,7 +29,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<UiHandler>getController().setSteve(steve, fxmlLoader);
+            fxmlLoader.<UiHandler>getController().setSteve(STEVE, fxmlLoader);
             stage.show();
             stage.setTitle("Steve");
             stage.setResizable(false);
