@@ -16,5 +16,9 @@ bin/
 # User generated data
 /data/
 
+# Test generated data
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Settings files
+/.settings/
