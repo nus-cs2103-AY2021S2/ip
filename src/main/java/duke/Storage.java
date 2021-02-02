@@ -62,14 +62,14 @@ public class Storage {
                         'D',
                         task.isDone() ? 'X' : ' ',
                         task.getDescription(),
-                        ((Deadline) task).getBy());
+                        ((Deadline) task).getBy().toString());
                 break;
             case "EVENT":
                 toWrite = String.format("%c|%c|%s|%s",
                         'E',
                         task.isDone() ? 'X' : ' ',
                         task.getDescription(),
-                        ((Event) task).getAt());
+                        ((Event) task).getAt().toString());
                 break;
             }
             fw.write(toWrite + "\n");

@@ -5,6 +5,8 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.time.LocalDateTime;
+
 public class Parser {
     public static Task parseFromData(String dataInput) {
         String[] splitInput = dataInput.split("\\|", -1);
@@ -14,10 +16,10 @@ public class Parser {
             task = new Todo(splitInput[2]);
             break;
         case "D":
-            task = new Deadline(splitInput[2], splitInput[3]);
+            task = new Deadline(splitInput[2], LocalDateTime.parse(splitInput[3]));
             break;
         case "E":
-            task = new Event(splitInput[2], splitInput[3]);
+            task = new Event(splitInput[2], LocalDateTime.parse(splitInput[3]));
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + splitInput[0]);
@@ -28,6 +30,6 @@ public class Parser {
     }
 
     public void parseFromInput(String userInput){
-        
+
     }
 }
