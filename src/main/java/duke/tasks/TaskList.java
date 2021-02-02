@@ -9,6 +9,9 @@ import java.util.List;
 public class TaskList {
     private final List<Task> lst;
 
+    /**
+     * Creates a {@code Tasklist} object with an empty task list component.
+     */
     public TaskList() {
         lst = new ArrayList<>();
     }
@@ -45,6 +48,11 @@ public class TaskList {
         return lst;
     }
 
+    /**
+     * Checks if tasks in task list contains the keyword.
+     * @param keyword keyword
+     * @return list of Tasks containing the keyword
+     */
     public List<Task> tasksContainingKeyword(String keyword) {
         List<Task> tasksWithKeyword = new ArrayList<>();
         for (Task task : lst) {
@@ -52,7 +60,7 @@ public class TaskList {
                 tasksWithKeyword.add(task);
             }
         }
-        return  tasksWithKeyword;
+        return tasksWithKeyword;
     }
 
     public int size() {

@@ -6,6 +6,10 @@ package duke.command;
 public class DeleteCommand extends Command {
     private final String taskNumber;
 
+    /**
+     * Creates a {@code DeleteCommand} object with a task number component only.
+     * @param taskNumber
+     */
     public DeleteCommand(String taskNumber) {
         super("delete");
         this.taskNumber = taskNumber;

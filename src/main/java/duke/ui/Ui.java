@@ -1,8 +1,5 @@
 package duke.ui;
 
-import duke.duke.Duke;
-import duke.tasks.Task;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -10,6 +7,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.List;
+
+import duke.duke.Duke;
+import duke.tasks.Task;
 
 /**
  * Handles input/output of the application.

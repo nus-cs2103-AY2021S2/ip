@@ -6,6 +6,11 @@ package duke.tasks;
 public class Deadline extends Task {
     private final String deadline;
 
+    /**
+     * Creates a {@code Deadline} object with a task description and task deadline component.
+     * @param description task description
+     * @param deadline task deadline
+     */
     public Deadline(String description, String deadline) {
         super(description, "[D]");
         this.deadline = deadline;

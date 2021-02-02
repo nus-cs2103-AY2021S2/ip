@@ -6,6 +6,11 @@ package duke.tasks;
 public class Event extends Task {
     private final String eventTime;
 
+    /**
+     * Creates a {@code Event} object with a task description and a task event time component.
+     * @param description task description
+     * @param eventTime event time of task
+     */
     public Event(String description, String eventTime) {
         super(description, "[E]");
         this.eventTime = eventTime;

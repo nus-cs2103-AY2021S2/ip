@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.File;
+import java.io.IOException;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -9,22 +12,13 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
-
 import duke.duke.Duke;
-
 import duke.exceptions.InvalidArgumentException;
 import duke.exceptions.InvalidCommandException;
-
 import duke.parser.Parser;
-
 import duke.storage.Storage;
-
 import duke.tasks.TaskList;
-
 import duke.ui.Ui;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Main entry point to the chat bot application.
@@ -33,7 +27,7 @@ import java.io.IOException;
 
 public class Main {
     //private final static File f = new File("src/main/data/duke.txt");
-    private final static File file = new File("duke.txt");
+    private static final File file = new File("duke.txt");
 
     /**
      * Entry point of chat bot application.
@@ -84,17 +78,17 @@ public class Main {
                     userCommand.getCommand(), null);
             Storage.saveFile(file, bot);
         } else if (userCommand instanceof DeadlineCommand) {
-            bot.addTask(((DeadlineCommand) userCommand).getDescription(), userCommand.getCommand(),
-                    ((DeadlineCommand) userCommand).getDeadline());
+            bot.addTask(((DeadlineCommand) userCommand).getDescription(), userCommand.getCommand(), ((
+                    DeadlineCommand) userCommand).getDeadline());
             Storage.saveFile(file, bot);
         } else if (userCommand instanceof EventCommand) {
-            bot.addTask(((EventCommand) userCommand).getDescription(), userCommand.getCommand(),
-                    ((EventCommand) userCommand).getEventTime());
+            bot.addTask(((EventCommand) userCommand).getDescription(), userCommand.getCommand(), (
+                    (EventCommand) userCommand).getEventTime());
             Storage.saveFile(file, bot);
         } else if (userCommand instanceof DeleteCommand) {
             bot.removeTask(((DeleteCommand) userCommand).getTaskNumber());
             Storage.saveFile(file, bot);
-        } else if(userCommand instanceof FindCommand) {
+        } else if (userCommand instanceof FindCommand) {
             bot.showTasksContainingKeyword(((FindCommand) userCommand).getKeyword());
         }
     }
