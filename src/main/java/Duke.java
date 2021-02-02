@@ -1,6 +1,5 @@
-import core.IOManager;
-import core.InputHandler;
-import core.task.TaskManager;
+import javafx.application.Application;
+import ui.DukeApplicationPage;
 
 public class Duke {
     public static void main(String... args) {
@@ -11,11 +10,15 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        Application.launch(DukeApplicationPage.class, args);
+    /*
         TaskManager tm = new TaskManager();
         InputHandler inputHandler = new InputHandler(tm);
+
         IOManager ioManager = new IOManager();
         ioManager.setListener(inputHandler);
+
         ioManager.run();
-        tm.save();
+        tm.save();*/
     }
 }
