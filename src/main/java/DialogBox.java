@@ -35,7 +35,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(new Font("Arial", 15));
+        dialog.setFont(new Font("Georgia", 10));
         displayPicture.setImage(img);
     }
 

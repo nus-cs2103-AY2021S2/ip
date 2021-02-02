@@ -32,22 +32,28 @@ public class Controller {
     /**
      * Starts the program and accepting user inputs.
      */
-    public void run() {
+    public String run(String input) {
         ui.printStartMsg();
-        String input = ui.getUserCommand();
+        //String input = ui.getUserCommand();
 
+        /*
         while (!input.equals(END_COMMAND)) {
             ui.printDivider();
             handleInput(input);
             ui.printDivider();
             input = ui.getUserCommand();
         }
+         */
+        if (input.equals("bye")) {
+            return input;
+        }
 
-        ui.printByeMsg();
+        return handleInput(input);
+        //ui.printByeMsg();
     }
 
     /**
-     * Handle inputs from user.
+     * Handles inputs from user.
      * @param input User inputs.
      */
     public String handleInput(String input) {
@@ -56,7 +62,7 @@ public class Controller {
     }
 
     /**
-     * Execute User inputs based on the commandType.
+     * Executes User inputs based on the commandType.
      * @param input user input used based on commandType.
      * @param command commandType used to differentiate how input is used.
      */
