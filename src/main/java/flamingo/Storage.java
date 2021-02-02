@@ -14,9 +14,9 @@ import java.util.Scanner;
  * Loads and saves data.
  */
 public class Storage {
+    protected boolean pathExists;
     private String currentDirectory;
     private Path path;
-    protected boolean pathExists;
 
     /**
      * Creates a new flamingo.Storage.

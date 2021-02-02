@@ -3,8 +3,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import flamingo.*;
 import org.junit.jupiter.api.Test;
+
+import flamingo.Deadline;
+import flamingo.Storage;
+import flamingo.Task;
+import flamingo.TaskList;
+import flamingo.Todo;
 
 public class FlamingoTest {
 
