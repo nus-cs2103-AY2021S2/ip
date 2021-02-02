@@ -1,13 +1,12 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.lang.reflect.Array;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Justin {
     public static void main(String[] args) {
@@ -44,6 +43,11 @@ public class Justin {
         printLineBreaker();
         System.out.println("Hello I'm Justin");
         System.out.println("What can I do for you?");
+        System.out.println();
+        System.out.println("To add a todo: use command todo<space>taskName");
+        System.out.println("To add a deadline: use command deadline<space>taskName<space>/by<space>YYYY-MM-DD");
+        System.out.println("To add a event: use command event<space>taskName<space>/at<space>YYYY-MM-DD<space>HH:MM");
+        System.out.println();
         printLineBreaker();
 
         // Condition for Duke to stop
@@ -131,17 +135,21 @@ public class Justin {
                                 dl.markAsDone();
                             }
 
+                            printLineBreaker();
+                            System.out.println("Got it. I've added this task:");
                             tasks.set(i, dl);// insert into the list
-
                             System.out.println(" " + dl.toString());
                             System.out.println("Now you have " + tasks.size() + " tasks in the list");
                             printLineBreaker();
+
                             ifExist = true;
                         }
                     }
 
                     if (!ifExist) {
                         Deadline dl = new Deadline(description, date);
+                        printLineBreaker();
+                        System.out.println("Got it. I've added this task:");
                         tasks.add(dl);
                         System.out.println(" " + dl.toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list");
@@ -194,6 +202,11 @@ public class Justin {
                     // set delimiter to obtain the description and the at
                     String description = newText.substring(0, newText.indexOf("/")-1);
                     String date = newText.substring(newText.indexOf("/")+4);
+
+                    // splitting the date and time respectively
+
+                    //System.out.println(date1);
+                    //System.out.println(time);
 
                     //System.out.println(description + " " + date); // for debugging
 
@@ -307,7 +320,7 @@ public class Justin {
             try {
                 for (String line : Files.readAllLines(Paths.get(filePath))) {
 
-                    System.out.println(line); // for debugging
+                    //System.out.println(line); // for debugging
 
                     // create an linkedlist to store the split lines
                     String[] splits = line.split("\\|", 5);
@@ -387,9 +400,9 @@ public class Justin {
                     }
                 } else if (task.get(i) instanceof Event) {
                     if (task.get(i).isDone) {
-                        holder = "E" + "|" + "1" + "|" + task.get(i).description + "|" + ((Event) task.get(i)).at;
+                        holder = "E" + "|" + "1" + "|" + task.get(i).description + "|" + ((Event) task.get(i)).dateTime;
                     } else {
-                        holder = "E" + "|" + "1" + "|" + task.get(i).description + "|" + ((Event) task.get(i)).at;
+                        holder = "E" + "|" + "1" + "|" + task.get(i).description + "|" + ((Event) task.get(i)).dateTime;
                     }
                 } else {
                     // vanilla event

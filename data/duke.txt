@@ -1,0 +1,4 @@
+E|1|catch dog|2019-12-10 18:00
+D|0|catch mouse|2020-02-02
+T|1|catch cat
+1|catch eagle
