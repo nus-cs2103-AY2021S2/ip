@@ -21,9 +21,9 @@ public class DeadlineTask extends Task {
         this.deadline = date;
     }
 
-    private DeadlineTask(boolean done, String desc, LocalDateTime date) {
+    private DeadlineTask(boolean isDone, String desc, LocalDateTime date) {
         super(desc);
-        super.isDone = done;
+        super.isDone = isDone;
         this.deadline = date;
     }
 

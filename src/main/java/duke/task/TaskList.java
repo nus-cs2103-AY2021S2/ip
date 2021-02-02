@@ -70,7 +70,7 @@ public class TaskList {
      * @param idx the index of the task to be marked as done
      * @return the String format of the specified task
      */
-    public String doneTask(final int idx) {
+    public String markTaskDone(final int idx) {
         tasks.get(idx - 1).markDone();
         return tasks.get(idx - 1).toString();
     }
@@ -88,7 +88,7 @@ public class TaskList {
      * Getter for the size of the list.
      * @return the number of tasks in the list
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 

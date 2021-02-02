@@ -25,9 +25,9 @@ public class DeleteCommand implements Command {
      */
     @Override
     public String execute(final TaskList taskList) {
-        if (index > taskList.size()) {
+        if (index > taskList.getSize()) {
             throw new DukeException.InvalidTask();
         }
-        return String.format(DukeString.MESSAGE_DELETE, taskList.deleteTask(index), taskList.size());
+        return String.format(DukeString.MESSAGE_DELETE, taskList.deleteTask(index), taskList.getSize());
     }
 }
