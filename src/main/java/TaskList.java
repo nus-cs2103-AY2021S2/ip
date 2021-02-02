@@ -78,7 +78,7 @@ public class TaskList {
      */
     public void search(Ui ui, String searchTerm) {
         int count = 0;
-        for(Task t : taskList) {
+        for(Task t : tasks) {
             if (t.getDescription().indexOf(searchTerm) != -1) {
                 if(count == -1) {
                     ui.showSuccessSearch();
@@ -96,6 +96,6 @@ public class TaskList {
      * @return ArrayList<Task> taskList
      */
     public ArrayList<Task> getTaskList() {
-        return taskList;
+        return tasks;
     }
 }
