@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    protected LocalDate at;
+    public LocalDate at;
 
     public Event(String description, String at) {
         super(description, "Event");
