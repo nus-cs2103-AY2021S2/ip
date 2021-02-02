@@ -17,4 +17,15 @@ public class ToDoCommand extends Command {
     boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof ToDoCommand) {
+            ToDoCommand tdc = (ToDoCommand) obj;
+            return tdc.todo.equals(this.todo);
+        }
+        return false;
+    }
 }

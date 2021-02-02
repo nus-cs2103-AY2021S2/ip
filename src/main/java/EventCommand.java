@@ -19,4 +19,15 @@ public class EventCommand extends Command {
     boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof EventCommand) {
+            EventCommand evc = (EventCommand) obj;
+            return evc.event.equals(this.event) && evc.date.equals(this.date);
+        }
+        return false;
+    }
 }

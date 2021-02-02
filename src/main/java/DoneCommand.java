@@ -16,4 +16,15 @@ public class DoneCommand extends Command {
     boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof DoneCommand) {
+            DoneCommand dc = (DoneCommand) obj;
+            return dc.taskno == this.taskno;
+        }
+        return false;
+    }
 }

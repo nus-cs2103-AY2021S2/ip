@@ -18,6 +18,17 @@ public class ToDo extends Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof ToDo) {
+            ToDo td = (ToDo) obj;
+            return td.name.equals(this.name) && (td.done == this.done);
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         if (this.done) {
             return "[T][X] " + this.name;

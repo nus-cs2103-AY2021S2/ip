@@ -17,4 +17,15 @@ public class DeleteCommand extends Command {
     boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof DeleteCommand) {
+            DeleteCommand dlc = (DeleteCommand) obj;
+            return dlc.taskno == this.taskno;
+        }
+        return false;
+    }
 }

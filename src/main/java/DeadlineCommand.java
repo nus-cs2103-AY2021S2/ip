@@ -19,4 +19,15 @@ public class DeadlineCommand extends Command {
     boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof DeadlineCommand) {
+            DeadlineCommand dlc = (DeadlineCommand) obj;
+            return dlc.event.equals(this.event) && dlc.deadline.equals(this.deadline);
+        }
+        return false;
+    }
 }

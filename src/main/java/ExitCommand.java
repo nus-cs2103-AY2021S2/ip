@@ -8,4 +8,14 @@ public class ExitCommand extends Command {
     boolean isExit() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof ExitCommand) {
+            return true;
+        }
+        return false;
+    }
 }
