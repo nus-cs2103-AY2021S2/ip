@@ -12,25 +12,26 @@ class Ui {
      * @param input the processed data input
      * @param taskList the taskList which stores the task
      */
-    protected void processCommand(String[] input, TaskList taskList) {
+    protected String processCommand(String[] input, TaskList taskList) {
         try {
             if (input[0].equals("list")) {
-                taskList.listTask();
+                return taskList.listTask();
             } else if (input[0].equals("done")) {
-                taskList.doneTask(Integer.valueOf(input[1]));
+                return taskList.doneTask(Integer.valueOf(input[1]));
             } else if (input[0].equals("delete")) {
-                taskList.delete(Integer.valueOf(input[1]));
+                return taskList.delete(Integer.valueOf(input[1]));
             } else if (input[0].equals("todo")) {
-                taskList.addToDo(input[1]);
+                return taskList.addToDo(input[1]);
             } else if (input[0].equals("deadline")) {
-                taskList.addDeadline(input[1], LocalDate.parse(input[2]));
+                return taskList.addDeadline(input[1], LocalDate.parse(input[2]));
             } else if (input[0].equals("event")) {
-                taskList.addEvent(input[1], LocalDate.parse(input[2]));
+                return taskList.addEvent(input[1], LocalDate.parse(input[2]));
             } else if (input[0].equals("find")) {
-                taskList.find(input[1]);
+                return taskList.find(input[1]);
             }
         } catch (DukeException dukeException) {
             System.out.println(dukeException);
         }
+        return null;
     }
 }

@@ -1,12 +1,13 @@
 package duke;
 import java.util.Scanner;
 
+
 /**
  * The main driver class for Duke. The tasklist contains the task list. The Ui deals
  * with interactions with the user. The parser deals with making sense of the user
  * commands.
  */
-public class Duke {
+class Duke {
     private TaskList taskList;
     private Parser parser;
     private Ui ui;
@@ -47,8 +48,11 @@ public class Duke {
             }
         }
     }
+    public String[] processCommand(String input) throws DukeException {
+        return this.parser.processCommand(input);
+    }
 
-    private void process(String[] processedInput) {
-        this.ui.processCommand(processedInput, this.taskList);
+    public String process(String[] processedInput) {
+        return this.ui.processCommand(processedInput, this.taskList);
     }
 }
