@@ -2,7 +2,7 @@ package kobe;
 
 class CustomExceptions {
 
-    //for incomplete commands
+    //Class for incomplete commands
     public static class IncompleteDecriptionException extends KobeException {
         /**
          * Throws an exception for incomplete command descriptions
@@ -14,7 +14,7 @@ class CustomExceptions {
         }
     }
 
-    //for gibberish commands
+    //Class for gibberish commands
     public static class IncorrectDecriptionException extends KobeException {
         /**
          * Throws an exception for incorrect command descriptions that cannot be processed
