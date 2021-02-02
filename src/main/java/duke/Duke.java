@@ -17,7 +17,7 @@ public class Duke {
      *
      * @param filePath Location of the storage list
      */
-    public Duke(String[] filePath) {
+    public Duke(String... filePath) {
         this.storage = new Storage(filePath);
         try {
             this.tasks = this.storage.load();
