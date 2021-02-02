@@ -8,7 +8,7 @@ public class Event extends AbstractTask {
      *
      * @param description class description
      * @param at time of the event
-     * @throws duke.DukeEmptyDescriptionException if the description is empty
+     * @throws DukeEmptyDescriptionException if the description is empty
      */
     public Event(String description, String at) throws DukeEmptyDescriptionException {
         super(description);

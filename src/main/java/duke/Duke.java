@@ -1,44 +1,34 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Duke {
+
     private static final String DUKE_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     protected final TaskList tasks;
+    protected final Storage storage;
+    protected final Parser parser;
+    protected final Ui ui;
 
+    /**
+     * Instantiates the main duke class
+     */
     public Duke() {
         tasks = new TaskList();
-    }
-
-    /**
-     * Runs the command line interface
-     */
-    public void run() {
-        Ui ui = new Ui(tasks, DUKE_LOGO);
-        Storage storage = new Storage("data/duke.txt");
-        Parser parser = new Parser();
-        Scanner scanner = new Scanner(System.in);
+        storage = new Storage("data/duke.txt");
+        parser = new Parser();
+        ui = new Ui(tasks, DUKE_LOGO);
         storage.readTasks(tasks);
-
-        ui.printStart();
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            parser.processLine(line, tasks);
-            storage.saveTasks(tasks);
-        }
     }
 
     /**
-     * Main class to handle the input
-     *
-     * @param args the arguments to the program
+     * Generate a response to user input.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    public String getResponse(String input) {
+        String response = parser.processLine(input, tasks);
+        storage.saveTasks(tasks);
+        return response;
     }
 }

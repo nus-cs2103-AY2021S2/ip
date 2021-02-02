@@ -8,20 +8,19 @@ public class Parser {
      * Handle each line
      *
      * @param line the current line to process
-     * @return status of the command, -1 to exit, 0 to continue
+     * @return response of the command
      */
-    public int processLine(String line, TaskList tasks) {
+    public String processLine(String line, TaskList tasks) {
         if (line.compareTo("bye") == 0) {
             // Bye command, print and exit immediately.
-            System.out.println("\tDuke:");
-            System.out.println("\tBye!");
-            return -1;
+            return "Bye!";
         } else if (line.compareTo("list") == 0) {
             // List command, print out all the previous lines.
-            System.out.println("\tDuke:");
+            String response = "";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
+                response += String.format("%d. %s\n", i + 1, tasks.get(i));
             }
+            return response;
         } else if (line.startsWith("done ")) {
             // Done command, set the task as done.
             String indexStr = line.substring(5);
@@ -29,24 +28,24 @@ public class Parser {
                 int index = Integer.parseInt(indexStr) - 1;
                 AbstractTask currentTask = tasks.get(index);
                 currentTask.markDone();
-                System.out.printf("\tDuke: Marked task %d as done:\n", index);
-                System.out.printf("\t%s\n", currentTask);
+                return String.format("Marked task %d as done:\n%s\n", index, currentTask);
             } catch (NumberFormatException e) {
-                System.out.println("Task index must be a number!");
+                return "Task index must be a number!";
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Task index must be in range!");
+                return "Task index must be in range!";
             }
         } else if (line.startsWith("delete ")) {
             // Done command, set the task as done.
             String indexStr = line.substring(7);
             try {
                 int index = Integer.parseInt(indexStr) - 1;
-                System.out.printf("\tDuke: Deleted task %d: %s\n", index, tasks.get(index));
+                String response = String.format("Deleted task %d: %s\n", index, tasks.get(index));
                 tasks.remove(index);
+                return response;
             } catch (NumberFormatException e) {
-                System.out.println("Task index must be a number!");
+                return "Task index must be a number!";
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Task index must be in range!");
+                return "Task index must be in range!";
             }
         } else if (line.startsWith("find ")) {
             // Find string in the list of tasks
@@ -60,33 +59,33 @@ public class Parser {
                 }
             }
             if (!isFound) {
-                System.out.println("No tasks with the keyword found!");
+                return "No tasks with the keyword found!";
             } else {
-                System.out.println("\tI've found the following task(s) with the specified keyword:");
+                String response = "I've found the following task(s) with the specified keyword:\n";
                 for (AbstractTask task : tasks) {
                     if (task.toString().contains(findStr)) {
                         index++;
-                        System.out.printf("\t%d. %s\n", index, task.toString());
+                        response += String.format("%d. %s\n", index, task.toString());
                     }
                 }
+                return response;
             }
         } else {
             // No command, add the line task based on the prefix inside.
             try {
-                processNewTask(line, tasks);
+                return processNewTask(line, tasks);
             } catch (DukeUnknownCommandException e) {
                 //Handle Unknown Command Exception
-                System.out.println("Unknown command detected, ignoring!");
+                return "Unknown command detected, ignoring!";
             } catch (DukeEmptyDescriptionException e) {
                 //Handle Empty Description Exception
-                System.out.println("Task description cannot be empty, ignoring!");
+                return "Task description cannot be empty, ignoring!";
             } catch (DukeException e) {
-                System.out.println("Reached an error!");
+                return "Reached an error!";
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid Date Format!");
+                return "Invalid Date Format!";
             }
         }
-        return 0;
     }
 
     /**
@@ -95,7 +94,7 @@ public class Parser {
      * @param line the current task to process
      * @param tasks the current task list to process
      */
-    public void processNewTask(String line, TaskList tasks) throws DukeException {
+    public String processNewTask(String line, TaskList tasks) throws DukeException {
         if (line.startsWith("todo ")) {
             // Todo command, add a Todo class
             line = line.substring(5);
@@ -104,8 +103,7 @@ public class Parser {
             // Deadline command, add a Deadline class
             int byIdx = line.indexOf(" /by ");
             if (byIdx == -1) {
-                System.out.println("Need a time for the deadline, \"/by\" not found!");
-                return;
+                return "Need a time for the deadline, \"/by\" not found!";
             }
             String byStr = line.substring(byIdx + 5);
             String task = line.substring(9, byIdx);
@@ -114,8 +112,7 @@ public class Parser {
             // Event command, add an Event class
             int atIdx = line.indexOf(" /at ");
             if (atIdx == -1) {
-                System.out.println("Need a time for the event, \"/at\" not found!");
-                return;
+                return "Need a time for the event, \"/at\" not found!";
             }
             String atStr = line.substring(atIdx + 5);
             String task = line.substring(6, atIdx);
@@ -125,7 +122,8 @@ public class Parser {
         } else {
             throw new DukeUnknownCommandException();
         }
-        System.out.printf("\tDuke: Now you have %d tasks.\n", tasks.size());
-        System.out.println("\tadded: " + tasks.get(tasks.size() - 1));
+        String response = String.format("Now you have %d tasks.\n", tasks.size());
+        response += "added: " + tasks.get(tasks.size() - 1);
+        return response;
     }
 }
