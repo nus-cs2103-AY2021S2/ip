@@ -2,13 +2,14 @@ package duke;
 
 /**
  * Encapsulates the Ui component of Duke.
- * 
+ *
  * @author Aaron Saw Min Sern
  */
 public class Ui {
     private static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String LINE = "────────────────────────────────────────────────────────────────────────────────";
+    private static final String LINE = "────────────────────────────────────"
+        + "────────────────────────────────────────────";
 
     /**
      * Prints the starting header logo and text to the command line.

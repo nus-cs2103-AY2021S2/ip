@@ -8,24 +8,26 @@ package duke.task;
 public abstract class Task {
     protected boolean isDone;
     protected final String description;
-    public abstract String encode();
 
-	/**
-	 * Default constructor for subclasses of Task.
-	 *
-	 * @param	isDone      the status of the task item 
-	 * @param	description	the description for the task item
-	 */
+    /**
+     * Default constructor for subclasses of Task.
+     *
+     * @param isDone      the status of the task item
+     * @param description the description for the task item
+     */
     protected Task(final boolean isDone, final String description) {
         this.isDone = isDone;
         this.description = description;
     }
 
-	/**
-	 * Returns a tick if this Task object is finished and a cross otherwise.
-	 *
-     * @return              the status icon based on the status of this Task object.
-	 */
+    public abstract String encode();
+
+
+    /**
+     * Returns a tick if this Task object is finished and a cross otherwise.
+     *
+     * @return the status icon based on the status of this Task object.
+     */
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718");
     }
@@ -40,33 +42,36 @@ public abstract class Task {
     /**
      * Returns true if this task description contains the keyword ignoring case.
      *
-     * @param   keyword     the keyword to be tested with
-     * @return              true if this task description matches the keyword
+     * @param keyword the keyword to be tested with
+     * @return true if this task description matches the keyword
      */
     public boolean isMatching(String keyword) {
         return containsIgnoreCase(description, keyword);
     }
 
     private static boolean containsIgnoreCase(String str, String searchStr) {
-        if (str == null || searchStr == null)
+        if (str == null || searchStr == null) {
             return false;
+        }
 
         final int length = searchStr.length();
-        if (length == 0)
+        if (length == 0) {
             return true;
+        }
 
         for (int i = str.length() - length; i >= 0; i--) {
-            if (str.regionMatches(true, i, searchStr, 0, length))
+            if (str.regionMatches(true, i, searchStr, 0, length)) {
                 return true;
+            }
         }
         return false;
     }
 
-	/**
-	 * Returns the string represenatation of this Task instance
-	 *
-	 * @return		the string representation of this Task instance
-	 */
+    /**
+     * Returns the string represenatation of this Task instance
+     *
+     * @return the string representation of this Task instance
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);

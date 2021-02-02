@@ -13,12 +13,23 @@ public class AddCommand implements Command {
     private String task;
     private String datetime;
 
+    /**
+     * Constructor for class AddCommand on tasks without a datetime.
+     * @param   type    the task type
+     * @param   task    the task description
+     */
     public AddCommand(TaskType type, String task) {
         this.type = type;
         this.task = task;
         this.datetime = null;
     }
 
+    /**
+     * Constructor for class AddCommand on tasks with a datetime.
+     * @param   type        the task type
+     * @param   task        the task description
+     * @param   datetime    the datetime
+     */
     public AddCommand(TaskType type, String task, String datetime) {
         this.type = type;
         this.task = task;
@@ -53,7 +64,7 @@ public class AddCommand implements Command {
                 if (event != null) {
                     tasks.add(event);
                     isInsert = true;
-                } 
+                }
                 break;
             case DEADLINE:
                 Deadline deadline = null;
@@ -67,8 +78,10 @@ public class AddCommand implements Command {
                 if (deadline != null) {
                     tasks.add(deadline);
                     isInsert = true;
-                } 
+                }
                 break;
+            default:
+                return;
             }
         }
 
