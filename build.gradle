@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Maya"
+    mainClassName = "Maya"
 }
 
 shadowJar {
