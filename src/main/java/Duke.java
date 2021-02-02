@@ -6,26 +6,28 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> inputList = new ArrayList<>();
+        TaskList tasks = new TaskList();
 
         while (true) {
             String input = sc.nextLine();
 
-            if (input.equals("bye")) {
+            if (input.contains(" ") && input.split(" ")[0].equals("done")) {
+                int indexOfDoneTask = Integer.parseInt(input.split(" ")[1]);
+                Task doneTask = tasks.getTaskByIndex(indexOfDoneTask);
+                doneTask.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(doneTask.getStatusString());
+            } else if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
+                tasks.printTasks();
+            } else if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (input.equals("list")) {
-                printList(inputList);
             } else {
-                inputList.add(input);
-                System.out.println("Added: " + input);
+                Task newTask = new Task(input);
+                tasks.addTask(newTask);
+                System.out.println("Added: " + newTask.getDescription());
             }
-        }
-    }
-
-    private static void printList(ArrayList<String> list) {
-        for (int index = 0; index < list.size(); index++) {
-            System.out.print((index + 1) + ". " + list.get(index) + "\n");
         }
     }
 }
