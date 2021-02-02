@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.lang.System;
 
 /**
  * Main driver class of the Duke program.
@@ -37,7 +36,7 @@ public class Duke {
         ui.printIntroduction();
         boolean isExit = false;
 
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String stringCommand = ui.readCommand();
                 Command command = Parser.parseCommand(stringCommand);
