@@ -39,24 +39,15 @@ public class Duke {
         }
     }
 
-    /**
-     * The driver method to run a created Duke object that responds to user input.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCmd = ui.readCommand();
-                Command parsedCmd = Parser.parse(fullCmd);
-                parsedCmd.execute(storage, ui, taskList);
-                isExit = parsedCmd.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
-        }
+    public Ui getUi() {
+        return this.ui;
     }
 
+    /**
+     * Parses and subsequently executes the given command input String.
+     *
+     * @return String output to be displayed
+     */
     String getResponse(String input) {
         try {
             Command parsedCmd = Parser.parse(input);
@@ -64,26 +55,5 @@ public class Duke {
         } catch (DukeException e) {
             return ui.showError(e);
         }
-    }
-
-    /*
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
-    */
-
-
-    /**
-     * Main method which initializes and runs Duke.
-     * @param args Unused.
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }

@@ -28,9 +28,9 @@ public class Ui {
     /**
      * Prints the Welcome message to output.
      */
-    public void showWelcome() {
-        System.out.println("Greetings. My name is I-01B, but you may call me DUKE.");
-        System.out.println("What can I assist you with?");
+    public String showWelcome() {
+        return "Greetings. My name is I-01B, but you may call me DUKE. \n" +
+          "What can I assist you with?";
     }
 
     /**
