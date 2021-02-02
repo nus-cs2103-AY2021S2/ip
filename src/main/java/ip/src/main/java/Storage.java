@@ -5,6 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Storage class that deals with loading and updating the tasks in the given file.
+ *
+ */
+
 public class Storage {
     protected String filePath;
     protected Duke bot;
@@ -14,7 +19,14 @@ public class Storage {
         this.bot = bot;
     }
 
-    public void loadTasks(String TaskData) throws FileNotFoundException {
+    /**
+     * Updates the Duke bot with the tasks by loading the tasks in the file.
+     *
+     * @param TaskData The task from the file.
+     * @throws FileNotFoundException
+     */
+
+    public void loadTask(String TaskData) throws FileNotFoundException {
         File f = new File(this.filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         Task newTask = new Task("");
@@ -45,6 +57,12 @@ public class Storage {
             }
 
         }
+
+    /**
+     * Updates the file with the bot current TaskList.
+     *
+     * @throws IOException
+     */
 
     public void updateFile() throws IOException {
         FileWriter fw = new FileWriter(this.filePath);

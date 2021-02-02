@@ -6,20 +6,38 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
+/** A-More OOP class that demonstrates OOP by having classes such as Task, Event etc.
+ *
+ */
+
 public class A_MoreOOP {
+
+    /** Returns a Duke bot that has loaded the tasks from the file given.
+     *
+     * @param filePath Location of the file with the tasks information.
+     * @param bot The Duke bot to be updated with the tasks from the file.
+     * @throws FileNotFoundException
+     */
 
     private static void createBot(String filePath, Duke bot) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         Storage storage = new Storage(filePath, bot);
         Task newTask = new Task("");
+
         while (s.hasNext()) {
-            storage.loadTasks(s.nextLine());
+            storage.loadTask(s.nextLine());
         }
 
     }
 
-
+    /**
+     * Overwrites the file with the updated tasks everytime a user gives a command/input.
+     *
+     * @param filePath The location of the file to be updated.
+     * @param bot The bot with the new tasks to be written to the file.
+     * @throws IOException
+     */
     private static void updateFile(String filePath, Duke bot) throws IOException {
         Storage storage = new Storage(filePath, bot);
         storage.updateFile();
@@ -29,6 +47,7 @@ public class A_MoreOOP {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Duke bot = new Duke();
+
         try{
             File f = new File("data/duke.txt");
             f.getParentFile().mkdirs();
@@ -41,6 +60,7 @@ public class A_MoreOOP {
             System.out.println("Error in creating file");
 
         }
+
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Parser parser = new Parser();
@@ -61,20 +81,18 @@ public class A_MoreOOP {
                             input = parser.toDoTask(input);
                             ui.toDoCommand(input);
 
-                            //counter++;
                         } catch (Exception e) {
                             throw new DukeException(("OOPS!!! The description cannot be empty."));
                         }
                     } else if (command.equals("event")) {
                         String content = parser.eventTaskContent(input);
                         String at = parser.eventTaskAt(input);
-                        ui.eventCommand(content,at);
-
+                        ui.eventCommand(content, at);
 
                     } else if (command.equals("deadline")) {
                         String content = parser.deadlineTaskContent(input);
                         String by = parser.deadlineTaskBy(input);
-                        ui.deadlineCommand(content,by);
+                        ui.deadlineCommand(content, by);
 
                     }else if(command.equals("delete")){
                         int id = parser.getId(input);

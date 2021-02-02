@@ -5,9 +5,20 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+/**
+ * Deadline is a type of Task with attributes String content and a Date stored as a Date object.
+ *
+ */
 
 public class Deadline extends Task{
     protected Date by;
+
+    /**
+     * Constructor for Deadline Class.
+     *
+     * @param content String content given by user.
+     * @param by_str Deadline date given by user, parsed into a Date object with the format dd/MM/yyyy HH:mm.
+     */
 
     public Deadline(String content,String by_str) {
         super(content);
@@ -21,6 +32,12 @@ public class Deadline extends Task{
         }
 
     }
+
+    /**
+     * toString() of Deadline Class.
+     *
+     * @return toString() representation of a Deadline object with its done status, content and date.
+     */
 
     @Override
     public String toString() {
