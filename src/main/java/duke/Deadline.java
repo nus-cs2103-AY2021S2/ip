@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class represents tasks that can be classified as deadlines
+ */
 public class Deadline extends Task {
 
     protected String by;

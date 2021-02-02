@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * This class is in charge of understanding the user's input and process input
+ * to be passed to other classes for further processing
+ */
 public class Parser {
 
     public Parser() {

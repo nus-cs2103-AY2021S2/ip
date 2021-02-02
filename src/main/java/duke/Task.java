@@ -1,7 +1,8 @@
 package duke;
 
-import java.time.LocalDate;
-
+/**
+ * This class is an object-oriented-representation of a task event
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -37,10 +38,22 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns a segment of text representing the current task, this text is in the format
+     * which is to be saved to file
+     *
+     * @return String of description of task
+     */
     public String saveToFile() {
         return " | " + getStatusIcon() + " | " + getDescription();
     }
 
+    /**
+     * Returns a segment of text representing the current task, this text is in the format
+     * which is to be displayed to the user
+     *
+     * @return String of description of task
+     */
     public String toString() {
         return " | " + getStatusIcon() + " | " + getDescription();
     }

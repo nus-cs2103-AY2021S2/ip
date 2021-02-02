@@ -1,18 +1,25 @@
 package duke;
 
 import java.util.List;
-import java.util.Scanner;
 
+/**
+ * This class is where the logic related to Duke comes together and gets executed
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    /**
+     * Constructor of Duke
+     *
+     * @param nil
+     */
+    public Duke() {
 
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
 
         try {
             tasks = new TaskList(storage.load()); // returns a List<Task> of all tasks
@@ -23,36 +30,29 @@ public class Duke {
         }
     }
 
-    public void run() {
+    /**
+     * Take user's input and generate corresponding response back to the user
+     *
+     * @param String user input
+     * @return String Response to the user
+     */
+    public String getResponse(String userInput) {
 
-        // initialise all necessary variables
-        Scanner inputScanner = new Scanner(System.in);
-        Boolean terminate = false; // to check if the chatbot should be terminated
-
-        ui.showLine();
-        ui.showWelcomeMsg();
+        ui.clearResponse();
 
         Parser parser = new Parser();
         String[] parsedInput;
 
-        while (!terminate) {
+        try {
+            parsedInput = parser.processInput(userInput);
 
-            String userInput = inputScanner.nextLine();
-
-            try {
-                parsedInput = parser.processInput(userInput);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                continue;
-            }
             if (parsedInput[0].equals("LST")) {
                 ui.showListMsg();
-                tasks.printTask();
+                ui.printTasks(tasks);
                 ui.showLine();
             } else if (parsedInput[0].equals("BYE")) {
                 ui.showByeMsg();
                 ui.showLine();
-                terminate = true;
             } else if (parsedInput[0].equals("DON")) {
                 int taskIndex = Integer.parseInt(parsedInput[1]);
 
@@ -66,7 +66,7 @@ public class Duke {
 
                     storage.save(tasks);
                 } else {
-                    System.out.println("Requested task does not exist");
+                    ui.showError("Requested task does not exist");
                     ui.showLine();
                 }
             } else if (parsedInput[0].equals("TDO")) {
@@ -112,7 +112,7 @@ public class Duke {
 
                     storage.save(tasks);
                 } else {
-                    System.out.println("Requested task does not exist");
+                    ui.showError("Requested task does not exist");
                     ui.showLine();
                 }
 
@@ -128,19 +128,20 @@ public class Duke {
                     ui.showFoundText();
                     int i = 1;
                     for (Task t : foundTasks) {
-                        System.out.println(i + ". " + t.toString());
+                        ui.appendResponse(i + ". " + t.toString());
                         i++;
                     }
                     ui.showLine();
                 }
 
             } else {
-                System.out.println("Something went wrong!");
+                ui.showError("Something went wrong!");
             }
+        } catch(DukeException e) {
+            ui.showError(e.getMessage());
         }
+        System.out.println(ui.getResponse());
+        return ui.getResponse();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
 }

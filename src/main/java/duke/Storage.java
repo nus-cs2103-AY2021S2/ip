@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class acts as an agent of communication between the data saved locally under the directory
+ * and the program
+ */
 public class Storage {
 
     protected String filePath;

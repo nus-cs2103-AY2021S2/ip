@@ -1,64 +1,171 @@
 package duke;
 
+/**
+ * This class acts as a placeholder for responses to be responded to the user
+ */
 public class Ui {
-    public Ui() {}
 
+    private String response;
+
+    public Ui() {
+        response = "";
+    }
+
+    /**
+     * modifies response to an empty string
+     *
+     * @return void
+     */
+    public void clearResponse() {
+        response = "";
+    }
+
+    /**
+     * Returns String of response
+     *
+     * @return response
+     */
+    public String getResponse() {
+        return this.response;
+    }
+
+    /**
+     * append the string specified to the response
+     *
+     * @param String message to be appended
+     * @return void
+     */
+
+    public void appendResponse(String msg) {
+        response += msg;
+    }
+
+    /**
+     * append a general error message to the reponse
+     *
+     * @return void
+     */
     public void showLoadingError() {
-        System.out.println("Error occurred while loading");
+        response += "Error occurred while loading\n";
     }
 
-    public void showWelcomeMsg() {
-        System.out.println("Good morning comrade, welcome to KGB.\nWhat can I do for you?");
-    }
-
+    /**
+     * append line to the reponse
+     *
+     * @return void
+     */
     public void showLine() {
-        System.out.println("_____________________________________________");
+        response += "_____________________________________________\n";
     }
 
+    /**
+     * append specified error message to the reponse
+     *
+     * @param String error message
+     * @return void
+     */
     public void showError(String msg) {
-        System.out.println("    " + msg);
+        response += (msg + "\n");
     }
 
+    /**
+     * appends textual form of task to the response
+     *
+     * @param Task task
+     * @return void
+     */
     public void printTask(Task task) {
-        System.out.println(task.toString());
+        response += task.toString() + "\n";
+        if (task.toString().isEmpty()) {
+            System.out.println("Nothing");
+        }
+        System.out.println("Print task: " + task.toString());
     }
 
-    // printings related to LIST
+    /**
+     * appends textual form of task from a tasklist to the response
+     *
+     * @param TaskList taskList
+     * @return void
+     */
+    public void printTasks(TaskList taskList) {
+        int i = 1;
+        for (Task t : taskList.getTaskList()) {
+            response += (i + ". " + t.toString() + "\n");
+            i++;
+        }
+    }
+
+    /**
+     * appends list header message to the response
+     *
+     * @return void
+     */
     public void showListMsg() {
-        System.out.println("Here are the tasks in your list:");
+        response += "Here are the tasks in your list:\n";
     }
 
-    // printings related to BYE
+    /**
+     * appends goodbye message to the response
+     *
+     * @return void
+     */
     public void showByeMsg() {
-        System.out.println("Goodbye comrade. Hope to see you again soon!");
+        response += "Goodbye comrade. Hope to see you again soon!\n";
     }
 
-    // printings related to DONE
+    /**
+     * appends marking task as done message to the response
+     *
+     * @return void
+     */
     public void showDoneMsg() {
-        System.out.println("Nice! I've marked this task as done:");
+        response += "Nice! I've marked this task as done:\n";
     }
 
-    // printings related to tasks
+    /**
+     * appends added task message to the response
+     *
+     * @return void
+     */
     public void showTaskMsg() {
-        System.out.println("Got it. I've added this task:");
+        response += "Got it. I've added this task:\n";
     }
 
+    /**
+     * appends task count message to the response
+     *
+     * @return void
+     */
     public void showTaskCount(int i) {
-        System.out.println("Now you have " + i+ " tasks in the list.");
+        response += ("Now you have " + i+ " tasks in the list.\n");
     }
 
-    // printings related to delete
+    /**
+     * appends delete header message to the response
+     *
+     * @return void
+     */
     public void showDeleteMsg() {
-        System.out.println("Noted. I've removed this task:");
+        response += "Noted. I've removed this task:\n";
     }
 
-    // printings related to find
+    /**
+     * appends cannot find task message to the response
+     *
+     * @return void
+     */
     public void showCannotFind() {
-        System.out.println("I'm sorry, I can't find the task requested");
+        response += "I'm sorry, I can't find the task requested\n";
     }
 
+    /**
+     * appends founded task header message to the response
+     *
+     * @return void
+     */
     public void showFoundText() {
-        System.out.println("Here are the matching tasks in your list:");
+        response += "Here are the matching tasks in your list:\n";
     }
 
 }

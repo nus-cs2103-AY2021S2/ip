@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * This class represents a todo event
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

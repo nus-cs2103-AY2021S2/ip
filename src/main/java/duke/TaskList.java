@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is a container of multiple tasks
+ */
 public class TaskList {
 
     protected List<Task> taskList;
@@ -81,7 +84,7 @@ public class TaskList {
     public void printTask() {
         int i = 1;
         for (Task t : this.taskList) {
-            System.out.println(i + ". " + t.toString());
+            System.out.println("Task loaded: " + i + ". " + t.toString());
             i++;
         }
     }
