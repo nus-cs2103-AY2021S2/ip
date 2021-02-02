@@ -18,10 +18,18 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Creates a new Storage object with the specified file path
+     * @param filePath: Path to the storage file, for example: data/tasks.txt
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the txt file specified previously, and parses it nicely into List of Tasks.
+     * @return Tasks: tasks that are parsed from the txt file will be returned
+     */
     public List<Task> load() {
         try {
             String taskFileContent = fileHandler();
@@ -41,6 +49,11 @@ public class Storage {
         return null;
     }
 
+    /**
+     * Method for tasks to write to .txt files.
+     * The codes below parses task -> task string format, and writes into file path specified.
+     * @param tasks: Tasks that want to be written into txt file
+     */
     public void writeToFile(TaskList tasks) {
         try {
             String content = parseTasksToString(tasks.get());
@@ -54,6 +67,9 @@ public class Storage {
         }
     }
 
+    /**
+     * This method deletes the file specified at the file path.
+     */
     public void clearFile() {
         File file = new File(this.filePath);
         file.delete();

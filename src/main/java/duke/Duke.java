@@ -11,6 +11,10 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
+    /**
+     * Initiates a new Duke chatbot with the specified storage file
+     * @param filePath: file path to .txt file used to store tasks
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(this.storage.load(), this.storage);
@@ -18,6 +22,9 @@ public class Duke {
         this.ui = new Ui("Olly");
     }
 
+    /**
+     * Runs Duke chatbot, allowing user to interact with it via commands
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.speak("Hey! Welcome to the chatbot. What can I do for you today?");

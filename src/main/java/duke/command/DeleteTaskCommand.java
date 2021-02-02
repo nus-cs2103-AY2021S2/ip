@@ -9,11 +9,21 @@ import main.java.duke.task.Task;
 public class DeleteTaskCommand extends Command {
     private int index;
 
+    /**
+     * Creates a command for 'deleting task'
+     * @param index: index of task to be deleted
+     */
     public DeleteTaskCommand(int index) {
         super();
         this.index = index - 1;
     }
 
+    /**
+     * Execute action to delete a task from existing lists of task
+     * @param tasks: list of tasks
+     * @param ui: UI required for conversation
+     * @param storage: Storage required for .txt file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.size()) {

@@ -130,12 +130,12 @@ public class DukeTest {
     @Test
     public void event_noDate_exceptionThrown() {
         assertThrows(DukeException.class, () -> {
-            Command c = this.parser.parse("event hackathon");
+            Command c = this.parser.parse("event nus hackathon");
             c.execute(tasks, ui, storage);
         });
 
         assertThrows(DukeException.class, () -> {
-            Command c = this.parser.parse("event hackathon /at");
+            Command c = this.parser.parse("event nus hackathon /at");
             c.execute(tasks, ui, storage);
         });
     }
@@ -143,12 +143,12 @@ public class DukeTest {
     @Test
     public void event_wrongSyntax_exceptionThrown() {
         assertThrows(DukeException.class, () -> {
-            Command c = this.parser.parse("event hackathon");
+            Command c = this.parser.parse("event nus hackathon");
             c.execute(tasks, ui, storage);
         });
 
         assertThrows(DukeException.class, () -> {
-            Command c = this.parser.parse("event hackathon /by");
+            Command c = this.parser.parse("event nus hackathon /by");
             c.execute(tasks, ui, storage);
         });
     }
@@ -156,7 +156,34 @@ public class DukeTest {
     @Test
     public void event_wrongDateFormat_exceptionThrown() {
         assertThrows(DukeException.class, () -> {
-            Command c = this.parser.parse("event hackathon /at 01-25-2021");
+            Command c = this.parser.parse("event nus hackathon /at 01-25-2021");
+            c.execute(tasks, ui, storage);
+        });
+    }
+
+    @Test
+    public void find_findTask_success() throws DukeException {
+        Command c;
+
+        c = this.parser.parse("todo borrow book");
+        c.execute(tasks, ui, storage);
+
+        c = this.parser.parse("todo borrow nus book");
+        c.execute(tasks, ui, storage);
+
+        c = this.parser.parse("todo borrow bicycle");
+        c.execute(tasks, ui, storage);
+
+        assertEquals(2, tasks.findAll("book").size());
+        assertEquals(0, tasks.findAll("random").size());
+        assertEquals(1, tasks.findAll("bicycle").size());
+        assertEquals(1, tasks.findAll("nus book").size());
+    }
+
+    @Test
+    public void find_noCriteria_exceptionThrown() {
+        assertThrows(DukeException.class, () -> {
+            Command c = this.parser.parse("find");
             c.execute(tasks, ui, storage);
         });
     }

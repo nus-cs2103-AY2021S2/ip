@@ -12,77 +12,98 @@ import java.util.Optional;
 
 public class Parser {
 
+    private String input;
     private String command;
-    private Optional<String> secondSpecifier;
-    private Optional<String> thirdSpecifier;
 
-    public Parser()  {
+    public Parser() {
     }
 
+    /**
+     * Returns a Command after parsing the input that is received from the user.
+     * Invalid input would result in DukeException being thrown.
+     * @param input: Input receives from the user
+     * @return Command: specific Command relating to the input which requires execution
+     * @throws DukeException: Exception is thrown when an invalid command is given
+     */
     public Command parse(String input) throws DukeException {
         String[] args = input.split(" ");
+        this.input = input;
         this.command = args[0];
-
-        if (this.command.equals("")) {
-            throw new DukeException("Please enter a proper command!");
-        }
-
-        if (args.length >= 2) {
-            this.secondSpecifier = Optional.ofNullable(args[1]);
-        } else {
-            this.secondSpecifier = Optional.empty();
-        }
-
-        if (args.length == 4) {
-            this.thirdSpecifier = Optional.ofNullable(args[3]);
-        } else {
-            this.thirdSpecifier = Optional.empty();
-        }
-
-        if (this.command.equals("todo") && this.secondSpecifier.isEmpty()) {
-            throw new DukeException("There\'s no task name specified!");
-        }
-
-        if (this.command.equals("event") || this.command.equals("deadline")) {
-            if (this.secondSpecifier.isEmpty() || this.thirdSpecifier.isEmpty()) {
-                throw new DukeException("There\'s no task name or date specified!");
-            }
-
-            try {
-                LocalDate.parse(this.thirdSpecifier.get());
-            } catch (DateTimeParseException dtEx) {
-                throw new DukeException("\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
-            }
-        }
 
         switch (this.command) {
             case "list":
-                if (this.secondSpecifier.isEmpty()) {
+                String[] listParams = input.split("list ");
+                if (listParams.length == 1) {
                     return new ShowTaskCommand();
-                } else if (this.secondSpecifier.get().equals("today")) {
+                } else if (listParams[1].equals("today")) {
                     return new ShowTaskCommand(LocalDate.now());
-                } else if (this.secondSpecifier.get().equals("tomorrow")) {
+                } else if (listParams[1].equals("tomorrow")) {
                     return new ShowTaskCommand(LocalDate.now().plus(1, ChronoUnit.DAYS));
                 } else {
-                    return new ShowTaskCommand(this.secondSpecifier.get());
+                    return new ShowTaskCommand(listParams[1]);
                 }
             case "todo":
-                Todo todo = new Todo(this.secondSpecifier.get());
+                String todoName = validateOneField("There\'s no task name specified!");
+                Todo todo = new Todo(todoName);
                 return new AddTaskCommand(todo);
             case "deadline":
-                Deadline deadline = new Deadline(this.secondSpecifier.get(), LocalDate.parse(this.thirdSpecifier.get()));
-                return new AddTaskCommand(deadline);
+                String[] deadlineDetails = validateTwoFieldWithDivider("/by",
+                            "There\'s no date specified!",
+                            "\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
+
+                try {
+                    Deadline deadline = new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1]));
+                    return new AddTaskCommand(deadline);
+                } catch (DateTimeParseException dtEx) {
+                    throw new DukeException("\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
+                }
             case "event":
-                Event event = new Event(this.secondSpecifier.get(), LocalDate.parse(this.thirdSpecifier.get()));
-                return new AddTaskCommand(event);
+                String[] eventDetails = validateTwoFieldWithDivider("/at",
+                        "There\'s no date specified!",
+                        "\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
+
+                try {
+                    Event event = new Event(eventDetails[0], LocalDate.parse(eventDetails[1]));
+                    return new AddTaskCommand(event);
+                } catch (DateTimeParseException dtEx) {
+                    throw new DukeException("\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
+                }
             case "done":
-                return new DoneTaskCommand(Integer.parseInt(this.secondSpecifier.orElse("-1")));
+                String doneIndex = validateOneField("There\'s no task index specified!");
+                return new DoneTaskCommand(Integer.parseInt(doneIndex));
+            case "find":
+                String findCriteria = validateOneField("There\'s no criteria specified!");
+                return new FindCommand(findCriteria);
             case "delete":
-                return new DeleteTaskCommand(Integer.parseInt(this.secondSpecifier.orElse("-1")));
+                String deleteIndex = validateOneField("There\'s no task index specified!");
+                return new DeleteTaskCommand(Integer.parseInt(deleteIndex));
             case "bye":
                 return new ByeCommand();
             default:
                 throw new DukeException("There\'s no such command! Try todo?");
+        }
+    }
+
+    private String validateOneField(String exceptionDesc) throws DukeException {
+        String[] params = this.input.split(this.command + " ");
+        if (params.length == 2) {
+            return params[1];
+        } else {
+            throw new DukeException(exceptionDesc);
+        }
+    }
+
+    private String[] validateTwoFieldWithDivider(String divider, String exceptionOneDesc, String exceptionTwoDesc) throws DukeException {
+        String[] params = input.split( this.command + " ");
+        if (params.length == 2) {
+            String[] details = params[1].split(divider);
+            if (details.length == 2) {
+                return details;
+            } else {
+                throw new DukeException(exceptionTwoDesc);
+            }
+        } else {
+            throw new DukeException(exceptionOneDesc);
         }
     }
 }
