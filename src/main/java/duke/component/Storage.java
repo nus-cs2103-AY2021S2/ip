@@ -1,16 +1,16 @@
 package duke.component;
 
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Deadline;
-import duke.task.Event;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class Storage {
     private String filePath;
@@ -25,7 +25,7 @@ public class Storage {
 
     /**
      * Loads lines from the specified filePath.
-     * @return
+     * @return string array of input
      * @throws IOException
      */
     public String[] load() throws IOException {

@@ -6,6 +6,11 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDate by;
 
+    /**
+     * Creates a new Deadline.
+     * @param name
+     * @param by
+     */
     public Deadline(String name, String by) {
         super(name);
         this.by = LocalDate.parse(by);

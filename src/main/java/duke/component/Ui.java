@@ -1,9 +1,9 @@
 package duke.component;
 
-import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Task;
 
 public class Ui {
     public static final String LINE = "____________________________________________________________";
@@ -72,10 +72,17 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints not found message.
+     */
     public void showNotFound() {
         System.out.println("Task not found!");
     }
 
+    /**
+     * Prints found tasks.
+     * @param tasks
+     */
     public void showFound(ArrayList<Task> tasks) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {

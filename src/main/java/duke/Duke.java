@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.component.Parser;
@@ -10,13 +12,15 @@ import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.UnknownCommandException;
 
-import java.io.*;
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a new Duke instance.
+     * @param filePath
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -28,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
