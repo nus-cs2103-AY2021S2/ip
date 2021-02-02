@@ -34,7 +34,9 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.showWelcome();
-        while(sc.hasNextLine()) {
+        boolean isRunning = true;
+
+        while(isRunning) {
             String input = sc.nextLine();
             try {
                 Command command = parser.parseCommand(input);
@@ -42,6 +44,8 @@ public class Duke {
                     case BYE:
                         ui.showGoodbye();
                         storage.save(tasks);
+                        sc.close();
+                        isRunning = false;
                         break;
                     case LIST:
                         ui.showTasks(tasks);
@@ -63,16 +67,33 @@ public class Duke {
                         storage.save(tasks);
                         break;
                     case DEADLINE:
-                        Deadline newDeadline = parser.parseDeadlineCommand(input);
-                        tasks.addTask(newDeadline);
-                        ui.showMessage("Got it. I've added this task:\n  " + newDeadline + "\nNow you have " + tasks.getSize() + " tasks in the list.");
-                        storage.save(tasks);
+                        try {
+                            Deadline curr = parser.parseDeadlineCommand(input);
+                            tasks.addTask(curr);
+                            ui.showMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                            storage.save(tasks);
+                        } catch (DukeException error) {
+                            ui.showErrorMessage("The description of a deadline cannot be empty.");
+                        }
                         break;
                     case EVENT:
-                        Event newEvent = parser.parseEventCommand(input);
-                        tasks.addTask(newEvent);
-                        ui.showMessage("Got it. I've added this task:\n  " + newEvent + "\nNow you have " + tasks.getSize() + " tasks in the list.");
-                        storage.save(tasks);
+                        try {
+                            Event curr = parser.parseEventCommand(input);
+                            tasks.addTask(curr);
+                            ui.showMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                            storage.save(tasks);
+                        } catch (DukeException error) {
+                            ui.showErrorMessage("The description of an event cannot be empty.");
+                        }
+                        break;
+                    case FIND:
+                        try {
+                            String keywords = parser.parseFindCommand(input);
+                            TaskList foundTasks = tasks.findTasks(keywords);
+                            ui.showFoundTasks(foundTasks);
+                        } catch (DukeException error) {
+                            ui.showErrorMessage("No task with specified keywords can be found.");
+                        }
                         break;
                     case HELP:
                         ui.showHelpMessage();
@@ -81,7 +102,7 @@ public class Duke {
             } catch(DukeException error) {
                 ui.showInputError();
             } catch(DateTimeParseException error) {
-                ui.showErrorMessage("The date provided is invalid");
+                ui.showErrorMessage("The date provided is invalid.");
             } catch (IndexOutOfBoundsException error) {
                 ui.showErrorMessage("Selected item does not exist.");
             }

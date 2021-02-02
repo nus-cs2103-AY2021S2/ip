@@ -66,8 +66,8 @@ public class Ui {
     }
 
     /**
-     * This method is used to output the list of tasks in the TaskList object.
-     * @param tasks The TaskList object.
+     * This method is used to output the list of tasks in the <code>TaskList</code> object.
+     * @param tasks The <code>TaskList</code> object.
      * @see TaskList
      */
     public void showTasks(TaskList tasks) {
@@ -76,6 +76,27 @@ public class Ui {
             message.append("List is empty.");
         } else {
             message.append("Here are your list of tasks:\n");
+            for(int i = 1; i <= tasks.getSize(); i++) {
+                message.append("  " + i + ". " + tasks.getTask(i - 1));
+                if(i < tasks.getSize()) {
+                    message.append("\n");
+                }
+            }
+        }
+        showMessage(message.toString());
+    }
+
+    /**
+     * This method is used to output the list of found tasks in the <code>TaskList</code> object.
+     * @param tasks The <code>TaskList</code> object.
+     * @see TaskList
+     */
+    public void showFoundTasks(TaskList tasks) {
+        StringBuilder message = new StringBuilder();
+        if(tasks.isEmpty()) {
+            message.append("Sorry! Task not found.");
+        } else {
+            message.append("Here are the matching tasks in your list:\n");
             for(int i = 1; i <= tasks.getSize(); i++) {
                 message.append("  " + i + ". " + tasks.getTask(i - 1));
                 if(i < tasks.getSize()) {

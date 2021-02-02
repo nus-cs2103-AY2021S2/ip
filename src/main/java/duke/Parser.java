@@ -45,6 +45,12 @@ public class Parser {
         return new Event(args[0], LocalDate.parse(args[1]));
     }
 
+    public String parseFindCommand(String input) throws DukeException {
+        checkEmptyInput(input);
+        String keywords = input.substring(5);
+        return keywords;
+    }
+
     public boolean checkEmptyInput(String input) throws DukeException {
         String[] inputBreakdown = input.split(" ");
         if(inputBreakdown.length <= 1) {

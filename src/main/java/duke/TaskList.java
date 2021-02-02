@@ -55,6 +55,22 @@ public class TaskList {
     }
 
     /**
+     * This method is used to find a list of tasks that match the specified keywords.
+     * @param keywords The specified keywords to find tasks.
+     * @return <code>TaskList</code> of tasks that match the specified keywords.
+     * @see TaskList
+     */
+    public TaskList findTasks(String keywords) {
+        TaskList foundTasks = new TaskList();
+        for(Task task : tasks) {
+            if(task.getDescription().contains(keywords)) {
+                foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
+
+    /**
      * This method is used to check whether the list is empty.
      * @return True if list is empty. Else, false.
      */
