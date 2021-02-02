@@ -46,6 +46,14 @@ public class Ui {
         return ERROR_START + message;
     }
 
+    public String combineMessages(String... messages) {
+        StringBuilder sb = new StringBuilder();
+        for (String message : messages) {
+            sb.append(message + NEW_LINE);
+        }
+        return sb.toString();
+    }
+
     /**
      * Gets a feedback message after user adds a task.
      *
@@ -54,11 +62,7 @@ public class Ui {
      * @return Add task report.
      */
     public String getAddTaskReport(Task task, TaskList tasks) {
-        StringBuilder response = new StringBuilder();
-        response.append(TASK_ADDED_MESSAGE + NEW_LINE);
-        response.append(getTaskInfo(task) + NEW_LINE);
-        response.append(getTaskCountInfo(tasks) + NEW_LINE);
-        return response.toString();
+        return combineMessages(TASK_ADDED_MESSAGE, getTaskInfo(task), getTaskCountInfo(tasks));
     }
 
     /**
@@ -79,14 +83,8 @@ public class Ui {
      * @return Mark task as done feedback message.
      */
     public String getMarkTaskAsDoneMessage(Task task, boolean wasDone) {
-        StringBuilder response = new StringBuilder();
-        if (wasDone) {
-            response.append(TASK_ALR_COMPLETED_MESSAGE + NEW_LINE);
-        } else {
-            response.append(TASK_COMPLETED_MESSAGE + NEW_LINE);
-        }
-        response.append(getTaskInfo(task));
-        return response.toString();
+        String taskCompleteMessage = wasDone ? TASK_ALR_COMPLETED_MESSAGE : TASK_COMPLETED_MESSAGE;
+        return combineMessages(taskCompleteMessage, getTaskInfo(task));
     }
 
     /**
@@ -97,12 +95,7 @@ public class Ui {
      * @return Delete task message.
      */
     public String getDeleteTaskMessage(Task task, TaskList tasks) {
-        StringBuilder response = new StringBuilder();
-        response.append(TASK_REMOVED_MESSAGE + NEW_LINE);
-        response.append(getTaskInfo(task) + NEW_LINE);
-        response.append(getTaskCountInfo(tasks));
-        return response.toString();
-
+        return combineMessages(TASK_REMOVED_MESSAGE, getTaskInfo(task), getTaskCountInfo(tasks));
     }
 
     /**
@@ -125,15 +118,12 @@ public class Ui {
         if (tasks.isEmpty()) {
             return EMPTY_LIST_MESSAGE;
         } else {
-            StringBuilder response = new StringBuilder();
-            response.append(PRINT_LIST_MESSAGE + NEW_LINE);
-            appendTaskToString(tasks, response);
-            return response.toString();
+            return combineMessages(PRINT_LIST_MESSAGE, combineTasksToString(tasks));
         }
     }
 
     /**
-     * gets all the tasks found by a keyword after formatting.
+     * Gets all the tasks found by a keyword after formatting.
      *
      * @param tasks List of found tasks.
      * @return Info of all found tasks after formatting
@@ -142,23 +132,21 @@ public class Ui {
         if (tasks.isEmpty()) {
             return NO_FOUND_TASK_MESSAGE;
         } else {
-            StringBuilder response = new StringBuilder();
-            response.append(PRINT_FOUND_TASKS_MESSAGE + NEW_LINE);
-            appendTaskToString(tasks, response);
-            return response.toString();
+            return combineMessages(PRINT_FOUND_TASKS_MESSAGE, combineTasksToString(tasks));
         }
     }
 
     /**
-     * Adds info string of all the tasks in the given TaskList
-     * to the provided StringBuilder
+     * Combine info strings of all the tasks in the given TaskList into one.
      *
      * @param tasks TaskList to be printed.
-     * @param sb    StringBuilder which task string will be appended to
+     * @return Combines string containing all tasks in TaskList.
      */
-    public void appendTaskToString(TaskList tasks, StringBuilder sb) {
+    public String combineTasksToString(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= tasks.getTaskCount(); ++i) {
             sb.append(i + "." + tasks.getTask(i - 1).toString() + NEW_LINE);
         }
+        return sb.toString();
     }
 }
