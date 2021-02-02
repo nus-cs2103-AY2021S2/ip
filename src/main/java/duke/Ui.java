@@ -23,6 +23,7 @@ public class Ui {
 
     /**
      * Returns a String representing the user input.
+     *
      * @return a String representing the user input.
      */
     public String readInput() {
@@ -34,7 +35,8 @@ public class Ui {
      * Prints a message informing the user
      * of the Task added to the TaskList
      * along with the total number of Tasks in the TaskList.
-     * @param t the Task that was added to the TaskList.
+     *
+     * @param t        the Task that was added to the TaskList.
      * @param taskList the TaskList in which the Task was added to.
      */
     public void printTaskAddedConfirmation(Task t, TaskList taskList) {
@@ -48,6 +50,7 @@ public class Ui {
     /**
      * Prints the details of all the Tasks in the TaskList
      * in numerical order.
+     *
      * @param taskList the TaskList containing the Tasks to be printed.
      */
     public void listTasks(TaskList taskList) {
@@ -68,6 +71,7 @@ public class Ui {
     /**
      * Prints a message informing the user
      * of the Task that was marked as done.
+     *
      * @param task the Task that was marked as done.
      */
     public void printTaskDoneConfirmation(Task task) {
@@ -79,8 +83,9 @@ public class Ui {
      * Prints a message informing the user
      * of the Task that was deleted from the TaskList
      * along with the remaining number of Tasks in that TaskList.
+     *
      * @param taskList the TaskList from which the Task was deleted.
-     * @param task the Task to be deleted.
+     * @param task     the Task to be deleted.
      */
     public void printTaskDeleteConfirmation(TaskList taskList, Task task) {
         ArrayList<Task> tasks = taskList.getTasks();
@@ -94,6 +99,7 @@ public class Ui {
      * Prints the details of all the Tasks in the TaskList,
      * that matched a keyword input by the user,
      * in numerical order.
+     *
      * @param taskList the TaskList containing the matched Tasks to be printed.
      */
     public void printMatchingTasks(TaskList taskList) {
@@ -122,6 +128,7 @@ public class Ui {
     /**
      * Prints a message informing the user that
      * user input was invalid along with the error message.
+     *
      * @param e the DukeException containing the details of the error.
      */
     public void printDukeExceptionMessage(DukeException e) {

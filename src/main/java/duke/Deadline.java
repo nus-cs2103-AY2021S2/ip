@@ -13,8 +13,9 @@ public class Deadline extends Task {
 
     /**
      * Class constructor.
+     *
      * @param description the details of the deadline.
-     * @param by the date and time the deadline needs to be done by.
+     * @param by          the date and time the deadline needs to be done by.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -23,6 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a String representation of this Deadline.
+     *
      * @return a String representation of this Deadline.
      */
     @Override

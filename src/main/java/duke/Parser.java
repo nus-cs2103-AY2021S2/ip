@@ -11,14 +11,15 @@ import java.util.ArrayList;
  */
 public class Parser {
 
-    protected static DateTimeFormatter INPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    protected static final DateTimeFormatter INPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     /**
      * Returns a valid Duke Command after parsing user input.
+     *
      * @param input user input.
      * @return a valid Duke Command
      * @throws DukeException when user input
-     *         does not match any valid Duke Commands.
+     *                       does not match any valid Duke Commands.
      */
     public Command parseCommand(String input) throws DukeException {
         String[] arr = input.split(" ");
@@ -31,10 +32,11 @@ public class Parser {
 
     /**
      * Returns a ToDo based on user input.
+     *
      * @param input user input.
      * @return a ToDo based on user input.
      * @throws DukeException when user input does not contain
-     *         the description of the ToDo after the command.
+     *                       the description of the ToDo after the command.
      */
     public ToDo parseToDo(String input) throws DukeException {
         String[] arr = input.split(" ");
@@ -46,12 +48,13 @@ public class Parser {
 
     /**
      * Returns a Deadline based on user input.
+     *
      * @param input user input.
      * @return a Deadline based on user input.
      * @throws DukeException when user input does not contain
-     *         the description of the Deadline after the command,
-     *         the date and time of the Deadline after '/by'
-     *         or when the date and time is not in the correct format.
+     *                       the description of the Deadline after the command,
+     *                       the date and time of the Deadline after '/by'
+     *                       or when the date and time is not in the correct format.
      */
     public Deadline parseDeadline(String input) throws DukeException {
         String[] arr = input.split(" ");
@@ -73,12 +76,13 @@ public class Parser {
 
     /**
      * Returns an Event based on user input.
+     *
      * @param input user input.
      * @return a Event based on user input.
      * @throws DukeException when user input does not contain
-     *         the description of the Event after the command,
-     *         the date and time of the Event after '/at'
-     *         or when the date and time is not in the correct format.
+     *                       the description of the Event after the command,
+     *                       the date and time of the Event after '/at'
+     *                       or when the date and time is not in the correct format.
      */
     public Event parseEvent(String input) throws DukeException {
         String[] arr = input.split(" ");
@@ -101,11 +105,12 @@ public class Parser {
     /**
      * Returns a valid int index of the Task
      * to be marked as done in the TaskList.
-     * @param input user input.
+     *
+     * @param input    user input.
      * @param taskList list of Tasks that contains the Task to be marked as done.
      * @return the index of the Task.
      * @throws DukeException when user input does not contain an int value after the command
-     *         or when the index provided does not correspond to any Task in the TaskList.
+     *                       or when the index provided does not correspond to any Task in the TaskList.
      */
     public int parseDone(String input, TaskList taskList) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
@@ -127,11 +132,12 @@ public class Parser {
     /**
      * Returns a valid int index of the Task
      * to be deleted from the TaskList.
-     * @param input user input.
+     *
+     * @param input    user input.
      * @param taskList list of Tasks that contains the Task to be deleted.
      * @return the index of the Task.
      * @throws DukeException when user input does not contain an int value after the command
-     *         or when the index provided does not correspond to any Task in the TaskList.
+     *                       or when the index provided does not correspond to any Task in the TaskList.
      */
     public int parseDelete(String input, TaskList taskList) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
@@ -152,10 +158,11 @@ public class Parser {
 
     /**
      * Returns a valid String keyword.
+     *
      * @param input user input.
      * @return a valid String keyword
      * @throws DukeException when user enters more than one keyword
-     *         or none at all.
+     *                       or none at all.
      */
     public String parseKeyword(String input) throws DukeException {
         String[] arr = input.split(" ");

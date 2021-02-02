@@ -1,12 +1,11 @@
 package duke;
 
-import java.io.IOException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import java.util.ArrayList;
 
 /**
@@ -20,6 +19,7 @@ public class Storage {
      * Returns a TaskList from a save file if it exists,
      * else creates a new save file and
      * returns an empty TaskList.
+     *
      * @return a TaskList from a saved file or an empty TaskList.
      */
     public TaskList readFromFile() {
@@ -53,6 +53,7 @@ public class Storage {
 
     /**
      * Writes the contents of a TaskList into a save file.
+     *
      * @param tasks the TaskList to be written into the save file.
      */
     public void writeToFile(TaskList tasks) {

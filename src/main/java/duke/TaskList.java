@@ -7,12 +7,13 @@ import java.util.ArrayList;
  * Represents the component of the Duke program
  * that contains the list of Tasks.
  */
-public class TaskList implements Serializable  {
+public class TaskList implements Serializable {
 
     protected ArrayList<Task> tasks;
 
     /**
      * Class constructor.
+     *
      * @param tasks the list of Tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -21,6 +22,7 @@ public class TaskList implements Serializable  {
 
     /**
      * Returns the list of Tasks stored in this TaskList.
+     *
      * @return the list of Tasks stored in this TaskList.
      */
     public ArrayList<Task> getTasks() {
@@ -30,6 +32,7 @@ public class TaskList implements Serializable  {
     /**
      * Returns the Task in the specified int index of
      * the list of Tasks contained in this TaskList.
+     *
      * @param index the int index of the Task to be returned.
      * @return the Task in the specified int index.
      */
@@ -40,6 +43,7 @@ public class TaskList implements Serializable  {
     /**
      * Adds a Task into the list of Tasks
      * contained in this TaskList.
+     *
      * @param task the Task to be added.
      */
     public void addTask(Task task) {
@@ -50,6 +54,7 @@ public class TaskList implements Serializable  {
      * Marks a Task in the specified int index of
      * the list of Tasks contained in this TaskList
      * as done.
+     *
      * @param index the int index of the Task to be marked as done.
      */
     public void markTaskAsDone(int index) {
@@ -59,6 +64,7 @@ public class TaskList implements Serializable  {
     /**
      * Deletes a Task in the specified int index of
      * the list of Tasks contained in this TaskList.
+     *
      * @param index the int index of the Task to be deleted.
      */
     public void deleteTask(int index) {
@@ -68,6 +74,7 @@ public class TaskList implements Serializable  {
     /**
      * Returns a TaskList containing Tasks that
      * have descriptions matching the String keyword.
+     *
      * @param keyword the String keyword to be matched with Task descriptions.
      * @return a TaskList containing matching Tasks.
      */

@@ -14,6 +14,7 @@ public class Task implements Serializable {
 
     /**
      * Class constructor.
+     *
      * @param description the details of the task.
      */
     public Task(String description) {
@@ -23,6 +24,7 @@ public class Task implements Serializable {
 
     /**
      * Returns a String that represents whether this Task is done.
+     *
      * @return String representation of whether this Task is done.
      */
     public String getStatusIcon() {
@@ -38,6 +40,7 @@ public class Task implements Serializable {
 
     /**
      * Returns a String representation of this Task.
+     *
      * @return a String representation of this Task.
      */
     @Override

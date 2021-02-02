@@ -14,9 +14,10 @@ public class Duke {
 
     /**
      * Class constructor.
-     * @param ui handles interactions with user.
-     * @param storage handles loading and saving of Tasks.
-     * @param parser handles user commands.
+     *
+     * @param ui       handles interactions with user.
+     * @param storage  handles loading and saving of Tasks.
+     * @param parser   handles user commands.
      * @param taskList contains list of Tasks.
      */
     public Duke(Ui ui, Storage storage, Parser parser, TaskList taskList) {
@@ -81,6 +82,8 @@ public class Duke {
                     ui.printByeMessage();
                     isTerminated = true;
                     break;
+                default:
+                    //Do nothing
                 }
             } catch (DukeException dukeException) {
                 ui.printDukeExceptionMessage(dukeException);
@@ -91,6 +94,7 @@ public class Duke {
     /**
      * Initialises a Duke object after loading a saved file
      * of Tasks if it exists, then executes main logic.
+     *
      * @param args unused.
      */
     public static void main(String[] args) {
