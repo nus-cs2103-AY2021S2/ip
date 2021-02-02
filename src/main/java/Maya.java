@@ -1,9 +1,14 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Maya {
+public class Maya extends Application{
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -25,6 +30,15 @@ public class Maya {
         } catch (UnknownCommandException e) {
             ui.showError(e.getMessage());
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
