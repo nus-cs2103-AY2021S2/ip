@@ -12,8 +12,8 @@ import java.util.Scanner;
  * Loads and saves data.
  */
 public class Storage {
-    protected String currentDirectory;
-    protected Path path;
+    private String currentDirectory;
+    private Path path;
     protected boolean pathExists;
 
     /**

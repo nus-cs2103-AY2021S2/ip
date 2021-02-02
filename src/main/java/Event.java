@@ -5,26 +5,26 @@ import java.time.format.DateTimeFormatter;
  * Creates an Event task with a date and time.
  */
 public class Event extends Task {
-    protected LocalDateTime at;
+    protected LocalDateTime dateAndTime;
 
     /**
      * Creates a new Event.
      * @param description Description of the event.
-     * @param at Date and time of the event.
+     * @param dateAndTime Date and time of the event.
      */
-    public Event(String description, LocalDateTime at) {
+    public Event(String description, LocalDateTime dateAndTime) {
         super(description);
-        this.at = at;
+        this.dateAndTime = dateAndTime;
     }
 
     @Override
     public String saveTask() {
-        return "E" + super.saveTask() + " |" + at + "\n";
+        return "E" + super.saveTask() + " |" + dateAndTime + "\n";
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+                + dateAndTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }

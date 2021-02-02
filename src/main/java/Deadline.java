@@ -5,26 +5,26 @@ import java.time.format.DateTimeFormatter;
  * Creates a Deadline task with a date.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDate date;
 
     /**
      * Creates a new Deadline.
      * @param description Description of the task.
-     * @param by Date of the deadline.
+     * @param date Date of the deadline.
      */
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, LocalDate date) {
         super(description);
-        this.by = by;
+        this.date = date;
     }
 
     @Override
     public String saveTask() {
-        return "D" + super.saveTask() + " |" + by + "\n";
+        return "D" + super.saveTask() + " |" + date + "\n";
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes: one echoing user input and the other containing the chatbot's reply.
+     * Creates two dialog boxes for user input and response.
      * Appends dialog boxes to the dialog container.
      * Clears the user input after processing.
      */

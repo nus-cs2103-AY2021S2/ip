@@ -68,12 +68,9 @@ public class TaskList {
      * @param num Number representing task in the list.
      */
     public String deleteTask(int num) {
-        //System.out.println("\nOkay, I've deleted this task:");
-        //System.out.println(tasks.get(num - 1).toString());
         String taskToDelete = tasks.get(num - 1).toString();
         tasks.remove(num - 1);
         numTasks--;
-        //System.out.println("You now have a total of " + numTasks + " tasks.\n");
 
         return "Okay, I've deleted this task:\n" + taskToDelete
                 + "\nYou now have a total of " + numTasks + " tasks.";
