@@ -1,5 +1,15 @@
+/**
+ * Represents a Parser which parses user inputs.
+ */
 public class Parser {
 
+    /**
+     * Returns the appropriate command after parsing the input.
+     * @param input User input.
+     * @return Relevant command.
+     * @throws IncompleteCommandException If command is incomplete.
+     * @throws NoSuchCommandException If command does not exist.
+     */
     static Command parse(String input) throws IncompleteCommandException, NoSuchCommandException {
         Command command;
         if (input.equals("bye")) {

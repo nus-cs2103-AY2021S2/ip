@@ -1,11 +1,17 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the chatbot Duke.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor for Duke.
+     */
     Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -23,6 +29,12 @@ public class Duke {
         duke.chat(scanner, duke.tasks);
     }
 
+    /**
+     * Allows user to start chatting with Duke.
+     * @param scanner For user to input commands.
+     * @param tasks List of tasks user has saved.
+     * @throws IOException If exception occurs when method is running.
+     */
     public void chat(Scanner scanner, TaskList tasks) throws IOException {
         this.ui.welcome();
         boolean isExit = false;

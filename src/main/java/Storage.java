@@ -7,11 +7,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage used for loading files from and saving files into the user's computer.
+ */
 public class Storage {
     private static final String currdir = System.getProperty("user.dir");
     private static final Path path = Paths.get(currdir, "data");
     private static final Path file = Paths.get(currdir, "data", "duke.txt");
 
+    /**
+     * Loads saved tasks from the user's computer.
+     * @return List of saved tasks.
+     * @throws IOException if exception occurs when method is running.
+     */
     public ArrayList<Task> loadtasks() throws IOException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
@@ -51,6 +59,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks into the user's computer.
+     * @param tasks List of tasks to be saved.
+     */
     public void savetasks(TaskList tasks) {
         try {
             String string = "";
