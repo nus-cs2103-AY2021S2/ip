@@ -7,8 +7,10 @@ public class Parser {
 
     /**
      * Process the user input to make sense for the system.
+     * @param nextInput The user input.
      * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct display.
+     * @param ui UI structure to show the user correct message.
+     * @return Return the correct logic and GUI output.
      */
     public String processInput(String nextInput, TaskList tasks, Ui ui) {
         String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
@@ -56,7 +58,8 @@ public class Parser {
      * Adds a Todo task.
      * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct display.
+     * @param ui UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public String todo(String nextInput, TaskList tasks, Ui ui) throws DukeException{
@@ -73,7 +76,8 @@ public class Parser {
      * Adds a Deadline task.
      * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct display.
+     * @param ui UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public String deadline(String nextInput, TaskList tasks, Ui ui) throws DukeException{
@@ -93,7 +97,8 @@ public class Parser {
      * Adds a Event task.
      * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct display.
+     * @param ui UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public String event(String nextInput, TaskList tasks, Ui ui) throws DukeException{
@@ -114,7 +119,8 @@ public class Parser {
      * @param command The command given by user input.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param count The current number of tasks stored inside the Task Arraylist.
-     * @param ui UI structure to show the user correct display.
+     * @param ui UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
     public String done(String command, TaskList tasks, int count, Ui ui) throws DukeException{
@@ -135,7 +141,8 @@ public class Parser {
      * @param command The command given by user input.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param count The current number of tasks stored inside the Task Arraylist.
-     * @param ui UI structure to show the user correct display.
+     * @param ui UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
     public String delete(String command, TaskList tasks, int count, Ui ui) throws DukeException {
@@ -156,7 +163,8 @@ public class Parser {
     /**
      * List out all user inputs in sequence.
      * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct display.
+     * @param ui UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
      */
     public String list(TaskList tasks, Ui ui) {
         return ui.showListMsg(tasks);
@@ -166,7 +174,8 @@ public class Parser {
      * Find tasks matching the keyword in the command given by the user.
      * @param command The command given by user input.
      * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct display.
+     * @param ui UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the user input is invalid.
      */
     public String find(String command, TaskList tasks, Ui ui) throws DukeException {
@@ -179,12 +188,17 @@ public class Parser {
 
     /**
      * Tells the user that the input given is invalid.
+     * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the user input is invalid.
      */
     public String wrongCommand() throws DukeException {
         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    /**
+     * Terminate the GUI when the user decides to.
+     * @return Nothing since this command will close the GUI.
+     */
     public String exitCommand() {
         Platform.exit();
         return null;

@@ -18,8 +18,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     * @param input The user input.
+     * @return Return the correct output from the given input.
+     * @throws FileNotFoundException Exception thrown when the file does not exist, should not happen.
      */
     String getResponse(String input) throws FileNotFoundException {
         String result = parser.processInput(input, storage.tasks, ui);
