@@ -2,63 +2,43 @@
  * Class that control how Duke interacts with user.
  */
 public class Ui {
-    static final String LINE_AFTER_COMMAND = "___________________________________" +
-            "_________________________";
 
     /**
-     * Show a message added with a line
+     * Show a message with an additional newline
      * @param message Message wanted to be shown
      */
-    public static void showMessage(String message) {
-        System.out.println(message);
-        System.out.println(LINE_AFTER_COMMAND);
-    }
-
-    /**
-     * Show message (without line)
-     * @param item Message wanted to be shown
-     */
-    public static void showMessageInALine(String item) {
-        System.out.println(item);
+    public static String showMessage(String message) {
+        return message + "\n";
     }
 
     /**
      * Welcome message when starting Duke
      */
-    public static void showWelcomeMessage() {
+
+    public static String getWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(LINE_AFTER_COMMAND + "\nHello! I'm  Duke");
-        System.out.println("What can I do for you?\n" + LINE_AFTER_COMMAND + "\n");
+                + "|____/ \\__,_|_|\\_\\___|";
+        return "Hello from\n" + logo + "\nHello! I'm Fayola, Duke's Assistant.\n" +
+                "What can I do for you?\n";
     }
 
     /**
      * Closing message when closing Duke
      */
-    public static void doBye() {
-        System.out.println(LINE_AFTER_COMMAND + "\nBye. Hope to see you again soon!\n"
-                + LINE_AFTER_COMMAND + "\n");
+    public static String doBye() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
-    /**
-     * Print a line
-     */
-    public static void printLine() {
-        System.out.println(LINE_AFTER_COMMAND);
-    }
 
     /**
      * Message when finishing a Task
      * @param message message of finishing a task
      */
-    public static void finishTaskMessage(String message) {
-        Ui.showMessageInALine("Nice! I've marked this task as done: ");
-        System.out.println(" " + message);
-        System.out.println(LINE_AFTER_COMMAND);
+    public static String finishTaskMessage(String message) {
+        return "Nice! I've marked this task as done: \n" + " " + message + "\n";
     }
 
     /**
@@ -66,11 +46,9 @@ public class Ui {
      * @param message message of deleting a task
      * @param newSize new size of the TaskList
      */
-    public static void deleteTaskMessage(String message, int newSize) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + message);
-        System.out.println("Now you have " + newSize + " tasks in the list.");
-        System.out.println(LINE_AFTER_COMMAND + "\n");
+    public static String deleteTaskMessage(String message, int newSize) {
+        return "Noted. I've removed this task:\n"  + "  " + message + "\nNow you have " + newSize
+                + " tasks in the list.\n";
     }
 
     /**
@@ -78,10 +56,8 @@ public class Ui {
      * @param message messsage of adding a task
      * @param newSize new size of the TaskList
      */
-    public static void addTaskMessage(String message, int newSize) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + message);
-        System.out.println("Now you have " + newSize + " tasks in the list.");
-        System.out.println(LINE_AFTER_COMMAND + "\n");
+    public static String addTaskMessage(String message, int newSize) {
+        return "Got it. I've added this task:\n" + "  " + message + "\nNow you have "
+                + newSize + " tasks in the list.";
     }
 }

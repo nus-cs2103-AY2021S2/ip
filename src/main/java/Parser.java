@@ -43,12 +43,12 @@ public class Parser {
                 return phrases[0].substring(this.command.length() + 1);
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the "
+            throw new DukeException("OOPS!!! I'm sorry, but the "
                     + this.command +" must have description :-(");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the input is kinda faulty :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but the input is kinda faulty :-(");
         }
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I cannot understand the input :-(");
+        throw new DukeException("OOPS!!! I'm sorry, but I cannot understand the input :-(");
     }
 
     /**
@@ -71,12 +71,12 @@ public class Parser {
             }
         }
         catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the "
+            throw new DukeException("OOPS!!! I'm sorry, but the "
                     + this.command +" must have description :-(");
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the input is kinda faulty :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but the input is kinda faulty :-(");
         }
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I cannot understand the input :-(");
+        throw new DukeException("OOPS!!! I'm sorry, but I cannot understand the input :-(");
     }
 }

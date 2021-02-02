@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * An app that interacts with the users and help them list down tasks
  * they need to do.
@@ -9,9 +7,7 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
 
-    /**
-     * Main function of the class.
-     */
+    /*
     public static void main(String[] args) {
         try {
             new Duke("./data/duke.txt").run();
@@ -22,6 +18,42 @@ public class Duke {
             Ui.showMessage(e.getMessage());
             return;
         }
+    }
+    */
+
+    public String getResponse(String command) {
+        String output = "";
+        if (command.equals("bye")) {
+            return Ui.doBye();
+        }
+        try {
+            this.parser = new Parser(command);
+            String parsedCommand = this.parser.getCommand();
+            String description = this.parser.getDescription();
+            String deadline = this.parser.getDeadLine();
+            if (parsedCommand.equals("list")) {
+                output = taskList.iterateList();
+            } else if (parsedCommand.equals("done")) {
+                output = taskList.finishATask(description);
+            } else if (parsedCommand.equals("delete")) {
+                output = taskList.deleteATask(description);
+            } else if (parsedCommand.equals("find")) {
+                output = taskList.findTasks(description);
+            } else {
+                Task task = processTask(parsedCommand, description, deadline);
+                output = taskList.addTask(task);
+            }
+        } catch (DukeException e) {
+            output = Ui.showMessage(e.getMessage());
+        } catch (DukeExceptionDeadline e) {
+            output = Ui.showMessage(e.getMessage());
+        }
+        try {
+            storage.writeFile(taskList);
+        } catch (DukeException e) {
+            output = Ui.showMessage(e.getMessage());
+        }
+        return output;
     }
 
     /**
@@ -36,53 +68,6 @@ public class Duke {
     }
 
     /**
-     * After loading the data from the storage, run Duke application.
-     */
-    public void run() {
-        Ui.showWelcomeMessage();
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            String command = scanner.nextLine();
-            if (command.equals("bye")) {
-                Ui.doBye();
-                break;
-            }
-            Ui.printLine();
-            String[] inputs = command.split(" ");
-            try {
-                this.parser = new Parser(command);
-                command = this.parser.getCommand();
-                String description = this.parser.getDescription();
-                String deadline = this.parser.getDeadLine();
-                if (command.equals("list")) {
-                    taskList.iterateList();
-                    continue;
-                } else if (command.equals("done")) {
-                    taskList.finishATask(description);
-                } else if (command.equals("delete")) {
-                    taskList.deleteATask(description);
-                } else if (command.equals("find")) {
-                    taskList.findTasks(description);
-                } else {
-                    Task task = processTask(command, description, deadline);
-                    taskList.addTask(task);
-                }
-            } catch (DukeException e) {
-                Ui.showMessage(e.getMessage());
-                continue;
-            } catch (DukeExceptionDeadline e) {
-                Ui.showMessage(e.getMessage());
-                continue;
-            }
-            try {
-                storage.writeFile(taskList);
-            } catch (DukeException e) {
-                Ui.showMessage(e.getMessage());
-            }
-        }
-    }
-
-    /**
      * A function that process the command from the users
      * @param command The type of task given
      * @param description The description of the task need to be done
@@ -91,7 +76,6 @@ public class Duke {
      * @throws DukeException Command is not valid
      * @throws DukeExceptionDeadline Deadline given is not in "yyyy-MM-dd"
      */
-
     public static Task processTask(String command, String description, String deadline)
             throws DukeException, DukeExceptionDeadline {
         if (command.equals("todo")) {

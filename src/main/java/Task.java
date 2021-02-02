@@ -25,7 +25,10 @@ public class Task {
      * Finish the current Task
      * @return New Task object that has been done
      */
-    public Task finishTask() {
+    public Task finishTask() throws DukeException {
+        if (this.isDone) {
+            throw new DukeException("Task has been done before!");
+        }
         return new Task(this.task, true);
     }
 
