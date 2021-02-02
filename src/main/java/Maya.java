@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -19,6 +21,9 @@ public class Maya extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image maya = new Image(this.getClass().getResourceAsStream("/images/maya.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/tucker.jpg"));
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -80,6 +85,14 @@ public class Maya extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
     }
 
     /**
@@ -94,6 +107,28 @@ public class Maya extends Application {
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getMayaDialog(dukeText, new ImageView(maya))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String input) {
+        return "Maya heard: " + input;
+//        ui.showLine();
+//        Scanner sc = new Scanner(System.in);
+//        Parser.parse(command, sc, ui, taskList, storage);
     }
 
     /**
