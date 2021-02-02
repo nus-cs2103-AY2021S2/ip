@@ -9,11 +9,6 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * Constructs a ListCommand object.
-     */
-    public ListCommand() {}
-
-    /**
      * Returns the list of tasks in TaskList.
      *
      * @param tasks TaskList to be listed.
