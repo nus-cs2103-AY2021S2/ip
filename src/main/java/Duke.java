@@ -1,6 +1,9 @@
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;  // Import the File class
@@ -80,7 +83,8 @@ public class Duke {
                     try{
                         String name = getEventOrDeadlineName(input);
                         String by = getEventOrDeadlineAttribute(input);
-                        Deadline deadline = new Deadline(name, by);
+
+                        Deadline deadline = new Deadline(name, processDate(by));
                         tasks.add(deadline);
 
                         System.out.println("\n---------------------------------------" );
@@ -191,5 +195,48 @@ public class Duke {
             System.out.println("saveTask error");
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<Task> fetchTasks() {
+        ArrayList<Task> result = new ArrayList<>();
+        String currDir = System.getProperty("user.dir");
+        String expectedDir = currDir + "/data/modoc_tm.txt";
+
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(expectedDir));
+            String lineRead = reader.readLine();
+            while (lineRead != null) {
+                char taskType = lineRead.charAt(0);
+                String[] data = lineRead.split("/");
+                Boolean isDone = (Integer.parseInt(data[1]) == 1 ? true : false);
+                if (taskType == 'E') {
+                    Event event = new Event(data[2], data[3], isDone);
+                    result.add(event);
+                } else if (taskType == 'D') {
+                    Deadline deadline = new Deadline(data[2], data[3], isDone);
+                    result.add(deadline);
+                } else {
+                    Todo todo = new Todo(data[2], isDone);
+                    result.add(todo);
+                }
+                lineRead = reader.readLine();
+            }
+        } catch (IOException e) {
+            return result;
+        }
+        return result;
+    }
+
+    public static String processDate(String originalDate) {
+        LocalDate date = LocalDate.parse(originalDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String month = date.getMonth().toString();
+        String threeLetteredMonth = month.substring(0,1) + month.substring(1,3).toLowerCase();
+        String day = Integer.toString(date.getDayOfMonth());
+        String year = Integer.toString(date.getYear());
+
+        String result = threeLetteredMonth + " " + day + " " + year;
+
+        return result;
     }
 }
