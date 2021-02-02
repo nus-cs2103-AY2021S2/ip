@@ -76,7 +76,15 @@ public class TaskList {
         return str.substring(0, str.length() - 7);
     }
 
+    /**
+     * Returns the string representation of the TaskList
+     *
+     * @return the lists of tasks
+     */
     public String listTasks() {
+        if (this.tasks.size() == 0) {
+            return "You have no tasks in your list.";
+        }
         return this.toString();
     }
 
@@ -100,7 +108,7 @@ public class TaskList {
      * @return String representation of the amount of tasks in the TaskList.
      */
     private String sizeToString() {
-        return "\n    Now you have " + this.tasks.size() + " tasks in the list.";
+        return "\nNow, you have " + this.tasks.size() + " tasks in the list.";
     }
 
     @Override
