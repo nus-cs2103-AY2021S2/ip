@@ -32,6 +32,7 @@ public class Storage {
         try {
             data.createNewFile();
         } catch (IOException e) {
+            e.printStackTrace();
             System.err.println("Could not create new file, exiting process now.");
             System.exit(1);
         }
@@ -69,11 +70,11 @@ public class Storage {
                 break;
             // format: DEADLINE.1.desc.date.time
             case "DEADLINE":
-                newTask = new Deadline(taskArgs[3], isTaskDone, LocalDate.parse(taskArgs[3]), LocalTime.parse(taskArgs[4]));
+                newTask = new Deadline(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]), LocalTime.parse(taskArgs[4]));
                 break;
             // format: EVENT.1.desc.date.time
             case "EVENT":
-                newTask = new Event(taskArgs[3], isTaskDone, LocalDate.parse(taskArgs[3]), LocalTime.parse(taskArgs[4]));
+                newTask = new Event(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]), LocalTime.parse(taskArgs[4]));
                 break;
             }
             taskList.add(newTask);
