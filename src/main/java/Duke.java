@@ -15,46 +15,52 @@ public class Duke {
 
         while (true) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                bye();
-                break;
-            } else if (input.contains("done")) {
-                System.out.println("Nice! I've marked this task as done: ");
+            try {
+                errorHandling(input);
+                if (input.equals("bye")) {
+                    bye();
+                    break;
+                } else if (input.contains("done")) {
+                    System.out.println("Nice! I've marked this task as done: ");
 
-                int taskNum = Integer.parseInt(input.substring(5));
-                String name = items.get(taskNum - 1).getDescription();
+                    int taskNum = Integer.parseInt(input.substring(5));
+                    String name = items.get(taskNum - 1).getDescription();
 
-                Task type = items.get(taskNum - 1);
-                items.remove(taskNum - 1);
-                if (type instanceof Todo){
-                    Todo markDone = new Todo(name, true);
-                    items.add(taskNum - 1, markDone);
-                    System.out.println(markDone);
-                } else if (type instanceof Deadline){
-                    Deadline markDone = new Deadline(name, true);
-                    items.add(taskNum - 1, markDone);
-                    System.out.println(markDone);
+                    Task type = items.get(taskNum - 1);
+                    items.remove(taskNum - 1);
+                    if (type instanceof Todo) {
+                        Todo markDone = new Todo(name, true);
+                        items.add(taskNum - 1, markDone);
+                        System.out.println(markDone);
+                    } else if (type instanceof Deadline) {
+                        Deadline markDone = new Deadline(name, true);
+                        items.add(taskNum - 1, markDone);
+                        System.out.println(markDone);
+                    } else {
+                        Event markDone = new Event(name, true);
+                        items.add(taskNum - 1, markDone);
+                        System.out.println(markDone);
+                    }
+
+                } else if (input.equals("list")) {
+                    int n = 1;
+                    System.out.println("Here are the tasks in your list:");
+                    for (Task item : items) {
+                        System.out.println(n + ". " + item);
+                        n++;
+                    }
+
+                } else if (input.contains("deadline")) {
+                    items.add(new Deadline(input.substring(8)));
+                } else if (input.contains("todo")) {
+                    items.add(new Todo(input.substring(4)));
+                } else if (input.contains("event")) {
+                    items.add(new Event(input.substring(5)));
                 } else {
-                    Event markDone = new Event(name, true);
-                    items.add(taskNum - 1, markDone);
-                    System.out.println(markDone);
+                    items.add(new Task(input));
                 }
-
-            } else if (input.equals("list")) {
-                int n = 1;
-                System.out.println("Here are the tasks in your list:");
-                for (Task item : items) {
-                    System.out.println(n + ". " + item);
-                    n++;
-                }
-            } else if (input.contains("deadline")) {
-                items.add(new Deadline(input.substring(8)));
-            } else if (input.contains("todo")) {
-                items.add(new Todo(input.substring(4)));
-            } else if (input.contains("event")) {
-                items.add(new Event(input.substring(5)));
-            } else {
-                items.add(new Task(input));
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
     }
@@ -64,5 +70,17 @@ public class Duke {
      */
     public static void bye() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void errorHandling(String input) throws DukeException {
+        if (input.length() == 4 && input.equals("todo")) {
+            throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+        } else if (input.length() == 8 && input.equals("deadline")) {
+            throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (input.length() == 5 && input.equals("event")) {
+            throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+        } else if (input.substring(0,4).equals("blah")) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else {}
     }
 }
