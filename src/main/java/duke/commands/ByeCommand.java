@@ -4,13 +4,12 @@ import java.io.IOException;
 
 import duke.tasks.TaskList;
 import duke.utils.Storage;
-import duke.utils.Ui;
 
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 
-    public ByeCommand(TaskList taskList, Ui ui, Storage storage) {
-        super(taskList, ui, storage);
+    public ByeCommand(TaskList taskList, Storage storage) {
+        super(taskList, storage);
     }
 
     /**
@@ -24,7 +23,6 @@ public class ByeCommand extends Command {
 
             return "Bye. Hope to see you again soon!";
         } catch (IOException e) {
-            this.ui.showError(e.getMessage());
             return e.getMessage();
         }
     }

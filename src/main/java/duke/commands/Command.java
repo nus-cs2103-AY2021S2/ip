@@ -7,11 +7,9 @@ import duke.utils.Ui;
 public abstract class Command {
     protected TaskList taskList;
     protected Storage storage;
-    protected Ui ui;
 
-    Command(TaskList taskList, Ui ui, Storage storage) {
+    Command(TaskList taskList, Storage storage) {
         this.taskList = taskList;
-        this.ui = ui;
         this.storage = storage;
     }
 

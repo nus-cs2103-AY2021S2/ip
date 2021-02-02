@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 import duke.utils.Storage;
-import duke.utils.Ui;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
@@ -12,12 +11,11 @@ public class DoneCommand extends Command {
     /**
      * Creates a DoneCommand object to store the done command input from the user.
      * @param taskList the current list of Tasks.
-     * @param ui the object in charge of printing user-friendly outputs.
      * @param storage the object in charge of writing to the local storage file.
      * @param position the position of the task in the taskList to mark as done.
      */
-    public DoneCommand(TaskList taskList, Ui ui, Storage storage, int position) {
-        super(taskList, ui, storage);
+    public DoneCommand(TaskList taskList, Storage storage, int position) {
+        super(taskList, storage);
         this.position = position;
     }
 

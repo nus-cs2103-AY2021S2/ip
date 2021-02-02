@@ -14,16 +14,14 @@ import duke.tasks.TaskList;
 
 public class Storage {
     private final String filepath;
-    private final Ui ui;
 
     /**
      * Constructs a Storage object responsible for reading and writing to the local storage file.
+     *
      * @param filepath the filepath of the local storage file, as a String.
-     * @param ui the object in charge of printing user-friendly outputs.
      */
-    public Storage(String filepath, Ui ui) {
+    public Storage(String filepath) {
         this.filepath = filepath;
-        this.ui = ui;
     }
 
     /**
@@ -32,35 +30,25 @@ public class Storage {
      *
      * @return TaskList populated with Tasks, if applicable.
      */
-    public TaskList loadFromFile() {
-        try {
-            File file = new File(filepath);
+    public TaskList loadFromFile() throws FileNotFoundException, InvalidTaskTypeException {
+        File file = new File(filepath);
 
-            List<String> txt = new ArrayList<>();
-            if (file.exists()) {
-                Scanner scannerFile = new Scanner(file);
-                while (scannerFile.hasNextLine()) {
-                    txt.add(scannerFile.nextLine());
-                }
-                scannerFile.close();
+        List<String> txt = new ArrayList<>();
+        if (file.exists()) {
+            Scanner scannerFile = new Scanner(file);
+            while (scannerFile.hasNextLine()) {
+                txt.add(scannerFile.nextLine());
             }
+            scannerFile.close();
+        }
 
-            if (txt.size() == 0) {
-                this.emptyFile();
-                return new TaskList();
-            } else {
-                this.nonEmptyFile();
-                List<Task> converted = FileTaskStringConverter.allStringToAllTask(txt);
-                TaskList taskList = new TaskList(converted);
-                taskList.getListInString();
-                return taskList;
-            }
-        } catch (FileNotFoundException e) {
-            ui.showError("Cannot access file at specified location.\n" + e.getMessage());
+        if (txt.size() == 0) {
             return new TaskList();
-        } catch (InvalidTaskTypeException e) {
-            ui.showError("Erroneous task type in file. Please check your file again!");
-            return new TaskList();
+        } else {
+            List<Task> converted = FileTaskStringConverter.allStringToAllTask(txt);
+            TaskList taskList = new TaskList(converted);
+            taskList.getListInString();
+            return taskList;
         }
     }
 
@@ -81,13 +69,5 @@ public class Storage {
 
         fw.write(text.toString());
         fw.close();
-    }
-
-    private void emptyFile() {
-        this.ui.showMsg("You have no existing tasks!");
-    }
-
-    private void nonEmptyFile() {
-        this.ui.showMsg("You have existing tasks!");
     }
 }
