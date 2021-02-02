@@ -23,8 +23,8 @@ public class DeleteCommand extends Command {
      * @param list List of tasks
      */
     @Override
-    public void execute(TaskList list) {
+    public String execute(TaskList list) {
         Task curr = list.delete(taskNum - 1);
-        ui.printDeleteMsg(curr, list.size());
+        return ui.printDeleteMsg(curr, list.size());
     }
 }

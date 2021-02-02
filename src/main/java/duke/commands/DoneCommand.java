@@ -25,8 +25,8 @@ public class DoneCommand extends Command {
      * @param list List of tasks
      */
     @Override
-    public void execute(TaskList list) {
+    public String execute(TaskList list) {
         Task curr = list.markCompleted(taskNum - 1);
-        ui.printCompletedMsg(curr);
+        return ui.printCompletedMsg(curr);
     }
 }

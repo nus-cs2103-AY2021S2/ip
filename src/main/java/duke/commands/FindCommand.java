@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @param list List of tasks
      */
     @Override
-    public void execute(TaskList list) {
-        ui.printSearchResults(list.find(this.text));
+    public String execute(TaskList list) {
+        return ui.printSearchResults(list.find(this.text));
     }
 }

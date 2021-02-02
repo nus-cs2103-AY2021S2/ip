@@ -31,6 +31,6 @@ public abstract class Command {
      * Abstract method for executing a command
      * @param list List of tasks
      */
-    public abstract void execute(TaskList list);
+    public abstract String execute(TaskList list);
 
 }

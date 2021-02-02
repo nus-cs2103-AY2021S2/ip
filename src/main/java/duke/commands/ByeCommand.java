@@ -18,7 +18,7 @@ public class ByeCommand extends Command {
      * @param list List of tasks
      */
     @Override
-    public void execute(TaskList list) {
-        ui.printGoodbye();
+    public String execute(TaskList list) {
+        return ui.printGoodbye();
     }
 }

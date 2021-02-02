@@ -23,16 +23,16 @@ public class Ui {
     /**
      * Prints welcome message
      */
-    public void printWelcomeText() {
-        System.out.println(DIVIDER + SPACE + "Konichiwa~ Watashi wa Duke desu! \n" + SPACE
-                + "What can I do for you today?\n" + DIVIDER);
+    public String printWelcomeText() {
+        return DIVIDER + SPACE + "Konichiwa~ Watashi wa Duke desu! \n" + SPACE
+                + "What can I do for you today?\n" + DIVIDER;
     }
 
     /**
      * Prints exit message
      */
-    public void printGoodbye() {
-        System.out.println(DIVIDER + SPACE + "Sayonara, matta ne~ \n" + DIVIDER);
+    public String printGoodbye() {
+        return DIVIDER + SPACE + "Sayonara, matta ne~ \n" + DIVIDER;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Ui {
      *
      * @param list List of tasks
      */
-    public void printList(TaskList list) {
+    public String printList(TaskList list) {
         String resultString = DIVIDER;
 
         if (list.size() == 0) {
@@ -53,7 +53,7 @@ public class Ui {
         }
 
         resultString = resultString + DIVIDER;
-        System.out.println(resultString);
+        return resultString;
     }
 
     /**
@@ -61,8 +61,8 @@ public class Ui {
      *
      * @param text Given text
      */
-    public void printText(String text) {
-        System.out.println(DIVIDER + SPACE + text + "\n" + DIVIDER);
+    public String printText(String text) {
+        return DIVIDER + SPACE + text + "\n" + DIVIDER;
     }
 
     /**
@@ -70,9 +70,9 @@ public class Ui {
      *
      * @param task Given task that is marked as done
      */
-    public void printCompletedMsg(Task task) {
-        System.out.println(DIVIDER + SPACE + "Otsukare! I've marked this task as done: \n" + SPACE + "  "
-                + task.toString() + "\n" + DIVIDER);
+    public String printCompletedMsg(Task task) {
+        return DIVIDER + SPACE + "Otsukare! I've marked this task as done: \n" + SPACE + "  "
+                + task.toString() + "\n" + DIVIDER;
     }
 
     /**
@@ -81,9 +81,9 @@ public class Ui {
      * @param task Task to be deleted
      * @param size Number of tasks left in list
      */
-    public void printDeleteMsg(Task task, int size) {
-        System.out.println(DIVIDER + SPACE + "Yayyyy! I've removed the task: \n" + SPACE + "  " + task.toString() + "\n"
-                + SPACE + "Now you have " + size + " task(s) left!\n" + DIVIDER);
+    public String printDeleteMsg(Task task, int size) {
+        return DIVIDER + SPACE + "Yayyyy! I've removed the task: \n" + SPACE + "  " + task.toString() + "\n"
+                + SPACE + "Now you have " + size + " task(s) left!\n" + DIVIDER;
     }
 
     /**
@@ -92,9 +92,9 @@ public class Ui {
      * @param task Task that is added
      * @param size Number of tasks now on list
      */
-    public void printTask(Task task, int size) {
-        System.out.println(DIVIDER + SPACE + "Ayyyyy I've added the task: \n" + SPACE + "  " + task.toString() + "\n"
-                + SPACE + "Now you have " + size + " task(s) in the list.\n" + DIVIDER);
+    public String printTask(Task task, int size) {
+        return DIVIDER + SPACE + "Ayyyyy I've added the task: \n" + SPACE + "  " + task.toString() + "\n"
+                + SPACE + "Now you have " + size + " task(s) in the list.\n" + DIVIDER;
     }
 
     /**
@@ -102,9 +102,9 @@ public class Ui {
      *
      * @param taskList Given list of tasks
      */
-    public void printSearchResults(TaskList taskList) {
+    public String printSearchResults(TaskList taskList) {
         if (taskList.size() == 0) {
-            System.out.println(DIVIDER + SPACE + "There are no matching results D:\n" + DIVIDER);
+            return DIVIDER + SPACE + "There are no matching results D:\n" + DIVIDER;
         } else {
             String resultString = DIVIDER;
             resultString = resultString + SPACE + "Hai~ The search results are are: \n";
@@ -112,9 +112,14 @@ public class Ui {
                 resultString = resultString + SPACE + (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
             }
             resultString = resultString + DIVIDER;
-            System.out.println(resultString);
+            return resultString;
         }
 
+    }
+
+    public String printUnknowInputError() {
+        return DIVIDER + SPACE + "Sorry! I do not understand what you just said. Try again pwease?"
+                + DIVIDER;
     }
 
     /**

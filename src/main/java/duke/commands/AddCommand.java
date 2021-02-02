@@ -23,8 +23,8 @@ public class AddCommand extends Command {
      * @param list List of tasks
      */
     @Override
-    public void execute(TaskList list) {
+    public String execute(TaskList list) {
         list.addTask(task);
-        ui.printTask(task, list.size());
+        return ui.printTask(task, list.size());
     }
 }

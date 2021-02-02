@@ -31,14 +31,13 @@ public class Storage {
      * @param path Filepath of .txt file to save tasks in
      * @throws FileIoException If Duke is unable to read the file
      */
-    public Storage(String path) throws FileIoException {
+    public Storage(String path) {
         this.path = path;
         try {
             file = new File(path);
             file.createNewFile();
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            throw new FileIoException();
         }
     }
 
@@ -48,7 +47,7 @@ public class Storage {
      * @return ArrayList of saved tasks
      * @throws FileIoException If Duke is unable to read the file
      */
-    public ArrayList<Task> getTasks() throws FileIoException {
+    public ArrayList<Task> getTasks() {
         ArrayList<Task> list = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
@@ -66,19 +65,19 @@ public class Storage {
                     } else if (taskType.equals("E")) {
                         list.add(new Event(taskName, isCompleted, time.toString()));
                     } else {
-                        throw new FileIoException();
+                        System.out.println("Error");
                     }
                 } else {
                     if (taskType.equals("T")) {
                         list.add(new Todo(taskName, isCompleted));
                     } else {
-                        throw new FileIoException();
+                        System.out.println("Error");
                     }
                 }
 
             }
-        } catch (FileNotFoundException | FileIoException e) {
-            throw new FileIoException();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error!!");
         }
         return list;
     }
@@ -89,15 +88,21 @@ public class Storage {
      * @param taskList List of tasks
      * @throws IOException If Duke is unable to write the file
      */
-    public void writeFile(TaskList taskList) throws IOException {
-        FileWriter fw = new FileWriter(path);
-        ArrayList<Task> list = taskList.getList();
+    public void writeFile(TaskList taskList) {
+        try {
+            FileWriter fw = new FileWriter(path);
+            ArrayList<Task> list = taskList.getList();
 
-        for (Task curr : list) {
-            String storageString = curr.toStorageString();
-            fw.write(storageString + "\n");
+            for (Task curr : list) {
+                String storageString = curr.toStorageString();
+                fw.write(storageString + "\n");
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        fw.close();
+
     }
 
 }

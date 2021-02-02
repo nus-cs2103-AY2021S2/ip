@@ -1,9 +1,6 @@
 package duke;
 
 import duke.commands.*;
-
-import duke.exceptions.UnknownInputException;
-
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
@@ -18,9 +15,8 @@ public class Parser {
      *
      * @param str User input
      * @return Corresponding command for Duke to execute
-     * @throws UnknownInputException If unable to parse the command
      */
-    public Command parse(String str) throws UnknownInputException {
+    public Command parse(String str) {
         if (str.startsWith("bye")) {
             return new ByeCommand();
         } else if (str.startsWith("list")) {
@@ -44,9 +40,8 @@ public class Parser {
      *
      * @param str User input
      * @return Corresponding command for Duke to execute
-     * @throws UnknownInputException If unable to parse the command
      */
-    public Command addTasks(String str) throws UnknownInputException {
+    public Command addTasks(String str) {
         if (str.startsWith("todo ")) {
             Todo curr = new Todo(str.substring(5), false);
             return new AddCommand(curr);
@@ -59,7 +54,7 @@ public class Parser {
             Event curr = new Event(str.substring(6, cut - 1), false, str.substring(cut + 4));
             return new AddCommand(curr);
         } else {
-            throw new UnknownInputException();
+            return new ErrorCommand();
         }
     }
 

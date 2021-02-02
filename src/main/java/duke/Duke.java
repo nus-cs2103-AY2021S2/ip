@@ -1,11 +1,7 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.commands.ByeCommand;
 import duke.commands.Command;
-import duke.exceptions.DukeException;
-import duke.exceptions.FileIoException;
 import duke.tasks.TaskList;
 
 /**
@@ -18,22 +14,14 @@ public class Duke {
 
     /**
      * Creates a Duke object and retrieves stored takes from disk if present
-     *
-     * @param filePath Path where task are stored in disk
      */
-    public Duke(String filePath) throws FileIoException {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
-
-        try {
-            taskList = new TaskList(storage.getTasks());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            taskList = new TaskList();
-        }
+        storage = new Storage("data.txt");
+        taskList = new TaskList(storage.getTasks());
     }
 
-    private void run() throws DukeException, IOException {
+    private void run() {
         ui.printWelcomeText();
         boolean isBye = false;
 
@@ -51,7 +39,11 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
-        new Duke("data.txt").run();
+    public String getResponse(String input) {
+        Parser parser = new Parser();
+        Command command = parser.parse(input);
+        String response = command.execute(taskList);
+        return response;
     }
+
 }
