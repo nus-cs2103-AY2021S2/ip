@@ -37,7 +37,7 @@ public class Duke {
     private void start() {
         try {
             UI.greet();
-            loadUIAndStorage();
+            loadUiAndStorage();
         } catch (DukeException e) {
             UI.printMessage(new String[] {e.getMessage()});
             UI.printMessage(new String[] {"Closing..."});
@@ -88,16 +88,16 @@ public class Duke {
      * @return the greet message
      */
     public String getGreetMessage() {
-        return ui.getGreetGui();
+        return UI.getGreetGui();
     }
 
     /**
      * Loads UI and storage for duke created
      * @throws DukeException when unable to load storage
      */
-    public void loadUIAndStorage() throws DukeException {
-            this.ui = new UI();
-            this.storage = new Storage();
+    public void loadUiAndStorage() throws DukeException {
+        this.ui = new UI();
+        this.storage = new Storage();
     }
 
 }

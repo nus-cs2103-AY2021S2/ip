@@ -1,10 +1,10 @@
 package duke.ui;
 
-import duke.Duke;
-import duke.main.DukeException;
-import duke.ui.DialogBox;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import duke.Duke;
+import duke.main.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         try {
-            d.loadUIAndStorage();
+            d.loadUiAndStorage();
             printResponse(d.getGreetMessage());
         } catch (DukeException e) {
             String message = e.getMessage() + "\n"
@@ -57,7 +57,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InterruptedException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -66,7 +66,9 @@ public class MainWindow extends AnchorPane {
         );
         if (input.equalsIgnoreCase("bye")) {
             new Timer().schedule(new TimerTask() {
-                public void run () { System.exit(0); }
+                public void run () {
+                    System.exit(0);
+                }
             }, 1500);
         }
         userInput.clear();
@@ -78,5 +80,4 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
     }
-
 }

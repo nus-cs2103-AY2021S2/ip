@@ -96,7 +96,7 @@ public class UI {
 
     /**
      * Helper method that prints the message or reply after the user command is executed.
-     * @param msg
+     * @param msg message to be printed
      */
     private static void printReply(String msg) {
         System.out.println(msg);
