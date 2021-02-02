@@ -13,10 +13,10 @@ public class Storage {
 
     /** Default path to store the user tasks. */
     public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
-    public static ArrayList<Task> tasks;
+    public TaskList tasks;
 
     public Storage() {
-        tasks = new ArrayList<>();
+        tasks = new TaskList();
     }
 
     /**
@@ -38,7 +38,7 @@ public class Storage {
      * @param file The name of the file.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      */
-    public void readFileIntoList(String file, ArrayList<Task> tasks) {
+    public void readFileIntoList(String file, TaskList tasks) {
         List<String> lines = Collections.emptyList();
 
         try {
@@ -80,7 +80,8 @@ public class Storage {
      */
     public void writeListIntoFile() throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(DEFAULT_STORAGE_FILEPATH);
-        for (Task item: tasks) {
+        ArrayList<Task> items = tasks.getTaskList();
+        for (Task item: items) {
             writer.println(item.toString());
         }
         writer.close();

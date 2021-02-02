@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+import java.io.FileNotFoundException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,15 +22,19 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private final Ui ui = new Ui();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.setPadding(new Insets(10,0,0,10));
         dialogContainer.setSpacing(10);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.showWelcomeMsg(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -40,7 +46,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws FileNotFoundException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
