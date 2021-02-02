@@ -37,9 +37,9 @@ public class Output {
      */
     public String printDoneMsg(Task task) {
         if(task.getStatusIcon().equals("\u2713"))
-            return "    Nice! I've marked this task as done: " + task;
+            return "Nice! I've marked this task as done: \n\t" + task;
         else
-            return "    Noted. I've marked this task as undone: " + task;
+            return "Noted. I've marked this task as undone: \n\t" + task;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Output {
      * @param numTasks  total number of existing tasks
      */
     public String printDeleteMsg(Task task, int numTasks) {
-        return "    Noted. I've removed this task: " + task + "Now you have " + numTasks + " tasks in the list.";
+        return "Noted. I've removed this task: \n\t" + task + "\nNow you have " + numTasks + " tasks in the list.";
     }
 
     /**
@@ -57,7 +57,7 @@ public class Output {
     public String printFind(ArrayList<Task> foundTasks, String query) {
         StringBuilder sb = new StringBuilder();
         if (foundTasks.size() == 0) {
-            return "    ☹ OOPS! No tasks found for the query: " + query;
+            return "☹ OOPS! No tasks found for the query: \n\t" + query;
         }
         for (Task t : foundTasks) {
             sb.append(t);
