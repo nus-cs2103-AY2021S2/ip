@@ -1,4 +1,13 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.List;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.*;
 
 public class Justin {
     public static void main(String[] args) {
@@ -41,7 +50,17 @@ public class Justin {
         boolean terminate = false;
 
         // create LinkedList to store information of user inputs
-        ArrayList<Task> tasks = new ArrayList<>();
+        //ArrayList<Task> tasks = new ArrayList<>();
+
+        // method to load file from Duke.txt
+
+        String userDir = System.getProperty("user.dir");
+        String filePath = userDir + File.separator + "data" + File.separator + "duke.txt";
+        File file = new File(filePath);
+        // load any existing list into the array list
+
+        ArrayList<Task> tasks = Justin.loadFile(filePath);
+
 
         //Duke will keep repeating until command given "Bye"
         while (!terminate) {
@@ -57,6 +76,10 @@ public class Justin {
                     printLineBreaker();
                     System.out.println("Bye. Hope to see you again soon!");
                     printLineBreaker();
+
+                    // create method to save content of list into duke.txt
+                    saveFile(tasks, filePath);
+
                     terminate = true; // terminates Duke
 
                 } else if (text.equals("list")) {
@@ -99,6 +122,8 @@ public class Justin {
                     printLineBreaker();
                     System.out.println("Got it. I've added this task:");
 
+                    boolean ifExist = false; // checking if there is an instance of a default tasks
+
                     for (int i = 0; i < tasks.size(); i++) {
                         if (tasks.get(i).description.equals(description)) { // meaning this is the task we want to change
                             Deadline dl = new Deadline(description, date);
@@ -111,11 +136,24 @@ public class Justin {
                             System.out.println(" " + dl.toString());
                             System.out.println("Now you have " + tasks.size() + " tasks in the list");
                             printLineBreaker();
+                            ifExist = true;
                         }
                     }
+
+                    if (!ifExist) {
+                        Deadline dl = new Deadline(description, date);
+                        tasks.add(dl);
+                        System.out.println(" " + dl.toString());
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        printLineBreaker();
+
+                    }
+
                 } else if (text.contains("todo")) {
                     String description = text.substring(text.indexOf(" ")+1); // take out the item from the text
                     //System.out.println(description); // for debugging
+
+                    boolean ifExist = false; // checking if there is an instance of a default tasks
 
                     for (int i = 0; i < tasks.size(); i++) { // there is an instance of the item in list
                         if (tasks.get(i).description.equals(description)) {
@@ -131,8 +169,23 @@ public class Justin {
                             System.out.println(" " + td.toString());
                             System.out.println("Now you have " + tasks.size() + " tasks in the list");
                             printLineBreaker();
+                            ifExist = true;
                         }
                     }
+
+                    if (!ifExist) {
+                        // no instance of new task in exisiting list, must create new one
+                        Todo td = new Todo(description);
+                        tasks.add(td);
+                        // formatting
+                        printLineBreaker();
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(" " + td.toString());
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        printLineBreaker();
+                    }
+
+
                 } else if (text.contains("event")) {
 
                     String newText = text.substring(text.indexOf(" ")+1); // removing the event to get description
@@ -143,6 +196,8 @@ public class Justin {
                     String date = newText.substring(newText.indexOf("/")+4);
 
                     //System.out.println(description + " " + date); // for debugging
+
+                    boolean ifExist = false;
 
                     for (int i = 0; i < tasks.size(); i++) {
                         if(tasks.get(i).description.equals(description)) {
@@ -160,22 +215,26 @@ public class Justin {
                             System.out.println(" " + e.toString());
                             System.out.println("Now you have " + tasks.size() + " tasks in the list");
                             printLineBreaker();
+                            ifExist = true;
                         }
+                    }
+
+                    if (!ifExist) {
+                        Event e = new Event(description, date);
+                        tasks.add(e);
+                        //formatting
+                        printLineBreaker();
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(" " + e.toString());
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        printLineBreaker();
                     }
                 }
                 else if (text.contains("delete")) {
+
                     String num = text.substring(7); // take out the int value of the task to be completed
-                    int listNum = Integer.parseInt(num); // changes to int
-                    System.out.println(listNum);
 
-                    Task newTask = tasks.remove(listNum-1); // delete the entry of choice
-
-                    //format
-                    printLineBreaker();
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(" " + newTask.toString());
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list");
-                    printLineBreaker();
+                    tasks = delete(tasks, num);
 
                 }
                 // adding of tasks
@@ -198,7 +257,6 @@ public class Justin {
 
     }
 
-    //  ***** level 5 *****
     static void validate(String text) throws JustinException {
         if (text.length() < 5 && text.contains("todo") ) { // case 1
             throw new JustinException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -219,5 +277,146 @@ public class Justin {
             System.out.print("-");
         }
         System.out.println();
+    }
+
+    public static ArrayList<Task> delete(ArrayList<Task> tasks, String num) throws JustinException {
+        try {
+            int listNum = Integer.parseInt(num); // changes to int
+            System.out.println(listNum);
+            Task newTask = tasks.remove(listNum-1); // delete the entry of choice
+            //format
+            printLineBreaker();
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(" " + newTask.toString());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list");
+            printLineBreaker();
+            return tasks;
+        } catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error deleting" + e.getMessage());
+            throw new JustinException("OOPS!!! Cannot delete what you don't have!");
+        }
+    }
+
+
+    public static ArrayList<Task> loadFile(String filePath)  {
+
+        ArrayList<Task> holder = new ArrayList<>();
+        File file = new File(filePath);
+
+        if (file.exists()) {
+            try {
+                for (String line : Files.readAllLines(Paths.get(filePath))) {
+
+                    System.out.println(line); // for debugging
+
+                    // create an linkedlist to store the split lines
+                    String[] splits = line.split("\\|", 5);
+
+                    // splits[0] is the holder
+                    // T is t0do
+                    // E is event
+                    // D is deadline
+                    // else just a vanilla task
+
+                    if (splits[0].equals("T")) {
+                        Todo td = new Todo(splits[2]);
+                        if (splits[1].equals("1")) {
+                            td.markAsDone();
+                        }
+                        holder.add(td);
+                    } else if (splits[0].equals("D")) {
+                       Deadline dl = new Deadline(splits[2], splits[3]);
+                       if (splits[1].equals("1")) {
+                           dl.markAsDone();
+                       }
+                       holder.add(dl);
+                    } else if (splits[0].equals("E")) {
+                        Event e = new Event(splits[2], splits[3]);
+                        if (splits[1].equals("1")) {
+                            e.markAsDone();
+                        }
+                        holder.add(e);
+                    }
+                    else {
+                        Task t = new Task(splits[1]);
+                        holder.add(t);
+                    }
+
+
+                }
+            } catch (IOException e) {
+                System.out.println("file not found");
+            }
+        } else {
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                System.out.println("New file created");
+            } catch (IOException e) {
+                System.out.println("Error creating file");
+            }
+
+        }
+
+        return holder;
+
+    }
+
+    // method to save contents of list onto justin.txt
+    public static void saveFile(ArrayList<Task> task, String filePath) {
+
+        try {
+
+            StringBuffer sb = new StringBuffer(""); // create empty sb to store content of list
+
+            for (int i = 0; i < task.size(); i++) {
+
+                String holder = ""; // to hold content of current line to be stored into sb
+
+                if (task.get(i) instanceof Todo) { // is a t0do class
+                    if (task.get(i).isDone) {
+                        holder = "T" + "|" + "1" + "|" + task.get(i).description;
+                    } else {
+                        holder = "T" + "|" + "0" + "|" + task.get(i).description;
+                    }
+                } else if (task.get(i) instanceof Deadline) { // is a deadline class
+                    if (task.get(i).isDone) {
+                        holder = "D" + "|" + "1" + "|" + task.get(i).description + "|" + ((Deadline) task.get(i)).by;
+                    } else {
+                        holder = "D" + "|" + "0" + "|" + task.get(i).description + "|" + ((Deadline) task.get(i)).by;
+                    }
+                } else if (task.get(i) instanceof Event) {
+                    if (task.get(i).isDone) {
+                        holder = "E" + "|" + "1" + "|" + task.get(i).description + "|" + ((Event) task.get(i)).at;
+                    } else {
+                        holder = "E" + "|" + "1" + "|" + task.get(i).description + "|" + ((Event) task.get(i)).at;
+                    }
+                } else {
+                    // vanilla event
+                    if (task.get(i).isDone) {
+                        holder = "1" + "|" + task.get(i).description;
+                    } else {
+                        holder = "1" + "|" + task.get(i).description;
+                    }
+
+                }
+
+                if (i < task.size()) {
+                    sb.append((holder + "\n"));
+                } else {
+                    sb.append(holder);
+                }
+
+            }
+
+            // write content of sb into file
+
+            FileWriter myWriter = new FileWriter(new File(filePath));
+            myWriter.write(sb.toString());
+            myWriter.close();
+
+        } catch(IOException e) {
+            System.out.println("Unable to write to file justin.txt");
+        }
     }
 }
