@@ -8,6 +8,7 @@ public class Duke {
     TaskList list;
 
     public Duke(){
+
         this.list = new TaskList();
     }
 
@@ -89,6 +90,16 @@ public class Duke {
         System.out.println("    " + task);
         System.out.println("Now you have " + String.valueOf(this.list.size()) + " tasks in the list.");
 
+    }
+
+    /**
+     * Prints all the tasks with content that contain the keyword.
+     *
+     * @param keyword The keyword given by the user.
+     */
+    public void findMatchingTasks(String keyword){
+        TaskList matchingTasks = this.list.findTasks(keyword);
+        matchingTasks.printTasks();
     }
 
     public static void main(String[] args) {

@@ -25,9 +25,20 @@ public class Task {
 
     }
 
+    /**
+     * Checks if Task content has matching keyword.
+     *
+     * @return Returns True if task content has keyword.
+     */
+
+    public boolean isMatch(String keyword){
+        return this.content.contains(keyword);
+    }
+
     public String toString(){
         return this.content;
     }
+
 
 }
 

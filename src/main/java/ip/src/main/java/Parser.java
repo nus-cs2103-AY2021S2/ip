@@ -97,6 +97,18 @@ public class Parser {
         return id;
     }
 
+    /**
+     * Retrieves the keyword from the user input to for the find task method.
+     *
+     * @param input User input.
+     * @return The keyword used to find the matching tasks in the Task list.
+     */
+
+    public String getKeyword(String input){
+        String keyword = input.split(" ", 2)[1];
+        return keyword;
+    }
+
 
 
 }
