@@ -3,8 +3,6 @@ package fakebot;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javafx.application.Application;
-
 import fakebot.command.Command;
 import fakebot.command.CommandException;
 import fakebot.command.CommandType;
@@ -13,21 +11,12 @@ import fakebot.task.Events;
 import fakebot.task.Task;
 import fakebot.task.TaskList;
 import fakebot.task.ToDos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 
 /**
  * Fakebot class, main class for Fakebot.
  */
-public class FakeBot{
+public class FakeBot {
     private static final String OLD_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -321,33 +310,4 @@ public class FakeBot{
         }
         throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
-
-
-    /**
-     * Main method of the programs.
-     *
-     * @param args class input.
-     */
-    /*
-    public static void main(String[] args) {
-
-        ui = new Ui();
-        FakeBot fakeBot = new FakeBot(SAVE_FILE_NAME, SAVE_FILE_PATH);
-        fakeBot.printHelloMessage();
-
-        boolean continueProgram = true;
-        while (continueProgram) {
-            String reply = ui.readLine();
-            Command command;
-            try {
-                command = fakeBot.validateCommand(reply);
-            } catch (CommandException e) {
-                ui.printBotMessage(e.getMessage());
-                continue;
-            }
-            continueProgram = fakeBot.processCommand(command);
-        }
-        ui.printBotMessage("Bye. Hope to see you again soon!");
-    }
-    */
 }

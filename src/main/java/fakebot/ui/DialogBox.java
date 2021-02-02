@@ -16,11 +16,21 @@ import javafx.scene.shape.Circle;
 
 
 //Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
+
+/**
+ * Dialog Box for respond and user input
+ */
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Constructors for DialogBox specifying label and image view
+     *
+     * @param l text to be display
+     * @param iv user profile image to be display
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -34,9 +44,9 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.CENTER_RIGHT);
 
-        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTGREEN,
+        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTGREEN,
                 CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(background_fill);
+        Background background = new Background(backgroundFill);
         this.setBackground(background);
 
         this.setPadding(new Insets(10, 10, 10, 10));
@@ -49,9 +59,9 @@ public class DialogBox extends HBox {
     private void flip() {
         this.setAlignment(Pos.CENTER_LEFT);
 
-        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTGREY,
+        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTGREY,
                 CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(background_fill);
+        Background background = new Background(backgroundFill);
         this.setBackground(background);
 
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -59,10 +69,23 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Returns dialog box for user
+     * @param l text of user
+     * @param iv imageView of user
+     * @return Returns dialog box of the user
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+
+    /**
+     * Returns dialog box for fakebot
+     * @param l text of fakebot
+     * @param iv imageView of fakebot
+     * @return Returns dialog box of the fakebot
+     */
     public static DialogBox getFakebotDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

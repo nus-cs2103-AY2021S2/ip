@@ -16,7 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -117,7 +116,7 @@ public class Ui extends Application {
 
     }
 
-    private void handleUserInput(String userInput){
+    private void handleUserInput(String userInput) {
         Command command;
         try {
             command = fakeBot.validateCommand(userInput);
@@ -126,7 +125,7 @@ public class Ui extends Application {
             return;
         }
         String outputText = fakeBot.processCommand(command);
-        if(outputText.length() > 0) {
+        if (outputText.length() > 0) {
             addTextToContainer(userInput, outputText);
         }
     }
@@ -170,14 +169,5 @@ public class Ui extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
                 DialogBox.getFakebotDialog(fakebotText, new ImageView(fakeBotImage))
         );
-    }
-        /**
-         * Reads Line from IO.
-         *
-         * @return Return String read from input.
-         */
-    public String readLine() {
-        String input = scanf.nextLine();
-        return input;
     }
 }
