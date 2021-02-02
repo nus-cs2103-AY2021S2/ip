@@ -37,15 +37,15 @@ public class Ui {
      * Prints the error to output.
      * @param e error to be printed.
      */
-    public void showError(Throwable e) {
-        System.out.println("Error: " + e);
+    public String showError(Throwable e) {
+        return "Error: " + e.toString();
     }
 
     /**
      * Prints the given message to output.
      * @param message String to be printed.
      */
-    public void print(String message) {
-        System.out.println(message);
+    public String print(String message) {
+        return message;
     }
 }

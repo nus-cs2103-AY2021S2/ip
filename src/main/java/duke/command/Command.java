@@ -32,7 +32,7 @@ public abstract class Command {
      * @param taskList taskList to be used.
      * @throws DukeException if there is an issue with the command.
      */
-    public abstract void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException;
+    public abstract String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException;
 
     public boolean isExit() {
         return isExit;

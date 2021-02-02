@@ -11,12 +11,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        ui.print("Here's what I found:");
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+        String result = "Here's what I found:";
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).getTask().contains(getArguments())) {
-                ui.print((i + 1) + ". " + taskList.get(i));
+                result = result + "\n" + (i + 1) + ". " + taskList.get(i);
             }
         }
+        return result;
     }
 }

@@ -15,10 +15,11 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) {
-        ui.print("This is your to-do list:");
+    public String execute(Storage storage, Ui ui, TaskList taskList) {
+        String result = "This is your to-do list:";
         for (int i = 0; i < taskList.size(); i++) {
-            ui.print((i + 1) + ". " + taskList.get(i));
+            result = result + "\n" + ui.print((i + 1) + ". " + taskList.get(i));
         }
+        return result;
     }
 }

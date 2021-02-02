@@ -18,14 +18,14 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
         if (getArguments().isBlank()) {
             throw new DukeException("I apologize, please input description for 'todo'.");
         } else {
             Task newTask = new Todo(getArguments());
             taskList.add(newTask);
             storage.addToFile(newTask);
-            ui.print("Added to to-do list: \n" + newTask);
+            return "Added to to-do list: \n" + newTask;
         }
     }
 }
