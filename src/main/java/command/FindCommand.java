@@ -1,17 +1,17 @@
 package main.java.command;
 
+import java.util.List;
+
 import main.java.TaskManager;
 import main.java.Ui;
 import main.java.entity.Task;
-
-import java.util.List;
 
 /**
  * Command to find tasks associated with a search keyword
  */
 public class FindCommand extends Command {
 
-    String keyword;
+    private String keyword;
 
     /**
      * Create a search command to search tasks with a specific keyword

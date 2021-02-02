@@ -8,7 +8,7 @@ import main.java.entity.Task;
  * Command to mark a task as done
  */
 public class DoneCommand extends Command {
-    int doneIndex;
+    private int doneIndex;
 
     /**
      * Creates a DoneCommand instance

@@ -1,11 +1,19 @@
 package main.java;
 
-import main.java.entity.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import main.java.entity.Deadline;
+import main.java.entity.Event;
+import main.java.entity.Task;
+import main.java.entity.Todo;
 
 /**
  * A utility class to be called only by TaskManager to help manage
@@ -71,7 +79,7 @@ class Storage {
         return task;
     }
 
-    protected void updateFile(List<Task> list){
+    protected void updateFile(List<Task> list) {
         try {
             FileWriter fw = new FileWriter(file, false);
             for (Task task : list) {

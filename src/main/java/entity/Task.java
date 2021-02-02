@@ -61,5 +61,5 @@ public abstract class Task {
      * Provides API for Task and its sub-classes to call toFileString() method
      * @return File String representation of this Task
      */
-    public abstract  String toFileString();
+    public abstract String toFileString();
 }

@@ -1,9 +1,19 @@
 package main.java;
 
-import main.java.command.*;
-import main.java.exceptions.IllegalInputFormatException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import main.java.command.AddDeadlineCommand;
+import main.java.command.AddEventCommand;
+import main.java.command.AddTodoCommand;
+import main.java.command.Command;
+import main.java.command.DeleteCommand;
+import main.java.command.DoneCommand;
+import main.java.command.ExitCommand;
+import main.java.command.FindCommand;
+import main.java.command.ListCommand;
+import main.java.command.WrongCommand;
+import main.java.exceptions.IllegalInputFormatException;
 
 /**
  * A Parser class that is used to parse user input as Commands

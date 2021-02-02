@@ -1,8 +1,9 @@
 package main.java;
 
+import java.util.NoSuchElementException;
+
 import main.java.command.Command;
 
-import java.util.NoSuchElementException;
 
 /**
  * Main class

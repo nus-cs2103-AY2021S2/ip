@@ -1,6 +1,9 @@
 package main.java;
-import main.java.entity.*;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import main.java.entity.Task;
 
 /**
  * Contain a Task List to manage tasks
@@ -95,8 +98,8 @@ public class TaskManager {
      * @return list of tasks containing the keyword
      */
     public List<Task> findByKeyword(String keyword) {
-        List<Task> result =  new ArrayList<>();
-        for (Task task: list) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : list) {
             if (task.getName().contains(keyword)) {
                 result.add(task);
             }

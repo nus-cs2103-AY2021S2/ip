@@ -1,20 +1,20 @@
 package main.java.command;
 
+import java.time.LocalDate;
+
 import main.java.TaskManager;
 import main.java.Ui;
 import main.java.entity.Event;
 import main.java.entity.Task;
 
-import java.time.LocalDate;
-
 /**
  * Command to add a Event Task
  */
 public class AddEventCommand extends AddCommand {
-    String eventName;
-    String keyword;
-    String dateString;
-    LocalDate date;
+    private String eventName;
+    private String keyword;
+    private String dateString;
+    private LocalDate date;
 
     /**
      * Creates a command to add a Event task

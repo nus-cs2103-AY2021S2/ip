@@ -8,7 +8,7 @@ import main.java.entity.Task;
  * Command to delete a task
  */
 public class DeleteCommand extends Command {
-    int deleteIndex;
+    private int deleteIndex;
 
     /**
      * Creates a Command to delete a task

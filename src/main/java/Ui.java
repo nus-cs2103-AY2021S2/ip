@@ -1,8 +1,9 @@
 package main.java;
 
-import main.java.entity.Task;
 import java.util.List;
 import java.util.Scanner;
+
+import main.java.entity.Task;
 
 /**
  * User Interface Management class that helps facilitate
@@ -11,18 +12,18 @@ import java.util.Scanner;
  * and display query result to user
  */
 public class Ui {
-    private Scanner sc;
-    static final String GREETINGS = "Dear user, welcome to the world of duke!";
     static final String PREFIX = "    ";
+    static final String DISPLAY_EMPTY_LIST = PREFIX + "Currently there is nothing on your list.";
+    static final String DISPLAY_ADDED = PREFIX + "Got it. I've added this task:";
+    static final String DISPLAY_DONE = PREFIX + "Nice! I've mark this task as done:";
+    static final String DISPLAY_RENAME = PREFIX + "Noted, I've removed this task:";
+    static final String GREETINGS = "Dear user, welcome to the world of duke!";
     static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    static final String DISPLAY_EMPTY_LIST = PREFIX + "Currently there is nothing on your list.";
-    static final String DISPLAY_ADDED = PREFIX + "Got it. I've added this task:";
-    static final String DISPLAY_DONE = PREFIX + "Nice! I've mark this task as done:";
-    static final String DISPLAY_RENAME = PREFIX + "Noted, I've removed this task:";
+    private Scanner sc;
 
     /**
      * Creates a Ui instance
@@ -61,20 +62,30 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Display a general wrong command
+     */
+    public void displayWrongCommand() {
+        System.out.println(PREFIX + "Sorry, but we could not parse your input");
+        System.out.println(PREFIX + "Please recheck its validity...");
+    }
 
+    /**
+     * Display a wrong command message
+     * @param message customized input message
+     */
     public void displayWrongCommand(String message) {
         System.out.println(PREFIX + message);
         System.out.println(PREFIX + "Sorry, but we could not parse your input");
         System.out.println(PREFIX + "Please recheck its validity...");
     }
 
+    /**
+     * Display an input index out of range error message
+     * @param index the given index
+     */
     public void displayOutOfRange(int index) {
         System.out.println(PREFIX + "There is no such index " + index + " in the task list.");
-    }
-
-    public void displayWrongCommand() {
-        System.out.println(PREFIX + "Sorry, but we could not parse your input");
-        System.out.println(PREFIX + "Please recheck its validity...");
     }
 
     /**
@@ -156,11 +167,11 @@ public class Ui {
      */
     public void displaySearchResult(List<Task> result) {
         if (result.isEmpty()) {
-            System.out.println(prefix + "Sorry, there is no task found.");
+            System.out.println(PREFIX + "Sorry, there is no task found.");
         } else {
-            System.out.println(prefix + "We found " + result.size() + " results:");
+            System.out.println(PREFIX + "We found " + result.size() + " results:");
             for (Task task: result) {
-                System.out.println(prefix + task);
+                System.out.println(PREFIX + task);
             }
         }
     }

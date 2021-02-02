@@ -75,7 +75,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + (this.isDone ? "X" : " ") + "] " + this.name + " (" + this.keyword + ": " + (this.timeDate == null ? this.time : this.timeDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";
+        return "[E][" + (this.isDone ? "X" : " ") + "] " + this.name + " (" + this.keyword + ": " +
+                (this.timeDate == null ? this.time : this.timeDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";
     }
 
     /**
@@ -85,7 +86,8 @@ public class Event extends Task {
      */
     @Override
     public String toFileString() {
-        return "E|" + (this.isDone ? "1" : "0") + "|" + this.name + "|" + this.keyword + "|" + (this.timeDate == null ? this.time : this.timeDate);
+        return "E|" + (this.isDone ? "1" : "0") + "|" + this.name + "|" +
+                this.keyword + "|" + (this.timeDate == null ? this.time : this.timeDate);
     }
 
 }

@@ -6,7 +6,7 @@ import main.java.Ui;
 /**
  * Command to list all tasks
  */
-public class ListCommand  extends Command {
+public class ListCommand extends Command {
 
     /**
      * execute list tasks command

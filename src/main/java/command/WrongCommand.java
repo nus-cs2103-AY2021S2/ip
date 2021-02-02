@@ -6,8 +6,8 @@ import main.java.Ui;
 /**
  * WrongCommand to inform user of the issue
  */
-public class WrongCommand extends Command{
-    String message;
+public class WrongCommand extends Command {
+    private String message;
 
     /**
      * Creates a WrongCommand with only general message
