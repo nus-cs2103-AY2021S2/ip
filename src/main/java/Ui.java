@@ -10,7 +10,7 @@ public class Ui {
         startDuke();
     }
 
-    private static void startDuke() {
+    public static void startDuke() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -20,18 +20,6 @@ public class Ui {
         System.out.println("---------------------------------------------");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println("---------------------------------------------");
-    }
-
-
-    /**
-     * Returns text input command by user.
-     * If the user input is null, empty String is returned.
-     *
-     * @return Input command Line.
-     */
-    public String getUserCommand(){
-        String fullInputLine = in.nextLine();
-        return fullInputLine;
     }
 
     public String showResultToUser(TaskList tasks, TaskResult taskResult){
@@ -72,10 +60,7 @@ public class Ui {
      * @param taskList TaskList object to be printed.
      */
     private String printMyTask(TaskList taskList) {
-        String responseToUser = separator + "\n" + "Here are the tasks in your list:";
-
-        System.out.println("---------------------------------------------");
-        System.out.println("Here are the tasks in your list:");
+        String responseToUser = "Here are the tasks in your list:";
 
         // loop through list and print every task in a new line
         int len = taskList.getSize();
@@ -84,13 +69,10 @@ public class Ui {
             Task curTask = tasks.get(i - 1);
             System.out.println(i + ". " + curTask);
 
-            String toAdd = "\n" + curTask.toString();
+            String toAdd = "\n" + i + ". " + curTask.toString();
             responseToUser +=  toAdd;
         }
-        System.out.println("---------------------------------------------");
 
-        responseToUser += "\n";
-        responseToUser += separator;
         return responseToUser;
     }
 
@@ -102,8 +84,6 @@ public class Ui {
     private String printMatchingTask(TaskList matchingTask) {
         String responseToUser = separator + "\n" + "Here are the matching tasks in your list:";
 
-        System.out.println("---------------------------------------------");
-        System.out.println("Here are the matching tasks in your list:");
         // loop through list and print every task in a new line
         int len = matchingTask.getSize();
         ArrayList<Task> tasks = matchingTask.getTaskList();
@@ -111,65 +91,34 @@ public class Ui {
             Task curTask = tasks.get(i - 1);
             System.out.println(i + ". " + curTask);
 
-            String toAdd = "\n" + curTask.toString();
+            String toAdd = "\n" + i + ". " + curTask.toString();
             responseToUser +=  toAdd;
         }
-        System.out.println("---------------------------------------------");
 
-        responseToUser += "\n";
-        responseToUser += separator;
         return responseToUser;
     }
 
     public String showGoodbyeMessage(){
-        System.out.println("---------------------------------------------");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("---------------------------------------------");
-
-        return separator + "\n" + "Bye. Hope to see you again soon!" + "\n" + separator;
+        return "Bye. Hope to see you again soon!";
     }
 
     private String showCompleteMessage(Task task){
-        System.out.println("---------------------------------------------");
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
-        System.out.println("---------------------------------------------");
-
-        return separator + "\n" + "Bye. Hope to see you again soon!" + "\n" + task.toString() + "\n" + separator;
+        return "Nice! I've marked this task as done:" + "\n" + task.toString();
     }
 
     private String showDeleteMessage(Task task, int listSize){
-        System.out.println("---------------------------------------------");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + listSize + " tasks in the list.");
-        System.out.println("---------------------------------------------");
-
-        return separator + "\n" + "Noted. I've removed this task:" + "\n" + task.toString() + "\n" + "Now you have " + listSize + " tasks in the list." + "\n" + separator;
+        return "Noted. I've removed this task:" + "\n" + task.toString() + "\n" + "Now you have " + listSize + " tasks in the list.";
     }
 
     private String showAddMessage(Task task, int listSize){
-        System.out.println("---------------------------------------------");
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + listSize + " tasks in the list.");
-        System.out.println("---------------------------------------------");
-        return separator + "\n" + "Got it. I've added this task:" + "\n" + task.toString() + "\n" + "Now you have " + listSize + " tasks in the list." + "\n" + separator;
+        return "Got it. I've added this task:" + "\n" + task.toString() + "\n" + "Now you have " + listSize + " tasks in the list.";
     }
 
     public String showLoadingError(){
-        System.out.println("---------------------------------------------");
-        System.out.println("OOPS!! Duke fails to load, please restart!");
-        System.out.println("---------------------------------------------");
-
-        return separator + "\n" + "OOPS!! Duke fails to load, please restart!" + "\n" + separator;
+        return "OOPS!! Duke fails to load, please restart!";
     }
 
     public String showErrorMessage(String message){
-        System.out.println("---------------------------------------------");
-        System.out.println(message);
-        System.out.println("---------------------------------------------");
-
-        return separator + "\n" + message + "\n" + separator;
+        return message;
     }
 }

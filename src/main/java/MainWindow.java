@@ -29,10 +29,9 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         String greetingMessage = "Hello! I'm Duke\n" + "What can I do for you?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingMessage, dukeImage));
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // never show a vertical ScrollBar
-        scrollPane.setFitToWidth(true); // set content width to viewport width
-        scrollPane.setPannable(true); // allow scrolling via mouse dragging
-//        scrollPane.vvalueProperty().bind(dialogContainer);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPannable(true);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
