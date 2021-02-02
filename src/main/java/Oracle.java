@@ -37,7 +37,7 @@ public class Oracle {
 
         //load file if available
         try {
-            File store = new File("./oracale_data.txt");
+            File store = new File("./oracle_data.txt");
             Scanner myReader = new Scanner(store);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
