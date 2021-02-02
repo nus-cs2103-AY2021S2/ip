@@ -14,6 +14,7 @@ public class MyDuke {
         System.out.print("You: ");
         String input = sc.nextLine();
 
+        //level-1
         while (!input.equals("bye")) {
             print("Paikia Bot: " + input);
             System.out.print("You: ");
