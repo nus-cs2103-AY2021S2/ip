@@ -21,7 +21,8 @@ public class ExitCommand extends Command {
 
     /**
      * Checks the equivalence of ExitCommand this and Object obj.
-     * If obj is an instance of the ExitCommand class and all attributes are equivalent, it is equivalent to this.
+     * If obj is an instance of the ExitCommand class and all attributes are equivalent,
+     * it is equivalent to this.
      * @param obj the object which will be compared to this.
      * @return Indication of whether obj is equivalent to this.
      */

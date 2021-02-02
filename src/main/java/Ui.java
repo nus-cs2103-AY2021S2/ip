@@ -51,7 +51,7 @@ public class Ui {
      * @param task Saved task.
      * @param tasks Number of tasks after saving.
      */
-    void addtask(String task, int tasks) {
+    void addTask(String task, int tasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println(String.format("Now you have %s tasks in the list.", tasks) + "\n");

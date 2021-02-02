@@ -1,4 +1,5 @@
 import java.io.IOException;
+
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,7 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage();
         try {
-            this.tasks = new TaskList(this.storage.loadtasks());
+            this.tasks = new TaskList(this.storage.loadTasks());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             this.tasks = new TaskList();

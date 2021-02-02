@@ -22,8 +22,8 @@ public class EventCommand extends Command {
     void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Event(this.event, this.date);
         tasks.add(task);
-        ui.addtask(task.toString(), tasks.size());
-        storage.savetasks(tasks);
+        ui.addTask(task.toString(), tasks.size());
+        storage.saveTasks(tasks);
     }
 
     /**
@@ -36,7 +36,8 @@ public class EventCommand extends Command {
 
     /**
      * Checks the equivalence of EventCommand this and Object obj.
-     * If obj is an instance of the EventCommand class and all attributes are equivalent, it is equivalent to this.
+     * If obj is an instance of the EventCommand class and all attributes are equivalent,
+     * it is equivalent to this.
      * @param obj the object which will be compared to this.
      * @return Indication of whether obj is equivalent to this.
      */
@@ -45,8 +46,8 @@ public class EventCommand extends Command {
         if (obj == this) {
             return true;
         } else if (obj instanceof EventCommand) {
-            EventCommand evc = (EventCommand) obj;
-            return evc.event.equals(this.event) && evc.date.equals(this.date);
+            EventCommand eventCommand = (EventCommand) obj;
+            return eventCommand.event.equals(this.event) && eventCommand.date.equals(this.date);
         }
         return false;
     }

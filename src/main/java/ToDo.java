@@ -34,7 +34,8 @@ public class ToDo extends Task {
 
     /**
      * Checks the equivalence of ToDo this and Object obj.
-     * If obj is an instance of the ToDo class and all attributes are equivalent, it is equivalent to this.
+     * If obj is an instance of the ToDo class and all attributes are equivalent,
+     * it is equivalent to this.
      * @param obj the object which will be compared to this.
      * @return Indication of whether obj is equivalent to this.
      */
@@ -43,8 +44,8 @@ public class ToDo extends Task {
         if (obj == this) {
             return true;
         } else if (obj instanceof ToDo) {
-            ToDo td = (ToDo) obj;
-            return td.name.equals(this.name) && (td.done == this.done);
+            ToDo toDo = (ToDo) obj;
+            return toDo.name.equals(this.name) && (toDo.done == this.done);
         }
         return false;
     }
