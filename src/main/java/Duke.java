@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -10,25 +11,23 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\n"+ "What can I do for you?");
+        ArrayList<String> items = new ArrayList<>();
 
         while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 bye();
                 break;
+            } else if (input.equals("list")) {
+                int n = 1;
+                for (String item : items) {
+                    System.out.println( n + ". " + item);
+                    n++;
+                }
             } else {
-                echo(input);
+                items.add(input);
             }
         }
-    }
-
-    /**
-     * Echos the input message.
-     *
-     * @param msg the user input to be echoed
-     */
-    public static void echo(String msg) {
-        System.out.println(msg);
     }
 
     /**
