@@ -1,10 +1,15 @@
 plugins {
     id 'java-library'
     id 'application'
+    id 'checkstyle'
 }
 
 repositories {
     jcenter()
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }
 
 dependencies {
