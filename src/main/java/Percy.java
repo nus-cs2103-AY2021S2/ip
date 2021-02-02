@@ -1,26 +1,28 @@
 import java.io.IOException;
 
-import percy.command.Command;
-import percy.command.Parser;
-import percy.exception.PercyException;
+import javafx.application.Application;
+// import percy.command.Command;
+// import percy.command.Parser;
+// import percy.exception.PercyException;
 import percy.storage.Storage;
 import percy.task.TaskList;
 import percy.ui.Ui;
 
 
 public class Percy {
-    private TaskList list;
+    private TaskList tasks;
     private Ui ui;
     private Storage storage;
-    private String filePath = "data/percy.txt";
+    private String filePath;
 
     /**
      * Constructs the chat bot Percy.
      */
-    public Percy() throws IOException {
-        this.list = new TaskList();
+    public Percy(String filePath) throws IOException {
+        this.tasks = new TaskList();
         this.ui = new Ui();
         this.storage = new Storage(this.filePath);
+        this.filePath = filePath;
     }
 
     /**
@@ -28,15 +30,16 @@ public class Percy {
      *
      * @throws IOException
      */
+    /*
     public void run() throws IOException {
-        list.updateTaskList(storage.load());
+        tasks.updateTaskList(storage.load());
         Ui.printStartUpMsg();
         while (true) {
             String command = Ui.readCommand();
             Parser parser = new Parser(command);
             try {
                 Command cmd = parser.getCommand();
-                String response = cmd.execute(list, storage);
+                String response = cmd.execute(tasks, storage);
                 System.out.println(response);
                 if (cmd.isExit()) {
                     break;
@@ -48,15 +51,31 @@ public class Percy {
             }
         }
     }
+    */
+
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
 
     /**
      * Runs the chat bot Percy.
      */
-    public static void main(String [] args) {
-        try {
+    public static void main(String[] args) throws IOException {
+        Application.launch(Gui.class, args);
+        /* // Command-Line mode
             new Percy().run();
         } catch (IOException ex) {
             System.err.println(ex);
         }
+         */
     }
 }
