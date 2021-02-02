@@ -37,6 +37,31 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns true if this task description contains the keyword ignoring case.
+     *
+     * @param   keyword     the keyword to be tested with
+     * @return              true if this task description matches the keyword
+     */
+    public boolean isMatching(String keyword) {
+        return containsIgnoreCase(description, keyword);
+    }
+
+    private static boolean containsIgnoreCase(String str, String searchStr) {
+        if (str == null || searchStr == null)
+            return false;
+
+        final int length = searchStr.length();
+        if (length == 0)
+            return true;
+
+        for (int i = str.length() - length; i >= 0; i--) {
+            if (str.regionMatches(true, i, searchStr, 0, length))
+                return true;
+        }
+        return false;
+    }
+
 	/**
 	 * Returns the string represenatation of this Task instance
 	 *
