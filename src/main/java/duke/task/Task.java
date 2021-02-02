@@ -46,8 +46,9 @@ public class Task {
      * @return Outcome of the action.
      */
     public Boolean markAsDone() {
-        if (this.isDone)
+        if (this.isDone) {
             return false;
+        }
         this.isDone = true;
         return true;
     }
@@ -59,6 +60,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s",
+                this.getStatusIcon(), this.description);
     }
 }

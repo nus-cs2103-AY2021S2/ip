@@ -1,13 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * Represents the task list used by the Duke chat bot.
@@ -55,7 +55,7 @@ public class TaskList {
 
         sb.append("You got a total of " + this.collection.size() + " task(s).\n");
         for (int i = 0; i < collection.size(); i++) {
-           sb.append(String.format("\t%d. %s\n", i + 1, collection.get(i)));
+            sb.append(String.format("\t%d. %s\n", i + 1, collection.get(i)));
         }
 
         return sb.toString();
@@ -96,24 +96,28 @@ public class TaskList {
         if (args[0].equals("")) {
             throw new DukeException("I need a description of your task...");
         } else if (args[1].equals("")) {
-            if (type.equals("deadline"))
+            if (type.equals("deadline")) {
                 throw new DukeException("I need to know when your task ends...");
-            if (type.equals("event"))
+            }
+            if (type.equals("event")) {
                 throw new DukeException("I need to know the time period of your event...");
+            }
         }
 
         // Add to collection
         try {
             switch (type) {
-                case "todo":
-                    this.collection.add(new Todo(args[0]));
-                    break;
-                case "deadline":
-                    this.collection.add(new Deadline(args[0], LocalDate.parse(args[1])));
-                    break;
-                case "event":
-                    this.collection.add(new Event(args[0], LocalDate.parse(args[1])));
-                    break;
+            case "todo":
+                this.collection.add(new Todo(args[0]));
+                break;
+            case "deadline":
+                this.collection.add(new Deadline(args[0], LocalDate.parse(args[1])));
+                break;
+            case "event":
+                this.collection.add(new Event(args[0], LocalDate.parse(args[1])));
+                break;
+            default:
+                throw new DukeException("Invalid task type.");
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Please specify a proper date... (Format: YYYY-MM-DD)");
@@ -132,8 +136,9 @@ public class TaskList {
         try {
             int itemIdx = Integer.parseInt(index.split(" ")[0]) - 1;
             boolean status = this.collection.get(itemIdx).markAsDone();
-            if (!status)
+            if (!status) {
                 throw new IllegalArgumentException();
+            }
             return "Task '" + this.collection.get(itemIdx).getDescription() + "' is marked as done.";
         } catch (NumberFormatException e) {
             throw new DukeException("I need a task number...");

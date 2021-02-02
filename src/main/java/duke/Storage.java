@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +7,11 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Represents the storage functionalities used by
@@ -48,16 +48,17 @@ public class Storage {
                 String[] parts = line.replace('|', ' ').split("[ ]+");
 
                 Task task;
-                if (parts[0].equals("T"))
+                if (parts[0].equals("T")) {
                     task = new Todo(parts[2]);
-                else if (parts[0].equals("D")) {
+                } else if (parts[0].equals("D")) {
                     task = new Deadline(parts[2], LocalDate.parse(parts[3]));
-                } else
+                } else {
                     task = new Event(parts[2], LocalDate.parse(parts[3]));
+                }
 
-                if (parts[1].equals("1"))
+                if (parts[1].equals("1")) {
                     task.markAsDone();
-
+                }
                 collection.add(task);
             }
         } catch (IOException e) {
@@ -82,19 +83,21 @@ public class Storage {
             StringBuilder sb = new StringBuilder();
             for (Task task : collection) {
                 // Task type
-                if (task instanceof Todo)
+                if (task instanceof Todo) {
                     sb.append('T');
-                else if (task instanceof Deadline)
+                } else if (task instanceof Deadline) {
                     sb.append('D');
-                else if (task instanceof Event)
+                } else if (task instanceof Event) {
                     sb.append('E');
+                }
 
                 // Status
                 sb.append(" | ");
-                if (task.getStatusIcon().equals("*"))
+                if (task.getStatusIcon().equals("*")) {
                     sb.append("1");
-                else
+                } else {
                     sb.append("0");
+                }
 
                 // Description
                 sb.append(" | ");
@@ -103,10 +106,10 @@ public class Storage {
                 // Args
                 if (task instanceof Deadline) {
                     sb.append(" | ");
-                    sb.append(((Deadline)task).getBy());
+                    sb.append(((Deadline) task).getBy());
                 } else if (task instanceof Event) {
                     sb.append(" | ");
-                    sb.append(((Event)task).getAt());
+                    sb.append(((Event) task).getAt());
                 }
                 sb.append('\n');
             }

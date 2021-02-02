@@ -100,8 +100,9 @@ public class Ui {
      */
     public void say(String message, Boolean newLine) {
         System.out.print(">> " + message);
-        if (newLine)
+        if (newLine) {
             System.out.print("\n");
+        }
     }
 
     /**

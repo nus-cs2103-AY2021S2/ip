@@ -49,32 +49,34 @@ public class Command {
         try {
             CommandsEnum ce = CommandsEnum.valueOf(this.commandType.toUpperCase());
             switch (ce) {
-                case USAGE:
-                    ui.showUsage();
-                    break;
-                case LIST:
-                    this.listCommand(tasks, ui);
-                    break;
-                case FIND:
-                    this.findTasks(tasks, ui);
-                    break;
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    this.addTask(tasks, ui);
-                    break;
-                case DONE:
-                    this.markDone(tasks, ui);
-                    break;
-                case DELETE:
-                    this.deleteTask(tasks, ui);
-                    break;
-                case SAVE:
-                    this.saveTasks(tasks, ui, storage);
-                    break;
-                case BYE:
-                    this.toExit = ui.toExit();
-                    break;
+            case USAGE:
+                ui.showUsage();
+                break;
+            case LIST:
+                this.listCommand(tasks, ui);
+                break;
+            case FIND:
+                this.findTasks(tasks, ui);
+                break;
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                this.addTask(tasks, ui);
+                break;
+            case DONE:
+                this.markDone(tasks, ui);
+                break;
+            case DELETE:
+                this.deleteTask(tasks, ui);
+                break;
+            case SAVE:
+                this.saveTasks(tasks, ui, storage);
+                break;
+            case BYE:
+                this.toExit = ui.toExit();
+                break;
+            default:
+                throw new DukeException("I'm not trained with these commands yet...");
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("I'm not trained with these commands yet...");
