@@ -79,7 +79,7 @@ public class Ui {
      * @return formatted goodbye string.
      */
     public static String makeByeMsg() {
-        return DIVIDER + INDENT + MESSAGE_GOODBYE + "\n" + DIVIDER;
+        return MESSAGE_GOODBYE + "\n";
     }
 
     /**
@@ -87,7 +87,7 @@ public class Ui {
      * @return formatted string.
      */
     public static String makeMsg(String s) {
-        return DIVIDER + INDENT + s.toString() + "\n" + DIVIDER;
+        return s.toString() + "\n";
     }
 
     /**
@@ -96,11 +96,10 @@ public class Ui {
      * @return formatted multi-line string.
      */
     public static String makeMsg(ArrayList<String> stringArr) {
-        String str = DIVIDER;
+        String str = "";
         for (String s : stringArr) {
-            str += INDENT + s.toString() + "\n";
+            str += s.toString() + "\n";
         }
-        str += DIVIDER;
         return str;
     }
 
@@ -111,16 +110,15 @@ public class Ui {
      */
     public static String makeListMsg(TaskList list) {
         String response;
-        response = DIVIDER + INDENT + "Here are the tasks in your list:\n";
+        response = "Here are the tasks in your list:\n";
         int i = 1;
         for (Task t : list.getTaskList()) {
-            response += INDENT
-                    + String.valueOf(i++) + ". "
+            response += String.valueOf(i++) + ". "
                     + t.toString() + "\n";
         }
         String taskString = (list.getTaskList().size() == 1) ? "task" : "tasks";
-        response += INDENT + "Now you have " + list.getTaskList().size() + " "
-                + taskString + " in the list.\n" + DIVIDER;
+        response += "Now you have " + list.getTaskList().size() + " "
+                + taskString + " in the list.\n";
         return response;
     }
 
@@ -132,10 +130,9 @@ public class Ui {
      * @return message for adding task
      */
     public static String makeAddMsg(Task t, TaskList list) {
-        return DIVIDER + INDENT + "Got it. I've added this task:\n"
-                + INDENT + INDENT + t.toString() + "\n"
-                + INDENT + "Now you have " + list.getTaskList().size() + " tasks in the list.\n"
-                + DIVIDER;
+        return "Got it. I've added this task:\n"
+                + t.toString() + "\n"
+                + "Now you have " + list.getTaskList().size() + " tasks in the list.\n";
     }
 
     /**
@@ -145,10 +142,9 @@ public class Ui {
      * @return message for deletion of task
      */
     public static String makeDeleteMsg(Task t, TaskList list) {
-        return DIVIDER + INDENT + "Noted. I've removed this task:\n"
-                + INDENT + INDENT + t.toString() + "\n"
-                + INDENT + "Now you have " + list.getTaskList().size() + " tasks in the list.\n"
-                + DIVIDER;
+        return "Noted. I've removed this task:\n"
+                + t.toString() + "\n"
+                + "Now you have " + list.getTaskList().size() + " tasks in the list.\n";
     }
 
     /**
@@ -157,9 +153,8 @@ public class Ui {
      * @return t the message for marking a task as done.
      */
     public static String makeDoneMsg(Task t) {
-        return DIVIDER + INDENT + "Nice! I've marked this task as done:\n"
-                + INDENT + INDENT + t.toString() + "\n"
-                + DIVIDER;
+        return "Nice! I've marked this task as done:\n"
+                + t.toString() + "\n";
     }
 
     /**
@@ -171,14 +166,13 @@ public class Ui {
         ArrayList<Task> filteredTasksArr = filteredTasks.getTaskList();
         int taskCount = filteredTasks.getTaskList().size();
         if (taskCount == 0) {
-            return DIVIDER + INDENT + "There are no matching tasks in your list.\n" + DIVIDER;
+            return "There are no matching tasks in your list.\n";
         } else {
             String s;
-            s = DIVIDER + INDENT + "Here are the matching tasks in your list:\n";
+            s = "Here are the matching tasks in your list:\n";
             for (Task t : filteredTasksArr) {
-                s += INDENT + (filteredTasksArr.indexOf(t) + 1) + "." + t.toString() + "\n";
+                s += (filteredTasksArr.indexOf(t) + 1) + "." + t.toString() + "\n";
             }
-            s += DIVIDER;
             return s;
         }
     }
