@@ -2,3 +2,4 @@ T | O | work
 T | O | book report 
 D | O | submit ip | by: 12-2-2021 1900
 E | X | level outing | from: 02-2-2021 1900 | to: 02-2-2021 2100
+E | O | team meeting | from: 02-2-2021 2100 | to: 02-2-2021 2359
