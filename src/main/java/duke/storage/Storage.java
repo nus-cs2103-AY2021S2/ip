@@ -28,7 +28,7 @@ public class Storage {
     /**
      * Constructs a Storage with the given save file location.
      *
-     * @param filePath File path of the save file
+     * @param filePath File path of the save file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
