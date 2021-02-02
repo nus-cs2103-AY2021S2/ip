@@ -55,13 +55,4 @@ public class TaskList {
         }
         return outputString.toString();
     }
-
-    public void printTaskList() {
-        int count = 1;
-        System.out.print(Ui.line);
-        for (Task task : taskList) {
-            System.out.println("\t" + count++ + ". " + task);
-        }
-        System.out.println(Ui.line);
-    }
 }

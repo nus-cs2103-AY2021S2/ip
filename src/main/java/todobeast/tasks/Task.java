@@ -19,5 +19,9 @@ public abstract class Task {
         isDone = true;
     }
 
+    public boolean containsStringInDesc(String regex) {
+        return taskDescription.contains(regex);
+    }
+
     abstract public String formatForStorage(String delimiter);
 }

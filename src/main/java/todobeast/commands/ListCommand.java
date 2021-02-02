@@ -11,6 +11,7 @@ public class ListCommand extends Command {
         if (taskList == null) {
             throw new ToDoBeastException("Task list cannot be found.");
         }
-        ui.printTaskList(taskList);
+        ui.listTasks();
+        ui.printTaskList(taskList.getTaskList());
     }
 }
