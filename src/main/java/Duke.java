@@ -1,6 +1,11 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke is a personal assistant chat bot that helps users to
  * keep track of various things.
@@ -10,7 +15,8 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
-
+    private Parser parser;
+    private Scanner sc;
 
     /**
      * Main method for Duke class.
@@ -26,6 +32,8 @@ public class Duke {
         }
     }
 
+
+
     /**
      * Constructor for Duke class.
      *
@@ -40,15 +48,30 @@ public class Duke {
     }
 
     /**
+     * Generates a response to user input.
+     */
+    public String getResponse(String input) {
+        //try {
+            parser = new Parser();
+            storage = new Storage("duke.txt");
+            return parser.execute(input, taskList, storage);
+        //} catch (DukeException e) {
+            //System.err.println(e.getMessage());
+        //}
+    }
+
+
+    /**
      * Runs the Duke application.
      *
      * @throws IOException if filePath or system input is invalid.
      */
+
     public void run() throws IOException {
         ui.printHello();
-        Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage("duke.txt");
-        Parser parser = new Parser();
+        sc = new Scanner(System.in);
+        storage = new Storage("duke.txt");
+        parser = new Parser();
 
         while (true) {
             String input = sc.nextLine();
@@ -60,5 +83,6 @@ public class Duke {
         sc.close();
         storage.storeTasks(taskList);
     }
+
 
 }
