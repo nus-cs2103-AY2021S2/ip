@@ -30,11 +30,11 @@ test {
 }
 
 application {
-    mainClassName = "Maya"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "maya"
+    archiveBaseName = "launcher"
     archiveClassifier = null
 }
 
