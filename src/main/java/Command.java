@@ -1,33 +1,15 @@
-import java.util.HashMap;
-import java.util.Map;
+public abstract class Command {
+    protected String arguments;
+    protected boolean isExit;
 
-public enum Command {
-    TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
-    BYE("bye"),
-    LIST("list"),
-    DONE("done"),
-    DELETE("delete");
-
-    private final String label;
-    private static final Map<String, Command> BY_LABEL = new HashMap<>();
-
-    static {
-        for (Command command : values()) {
-            BY_LABEL.put(command.label, command);
-        }
+    public Command(String arguments) {
+        this.arguments = arguments;
+        this.isExit = false;
     }
 
-    private Command(String label) {
-        this.label = label;
+    public boolean isExit() {
+        return this.isExit;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public static Command valueOfLabel(String label) {
-        return BY_LABEL.get(label);
-    }
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }
