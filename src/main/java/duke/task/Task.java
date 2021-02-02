@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Constructor for <code>Task</code> class.
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -20,6 +21,7 @@ public class Task {
 
     /**
      * Generates the appropriate symbol according to whether the task is marked as done.
+     *
      * @return String format of the symbol.
      */
     public String getStatusIcon() {
@@ -35,6 +37,7 @@ public class Task {
 
     /**
      * Generates the date of the task.
+     *
      * @return Date of the task in String format.
      */
     public String getTaskDate() {
@@ -43,6 +46,7 @@ public class Task {
 
     /**
      * Generates the description of the task.
+     *
      * @return Description of the task.
      */
     public String getDescription() {
@@ -51,6 +55,7 @@ public class Task {
 
     /**
      * Generates the specific type of the task - deadline, event, todo.
+     *
      * @return Specific type of task.
      */
     public String getTaskType() {
@@ -59,6 +64,7 @@ public class Task {
 
     /**
      * Checks if the task is marked as done.
+     *
      * @return True if the task is done otherwise false.
      */
     public boolean isDone() {
@@ -67,6 +73,7 @@ public class Task {
 
     /**
      * Generates details of a task - description, done.
+     *
      * @return String output for a task.
      */
     @Override

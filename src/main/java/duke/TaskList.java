@@ -14,13 +14,15 @@ import duke.task.ToDo;
 
 /**
  * <code>TaskList</code> class contains the task list.
- * It has methods to carry out task actions - add, delete, mark as done, commanded by the user.
+ * It has methods to carry out task actions - add, delete,
+ * mark as done, commanded by the user.
  */
 public class TaskList {
     protected List<Task> list;
 
     /**
-     * Constructor for TaskList class when there is no existing task list in the Duke application yet.
+     * Constructor for TaskList class when there is no existing
+     * task list in the Duke application yet.
      * Initializes a new list to store tasks.
      */
     public TaskList() {
@@ -30,6 +32,7 @@ public class TaskList {
     /**
      * Constructor for TaskList class when there is an existing list of tasks in the
      * Duke application already.
+     *
      * @param list List of existing tasks.
      */
     public TaskList(List<Task> list) {
@@ -38,6 +41,7 @@ public class TaskList {
 
     /**
      * Adds a new task to the list of existing tasks.
+     *
      * @param userInput User input of the new task to be added.
      * @return New task added by the user.
      * @throws InvalidDateException If the date is in an invalid format.
@@ -73,6 +77,7 @@ public class TaskList {
 
     /**
      * Marks an existing task in the list as done.
+     *
      * @param userInput User input of the task to be marked as done.
      */
     public void markAsDone(String userInput) {
@@ -82,6 +87,7 @@ public class TaskList {
 
     /**
      * Deletes an existing task in the list.
+     *
      * @param userInput User input of the task to be deleted.
      */
     public void deleteTask(String userInput) {
@@ -91,6 +97,7 @@ public class TaskList {
 
     /**
      * Finds a task by searching for a keyword.
+     *
      * @param userInput User input of the keyword to be found.
      * @return List of tasks that contains the keyword.
      */
@@ -102,10 +109,8 @@ public class TaskList {
             String taskDescription = task.getDescription();
             String[] taskDescriptionArr = taskDescription.split(" ");
 
-            for (int i = 0; i < taskDescriptionArr.length; i++) {
-                String currWord = taskDescriptionArr[i];
-
-                if (currWord.equals(keyword)) {
+            for (String currentWord : taskDescriptionArr) {
+                if (currentWord.equals(keyword)) {
                     tempList.add(task);
                     break;
                 }

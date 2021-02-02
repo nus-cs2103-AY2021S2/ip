@@ -7,6 +7,7 @@ public class DukeException extends Exception {
 
     /**
      * Constructor for DukeException class.
+     *
      * @param message Error message.
      */
     public DukeException(String message) {

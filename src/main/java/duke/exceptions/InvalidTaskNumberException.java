@@ -9,6 +9,6 @@ public class InvalidTaskNumberException extends DukeException {
      * Constructor for InvalidTaskNumberException class.
      */
     public InvalidTaskNumberException() {
-        super ("     ☹ OOPS!!! You have entered an invalid task number.");
+        super ("☹ OOPS!!! You have entered an invalid task number. ☹");
     }
 }

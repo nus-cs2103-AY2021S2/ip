@@ -17,6 +17,7 @@ public class Parser {
 
     /**
      * Constructor for Parser class.
+     *
      * @param userInput User input in the command line.
      */
     public Parser(String userInput) {
@@ -25,6 +26,7 @@ public class Parser {
 
     /**
      * Parses the String user input into an array of Strings.
+     *
      * @return An array of Strings of the parsed user input.
      */
     public String[] parseUserInput() {
@@ -32,7 +34,9 @@ public class Parser {
     }
 
     /**
-     * Retrieves the user's task action by accessing the array of parsed user input Strings.
+     * Retrieves the user's task action by accessing
+     * the array of parsed user input Strings.
+     *
      * @return User command task action.
      */
     public String getUserAction() {
@@ -41,6 +45,7 @@ public class Parser {
 
     /**
      * Checks the user input and ensures that it makes sense.
+     *
      * @param list List of existing tasks.
      * @throws MissingTaskNumberException If there is no task number for done or delete actions.
      * @throws InvalidTaskNumberException If the task number is outside the list range.
@@ -55,6 +60,13 @@ public class Parser {
         String task = userInputArr[0];
 
         switch (task) {
+        case "list":
+        case "bye":
+            if (userInputArr.length > 1) {
+                throw new InvalidInputException();
+            }
+            break;
+
         case "todo":
         case "deadline":
         case "event":

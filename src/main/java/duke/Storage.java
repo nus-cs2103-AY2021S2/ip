@@ -17,13 +17,15 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * <code>Storage</code> class handles the loading of tasks from the file and saving tasks in the file.
+ * <code>Storage</code> class handles the loading of
+ * tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
     /**
      * Constructor for Storage class.
      * Initializes File for the task file.
+     *
      * @param filePath Filepath of the file that saves task
      * @throws InvalidFolderException If folder to store the file does not exist.
      */
@@ -44,6 +46,7 @@ public class Storage {
 
     /**
      * Returns a List of existing tasks from the file when Duke starts up.
+     *
      * @param filePath Filepath of the file that saves task.
      * @return List of existing tasks in the file.
      * @throws FileNotFoundException If the file cannot be found.
@@ -88,6 +91,7 @@ public class Storage {
 
     /**
      * Saves the tasks in the file whenever the task list changes.
+     *
      * @param filePath Filepath of the file that saves task.
      * @param list List of existing tasks.
      */

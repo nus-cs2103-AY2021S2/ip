@@ -8,11 +8,12 @@ public class EmptyDescriptionException extends DukeException {
 
     /**
      * Constructor for EmptyDescriptionException class.
+     *
      * @param task Specific type of task.
      */
     public EmptyDescriptionException(String task) {
-        super ("     ☹ OOPS!!! The description for the following type of task cannot be empty.\n "
-                + "     Please try again!\n"
+        super ("☹ OOPS!!! The description for the following type of task cannot be empty. ☹\n "
+                + "Please try again!\n"
                 + "      Task Type: " + task);
     }
 }

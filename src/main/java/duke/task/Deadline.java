@@ -11,6 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for <code>Deadline</code> class.
+     *
      * @param description Description of the deadline task.
      * @param date Date of the deadline task.
      */
@@ -22,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Generates the date of the deadline task.
+     *
      * @return Date of the task in String format.
      */
     @Override
@@ -31,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Generates details of a deadline task - description, date.
+     *
      * @return String output for a deadline task.
      */
     @Override

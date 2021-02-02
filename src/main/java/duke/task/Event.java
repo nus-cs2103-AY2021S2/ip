@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Constructor for <code>Event</code> class
+     *
      * @param description Description of the event task.
      * @param date Date of the event task.
      */
@@ -22,6 +23,7 @@ public class Event extends Task {
 
     /**
      * Generates the date of the event task.
+     *
      * @return Date of the task in String format.
      */
     @Override
@@ -31,6 +33,7 @@ public class Event extends Task {
 
     /**
      * Generates details of an event task - description, date.
+     *
      * @return String output for a event task.
      */
     @Override

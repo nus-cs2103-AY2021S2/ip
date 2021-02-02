@@ -9,6 +9,6 @@ public class MissingTaskNumberException extends DukeException {
      * Constructor for MissingTaskNumberException.
      */
     public MissingTaskNumberException() {
-        super ("     Error!! Please enter a task number and try again! :)");
+        super ("Error!! Please enter a task number and try again! ☹");
     }
 }

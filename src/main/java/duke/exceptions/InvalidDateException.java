@@ -9,6 +9,6 @@ public class InvalidDateException extends DukeException {
      * Constructor for InvalidDateException class.
      */
     public InvalidDateException() {
-        super ("     ☹ OOPS!!! You have entered an invalid date/time.");
+        super ("☹ OOPS!!! You have entered an invalid date/time. ☹");
     }
 }
