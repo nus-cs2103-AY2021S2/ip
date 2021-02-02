@@ -4,26 +4,31 @@ import java.io.FileNotFoundException;
  * Represents the chat bot.
  */
 public class Flamingo {
+    private static Storage storage = new Storage();
+    private static TaskList tasks;
 
-    /**
-     * Starts the chatbot.
-     */
     public Flamingo() {
-        Storage storage = new Storage();
-        TaskList tasks;
-
         try {
             tasks = new TaskList(storage.loadData());
         } catch (FileNotFoundException e) {
             Ui.showLoadingError();
             tasks = new TaskList();
         }
-
-        Ui.sayHello();
-        Parser.run(storage, tasks);
     }
 
-    public static void main(String[] args) {
-        new Flamingo();
+    public static Storage getStorage() {
+        return storage;
+    }
+
+    public static TaskList getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Generates a response.
+     */
+    public static String getResponse(String input) {
+        String response = Parser.run(input);
+        return response;
     }
 }

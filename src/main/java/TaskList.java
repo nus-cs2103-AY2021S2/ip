@@ -27,27 +27,26 @@ public class TaskList {
     /**
      * Prints out the tasks in the ArrayList.
      */
-    public void listTasks() {
-        System.out.println("");
+    public String listTasks() {
+        String list = "";
 
         for (int i = 1; i < numTasks + 1; i++) {
-            System.out.println(i + ". " + tasks.get(i - 1).toString());
+            list += (i + ". " + tasks.get(i - 1).toString() + "\n");
         }
 
-        System.out.println("");
+        return list;
     }
 
     /**
-     * Adds a tasks to the ArrayList.
+     * Adds a task to the ArrayList.
      *
      * @param task Task from user input.
      */
-    public void addTask(Task task) {
-        System.out.println("\nOkay, I've added this task:");
+    public String addTask(Task task) {
         tasks.add(numTasks, task);
         numTasks++;
-        System.out.println(task.toString());
-        System.out.println("You now have a total of " + numTasks + " tasks.\n");
+        return "Okay, I've added this task:\n" + task.toString()
+                + "\nYou now have a total of " + numTasks + " tasks.";
     }
 
     /**
@@ -55,11 +54,12 @@ public class TaskList {
      *
      * @param num Number representing task in the list.
      */
-    public void markAsDone(int num) {
-        System.out.println("\nOkay, this task has been marked as done:");
+    public String markAsDone(int num) {
         Task currentTask = tasks.get(num - 1);
         currentTask.markAsDone();
-        System.out.println(num + ". " + currentTask.toString() + "\n");
+
+        return "Okay, this task has been marked as done:\n"
+                + num + ". " + currentTask.toString();
     }
 
     /**
@@ -67,12 +67,16 @@ public class TaskList {
      *
      * @param num Number representing task in the list.
      */
-    public void deleteTask(int num) {
-        System.out.println("\nOkay, I've deleted this task:");
-        System.out.println(tasks.get(num - 1).toString());
+    public String deleteTask(int num) {
+        //System.out.println("\nOkay, I've deleted this task:");
+        //System.out.println(tasks.get(num - 1).toString());
+        String taskToDelete = tasks.get(num - 1).toString();
         tasks.remove(num - 1);
         numTasks--;
-        System.out.println("You now have a total of " + numTasks + " tasks.\n");
+        //System.out.println("You now have a total of " + numTasks + " tasks.\n");
+
+        return "Okay, I've deleted this task:\n" + taskToDelete
+                + "\nYou now have a total of " + numTasks + " tasks.";
     }
 
     /**
@@ -80,7 +84,7 @@ public class TaskList {
      *
      * @param keyword Keyword from user input.
      */
-    public void findString(String keyword) {
+    public String findString(String keyword) {
         boolean hasMatch = false;
         ArrayList<Task> matches = new ArrayList<>();
         ArrayList<Integer> taskNumber = new ArrayList<>();
@@ -98,13 +102,14 @@ public class TaskList {
         }
 
         if (hasMatch) {
-            System.out.println("\nBingo Flamingo! I've found these matching results:");
+            String listOfMatches = "";
             for (int j = 0; j < matches.size(); j++) {
-                System.out.println(taskNumber.get(j) + ". " + matches.get(j));
+                listOfMatches += taskNumber.get(j) + ". " + matches.get(j) + "\n";
             }
-            System.out.println("");
+            return "Bingo Flamingo! I've found these matching results:\n"
+                    + listOfMatches;
         } else {
-            System.out.println("\nOh no Flamingo! No matches were found.\n");
+            return "Oh no Flamingo! No matches were found.";
         }
     }
 }
