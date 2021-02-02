@@ -16,7 +16,6 @@ public class Parser {
     /**
      * Parser contains the Storage, Tasks, and Ui classes and acts as an
      * intermediary for them to interact.
-     * 
      * @param storage Storage class
      * @param tasks   TaskList class
      * @param ui      Ui Class
@@ -30,7 +29,6 @@ public class Parser {
 
     /**
      * Instantiates the scanner and parses inputs.
-     * 
      */
     public void open() {
         while (sc.hasNextLine()) {

@@ -15,7 +15,6 @@ public class Ui {
 
     /**
      * Prints out the TaskList in a nice format.
-     * 
      * @param tasks the TaskList to be printed.
      */
     public void showList(TaskList tasks) {
@@ -27,7 +26,6 @@ public class Ui {
     /**
      * Searches the TaskList and prints out the items that matches the user
      * specifications.
-     * 
      * @param tasks  the TaskList to be searched.
      * @param toFind the String that the user is looking for.
      */
@@ -50,7 +48,6 @@ public class Ui {
 
     /**
      * Prints out confirmation after marking an item as done.
-     * 
      * @param input The string input by the user.
      * @param tasks The TaskList to be checked.
      */
@@ -62,7 +59,6 @@ public class Ui {
 
     /**
      * Prints out confirmations that the Task was added to the TaskList.
-     * 
      * @param tasks The TaskList to be added to.
      * @param task  The Task to be added.
      */
@@ -75,7 +71,6 @@ public class Ui {
 
     /**
      * Prints out confirmation for deleting a task from the TaskList.
-     * 
      * @param input The input string.
      * @param tasks The TaskList which the item is removed from.
      */

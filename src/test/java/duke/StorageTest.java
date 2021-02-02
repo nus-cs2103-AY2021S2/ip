@@ -1,7 +1,5 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
@@ -9,7 +7,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorageTest {
+import org.junit.jupiter.api.Test;
+
+class StorageTest {
 
     @Test
     void save_file_success() {

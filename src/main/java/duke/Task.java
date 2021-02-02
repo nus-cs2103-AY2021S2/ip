@@ -34,7 +34,6 @@ public class Task {
     /**
      * Looks for inputs with the format yyyy-mm-dd and changes them to the MMM dd
      * yyyy format.
-     * 
      * @param date The date to be changed.
      * @return The newly formatted date.
      */

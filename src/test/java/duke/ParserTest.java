@@ -1,10 +1,10 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ParserTest {
+import org.junit.jupiter.api.Test;
+
+class ParserTest {
 
     @Test
     void test() {

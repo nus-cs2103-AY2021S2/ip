@@ -21,7 +21,6 @@ public class Storage {
 
     /**
      * Saves the TaskList into a file.
-     * 
      * @param taskList The TaskList to be saved.
      * @throws IOException If file does not exist.
      */
@@ -35,7 +34,6 @@ public class Storage {
 
     /**
      * Loads Tasks from a file and stores them in a List.
-     * 
      * @return A List containing all the tasks.
      * @throws FileNotFoundException If the file does not exist.
      */

@@ -5,31 +5,22 @@ import duke.Ui;
 
 public class Duke {
 
+    private Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
-
-    /**
-     * Starts the program.
-     * 
-     */
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
-    }
 
     /**
      * Initialization of the Storage, TaskList and Ui.
-     * 
      * @param filePath The file path for storage of data.
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        this.ui = new Ui();
         try {
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.load());
+            this.storage = new Storage(filePath);
+            this.tasks = new TaskList(storage.load());
         } catch (Exception e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
+            this.tasks = new TaskList();
+            this.ui.showLoadingError();
         }
     }
 
@@ -40,6 +31,13 @@ public class Duke {
         Parser p = new Parser(storage, tasks, ui);
         p.open();
         p.close();
+    }
+
+    /**
+     * Starts the program.
+     */
+    public static void main(String[] args) {
+        new Duke("duke.txt").run();
     }
 
 }
