@@ -67,6 +67,18 @@
     ____________________________________________________________
 
     ____________________________________________________________
+     Got it! I've added this task:
+       [E][ ] haha
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Got it! I've added this task:
+       [D][ ] hoho
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
      Error: Please provide a task name!
     ____________________________________________________________
 
@@ -91,24 +103,28 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     Error: Task does not exist!
+     Noted. I've removed this task:
+       [E][ ] haha
+     Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] borrow book
      2.[E][X] birthday (at: 11-08-2020 13:14)
+     3.[D][ ] hoho
     ____________________________________________________________
 
     ____________________________________________________________
      Noted. I've removed this task:
        [T][X] borrow book
-     Now you have 1 tasks in the list.
+     Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
      1.[E][X] birthday (at: 11-08-2020 13:14)
+     2.[D][ ] hoho
     ____________________________________________________________
 
     ____________________________________________________________
@@ -122,53 +138,55 @@
     ____________________________________________________________
      Got it! I've added this task:
        [D][ ] prepare bob's birthday present (by: 20-05-2021 13:14)
-     Now you have 2 tasks in the list.
+     Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
      1.[E][X] birthday (at: 11-08-2020 13:14)
-     2.[D][ ] prepare bob's birthday present (by: 20-05-2021 13:14)
+     2.[D][ ] hoho
+     3.[D][ ] prepare bob's birthday present (by: 20-05-2021 13:14)
     ____________________________________________________________
 
     ____________________________________________________________
      Got it! I've added this task:
        [E][ ] next birthday (at: 11-08-2021 13:14)
-     Now you have 3 tasks in the list.
+     Now you have 4 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it! I've added this task:
        [E][ ] next next birthday (at: 11-08-2022 13:14)
-     Now you have 4 tasks in the list.
+     Now you have 5 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
      1.[E][X] birthday (at: 11-08-2020 13:14)
-     2.[D][ ] prepare bob's birthday present (by: 20-05-2021 13:14)
-     3.[E][ ] next birthday (at: 11-08-2021 13:14)
-     4.[E][ ] next next birthday (at: 11-08-2022 13:14)
+     2.[D][ ] hoho
+     3.[D][ ] prepare bob's birthday present (by: 20-05-2021 13:14)
+     4.[E][ ] next birthday (at: 11-08-2021 13:14)
+     5.[E][ ] next next birthday (at: 11-08-2022 13:14)
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the matching tasks in your list:
-     3.[E][ ] next birthday (at: 11-08-2021 13:14)
-     4.[E][ ] next next birthday (at: 11-08-2022 13:14)
+     4.[E][ ] next birthday (at: 11-08-2021 13:14)
+     5.[E][ ] next next birthday (at: 11-08-2022 13:14)
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the matching tasks in your list:
      1.[E][X] birthday (at: 11-08-2020 13:14)
-     2.[D][ ] prepare bob's birthday present (by: 20-05-2021 13:14)
-     3.[E][ ] next birthday (at: 11-08-2021 13:14)
-     4.[E][ ] next next birthday (at: 11-08-2022 13:14)
+     3.[D][ ] prepare bob's birthday present (by: 20-05-2021 13:14)
+     4.[E][ ] next birthday (at: 11-08-2021 13:14)
+     5.[E][ ] next next birthday (at: 11-08-2022 13:14)
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the matching tasks in your list:
-     3.[E][ ] next birthday (at: 11-08-2021 13:14)
-     4.[E][ ] next next birthday (at: 11-08-2022 13:14)
+     4.[E][ ] next birthday (at: 11-08-2021 13:14)
+     5.[E][ ] next next birthday (at: 11-08-2022 13:14)
     ____________________________________________________________
 
     ____________________________________________________________

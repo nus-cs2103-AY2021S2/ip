@@ -9,6 +9,8 @@ list
 done 2
 done 3
 list
+event haha
+deadline hoho
 deadline
 todo
 event
