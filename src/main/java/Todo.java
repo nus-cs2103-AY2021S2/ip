@@ -1,5 +1,10 @@
 import static java.lang.Boolean.parseBoolean;
 
+/**
+ * This class implements a type of task that users can add to their tasklist on this app.
+ * The task has no variable specific to it that is of interest to the user (unlike event
+ * that has an eventTiming variable).
+ */
 public class Todo extends Task {
     private static final String taskType = "T";
 
@@ -21,7 +26,12 @@ public class Todo extends Task {
         return "T" + delimiter + description + delimiter + isDone + System.lineSeparator();
     }
 
-    //T;;desc;;true
+
+    /**
+     * Creates a Todo object based on the string stored in the hard disk.
+     * @param oneLine One line of stored input to be parsed into a todo
+     * @return Todo Object
+     */
     public static Todo parse(String oneLine) {
         assert oneLine.startsWith("T" + delimiter);
 

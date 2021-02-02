@@ -50,7 +50,7 @@ public class TaskList {
      * @throws IOException
      */
     public void saveTasksList() throws IOException {
-        File f = new File(Storage.taskListFilePath.toString());
+        File f = new File(Storage.TASK_LIST_FILE_PATH.toString());
         // doesn't actually create a new file i think, converts an existing file
 
         FileWriter fw = new FileWriter(f);
@@ -73,7 +73,7 @@ public class TaskList {
 
         String[] messages = {
                 "Success. I've added this task:",
-                Ui.taskIndent + t // standardize this indent,
+                Ui.EXTRA_INDENT + t
         };
 
         Ui.print(messages);
@@ -90,16 +90,12 @@ public class TaskList {
         }
 
         Ui.print(new String[]{"Got you. I've deleted this task:",
-                Ui.taskIndent + taskArrayList.get(i - 1)});
+                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)});
 
         taskArrayList.remove(i - 1);
     }
 
-    /**
-     * Mark specified task done
-     *
-     * @param i off-by-one index of a task in array list
-     */
+
     /**
      * Marks a task in the list done
      * @param i index of task to mark done
@@ -113,7 +109,7 @@ public class TaskList {
         taskArrayList.get(i - 1).markAsDone();
 
         Ui.print(new String[]{"Good work! I've marked this task done:",
-                Ui.taskIndent + taskArrayList.get(i - 1)});
+                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)});
     }
 
     /**
@@ -129,6 +125,11 @@ public class TaskList {
         return errMsg;
     }
 
+    /**
+     * Finds tasks whose description match a user-inputted string, and prints all
+     * matching tasks.
+     * @param s Search keyword, inputted by user
+     */
     public void findTasks(String s) {
         TaskList filtered = new TaskList();
         for (Task t : taskArrayList) {

@@ -2,9 +2,19 @@ import static java.lang.Boolean.parseBoolean;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class implements a type of task that users can add to their tasklist on this app.
+ * The event task has an event-specific variable, event timing.
+ */
 public class Event extends Task {
-    private LocalDateTime eventTiming; // todo make a custom class for datetimes
+    private LocalDateTime eventTiming; // todo make a custom class for datetimes (it can contain formatting functions)
 
+    /**
+     * Public constructor which is used when parsing user inputted command
+     * "event {desc} /at {timing}".
+     * @param desc
+     * @param eventTiming
+     */
     public Event(String desc, String eventTiming) {
         super(desc);
         this.eventTiming = ParseDateTime.parse(eventTiming);
@@ -15,6 +25,10 @@ public class Event extends Task {
         this.eventTiming = ParseDateTime.parse(eventTiming);
     }
 
+    /**
+     * Returns a string representation of an event task
+     * @return String representation of an event
+     */
     public String toString() {
         return "[E][" + getStatusIcon() + "] " + description
                 + " (at: " + ParseDateTime.readableString(eventTiming) + ")";
@@ -27,7 +41,12 @@ public class Event extends Task {
                 + delimiter + ParseDateTime.unparse(eventTiming) + System.lineSeparator();
     }
 
-    //E;;desc;;true;;timing
+    /**
+     * Creates a deadline object based on the string stored in the hard disk.
+     * Example stored string for this class: "//E;;desc;;true;;timing".
+     * @param oneLine One line of stored input to be parsed into a deadline
+     * @return Deadline Object
+     */
     public static Event parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
         assert oneLine.startsWith("T" + delimiter);
@@ -45,7 +64,10 @@ public class Event extends Task {
         return new Event(desc, eventTiming, isDone);
     }
 
-    // for testing purposes
+    /**
+     * This method only exists for one-off testing of this class.
+     * @param args
+     */
     public static void main(String[] args) {
         Event t = new Event("hello world", "8pm");
         System.out.println(t);

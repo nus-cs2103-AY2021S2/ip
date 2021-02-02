@@ -6,41 +6,45 @@ import java.time.LocalDateTime;
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
-    private final LocalDateTime deadline;
+    private final LocalDateTime deadlineDateTime; // need a better name, but also cannot confuse with the class name
 
     /**
      * Creates a deadline object
      * @param desc description of the deadline object
-     * @param deadline date/time that the deadline task is due
+     * @param deadlineDateTime date/time that the deadline task is due
      */
-    public Deadline(String desc, String deadline) {
+    public Deadline(String desc, String deadlineDateTime) {
         super(desc);
-        this.deadline = ParseDateTime.parse(deadline);
+        this.deadlineDateTime = ParseDateTime.parse(deadlineDateTime);
     }
 
-    private Deadline(String desc, String deadline, boolean isDone) {
+    private Deadline(String desc, String deadlineDateTime, boolean isDone) {
         super(desc, isDone);
-        this.deadline = ParseDateTime.parse(deadline);
+        this.deadlineDateTime = ParseDateTime.parse(deadlineDateTime);
     }
 
+    /**
+     * Returns a string representation of a deadline task
+     * @return String representation of a deadline
+     */
     @Override
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + description
-                + " (by: " + ParseDateTime.readableString(deadline) + ")";
+                + " (by: " + ParseDateTime.readableString(deadlineDateTime) + ")";
     }
 
     @Override
     public String unparse() {
         return "D" + delimiter + description + delimiter + isDone
-                + delimiter + ParseDateTime.unparse(deadline) + System.lineSeparator();
+                + delimiter + ParseDateTime.unparse(deadlineDateTime) + System.lineSeparator();
     }
 
     // note that this parsing is different from parsing user inputs.
     // since this parsing for hard disk storage is separate from that parsing,
     // the /at /by style of inputs won't affect this if they change, i think
     /**
-     * Creates a deadline object based on user input.
-     * @param oneLine One line of user input to be parsed into a deadline
+     * Creates a deadline object based on the string stored in the hard disk.
+     * @param oneLine One line of stored input to be parsed into a deadline
      * @return Deadline Object
      */
     public static Deadline parse(String oneLine) {
@@ -61,7 +65,10 @@ public class Deadline extends Task {
         return new Deadline(desc, deadline, isDone);
     }
 
-    // for testing purposes
+    /**
+     * This method only exists for one-off testing of this deadline class
+     * @param args
+     */
     public static void main(String[] args) {
         Deadline t = new Deadline("hello world", "7am on wed");
         System.out.println(t);

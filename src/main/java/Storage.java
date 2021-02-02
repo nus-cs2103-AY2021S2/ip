@@ -17,10 +17,10 @@ import java.util.Scanner;
  */
 public class Storage {
     // fixme this is wrong when run by bat file or jar file
-    public static final String projectDir = System.getProperty("user.dir");
+    public static final String PROJECT_DIR = System.getProperty("user.dir");
 
-    public static final java.nio.file.Path taskListFilePath = java.nio.file.Paths.get(
-            projectDir, "src", "data", "tasks.txt");
+    public static final java.nio.file.Path TASK_LIST_FILE_PATH = java.nio.file.Paths.get(
+            PROJECT_DIR, "src", "data", "tasks.txt");
 
 
     /**
@@ -44,7 +44,7 @@ public class Storage {
      * @return if task file exists
      */
     public static boolean doesTaskFileExist() {
-        return doesFileOrDirectoryExist(taskListFilePath);
+        return doesFileOrDirectoryExist(TASK_LIST_FILE_PATH);
     }
 
     /**
@@ -56,18 +56,18 @@ public class Storage {
             // probably not gonna be used due to TaskList.java impl
             return;
         } else {
-            java.nio.file.Path dataDirPath = java.nio.file.Paths.get(projectDir, "src", "data");
+            java.nio.file.Path dataDirPath = java.nio.file.Paths.get(PROJECT_DIR, "src", "data");
             boolean doesDataDirExist = doesFileOrDirectoryExist(dataDirPath);
 
             // create directory if it doesn't exist
             if (!doesDataDirExist) {
-                Path p = Paths.get(projectDir, "src", "data");
+                Path p = Paths.get(PROJECT_DIR, "src", "data");
                 boolean hasCreated = new File(p.toString()).mkdir();
                 System.out.println("done 2 " + hasCreated);
             }
 
             // create file
-            Path p = Paths.get(projectDir, "src", "data", "tasks.txt");
+            Path p = Paths.get(PROJECT_DIR, "src", "data", "tasks.txt");
             boolean isCreated = new File(p.toString()).createNewFile();
         }
     }
@@ -84,7 +84,7 @@ public class Storage {
 
         if (doesTaskFileExist()) {
             // load it
-            File f = new File(taskListFilePath.toString());
+            File f = new File(TASK_LIST_FILE_PATH.toString());
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
                 // much hardcoding to parse which class' unparse method to use

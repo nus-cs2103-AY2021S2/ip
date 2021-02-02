@@ -24,11 +24,12 @@ public class Duke {
         // variables to reuse
         String userInput;
         Parser parser = new Parser(taskList);
-        boolean remainOpen = true;
+        boolean hasUserTypedBye = false;
 
-        while (remainOpen) {
+        while (hasUserTypedBye) {
             userInput = sc.nextLine().trim();
-            remainOpen = parser.parseInputLine(userInput);
+            hasUserTypedBye = !parser.parseInputLine(userInput);
+            // todo find a new name that follows boolean conventions OR not the return values of parseInputLine
         }
 
         sc.close();

@@ -1,7 +1,7 @@
 public abstract class Task {
+    protected static String delimiter = ";;";
     protected String description;
     protected boolean isDone;
-    protected static String delimiter = ";;";
     protected String taskType;
 
     /**

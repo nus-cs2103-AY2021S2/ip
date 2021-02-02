@@ -47,6 +47,7 @@ public class ParseDateTime {
     }
 
     // where s is formatted like "30-04 6PM"
+    // todo as suggested in PR, make parsing format names more descriptive
     private static LocalDateTime parseFormat1(String s) {
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM ha yyyy");
         int yyyy = Year.now().getValue();
@@ -67,7 +68,10 @@ public class ParseDateTime {
     }
 
 
-    // testing purposes
+    /**
+     * This method only exists for one-off testing of this class.
+     * @param args
+     */
     public static void main(String[] args) {
         LocalDate d3 = LocalDate.parse("2019-12-02");
         System.out.println(d3);

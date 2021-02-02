@@ -173,7 +173,7 @@ public class Parser {
      * @param userInput User input from terminal
      * @return returns whether to keep scanner open
      */
-    public boolean parseInputLine(String userInput)  {
+    public boolean parseInputLine(String userInput) {
 
         // SETTING UP THE VARIABLES NEEDED FOR ERROR CHECKING / PARSING
         int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
