@@ -17,12 +17,13 @@ public class DateValidatorLocalDate implements DateValidator {
         dateFormatter = df;
     }
 
-    @Override
+
     /**
      * Checks if date given is valid, in the following order:
      * date - time - locale;
      * If all 3 fails, return with invalid, otherwise return results.
      */
+    @Override
     public boolean isValid(String dateStr) {
         LocalDateTime ldt = null;
 

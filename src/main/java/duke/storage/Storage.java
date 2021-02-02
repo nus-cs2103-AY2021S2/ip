@@ -64,14 +64,16 @@ public class Storage {
                 } else if (taskType.equals("event")) {
                     if (validator.isValid(strArr[3].trim())) {
                         Date eventDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(strArr[3].trim());
-                        taskArr[taskIterator] = new EventTask(taskName, isDoneStr.equals("done"), strArr[3].trim(), eventDate);
+                        taskArr[taskIterator] = new EventTask(taskName,
+                                isDoneStr.equals("done"), strArr[3].trim(), eventDate);
                     } else {
                         System.out.println("Invalid date format for timed Task");
                     }
                 } else if (taskType.equals("deadline")) {
                     if (validator.isValid(strArr[3].trim())) {
                         Date deadlineDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(strArr[3].trim());
-                        taskArr[taskIterator] = new DeadlineTask(taskName, isDoneStr.equals("done"), strArr[3].trim(), deadlineDate);
+                        taskArr[taskIterator] = new DeadlineTask(taskName,
+                                isDoneStr.equals("done"), strArr[3].trim(), deadlineDate);
                     } else {
                         System.out.println("Invalid date format for timed Task");
                     }
