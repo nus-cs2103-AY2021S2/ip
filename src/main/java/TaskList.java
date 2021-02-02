@@ -22,4 +22,8 @@ public class TaskList {
             System.out.print(taskNumber + "." + task.getStatusString() + "\n");
         }
     }
+
+    public int getSize() {
+        return this.tasks.size();
+    }
 }
