@@ -4,10 +4,11 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    /*
+    /**
      * Handle each line
      *
      * @param line the current line to process
+     * @return status of the command, -1 to exit, 0 to continue
      */
     public int processLine(String line, TaskList tasks) {
         if (line.compareTo("bye") == 0) {
@@ -18,7 +19,7 @@ public class Parser {
         } else if (line.compareTo("list") == 0) {
             // List command, print out all the previous lines.
             System.out.println("\tDuke:");
-            for(int i = 0;i < tasks.size();i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
             }
         } else if (line.startsWith("done ")) {
@@ -30,7 +31,7 @@ public class Parser {
                 currentTask.markDone();
                 System.out.printf("\tDuke: Marked task %d as done:\n", index);
                 System.out.printf("\t%s\n", currentTask);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Task index must be a number!");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Task index must be in range!");
@@ -42,7 +43,7 @@ public class Parser {
                 int index = Integer.parseInt(indexStr) - 1;
                 System.out.printf("\tDuke: Deleted task %d: %s\n", index, tasks.get(index));
                 tasks.remove(index);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Task index must be a number!");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Task index must be in range!");
@@ -88,10 +89,11 @@ public class Parser {
         return 0;
     }
 
-    /*
+    /**
      * Handle a new task
      *
      * @param line the current task to process
+     * @param tasks the current task list to process
      */
     public void processNewTask(String line, TaskList tasks) throws DukeException {
         if (line.startsWith("todo ")) {
