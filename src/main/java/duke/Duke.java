@@ -33,8 +33,9 @@ public class Duke {
         ui.showWelcome();
 
         Scanner sc = new Scanner(System.in);
+        boolean isRunning = true;
 
-        while(sc.hasNextLine()) {
+        while(isRunning) {
             String input = sc.nextLine();
             try {
                 Command command = parser.parseCommand(input);
@@ -42,6 +43,8 @@ public class Duke {
                     case BYE:
                         ui.showGoodBye();
                         storage.save(tasks);
+                        sc.close();
+                        isRunning = false;
                         break;
                     case LIST:
                         ui.showTasks(tasks);
@@ -85,9 +88,9 @@ public class Duke {
                             ui.showMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
                             storage.save(tasks);
                         } catch (DukeException error) {
-                            ui.showErrorMessage("The description of a deadline cannot be empty");
+                            ui.showErrorMessage("The description of a deadline cannot be empty.");
                         } catch(DateTimeParseException error) {
-                            ui.showErrorMessage("The date provided is invalid");
+                            ui.showErrorMessage("The date provided is invalid.");
                         }
                         break;
                     case EVENT:
@@ -97,7 +100,16 @@ public class Duke {
                             ui.showMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
                             storage.save(tasks);
                         } catch (DukeException error) {
-                            ui.showErrorMessage("The description of an event cannot be empty");
+                            ui.showErrorMessage("The description of an event cannot be empty.");
+                        }
+                        break;
+                    case FIND:
+                        try {
+                            String keywords = parser.parseFindCommand(input);
+                            TaskList foundTasks = tasks.findTasks(keywords);
+                            ui.showFoundTasks(foundTasks);
+                        } catch (DukeException error) {
+                            ui.showErrorMessage("Task with specified keywords not found.");
                         }
                         break;
                     case HELP:

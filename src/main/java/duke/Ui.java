@@ -63,6 +63,22 @@ public class Ui {
         showMessage(message.toString());
     }
 
+    public void showFoundTasks(TaskList tasks) {
+        StringBuilder message = new StringBuilder();
+        if(tasks.isEmpty()) {
+            message.append("Sorry! Task not found.");
+        } else {
+            message.append("Here are the matching tasks in your list:\n");
+            for(int i = 1; i <= tasks.getSize(); i++) {
+                message.append("  " + i + ". " + tasks.getTask(i - 1));
+                if(i < tasks.getSize()) {
+                    message.append("\n");
+                }
+            }
+        }
+        showMessage(message.toString());
+    }
+
     public void showMessage(String message) {
         System.out.println(divider + message + "\n" + divider);
     }

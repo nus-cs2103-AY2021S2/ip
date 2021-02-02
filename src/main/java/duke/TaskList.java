@@ -30,6 +30,16 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public TaskList findTasks(String keywords) {
+        TaskList foundTasks = new TaskList();
+        for(Task task : tasks) {
+            if(task.description.contains(keywords)) {
+                foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
+
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
