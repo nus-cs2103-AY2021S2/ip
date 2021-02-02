@@ -94,4 +94,17 @@ public class Task {
         this.date = date;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (this.name.equals(((Task) obj).getName())) {
+            return true;
+        }
+
+        return super.equals(obj);
+    }
+
 }
