@@ -9,24 +9,47 @@ public class Duke {
         TaskList tasks = new TaskList();
 
         while (true) {
-            String input = sc.nextLine();
+            InputHandler handler = new InputHandler(sc.nextLine());
 
-            if (input.contains(" ") && input.split(" ")[0].equals("done")) {
-                int indexOfDoneTask = Integer.parseInt(input.split(" ")[1]);
+            String action = handler.getAction();
+
+            if (action.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            }
+
+            if (action.equals("list")) {
+                System.out.println("Here are the task(s) in your list:");
+                tasks.printTasks();
+            }
+
+            if (action.equals("done")) {
+                int indexOfDoneTask = Integer.parseInt(handler.getDescription());
                 Task doneTask = tasks.getTaskByIndex(indexOfDoneTask);
                 doneTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(doneTask.getStatusString());
-            } else if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                tasks.printTasks();
-            } else if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else {
-                Task newTask = new Task(input);
+            }
+
+            if (action.equals("todo") || action.equals("deadline") || action.equals("event")) {
+                String description = handler.getDescription();
+
+                Task newTask;
+
+                if (action.equals("todo")) {
+                    newTask = new ToDo(description);
+                } else if (action.equals("deadline")) {
+                    String by = handler.getBy();
+                    newTask = new Deadline(description, by);
+                } else {
+                    String at = handler.getAt();
+                    newTask = new Event(description, at);
+                }
+
                 tasks.addTask(newTask);
-                System.out.println("Added: " + newTask.getDescription());
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask.getStatusString());
+                System.out.println("Now you have " + tasks.getSize() + " task(s) in the list.");
             }
         }
     }
