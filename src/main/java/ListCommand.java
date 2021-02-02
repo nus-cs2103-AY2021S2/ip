@@ -25,7 +25,8 @@ public class ListCommand extends Command {
 
     /**
      * Checks the equivalence of ListCommand this and Object obj.
-     * If obj is an instance of the ListCommand class and all attributes are equivalent, it is equivalent to this.
+     * If obj is an instance of the ListCommand class and all attributes are equivalent,
+     * it is equivalent to this.
      * @param obj the object which will be compared to this.
      * @return Indication of whether obj is equivalent to this.
      */

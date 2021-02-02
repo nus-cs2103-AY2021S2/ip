@@ -2,14 +2,14 @@
  * Represents a command involving the deletion of a task.
  */
 public class DeleteCommand extends Command {
-    private int taskno;
+    private int taskNo;
 
     /**
      * Constructor for DeleteCommand.
-     * @param taskno Number corresponding to the task to be deleted.
+     * @param taskNo Number corresponding to the task to be deleted.
      */
-    DeleteCommand(int taskno) {
-        this.taskno = taskno;
+    DeleteCommand(int taskNo) {
+        this.taskNo = taskNo;
     }
 
     /**
@@ -17,10 +17,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
-        String task = tasks.get(this.taskno - 1).toString();
-        tasks.remove(this.taskno - 1);
+        String task = tasks.get(this.taskNo - 1).toString();
+        tasks.remove(this.taskNo - 1);
         ui.delete(task, tasks.size());
-        storage.savetasks(tasks);
+        storage.saveTasks(tasks);
     }
 
     /**
@@ -33,7 +33,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Checks the equivalence of DeleteCommand this and Object obj.
-     * If obj is an instance of the DeleteCommand class and all attributes are equivalent, it is equivalent to this.
+     * If obj is an instance of the DeleteCommand class and all attributes are equivalent,
+     * it is equivalent to this.
      * @param obj the object which will be compared to this.
      * @return Indication of whether obj is equivalent to this.
      */
@@ -42,8 +43,8 @@ public class DeleteCommand extends Command {
         if (obj == this) {
             return true;
         } else if (obj instanceof DeleteCommand) {
-            DeleteCommand dlc = (DeleteCommand) obj;
-            return dlc.taskno == this.taskno;
+            DeleteCommand deleteCommand = (DeleteCommand) obj;
+            return deleteCommand.taskNo == this.taskNo;
         }
         return false;
     }

@@ -2,14 +2,14 @@
  * Represents a command involving the completion of a task.
  */
 public class DoneCommand extends Command {
-    private int taskno;
+    private int taskNo;
 
     /**
      * Constructor for DoneCommand.
-     * @param taskno Number corresponding to the completed task.
+     * @param taskNo Number corresponding to the completed task.
      */
-    DoneCommand(int taskno) {
-        this.taskno = taskno;
+    DoneCommand(int taskNo) {
+        this.taskNo = taskNo;
     }
 
     /**
@@ -17,9 +17,9 @@ public class DoneCommand extends Command {
      */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.set(this.taskno - 1, tasks.get(this.taskno - 1).done());
-        ui.done(tasks.get(this.taskno - 1).toString());
-        storage.savetasks(tasks);
+        tasks.set(this.taskNo - 1, tasks.get(this.taskNo - 1).done());
+        ui.done(tasks.get(this.taskNo - 1).toString());
+        storage.saveTasks(tasks);
     }
 
     /**
@@ -32,7 +32,8 @@ public class DoneCommand extends Command {
 
     /**
      * Checks the equivalence of DoneCommand this and Object obj.
-     * If obj is an instance of the DoneCommand class and all attributes are equivalent, it is equivalent to this.
+     * If obj is an instance of the DoneCommand class and all attributes are equivalent,
+     * it is equivalent to this.
      * @param obj the object which will be compared to this.
      * @return Indication of whether obj is equivalent to this.
      */
@@ -41,8 +42,8 @@ public class DoneCommand extends Command {
         if (obj == this) {
             return true;
         } else if (obj instanceof DoneCommand) {
-            DoneCommand dc = (DoneCommand) obj;
-            return dc.taskno == this.taskno;
+            DoneCommand doneCommand = (DoneCommand) obj;
+            return doneCommand.taskNo == this.taskNo;
         }
         return false;
     }

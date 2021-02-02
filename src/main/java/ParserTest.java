@@ -12,8 +12,10 @@ public class ParserTest {
         assertEquals(new DoneCommand(1), Parser.parse("done 1"));
         assertEquals(new DeleteCommand(1), Parser.parse("delete 1"));
         assertEquals(new ToDoCommand("homework"), Parser.parse("todo homework"));
-        assertEquals(new EventCommand("concert", "2020-12-09"), Parser.parse("event concert /at 2020-12-09"));
-        assertEquals(new DeadlineCommand("tutorial", "2021-01-01"), Parser.parse("deadline tutorial /by 2021-01-01"));
+        assertEquals(new EventCommand("concert", "2020-12-09"),
+                     Parser.parse("event concert /at 2020-12-09"));
+        assertEquals(new DeadlineCommand("tutorial", "2021-01-01"),
+                     Parser.parse("deadline tutorial /by 2021-01-01"));
     }
 
     @Test

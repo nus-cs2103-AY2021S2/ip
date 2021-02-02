@@ -54,7 +54,8 @@ public class Deadline extends Task {
 
     /**
      * Checks the equivalence of Deadline this and Object obj.
-     * If obj is an instance of the Deadline class and all attributes are equivalent, it is equivalent to this.
+     * If obj is an instance of the Deadline class and all attributes are equivalent,
+     * it is equivalent to this.
      * @param obj the object which will be compared to this.
      * @return Indication of whether obj is equivalent to this.
      */
@@ -63,8 +64,10 @@ public class Deadline extends Task {
         if (obj == this) {
             return true;
         } else if (obj instanceof Deadline) {
-            Deadline dl = (Deadline) obj;
-            return dl.name.equals(this.name) && (dl.deadline.equals(this.deadline)) && (dl.done == this.done);
+            Deadline deadline = (Deadline) obj;
+            return deadline.name.equals(this.name)
+                    && (deadline.deadline.equals(this.deadline))
+                            && (deadline.done == this.done);
         }
         return false;
     }
@@ -76,8 +79,12 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (this.done) {
-            return String.format("[D][X] %s (by: %s)", this.name, this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+            return String.format("[D][X] %s (by: %s)",
+                                 this.name,
+                                 this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
         }
-        return String.format("[D][ ] %s (by: %s)", this.name, this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        return String.format("[D][ ] %s (by: %s)",
+                             this.name,
+                             this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }

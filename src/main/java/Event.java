@@ -54,7 +54,8 @@ public class Event extends Task {
 
     /**
      * Checks the equivalence of Event this and Object obj.
-     * If obj is an instance of the Event class and all attributes are equivalent, it is equivalent to this.
+     * If obj is an instance of the Event class and all attributes are equivalent,
+     * it is equivalent to this.
      * @param obj the object which will be compared to this.
      * @return Indication of whether obj is equivalent to this.
      */
@@ -63,8 +64,10 @@ public class Event extends Task {
         if (obj == this) {
             return true;
         } else if (obj instanceof Event) {
-            Event ev = (Event) obj;
-            return ev.name.equals(this.name) && (ev.duration.equals(this.duration)) && (ev.done == this.done);
+            Event event = (Event) obj;
+            return event.name.equals(this.name)
+                    && (event.duration.equals(this.duration))
+                            && (event.done == this.done);
         }
         return false;
     }
@@ -76,8 +79,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.done) {
-            return String.format("[E][X] %s (at: %s)", this.name, this.duration.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+            return String.format("[E][X] %s (at: %s)",
+                                 this.name,
+                                 this.duration.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
         }
-        return String.format("[E][ ] %s (at: %s)", this.name, this.duration.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        return String.format("[E][ ] %s (at: %s)",
+                             this.name,
+                             this.duration.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }
