@@ -25,8 +25,9 @@ public class Storage {
 
             Path dir = Paths.get(dirPath);
             Path path = Paths.get(filePath);
-            if (!Files.exists(dir))
+            if (!Files.exists(dir)) {
                 Files.createDirectory(dir);
+            }
             Files.createFile(path);
         } catch (IOException e) {
             System.err.println("Parent directory does not exist.");
@@ -36,8 +37,9 @@ public class Storage {
 
     public void saveFile(List<String> data) {
         Path path = Paths.get(filePath);
-        if (!Files.exists(path))
+        if (!Files.exists(path)) {
             createDirectoryAndFile();
+        }
         try {
             Files.write(path, data, StandardCharsets.UTF_8);
         } catch (IOException e) {

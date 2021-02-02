@@ -14,7 +14,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         TaskList loaded = storage.loadFile();
-        if (loaded == null) { // No files exist or file is corrupted
+        if (loaded == null) {
             tasks = new TaskList();
             storage.createDirectoryAndFile();
         } else {
