@@ -1,11 +1,12 @@
 package jaryl.duke;
 
-import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DataManagerTest {
     private static final String FILE_PATH = "./data/test.txt";
