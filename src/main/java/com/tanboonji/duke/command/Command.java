@@ -1,3 +1,8 @@
+package com.tanboonji.duke.command;
+
+import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.model.TaskList;
+
 public abstract class Command {
 
     protected TaskList taskList;

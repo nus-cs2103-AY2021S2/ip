@@ -1,3 +1,5 @@
+package com.tanboonji.duke.model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

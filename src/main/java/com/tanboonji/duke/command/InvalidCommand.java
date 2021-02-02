@@ -1,3 +1,5 @@
+package com.tanboonji.duke.command;
+
 public class InvalidCommand extends Command {
 
     String errorMessage;

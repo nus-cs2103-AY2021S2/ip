@@ -1,20 +1,25 @@
-public class DeleteCommand extends Command {
+package com.tanboonji.duke.command;
 
-    public static final String COMMAND = "delete";
-    private final String HEADER = "Noted! I've removed this task:\n\t";
+import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.model.Task;
+
+public class DoneCommand extends Command {
+
+    public static final String COMMAND = "done";
+    private final String HEADER = "Nice! I've marked this task as done:\n\t";
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number.\n"
-            + "\tCommand: delete [task number]";
+            + "\tCommand: done [task number]";
 
-    private int taskIndex;
+    private final int taskIndex;
 
-    private DeleteCommand(int taskIndex) {
+    private DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     @Override
     public String execute() throws DukeException {
         try {
-            Task task = taskList.deleteTask(taskIndex);
+            Task task = taskList.markAsDone(taskIndex);
             return HEADER + task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ERROR_MESSAGE);
@@ -26,11 +31,11 @@ public class DeleteCommand extends Command {
         return true;
     }
 
-    public static DeleteCommand parseArguments(String input) throws DukeException {
+    public static DoneCommand parseArguments(String input) throws DukeException {
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(input) - 1;
-            return new DeleteCommand(taskIndex);
+            return new DoneCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(ERROR_MESSAGE);
         }

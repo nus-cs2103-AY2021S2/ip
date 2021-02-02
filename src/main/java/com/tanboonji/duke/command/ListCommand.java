@@ -1,3 +1,7 @@
+package com.tanboonji.duke.command;
+
+import com.tanboonji.duke.model.Task;
+
 public class ListCommand extends Command {
 
     public static final String COMMAND = "list";

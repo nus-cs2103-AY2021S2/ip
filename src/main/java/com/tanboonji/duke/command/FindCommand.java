@@ -1,3 +1,8 @@
+package com.tanboonji.duke.command;
+
+import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.model.Task;
+
 public class FindCommand extends Command {
 
     public static final String COMMAND = "find";

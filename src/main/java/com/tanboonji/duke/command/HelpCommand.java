@@ -1,3 +1,5 @@
+package com.tanboonji.duke.command;
+
 public class HelpCommand extends Command {
 
     public static final String COMMAND = "help";

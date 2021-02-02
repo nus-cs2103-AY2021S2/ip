@@ -1,3 +1,5 @@
+package com.tanboonji.duke.ui;
+
 public class Ui {
 
     private final String DUKE_LOGO = " ____        _\n"
