@@ -41,14 +41,17 @@ public class myList {
     }
 
     public String markCompleted(int index) {
-        taskList.get(index).markCompleted();
-        this.save();
-        return Ui.completedTask();
+        if (index < taskList.size() && index >= 0) {
+            taskList.get(index).markCompleted();
+            this.save();
+            return Ui.completedTask();
+        } else {
+            return Ui.taskNotFoundError();
+        }
     }
 
     public String delete(int index) {
-
-        if (index < taskList.size()) {
+        if (index < taskList.size() && index >= 0) {
             taskList.remove(index);
             this.save();
             return Ui.removeTask(taskList);

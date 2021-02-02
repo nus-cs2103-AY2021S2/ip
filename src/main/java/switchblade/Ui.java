@@ -16,6 +16,7 @@ public class Ui {
         // Retrieve last task in list and print it
         StringBuilder sb = new StringBuilder();
 
+        // get last item in list
         sb.append("Added to list:\n" + taskList.get(taskList.size() - 1).toString());
         sb.append("\nYou now have " + taskList.size() + " tasks\n");
 
@@ -87,18 +88,18 @@ public class Ui {
     }
 
     public static String printFoundTasks(ArrayList<Task> taskArrayList) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here's the tasks I found with your search term!\n");
+        if (taskArrayList.size() > 0) {
+            StringBuilder sb = new StringBuilder();
+            for (Task t : taskArrayList) {
+                sb.append(t);
+            }
 
-        for (Task t : taskArrayList) {
-            sb.append(t);
+            if (!sb.toString().isBlank()) {
+                return "Here's the tasks I found with your search term!\n" + sb.toString();
+            }
         }
 
-        if (sb.toString().length() > 0) {
-            return sb.toString();
-        } else {
-            return taskNotFoundError();
-        }
+        return taskNotFoundError();
     }
 
     public static String shutdown() {
