@@ -1,5 +1,22 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import static java.lang.Integer.parseInt;
 
 /**
@@ -7,76 +24,49 @@ import static java.lang.Integer.parseInt;
  *
  */
 
-public class Duke {
+public class Duke  extends Application{
     /**
      * Driver code.
      */
-    public static void main(String[] args) throws FileNotFoundException {
-        Ui ui;
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String hello = "What can I do for you?\n";
-        String goodbye = "Bye. Hope to see you again soon!\n";
-        String SAVE_FILE_PATH = "./data/";
-        String SAVE_FILE_NAME = "data.txt";
-        Storage storage;
-        storage = new Storage(SAVE_FILE_PATH,SAVE_FILE_NAME);
-        ArrayList<String> input;
-        TaskList tasks;
+    private static String FILE_PATH = "./data/";
+    private static String FILE_NAME = "data.txt";
+    private static String hello = "What can I do for you?\n";
+    private static String goodbye = "Bye. Hope to see you again soon!\n";
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    public Ui ui;
+    public Storage storage;
+    public TaskList tasklist;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    public Duke(String filePath, String fileName) throws FileNotFoundException {
         ui = new Ui();
+        storage = new Storage(filePath, fileName);
         try {
-            input = storage.readFile();
-            tasks = new TaskList(readInput(input));
+            tasklist = new TaskList(readInput(storage.readFile()));
         }
-        catch (FileNotFoundException e){
-            throw new FileNotFoundException("No File Detected");
+        catch (Exception e){
+            throw new FileNotFoundException("No File Found!");
         }
-        ui.printResponse("Hello from\n" + logo);
-        ui.printResponse(hello);
-        String cmd = ui.readLine();
-        String[] pre = cmd.split("\\s+");
-        while(!cmd.equals("bye")) {
-            int n;
-            switch (pre[0]) {
-                case "list" :
-                    ui.printTasks(tasks);
-                    storage.writeTasks(tasks);
-                    break;
-                case "done" :
-                    n = parseInt(pre[1]) - 1;
-                    doneTask(tasks, n,ui);
-                    storage.writeTasks(tasks);
-                    break;
-                case "delete" :
-                    n = parseInt(pre[1]) - 1;
-                    deleteTask(tasks, n,ui);
-                    storage.writeTasks(tasks);
-                    break;
-                case "deadline" :
-                    addDeadline(tasks, cmd,ui);
-                    storage.writeTasks(tasks);
-                    break;
-                case "event" :
-                    addEvent(tasks, cmd,ui);
-                    storage.writeTasks(tasks);
-                    break;
-                case "todo" :
-                    addToDo(tasks, pre,ui);
-                    storage.writeTasks(tasks);
-                    break;
-                case "find" :
-                    findTasks(tasks,pre[1],ui);
-                    break;
-                default :
-                    addError(ui);
-            }
-            cmd = ui.readLine();
-            pre = cmd.split("\\s+");
+    }
+
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Duke duke = new Duke(FILE_NAME,FILE_NAME);
+        Scanner sc = new Scanner(System.in);
+        String word = sc.nextLine();
+        while(sc.hasNext()) {
+            duke.doCommand(word);
+            word = sc.nextLine();
         }
-        ui.printResponse(goodbye);
+        duke.doCommand("bye");
     }
 
     /**
@@ -86,10 +76,11 @@ public class Duke {
      * @param ui the ui used to scan.
      */
 
-    private static void findTasks(TaskList tasks, String s, Ui ui) {
+    private static String findTasks(TaskList tasks, String s, Ui ui) {
         TaskList query = tasks.find(s);
-        ui.printResponse("Here are the matching tasks in your list:\n");
-        ui.printTasks(query);
+        String response = "Here are the matching tasks in your list:\n";
+        response = response + ui.printTasks(query);
+        return response;
     }
 
     /**
@@ -99,17 +90,21 @@ public class Duke {
      * @param ui the ui used to scan.
      */
 
-    private static void deleteTask(TaskList tasks, int n, Ui ui) {
+    private static String deleteTask(TaskList tasks, int n, Ui ui) {
+        String response = "";
         try {
             Task t = tasks.get(n);
-            ui.printResponse("Noted. I've removed this task: ");
+
+            response = "Noted. I've removed this task: ";
             tasks.remove(n);
-            ui.printResponse(t.toString());
+            response = response + "\n" +t.toString();
             int size = tasks.size();
-            printTotalTasks(size,ui);
+            response = response + "\n" + printTotalTasks(size,ui);
+            return response;
         }
         catch(IndexOutOfBoundsException e){
-            ui.printResponse("Wrong task ID");
+            response = "Wrong task ID";
+            return response;
         }
     }
 
@@ -119,7 +114,7 @@ public class Duke {
      * @param ui the ui used to scan.
      */
 
-    private static void printTotalTasks(int size, Ui ui) {
+    private static String printTotalTasks(int size, Ui ui) {
         String msg;
         if(size != 1) {
              msg = "Now you have " + size + " tasks in the list";
@@ -127,7 +122,7 @@ public class Duke {
         else{
              msg = "Now you have " + size + " task in the list";
         }
-        ui.printResponse(msg);
+        return msg;
     }
 
     /**
@@ -137,15 +132,19 @@ public class Duke {
      * @param ui the ui used to scan.
      */
 
-    private static void doneTask(TaskList tasks, int n,Ui ui) {
+    private static String doneTask(TaskList tasks, int n,Ui ui) {
+        String response;
         try {
             tasks.set(n, tasks.get(n).finish());
-            ui.printResponse("Nice! I've marked this task as done: \n");
-            ui.printResponse(tasks.get(n).toString());
+            response = "Nice! I've marked this task as done: \n";
+            response = response + tasks.get(n).toString();
+            return response;
         }
         catch(IndexOutOfBoundsException e){
-            ui.printResponse("Wrong task ID");
+            response = "Wrong task ID";
+            return response;
         }
+
     }
 
     /**
@@ -153,8 +152,8 @@ public class Duke {
      * @param ui the ui used to scan.
      */
 
-    private static void addError(Ui ui) {
-        ui.printResponse("Command not understood");
+    private static String addError(Ui ui) {
+        return "Command not understood";
     }
 
     /**
@@ -164,15 +163,17 @@ public class Duke {
      * @param ui the ui used to scan.
      */
 
-    private static void addToDo(TaskList tasks, String[] pre, Ui ui) {
+    private static String addToDo(TaskList tasks, String[] pre, Ui ui) {
+        String response = "";
         if (pre.length > 0) {
             tasks.add(Parser.parseTodo(pre));
-            ui.printResponse("Got it. I've added this task:");
-            ui.printResponse(tasks.get(tasks.size() - 1).toString());
-            printTotalTasks(tasks.size(),ui);
+            response = "Got it. I've added this task:";
+            response = response + "\n" + tasks.get(tasks.size() - 1).toString() + "\n" +
+                printTotalTasks(tasks.size(),ui);
+            return response;
         }
         else {
-            ui.printResponse("Please add a description for todo.");
+            return "Please add a description for todo.";
         }
     }
 
@@ -183,16 +184,18 @@ public class Duke {
      * @param ui the ui used to scan.
      */
 
-    private static void addEvent(TaskList tasks, String cmd,Ui ui) {
+    private static String addEvent(TaskList tasks, String cmd,Ui ui) {
         String[] pre2 = cmd.split("/at");
+        String response;
         try {
             tasks.add(Parser.parseEvent(pre2));
-            ui.printResponse("Got it. I've added this task:");
-            ui.printResponse(tasks.get(tasks.size() - 1).toString());
-            printTotalTasks(tasks.size(),ui);
+            response = "Got it. I've added this task:";
+            response = response + "\n" + tasks.get(tasks.size() - 1).toString() + "\n" +
+                    printTotalTasks(tasks.size(),ui);
+            return response;
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            ui.printResponse("Please enter a description for event");
+            return "Please enter a description for event";
         }
     }
 
@@ -203,16 +206,18 @@ public class Duke {
      * @param ui the ui used to scan.
      */
 
-    private static void addDeadline(TaskList tasks, String cmd, Ui ui) {
+    private static String addDeadline(TaskList tasks, String cmd, Ui ui) {
         String[] pre2 = cmd.split("/by");
+        String response;
         try {
             tasks.add(Parser.parseDeadlinne(pre2));
-            ui.printResponse("Got it. I've added this task:");
-            ui.printResponse(tasks.get(tasks.size() - 1).toString());
-            printTotalTasks(tasks.size(),ui);
+            response = "Got it. I've added this task:";
+            response = response + "\n" + tasks.get(tasks.size() - 1).toString() + "\n" +
+                    printTotalTasks(tasks.size(),ui);
+            return response;
         }
         catch (ArrayIndexOutOfBoundsException  e) {
-            ui.printResponse("Please enter a description for deadline");
+            return "Please enter a description for deadline";
         }
     }
 
@@ -240,4 +245,126 @@ public class Duke {
         }
     return tasks;
     }
+
+    @Override
+    public void start(Stage stage) {
+        //Step 1. Setting up required components
+
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+
+    }
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    public String doCommand(String word){
+        String[] pre = word.split("\\s+");
+        String response = "";
+        switch (pre[0]) {
+            case "bye":
+                return "Good Bye~~";
+                case "list" :
+                    response = ui.printTasks(tasklist);
+                    storage.writeTasks(tasklist);
+                    break;
+                case "done" :
+                    int n = parseInt(pre[1]) - 1;
+                    response = doneTask(tasklist, n, ui);
+                    storage.writeTasks(tasklist);
+                    break;
+                case "delete" :
+                    n = parseInt(pre[1]) - 1;
+                    response = deleteTask(tasklist, n,ui);
+                    storage.writeTasks(tasklist);
+                    break;
+                case "deadline" :
+                    response = addDeadline(tasklist, word,ui);
+                    storage.writeTasks(tasklist);
+                    break;
+                case "event" :
+                    response = addEvent(tasklist, word,ui);
+                    storage.writeTasks(tasklist);
+                    break;
+                case "todo" :
+                    response = addToDo(tasklist, pre,ui);
+                    storage.writeTasks(tasklist);
+                    break;
+                case "find" :
+                    response = findTasks(tasklist,pre[1],ui);
+                    break;
+                default :
+                    response = addError(ui);
+            }
+            return response;
+    }
+
 }

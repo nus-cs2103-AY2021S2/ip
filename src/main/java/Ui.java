@@ -39,11 +39,12 @@ public class Ui {
      *
      */
 
-    public void printTasks(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:\n");
+    public String printTasks(TaskList tasks) {
+        String response = "Here are the tasks in your list:\n";
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + ". " + tasks.get(i-1));
+            response = response + i + ". " + tasks.get(i-1) + "\n";
         }
+        return response;
     }
 
 }
