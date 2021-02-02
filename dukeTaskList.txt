@@ -1,3 +1,0 @@
-D 1   CS2103 iP Project Week 3 (by: 6 Jan 2021 2359 )
-T 0  read book
-D 0  return book (by: 2 Feb 2021 1200 )
