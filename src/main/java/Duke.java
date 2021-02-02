@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
+
 /*
  * The main class for the Duke app.
  */
@@ -11,12 +16,6 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
-        /*try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }*/
     }
 
     /*
@@ -25,7 +24,18 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.reply();
-        Parser parser = new Parser(tasks, ui);
+        Path path = Paths.get(this.storage.getFilePath());
+        if (Files.exists(path)) {
+            this.tasks = storage.readFromFile();
+        } else {
+            try {
+                Files.createDirectories(path.getParent());
+                Files.createFile(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Parser parser = new Parser(tasks, ui, storage);
         while (true) {
             String command = sc.nextLine();
             parser.insertCommand(command);
@@ -38,6 +48,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:/ip/src/main/java/Duke.java").run();
+        new Duke("./data/duke.txt").run();
     }
 }

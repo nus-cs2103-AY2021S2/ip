@@ -12,13 +12,11 @@ public class Event extends Task {
      * Add am or pm depending on time of the day.
      * Override Task's timeFormatter since Event has a start and
      * end time while Task only has a start time.
-     *
-     * @param time Time in 24h format.
-     * @return Time in 12h format.
      */
     @Override
-    public String timeFormatter(String time) {
-        String[] sArr = time.split("-");
+    public void formatTime() {
+        String copy = this.getTime();
+        String[] sArr = copy.split("-");
         String time1 = sArr[0];
         String time2 = sArr[1];
         char[] cArr = time1.toCharArray();
@@ -89,6 +87,7 @@ public class Event extends Task {
         } else {
             end += "am";
         }
-        return start + "-" + end;
+        String convertedTime = start + "-" + end;
+        this.setTime(convertedTime);
     }
 }

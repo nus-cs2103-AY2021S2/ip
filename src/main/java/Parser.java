@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 /*
  * Deal with making sense of users' commands.
  */
@@ -5,12 +8,14 @@ public class Parser {
     private String command;
     private TaskList taskList;
     private Ui ui;
+    private Storage storage;
     private boolean isFinished;
 
-    public Parser(TaskList tasklist, Ui ui) {
+    public Parser(TaskList tasklist, Ui ui, Storage storage) {
         this.command = "";
         this.taskList = tasklist;
         this.ui = ui;
+        this.storage = storage;
         this.isFinished = false;
     }
 
@@ -51,42 +56,29 @@ public class Parser {
                 String[] line = command.split(" ");
                 int length = line.length;
                 if (length == 1) {
-                    throw new TodoException("Oops! The description for Todo cannot be empty.");
+                    throw new IncompleteException("The description for Todo cannot be empty.");
                 }
                 ui.replace("Got it. I've added this task:");
                 String description = "";
-                String date = "";
-                String time = "";
-                boolean isDesc = true;
-                boolean isDate = true;
                 for (int i = 1; i < length; i++) {
-                    if (line[i].equals("/at")) {
-                        isDesc = false;
-                    } else if (isDesc) {
-                        if (i + 1 == length) {
-                            description += line[i];
-                        } else {
-                            description += line[i] + " ";
-                        }
-                    } else if (isDate) {
-                        date += line[i];
-                        isDate = false;
+                    if (i + 1 == length) {
+                        description += line[i];
                     } else {
-                        time += line[i];
+                        description += line[i] + " ";
                     }
                 }
-                Todo todo = new Todo(description, date, time);
+                Todo todo = new Todo(description);
                 taskList.addTask(todo);
                 ui.replace(todo.toString());
                 Integer numOfTasks = taskList.numOfTasks();
                 ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
+                storage.writeToFile(taskList);
             } else if (command.contains("deadline")) {
                 String[] line = command.split(" ");
                 int length = line.length;
                 if (length == 1) {
-                    throw new DeadlineException("Oops! The description for Deadline cannot be empty.");
+                    throw new IncompleteException("The description for Deadline cannot be empty.");
                 }
-                ui.replace("Got it. I've added this task:");
                 String description = "";
                 String date = "";
                 String time = "";
@@ -108,18 +100,27 @@ public class Parser {
                         time += line[i];
                     }
                 }
-                Deadline deadline = new Deadline(description, date, time);
-                taskList.addTask(deadline);
-                ui.replace(deadline.toString());
-                Integer numOfTasks = taskList.numOfTasks();
-                ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
+                if (date.equals("")) {
+                    throw new IncompleteException("The date for Deadline cannot be empty.");
+                } else if (time.equals("")) {
+                    throw new IncompleteException("The time for Deadline cannot be empty.");
+                } else {
+                    ui.replace("Got it. I've added this task:");
+                    Deadline deadline = new Deadline(description, date, time);
+                    deadline.formatDate();
+                    deadline.formatTime();
+                    taskList.addTask(deadline);
+                    ui.replace(deadline.toString());
+                    Integer numOfTasks = taskList.numOfTasks();
+                    ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
+                    storage.writeToFile(taskList);
+                }
             } else if (command.contains("event")) {
                 String[] line = command.split(" ");
                 int length = line.length;
                 if (length == 1) {
-                    throw new EventException("Oops! The description for Event cannot be empty.");
+                    throw new IncompleteException("The description for Event cannot be empty.");
                 }
-                ui.replace("Got it. I've added this task:");
                 String description = "";
                 String date = "";
                 String time = "";
@@ -141,50 +142,87 @@ public class Parser {
                         time += line[i];
                     }
                 }
-                Event event = new Event(description, date, time);
-                taskList.addTask(event);
-                ui.replace(event.toString());
-                Integer numOfTasks = taskList.numOfTasks();
-                ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
+                if (date.equals("")) {
+                    throw new IncompleteException("The date for Event cannot be empty.");
+                } else if (time.equals("")) {
+                    throw new IncompleteException("The time for Event cannot be empty.");
+                } else {
+                    ui.replace("Got it. I've added this task:");
+                    Event event = new Event(description, date, time);
+                    event.formatDate();
+                    event.formatTime();
+                    taskList.addTask(event);
+                    ui.replace(event.toString());
+                    Integer numOfTasks = taskList.numOfTasks();
+                    ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
+                    storage.writeToFile(taskList);
+                }
             } else if (command.contains("done")) {
                 String[] line = command.split(" ");
-                int number = Integer.parseInt(line[1]) - 1;
-                Task newTask = taskList.getTask(number).markAsDone();
-                taskList.replaceTask(number, newTask);
+                int length = line.length;
+                if (length == 1) {
+                    throw new IncompleteException("The line number for Done cannot be empty.");
+                }
+                int number = Integer.parseInt(line[1]);
+                if (number > taskList.numOfTasks()) {
+                    throw new DeleteException("Invalid line number.");
+                }
+                int index = number - 1;
+                Task task = taskList.getTask(index);
+                task.markAsDone();
+                taskList.replaceTask(index, task);
                 ui.replace("Nice! I've marked this task as done:");
-                ui.replace(newTask.toString());
+                ui.replace(task.toString());
+                storage.writeToFile(taskList);
             } else if (command.contains("delete")) {
-                ui.replace("Noted. I've removed this task:");
                 String[] line = command.split(" ");
-                int number = Integer.parseInt(line[1]) - 1;
-                Task deletedTask = taskList.deleteTask(number);
+                int length = line.length;
+                if (length == 1) {
+                    throw new IncompleteException("The line number for Delete cannot be empty.");
+                }
+                int number = Integer.parseInt(line[1]);
+                if (number > taskList.numOfTasks()) {
+                    throw new DeleteException("Invalid line number.");
+                }
+                ui.replace("Noted. I've removed this task:");
+                int index =  number - 1;
+                Task deletedTask = taskList.deleteTask(index);
                 ui.replace(deletedTask.toString());
                 Integer numOfTasks = taskList.numOfTasks();
                 ui.replace("Now you have " + numOfTasks.toString() + " tasks in the list.");
-                Integer numOfTask = taskList.numOfTasks();
-                ui.replace("Now you have " + numOfTask.toString() + " tasks in the list.");
+                storage.writeToFile(taskList);
             } else if (command.contains("find")) {
                 String[] line = command.split(" ");
                 int length = line.length;
                 if (length == 1) {
-                    throw new FindException("Oops! The description for Find cannot be empty.");
+                    throw new IncompleteException("The description for Find cannot be empty.");
                 }
-                ui.replace("Here are the matching tasks in your list:");
                 String word = line[1];
+                List<String> matches = new ArrayList<>();
+                Integer num = 1;
+                boolean isFound = false;
                 for (int i = 0; i < taskList.numOfTasks(); i++) {
                     Task task = taskList.getTask(i);
                     String description = task.toString();
-                    Integer num = 1;
                     if (description.contains(word)) {
-                        ui.replace(num.toString() + description);
+                        matches.add(num.toString() + ". " + description);
                         num++;
+                        isFound = true;
                     }
                 }
+                if (isFound) {
+                    ui.replace("Here are the matching tasks in your list:");
+                    for (int i = 0; i < matches.size(); i++) {
+                        ui.replace(matches.get(i));
+                    }
+                } else {
+                    throw new FindException("Your list does not contain this word.");
+                }
             } else if (command.equals("bye")) {
-                ui.replace("Bye! Hope to see you again soon!");
+                ui.replace("Goodbye! Hope to see you again soon!");
                 this.isFinished = true;
             } else {
-                throw new UnknownException("Oops! I'm sorry, but I don't know what that means!");
+                throw new UnknownException("I'm sorry, but I don't know what that means.");
             }
         } catch (DukeException e) {
             System.out.println(e);

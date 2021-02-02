@@ -3,8 +3,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Task {
     private String description;
-    private final String date;
-    private final String time;
+    private String date;
+    private String time;
     private final String symbol;
     private boolean isAt;
     private boolean isDone;
@@ -18,15 +18,6 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String description, String date, String time, String symbol, boolean flag, boolean done) {
-        this.description = description;
-        this.date = date;
-        this.time = time;
-        this.symbol = symbol;
-        this.isAt = flag;
-        this.isDone = done;
-    }
-
     public String getDate() {
         return this.date;
     }
@@ -35,26 +26,28 @@ public class Task {
         return this.time;
     }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     /*
      * Change the done status of a task.
      *
      * @return The same task with a changed done status.
      */
-    public Task markAsDone() {
-        return new Task(description, date, time, symbol, isAt, true);
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     /*
      * Convert the date from "DD/MM/YYYY" format to "D MMM YYYY" format.
-     *
-     * @param date Date in "DD/MM/YYYY" format.
-     * @return Date in "D MMM YYYY" format.
      */
-    public String dateFormatter(String date) {
+    public void formatDate() {
+        String copy = this.date;
         String year = "";
         String month = "";
         String day = "";
-        String[] sArr = date.split("");
+        String[] sArr = copy.split("");
         int slashCounter = 0;
         for (int i = 0; i < sArr.length; i++) {
             if (sArr[i].equals("/")) {
@@ -75,24 +68,23 @@ public class Task {
         }
         String formattedDate = year + "-" + month + "-" + day;
         LocalDate ld = LocalDate.parse(formattedDate);
-        return ld.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        formattedDate = ld.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        this.date = formattedDate;
     }
 
     /*
      * Convert time from 24h format to 12h format.
      * Separate hour and minute by adding a colon.
      * Add am or pm depending on time of the day.
-     *
-     * @param time Time in 24h format.
-     * @return Time in 12h format.
      */
-    public String timeFormatter(String time) {
-        char[] cArr = time.toCharArray();
+    public void formatTime() {
+        String copy = this.time;
+        char[] cArr = copy.toCharArray();
         Integer tensHour = cArr[0] - '0';
         Integer onesHour = cArr[1] - '0';
         Integer tensMin = cArr[2] - '0';
         Integer onesMin = cArr[3] - '0';
-        String output = "";
+        String formattedTime = "";
         boolean isAfternoon = false;
         if (!tensHour.equals(0)) {
             Integer combinedHour = tensHour * 10 + onesHour;
@@ -102,26 +94,26 @@ public class Task {
                     combinedHour -= 12;
                 }
             }
-            output += combinedHour.toString() + ":";
+            formattedTime += combinedHour.toString() + ":";
         } else {
             if (onesHour.equals(0)) {
-                output += "12:";
+                formattedTime += "12:";
             } else {
-                output += onesHour.toString() + ":";
+                formattedTime += onesHour.toString() + ":";
             }
         }
         if (tensMin == 0) {
-            output += "0";
+            formattedTime += "0";
         } else {
-            output += tensMin.toString();
+            formattedTime += tensMin.toString();
         }
-        output += onesMin.toString();
+        formattedTime += onesMin.toString();
         if (isAfternoon) {
-            output += "pm";
+            formattedTime += "pm";
         } else {
-            output += "am";
+            formattedTime += "am";
         }
-        return output;
+        this.time = formattedTime;
     }
 
     @Override
@@ -133,17 +125,17 @@ public class Task {
             } else {
                 copy += "(by: ";
             }
-            copy += this.dateFormatter(this.date);
+            copy += this.date;
             if (this.time.length() > 0) {
-                copy += ", " + this.timeFormatter(this.time);
+                copy += ", " + this.time;
             }
             copy += ")";
         }
         copy = this.description + copy;
         if (this.isDone) {
-            return symbol + "[X] " + copy;
+            return symbol + " " + "[/] " + copy;
         } else {
-            return symbol + "[ ] " + copy;
+            return symbol + " " + "[] " + copy;
         }
     }
 }
