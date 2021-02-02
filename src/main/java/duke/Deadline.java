@@ -5,10 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends AbstractTask {
-    protected LocalDate by;
+    protected final LocalDate by;
 
-    /*
+    /**
      * Constructs a deadline task using the description and the deadline timing
+     *
+     * @throws DukeEmptyDescriptionException if the description is empty
+     * @throws DateTimeParseException if the date cannot be parsed
      */
     public Deadline(String description, String by) throws DukeEmptyDescriptionException, DateTimeParseException {
         super(description);

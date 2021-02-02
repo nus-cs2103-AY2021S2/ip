@@ -1,20 +1,20 @@
 package duke;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
-import java.io.File;
+import java.io.ObjectOutputStream;
 
 public class Storage {
-    String fileName;
+    private final String fileName;
 
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
-    /*
+    /**
      * Save the contents to disk
      *
      * @param tasks the object to store the tasks
@@ -23,9 +23,9 @@ public class Storage {
         try {
             FileOutputStream taskFile = new FileOutputStream(fileName);
             ObjectOutputStream taskObjectStream = new ObjectOutputStream(taskFile);
-            Integer taskSize = Duke.tasks.size();
+            Integer taskSize = tasks.size();
             taskObjectStream.writeObject(taskSize);
-            for (AbstractTask task : Duke.tasks) {
+            for (AbstractTask task : tasks) {
                 taskObjectStream.writeObject(task);
             }
             taskObjectStream.flush();
@@ -35,7 +35,7 @@ public class Storage {
         }
     }
 
-    /*
+    /**
      * Read tasks from disk
      *
      * @param tasks the object to store the tasks
@@ -45,9 +45,9 @@ public class Storage {
             FileInputStream taskFile = new FileInputStream(fileName);
             ObjectInputStream taskObjectStream = new ObjectInputStream(taskFile);
             Integer taskSize = (Integer) taskObjectStream.readObject();
-            for(int i = 0;i < taskSize;i++) {
+            for (int i = 0; i < taskSize; i++) {
                 AbstractTask task = (AbstractTask) taskObjectStream.readObject();
-                Duke.tasks.add(task);
+                tasks.add(task);
             }
             taskObjectStream.close();
         } catch (IOException e) {

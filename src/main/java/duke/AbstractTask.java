@@ -3,11 +3,13 @@ package duke;
 import java.io.Serializable;
 
 public abstract class AbstractTask implements Serializable {
-    protected String description;
+    protected final String description;
     protected boolean isDone;
 
-    /*
+    /**
      * Constructs a task using the description
+     *
+     * @throws DukeEmptyDescriptionException if the description is empty
      */
     public AbstractTask(String description) throws DukeEmptyDescriptionException {
         if (description.isEmpty()) {

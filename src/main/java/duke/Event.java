@@ -1,17 +1,21 @@
 package duke;
 
 public class Event extends AbstractTask {
-    protected String at;
+    protected final String at;
 
-    /*
+    /**
      * Constructs an event task using the description and the event timing
+     *
+     * @param description class description
+     * @param at time of the event
+     * @throws duke.DukeEmptyDescriptionException if the description is empty
      */
     public Event(String description, String at) throws DukeEmptyDescriptionException {
         super(description);
         this.at = at;
     }
 
-    /*
+    /**
      * Return a string representation of the task
      */
     @Override
