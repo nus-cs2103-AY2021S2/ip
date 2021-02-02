@@ -10,7 +10,7 @@
 	8Y"Ybbd8"'   `"Ybbd8"' `"8bbdP"Y8 `"YbbdP"'   "Y888  
 	                                                     
 	                                                     
-	Welcome to ToDoBeast, your best productivity task tracker tool!
+	Welcome to todobeast, your best productivity task tracker tool!
 	Let's get this bread! How would you like to be productive today?
 	________________________________________________________________
 
@@ -76,15 +76,15 @@
 	________________________________________________________________
 
 	________________________________________________________________
-	OOPS :( !!! Task index provided is not a number.
+	OOPS :( !!! todobeast.tasks.Task index provided is not a number.
 	________________________________________________________________
 
 	________________________________________________________________
-	OOPS :( !!! Task index provided is not present in the list.
+	OOPS :( !!! todobeast.tasks.Task index provided is not present in the list.
 	________________________________________________________________
 
 	________________________________________________________________
-	OOPS :( !!! Task index provided is not present in the list.
+	OOPS :( !!! todobeast.tasks.Task index provided is not present in the list.
 	________________________________________________________________
 
 	________________________________________________________________
@@ -104,15 +104,15 @@
 	________________________________________________________________
 
 	________________________________________________________________
-	OOPS :( !!! Task index provided is not a number.
+	OOPS :( !!! todobeast.tasks.Task index provided is not a number.
 	________________________________________________________________
 
 	________________________________________________________________
-	OOPS :( !!! Task index provided is not present in the list.
+	OOPS :( !!! todobeast.tasks.Task index provided is not present in the list.
 	________________________________________________________________
 
 	________________________________________________________________
-	OOPS :( !!! Task index provided is not present in the list.
+	OOPS :( !!! todobeast.tasks.Task index provided is not present in the list.
 	________________________________________________________________
 
 	________________________________________________________________

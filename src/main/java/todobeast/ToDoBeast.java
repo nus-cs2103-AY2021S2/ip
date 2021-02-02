@@ -1,5 +1,4 @@
-import java.util.Scanner;
-import java.util.List;
+package todobeast;
 
 public class ToDoBeast {
 

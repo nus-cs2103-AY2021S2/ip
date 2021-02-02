@@ -1,8 +1,9 @@
-public class Task {
+package todobeast.tasks;
+
+public abstract class Task {
     protected String taskDescription;
     protected boolean isDone;
     public static final String TASK_DELIMITER = " | ";
-    public static final String TASK_DELIMITER_REGEX = " [|] ";
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
@@ -18,8 +19,5 @@ public class Task {
         isDone = true;
     }
 
-    @Override
-    public String toString() {
-        return (isDone ? "done" : " ") + TASK_DELIMITER + taskDescription;
-    }
+    abstract public String formatForStorage(String delimiter);
 }
