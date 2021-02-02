@@ -7,15 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
 public class Dialog extends HBox {
     @FXML
+    private ImageView displayPic;
+    @FXML
     private Label dialog;
 
-    private Dialog(String text) {
+    private Dialog(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/Dialog.fxml"));
             fxmlLoader.setController(this);
@@ -26,6 +30,7 @@ public class Dialog extends HBox {
         }
 
         dialog.setText(text);
+        displayPic.setImage(image);
     }
 
     private void flip() {
@@ -35,14 +40,14 @@ public class Dialog extends HBox {
         getChildren().setAll(observableList);
     }
 
-    public static Dialog getDukeResponse(String text) {
-        var dialog = new Dialog(text);
+    public static Dialog getDukeResponse(String str, Image dukeImg) {
+        var dialog = new Dialog(str, dukeImg);
         dialog.flip();
         return dialog;
     }
 
-    public static Dialog getUserResponse(String text) {
-        var dialog = new Dialog(text);
+    public static Dialog getUserResponse(String str, Image userImg) {
+        var dialog = new Dialog(str, userImg);
         return dialog;
     }
 }

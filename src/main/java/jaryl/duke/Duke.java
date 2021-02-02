@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -23,10 +24,13 @@ public class Duke extends Application {
     private ArrayList<Task> tasksList;
     private Output output;
 
-    private VBox dialogContainer;
-    private ScrollPane scrollPane;
     private TextField userInput;
+    private VBox vBox;
+    private ScrollPane scrollPane;
     private Button sendButton;
+
+    private Image userImg = new Image(this.getClass().getResourceAsStream("/images/ash.png"));
+    private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/pikachu.png"));
 
     /**
      * Constructor to instantiate a new Duke object
@@ -45,10 +49,10 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        dialogContainer = new VBox();
+        vBox = new VBox();
         scrollPane = new ScrollPane();
 
-        scrollPane.setContent(dialogContainer);
+        scrollPane.setContent(vBox);
 
         sendButton = new Button(">");
         userInput = new TextField();
@@ -70,7 +74,7 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        vBox.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
 
@@ -86,22 +90,22 @@ public class Duke extends Application {
         stage.show();
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            userInputHandler();
         });
 
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            userInputHandler();
         });
 
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        vBox.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    private void handleUserInput() {
+    private void userInputHandler() {
         Label dukeResponse = new Label(getResponse(userInput.getText()));
         Label userResponse = new Label(userInput.getText());
-        dialogContainer.getChildren().addAll(
-                Dialog.getUserResponse(userResponse.toString()),
-                Dialog.getDukeResponse(dukeResponse.toString())
+        vBox.getChildren().addAll(
+                Dialog.getUserResponse(userResponse.toString(), userImg),
+                Dialog.getDukeResponse(dukeResponse.toString(), dukeImg)
         );
         userInput.clear();
     }

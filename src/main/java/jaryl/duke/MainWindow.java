@@ -4,6 +4,7 @@ import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 public class MainWindow {
@@ -17,6 +18,9 @@ public class MainWindow {
     private Button sendButton;
     @FXML
     private VBox dialogBox;
+
+    private Image userImg = new Image(this.getClass().getResourceAsStream("/images/ash.png"));
+    private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/pikachu.png"));
 
     public void setDuke(Duke duke) {
         this.duke = duke;
@@ -39,10 +43,10 @@ public class MainWindow {
     @FXML
     private void userInputHandler() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String resp = duke.getResponse(input);
         dialogBox.getChildren().addAll(
-                Dialog.getUserResponse(input),
-                Dialog.getDukeResponse(response)
+                Dialog.getUserResponse(input, userImg),
+                Dialog.getDukeResponse(resp, dukeImg)
         );
         userInput.clear();
     }
