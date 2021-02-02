@@ -14,18 +14,18 @@ import javafx.scene.layout.AnchorPane;
 public class UiHandlerTest extends AnchorPane {
 
     //reused from https://www.baeldung.com/java-testing-system-out-println
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final UiHandler uiHandler = new UiHandler();
+    private final PrintStream STANDARD_OUT = System.out;
+    private final ByteArrayOutputStream OUTPUT_STREAM_CAPTOR = new ByteArrayOutputStream();
+    private final UiHandler UI_HANDLER = new UiHandler();
 
     @BeforeEach
     public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
+        System.setOut(new PrintStream(OUTPUT_STREAM_CAPTOR));
     }
 
     @AfterEach
     public void tearDown() {
-        System.setOut(standardOut);
+        System.setOut(STANDARD_OUT);
     }
 
     @Test
@@ -36,22 +36,22 @@ public class UiHandlerTest extends AnchorPane {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String expected = "Hello from\n" + logo + "\nWhat can I do for you?";
-        uiHandler.showWelcome();
-        assertEquals(expected, outputStreamCaptor.toString().trim());
+        UI_HANDLER.showWelcome();
+        assertEquals(expected, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 
     @Test
     void showInfo_whenInvokePrintln_thenOutputCaptorSuccess() {
         String expected = "Test print information message!";
-        uiHandler.showResponse(expected);
-        assertEquals(expected, outputStreamCaptor.toString().trim());
+        UI_HANDLER.showResponse(expected);
+        assertEquals(expected, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 
     @Test
     void showError_whenInvokePrintln_thenOutputCaptorSuccess() {
         String errMsg = "Test print error message!";
         String expected = "Error: " + "Test print error message!";
-        uiHandler.showResponse(errMsg);
-        assertEquals(expected, outputStreamCaptor.toString().trim());
+        UI_HANDLER.showResponse(errMsg);
+        assertEquals(expected, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 }
