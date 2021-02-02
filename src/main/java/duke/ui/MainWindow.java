@@ -23,12 +23,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user icon.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/tabby icon.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.getStylesheets().add(getClass().getResource("/view/ui.css").toExternalForm());
         welcomeUser();
     }
 
@@ -37,7 +38,9 @@ public class MainWindow extends AnchorPane {
     }
 
     private void welcomeUser() {
-        String welcomeMessage = "Hi, I'm Tabby the task bot! I'll help you keep tabs on your to-dos, deadlines and events!";
+        String welcomeMessage = "Hi, I'm Tabby the task bot!\n" +
+                "I'll help you keep tabs on your to-dos, deadlines and events!\n" +
+                "Enter help for a summary of commands.";
 //        String input = userInput.getText();
 //        String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

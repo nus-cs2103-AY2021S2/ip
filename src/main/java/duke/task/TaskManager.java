@@ -13,6 +13,11 @@ public class TaskManager {
     protected ArrayList<Task> tasks;
     protected FileSaver fileSaver;
 
+    protected final String HELP_RESPONSE = "list: list all tasks\ndone {i}: mark task at position {i} as done\n" +
+            "delete {i}: delete task at position {i}\nfind {keyword}: find and list all tasks containing {keyword}\n" +
+            "todo {description}: creates a new todo\ndeadline {description} /by {date}: creates a new deadline\n" +
+            "event {description} /on {date} /from {time} /to {time}: creates a new event";
+
     public TaskManager() {
         tasks = new ArrayList<>();
         fileSaver = new FileSaver();
@@ -22,7 +27,9 @@ public class TaskManager {
         this.tasks = tasks;
         ErrorChecker e = new ErrorChecker(input, tasks);
 
-        if (input.equals("list")) {
+        if (input.equals("help")) {
+            return HELP_RESPONSE;
+        } else if (input.equals("list")) {
             return listEvents();
         } else if (e.isValid()) {
             if (input.startsWith("done")) {
@@ -91,7 +98,7 @@ public class TaskManager {
 
     public String findTasks(String input) {
         String description = input.substring(5);
-        String output = "Here is a list of your tasks:";
+        String output = "Here is a list of your tasks that contain " + description +":";
 
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).description.contains(description)) {
@@ -108,7 +115,7 @@ public class TaskManager {
         String output = "Here is a list of your tasks:";
 
         for (int i = 0; i < tasks.size(); i++) {
-            output = output + (i + 1) + ". " + tasks.get(i).toString();
+            output = output + "\n" + (i + 1) + ". " + tasks.get(i).toString();
         }
 
 //        output = output + "\n" + Duke.LINE;

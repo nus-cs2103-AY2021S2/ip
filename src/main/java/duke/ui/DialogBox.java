@@ -22,6 +22,8 @@ import javafx.scene.layout.VBox;
  */
 public class DialogBox extends HBox {
     @FXML
+    private VBox vbox;
+    @FXML
     private Label messageContent;
     @FXML
     private Label senderName;
@@ -52,17 +54,22 @@ public class DialogBox extends HBox {
 //        tmp.addAll(messageContent);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        vbox.setAlignment(Pos.TOP_LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
 //        var db = new DialogBox(text, img);
         var db = new DialogBox("user", text, img);
         db.flip();
+        db.senderName.setId("userName");
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
 //        return new DialogBox(text, img);
-        return new DialogBox("duke", text, img);
+//        return new DialogBox("tabby", text, img);
+        var db = new DialogBox("tabby", text, img);
+        db.senderName.setId("tabbyName");
+        return db;
     }
 }

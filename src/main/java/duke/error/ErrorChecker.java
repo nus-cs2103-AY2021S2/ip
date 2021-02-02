@@ -36,7 +36,7 @@ public class ErrorChecker {
     public boolean isValid() {
         String taskType = "";
 
-        if (!input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("find")
+        if (!input.equals("help") && !input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("find")
                 && !input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
             errorMessage = new IllegalInputException("").toString();
             return false;
