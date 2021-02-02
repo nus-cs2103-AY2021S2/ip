@@ -34,10 +34,42 @@ public class Parser {
      * Get command from user input
      *
      * @param cmd user input
-     * @return a string
+     * @return string command
      * */
-    public String[] getDesc(String cmd) {
-        return cmd.split(" ", 2);
+    public String getCommand(String cmd) {
+        String[] arr = cmd.split(" ", 2);
+        return arr[0];
     }
 
+    /**
+     * Get description of task from user input
+     *
+     * @param cmd user input
+     * @return string description
+     * */
+    public String getDesc(String cmd) {
+        int dateIndx = cmd.indexOf("/");
+        int cmdIndx = cmd.indexOf(" ");
+        String desc;
+        if (cmdIndx == -1) {
+            return "";
+        } else if (dateIndx != -1) {
+            desc = cmd.substring(cmdIndx + 1, dateIndx);
+        } else {
+            String[] arr = cmd.split(" ", 2);
+            desc = arr[1];
+        }
+        return desc;
+    }
+
+    /** Get date of deadline or event
+     *
+     * @param cmd user input
+     * @return string date
+     * */
+    public String getDate(String cmd) {
+        int descIndx = cmd.indexOf("/");
+        String date = cmd.substring(descIndx + 4);
+        return date;
+    }
 }

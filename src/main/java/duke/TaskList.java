@@ -52,12 +52,13 @@ public class TaskList {
         return this.taskList.get(index - 1);
     }
 
-    /** Find tasks that macthes the given string
+    /** Find tasks that matches the given string
      *
      * @param s string to search for
      */
-    public void findTasks(String s) {
+    public String findTasks(String s) {
         ArrayList<Task> matched = new ArrayList<>();
+        String msg = "";
         for (Task t : taskList) {
             String name = t.getName();
             if (name.contains(s)) {
@@ -65,13 +66,13 @@ public class TaskList {
             }
         }
         if (matched.size() >= 1) {
-            String msg = "Duchess: Here are the matching tasks in your list:";
+            msg += "Duchess: Here are the matching tasks in your list:";
             for (int i = 0; i < matched.size(); i++) {
                 msg += "\n" + (i + 1) + ". " + matched.get(i);
             }
-            System.out.println(msg);
         } else {
-            System.out.println("Duchess: No matching tasks found!");
+            msg += "Duchess: No matching tasks found!";
         }
+        return msg;
     }
 }
