@@ -21,7 +21,9 @@ public class Todo extends Task {
      *
      * @return String representing todo-task in format to be saved into txt.
      */
-    protected String saveTask() { return "T | " + super.saveTask(); }
+    protected String saveTask() {
+        return "T | " + super.saveTask();
+    }
 
     /**
      * Converts this object to a string that represents the todo-task.

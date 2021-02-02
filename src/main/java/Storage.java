@@ -1,9 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -13,10 +11,10 @@ import java.util.Scanner;
 public class Storage {
 
     /** Constant path of folder that the txt file will be in. */
-    private final String DATA_FOLDER_PATH = "data";
+    private static final String DATA_FOLDER_PATH = "data";
 
     /** Constant path to txt file. */
-    private final String DUKE_FILE_PATH = "data/duke.txt";
+    private static final String DUKE_FILE_PATH = "data/duke.txt";
 
     /** List of tasks */
     private TaskList tasks;
@@ -38,11 +36,11 @@ public class Storage {
      * @throws FileNotFoundException Throws error if the file is not found.
      */
     public void loadData() throws FileNotFoundException {
-        File dataFolder = new File(DATA_FOLDER_PATH);
+        File dataFolder = new File(Storage.DATA_FOLDER_PATH);
         if (!dataFolder.exists()) {
             dataFolder.mkdir();
         }
-        File dukeFile = new File(DUKE_FILE_PATH);
+        File dukeFile = new File(Storage.DUKE_FILE_PATH);
         if (dukeFile.exists()) {
             Scanner s = new Scanner(dukeFile); // create a Scanner using the File as the source
             while (s.hasNext()) {
@@ -81,7 +79,7 @@ public class Storage {
     }
 
     private void writeNewFile(String userInput) throws IOException {
-        FileWriter fw = new FileWriter(DUKE_FILE_PATH);
+        FileWriter fw = new FileWriter(Storage.DUKE_FILE_PATH);
         fw.write(userInput);
         fw.close();
     }

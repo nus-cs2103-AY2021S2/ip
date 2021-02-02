@@ -73,8 +73,8 @@ public class TaskList {
     @Override
     public String toString() {
         String stringToReturn = "";
-        for (int i=1; i<=this.getSize(); i++) {
-            if (i==this.getSize()) {
+        for (int i = 1; i <= this.getSize(); i++) {
+            if (i == this.getSize()) {
                 stringToReturn += "  " + i + ". " + this.getTask(i);
             } else {
                 stringToReturn += "  " + i + ". " + this.getTask(i) + "\n";

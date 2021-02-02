@@ -26,6 +26,9 @@ public class Duke {
         parser = new Parser(tasks);
     }
 
+    /**
+     * Main method. Creates Duke object and runs the application.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         try {

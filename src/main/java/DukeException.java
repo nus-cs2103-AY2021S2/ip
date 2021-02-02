@@ -1,5 +1,3 @@
-import java.lang.Exception;
-
 public class DukeException extends Exception {
     /**
      * Initializes a newly created DukeException object without a message.

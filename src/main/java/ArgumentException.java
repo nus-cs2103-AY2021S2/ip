@@ -31,13 +31,24 @@ public class ArgumentException extends DukeException {
     @Override
     public String toString() {
         if (this.type == 1) {
-            return super.toString() + "A todo-task should be specified as follows \n todo <task_description> \n -----------------------------------------------------";
+            return super.toString()
+                    + "A todo-task should be specified as follows \n "
+                    + "todo <task_description> \n "
+                    + "-----------------------------------------------------";
         } else if (this.type == 2) {
-            return super.toString() + "A deadline-task should be specified as follows \n deadline <task_description> /by <task_deadline> \n -----------------------------------------------------";
+            return super.toString()
+                    + "A deadline-task should be specified as follows \n "
+                    + "deadline <task_description> /by <task_deadline> \n "
+                    + "-----------------------------------------------------";
         } else if (this.type == 3) {
-            return super.toString() + "A event-task should be specified as follows \n event <event_description> /at <event_date> \n -----------------------------------------------------";
+            return super.toString()
+                    + "A event-task should be specified as follows \n "
+                    + "event <event_description> /at <event_date> \n "
+                    + "-----------------------------------------------------";
         } else {
-            return super.toString() + "Please enter a valid item number in the list \n -----------------------------------------------------";
+            return super.toString()
+                    + "Please enter a valid item number in the list \n "
+                    + "-----------------------------------------------------";
         }
     }
 }

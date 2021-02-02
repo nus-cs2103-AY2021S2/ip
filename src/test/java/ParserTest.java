@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
@@ -59,20 +59,13 @@ public class ParserTest {
         TaskList tasks = new TaskList();
         Parser parser = new Parser(tasks);
 
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("deadline ", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("deadline /by ", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("deadline /by jan", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("deadline return book /by", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("deadline return book /by ", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("deadline /by 2019-09-09", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("deadline /by2019-09-09", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline ", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline /by ", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline /by jan", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline return book /by", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline return book /by ", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline /by 2019-09-09", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline /by2019-09-09", false));
     }
 
     @Test
@@ -80,20 +73,13 @@ public class ParserTest {
         TaskList tasks = new TaskList();
         Parser parser = new Parser(tasks);
 
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("event ", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("event /at ", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("event /at jan", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("event return book /at", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("event return book /at ", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("event /at 2019-09-09", false));
-        assertThrows(ArgumentException.class,
-                () -> parser.addTaskToList("event /at2019-09-09", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event ", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event /at ", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event /at jan", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event return book /at", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event return book /at ", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event /at 2019-09-09", false));
+        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event /at2019-09-09", false));
     }
 
     @Test

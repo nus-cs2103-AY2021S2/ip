@@ -36,7 +36,9 @@ public class Deadline extends Task {
      *
      * @return String representing deadline-task in format to be saved into txt.
      */
-    protected String saveTask() { return "D | " + super.saveTask() + " | " + this.by; }
+    protected String saveTask() {
+        return "D | " + super.saveTask() + " | " + this.by;
+    }
 
     /**
      * Converts this object to a string that represents the deadline-task.
