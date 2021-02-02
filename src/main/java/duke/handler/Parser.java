@@ -26,4 +26,8 @@ public class Parser {
                 ? task.markDone()
                 : task;
     }
+
+    public void parseFromInput(String userInput){
+        
+    }
 }
