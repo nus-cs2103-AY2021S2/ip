@@ -1,87 +1,91 @@
 import java.io.IOException;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class Parser {
+
     /**
      * Parses the user command and instructs the taskList, ui or sc
      * to carry out different functions according to the command argument.
      *
      * @param command user input
-     * @param sc Scanner object.
-     * @param ui Ui object.
+     * @param ui Ui object
      * @param taskList TaskList object.
      * @param storage Storage object.
      * @throws NoSuchElementException if additional user input required is not provided.
      * @throws UnknownCommandException if command is not supported by Maya.
      * @throws IOException if null is supplied to Storage or if file is not found.
      */
-    static void parse(String command, Scanner sc, Ui ui, TaskList taskList, Storage storage)
+    static String parse(String command, Ui ui, TaskList taskList, Storage storage)
             throws NoSuchElementException, UnknownCommandException, IOException {
-        switch(command) {
-        case "bye":
-            ui.showBye();
-            break;
-        case "list":
-            ui.showList(taskList.getList(), false);
-            break;
-        case "done":
-            // To get the index
-            int index = sc.nextInt();
-            taskList.markTaskAsDone(index);
-            storage.writeToFile(taskList.getList());
-            break;
-        case "todo":
-            String name = sc.nextLine();
-            if (!name.equals("")) {
-                Todo todo = new Todo(name.trim());
-                taskList.addTask(todo);
-                storage.appendToFile(todo);
-            } else {
-                throw new NoSuchElementException("☹ OOPS!!! The description of"
-                        + " a todo cannot be empty.");
-            }
-            break;
-        case "deadline":
-            String desc = sc.nextLine();
-            if (!desc.equals("")) {
-                String[] split = desc.split("/by", 2);
-                Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
-                taskList.addTask(deadline);
-                storage.appendToFile(deadline);
-            } else {
-                throw new NoSuchElementException("☹ OOPS!!! The description of"
-                        + " a deadline cannot be empty.");
-            }
-            break;
-        case "event":
-            String description = sc.nextLine();
-            if (!description.equals("")) {
-                String[] split = description.split("/at", 2);
-                Event event = new Event(split[0].trim(), split[1].trim());
-                taskList.addTask(event);
-                storage.appendToFile(event);
-            } else {
-                throw new NoSuchElementException("☹ OOPS!!! The description of"
-                        + " an event cannot be empty.");
-            }
-            break;
-        case "find":
-            String searchString = sc.nextLine();
-            if (!searchString.equals("")) {
-                ui.showList(taskList.searchTask(searchString.trim()), true);
-            } else {
-                throw new NoSuchElementException("    ☹ OOPS!!! The search keyword cannot be empty.");
-            }
-            break;
-        case "delete":
-            // To get the index
-            int i = sc.nextInt();
-            taskList.removeTask(i);
-            storage.writeToFile(taskList.getList());
-            break;
-        default:
-            throw new UnknownCommandException();
+        switch(parseCommand(command)) {
+            case "bye":
+                return ui.showBye();
+            case "list":
+                return ui.showList(taskList.getList(), false);
+            case "done":
+                // To get the index
+                int index = Integer.parseInt(getDescription(command));
+                Task doneTask = taskList.markTaskAsDone(index);
+                storage.writeToFile(taskList.getList());
+                return ui.showDone(doneTask);
+            case "todo":
+                String name = getDescription(command);
+                if (!name.equals("")) {
+                    Todo todo = new Todo(name.trim());
+                    Task newTask = taskList.addTask(todo);
+                    storage.appendToFile(todo);
+                    return ui.showAddTask(newTask, taskList.getListSize());
+                } else {
+                    throw new NoSuchElementException("☹ OOPS!!! The description of"
+                            + " a todo cannot be empty.");
+                }
+            case "deadline":
+                String desc = getDescription(command);
+                if (!desc.equals("")) {
+                    String[] split = desc.split("/by", 2);
+                    Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
+                    Task newTask = taskList.addTask(deadline);
+                    storage.appendToFile(deadline);
+                    return ui.showAddTask(newTask, taskList.getListSize());
+                } else {
+                    throw new NoSuchElementException("☹ OOPS!!! The description of"
+                            + " a deadline cannot be empty.");
+                }
+            case "event":
+                String description = getDescription(command);
+                if (!description.equals("")) {
+                    String[] split = description.split("/at", 2);
+                    Event event = new Event(split[0].trim(), split[1].trim());
+                    Task newTask = taskList.addTask(event);
+                    storage.appendToFile(event);
+                    return ui.showAddTask(newTask, taskList.getListSize());
+                } else {
+                    throw new NoSuchElementException("☹ OOPS!!! The description of"
+                            + " an event cannot be empty.");
+                }
+            case "find":
+                String searchString = getDescription(command);
+                if (!searchString.equals("")) {
+                    return ui.showList(taskList.searchTask(searchString.trim()), true);
+                } else {
+                    throw new NoSuchElementException("    ☹ OOPS!!! The search keyword cannot be empty.");
+                }
+            case "delete":
+                // To get the index
+                int i = Integer.parseInt(getDescription(command));
+                Task removedTask = taskList.removeTask(i);
+                storage.writeToFile(taskList.getList());
+                return ui.showRemoveTask(removedTask, taskList.getListSize());
+            default:
+                throw new UnknownCommandException();
         }
+    }
+
+    static String parseCommand(String command) {
+        return command.split(" ", 2)[0];
+    }
+
+    static String getDescription(String command) {
+        return command.split(" ", 2)[1];
     }
 }
