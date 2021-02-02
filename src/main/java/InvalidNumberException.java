@@ -13,7 +13,7 @@ public class InvalidNumberException extends Exception {
     /**
      * Prints the error message.
      */
-    public void printMessage() {
-        System.out.println(super.getMessage());
+    public String printMessage() {
+        return super.getMessage();
     }
 }

@@ -7,68 +7,64 @@ public class Parser {
     /**
      * Determines the keyword and processes the input based on the keyword.
      */
-    static void parse() {
-        Scanner sc = new Scanner(System.in);
-        boolean canExitNow = false;
-        while (!canExitNow) {
-            String inp = sc.nextLine();
-            String[] spl = inp.split(" ", 2);
-            try {
-                switch (spl[0]) {
-                case "todo":
-                    checkSplLength(spl, 2, "todo");
-                    TaskList.processTodo(spl);
-                    break;
-                case "deadline":
-                    checkSplLength(spl, 2, "deadline");
-                    String[] spl2 = spl[1].split(" /by ", 2);
-                    checkSplLength(spl2, 2, "deadline");
-                    String[] spl3 = spl2[1].split(" ", 2);
-                    checkSplLength(spl3, 2, "deadline");
-                    TaskList.processDeadline(spl2, spl3);
-                    break;
-                case "event":
-                    checkSplLength(spl, 2, "event");
-                    String[] spl4 = spl[1].split(" /at ", 2);
-                    checkSplLength(spl4, 2, "event");
-                    String[] spl5 = spl4[1].split(" ", 2);
-                    checkSplLength(spl5, 2, "event");
-                    TaskList.processEvent(spl4, spl5);
-                    break;
-                case "done":
-                    checkSplLength(spl, 2, "done");
-                    isInt(spl[1]);
-                    TaskList.processDone(spl);
-                    break;
-                case "list":
-                    checkSplLength(spl, 1, "list");
-                    TaskList.processList();
-                    break;
-                case "delete":
-                    checkSplLength(spl, 2, "delete");
-                    isInt(spl[1]);
-                    TaskList.processDelete(spl);
-                    break;
-                case "bye":
-                    checkSplLength(spl, 1, "bye");
-                    TaskList.processBye();
-                    canExitNow = true;
-                    break;
-                case "find":
-                    checkSplLength(spl, 2, "find");
-                    TaskList.processFind(spl);
-                    break;
-                default:
-                    throw new InvalidKeywordException(Ui.invalidKeywordExceptionMessage());
-                }
-            } catch (InvalidTaskFormatException e) {
-                e.printMessage();
-            } catch (InvalidNumberException e) {
-                e.printMessage();
-            } catch (InvalidKeywordException e) {
-                e.printMessage();
+    static String parse(String inp) {
+        String[] spl = inp.split(" ", 2);
+        String output;
+        try {
+            switch (spl[0]) {
+            case "todo":
+                checkSplLength(spl, 2, "todo");
+                output = TaskList.processTodo(spl);
+                break;
+            case "deadline":
+                checkSplLength(spl, 2, "deadline");
+                String[] spl2 = spl[1].split(" /by ", 2);
+                checkSplLength(spl2, 2, "deadline");
+                String[] spl3 = spl2[1].split(" ", 2);
+                checkSplLength(spl3, 2, "deadline");
+                output = TaskList.processDeadline(spl2, spl3);
+                break;
+            case "event":
+                checkSplLength(spl, 2, "event");
+                String[] spl4 = spl[1].split(" /at ", 2);
+                checkSplLength(spl4, 2, "event");
+                String[] spl5 = spl4[1].split(" ", 2);
+                checkSplLength(spl5, 2, "event");
+                output = TaskList.processEvent(spl4, spl5);
+                break;
+            case "done":
+                checkSplLength(spl, 2, "done");
+                isInt(spl[1]);
+                output = TaskList.processDone(spl);
+                break;
+            case "list":
+                checkSplLength(spl, 1, "list");
+                output = TaskList.processList();
+                break;
+            case "delete":
+                checkSplLength(spl, 2, "delete");
+                isInt(spl[1]);
+                output = TaskList.processDelete(spl);
+                break;
+            case "bye":
+                checkSplLength(spl, 1, "bye");
+                output = TaskList.processBye();
+                break;
+            case "find":
+                checkSplLength(spl, 2, "find");
+                output = TaskList.processFind(spl);
+                break;
+            default:
+                throw new InvalidKeywordException(Ui.invalidKeywordExceptionMessage());
             }
+        } catch (InvalidTaskFormatException e) {
+            output = e.printMessage();
+        } catch (InvalidNumberException e) {
+            output = e.printMessage();
+        } catch (InvalidKeywordException e) {
+            output = e.printMessage();
         }
+        return output;
     }
 
     /**

@@ -50,10 +50,10 @@ public class TaskList {
      * and printing the output message.
      * @param spl Contains the keyword and description in the array.
      */
-    static void processTodo(String[] spl) {
+    static String processTodo(String[] spl) {
         storage.add(new Todo(spl[1]));
         count++;
-        Ui.outputMessageTask(spl[0], storage.get(count - 1));
+        return Ui.outputMessageTask(spl[0], storage.get(count - 1));
     }
 
     /**
@@ -61,10 +61,10 @@ public class TaskList {
      * and printing the output message.
      * @param spl Contains the keyword, description and date in the array.
      */
-    static void processDeadline(String[] spl, String[] spl2) {
+    static String processDeadline(String[] spl, String[] spl2) {
         storage.add(new Deadline(spl[0], LocalDate.parse(spl2[0]), LocalTime.parse(spl2[1])));
         count++;
-        Ui.outputMessageTask(spl[0], storage.get(count - 1));
+        return Ui.outputMessageTask(spl[0], storage.get(count - 1));
     }
 
     /**
@@ -72,10 +72,10 @@ public class TaskList {
      * and printing the output message.
      * @param spl Contains the keyword, description and date in the array.
      */
-    static void processEvent(String[] spl, String[] spl2) {
+    static String processEvent(String[] spl, String[] spl2) {
         storage.add(new Event(spl[0], LocalDate.parse(spl2[0]), LocalTime.parse(spl2[1])));
         count++;
-        Ui.outputMessageTask(spl[0], storage.get(count - 1));
+        return Ui.outputMessageTask(spl[0], storage.get(count - 1));
     }
 
     /**
@@ -83,46 +83,46 @@ public class TaskList {
      * It also prints an output message.
      * @param spl Contains the keyword and the number of the task which has been completed.
      */
-    static void processDone(String[] spl) {
+    static String processDone(String[] spl) {
         int number = Integer.parseInt(spl[1]);
         Task current = storage.get(number - 1);
         current.finished();
-        Ui.outputMessageDone(current);
+        return Ui.outputMessageDone(current);
     }
 
     /**
      * Prints the output message for a list of all the tasks which contain the keyword.
      * @param spl Contains the keyword and the word that is being searched in the array.
      */
-    static void processFind(String[] spl) {
-        Ui.outputMessageFind(storage, spl);
+    static String processFind(String[] spl) {
+        return Ui.outputMessageFind(storage, spl);
     }
 
     /**
      * Prints the output message for a list of all the tasks to be printed out.
      */
-    static void processList() {
-        Ui.outputMessageList(storage, count);
+    static String processList() {
+        return Ui.outputMessageList(storage, count);
     }
 
     /**
      * Deletes the n-numbered Task from the task list, where n is the number given by the user.
      * @param spl Contains the keyword, and the Task number that has to be deleted (n) in the array.
      */
-    static void processDelete(String[] spl) {
+    static String processDelete(String[] spl) {
         int num = Integer.parseInt(spl[1]);
         Task t = storage.get(num - 1);
         storage.remove(num - 1);
         count--;
-        Ui.outputMessageDelete(t);
+        return Ui.outputMessageDelete(t);
     }
 
     /**
      * Stores the task list once the user wants to leave the program.
      * Prints an output message as well.
      */
-    static void processBye() {
+    static String processBye() {
         Storage.uploadToHardDrive();
-        Ui.outputMessageBye();
+        return Ui.outputMessageBye();
     }
 }
