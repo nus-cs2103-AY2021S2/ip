@@ -3,195 +3,162 @@ package duke.ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.Scanner;
-
 public class Ui {
-    private final Scanner sc;
-
-    private static final String INDENTATION = "    ";
-    private static final String NEW_LINE = "\n    ";
-    private static final String PARTITION_LINE = INDENTATION + "---------------------------";
-    private static final String LOGO = "    __  _____ _  ___   ___   _ ___\n" +
-            "    \\ \\/ /_ _| \\| \\ \\ / / | | | __|\n" +
-            "     >  < | || .` |\\ V /| |_| | _|\n" +
-            "    /_/\\_\\___|_|\\_| |_|  \\___/|___|\n";
+    private static final String NEW_LINE = "\n";
     private static final String GREETING_MESSAGE =
-            INDENTATION + "Hi there! Welcome to\n" + LOGO + NEW_LINE + "What can I do for you today?";
-    private static final String FAREWELL_MESSAGE = INDENTATION + "Goodbye. Have a nice day!!";
-    private static final String ERROR_START = INDENTATION + "OOPS!!! ";
-    private static final String TASK_ADDED_MESSAGE = INDENTATION + "Got it. I've added this task:";
-    private static final String TASK_COMPLETED_MESSAGE = INDENTATION + "Congratulations! You have completed this task:";
-    private static final String TASK_ALR_COMPLETED_MESSAGE = INDENTATION + "You have already completed this task:";
-    private static final String TASK_REMOVED_MESSAGE = INDENTATION + "Noted. This task has been removed:";
-    private static final String EMPTY_LIST_MESSAGE = INDENTATION + "It seems like there is nothing in your list.";
-    private static final String PRINT_LIST_MESSAGE = INDENTATION + "Here are the tasks in your list:";
+            "Hi there! I am Moomin" + NEW_LINE + "What can I do for you today?";
+    private static final String FAREWELL_MESSAGE = "Goodbye. Have a nice day!!";
+    private static final String ERROR_START = "Hmm... ";
+    private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
+    private static final String TASK_COMPLETED_MESSAGE = "Congratulations! You have completed this task:";
+    private static final String TASK_ALR_COMPLETED_MESSAGE = "You have already completed this task:";
+    private static final String TASK_REMOVED_MESSAGE = "Noted. This task has been removed:";
+    private static final String EMPTY_LIST_MESSAGE = "It seems like there is nothing in your list.";
+    private static final String PRINT_LIST_MESSAGE = "Here are the tasks in your list:";
     private static final String NO_FOUND_TASK_MESSAGE =
-            INDENTATION + "It seems like there is no task matching your keyword:";
-    private static final String PRINT_FOUND_TASKS_MESSAGE = INDENTATION + "Here are the matching tasks in your list:";
+            "It seems like there is no task matching your keyword:";
+    private static final String PRINT_FOUND_TASKS_MESSAGE = "Here are the matching tasks in your list:";
 
     /**
-     * Initializes the required object for an Ui object.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * Reads a line of input entered by user.
+     * Gets the greeting message.
      *
-     * @return String containing user input
+     * @return Greeting message.
      */
-    public String nextUserInput() {
-        return sc.nextLine().trim();
+    public String getGreetingMessage() {
+        return GREETING_MESSAGE;
     }
 
     /**
-     * Terminates the functioning Ui Object.
-     */
-    public void close() {
-        sc.close();
-    }
-
-    /**
-     * Prints a partition line.
-     */
-    public void printPartitionLine() {
-        System.out.println(PARTITION_LINE);
-    }
-
-    /**
-     * Prints the greeting message.
-     */
-    public void printGreeting() {
-        printPartitionLine();
-        System.out.println(GREETING_MESSAGE);
-        printPartitionLine();
-    }
-
-    /**
-     * Prints the farewell message.
-     */
-    public void printFarewell() {
-        printPartitionLine();
-        System.out.println(FAREWELL_MESSAGE);
-        printPartitionLine();
-    }
-
-    /**
-     * Prints a error message after formatting.
+     * Gets the farewell message.
      *
-     * @param message Content of the error message.
+     * @return Farewell message.
      */
-    public void printErrorMessage(String message) {
-        printPartitionLine();
-        System.out.println(ERROR_START + message);
-        printPartitionLine();
+    public String getFarewellMessage() {
+        return FAREWELL_MESSAGE;
     }
 
     /**
-     * Prints a feedback message after user adds a task.
+     * Gets the error message.
+     *
+     * @return Formatted error message.
+     */
+    public String getErrorMessage(String message) {
+        return ERROR_START + message;
+    }
+
+    /**
+     * Gets a feedback message after user adds a task.
      *
      * @param task  Task added by user.
      * @param tasks List of tasks the task was added to.
+     * @return Add task report.
      */
-    public void printAddTaskReport(Task task, TaskList tasks) {
-        printPartitionLine();
-        System.out.println(TASK_ADDED_MESSAGE);
-        printTask(task);
-        printTaskCount(tasks);
-        printPartitionLine();
+    public String getAddTaskReport(Task task, TaskList tasks) {
+        StringBuilder response = new StringBuilder();
+        response.append(TASK_ADDED_MESSAGE + NEW_LINE);
+        response.append(getTaskInfo(task) + NEW_LINE);
+        response.append(getTaskCountInfo(tasks) + NEW_LINE);
+        return response.toString();
     }
 
     /**
-     * Prints a message containing the total number of tasks.
+     * Gets a message containing the total number of tasks.
      *
      * @param tasks List of all the tasks.
+     * @return Task count info.
      */
-    public void printTaskCount(TaskList tasks) {
-        System.out.println(INDENTATION + "Now you have " + tasks.getTaskCount() + " in the list.");
+    public String getTaskCountInfo(TaskList tasks) {
+        return "Now you have " + tasks.getTaskCount() + " in the list.";
     }
 
     /**
-     * Prints a feedback message after user marks a task as done.
+     * Gets a feedback message after user marks a task as done.
      *
      * @param task    Task marked as done.
      * @param wasDone If the task was already marked as done.
+     * @return Mark task as done feedback message.
      */
-    public void printMarkTaskAsDoneMessage(Task task, boolean wasDone) {
-        printPartitionLine();
+    public String getMarkTaskAsDoneMessage(Task task, boolean wasDone) {
+        StringBuilder response = new StringBuilder();
         if (wasDone) {
-            System.out.println(TASK_ALR_COMPLETED_MESSAGE);
+            response.append(TASK_ALR_COMPLETED_MESSAGE + NEW_LINE);
         } else {
-            System.out.println(TASK_COMPLETED_MESSAGE);
+            response.append(TASK_COMPLETED_MESSAGE + NEW_LINE);
         }
-        printTask(task);
-        printPartitionLine();
+        response.append(getTaskInfo(task));
+        return response.toString();
     }
 
     /**
-     * Prints a feedback message after user deletes a task.
+     * Gets a feedback message after user deletes a task.
      *
      * @param task  Task deleted by user.
      * @param tasks List of tasks the task was deleted from.
+     * @return Delete task message.
      */
-    public void printDeleteTaskMessage(Task task, TaskList tasks) {
-        printPartitionLine();
-        System.out.println(TASK_REMOVED_MESSAGE);
-        printTask(task);
-        printTaskCount(tasks);
-        printPartitionLine();
+    public String getDeleteTaskMessage(Task task, TaskList tasks) {
+        StringBuilder response = new StringBuilder();
+        response.append(TASK_REMOVED_MESSAGE + NEW_LINE);
+        response.append(getTaskInfo(task) + NEW_LINE);
+        response.append(getTaskCountInfo(tasks));
+        return response.toString();
+
     }
 
     /**
-     * Print a task after formatting.
+     * Gets a task after formatting.
      *
      * @param task Task to be displayed.
+     * @return Task info message.
      */
-    public void printTask(Task task) {
-        System.out.println(INDENTATION + INDENTATION + task.toString());
+    public String getTaskInfo(Task task) {
+        return task.toString();
     }
 
     /**
-     * Prints all the tasks after formatting.
+     * Gets all the tasks after formatting.
      *
      * @param tasks List of all the tasks.
+     * @return Info of al tasks after formatting
      */
-    public void printAllTasks(TaskList tasks) {
-        printPartitionLine();
+    public String getAllTasks(TaskList tasks) {
         if (tasks.isEmpty()) {
-            System.out.println(EMPTY_LIST_MESSAGE);
+            return EMPTY_LIST_MESSAGE;
         } else {
-            System.out.println(PRINT_LIST_MESSAGE);
-            printTasks(tasks);
+            StringBuilder response = new StringBuilder();
+            response.append(PRINT_LIST_MESSAGE + NEW_LINE);
+            appendTaskToString(tasks, response);
+            return response.toString();
         }
-        printPartitionLine();
     }
 
     /**
-     * Prints all the tasks found by a keyword after formatting.
+     * gets all the tasks found by a keyword after formatting.
      *
      * @param tasks List of found tasks.
+     * @return Info of all found tasks after formatting
      */
-    public void printAllFoundTasks(TaskList tasks) {
-        printPartitionLine();
+    public String getAllFoundTasks(TaskList tasks) {
         if (tasks.isEmpty()) {
-            System.out.println(NO_FOUND_TASK_MESSAGE);
+            return NO_FOUND_TASK_MESSAGE;
         } else {
-            System.out.println(PRINT_FOUND_TASKS_MESSAGE);
-            printTasks(tasks);
+            StringBuilder response = new StringBuilder();
+            response.append(PRINT_FOUND_TASKS_MESSAGE + NEW_LINE);
+            appendTaskToString(tasks, response);
+            return response.toString();
         }
-        printPartitionLine();
     }
 
     /**
-     * Prints all the tasks in the given TaskList.
+     * Adds info string of all the tasks in the given TaskList
+     * to the provided StringBuilder
      *
      * @param tasks TaskList to be printed.
+     * @param sb    StringBuilder which task string will be appended to
      */
-    public void printTasks(TaskList tasks) {
+    public void appendTaskToString(TaskList tasks, StringBuilder sb) {
         for (int i = 1; i <= tasks.getTaskCount(); ++i) {
-            System.out.println("    " + i + "." + tasks.getTask(i - 1).toString());
+            sb.append(i + "." + tasks.getTask(i - 1).toString() + NEW_LINE);
         }
     }
-
 }

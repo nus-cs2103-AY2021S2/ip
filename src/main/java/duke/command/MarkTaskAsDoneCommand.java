@@ -25,13 +25,13 @@ public class MarkTaskAsDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = tasks.getTask(taskIndex - 1);
             boolean taskWasDone = task.isDone();
             task.markAsDone();
-            ui.printMarkTaskAsDoneMessage(task, taskWasDone);
             storage.saveTasksToFile(tasks);
+            return ui.getMarkTaskAsDoneMessage(task, taskWasDone);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(INDEX_OOB_ERROR_MESSAGE);
         }

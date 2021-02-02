@@ -19,10 +19,10 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(todo);
-        ui.printAddTaskReport(todo, tasks);
         storage.saveTasksToFile(tasks);
+        return ui.getAddTaskReport(todo, tasks);
     }
 
     @Override

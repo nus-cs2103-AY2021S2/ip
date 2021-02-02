@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.scene.image.Image;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -8,6 +10,13 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
+
+    String littleMyUrl =
+            "https://static.wikia.nocookie.net/moomin/images/0/05/My1.png/revision/latest/top-crop/width/300/height/300?cb=20190914020308";
+    String moominUrl =
+            "https://i.pinimg.com/originals/19/3a/15/193a1552cc00589da96c9c8ce8cc4ba9.png";
+    private Image user = new Image(littleMyUrl, 160, 60, false, true);
+    private Image duke = new Image(moominUrl, 160, 60, false, true);
 
     private TaskList tasks;
     private Ui ui;
@@ -23,38 +32,30 @@ public class Duke {
         try {
             storage.loadTasksFromFile(tasks);
         } catch (DukeException e) {
-            ui.printErrorMessage(e.getMessage());
+            ui.getErrorMessage(e.getMessage());
         }
     }
 
     /**
-     * Handles the inputs entered by the user,
-     * until the user enters the exit command.
+     * Gets greeting message
+     *
+     * @return Greeting message
      */
-    public void handleUserInput() {
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String userInput = ui.nextUserInput();
-                Command command = Parser.parse(userInput);
-                command.execute(tasks, ui, storage);
-                isRunning = !command.isExitCommand();
-            } catch (DukeException e) {
-                ui.printErrorMessage(e.getMessage());
-            }
-        }
+    public String getGreetingMessage() {
+        return ui.getGreetingMessage();
     }
 
     /**
-     * Runs the Duke program.
+     * Gets response for the inputs entered by the user
+     *
+     * @return Response
      */
-    public void run() {
-        ui.printGreeting();
-        handleUserInput();
-        ui.close();
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.getResponse(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.getErrorMessage(e.getMessage());
+        }
     }
 }

@@ -17,9 +17,9 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printFarewell();
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.saveTasksToFile(tasks);
+        return ui.getFarewellMessage();
     }
 
     @Override

@@ -2,11 +2,8 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.List;
 
 public class FindTaskCommand extends Command {
     private String keyword;
@@ -21,9 +18,9 @@ public class FindTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
         TaskList foundTasks = tasks.findTask(keyword);
-        ui.printAllFoundTasks(foundTasks);
+        return ui.getAllFoundTasks(foundTasks);
     }
 
     @Override

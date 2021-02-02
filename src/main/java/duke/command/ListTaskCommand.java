@@ -16,9 +16,9 @@ public class ListTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printAllTasks(tasks);
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.saveTasksToFile(tasks);
+        return ui.getAllTasks(tasks);
     }
 
     @Override
