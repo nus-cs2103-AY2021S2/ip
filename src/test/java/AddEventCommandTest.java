@@ -1,6 +1,4 @@
-package duke.command.test;
 
-import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.exception.DukeException;
 import duke.task.Task;

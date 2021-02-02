@@ -1,4 +1,3 @@
-package duke.command.test;
 
 import duke.command.AddToDoCommand;
 import duke.exception.DukeException;
