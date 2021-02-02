@@ -36,7 +36,9 @@ public class Task {
      * Returns a formatted string of the state of the task
      */
     public String toString() {
-        if (isDone) return "todo | done | " + taskName;
+        if (isDone) {
+            return "todo | done | " + taskName;
+        }
         return "todo | not done | " + taskName;
     }
 
@@ -45,7 +47,9 @@ public class Task {
      * @return More human readable toString()
      */
     public String toFormattedString() {
-        if (isDone) return "[T][X] " + taskName;
+        if (isDone) {
+            return "[T][X] " + taskName;
+        }
         return "[T][ ] " + taskName;
     }
 

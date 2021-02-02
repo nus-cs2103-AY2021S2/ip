@@ -15,6 +15,11 @@ public class Parser {
     boolean isBye;
     DateValidator validator;
 
+    /**
+     * Constructor of the Parser.
+     * @param ui Handler for user interface.
+     * @param validator Valid date format for tasks.
+     */
     public Parser(ConsoleUI ui, DateValidator validator) {
         this.ui = ui;
         this.isBye = false;
@@ -51,7 +56,7 @@ public class Parser {
      */
     public Integer parseInput(Task[] tasks, int taskIterator) {
         String input = ui.nextLine();
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
 
         try {
             switch (inputArr[0]) {
@@ -89,9 +94,9 @@ public class Parser {
                 } else {
                     // create todoTask
                     if (firstHalf.length == 1) {
-                        throw new MissingTodoDescriptorException("------------------------------------\n" +
-                                ":( OOPS!!! The description of a todo cannot be empty\n" +
-                                "------------------------------------");
+                        throw new MissingTodoDescriptorException("------------------------------------\n"
+                                + ":( OOPS!!! The description of a todo cannot be empty\n"
+                                + "------------------------------------");
                     } else {
                         tasks[taskIterator] = new Task(firstHalf[1], false);
                     }
@@ -121,9 +126,9 @@ public class Parser {
                 ui.formatBox(output);
                 break;
             default:
-                throw new UnknownInputParamException("------------------------------------\n" +
-                        ":( OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                        "------------------------------------");
+                throw new UnknownInputParamException("------------------------------------\n"
+                        + ":( OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                        + "------------------------------------");
             }
         } catch (MissingTodoDescriptorException e) {
             System.out.println(e.getMessage());
