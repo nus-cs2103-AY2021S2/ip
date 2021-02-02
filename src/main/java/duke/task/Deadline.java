@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,8 +7,8 @@ public class Deadline extends Task {
 
     /**
      * Creates a new deadline task
-     * @param name: deadline name
-     * @param date: deadline due date
+     * @param name deadline name
+     * @param date deadline due date
      */
     public Deadline(String name, LocalDate date) {
         super(name, "Make sure you meet this deadline!");
@@ -18,9 +18,9 @@ public class Deadline extends Task {
     /**
      * Overloads the Deadline(String name, LocalDate date) method, with new status parameter.
      * This can be used if status is required to be defined.
-     * @param name: deadline name
-     * @param date: deadline date
-     * @param status: deadline status (done, not done)
+     * @param name deadline name
+     * @param date deadline date
+     * @param status deadline status (done, not done)
      */
     public Deadline(String name, LocalDate date, Boolean status) {
         this(name, date);

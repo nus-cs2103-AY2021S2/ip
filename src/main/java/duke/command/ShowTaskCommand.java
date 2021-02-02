@@ -1,13 +1,13 @@
-package main.java.duke.command;
-
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.task.Task;
+package duke.command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 public class ShowTaskCommand extends Command {
 
@@ -28,7 +28,7 @@ public class ShowTaskCommand extends Command {
 
     /**
      * Overloads ShowTaskCommand() method with specified date
-     * @param date: show tasks with specific date
+     * @param date show tasks with specific date
      */
     public ShowTaskCommand(LocalDate date) {
         super();
@@ -38,7 +38,7 @@ public class ShowTaskCommand extends Command {
 
     /**
      * Overloads ShowTaskCommand() method with date in string
-     * @param date: show tasks with specific date in string, format: yyyy-mm-dd
+     * @param date show tasks with specific date in string, format: yyyy-mm-dd
      */
     public ShowTaskCommand(String date) {
         super();
@@ -53,9 +53,9 @@ public class ShowTaskCommand extends Command {
 
     /**
      * Execute action to list tasks
-     * @param tasks: list of tasks
-     * @param ui: UI required for conversation
-     * @param storage: Storage required for .txt file
+     * @param tasks list of tasks
+     * @param ui UI required for conversation
+     * @param storage Storage required for .txt file
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.util.Scanner;
 
@@ -9,7 +9,7 @@ public class Ui {
 
     /**
      * Creates a UI "engine" which is responsible for everything related to bot's user interface (UI)
-     * @param botName: Bot will reply with this bot name in this future
+     * @param botName Bot will reply with this bot name in this future
      */
     public Ui(String botName) {
         this.botName = botName;
@@ -18,7 +18,7 @@ public class Ui {
 
     /**
      * Appends the bot name to the intended message. This results in the message looking similar to speech.
-     * @param message: Message that bot wants to tell user
+     * @param message Message that bot wants to tell user
      */
     public void speak(String message) {
         System.out.println(botName + ": " + message);

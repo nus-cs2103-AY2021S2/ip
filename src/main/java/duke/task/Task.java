@@ -1,13 +1,17 @@
-package main.java.duke.task;
+package duke.task;
 
 import java.time.LocalDate;
 
 public class Task {
-    String name;
-    Boolean status;
-    String addMessage;
-    LocalDate date;
+    protected String name;
+    protected Boolean status;
+    protected String addMessage;
+    protected LocalDate date;
 
+    /**
+     * Creates a new task based on the given name
+     * @param name name of task
+     */
     public Task(String name) {
         this.name = name;
         this.status = false;
@@ -31,7 +35,7 @@ public class Task {
 
     /**
      * Retrieves date of task
-     * @return LocalDate: date of task
+     * @return LocalDate date of task
      */
     public LocalDate getDate() {
         return this.date;
@@ -39,7 +43,7 @@ public class Task {
 
     /**
      * Retrieves status of task
-     * @return boolean: true (done), false (not done)
+     * @return boolean true (done), false (not done)
      */
     public boolean getStatus() {
         return this.status;

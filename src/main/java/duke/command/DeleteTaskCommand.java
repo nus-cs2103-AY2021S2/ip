@@ -1,17 +1,17 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.task.Task;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 public class DeleteTaskCommand extends Command {
     private int index;
 
     /**
      * Creates a command for 'deleting task'
-     * @param index: index of task to be deleted
+     * @param index index of task to be deleted
      */
     public DeleteTaskCommand(int index) {
         super();
@@ -20,9 +20,9 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Execute action to delete a task from existing lists of task
-     * @param tasks: list of tasks
-     * @param ui: UI required for conversation
-     * @param storage: Storage required for .txt file
+     * @param tasks list of tasks
+     * @param ui UI required for conversation
+     * @param storage Storage required for .txt file
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

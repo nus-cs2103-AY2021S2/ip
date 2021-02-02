@@ -1,10 +1,10 @@
-package main.java.duke;
-
-import main.java.duke.task.Task;
+package duke;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 public class TaskList {
     private List<Task> tasks;
@@ -13,7 +13,7 @@ public class TaskList {
     /**
      * TaskList provides an abstraction for a list of Tasks.
      * Additionally, it provides other helpful Task-related functions which would be a hassle without the abstraction.
-     * @param storage: Storage of the tasks' .txt file
+     * @param storage Storage of the tasks' .txt file
      */
     TaskList(Storage storage) {
         this.storage = storage;
@@ -21,10 +21,10 @@ public class TaskList {
     }
 
     /**
-     * This method overloads TaskList(Storage storage), with an additional List<Task> parameter.
+     * This method overloads TaskList(Storage storage), with an additional List&lt;Task&gt; parameter.
      * It is used over TaskList(Storage storage) when the user already has existing tasks.
-     * @param tasks: List of Tasks to insert into TaskList
-     * @param storage: Storage of the tasks' .txt file
+     * @param tasks List of Tasks to insert into TaskList
+     * @param storage Storage of the tasks' .txt file
      */
     public TaskList(List<Task> tasks, Storage storage) {
         this(storage);
@@ -41,7 +41,7 @@ public class TaskList {
 
     /**
      * Adds a new task to List of Tasks
-     * @param task: Task to be added
+     * @param task Task to be added
      */
     public void add(Task task) {
         tasks.add(task);
@@ -50,7 +50,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the List of Tasks
-     * @param task: Task to be deleted
+     * @param task Task to be deleted
      */
     public void delete(Task task) {
         tasks.remove(task);
@@ -67,13 +67,18 @@ public class TaskList {
 
     /**
      * Retrieve task from List of Task based on index (0-based)
-     * @param i: index of Task
+     * @param i index of Task
      * @return Task with index i
      */
     public Task find(int i) {
         return tasks.get(i);
     }
 
+    /**
+     * Retrieves all tasks relating to the given criteria (search)
+     * @param criteria keyword given to search task
+     * @return Tasks relating to the given keyworrd
+     */
     public TaskList findAll(String criteria) {
         List<Task> tempTask = new ArrayList<Task>();
         for (Task task: tasks) {
@@ -86,7 +91,7 @@ public class TaskList {
 
     /**
      * Filters the current list of Tasks and returns a new list of tasks with the specified date.
-     * @param date: Filter date in LocalDate
+     * @param date Filter date in LocalDate
      * @return List of Tasks with specified date
      */
     public List<Task> getByDate(LocalDate date) {
@@ -111,7 +116,7 @@ public class TaskList {
     public String toString() {
         String tasksContent = "";
         for (int i = 0; i < tasks.size(); i++) {
-            tasksContent += (i+1 + ". " + tasks.get(i) + "\n");
+            tasksContent += (i + 1 + ". " + tasks.get(i) + "\n");
         }
         return tasksContent.trim();
     }

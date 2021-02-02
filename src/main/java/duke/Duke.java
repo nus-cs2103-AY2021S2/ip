@@ -1,8 +1,8 @@
-package main.java.duke;
-
-import main.java.duke.command.Command;
+package duke;
 
 import java.util.Scanner;
+
+import duke.command.Command;
 
 public class Duke {
 
@@ -12,8 +12,8 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initiates a new Duke chatbot with the specified storage file
-     * @param filePath: file path to .txt file used to store tasks
+     * Creates a new instance of 'Duke' bot
+     * @param filePath path to file containing saved tasks
      */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
@@ -23,7 +23,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke chatbot, allowing user to interact with it via commands
+     * Spins up the bot and allow execution from users
      */
     public void run() {
         Scanner sc = new Scanner(System.in);

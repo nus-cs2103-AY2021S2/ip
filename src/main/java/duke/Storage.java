@@ -1,11 +1,10 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.Todo;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -14,13 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class Storage {
 
     private String filePath;
 
     /**
      * Creates a new Storage object with the specified file path
-     * @param filePath: Path to the storage file, for example: data/tasks.txt
+     * @param filePath Path to the storage file, for example: data/tasks.txt
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -28,7 +32,7 @@ public class Storage {
 
     /**
      * Loads the txt file specified previously, and parses it nicely into List of Tasks.
-     * @return Tasks: tasks that are parsed from the txt file will be returned
+     * @return Tasks tasks that are parsed from the txt file will be returned
      */
     public List<Task> load() {
         try {
@@ -52,7 +56,7 @@ public class Storage {
     /**
      * Method for tasks to write to .txt files.
      * The codes below parses task -> task string format, and writes into file path specified.
-     * @param tasks: Tasks that want to be written into txt file
+     * @param tasks Tasks that want to be written into txt file
      */
     public void writeToFile(TaskList tasks) {
         try {
@@ -111,21 +115,23 @@ public class Storage {
 
             Task newTask = new Task(taskName);
             switch (taskType) {
-                case "T":
-                    newTask = new Todo(taskName, taskStatus);
-                    break;
-                case "E":
-                    newTask = new Event(
-                            taskInfo[2],
-                            LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
-                            taskStatus);
-                    break;
-                case "D":
-                    newTask = new Deadline(
-                            taskInfo[2],
-                            LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
-                            taskStatus);
-                    break;
+            case "T":
+                newTask = new Todo(taskName, taskStatus);
+                break;
+            case "E":
+                newTask = new Event(
+                        taskInfo[2],
+                        LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                        taskStatus);
+                break;
+            case "D":
+                newTask = new Deadline(
+                        taskInfo[2],
+                        LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                        taskStatus);
+                break;
+            default:
+                break;
             }
             tempTask.add(newTask);
         }

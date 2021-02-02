@@ -1,15 +1,15 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class FindCommand extends Command {
     private String input;
 
     /**
      * Creates a command for 'finding task'
-     * @param input: The input criteria for the task, for example: if the input criteria is 'book', you are finding
+     * @param input The input criteria for the task, for example: if the input criteria is 'book', you are finding
      *               all tasks with book
      */
     public FindCommand(String input) {

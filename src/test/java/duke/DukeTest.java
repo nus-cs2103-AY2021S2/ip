@@ -1,30 +1,29 @@
 package duke;
 
-import main.java.duke.*;
-import main.java.duke.command.Command;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import duke.command.Command;
 
 public class DukeTest {
+
+    private static final String FILE_PATH = "data/task.txt";
 
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
 
-    private static final String filePath = "data/task.txt";
-
     @BeforeEach
     public void init() {
         this.parser = new Parser();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(FILE_PATH);
         this.storage.clearFile();
         this.tasks = new TaskList(this.storage.load(), this.storage);
         this.ui = new Ui("Olly");

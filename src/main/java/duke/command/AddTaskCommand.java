@@ -1,16 +1,16 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.task.Task;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 public class AddTaskCommand extends Command {
     private Task task;
 
     /**
      * Creates a command for 'adding task'
-     * @param task: Task to be added
+     * @param task Task to be added
      */
     public AddTaskCommand(Task task) {
         super();
@@ -19,9 +19,9 @@ public class AddTaskCommand extends Command {
 
     /**
      * Execute action to add a new task to existing lists of task
-     * @param tasks: list of tasks
-     * @param ui: UI required for conversation
-     * @param storage: Storage required for .txt file
+     * @param tasks list of tasks
+     * @param ui UI required for conversation
+     * @param storage Storage required for .txt file
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

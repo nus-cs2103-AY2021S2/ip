@@ -1,10 +1,10 @@
-package main.java.duke.task;
+package duke.task;
 
 public class Todo extends Task {
 
     /**
      * Creates a new todo task
-     * @param name: todo name
+     * @param name todo name
      */
     public Todo(String name) {
         super(name, "Make sure you do this task!");
@@ -13,8 +13,8 @@ public class Todo extends Task {
     /**
      * Overloads the Todo(String name) method, with new status parameter.
      * This can be used if status is required to be defined.
-     * @param name: event name
-     * @param status: event status (done, not done)
+     * @param name event name
+     * @param status event status (done, not done)
      */
     public Todo(String name, Boolean status) {
         this(name);

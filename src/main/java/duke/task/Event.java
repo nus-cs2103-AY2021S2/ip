@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,8 +7,8 @@ public class Event extends Task {
 
     /**
      * Creates a new event task
-     * @param name: event name
-     * @param date: event due date
+     * @param name event name
+     * @param date event due date
      */
     public Event(String name, LocalDate date) {
         super(name, "Event coming right up!");
@@ -18,9 +18,9 @@ public class Event extends Task {
     /**
      * Overloads the Event(String name, LocalDate date) method, with new status parameter.
      * This can be used if status is required to be defined.
-     * @param name: event name
-     * @param date: event date
-     * @param status: event status (done, not done)
+     * @param name event name
+     * @param date event date
+     * @param status event status (done, not done)
      */
     public Event(String name, LocalDate date, Boolean status) {
         this(name, date);
