@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a Deadline Task.
-     * 
+     *
      * @param description description of the task.
      * @param taskType the type of the task.
      * @param by the date that the task has to be done by.
@@ -32,8 +32,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() 
-                + " (by: " 
+        return super.toString()
+                + " (by: "
                 + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

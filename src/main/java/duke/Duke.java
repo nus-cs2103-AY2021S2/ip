@@ -9,7 +9,7 @@ public class Duke {
 
     /**
      * Creates a Duke Bot that interprets user input.
-     * 
+     *
      * @param filePath Location of the storage list
      */
     public Duke(String[] filePath) {
@@ -23,7 +23,7 @@ public class Duke {
         }
     }
 
-    public void run() {
+    private void run() {
         this.ui.greet();
         while (true) {
             String[] commandArr = Parser.parseCommand(this.ui.readCommand());
@@ -98,7 +98,7 @@ enum DukeCommand {
     TODO,
     EVENT,
     DEADLINE;
-    
+
     public static DukeCommand fromString(String command) {
         for (int i = 1; i < DukeCommand.values().length; i++) {
             if (DukeCommand.values()[i].toString().equals(command.toUpperCase())) {

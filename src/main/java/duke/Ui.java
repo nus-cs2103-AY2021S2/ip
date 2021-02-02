@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -11,7 +11,7 @@ public class Ui {
 
     /**
      * Prints Text formatted between 2 lines.
-     * 
+     *
      * @param text Text to be printed.
      */
     public void sendToUser(String text) {
@@ -25,7 +25,7 @@ public class Ui {
 
     /**
      * Prints the exception.
-     * 
+     *
      * @param e The exception to be printed.
      */
     public void showError(Exception e) {
@@ -34,7 +34,7 @@ public class Ui {
 
     /**
      * Reads a line from stdin.
-     * 
+     *
      * @return String representing a command.
      */
     public String readCommand() {
@@ -42,14 +42,23 @@ public class Ui {
     }
 
     /**
+     * Returns the Scanner object.
+     *
+     * @return Scanner object
+     */
+    public Scanner getScanner() {
+        return sc;
+    }
+
+    /**
      * Prints a greeting message.
      */
     public void greet() {
-        String logo = 
-                  " ____        _        \n" 
-                + "|  _ \\ _   _| | _____ \n" 
+        String logo =
+                  " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" 
+                + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println("Hello from\n" + logo);

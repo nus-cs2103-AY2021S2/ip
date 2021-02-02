@@ -9,14 +9,14 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
-    
+
     public TaskList(List<Task> taskList) {
         this.tasks = taskList;
     }
 
     /**
      * Adds a Task to the TaskList.
-     * 
+     *
      * @param task Task to be added.
      * @return Success Message String.
      */
@@ -29,7 +29,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the TaskList, given an index.
-     * 
+     *
      * @param taskIndex 1-based index for the task to be deleted.
      * @return Success Mesasge String.
      * @throws DukeException
@@ -43,10 +43,10 @@ public class TaskList {
                 + deletedTask
                 + this.sizeToString();
     }
-    
+
     /**
      * Marks a task in the TaskList as done, given an index
-     * 
+     *
      * @param taskIndex 1-based index for the task to be deleted.
      * @return Success Message String.
      * @throws DukeException
@@ -63,7 +63,7 @@ public class TaskList {
 
     /**
      * Returns the tasks that are in the TaskList.
-     * 
+     *
      * @return String representing the tasks in the TaskList.
      */
     public String findTask(String phrase) {
@@ -82,7 +82,7 @@ public class TaskList {
 
     /**
      * Returns the save String representation of a TaskList.
-     * 
+     *
      * @return a String representing a TaskList.
      */
     public String saveTaskListString() {
@@ -96,7 +96,7 @@ public class TaskList {
 
     /**
      * Returns a String representation of the amount of tasks in the TaskList.
-     * 
+     *
      * @return String representation of the amount of tasks in the TaskList.
      */
     private String sizeToString() {

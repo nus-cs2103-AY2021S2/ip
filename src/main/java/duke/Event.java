@@ -9,7 +9,7 @@ public class Event extends Task {
 
     /**
      * Returns an Event class.
-     * 
+     *
      * @param description description of the task.
      * @param taskType the type of the task.
      * @param at the date that the task will happen.
@@ -23,7 +23,7 @@ public class Event extends Task {
             throw new DukeException("Date is not in the correct format");
         }
     }
-    
+
     @Override
     public String saveTaskString() {
         String delimiter = " ~ ";
@@ -32,8 +32,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() 
-                + " (at: " 
+        return super.toString()
+                + " (at: "
                 + this.at.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 }

@@ -12,8 +12,8 @@ public class Storage {
 
     /**
      * Returns a Storage object which performs saving and loading functions.
-     * 
-     * @param filePathArr an Array with the relative file path. 
+     *
+     * @param filePathArr an Array with the relative file path.
      * eg. "data/duke.txt" would be ["data", "duke.txt"]
      */
     public Storage(String[] filePathArr) {
@@ -29,7 +29,7 @@ public class Storage {
      * Returns a TaskList loaded from the defined filePath
      * If filepath does not exist, returns a TaskList with an empty
      * list of Tasks.
-     * 
+     *
      * @return TaskList loaded from file
      * @throws DukeException
      */
@@ -61,7 +61,7 @@ public class Storage {
     /**
      * Saves the tasks to the file with defined filepath.
      * If the TaskList is empty, saves an empty file.
-     * 
+     *
      * @param taskList Tasklist with the Tasks to be saved
      * @throws DukeException
      */
