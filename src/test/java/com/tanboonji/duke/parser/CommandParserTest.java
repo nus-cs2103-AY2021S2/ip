@@ -1,6 +1,15 @@
-import org.junit.jupiter.api.Test;
+package com.tanboonji.duke.parser;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import com.tanboonji.duke.command.DoneCommand;
+import com.tanboonji.duke.command.EventCommand;
+import com.tanboonji.duke.command.HelpCommand;
+import com.tanboonji.duke.command.InvalidCommand;
+import com.tanboonji.duke.command.ListCommand;
+import com.tanboonji.duke.command.ToDoCommand;
 
 class CommandParserTest {
 
@@ -15,7 +24,7 @@ class CommandParserTest {
     @Test
     void parse_eventCommand_success() {
         String[] inputs = {"event book reading /at 01-02-2021 0000", " event  book reading /at 01/02/2021",
-                "event  book reading /at 01.02.2021 2359 "};
+            "event  book reading /at 01.02.2021 2359 "};
         for (String input: inputs) {
             assertTrue(CommandParser.parse(input).getClass().isAssignableFrom(EventCommand.class));
         }
@@ -46,7 +55,7 @@ class CommandParserTest {
     }
 
     @Test
-    void parse_invalidToDoCommand_DukeException() {
+    void parse_invalidToDoCommand_dukeException() {
         String[] inputs = {"todo", "  todo", "todo  "};
         for (String input: inputs) {
             assertTrue(CommandParser.parse(input).getClass().isAssignableFrom(InvalidCommand.class));
@@ -54,7 +63,7 @@ class CommandParserTest {
     }
 
     @Test
-    void parse_invalidEventCommand_DukeException() {
+    void parse_invalidEventCommand_dukeException() {
         String[] inputs = {"event", " event  book reading", "event  book reading /by 01.01.2021 0000 "};
         for (String input: inputs) {
             assertTrue(CommandParser.parse(input).getClass().isAssignableFrom(InvalidCommand.class));
@@ -62,7 +71,7 @@ class CommandParserTest {
     }
 
     @Test
-    void parse_invalidDoneCommand_DukeException() {
+    void parse_invalidDoneCommand_dukeException() {
         String[] inputs = {"done", " done  one", "done  two "};
         for (String input: inputs) {
             assertTrue(CommandParser.parse(input).getClass().isAssignableFrom(InvalidCommand.class));
