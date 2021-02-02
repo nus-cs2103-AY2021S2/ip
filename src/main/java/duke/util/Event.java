@@ -23,6 +23,7 @@ public class Event extends Task {
 
     /**
      * Factory method for creating Event task.
+     * 
      * @param input Description of the task and its date.
      *     Date should be indicated after "/at".
      * @return An Event task.
@@ -46,6 +47,11 @@ public class Event extends Task {
         return new Event(details[0], date);
     }
 
+    /**
+     * Returns String in the form "[Type] task".
+     * 
+     * @return String representation of Event.
+     */
     @Override
     public String toString() {
         return String.format("[%s]%s (at: %s)",
@@ -56,6 +62,8 @@ public class Event extends Task {
 
     /**
      * Export data into a standardised format.
+     * 
+     * @return List of Event details.
      */
     @Override
     protected List<String> exportData() {
@@ -67,6 +75,9 @@ public class Event extends Task {
 
     /**
      * Import data from standardised format.
+     * 
+     * @param args Event details.
+     * @return Event object.
      */
     protected static Event importData(String[] args) {
         boolean isDone = args[1].equals("1");

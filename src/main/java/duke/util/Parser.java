@@ -11,6 +11,7 @@ public class Parser {
     /**
      * Checks if input from user is valid.
      * <br>Only accepts valid commands, followed by valid parameters.
+     * 
      * @param input Input from user.
      * @throws DukeInputException If input is invalid.
      */
@@ -56,6 +57,7 @@ public class Parser {
 
     /**
      * Checks if input from text file is valid.
+     * 
      * @param input Line from saved file.
      * @throws DukeInputException If input is invalid.
      */
@@ -158,6 +160,7 @@ public class Parser {
 
     /**
      * Checks if input is either a "y" (yes) or "n" (no).
+     * 
      * @param s Input from user.
      * @throws DukeInputException If input is neither a "y" or "n".
      */

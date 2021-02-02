@@ -26,6 +26,8 @@ public class Storage {
 
     /**
      * Create storage with custom path.
+     * 
+     * @param path Path of file.
      */
     public Storage(String path) {
         file = new File(path);
@@ -33,6 +35,7 @@ public class Storage {
 
     /**
      * Save tasklist to a text file.
+     * 
      * @param taskList Current tasklist.
      * @throws DukeException If the file is invalid or cannot be open for any reason.
      */
@@ -59,6 +62,7 @@ public class Storage {
 
     /**
      * Reads and returns tasklist from a text file.
+     * 
      * @return List of tasks
      */
     public List<Task> loadTaskList() throws DukeException {

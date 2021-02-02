@@ -22,6 +22,7 @@ public class Ui {
 
     /**
      * Reads input from user.
+     * 
      * @return String input.
      */
     public String readInput() {
@@ -55,7 +56,7 @@ public class Ui {
     /**
      * Displays greeting messages when Duke starts.
      */
-    public void greetings() {
+    public void displayGreetings() {
         System.out.println(LOGO);
         echoBorder(List.of("Hello! I'm Duke",
                 "What can I do for you?",
@@ -94,6 +95,7 @@ public class Ui {
 
     /**
      * Displays error messages.
+     * 
      * @param e Error to be displayed.
      */
     public void displayError(DukeException e) {
@@ -109,6 +111,7 @@ public class Ui {
 
     /**
      * Displays list contents.
+     * 
      * @param lst List to be displayed.
      */
     public void displayList(List<String> lst) {
@@ -125,6 +128,7 @@ public class Ui {
 
     /**
      * Displays message after task is marked as done.
+     * 
      * @param task Task  marked as done.
      */
     public void completeTask(String task) {
@@ -133,6 +137,7 @@ public class Ui {
 
     /**
      * Displays added task and the current number of task in the TaskList.
+     * 
      * @param task Task added to TaskList.
      * @param size Current size of TaskList.
      */
@@ -144,6 +149,7 @@ public class Ui {
 
     /**
      * Displays deleted task and the current number of task in the TaskList.
+     * 
      * @param task Task deleted from TaskList.
      * @param size Current size of TaskList.
      */
@@ -156,19 +162,20 @@ public class Ui {
     /**
      * Displays messages after TaskList has been saved.
      */
-    public void saved() {
+    public void save() {
         echoSingleBorder("TaskList have been saved!");
     }
 
     /**
      * Displays messages after TaskList has been loaded.
      */
-    public void loaded() {
+    public void load() {
         echoSingleBorder("TaskList loaded successfully!");
     }
 
     /**
      * Prompts user to save file.
+     * 
      * @return Response from user.
      */
     public String saveFilePrompt() {
@@ -178,6 +185,7 @@ public class Ui {
 
     /**
      * Confirms if user want to delete this task.
+     * 
      * @return Response from user.
      */
     public String deleteTaskPrompt() {

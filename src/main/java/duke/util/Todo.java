@@ -20,6 +20,7 @@ public class Todo extends Task {
 
     /**
      * Factory method for creating Todo task.
+     * 
      * @param description Description of the task
      * @return A todo task
      * @throws DukeInputException if description is empty
@@ -31,6 +32,11 @@ public class Todo extends Task {
         return new Todo(description);
     }
 
+    /**
+     * Returns String in the form "[Type] task".
+     * 
+     * @return String representation of Todo.
+     */
     @Override
     public String toString() {
         return String.format("[%s]%s", TYPE, super.toString());
@@ -38,6 +44,8 @@ public class Todo extends Task {
 
     /**
      * Export data into a standardised format.
+     * 
+     * @return List of Todo details.
      */
     @Override
     protected List<String> exportData() {
@@ -48,6 +56,9 @@ public class Todo extends Task {
 
     /**
      * Import data from standardised format.
+     * 
+     * @param args Todo details.
+     * @return Todo object.
      */
     protected static Todo importData(String[] args) {
         boolean isDone = args[1].equals("1");

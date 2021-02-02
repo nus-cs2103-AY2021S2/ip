@@ -23,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Factory method for creating deadline task.
+     * 
      * @param input Description of the task and its due date.
      *     Due date should be indicated after "/by".
      * @return A deadline task.
@@ -46,6 +47,11 @@ public class Deadline extends Task {
         return new Deadline(details[0], date);
     }
 
+    /**
+     * Returns String in the form "[Type] task".
+     * 
+     * @return String representation of Deadline.
+     */
     @Override
     public String toString() {
         return String.format("[%s]%s (by: %s)",
@@ -56,6 +62,8 @@ public class Deadline extends Task {
 
     /**
      * Export data into a standardised format.
+     * 
+     * @return List of Deadline details.
      */
     @Override
     protected List<String> exportData() {
@@ -67,6 +75,9 @@ public class Deadline extends Task {
 
     /**
      * Import data from standardised format.
+     * 
+     * @param args Deadline details.
+     * @return Deadline object.
      */
     protected static Deadline importData(String[] args) {
         boolean isDone = args[1].equals("1");

@@ -47,6 +47,7 @@ public class Duke {
 
     /**
      * Constructor to create Duke object.
+     * 
      * @param filePath File path to save tasklist.
      */
     public Duke(String filePath) {
@@ -72,7 +73,7 @@ public class Duke {
      * Starts the Duke bot.
      */
     public void start() {
-        ui.greetings();
+        ui.displayGreetings();
 
         for (;;) {
 
@@ -92,7 +93,7 @@ public class Duke {
             try {
                 switch (command) {
                 case "bye":
-                    if (exit()) {
+                    if (confirmExit()) {
                         return;
                     }
                     break;
@@ -116,11 +117,11 @@ public class Duke {
                     break;
                 case "save":
                     storage.saveTaskList(tasks.toList());
-                    ui.saved();
+                    ui.save();
                     break;
                 case "load":
                     tasks = new TaskList(storage.loadTaskList());
-                    ui.loaded();
+                    ui.load();
                     break;
                 case "help":
                     ui.help();
@@ -167,18 +168,18 @@ public class Duke {
         }
     }
 
-    private boolean exit() {
+    private boolean confirmExit() {
         String s = ui.saveFilePrompt();
         try {
             Parser.parseYesNo(s);
         } catch (DukeInputException e) {
             ui.displayError(e);
-            return exit();
+            return confirmExit();
         }
         if (s.equals("y")) {
             try {
                 storage.saveTaskList(tasks.toList());
-                ui.saved();
+                ui.save();
             } catch (DukeException e) {
                 ui.displayError(e);
                 return false;
