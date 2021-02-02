@@ -1,8 +1,9 @@
 package duke.task;
 import java.time.LocalDate;
-import duke.dukeException.DukeException;
 
-public class Deadline extends Task{
+import duke.dukeexception.DukeException;
+
+public class Deadline extends Task {
     /** Date of the deadline */
     protected LocalDate by;
 
@@ -33,7 +34,7 @@ public class Deadline extends Task{
     @Override
     public void addTask(int count) throws DukeException {
         if (this.name.equals("deadline")) {
-            throw new DukeException("     ☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("      OOPS!!! The description of a deadline cannot be empty.");
         } else {
             super.addTask(count);
         }
@@ -46,7 +47,8 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.getMonth() + " " + by.getDayOfMonth()+ " "+ by.getYear() + ")";
+        return "[D]" + super.toString() + " (by: " + by.getMonth() + " "
+                + by.getDayOfMonth() + " " + by.getYear() + ")";
     }
 }
 

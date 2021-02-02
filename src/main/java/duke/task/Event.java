@@ -1,8 +1,12 @@
 package duke.task;
-import java.time.LocalDate;
-import duke.dukeException.DukeException;
 
-public class Event extends Task{
+import java.time.LocalDate;
+
+import duke.dukeexception.DukeException;
+
+
+
+public class Event extends Task {
     /** Event time */
     protected LocalDate at;
 
@@ -33,7 +37,7 @@ public class Event extends Task{
     @Override
     public void addTask(int count) throws DukeException {
         if (this.name.equals("event")) {
-            throw new DukeException("     ☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("      OOPS!!! The description of an event cannot be empty.");
         } else {
             super.addTask(count);
         }
@@ -46,7 +50,8 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.getMonth() + " " + at.getDayOfMonth() + " " + at.getYear() + ")";
+        return "[E]" + super.toString() + " (at: " + at.getMonth()
+                + " " + at.getDayOfMonth() + " " + at.getYear() + ")";
     }
 }
 

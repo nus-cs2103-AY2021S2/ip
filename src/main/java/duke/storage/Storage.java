@@ -1,18 +1,20 @@
 package duke.storage;
-import duke.dukeException.DukeException;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.dukeexception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Storage {
     /** The path of the file storing all tasks */
-    public String filePath;
+    private String filePath;
 
     /**
      * Class constructor.
@@ -38,7 +40,7 @@ public class Storage {
                 String data = myReader.nextLine();
                 Character type = data.charAt(0);
                 boolean isDone = false;
-                if (data.charAt(4)=='1') {
+                if (data.charAt(4) == '1') {
                     isDone = true;
                 }
                 data = data.substring(8);
@@ -49,8 +51,8 @@ public class Storage {
                 int mon = -999;
                 int day = -999;
                 if (mid > 0) {
-                    name = data.substring(0, mid-1);
-                    date = data.substring(mid+2);
+                    name = data.substring(0, mid - 1);
+                    date = data.substring(mid + 2);
                     year = Integer.valueOf(date.substring(0, 4));
                     mon = Integer.valueOf(date.substring(5, 7));
                     day = Integer.valueOf(date.substring(8));

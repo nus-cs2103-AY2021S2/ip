@@ -1,10 +1,12 @@
-import duke.command.Command;
-import duke.parser.Parser;
-import duke.task.*;
-import duke.dukeException.DukeException;
-import duke.storage.Storage;
-import duke.ui.Ui;
 import java.io.IOException;
+
+import duke.command.Command;
+import duke.dukeexception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 
 public class Duke {
     /** Data related object */
@@ -25,7 +27,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException | IOException e) {
+        } catch (IOException | DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }

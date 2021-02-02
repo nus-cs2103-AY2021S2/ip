@@ -1,6 +1,6 @@
 package duke.parser;
 import duke.command.Command;
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 
 public class Parser {
 

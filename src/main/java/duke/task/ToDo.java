@@ -1,7 +1,7 @@
 package duke.task;
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * Class constructor specifying name.
      */
@@ -25,9 +25,9 @@ public class ToDo extends Task{
      *                      exception occurred
      */
     @Override
-    public void addTask(int count) throws DukeException{
+    public void addTask(int count) throws DukeException {
         if (this.name.equals("todo")) {
-            throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("      OOPS!!! The description of a todo cannot be empty.");
         } else {
             super.addTask(count);
         }

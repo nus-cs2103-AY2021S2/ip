@@ -1,11 +1,11 @@
 package duke.task;
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 
 public class Task {
     /** Status of the task */
-    public boolean isDone;
+    protected boolean isDone;
     /** Name of the task */
-    public String name;
+    protected String name;
 
     /**
      * Class constructor.
@@ -13,6 +13,10 @@ public class Task {
     public Task(String name) {
         this.isDone = false;
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     /**
@@ -31,7 +35,7 @@ public class Task {
      */
     public void addTask(int count) throws DukeException {
         if (this.name.equals("todo")) {
-            throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("      OOPS!!! The description of a todo cannot be empty.");
         } else {
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + this.toString());
