@@ -1,7 +1,9 @@
 package duke.handler;
 
 public enum Queries {
-    ADD,
+    TODO,
+    DEADLINE,
+    EVENT,
     LIST,
     DONE,
     DELETE,
