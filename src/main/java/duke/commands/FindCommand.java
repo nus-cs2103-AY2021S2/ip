@@ -24,13 +24,13 @@ public class FindCommand extends Command {
      * @param storage storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList printTaskList = new TaskList();
         for (Task task : taskList.getTaskList()) {
             if (task.getDescription().contains(query)) {
                 printTaskList.add(task);
             }
         }
-        ui.showListMessage(printTaskList, true);
+        return ui.showListMessage(printTaskList, true);
     }
 }

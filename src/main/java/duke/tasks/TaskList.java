@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class TaskList {
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     /** Constructor to instantiate an empty task list. */
     public TaskList() {
@@ -118,9 +118,9 @@ public class TaskList {
         LocalDate queryDate = LocalDate.parse(date);
         printTasks.removeIf(t -> {
             if (t instanceof Deadline) {
-                return !(((Deadline) t).getBy().isEqual(queryDate));
+                return !(((Deadline) t).getBy().toLocalDate().isEqual(queryDate));
             } else if (t instanceof Event) {
-                return !((Event) t).getAt().isEqual(queryDate);
+                return !((Event) t).getAt().toLocalDate().isEqual(queryDate);
             }
             return true;
         });

@@ -1,15 +1,15 @@
-package duke.task;
+package duke.tasks;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import duke.DukeHelper;
+import duke.common.Utils;
 
 /**
  * Represents a Event {@code Task}.
  */
 public class Event extends Task {
 
-    private LocalDate at;
+    private final LocalDateTime at;
 
     /**
      * Constructor for Event {@code Task}, specifying the description and occurrence date.
@@ -19,7 +19,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = LocalDate.parse(at);
+        this.at = LocalDateTime.parse(at);
     }
 
     /**
@@ -31,16 +31,16 @@ public class Event extends Task {
      */
     public Event(int done, String description, String at) {
         super(done, description);
-        this.at = LocalDate.parse(at);
+        this.at = LocalDateTime.parse(at);
     }
 
-    public LocalDate getAt() {
+    public LocalDateTime getAt() {
         return at;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), DukeHelper.formatDate(at));
+        return String.format("[E]%s (at: %s)", super.toString(), Utils.formatDate(at));
     }
 
     @Override

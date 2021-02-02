@@ -1,6 +1,6 @@
 package duke;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -15,8 +15,8 @@ public class DukeHelper {
      * @param date date to be formatted
      * @return formatted date String
      */
-    public static String formatDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public static String formatDate(LocalDateTime date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
         return date.format(formatter);
     }
 
@@ -27,8 +27,8 @@ public class DukeHelper {
      * @return formatted date String
      */
     public static String formatDateString(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        LocalDate date = LocalDate.parse(dateString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
+        LocalDateTime date = LocalDateTime.parse(dateString);
         return date.format(formatter);
     }
 
@@ -39,7 +39,7 @@ public class DukeHelper {
      */
     public static boolean validDateChecker(String dateString) {
         try {
-            LocalDate.parse(dateString);
+            LocalDateTime.parse(dateString);
             return true;
         } catch (DateTimeParseException e) {
             return false;

@@ -1,15 +1,15 @@
-package duke.task;
+package duke.tasks;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import duke.DukeHelper;
+import duke.common.Utils;
 
 /**
  * Represents a Deadline {@code Task}.
  */
 public class Deadline extends Task {
 
-    private LocalDate by;
+    private final LocalDateTime by;
 
     /**
      * Constructor for Deadline {@code Task}, specifying the description and due date.
@@ -19,7 +19,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.by = LocalDateTime.parse(by);
     }
 
     /**
@@ -31,16 +31,16 @@ public class Deadline extends Task {
      */
     public Deadline(int done, String description, String by) {
         super(done, description);
-        this.by = LocalDate.parse(by);
+        this.by = LocalDateTime.parse(by);
     }
 
-    public LocalDate getBy() {
+    public LocalDateTime getBy() {
         return by;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), DukeHelper.formatDate(by));
+        return String.format("[D]%s (by: %s)", super.toString(), Utils.formatDate(by));
     }
 
     @Override
