@@ -64,7 +64,17 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+//    public static void main(String[] args) {
+//        new Duke().run();
+//        Application.launch(args);
+//    }
+
+
+
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
+
+
 }
