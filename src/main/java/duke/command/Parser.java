@@ -82,6 +82,12 @@ public class Parser {
 			}
 
 			return new ListCommand();
+		case "find":
+			if (tokens.length != 2) {
+				throw new FindCommandParseException();
+			}
+
+			return new FindCommand(tokens[1]);
 		case "delete":
 			if (tokens.length != 2) {
 				throw new DeleteCommandParseException();

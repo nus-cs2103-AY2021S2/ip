@@ -81,6 +81,20 @@ public class TaskList {
             System.out.printf("\t%d. %s\n", ++i, t);
         }
 	}
+	
+	/**
+	 * Returns a list of string representation of Tasks instances that contains
+	 * the keyword ignoring case.
+	 *
+	 * @param	keyword		the keyword to be tested with
+	 * @return				a list of tasks that matches the keyword
+	 */
+	public List<String> find(String keyword) {
+		return tasks.stream()
+						.filter(task -> task.isMatching(keyword))
+						.map(task -> task.toString())
+						.collect(Collectors.toList());
+	}
 
 	/**
 	 * Removes a Task instance at a particular index.
