@@ -6,10 +6,10 @@ import java.util.Scanner;
  * The Ui class handles direct I/O from the user.
  */
 public class Ui {
-    
+
     private static final String WELCOME_MESSAGE = "Hello I'm Checklst! What can I do for you?";
 
-    Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     /**
      * Prints output in a standard format.

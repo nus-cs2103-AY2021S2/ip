@@ -6,12 +6,22 @@ import java.time.format.DateTimeParseException;
 
 import checklst.exception.ChecklstException;
 
-/** 
+/**
  * The Deadline class represents a Task with a specific Deadline.
  */
 public class Deadline extends Task {
-    
+
     protected final LocalDate dueDate;
+
+    protected Deadline(String name, LocalDate dueDate) {
+        super(name);
+        this.dueDate = dueDate;
+    }
+
+    protected Deadline(String name, boolean completed, LocalDate dueDate) {
+        super(name, completed);
+        this.dueDate = dueDate;
+    }
 
     /**
      * Creates a new Deadline object.
@@ -32,16 +42,6 @@ public class Deadline extends Task {
         }
 
         return new Deadline(splitInput[0], dueDate);
-    }
-
-    protected Deadline(String name, LocalDate dueDate) {
-        super(name);
-        this.dueDate = dueDate;
-    }
-
-    protected Deadline(String name, boolean completed, LocalDate dueDate) {
-        super(name, completed);
-        this.dueDate = dueDate;
     }
 
     @Override

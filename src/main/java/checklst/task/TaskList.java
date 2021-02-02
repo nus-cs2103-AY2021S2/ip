@@ -1,7 +1,7 @@
 package checklst.task;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import checklst.exception.ChecklstException;
@@ -10,11 +10,11 @@ import checklst.exception.ChecklstException;
  * The TaskList class wraps a list of Tasks and has various methods to process them.
  */
 public class TaskList {
-    
+
     private final List<Task> taskList;
 
     /**
-     * Creates a new TaskList object. 
+     * Creates a new TaskList object.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -33,7 +33,7 @@ public class TaskList {
         this.taskList.add(task);
         return String.format("Added: %s\n\tYou now have %d task(s) in the list!", task, this.taskList.size());
     }
- 
+
     /**
      * Completes a Task in the TaskList.
      * @param index The index (1-based) of the Task to be completed.
@@ -55,12 +55,12 @@ public class TaskList {
 
     /**
      * Deletes a Task from the TaskList based on index.
-     * @param index The index (1-based) of the Task to be deleted. 
+     * @param index The index (1-based) of the Task to be deleted.
      * @return The deleted Task.
      * @throws ChecklstException Exception thrown if index is out of bounds.
      */
     public Task deleteTask(int index) throws ChecklstException {
-        index--; 
+        index--;
 
         if (index < 0 || index >= this.taskList.size()) {
             throw new ChecklstException("The task index you have indicated does not exist!");
@@ -82,7 +82,7 @@ public class TaskList {
         List<Task> filteredList = this.taskList.stream()
             .filter(x -> x.name.contains(input))
             .collect(Collectors.toList());
-        
+
         if (filteredList.size() == 0) {
             throw new ChecklstException("No results found!!");
         }

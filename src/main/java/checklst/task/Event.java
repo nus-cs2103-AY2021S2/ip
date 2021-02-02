@@ -10,8 +10,18 @@ import checklst.exception.ChecklstException;
  * The Event class represents a Task which has a specific DateTime.
  */
 public class Event extends Task {
-    
+
     protected final LocalDate dateTime;
+
+    protected Event(String name, LocalDate dateTime) {
+        super(name);
+        this.dateTime = dateTime;
+    }
+
+    protected Event(String name, boolean completed, LocalDate dateTime) {
+        super(name, completed);
+        this.dateTime = dateTime;
+    }
 
     /**
      * Creates a new Event object.
@@ -34,16 +44,6 @@ public class Event extends Task {
         return new Event(splitInput[0], dateTime);
     }
 
-    protected Event(String name, LocalDate dateTime) {
-        super(name);
-        this.dateTime = dateTime;
-    }
-
-    protected Event(String name, boolean completed, LocalDate dateTime) {
-        super(name, completed);
-        this.dateTime = dateTime;
-    }
-
     @Override
     public Task complete() {
         return new Event(this.name, true, this.dateTime);
@@ -51,7 +51,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " 
+        return "[E]" + super.toString() + " (at: "
             + this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 

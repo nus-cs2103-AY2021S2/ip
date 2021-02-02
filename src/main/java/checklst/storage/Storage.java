@@ -11,7 +11,7 @@ import checklst.exception.ChecklstException;
  * The Storage class stores and processes the saved commands.
  */
 public class Storage {
-    
+
     private final ArrayList<String> commandHistory = new ArrayList<>();
 
     /**
@@ -43,7 +43,7 @@ public class Storage {
     }
 
     protected ArrayList<String> getCommandHistory() {
-       return this.commandHistory;
+        return this.commandHistory;
     }
 
 }

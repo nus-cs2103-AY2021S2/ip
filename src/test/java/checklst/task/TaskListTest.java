@@ -1,8 +1,8 @@
 package checklst.task;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +32,7 @@ public class TaskListTest {
         assertThrows(ChecklstException.class, () -> this.taskList.deleteTask(0));
         assertThrows(ChecklstException.class, () -> this.taskList.deleteTask(1));
     }
-    
+
     @Test
     public void findTaskTest() throws ChecklstException {
         Task task = new Todo("hello");

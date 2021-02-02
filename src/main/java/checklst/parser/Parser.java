@@ -1,19 +1,19 @@
 package checklst.parser;
 
-import checklst.task.Event;
 import checklst.exception.ChecklstException;
 import checklst.storage.Storage;
 import checklst.task.Deadline;
+import checklst.task.Event;
 import checklst.task.Task;
 import checklst.task.TaskList;
 import checklst.task.Todo;
 import checklst.ui.Ui;
 
-/**  
+/**
  * The Parser class makes sense of inputs and runs the respective follow up methods.
  */
 public class Parser {
-    
+
     /**
      * Processes input commands and calls the respective command methods.
      * @param input Input string.
@@ -68,7 +68,7 @@ public class Parser {
      * Processes input commands from the saved history and calls the respective command methods
      * but without ui output or storage.
      * @param input Input string.
-     * @param storage Storage instance for saving of commands.
+     * @param taskList TaskList instance for manipulating tasks.
      */
     public void parseHistoryCommand(String[] input, TaskList taskList) {
         try {
@@ -93,11 +93,13 @@ public class Parser {
                 Task newDeadline = Deadline.makeDeadline(input[1]);
                 taskList.add(newDeadline);
                 break;
+            default:
+                break;
             }
         } catch (ChecklstException e) {
             // Nothing because all exceptions should be handled on initial run.
         }
-        
+
     }
 
 }

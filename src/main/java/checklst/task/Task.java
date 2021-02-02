@@ -4,7 +4,7 @@ package checklst.task;
  * The Task class is an abstract skeleton that all Tasks (Todo, Event, Deadline) inherit from.
  */
 public abstract class Task {
-    
+
     protected final String name;
     protected final boolean completed;
 

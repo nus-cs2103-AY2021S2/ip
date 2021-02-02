@@ -14,7 +14,11 @@ import checklst.ui.Ui;
  * The Checklst Class represents the entry point of the Checklst Program.
  */
 public class Checklst {
-    
+
+    private final Ui ui = new Ui();
+    private final Parser parser = new Parser();
+    private final Storage storage = new Storage();
+
     /**
      * The main function of the Checklst Program.
      * Creates and initializes an instance of Checklst and runs it.
@@ -24,10 +28,6 @@ public class Checklst {
         Checklst checklst = new Checklst();
         checklst.run();
     }
-
-    private final Ui ui = new Ui();
-    private final Parser parser = new Parser();
-    private final Storage storage = new Storage();
 
     /**
      * Main function to run the Checklst Program.

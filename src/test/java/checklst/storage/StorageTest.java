@@ -25,5 +25,5 @@ public class StorageTest {
         this.storage.removeLastCommand();
         assertTrue(this.storage.getCommandHistory().size() == 0);
     }
-    
+
 }

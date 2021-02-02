@@ -7,6 +7,14 @@ import checklst.exception.ChecklstException;
  */
 public class Todo extends Task {
 
+    protected Todo(String name) {
+        super(name);
+    }
+
+    protected Todo(String name, boolean completed) {
+        super(name, completed);
+    }
+
     /**
      * Creates a Todo Object.
      * @param name - Name of Todo.
@@ -17,14 +25,6 @@ public class Todo extends Task {
             throw new ChecklstException("Todo needs a name!");
         }
         return new Todo(name);
-    }
-    
-    protected Todo(String name) {
-        super(name);
-    }
-
-    protected Todo(String name, boolean completed) {
-        super(name, completed);
     }
 
     @Override

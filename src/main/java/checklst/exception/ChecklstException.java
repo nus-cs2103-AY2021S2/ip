@@ -1,10 +1,10 @@
 package checklst.exception;
 
-/** 
- * Custom exception to represent Exceptions in the Checklst program. 
+/**
+ * Custom exception to represent Exceptions in the Checklst program.
  */
 public class ChecklstException extends Exception {
-    
+
     /**
      *
      */
