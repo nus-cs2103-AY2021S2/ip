@@ -30,8 +30,9 @@ public class Duke {
     }
 
     /**
-     * Prints welcome message and reads the user inputs and execute the respective command.
-     * Exit when the user types 'bye'.
+     * Parses the user's input and executes its command.
+     *
+     * @param input input from user
      */
     public String getResponse(String input) {
         try {
