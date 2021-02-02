@@ -2,9 +2,9 @@ public class Ui {
     private static final String LINE = "----------------------------------------------\n";
     private static final String GREETING = LINE
             + "Hello! I`m Duke\n"
-            + "How can i help you?\n "
+            + "Please enter file name to load tasks\n "
             + LINE;
-    private static final String START = LINE + "Please start entering your command : ";
+    private static final String START = "File loaded, what do you want to do? ";
 
     private static TaskList tasks;
     private static Storage storage;
