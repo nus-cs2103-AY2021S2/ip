@@ -29,16 +29,15 @@ public class TaskList {
     /**
      * Iterate Task object in list and ask Ui to print them
      */
-    public void iterateList() {
+    public String iterateList() {
         if (this.tasks.size() == 0) {
-            Ui.showMessage("There are no task in your list");
-            return;
+            return Ui.showMessage("There are no task in your list");
         }
-        Ui.showMessageInALine("Here are the tasks in your list:");
+        String output = Ui.showMessage("Here are the tasks in your list:");
         for (int i = 0; i < this.tasks.size(); i++) {
-            Ui.showMessageInALine(String.valueOf(i + 1) + "." + this.tasks.get(i));
+            output += Ui.showMessage(String.valueOf(i + 1) + "." + this.tasks.get(i));
         }
-        Ui.printLine();
+        return output;
     }
 
     /**
@@ -46,16 +45,16 @@ public class TaskList {
      * @param input The String representation of the index of the task
      * @throws DukeException Index out of bound
      */
-    public void finishATask(String input) throws DukeException {
+    public String finishATask(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input) - 1;
             this.tasks.set(index, this.tasks.get(index).finishTask());
-            Ui.finishTaskMessage(this.tasks.get(index).toString());
+            return Ui.finishTaskMessage(this.tasks.get(index).toString());
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The index of done cannot be empty.");
+            throw new DukeException("OOPS!!! The index of done cannot be empty.");
         }
         catch(IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The index of done exceed the tasks' list.");
+            throw new DukeException("OOPS!!! The index of done exceed the tasks' list.");
         }
     }
 
@@ -64,18 +63,18 @@ public class TaskList {
      * @param input The String representation of the index of the task
      * @throws DukeException Index out of bound
      */
-    public void deleteATask(String input) throws DukeException {
+    public String deleteATask(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input) - 1;
             Task deleted = this.tasks.get(index);
             this.tasks.remove(index);
-            Ui.deleteTaskMessage(deleted.toString(), this.tasks.size());
+            return Ui.deleteTaskMessage(deleted.toString(), this.tasks.size());
         }
         catch(ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The index of delete cannot be empty.");
+            throw new DukeException("OOPS!!! The index of delete cannot be empty.");
         }
         catch(IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The index of delete exceed the tasks' list.");
+            throw new DukeException("OOPS!!! The index of delete exceed the tasks' list.");
         }
     }
 
@@ -83,16 +82,16 @@ public class TaskList {
      * Add task to the current TaskList
      * @param task Task that is going to be added
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.tasks.add(task);
-        Ui.addTaskMessage(task.toString(), this.tasks.size());
+        return Ui.addTaskMessage(task.toString(), this.tasks.size());
     }
 
     /**
      * Finding Tasks that match the keyword
      * @param keyword Keyword to find in list of Tasks
      */
-    public void findTasks(String keyword) {
+    public String findTasks(String keyword) {
         List<Task> temp = new ArrayList<>();
         for (Task task: this.tasks) {
             if (task.toString().contains(keyword)) {
@@ -100,14 +99,13 @@ public class TaskList {
             }
         }
         if (temp.size() == 0) {
-            Ui.showMessage("No matching task");
-            return;
+            return Ui.showMessage("No matching task");
         }
-        Ui.showMessageInALine("Here are the matching tasks in your list:");
+        String output = Ui.showMessage("Here are the matching tasks in your list:");
         for (int i = 0; i < temp.size(); i++) {
-            Ui.showMessageInALine(String.valueOf(i + 1) + "." + temp.get(i));
+            output += Ui.showMessage(String.valueOf(i + 1) + "." + temp.get(i));
         }
-        Ui.printLine();
+        return output;
 
     }
 

@@ -27,7 +27,10 @@ public class Todo extends Task {
      * @return Finished Todo object.
      */
     @Override
-    public Task finishTask() {
+    public Task finishTask() throws DukeException {
+        if (this.isDone) {
+            throw new DukeException("Task has been done before!");
+        }
         return new Todo(this.task, true);
     }
 

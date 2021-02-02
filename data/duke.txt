@@ -1,4 +1,3 @@
 T|1|makan
-E|1|mencari|20 June
-E|0|makan2|10 nov
-D|1|belajar|2020-10-03
+D|1|makan|2020-10-10
+T|0|menikah

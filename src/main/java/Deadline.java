@@ -65,7 +65,10 @@ public class Deadline extends Task {
      * @return a Task that has been done.
      */
     @Override
-    public Task finishTask() {
+    public Task finishTask() throws DukeException{
+        if (this.isDone) {
+            throw new DukeException("Task has been done before!");
+        }
         return new Deadline(this.task, this.deadline,true);
     }
 

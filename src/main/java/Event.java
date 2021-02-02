@@ -32,7 +32,10 @@ public class Event extends Task{
      * @return A new Event that has been done
      */
     @Override
-    public Task finishTask() {
+    public Task finishTask() throws DukeException{
+        if (this.isDone) {
+            throw new DukeException("Task has been done before!");
+        }
         return new Event(this.task, this.deadline, true);
     }
 
