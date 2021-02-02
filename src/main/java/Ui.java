@@ -11,14 +11,13 @@ public class Ui {
         return sc.nextLine();
     }
 
-    //user output at start
     public void printStart() {
         System.out.println(LINE);
         String logo =
-                "      _ __ ___   ___  _   _ _ __ ___   ___  _   _ \n" +
-                        "     | '_ ` _ \\ / _ \\| | | | '_ ` _ \\ / _ \\| | | |\n" +
-                        "     | | | | | | (_) | |_| | | | | | | (_) | |_| |\n" +
-                        "     |_| |_| |_|\\___/ \\__,_|_| |_| |_|\\___/ \\__,_|";
+                "      _ __ ___   ___  _   _ _ __ ___   ___  _   _ \n"
+                      + "     | '_ ` _ \\ / _ \\| | | | '_ ` _ \\ / _ \\| | | |\n"
+                      + "     | | | | | | (_) | |_| | | | | | | (_) | |_| |\n"
+                      + "     |_| |_| |_|\\___/ \\__,_|_| |_| |_|\\___/ \\__,_|";
         System.out.println(logo + " is back!\n     What have you awoken MouMou for?");
         System.out.println(LINE);
     }
