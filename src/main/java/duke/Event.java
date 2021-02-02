@@ -4,21 +4,21 @@ package duke;
  * Represents a task with a duration specified in the "at" argument.
  */
 public class Event extends Task {
-    protected String at;
+    protected String inputAfterAt;
 
     /**
      * Creates a task with a duration specified in the "at" argument.
      *
-     * @param description Describes the task.
-     * @param at          Specifies the duration of this task.
+     * @param description  Describes the task.
+     * @param inputAfterAt Specifies the duration of this task.
      */
-    public Event(String description, String at) {
+    public Event(String description, String inputAfterAt) {
         super(description);
-        this.at = at;
+        this.inputAfterAt = inputAfterAt;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + inputAfterAt + ")";
     }
 }

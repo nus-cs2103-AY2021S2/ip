@@ -53,10 +53,10 @@ public class Ui {
     /**
      * Prints error message.
      *
-     * @param err Error message.
+     * @param error Error message.
      */
-    public static void printErr(String err) {
-        System.out.println(err);
+    public static void printError(String error) {
+        System.out.println(error);
     }
 
     public static void printLine() {

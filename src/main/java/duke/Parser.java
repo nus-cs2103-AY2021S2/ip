@@ -19,7 +19,7 @@ public class Parser {
     }
 
     /**
-     * Passing the command to the relevant methods.
+     * Passes the command to the relevant methods.
      *
      * @param command A string of the command to be carried out.
      */
@@ -58,7 +58,7 @@ public class Parser {
                 break;
             }
         } catch (DukeException | IllegalArgumentException e) {
-            Ui.printErr(e.getMessage());
+            Ui.printError(e.getMessage());
         }
     }
 
@@ -72,19 +72,19 @@ public class Parser {
     private void handleDone(String command) {
         try {
             int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task currTask = tasks.get(taskNum);
-            currTask.markDone();
-            System.out.println("Swee chai. It's done.\n" + currTask);
+            Task currentTask = tasks.get(taskNum);
+            currentTask.markDone();
+            System.out.println("Swee chai. It's done.\n" + currentTask);
             if (storage != null) {
                 storage.updateTaskDone(taskNum);
             }
         } catch (NumberFormatException e) {
-            Ui.printErr("Please enter a number from 1 to " + tasks.size() + " after done!");
+            Ui.printError("Please enter a number from 1 to " + tasks.size() + " after done!");
         } catch (IndexOutOfBoundsException e) {
             if (tasks.size() == 0) {
-                Ui.printErr("Your list is empty!");
+                Ui.printError("Your list is empty!");
             } else {
-                Ui.printErr("Please enter a number from 1 to " + tasks.size() + " after done!");
+                Ui.printError("Please enter a number from 1 to " + tasks.size() + " after done!");
             }
         }
     }
@@ -98,19 +98,19 @@ public class Parser {
     private void handleDelete(String command) {
         try {
             int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task currTask = tasks.remove(taskNum);
-            System.out.println("See la. It's deleted.\n" + currTask
+            Task currentTask = tasks.remove(taskNum);
+            System.out.println("See la. It's deleted.\n" + currentTask
                     + "\nYou currently have " + tasks.size() + " task(s) in the list.");
             if (storage != null) {
                 storage.deleteTask(taskNum);
             }
         } catch (NumberFormatException e) {
-            Ui.printErr("Please enter a number from 1 to " + tasks.size() + " after delete!");
+            Ui.printError("Please enter a number from 1 to " + tasks.size() + " after delete!");
         } catch (IndexOutOfBoundsException e) {
             if (tasks.size() == 0) {
-                Ui.printErr("Your list is empty!");
+                Ui.printError("Your list is empty!");
             } else {
-                Ui.printErr("Please enter a number from 1 to " + tasks.size() + " after delete!");
+                Ui.printError("Please enter a number from 1 to " + tasks.size() + " after delete!");
             }
         }
     }
@@ -130,21 +130,21 @@ public class Parser {
         try {
             String query = command.split(" ", 2)[1].trim();
             StringBuffer reply = new StringBuffer();
-            boolean found = false;
+            boolean isFound = false;
             for (int i = 1; i <= tasks.size(); i++) {
                 if (tasks.get(i - 1).toString().contains(query)) {
-                    found = true;
+                    isFound = true;
                     reply.append(i + "." + tasks.get(i - 1) + "\n");
                 }
             }
-            if (found) {
+            if (isFound) {
                 reply.insert(0, "Here are the matching tasks in your list:\n");
                 System.out.print(reply);
             } else {
                 System.out.println("There are no tasks that match \"" + query + "\"!");
             }
         } catch (IndexOutOfBoundsException e) {
-            Ui.printErr("Please type in your query after find!");
+            Ui.printError("Please type in your query after find!");
         }
     }
 }

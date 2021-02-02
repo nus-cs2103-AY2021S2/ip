@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  * If deadline is parsable as a LocalDateTime or LocalDate, it will be stored in the variable byDateTime or byDate.
  */
 public class Deadline extends Task {
-    protected String by;
+    protected String inputAfterBy;
     protected LocalDateTime byDateTime;
     protected LocalDate byDate;
 
@@ -19,31 +19,31 @@ public class Deadline extends Task {
      * Tries to parse deadline in various DateTimeFormatter patterns and stores as LocalDateTime object in byDateTime,
      * or store as LocalDate object in byDate.
      *
-     * @param description Describes the task.
-     * @param by          Specifies the deadline of this task.
+     * @param description  Describes the task.
+     * @param inputAfterBy Specifies the deadline of this task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String inputAfterBy) {
         super(description);
-        this.by = by;
+        this.inputAfterBy = inputAfterBy;
 
         try {
-            byDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+            byDateTime = LocalDateTime.parse(inputAfterBy, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
         } catch (DateTimeParseException ignored) {
         }
         try {
-            byDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy kkmm"));
+            byDateTime = LocalDateTime.parse(inputAfterBy, DateTimeFormatter.ofPattern("dd/MM/yyyy kkmm"));
         } catch (DateTimeParseException ignored) {
         }
         try {
-            byDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy kkmm"));
+            byDateTime = LocalDateTime.parse(inputAfterBy, DateTimeFormatter.ofPattern("dd-MM-yyyy kkmm"));
         } catch (DateTimeParseException ignored) {
         }
         try {
-            byDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            byDate = LocalDate.parse(inputAfterBy, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         } catch (DateTimeParseException ignored) {
         }
         try {
-            byDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            byDate = LocalDate.parse(inputAfterBy, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (DateTimeParseException ignored) {
         }
     }
@@ -51,7 +51,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (byDateTime == null && byDate == null) {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+            return "[D]" + super.toString() + " (by: " + this.inputAfterBy + ")";
         } else if (byDateTime != null) {
             return "[D]" + super.toString()
                     + " (by: " + byDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, ha")) + ")";

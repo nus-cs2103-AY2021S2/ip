@@ -8,7 +8,7 @@ package duke;
 public class Duke {
     /**
      * Starts Duke with instance of Ui, Storage, TaskList, and Parser to receive input and serve output.
-     * @param args
+     * @param args Command line arguments passed when running main.
      */
     public static void main(String[] args) {
         Ui ui = Ui.startUi();
