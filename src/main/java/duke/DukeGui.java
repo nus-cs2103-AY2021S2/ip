@@ -10,7 +10,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class DukeGui extends Application {
 
@@ -19,6 +20,9 @@ public class DukeGui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage primaryStage) {
@@ -60,18 +64,19 @@ public class DukeGui extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //step 3 add functionality
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
+
+        // scroll down when the height changes
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
 
         mainLayout.setPrefSize(400.0, 600.0);
@@ -85,6 +90,24 @@ public class DukeGui extends Application {
         // more code to be added here later
     }
 
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
     private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
@@ -92,4 +115,5 @@ public class DukeGui extends Application {
 
         return textToAdd;
     }
+
 }
