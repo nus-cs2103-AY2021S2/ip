@@ -26,7 +26,7 @@ public abstract class Task {
     */
     public String done() {
         this.isDone = true;
-        return Helper.formatStringArray(new String[] {"Nice! I've marked this task as done:", this.toString()});
+        return Helper.formatStrings(new String[] {"Nice! I've marked this task as done:", this.toString()});
     }
 
     public boolean isDescriptionContainsString(String input) {

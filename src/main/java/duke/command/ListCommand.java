@@ -43,7 +43,7 @@ public class ListCommand extends Command {
             //Map each filtered Task with Task.toString()
             List<String> taskStrings = matchedTasks.stream().map(Task::toString).collect(Collectors.toList());
             return "Found the following tasks on " + queryDate.toString() + ":" + System.lineSeparator()
-                    + System.lineSeparator() + Helper.formatStringArray(taskStrings);
+                    + System.lineSeparator() + Helper.formatStrings(taskStrings);
 
         } else {
             return list.formatList();

@@ -24,6 +24,6 @@ public class FindCommand extends Command {
         ArrayList<Task> filteredList = list.filter(task -> task.isDescriptionContainsString(keyword));
         List<String> tasksAsString = filteredList.stream().map(Task::toString).collect(Collectors.toList());
         tasksAsString.add(0, "Found " + tasksAsString.size() + " matching task(s):");
-        return Helper.formatStringArray(tasksAsString.toArray(new String[0]));
+        return Helper.formatStrings(tasksAsString.toArray(new String[0]));
     }
 }

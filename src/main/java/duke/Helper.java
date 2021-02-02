@@ -35,9 +35,9 @@ public class Helper {
     }
 
     /**
-     * Formats the array of input strings to an output string in which each input string is in a new line.
+     * Concatenates the input strings with a new line between them, except the last string.
      */
-    public static String formatStringArray(String[] input) {
+    public static String formatStrings(String ... input) {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < input.length; i++) {
             output.append(input[i]);
@@ -49,9 +49,9 @@ public class Helper {
     }
 
     /**
-     * Formats the List of input strings to an output string in which each input string is in a new line.
+     * Concatenates the input strings from the List with a new line between them, except the last string.
      */
-    public static String formatStringArray(List<String> input) {
+    public static String formatStrings(List<String> input) {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < input.size(); i++) {
             output.append(input.get(i));

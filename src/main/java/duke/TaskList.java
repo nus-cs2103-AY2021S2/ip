@@ -26,12 +26,12 @@ public class TaskList {
     public String add(Task task) throws DukeException {
         this.list.add(task);
         storage.writeTaskToFile(task);
-        return Helper.formatStringArray(new String[] {
+        return Helper.formatStrings(
             "Got it. I've added this task:",
             System.lineSeparator(),
             "    " + task.toString(),
             "Now you have " + this.list.size() + " tasks in the list."
-        });
+        );
     }
 
     /**
@@ -53,16 +53,16 @@ public class TaskList {
         this.list.remove(taskNumber - 1);
         //Rewrite all tasks
         rewriteTasks();
-        return Helper.formatStringArray(new String[] {
+        return Helper.formatStrings(
             "Noted. I've removed this task:",
             System.lineSeparator(),
             this.list.get(taskNumber - 1).toString(),
             "Now you have " + (this.list.size() - 1) + " tasks in the list."
-        });
+        );
     }
 
     /**
-     * Prints to console all tasks that are present in the list.
+     * Returns the formatted string containing all tasks that are present in this TaskList.
      */
     public String formatList() {
         String[] printedArray = new String[this.list.size() + 1];
@@ -72,7 +72,7 @@ public class TaskList {
                     + this.list.get(i).toString();
             printedArray[i + 1] = listEntry;
         }
-        return Helper.formatStringArray(printedArray);
+        return Helper.formatStrings(printedArray);
     }
 
     /**
