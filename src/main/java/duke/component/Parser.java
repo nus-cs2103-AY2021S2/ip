@@ -1,30 +1,30 @@
 package duke.component;
 
-import duke.command.Command;
 import duke.command.AddCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-
 import duke.exception.EmptyDescriptionException;
 import duke.exception.UnknownCommandException;
 import duke.exception.WrongFormatException;
-import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.ToDo;
 
 public class Parser {
     /**
      * Parses command and generate task accordingly.
      * @param command
-     * @return
+     * @return the corresponding Command
      * @throws UnknownCommandException
      * @throws EmptyDescriptionException
      * @throws WrongFormatException
      */
-    public static Command parse(String command) throws UnknownCommandException, EmptyDescriptionException, WrongFormatException {
+    public static Command parse(String command)
+            throws UnknownCommandException, EmptyDescriptionException, WrongFormatException {
         String[] parameters = command.split(" ");
         switch (parameters[0]) {
         case "bye": {
@@ -71,12 +71,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a new AddCommand for Deadline.
+     * @param command
+     * @return corresponding AddComand
+     * @throws WrongFormatException
+     * @throws EmptyDescriptionException
+     */
     public static AddCommand parseDeadline(String command) throws WrongFormatException, EmptyDescriptionException {
         int slash = command.indexOf("/by");
         if (slash == -1) {
             throw new WrongFormatException();
-        }
-        else if (slash <= 10 || command.split(" ").length <= 2) {
+        } else if (slash <= 10 || command.split(" ").length <= 2) {
             throw new EmptyDescriptionException("deadline");
         }
         String name = command.substring(9, slash - 1);
@@ -86,12 +92,18 @@ public class Parser {
         return new AddCommand(dl);
     }
 
+    /**
+     * Creates a new AddCommand for Event.
+     * @param command
+     * @return corresponding AddCommand
+     * @throws WrongFormatException
+     * @throws EmptyDescriptionException
+     */
     public static AddCommand parseEvent(String command) throws WrongFormatException, EmptyDescriptionException {
         int slash = command.indexOf("/at");
         if (slash == -1) {
             throw new WrongFormatException();
-        }
-        else if (slash <= 7 || command.split(" ").length <= 2) {
+        } else if (slash <= 7 || command.split(" ").length <= 2) {
             throw new EmptyDescriptionException("event");
         }
         String name = command.substring(6, slash - 1);

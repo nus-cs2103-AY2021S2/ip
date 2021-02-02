@@ -6,6 +6,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDate at;
 
+    /**
+     * Creates a new Event.
+     * @param name
+     * @param at
+     */
     public Event(String name, String at) {
         super(name);
         this.at = LocalDate.parse(at);

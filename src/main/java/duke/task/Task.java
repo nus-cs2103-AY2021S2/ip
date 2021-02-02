@@ -1,11 +1,15 @@
 package duke.task;
 
 public class Task {
-    protected static String DATE_DISPLAY_FORMAT = "MMM d yyyy";
-    protected static String DATE_SAVE_FORMAT = "yyyy-MM-dd";
+    protected static final String DATE_DISPLAY_FORMAT = "MMM d yyyy";
+    protected static final String DATE_SAVE_FORMAT = "yyyy-MM-dd";
     private String name;
     private boolean isDone;
 
+    /**
+     * Creates a new Task.
+     * @param name
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
