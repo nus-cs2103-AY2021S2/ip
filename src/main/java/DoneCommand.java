@@ -7,7 +7,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int num;
-        Task t;
+        Task task;
         String respone;
 
         try {
@@ -21,8 +21,8 @@ public class DoneCommand extends Command {
         } else {
             num--;
             tasks.doneTask(num);
-            t = tasks.list.get(num);
-            respone = ui.showDone(t);
+            task = tasks.list.get(num);
+            respone = ui.showDone(task);
             storage.store(tasks.list);
         }
 

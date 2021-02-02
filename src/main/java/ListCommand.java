@@ -4,12 +4,13 @@ public class ListCommand extends Command {
         super(action, info);
     }
 
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String respone;
         if (tasks.size == 0) {
             throw new DukeException("OOPS!!! There is currently no tasks for you.");
         } else {
-            respone = ui.showList() + "\n" + tasks.listStrTask();
+            respone = ui.showList() + "\n" + tasks.listTask();
         }
         return respone;
     }

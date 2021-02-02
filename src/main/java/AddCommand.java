@@ -27,7 +27,7 @@ public class AddCommand extends Command {
         size = tasks.size;
         t = (tasks.list).get(size - 1);
 
-        respone = ui.showAdd(t, size);
+        respone = ui.showAddMessage(t, size);
         storage.store(tasks.list);
         return respone;
     }

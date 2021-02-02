@@ -5,13 +5,15 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor to set up Duke with previously stored file.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("Duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -26,11 +28,12 @@ public class Duke {
     public String getResponse(String input) {
         String respone;
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.getCommand(input);
             respone = c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             respone = ui.showError(e.getMessage());
         }
         return respone;
     }
+
 }

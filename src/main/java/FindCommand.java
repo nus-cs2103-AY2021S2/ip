@@ -10,7 +10,7 @@ public class FindCommand extends Command {
         if (info.equals("")) {
             throw new DukeException("OOPS!!! The description cannot be empty.");
         } else {
-            respone = ui.showFind() + "\n" + tasks.findStrTask(info);
+            respone = ui.showFind() + "\n" + tasks.findTask(info);
         }
         return respone;
     }

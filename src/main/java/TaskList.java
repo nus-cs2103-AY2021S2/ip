@@ -63,13 +63,7 @@ public class TaskList {
     /**
      * Show all the tasks in the list.
      */
-    public void listTask() {
-        for (int i = 0; i < size; i++) {
-            System.out.println((i + 1) + "." + list.get(i));
-        }
-    }
-
-    public String listStrTask() {
+    public String listTask() {
         String respone = "";
         for (int i = 0; i < size; i++) {
             respone = respone + (i + 1) + "." + list.get(i) + "\n";
@@ -80,26 +74,10 @@ public class TaskList {
     /**
      * Find the tasks which has similar name to the string.
      *
-     * @param task string to be searched.
-     */
-    public void findTask(String task) {
-        int num = 1;
-
-        for (int i = 0; i < size; i++) {
-            String string = list.get(i).toString();
-            if (string.contains(task)) {
-                System.out.println(num++ + "." + string);
-            }
-        }
-    }
-
-    /**
-     * Find the tasks which has similar name to the string.
-     *
      * @param task
      * @return task found
      */
-    public String findStrTask(String task) {
+    public String findTask(String task) {
         int num = 1;
         String respone = "";
 
@@ -115,26 +93,10 @@ public class TaskList {
     /**
      * Search for tasks which take place at that timing.
      *
-     * @param time string to be searched.
-     */
-    public void dateTask(String time) {
-        int num = 1;
-
-        for (int i = 0; i < size; i++) {
-            String string = list.get(i).toString();
-            if (string.contains(time)) {
-                System.out.println(num++ + "." + string);
-            }
-        }
-    }
-
-    /**
-     * Search for tasks which take place at that timing.
-     *
      * @param time
      * @return task found
      */
-    public String dateStrTask(String time) {
+    public String searchDateTask(String time) {
         int num = 1;
         String respone = "";
 

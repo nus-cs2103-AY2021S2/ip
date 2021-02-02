@@ -22,7 +22,7 @@ public class DateCommand extends Command {
             } catch (DateTimeParseException e) {
                 throw new DukeException("OOPS!!! The timing is not in the correct format.");
             }
-            respone = ui.showDate(time) + "\n" + tasks.dateStrTask(time);
+            respone = ui.showDate(time) + "\n" + tasks.searchDateTask(time);
         }
 
         return respone;

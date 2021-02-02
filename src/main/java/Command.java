@@ -3,6 +3,12 @@ public abstract class Command {
     protected String action;
     protected String info;
 
+    /**
+     * Constructor to form a command with execute.
+     *
+     * @param action command
+     * @param info detail
+     */
     public Command(String action, String info) {
         this.action = action;
         this.info = info;

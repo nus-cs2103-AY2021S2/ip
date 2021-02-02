@@ -11,7 +11,7 @@ public class Parser {
      * @return command
      * @throws DukeException
      */
-    public static Command parse(String string) throws DukeException {
+    public static Command getCommand(String string) throws DukeException {
         String action;
         String info;
         Command command;
