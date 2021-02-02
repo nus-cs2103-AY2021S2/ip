@@ -1,8 +1,4 @@
-package duke.command;
-
-import duke.util.Parser;
-import duke.util.Ui;
-import duke.task.TaskList;
+package duke;
 
 public abstract class Command {
     protected final String command;

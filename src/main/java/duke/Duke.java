@@ -2,12 +2,6 @@ package duke;
 
 import java.util.Scanner;
 
-import duke.task.TaskList;
-import duke.util.*;
-import duke.command.*;
-import duke.exception.DukeException;
-import duke.exception.WrongCommandDukeException;
-
 public class Duke {
     private TaskList tasks;
     private Storage storage;
@@ -29,15 +23,15 @@ public class Duke {
     /**
      * Starts the Duke program.
      */
-    private void run() {
+    public void run() {
         ui.printGreeting();
         storage.loadTaskList(tasks);
         Scanner sc = new Scanner(System.in);
-        boolean exit = false;
-        while (!exit) {
+        boolean shouldExit = false;
+        while (!shouldExit) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
-                exit = true;
+                shouldExit = true;
                 ui.printBye();
             } else {
                 executeCommand(input);
@@ -73,8 +67,10 @@ public class Duke {
         } catch (DukeException e) {
             ui.printError(e);
         }
-        cmd.execute();
-        tasks = cmd.getTaskList();
+        if (cmd != null) {
+            cmd.execute();
+            tasks = cmd.getTaskList();
+        }
     }
 
     /**

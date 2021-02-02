@@ -1,8 +1,4 @@
-package duke.command;
-
-import duke.task.TaskList;
-import duke.exception.DukeException;
-import duke.exception.WrongFormatDukeException;
+package duke;
 
 public class ListTaskCommand extends Command {
 
@@ -27,6 +23,9 @@ public class ListTaskCommand extends Command {
         }
     }
 
+    /**
+     * Executes the list task command.
+     */
     @Override
     public void execute() {
         listTask();

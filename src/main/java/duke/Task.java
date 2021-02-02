@@ -1,16 +1,27 @@
-package duke.task;
+package duke;
 
 public abstract class Task {
     public String input;
-    public boolean isDone;
-    static String CHECKED = "[X]";
-    static String UNCHECKED = "[ ]";
+    private boolean isDone;
+    public static String CHECKED = "[X]";
+    public static String UNCHECKED = "[ ]";
 
     public Task(String input) {
         this.input = input;
         this.isDone = false;
     }
 
+    public String getMark() {
+        if (isDone) {
+            return CHECKED;
+        } else  {
+            return UNCHECKED;
+        }
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
 
     private String getDescription() {
         return this.input;
@@ -33,8 +44,16 @@ public abstract class Task {
         return containsKeyword;
     }
 
+    /**
+     * Returns the task in a String format that can be saved by the file writer.
+     *
+     * @return Formatted string of task.
+     */
     public abstract String formatToSave();
 
+    /**
+     * Marks the task as done.
+     */
     public void checkTask() {
         this.isDone = true;
     }

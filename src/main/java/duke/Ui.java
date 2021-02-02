@@ -1,14 +1,10 @@
-package duke.util;
-
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.exception.DukeException;
+package duke;
 
 public class Ui {
-    private final String spacer = "----------------------------------------------------";
+    private final String SPACER = "----------------------------------------------------";
 
     private void printSpacer() {
-        System.out.println(spacer);
+        System.out.println(SPACER);
     }
 
     /**
@@ -114,6 +110,7 @@ public class Ui {
         System.out.println("'event (task description) /from (DD/MM/YYYY TIME) /to (DD/MM/YYYY TIME)' (adds an Event task to your list)");
         System.out.println("'done (valid index)' (checks a task on your list)");
         System.out.println("'delete (valid index)' (removes a task from your list)");
+        System.out.println("'find (keyword)' (searches for all tasks in your list containing the keyword)");
         System.out.println("Do omit the parentheses in the actual command.");
         System.out.println("I pray that I will be of use to you.");
         printSpacer();

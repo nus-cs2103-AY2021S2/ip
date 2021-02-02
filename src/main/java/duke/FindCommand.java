@@ -1,10 +1,4 @@
-package duke.command;
-
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.exception.DukeException;
-import duke.exception.WrongFormatDukeException;
-import duke.exception.NoSuchKeywordException;
+package duke;
 
 public class FindCommand extends Command {
 
@@ -41,6 +35,9 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Executes the find command.
+     */
     @Override
     public void execute() {
         find();

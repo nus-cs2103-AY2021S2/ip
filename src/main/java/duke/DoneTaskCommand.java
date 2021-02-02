@@ -1,8 +1,4 @@
-package duke.command;
-
-import duke.task.TaskList;
-import duke.exception.DukeException;
-import duke.exception.WrongFormatDukeException;
+package duke;
 
 public class DoneTaskCommand extends Command {
 
@@ -29,6 +25,9 @@ public class DoneTaskCommand extends Command {
         }
     }
 
+    /**
+     * Executes the done task command.
+     */
     @Override
     public void execute() {
         doTask();

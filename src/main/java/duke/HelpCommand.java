@@ -1,8 +1,4 @@
-package duke.command;
-
-import duke.task.TaskList;
-import duke.exception.DukeException;
-import duke.exception.WrongFormatDukeException;
+package duke;
 
 public class HelpCommand extends Command {
 
@@ -27,6 +23,9 @@ public class HelpCommand extends Command {
         }
     }
 
+    /**
+     * Executes the help command.
+     */
     @Override
     public void execute() {
         help();

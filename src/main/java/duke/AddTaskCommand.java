@@ -1,15 +1,7 @@
-package duke.command;
+package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.exception.DukeException;
-import duke.exception.WrongFormatDukeException;
 
 public class AddTaskCommand extends Command {
 
@@ -88,6 +80,9 @@ public class AddTaskCommand extends Command {
         }
     }
 
+    /**
+     * Executes the add task command.
+     */
     @Override
     public void execute() {
         if (command.equals("todo")) {

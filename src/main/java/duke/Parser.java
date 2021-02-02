@@ -1,9 +1,11 @@
-package duke.util;
+package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
+    private final int DEADLINE_SUB = 9;
+    private final int EVENT_SUB = 6;
 
     private LocalDateTime parseDate(String date) {
         LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/M/yyyy Hmm"));
@@ -83,7 +85,7 @@ public class Parser {
      */
     public String parseDeadlineDescription(String input) {
         String[] details = input.split(" /by ");
-        return details[0].substring(9);
+        return details[0].substring(DEADLINE_SUB);
     }
 
     /**
@@ -132,7 +134,7 @@ public class Parser {
      */
     public String parseEventDescription(String input) {
         String[] details = input.split(" /from ");
-        return details[0].substring(6);
+        return details[0].substring(EVENT_SUB);
     }
 
     /**
@@ -166,11 +168,7 @@ public class Parser {
      * @return Boolean.
      */
     public boolean canParseListCommand(String input) {
-        if (input.equals("list") || input.equals("list ")) {
-            return true;
-        } else {
-            return false;
-        }
+       return input.equals("list") || input.equals("list ");
     }
 
     /**

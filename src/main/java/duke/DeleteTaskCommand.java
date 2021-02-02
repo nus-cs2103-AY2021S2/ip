@@ -1,9 +1,4 @@
-package duke.command;
-
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.exception.DukeException;
-import duke.exception.WrongFormatDukeException;
+package duke;
 
 public class DeleteTaskCommand extends Command {
 
@@ -30,6 +25,9 @@ public class DeleteTaskCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to remove task.
+     */
     @Override
     public void execute() {
         removeTask();

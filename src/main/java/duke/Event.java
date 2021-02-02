@@ -1,4 +1,4 @@
-package duke.task;
+package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +24,7 @@ public class Event extends Task {
     @Override
     public String formatToSave() {
         String str = "E | ";
-        if (isDone) {
+        if (isDone()) {
             str += "X |";
         } else {
             str += "O |";
@@ -43,12 +43,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         String str = "[E]";
-        if (isDone) {
-            str += CHECKED;
-        } else {
-            str += UNCHECKED;
-        }
-        str += " " + description + " (from: " + startDate.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"))
+        str += this.getMark() + " " + description
+                + " (from: " + startDate.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"))
                 + " - " + endDate.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm")) + ")";
         return str;
     }
