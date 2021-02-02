@@ -36,19 +36,20 @@ public class Parser {
     * <li>delete <int:number> - Deletes item number specified (1-based)</li>
     * </ul>
     * @param in the input command entered by user
-    * @param TaskList the TaskList object the commands will be processed on
+    * @TaskList the TaskList object the commands will be processed on
     * @return String object containing results of processing 
     */
     public String process(String in, TaskList tl){
         
         try {
-            
+
             String res = "";
             
             String[] split = in.split("\\s");
             
             String cmd = split[0];
-            
+
+
             switch(cmd) {
             case "bye":
                 end = true;
@@ -197,7 +198,7 @@ public class Parser {
             }
             
             return res;
-            
+
         } catch(DukeException de) {
             return de.getMessage();
         }
