@@ -7,7 +7,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 
@@ -29,6 +33,12 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clip);
 
         this.setAlignment(Pos.CENTER_RIGHT);
+
+        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTGREEN,
+                CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(background_fill);
+        this.setBackground(background);
+
         this.setPadding(new Insets(10, 10, 10, 10));
         this.getChildren().addAll(text, displayPicture);
     }
@@ -38,6 +48,12 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         this.setAlignment(Pos.CENTER_LEFT);
+
+        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTGREY,
+                CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(background_fill);
+        this.setBackground(background);
+
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
