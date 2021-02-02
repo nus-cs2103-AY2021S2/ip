@@ -17,4 +17,8 @@ public class DukeTest {
     public void testDeadlineString() {
         assertEquals("[D][\u2717] sleep (by: Mar 29 2000)", new Deadline("sleep", false, "2000-03-29").toString());
     }
+
+    @Test void testEventString() {
+        assertEquals("[T][\u2717] sleep (at: Mar 29 2000)", new Deadline("sleep", false, "2000-03-29").toString());
+    }
 }
