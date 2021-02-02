@@ -24,6 +24,8 @@ public class Deadline extends Task{
                 Integer.parseInt(sorted[3].substring(2, 4)));//Minute
     }
 
+    /* format [D][X] {description} ({dayofweek} {time}, {day} {month} {year})
+     */
     @Override
     public String toString() {
         String type = "[D]";
