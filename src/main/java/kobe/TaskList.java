@@ -161,6 +161,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds a task corresponding to the String input by the user
+     *
+     * @param keyword  the String input by the user
+     * @param ui  the user interface to inform the user of the outcome
+     */
     public void findTask(String keyword, Ui ui) {
         ui.showLine();
         System.out.print(ui.ind() + "Kobe has found these tasks in your list:\n");
