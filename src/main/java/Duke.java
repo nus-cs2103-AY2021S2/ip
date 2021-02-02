@@ -17,16 +17,6 @@ public class Duke {
     }
 
 
-
-    public void Greet() {
-        String greeting = "____________________________________________________________\n"
-                + "Hello! I'm Duke, 恭喜发财 \u263a.\n"
-                + "What can I do for you?\n"
-                + "____________________________________________________________\n";
-        System.out.println(greeting);
-
-    }
-
     public void run() throws InvalidCommandException {
         Scanner sc = new Scanner(System.in);
         String description = sc.nextLine();
@@ -34,17 +24,6 @@ public class Duke {
         parser.readCommand(description);
     }
 
-
-    public void Exit() {
-            String exit = "____________________________________________________________\n"
-            + "Bye. Hope to see you again soon!\n"
-            + "Wish you all the best for CS2103T\n"
-            + "____________________________________________________________\n";
-
-            canExit = true;
-            System.out.println(exit);
-
-        }
 
     public static void main(String[] args) {
 
@@ -58,7 +37,7 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
 
-        duke.Greet();
+        duke.ui.Greet();
 
         Storage dukeBot = new Storage(path);
         dukeBot.taskRecorder();
@@ -76,7 +55,7 @@ public class Duke {
         }
 
         dukeBot.record(taskList);
-        duke.Exit();
+        duke.ui.Exit();
 
         
     }
