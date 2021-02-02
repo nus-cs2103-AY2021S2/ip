@@ -1,20 +1,21 @@
 package duke;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class InputHandler {
-    private final ArrayList<Task> taskList;
+    private final List<Task> taskList;
 
     public InputHandler() {
         this.taskList = new ArrayList<>();
     }
 
-    public InputHandler(ArrayList<Task> taskList) {
+    public InputHandler(List<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public ArrayList<Task> getTaskList() {
+    public List<Task> getTaskList() {
         return this.taskList;
     }
 
