@@ -75,6 +75,8 @@ public class Storage {
                     taskInList = new Deadline(deadline, deadlineDetail);
                     taskList.add(taskInList);
                     break;
+                default:
+
                 }
             }
             catch (Exception e) {
