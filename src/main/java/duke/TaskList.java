@@ -31,12 +31,15 @@ class TaskList {
     /**
      * Iterates over the task list and prints out all the tasks.
      */
-    public void listTask() {
-        System.out.println("Here are the tasks in your list:");
+    public String listTask() {
+        String result = "";
+        result += "Here are the tasks in your list:";
         for (int i = 0; i < taskList.size(); i++) {
             Task currTask = taskList.get(i);
-            System.out.println(i + 1 + "." + currTask);
+            result += "\n";
+            result += i + 1 + "." + currTask;
         }
+        return result;
     }
 
     /**
@@ -45,16 +48,18 @@ class TaskList {
      * @param index the index of the task which is completed
      * @throws DukeException is thrown when the index given is invalid
      */
-    protected void doneTask(int index) throws DukeException {
+    protected String doneTask(int index) throws DukeException {
+        String result = "";
         if (this.taskList.size() >= index) {
             Task currTask = this.taskList.get(index - 1);
             currTask.completeTask();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  " + currTask);
+            result += "Nice! I've marked this task as done:\n";
+            result += "  " + currTask;
         } else {
-            System.out.println("Task not found");
+            result += "Task not found";
         }
         Storage.update(this.taskList);
+        return result;
     }
 
     /**
@@ -62,16 +67,18 @@ class TaskList {
      *
      * @param index the index of the task to be deleted
      */
-    public void delete(int index) {
+    public String delete(int index) {
+        String result = "";
         int deleteIndex = index;
         if (this.taskList.size() >= deleteIndex) {
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + this.taskList.remove(deleteIndex - 1));
-            System.out.println(this);
+            result += "Noted. I've removed this task:\n";
+            result += "  " + this.taskList.remove(deleteIndex - 1);
+            result += this;
         } else {
-            System.out.println("Task not found");
+            result += "Task not found";
         }
         Storage.update(this.taskList);
+        return result;
     }
 
     /**
@@ -79,13 +86,15 @@ class TaskList {
      *
      * @param taskName the name of the todo task
      */
-    public void addToDo(String taskName) {
+    public String addToDo(String taskName) {
+        String result = "";
         ToDo newTask = new ToDo(taskName);
         this.taskList.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + newTask);
-        System.out.println(this);
+        result += "Got it. I've added this task:\n";
+        result += "  " + newTask + "\n";
+        result += this;
         Storage.update(this.taskList);
+        return result;
     }
 
     /**
@@ -94,13 +103,15 @@ class TaskList {
      * @param taskName the name of the event task
      * @param date the date in which the event takes place
      */
-    public void addEvent(String taskName, LocalDate date) {
+    public String addEvent(String taskName, LocalDate date) {
+        String result = "";
         Event newTask = new Event(taskName, date);
         this.taskList.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + newTask);
-        System.out.println(this);
+        result += "Got it. I've added this task:\n";
+        result += "  " + newTask + "\n";
+        result += this;
         Storage.update(this.taskList);
+        return result;
     }
 
     /**
@@ -109,21 +120,31 @@ class TaskList {
      * @param taskName the name of the deadline task
      * @param date the date in which the deadline is due
      */
-    public void addDeadline(String taskName, LocalDate date) {
+    public String addDeadline(String taskName, LocalDate date) {
+        String result = "";
         Deadline newTask = new Deadline(taskName, date);
         this.taskList.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + newTask);
-        System.out.println(this);
+        result += "Got it. I've added this task:\n";
+        result += "  " + newTask + "\n";
+        result += this;
         Storage.update(this.taskList);
+        return result;
     }
 
-    public void find(String keyWord) {
+    public String find(String keyWord) {
+        String result = "";
+        boolean isFirst = true;
         for (Task t : taskList) {
             if (t.getTaskName().toString().contains(keyWord)) {
-                System.out.println(t);
+                if (isFirst) {
+                    isFirst = false;
+                } else {
+                    result += "\n";
+                }
+                result += t;
             }
         }
+        return result;
     }
 
     /**
