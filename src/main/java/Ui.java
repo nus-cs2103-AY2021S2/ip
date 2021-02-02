@@ -1,7 +1,4 @@
 public class Ui {
-    private static final String INDENTATION = "    ";
-    private static final String REPLY_OUTLINE = INDENTATION + "____________________________________________________________";
-
     public Ui() {
     }
 
@@ -11,96 +8,81 @@ public class Ui {
      * @param line Line to format.
      * @return Formatted line.
      */
-    public String formatLine(String line) {
-        return INDENTATION + line + "\n";
+    public static String formatLine(String line) {
+        return line + "\n";
     }
 
-    /**
-     * Styles and prints given string.
-     *
-     * @param msg Message to print.
-     */
-    public void reply(String msg) {
-        System.out.println(REPLY_OUTLINE + "\n" + msg + REPLY_OUTLINE + "\n");
-    }
-
-    public void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        String msg = formatLine("Hello! I'm Duke")
+    public static String getGreeting() {
+        return formatLine("Hello! I'm Duke")
                 + formatLine("What can I do for you?");
-        reply(msg);
     }
 
     /**
-     * Prints a list of all tasks.
+     * Returns a formatted list of all tasks.
      *
      * @param tasks List of tasks.
+     * @return Formatted list of tasks.
      */
-    public void list(TaskList tasks) {
+    public static String list(TaskList tasks) {
         StringBuilder msg = new StringBuilder(formatLine("Here are the tasks in your list:"));
 
         for (int i = 0; i < tasks.size(); i++) {
             msg.append(formatLine((i + 1) + ". " + tasks.getTaskAt(i)));
         }
-        reply(msg.toString());
+        return msg.toString();
     }
 
-    public void exit() {
-        reply(formatLine("Bye. Hope to see you again soon!"));
+    public static String exit() {
+        return formatLine("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints a reply, having added a task.
+     * Returns the reply to having added a task.
      *
      * @param task Task that was added.
      * @param numTasks Total number of tasks in task list.
+     * @return Reply to having added a task.
      */
-    public void addedTaskReply(Task task, int numTasks) {
-        String msg = formatLine("Got it. I've added this task:")
+    public static String addedTaskReply(Task task, int numTasks) {
+        return formatLine("Got it. I've added this task:")
                 + formatLine("  " + task)
                 + formatLine("Now you have " + numTasks + " tasks in the list.");
-        reply(msg);
     }
 
     /**
-     * Prints a reply, having marked a task as done.
+     * Returns the reply to having marked a task as done.
      *
      * @param task Task that was marked as done.
+     * @return Reply to having marked a task as done.
      */
-    public void markDoneReply(Task task) {
-        String msg = formatLine("Nice! I've marked this task as done:")
+    public static String markDoneReply(Task task) {
+        return formatLine("Nice! I've marked this task as done:")
                 + formatLine("  " + task);
-        reply(msg);
     }
 
     /**
-     * Prints a reply, having deleted a task.
+     * Returns the reply to having deleted a task.
      *
      * @param deletedTask Task that was deleted.
      * @param numTasks Number of tasks in task list.
+     * @return Reply to having deleted a task.
      */
-    public void deleteReply(Task deletedTask, int numTasks) {
-        String msg = formatLine("Noted. I've removed this task:")
+    public static String deleteReply(Task deletedTask, int numTasks) {
+        return formatLine("Noted. I've removed this task:")
                 + formatLine("  " + deletedTask)
                 + formatLine("Now you have " + numTasks + " tasks in the list.");
-        reply(msg);
     }
 
-    public void listMatchingTasks(TaskList tasks) {
+    public static String listMatchingTasks(TaskList tasks) {
         if (tasks.size() > 0) {
             StringBuilder msg = new StringBuilder(formatLine("Here are the matching tasks in your list:"));
 
             for (int i = 0; i < tasks.size(); i++) {
                 msg.append(formatLine((i + 1) + ". " + tasks.getTaskAt(i)));
             }
-            reply(msg.toString());
+            return msg.toString();
         } else {
-            reply(formatLine("No matching tasks were found."));
+            return formatLine("No matching tasks were found.");
         }
     }
 }

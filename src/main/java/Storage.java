@@ -1,9 +1,9 @@
-import java.util.Arrays;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Storage {
     private final File file;
@@ -47,7 +47,7 @@ public class Storage {
         tasks.add(event);
     }
 
-    private void parseLine(String line, TaskList tasks, Ui ui) {
+    private void parseLine(String line, TaskList tasks) {
         String[] parts = Arrays.stream(line.split("\\|"))
                 .map(String::trim)
                 .toArray(String[]::new);
@@ -66,10 +66,8 @@ public class Storage {
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException exception) {
-            ui.reply(ui.formatLine(exception.getMessage()));
-        } catch (DateTimeParseException exception) {
-            ui.reply(ui.formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
+        } catch (UnknownCommandException | DateTimeParseException exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -77,14 +75,13 @@ public class Storage {
      * Reads and processes data from file.
      *
      * @param tasks List of tasks.
-     * @param ui Ui object.
      * @throws IOException If an error occurs while reading from the file.
      */
-    public void readFromFile(TaskList tasks, Ui ui) throws IOException {
+    public void readFromFile(TaskList tasks) throws IOException {
         if (!this.file.createNewFile()) {
             Scanner fileSc = new Scanner(this.file);
             while (fileSc.hasNextLine()) {
-                parseLine(fileSc.nextLine(), tasks, ui);
+                parseLine(fileSc.nextLine(), tasks);
             }
             fileSc.close();
         }
