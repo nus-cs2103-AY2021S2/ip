@@ -1,3 +1,11 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,24 +37,21 @@ public class Storage {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] taskData = line.split("\\|");
-                String taskType = taskData[0];
-                String taskStatus = taskData[1];
-                String taskDescription = taskData[2];
                 Task task = null;
 
-                switch(taskType) {
+                switch(taskData[0]) {
                 case("T"):
-                    task = new Todo(taskDescription);
+                    task = new Todo(taskData[2]);
                     break;
                 case("D"):
-                    task = new Deadline(taskDescription, taskData[3]);
+                    task = new Deadline(taskData[2], taskData[3]);
                     break;
                 case("E"):
-                    task = new Event(taskDescription, taskData[3]);
+                    task = new Event(taskData[2], taskData[3]);
                     break;
                 }
 
-                if (task != null && taskStatus.equals("1")) {
+                if (task != null && taskData[1].equals("1")) {
                     task.setDone(true);
                 }
 

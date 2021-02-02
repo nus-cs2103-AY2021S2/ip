@@ -1,3 +1,1 @@
-T|0|wash dishes
-T|0|borrow book
-D|0|reutnr book
+T|0|borrow books

@@ -1,4 +1,11 @@
-public class AddTaskCommand extends Command{
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
+
+public class AddTaskCommand extends Command {
     public AddTaskCommand(String arguments) {
         super(arguments);
     }

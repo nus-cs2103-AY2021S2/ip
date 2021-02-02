@@ -1,3 +1,15 @@
+package duke;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+
 public class Parser {
     public static Command parseCommand(String userInput) throws DukeException {
         userInput = userInput.trim();

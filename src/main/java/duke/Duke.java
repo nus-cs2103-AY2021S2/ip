@@ -1,7 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String pathname) {
         ui = new Ui();
@@ -24,7 +29,7 @@ public class Duke {
                 ui.showLine();
                 Command command = Parser.parseCommand(fullCommand);
                 command.execute(tasks, ui, storage);
-                isExit = command.isExit;
+                isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
