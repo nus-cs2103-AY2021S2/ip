@@ -1,15 +1,19 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'java'
-	id 'checkstyle'
+		id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 jar {
     manifest {
 		attributes(
-			'Main-Class': 'duke.Duke'
+			'Main-Class': 'duke.Launcher'
 		)
 	}
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 repositories {
@@ -30,4 +34,9 @@ test {
 
 checkstyle {
     toolVersion = '8.29'
+}
+
+javafx {
+    version = "15.0.1"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }

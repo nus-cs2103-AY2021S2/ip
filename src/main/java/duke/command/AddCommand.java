@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -28,11 +27,10 @@ public class AddCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         taskList.add(task);
-        ui.printIndented("Got it. I've added this task:");
-        ui.printIndented(String.format("    %s", task));
-        ui.printIndented(String.format("Now you have %d tasks in the list.", taskList.size()));
         storage.write(taskList.toDataString());
+        return String.format("Got it. I've added this task:\n    %s\nNow you have %d tasks in the list.",
+                task, taskList.size());
     }
 }

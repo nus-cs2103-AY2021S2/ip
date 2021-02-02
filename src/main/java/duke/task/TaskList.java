@@ -3,6 +3,8 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.DukeException;
+
 public class TaskList {
     private List<Task> taskList;
 
@@ -43,9 +45,14 @@ public class TaskList {
      * Marks task at index idx as done
      *
      * @param idx index of task to mark done
+     * @throws DukeException
      */
-    public void markDone(int idx) {
-        taskList.get(idx).setDone();
+    public void markDone(int idx) throws DukeException {
+        try {
+            taskList.get(idx).setDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Index is out of bound.");
+        }
     }
 
     /**
