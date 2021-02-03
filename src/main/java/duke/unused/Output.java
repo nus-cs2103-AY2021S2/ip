@@ -1,4 +1,4 @@
-package main.java.duke.unused;
+package duke.unused;
 
 public abstract class Output {
 

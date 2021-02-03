@@ -1,13 +1,13 @@
-package main.java.duke.maincomponents;
+package duke.maincomponents;
 
 import java.util.ArrayList;
 
-import main.java.duke.exceptions.DukeException;
-import main.java.duke.exceptions.TaskException;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
+import duke.exceptions.DukeException;
+import duke.exceptions.TaskException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 
 /**

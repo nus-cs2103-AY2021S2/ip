@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 /**
  * Parent Class of all task

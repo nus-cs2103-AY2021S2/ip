@@ -1,9 +1,9 @@
-import main.java.duke.command.Command;
-import main.java.duke.exceptions.DukeException;
-import main.java.duke.maincomponents.Parser;
-import main.java.duke.maincomponents.Storage;
-import main.java.duke.maincomponents.TaskList;
-import main.java.duke.maincomponents.Ui;
+import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.maincomponents.Parser;
+import duke.maincomponents.Storage;
+import duke.maincomponents.TaskList;
+import duke.maincomponents.Ui;
 
 /**
  * Main class for Duke that handles the execution of its functions
@@ -41,8 +41,8 @@ public class Duke {
         Parser stringParser = new Parser();
         dukeUi.showWelcomeLine();
 
-        boolean isExit = false;
         String userInput = dukeUi.readCommand();
+        boolean isExit = stringParser.checkIfExit(userInput);
 
         while (!isExit) {
             try {
