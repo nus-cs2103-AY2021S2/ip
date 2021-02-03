@@ -21,9 +21,9 @@ public class DeadlineCommand extends Command {
             + "Example: deadline Assignment 1 /by 31/1/2021 1800\n"
             + "Example: deadline Assignment 2 /by 28/10/2021, 2359";
 
-    private final String TASK_NAME;
-    private final LocalDate DEADLINE_DATE;
-    private final LocalTime DEADLINE_TIME;
+    private final String taskName;
+    private final LocalDate deadlineDate;
+    private final LocalTime deadlineTime;
 
     /**
      * Creates a {@code DeadlineCommand} object with a deadline date component only.
@@ -32,9 +32,9 @@ public class DeadlineCommand extends Command {
      * @param deadlineDate Date component of deadline.
      */
     public DeadlineCommand(String taskName, LocalDate deadlineDate) {
-        TASK_NAME = taskName;
-        DEADLINE_DATE = deadlineDate;
-        DEADLINE_TIME = null;
+        this.taskName = taskName;
+        this.deadlineDate = deadlineDate;
+        deadlineTime = null;
     }
 
     /**
@@ -45,14 +45,14 @@ public class DeadlineCommand extends Command {
      * @param deadlineTime Time component of deadline.
      */
     public DeadlineCommand(String taskName, LocalDate deadlineDate, LocalTime deadlineTime) {
-        TASK_NAME = taskName;
-        DEADLINE_DATE = deadlineDate;
-        DEADLINE_TIME = deadlineTime;
+        this.taskName = taskName;
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
     }
 
     @Override
     public CommandResult execute() {
-        DeadlineTask task = new DeadlineTask(TASK_NAME, DEADLINE_DATE, DEADLINE_TIME);
+        DeadlineTask task = new DeadlineTask(taskName, deadlineDate, deadlineTime);
         taskList.addTask(task);
         String messageForUser = MESSAGE_ADDED_TASK + "\n"
                 + "  " + task.toString() + "\n"

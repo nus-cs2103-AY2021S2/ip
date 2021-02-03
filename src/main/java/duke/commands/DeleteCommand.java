@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
             + "Usage: delete <task_number>\n"
             + "Example: delete 2";
 
-    private final int INDEX;
+    private final int index;
 
     /**
      * Creates a {@code DeleteCommand} object with the index of the task in the task list to be deleted.
@@ -24,14 +24,14 @@ public class DeleteCommand extends Command {
      * @param index Index of the task to be deleted.
      */
     public DeleteCommand(int index) {
-        INDEX = index;
+        this.index = index;
     }
 
     @Override
     public CommandResult execute() {
         try {
-            Task task = taskList.getTask(INDEX);
-            taskList.deleteTask(INDEX);
+            Task task = taskList.getTask(index);
+            taskList.deleteTask(index);
             String messageForUser = MESSAGE_DELETED_TASK + "\n"
                     + "  " + task.toString() + "\n"
                     + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size());

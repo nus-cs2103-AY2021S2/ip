@@ -15,10 +15,8 @@ import javafx.stage.Stage;
  * Manages the UI component of the application.
  */
 public class Ui {
-    private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
-
-    private Storage storage;
-    private TaskList taskList;
+    private final Storage storage;
+    private final TaskList taskList;
 
     /**
      * Creates a {@code Ui} object that handles the GUI.

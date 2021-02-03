@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
             + "Usage: done <task_number>"
             + "Example: done 2";
 
-    private final int INDEX;
+    private final int index;
 
     /**
      * Creates a {@code DoneCommand} object with the index of the task in the task list to be marked as done.
@@ -21,15 +21,15 @@ public class DoneCommand extends Command {
      * @param index Index of the task to be marked as done.
      */
     public DoneCommand(int index) {
-        INDEX = index;
+        this.index = index;
     }
 
     @Override
     public CommandResult execute() {
         try {
-            taskList.completeTask(INDEX);
+            taskList.completeTask(index);
             String messageForUser = MESSAGE_DONE_TASK + "\n"
-                    + taskList.getTask(INDEX).toString();
+                    + taskList.getTask(index).toString();
             return new CommandResult(messageForUser, taskList, false);
         } catch (IndexOutOfBoundsException ex) {
             return new CommandResult(MESSAGE_INVALID_INDEX, false);

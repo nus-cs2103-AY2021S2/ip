@@ -4,8 +4,8 @@ package duke.tasks;
  * Represents a task.
  */
 public abstract class Task {
-    protected final String TASK_TYPE;
-    protected final String NAME;
+    protected final String taskType;
+    protected final String name;
     protected boolean isCompleted;
 
     /**
@@ -16,8 +16,8 @@ public abstract class Task {
      * @param name     Name of the task.
      */
     public Task(String taskType, String name) {
-        TASK_TYPE = taskType;
-        NAME = name;
+        this.taskType = taskType;
+        this.name = name;
         isCompleted = false;
     }
 
@@ -30,8 +30,8 @@ public abstract class Task {
      * @param isCompleted Boolean indicating whether the task has been completed.
      */
     public Task(String taskType, String name, boolean isCompleted) {
-        TASK_TYPE = taskType;
-        NAME = name;
+        this.taskType = taskType;
+        this.name = name;
         this.isCompleted = isCompleted;
     }
 
@@ -41,7 +41,7 @@ public abstract class Task {
      * @return Name of the task.
      */
     public String getName() {
-        return NAME;
+        return name;
     }
 
     /**
@@ -69,6 +69,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", (isCompleted ? "X" : " "), NAME);
+        return String.format("[%s] %s", (isCompleted ? "X" : " "), name);
     }
 }

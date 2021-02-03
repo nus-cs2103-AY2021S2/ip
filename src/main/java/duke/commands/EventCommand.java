@@ -15,8 +15,8 @@ public class EventCommand extends Command {
             + "Usage: event <task_description> /at <event_time>\n"
             + "Example: event Project Meeting /at NUS SoC COM1-0210";
 
-    private final String TASK_NAME;
-    private final String EVENT_TIME;
+    private final String taskName;
+    private final String eventTime;
 
     /**
      * Creates an {@code EventCommand} object with the given task name and description of the event time.
@@ -25,13 +25,13 @@ public class EventCommand extends Command {
      * @param eventTime Description of the event time.
      */
     public EventCommand(String taskName, String eventTime) {
-        TASK_NAME = taskName;
-        EVENT_TIME = eventTime;
+        this.taskName = taskName;
+        this.eventTime = eventTime;
     }
 
     @Override
     public CommandResult execute() {
-        EventTask task = new EventTask(TASK_NAME, EVENT_TIME);
+        EventTask task = new EventTask(taskName, eventTime);
         taskList.addTask(task);
         String messageForUser = MESSAGE_ADDED_TASK + "\n"
                 + "  " + task.toString() + "\n"

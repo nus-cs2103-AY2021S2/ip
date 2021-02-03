@@ -15,7 +15,7 @@ public class ToDoCommand extends Command {
             + "Usage: todo <task_description>\n"
             + "Example: todo Go CNY shopping";
 
-    private final String TASK_NAME;
+    private final String taskName;
 
     /**
      * Creates a {@code ToDoCommand} with the given task name.
@@ -23,12 +23,12 @@ public class ToDoCommand extends Command {
      * @param taskName Name of the task.
      */
     public ToDoCommand(String taskName) {
-        TASK_NAME = taskName;
+        this.taskName = taskName;
     }
 
     @Override
     public CommandResult execute() {
-        ToDoTask task = new ToDoTask(TASK_NAME);
+        ToDoTask task = new ToDoTask(taskName);
         taskList.addTask(task);
         String messageForUser = MESSAGE_ADDED_TASK + "\n"
                 + "  " + task.toString() + "\n"

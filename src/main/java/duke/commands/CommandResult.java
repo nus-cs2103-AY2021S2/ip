@@ -6,9 +6,9 @@ import duke.tasks.TaskList;
  * Represents the result of a command after execution.
  */
 public class CommandResult {
-    private final String MESSAGE_FOR_USER;
-    private final TaskList UPDATED_TASK_LIST;
-    private final boolean IS_EXITING;
+    private final String messageForUser;
+    private final TaskList updatedTaskList;
+    private final boolean isExiting;
 
     /**
      * Creates a {@code CommandResult} object with a message for the user, without an updated task list,
@@ -18,9 +18,9 @@ public class CommandResult {
      * @param isExiting Boolean that sets whether the application is exiting.
      */
     public CommandResult(String messageForUser, boolean isExiting) {
-        MESSAGE_FOR_USER = messageForUser;
-        UPDATED_TASK_LIST = null;
-        IS_EXITING = isExiting;
+        this.messageForUser = messageForUser;
+        updatedTaskList = null;
+        this.isExiting = isExiting;
     }
 
     /**
@@ -32,9 +32,9 @@ public class CommandResult {
      * @param isExiting Boolean that sets whether the application is exiting.
      */
     public CommandResult(String messageForUser, TaskList updatedTaskList, boolean isExiting) {
-        MESSAGE_FOR_USER = messageForUser;
-        UPDATED_TASK_LIST = updatedTaskList;
-        IS_EXITING = isExiting;
+        this.messageForUser = messageForUser;
+        this.updatedTaskList = updatedTaskList;
+        this.isExiting = isExiting;
     }
 
     /**
@@ -43,7 +43,7 @@ public class CommandResult {
      * @return Message for the user.
      */
     public String getMessageForUser() {
-        return MESSAGE_FOR_USER;
+        return messageForUser;
     }
 
     /**
@@ -52,7 +52,7 @@ public class CommandResult {
      * @return The updated task list.
      */
     public TaskList getUpdatedTaskList() {
-        return UPDATED_TASK_LIST;
+        return updatedTaskList;
     }
 
     /**
@@ -61,7 +61,7 @@ public class CommandResult {
      * @return True if application is exiting after command, otherwise false.
      */
     public boolean isExitingProgram() {
-        return IS_EXITING;
+        return isExiting;
     }
 
     /**
@@ -83,12 +83,12 @@ public class CommandResult {
         }
 
         CommandResult objCommandResult = (CommandResult) obj;
-        if (!MESSAGE_FOR_USER.equals(objCommandResult.MESSAGE_FOR_USER)) {
+        if (!messageForUser.equals(objCommandResult.messageForUser)) {
             return false;
         }
-        if (UPDATED_TASK_LIST != null && objCommandResult.UPDATED_TASK_LIST != null) {
-            return UPDATED_TASK_LIST.equals(objCommandResult.UPDATED_TASK_LIST);
+        if (updatedTaskList != null && objCommandResult.updatedTaskList != null) {
+            return updatedTaskList.equals(objCommandResult.updatedTaskList);
         }
-        return UPDATED_TASK_LIST == null && objCommandResult.UPDATED_TASK_LIST == null;
+        return updatedTaskList == null && objCommandResult.updatedTaskList == null;
     }
 }

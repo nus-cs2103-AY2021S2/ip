@@ -27,7 +27,7 @@ public class Storage {
             + "Exiting...";
     private static final String MESSAGE_ERROR_WRITING_TO_FILE = "Error writing data to file: ";
 
-    private final Path PATH;
+    private final Path path;
 
     /**
      * Creates a {@code Storage} object with the default file path.
@@ -49,7 +49,7 @@ public class Storage {
             throw new InvalidStorageFilePathException(MESSAGE_INVALID_FILEPATH);
         }
         try {
-            PATH = Path.of(filePath);
+            path = Path.of(filePath);
         } catch (InvalidPathException ex) {
             throw new InvalidStorageFilePathException(MESSAGE_FAILED_INITIALIZATION);
         }
@@ -77,13 +77,13 @@ public class Storage {
         }
         try {
             // Create directories in the file path that do not exist yet
-            Path pathToParentDirectory = PATH.getParent();
+            Path pathToParentDirectory = path.getParent();
             Files.createDirectories(pathToParentDirectory);
 
             List<String> taskStrings = Storage.convertAllTasksToString(taskList);
-            Files.write(PATH, taskStrings);
+            Files.write(path, taskStrings);
         } catch (IOException ex) {
-            throw new StorageException(MESSAGE_ERROR_WRITING_TO_FILE + PATH);
+            throw new StorageException(MESSAGE_ERROR_WRITING_TO_FILE + path);
         }
     }
 
@@ -95,10 +95,10 @@ public class Storage {
      */
     public TaskList loadTasks() throws IOException {
         TaskList taskList = new TaskList();
-        if (!Files.exists(PATH) || !Files.isRegularFile(PATH)) {
+        if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return taskList;
         }
-        List<String> taskStrings = Files.readAllLines(PATH);
+        List<String> taskStrings = Files.readAllLines(path);
         for (String s : taskStrings) {
             taskList.addTask(Storage.convertStringToTask(s));
         }
@@ -112,14 +112,13 @@ public class Storage {
      * @return {@code Task}.
      */
     public static Task convertStringToTask(String taskString) {
-        Task task = null;
-
         String[] arr = taskString.split("\\s\\|\\s");
         String taskType = arr[0];
         String taskStatus = arr[1];
         String taskName = arr[2];
         boolean isTaskCompleted = taskStatus.equals("1");
 
+        Task task;
         switch (taskType) {
         case ToDoTask.IDENTIFIER:
             task = new ToDoTask(taskName, isTaskCompleted);

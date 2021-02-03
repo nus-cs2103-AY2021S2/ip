@@ -29,7 +29,7 @@ public class ToDoTask extends Task {
 
     @Override
     public String getTaskType() {
-        return TASK_TYPE;
+        return taskType;
     }
 
     @Override
