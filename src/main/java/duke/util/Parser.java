@@ -105,7 +105,7 @@ public class Parser {
         } else if (keyword.equals("event")) {
             return new AddEventCommand();
         } else {
-            throw new NoCommandException("dwqowq");
+            throw new NoCommandException("Daddy, I don't understand what that means :)");
         }
     }
 

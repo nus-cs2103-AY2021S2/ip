@@ -19,8 +19,8 @@ public class Ui {
     /**
      * Print Greetings at the beginning of the program.
      */
-    public void printGreetings() {
-        System.out.println(greetings);
+    public String printGreetings() {
+        return greetings;
     }
 
     /**
@@ -115,9 +115,5 @@ public class Ui {
 
     public void displayMessage(String message) {
         System.out.println(message);
-    }
-
-    public boolean hasNextLine() {
-        return this.scan.hasNext();
     }
 }

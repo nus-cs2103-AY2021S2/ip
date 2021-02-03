@@ -22,7 +22,7 @@ public class Driver extends Application {
         Ui userInterface = new Ui();
         try {
             Duke duke = Duke.start();
-            userInterface.printGreetings();
+            userInterface.displayMessage(userInterface.printGreetings());
 
             String sentence = userInterface.readCommand();
             while (isNotEqualBye(sentence)) {
