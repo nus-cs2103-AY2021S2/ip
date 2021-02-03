@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * A FindCommand class to find tasks that contain a given keyword.
@@ -25,22 +24,12 @@ public class FindCommand extends Command {
      * Executes task find.
      *
      * @param taskList The list of tasks.
-     * @param ui       The user interface.
      * @param storage  The storage handler.
-     * @throws DukeException
+     * @return Output for GUI.
+     * @throws DukeException If user input format is wrong.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.find(this.fullCommand);
-    }
-
-    /**
-     * Program does not exit.
-     *
-     * @return False to continue the program.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        return taskList.find(this.fullCommand);
     }
 }

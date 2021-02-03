@@ -36,22 +36,27 @@ public class TaskList {
 
     /**
      * Lists all tasks.
+     *
+     * @return Output for GUI.
      */
-    public void list() {
-        System.out.println("     Here are the tasks in your list:");
+    public String list() {
+        StringBuilder sb = new StringBuilder("     Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
-            System.out.println("     " + (i + 1) + "." + currTask.toString());
+            String msg = "     " + (i + 1) + "." + currTask.toString() + "\n";
+            sb.append(msg);
         }
+        return sb.toString();
     }
 
     /**
      * Completes a task in the TaskList.
      *
      * @param fullCommand Command given by user.
+     * @return Output for GUI.
      * @throws DukeException If user input format is wrong.
      */
-    public void done(String fullCommand) throws DukeException {
+    public String done(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length < 3) {
             if (inputArr.length == 1) {
@@ -66,8 +71,8 @@ public class TaskList {
                 } else {
                     this.tasks.get(i).markAsDone();
                     Task currTask = tasks.get(i);
-                    System.out.println("     Nice! I've marked this task as done:\n"
-                            + "       " + currTask.toString());
+                    return "     Nice! I've marked this task as done:\n"
+                            + "       " + currTask.toString() + "\n";
                 }
             }
         } else {
@@ -80,9 +85,10 @@ public class TaskList {
      * Deletes a task from the TaskList.
      *
      * @param fullCommand Command given by user.
+     * @return Output for GUI.
      * @throws DukeException If user input format is wrong.
      */
-    public void delete(String fullCommand) throws DukeException {
+    public String delete(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length < 3) {
             if (inputArr.length == 1) {
@@ -95,9 +101,9 @@ public class TaskList {
                     throw new DukeException("       OOPS!!! The task number is out of range. "
                             + "Please use \"list\" to see the list of tasks.");
                 } else {
-                    System.out.println("     Noted. I've removed this task:\n"
+                    return "     Noted. I've removed this task:\n"
                             + "       " + this.tasks.remove(i).toString() + "\n"
-                            + "     Now you have " + this.tasks.size() + " tasks in the list.");
+                            + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
                 }
             }
         } else {
@@ -110,14 +116,16 @@ public class TaskList {
      * Finds all task in task list that contains a given keyword.
      *
      * @param fullCommand Command given by user.
+     * @return Output for GUI.
      * @throws DukeException If user input format is wrong.
      */
-    public void find(String fullCommand) throws DukeException {
+    public String find(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length < 3) {
             if (inputArr.length == 1) {
                 throw new DukeException("       OOPS!!! The keyword cannot be empty.");
             } else {
+                StringBuilder sb = new StringBuilder("     Here are the matching tasks in your list:\n");
                 ArrayList<Task> temp = new ArrayList<>();
                 for (Task currTask : tasks) {
                     String currDescription = currTask.getDescription();
@@ -125,11 +133,12 @@ public class TaskList {
                         temp.add(currTask);
                     }
                 }
-                System.out.println("     Here are the matching tasks in your list:");
                 for (int j = 0; j < temp.size(); j++) {
                     Task tempTask = temp.get(j);
-                    System.out.println("     " + (j + 1) + "." + tempTask.toString());
+                    String msg = "     " + (j + 1) + "." + tempTask.toString() + "\n";
+                    sb.append(msg);
                 }
+                return sb.toString();
             }
         } else {
             throw new DukeException("       OOPS!!! The format should be "
@@ -142,9 +151,10 @@ public class TaskList {
      *
      * @param type        The type of task.
      * @param fullCommand Command given by user.
+     * @return Output for GUI.
      * @throws DukeException If user input format is wrong.
      */
-    public void addTask(String type, String fullCommand) throws DukeException {
+    public String addTask(String type, String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         switch (type) {
         case "todo":
@@ -192,9 +202,9 @@ public class TaskList {
             break;
         default:
         }
-        System.out.println("     Got it. I've added this task:\n"
+        return "     Got it. I've added this task:\n"
                 + "       " + this.tasks.get(this.tasks.size() - 1).toString() + "\n"
-                + "     Now you have " + this.tasks.size() + " tasks in the list.");
+                + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
     }
 
     public ArrayList<Task> getTaskList() {
