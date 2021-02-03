@@ -28,6 +28,11 @@ public class MainWindow extends GridPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Runs Duke and access storage.
+     *
+     * @param d Duke object used.
+     */
     public void setDuke(Duke d) {
         duke = d;
         try {
@@ -37,6 +42,9 @@ public class MainWindow extends GridPane {
         }
     }
 
+    /**
+     * Greets the user and prints out list in storage.
+     */
     public void greetings() {
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog("Welcome to Duke! \n" + duke.parser.printList(), dukeImage)

@@ -30,6 +30,7 @@ public class Parser {
      * <p> 7. Exit Duke: bye </p>
      *
      * @param userInput Command from user.
+     * @return String representing the output of processing command.
      */
     protected String processCommand(String userInput) {
         if ("list".equals(userInput)) {
@@ -49,6 +50,7 @@ public class Parser {
      * Sets a task as done and prints out the task marked as done.
      *
      * @param userInput Takes in command from user in the format: done &lt;indexOfItem&gt;
+     * @return String representing the output of processing command.
      */
     protected String setAsDone(String userInput) {
         String textToReturn = "";
@@ -68,6 +70,7 @@ public class Parser {
      * Deletes a task in the list and prints out the task deleted with the remaining number of tasks in the list.
      *
      * @param userInput Takes in command from user in the format: delete &lt;indexOfItem&gt;
+     * @return String representing the output of processing command.
      */
     protected String deleteFromList(String userInput) {
         String textToReturn = "";
@@ -88,6 +91,7 @@ public class Parser {
      * Finds all tasks in the list that matches the keyword given by user.
      *
      * @param userInput Takes in command from user in the format: find &lt;keyword&gt;
+     * @return String representing the output of processing command.
      */
     protected String findFromList(String userInput) {
         TaskList tasksMatchingKeyword = new TaskList();
@@ -109,7 +113,7 @@ public class Parser {
      *                  <p> deadline task: deadline &lt;task_description&gt; /by &lt;date&gt; </p>
      *                  <p> event task: event &lt;event_description&gt; /at &lt;date&gt; </p>
      * @param isDone True if task to be added is done, else false.
-     * @throws DukeException Throws error if the keyword or format is wrong.
+     * @return String representing the output of processing command.
      */
     protected String addTaskToList(String userInput, boolean isDone) {
         String textToReturn = "";
@@ -162,6 +166,8 @@ public class Parser {
 
     /**
      * Returns the representation of the list of all events.
+     *
+     * @return String representing the list of all events.
      */
     protected String printList() {
         String listRepresentation = "Here are the tasks in your list:\n";
@@ -171,6 +177,8 @@ public class Parser {
 
     /**
      * Returns the list of all matching events.
+     *
+     * @return String representing the list of all matching events.
      */
     protected String printList(TaskList tasks) {
         String listRepresentation = "Here are the matching tasks in your list:\n";
