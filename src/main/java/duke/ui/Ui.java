@@ -50,6 +50,12 @@ public class Ui {
         System.out.println(" See you.");
     }
 
+    public void printTaskAdded(Task task, TaskList tasks) {
+        System.out.println(" Added: ");
+        System.out.println("  " + task);
+        System.out.println(" Now you have " + tasks.size() + " tasks.");
+    }
+
     /**
      * Prints all the tasks in the TaskList.
      * @param tasks The TaskList to be printed.
@@ -87,7 +93,7 @@ public class Ui {
     }
 
     public String exitResponse() {
-        return "See ya bro.";
+        return "See you.";
     }
 
     public String listTasksResponse(TaskList tasks) {

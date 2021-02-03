@@ -35,7 +35,7 @@ public class DeadlineCommand extends AddCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Deadline deadline = getTask();
-        super.addThisTask(tasks, deadline, storage);
+        super.addThisTask(tasks, deadline, ui, storage);
         return ui.addTaskResponse(deadline, tasks);
     }
 
@@ -43,11 +43,11 @@ public class DeadlineCommand extends AddCommand {
     protected Deadline getTask() throws DescriptionMissingException, InvalidDateTimeException {
         String nameDeadline = fullCommand.substring(8).strip();
         if (nameDeadline.equals("")) {
-            throw new DescriptionMissingException("Argument missing!");
+            throw new DescriptionMissingException("Argument missing! Please specify the name!");
         }
         String[] nameAndDeadline = nameDeadline.split("/by");
         if (nameAndDeadline.length < 2) {
-            throw new DescriptionMissingException("Argument missing!");
+            throw new DescriptionMissingException("Argument missing! Please include the date and time!");
         }
         String name = nameAndDeadline[0].strip();
         String deadline = nameAndDeadline[1].strip();

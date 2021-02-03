@@ -65,6 +65,7 @@ public class Parser {
      */
     public static LocalDateTime parseDateTime(String dateTime) throws InvalidDateTimeException {
         String[] dateAndTime = dateTime.strip().split(" ");
+
         LocalDateTime parsedDateTime;
 
         if (dateAndTime.length != 2) {

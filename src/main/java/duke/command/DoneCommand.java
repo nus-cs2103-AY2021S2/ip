@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DescriptionMissingException;
 import duke.exception.DukeException;
 import duke.exception.TaskIndexOutOfBoundException;
 import duke.storage.Storage;
@@ -27,7 +28,8 @@ public class DoneCommand extends IndexCommand {
      * @throws DukeException If error occurs during the process.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws DescriptionMissingException, TaskIndexOutOfBoundException {
         int index = getIndex();
         if (index < tasks.size()) {
             Task completedTask = tasks.get(index);

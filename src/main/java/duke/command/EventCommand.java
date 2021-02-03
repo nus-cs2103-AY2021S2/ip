@@ -35,7 +35,7 @@ public class EventCommand extends AddCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Event event = getTask();
-        super.addThisTask(tasks, event, storage);
+        super.addThisTask(tasks, event, ui, storage);
         return ui.addTaskResponse(event, tasks);
     }
 
@@ -43,12 +43,12 @@ public class EventCommand extends AddCommand {
     protected Event getTask() throws DescriptionMissingException, InvalidDateTimeException {
         String nameDate = fullCommand.substring(5).strip();
         if (nameDate.equals("")) {
-            throw new DescriptionMissingException("Argument missing!");
+            throw new DescriptionMissingException("Argument missing! Please specify the name!");
         }
 
         String[] nameAndDate = nameDate.split("/at");
         if (nameAndDate.length < 2) {
-            throw new DescriptionMissingException("Argument missing!");
+            throw new DescriptionMissingException("Argument missing! Please include the date and time!");
         }
         String name = nameAndDate[0].strip();
         String date = nameAndDate[1].strip();

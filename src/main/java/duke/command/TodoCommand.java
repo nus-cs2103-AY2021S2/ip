@@ -30,7 +30,7 @@ public class TodoCommand extends AddCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DescriptionMissingException {
         Todo todo = getTask();
-        super.addThisTask(tasks, todo, storage);
+        super.addThisTask(tasks, todo, ui, storage);
         return ui.addTaskResponse(todo, tasks);
     }
 
@@ -38,7 +38,7 @@ public class TodoCommand extends AddCommand {
     protected Todo getTask() throws DescriptionMissingException {
         String name = fullCommand.substring(4).strip();
         if (name.equals("")) {
-            throw new DescriptionMissingException("Argument missing!");
+            throw new DescriptionMissingException("Argument missing! Please include the name!");
         } else {
             return new Todo(name);
         }

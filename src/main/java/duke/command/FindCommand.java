@@ -47,7 +47,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns false.
+     *
      * @return False.
      */
     @Override
