@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class to save information to hard disk.
+ */
 public class Storage {
     private final String DEFAULT_PATH = "./duke.txt";
     private final Path filePath;
