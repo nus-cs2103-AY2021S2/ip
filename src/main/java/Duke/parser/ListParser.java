@@ -15,6 +15,9 @@ public class ListParser {
     private String description;
     private LocalDateTime time;
 
+    /**
+     * Return ListParser.
+     */
     public ListParser() {
         this.typeOfTask = "";
         this.isDone = null;
@@ -22,6 +25,14 @@ public class ListParser {
         this.time = null;
     }
 
+    /**
+     * Return ListParser.
+     *
+     * @param typeOfTask typeOfTask todo, event, deadline
+     * @param isDone Boolean of task completion status
+     * @param description
+     * @param time
+     */
     ListParser(String typeOfTask, Boolean isDone, String description, LocalDateTime time) {
         this.typeOfTask = typeOfTask;
         this.isDone = isDone;

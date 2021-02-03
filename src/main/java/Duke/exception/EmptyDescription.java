@@ -6,8 +6,8 @@ package duke.exception;
  * @author Oh Jun Ming
  * @version 1.0
  */
-public class EmptyDescription extends DukeException{
-    public String typeOfTask;
+public class EmptyDescription extends DukeException {
+    private String typeOfTask;
 
     /**
      * Returns EmptyDescription.

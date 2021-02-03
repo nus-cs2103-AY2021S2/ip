@@ -1,12 +1,14 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.exception.EmptyDescription;
 import duke.exception.InvalidTypeOfTask;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import java.io.IOException;
-import java.util.Scanner;
+
 
 /**
  * Duke program maintains a taskList for user to track tasks.
@@ -37,7 +39,7 @@ public class Duke {
      *
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Duke duke = new Duke();
         duke.execute();
     }
@@ -50,7 +52,7 @@ public class Duke {
         Boolean shouldExit = false;
         Scanner s = new Scanner(System.in);
 
-        while(!shouldExit && s.hasNextLine()){
+        while (!shouldExit && s.hasNextLine()) {
             try {
                 taskList = storage.load();
                 taskList = ui.readCommand(taskList, s);
@@ -61,7 +63,7 @@ public class Duke {
             } catch (InvalidTypeOfTask e) {
                 ui.enclose(e.toString());
             } catch (IOException e) {
-
+                System.out.println("exception");
             }
         }
         ui.exit();

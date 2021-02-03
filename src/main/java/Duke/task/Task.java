@@ -46,6 +46,11 @@ public class Task {
         return msg;
     }
 
+    /**
+     * Encodes Task to string format for storage.
+     *
+     * @return String
+     */
     public String encode() {
         if (isDone.equals(true)) {
             return "DONE" + "|" + this.msg;
