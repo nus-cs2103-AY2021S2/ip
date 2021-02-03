@@ -5,16 +5,26 @@ Task.Task is the general case for Task.Todo, Task.Deadline, and Task.Event. In f
 I dont know... depends on future requirements.
  */
 public class Task {
+    /** base class for the Task
+     * @param description description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * @param isDone boolean to indicate if the task is done
+     * @param description description of the task
+     */
     public Task(Boolean isDone, String description) {
         this.description = description;
         this.isDone = isDone;
     }
 
+    /**
+     * @return [X] or [ ]
+     */
     protected String getStatusIcon() {
         return (isDone ? "X" : " "); //return X symbol or empty string
     }
