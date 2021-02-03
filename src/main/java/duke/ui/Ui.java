@@ -39,7 +39,7 @@ public class Ui {
             VBox vBox = fxmlLoader.load();
             Scene scene = new Scene(vBox);
             fxmlLoader.<MainWindow>getController().setComponents(storage, taskList, primaryStage);
-            scene.getStylesheets().add(Main.class.getResource("/view/Background.css").toExternalForm());
+            scene.getStylesheets().add(Main.class.getResource("/view/Styles.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
