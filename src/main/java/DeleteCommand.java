@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
         String response;
         int taskNo = Integer.parseInt(String.valueOf(fullCommand.charAt(7))) - 1;
         String toPrint = tasks.remove(taskNo);
-        response = "Alright! I've removed this task:\n" + toPrint + "Now you have a whopping "
+        response = "Alright! I've removed this task:\n" + toPrint + "\n" + "Now you have a whopping "
                     + tasks.size() + " task(s) in the list.";
         return response;
     }

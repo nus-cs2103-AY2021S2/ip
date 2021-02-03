@@ -23,10 +23,8 @@ public class Ui {
     }
 
     //output at the end
-    public void printEnd() {
-        System.out.println(LINE);
-        System.out.println(Aligner.align("Goodnight! MouMou will go back to sleep now."));
-        System.out.println(LINE);
+    public String printEnd() {
+        return "Goodnight! MouMou will go back to sleep now.";
     }
 
     public static void printLine() {

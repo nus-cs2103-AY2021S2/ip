@@ -1,4 +1,0 @@
-T # 0 # run with dog
-T # 0 # buy leash
-E # 0 # dog party  # 2021-02-03 1600-1700
-D # 1 # buy dog food  # 2021-02-02 1600
