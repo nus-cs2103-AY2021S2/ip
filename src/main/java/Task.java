@@ -28,7 +28,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] %s", done ? '✓' : '✗', info);
+        return String.format("[%s] %s", done ? "✓" : "✗", info);
     }
 
     /**

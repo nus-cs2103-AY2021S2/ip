@@ -123,7 +123,7 @@ public class DukeTest {
 
         final String expectedOutput = "Invalid Input: invalid input\n"
                 + "Command event encountered invalid arguments: Dupicate argument /at\n";
-        assertEquals(expectedOutput, new String(out.toByteArray()));
+        assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
     @Test
@@ -267,7 +267,7 @@ public class DukeTest {
                 + "1.[E][✗] project meeting (at: Mar 01 2020 1400)\n"
                 + "Nice! I've marked this task as done:\n  [E][✓] project meeting (at: Mar 01 2020 1400)\n"
                 + "1.[E][✓] project meeting (at: Mar 01 2020 1400)\n";
-        assertEquals(expectedOutput, new String(out.toByteArray()));
+        assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
     @Test
@@ -287,7 +287,7 @@ public class DukeTest {
                 + "1.[D][✗] return book (by: Mar 01 2020 1400)\n"
                 + "Nice! I've marked this task as done:\n  [D][✓] return book (by: Mar 01 2020 1400)\n"
                 + "1.[D][✓] return book (by: Mar 01 2020 1400)\n";
-        assertEquals(expectedOutput, new String(out.toByteArray()));
+        assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
     @Test
@@ -306,7 +306,7 @@ public class DukeTest {
         final String expectedOutput = "Got it. I've added this task:\n  [T][✗] borrow book\nNow you have 1 tasks in the list.\n"
                 + "1.[T][✗] borrow book\n" + "Nice! I've marked this task as done:\n  [T][✓] borrow book\n"
                 + "1.[T][✓] borrow book\n";
-        assertEquals(expectedOutput, new String(out.toByteArray()));
+        assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
     @Test
@@ -326,7 +326,7 @@ public class DukeTest {
                 + "Got it. I've added this task:\n  [T][✗] help myself\nNow you have 2 tasks in the list.\n"
                 + "Nice! I've marked this task as done:\n  [T][✓] help people\n" + "1.[T][✓] help people\n"
                 + "2.[T][✗] help myself\n";
-        assertEquals(expectedOutput, new String(out.toByteArray()));
+        assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
     @Test
@@ -403,7 +403,7 @@ public class DukeTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Duke.chatLoop(in, out);
 
-        assertEquals("Bye. Hope to see you again soon!\n", new String(out.toByteArray()));
+        assertEquals("Bye. Hope to see you again soon!\n", new String(out.toByteArray()).replace("\r",""));
     }
 
     @Test
