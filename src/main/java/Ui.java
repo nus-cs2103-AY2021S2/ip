@@ -6,14 +6,13 @@ public class Ui {
     /**
      * Prints the welcome message for users when they run the app.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n" + "What can I help you with today! :-)");
+        return logo + "\n" + "Hello! I'm Duke\n" + "What can I help you with today! :-)";
     }
 
     /**
@@ -21,9 +20,9 @@ public class Ui {
      * @param task Task that was added.
      * @param taskListSize Number of tasks in the TaskList.
      */
-    public void responseToAddTask(Task task, int taskListSize) {
-        System.out.println("Done! One new task:\n" + task.toString() + "\nNow you have "
-                 + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
+    public String responseToAddTask(Task task, int taskListSize) {
+        return "Done! One new task:\n" + task.toString() + "\nNow you have "
+                 + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list";
     }
 
     /**
@@ -31,16 +30,16 @@ public class Ui {
      * @param task Task that was deleted.
      * @param taskListSize Number of tasks in the TaskList.
      */
-    public void responseToDelete(Task task, int taskListSize) {
-        System.out.println("Noted, I've removed this task:\n" + task.toString()
-                 + "\nNow you have " + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
+    public String responseToDelete(Task task, int taskListSize) {
+        return "Noted, I've removed this task:\n" + task.toString()
+                 + "\nNow you have " + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list";
     }
 
     /**
      * Prints the response after user inputs 'bye', before program exits.
      */
-    public void responseToBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String responseToBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -48,11 +47,11 @@ public class Ui {
      * the TaskList is empty.
      * @param taskListSize Number of tasks in the TaskList.
      */
-    public void responseToList(int taskListSize) {
+    public String responseToList(int taskListSize) {
         if (taskListSize != 0) {
-            System.out.println("Here are the tasks in your list:");
+            return "Here are the tasks in your list:";
         } else {
-            System.out.println("Your list is currently empty! Let's start adding tasks!");
+            return "Your list is currently empty! Let's start adding tasks!";
         }
     }
 
@@ -60,16 +59,16 @@ public class Ui {
      * Prints the response after marking a task as completed.
      * @param task Task that was marked completed.
      */
-    public void responseToDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task.toString());
+    public String responseToDone(Task task) {
+        return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
-    public static void responseToFind() {
-        System.out.println("Here are the matching tasks in your list:");
+    public static String responseToFind() {
+        return "Here are the matching tasks in your list:";
     }
 
-    public static void responseToNoMatches() {
-        System.out.println("There are no matching tasks! Time to add one!");
+    public static String responseToNoMatches() {
+        return "There are no matching tasks! Time to add one!";
     }
 
 
