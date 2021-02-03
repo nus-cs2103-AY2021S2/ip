@@ -26,7 +26,8 @@ public class Parser {
      */
     public Command parseCommand(String input) throws ParserException {
         String[] tokens = input.split(" ");
-        switch (tokens[0]) {
+        String commandWord = tokens[0];
+        switch (commandWord) {
         case AddTodoCommand.COMMAND_TEXT:
             return prepareAddTodo(input, tokens);
         case AddDeadlineCommand.COMMAND_TEXT:

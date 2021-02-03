@@ -11,6 +11,7 @@ public class ExitCommand extends Command {
      *
      * @param tasks
      * @param ui
+     * @return response message
      */
     @Override
     public String execute(TaskList tasks, TextUi ui) {
@@ -21,7 +22,7 @@ public class ExitCommand extends Command {
      * Checks if given command is an ExitCommand
      *
      * @param command
-     * @return
+     * @return if command is exit boolean
      */
     public static boolean isExit(Command command) {
         return command instanceof ExitCommand;
