@@ -14,6 +14,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    public Duke() {
+        this("data/tasks.txt");
+    }
+
     /**
      * Initialises the Duke chat bot with all
      * of its core functionalities.
@@ -32,33 +36,33 @@ public class Duke {
         }
     }
 
-    /**
-     * Manages the logic of the Duke chat bot.
-     */
-    public void run() {
-        ui.showGreetings();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.ask();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError("Oh no... " + e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return "Oh no... " + e.getMessage();
         }
     }
 
-    /**
-     * Entry point to the Duke chat bot.
-     *
-     * @param args Arguments supplied to the application.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
+//    /**
+//     * Manages the logic of the Duke chat bot.
+//     */
+//    public void run() {
+//        ui.showGreetings();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.ask();
+//                ui.showLine();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError("Oh no... " + e.getMessage());
+//            } finally {
+//                ui.showLine();
+//            }
+//        }
+//    }
 }

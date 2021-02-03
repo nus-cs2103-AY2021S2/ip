@@ -45,36 +45,26 @@ public class Command {
      * @param storage Core Storage object.
      * @throws DukeException If unknown command was specified
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             CommandsEnum ce = CommandsEnum.valueOf(this.commandType.toUpperCase());
             switch (ce) {
             case USAGE:
-                ui.showUsage();
-                break;
+                return ui.showUsage();
             case LIST:
-                this.listCommand(tasks, ui);
-                break;
+                return this.listCommand(tasks, ui);
             case FIND:
-                this.findTasks(tasks, ui);
-                break;
+                return this.findTasks(tasks, ui);
             case TODO:
             case DEADLINE:
             case EVENT:
-                this.addTask(tasks, ui);
-                break;
+                return this.addTask(tasks, ui);
             case DONE:
-                this.markDone(tasks, ui);
-                break;
+                return this.markDone(tasks, ui);
             case DELETE:
-                this.deleteTask(tasks, ui);
-                break;
+                return this.deleteTask(tasks, ui);
             case SAVE:
-                this.saveTasks(tasks, ui, storage);
-                break;
-            case BYE:
-                this.toExit = ui.toExit();
-                break;
+                return this.saveTasks(tasks, ui, storage);
             default:
                 throw new DukeException("I'm not trained with these commands yet...");
             }
@@ -90,8 +80,8 @@ public class Command {
      * @param tasks Core TaskList object.
      * @param ui Core Ui object.
      */
-    public void listCommand(TaskList tasks, Ui ui) {
-        ui.say(tasks.showList());
+    public String listCommand(TaskList tasks, Ui ui) {
+        return ui.say(tasks.showList());
     }
 
     /**
@@ -101,8 +91,8 @@ public class Command {
      * @param tasks Core TaskList object.
      * @param ui Core Ui object.
      */
-    public void findTasks(TaskList tasks, Ui ui) {
-        ui.say(tasks.findTasks(this.commandArgs[0]));
+    public String findTasks(TaskList tasks, Ui ui) {
+        return ui.say(tasks.findTasks(this.commandArgs[0]));
     }
 
     /**
@@ -112,8 +102,8 @@ public class Command {
      * @param ui Core Ui object.
      * @throws DukeException  If invalid task type or arguments specified.
      */
-    public void addTask(TaskList tasks, Ui ui) throws DukeException {
-        ui.say(tasks.addTask(this.commandType, this.commandArgs));
+    public String addTask(TaskList tasks, Ui ui) throws DukeException {
+        return ui.say(tasks.addTask(this.commandType, this.commandArgs));
     }
 
     /**
@@ -123,8 +113,8 @@ public class Command {
      * @param ui Core Ui object.
      * @throws DukeException If invalid index specified.
      */
-    public void markDone(TaskList tasks, Ui ui) throws DukeException {
-        ui.say(tasks.markDone(this.commandArgs[0]));
+    public String markDone(TaskList tasks, Ui ui) throws DukeException {
+        return ui.say(tasks.markDone(this.commandArgs[0]));
     }
 
     /**
@@ -134,8 +124,8 @@ public class Command {
      * @param ui Core Ui object.
      * @throws DukeException If invalid index specified.
      */
-    public void deleteTask(TaskList tasks, Ui ui) throws DukeException {
-        ui.say(tasks.deleteTask(this.commandArgs[0]));
+    public String deleteTask(TaskList tasks, Ui ui) throws DukeException {
+        return ui.say(tasks.deleteTask(this.commandArgs[0]));
     }
 
     /**
@@ -146,8 +136,8 @@ public class Command {
      * @param storage Core Storage object.
      * @throws DukeException If the file cannot be found.
      */
-    public void saveTasks(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.say(storage.save(tasks.getList()));
+    public String saveTasks(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.say(storage.save(tasks.getList()));
     }
 
     /**

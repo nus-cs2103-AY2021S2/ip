@@ -20,64 +20,35 @@ public class Ui {
     /**
      * Prints the usage menu.
      */
-    public void showUsage() {
-        this.say("Hey! These are the commands available:");
-        this.say("\t- usage");
-        this.say("\t- list");
-        this.say("\t- todo <task_description>");
-        this.say("\t- deadline <task_description> /by <date_time>");
-        this.say("\t- event <task_description> /at <date_time>");
-        this.say("\t- done <task_number>");
-        this.say("\t- delete <task_number>");
-        this.say("\t- save");
-        this.say("\t- bye");
-    }
-
-    /**
-     * Prints the line separator.
-     */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+    public String showUsage() {
+        String output = "Hey! These are the commands available:";
+        output += "\t- usage";
+        output += "\t- list";
+        output += "\t- todo <task_description>";
+        output += "\t- deadline <task_description> /by <date_time>";
+        output += "\t- event <task_description> /at <date_time>";
+        output += "\t- done <task_number>";
+        output += "\t- delete <task_number>";
+        output += "\t- save";
+        output += "\t- bye";
+        return output;
     }
 
     /**
      * Prints the greetings.
      */
-    public void showGreetings() {
-        this.showLine();
-        System.out.println(" ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|");
-        this.showLine();
-        this.say("Hey, hello there! I'm Duke, your personal chat bot.");
-        this.say("To know more about what I can do, type 'usage'.");
-        this.say("So... Is there anything I can do for you today?");
-    }
-
-    /**
-     * Confirms with the user whether they are
-     * sure about exiting the chat bot.
-     *
-     * @return Outcome of the user decision.
-     */
-    public boolean toExit() {
-        this.say("Are you sure? (Y/N)");
-        String confirmation = this.ask();
-        if (confirmation.equalsIgnoreCase("y") || confirmation.equalsIgnoreCase("yes")) {
-            this.say("Alright, take care. I hope to see you again soon!");
-            return true;
-        }
-        this.say("Hmm... alright I'll stay.");
-        return false;
+    public String showGreetings() {
+        String output = "Hey, hello there! I'm Duke, your personal chat bot.";
+        output += "To know more about what I can do, type 'usage'.";
+        output += "So... Is there anything I can do for you today?";
+        return output;
     }
 
     /**
      * Prints the file load error message.
      */
-    public void showLoadingError() {
-        this.say("Unable to load file.");
+    public String showLoadingError() {
+        return this.say("Unable to load file.");
     }
 
     /**
@@ -86,23 +57,8 @@ public class Ui {
      *
      * @param message Error message.
      */
-    public void showError(String message) {
-        this.say(message);
-    }
-
-    /**
-     * Formats and prints output messages in a
-     * more personalised manner and
-     * 'chat bot'-like manner.
-     *
-     * @param message Message to be formatted and displayed.
-     * @param newLine Newline at the end of the message.
-     */
-    public void say(String message, Boolean newLine) {
-        System.out.print(">> " + message);
-        if (newLine) {
-            System.out.print("\n");
-        }
+    public String showError(String message) {
+        return this.say(message);
     }
 
     /**
@@ -112,19 +68,7 @@ public class Ui {
      *
      * @param message Message to be formatted and displayed.
      */
-    public void say(String message) {
-        this.say(message, true);
-    }
-
-    /**
-     * Retrieves the user input in a
-     * more personalised manner and
-     * 'chat bot'-like manner.
-     *
-     * @return User input.
-     */
-    public String ask() {
-        System.out.print("<< ");
-        return this.sc.nextLine();
+    public String say(String message) {
+        return message;
     }
 }
