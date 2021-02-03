@@ -6,36 +6,40 @@ public class InputHandler {
     }
 
     public String getAction() {
-        return this.input.contains(" ") ? this.input.split(" ")[0] : this.input;
+        return (input + " ").split(" ")[0];
+    }
+
+    private String getRemainingTokens() {
+        if (!input.contains(" ")) {
+            return "";
+        }
+        return this.input.split(" ", 2)[1];
     }
 
     public String getDescription() {
-        if (this.input.contains(" ")) {
-            String description = this.input.split(" ", 2)[1];
-
-            if (description.contains("/at")) {
-                return description.split("/at")[0].trim();
-            } else if (description.contains("/by")) {
-                return description.split("/by")[0].trim();
-            } else {
-                return description;
-            }
+        String remainingTokens = this.getRemainingTokens();
+        if (remainingTokens.contains("/by")) {
+            return remainingTokens.split("/by")[0].trim();
+        } else if (remainingTokens.contains("/at")) {
+            return remainingTokens.split("/at")[0].trim();
+        } else {
+            return remainingTokens;
         }
-
-        return "";
-    }
-
-    public String getAt() {
-        if (this.getAction().equals("event")) {
-            return this.input.split("/at")[1].trim();
-        }
-        return "";
     }
 
     public String getBy() {
-        if (this.getAction().equals("deadline")) {
-            return this.input.split("/by")[1].trim();
+        String remainingTokens = this.getRemainingTokens();
+        if (!remainingTokens.contains("/by")) {
+            return "";
         }
-        return "";
+        return remainingTokens.split("/by", 2)[1].trim();
+    }
+
+    public String getAt() {
+        String remainingTokens = this.getRemainingTokens();
+        if (!remainingTokens.contains("/at")) {
+            return "";
+        }
+        return remainingTokens.split("/at", 2)[1].trim();
     }
 }

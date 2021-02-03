@@ -1,7 +1,17 @@
+actionthattheappdoesnotsupport
+list
+todo
 todo CS2107 Revision
+deadline
+deadline CS2103 Week 4 Quiz
+deadline CS2103 Week 4 Quiz /by
 deadline CS2103 Week 4 Quiz /by 5 Feb 2021 2:00 AM
+event
+event CS2107 In-Lecture Quiz
+event CS2107 In-Lecture Quiz /at
 event CS2107 In-Lecture Quiz /at 4 Feb 2021 10:00 AM to 10:30 AM
 list
 done 1
+done 4
 list
 bye
