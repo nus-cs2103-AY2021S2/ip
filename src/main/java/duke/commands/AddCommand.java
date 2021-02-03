@@ -138,14 +138,4 @@ public class AddCommand extends Command {
         storage.save(tasks);
         return ui.getAddTaskString(tasks, temp);
     }
-
-    /**
-     * Returns if program should exit after this command.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
