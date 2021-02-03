@@ -27,7 +27,7 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeWrongInputException {
         // User input
-        String[] commandArr = command.trim().split(" ");
+        String[] commandArr = command.trim().toLowerCase().split(" ");
         command = command.trim();
         switch(commandArr[0]) {
         case "list":
@@ -47,7 +47,7 @@ public class Parser {
         case "bye":
             return new ExitCommand(command);
         default:
-            throw new DukeWrongInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeWrongInputException("OOPS! I'm sorry, but I don't know what that means.");
         }
     }
 }

@@ -26,14 +26,14 @@ public class DeadlineCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the commands available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException {
         String description = "";
         String deadline = "";
         boolean foundBy = false;
         String[] commandArr = command.trim().split(" ");
         if (command.equals("deadline")) {
-            throw new DukeMissingInputException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeMissingInputException("OOPS! The description of a deadline cannot be empty.");
         } else {
             for (int i = 1; i < commandArr.length; i++) {
                 if (commandArr[i].equals("/by")) {
@@ -52,10 +52,11 @@ public class DeadlineCommand extends Command {
             LocalDate dateDeadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             Deadline newDeadline = new Deadline(description, dateDeadline);
             taskList.add(newDeadline);
-            ui.showTaskAdded(newDeadline);
+            storage.save(taskList.getTaskList());
+            return ui.showTaskAdded(newDeadline);
         } else {
             throw new DukeWrongInputException(
-                    "OOPS!!! Please enter your deadline in the format: deadline /by yyyy-mm-dd :-(");
+                    "OOPS! Please enter your deadline in the format: deadline /by yyyy-mm-dd");
         }
     }
 

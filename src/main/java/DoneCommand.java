@@ -10,7 +10,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     *
+     * Overriding execute method.
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
@@ -18,13 +18,18 @@ public class DoneCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException {
         String[] commandArr = command.trim().split(" ");
-
-        Task doneTask = taskList.getTaskAtIndex(Integer.parseInt(commandArr[1]) - 1);
-        doneTask.markAsDone();
-        ui.showTaskDone(doneTask);
+        int itemPosition = Integer.parseInt(commandArr[1]) - 1;
+        if (itemPosition + 1 <= taskList.getTaskListLength() || itemPosition < 0) {
+            Task doneTask = taskList.getTaskAtIndex(itemPosition);
+            doneTask.markAsDone();
+            storage.save(taskList.getTaskList());
+            return ui.showTaskDone(doneTask);
+        } else {
+            throw new DukeWrongInputException("Oops! Item number to be marked done out of bounds.");
+        }
     }
 
     /**

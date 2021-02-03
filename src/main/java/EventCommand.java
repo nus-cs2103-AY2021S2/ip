@@ -22,7 +22,7 @@ public class EventCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException {
         String description = "";
         String time = "";
@@ -30,7 +30,7 @@ public class EventCommand extends Command {
         String [] commandArr = command.trim().split(" ");
 
         if (command.equals("event")) {
-            throw new DukeMissingInputException("OOPS!!! The description of an event cannot be empty.");
+            throw new DukeMissingInputException("OOPS! The description of an event cannot be empty.");
         } else {
             for (int i = 1; i < commandArr.length; i++) {
                 if (commandArr[i].equals("/at")) {
@@ -47,7 +47,8 @@ public class EventCommand extends Command {
         time = time.trim();
         Event newEvent = new Event(description, time);
         taskList.add(newEvent);
-        ui.showTaskAdded(newEvent);
+        storage.save(taskList.getTaskList());
+        return ui.showTaskAdded(newEvent);
     }
 
     /**

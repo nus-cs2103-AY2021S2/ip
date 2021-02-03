@@ -22,11 +22,18 @@ public class DeleteCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException {
         String[] commandArr = command.trim().split(" ");
-        ui.showTaskDeleted(taskList.getTaskAtIndex(Integer.parseInt(commandArr[1]) - 1));
-        taskList.delete(Integer.parseInt(commandArr[1]) - 1);
+        int itemPosition = Integer.parseInt(commandArr[1]) - 1;
+        if (itemPosition + 1 <= taskList.getTaskListLength() || itemPosition < 0) {
+            String output = ui.showTaskDeleted(taskList.getTaskAtIndex(itemPosition));
+            taskList.delete(itemPosition);
+            storage.save(taskList.getTaskList());
+            return output;
+        } else {
+            throw new DukeWrongInputException("Oops! Item number to be deleted out of bounds");
+        }
     }
 
     /**

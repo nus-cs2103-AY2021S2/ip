@@ -30,7 +30,7 @@ public class Storage {
                 System.out.println("Hard Disk loaded.");
             }
         } catch (IOException e) {
-            throw new DukeWrongInputException("File not found!");
+            throw new DukeWrongInputException("File not found.");
         }
     }
 
@@ -56,12 +56,12 @@ public class Storage {
                     tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
                     break;
                 default:
-                    throw new IOException("File Error: wrong data format in hard drive");
+                    throw new IOException("File Error: wrong data format in hard drive.");
                 }
             }
             sc.close();
         } catch (IOException e) {
-            throw new DukeWrongInputException("File Error: wrong data format in hard drive");
+            throw new DukeWrongInputException("File Error: wrong data format in hard drive.");
         }
         return tasks;
     }
@@ -87,7 +87,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeWrongInputException("File Error: wrong data format in hard drive");
+            throw new DukeWrongInputException("File Error: wrong data format in hard drive.");
         }
     }
 
