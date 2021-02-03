@@ -5,23 +5,10 @@ import duke.exception.DukeCommandException;
 import duke.exception.DukeToDoException;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Parser {
-    // private final List<Task> taskList;
 
-    // public Parser() {
-    //     this.taskList = new ArrayList<>();
-    // }
-    //
-    // public Parser(List<Task> taskList) {
-    //     this.taskList = taskList;
-    // }
-    //
-    // public List<Task> getTaskList() {
-    //     return this.taskList;
-    // }
 
     /**
      * Parses a userInput and outputs a command for execution
