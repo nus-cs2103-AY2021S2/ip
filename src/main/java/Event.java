@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -9,7 +10,7 @@ public class Event extends Task {
      * @param description description of the event
      * @param time        , which is currently still in String form but I suspect that might change
      **/
-    public Event(String description, String time) {
+    public Event(String description, String time) throws CommandFormatException {
         super(description);
         /* sorted should have 4 args, delimited by spaces
         1. Day
@@ -17,20 +18,32 @@ public class Event extends Task {
         3. Year
         4. Hour/Minute
          */
-        this.time = parseDate(time.split(" "));
+        try {
+            this.time = parseDate(time.split(" "));
+        } catch (NumberFormatException e){
+            throw new CommandFormatException(e.getMessage());
+        }
     }
 
-    public Event(Boolean isDone, String description, String time) {
+    public Event(Boolean isDone, String description, String time) throws CommandFormatException {
         super(isDone, description);
-        this.time = parseDate(time.split(" "));
+        try {
+            this.time = parseDate(time.split(" "));
+        } catch (NumberFormatException e){
+            throw new CommandFormatException(e.getMessage());
+        }
     }
 
-    private LocalDateTime parseDate(String[] sorted){
-        return LocalDateTime.of(Integer.parseInt(sorted[2]), //Day
-                Integer.parseInt(sorted[1]), //Month
-                Integer.parseInt(sorted[0]), //Year
-                Integer.parseInt(sorted[3].substring(0, sorted[3].length()-2)), //Hour
-                Integer.parseInt(sorted[3].substring(sorted[3].length()-2)));//Minute
+    private LocalDateTime parseDate(String[] sorted) throws CommandFormatException{
+        try {
+            return LocalDateTime.of(Integer.parseInt(sorted[2]), //Day
+                    Integer.parseInt(sorted[1]), //Month
+                    Integer.parseInt(sorted[0]), //Year
+                    Integer.parseInt(sorted[3].substring(0, sorted[3].length()-2)), //Hour
+                    Integer.parseInt(sorted[3].substring(sorted[3].length()-2)));//Minute
+        } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
+            throw new CommandFormatException(e.getMessage());
+        }
     }
 
     /* format [D][X] {description} ({dayofweek} {time}, {day} {month} {year})

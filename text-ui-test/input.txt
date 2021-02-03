@@ -1,11 +1,11 @@
 todo borrow book
 deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /2 2 2020 1430
+event project meeting /18 12 2017 0000
 list
 todo
-deadline 3293jof
-event pqehg
-blah
+deadline 3293jof /18 12 2017 1930
+event pqehg /
 done 1
 done 3
 done
@@ -15,3 +15,4 @@ delete 19248
 delete
 delete 2
 list
+bye

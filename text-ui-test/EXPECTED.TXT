@@ -1,3 +1,4 @@
+Storage file could not be found, starting fresh database
               $$$@@@@@@@
          ##########$$$$$$@@$
        #**!!!!!!!!**####$$$$$$#
@@ -21,27 +22,31 @@
 
 Greetings Neo, what can the Oracle do for you?
 1. [T][ ] borrow book
-2. [D][ ] return book (by Sunday)
-3. [E][ ] project meeting (at Mon 2-4pm)
+Event:    event {description} /{day} {month} {year} {hour}{minute}
+2. [D][ ] return book  (Sun 14:30, 2 FEBRUARY 2020)
+3. [E][ ] project meeting  (Mon 00:00, 18 DECEMBER 2017)
 You have forgotten quickly, but the Oracle Remembers
 1. [T][ ] borrow book
-2. [D][ ] return book (by Sunday)
-3. [E][ ] project meeting (at Mon 2-4pm)
-Give The Oracle a the description of the todo
-Give The Oracle both the description/deadline of the deadline
-Give The Oracle both the description/time of the event
-Your words are unclear, Neo
+2. [D][ ] return book  (Sun 14:30, 2 FEBRUARY 2020)
+3. [E][ ] project meeting  (Mon 00:00, 18 DECEMBER 2017)
+Todo:     todo {description}
+4. [D][ ] 3293jof  (Mon 19:30, 18 DECEMBER 2017)
+Event:    event {description} /{day} {month} {year} {hour}{minute}
 1. [T][X] borrow book
-3. [E][X] project meeting (at Mon 2-4pm)
-The Oracle recalls you only have 3 tasks. Give a valid index
-The Oracle recalls you only have 3 tasks. Give a valid index
+3. [E][X] project meeting  (Mon 00:00, 18 DECEMBER 2017)
+MarkDone: done {taskIndex}
+You only have 4 tasks. Give a valid index
 You have forgotten quickly, but the Oracle Remembers
 1. [T][X] borrow book
-2. [D][ ] return book (by Sunday)
-3. [E][X] project meeting (at Mon 2-4pm)
-The Oracle recalls you only have 3 tasks. Give a valid index
-The Oracle recalls you only have 3 tasks. Give a valid index
-Erased: 2. [D][ ] return book (by Sunday)
+2. [D][ ] return book  (Sun 14:30, 2 FEBRUARY 2020)
+3. [E][X] project meeting  (Mon 00:00, 18 DECEMBER 2017)
+4. [D][ ] 3293jof  (Mon 19:30, 18 DECEMBER 2017)
+You only have 4 tasks. Give a valid index
+Delete:   delete {taskIndex}
+Erased: 2. [D][ ] return book  (Sun 14:30, 2 FEBRUARY 2020)
 You have forgotten quickly, but the Oracle Remembers
 1. [T][X] borrow book
-2. [E][X] project meeting (at Mon 2-4pm)
+2. [E][X] project meeting  (Mon 00:00, 18 DECEMBER 2017)
+3. [D][ ] 3293jof  (Mon 19:30, 18 DECEMBER 2017)
+Very well, we shall meet again
+Successfully saved the information
