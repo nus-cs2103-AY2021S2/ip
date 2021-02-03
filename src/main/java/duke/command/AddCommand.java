@@ -39,11 +39,11 @@ public class AddCommand extends Command {
      * @throws DukeException If the current list cannot be saved into the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = getCorrectTask();
         tasks.add(t);
-        ui.showAdd(t.toString(), tasks.getSize());
         storage.save(tasks.listOutTaskInString());
+        return ui.showAdd(t.toString(), tasks.getSize());
     }
 
     private Task getCorrectTask() {

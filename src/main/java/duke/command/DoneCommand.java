@@ -31,9 +31,9 @@ class DoneCommand extends Command {
      * @throws DukeException If an I/O error occurs or the index if out of bounds of the list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.markTaskAsDone(description);
-        ui.showDone(t.toString(), tasks.getSize());
         storage.save(tasks.listOutTaskInString());
+        return ui.showDone(t.toString(), tasks.getSize());
     }
 }
