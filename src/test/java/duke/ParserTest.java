@@ -43,8 +43,9 @@ public class ParserTest {
         setUpStreams();
 
         duke.Parser p = new duke.Parser();
-        p.parser("clear");
-        p.parser("todo read a book");
+        String actual = Ui.welcome();
+        actual += p.parser("clear");
+        actual += p.parser("todo read a book");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -65,7 +66,7 @@ public class ParserTest {
                 + "    ____________________________________________________________\n"
                 + "\n";
 
-        assertEquals(check, outContent.toString());
+        assertEquals(check, actual);
         restoreStreams();
     }
 
@@ -74,8 +75,9 @@ public class ParserTest {
         setUpStreams();
 
         duke.Parser p = new duke.Parser();
-        p.parser("clear");
-        p.parser("deadline read a book /by 2021-01-31");
+        String actual = Ui.welcome();
+        actual += p.parser("clear");
+        actual += p.parser("deadline read a book /by 2021-01-31");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -96,7 +98,7 @@ public class ParserTest {
                 + "    ____________________________________________________________\n"
                 + "\n";
 
-        assertEquals(check, outContent.toString());
+        assertEquals(check, actual);
         restoreStreams();
     }
 
@@ -105,8 +107,9 @@ public class ParserTest {
         setUpStreams();
 
         duke.Parser p = new duke.Parser();
-        p.parser("clear");
-        p.parser("event read a book /at 2021-01-31");
+        String actual = Ui.welcome();
+        actual += p.parser("clear");
+        actual += p.parser("event read a book /at 2021-01-31");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -127,7 +130,7 @@ public class ParserTest {
                 + "    ____________________________________________________________\n"
                 + "\n";
 
-        assertEquals(check, outContent.toString());
+        assertEquals(check, actual);
         restoreStreams();
     }
 
@@ -136,11 +139,12 @@ public class ParserTest {
         setUpStreams();
 
         duke.Parser p = new duke.Parser();
-        p.parser("clear");
-        p.parser("todo read a book");
-        p.parser("deadline read a book /by 2021-01-31");
-        p.parser("event read a book /at 2021-01-31");
-        p.parser("list");
+        String actual = Ui.welcome();
+        actual += p.parser("clear");
+        actual += p.parser("todo read a book");
+        actual += p.parser("deadline read a book /by 2021-01-31");
+        actual += p.parser("event read a book /at 2021-01-31");
+        actual += p.parser("list");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -183,7 +187,7 @@ public class ParserTest {
                 + "    ____________________________________________________________\n"
                 + "\n";
 
-        assertEquals(check, outContent.toString());
+        assertEquals(check, actual);
         restoreStreams();
     }
 
@@ -192,15 +196,16 @@ public class ParserTest {
         setUpStreams();
 
         duke.Parser p = new duke.Parser();
-        p.parser("clear");
-        p.parser("todo read a book");
-        p.parser("deadline read a book /by 2021-01-31");
-        p.parser("event read a book /at 2021-01-31");
-        p.parser("list");
-        p.parser("done 1");
-        p.parser("done 2");
-        p.parser("done 3");
-        p.parser("list");
+        String actual = Ui.welcome();
+        actual += p.parser("clear");
+        actual += p.parser("todo read a book");
+        actual += p.parser("deadline read a book /by 2021-01-31");
+        actual += p.parser("event read a book /at 2021-01-31");
+        actual += p.parser("list");
+        actual += p.parser("done 1");
+        actual += p.parser("done 2");
+        actual += p.parser("done 3");
+        actual += p.parser("list");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -270,7 +275,7 @@ public class ParserTest {
                 + "\n";
 
 
-        assertEquals(check, outContent.toString());
+        assertEquals(check, actual);
         restoreStreams();
     }
 
@@ -279,13 +284,14 @@ public class ParserTest {
         setUpStreams();
 
         duke.Parser p = new duke.Parser();
-        p.parser("clear");
-        p.parser("todo read a book");
-        p.parser("deadline read a book /by 2021-01-31");
-        p.parser("event read a book /at 2021-01-31");
-        p.parser("list");
-        p.parser("delete 2");
-        p.parser("list");
+        String actual = Ui.welcome();
+        actual += p.parser("clear");
+        actual += p.parser("todo read a book");
+        actual += p.parser("deadline read a book /by 2021-01-31");
+        actual += p.parser("event read a book /at 2021-01-31");
+        actual += p.parser("list");
+        actual += p.parser("delete 2");
+        actual += p.parser("list");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -342,7 +348,7 @@ public class ParserTest {
                 + "    ____________________________________________________________\n"
                 + "\n";
 
-        assertEquals(check, outContent.toString());
+        assertEquals(check, actual);
         restoreStreams();
     }
 
@@ -351,19 +357,20 @@ public class ParserTest {
         setUpStreams();
 
         duke.Parser p = new duke.Parser();
-        p.parser("clear");
-        p.parser("todo read a book");
-        p.parser("deadline read a book /by 2021-01-31");
-        p.parser("event read a book /at 2021-01-31");
-        p.parser("todo study");
-        p.parser("deadline study /by 2021-01-31");
-        p.parser("event study /at 2021-01-31");
-        p.parser("done 1");
-        p.parser("done 3");
-        p.parser("done 5");
-        p.parser("list");
-        p.parser("taskson 2021-01-30");
-        p.parser("taskson 2021-01-31");
+        String actual = Ui.welcome();
+        actual += p.parser("clear");
+        actual += p.parser("todo read a book");
+        actual += p.parser("deadline read a book /by 2021-01-31");
+        actual += p.parser("event read a book /at 2021-01-31");
+        actual += p.parser("todo study");
+        actual += p.parser("deadline study /by 2021-01-31");
+        actual += p.parser("event study /at 2021-01-31");
+        actual += p.parser("done 1");
+        actual += p.parser("done 3");
+        actual += p.parser("done 5");
+        actual += p.parser("list");
+        actual += p.parser("taskson 2021-01-30");
+        actual += p.parser("taskson 2021-01-31");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -462,7 +469,7 @@ public class ParserTest {
                 + "    ____________________________________________________________\n"
                 + "\n";
 
-        assertEquals(check, outContent.toString());
+        assertEquals(check, actual);
         restoreStreams();
     }
 }

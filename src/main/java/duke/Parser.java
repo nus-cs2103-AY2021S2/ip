@@ -3,22 +3,24 @@ package duke;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class Parser {
 
 	private final TaskList mem;
-	private final Storage storage;
-	private final Hashtable<String, Consumer<String>> functions;
+	private final Hashtable<String, Function<String, String>> functions;
+	private boolean isExited;
 
 	/**
 	 * loads the txt file into mem and displays the welcome message
 	 */
 	public Parser() {		
-		this.storage = new Storage();
-		this.mem = this.storage.load();
-		functions = new Hashtable<String, Consumer<String>>();
+		Storage storage = new Storage();
+		this.mem = new TaskList(storage.load(), storage);
+		functions = new Hashtable<String, Function<String, String>>();
 		this.initialize();
-		Ui.welcome();
+		this.isExited = false;
+		//Ui.welcome();
 	}
 
 	private void initialize() {
@@ -40,76 +42,82 @@ public class Parser {
 	 * reads the string and determines which function to call
 	 * @param s user input
 	 */
-	public void parser(String s) {
+	public String parser(String s) {
 		Scanner sc = new Scanner(s);
 		String inputs = sc.next();
-		if (inputs.equals("list")) {
-			this.list();
+		if (inputs.equals("bye")) {
+			this.isExited = true;
+			return Ui.bye();
+		} else if (inputs.equals("list")) {
+			return this.list();
 		} else if (inputs.equals("taskson")) {
-			this.tasksOnDay(sc.nextLine().stripLeading());
+			return this.tasksOnDay(sc.nextLine().stripLeading());
 		} else if (inputs.equals("clear")) {
-			this.clear();
+			return this.clear();
 		} else if (!this.checkValid(inputs)) {
-			Ui.invalidInput();
+			return Ui.invalidInput();
 		} else if (sc.hasNext()) {
-			functions.get(inputs).accept(sc.nextLine().stripLeading());
+			return functions.get(inputs).apply(sc.nextLine().stripLeading());
 		} else {
-			Ui.emptyDescription(inputs);
+			return Ui.emptyDescription(inputs);
 		}
-		this.storage.save(this.mem.get());
 	}
 
-	private void store(Task t) {
+	boolean getIsExited() {
+		return this.isExited;
+	}
+
+	private String store(Task t) {
 		this.mem.store(t);
-		Ui.store(t, this.mem.size());
+		return Ui.store(t, this.mem.size());
 	}
 
-	private void list() {
-		Ui.list(this.mem);
+	private String list() {
+		return Ui.list(this.mem);
 	}
 
-	private void done(String s) {
+	private String done(String s) {
 		int i = Integer.parseInt(s);
 		Task t = this.mem.get(i);
 		t.finish();
-		Ui.done(t);
+		return Ui.done(t);
 	}
 
-	private void toDo(String s) {
+	private String toDo(String s) {
 		ToDo t = new ToDo(s);
-		this.store(t);
+		return this.store(t);
 	}
 
-	private void deadline(String s) {
+	private String deadline(String s) {
 		String[] inputs = s.split(" /by ");
 		Deadline t = new Deadline(inputs[0], inputs[1]);
-		this.store(t);
+		return this.store(t);
 	}
 
-	private void event(String s) {
+	private String event(String s) {
 		String[] inputs = s.split(" /at ");
 		Event t = new Event(inputs[0], inputs[1]);
-		this.store(t);
+		return this.store(t);
 	}
 
-	private void delete(String s) {
+	private String delete(String s) {
 		int i = Integer.parseInt(s);
 		Task t = this.mem.get(i);
 		this.mem.delete(t);
-		Ui.delete(t, this.mem.size());
+		return Ui.delete(t, this.mem.size());
 	}
 
-	private void tasksOnDay(String s) {
-		Ui.tasksOnDay(this.mem, s);
+	private String tasksOnDay(String s) {
+		return Ui.tasksOnDay(this.mem, s);
 	}
 
-	void find(String s) {
-		Ui.find(this.mem, s);
+	String find(String s) {
+		return Ui.find(this.mem, s);
 	}
 
-	void clear() {
+	String clear() {
 		this.mem.clear();
-		Ui.clear();
+		return Ui.clear();
 	}
 
 

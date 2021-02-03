@@ -5,17 +5,20 @@ import java.util.ArrayList;
 class TaskList {
 	
 	private final ArrayList<Task> list;
+	private final Storage storage;
 
-	TaskList() {
+	TaskList(Storage s) {
 		this.list = new ArrayList<Task>();
+		this.storage = s;
 	}
 
 	/**
 	 * creates a TaskList from a given Task ArrayList
 	 * @param a ArrayList of Task
 	 */
-	TaskList(ArrayList<Task> a) {
+	TaskList(ArrayList<Task> a, Storage s) {
 		this.list = a;
+		this.storage = s;
 	}
 
 	/**
@@ -41,6 +44,7 @@ class TaskList {
 	 */
 	void store(Task t) {
 		this.list.add(t);
+		this.storage.save(this.list);
 	}
 
 	/**
@@ -49,6 +53,7 @@ class TaskList {
 	 */
 	void delete(Task t) {
 		this.list.remove(t);
+		this.storage.save(this.list);
 	}
 
 	/**
@@ -56,6 +61,7 @@ class TaskList {
 	 */
 	void clear() {
 		this.list.clear();
+		this.storage.save(this.list);
 	}
 
 	/**

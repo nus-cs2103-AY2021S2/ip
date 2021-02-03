@@ -40,7 +40,7 @@ class Storage {
 	 * reads the data in the file and returns a TaskList
 	 * @return TaskList created from the data of the file
 	 */
-	TaskList load() {
+	ArrayList<Task> load() {
 		ArrayList<Task> list = new ArrayList<Task>();
 		try {
 			BufferedReader br = Files.newBufferedReader(this.data.toPath());
@@ -60,7 +60,7 @@ class Storage {
 		} catch (IOException e) {
 
 		}
-		return new TaskList(list);
+		return list;
 	}
 
 	/**

@@ -7,36 +7,36 @@ class Ui {
 	/**
 	 * displays the welcome message
 	 */
-	static void welcome() {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      Hello! I'm Duke");
-		System.out.println("      What can I do for you?");
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String welcome() {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      Hello! I'm Duke\n"
+		+ "      What can I do for you?\n"
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
 	/**
 	 * displays the message when an invalid input is given
 	 */
-	static void invalidInput() {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String invalidInput() {
+		return "    ____________________________________________________________\n"
+
+		+ "      ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
 	/**
 	 * displays the message when the task has an empty description
 	 * @param s name of task
 	 */
-	static void emptyDescription(String s) {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      ☹ OOPS!!! The description of a " + s + " cannot be empty.");
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String emptyDescription(String s) {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      ☹ OOPS!!! The description of a " + s + " cannot be empty.\n"
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
 	/**
@@ -44,40 +44,40 @@ class Ui {
 	 * @param t task that was stored
 	 * @param n the number of tasks in the list
 	 */
-	static void store(Task t, int n) {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      Got it. I've added this task: ");
-		System.out.println("      " + t);
-		System.out.println("      now you have " + n + " tasks in the list.");
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String store(Task t, int n) {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      Got it. I've added this task: \n"
+		+ "      " + t + "\n"
+		+ "      now you have " + n + " tasks in the list.\n"
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
 	/**
 	 * displays the message when the tasks are listed
 	 * @param t the given TaskList
 	 */
-	static void list(TaskList t) {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      Here are the tasks in your list:");
-		System.out.printf("%s", t.toString());
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String list(TaskList t) {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      Here are the tasks in your list:\n"
+		+ t.toString()
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
 	/**
 	 * displays the message when the task is marked as done
 	 * @param t the Task to be marked as done
 	 */
-	static void done(Task t) {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      Nice! I've marked this task as done:");
-		System.out.println("      " + t);
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String done(Task t) {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      Nice! I've marked this task as done:\n"
+		+ "      " + t + "\n"
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
 	/**
@@ -85,14 +85,14 @@ class Ui {
 	 * @param t the Task to be deleted
 	 * @param n the size of TaskList after deletion
 	 */
-	static void delete(Task t, int n) {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      Noted. I've removed this task:");
-		System.out.println("      " + t);
-		System.out.println("      now you have " + n + " tasks in the list.");
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String delete(Task t, int n) {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      Noted. I've removed this task:\n"
+		+ "      " + t + "\n"
+		+ "      now you have " + n + " tasks in the list.\n"
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
 	/**
@@ -100,30 +100,38 @@ class Ui {
 	 * @param t the given TaskList
 	 * @param s the day that is given in yyy-mm-dd format (e.g. 2021-01-31)
 	 */
-	static void tasksOnDay(TaskList t, String s) {
+	static String tasksOnDay(TaskList t, String s) {
 		LocalDate day = LocalDate.parse(s);
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      Here are the tasks on " + day.toString() + ":");
-		System.out.printf("%s", t.tasksOnDay(s));
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+		return "    ____________________________________________________________\n\n"
+
+		+ "      Here are the tasks on " + day.toString() + ":\n"
+		+ t.tasksOnDay(s)
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
-	static void find(TaskList t, String s) {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      Here are the matching tasks in your list:");
-		System.out.printf("%s", t.find(s));
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String find(TaskList t, String s) {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      Here are the matching tasks in your list:\n"
+		+ t.find(s) + "\n"
+		+ "    ____________________________________________________________\n\n";
+
 	}
 
-	static void clear() {
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
-		System.out.println("      The list has been cleared");
-		System.out.println("    ____________________________________________________________");
-		System.out.println();
+	static String clear() {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      The list has been cleared\n"
+		+ "    ____________________________________________________________\n\n";
+
+	}
+
+	static String bye() {
+		return "    ____________________________________________________________\n\n"
+
+		+ "      Bye. Hope to see you again soon!\n"
+		+ "    ____________________________________________________________\n\n";
+
 	}
 }
