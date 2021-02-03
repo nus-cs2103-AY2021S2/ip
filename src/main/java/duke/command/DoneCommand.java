@@ -25,7 +25,7 @@ public class DoneCommand implements Command {
      */
     @Override
     public String execute(final TaskList taskList) {
-        if (index > taskList.getSize()) {
+        if (index > taskList.getSize() || index <= 0) {
             throw new DukeException.InvalidTask();
         }
         return String.format("%s\n%s", DukeString.MESSAGE_DONE, taskList.markTaskDone(index));
