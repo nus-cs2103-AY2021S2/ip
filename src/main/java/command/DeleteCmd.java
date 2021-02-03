@@ -9,10 +9,21 @@ public class DeleteCmd extends Command {
 
     private String cmd;
 
+    /**
+     * Constructor method.
+     * @param cmd User input command.
+     */
     public DeleteCmd (String cmd) {
         this.cmd = cmd;
     }
 
+    /**
+     * Execute method.
+     * @param lst a TaskList object containing Task Objects.
+     * @param ui a Ui object.
+     * @param storage a storage object.
+     * @throws DuckieException if user enters commands besides accepted ones.
+     */
     @Override
     public void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         //System.out.println(line);
@@ -33,6 +44,10 @@ public class DeleteCmd extends Command {
 
     }
 
+    /**
+     * Method to determine whether to exit program.
+     * @return Returns false, program continues.
+     */
     @Override
     public boolean isEnd() {
         return false;

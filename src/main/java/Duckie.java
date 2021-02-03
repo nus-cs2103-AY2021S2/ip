@@ -1,16 +1,28 @@
 package main.java;
 
 
-import main.java.classes.*;
-import main.java.command.*;
+import main.java.classes.DuckieException;
+import main.java.classes.Parser;
+import main.java.classes.Storage;
+import main.java.classes.TaskList;
+import main.java.classes.Ui;
+import main.java.command.Command;
 
 import java.io.IOException;
 
+/**
+ * Main class.
+ */
 public class Duckie {
     private Storage storage;
     private TaskList lst;
     private Ui ui;
 
+    /**
+     * Constructor method.
+     * @param filePath to the saved file
+     * @throws IOException if user IO is incorrect
+     */
     public Duckie(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +34,10 @@ public class Duckie {
         }
     }
 
+    /**
+     * Run method to run Duckie.
+     * @throws IOException if user IO is incorrect
+     */
     public void run() throws IOException {
         storage.loadTasks();
         ui.startMessage();
@@ -30,9 +46,9 @@ public class Duckie {
             try {
                 String fullInput = ui.readInput();
                 ui.customLine();
-                Command c = Parser.parse(fullInput);
-                c.execute(lst, ui, storage);
-                isEnd = c.isEnd();
+                Command cmd = Parser.parse(fullInput);
+                cmd.execute(lst, ui, storage);
+                isEnd = cmd.isEnd();
             } catch (DuckieException e) {
                 e.printStackTrace();
             }
@@ -41,7 +57,12 @@ public class Duckie {
         ui.endMessage();
     }
 
-    public static void main(String[] args) throws IOException, DuckieException {
+    /**
+     * Main method to drive Duckie.
+     * @param args command line arguments
+     * @throws IOException if user IO is incorrect
+     */
+    public static void main(String[] args) throws IOException {
         new Duckie("duckie.txt").run();
     }
 }
