@@ -1,7 +1,6 @@
 package duke.gui;
 
 import duke.Duke;
-import duke.gui.DialogBox;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,15 +31,22 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes Main window and display the welcome message by Duke.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog("Hello, my name is Jarvis. How can I help you?",
+                DialogBox.getUserDialog("Hello, my name is Duke. How can I help you?",
                         dukeImage)
         );
     }
 
+    /**
+     * A method that sets a delay before exiting from the application.
+     * A 1.5 second delay is set to allow the user to view the farewell message by Duke.
+     */
     public void shutdown() {
         Timer timer = new Timer();
         int delay = 1500;

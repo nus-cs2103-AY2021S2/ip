@@ -22,16 +22,14 @@ import java.util.Scanner;
  */
 public class TaskStorage {
     private File file;
-    private Ui ui;
 
     /**
-     * Constructor for TaskStorage.
+     * Constructor of TaskStorage.
      *
      * @param path Path of the file to read from or write to.
      */
     public TaskStorage(String path) throws DukeStorageException {
         try {
-            ui = new Ui();
             file = new File(path);
             file.getParentFile().mkdirs();
             file.createNewFile();
@@ -78,7 +76,7 @@ public class TaskStorage {
     }
 
     /**
-     * Retrieve data of tasks from file and construct a list of tasks previously added by the user.
+     * Retrieves data of tasks from file and construct a list of tasks previously added by the user.
      *
      * @return A list of tasks retrieved from the storage.
      */

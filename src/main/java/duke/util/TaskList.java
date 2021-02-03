@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class TaskList {
     private List<Task> tasks;
-    private Ui ui;
 
     /**
      * Constructor for TaskList.
@@ -19,7 +18,6 @@ public class TaskList {
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
-        this.ui = new Ui();
     }
 
     /**
@@ -30,7 +28,6 @@ public class TaskList {
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
-        this.ui = new Ui();
     }
 
     /**

@@ -5,7 +5,7 @@ import duke.exception.DukeStorageException;
 import duke.util.Parser;
 import duke.util.TaskList;
 import duke.util.TaskStorage;
-import duke.util.Ui;
+import duke.util.MessageFormatter;
 
 /**
  * Class representing chat bot, Duke.
@@ -13,29 +13,40 @@ import duke.util.Ui;
 public class Duke {
     private TaskList tasks;
     private TaskStorage storage;
-    private Ui ui;
+    private MessageFormatter messageFormatter;
     private boolean isActive;
 
     /**
      * Constructor of Duke.
      */
     public Duke() throws DukeStorageException {
-        ui = new Ui();
+        messageFormatter = new MessageFormatter();
         storage = new TaskStorage("data/tasks.txt");
         tasks = storage.retrieveData();
         isActive = true;
     }
 
+    /**
+     * Interprets user input, executes Command and returns Duke's response.
+     *
+     * @param input The input of the user.
+     * @return String representing Duke's response.
+     */
     public String getResponse(String input) {
         if (input.isBlank()) {
             return "You have not entered a command!";
         }
         Command cmd = Parser.parse(input, tasks);
-        String response = cmd.execute(tasks, ui, storage);
+        String response = cmd.execute(tasks, messageFormatter, storage);
         isActive = !cmd.toExit();
         return response;
     }
 
+    /**
+     * Gets the status of Duke.
+     *
+     * @return true if Duke is still running, false if Duke is no longer running.
+     */
     public boolean isActive() {
         return isActive;
     }

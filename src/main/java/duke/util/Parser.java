@@ -22,7 +22,6 @@ import java.time.format.DateTimeFormatter;
  * Class representing a Parser.
  */
 public class Parser {
-    private static final Ui ui = new Ui();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**

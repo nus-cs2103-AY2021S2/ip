@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.util.TaskList;
 import duke.util.TaskStorage;
-import duke.util.Ui;
+import duke.util.MessageFormatter;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -30,11 +30,11 @@ public class FindCommand extends Command {
      * If task description contains the keyword, corresponding task is printed.
      *
      * @param tasks List of tasks.
-     * @param ui Formats and prints the list of matching tasks to user.
-     * @param storage
-     * @return true.
+     * @param messageFormatter Formats Duke's response into a String.
+     * @param storage Storage of tasks.
+     * @return A list of tasks with descriptions that matches the keyword entered by the user.
      */
-    public String execute(TaskList tasks, Ui ui, TaskStorage storage) {
+    public String execute(TaskList tasks, MessageFormatter messageFormatter, TaskStorage storage) {
         List<Task> matchingTasks = new ArrayList<>();
         ListIterator<Task> iterator = tasks.getIterator();
         while (iterator.hasNext()) {
@@ -44,6 +44,6 @@ public class FindCommand extends Command {
                 matchingTasks.add(task);
             }
         }
-        return ui.formatFindCmdMsg(new TaskList(matchingTasks));
+        return messageFormatter.formatFindCmdMsg(new TaskList(matchingTasks));
     }
 }

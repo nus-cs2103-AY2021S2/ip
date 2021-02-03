@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.util.MessageFormatter;
 import duke.util.TaskList;
 import duke.util.TaskStorage;
-import duke.util.Ui;
 
 /**
  * Class representing a List Command.
@@ -13,11 +13,11 @@ public class ListCommand extends Command {
      * Shows all the tasks to user.
      *
      * @param tasks List of tasks.
-     * @param ui Formats and prints tasks to user.
-     * @param storage
-     * @return true.
+     * @param messageFormatter Formats Duke's response into a String.
+     * @param storage Storage of tasks.
+     * @return All current tasks.
      */
-    public String execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        return ui.formatListCmdMsg(tasks);
+    public String execute(TaskList tasks, MessageFormatter messageFormatter, TaskStorage storage) {
+        return messageFormatter.formatListCmdMsg(tasks);
     }
 }

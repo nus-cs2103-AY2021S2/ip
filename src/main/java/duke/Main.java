@@ -17,6 +17,11 @@ public class Main extends Application {
 
     private Duke duke;
 
+    /**
+     * Initializes and starts the application.
+     *
+     * @param stage Top level JavaFx container.
+     */
     @Override
     public void start(Stage stage) {
         try {
