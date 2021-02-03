@@ -13,6 +13,7 @@ public class ArgumentException extends DukeException {
 
     /**
      * Initializes a newly created ArgumentException object with the error type.
+     *
      * @param type Error type according to the list below:
      *             <p> 1. Format error of a todo-task </p>
      *             <p> 2. Format error of a deadline-task </p>
@@ -26,25 +27,29 @@ public class ArgumentException extends DukeException {
 
     /**
      * Converts this object to a string that represents the error message
+     *
      * @return A string representing the error message depending on the specific error it is associated with
      */
     @Override
     public String toString() {
-        if (this.type == 1) {
+        switch (this.type) {
+        case 1:
             return super.toString()
-                    + "A todo-task should be specified as follows \n "
-                    + "todo <task_description>";
-        } else if (this.type == 2) {
+                + "A todo-task should be specified as follows \n "
+                + "todo <task_description>";
+        case 2:
             return super.toString()
-                    + "A deadline-task should be specified as follows \n "
-                    + "deadline <task_description> /by <task_deadline>";
-        } else if (this.type == 3) {
+                + "A deadline-task should be specified as follows \n "
+                + "deadline <task_description> /by <task_deadline>";
+        case 3:
             return super.toString()
-                    + "A event-task should be specified as follows \n "
-                    + "event <event_description> /at <event_date>";
-        } else {
+                + "A event-task should be specified as follows \n "
+                + "event <event_description> /at <event_date>";
+        case 4:
             return super.toString()
-                    + "Please enter a valid item number in the list";
+                + "Please enter a valid item number in the list.";
+        default:
+            return super.toString();
         }
     }
 }
