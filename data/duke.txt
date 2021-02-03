@@ -1,5 +1,4 @@
-T | 1 | read book
-D | 0 | return book | 2020-06-06
+D | 1 | return book | 2020-06-06
 T | 1 | join sports club
 T | 0 | hi
 T | 0 | hi hi

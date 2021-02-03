@@ -16,15 +16,31 @@ public class Ui {
                     + "|____/ \\__,_|_|\\_\\___|\n";
     public Ui() { }
 
-    public void introduction() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Please enter the keyword:\n"
-                + "        help\n" + "to see the list of commands\n");
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
+
+    public void printMessage(String message) {
+        System.out.println(message);
     }
 
-    public void help() {
-        System.out.println("Here is the list of commands:"
+
+    /**
+     * Introduction output from the UI.
+     *
+     * @return the String output for this command.
+     */
+    public String introduction() {
+        return "Hello from\n" + logo
+                + "Please enter the keyword:\n"
+                + "        help\n" + "to see the list of commands\n"
+                + "Hello! I'm Duke\n" + "What can I do for you?\n";
+    }
+
+    /**
+     * Help output from the UI.
+     *
+     * @return the String output for this command.
+     * */
+    public String help() {
+        return "Here is the list of commands:"
                 + "\nShow list of commands:\n - help"
                 + "\nExit duke:\n - bye"
                 + "\nDisplay list of tasks:\n - list"
@@ -34,86 +50,167 @@ public class Ui {
                 + "\nAdd a new task:\n - todo <task>"
                 + "\nAdd a new deadline:\n - deadline <task> /by <yyyy-mm-dd>"
                 + "\nAdd a new event:\n - event <name> /at <yyyy-mm-dd> <hh:mm> - <hh:mm>"
-                + "\n**REMEMBER to exclude the < > when entering keywords\n");
+                + "\n**REMEMBER to exclude the < > when entering keywords\n";
     }
 
-    public void preload() {
-        System.out.println("--Booting up Application--");
-        System.out.println("Checking if loading data exist...\n");
+    /**
+     * Pre-loading output from the UI.
+     *
+     * @return the String output for this command.
+     */
+    public String preload() {
+        return "--Booting up Application--\n"
+            + "Checking if loading data exist...\n";
     }
 
-    public void goodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    /**
+     * Goodbye output from the UI.
+     *
+     * @return the String output for this command.
+     * */
+    public String goodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Reads the input by the user.
+     *
+     * @return the input by the user.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
-    public void add(DukeTask task, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println(String.format("Now you have %d tasks in the list.\n", size));
+    /**
+     * Adding Tasks output from the UI.
+     *
+     * @param task The DukeTask Added.
+     * @param size The size of the TaskList.
+     * @return the String output for this command.
+     */
+    public String add(DukeTask task, int size) {
+        return "Got it. I've added this task:\n"
+                + "  " + task + "\n"
+                + String.format("Now you have %d tasks in the list.\n", size);
     }
 
-    public void delete(DukeTask task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task);
-        System.out.println(String.format("Now you have %d tasks in the list.\n", size));
+    /**
+     * Deleting Tasks output from the UI.
+     *
+     * @param task The DukeTask deleted.
+     * @param size The size of the TaskList.
+     * @return the String output for this command.
+     */
+    public String delete(DukeTask task, int size) {
+        return "Noted. I've removed this task:\n"
+            + "  " + task
+            + String.format("Now you have %d tasks in the list.\n", size);
     }
 
-    public void done(DukeTask task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + task + "\n");
+    /**
+     * Done output from the UI.
+     *
+     * @param task Task marked as done.
+     * @return the String output for this command.
+     */
+    public String done(DukeTask task) {
+        return "Nice! I've marked this task as done:\n"
+            + "  " + task + "\n";
     }
 
-    public void list(TaskList taskList) {
+    /**
+     * Lists the tasks in the taskList.
+     *
+     * @param taskList The TaskList.
+     * @return the String output for this command.
+     */
+    public String list(TaskList taskList) {
         int i = 1;
-        System.out.println("Here are the tasks in your list:");
+        String output = "";
+        output += "Here are the tasks in your list:\n";
         for (DukeTask items : taskList.getList()) {
-            System.out.println(String.format("%d.%s", i, items));
+            output += String.format("%d.%s\n", i, items);
             i++;
         }
-        System.out.println("");
+        return output;
     }
 
-    public void find(List<DukeTask> taskList) {
+    /**
+     * Shows the item in the List.
+     *
+     * @param taskList List of Tasks containing the keyword.
+     * @return the String output for this command.
+     */
+    public String find(List<DukeTask> taskList) {
         int i = 1;
-        System.out.println("Here are the matching tasks in your list:");
+        String output = "";
+        output += "Here are the matching tasks in your list:\n";
         for (DukeTask items : taskList) {
-            System.out.println(String.format("%d.%s", i, items));
+            output += String.format("%d.%s", i, items);
             i++;
         }
-        System.out.println("");
+        return output;
     }
 
-    public void loadFileError() {
-        System.out.println("An error occurred while loading!!");
+    /**
+     * Loading File Error output from the UI.
+     *
+     * @return the String output for this command.
+     */
+    public String loadFileError() {
+        return "An error occurred while loading!!";
     }
 
-    public void arrayIndexOutOfBoundsError() {
-        System.out.println("☹ OOPS!!! The index needs to be in range of the list.\n");
+    /**
+     * Index Out of Bounds Error output from the UI.
+     *
+     * @return the String output for this command.
+     */
+    public String arrayIndexOutOfBoundsError() {
+        return "☹ OOPS!!! The index needs to be in range of the list.\n";
     }
 
-    public void emptyIndexError() {
-        System.out.println("☹ OOPS!!! I need the index of the task you want done.\n");
+    /**
+     * Empty Index Error output from the UI.
+     *
+     * @return the String output for this command.
+     */
+    public String emptyIndexError() {
+        return "☹ OOPS!!! I need the index of the task you want done.\n";
     }
 
-    public void emptyDescriptionError(String tasktype) {
-        System.out.println("☹ OOPS!!! The description of a " + tasktype + " cannot be empty.\n");
+    /**
+     * Empty Description Error output from the UI.
+     *
+     * @param tasktype Type of the Task.
+     * @return the String output for this command.
+     */
+    public String emptyDescriptionError(String tasktype) {
+        return "☹ OOPS!!! The description of a " + tasktype + " cannot be empty.\n";
     }
 
-    public void emptyDetailsError(String tasktype) {
+    /**
+     * Empty Details Error output from the UI.
+     *
+     * @param tasktype Type of the Task.
+     * @return the String output for this command.
+     */
+    public String emptyDetailsError(String tasktype) {
         if (tasktype.equals("deadline")) {
-            System.out.println("☹ OOPS!!! The date of a deadline cannot be empty.\n");
+            return "☹ OOPS!!! The date of a deadline cannot be empty.\n";
         } else {
-            System.out.println("☹ OOPS!!! The timing of an event cannot be empty.\n");
+            return "☹ OOPS!!! The timing of an event cannot be empty.\n";
         }
     }
 
-    public void unknownCommandError() {
-        System.out.println("☹ OOPS!!! Command is not recognized!!\n");
+    /**
+     * Unknown Command Error output from the UI.
+     *
+     * @return the String output for this command.
+     */
+    public String unknownCommandError() {
+        return "☹ OOPS!!! Command is not recognized!!\n";
     }
 }
 

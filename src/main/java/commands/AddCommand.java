@@ -25,12 +25,11 @@ public class AddCommand extends Command {
       * @param ui Duke UI object.
       */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
         tasklist.add(this.task);
-        ui.add(this.task, tasklist.size());
         storage.save(tasklist);
+        return ui.add(this.task, tasklist.size());
     }
-
     @Override
     public boolean isExit() {
         return false;

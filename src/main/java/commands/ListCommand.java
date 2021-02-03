@@ -14,8 +14,8 @@ public class ListCommand extends Command {
      * @param ui Duke UI object.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.list(tasklist);
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return ui.list(tasklist);
     }
 
     @Override

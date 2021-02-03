@@ -18,6 +18,6 @@ public abstract class Command {
      * @param ui Duke UI object.
      * @throws DukeException Depends on the error of the command.
      */
-    public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
     public abstract boolean isExit();
 }

@@ -14,8 +14,8 @@ public class ByeCommand extends Command {
      * @param ui Duke UI object.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.goodbye();
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return ui.goodbye();
     }
 
     @Override

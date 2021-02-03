@@ -18,8 +18,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
-        ui.find(tasklist.find(this.word));
+    public String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+        return ui.find(tasklist.find(this.word));
     }
 
     @Override

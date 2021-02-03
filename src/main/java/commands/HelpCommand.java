@@ -14,8 +14,8 @@ public class HelpCommand extends Command {
      * @param ui Duke UI object.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.help();
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return ui.help();
     }
 
     @Override
