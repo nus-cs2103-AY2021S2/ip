@@ -5,6 +5,7 @@ import duke.exceptions.DukeEmptyListException;
 import duke.exceptions.DukeUnknownArgumentsException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+import duke.ui.Message;
 import duke.ui.Ui;
 
 /**
@@ -31,27 +32,33 @@ public class Controller {
     /**
      * Starts the program and accepting user inputs.
      */
-    public void run() {
-        ui.printStartMsg();
-        String input = ui.getUserCommand();
+    public String run(String input) {
+        //ui.printStartMsg();
+        //String input = ui.getUserCommand();
 
+        /*
         while (!input.equals(END_COMMAND)) {
             ui.printDivider();
             handleInput(input);
             ui.printDivider();
             input = ui.getUserCommand();
         }
+         */
+        if (input.equals("bye")) {
+            return Message.getByeMsg();
+        }
 
-        ui.printByeMsg();
+        return handleInput(input);
+        //ui.printByeMsg();
     }
 
     /**
      * Handles inputs from user.
      * @param input User inputs.
      */
-    private void handleInput(String input) {
+    public String handleInput(String input) {
         BasicCommandType command = Parser.parseCommand(input);
-        executeCommand(input, command);
+        return executeCommand(input, command);
     }
 
     /**
@@ -59,33 +66,36 @@ public class Controller {
      * @param input user input used based on commandType.
      * @param command commandType used to differentiate how input is used.
      */
-    private void executeCommand(String input, BasicCommandType command) {
+    private String executeCommand(String input, BasicCommandType command) {
         try {
+            String output;
             switch (command) {
             case DONE:
-                doneTask(input);
+                output = doneTask(input);
                 break;
             case LIST:
-                printList();
+                output = printList();
                 break;
             case DELETE:
-                tasks.deleteTask(input);
+                output = tasks.deleteTask(input);
                 break;
             case ADD:
-                specificTask(input);
+                output = specificTask(input);
                 break;
             default:
                 throw new DukeUnknownArgumentsException();
             }
             tasks.updateSave(storage);
-        } catch (DukeUnknownArgumentsException e) {
-            ui.printErrorMsg(e);
+            return output;
+        } catch (DukeUnknownArgumentsException | DukeEmptyListException e) {
+            return Message.getErrorMsg(e);
+            //ui.printErrorMsg(e);
         } catch (NumberFormatException e) {
-            ui.printErrorMsg(e);
+            return Message.getErrorMsg(e);
+            //ui.printErrorMsg(e);
         } catch (IndexOutOfBoundsException e) {
-            ui.printErrorMsg(e, tasks);
-        } catch (DukeEmptyListException e) {
-            ui.printErrorMsg(e);
+            return Message.getErrorMsg(e, tasks);
+            //ui.printErrorMsg(e, tasks);
         }
     }
 
@@ -93,8 +103,8 @@ public class Controller {
      * Marks specified task based on input as done.
      * @param input input used to get index to be marked as done.
      */
-    private void doneTask(String input) {
-        tasks.done(input);
+    private String doneTask(String input) {
+        return tasks.done(input);
     }
 
     /**
@@ -102,15 +112,15 @@ public class Controller {
      * @param input input used to get specific information of the task to be added.
      * @throws DukeUnknownArgumentsException if the input contains an unknown command.
      */
-    private void specificTask(String input) throws DukeUnknownArgumentsException {
-        tasks.run(input);
+    private String specificTask(String input) throws DukeUnknownArgumentsException {
+        return tasks.run(input);
     }
 
     /**
      * Prints the string representation of the TaskList.
      */
-    private void printList() {
-        tasks.print();
+    private String printList() {
+        return tasks.print();
     }
 
 }
