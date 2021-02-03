@@ -46,7 +46,7 @@ public class Duke {
      * Start Duke chat services.
      */
     public void execute() {
-        ui.Greet();
+        ui.greet();
         Boolean shouldExit = false;
         Scanner s = new Scanner(System.in);
 

@@ -58,7 +58,7 @@ public class Ui {
     /**
      * Greets user.
      */
-    public void Greet() {
+    public void greet() {
         enclose(Response.GREET.toString());
     }
 

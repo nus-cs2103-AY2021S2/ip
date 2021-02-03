@@ -5,6 +5,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+
 repositories {
     mavenCentral()
 }
@@ -29,7 +30,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -43,4 +44,8 @@ checkstyle {
 
 run{
     standardInput = System.in
+}
+
+run {
+    enableAssertions = true
 }
