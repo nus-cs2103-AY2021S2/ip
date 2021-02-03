@@ -181,7 +181,7 @@ public class Duke {
         while (s.hasNextLine()) {
             String curr = s.nextLine();
             String[] currArray = curr.split("\\|");
-            
+
             if (currArray[0].equals("T")) {
                 ToDos currTask;
                 if (currArray[1].equals("0")) {

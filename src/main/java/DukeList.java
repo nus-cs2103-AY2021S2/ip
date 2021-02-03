@@ -43,6 +43,10 @@ public class DukeList {
         size = 0;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     /**
      * DukeList getter
      * @param x Task number x
