@@ -1,11 +1,13 @@
+package duke;
+
 import java.time.LocalDate;
 
 /**
  * Represents a deadline task
  */
-public class Deadline extends Task{
-    LocalDate deadline;
-    String time;
+public class Deadline extends Task {
+    private LocalDate deadline;
+    private String time;
 
     /**
      * Constructor of a deadline
@@ -30,6 +32,14 @@ public class Deadline extends Task{
         super(name, done);
         this.deadline = deadline;
         this.time = time;
+    }
+
+    public LocalDate getDeadline() {
+        return this.deadline;
+    }
+
+    public String getTime() {
+        return this.time;
     }
 
     /**

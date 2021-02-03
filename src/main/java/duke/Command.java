@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents the different types of possible commands.
  */

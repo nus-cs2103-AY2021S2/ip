@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -103,8 +105,8 @@ public class Storage {
     public void appendEvent(Event task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt", true);
-            fw.write("E | 0 | " + task.name + " | " + task.date + " "
-                    + task.time + System.lineSeparator());
+            fw.write("E | 0 | " + task.name + " | " + task.getDate() + " "
+                    + task.getTime() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             throw new DukeException("File cannot be found.", e);
@@ -121,8 +123,8 @@ public class Storage {
     public void appendDeadline(Deadline task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt", true);
-            fw.write("D | 0 | " + task.name + " | " + task.deadline + " "
-                    + task.time + System.lineSeparator());
+            fw.write("D | 0 | " + task.name + " | " + task.getDeadline() + " "
+                    + task.getTime() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             throw new DukeException("File cannot be found.", e);

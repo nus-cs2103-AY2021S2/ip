@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -46,8 +48,8 @@ public class Parser {
             String indexString = userInput.substring(index).strip();
             number = Integer.parseInt(indexString);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Remember to specify which task you are done with " +
-                    "using a valid number", e);
+            throw new DukeException("Remember to specify which task you are done with "
+                    + "using a valid number", e);
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid format, please try again using numbers only.", e);
         }

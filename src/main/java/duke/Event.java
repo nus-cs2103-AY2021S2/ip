@@ -1,11 +1,13 @@
+package duke;
+
 import java.time.LocalDate;
 
 /**
  * Represents an event
  */
-public class Event extends Task{
-    LocalDate date;
-    String time;
+public class Event extends Task {
+    private LocalDate date;
+    private String time;
 
     /**
      * Constructor of an event
@@ -30,6 +32,14 @@ public class Event extends Task{
         super(name, done);
         this.date = date;
         this.time = time;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public String getTime() {
+        return this.time;
     }
 
     /**

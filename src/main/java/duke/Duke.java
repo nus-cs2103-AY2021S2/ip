@@ -1,3 +1,4 @@
+package duke;
 /**
  * Duke is a program that helps you keep track of tasks.
  *

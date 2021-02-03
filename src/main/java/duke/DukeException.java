@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Thrown to indicate an error in Duke
  */
