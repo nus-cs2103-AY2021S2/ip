@@ -27,7 +27,7 @@ public class StorageTest {
         }
 
         try {
-            new Storage(System.getProperty("user.dir") +"/data/DukeBot.txt").loadData();
+            new Storage(System.getProperty("user.dir") + "/data/DukeBot.txt").loadData();
         } catch (DukeException ex) {
             System.out.println("Fail to load file!");
             assertEquals("☹ OOPS!!! The file cannot be loaded and a new file will be created !!!",
@@ -62,7 +62,7 @@ public class StorageTest {
         }
 
         try {
-            new Storage(System.getProperty("user.dir") +"/data/DukeBot.txt").saveData(new TaskList());
+            new Storage(System.getProperty("user.dir") + "/data/DukeBot.txt").saveData(new TaskList());
         } catch (DukeException ex) {
             System.out.println("Fail to load file!");
             assertEquals("☹ OOPS!!! Unfortunately, file saving to Duke.txt is not working at the moment "

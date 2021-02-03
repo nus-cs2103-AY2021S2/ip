@@ -20,17 +20,10 @@ import duke.task.ToDo;
 /**
  * Storage class to manage saving tasks into the list and loading of tasks from the list when requested by the user
  */
+
 public class Storage {
     private final String fileDirectory;
     private final String pathDirectory;
-
-    /**
-     * Storage class constructor
-     */
-    public Storage() {
-        this.fileDirectory = "";
-        this.pathDirectory = "";
-    }
 
     /**
      * Storage class overloaded constructor
