@@ -1,6 +1,9 @@
 package com.nus.duke.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.nus.duke.command.Command;
 import com.nus.duke.command.DeleteCommand;
@@ -10,8 +13,6 @@ import com.nus.duke.command.HelpCommand;
 import com.nus.duke.command.IncorrectCommand;
 import com.nus.duke.command.ListCommand;
 import com.nus.duke.command.TodoCommand;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 class CommandParserTest {
 

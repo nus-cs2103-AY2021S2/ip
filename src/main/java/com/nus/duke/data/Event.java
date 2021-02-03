@@ -1,7 +1,8 @@
 package com.nus.duke.data;
 
-import com.nus.duke.parser.DateParser;
 import java.time.LocalDateTime;
+
+import com.nus.duke.parser.DateParser;
 
 /**
  * Event is a type of Task that includes a time. Note: Date/time are treated as Strings, so any

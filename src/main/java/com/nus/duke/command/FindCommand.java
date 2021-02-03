@@ -1,8 +1,9 @@
 package com.nus.duke.command;
 
+import java.util.List;
+
 import com.nus.duke.data.Task;
 import com.nus.duke.ui.TextUi;
-import java.util.List;
 
 public class FindCommand extends Command {
 

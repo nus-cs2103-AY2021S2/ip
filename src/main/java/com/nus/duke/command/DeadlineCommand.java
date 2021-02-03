@@ -1,10 +1,11 @@
 package com.nus.duke.command;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.nus.duke.common.DukeDateParserException;
 import com.nus.duke.data.Deadline;
 import com.nus.duke.parser.DateParser;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DeadlineCommand extends Command {
 

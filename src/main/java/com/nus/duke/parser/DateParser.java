@@ -1,6 +1,5 @@
 package com.nus.duke.parser;
 
-import com.nus.duke.common.DukeDateParserException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +11,8 @@ import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
+
+import com.nus.duke.common.DukeDateParserException;
 
 public class DateParser {
 

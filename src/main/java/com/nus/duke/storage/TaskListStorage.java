@@ -1,14 +1,15 @@
 package com.nus.duke.storage;
 
-import com.nus.duke.common.DukeStorageException;
-import com.nus.duke.data.Task;
-import com.nus.duke.data.TaskList;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import com.nus.duke.common.DukeStorageException;
+import com.nus.duke.data.Task;
+import com.nus.duke.data.TaskList;
 
 public class TaskListStorage {
 

@@ -1,7 +1,8 @@
 package com.nus.duke.data;
 
-import com.nus.duke.parser.DateParser;
 import java.time.LocalDateTime;
+
+import com.nus.duke.parser.DateParser;
 
 /**
  * Deadline is a type of Task that needs to be done before a specific date/time. Note: Date/time are
