@@ -87,7 +87,7 @@ public class Parser {
                     if (taskNumber < 1) {
                         throw new Exception("Please provide a valid task number!");
                     }
-                    if (taskNumber <= tasks.size()) {
+                    if (taskNumber <= tasks.getSize()) {
                         tasks.markAsDone(taskNumber);
                         Ui.printLine("Nice! I've marked this task as done:");
                         Ui.printLine(String.format("  %s", tasks.getTaskString(taskNumber)));
@@ -106,11 +106,11 @@ public class Parser {
                     if (taskNumber < 1) {
                         throw new Exception("Please provide a valid task number!");
                     }
-                    if (taskNumber <= tasks.size()) {
+                    if (taskNumber <= tasks.getSize()) {
                         String taskString = tasks.delete(taskNumber);
                         Ui.printLine("Noted. I've removed this task:");
                         Ui.printLine(String.format("  %s", taskString));
-                        Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                        Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                     } else {
                         throw new Exception("Task does not exist!");
                     }
@@ -125,7 +125,7 @@ public class Parser {
                 tasks.add(task);
                 Ui.printLine("Got it! I've added this task:");
                 Ui.printLine("  " + task);
-                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
             } else if (tokens[0].equals("deadline")) {
                 if (tokens.length < 2) {
                     throw new Exception("Please provide a task name!");
@@ -140,7 +140,7 @@ public class Parser {
                                 tasks.add(task);
                                 Ui.printLine("Got it! I've added this task:");
                                 Ui.printLine("  " + task);
-                                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                             } catch (DateTimeParseException e) {
                                 throw new Exception("Datetime in the wrong format!");
                             }
@@ -155,7 +155,7 @@ public class Parser {
                     tasks.add(task);
                     Ui.printLine("Got it! I've added this task:");
                     Ui.printLine("  " + task);
-                    Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                    Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                 }
             } else if (tokens[0].equals("event")) {
                 if (tokens.length < 2) {
@@ -171,7 +171,7 @@ public class Parser {
                                 tasks.add(task);
                                 Ui.printLine("Got it! I've added this task:");
                                 Ui.printLine("  " + task);
-                                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                             } catch (DateTimeParseException e) {
                                 throw new Exception("Datetime in the wrong format!");
                             }
@@ -186,7 +186,7 @@ public class Parser {
                     tasks.add(task);
                     Ui.printLine("Got it! I've added this task:");
                     Ui.printLine("  " + task);
-                    Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                    Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                 }
             } else if (tokens[0].equals("find")) {
                 if (tokens.length < 2) {
@@ -195,7 +195,7 @@ public class Parser {
                 ArrayList<String> matchedTaskStrings = new ArrayList<>();
                 ArrayList<Integer> matchedTaskIndices = new ArrayList<>();
                 Pattern pattern = Pattern.compile(tokens[1], Pattern.CASE_INSENSITIVE);
-                for (int i = 1; i <= tasks.size(); i++) { // i is one-based!
+                for (int i = 1; i <= tasks.getSize(); i++) { // i is one-based!
                     Matcher matcher = pattern.matcher(tasks.getTaskName(i));
                     if (matcher.find()) {
                         matchedTaskStrings.add(tasks.getTaskString(i));
