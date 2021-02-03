@@ -341,11 +341,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return "[D]" + super.toString() + " (" + this.deadline + ")";
-=======
         return "[D]" + super.toString() + "(" + this.timeDisplay() + ")";
->>>>>>> branch-Level-8
     }
 }
 
@@ -377,11 +373,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return "[E]" + super.toString() + " (" + this.date + ")";
-=======
         return "[E]" + super.toString() + "(" + this.timeDisplay() + ")";
->>>>>>> branch-Level-8
     }
 }
 
