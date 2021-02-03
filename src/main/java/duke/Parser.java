@@ -42,6 +42,9 @@ public class Parser {
         case "bye":
             c = new ByeCommand();
             break;
+        case "help":
+            c = new HelpCommand();
+            break;
         case "find":
             c = new FindCommand(parsedInput[1]);
             break;

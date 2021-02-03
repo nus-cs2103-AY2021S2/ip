@@ -1,2 +1,2 @@
-T |   | read book
-T |   | return book
+T | X | return book
+T |   | burn book

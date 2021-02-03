@@ -4,6 +4,15 @@ import java.util.Scanner;
 
 public class Ui {
     private final String LINE = "";
+    private final String HELP = "     These are the formats for Duke commands:\n"
+            + "    - help\n"
+            + "    - list\n"
+            + "    - todo (taskName)\n"
+            + "    - deadline (taskName) /by (YYYY-M-D TIME)\n"
+            + "    - event (taskName) /at (YYYY-M-D TIME-TIME)\n"
+            + "    - find (relevantName)\n"
+            + "    - delete (taskNumber from list)\n"
+            + "    - done (taskNumber from list)\n";
     private Scanner sc;
 
     public Ui() {
@@ -13,9 +22,13 @@ public class Ui {
     /**
      * Print greeting message.
      */
-    public static String printGreeting() {
+    public String printGreeting() {
         String greeting = "     Hello! I'm Duke\n" + "     What can I do for you?\n";
         return greeting;
+    }
+
+    public String printHelp() {
+        return HELP;
     }
 
     /**

@@ -15,7 +15,10 @@ public class Duke {
     }
 
     public static String greeting() {
-        return Ui.printGreeting();
+        return new Ui().printGreeting();
+    }
+    public static String help() {
+        return new Ui().printHelp();
     }
 
     public static void main(String[] args) {
