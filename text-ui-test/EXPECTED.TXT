@@ -1,4 +1,4 @@
-Storage file could not be found, starting fresh database
+Oracle.Storage file could not be found, starting fresh database
               $$$@@@@@@@
          ##########$$$$$$@@$
        #**!!!!!!!!**####$$$$$$#
@@ -20,23 +20,23 @@ Storage file could not be found, starting fresh database
       -~:;===;======;=;;;:::~-,
         .-~~::::;:::::~:~--.
 
-Greetings Neo, what can the Oracle do for you?
+Greetings Neo, what can the Oracle.Oracle do for you?
 1. [T][ ] borrow book
-Event:    event {description} /{day} {month} {year} {hour}{minute}
+Entry.Event:    event {description} /{day} {month} {year} {hour}{minute}
 2. [D][ ] return book  (Sun 14:30, 2 FEBRUARY 2020)
 3. [E][ ] project meeting  (Mon 00:00, 18 DECEMBER 2017)
-You have forgotten quickly, but the Oracle Remembers
+You have forgotten quickly, but the Oracle.Oracle Remembers
 1. [T][ ] borrow book
 2. [D][ ] return book  (Sun 14:30, 2 FEBRUARY 2020)
 3. [E][ ] project meeting  (Mon 00:00, 18 DECEMBER 2017)
-Todo:     todo {description}
+Entry.Todo:     todo {description}
 4. [D][ ] 3293jof  (Mon 19:30, 18 DECEMBER 2017)
-Event:    event {description} /{day} {month} {year} {hour}{minute}
+Entry.Event:    event {description} /{day} {month} {year} {hour}{minute}
 1. [T][X] borrow book
 3. [E][X] project meeting  (Mon 00:00, 18 DECEMBER 2017)
 MarkDone: done {taskIndex}
 You only have 4 tasks. Give a valid index
-You have forgotten quickly, but the Oracle Remembers
+You have forgotten quickly, but the Oracle.Oracle Remembers
 1. [T][X] borrow book
 2. [D][ ] return book  (Sun 14:30, 2 FEBRUARY 2020)
 3. [E][X] project meeting  (Mon 00:00, 18 DECEMBER 2017)
@@ -44,7 +44,7 @@ You have forgotten quickly, but the Oracle Remembers
 You only have 4 tasks. Give a valid index
 Delete:   delete {taskIndex}
 Erased: 2. [D][ ] return book  (Sun 14:30, 2 FEBRUARY 2020)
-You have forgotten quickly, but the Oracle Remembers
+You have forgotten quickly, but the Oracle.Oracle Remembers
 1. [T][X] borrow book
 2. [E][X] project meeting  (Mon 00:00, 18 DECEMBER 2017)
 3. [D][ ] 3293jof  (Mon 19:30, 18 DECEMBER 2017)

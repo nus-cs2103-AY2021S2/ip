@@ -1,16 +1,20 @@
+package Entry;
+
+import Command.CommandFormatException;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-public class Deadline extends Task {
+public class Event extends Task {
     /**
-     * Returns a Deadline
+     * Returns an Task.Event
      *
-     * @param description description of the deadline
-     * @param deadline    , which is currently still in String form but I suspect that might change
+     * @param description description of the event
+     * @param time        , which is currently still in String form but I suspect that might change
      **/
-    public Deadline(String description, String deadline) throws CommandFormatException{
+    public Event(String description, String time) throws CommandFormatException {
         super(description);
         /* sorted should have 4 args, delimited by spaces
         1. Day
@@ -19,16 +23,16 @@ public class Deadline extends Task {
         4. Hour/Minute
          */
         try {
-            this.deadline = parseDate(deadline.split(" "));
+            this.time = parseDate(time.split(" "));
         } catch (NumberFormatException e){
             throw new CommandFormatException(e.getMessage());
         }
     }
 
-    public Deadline(Boolean isDone, String description, String deadline) throws CommandFormatException{
+    public Event(Boolean isDone, String description, String time) throws CommandFormatException {
         super(isDone, description);
         try {
-            this.deadline = parseDate(deadline.split(" "));
+            this.time = parseDate(time.split(" "));
         } catch (NumberFormatException e){
             throw new CommandFormatException(e.getMessage());
         }
@@ -39,8 +43,8 @@ public class Deadline extends Task {
             return LocalDateTime.of(Integer.parseInt(sorted[2]), //Day
                     Integer.parseInt(sorted[1]), //Month
                     Integer.parseInt(sorted[0]), //Year
-                    Integer.parseInt(sorted[3].substring(0, sorted[3].length() - 2)), //Hour
-                    Integer.parseInt(sorted[3].substring(sorted[3].length() - 2)));//Minute
+                    Integer.parseInt(sorted[3].substring(0, sorted[3].length()-2)), //Hour
+                    Integer.parseInt(sorted[3].substring(sorted[3].length()-2)));//Minute
         } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
             throw new CommandFormatException(e.getMessage());
         }
@@ -50,37 +54,35 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String type = "[D]";
+        String type = "[E]";
         String doneStatus = "[" + getStatusIcon() + "]";
-        String day = deadline.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("en"));
+        String day = time.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("en"));
         return String.format("%s%s %s (%s %s:%s, %s %s %s)", type, doneStatus, this.description, day,
-                this.getDeadlineHour(), this.getDeadlineMinute(), deadline.getDayOfMonth(), deadline.getMonth(),
-                deadline.getYear());
+                this.getTimeHour(), this.getTimeMinute(), time.getDayOfMonth(), time.getMonth(), time.getYear());
     }
 
-    private String getDeadlineHour() {
-        return this.deadline.getHour() < 10 ? "0" + this.deadline.getHour() : String.valueOf(this.deadline.getHour());
+    private String getTimeHour(){
+        return this.time.getHour() < 10 ? "0" + this.time.getHour(): String.valueOf(this.time.getHour());
+    }
+    private String getTimeMinute(){
+        return this.time.getMinute() < 10 ? "0" + this.time.getMinute(): String.valueOf(this.time.getMinute());
     }
 
-    private String getDeadlineMinute() {
-        return this.deadline.getMinute() < 10 ? "0" + this.deadline.getMinute() : String.valueOf(this.deadline.getMinute());
-    }
 
     /***
      * Format = {type}{done}{description}{deadline}
      */
-    public String toStorage() {
+    public String toStorage(){
         //type
         String res = "D";
         //done status
         res += "\u001E" + (isDone ? "T" : "F");
         //description
         res += "\u001E" + this.description;
-        //deadline
-        res += "\u001E" + String.format("%s %s %s %s%s", this.deadline.getDayOfMonth(), this.deadline.getMonthValue(),
-                this.deadline.getYear(), this.getDeadlineHour(), this.getDeadlineMinute());
+        //time
+        res += "\u001E" + String.format("%s %s %s %s%s", this.time.getDayOfMonth(), this.time.getMonthValue(),
+                this.time.getYear(), this.getTimeHour(), this.getTimeMinute());
         return res;
     }
-
-    LocalDateTime deadline;
+    LocalDateTime time;
 }

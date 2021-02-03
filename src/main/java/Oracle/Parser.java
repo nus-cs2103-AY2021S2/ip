@@ -1,3 +1,7 @@
+package Oracle;
+
+import Command.*;
+
 public class Parser {
     private final Ui ui;
 
@@ -27,7 +31,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 this.ui.showNumberFormatException("done task");
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("MarkDoneCommand");
+                ui.showFormatException("Command.MarkDoneCommand");
             }
             return new EmptyCommand();
         }
@@ -43,7 +47,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 this.ui.showNumberFormatException("task to be deleted");
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("DeleteCommand");
+                ui.showFormatException("Command.DeleteCommand");
             }
             return new EmptyCommand();
         }
@@ -56,7 +60,7 @@ public class Parser {
             try {
                 return new TodoCommand(split[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("TodoCommand");
+                ui.showFormatException("Command.TodoCommand");
             }
             return new EmptyCommand();
         }
@@ -70,7 +74,7 @@ public class Parser {
                 String[] params = split[1].split("/", 2);
                 return new EventCommand(params[0], params[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("EventCommand");
+                ui.showFormatException("Command.EventCommand");
             }
             return new EmptyCommand();
             /*
@@ -83,7 +87,7 @@ public class Parser {
                 String[] params = split[1].split("/", 2);
                 return new DeadlineCommand(params[0], params[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("DeadlineCommand");
+                ui.showFormatException("Command.DeadlineCommand");
             }
             return new EmptyCommand();
         }

@@ -1,3 +1,8 @@
+package Command;
+import Oracle.TaskList;
+import Oracle.Ui;
+import Entry.Event;
+
 public class EventCommand implements Command {
     private final String taskDescription;
     private final String taskTime;
@@ -12,7 +17,7 @@ public class EventCommand implements Command {
         try {
             tasks.add(new Event(this.taskDescription, this.taskTime));
         } catch (CommandFormatException e) {
-            ui.showFormatException("EventCommand");
+            ui.showFormatException("Command.EventCommand");
             return true;
         }
         ui.showNewTask(tasks.size(), tasks.get(tasks.size()-1));

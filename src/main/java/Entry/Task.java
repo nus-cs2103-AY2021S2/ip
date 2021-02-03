@@ -1,5 +1,7 @@
+package Entry;
+
 /*
-Task is the general case for Todo, Deadline, and Event. In future we might change this to interface or smt,
+Task.Task is the general case for Task.Todo, Task.Deadline, and Task.Event. In future we might change this to interface or smt,
 I dont know... depends on future requirements.
  */
 public class Task {

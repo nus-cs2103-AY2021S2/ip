@@ -1,3 +1,7 @@
+package Oracle;
+
+import Entry.Task;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -5,13 +9,13 @@ import java.util.Scanner;
 public class Ui {
     private Scanner scanner;
     Map<String, String> commandMap = Map.of(
-            "ExitCommand", "    bye",
-            "ListCommand", "    list",
-            "TodoCommand", "    todo {description}",
-            "DeadlineCommand", "deadline {description} /{day} {month} {year} {hour}{minute}",
-            "EventCommand", "   event {description} /{day} {month} {year} {hour}{minute}",
-            "MarkDoneCommand", "done {taskIndex}",
-            "DeleteCommand", "  delete {taskIndex}"
+            "Command.ExitCommand", "    bye",
+            "Command.ListCommand", "    list",
+            "Command.TodoCommand", "    todo {description}",
+            "Command.DeadlineCommand", "deadline {description} /{day} {month} {year} {hour}{minute}",
+            "Command.EventCommand", "   event {description} /{day} {month} {year} {hour}{minute}",
+            "Command.MarkDoneCommand", "done {taskIndex}",
+            "Command.DeleteCommand", "  delete {taskIndex}"
             );
 
     public Ui() {
@@ -19,7 +23,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("Storage file could not be found, starting fresh database");
+        System.out.println("Oracle.Storage file could not be found, starting fresh database");
     }
 
     public void showWelcome() {
@@ -45,7 +49,7 @@ public class Ui {
                 + "    -:;!====!=!!!!!!!======;;::~,\n"
                 + "      -~:;===;======;=;;;:::~-,\n"
                 + "        .-~~::::;:::::~:~--.\n";
-        System.out.println(logo + "\nGreetings Neo, what can the Oracle do for you?");
+        System.out.println(logo + "\nGreetings Neo, what can the Oracle.Oracle do for you?");
     }
 
     public void showGoodbye() {
@@ -61,7 +65,7 @@ public class Ui {
     }
 
     public void showList(ArrayList<Task> tasks) {
-        System.out.println("You have forgotten quickly, but the Oracle Remembers");
+        System.out.println("You have forgotten quickly, but the Oracle.Oracle Remembers");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
@@ -76,7 +80,7 @@ public class Ui {
     }
 
     public void showNumberFormatException(String domain) {
-        System.out.println("Give The Oracle the index of the " + domain);
+        System.out.println("Give The Oracle.Oracle the index of the " + domain);
     }
 
     public void showDeleteTask(int i, Task t) {

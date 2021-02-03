@@ -1,3 +1,8 @@
+package Command;
+import Oracle.TaskList;
+import Oracle.Ui;
+import Entry.Deadline;
+
 public class DeadlineCommand implements Command {
     private final String taskDescription;
     private final String taskDeadline;
@@ -12,7 +17,7 @@ public class DeadlineCommand implements Command {
         try {
             tasks.add(new Deadline(this.taskDescription, this.taskDeadline));
         } catch (CommandFormatException e) {
-            ui.showFormatException("EventCommand");
+            ui.showFormatException("Command.EventCommand");
             return true;
         }
         ui.showNewTask(tasks.size(), tasks.get(tasks.size() - 1));

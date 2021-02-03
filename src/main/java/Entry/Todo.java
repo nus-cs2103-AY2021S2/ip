@@ -1,6 +1,8 @@
+package Entry;
+
 public class Todo extends Task{
     /**
-     * Returns a Todo
+     * Returns a Task.Todo
      * @param description description of the todo
      * **/
     public Todo(String description) {
