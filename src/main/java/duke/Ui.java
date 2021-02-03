@@ -5,22 +5,25 @@ import java.util.List;
 
 public class Ui {
 
-    public Ui() {
-        textWrapper("Hello! I'm Duke \nWhat can I do for you?");
+    private Ui() {
     }
 
-    public void showBye() {
-        textWrapper("Bye. Hope to see you again soon!\n");
+    public static String showWelcome() {
+        return textWrapper("Hello! I'm Duke \nWhat can I do for you?");
+    }
+
+    public static String showBye() {
+        return textWrapper("Bye. Hope to see you again soon!\n");
     }
 
     /**
      * Prints out the TaskList in a nice format.
      * @param tasks the TaskList to be printed.
      */
-    public void showList(TaskList tasks) {
+    public static String showList(TaskList tasks) {
         String out = "Here are the tasks in your list: \n";
         out += printList(tasks);
-        textWrapper(out);
+        return textWrapper(out);
     }
 
     /**
@@ -29,7 +32,7 @@ public class Ui {
      * @param tasks  the TaskList to be searched.
      * @param toFind the String that the user is looking for.
      */
-    public void showFind(TaskList tasks, String toFind) {
+    public static String showFind(TaskList tasks, String toFind) {
         String out;
         List<Task> tempTasks = new ArrayList<>();
         for (Task t : tasks) {
@@ -43,7 +46,7 @@ public class Ui {
         } else {
             out = "Nothing in the list matches\n";
         }
-        textWrapper(out);
+        return textWrapper(out);
     }
 
     /**
@@ -51,10 +54,10 @@ public class Ui {
      * @param input The string input by the user.
      * @param tasks The TaskList to be checked.
      */
-    public void showDone(String input, TaskList tasks) {
+    public static String showDone(String input, TaskList tasks) {
         String out = "Nice! I've marked this task as done: \n  ";
         out += tasks.get(getIndex(input));
-        textWrapper(out);
+        return textWrapper(out);
     }
 
     /**
@@ -62,11 +65,11 @@ public class Ui {
      * @param tasks The TaskList to be added to.
      * @param task  The Task to be added.
      */
-    public void showTaskAdded(TaskList tasks, Task task) {
+    public static String showTaskAdded(TaskList tasks, Task task) {
         String out = "Got it. I've added this task:\n ";
         out += task.toString() + "\n";
         out += String.format("Now you have %d tasks in the list.", tasks.size() + 1);
-        textWrapper(out);
+        return textWrapper(out);
     }
 
     /**
@@ -74,46 +77,48 @@ public class Ui {
      * @param input The input string.
      * @param tasks The TaskList which the item is removed from.
      */
-    public void showDeleteTask(String input, TaskList tasks) {
+    public static String showDeleteTask(String input, TaskList tasks) {
         String out = "Noted. I've removed this task: \n  ";
         out += tasks.get(getIndex(input)) + "\n";
         out += String.format("Now you have %d tasks in the list.", tasks.size() - 1);
-        textWrapper(out);
+        return textWrapper(out);
     }
 
-    public void showDukeTaskError() {
-        textWrapper("☹ OOPS!!! The description of a task cannot be empty.");
+    public static String showDukeTaskError() {
+        return textWrapper("The description of a task cannot be empty.");
     }
 
-    public void showDukeGeneralError() {
-        textWrapper("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public static String showDukeGeneralError() {
+        return textWrapper("I'm sorry, but I don't know what that means");
     }
 
-    public void showDukeEmptyListError() {
-        textWrapper("You have nothing in the list!");
+    public static String showDukeEmptyListError() {
+        return textWrapper("You have nothing in the list!");
     }
 
-    public void showLoadingError() {
-        textWrapper("This file cant be loaded! Creating a new file called duke.txt in CWD");
+    public static String showLoadingError() {
+        return textWrapper("This file cant be loaded! Creating a new file called duke.txt in CWD");
     }
 
-    public int getIndex(String input) {
+    public static String showEmptyError() {
+        return textWrapper("Please Enter a command!");
+    }
+
+    public static int getIndex(String input) {
         return Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
     }
 
-    private String printList(TaskList contentList) {
+    private static String printList(TaskList contentList) {
         StringBuilder printStr = new StringBuilder();
         for (int i = 0; i < contentList.size(); i++) {
-            String textToAdd = String.format("%d.%s%n", i + 1, contentList.get(i).toString());
+            String textToAdd = String.format("%d. %s%n", i + 1, contentList.get(i).toString());
             printStr.append(textToAdd);
         }
         return printStr.toString();
     }
 
-    private void textWrapper(String a) {
-        System.out.println("____________________________________________________________");
-        System.out.println(a);
-        System.out.println("____________________________________________________________");
+    private static String textWrapper(String a) {
+        return a;
     }
 
 }
