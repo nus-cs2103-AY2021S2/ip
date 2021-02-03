@@ -12,6 +12,25 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    // TEMP OVERLOAD
+    public DialogBox(Label l) {
+        text = l;
+        text.setWrapText(true);
+
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.getChildren().addAll(text);
+    }
+    public static DialogBox getUserDialog(Label l) {
+        var db = new DialogBox(l);
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getDukeDialog(Label l) {
+        return new DialogBox(l);
+
+    }
+
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

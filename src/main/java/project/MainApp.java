@@ -26,8 +26,8 @@ public class MainApp extends Application {
 
     private Olaf olaf = new Olaf();
 
-    private Image user = new Image(this.getClass().getClassLoader().getResourceAsStream("/../../resources/images/user.png"));
-    private Image duke = new Image(this.getClass().getClassLoader().getResourceAsStream("/../../resources/images/olaf-round.png"));
+//    private Image user_img = new Image(this.getClass().getClassLoader().getResourceAsStream("/../../resources/images/user.png"));
+//    private Image olaf_img = new Image(this.getClass().getClassLoader().getResourceAsStream("/../../resources/images/olaf-round.png"));
 
     /**
      * Starts a session of the application.
@@ -138,8 +138,10 @@ public class MainApp extends Application {
         Label userText = new Label(userInput.getText());
         Label olafText = new Label(olaf.getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(olafText, new ImageView(duke))
+                DialogBox.getUserDialog(userText),
+                DialogBox.getDukeDialog(olafText)
+//                DialogBox.getUserDialog(userText, new ImageView(user_img)),
+//                DialogBox.getDukeDialog(olafText, new ImageView(olaf_img))
         );
         userInput.clear();
     }

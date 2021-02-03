@@ -28,13 +28,13 @@ public class Olaf {
         storage = new Storage(FILE_PATH);
         ui = new Ui();
 
-//        try {
-//            tasks = new TaskList(storage.load());
-//            ui.showFormatResponse(PrintText.WELCOME_MESSAGE);
-//        } catch (IOException e) {
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
+        try {
+            tasks = new TaskList(storage.load());
+            ui.showFormatResponse(PrintText.WELCOME_MESSAGE);
+        } catch (IOException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
 
         app = new OlafApp(tasks, ui, storage);
     }
