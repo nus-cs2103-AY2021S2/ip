@@ -6,22 +6,22 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * Class initialises Duke Bot to take in inpiut from user
+ * Class initialises Duke Bot to take in input from user
  */
 
 public class Duke extends Application {
 
-    private static Storage storage = new Storage();
+    private static final Storage storage = new Storage();
 
-    private static TaskList list = new TaskList();
+    private static final TaskList list = new TaskList();
 
-    private static Parser parser = new Parser();
+    private static final Parser parser = new Parser();
 
     /**
      * Presents saved history via Storage and
      * reads input from users.
-     * @param args
-     * @throws Exception
+     * @param args arguments
+     * @throws Exception thrown when Duke cannot handle user input.
      */
     public static void main(String[] args) throws Exception {
         if (storage.isSavedHistory()) {
@@ -38,7 +38,7 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Ui ui = new Ui();
+        // Ui ui = new Ui();
         // Label uiWords = new Label(ui.welcomeUser());
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
@@ -49,7 +49,7 @@ public class Duke extends Application {
     /**
      * Function to call when we want to end main, to store the TaskList into storage
      *
-     * @throws IOException
+     * @throws IOException from Storage.
      */
     static void byeCommand() throws IOException {
         storage.saveHistory(list);
