@@ -31,6 +31,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Construtor that takes in filepath to data file
+     * @param filePathStr
+     */
     public Storage(String filePathStr) {
         this.filePath = Paths.get(filePathStr);
         File file = new File(DEFAULT_PATH);
