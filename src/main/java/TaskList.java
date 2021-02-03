@@ -17,6 +17,10 @@ public class TaskList {
         return this.tasks.get(index - 1);
     }
 
+    public Task popTaskByIndex(int index) {
+        return this.tasks.remove(index - 1);
+    }
+
     public void printTasks() {
         for (int index = 0; index < this.tasks.size(); index++) {
             int taskNumber = index + 1;

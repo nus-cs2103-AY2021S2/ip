@@ -29,4 +29,9 @@ Here are the task(s) in your list:
 1.[T][X] CS2107 Revision
 2.[D][ ] CS2103 Week 4 Quiz (by: 5 Feb 2021 2:00 AM)
 3.[E][ ] CS2107 In-Lecture Quiz (at: 4 Feb 2021 10:00 AM to 10:30 AM)
+Noted. I've removed this task:
+[D][ ] CS2103 Week 4 Quiz (by: 5 Feb 2021 2:00 AM)
+Here are the task(s) in your list:
+1.[T][X] CS2107 Revision
+2.[E][ ] CS2107 In-Lecture Quiz (at: 4 Feb 2021 10:00 AM to 10:30 AM)
 Bye. Hope to see you again soon!
