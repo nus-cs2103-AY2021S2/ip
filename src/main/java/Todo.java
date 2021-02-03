@@ -4,7 +4,7 @@ class Todo extends Task {
     }
 
     Todo(String task, boolean completed) {
-        super(task, completed); 
+        super(task, completed);
     }
 
     public static Todo readTask(String input) {
@@ -14,11 +14,11 @@ class Todo extends Task {
     }
 
     public String toCommand() {
-        return this.getClass().toString() + ", " + this.getCompleted() + ", " + this.task;
-    } 
+        return this.getClass().toString() + ", " + this.getCompleted() + ", " + this.getTask();
+    }
 
     @Override
     public String toString() {
-        return "[T]" + this.completedBox() + this.task;
+        return "[T]" + this.completedBox() + this.getTask();
     }
 }

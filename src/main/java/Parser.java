@@ -4,11 +4,11 @@ import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Parser {
-    private Scanner scanner; 
-    static String input;
-    Ui userInterface;
+    private static String input;
+    private Scanner scanner;
+    private Ui userInterface;
 
-    Parser(){
+    Parser() {
         scanner = new Scanner(System.in);
         userInterface = new Ui();
         userInterface.welcomeUser();
@@ -29,10 +29,10 @@ public class Parser {
      * else it closes the scanner and bids goodbye to user.
      */
     public void readInput(TaskList list) throws Exception {
-        if(scanner.hasNextLine()) {
-            input = scanner.nextLine(); 
+        if (scanner.hasNextLine()) {
+            input = scanner.nextLine();
             removeExtraLinesAndSpacesFromInput();
-            if(!inputDoesNotContainBye()) {
+            if (!inputDoesNotContainBye()) {
                 userInterface.userLeaving();
                 scanner.close();
             } else {
@@ -47,7 +47,7 @@ public class Parser {
 
     /**
      * Method checks if input contains string "bye"
-     * 
+     *
      * @return Boolean that whether input contains "bye"
      */
     public Boolean inputDoesNotContainBye() {
@@ -85,7 +85,7 @@ public class Parser {
 
     /**
      * Method reads which number in list user wants to mark done.
-     * 
+     *
      * @return int val index in the list that user wants to mark as completed.
      */
     public int inputContainsDoneAtIndex() throws ArrayIndexOutOfBoundsException {
@@ -102,10 +102,10 @@ public class Parser {
         list.markDone(index);
         userInterface.userDoneTask(list.getTaskAtIndex(index).toString());
     }
-    
+
     /**
      * Method reads the Todo Task that user has input and removes the unnecessary string to be saved in Todo
-     * 
+     *
      * @return task that user has input.
      */
     public String inputTaskToDoIs() throws ArrayIndexOutOfBoundsException {
@@ -127,11 +127,11 @@ public class Parser {
 
     /**
      * Method takes in the Date and Time that user input and returns an array of size 2 with date and time respectively
-     * 
-     * @return String[] of size 2 with string relevant to date and time. 
+     *
+     * @return String[] of size 2 with string relevant to date and time.
      */
     public String[] findTaskWithDate() {
-        if(inputContainsEvent()) {
+        if (inputContainsEvent()) {
             input = input.replaceFirst("event", "");
         } else {
             input = input.replaceFirst("deadline", "");
@@ -142,8 +142,8 @@ public class Parser {
 
     /**
      * Method formats user input of time into LocalDateTime
-     * 
-     * @param inputDate of type String 
+     *
+     * @param inputDate of type String
      * @return LocalDateTime of the user input
      */
     static LocalDateTime inputDateAndTime(String inputDate) {
@@ -155,45 +155,60 @@ public class Parser {
 
     /**
      * Method formats user input of time into LocalDate
-     * 
+     *
      * @return LocalDate of the user input
      */
     static LocalDate inputDate(String input) {
         String[] dateArray = input.split("/");
-        LocalDate date = LocalDate.of(Integer.parseInt(dateArray[2]), 
-                                            Integer.parseInt(dateArray[1]), 
+        LocalDate date = LocalDate.of(Integer.parseInt(dateArray[2]),
+                                            Integer.parseInt(dateArray[1]),
                                             Integer.parseInt(dateArray[0]));
         return date;
     }
 
     /**
-     * Method formats user input of time into LocalDateTime
-     * 
+     * Formats user input of time into LocalDateTime
+     *
      * @return LocalDateTime of the user input
      */
     static LocalTime inputTime(String input) {
         String hour = input.substring(0, 2);
-        String minutes = input.substring(2); 
+        String minutes = input.substring(2);
         LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minutes));
         return time;
     }
 
+    /**
+     * Adds the Event created from input into TaskList
+     * after reading what the input was
+     * @param list TaskList that stores user's Tasks
+     */
     public void addEventTask(TaskList list) {
         String[] taskAndDate = findTaskWithDate();
         list.addEvent(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
         userInterface.userAddTask(list);
-    } 
+    }
 
+    /**
+     * Adds a Deadline into TaskList passed into method
+     * Deadline comes from input by user to be saved into TaskList
+     * @param list TaskList that stores user's Tasks
+     */
     public void addDeadlineTask(TaskList list) {
         String[] taskAndDate = findTaskWithDate();
         list.addDeadline(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
         userInterface.userAddTask(list);
     }
 
-////////// command event and deadline end //////////////
+    ////////// command event and deadline end //////////////
 
-////////////// Command delete START ///////////////
+    ////////////// Command delete START ///////////////
 
+    /**
+     * Deletes the requested Task given in input
+     * from TaskList passed into method
+     * @param list TaskList that contains Task to be deleted
+     */
     public void commandDelete(TaskList list) {
         String value = input.replaceFirst("delete", "");
         value = value.strip();
@@ -202,33 +217,30 @@ public class Parser {
         userInterface.userDeleteTask(delete, list);
     }
 
-////////////// Command delete End ///////////////
+    ////////////// Command delete End ///////////////
 
     /**
      * Method formats input to content that user wishes to search for
      */
     private void contentToFind() {
         input = input.replaceFirst("find", "");
-        input = input.strip(); 
+        input = input.strip();
     }
 
     private void displayFindList(TaskList list) {
         contentToFind();
-        TaskList filteredList = list.filterFind(input); 
+        TaskList filteredList = list.filterFind(input);
         if (filteredList.size() == 0) {
             System.out.print("No similar matched found.");
-        } else { 
+        } else {
             userInterface.tellUserListFound();
             filteredList.listAllTasks();
         }
     }
 
-
-
-
     private void analyseInput(TaskList list) throws Exception {
-        while(inputDoesNotContainBye()) {
-            if(inputContainsDone()) {
+        while (inputDoesNotContainBye()) {
+            if (inputContainsDone()) {
                 markDoneAtIndex(list);
             } else if (inputContainsTodo()) {
                 addTodoTask(list);
@@ -248,7 +260,7 @@ public class Parser {
             } else if (inputContainsFind()) {
                 displayFindList(list);
             } else {
-                if(scanner.hasNextLine()) {
+                if (scanner.hasNextLine()) {
                     input = scanner.nextLine();
                 } else {
                     throw new Exception("Please enter a valid command!");
@@ -258,8 +270,5 @@ public class Parser {
             readInput(list);
         }
     }
-
-
-
 
 }

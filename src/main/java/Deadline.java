@@ -1,9 +1,9 @@
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.sql.Timestamp;
 
 class Deadline extends Task {
-    LocalDateTime date;
+    private LocalDateTime date;
 
     Deadline(String t, LocalDateTime due) {
         super(t);
@@ -11,7 +11,7 @@ class Deadline extends Task {
     }
 
     Deadline(String task, Boolean isCompleted, LocalDateTime dueDate) {
-        super(task, isCompleted); 
+        super(task, isCompleted);
         this.date = dueDate;
     }
 
@@ -26,22 +26,20 @@ class Deadline extends Task {
         return new Deadline(list[2], Boolean.parseBoolean(list[1]), LocalDateTime.parse(list[3]));
     }
 
-    /** 
+    /**
      * Gives a format of saving a Deadline into storage
-     * 
+     *
      * @return String formatted to save a Deadline into storage
      */
     public String toCommand() {
-        return this.getClass().toString() + ", " + 
-                this.getCompleted() + ", " + this.task + ", " + this.date;
+        return this.getClass().toString() + ", "
+                + this.getCompleted() + ", " + this.getTask() + ", " + this.date;
     }
 
     @Override
     public String toString() {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd YYYY hh:mm a");
-        // return "[D]" + this.completedBox() + this.task 
-        //         + "(by: " + this.date.getMonth() + " " + this.date.getDayOfMonth() + " " +  this.date.getYear() +  " " + this.date.toLocalTime() +  ")";
-        return "[D]" + this.completedBox() + this.task 
+        return "[D]" + this.completedBox() + this.getTask()
                 + "(by: " + dateFormatter.format(Timestamp.valueOf(this.date)) + ")";
     }
 
