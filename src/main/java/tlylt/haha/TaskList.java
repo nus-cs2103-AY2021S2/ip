@@ -184,6 +184,8 @@ public class TaskList {
             this.deleteFromDB(LegitCommand.DELETE.getDetail());
             this.updateFile();
             break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + command);
         }
         return false;
     }

@@ -1,12 +1,13 @@
 package tlylt.haha;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
 
 public class ParserTest {
     @Test
@@ -20,8 +21,7 @@ public class ParserTest {
 
     @Test
     void taskNumber_notANumber_exceptionThrown() {
-        assertThrows(HahaTaskNumberNotIntException.class,
-                () -> Parser.taskNumber("one"));
+        assertThrows(HahaTaskNumberNotIntException.class, () -> Parser.taskNumber("one"));
     }
 
     @Test

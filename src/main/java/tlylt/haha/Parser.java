@@ -84,7 +84,8 @@ public class Parser {
         if (Arrays
                 .stream(TaskType.values())
                 .map(TaskType::getRep)
-                .anyMatch(x -> x.equals(task)) &&
+                .anyMatch(x -> x.equals(task))
+                &&
                 description.isEmpty()
         ) {
             throw new HahaEmptyDescriptionException(input);
