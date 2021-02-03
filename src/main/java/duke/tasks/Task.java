@@ -11,8 +11,8 @@ public abstract class Task {
     /**
      * Creates a {@code Task} object with a task description, task type,
      * with task initially set to not done status.
-     * @param description task description
-     * @param type type of task
+     * @param description Task description.
+     * @param type Type of task
      */
     public Task(String description, String type) {
         this.description = description;
@@ -29,7 +29,7 @@ public abstract class Task {
 
     /**
      * Gets task status icon.
-     * @return task status icon
+     * @return Task status icon.
      */
     public String getStatusIcon() {
         return isDone ? "[X]" : "[ ]";
@@ -37,7 +37,7 @@ public abstract class Task {
 
     /**
      * Returns identifier of type of task.
-     * @return identifier of task type
+     * @return Identifier of task type.
      */
     public String getType() {
         return type;
@@ -45,7 +45,7 @@ public abstract class Task {
 
     /**
      * Returns description of task.
-     * @return task description
+     * @return Task description.
      */
     public String getDescription() {
         return description;
@@ -53,7 +53,7 @@ public abstract class Task {
 
     /**
      * Checks if task is completed.
-     * @return true if task is completed, false otherwise
+     * @return True if task is completed, false otherwise
      */
     public boolean getStatus() {
         return isDone;
@@ -61,8 +61,8 @@ public abstract class Task {
 
     /**
      * Checks if task contains a keyword.
-     * @param keyword keyword
-     * @return true if task contains the keyword, false otherwise
+     * @param keyword Keyword to be searched.
+     * @return True if task contains the keyword, false otherwise.
      */
     public boolean contains(String keyword) {
         String[] descriptionArray = this.description.split(" ");

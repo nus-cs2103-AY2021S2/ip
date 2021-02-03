@@ -18,7 +18,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list of tasks.
-     * @param task task to be added
+     * @param task Task to be added.
      */
     public void addItem(Task task) {
         lst.add(task);
@@ -26,7 +26,7 @@ public class TaskList {
 
     /**
      * Removes a task from the list of tasks.
-     * @param id index of task to be removed
+     * @param id Index of task to be removed.
      */
     public void removeItem(int id) {
         lst.remove(id);
@@ -34,7 +34,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
-     * @param id index of task to be marked as done
+     * @param id Index of task to be marked as done.
      */
     public void doneTask(int id) {
         lst.get(id).markAsDone();
@@ -42,7 +42,7 @@ public class TaskList {
 
     /**
      * Returns list of tasks.
-     * @return list of tasks
+     * @return List of tasks.
      */
     public List<Task> getLst() {
         return lst;
@@ -50,8 +50,8 @@ public class TaskList {
 
     /**
      * Checks if tasks in task list contains the keyword.
-     * @param keyword keyword
-     * @return list of Tasks containing the keyword
+     * @param keyword Keyword to be searched.
+     * @return List of Tasks containing the keyword.
      */
     public List<Task> tasksContainingKeyword(String keyword) {
         List<Task> tasksWithKeyword = new ArrayList<>();
@@ -63,6 +63,10 @@ public class TaskList {
         return tasksWithKeyword;
     }
 
+    /**
+     * Returns size of task list.
+     * @return Size of task list.
+     */
     public int size() {
         return lst.size();
     }

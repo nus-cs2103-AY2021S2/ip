@@ -1,5 +1,11 @@
 package duke.command;
 
+import java.io.File;
+import java.io.IOException;
+
+import duke.duke.Duke;
+import duke.storage.Storage;
+
 /**
  * Creates an Event task.
  */
@@ -32,5 +38,12 @@ public class EventCommand extends Command {
      */
     public String getEventTime() {
         return eventTime;
+    }
+
+    @Override
+    public String run(File file, Duke bot) throws IOException {
+        String output = bot.addTask(getDescription(), getCommand(), getEventTime());
+        Storage.saveFile(file, bot);
+        return output;
     }
 }

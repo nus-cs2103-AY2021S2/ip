@@ -1,5 +1,11 @@
 package duke.command;
 
+import java.io.File;
+import java.io.IOException;
+
+import duke.duke.Duke;
+import duke.storage.Storage;
+
 /**
  * Creates a Deadline task.
  */
@@ -32,5 +38,12 @@ public class DeadlineCommand extends Command {
      */
     public String getDeadline() {
         return deadline;
+    }
+
+    @Override
+    public String run(File file, Duke bot) throws IOException {
+        String output = bot.addTask(getDescription(), getCommand(), getDeadline());
+        Storage.saveFile(file, bot);
+        return output;
     }
 }

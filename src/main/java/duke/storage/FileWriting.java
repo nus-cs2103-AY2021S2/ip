@@ -18,9 +18,9 @@ public class FileWriting {
 
     /**
      * Saves list of tasks by writing into the file whenever a command updates the task list.
-     * @param file the file that is written to
-     * @param duke a Duke object that manages task list operations
-     * @throws IOException if error occurs while writing to the file
+     * @param file The file that is written to.
+     * @param duke A Duke object that manages task list operations.
+     * @throws IOException If error occurs while writing to the file.
      */
     public static void writeToFile(File file, Duke duke) throws IOException {
         FileWriter fw = new FileWriter(file);

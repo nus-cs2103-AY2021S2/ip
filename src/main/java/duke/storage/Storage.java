@@ -13,9 +13,9 @@ public class Storage {
 
     /**
      * Retrieves and loads list of task stored into task list.
-     * @param file the file that task information retrieved from
-     * @return task retrieved task list
-     * @throws IOException
+     * @param file The file that task information retrieved from.
+     * @return Task retrieved task list
+     * @throws IOException If error occurs while writing or retrieving tasks from file.
      */
     public static TaskList runFile(File file) throws IOException {
         return FileReading.loadTask(file);
