@@ -7,6 +7,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor method.
+     *
      * @param command command input from user.
      */
     public DeleteCommand(String command) {
@@ -15,6 +16,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Execute command for delete command.
+     *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
@@ -26,7 +28,7 @@ public class DeleteCommand extends Command {
             DukeWrongInputException {
         String[] commandArr = command.trim().split(" ");
         int itemPosition = Integer.parseInt(commandArr[1]) - 1;
-        if (itemPosition + 1 <= taskList.getTaskListLength() || itemPosition < 0) {
+        if (itemPosition + 1 <= taskList.getTaskListLength() && itemPosition >= 0) {
             String output = ui.showTaskDeleted(taskList.getTaskAtIndex(itemPosition));
             taskList.delete(itemPosition);
             storage.save(taskList.getTaskList());
@@ -38,6 +40,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Indicates whether command is an exit command.
+     *
      * @return boolean value for whether command is an exit command.
      */
     @Override

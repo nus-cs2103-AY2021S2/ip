@@ -4,7 +4,7 @@
 public class Ui {
 
     /**
-     * Show Duke's welcome text
+     * Show Duke's welcome text.
      */
     public String showWelcome() {
         return "Hello, I am Duke, your personal Assistant. How may I help you today?";
@@ -12,6 +12,7 @@ public class Ui {
 
     /**
      * Show number of items in the task list.
+     *
      * @param numOfItems
      */
     public String showNumberOfItems(int numOfItems) {
@@ -20,6 +21,7 @@ public class Ui {
 
     /**
      * Shows the task that was added to the list.
+     *
      * @param task
      */
     public String showTaskAdded(Task task) {
@@ -28,6 +30,7 @@ public class Ui {
 
     /**
      * Show the task being marked as done.
+     *
      * @param task
      */
     public String showTaskDone(Task task) {
@@ -47,6 +50,7 @@ public class Ui {
 
     /**
      * Shows the task deleted.
+     *
      * @param task task to be deleted
      */
     public String showTaskDeleted(Task task) {
@@ -57,17 +61,25 @@ public class Ui {
      * Show good bye to user.
      */
     public String showBye() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!\nTo exit, click [X] at the top left.";
     }
 
     /**
      * Shows the error message from exception.
+     *
      * @param e exception encountered.
      */
     public String showLoadingError(Exception e) {
         return e.getMessage();
     }
 
+    /**
+     * Shows the list of items found according to user keyword.
+     *
+     * @param taskList list of tasks
+     * @param command user command
+     * @return a list of the items found according to user keyword
+     */
     public String showFoundListItems(TaskList taskList, String command) {
         String[] commandArr = command.split(" ");
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list: \n");

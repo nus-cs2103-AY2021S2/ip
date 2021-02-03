@@ -5,6 +5,7 @@ public abstract class Command {
     /**
      * Abstract execute method.
      * Each command has a execute method that when called, executes that particular command.
+     *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
@@ -16,6 +17,7 @@ public abstract class Command {
 
     /**
      * Abstract method that indicates if particular method is an exit command.
+     *
      * @return boolean value for whether the task is an exit command.
      */
     public abstract boolean isExit();

@@ -1,1 +1,2 @@
-T / false / walk dog
+D / true / return book  / 2020-01-25
+E / true / project meeting  / Mon 2-4pm

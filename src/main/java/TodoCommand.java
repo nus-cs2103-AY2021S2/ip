@@ -7,6 +7,7 @@ public class TodoCommand extends Command {
 
     /**
      * Constructor method.
+     *
      * @param command
      */
     public TodoCommand(String command) {
@@ -15,6 +16,7 @@ public class TodoCommand extends Command {
 
     /**
      * Execute method for To do command.
+     *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.

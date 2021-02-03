@@ -11,6 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor method.
+     *
      * @param description task description.
      * @param deadline LocalDate object that describes the deadline.
      */
@@ -20,7 +21,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overloaded constructor method
+     * Overloaded constructor method.
+     *
      * @param description task description.
      * @param deadline LocalDate object that describes the deadline.
      * @param isDone task done status.
@@ -32,6 +34,7 @@ public class Deadline extends Task {
 
     /**
      * Getter method for task deadline.
+     *
      * @return string of task deadline
      */
     public LocalDate getDeadline() {
@@ -40,6 +43,7 @@ public class Deadline extends Task {
 
     /**
      * Method that allows user to change the deadline of task
+     *
      * @param deadline new deadline to be changed to
      * @return the new deadline
      */
@@ -50,6 +54,7 @@ public class Deadline extends Task {
 
     /**
      * Overrides Task's toString method.
+     *
      * @return String output for the deadline.
      */
     @Override
