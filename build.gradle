@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    google()
+    maven {
+        url "https://maven.springframework.org/release"
+    }
+    maven {
+        url "https://maven.restlet.com"
+    }
+}
+
+checkstyle {
+    toolVersion = '8.29'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+run {
+    enableAssertions = true
+}
+

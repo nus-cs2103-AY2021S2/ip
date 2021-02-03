@@ -1,3 +1,5 @@
+package main.java;
+
 /*
  * A type of Task.
  */

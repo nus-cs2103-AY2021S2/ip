@@ -1,3 +1,5 @@
+package main.java;
+
 /*
  * The main exception for Duke.
  */

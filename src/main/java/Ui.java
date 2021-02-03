@@ -1,3 +1,5 @@
+package main.java;
+
 /*
  * Deal with interactions with the users.
  */
