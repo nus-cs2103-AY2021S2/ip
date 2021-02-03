@@ -29,6 +29,7 @@ public class Storage {
 
     /**
      * Saves the tasklist in /data/saveFile.txt
+     *
      * @param store the current tasklist of the user
      */
     public void saveFile(TaskList store) {
@@ -39,7 +40,7 @@ public class Storage {
             }
             save = save.replaceAll("\u2713", "1");
             save = save.replaceAll("\u2718", "0");
-            save = save.replaceAll("\\[", "" );
+            save = save.replaceAll("\\[", "");
             save = save.replaceAll("]", "");
             save = save.replaceAll("\\(", "");
             save = save.replaceAll("\\)", "");
@@ -61,21 +62,21 @@ public class Storage {
                 char isDone = contents.get(i).charAt(1);
                 boolean status = isDone == '1';
                 String rest = contents.get(i).substring(2);
-                rest = rest.replaceFirst("^\\s*"," ");
+                rest = rest.replaceFirst("^\\s*", " ");
                 switch (type) {
-                    case 'T':
-                        store.storage.add(new ToDo(rest, status));
-                        break;
-                    case 'D':
-                        String[] restD1 = rest.split("by:");
-                        store.storage.add(new Deadline(restD1[0], status, restD1[1]));
-                        break;
-                    case 'E':
-                        String[] restE1 = rest.split("at:");
-                        store.storage.add(new Event(restE1[0], status, restE1[1]));
-                        break;
-                    default:
-                        break;
+                case 'T':
+                    store.storage.add(new ToDo(rest, status));
+                    break;
+                case 'D':
+                    String[] restD1 = rest.split("by:");
+                    store.storage.add(new Deadline(restD1[0], status, restD1[1]));
+                    break;
+                case 'E':
+                    String[] restE1 = rest.split("at:");
+                    store.storage.add(new Event(restE1[0], status, restE1[1]));
+                    break;
+                default:
+                    break;
                 }
             }
         } catch (IOException E) {
