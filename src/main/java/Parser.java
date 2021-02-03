@@ -8,7 +8,8 @@ public class Parser {
     private Storage storage;
 
     /**
-     * Constructor method
+     * Constructor method.
+     *
      * @param taskList list of tasks
      * @param ui standard ui object
      * @param storage standard storage object
@@ -21,13 +22,14 @@ public class Parser {
 
     /**
      * Parse method takes in command in the form of a string and returns a class.
+     *
      * @param command user command input
      * @return respective command object based on user input
      * @throws DukeWrongInputException if system does not understand user input
      */
     public static Command parse(String command) throws DukeWrongInputException {
         // User input
-        String[] commandArr = command.trim().split(" ");
+        String[] commandArr = command.trim().toLowerCase().split(" ");
         command = command.trim();
         switch(commandArr[0]) {
         case "list":
@@ -47,7 +49,7 @@ public class Parser {
         case "bye":
             return new ExitCommand(command);
         default:
-            throw new DukeWrongInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeWrongInputException("OOPS! I'm sorry, I don't understand.");
         }
     }
 }

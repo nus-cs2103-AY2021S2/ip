@@ -1,99 +1,93 @@
-import java.util.Scanner;
-
+/**
+ * UI class is a class that handles all aspects of IO in Duke.
+ */
 public class Ui {
 
     /**
-     * Reads user input
-     * @return user input in the form of a string
+     * Show Duke's welcome text.
      */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            return sc.nextLine();
-        }
-        return "";
-    }
-
-    /**
-     * Shows a horizontal line.
-     */
-    public void showLine() {
-        System.out.println("---------------------------------------------------------------------");
-    }
-
-    /**
-     * Shows error message from exception
-     * @param errorMessage
-     */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
-    }
-
-    /**
-     * Show Duke's welcome text
-     */
-    public void showWelcome() {
-        System.out.println("Hello, I am Duke, your personal Assistant. How may I help you today?:");
+    public String showWelcome() {
+        return "Hello, I am Duke, your personal Assistant. How may I help you today?";
     }
 
     /**
      * Show number of items in the task list.
+     *
      * @param numOfItems
      */
-    public void showNumberOfItems(int numOfItems) {
-        System.out.println("Now you have " + numOfItems + " tasks in the list.");
+    public String showNumberOfItems(int numOfItems) {
+        return "Now you have " + numOfItems + " tasks in the list.";
     }
 
     /**
      * Shows the task that was added to the list.
+     *
      * @param task
      */
-    public void showTaskAdded(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
+    public String showTaskAdded(Task task) {
+        return "Got it. I've added this task: \n" + task.toString();
     }
 
     /**
      * Show the task being marked as done.
+     *
      * @param task
      */
-    public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.toString());
+    public String showTaskDone(Task task) {
+        return "Nice! I've marked this task as done: \n" + task.toString();
     }
 
     /**
      * Show the list of tasks.
      */
-    public void showListItems() {
-        System.out.println("Here are the tasks on your list:");
+    public String showListItems(TaskList taskList) {
+        StringBuilder sb = new StringBuilder("Here are the tasks on your list: \n");
+        for (int i = 1; i <= taskList.getTaskListLength(); i++) {
+            sb.append(String.format("%s. %s", i, taskList.getTaskAtIndex(i - 1).toString()) + "\n");
+        }
+        return sb.toString();
     }
 
     /**
      * Shows the task deleted.
+     *
      * @param task task to be deleted
      */
-    public void showTaskDeleted(Task task) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(task.toString());
+    public String showTaskDeleted(Task task) {
+        return "Noted. I've removed this task: \n" + task.toString();
     }
 
     /**
      * Show good bye to user.
      */
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showBye() {
+        return "Bye. Hope to see you again soon!\nTo exit, click [X] at the top left.";
     }
 
     /**
      * Shows the error message from exception.
+     *
      * @param e exception encountered.
      */
-    public void showLoadingError(Exception e) {
-        System.out.println(e.getMessage());
+    public String showLoadingError(Exception e) {
+        return e.getMessage();
     }
 
-    public void showFoundListItems() {
-        System.out.println("Here are the matching tasks in your list:");
+    /**
+     * Shows the list of items found according to user keyword.
+     *
+     * @param taskList list of tasks
+     * @param command user command
+     * @return a list of the items found according to user keyword
+     */
+    public String showFoundListItems(TaskList taskList, String command) {
+        String[] commandArr = command.split(" ");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list: \n");
+        for (int i = 1; i <= taskList.getTaskListLength(); i++) {
+            if (taskList.getTaskAtIndex(i - 1).getDescription().contains(commandArr[1])) {
+                sb.append(String.format("%s. %s", i, taskList.getTaskAtIndex(i - 1).toString()) + "\n");
+            }
+        }
+        return sb.toString();
     }
 }

@@ -7,16 +7,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException {
-        ui.showFoundListItems();
-        String[] commandArr = command.split(" ");
-        for (int i = 1; i <= taskList.getTaskListLength(); i++) {
-            if (taskList.getTaskAtIndex(i - 1).getDescription().contains(commandArr[1])) {
-                String output = String.format("%s. %s", i, taskList.getTaskAtIndex(i - 1).toString());
-                System.out.println(output);
-            }
-        }
+        return ui.showFoundListItems(taskList, command);
     }
 
     /**

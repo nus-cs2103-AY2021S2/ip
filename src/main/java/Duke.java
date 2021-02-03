@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
  * Duke is a AI assistant program that allows users to take note of their tasks.
  * Functions supported include:
@@ -17,52 +15,28 @@ public class Duke {
 
     /**
      * Constructor method.
-     * @param filePath to the hard drive file
-     * @throws IOException if error in user IO
      */
-    public Duke(String filePath) throws IOException {
-        this.storage = new Storage(filePath);
+    public Duke() {
         try {
+            this.storage = new Storage();
             taskList = new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (DukeWrongInputException e) {
             ui.showLoadingError(e);
             taskList = new TaskList();
         }
     }
 
     /**
-     * Runs the Duke Simulation
-     * @throws IOException if error in user IO
+     * Duke's response based on user input.
      */
-    public void run() throws IOException {
-        storage.load();
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeWrongInputException e) {
-                ui.showError(e.getMessage());
-            } catch (DukeMissingInputException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeWrongInputException e) {
+            return e.getMessage();
+        } catch (DukeMissingInputException e) {
+            return e.getMessage();
         }
-        storage.save(taskList.getTaskList());
-        ui.showBye();
-    }
-
-    /**
-     * Main driver function.
-     * @param args command line arguments
-     * @throws IOException if error in user IO
-     */
-    public static void main(String[] args) throws IOException {
-        new Duke("duke.txt").run();
     }
 }

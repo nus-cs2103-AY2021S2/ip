@@ -22,9 +22,9 @@ public class ExitCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException {
-        return;
+        return ui.showBye();
     }
 
     /**

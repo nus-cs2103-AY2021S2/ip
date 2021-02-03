@@ -7,6 +7,7 @@ public class TodoCommand extends Command {
 
     /**
      * Constructor method.
+     *
      * @param command
      */
     public TodoCommand(String command) {
@@ -15,6 +16,7 @@ public class TodoCommand extends Command {
 
     /**
      * Execute method for To do command.
+     *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
@@ -22,12 +24,12 @@ public class TodoCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException {
         String description = "";
         String[] commandArr = command.split(" ");
         if (command.equals("todo")) {
-            throw new DukeMissingInputException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeMissingInputException("OOPS! The description of a todo cannot be empty.");
         } else {
             for (int i = 1; i < commandArr.length; i++) {
                 description += (commandArr[i] + " ");
@@ -36,7 +38,8 @@ public class TodoCommand extends Command {
         description = description.trim();
         Todo newTodo = new Todo(description);
         taskList.add(newTodo);
-        ui.showTaskAdded(newTodo);
+        storage.save(taskList.getTaskList());
+        return ui.showTaskAdded(newTodo);
     }
 
     /**
