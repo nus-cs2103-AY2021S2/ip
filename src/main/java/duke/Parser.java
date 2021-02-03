@@ -6,24 +6,14 @@ import duke.command.ListCommand;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Parser {
-    // private final List<Task> taskList;
 
-    // public Parser() {
-    //     this.taskList = new ArrayList<>();
-    // }
-    //
-    // public Parser(List<Task> taskList) {
-    //     this.taskList = taskList;
-    // }
-    //
-    // public List<Task> getTaskList() {
-    //     return this.taskList;
-    // }
-
-
+    /**
+     * Method to parse commands given by user
+     * @param userInput
+     * @return
+     */
     public Command parseCommand(String userInput) {
         String[] splitInput = userInput.split(" ", 2);
         String command = splitInput[0];

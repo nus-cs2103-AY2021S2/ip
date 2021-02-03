@@ -5,7 +5,9 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * Class to represent text UI of application.
+ */
 public class Ui {
 
     private static final String LINE_PREFIX = ">>> ";
@@ -14,10 +16,18 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Wrapper constructor to be used.
+     */
     public Ui() {
         this(System.in, System.out);
     }
 
+    /**
+     * Constructor to set standard input and output for Ui
+     * @param in
+     * @param out
+     */
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
