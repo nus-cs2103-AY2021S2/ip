@@ -8,8 +8,8 @@ public class Deadline extends Task {
 
     /**
      * Creates a {@code Deadline} object with a task description and task deadline component.
-     * @param description task description
-     * @param deadline task deadline
+     * @param description Task description.
+     * @param deadline Task deadline.
      */
     public Deadline(String description, String deadline) {
         super(description, "[D]");
@@ -18,7 +18,7 @@ public class Deadline extends Task {
 
     /**
      * Returns deadline of task.
-     * @return task deadline
+     * @return Task deadline.
      */
     public String getDeadline() {
         return deadline;

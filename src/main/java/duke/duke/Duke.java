@@ -28,7 +28,7 @@ public class Duke {
 
     /**
      * Creates a {@code Duke} object with a task list.
-     * @param list task list
+     * @param list Task list.
      */
     public Duke(TaskList list) {
         this.list = list;
@@ -36,11 +36,11 @@ public class Duke {
 
     /**
      * Adds a new task to list of tasks.
-     * @param message task description
-     * @param type identifier of task type
-     * @param date time of task
+     * @param message Task description.
+     * @param type Identifier of task type.
+     * @param date Time of task.
      */
-    public void addTask(String message, String type, String date) {
+    public String addTask(String message, String type, String date) {
         Task task = null;
         switch (type) {
         case "todo":
@@ -53,45 +53,45 @@ public class Duke {
             task = new Event(message, date);
             break;
         default:
-            Ui.print("No task added");
+            System.out.println("No task added");
         }
 
         list.addItem(task);
-        Ui.showAddTaskMessage(task, list.getLst());
+        return Ui.showAddTaskMessage(task, list.getLst());
     }
 
     /**
      * Removes a task from list of tasks.
-     * @param id index of task to be removed
+     * @param id Index of task to be removed.
      */
-    public void removeTask(String id) {
+    public String removeTask(String id) {
         int n = Integer.parseInt(id) - 1;
         Task task = list.getLst().get(n);
         list.removeItem(n);
-        Ui.showRemoveTaskMessage(task, list.getLst());
+        return Ui.showRemoveTaskMessage(task, list.getLst());
     }
 
     /**
      * Marks a task as done.
      * @param id index of task to be marked as done
      */
-    public void markAsDone(String id) {
+    public String markAsDone(String id) {
         int n = Integer.parseInt(id) - 1;
         list.doneTask(n);
-        Ui.showDoneTaskMessage(list.getLst(), n);
+        return Ui.showDoneTaskMessage(list.getLst(), n);
 
     }
 
     /**
      * Shows user list of current tasks.
      */
-    public void showTasks() {
-        Ui.showTasksToUser(list.getLst());
+    public String showTasks() {
+        return Ui.showTasksToUser(list.getLst());
     }
 
     /**
      * Returns task list.
-     * @return task list
+     * @return Task list
      */
     public TaskList getList() {
         return list;
@@ -99,18 +99,27 @@ public class Duke {
 
     /**
      * Returns logo of chat bot.
-     * @return logo of chat bot
+     * @return Logo of chat bot
      */
     public String getLogo() {
         return LOGO;
     }
 
+    /**
+     * Returns number of tasks in task list.
+     * @return Number of tasks in task list.
+     */
     public int getNumberOfTasks() {
         return list.size();
     }
 
-    public void showTasksContainingKeyword(String keyword) {
-        Ui.showTasksToUser(list.tasksContainingKeyword(keyword));
+    /**
+     * Returns String of tasks containing a keyword.
+     * @param keyword keyword to be searched.
+     * @return String of tasks containing a keyword.
+     */
+    public String showTasksContainingKeyword(String keyword) {
+        return Ui.showTasksToUser(list.tasksContainingKeyword(keyword));
     }
 
 }

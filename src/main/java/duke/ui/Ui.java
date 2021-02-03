@@ -1,126 +1,72 @@
 package duke.ui;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.List;
 
 import duke.duke.Duke;
 import duke.tasks.Task;
 
 /**
- * Handles input/output of the application.
- * Acquires user input and prints messages to the console.
+ * Manages the UI component of the application.
  */
 public class Ui {
-    public static final BufferedReader IN = new BufferedReader(new InputStreamReader(System.in));
-    public static final PrintWriter OUT = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
     /**
-     * Prints welcome message.
-     * @param bot a Duke object that manages task list operations
+     * Displays welcome message upon launch of application.
+     * @param bot A Duke object that manages task list operations.
      */
-    public static void showWelcomeMessage(Duke bot) {
-        OUT.printf("Hello from%n%s%n", bot.getLogo());
-        OUT.println("Hello! I'm Duke");
-        OUT.println("What can I do for you?");
-
-        for (int i = 0; i < 50; i++) {
-            OUT.print('\u2500');
-        }
-        OUT.println();
-        OUT.flush();
+    public static String showWelcomeMessage(Duke bot) {
+        return String.format("Hello from%n%s%n", bot.getLogo())
+                + "Hello! I'm Duke\n" + "What can I do for you?\n";
     }
 
     /**
-     * Prints message that requests for user input.
+     * Displays response for ListCommand.
+     * @param list List of task to be printed.
      */
-    public static void askForUserRequest() {
-        OUT.println("Anything else?");
-        OUT.flush();
-    }
-
-    /**
-     * Prints list of task for the user.
-     * @param list list of task to be printed
-     */
-    public static void showTasksToUser(List<Task> list) {
+    public static String showTasksToUser(List<Task> list) {
+        StringBuilder tasks = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
-            OUT.printf("%d.%s%n", i + 1, list.get(i));
+            tasks.append(String.format("%d.%s%n", i + 1, list.get(i)));
         }
-        OUT.flush();
+        return tasks.toString();
     }
 
     /**
-     * Prints an empty line.
+     * Displays response for a task type Command.
+     * @param task The new task added.
+     * @param list List of tasks.
      */
-    public static void printEmptyLine() {
-        OUT.println();
-        OUT.flush();
+    public static String showAddTaskMessage(Task task, List<Task> list) {
+        String taskMessage;
+        taskMessage = "Got it. I've added this task:\n" + String.format(" %s%n", task)
+                + String.format("Now you have %d tasks in the list.%n", list.size());
+        return taskMessage;
     }
 
     /**
-     * Prints message when a new task is added.
-     * @param task the new task added
-     * @param list list of tasks
+     * Displays response for DeleteCommand.
+     * @param task The task to be removed.
+     * @param list List of tasks.
      */
-    public static void showAddTaskMessage(Task task, List<Task> list) {
-        OUT.println("Got it. I've added this task:");
-        OUT.printf(" %s%n", task);
-        OUT.printf("Now you have %d tasks in the list.%n", list.size());
-        OUT.flush();
+    public static String showRemoveTaskMessage(Task task, List<Task> list) {
+        return "Noted. I've removed this task:" + String.format(" %s%n", task)
+                + String.format("Now you have %d tasks in the list.%n", list.size());
     }
 
     /**
-     * Prints message when a task is removed.
-     * @param task the task to be removed
-     * @param list list of tasks
+     * Displays response for DoneCommand.
+     * @param list List of tasks.
+     * @param id Index of task to be marked as done.
      */
-    public static void showRemoveTaskMessage(Task task, List<Task> list) {
-        OUT.println("Noted. I've removed this task:");
-        OUT.printf(" %s%n", task);
-        OUT.printf("Now you have %d tasks in the list.%n", list.size());
-        OUT.flush();
+    public static String showDoneTaskMessage(List<Task> list, int id) {
+        return "Nice! I've marked this task as done:"
+                + String.format(" %s%n", list.get(id));
     }
 
     /**
-     * Prints message when task is marked as done.
-     * @param list list of tasks
-     * @param id index of task to be marked as done
+     * Displays response for ByeCommand.
      */
-    public static void showDoneTaskMessage(List<Task> list, int id) {
-        OUT.println("Nice! I've marked this task as done:");
-        OUT.printf(" %s%n", list.get(id));
-        OUT.flush();
-    }
-
-    /**
-     * Prints message upon exit of the application
-     */
-    public static void showExitMessage() {
-        OUT.println("Bye. Hope to see you again soon!");
-        OUT.flush();
-        OUT.close();
-    }
-
-    /**
-     * Prints a message to the console.
-     * @param message message to be shown to the user
-     */
-    public static void print(String message) {
-        OUT.println(message);
-        OUT.flush();
-    }
-
-    /**
-     * Reads the user input.
-     * @return user input as string
-     * @throws IOException if an IO error occurs
-     */
-    public static String readUserInput() throws IOException {
-        return IN.readLine();
+    public static String showExitMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 }

@@ -1,5 +1,11 @@
 package duke.command;
 
+import java.io.File;
+import java.io.IOException;
+
+import duke.duke.Duke;
+import duke.storage.Storage;
+
 /**
  * Creates a Todo task.
  */
@@ -21,5 +27,12 @@ public class TodoCommand extends Command {
      */
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String run(File file, Duke bot) throws IOException {
+        String output = bot.addTask(getDescription(), getCommand(), null);
+        Storage.saveFile(file, bot);
+        return output;
     }
 }
