@@ -89,7 +89,8 @@ public class Duke extends Application {
 
         AnchorPane mainLayout = new AnchorPane();
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-        //affects the positioning of the nodes
+        //affects the positioning of the nodes. use static method and not object method?? coz this is setting for the
+        //node which is sendbutton
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
@@ -114,6 +115,7 @@ public class Duke extends Application {
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
+    //not needed anymore
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
@@ -129,8 +131,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getDialog(userText, new ImageView(user), true),
+                DialogBox.getDialog(dukeText, new ImageView(duke), false)
         );
         userInput.clear();
     }
@@ -166,7 +168,7 @@ public class Duke extends Application {
             try {
                 Files.createDirectory(Paths.get(FOLDER_PATH));
                 TaskList.setList(new ArrayList<Task>());
-            } catch (IOException e1){
+            } catch (IOException e1) {
                 System.out.println(Ui.lineGetter() + " Cannot create new directory\n" + Ui.lineGetter());
             }
             //shld just be ioexception, shldnt come to this catch block
