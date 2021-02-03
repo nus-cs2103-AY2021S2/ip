@@ -16,7 +16,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String done = this.isDone? "\u2713" : "X";
+        String done = this.isDone ? "\u2713" : "X";
         return "[" + done + "] " + this.description;
     }
 

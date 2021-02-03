@@ -19,13 +19,13 @@ public class Parser {
 
     public static void addTask(Task newTask) {
         taskList.add(newTask);
-        System.out.println("Got it. I've added this task:" + "\n" + newTask.toString() +
-                "\n" + "Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Got it. I've added this task:" + "\n" + newTask.toString()
+                + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void listTask() {
         System.out.println("Here are the task in your list:");
-        for(int i = 0; i < taskList.size(); ++i) {
+        for (int i = 0; i < taskList.size(); ++i) {
             System.out.println(i+1 + ". " + taskList.get(i));
         }
     }
@@ -33,8 +33,8 @@ public class Parser {
     public static void deleteTask(int i) {
         Task task = taskList.get(i-1);
         taskList.remove(i-1);
-        System.out.println("Noted. I've removed this task:" + "\n" + task.toString() +
-                "\n" + "Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Noted. I've removed this task:" + "\n" + task.toString()
+                + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void markDone(int i) {
@@ -43,12 +43,13 @@ public class Parser {
         System.out.println("Nice! I've marked this task as done: " + "\n" + task.toString());
     }
 
-    public static void read() throws DukeException, Exception{
+    public static void read() throws DukeException, Exception {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (input.equals(""))
+            if (input.equals("")) {
                 throw new EmptyArgument("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
             if (input.startsWith("done")) {
                 String[] spiltInput = input.split("\\s+");
                 int taskNumber = Integer.parseInt(spiltInput[1]);
