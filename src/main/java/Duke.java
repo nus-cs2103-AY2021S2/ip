@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -29,8 +30,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Instantiates required classes.
@@ -40,35 +41,6 @@ public class Duke extends Application {
         TaskList tasks = new TaskList(ui);
         this.ine = new Storage(tasks, ui);
         this.parser = new Parser(tasks, ui);
-    }
-
-    /**
-     * Creates a new Duke object and runs the main method.
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * Main method.
-     */
-    public void run() {
-        ui.welcome();
-        try {
-            ine.importData();
-        } catch (IOException e) {
-            ui.ioException();
-        }
-
-        parser.poll();
-
-        try {
-            ine.exportData();
-        } catch (IOException e) {
-            ui.ioException();
-        }
-        ui.bye();
     }
 
     @Override
@@ -116,6 +88,18 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.welcome(),
+                new ImageView(duke)));
+
+        Label importRes;
+        try {
+            importRes = ine.importData();
+        } catch (IOException e) {
+            importRes = ui.ioException();
+        }
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(importRes,
+                new ImageView(duke)));
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -128,16 +112,33 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        Label dukeText;
+        if (input.equals("bye")) {
+            dukeText = ui.bye();
+        } else {
+            dukeText = parser.parse(input);
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
-    }
-
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+        if (input.equals("bye")) {
+            Thread t = new Thread(() -> {
+                try {
+                    ine.exportData();
+                    Thread.sleep(1500);
+                    Platform.exit();
+                } catch (IOException e) {
+                    dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.ioException(),
+                            new ImageView(duke)));
+                } catch (InterruptedException e) {
+                    System.err.println(e);
+                }
+            });
+            t.start();
+        }
     }
 }

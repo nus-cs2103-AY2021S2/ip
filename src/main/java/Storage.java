@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+import javafx.scene.control.Label;
+
 /**
  * IO handler for CS2103T iP. Manages import of saved tasks upon program start and export
  * of tasks upon program termination.
@@ -38,11 +40,10 @@ public class Storage {
      * Imports saved tasks into TaskList.
      * @throws FileNotFoundException When file is not found.
      */
-    public void importData() throws FileNotFoundException {
+    public Label importData() throws FileNotFoundException {
         Scanner sc = new Scanner(data);
         if (!sc.hasNext()) {
-            ui.print("Looks like you have no tasks! :)");
-            return;
+            return ui.print("Looks like you have no tasks! :)");
         }
         while (sc.hasNext()) {
             String line = sc.nextLine();
@@ -56,7 +57,7 @@ public class Storage {
             storage.addImport(newTask);
         }
         sc.close();
-        ui.print("Tasks saved from last session imported! :)");
+        return ui.print("Tasks saved from last session imported! :)");
     }
 
     /**
