@@ -6,16 +6,22 @@ import java.time.format.DateTimeFormatter;
 /**
  * Implementation for tasks with a given start-time and end-time.
  *  @author Soon Keat Neo
- *  @version CS2103T AY20/21 Sem 1 iP
+ *  @version CS2103T AY20/21 Sem 2 iP
  */
 
 public class Event extends Task {
     private final LocalDate startAndEnd;
+
+
     public Event(String taskName, String startAndEnd) {
         super(taskName, "E");
         this.startAndEnd = LocalDate.parse(startAndEnd);
     }
 
+    /**
+     * Returns the date of the instance of the event
+     * @return the event date
+     */
     public LocalDate getDate() {
         return this.startAndEnd;
     }

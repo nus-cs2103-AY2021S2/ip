@@ -3,7 +3,7 @@ package soonkeatneo.duke.task;
 /**
  * Implementation for the Tasks that the chat-bot stores.
  * @author Soon Keat Neo
- * @version CS2103T AY20/21 Sem 1 iP
+ * @version CS2103T AY20/21 Sem 2 iP
  */
 public class Task {
     protected String description;

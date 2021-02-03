@@ -1,9 +1,9 @@
 package soonkeatneo.duke;
 
 /**
- * Implementation for the chat-bot UI.
+ * Implementation for the then-CLI version of the Duke chat-bot. Not in active use.
  * @author Soon Keat Neo
- * @version CS2103T AY20/21 Sem 1 iP
+ * @version CS2103T AY20/21 Sem 2 iP
  */
 
 public class Ui {
