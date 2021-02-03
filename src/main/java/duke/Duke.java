@@ -40,5 +40,9 @@ public class Duke {
     public static void main(String[] args) {
         new Duke().run();
     }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }
 
