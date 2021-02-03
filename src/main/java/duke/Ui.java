@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private final String LINE = "    ____________________________________________________________\n";
+    private final String LINE = "";
     private Scanner sc;
 
     public Ui() {
@@ -13,17 +13,17 @@ public class Ui {
     /**
      * Print greeting message.
      */
-    public void printGreeting() {
+    public static String printGreeting() {
         String greeting = "     Hello! I'm Duke\n" + "     What can I do for you?\n";
-        System.out.print(LINE + greeting + LINE);
+        return greeting;
     }
 
     /**
      * Print bye message.
      */
-    public void printBye() {
+    public String printBye() {
         String byeMessage = "     Bye. Hope to see you again soon!\n";
-        System.out.print(LINE + byeMessage + LINE);
+        return byeMessage;
     }
 
     /**
@@ -40,8 +40,8 @@ public class Ui {
      *
      * @param error error found.
      */
-    public void printError(String error) {
-        System.out.print(LINE + error + LINE);
+    public String printError(String error) {
+        return LINE + error + LINE;
     }
 
     /**
@@ -59,19 +59,22 @@ public class Ui {
      *
      * @param tl task list to be printed.
      */
-    public void printTasks(TaskList tl) {
+    public String printTasks(TaskList tl) {
         if (tl.size() == 0) {
             String emptyListMsg = "     There are no tasks in your list!\n";
-            System.out.print(LINE + emptyListMsg + LINE);
-            return;
+            return LINE + emptyListMsg + LINE;
+        } else {
+            int index = 1;
+            String listMsg = "     These are the tasks in your list:\n";
+            String msg = "";
+            msg += LINE + listMsg;
+            for (Task t : tl.getList()) {
+                msg += String.format("     %d. %s\n",
+                        index++, t.toString());
+            }
+            msg += LINE;
+            return msg;
         }
-        int index = 1;
-        System.out.print(LINE);
-        for (Task t : tl.getList()) {
-            System.out.print(String.format("     %d. %s\n",
-                    index++, t.toString()));
-        }
-        System.out.print(LINE);
     }
 
     private String taskListSizeMsg(int numOfTasks) {
@@ -83,11 +86,11 @@ public class Ui {
      *
      * @param t task added to task list.
      */
-    public void printAddedTask(Task t, TaskList tl) {
+    public String printAddedTask(Task t, TaskList tl) {
         String addMsg = "     Got it. I've added this task:\n";
         String taskMsg = "\t" + t.toString() + "\n";
         String listSizeMsg = taskListSizeMsg(tl.size());
-        System.out.print(LINE + addMsg + taskMsg + listSizeMsg + LINE);
+        return LINE + addMsg + taskMsg + listSizeMsg + LINE;
     }
 
     /**
@@ -95,10 +98,10 @@ public class Ui {
      *
      * @param t task marked done.
      */
-    public void printMarkedDone(Task t) {
+    public String printMarkedDone(Task t) {
         String doneMsg = "     Nice! I've marked this task as done:\n";
         String taskMsg = "\t" + t.toString() + "\n";
-        System.out.print(LINE + doneMsg + taskMsg + LINE);
+        return LINE + doneMsg + taskMsg + LINE;
     }
 
     /**
@@ -106,11 +109,11 @@ public class Ui {
      *
      * @param t task deleted.
      */
-    public void printDeletedTask(Task t, TaskList tl) {
+    public String printDeletedTask(Task t, TaskList tl) {
         String deleteMsg = "     Noted. I've removed this task:\n";
         String taskMsg = "\t" + t.toString() + "\n";
         String listSizeMsg = taskListSizeMsg(tl.size());
-        System.out.print(LINE + deleteMsg + taskMsg + listSizeMsg + LINE);
+        return LINE + deleteMsg + taskMsg + listSizeMsg + LINE;
     }
 
     /**
@@ -119,20 +122,21 @@ public class Ui {
      *
      * @param tl list of task to be printed.
      */
-    public void printFoundTasks(TaskList tl) {
+    public String printFoundTasks(TaskList tl) {
         if (tl.size() == 0) {
             String noMatchMsg = "     There are no matching task in your list!\n";
-            System.out.print(LINE + noMatchMsg + LINE);
-            return;
+            return LINE + noMatchMsg + LINE;
+        } else {
+            int index = 1;
+            String findMsg = "     Here are the matching tasks in your list:\n";
+            String msg = "";
+            msg += LINE + findMsg;
+            for (Task t : tl.getList()) {
+                msg += String.format("     %d. %s\n",
+                        index++, t.toString());
+            }
+            msg += LINE;
+            return msg;
         }
-        int index = 1;
-        String findMsg = "     Here are the matching tasks in your list:\n";
-        System.out.print(LINE);
-        System.out.print(findMsg);
-        for (Task t : tl.getList()) {
-            System.out.print(String.format("     %d. %s\n",
-                    index++, t.toString()));
-        }
-        System.out.print(LINE);
     }
 }

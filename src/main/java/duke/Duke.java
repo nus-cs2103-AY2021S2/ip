@@ -11,34 +11,23 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.tl = new TaskList();
+        this.tl = this.storage.load();
     }
 
-    /**
-     * Simulates the running of Duke.
-     * A interative task planner.
-     *
-     */
-    public void run() {
-        ui.printGreeting();
-        storage.load(tl);
-        String input;
-        input = ui.readLine();
-        while (!input.equals("bye")) {
-            try {
-                Command c = Parser.parseInput(input);
-                c.execute(tl, ui, storage);
-            } catch (Exception e) {
-                ui.printError(e.toString());
-            } finally {
-                input = ui.readLine();
-            }
-        }
-        ui.printBye();
+    public static String greeting() {
+        return Ui.printGreeting();
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parseInput(input);
+            return c.execute(tl, ui, storage);
+        } catch (Exception e) {
+            return ui.printError(e.toString());
+        }
     }
 }
 

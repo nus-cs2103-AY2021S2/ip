@@ -28,10 +28,10 @@ public class Storage {
     /**
      * Load tasks stored in drive to task list.
      *
-     * @param tl task list to contain stored tasks.
      */
-    public void load(TaskList tl) {
+    public TaskList load() {
         try {
+            TaskList tl = new TaskList();
             File f = new File(PATH_NAME + FILE_NAME);
             f.createNewFile();
             Scanner sc = new Scanner(f);
@@ -63,8 +63,10 @@ public class Storage {
                     tl.add(t);
                 }
             }
+            return tl;
         } catch (Exception e) {
             Ui.printMessage("Unable to load file!");
+            return new TaskList();
         }
     }
 }

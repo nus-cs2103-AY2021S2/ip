@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      * @throws DukeException if task cannot be created.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         Task t = null;
         switch (taskType) {
         case "todo":
@@ -41,10 +41,8 @@ public class AddCommand extends Command {
         default:
             throw new DukeWrongCommandException(taskType);
         }
-        if (t != null) {
-            tl.add(t);
-            ui.printAddedTask(t, tl);
-            storage.save(tl.toString());
-        }
+        tl.add(t);
+        storage.save(tl.toString());
+        return ui.printAddedTask(t, tl);
     }
 }
