@@ -38,10 +38,14 @@ class Storage {
      */
     public void refile(Tasklist list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (Task task : list) {
-            fw.write(task.encode());
-            fw.write("\n");
-        }
+        list.forEach(task -> {
+            try {
+                fw.write(task.encode());
+                fw.write("\n");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
         fw.close();
     }
 
@@ -58,34 +62,29 @@ class Storage {
         parent.mkdirs();
         file.createNewFile();
         Scanner sc = new Scanner(file);
-        while (sc.hasNextLine()) {
-            String str = sc.nextLine();
+        sc.useDelimiter("\n");
+        sc.forEachRemaining(str -> {
             String[] tokens = str.split(" / ");
             Task task;
             switch (tokens[0]) {
             case "T":
                 task = new ToDo(tokens[2]);
-                if (Integer.parseInt(tokens[1]) == 1) {
-                    task.markAsDone();
-                }
                 break;
             case "D":
                 task = new Deadline(tokens[2], tokens[3]);
-                if (Integer.parseInt(tokens[1]) == 1) {
-                    task.markAsDone();
-                }
                 break;
             case "E":
                 task = new Event(tokens[2], tokens[3]);
-                if (Integer.parseInt(tokens[1]) == 1) {
-                    task.markAsDone();
-                }
                 break;
             default:
                 throw new InputMismatchException();
             }
+            if (Integer.parseInt(tokens[1]) == 1) {
+                task.markAsDone();
+            }
             list.add(task);
-        }
+        });
+        sc.close();
         return list;
     }
 }

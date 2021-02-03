@@ -61,9 +61,7 @@ public class Blarb {
     public boolean execute(String input) {
         Output output = Processor.execute(input, tasklist, storage);
         if (!Processor.leave(input)) {
-            if (output.warn != null) {
-                ui.warn(output.warn);
-            }
+            output.warn.ifPresent(ui::warn);
             ui.blurt(output.normal);
             return true;
         }
@@ -79,12 +77,11 @@ public class Blarb {
      */
     public String getResponse(String input) {
         Output output = Processor.execute(input, tasklist, storage);
-        if (output.warn == null) {
-            return Processor.execute(input, tasklist, storage).normal;
-        }
-        return String.format("!!! %s\n%s",
-                Processor.execute(input, tasklist, storage).warn,
-                Processor.execute(input, tasklist, storage).normal);
+        String normal = output.normal;
+        String warn = output.warn
+                .map(x -> String.format("!!! %s\n", x))
+                .orElse("");
+        return String.format("%s%s", warn, normal);
     }
 
     /**
