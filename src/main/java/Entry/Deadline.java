@@ -10,18 +10,17 @@ import java.util.Locale;
 public class Deadline extends Task {
     /**
      * Returns a Task.Deadline
+     * sorted should have 4 args, delimited by spaces
+     *  1. Day
+     *  2. Month
+     *  3. Year
+     *  4. Hour/Minute
      *
      * @param description description of the deadline
      * @param deadline    String to be converted to a LocalDateTime
      **/
     public Deadline(String description, String deadline) throws CommandFormatException {
         super(description);
-        /* sorted should have 4 args, delimited by spaces
-        1. Day
-        2. Month
-        3. Year
-        4. Hour/Minute
-         */
         try {
             this.deadline = parseDate(deadline.split(" "));
         } catch (NumberFormatException e){
