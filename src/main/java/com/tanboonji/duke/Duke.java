@@ -39,6 +39,20 @@ public class Duke {
         }
     }
 
+    public void initialise() {
+        storage = new Storage(FILE_DIR);
+        ui = new Ui();
+
+        try {
+            taskList = storage.load();
+            ui.print("load successful");
+        } catch (DukeException e) {
+            ui.print(e.getMessage());
+        }
+
+        ui.greet();
+    }
+
     private boolean processInput(String input) {
         Command command;
         try {
@@ -63,7 +77,22 @@ public class Duke {
         return true;
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    public String getResponse(String input) {
+        Command command;
+        try {
+            command = CommandParser.parse(input);
+            command.addTaskList(taskList);
+            String result = command.execute();
+
+            if (command.shouldSave()) {
+                storage.save(taskList);
+            }
+
+            return result;
+        } catch (IllegalArgumentException e) {
+            return HelpCommand.ERROR_MESSAGE + HelpCommand.COMMAND_LIST;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
