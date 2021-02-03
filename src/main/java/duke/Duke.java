@@ -31,7 +31,7 @@ public class Duke {
 
     /**
      * Initializes a Duke object with specified file path and calls run method.
-     * @param args
+     * @param args input from user
      */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
@@ -75,7 +75,7 @@ public class Duke {
                 break;
             case "todo":
                 try {
-                    parser.isEmptyDesc(inputArr);
+                    parser.isEmptyDescription(inputArr);
                     String details = inputArr[1];
                     Task todo = new Todo(details);
                     tasks.addTask(todo);
@@ -86,7 +86,7 @@ public class Duke {
                 break;
             case "deadline":
                 try {
-                    parser.isEmptyDesc(inputArr);
+                    parser.isEmptyDescription(inputArr);
                     String details = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
                     String date = input.substring(input.indexOf("/") + 4);
                     Task deadline = new Deadline(details, date);
@@ -98,7 +98,7 @@ public class Duke {
                 break;
             case "event":
                 try {
-                    parser.isEmptyDesc(inputArr);
+                    parser.isEmptyDescription(inputArr);
                     String details = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
                     String date = input.substring(input.indexOf("/") + 4);
                     Task event = new Event(details, date);

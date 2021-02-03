@@ -3,11 +3,20 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class for event tasks
+ */
 public class Event extends Task {
 
     protected String at;
     protected LocalDate localAt;
 
+    /**
+     * Constructor for event class.
+     * Initializes a event with specified description.
+     *
+     * @param description description of the event task
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;

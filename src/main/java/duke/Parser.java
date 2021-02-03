@@ -17,7 +17,7 @@ public class Parser {
      * @param inputArr user input array.
      * @throws DukeException if input task description is missing.
      */
-    public void isEmptyDesc(String[] inputArr) throws DukeException {
+    public void isEmptyDescription(String[] inputArr) throws DukeException {
         if (inputArr.length == 1) {
             throw new DukeException();
         }
