@@ -9,7 +9,7 @@ import java.util.Collection;
 public class Storage {
     private static String fileName;
 
-    public ArrayList<Task> load(String fileName,Ui ui) {
+    public ArrayList<Task> load(String fileName) throws DukeException, DukeDeadlineException{
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File f = new File(fileName);
@@ -17,13 +17,15 @@ public class Storage {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String strTask = s.nextLine();
-                Task task = Parser.parseForText(strTask, ui);
+                Task task = Parser.parseForText(strTask);
                 tasks.add(task);
             }
             this.fileName = fileName;
             s.close();
         } catch (IOException e) {
-            ui.showError("Unable to create file");
+            throw new DukeException("Unable to create file");
+        } catch (DukeDeadlineException e) {
+            throw e;
         }
         return tasks;
     }
