@@ -15,17 +15,28 @@ public class Duke {
         greetUser();
         while(true) {
             String cmd = sc.nextLine();
-            if(cmd.equals("bye")) {
+            String[] cmds = cmd.split(" ");
+            if(cmds[0].equals("bye")) {
                 byeUser();
                 break;
             }
-            else if(cmd.equals("list")) {
+            else if(cmds[0].equals("list")) {
                 listItems();
+            }
+            else if(cmds[0].equals("done")) {
+                doneItem(Integer.parseInt(cmds[1]));
             }
             else {
                 addItems(cmd);
             }
         }
+    }
+
+    private static void doneItem(int itemNo) {
+        tasks.get(itemNo-1).isCompleted = true;
+        System.out.println("Nice, I have marked this task as done!");
+        System.out.print("  ");
+        System.out.print(tasks.get(itemNo-1));
     }
 
     private static void addItems(String cmd) {
