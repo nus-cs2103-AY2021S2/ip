@@ -51,14 +51,4 @@ public class FindCommand extends Command {
             return ui.getNoMatchString();
         }
     }
-
-    /**
-     * Returns if program should exit after this command.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
