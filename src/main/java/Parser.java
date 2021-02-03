@@ -30,30 +30,19 @@ public class Parser {
      * <p> 7. Exit Duke: bye </p>
      *
      * @param userInput Command from user.
+     * @return String representing the output of processing command.
      */
-    protected void processCommand(String userInput) {
+    protected String processCommand(String userInput) {
         if ("list".equals(userInput)) {
-            printList();
+            return printList();
         } else if (userInput.startsWith("done ")) {
-            try {
-                setAsDone(userInput);
-            } catch (DukeException ex) {
-                System.out.println(ex);
-            }
+            return setAsDone(userInput);
         } else if (userInput.startsWith("delete ")) {
-            try {
-                deleteFromList(userInput);
-            } catch (DukeException ex) {
-                System.out.println(ex);
-            }
+            return deleteFromList(userInput);
         } else if (userInput.startsWith("find ")) {
-            findFromList(userInput);
+            return findFromList(userInput);
         } else {
-            try {
-                addTaskToList(userInput, false);
-            } catch (DukeException ex) {
-                System.out.println(ex);
-            }
+            return addTaskToList(userInput, false);
         }
     }
 
@@ -61,18 +50,19 @@ public class Parser {
      * Sets a task as done and prints out the task marked as done.
      *
      * @param userInput Takes in command from user in the format: done &lt;indexOfItem&gt;
-     * @throws DukeException Throws error if the indexOfItem given is invalid.
+     * @return String representing the output of processing command.
      */
-    protected void setAsDone(String userInput) throws DukeException {
+    protected String setAsDone(String userInput) {
+        String textToReturn = "";
         try {
             int indexToMark = Integer.parseInt(userInput.substring(5));
             Task ts = tasks.getTask(indexToMark);
             ts.markAsDone();
-            System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("  " + ts);
-            System.out.println("-----------------------------------------------------");
+            textToReturn += "Nice! I've marked this task as done: \n";
+            textToReturn += "  " + ts;
+            return textToReturn;
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-            throw new ArgumentException(4);
+            return new ArgumentException(4).toString();
         }
     }
 
@@ -80,19 +70,20 @@ public class Parser {
      * Deletes a task in the list and prints out the task deleted with the remaining number of tasks in the list.
      *
      * @param userInput Takes in command from user in the format: delete &lt;indexOfItem&gt;
-     * @throws DukeException Throws error if the indexOfItem given is invalid.
+     * @return String representing the output of processing command.
      */
-    protected void deleteFromList(String userInput) throws DukeException {
+    protected String deleteFromList(String userInput) {
+        String textToReturn = "";
         try {
             int indexToDelete = Integer.parseInt(userInput.substring(7));
             Task ts = tasks.getTask(indexToDelete);
             tasks.removeTask(indexToDelete);
-            System.out.println("Okay! I've removed this task: ");
-            System.out.println("  " + ts);
-            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
-            System.out.println("-----------------------------------------------------");
+            textToReturn += "Okay! I've removed this task: \n";
+            textToReturn += "  " + ts;
+            textToReturn += "\nNow you have " + tasks.getSize() + " tasks in the list.";
+            return textToReturn;
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-            throw new ArgumentException(4);
+            return new ArgumentException(4).toString();
         }
     }
 
@@ -100,8 +91,9 @@ public class Parser {
      * Finds all tasks in the list that matches the keyword given by user.
      *
      * @param userInput Takes in command from user in the format: find &lt;keyword&gt;
+     * @return String representing the output of processing command.
      */
-    protected void findFromList(String userInput) {
+    protected String findFromList(String userInput) {
         TaskList tasksMatchingKeyword = new TaskList();
         String keyword = userInput.substring(5);
         for (int i = 1; i <= tasks.getSize(); i++) {
@@ -110,7 +102,7 @@ public class Parser {
                 tasksMatchingKeyword.addTask(task);
             }
         }
-        printList(tasksMatchingKeyword);
+        return printList(tasksMatchingKeyword);
     }
 
     /**
@@ -121,18 +113,19 @@ public class Parser {
      *                  <p> deadline task: deadline &lt;task_description&gt; /by &lt;date&gt; </p>
      *                  <p> event task: event &lt;event_description&gt; /at &lt;date&gt; </p>
      * @param isDone True if task to be added is done, else false.
-     * @throws DukeException Throws error if the keyword or format is wrong.
+     * @return String representing the output of processing command.
      */
-    protected void addTaskToList(String userInput, boolean isDone) throws DukeException {
+    protected String addTaskToList(String userInput, boolean isDone) {
+        String textToReturn = "";
         if (userInput.startsWith("todo ")) {
             String[] splits = userInput.split("todo ");
             if (splits.length == 2) {
                 Todo addedTask = new Todo(Arrays.asList(splits).get(1), isDone);
                 tasks.addTask(addedTask);
-                System.out.println("Got it, I've added this task to the list: ");
-                System.out.println("  " + addedTask);
+                textToReturn += "Got it, I've added this task to the list: \n";
+                textToReturn += "  " + addedTask;
             } else {
-                throw new ArgumentException(1);
+                textToReturn = new ArgumentException(1).toString();
             }
         } else if (userInput.startsWith("deadline ")) {
             String[] splits = userInput.split("deadline |/by ");
@@ -141,48 +134,56 @@ public class Parser {
                     Deadline addedTask = new Deadline(Arrays.asList(splits).get(1),
                             isDone, Arrays.asList(splits).get(2));
                     tasks.addTask(addedTask);
-                    System.out.println("Got it, I've added this task to the list: ");
-                    System.out.println("  " + addedTask);
+                    textToReturn += "Got it, I've added this task to the list: \n";
+                    textToReturn += "  " + addedTask;
                 } catch (DukeException ex) {
-                    System.out.println(ex);
+                    textToReturn = ex.toString();
                 }
             } else {
-                throw new ArgumentException(2);
+                textToReturn = new ArgumentException(2).toString();
             }
         } else if (userInput.startsWith("event ")) {
             String[] splits = userInput.split("event | /at ");
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
-                Event addedTask = new Event(Arrays.asList(splits).get(1),
-                        isDone, Arrays.asList(splits).get(2));
-                tasks.addTask(addedTask);
-                System.out.println("Got it, I've added this task to the list: ");
-                System.out.println("  " + addedTask);
+                try {
+                    Event addedTask = new Event(Arrays.asList(splits).get(1),
+                            isDone, Arrays.asList(splits).get(2));
+                    tasks.addTask(addedTask);
+                    textToReturn += "Got it, I've added this task to the list: \n";
+                    textToReturn += "  " + addedTask;
+                } catch (DukeException ex) {
+                    textToReturn = ex.toString();
+                }
             } else {
-                throw new ArgumentException(3);
+                textToReturn = new ArgumentException(3).toString();
             }
         } else {
-            throw new KeywordException();
+            textToReturn = new KeywordException().toString();
         }
-        System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
-        System.out.println("-----------------------------------------------------");
+        textToReturn += "\nYou currently have " + tasks.getSize() + " tasks in the list.";
+        return textToReturn;
     }
 
     /**
-     * Prints out the list of all events.
+     * Returns the representation of the list of all events.
+     *
+     * @return String representing the list of all events.
      */
-    protected void printList() {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(tasks.toString());
-        System.out.println("-----------------------------------------------------");
+    protected String printList() {
+        String listRepresentation = "Here are the tasks in your list:\n";
+        listRepresentation += tasks.toString();
+        return listRepresentation;
     }
 
     /**
-     * Prints out the list of all matching events.
+     * Returns the list of all matching events.
+     *
+     * @return String representing the list of all matching events.
      */
-    protected void printList(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(tasks.toString());
-        System.out.println("-----------------------------------------------------");
+    protected String printList(TaskList tasks) {
+        String listRepresentation = "Here are the matching tasks in your list:\n";
+        listRepresentation += tasks.toString();
+        return listRepresentation;
     }
 
 }

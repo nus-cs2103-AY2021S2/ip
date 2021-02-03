@@ -75,9 +75,9 @@ public class TaskList {
         String stringToReturn = "";
         for (int i = 1; i <= this.getSize(); i++) {
             if (i == this.getSize()) {
-                stringToReturn += "  " + i + ". " + this.getTask(i);
+                stringToReturn += "\n" + i + ". " + this.getTask(i);
             } else {
-                stringToReturn += "  " + i + ". " + this.getTask(i) + "\n";
+                stringToReturn += "\n" + i + ". " + this.getTask(i) + "\n";
             }
         }
         return stringToReturn;
