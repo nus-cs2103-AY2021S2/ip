@@ -28,6 +28,8 @@ public class DukeBot {
 
     /**
      * Starts the input loop with the associated input stream, ending only on a bye command.
+     *
+     * @param scanner the scanner for the input stream.
      */
     public void run(Scanner scanner) {
         Command command;

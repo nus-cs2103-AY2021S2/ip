@@ -62,3 +62,7 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
