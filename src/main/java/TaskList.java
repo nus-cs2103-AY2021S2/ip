@@ -11,17 +11,18 @@ public class TaskList {
      * @param index Index of the task to be removed.
      * @param tasks List of all tasks.
      */
-    public static void markDone(int index, List<Task> tasks) {
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public static String markDone(int index, List<Task> tasks) {
+        String reply = "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         tasks.get(index).markAsDone();
-        System.out.println("Good job, I have marked this task as done!");
-        System.out.println(tasks.get(index).toString());
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        reply += "\nGood job, I have marked this task as done!";
+        reply += "\n" + tasks.get(index).toString();
+        reply += "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
-            System.out.println("Sorry, unable to save data to the hard disk.");
+            reply += "\nSorry, unable to save data to the hard disk.";
         }
+        return reply;
     }
 
     /**
@@ -34,24 +35,26 @@ public class TaskList {
      * @throws InvalidTodoException If Todo does not
      *                              have a description.
      */
-    public static void addTodo(String command, List<Task> tasks) throws InvalidTodoException {
+    public static String addTodo(String command, List<Task> tasks) throws InvalidTodoException {
+        String reply = "";
         if (command.length() < 6) {
             throw new InvalidTodoException();
         }
         tasks.add(new Todo(command.substring(5)));
         int count = tasks.size();
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(tasks.get(count - 1).toString());
-        System.out.println("Now you have " + count
+        reply += "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        reply += "\nGot it. I've added this task: ";
+        reply += "\n" + tasks.get(count - 1).toString();
+        reply += "\n" + "Now you have " + count
                 + (count == 1 ? " task" : " tasks")
-                + " in the list.");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+                + " in the list.";
+        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
-            System.out.println("Sorry, unable to save data to the hard disk.");
+            reply += "\n" + "Sorry, unable to save data to the hard disk.";
         }
+        return reply;
     }
 
     /**
@@ -65,7 +68,8 @@ public class TaskList {
      * @throws InvalidDateTimeFormatException If the format of the date and time entered is incorrect.
      */
 
-    public static void addDeadline(String command, List<Task> tasks) throws InvalidDateTimeFormatException {
+    public static String addDeadline(String command, List<Task> tasks) throws InvalidDateTimeFormatException {
+        String reply = "";
         try {
             tasks.add(new Deadline(command.substring(9).split("/")[0],
                     LocalDateTime.parse(command.substring(9)
@@ -74,18 +78,19 @@ public class TaskList {
             throw new InvalidDateTimeFormatException();
         }
         int count = tasks.size();
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(tasks.get(count - 1).toString());
-        System.out.println("Now you have " + count
+        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        reply += "\n" + "Got it. I've added this task: ";
+        reply += "\n" + tasks.get(count - 1).toString();
+        reply += "\n" + "Now you have " + count
                 + (count == 1 ? " task" : " tasks")
-                + " in the list.");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+                + " in the list.";
+        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
-            System.out.println("Sorry, unable to save data to the hard disk.");
+            reply += "\n" + "Sorry, unable to save data to the hard disk.";
         }
+        return reply;
     }
 
     /**
@@ -97,7 +102,8 @@ public class TaskList {
      * @param tasks List of all tasks.
      */
 
-    public static void addEvent(String command, List<Task> tasks) throws InvalidDateTimeFormatException {
+    public static String addEvent(String command, List<Task> tasks) throws InvalidDateTimeFormatException {
+        String reply = "";
         try {
             tasks.add(new Event(command.substring(6).split("/")[0],
                     LocalDateTime.parse(command.substring(6).split("/")[1].substring(3),
@@ -106,18 +112,19 @@ public class TaskList {
             throw new InvalidDateTimeFormatException();
         }
         int count = tasks.size();
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(tasks.get(count - 1).toString());
-        System.out.println("Now you have " + count
+        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        reply += "\n" + "Got it. I've added this task: ";
+        reply += "\n" + tasks.get(count - 1).toString();
+        reply += "\n" + "Now you have " + count
                 + (count == 1 ? " task" : " tasks")
-                + " in the list.");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+                + " in the list.";
+        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
             System.out.println("Sorry, unable to save data to the hard disk.");
         }
+        return reply;
     }
 
     /**
@@ -128,22 +135,24 @@ public class TaskList {
      *                the task to be deleted.
      * @param tasks List of all tasks.
      */
-    public static void deleteTask(String command, List<Task> tasks) {
+    public static String deleteTask(String command, List<Task> tasks) {
+        String reply = "";
         int deleteIndex = Integer.parseInt(command.split(" ")[1]) - 1;
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("I've removed the task:");
-        System.out.println(tasks.get(deleteIndex));
+        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        reply += "\n" + "I've removed the task:";
+        reply += "\n" + tasks.get(deleteIndex);
         tasks.remove(deleteIndex);
         int count = tasks.size();
-        System.out.println("Now you have " + count
+        reply += "\n" + "Now you have " + count
                 + (count == 1 ? " task" : " tasks")
-                + " in the list.");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+                + " in the list.";
+        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
             Ui.printUnableToSaveDataMessage();
         }
+        return reply;
     }
 
     /**
@@ -151,15 +160,18 @@ public class TaskList {
      *
      * @param tasks List of all tasks.
      */
-    public static void printList(List<Task> tasks) {
+    public static String printList(List<Task> tasks) {
+        String reply = "";
         int listCount = 1;
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Here are the tasks in your list:");
+        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        reply += "\n" + "Here are the tasks in your list:";
         for (Task task : tasks) {
-            System.out.println("  " + listCount + "." + task.toString());
+            reply += "\n" + "  " + listCount + "." + task.toString();
             listCount++;
         }
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        System.out.println(reply);
+        return reply;
     }
 
     /**
@@ -168,17 +180,19 @@ public class TaskList {
      * @param command Command input by user.
      * @param tasks List of tasks.
      */
-    public static void findTask(String command, List<Task> tasks) {
+    public static String findTask(String command, List<Task> tasks) {
+        String reply = "";
         int listCount = 1;
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Here are the matching tasks in your list:");
+        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        reply += "\n" + "Here are the matching tasks in your list:";
         for (Task task : tasks) {
             if (task.toString().contains(command.split(" ")[1])) {
-                System.out.println("  " + listCount + "." + task.toString());
+                reply += "\n" + "  " + listCount + "." + task.toString();
                 listCount++;
             }
         }
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        return reply;
     }
 
 }
