@@ -12,40 +12,34 @@ public class Ui {
             + "|  __  | / /\\ \\ |  __  | / /\\ \\\n"
             + "| |  | |/ ____ \\| |  | |/ ____ \\\n"
             + "|_|  |_/_/    \\_\\_|  |_/_/    \\_\\\n";
-    private static final String STARTER = "Hello from\n" + LOGO
-            + LINE_BREAK
-            + "Dude, I'm HAHA.\n"
+    private static final String STARTER = "Dude, I'm HAHA.\n"
             + "What can I do for you?\n"
             + "Hint: deadline & event to include date & time\n"
             + "e.g. 2020-02-02 18:00\n"
-            + "(Oh when you are done, say bye)\n"
-            + LINE_BREAK;
+            + "(Oh when you are done, say bye)\n";
+
     private static final String TASK_NOT_FOUND = "OH WAIT A MINUTE!\n"
             + ":(\n"
             + "No related tasks in your list!";
 
-    public void taskNotFound() {
+    public String taskNotFound() {
         System.out.println(TASK_NOT_FOUND);
+        return TASK_NOT_FOUND;
     }
 
     /**
      * Outputs welcome message.
      */
-    public void welcome() {
+    public String welcome() {
         System.out.println(STARTER);
-    }
-
-    /**
-     * Outputs linebreak.
-     */
-    public void lineBreak() {
-        System.out.println(LINE_BREAK);
+        return STARTER;
     }
 
     /**
      * Outputs goodbye message.
      */
-    public void bye() {
+    public String bye() {
         System.out.println("Bye now!");
+        return "Bye now!";
     }
 }
