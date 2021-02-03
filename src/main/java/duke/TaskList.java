@@ -1,8 +1,8 @@
 package duke;
 
+import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.lang.StringBuilder;
 
 public class TaskList {
     private ArrayList<Task> taskList;

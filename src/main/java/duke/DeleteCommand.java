@@ -1,8 +1,13 @@
 package duke;
 
 public class DeleteCommand extends Command {
-    int taskNum;
+    private int taskNum;
 
+    /**
+     * Construct a delete command.
+     *
+     * @param taskNum The task number to delete in task list.
+     */
     public DeleteCommand(int taskNum) {
         super();
         this.taskNum = taskNum;

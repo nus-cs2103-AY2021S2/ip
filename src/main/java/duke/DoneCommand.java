@@ -1,8 +1,13 @@
 package duke;
 
 public class DoneCommand extends Command {
-    int taskNum;
+    private int taskNum;
 
+    /**
+     * Constructer for done command.
+     *
+     * @param taskNum The task number to be set as done.
+     */
     public DoneCommand(int taskNum) {
         super();
         this.taskNum = taskNum;

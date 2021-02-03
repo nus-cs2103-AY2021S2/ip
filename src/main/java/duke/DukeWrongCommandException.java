@@ -1,7 +1,7 @@
 package duke;
 
 public class DukeWrongCommandException extends DukeException {
-    String command;
+    private String command;
 
     public DukeWrongCommandException(String command) {
         this.command = command;

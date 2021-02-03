@@ -5,6 +5,9 @@ public class Duke {
     private Storage storage;
     private TaskList tl;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -38,3 +41,4 @@ public class Duke {
         new Duke().run();
     }
 }
+

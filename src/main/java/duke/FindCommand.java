@@ -1,7 +1,7 @@
 package duke;
 
 public class FindCommand extends Command {
-    String pattern;
+    private String pattern;
 
     public FindCommand(String pattern) {
         this.pattern = pattern;

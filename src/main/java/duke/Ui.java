@@ -60,7 +60,7 @@ public class Ui {
      * @param tl task list to be printed.
      */
     public void printTasks(TaskList tl) {
-        if(tl.size() == 0) {
+        if (tl.size() == 0) {
             String emptyListMsg = "     There are no tasks in your list!\n";
             System.out.print(LINE + emptyListMsg + LINE);
             return;
@@ -120,7 +120,7 @@ public class Ui {
      * @param tl list of task to be printed.
      */
     public void printFoundTasks(TaskList tl) {
-        if(tl.size() == 0) {
+        if (tl.size() == 0) {
             String noMatchMsg = "     There are no matching task in your list!\n";
             System.out.print(LINE + noMatchMsg + LINE);
             return;

@@ -5,16 +5,22 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    protected LocalDateTime deadline;
 
-    public Deadline(String description, LocalDateTime by) {
+    /**
+     * Constructor for deadltine task.
+     *
+     * @param description Name of Deadline task.
+     * @param deadline Time format of deadline.
+     */
+    public Deadline(String description, LocalDateTime deadline) {
         super(description);
-        this.by = by;
+        this.deadline = deadline;
     }
 
-    public Deadline(String description, LocalDateTime by, boolean isDone) {
+    public Deadline(String description, LocalDateTime deadline, boolean isDone) {
         super(description, true);
-        this.by = by;
+        this.deadline = deadline;
     }
 
     /**
@@ -49,7 +55,7 @@ public class Deadline extends Task {
      */
     @Override
     public Deadline finishTask() {
-        return new Deadline(description, by, true);
+        return new Deadline(description, deadline, true);
     }
 
     /**
@@ -61,7 +67,7 @@ public class Deadline extends Task {
     @Override
     public String saveTask() {
         return String.format("D | %s | %s | %s\n", super.getStatusIcon(),
-                description, super.timeFormat(by));
+                description, super.timeFormat(deadline));
     }
 
     /**
@@ -73,6 +79,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + super.timeFormat(by) + ")";
+                + super.timeFormat(deadline) + ")";
     }
 }

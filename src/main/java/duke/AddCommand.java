@@ -4,6 +4,12 @@ public class AddCommand extends Command {
     private String taskType;
     private String taskInfo;
 
+    /**
+     * Constructor for add command.
+     *
+     * @param taskType Type of task to add.
+     * @param taskInfo Information of task to be parsed.
+     */
     public AddCommand(String taskType, String taskInfo) {
         super();
         this.taskType = taskType;
@@ -32,6 +38,8 @@ public class AddCommand extends Command {
         case "event":
             t = Event.create(taskInfo);
             break;
+        default:
+            throw new DukeWrongCommandException(taskType);
         }
         if (t != null) {
             tl.add(t);

@@ -1,11 +1,10 @@
 package duke;
 
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
-
+import java.util.Scanner;
 
 public class Storage {
     private final static String PATHNAME = "C:/users/chian/Desktop/CS2103/ip/data/";
@@ -54,6 +53,8 @@ public class Storage {
                     LocalDateTime ldt = Parser.parseFileDate(taskArray[3]);
                     t = new Deadline(taskArray[2], ldt);
                     break;
+                default:
+                    throw new DukeWrongFormatException("loaded file");
                 }
                 if (t != null) {
                     if (taskArray[1].equals("X")) {
