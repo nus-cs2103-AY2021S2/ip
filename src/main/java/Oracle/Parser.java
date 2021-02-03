@@ -100,6 +100,14 @@ public class Parser {
                 ui.showFormatException("DeadlineCommand");
             }
             return new EmptyCommand();
+        } else if (split[0].equals("find")) {
+            try {
+                String kw = split[1];
+                return new FindCommand(kw);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                ui.showFormatException("FindCommand");
+            }
+            return new EmptyCommand();
         }
             /*
              CASE: UNKNOWN INSTRUCTION

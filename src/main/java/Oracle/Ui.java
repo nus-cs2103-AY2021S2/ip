@@ -15,6 +15,7 @@ public class Ui {
             "DeadlineCommand", "deadline {description} /{day} {month} {year} {hour}{minute}",
             "EventCommand", "   event {description} /{day} {month} {year} {hour}{minute}",
             "MarkDoneCommand", "done {taskIndex}",
+            "FindCommand", "    find {keyword}",
             "DeleteCommand", "  delete {taskIndex}"
             );
 
@@ -29,7 +30,7 @@ public class Ui {
      * Informs the user that the load store file could not be found
      */
     public void showLoadingError() {
-        System.out.println("Oracle.Storage file could not be found, starting fresh database");
+        System.out.println("Storage file could not be found, starting fresh database");
     }
 
     /**
@@ -58,7 +59,7 @@ public class Ui {
                 + "    -:;!====!=!!!!!!!======;;::~,\n"
                 + "      -~:;===;======;=;;;:::~-,\n"
                 + "        .-~~::::;:::::~:~--.\n";
-        System.out.println(logo + "\nGreetings Neo, what can the Oracle.Oracle do for you?");
+        System.out.println(logo + "\nGreetings Neo, what can the Oracle do for you?");
     }
 
     /**
@@ -83,7 +84,7 @@ public class Ui {
      * @param tasks the tasks, which can all print its own identity.
      */
     public void showList(ArrayList<Task> tasks) {
-        System.out.println("You have forgotten quickly, but the Oracle.Oracle Remembers");
+        System.out.println("You have forgotten quickly, but the Oracle Remembers");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
@@ -109,7 +110,7 @@ public class Ui {
      * @param domain domain of underlying list, eg. "tasks"
      */
     public void showNumberFormatException(String domain) {
-        System.out.println("Give The Oracle.Oracle the index of the " + domain);
+        System.out.println("Give The Oracle the index of the " + domain);
     }
 
     /** Show recently deleted task
@@ -142,6 +143,13 @@ public class Ui {
     public void showFormatException() {
         for (String command : commandMap.keySet()) {
             showFormatException(command);
+        }
+    }
+
+    public void showSearchResults(String keyword, ArrayList<Task> results) {
+        System.out.println("Here are the results we found for: \"" + keyword + "\"");
+        for (Task t : results) {
+            System.out.println(t);
         }
     }
 }

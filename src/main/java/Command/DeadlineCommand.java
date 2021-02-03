@@ -26,7 +26,7 @@ public class DeadlineCommand implements Command {
         try {
             tasks.add(new Deadline(this.taskDescription, this.taskDeadline));
         } catch (CommandFormatException e) {
-            ui.showFormatException("Command.EventCommand");
+            ui.showFormatException("EventCommand");
             return true;
         }
         ui.showNewTask(tasks.size(), tasks.get(tasks.size() - 1));

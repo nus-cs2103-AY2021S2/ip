@@ -26,7 +26,7 @@ public class EventCommand implements Command {
         try {
             tasks.add(new Event(this.taskDescription, this.taskTime));
         } catch (CommandFormatException e) {
-            ui.showFormatException("Command.EventCommand");
+            ui.showFormatException("EventCommand");
             return true;
         }
         ui.showNewTask(tasks.size(), tasks.get(tasks.size()-1));
