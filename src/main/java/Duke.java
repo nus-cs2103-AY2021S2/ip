@@ -31,7 +31,7 @@ public class Duke {
         while (!isExit) {
             try{
                 String fullCommand = ui.getUserCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parseCommand(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
@@ -47,23 +47,4 @@ public class Duke {
         new Duke("tasks.txt").run();
     }
 
-    // public static void main(String[] args) throws IOException {
-    //     System.out.println("Hello, I'm Bob");
-    //     Scanner scanner = new Scanner(System.in);
-    //     Storage storage = new Storage();
-    //     List<Task> savedTaskList = storage.loadData();
-    //
-    //     InputHandler io = new InputHandler(savedTaskList);
-    //
-    //     while (true) {
-    //         String input = scanner.nextLine();
-    //         if (input.equals("bye")) {
-    //             System.out.println(">>> Bye. Hope to see you again soon!");
-    //             break;
-    //         } else {
-    //             io = io.processInput(input);
-    //             storage.writeData(io.getTaskList());
-    //         }
-    //     }
-    // }
 }

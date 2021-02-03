@@ -85,8 +85,6 @@ public class Parser {
         switch (command) {
         case "todo":
             if(splitInput.length == 1) {
-                // System.out.println("ERROR");
-                // return new DummyCommand();
                 throw new DukeToDoException("The description of a todo cannot be empty.");
             }
             String taskDescription = splitInput[1];
