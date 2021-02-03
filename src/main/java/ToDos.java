@@ -3,6 +3,7 @@
    * @param description the description of the task
    */
 
+@SuppressWarnings("checkstyle:JavadocType")
 class ToDos extends Task {
 
     public ToDos(String description)  {
