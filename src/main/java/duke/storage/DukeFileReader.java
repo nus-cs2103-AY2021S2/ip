@@ -26,9 +26,6 @@ public class DukeFileReader {
         while (sc.hasNextLine()) {
             String taskString = sc.nextLine();
             String[] taskBreakdown = taskString.split("\\|");
-//            for (String str : taskBreakdown) {
-//                System.out.println(str + "\n");
-//            }
             boolean isTaskDone = taskBreakdown[1].equals("1") ? true : false;
             String taskName = taskBreakdown[2];
             if (taskBreakdown[0].equals("T")) {
