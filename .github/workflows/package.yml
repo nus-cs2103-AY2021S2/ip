@@ -4,7 +4,7 @@ on:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-name: Package in JAR
+name: Create JAR
 
 jobs:
   create_release:
@@ -40,14 +40,8 @@ jobs:
           java-version: '11'
           java-package: jdk+fx
           architecture: x64
-      - name: Compile into bin folder
-        run: |
-          mkdir ./bin
-          javac -cp ./src/main/java -Xlint:none -d ./bin ./src/main/java/com/lirc572/ip/*.java
-      - name: Package into JAR
-        run: |
-          cd ./bin
-          jar cvmf ../src/main/java/META-INF/MANIFEST.MF ../duke.jar com/lirc572/ip/*.class
+      - name: Create JAR with Gradle & Shadow
+        run: ./gradlew clean shadowJar
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
@@ -55,6 +49,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./duke.jar
+          asset_path: ./build/libs/duke.jar
           asset_name: duke.jar
           asset_content_type: application/octet-stream

@@ -3,7 +3,7 @@
 ![Checkstyle](https://github.com/lirc572/ip/workflows/Checkstyle/badge.svg)
 ![Text UI Test](https://github.com/lirc572/ip/workflows/Text%20UI%20Test/badge.svg)
 ![Unit Test](https://github.com/lirc572/ip/workflows/Unit%20Test/badge.svg)
-![Package in JAR](https://github.com/lirc572/ip/workflows/Package%20in%20JAR/badge.svg)
+![Create JAR](https://github.com/lirc572/ip/workflows/Create%20JAR/badge.svg)
 
 Duke is the ultimate personal assistant chatbot.
 
