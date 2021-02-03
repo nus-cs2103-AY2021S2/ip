@@ -8,7 +8,7 @@ public class ListCommand extends Command {
      * @param storage object to load and save tasks.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
-        ui.printTasks(tl);
+    public String execute(TaskList tl, Ui ui, Storage storage) {
+        return ui.printTasks(tl);
     }
 }

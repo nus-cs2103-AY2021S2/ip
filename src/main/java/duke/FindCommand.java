@@ -8,7 +8,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         TaskList tempTL = new TaskList();
         for (Task t : tl.getList()) {
             String taskName = t.getName();
@@ -16,6 +16,6 @@ public class FindCommand extends Command {
                 tempTL.add(t);
             }
         }
-        ui.printFoundTasks(tempTL);
+        return ui.printFoundTasks(tempTL);
     }
 }

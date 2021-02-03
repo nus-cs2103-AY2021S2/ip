@@ -22,11 +22,11 @@ public class DoneCommand extends Command {
      * @param storage objec to store and load task list.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         Task t = tl.get(taskNum - 1);
         t.finishTask();
         tl.set(taskNum - 1, t);
-        ui.printMarkedDone(t);
         storage.save(tl.toString());
+        return ui.printMarkedDone(t);
     }
 }
