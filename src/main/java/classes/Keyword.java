@@ -10,5 +10,6 @@ public enum Keyword {
     event,
     done,
     delete,
+    find,
     bye;
 }

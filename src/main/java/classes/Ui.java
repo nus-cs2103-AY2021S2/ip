@@ -42,4 +42,8 @@ public class Ui {
         return sc.nextLine();
     }
 
+    public void findMessage() {
+        System.out.println("found it! here's your task(s):");
+    }
+
 }

@@ -8,6 +8,7 @@ import main.java.command.DoneCmd;
 import main.java.command.EventCmd;
 import main.java.command.ListCmd;
 import main.java.command.ToDoCmd;
+import main.java.command.FindCmd;
 
 /**
  * Parser class to deal with making sense of the user command.
@@ -16,7 +17,7 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
-    private static String[] command = {"list", "bye", "todo", "deadline", "event", "done", "delete"};
+    private static String[] command = {"list", "bye", "todo", "deadline", "event", "done", "delete", "find"};
 
     /**
      * Constructor method.
@@ -59,8 +60,12 @@ public class Parser {
             case "delete":
                 return new DeleteCmd(cmd);
                 // Fallthrough
+            case "find":
+                return new FindCmd(cmd);
+                // Fallthrough
             case "bye":
                 return new ByeCmd(cmd);
+                // Fallthrough
             default:
                 throw new DuckieException("please start with 'list', 'todo', 'event', deadline', 'delete', 'done' or 'bye'");
         }
