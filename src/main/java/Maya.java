@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.Struct;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -22,13 +23,11 @@ public class Maya extends Application {
     private final Image maya = new Image(this.getClass().getResourceAsStream("/images/maya.jpg"));
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/tucker.jpg"));
 
-    private String filePath = "data/task.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
-    @Override
-    public void start(Stage stage) {
+    public Maya(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
 
@@ -38,7 +37,10 @@ public class Maya extends Application {
                 | ArrayIndexOutOfBoundsException | IOException e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    @Override
+    public void start(Stage stage) {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -119,16 +121,16 @@ public class Maya extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String mayaText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getMayaDialog(dukeText, new ImageView(maya))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getMayaDialog(mayaText, maya)
         );
         userInput.clear();
     }
 
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             return Parser.parse(input, ui, taskList, storage);
         } catch (UnknownCommandException | IOException e) {
@@ -140,14 +142,8 @@ public class Maya extends Application {
      * Starts the Maya object to accept user commands.
      * Processes user commands by utilising Parser object
      * to make sense of the user command.
-     *
-     * @param filePath a String of the path
-     *                 where the TaskList is stored.
      */
-    public void run(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-
+    public void run() {
         try {
             taskList = storage.load();
 
@@ -174,6 +170,6 @@ public class Maya extends Application {
     }
 
     public static void main(String[] args) {
-        new Maya().run("data/task.txt");
+        new Maya("data/task.txt").run();
     }
 }
