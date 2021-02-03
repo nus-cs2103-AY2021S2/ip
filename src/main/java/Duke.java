@@ -1,14 +1,19 @@
 import javafx.application.Application;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+
+import javafx.stage.Stage;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,6 +33,9 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -64,16 +72,18 @@ public class Duke extends Application {
         userInput.setPrefWidth(343.0);
         //handler to handle when press enter
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            //dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            //userInput.clear();
+            handleUserInput();
         });
 
 
         sendButton = new Button("Send");
         sendButton.setPrefWidth(55.0);
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            //dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            //userInput.clear();
+            handleUserInput();
         });
 
 
@@ -108,6 +118,29 @@ public class Duke extends Application {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
         return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     private static final String FOLDER_PATH = "./src/main/java/data/";
