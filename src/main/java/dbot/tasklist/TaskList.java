@@ -1,53 +1,22 @@
 package dbot.tasklist;
 
-import dbot.exception.DukeException;
 import dbot.task.Task;
 
-import java.util.List;
 import java.util.ArrayList;
 
-public class TaskList {
-    private final ArrayList<Task> tasks;
+public class TaskList extends ArrayList<Task> {
 
     public TaskList() {
-        tasks = new ArrayList<>();
+        this(100);
     }
 
-    public Task get(int index) throws DukeException {
-        try {
-            return tasks.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            if (tasks.size() == 0) {
-                throw new DukeException("The list is currently empty");
-            } else {
-                throw new DukeException("Valid indexes are from 1 to " + tasks.size() + ".");
-            }
-        }
-    }
-
-    public void add(Task task) {
-        tasks.add(task);
-    }
-
-    public Task remove(int index) throws DukeException {
-        try {
-            return tasks.remove(index);
-        } catch (IndexOutOfBoundsException e) {
-            if (tasks.size() == 0) {
-                throw new DukeException("The list is currently empty");
-            } else {
-                throw new DukeException("Valid indexes are from 1 to " + tasks.size() + ".");
-            }
-        }
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
+    public TaskList(int initialSize) {
+        super(initialSize);
     }
 
     public String encode() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Task task : tasks) {
+        for (Task task : this) {
             String taskName = task.getClass().getSimpleName().toLowerCase();
             boolean isDone = task.getDone();
             String fullDescription = task.getFullDescription();

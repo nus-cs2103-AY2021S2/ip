@@ -22,6 +22,16 @@ public class DeleteCommand extends Command {
 
     @Override
     public void quietExecute(TaskList tasks, Storage storage) throws DukeException {
-        deleteTask = tasks.remove(getTargetIndex() - 1);
+        try {
+            deleteTask = tasks.remove(getTargetIndex() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            String errorMessage;
+            if (tasks.size() > 0) {
+                errorMessage = "Valid indexes are from 1 to " + tasks.size() + ".";
+            } else {
+                errorMessage = "The task list is empty and there is nothing to be deleted.";
+            }
+            throw new DukeException(errorMessage, e);
+        }
     }
 }

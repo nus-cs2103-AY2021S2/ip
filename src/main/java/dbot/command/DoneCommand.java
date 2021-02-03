@@ -22,7 +22,17 @@ public class DoneCommand extends Command {
 
     @Override
     public void quietExecute(TaskList tasks, Storage storage) throws DukeException {
-        doneTask = tasks.get(getTargetIndex() - 1);
-        doneTask.setDone(true);
+        try {
+            doneTask = tasks.get(getTargetIndex() - 1);
+            doneTask.setDone(true);
+        } catch (IndexOutOfBoundsException e) {
+            String errorMessage;
+            if (tasks.size() > 0) {
+                errorMessage = "Valid indexes are from 1 to " + tasks.size() + ".";
+            } else {
+                errorMessage = "The task list is empty and there is nothing to be marked as done.";
+            }
+            throw new DukeException(errorMessage, e);
+        }
     }
 }

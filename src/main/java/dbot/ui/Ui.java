@@ -46,7 +46,7 @@ public class Ui {
     }
 
     public void printTasks(TaskList tasks) {
-        for (Task task : tasks.getTasks()) {
+        for (Task task : tasks) {
             out.println(task.toString());
         }
     }

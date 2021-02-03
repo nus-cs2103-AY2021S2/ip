@@ -20,7 +20,7 @@ public class DBot {
             tasks = storage.load();
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            tasks = new TaskList(100);
         }
     }
 
