@@ -3,9 +3,10 @@ package soonkeatneo.duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import soonkeatneo.duke.task.Task;
+
 import soonkeatneo.duke.task.Deadline;
 import soonkeatneo.duke.task.Event;
+import soonkeatneo.duke.task.Task;
 import soonkeatneo.duke.task.Todo;
 
 /**

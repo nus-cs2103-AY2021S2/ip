@@ -1,6 +1,5 @@
 package soonkeatneo.duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import soonkeatneo.duke.task.Deadline;
@@ -38,7 +37,8 @@ public class Parser {
                 String saveToDisk = "T | 0 | " + taskString;
                 storage.saveTaskToDisk(saveToDisk);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new InvalidInputException("Your input format doesn't seem right! For todos, it needs to be: todo <title>");
+                throw new InvalidInputException(
+                        "Your input format doesn't seem right! For todos, it needs to be: todo <title>");
             }
         } else if (inputString.startsWith("event")) {
             try {
@@ -50,9 +50,12 @@ public class Parser {
                 String saveToDisk = "E | 0 | " + taskString + " | " + dateTime;
                 storage.saveTaskToDisk(saveToDisk);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-                throw new InvalidInputException("Your input format doesn't seem right! For events, it needs to be: event <title> /at [YYYY-MM-DD]");
+                throw new InvalidInputException(
+                        "Your input format doesn't seem right!"
+                                + " For events, it needs to be: event <title> /at [YYYY-MM-DD]");
             } catch (DateTimeParseException e) {
-                throw new InvalidInputException("The format of your date and time seem to be wrong! Ensure it adheres to YYYY-MM-DD format.");
+                throw new InvalidInputException(
+                        "The format of your date and time seem to be wrong! Ensure it adheres to YYYY-MM-DD format.");
             }
         } else if (inputString.startsWith("deadline")) {
             try {
@@ -64,15 +67,19 @@ public class Parser {
                 String saveToDisk = "D | 0 | " + taskString + " | " + deadlineTime;
                 storage.saveTaskToDisk(saveToDisk);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-                throw new InvalidInputException("Your input format doesn't seem right! For deadlines, it needs to be: deadline <title> /at [YYYY-MM-DD]");
+                throw new InvalidInputException(
+                        "Your input format doesn't seem right!"
+                                + " For deadlines, it needs to be: deadline <title> /at [YYYY-MM-DD]");
             } catch (DateTimeParseException e) {
-                throw new InvalidInputException("The format of your date and time seem to be wrong! Ensure it adheres to YYYY-MM-DD format.");
+                throw new InvalidInputException(
+                        "The format of your date and time seem to be wrong! Ensure it adheres to YYYY-MM-DD format.");
             }
         } else if (inputString.startsWith("find")) {
             try {
                 tasks.find(inputString.substring(5).trim());
             } catch (StringIndexOutOfBoundsException e) {
-                throw new InvalidInputException("Your input format doesn't seem right! For find, it needs to be: find <string>");
+                throw new InvalidInputException(
+                        "Your input format doesn't seem right! For find, it needs to be: find <string>");
             }
         } else {
             throw new InvalidCommandException();

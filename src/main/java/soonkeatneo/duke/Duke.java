@@ -10,10 +10,10 @@ import java.util.Scanner;
 
 public class Duke {
     /** Allows for easy change of the bot name in future. **/
-    final protected static String BOT_NAME = "DukeNukem";
-    private Ui ui;
+    protected static final String BOT_NAME = "DukeNukem";
     private static TaskList tasks;
     private static Storage storage;
+    private Ui ui;
 
     /**
      * Creates a new Duke object with the given file-path for {@Storage}.

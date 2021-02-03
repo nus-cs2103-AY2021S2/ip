@@ -7,7 +7,7 @@ package soonkeatneo.duke;
  */
 
 public class Ui {
-    final private static String SEPARATORS = "~~~~~~~~~~~~~~~~~~~~~~";
+    private static final String SEPARATORS = "~~~~~~~~~~~~~~~~~~~~~~";
 
     public Ui() {
         greetUser();
