@@ -21,28 +21,13 @@ public class Duke {
     /**
      * Process command given by user.
      */
-    public String doCommand(String word) {
-        String result;
-
-        String[] tmp = word.split(" ");
-        String command = tmp[0];
-        if (word.equals("bye")) {
-            result = ui.getBye();
-        } else if (word.equals("list")) {
-            result = doList();
-        } else if (command.equals("done")) {
-            int index = Integer.parseInt(tmp[1]);
-            result = doDone(index);
-        } else if (command.equals("delete")) {
-            int index = Integer.parseInt(tmp[1]);
-            result = doDelete(index);
-        } else if (command.equals("find")) {
-            result = doFind(word);
-        } else {
-            result = doTask(word);
+    public String doCommand(String sentence) {
+        try {
+            Command command = Parser.parseCommand(sentence, taskList);
+            return command.execute(storage, taskList, ui, sentence);
+        } catch (NoCommandException e) {
+            return e.getMessage();
         }
-        storage.saveTasks(taskList);
-        return result;
     }
 
     /**

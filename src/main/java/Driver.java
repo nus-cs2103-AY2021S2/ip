@@ -23,11 +23,11 @@ public class Driver extends Application {
             Duke duke = Duke.start();
             userInterface.printGreetings();
 
-            String command = userInterface.readCommand();
-            while (isNotEqualBye(command)) {
-                String message = duke.doCommand(command);
+            String sentence = userInterface.readCommand();
+            while (isNotEqualBye(sentence)) {
+                String message = duke.doCommand(sentence);
                 userInterface.displayMessage(message);
-                command = userInterface.readCommand();
+                sentence = userInterface.readCommand();
             }
 
         } finally {

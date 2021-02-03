@@ -80,4 +80,33 @@ public class Parser {
         }
         return combinedStringTasks.toString();
     }
+
+    public static Command parseCommand(String sentence, TaskList taskList) throws NoCommandException {
+        String keyword = getKeyword(sentence);
+        if (keyword.equals("bye")) {
+            return new ByeCommand();
+        } else if (keyword.equals("list")) {
+            return new ListCommand();
+        } else if (keyword.equals("done")) {
+            return new DoneCommand();
+        } else if (keyword.equals("delete")) {
+            return new DeleteCommand();
+        } else if (keyword.equals("find")) {
+            return new FindCommand();
+        } else if (keyword.equals("todo")) {
+            return new AddToDoCommand();
+        } else if (keyword.equals("deadline")) {
+            return new AddDeadlineCommand();
+        } else if (keyword.equals("event")) {
+            return new AddEventCommand();
+        } else {
+            throw new NoCommandException("dwqowq");
+        }
+    }
+
+    public static String getKeyword(String sentence) {
+        String[] splitSentence = sentence.split(" ");
+        String keyword = splitSentence[0];
+        return keyword;
+    }
 }
