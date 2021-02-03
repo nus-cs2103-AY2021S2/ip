@@ -7,25 +7,30 @@ import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.task.TaskList;
 import duke.task.TaskParseException;
-import duke.ui.TextUi;
+import duke.ui.Gui;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
 /**
  * A personal task list app.
  */
-public class Duke {
-    private final Storage storage;
-    private final Ui ui;
-    private final Parser parser;
+public class Duke extends Application {
+    private Storage storage;
+    private Ui ui;
+    private Parser parser;
     private TaskList tasks;
 
     /**
-     * Constructs a Duke instance which uses the given file path as its data file.
+     * Called by JavaFX to initialize the app.
      *
-     * @param filePath The file path to use for Duke's data file.
+     * @param stage The stage used.
      */
-    public Duke(String filePath) {
-        storage = new Storage(filePath);
+    @Override
+    public void start(Stage stage) {
+        final String dataFilePath = "data/duke.dat";
+        storage = new Storage(dataFilePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (StorageException | TaskParseException e) {
@@ -33,39 +38,36 @@ public class Duke {
             tasks = new TaskList();
         }
         parser = new Parser();
-        ui = new TextUi();
-    }
 
-    /**
-     * Creates a duke instance with a hardcoded data path and runs it.
-     *
-     * @param args Ignored command line arguments.
-     */
-    public static void main(String[] args) {
-        final String dataFilePath = "data/duke.dat";
-        new Duke(dataFilePath).run();
-    }
+        Gui gui = new Gui(this::handleInput);
+        gui.start(stage);
 
-    /**
-     * Shows a greeting to the user before entering the app's main loop. Exits when commanded to.
-     */
-    public void run() {
+        ui = gui;
         ui.showGreeting();
+    }
 
-        boolean isExit = false;
-        do {
-            String input = ui.readCommand();
-            Command cmd = parser.parseCmd(input);
-            CommandResult cmdResult = cmd.execute(tasks, storage);
-            ui.showCommandResult(cmdResult);
-            isExit = cmdResult.isExit();
-            try {
-                storage.save(tasks.serialize());
-            } catch (StorageException e) {
-                ui.showError("Warning: failed to save tasks!");
-            }
-        } while (!isExit);
+    /**
+     * Called by JavaFX when the app is closed.
+     *
+     * @throws Exception If something goes wrong.
+     */
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+    }
 
-        ui.showFarewell();
+    private void handleInput(String input) {
+        Command cmd = parser.parseCmd(input);
+        CommandResult cmdResult = cmd.execute(tasks, storage);
+        ui.showCommandResult(cmdResult);
+        try {
+            storage.save(tasks.serialize());
+        } catch (StorageException e) {
+            ui.showError("Warning: failed to save tasks!");
+        }
+
+        if (cmdResult.isExit()) {
+            Platform.exit();
+        }
     }
 }
