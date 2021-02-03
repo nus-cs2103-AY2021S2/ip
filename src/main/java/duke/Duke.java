@@ -1,10 +1,13 @@
 package duke;
+import java.util.Scanner;
 
-import helper.*;
-
+import helper.DukeException;
+import helper.Parser;
+import helper.Storage;
+import helper.TaskList;
+import helper.Ui;
 import helper.command.Command;
 
-import java.util.Scanner;
 
 /**
  * Main class
@@ -34,6 +37,10 @@ public class Duke {
         ui.dukePrint(greeting);
     }
 
+    /**
+     * The main
+     * @param args
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
