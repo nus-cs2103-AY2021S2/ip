@@ -245,7 +245,7 @@ public class Duke {
             return false;
         }
 
-        Task task = taskList.remove(taskId - 1);
+        Task task = taskList.remove(taskId);
 
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
@@ -290,5 +290,4 @@ public class Duke {
 
         return false;
     }
-
 }
