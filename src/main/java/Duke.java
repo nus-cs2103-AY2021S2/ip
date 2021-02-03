@@ -3,45 +3,58 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static Scanner sc = new Scanner(System.in);
-    private static String logo;
     private static List<Task> tasks = new ArrayList<>();
+    private static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        logo = " __        _        \n"
-                + "|  _ \\ _   | | __ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| || | || |   <  __/\n"
-                + "|_/ \\,||\\\\___|\n";
-        greetUser();
+        String logo =
+                " __        _        \n"
+                        + "|  _ \\ _   | | __ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| || | || |   <  __/\n"
+                        + "|_/ \\,||\\\\___|\n";
+        System.out.println("Hi Im Duke, how may I help you?");
         while(true) {
-            String cmd = sc.nextLine();
-            String[] cmds = cmd.split(" ");
-            if(cmds[0].equals("bye")) {
-                byeUser();
-                break;
-            }
-            else if(cmds[0].equals("list")) {
-                listItems();
-            }
-            else if(cmds[0].equals("done")) {
-                doneItem(Integer.parseInt(cmds[1]));
-            }
-            else {
-                addItems(cmd);
-            }
+                String cmd = sc.next();
+                if (cmd.equals("bye")) {
+                    byeUser(logo);
+                    break;
+                } else if (cmd.equals("list")) {
+                    listItems();
+                } else if (cmd.equals("done")) {
+                    int itemNo = sc.nextInt();
+                    markItemAsDone(itemNo);
+                } else {
+                    String typeOfEvent = cmd;
+                    String eventDescription = sc.nextLine();
+                    addItem(typeOfEvent, eventDescription);
+                }
         }
     }
+    private static void addItem(String typeOfEvent, String eventDescription) {
+        if(typeOfEvent.equals("todo")) {
+            tasks.add(new ToDos(eventDescription));
+        }
+        else {
+            String[] _eventDescription = eventDescription.split("/");
+            StringBuilder firstPart = new StringBuilder(_eventDescription[0]).append(" ");
+            StringBuilder secondPart = new StringBuilder(_eventDescription[1]);
+            secondPart.insert(0, '(');
+            secondPart.insert(3, ':');
+            secondPart.append(')');
+            firstPart.append(secondPart);
+            if (typeOfEvent.equals("deadline")) tasks.add(new Deadline(firstPart.toString()));
+            else if (typeOfEvent.equals("event")) tasks.add(new Event(firstPart.toString()));
+        }
+        System.out.print("added: ");
+        System.out.println(tasks.get(tasks.size()-1));
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+    }
 
-    private static void doneItem(int itemNo) {
+    private static void markItemAsDone(int itemNo) {
         tasks.get(itemNo-1).isCompleted = true;
         System.out.println("Nice, I have marked this task as done!");
         System.out.print("  ");
         System.out.print(tasks.get(itemNo-1));
-    }
-
-    private static void addItems(String cmd) {
-        tasks.add(new Task(cmd));
-        System.out.println("added: " + tasks.get(tasks.size()-1));
     }
 
     private static void listItems() {
@@ -51,18 +64,9 @@ public class Duke {
             System.out.println("" + itemNo + ". " + tasks.get(itemNo-1));
         }
     }
-    private static void greetUser() {
-        System.out.println("Hello from\n" + logo);
+
+    private static void byeUser(String logo) {
+        System.out.println("Bye bye, have a nice day! Thanks for using " + logo);
     }
-    private static void byeUser() {
-        System.out.println("Bye from\n" + logo);
-    }
-    private static void echo() {
-        while(true) {
-            String cmd = sc.nextLine();
-            if(cmd.equals("bye")) break;
-            System.out.println(cmd);
-        }
-        byeUser();
-    }
+
 }

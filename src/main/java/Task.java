@@ -1,5 +1,5 @@
-public class Task {
-    private String description;
+public abstract class Task {
+    protected String description;
     protected boolean isCompleted;
     Task(String description) {
         this.description = description;
