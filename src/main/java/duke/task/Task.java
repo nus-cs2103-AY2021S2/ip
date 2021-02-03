@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (done ? "\u2713" : " "); // return tick or X symbols
+        return (done ? "X" : " "); // return X for done or empty string for pending
     }
 
     public String getDescription() {
