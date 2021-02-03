@@ -1,38 +1,32 @@
 import java.io.IOException;
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import duke.Duke;
 import exception.DukeException;
+import ui.MainWindow;
 
 /**
  * Main driver class.
  */
-public class Main {
-    /**
-     * Starts Duke and listens for new commands until 'bye' input is received.
-     *
-     * @param args the input arguments
-     * @throws IOException   the io exception
-     * @throws DukeException the duke exception
-     */
-    public static void main(String[] args) throws IOException, DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        Scanner sc = new Scanner(System.in);
-        Duke duke = new Duke();
+public class Main extends Application {
 
-        while (sc.hasNextLine()) {
-            try {
-                if (duke.parse(sc.nextLine()) == 0) {
-                    break;
-                }
-            } catch (DukeException | IOException ex) {
-                System.out.println(ex.toString());
-            }
+    @Override
+    public void start(Stage stage) {
+        try {
+            Duke duke = new Duke();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            stage.setTitle("Duke");
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException | DukeException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -60,7 +60,7 @@ public class Duke {
      * @throws DukeException the duke exception
      * @throws IOException   the io exception
      */
-    public int parse(String input) throws DukeException, IOException {
+    public String parse(String input) throws DukeException, IOException {
         String[] parsedInput = input.split("\\s+", 2);
         switch (parsedInput[0]) {
         case (""):
@@ -72,9 +72,9 @@ public class Duke {
             } else {
                 Todo currTodo = new Todo(parsedInput[1]);
                 dukeTaskList.add(currTodo);
-                dukeResponse.addTask(currTodo, dukeTaskList.size());
+                return dukeResponse.addTask(currTodo, dukeTaskList.size());
             }
-            break;
+            //Fallthrough
         }
         case ("event"): {
             if (parsedInput.length < 2) {
@@ -88,8 +88,8 @@ public class Duke {
                 LocalDateTime dateTime = LocalDateTime.parse(args[1].substring(1), format);
                 Event currEvent = new Event(args[0], dateTime);
                 dukeTaskList.add(currEvent);
-                dukeResponse.addTask(currEvent, dukeTaskList.size());
-                break;
+                return dukeResponse.addTask(currEvent, dukeTaskList.size());
+                //Fallthrough
             } catch (DateTimeParseException e) {
                 throw new DukeDateFormatException();
             }
@@ -106,8 +106,8 @@ public class Duke {
                 LocalDateTime dateTime = LocalDateTime.parse(args[1].substring(1), format);
                 Deadline currDeadline = new Deadline(args[0], dateTime);
                 dukeTaskList.add(currDeadline);
-                dukeResponse.addTask(currDeadline, dukeTaskList.size());
-                break;
+                return dukeResponse.addTask(currDeadline, dukeTaskList.size());
+                //Fallthrough
             } catch (DateTimeParseException e) {
                 throw new DukeDateFormatException();
             }
@@ -122,11 +122,11 @@ public class Duke {
             }
             Task deletedTask = dukeTaskList.get(deleteIndex);
             dukeTaskList.remove(deleteIndex);
-            dukeResponse.deleteTask(deletedTask, dukeTaskList.size());
-            break;
+            return dukeResponse.deleteTask(deletedTask, dukeTaskList.size());
+            //Fallthrough
         case ("list"):
-            dukeResponse.listTasks(dukeTaskList, false);
-            break;
+            return dukeResponse.listTasks(dukeTaskList, false);
+            //Fallthrough
         case ("find"):
             if (parsedInput.length < 2) {
                 throw new DukeMissingArgumentsException();
@@ -139,8 +139,8 @@ public class Duke {
                 }
             }
             DukeTaskList dukeSearchTaskList = new DukeTaskList(searchedList);
-            dukeResponse.listTasks(dukeSearchTaskList, true);
-            break;
+            return dukeResponse.listTasks(dukeSearchTaskList, true);
+            //Fallthrough
         case ("done"): {
             if (parsedInput.length < 2) {
                 throw new DukeMissingArgumentsException();
@@ -151,18 +151,16 @@ public class Duke {
             }
             Task currTask = dukeTaskList.get(index);
             currTask.markAsDone();
-            dukeResponse.markAsDone(currTask);
-            break;
+            return dukeResponse.markAsDone(currTask);
+            //Fallthrough
         }
         case ("bye"):
-            dukeResponse.farewell();
             dukeStorage.unload(dukeTaskList);
-            return 0;
+            return dukeResponse.farewell();
             // Fallthrough
         default:
             throw new DukeUnknownInputException();
             // Fallthrough
         }
-        return 1;
     }
 }

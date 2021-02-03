@@ -13,15 +13,15 @@ public class DukeResponse {
     /**
      * Duke message dividers.
      */
-    public static final String DIVIDER_FRONT = "\n═════════════"
-            + "══════════════╣DUKE╠════"
-            + "═══════════════════════\n";
+    public static final String DIVIDER_FRONT = "\n\u2550\u2550\u2550"
+            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563DUKE\u2560"
+            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n";
     /**
      * Duke message dividers.
      */
-    public static final String DIVIDER_BACK = "\n═══════════════"
-            + "══════════════════════"
-            + "═══════════════════════\n";
+    public static final String DIVIDER_BACK = "\n\u2550\u2550\u2550\u2550\u2550"
+            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550"
+            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n";
     /**
      * Duke task add headers.
      */
@@ -53,18 +53,18 @@ public class DukeResponse {
     /**
      * Respond a welcome message to the user.
      */
-    public void welcome() {
+    public String welcome() {
         this.currentMessage = "Hey there! I'm Duke\n"
                 + "What can I do for you today?";
-        printMessage();
+        return this.currentMessage;
     }
 
     /**
      * Respond a farewell message to the user.
      */
-    public void farewell() {
+    public String farewell() {
         this.currentMessage = "Good bye. Hope to see you again soon!";
-        printMessage();
+        return this.currentMessage;
     }
 
     /**
@@ -73,10 +73,10 @@ public class DukeResponse {
      * @param task  the task
      * @param count the count
      */
-    public void addTask(Task task, int count) {
+    public String addTask(Task task, int count) {
         this.currentMessage = TASK_ADD_HEADER + Emoji.TASK + " "
                 + task + TASK_FOOTER1 + count + TASK_FOOTER2;
-        printMessage();
+        return printMessage();
     }
 
     /**
@@ -85,11 +85,11 @@ public class DukeResponse {
      * @param task  the task
      * @param count the count
      */
-    public void deleteTask(Task task, int count) {
+    public String deleteTask(Task task, int count) {
         this.currentMessage = TASK_DELETE_HEADER + Color.BLUE_BOLD
                 + Emoji.TRASH + Color.RESET + " " + task
                 + TASK_FOOTER1 + count + TASK_FOOTER2;
-        printMessage();
+        return printMessage();
     }
 
     /**
@@ -97,10 +97,10 @@ public class DukeResponse {
      *
      * @param task the task
      */
-    public void markAsDone(Task task) {
+    public String markAsDone(Task task) {
         this.currentMessage = "Sweet! I've marked this task as done:\n"
                 + task.toString();
-        printMessage();
+        return printMessage();
     }
 
     /**
@@ -108,7 +108,7 @@ public class DukeResponse {
      *
      * @param list the list
      */
-    public void listTasks(DukeTaskList list, boolean isFind) throws DukeException {
+    public String listTasks(DukeTaskList list, boolean isFind) throws DukeException {
         if (list.size() == 0) {
             if (isFind) {
                 throw new DukeException("Woops! No task found under those parameters!");
@@ -130,15 +130,15 @@ public class DukeResponse {
             this.currentMessage = strList.substring(0,
                     strList.toString().length() - 1);
         }
-        printMessage();
+        return printMessage();
     }
 
 
     /**
      * Print message.
      */
-    public void printMessage() {
-        System.out.println(DIVIDER_FRONT + this.currentMessage + DIVIDER_BACK);
+    public String printMessage() {
+        return DIVIDER_FRONT + this.currentMessage + DIVIDER_BACK;
     }
 
 }

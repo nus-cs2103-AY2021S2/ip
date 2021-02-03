@@ -11,15 +11,15 @@ public class DukeException extends Exception {
     /**
      * duke.Duke message dividers.
      */
-    public static final String DIVIDER_FRONT = "\n══════════════════"
-            + "═════════╣DUKE╠═══════"
-            + "════════════════════\n";
+    public static final String DIVIDER_FRONT = "\n\u2550\u2550\u2550"
+            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563DUKE\u2560"
+            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n";
     /**
      * duke.Duke message dividers.
      */
-    public static final String DIVIDER_BACK = "\n══════════════════"
-            + "══════════════════════"
-            + "════════════════════\n";
+    public static final String DIVIDER_BACK = "\n\u2550\u2550\u2550\u2550\u2550"
+            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550"
+            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n";
 
     /**
      * Instantiates a new duke.Duke exception.

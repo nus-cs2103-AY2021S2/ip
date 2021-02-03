@@ -40,8 +40,8 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone
-                ? Color.GREEN_BOLD + "\u2713" + Color.RESET
-                : Color.RED_BOLD + "\u2718" + Color.RESET);
+                ? "\u2713"
+                : "\u2718");
     }
 
     /**
