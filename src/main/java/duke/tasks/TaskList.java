@@ -68,6 +68,18 @@ public class TaskList {
         return tasks.get(taskIndex - 1);
     }
 
+    public String findTaskWith(String findWord) {
+        String s ="";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t.toString().contains(findWord)) {
+                s += Integer.toString(i + 1) + "."
+                        + t + "\n";
+            }
+        }
+        return s;
+    }
+
     @Override
     public String toString() {
         String s = "";

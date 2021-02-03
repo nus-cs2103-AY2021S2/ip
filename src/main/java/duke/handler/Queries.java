@@ -5,6 +5,7 @@ public enum Queries {
     DEADLINE,
     EVENT,
     LIST,
+    FIND,
     DONE,
     DELETE,
     BYE;

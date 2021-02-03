@@ -75,6 +75,10 @@ public class Parser {
                 String eventDes = eInfo[0];
                 commandHandler = new EventHandler(eventDes, dateTimeAt);
                 break;
+            case FIND:
+                String findWord = userInput.split(" ", 2)[1];
+                commandHandler = new FindHandler(findWord);
+                break;
             case DONE:
                 int doneNum = Integer.parseInt(userInput.split(" ")[1]);
                 commandHandler = new DoneHandler(doneNum);
