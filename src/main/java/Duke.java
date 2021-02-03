@@ -1,17 +1,13 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
 
 /**
  * Duke keeps track of a list of tasks.
@@ -26,9 +22,6 @@ public class Duke extends Application {
 
     /** Parser that processes commands. */
     public Parser parser;
-
-    /** User Interface that handles interaction with user. */
-    private Ui ui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -47,28 +40,6 @@ public class Duke extends Application {
         storage = new Storage(tasks);
         parser = new Parser(tasks);
     }
-
-    /**
-     * Main method. Creates Duke object and runs the application.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        try {
-            duke.storage.loadData();
-            duke.parser.printList();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found :(");
-        }
-        duke.ui = new Ui();
-        String userInput = duke.ui.nextInput();
-        while (!"bye".equals(userInput)) {
-            duke.parser.processCommand(userInput);
-            duke.storage.writeTaskList();
-            userInput = duke.ui.nextInput();
-        }
-        duke.ui.close();
-    }
-
 
     @Override
     public void start(Stage stage) {
