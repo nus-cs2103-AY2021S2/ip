@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * Ui class that handles interactions with user.
+ */
 public class Ui {
     private static final String INDENT = "  ";
     private static final String TEXT_INDENT = INDENT + "|" + " ";
@@ -15,25 +18,38 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
-
+    /**
+     * Default constructor.
+     */
     public Ui() {
         this.in = new Scanner(System.in);
         this.out = System.out;
     }
 
+
     private boolean hasCommand() {
         return in.hasNext();
     }
 
+    /**
+     * Reads input by line.
+     * @return String of input.
+     */
     public String readCommand() {
         assert hasCommand();
         return in.nextLine();
     }
 
+    /**
+     * Closes system input.
+     */
     public void close() {
         in.close();
     }
 
+    /**
+     * Displays the default intro message.
+     */
     public void displayIntro() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -46,6 +62,10 @@ public class Ui {
         respond(response);
     }
 
+    /**
+     * Formats and prints the string response in a chat response form.
+     * @param response response from Duke.
+     */
     public void respond(String response) {
         String indentedResponse = Arrays.stream(response.split("\n"))
                 .map(line -> TEXT_INDENT + line)

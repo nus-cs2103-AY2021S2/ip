@@ -1,7 +1,15 @@
 package duke.tasks;
 
+/**
+ * Class representing tasks with only descriptions.
+ */
 public class Todo extends Task{
     private static final String TYPE = "TODO";
+
+    /**
+     * Default consturctor
+     * @param description description of task.
+     */
     public Todo(String description) {
         super(description, TYPE);
     }

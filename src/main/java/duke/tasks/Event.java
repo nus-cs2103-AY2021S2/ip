@@ -6,11 +6,20 @@ public class Event extends Task {
     private static final String TYPE = "EVENT";
     protected LocalDateTime at;
 
+    /**
+     * Event class that represents event tasks.
+     * @param description string content of event task.
+     * @param at dateTime of event.
+     */
     public Event(String description, LocalDateTime at) {
         super(description, TYPE);
         this.at = at;
     }
 
+    /**
+     * Returns date time of event.
+     * @return dateTime of event.
+     */
     public LocalDateTime getAt() {
         return at;
     }

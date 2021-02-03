@@ -2,15 +2,27 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ * Deadline class that represents tasks with a deadline.
+ */
 public class Deadline extends Task{
     private static final String TYPE = "DEADLINE";
     protected LocalDateTime by;
 
+    /**
+     * Default constructor.
+     * @param description string content of the deadlined task.
+     * @param by deadline of task.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description, TYPE);
         this.by = by;
     }
 
+    /**
+     * Returns deadline of task.
+     * @return deadline of task.
+     */
     public LocalDateTime getBy() {
         return by;
     }

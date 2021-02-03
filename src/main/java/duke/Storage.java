@@ -16,14 +16,26 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class that handles the loading of data from data file
+ * and updating of task information in data file.
+ */
 public class Storage {
     private static String STORAGE_PATH;
     private static final int MARK_INDEX = 2;
 
+    /**
+     * Default constructor for Storage.
+     * @param storagePath path to the storage file.
+     */
     public Storage(String storagePath) {
         STORAGE_PATH = storagePath;
     }
 
+    /**
+     * Loads data from the storage file.
+     * @return List of tasks.
+     */
     public TaskList load() {
         TaskList tasks = new TaskList();
         Scanner dataReader = null;
@@ -46,6 +58,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes new tasks into the storage file.
+     * @param task task to be added to the storage file.
+     */
     public void addTask(Task task){
         try {
             FileWriter fw = new FileWriter(STORAGE_PATH, true);
@@ -79,6 +95,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Marks the certain task as done in the storage file.
+     * @param task task be marked.
+     * @param taskNum task index(from 1) in relation to the number of tasks
+     *                in the storage file.
+     */
     public void markDoneInStorage(Task task, int taskNum) {
         try {
             Path path = Paths.get(STORAGE_PATH);
@@ -93,6 +115,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes the nth task of the list of tasks.
+     * @param taskNum nth task to be removed from the list of tasks
+     *                in the storage file.
+     */
     public void delete(int taskNum) {
         try {
             Path path = Paths.get(STORAGE_PATH);
