@@ -18,7 +18,7 @@ public class Storage {
      * @return the task list containing all the tasks from internal storage
      */
     public TaskList load() {
-        return DukeFileReader.loadTasks();
+        return DukeFileReader.loadTasks(filePath);
     }
 
     /**

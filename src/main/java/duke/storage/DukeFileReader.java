@@ -16,12 +16,11 @@ import java.util.Scanner;
  * Reads file input from internal storage
  */
 public class DukeFileReader {
-    private static final String FILE_PATH = "data" + File.separator + "duke.txt";
 
-    private static TaskList readTaskListFromInternalStorage() throws FileNotFoundException {
+    private static TaskList readTaskListFromInternalStorage(String filePath) throws FileNotFoundException {
         TaskList taskList = new TaskList();
-        FileDirectoryChecker.prepareFile(FILE_PATH);
-        File f = new File(FILE_PATH);
+        FileDirectoryChecker.prepareFile(filePath);
+        File f = new File(filePath);
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
             String taskString = sc.nextLine();
@@ -67,9 +66,9 @@ public class DukeFileReader {
      * loads tasks from internal storage
      * @return a task list containing all the tasks from internal storage
      */
-    public static TaskList loadTasks() {
+    public static TaskList loadTasks(String filePath) {
         try {
-            TaskList taskList = readTaskListFromInternalStorage();
+            TaskList taskList = readTaskListFromInternalStorage(filePath);
             return taskList;
         } catch (FileNotFoundException e) {
             Ui.printError(e.getMessage());
