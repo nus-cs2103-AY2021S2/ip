@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Handles the welcome and exit portions of the chatbot
+ */
 public class Ui {
 
     private static final String logo = " ____        _        \n"
@@ -12,11 +15,17 @@ public class Ui {
 
     }
 
+    /**
+     * Greets the user when the chatbot is ran
+     */
     public static void greet() {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
     }
 
+    /**
+     * Displays exit message when user exits the chatbot
+     */
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }

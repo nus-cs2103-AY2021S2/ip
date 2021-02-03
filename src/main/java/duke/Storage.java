@@ -4,31 +4,42 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Storage class which handles the saving and laoding of tasklist to and from a text file
+ */
 public class Storage {
 
     public Storage() {
 
     }
 
-    public static void saveTaskList() throws Exception {
+    /**
+     * Saves the existing tasks in the tasklist to a textfile
+     * @throws IOException when the filename does not exist
+     */
+    public static void saveTaskList() throws IOException {
         try {
             File file = new File("src/main/java/duke/duke.txt");
             FileWriter fw = new FileWriter(file);
-            //PrintWriter pw = new PrintWriter(file);
             for (int i = 0; i < Parser.getTaskList().size(); ++i) {
                 fw.write(Parser.getTaskList().get(i).toString() + "\n");
             }
             fw.close();
-            //pw.close();
         } catch (Exception ex) {
             System.out.println("error" + ex.getMessage());
         }
     }
 
-    public static void loadTaskList() throws Exception {
+    /**
+     * Loads the tasks from the text file back into the task list array
+     * @throws FileNotFoundException if the specified file does not exist
+     */
+    public static void loadTaskList() throws FileNotFoundException {
         String line  = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/main/java/duke/duke.txt"));
