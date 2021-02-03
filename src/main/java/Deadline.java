@@ -8,10 +8,15 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Task setDone() {
+    public Deadline setDone() {
         Deadline doneTask = new Deadline(this.name, this.by);
         doneTask.isDone = true;
         return doneTask;
+    }
+
+    @Override
+    public String getSaveText() {
+        return "D | " + super.getSaveText() + " /by " + this.by;
     }
 
     @Override
