@@ -44,7 +44,7 @@ public class Duke {
         ArrayList<Task> lst = new ArrayList<>();
 
         while (sc.hasNext()) {
-            String[] input = sc.nextLine().split("\\s+");
+            String input = sc.nextLine();
             TaskList tl = new TaskList();
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again!");
@@ -75,7 +75,7 @@ public class Duke {
     public String getResponse(String input) {
         Scanner sc = new Scanner(System.in);
         String[] splited = input.split("\\s+");
-        return TaskList.createTask(splited, sc, lst);
+        return TaskList.guiTask(splited, lst);
     }
 
 }
