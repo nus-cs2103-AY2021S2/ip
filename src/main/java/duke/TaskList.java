@@ -31,7 +31,7 @@ public class TaskList {
      * Deletes a task from the TaskList, given an index.
      *
      * @param taskIndex 1-based index for the task to be deleted.
-     * @return Success Mesasge String.
+     * @return Success Message String.
      * @throws DukeException
      */
     public String deleteTask(int taskIndex) throws DukeException {
