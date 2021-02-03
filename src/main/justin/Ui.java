@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Ui {
 
@@ -84,6 +85,25 @@ public class Ui {
         System.out.println(m);
         printSpace();
         printLine();
+    }
+
+    public void printFoundTask(ArrayList<String> list) {
+
+        printLine();
+
+        if (list.isEmpty()) {
+            System.out.println("OOPS!! There are no such tasks in the list! Try searching using another" +
+                    " key word instead!");
+        } else {
+            System.out.println("Here are the matching tasks in your list");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(i+1 + "." + list.get(i));
+
+            }
+        }
+
+        printLine();
+
     }
 
     public void printSpace() {

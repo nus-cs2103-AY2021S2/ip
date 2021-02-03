@@ -121,7 +121,6 @@ public class TaskList {
         try {
 
             int listNum = Integer.parseInt(num); // changes to int
-            System.out.println(listNum);
             Task newTask = list.remove(listNum-1); // delete the entry of choice
             //format
             printLineBreaker();
@@ -130,10 +129,30 @@ public class TaskList {
             System.out.println("Now you have " + list.size() + " tasks in the list");
             printLineBreaker();
 
-        } catch(ArrayIndexOutOfBoundsException e) {
-            System.out.println("Error deleting" + e.getMessage());
+        } catch(IndexOutOfBoundsException e) {
             throw new JustinException("OOPS!!! Cannot delete what you don't have!");
         }
+    }
+
+    public ArrayList<String> find(String key) {
+
+        boolean isFound = false; // if any tasks matches description we can return a TaskList
+        ArrayList<String> holder = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+
+            String description = list.get(i).getDescription();
+
+            if (description.contains(key)) {
+                holder.add(list.get(i).toString());
+            }
+
+            isFound = true; // there is at least ONE instance of description with key word
+        }
+
+
+        return holder;
+
     }
 
 

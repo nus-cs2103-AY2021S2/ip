@@ -82,13 +82,11 @@ public class Justin {
 
                     case "DEADLINE":
 
-                        // insert code for deadline
                         String newText = text.substring(9); // remove deadline from the string text
                         // set delimiter to take out the description of the deadline
                         String description = newText.substring(0, newText.indexOf("/") - 1);
                         // set delimiter to take out date of the deadline
                         String date = newText.substring(newText.indexOf("/") + 4);
-                        //System.out.println(date); // for debugging
 
                         ui.printLine();
                         tasks.addDeadline(description, date);
@@ -99,19 +97,16 @@ public class Justin {
                     case "TODO":
 
                         String descriptionToDo = text.substring(text.indexOf(" ") + 1); // take out the item from the text
-                        //System.out.println(description); // for debugging
                         tasks.addToDo(descriptionToDo);
+
                         break;
 
                     case "EVENT":
 
                         String eventText = text.substring(text.indexOf(" ") + 1); // removing the event to get description
-                        System.out.println(eventText); // for debugging
-
                         // set delimiter to obtain the description and the at
                         String descriptionEvent = eventText.substring(0, eventText.indexOf("/") - 1);
                         String dateEvent = eventText.substring(eventText.indexOf("/") + 4);
-
                         // splitting the date and time respectively
                         tasks.addEvent(descriptionEvent, dateEvent);
 
@@ -124,8 +119,10 @@ public class Justin {
 
                         break;
 
-                    case "OOPS": // for level 9
+                    case "FIND": // for level 9
 
+                        String findText = text.substring(text.indexOf(" ")+1); // key for searching
+                        ui.printFoundTask(tasks.find(findText));
 
                         break;
 
@@ -147,7 +144,6 @@ public class Justin {
         }
         sc.close();
     }
-
 
         public static void main(String[]args){
 

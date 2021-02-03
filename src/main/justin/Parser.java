@@ -40,8 +40,16 @@ public class Parser {
 
                 return "DELETE";
 
-            } else {
+            } else if (fullText.contains("find")) {
+
+                return "FIND";
+
+            }
+
+            else {
+
                 return "ADD";
+
             }
         } catch (JustinException m) {
             throw new JustinException(m.getMessage());
