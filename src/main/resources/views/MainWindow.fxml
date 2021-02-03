@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.stage.*?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <scene>
+    <Scene>
+      <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+        <children>
+               <MenuBar>
+                 <menus>
+                   <Menu mnemonicParsing="false" text="File">
+                     <items>
+                       <MenuItem mnemonicParsing="false" text="Exit" />
+                     </items>
+                   </Menu>
+                   <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                       <MenuItem mnemonicParsing="false" text="About" />
+                     </items>
+                   </Menu>
+                 </menus>
+               </MenuBar>
+               <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                  <children>
+                     <TextField fx:id="commandTextField" onAction="#handleCommandText" />
+                     <TextArea fx:id="resultTextArea" editable="false" VBox.vgrow="ALWAYS">
+                        <font>
+                           <Font name="Monospaced Regular" size="13.0" />
+                        </font></TextArea>
+                  </children>
+               </VBox>
+        </children>
+      </VBox>
+    </Scene>
+  </scene>
+</fx:root>
