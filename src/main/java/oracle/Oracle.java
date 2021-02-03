@@ -1,18 +1,6 @@
-package Oracle;
+package oracle;
 
-import Command.Command;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import command.Command;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;

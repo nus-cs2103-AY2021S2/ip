@@ -1,7 +1,7 @@
-package Command;
-import Entry.Task;
-import Oracle.TaskList;
-import Oracle.Ui;
+package command;
+import entry.Task;
+import oracle.TaskList;
+import oracle.Ui;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
-package Command;
-import Oracle.TaskList;
-import Oracle.Ui;
-import Entry.Task;
+package command;
+import oracle.TaskList;
+import oracle.Ui;
+import entry.Task;
 
 public class DeleteCommand implements Command {
     private final int taskIndex;

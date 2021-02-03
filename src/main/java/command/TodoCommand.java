@@ -1,7 +1,7 @@
-package Command;
-import Oracle.TaskList;
-import Oracle.Ui;
-import Entry.Todo;
+package command;
+import oracle.TaskList;
+import oracle.Ui;
+import entry.Todo;
 
 public class TodoCommand implements Command{
     private final String taskDescription;

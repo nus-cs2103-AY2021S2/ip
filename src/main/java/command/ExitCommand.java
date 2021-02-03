@@ -1,6 +1,6 @@
-package Command;
-import Oracle.TaskList;
-import Oracle.Ui;
+package command;
+import oracle.TaskList;
+import oracle.Ui;
 
 public class ExitCommand implements Command{
     /** Terminating command called when user exits the program

@@ -1,4 +1,4 @@
-package Command;
+package command;
 
 public class CommandFormatException extends Exception{
     public CommandFormatException(String message) {

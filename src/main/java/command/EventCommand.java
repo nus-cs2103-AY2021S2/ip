@@ -1,7 +1,7 @@
-package Command;
-import Oracle.TaskList;
-import Oracle.Ui;
-import Entry.Event;
+package command;
+import oracle.TaskList;
+import oracle.Ui;
+import entry.Event;
 
 public class EventCommand implements Command {
     private final String taskDescription;

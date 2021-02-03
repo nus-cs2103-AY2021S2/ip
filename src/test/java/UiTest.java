@@ -1,8 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import Entry.Task;
-import Entry.Todo;
-import Oracle.Ui;
+import entry.Task;
+import entry.Todo;
+import oracle.Ui;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

@@ -1,6 +1,6 @@
-package Command;
-import Oracle.TaskList;
-import Oracle.Ui;
+package command;
+import oracle.TaskList;
+import oracle.Ui;
 
 public class ListCommand implements Command{
     /**

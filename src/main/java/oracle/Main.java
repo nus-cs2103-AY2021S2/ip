@@ -1,4 +1,4 @@
-package Oracle;
+package oracle;
 
 import java.io.IOException;
 

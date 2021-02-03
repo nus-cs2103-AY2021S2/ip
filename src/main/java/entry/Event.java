@@ -1,6 +1,6 @@
-package Entry;
+package entry;
 
-import Command.CommandFormatException;
+import command.CommandFormatException;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;

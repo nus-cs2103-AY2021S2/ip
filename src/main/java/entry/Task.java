@@ -1,4 +1,4 @@
-package Entry;
+package entry;
 
 public class Task {
     /** base class for the Task

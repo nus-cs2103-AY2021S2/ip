@@ -1,7 +1,7 @@
-package Command;
-import Oracle.TaskList;
-import Oracle.Ui;
-import Entry.Deadline;
+package command;
+import oracle.TaskList;
+import oracle.Ui;
+import entry.Deadline;
 
 public class DeadlineCommand implements Command {
     private final String taskDescription;

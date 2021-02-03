@@ -1,4 +1,4 @@
-package Entry;
+package entry;
 
 public class Todo extends Task{
     /**

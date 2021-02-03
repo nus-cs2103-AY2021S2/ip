@@ -1,10 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import Command.CommandFormatException;
-import Entry.Event;
-import Entry.Task;
-import Entry.Todo;
-import Oracle.Ui;
+import command.CommandFormatException;
+import entry.Event;
 import org.junit.jupiter.api.Test;
 
 class EventTest {

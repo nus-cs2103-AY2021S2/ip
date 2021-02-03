@@ -1,10 +1,10 @@
-package Oracle;
+package oracle;
 
-import Command.CommandFormatException;
-import Entry.Deadline;
-import Entry.Event;
-import Entry.Task;
-import Entry.Todo;
+import command.CommandFormatException;
+import entry.Deadline;
+import entry.Event;
+import entry.Task;
+import entry.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +23,14 @@ public class TaskList {
             Boolean isDone = sorted[1].equals("T");
             try{
                 switch (sorted[0]) {
-                    case "T":
-                        this.tasklist.add(new Todo(isDone, sorted[2]));
-                        break;
-                    case "D":
-                        this.tasklist.add(new Deadline(isDone, sorted[2], sorted[3]));
-                        break;
-                    case "E":
-                        this.tasklist.add(new Event(isDone, sorted[2], sorted[3]));
+                case "T":
+                    this.tasklist.add(new Todo(isDone, sorted[2]));
+                    break;
+                case "D":
+                    this.tasklist.add(new Deadline(isDone, sorted[2], sorted[3]));
+                    break;
+                case "E":
+                    this.tasklist.add(new Event(isDone, sorted[2], sorted[3]));
                 }
             } catch (CommandFormatException ignored) {
             }

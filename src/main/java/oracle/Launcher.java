@@ -1,6 +1,5 @@
-package Oracle;
+package oracle;
 
-import Oracle.Oracle;
 import javafx.application.Application;
 
 /**

@@ -1,6 +1,6 @@
-package Oracle;
+package oracle;
 
-import Entry.Task;
+import entry.Task;
 
 import java.util.ArrayList;
 import java.util.Map;

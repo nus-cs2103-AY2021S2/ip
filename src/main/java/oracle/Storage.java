@@ -1,6 +1,6 @@
-package Oracle;
+package oracle;
 
-import Entry.Task;
+import entry.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;

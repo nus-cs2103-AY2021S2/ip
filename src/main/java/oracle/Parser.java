@@ -1,6 +1,6 @@
-package Oracle;
+package oracle;
 
-import Command.*;
+import command.*;
 
 public class Parser {
     private final Ui ui;
