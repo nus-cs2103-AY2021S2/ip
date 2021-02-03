@@ -53,16 +53,6 @@ public class DeleteCommand extends Command {
         }
     }
 
-    /**
-     * Returns if program should exit after this command.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
     private boolean isNumber(String checkString) {
         try {
             Integer.parseInt(checkString);
