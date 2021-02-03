@@ -80,7 +80,7 @@ public class Ui {
     }
 
     public void showLine() {
-        out.println("---------------------------");
+        out.println("-----------------------------");
     }
 
 }
