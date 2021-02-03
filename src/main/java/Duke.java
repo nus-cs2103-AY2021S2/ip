@@ -9,7 +9,7 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         ArrayList<String> validActions
-                = new ArrayList<>(Arrays.asList("todo", "deadline", "event", "done", "list", "bye"));
+                = new ArrayList<>(Arrays.asList("todo", "deadline", "event", "done", "delete", "list", "bye"));
 
         Scanner sc = new Scanner(System.in);
         TaskList tasks = new TaskList();
@@ -55,7 +55,7 @@ public class Duke {
                 continue;
             }
 
-            if (action.equals("done")) {
+            if (action.equals("done") || action.equals("delete")) {
                 try {
                     if (!isInteger(description)) {
                         throw new InvalidTaskNumberException();
@@ -66,17 +66,25 @@ public class Duke {
                         throw new TaskNumberDoesNotExistException(taskNumber);
                     }
 
-                    Task doneTask = tasks.getTaskByIndex(taskNumber);
-                    doneTask.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(doneTask.getStatusString());
-                    continue;
+                    if (action.equals("done")) {
+                        Task doneTask = tasks.getTaskByIndex(taskNumber);
+                        doneTask.markAsDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(doneTask.getStatusString());
+                        continue;
+                    } else {
+                        Task deletedTask = tasks.popTaskByIndex(taskNumber);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(deletedTask.getStatusString());
+                        continue;
+                    }
 
                 } catch (InvalidTaskNumberException | TaskNumberDoesNotExistException e) {
                     System.out.println(e.getMessage());
                     continue;
                 }
             }
+
 
             Task newTask;
 
