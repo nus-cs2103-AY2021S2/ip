@@ -30,16 +30,57 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println(WELCOME_MESSAGE);
+        out.println(WELCOME_MESSAGE);
     }
 
-    public void printTasks(List<Task> taskList) {
-        System.out.println(">>> Here are your tasks:");
+    public void printTasks(TaskList taskList) {
+        out.println(">>> Ok Human. Here are your tasks:");
         int i = 1;
-        for( Task t : taskList) {
-            System.out.printf("    %d: [%s] [%s] %s\n", i,
+        for( Task t : taskList.getTaskList()) {
+            out.printf("    %d: [%s] [%s] %s\n", i,
                     t.getTaskType(), t.getStatusIcon(), t.getTaskDescription());
             i++;
         }
     }
+
+    public void printTaskDone(Task task) {
+        out.printf(">>> Noted Human. I've marked this task as done:\n  [%s] [%s] %s\n",
+                task.getTaskType(), task.getStatusIcon(),
+                task.getTaskDescription());
+    }
+
+    public void printTaskDeleted(Task task) {
+        out.printf("%s Task deleted successfully:\n  [%s] [%s] %s\n ",
+                LINE_PREFIX, task.getTaskType(), task.getStatusIcon(),
+                task.getTaskDescription());
+    }
+    
+    public void printAddToDo(ToDo toDo) {
+        System.out.printf("%s added:\n   [%s] [%s] %s\n",
+                LINE_PREFIX, toDo.getTaskType(), toDo.getStatusIcon(),
+                toDo.getTaskDescription());
+        
+    }
+
+    public void printAddDeadLine(Deadline deadline) {
+        System.out.printf("%s added:\n   [%s] [%s] %s (by: %s)\n",
+                LINE_PREFIX, deadline.getTaskType(), deadline.getStatusIcon(),
+                deadline.getTaskDescription(), deadline.getEndTime());
+    }
+
+    public void printAddEvent(Event event) {
+        System.out.printf("%s added:\n   [%s] [%s] %s (at: %s)\n",
+                LINE_PREFIX, event.getTaskType(), event.getStatusIcon(),
+                event.getTaskDescription(), event.getEventTime());
+    }
+
+
+    public void showError(String errorMsg) {
+        out.println("[ERROR]: " + errorMsg);
+    }
+
+    public void showLine() {
+        out.println("-----------------------------");
+    }
+
 }
