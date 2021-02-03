@@ -10,6 +10,10 @@ public class Oracle {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Create a new Oracle object
+     * @param filePath filePath of the storage file
+     */
     public Oracle(String filePath) {
         ui = new Ui();
         parser = new Parser(ui);
@@ -23,6 +27,9 @@ public class Oracle {
         }
     }
 
+    /**
+     * Runs the oracle until termination
+     */
     public void run() {
         ui.showWelcome();
         // SCANNER takes input from user in a while loop, parses input using a series of if-else statements

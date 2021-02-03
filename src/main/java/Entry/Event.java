@@ -12,7 +12,7 @@ public class Event extends Task {
      * Returns an Task.Event
      *
      * @param description description of the event
-     * @param time        , which is currently still in String form but I suspect that might change
+     * @param time        String to be converted to a LocalDateTime
      **/
     public Event(String description, String time) throws CommandFormatException {
         super(description);
@@ -29,6 +29,12 @@ public class Event extends Task {
         }
     }
 
+    /** Called during initialisation only, when storage pulls stored tasks from txt file.
+     * @param isDone boolean to indicate whether Task is done
+     * @param description description of the Event
+     * @param time String to be converted to a LocalDateTime
+     * @throws CommandFormatException user has typed the command in a wrong format
+     */
     public Event(Boolean isDone, String description, String time) throws CommandFormatException {
         super(isDone, description);
         try {
@@ -38,6 +44,12 @@ public class Event extends Task {
         }
     }
 
+    /** Parses the String to produce a LocalDateTime. If information is wrong, throws CommandFormatException,
+     * which will be eventually handled to remind users to use correct format. See Ui.
+     * @param sorted the sorted tags corresponding to various "time" arguments
+     * @return LocalDateTime
+     * @throws CommandFormatException user has typed the command in a wrong format
+     */
     private LocalDateTime parseDate(String[] sorted) throws CommandFormatException{
         try {
             return LocalDateTime.of(Integer.parseInt(sorted[2]), //Day
@@ -50,7 +62,9 @@ public class Event extends Task {
         }
     }
 
-    /* format [D][X] {description} ({dayofweek} {time}, {day} {month} {year})
+    /**
+     * @return String representation of this Event
+     * format [D][X] {description} ({dayofweek} {time}, {day} {month} {year})
      */
     @Override
     public String toString() {
@@ -61,9 +75,16 @@ public class Event extends Task {
                 this.getTimeHour(), this.getTimeMinute(), time.getDayOfMonth(), time.getMonth(), time.getYear());
     }
 
+    /**
+     * @return wrapper around LocalDateTime corresponding method, but well formatted
+     */
     private String getTimeHour(){
         return this.time.getHour() < 10 ? "0" + this.time.getHour(): String.valueOf(this.time.getHour());
     }
+
+    /**
+     * @return wrapper around LocalDateTime corresponding method, but well formatted
+     */
     private String getTimeMinute(){
         return this.time.getMinute() < 10 ? "0" + this.time.getMinute(): String.valueOf(this.time.getMinute());
     }
@@ -71,6 +92,7 @@ public class Event extends Task {
 
     /***
      * Format = {type}{done}{description}{deadline}
+     * @return String to be stored in the txt file for storage.
      */
     public String toStorage(){
         //type

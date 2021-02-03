@@ -3,7 +3,7 @@ package Entry;
 public class Todo extends Task{
     /**
      * Returns a Task.Todo
-     * @param description description of the todo
+     * @param description description of the object
      * **/
     public Todo(String description) {
         super(description);
@@ -12,6 +12,9 @@ public class Todo extends Task{
         super(isDone, description);
     }
 
+    /**
+     * @return String representation of the object
+     */
     @Override
     public String toString() {
         String type = "[T]";
@@ -19,8 +22,9 @@ public class Todo extends Task{
         return type + doneStatus + " " + this.description;
     }
 
-    /***
+    /**
      * Format = {type}{done}{description}
+     * @return String to be stored in the txt storage file.
      */
     public String toStorage(){
         //type

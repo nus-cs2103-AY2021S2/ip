@@ -12,7 +12,7 @@ public class Deadline extends Task {
      * Returns a Task.Deadline
      *
      * @param description description of the deadline
-     * @param deadline    , which is currently still in String form but I suspect that might change
+     * @param deadline    String to be converted to a LocalDateTime
      **/
     public Deadline(String description, String deadline) throws CommandFormatException {
         super(description);
@@ -29,6 +29,12 @@ public class Deadline extends Task {
         }
     }
 
+    /** Called during initialisation only, when storage pulls stored tasks from txt file.
+     * @param isDone boolean to indicate whether Task is done
+     * @param description description of the deadline
+     * @param deadline String to be converted to a LocalDateTime
+     * @throws CommandFormatException user has typed the command in a wrong format
+     */
     public Deadline(Boolean isDone, String description, String deadline) throws CommandFormatException{
         super(isDone, description);
         try {
@@ -38,6 +44,12 @@ public class Deadline extends Task {
         }
     }
 
+    /** Parses the String to produce a LocalDateTime. If information is wrong, throws CommandFormatException,
+     * which will be eventually handled to remind users to use correct format. See Ui.
+     * @param sorted the sorted tags corresponding to various "time" arguments
+     * @return LocalDateTime
+     * @throws CommandFormatException user has typed the command in a wrong format
+     */
     private LocalDateTime parseDate(String[] sorted) throws CommandFormatException{
         try {
             return LocalDateTime.of(Integer.parseInt(sorted[2]), //Day
@@ -50,7 +62,9 @@ public class Deadline extends Task {
         }
     }
 
-    /* format [D][X] {description} ({dayofweek} {time}, {day} {month} {year})
+    /**
+     * @return String representation of this Deadline
+     * format [D][X] {description} ({dayofweek} {time}, {day} {month} {year})
      */
     @Override
     public String toString() {
@@ -62,16 +76,23 @@ public class Deadline extends Task {
                 deadline.getYear());
     }
 
+    /**
+     * @return wrapper around LocalDateTime corresponding method, but well formatted
+     */
     private String getDeadlineHour() {
         return this.deadline.getHour() < 10 ? "0" + this.deadline.getHour() : String.valueOf(this.deadline.getHour());
     }
 
+    /**
+     * @return wrapper around LocalDateTime corresponding method, but well formatted
+     */
     private String getDeadlineMinute() {
         return this.deadline.getMinute() < 10 ? "0" + this.deadline.getMinute() : String.valueOf(this.deadline.getMinute());
     }
 
     /***
      * Format = {type}{done}{description}{deadline}
+     * @return String to be stored in the txt file for storage.
      */
     public String toStorage() {
         //type

@@ -13,10 +13,18 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
+    /**
+     * @param filePath filePath of the storage file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * @return List of String lines corresponding to the various tasks from the data file. Each line corresponds
+     * to a task. Throws file not found error, but handling of the error is done by the Oracle object
+     * @throws FileNotFoundException to be handled by Oracle
+     */
     public List<String> load() throws FileNotFoundException{
         ArrayList<String> res = new ArrayList<>();
         //load file if available
@@ -30,6 +38,10 @@ public class Storage {
         return res;
     }
 
+    /**
+     * Store the tasks in the txt file. Format of the text file is handled by the Task classes
+     * @param tasks this is the arraylist used during runtime, to be converted to text file.
+     */
     public void store(ArrayList<Task> tasks) {
         // store data
         try {

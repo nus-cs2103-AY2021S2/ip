@@ -5,10 +5,20 @@ import Command.*;
 public class Parser {
     private final Ui ui;
 
+    /**
+     * Create a new Parser object
+     * @param ui stores ui given to log errors if they occur.
+     */
     public Parser(Ui ui) {
         this.ui = ui;
     }
 
+    /**
+     * Parses the input gotten by the Ui, returns a command to the Oracle to execute, but doesnt execute anything
+     * by itself
+     * @param input this is the raw String given by the user
+     * @return a Command
+     */
     public Command parse(String input) {
         String[] split = input.split(" ", 2); // Split user input - used for operations with params
         /* CASE: TERMINATION */
