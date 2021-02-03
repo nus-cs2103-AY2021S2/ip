@@ -65,7 +65,7 @@ public class TextUi {
      * @param tasks
      */
     public String getAddTaskMessage(Task task, TaskList tasks) {
-        return getFormattedMessage(new String[]{
+        return getFormattedMessage(new String[] {
                 "Got it. I've added this task:",
                 "  " + task,
                 "Now you have " + tasks.size() + " tasks in the list."
@@ -79,7 +79,7 @@ public class TextUi {
      * @param tasks
      */
     public String getDeleteTaskMessage(Task task, TaskList tasks) {
-        return getFormattedMessage(new String[]{
+        return getFormattedMessage(new String[] {
                 "Noted. I've removed this task:",
                 "  " + task,
                 "Now you have " + tasks.size() + " tasks in the list."
