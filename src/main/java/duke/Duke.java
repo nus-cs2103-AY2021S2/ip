@@ -3,12 +3,17 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
  * The types of tasks the user can add are: todo, deadline, event.
  * The user can also delete, check as done, and list tasks.
  */
-public class Duke {
+public class Duke extends Application {
 
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
 
@@ -27,6 +32,19 @@ public class Duke {
         parser = new Parser();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadTasks());
+    }
+
+    public Duke() {
+
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
