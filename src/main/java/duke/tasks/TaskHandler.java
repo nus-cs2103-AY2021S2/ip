@@ -1,13 +1,13 @@
 package duke.tasks;
 
-import duke.ui.Ui;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import duke.enums.Commands;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOptionException;
+import duke.ui.Ui;
 import duke.util.DateFormatter;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 /**
  * TaskHandler that executes tasks related to a TaskList or Task.
@@ -66,6 +66,7 @@ public class TaskHandler {
             numberOfTasks += 1;
             Ui.showTaskAddedText(event.toString(), numberOfTasks);
             break;
+        default:
         }
     }
 
@@ -135,12 +136,17 @@ public class TaskHandler {
         Ui.showTaskDeletedText(task.toString(), numberOfTasks);
     }
 
+    /**
+     * Finds a Task from the TaskList based on a query.
+     * @param query String representing the query.
+     * @param taskList ArrayList of Tasks.
+     */
     public static void findTasks(String query, ArrayList<Task> taskList) {
         int size = taskList.size();
         ArrayList<Task> itemsFound = new ArrayList<>();
 
-        for(int i = 0; i < size; i++) {
-            if(taskList.get(i).description.contains(query)) {
+        for (int i = 0; i < size; i++) {
+            if (taskList.get(i).description.contains(query)) {
                 Task task = taskList.get(i);
                 itemsFound.add(task);
             }

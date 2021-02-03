@@ -1,10 +1,10 @@
 package duke.util;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeException;
 
 /**
  * Encodes & decodes the date as required.

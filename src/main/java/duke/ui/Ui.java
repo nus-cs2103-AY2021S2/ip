@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.Apollo;
 import duke.util.Parser;
-
-import java.util.Scanner;
 
 /**
  * Handles Ui related input and output tasks.
