@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -40,43 +39,44 @@ class Duke {
     public static void main(String[] args) throws IOException {
         Duke myDuke = new Duke("data/DanhDuke.txt", "data");
         myDuke.ui.echoHi();
-        myDuke.storage.writeBack(myDuke.tasklist.listUsed);
+        myDuke.storage.writeBack(myDuke.tasklist.getListUsed());
         boolean signalToExit = false;
         while (!signalToExit && myDuke.ui.stillHaveCommand()) {
             String commandLine = myDuke.ui.readCommand();
-            Command command = Parser.parse(commandLine, myDuke.tasklist.listUsed);
-            switch (command.commandTitle) {
+            Command command = Parser.parse(commandLine, myDuke.tasklist.getListUsed());
+            switch (command.getCommandTitle()) {
             case "list":
-                myDuke.ui.echoPrintList(myDuke.tasklist.listUsed);
+                myDuke.ui.echoPrintList(myDuke.tasklist.getListUsed());
                 break;
             case "bye":
                 myDuke.ui.echoBye();
                 signalToExit = true;
                 break;
             case "done":
-                markTaskDone(myDuke, Integer.parseInt(command.commandContent));
+                markTaskDone(myDuke, Integer.parseInt(command.getCommandContent()));
                 break;
             case "delete":
-                deleteTask(myDuke, Integer.parseInt(command.commandContent));
+                deleteTask(myDuke, Integer.parseInt(command.getCommandContent()));
                 break;
             case "todo":
             case "deadline":
             case "event":
-                addToList(myDuke, command.commandContent);
+                addToList(myDuke, command.getCommandContent());
                 break;
             case "myTaskToday":
-                myDuke.ui.echoTaskToday(myDuke.tasklist.listUsed);
+                myDuke.ui.echoTaskToday(myDuke.tasklist.getListUsed());
                 break;
             case "myTaskOn":
-                myDuke.ui.echoTaskThisDay(myDuke.tasklist.listUsed,
-                        LocalDateTime.parse(command.commandContent, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+                myDuke.ui.echoTaskThisDay(myDuke.tasklist.getListUsed(),
+                        LocalDateTime.parse
+                                (command.getCommandContent(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
                 break;
             case "find":
-                myDuke.ui.echoPrintFindResult(myDuke.tasklist.listUsed, command.commandContent);
+                myDuke.ui.echoPrintFindResult(myDuke.tasklist.getListUsed(), command.getCommandContent());
                 break;
             default:
                 try {
-                    executeFalseCommand(command.commandContent);
+                    executeFalseCommand(command.getCommandContent());
                 } catch (DukeException err) {
                     myDuke.ui.echoErrMsg(err);
                 }
@@ -92,8 +92,8 @@ class Duke {
      */
     public static void addToList(Duke duke, String taskDescription) {
         Task task = duke.tasklist.addTask(taskDescription);
-        duke.storage.updateFile(duke.tasklist.listUsed);
-        duke.ui.echoAddToList(task, duke.tasklist.listUsed.size());
+        duke.storage.updateFile(duke.tasklist.getListUsed());
+        duke.ui.echoAddToList(task, duke.tasklist.getListUsed().size());
     }
 
     /**
@@ -105,7 +105,7 @@ class Duke {
      */
     public static void markTaskDone(Duke duke, int index) {
         Task task = duke.tasklist.doneTask(index);
-        duke.storage.updateFile(duke.tasklist.listUsed);
+        duke.storage.updateFile(duke.tasklist.getListUsed());
         duke.ui.echoMarkTaskDone(task);
     }
 
@@ -117,10 +117,10 @@ class Duke {
      * @param index The index of that task in taskList
      */
     public static void deleteTask(Duke duke, int index) {
-        Task task = duke.tasklist.listUsed.get(index - 1);
+        Task task = duke.tasklist.getListUsed().get(index - 1);
         duke.ui.echoDeleteTask(task);
         duke.tasklist.deleteTask(index);
-        duke.storage.updateFile(duke.tasklist.listUsed);
+        duke.storage.updateFile(duke.tasklist.getListUsed());
     }
 
     /**

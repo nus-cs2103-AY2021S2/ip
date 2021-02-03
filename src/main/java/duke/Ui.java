@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -121,8 +120,8 @@ class Ui {
      * @param err DukeException object related.
      */
     public void echoErrMsg(DukeException err) {
-        System.out.println("    ____________________________________________________________\n" + err.getMessage() +
-                "\n" + "    ____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________\n"
+                + err.getMessage() + "\n" + "    ____________________________________________________________\n");
     }
 
     /**
@@ -136,8 +135,8 @@ class Ui {
         System.out.println("     Here are the tasks on " + dateTime.toString().substring(0, 10) + ":");
         int index = 1;
         for (Task task : taskList) {
-            if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, dateTime))
-                    || (task instanceof Event && sameDay(((Event) task).eTime, dateTime))) {
+            if ((task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), dateTime))
+                    || (task instanceof Event && sameDay(((Event) task).geteTime(), dateTime))) {
                 System.out.format("     %d. " + task.printTask() + "\n", index);
                 index++;
             }
@@ -155,8 +154,8 @@ class Ui {
         System.out.println("     Here are the tasks today:");
         int index = 1;
         for (Task task : taskList) {
-            if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, LocalDateTime.now()))
-                    || (task instanceof Event && sameDay(((Event) task).eTime, LocalDateTime.now()))) {
+            if ((task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), LocalDateTime.now()))
+                    || (task instanceof Event && sameDay(((Event) task).geteTime(), LocalDateTime.now()))) {
                 System.out.format("     %d. " + task.printTask() + "\n", index);
                 index++;
             }
@@ -175,7 +174,7 @@ class Ui {
         System.out.println("     Here are the matching tasks:");
         int index = 1;
         for (Task task : taskList) {
-            if (task.taskName.contains(pattern)) {
+            if (task.getTaskName().contains(pattern)) {
                 System.out.format("     %d. " + task.printTask() + "\n", index);
                 index++;
             }

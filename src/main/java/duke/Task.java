@@ -5,8 +5,8 @@ package duke;
  * Task has 3 types: ToDo, Deadline, Event.
  */
 class Task {
-    public String taskName;
-    public boolean taskDone;
+    private String taskName;
+    private boolean taskDone;
 
     /**
      * return a Task with specified taskName, this task is not done yet.
@@ -38,5 +38,13 @@ class Task {
      */
     public void markAsDone() {
         this.taskDone = true;
+    }
+
+    public boolean isTaskDone() {
+        return taskDone;
+    }
+
+    public String getTaskName() {
+        return taskName;
     }
 }

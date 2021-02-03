@@ -5,9 +5,10 @@ package duke;
  * the command name: commandTitle
  * the command body: commandContent
  */
+@SuppressWarnings("checkstyle:Regexp")
 class Command {
-    public String commandTitle;
-    public String commandContent;
+    private String commandTitle;
+    private String commandContent;
 
     /**
      * Returns a command with the specified name and body
@@ -18,5 +19,12 @@ class Command {
     public Command(String commandTitle, String commandContent) {
         this.commandTitle = commandTitle;
         this.commandContent = commandContent;
+    }
+    public String getCommandContent() {
+        return commandContent;
+    }
+
+    public String getCommandTitle() {
+        return commandTitle;
     }
 }

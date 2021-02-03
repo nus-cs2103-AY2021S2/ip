@@ -2,7 +2,6 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 
 /**
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  * Operations provided: addTask, doneTask, deleteTask.
  */
 class TaskList {
-    public ArrayList<Task> listUsed;
+    private ArrayList<Task> listUsed;
 
     /**
      * Returns a TaskList.
@@ -63,5 +62,9 @@ class TaskList {
      */
     public void deleteTask(int index) {
         this.listUsed.remove(index - 1);
+    }
+
+    public ArrayList<Task> getListUsed() {
+        return listUsed;
     }
 }
