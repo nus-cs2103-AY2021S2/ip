@@ -29,7 +29,7 @@ public class Ui {
     }
 
     public void printStartMsg() {
-        out.println(Message.START_MSG);
+        out.println(Message.getStartMsg());
     }
 
     public String getUserCommand() {
@@ -41,7 +41,7 @@ public class Ui {
     }
 
     public void printByeMsg() {
-        out.println(Message.BYE_MSG);
+        out.println(Message.getByeMsg());
     }
 
     public void printDoneMsg(Task task) {
