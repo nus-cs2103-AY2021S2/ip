@@ -31,8 +31,8 @@ public class Storage {
                 this.file.createNewFile();
             }
         } catch (IOException e) {
-            throw new DukeException("There is an error creating" +
-                    "file: " + this.file.getName());
+            throw new DukeException("There is an error creating"
+                    + "file: " + this.file.getName());
         }
     }
 

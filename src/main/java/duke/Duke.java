@@ -15,6 +15,9 @@ public class Duke {
     private final TaskList tasks;
     private final Storage storage;
 
+    /**
+     * Initializes a Duke object.
+     */
     public Duke() {
         this.ui = new Ui();
         this.tasks = new TaskList();
@@ -26,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts reading inputs and executing Duke's program.
+     */
     public void run() {
         ui.showGreeting();
         boolean isExit = false;
