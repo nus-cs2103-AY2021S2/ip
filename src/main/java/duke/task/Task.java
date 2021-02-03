@@ -35,7 +35,7 @@ public class Task {
     /**
      * @return If the task is done, return an X, else return a empty space character
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "X" : " "); //return tick or X symbols
     }
 
@@ -59,7 +59,7 @@ public class Task {
         return isDoneInt + "|" + description;
     }
 
-    public boolean descriptionContains(String input){
+    public boolean descriptionContains(String input) {
         return description.contains(input);
     }
 }

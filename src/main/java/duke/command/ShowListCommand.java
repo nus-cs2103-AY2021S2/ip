@@ -28,6 +28,6 @@ public class ShowListCommand implements Command {
     @Override
     public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
         ArrayList<Task> currentTaskList = dukeTaskList.getCurrentTaskList();
-        Ui.showReturnTaskList(currentTaskList);
+        dukeUi.showReturnTaskList(currentTaskList);
     }
 }

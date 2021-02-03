@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.maincomponents.Storage;
-import duke.task.Task;
 import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
-
-import java.util.ArrayList;
+import duke.task.Task;
 
 public class EventCommand implements Command {
     private ArrayList<String> eventDescription;

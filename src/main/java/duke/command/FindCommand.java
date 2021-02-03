@@ -1,14 +1,20 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.maincomponents.Storage;
 import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
 import duke.task.Task;
 
-import java.util.ArrayList;
 
-public class FindCommand implements Command{
-    String stringToFind;
+
+public class FindCommand implements Command {
+    private String stringToFind;
+
+    public FindCommand(String s) {
+        stringToFind = s;
+    }
 
     @Override
     public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
@@ -17,15 +23,11 @@ public class FindCommand implements Command{
 
         for (Task currentTask : currentTaskList) {
 
-            if (currentTask.descriptionContains(stringToFind)){
+            if (currentTask.descriptionContains(stringToFind)) {
                 newTaskList.add(currentTask);
             }
         }
 
         dukeUi.showFoundTaskList(newTaskList);
-    }
-
-    public FindCommand(String s){
-        stringToFind = s;
     }
 }

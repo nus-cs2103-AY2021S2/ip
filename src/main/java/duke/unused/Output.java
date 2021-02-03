@@ -14,6 +14,12 @@ public abstract class Output {
         return horizontalLine() + '\n' + indentedString(input) + '\n' + horizontalLine();
     }
 
+    /**
+     * pad a string with spaces at its front
+     * @param input input string
+     * @param numOfSpacesToPad number of spaces to add in front of a string
+     * @return string padded with spaces
+     */
     public String padSpaces(String input, int numOfSpacesToPad) {
         String toreturn = "";
 

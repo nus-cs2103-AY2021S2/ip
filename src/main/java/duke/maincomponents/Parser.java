@@ -51,7 +51,7 @@ public class Parser {
         }
     }
 
-    private boolean equalsToDelete(String userInput){
+    private boolean equalsToDelete(String userInput) {
         return checkStringStartingEquals(userInput, "delete");
     }
 
@@ -144,7 +144,7 @@ public class Parser {
         }
     }
 
-    public boolean equalsToFind(String userInput) {
+    private boolean equalsToFind(String userInput) {
         return checkStringStartingEquals(userInput, "find");
     }
 

@@ -11,6 +11,9 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Shows default welcome line
+     */
     public void showWelcomeLine() {
         System.out.println(defaultFormatting("Hello! I'm Duke\n"
                 + padSpaces("What can I do for you?", 5)));
@@ -24,7 +27,11 @@ public class Ui {
         return padSpaces("Now you have " + String.valueOf(numberOfTasks) + " task in the list.", 5);
     }
 
-    public static void showReturnTaskList(ArrayList<Task> taskArray) {
+    /**
+     * Shows a task list to the user in the appropriate format
+     * @param taskArray task array list to show to the viewer
+     */
+    public void showReturnTaskList(ArrayList<Task> taskArray) {
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalLine()).append('\n');
 
@@ -42,6 +49,10 @@ public class Ui {
         System.out.println(sb.toString());
     }
 
+    /**
+     * Shows a specificed error message
+     * @param errorMsg error message to show to the user
+     */
     public void showLoadingError(String errorMsg) {
         System.out.println(defaultFormatting(errorMsg));
     }
@@ -54,6 +65,10 @@ public class Ui {
         System.out.println(defaultFormatting(msg));
     }
 
+    /**
+     * Show the user that a specific task has been marked as done
+     * @param doneTask Task that has been marked as done
+     */
     public void showTaskDone(Task doneTask) {
         System.out.println(defaultFormatting("Nice! I've marked this task as done:\n"
                 + padSpaces(doneTask.toString(), 7)));
@@ -90,6 +105,12 @@ public class Ui {
         return horizontalLine() + '\n' + indentedString(input) + '\n' + horizontalLine();
     }
 
+    /**
+     * pad a string with spaces at its front
+     * @param input input string
+     * @param numOfSpacesToPad number of spaces to add in front of a string
+     * @return string padded with spaces
+     */
     private static String padSpaces(String input, int numOfSpacesToPad) {
         String toreturn = "";
 
@@ -100,7 +121,11 @@ public class Ui {
         return toreturn + input;
     }
 
-    public void showFoundTaskList(ArrayList<Task> taskArray){
+    /**
+     * Shows task that are related to a string specificed by the user
+     * @param taskArray Array list of tasks that are related to a string specificed by the user
+     */
+    public void showFoundTaskList(ArrayList<Task> taskArray) {
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalLine()).append('\n');
 
@@ -109,7 +134,7 @@ public class Ui {
 
             Task currentTask = taskArray.get(i);
 
-            String numberIndicator =  (i+1) + ".";
+            String numberIndicator = (i + 1) + ".";
             String temp = numberIndicator + currentTask.toString() + '\n';
 
             sb.append(indentedString( temp ));

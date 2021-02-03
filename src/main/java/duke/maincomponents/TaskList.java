@@ -73,8 +73,7 @@ public class TaskList {
      * @throws DukeException error thrown if the index given has no corresponding task
      */
     public Task deleteTask(int taskInt) throws DukeException {
-        if (taskInt >= 1 && taskInt <= tasks.size()){
-
+        if (taskInt >= 1 && taskInt <= tasks.size()) {
             Task todelete = tasks.get(taskInt - 1);
             tasks.remove(taskInt - 1);
             numberOfTasks = numberOfTasks - 1;
