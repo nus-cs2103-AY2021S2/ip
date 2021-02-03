@@ -1,8 +1,12 @@
 package main.java;
 
 
-import main.java.classes.*;
-import main.java.command.*;
+import main.java.classes.DuckieException;
+import main.java.classes.Parser;
+import main.java.classes.Storage;
+import main.java.classes.TaskList;
+import main.java.classes.Ui;
+import main.java.command.Command;
 
 import java.io.IOException;
 

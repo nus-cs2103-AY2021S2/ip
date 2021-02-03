@@ -1,6 +1,13 @@
 package main.java.classes;
 
-import main.java.command.*;
+import main.java.command.ByeCmd;
+import main.java.command.Command;
+import main.java.command.DeadlineCmd;
+import main.java.command.DeleteCmd;
+import main.java.command.DoneCmd;
+import main.java.command.EventCmd;
+import main.java.command.ListCmd;
+import main.java.command.ToDoCmd;
 
 public class Parser {
     private TaskList taskList;
@@ -20,16 +27,22 @@ public class Parser {
         switch(commandArr[0]) {
             case "list":
                 return new ListCmd(cmd);
+                // Fallthrough
             case "todo":
                 return new ToDoCmd(cmd);
+                // Fallthrough
             case "event":
                 return new EventCmd(cmd);
+                // Fallthrough
             case "deadline":
                 return new DeadlineCmd(cmd);
+                // Fallthrough
             case "done":
                 return new DoneCmd(cmd);
+                // Fallthrough
             case "delete":
                 return new DeleteCmd(cmd);
+                // Fallthrough
             case "bye":
                 return new ByeCmd(cmd);
             default:

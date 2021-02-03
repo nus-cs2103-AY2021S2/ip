@@ -15,11 +15,11 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Storage {
-    private File f;
+    private File file;
 
     public Storage(String filePath) throws IOException {
-        this.f = new File(filePath);
-        if (f.createNewFile()) {
+        this.file = new File(filePath);
+        if (file.createNewFile()) {
             System.out.println("file created!");
         } else {
             System.out.println("file loaded!");
@@ -27,7 +27,7 @@ public class Storage {
     }
 
     public void saveTasks(ArrayList<Task> AL) throws IOException {
-        FileWriter fw = new FileWriter(this.f);
+        FileWriter fw = new FileWriter(this.file);
         for (Task temp : AL) {
             if (temp instanceof Deadline) {
                 fw.write(String.format("D | %s | %s | %s",
@@ -45,7 +45,7 @@ public class Storage {
 
     public ArrayList<Task> loadTasks() throws IOException {
         ArrayList<Task> AL = new ArrayList<>();
-        Scanner sc = new Scanner(this.f);
+        Scanner sc = new Scanner(this.file);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
             s = s.trim();
