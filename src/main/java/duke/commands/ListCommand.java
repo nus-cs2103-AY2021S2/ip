@@ -24,14 +24,4 @@ public class ListCommand extends Command {
             return ui.getListOfTasks(tasks);
         }
     }
-
-    /**
-     * Returns if program should exit after this command.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

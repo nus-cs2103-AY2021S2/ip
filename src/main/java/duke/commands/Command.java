@@ -23,11 +23,4 @@ public abstract class Command {
      * @throws DukeException If error happens while executing command.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException;
-
-    /**
-     * Returns if program should exit after this command.
-     *
-     * @return true if should program should exit after command, false otherwise.
-     */
-    public abstract boolean isExit();
 }
