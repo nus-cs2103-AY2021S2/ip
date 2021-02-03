@@ -14,15 +14,6 @@ class Ui {
     }
 
     /**
-     * Bids farewell to the user
-     */
-    public void farewellUser() {
-        System.out.println(FORMAT_LINE
-                + "\nGoodbye and see you soon!\n"
-                + FORMAT_LINE);
-    }
-
-    /**
      * Echoes the command input by the user for better UI clarity.
      */
     public void echoCommand(String input) {

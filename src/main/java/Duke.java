@@ -1,6 +1,4 @@
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 
 /**
  * A personal task managing chatbot project.
@@ -21,37 +19,10 @@ public class Duke {
     }
 
     /**
-     * Main method which serves as the entry point into the chatbot.
-     *
-     * @param args empty string array.
+     * @param input String representing input entered by user.
+     * @return String representing Gets the response from Duke to be shown to the user.
      */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * Runs the chatbot by taking in user input and processing it.
-     */
-    public void run() {
-        this.ui.greetUser();
-
-        Scanner sc = new Scanner(System.in);
-
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
-
-            try {
-                this.ui.echoCommand(input);
-                if (input.equals("bye")) {
-                    this.ui.farewellUser();
-                    break;
-                }
-                Parser.parseInput(input, this.tasks, this.storage);
-
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-        }
+    public String getResponse(String input) {
+        return Parser.parseInput(input, this.tasks, this.storage);
     }
 }

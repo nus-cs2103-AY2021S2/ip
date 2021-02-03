@@ -1,4 +1,6 @@
-D | 1 | lol | 2019-09-09
-T | 1 | 1morw
-T | 0 | booksell
-T | 0 |  return book
+T | 1 | Finishproject
+T | 0 | readbook
+E | 1 | careerfair | 2020-02-03
+D | 0 | presentationsubmission | 2021-09-09
+D | 0 | retiurnbook | 2021-03-04
+T | 0 |  eat

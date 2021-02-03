@@ -32,16 +32,18 @@ class TaskList {
     /**
      * Prints all the tasks in the task list.
      */
-    public void listTasks() {
-        System.out.println(this.ui.FORMAT_LINE);
-        System.out.println("You have the following task(s) in your list.");
+    public String listTasks() {
+        String output = "";
+        output += this.ui.FORMAT_LINE + "\n";
+        output += "You have the following task(s) in your list.\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = this.tasks.get(i);
-            System.out.println(i + 1 + "." + task.toString());
+            output += i + 1 + "." + task.toString() + "\n";
 
         }
-        System.out.println(this.ui.FORMAT_LINE);
+        output += "\n" + this.ui.FORMAT_LINE;
 
+        return output;
     }
 
     /**
@@ -59,12 +61,15 @@ class TaskList {
      *
      * @param task An instance of Task representing the newly added task
      */
-    public void printAddedTask(Task task) {
-        System.out.println(this.ui.FORMAT_LINE);
-        System.out.println("Got it. I've added this task to your list:\n"
-                + "   " + task.toString());
-        System.out.println("Now you have " + this.tasks.size() + " task(s) in the list.");
-        System.out.println(this.ui.FORMAT_LINE);
+    public String printAddedTask(Task task) {
+        String output = "";
+        output += this.ui.FORMAT_LINE;
+        output += "\nGot it. I've added this task to your list:\n"
+                + "   " + task.toString();
+        output += "\nNow you have " + this.tasks.size() + " task(s) in the list.\n";
+        output += this.ui.FORMAT_LINE;
+
+        return output;
 
 
     }
@@ -74,13 +79,15 @@ class TaskList {
      *
      * @param index An integer representing the index of the task to be marked as done.
      */
-    public void markAsDone(int index) {
+    public String markAsDone(int index) {
         Task task = this.tasks.get(index);
         task.markAsDone();
-        System.out.println(this.ui.FORMAT_LINE);
-        System.out.println(" Good job! I've marked this task as done:\n"
-                + "   " + task.toString());
-        System.out.println(this.ui.FORMAT_LINE);
+        String output = "";
+        output += this.ui.FORMAT_LINE;
+        output += "\n Good job! I've marked this task as done:\n"
+                + "   " + task.toString() + "\n";
+        output += this.ui.FORMAT_LINE;
+        return output;
 
     }
 
@@ -89,14 +96,16 @@ class TaskList {
      *
      * @param index An integer representing the index of the task to be deleted.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task task = this.tasks.get(index);
         this.tasks.remove(index);
-        System.out.println(this.ui.FORMAT_LINE);
-        System.out.println(" Noted. I've removed this task:\n"
-                + "   " + task.toString());
-        System.out.println("Now you have " + this.tasks.size() + " task(s) in the list.");
-        System.out.println(this.ui.FORMAT_LINE);
+        String output = "";
+        output += this.ui.FORMAT_LINE;
+        output += "\n Noted. I've removed this task:\n"
+                + "   " + task.toString() + "\n";
+        output += "Now you have " + this.tasks.size() + " task(s) in the list.\n";
+        output += this.ui.FORMAT_LINE;
+        return output;
 
     }
 
@@ -105,24 +114,26 @@ class TaskList {
      *
      * @param keyword A String indicating the keyword to search for.
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
+        String output = "";
         for (Task task : this.tasks) {
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 filteredTasks.add(task);
             }
         }
         if (filteredTasks.size() == 0) {
-            System.out.println("Sorry I could not find any matching tasks in your list.");
+            output += "Sorry I could not find any matching tasks in your list.\n";
         } else {
-            System.out.println(this.ui.FORMAT_LINE);
-            System.out.println("Here are the matching tasks in your list:");
+            output += this.ui.FORMAT_LINE;
+            output += "\nHere are the matching tasks in your list:\n";
             for (int i = 0; i < filteredTasks.size(); i++) {
                 Task task = filteredTasks.get(i);
-                System.out.println(i + 1 + "." + task.toString());
+                output += i + 1 + "." + task.toString() + "\n";
 
             }
-            System.out.println(this.ui.FORMAT_LINE);
+            output += "\n" + this.ui.FORMAT_LINE;
         }
+        return output;
     }
 }
