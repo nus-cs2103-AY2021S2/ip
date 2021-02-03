@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.Ui;
 
 /**
  * Class representing a List Command.
@@ -17,8 +17,7 @@ public class ListCommand extends Command {
      * @param storage
      * @return true.
      */
-    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        ui.print(tasks);
-        return true;
+    public String execute(TaskList tasks, Ui ui, TaskStorage storage) {
+        return ui.formatListCmdMsg(tasks);
     }
 }

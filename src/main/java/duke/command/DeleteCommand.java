@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.Ui;
+import duke.exception.DukeStorageException;
 import duke.task.Task;
 
 /**
@@ -31,12 +32,13 @@ public class DeleteCommand extends Command {
      * @param storage Updates tasks.txt of the removed task.
      * @return true.
      */
-    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        Task removedTask = tasks.deleteTask(indexToDelete);
-        storage.storeData(tasks);
-        ui.print("I've removed this task:\n\t\t" + removedTask +
-                "\n\n\t  You have " +
-                tasks.getSize() + (tasks.getSize() == 1 ? " task" : " tasks") + " in your list");
-        return true;
+    public String execute(TaskList tasks, Ui ui, TaskStorage storage) {
+        try {
+            Task taskRemoved = tasks.deleteTask(indexToDelete);
+            storage.storeData(tasks);
+            return ui.formatRemoveCmdMsg(taskRemoved, tasks);
+        } catch (DukeStorageException e) {
+            return e.getMessage();
+        }
     }
 }

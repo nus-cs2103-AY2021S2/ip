@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.Ui;
 
 /**
  * Class representing an Exit Command.
@@ -16,8 +16,11 @@ public class ExitCommand extends Command {
      * @param storage
      * @return false.
      */
-    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        ui.print("Goodbye. See you later!");
-        return false;
+    public String execute(TaskList tasks, Ui ui, TaskStorage storage) {
+        return ("Goodbye. See you later!");
+    }
+
+    public boolean toExit() {
+        return true;
     }
 }

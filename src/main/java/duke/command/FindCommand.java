@@ -1,12 +1,13 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Class representing the Find Command.
@@ -33,22 +34,16 @@ public class FindCommand extends Command {
      * @param storage
      * @return true.
      */
-    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        List<Task> temp = new ArrayList<>();
-        TaskList allTasks = storage.retrieveData();
-        for (int i = 0; i < allTasks.getSize(); i++) {
-            Task task = allTasks.getTask(i);
+    public String execute(TaskList tasks, Ui ui, TaskStorage storage) {
+        List<Task> matchingTasks = new ArrayList<>();
+        ListIterator<Task> iterator = tasks.getIterator();
+        while (iterator.hasNext()) {
+            Task task = iterator.next();
             String description = task.getDescription();
             if (description.contains(keyword)) {
-                temp.add(task);
+                matchingTasks.add(task);
             }
         }
-        if (temp.isEmpty()) {
-            ui.print("There are no tasks with such keyword!");
-        } else {
-            TaskList matchingTasks = new TaskList(temp);
-            ui.print(matchingTasks);
-        }
-        return true;
+        return ui.formatFindCmdMsg(new TaskList(matchingTasks));
     }
 }

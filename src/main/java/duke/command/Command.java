@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.Ui;
 
 /**
  * Class representing a Command.
@@ -16,5 +16,9 @@ public abstract class Command {
      * @param storage Updates the tasks.txt file after executing commands modifying TaskList/tasks.
      * @return false if exit command is executed, true otherwise.
      */
-    public abstract boolean execute(TaskList tasks, Ui ui, TaskStorage storage);
+    public abstract String execute(TaskList tasks, Ui ui, TaskStorage storage);
+
+    public boolean toExit() {
+        return false;
+    };
 }

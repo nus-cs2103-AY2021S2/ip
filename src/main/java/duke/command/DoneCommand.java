@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.Ui;
+import duke.exception.DukeStorageException;
 import duke.task.Task;
 
 /**
@@ -31,11 +32,14 @@ public class DoneCommand extends Command {
      * @param storage Updates tasks.txt of the completed task.
      * @return true.
      */
-    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        Task completedTask = tasks.getTask(completedTaskIdx);
-        completedTask.setDone();
-        storage.storeData(tasks);
-        ui.print("Nice! I have marked this task as done:\n\t\t " + completedTask);
-        return true;
+    public String execute(TaskList tasks, Ui ui, TaskStorage storage) {
+        try {
+            Task completedTask = tasks.getTask(completedTaskIdx);
+            completedTask.setDone();
+            storage.storeData(tasks);
+            return ui.formatDoneCmdMsg(completedTask);
+        } catch (DukeStorageException e) {
+            return e.getMessage();
+        }
     }
 }

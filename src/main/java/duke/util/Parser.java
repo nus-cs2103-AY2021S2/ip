@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import duke.command.AddCommand;
 import duke.command.InvalidCommand;
@@ -35,7 +35,7 @@ public class Parser {
     public static Command parse(String userInput, TaskList tasks) {
         String[] split = userInput.split("\\s+");
         String command = split[0];
-        Command res = null;
+        Command res;
         try {
             switch (command) {
             case "todo":
@@ -79,10 +79,10 @@ public class Parser {
                 res = new ExitCommand();
                 break;
             default:
-                res = new InvalidCommand();
+                res = new InvalidCommand("No such command!");
             }
         } catch (DukeException e) {
-            ui.print(e.getMessage());
+            res = new InvalidCommand(e.getMessage());
         }
         return res;
     }

@@ -1,13 +1,19 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.Ui;
 
 /**
  * Class representing an Invalid Command.
  */
 public class InvalidCommand extends Command {
+    private String errorMessage;
+
+    public InvalidCommand(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     /**
      * Prompts user of invalid command.
      *
@@ -16,8 +22,7 @@ public class InvalidCommand extends Command {
      * @param storage
      * @return true.
      */
-    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        ui.print("Invalid command!");
-        return true;
+    public String execute(TaskList tasks, Ui ui, TaskStorage storage) {
+        return errorMessage;
     }
 }
