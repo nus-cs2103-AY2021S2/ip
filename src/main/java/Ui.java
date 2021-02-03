@@ -1,10 +1,9 @@
 public class Ui {
-    private static final String LINE = "----------------------------------------------\n";
-    private static final String GREETING = LINE
-            + "Hello! I`m Duke\n"
-            + "Please enter file name to load tasks\n "
-            + LINE;
-    private static final String START = "File loaded, what do you want to do? ";
+    private static final String GREETING = "Hello! I`m Duke\n"
+            + "Please enter file name to load tasks\n ";
+    private static final String GOODBYE = "Thank you for using Duke , please come back again";
+    private static final String FAILURE_LOAD_START = "No task is found in file, what can i do for you? ";
+    private static final String SUCCESS_LOAD_START = "File loaded, what can i do for you? ";
 
     private static TaskList tasks;
     private static Storage storage;
@@ -16,6 +15,10 @@ public class Ui {
         return GREETING;
     }
 
+    public static String showGoodbye() {
+        return GOODBYE;
+    }
+
     public static String load(String fileName) {
         storage = new Storage();
         try {
@@ -25,7 +28,12 @@ public class Ui {
         } catch (DukeDeadlineException e) {
             return showError(e.getMessage());
         }
-        return START;
+
+        if (tasks.getTaskList().size() == 0) {
+            return FAILURE_LOAD_START;
+        }
+
+        return SUCCESS_LOAD_START;
     }
 
     /**
@@ -99,11 +107,14 @@ public class Ui {
         return "There are no matching task with " + searchTerm;
     }
 
+    public static void save() {
+        storage.save(tasks.getTaskList());
+    }
+
     public static String parseAndPrint(String fullCommand) {
         try {
             Command command = Parser.parse(fullCommand);
-            return null;
-            //return command.excute();
+            return command.excute(tasks);
         } catch (DukeException e) {
             return showError(e.getMessage());
         } catch (DukeDeadlineException e) {

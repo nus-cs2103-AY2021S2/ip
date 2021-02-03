@@ -3,43 +3,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    public static String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
-    public static String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
-
-    /*
-    private Ui ui;
-    private TaskList tasks;
-    private Storage storage;
-
-    public void run() {
-        this.ui = new Ui();
-        this.storage = new Storage();
-
-        String filePath = this.ui.askFilePath();
-        tasks = new TaskList(this.storage.load(filePath , ui));
-
-        this.ui.showGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.excute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (DukeDeadlineException e) {
-                ui.showError(e.getMessage());
-            } catch (NullPointerException e) {
-                ui.showError("OOPS!!! I`m sorry. but i don`t know what that means :-(");
-            } finally {
-                ui.showLine();
-            }
-        }
-        this.storage.save(tasks.getTaskList());
-    }
-     */
+    private static final String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
+    private static final String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
 
     /**
      * Returns a Command object based on the fullCommand given
@@ -48,7 +13,8 @@ public class Parser {
      * @throws DukeException
      * @throws DukeDeadlineException
      */
-    public static Command parse(String fullCommand) throws DukeException , DukeDeadlineException{
+    public static Command parse(String fullCommand) throws DukeException , DukeDeadlineException {
+        fullCommand = fullCommand.trim();
         int firstSpace = fullCommand.indexOf(" ");
         String keyword = firstSpace == -1 ? fullCommand : fullCommand.substring(0, firstSpace).toLowerCase();
 
@@ -73,13 +39,13 @@ public class Parser {
 
         //Commands that needs a description
         Task task = null;
-        if(keyword.equalsIgnoreCase("find")){
+        if (keyword.equalsIgnoreCase("find")) {
             checkDescription(firstSpace, ERROR_SEARCH_TERM);
             return new FindCommand(fullCommand.substring(firstSpace));
-        } else if(keyword.equalsIgnoreCase("todo")) {
+        } else if (keyword.equalsIgnoreCase("todo")) {
             checkDescription(firstSpace, ERROR_DESCRIPTION);
             task = new Todo(fullCommand.substring(firstSpace));
-        } else if (keyword.equalsIgnoreCase("deadline") || keyword.equalsIgnoreCase("event")){
+        } else if (keyword.equalsIgnoreCase("deadline") || keyword.equalsIgnoreCase("event")) {
             checkDescription(firstSpace, ERROR_DESCRIPTION);
             task = createTaskWithDeadline(fullCommand, keyword, firstSpace);
         } else {
@@ -108,14 +74,14 @@ public class Parser {
         String errorMessage;
         switch (keyword) {
         case "deadline":
-            errorMessage = "OOPS!!! Format of the deadline of a deadline task should be " +
-                                "(Year-Month-Day time (24 hours)";
+            errorMessage = "OOPS!!! Format of the deadline of a deadline task should be "
+                    + "(Year-Month-Day time (24 hours)";
             LocalDateTime deadline = parseDate(fullCommand.substring(nextSpace), errorMessage);
             t = new Deadline(taskDescription, deadline);
             break;
         case "event":
-            errorMessage = "OOPS!!! Format of the time period of a Event task should be " +
-                            "(Year-Month-Day Time(24 hours)-Time(24 hours)";
+            errorMessage = "OOPS!!! Format of the time period of a Event task should be "
+                    + "(Year-Month-Day Time(24 hours)-Time(24 hours)";
             LocalDateTime[] deadlines = parseDates(fullCommand.substring(nextSpace), errorMessage);
             t = new Event(taskDescription, deadlines[0], deadlines[1]);
             break;

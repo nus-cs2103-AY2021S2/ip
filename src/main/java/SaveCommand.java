@@ -1,4 +1,4 @@
-public class SaveCommand extends Command{
+public class SaveCommand extends Command {
     private String command;
 
     public SaveCommand() {
@@ -9,8 +9,9 @@ public class SaveCommand extends Command{
         this.command = command;
     }
 
-    public void excute(TaskList taskList, Ui ui, Storage storage) {
-        storage.save(taskList.getTaskList());
+    public String excute(TaskList taskList) {
+        Ui.save();
+        return Ui.showGoodbye();
     }
 
     @Override

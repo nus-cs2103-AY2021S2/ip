@@ -30,7 +30,7 @@ public class Storage {
         return tasks;
     }
 
-    public void save(Collection<Task> taskList) {
+    public void save(ArrayList<Task> taskList) {
         try{
             FileWriter fw = new FileWriter(this.fileName);
             for(Task t : taskList) {
