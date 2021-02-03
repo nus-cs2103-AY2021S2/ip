@@ -6,7 +6,7 @@ public class HelpCommand extends Command {
     public static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid command.\n";
     public static final String COMMAND_LIST = "\tCommands available:\n"
             + "\t\t- list\n"
-            + "\t\t- find [keyword]"
+            + "\t\t- find [keyword]\n"
             + "\t\t- todo [description]\n"
             + "\t\t- deadline [description] /by [deadline]\n"
             + "\t\t- event [description] /at [datetime]\n"
