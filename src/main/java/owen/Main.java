@@ -1,14 +1,26 @@
 package owen;
 
 /**
- * Starts Owen chatbot with a terminal UI interface.
+ * Main entrypoint for Owen chatbot with GUI interface.
  */
 public class Main {
-    /**
-     * Main entry point for Owen chatbot with terminal UI interface.
-     * @param args Command line arguments.
-     */
     public static void main(String[] args) {
+        startGui(args);
+    }
+
+    /**
+     * Starts GUI interface for interacting with Owen chatbot.
+     * @param args Program arguments.
+     */
+    public static void startGui(String[] args) {
+        Gui.main(args);
+    }
+
+    /**
+     * Starts Terminal interface for interacting with Owen chatbot.
+     * @param args Program arguments.
+     */
+    public static void startTerminal(String[] args) {
         Chatbot owen = new Owen();
         Ui ui = new Ui();
 
