@@ -16,6 +16,8 @@ import javafx.scene.layout.HBox;
 
 /**
  * Represents a chat message style control.
+ *
+ * @author Benedict Khoo
  */
 public class DialogBox extends HBox {
     @FXML

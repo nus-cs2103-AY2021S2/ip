@@ -2,6 +2,8 @@ package duke.task;
 
 /**
  * Represents a simple todo task.
+ *
+ * @author Benedict Khoo
  */
 public class ToDo extends Task {
     private static final String TYPE = "T";

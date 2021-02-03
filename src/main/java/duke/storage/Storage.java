@@ -9,6 +9,8 @@ import java.nio.file.Path;
 
 /**
  * Abstracts saving and loading a string to and from a file.
+ *
+ * @author Benedict Khoo
  */
 public class Storage {
     private final Path dirPath;

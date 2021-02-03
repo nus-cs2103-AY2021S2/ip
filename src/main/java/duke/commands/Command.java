@@ -5,12 +5,14 @@ import duke.task.TaskList;
 
 /**
  * Represents an executable command.
+ *
+ * @author Benedict Khoo
  */
 public abstract class Command {
     /**
      * Executes the command with the input Duke context (task list and storage).
      *
-     * @param tasks The task list used by Duke.
+     * @param tasks   The task list used by Duke.
      * @param storage The storage used by Duke.
      * @return The result of executing the command.
      */

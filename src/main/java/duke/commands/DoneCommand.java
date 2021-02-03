@@ -9,6 +9,8 @@ import duke.task.TaskList;
 
 /**
  * Marks a task as done.
+ *
+ * @author Benedict Khoo
  */
 public class DoneCommand extends Command {
     private static final Pattern DONE_KEYWORD = Pattern.compile("(?i)done\\b");
@@ -53,7 +55,7 @@ public class DoneCommand extends Command {
     /**
      * Marks a task in tasks as done and returns a CommandResult indicating success or failure.
      *
-     * @param tasks The task list to get the task from.
+     * @param tasks   The task list to get the task from.
      * @param storage The storage used by Duke (unused).
      * @return A CommandResult indicating success or failure.
      */

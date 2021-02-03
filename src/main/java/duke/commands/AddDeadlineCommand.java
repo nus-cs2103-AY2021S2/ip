@@ -11,6 +11,8 @@ import duke.task.TaskList;
 
 /**
  * Adds a deadline to the task list.
+ *
+ * @author Benedict Khoo
  */
 public class AddDeadlineCommand extends Command {
     private static final Pattern ADD_DEADLINE_KEYWORD = Pattern.compile("(?i)deadline\\b");
@@ -73,7 +75,7 @@ public class AddDeadlineCommand extends Command {
     /**
      * Adds a deadline to tasks and returns a CommandResult indicating success.
      *
-     * @param tasks The task list to add to.
+     * @param tasks   The task list to add to.
      * @param storage The storage used by Duke (unused).
      * @return A CommandResult indicating success.
      */

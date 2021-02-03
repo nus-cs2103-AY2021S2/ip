@@ -9,6 +9,8 @@ import duke.task.ToDo;
 
 /**
  * Adds a ToDo to the task list.
+ *
+ * @author Benedict Khoo
  */
 public class AddToDoCommand extends Command {
     private static final Pattern ADD_TODO_KEYWORD = Pattern.compile("(?i)todo\\b");
@@ -54,7 +56,7 @@ public class AddToDoCommand extends Command {
     /**
      * Adds a todo to tasks and returns a CommandResult indicating success.
      *
-     * @param tasks The task list to add to.
+     * @param tasks   The task list to add to.
      * @param storage The storage used by Duke (unused).
      * @return A CommandResult indicating success.
      */

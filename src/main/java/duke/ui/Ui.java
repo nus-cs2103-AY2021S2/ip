@@ -4,6 +4,8 @@ import duke.commands.CommandResult;
 
 /**
  * Represents a generic user interface.
+ *
+ * @author Benedict Khoo
  */
 public interface Ui {
     /**

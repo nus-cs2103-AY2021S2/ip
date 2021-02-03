@@ -6,6 +6,8 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with a deadline.
+ *
+ * @author Benedict Khoo
  */
 public class Deadline extends Task {
     public static final String INPUT_DATE_FORMAT = "yyyy-MM-dd";
@@ -24,7 +26,7 @@ public class Deadline extends Task {
      * Constructs a Deadline with the given description and due date.
      *
      * @param description The task description.
-     * @param date The due date.
+     * @param date        The due date.
      */
     public Deadline(String description, LocalDate date) {
         this(description, date, false);
@@ -34,8 +36,8 @@ public class Deadline extends Task {
      * Constructs a Deadline with the given description, due date and done status.
      *
      * @param description The task description.
-     * @param date The due date.
-     * @param isDone The done status.
+     * @param date        The due date.
+     * @param isDone      The done status.
      */
     public Deadline(String description, LocalDate date, boolean isDone) {
         super(description, TYPE, isDone);

@@ -2,6 +2,8 @@ package duke.task;
 
 /**
  * Represents a task with a period/duration.
+ *
+ * @author Benedict Khoo
  */
 public class Event extends Task {
     private static final String TYPE = "E";
@@ -17,7 +19,7 @@ public class Event extends Task {
      * Constructs an Event with the given description and period.
      *
      * @param description The task description.
-     * @param period The period during which the event takes place.
+     * @param period      The period during which the event takes place.
      */
     public Event(String description, String period) {
         this(description, period, false);
@@ -27,8 +29,8 @@ public class Event extends Task {
      * Constructs an Event with the given description, period and done status.
      *
      * @param description The task description.
-     * @param period The period during which the event takes place.
-     * @param isDone The done status of this event.
+     * @param period      The period during which the event takes place.
+     * @param isDone      The done status of this event.
      */
     public Event(String description, String period, boolean isDone) {
         super(description, TYPE, isDone);

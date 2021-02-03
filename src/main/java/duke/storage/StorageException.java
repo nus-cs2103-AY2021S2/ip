@@ -2,6 +2,8 @@ package duke.storage;
 
 /**
  * Represents a failure to load or store something.
+ *
+ * @author Benedict Khoo
  */
 public class StorageException extends Exception {
     public StorageException(String message) {

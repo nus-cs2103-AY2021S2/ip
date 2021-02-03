@@ -14,6 +14,8 @@ import duke.commands.ListCommand;
 
 /**
  * Parses Duke commands.
+ *
+ * @author Benedict Khoo
  */
 public class Parser {
     /**

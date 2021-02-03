@@ -9,6 +9,8 @@ import duke.task.TaskList;
 
 /**
  * Deletes a task from the task list.
+ *
+ * @author Benedict Khoo
  */
 public class DeleteCommand extends Command {
     private static final Pattern DELETE_KEYWORD = Pattern.compile("(?i)delete\\b");
@@ -53,7 +55,7 @@ public class DeleteCommand extends Command {
     /**
      * Deletes a task from tasks and returns a CommandResult indicating success or failure.
      *
-     * @param tasks The task list to delete from.
+     * @param tasks   The task list to delete from.
      * @param storage The storage used by Duke (unused).
      * @return A CommandResult indicating success or failure.
      */

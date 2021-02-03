@@ -7,6 +7,8 @@ import duke.task.TaskList;
 
 /**
  * Signals Duke to exit.
+ *
+ * @author Benedict Khoo
  */
 public class ExitCommand extends Command {
     private static final Pattern EXIT_KEYWORD = Pattern.compile("(?i)bye\\b");
@@ -30,7 +32,7 @@ public class ExitCommand extends Command {
     /**
      * Returns a new CommandResult that signals Duke to exit.
      *
-     * @param tasks The task list used by Duke (unused).
+     * @param tasks   The task list used by Duke (unused).
      * @param storage The storage used by Duke (unused).
      * @return A CommandResult that signals Duke to exit.
      */

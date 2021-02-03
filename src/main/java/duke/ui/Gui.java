@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 /**
  * Represents a graphical UI with a chat-bot style interface for Duke.
+ *
+ * @author Benedict Khoo
  */
 public class Gui extends AnchorPane implements Ui {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));

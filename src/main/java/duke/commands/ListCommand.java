@@ -8,7 +8,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Lists the tasks in the task list
+ * Lists the tasks in the task list.
+ *
+ * @author Benedict Khoo
  */
 public class ListCommand extends Command {
     private static final Pattern LIST_KEYWORD = Pattern.compile("(?i)list\\b");
@@ -48,7 +50,7 @@ public class ListCommand extends Command {
     /**
      * Returns a CommandResult with the list of tasks as a message for the user.
      *
-     * @param tasks The task list to list.
+     * @param tasks   The task list to list.
      * @param storage The storage used by Duke (unused).
      * @return A CommandResult with the list of tasks as a message for the user.
      */

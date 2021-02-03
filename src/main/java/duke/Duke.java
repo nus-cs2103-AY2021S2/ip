@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 /**
  * A personal task list app.
+ *
+ * @author Benedict Khoo
  */
 public class Duke extends Application {
     private Storage storage;

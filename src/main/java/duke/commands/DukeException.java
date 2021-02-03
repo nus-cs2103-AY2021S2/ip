@@ -2,6 +2,8 @@ package duke.commands;
 
 /**
  * Represents exceptional behavior when executing Duke.
+ *
+ * @author Benedict Khoo
  */
 public class DukeException extends Exception {
     /**

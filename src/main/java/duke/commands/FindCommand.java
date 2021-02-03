@@ -9,6 +9,8 @@ import duke.task.TaskList;
 
 /**
  * Searches (case-sensitive) for tasks containing a search term.
+ *
+ * @author Benedict Khoo
  */
 public class FindCommand extends Command {
     private static final Pattern FIND_KEYWORD = Pattern.compile("(?i)find\\b");

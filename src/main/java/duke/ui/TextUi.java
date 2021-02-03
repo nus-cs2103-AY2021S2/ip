@@ -7,6 +7,8 @@ import duke.commands.CommandResult;
 
 /**
  * Represents a text UI that uses the standard input and outputs.
+ *
+ * @author Benedict Khoo
  */
 public class TextUi implements Ui {
     private static final String COMMAND_PROMPT = "Type Command> ";

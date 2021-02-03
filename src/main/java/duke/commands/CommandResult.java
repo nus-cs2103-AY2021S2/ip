@@ -2,6 +2,8 @@ package duke.commands;
 
 /**
  * Represents the result of executing a command.
+ *
+ * @author Benedict Khoo
  */
 public class CommandResult {
     protected String feedback;
@@ -20,7 +22,7 @@ public class CommandResult {
      * Constructs a CommandResult with the given feedback message and a signal to Duke to exit or not.
      *
      * @param feedback The feedback message for the user.
-     * @param isExit True if Duke should exit after the current command. False otherwise.
+     * @param isExit   True if Duke should exit after the current command. False otherwise.
      */
     public CommandResult(String feedback, boolean isExit) {
         this.feedback = feedback;

@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 /**
  * Represents a list of tasks.
+ *
+ * @author Benedict Khoo
  */
 public class TaskList {
     private final List<Task> tasks;

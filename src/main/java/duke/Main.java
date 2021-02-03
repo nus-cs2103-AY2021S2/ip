@@ -2,6 +2,11 @@ package duke;
 
 import javafx.application.Application;
 
+/**
+ * Entry point of the program.
+ *
+ * @author Benedict Khoo
+ */
 public class Main {
     /**
      * Launches the Duke application.

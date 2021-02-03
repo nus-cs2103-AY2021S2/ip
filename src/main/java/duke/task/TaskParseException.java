@@ -2,6 +2,8 @@ package duke.task;
 
 /**
  * Represents a failure to parse a task.
+ *
+ * @author Benedict Khoo
  */
 public class TaskParseException extends Exception {
     public TaskParseException(String message) {

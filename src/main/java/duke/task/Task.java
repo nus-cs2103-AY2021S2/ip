@@ -2,6 +2,8 @@ package duke.task;
 
 /**
  * Represents a generic task.
+ *
+ * @author Benedict Khoo
  */
 public abstract class Task {
     protected String description;
@@ -12,7 +14,7 @@ public abstract class Task {
      * Constructs a Task with the given description and type.
      *
      * @param description The task description.
-     * @param type The task type.
+     * @param type        The task type.
      */
     protected Task(String description, String type) {
         this(description, type, false);
@@ -22,8 +24,8 @@ public abstract class Task {
      * Constructs a Task with the given description and type.
      *
      * @param description The task description.
-     * @param type The task type.
-     * @param isDone The done status.
+     * @param type        The task type.
+     * @param isDone      The done status.
      */
     protected Task(String description, String type, boolean isDone) {
         this.description = description;

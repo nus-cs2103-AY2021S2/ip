@@ -9,6 +9,8 @@ import duke.task.TaskList;
 
 /**
  * Adds an event to the task list.
+ *
+ * @author Benedict Khoo
  */
 public class AddEventCommand extends Command {
     private static final Pattern ADD_EVENT_KEYWORD = Pattern.compile("(?i)event\\b");
@@ -65,7 +67,7 @@ public class AddEventCommand extends Command {
     /**
      * Adds an event to tasks and returns a CommandResult indicating success.
      *
-     * @param tasks The task list to add to.
+     * @param tasks   The task list to add to.
      * @param storage The storage used by Duke (unused).
      * @return A CommandResult indicating success.
      */
