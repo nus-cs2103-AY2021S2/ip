@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    Deadline(String description) {
+    Deadline(String description) throws EmptyArgumentException {
         super(description);
     }
 

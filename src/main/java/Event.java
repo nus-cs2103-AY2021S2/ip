@@ -1,5 +1,5 @@
 public class Event extends Task {
-    Event(String description) {
+    Event(String description) throws EmptyArgumentException {
         super(description);
     }
 

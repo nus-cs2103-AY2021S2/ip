@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,6 +6,7 @@ import java.util.Scanner;
 public class Duke {
     private static List<Task> tasks = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
+    private static final String filePath = System.getProperty("user.dir") + "/data/duke.txt";
     public static void main(String[] args) {
         String logo =
                 " __        _        \n"
@@ -14,6 +16,7 @@ public class Duke {
                         + "|_/ \\,||\\\\___|\n";
         System.out.println("Hi Im Duke, how may I help you?");
         while(true) {
+            try {
                 String cmd = sc.next();
                 if (cmd.equals("bye")) {
                     byeUser(logo);
@@ -23,21 +26,24 @@ public class Duke {
                 } else if (cmd.equals("done")) {
                     int itemNo = sc.nextInt();
                     markItemAsDone(itemNo);
-                } else if(cmd.equals("delete")) {
-                    int itemNo = sc.nextInt();
-                    deleteItem(itemNo);
                 } else {
                     String typeOfEvent = cmd;
                     String eventDescription = sc.nextLine();
                     addItem(typeOfEvent, eventDescription);
                 }
+            } catch (InvalidCommandException e) {
+                System.out.println(e.getMessage());
+            } catch (EmptyArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
-    private static void addItem(String typeOfEvent, String eventDescription) {
+
+    private static void addItem(String typeOfEvent, String eventDescription) throws EmptyArgumentException, InvalidCommandException {
         if(typeOfEvent.equals("todo")) {
             tasks.add(new ToDos(eventDescription));
         }
-        else {
+        else if(typeOfEvent.equals("deadline") || typeOfEvent.equals("event")){
             String[] _eventDescription = eventDescription.split("/");
             StringBuilder firstPart = new StringBuilder(_eventDescription[0]).append(" ");
             StringBuilder secondPart = new StringBuilder(_eventDescription[1]);
@@ -45,9 +51,10 @@ public class Duke {
             secondPart.insert(3, ':');
             secondPart.append(')');
             firstPart.append(secondPart);
-            if (typeOfEvent.equals("deadline")) tasks.add(new Deadline(firstPart.toString()));
+            if (typeOfEvent.equals("deadline")) tasks.add(new Deadline(eventDescription));
             else if (typeOfEvent.equals("event")) tasks.add(new Event(firstPart.toString()));
         }
+        else throw new InvalidCommandException();
         System.out.print("added: ");
         System.out.println(tasks.get(tasks.size()-1));
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
@@ -58,15 +65,6 @@ public class Duke {
         System.out.println("Nice, I have marked this task as done!");
         System.out.print("  ");
         System.out.print(tasks.get(itemNo-1));
-    }
-
-    private static void deleteItem(int itemNo) {
-        Task toBeDeleted = tasks.get(itemNo-1);
-        tasks.remove(itemNo-1);
-        System.out.println("Noted. I have removed this task:");
-        System.out.print("  ");
-        System.out.println(toBeDeleted);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
 
     private static void listItems() {

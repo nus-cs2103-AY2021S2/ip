@@ -1,5 +1,5 @@
 public class ToDos extends Task {
-    ToDos(String description) {
+    ToDos(String description) throws EmptyArgumentException {
         super(description);
     }
 
