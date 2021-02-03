@@ -26,4 +26,15 @@ public class DeleteHandler implements CommandHandler{
         ui.respond(response);
         storage.delete(taskNum);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof  DeleteHandler) {
+            return taskNum == ((DeleteHandler)obj).getTaskNum();
+        } else {
+            return false;
+        }
+    }
 }

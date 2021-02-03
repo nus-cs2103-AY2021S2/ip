@@ -14,6 +14,11 @@ public class DeadlineHandler implements CommandHandler {
     public DeadlineHandler(String deadlineDes, LocalDateTime dateTimeBy) {
         toAdd = new Deadline(deadlineDes, dateTimeBy);
     }
+
+    public Deadline getDeadlineTask() {
+        return toAdd;
+    }
+
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {
         taskList.addTask(toAdd);
@@ -22,5 +27,16 @@ public class DeadlineHandler implements CommandHandler {
                 + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.\n";
         ui.respond(response);
         storage.addTask(toAdd);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof  DeadlineHandler) {
+            return toAdd.equals(((DeadlineHandler) obj).getDeadlineTask());
+        } else {
+            return false;
+        }
     }
 }

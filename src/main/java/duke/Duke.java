@@ -40,7 +40,7 @@ public class Duke {
                 CommandHandler commandHandler = Parser.parseFromInput(ui.readCommand());
                 checkDeleteDonePossible(commandHandler, tasks);
                 commandHandler.execute(ui, storage, tasks);
-                if (commandHandler instanceof EndHandler) {
+                if (commandHandler instanceof ByeHandler) {
                     exit = true;
                 }
             } catch (DukeException e) {
@@ -51,7 +51,7 @@ public class Duke {
         ui.close();
     }
 
-    private void checkDeleteDonePossible(CommandHandler commandHandler, TaskList taskList)
+    public static void checkDeleteDonePossible(CommandHandler commandHandler, TaskList taskList)
             throws DukeInvalidDesException {
         if (commandHandler instanceof DoneHandler) {
             if (((DoneHandler) commandHandler).getTaskNum() > taskList.getNumOfTasks()) {

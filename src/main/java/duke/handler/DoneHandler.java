@@ -27,4 +27,15 @@ public class DoneHandler implements CommandHandler{
         ui.respond(response);
         storage.markDoneInStorage(updatedTask, taskNum);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof  DoneHandler) {
+            return taskNum == ((DoneHandler)obj).getTaskNum();
+        } else {
+            return false;
+        }
+    }
 }

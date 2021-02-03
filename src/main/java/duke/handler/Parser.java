@@ -47,7 +47,7 @@ public class Parser {
         try {
             switch(query) {
             case BYE:
-                commandHandler = new EndHandler();
+                commandHandler = new ByeHandler();
                 break;
             case TODO:
                 String todoDes = userInput.split(" ", 2)[1];

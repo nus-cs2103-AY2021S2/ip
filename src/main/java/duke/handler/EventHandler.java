@@ -14,6 +14,10 @@ public class EventHandler implements CommandHandler {
     public EventHandler(String eventDes, LocalDateTime dateTimeAt) {
         toAdd = new Event(eventDes, dateTimeAt);
     }
+
+    public Event getEventTask() {
+        return toAdd;
+    }
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {
         taskList.addTask(toAdd);
@@ -22,5 +26,16 @@ public class EventHandler implements CommandHandler {
                 + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.\n";
         ui.respond(response);
         storage.addTask(toAdd);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof  EventHandler) {
+            return toAdd.equals(((EventHandler) obj).getEventTask());
+        } else {
+            return false;
+        }
     }
 }

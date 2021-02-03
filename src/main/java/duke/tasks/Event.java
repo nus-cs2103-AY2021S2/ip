@@ -16,6 +16,19 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof  Event) {
+            Event eTask = (Event) obj;
+            return this.description.equals(eTask.getDescription())
+                    && this.at.equals(eTask.getAt());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString()
                 + "(at:" + at.format(super.DATE_TIME_FORMATTER) + ")";

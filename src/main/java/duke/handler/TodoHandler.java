@@ -13,6 +13,11 @@ public class TodoHandler implements CommandHandler {
     public TodoHandler(String todoDes) {
         toAdd = new Todo(todoDes);
     }
+
+    public Todo getTodoTask() {
+        return toAdd;
+    }
+
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {
         taskList.addTask(toAdd);
@@ -22,4 +27,16 @@ public class TodoHandler implements CommandHandler {
         ui.respond(response);
         storage.addTask(toAdd);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof  TodoHandler) {
+            return toAdd.equals(((TodoHandler) obj).getTodoTask());
+        } else {
+            return false;
+        }
+    }
 }
+
