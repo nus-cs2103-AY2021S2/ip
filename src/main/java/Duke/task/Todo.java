@@ -7,7 +7,7 @@ package duke.task;
  * @author Oh Jun Ming
  * @version 1.0
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Returns a Todo.
      *

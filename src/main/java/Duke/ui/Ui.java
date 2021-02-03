@@ -1,12 +1,14 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.common.Response;
 import duke.exception.EmptyDescription;
 import duke.exception.InvalidTypeOfTask;
 import duke.parser.Parser;
 import duke.task.TaskList;
 
-import java.util.Scanner;
+
 
 public class Ui {
     private Boolean shouldExit = false;
@@ -14,6 +16,16 @@ public class Ui {
     public Ui() {
 
     }
+
+    /**
+     * Reads command user input.
+     *
+     * @param taskList1
+     * @param s
+     * @return TaskList
+     * @throws InvalidTypeOfTask
+     * @throws EmptyDescription
+     */
     public TaskList readCommand(TaskList taskList1, Scanner s) throws InvalidTypeOfTask, EmptyDescription {
         String input = s.nextLine();
         Parser p = new Parser();
@@ -66,7 +78,7 @@ public class Ui {
      * Echo user input.
      */
     public void echo(String msg) {
-        enclose(msg+ "\n");
+        enclose(msg + "\n");
     }
 
     /**

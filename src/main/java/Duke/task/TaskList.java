@@ -1,13 +1,13 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.common.Response;
 import duke.exception.EmptyDescription;
 import duke.parser.ListParser;
 import duke.parser.Parser;
 
-import java.security.spec.RSAOtherPrimeInfo;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -20,6 +20,11 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Adds task from storage to tasklist.
+     *
+     * @param p
+     */
     public void populate(ListParser p) {
         String typeOfTask = p.getTypeOfTask();
         Boolean isDone = p.getIsDone();
@@ -36,9 +41,17 @@ public class TaskList {
         case "E":
             tasks.add(new Event(description, isDone, time));
             break;
+        default:
+            System.out.println("wrong typeOfTask");
         }
     }
 
+    /**
+     * Adds task to tasklist.
+     *
+     * @param p
+     * @throws EmptyDescription
+     */
     public void add(Parser p) throws EmptyDescription {
         String typeOfTask = p.getTypeOfTask();
         String description = p.getDescription();
@@ -60,6 +73,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Removes task from taskList.
+     *
+     * @param p
+     */
     public void delete(Parser p) {
         int i = Integer.parseInt(p.getDescription()) - 1;
         Task task = tasks.get(i);
@@ -69,6 +87,12 @@ public class TaskList {
         enclose(instructions);
     }
 
+    /**
+     * Marks task as DONE.
+     *
+     * @param p
+     * @throws EmptyDescription
+     */
     public void markAsDone(Parser p) throws EmptyDescription {
         if (p.getDescription().equals("")) {
             throw new EmptyDescription(p.getTypeOfTask());
@@ -78,6 +102,10 @@ public class TaskList {
         enclose(Response.DONE.toString() + tasks.get(i) + "\n");
     }
 
+    /**
+     * Locates tasks matched with keyword.
+     * @param parser
+     */
     public void find(Parser parser) {
         String keyword = parser.getDescription();
         System.out.println(keyword);
@@ -92,9 +120,12 @@ public class TaskList {
         searchList.list();
     }
 
+    /**
+     * Prints list.
+     */
     public void list() {
         String msg = "";
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             msg += (i + 1) + "." + tasks.get(i) + "\n";
         }
         enclose(Response.LIST.toString() + msg);
@@ -109,7 +140,7 @@ public class TaskList {
         System.out.println("---------------------------------------\n");
     }
 
-    public  String status() {
+    public String status() {
         return "Now you have " + tasks.size() + " tasks in the list.\n";
     }
 }

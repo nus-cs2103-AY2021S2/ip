@@ -6,8 +6,7 @@ package duke.exception;
  * @author Oh Jun Ming
  * @version 1.0
  */
-public class InvalidTypeOfTask extends DukeException{
-
+public class InvalidTypeOfTask extends DukeException {
     /**
      * Returns String that produces error exception message to user.
      *

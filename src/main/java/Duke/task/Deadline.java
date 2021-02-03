@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author Oh Jun Ming
  * @version 1.0
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
@@ -47,6 +47,11 @@ public class Deadline extends Task{
         return new Deadline(this.msg, true, this.by);
     }
 
+    /**
+     * Encodes Task to string format for storage.
+     *
+     * @return String
+     */
     public String encode() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return "D" + "|" + super.encode() + "|" + by.format(formatter);
