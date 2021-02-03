@@ -22,8 +22,8 @@ public class Ui {
     /**
      * Print Bye at the end of the program.
      */
-    public void printBye() {
-        System.out.println(bye);
+    public String getBye() {
+        return bye;
     }
 
     /**
@@ -31,26 +31,24 @@ public class Ui {
      * @param i current ordering number in the TaskList
      *        task Task to print
      */
-    public void printList(int i, Task task) {
-        System.out.print(i+1);
-        System.out.print(".");
-        System.out.println(task);
+    public String getList(int i, Task task) {
+        String number = String.valueOf(i+1);
+        return number + "." + task;
     }
 
     /**
      * Print whenever done command is called successfully.
      * @param task Task done
      */
-    public void printDoneSuccess(Task task) {
-        System.out.println("Nice I have marked this task as done!");
-        System.out.println(task);
+    public String getDoneSuccess(Task task) {
+        return "Nice I have marked this task as done!\n" + task;
     }
 
     /**
      * Print whenever there is exception when done command is called.
      */
-    public void printDoneFail() {
-        System.out.println(doneFail);
+    public String getDoneFail() {
+        return doneFail;
     }
 
     /**
@@ -58,42 +56,43 @@ public class Ui {
      * @param task Task to delete
      *        size The size of the TaskList after removal
      */
-    public void printDeleteSuccess(Task task, int size) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String getDeleteSuccess(Task task, int size) {
+        return "Noted. I've removed this task: \n" + task + "\n" +
+                "Now you have " + size + " tasks in the list.";
     }
 
     /**
      * Print whenever there is exception when delete command is called.
      */
-    public void printDeleteFail() {
-        System.out.println(deleteFail);
+    public String getDeleteFail() {
+        return deleteFail;
     }
 
     /**
      * Print whenever find command is called successfully.
      * @param listFound List<Task> found that we would like to print
      */
-    public void printFindSuccess(List<Task> listFound) {
+    public String getFindSuccess(List<Task> listFound) {
+        String result = "";
         for (int i=0; i < listFound.size(); i++) {
-            printList(i, listFound.get(i));
+            result += getList(i, listFound.get(i));
         }
+        return result;
     }
 
     /**
      * Print whenever there is exception when find command is called.
      */
-    public void printFindFail(NoMeaningException e) {
-        System.out.println(e.getMessage());
+    public String getFindFail(NoMeaningException e) {
+        return e.getMessage();
     }
 
     /**
      * Print whenever there is exception when task typed command is called.
      * @param e NoMeaningException that arises whenever task command failed.
      */
-    public void printTaskFail(NoMeaningException e) {
-        System.out.println(e.getMessage());
+    public String getTaskFail(NoMeaningException e) {
+        return e.getMessage();
     }
 
     /**
@@ -101,9 +100,20 @@ public class Ui {
      * @param task Task to print
      *        size The current size of TaskList
      */
-    public void printTaskFinally(Task task, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String getTaskFinally(Task task, int size) {
+        return "Got it. I've added this task:\n" + task + "\n" +
+        "Now you have " + size + " tasks in the list.";
+    }
+
+    public String readCommand() {
+        return this.scan.nextLine();
+    }
+
+    public void displayMessage(String message) {
+        System.out.println(message);
+    }
+
+    public boolean hasNextLine() {
+        return this.scan.hasNext();
     }
 }
