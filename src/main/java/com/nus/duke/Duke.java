@@ -1,60 +1,19 @@
 package com.nus.duke;
 
-import com.nus.duke.command.Command;
-import com.nus.duke.command.ExitCommand;
-import com.nus.duke.common.DukeStorageException;
-import com.nus.duke.data.TaskList;
-import com.nus.duke.parser.CommandParser;
-import com.nus.duke.storage.TaskListStorage;
+import com.nus.duke.common.Logic;
+import com.nus.duke.ui.GraphicalUi;
 import com.nus.duke.ui.TextUi;
 
-public class Duke {
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-    private TextUi ui;
-    private TaskList taskList;
-    private CommandParser parser;
-    private TaskListStorage storage;
+public class Duke extends Application {
 
-    public static void main(String[] args) {
-        new Duke().run();
-    }
+    private TextUi textUi;
+    private GraphicalUi graphicalUi;
 
-    public void run() {
-        this.init();
-        this.ui.showWelcomeMessage();
-        this.mainLoop();
-        this.exit();
-    }
-
-    private void init() {
-        this.ui = new TextUi();
-        this.storage = new TaskListStorage();
-        this.parser = new CommandParser();
-        try {
-            this.taskList = this.storage.load();
-        } catch (DukeStorageException e) {
-            this.ui.printToUser(e.getLocalizedMessage());
-            this.taskList = new TaskList();
-        }
-    }
-
-    private void mainLoop() {
-        Command command;
-        do {
-            String userInput = this.ui.readUserCommand();
-            command = this.parser.parseCommand(userInput);
-            command.setContext(this.taskList);
-            String result = command.execute();
-            try {
-                this.storage.save(this.taskList);
-            } catch (DukeStorageException e) {
-                this.ui.printToUser(e.getLocalizedMessage());
-            }
-            this.ui.printToUser(result);
-        } while (!(command instanceof ExitCommand));
-    }
-
-    private void exit() {
-        this.ui.printToUser("Bye. See you again.");
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        new GraphicalUi(primaryStage, new Logic());
     }
 }
