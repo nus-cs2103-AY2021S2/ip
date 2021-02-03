@@ -16,7 +16,20 @@ public class Storage {
     private final Path filePath;
 
     public Storage() {
-        filePath = Paths.get(DEFAULT_PATH);
+        this.filePath = Paths.get(DEFAULT_PATH);
+        File file = new File(DEFAULT_PATH);
+        if (Files.notExists(this.filePath)) {
+            try {
+                System.out.println("created new file");
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Storage(String filePathStr) {
+        this.filePath = Paths.get(filePathStr);
         File file = new File(DEFAULT_PATH);
         if (Files.notExists(this.filePath)) {
             try {
