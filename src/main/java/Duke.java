@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+
 /**
  * Contains main driver class to run the Duke program
  */
@@ -8,12 +11,23 @@ public class Duke {
     Storage storage;
     TaskList tasks;
     Ui ui;
-
+    public static String respond;
 
     public Duke(String filePath) {
         ui = new Ui();
         ui.greet();
         storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.check());
+        } catch (IOException | DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Duke() {
+        ui = new Ui();
+        ui.greet();
+        storage = new Storage("data/duke.txt");
         try {
             tasks = new TaskList(storage.check());
         } catch (IOException | DukeException e) {
@@ -52,5 +66,29 @@ public class Duke {
      */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("data/duke.txt").run();
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     *
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Node getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) throws IOException, DukeException {
+        Parser.parse(input);
+        return respond;
     }
 }

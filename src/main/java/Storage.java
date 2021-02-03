@@ -35,16 +35,19 @@ public class Storage {
             System.out.println("     Welcome! New user :)");
             System.out.println("     What can I do for you?");
             System.out.println("    ____________________________________________________________");
+            Duke.respond = "Welcome! New user :)\n" + "What can I do for you?";
         } else {
             scanFile();
             if (TaskList.tasks.size() == 0) {
                 System.out.println("     You have no saved task!");
                 System.out.println("     What can I do for you?");
                 System.out.println("    ____________________________________________________________");
+                Duke.respond = "You have no saved task!\n" + "What can I do for you?";
             } else {
                 System.out.println("     You have " + TaskList.tasks.size() + " saved tasks!");
                 System.out.println("     What can I do for you?");
                 System.out.println("    ____________________________________________________________");
+                Duke.respond = "You have " + TaskList.tasks.size() + " saved tasks!\n" + "What can I do for you?";
             }
         }
         return TaskList.tasks;
