@@ -86,29 +86,35 @@ public class TaskList {
     /**
      * Prints all the tasks in the task list matching the search keyword.
      */
-    public void findTasks(String keyword) {
+    public String findTasks(String keyword) {
+        String response = "";
         if (data.size() > 0){
             for (int i = 1; i <= data.size(); i++) {
                 Task t = data.get(i - 1);
                 if (t.name.contains(keyword)) {
-                    System.out.println("   " + i + ": " + t);
+                    response += "   " + i + ": " + t + "\n";
                 }
             }
         } else {
-            System.out.println("   Looks like you haven't added any tasks.");
+            response = "   Looks like you haven't added any tasks.";
         }
+
+        return response;
     }
 
     /**
      * Prints all the tasks in the task list.
      */
-    public void showTasks() {
+    public String showTasks() {
+        String response = "";
         if (data.size() > 0) {
             for (int i = 1; i <= data.size(); i++) {
-                System.out.println("   " + i + ": " + data.get(i - 1));
+                response += "   " + i + ": " + data.get(i - 1) + "\n";
             }
         } else {
-            System.out.println("   Looks like you haven't added any tasks.");
+            response = "   Looks like you haven't added any tasks.";
         }
+
+        return response;
     }
 }

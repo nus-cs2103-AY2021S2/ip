@@ -25,22 +25,22 @@ public class Ui {
      *
      * @param message The message to echo
      */
-    public void echo(String message) {
-        System.out.println(name + ": " + message);
+    public String echo(String message) {
+        return name + ": " + message;
     }
 
     /**
      * Greets by echoing the greeting message.
      */
-    public void greeting() {
-        this.echo("Hi, I am " + name + "! How can I help you?");
+    public String greeting() {
+        return this.echo("Hi, I am " + name + "! How can I help you?");
     }
 
     /**
      * Says goodbye by echoing the closing message.
      */
-    public void closing() {
-        this.echo("Goodbye!");
+    public String closing() {
+        return this.echo("Goodbye!");
     }
 
     /**
