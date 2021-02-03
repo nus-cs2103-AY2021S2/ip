@@ -4,14 +4,11 @@ import java.util.Scanner;
 public class Seashell {
 
     private ArrayList<Task> taskList;
+    private final SaveHandler saveHandler;
 
     public Seashell() {
-        this.taskList = new ArrayList<>();
-    }
-
-    public Seashell(String saveFileText) {
-        this.taskList = new ArrayList<>();
-        // add items from saveFile
+        this.saveHandler = new SaveHandler();
+        this.taskList = this.saveHandler.loadSave();
     }
 
     public void start() {
@@ -23,7 +20,7 @@ public class Seashell {
                 if (command.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
-                } else if (command.equals("list")) {
+                } else if (command.stripTrailing().equals("list")) {
                     listTasks(taskList);
                 } else if (command.startsWith("done ")) {
                     done(command, taskList);
@@ -65,6 +62,7 @@ public class Seashell {
             taskList.set(taskNum - 1, updated);
             System.out.println("Nice! I've marked this task as done: \n" + updated);
         }
+        this.saveHandler.updateSaveFile(this.taskList);
     }
 
     private void delete(String command, ArrayList<Task> taskList) throws SeashellException {
@@ -77,6 +75,7 @@ public class Seashell {
             System.out.println("Noted. I have removed " + toRemove);
             System.out.println("You now have " + taskList.size() + " items in the task list");
         }
+        this.saveHandler.updateSaveFile(this.taskList);
     }
 
     private void createTodo(String command, ArrayList<Task> taskList) throws SeashellException {
@@ -88,6 +87,7 @@ public class Seashell {
             taskList.add(newTask);
             System.out.println("Added " + newTask + " to the task list!");
             System.out.println("You now have " + taskList.size() + " items in the task list");
+            this.saveHandler.addTaskToSaveFile(newTask);
         }
     }
 
@@ -104,6 +104,7 @@ public class Seashell {
             taskList.add(newTask);
             System.out.println("Added " + newTask + " to the task list!");
             System.out.println("You now have " + taskList.size() + " items in the task list");
+            this.saveHandler.addTaskToSaveFile(newTask);
         }
     }
 
@@ -120,6 +121,7 @@ public class Seashell {
             taskList.add(newTask);
             System.out.println("Added " + newTask + " to the task list!");
             System.out.println("You now have " + taskList.size() + " items in the task list");
+            this.saveHandler.addTaskToSaveFile(newTask);
         }
     }
 }

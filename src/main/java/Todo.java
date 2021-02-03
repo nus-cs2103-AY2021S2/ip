@@ -5,7 +5,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public Task setDone() {
+    public Todo setDone() {
         Todo doneTask = new Todo(this.name);
         doneTask.isDone = true;
         return doneTask;

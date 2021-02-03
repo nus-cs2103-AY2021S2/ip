@@ -8,7 +8,7 @@ public class Event extends Task {
     }
 
     @Override
-    public Task setDone() {
+    public Event setDone() {
         Event doneTask = new Event(this.name, this.at);
         doneTask.isDone = true;
         return doneTask;
@@ -16,7 +16,7 @@ public class Event extends Task {
 
     @Override
     public String getSaveText() {
-        return "E | " + super.getSaveText();
+        return "E | " + super.getSaveText() + " /at " + this.at;
     }
 
     @Override

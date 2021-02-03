@@ -16,7 +16,7 @@ public class Task {
 
     public String getSaveText() {
         StringBuilder sb = new StringBuilder();
-        if (isDone) {
+        if (this.isDone) {
             sb.append("1 | ");
         } else {
             sb.append("0 | ");
