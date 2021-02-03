@@ -45,9 +45,13 @@ public abstract class Task {
         return description;
     }
 
+    public void finishTask() {
+        isDone = true;
+    }
+
     public abstract String saveTask();
 
-    public abstract Task finishTask();
+
 
     @Override
     public String toString() {

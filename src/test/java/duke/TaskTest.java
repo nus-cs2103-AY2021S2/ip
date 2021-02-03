@@ -20,7 +20,7 @@ public class TaskTest {
     @Test
     public void testFinishTask() {
         Task t = new ToDo("read book");
-        t = t.finishTask();
+        t.finishTask();
         assertEquals("X", t.getStatusIcon());
     }
 }

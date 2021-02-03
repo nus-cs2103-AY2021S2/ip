@@ -18,11 +18,6 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public Deadline(String description, LocalDateTime deadline, boolean isDone) {
-        super(description, true);
-        this.deadline = deadline;
-    }
-
     /**
      * Static method to create a Deadline task.
      *
@@ -46,16 +41,6 @@ public class Deadline extends Task {
                 throw new DukeWrongFormatException("deadline");
             }
         }
-    }
-
-    /**
-     * Changes the task state to be finished.
-     *
-     * @return new finished Deadline task.
-     */
-    @Override
-    public Deadline finishTask() {
-        return new Deadline(description, deadline, true);
     }
 
     /**

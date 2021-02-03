@@ -7,17 +7,17 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Storage {
-    private final static String PATHNAME = "C:/users/chian/Desktop/CS2103/ip/data/";
-    private final static String FILENAME = "data.txt";
+    private final String PATH_NAME = "C:/users/chian/Desktop/CS2103/ip/data/";
+    private final String FILE_NAME = "data.txt";
 
     /**
      * Writes file with tasks on list and saves.
      *
      * @param tasks string format of all tasks on list.
      */
-    public static void save(String tasks) {
+    public void save(String tasks) {
         try {
-            FileWriter fw = new FileWriter(PATHNAME + FILENAME);
+            FileWriter fw = new FileWriter(PATH_NAME + FILE_NAME);
             fw.write(tasks);
             fw.close();
         } catch (IOException e) {
@@ -30,9 +30,9 @@ public class Storage {
      *
      * @param tl task list to contain stored tasks.
      */
-    public static void load(TaskList tl) {
+    public void load(TaskList tl) {
         try {
-            File f = new File(PATHNAME + FILENAME);
+            File f = new File(PATH_NAME + FILE_NAME);
             f.createNewFile();
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
@@ -58,7 +58,7 @@ public class Storage {
                 }
                 if (t != null) {
                     if (taskArray[1].equals("X")) {
-                        t = t.finishTask();
+                        t.finishTask();
                     }
                     tl.add(t);
                 }

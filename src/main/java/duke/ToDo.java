@@ -1,13 +1,12 @@
 package duke;
 
 public class ToDo extends Task {
-
+    /**
+     * Constructor of to-do task.
+     * @param description Name of task.
+     */
     public ToDo(String description) {
         super(description);
-    }
-
-    public ToDo(String description, boolean done) {
-        super(description, done);
     }
 
     /**
@@ -23,16 +22,6 @@ public class ToDo extends Task {
         } else {
             return new ToDo(taskInfo);
         }
-    }
-
-    /**
-     * Changes the task state to be finished.
-     *
-     * @return new finished to-do task.
-     */
-    @Override
-    public ToDo finishTask() {
-        return new ToDo(description, true);
     }
 
     /**

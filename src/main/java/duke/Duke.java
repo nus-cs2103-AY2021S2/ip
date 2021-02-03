@@ -21,7 +21,7 @@ public class Duke {
      */
     public void run() {
         ui.printGreeting();
-        Storage.load(tl);
+        storage.load(tl);
         String input;
         input = ui.readLine();
         while (!input.equals("bye")) {
