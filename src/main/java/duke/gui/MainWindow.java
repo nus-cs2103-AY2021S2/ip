@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * A method that sets a delay before exiting from the application.
+     * Sets a delay before exiting from the application.
      * A 1.5 second delay is set to allow the user to view the farewell message by Duke.
      */
     public void shutdown() {

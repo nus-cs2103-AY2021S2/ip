@@ -19,7 +19,7 @@ public abstract class Command {
     public abstract String execute(TaskList tasks, MessageFormatter messageFormatter, TaskStorage storage);
 
     /**
-     * Method that returns whether the user has requested to exit the application.
+     * Returns whether the user has requested to exit the application.
      *
      * @return false for all commands except the ExitCommand, which overrides this method.
      */

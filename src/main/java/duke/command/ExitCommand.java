@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Method that returns whether the user has requested to exit the application.
+     * Returns whether the user has requested to exit the application.
      *
      * @return true, as this is the Exit Command.
      */
