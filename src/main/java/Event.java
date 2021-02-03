@@ -9,6 +9,7 @@ public class Event extends Task {
 
     /**
      * Creates a new Event with the description and time of event.
+     *
      * @param name Description of Event.
      * @param time Time of event.
      */

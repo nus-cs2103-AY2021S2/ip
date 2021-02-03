@@ -9,6 +9,7 @@ public class DateValidation {
 
     /**
      * Checks if the input is in the correct format of "yyyy-mm-dd".
+     *
      * @param date Input to be checked.
      * @return A LocalDate object created from the input.
      * @throws DukeException On invalid input. Input format is wrong.
@@ -25,6 +26,7 @@ public class DateValidation {
 
     /**
      * Creates a LocalDate object from a string.
+     *
      * @param date String that is used to create a LocalDate object.
      * @return A LocalDate object created.
      */

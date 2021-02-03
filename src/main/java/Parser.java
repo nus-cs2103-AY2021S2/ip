@@ -16,6 +16,7 @@ public class Parser {
 
     /**
      * Creates a new instance of a Parser to make sense of user command.
+     *
      * @param storage Storage of tasks on hard disk.
      * @param tasks List of user's tasks.
      * @param ui Ui for user interaction.
@@ -124,6 +125,7 @@ public class Parser {
     /**
      * Main method to make sense of the user command and to determine
      * which command it is.
+     *
      * @param command User's command input.
      */
     public String handleCommand(String command) {
