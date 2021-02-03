@@ -9,13 +9,6 @@ public class EventTask extends Task {
     /** Time of event **/
     private String time;
 
-//    public EventTask(String description, boolean isDone, String at) {
-//        super(description);
-//        super.isDone = false;
-//        this.at = at;
-//        this.atDate = null;
-//    }
-
     /**
      * Constructs an EventTask object.
      * @param description Descriptions of the event
@@ -23,7 +16,8 @@ public class EventTask extends Task {
      * @param atDate Date of event
      * @param time Time of event
      */
-    public EventTask(String description, boolean isDone, LocalDate atDate, String time) {
+    public EventTask(String description, boolean isDone,
+                     LocalDate atDate, String time) {
         super(description);
         super.isDone = isDone;
         this.atDate = atDate;
@@ -39,7 +33,9 @@ public class EventTask extends Task {
     public String toString() {
         if (this.atDate != null) {
             return "[E] " + super.toString() + " (by: "
-                    + this.atDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + ", time: " + time + ")";
+                    + this.atDate.format(
+                            DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+                    + ", time: " + time + ")";
         }
         //error prone line below
         return "[E] " + super.toString() + " (by: " + this.atDate + ")";

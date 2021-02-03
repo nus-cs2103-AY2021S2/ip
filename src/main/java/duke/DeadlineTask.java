@@ -28,6 +28,7 @@ public class DeadlineTask extends Task {
         //error prone line below
         return "[D] " + super.toString() + " (by: " + this.byDate + " time: " + time + ")";
     }
+
     @Override
     public String getTaskDetails() {
         String divider = " | ";
