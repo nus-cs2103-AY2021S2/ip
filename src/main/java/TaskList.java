@@ -71,10 +71,7 @@ public class TaskList {
     public void addTask(Task t) {
         taskArrayList.add(t);
 
-        String[] messages = {
-                "Success. I've added this task:",
-                Ui.EXTRA_INDENT + t
-        };
+        String[] messages = {"Success. I've added this task:", Ui.EXTRA_INDENT + t};
 
         Ui.print(messages);
     }
@@ -89,8 +86,12 @@ public class TaskList {
             throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskArrayList.size()));
         }
 
-        Ui.print(new String[]{"Got you. I've deleted this task:",
-                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)});
+        Ui.print(
+            new String[]{
+                "Got you. I've deleted this task:",
+                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)
+            }
+        );
 
         taskArrayList.remove(i - 1);
     }
@@ -108,8 +109,13 @@ public class TaskList {
 
         taskArrayList.get(i - 1).markAsDone();
 
-        Ui.print(new String[]{"Good work! I've marked this task done:",
-                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)});
+        // todo checkstyle doesn't allow 8 space formatting
+        Ui.print(
+            new String[]{
+                "Good work! I've marked this task done:",
+                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)
+            }
+        );
     }
 
     /**

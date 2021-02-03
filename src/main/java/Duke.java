@@ -6,6 +6,34 @@ public class Duke {
     private static TaskList taskList;
 
     /**
+     * The driver of the duke object
+     * @param sc Scanner passed in from main function to read user input
+     */
+    public void runDuke(Scanner sc) {
+        try {
+            taskList = TaskList.setupTaskList();
+        } catch (IOException e) {
+            Ui.print(new String[]{"Something went wrong in loading the task file and parsing",
+                    e.getMessage()});
+        }
+
+        Ui.intro();
+
+        // variables to reuse
+        String userInput;
+        Parser parser = new Parser(taskList);
+        boolean hasUserTypedBye = false;
+
+        while (hasUserTypedBye) {
+            userInput = sc.nextLine().trim();
+            hasUserTypedBye = !parser.parseInputLine(userInput);
+            // todo find a new name that follows boolean conventions OR not the return values of parseInputLine
+        }
+
+        sc.close();
+    }
+
+    /**
      * Entry point of the duke programme
      * @param args Irrelevant argument
      */
