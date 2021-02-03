@@ -14,6 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+/**
+ * Controller for dialog box containing an avatar image as well as dialog text.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Text dialog;
@@ -44,10 +47,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates new user dialog box with dialog text on the left and avatar image on the right.
+     * @param text User dialog text.
+     * @param img User avatar image.
+     * @return New user dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates new bot dialog box with dialog text on the right and avatar image on the left.
+     * @param text Bot dialog text.
+     * @param img Bot avatar image.
+     * @return New bot dialog box.
+     */
     public static DialogBox getBotDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

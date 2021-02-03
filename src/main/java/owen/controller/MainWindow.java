@@ -13,6 +13,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import owen.Chatbot;
 
+/**
+ * Controller for main GUI interface window.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -28,6 +31,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Cat.jpg"));
     private Image botImage = new Image(this.getClass().getResourceAsStream("/images/Owl.jpg"));
 
+    /**
+     * Creates controller for main GUI interface window.
+     * @param bot Chatbot that GUI acts as an interface for.
+     */
     public MainWindow(Chatbot bot) {
         this.bot = bot;
 
@@ -41,6 +48,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Initializes main GUI interface window layout and get hello message from chatbot.
+     */
     @FXML
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());

@@ -5,6 +5,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import owen.controller.MainWindow;
 
+/**
+ * GUI interface for interacting with Owen chatbot.
+ */
 public class Gui extends Application {
     private Chatbot bot;
 
