@@ -14,7 +14,7 @@ class DeadlineTest {
      */
     @Test
     void testToString() {
-        assertEquals("[D][ ] read book (by: 2019-01-02 12:45)"
-                , new Deadline("read book", LocalDate.parse("2019-01-02"), LocalTime.parse("12:45")).toString());
+        assertEquals("[D][ ] read book (by: 2019-01-02 12:45)",
+                new Deadline("read book", LocalDate.parse("2019-01-02"), LocalTime.parse("12:45")).toString());
     }
 }
