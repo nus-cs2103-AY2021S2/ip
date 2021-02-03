@@ -6,7 +6,7 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
-    private static String[] command = {"list", "bye", "todo", "deadline", "event", "done", "delete"};
+    private static String[] command = {"list", "bye", "todo", "deadline", "event", "done", "delete", "find"};
 
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
@@ -30,6 +30,8 @@ public class Parser {
                 return new DoneCmd(cmd);
             case "delete":
                 return new DeleteCmd(cmd);
+            case "find":
+                return new FindCmd(cmd);
             case "bye":
                 return new ByeCmd(cmd);
             default:
