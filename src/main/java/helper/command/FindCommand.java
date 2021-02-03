@@ -24,8 +24,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> cloneList = new ArrayList<>(tasks.getTaskList());
-        ui.dukePrint(filterTasks(cloneList));
+        return ui.dukePrint(filterTasks(cloneList));
     }
 }

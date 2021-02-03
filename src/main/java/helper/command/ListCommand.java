@@ -18,11 +18,11 @@ public class ListCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            ui.dukePrint(tasks.getTaskList());
+            return ui.dukePrint(tasks.getTaskList());
         } catch (Exception e) {
-            ui.dukePrint("Nothing to list...");
+            return ui.dukePrint("Nothing to list...");
         }
     }
 }

@@ -21,16 +21,19 @@ public class DeleteCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String stringToReturn = "";
         try {
             int index = Integer.parseInt(deleteString) - 1;
-            ui.dukePrint("OK! We removed task: " + deleteString + ". " + tasks.get(index));
+            stringToReturn = ("OK! We removed task: " + deleteString + ". " + tasks.get(index));
             tasks.remove(index);
             storage.saveFile(tasks);
+
         } catch (Exception e) {
-            ui.dukePrint("Please use a good index. Our list starts at 1..." +
-                    " and ends at " + (tasks.size() + 1));
+            stringToReturn = ("Please use a good index. Our list starts at 1..."
+                    + " and ends at " + (tasks.size() + 1));
         }
+        return stringToReturn;
     }
 
 

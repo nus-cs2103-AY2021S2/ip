@@ -3,6 +3,7 @@ package helper.command;
 import helper.Storage;
 import helper.TaskList;
 import helper.Ui;
+import javafx.application.Platform;
 import task.Task;
 
 /**
@@ -15,9 +16,10 @@ public class ExitCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         super.isExit = true;
-        ui.dukePrint("Bye!!!");
+        String stringToReturn = ("Bye!!!");
+        return stringToReturn;
     }
 
 }

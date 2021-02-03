@@ -1,6 +1,7 @@
 package gui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -18,17 +21,19 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
-                scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String greeting = "Hello! I'm Duke.\n" + "Please enter something below.";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -48,5 +53,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        // do what you have to do
+        if (duke.getIsExit()) {
+            Platform.exit();
+        }
     }
 }
