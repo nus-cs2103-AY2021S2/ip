@@ -23,11 +23,19 @@ public class Message {
     public static final String LINE = INDENT
             + "__________________________________________________"
             + "______________" + NEWLINE;
-    public static final String START_MSG =
+    private static final String START_MSG =
             "Hello from" + NEWLINE + LOGO + LINE + INDENT + "Hello! I'm Duke" + NEWLINE + INDENT
                     + "What can I do for you?" + NEWLINE + LINE;
-    public static final String BYE_MSG =
-            LINE + INDENT + " Bye. Hope to see you again soon!" + NEWLINE + LINE;
+    private static final String BYE_MSG =
+            INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
+
+    public static String getStartMsg() {
+        return START_MSG;
+    }
+
+    public static String getByeMsg() {
+        return BYE_MSG;
+    }
 
     public static String getErrorMsg(DukeException e) {
         return INDENT + e;

@@ -33,7 +33,7 @@ public class Controller {
      * Starts the program and accepting user inputs.
      */
     public String run(String input) {
-        ui.printStartMsg();
+        //ui.printStartMsg();
         //String input = ui.getUserCommand();
 
         /*
@@ -45,7 +45,7 @@ public class Controller {
         }
          */
         if (input.equals("bye")) {
-            return input;
+            return Message.getByeMsg();
         }
 
         return handleInput(input);
