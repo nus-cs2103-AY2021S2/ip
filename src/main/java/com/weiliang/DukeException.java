@@ -1,4 +1,4 @@
-package weiliang.bot;
+package com.weiliang;
 
 /**
  * Main wrapper class for Duke exceptions
@@ -10,7 +10,7 @@ public class DukeException extends Exception {
     /**
      * Constructor for DukeException
      * 
-     * @param message the description of exception
+     * @param message the description of the exception
      */
     public DukeException(String message) {
         super(message);

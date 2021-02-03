@@ -1,10 +1,10 @@
-package weiliang.bot.task;
+package com.weiliang.task;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import weiliang.bot.DukeException;
+import com.weiliang.DukeException;
 
 public class TaskList implements Iterable<Task> {
 

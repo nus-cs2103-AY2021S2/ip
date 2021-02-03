@@ -1,4 +1,4 @@
-package weiliang.bot.task;
+package com.weiliang.task;
 
 import org.junit.jupiter.api.Test;
 

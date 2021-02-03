@@ -1,4 +1,4 @@
-package weiliang.bot;
+package com.weiliang.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,10 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import weiliang.bot.task.Deadline;
-import weiliang.bot.task.Event;
-import weiliang.bot.task.Task;
-import weiliang.bot.task.TaskList;
+import com.weiliang.DukeException;
+import com.weiliang.task.Deadline;
+import com.weiliang.task.Event;
+import com.weiliang.task.Task;
+import com.weiliang.task.TaskList;
 
 /**
  * Main text-based storage facility
@@ -82,7 +83,7 @@ public class Storage {
      * Inner method for parsing information
      * 
      * @param content raw string content
-     * @return parsed task
+     * @return the parsed task
      */
     private Task parseTask(String content) {
         // Format -> D | 1 | details | timing
