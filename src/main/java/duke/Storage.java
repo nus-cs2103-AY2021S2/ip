@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +13,7 @@ public class Storage {
 
     }
 
-    public static void saveTaskList() {
+    public static void saveTaskList() throws Exception {
         try {
             File file = new File("src/main/java/duke/duke.txt");
             FileWriter fw = new FileWriter(file);

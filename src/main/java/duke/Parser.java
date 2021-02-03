@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -42,33 +42,6 @@ public class Parser {
         task.done();
         System.out.println("Nice! I've marked this task as done: " + "\n" + task.toString());
     }
-
-    /*public static void saveTaskList() {
-        try {
-            File file = new File("src\\main\\main.java.duke.txt");
-            FileWriter fw = new FileWriter(file);
-            //PrintWriter pw = new PrintWriter(file);
-            for (int i = 0; i < taskList.size(); ++i) {
-                fw.write(taskList.get(i).toString() + "\n");
-            }
-            fw.close();
-            //pw.close();
-        } catch (Exception ex) {
-            System.out.println("error" + ex.getMessage());
-        }
-    }*/
-
-    /*public static void loadTaskList() throws Exception {
-        String line  = null;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\main.java.duke\\main.java.duke.txt"));
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    };*/
 
     public static void read() throws DukeException, Exception{
         Scanner sc = new Scanner(System.in);
