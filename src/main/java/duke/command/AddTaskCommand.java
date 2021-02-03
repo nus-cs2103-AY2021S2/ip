@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -24,10 +26,12 @@ public class AddTaskCommand extends Command {
      * @param storage Storage required for .txt file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList tasks, Ui ui, Storage storage) {
+        ArrayList<String> returnMsg = new ArrayList<>();
         tasks.add(task);
-        ui.speak(task.getAddMessage() + (task.getAddMessage() == null ? "" : " ") + "I've added:");
-        System.out.println(task);
-        ui.speak("You now have " + tasks.size() + " tasks at hand.");
+        returnMsg.add(ui.speak(task.getAddMessage() + (task.getAddMessage() == null ? "" : " ")
+                + "I've added: " + task));
+        returnMsg.add(ui.speak("You now have " + tasks.size() + " tasks at hand."));
+        return returnMsg;
     }
 }

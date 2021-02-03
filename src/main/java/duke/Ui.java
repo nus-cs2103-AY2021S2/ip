@@ -20,8 +20,8 @@ public class Ui {
      * Appends the bot name to the intended message. This results in the message looking similar to speech.
      * @param message Message that bot wants to tell user
      */
-    public void speak(String message) {
-        System.out.println(botName + ": " + message);
+    public String speak(String message) {
+        return (botName + ": " + message);
     }
 
     /**

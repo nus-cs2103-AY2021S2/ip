@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -26,14 +28,15 @@ public class DoneTaskCommand extends Command {
      * @param storage Storage required for .txt file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public ArrayList<String> execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ArrayList<String> returnMsg = new ArrayList<>();
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("The task number does not work, try again?");
         }
         Task doneTask = tasks.find(index);
         doneTask.setDone();
-        ui.speak("Swee! This task is done:");
-        System.out.println(doneTask);
+        returnMsg.add(ui.speak("Swee! This task is done: " + doneTask));
         storage.writeToFile(tasks);
+        return returnMsg;
     }
 }

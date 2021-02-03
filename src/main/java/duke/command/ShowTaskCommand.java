@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import duke.Storage;
@@ -58,16 +59,19 @@ public class ShowTaskCommand extends Command {
      * @param storage Storage required for .txt file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList tasks, Ui ui, Storage storage) {
+        ArrayList<String> returnMsg = new ArrayList<>();
         if (tasks.size() == 0) {
-            ui.speak("You currently have no tasks! Use todo, deadline or event.");
+            returnMsg.add(ui.speak("You currently have no tasks! Use todo, deadline or event."));
         } else if (this.taskType == ShowTaskType.SHOW_TASK_ALL) {
-            ui.speak("Here you go! Your list of items:");
-            System.out.println(tasks.toString());
+            returnMsg.add(ui.speak("Here you go! Your list of items:"));
+            returnMsg.add(tasks.toString());
         } else {
             List<Task> tempTask = tasks.getByDate(date);
-            ui.speak("Here you go! Your list of items:");
-            System.out.println(tempTask.toString());
+            returnMsg.add(ui.speak("Here you go! Your list of items:"));
+            returnMsg.add(tempTask.toString());
         }
+
+        return returnMsg;
     }
 }

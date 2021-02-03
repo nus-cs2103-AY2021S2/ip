@@ -52,7 +52,7 @@ public class Parser {
             Todo todo = new Todo(todoName);
             return new AddTaskCommand(todo);
         case "deadline":
-            String[] deadlineDetails = validateTwoFieldWithDivider("/by",
+            String[] deadlineDetails = validateTwoFieldWithDivider(" /by ",
                         "There\'s no date specified!",
                         "\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
 
@@ -63,7 +63,7 @@ public class Parser {
                 throw new DukeException("\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
             }
         case "event":
-            String[] eventDetails = validateTwoFieldWithDivider("/at",
+            String[] eventDetails = validateTwoFieldWithDivider(" /at ",
                     "There\'s no date specified!",
                     "\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
 
@@ -71,7 +71,7 @@ public class Parser {
                 Event event = new Event(eventDetails[0], LocalDate.parse(eventDetails[1]));
                 return new AddTaskCommand(event);
             } catch (DateTimeParseException dtEx) {
-                throw new DukeException("\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
+                throw new DukeException("Your date/time must be in the yyyy-mm-dd format. Please try again!");
             }
         case "done":
             String doneIndex = validateOneField("There\'s no task index specified!");
