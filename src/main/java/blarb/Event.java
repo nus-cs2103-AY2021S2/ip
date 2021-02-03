@@ -1,7 +1,7 @@
 package blarb;
 
 /**
- * {@code blarb.Event} is a {@code blarb.Task} that has a specific time of occurrence.
+ * {@code Event} is a {@code Task} that has a specific time of occurrence.
  *
  * @see Task
  */

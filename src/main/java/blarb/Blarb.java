@@ -11,6 +11,7 @@ public class Blarb {
     private final String filePath;
     private final Ui ui;
     private final Storage storage;
+    private final Processor processor;
 
     /**
      * Initializes Blarb with a given storage path.
@@ -22,6 +23,7 @@ public class Blarb {
         ui = new Ui();
         storage = new Storage(filePath);
         tasklist = new Tasklist();
+        processor = new Processor();
 
         try {
             tasklist.addAll(storage.load());
@@ -46,9 +48,9 @@ public class Blarb {
     public void run() {
         ui.rollCredits();
         ui.blurt("This is BLARB.\nYou may speak.");
-        boolean active = true;
-        while (active && ui.isAvailable()) {
-            active = execute(ui.read());
+        boolean isActive = true;
+        while (isActive && ui.isAvailable()) {
+            isActive = isActiveAfterExecuting(ui.read());
         }
     }
 
@@ -58,9 +60,9 @@ public class Blarb {
      * @param input The inputted command.
      * @return A boolean value that shows the availability for the next command intake.
      */
-    public boolean execute(String input) {
-        Output output = Processor.execute(input, tasklist, storage);
-        if (!Processor.leave(input)) {
+    public boolean isActiveAfterExecuting(String input) {
+        Output output = processor.execute(input, tasklist, storage);
+        if (!processor.willTerminate(input)) {
             if (output.warn != null) {
                 ui.warn(output.warn);
             }
@@ -78,13 +80,13 @@ public class Blarb {
      * @return Response string.
      */
     public String getResponse(String input) {
-        Output output = Processor.execute(input, tasklist, storage);
+        Output output = processor.execute(input, tasklist, storage);
         if (output.warn == null) {
-            return Processor.execute(input, tasklist, storage).normal;
+            return output.normal;
         }
         return String.format("!!! %s\n%s",
-                Processor.execute(input, tasklist, storage).warn,
-                Processor.execute(input, tasklist, storage).normal);
+                output.warn,
+                output.normal);
     }
 
     /**
@@ -93,8 +95,8 @@ public class Blarb {
      * @param input User input string.
      * @return Response string.
      */
-    public boolean leave(String input) {
-        return Processor.leave(input);
+    public boolean willTerminate(String input) {
+        return processor.willTerminate(input);
     }
 
 }

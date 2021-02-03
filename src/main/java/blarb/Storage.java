@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ class Storage {
     /**
      * Appends a task to the tasklist file.
      *
-     * @param task blarb.Task to be added.
+     * @param task Task to be added.
      * @throws IOException Issues with writing into the file.
      */
     public void file(Task task) throws IOException {
@@ -68,23 +67,25 @@ class Storage {
                 if (Integer.parseInt(tokens[1]) == 1) {
                     task.markAsDone();
                 }
+                list.add(task);
                 break;
             case "D":
                 task = new Deadline(tokens[2], tokens[3]);
                 if (Integer.parseInt(tokens[1]) == 1) {
                     task.markAsDone();
                 }
+                list.add(task);
                 break;
             case "E":
                 task = new Event(tokens[2], tokens[3]);
                 if (Integer.parseInt(tokens[1]) == 1) {
                     task.markAsDone();
                 }
+                list.add(task);
                 break;
             default:
-                throw new InputMismatchException();
+                assert false;
             }
-            list.add(task);
         }
         return list;
     }

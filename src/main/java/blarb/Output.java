@@ -7,8 +7,8 @@ class Output {
     final String normal;
     final String warn;
 
-    Output(String normal, String warn) {
-        this.normal = normal;
-        this.warn = warn;
+    Output(String[] input) {
+        this.normal = input[0];
+        this.warn = input[1];
     }
 }
