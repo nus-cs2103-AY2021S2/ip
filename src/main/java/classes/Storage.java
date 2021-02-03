@@ -14,20 +14,33 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Storage class to deal with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
-    private File f;
+    private File file;
 
+    /**
+     * Constructor method.
+     * @param filePath path to the saved file
+     * @throws IOException if user IO is incorrect
+     */
     public Storage(String filePath) throws IOException {
-        this.f = new File(filePath);
-        if (f.createNewFile()) {
+        this.file = new File(filePath);
+        if (file.createNewFile()) {
             System.out.println("file created!");
         } else {
             System.out.println("file loaded!");
         }
     }
 
+    /**
+     * Method to save Task in saved file, converts Task objects to Strings in file
+     * @param AL ArrayList of Task objects from user input
+     * @throws IOException if user IO is incorrect
+     */
     public void saveTasks(ArrayList<Task> AL) throws IOException {
-        FileWriter fw = new FileWriter(this.f);
+        FileWriter fw = new FileWriter(this.file);
         for (Task temp : AL) {
             if (temp instanceof Deadline) {
                 fw.write(String.format("D | %s | %s | %s",
@@ -43,9 +56,14 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Method to load Tasks from saved file, converts Strings in saved file to Task objects.
+     * @return an ArrayList AL of Task objects
+     * @throws IOException if user IO is incorrect
+     */
     public ArrayList<Task> loadTasks() throws IOException {
         ArrayList<Task> AL = new ArrayList<>();
-        Scanner sc = new Scanner(this.f);
+        Scanner sc = new Scanner(this.file);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
             s = s.trim();

@@ -12,10 +12,21 @@ import java.util.Locale;
 public class DeadlineCmd extends Command {
     private String cmd;
 
+    /**
+     * Constructor method.
+     * @param cmd User input command.
+     */
     public DeadlineCmd(String cmd){
         this.cmd = cmd;
     }
 
+    /**
+     * Execute method.
+     * @param lst a TaskList object containing Task Objects.
+     * @param ui a Ui object.
+     * @param storage a storage object.
+     * @throws DuckieException if user enters commands besides accepted ones.
+     */
     @Override
     public void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         //String[] cmdArr = cmd.trim().split(" ");
@@ -51,6 +62,10 @@ public class DeadlineCmd extends Command {
        // System.out.println(line);
     }
 
+    /**
+     * Method to determine whether to exit program.
+     * @return Returns false, program continues.
+     */
     @Override
     public boolean isEnd() {
         return false;

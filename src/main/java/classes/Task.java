@@ -25,6 +25,10 @@ public class Task {
         return (isDone ? "\u2718" : " ");
     }
 
+    /**
+     * Method to get the isDone status of a Task as a String
+     * @return Returns String "done" if isDone is true, "not done" otherwise.
+     */
     public String getIsDone() {
         if (this.isDone) {
             return "done";
