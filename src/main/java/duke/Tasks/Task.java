@@ -1,4 +1,4 @@
-package duke;
+package duke.Tasks;
 
 public class Task {
     private static String taskType = "TASK";

@@ -1,7 +1,8 @@
-package duke;
+package duke.Tasks;
 
 
-public class ToDo extends Task{
+
+public class ToDo extends Task {
     private static String taskType = "TODO";
     public ToDo(String description) {
         super(description);

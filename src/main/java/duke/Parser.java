@@ -81,13 +81,13 @@ public class Parser {
         case "deadline":
             String[] taskDetails = splitInput[1].split("/by");
             taskDescription = taskDetails[0];
-            LocalDate endTime =  LocalDate.parse(taskDetails[1]);
+            LocalDate endTime =  LocalDate.parse(taskDetails[1].trim());
             return new TaskCommand(command, taskDescription, endTime);
 
         case "event":
             taskDetails = splitInput[1].split("/at");
             taskDescription = taskDetails[0];
-            LocalDate eventTime =  LocalDate.parse(taskDetails[1]);
+            LocalDate eventTime =  LocalDate.parse(taskDetails[1].trim());
             return new TaskCommand(command, taskDescription, eventTime);
 
         default:

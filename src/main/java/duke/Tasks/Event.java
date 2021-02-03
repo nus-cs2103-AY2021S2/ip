@@ -1,8 +1,8 @@
-package duke;
+package duke.Tasks;
 
 import java.time.LocalDate;
 
-public class Event extends Task{
+public class Event extends Task {
     private static String taskType = "EVENT";
 //    private String startTime;
 //    private String endTime;

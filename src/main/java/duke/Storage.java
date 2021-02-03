@@ -1,5 +1,10 @@
 package duke;
 
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.ToDo;
+import duke.Tasks.Deadline;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.IOException;
@@ -32,7 +37,7 @@ public class Storage {
     }
 
     /**
-     * Construtor that takes in filepath to data file
+     * Constructor that takes in filepath to data file
      * @param filePathStr
      */
     public Storage(String filePathStr) {

@@ -1,8 +1,13 @@
 package duke;
 
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.ToDo;
+import duke.Tasks.Deadline;
+
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -12,6 +17,7 @@ public class Ui {
 
     private static final String LINE_PREFIX = ">>> ";
     private static final String WELCOME_MESSAGE = "Hello Human, I am Bob.";
+    private static final String EXIT_MESSAGE = "Goodbye Human.";
 
     private final Scanner in;
     private final PrintStream out;
@@ -40,11 +46,15 @@ public class Ui {
     }
 
     public void showWelcome() {
-        out.println(WELCOME_MESSAGE);
+        out.println(LINE_PREFIX + WELCOME_MESSAGE);
+    }
+
+    public void showBye() {
+        out.println(LINE_PREFIX + EXIT_MESSAGE);
     }
 
     public void printTasks(TaskList taskList) {
-        out.println(">>> Ok Human. Here are your tasks:");
+        out.println(LINE_PREFIX + "Ok Human. Here are your tasks:");
         int i = 1;
         for( Task t : taskList.getTaskList()) {
             out.printf("    %d: [%s] [%s] %s\n", i,
@@ -54,8 +64,8 @@ public class Ui {
     }
 
     public void printTaskDone(Task task) {
-        out.printf(">>> Noted Human. I've marked this task as done:\n  [%s] [%s] %s\n",
-                task.getTaskType(), task.getStatusIcon(),
+        out.printf("%s Noted Human. I've marked this task as done:\n  [%s] [%s] %s\n",
+                LINE_PREFIX, task.getTaskType(), task.getStatusIcon(),
                 task.getTaskDescription());
     }
 
@@ -73,15 +83,19 @@ public class Ui {
     }
 
     public void printAddDeadLine(Deadline deadline) {
-        System.out.printf("%s added:\n   [%s] [%s] %s (by: %s)\n",
+        LocalDate time = deadline.getEndTime();
+        System.out.printf("%s added:\n   [%s] [%s] %s (by: %s %s %s)\n",
                 LINE_PREFIX, deadline.getTaskType(), deadline.getStatusIcon(),
-                deadline.getTaskDescription(), deadline.getEndTime());
+                deadline.getTaskDescription(), time.getMonth(),
+                time.getDayOfMonth(), time.getYear());
     }
 
     public void printAddEvent(Event event) {
-        System.out.printf("%s added:\n   [%s] [%s] %s (at: %s)\n",
+        LocalDate time = event.getEventTime();
+        System.out.printf("%s added:\n   [%s] [%s] %s (at: %s %s %s)\n",
                 LINE_PREFIX, event.getTaskType(), event.getStatusIcon(),
-                event.getTaskDescription(), event.getEventTime());
+                event.getTaskDescription(), time.getMonth(),
+                time.getDayOfMonth(), time.getYear());
     }
 
 
