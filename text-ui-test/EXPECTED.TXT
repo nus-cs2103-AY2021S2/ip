@@ -23,6 +23,18 @@ ____________________________________________________________
 2. [D][ ] return book (by June 6th)
 3. [E][ ] project meeting (at Aug 6th 2-4pm)
 ____________________________________________________________
+You: done
+____________________________________________________________
+Paikia Bot: you done what task, limpeh need more information ah. input 'done <task number>'. eg, done 3
+____________________________________________________________
+You: done 0
+____________________________________________________________
+Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah
+____________________________________________________________
+You: done 4
+____________________________________________________________
+Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah
+____________________________________________________________
 You: done 2
 ____________________________________________________________
 Paikia Bot: ok i just help u checked this task as done -- [D][X] return book (by June 6th)
@@ -62,6 +74,28 @@ ____________________________________________________________
 1. [T][ ] read book
 2. [D][X] return book (by June 6th)
 3. [E][ ] project meeting (at Aug 6th 2-4pm)
+____________________________________________________________
+You: delete
+____________________________________________________________
+Paikia Bot: you done what task, limpeh need more information ah. input 'done <task number>'. eg, done 3
+____________________________________________________________
+You: delete 0
+____________________________________________________________
+Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah
+____________________________________________________________
+You: delete 10
+____________________________________________________________
+Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah
+____________________________________________________________
+You: delete 1
+____________________________________________________________
+Paikia Bot: ok i just help u deleted this task -- [T][ ] read book
+Paikia Bot: now u got 2 item(s) in your list ah
+____________________________________________________________
+You: list
+____________________________________________________________
+1. [D][X] return book (by June 6th)
+2. [E][ ] project meeting (at Aug 6th 2-4pm)
 ____________________________________________________________
 You: bye
 ____________________________________________________________

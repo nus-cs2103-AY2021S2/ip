@@ -44,7 +44,27 @@ public class MyDuke {
                 } catch (NoIndexException e) {
                     print(e.getMessage());
                 } catch (IndexOutOfBoundsException e) {
-                    print("Paikia Bot: the number that you inputted ah, is more than the number of tasks in your list leh, try again pls ah");
+                    print("Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah");
+                } catch (NumberFormatException e) {
+                    print("Paikia Bot: ur input after 'done' is invalid, reminder that it should be a single integer"
+                            + "and remember to not leave a space after your input. eg, done 3");
+                }
+
+            } else if (inputArr[0].equals("delete")) { // level-6 addition
+
+                try {
+                    indexChecker(inputArr);
+                    int ref = Integer.parseInt(inputArr[1]);
+                    Task toRemove = list.get(ref - 1);
+                    list.remove(ref - 1);
+                    print(new String[] {
+                        "Paikia Bot: ok i just help u deleted this task -- " + toRemove.toString(),
+                        "Paikia Bot: now u got " + list.size() + " item(s) in your list ah"
+                    });
+                } catch (NoIndexException e) {
+                    print(e.getMessage());
+                } catch (IndexOutOfBoundsException e) {
+                    print("Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah");
                 } catch (NumberFormatException e) {
                     print("Paikia Bot: ur input after 'done' is invalid, reminder that it should be a single integer"
                             + "and remember to not leave a space after your input. eg, done 3");
