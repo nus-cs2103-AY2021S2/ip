@@ -12,8 +12,15 @@ repositories {
     mavenCentral()
 }
 
+//sourceSets.main {
+//    resources {
+//        srcDirs 'src/main/resources'
+//    }
+//}
+
+
 application {
-    project.setProperty("mainClassName", 'project.Olaf')
+    project.setProperty("mainClassName", 'project.Launcher')
 }
 
 test {
