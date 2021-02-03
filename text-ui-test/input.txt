@@ -1,6 +1,6 @@
-todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
+todo dishes
+deadline submission /by June 6th
+event play soccer /at Aug 6th 2-4pm
 list
 done
 done 0
@@ -9,9 +9,9 @@ done 2
 list
 todo
 deadline
-deadline return another book
+deadline return another submission
 event
-event another project meeting
+event another play basketball
 lmao
 list
 delete

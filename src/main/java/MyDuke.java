@@ -1,15 +1,81 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class MyDuke {
 
     public static String DASH = "____________________________________________________________";
+    // public static String DATA_SAVE_FILE_DIR = "../../../data/saveFile.txt";
+    public static String DATA_SAVE_FILE_DIR = "../data/saveFile.txt";
+
+    private static List<Task> printFileContents(String filePath)
+            throws FileNotFoundException, InvalidArgException, NumberFormatException, InvalidTypeException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner sc = new Scanner(f); // create a Scanner using the File as the source
+        List<Task> l = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            // System.out.println(input);
+            String[] inputArr = input.split(" @ ");
+            if (inputArr.length < 3 && inputArr.length > 4) {
+                throw new InvalidArgException("Paikia Bot: eh walao something is wrong with this input: " + input
+                        + ", pls double check and rectify");
+            }
+            // System.out.println(inputArr.length);
+            boolean isDone = Integer.parseInt(inputArr[1]) == 1;
+            if (inputArr[0].equals("T")) {
+                l.add(new ToDo(inputArr[2], isDone));
+            } else if (inputArr[0].equals("E")) {
+                l.add(new Event(inputArr[3], inputArr[2], isDone));
+            } else if (inputArr[0].equals("D")) {
+                l.add(new Deadline(inputArr[3], inputArr[2], isDone));
+            }
+        }
+        return l;
+    }
+
+    private static void writeToFile(String filePath, List<Task> list) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task t : list) {
+            int doneStatus = t.isDone ? 1 : 0;
+            if (t instanceof ToDo) {
+                fw.write("T @ " + doneStatus + " @ " + t.info + System.lineSeparator());
+            } else if (t instanceof Event) {
+                Event e = (Event) t;
+                fw.write("E @ " + doneStatus + " @ " + t.info + " @ " + e.date + System.lineSeparator());
+            } else {
+                Deadline d = (Deadline) t;
+                fw.write("D @ " + doneStatus + " @ " + t.info + " @ " + d.deadline + System.lineSeparator());
+            }
+        }
+        fw.close();
+    }
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         List<Task> list = new ArrayList<>(); // change from string to task
-        print(new String[] { "Pai Kia Bot: Eh harlo! Call me Pai Kia Bot.", "Pai Kia Bot: What you want?" });
+        try {
+            list = printFileContents(DATA_SAVE_FILE_DIR);
+            print(new String[] { "Pai Kia Bot: Eh harlo! Call me Pai Kia Bot.",
+                    "Pai Kia Bot: Got ur input file, baik la", "Pai Kia Bot: how u want me to help u?" });
+        } catch (FileNotFoundException e) {
+            print(new String[] { "Pai Kia Bot: Eh harlo! Call me Pai Kia Bot.",
+                    "Pai Kia Bot: I cannot find ur input file sia, could be becuz",
+                    "1) u never create file because u r new user, in that case, just continue using this program and i "
+                            + "will create the folder and save file for u in the directory [root]/data",
+                    "2) ur saveFile.txt is not in the correct directory, pls input bye and shift the file to [root]/data",
+                    "3) ur input file is not named saveFile.txt, pls input 'bye' and rename ur input file",
+                    "Pai Kia Bot: What help you want?" });
+        } catch (InvalidArgException e) {
+            print(e.getMessage());
+        } catch (InvalidTypeException e) {
+            print(e.getMessage());
+        }
 
         System.out.print("You: ");
         String input = sc.nextLine();
@@ -57,10 +123,8 @@ public class MyDuke {
                     int ref = Integer.parseInt(inputArr[1]);
                     Task toRemove = list.get(ref - 1);
                     list.remove(ref - 1);
-                    print(new String[] {
-                        "Paikia Bot: ok i just help u deleted this task -- " + toRemove.toString(),
-                        "Paikia Bot: now u got " + list.size() + " item(s) in your list ah"
-                    });
+                    print(new String[] { "Paikia Bot: ok i just help u deleted this task -- " + toRemove.toString(),
+                            "Paikia Bot: now u got " + list.size() + " item(s) in your list ah" });
                 } catch (NoIndexException e) {
                     print(e.getMessage());
                 } catch (IndexOutOfBoundsException e) {
@@ -120,7 +184,14 @@ public class MyDuke {
             input = sc.nextLine();
             System.out.println(input);
         }
-        print("Pai Kia Bot: Leave so soon ah? Limpeh sleep first, if got no issue don't disturb me.");
+        print("Pai Kia Bot: Leave so soon ah? Ok can limpeh help u save your list in [root]/data as saveFile.txt, i go sleep first");
+
+        try {
+            writeToFile(DATA_SAVE_FILE_DIR, list);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+        sc.close();
     }
 
     static void print(String s) {
@@ -243,7 +314,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(" + this.deadline + ")";
+        return "[D]" + super.toString() + " (" + this.deadline + ")";
     }
 }
 
@@ -265,7 +336,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(" + this.date + ")";
+        return "[E]" + super.toString() + " (" + this.date + ")";
     }
 }
 
@@ -302,6 +373,18 @@ class NoDeadlineException extends MyDukeException {
 
 class NoDateException extends MyDukeException {
     NoDateException(String s) {
+        super(s);
+    }
+}
+
+class InvalidArgException extends MyDukeException {
+    InvalidArgException(String s) {
+        super(s);
+    }
+}
+
+class InvalidTypeException extends MyDukeException {
+    InvalidTypeException(String s) {
         super(s);
     }
 }
