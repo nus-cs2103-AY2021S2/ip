@@ -1,19 +1,18 @@
 package duke.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Manages persistent storage of information.
@@ -39,7 +38,7 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         int lineIndex = 1;
 
-        if(!file.exists()) {
+        if (!file.exists()) {
             try {
                 createFile(file);
             } catch (DukeException e) {
@@ -49,7 +48,7 @@ public class Storage {
 
         try {
             Scanner scanner = new Scanner(file);
-            while(scanner.hasNext()) {
+            while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 Task task = processLine(line, lineIndex);
                 taskList.add(task);
@@ -101,7 +100,7 @@ public class Storage {
             throw new DukeException("Failed to read from saved file!");
         }
 
-        if(taskStatus.equals("0")) {
+        if (taskStatus.equals("0")) {
             isTaskDone = false;
         } else if (taskStatus.equals("1")) {
             isTaskDone = true;
@@ -167,7 +166,7 @@ public class Storage {
         String description = task.getDescription();
         int isDone;
 
-        if(task.getIsDone()) {
+        if (task.getIsDone()) {
             isDone = 1;
         } else if (task.getIsDone() == false) {
             isDone = 0;

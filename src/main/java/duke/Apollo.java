@@ -1,11 +1,11 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
-import duke.util.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
+import duke.util.Storage;
 
 /**
  * The Apollo bot handling Storage, TaskList and Ui.

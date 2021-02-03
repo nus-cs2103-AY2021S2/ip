@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.util.DateFormatter;
-
 import java.time.LocalDate;
+
+import duke.util.DateFormatter;
 
 /**
  * Represents a Task as an Event.
