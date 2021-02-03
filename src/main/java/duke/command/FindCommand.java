@@ -1,12 +1,13 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.MessageFormatter;
 import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Class representing the Find Command.
@@ -29,26 +30,20 @@ public class FindCommand extends Command {
      * If task description contains the keyword, corresponding task is printed.
      *
      * @param tasks List of tasks.
-     * @param ui Formats and prints the list of matching tasks to user.
-     * @param storage
-     * @return true.
+     * @param messageFormatter Formats Duke's response into a String.
+     * @param storage Storage of tasks.
+     * @return A list of tasks with descriptions that matches the keyword entered by the user.
      */
-    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        List<Task> temp = new ArrayList<>();
-        TaskList allTasks = storage.retrieveData();
-        for (int i = 0; i < allTasks.getSize(); i++) {
-            Task task = allTasks.getTask(i);
+    public String execute(TaskList tasks, MessageFormatter messageFormatter, TaskStorage storage) {
+        List<Task> matchingTasks = new ArrayList<>();
+        ListIterator<Task> iterator = tasks.getIterator();
+        while (iterator.hasNext()) {
+            Task task = iterator.next();
             String description = task.getDescription();
             if (description.contains(keyword)) {
-                temp.add(task);
+                matchingTasks.add(task);
             }
         }
-        if (temp.isEmpty()) {
-            ui.print("There are no tasks with such keyword!");
-        } else {
-            TaskList matchingTasks = new TaskList(temp);
-            ui.print(matchingTasks);
-        }
-        return true;
+        return messageFormatter.formatFindCmdMsg(new TaskList(matchingTasks));
     }
 }

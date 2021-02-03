@@ -1,12 +1,15 @@
-package duke;
+package duke.util;
 
+import duke.exception.DukeStorageException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,21 +22,19 @@ import java.util.Scanner;
  */
 public class TaskStorage {
     private File file;
-    private Ui ui;
 
     /**
-     * Constructor for TaskStorage.
+     * Constructor of TaskStorage.
      *
      * @param path Path of the file to read from or write to.
      */
-    public TaskStorage(String path) {
+    public TaskStorage(String path) throws DukeStorageException {
         try {
-            ui = new Ui();
             file = new File(path);
             file.getParentFile().mkdirs();
             file.createNewFile();
-        } catch (Exception e) {
-            ui.print(e.getMessage());
+        } catch (IOException e) {
+            throw new DukeStorageException("An error has occurred when creating a save file!");
         }
     }
 
@@ -42,7 +43,7 @@ public class TaskStorage {
      *
      * @param tasks Existing user's tasks.
      */
-    public void storeData(TaskList tasks) {
+    public void storeData(TaskList tasks) throws DukeStorageException {
         try {
             FileWriter writer = new FileWriter(file);
             ListIterator<Task> iterator = tasks.getIterator();
@@ -69,17 +70,17 @@ public class TaskStorage {
                 writer.write(System.lineSeparator());
             }
             writer.close();
-        } catch (Exception e) {
-            ui.print(e.getMessage());
+        } catch (IOException e) {
+            throw new DukeStorageException("An error has occurred when saving the tasks!");
         }
     }
 
     /**
-     * Retrieve data of tasks from file and construct a list of tasks previously added by the user.
+     * Retrieves data of tasks from file and construct a list of tasks previously added by the user.
      *
      * @return A list of tasks retrieved from the storage.
      */
-    public TaskList retrieveData() {
+    public TaskList retrieveData() throws DukeStorageException {
         List<Task> retrievedTasks = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
@@ -107,8 +108,8 @@ public class TaskStorage {
                 default:
                 }
             }
-        } catch (Exception e){
-            ui.print(e.getMessage());
+        } catch (FileNotFoundException e){
+            throw new DukeStorageException("Save file is missing/corrupted!");
         }
         return new TaskList(retrievedTasks);
     }

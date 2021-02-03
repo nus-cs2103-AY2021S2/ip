@@ -1,51 +1,53 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeStorageException;
+import duke.util.Parser;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
+import duke.util.MessageFormatter;
 
 /**
  * Class representing chat bot, Duke.
  */
 public class Duke {
-    private static TaskList tasks;
-    private static TaskStorage storage;
-    private static Ui ui;
-    private static boolean isActive;
+    private TaskList tasks;
+    private TaskStorage storage;
+    private MessageFormatter messageFormatter;
+    private boolean isActive;
 
     /**
      * Constructor of Duke.
      */
-    public Duke() {
-        ui = new Ui();
+    public Duke() throws DukeStorageException {
+        messageFormatter = new MessageFormatter();
         storage = new TaskStorage("data/tasks.txt");
         tasks = storage.retrieveData();
         isActive = true;
     }
 
     /**
-     * Runs the chat bot.
-     * Reads user input and parses it.
-     * Exits when user enters "bye".
+     * Interprets user input, executes Command and returns Duke's response.
+     *
+     * @param input The input of the user.
+     * @return String representing Duke's response.
      */
-    private void run() {
-        ui.print("POWERED BY JARVIS\n\n\t  Hello! I'm Jarvis.\n\t  How may I help you?");
-        while (isActive) {
-            String userInput = ui.readInput();
-            if (userInput.isBlank()) {
-                continue;
-            }
-            Command cmd = Parser.parse(userInput, tasks);
-            if (cmd != null) {
-                isActive = cmd.execute(tasks, ui, storage);
-            }
+    public String getResponse(String input) {
+        if (input.isBlank()) {
+            return "You have not entered a command!";
         }
+        Command cmd = Parser.parse(input, tasks);
+        String response = cmd.execute(tasks, messageFormatter, storage);
+        isActive = !cmd.toExit();
+        return response;
     }
 
     /**
-     * Creates a Duke object and runs the program.
+     * Gets the status of Duke.
+     *
+     * @return true if Duke is still running, false if Duke is no longer running.
      */
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    public boolean isActive() {
+        return isActive;
     }
 }

@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.TaskStorage;
-import duke.Ui;
+import duke.util.TaskStorage;
+import duke.util.MessageFormatter;
+import duke.exception.DukeStorageException;
 import duke.task.Task;
-import duke.TaskList;
+import duke.util.TaskList;
 
 /**
  * Class representing an Add command in Duke.
@@ -27,16 +28,17 @@ public class AddCommand extends Command {
      * Prompts the user that the task has been added and show the total number of tasks.
      *
      * @param tasks List of tasks.
-     * @param ui Formats message and prints it to user.
+     * @param messageFormatter Formats Duke's response into a String.
      * @param storage Updates tasks.txt of the new task.
-     * @return true.
+     * @return Duke's response after adding task to the list.
      */
-    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        tasks.addTask(toAdd);
-        storage.storeData(tasks);
-        ui.print("Got it. I've added this task:\n\t\t" + toAdd +
-                "\n\n\t  You have " +
-                tasks.getSize() + (tasks.getSize() == 1 ? " task" : " tasks") + " in your list");
-        return true;
+    public String execute(TaskList tasks, MessageFormatter messageFormatter, TaskStorage storage) {
+        try {
+            tasks.addTask(toAdd);
+            storage.storeData(tasks);
+            return messageFormatter.formatAddCmdMsg(toAdd, tasks);
+        } catch (DukeStorageException e) {
+            return e.getMessage();
+        }
     }
 }
