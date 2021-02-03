@@ -1,7 +1,0 @@
-TTsapgoih 12
-DTtissues 2 12 2017 1843
-DFbuy whisky 4 4 2014 0543
-DFbuy beer 1 1 2000 0000
-DTbuy beer 1 1 2000 0800
-TFsappy
-DFsappy two 21 2 2000 1330

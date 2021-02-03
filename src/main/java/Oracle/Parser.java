@@ -31,7 +31,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 this.ui.showNumberFormatException("done task");
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("Command.MarkDoneCommand");
+                ui.showFormatException("MarkDoneCommand");
             }
             return new EmptyCommand();
         }
@@ -47,7 +47,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 this.ui.showNumberFormatException("task to be deleted");
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("Command.DeleteCommand");
+                ui.showFormatException("DeleteCommand");
             }
             return new EmptyCommand();
         }
@@ -60,7 +60,7 @@ public class Parser {
             try {
                 return new TodoCommand(split[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("Command.TodoCommand");
+                ui.showFormatException("TodoCommand");
             }
             return new EmptyCommand();
         }
@@ -74,7 +74,7 @@ public class Parser {
                 String[] params = split[1].split("/", 2);
                 return new EventCommand(params[0], params[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("Command.EventCommand");
+                ui.showFormatException("EventCommand");
             }
             return new EmptyCommand();
             /*
@@ -87,7 +87,7 @@ public class Parser {
                 String[] params = split[1].split("/", 2);
                 return new DeadlineCommand(params[0], params[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showFormatException("Command.DeadlineCommand");
+                ui.showFormatException("DeadlineCommand");
             }
             return new EmptyCommand();
         }

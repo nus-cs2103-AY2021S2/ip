@@ -9,13 +9,13 @@ import java.util.Scanner;
 public class Ui {
     private Scanner scanner;
     Map<String, String> commandMap = Map.of(
-            "Command.ExitCommand", "    bye",
-            "Command.ListCommand", "    list",
-            "Command.TodoCommand", "    todo {description}",
-            "Command.DeadlineCommand", "deadline {description} /{day} {month} {year} {hour}{minute}",
-            "Command.EventCommand", "   event {description} /{day} {month} {year} {hour}{minute}",
-            "Command.MarkDoneCommand", "done {taskIndex}",
-            "Command.DeleteCommand", "  delete {taskIndex}"
+            "ExitCommand", "    bye",
+            "ListCommand", "    list",
+            "TodoCommand", "    todo {description}",
+            "DeadlineCommand", "deadline {description} /{day} {month} {year} {hour}{minute}",
+            "EventCommand", "   event {description} /{day} {month} {year} {hour}{minute}",
+            "MarkDoneCommand", "done {taskIndex}",
+            "DeleteCommand", "  delete {taskIndex}"
             );
 
     public Ui() {
