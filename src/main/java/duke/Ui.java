@@ -26,80 +26,82 @@ public class Ui {
 
     /**
      * Greets the user when the program is being initialized.
-     * Outputs on the console.
+     *
+     * @return A welcome message from Duke.
      */
-    void showWelcome() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    String showWelcome() {
+        return "Hello! I'm Duke" + System.lineSeparator()
+                + "What can I do for you?";
     }
 
     /**
-     * Outputs a line to separate an user's input and program's output.
-     */
-    void showLine() {
-        System.out.println("_______________________________________________________");
-    }
-
-    /**
-     * Outputs the error message.
+     * Returns the error message.
      *
      * @param msg The message that caused the error.
+     * @return The error message.
      */
-    void showError(String msg) {
-        System.out.println(msg);
+    String showError(String msg) {
+        return msg;
     }
 
     /**
-     *Outputs a goodbye message before the end of program.
+     * Returns a goodbye message before the end of program.
+     *
+     * @return A goodbye message to the user.
      */
-    public void showExit() {
-        sc.close();
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showExit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Outputs a loading error when the file containing data cannot be loaded
-     * from the had disk.
+     * Returns a loading error when the file containing data cannot be loaded
+     * from the hard disk.
+     *
+     * @return The loading error message.
      */
     void showLoadingError() {
         System.out.println("Unable to load the file. Empty list created.");
     }
 
     /**
-     * Outputs when adding a task to the list is successful.
+     * Returns a message and the added task.
      *
      * @param task The added task.
      * @param size Current size of the list.
+     * @return A string of message and added task.
      */
-    public void showAdd(String task, int size) {
-        System.out.println("Got it. I've added this task:");
-        showTaskAndSize(task, size);
+    public String showAdd(String task, int size) {
+        return "Got it. I've added this task:" + System.lineSeparator()
+                + showTaskAndSize(task, size);
     }
 
     /**
-     * Outputs when deleting a task from the list is successful.
+     * Returns when deleting a task from the list is successful.
      *
      * @param task The deleted task.
      * @param size Current size of the list.
+     * @return A string of message and deleted task.
      */
-    public void showDelete(String task, int size) {
-        System.out.println("Noted, I've removed this task: ");
-        showTaskAndSize(task, size);
+    public String showDelete(String task, int size) {
+        return "Noted, I've removed this task: " + System.lineSeparator()
+                + showTaskAndSize(task, size);
     }
 
     /**
      * Outputs when marking a task as done is successful.
+     *
      * @param task The task that is marked as done.
      * @param size Current size of the list.
+     * @return A string of message and the task marked as done.
      */
-    public void showDone(String task, int size) {
-        System.out.println("Nice! I've mark this task as done");
-        showTaskAndSize(task, size);
+    public String showDone(String task, int size) {
+        return "Nice! I've mark this task as done" + System.lineSeparator()
+                + showTaskAndSize(task, size);
     }
 
-    private void showTaskAndSize(String task, int size) {
-        System.out.println(task);
-        System.out.println(String.format("Now you have %d tasks in the list.", size));
+    private String showTaskAndSize(String task, int size) {
+        return task + System.lineSeparator()
+                + String.format("Now you have %d tasks in the list.", size);
     }
 
     /**
@@ -108,12 +110,12 @@ public class Ui {
      *
      * @param list The list storing the tasks.
      */
-    public void showCurrentList(List<Task> list) {
+    public String showCurrentList(List<Task> list) {
         if (list.isEmpty()) {
-            System.out.println("There is currently no task in the list.");
+            return "There is currently no task in the list.";
         } else {
-            System.out.println("Here are the tasks in your list:");
-            showListItem(list);
+            return "Here are the tasks in your list:" + System.lineSeparator()
+                    + showListItem(list);
         }
     }
 
@@ -122,20 +124,24 @@ public class Ui {
      *
      * @param list The list storing the matching tasks.
      */
-    public void showFindKeywordList(List<Task> list) {
+    public String showFindKeywordList(List<Task> list) {
         if (list.isEmpty()) {
-            System.out.println("There is no task containing the keyword.");
+            return "There is no task containing the keyword.";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            showListItem(list);
+            return "Here are the matching tasks in your list:"
+                    + System.lineSeparator() + showListItem(list);
         }
     }
 
-    private void showListItem(List<Task> list) {
+    private String showListItem(List<Task> list) {
+        String res = "";
         int index = 1;
         for (Task t: list) {
-            System.out.println(index + "." + t);
+            res += String.format("%d. %s", index, t.toString())
+                    + System.lineSeparator();
             index++;
         }
+
+        return res;
     }
 }
