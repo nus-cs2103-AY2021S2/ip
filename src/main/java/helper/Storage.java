@@ -1,12 +1,12 @@
 package helper;
 
-import task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import task.Task;
 
 /**
  * Handles storage
@@ -52,7 +52,7 @@ public class Storage {
                 myWriter.write(t.toString() + "\n");
             }
             myWriter.close();
-//            System.out.println("Successfully wrote to the file.");
+            //  System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             throw new DukeException("Cannot save file");
         }
