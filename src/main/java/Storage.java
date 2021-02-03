@@ -1,11 +1,11 @@
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Storage {
-    File file;
+    private File file;
 
     public Storage() {
         this.file = new File("PreviousTaskList.txt");
@@ -22,11 +22,11 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public void initialise(TaskList tasklist) throws FileNotFoundException {
-        if(isSavedHistory()) {
+        if (isSavedHistory()) {
             Scanner s = new Scanner(this.file);
-            while(s.hasNext()) {
+            while (s.hasNext()) {
                 String current = s.nextLine().toLowerCase();
-                if(current.contains("todo")) {
+                if (current.contains("todo")) {
                     Task task = Todo.readTask(current);
                     tasklist.add(task);
                 } else if (current.contains("deadline")) {
@@ -34,9 +34,9 @@ public class Storage {
                 } else if (current.contains("event")) {
                     tasklist.add(Event.readTask(current));
                 } else {
-                    if(s.hasNext()){
+                    if (s.hasNext()) {
                         current = s.nextLine();
-                    } else{
+                    } else {
                         throw new FileNotFoundException("History saved corrupted");
                     }
                 }
@@ -55,7 +55,7 @@ public class Storage {
         FileWriter fw = new FileWriter("PreviousTaskList.txt");
         try {
             for (int i = 0; i < tasklist.size(); i++) {
-                if(i == 0) {
+                if (i == 0) {
                     fw.write(tasklist.write(i));
                 } else {
                     fw.write(System.lineSeparator() + tasklist.write(i));

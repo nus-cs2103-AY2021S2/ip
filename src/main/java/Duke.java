@@ -5,23 +5,29 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Class initialises Duke Bot to take in inpiut from user
+ */
 
 public class Duke extends Application {
 
-    static Storage storage = new Storage(); 
+    private static Storage storage = new Storage();
 
-    static TaskList list = new TaskList();
+    private static TaskList list = new TaskList();
 
-    static Parser parser = new Parser();
+    private static Parser parser = new Parser();
 
+    /**
+     * Presents saved history via Storage and
+     * reads input from users.
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
-        if(storage.isSavedHistory()) {
+        if (storage.isSavedHistory()) {
             storage.initialise(list);
         }
-        //Parser
         parser.readInput(list);
-        
-        //Storage
         try {
             byeCommand();
         } catch (IOException io) {
@@ -42,7 +48,7 @@ public class Duke extends Application {
 
     /**
      * Function to call when we want to end main, to store the TaskList into storage
-     * 
+     *
      * @throws IOException
      */
     static void byeCommand() throws IOException {
@@ -50,6 +56,3 @@ public class Duke extends Application {
     }
 
 }
-
-
-

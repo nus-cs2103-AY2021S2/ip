@@ -1,6 +1,6 @@
 public class Task {
-    String task;
-    Boolean completed;
+    private String task;
+    private Boolean completed;
 
     Task(String t) {
         this.task = t;
@@ -12,37 +12,41 @@ public class Task {
         this.completed = completed;
     }
 
-    public void isCompleted() {
+    protected boolean getCompleted() {
+        return this.completed;
+    }
+
+    protected String getTask() {
+        return this.task;
+    }
+
+    public void setCompleted() {
         this.completed = true;
     }
 
+    /**
+     * Decides how to present the box based on
+     * if the task is completed
+     * @return string box that is checked or unchecked
+     */
     public String completedBox() {
-        if (this.completed) {
+        if (this.getCompleted()) {
             return "[X] ";
         } else {
             return "[ ] ";
         }
     }
 
-    boolean getCompleted() {
-        return this.completed;
-    }
-
     boolean taskMatch(String keyword) {
-        return this.task.contains(keyword);
+        return this.getTask().contains(keyword);
     }
-
-    // public static Task readTask(String input) {
-    //     String[] list = input.split(",", 3);
-    //     return new Task(list[1], Boolean.parseBoolean(list[2]));
-    // }
 
     public String toCommand() {
-        return this.getClass().toString() + ", " + this.getCompleted() + ", " + this.task;
+        return this.getClass().toString() + ", " + this.getCompleted() + ", " + this.getTask();
     }
 
     @Override
     public String toString() {
-        return this.completedBox() + this.task;
+        return this.completedBox() + this.getTask();
     }
 }

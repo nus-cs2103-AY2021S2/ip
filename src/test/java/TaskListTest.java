@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
@@ -8,14 +8,14 @@ public class TaskListTest {
         TaskList list = new TaskList();
         Task task = new Task("make this right");
         list.add(task);
-        assertEquals(list.list.get(0), task);
+        assertEquals(list.getList().get(0), task);
 
     }
 
     @Test
-    public void addTodoTest(){
+    public void addTodoTest() {
         TaskList list = new TaskList();
         list.addTodo("testcase2");
-        assertEquals(list.list.get(0).task, "testcase2");
+        assertEquals(list.getList().get(0).getTask() , "testcase2");
     }
 }
