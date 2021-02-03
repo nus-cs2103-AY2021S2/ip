@@ -1,6 +1,6 @@
 package tlylt.haha;
 
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -19,14 +19,6 @@ public class UiTest {
         // With reference to
         // https://www.baeldung.com/java-testing-system-out-println
         System.setOut(testOutput);
-    }
-
-    @Test
-    void lineBreak_whenInvoke_success() {
-        new Ui().lineBreak();
-        assertEquals(
-                "____________________________________________________________",
-                output.toString().trim());
     }
 
     @Test
@@ -51,8 +43,8 @@ public class UiTest {
                 output.toString().trim());
     }
 
-    @AfterAll
-    public static void tearDown() {
+    @AfterEach
+    public void tearDown() {
         System.setOut(System.out);
     }
 }
