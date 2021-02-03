@@ -23,17 +23,11 @@ public class Storage {
         pathOfDataFile = filePath;
         try {
             File folder = new File(folderName);
-            if (folder.mkdir()) {
-                //System.out.println("Folder created: " + folder.getName());
-            } else {
-                //System.out.println("Folder already exists.");
-            }
+            folder.mkdir();
+
             File dataFile = new File(filePath);
-            if (dataFile.createNewFile()) {
-                //System.out.println("File created: " + dataFile.getName());
-            } else {
-                //System.out.println("File already exists.");
-            }
+            dataFile.createNewFile();
+
         } catch (IOException e) {
             throw new DukeException("Error occured during file or folder creation");
         }

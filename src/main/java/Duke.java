@@ -9,9 +9,9 @@ import main.java.duke.maincomponents.Ui;
  * Main class for Duke that handles the execution of its functions
  */
 public class Duke {
-    private static final String FILENAME = "dukedata.txt";
-    private static final String FOLDERNAME = "data";
-    private static final String PATH = FOLDERNAME + "/" + FILENAME;
+    private static final String FILE_NAME = "dukedata.txt";
+    private static final String FOLDER_NAME = "data";
+    private static final String RELATIVE_PATH = FOLDER_NAME + "/" + FILE_NAME;
 
     private Storage dukeStorage;
     private TaskList dukeTaskList;
@@ -44,7 +44,7 @@ public class Duke {
         boolean isExit = false;
         String userInput = dukeUi.readCommand();
 
-        while ( !isExit) {
+        while (!isExit) {
             try {
                 Command c = stringParser.parse(userInput);
                 c.execute(dukeTaskList, dukeUi, dukeStorage);
@@ -64,6 +64,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(PATH, FOLDERNAME).run();
+        new Duke(RELATIVE_PATH, FOLDER_NAME).run();
     }
 }

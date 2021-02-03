@@ -15,9 +15,6 @@ import main.java.duke.exceptions.DukeException;
 
 public class Parser {
 
-    public Parser(){
-    }
-
     private static boolean checkStringStartingEquals(String userInput, String stringToCheck) {
         return userInput.length() >= stringToCheck.length()
                 && userInput.substring(0, stringToCheck.length()).equals(stringToCheck);
@@ -171,15 +168,12 @@ public class Parser {
         try {
             if (this.equalsToList(userInput)) {
                 return new ShowListCommand();
-
             } else if (this.equalsToDone(userInput)) {
                 int taskDoneInt = this.parseDoneCommand(userInput);
                 return new DoneCommand(taskDoneInt);
-
             } else if (this.equalsToDelete(userInput)) {
                 int taskDeleteInt = this.parseDeleteCommand(userInput);
                 return new DeleteCommand(taskDeleteInt);
-
             } else if (this.equalsToToDo(userInput)) {
                 String toDoDescription = this.parseToDoCommand(userInput);
                 return new ToDoCommand(toDoDescription);

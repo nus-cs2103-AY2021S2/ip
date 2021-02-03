@@ -15,9 +15,8 @@ public class FindCommand implements Command{
         ArrayList<Task> currentTaskList = dukeTaskList.getCurrentTaskList();
         ArrayList<Task> newTaskList = new ArrayList<>();
 
-        for (int i = 0; i < currentTaskList.size(); i++) {
+        for (Task currentTask : currentTaskList) {
 
-            Task currentTask = currentTaskList.get(i);
             if (currentTask.descriptionContains(stringToFind)){
                 newTaskList.add(currentTask);
             }
