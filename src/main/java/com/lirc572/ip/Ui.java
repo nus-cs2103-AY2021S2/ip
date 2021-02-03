@@ -57,6 +57,7 @@ public class Ui {
 
     /**
      * Prints the error message of the specified Exception.
+     *
      * @param e The Exception whose error message is to be printed.
      */
     public static void printError(Exception e) {
