@@ -1,11 +1,20 @@
 Hello! I'm Duke
 What can I do for you?
+OOPS!!! I'm sorry, but I don't know what 'actionthattheappdoesnotsupport' means :-(
+You have no tasks in your list yet :)
+You need to add a description for the action 'todo' :-)
 Got it. I've added this task:
 [T][ ] CS2107 Revision
 Now you have 1 task(s) in the list.
+You need to add a description for the action 'deadline' :-)
+You need to specify a deadline following a '/by' marker...
+You need to specify a deadline following a '/by' marker...
 Got it. I've added this task:
 [D][ ] CS2103 Week 4 Quiz (by: 5 Feb 2021 2:00 AM)
 Now you have 2 task(s) in the list.
+You need to add a description for the action 'event' :-)
+You need to specify an event time following an '/at' marker...
+You need to specify an event time following an '/at' marker...
 Got it. I've added this task:
 [E][ ] CS2107 In-Lecture Quiz (at: 4 Feb 2021 10:00 AM to 10:30 AM)
 Now you have 3 task(s) in the list.
@@ -15,6 +24,7 @@ Here are the task(s) in your list:
 3.[E][ ] CS2107 In-Lecture Quiz (at: 4 Feb 2021 10:00 AM to 10:30 AM)
 Nice! I've marked this task as done:
 [T][X] CS2107 Revision
+Task 4 does not exist :O
 Here are the task(s) in your list:
 1.[T][X] CS2107 Revision
 2.[D][ ] CS2103 Week 4 Quiz (by: 5 Feb 2021 2:00 AM)

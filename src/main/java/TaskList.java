@@ -1,3 +1,5 @@
+import Tasks.Task;
+
 import java.util.*;
 
 public class TaskList {
