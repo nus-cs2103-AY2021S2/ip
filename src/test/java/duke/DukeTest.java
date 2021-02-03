@@ -13,7 +13,7 @@ public class DukeTest {
 
     @Test
     public void eventCreation_properDate_success() {
-        assertEquals(new Duke.Event("Eat Breakfast", "2020-01-01").toString(),
+        assertEquals(new Event("Eat Breakfast", "2020-01-01").toString(),
                 "[E][ ] Eat Breakfast (at:Jan 1 2020 1200 AM)");
     }
 
@@ -21,7 +21,7 @@ public class DukeTest {
     public void eventCreation_invalidDate_exceptionThrown() {
         try {
             assertEquals("[E][ ] Eat Breakfast  (at:Jan 1 2020 1800 PM)",
-                    new Duke.Event("Eat Breakfast", "tmr 6pm").toString());
+                    new Event("Eat Breakfast", "tmr 6pm").toString());
             fail();
         } catch (Exception e) {
             assertEquals("Text 'tmr' could not be parsed at index 0", e.getMessage());
@@ -30,7 +30,7 @@ public class DukeTest {
 
     @Test
     public void taskList_emptyList_shouldBeEmpty() {
-        assertEquals( true, new Duke.TaskList().isEmpty());
+        assertEquals( true, new TaskList().isEmpty());
     }
 
 }
