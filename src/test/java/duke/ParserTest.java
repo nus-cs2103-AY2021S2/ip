@@ -1,13 +1,13 @@
 package duke;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
