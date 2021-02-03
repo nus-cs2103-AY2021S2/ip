@@ -2,10 +2,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Class Duke is the main class for the execution of Duke chatbot.
@@ -22,7 +19,6 @@ public class Duke {
      */
 
     public static void main(String[] args) throws FileNotFoundException {
-        String input;
         ArrayList<Task> arrayList = new ArrayList<>();
 
         String path = "duke.txt";

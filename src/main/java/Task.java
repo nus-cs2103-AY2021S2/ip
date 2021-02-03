@@ -33,15 +33,6 @@ public class Task {
     }
 
     /**
-     * This method is used to print out the task
-     * @return String This returns and string representation of
-     * the task with updated status icon.
-     */
-    public String printTask() {
-        return this.getStatusIcon() + " " + description;
-    }
-
-    /**
      * This is the toString() method of the class
      * @return String This returns the string representation of the task.
      */
