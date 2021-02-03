@@ -2,7 +2,6 @@ package com.jetbrains;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.lang.Throwable;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,38 +20,50 @@ public class Duke {
         while (!input.equals("bye")) {
             Task task;
             try {
-            if (input.equals("list")) {
-                displayList(list);
-                System.out.println("\n");
-            } else if (input.contains("done")) {
-                String[] doneCommand = input.split(" ");
-                task = list.get(Integer.parseInt(doneCommand[1]) - 1);
-                System.out.println("Good job! I've marked this task as done:\n    " +
-                        task.markDone() +
-                        "\n");
-            } else if (input.contains("todo") ||
-                    input.contains("deadline") ||
-                    input.contains("event")) {
+                if (input.equals("list")) {
+                    displayList(list);
+                    System.out.println("\n");
+                } else if (input.contains("done")) {
+                    String[] command = input.split(" ");
+                    task = list.get(Integer.parseInt(command[1]) - 1);
+                    System.out.println("Good job! I've marked this task as done:\n    " +
+                            task.markDone() +
+                            "\n");
+                } else if (input.contains("delete")) {
+                    String[] command = input.split(" ");
+                    int index = Integer.parseInt(command[1]) - 1;
+                    task = list.get(index);
+                    System.out.println("Alright, I've deleted this task:\n    " +
+                            task +
+                            "\n");
+                    list.remove(index);
+                    System.out.println("Now you have " + list.size() +
+                            " task(s) in the list. \n");
+                } else if (input.contains("todo") ||
+                        input.contains("deadline") ||
+                        input.contains("event")) {
 
-                if (input.contains("todo")) {
-                    task = new ToDo(input);
-                } else if (input.contains("deadline")) {
-                    task = new Deadline(input);
-                } else {
-                    task = new Event(input);
-                }
-                list.add(task);
-                System.out.println("I'll take note! \n  added: " +
-                        task + "\nNow you have " + list.size() +
-                        " task(s) in the list. \n");
+                    if (input.contains("todo")) {
+                        task = new ToDo(input);
+                    } else if (input.contains("deadline")) {
+                        task = new Deadline(input);
+                    } else {
+                        task = new Event(input);
+                    }
+                    list.add(task);
+                    System.out.println("Alright! I've added this task: \n   " +
+                            task + "\nNow you have " + list.size() +
+                            " task(s) in the list. \n");
                 } else {
                     throw new DukeInvalidCommandException();
                 }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-                input = sc.nextLine();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Oh no! This task does not exist. D:" );
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
+            input = sc.nextLine();
+        }
 
         sc.close();
         System.out.println("Bye! Stay on task!");
