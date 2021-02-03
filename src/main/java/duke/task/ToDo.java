@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.task;
 
 
 

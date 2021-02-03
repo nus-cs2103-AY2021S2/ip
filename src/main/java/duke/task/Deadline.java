@@ -1,9 +1,9 @@
-package duke.Tasks;
+package duke.task;
 
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    private static String taskType = "Deadline";
+    private static String taskType = "DEADLINE";
     private LocalDate endTime;
 
     public Deadline(String taskDescription, LocalDate endTime) {

@@ -3,10 +3,10 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.ToDo;
-import duke.Tasks.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
 import duke.Ui;
 
 import java.time.LocalDate;
