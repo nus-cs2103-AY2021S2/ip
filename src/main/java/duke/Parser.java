@@ -43,6 +43,19 @@ public class Parser {
         System.out.println("Nice! I've marked this task as done: " + "\n" + task.toString());
     }
 
+    public static void searchTask(String s) {
+        boolean hasFound = false;
+        for (Task t : taskList) {
+            if (t.description.contains(s)) {
+                hasFound = true;
+                System.out.println(t.toString());
+            }
+        }
+        if (!hasFound) {
+            System.out.println("no tasks found that matches your input!");
+        }
+    }
+
     public static void read() throws DukeException, Exception{
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
@@ -119,7 +132,17 @@ public class Parser {
                 }
                 ToDoTask task = new ToDoTask(desc);
                 addTask(task);
-
+            } else if (input.startsWith("find")) {
+                String[] spiltInput = input.split("\\s+");
+                String toSearch = "";
+                for (int i = 1; i < spiltInput.length; ++i) {
+                    if (toSearch.equals("")) {
+                        toSearch += spiltInput[i];
+                    } else {
+                        toSearch = toSearch + " " + spiltInput[i];
+                    }
+                }
+                searchTask(toSearch);
             } else if (input.equals("bye")) {
                 Ui.exit();
                 break;
