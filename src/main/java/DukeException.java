@@ -1,5 +1,3 @@
-import java.lang.RuntimeException;
-
 /**
  * Class DukeException is an custom unchecked exception class.
  *

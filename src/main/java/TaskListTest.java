@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Zhang Peng
  */
 class TaskListTest {
-    ArrayList<Task> l = new ArrayList<Task>();
+    ArrayList<Task> l = new ArrayList<>();
     Task t = new Task("todo borrow book");
 
     /**
