@@ -75,6 +75,8 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + (this.dueTime != null ? String.format(" (by: %s)", this.getDueTime()) : "");
+        return "[D]"
+            + super.toString()
+            + (this.dueTime != null ? String.format(" (by: %s)", this.getDueTime()) : "");
     }
 }
