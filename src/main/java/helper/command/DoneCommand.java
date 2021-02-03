@@ -22,16 +22,18 @@ public class DoneCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String stringToReturn = "";
         try {
             int index = Integer.parseInt(doneString) - 1;
             tasks.get(index).setDone(true);
-            ui.dukePrint("Good! We finished task: " + doneString + ". " + tasks.get(index));
+            stringToReturn = ("Good! We finished task: " + doneString + ". " + tasks.get(index));
             storage.saveFile(tasks);
         } catch (Exception e) {
-            ui.dukePrint("Please use a good index. Our list starts at 1..." +
-                    " and ends at " + (tasks.size() + 1));
+            stringToReturn = ("Please use a good index. Our list starts at 1..."
+                    + " and ends at " + (tasks.size() + 1));
         }
+        return stringToReturn;
     }
 
 }

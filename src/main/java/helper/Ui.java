@@ -17,30 +17,30 @@ public class Ui {
      * Show error s
      * @param s error
      */
-    public void showError(String s) {
-        dukePrint(s);
+    public String showError(String s) {
+        return s;
     }
 
     /**
      * Print with horizontal lines
      * @param s String to print
      */
-    public void dukePrint(String s) {
+    public String dukePrint(String s) {
         System.out.println("\n----------------------");
         System.out.println(s);
         System.out.println("----------------------\n");
+        return s;
     }
 
     /**
      * Print list of tasks
      * @param ls list of tasks
      */
-    public void dukePrint(List<Task> ls) {
-        System.out.println("\n----------------------");
-        for (int i = 0 ; i < ls.size(); i++) {
-            System.out.print(i+1);
-            System.out.println(". " + ls.get(i) );
+    public String dukePrint(List<Task> ls) {
+        StringBuilder initString = new StringBuilder();
+        for (int i = 0; i < ls.size(); i++) {
+            initString.append((i + 1)).append(". ").append(ls.get(i)).append("\n");
         }
-        System.out.println("----------------------\n");
+        return initString.toString();
     }
 }

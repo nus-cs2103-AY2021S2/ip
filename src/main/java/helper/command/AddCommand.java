@@ -25,44 +25,46 @@ public class AddCommand extends Command {
 
     /**
      * Executes the parsed command
+     *
      * @param tasks
      * @param ui
      * @param storage
      * @throws DukeException
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String stringToReturn = "";
         switch (whichAdd) {
-            case "todo":
-                Todo todo = new Todo(addString);
-                tasks.add(todo);
-                ui.dukePrint("added new todo: " + todo);
+        case "todo":
+            Todo todo = new Todo(addString);
+            tasks.add(todo);
+            stringToReturn = ("added new todo: " + todo);
             break;
-            case "event":
-                String[] eventInfo = addString.split(" /at ");
-                try {
-                    LocalDate date = LocalDate.parse(eventInfo[1]);
-                    Event event = new Event(eventInfo[0], date);
-                    tasks.add(event);
-                    ui.dukePrint("added new event: " + event);
-                }
-                catch (Exception e) {
-                    throw new DukeException("Invalid event");
-                }
+        case "event":
+            String[] eventInfo = addString.split(" /at ");
+            try {
+                LocalDate date = LocalDate.parse(eventInfo[1]);
+                Event event = new Event(eventInfo[0], date);
+                tasks.add(event);
+                stringToReturn = ("added new event: " + event);
+            } catch (Exception e) {
+                throw new DukeException("Invalid event");
+            }
             break;
-            case "deadline":
-                String[] deadlineInfo = addString.split(" /by ");
-                try {
-                    LocalDate date = LocalDate.parse(deadlineInfo[1]);
-                    Deadline deadline = new Deadline(deadlineInfo[0], date);
-                    tasks.add(deadline);
-                    ui.dukePrint("added new deadline: " + deadline);
-                }
-                catch (Exception e) {
-                    throw new DukeException("Invalid deadline");
-                }
+        case "deadline":
+            String[] deadlineInfo = addString.split(" /by ");
+            try {
+                LocalDate date = LocalDate.parse(deadlineInfo[1]);
+                Deadline deadline = new Deadline(deadlineInfo[0], date);
+                tasks.add(deadline);
+                stringToReturn = ("added new deadline: " + deadline);
+            } catch (Exception e) {
+                throw new DukeException("Invalid deadline");
+            }
             break;
         }
         storage.saveFile(tasks);
+        return stringToReturn;
     }
 
 }
