@@ -21,8 +21,10 @@ import javafx.stage.Stage;
  */
 public class Gui extends AnchorPane implements Ui {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/YingJen.jpg"));
+    private final Image appIcon = new Image(this.getClass().getResourceAsStream("/images/YingJen.jpg"));
     private final Consumer<String> inputHandler;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -136,6 +138,7 @@ public class Gui extends AnchorPane implements Ui {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Ying Jen: Your Personal Assistant");
+            stage.getIcons().add(appIcon);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

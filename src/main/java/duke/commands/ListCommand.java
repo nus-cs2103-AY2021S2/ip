@@ -59,6 +59,7 @@ public class ListCommand extends Command {
         if (tasks.taskCount() == 0) {
             feedback.append("No tasks currently!");
         } else {
+            feedback.append("Here are your current tasks:\n");
             for (int i = 0; i < tasks.taskCount(); i++) {
                 Task t = tasks.getAt(i);
                 int index = i + 1;
