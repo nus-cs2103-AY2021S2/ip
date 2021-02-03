@@ -12,15 +12,14 @@ public class Ui {
     }
 
     //user output at start
-    public void printStart() {
-        System.out.println(LINE);
+    public String printStart() {
         String logo =
-                "      _ __ ___   ___  _   _ _ __ ___   ___  _   _ \n" +
-                        "     | '_ ` _ \\ / _ \\| | | | '_ ` _ \\ / _ \\| | | |\n" +
-                        "     | | | | | | (_) | |_| | | | | | | (_) | |_| |\n" +
-                        "     |_| |_| |_|\\___/ \\__,_|_| |_| |_|\\___/ \\__,_|";
-        System.out.println(logo + " is back!\n     What have you awoken MouMou for?");
-        System.out.println(LINE);
+                "      _ __ ___   ___  _   _ _ __ ___   ___  _   _ \n"
+                      + "     | '_ ` _ \\ / _ \\| | | | '_ ` _ \\ / _ \\| | | |\n"
+                      + "     | | | | | | (_) | |_| | | | | | | (_) | |_| |\n"
+                      + "     |_| |_| |_|\\___/ \\__,_|_| |_| |_|\\___/ \\__,_|"
+                        + " is back!\n     What have you awoken MouMou for?";
+        return logo;
     }
 
     //output at the end

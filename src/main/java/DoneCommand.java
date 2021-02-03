@@ -19,18 +19,15 @@ public class DoneCommand extends Command {
      * @param tasks the task list consisting the task to be marked as done
      * @throws DukeException if user did not type in a task number
      */
-    public void execute(TaskList tasks) throws DukeException {
-        Ui.printLine();
+    public String execute(TaskList tasks) throws DukeException {
+        String response;
         String[] inputs = this.fullCommand.split(" ");
         if (inputs.length == 1) {
             throw new DukeException("OOPS! Please tell me what to mark as done!");
         }
         int taskNo = Integer.parseInt(String.valueOf(fullCommand.charAt(5))) - 1;
         String toPrint = tasks.makeDone(taskNo);
-        Ui.print(
-                Aligner.align("Good job! I've marked this task as done:"));
-        Ui.print(
-                Aligner.align(toPrint));
-        Ui.printLine();
+        response = "Good job! I've marked this task as done:\n" + toPrint;
+        return response;
     }
 }

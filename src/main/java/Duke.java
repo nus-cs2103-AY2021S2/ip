@@ -1,17 +1,26 @@
 import java.io.IOException;
-import java.util.*;
-import java.io.File;
+import java.util.Scanner;
 
 public class Duke {
-    public static final Scanner sc = new Scanner(System.in);
-    public static TaskList tasks;
-    public static FileHandler fh; 
-    public static Ui ui;
+    private static final Scanner sc = new Scanner(System.in);
+    private static TaskList tasks;
+    private static FileHandler fh;
+    private static Ui ui;
 
     public Duke() {
         ui = new Ui();
         fh = new FileHandler();
         tasks = new TaskList();
+    }
+
+    public String getResponse(String input) {
+            try {
+                Command c = Parser.parse(input);
+                String response = c.execute(tasks);
+                return response;
+            } catch (DukeException ex) {
+                return ex.getMessage();
+            }
     }
 
     public static void start() {
