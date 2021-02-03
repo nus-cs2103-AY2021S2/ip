@@ -3,9 +3,9 @@
  */
 public class Duke {
 
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
 
     /**
      * Duke constructor specifying the file path to save the task list to.
