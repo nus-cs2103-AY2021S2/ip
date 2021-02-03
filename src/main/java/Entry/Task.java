@@ -1,9 +1,5 @@
 package Entry;
 
-/*
-Task.Task is the general case for Task.Todo, Task.Deadline, and Task.Event. In future we might change this to interface or smt,
-I dont know... depends on future requirements.
- */
 public class Task {
     /** base class for the Task
      * @param description description of the task
