@@ -1,10 +1,15 @@
 import java.util.Scanner;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 public class MyDuke {
 
@@ -30,9 +35,9 @@ public class MyDuke {
             if (inputArr[0].equals("T")) {
                 l.add(new ToDo(inputArr[2], isDone));
             } else if (inputArr[0].equals("E")) {
-                l.add(new Event(inputArr[3], inputArr[2], isDone));
+                l.add(new Event(LocalDate.parse(inputArr[3]), inputArr[2], isDone));
             } else if (inputArr[0].equals("D")) {
-                l.add(new Deadline(inputArr[3], inputArr[2], isDone));
+                l.add(new Deadline(LocalDate.parse(inputArr[3]), inputArr[2], isDone));
             }
         }
         return l;
@@ -151,7 +156,7 @@ public class MyDuke {
                 try {
                     eventChecker(inputArr);
                     String[] temp = inputArr[1].split("/", 2);
-                    Event e = new Event(temp[1], temp[0], false);
+                    Event e = new Event(LocalDate.parse(temp[1]), temp[0], false);
                     list.add(e);
                     print(new String[] { "Paikia Bot: ok i just help u added this event -- " + e.toString(),
                             "Paikia Bot: now u got " + list.size() + " item(s) in your list ah" });
@@ -159,6 +164,12 @@ public class MyDuke {
                     print(e.getMessage());
                 } catch (NoDateException e) {
                     print(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    print("Paikia Bot: oi your date input got format error cannot parse sial: " + inputArr[1].split("/", 2)[1]);
+                    print(new String[] {
+                        "Paikia Bot: oi your date input got format error cannot parse sial: " + inputArr[1].split("/", 2)[1],
+                        "Paikia Bot: the format should be liddis: yyyy-mm-dd, eg. 2020-03-02"
+                    });
                 }
 
             } else if (inputArr[0].equals("deadline")) {
@@ -166,7 +177,7 @@ public class MyDuke {
                 try {
                     deadlineChecker(inputArr);
                     String[] temp = inputArr[1].split("/", 2);
-                    Deadline d = new Deadline(temp[1], temp[0], false);
+                    Deadline d = new Deadline(LocalDate.parse(temp[1]), temp[0], false);
                     list.add(d);
                     print(new String[] { "Paikia Bot: ok i just help u added this deadline -- " + d.toString(),
                             "Paikia Bot: now u got " + list.size() + " item(s) in your list ah" });
@@ -174,6 +185,12 @@ public class MyDuke {
                     print(e.getMessage());
                 } catch (NoDateException e) {
                     print(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    print("Paikia Bot: oi your date input got format error cannot parse sial: " + inputArr[1].split("/", 2)[1]);
+                    print(new String[] {
+                        "Paikia Bot: oi your date input got format error cannot parse sial: " + inputArr[1].split("/", 2)[1],
+                        "Paikia Bot: the format should be liddis: yyyy-mm-dd, eg. 2020-03-02"
+                    });
                 }
 
             } else {
@@ -297,9 +314,9 @@ class ToDo extends Task {
 }
 
 class Deadline extends Task {
-    String deadline;
+    LocalDate deadline;
 
-    Deadline(String deadline, String s, boolean b) {
+    Deadline(LocalDate deadline, String s, boolean b) {
         super(s, b);
         this.deadline = deadline;
     }
@@ -312,16 +329,30 @@ class Deadline extends Task {
         return new Deadline(this.deadline, this.info, false);
     }
 
+    String timeDisplay() { //format: MMM dd yyyy
+        String year = Integer.toString(this.deadline.getYear());
+        String month = this.deadline.getMonth().name().substring(0,3);
+        String day = this.deadline.getDayOfMonth() > 9
+            ? Integer.toString(this.deadline.getDayOfMonth())
+            : "0" + Integer.toString(this.deadline.getDayOfMonth());
+
+        return month + " " + day + " " + year;
+    }
+
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "[D]" + super.toString() + " (" + this.deadline + ")";
+=======
+        return "[D]" + super.toString() + "(" + this.timeDisplay() + ")";
+>>>>>>> branch-Level-8
     }
 }
 
 class Event extends Task {
-    String date;
+    LocalDate date;
 
-    Event(String date, String s, boolean b) {
+    Event(LocalDate date, String s, boolean b) {
         super(s, b);
         this.date = date;
     }
@@ -334,9 +365,23 @@ class Event extends Task {
         return new Event(this.date, this.info, false);
     }
 
+    String timeDisplay() { //format: MMM dd yyyy
+        String year = Integer.toString(this.date.getYear());
+        String month = this.date.getMonth().name().substring(0,3);
+        String day = this.date.getDayOfMonth() > 9
+            ? Integer.toString(this.date.getDayOfMonth())
+            : "0" + Integer.toString(this.date.getDayOfMonth());
+
+        return month + " " + day + " " + year;
+    }
+
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "[E]" + super.toString() + " (" + this.date + ")";
+=======
+        return "[E]" + super.toString() + "(" + this.timeDisplay() + ")";
+>>>>>>> branch-Level-8
     }
 }
 
