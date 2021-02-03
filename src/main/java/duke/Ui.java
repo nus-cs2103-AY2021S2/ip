@@ -1,81 +1,40 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
- * Encompasses interactions with the user using Scanner to get input and outputs to the default System.out.
+ * Encompasses interactions with the user by returning Strings.
  */
 public class Ui {
-    private final Scanner scanner;
-
-    private Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
     /**
-     * Static factory creation of Ui.
+     * Returns the custom welcome message to the user.
      *
-     * @return DukeObjects.Duke.Ui object started.
+     * @return welcome message.
      */
-    public static Ui startUi() {
-        String logo = " ____        _        \n"
+    public static String showWelcome() {
+        return "Hello from\n"
+                + " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n"
-                + "What can I do for you?");
-
-        return new Ui();
-    }
-
-    /**
-     * Reads a line of user input, returns null if there is no input.
-     *
-     * @return String read.
-     */
-    public String readCommand() {
-        if (scanner.hasNextLine()) {
-            return scanner.nextLine();
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Closes this Ui and its underlying Scanner.
-     */
-    public void close() {
-        scanner.close();
-    }
-
-    /**
-     * Prints error message.
-     *
-     * @param error Error message.
-     */
-    public static void printError(String error) {
-        System.out.println(error);
-    }
-
-    public static void printLine() {
-        System.out.println("------------------------------");
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?";
     }
 
     /**
      * Prints each Task in the list with its index, and remarks if the list is empty.
      *
-     * @param tasks List of Tasks to be printed.
+     * @param tasks The existing list of tasks.
+     * @return string of listed entries.
      */
-    public static void printList(TaskList tasks) {
+    public static String printList(TaskList tasks) {
         if (tasks.size() == 0) {
-            System.out.println("Your list is empty!");
+            return "Your list is empty!";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String result = "Here are the tasks in your list: \n";
             for (int i = 1; i <= tasks.size(); i++) {
-                System.out.println(i + "." + tasks.get(i - 1));
+                result = result.concat(i + "." + tasks.get(i - 1) + "\n");
             }
+            return result;
         }
     }
 

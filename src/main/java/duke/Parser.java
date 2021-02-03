@@ -22,22 +22,24 @@ public class Parser {
      * Passes the command to the relevant methods.
      *
      * @param command A string of the command to be carried out.
+     * @return response to the command.
      */
-    public void parseCommand(String command) {
+    public String parseCommand(String command) {
+        String response = "";
         command = command.trim();
         try {
             switch (command.split(" ")[0]) {
             case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
+                response = "Bye. Hope to see you again soon!";
                 break;
             case "list":
-                Ui.printList(tasks);
+                response = Ui.printList(tasks);
                 break;
             case "done":
-                handleDone(command);
+                response = handleDone(command);
                 break;
             case "delete":
-                handleDelete(command);
+                response = handleDelete(command);
                 break;
             case "todo":
                 // Fallthrough
@@ -45,20 +47,22 @@ public class Parser {
                 // Fallthrough
             case "event":
                 Task newTask = Task.dispatchTaskCreation(command);
-                addTask(newTask);
+                response = addTask(newTask);
                 if (storage != null) {
                     storage.storeTask(command);
                 }
                 break;
             case "find":
-                handleFind(command);
+                response = handleFind(command);
                 break;
             default:
                 Ui.throwIllegalArgumentEx(command);
                 break;
             }
         } catch (DukeException | IllegalArgumentException e) {
-            Ui.printError(e.getMessage());
+            response = e.getMessage();
+        } finally {
+            return response;
         }
     }
 
@@ -67,69 +71,82 @@ public class Parser {
      * Handles exceptions that include index out of bounds and number format.
      * Saves to storage.
      *
-     * @param command "done {task number}"
+     * @param command "done {task number}".
+     * @return feedback whether task is marked done successfully or not.
      */
-    private void handleDone(String command) {
+    private String handleDone(String command) {
+        String reply = "";
         try {
             int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
             Task currentTask = tasks.get(taskNum);
             currentTask.markDone();
-            System.out.println("Swee chai. It's done.\n" + currentTask);
+            reply = "Noice. It's done. \n" + currentTask;
             if (storage != null) {
                 storage.updateTaskDone(taskNum);
             }
         } catch (NumberFormatException e) {
-            Ui.printError("Please enter a number from 1 to " + tasks.size() + " after done!");
+            reply = "Please enter a number from 1 to " + tasks.size() + " after done!";
         } catch (IndexOutOfBoundsException e) {
             if (tasks.size() == 0) {
-                Ui.printError("Your list is empty!");
+                reply = "Your list is empty!";
             } else {
-                Ui.printError("Please enter a number from 1 to " + tasks.size() + " after done!");
+                reply = "Please enter a number from 1 to " + tasks.size() + " after done!";
             }
         }
+        return reply;
     }
 
     /**
      * Deletes the task in the list. Updates storage.
      * Handles number format and index out of bounds exceptions.
      *
-     * @param command "delete {task number}"
+     * @param command "delete {task number}".
+     * @return feedback whether the task is deleted successfully.
      */
-    private void handleDelete(String command) {
+    private String handleDelete(String command) {
+        String reply = "";
         try {
             int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
             Task currentTask = tasks.remove(taskNum);
-            System.out.println("See la. It's deleted.\n" + currentTask
-                    + "\nYou currently have " + tasks.size() + " task(s) in the list.");
+            reply = "See la. It's deleted. \n" + currentTask
+                    + "\nYou currently have " + tasks.size() + " task(s) in the list.";
             if (storage != null) {
                 storage.deleteTask(taskNum);
             }
         } catch (NumberFormatException e) {
-            Ui.printError("Please enter a number from 1 to " + tasks.size() + " after delete!");
+            reply = "Please enter a number from 1 to " + tasks.size() + " after delete!";
         } catch (IndexOutOfBoundsException e) {
             if (tasks.size() == 0) {
-                Ui.printError("Your list is empty!");
+                reply = "Your list is empty!";
             } else {
-                Ui.printError("Please enter a number from 1 to " + tasks.size() + " after delete!");
+                reply = "Please enter a number from 1 to " + tasks.size() + " after delete!";
             }
         }
+        return reply;
     }
 
     /**
-     * Adds specified task into task list and prints user feedback.
+     * Adds specified task into task list and returns user feedback.
      *
      * @param task Task to be added.
+     * @return feedback for adding task successfully.
      */
-    private void addTask(Task task) {
+    private String addTask(Task task) {
         tasks.add(task);
-        System.out.println("Your task has been added: " + task
-                + "\nYou currently have " + tasks.size() + " task(s) in the list.");
+        return "Your task has been added: " + task
+                + "\nYou currently have " + tasks.size() + " task(s) in the list.";
     }
 
-    private void handleFind(String command) {
+    /**
+     * Loops through the existing TaskList and finds all tasks that match the given argument.
+     *
+     * @param command "find {string to match}".
+     * @return string of tasks matching argument.
+     */
+    private String handleFind(String command) {
+        StringBuffer reply = new StringBuffer();
         try {
             String query = command.split(" ", 2)[1].trim();
-            StringBuffer reply = new StringBuffer();
             boolean isFound = false;
             for (int i = 1; i <= tasks.size(); i++) {
                 if (tasks.get(i - 1).toString().contains(query)) {
@@ -139,12 +156,12 @@ public class Parser {
             }
             if (isFound) {
                 reply.insert(0, "Here are the matching tasks in your list:\n");
-                System.out.print(reply);
             } else {
-                System.out.println("There are no tasks that match \"" + query + "\"!");
+                return "There are no tasks that match \"" + query + "\"!";
             }
         } catch (IndexOutOfBoundsException e) {
-            Ui.printError("Please type in your query after find!");
+            return "Please type in your query after find!";
         }
+        return reply.toString();
     }
 }

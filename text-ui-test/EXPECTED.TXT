@@ -69,15 +69,15 @@ Here are the tasks in your list:
 4.[D][ ] profit again (by: 28 Jan 2023, 6PM)
 ------------------------------
 ------------------------------
-Swee chai. It's done.
+Noice. It's done.
 [E][X] grinding (at: all day err day)
 ------------------------------
 ------------------------------
-Swee chai. It's done.
+Noice. It's done.
 [D][X] profit (by: 2022)
 ------------------------------
 ------------------------------
-Swee chai. It's done.
+Noice. It's done.
 [D][X] profit again (by: 28 Jan 2023, 6PM)
 ------------------------------
 ------------------------------
@@ -96,7 +96,7 @@ Here are the tasks in your list:
 4.[D][X] profit again (by: 28 Jan 2023, 6PM)
 ------------------------------
 ------------------------------
-Swee chai. It's done.
+Noice. It's done.
 [T][X] hustle
 ------------------------------
 ------------------------------
