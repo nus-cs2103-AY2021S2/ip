@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -9,14 +11,14 @@ public class Deadline extends Task{
     private final String type;
     private final LocalDate date;
     private final LocalTime time;
-    Deadline(String job, LocalDate date, LocalTime time) {
+    public Deadline(String job, LocalDate date, LocalTime time) {
         super(job);
         this.type = "D";
         this.date = date;
         this.time = time;
     }
 
-    Deadline(String job, Boolean isDone, LocalDate date, LocalTime time) {
+    public Deadline(String job, Boolean isDone, LocalDate date, LocalTime time) {
         super(job, isDone);
         this.type = "D";
         this.date = date;

@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -9,7 +11,7 @@ public class Event extends Task{
     private final String type;
     private final LocalDate date;
     private final LocalTime time;
-    Event(String job, LocalDate date, LocalTime time) {
+    public Event(String job, LocalDate date, LocalTime time) {
         super(job);
         this.type = "E";
         this.date = date;

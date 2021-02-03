@@ -1,5 +1,9 @@
+package duke.util;
+
 import java.util.Scanner;
 import java.util.List;
+
+import duke.exception.NoMeaningException;
 
 public class Ui {
     private Scanner scan;

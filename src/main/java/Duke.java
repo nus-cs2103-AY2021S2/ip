@@ -1,6 +1,12 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+
+import duke.exception.NoCommandException;
+import duke.exception.NoMeaningException;
+import duke.util.*;
+import duke.command.Command;
+
 public class Duke {
     private static String FILE_PATH = "./data/";
     private static String FILE_NAME = "history.txt";

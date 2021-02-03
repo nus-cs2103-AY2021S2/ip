@@ -1,6 +1,8 @@
+package duke.util;
+
 public class ToDo extends Task{
     private final String type;
-    ToDo(String job) {
+    public ToDo(String job) {
         super(job);
         this.type = "T";
     }

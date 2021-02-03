@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.ToDo;
+import duke.exception.NoMeaningException;
+
 public class AddToDoCommand extends Command {
     public AddToDoCommand() {}
     public String execute(Storage storage, TaskList taskList, Ui ui, String command) {

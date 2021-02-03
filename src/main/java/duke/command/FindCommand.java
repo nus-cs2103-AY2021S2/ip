@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.NoMeaningException;
+import duke.util.Storage;
+import duke.util.Task;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 import java.util.List;
 
 public class FindCommand extends Command{

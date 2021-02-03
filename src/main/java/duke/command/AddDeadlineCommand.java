@@ -1,8 +1,16 @@
+package duke.command;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Deadline;
+import duke.exception.NoMeaningException;
 
 public class AddDeadlineCommand extends Command {
     public AddDeadlineCommand() {}
+
     public String execute(Storage storage, TaskList taskList, Ui ui, String command) {
         try {
             String commandContent = command.substring(9);

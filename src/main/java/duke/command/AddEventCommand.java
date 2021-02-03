@@ -1,5 +1,12 @@
+package duke.command;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Event;
+import duke.exception.NoMeaningException;
 
 public class AddEventCommand extends Command {
     public AddEventCommand() {}
