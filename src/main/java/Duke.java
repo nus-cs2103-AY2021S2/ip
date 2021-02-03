@@ -1,16 +1,12 @@
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import exception.DukeException;
 import exception.DukeInvalidInputException;
 import gui.MainWindow;
+import gui.TextFieldInputStream;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -29,7 +25,7 @@ public class Duke extends Application {
      */
     public static void main(String[] args) throws IOException {
 
-        UI.greet();
+        UI.greet(System.out);
 
         storage.tasks = new ArrayList<>(100);
         storage.inputs = new ArrayList<>(100);
@@ -40,18 +36,41 @@ public class Duke extends Application {
     }
 
     MainWindow window = new MainWindow();
+    Thread t;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         window.createChatWindow();
         primaryStage.setScene(window.getScene());
+
+        UI.greet(window.getOutputStream());
+
+        storage.tasks = new ArrayList<>(100);
+        storage.inputs = new ArrayList<>(100);
+        storage.loadHistory();
+
+        primaryStage.show();
+
+        t = new Thread(() -> {
+            try {
+                chatLoop(window.getInputStream(), window.getOutputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        t.start();
+    }
+
+    @Override
+    public void stop() {
+        t.stop();
     }
 
     protected static void chatLoop(InputStream in, OutputStream out) throws IOException {
 
-        BufferedReader reader = getReader(in);
         PrintStream writer = getWriter(out);
-        String line = reader.readLine();
+        String line = readLine(in);
         while (line != null) {
             try {
                 writer.println(parseInput(line));
@@ -59,11 +78,13 @@ public class Duke extends Application {
                 storage.saveHistory();
             } catch (DukeException e) {
                 handleException(e, writer);
+            } catch (Exception e) {
+                writer.println(e.toString());
             }
             if (line.equals("bye")) {
                 break;
             }
-            line = reader.readLine();
+            line = readLine(in);
         }
     }
 
@@ -101,5 +122,17 @@ public class Duke extends Application {
 
     private static BufferedReader getReader(InputStream in) {
         return new BufferedReader(new InputStreamReader(in));
+    }
+
+    private static String readLine(InputStream stream) throws IOException {
+        char c;
+        String s = "";
+        do {
+            c = (char) stream.read();
+            if (c == '\n')
+                break;
+            s += c + "";
+        } while (c != -1);
+        return s;
     }
 }
