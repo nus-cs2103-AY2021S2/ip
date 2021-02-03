@@ -23,9 +23,13 @@ public class Task {
         return taskType;
     }
 
-    public Task setIsDone(boolean done) {
+    // public Task setIsDone(boolean done) {
+    //
+    //     return new Task(this.taskDescription, done);
+    // }
 
-        return new Task(this.taskDescription, done);
+    public void setIsDone(boolean done) {
+        this.isDone = done;
     }
 
     public boolean getIsDone() {

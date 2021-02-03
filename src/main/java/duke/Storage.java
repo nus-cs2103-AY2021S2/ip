@@ -41,7 +41,12 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Method to save TaskList to hard disk.
+     *
+     * @param taskList
+     * @throws IOException
+     */
     public void writeData(List<Task> taskList) throws IOException {
         FileWriter file = new FileWriter(DEFAULT_PATH);
         for (Task task : taskList) {
@@ -75,6 +80,18 @@ public class Storage {
         }
         file.close();
     }
+
+
+    /**
+     * Wrapper method to accept TaskList instead of a List.
+     *
+     * @param taskList
+     * @throws IOException
+     */
+    public void writeData(TaskList taskList) throws IOException {
+        writeData(taskList.getTaskList());
+    }
+
 
     public List<Task> loadData() throws IOException {
         // checks to see if a file is already supposed to be there

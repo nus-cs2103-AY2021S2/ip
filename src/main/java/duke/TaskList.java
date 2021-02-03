@@ -44,4 +44,12 @@ public class TaskList {
         this.taskList.get(index).setIsDone(isDone);
     }
 
+    public void addTask(Task task) {
+        this.taskList.add(task);
+    }
+
+    public void deleteTask(int index) {
+        this.taskList.remove(index);
+    }
+
 }
