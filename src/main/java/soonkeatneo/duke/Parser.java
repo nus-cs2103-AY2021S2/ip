@@ -9,7 +9,7 @@ import soonkeatneo.duke.task.Todo;
 /**
  * Implementation for parsing of input to be routed to specific handlers.
  *  @author Soon Keat Neo
- *  @version CS2103T AY20/21 Sem 1 iP
+ *  @version CS2103T AY20/21 Sem 2 iP
  */
 
 public class Parser {
@@ -19,23 +19,23 @@ public class Parser {
      * @param tasks Task List to be manipulated
      * @param storage {@Storage} object to be used
      */
-    public static void parse(String inputString, TaskList tasks, Storage storage) {
+    public static String parse(String inputString, TaskList tasks, Storage storage) {
 
         if (inputString.equals("list")) {
-            tasks.print();
+            return tasks.print();
         } else if (inputString.equals("bye")) {
-            Duke.quit();
+            System.exit(0);
         } else if (inputString.startsWith("done")) {
-            tasks.completeTask(inputString, storage);
+            return tasks.completeTask(inputString, storage);
         } else if (inputString.startsWith("delete")) {
-            tasks.deleteTask(inputString, storage);
+            return tasks.deleteTask(inputString, storage);
         } else if (inputString.startsWith("todo")) {
             try {
                 String taskString = inputString.substring(5);
                 Todo newTodo = new Todo(taskString);
-                tasks.addTask(newTodo);
                 String saveToDisk = "T | 0 | " + taskString;
                 storage.saveTaskToDisk(saveToDisk);
+                return tasks.addTask(newTodo);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException(
                         "Your input format doesn't seem right! For todos, it needs to be: todo <title>");
@@ -46,9 +46,9 @@ public class Parser {
                 String taskString = eventString[0].substring(6).trim();
                 String dateTime = eventString[1].trim();
                 Event newEvent = new Event(taskString, dateTime);
-                tasks.addTask(newEvent);
                 String saveToDisk = "E | 0 | " + taskString + " | " + dateTime;
                 storage.saveTaskToDisk(saveToDisk);
+                return tasks.addTask(newEvent);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException(
                         "Your input format doesn't seem right!"
@@ -63,9 +63,9 @@ public class Parser {
                 String taskString = eventString[0].substring(9).trim();
                 String deadlineTime = eventString[1].trim();
                 Deadline newDeadline = new Deadline(taskString, deadlineTime);
-                tasks.addTask(newDeadline);
                 String saveToDisk = "D | 0 | " + taskString + " | " + deadlineTime;
                 storage.saveTaskToDisk(saveToDisk);
+                return tasks.addTask(newDeadline);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException(
                         "Your input format doesn't seem right!"
@@ -76,7 +76,7 @@ public class Parser {
             }
         } else if (inputString.startsWith("find")) {
             try {
-                tasks.find(inputString.substring(5).trim());
+                return tasks.find(inputString.substring(5).trim());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException(
                         "Your input format doesn't seem right! For find, it needs to be: find <string>");
@@ -84,5 +84,6 @@ public class Parser {
         } else {
             throw new InvalidCommandException();
         }
+        return "test";
     }
 }

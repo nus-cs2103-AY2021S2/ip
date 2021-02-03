@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Handles the opening, writing and opening of files.
  * @author Soon Keat Neo
- * @version CS2103T AY20/21 Sem 1 iP v0.1
+ * @version CS2103T AY20/21 Sem 2 iP v0.1
  */
 public class Storage {
     private String filePath;

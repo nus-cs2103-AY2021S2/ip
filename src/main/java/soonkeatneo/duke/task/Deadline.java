@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Implementation for tasks with a specified end-date.
  *  @author Soon Keat Neo
- *  @version CS2103T AY20/21 Sem 1 iP
+ *  @version CS2103T AY20/21 Sem 2 iP
  */
 
 public class Deadline extends Task {
@@ -16,6 +16,10 @@ public class Deadline extends Task {
         this.lastDate = LocalDate.parse(lastDate);
     }
 
+    /**
+     * Returns the date of the instance.
+     * @return date of the object
+     */
     public LocalDate getDate() {
         return this.lastDate;
     }

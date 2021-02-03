@@ -12,7 +12,7 @@ import soonkeatneo.duke.task.Todo;
 /**
  * Stores and manages the list of {@Task} created.
  * @author Soon Keat Neo
- * @version CS2103T AY20/21 Sem 1 iP v0.1
+ * @version CS2103T AY20/21 Sem 2 iP v0.1
  */
 public class TaskList {
     private static List<Task> taskList;
@@ -37,42 +37,46 @@ public class TaskList {
      * Prints a list of {@Task} matching the given string.
      * @param inputString the String to search for
      */
-    public void find(String inputString) {
+    public String find(String inputString) {
         List<Task> newList = new ArrayList<>();
         boolean hasPrintedTasks = false;
         int counter = 0;
+        String message = "";
         for (int i = 0; i < this.taskList.size(); i++) {
             Task task = this.taskList.get(i);
             if (task.getDescription().toLowerCase().contains(inputString.toLowerCase())) {
                 if (!hasPrintedTasks) {
-                    Ui.printMessage("Here are the list of matching tasks: ");
+                    message += "Here are the list of matching tasks: \n";
                     hasPrintedTasks = true;
                 }
-                Ui.printMessage((counter + 1) + ". " + task.toString());
+                message += (counter + 1) + ". " + task.toString() + "\n";
                 counter += 1;
             }
         }
         if (!hasPrintedTasks) {
-            Ui.printMessage("There are no matching tasks!");
+            message += "There are no matching tasks!";
         }
+        return message;
     }
 
     /**
      * Adds a new {@Task} to the task list.
      * @param task Given task to be added to the task list
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         taskList.add(task);
-        Ui.printMessage("Wakarimashita! Task added to list:");
-        Ui.printMessage(task.toString());
-        Ui.printMessage("The size of your task list is now: " + this.getSize());
+        String message = "Wakarimashita! Task added to list:\n";
+        message += task.toString();
+        message += "\nThe size of your task list is now: " + this.getSize();
+        return message;
     }
 
     /**
      * Mark the specified task as complete.
      * @param inputString User input string
      */
-    public void completeTask(String inputString, Storage storage) {
+    public String completeTask(String inputString, Storage storage) {
+        String message = "";
         try {
             int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
             Task doneTask = taskList.get(taskId).setDone();
@@ -92,11 +96,12 @@ public class TaskList {
                 newString += " | " + date.toString();
             }
             storage.deleteReplaceTaskFromDisk(oldString, newString);
-            Ui.printMessage("Great~! Task completed:");
-            Ui.printMessage(doneTask.toString());
+            message += "Great~! Task completed:\n";
+            message += doneTask.toString();
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskException();
         }
+        return message;
     }
 
     /**
@@ -104,7 +109,8 @@ public class TaskList {
      * @param inputString User input string
      * @param storage Storage object to remove from disk
      */
-    public void deleteTask(String inputString, Storage storage) {
+    public String deleteTask(String inputString, Storage storage) {
+        String message = "";
         try {
             int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
             Task deletedTask = taskList.remove(taskId);
@@ -113,27 +119,28 @@ public class TaskList {
             String descriptionOfTask = deletedTask.getDescription().strip();
             String oldString = typeOfTask + " | " + completionOfTask + " | " + descriptionOfTask;
             storage.deleteReplaceTaskFromDisk(oldString, "");
-            Ui.printMessage("Okie! I've deleted the task from your list:");
-            Ui.printMessage(deletedTask.toString());
-            Ui.printMessage("The size of your task list is now: " + taskList.size());
+            message += "Okie! I've deleted the task from your list:\n";
+            message += deletedTask.toString();
+            message += "\nThe size of your task list is now: " + taskList.size();
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskException();
         }
+        return message;
     }
 
     /**
      * Prints the list of tasks in the list, including the status.
      */
-    public void print() {
+    public String print() {
         if (taskList.size() < 1) {
-            Ui.printMessage("There are no tasks in your list! :c");
-            return;
+            return "There are no tasks in your list! :c";
         }
-        Ui.printMessage("Tasks in your list are~: ");
+        String message = "Tasks in your list are~: \n";
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            Ui.printMessage((i + 1) + "." + task);
+            message += (i + 1) + "." + task + "\n";
         }
+        return message;
     }
 
     /**
