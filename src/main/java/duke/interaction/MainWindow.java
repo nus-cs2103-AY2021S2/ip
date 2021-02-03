@@ -1,7 +1,6 @@
 package duke.interaction;
 
 import duke.common.DukeBot;
-import duke.interaction.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
