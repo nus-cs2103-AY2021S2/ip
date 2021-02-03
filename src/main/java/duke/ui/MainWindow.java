@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import duke.commands.Command;
 import duke.commands.CommandResult;
@@ -9,7 +9,6 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.tasks.TaskList;
-import duke.ui.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

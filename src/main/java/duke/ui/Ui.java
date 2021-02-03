@@ -3,7 +3,6 @@ package duke.ui;
 import java.io.IOException;
 
 import duke.Main;
-import duke.MainWindow;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import javafx.fxml.FXMLLoader;
