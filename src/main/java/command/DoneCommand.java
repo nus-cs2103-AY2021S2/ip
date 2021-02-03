@@ -25,18 +25,19 @@ public class DoneCommand extends Command {
      * and Ui to display done message
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return command execution result string
      */
     @Override
-    public void execute(TaskManager tm, Ui ui) {
+    public String execute(TaskManager tm, Ui ui) {
         try {
             if (tm.indexWithinRange(doneIndex)) {
                 Task task = tm.done(doneIndex);
-                ui.displayAfterDone(task);
+                return ui.displayAfterDone(task);
             } else {
-                ui.displayOutOfRange(doneIndex);
+                return ui.displayOutOfRange(doneIndex);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return e.getMessage();
         }
     }
 }

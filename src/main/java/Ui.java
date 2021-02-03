@@ -35,23 +35,22 @@ public class Ui {
     /**
      * Show greetings display
      */
-    public void greeting() {
-        System.out.println("This is \n" + LOGO);
-        System.out.println(GREETINGS);
+    public String greeting() {
+        return "This is \n" + LOGO + "\n" + GREETINGS;
     }
 
     /**
      * Show exit display
      */
-    public void displayExit() {
-        System.out.println(PREFIX + "Bye, until next time!");
+    public String displayExit() {
+        return PREFIX + "Bye, until next time!";
     }
 
     /**
      * Show a horizontal line
      */
-    public void displayLine() {
-        System.out.println("________________________");
+    public String displayLine() {
+        return "________________________";
     }
 
     /**
@@ -65,89 +64,94 @@ public class Ui {
     /**
      * Display a general wrong command
      */
-    public void displayWrongCommand() {
-        System.out.println(PREFIX + "Sorry, but we could not parse your input");
-        System.out.println(PREFIX + "Please recheck its validity...");
+    public String displayWrongCommand() {
+        return PREFIX + "Sorry, but we could not parse your input\n"
+                + PREFIX + "Please recheck its validity...";
     }
 
     /**
      * Display a wrong command message
      * @param message customized input message
      */
-    public void displayWrongCommand(String message) {
-        System.out.println(PREFIX + message);
-        System.out.println(PREFIX + "Sorry, but we could not parse your input");
-        System.out.println(PREFIX + "Please recheck its validity...");
+    public String displayWrongCommand(String message) {
+        return PREFIX + message + "\n"
+                + PREFIX + "Sorry, but we could not parse your input\n"
+                + PREFIX + "Please recheck its validity...";
     }
 
     /**
      * Display an input index out of range error message
      * @param index the given index
      */
-    public void displayOutOfRange(int index) {
-        System.out.println(PREFIX + "There is no such index " + index + " in the task list.");
+    public String displayOutOfRange(int index) {
+        return PREFIX + "There is no such index " + index + " in the task list.";
     }
 
     /**
      * Display Error with particular error message
      * @param message particular error message
      */
-    public void displayError(String message) {
-        System.out.println("Duke is sorry about it, but we have encountered an error...");
-        System.out.println(message);
+    public String displayError(String message) {
+        return "Duke is sorry about it, but we have encountered an error...\n"
+                + message;
     }
 
     /**
      * Display a task
      * @param task task to be displayed
      */
-    public void displayTask(Task task) {
-        System.out.println(PREFIX + task);
+    public String displayTask(Task task) {
+        return PREFIX + task.toString();
     }
 
     /**
      * Display info regarding current task list size
      * @param size list size
      */
-    public void displayListSize(int size) {
-        System.out.println(PREFIX + "Now you have " + size + " tasks in the list.");
+    public String displayListSize(int size) {
+        return PREFIX + "Now you have " + size + " tasks in the list.";
     }
 
     /**
      * Display when there is nothing in task list
      */
-    public void displayEmptyList() {
-        System.out.println(DISPLAY_EMPTY_LIST);
+    public String displayEmptyList() {
+        return DISPLAY_EMPTY_LIST;
     }
 
     /**
      * Display all tasks
      * @param list list of tasks
      */
-    public void displayAllTasks(List<Task> list) {
+    public String displayAllTasks(List<Task> list) {
+        String display = "";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(PREFIX + (i + 1) + ". " + list.get(i));
+            display += PREFIX + (i + 1) + ". " + list.get(i) + "\n";
         }
+        return display;
     }
 
     /**
      * Display after adding a task
      * @param size task list size after adding the task
      * @param task task added
+     * @return
      */
-    public void displayAfterAdd(int size, Task task) {
-        System.out.println(DISPLAY_ADDED);
-        displayTask(task);
-        displayListSize(size);
+    public String displayAfterAdd(int size, Task task) {
+        String display = DISPLAY_ADDED;
+        display += "\n" + displayTask(task);
+        display += "\n" + displayListSize(size);
+        return display;
     }
 
     /**
      * Display after done a task
      * @param task task done
      */
-    public void displayAfterDone(Task task) {
-        System.out.println(DISPLAY_DONE);
-        displayTask(task);
+    public String displayAfterDone(Task task) {
+        String display = DISPLAY_DONE + "\n";
+        display += displayTask(task);
+        return display;
     }
 
     /**
@@ -155,24 +159,27 @@ public class Ui {
      * @param size task list size after deleting the task
      * @param task task deleted
      */
-    public void displayAfterDelete(int size, Task task) {
-        System.out.println(DISPLAY_RENAME);
-        System.out.println(PREFIX + task);
-        displayListSize(size);
+    public String displayAfterDelete(int size, Task task) {
+        String display = DISPLAY_RENAME;
+        display += "\n" + PREFIX + task.toString();
+        display += "\n" + displayListSize(size);
+        return display;
     }
 
     /**
      * Display search result based on given result task list
      * @param result task list found
      */
-    public void displaySearchResult(List<Task> result) {
+    public String displaySearchResult(List<Task> result) {
+        String display;
         if (result.isEmpty()) {
-            System.out.println(PREFIX + "Sorry, there is no task found.");
+            display = PREFIX + "Sorry, there is no task found.";
         } else {
-            System.out.println(PREFIX + "We found " + result.size() + " results:");
+            display = PREFIX + "We found " + result.size() + " results:\n";
             for (Task task: result) {
-                System.out.println(PREFIX + task);
+                display += PREFIX + task + "\n";
             }
         }
+        return display;
     }
 }

@@ -26,10 +26,11 @@ public class FindCommand extends Command {
      * then call ui to display the taks
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return command execution result string
      */
     @Override
-    public void execute(TaskManager tm, Ui ui) {
+    public String execute(TaskManager tm, Ui ui) {
         List<Task> result = tm.findByKeyword(keyword);
-        ui.displaySearchResult(result);
+        return ui.displaySearchResult(result);
     }
 }

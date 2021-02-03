@@ -46,9 +46,10 @@ public class AddDeadlineCommand extends AddCommand {
      * and Ui to display add message
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return execution result string
      */
     @Override
-    public void execute(TaskManager tm, Ui ui) {
+    public String execute(TaskManager tm, Ui ui) {
         Task task;
         if (this.date == null) {
             task = new Deadline(deadlineName, keyword, dateString);
@@ -56,6 +57,6 @@ public class AddDeadlineCommand extends AddCommand {
             task = new Deadline(deadlineName, keyword, date);
         }
         tm.addTask(task);
-        ui.displayAfterAdd(tm.size(), task);
+        return ui.displayAfterAdd(tm.size(), task);
     }
 }

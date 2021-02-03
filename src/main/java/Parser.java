@@ -33,7 +33,7 @@ public class Parser {
      * @return parsed command
      * @throws Exception parsing exceptions including wrong input, index out of bounds due to wrong input etc.
      */
-    public Command parse(String commandStr) throws Exception {
+    public Command parse(String commandStr) {
         Command command = null;
         try {
             if (commandStr == null) {

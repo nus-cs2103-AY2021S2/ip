@@ -12,10 +12,11 @@ public class ExitCommand extends Command {
      * Simply exit Duke
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return command execution result string
      */
     @Override
-    public void execute(TaskManager tm, Ui ui) {
-        ui.displayExit();
+    public String execute(TaskManager tm, Ui ui) {
+        return ui.displayExit();
     }
 
     /**

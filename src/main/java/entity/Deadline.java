@@ -75,8 +75,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D][" + (this.isDone ? "X" : " ") + "] " + this.name + " (" + keyword + ": " +
-                (this.deadlineDate == null ? this.deadline : this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";
+        return "[D][" + (this.isDone ? "X" : " ") + "] " + this.name + " (" + keyword + ": "
+                + (this.deadlineDate == null ? this.deadline
+                    : this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";
     }
 
     /**
@@ -86,8 +87,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
-        return "D|" + (this.isDone ? "1" : "0") + "|" + this.name + "|" +
-                this.keyword + "|" + (this.deadlineDate == null ? this.deadline : this.deadlineDate);
+        return "D|" + (this.isDone ? "1" : "0") + "|" + this.name + "|"
+                + this.keyword + "|" + (this.deadlineDate == null ? this.deadline : this.deadlineDate);
     }
 
 

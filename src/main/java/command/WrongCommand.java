@@ -28,13 +28,14 @@ public class WrongCommand extends Command {
      * Call Ui to display error message
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return command execution result string
      */
     @Override
-    public void execute(TaskManager tm, Ui ui) {
+    public String execute(TaskManager tm, Ui ui) {
         if (message != null) {
-            ui.displayWrongCommand(message);
+            return ui.displayWrongCommand(message);
         } else {
-            ui.displayWrongCommand();
+            return ui.displayWrongCommand();
         }
     }
 }

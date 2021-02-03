@@ -27,11 +27,12 @@ public class AddTodoCommand extends AddCommand {
      * and Ui to display add message
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return execution result string
      */
     @Override
-    public void execute(TaskManager tm, Ui ui) {
+    public String execute(TaskManager tm, Ui ui) {
         Task task = new Todo(todoName);
         tm.addTask(task);
-        ui.displayAfterAdd(tm.size(), task);
+        return ui.displayAfterAdd(tm.size(), task);
     }
 }

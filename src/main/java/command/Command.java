@@ -23,8 +23,9 @@ public abstract class Command {
      * to be override by sub-classes
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return execution result string
      */
-    public abstract void execute(TaskManager tm, Ui ui);
+    public abstract String execute(TaskManager tm, Ui ui);
 
     /**
      * Check if the command will call exit

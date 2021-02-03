@@ -14,13 +14,14 @@ public class ListCommand extends Command {
      * and Ui to display all these tasks
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return command execution result string
      */
     @Override
-    public void execute(TaskManager tm, Ui ui) {
+    public String execute(TaskManager tm, Ui ui) {
         if (tm.isEmpty()) {
-            ui.displayEmptyList();
+            return ui.displayEmptyList();
         } else {
-            ui.displayAllTasks(tm.getList());
+            return ui.displayAllTasks(tm.getList());
         }
     }
 }

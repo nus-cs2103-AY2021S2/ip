@@ -25,18 +25,19 @@ public class DeleteCommand extends Command {
      * and Ui to display delete message
      * @param tm Associated TaskManager
      * @param ui Associated Ui
+     * @return command execution result string
      */
     @Override
-    public void execute(TaskManager tm, Ui ui) {
+    public String execute(TaskManager tm, Ui ui) {
         try {
             if (tm.indexWithinRange(deleteIndex)) {
                 Task task = tm.deleteTask(deleteIndex);
-                ui.displayAfterDelete(deleteIndex, task);
+                return ui.displayAfterDelete(deleteIndex, task);
             } else {
-                ui.displayOutOfRange(deleteIndex);
+                return ui.displayOutOfRange(deleteIndex);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            return e.getMessage();
         }
     }
 }
