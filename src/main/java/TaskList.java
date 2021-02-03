@@ -23,26 +23,24 @@ public class TaskList {
      *           and will thus be used to obtain the remaining lines
      */
 
-    public static String createTask(String[] input, Scanner sc, ArrayList<Task> lst) {
+    public static void createTask(String input, Scanner sc, ArrayList<Task> lst) {
         Storage store = new Storage();
         String home = store.getHome();
         String file = store.getDefaultFilePath();
-        if (input[0].equals("list")) {
-            String output = "Here are the tasks in your list\n";
-            //System.out.println("Here are the tasks in your list:");
+        if (input.equals("list")) {
+            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < lst.size(); i++) {
                 int count = i + 1;
                 Task a = lst.get(i);
-                output = output + count + ". " + a + "\n";
-                //System.out.println(count + ". " + a);
+                System.out.println(count + ". " + a);
             }
-            return output;
-        } else if (input[0].equals("done")) {
-            int tag = Integer.parseInt(input[1]) - 1;
+            System.out.println();
+        } else if (input.equals("done")) {
+            int tag = sc.nextInt() - 1;
             Task d = lst.get(tag);
             d.markAsDone();
-            String output = "Nice! I've marked this task as done: \n";
-            output = output + d + "\n";
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(d + "\n");
 
             String temp = home + File.separator + "temp.txt";
             //create temp file
@@ -88,17 +86,12 @@ public class TaskList {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return output;
-            //System.out.println("Nice! I've marked this task as done:");
-            //System.out.println(d + "\n");
-
-        } else if (input[0].equals("delete")) {
-            int tag = Integer.parseInt(input[1]) - 1;
+        } else if (input.equals("delete")) {
+            int tag = sc.nextInt() - 1;
             int len = lst.size() - 1;
-            String output = "Noted. I've removed this task:\n";
-            output = output + "\t" + lst.get(tag) + "\n";
-            output = output + "Now you have " + len + "tasks in the list. \n";
-            lst.remove(tag);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("\t" + lst.get(tag));
+            System.out.println("Now you have " + len + " tasks in the list.\n");
 
             String temp = home + File.separator + "temp.txt";
             //create temp file
@@ -136,92 +129,60 @@ public class TaskList {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return output;
-            //System.out.println("Noted. I've removed this task:");
-            //System.out.println("\t" + lst.get(tag));
-            //System.out.println("Now you have " + len + " tasks in the list.\n");
-            //lst.remove(tag);
-        } else if (input[0].equals("todo")) {
-            String task = "";
-            if (input.length == 1) {
-                return "OOPS!!! The description of a todo cannot be empty.\n";
-            } else {
-                for (int i = 1; i < input.length; i++) {
-                    task = task + input[i] + " ";
-                }
-            }
+            lst.remove(tag);
+        } else if (input.equals("todo")) {
+            String task = sc.nextLine();
             try {
                 Todo td = Todo.makeTodo(task);
                 lst.add(td);
                 int len = lst.size();
-                String output = "Got it. I've added this task: \n";
-                output = output + "\t" + td + "\n";
-                output = output + "Now you have " + len + " tasks in the list.\n";
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + td);
+                System.out.println("Now you have " + len + " tasks in the list.\n");
                 try {
                     Storage.appendToFile(file, "Todo:" + " 0" + task + "\n");
                 } catch (IOException e) {
-                    return "OOPS!!! " + e.getMessage();
+                    System.out.println("OOPS!!! " + e.getMessage());
                 }
-                return output;
-                //System.out.println("Got it. I've added this task:");
-                //System.out.println("\t" + td);
-                //System.out.println("Now you have " + len + " tasks in the list.\n");
-
             } catch (DukeException ex){
-                return "OOPS!!! The description of a todo cannot be empty.\n";
+                System.err.println("☹ OOPS!!! The description of a todo cannot be empty.\n");
             }
-        } else if (input[0].equals("deadline")) {
-            String line = "";
-            if (input.length == 1) {
-                return "OOPS!!! The description of a deadline cannot be empty.\n";
-            } else {
-                for (int i = 1; i < input.length; i++) {
-                    line = line + input[i] + " ";
-                }
-            }
+        } else if (input.equals("deadline")) {
+            String line = sc.nextLine();
             try {
                 Deadline dl = Deadline.makeDeadline(line);
                 lst.add(dl);
                 int len = lst.size();
-                String output = "Got it. I've added this task:\n";
-                output = output + "\t" + dl + "\n";
-                output = output+ "Now you have " + len + " tasks in the list.\n";
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + dl);
+                System.out.println("Now you have " + len + " tasks in the list.\n");
                 try {
                     Storage.appendToFile(file,  "Deadline:" + " 0"+ line + "\n");
                 } catch (IOException e) {
-                    return "OOPS!!! " + e.getMessage();
+                    System.out.println("OOPS!!! " + e.getMessage());
                 }
-                return output;
             } catch (DukeException ex){
-                return "OOPS!!! The description of a deadline cannot be empty.\n";
+                System.err.println("☹ OOPS!!! The description of a deadline cannot be empty.\n");
             }
-        } else if (input[0].equals("event")) {
-            String line = "";
-            if (input.length == 1) {
-                return "OOPS!!! The description of an event cannot be empty.\n";
-            } else {
-                for (int i = 1; i < input.length; i++) {
-                    line = line + input[i] + " ";
-                }
-            }
+        } else if (input.equals("event")) {
+            String line = sc.nextLine();
             try {
                 Event event = Event.makeEvent(line);
                 lst.add(event);
                 int len = lst.size();
-                String output = "Got it. I've added this task:\n";
-                output = output + "\t" + event + "\n";
-                output = output+ "Now you have " + len + " tasks in the list.\n";
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + event);
+                System.out.println("Now you have " + len + " tasks in the list.");
                 try {
                     Storage.writeToFile(file, "Event:" + " 0" + line + "\n");
                 } catch (IOException e) {
                     System.out.println("OOPS!!! " + e.getMessage());
                 }
-                return output;
             } catch (DukeException ex) {
-                return "OOPS!!! The description of an event cannot be empty.\n";
+                System.err.println("☹ OOPS!!! The description of an event cannot be empty.\n");
             }
-        } else if (input[0].equals("find")) {
-            String keyword = input[1];
+        } else if (input.equals("find")) {
+            String keyword = sc.next();
             int matchCount = 0;
             ArrayList<Integer> num = new ArrayList<>();
             for (int i = 0; i < lst.size(); i++) {
@@ -232,16 +193,15 @@ public class TaskList {
                 }
             }
             if (matchCount != 0) {
-                String output = "Here are the matching tasks in your list:\n";
+                System.out.println("Here are the matching tasks in your list:\n");
                 for (int j = 0; j < num.size(); j++) {
-                    output = output + lst.get(num.get(j)) + "\n";
+                    System.out.println(lst.get(j));
                 }
-                return output;
             } else {
-                return "There are no tasks matching this keyword :-(\n";
+                System.out.println("There are no tasks matching this keyword :-(");
             }
         } else {
-            return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }
 }
