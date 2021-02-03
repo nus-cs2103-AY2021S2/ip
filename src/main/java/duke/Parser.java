@@ -16,7 +16,7 @@ public class Parser {
      * @return a DukeCommand that contains a Command and a String
      * containing more details
      */
-    public static DukeCommand parseCommand(String input) {
+    public static DukeCommand parseCommand(String input) throws Exception {
         try {
             String[] params = input.split(" ", 2);
 
@@ -24,34 +24,61 @@ public class Parser {
                 return new DukeCommand(Command.BYE, "");
 
             } else if (params[0].equals("delete")) {
+                if (params.length == 1) {
+                    throw new DukeException("delete is missing 1 argument");
+                }
+
                 return new DukeCommand(Command.DELETE, params[1]);
 
             } else if (input.equals("list")) {
+                if (params.length == 1) {
+                    throw new DukeException("list is missing 1 argument");
+                }
+
                 return new DukeCommand(Command.LIST, "");
 
             } else if (params[0].equals("done")) {
+                if (params.length == 1) {
+                    throw new DukeException("done is missing 1 argument");
+                }
+
                 return new DukeCommand(Command.DONE, params[1]);
 
             } else if (params[0].equals("todo")) {
+                if (params.length == 1) {
+                    throw new DukeException("todo is missing 1 argument");
+                }
+
                 return new DukeCommand(Command.TODO, params[1]);
 
             } else if (params[0].equals("deadline")) {
+                if (params.length == 1) {
+                    throw new DukeException("Missing arguments for deadline");
+                }
+
                 return new DukeCommand(Command.DEADLINE, params[1]);
 
             } else if (params[0].equals("event")) {
+                if (params.length == 1) {
+                    throw new DukeException("Missing arguments for event");
+                }
+
                 return new DukeCommand(Command.EVENT, params[1]);
 
             } else if (params[0].equals("find")) {
+                if (params.length == 1) {
+                    throw new DukeException("Missing keyword for find");
+                }
+
                 return new DukeCommand(Command.FIND, params[1]);
             } else {
                 return new DukeCommand(Command.INVALID, "");
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw ex;
         }
 
-        return null;
     }
 
     /**
