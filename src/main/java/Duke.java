@@ -23,6 +23,9 @@ public class Duke {
                 } else if (cmd.equals("done")) {
                     int itemNo = sc.nextInt();
                     markItemAsDone(itemNo);
+                } else if(cmd.equals("delete")) {
+                    int itemNo = sc.nextInt();
+                    deleteItem(itemNo);
                 } else {
                     String typeOfEvent = cmd;
                     String eventDescription = sc.nextLine();
@@ -55,6 +58,15 @@ public class Duke {
         System.out.println("Nice, I have marked this task as done!");
         System.out.print("  ");
         System.out.print(tasks.get(itemNo-1));
+    }
+
+    private static void deleteItem(int itemNo) {
+        Task toBeDeleted = tasks.get(itemNo-1);
+        tasks.remove(itemNo-1);
+        System.out.println("Noted. I have removed this task:");
+        System.out.print("  ");
+        System.out.println(toBeDeleted);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
 
     private static void listItems() {
