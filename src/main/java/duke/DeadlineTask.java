@@ -6,12 +6,14 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task {
     private LocalDate byDate;
     private String time;
-//    public DeadlineTask(String description, boolean isDone, LocalDate byDate) {
-//        super(description);
-//        super.isDone = isDone;
-//        this.byDate = byDate;
-//        this.time = null;
-//    }
+
+    /**
+     * Creates a DeadlineTask object.
+     * @param description description of DeadlineTask
+     * @param isDone true if deadlineTask is done
+     * @param byDate deadline date
+     * @param time time on deadline date
+     */
     public DeadlineTask(String description, boolean isDone, LocalDate byDate, String time) {
         super(description);
         super.isDone = isDone;
@@ -32,7 +34,7 @@ public class DeadlineTask extends Task {
     @Override
     public String getTaskDetails() {
         String divider = " | ";
-        return "D" +  divider
+        return "D" + divider
                 + (isDone ? "1" : "0") + divider
                 + description + divider
                 + byDate + divider + time;

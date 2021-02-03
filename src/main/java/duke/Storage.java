@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 public class Storage {
     private static final String ROOT_PROJECT = System.getProperty("user.dir");
-    public static Path saveFilePath =
-            Paths.get(ROOT_PROJECT,"src", "data", "duke.txt");
+    private static Path saveFilePath =
+            Paths.get(ROOT_PROJECT, "src", "data", "duke.txt");
     private static Path saveFolderPath =
-            Paths.get(ROOT_PROJECT,"src", "data");
+            Paths.get(ROOT_PROJECT, "src", "data");
 
     /**
      * Constructs a Storage object.
@@ -60,7 +60,7 @@ public class Storage {
         try {
             BufferedReader bufferedReader = Files.newBufferedReader(saveFilePath);
             String record = bufferedReader.readLine();
-            while(record != null) {
+            while (record != null) {
                 ledger.add(stringToTask(record));
                 record = bufferedReader.readLine();
             }
@@ -79,7 +79,7 @@ public class Storage {
     public void saveData(ArrayList<Task> tasks) throws DukeException {
         try {
             ArrayList<String> ledger = new ArrayList<>();
-            for(Task t : tasks) {
+            for (Task t : tasks) {
                 String s = t.getTaskDetails();
                 ledger.add(s);
             }

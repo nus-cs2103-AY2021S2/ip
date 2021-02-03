@@ -48,7 +48,7 @@ public class EventTask extends Task {
     @Override
     public String getTaskDetails() {
         String divider = " | ";
-        return "E" +  divider
+        return "E" + divider
                 + (isDone ? "1" : "0") + divider
                 + description + divider
                 + atDate + divider + time;

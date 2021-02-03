@@ -2,38 +2,31 @@ package duke;
 
 public class Ui {
     private final String[] HELLO = {
-            System.lineSeparator() +
-                    " _____ ____  ____  _  __ _____ ____ " +
-                    System.lineSeparator() +
-                    "/__ __Y  _ \\/ ___\\/ |/ //  __//  __\\" +
-                    System.lineSeparator() +
-                    "  / \\ | / \\||    \\|   / |  \\  |  \\/|" +
-                    System.lineSeparator() +
-                    "  | | | |-||\\___ ||   \\ |  /_ |    /" +
-                    System.lineSeparator() +
-                    "  \\_/ \\_/ \\|\\____/\\_|\\_\\\\____\\\\_/\\_\\",
-            "Sup sup! I'm Tasker :)"
+            System.lineSeparator() + " _____ ____  ____  _  __ _____ ____ "
+                    + System.lineSeparator()
+                    + "/__ __Y  _ \\/ ___\\/ |/ //  __//  __\\"
+                    + System.lineSeparator()
+                    + "  / \\ | / \\||    \\|   / |  \\  |  \\/|"
+                    + System.lineSeparator()
+                    + "  | | | |-||\\___ ||   \\ |  /_ |    /"
+                    + System.lineSeparator()
+                    + "  \\_/ \\_/ \\|\\____/\\_|\\_\\\\____\\\\_/\\_\\", "Sup sup! I'm Tasker :)"
     };
     private final String[] GOODBYE = {
-            System.lineSeparator() +
-                    " _____ ____  ____  ____  ____ ___  _ _____" + System.lineSeparator() +
-                    "/  __//  _ \\/  _ \\/  _ \\/  _ \\\\  \\///  __/" + System.lineSeparator() +
-                    "| |  _| / \\|| / \\|| | \\|| | // \\  / |  \\  " + System.lineSeparator() +
-                    "| |_//| \\_/|| \\_/|| |_/|| |_\\\\ / /  |  /_ " + System.lineSeparator() +
-                    "\\____\\\\____/\\____/\\____/\\____//_/   \\____\\",
-            "Till next time :)"
+            System.lineSeparator() + " _____ ____  ____  ____  ____ ___  _ _____" + System.lineSeparator()
+                    + "/  __//  _ \\/  _ \\/  _ \\/  _ \\\\  \\///  __/" + System.lineSeparator()
+                    + "| |  _| / \\|| / \\|| | \\|| | // \\  / |  \\  " + System.lineSeparator()
+                    + "| |_//| \\_/|| \\_/|| |_/|| |_\\\\ / /  |  /_ " + System.lineSeparator()
+                    + "\\____\\\\____/\\____/\\____/\\____//_/   \\____\\", "Till next time :)"
     };
     private final String[] READY = {
-            System.lineSeparator() +
-                    "Tasker is ready :)"
+            System.lineSeparator() + "Tasker is ready :)"
     };
     private final String[] LOADING_ERROR = {
-            System.lineSeparator() +
-                    "Something went wrong :("
+            System.lineSeparator() + "Something went wrong :("
     };
-    private final String LINE_PARTITION =
-            "__________________________________________________________________" +
-                    "_______________________________________________________"
+    private final String LINE_PARTITION = "_______________________________" + "___________________________________"
+                    + "_______________________________________________________"
                     + "_____________________________________________________________" + System.lineSeparator();
 
     /**
