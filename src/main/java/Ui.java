@@ -37,25 +37,28 @@ public class Ui {
             }
         }
         if (num == 1) {
+            Duke.respond = "You have no matching tasks in your list :(\n" + msg;
             msg = "    ____________________________________________________________\n"
                     + "     You have no matching tasks in your list :(\n"
                     + "    ____________________________________________________________";
         } else {
+            Duke.respond = "Here are the matching tasks in your list:\n" + msg;
             msg = "    ____________________________________________________________\n"
                     + "     Here are the matching tasks in your list:\n"
                     + msg + "    ____________________________________________________________";
         }
-        System.out.println(msg);
     }
 
     /**
      * Say bye when the user logouts.
      */
     public void bye() throws IOException {
-        System.out.println("    ____________________________________________________________\n     "
+        String msg = "    ____________________________________________________________\n     "
                 + "Bye. Hope to see you again soon!\n"
-                + "    ____________________________________________________________");
+                + "    ____________________________________________________________";
+        System.out.println(msg);
         Storage.save();
+        Duke.respond = msg;
     }
 
     /**
@@ -69,6 +72,7 @@ public class Ui {
                 + "     | |_| | |_| |   <  __/\n"
                 + "     |____/ \\__,_|_|\\_\\___|\n\n     "
                 + "Hello! I'm Duke :P");
+        Duke.respond = "Hello there, I am Duke :P+" + "\n" + "Tell me what you want!";
     }
 
     /**
@@ -80,8 +84,10 @@ public class Ui {
      */
     public void todo(String desc) throws DukeException {
         if (desc.length() > 0) {
+            Duke.respond = "Task added!";
             TaskList.addTask(new ToDo(desc));
         } else {
+            Duke.respond = "☹ OOPS!!! The description of a todo cannot be empty.";
             throw new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The description of a todo cannot be empty.\n"
                     + "    ____________________________________________________________");
@@ -94,32 +100,37 @@ public class Ui {
      * @param desc  Description of the event.
      * @param at    Date of the event.
      * @param start Start time of the event.
-     * @param end End time of the event.
+     * @param end   End time of the event.
      * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
      *                       information when task is created such as no description, date and time.
      */
     public void event(String desc, LocalDate at, LocalTime start, LocalTime end) throws DukeException {
         if (desc.equals("")) {
+            Duke.respond = "☹ OOPS!!! The description, date, start and end time of an event cannot be empty.";
             throw new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The description, date, start and end time of an event cannot be empty.\n"
                     + "    ____________________________________________________________");
         }
         if (at == null) {
+            Duke.respond = "☹ OOPS!!! The date & time of an event cannot be empty.";
             throw new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The date & time of an event cannot be empty.\n"
                     + "    ____________________________________________________________");
         }
         if (start == null) {
+            Duke.respond = "☹ OOPS!!! The start and end time of an event cannot be empty.";
             throw new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The start and end time of an event cannot be empty.\n"
                     + "    ____________________________________________________________");
         }
         if (end == null) {
+            Duke.respond = "☹ OOPS!!! The end time of an event cannot be empty.";
             throw new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The end time of an event cannot be empty.\n"
                     + "    ____________________________________________________________");
         }
         TaskList.addTask(new Event(desc, at, start, end));
+        Duke.respond = "Task added!";
     }
 
     /**
@@ -133,20 +144,24 @@ public class Ui {
      */
     public void deadline(String desc, LocalDate by, LocalTime time) throws DukeException {
         if (desc.equals("")) {
+            Duke.respond = "☹ OOPS!!! The description, date & time of a deadline cannot be empty.";
             throw new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The description, date & time of a deadline cannot be empty.\n"
                     + "    ____________________________________________________________");
         }
         if (by == null) {
+            Duke.respond = "☹ OOPS!!! The date & time of a deadline cannot be empty.";
             throw new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The date & time of a deadline cannot be empty.\n"
                     + "    ____________________________________________________________");
         }
         if (time == null) {
+            Duke.respond = "☹ OOPS!!! The time of a deadline cannot be empty.";
             throw new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The time of a deadline cannot be empty.\n"
                     + "    ____________________________________________________________");
         }
         TaskList.addTask(new Deadline(desc, by, time));
+        Duke.respond = "Deadline added!";
     }
 }

@@ -23,6 +23,8 @@ public class TaskList extends ArrayList<Task> {
                 + "     Now you have " + (tasks.size() - 1) + " tasks in the list.\n"
                 + "    ____________________________________________________________");
         tasks.remove(num - 1);
+        Duke.respond = "Noted. I've removed this task:\n" + tasks.get(num - 1) + "\nNow you have "
+                + (tasks.size() - 1) + " tasks in the list.";
     }
 
     /**
@@ -31,21 +33,19 @@ public class TaskList extends ArrayList<Task> {
     public static void list() {
         String s = "";
         if (tasks.size() == 0) {
+            Duke.respond = "You have no task in your list!";
             System.out.println("    ____________________________________________________________\n     "
-                    + "Here are the tasks in your list:\n    "
+                    + "You have no task in your list!\n    "
                     + "____________________________________________________________\n");
-            return;
-        }
-        for (int i = 0; i < tasks.size(); i++) {
-            s += (i + 1) + "." + tasks.get(i) + "\n";
-            if (i != tasks.size() - 1) {
-                s += "     ";
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                s += (i + 1) + "." + tasks.get(i) + "\n";
             }
-        }
-        System.out.println("    ____________________________________________________________\n     " +
-                "Here are the tasks in your list:\n     " + s +
-                "    ____________________________________________________________\n");
-    }
+            Duke.respond = "Here are the tasks in your list:\n" + s;
+            System.out.println("    ____________________________________________________________\n     " +
+                    "Here are the tasks in your list:\n     " + s +
+                    "    ____________________________________________________________\n");
+        }   }
 
     /**
      * Add the task to the taskList.
@@ -54,6 +54,8 @@ public class TaskList extends ArrayList<Task> {
      */
     public static void addTask(Task task) {
         tasks.add(task);
+        Duke.respond = "Got it. I've added this task:\n" + task + "\nNow you have " + tasks.size()
+                + " tasks in the list.";
         System.out.println("    ____________________________________________________________\n"
                 + "     Got it. I've added this task: \n"
                 + "       " + task + "\n"
@@ -69,6 +71,7 @@ public class TaskList extends ArrayList<Task> {
     public static void done(int num) {
         Task task = tasks.get(num - 1);
         task.markAsDone();
+        Duke.respond = "Nice! I've marked this task as done:\n" + task;
         System.out.println("    ____________________________________________________________\n"
                 + "     Nice! I've marked this task as done: \n"
                 + "       " + task + "\n"

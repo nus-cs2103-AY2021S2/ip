@@ -30,25 +30,31 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         if (command.equals("bye")) {
             ui.bye();
+            Duke.respond = "Bye bye!";
         } else if (command.equals("list")) {
             TaskList.list();
         } else if (command.length() <= 3) {
+            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw (new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________"));
         } else if (cond1) {
+            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw (new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________"));
         } else if (cond2) {
+            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw (new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________"));
         } else if (cond3) {
+            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw (new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________"));
         } else if (cond4) {
+            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw (new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________"));
@@ -89,10 +95,11 @@ public class Parser {
                 ui.event(desc, LocalDate.parse(format(date), formatter), null, null);
             } else if (end.equals("")) {
                 ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localStart), null);
+            } else {
+                localStart += start.substring(0, 2) + ":" + start.substring(2, 4);
+                localEnd += end.substring(0, 2) + ":" + end.substring(2, 4);
+                ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localStart), LocalTime.parse(localEnd));
             }
-            localStart += start.substring(0, 2) + ":" + start.substring(2, 4);
-            localEnd += end.substring(0, 2) + ":" + end.substring(2, 4);
-            ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localStart), LocalTime.parse(localEnd));
         } else if (command.substring(0, 6).equals("delete")) {
             TaskList.delete(Integer.parseInt(command.substring(7)));
         } else if (command.substring(0, 8).equals("deadline")) {
@@ -125,6 +132,7 @@ public class Parser {
             }
             ui.deadline(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime));
         } else {
+            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw (new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________"));
