@@ -27,7 +27,7 @@ public class ListCmd extends Command {
         for (int i = 0; i < lst.getListSize(); i++) {
             System.out.println(i + 1 + "." + lst.getTask(i).toString());
         }
-        //System.out.println(line);
+        
         ui.customLine();
     }
 
