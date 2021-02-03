@@ -5,15 +5,15 @@ import java.util.Scanner;
 import duke.common.DukeBot;
 
 /**
- * Duke is a chatbot that manages your tasks with persistent storage.
+ * A CLI interface for Duke. Deprecated.
  */
-public class Duke {
+public class DukeCli {
     /**
      * The entry point for the Duke chatbot.
      *
      * @param args the command line args passed to Duke.
      */
     public static void main(String[] args) {
-        new DukeBot(new Scanner(System.in), "data/duke.txt").run();
+        new DukeBot("data/duke.txt").run(new Scanner(System.in));
     }
 }
