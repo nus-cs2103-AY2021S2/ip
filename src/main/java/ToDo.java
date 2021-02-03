@@ -1,8 +1,11 @@
 public class ToDo extends Task {
-    protected String period;
-
     public ToDo(String description) {
         super(description);
+    }
+
+    @Override
+    public String saveFormat() {
+        return "T | " + super.saveFormat();
     }
 
     @Override

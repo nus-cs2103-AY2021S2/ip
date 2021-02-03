@@ -7,6 +7,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String saveFormat() {
+        return "E | " + super.saveFormat() + " | " + period;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + period + ")";
     }
