@@ -22,7 +22,7 @@ public class Duke {
         try {
             th.loadTaskList(storage.loadTaskList());
         } catch (ChatBotException e) {
-            th.clearTaskList();;
+            th.clearTaskList();
         }
     }
 

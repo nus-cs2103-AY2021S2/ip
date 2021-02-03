@@ -16,7 +16,7 @@ public abstract class Task {
     }
 
     //when task is done change the isDone to true
-    public void taskDone() {
+    public void setTaskDone() {
         this.isDone = true;
     }
 

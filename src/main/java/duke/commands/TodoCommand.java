@@ -33,8 +33,7 @@ public class TodoCommand extends ChatBotCommand {
         String output = String.format(
                 "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list",
                 th.getTaskList().get(th.getLength() - 1).toString(),
-                th.getLength()
-        );
+                th.getLength());
         return output;
     }
 }

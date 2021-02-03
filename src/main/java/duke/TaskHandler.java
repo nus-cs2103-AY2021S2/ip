@@ -52,11 +52,11 @@ public class TaskHandler {
      *
      * @return A Task
      */
-    public Task taskIsDone(int index) throws IndexOutOfRangeException, TaskDoneException {
+    public Task markTaskAsDone(int index) throws IndexOutOfRangeException, TaskDoneException {
         try {
             Task task = tasks.get(index - 1);
             if (!task.getIsDone()) {
-                task.taskDone();
+                task.setTaskDone();
                 return task;
             } else {
                 throw new TaskDoneException();
@@ -111,36 +111,32 @@ public class TaskHandler {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
             switch (type) {
-            case "T": {
-                Task task = new TodoTask(taskName);
+            case "T":
+                Task todoTask = new TodoTask(taskName);
                 if (isDone) {
-                    task.taskDone();
+                    todoTask.setTaskDone();
                 }
-                this.tasks.add(task);
+                this.tasks.add(todoTask);
                 break;
-            }
-            case "D": {
+            case "D":
                 LocalDate deadline = LocalDate.parse(words[3].strip(), dateFormat);
-                Task task = new DeadlineTask(taskName, deadline);
+                Task deadlineTask = new DeadlineTask(taskName, deadline);
                 if (isDone) {
-                    task.taskDone();
+                    deadlineTask.setTaskDone();
                 }
-                this.tasks.add(task);
+                this.tasks.add(deadlineTask);
                 break;
-            }
-            case "E": {
+            case "E":
                 LocalDateTime startTime = LocalDateTime.parse(words[3].strip(), timeFormat);
                 LocalDateTime endTime = LocalDateTime.parse(words[4].strip(), timeFormat);
-                Task task = new EventTask(taskName, startTime, endTime);
+                Task eventTask = new EventTask(taskName, startTime, endTime);
                 if (isDone) {
-                    task.taskDone();
+                    eventTask.setTaskDone();
                 }
-                this.tasks.add(task);
+                this.tasks.add(eventTask);
                 break;
-            }
-            default: {
+            default:
                 throw new FileIoException();
-            }
             }
         }
     }
