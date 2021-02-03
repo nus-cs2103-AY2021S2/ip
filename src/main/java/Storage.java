@@ -27,11 +27,9 @@ public class Storage {
     public ArrayList<String> load() throws DukeException {
         try {
             ArrayList<String> tasks = new ArrayList<>();
-
             // open the file
             File f = new File(this.filePath);
             Scanner scanner = new Scanner(f);
-
             // scan the file by line
             while (scanner.hasNext()) {
                 tasks.add(scanner.nextLine());
@@ -49,13 +47,10 @@ public class Storage {
      * @throws DukeException If fail to write the file.
      */
     public void updateTaskList(TaskList taskList) throws DukeException {
-
         try {
             ArrayList<Task> tasks = taskList.getTaskList();
-
             // open the file and initialise a file writer
             FileWriter writer = new FileWriter(filePath);
-
             // write tasks into file by line
             for (Task t : tasks) {
                 writer.write(t.toString() + System.lineSeparator());

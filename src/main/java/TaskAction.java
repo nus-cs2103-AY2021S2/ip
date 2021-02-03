@@ -20,7 +20,6 @@ public class TaskAction {
     public TaskAction(Task relatedTask, String actionType){
         this.relatedTask = relatedTask;
         this.actionType = actionType;
-//        this.relatedTaskList = null;
         this.keyword = null;
     }
 

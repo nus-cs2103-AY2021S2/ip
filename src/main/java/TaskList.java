@@ -28,27 +28,22 @@ public class TaskList {
         String actionType = taskAction.getActionType();
 
         TaskResult taskResult = new TaskResult();
-        switch (actionType){
-
+        switch (actionType) {
         case "add":
             addTask(relatedTask);
             taskResult = new TaskResult(relatedTask, "add");
             break;
-
         case "complete":
             relatedTask = markTaskAsDone(relatedTaskNumber);
             taskResult = new TaskResult(relatedTask, "complete");
             break;
-
         case "delete":
             relatedTask = deleteTask(relatedTaskNumber);
             taskResult = new TaskResult(relatedTask, "delete");
             break;
-
         case "display":
             taskResult = new TaskResult(new TaskList(this.taskList, this.totalTask), "display");
             break;
-
         case "find":
             TaskList matchingTaskList = findMatchingTask(keyword);
             taskResult = new TaskResult(matchingTaskList, "find");
@@ -58,7 +53,7 @@ public class TaskList {
     }
 
 
-    private boolean isDone(String icon){
+    private boolean isDone(String icon) {
         if (icon.equals("\u2713")){
             return true;
         }
@@ -136,21 +131,6 @@ public class TaskList {
     }
 
     /**
-     * Return the task by its order number in a TaskList.
-     *
-     * @param taskNumber Order number of the task of interest.
-     * @return Task of specified order number.
-     */
-//    public Task getTask(int taskNumber) throws DukeException {
-//        try {
-//            Task task = this.taskList.get(taskNumber);
-//            return task;
-//        } catch (IndexOutOfBoundsException e){
-//            throw new DukeException("OOPS!! The task number is invalid.");
-//        }
-//    }
-
-    /**
      * Return the list of tasks in a TaskList.
      *
      * @return List of tasks.
@@ -189,7 +169,7 @@ public class TaskList {
      * @param taskNumber Order number of the task to be completed.
      * @return Task marked as done.
      */
-    private Task markTaskAsDone(int taskNumber) throws DukeException{
+    private Task markTaskAsDone(int taskNumber) throws DukeException {
         try {
             Task curTask = this.taskList.get(taskNumber - 1);
             curTask.markAsDone();
@@ -205,12 +185,10 @@ public class TaskList {
      * @param keyword Keyword to look for in tasks' description.
      * @return List of tasks that have the keyword in their description.
      */
-    private TaskList findMatchingTask(String keyword){
+    private TaskList findMatchingTask(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<> ();
-
         // loop through every task in the list
-        for (Task t: this.taskList){
-
+        for (Task t: this.taskList) {
             // add task to list if its description contains the keyword
             if (t.getDescription().contains(keyword)){
                 matchingTasks.add(t);

@@ -13,17 +13,17 @@ public class Parser {
         this.validOperators = initialiseOperators();
     }
 
-    private ArrayList<String> initialiseOperators(){
+    private ArrayList<String> initialiseOperators() {
         ArrayList<String> operators = new ArrayList<>();
         // add valid operators into list
-        operators .add("bye");
-        operators .add("list");
-        operators .add("todo");
-        operators .add("deadline");
-        operators .add("event");
-        operators .add("done");
-        operators .add("delete");
-        operators .add("find");
+        operators.add("bye");
+        operators.add("list");
+        operators.add("todo");
+        operators.add("deadline");
+        operators.add("event");
+        operators.add("done");
+        operators.add("delete");
+        operators.add("find");
         return operators ;
     }
 
@@ -39,31 +39,25 @@ public class Parser {
             int taskNumberToComplete = parseDone(taskDetail);
             taskManager =  new TaskManager(operator, Integer.toString(taskNumberToComplete));
             break;
-
         case "delete":
             int taskNumberToDelete = parseDelete(taskDetail);
             taskManager = new TaskManager(operator, Integer.toString(taskNumberToDelete));
             break;
-
         case "todo":
             String description = parseAddToDo(taskDetail);
             taskManager = new TaskManager(operator, description);
             break;
-
         case "deadline":
             String[] detailsDeadline = parseAddDeadline(taskDetail);
             taskManager = new TaskManager(operator, detailsDeadline);
             break;
-
         case "event":
                 String[] detailsEvent = parseAddEvent(taskDetail);
                 taskManager = new TaskManager(operator, detailsEvent);
                 break;
-
         case "list":
                 taskManager = new TaskManager(operator);
                 break;
-
         case "find":
             String keyword = parseFindTask(taskDetail);
             taskManager = new TaskManager(operator, keyword);
@@ -82,10 +76,8 @@ public class Parser {
     private String parseOperator(String userInput) throws DukeException {
         // split command text by its first space into 2 parts
         String[] commandParts = userInput.split(" ", 2);
-
         // parse operator in the first word of a text command
         String operator = commandParts[0];
-
         if (!isValidOperator(operator)) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -104,8 +96,7 @@ public class Parser {
      * @return Task number.
      * @throws DukeException If task number is empty or a non-integer is entered.
      */
-    private int parseDone(String[] taskDetail) throws DukeException{
-
+    private int parseDone(String[] taskDetail) throws DukeException {
         // parse task number
         if (taskDetail.length == 1) {
             throw new DukeException("OOPS!!! Please specify the task number.");
@@ -127,7 +118,6 @@ public class Parser {
      * @throws DukeException If task number is empty or a non-integer is entered.
      */
     private int parseDelete(String[] taskDetail) throws DukeException {
-
         // parse task number
         if (taskDetail.length == 1) {
             throw new DukeException("OOPS!!! Please specify the task number.");
@@ -149,7 +139,6 @@ public class Parser {
      * @throws DukeException If description is empty.
      */
     private String parseAddToDo(String[] taskDetail) throws DukeException {
-
         // parse description of ToDo
         if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -167,18 +156,15 @@ public class Parser {
      * @throws DukeException If description is empty or due time does not follow 'yyyy-M-d H:mm' format.
      */
     private String[] parseAddDeadline(String[] taskDetail) throws DukeException {
-
         // parse details of Deadline
         if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else{
-
             // split details to description and time
             String[] details = taskDetail[1].split(" /by ", 2);
-            if (details.length == 1 || !isValidTime(details[1])){
+            if (details.length == 1 || !isValidTime(details[1])) {
                 throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-MM-dd HH:mm");
             }
-
             String description = details[0];
             String by = details[1];
             return new String[] {description, by};
@@ -195,16 +181,14 @@ public class Parser {
     private String[] parseAddEvent(String[] taskDetail) throws DukeException {
 
         // parse details of Event
-        if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
+        if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else{
-
             // split details to description and time
             String[] details = taskDetail[1].split(" /at ", 2);
-            if (details.length == 1 || !isValidTime(details[1])){
+            if (details.length == 1 || !isValidTime(details[1])) {
                 throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-MM-dd HH:mm");
             }
-
             String description = details[0];
             String at = details[1];
             return new String[] {description, at};
@@ -219,9 +203,8 @@ public class Parser {
      * @throws DukeException If keyword is empty.
      */
     private String parseFindTask(String[] taskDetail) throws DukeException {
-
         // parse keyword of task
-        if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
+        if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! There is no matching task.");
         } else{
             String keyword = taskDetail[1];

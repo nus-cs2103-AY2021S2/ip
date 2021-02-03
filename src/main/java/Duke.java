@@ -19,10 +19,6 @@ public class Duke {
         }
     }
 
-    public static void main(String[] launchArgs) throws DukeException {
-        new Duke(System.getProperty("user.dir") + "/data/tasks.txt");
-    }
-
     private TaskResult executeCommand(TaskManager taskManager) throws DukeException {
             TaskAction action = taskManager.execute();
             TaskResult result = tasks.executeOperation(action);
