@@ -1,98 +1,93 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Utility class to parse user input.
  */
 public class Parser {
 
-    private Scanner sc;
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
-     * Parser contains the Storage, Tasks, and Ui classes and acts as an
+     * Parser contains the Storage, Tasks, and return duke.Ui classes and acts as an
      * intermediary for them to interact.
      * @param storage Storage class
      * @param tasks   TaskList class
-     * @param ui      Ui Class
      */
-    public Parser(Storage storage, TaskList tasks, Ui ui) {
-        this.sc = new Scanner(System.in);
+    public Parser(Storage storage, TaskList tasks) {
         this.storage = storage;
         this.tasks = tasks;
-        this.ui = ui;
     }
 
     /**
      * Instantiates the scanner and parses inputs.
      */
-    public void open() {
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            try {
-                identifyInput(input);
-            } catch (DukeTaskException e1) {
-                ui.showDukeTaskError();
-            } catch (IndexOutOfBoundsException e) {
-                ui.showDukeEmptyListError();
-            } catch (Exception e) {
-                ui.showDukeGeneralError();
-            }
+    public String response(String input) {
+        try {
+            return identifyInput(input);
+        } catch (DukeTaskException e1) {
+            return duke.Ui.showDukeTaskError();
+        } catch (IndexOutOfBoundsException e) {
+            return duke.Ui.showDukeEmptyListError();
+        } catch (Exception e) {
+            return duke.Ui.showDukeGeneralError();
         }
     }
 
-    public void close() {
-        sc.close();
-    }
-
-    private void identifyInput(String input) throws DukeGeneralException, DukeTaskException {
+    private String identifyInput(String input) throws DukeGeneralException, DukeTaskException {
         Task temp;
+        String output;
         switch (getCommand(input)) {
         case "bye":
             try {
                 storage.save(tasks);
             } catch (IOException e) {
-                ui.showLoadingError();
+                return duke.Ui.showLoadingError();
             }
-            ui.showBye();
+            output = duke.Ui.showBye();
             break;
         case "list":
-            ui.showList(tasks);
+            if (tasks.isEmpty()) {
+                return duke.Ui.showDukeEmptyListError();
+            }
+            output = duke.Ui.showList(tasks);
             break;
         case "find":
-            ui.showFind(tasks, getMessage(input).trim());
+            output = duke.Ui.showFind(tasks, getMessage(input).trim());
             break;
         case "done":
-            tasks.setDone(ui.getIndex(input));
-            ui.showDone(input, tasks);
+            tasks.setDone(duke.Ui.getIndex(input));
+            output = duke.Ui.showDone(input, tasks);
             break;
         case "todo":
             temp = new ToDo(getMessage(input));
-            ui.showTaskAdded(tasks, temp);
+            output = duke.Ui.showTaskAdded(tasks, temp);
             tasks.add(temp);
             break;
         case "deadline":
             temp = new Deadline(getMessage(input));
-            ui.showTaskAdded(tasks, temp);
+            output = duke.Ui.showTaskAdded(tasks, temp);
             tasks.add(temp);
             break;
         case "event":
             temp = new Event(getMessage(input));
-            ui.showTaskAdded(tasks, temp);
+            output = duke.Ui.showTaskAdded(tasks, temp);
             tasks.add(temp);
             break;
         case "delete":
-            ui.showDeleteTask(input, tasks);
-            tasks.remove(ui.getIndex(input));
+            output = duke.Ui.showDeleteTask(input, tasks);
+            tasks.remove(duke.Ui.getIndex(input));
+            break;
+        case "":
+        case " ":
+            output = duke.Ui.showEmptyError();
             break;
         default:
-            throw new DukeGeneralException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-
+            throw new DukeGeneralException("I'm sorry, but I don't know what that means");
         }
+        return output;
     }
 
     private String getCommand(String input) throws DukeTaskException {
@@ -111,7 +106,6 @@ public class Parser {
         } catch (Exception e) {
             throw new DukeTaskException("");
         }
-
     }
 
 }

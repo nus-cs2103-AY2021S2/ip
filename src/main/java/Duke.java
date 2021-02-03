@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
@@ -14,13 +16,11 @@ public class Duke {
      * @param filePath The file path for storage of data.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
         try {
             this.storage = new Storage(filePath);
             this.tasks = new TaskList(storage.load());
         } catch (Exception e) {
             this.tasks = new TaskList();
-            this.ui.showLoadingError();
         }
     }
 
@@ -28,9 +28,16 @@ public class Duke {
      * Starts the program to handle user interaction.
      */
     public void run() {
-        Parser p = new Parser(storage, tasks, ui);
-        p.open();
-        p.close();
+        Scanner sc = new Scanner(System.in);
+        Parser p = new Parser(storage, tasks);
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            System.out.println(p.response(input));
+            if (input.equals("bye")) {
+                break;
+            }
+        }
+        sc.close();
     }
 
     /**
