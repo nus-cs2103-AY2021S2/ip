@@ -14,7 +14,6 @@ import duke.ui.UI;
 public class Duke {
     private Storage storage;
     private UI ui;
-
     /**
      * Constructor.
      */
@@ -38,8 +37,7 @@ public class Duke {
     private void start() {
         try {
             UI.greet();
-            this.ui = new UI();
-            this.storage = new Storage();
+            loadUiAndStorage();
         } catch (DukeException e) {
             UI.printMessage(new String[] {e.getMessage()});
             UI.printMessage(new String[] {"Closing..."});
@@ -64,6 +62,42 @@ public class Duke {
     private void exit() {
         UI.bye();
         System.exit(-1);
+    }
+
+    /**
+     * Returns the response from user input to GUI.
+     * @param input user input
+     * @return response after input is executed
+     */
+    public String getResponse(String input) {
+        if (input.equalsIgnoreCase("bye")) {
+            return UI.getExitGui();
+        } else {
+            try {
+                Command command = new Parser().parseMessage(input);
+                String[] result = command.execute();
+                return UI.formatMessageGui(result);
+            } catch (DukeException e) {
+                return UI.formatMessageGui(new String[] {e.getMessage()});
+            }
+        }
+    }
+
+    /**
+     * Returns the greet message.
+     * @return the greet message
+     */
+    public String getGreetMessage() {
+        return UI.getGreetGui();
+    }
+
+    /**
+     * Loads UI and storage for duke created
+     * @throws DukeException when unable to load storage
+     */
+    public void loadUiAndStorage() throws DukeException {
+        this.ui = new UI();
+        this.storage = new Storage();
     }
 
 }

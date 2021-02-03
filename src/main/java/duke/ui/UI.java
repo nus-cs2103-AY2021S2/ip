@@ -38,7 +38,7 @@ public class UI {
     /**
      * Returns the formatted message to be printed.
      * @param messages an array of strings, main body of the message to be formatted.
-     * @return the formatted message (specifically, greet and bye) to be printed.
+     * @return the formatted message to be printed.
      */
     public static String formatMessage(String[] messages) {
         StringBuilder res = new StringBuilder(border);
@@ -47,6 +47,37 @@ public class UI {
         }
         res.append(border);
         return res.toString();
+    }
+
+    /**
+     * Returns the formatted message to be printed for GUI.
+     * @param messages an array of strings, main body of the message to be formatted.
+     * @return the formatted message to be printed.
+     */
+    public static String formatMessageGui(String[] messages) {
+        StringBuilder res = new StringBuilder();
+        for (String message : messages) {
+            res.append(message).append("\n");
+        }
+        return res.toString();
+    }
+
+    /**
+     * Returns the greet message to be printed for GUI.
+     * @return the greet message to be printed.
+     */
+    public static String getGreetGui() {
+        return "Greetings! I'm Your Personal Assistant Duke:)\n"
+            + "What can I do for you today?";
+    }
+
+    /**
+     * Returns the exit message to be printed for GUI.
+     * @return the exit message to be printed.
+     */
+    public static String getExitGui() {
+        return "Bye. Nice to meet you and hope to see you again soon!\n"
+                + "Closing...";
     }
 
     /**
@@ -65,7 +96,7 @@ public class UI {
 
     /**
      * Helper method that prints the message or reply after the user command is executed.
-     * @param msg
+     * @param msg message to be printed
      */
     private static void printReply(String msg) {
         System.out.println(msg);
