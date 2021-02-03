@@ -7,10 +7,17 @@ import duke.exceptions.TaskException;
 // import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    private final DateTimeFormatter FORMAT_ONE = DateTimeFormatter.ofPattern("d-M-uuuu");
-    private final DateTimeFormatter FORMAT_TWO = DateTimeFormatter.ofPattern("uuuu-M-d");
+    private final DateTimeFormatter formatOne = DateTimeFormatter.ofPattern("d-M-uuuu");
+    private final DateTimeFormatter formatTwo = DateTimeFormatter.ofPattern("uuuu-M-d");
     private String deadlineBy;
     private LocalDate dateBy;
+
+    /**
+     * Default constructor for deadline
+     * @param description description of deadline
+     * @param by String of when the deadline is by
+     * @throws TaskException throws an error if date formatting is wrong
+     */
     public Deadline(String description, String by) throws TaskException {
         super(description);
         this.deadlineBy = by;
@@ -18,9 +25,9 @@ public class Deadline extends Task {
         try {
             String trimmed = deadlineBy.trim();
             if (trimmed.substring(0, 4).contains("-")) {
-                dateBy = LocalDate.parse(deadlineBy.trim(), FORMAT_ONE);
+                dateBy = LocalDate.parse(deadlineBy.trim(), formatOne);
             } else {
-                dateBy = LocalDate.parse(deadlineBy.trim(), FORMAT_TWO);
+                dateBy = LocalDate.parse(deadlineBy.trim(), formatTwo);
             }
         } catch (Exception e) {
             throw new TaskException("deadline must be of the format date-month-year, in numbers.");
@@ -32,6 +39,13 @@ public class Deadline extends Task {
         */
     }
 
+    /**
+     * Alternative constructor for deadline
+     * @param description description of deadline
+     * @param by String of when the deadline is by
+     * @param doneInt index to signify if deadline is done or not
+     * @throws TaskException throws an error if date formatting is wrong
+     */
     public Deadline(String description, String by, int doneInt) throws TaskException {
         super(description, doneInt);
         this.deadlineBy = by;
@@ -39,9 +53,9 @@ public class Deadline extends Task {
         try {
             String trimmed = deadlineBy.trim();
             if (trimmed.substring(0, 4).contains("-")) {
-                dateBy = LocalDate.parse(deadlineBy.trim(), FORMAT_ONE);
+                dateBy = LocalDate.parse(deadlineBy.trim(), formatOne);
             } else {
-                dateBy = LocalDate.parse(deadlineBy.trim(), FORMAT_TWO);
+                dateBy = LocalDate.parse(deadlineBy.trim(), formatTwo);
             }
         } catch (Exception e) {
             throw new TaskException("deadline must be of the format date-month-year, in numbers.");

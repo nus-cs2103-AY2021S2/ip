@@ -19,6 +19,12 @@ import duke.task.ToDo;
 public class Storage {
     private String pathOfDataFile;
 
+    /**
+     * Default constructor for Storage
+     * @param filePath path of file to load and store
+     * @param folderName foldername of where the file resides
+     * @throws DukeException
+     */
     public Storage(String filePath, String folderName) throws DukeException {
         pathOfDataFile = filePath;
         try {
@@ -33,6 +39,11 @@ public class Storage {
         }
     }
 
+    /**
+     * loads memory into duke
+     * @return arraylist of tasks
+     * @throws DukeException IO exception if file cannot be read
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File dukeData = new File(pathOfDataFile);
@@ -71,6 +82,11 @@ public class Storage {
         }
     }
 
+    /**
+     * saves current task list to file at every iteration of user input
+     * @param taskArray task array to save to memory
+     * @throws DukeException IO exception if an error occurs with the file
+     */
     public void saveToFile(ArrayList<Task> taskArray) throws DukeException {
         try {
             Writer fileWriter = new FileWriter("data/dukedata.txt", false);

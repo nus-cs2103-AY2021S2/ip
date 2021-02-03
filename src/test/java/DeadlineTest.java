@@ -1,6 +1,8 @@
+
+import org.junit.jupiter.api.Test;
+
 import duke.exceptions.TaskException;
 import duke.task.Deadline;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,14 +18,14 @@ public class DeadlineTest {
             assertEquals("[D][ ] test (by: Jan 3 2020)", output);
             assertEquals("D|0|test|2020-01-03", output1);
             assertEquals(output2, output);
-        }catch(TaskException e){
+        } catch (TaskException e) {
             // do nothing
         }
     }
 
     @Test
-    public void checkDoneStateChange(){
-        try{
+    public void checkDoneStateChange() {
+        try {
             Deadline deadline = new Deadline("test", "2020-01-03");
             deadline.changeTaskToDone();
 
@@ -34,8 +36,8 @@ public class DeadlineTest {
             assertEquals("D|1|test|2020-01-03", output2);
 
 
-        }catch(TaskException e){
-
+        } catch (TaskException e) {
+            // do nothing
         }
     }
 

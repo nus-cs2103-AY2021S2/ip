@@ -24,7 +24,7 @@ public class Ui {
     }
 
     private String numberOfTasksLine(int numberOfTasks) {
-        return padSpaces("Now you have " + String.valueOf(numberOfTasks) + " task in the list.", 5);
+        return padSpaces("Now you have " + numberOfTasks + " task in the list.", 5);
     }
 
     /**
@@ -66,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Show the user that a specific task has been marked as done
+     * Shows the user that a specific task has been marked as done
      * @param doneTask Task that has been marked as done
      */
     public void showTaskDone(Task doneTask) {
@@ -74,6 +74,11 @@ public class Ui {
                 + padSpaces(doneTask.toString(), 7)));
     }
 
+    /**
+     * Show the user that a specific task has been deleted
+     * @param deletedTask Task that has been deleted
+     * @param numberOfTasks Number of remaining tasks
+     */
     public void showTaskDeleted(Task deletedTask, int numberOfTasks) {
         String a = "Noted. I've removed this task:\n" + padSpaces(deletedTask.toString(), 7)
                 + "\n" + numberOfTasksLine(numberOfTasks);
@@ -81,6 +86,11 @@ public class Ui {
         System.out.println(defaultFormatting(a));
     }
 
+    /**
+     * Shows the user the task that has been added to duke
+     * @param addedTask Task that has been added
+     * @param numberOfTasks Number of tasks
+     */
     public void showAddedTask(Task addedTask, int numberOfTasks) {
         String temp = "Got it. I've added this task:\n" + padSpaces(addedTask.toString(), 7)
                 + "\n" + numberOfTasksLine(numberOfTasks);
@@ -137,7 +147,7 @@ public class Ui {
             String numberIndicator = (i + 1) + ".";
             String temp = numberIndicator + currentTask.toString() + '\n';
 
-            sb.append(indentedString( temp ));
+            sb.append(indentedString(temp));
         }
         sb.append(horizontalLine());
         System.out.println(sb.toString());

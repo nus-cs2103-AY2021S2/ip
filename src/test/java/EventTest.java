@@ -1,5 +1,7 @@
-import duke.task.Event;
+
 import org.junit.jupiter.api.Test;
+
+import duke.task.Event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,7 +17,7 @@ public class EventTest {
     }
 
     @Test
-    public void checkDoneStateChange(){
+    public void checkDoneStateChange() {
         Event event = new Event("testing at", "Now");
         event.changeTaskToDone();
 

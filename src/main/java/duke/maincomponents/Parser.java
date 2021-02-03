@@ -32,7 +32,13 @@ public class Parser {
         return checkStringStartingEquals(userInput, "done");
     }
 
-    public int parseDoneCommand(String userInput) throws DukeException {
+    /**
+     * Parse a command that starts with done
+     * @param userInput User Input that has "done" as its start
+     * @return index of task to mark as done
+     * @throws DukeException an exception to indicate an error
+     */
+    private int parseDoneCommand(String userInput) throws DukeException {
         int length = "done".length();
         if (checkStringEquals(userInput, "done")) {
             throw new DukeException("Error! Please indicate the task "
@@ -55,7 +61,13 @@ public class Parser {
         return checkStringStartingEquals(userInput, "delete");
     }
 
-    public int parseDeleteCommand(String userInput) throws DukeException {
+    /**
+     * Parse a command that starts with delete
+     * @param userInput User input that has "delete" at its start
+     * @return index of task to delete
+     * @throws DukeException an exception to indicate an error
+     */
+    private int parseDeleteCommand(String userInput) throws DukeException {
         int length = "delete".length();
         if (checkStringEquals(userInput, "delete")) {
             throw new DukeException("Error! Please indicate the task which want to delete by its number on the list");
@@ -76,7 +88,13 @@ public class Parser {
         return checkStringStartingEquals(userInput, "todo");
     }
 
-    public String parseToDoCommand(String userInput) throws DukeException {
+    /**
+     * Parse a command that starts with "todo"
+     * @param userInput User input with todo at its start
+     * @return description of todo task to add
+     * @throws DukeException an exception to indicate an error
+     */
+    private String parseToDoCommand(String userInput) throws DukeException {
         int length = "todo".length();
         if (checkStringEquals(userInput, "todo")) {
             throw new DukeException("Error! The description of a todo cannot be empty!");
@@ -91,7 +109,13 @@ public class Parser {
         return checkStringStartingEquals(userInput, "event");
     }
 
-    public ArrayList<String> parseEventCommand(String userInput) throws DukeException {
+    /**
+     * Parse a command that has with event
+     * @param userInput User input with event at it sstart
+     * @return description of event and description of where the event is at in an arraylist
+     * @throws DukeException an exception to indicate an error
+     */
+    private ArrayList<String> parseEventCommand(String userInput) throws DukeException {
         int length = "event".length();
         if (checkStringEquals(userInput, "event")) {
             throw new DukeException("Error! The description of a event cannot be empty!");
@@ -118,8 +142,7 @@ public class Parser {
     private boolean equalsToDeadline(String userInput) {
         return checkStringStartingEquals(userInput, "deadline");
     }
-
-    public ArrayList<String> parseDeadlineCommand(String userInput) throws DukeException {
+    private ArrayList<String> parseDeadlineCommand(String userInput) throws DukeException {
         int length = "deadline".length();
         if (checkStringEquals(userInput, "deadline")) {
             throw new DukeException("Error! The description of a deadline cannot be empty!");
@@ -147,10 +170,8 @@ public class Parser {
     private boolean equalsToFind(String userInput) {
         return checkStringStartingEquals(userInput, "find");
     }
-
-    public String parseFindCommand(String userInput) throws DukeException {
+    private String parseFindCommand(String userInput) throws DukeException {
         int length = "find".length();
-
         if (checkStringEquals(userInput, "find")) {
             throw new DukeException("Error! The description of what you wish to find cannot be empty!");
         } else if (!checkStringEquals(userInput.substring(length, length + 1), " ")) {
@@ -164,6 +185,12 @@ public class Parser {
         return userInput.equals("bye");
     }
 
+    /**
+     * Parses user input and return a command that can be executed
+     * @param userInput userInput to parse
+     * @return Command that can be executed
+     * @throws DukeException an execption
+     */
     public Command parse(String userInput) throws DukeException {
         try {
             if (this.equalsToList(userInput)) {
