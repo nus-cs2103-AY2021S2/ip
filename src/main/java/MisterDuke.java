@@ -1,8 +1,8 @@
 import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -234,13 +234,17 @@ class Storage {
             } else if (tempStr.contains("[D]")) {
                 String[] strArray = cmd.split("by:", 2);
                 String inst = strArray[0].substring(0, strArray[0].length() - 2);
-                String date = strArray[1].substring(0, strArray[1].length() - 1);
-                LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                Deadline deadlineTask = new Deadline(inst + " ", localDate);
-                if (!checkForTick.contains(" ")) {
-                    deadlineTask.markAsDone();
+                String date = strArray[1].substring(0, strArray[1].length() - 1).trim();
+                try {
+                    Date deadlineDate = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy").parse(date);
+                    Deadline deadlineTask = new Deadline(inst + " ", deadlineDate);
+                    if (!checkForTick.contains(" ")) {
+                        deadlineTask.markAsDone();
+                    }
+                    tasksArrayList.add(deadlineTask);
+                } catch (Exception e) {
+                    e.getStackTrace();
                 }
-                tasksArrayList.add(deadlineTask);
             } else if (tempStr.contains("[E]")) {
                 String[] strArray = cmd.split("at:", 2);
                 String inst = strArray[0].substring(0, strArray[0].length() - 2);
@@ -373,46 +377,34 @@ class DeadlineCommand extends Command {
         this.command = command;
     }
 
-    /**
-     * Checks whether the deadline date given by the user is acceptable
-     * in the format dd-mm-yyyy
-     * @param str deadline date given by user
-     * @return true if deadline date is in the format dd-mm-yyyy
-     */
-    public boolean isDate(String str) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        try {
-            LocalDate.parse(str, dateTimeFormatter);
-        } catch (DateTimeParseException dateTimeParseException) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String input = command.trim();
         if (input.equalsIgnoreCase("deadline")) {
             throw new DukeException("     Could you please specify your task? :)");
         }
+        
         String[] strArray = input.split(" ", 2);
-        String cmd = strArray[0];
-        String cmdTask = strArray[1];
-
         if (!strArray[1].contains("/by")) {
             throw new DukeException("     Uh oh! Please specify a timing using /by.");
         }
+        
+        String cmd = strArray[0];
+        String cmdTask = strArray[1];
         String[] tempStrArray = cmdTask.split("/by", 2);
-        if (isDate(tempStrArray[1])) {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate localDate = LocalDate.parse(tempStrArray[1], dateTimeFormatter);
-            Deadline tempTask = new Deadline(tempStrArray[0], localDate);
-            taskList.add(tempTask);
-            ui.showTaskAdded(tempTask);
-            ui.showTaskList(taskList.size());
-        } else {
-            throw new DukeException("     Uh oh! Please enter a timing in the format dd-mm-yyyy");
+        String inputDate = tempStrArray[1].trim();
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+        Date date;
+        try {
+            date = format.parse(inputDate);
+        } catch (Exception e) {
+            throw new DukeException("     Uh oh! Please enter a timing in the format dd-mm-yyyy HHmm");
         }
+        Deadline tempTask = new Deadline(tempStrArray[0], date);
+        taskList.add(tempTask);
+        ui.showTaskAdded(tempTask);
+        ui.showTaskList(taskList.size());
     }
 
     public boolean isRunning() {
@@ -638,17 +630,16 @@ class ToDo extends Task {
  * it specifies the task as a Deadline using [D]
  */
 class Deadline extends Task {
-    protected LocalDate deadlineBy;
+    protected Date deadlineBy;
 
-    public Deadline(String description, LocalDate deadlineBy) {
+    public Deadline(String description, Date deadlineBy) {
         super(description);
         this.deadlineBy = deadlineBy;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" +
-            deadlineBy.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
+        return "[D]" + super.toString() + "(by: " + deadlineBy + ")";
     }
 }
 
