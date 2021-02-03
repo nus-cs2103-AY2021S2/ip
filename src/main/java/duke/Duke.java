@@ -51,20 +51,20 @@ public class Duke {
                 break;
             }
             case "bye": {
-                Ui.echo("Bye. Hope to see you again soon!");
+                ui.setResponse("Bye. Hope to see you again soon!");
                 shouldRun = false;
                 break;
             }
             default: {
-                Ui.echo(String.format("I'm sorry, I don't know what %s means.", input));
+                ui.setResponse(String.format("I'm sorry, I don't know what %s means.", input));
                 break;
             }
             }
         } catch (DukeException dukeException) {
-            Ui.echo(String.format("Francis encountered an error while processing your request. "
-                    + "Here are the details:\n%s", dukeException.getMessage()));
+            ui.setResponse((String.format("Francis encountered an error while processing your request. "
+                    + "Here are the details:\n%s", dukeException.getMessage())));
         } catch (Exception e) {
-            Ui.echo(String.format("Francis encountered an unexpected while processing your request. "
+            ui.setResponse(String.format("Francis encountered an unexpected while processing your request. "
                     + "Here are the details:\n%s", e.getMessage()));
         }
     }
