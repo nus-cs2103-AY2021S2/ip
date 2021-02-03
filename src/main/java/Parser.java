@@ -10,17 +10,19 @@ public class Parser {
      * @param input   String representing input entered by user
      * @param tasks   Class containing the list of tasks being tracked
      * @param storage Class dealing with loading tasks from the file and saving tasks in the file
+     * @return String with the output of the requested action / error message.
      */
-    public static void parseInput(String input, TaskList tasks, Storage storage) {
+    public static String parseInput(String input, TaskList tasks, Storage storage) {
+        String output = "";
         try {
             if (input.equals("list")) {
-                tasks.listTasks();
+                output = tasks.listTasks();
             } else if (input.startsWith("done")) {
                 int index = Integer.parseInt(input.replaceAll("[^-0-9]", ""));
                 if (index > tasks.size() || index <= 0) {
                     throw new DukeException("The list item number provided is invalid");
                 }
-                tasks.markAsDone(index - 1);
+                output = tasks.markAsDone(index - 1);
                 storage.writeTasksToFile(tasks.getTaskList());
             } else if (input.startsWith("todo")) {
                 String description = input.replace("todo", "");
@@ -29,7 +31,7 @@ public class Parser {
                     throw new DukeException("todo description cannot be empty");
                 }
                 tasks.addTask(todo);
-                tasks.printAddedTask(todo);
+                output = tasks.printAddedTask(todo);
                 storage.writeTasksToFile(tasks.getTaskList());
             } else if (input.startsWith("deadline")) {
                 if (input.strip().equals("deadline")) {
@@ -45,7 +47,7 @@ public class Parser {
                 LocalDate date = LocalDate.parse(input.split("/by", 2)[1].strip());
                 Deadline deadline = new Deadline(description, date);
                 tasks.addTask(deadline);
-                tasks.printAddedTask(deadline);
+                output = tasks.printAddedTask(deadline);
                 storage.writeTasksToFile(tasks.getTaskList());
             } else if (input.startsWith("event")) {
 
@@ -63,7 +65,7 @@ public class Parser {
 
                 Event event = new Event(description, date);
                 tasks.addTask(event);
-                tasks.printAddedTask(event);
+                output = tasks.printAddedTask(event);
                 storage.writeTasksToFile(tasks.getTaskList());
 
             } else if (input.startsWith("delete")) {
@@ -71,20 +73,23 @@ public class Parser {
                 if (index > tasks.size() || index <= 0) {
                     throw new DukeException("The list item number provided is invalid");
                 }
-                tasks.deleteTask(index - 1);
+                output = tasks.deleteTask(index - 1);
                 storage.writeTasksToFile(tasks.getTaskList());
             } else if (input.startsWith("find")) {
                 if (input.split(" ").length < 2) {
                     throw new DukeException("Please enter a keyword to search for");
                 }
-                tasks.findTask(input.split(" ")[1]);
+                output = tasks.findTask(input.split(" ")[1]);
 
+            } else if (input.startsWith("bye")) {
+                output = "Goodbye and see you soon!";
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
+        return output;
 
     }
 }
