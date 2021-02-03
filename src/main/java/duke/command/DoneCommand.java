@@ -7,6 +7,14 @@ import duke.util.Ui;
 
 public class DoneCommand extends Command {
     public DoneCommand() {}
+
+    /**
+     * Process command done given by user.
+     * @param storage The storage to store result
+     *        taskList TaskList associated to the current Duke
+     *        ui The UI we use to print stuff
+     *        command Sentences entered by the user
+     */
     public String execute(Storage storage, TaskList taskList, Ui ui, String command) {
         String[] splitCommand = command.split(" ");
         int index = Integer.parseInt(splitCommand[1]);
