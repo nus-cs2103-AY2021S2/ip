@@ -49,24 +49,31 @@ public class Parser {
     }
 
     private Command prepareAddTodo(String input, String[] tokens) throws ParserException {
-        if (tokens.length < 2) {
+        int minTokens = 2;
+        int descriptionOffset = 5;
+
+        if (tokens.length < minTokens) {
             throw new ParserException("Todo requires a description.");
         }
 
-        Todo todo = new Todo(input.substring(5));
+        Todo todo = new Todo(input.substring(descriptionOffset));
         return new AddTodoCommand(todo);
     }
 
     private Command prepareAddDeadline(String input, String[] tokens) throws ParserException {
+        int byOffset = 4;
+        int descriptionOffset = 9;
+
         int bySwitchIndex = input.indexOf("/by");
-        if (bySwitchIndex == -1 || bySwitchIndex + 4 > input.length()) {
+        if (bySwitchIndex == -1 || bySwitchIndex + byOffset > input.length()) {
             throw new ParserException("Deadline requires '/by' to be specified.");
         }
-        String description = input.substring(9, bySwitchIndex);
+
+        String description = input.substring(descriptionOffset, bySwitchIndex);
         if (description.trim().equals("")) {
             throw new ParserException("Deadline requires a description.");
         }
-        String byStr = input.substring(bySwitchIndex + 4);
+        String byStr = input.substring(bySwitchIndex + byOffset);
         if (byStr.trim().equals("")) {
             throw new ParserException("Deadline requires '/by' to be specified.");
         }
@@ -83,15 +90,18 @@ public class Parser {
     }
 
     private Command prepareAddEvent(String input, String[] tokens) throws ParserException {
+        int atOffset = 4;
+        int descriptionOffset = 6;
+
         int atSwitchIndex = input.indexOf("/at");
-        if (atSwitchIndex == -1 || atSwitchIndex + 4 > input.length()) {
+        if (atSwitchIndex == -1 || atSwitchIndex + atOffset > input.length()) {
             throw new ParserException("Event requires '/at' to be specified.");
         }
-        String description = input.substring(6, atSwitchIndex);
+        String description = input.substring(descriptionOffset, atSwitchIndex);
         if (description.trim().equals("")) {
             throw new ParserException("Event requires a description.");
         }
-        String atStr = input.substring(atSwitchIndex + 4);
+        String atStr = input.substring(atSwitchIndex + atOffset);
         if (atStr.trim().equals("")) {
             throw new ParserException("Event requires '/at' to be specified.");
         }
@@ -108,7 +118,9 @@ public class Parser {
     }
 
     private Command prepareDone(String input, String[] tokens) throws ParserException {
-        if (tokens.length < 2) {
+        int minTokens = 2;
+
+        if (tokens.length < minTokens) {
             throw new ParserException("Please specify a number");
         }
 
@@ -123,7 +135,9 @@ public class Parser {
     }
 
     private Command prepareDelete(String input, String[] tokens) throws ParserException {
-        if (tokens.length < 2) {
+        int minTokens = 2;
+
+        if (tokens.length < minTokens) {
             throw new ParserException("Please specify a number");
         }
 
@@ -138,7 +152,9 @@ public class Parser {
     }
 
     private Command prepareFind(String input, String[] tokens) throws ParserException {
-        if (tokens.length < 2) {
+        int minTokens = 2;
+
+        if (tokens.length < minTokens) {
             throw new ParserException("Please specify what you are finding");
         }
 

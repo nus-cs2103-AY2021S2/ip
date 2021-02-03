@@ -15,10 +15,12 @@ import data.TaskList;
 
 public class StorageFile {
 
-    private static final String workingDirPath = System.getProperty("user.dir");
+    private static final String WORKING_DIR_PATH = System.getProperty("user.dir");
     private static final String DEFAULT_STORAGE_FILE_PATH = java.nio.file.Paths
-            .get(workingDirPath, "saveFile.json")
+            .get(WORKING_DIR_PATH, "saveFile.json")
             .toString();
+
+    // To map java objects to json
     private final ObjectMapper mapper = JsonMapper.builder()
             .findAndAddModules()
             .build();
