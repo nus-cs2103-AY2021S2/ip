@@ -42,7 +42,6 @@ public class Parser {
             return findFromList(userInput);
         } else {
             return addTaskToList(userInput, false);
-
         }
     }
 

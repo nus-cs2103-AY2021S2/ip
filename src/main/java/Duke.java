@@ -22,10 +22,10 @@ public class Duke extends Application {
     private TaskList tasks;
 
     /** Storage that controls saving and reading file. */
-    private Storage storage;
+    public Storage storage;
 
     /** Parser that processes commands. */
-    private Parser parser;
+    public Parser parser;
 
     /** User Interface that handles interaction with user. */
     private Ui ui;
@@ -36,8 +36,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
 
     /**
      * Initializes a newly created Duke object with empty task list, storage and parser.
@@ -68,6 +68,7 @@ public class Duke extends Application {
         }
         duke.ui.close();
     }
+
 
     @Override
     public void start(Stage stage) {
@@ -139,11 +140,11 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput(Duke duke) {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText(), duke));
+        String input = userInput.getText();
+        String response = duke.getResponse(input, duke);
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(userText, new ImageView(userImage)),
-            DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
+            DialogBox.getUserDialog(input, userImage),
+            DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }
@@ -152,8 +153,8 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input, Duke duke) {
+    public String getResponse(String input, Duke duke) {
         String processedString = duke.parser.processCommand(input);
-        return "Duke heard: \n" + processedString;
+        return processedString;
     }
 }
