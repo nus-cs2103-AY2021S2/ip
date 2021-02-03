@@ -39,7 +39,6 @@ public class Duke  extends Application{
     private Button sendButton;
     private Scene scene;
 
-    public Ui ui;
     public Storage storage;
     public TaskList tasklist;
 
@@ -47,7 +46,6 @@ public class Duke  extends Application{
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke(String filePath, String fileName) throws FileNotFoundException {
-        ui = new Ui();
         storage = new Storage(filePath, fileName);
         try {
             tasklist = new TaskList(readInput(storage.readFile()));
@@ -73,13 +71,12 @@ public class Duke  extends Application{
      * Find a task.
      * @param tasks list of tasks.
      * @param s the key string.
-     * @param ui the ui used to scan.
      */
 
-    private static String findTasks(TaskList tasks, String s, Ui ui) {
+    private static String findTasks(TaskList tasks, String s) {
         TaskList query = tasks.find(s);
         String response = "Here are the matching tasks in your list:\n";
-        response = response + ui.printTasks(query);
+        response = response + Duke.printTasks(query);
         return response;
     }
 
@@ -87,10 +84,9 @@ public class Duke  extends Application{
      * Delete a task.
      * @param tasks list of tasks.
      * @param n the target index.
-     * @param ui the ui used to scan.
      */
 
-    private static String deleteTask(TaskList tasks, int n, Ui ui) {
+    private static String deleteTask(TaskList tasks, int n) {
         String response = "";
         try {
             Task t = tasks.get(n);
@@ -99,7 +95,7 @@ public class Duke  extends Application{
             tasks.remove(n);
             response = response + "\n" +t.toString();
             int size = tasks.size();
-            response = response + "\n" + printTotalTasks(size,ui);
+            response = response + "\n" + printTotalTasks(size);
             return response;
         }
         catch(IndexOutOfBoundsException e){
@@ -111,10 +107,9 @@ public class Duke  extends Application{
     /**
      * Print the number of tasks
      * @param size the total of tasks.
-     * @param ui the ui used to scan.
      */
 
-    private static String printTotalTasks(int size, Ui ui) {
+    private static String printTotalTasks(int size) {
         String msg;
         if(size != 1) {
              msg = "Now you have " + size + " tasks in the list";
@@ -129,10 +124,9 @@ public class Duke  extends Application{
      * Mark a task as done.
      * @param tasks list of tasks.
      * @param n target index.
-     * @param ui the ui used to scan.
      */
 
-    private static String doneTask(TaskList tasks, int n,Ui ui) {
+    private static String doneTask(TaskList tasks, int n) {
         String response;
         try {
             tasks.set(n, tasks.get(n).finish());
@@ -149,10 +143,9 @@ public class Duke  extends Application{
 
     /**
      * Print an error.
-     * @param ui the ui used to scan.
      */
 
-    private static String addError(Ui ui) {
+    private static String addError() {
         return "Command not understood";
     }
 
@@ -160,16 +153,15 @@ public class Duke  extends Application{
      * Add a todo task
      * @param tasks list of tasks.
      * @param pre input from user.
-     * @param ui the ui used to scan.
      */
 
-    private static String addToDo(TaskList tasks, String[] pre, Ui ui) {
-        String response = "";
+    private static String addToDo(TaskList tasks, String[] pre) {
+        String response;
         if (pre.length > 0) {
             tasks.add(Parser.parseTodo(pre));
             response = "Got it. I've added this task:";
             response = response + "\n" + tasks.get(tasks.size() - 1).toString() + "\n" +
-                printTotalTasks(tasks.size(),ui);
+                printTotalTasks(tasks.size());
             return response;
         }
         else {
@@ -181,17 +173,16 @@ public class Duke  extends Application{
      * Add a event task
      * @param tasks list of tasks.
      * @param cmd input from user.
-     * @param ui the ui used to scan.
      */
 
-    private static String addEvent(TaskList tasks, String cmd,Ui ui) {
+    private static String addEvent(TaskList tasks, String cmd) {
         String[] pre2 = cmd.split("/at");
         String response;
         try {
             tasks.add(Parser.parseEvent(pre2));
             response = "Got it. I've added this task:";
             response = response + "\n" + tasks.get(tasks.size() - 1).toString() + "\n" +
-                    printTotalTasks(tasks.size(),ui);
+                    printTotalTasks(tasks.size());
             return response;
         }
         catch (ArrayIndexOutOfBoundsException e) {
@@ -203,17 +194,16 @@ public class Duke  extends Application{
      * Add a deadline task
      * @param tasks list of tasks.
      * @param cmd input from user.
-     * @param ui the ui used to scan.
      */
 
-    private static String addDeadline(TaskList tasks, String cmd, Ui ui) {
+    private static String addDeadline(TaskList tasks, String cmd) {
         String[] pre2 = cmd.split("/by");
         String response;
         try {
             tasks.add(Parser.parseDeadlinne(pre2));
             response = "Got it. I've added this task:";
             response = response + "\n" + tasks.get(tasks.size() - 1).toString() + "\n" +
-                    printTotalTasks(tasks.size(),ui);
+                    printTotalTasks(tasks.size());
             return response;
         }
         catch (ArrayIndexOutOfBoundsException  e) {
@@ -333,38 +323,46 @@ public class Duke  extends Application{
             case "bye":
                 return "Good Bye~~";
                 case "list" :
-                    response = ui.printTasks(tasklist);
+                    response = Duke.printTasks(tasklist);
                     storage.writeTasks(tasklist);
                     break;
                 case "done" :
                     int n = parseInt(pre[1]) - 1;
-                    response = doneTask(tasklist, n, ui);
+                    response = doneTask(tasklist, n);
                     storage.writeTasks(tasklist);
                     break;
                 case "delete" :
                     n = parseInt(pre[1]) - 1;
-                    response = deleteTask(tasklist, n,ui);
+                    response = deleteTask(tasklist, n);
                     storage.writeTasks(tasklist);
                     break;
                 case "deadline" :
-                    response = addDeadline(tasklist, word,ui);
+                    response = addDeadline(tasklist, word);
                     storage.writeTasks(tasklist);
                     break;
                 case "event" :
-                    response = addEvent(tasklist, word,ui);
+                    response = addEvent(tasklist, word);
                     storage.writeTasks(tasklist);
                     break;
                 case "todo" :
-                    response = addToDo(tasklist, pre,ui);
+                    response = addToDo(tasklist, pre);
                     storage.writeTasks(tasklist);
                     break;
                 case "find" :
-                    response = findTasks(tasklist,pre[1],ui);
+                    response = findTasks(tasklist,pre[1]);
                     break;
                 default :
-                    response = addError(ui);
+                    response = addError();
             }
             return response;
     }
+    public static String printTasks(TaskList tasks) {
+        String response = "Here are the tasks in your list:\n";
+        for (int i = 1; i <= tasks.size(); i++) {
+            response = response + i + ". " + tasks.get(i-1) + "\n";
+        }
+        return response;
+    }
+
 
 }
