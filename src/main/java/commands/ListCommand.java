@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import data.TaskList;
 import ui.TextUi;
 
@@ -9,13 +7,13 @@ public class ListCommand extends Command {
     public static final String COMMAND_TEXT = "list";
 
     /**
-     * Outputs the tasks
+     * Returns the tasks message
+     *
      * @param tasks
      * @param ui
-     * @throws IOException
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui) throws IOException {
-        ui.writeTasks(tasks);
+    public String execute(TaskList tasks, TextUi ui) {
+        return ui.getTasksMessage(tasks);
     }
 }

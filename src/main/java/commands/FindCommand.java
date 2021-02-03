@@ -1,6 +1,5 @@
 package commands;
 
-import java.io.IOException;
 import java.util.stream.Collectors;
 
 import data.TaskList;
@@ -11,16 +10,28 @@ public class FindCommand extends Command {
 
     private String query;
 
+    /**
+     * Creates a Find Command with the given query
+     *
+     * @param query
+     */
     public FindCommand(String query) {
         this.query = query;
     }
 
+    /**
+     * Returns the tasks message that matches the query
+     *
+     * @param tasks
+     * @param ui
+     * @return
+     */
     @Override
-    public void execute(TaskList tasks, TextUi ui) throws IOException {
+    public String execute(TaskList tasks, TextUi ui) {
         TaskList filteredTasks = tasks.stream()
-            .filter(t -> t.getDescription().contains(query))
-            .collect(Collectors.toCollection(TaskList::new));
+                .filter(t -> t.getDescription().contains(query))
+                .collect(Collectors.toCollection(TaskList::new));
 
-        ui.writeTasks(filteredTasks);
+        return ui.getTasksMessage(filteredTasks);
     }
 }

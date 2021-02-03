@@ -11,37 +11,63 @@ import storage.StorageFile;
 import ui.TextUi;
 
 public class Duke {
+    private TextUi ui;
+    private Parser parser;
+    private StorageFile storage;
+    private TaskList tasks;
+
     /**
-     * Entry point for Duke.Duke
-     *
-     * @param args
-     * @throws IOException
+     * Creates a duke instance that reads from
      */
-    public static void main(String[] args) throws IOException {
-        TextUi ui = new TextUi();
-        Parser parser = new Parser();
-        StorageFile storage = new StorageFile();
-
-        TaskList tasks = storage.load();
-        ui.writeGreeting();
-
-        Command command = null;
-        do {
-            String input = ui.readLine();
-
-            try {
-                command = parser.parseCommand(input);
-            } catch (ParserException pe) {
-                ui.write(pe.getMessage());
-                continue;
-            }
-
-            command.execute(tasks, ui);
-            storage.save(tasks);
-        } while (!ExitCommand.isExit(command));
-
-        ui.close();
+    public Duke() {
+        ui = new TextUi();
+        parser = new Parser();
+        storage = new StorageFile();
     }
 
+    /**
+     * Initialises duke with tasks from the savefile
+     *
+     * @throws IOException
+     */
+    public void initialise() throws IOException {
+        tasks = storage.load();
+    }
 
+    /**
+     * Returns the greeting message
+     *
+     * @return greetingMessage
+     */
+    public String getGreetingMessage() {
+        return ui.getGreetingMessage();
+    }
+
+    /**
+     * Gets the response for a given input
+     *
+     * @param input
+     * @return DukeResponse with message
+     * @throws IOException
+     */
+    public DukeResponse getResponse(String input) throws IOException {
+        Command command = null;
+        String message;
+        try {
+            command = parser.parseCommand(input);
+            message = command.execute(tasks, ui);
+        } catch (ParserException pe) {
+            message = pe.getMessage();
+        }
+
+        storage.save(tasks);
+
+        DukeResponse response = new DukeResponse(message);
+
+        if (ExitCommand.isExit(command)) {
+            response.setExit(true);
+        }
+
+        return response;
+    }
 }

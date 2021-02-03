@@ -11,10 +11,12 @@ public class Event extends Task {
     protected LocalDate at;
     private String localDateOutputFormat = "MMM d yyyy";
 
-    private Event() {}
+    private Event() {
+    }
 
     /**
      * Event (Task) constructor
+     *
      * @param description
      * @param at
      */
@@ -23,9 +25,14 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns a Event with status icon and 'at' date
+     *
+     * @return Event string
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString()
-            + " (at: " + at.format(DateTimeFormatter.ofPattern(localDateOutputFormat)) + ")";
+                + " (at: " + at.format(DateTimeFormatter.ofPattern(localDateOutputFormat)) + ")";
     }
 }

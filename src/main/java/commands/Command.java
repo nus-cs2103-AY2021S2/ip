@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import data.TaskList;
 import ui.TextUi;
 
@@ -10,13 +8,14 @@ import ui.TextUi;
  * Only subclasses are meant to be used.
  */
 public abstract class Command {
-    protected Command() {}
+    protected Command() {
+    }
 
     /**
      * Executes the command's logic
+     *
      * @param tasks
      * @param ui
-     * @throws IOException
      */
-    public abstract void execute(TaskList tasks, TextUi ui) throws IOException;
+    public abstract String execute(TaskList tasks, TextUi ui);
 }

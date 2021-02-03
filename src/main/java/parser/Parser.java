@@ -19,6 +19,7 @@ import data.Todo;
 public class Parser {
     /**
      * Parses the given input to get the correct command
+     *
      * @param input
      * @return Command
      * @throws ParserException

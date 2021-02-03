@@ -1,140 +1,97 @@
 package ui;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-
 import data.Task;
 import data.TaskList;
 
 public class TextUi {
-    private static final String divider = "\t____________________________________________________________\n";
-
-    private BufferedReader in;
-    private BufferedWriter out;
+    private static final String GREETING = "Hi, I am Duke. How may I help you?";
 
     public TextUi() {
-        this(System.in, System.out);
     }
 
     /**
-     * TextUi constructor
-     * @param in
-     * @param out
+     * Returns the greeting message
+     *
+     * @return
      */
-    public TextUi(InputStream in, OutputStream out) {
-        this.in = new BufferedReader(new InputStreamReader(in));
-        this.out = new BufferedWriter(new OutputStreamWriter(out));
-    }
-
-    public String readLine() throws IOException {
-        return in.readLine();
+    public String getGreetingMessage() {
+        return GREETING;
     }
 
     /**
-     * Writes greeting message to output
-     * @throws IOException
-     */
-    public void writeGreeting() throws IOException {
-        String[] greeting = {
-            "Hello! I'm Duke",
-            "What can I do for you?"
-        };
-        write(greeting);
-    }
-
-    /**
-     * Writes the given line with dividers
+     * Returns the given line with the correct formatting.
+     * Currently does not do any formatting.
+     *
      * @param line
-     * @throws IOException
      */
-    public void write(String line) throws IOException {
-        out.write(divider);
-        out.write('\t');
-        out.write(line);
-        out.newLine();
-        out.write(divider);
-        out.flush();
+    public String getFormattedMessage(String line) {
+        return line;
     }
 
     /**
-     * Writes the given lines with dividers
+     * Returns the given lines with dividers
+     *
      * @param lines
-     * @throws IOException
      */
-    public void write(String[] lines) throws IOException {
-        out.write(divider);
+    public String getFormattedMessage(String[] lines) {
+        StringBuilder stringBuilder = new StringBuilder();
         for (String line : lines) {
-            out.write('\t');
-            out.write(line);
-            out.newLine();
+            stringBuilder.append(line);
+            stringBuilder.append(System.lineSeparator());
         }
-        out.write(divider);
-        out.flush();
+
+        return stringBuilder.toString();
     }
 
     /**
-     * Writes the given tasks
+     * Returns a list of tasks as a string
+     *
      * @param tasks
-     * @throws IOException
      */
-    public void writeTasks(TaskList tasks) throws IOException {
+    public String getTasksMessage(TaskList tasks) {
         String[] lines = new String[tasks.size()];
 
         for (int i = 0; i < tasks.size(); i++) {
             lines[i] = (i + 1) + "." + tasks.get(i).toString();
         }
 
-        write(lines);
+        return getFormattedMessage(lines);
     }
 
     /**
-     * Writes the acknowledgement message for adding a task
+     * Returns the acknowledgement message for adding a task
+     *
      * @param task
      * @param tasks
-     * @throws IOException
      */
-    public void writeAddTask(Task task, TaskList tasks) throws IOException {
-        write(new String[]{
-            "Got it. I've added this task:",
-            "  " + task,
-            "Now you have " + tasks.size() + " tasks in the list."
+    public String getAddTaskMessage(Task task, TaskList tasks) {
+        return getFormattedMessage(new String[]{
+                "Got it. I've added this task:",
+                "  " + task,
+                "Now you have " + tasks.size() + " tasks in the list."
         });
     }
 
     /**
-     * Writes the acknowledgement message for deleting a task
+     * Returns the acknowledgement message for deleting a task
+     *
      * @param task
      * @param tasks
-     * @throws IOException
      */
-    public void writeDeleteTask(Task task, TaskList tasks) throws IOException {
-        write(new String[]{
-            "Noted. I've removed this task:",
-            "  " + task,
-            "Now you have " + tasks.size() + " tasks in the list."
+    public String getDeleteTaskMessage(Task task, TaskList tasks) {
+        return getFormattedMessage(new String[]{
+                "Noted. I've removed this task:",
+                "  " + task,
+                "Now you have " + tasks.size() + " tasks in the list."
         });
     }
 
     /**
-     * Writes the acknowledgement message for finishing a task
+     * Returns the acknowledgement message for finishing a task
+     *
      * @param task
-     * @throws IOException
      */
-    public void writeDoneTask(Task task) throws IOException {
-        write("  [" + task.getStatusIcon() + "] " + task.getDescription());
-    }
-
-    /**
-     * Closes the input and output streams
-     * @throws IOException
-     */
-    public void close() throws IOException {
-        in.close();
-        out.close();
+    public String getDoneTaskMessage(Task task) {
+        return getFormattedMessage("  [" + task.getStatusIcon() + "] " + task.getDescription());
     }
 }

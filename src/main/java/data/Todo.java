@@ -8,12 +8,18 @@ public class Todo extends Task {
 
     /**
      * Todo constructor
+     *
      * @param description
      */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Returns the Todo with status icon
+     *
+     * @return Todo string
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

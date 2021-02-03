@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import data.Deadline;
 import data.TaskList;
 import ui.TextUi;
@@ -16,14 +14,14 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Adds Deadline into given tasks and outputs corresponding acknowledgement message
+     * Adds Deadline into given tasks and returns corresponding acknowledgement message
+     *
      * @param tasks
      * @param ui
-     * @throws IOException
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui) throws IOException {
+    public String execute(TaskList tasks, TextUi ui) {
         tasks.add(deadline);
-        ui.writeAddTask(deadline, tasks);
+        return ui.getAddTaskMessage(deadline, tasks);
     }
 }

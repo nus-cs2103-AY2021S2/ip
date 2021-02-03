@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import data.TaskList;
 import data.Todo;
 import ui.TextUi;
@@ -16,14 +14,14 @@ public class AddTodoCommand extends Command {
     }
 
     /**
-     * Adds todo to given tasks and outputs corresponding acknowledgement message
+     * Adds todo to given tasks and returns corresponding acknowledgement message
+     *
      * @param tasks
      * @param ui
-     * @throws IOException
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui) throws IOException {
+    public String execute(TaskList tasks, TextUi ui) {
         tasks.add(todo);
-        ui.writeAddTask(todo, tasks);
+        return ui.getAddTaskMessage(todo, tasks);
     }
 }

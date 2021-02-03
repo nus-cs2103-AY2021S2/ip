@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import data.Task;
 import data.TaskList;
 import ui.TextUi;
@@ -16,20 +14,19 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes the selected task from the given tasks and outputs the corresponding acknowlegement message
+     * Deletes the selected task from the given tasks and returns the corresponding acknowlegement message
+     *
      * @param tasks
      * @param ui
-     * @throws IOException
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui) throws IOException {
+    public String execute(TaskList tasks, TextUi ui) {
         if (indexToDelete < 0 || indexToDelete >= tasks.size()) {
-            ui.write("Invalid number.");
-            return;
+            return ui.getFormattedMessage("Invalid number.");
         }
 
         Task taskToDelete = tasks.get(indexToDelete);
         tasks.remove(indexToDelete);
-        ui.writeDeleteTask(taskToDelete, tasks);
+        return ui.getDeleteTaskMessage(taskToDelete, tasks);
     }
 }

@@ -11,10 +11,12 @@ public class Deadline extends Task {
     protected LocalDate by;
     private String localDateOutputFormat = "MMM d yyyy";
 
-    private Deadline() {}
+    private Deadline() {
+    }
 
     /**
      * Deadline constructor
+     *
      * @param description
      * @param by
      */
@@ -23,9 +25,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns a Deadline with status icon and 'by' date
+     *
+     * @return Deadline string
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString()
-            + " (by: " + by.format(DateTimeFormatter.ofPattern(localDateOutputFormat)) + ")";
+                + " (by: " + by.format(DateTimeFormatter.ofPattern(localDateOutputFormat)) + ")";
     }
 }

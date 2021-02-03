@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * can reconstruct the correct task type from json.
  */
 @JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "d")
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "d")
 @JsonSubTypes({
-    @Type(value = Todo.class, name = "Todo"),
-    @Type(value = Deadline.class, name = "Deadline"),
-    @Type(value = Event.class, name = "Event")
+        @Type(value = Todo.class, name = "Todo"),
+        @Type(value = Deadline.class, name = "Deadline"),
+        @Type(value = Event.class, name = "Event")
 })
 public class Task {
 
@@ -28,7 +28,8 @@ public class Task {
     @JsonProperty
     protected String description;
 
-    protected Task() {}
+    protected Task() {
+    }
 
     /**
      * Task constructor
@@ -40,6 +41,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Gets the status icon char for the task state
+     *
+     * @return status icon
+     */
     @JsonIgnore
     public String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718"; // return tick or X symbols
@@ -47,6 +53,7 @@ public class Task {
 
     /**
      * return if the tasks is done
+     *
      * @return task's isDone value
      */
     @JsonIgnore
@@ -63,6 +70,7 @@ public class Task {
 
     /**
      * Gets the description of the task
+     *
      * @return description of task
      */
     public String getDescription() {
@@ -71,12 +79,18 @@ public class Task {
 
     /**
      * Sets the description of the task
+     *
      * @param description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Returns a task as a string with status icon
+     *
+     * @return task string
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();

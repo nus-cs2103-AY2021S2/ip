@@ -17,34 +17,36 @@ public class StorageFile {
 
     private static final String workingDirPath = System.getProperty("user.dir");
     private static final String DEFAULT_STORAGE_FILE_PATH = java.nio.file.Paths
-        .get(workingDirPath, "saveFile.json")
-        .toString();
+            .get(workingDirPath, "saveFile.json")
+            .toString();
     private final ObjectMapper mapper = JsonMapper.builder()
-        .findAndAddModules()
-        .build();
+            .findAndAddModules()
+            .build();
 
     private File saveFile;
 
-    public StorageFile() throws IOException {
+    public StorageFile() {
         this(DEFAULT_STORAGE_FILE_PATH);
     }
 
     /**
      * StorageFile constructor
+     *
      * @param filePath
      * @throws IOException
      */
-    public StorageFile(String filePath) throws IOException {
+    public StorageFile(String filePath) {
         saveFile = new File(filePath);
-        saveFile.createNewFile();
     }
 
     /**
      * Writes the given tasks to the savefile
+     *
      * @param tasks
      * @throws IOException
      */
     public void save(TaskList tasks) throws IOException {
+        saveFile.createNewFile();
         try (BufferedOutputStream outSaveFile = new BufferedOutputStream(new FileOutputStream(saveFile, false))
         ) {
             // https://github.com/FasterXML/jackson-databind/pull/1309
@@ -54,6 +56,7 @@ public class StorageFile {
 
     /**
      * Reads from the savefile and creates tasks
+     *
      * @return TaskList
      * @throws IOException
      */

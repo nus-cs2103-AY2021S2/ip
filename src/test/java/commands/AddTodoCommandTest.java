@@ -2,8 +2,6 @@ package commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +20,7 @@ public class AddTodoCommandTest {
     @BeforeEach
     void setUp() {
         tasks = new TaskList();
-        ui = new TextUi(new ByteArrayInputStream(new byte[1024]), new ByteArrayOutputStream());
+        ui = new TextUi();
     }
 
     @Test

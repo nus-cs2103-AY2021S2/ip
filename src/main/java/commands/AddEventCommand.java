@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import data.Event;
 import data.TaskList;
 import ui.TextUi;
@@ -16,14 +14,14 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * Adds event into given tasks and outputs acknowledgement message
+     * Adds event into given tasks and returns acknowledgement message
+     *
      * @param tasks
      * @param ui
-     * @throws IOException
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui) throws IOException {
+    public String execute(TaskList tasks, TextUi ui) {
         tasks.add(event);
-        ui.writeAddTask(event, tasks);
+        return ui.getAddTaskMessage(event, tasks);
     }
 }

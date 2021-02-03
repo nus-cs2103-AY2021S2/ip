@@ -1,7 +1,5 @@
 package commands;
 
-import java.io.IOException;
-
 import data.Task;
 import data.TaskList;
 import ui.TextUi;
@@ -16,20 +14,19 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks the selected task as done and outputs the corresponding acknowledgement message
+     * Marks the selected task as done and returns the corresponding acknowledgement message
+     *
      * @param tasks
      * @param ui
-     * @throws IOException
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui) throws IOException {
+    public String execute(TaskList tasks, TextUi ui) {
         if (indexToSetDone < 0 || indexToSetDone >= tasks.size()) {
-            ui.write("Invalid number.");
-            return;
+            return ui.getFormattedMessage("Invalid number.");
         }
 
         Task task = tasks.get(indexToSetDone);
         task.markAsDone();
-        ui.writeDoneTask(task);
+        return ui.getDoneTaskMessage(task);
     }
 }

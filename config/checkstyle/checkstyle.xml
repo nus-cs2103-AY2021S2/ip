@@ -339,6 +339,7 @@
     </module>
 
     <module name="Indentation">
+      <property name="lineWrappingIndentation" value="8" />
       <property name="caseIndent" value="0" />
     </module>
 
@@ -398,6 +399,8 @@
       <property name="allowMissingPropertyJavadoc" value="true"/>
       <property name="ignoreMethodNamesRegex" value="(set.*|get.*)"/>
     </module>
+
+    <module name="RequireEmptyLineBeforeBlockTagGroup"/>
 
   </module>
 </module>
