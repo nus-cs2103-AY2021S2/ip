@@ -36,7 +36,7 @@ public class UiHandler extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        showWelcome();
+        showWelcomeMsg();
     }
 
     /**
@@ -52,8 +52,8 @@ public class UiHandler extends AnchorPane {
     /**
      * Greets the user upon program launch.
      */
-    public void showWelcome() {
-        showInfo("Hello, I am Steve! How can I help you?");
+    public void showWelcomeMsg() {
+        showInfoMsg("Hello, I am Steve! How can I help you?");
     }
 
     /**
@@ -61,7 +61,7 @@ public class UiHandler extends AnchorPane {
      *
      * @param info information to print
      */
-    private void showInfo(String info) {
+    private void showInfoMsg(String info) {
         dialogContainer.getChildren().add(DialogBox.getSteveDialog(info.split(" ", 2)[1], STEVE_IMAGE));
     }
 
@@ -70,7 +70,7 @@ public class UiHandler extends AnchorPane {
      *
      * @param msg error message to print
      */
-    private void showError(String msg) {
+    private void showErrorMsg(String msg) {
         dialogContainer.getChildren().add(DialogBox.getSteveDialog(msg, STEVE_IMAGE));
     }
 
@@ -79,7 +79,7 @@ public class UiHandler extends AnchorPane {
      *
      * @param crashMsg message to print before termination
      */
-    private void showTerminate(String crashMsg) {
+    private void showTerminateMsg(String crashMsg) {
         dialogContainer.getChildren().add(DialogBox.getSteveDialog(crashMsg, STEVE_IMAGE));
     }
 
@@ -107,11 +107,11 @@ public class UiHandler extends AnchorPane {
      */
     public void showResponse(String response) {
         if (response.startsWith("Error:")) {
-            showError(response);
+            showErrorMsg(response);
         } else if (response.startsWith("Terminated: ")) {
-            showTerminate(response);
+            showTerminateMsg(response);
         } else {
-            showInfo(response);
+            showInfoMsg(response);
         }
     }
 }

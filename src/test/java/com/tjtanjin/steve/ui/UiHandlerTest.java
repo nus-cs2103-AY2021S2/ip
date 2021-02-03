@@ -35,23 +35,23 @@ public class UiHandlerTest extends AnchorPane {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String expected = "Hello from\n" + logo + "\nWhat can I do for you?";
+        String expectedMsg = "Hello from\n" + logo + "\nWhat can I do for you?";
         UI_HANDLER.showWelcome();
-        assertEquals(expected, OUTPUT_STREAM_CAPTOR.toString().trim());
+        assertEquals(expectedMsg, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 
     @Test
     void showInfo_whenInvokePrintln_thenOutputCaptorSuccess() {
-        String expected = "Test print information message!";
-        UI_HANDLER.showResponse(expected);
-        assertEquals(expected, OUTPUT_STREAM_CAPTOR.toString().trim());
+        String expectedMsg = "Test print information message!";
+        UI_HANDLER.showResponse(expectedMsg);
+        assertEquals(expectedMsg, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 
     @Test
     void showError_whenInvokePrintln_thenOutputCaptorSuccess() {
         String errMsg = "Test print error message!";
-        String expected = "Error: " + "Test print error message!";
+        String expectedMsg = "Error: " + "Test print error message!";
         UI_HANDLER.showResponse(errMsg);
-        assertEquals(expected, OUTPUT_STREAM_CAPTOR.toString().trim());
+        assertEquals(expectedMsg, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 }
