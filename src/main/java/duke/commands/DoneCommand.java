@@ -28,11 +28,11 @@ public class DoneCommand extends Command {
     public CommandResult execute() {
         try {
             taskList.completeTask(index);
-            String messageForUser = MESSAGE_DONE_TASK + "\n"
-                    + taskList.getTask(index).toString();
-            return new CommandResult(messageForUser, taskList, false);
+            return new CommandResult(taskList, false,
+                    MESSAGE_DONE_TASK + "\n",
+                    taskList.getTask(index).toString());
         } catch (IndexOutOfBoundsException ex) {
-            return new CommandResult(MESSAGE_INVALID_INDEX, false);
+            return new CommandResult(false, MESSAGE_INVALID_INDEX);
         }
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
  * Represents a list of {@code Task}.
  */
 public class TaskList {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();

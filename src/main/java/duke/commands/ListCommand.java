@@ -16,17 +16,17 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         if (taskList.isEmpty()) {
-            return new CommandResult(MESSAGE_EMPTY_TASKLIST, false);
-        } else {
-            StringBuilder tasksListAsString = new StringBuilder();
-            for (int i = 1; i <= taskList.size(); i++) {
-                tasksListAsString.append(String.format(MESSAGE_INDEX_TASK_FORMAT, i, taskList.getTask(i - 1)));
-                if (i != taskList.size()) {
-                    tasksListAsString.append("\n");
-                }
-            }
-            String messageForUser = MESSAGE_SHOW_TASKLIST + "\n" + tasksListAsString.toString();
-            return new CommandResult(messageForUser, false);
+            return new CommandResult(false, MESSAGE_EMPTY_TASKLIST);
         }
+        StringBuilder taskListAsString = new StringBuilder();
+        for (int i = 1; i <= taskList.size(); i++) {
+            taskListAsString.append(String.format(MESSAGE_INDEX_TASK_FORMAT, i, taskList.getTask(i - 1)));
+            if (i != taskList.size()) {
+                taskListAsString.append("\n");
+            }
+        }
+        return new CommandResult(false,
+                MESSAGE_SHOW_TASKLIST + "\n",
+                taskListAsString.toString());
     }
 }

@@ -1,7 +1,5 @@
 package duke.commands;
 
-import static duke.utils.Messages.MESSAGE_EXIT;
-
 /**
  * Exits the application.
  */
@@ -13,6 +11,6 @@ public class ByeCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(MESSAGE_EXIT, true);
+        return new CommandResult(true);
     }
 }

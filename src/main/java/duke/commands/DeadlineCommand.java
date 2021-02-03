@@ -54,9 +54,9 @@ public class DeadlineCommand extends Command {
     public CommandResult execute() {
         DeadlineTask task = new DeadlineTask(taskName, deadlineDate, deadlineTime);
         taskList.addTask(task);
-        String messageForUser = MESSAGE_ADDED_TASK + "\n"
-                + "  " + task.toString() + "\n"
-                + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size());
-        return new CommandResult(messageForUser, taskList, false);
+        return new CommandResult(taskList, false,
+                MESSAGE_ADDED_TASK + "\n",
+                task.toString() + "\n",
+                String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()));
     }
 }

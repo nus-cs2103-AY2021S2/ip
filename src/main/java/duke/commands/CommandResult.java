@@ -6,35 +6,43 @@ import duke.tasks.TaskList;
  * Represents the result of a command after execution.
  */
 public class CommandResult {
-    private final String messageForUser;
     private final TaskList updatedTaskList;
     private final boolean isExiting;
+    private final String messageForUser;
 
     /**
      * Creates a {@code CommandResult} object with a message for the user, without an updated task list,
      * and sets whether the application will be exiting after the command.
      *
-     * @param messageForUser Message string to show to user.
      * @param isExiting Boolean that sets whether the application is exiting.
+     * @param messages Arguments that represent the messages to show to user.
      */
-    public CommandResult(String messageForUser, boolean isExiting) {
-        this.messageForUser = messageForUser;
+    public CommandResult(boolean isExiting, String... messages) {
         updatedTaskList = null;
         this.isExiting = isExiting;
+        StringBuilder fullMessage = new StringBuilder();
+        for (String msg : messages) {
+            fullMessage.append(msg);
+        }
+        messageForUser = fullMessage.toString();
     }
 
     /**
      * Creates a {@code CommandResult} object with a message for the user and an updated task list,
      * and sets whether the application will be exiting after the command.
      *
-     * @param messageForUser Message string to show to user.
      * @param updatedTaskList Updated task list after execution of a command.
      * @param isExiting Boolean that sets whether the application is exiting.
+     * @param messages Arguments that represent the messages to show to user.
      */
-    public CommandResult(String messageForUser, TaskList updatedTaskList, boolean isExiting) {
-        this.messageForUser = messageForUser;
+    public CommandResult(TaskList updatedTaskList, boolean isExiting, String... messages) {
         this.updatedTaskList = updatedTaskList;
         this.isExiting = isExiting;
+        StringBuilder fullMessage = new StringBuilder();
+        for (String msg : messages) {
+            fullMessage.append(msg);
+        }
+        messageForUser = fullMessage.toString();
     }
 
     /**

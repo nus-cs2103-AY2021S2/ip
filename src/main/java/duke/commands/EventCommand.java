@@ -33,9 +33,9 @@ public class EventCommand extends Command {
     public CommandResult execute() {
         EventTask task = new EventTask(taskName, eventTime);
         taskList.addTask(task);
-        String messageForUser = MESSAGE_ADDED_TASK + "\n"
-                + "  " + task.toString() + "\n"
-                + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size());
-        return new CommandResult(messageForUser, taskList, false);
+        return new CommandResult(taskList, false,
+                MESSAGE_ADDED_TASK + "\n",
+                task.toString() + "\n",
+                String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()));
     }
 }

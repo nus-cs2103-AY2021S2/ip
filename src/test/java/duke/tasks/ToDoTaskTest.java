@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTaskTest {
-    private static String taskName = "Read Book";
+    private static final String TASK_NAME = "Read Book";
 
     @Test
     public void testStringConversion() {
-        assertEquals("[T][ ] Read Book", new ToDoTask(taskName).toString());
-        assertEquals("[T][ ] Read Book", new ToDoTask(taskName, false).toString());
-        assertEquals("[T][X] Read Book", new ToDoTask(taskName, true).toString());
+        assertEquals("[T][ ] Read Book", new ToDoTask(TASK_NAME).toString());
+        assertEquals("[T][ ] Read Book", new ToDoTask(TASK_NAME, false).toString());
+        assertEquals("[T][X] Read Book", new ToDoTask(TASK_NAME, true).toString());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class ToDoTaskTest {
 
     @Test
     public void getName_nonEmptyString_success() {
-        assertEquals(taskName, new ToDoTask(taskName).getName());
+        assertEquals(TASK_NAME, new ToDoTask(TASK_NAME).getName());
     }
 
     @Test
@@ -33,17 +33,17 @@ public class ToDoTaskTest {
 
     @Test
     public void isDone_completedTask_true() {
-        assertTrue(new ToDoTask(taskName, true).isDone());
+        assertTrue(new ToDoTask(TASK_NAME, true).isDone());
     }
 
     @Test
     public void isDone_notCompletedTask_false() {
-        assertFalse(new ToDoTask(taskName, false).isDone());
+        assertFalse(new ToDoTask(TASK_NAME, false).isDone());
     }
 
     @Test
     public void completeTask_notCompletedTask_success() {
-        ToDoTask toDoTask = new ToDoTask(taskName, false);
+        ToDoTask toDoTask = new ToDoTask(TASK_NAME, false);
         toDoTask.completeTask();
         assertTrue(toDoTask.isDone());
     }

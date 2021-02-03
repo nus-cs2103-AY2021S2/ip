@@ -13,16 +13,16 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        String helpMessage = MESSAGE_HELP + "\n"
-                + ByeCommand.MESSAGE_USAGE + "\n\n"
-                + ListCommand.MESSAGE_USAGE + "\n\n"
-                + ToDoCommand.MESSAGE_USAGE + "\n\n"
-                + DeadlineCommand.MESSAGE_USAGE + "\n\n"
-                + EventCommand.MESSAGE_USAGE + "\n\n"
-                + DoneCommand.MESSAGE_USAGE + "\n\n"
-                + DeleteCommand.MESSAGE_USAGE + "\n\n"
-                + FindCommand.MESSAGE_USAGE + "\n\n"
-                + HelpCommand.MESSAGE_USAGE;
-        return new CommandResult(helpMessage, false);
+        return new CommandResult(false,
+                MESSAGE_HELP + "\n",
+                HelpCommand.MESSAGE_USAGE + "\n\n",
+                ByeCommand.MESSAGE_USAGE + "\n\n",
+                ListCommand.MESSAGE_USAGE + "\n\n",
+                ToDoCommand.MESSAGE_USAGE + "\n\n",
+                DeadlineCommand.MESSAGE_USAGE + "\n\n",
+                EventCommand.MESSAGE_USAGE + "\n\n",
+                DoneCommand.MESSAGE_USAGE + "\n\n",
+                DeleteCommand.MESSAGE_USAGE + "\n\n",
+                FindCommand.MESSAGE_USAGE);
     }
 }

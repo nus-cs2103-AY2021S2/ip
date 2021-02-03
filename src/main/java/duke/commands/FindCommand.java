@@ -38,11 +38,12 @@ public class FindCommand extends Command {
             }
         }
         if (tasksWithSearchWord.length() == 0) {
-            return new CommandResult(MESSAGE_NO_MATCHES, false);
-        } else {
-            tasksWithSearchWord.deleteCharAt(tasksWithSearchWord.length() - 1);
-            String messageForUser = MESSAGE_FOUND_TASKS + "\n" + tasksWithSearchWord.toString();
-            return new CommandResult(messageForUser, false);
+            return new CommandResult(false, MESSAGE_NO_MATCHES);
         }
+
+        tasksWithSearchWord.deleteCharAt(tasksWithSearchWord.length() - 1);
+        return new CommandResult(false,
+                MESSAGE_FOUND_TASKS + "\n",
+                tasksWithSearchWord.toString());
     }
 }
