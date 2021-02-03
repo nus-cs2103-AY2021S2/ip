@@ -2,6 +2,7 @@ package com.jetbrains;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.lang.Throwable;
 
 public class Duke {
     public static void main(String[] args) {
@@ -18,17 +19,21 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
+            Task task;
+            try {
             if (input.equals("list")) {
                 displayList(list);
                 System.out.println("\n");
             } else if (input.contains("done")) {
                 String[] doneCommand = input.split(" ");
-                Task task = list.get(Integer.parseInt(doneCommand[1]) - 1);
+                task = list.get(Integer.parseInt(doneCommand[1]) - 1);
                 System.out.println("Good job! I've marked this task as done:\n    " +
                         task.markDone() +
                         "\n");
-            } else {
-                Task task;
+            } else if (input.contains("todo") ||
+                    input.contains("deadline") ||
+                    input.contains("event")) {
+
                 if (input.contains("todo")) {
                     task = new ToDo(input);
                 } else if (input.contains("deadline")) {
@@ -39,10 +44,16 @@ public class Duke {
                 list.add(task);
                 System.out.println("I'll take note! \n  added: " +
                         task + "\nNow you have " + list.size() +
-                        " task(s) in the list. \n" );
+                        " task(s) in the list. \n");
+                } else {
+                    throw new DukeInvalidCommandException();
+                }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                input = sc.nextLine();
             }
-            input = sc.nextLine();
-        }
+
         sc.close();
         System.out.println("Bye! Stay on task!");
     }

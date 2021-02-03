@@ -1,18 +1,29 @@
 package com.jetbrains;
 
+import java.lang.Throwable;
 public class Deadline extends Task {
-    String dueDate;
+    String by;
 
-    Deadline(String input) {
-        String[] inputs = input.trim().split("/by ");
-        this.task = inputs[0].substring(9);
+    Deadline(String input) throws DukeIncompleteCommandException {
+        input = input.substring(8).trim();
+
+        if (input.equals("")) {
+            throw new DukeIncompleteCommandException();
+        }
+
+        String[] inputs = input.split("/by");
+
+        if (!input.contains("/by") || inputs.length < 2) {
+            throw new DukeIncompleteCommandException("Oh no! Please enter an due date. :P");
+        }
+        this.task = inputs[0];
         this.isDone = false;
-        this.dueDate = inputs[1];
+        this.by = inputs[1].trim();
     }
 
     @Override
     public String toString() {
         return String.format("DDLN%s (by: %s)" ,
-                super.toString(), dueDate);
+                super.toString(), by);
     }
 }
