@@ -40,21 +40,12 @@ public class OlafApp {
 
     /**
      * Executes each session of the application.
+     *
+     * @param command
      */
-    public void run() {
-        // todo: break this down into more methods...?
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println(PrintText.WELCOME_MESSAGE);
-
+    public String run(String command) {
         while (isActive) {
-            String command = null;
-            try {
-                command = bf.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            // is while loop needed here??
             assert command != null;
 
             if (command.equalsIgnoreCase("bye")) {
@@ -62,9 +53,9 @@ public class OlafApp {
             } else if (command.equalsIgnoreCase("list")) {
                 // todo: use try catch here
                 if (taskList.hasTasks()) {
-                    ui.showList(taskList);
+                    return ui.showList(taskList);
                 } else {
-                    System.out.println(PrintText.EMPTY_TASKLIST_ERROR);
+                    return PrintText.EMPTY_TASKLIST_ERROR.toString();
                 }
             } else if (command.toLowerCase().startsWith("find")) {
                 String expression = Parser.parseParameter(command, " ", 1);
@@ -73,9 +64,9 @@ public class OlafApp {
                 if (matches.hasTasks()) {
                     // todo: index of matches List should follow original taskList
                     String output = "Here are the tasks that match your search:\n\n" + matches.toString();
-                    ui.showFormatResponse(output);
+                    return ui.showFormatResponse(output);
                 } else {
-                    ui.showFormatResponse("No tasks match your search...");
+                    return ui.showFormatResponse("No tasks match your search...");
                 }
             } else if (command.toLowerCase().startsWith("done")) {
                 try {
@@ -84,11 +75,11 @@ public class OlafApp {
 
                     storage.saveData(taskList);
 
-                    ui.showDoneSuccess(id, taskList.getTask(id), taskList.getTotalNumberOfTasksUndone());
+                    return ui.showDoneSuccess(id, taskList.getTask(id), taskList.getTotalNumberOfTasksUndone());
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    ui.showFormatError(PrintText.DONE_FORMAT);
+                    return ui.showFormatError(PrintText.DONE_FORMAT);
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                    ui.showInvalidIndexError();
+                    return ui.showInvalidIndexError();
                 }
             } else if (command.toLowerCase().startsWith("delete")) {
                 try {
@@ -97,11 +88,11 @@ public class OlafApp {
 
                     storage.saveData(taskList);
 
-                    ui.showDeleteSuccess(id, deleted, taskList.getTotalNumberOfTasks());
+                    return ui.showDeleteSuccess(id, deleted, taskList.getTotalNumberOfTasks());
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    ui.showFormatError(PrintText.DELETE_FORMAT);
+                    return ui.showFormatError(PrintText.DELETE_FORMAT);
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                    ui.showInvalidIndexError();
+                    return ui.showInvalidIndexError();
                 }
             } else if (command.toLowerCase().startsWith("todo")) {
                 try {
@@ -111,10 +102,10 @@ public class OlafApp {
 
                     storage.saveData(taskList);
 
-                    ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
+                    return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                             newTodo, taskList.getTotalNumberOfTasksUndone());
                 } catch (IndexOutOfBoundsException e) {
-                    ui.showFormatError(PrintText.TODO_FORMAT);
+                    return ui.showFormatError(PrintText.TODO_FORMAT);
                 }
             } else if (command.toLowerCase().startsWith("deadline")) {
                 try {
@@ -129,11 +120,11 @@ public class OlafApp {
 
                     storage.saveData(taskList);
 
-                    ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
+                    return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                             newDeadline, taskList.getTotalNumberOfTasksUndone());
                 } catch (Exception e) {
                     // catches both ParseException and IndexOutOfBounds exception
-                    ui.showFormatError(PrintText.DEADLINE_FORMAT);
+                    return ui.showFormatError(PrintText.DEADLINE_FORMAT);
                 }
             } else if (command.toLowerCase().startsWith("event")) {
                 try {
@@ -152,23 +143,23 @@ public class OlafApp {
 
                     storage.saveData(taskList);
 
-                    ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
+                    return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                             newEvent, taskList.getTotalNumberOfTasksUndone());
                 } catch (Exception e) {
                     // catches both ParseException and IndexOutOfBounds exception
-                    ui.showFormatError(PrintText.EVENT_FORMAT);
+                    return ui.showFormatError(PrintText.EVENT_FORMAT);
                 }
             } else if (command.equalsIgnoreCase("help")) {
-                ui.showFormatResponse(PrintText.HELP);
+                return ui.showFormatResponse(PrintText.HELP);
             } else {
-                ui.showFormatResponse("  Hmm sorry I don't understand :(\n"
+                return ui.showFormatResponse("  Hmm sorry I don't understand :(\n"
                         + "  Type 'help' to find out how you can talk to me!\n");
             }
         }
+        return "could you repeat that?";
     }
 
     private void stop() {
         isActive = false;
-        ui.showFormatResponse("  Aww hope to see you soon, goodbye!\n");
     }
 }
