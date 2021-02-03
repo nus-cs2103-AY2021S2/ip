@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import gui.DukeUi;
 
 /**
  * A launcher class to workaround classpath issues.
