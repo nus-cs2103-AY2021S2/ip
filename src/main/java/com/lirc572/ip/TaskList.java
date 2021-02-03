@@ -76,7 +76,7 @@ public class TaskList {
         // Convert task list to a string
         StringBuilder data = new StringBuilder();
         for (Task task : this.tasks) {
-            data.append(task.toSavedString() + "\n");
+            data.append(task.getSavedString() + "\n");
         }
         return data.toString();
     }

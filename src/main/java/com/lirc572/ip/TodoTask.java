@@ -20,7 +20,7 @@ public class TodoTask extends Task {
      * @return The string representation of the TodoTask for storage.
      */
     @Override
-    public String toSavedString() {
+    public String getSavedString() {
         return String.format(
                 "T | %d | %s",
                 this.getIsDone() ? 1 : 0,

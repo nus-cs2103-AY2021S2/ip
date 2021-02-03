@@ -50,8 +50,8 @@ public class TaskTest {
     @Test
     public void testToSavedString() {
         Task task = new Task("lirc572");
-        assertEquals("0 | lirc572", task.toSavedString());
+        assertEquals("0 | lirc572", task.getSavedString());
         task.setIsDone(true);
-        assertEquals("1 | lirc572", task.toSavedString());
+        assertEquals("1 | lirc572", task.getSavedString());
     }
 }

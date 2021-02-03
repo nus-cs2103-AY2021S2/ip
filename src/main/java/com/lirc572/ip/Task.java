@@ -56,7 +56,7 @@ public class Task {
      * Returns the string representation of the Task for storage.
      * @return The string representation of the Task for storage.
      */
-    public String toSavedString() {
+    public String getSavedString() {
         return String.format(
                 "%d | %s",
                 this.getIsDone() ? 1 : 0,

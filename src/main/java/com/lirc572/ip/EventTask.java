@@ -63,7 +63,7 @@ public class EventTask extends Task {
      * @return The string representation of the DeadlineTask for storage.
      */
     @Override
-    public String toSavedString() {
+    public String getSavedString() {
         return String.format(
                 "E | %d | %s | %s",
                 this.getIsDone() ? 1 : 0,

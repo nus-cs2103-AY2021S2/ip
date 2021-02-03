@@ -64,7 +64,7 @@ public class DeadlineTask extends Task {
      * @return The string representation of the DeadlineTask for storage.
      */
     @Override
-    public String toSavedString() {
+    public String getSavedString() {
         return String.format(
                 "D | %d | %s | %s",
                 this.getIsDone() ? 1 : 0,
