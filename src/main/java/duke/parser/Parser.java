@@ -25,12 +25,12 @@ public class Parser {
         } else if (fullCommand.equals("list")) {
             command = new ListCommand();
         } else {
-            String[] splitComands = fullCommand.split(" ");
-            if (splitComands[0].equals("done")) {
+            String[] splitCommands = fullCommand.split(" ");
+            if (splitCommands[0].equals("done")) {
                 command = new DoneCommand(fullCommand);
-            } else if (splitComands[0].equals("delete")) {
+            } else if (splitCommands[0].equals("delete")) {
                 command = new DeleteCommand(fullCommand);
-            } else if (splitComands[0].equals("find")) {
+            } else if (splitCommands[0].equals("find")) {
                 command = new FindCommand(fullCommand);
             } else {
                 command = new AddCommand(fullCommand);
