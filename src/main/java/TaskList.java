@@ -18,11 +18,12 @@ public class TaskList {
         this.size = tasks.size();
     }
 
-    public void listing() {
+    public String listing() {
+        String output = "";
         for (int i = 1; i < tasks.size() + 1; i++) {
-            Ui.print(
-                    Aligner.align(i + "." + tasks.get(i - 1).toString()));
+            output = output + i + "." + tasks.get(i - 1).toString() + "\n";
         }
+        return output;
     }
 
     public List<Task> getList() {

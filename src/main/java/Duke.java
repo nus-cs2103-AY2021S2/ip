@@ -13,6 +13,16 @@ public class Duke {
         tasks = new TaskList();
     }
 
+    public String getResponse(String input) {
+            try {
+                Command c = Parser.parse(input);
+                String response = c.execute(tasks);
+                return response;
+            } catch (DukeException ex) {
+                return ex.getMessage();
+            }
+    }
+
     public static void start() {
         ui.printStart();
         readData();

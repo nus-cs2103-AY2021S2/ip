@@ -41,10 +41,14 @@ if defined JAVA_HOME goto findJavaFromJavaHome
 set JAVA_EXE=java.exe
 %JAVA_EXE% -version >NUL 2>&1
 <<<<<<< HEAD
+<<<<<<< HEAD
 if "%ERRORLEVEL%" == "0" goto init
 =======
 if "%ERRORLEVEL%" == "0" goto execute
 >>>>>>> branch-A-Gradle
+=======
+if "%ERRORLEVEL%" == "0" goto execute
+>>>>>>> branch-Level10
 
 echo.
 echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
@@ -59,10 +63,14 @@ set JAVA_HOME=%JAVA_HOME:"=%
 set JAVA_EXE=%JAVA_HOME%/bin/java.exe
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if exist "%JAVA_EXE%" goto init
 =======
 if exist "%JAVA_EXE%" goto execute
 >>>>>>> branch-A-Gradle
+=======
+if exist "%JAVA_EXE%" goto execute
+>>>>>>> branch-Level10
 
 echo.
 echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
@@ -72,6 +80,7 @@ echo location of your Java installation.
 
 goto fail
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 :init
 @rem Get command-line arguments, handling Windows variants
@@ -90,11 +99,14 @@ set CMD_LINE_ARGS=%*
 
 =======
 >>>>>>> branch-A-Gradle
+=======
+>>>>>>> branch-Level10
 :execute
 @rem Setup the command line
 
 set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 @rem Execute Gradle
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
@@ -103,6 +115,11 @@ set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
 @rem Execute Gradle
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
 >>>>>>> branch-A-Gradle
+=======
+
+@rem Execute Gradle
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
+>>>>>>> branch-Level10
 
 :end
 @rem End local scope for the variables with windows NT shell

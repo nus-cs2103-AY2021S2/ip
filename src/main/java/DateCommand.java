@@ -25,8 +25,8 @@ public class DateCommand extends Command {
      * @throws DukeException if no date is specified
      */
     @Override
-    public void execute(TaskList tasks) throws DukeException {
-        Ui.printLine();
+    public String execute(TaskList tasks) throws DukeException {
+        String response = "";
         String[] inputs = this.fullCommand.split(" ");
         if (inputs.length == 1) {
             throw new DukeException("OOPS! Please give me the date that you want to check in YYYY-MM-DD format.");
@@ -34,10 +34,8 @@ public class DateCommand extends Command {
         LocalDate d = LocalDate.parse(inputs[1]);
         List<Task> toPrint = tasks.print(d);
         for (int i = 1; i < toPrint.size() + 1; i++) {
-            Ui.print(
-                    Aligner.align(i + "."
-                            + toPrint.get(i - 1).toString()));
+            response = response + i + "." + toPrint.get(i - 1).toString() + "\n";
         }
-        Ui.printLine();
+        return response;
     }
 }

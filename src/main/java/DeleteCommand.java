@@ -20,18 +20,12 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks) throws DukeException {
-        Ui.printLine();
+    public String execute(TaskList tasks) throws DukeException {
+        String response;
         int taskNo = Integer.parseInt(String.valueOf(fullCommand.charAt(7))) - 1;
         String toPrint = tasks.remove(taskNo);
-        Ui.print(
-                Aligner.align("Alright! I've removed this task:"));
-        Ui.print(
-                Aligner.align(toPrint));
-        Ui.print(
-                Aligner.align("Now you have a whopping "
-                        + tasks.size()
-                                + " task(s) in the list."));
-        Ui.printLine();
+        response = "Alright! I've removed this task:\n" + toPrint + "Now you have a whopping "
+                    + tasks.size() + " task(s) in the list.";
+        return response;
     }
 }
