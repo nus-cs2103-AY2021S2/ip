@@ -57,15 +57,18 @@ public class Parser {
     }
 
     /**
-     * @param taskType the type of the task
-     * @param taskStr part of the user command which represents a task
-     * @return a duke.task.Task object in the user command
-     * @throws DukeException exception when there is a task parsing error
+     * Parses a string into a Task object.
+     *
+     * @param args The string representing task type and the string representing task.
+     * @return The Task object parsed from the string representing an object.
+     * @throws DukeException The exception when there is an error parsing the task
      */
-    private Task parseTask(String taskType, String taskStr) throws DukeException {
+    private Task parseTask(String ... args) throws DukeException {
         String pattern;
         Pattern r;
         Matcher m;
+        String taskType = args[0];
+        String taskStr = args[1];
 
         if (taskType.equals("todo") && taskStr.isEmpty()) {
             throw new EmptyTodoDescriptionException();
