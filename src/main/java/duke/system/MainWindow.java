@@ -1,6 +1,7 @@
 package duke.system;
 
 import duke.Duke;
+import duke.task.TaskList;
 import duke.system.DialogBox;
 import duke.system.exception.DukeException;
 import javafx.fxml.FXML;
@@ -25,12 +26,15 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/memeeman.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/memeeman.jpg"));
+
+    private TaskList tasks;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        tasks = new TaskList();
     }
 
     public void setDuke(Duke d) {
@@ -44,7 +48,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = duke.getResponse(input, tasks);
+        System.out.println(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

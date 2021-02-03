@@ -115,7 +115,7 @@ public class Parser {
      * @return a string to be printed to the console by UI
      */
     public String print(TaskList inputList) {
-        predefinedCommand switchVal = predefinedCommand.valueOf(this.command);
+        predefinedCommand switchVal = predefinedCommand.valueOf(this.command.toUpperCase());
         switch (switchVal) {
         case BYE:
             return "Bye. Hope to see you again soon!";
@@ -154,9 +154,10 @@ public class Parser {
                 matchedStr += "\n" + ((i + 1) + "." + tempList.getListItems().get(i));
             }
             return matchedStr + LINE;
+        default:
+            return "";
         }
-        // every case must return some form of string, therefore break is not required
-        return "";
+//         every case must return some form of string, therefore break is not required
     }
 
     /**
