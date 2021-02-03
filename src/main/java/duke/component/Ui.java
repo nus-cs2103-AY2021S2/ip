@@ -6,8 +6,6 @@ import java.util.Scanner;
 import duke.task.Task;
 
 public class Ui {
-    public static final String LINE = "____________________________________________________________";
-
     /**
      * Reads user's input command.
      * @return
@@ -20,27 +18,24 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
-        System.out.println(LINE);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println(LINE);
+    public String showWelcome() {
+        return "Hello! I'm Duke \n What can I do for you?";
     }
 
     /**
      * Prints bye message.
      */
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints done message.
      * @param t
      */
-    public void showDone(Task t) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t);
+    public String showDone(Task t) {
+        return "Nice! I've marked this task as done: \n"
+                + t.toString();
     }
 
     /**
@@ -48,10 +43,10 @@ public class Ui {
      * @param t
      * @param tl
      */
-    public void showDelete(Task t, TaskList tl) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(t);
-        System.out.println("Now you have " + tl.getTasks().size() + " tasks in the list.");
+    public String showDelete(Task t, TaskList tl) {
+        return "Noted. I've removed this task: \n"
+                + t.toString() + "\n"
+                + "Now you have " + tl.getTasks().size() + " tasks in the list.";
     }
 
     /**
@@ -59,61 +54,56 @@ public class Ui {
      * @param t
      * @param tl
      */
-    public void showAdd(Task t, TaskList tl) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(t);
-        System.out.println("Now you have " + tl.getTasks().size() + " tasks in the list.");
-    }
-
-    /**
-     * Prints a line.
-     */
-    public void showLine() {
-        System.out.println(LINE);
+    public String showAdd(Task t, TaskList tl) {
+        return "Got it. I've added this task: \n"
+                + t.toString() + "\n"
+                + "Now you have " + tl.getTasks().size() + " tasks in the list.";
     }
 
     /**
      * Prints not found message.
      */
-    public void showNotFound() {
-        System.out.println("Task not found!");
+    public String showNotFound() {
+        return "Task not found!";
     }
 
     /**
      * Prints found tasks.
      * @param tasks
      */
-    public void showFound(ArrayList<Task> tasks) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFound(ArrayList<Task> tasks) {
+        String result = "Here are the matching tasks in your list: \n";
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + "." + tasks.get(i - 1).toString());
+            result += i + "." + tasks.get(i - 1).toString() + "\n";
         }
+        return result;
     }
 
     /**
      * Prints all the task in the taskList.
      * @param tl
      */
-    public void showList(TaskList tl) {
-        System.out.println("Here are the tasks in your list:");
+    public String showList(TaskList tl) {
+        String result = "Here are the tasks in your list: \n";
         ArrayList<Task> tasks = tl.getTasks();
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + "." + tasks.get(i - 1).toString());
+            result += i + "." + tasks.get(i - 1).toString() + "\n";
         }
+        return result;
     }
 
     /**
      * Prints loading error message.
      */
-    public void showLoadingError(Exception e) {
-        System.out.println(e.getMessage());
+    public String showLoadingError(Exception e) {
+        return e.getMessage();
     }
 
     /**
      * Prints error message.
      * @param msg
      */
-    public void showError(String msg) {
-        System.out.println(msg);
+    public String showError(String msg) {
+        return msg;
     }
 }

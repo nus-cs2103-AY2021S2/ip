@@ -24,13 +24,13 @@ public class FindCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<Task>();
         for (Task t : taskList.getTasks()) {
             if (t.getName().contains(this.keyword)) {
                 tasks.add(t);
             }
         }
-        ui.showFound(tasks);
+        return ui.showFound(tasks);
     }
 }

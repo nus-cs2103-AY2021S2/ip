@@ -22,13 +22,12 @@ public class DoneCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (index > taskList.getTasks().size() - 1 || index < 0) {
-            ui.showNotFound();
-            return;
+            return ui.showNotFound();
         }
         Task t = taskList.getTasks().get(index);
         t.markAsDone();
-        ui.showDone(t);
+        return ui.showDone(t);
     }
 }

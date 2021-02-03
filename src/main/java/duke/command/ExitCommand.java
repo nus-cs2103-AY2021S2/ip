@@ -11,8 +11,7 @@ public class ExitCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showBye();
-        System.exit(0);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showBye();
     }
 }
