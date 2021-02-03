@@ -6,16 +6,16 @@ package checklst.task;
 public abstract class Task {
 
     protected final String name;
-    protected final boolean completed;
+    protected final boolean isCompleted;
 
     protected Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
-    protected Task(String name, boolean completed) {
+    protected Task(String name, boolean isCompleted) {
         this.name = name;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     /**
@@ -26,8 +26,8 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String completed = this.completed ? "[X]" : "[]";
-        return completed + " " + this.name;
+        String isCompleted = this.isCompleted ? "[X]" : "[]";
+        return isCompleted + " " + this.name;
     }
 
 }

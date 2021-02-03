@@ -11,16 +11,16 @@ import checklst.exception.ChecklstException;
  */
 public class Event extends Task {
 
-    protected final LocalDate dateTime;
+    protected final LocalDate eventDate;
 
-    protected Event(String name, LocalDate dateTime) {
+    protected Event(String name, LocalDate eventDate) {
         super(name);
-        this.dateTime = dateTime;
+        this.eventDate = eventDate;
     }
 
-    protected Event(String name, boolean completed, LocalDate dateTime) {
+    protected Event(String name, boolean completed, LocalDate eventDate) {
         super(name, completed);
-        this.dateTime = dateTime;
+        this.eventDate = eventDate;
     }
 
     /**
@@ -34,25 +34,25 @@ public class Event extends Task {
             throw new ChecklstException("Inproper Event format used! Please use { name } /at { event }");
         }
 
-        LocalDate dateTime;
+        LocalDate eventDate;
         try {
-            dateTime = LocalDate.parse(splitInput[1]);
+            eventDate = LocalDate.parse(splitInput[1]);
         } catch (DateTimeParseException e) {
-            throw new ChecklstException("Incorrect DateTime format! Please use YYYY-MM-DD");
+            throw new ChecklstException("Incorrect Event Date format! Please use YYYY-MM-DD");
         }
 
-        return new Event(splitInput[0], dateTime);
+        return new Event(splitInput[0], eventDate);
     }
 
     @Override
     public Task complete() {
-        return new Event(this.name, true, this.dateTime);
+        return new Event(this.name, true, this.eventDate);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-            + this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            + this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
 }
