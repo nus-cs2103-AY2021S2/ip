@@ -19,6 +19,14 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Returns event task.
+     *
+     * @param taskInfo Information of the task.
+     * @return New Event task.
+     * @throws DukeWrongFormatException If taskInfo format is wrong.
+     * @throws DukeMissingDescriptionException If taskInfo is blank.
+     */
     public static Event create(String taskInfo) throws DukeWrongFormatException,
             DukeMissingDescriptionException {
         String[] parsedInfo = taskInfo.split(" /at ", 2);
