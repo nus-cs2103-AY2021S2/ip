@@ -22,6 +22,11 @@ public class Duke extends Application {
     private Parser parser;
     private TaskList tasks;
 
+    /**
+     * Called by JavaFX to initialize the app.
+     *
+     * @param stage The stage used.
+     */
     @Override
     public void start(Stage stage) {
         final String dataFilePath = "data/duke.dat";
@@ -41,6 +46,11 @@ public class Duke extends Application {
         ui.showGreeting();
     }
 
+    /**
+     * Called by JavaFX when the app is closed.
+     *
+     * @throws Exception If something goes wrong.
+     */
     @Override
     public void stop() throws Exception {
         super.stop();

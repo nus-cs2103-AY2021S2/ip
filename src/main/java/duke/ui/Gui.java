@@ -16,7 +16,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Represents a graphical UI with a chat-bot style interface for Duke.
+ */
 public class Gui extends AnchorPane implements Ui {
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Consumer<String> inputHandler;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -26,22 +32,103 @@ public class Gui extends AnchorPane implements Ui {
     @FXML
     private Button sendButton;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Consumer<String> inputHandler;
-
+    /**
+     * Creates a new GUI with a specified callback to handle user input.
+     *
+     * @param inputHandler The callback to execute when a user input is received.
+     */
     public Gui(Consumer<String> inputHandler) {
         this.inputHandler = inputHandler;
     }
 
+    /**
+     * Initializes the GUI elements; called by JavaFX
+     */
     @FXML
     public void initialize() {
+        System.out.println("init");
         userInput.setOnAction(this::handleUserInput);
         sendButton.setOnAction(this::handleUserInput);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * NOT SUPPORTED by this GUI implementation. This uses an event-driven model.
+     *
+     * @throws UnsupportedOperationException When called.
+     * @#return Never. It always throws an exception.
+     */
+    @Override
+    public String readCommand() {
+        throw new UnsupportedOperationException("GUI uses an event-driven model!");
+    }
+
+    /**
+     * Displays the given result as a 'chat message' from Duke.
+     *
+     * @param result The result to display.
+     */
+    @Override
+    public void showCommandResult(CommandResult result) {
+        if (result.hasFeedback()) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(result.getFeedback(), dukeImage)
+            );
+        }
+    }
+
+    /**
+     * Displays the error message as a 'chat message' from Duke.
+     *
+     * @param errMsg The error message to display.
+     */
+    @Override
+    public void showError(String errMsg) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(errMsg, dukeImage)
+        );
+    }
+
+    /**
+     * Displays a farewell message as a 'chat message' from Duke.
+     */
+    @Override
+    public void showFarewell() {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Goodbye, cruel world!", dukeImage)
+        );
+    }
+
+    /**
+     * Displays a welcome message as a 'chat message' from Duke.
+     */
+    @Override
+    public void showGreeting() {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Hello, I am Ying Jen.\n"
+                        + "How may I help you?", dukeImage)
+        );
+    }
+
+    /**
+     * Displays the given message as a 'chat message' from Duke.
+     *
+     * @param msg The message to display.
+     */
+    @Override
+    public void showMessage(String msg) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(msg, dukeImage)
+        );
+    }
+
+    /**
+     * Sets up the JavaFX structure for the GUI.
+     *
+     * @param stage The JavaFX stage to use.
+     */
     public void start(Stage stage) {
+        System.out.println("start");
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
@@ -55,10 +142,6 @@ public class Gui extends AnchorPane implements Ui {
         }
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput(ActionEvent event) {
         String input = userInput.getText();
@@ -70,49 +153,6 @@ public class Gui extends AnchorPane implements Ui {
         userInput.clear();
 
         inputHandler.accept(input);
-    }
-
-    @Override
-    public String readCommand() {
-        throw new UnsupportedOperationException("GUI uses an event-driven model!");
-    }
-
-    @Override
-    public void showCommandResult(CommandResult result) {
-        if (result.hasFeedback()) {
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(result.getFeedback(), dukeImage)
-            );
-        }
-    }
-
-    @Override
-    public void showError(String errMsg) {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(errMsg, dukeImage)
-        );
-    }
-
-    @Override
-    public void showFarewell() {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Goodbye, cruel world!", dukeImage)
-        );
-    }
-
-    @Override
-    public void showGreeting() {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hello, I am Ying Jen.\n"
-                        + "How may I help you?", dukeImage)
-        );
-    }
-
-    @Override
-    public void showMessage(String msg) {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(msg, dukeImage)
-        );
     }
 
     private boolean isValid(String input) {

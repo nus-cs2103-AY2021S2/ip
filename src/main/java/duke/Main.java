@@ -4,7 +4,7 @@ import javafx.application.Application;
 
 public class Main {
     /**
-     * Creates a duke instance with a hardcoded data path and runs it.
+     * Launches the Duke application.
      *
      * @param args Ignored command line arguments.
      */
