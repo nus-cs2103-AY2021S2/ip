@@ -1,6 +1,5 @@
 package main.java;
 
-
 import main.java.classes.DuckieException;
 import main.java.classes.Parser;
 import main.java.classes.Storage;
