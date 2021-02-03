@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -45,7 +46,9 @@ public class MainWindow extends AnchorPane {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
 
         String response = this.bot.getResponse();
-        this.dialogContainer.getChildren().addAll(DialogBox.getBotDialog(response, this.botImage));
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getBotDialog(response, this.botImage),
+                new Separator());
     }
 
     /**
@@ -62,7 +65,8 @@ public class MainWindow extends AnchorPane {
 
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, this.userImage),
-                DialogBox.getBotDialog(response, this.botImage)
-        );
+                new Separator(),
+                DialogBox.getBotDialog(response, this.botImage),
+                new Separator());
     }
 }
