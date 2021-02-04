@@ -14,6 +14,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        // creating new Duke run
         new Duke(DATABASE_FILE_PATH, DATABASE_DIRECTORY_PATH).run();
     }
 
