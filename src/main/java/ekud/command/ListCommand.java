@@ -12,7 +12,7 @@ import ekud.task.TaskWithDateTime;
  * Command that lists all tasks, optionally filter by date if given.
  */
 public class ListCommand extends Command {
-    private final boolean filter;
+    private final boolean toFilter;
     private LocalDate date;
 
     /**
@@ -21,7 +21,7 @@ public class ListCommand extends Command {
      * @param date The date to be used as the filter
      */
     public ListCommand(LocalDate date) {
-        filter = true;
+        toFilter = true;
         this.date = date;
     }
 
@@ -29,7 +29,7 @@ public class ListCommand extends Command {
      * Construct a command that lists all tasks.
      */
     public ListCommand() {
-        filter = false;
+        toFilter = false;
     }
 
     /**
@@ -41,7 +41,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(final TaskList tasks, Storage storage) throws EkudException {
         // list command with no arguments
-        if (!filter) {
+        if (!toFilter) {
             if (tasks.isEmpty()) {
                 return "I know nothing, feed me with something :)";
             }
