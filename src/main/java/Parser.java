@@ -60,6 +60,7 @@ public class Parser {
 
                 holder = "Got it. I've added this task: "+ "\n";
                 Task task = new Todo(input.substring(5));
+                holder = holder + task + "\n";
                 new TaskList().addToList(arrayList, task);
                 holder = holder.concat("Now you have " + arrayList.size() + " task(s) in the list");
 
@@ -80,9 +81,11 @@ public class Parser {
                     String f = xx.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
                     Task task = new Deadline(part1.substring(9), f);
+                    holder = holder + task + "\n";
                     new TaskList().addToList(arrayList, task);
                 } else {
                     Task task = new Deadline(part1.substring(9), part2.substring(3));
+                    holder = holder + task + "\n";
                     new TaskList().addToList(arrayList, task);
                 }
 
@@ -104,9 +107,11 @@ public class Parser {
                     String f = xx.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + timeString ;
 
                     Task task = new Event(part1.substring(6), f);
+                    holder = holder + task + "\n";
                     new TaskList().addToList(arrayList, task);
                 } else {
                     Task task = new Event(part1.substring(6), part2.substring(3));
+                    holder = holder + task + "\n";
                     new TaskList().addToList(arrayList, task);
                 }
                 holder = holder.concat("Now you have " + arrayList.size() + " task(s) in the list");
