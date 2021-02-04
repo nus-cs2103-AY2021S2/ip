@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.exception.EmptyArgumentException;
 
+import java.util.Locale;
+
 public abstract class Task {
     private final String description;
     private boolean isDone; //TODO: Figure out if I can restrict access
@@ -41,6 +43,22 @@ public abstract class Task {
     }
 
     public boolean containsSearch(String search){
-        return description.contains(search);
+        String targetString = description;
+        boolean isCaseSensitive = search.toLowerCase().contains(search);
+        if (isCaseSensitive){
+            targetString = targetString.toLowerCase();
+        }
+        if (search.contains(" ")){//Literal multi word matching
+            return targetString.contains(search);
+        } else {//Smart per word start matching
+            String[] words = targetString.split(" ");
+            for(String word: words){
+                String subWord = word.substring(0, search.length());
+                if (subWord.equals(search)){
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
