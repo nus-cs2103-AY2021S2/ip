@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -52,8 +51,8 @@ public class MainWindow extends VBox {
     @FXML
     public void initialize() {
         // Credits: Pictures from http://locusanimation.com/project/runningman/?lang=en
-        userImage = new Image(getClass().getResourceAsStream("/images/popo.png"));
-        dukeImage = new Image(getClass().getResourceAsStream("/images/kuga.png"));
+        userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
+        dukeImage = new Image(getClass().getResourceAsStream("/images/duke.png"));
 
         // Set the scroll pane to automatically scroll down when the text reaches the bottom
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -82,10 +81,10 @@ public class MainWindow extends VBox {
      * adds the welcome message label.
      */
     public void loadAdditionalConstraints() {
-        String welcomeMsg = "Hello! I'm Duke.\nWhat can I do for you?";
+        String welcomeMsg = "Hello! I'm Kuga, a personal assistant for managing task.\nWhat can I do for you?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg, dukeImage));
 
-        primaryStage.setTitle("Duke");
+        primaryStage.setTitle("Kuga");
         primaryStage.setMinWidth(500.0);
         primaryStage.setMinHeight(400.0);
     }
