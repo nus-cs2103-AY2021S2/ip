@@ -6,14 +6,24 @@ then
     mkdir ../bin
 fi
 
-# delete output from previous run
+# delete output and data file from previous run
 if [ -e "./ACTUAL.TXT" ]
 then
     rm ACTUAL.TXT
+    rm -rf data
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac \
+  -cp ../src/main/java \
+  -Xlint:none \
+  -d \
+  ../bin \
+  ../src/main/java/*.java \
+  ../src/main/java/controllers/*.java \
+  ../src/main/java/models/*.java \
+  ../src/main/java/views/*.java \
+  ../src/main/java/exceptions/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
@@ -24,7 +34,7 @@ java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
-dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
+# dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED-UNIX.TXT

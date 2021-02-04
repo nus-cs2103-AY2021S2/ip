@@ -1,0 +1,41 @@
+list
+deadline return book /by Sunday
+deadline return book /by 21/02/2020 1200
+event project meeting /at Mon 2-4pm
+done 2
+list
+done 1
+list
+deadline do homework /by no idea :-p
+deadline do homework /by 100/200/100000 142000
+deadline do homework /by 2/12/2021 1600
+list
+done 4
+event 
+event borrow book
+event /at 1 Sep
+event borrow book /at 1 Sep
+event borrow book /at 1/09/2021 1200
+list
+event borrow book /at
+deadline 
+deadline return book
+deadline /by 2 Sep
+deadline return book /by 2 Sep
+deadline return book /by 2/09/2021 1800
+list
+deadline return book /by
+list
+todo
+todo something todo!
+list
+blah
+list
+blah blah
+delete 1
+list
+delete 2
+list
+delete 10
+delete 15
+bye
