@@ -34,7 +34,7 @@ public class EventTask extends Task {
 
     /**
      * Displays the details of the task
-     * @return Formatted string which shows the type of task, its description and the date and duration of time the event is held
+     * @return Formatted string which shows the type, description and the date and time duration of the event
      */
     @Override
     public String toString() {
