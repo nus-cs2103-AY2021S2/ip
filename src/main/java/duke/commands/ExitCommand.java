@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.Storage;
-import duke.Ui;
-import duke.task.TaskList;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Terminates the program.
@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
      * @param storage storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showExit();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showExit();
     }
 }

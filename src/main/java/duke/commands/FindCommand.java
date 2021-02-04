@@ -1,9 +1,10 @@
-package duke.command;
+package duke.commands;
 
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Finds and lists all tasks in task lists that contains any of the argument keywords.
@@ -24,13 +25,18 @@ public class FindCommand extends Command {
      * @param storage storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList printTaskList = new TaskList();
-        for (Task task : taskList.getTaskList()) {
+        for (Task task: taskList.getTaskList()) {
             if (task.getDescription().contains(query)) {
                 printTaskList.add(task);
             }
         }
-        ui.showListMessage(printTaskList, true);
+
+        if (printTaskList.size() <= 0) {
+            throw new DukeException("No results found.");
+        }
+
+        return ui.showListMessage(printTaskList, true);
     }
 }

@@ -1,10 +1,10 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Mark a task as done from the list based on given index, or mark everything as done from the list.
@@ -26,18 +26,19 @@ public class DoneCommand extends Command {
      * @throws DukeException if there were errors encountered when saving the file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int listSize = taskList.size();
         if (listSize <= 0) {
             throw new DukeException("Your task list is empty.");
         }
 
+        String returnMessage;
         if (input.equals("all")) {
             if (taskList.isAllDone()) {
                 throw new DukeException("You have already completed all the tasks!");
             }
             taskList.setAllDone();
-            ui.showDoneMessage(taskList);
+            returnMessage = ui.showDoneMessage(taskList);
         } else {
             int index = Integer.parseInt(input) - 1;
             if (index < 0 || index >= listSize) {
@@ -50,8 +51,10 @@ public class DoneCommand extends Command {
             }
 
             task.setDone();
-            ui.showDoneMessage(task);
+            returnMessage = ui.showDoneMessage(task);
         }
+
         storage.saveFile(taskList);
+        return returnMessage;
     }
 }

@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 /**
  * An abstract base class of addable task.
@@ -25,7 +25,7 @@ public abstract class Task {
      * @param description description of the task
      */
     public Task(int done, String description) {
-        this.isDone = done == 1 ? true : false;
+        this.isDone = done == 1;
         this.description = description;
     }
 

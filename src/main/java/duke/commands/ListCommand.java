@@ -1,10 +1,10 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.DukeHelper;
-import duke.Storage;
-import duke.Ui;
-import duke.task.TaskList;
+import duke.common.Utils;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Lists all the tasks in the list to the user.
@@ -30,7 +30,7 @@ public class ListCommand extends Command {
      * @throws DukeException if there were errors encountered parsing the user's input
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int listSize = taskList.size();
         if (listSize <= 0) {
             throw new DukeException("Your task list is empty.");
@@ -46,9 +46,9 @@ public class ListCommand extends Command {
         }
 
         if (printTaskList.size() <= 0) {
-            throw new DukeException(String.format("You have no task on %s.", DukeHelper.formatDateString(date)));
+            throw new DukeException(String.format("You have no task on %s.", Utils.formatDateString(date)));
         }
 
-        ui.showListMessage(printTaskList, false);
+        return ui.showListMessage(printTaskList, false);
     }
 }

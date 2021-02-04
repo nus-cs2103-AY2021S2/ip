@@ -1,13 +1,13 @@
-package duke;
+package duke.common;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
  * Helper methods used to validate and format inputs.
  */
-public class DukeHelper {
+public class Utils {
 
     /**
      * Returns a formatted date String.
@@ -15,8 +15,8 @@ public class DukeHelper {
      * @param date date to be formatted
      * @return formatted date String
      */
-    public static String formatDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public static String formatDate(LocalDateTime date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
         return date.format(formatter);
     }
 
@@ -27,8 +27,8 @@ public class DukeHelper {
      * @return formatted date String
      */
     public static String formatDateString(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        LocalDate date = LocalDate.parse(dateString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
+        LocalDateTime date = LocalDateTime.parse(dateString);
         return date.format(formatter);
     }
 
@@ -37,9 +37,9 @@ public class DukeHelper {
      *
      * @param dateString a date String to be checked
      */
-    public static boolean validDateChecker(String dateString) {
+    public static boolean checkValidDate(String dateString) {
         try {
-            LocalDate.parse(dateString);
+            LocalDateTime.parse(dateString);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -51,7 +51,7 @@ public class DukeHelper {
      *
      * @param numberString a number String to be checked
      */
-    public static boolean numericChecker(String numberString) {
+    public static boolean checkNumeric(String numberString) {
         try {
             Integer.parseInt(numberString);
             return true;

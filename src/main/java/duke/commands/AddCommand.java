@@ -1,10 +1,10 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Adds task to the task list.
@@ -26,9 +26,9 @@ public class AddCommand extends Command {
      * @throws DukeException if there were errors encountered when saving the file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.add(task);
-        ui.showAddMessage(task, taskList.size());
         storage.saveFile(taskList);
+        return ui.showAddMessage(task, taskList.size());
     }
 }

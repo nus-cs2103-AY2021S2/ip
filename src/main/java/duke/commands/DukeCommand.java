@@ -1,4 +1,4 @@
-package duke.command;
+package duke.commands;
 
 /**
  * Valid commands that the user can execute.
@@ -20,7 +20,7 @@ public enum DukeCommand {
      * @return the boolean to indicate whether is it a valid command
      */
     public static boolean isContains(String value) {
-        for (DukeCommand cmd : values()) {
+        for (DukeCommand cmd: values()) {
             if (cmd.name().equals(value)) {
                 return true;
             }

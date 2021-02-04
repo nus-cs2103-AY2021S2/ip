@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
 
 /**
  * Stores and restores the user's task list.
@@ -45,7 +46,7 @@ public class Storage {
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
-            throw new DukeException("File not found");
+            throw new DukeException("File not found.");
         }
 
         List<Task> tasks = new ArrayList<>();
@@ -78,8 +79,8 @@ public class Storage {
     /**
      * Saves the {@code Task} data that is stored in the {@code TaskList} to the storage file.
      *
-     * @param taskList task list to be saved
-     * @throws DukeException if there were errors encountered when trying to write data to the file.
+     * @param taskList {@code TaskList} to be saved
+     * @throws DukeException if there were errors encountered when trying to write data to the file
      */
     public void saveFile(TaskList taskList) throws DukeException {
         try {
@@ -87,7 +88,7 @@ public class Storage {
             fileWriter.write(taskList.toStorageString());
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Error saving file");
+            throw new DukeException("Error saving file.");
         }
     }
 }

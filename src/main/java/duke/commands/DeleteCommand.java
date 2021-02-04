@@ -1,10 +1,10 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Deletes task from the list based on given index, or delete everything from the list.
@@ -26,15 +26,18 @@ public class DeleteCommand extends Command {
      * @throws DukeException if there were errors encountered when saving the file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int listSize = taskList.size();
         if (listSize <= 0) {
             throw new DukeException("Your task list is empty.");
         }
 
+        String returnMessage;
         if (input.equals("all")) {
-            ui.showDeleteMessage(taskList);
+            TaskList tl = taskList.clone();
             taskList.clear();
+            storage.saveFile(taskList);
+            returnMessage = ui.showDeleteMessage(tl);
         } else {
             int index = Integer.parseInt(input) - 1;
             if (index < 0 || index >= listSize) {
@@ -42,8 +45,10 @@ public class DeleteCommand extends Command {
             }
 
             Task task = taskList.delete(index);
-            ui.showDeleteMessage(task, taskList.size());
+            storage.saveFile(taskList);
+            returnMessage = ui.showDeleteMessage(task, taskList.size());
         }
         storage.saveFile(taskList);
+        return returnMessage;
     }
 }
