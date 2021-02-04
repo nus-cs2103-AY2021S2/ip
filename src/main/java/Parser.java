@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     /**
      * Parses a valid input string into the corresponding valid Commmand.
+     *
      * @param input Input string to be parsed.
      * @return The corresponding Command of the input string.
      * @throws DukeException Thrown exception caused by the reason specified in its error body.

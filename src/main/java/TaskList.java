@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Removes the task specified by the input index from the TaskList.
+     *
      * @param index Index of the file to be deleted.
      * @return The deleted task.
      */
@@ -29,6 +30,7 @@ public class TaskList {
 
     /**
      * Sets the task specified by the input index from the TaskList as done.
+     *
      * @param index Index of the file to be set as done.
      * @return The done task.
      */
@@ -58,7 +60,7 @@ public class TaskList {
 
     /**
      * Prints all the Tasks with String representation that contains the query term.
-     * @param query
+     * @param query The query term that the command string must include.
      */
     public void findTasks(String query) {
         if (tasks.isEmpty()) {

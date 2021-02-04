@@ -41,6 +41,7 @@ public class Ui {
 
     /**
      * Prints the error message of the input exception.
+     *
      * @param e The caught error to be printed.
      */
     public void printErrorMessage(Exception e) {

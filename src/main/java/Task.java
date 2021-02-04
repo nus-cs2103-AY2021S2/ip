@@ -15,6 +15,7 @@ public abstract class Task {
 
     /**
      * Returns the String representation of the Task.
+     *
      * @return String representation of the Task.
      */
     public String toString() {
@@ -24,6 +25,7 @@ public abstract class Task {
 
     /**
      * Returns the save format of the Task.
+     * 
      * @return Save format of the Task.
      */
     public String toLog() {

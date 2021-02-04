@@ -13,6 +13,7 @@ public class Storage {
 
     /**
      * Saves the tasks in taskList into save file "duke_saved_tasks" in the same directory.
+     *
      * @param taskList TaskList containing the tasks to be saved.
      */
     public void save(TaskList taskList) {
@@ -35,6 +36,7 @@ public class Storage {
     /**
      * Builds and return an ArrayList of Tasks from the saved tasks in the save file "duke_saved_tasks" in the same
      * directory.
+     *
      * @return ArrayList of Tasks from the saved tasks in the save file "duke_saved_tasks"
      * @throws DukeException Thrown exception when an error occurs during loading, according to the reason specified in
      * error body.

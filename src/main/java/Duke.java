@@ -3,11 +3,10 @@ public class Duke {
     private final Storage storage;
     private final TaskList tasks;
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-
-    }
-
+    /**
+     * Constructs Duke object, which immediately runs and starts accepting
+     * user input.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -22,6 +21,15 @@ public class Duke {
 
         this.tasks = tempTasks;
         run();
+    }
+
+    /**
+     * Main method of Duke, entry point to run the program.
+     *
+     * @param args arguments provided when running the program.
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
     }
 
     private void run() {
@@ -47,8 +55,4 @@ public class Duke {
             }
         }
     }
-    //    private void shutDown() {
-    //        System.out.println("See you soon boss!");
-    //        System.exit(0);
-    //    }
 }

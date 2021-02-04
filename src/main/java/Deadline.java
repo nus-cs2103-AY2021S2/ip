@@ -7,6 +7,7 @@ public class Deadline extends Task {
 
     /**
      * Initializes a Deadline Task with the specified description and dateTime.
+     *
      * @param description Description of the Deadline Task.
      * @param dateTime Date and Time the Deadline Task should be done by.
      */

@@ -10,6 +10,7 @@ public class CommandEvent extends Command {
 
     /**
      * Initialize the CommandEvent object to represent the Event Task with the specified description and datetime.
+     *
      * @param description Description of the Event Task.
      * @param dateTime Date and time the Event Task will occur on.
      */
@@ -21,6 +22,7 @@ public class CommandEvent extends Command {
     /**
      * Creates an Event Task with the specified attributes and adds it into the provided TaskList. Then, save the
      * updated TaskList.
+     *
      * @param tasks TaskList of Duke object, contains all the Tasks that were added.
      * @param ui Ui of Duke object, prints the message of CommandEvent and Event Task.
      * @param storage Storage of Duke object, saves the TaskList into a text file.
@@ -36,6 +38,7 @@ public class CommandEvent extends Command {
 
     /**
      * Returns the string representation of the message to be printed by the Duke object's Ui.
+     *
      * @return String representation of the message to be printed by the Duke object's Ui.
      */
     @Override

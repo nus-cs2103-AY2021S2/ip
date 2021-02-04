@@ -10,6 +10,7 @@ public class CommandDeadline extends Command {
 
     /**
      * Initialize the CommandDeadline object to represent the Deadline Task with the specified description and datetime.
+     *
      * @param description Description of the Deadline Task.
      * @param dateTime Date and time the Deadline Task should be done by.
      */
@@ -21,6 +22,7 @@ public class CommandDeadline extends Command {
     /**
      * Creates a Deadline Task with the specified attributes and adds it into the provided TaskList. Then, save the
      * updated TaskList.
+     *
      * @param tasks TaskList of Duke object, contains all the Tasks that were added.
      * @param ui Ui of Duke object, prints the message of CommandDeadline and Deadline Task.
      * @param storage Storage of Duke object, saves the TaskList into a text file.
@@ -36,6 +38,7 @@ public class CommandDeadline extends Command {
 
     /**
      * Returns the string representation of the message to be printed by the Duke object's Ui.
+     *
      * @return String representation of the message to be printed by the Duke object's Ui.
      */
     @Override

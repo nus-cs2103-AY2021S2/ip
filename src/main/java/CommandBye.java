@@ -5,6 +5,7 @@
 public class CommandBye extends Command {
     /**
      * Closes the provided attributes of Duke object in preparation of ending the run.
+     *
      * @param tasks TaskList of Duke object
      * @param ui Ui of Duke object
      * @param storage Storage of Duke object
@@ -17,6 +18,7 @@ public class CommandBye extends Command {
 
     /**
      * Returns the string representation of the message to be printed by the Duke object's Ui.
+     *
      * @return String representation of the message to be printed by the Duke object's Ui.
      */
     @Override
