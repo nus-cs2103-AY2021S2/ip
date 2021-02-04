@@ -17,15 +17,17 @@ public class Parser {
      * @return list of parsed input.
      */
     public ArrayList<String> parseInput(String input) {
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> parsedOuput = new ArrayList<>();
         try {
             String[] contents = input.split("\\s+");
             String command = contents[0];
-            result.add(command);
+            parsedOuput.add(command);
             StringBuilder sb = new StringBuilder();
+            // Initialise a pointer
             int pointer = 0;
-
+            // Appends the date into the string builder
             for (int i = 1; i < contents.length; i++) {
+                // Checks whether the input is an event or deadline
                 if (contents[i].equals("/by") || contents[i].equals("/at")) {
                     pointer = i;
                     break;
@@ -38,23 +40,21 @@ public class Parser {
                     }
                 }
             }
-
-            result.add(sb.toString());
+            parsedOuput.add(sb.toString());
+            // Reset the string builder to append the date.
             sb = new StringBuilder();
-
             if (command.equals("deadline") || command.equals("event")) {
                 String duration;
                 for (int i = pointer + 1; i < contents.length; i++) {
                     sb.append(contents[i]);
                     sb.append(" ");
                 }
-                result.add(sb.toString());
+                parsedOuput.add(sb.toString());
             }
-
         } catch (Exception err) {
             Ui.printBox("☹ OOPS!!! Incorrect input, please check!");
         }
-        return result;
+        return parsedOuput;
     }
 
 }

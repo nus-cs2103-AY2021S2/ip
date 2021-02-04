@@ -10,24 +10,30 @@ import task.Event;
 import task.TaskList;
 import task.Deadline;
 import task.Todo;
-import task.Task;
 
 import ui.Ui;
 
-import static ui.Ui.printBox;
-
+/**
+ * ChatBot class that contains the function of the chat bot.
+ */
 public class ChatBot {
     private TaskList tasklist;
-    private Storage storage;
-    private Parser parser;
+    private final Storage storage;
+    private final Parser parser;
 
+    /**
+     * Construct a ChatBot object.
+     */
     public ChatBot() {
         storage = new Storage();
         parser = new Parser();
         tasklist = new TaskList();
-
     }
 
+    /**
+     * Startup the chat bot by loading the task list from storage.
+     * @return null
+     */
     public String startup() {
         tasklist = storage.load(tasklist);
         if (tasklist.size() == 0) {
@@ -39,10 +45,20 @@ public class ChatBot {
         }
     }
 
+    /**
+     * Saves the current task list into the storage.
+     * @return Save message
+     * @throws IOException IOException
+     */
     public String save() throws IOException {
        return storage.save(tasklist);
     }
 
+    /**
+     * Process the specified user <code>input</code>.
+     * @param input input from user
+     * @return A String from ChatBot
+     */
     public String process(String input) {
         ArrayList<String> parsedInput = parser.parseInput(input);
         try {
@@ -50,36 +66,27 @@ public class ChatBot {
             if (command.equals("list")) {
                 return Ui.printList(tasklist);
             } else {
-                if (command.equals("done")) {
+                if (command.equals("done") || command.equals("delete")) {
                     int index = Integer.parseInt(parsedInput.get(1));
-                    return tasklist.completeTask(index);
-                } else if (command.equals("delete")) {
-                    int index = Integer.parseInt(parsedInput.get(1));
-                    return tasklist.deleteTask(index);
+                    return command.equals("done") ? tasklist.completeTask(index) : tasklist.deleteTask(index);
                 } else {
                     String description = parsedInput.get(1);
-                    Task newTask;
                     String duration;
                     switch (command) {
+                    case "find":
+                        return tasklist.find(description);
                     case "todo":
-                        newTask = new Todo(description);
-                        return tasklist.addTask(newTask);
+                        return tasklist.addTask(new Todo(description));
                     case "deadline":
                         duration = parsedInput.get(2);
-                        newTask = new Deadline(description, duration);
-                        return tasklist.addTask(newTask);
+                        return tasklist.addTask(new Deadline(description, duration));
                     case "event":
                         duration = parsedInput.get(2);
-                        newTask = new Event(description, duration);
-                        return tasklist.addTask(newTask);
+                        return tasklist.addTask(new Event(description, duration));
                     case "bye" :
-                        try {
-                            return this.save();
-                        } catch (IOException ex) {
-                            return ex.getMessage();
-                        }
+                        return this.save();
                     default:
-                        return "☹ OOPS!!! Incorrect input, please check!";
+                        throw new DukeException("☹ OOPS!!! Incorrect input, please check!");
                     }
                 }
             }
@@ -89,5 +96,4 @@ public class ChatBot {
             return "☹ OOPS!!! Incorrect input, please check!";
         }
     }
-
 }

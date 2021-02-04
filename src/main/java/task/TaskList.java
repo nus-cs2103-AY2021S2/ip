@@ -8,14 +8,13 @@ import ui.Ui;
  * Contains <code>addTask</code> and <code>deleteTask</code> which can add/delete tasks in the list.
  */
 public class TaskList {
-
-    protected ArrayList<Task> tasklist;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructs a empty task list.
      */
     public TaskList() {
-        tasklist = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -24,15 +23,15 @@ public class TaskList {
      *
      * @param input search parameter.
      */
-    public void find(String input) {
+    public String find(String input) {
         ArrayList<Task> result = new ArrayList<>();
-        for (Task task : tasklist) {
+        for (Task task : tasks) {
             String curr = task.getDetails();
             if (curr.contains(input)) {
                 result.add(task);
             }
         }
-        Ui.printSearch(result);
+        return Ui.printSearch(result);
     }
 
     /**
@@ -41,7 +40,7 @@ public class TaskList {
      * @return tally of task in task list.
      */
     public String getTally() {
-        return "     Currently you have " + tasklist.size() + " tasks in the list.";
+        return "     Currently you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -50,7 +49,7 @@ public class TaskList {
      * @param task task being added.
      */
     public String addTask(Task task) {
-        tasklist.add(task);
+        tasks.add(task);
         return Ui.ADD_MSG + task + "\n" + this.getTally();
     }
 
@@ -60,8 +59,8 @@ public class TaskList {
      * @param index index of task.
      */
     public String completeTask(int index) {
-        Task task = tasklist.get(index - 1);
-        task.complete();
+        Task task = tasks.get(index - 1);
+        task.setComplete();
         return Ui.MARK_MSG + "      " + task;
     }
 
@@ -72,8 +71,8 @@ public class TaskList {
      */
 
     public String deleteTask(int index) {
-        String task = tasklist.get(index - 1).toString();
-        tasklist.remove(index - 1);
+        String task = tasks.get(index - 1).toString();
+        tasks.remove(index - 1);
         return Ui.DELETE_MSG + task + "\n \n" + getTally();
     }
 
@@ -83,7 +82,7 @@ public class TaskList {
      * @return number of tasks.
      */
     public int size() {
-        return tasklist.size();
+        return tasks.size();
     }
 
     /**
@@ -93,11 +92,11 @@ public class TaskList {
      * @return task specified by the index.
      */
     public Task get(int index) {
-        return tasklist.get(index);
+        return tasks.get(index);
     }
 
     @Override
     public String toString() {
-        return tasklist.toString();
+        return tasks.toString();
     }
 }

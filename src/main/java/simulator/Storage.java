@@ -83,22 +83,26 @@ public class Storage {
             String status = task.getStatus();
             String type = task.getType();
             String description = task.getDetails();
+            // check whether the saved data is a todo
             if (type.equals("T")) {
                 writer.write(type + "|" + status + "|" + description);
             } else {
+                // Check whether the saved data is a deadline or event
                 String date = type.equals("D") ? ((Deadline) task).getDate() : ((Event) task).getDate();
-                if ((type.equals("D")
-                        ? ((Deadline) task).getTime() == null
-                        : ((Event) task).getTime() == null)) {
+                String time;
+                if (type.equals("D")) {
+                    time = ((Deadline) task).getTime();
+                } else {
+                    time = ((Event) task).getTime();
+                }
+                if (time == null ) {
                     writer.write(type + "|" + status + "|" + description + "@" + date);
                 } else {
-                    String time = type.equals("D") ? ((Deadline) task).getTime() : ((Event) task).getTime();
                     writer.write(type + "|" + status + "|" + description + "@" + date + "@" + time);
                 }
             }
             writer.newLine();
         }
-
         writer.close();
         return "Task List Saved Successfully!\n"
                 + Ui.EXIT_MSG;

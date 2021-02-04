@@ -13,6 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * A Gui class for the ChatBot
+ */
 
 public class Gui extends Application {
 
@@ -24,6 +27,11 @@ public class Gui extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
+
+    /**
+     * Starts up the Gui with the specified <code>Stage</code>.
+     * @param stage Stage of application
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components

@@ -43,11 +43,21 @@ public class Ui {
                 + "\n" + BOTTOM_BORDER);
     }
 
+    /**
+     * Formats the <code>String</code> input into a asterisk box.
+     * @param input string that requires formatting
+     * @return formatted string
+     */
     public static String formatBox(String input) {
         return TOP_BORDER + INDENT_4_SPACES + input
                 + "\n" + BOTTOM_BORDER;
     }
 
+    /**
+     * Prints the specified <code>TaskList</code> with a format
+     * @param list list that requires formatting
+     * @return returns a String of formatted list of elements
+     */
     public static String printList(TaskList list) {
         if (list.size() == 0 ) {
             return "OOPPS! Your Current Task List Is Empty!";
@@ -65,14 +75,15 @@ public class Ui {
      *
      * @param list searched elements to be border
      */
-
-    public static void printSearch(ArrayList<Task> list) {
-        System.out.print(TOP_BORDER);
-        System.out.println("     Here are the matching tasks found: \n");
+    public static String printSearch(ArrayList<Task> list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks found: \n");
         for (int i = 1; i <= list.size(); i++) {
-            System.out.println(INDENT_4_SPACES + i + ") "
-                    + list.get(i - 1));
+            sb.append(INDENT_4_SPACES);
+            sb.append(i);
+            sb.append(") ");
+            sb.append(list.get(i - 1));
         }
-        System.out.println(BOTTOM_BORDER);
+        return sb.toString();
     }
 }

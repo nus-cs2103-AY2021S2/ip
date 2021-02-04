@@ -19,14 +19,14 @@ public class Event extends Task {
      * Constructs a Event task with description specified by <code>description</code> ,and date and time
      * specified by <code>duration</code>.
      *
-     * @param str task description.
+     * @param taskDescription task description.
      * @throws DukeException DukeException if task date or description is empty.
      */
-    public Event(String... str) throws DukeException {
+    public Event(String... taskDescription) throws DukeException {
         this.type = "E";
-        if (str.length >= 1) {
-            this.description = str[0];
-            String[] input = str[1].split("\\s+");
+        if (taskDescription.length >= 1) {
+            this.description = taskDescription[0];
+            String[] input = taskDescription[1].split("\\s+");
             try {
                 this.date = LocalDate.parse(input[0]);
                 this.time = LocalTime.parse(input[1]);
@@ -49,9 +49,8 @@ public class Event extends Task {
     }
 
     /**
-     * Contructs a Event task with status as specified by <code>status</code> and the description,date and time
+     * Contruct a Event task with status as specified by <code>status</code> and the description,date and time
      * specified by <code>input</code>.
-     *
      * @param status task status.
      * @param input  task description,date and time.
      * @throws DukeException DukeException if task date or description is empty.
