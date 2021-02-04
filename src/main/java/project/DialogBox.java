@@ -24,29 +24,6 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        dialog.setText(text);
-    }
-
-    public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text);
-    }
-
-    public static DialogBox getDukeDialog(String text) {
-        var db = new DialogBox(text);
-        db.flip();
-        return db;
-    }
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));

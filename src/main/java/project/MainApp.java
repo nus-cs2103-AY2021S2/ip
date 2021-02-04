@@ -20,8 +20,9 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(MainApp.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load(); //breaks here cos it cant load MainWindow
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setOlaf(olaf);

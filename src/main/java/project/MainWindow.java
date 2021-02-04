@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -23,7 +24,7 @@ public class MainWindow extends AnchorPane {
     private Olaf olaf;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image olafImage = new Image(this.getClass().getResourceAsStream("/images/olaf-round.png"));
+    private Image olafImage = new Image(this.getClass().getResourceAsStream("/images/olaf-head.png"));
 
     @FXML
     public void initialize() {
@@ -43,10 +44,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = olaf.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input),
-                DialogBox.getDukeDialog(response)
-//                DialogBox.getUserDialog(input, userImage),
-//                DialogBox.getDukeDialog(response, olafImage)
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, olafImage)
         );
         userInput.clear();
     }
