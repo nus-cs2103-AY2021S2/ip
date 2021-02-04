@@ -15,7 +15,7 @@ public abstract class Command {
      * @param storage Storage that deals with storing TaskList into hard drive.
      * @throws IOException If program is unable to store data into hard drive.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
     /**
      * To identify if a command causes the Duke bot to stop running.

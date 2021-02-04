@@ -9,7 +9,8 @@ public class ExitCommand extends Command {
      * @param ui Ui that deals with interaction with the user.
      * @param storage Storage that deals with storing TaskList into hard drive.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         super.toggleExit();
+        return "Exiting.";
     }
 }

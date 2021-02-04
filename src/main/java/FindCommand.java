@@ -21,7 +21,7 @@ public class FindCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        ui.printSomeTasks(taskList.findTasks(this.keyword));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+        return ui.printSomeTasks(taskList.findTasks(this.keyword));
     }
 }

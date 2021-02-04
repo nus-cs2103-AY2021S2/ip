@@ -53,12 +53,25 @@ public class Duke {
         ui.printExitMessage();
     }
 
+    public String getResponse(String input) {
+        try {
+            //String stringCommand = ui.readCommand();
+            Command command = Parser.parseCommand(input);
+            return command.execute(tasks, ui, storage);
+        } catch (DukeException de) {
+            ui.printDukeException(de);
+        } catch (IOException ie) {
+            ui.printUpdateIoError(ie);
+        }
+        return "Failed?";
+    }
+
     /**
      * Main method for the Duke class.
      * Creates a new Duke and calls Duke.run().
      * @param args Args for main method.
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new Duke("data/savedTasks.txt").run();
-    }
+    }*/
 }

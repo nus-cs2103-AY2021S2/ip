@@ -22,9 +22,9 @@ public class DoneCommand extends Command {
      * @param storage Storage that deals with storing TaskList into hard drive.
      * @throws IOException If there is an error while updating the file in hard drive.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.markDone(this.taskNum - 1);
         storage.update(taskList);
-        ui.printMarkDone(taskList.getTasks().get(this.taskNum - 1));
+        return ui.printMarkDone(taskList.getTasks().get(this.taskNum - 1));
     }
 }

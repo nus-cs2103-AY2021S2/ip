@@ -84,49 +84,54 @@ public class Ui {
      * Prints the list of tasks.
      * @param tasks
      */
-    public void printTasks(TaskList tasks) {
+    public String printTasks(TaskList tasks) {
         ArrayList<Task> taskList = tasks.getTasks();
+        StringBuilder toReturn = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
-            System.out.println("" + i + ". " + taskList.get(i - 1).getStatus());
+            toReturn.append(i).append(". ").append(taskList.get(i - 1).getStatus());
         }
-        printPartition();
+        //printPartition();
+        return toReturn.toString();
     }
 
     /**
      * Prints the list of tasks according to the input.
      * @param tasks The list of tasks to print.
      */
-    public void printSomeTasks(ArrayList<Task> tasks) {
+    public String printSomeTasks(ArrayList<Task> tasks) {
+        StringBuilder toReturn = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println("" + i + ". " + tasks.get(i - 1).getStatus());
+            toReturn.append(i).append(". ").append(tasks.get(i - 1).getStatus());
         }
-        printPartition();
+        //printPartition();
+        return toReturn.toString();
     }
 
     /**
      * Prints the number of tasks.
      * @param taskList The TaskList that is being kept tracked of.
      */
-    public void printNumTasks(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
-        printPartition();
+    public String printNumTasks(TaskList taskList) {
+        return "Now you have " + taskList.getTasks().size() + " tasks in the list.";
+        //printPartition();
     }
 
     /**
      * Prints message when adding a task.
      */
-    public void printAddTaskMessage(Task added, TaskList taskList) {
-        System.out.println("Got it. I've added this task:\n" + added.getStatus());
-        printNumTasks(taskList);
+    public String printAddTaskMessage(Task added, TaskList taskList) {
+        String toReturn = "Got it. I've added this task:\n" + added.getStatus();
+        toReturn += printNumTasks(taskList);
+        return toReturn;
     }
 
     /**
      * Prints the message when a task is marked as done.
      * @param marked
      */
-    public void printMarkDone(Task marked) {
-        System.out.println("This task is marked as done:\n" + marked.getStatus());
-        printPartition();
+    public String printMarkDone(Task marked) {
+        return "This task is marked as done:\n" + marked.getStatus();
+        //printPartition();
     }
 
     /**
@@ -134,9 +139,10 @@ public class Ui {
      * @param deleted
      * @param taskList
      */
-    public void printDeleteTask(Task deleted, TaskList taskList) {
-        System.out.println("This task has been removed:\n" + deleted.getStatus());
-        printNumTasks(taskList);
+    public String printDeleteTask(Task deleted, TaskList taskList) {
+        String toReturn = "This task has been removed:\n" + deleted.getStatus();
+        toReturn += printNumTasks(taskList);
+        return toReturn;
     }
 
     /**
