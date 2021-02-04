@@ -1,5 +1,5 @@
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class TaskListTest {
     public void testInitialization() {
         TaskList tasks = new TaskList();
         ArrayList<Task> expected = new ArrayList<>();
-        Assert.assertEquals(expected, tasks.getTasks());
+        Assertions.assertEquals(expected, tasks.getTasks());
     }
 
     @Test
@@ -38,12 +38,12 @@ public class TaskListTest {
         expected.add(new ToDo("description"));
         tasks.addTask(new ToDo("description 2"));
         expected.add(new ToDo("description 2"));
-        Assert.assertEquals(expected.toString(), tasks.getTasks().toString());
+        Assertions.assertEquals(expected.toString(), tasks.getTasks().toString());
 
         // test case 2: test delete
         tasks.deleteTask(1);
         expected.remove(0);
-        Assert.assertEquals(expected.toString(), tasks.getTasks().toString());
+        Assertions.assertEquals(expected.toString(), tasks.getTasks().toString());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class TaskListTest {
         tasks.addTask(new ToDo("description"));
         tasks.doneTask(1);
 
-        Assert.assertEquals("[[T][X] description]", tasks.getTasks().toString());
+        Assertions.assertEquals("[[T][X] description]", tasks.getTasks().toString());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class TaskListTest {
         "1. [T][ ] description\r\n" +
         "2. [T][ ] description 2";
         tasks.printTasks();
-        Assert.assertEquals(expected, outputStreamCaptor.toString().trim());
+        Assertions.assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 
     @Test
@@ -76,6 +76,6 @@ public class TaskListTest {
         String expected = "Here you go boss: \r\n" +
                 "2. [T][ ] description 2";
         tasks.findTasks("2");
-        Assert.assertEquals(expected, outputStreamCaptor.toString().trim());
+        Assertions.assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 }
