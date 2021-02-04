@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with saving and loading DukeList from duke.txt
+ */
 public class Storage {
 
     private final String filePath;

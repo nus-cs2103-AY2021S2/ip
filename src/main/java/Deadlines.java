@@ -15,6 +15,10 @@ public class Deadlines extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Returns the deadline of the task as a LocalDate Object
+     * @return LocalDate object
+     */
     public LocalDate getBy() {
         return deadline;
     }

@@ -13,7 +13,7 @@ public class Parser {
         String commandName = commandStringArr[0];
         switch (commandName) {
         case "done":
-            list.done(Integer.parseInt(commandStringArr[1]) - 1);
+            list.markAsDone(Integer.parseInt(commandStringArr[1]) - 1);
             return "done";
         case "delete":
             list.delete(Integer.parseInt(commandStringArr[1]) - 1);

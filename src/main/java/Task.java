@@ -16,14 +16,25 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Mark the task as done
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Returns boolean of the completion of the task
+     * @return
+     */
     public boolean isTaskDone() {
         return isDone;
     }
 
+    /**
+     * Returns the name of the task as a string
+     * @return taskName
+     */
     public String getTaskName() {
         return taskName;
     }

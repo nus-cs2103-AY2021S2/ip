@@ -20,4 +20,5 @@ done done
 show 9999999
 deadline go home
 event sleep /by
+reset
 bye

@@ -3,6 +3,10 @@
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Start point of Duke
+ * Initializes DUke and starts the interaction with user
+ */
 public class Duke {
     private DukeList list;
     private UI ui;
@@ -20,6 +24,10 @@ public class Duke {
             list = new DukeList();
         }
     }
+
+    /**
+     * Runs the program until termination is called
+     */
     public void run()  {
         ui.WelcomeMessage();
         ui.showDivider();

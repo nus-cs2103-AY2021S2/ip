@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Custom arraylist for task objects
+ */
 public class DukeList {
     private ArrayList<Task> list;
     private int size;
@@ -14,19 +17,27 @@ public class DukeList {
         this.list = list;
         size = list.size();
     }
+
+    /**
+     * add task into the list
+     * @param item Task item
+     */
     public void add(Task item) {
         list.add(item);
         size++;
     }
 
-    public void done(int x) {
+    /**
+     * mark task as done
+     * @param x task number
+     */
+    public void markAsDone(int x) {
         list.get(x).markAsDone();
     }
 
     /**
-     *
-     * @param x Task number to be removed
      * deletes the stated task
+     * @param x Task number to be removed
      */
 
     public void delete(int x) {
