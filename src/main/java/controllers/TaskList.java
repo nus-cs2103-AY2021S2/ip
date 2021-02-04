@@ -294,8 +294,12 @@ public class TaskList {
         }
         return new TaskList(IntStream.range(0, this.todosList.size()).mapToObj(idx -> {
             if (idx == idxIsDone) {
+<<<<<<< Updated upstream
                 Optional<? extends Todo> doneTodo =
                         this.todosList.get(idx).map(Todo::markAsDone);
+=======
+                Optional<? extends Todo> doneTodo = this.todosList.get(idx).map(Todo::markAsDone);
+>>>>>>> Stashed changes
                 try {
                     this.todosView.markAsDone(doneTodo);
                 } catch (Exception e) {

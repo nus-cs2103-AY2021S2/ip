@@ -79,10 +79,12 @@ public class Storage {
                 // delete existing file if it exists in directory
                 File existingDatabase = new File(this.filePath);
                 if (existingDatabase.exists()) {
+                    // noinspection ResultOfMethodCallIgnored
                     existingDatabase.delete();
                 }
             } else {
                 // create directory if it doesn't exist
+                // noinspection ResultOfMethodCallIgnored
                 databaseDirectory.mkdir();
             }
 
@@ -90,7 +92,7 @@ public class Storage {
             FileWriter writer = new FileWriter(new File(this.filePath), true);
 
             // loop through list and write to file
-            todosList.stream().forEach(optTodo -> {
+            todosList.forEach(optTodo -> {
                 // lineToWrite will be written at the end
                 String lineToWrite;
 
