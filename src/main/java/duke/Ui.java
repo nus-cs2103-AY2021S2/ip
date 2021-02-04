@@ -40,25 +40,17 @@ class Ui {
     /**
      * Say Bye
      */
-    public void echoBye() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________\n");
+    public String echoBye() {
+        String ans = "Bye. Hope to see you again soon!\n";
+        return ans;
     }
 
     /**
      * Say Hi!
      */
-    public void echoHi() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("    ____________________________________________________________");
-        System.out.println(logo);
-        System.out.println("Hello! I'm Danh's Duke\nWhat can I do for you, Mr Danh?");
-        System.out.println("    ____________________________________________________________\n");
+    public String echoHi() {
+        String ans = " Hello! I'm Danh's Duke\nWhat can I do for you, Mr Danh?\n";
+        return ans;
     }
 
     /**
@@ -66,15 +58,14 @@ class Ui {
      *
      * @param taskList TaskList related.
      */
-    public void echoPrintList(ArrayList<Task> taskList) {
+    public String echoPrintList(ArrayList<Task> taskList) {
+        String ans = "Here are the tasks in your list:\n";
         int index = 1;
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks in your list:");
         for (Task task : taskList) {
-            System.out.format("     %d. " + task.printTask() + "\n", index);
+            ans += String.format(" %d. " + task.printTask() + "\n", index);
             index++;
         }
-        System.out.println("    ____________________________________________________________\n");
+        return ans;
     }
 
     /**
@@ -83,12 +74,10 @@ class Ui {
      * @param task      The task added
      * @param noOfTasks Number of tasks in taskList after adding.
      */
-    public void echoAddToList(Task task, int noOfTasks) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + task.printTask());
-        System.out.format("     Now you have %d tasks in the list.\n", noOfTasks);
-        System.out.println("    ____________________________________________________________\n");
+    public String echoAddToList(Task task, int noOfTasks) {
+        String ans = "Got it. I've added this task: \n" +" " + task.printTask() + "\n" +
+                String.format("Now you have %d tasks in the list.\n", noOfTasks);
+        return ans;
     }
 
     /**
@@ -96,11 +85,10 @@ class Ui {
      *
      * @param task Task done.
      */
-    public void echoMarkTaskDone(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       " + task.printTask());
-        System.out.println("    ____________________________________________________________\n");
+    public String echoMarkTaskDone(Task task) {
+        String ans = "Nice! I've marked this task as done: \n" +
+                " " + task.printTask() + "\n";
+        return ans;
     }
 
     /**
@@ -108,11 +96,10 @@ class Ui {
      *
      * @param task Task deleted.
      */
-    public void echoDeleteTask(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Noted. I've removed this task: ");
-        System.out.println("       " + task.printTask());
-        System.out.println("    ____________________________________________________________\n");
+    public String echoDeleteTask(Task task) {
+        String ans = "Noted. I've removed this task: \n" +
+                " " + task.printTask() + "\n";
+        return ans;
     }
 
     /**
@@ -120,9 +107,9 @@ class Ui {
      *
      * @param err DukeException object related.
      */
-    public void echoErrMsg(DukeException err) {
-        System.out.println("    ____________________________________________________________\n" + err.getMessage() +
-                "\n" + "    ____________________________________________________________\n");
+    public String echoErrMsg(DukeException err) {
+        String ans = err.getMessage();
+        return ans;
     }
 
     /**
@@ -131,18 +118,17 @@ class Ui {
      * @param taskList The tasklist related.
      * @param dateTime The day that we want to search for.
      */
-    public void echoTaskThisDay(ArrayList<Task> taskList, LocalDateTime dateTime) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks on " + dateTime.toString().substring(0, 10) + ":");
+    public String echoTaskThisDay(ArrayList<Task> taskList, LocalDateTime dateTime) {
+        String ans = "Here are the tasks on " + dateTime.toString().substring(0, 10) + ":\n";
         int index = 1;
         for (Task task : taskList) {
             if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, dateTime))
                     || (task instanceof Event && sameDay(((Event) task).eTime, dateTime))) {
-                System.out.format("     %d. " + task.printTask() + "\n", index);
+                ans += String.format(" %d. " + task.printTask() + "\n", index);
                 index++;
             }
         }
-        System.out.println("    ____________________________________________________________\n");
+        return ans;
     }
 
     /**
@@ -150,18 +136,17 @@ class Ui {
      *
      * @param taskList The tasklist related.
      */
-    public void echoTaskToday(ArrayList<Task> taskList) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks today:");
+    public String echoTaskToday(ArrayList<Task> taskList) {
+        String ans = "Here are the tasks today:\n";
         int index = 1;
         for (Task task : taskList) {
             if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, LocalDateTime.now()))
                     || (task instanceof Event && sameDay(((Event) task).eTime, LocalDateTime.now()))) {
-                System.out.format("     %d. " + task.printTask() + "\n", index);
+                ans += String.format(" %d. " + task.printTask() + "\n", index);
                 index++;
             }
         }
-        System.out.println("    ____________________________________________________________\n");
+        return ans;
     }
 
     /**
@@ -170,17 +155,16 @@ class Ui {
      * @param taskList The taskList related.
      * @param pattern The String pattern given by find command.
      */
-    public void echoPrintFindResult(ArrayList<Task> taskList, String pattern) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the matching tasks:");
+    public String echoPrintFindResult(ArrayList<Task> taskList, String pattern) {
+        String ans = "Here are the matching tasks:\n";
         int index = 1;
         for (Task task : taskList) {
             if (task.taskName.contains(pattern)) {
-                System.out.format("     %d. " + task.printTask() + "\n", index);
+                ans += String.format(" %d. " + task.printTask() + "\n", index);
                 index++;
             }
         }
-        System.out.println("    ____________________________________________________________\n");
+        return ans;
     }
 
     /**
