@@ -16,7 +16,7 @@ public class Constants {
     public static final String MARK_DONE_TASK = "Nice! I've marked this task as done:\n  ";
     public static final String START_LISTING = "Here are the tasks in your list:";
     public static final String INVALID_DATETIME_FORMAT = "Invalid format for date and time." + "\n"
-            + "Your date (and time) should have format yyyy-mm-dd (HH-MM)"
+            + "Your date (and time) should have format yyyy-mm-dd (HH-MM)" + "\n"
             + "For example: 2019-10-15 or 2019-10-15 1800";
     private static final String LOGO = " ____        _        \n"
                                     + "|  _ \\ _   _| | _____ \n"

@@ -1,4 +1,4 @@
 T | 0 | borrow book
-T | 0 | eat
-E | 0 | meeting|    May 1 2020
-D | 0 | ip week 4| Feb 4 2021 11:59pm
+T | 1 | eat
+E | 1 | meeting|      May 1 2020
+E | 0 | lunar new year| Feb 12 2021

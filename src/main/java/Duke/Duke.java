@@ -71,6 +71,14 @@ public class Duke {
                 output.append(i + 1).append(". ").append(list.get(i)).append('\n');
             }
             return output.toString();
+        } else if (command.equalsIgnoreCase(Command.STATISTICS.getAction())) {
+            ArrayList<Task> list = taskList.getList();
+            if (list.isEmpty()) {
+                return Constants.EMPTY_TASK_LIST;
+            } else {
+                int[][] stats = taskList.statistics();
+                return ui.stats(stats);
+            }
         } else if (command.equalsIgnoreCase(Command.DONE.getAction())
                 || command.equalsIgnoreCase(Command.DELETE.getAction())) {
             try {
@@ -132,6 +140,14 @@ public class Duke {
                 break;
             } else if (command.equalsIgnoreCase(Command.LIST.getAction())) {
                 ui.printAllTask(taskList.getList());
+            } else if (command.equalsIgnoreCase(Command.STATISTICS.getAction())) {
+                ArrayList<Task> list = taskList.getList();
+                if (list.isEmpty()) {
+                    ui.printResponse(Constants.EMPTY_TASK_LIST);
+                } else {
+                    int[][] stats = taskList.statistics();
+                    ui.printResponse(ui.stats(stats));
+                }
             } else if (command.equalsIgnoreCase(Command.DONE.getAction())
                     || command.equalsIgnoreCase(Command.DELETE.getAction())) {
                 try {
