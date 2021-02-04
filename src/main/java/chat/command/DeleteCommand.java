@@ -27,17 +27,19 @@ public class DeleteCommand extends Command{
     /**
      * Method that deletes tasks from list of tasks from TaskList object.
      * 
-     * @param tasks TaskList object that contains a list of tasks.
+     * @param taskList TaskList object that contains a list of tasks.
      * @param ui Ui object that gives responses to user.
      * @param storage Storage object that interacts with task data in hard disk.
      * @throws ChatException If format of command is wrong.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException {
-        Task task = checkCommandIndex(tasks, "delete", this.inputStr);
-        tasks.getTasks().remove(task);
-        ui.printDeleteSuccess(task, tasks.getTasks().size());
-        storage.save(tasks);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
+       
+        Task task = checkCommandIndex(taskList, "delete", this.inputStr);
+        taskList.getTasks().remove(task);
+        storage.save(taskList);
+        ui.showDeleteSuccess(task, taskList.getTasks().size());
+
     }
     
 }

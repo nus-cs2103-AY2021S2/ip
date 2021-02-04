@@ -15,12 +15,12 @@ public abstract class Command {
 
     /**
      * Abstract method that executes the command.
-     * @param tasks TaskList object that contains a list of tasks.
+     * @param taskList TaskList object that contains a list of tasks.
      * @param ui Ui object that gives responses to user.
      * @param storage Storage object that interacts with task data in hard disk.
      * @throws ChatException If format of command is wrong.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException;
 
     /**
      * Returns true if command requires Chat the Cat to exit.
@@ -34,13 +34,13 @@ public abstract class Command {
     /**
      * Method that can be used to check format for commands with indexes.
      * 
-     * @param tasks TaskList object that contains a list of tasks.
+     * @param taskList TaskList object that contains a list of tasks.
      * @param commandName Command name.
      * @param str Inputted command string from user to Chat the Cat.
      * @return Task.
      * @throws ChatException If format of command is wrong.
      */
-    public Task checkCommandIndex(TaskList tasks, String commandName, String str) throws ChatException {
+    public Task checkCommandIndex(TaskList taskList, String commandName, String str) throws ChatException {
         //for commands with format: [command] [index]
         //returns valid index if index is correct
         if (str.strip().equals(commandName)) {
@@ -52,12 +52,13 @@ public abstract class Command {
                     "Please input with this format:\n" +
                     "%s [index]", commandName));
         }
+        
         try {
             int i = Integer.parseInt(str.split(" ")[1]) - 1;
-            return tasks.getTasks().get(i);
+            return taskList.getTasks().get(i);
         } catch (IndexOutOfBoundsException e1) {
             //list is empty, hence i results in index out of bounds
-            //or when i >= tasks.getTasks().size()
+            //or when i >= taskList.getTasks().size()
             throw new ChatException("List is empty or index is out of bounds");
         } catch (NumberFormatException e3){
             //i.e. [command] string

@@ -26,19 +26,21 @@ public class DoneCommand extends Command {
     /**
      * Method that marks tasks as done from list of tasks from TaskList object.
      * 
-     * @param tasks TaskList object that contains a list of tasks.
+     * @param taskList TaskList object that contains a list of tasks.
      * @param ui Ui object that gives responses to user.
      * @param storage Storage object that interacts with task data in hard disk.
      * @throws ChatException If format of command is wrong.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException {
-        Task task = checkCommandIndex(tasks, "done", this.inputStr);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
+        
+        Task task = checkCommandIndex(taskList, "done", this.inputStr);
+        
         if (task.getIsDone()) {
             throw new ChatException(String.format("Task already completed\n%s", task));
         } else {
             task.completed();
-            ui.printWellDone(task);
-            storage.save(tasks);
+            storage.save(taskList);
+            ui.showWellDone(task);
         }
     }
     

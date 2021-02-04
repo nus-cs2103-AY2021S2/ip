@@ -29,13 +29,15 @@ public class AddCommand extends Command{
     /**
      * Method that adds tasks to list of tasks from TaskList object.
      * 
-     * @param tasks TaskList object that contains a list of tasks.
+     * @param taskList TaskList object that contains a list of tasks.
      * @param ui Ui object that gives responses to user.
      * @param storage Storage object that interacts with task data in hard disk.
      * @throws ChatException If format of command is wrong.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
+        
         Task task;
+        
         if (this.inputStr.startsWith("todo")) {
             task = Todo.createTodo(this.inputStr);
         } else if (this.inputStr.startsWith("deadline")) {
@@ -44,9 +46,10 @@ public class AddCommand extends Command{
             //inputStr starts with event
             task = Event.createEvent(this.inputStr);
         }
-        tasks.getTasks().add(task);
-        ui.printAddedSuccess(task, tasks.getTasks().size());
-        storage.save(tasks);
+        
+        taskList.getTasks().add(task);
+        storage.save(taskList);
+        ui.showAddSuccess(task, taskList.getTasks().size());
     }
     
 }
