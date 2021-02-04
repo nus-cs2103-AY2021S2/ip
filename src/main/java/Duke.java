@@ -16,15 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import java.lang.reflect.Method;
 
 
 
@@ -39,13 +30,25 @@ public class Duke extends Application  {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
-    private Image user = new Image(new FileInputStream("2.png"));
-    private Image duke = new Image(new FileInputStream("3.png"));
+    private Image user;
 
-    public Duke() throws FileNotFoundException {
+    {
+        try {
+            user = new Image(new FileInputStream("2.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Image duke;
+
+    {
+        try {
+            duke = new Image(new FileInputStream("3.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -59,10 +62,10 @@ public class Duke extends Application  {
             dialogContainer = new VBox();
             scrollPane.setContent(dialogContainer);
             userInput = new TextField();
-            sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
             AnchorPane mainLayout = new AnchorPane();
             mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-            scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
             stage.setScene(scene);
             stage.show();
 
@@ -88,13 +91,9 @@ public class Duke extends Application  {
 
 
             //Part 3. Add functionality to handle user input.
-            sendButton.setOnMouseClicked((event) -> {
-                handleUserInput();
-            });
+            sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-            userInput.setOnAction((event) -> {
-                handleUserInput();
-            });
+            userInput.setOnAction((event) -> handleUserInput());
 
             //Scroll down to the end every time dialogContainer's height changes.
             dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -109,7 +108,6 @@ public class Duke extends Application  {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
@@ -133,9 +131,6 @@ public class Duke extends Application  {
      * Replace this stub with your completed method.
      */
 
-
-
-
     // will need to change this box
     private String getResponse(String input) {
         return "Duke heard: " + input;
@@ -144,7 +139,6 @@ public class Duke extends Application  {
 
 
 
-    /*
     public static void main(String[] args) throws FileNotFoundException {
         ArrayList<Task> arrayList = new ArrayList<>();
 
@@ -173,7 +167,7 @@ public class Duke extends Application  {
 
         new Ui().interactWithUser(arrayList, path);
     }
-    */
+
 
 
 }

@@ -4,31 +4,18 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
 
-    private Label text;
-    private ImageView displayPicture;
-
     public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        l.setWrapText(true);
+        iv.setFitWidth(100.0);
+        iv.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        this.getChildren().addAll(l, iv);
     }
 
     /**
@@ -40,7 +27,7 @@ public class DialogBox extends HBox {
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
     }
-
+// a method that call to create the dialogBox
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
