@@ -3,7 +3,7 @@ package duke.customClass;
 import org.junit.jupiter.api.Test;
 import duke.customClass.Command;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandRouterTest {
 
