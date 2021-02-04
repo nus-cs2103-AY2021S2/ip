@@ -3,7 +3,7 @@ package duke.util;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import duke.Apollo;
+import duke.Duke;
 import duke.enums.Commands;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOptionException;
@@ -24,7 +24,7 @@ public class Parser {
      * @param apollo Instance of the bot.
      * @throws DukeException Occurs when a command is unrecognised or options are invalid.
      */
-    public static void handleInput(String s, ArrayList<Task> taskList, Apollo apollo) throws DukeException {
+    public static void handleInput(String s, ArrayList<Task> taskList, Duke apollo) throws DukeException {
         String input = s.trim();
         Commands command;
 
