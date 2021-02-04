@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -5,8 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-
-import java.io.FileNotFoundException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -37,7 +37,7 @@ public class MainWindow extends GridPane {
     public void setDuke(Duke d) {
         duke = d;
         try {
-            duke.storage.loadData();
+            duke.getStorage().loadData();
         } catch (FileNotFoundException e) {
             System.out.println("File not found :(");
         }
@@ -48,7 +48,7 @@ public class MainWindow extends GridPane {
      */
     public void greetings() {
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog("Welcome to Duke! \n" + duke.parser.printList(), dukeImage)
+            DialogBox.getDukeDialog("Welcome to Duke! \n" + duke.getParser().printList(), dukeImage)
         );
     }
 
@@ -64,7 +64,7 @@ public class MainWindow extends GridPane {
             Platform.exit();
         } else {
             String response = duke.getResponse(input, duke);
-            duke.storage.writeTaskList();
+            duke.getStorage().writeTaskList();
             dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

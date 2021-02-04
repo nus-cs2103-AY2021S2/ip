@@ -14,14 +14,14 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
-    /** List of tasks. */
-    private TaskList tasks;
-
     /** Storage that controls saving and reading file. */
-    public Storage storage;
+    private Storage storage;
 
     /** Parser that processes commands. */
-    public Parser parser;
+    private Parser parser;
+
+    /** List of tasks. */
+    private TaskList tasks;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -39,6 +39,24 @@ public class Duke extends Application {
         tasks = new TaskList();
         storage = new Storage(tasks);
         parser = new Parser(tasks);
+    }
+
+    /**
+     * Returns the storage of this Duke object.
+     *
+     * @return Storage object of this Duke object.
+     */
+    public Storage getStorage() {
+        return this.storage;
+    }
+
+    /**
+     * Returns the parser of this Duke object.
+     *
+     * @return Parser object of this Duke object.
+     */
+    public Parser getParser() {
+        return this.parser;
     }
 
     @Override

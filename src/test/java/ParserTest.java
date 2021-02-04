@@ -1,11 +1,14 @@
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
     @Test
-    public void setAsDone_invalidInput_argumentExceptionThrown() throws DukeException {
+    public void setAsDone_invalidInput_argumentExceptionString() throws DukeException {
+        String expectedOutput = "Wrong Arguments Specified: \n"
+            + "Please enter a valid item number in the list.";
+
         TaskList tasks = new TaskList();
 
         Task t1 = new Todo("join sports club", false);
@@ -18,15 +21,18 @@ public class ParserTest {
 
         Parser parser = new Parser(tasks);
 
-        assertThrows(ArgumentException.class, () -> parser.setAsDone("done "));
-        assertThrows(ArgumentException.class, () -> parser.setAsDone("done a"));
-        assertThrows(ArgumentException.class, () -> parser.setAsDone("done 0"));
-        assertThrows(ArgumentException.class, () -> parser.setAsDone("done -1"));
-        assertThrows(ArgumentException.class, () -> parser.setAsDone("done 6"));
+        assertEquals(expectedOutput, parser.setAsDone("done "));
+        assertEquals(expectedOutput, parser.setAsDone("done a"));
+        assertEquals(expectedOutput, parser.setAsDone("done 0"));
+        assertEquals(expectedOutput, parser.setAsDone("done -1"));
+        assertEquals(expectedOutput, parser.setAsDone("done 6"));
     }
 
     @Test
-    public void deleteFromList_invalidInput_argumentExceptionThrown() throws DukeException {
+    public void deleteFromList_invalidInput_argumentExceptionString() throws DukeException {
+        String expectedOutput = "Wrong Arguments Specified: \n"
+            + "Please enter a valid item number in the list.";
+
         TaskList tasks = new TaskList();
 
         Task t1 = new Todo("join sports club", false);
@@ -39,63 +45,81 @@ public class ParserTest {
 
         Parser parser = new Parser(tasks);
 
-        assertThrows(ArgumentException.class, () -> parser.deleteFromList("delete "));
-        assertThrows(ArgumentException.class, () -> parser.deleteFromList("delete a"));
-        assertThrows(ArgumentException.class, () -> parser.deleteFromList("delete 0"));
-        assertThrows(ArgumentException.class, () -> parser.deleteFromList("delete -1"));
-        assertThrows(ArgumentException.class, () -> parser.deleteFromList("delete 6"));
+        assertEquals(expectedOutput, parser.setAsDone("delete "));
+        assertEquals(expectedOutput, parser.setAsDone("delete a"));
+        assertEquals(expectedOutput, parser.setAsDone("delete 0"));
+        assertEquals(expectedOutput, parser.setAsDone("delete -1"));
+        assertEquals(expectedOutput, parser.setAsDone("delete 6"));
     }
 
     @Test
-    public void addTaskToList_invalidTodo_argumentExceptionThrown() {
+    public void addTaskToList_invalidTodo_argumentExceptionString() {
+        String expectedOutput = "Wrong Arguments Specified: \n"
+            + "A todo-task should be specified as follows \n "
+            + "todo <task_description>\n"
+            + "You currently have 0 tasks in the list.";
+
         TaskList tasks = new TaskList();
         Parser parser = new Parser(tasks);
 
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("todo ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("todo ", false));
     }
 
     @Test
-    public void addTaskToList_invalidDeadline_argumentExceptionThrown() {
+    public void addTaskToList_invalidDeadline_argumentExceptionString() {
+        String expectedOutput = "Wrong Arguments Specified: \n"
+            + "A deadline-task should be specified as follows \n "
+            + "deadline <task_description> /by <task_deadline>\n"
+            + "You currently have 0 tasks in the list.";
+
         TaskList tasks = new TaskList();
         Parser parser = new Parser(tasks);
 
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline ", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline /by ", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline /by jan", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline return book /by", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline return book /by ", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline /by 2019-09-09", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("deadline /by2019-09-09", false));
+        assertEquals(expectedOutput, parser.addTaskToList("deadline ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("deadline /by ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("deadline /by jan", false));
+        assertEquals(expectedOutput, parser.addTaskToList("deadline return book /by", false));
+        assertEquals(expectedOutput, parser.addTaskToList("deadline return book /by ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("deadline /by 2019-09-09", false));
+        assertEquals(expectedOutput, parser.addTaskToList("deadline /by2019-09-09", false));
     }
 
     @Test
-    public void addTaskToList_invalidEvent_argumentExceptionThrown() {
+    public void addTaskToList_invalidEvent_argumentExceptionString() {
+        String expectedOutput = "Wrong Arguments Specified: \n"
+            + "A event-task should be specified as follows \n "
+            + "event <event_description> /at <event_date>\n"
+            + "You currently have 0 tasks in the list.";
+
         TaskList tasks = new TaskList();
         Parser parser = new Parser(tasks);
 
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event ", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event /at ", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event /at jan", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event return book /at", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event return book /at ", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event /at 2019-09-09", false));
-        assertThrows(ArgumentException.class, () -> parser.addTaskToList("event /at2019-09-09", false));
+        assertEquals(expectedOutput, parser.addTaskToList("event ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("event /at ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("event /at jan", false));
+        assertEquals(expectedOutput, parser.addTaskToList("event return book /at", false));
+        assertEquals(expectedOutput, parser.addTaskToList("event return book /at ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("event /at 2019-09-09", false));
+        assertEquals(expectedOutput, parser.addTaskToList("event /at2019-09-09", false));
     }
 
     @Test
-    public void addTaskToList_unknownKeyword_argumentExceptionThrown() {
+    public void addTaskToList_unknownKeyword_argumentExceptionString() {
+        String expectedOutput = "Unidentified Keyword: Please try again using the correct keywords and order :)\n"
+            + "You currently have 0 tasks in the list.";
+
         TaskList tasks = new TaskList();
         Parser parser = new Parser(tasks);
 
-        assertThrows(KeywordException.class, () -> parser.addTaskToList("", false));
-        assertThrows(KeywordException.class, () -> parser.addTaskToList(" ", false));
-        assertThrows(KeywordException.class, () -> parser.addTaskToList("s", false));
-        assertThrows(KeywordException.class, () -> parser.addTaskToList("1", false));
-        assertThrows(KeywordException.class, () -> parser.addTaskToList("hi", false));
-        assertThrows(KeywordException.class, () -> parser.addTaskToList("todo", false));
-        assertThrows(KeywordException.class, () -> parser.addTaskToList("deadline", false));
-        assertThrows(KeywordException.class, () -> parser.addTaskToList("event", false));
-        assertThrows(KeywordException.class, () -> parser.addTaskToList("Event ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("", false));
+        assertEquals(expectedOutput, parser.addTaskToList(" ", false));
+        assertEquals(expectedOutput, parser.addTaskToList("s", false));
+        assertEquals(expectedOutput, parser.addTaskToList("1", false));
+        assertEquals(expectedOutput, parser.addTaskToList("hi", false));
+        assertEquals(expectedOutput, parser.addTaskToList("todo", false));
+        assertEquals(expectedOutput, parser.addTaskToList("deadline", false));
+        assertEquals(expectedOutput, parser.addTaskToList("event", false));
+        assertEquals(expectedOutput, parser.addTaskToList("Event ", false));
     }
 
 }
