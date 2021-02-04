@@ -52,7 +52,7 @@ public class Duke {
 
     /**
      * Constructor to create Duke object.
-     * 
+     *
      * @param filePath File path to save tasklist.
      */
     public Duke(String filePath) {
@@ -66,16 +66,21 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes user input and provides response.
+     *
+     * @param input User input.
+     * @return Duke response.
+     */
     public String getResponse(String input) {
 
         if (isWaitingSaveFileResponse) {
-            return exit(input);
+            return confirmSave(input);
         }
 
         if (isWaitingDeleteTaskResponse) {
-            return deleteTask(input);
+            return confirmDelete(input);
         }
-
 
         try {
             Parser.parseInput(input);
@@ -124,7 +129,7 @@ public class Duke {
             return ui.displayError(e);
         }
 
-        throw new RuntimeException("ERROR"); // Should never reach here;
+        throw new RuntimeException("ERROR in Duke's getResponse method"); // Should never reach here;
     }
 
     private String completeTask(String num) throws DukeInputException {
@@ -138,7 +143,7 @@ public class Duke {
         return ui.addTask(t.toString(), tasks.size());
     }
 
-    private String deleteTask(String s) {
+    private String confirmDelete(String s) {
         try {
             Parser.parseYesNo(s);
         } catch (DukeInputException e) {
@@ -158,7 +163,7 @@ public class Duke {
         }
     }
 
-    private String exit(String s) {
+    private String confirmSave(String s) {
         try {
             Parser.parseYesNo(s);
         } catch (DukeInputException e) {
@@ -175,10 +180,20 @@ public class Duke {
         return "shutdownConfirm";
     }
 
+    /**
+     * Returns TaskList.
+     *
+     * @return TaskList.
+     */
     protected ObservableList<Task> getTaskList() {
         return tasks.getList();
     }
 
+    /**
+     * Returns Duke's greeting messages.
+     *
+     * @return Greeting messages.
+     */
     public String displayGreetings() {
         return ui.displayGreetings();
     }

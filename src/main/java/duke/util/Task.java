@@ -14,7 +14,7 @@ public abstract class Task {
 
     /**
      * Constructor to create a Task with a description.
-     * 
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -25,7 +25,7 @@ public abstract class Task {
 
     /**
      * Constructor to create a Task with a description and a date.
-     * 
+     *
      * @param description Description of the task.
      * @param date Date of the task.
      */
@@ -36,9 +36,9 @@ public abstract class Task {
     }
 
     /**
-     * Set task as completed.
+     * Returns a new task marked as done.
      */
-    public abstract Task markComplete();
+    public abstract Task markDone();
 
     private String getStatus() {
         return isDone ? "X" : " ";
@@ -46,7 +46,7 @@ public abstract class Task {
 
     /**
      * Returns description of task.
-     * 
+     *
      * @return Description of task.
      */
     public String getDescription() {
@@ -55,7 +55,7 @@ public abstract class Task {
 
     /**
      * Returns String in the form "[status] description".
-     * 
+     *
      * @return String representation of Task.
      */
     @Override
@@ -65,7 +65,7 @@ public abstract class Task {
 
     /**
      * Export data into a standardised format.
-     * 
+     *
      * @return List of task details.
      */
     protected abstract List<String> exportData();

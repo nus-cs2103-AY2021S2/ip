@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
  */
 public class TaskList {
     private ObservableList<Task> lst;
+
     /**
      * Creates empty tasklist.
      */
@@ -22,7 +23,7 @@ public class TaskList {
 
     /**
      * Fills tasklist with contents of the given list.
-     * 
+     *
      * @param lst List of tasks.
      */
     public TaskList(List<Task> lst) {
@@ -38,7 +39,7 @@ public class TaskList {
 
     /**
      * Deletes task from the tasklist.
-     * 
+     *
      * @param i Index of task to be deleted.
      * @return Task that has been deleted.
      * @throws DukeInputException If the given index is out of range.
@@ -50,7 +51,7 @@ public class TaskList {
             t = lst.get(i);
             lst.remove(i);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInputException(String.format("\"%d\" is an invalid number!", i));
+            throw new DukeInputException(String.format("\"%d\" is an invalid number!", i - 1));
         }
 
         return t;
@@ -58,7 +59,7 @@ public class TaskList {
 
     /**
      * Marks task in tasklist as completed.
-     * 
+     *
      * @param i Index of task that has been completed.
      * @return Task that has been completed.
      * @throws DukeInputException If the given index is out of range.
@@ -72,7 +73,7 @@ public class TaskList {
             throw new DukeInputException(String.format("\"%d\" is an invalid number!", i - 1));
         }
 
-        Task completedTask = t.markComplete();
+        Task completedTask = t.markDone();
         lst.set(i, completedTask);
 
         return completedTask;
@@ -80,7 +81,7 @@ public class TaskList {
 
     /**
      * Convert tasks to a numbered list of strings.
-     * 
+     *
      * @return List of numbered tasks.
      */
     public List<String> listOutTask() {
@@ -96,7 +97,7 @@ public class TaskList {
 
     /**
      * Returns size of tasklist.
-     * 
+     *
      * @return Size of tasklist.
      */
     public int size() {
@@ -105,7 +106,7 @@ public class TaskList {
 
     /**
      * Returns list of tasks.
-     * 
+     *
      * @return List of tasks.
      */
     public ObservableList<Task> getList() {
@@ -114,11 +115,11 @@ public class TaskList {
 
     /**
      * Returns list of tasks on the given date.
-     * 
+     *
      * @param d Date of task.
      * @return List of numbered tasks with the following date.
      */
-    public List<String> searchByDate(LocalDate d) {
+    private List<String> searchByDate(LocalDate d) {
         List<String> results = new ArrayList<>();
 
         for (int i = 0; i < lst.size(); i++) {
@@ -132,7 +133,8 @@ public class TaskList {
 
     /**
      * Returns list of tasks with the given keyword.
-     * 
+     * <br>If keyword is in a valid LocalDate format (YYYY-MM-DD), search by date, else search by keyword.
+     *
      * @param keyword Keyword to search.
      * @return List of numbered tasks containing the given keyword.
      */

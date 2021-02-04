@@ -23,7 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Factory method for creating deadline task.
-     * 
+     *
      * @param input Description of the task and its due date.
      *     Due date should be indicated after "/by".
      * @return A deadline task.
@@ -49,7 +49,7 @@ public class Deadline extends Task {
 
     /**
      * Returns String in the form "[Type] task".
-     * 
+     *
      * @return String representation of Deadline.
      */
     @Override
@@ -62,7 +62,7 @@ public class Deadline extends Task {
 
     /**
      * Export data into a standardised format.
-     * 
+     *
      * @return List of Deadline details.
      */
     @Override
@@ -75,7 +75,7 @@ public class Deadline extends Task {
 
     /**
      * Import data from standardised format.
-     * 
+     *
      * @param args Deadline details.
      * @return Deadline object.
      */
@@ -84,8 +84,13 @@ public class Deadline extends Task {
         return new Deadline(args[2], LocalDate.parse(args[3]), isDone);
     }
 
+    /**
+     * Returns a new Deadline task marked as done.
+     *
+     * @return A Deadline object.
+     */
     @Override
-    public Deadline markComplete() {
+    public Deadline markDone() {
         return new Deadline(description, date, true);
     }
 }

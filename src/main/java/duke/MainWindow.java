@@ -1,6 +1,7 @@
 package duke;
 
 import duke.util.Task;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
@@ -10,7 +11,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -30,9 +30,12 @@ public class MainWindow extends SplitPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
+    /**
+     * Initialize GUI properties.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -49,11 +52,19 @@ public class MainWindow extends SplitPane {
         });
     }
 
+    /**
+     * Initialise duke and add tasklist to listView.
+     *
+     * @param d Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
         listView.setItems(duke.getTaskList());
     }
 
+    /**
+     * Display greeting message on GUI.
+     */
     public void showGreetings() {
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(duke.displayGreetings(), dukeImage)
@@ -66,8 +77,14 @@ public class MainWindow extends SplitPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().strip();
+
+        if (input.isEmpty()) {
+            return;
+        }
+
         String response = duke.getResponse(input);
+
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response, dukeImage)
@@ -75,9 +92,7 @@ public class MainWindow extends SplitPane {
         userInput.clear();
 
         if (response.equals("shutdownConfirm")) {
-            Stage stage = (Stage) sendButton.getScene().getWindow();
-            // do what you have to do
-            stage.close();
+            Platform.exit();
         }
     }
 }

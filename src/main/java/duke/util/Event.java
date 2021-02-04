@@ -23,7 +23,7 @@ public class Event extends Task {
 
     /**
      * Factory method for creating Event task.
-     * 
+     *
      * @param input Description of the task and its date.
      *     Date should be indicated after "/at".
      * @return An Event task.
@@ -49,7 +49,7 @@ public class Event extends Task {
 
     /**
      * Returns String in the form "[Type] task".
-     * 
+     *
      * @return String representation of Event.
      */
     @Override
@@ -62,7 +62,7 @@ public class Event extends Task {
 
     /**
      * Export data into a standardised format.
-     * 
+     *
      * @return List of Event details.
      */
     @Override
@@ -75,7 +75,7 @@ public class Event extends Task {
 
     /**
      * Import data from standardised format.
-     * 
+     *
      * @param args Event details.
      * @return Event object.
      */
@@ -84,8 +84,13 @@ public class Event extends Task {
         return new Event(args[2], LocalDate.parse(args[3]), isDone);
     }
 
+    /**
+     * Returns a new Event task marked as done.
+     *
+     * @return An Event object.
+     */
     @Override
-    public Event markComplete() {
+    public Event markDone() {
         return new Event(description, date, true);
     }
 }

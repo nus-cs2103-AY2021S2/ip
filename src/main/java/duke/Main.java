@@ -15,6 +15,12 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/dukeData.txt");
 
+    /**
+     * The main entry point for the GUI.
+     * Creates the scene, duke and display greetings.
+     *
+     * @param stage Window on which scene is set.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -22,6 +28,7 @@ public class Main extends Application {
             SplitPane sp = fxmlLoader.load();
             Scene scene = new Scene(sp);
             stage.setScene(scene);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().showGreetings();
             stage.show();
