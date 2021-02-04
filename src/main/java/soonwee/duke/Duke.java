@@ -1,160 +1,102 @@
 package soonwee.duke;
 
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import java.time.LocalDateTime;
 
 /**
- * Represents a Duke instance. A Duke instance will prompt user which bot they
- * want to use (1. Echo Bot, 2. Tasks List Bot).
+ * Represents a Duke instance.
  */
 public class Duke {
 
-    public static final int TODO = 1;
-    public static final int DEADLINE = 2;
-    public static final int EVENT = 3;
-    public static final int FIND = 4;
-    public static Ui display = new Ui();
-
     /**
-     * Starts the program.
-     */
-    public static void main(String[] args) throws IOException {
-        System.out.println(display.printGreeting());
-        System.out.println(display.printPrompt());
-        selectAction();
-        System.out.println(display.printBye());
-    }
-
-    /**
-     * Prompts the user which bot they want to choose.
+     * Initializes the input by checking the front command and performing
+     * their required actions.
      *
-     * @throws IOException if an error occurs.
+     * @return updated Task List
      */
-    public static void selectAction() throws IOException {
-        BufferedReader input = new
-                BufferedReader(new InputStreamReader(System.in));
-        String cmd = input.readLine();
-        switch (cmd) {
-        case "1":
-            performFirstTask();
-            break;
-        case "2":
-            TaskList temp = performSecondTask();
-            break;
-        default:
-            break;
+    public static String initialize(String input) {
+        String result = new String();
+        Storage storage = new Storage("data\\tasks.txt");
+        if (input.equals("list")) {
+            result = storage.taskList.displayTasks();
+        } else if (input.contains("done")) {
+            int index = Integer.parseInt(input.substring(5));
+            result = storage.taskList.setTaskDone(index);
+            storage.writeFile();
+        } else if (input.contains("delete")) {
+            int index = Integer.parseInt(input.substring(7));
+            result = storage.taskList.removeTask(index);
+            storage.writeFile();
+        } else if (input.contains("find")) {
+            String text = new Parser().getSearchWord(input);
+            result = result + storage.taskList.searchRelatedText(text) + "\n";
+        } else {
+            result = performTaskCheck(storage.taskList, input);
+            storage.writeFile();
         }
-        input.close();
+        return result;
     }
 
     /**
-     * Performs the first macro task which will echo whatever the user types
-     * in and ends when the user types 'bye'.
+     * Performs the checking of Tasks to determine and validate what they are, and
+     * create them accordingly.
      *
-     * @throws IOException if an error occur.
+     * @return updated Task List
      */
-    public static void performFirstTask() throws IOException {
-        String cmd = new String();
-        BufferedReader input = new
-                BufferedReader(new InputStreamReader(System.in));
-        while (true) {
-            cmd = input.readLine();
-            System.out.println(display.printLine());
-            if (cmd.equals("bye")) {
-                break;
-            }
-            System.out.println(cmd);
-            System.out.println(display.printLine());
-        }
-    }
-
-    /**
-     * Performs the second macro task which can add, delete or mark a task as
-     * done. Macro will end when user types in 'bye'.
-     *
-     * @return updated Task List.
-     * @throws IOException if file or directory is not found.
-     */
-    public static TaskList performSecondTask() throws IOException {
-        String cmd = new String();
-        Storage storage = new Storage("C:\\Users\\songs\\Desktop\\CS2103\\data\\tasks.txt");
-        BufferedReader input = new
-                BufferedReader(new InputStreamReader(System.in));
-        while (true) {
-            cmd = input.readLine();
-            System.out.println(display.printLine());
-            if (cmd.equals("list")) {
-                storage.taskList.displayTasks();
-            } else if (cmd.equals("bye")) {
-                break;
-            } else if (cmd.contains("done")) {
-                int index = Integer.parseInt(cmd.substring(5));
-                storage.taskList.setTaskDone(index);
-                storage.writeFile();
-            } else if (cmd.contains("delete")) {
-                int index = Integer.parseInt(cmd.substring(7));
-                storage.taskList.removeTask(index);
-                storage.writeFile();
-            } else if (cmd.contains("find")) {
-                String text = new Parser().checkFrontInput(cmd, FIND);
-                storage.taskList.searchText(text);
-            } else {
-                storage.taskList = performChildTask(storage.taskList, cmd);
-                storage.writeFile();
-            }
-            System.out.println(display.printLine());
-        }
-        input.close();
-        return storage.taskList;
-    }
-
-    /**
-     * Performs the second macro child task which can add, delete or mark a
-     * task as done. Macro will end when user types in 'bye'.
-     *
-     * @return updated Task List.
-     */
-    public static TaskList performChildTask(TaskList taskList, String cmd) {
+    public static String performTaskCheck(TaskList taskList, String cmd) {
+        String result = new String();
         Parser checker = new Parser();
-        int taskType = checker.checkTaskType(cmd);
+        TaskType taskType = checker.checkTaskType(cmd);
         String task = checker.checkFrontInput(cmd, taskType);
         if (!task.isEmpty()) {
             try {
-                if (taskType == -1) {
+                if (task.contains("OOPS!!!")) {
+                    throw new DukeException(task);
+                }
+                if (taskType == TaskType.UNKNOWN) {
                     throw new
-                            DukeException("☹ OOPS!!! I'm sorry, " + "but I don't know what that means :-(");
+                            DukeException("OOPS!!! I'm sorry, " + "but I don't know what that means :-(");
                 } else {
-                    if (taskType == TODO) {
+                    if (taskType == TaskType.TODO) {
                         ToDo newToDo = new ToDo(task);
-                        performAddTask(taskList, newToDo);
+                        result = result + performAddTask(taskList, newToDo);
                     } else {
                         LocalDateTime date = checker.dateFormatter(cmd);
-                        if (taskType == DEADLINE) {
+                        if (taskType == TaskType.DEADLINE) {
                             Deadline newDeadLine = new Deadline(task, date);
-                            performAddTask(taskList, newDeadLine);
+                            result = result + performAddTask(taskList, newDeadLine);
                         } else {
                             Event newEvent = new Event(task, date);
-                            performAddTask(taskList, newEvent);
+                            result = result + performAddTask(taskList, newEvent);
                         }
                     }
-                    System.out.println(display.printTotalTasks(taskList));
+                    result = result + taskList.printTotalTasks();
                 }
             } catch (DukeException de) {
-                System.out.println(de.getMessage());
+                result = result + de.getMessage();
             }
         }
-        return taskList;
+        return result;
     }
 
     /**
      * Performs addition of task into TaskList.
      */
-    public static void performAddTask(TaskList taskList, Task task) {
+    public static String performAddTask(TaskList taskList, Task task) {
         taskList.addTask(task);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(task);
+        String result = new String();
+        result = result + "Got it. I've added this task: \n" + task.toString() + "\n";
+        return result;
+    }
+
+    /**
+     * Sends in the input and gets the response from the performed action.
+     *
+     * @param input command input
+     * @return output result from the input
+     */
+    public String getResponse(String input) {
+        String result = new String();
+        result = result + initialize(input);
+        return result;
     }
 }

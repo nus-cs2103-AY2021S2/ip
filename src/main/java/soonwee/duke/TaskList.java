@@ -20,18 +20,19 @@ public class TaskList {
     /**
      * Set a certain task to be done.
      *
-     * @param index task number.
+     * @param index task number
      */
-    public void setTaskDone(int index) {
+    public String setTaskDone(int index) {
+        String result = new String();
         this.getTask(index - 1).setCompleted();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(this.getTask(index - 1));
+        result = result + "Nice! I've marked this task as done: \n" + this.getTask(index - 1);
+        return result;
     }
 
     /**
      * Adds a new task to the Task List.
      *
-     * @param newTask new task.
+     * @param newTask new task
      */
     public void addTask(Task newTask){
         tasksList.add(newTask);
@@ -40,7 +41,7 @@ public class TaskList {
     /**
      * Gets size of Task List.
      *
-     * @return updated Task List.
+     * @return updated Task List
      */
     public int getSize() {
         return this.tasksList.size();
@@ -49,55 +50,60 @@ public class TaskList {
     /**
      * Gets the task at respective index.
      *
-     * @param index task index.
-     * @return task at that index.
+     * @param index task index
+     * @return task at that index
      */
     public Task getTask(int index){
         return tasksList.get(index);
     }
 
-    public void searchText(String cmd) {
+    public String searchRelatedText(String cmd) {
         ArrayList<Task> temporaryList = new ArrayList<>();
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).taskDesc.contains(cmd)) {
                 temporaryList.add(tasksList.get(i));
             }
         }
-        displayTasks(temporaryList);
+        String result = "Here are the matching tasks in your list: \n";
+        for (int j = 0; j < temporaryList.size(); j++) {
+            result = result + String.valueOf(j + 1) + ". " + temporaryList.get(j).toString() + "\n";
+        }
+        return result;
+    }
+
+    /**
+     * Prints current total tasks.
+     *
+     * @return a display indicating the number of tasks
+     */
+    public String printTotalTasks() {
+        String result = "Now you have " + this.getSize() + " tasks in the list.";
+        return result;
     }
 
     /**
      * Removes task at respective index.
      *
-     * @param index task index.
+     * @param index task index
      */
-    public void removeTask(int index) {
+    public String removeTask(int index) {
         Task temp = this.getTask(index - 1);
         tasksList.remove(index - 1);
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(temp);
-        System.out.println("Now you have " + this.getSize() + " tasks in the list.");
+        String result = new String();
+        result = result + "Noted. I've removed this task: \n" + temp + "\n"
+                + "Now you have " + this.getSize() + " tasks in the list.";
+        return result;
     }
 
     /**
      * Displays all tasks.
      */
-    public void displayTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public String displayTasks() {
+        String result = new String();
+        result = result + "Here are the tasks in your list: \n";
         for (int i = 0; i < tasksList.size(); i++) {
-            System.out.println(String.valueOf(i + 1) + "." + tasksList.get(i));
-	}
-    }
-
-    /**
-     * Displays all tasks in the TaskList.
-     *
-     * @param taskList temporary task list.
-     */
-    public void displayTasks(ArrayList<Task> taskList) {
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + 1 + "." + taskList.get(i));
-        }
+            result = result + String.valueOf(i + 1) + ". " + tasksList.get(i) + "\n";
+	    }
+        return result;
     }
 }

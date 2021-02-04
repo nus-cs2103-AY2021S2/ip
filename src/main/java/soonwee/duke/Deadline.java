@@ -9,22 +9,22 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    protected LocalDateTime endTime;
 
     /**
      * Instantiates the Deadline task.
      *
-     * @param description description of the task.
-     * @param by deadline to complete the task by.
+     * @param description description of the task
+     * @param endTime deadline to complete the task by
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime endTime) {
         super(description);
-        this.by = by;
+        this.endTime = endTime;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
-                + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+                + endTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

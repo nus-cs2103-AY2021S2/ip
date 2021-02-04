@@ -9,22 +9,22 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDateTime at;
+    protected LocalDateTime startTime;
 
     /**
      * Instantiates the Event task.
      *
      * @param description description of the task
-     * @param starting time of the task
+     * @param startTime start time of the task
      */
-    public Event(String description, LocalDateTime at) {
+    public Event(String description, LocalDateTime startTime) {
         super(description);
-        this.at = at;
+        this.startTime = startTime;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: "
-                + this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+                + this.startTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

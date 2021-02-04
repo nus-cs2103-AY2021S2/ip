@@ -21,7 +21,7 @@ public class Storage {
     public TaskList taskList;
 
     /**
-     * Instantiate Storage with its target directory.
+     * Instantiates Storage with its target directory.
      */
     public Storage(String directory) {
         this.taskList = createNew();
@@ -39,9 +39,9 @@ public class Storage {
     }
 
     /**
-     * Create a file in the specified directory.
+     * Creates a file in the specified directory.
      *
-     * @param directory target directory.
+     * @param directory target directory
      * @return new file object
      */
     public File createFile(String directory) {
@@ -65,7 +65,7 @@ public class Storage {
      */
     public void readFile() {
         try {
-            File fileObject = new File("C:\\Users\\songs\\Desktop\\CS2103\\data\\tasks.txt");
+            File fileObject = new File("data\\tasks.txt");
             Scanner reader = new Scanner(fileObject);
             while (reader.hasNextLine()) {
                 String data = reader.nextLine();
@@ -81,7 +81,7 @@ public class Storage {
     /**
      * Process data in file and add them into memory task list.
      *
-     * @param data input data taken from command.
+     * @param data input data taken from command
      */
     public void processFileData(String data) {
         char taskType = data.charAt(1);
@@ -115,7 +115,7 @@ public class Storage {
      */
     public void writeFile() {
         try {
-            FileWriter fileWriter = new FileWriter("C:\\Users\\songs\\Desktop\\CS2103\\data\\tasks.txt");
+            FileWriter fileWriter = new FileWriter("data\\tasks.txt");
             for (int i = 0; i < this.taskList.getSize(); i++) {
                 fileWriter.write(this.taskList.getTask(i).toString() + "\n");
             }
