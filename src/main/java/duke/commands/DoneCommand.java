@@ -3,8 +3,8 @@ package duke.commands;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.models.Task;
+import duke.ui.Ui;
 
 /**
  * Handles the Done command of the user to mark tasks as done.

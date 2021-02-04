@@ -1,37 +1,25 @@
-package duke;
+package duke.ui;
 
+import duke.TaskList;
 import duke.models.Task;
 
 /**
  * Manages the Command line interface of the application.
  */
-public class Ui {
-    public static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String HORIZONTAL_LINE = "____________________________________"
-        + "_________________________________";
-
-    public Ui() {
-
-    }
+public abstract class Ui {
+    public abstract void resetReplyString();
+    public abstract String getReplyString();
 
     /**
      * Prints the output with an indent.
      * @param output output to be printed
      */
-    public void printIndentOutput(String output) {
-        System.out.println('\t' + output);
-    }
+    public abstract void printIndentOutput(String output);
 
     /**
      * Prints a straight horizontal line.
      */
-    public void printHorizontalLine() {
-        printIndentOutput(HORIZONTAL_LINE);
-    }
+    public abstract void printHorizontalLine();
 
     /**
      * Print the current status of tasks.
@@ -47,13 +35,7 @@ public class Ui {
     /**
      * Prints out the intro of the application.
      */
-    public void printIntro() {
-        System.out.println("Hello from\n" + LOGO);
-
-        printHorizontalLine();
-        printIndentOutput("What can I do for you?");
-        printHorizontalLine();
-    }
+    public abstract void printIntro();
 
     /**
      * Prints out the given error message in the application.

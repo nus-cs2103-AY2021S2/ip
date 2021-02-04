@@ -2,8 +2,8 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.models.Task;
+import duke.ui.Ui;
 
 /**
  * Abstract class for commands adding new tasks to the list.

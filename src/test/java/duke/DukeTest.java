@@ -5,6 +5,6 @@ import org.junit.jupiter.api.Test;
 public class DukeTest {
     @Test
     public void empty() {
-        Duke d = new Duke();
+        Duke d = new Duke(true);
     }
 }
