@@ -1,7 +1,7 @@
 package surrealchat.easteregg;
 
 /**
- * Base class for easter eggs.
+ * Abstract base class for easter eggs meant to humour users.
  */
 public abstract class EasterEgg {
     private final String easterEggType;

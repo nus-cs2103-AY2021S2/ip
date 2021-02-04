@@ -1,6 +1,6 @@
 package surrealchat.command;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 
@@ -23,11 +23,11 @@ public class EventCommand extends Command {
         this.rawDescription = rawDescription;
     }
 
-    private LocalDate parseDate(String dateString) {
+    private LocalDateTime parseDate(String dateString) {
         try {
-            return LocalDate.parse(dateString);
+            return LocalDateTime.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Input date format is incorrect. Not stonks!\n");
+            throw new IllegalArgumentException("Input date time format is incorrect. Not stonks!\n");
         }
     }
 
@@ -39,11 +39,11 @@ public class EventCommand extends Command {
         //Split the description into description and event
         String[] descriptionSplitArray = taskDescription.split("/at");
         try {
-            LocalDate eventDate = this.parseDate(descriptionSplitArray[1].trim());
+            LocalDateTime eventDateTime = this.parseDate(descriptionSplitArray[1].trim());
 
             //Create Event task
             return EventTask.createNewEventTask(descriptionSplitArray[0].trim(),
-                    eventDate);
+                    eventDateTime);
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
             throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/at'? Not stonks!\n");
         }
@@ -76,8 +76,8 @@ public class EventCommand extends Command {
      */
     public static String displayHelp() {
         String outputString = "Given a description and event date, stores event task.\n";
-        outputString += "Format of arguments: event [description] /at [event date]\n";
-        outputString += "[event date] must be of the form YYYY-MM-DD\n";
+        outputString += "Format of arguments: event [description] /at [event date and time]\n";
+        outputString += "[event date and time] must be of the form {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock\n";
         return outputString;
     }
 }

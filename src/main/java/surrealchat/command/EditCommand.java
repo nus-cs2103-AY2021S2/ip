@@ -18,7 +18,7 @@ public class EditCommand extends Command {
         this.rawDescription = rawDescription;
     }
 
-    private boolean checkInvalidTaskNumber(int taskNumber, TaskManagement taskManagement) {
+    private boolean isInvalidTaskNumber(int taskNumber, TaskManagement taskManagement) {
         return ((taskNumber <= 0) || (taskNumber > taskManagement.getNumberOfTasks()));
     }
 
@@ -44,7 +44,7 @@ public class EditCommand extends Command {
             String newDescription = descriptionSplitArray[1].trim();
 
             //Edit task description
-            if (this.checkInvalidTaskNumber(taskNumber, taskManagement)) {
+            if (this.isInvalidTaskNumber(taskNumber, taskManagement)) {
                 return "Invalid task number. Not stonks!\n";
             } else if (newDescription.isEmpty()) {
                 return "No description provided for editing. Not stonks!\n";

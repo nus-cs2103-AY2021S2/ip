@@ -8,6 +8,7 @@ import surrealchat.command.EventCommand;
 import surrealchat.command.FindCommand;
 import surrealchat.command.ListCommand;
 import surrealchat.command.ToDoCommand;
+import surrealchat.easteregg.HandEasterEgg;
 import surrealchat.easteregg.OrangEasterEgg;
 import surrealchat.easteregg.VegetalEasterEgg;
 
@@ -42,6 +43,10 @@ public class HelpMode {
             return OrangEasterEgg.displayHelp();
         case "vegetal":
             return VegetalEasterEgg.displayHelp();
+        case "icandoit":
+            //Fallthrough
+        case "aikendueet":
+            return HandEasterEgg.displayHelp();
         default:
             return "Helper does not recognise command. Not Stonks!\n";
         }

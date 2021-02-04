@@ -9,6 +9,15 @@ Meme Man will also catch exceptions for you, because Meme Man thinks exceptions 
 
 Based on the Duke chatbot.
 
+## How to interpret this guide
+Commands usually come in the following format:
+`command (arguments if any)`
+
+For date and time inputs, they would be given as such:
+`{YYYY-MM-DD}T{HH:MM:SS}`
+Any capital letter between braces is to be replaced with the relevant date/time component.
+The T in the middle is used to indicate time.
+
 ## Features
 
 ### GUI Now Available!
@@ -68,22 +77,22 @@ Total number of tasks: 1
 Format: `deadline DESCRIPTION /by DATE`
 
 Key this command in along with task description and deadline date to cause Meme Man to add a Deadline task.
-Deadline date must be in this format: YYYY-MM-DD.
+Deadline date must be in this format: {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
 ```
-deadline Do CS2103T lecture quiz /by 2021-01-12
-deadline Do CS2103T ip /by 2021-01-13
+deadline Do CS2103T lecture quiz /by 2021-01-12T10:10:10
+deadline Do CS2103T ip /by 2021-01-13T10:10:10
 ```
 
 Expected outcome:
 
 ```
-Meme Man is now adding deadline task: [D][✘] Do CS2103T lecture quiz (by: 2021-01-12)
+Meme Man is now adding deadline task: [D][✘] Do CS2103T lecture quiz (by: 2021-01-12, 10:10:10)
 Total number of tasks: 2
-Meme Man is now adding deadline task: [D][✘] Do CS2103T ip (by: 2021-01-13)
+Meme Man is now adding deadline task: [D][✘] Do CS2103T ip (by: 2021-01-13, 10:10:10)
 Total number of tasks: 3
 ```
 
@@ -92,26 +101,26 @@ Outcome if "/by" is missing:
 Wrong formatting. Did you forget to put '/by'? Not stonks!
 ```
 
-Outcome for incorrect date format:
+Outcome for incorrect date time format:
 ```
-"Input date format is incorrect. Not stonks!"
+"Input date time format is incorrect. Not stonks!"
 ```
 
 ### Add Event task - `event`
 Format: `event DESCRIPTION /at DATE`
 
 Key this command in along with task description and event date to cause Meme Man to add a Event task.
-Event date must be in this format: YYYY-MM-DD.
+Event date must be in this format: {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
-`event Attend CS2101 class /at 2021-01-14`
+`event Attend CS2101 class /at 2021-01-14T10:10:10`
 
 Expected outcome:
 
 ```
-Meme Man is now adding event task: [E][✘] Attend CS2101 class (at: 2021-01-14)
+Meme Man is now adding event task: [E][✘] Attend CS2101 class (at: 2021-01-14, 10:10:10)
 Total number of tasks: 4
 ```
 Outcome if "/at" is missing:
@@ -119,9 +128,9 @@ Outcome if "/at" is missing:
 Wrong formatting. Did you forget to put '/at'? Not stonks!
 ```
 
-Outcome for incorrect date format:
+Outcome for incorrect date time format:
 ```
-"Input date format is incorrect. Not stonks!"
+"Input date time format is incorrect. Not stonks!"
 ```
 
 ### What happens if task description is empty?
@@ -330,6 +339,11 @@ Key this command in and you'd be pleasantly surprised at how punny Orang can be 
 Format: `vegetal`
 
 Did someone said... NO VEGETALS?
+
+### Easter egg - `icandoit` or `aikendueet`
+Format: `icandoit` or `aikendueet`
+
+You can use either command to achieve transcendence. Try it out!
 
 ### Invalid commands
 If you key in an unrecognised command, this is what Meme Man has to say:

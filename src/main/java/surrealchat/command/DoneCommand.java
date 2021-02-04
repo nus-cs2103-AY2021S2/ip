@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
         this.taskNumberString = taskNumberString;
     }
 
-    private boolean checkInvalidTaskNumber(int taskNumber, TaskManagement taskManagement) {
+    private boolean isInvalidTaskNumber(int taskNumber, TaskManagement taskManagement) {
         return ((taskNumber <= 0) || (taskNumber > taskManagement.getNumberOfTasks()));
     }
 
@@ -63,7 +63,7 @@ public class DoneCommand extends Command {
         try {
             int taskNumber = this.getInputNumber(this.taskNumberString);
 
-            if (this.checkInvalidTaskNumber(taskNumber, taskManagement)) {
+            if (this.isInvalidTaskNumber(taskNumber, taskManagement)) {
                 return "Invalid task number. Not stonks!\n";
             }
 

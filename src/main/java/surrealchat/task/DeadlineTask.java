@@ -1,14 +1,14 @@
 package surrealchat.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a task with a deadline.
  */
 public class DeadlineTask extends Task {
-    private LocalDate deadline;
+    private LocalDateTime deadline;
 
-    private DeadlineTask(String taskDescription, LocalDate deadline, boolean isDone) {
+    private DeadlineTask(String taskDescription, LocalDateTime deadline, boolean isDone) {
         super(taskDescription, "D", isDone);
         this.deadline = deadline;
     }
@@ -16,10 +16,10 @@ public class DeadlineTask extends Task {
     /**
      * Creates new instance of DeadlineTask object.
      * @param taskDescription The description of task.
-     * @param deadline LocalDate object of the date by which task should be completed.
+     * @param deadline LocalDate object of the date and time by which task should be completed.
      * @return New DeadlineTask that is not done.
      */
-    public static DeadlineTask createNewDeadlineTask(String taskDescription, LocalDate deadline) {
+    public static DeadlineTask createNewDeadlineTask(String taskDescription, LocalDateTime deadline) {
         return new DeadlineTask(taskDescription, deadline, false);
     }
 
@@ -30,7 +30,7 @@ public class DeadlineTask extends Task {
      * @param isDone Whether task was previously marked as done.
      * @return DeadlineTask as loaded from file.
      */
-    public static DeadlineTask loadDeadlineTaskFromFile(String taskDescription, LocalDate deadline, boolean isDone) {
+    public static DeadlineTask loadDeadlineTaskFromFile(String taskDescription, LocalDateTime deadline, boolean isDone) {
         return new DeadlineTask(taskDescription, deadline, isDone);
     }
 
@@ -67,6 +67,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), this.deadline);
+        return String.format("%s (by: %s, %s)",
+                super.toString(), this.deadline.toLocalDate(), this.deadline.toLocalTime());
     }
 }

@@ -1,14 +1,14 @@
 package surrealchat.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a task that can occur only at a certain time.
  */
 public class EventTask extends Task {
-    private LocalDate event;
+    private LocalDateTime event;
 
-    private EventTask(String taskDescription, LocalDate event, boolean isDone) {
+    private EventTask(String taskDescription, LocalDateTime event, boolean isDone) {
         super(taskDescription, "E", isDone);
         this.event = event;
     }
@@ -16,21 +16,21 @@ public class EventTask extends Task {
     /**
      * Creates new instance of EventTask object.
      * @param taskDescription The description of task.
-     * @param event LocalDate object of the date at which task should happen.
+     * @param event LocalDateTime object of the date and time at which task should happen.
      * @return New EventTask that is not done.
      */
-    public static EventTask createNewEventTask(String taskDescription, LocalDate event) {
+    public static EventTask createNewEventTask(String taskDescription, LocalDateTime event) {
         return new EventTask(taskDescription, event, false);
     }
 
     /**
      * Creates instance of EventTask based on what was loaded from file.
      * @param taskDescription The description of new task.
-     * @param event The event date of the task.
+     * @param event The event date and time of the task.
      * @param isDone Whether task was previously marked as done.
      * @return EventTask as loaded from file.
      */
-    public static EventTask loadEventTaskFromFile(String taskDescription, LocalDate event, boolean isDone) {
+    public static EventTask loadEventTaskFromFile(String taskDescription, LocalDateTime event, boolean isDone) {
         return new EventTask(taskDescription, event, isDone);
     }
 
@@ -66,6 +66,6 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (at: %s)", super.toString(), this.event);
+        return String.format("%s (at: %s, %s)", super.toString(), this.event.toLocalDate(), this.event.toLocalTime());
     }
 }

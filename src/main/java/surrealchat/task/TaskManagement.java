@@ -1,6 +1,6 @@
 package surrealchat.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -158,11 +158,11 @@ public class TaskManagement {
         return newTask;
     }
 
-    private LocalDate parseDate(String dateString) {
+    private LocalDateTime parseDate(String dateString) {
         try {
-            return LocalDate.parse(dateString);
+            return LocalDateTime.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Input date format is incorrect. Not stonks!\n");
+            throw new IllegalArgumentException("Input date time format is incorrect. Not stonks!\n");
         }
     }
 
@@ -174,11 +174,11 @@ public class TaskManagement {
         //Split the description into description and deadline
         String[] descriptionSplitArray = taskDescription.split("/by");
         try {
-            LocalDate deadlineDate = this.parseDate(descriptionSplitArray[1].trim());
+            LocalDateTime deadlineDateTime = this.parseDate(descriptionSplitArray[1].trim());
 
             //Create Deadline task
             DeadlineTask newTask = DeadlineTask.loadDeadlineTaskFromFile(descriptionSplitArray[0].trim(),
-                    deadlineDate, isDone);
+                    deadlineDateTime, isDone);
             this.addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -194,11 +194,11 @@ public class TaskManagement {
         //Split the description into description and event
         String[] descriptionSplitArray = taskDescription.split("/at");
         try {
-            LocalDate eventDate = this.parseDate(descriptionSplitArray[1].trim());
+            LocalDateTime eventDateTime = this.parseDate(descriptionSplitArray[1].trim());
 
             //Create Event task
             EventTask newTask = EventTask.loadEventTaskFromFile(descriptionSplitArray[0].trim(),
-                    eventDate, isDone);
+                    eventDateTime, isDone);
             this.addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur

@@ -13,6 +13,7 @@ import surrealchat.command.FindCommand;
 import surrealchat.command.ListCommand;
 import surrealchat.command.ToDoCommand;
 import surrealchat.easteregg.EasterEgg;
+import surrealchat.easteregg.HandEasterEgg;
 import surrealchat.easteregg.OrangEasterEgg;
 import surrealchat.easteregg.VegetalEasterEgg;
 import surrealchat.file.FileManagement;
@@ -62,7 +63,7 @@ public class SurrealChat {
 
         //Reorganise the remainder of input.
         for (int i = 1; i < separatedWords.length; i++) {
-            restOfInput += separatedWords[i];
+            restOfInput += String.format("%s ", separatedWords[i]);
         }
         restOfInput = restOfInput.trim();
 
@@ -109,6 +110,12 @@ public class SurrealChat {
         case "vegetal":
             EasterEgg vegetalEasterEgg = new VegetalEasterEgg();
             outputString = vegetalEasterEgg.execute();
+            return outputString;
+        case "icandoit":
+            //Fallthrough to aikendueet
+        case "aikendueet":
+            EasterEgg handEasterEgg = new HandEasterEgg();
+            outputString = handEasterEgg.execute();
             return outputString;
         default:
             return "Command not recognised. Not stonks!\n";

@@ -1,6 +1,6 @@
 package surrealchat.command;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 
@@ -23,11 +23,11 @@ public class DeadlineCommand extends Command {
         this.rawDescription = rawDescription;
     }
 
-    private LocalDate parseDate(String dateString) {
+    private LocalDateTime parseDate(String dateString) {
         try {
-            return LocalDate.parse(dateString);
+            return LocalDateTime.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Input date format is incorrect. Not stonks!\n");
+            throw new IllegalArgumentException("Input date time format is incorrect. Not stonks!\n");
         }
     }
 
@@ -39,11 +39,11 @@ public class DeadlineCommand extends Command {
         //Split the description into description and deadline
         String[] descriptionSplitArray = taskDescription.split("/by");
         try {
-            LocalDate deadlineDate = this.parseDate(descriptionSplitArray[1].trim());
+            LocalDateTime deadlineDateTime = this.parseDate(descriptionSplitArray[1].trim());
 
             //Create Deadline task
             return DeadlineTask.createNewDeadlineTask(descriptionSplitArray[0].trim(),
-                    deadlineDate);
+                    deadlineDateTime);
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
             throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/by'? Not stonks!\n");
         }
@@ -77,7 +77,7 @@ public class DeadlineCommand extends Command {
     public static String displayHelp() {
         String outputString = "Given a description and deadline, stores deadline task.\n";
         outputString += "Format of arguments: deadline [description] /by [deadline]\n";
-        outputString += "[deadline] must be of the form YYYY-MM-DD\n";
+        outputString += "[deadline] must be of the form {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock\n";
         return outputString;
     }
 }
