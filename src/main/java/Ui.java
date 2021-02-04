@@ -57,4 +57,12 @@ public class Ui {
         return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
+    public String showInvalidType() {
+        return "OOPS!!! This is not a deadline task and it cannot be rescheduled.";
+    }
+
+    public String showRescheduledTask(ArrayList<Task> list, int taskIndex) {
+        return "Noted. I've rescheduled this task:\n" + list.get(taskIndex).toString();
+    }
+
 }

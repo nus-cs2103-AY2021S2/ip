@@ -48,12 +48,21 @@ public class Parser {
         return command.substring(5);
     }
 
+    static int parseRescheduleIndex(String command) {
+        return Integer.parseInt(command.substring(11).split(" /to ")[0]);
+    }
+
+    static LocalDate parseRescheduleTime(String command) {
+        return LocalDate.parse(command.substring(11).split(" /to ")[1]);
+    }
+
     static boolean hasSaved(String command) {
         return command.equals("save");
     }
 
     static boolean hasExited(String command) {
-        return command.equals("exit"); }
+        return command.equals("exit");
+    }
 
     public String parseCommand(String command) {
         String commandType = Parser.parseCommandType(command);
@@ -111,6 +120,16 @@ public class Parser {
                     }
                 }
                 return ui.showMatchingTasks(matchingTasks);
+            } else if (commandType.equals("reschedule")) {
+                // RESCHEDULE DEADLINE TASK
+                int taskIndex = Parser.parseRescheduleIndex(command) - 1;
+                if (tasks.list.get(taskIndex) instanceof Deadline) {
+                    LocalDate updated = Parser.parseRescheduleTime(command);
+                    ((Deadline) tasks.list.get(taskIndex)).updateDate(updated);
+                    return ui.showRescheduledTask(tasks.list, taskIndex);
+                } else {
+                    throw new DukeException(ui.showInvalidType());
+                }
             } else {
                 throw new DukeException(ui.showInvalidCommand());
             }
