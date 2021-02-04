@@ -29,7 +29,7 @@ public class TaskList {
     public TaskList findTasks(String term) {
         List<Task> result = new ArrayList<Task>();
         for (Task task : tasks) {
-            if(task.desc.contains(term)) {
+            if (task.desc.contains(term)) {
                 result.add(task);
             }
         }
@@ -77,9 +77,7 @@ public class TaskList {
 
     /**
      * Add task.
-     *
      * @param task Task to be added
-     * @return Done task.
      */
     public void add(Task task) {
         this.tasks.add(task);

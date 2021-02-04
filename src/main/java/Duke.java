@@ -1,10 +1,5 @@
 public class Duke {
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
-    }
-
     private boolean isActive;
     private Storage storage;
     private TaskList taskList;
@@ -17,6 +12,11 @@ public class Duke {
         this.taskList = new TaskList(storage.loadTasks());
         this.ui = new Ui();
         this.parser = new Parser(taskList, ui);
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.start();
     }
 
     private void start() {

@@ -20,7 +20,7 @@ public class Deadline extends Task {
      * @return Deadline object
      * @throws DukeException If parsing input fails
      */
-    static public Deadline parse(String input) throws DukeException {
+    public static Deadline parse(String input) throws DukeException {
         String[] arr = input.split("deadline");
         if (arr.length < 2) {
             throw new DukeException("Deadline description cannot be empty");

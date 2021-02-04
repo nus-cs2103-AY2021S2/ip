@@ -20,7 +20,7 @@ public class Event extends Task {
      * @return Event object
      * @throws DukeException If parsing input fails
      */
-    static public Event parse(String input) throws DukeException {
+    public static Event parse(String input) throws DukeException {
         String[] arr = input.split("event");
         if (arr.length < 2) {
             throw new DukeException("Event description cannot be empty");
