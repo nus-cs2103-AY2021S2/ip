@@ -1,6 +1,6 @@
 package dbot.command;
 
-import dbot.exception.DukeException;
+import dbot.exception.DBotException;
 import dbot.storage.Storage;
 import dbot.task.Task;
 import dbot.tasklist.TaskList;
@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
         TaskList relevantTasks = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void quietExecute(TaskList tasks, Storage storage) throws DukeException {
-
+    public void quietExecute(TaskList tasks, Storage storage) throws DBotException {
+        throw new IllegalArgumentException("The 'find' command cannot be used quietly.");
     }
 }
