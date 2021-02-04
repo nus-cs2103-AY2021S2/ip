@@ -9,14 +9,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-
 /**
  * Duke program maintains a taskList for user to track tasks.
  * Reads user input tasks(todo, event, deadline).
  * Able to perform add, delete, markasDone tasks.
- *
- * @author Oh Jun Ming
- * @version 1.0
  */
 
 public class Duke {
@@ -24,7 +20,10 @@ public class Duke {
     private Ui ui;
     private TaskList taskList;
 
-    Duke() {
+    /**
+     * Initialise Duke chatbot.
+     */
+    public Duke() {
         ui = new Ui();
         storage = new Storage();
         try {
@@ -32,16 +31,6 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("file not found");
         }
-    }
-
-    /**
-     * Initialise scanner.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.execute();
     }
 
     /**
@@ -67,5 +56,23 @@ public class Duke {
             }
         }
         ui.exit();
+    }
+
+    /**
+     * Initialise scanner.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.execute();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
