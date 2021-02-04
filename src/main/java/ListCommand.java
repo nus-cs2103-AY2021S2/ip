@@ -9,7 +9,7 @@ public class ListCommand extends Command {
      * @param ui Ui that deals with interaction with the user.
      * @param storage Storage that deals with storing TaskList into hard drive.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printTasks(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printTasks(taskList);
     }
 }
