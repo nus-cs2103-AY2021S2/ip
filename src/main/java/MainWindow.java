@@ -30,17 +30,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+//        String sage = " ____       __      ________  _______.\n"
+//                    + "/  __|     /  \    /   _____||   ____|\n"
+//                    + "|  |__    / __ \   |  |  ___ |  |__.  \n"
+//                    + "\__   \  / /__\ \  |  | |_  ||   __|  \n"
+//                    + " __|  | /  ____  \ |  |___| ||  |____.\n"
+//                    + "|_____//__/    \__\\________/|_______|\n";
+        String sageFormattedSpacing = "  ____          _        _______     ______.\n"
+                + "/    __|       /  \\     /    _____|  |     ___|\n"
+                + "|    |__      / __ \\    |   |  ___    |    |__.  \n"
+                + "\\__    \\    / /__\\ \\  |   |  |__  |  |     __|  \n"
+                + " __|    |  /   ___   \\ |   |___|   |  |    |___.\n"
+                + "|_____//__/      \\__\\\\______/  |_______|\n";
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hello from\n" + logo + "\n" +
+                DialogBox.getDukeDialog(sageFormattedSpacing +
                         "    ________________________________________________________\n" +
-                        "     Duke... booted...\n" +
-                        "     requesting tasks\n" +
-                        "    ________________________________________________________\n\n", dukeImage));
+                        "     Unique Skill: Sage\n" +
+                        "     >Acquired\n" +
+                        "    ________________________________________________________\n", dukeImage));
     }
 
     public void setDuke(Duke d) {
