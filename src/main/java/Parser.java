@@ -16,7 +16,8 @@ public class Parser {
      * @param  tasks The TaskList object containing all tasks.
      * @param  str The string to be parsed.
      */
-    public static void parse(TaskList tasks, String str) throws DukeException {
+    public static String parse(TaskList tasks, String str) throws DukeException {
+        String output = "";
         Pattern pDone = Pattern.compile("^(done )([0-9]+)");
         Matcher mDone = pDone.matcher(str);
 
@@ -36,52 +37,53 @@ public class Parser {
         Matcher mFind = pFind.matcher((str));
 
         if (str.equals("list")) {
-            System.out.println("Here are the tasks in your tasks!");
+            output += "Here are the tasks in your tasks!\n";
             tasks.getNumItems();
-            tasks.printTasks();
+            output += tasks.printTasksToString();
         } else if (mDone.find()) {
-            System.out.println("Good job, I've marked the task as done!");
+            output += "Good job, I've marked the task as done!\n";
             int n = Integer.parseInt(mDone.group(2)) - 1;
             tasks.getAtInd(n).markAsDone();
-            System.out.println(tasks.getAtInd(n));
+            output += tasks.getAtInd(n);
         } else if (mTodo.find()) {
-            System.out.println(mTodo.group(2));
+            output += mTodo.group(2) + "\n";
             if (mTodo.group(2).equals("")) {
                 throw new DukeException("The description of a Todo cannot be empty!");
             }
             tasks.addTodo(mTodo.group(2));
-            System.out.println("Got it!. I have added the following task:");
-            System.out.println(tasks.getAtInd(tasks.getNumItems() - 1));
-            System.out.println("Now you have " + tasks.getNumItems() + " tasks in the tasks.");
+            output += "Got it!. I have added the following task:\n";
+            output += tasks.getAtInd(tasks.getNumItems() - 1) + "\n";
+            output += "Now you have " + tasks.getNumItems() + " tasks in the tasks.";
         } else if (mDeadline.find()) {
             if (mDeadline.group(2).equals("")) {
                 throw new DukeException("The description of a Deadline cannot be empty!");
             }
-            System.out.println(mDeadline.group(4));
+            //output += mDeadline.group(4) + "\n";
             tasks.addDeadline(mDeadline.group(2), mDeadline.group(4));
-            System.out.println("Got it!. I have added the following task:");
-            System.out.println(tasks.getAtInd(tasks.getNumItems() - 1));
-            System.out.println("Now you have " + tasks.getNumItems() + " tasks in the tasks.");
+            output += "Got it!. I have added the following task:" + "\n";
+            output += tasks.getAtInd(tasks.getNumItems() - 1) + "\n";
+            output += "Now you have " + tasks.getNumItems() + " tasks in the tasks.";
         } else if (mEvent.find()) {
             if (mEvent.group(2).equals("")) {
                 throw new DukeException("The description of an Event cannot be empty!");
             }
             tasks.addEvent(mEvent.group(2), mEvent.group(4));
-            System.out.println("Got it!. I have added the following task:");
-            System.out.println(tasks.getAtInd(tasks.getNumItems() - 1));
-            System.out.println("Now you have " + tasks.getNumItems() + " tasks in the tasks.");
+            output += "Got it!. I have added the following task:" + "\n";
+            output += tasks.getAtInd(tasks.getNumItems() - 1) + "\n";
+            output += "Now you have " + tasks.getNumItems() + " tasks in the tasks.";
         } else if (mDelete.find()) {
-            System.out.println("Okay I have removed this task!");
+            output += "Okay I have removed this task!" + "\n";
             int n = Integer.parseInt(mDelete.group(2)) - 1;
-            System.out.println(tasks.getAtInd(n));
+            output += tasks.getAtInd(n) + "\n";
             tasks.deleteTask(n);
-            System.out.println("Now you have " + tasks.getNumItems() + " tasks in the list.");
+            output += "Now you have " + tasks.getNumItems() + " tasks in the list.";
         } else if (mFind.find()) {
-            System.out.println("Here are the matching tasks in your list!");
+            output += "Here are the matching tasks in your list!" + "\n";
             String word = mFind.group(2);
-            tasks.matchTasks(word);
+            output += tasks.matchTasks(word);
         } else {
             throw new DukeException("I don't know what that means!!!!");
         }
+        return output;
     }
 }

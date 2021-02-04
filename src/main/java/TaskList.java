@@ -11,7 +11,7 @@ public class TaskList {
      * Constructor for this TaskList object.
      */
     TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
         this.numItems = 0;
     }
 
@@ -53,12 +53,15 @@ public class TaskList {
     }
 
     /**
-     * Prints all tasks in the TaskList
+     * Prints all tasks in the TaskList as a string
      */
-    public void printTasks() {
+    public String printTasksToString() {
+        String output = "";
         for (int i = 0; i < numItems; i++) {
-            System.out.println(i+1 + "." + tasks.get(i));
+            int index = i + 1;
+            output += index + "." + tasks.get(i) + "\n";
         }
+        return output;
     }
 
     /**
@@ -83,13 +86,16 @@ public class TaskList {
      * Prints the tasks which contain the given string.
      * @param str given keyword string
      */
-    public void matchTasks(String str) {
+    public String matchTasks(String str) {
+        String output = "";
         int n = 0;
         for (int i = 0; i < numItems; i++) {
+            int index = n + 1;
             if (tasks.get(i).toString().contains(str)) {
-                System.out.println(n+1 + "." + tasks.get(i));
+                output += index + "." + tasks.get(i);
                 n++;
             }
         }
+        return output;
     }
 }
