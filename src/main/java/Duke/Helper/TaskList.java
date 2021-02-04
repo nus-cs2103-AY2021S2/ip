@@ -131,4 +131,25 @@ public class TaskList {
         }
         return result;
     }
+
+    /**
+     * Statistics about the items: number of tasks for each type and number of done and not done task within that type.
+     * @return a 3x2 matrix represent the statistics.
+     */
+    public int[][] statistics() {
+        int[][] result = new int[3][2]; //td: first row, deadline: second row, event: third row; done: second col, not done: first col
+        for (Task task : list) {
+            int row = -1;
+            int col = task.getStatusNumber();
+            if (task.getType().equals("T")) {
+                row = 0;
+            } else if (task.getType().equals("D")) {
+                row = 1;
+            } else if (task.getType().equals("E")) {
+                row = 2;
+            }
+            result[row][col] += 1;
+        }
+        return result;
+    }
 }

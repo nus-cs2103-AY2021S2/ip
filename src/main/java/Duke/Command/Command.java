@@ -6,7 +6,8 @@ package Duke.Command;
 public enum Command {
     LIST("list"), BYE("bye"),
     DONE("done"), DELETE("delete"), FIND("find"),
-    EVENT("event"), DEADLINE("deadline"), TODO("todo");
+    EVENT("event"), DEADLINE("deadline"), TODO("todo"),
+    STATISTICS("stat");
 
     /**
      * The Command e-num constructor has 1 parameter: The string representation for the command.
