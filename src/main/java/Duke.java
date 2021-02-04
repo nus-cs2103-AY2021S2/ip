@@ -39,13 +39,13 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        /*
+
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
         helloWorld.setFont(new Font("Arial", 50));
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
-        */
+
         /*
         Stage s = new Stage();
         Label l = new Label("sdf");
@@ -127,6 +127,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -143,7 +144,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return "Duke heard: " + input;
     }
 
