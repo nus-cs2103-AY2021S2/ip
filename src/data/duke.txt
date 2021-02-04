@@ -1,0 +1,3 @@
+T ; 0 ; dog
+E ; 0 ; project meeting ; 2019-10-15
+T ; 0 ; bath
