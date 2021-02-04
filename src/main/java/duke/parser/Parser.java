@@ -18,6 +18,11 @@ import duke.command.TodoCommand;
 import duke.exception.CommandNotFoundException;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
+import duke.task.Deadline;
+import duke.task.EnumTask;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 
 /**
@@ -36,11 +41,14 @@ public class Parser {
         Command command;
 
         if (potentialCommand.equalsIgnoreCase("TODO")) {
-            command = new TodoCommand(input);
+            String description = input.substring(endIndex).strip();
+            command = new TodoCommand(description);
         } else if (potentialCommand.equalsIgnoreCase("DEADLINE")) {
-            command = new DeadlineCommand(input);
+            String[] descriptions = input.substring(endIndex).strip().split("/by");
+            command = new DeadlineCommand(descriptions);
         } else if (potentialCommand.equalsIgnoreCase("EVENT")) {
-            command = new EventCommand(input);
+            String[] descriptions = input.substring(endIndex).strip().split("/at");
+            command = new EventCommand(descriptions);
         } else if (potentialCommand.equalsIgnoreCase("LIST")) {
             command = new ListCommand();
         } else if (potentialCommand.equalsIgnoreCase("DONE")) {
@@ -55,6 +63,24 @@ public class Parser {
             throw new CommandNotFoundException("What do you mean? I do not know this command.");
         }
         return command;
+    }
+
+    public static Task parseTask(EnumTask taskType, String ... descriptions) throws DukeException {
+        String name = descriptions[0];
+        switch (taskType) {
+        case TODO:
+            return new Todo(name);
+        case DEADLINE:
+            String deadline = descriptions[1].strip();
+            LocalDateTime cutOffTime = parseDateTime(deadline);
+            return new Deadline(name, cutOffTime);
+        case EVENT:
+            String eventTime = descriptions[1].strip();
+            LocalDateTime startingTime = parseDateTime(eventTime);
+            return new Event(name, startingTime);
+        default:
+            throw new DukeException("I do not know this task");
+        }
     }
 
     /**

@@ -35,8 +35,7 @@ public class DoneCommand extends IndexCommand {
             Task completedTask = tasks.get(index);
             completedTask.complete();
             storage.updateInFile(tasks);
-            System.out.println(" Marked. How cool is that?");
-            System.out.println("  " + completedTask);
+            ui.printTaskCompleted(completedTask);
             return ui.completeTaskResponse(completedTask);
         } else {
             throw new TaskIndexOutOfBoundException("There is no task numbered " + (index + 1) + "!");

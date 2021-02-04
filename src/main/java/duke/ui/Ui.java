@@ -56,6 +56,17 @@ public class Ui {
         System.out.println(" Now you have " + tasks.size() + " tasks.");
     }
 
+    public void printTaskRemoved(Task task, TaskList tasks) {
+        System.out.println(" Following task is removed:");
+        System.out.println("  " + task);
+        System.out.println(" Now you have " + tasks.size() + " tasks.");
+    }
+
+    public void printTaskCompleted(Task task) {
+        System.out.println(" Marked. How cool is that?");
+        System.out.println("  " + task);
+    }
+
     /**
      * Prints all the tasks in the TaskList.
      * @param tasks The TaskList to be printed.

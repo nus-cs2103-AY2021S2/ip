@@ -35,9 +35,7 @@ public class DeleteCommand extends IndexCommand {
             Task removingTask = tasks.get(index);
             tasks.remove(index);
             storage.updateInFile(tasks);
-            System.out.println(" Following task is removed:");
-            System.out.println("  " + removingTask);
-            System.out.println(" Now you have " + tasks.size() + " tasks.");
+            ui.printTaskRemoved(removingTask, tasks);
             return ui.deleteTaskResponse(removingTask, tasks);
         } else {
             throw new TaskIndexOutOfBoundException("There is no task numbered " + (index + 1) + "!");

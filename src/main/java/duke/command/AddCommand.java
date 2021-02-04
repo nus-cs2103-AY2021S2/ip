@@ -22,8 +22,6 @@ public abstract class AddCommand extends Command {
         ui.printTaskAdded(task, tasks);
     }
 
-    protected abstract Task getTask() throws DukeException;
-
     /**
      * Returns false if this command is not ExitCommand.
      * @return false.

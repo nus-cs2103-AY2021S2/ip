@@ -8,6 +8,8 @@ import duke.exception.InvalidDateTimeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.EnumTask;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -15,14 +17,14 @@ import duke.ui.Ui;
  * A class represents a DeadlineCommand.
  */
 public class DeadlineCommand extends AddCommand {
-    private final String fullCommand;
+    private final String[] descriptions;
 
     /**
      * Constructs a DeadlineCommand.
-     * @param fullCommand Full command from the user's input.
+     * @param descriptions Full command from the user's input.
      */
-    public DeadlineCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public DeadlineCommand(String[] descriptions) {
+        this.descriptions = descriptions;
     }
 
     /**
@@ -34,25 +36,15 @@ public class DeadlineCommand extends AddCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Deadline deadline = getTask();
+        String name = descriptions[0];
+        if (name.equals("")) {
+            throw new DescriptionMissingException("Please include the name!");
+        }
+        if (descriptions.length < 2) {
+            throw new DescriptionMissingException("Please include the date and time!");
+        }
+        Task deadline = Parser.parseTask(EnumTask.DEADLINE, name, descriptions[1]);
         super.addThisTask(tasks, deadline, ui, storage);
         return ui.addTaskResponse(deadline, tasks);
-    }
-
-    @Override
-    protected Deadline getTask() throws DescriptionMissingException, InvalidDateTimeException {
-        String nameDeadline = fullCommand.substring(8).strip();
-        if (nameDeadline.equals("")) {
-            throw new DescriptionMissingException("Argument missing! Please specify the name!");
-        }
-        String[] nameAndDeadline = nameDeadline.split("/by");
-        if (nameAndDeadline.length < 2) {
-            throw new DescriptionMissingException("Argument missing! Please include the date and time!");
-        }
-        String name = nameAndDeadline[0].strip();
-        String deadline = nameAndDeadline[1].strip();
-
-        LocalDateTime cutOffTime = Parser.parseDateTime(deadline);
-        return new Deadline(name, cutOffTime);
     }
 }

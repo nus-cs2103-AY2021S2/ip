@@ -7,7 +7,9 @@ import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.task.EnumTask;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -15,14 +17,14 @@ import duke.ui.Ui;
  * A class represents an EventCommand.
  */
 public class EventCommand extends AddCommand {
-    private final String fullCommand;
+    private final String[] descriptions;
 
     /**
      * Constructs an EventCommand.
-     * @param fullCommand The full command from user's input.
+     * @param descriptions The full command from user's input.
      */
-    public EventCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public EventCommand(String[] descriptions) {
+        this.descriptions = descriptions;
     }
 
     /**
@@ -34,26 +36,15 @@ public class EventCommand extends AddCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Event event = getTask();
+        String name = descriptions[0];
+        if (name.equals("")) {
+            throw new DescriptionMissingException("Please include the name!");
+        }
+        if (descriptions.length < 2) {
+            throw new DescriptionMissingException("Please include the date and time!");
+        }
+        Task event = Parser.parseTask(EnumTask.EVENT, name, descriptions[1]);
         super.addThisTask(tasks, event, ui, storage);
         return ui.addTaskResponse(event, tasks);
-    }
-
-    @Override
-    protected Event getTask() throws DescriptionMissingException, InvalidDateTimeException {
-        String nameDate = fullCommand.substring(5).strip();
-        if (nameDate.equals("")) {
-            throw new DescriptionMissingException("Argument missing! Please specify the name!");
-        }
-
-        String[] nameAndDate = nameDate.split("/at");
-        if (nameAndDate.length < 2) {
-            throw new DescriptionMissingException("Argument missing! Please include the date and time!");
-        }
-        String name = nameAndDate[0].strip();
-        String date = nameAndDate[1].strip();
-
-        LocalDateTime startTime = Parser.parseDateTime(date);
-        return new Event(name, startTime);
     }
 }

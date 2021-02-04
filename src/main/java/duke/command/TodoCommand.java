@@ -1,23 +1,26 @@
 package duke.command;
 
 import duke.exception.DescriptionMissingException;
+import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.task.EnumTask;
+import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 import duke.ui.Ui;
 
 /**
  * A class represents a TodoCommand.
  */
 public class TodoCommand extends AddCommand {
-    private final String fullCommand;
+    private final String description;
 
     /**
      * Constructs a TodoCommand.
-     * @param fullCommand The full command from the user's input.
+     * @param description The full command from the user's input.
      */
-    public TodoCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public TodoCommand(String description) {
+        this.description = description;
     }
 
     /**
@@ -28,19 +31,13 @@ public class TodoCommand extends AddCommand {
      * @throws DescriptionMissingException If the input is not complete.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DescriptionMissingException {
-        Todo todo = getTask();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String name = description;
+        if (name.equals("")) {
+            throw new DescriptionMissingException("Please include the name!");
+        }
+        Task todo = Parser.parseTask(EnumTask.TODO, description);
         super.addThisTask(tasks, todo, ui, storage);
         return ui.addTaskResponse(todo, tasks);
-    }
-
-    @Override
-    protected Todo getTask() throws DescriptionMissingException {
-        String name = fullCommand.substring(4).strip();
-        if (name.equals("")) {
-            throw new DescriptionMissingException("Argument missing! Please include the name!");
-        } else {
-            return new Todo(name);
-        }
     }
 }
