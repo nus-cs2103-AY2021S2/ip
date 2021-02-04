@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.io.IOException;
 
@@ -14,8 +15,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> list = new ArrayList<>();
+    public ArrayList<Task> loadAllTasks() throws DukeException {
+        ArrayList<Task> taskList = new ArrayList<>();
+        System.out.println(filePath);
         File f = new File(filePath);
 
         if(f.exists() && !f.isDirectory()) {
@@ -31,7 +33,7 @@ public class Storage {
                             td.markAsDone();
                         }
 
-                        list.add(td);
+                        taskList.add(td);
                         break;
 
                     case "D":
@@ -41,7 +43,7 @@ public class Storage {
                             d.markAsDone();
                         }
 
-                        list.add(d);
+                        taskList.add(d);
                         break;
 
                     case "E":
@@ -50,13 +52,14 @@ public class Storage {
                         if (dataArr[1].equals("1")) {
                             e.markAsDone();
                         }
-                        list.add(e);
+                        taskList.add(e);
                         break;
                     default:
                         throw new DukeException("Line cannot be read");
                     }
                 }
-                return list;
+                System.out.println("Successfully loaded all tasks");
+                return taskList;
             } catch (IOException e) {
                 System.out.println("Error reading file" + e);
                 throw new DukeException("Error reading file");
@@ -78,12 +81,12 @@ public class Storage {
             FileWriter mw = new FileWriter(filePath, true);
             switch (taskType) {
             case "T":
-                mw.write("\n" + taskType + " | " + done + " | " + description);
+                mw.write(taskType + " | " + done + " | " + description + "\n");
                 mw.close();
                 break;
             case "D":
             case "E":
-                mw.write("\n" + taskType + " | " + done + " | " + description + " | " + deadline);
+                mw.write(taskType + " | " + done + " | " + description + " | " + deadline + "\n");
                 mw.close();
             }
         } catch (IOException e) {

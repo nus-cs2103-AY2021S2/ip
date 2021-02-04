@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.io.File;
 
 /**
  *  Juke is a chatbot that helps users keep track of tasks.
@@ -23,6 +24,7 @@ import java.nio.file.Files;
  */
 public class Duke {
 
+
         private Storage storage;
         private TaskList tasks;
         private Ui ui;
@@ -31,8 +33,9 @@ public class Duke {
             ui = new Ui();
             storage = new Storage(filePath);
             try {
-                tasks = new TaskList(storage.load());
+                tasks = new TaskList(storage.loadAllTasks());
             } catch (DukeException e) {
+                System.out.println(tasks);
                 ui.showLoadingError();
                 tasks = new TaskList();
             }

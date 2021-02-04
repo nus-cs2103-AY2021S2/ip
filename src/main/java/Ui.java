@@ -9,7 +9,7 @@ public class Ui {
     }
 
     public void printHorizontalLine() {
-        System.out.println("    ___________________________________________________________");
+        System.out.println("_____________________________________");
     }
 
     public void showWelcome() {
@@ -29,5 +29,9 @@ public class Ui {
 
     public void showError(String error) {
         System.out.println(error);
+    }
+
+    public void print(String message) {
+        System.out.println(message);
     }
 }
