@@ -12,57 +12,71 @@ public class Parser {
     public Parser() {
     }
 
+    /**
+     * This is the the method for making sense of the user commands
+     * @param arrayList takes in the arrayList
+     * @param path specifies the path to the file
+     * @param input takes in the a scanner to scan
+     * @return Nothing.
+     */
     public String makingSenseOfUserCommand(ArrayList<Task> arrayList, String path, String input) {
+           String holder;
 
-      //while (scanner.hasNextLine()) {
-       //     input = scanner.nextLine();
-
+            try {
                 if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
                         || input.contains("list") || input.contains("done") || input.contains("delete") || input.contains("find"))) {
-                    return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } else if (input.equals("todo") || input.equals("event") || input.equals("deadline")
                         || input.equals("done") || input.equals("delete") || input.equals("find")) {
-                    return "☹ OOPS!!! The description of a todo cannot be empty.";
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }                                // can add in more exceptions
+            } catch (DukeException e) {
+                holder = e.getMessage();
+            }
+            if (input.contains("bye")) {
 
-            if (input.equals("bye")) {
-                return "Bye. Hope to see you again soon!";
+                holder = "Bye. Hope to see you again soon!";
+
 
             } else if (input.equals("list")) {
 
-                String one = "Here are the tasks in your list:";
+                holder = "Here are the tasks in your list:";
                 for (Task m : arrayList) {
-                    one = one + m.index + ". " + m + "\n";
+                    holder = holder.concat(m.index + ". " + m);
+                    holder = holder.concat("\n");
                 }
-                return one;
 
 
-            } else if (input.contains("done") && !(input.equals("done"))) {
+            } else if (input.contains("done ")) {
                 int x = Integer.parseInt(input.substring(5));
-
+                try {
                     if (x > arrayList.size()) {
-                        return "☹ OOPS!!! Sorry item no found :-(";
+                        throw new DukeException("☹ OOPS!!! Sorry item no found :-(");
                     } else {
 
-                       String one = "Nice! I've marked this task as done:";
-                        one = one + arrayList.get(x - 1).markAsDone().getStatusIcon() + " "
-                                + arrayList.get(x - 1).description;
+                        holder = "Nice! I've marked this task as done:";
+                        holder = holder.concat(arrayList.get(x - 1).markAsDone().getStatusIcon() + " "
+                                + arrayList.get(x - 1).description);
                         arrayList.set(x - 1, arrayList.get(x - 1).markAsDone());
-                        return one;
 
                     }
 
-            } else if (input.contains("todo") && !(input.equals("todo"))) {
+                } catch (DukeException e) {
+                    holder = e.getMessage();
+                }
 
-                String one = "Got it. I've added this task: "+ "\n";
+            } else if (input.contains("todo ")) {
+
+                holder = "Got it. I've added this task: ";
                 Task task = new Todo(input.substring(5));
                 new TaskList().addToList(arrayList, task);
-                one = one + "Now you have " + arrayList.size() + " task(s) in the list";
-                return one;
+                holder = holder.concat("Now you have " + arrayList.size() + " task(s) in the list");
 
 
-            } else if (input.contains("deadline") && !(input.equals("deadline"))) {
-                String one = "Got it. I've added this task: "+ "\n";
+
+            } else if (input.contains("deadline")) {
+
+                holder = "Got it. I've added this task: ";
                 String[] parts = input.split("/",2);
                 String part1 = parts[0];
                 String part2 = parts[1];
@@ -81,11 +95,11 @@ public class Parser {
                     new TaskList().addToList(arrayList, task);
                 }
 
-                one = one + "Now you have " + arrayList.size() + " task(s) in the list";
-                return one;
+                holder = holder.concat("Now you have " + arrayList.size() + " task(s) in the list");
 
-            } else if (input.contains("event") && !(input.equals("event"))) {
-               String one = "Got it. I've added this task: " + "\n";
+
+            } else if (input.contains("event ")) {
+                holder = "Got it. I've added this task: ";
                 String[] parts = input.split("/",2);
                 String part1 = parts[0];
                 String part2 = parts[1];
@@ -104,27 +118,28 @@ public class Parser {
                     Task task = new Event(part1.substring(6), part2.substring(3));
                     new TaskList().addToList(arrayList, task);
                 }
-                one = one + "Now you have " + arrayList.size() + " task(s) in the list";
-                return one;
+                holder = holder.concat("Now you have " + arrayList.size() + " task(s) in the list");
 
-            }  else if (input.contains("delete") && !(input.equals("delete"))) {
+
+            }  else if (input.contains("delete ")) {
 
                 int deletedNumber = Integer.parseInt(input.substring(7));
-
+                try {
                     if (deletedNumber > arrayList.size()) {
-                        return "☹ OOPS!!! Sorry item no found :-(";
+                        throw new DukeException("☹ OOPS!!! Sorry item no found :-(");
                     } else {
-                        String one = "Noted. I've removed this task: " + "\n";
+                        holder = "Noted. I've removed this task: ";
                         new TaskList().deleteFromList(arrayList, deletedNumber);
-                        one = one + "Now you have " + arrayList.size() + " task(s) in the list";
-                        return one;
+                        holder = holder.concat("Now you have " + arrayList.size() + " task(s) in the list");
+
                     }
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
 
-            } else if (input.contains("find") && !(input.equals("find"))) {
-                String one = "Here are the matching tasks in your list:";
-
+            } else if (input.contains("find ")) {
+                holder = "Here are the matching tasks in your list: \n";
                 ArrayList<Task> tt = new ArrayList<>();
-
                 int counterOne = 1;
 
                 for (Task ttt :arrayList) {
@@ -136,12 +151,14 @@ public class Parser {
                 }
 
                 for (Task m : tt) {
-                    String two = m.index + ". " + m;
-                    two = two +"\n";
-                    return two;
+                    holder = holder.concat(m.index + ". " + m);
+                    holder = holder.concat("\n");
                 }
 
+            } else {
+                holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             }
+
             int counterTwo = 1;
             for (Task s : arrayList) {
                 s.index = counterTwo;
@@ -149,8 +166,9 @@ public class Parser {
             }
             new Storage().savingFile(arrayList, path);
 
-     return "\n";
-}
+            return holder;
+        }
+
+    }
 
 
-}
