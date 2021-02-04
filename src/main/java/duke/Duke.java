@@ -8,9 +8,9 @@ import duke.ui.Ui;
 import duke.util.Storage;
 
 /**
- * The Apollo bot handling Storage, TaskList and Ui.
+ * The Duke bot handling Storage, TaskList and Ui.
  */
-public class Apollo {
+public class Duke {
 
     private static final String BOT_NAME = "Apollo the Robot";
     private static final String STORAGE_PATH = "data/ApolloTaskData.txt";
@@ -19,9 +19,9 @@ public class Apollo {
     private final Ui ui;
 
     /**
-     * Constructor for Apollo.
+     * Constructor for Duke.
      */
-    public Apollo() {
+    public Duke() {
         this.storageHandler = new Storage(STORAGE_PATH);
         this.ui = new Ui();
 
@@ -33,12 +33,12 @@ public class Apollo {
         }
 
         ui.displayWelcomeText(BOT_NAME);
-        ui.startInputManager(this);
+        // ui.startInputManager(this);
     }
 
     /**
      * Gets Apollo's TaskList.
-      * @return Apollo's TaskList.
+     * @return Apollo's TaskList.
      */
     public TaskList getTasks() {
         return taskList;
@@ -53,5 +53,16 @@ public class Apollo {
         } catch (IOException | DukeException e) {
             Ui.showMessageBetweenLines(e.getMessage());
         }
+    }
+
+    /**
+     * Gets a response from a command execution to be displayed in the GUI.
+     * @param input User input that is to be parsed.
+     * @return String with Duke's response to a user's input.
+     */
+    String getResponse(String input) {
+        ui.handleInput(this, input);
+        String message = ui.getMessages();
+        return message;
     }
 }

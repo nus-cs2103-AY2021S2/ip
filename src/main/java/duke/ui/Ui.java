@@ -1,8 +1,10 @@
 package duke.ui;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
-import duke.Apollo;
+import duke.Duke;
 import duke.util.Parser;
 
 /**
@@ -10,6 +12,7 @@ import duke.util.Parser;
  */
 public class Ui {
 
+    private static Queue<String> messageQueue = new LinkedList<>();
     public static final String INDENTATION = "    ";
 
     /**
@@ -18,6 +21,7 @@ public class Ui {
      */
     public static void showMessageWithIndentation(String s) {
         System.out.println(INDENTATION + " " + s);
+        Ui.addToMessageQueue(s);
     }
 
     /**
@@ -26,6 +30,7 @@ public class Ui {
     public static void showLine() {
         String line = "____________________________________________________________";
         System.out.println(INDENTATION + line);
+        Ui.addToMessageQueue("");
     }
 
     /**
@@ -99,7 +104,7 @@ public class Ui {
      * Starts the input manager which handles user input.
      * @param apollo The chat bot that the input manager is to handle inputs for.
      */
-    public void startInputManager(Apollo apollo) {
+    public void startInputManager(Duke apollo) {
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNext()) {
@@ -111,5 +116,43 @@ public class Ui {
                 Ui.showMessageBetweenLines("An error occurred:", e.getMessage());
             }
         }
+    }
+
+    /**
+     * Passes input from Duke's GUI to Parser to execute related commands.
+     * @param apollo Instance of Duke.
+     * @param input User input to be passed to Parser.
+     */
+    public void handleInput(Duke apollo, String input) {
+        try {
+            Parser.handleInput(input, apollo.getTasks().getTaskList(), apollo);
+        } catch (Exception e) {
+            Ui.showMessageBetweenLines("An error occurred:", e.getMessage());
+        }
+    }
+
+    public String getMessages() {
+        StringBuilder message = new StringBuilder();
+        while (this.hasPendingMessage()) {
+            message.append(messageQueue.poll() + "\n");
+        }
+
+        return message.toString().trim();
+    }
+
+    public static void addToMessageQueue(String s) {
+        try {
+            messageQueue.offer(s);
+        } catch (Exception e) {
+            showErrorMessage(e.getMessage());
+        }
+    }
+
+    public static void clearMessageQueue() {
+        messageQueue.clear();
+    }
+
+    public static boolean hasPendingMessage() {
+        return !messageQueue.isEmpty();
     }
 }
