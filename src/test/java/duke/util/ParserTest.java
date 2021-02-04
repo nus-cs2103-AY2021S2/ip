@@ -31,6 +31,8 @@ public class ParserTest {
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete a"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete 1a2"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete    1"));
+
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("search"));
     }
 
     @Test
@@ -45,5 +47,11 @@ public class ParserTest {
         assertThrows(DukeInputException.class, () -> Parser.checkImportFormat(";D;1;a;;2011-01-01"));
         assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("a"));
         assertThrows(DukeInputException.class, () -> Parser.checkImportFormat(""));
+    }
+
+    @Test
+    public void parseYesNoTest() {
+        assertThrows(DukeInputException.class, () -> Parser.parseYesNo(""));
+        assertThrows(DukeInputException.class, () -> Parser.parseYesNo("a"));
     }
 }
