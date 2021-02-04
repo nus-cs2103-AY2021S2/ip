@@ -1,6 +1,4 @@
-[T][X] cry
-[T][X] shout
 [D][X] hw (by: 2019-12-01)
 [T][X] eat
 [E][X] work (at: home)
-[T][ ] sleep
+[T][ ] run
