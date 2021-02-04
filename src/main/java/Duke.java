@@ -15,18 +15,6 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    /*
-        public static void main(String[] args) throws FileNotFoundException {
-
-
-            System.out.println("--------------------------");
-            System.out.println("Hello! I'm Duke");
-            System.out.println("What can I do for you?");
-            System.out.println("--------------------------");
-
-        }
-
-     */
     public String getResponse(String input) {
         ArrayList<Task> arrayList = new ArrayList<>();
         String path = "duke.txt";

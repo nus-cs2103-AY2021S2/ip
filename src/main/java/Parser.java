@@ -22,25 +22,20 @@ public class Parser {
     public String makingSenseOfUserCommand(ArrayList<Task> arrayList, String path, String input) {
            String holder;
 
-            try {
-                if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
+
+           if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
                         || input.contains("list") || input.contains("done") || input.contains("delete") || input.contains("find"))) {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                } else if (input.equals("todo") || input.equals("event") || input.equals("deadline")
+                    holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-("+ "\n";
+           } else if (input.equals("todo") || input.equals("event") || input.equals("deadline")
                         || input.equals("done") || input.equals("delete") || input.equals("find")) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                }                                // can add in more exceptions
-            } catch (DukeException e) {
-                holder = e.getMessage();
-            }
-            if (input.contains("bye")) {
+                    holder = "☹ OOPS!!! The description of a todo cannot be empty."+ "\n";
+           } else if (input.contains("bye")) {
 
-                holder = "Bye. Hope to see you again soon!";
-
+                holder = "Bye. Hope to see you again soon!"+ "\n";
 
             } else if (input.equals("list")) {
 
-                holder = "Here are the tasks in your list:";
+                holder = "Here are the tasks in your list:" + "\n";
                 for (Task m : arrayList) {
                     holder = holder.concat(m.index + ". " + m);
                     holder = holder.concat("\n");
@@ -51,10 +46,10 @@ public class Parser {
                 int x = Integer.parseInt(input.substring(5));
                 try {
                     if (x > arrayList.size()) {
-                        throw new DukeException("☹ OOPS!!! Sorry item no found :-(");
+                        throw new DukeException("☹ OOPS!!! Sorry item no found :-(\n");
                     } else {
 
-                        holder = "Nice! I've marked this task as done:";
+                        holder = "Nice! I've marked this task as done:"+ "\n";
                         holder = holder.concat(arrayList.get(x - 1).markAsDone().getStatusIcon() + " "
                                 + arrayList.get(x - 1).description);
                         arrayList.set(x - 1, arrayList.get(x - 1).markAsDone());
@@ -67,7 +62,7 @@ public class Parser {
 
             } else if (input.contains("todo ")) {
 
-                holder = "Got it. I've added this task: ";
+                holder = "Got it. I've added this task: "+ "\n";
                 Task task = new Todo(input.substring(5));
                 new TaskList().addToList(arrayList, task);
                 holder = holder.concat("Now you have " + arrayList.size() + " task(s) in the list");
@@ -76,7 +71,7 @@ public class Parser {
 
             } else if (input.contains("deadline")) {
 
-                holder = "Got it. I've added this task: ";
+                holder = "Got it. I've added this task: "+ "\n";
                 String[] parts = input.split("/",2);
                 String part1 = parts[0];
                 String part2 = parts[1];
@@ -99,7 +94,7 @@ public class Parser {
 
 
             } else if (input.contains("event ")) {
-                holder = "Got it. I've added this task: ";
+                holder = "Got it. I've added this task: "+ "\n";
                 String[] parts = input.split("/",2);
                 String part1 = parts[0];
                 String part2 = parts[1];
@@ -128,7 +123,7 @@ public class Parser {
                     if (deletedNumber > arrayList.size()) {
                         throw new DukeException("☹ OOPS!!! Sorry item no found :-(");
                     } else {
-                        holder = "Noted. I've removed this task: ";
+                        holder = "Noted. I've removed this task: "+ "\n";
                         new TaskList().deleteFromList(arrayList, deletedNumber);
                         holder = holder.concat("Now you have " + arrayList.size() + " task(s) in the list");
 
@@ -156,7 +151,7 @@ public class Parser {
                 }
 
             } else {
-                holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-("+ "\n";
             }
 
             int counterTwo = 1;
@@ -166,7 +161,7 @@ public class Parser {
             }
             new Storage().savingFile(arrayList, path);
 
-            return holder;
+            return holder+ "\n";
         }
 
     }
