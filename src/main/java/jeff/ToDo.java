@@ -3,7 +3,7 @@ package jeff;
 /**
  * Represents a ToDo, child class of Task.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Constructor for Event.
