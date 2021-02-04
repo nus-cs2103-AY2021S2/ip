@@ -7,7 +7,7 @@ public class ToDo extends Task {
     }
 
     public ToDo(String info, boolean isDone) {
-        super(info, isDone);
+        super(info, taskType.ToDo, isDone);
     }
 
     @Override

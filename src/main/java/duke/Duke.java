@@ -1,56 +1,38 @@
 package duke;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-import java.util.ArrayList;
-
 import duke.exceptions.*;
 import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
+import duke.taskList.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Duke {
     public static final String DIRECTORY = System.getProperty("user.dir");
-    public ArrayList<Task> taskList;
+    public static TaskList tasks;
+    private Storage storage;
+    private final Ui ui;
+
+    /**
+     * Constructor for Duke object
+     */
 
     public Duke() {
-        this.taskList = new ArrayList<>();
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
+        this.ui = new Ui();
+        this.storage = new Storage(DIRECTORY);
+        this.tasks = new TaskList();
+        storage.loadTasks(tasks);
     }
 
     public void run() {
-        String name = "Alfred";
         String input;
+        ui.start();
 
-        String logo = "     __      _     ____                  _\n"
-                + "    /  \\    | |   |  __| _____  ____    | |\n"
-                + "   / /\\ \\   | | __| |__ |  ___|/ __ \\   | |\n"
-                + "  / /__\\ \\  | ||__   __|| |   / ____/ __| |\n"
-                + " / ______ \\ | |   | |   | |   \\ \\___ / _  |\n"
-                + "/_/      \\_\\|_|   |_|   |_|    \\____|\\____|\n";
-
-        System.out.println(logo);
-        System.out.println("Hello Master. Nice to meet you, my name is " + name + ".");
-        System.out.println("How may I be of service, Master?");
-
-        Scanner sc = new Scanner(System.in);
-
-        while (sc.hasNextLine()) {
-            input = sc.nextLine();
+        while (ui.canRead()) {
+            input = ui.readInput();
 
             while (!input.equals("bye")) {
                 try {
@@ -58,27 +40,30 @@ public class Duke {
                     String action = inputWords[0];
 
                     if (input.equals("list")) {
-                        System.out.println("Here is a list of your tasks, Master:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            System.out.println(i + 1 + ". " + taskList.get(i).toString());
+                        if (tasks.getSize() == 0) {
+                            throw new EmptyListException("List is empty.");
                         }
-                        input = sc.nextLine();
+                        ui.getList(tasks);
+                        input = ui.readInput();
                     } else if (action.equals("done")) {
                         if (inputWords.length < 2) {
                             throw new MissingArgumentException("Wrong number of arguments.");
-                        } else if (taskList.size() == 0) {
+                        } else if (tasks.getSize() == 0) {
                             throw new EmptyListException("List is empty.");
-                        } else if (Integer.parseInt(inputWords[1]) > taskList.size()) {
+                        } else if (Integer.parseInt(inputWords[1]) > tasks.getSize()) {
                             throw new NotExistingTaskException("No such task number");
                         }
-                        int idx = Integer.parseInt(inputWords[1]);
-                        System.out.println(taskList.get(idx - 1).markCompleted());
-                        input = sc.nextLine();
+                        int index = Integer.parseInt(inputWords[1]);
+
+                        Task completedTask = tasks.getTask(index - 1);
+                        completedTask.markCompleted();
+                        ui.taskDone(completedTask);
+
+                        input = ui.readInput();
                     } else if (action.equals("todo") || action.equals("deadline") || action.equals("event")){
                         if (inputWords.length < 2) {
                             throw new MissingArgumentException("Wrong number of arguments");
                         }
-                        System.out.println("\nMaster, I've added this task as requested:");
                         StringBuilder sb = new StringBuilder();
                         String taskItem;
 
@@ -89,199 +74,88 @@ public class Duke {
                             }
                             taskItem = sb.toString();
                             ToDo toDoItem = new ToDo(taskItem);
-                            taskList.add(toDoItem);
-                            System.out.println(toDoItem.toString());
+                            tasks.addTask(toDoItem);
+
+                            ui.addTask(toDoItem);
                         } else {
-                            int slashIdx = 0;
+                            int slashIndex = 0;
 
                             for (int i = 0; i < inputWords.length; i++) {
                                 if (inputWords[i].contains(Character.toString('/'))) {
-                                    slashIdx = i;
+                                    slashIndex = i;
                                 }
                             }
-                            for (int j = 1; j < slashIdx; j++) {
+                            for (int j = 1; j < slashIndex; j++) {
                                 sb.append(" ");
                                 sb.append(inputWords[j]);
                             }
                             taskItem = sb.toString();
                             StringBuilder sbSlash = new StringBuilder();
 
-                            for (int k = slashIdx + 1; k < inputWords.length; k++) {
+                            for (int k = slashIndex + 1; k < inputWords.length; k++) {
                                 sbSlash.append(" ");
                                 sbSlash.append(inputWords[k]);
                             }
                             try {
                                 if (action.equals("deadline")) {
                                     Deadline deadlineItem = new Deadline(taskItem, sbSlash.toString());
-                                    taskList.add(deadlineItem);
-                                    System.out.println(deadlineItem.toString());
+                                    tasks.addTask(deadlineItem);
+                                    ui.addTask(deadlineItem);
                                 } else {
                                     Event eventItem = new Event(taskItem, sbSlash.toString());
-                                    taskList.add(eventItem);
-                                    System.out.println(eventItem.toString());
+                                    tasks.addTask(eventItem);
+                                    ui.addTask(eventItem);
                                 }
                             } catch (Exception e) {
                                 throw new DateTimeFormatException("Wrong datetime format given.");
                             }
                         }
-                        if (taskList.size() == 1) {
-                            System.out.println("\nYou have " + taskList.size() + " task in the list now, Master.");
-                        } else {
-                            System.out.println("\nYou have " + taskList.size() + " tasks in the list now, Master.");
-                        }
-                        input = sc.nextLine();
+                        ui.getTaskListSize(tasks);
+                        input = ui.readInput();
                     } else if (action.equals("delete")) {
                         if (inputWords.length < 2) {
                             throw new MissingArgumentException("Wrong number of arguments");
-                        } else if (taskList.size() == 0) {
+                        } else if (tasks.getSize() == 0) {
                             throw new EmptyListException("List is empty.");
-                        } else if (Integer.parseInt(inputWords[1]) > taskList.size()) {
+                        } else if (Integer.parseInt(inputWords[1]) > tasks.getSize()) {
                             throw new NotExistingTaskException("No such task number");
                         }
-                        int deleteIdx = Integer.parseInt(inputWords[1]);
-                        System.out.println(
-                                "\nUnderstood Master. I've removed this task from the list:");
-                        System.out.println(taskList.get(deleteIdx - 1));
-                        taskList.remove(deleteIdx);
-                        if (taskList.size() == 1) {
-                            System.out.println("\nNow you have "
-                                                + taskList.size()
-                                                + " task in the list, Master.");
-                        } else {
-                            System.out.println("\nNow you have "
-                                                + taskList.size()
-                                                + " tasks in the list, Master.");
-                        }
+                        int deleteIndex = Integer.parseInt(inputWords[1]);
 
-                        input = sc.nextLine();
+                        ui.deleteTask(tasks.getTask(deleteIndex - 1));
+                        tasks.removeTask(deleteIndex - 1);
+                        ui.getTaskListSize(tasks);
+
+                        input = ui.readInput();
                     } else {
                         throw new NoKeywordException("No such action.");
                     }
                 } catch (MissingArgumentException error) {
                     System.out.println(
                             "\nMaster, I'm afraid you're missing the task number.");
-                    input = sc.nextLine();
+                    input = ui.readInput();
                 } catch (NoKeywordException error) {
                     System.out.println(
                             "\nSorry Master but I cannot do that.");
-                    input = sc.nextLine();
+                    input = ui.readInput();
                 } catch (DateTimeFormatException error) {
                     System.out.println(
                             "\nMaster, please input the date and time as such: \"YYYY-MM-DD HH:MM\"");
-                    input = sc.nextLine();
+                    input = ui.readInput();
                 } catch (EmptyListException error) {
                     System.out.println(
                             "\nThe list is empty, Master.");
-                    input = sc.nextLine();
+                    input = ui.readInput();
                 } catch (NotExistingTaskException error) {
                     System.out.println(
                             "\nI'm afraid the task number is not in the list, Master.");
-                    input = sc.nextLine();
+                    input = ui.readInput();
                 }
             }
-            System.out.println("Have a good day, Master. Take care.");
-            saveTaskList(taskList);
+            ui.goodBye();
+            storage.saveTaskList(tasks);
             break;
         }
         System.exit(1);
-    }
-
-    /** Saves the list of Tasks in the ArrayList object
-     * into a .txt file.
-     *
-     * @param taskList
-     */
-
-    public void saveTaskList(ArrayList<Task> taskList) {
-        Path path = Paths.get(this.DIRECTORY, "Data");
-        try {
-            /* Check if file path exists.
-             * If it doesn't, create a new directory.
-             */
-            if (!Files.exists(path)) {
-                Files.createDirectories(path);
-            }
-
-            Path filePath = Paths.get(this.DIRECTORY, "Data", "taskList.txt");
-            File taskFile = filePath.toFile();
-
-            /* Check if the file exists.
-             * If it doesn't, create a new file
-             */
-
-            if (!taskFile.exists()) {
-                taskFile.createNewFile();
-            }
-
-            FileWriter fileWriter = new FileWriter(taskFile);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            Task task;
-            for (int i = 0; i < taskList.size(); i++) {
-                task = taskList.get(i);
-                bufferedWriter.write(task.toSave());
-                bufferedWriter.write("~");
-                if(task.getDoneStatus()) {
-                    bufferedWriter.write("1");
-                } else {
-                    bufferedWriter.write("0");
-                }
-                bufferedWriter.write("++");
-            }
-            bufferedWriter.close();
-        } catch (IOException error) {
-            System.out.println(error.getMessage());
-        }
-    }
-
-    /**
-     * Loads the list of Tasks in the .txt file into the TaskList object
-     *
-     * @param taskList
-     */
-
-    public void loadTasks(ArrayList<Task> taskList) {
-        Path filePath = Paths.get(this.DIRECTORY, "Data", "taskList.txt");
-
-        if (filePath.toFile().exists()) {
-            try {
-                BufferedReader bufferedReader = Files.newBufferedReader(filePath);
-                String data = bufferedReader.readLine();
-
-                if (data != null) {
-                    String[] tasks = data.split("\\+\\+");
-
-                    for (int i = 0; i < tasks.length; i++) {
-                        String[] doneList = tasks[i].split("~", 2);
-                        String[] nameList = doneList[0].split(" ", 2);
-
-                        if (nameList[0].equals("deadline")) {
-                            String[] deadlineItem = nameList[1].split("/by", 2);
-                            Task taskItem = new Deadline(deadlineItem[0],
-                                    deadlineItem[1],
-                                    checkDone(deadlineItem[1]));
-                            taskList.add(taskItem);
-                        } else if (nameList[0].equals("event")) {
-                            String[] eventItem = nameList[1].split("/at", 2);
-                            Task taskItem = new Event(eventItem[0],
-                                    eventItem[1],
-                                    checkDone(eventItem[1]));
-                            taskList.add(taskItem);
-                        } else if (nameList[0].equals("todo")) {
-                            Task taskItem = new ToDo(nameList[1], checkDone(doneList[1]));
-                            taskList.add(taskItem);
-                        }
-                    }
-                }
-            } catch (IOException error) {
-                System.out.println(error.getMessage());
-            }
-        } else {
-            File createFile = new File("/Data/duke.txt");
-        }
-    }
-
-    private static boolean checkDone (String item) {
-        return item.equals("1");
     }
 }

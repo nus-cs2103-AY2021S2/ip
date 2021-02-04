@@ -17,8 +17,7 @@ public class Event extends Task{
     }
 
     public Event(String info, String afterAt, boolean isDone) {
-        super(info, isDone);
-        this.type = taskType.Event;
+        super(info, taskType.Event, isDone);
         String[] afterAtList = afterAt.split(" ", 2);
         this.location = afterAtList[0];
         this.dateTime = afterAtList[1];

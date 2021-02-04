@@ -12,8 +12,7 @@ public class Deadline extends Task {
     }
 
     public Deadline(String info, String afterBy, boolean isDone) {
-        super(info, isDone);
-        this.type = taskType.Deadline;
+        super(info, taskType.Deadline, isDone);
         this.afterBy = afterBy.trim();
     }
 

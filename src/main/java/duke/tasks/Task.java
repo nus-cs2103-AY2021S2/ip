@@ -12,10 +12,10 @@ public class Task {
         this.type = type;
     }
 
-    public Task(String info, boolean isDone) {
+    public Task(String info, taskType type, boolean isDone) {
         this.info = info;
+        this.type = type;
         this.isDone = isDone;
-
     }
 
     public String getInfo() {
@@ -24,16 +24,14 @@ public class Task {
 
     public String checkIcon() {
         if (isDone) {
-            return "\u0058";
+            return "\u0058"; // icon is a cross
         } else {
             return " ";
         }
     }
 
-    public String markCompleted() {
+    public void markCompleted() {
         isDone = true;
-        System.out.println("Well done, Master! I've marked this task as done:");
-        return toString();
     }
 
     public taskType getType() {
