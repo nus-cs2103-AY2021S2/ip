@@ -7,6 +7,11 @@ public class TaskList {
     private List<Task> tasks;
     private int count;
 
+    /**
+     * Constructor for TaskList, a wrapper class for a list of Tasks and all operations on it. Writes to storage by
+     * calling Storage.
+     * @param storage Storage object that TaskList writes to.
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = new ArrayList<>();
@@ -37,27 +42,49 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Returns task at given index.
+     * @param index Index of task wanted
+     * @return Task at given index
+     */
     public Task get(int index) {
         return this.tasks.get(index - 1);
     }
 
+    /**
+     * Removes task at given index.
+     * @param index Index of task wanted
+     */
     public void remove(int index) {
         this.storage.remove(index);
         this.tasks.remove(index - 1);
         this.count--;
     }
 
+    /**
+     * Replaces task at given index.
+     * @param index Index of task to be replaced
+     * @param task New task that will replace previous task
+     */
     public void set(int index, Task task) {
         this.storage.set(index, task);
         this.tasks.set(index - 1, task);
     }
 
+    /**
+     * Adds given task to end of the task list.
+     * @param task Task to be added
+     */
     public void add(Task task) {
         this.storage.add(task);
         this.tasks.add(task);
         this.count++;
     }
 
+    /**
+     * Returns number of tasks in task list.
+     * @return Number of tasks in list
+     */
     public int getSize() {
         return this.count;
     }

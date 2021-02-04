@@ -16,6 +16,10 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    /**
+     * Starts running Duke.
+     * @return 0 for successful exit
+     */
     public int dukeRunner() {
         Ui.printHello();
 
