@@ -42,6 +42,7 @@ public class Duke {
             } catch (EmptyArgumentException e) {
                 System.out.println(e.getMessage());
             }
+            save(tasks);
         }
     }
 
