@@ -24,14 +24,35 @@ public class UI {
     public void FailureMessage(String commandFailed) {
         //cases
     }
-    public void commandMessage(String command) {
+    public void commandMessage(String command, DukeList list) {
         switch(command) {
         case "done":
-
+            showMessage();
+            showNoOfTaskLeft(list);
+        case "delete":
+            deleteMessage();
+            showNoOfTaskLeft(list);
+        case "reset":
+            resetMessage();
+        case "todo":
+            addTaskMessage();
+            showNoOfTaskLeft(list);
+        case "deadline":
+            addTaskMessage();
+            showNoOfTaskLeft(list);
+        case "event":
+            addTaskMessage();
+            showNoOfTaskLeft(list);
+        case "list":
+            listMessage(list);
+        case "bye":
+            GoodByeMessage();
+        case "unknown":
+            unknownCommandMessage();
         }
     }
 
-    public void ListMessage(DukeList list) {
+    public void listMessage(DukeList list) {
         int size = list.getSize();
         showToUser(DIVIDER + LS);
         for (int i = 0; i < size; i++) {
@@ -45,7 +66,7 @@ public class UI {
     }
 
     public void deleteMessage() {
-        showToUser(DIVIDER + LS + "Got it! The task has been deleted" + LS + listSize() + DIVIDER);
+        showToUser(DIVIDER + LS + "Got it! The task has been deleted" + LS  + DIVIDER);
     }
 
     public void resetMessage() {
@@ -53,22 +74,25 @@ public class UI {
     }
 
     public void showMessage() {
-        showToUser(DIVIDER + LS + "Here are your tasks on this day" + LS + DIVIDER);
+        showToUser(DIVIDER + LS + "Here are your tasks on this day" + LS  + DIVIDER);
     }
 
     public void addTaskMessage() {
         showToUser((DIVIDER + LS + "Got it! The task has been added" + LS + DIVIDER));
     }
 
-    public String listSize(DukeList list) {
-        return String.valueOf(list.getSize());
+    public void showNoOfTaskLeft(DukeList list) {
+        showToUser(DIVIDER + LS + "You have " + list.getSize() + " Task left." + LS + DIVIDER);
     }
 
+    public void unknownCommandMessage() {
+        showToUser(DIVIDER + LS + "I'm sorry, I do not know what that means" + LS + DIVIDER);
+    }
     public String readCommand() {
         return in.nextLine(); //parser will break down this command
     }
 
-    public void showToUser(String... message) {
+    public void showToUser(String message) {
         System.out.println(message);
     }
 }
