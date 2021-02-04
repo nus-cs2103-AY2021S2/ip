@@ -53,7 +53,7 @@ public class UiHandler extends AnchorPane {
      * Greets the user upon program launch.
      */
     public void showWelcomeMsg() {
-        showInfoMsg("Hello, I am Steve! How can I help you?");
+        showInfoMsg("Info: Hello, I am Steve! How can I help you?");
     }
 
     /**
