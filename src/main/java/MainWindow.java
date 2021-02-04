@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -58,13 +59,18 @@ public class MainWindow extends GridPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input, duke);
-        duke.storage.writeTaskList();
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+        if ("bye".equals(input)) {
+            Platform.setImplicitExit(true);
+            Platform.exit();
+        } else {
+            String response = duke.getResponse(input, duke);
+            duke.storage.writeTaskList();
+            dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+        }
     }
 
 
