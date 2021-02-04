@@ -8,7 +8,7 @@ import duke.models.Task;
 
 /**
  * Handles the Delete command of the user to delete a certain task in the list.
- * Format of command: "delete <task_index>".
+ * Format of command: "delete [task_index]".
  */
 public class DeleteCommand implements Command {
     private int index;

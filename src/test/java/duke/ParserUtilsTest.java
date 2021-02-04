@@ -1,17 +1,17 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class ParserUtilsTest {
     @Test
     public void testParseDateTimeBySlash() throws DukeException {
         LocalDateTime dateTime = ParserUtils.parseDateTime("1/12/1212", "Invalid Date");
-        assertEquals(LocalDateTime.of(1212, 12, 1, 0,0), dateTime);
+        assertEquals(LocalDateTime.of(1212, 12, 1, 0, 0), dateTime);
     }
 
     @Test

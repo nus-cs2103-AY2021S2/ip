@@ -1,13 +1,13 @@
 package duke;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class UiTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -38,6 +38,7 @@ public class UiTest {
     public void testIntro() {
         Ui ui = new Ui();
         ui.printIntro();
-        assertEquals("Hello from\n" + Ui.LOGO + "\n\t" + Ui.HORIZONTAL_LINE + "\n\tWhat can I do for you?\n\t" + Ui.HORIZONTAL_LINE + '\n', outContent.toString());
+        assertEquals("Hello from\n" + Ui.LOGO + "\n\t" + Ui.HORIZONTAL_LINE
+                + "\n\tWhat can I do for you?\n\t" + Ui.HORIZONTAL_LINE + '\n', outContent.toString());
     }
 }

@@ -4,12 +4,11 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.commands.Command;
 import duke.models.Task;
 
 /**
  * Handles the Done command of the user to mark tasks as done.
- * Format of command: "done <task_index>".
+ * Format of command: "done [task_index]".
  */
 public class DoneCommand implements Command {
     private int index;
