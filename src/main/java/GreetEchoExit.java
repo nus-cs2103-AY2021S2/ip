@@ -8,6 +8,10 @@ public class GreetEchoExit {
 
     protected static ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Main class to take in user input
+     * @param args Filler
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
