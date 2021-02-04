@@ -30,8 +30,8 @@ public class Duke {
         String promptMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                                 + "List of recognised user prompts:\n"
                                 + "  1. todo - adds a todo (E.g. todo borrow book)\n"
-                                + "  2. deadline - adds a deadline (E.g. deadline return book /by Sunday\n"
-                                + "  3. event - adds an event (E.g. event project meeting /at Mon 2-4pm)\n"
+                                + "  2. deadline - adds a deadline (E.g. deadline return book /by 2021-02-04)\n"
+                                + "  3. event - adds an event (E.g. event project meeting /at 2021-03-05)\n"
                                 + "  4. delete - removes a task from the lists of task\n"
                                 + "  5. list - displays the list of tasks\n"
                                 + "  6. bye - terminates Duke ☹";
@@ -79,11 +79,11 @@ public class Duke {
                                                         + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
                             replyFormat(systemMessage);
                         } else {
-                            throw new DukeException("☹ OOPS!!! The date and/or time cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The date cannot be empty.");
                         }
                     } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("☹ OOPS!!! Please specify the date and/or time in this format:\n"
-                                                            + "  deadline [task description] /by [date and/or time]");
+                        throw new DukeException("☹ OOPS!!! Please specify the date in this format:\n"
+                                                            + "  deadline [task description] /by [yyyy-mm-dd]");
                     }
                 } else {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -105,11 +105,11 @@ public class Duke {
                                                         + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
                             replyFormat(systemMessage);
                         } else {
-                            throw new DukeException("☹ OOPS!!! The date and/or time cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The date cannot be empty.");
                         }
                     } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("☹ OOPS!!! Please specify the date and/or time in this format:\n"
-                                                            + "  event [task description] /at [date and/or time]");
+                        throw new DukeException("☹ OOPS!!! Please specify the date in this format:\n"
+                                                            + "  event [task description] /at [yyyy-mm-dd]");
                     }
                 } else {
                     throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -124,14 +124,14 @@ public class Duke {
     // Marks a task as done and informs the user about it
     private static void completeTask(String promptDescription) throws DukeException {
         try {
-            int taskNo = Integer.valueOf(promptDescription);
-            if (taskNo > 0 && taskNo <= tasksList.size()) {
-                Task taskToComplete = tasksList.get(taskNo - 1);
+            int TaskNum = Integer.valueOf(promptDescription);
+            if (TaskNum > 0 && TaskNum <= tasksList.size()) {
+                Task taskToComplete = tasksList.get(TaskNum - 1);
                 taskToComplete.markAsDone();
                 String doneMessage = "Nice! I've marked this task as done:\n" + "  " + taskToComplete;
                 replyFormat(doneMessage);
             } else {
-                throw new DukeException("Task " + taskNo + " is not in the task list!");
+                throw new DukeException("Task " + TaskNum + " is not in the task list!");
             }
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! Please specify a task number. (E.g. done 2)");
@@ -141,16 +141,16 @@ public class Duke {
     // Deletes a task from the taskList
     private static void deleteTask(String promptDescription) throws DukeException {
         try {
-            int taskNo = Integer.valueOf(promptDescription);
-            if (taskNo > 0 && taskNo <= tasksList.size()) {
+            int taskNum = Integer.valueOf(promptDescription);
+            if (taskNum > 0 && taskNum <= tasksList.size()) {
                 counter--;
-                Task taskToDelete = tasksList.get(taskNo - 1);
+                Task taskToDelete = tasksList.get(taskNum - 1);
                 String deletedMessage = "Noted. I've removed this task:\n" + "  " + taskToDelete + "\n"
                                                         + "Now you have " + counter + " tasks in the list";
-                tasksList.remove(taskNo - 1);
+                tasksList.remove(taskNum - 1);
                 replyFormat(deletedMessage);
             } else {
-                throw new DukeException("Task " + taskNo + " is not in the task list!");
+                throw new DukeException("Task " + taskNum + " is not in the task list!");
             }
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! Please specify a task number. (E.g. delete 2)");
