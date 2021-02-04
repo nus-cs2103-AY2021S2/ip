@@ -7,6 +7,7 @@ import surrealchat.command.EditCommand;
 import surrealchat.command.EventCommand;
 import surrealchat.command.FindCommand;
 import surrealchat.command.ListCommand;
+import surrealchat.command.ScronchCommand;
 import surrealchat.command.ToDoCommand;
 import surrealchat.easteregg.HandEasterEgg;
 import surrealchat.easteregg.OrangEasterEgg;
@@ -33,6 +34,8 @@ public class HelpMode {
             return DeleteCommand.displayHelp();
         case "done":
             return DoneCommand.displayHelp();
+        case "scronch":
+            return ScronchCommand.displayHelp();
         case "find":
             return FindCommand.displayHelp();
         case "list":

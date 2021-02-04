@@ -11,6 +11,7 @@ import surrealchat.command.EditCommand;
 import surrealchat.command.EventCommand;
 import surrealchat.command.FindCommand;
 import surrealchat.command.ListCommand;
+import surrealchat.command.ScronchCommand;
 import surrealchat.command.ToDoCommand;
 import surrealchat.easteregg.EasterEgg;
 import surrealchat.easteregg.HandEasterEgg;
@@ -98,6 +99,10 @@ public class SurrealChat {
         case "delete":
             Command deleteCommand = new DeleteCommand(restOfInput);
             outputString = deleteCommand.execute(this.taskManagement);
+            return outputString;
+        case "scronch":
+            Command scronchCommand = new ScronchCommand();
+            outputString = scronchCommand.execute(this.taskManagement);
             return outputString;
         case "find":
             Command findCommand = new FindCommand(restOfInput);

@@ -78,6 +78,16 @@ public class TaskManagement {
         return this.taskList.remove(taskNumber - 1);
     }
 
+    /**
+     * Deletes all tasks from the list.
+     */
+    public void deleteAllTasks() {
+        if (this.taskList.isEmpty()) {
+            throw new NoSuchElementException("List is already empty. Not stonks!\n");
+        }
+        this.taskList.clear();
+    }
+
     private String spellTaskType(String taskType) {
         switch(taskType) {
         case "T":

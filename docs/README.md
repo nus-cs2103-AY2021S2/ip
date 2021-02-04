@@ -14,9 +14,16 @@ Commands usually come in the following format:
 `command (arguments if any)`
 
 For date and time inputs, they would be given as such:
+
 `{YYYY-MM-DD}T{HH:MM:SS}`
+
 Any capital letter between braces is to be replaced with the relevant date/time component.
 The T in the middle is used to indicate time.
+
+Outcomes are usually indicated in the following format:
+```
+Possible outcomes
+```
 
 ## Features
 
@@ -31,6 +38,7 @@ You can add 3 types of tasks:
 
 ### Delete tasks
 If you feel that keeping them on the list is not necessary, Meme Man will delete them for you.
+Even better, you can delete them all in one go!
 
 ### List tasks
 You can key in "list" and Meme Man will display the tasks in the order that you have keyed them in.
@@ -250,6 +258,26 @@ Outcome if task number is invalid:
 ```
 Invalid task number. Not stonks!
 ```
+
+### Delete all tasks - `scronch`
+Format: `scronch`
+
+Key this command in to delete all tasks and empty task list.
+
+Example usage:
+`scronch`
+
+Expected outcome:
+```
+Scronching all tasks...
+Total number of tasks: 0
+```
+
+Outcome if list is already empty:
+```
+List is already empty. Not stonks!
+```
+
 ### Find tasks - `find`
 Format: `find KEYWORD`
 
