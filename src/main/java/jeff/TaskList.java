@@ -57,7 +57,7 @@ public class TaskList {
      * @param index Index to retrieve Task from.
      * @return Task at index.
      */
-    public Task getTask(int index){
+    public Task getTask(int index) {
         return tasks.get(index);
     }
 
@@ -78,6 +78,12 @@ public class TaskList {
         tasks.remove(index);
     }
 
+    /**
+     * Returns tasks matching search string.
+     *
+     * @param s Search string.
+     * @return ArrayList of tasks matching the search.
+     */
     public ArrayList<Task> findTask(String s) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task t : tasks) {

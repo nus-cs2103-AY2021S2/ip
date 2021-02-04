@@ -1,7 +1,6 @@
 package jeff;
 
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 
 /**
@@ -75,7 +74,7 @@ public class Parser {
             }
             try {
                 String[] dateTime = messageSplit[1].split("at ")[1].split(" ", 2);
-                Task event= new Event(messageMain[1], dateTime[0], dateTime[1]);
+                Task event = new Event(messageMain[1], dateTime[0], dateTime[1]);
                 tasks.addTask(event);
                 ui.print("Got it. I've added this task:\n" + event + tasks.queryNumTasks());
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -86,7 +85,7 @@ public class Parser {
             break;
 
         case done:
-            if(messageMain.length != 2) {
+            if (messageMain.length != 2) {
                 throw new JeffException("wrong number of arguments for done");
             }
             try {
@@ -124,7 +123,7 @@ public class Parser {
             break;
 
         case find:
-            if(messageMain.length != 2) {
+            if (messageMain.length != 2) {
                 throw new JeffException("enter keyword to find task(s) by");
             }
             ArrayList<Task> foundTasks = tasks.findTask(messageMain[1]);
@@ -134,6 +133,9 @@ public class Parser {
             }
             ui.print(s);
             break;
+
+        default:
+
         }
         return isExit;
     }
