@@ -10,6 +10,11 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     private String keyword;
 
+    /**
+     * Initializes a Find Command to search for the given keyword.
+     *
+     * @param keyword A String to be matched against the description of Tasks in the TaskList.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
