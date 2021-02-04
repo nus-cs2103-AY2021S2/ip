@@ -123,13 +123,13 @@ public class TaskHandler {
         if (TASKS.size() == 0) {
             return "Info: You have no task at the moment!";
         } else {
-            StringBuilder str = new StringBuilder("Info: ");
+            StringBuilder strOfTasks = new StringBuilder("Info: ");
             for (int i = 1; i <= TASKS.size(); i++) {
                 Task task = TASKS.get(i - 1);
-                str.append(i).append(".").append(task).append("\n");
+                strOfTasks.append(i).append(".").append(task).append("\n");
             }
-            str.append("You have ").append(TASKS.size()).append(" task(s)!");
-            return str.toString();
+            strOfTasks.append("You have ").append(TASKS.size()).append(" task(s)!");
+            return strOfTasks.toString();
         }
     }
 
@@ -144,19 +144,19 @@ public class TaskHandler {
             return "Info: You have no task at the moment!";
         } else {
             int counter = 0;
-            StringBuilder str = new StringBuilder("Info: ");
+            StringBuilder strOfTasks = new StringBuilder("Info: ");
             for (String taskName : taskNames) {
                 System.out.println(taskName);
                 for (int j = 1; j <= TASKS.size(); j++) {
                     Task task = TASKS.get(j - 1);
                     if (task.getTaskName().contains(taskName)) {
                         counter += 1;
-                        str.append(counter).append(".").append(task).append("\n");
+                        strOfTasks.append(counter).append(".").append(task).append("\n");
                     }
                 }
             }
-            str.append("A total of ").append(counter).append(" task(s) were found.");
-            return str.toString();
+            strOfTasks.append("A total of ").append(counter).append(" task(s) were found.");
+            return strOfTasks.toString();
         }
     }
 }
