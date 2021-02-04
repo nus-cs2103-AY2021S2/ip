@@ -1,14 +1,15 @@
 package duke;
 
-import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 
 /**
@@ -64,7 +65,8 @@ class Storage {
                 break;
             case "D":
                 int dlIndex = line.indexOf("(by: ");
-                LocalDateTime dlTime = LocalDateTime.parse(line.substring(dlIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDateTime dlTime = LocalDateTime.parse(line.substring(dlIndex + 5, line.length() - 1),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 if (line.charAt(4) == ' ') {
                     taskList.add(new Deadline(line.substring(7, dlIndex - 1), dlTime));
                 } else {
@@ -75,7 +77,8 @@ class Storage {
                 break;
             default:
                 int etIndex = line.indexOf("(at: ");
-                LocalDateTime eventTime = LocalDateTime.parse(line.substring(etIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDateTime eventTime = LocalDateTime.parse(line.substring(etIndex + 5, line.length() - 1),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 if (line.charAt(4) == ' ') {
                     taskList.add(new Deadline(line.substring(7, etIndex - 1), eventTime));
                 } else {

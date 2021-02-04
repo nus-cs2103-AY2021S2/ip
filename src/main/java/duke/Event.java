@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * The time of event: eTime
  */
 class Event extends Task {
-    public LocalDateTime eTime;
+    private LocalDateTime eTime;
 
     /**
      * Returns an event with specified name and time
@@ -32,14 +32,28 @@ class Event extends Task {
     @Override
     public String printTask() {
         String ans;
-        if (taskDone) {
-            ans = "[E][X] " + this.taskName + " (at: "
+        if (this.isTaskDone()) {
+            ans = "[E][X] " + this.getTaskName() + " (at: "
                     + this.eTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         } else {
-            ans = "[E][ ] " + this.taskName + " (at: "
+            ans = "[E][ ] " + this.getTaskName() + " (at: "
                     + this.eTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         }
         return ans;
+    }
+
+    @Override
+    public boolean isTaskDone() {
+        return super.isTaskDone();
+    }
+
+    @Override
+    public String getTaskName() {
+        return super.getTaskName();
+    }
+
+    public LocalDateTime geteTime() {
+        return eTime;
     }
 }
 

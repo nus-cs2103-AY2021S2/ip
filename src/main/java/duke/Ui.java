@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -75,8 +74,8 @@ class Ui {
      * @param noOfTasks Number of tasks in taskList after adding.
      */
     public String echoAddToList(Task task, int noOfTasks) {
-        String ans = "Got it. I've added this task: \n" +" " + task.printTask() + "\n" +
-                String.format("Now you have %d tasks in the list.\n", noOfTasks);
+        String ans = "Got it. I've added this task: \n" + " ";
+        ans += task.printTask() + "\n" + String.format("Now you have %d tasks in the list.\n", noOfTasks);
         return ans;
     }
 
@@ -86,8 +85,7 @@ class Ui {
      * @param task Task done.
      */
     public String echoMarkTaskDone(Task task) {
-        String ans = "Nice! I've marked this task as done: \n" +
-                " " + task.printTask() + "\n";
+        String ans = "Nice! I've marked this task as done: \n" + " " + task.printTask() + "\n";
         return ans;
     }
 
@@ -97,8 +95,7 @@ class Ui {
      * @param task Task deleted.
      */
     public String echoDeleteTask(Task task) {
-        String ans = "Noted. I've removed this task: \n" +
-                " " + task.printTask() + "\n";
+        String ans = "Noted. I've removed this task: \n" + " " + task.printTask() + "\n";
         return ans;
     }
 
@@ -107,6 +104,7 @@ class Ui {
      *
      * @param err DukeException object related.
      */
+
     public String echoErrMsg(DukeException err) {
         String ans = err.getMessage();
         return ans;
@@ -122,8 +120,8 @@ class Ui {
         String ans = "Here are the tasks on " + dateTime.toString().substring(0, 10) + ":\n";
         int index = 1;
         for (Task task : taskList) {
-            if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, dateTime))
-                    || (task instanceof Event && sameDay(((Event) task).eTime, dateTime))) {
+            if ((task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), dateTime))
+                    || (task instanceof Event && sameDay(((Event) task).geteTime(), dateTime))) {
                 ans += String.format(" %d. " + task.printTask() + "\n", index);
                 index++;
             }
@@ -140,8 +138,8 @@ class Ui {
         String ans = "Here are the tasks today:\n";
         int index = 1;
         for (Task task : taskList) {
-            if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, LocalDateTime.now()))
-                    || (task instanceof Event && sameDay(((Event) task).eTime, LocalDateTime.now()))) {
+            if ((task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), LocalDateTime.now()))
+                    || (task instanceof Event && sameDay(((Event) task).geteTime(), LocalDateTime.now()))) {
                 ans += String.format(" %d. " + task.printTask() + "\n", index);
                 index++;
             }
@@ -153,13 +151,13 @@ class Ui {
      * Print all the tasks that match the pattern of a find command.
      *
      * @param taskList The taskList related.
-     * @param pattern The String pattern given by find command.
+     * @param pattern  The String pattern given by find command.
      */
     public String echoPrintFindResult(ArrayList<Task> taskList, String pattern) {
         String ans = "Here are the matching tasks:\n";
         int index = 1;
         for (Task task : taskList) {
-            if (task.taskName.contains(pattern)) {
+            if (task.getTaskName().contains(pattern)) {
                 ans += String.format(" %d. " + task.printTask() + "\n", index);
                 index++;
             }

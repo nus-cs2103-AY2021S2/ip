@@ -2,7 +2,6 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 
 /**
@@ -60,7 +59,8 @@ class Parser {
                 return new Command("executeFalseCommand", "deadline");
             } else {
                 try {
-                    LocalDateTime.parse(commandLine.substring(commandLine.indexOf("/by ") + 4), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    LocalDateTime.parse(commandLine.substring(commandLine.indexOf("/by ") + 4),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 } catch (Exception e) {
                     return new Command("executeFalseCommand", "myTaskOn");
                 }
@@ -73,7 +73,8 @@ class Parser {
                 return new Command("executeFalseCommand", "event");
             } else {
                 try {
-                    LocalDateTime.parse(commandLine.substring(commandLine.indexOf("/at ") + 4), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    LocalDateTime.parse(commandLine.substring(commandLine.indexOf("/at ") + 4),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 } catch (Exception e) {
                     return new Command("executeFalseCommand", "myTaskOn");
                 }
@@ -90,7 +91,8 @@ class Parser {
                 return new Command("executeFalseCommand", "myTaskOn");
             } else {
                 try {
-                    LocalDateTime.parse(commandLine.substring(9) + " 00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    LocalDateTime.parse(commandLine.substring(9) + " 00:00",
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 } catch (Exception e) {
                     return new Command("executeFalseCommand", "myTaskOn");
                 }

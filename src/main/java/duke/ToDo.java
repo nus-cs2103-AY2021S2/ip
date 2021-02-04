@@ -23,11 +23,21 @@ class ToDo extends Task {
     @Override
     public String printTask() {
         String ans;
-        if (taskDone) {
-            ans = "[T][X] " + this.taskName;
+        if (this.isTaskDone()) {
+            ans = "[T][X] " + this.getTaskName();
         } else {
-            ans = "[T][ ] " + this.taskName;
+            ans = "[T][ ] " + this.getTaskName();
         }
         return ans;
+    }
+
+    @Override
+    public String getTaskName() {
+        return super.getTaskName();
+    }
+
+    @Override
+    public boolean isTaskDone() {
+        return super.isTaskDone();
     }
 }

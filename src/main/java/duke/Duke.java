@@ -3,7 +3,6 @@ package duke;
 import javafx.application.Platform;
 
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +17,7 @@ import java.time.format.DateTimeFormatter;
  */
 class Duke {
     private final Ui ui;
-    private final TaskList tasklist;
+    private final TaskList taskList;
     private final Storage storage;
 
     /**
@@ -27,8 +26,12 @@ class Duke {
     public Duke() throws IOException {
         this.ui = new Ui();
         this.storage = new Storage("data/DanhDuke.txt", "data");
-        this.tasklist = new TaskList();
-        this.storage.writeBack(this.tasklist.listUsed);
+        this.taskList = new TaskList();
+        this.storage.writeBack(this.taskList.getListUsed());
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     /**
@@ -40,67 +43,12 @@ class Duke {
     public static void main(String[] args) throws IOException {
         Duke myDuke = new Duke();
         myDuke.ui.echoHi();
-
         boolean signalToExit = false;
         while (!signalToExit && myDuke.ui.stillHaveCommand()) {
             String commandLine = myDuke.ui.readCommand();
-            Command command = Parser.parse(commandLine, myDuke.tasklist.listUsed);
+            Command command = Parser.parse(commandLine, myDuke.getTaskList().getListUsed());
             executeCommand(myDuke, command);
         }
-    }
-
-
-    public static String executeCommand(Duke myDuke, Command command) {
-        String ans = "";
-        switch (command.commandTitle) {
-        case "list":
-            ans = myDuke.ui.echoPrintList(myDuke.tasklist.listUsed);
-            break;
-        case "bye":
-            ans = myDuke.ui.echoBye();
-            break;
-        case "done":
-            ans = markTaskDone(myDuke, Integer.parseInt(command.commandContent));
-            break;
-        case "delete":
-            ans = deleteTask(myDuke, Integer.parseInt(command.commandContent));
-            break;
-        case "todo":
-        case "deadline":
-        case "event":
-            ans = addToList(myDuke, command.commandContent);
-            break;
-        case "myTaskToday":
-            ans = myDuke.ui.echoTaskToday(myDuke.tasklist.listUsed);
-            break;
-        case "myTaskOn":
-            ans = myDuke.ui.echoTaskThisDay(myDuke.tasklist.listUsed,
-                    LocalDateTime.parse(command.commandContent, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-            break;
-        case "find":
-            ans = myDuke.ui.echoPrintFindResult(myDuke.tasklist.listUsed, command.commandContent);
-            break;
-        default:
-            try {
-                executeFalseCommand(command.commandContent);
-            } catch (DukeException err) {
-                ans = myDuke.ui.echoErrMsg(err);
-            }
-        }
-        return ans;
-    }
-
-    /**
-     * Perform 3 actions: add new task to taskList, show results with user and change taskFile content correspondingly.
-     *
-     * @param duke            The duke instance related to this action
-     * @param taskDescription The desciption of the task that we want to add
-     */
-    public static String addToList(Duke duke, String taskDescription) {
-        Task task = duke.tasklist.addTask(taskDescription);
-        duke.storage.updateFile(duke.tasklist.listUsed);
-        String ans = duke.ui.echoAddToList(task, duke.tasklist.listUsed.size());
-        return ans;
     }
 
     /**
@@ -111,9 +59,22 @@ class Duke {
      * @param index The index of that task in taskList
      */
     public static String markTaskDone(Duke duke, int index) {
-        Task task = duke.tasklist.doneTask(index);
-        duke.storage.updateFile(duke.tasklist.listUsed);
+        Task task = duke.getTaskList().doneTask(index);
+        duke.storage.updateFile(duke.getTaskList().getListUsed());
         String ans = duke.ui.echoMarkTaskDone(task);
+        return ans;
+    }
+
+    /**
+     * Perform 3 actions: add new task to taskList, show results with user and change taskFile content correspondingly.
+     *
+     * @param duke            The duke instance related to this action
+     * @param taskDescription The desciption of the task that we want to add
+     */
+    public static String addToList(Duke duke, String taskDescription) {
+        Task task = duke.getTaskList().addTask(taskDescription);
+        duke.storage.updateFile(duke.getTaskList().getListUsed());
+        String ans = duke.ui.echoAddToList(task, duke.getTaskList().getListUsed().size());
         return ans;
     }
 
@@ -125,10 +86,10 @@ class Duke {
      * @param index The index of that task in taskList
      */
     public static String deleteTask(Duke duke, int index) {
-        Task task = duke.tasklist.listUsed.get(index - 1);
+        Task task = duke.getTaskList().getListUsed().get(index - 1);
         String ans = duke.ui.echoDeleteTask(task);
-        duke.tasklist.deleteTask(index);
-        duke.storage.updateFile(duke.tasklist.listUsed);
+        duke.getTaskList().deleteTask(index);
+        duke.storage.updateFile(duke.getTaskList().getListUsed());
         return ans;
     }
 
@@ -163,12 +124,52 @@ class Duke {
         }
     }
 
+    public static String executeCommand(Duke myDuke, Command command) {
+        String ans = "";
+        switch (command.getCommandTitle()) {
+        case "list":
+            ans = myDuke.ui.echoPrintList(myDuke.getTaskList().getListUsed());
+            break;
+        case "bye":
+            ans = myDuke.ui.echoBye();
+            break;
+        case "done":
+            ans = markTaskDone(myDuke, Integer.parseInt(command.getCommandContent()));
+            break;
+        case "delete":
+            ans = deleteTask(myDuke, Integer.parseInt(command.getCommandContent()));
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            ans = addToList(myDuke, command.getCommandContent());
+            break;
+        case "myTaskToday":
+            ans = myDuke.ui.echoTaskToday(myDuke.getTaskList().getListUsed());
+            break;
+        case "myTaskOn":
+            ans = myDuke.ui.echoTaskThisDay(myDuke.getTaskList().getListUsed(),
+                    LocalDateTime.parse(command.getCommandContent(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+            break;
+        case "find":
+            ans = myDuke.ui.echoPrintFindResult(myDuke.getTaskList().getListUsed(), command.getCommandContent());
+            break;
+        default:
+            try {
+                executeFalseCommand(command.getCommandContent());
+            } catch (DukeException err) {
+                ans = myDuke.ui.echoErrMsg(err);
+            }
+        }
+        return ans;
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        Command command = Parser.parse(input, this.tasklist.listUsed);
+        Command command = Parser.parse(input, this.getTaskList().getListUsed());
         String response = executeCommand(this, command);
         if (response.contains("Bye. Hope to see you again soon")) {
             Platform.exit();
@@ -176,5 +177,3 @@ class Duke {
         return response;
     }
 }
-
-
