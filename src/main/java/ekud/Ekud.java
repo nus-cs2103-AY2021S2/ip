@@ -9,6 +9,7 @@ import ekud.task.TaskList;
 public class Ekud {
     private final Storage storage;
     private TaskList tasks;
+    private boolean isOnline;
 
     /**
      * Construct a new instance of the Ekud chatbot.
@@ -16,6 +17,7 @@ public class Ekud {
      * @param filePath Path to the saved tasks
      */
     public Ekud(String filePath) {
+        isOnline = true;
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -33,6 +35,18 @@ public class Ekud {
      */
     public String getResponse(String fullCommand) throws EkudException {
         Command c = Parser.parse(fullCommand);
+        if (c.isExit()) {
+            isOnline = false;
+        }
         return c.execute(tasks, storage);
+    }
+
+    /**
+     * Check if Ekud is still online for replies.
+     *
+     * @return True if no bye command has been executed, false otherwise.
+     */
+    public boolean isOnline() {
+        return isOnline;
     }
 }
