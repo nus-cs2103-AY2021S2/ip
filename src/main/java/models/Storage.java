@@ -41,24 +41,24 @@ public class Storage {
 
                 // @formatter:off
                 switch (type) {
-                    case "T":
-                        // create new todo
-                        existingTodosList.add(Optional.of(new Todo(message, isDone)));
-                        break;
-                    case "D":
-                        // create new deadline
-                        existingTodosList.add(Optional.of(
-                                    new Deadline(message,
-                                                isDone,
-                                                line.get(TODO_EXTRA_MESSAGE_INDEX))));
-                        break;
-                    case "E":
-                        // create new event
-                        existingTodosList.add(Optional.of(
-                                    new Event(message,
+                case "T":
+                    // create new todo
+                    existingTodosList.add(Optional.of(new Todo(message, isDone)));
+                    break;
+                case "D":
+                    // create new deadline
+                    existingTodosList.add(Optional.of(
+                                new Deadline(message,
                                             isDone,
                                             line.get(TODO_EXTRA_MESSAGE_INDEX))));
-                        break;
+                    break;
+                case "E":
+                    // create new event
+                    existingTodosList.add(Optional.of(
+                                new Event(message,
+                                        isDone,
+                                        line.get(TODO_EXTRA_MESSAGE_INDEX))));
+                    break;
                 }
             }
             sc.close();
