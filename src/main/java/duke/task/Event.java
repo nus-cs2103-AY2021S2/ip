@@ -14,8 +14,8 @@ public class Event extends Task {
     /**
      * Creates an Event object with a description and DateTime object.
      *
-     * @param description description of the event
-     * @param dateTime DateTime indicating the occurrence of the event
+     * @param description description of the event.
+     * @param dateTime DateTime indicating the occurrence of the event.
      */
     public Event(String description, LocalDateTime dateTime) {
         super(description);
@@ -25,9 +25,9 @@ public class Event extends Task {
     /**
      * Returns Event task created from arguments representing the user input.
      *
-     * @param command user input
-     * @return Event task
-     * @throws DukeException if insufficient or invalid arguments are passed
+     * @param command user input.
+     * @return Event task.
+     * @throws DukeException if insufficient or invalid arguments are passed.
      */
     public static Task createEvent(String[] command) throws DukeException {
         if (command.length == 1) {

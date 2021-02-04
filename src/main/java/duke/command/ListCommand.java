@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
- * Class containing data and methods specific to a List command
+ * Class containing data and methods specific to a List command.
  */
 public class ListCommand extends Command {
     /**

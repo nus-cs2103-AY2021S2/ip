@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.util.ArrayList;
 
@@ -13,11 +13,11 @@ public class Ui {
     /**
      * Returns welcome message.
      *
-     * @return welcome message at the start of application
+     * @return welcome message at the start of application.
      */
     public static String welcomeString() {
         return "Welcome!\n"
-                + "I'm Ronald, the best McSpicy ever.\n"
+                + "I'm Ronald the McSpicy.\n"
                 + "What can I do for you today?";
     }
 
@@ -34,7 +34,7 @@ public class Ui {
     /**
      * Prints all tasks.
      *
-     * @param tasks tasks to be printed
+     * @param tasks tasks to be printed.
      */
     public static void displayAllTasks(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
@@ -65,7 +65,7 @@ public class Ui {
     /**
      * Displays tasks matching a particular keyword that the user entered.
      *
-     * @param tasks tasks which have descriptions containing the keyword
+     * @param tasks tasks which have descriptions containing the keyword.
      */
     public static void displayMatchingTasks(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
@@ -84,8 +84,8 @@ public class Ui {
     /**
      * Prints added task.
      *
-     * @param task  task that was added to the list of tasks
-     * @param tasks all existing tasks
+     * @param task  task that was added to the list of tasks.
+     * @param tasks all existing tasks.
      */
     public static void displayAddedTask(Task task, ArrayList<Task> tasks) {
         String str = "Cool! I've added the following item to your order list.\n\n    "
@@ -99,8 +99,8 @@ public class Ui {
     /**
      * Prints deleted task.
      *
-     * @param task  task that was deleted
-     * @param tasks all existing tasks
+     * @param task  task that was deleted.
+     * @param tasks all existing tasks.
      */
     public static void displayDeletedTask(Task task, ArrayList<Task> tasks) {
         String str = "Aw man... I told Donald that was a bad item to put on the menu.\n"
@@ -113,7 +113,7 @@ public class Ui {
     /**
      * Prints task that was marked as done.
      *
-     * @param task task that was marked as done
+     * @param task task that was marked as done.
      */
     public static void displayDone(Task task) {
         assignResponse("Your order has been served!\n\n  " + task);
@@ -122,7 +122,7 @@ public class Ui {
     /**
      * Prints error.
      *
-     * @param msg error message
+     * @param msg error message.
      */
     public static void displayError(String msg) {
         assignResponse("Oops!\n" + msg);

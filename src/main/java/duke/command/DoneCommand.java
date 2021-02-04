@@ -1,12 +1,12 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
 
 /**
- * Class containing data and methods specific to a Done command
+ * Class containing data and methods specific to a Done command.
  */
 public class DoneCommand extends Command {
 
@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     /**
      * Obtains task to be marked as done from the arguments from initialisation and marks it as done.
      *
-     * @throws DukeException if argument passed does not correspond to a valid task number
+     * @throws DukeException if argument passed does not correspond to a valid task number.
      */
     @Override
     public void process() throws DukeException {

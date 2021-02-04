@@ -14,8 +14,8 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline object with a description and a DateTime object.
-     * @param description description of the deadline
-     * @param dateTime DateTime indicating the deadline of the task
+     * @param description description of the deadline.
+     * @param dateTime DateTime indicating the deadline of the task.
      */
     public Deadline(String description, LocalDateTime dateTime) {
         super(description);
@@ -25,9 +25,9 @@ public class Deadline extends Task {
     /**
      * Returns Deadline task created from arguments representing the user input.
      *
-     * @param command user input
-     * @return Deadline task
-     * @throws DukeException if insufficient or invalid arguments are passed
+     * @param command user input.
+     * @return Deadline task.
+     * @throws DukeException if insufficient or invalid arguments are passed.
      */
     public static Task createDeadline(String[] command) throws DukeException {
         if (command.length == 1) {

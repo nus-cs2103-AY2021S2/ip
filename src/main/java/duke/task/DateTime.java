@@ -19,9 +19,9 @@ public class DateTime {
     /**
      * Converts string into LocalDateTime object.
      *
-     * @param date String representing date
-     * @return LocalDateTime object
-     * @throws DukeException if format of the date String is invalid
+     * @param date String representing date.
+     * @return LocalDateTime object.
+     * @throws DukeException if format of the date String is invalid.
      */
     public static LocalDateTime convertStringToDate(String date) throws DukeException {
         try {
@@ -36,7 +36,7 @@ public class DateTime {
     /**
      * Returns String representing DateTime of tasks to be printed to the CLI.
      *
-     * @return String representing DateTime of tasks
+     * @return String representing DateTime of tasks.
      */
     public String getDateTimeForDisplay() {
         return " (by: " + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")) + ")";
@@ -45,7 +45,7 @@ public class DateTime {
     /**
      * Returns String representing DateTime of tasks to be stored in data file.
      *
-     * @return String representing DateTime of tasks
+     * @return String representing DateTime of tasks.
      */
     public String getFormattedStorageString() {
         return dateTime.toString();

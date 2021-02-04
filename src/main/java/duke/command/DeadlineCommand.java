@@ -2,14 +2,14 @@ package duke.command;
 
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Class containing data and methods specific to a Deadline command
+ * Class containing data and methods specific to a Deadline command.
  */
 public class DeadlineCommand extends Command {
 
@@ -18,10 +18,10 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Creates Deadline object from commands provided during initialisation of the DeadlineCommand object, adds it to
+     * Creates Deadline object from commands provided during initialisation of the DeadlineCommand object. Adds it to
      * the data file and prints the added Deadline object.
      *
-     * @throws DukeException if arguments provided to the DeadlineCommand object are invalid
+     * @throws DukeException if arguments provided to the DeadlineCommand object are invalid.
      */
     @Override
     public void process() throws DukeException {

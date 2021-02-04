@@ -2,13 +2,13 @@ package duke.command;
 
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Class containing data and methods specific to a Delete command
+ * Class containing data and methods specific to a Delete command.
  */
 public class DeleteCommand extends Command {
 
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     /**
      * Obtains task to be deleted from the arguments from command initialisation and deletes it from the data file.
      *
-     * @throws DukeException if argument passed does not correspond to a valid task number
+     * @throws DukeException if argument passed does not correspond to a valid task number.
      */
     @Override
     public void process() throws DukeException {

@@ -26,9 +26,9 @@ public class Storage {
     }
 
     /**
-     * Initialises the path name of the data file
+     * Initialises the path name of the data file.
      *
-     * @param newPathName path where the data file should be created or should be accessed from
+     * @param newPathName path where the data file should be created or should be accessed from.
      */
     public static void initialisePath(String newPathName) {
         pathName = newPathName;
@@ -57,9 +57,9 @@ public class Storage {
     /**
      * Returns Task object after converting a String object in the data file.
      *
-     * @param taskString formatted String containing all necessary information of a Task
-     * @return Task object that was represented by the taskString
-     * @throws DukeException if the formatting of Strings in the data file is incorrect
+     * @param taskString formatted String containing all necessary information of a Task.
+     * @return Task object that was represented by the taskString.
+     * @throws DukeException if the formatting of Strings in the data file is incorrect.
      */
     private static Task convertStringToTask(String taskString) throws DukeException {
         String[] taskArgs = taskString.split(SPLITTER, 4);
@@ -97,7 +97,7 @@ public class Storage {
      * Updates the data file with the tasks saved into the program. If data file has been shifted from its original
      * position, a new data file will be created with the existing task items.
      *
-     * @throws DukeException if the data file cannot be written into
+     * @throws DukeException if the data file cannot be written into.
      */
     public static void updateDataFile() throws DukeException {
         try {

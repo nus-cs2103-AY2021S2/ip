@@ -3,12 +3,12 @@ package duke.command;
 import java.util.ArrayList;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
 
 /**
- * Class containing data and methods specific to a Find command
+ * Class containing data and methods specific to a Find command.
  */
 public class FindCommand extends Command {
 
@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     /**
      * Finds all tasks matching the keyword obtained from the arguments from initialisation.
      *
-     * @throws DukeException if insufficient arguments are passed or arguments are invalid
+     * @throws DukeException if insufficient arguments are passed or arguments are invalid.
      */
     @Override
     public void process() throws DukeException {

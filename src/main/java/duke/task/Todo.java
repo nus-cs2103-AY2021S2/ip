@@ -14,9 +14,9 @@ public class Todo extends Task {
     /**
      * Returns Todo task created from arguments representing the user input.
      *
-     * @param command user input
-     * @return Todo task
-     * @throws DukeException if insufficient or invalid arguments are passed
+     * @param command user input.
+     * @return Todo task.
+     * @throws DukeException if insufficient or invalid arguments are passed.
      */
     public static Task createTodo(String[] command) throws DukeException {
         if (command.length == 1) {

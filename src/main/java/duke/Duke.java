@@ -1,6 +1,7 @@
 package duke;
 
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class Duke {
     private static final String PATHNAME = "./data.txt";
@@ -19,7 +20,7 @@ public class Duke {
      * @param input user input
      * @return response that is to be printed onto GUI
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         Parser.parseAndProcess(input);
         return Ui.getNextResponse();
     }

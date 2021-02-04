@@ -1,14 +1,14 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
 /**
- * Class containing data and methods specific to a Todo command
+ * Class containing data and methods specific to a Todo command.
  */
 public class TodoCommand extends Command {
 
@@ -17,10 +17,10 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Creates Todo object from commands provided during initialisation of the TodoCommand object, adds it to the
+     * Creates Todo object from commands provided during initialisation of the TodoCommand object. Adds it to the
      * data file and prints the added Todo object.
      *
-     * @throws DukeException if arguments provided to the TodoCommand object are invalid
+     * @throws DukeException if arguments provided to the TodoCommand object are invalid.
      */
     @Override
     public void process() throws DukeException {
