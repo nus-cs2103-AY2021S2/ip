@@ -1,13 +1,13 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+
 import duke.models.Event;
 import duke.models.Task;
 
-import java.time.LocalDateTime;
-
 /**
  * Handles the Event command of the user to create new events in the list.
- * Format of command: "event <event_name> /at <datetime>".
+ * Format of command: "event [event_name] /at [datetime]".
  */
 public class EventCommand extends AddCommand {
     private LocalDateTime dateTime;

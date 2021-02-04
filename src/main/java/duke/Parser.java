@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDateTime;
 
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
@@ -11,14 +12,14 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
 
-import java.time.LocalDateTime;
-
 /**
  * Parser class to parse commands given by the user.
  */
 public class Parser {
     private static boolean isCommandMatch(String line, String match) {
-        return line.startsWith(match) && (line.length() == match.length() || line.charAt(line.indexOf(match) + match.length()) == ' ');
+        return line.startsWith(match)
+                && (line.length() == match.length()
+                || line.charAt(line.indexOf(match) + match.length()) == ' ');
     }
 
     /**
@@ -48,7 +49,8 @@ public class Parser {
                 throw new DukeException("The deadline needs to have a date specified with \"/by\".");
             }
             String taskName = deadlineArgs[0];
-            LocalDateTime deadline = ParserUtils.parseDateTime(deadlineArgs[1], "The deadline needs to be specified in a valid date format.");
+            LocalDateTime deadline = ParserUtils.parseDateTime(deadlineArgs[1],
+                    "The deadline needs to be specified in a valid date format.");
             return new DeadlineCommand(taskName, deadline);
         } else if (isCommandMatch(line, "event")) {
             String[] cmdArgs = ParserUtils.getCommandArgs(line, "The description of an event cannot be empty.");
@@ -57,7 +59,8 @@ public class Parser {
                 throw new DukeException("The event needs to have a date specified with \"/at\".");
             }
             String taskName = eventArgs[0];
-            LocalDateTime dateTime = ParserUtils.parseDateTime(eventArgs[1], "The event date needs to be specified in a valid date format.");
+            LocalDateTime dateTime = ParserUtils.parseDateTime(eventArgs[1],
+                    "The event date needs to be specified in a valid date format.");
             return new EventCommand(taskName, dateTime);
         } else if (isCommandMatch(line, "delete")) {
             String[] cmdArgs = ParserUtils.getCommandArgs(line, "I'm sorry, but delete needs the index of a Task.");

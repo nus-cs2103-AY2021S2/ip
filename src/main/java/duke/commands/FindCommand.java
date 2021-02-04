@@ -1,15 +1,14 @@
 package duke.commands;
 
-import duke.DukeException;
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import java.util.ArrayList;
-
 /**
  * Handles the find command of the user to search tasks based on keyword.
- * Format of command: "find <keyword>".
+ * Format of command: "find [keyword]".
  */
 public class FindCommand implements Command {
     private String keyword;

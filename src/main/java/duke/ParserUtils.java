@@ -11,15 +11,16 @@ import java.util.Locale;
  * Utility methods for Parser class.
  */
 public class ParserUtils {
-    public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder().
-            appendPattern("[d/M/yyyy HHmm]").
-            appendPattern("[d/M/yyyy]").
-            appendPattern("[yyyy-M-d]").
-            appendPattern("[yyyy-M-d HH:mm]").
-            appendPattern("[MMM d yyyy]").
-            parseDefaulting(ChronoField.HOUR_OF_DAY, 0).
-            parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0).
-            toFormatter(Locale.ENGLISH);
+    public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
+        .appendPattern("[d/M/yyyy HHmm]")
+        .appendPattern("[d/M/yyyy]")
+        .appendPattern("[yyyy-M-d]")
+        .appendPattern("[yyyy-M-d HH:mm]")
+        .appendPattern("[MMM d yyyy]")
+        .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+        .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+        .toFormatter(Locale.ENGLISH);
+
 
     /**
      * Parses user-given datetime strings into DateTime objects.

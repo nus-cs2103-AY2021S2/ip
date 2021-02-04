@@ -1,11 +1,10 @@
 package duke;
 
-import duke.commands.Command;
-
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import duke.commands.Command;
 
 /**
  * Main Duke class.
@@ -27,11 +26,11 @@ public class Duke {
             this.storage = new Storage();
         }
         try {
-            this.tasks = storage.readTasks();
-        } catch(IOException e) {
+            tasks = storage.readTasks();
+        } catch (IOException e) {
             ui.printError("Unable to create file");
-            this.tasks = new TaskList();
-        } catch(Exception e) {
+            tasks = new TaskList();
+        } catch (Exception e) {
             ui.printError("Unable to parse file");
             this.tasks = new TaskList();
         }
@@ -64,7 +63,9 @@ public class Duke {
 
             ui.printHorizontalLine();
 
-            if (end) break;
+            if (end) {
+                break;
+            }
 
             line = stdin.nextLine();
         }
