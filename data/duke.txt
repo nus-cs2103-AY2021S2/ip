@@ -1,1 +1,4 @@
-D|0|homework|2021-05-22
+T|1|go work
+D|1|go school|2021-02-02
+D|1|cook dinner|2022-05-05
+E|1|exam|2021-02-02

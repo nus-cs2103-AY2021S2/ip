@@ -1,24 +1,23 @@
 todo go work
-deadline do homework /by 2021-01-01
-event go school /at 2021-01-01
-event go eat /at 2021-01-01
+todo sleep
+deadline go school /by 2021-02-02
+deadline cook dinner /by 2022-05-05
+event exam /at 2021-02-02
 list
 done 1
-delete 3
+done 2
+done 3
+delete 2
 list
-show 2021-01-01
-show 2222222222
+show 2021-02-02
+show 2222-2-2
+show 2022-05-05
+sdf
+dfadf
 todo
-deadline
-event
 done
-delete
-deadline no date check
-event no date check
-done 99
-delete 99
-fuck
-you
-list
-reset
+done done
+show 9999999
+deadline go home
+event sleep /by
 bye
