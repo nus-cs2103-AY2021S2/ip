@@ -3,6 +3,7 @@ package blarb;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * {@code Tasklist} stores and operates on the list of {@code Tasks}.
@@ -25,21 +26,19 @@ class Tasklist implements Iterable<Task> {
      * @param input Keywords for the search.
      */
     public String find(String input) {
-        int i = 1;
-        int counter = 0;
         CharSequence target = input.subSequence(0, input.length());
-        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
-        for (Task task : list) {
-            if (task.getDescription().contains(target)) {
-                sb.append(String.format("\n%d. %s", i, task.toString()));
-                counter++;
-            }
-            i++;
-        }
-        if (counter == 0) {
+        String result = IntStream.rangeClosed(1, list.size())
+                .filter(idx -> list.get(idx).getDescription().contains(target))
+                .mapToObj(idx -> String.format("\n%d. %s", idx, list.get(idx).toString()))
+                .collect(() -> new StringBuilder("Here are the matching tasks in your list:"),
+                        StringBuilder::append,
+                        StringBuilder::append)
+                .toString();
+        if (result.lines().count() <= 1) {
             return "There are no matching tasks in your list.";
+        } else {
+            return result;
         }
-        return sb.substring(0);
     }
 
     /**
@@ -51,12 +50,12 @@ class Tasklist implements Iterable<Task> {
         if (list.size() < 1) {
             return "You have nothing on your list.";
         } else {
-            int i = 1;
-            StringBuilder sb = new StringBuilder("Here are your tasks:\n");
-            for (Task task : list) {
-                sb.append(String.format("\n%d. %s", i++, task.toString()));
-            }
-            return sb.substring(0);
+            return IntStream.rangeClosed(1, list.size())
+                    .mapToObj(idx -> String.format("\n%d. %s", idx, list.get(idx).toString()))
+                    .collect(() -> new StringBuilder("Here are your tasks:\n"),
+                            StringBuilder::append,
+                            StringBuilder::append)
+                    .toString();
         }
     }
 
@@ -74,6 +73,12 @@ class Tasklist implements Iterable<Task> {
         return String.format(addTask, task.toString(), list.size());
     }
 
+    /**
+     * Adds multiple new Tasks to the task list.
+     *
+     * @param list List of tasks to be added.
+     * @return String interpretation of added task.
+     */
     public void addAll(List<Task> list) {
         this.list.addAll(list);
     }
@@ -99,8 +104,7 @@ class Tasklist implements Iterable<Task> {
      */
     public String delete(int index) throws IndexOutOfBoundsException {
         String delete = "The task is terminated:\n%s";
-        Task output = list.get(index);
-        list.remove(index);
+        Task output = list.remove(index);
         return String.format(delete, output);
     }
 
