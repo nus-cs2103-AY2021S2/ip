@@ -73,24 +73,24 @@ public class Deadline extends Todo {
         return String.format("%s hrs", this.deadlineDateTime.format(outputDateFormat));
     }
 
-    @Override
     /**
-     * Method overriden from Todo's getMessage method to return Deadline type and deadline
-     * 
+     * Method overridden from Todo's getMessage method to return Deadline type and deadline
+     *
      * @return String to be rendered to give information on the Deadline
      */
+    @Override
     public String getMessage() {
         return String.format("[D][%s] %s (by: %s)", this.getIsDoneIcon(), this.message,
                 this.getPrettierDeadlineDateTime());
     }
 
-    @Override
     /**
      * Method overridden the super class' to return a new Deadline that is marked as done instead of
      * a new Todo
-     * 
+     *
      * @return Deadline that is marked as done
      */
+    @Override
     public Deadline markAsDone() {
         return new Deadline(this.message, true, this.getDeadline());
     }

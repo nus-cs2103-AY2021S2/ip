@@ -8,6 +8,10 @@ import java.util.*;
 public class Storage {
     private final String filePath;
     private final String directoryPath;
+    private static final int TODO_TYPE_INDEX = 0;
+    private static final int TODO_IS_DONE_INDEX = 1;
+    private static final int TODO_MESSAGE_INDEX = 2;
+    private static final int TODO_EXTRA_MESSAGE_INDEX = 3;
 
     public Storage(String filePath, String directoryPath) {
         this.filePath = filePath;
@@ -17,7 +21,7 @@ public class Storage {
     /**
      * Attempt to retrieve a local save of the user's tasks on their pc as a list, if not found,
      * return the an empty list
-     * 
+     *
      * @return List containing either existing Todos based on data file or an empty list
      */
     public List<Optional<? extends Todo>> retrieveLocalDatabase() {
@@ -31,29 +35,30 @@ public class Storage {
                 List<String> line = Arrays.asList(sc.nextLine().split("\\|"));
 
                 // line = [type, isDone, message, extraMessage (event / deadline)]
-                String type = line.get(0);
-                boolean isDone = line.get(1) == "1";
-                String message = line.get(2);
+                String type = line.get(TODO_TYPE_INDEX);
+                boolean isDone = line.get(TODO_IS_DONE_INDEX).equals("1");
+                String message = line.get(TODO_MESSAGE_INDEX);
 
+                // @formatter:off
                 switch (type) {
-
                     case "T":
                         // create new todo
-                        existingTodosList.add(Optional.ofNullable(new Todo(message, isDone)));
+                        existingTodosList.add(Optional.of(new Todo(message, isDone)));
                         break;
-
                     case "D":
                         // create new deadline
-                        existingTodosList.add(
-                                Optional.ofNullable(new Deadline(message, isDone, line.get(3))));
+                        existingTodosList.add(Optional.of(
+                                    new Deadline(message,
+                                                isDone,
+                                                line.get(TODO_EXTRA_MESSAGE_INDEX))));
                         break;
-
                     case "E":
                         // create new event
-                        existingTodosList
-                                .add(Optional.ofNullable(new Event(message, isDone, line.get(3))));
+                        existingTodosList.add(Optional.of(
+                                    new Event(message,
+                                            isDone,
+                                            line.get(TODO_EXTRA_MESSAGE_INDEX))));
                         break;
-
                 }
             }
             sc.close();
@@ -67,7 +72,7 @@ public class Storage {
 
     /**
      * Saves all tasks from the todosList into the local database
-     * 
+     *
      * @param todosList List of todos passed to be saved into local database
      */
     public void saveTasksToLocalDatabase(List<Optional<? extends Todo>> todosList) {

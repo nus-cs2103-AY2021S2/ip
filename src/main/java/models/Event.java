@@ -17,7 +17,7 @@ public class Event extends Todo {
      * Constructor to allow setting of the eventTime in an Event object
      * 
      * @param message String message that a Todo contains
-     * @param eventTime String specific to events denoting when the event will be occurring
+     * @param eventStringDateTime String specific to events denoting when the event will be occurring
      */
     public Event(String message, String eventStringDateTime) {
         super(message);
@@ -30,7 +30,7 @@ public class Event extends Todo {
      * 
      * @param message String message that a Todo contains
      * @param isDone boolean denoting if a Todo is done
-     * @param eventTime String specific to events denoting when the event will be occurring
+     * @param eventStringDateTime String specific to events denoting when the event will be occurring
      */
     public Event(String message, boolean isDone, String eventStringDateTime) {
         super(message, isDone);
@@ -41,7 +41,7 @@ public class Event extends Todo {
     /**
      * Expects String in the format dd/MM/yyyy HHMM and returns LocalDateTime object
      * 
-     * @param eventDateString String passed in with the format dd/MM/yyyy HHMM
+     * @param eventDateTimeString String passed in with the format dd/MM/yyyy HHMM
      * @return LocalDateTime object from String eventTimeString passed in
      * @throws DateTimeParseException when the date time is in the wrong format
      */
@@ -72,24 +72,24 @@ public class Event extends Todo {
         return String.format("%s hrs", this.eventDateTime.format(outputDateFormat));
     }
 
-    @Override
     /**
-     * Method overriden from Todo's getMessage method to return event type and eventTime
-     * 
+     * Method overridden from Todo's getMessage method to return event type and eventTime
+     *
      * @return String to be rendered to give information on the Event
      */
+    @Override
     public String getMessage() {
         return String.format("[E][%s] %s (at: %s)", this.getIsDoneIcon(), this.message,
                 this.getPrettierEventTime());
     }
 
-    @Override
     /**
      * Method overridden the super class' to return a new Event that is marked as done instead of a
      * new Todo
-     * 
+     *
      * @return Event that is marked as done
      */
+    @Override
     public Event markAsDone() {
         return new Event(this.message, true, this.getEventTime());
     }

@@ -37,7 +37,7 @@ public class TaskListTest {
     List<Optional<? extends Todo>> todosList = null;
     try {
       assert commandArgs != null;
-      todosList = taskList.addTodo(commandArgs).getTodosList();
+      todosList = taskList.addTodo(commandArgs).getTodos();
     } catch (DukeBlankTaskException e) {
       e.printStackTrace();
     }
@@ -66,7 +66,7 @@ public class TaskListTest {
     try {
       assert commandArgs != null;
       try {
-        todosList = taskList.addDeadline(commandArgs).getTodosList();
+        todosList = taskList.addDeadline(commandArgs).getTodos();
       } catch (DukeBlankDetailsException | DukeDateTimeParseException e) {
         e.printStackTrace();
       }
@@ -101,7 +101,7 @@ public class TaskListTest {
     try {
       assert commandArgs != null;
       try {
-        todosList = taskList.addEvent(commandArgs).getTodosList();
+        todosList = taskList.addEvent(commandArgs).getTodos();
       } catch (DukeBlankDetailsException | DukeDateTimeParseException e) {
         e.printStackTrace();
       }

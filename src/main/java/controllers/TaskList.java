@@ -13,14 +13,16 @@ import exceptions.DukeBlankDetailsException;
 import exceptions.DukeBlankTaskException;
 import exceptions.DukeDateTimeParseException;
 import exceptions.DukeTaskIndexOutOfRangeException;
+
 import models.Deadline;
 import models.Event;
 import models.Todo;
+
 import views.TodosView;
 
 public class TaskList {
     /** todosList contains the state of the todos */
-    private final List<Optional<? extends Todo>> todosList;
+    private final List<Optional<? extends Todo>> todos;
     /** TodosView initialised to render view of Todos */
     private final TodosView todosView = new TodosView();
 
@@ -29,7 +31,7 @@ public class TaskList {
      * list of Optional Todo objects
      */
     public TaskList() {
-        this.todosList = new ArrayList<>();
+        this.todos = new ArrayList<>();
     }
 
     /**
@@ -38,7 +40,7 @@ public class TaskList {
      * @param todosList is an existing List of Optional Todos
      */
     public TaskList(List<Optional<? extends Todo>> todosList) {
-        this.todosList = todosList;
+        this.todos = todosList;
     }
 
     /**
@@ -46,7 +48,7 @@ public class TaskList {
      * Todos
      */
     public void listTodos() {
-        this.todosView.listTodos(this.todosList);
+        this.todosView.listTodos(this.todos);
     }
 
     /**
@@ -54,8 +56,8 @@ public class TaskList {
      * 
      * @return List<Optional<? extends Todo>> list of all todos contained in TodosController
      */
-    public List<Optional<? extends Todo>> getTodosList() {
-        return this.todosList;
+    public List<Optional<? extends Todo>> getTodos() {
+        return this.todos;
     }
 
     /**
@@ -65,13 +67,13 @@ public class TaskList {
      * @param keywordList String list of keywords to be matched
      */
     public void findByKeyword(List<String> keywordList) {
-        todosView.matchListTodos(this.todosList.stream().filter(optTodo -> {
+        todosView.matchListTodos(this.todos.stream().filter(optTodo -> {
             // check if todo message contains keyword
             return optTodo.map(Todo::getMessage).map(message -> {
                 // split message by space as delimiter
-                List<String> splitMessage = Arrays.asList(message.split(" "));
+                List<String> messagesSplitByWhitespace = Arrays.asList(message.split(" "));
                 // if any part of split message is contained in keywordList, return true
-                return splitMessage.stream().anyMatch(keywordList::contains);
+                return messagesSplitByWhitespace.stream().anyMatch(keywordList::contains);
             }).orElse(false);
         }).collect(Collectors.toList()));
     }
@@ -90,11 +92,11 @@ public class TaskList {
         Optional<? extends Todo> newTodoObject =
                 Optional.of(new Todo(String.join(" ", newTodoList)));
         try {
-            this.todosView.added(newTodoObject, this.todosList.size() + 1);
+            this.todosView.added(newTodoObject, this.todos.size() + 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new TaskList(Stream.concat(this.todosList.stream(), Stream.of(newTodoObject))
+        return new TaskList(Stream.concat(this.todos.stream(), Stream.of(newTodoObject))
                 .collect(Collectors.toList()));
     }
 
@@ -118,19 +120,19 @@ public class TaskList {
 
         // get index of todo to delete
         int idxDelete = Integer.parseInt(deleteTodoArgs.get(0)) - 1;
-        if (idxDelete >= this.todosList.size()) {
-            throw new DukeTaskIndexOutOfRangeException(
-                    "The index you input has an index that is beyond the range of the number of tasks you "
+        if (idxDelete >= this.todos.size()) {
+            throw new DukeTaskIndexOutOfRangeException("The index you input has an index that "
+                            + "is beyond the range of the number of tasks you "
                             + "currently have. Please try again.");
         }
 
         // render deleted view
-        todosView.deleted(this.todosList.get(idxDelete), this.todosList.size() - 1);
+        todosView.deleted(this.todos.get(idxDelete), this.todos.size() - 1);
 
         // remove from stream
         return new TaskList(
-                IntStream.range(0, this.todosList.size()).filter(idx -> idx != idxDelete)
-                        .mapToObj(this.todosList::get).collect(Collectors.toList()));
+                IntStream.range(0, this.todos.size()).filter(idx -> idx != idxDelete)
+                        .mapToObj(this.todos::get).collect(Collectors.toList()));
     }
 
     /**
@@ -153,28 +155,28 @@ public class TaskList {
             throw new DukeBlankTaskException("The Deadline you are trying to add cannot be blank!");
         }
 
-        ArrayList<String> message = new ArrayList<>();
-        ArrayList<String> deadline = new ArrayList<>();
+        ArrayList<String> messages = new ArrayList<>();
+        ArrayList<String> deadlines = new ArrayList<>();
 
         // iterate through list to find where escape character is
         // once found, everything after is part of the deadline
         newDeadlineList.stream().forEach(substring -> {
             if (substring.contains("/")) {
-                deadline.add(substring);
-            } else if (deadline.size() == 0) {
-                message.add(substring);
+                deadlines.add(substring);
+            } else if (deadlines.size() == 0) {
+                messages.add(substring);
             } else {
-                deadline.add(substring);
+                deadlines.add(substring);
             }
         });
 
         // if no message, throw exception
-        if (message.size() == 0) {
+        if (messages.size() == 0) {
             throw new DukeBlankTaskException("Please define a task message for your Deadline");
         }
 
         // if no deadline input or /by without any deadline, throw exception
-        if (deadline.size() <= 1) {
+        if (deadlines.size() <= 1) {
             // @formatter:off
             String exceptionMessage = "Please add a /by followed by the deadline time and date in DD/MM/YYYY "
                     + "HHMM to specify a time and date for the Deadline task. If there is no time for "
@@ -188,18 +190,18 @@ public class TaskList {
         // wrong format
         Optional<Deadline> newDeadline;
         try {
-            newDeadline = Optional.of(new Deadline(String.join(" ", message),
-                    String.join(" ", deadline.subList(1, deadline.size()))));
+            newDeadline = Optional.of(new Deadline(String.join(" ", messages),
+                    String.join(" ", deadlines.subList(1, deadlines.size()))));
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
                     "Please format your date after /by to be DD/MM/YYYY HHMM");
         }
 
         // render added view
-        this.todosView.added(newDeadline, this.todosList.size() + 1);
+        this.todosView.added(newDeadline, this.todos.size() + 1);
 
         // return new controller
-        return new TaskList(Stream.concat(this.todosList.stream(), Stream.of(newDeadline))
+        return new TaskList(Stream.concat(this.todos.stream(), Stream.of(newDeadline))
                 .collect(Collectors.toList()));
     }
 
@@ -224,28 +226,28 @@ public class TaskList {
             throw new DukeBlankTaskException("The Event you are trying to add cannot be blank!");
         }
 
-        ArrayList<String> message = new ArrayList<>();
-        ArrayList<String> eventTime = new ArrayList<>();
+        ArrayList<String> messages = new ArrayList<>();
+        ArrayList<String> eventTimes = new ArrayList<>();
 
         // iterate through list to find where escape character is
         // once found, everything after is part of the deadline
         newEventList.forEach(substring -> {
             if (substring.contains("/")) {
-                eventTime.add(substring);
-            } else if (eventTime.size() == 0) {
-                message.add(substring);
+                eventTimes.add(substring);
+            } else if (eventTimes.size() == 0) {
+                messages.add(substring);
             } else {
-                eventTime.add(substring);
+                eventTimes.add(substring);
             }
         });
 
         // if no message, throw exception
-        if (message.size() == 0) {
+        if (messages.size() == 0) {
             throw new DukeBlankTaskException("Please define a task message for your Event");
         }
 
         // if no deadline input or /by without any deadline, throw exception
-        if (eventTime.size() <= 1) {
+        if (eventTimes.size() <= 1) {
             // @formatter:off
             String exceptionMessage = "Please add a /by followed by the event time and date in DD/MM/YYYY "
                             + "HHMM to specify a time and date for the Event task. If there is no time for "
@@ -258,21 +260,21 @@ public class TaskList {
         // Creating an event might throw an exception if the date is in the wrong format
         Optional<Event> newEvent;
         try {
-            newEvent = Optional.of(new Event(String.join(" ", message),
-                    String.join(" ", eventTime.subList(1, eventTime.size()))));
+            newEvent = Optional.of(new Event(String.join(" ", messages),
+                    String.join(" ", eventTimes.subList(1, eventTimes.size()))));
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
                     "Please format your date after /at to be DD/MM/YYYY HHMM");
         }
 
         try {
-            this.todosView.added(newEvent, this.todosList.size() + 1);
+            this.todosView.added(newEvent, this.todos.size() + 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // return new controller
-        return new TaskList(Stream.concat(this.todosList.stream(), Stream.of(newEvent))
+        return new TaskList(Stream.concat(this.todos.stream(), Stream.of(newEvent))
                 .collect(Collectors.toList()));
     }
 
@@ -288,14 +290,15 @@ public class TaskList {
      */
     public TaskList markAsDone(List<String> doneArgs) throws DukeTaskIndexOutOfRangeException {
         int idxIsDone = Integer.parseInt(doneArgs.get(0)) - 1;
-        if (idxIsDone >= this.todosList.size()) {
-            throw new DukeTaskIndexOutOfRangeException(
-                    "The index you input has an index that is beyond the range of the number of tasks you currently have. Please try again.");
+        if (idxIsDone >= this.todos.size()) {
+            throw new DukeTaskIndexOutOfRangeException("The index you input has an index that is "
+                            + "beyond the range of the number of tasks you currently have. "
+                            + "Please try again.");
         }
-        return new TaskList(IntStream.range(0, this.todosList.size()).mapToObj(idx -> {
+        return new TaskList(IntStream.range(0, this.todos.size()).mapToObj(idx -> {
             if (idx == idxIsDone) {
                 Optional<? extends Todo> doneTodo =
-                        this.todosList.get(idx).map(Todo::markAsDone);
+                        this.todos.get(idx).map(Todo::markAsDone);
                 try {
                     this.todosView.markAsDone(doneTodo);
                 } catch (Exception e) {
@@ -303,7 +306,7 @@ public class TaskList {
                 }
                 return doneTodo;
             } else {
-                return this.todosList.get(idx);
+                return this.todos.get(idx);
             }
         }).collect(Collectors.toList()));
     }

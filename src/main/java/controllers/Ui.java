@@ -50,80 +50,67 @@ public class Ui {
             try {
                 //@formatter:off
                 switch (command.getCommand()) {
-
                 case LIST:
                     // list all the current todos
                     todosController.listTodos();
                     break;
-
                 case EVENT:
                     // add a new event to the model
                     try {
                         todosController = todosController.addEvent(command.getCommandArgs());
-
                     } catch (Exception e) {
                         greeting.printErrorMessage(e);
                     }
                     break;
-
                 case TODO:
                     // add a new todo to the model
                     try {
                         todosController = todosController.addTodo(command.getCommandArgs());
-
                     } catch (DukeBlankTaskException e) {
                         greeting.printErrorMessage(e);
                     }
                     break;
-
                 case DEADLINE:
                     // amend a current todo's deadline
                     try {
                         todosController = todosController.addDeadline(command.getCommandArgs());
-
                     } catch (Exception e) {
                         greeting.printErrorMessage(e);
                     }
                     break;
-
                 case DONE:
                     // mark a todo as done
                     try {
                         todosController = todosController.markAsDone(command.getCommandArgs());
-
                     } catch (DukeTaskIndexOutOfRangeException e) {
                         greeting.printErrorMessage(e);
                     }
                     break;
-
                 case DELETE:
                     // delete a todo from the list
                     try {
                         todosController = todosController.deleteTodo(command.getCommandArgs());
-
                     } catch (Exception e) {
                         greeting.printErrorMessage(e);
                     }
                     break;
-                    
                 case FIND:
                     // find a todo with the relevant keyword
                     todosController.findByKeyword(command.getCommandArgs());
                     break;
-
                 case BYE:
                     // break out of main function
                     greeting.bye();
 
                     // save current todosController tasks to local db before exit
-                    storage.saveTasksToLocalDatabase(todosController.getTodosList());
+                    storage.saveTasksToLocalDatabase(todosController.getTodos());
 
                     // close scanner preventing mem leak
                     sc.close();
 
-                    // return to end function
+                    // return is called here to end start()
+                    // thereby, stopping the instance of Duke
                     return;
-
                 case UNKNOWN:
                     // Fallthrough
                 default:
@@ -135,11 +122,9 @@ public class Ui {
                         greeting.printErrorMessage(e);
                     }
                     break;
-                    
                 }
-
             } catch (DukeCommandNotFoundException e) {
-                // catch error from Comamnd.getCommand()
+                // catch error from Command.getCommand()
                 greeting.printErrorMessage(e);
             } catch (Exception e) {
                 // program not supposed to end up here
