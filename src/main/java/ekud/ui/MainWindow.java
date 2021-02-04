@@ -1,6 +1,7 @@
 package ekud.ui;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import ekud.Ekud;
 import ekud.common.exception.EkudException;
@@ -74,6 +75,16 @@ public class MainWindow extends AnchorPane {
             dialogueContainer.getChildren().add(DialogueBox.genEkudDialogue(reply, dukeImage));
         } catch (EkudException e) {
             dialogueContainer.getChildren().add(DialogueBox.genEkudDialogue(e.toString(), dukeImage));
+        }
+
+        if (!ekud.isOnline()) {
+            userInput.setDisable(true);
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.exit(0);
         }
     }
 }
