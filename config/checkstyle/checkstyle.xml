@@ -382,9 +382,12 @@
       <property name="allowMissingParamTags" value="true"/>
     </module>
 
+    <module name="MissingJavadocType"/>
+
     <!-- Checks that every public method (excluding getters, setters and constructors) has a header comment. -->
     <module name="JavadocMethod">
-      <property name="allowedAnnotations" value="Override, Test, BeforeAll, BeforeEach, AfterAll, AfterEach, Subscribe"/>
+      <property name="allowedAnnotations"
+                value="Override, Test, BeforeAll, BeforeEach, AfterAll, AfterEach, Subscribe"/>
       <property name="scope" value="public"/>
       <property name="validateThrows" value="false"/>
       <property name="allowMissingParamTags" value="true"/>
