@@ -1,9 +1,18 @@
-public class Event extends Task {
-    protected String period;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Event(String description, String period) {
+public class Event extends Task {
+    protected LocalDate period;
+
+    public Event(String description, String period) throws DukeException {
         super(description);
-        this.period = period;
+        try {
+            this.period = LocalDate.parse(period);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! Please specify the date in this format:\n"
+                                        + "  event [task description] /at [yyyy-mm-dd]");
+        }
     }
 
     @Override
@@ -13,6 +22,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + period + ")";
+        return "[E]" + super.toString() + " (at: " + period.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

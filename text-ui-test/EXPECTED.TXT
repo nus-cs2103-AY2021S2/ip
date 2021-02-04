@@ -9,12 +9,12 @@ Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] cs2103 week 2 project (by: Thurs 2359)
+  [D][ ] cs2103 week 2 project (by: Jan 21 2021)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] cs2103 week 2 post-lecture quiz (by: Thurs 2359)
+  [D][ ] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -22,63 +22,63 @@ Nice! I've marked this task as done:
   [X] go through cs2103 weekly topics
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! The date and/or time cannot be empty.
+☹ OOPS!!! The date (optional: and time) cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [X] cs2103 week 2 post-lecture quiz (by: Thurs 2359)
+  [X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
   1.[T][X] go through cs2103 weekly topics
-  2.[D][X] cs2103 week 2 post-lecture quiz (by: Thurs 2359)
-  3.[D][ ] cs2103 week 2 project (by: Thurs 2359)
+  2.[D][X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+  3.[D][ ] cs2103 week 2 project (by: Jan 21 2021)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] cs2103 lecture (at: Fri 2-4pm)
+  [E][ ] cs2103 lecture (at: Jan 22 2021)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] cs2103 tutorial (by: Wed 5-6pm)
+  [E][ ] cs2103 tutorial (by: Jan 22 2021)
 Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 List of recognised user prompts:
   1. todo - adds a todo (E.g. todo borrow book)
-  2. deadline - adds a deadline (E.g. deadline return book /by Sunday
-  3. event - adds an event (E.g. event project meeting /at Mon 2-4pm)
+  2. deadline - adds a deadline (E.g. deadline return book /by yyyy-mm-dd)
+  3. event - adds an event (E.g. event project meeting /at yyyy-mm-dd)
   4. list - displays the list of tasks
   5. bye - terminates Duke ☹
 ____________________________________________________________
 ___________________________________________________________
 Here are the tasks in your list:
   1.[T][X] go through cs2103 weekly topics
-  2.[D][X] cs2103 week 2 post-lecture quiz (by: Thurs 2359)
-  3.[D][ ] cs2103 week 2 project (by: Thurs 2359)
-  4.[E][ ] cs2103 lecture (at: Fri 2-4pm)
-  5.[E][ ] cs2103 tutorial (by: Wed 5-6pm)
+  2.[D][X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+  3.[D][ ] cs2103 week 2 project (by: Jan 21 2021)
+  4.[E][ ] cs2103 lecture (at: Jan 22 2021)
+  5.[E][ ] cs2103 tutorial (by: Jan 22 2021)
 ____________________________________________________________
 ____________________________________________________________
 Task 0 is not in the task list!
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
-  [D][ ] cs2103 week 2 project (by: Thurs 2359)
+  [D][ ] cs2103 week 2 project (by: Jan 21 2021)
 Now you have 4 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [E][X] cs2103 lecture (at: Fri 2-4pm)
+  [E][X] cs2103 lecture (at: Jan 22 2021)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
   1. [T][X] go through cs2103 weekly topics
-  2. [D][X] cs2103 week 2 post-lecture quiz (by: Thurs 2359)
-  3. [E][X] cs2103 lecture (at: Fri 2-4pm)
-  4. [E][ ] cs2103 tutorial (at: Wed 5-6pm)
+  2. [D][X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+  3. [E][X] cs2103 lecture (at: Jan 22 2021)
+  4. [E][ ] cs2103 tutorial (by: Jan 22 2021)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

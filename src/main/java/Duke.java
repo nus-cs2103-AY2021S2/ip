@@ -8,7 +8,7 @@ public class Duke {
     private static final FileManager fileManager = new FileManager("data/tasksList.txt");
 
     public enum TaskType {
-        TODO, DEADLINE, EVENT;
+        TODO, DEADLINE, EVENT
     }
 
     private static void replyFormat(String reply) {
@@ -29,8 +29,8 @@ public class Duke {
         String promptMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                                 + "List of recognised user prompts:\n"
                                 + "  1. todo - adds a todo (E.g. todo borrow book)\n"
-                                + "  2. deadline - adds a deadline (E.g. deadline return book /by Sunday\n"
-                                + "  3. event - adds an event (E.g. event project meeting /at Mon 2-4pm)\n"
+                                + "  2. deadline - adds a deadline (E.g. deadline return book /by 2021-02-04)\n"
+                                + "  3. event - adds an event (E.g. event project meeting /at 2021-03-05)\n"
                                 + "  4. delete - removes a task from the lists of task\n"
                                 + "  5. list - displays the list of tasks\n"
                                 + "  6. bye - terminates Duke ☹";
@@ -56,7 +56,7 @@ public class Duke {
                 newTask = new ToDo(promptDescription);
                 tasksList.add(newTask);
                 systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
-                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                                    + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
                 replyFormat(systemMessage);
             } else {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -75,14 +75,14 @@ public class Duke {
                         tasksList.add(newTask);
                         counter++;
                         systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
-                                                    + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
                         replyFormat(systemMessage);
                     } else {
-                        throw new DukeException("☹ OOPS!!! The date and/or time cannot be empty.");
+                        throw new DukeException("☹ OOPS!!! The date cannot be empty.");
                     }
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("☹ OOPS!!! Please specify the date and/or time in this format:\n"
-                                                        + "  deadline [task description] /by [date and/or time]");
+                    throw new DukeException("☹ OOPS!!! Please specify the date in this format:\n"
+                                                + "  deadline [task description] /by [yyyy-mm-dd]");
                 }
             } else {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -101,14 +101,14 @@ public class Duke {
                         tasksList.add(newTask);
                         counter++;
                         systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
-                                                    + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
                         replyFormat(systemMessage);
                     } else {
-                        throw new DukeException("☹ OOPS!!! The date and/or time cannot be empty.");
+                        throw new DukeException("☹ OOPS!!! The date cannot be empty.");
                     }
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("☹ OOPS!!! Please specify the date and/or time in this format:\n"
-                                                        + "  event [task description] /at [date and/or time]");
+                    throw new DukeException("☹ OOPS!!! Please specify the date in this format:\n"
+                                                + "  event [task description] /at [yyyy-mm-dd]");
                 }
             } else {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -141,11 +141,12 @@ public class Duke {
     private static void deleteTask(String promptDescription) throws DukeException {
         try {
             int taskNum = Integer.parseInt(promptDescription);
+
             if (taskNum > 0 && taskNum <= tasksList.size()) {
                 counter--;
                 Task taskToDelete = tasksList.get(taskNum - 1);
                 String deletedMessage = "Noted. I've removed this task:\n" + "  " + taskToDelete + "\n"
-                                                        + "Now you have " + counter + " tasks in the list";
+                                            + "Now you have " + counter + " tasks in the list";
                 tasksList.remove(taskNum - 1);
                 replyFormat(deletedMessage);
             } else {
@@ -183,25 +184,33 @@ public class Duke {
         }
 
         try {
-            if (prompt.equals("list")) {
+            switch (prompt) {
+            case "list":
                 displayTasks(tasksList);
-            } else if (prompt.equals("done")) {
+                break;
+            case "done":
                 completeTask(promptDescription);
                 fileManager.saveFile(tasksList);
-            } else if (prompt.equals("delete")) {
+                break;
+            case "delete":
                 deleteTask(promptDescription);
                 fileManager.saveFile(tasksList);
-            } else if (prompt.equals("todo")) {
+                break;
+            case "todo":
                 addTask(TaskType.TODO, promptDescription);
                 fileManager.saveFile(tasksList);
-            } else if (prompt.equals("deadline")) {
+                break;
+            case "deadline":
                 addTask(TaskType.DEADLINE, promptDescription);
                 fileManager.saveFile(tasksList);
-            } else if (prompt.equals("event")) {
+                break;
+            case "event":
                 addTask(TaskType.EVENT, promptDescription);
                 fileManager.saveFile(tasksList);
-            } else {
+                break;
+            default:
                 displayPrompts();
+                break;
             }
         } catch (DukeException e){
             replyFormat(e.getMessage());

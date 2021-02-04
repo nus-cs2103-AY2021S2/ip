@@ -1,12 +1,12 @@
 todo go through cs2103 weekly topics
-deadline cs2103 week 2 post-lecture quiz /by Thurs 2359
-deadline cs2103 week 2 project /by Thurs 2359
+deadline cs2103 week 2 post-lecture quiz /by 2021-01-21
+deadline cs2103 week 2 project /by 2021-01-21
 done 1
 deadline test /by
 done 2
 list
-event cs2103 lecture /at Fri 2-4pm
-event cs2103 tutorial /at Wed 5-6pm
+event cs2103 lecture /at 2021-01-22
+event cs2103 tutorial /at 2021-01-27
 blah
 list
 done 0
