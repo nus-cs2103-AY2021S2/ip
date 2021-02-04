@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import ekud.Ekud;
 import ekud.common.exception.EkudException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -81,13 +82,22 @@ public class MainWindow extends AnchorPane {
         }
 
         if (!ekud.isOnline()) {
+            // block input
             userInput.setDisable(true);
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.exit(0);
+            sendButton.setDisable(true);
+
+            // quit the application
+            Thread exitThread = new Thread(this::countDownAndQuit);
+            exitThread.start();
         }
+    }
+
+    private void countDownAndQuit() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Platform.exit();
     }
 }
