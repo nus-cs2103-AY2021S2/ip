@@ -13,6 +13,9 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    public Main() throws IOException, DukeException {
+    }
+
     @Override
     public void start(Stage stage) {
         try {
@@ -22,6 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -39,7 +39,7 @@ public class Duke extends Application {
 //     */
 
 
-    public Duke() {
+    public Duke() throws IOException, DukeException {
         try {
             this.storage = new Storage("./myData.txt");
         } catch (IOException e) {
@@ -48,6 +48,19 @@ public class Duke extends Application {
         this.tasks = new TaskList();
         this.ui = new Ui();
 
+        storage.initialise(tasks);
+        //ui.initialise();
+        //ui.tasksLeft(tasks);
+
+
+    }
+
+    public TaskList getTaskList() {
+        return this.tasks;
+    }
+
+    public Storage getStorage() {
+        return this.storage;
     }
 
     @Override

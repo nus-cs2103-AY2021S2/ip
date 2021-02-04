@@ -11,23 +11,28 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public void initialise() {
+    public static String initialise() {
+        String output = "";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello I am\n" + logo);
-        System.out.println("What can I do for you?");
-        System.out.println("---------------------------------");
+        output += "Hello I am\n" + logo + "\n";
+        output += "What can I do for you?" + "\n";
+        output += "Type \"list\" to see your tasks!" + "\n";
+        output += "---------------------------------";
+        return output;
     }
 
     /**
      * Tells the user how many tasks they have currently.
      * @param  tasks The TaskList object containing all tasks.
      */
-    public void tasksLeft(TaskList tasks) {
-        System.out.println("You currently have " + tasks.getNumItems() + " tasks.");
+    public static String tasksLeft(TaskList tasks) {
+        String output = "";
+        output += "You currently have " + tasks.getNumItems() + " tasks.";
+        return output;
     }
 
     /**
