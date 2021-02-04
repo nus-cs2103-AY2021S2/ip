@@ -1,4 +1,1 @@
-[T][X] read a book
-[T][X] read a book
-[T][X] read a book
-[T][ ] read a book
+[D][X] return book (by: Sunday)

@@ -22,19 +22,15 @@ public class Parser {
     public String makingSenseOfUserCommand(ArrayList<Task> arrayList, String path, String input) {
            String holder;
 
-
-           if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
+          if (input.contains("bye")) {
+              holder = "Bye. Hope to see you again soon!" + "\n";
+          } else if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
                         || input.contains("list") || input.contains("done") || input.contains("delete") || input.contains("find"))) {
                     holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-("+ "\n";
            } else if (input.equals("todo") || input.equals("event") || input.equals("deadline")
                         || input.equals("done") || input.equals("delete") || input.equals("find")) {
                     holder = "☹ OOPS!!! The description of a todo cannot be empty."+ "\n";
-           } else if (input.contains("bye")) {
-
-                holder = "Bye. Hope to see you again soon!"+ "\n";
-
             } else if (input.equals("list")) {
-
                 holder = "Here are the tasks in your list:" + "\n";
                 for (Task m : arrayList) {
                     holder = holder.concat(m.index + ". " + m);
