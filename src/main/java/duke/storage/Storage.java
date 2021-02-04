@@ -68,7 +68,7 @@ public class Storage {
             boolean isDone = Integer.parseInt(taskArgs[1]) == 1;
             String desc = taskArgs[2];
 
-            Task task = null;
+            Task task;
 
             switch (type) {
             case TODO:
@@ -84,7 +84,6 @@ public class Storage {
                 throw new DukeException("Can't convert string from menu to order...");
             }
             if (isDone) {
-                assert task != null;
                 task.markDone();
             }
             return task;

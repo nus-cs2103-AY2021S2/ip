@@ -28,7 +28,6 @@ public class Ui {
         String str = "Thanks for coming, we hope to see you again!\n"
                 + "We will be closing shortly...";
         assignResponse(str);
-
     }
 
     /**

@@ -47,8 +47,11 @@ public class MainWindow extends AnchorPane {
         logo.setPreserveRatio(true);
         logo.setTranslateX(10);
         dialogContainer.setAlignment(Pos.BASELINE_CENTER);
-        dialogContainer.getChildren().addAll(
-                logo, DialogBox.getDukeDialog(Ui.welcomeString(), dukeImage)
+        dialogContainer
+                .getChildren()
+                .addAll(
+                        logo,
+                        DialogBox.getDukeDialog(Ui.welcomeString(), dukeImage)
         );
     }
 

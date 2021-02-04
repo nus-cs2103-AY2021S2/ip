@@ -33,10 +33,13 @@ public class Deadline extends Task {
         if (command.length == 1) {
             throw new DukeException("There's not enough information about your Deadline order!");
         }
+
         String[] args = command[1].split(" /by ", 2);
+
         if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()) {
             throw new DukeException("Looks like your Deadline order isn't complete...");
         }
+
         return new Deadline(args[0], DateTime.convertStringToDate(args[1]));
     }
 
