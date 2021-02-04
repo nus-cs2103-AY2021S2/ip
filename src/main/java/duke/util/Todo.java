@@ -53,4 +53,9 @@ public class Todo extends Task {
         boolean isDone = args[1].equals("1");
         return new Todo(args[2], isDone);
     }
+
+    @Override
+    public Todo completed() {
+        return new Todo(description, true);
+    }
 }

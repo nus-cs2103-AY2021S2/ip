@@ -87,7 +87,7 @@ public class Parser {
 
     private static void checkValidDate(String s) throws DukeInputException {
         try {
-            LocalDate date = LocalDate.parse(s);
+            LocalDate.parse(s);
         } catch (DateTimeParseException e) {
             throw new DukeInputException(
                 String.format("\"%s\" is a wrong date format! Please use YYYY-MM-DD format.", s));
@@ -129,7 +129,7 @@ public class Parser {
             throw new DukeInputException("Please input a task number!");
         } else {
             try {
-                int taskNum = Integer.parseInt(s);
+                Integer.parseInt(s);
             } catch (NumberFormatException e) {
                 throw new DukeInputException(
                         String.format("\"%s\" is not a valid number!", s));
@@ -142,7 +142,7 @@ public class Parser {
             throw new DukeInputException("Please input a task number!");
         } else {
             try {
-                int taskNum = Integer.parseInt(s);
+                Integer.parseInt(s);
             } catch (NumberFormatException e) {
                 throw new DukeInputException(
                         String.format("\"%s\" is not a valid number!", s));

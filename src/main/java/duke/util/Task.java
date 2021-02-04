@@ -36,9 +36,7 @@ public abstract class Task {
     /**
      * Set task as completed.
      */
-    public void completed() {
-        isDone = true;
-    }
+    public abstract Task completed();
 
     private String getStatus() {
         return isDone ? "X" : " ";

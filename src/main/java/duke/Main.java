@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -24,7 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(sp);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            fxmlLoader.<MainWindow>getController().greetings();
+            fxmlLoader.<MainWindow>getController().showGreetings();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

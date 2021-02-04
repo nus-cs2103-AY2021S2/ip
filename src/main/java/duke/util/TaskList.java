@@ -25,7 +25,7 @@ public class TaskList {
      * @param lst List of tasks.
      */
     public TaskList(List<Task> lst) {
-        this.lst = FXCollections.observableArrayList(lst); 
+        this.lst = FXCollections.observableArrayList(lst);
     }
 
     /**
@@ -66,11 +66,13 @@ public class TaskList {
         try {
             t = lst.get(i);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInputException(String.format("\"%d\" is an invalid number!", i));
+            throw new DukeInputException(String.format("\"%d\" is an invalid number!", i - 1));
         }
-        t.completed();
 
-        return t;
+        Task completedTask = t.completed();
+        lst.set(i, completedTask);
+
+        return completedTask;
     }
 
     /**

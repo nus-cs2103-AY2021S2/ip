@@ -1,17 +1,17 @@
 package duke;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import duke.util.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,7 +26,7 @@ public class MainWindow extends SplitPane {
     @FXML
     private Button sendButton;
     @FXML
-    private ListView<String> listView;
+    private ListView<Task> listView;
 
     private Duke duke;
 
@@ -36,16 +36,27 @@ public class MainWindow extends SplitPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        listView.setCellFactory(new Callback<ListView<Task>, ListCell<Task>>() {
+            @Override
+            public ListCell<Task> call(ListView<Task> list) {
+                return new ListCell<>() {
+                    @Override protected void updateItem(Task item, boolean empty) {
+                        super.updateItem(item, empty);
+                        setText(item == null ? "" : (this.getIndex() + 1) + ". " + item.toString());
+                    }
+                };
+            }
+        });
     }
 
     public void setDuke(Duke d) {
         duke = d;
-        // listView.setItems(duke.lst);
+        listView.setItems(duke.getTaskList());
     }
 
-    public void greetings() {
+    public void showGreetings() {
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog("hihi", dukeImage)
+            DialogBox.getDukeDialog(duke.displayGreetings(), dukeImage)
         );
     }
 
@@ -56,14 +67,14 @@ public class MainWindow extends SplitPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = input;
+        String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
 
-        if (input.equals("bye")) {
+        if (response.equals("shutdownConfirm")) {
             Stage stage = (Stage) sendButton.getScene().getWindow();
             // do what you have to do
             stage.close();

@@ -46,7 +46,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    // ObservableList<String> lst = FXCollections.observableArrayList("a","b","c");
+    private boolean isWaitingSaveFileResponse = false;
+    private boolean isWaitingDeleteTaskResponse = false;
+    private int taskToBeDeleted;
 
     /**
      * Constructor to create Duke object.
@@ -63,135 +65,120 @@ public class Duke {
         }
     }
 
-    /**
-     * Main method. Creates Duke object and calls start().
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/dukeData.txt");
-        duke.start();
-    }
+    public String getResponse(String input) {
 
-    /**
-     * Starts the Duke bot.
-     */
-    public void start() {
-        ui.greetings();
-
-        for (;;) {
-
-            String input = ui.readInput();
-
-            try {
-                Parser.parseInput(input);
-            } catch (DukeInputException e) {
-                ui.displayError(e);
-                continue;
-            }
-
-            String[] s = input.split(" ", 2);
-            String command = s[0];
-            String args = s.length == 2 ? s[1] : "";
-
-            try {
-                switch (command) {
-                case "bye":
-                    if (exit()) {
-                        return;
-                    }
-                    break;
-                case "list":
-                    ui.displayList(tasks.listOutTask());
-                    break;
-                case "done":
-                    completeTask(args);
-                    break;
-                case "todo":
-                    addTask(Todo.createTodo(args));
-                    break;
-                case "deadline":
-                    addTask(Deadline.createDeadline(args));
-                    break;
-                case "event":
-                    addTask(Event.createEvent(args));
-                    break;
-                case "delete":
-                    deleteTask(args);
-                    break;
-                case "save":
-                    storage.saveTaskList(tasks.getList());
-                    ui.saved();
-                    break;
-                case "load":
-                    tasks = new TaskList(storage.loadTaskList());
-                    ui.loaded();
-                    break;
-                case "help":
-                    ui.help();
-                    break;
-                case "search":
-                    ui.displayList(tasks.search(args));
-                    break;
-                default:
-                    // Should never reach here unless parser missed an invalid input.
-                    assert false : "Parser missed an invalid input";
-                }
-            } catch (DukeException e) {
-                ui.displayError(e);
-            }
+        if (isWaitingSaveFileResponse) {
+            return exit(input);
         }
+
+        if (isWaitingDeleteTaskResponse) {
+            return deleteTask(input);
+        }
+
+
+        try {
+            Parser.parseInput(input);
+        } catch (DukeInputException e) {
+            return ui.displayError(e);
+        }
+
+        String[] s = input.split(" ", 2);
+        String command = s[0];
+        String args = s.length == 2 ? s[1] : "";
+
+        try {
+            switch (command) {
+            case "bye":
+                isWaitingSaveFileResponse = true;
+                return ui.saveFilePrompt();
+            case "list":
+                return ui.displayList(tasks.listOutTask());
+            case "done":
+                return completeTask(args);
+            case "todo":
+                return addTask(Todo.createTodo(args));
+            case "deadline":
+                return addTask(Deadline.createDeadline(args));
+            case "event":
+                return addTask(Event.createEvent(args));
+            case "delete":
+                taskToBeDeleted = Integer.parseInt(args);
+                isWaitingDeleteTaskResponse = true;
+                return ui.deleteTaskPrompt();
+            case "save":
+                storage.saveTaskList(tasks.getList());
+                return ui.saved();
+            case "load":
+                tasks = new TaskList(storage.loadTaskList());
+                return ui.loaded();
+            case "help":
+                return ui.help();
+            case "search":
+                return ui.displayList(tasks.search(args));
+            default:
+                // Should never reach here unless parser missed an invalid input.
+                assert false : "Parser missed an invalid input";
+            }
+        } catch (DukeException e) {
+            return ui.displayError(e);
+        }
+
+        throw new RuntimeException("ERROR"); // Should never reach here;
     }
 
-    private void completeTask(String num) throws DukeInputException {
+    private String completeTask(String num) throws DukeInputException {
         int taskNum = Integer.parseInt(num);
         Task t = tasks.completeTask(taskNum - 1);
-        ui.completeTask(t.toString());
+        return ui.completeTask(t.toString());
     }
 
-    private void addTask(Task t) {
+    private String addTask(Task t) {
         tasks.addTask(t);
-        ui.addTask(t.toString(), tasks.size());
+        return ui.addTask(t.toString(), tasks.size());
     }
 
-    private void deleteTask(String num) throws DukeInputException {
-        String s = ui.deleteTaskPrompt();
+    private String deleteTask(String s) {
         try {
             Parser.parseYesNo(s);
         } catch (DukeInputException e) {
-            ui.displayError(e);
-            deleteTask(num);
-            return;
+            return ui.displayError(e);
         }
+        isWaitingDeleteTaskResponse = false;
         if (s.equals("y")) {
-            int taskNum = Integer.parseInt(num);
-            Task t = tasks.deleteTask(taskNum - 1);
-            ui.deleteTask(t.toString(), tasks.size());
+            Task t;
+            try {
+                t = tasks.deleteTask(taskToBeDeleted - 1);
+            } catch (DukeInputException e) {
+                return ui.displayError(e);
+            }
+            return ui.deleteTask(t.toString(), tasks.size());
         } else {
-            ui.abortDelete();
+            return ui.abortDelete();
         }
     }
 
-    private boolean exit() {
-        String s = ui.saveFilePrompt();
+    private String exit(String s) {
         try {
             Parser.parseYesNo(s);
         } catch (DukeInputException e) {
-            ui.displayError(e);
-            return exit();
+            return ui.displayError(e);
         }
+        isWaitingSaveFileResponse = false;
         if (s.equals("y")) {
             try {
                 storage.saveTaskList(tasks.getList());
-                ui.saved();
             } catch (DukeException e) {
-                ui.displayError(e);
-                return false;
+                return ui.displayError(e);
             }
         }
-        ui.exit();
-        return true;
+        return "shutdownConfirm";
     }
 
     protected ObservableList<Task> getTaskList() {
         return tasks.getList();
+    }
+
+    public String displayGreetings() {
+        return ui.displayGreetings();
     }
 }
