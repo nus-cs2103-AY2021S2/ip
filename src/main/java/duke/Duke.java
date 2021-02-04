@@ -1,30 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
@@ -32,8 +8,6 @@ import javafx.scene.layout.HBox;
  * The user can also delete, check as done, and list tasks.
  */
 public class Duke {
-
-    private static final String HORIZONTAL_RULE = "____________________________________________________________";
 
     private Storage storage;
     private TaskList tasks;
@@ -43,6 +17,7 @@ public class Duke {
     /**
      * Constructor for Duke class.
      * Initializes Ui, Parser, Storage and TaskList objects.
+     *
      * @param filePath file path to file where user wants his task list saved and loaded.
      */
     public Duke(String filePath) {
@@ -52,98 +27,76 @@ public class Duke {
         tasks = new TaskList(storage.loadTasks());
     }
 
-    public Duke() {
-
-    }
-
-
-
-
-
-    /**
-     * Initializes a Duke object with specified file path and calls run method.
-     * @param args input from user
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
     /**
      * Processes user input and interacts with Ui and TaskList objects.
      */
     public String getResponse(String input) {
-        Scanner sc = new Scanner(System.in);
-        boolean continueReading = true;
-        while (continueReading) {
-            String input = sc.nextLine();
+        String response = "";
+        String[] inputArr = parser.getInputArr(input);
+        String cmd = inputArr[0];
 
-            String[] inputArr = parser.getInputArr(input);
-            String cmd = inputArr[0];
-
-            switch(cmd) {
-            case "bye":
-                ui.exit();
-                continueReading = false;
-                break;
-            case "list":
-                ui.listAllTasks(tasks.list);
-                break;
-            case "done":
-                int numDone = Integer.parseInt(inputArr[1]);
-                Task task = tasks.list.get(numDone - 1);
-                tasks.checkAsDone(task);
-                ui.checkAsDoneMessage(task);
-                break;
-            case "delete":
-                int numDelete = Integer.parseInt(inputArr[1]);
-                Task deletedTask = tasks.deleteTask(numDelete);
-                ui.deleteTaskMessage(tasks.list, deletedTask);
-                break;
-            case "find":
-                String keyword = inputArr[1];
-                ui.findTask(keyword, tasks.list);
-                break;
-            case "todo":
-                try {
-                    parser.isEmptyDescription(inputArr);
-                    String details = inputArr[1];
-                    Task todo = new Todo(details);
-                    tasks.addTask(todo);
-                    ui.addTaskMessage(tasks.list, todo);
-                } catch (DukeException e) {
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.\n" + HORIZONTAL_RULE);
-                }
-                break;
-            case "deadline":
-                try {
-                    parser.isEmptyDescription(inputArr);
-                    String details = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-                    String date = input.substring(input.indexOf("/") + 4);
-                    Task deadline = new Deadline(details, date);
-                    tasks.addTask(deadline);
-                    ui.addTaskMessage(tasks.list, deadline);
-                } catch (DukeException e) {
-                    System.out.println("OOPS!!! The description of a deadline cannot be empty.\n" + HORIZONTAL_RULE);
-                }
-                break;
-            case "event":
-                try {
-                    parser.isEmptyDescription(inputArr);
-                    String details = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-                    String date = input.substring(input.indexOf("/") + 4);
-                    Task event = new Event(details, date);
-                    tasks.addTask(event);
-                    ui.addTaskMessage(tasks.list, event);
-                } catch (DukeException e) {
-                    System.out.println("OOPS!!! The description of an event cannot be empty.\n" + HORIZONTAL_RULE);
-                }
-                break;
-            default:
-                try {
-                    throw new DukeException();
-                } catch (DukeException e) {
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + HORIZONTAL_RULE);
-                }
+        switch (cmd) {
+        case "bye":
+            response += ui.exit();
+            break;
+        case "list":
+            response += ui.listAllTasks(tasks.list);
+            break;
+        case "done":
+            int numDone = Integer.parseInt(inputArr[1]);
+            Task task = tasks.list.get(numDone - 1);
+            tasks.checkAsDone(task);
+            response += ui.checkAsDoneMessage(task);
+            break;
+        case "delete":
+            int numDelete = Integer.parseInt(inputArr[1]);
+            Task deletedTask = tasks.deleteTask(numDelete);
+            response += ui.deleteTaskMessage(tasks.list, deletedTask);
+            break;
+        case "find":
+            String keyword = inputArr[1];
+            response += ui.findTask(keyword, tasks.list);
+            break;
+        case "todo":
+            try {
+                parser.isEmptyDescription(inputArr);
+                String details = inputArr[1];
+                Task todo = new Todo(details);
+                tasks.addTask(todo);
+                response += ui.addTaskMessage(tasks.list, todo);
+            } catch (DukeException e) {
+                response += "OOPS!!! The description of a todo cannot be empty.\n";
+            }
+            break;
+        case "deadline":
+            try {
+                parser.isEmptyDescription(inputArr);
+                String details = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
+                String date = input.substring(input.indexOf("/") + 4);
+                Task deadline = new Deadline(details, date);
+                tasks.addTask(deadline);
+                response += ui.addTaskMessage(tasks.list, deadline);
+            } catch (DukeException e) {
+                response += "OOPS!!! The description of a deadline cannot be empty.\n";
+            }
+            break;
+        case "event":
+            try {
+                parser.isEmptyDescription(inputArr);
+                String details = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
+                String date = input.substring(input.indexOf("/") + 4);
+                Task event = new Event(details, date);
+                tasks.addTask(event);
+                response += ui.addTaskMessage(tasks.list, event);
+            } catch (DukeException e) {
+                response += "OOPS!!! The description of an event cannot be empty.\n";
+            }
+            break;
+        default:
+            try {
+                throw new DukeException();
+            } catch (DukeException e) {
+                response += "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
             }
         }
         try {
@@ -151,7 +104,7 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        sc.close();
+        return response;
     }
 
 }

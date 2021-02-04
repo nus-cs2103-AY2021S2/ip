@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,15 +26,15 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/WhitePersianCat.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/WhitePomDog.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.greetings())
-        )
+                DialogBox.getDukeDialog(Ui.greetings(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -50,5 +54,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            TimerTask closeApp = new TimerTask() {
+                public void run() {
+                    System.exit(0);
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(closeApp, 2000);
+        }
     }
 }
