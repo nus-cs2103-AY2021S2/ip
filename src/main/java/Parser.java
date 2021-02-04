@@ -66,6 +66,8 @@ public class Parser {
                     return ParserOutput.addOutput(new Event(joined, timing.trim()));
                 case "delete":
                     return ParserOutput.removeOutput(Integer.parseInt(input[1]));
+                case "find":
+                    return ParserOutput.findOutput(input[1]);
                 default:
                     throw new DukeNotFoundException();
             }

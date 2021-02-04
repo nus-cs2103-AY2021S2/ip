@@ -3,12 +3,17 @@ public class ParserOutput {
     private Task task;
     private int index;
     private int action;
+    private String searchString;
 
     private ParserOutput(boolean bye, Task task, int action, int index) {
         this.bye = bye;
         this.task = task;
         this.action = action;
         this.index = index;
+    }
+
+    private void setSearch(String searchString) {
+        this.searchString = searchString;
     }
 
     /**
@@ -46,8 +51,10 @@ public class ParserOutput {
         return new ParserOutput(false, task, 3, 0);
     }
 
-    private static ParserOutput setOutput(Task task, int index) {
-        return new ParserOutput(false, task, 4, index);
+    public static ParserOutput findOutput(String searchString) {
+        ParserOutput p = new ParserOutput(false, null, 4, 0);
+        p.setSearch(searchString);
+        return p;
     }
 
     /**

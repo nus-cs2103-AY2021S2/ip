@@ -66,8 +66,8 @@ public class Duke {
                 this.taskList.add(parserOutput.getTask());
                 ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
                 break;
-            case 4: //set
-                this.taskList.set(parserOutput.getIndex(), parserOutput.getTask());
+            case 4: //find
+                System.out.println("Searching...");
                 break;
             case 5: //list
                 ui.printList(this.taskList);
