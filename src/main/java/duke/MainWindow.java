@@ -41,6 +41,9 @@ public class MainWindow extends AnchorPane {
         this.duke = duke;
     }
 
+    /**
+     * Sends a greeting dialog.
+     */
     public void greet() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greet(), dukeImage));
     }

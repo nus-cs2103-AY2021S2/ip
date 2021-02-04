@@ -4,6 +4,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Task with a Deadline.
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 
@@ -12,15 +15,15 @@ public class Deadline extends Task {
      *
      * @param description description of the task.
      * @param taskType the type of the task.
-     * @param by the date that the task has to be done by.
-     * @throws DukeException
+     * @param by the string representation of the date that the task has to be done by.
+     * @throws DukeException if the string representation of the date is not in the correct format.
      */
     public Deadline(String description, TaskType taskType, String by) throws DukeException {
         super(description, taskType);
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeException e) {
-            throw new DukeException("Date is not in the correct format");
+            throw new DukeException("Date is not in the correct format. Please put it in the form of yyyy-mm-dd.");
         }
     }
 

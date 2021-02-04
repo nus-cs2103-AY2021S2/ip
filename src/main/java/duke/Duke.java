@@ -2,6 +2,10 @@ package duke;
 
 import javafx.util.Pair;
 
+/**
+ * Represents a Chatbot which can interact with the user
+ * and perform note-taking functions.
+ */
 public class Duke {
 
     private static final String MESSAGE_COMMAND_GREET = "HELLO. I'M A BOT CALLED DUCHESS. Beep boop."
@@ -27,6 +31,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets response in the form of a {@code Pair<Integer, String>} given a user input.
+     *
+     * @param input Input from the user.
+     * @return {@code Pair<Integer, String>} representing a statusCode, and the message to be printed.
+     */
     public Pair<Integer, String> getResponse(String input) {
         String[] commandArr = Parser.parseCommand(input);
         String[] params;
@@ -109,6 +119,13 @@ enum DukeCommand {
     EVENT,
     DEADLINE;
 
+    /**
+     * Generates a DukeCommand based on the lowecase version of the text.
+     * If the command is unknown, returns DukeCommand.UNKNOWN
+     *
+     * @param command String that represents the command in lowercase.
+     * @return DukeCommand. If the command is unknown, DukeCommand.UNKNOWN.
+     */
     public static DukeCommand fromString(String command) {
         for (int i = 1; i < DukeCommand.values().length; i++) {
             if (DukeCommand.values()[i].toString().equals(command.toUpperCase())) {

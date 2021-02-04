@@ -6,6 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage object which can perform
+ * saving and loading functions.
+ */
 public class Storage {
     private String directoryPath;
     private String filePath;
@@ -31,7 +35,7 @@ public class Storage {
      * list of Tasks.
      *
      * @return TaskList loaded from file
-     * @throws DukeException
+     * @throws DukeException if the file is not accessible, or cannot be created.
      */
     public TaskList load() throws DukeException {
         File fileDirectory = new File(this.directoryPath);
@@ -63,7 +67,7 @@ public class Storage {
      * If the TaskList is empty, saves an empty file.
      *
      * @param taskList Tasklist with the Tasks to be saved
-     * @throws DukeException
+     * @throws DukeException if the file cannot be saved or written to.
      */
     public void save(TaskList taskList) throws DukeException {
         try {
@@ -71,7 +75,7 @@ public class Storage {
             writer.write(taskList.saveTaskListString());
             writer.close();
         } catch (IOException e) {
-            throw new DukeException("File cannot be saved.");
+            throw new DukeException("File cannot be saved or written to.");
         }
     }
 }

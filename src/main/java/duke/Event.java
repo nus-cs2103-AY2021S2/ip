@@ -4,6 +4,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Task which is an Event.
+ */
 public class Event extends Task {
     protected LocalDate at;
 
@@ -12,15 +15,15 @@ public class Event extends Task {
      *
      * @param description description of the task.
      * @param taskType the type of the task.
-     * @param at the date that the task will happen.
-     * @throws DukeException
+     * @param at the string representation of the date that the task will happen.
+     * @throws DukeException if the string representation of the date is not in the correct format.
      */
     public Event(String description, TaskType taskType, String at) throws DukeException {
         super(description, taskType);
         try {
             this.at = LocalDate.parse(at);
         } catch (DateTimeException e) {
-            throw new DukeException("Date is not in the correct format");
+            throw new DukeException("Date is not in the correct format. Please put it in the form of yyyy-mm-dd.");
         }
     }
 

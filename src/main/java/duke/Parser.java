@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a Parser which can parse user input.
+ */
 public class Parser {
 
     /**
@@ -24,7 +27,7 @@ public class Parser {
      * @param command the command that is given by the user.
      * @param params String to be parsed.
      * @return Parsed String array.
-     * @throws DukeException
+     * @throws DukeException if the required parameters for the specific command are missing.
      */
     public static String[] parseParams(DukeCommand command, String params) throws DukeException {
         String[] paramArr;
@@ -68,7 +71,7 @@ public class Parser {
      *
      * @param line String repesenting a task.
      * @return Task that the input from the file represents
-     * @throws DukeException
+     * @throws DukeException if the tasktype is invalid.
      */
     public static Task parseTaskFromFile(String line) throws DukeException {
         String[] parsedLine = line.split(" ~ ");
@@ -101,7 +104,7 @@ public class Parser {
      *
      * @param integerString String that represents an integer.
      * @return an Integer.
-     * @throws DukeException
+     * @throws DukeException if the input cannot be parsed to an integer.
      */
     public static int parseInt(String integerString) throws DukeException {
         try {
@@ -109,6 +112,5 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid Integer");
         }
-
     }
 }

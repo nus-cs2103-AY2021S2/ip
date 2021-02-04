@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a Task to be recorded in the TaskList.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -17,6 +20,9 @@ public class Task {
         this.taskType = taskType;
     }
 
+    /**
+     * Marks a task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }

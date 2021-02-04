@@ -3,15 +3,27 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a List of Tasks, and is able to perform
+ * operations on the List.
+ */
 public class TaskList {
     private List<Task> tasks;
 
+    /**
+     * Returns an empty TaskList that represents a List of Tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(List<Task> taskList) {
-        this.tasks = taskList;
+    /**
+     * Returns a TaskList that represents a List of Tasks.
+     *
+     * @param tasks the list of tasks that the TaskList represents
+     */
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -32,7 +44,7 @@ public class TaskList {
      *
      * @param taskIndex 1-based index for the task to be deleted.
      * @return Success Message String.
-     * @throws DukeException
+     * @throws DukeException if the taskIndex is more than the amount of tasks in the taskList.
      */
     public String deleteTask(int taskIndex) throws DukeException {
         if (taskIndex <= 0 || taskIndex > this.tasks.size()) {
@@ -49,7 +61,7 @@ public class TaskList {
      *
      * @param taskIndex 1-based index for the task to be deleted.
      * @return Success Message String.
-     * @throws DukeException
+     * @throws DukeException if the taskIndex is more than the amount of tasks in the taskList.
      */
     public String doTask(int taskIndex) throws DukeException {
         if (taskIndex <= 0 || taskIndex > this.tasks.size()) {
