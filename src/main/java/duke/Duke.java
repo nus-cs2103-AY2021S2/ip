@@ -1,11 +1,7 @@
-import java.io.*;
-import java.util.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.List;
-import java.nio.file.Paths;
-import java.nio.file.Files;
+package duke;
 import java.io.File;
+import duke.tasks.TaskList;
+import duke.command.Command;
 
 /**
  *  Juke is a chatbot that helps users keep track of tasks.

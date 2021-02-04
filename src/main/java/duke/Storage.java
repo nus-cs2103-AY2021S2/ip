@@ -1,10 +1,16 @@
+package duke;
+
+import duke.tasks.Task;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.io.IOException;
 
@@ -17,7 +23,6 @@ public class Storage {
 
     public ArrayList<Task> loadAllTasks() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
-        System.out.println(filePath);
         File f = new File(filePath);
 
         if(f.exists() && !f.isDirectory()) {

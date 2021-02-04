@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+
 public class DoneCommand extends Command {
     public static final boolean IS_EXIT = false;
     protected String input;

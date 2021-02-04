@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+
 public class DeleteCommand extends Command {
     public static final boolean IS_EXIT = false;
     protected String input;
