@@ -13,18 +13,20 @@ public class Ui {
 
     /**
      * Prints output in a standard format.
+     * @param output String to be sent.
+     * @return Formatted String.
      */
-    public void sendOutput(String output) {
-        System.out.println("\t----------------------------------------");
-        System.out.println("\t" + output);
-        System.out.println("\t----------------------------------------");
+    public String sendOutput(String output) {
+        String line = "\t----------------------------------------";
+        return line + "\n\t" + output + "\n\t" + line;
     }
 
     /**
      * Prints Welcome output.
+     * @return Welcome output.
      */
-    public void sendWelcome() {
-        sendOutput(WELCOME_MESSAGE);
+    public String sendWelcome() {
+        return sendOutput(WELCOME_MESSAGE);
     }
 
     /**

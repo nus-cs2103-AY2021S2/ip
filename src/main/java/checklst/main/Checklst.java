@@ -34,6 +34,7 @@ public class Checklst extends Application {
     private final Ui ui = new Ui();
     private final Parser parser = new Parser();
     private final Storage storage = new Storage();
+    private final TaskList taskList = new TaskList();
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -114,7 +115,7 @@ public class Checklst extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label("Welcome!"), new ImageView(duke)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(ui.sendWelcome()), new ImageView(duke)));
 
     }
 
@@ -138,7 +139,7 @@ public class Checklst extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return parser.parse(input.split(" ", 2), this.ui, this.taskList, this.storage);
     }
 
     /**
@@ -146,7 +147,6 @@ public class Checklst extends Application {
      */
     public void run() {
 
-        TaskList taskList = new TaskList();
         String[] input;
 
         try {
@@ -156,7 +156,7 @@ public class Checklst extends Application {
                     continue;
                 }
                 input = command.split(" ", 2);
-                this.parser.parseHistoryCommand(input, taskList);
+                this.parser.parseHistoryCommand(input, this.taskList);
             }
             this.ui.sendOutput("History successfully restored!");
         } catch (InvalidPathException | IOException e) {
@@ -168,7 +168,7 @@ public class Checklst extends Application {
         input = ui.readCommand();
 
         while (!input[0].equals("bye")) {
-            this.parser.parse(input, ui, taskList, storage);
+            this.parser.parse(input, ui, this.taskList, storage);
             input = ui.readCommand();
         }
 
