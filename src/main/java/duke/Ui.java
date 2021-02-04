@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Prints greetings message at the start when user runs the Duke app.
      */
-    public void greetings() {
+    public static String greetings() {
         System.out.println("____________________________________________________________\n"
                 + "Hello! I'm your personal assistant Duke\n"
                 + "How can I assist you?\n"

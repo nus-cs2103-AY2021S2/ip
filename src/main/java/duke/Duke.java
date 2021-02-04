@@ -5,15 +5,33 @@ import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
  * The types of tasks the user can add are: todo, deadline, event.
  * The user can also delete, check as done, and list tasks.
  */
-public class Duke extends Application {
+public class Duke {
 
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
 
@@ -38,14 +56,9 @@ public class Duke extends Application {
 
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
+
+
 
     /**
      * Initializes a Duke object with specified file path and calls run method.
@@ -58,9 +71,8 @@ public class Duke extends Application {
     /**
      * Processes user input and interacts with Ui and TaskList objects.
      */
-    public void run() {
+    public String getResponse(String input) {
         Scanner sc = new Scanner(System.in);
-        ui.greetings();
         boolean continueReading = true;
         while (continueReading) {
             String input = sc.nextLine();
