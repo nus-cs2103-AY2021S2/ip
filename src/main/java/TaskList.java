@@ -1,6 +1,7 @@
+import CustomExceptions.TaskNumberDoesNotExistException;
 import Tasks.Task;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -14,10 +15,28 @@ public class TaskList {
     }
 
     public Task getTaskByIndex(int index) {
+        try {
+            if (index > this.getSize()) {
+                throw new TaskNumberDoesNotExistException(index);
+            }
+        } catch (TaskNumberDoesNotExistException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
         return this.tasks.get(index - 1);
     }
 
     public Task popTaskByIndex(int index) {
+        try {
+            if (index > this.getSize()) {
+                throw new TaskNumberDoesNotExistException(index);
+            }
+        } catch (TaskNumberDoesNotExistException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
         return this.tasks.remove(index - 1);
     }
 
