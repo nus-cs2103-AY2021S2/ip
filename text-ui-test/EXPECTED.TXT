@@ -1,5 +1,5 @@
 ____________________________________
-Hello! I'm Duke
+Hello! I'm duke.Duke
 What can I do for you?
 ____________________________________
 ____________________________________
@@ -26,14 +26,14 @@ ____________________________________
 Please insert valid command
 ____________________________________
 ____________________________________
-Enter valid Event.
+Enter valid duke.Event.
 ____________________________________
 ____________________________________
 Please adhere to convention:
-(Event /at event details)
+(duke.Event /at event details)
 ____________________________________
 ____________________________________
-Got it. I've added this Event:
+Got it. I've added this duke.Event:
  [E][?] project meeting (at: 6th August 2pm - 4pm)
 Now you have 3 tasks in the list.
 ____________________________________

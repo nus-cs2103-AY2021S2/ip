@@ -1,10 +1,12 @@
+package duke;
+
 import java.util.ArrayList;
 
 public class Ui {
 
     public static final String HORIZONTAL_LINE = "________________________________________________";
     public static final String FILE_PATH = "data.txt";
-    private static final String greeting =" Hello! I'm Duke\n What can I do for you?\n";
+    private static final String greeting =" Hello! I'm duke.Duke\n What can I do for you?\n";
     private static String farewell = " Bye. Hope to see you again soon!\n";
 
     public static void initGreating() {
@@ -16,7 +18,7 @@ public class Ui {
     }
 
     public static void showSuccessfulAddedMessage(int numTask, Task task){
-        System.out.println(HORIZONTAL_LINE + "\n" + " Got it! I've added this new Task!");
+        System.out.println(HORIZONTAL_LINE + "\n" + " Got it! I've added this new duke.Task!");
         System.out.println("  " + task.toString());
         System.out.println(" Now you have " + numTask + " tasks in your TaskList.");
         System.out.println(HORIZONTAL_LINE);

@@ -1,3 +1,9 @@
+package duke;
+
+import duke.Database;
+import duke.Deadline;
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -35,7 +41,7 @@ public class Parser {
         try{
             String s1 = input.nextLine();
             if(s1.equals("")){
-                throw new DukeException(" Enter valid Event.");
+                throw new DukeException(" Enter valid duke.Event.");
             } else {
                 try {
                     String wholeString = s1.substring(1);

@@ -3,7 +3,7 @@ todo read book
 deadline
 deadline return book
 deadline return book /by Sunday
-Event event e at/ sometime
+duke.Event event e at/ sometime
 event
 event project meeting
 event project meeting /at 6th August 2pm - 4pm
