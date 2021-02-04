@@ -24,15 +24,15 @@ public class FindCommand extends Command {
     /**
      * Method that finds tasks from list of tasks from TaskList object.
      * 
-     * @param tasks TaskList object that contains a list of tasks.
+     * @param taskList TaskList object that contains a list of tasks.
      * @param ui Ui object that gives responses to user.
      * @param storage Storage object that interacts with task data in hard disk.
      * @throws ChatException If no tasks match keyword given by user.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
         String keyWord = this.inputStr.replace("find","").strip();
         TaskList foundTaskList = new TaskList(new ArrayList<Task>());
-        for (Task task : tasks.getTasks()) {
+        for (Task task : taskList.getTasks()) {
             if (task.getName().contains(keyWord)) {
                 foundTaskList.getTasks().add(task);
             }

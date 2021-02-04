@@ -11,12 +11,12 @@ public class ExitCommand extends Command{
 
     /**
      * Method that prints exiting response from Chat the Cat to user.
-     * @param tasks TaskList object that contains a list of tasks.
+     * @param taskList TaskList object that contains a list of tasks.
      * @param ui Ui object that gives responses to user.
      * @param storage Storage object that interacts with task data in hard disk.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.goodbye();
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        ui.exit();
     };
 
     /**

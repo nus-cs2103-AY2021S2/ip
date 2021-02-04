@@ -4,7 +4,7 @@ package chat;
  * Exception class specifically for errors from Chat the Cat.
  */
 
-public class ChatException extends Exception{
+public class ChatException extends Exception {
 
     /**
      * Initialises ChatException object.

@@ -30,14 +30,14 @@ public class Storage {
     /**
      * If there is a change in data from the file, this method saves the new data to the file.
      * 
-     * @param tasks TaskList object that contains a list of tasks.
+     * @param taskList TaskList object that contains a list of tasks.
      * @throws ChatException If there is error loading file or file cannot be found.
      */
-    public void save(TaskList tasks) throws ChatException {
+    public void save(TaskList taskList) throws ChatException {
         try {
-            if (!tasks.equals(load())) {
+            if (!taskList.equals(load())) {
                 String newStr = "";
-                for (Task t : tasks.getTasks()) {
+                for (Task t : taskList.getTasks()) {
                     newStr += t.allParameterStr() + "\n";
                 }
                 Files.writeString(filePath, newStr);
