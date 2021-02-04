@@ -3,11 +3,15 @@ import Tasks.Task;
 
 import java.util.ArrayList;
 
-public class TaskList {
+public class TaskCollection {
     private final ArrayList<Task> tasks;
 
-    public TaskList() {
+    public TaskCollection() {
         tasks = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getListOfTasks() {
+        return this.tasks;
     }
 
     public void addTask(Task task) {

@@ -12,6 +12,10 @@ public class Event extends Task {
         return "(at: " + this.at + ")";
     }
 
+    public String getAt() {
+        return this.at;
+    }
+
     public String getStatusString() {
         return "[E]" + super.getStatusString() + " " + this.getAtString();
     }
