@@ -23,7 +23,7 @@ public class Duke {
     public void run()  {
         ui.WelcomeMessage();
         ui.showDivider();
-        while(!ui.getIsExit()) {
+        while (!ui.getIsExit()) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.commandMessage(Parser.parse(fullCommand, list), list);
