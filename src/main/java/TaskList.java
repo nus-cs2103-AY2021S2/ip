@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,6 @@ public class TaskList {
 
     private Task parseStorageString(String storageString) {
         String[] splitStorageString = storageString.split("\\|");
-        for (String s : splitStorageString) {
-            System.out.println(s);
-        }
         Task task;
         if (splitStorageString[0].equals("T")) {
             task = new Todo(splitStorageString[2]);
@@ -40,18 +38,18 @@ public class TaskList {
     }
 
     public Task get(int index) {
-        return this.tasks.get(index);
+        return this.tasks.get(index - 1);
     }
 
     public void remove(int index) {
         this.storage.remove(index);
-        this.tasks.remove(index);
+        this.tasks.remove(index - 1);
         this.count--;
     }
 
     public void set(int index, Task task) {
         this.storage.set(index, task);
-        this.tasks.set(index, task);
+        this.tasks.set(index - 1, task);
     }
 
     public void add(Task task) {

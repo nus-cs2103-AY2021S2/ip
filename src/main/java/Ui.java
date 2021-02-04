@@ -33,7 +33,7 @@ public class Ui {
 
     public static void printList(TaskList tasks) {
         for (int i = 1; i <= tasks.getSize(); i++) {
-            System.out.println(i + ". " + tasks.get(i - 1).toString());
+            System.out.println(i + ". " + tasks.get(i).toString());
         }
     }
 

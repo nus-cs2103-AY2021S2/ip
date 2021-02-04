@@ -23,17 +23,14 @@ public class Storage {
     }
     public void add(Task task) {
         this.itemList.add(task.toStorageString());
-        for (String s : this.itemList) {
-            System.out.println(s);
-        }
         this.update();
     }
     public void set(int index, Task newTask) {
-        this.itemList.set(index, newTask.toStorageString());
+        this.itemList.set(index - 1, newTask.toStorageString());
         this.update();
     }
     public void remove(int index) {
-        this.itemList.remove(index);
+        this.itemList.remove(index - 1);
         this.update();
     }
 

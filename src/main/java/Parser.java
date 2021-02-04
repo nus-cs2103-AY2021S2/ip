@@ -19,7 +19,7 @@ public class Parser {
                 case "list":
                     return ParserOutput.listOutput();
                 case "done":
-                    int itemToBeUpdatedIndex = Integer.parseInt(input[1]) - 1;
+                    int itemToBeUpdatedIndex = Integer.parseInt(input[1]);
                     return ParserOutput.doneOutput(itemToBeUpdatedIndex);
 
                     /*

@@ -7,6 +7,8 @@ public class Duke {
     private TaskList taskList;
     private int count;
 
+    private static final String LOG_PATH = "./logs";
+
     public Duke(String path) {
         this.store = new Storage(path);
         this.taskList = new TaskList(this.store);
@@ -59,24 +61,24 @@ public class Duke {
             case 3: //add
                 this.taskList.add(parserOutput.getTask());
                 ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
+                break;
             case 4: //set
                 this.taskList.set(parserOutput.getIndex(), parserOutput.getTask());
+                break;
             case 5: //list
                 ui.printList(this.taskList);
+                break;
             default:
                 //TODO: add exception for this
         }
     }
 
     public static void main(String[] args) {
-        File logFile = new File("./logs");
+        File logFile = new File(LOG_PATH);
 
         try {
             if (logFile.isFile()) {
                 Scanner logs = new Scanner(logFile);
-                while (logs.hasNextLine()) {
-                    System.out.println(logs.nextLine());
-                }
                 logs.close();
             } else {
                 logFile.createNewFile();
@@ -85,6 +87,6 @@ public class Duke {
             System.out.println("no file created " + e);
         }
 
-        new Duke("./logs").dukeRunner();
+        new Duke(LOG_PATH).dukeRunner();
     }
 }

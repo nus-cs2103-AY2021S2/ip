@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 public class Task {
     private boolean done;
     private String name;
