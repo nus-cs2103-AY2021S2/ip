@@ -57,6 +57,13 @@ public class Ui {
             System.out.println("The following Task has been deleted:");
             System.out.println(data);
             break;
+        case SEARCH:
+            if (data.length() > 0){
+                System.out.println("Matching Task(s):");
+                System.out.println(data);
+            }else{
+                System.out.println("No Matching Task has been found");
+            }
         }
     }
     //TODO: Figure out if this overloading is acceptable from a coding style perspective.

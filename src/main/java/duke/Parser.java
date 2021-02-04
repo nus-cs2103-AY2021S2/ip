@@ -47,6 +47,11 @@ public class Parser {
         case "delete":
             c = new DeleteCommand(Integer.parseInt(tokens[1]));
             break;
+        case "find":
+            //Fall-through
+        case "search":
+            c = new SearchCommand(tokens[1]);
+            break;
         default:
             throw new InvalidCommandException(tokens[0]);
         }

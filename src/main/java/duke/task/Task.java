@@ -39,4 +39,8 @@ public abstract class Task {
     String toBaseFileString(){
         return (isDone ? "1" : "0") + "," + description.length() + "," + description;
     }
+
+    public boolean containsSearch(String search){
+        return description.contains(search);
+    }
 }
