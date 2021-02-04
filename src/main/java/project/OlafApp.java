@@ -1,6 +1,6 @@
 package project;
 
-import project.common.PrintText;
+import project.common.PrintedText;
 import project.io.Parser;
 import project.io.Ui;
 import project.storage.Storage;
@@ -10,9 +10,6 @@ import project.task.Task;
 import project.task.TaskList;
 import project.task.Todo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 
 /**
@@ -53,7 +50,7 @@ public class OlafApp {
             if (taskList.hasTasks()) {
                 return ui.showList(taskList);
             } else {
-                return PrintText.EMPTY_TASKLIST_ERROR.toString();
+                return PrintedText.EMPTY_TASKLIST_ERROR.toString();
             }
         } else if (command.toLowerCase().startsWith("find")) {
             String expression = Parser.parseParameter(command, " ", 1);
@@ -75,7 +72,7 @@ public class OlafApp {
 
                 return ui.showDoneSuccess(id, taskList.getTask(id), taskList.getTotalNumberOfTasksUndone());
             } catch (ArrayIndexOutOfBoundsException e) {
-                return ui.showFormatError(PrintText.DONE_FORMAT);
+                return ui.showFormatError(PrintedText.DONE_FORMAT);
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 return ui.showInvalidIndexError();
             }
@@ -88,7 +85,7 @@ public class OlafApp {
 
                 return ui.showDeleteSuccess(id, deleted, taskList.getTotalNumberOfTasks());
             } catch (ArrayIndexOutOfBoundsException e) {
-                return ui.showFormatError(PrintText.DELETE_FORMAT);
+                return ui.showFormatError(PrintedText.DELETE_FORMAT);
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 return ui.showInvalidIndexError();
             }
@@ -103,7 +100,7 @@ public class OlafApp {
                 return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                         newTodo, taskList.getTotalNumberOfTasksUndone());
             } catch (IndexOutOfBoundsException e) {
-                return ui.showFormatError(PrintText.TODO_FORMAT);
+                return ui.showFormatError(PrintedText.TODO_FORMAT);
             }
         } else if (command.toLowerCase().startsWith("deadline")) {
             try {
@@ -122,7 +119,7 @@ public class OlafApp {
                         newDeadline, taskList.getTotalNumberOfTasksUndone());
             } catch (Exception e) {
                 // catches both ParseException and IndexOutOfBounds exception
-                return ui.showFormatError(PrintText.DEADLINE_FORMAT);
+                return ui.showFormatError(PrintedText.DEADLINE_FORMAT);
             }
         } else if (command.toLowerCase().startsWith("event")) {
             try {
@@ -145,10 +142,10 @@ public class OlafApp {
                         newEvent, taskList.getTotalNumberOfTasksUndone());
             } catch (Exception e) {
                 // catches both ParseException and IndexOutOfBounds exception
-                return ui.showFormatError(PrintText.EVENT_FORMAT);
+                return ui.showFormatError(PrintedText.EVENT_FORMAT);
             }
         } else if (command.equalsIgnoreCase("help")) {
-            return ui.showFormatResponse(PrintText.HELP);
+            return ui.showFormatResponse(PrintedText.HELP);
         } else {
             return ui.showFormatResponse("  Hmm sorry I don't understand :(\n"
                     + "  Type 'help' to find out how you can talk to me!\n");

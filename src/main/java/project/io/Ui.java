@@ -1,6 +1,6 @@
 package project.io;
 
-import project.common.PrintText;
+import project.common.PrintedText;
 import project.task.Task;
 import project.task.TaskList;
 
@@ -10,7 +10,7 @@ import project.task.TaskList;
 public class Ui {
 
     private String formatResponse(String message) {
-        return PrintText.BORDER + message + PrintText.BORDER;
+        return PrintedText.BORDER + message + PrintedText.BORDER;
     }
 
     /**
@@ -19,7 +19,7 @@ public class Ui {
      * @param text The message to be printed.
      */
     public String showFormatResponse(String text) {
-        return PrintText.BORDER.toString() + text + PrintText.BORDER.toString();
+        return PrintedText.BORDER.toString() + text + PrintedText.BORDER.toString();
     }
 
     /**
@@ -28,8 +28,8 @@ public class Ui {
      *
      * @param text The {@code PrintText} message to be printed.
      */
-    public String showFormatResponse(PrintText text) {
-        return PrintText.BORDER.toString() + text + PrintText.BORDER.toString();
+    public String showFormatResponse(PrintedText text) {
+        return PrintedText.BORDER.toString() + text + PrintedText.BORDER.toString();
     }
 
     /**
@@ -102,7 +102,7 @@ public class Ui {
      *
      * @param format The {@code PrintText} format message to be printed.
      */
-    public String showFormatError(PrintText format) {
+    public String showFormatError(PrintedText format) {
         String message = "  Oops! Please say it like this:\n\n" + format;
         return this.formatResponse(message);
     }

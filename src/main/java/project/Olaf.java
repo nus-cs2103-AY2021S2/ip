@@ -1,6 +1,6 @@
 package project;
 
-import project.common.PrintText;
+import project.common.PrintedText;
 import project.io.Ui;
 import project.storage.Storage;
 import project.task.TaskList;
@@ -30,7 +30,7 @@ public class Olaf {
 
         try {
             tasks = new TaskList(storage.load());
-            ui.showFormatResponse(PrintText.WELCOME_MESSAGE);
+            ui.showFormatResponse(PrintedText.WELCOME_MESSAGE);
         } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
