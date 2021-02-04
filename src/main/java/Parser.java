@@ -13,76 +13,57 @@ public class Parser {
     public Parser() {
     }
 
-    /**
-     * This is the the method for making sense of the user commands
-     * @param arrayList takes in the arrayList
-     * @param path specifies the path to the file
-     * @param scanner takes in the a scanner to scan
-     * @return Nothing.
-     */
     public String makingSenseOfUserCommand(ArrayList<Task> arrayList, String path, String input) {
 
       //while (scanner.hasNextLine()) {
        //     input = scanner.nextLine();
-            try {
+
                 if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
                         || input.contains("list") || input.contains("done") || input.contains("delete") || input.contains("find"))) {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
                 } else if (input.equals("todo") || input.equals("event") || input.equals("deadline")
                         || input.equals("done") || input.equals("delete") || input.equals("find")) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    return "☹ OOPS!!! The description of a todo cannot be empty.";
                 }                                // can add in more exceptions
-            } catch (DukeException e) {
-                System.out.println("--------------------------");
-                System.out.println(e.getMessage());
-                System.out.println("--------------------------");
-            }
+
             if (input.equals("bye")) {
-                System.out.println("--------------------------");
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println("--------------------------");
+                return "Bye. Hope to see you again soon!";
 
             } else if (input.equals("list")) {
-                System.out.println("--------------------------");
-                System.out.println("Here are the tasks in your list:");
+
+                String one = "Here are the tasks in your list:";
                 for (Task m : arrayList) {
-                    System.out.print(m.index + ". " + m);
-                    System.out.print("\n");
+                    one = one + m.index + ". " + m + "\n";
                 }
-                System.out.println("--------------------------");
+                return one;
+
 
             } else if (input.contains("done") && !(input.equals("done"))) {
                 int x = Integer.parseInt(input.substring(5));
-                try {
+
                     if (x > arrayList.size()) {
-                        throw new DukeException("☹ OOPS!!! Sorry item no found :-(");
+                        return "☹ OOPS!!! Sorry item no found :-(";
                     } else {
-                        System.out.println("--------------------------");
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(arrayList.get(x - 1).markAsDone().getStatusIcon() + " "
-                                + arrayList.get(x - 1).description);
+
+                       String one = "Nice! I've marked this task as done:";
+                        one = one + arrayList.get(x - 1).markAsDone().getStatusIcon() + " "
+                                + arrayList.get(x - 1).description;
                         arrayList.set(x - 1, arrayList.get(x - 1).markAsDone());
-                        System.out.println("--------------------------");
+                        return one;
+
                     }
 
-                } catch (DukeException e) {
-                    System.out.println("--------------------------");
-                    System.out.println(e.getMessage());
-                    System.out.println("--------------------------");
-                }
-
             } else if (input.contains("todo") && !(input.equals("todo"))) {
-                System.out.println("--------------------------");
-                System.out.println("Got it. I've added this task: ");
+
+                String one = "Got it. I've added this task: "+ "\n";
                 Task task = new Todo(input.substring(5));
                 new TaskList().addToList(arrayList, task);
-                System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
-                System.out.println("--------------------------");
+                one = one + "Now you have " + arrayList.size() + " task(s) in the list";
+                return one;
 
 
             } else if (input.contains("deadline") && !(input.equals("deadline"))) {
-                System.out.println("--------------------------");
-                System.out.println("Got it. I've added this task: ");
+                String one = "Got it. I've added this task: "+ "\n";
                 String[] parts = input.split("/",2);
                 String part1 = parts[0];
                 String part2 = parts[1];
@@ -101,12 +82,11 @@ public class Parser {
                     new TaskList().addToList(arrayList, task);
                 }
 
-                System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
-                System.out.println("--------------------------");
+                one = one + "Now you have " + arrayList.size() + " task(s) in the list";
+                return one;
 
             } else if (input.contains("event") && !(input.equals("event"))) {
-                System.out.println("--------------------------");
-                System.out.println("Got it. I've added this task: ");
+               String one = "Got it. I've added this task: " + "\n";
                 String[] parts = input.split("/",2);
                 String part1 = parts[0];
                 String part2 = parts[1];
@@ -125,31 +105,24 @@ public class Parser {
                     Task task = new Event(part1.substring(6), part2.substring(3));
                     new TaskList().addToList(arrayList, task);
                 }
-                System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
-                System.out.println("--------------------------");
+                one = one + "Now you have " + arrayList.size() + " task(s) in the list";
+                return one;
 
             }  else if (input.contains("delete") && !(input.equals("delete"))) {
 
                 int deletedNumber = Integer.parseInt(input.substring(7));
-                try {
+
                     if (deletedNumber > arrayList.size()) {
-                        throw new DukeException("☹ OOPS!!! Sorry item no found :-(");
+                        return "☹ OOPS!!! Sorry item no found :-(";
                     } else {
-                        System.out.println("--------------------------");
-                        System.out.println("Noted. I've removed this task: ");
+                        String one = "Noted. I've removed this task: " + "\n";
                         new TaskList().deleteFromList(arrayList, deletedNumber);
-                        System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
-                        System.out.println("--------------------------");
+                        one = one + "Now you have " + arrayList.size() + " task(s) in the list";
+                        return one;
                     }
-                } catch (DukeException e) {
-                    System.out.println("--------------------------");
-                    System.out.println(e.getMessage());
-                    System.out.println("--------------------------");
-                }
 
             } else if (input.contains("find") && !(input.equals("find"))) {
-                System.out.println("--------------------------");
-                System.out.println("Here are the matching tasks in your list:");
+                String one = "Here are the matching tasks in your list:";
 
                 ArrayList<Task> tt = new ArrayList<>();
 
@@ -164,10 +137,11 @@ public class Parser {
                 }
 
                 for (Task m : tt) {
-                    System.out.print(m.index + ". " + m);
-                    System.out.print("\n");
+                    String two = m.index + ". " + m;
+                    two = two +"\n";
+                    return two;
                 }
-                System.out.println("--------------------------");
+
             }
             int counterTwo = 1;
             for (Task s : arrayList) {
@@ -176,5 +150,8 @@ public class Parser {
             }
             new Storage().savingFile(arrayList, path);
 
-    }
+     return "\n";
+}
+
+
 }
