@@ -1,4 +1,3 @@
-T|1|go work
-D|1|go school|2021-02-02
-D|1|cook dinner|2022-05-05
-E|1|exam|2021-02-02
+T|0|exam
+D|0|exam|2020-09-09
+E|0|exm|2020-09-08

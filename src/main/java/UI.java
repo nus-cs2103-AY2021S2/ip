@@ -25,8 +25,8 @@ public class UI {
         showToUser(GOODBYE_MESSAGE + LS + DIVIDER);
     }
 
-    public void commandMessage(String command, DukeList list) {
-        switch(command) {
+    public void commandMessage(String[] commandAndParams, DukeList list) {
+        switch(commandAndParams[0]) {
         case "done":
             doneMessage();
             showNoOfTaskLeft(list);
@@ -39,7 +39,7 @@ public class UI {
             resetMessage();
             break;
         case "show":
-            showMessage(list);
+            showMessage(list, commandAndParams[1]);
             break;
         case "todo":
         case "event":
@@ -50,12 +50,27 @@ public class UI {
         case "list":
             listMessage(list);
             break;
+        case "find":
+            findMessage(list, commandAndParams[1]);
+            break;
         case "bye":
             isExit = true;
             break;
-        case "unknown":
+        default:
             unknownCommandMessage();
             break;
+        }
+    }
+
+    private void findMessage(DukeList list, String keyword) {
+        int size = list.getSize();
+        int counter = 1;
+        showToUser("Here are tasks matching the keyword provided");
+        for (int i = 0; i < size; i++) {
+            if (list.get(i).getTaskName().contains(keyword)) {
+                showToUser((counter) + "." + list.get(i));
+                counter++;
+            }
         }
     }
 
@@ -79,19 +94,19 @@ public class UI {
         showToUser("Got it! All tasks have been deleted");
     }
 
-    public void showMessage(DukeList list) {
-        LocalDate day = list.getDate();
+    public void showMessage(DukeList list, String dateStr) {
+        LocalDate date = LocalDate.parse(dateStr);
         int counter = 1;
-        showToUser("Here are your task on " + day.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        showToUser("Here are your task on " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         for (int i = 0; i < list.getSize(); i++) {
             Task curr = list.get(i);
             if (curr instanceof Deadlines) {
-                if (((Deadlines) curr).getBy().equals(day)) {
+                if (((Deadlines) curr).getBy().equals(date)) {
                     showToUser(counter + "." + curr);
                     counter++;
                 }
             } else if (curr instanceof Events) {
-                if (((Events) curr).getDuration().equals(day)) {
+                if (((Events) curr).getDuration().equals(date)) {
                     showToUser(counter + "." + curr);
                     counter++;
                 }
@@ -124,7 +139,7 @@ public class UI {
     }
 
     public void showWrongArgsError() {
-        showToUser("Error! Your command has invalid arguement(s)!\nTry Again!");
+        showToUser("Error! Your command has invalid argument(s)!\nTry Again!");
     }
     public void showToUser(String message) {
         System.out.println(message);

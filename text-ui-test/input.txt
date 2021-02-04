@@ -3,6 +3,10 @@ todo sleep
 deadline go school /by 2021-02-02
 deadline cook dinner /by 2022-05-05
 event exam /at 2021-02-02
+deadline exam in school /by 2022-09-09
+find exam
+find school
+find sex
 list
 done 1
 done 2
@@ -20,4 +24,5 @@ done done
 show 9999999
 deadline go home
 event sleep /by
+reset
 bye
