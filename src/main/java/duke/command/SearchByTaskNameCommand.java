@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.*;
-import duke.ui.Ui;
 
 import java.util.LinkedList;
 
@@ -27,10 +26,10 @@ public class SearchByTaskNameCommand extends Command {
      * If the input is not correct, it will raise an exception.
      *
      * @param taskList The current taskList in the program.
-     * @param ui The current ui in the program.
+     * @return The Duke robot massage to the GUI.
      * @throws DukeException if there are some cases such as the input time format is wrong.
      */
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList) throws DukeException {
         String[] info;
         String name;
 
@@ -61,7 +60,7 @@ public class SearchByTaskNameCommand extends Command {
         }
 
         String botMessage = builder.toString();
-        ui.display(botMessage);
+        return botMessage;
 
     }
 }

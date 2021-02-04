@@ -1,7 +1,5 @@
 package duke.command;
-
 import duke.task.Event;
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 /**
@@ -25,11 +23,11 @@ public class AddEventCommand extends Command {
      * If the input is not correct, it will raise an exception.
      *
      * @param taskList The current taskList in the program.
-     * @param ui The current ui in the program.
+     * @return The Duke robot massage to the GUI.
      * @throws DukeException if there are some cases such as no event time specified, no event task name, then
      * it will raise the DukeException.
      */
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList) throws DukeException {
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
         int spaceIndex = userMessage.indexOf(" ");
@@ -55,6 +53,6 @@ public class AddEventCommand extends Command {
         builder.append("[" + event.getStatusIcon() + "] " + event.toString());
         builder.append("\nNow you have " + Integer.toString(taskList.getNumOfTasks()) + " tasks in the list.");
         String botMessage = builder.toString();
-        ui.display(botMessage);
+        return botMessage;
     }
 }

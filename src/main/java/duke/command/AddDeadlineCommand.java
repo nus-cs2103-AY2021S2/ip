@@ -1,6 +1,5 @@
 package duke.command;
 import duke.exception.DukeException;
-import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.TaskList;
 /**
@@ -24,11 +23,11 @@ public class AddDeadlineCommand extends Command {
      * If the input is not correct, it will raise an exception.
      *
      * @param taskList The current taskList in the program.
-     * @param ui The current ui in the program.
+     * @return The Duke robot massage to the GUI.
      * @throws DukeException if there are some cases such as no deadline time specified, no deadline task name, then
      * it will raise the DukeException.
      */
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList) throws DukeException {
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
 
@@ -41,7 +40,7 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
 
-        String deadlineName = userMessage.substring(spaceIndex + 1,dateIndex - 1);
+        String deadlineName = userMessage.substring(spaceIndex + 1, dateIndex - 1);
         String by = userMessage.substring(dateIndex + 4);
         Deadline deadline;
         try {
@@ -54,6 +53,6 @@ public class AddDeadlineCommand extends Command {
         builder.append("[" + deadline.getStatusIcon() + "] " + deadline.toString());
         builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");
         String botMessage = builder.toString();
-        ui.display(botMessage);
+        return botMessage;
     }
 }

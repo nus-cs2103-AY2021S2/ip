@@ -1,6 +1,4 @@
 package duke.command;
-import duke.exception.DukeException;
-import duke.ui.Ui;
 import duke.task.TaskList;
 
 /**
@@ -25,10 +23,10 @@ public class ByeCommand extends Command {
      * object into exit = true, which means the user wants to exit.
      *
      * @param taskList The current taskList in the program.
-     * @param ui The current ui in the program.
+     * @return The Duke robot massage to the GUI.
      */
-    public void execute(TaskList taskList, Ui ui) {
-        exit = true;
-        ui.display("Bye! Hope to see you again soon.");
+    public String execute(TaskList taskList) {
+        isExit = true;
+        return "Bye! Hope to see you again soon.";
     }
 }

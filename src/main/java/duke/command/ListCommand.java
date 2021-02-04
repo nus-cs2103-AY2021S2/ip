@@ -1,9 +1,7 @@
 package duke.command;
-import duke.exception.DukeException;
-import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-
+import duke.exception.DukeException;
 import java.util.LinkedList;
 /**
  * It is a command object extends from Command for the Duke program.
@@ -25,13 +23,14 @@ public class ListCommand extends Command {
      * The execution after parsing, list out all the current tasks.
      *
      * @param taskList The current taskList in the program.
-     * @param ui The current ui in the program.
+     * @return The Duke robot massage to the GUI.
+     * @throws DukeException if there is no task in the list.
      */
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList) throws DukeException {
         int numOfTasks = taskList.getNumOfTasks();
         // Exception case
         if (numOfTasks == 0) {
-            ui.display("No Tasks right now!");
+            throw new DukeException("OOPS!!! No task right now!");
         } else {
             LinkedList<Task> tasks = taskList.getTasks();
             StringBuilder builder = new StringBuilder();
@@ -45,8 +44,8 @@ public class ListCommand extends Command {
                 builder.append(taskName + "\n");
             }
             String botMessage = builder.toString();
-            ui.display(botMessage);
+            return botMessage;
         }
-        }
+    }
 }
 

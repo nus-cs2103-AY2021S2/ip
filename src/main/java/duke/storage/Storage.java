@@ -62,7 +62,7 @@ public class Storage {
         while (s.hasNext()) {
             String info = s.nextLine();
             boolean status = Integer.parseInt(info.substring(0,1)) == 1;
-            String type = info.substring(3,4);
+            String type = info.substring(3, 4);
 
             if (type.equals("T")) {
                 String name = info.substring(5);
@@ -73,7 +73,7 @@ public class Storage {
                 int endTimeIndex = info.length() - 1;
                 String name = info.substring(5 , endNameIndex - 1);
                 String by = info.substring(endNameIndex + 5, endTimeIndex);
-                LocalDateTime byTime = LocalDateTime.parse(by,df);
+                LocalDateTime byTime = LocalDateTime.parse(by, df);
                 Deadline deadline = new Deadline(name, byTime, status);
                 taskList.addTasks(deadline);
             } else if (type.equals("E")) {
@@ -81,7 +81,7 @@ public class Storage {
                 int endTimeIndex = info.length() - 1;
                 String name = info.substring(5 , endNameIndex - 1);
                 String at = info.substring(endNameIndex + 5, endTimeIndex);
-                LocalDateTime atTime = LocalDateTime.parse(at,df);
+                LocalDateTime atTime = LocalDateTime.parse(at, df);
                 Event event = new Event(name, atTime, status);
                 taskList.addTasks(event);
             }
@@ -115,6 +115,9 @@ public class Storage {
                 builder.append("\n");
             }
             String textToAppend = builder.toString();
+
+            System.out.println(textToAppend);
+
             fw.write(textToAppend);
             fw.close();
         }

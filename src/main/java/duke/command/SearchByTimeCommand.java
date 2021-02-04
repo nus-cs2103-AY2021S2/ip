@@ -1,5 +1,4 @@
 package duke.command;
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -34,10 +33,10 @@ public class SearchByTimeCommand extends Command {
      * If the input is not correct, it will raise an exception.
      *
      * @param taskList The current taskList in the program.
-     * @param ui The current ui in the program.
+     * @return The Duke robot massage to the GUI.
      * @throws DukeException if there are some cases such as the input time format is wrong.
      */
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList) throws DukeException {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String[] info;
         LocalDateTime time;
@@ -78,7 +77,7 @@ public class SearchByTimeCommand extends Command {
         }
 
         String botMessage = builder.toString();
-        ui.display(botMessage);
+        return botMessage;
 
     }
 }
