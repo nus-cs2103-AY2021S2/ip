@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.exceptions.DukeException;
+import duke.ui.ErrorBox;
 import duke.ui.Ui;
 
 
@@ -21,14 +22,17 @@ public class TaskList {
      *
      * @param i index labelling of the task in list.
      */
-    public static void markDone(int i) {
+    public static String markDone(int i) {
         try {
             Task t = tasks.get(i - 1);
             tasks.get(i - 1).markDone();
-            Ui.doneTask(t);
+            String result = Ui.doneTask(t);
+            return result;
         } catch (IndexOutOfBoundsException e) {
             DukeException.taskErrorException();
+            ErrorBox.display(e.getMessage());
         }
+        return "";
     }
 
     /**
@@ -62,15 +66,18 @@ public class TaskList {
     /**
      * Display all the tasks in the list.
      */
-    public static void listTasks() {
-        System.out.println(Ui.UPPER);
+    public static String listTasks() {
+        StringBuilder sb = new StringBuilder("");
+
         for (Task task : tasks) {
             if (task == null) {
                 break;
             }
             System.out.println(task);
+            sb.append(task.toString() + "\n");
         }
-        System.out.println(Ui.LOWER);
+
+        return sb.toString();
     }
 
     /**
@@ -78,7 +85,7 @@ public class TaskList {
      *
      * @param i the index labelling of the task.
      */
-    public static void deleteTask(int i) {
+    public static String deleteTask(int i) {
         try {
             Task t = tasks.get(i - 1);
             tasks.remove(i - 1);
@@ -88,8 +95,11 @@ public class TaskList {
                     task.changeIndex(task.getIndex() - 1);
                 }
             }
+            return Ui.deleteTask(t);
         } catch (IndexOutOfBoundsException e) {
             DukeException.taskErrorException();
+            ErrorBox.display(e.getMessage());
+            return "";
         }
     }
 

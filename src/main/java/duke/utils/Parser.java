@@ -10,7 +10,9 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exceptions.DukeException;
 import duke.type.CommandType;
+import duke.ui.ErrorBox;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * This class extract and process the user input and produce the right command to be executed after parsing.
@@ -31,26 +33,29 @@ public class Parser {
         String instruction;
         String taskName;
         String date;
-        Command command = new ErrorCommand();
+        Command command;
 
         try {
             instruction = extractInstruction(input);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            ErrorBox.display(e.getMessage());
+            command = new ErrorCommand(e.getMessage());
             return command;
         }
 
         try {
             taskName = extractTask(input, instruction);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            ErrorBox.display(e.getMessage());
+            command = new ErrorCommand(e.getMessage());
             return command;
         }
 
         try {
             date = extractDate(input, instruction);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            ErrorBox.display(e.getMessage());
+            command = new ErrorCommand(e.getMessage());
             return command;
         }
 
@@ -77,6 +82,7 @@ public class Parser {
             command = new FindCommand(taskName, date);
             break;
         default:
+            command = new ErrorCommand("");
             break;
         }
         return command;

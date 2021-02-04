@@ -13,9 +13,10 @@ public class FindCommand extends Command {
      * @param date date of the user task to be done.
      */
     public FindCommand(String task, String date) {
-        super("find", task, date, command -> {
-            System.out.println(TaskList.findTasks(task));
-            return false;
+        super("find", task, date, false, command -> {
+            String result = TaskList.findTasks(task);
+            System.out.println(result);
+            return result;
         });
     }
 

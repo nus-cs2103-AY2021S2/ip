@@ -2,6 +2,7 @@ package duke.utils;
 
 import duke.exceptions.DukeException;
 import duke.task.*;
+import duke.ui.ErrorBox;
 import duke.ui.Ui;
 
 import java.io.File;
@@ -37,7 +38,7 @@ public class TaskStorage {
             }
             fw.close();
         } catch (IOException err) {
-            DukeException.saveToFileError();
+            ErrorBox.display(err.getMessage());
         }
         return Ui.SUCCESSFUL_SAVE;
     }
@@ -49,47 +50,44 @@ public class TaskStorage {
      * @return the String display of a successful load.
      */
     public static String loadFiles() {
-        String output = Ui.LOAD_FILE;
-        System.out.println(output);
+        StringBuilder output = new StringBuilder("");
+
         try {
             File directory = new File(DIRECTORY);
             if (!directory.exists()) {
-                System.out.println(Ui.NO_DIRECTORY);
                 directory.mkdir();
-                Ui.sleep();
             }
 
             File file = new File(FILEPATH);
             if (!file.exists()) {
-                System.out.println(Ui.NO_FILE);
                 file.createNewFile();
-                Ui.sleep();
             }
 
             if (file.length() == 0) {
-                Ui.sleep();
-                System.out.println(Ui.EMPTY_FILE);
                 return Ui.EMPTY_FILE;
             }
 
-            restoreTask(file);
-            Ui.displayTask();
+            output.append(restoreTask(file));
         } catch (IOException e) {
-            System.out.println("IO error!: " + e.getMessage());
+            ErrorBox.display("IO error!: " + e.getMessage());
         }
-
-        return Ui.SUCESSFUL_LOAD;
+        if (output.length() == 0) {
+            output.append(Ui.EMPTY_FILE);
+        } else {
+            output.insert(0, Ui.SUCESSFUL_LOAD);
+        }
+        return output.toString();
     }
 
-    private static void restoreTask(File file) throws IOException {
+    private static String restoreTask(File file) throws IOException {
         Scanner sc = new Scanner(file);
-
+        StringBuilder sb = new StringBuilder("");
         while (sc.hasNext()) {
             String[] line = sc.nextLine().split("@@");
             if (line.length == 3) {
                 Todo t = new Todo(line[2], line[1]);
                 TaskList.addTask(t);
-
+                sb.append(t.toString() + "\n");
             } else {
                 int type = Integer.parseInt(line[0]);
                 String done = line[1];
@@ -97,9 +95,10 @@ public class TaskStorage {
                 String date = line[3];
                 Task t = type == 2 ? new Deadlines(taskName, date, done) : new Event(taskName, date, done);
                 TaskList.addTask(t);
-
+                sb.append(t.toString() + "\n");
             }
         }
         sc.close();
+        return sb.toString();
     }
 }

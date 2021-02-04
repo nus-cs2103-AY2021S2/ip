@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.ui.ErrorBox;
 import duke.ui.Ui;
 
 
@@ -25,9 +26,11 @@ public class DateAndTime {
                 LocalDate d1 = LocalDate.parse(date.trim());
                 return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             } catch (DateTimeParseException e) {
+                ErrorBox.display(e.getMessage());
                 return Ui.WRONG_DATE_FORMAT;
             }
         } else {
+            ErrorBox.display(Ui.WRONG_DATE_FORMAT);
             return Ui.WRONG_DATE_FORMAT;
         }
     }
@@ -50,6 +53,7 @@ public class DateAndTime {
         try {
             Double.parseDouble(strNum);
         } catch (NumberFormatException nfe) {
+            ErrorBox.display(nfe.getMessage());
             return false;
         }
         return true;

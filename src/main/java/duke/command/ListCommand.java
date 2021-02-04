@@ -12,9 +12,9 @@ public class ListCommand extends Command {
      * Create a ListCommand object to carry out listing of tasks.
      */
     public ListCommand() {
-        super("", "", "", command -> {
-            TaskList.listTasks();
-            return false;
+        super("", "", "", false, command -> {
+           String result = TaskList.listTasks();
+           return result;
         });
     }
 }

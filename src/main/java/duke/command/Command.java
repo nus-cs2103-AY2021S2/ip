@@ -9,7 +9,8 @@ public abstract class Command {
     private final String instruction;
     private final String task;
     private final String date;
-    private final Function<Command, Boolean> func;
+    private boolean isExit;
+    private final Function<Command, String> func;
 
 
     /**
@@ -20,10 +21,11 @@ public abstract class Command {
      * @param date        date of the task.
      * @param func        the function takes a command to execute the task and returns a boolean whether to end the program.
      */
-    public Command(String instruction, String task, String date, Function<Command, Boolean> func) {
+    public Command(String instruction, String task, String date, boolean isExit, Function<Command, String> func) {
         this.instruction = instruction;
         this.task = task;
         this.date = date;
+        this.isExit = isExit;
         this.func = func;
     }
 
@@ -33,11 +35,13 @@ public abstract class Command {
      *
      * @return a boolean of whether to end the program.
      */
-    public Boolean execute() {
+    public String execute() {
         return func.apply(this);
     }
 
-
+    public boolean getIsExitStatus() {
+        return isExit;
+    }
     public String getTask() {
         return task;
     }
