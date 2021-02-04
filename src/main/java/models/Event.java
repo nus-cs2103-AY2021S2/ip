@@ -15,7 +15,7 @@ public class Event extends Todo {
 
     /**
      * Constructor to allow setting of the eventTime in an Event object
-     * 
+     *
      * @param message String message that a Todo contains
      * @param eventStringDateTime String specific to events denoting when the event will be occurring
      */
@@ -27,7 +27,7 @@ public class Event extends Todo {
 
     /**
      * Constructor to allow setting of the isDone attribute of an Event
-     * 
+     *
      * @param message String message that a Todo contains
      * @param isDone boolean denoting if a Todo is done
      * @param eventStringDateTime String specific to events denoting when the event will be occurring
@@ -40,7 +40,7 @@ public class Event extends Todo {
 
     /**
      * Expects String in the format dd/MM/yyyy HHMM and returns LocalDateTime object
-     * 
+     *
      * @param eventDateTimeString String passed in with the format dd/MM/yyyy HHMM
      * @return LocalDateTime object from String eventTimeString passed in
      * @throws DateTimeParseException when the date time is in the wrong format
@@ -48,14 +48,14 @@ public class Event extends Todo {
     private LocalDateTime parseStringToLocalDateTime(String eventDateTimeString)
             throws DateTimeParseException {
         // @formatter:off
-        return LocalDateTime.parse(eventDateTimeString.length() == 15 
+        return LocalDateTime.parse(eventDateTimeString.length() == 15
                 ? eventStringDateTime
                 : String.format("0%s", eventStringDateTime), inputDateFormat);
     }
 
     /**
      * Getter method for event time from LocalDateTime of an Event object
-     * 
+     *
      * @return String containing event time of the Event, parsed from LocalDateTime object
      */
     public String getEventTime() {
@@ -64,7 +64,7 @@ public class Event extends Todo {
 
     /**
      * Getter method for event time from LocalDateTime of an Event object
-     * 
+     *
      * @return String containing event time of the Event, parsed from LocalDateTime object in a
      *         prettier format
      */

@@ -15,7 +15,7 @@ public class Deadline extends Todo {
 
     /**
      * Constructor to allow setting of the deadline in a Deadline object
-     * 
+     *
      * @param message String message that a Todo contains
      * @param deadlineString String specific to deadlines denoting when the deadline is due
      */
@@ -27,7 +27,7 @@ public class Deadline extends Todo {
 
     /**
      * Constructor to allow setting of the isDone attribute of an Deadline
-     * 
+     *
      * @param message String message that a Todo contains
      * @param isDone boolean denoting if a Todo is done
      * @param deadlineString String specific to deadlineStrings denoting the deadlineString of a
@@ -41,7 +41,7 @@ public class Deadline extends Todo {
 
     /**
      * Expects String in the format dd/MM/yyyy HHMM and returns LocalDateTime object
-     * 
+     *
      * @param deadlineString String passed in with the format dd/MM/yyyy HHMM
      * @return LocalDateTime object from String deadlineString passed in
      * @throws DateTimeParseException when date time is in the wrong format
@@ -49,14 +49,14 @@ public class Deadline extends Todo {
     private LocalDateTime parseStringToLocalDateTime(String deadlineString)
             throws DateTimeParseException {
         // @formatter:off
-        return LocalDateTime.parse(deadlineString.length() == 15 
+        return LocalDateTime.parse(deadlineString.length() == 15
                 ? deadlineString
                 : String.format("0%s", deadlineString), inputDateFormat);
     }
 
     /**
      * Getter method for deadline of a Deadline object
-     * 
+     *
      * @return String containing deadline of the Deadline
      */
     public String getDeadline() {
@@ -65,7 +65,7 @@ public class Deadline extends Todo {
 
     /**
      * Getter method for deadline time from LocalDateTime of a Deadline object
-     * 
+     *
      * @return String containing deadline of the Deadline object, parsed from LocalDateTime object
      *         in a prettier format
      */

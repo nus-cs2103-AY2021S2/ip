@@ -3,16 +3,26 @@ package models;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
 
 public class Storage {
-    private final String filePath;
-    private final String directoryPath;
     private static final int TODO_TYPE_INDEX = 0;
     private static final int TODO_IS_DONE_INDEX = 1;
     private static final int TODO_MESSAGE_INDEX = 2;
     private static final int TODO_EXTRA_MESSAGE_INDEX = 3;
+    private final String filePath;
+    private final String directoryPath;
 
+    /**
+     * Creates a new instance of Storage which is responsible for storing and retrieving
+     * tasks saved on a user's PC
+     * @param filePath file path of the file containing the tasks
+     * @param directoryPath directory path of the file containing the tasks
+     */
     public Storage(String filePath, String directoryPath) {
         this.filePath = filePath;
         this.directoryPath = directoryPath;
@@ -59,6 +69,8 @@ public class Storage {
                                         isDone,
                                         line.get(TODO_EXTRA_MESSAGE_INDEX))));
                     break;
+                default:
+                    break;
                 }
             }
             sc.close();
@@ -94,7 +106,7 @@ public class Storage {
             }
 
             // Init to write file in append mode
-            FileWriter writer = new FileWriter(new File(this.filePath), true);
+            FileWriter writer = new FileWriter(this.filePath, true);
 
             // loop through list and write to file
             todosList.forEach(optTodo -> {

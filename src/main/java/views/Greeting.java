@@ -26,7 +26,7 @@ public class Greeting {
 
     /**
      * Prints message from exception
-     * 
+     *
      * @param exception exception caught during runtime in Ui
      */
     public void printErrorMessage(Exception exception) {

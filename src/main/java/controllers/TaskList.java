@@ -13,11 +13,9 @@ import exceptions.DukeBlankDetailsException;
 import exceptions.DukeBlankTaskException;
 import exceptions.DukeDateTimeParseException;
 import exceptions.DukeTaskIndexOutOfRangeException;
-
 import models.Deadline;
 import models.Event;
 import models.Todo;
-
 import views.TodosView;
 
 public class TaskList {
@@ -36,7 +34,7 @@ public class TaskList {
 
     /**
      * Constructor of TodosController which takes in an existing List of Optional Todos
-     * 
+     *
      * @param todosList is an existing List of Optional Todos
      */
     public TaskList(List<Optional<? extends Todo>> todosList) {
@@ -53,8 +51,8 @@ public class TaskList {
 
     /**
      * Getter for todosList attr in TodosController
-     * 
-     * @return List<Optional<? extends Todo>> list of all todos contained in TodosController
+     *
+     * @return List of Optionals of anything extending Todo contained in TodosController
      */
     public List<Optional<? extends Todo>> getTodos() {
         return this.todos;
@@ -63,7 +61,7 @@ public class TaskList {
     /**
      * Takes in a list of keywords and prints todos with messages that contains any of the keywords
      * passed in
-     * 
+     *
      * @param keywordList String list of keywords to be matched
      */
     public void findByKeyword(List<String> keywordList) {
@@ -80,10 +78,10 @@ public class TaskList {
 
     /**
      * Adds a new Todo to the todosList and returns new TodosController containing that list
-     * 
+     *
      * @param newTodoList contains the new Todo that must not be an empty array
-     * @throws DukeBlankTaskException when user types in 'todo' but has nothing afterwards
      * @return TodosController with todosList containing the new Todo added
+     * @throws DukeBlankTaskException when user types in 'todo' but has nothing afterwards
      */
     public TaskList addTodo(List<String> newTodoList) throws DukeBlankTaskException {
         if (newTodoList.size() == 0) {
@@ -102,7 +100,7 @@ public class TaskList {
 
     /**
      * Deletes a todo from the list of the todos controller
-     * 
+     *
      * @param deleteTodoArgs is a list of size 1, containing the index of the todo to delete
      * @return TodosController with the todo with index passed in deleted from the list
      * @throws DukeBlankTaskException when user specifies the delete command without providing an
@@ -138,14 +136,14 @@ public class TaskList {
     /**
      * Takes in the list containing details about the new deadline and returns a new TodosController
      * with the new Deadline added
-     * 
+     *
      * @param newDeadlineList takes in list of arguments provided to the command for processing into
      *        a Deadline object
      * @return new TodosController with the new Deadline object added into it
      * @throws DukeBlankTaskException Exception is thrown when user does not add in any details
      *         after typing the 'deadline' command
      * @throws DukeBlankDetailsException Exception is thrown when user tries to define an deadline,
-     *         without adding /by <details> for the event
+     *         without adding /by details for the even
      * @throws DukeDateTimeParseException Exception is thrown when date time passed into CLI is of
      *         the wrong format
      */
@@ -208,14 +206,14 @@ public class TaskList {
     /**
      * Takes in the list containing details about the new deadline and returns a new TodosController
      * with the new Event added
-     * 
+     *
      * @param newEventList takes in list of arguments provided to the command for processing into a
      *        Event object
      * @return new TodosController with the new Event object added into it
      * @throws DukeBlankTaskException Exception is thrown when user does not add in any details
      *         after typing the 'event' command
      * @throws DukeBlankDetailsException Exception is thrown when user tries to define an event,
-     *         without adding /at <details> for the event
+     *         without adding /at details for the event
      * @throws DukeDateTimeParseException Exception is thrown when date time passed into CLI is of
      *         the wrong format
      */
@@ -279,10 +277,10 @@ public class TaskList {
     }
 
     /**
-     * Asserts that index of todo passed in to be marked as done is lesser than length of todosList,
-     * else there would be an arrayoutofboundsexception thrown
-     * 
-     * @param doneArgs should be a List<String> of size 1 containing one argument that is the ID of
+     * Index of todo passed in to be marked as done is lesser than length of todosList,
+     * else there would be an ArrayOutOfBoundsException thrown
+     *
+     * @param doneArgs should be a List of Strings with size 1 containing one argument that is the ID of
      *        which todo to mark as done and uses a 1-based indexing of the todos
      * @return TodosController containing Todo that's now updated as done
      * @throws DukeTaskIndexOutOfRangeException Exception is thrown when the user specifies a task

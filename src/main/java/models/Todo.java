@@ -6,7 +6,7 @@ public class Todo {
 
     /**
      * Create a new Todo without specifying isDone attribute, which defaults to false
-     * 
+     *
      * @param message denoting Todo message
      */
     public Todo(String message) {
@@ -15,7 +15,7 @@ public class Todo {
 
     /**
      * Constructor to allow setting of isDone boolean
-     * 
+     *
      * @param message String message that a Todo contains
      * @param isDone boolean denoting if Todo is done
      */
@@ -26,7 +26,7 @@ public class Todo {
 
     /**
      * Render full message required to denote what each Todo is
-     * 
+     *
      * @return Type of todo, icon denoting whether it's done and message
      */
     public String getMessage() {
@@ -35,7 +35,7 @@ public class Todo {
 
     /**
      * Protected method that returns an tick icon if the Todo is completed, else returns a X icon
-     * 
+     *
      * @return String unicode for the icon to render
      */
     protected String getIsDoneIcon() {
@@ -44,7 +44,7 @@ public class Todo {
 
     /**
      * Getter method for getting the isDone attribute of a Todo
-     * 
+     *
      * @return boolean on whether a todo is done
      */
     public boolean isTodoDone() {
@@ -53,7 +53,7 @@ public class Todo {
 
     /**
      * Getter method for getting raw message without formatting of a Todo
-     * 
+     *
      * @return String containing raw message of Todo
      */
     public String getRawMessage() {
@@ -62,7 +62,7 @@ public class Todo {
 
     /**
      * Marks a Todo as done by returning a new Todo
-     * 
+     *
      * @return Todo that is marked as done
      */
     public Todo markAsDone() {

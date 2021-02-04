@@ -13,11 +13,18 @@ public class Duke {
         this.storage = new Storage(filePath, directoryPath);
     }
 
+    /**
+     * Main method to run Duke
+     * @param args
+     */
     public static void main(String[] args) {
         // creating new Duke run
         new Duke(DATABASE_FILE_PATH, DATABASE_DIRECTORY_PATH).run();
     }
 
+    /**
+     * Runs duke
+     */
     public void run() {
         // Create new UI class
         Ui appController = new Ui(this.storage);

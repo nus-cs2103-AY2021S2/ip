@@ -9,7 +9,7 @@ import models.Todo;
 
 public class TodosView {
     /** Denotes the divider to use to go between lines */
-    String divider = "---";
+    private static final String DIVIDER = "---";
 
     /**
      * Explicit definition of the default constructor to create a new Todos View renderer
@@ -18,7 +18,7 @@ public class TodosView {
 
     /**
      * Takes in an Optional Todo and renders it out into a String
-     * 
+     *
      * @param todoToRender Optional Todo to be rendered
      * @return String which renders out how the information carried by the Todo
      */
@@ -29,7 +29,7 @@ public class TodosView {
     /**
      * Takes in a matching TodosList and returns a rendered view of the todos with a specified
      * header
-     * 
+     *
      * @param matchingTodosList List of Optional Todos that matches the keywords to be rendered
      */
     public void matchListTodos(List<Optional<? extends Todo>> matchingTodosList) {
@@ -43,13 +43,13 @@ public class TodosView {
     /**
      * Turns the todosList into a stream of messages from Todos and output them with a new line in
      * between each Todo
-     * 
+     *
      * @param todosList List of optional todos passed in from TodosController
      */
     public void listTodos(List<Optional<? extends Todo>> todosList) {
         printWithSpacing(String.format("Here are the tasks in your list:\n%s",
                 IntStream.range(0, todosList.size()).mapToObj(
-                        idx -> String.format("%d.%s", idx + 1, renderTodoLine(todosList.get(idx))))
+                    idx -> String.format("%d.%s", idx + 1, renderTodoLine(todosList.get(idx))))
                         .collect(Collectors.joining("\n"))));
     }
 
@@ -67,7 +67,7 @@ public class TodosView {
 
     /**
      * Prints 'Noted. I've removed this task:', followed by message contained in new Todo
-     * 
+     *
      * @param deletedTodo Optional Todo object containing the Todo to be deleted
      * @param listSize Integer list size taken to return number of tasks user currently has
      */
@@ -79,7 +79,7 @@ public class TodosView {
 
     /**
      * Adds text indicating todo is marked as done and renders the String to show the Todo
-     * 
+     *
      * @param newTodo Optional Todo to be marked as Done
      */
     public void markAsDone(Optional<? extends Todo> newTodo) {
@@ -89,10 +89,10 @@ public class TodosView {
 
     /**
      * Private method printWithSpacing adds divider around the text passed in to be printed
-     * 
+     *
      * @param text String to be printed with divider put around it
      */
     private void printWithSpacing(String text) {
-        System.out.printf("\n%s\n%s\n%s\n%n", divider, text, divider);
+        System.out.printf("\n%s\n%s\n%s\n%n", DIVIDER, text, DIVIDER);
     }
 }
