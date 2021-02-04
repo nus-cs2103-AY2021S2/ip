@@ -3,7 +3,7 @@ package duke.commands;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Base command class to define relevant actions for each given user's command.

@@ -5,6 +5,9 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import duke.commands.Command;
+import duke.ui.CliUi;
+import duke.ui.JavafxUi;
+import duke.ui.Ui;
 
 /**
  * Main Duke class.
@@ -14,16 +17,20 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    public Duke() {
-        this(null);
+    public Duke(boolean isCli) {
+        this(null, isCli);
     }
 
-    public Duke(String directoryPath) {
-        this.ui = new Ui();
-        if (directoryPath != null) {
-            this.storage = new Storage(Paths.get(directoryPath));
+    public Duke(String directoryPath, boolean isCli) {
+        if (isCli) {
+            ui = new CliUi();
         } else {
-            this.storage = new Storage();
+            ui = new JavafxUi();
+        }
+        if (directoryPath != null) {
+            storage = new Storage(Paths.get(directoryPath));
+        } else {
+            storage = new Storage();
         }
         try {
             tasks = storage.readTasks();
@@ -32,7 +39,7 @@ public class Duke {
             tasks = new TaskList();
         } catch (Exception e) {
             ui.printError("Unable to parse file");
-            this.tasks = new TaskList();
+            tasks = new TaskList();
         }
     }
 
@@ -50,16 +57,7 @@ public class Duke {
         while (line != null) {
             ui.printHorizontalLine();
 
-            try {
-                Command c = Parser.parse(line);
-                c.execute(tasks, ui, storage);
-                end = c.isExit();
-                storage.writeTasks(tasks);
-            } catch (DukeException e) {
-                ui.printError(e.getMessage());
-            } catch (IOException e) {
-                ui.printError("Unable to write to file");
-            }
+            getResponse(line);
 
             ui.printHorizontalLine();
 
@@ -71,7 +69,26 @@ public class Duke {
         }
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            storage.writeTasks(tasks);
+        } catch (DukeException e) {
+            ui.printError(e.getMessage());
+        } catch (IOException e) {
+            ui.printError("Unable to write to file");
+        }
+        String replyString = ui.getReplyString();
+        ui.resetReplyString();
+        return replyString;
+    }
+
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke(true).run();
     }
 }

@@ -9,6 +9,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import duke.ui.CliUi;
+import duke.ui.Ui;
+
 public class UiTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -29,16 +32,16 @@ public class UiTest {
 
     @Test
     public void testHorizontalLine() {
-        Ui ui = new Ui();
+        Ui ui = new CliUi();
         ui.printHorizontalLine();
-        assertEquals("\t" + Ui.HORIZONTAL_LINE + "\n", outContent.toString());
+        assertEquals("\t" + CliUi.HORIZONTAL_LINE + "\n", outContent.toString());
     }
 
     @Test
     public void testIntro() {
-        Ui ui = new Ui();
+        Ui ui = new CliUi();
         ui.printIntro();
-        assertEquals("Hello from\n" + Ui.LOGO + "\n\t" + Ui.HORIZONTAL_LINE
-                + "\n\tWhat can I do for you?\n\t" + Ui.HORIZONTAL_LINE + '\n', outContent.toString());
+        assertEquals("Hello from\n" + CliUi.LOGO + "\n\t" + CliUi.HORIZONTAL_LINE
+                + "\n\tWhat can I do for you?\n\t" + CliUi.HORIZONTAL_LINE + '\n', outContent.toString());
     }
 }

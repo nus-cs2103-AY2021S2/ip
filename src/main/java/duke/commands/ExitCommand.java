@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Handles the Exit command of the user to allow user to exit the command line interface.

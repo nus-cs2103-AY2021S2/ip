@@ -70,7 +70,6 @@ public class Parser {
             String[] cmdArgs = ParserUtils.getCommandArgs(line, "I'm sorry, but find needs a keyword specified.");
             String keyword = cmdArgs[1];
             return new FindCommand(keyword);
-
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

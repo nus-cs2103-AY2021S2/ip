@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Handles the find command of the user to search tasks based on keyword.

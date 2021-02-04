@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Handles the List command of the user to list out all tasks.

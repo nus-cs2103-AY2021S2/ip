@@ -3,9 +3,9 @@ package duke.commands;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.models.Task;
 import duke.models.Todo;
+import duke.ui.Ui;
 
 /**
  * Handles the Todo command of the user to create new todos in the list.
