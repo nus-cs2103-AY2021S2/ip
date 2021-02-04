@@ -19,6 +19,7 @@ public class Duke {
     }
 
     public void run() {
+        // Create new UI class
         Ui appController = new Ui(this.storage);
         // start app logic
         appController.start();
