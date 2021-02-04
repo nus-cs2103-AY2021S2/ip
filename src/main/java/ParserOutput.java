@@ -96,4 +96,8 @@ public class ParserOutput {
     public Task getTask() {
         return task;
     }
+
+    public String getSearchString() {
+        return searchString;
+    }
 }

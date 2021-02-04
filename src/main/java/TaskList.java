@@ -89,4 +89,18 @@ public class TaskList {
         return this.count;
     }
 
+    /**
+     * Returns all tasks that contains searchString in their descriptions.
+     * @param searchString substring to search for
+     * @return List of all tasks containing searchString
+     */
+    public List<Task> find(String searchString) {
+        List<Task> resultList = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getName().contains(searchString)) {
+                resultList.add(t);
+            }
+        }
+        return resultList;
+    }
 }

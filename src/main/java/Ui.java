@@ -53,4 +53,12 @@ public class Ui {
         System.out.println("I have removed item " + index + ".");
     }
 
+    public void printSearch(List<Task> tasks, String searchString) {
+        System.out.println(String.format("Searching for %s...", searchString));
+        System.out.println("Here you go!" );
+        for (Task t : tasks) {
+            System.out.println(t);
+        }
+    }
+
 }
