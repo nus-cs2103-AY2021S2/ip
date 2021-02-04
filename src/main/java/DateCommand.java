@@ -11,7 +11,7 @@ public class DateCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String time;
-        String respone;
+        String response;
 
         if (info.equals("")) {
             throw new DukeException("OOPS!!! The description cannot be empty.");
@@ -22,10 +22,10 @@ public class DateCommand extends Command {
             } catch (DateTimeParseException e) {
                 throw new DukeException("OOPS!!! The timing is not in the correct format.");
             }
-            respone = ui.showDate(time) + "\n" + tasks.searchDateTask(time);
+            response = ui.showDate(time) + "\n" + tasks.searchDateTask(time);
         }
 
-        return respone;
+        return response;
     }
 
     @Override

@@ -7,9 +7,9 @@ public class Parser {
     /**
      * Parse the input string into recognisable command.
      *
-     * @param string
-     * @return command
-     * @throws DukeException
+     * @param string input.
+     * @return command.
+     * @throws DukeException if command cannot be created.
      */
     public static Command getCommand(String string) throws DukeException {
         String action;
@@ -49,9 +49,9 @@ public class Parser {
     /**
      * Parse the information string to get the task required.
      *
-     * @param info
-     * @return task
-     * @throws DukeException
+     * @param info details.
+     * @return task.
+     * @throws DukeException if there is no task.
      */
     public static String getTask(String info) throws DukeException {
         String task;
@@ -73,9 +73,9 @@ public class Parser {
     /**
      * Parse the information string to get the timing for event.
      *
-     * @param info
-     * @return time at
-     * @throws DukeException
+     * @param info detail.
+     * @return time at.
+     * @throws DukeException if the time is wrong.
      */
     public static String getTimeAt(String info) throws DukeException {
         String time;
@@ -97,9 +97,9 @@ public class Parser {
     /**
      * Parse the information string to get the timing for deadline.
      *
-     * @param info
-     * @return time by
-     * @throws DukeException
+     * @param info detail.
+     * @return time by.
+     * @throws DukeException if time is wrong.
      */
     public static String getTimeBy(String info) throws DukeException {
         String time;

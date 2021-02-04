@@ -9,7 +9,7 @@ public class DeleteCommand extends Command {
         int num;
         int size;
         Task t;
-        String respone;
+        String response;
 
         try {
             num = Integer.parseInt(info);
@@ -24,11 +24,11 @@ public class DeleteCommand extends Command {
             t = (tasks.list).get(num);
             tasks.deleteTask(num);
             size = tasks.size;
-            respone = ui.showDelete(t, size);
+            response = ui.showDelete(t, size);
             storage.store(tasks.list);
         }
 
-        return respone;
+        return response;
     }
 
     @Override

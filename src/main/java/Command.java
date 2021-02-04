@@ -6,8 +6,8 @@ public abstract class Command {
     /**
      * Constructor to form a command with execute.
      *
-     * @param action command
-     * @param info detail
+     * @param action command.
+     * @param info detail.
      */
     public Command(String action, String info) {
         this.action = action;
@@ -15,13 +15,13 @@ public abstract class Command {
     }
 
     /**
-     * Execute the command reqested by the action on the current inforamtion.
+     * Execute the command requested by the action on the current information.
      * If command cannot be fulfilled, throws DukeException.
      *
-     * @param tasks
-     * @param ui
-     * @param storage
-     * @throws DukeException
+     * @param tasks tasks.
+     * @param ui ui.
+     * @param storage storage.
+     * @throws DukeException if execute fails.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 

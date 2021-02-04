@@ -1,120 +1,120 @@
 
 public class Ui {
 
-    protected String respone;
+    protected String response;
 
     /**
-     * Respone when the user activated Duke.
+     * Response when the user activated Duke.
      *
-     * @return welcome
+     * @return welcome.
      */
     public String showWelcome() {
-        respone = "-------------------------------"
+        response = "-------------------------------"
                 + "--------------------------------\n"
                 + "Hello! I'm Duke\n" + "What can I do for you?\n"
                 + "-------------------------------"
                 + "--------------------------------";
-        return respone;
+        return response;
     }
 
     /**
-     * Respone when there is a error.
+     * Response when there is a error.
      *
-     * @param error
-     * @return error
+     * @param error error
+     * @return message
      */
     public String showError(String error) {
-        respone = error;
-        return respone;
+        response = error;
+        return response;
     }
 
     /**
-     * Respone when user said bye.
+     * Response when user said bye.
      *
-     * @return goodbye
+     * @return goodbye.
      */
     public String showGoodBye() {
-        respone = "Bye. Hope to see you again soon";
-        return respone;
+        response = "Bye. Hope to see you again soon";
+        return response;
     }
 
     /**
      * Line to divide the text box.
      *
-     * @return line
+     * @return line.
      */
     public String showLine() {
-        respone = "-------------------------------------";
-        return respone;
+        response = "-------------------------------------";
+        return response;
     }
 
     /**
-     * Respone when user want to list out the tasks.
+     * Response when user want to list out the tasks.
      *
-     * @return list
+     * @return list.
      */
     public String showList() {
-        respone = "Here are the tasks in your list:";
-        return respone;
+        response = "Here are the tasks in your list:";
+        return response;
     }
 
     /**
-     * Respone when user want to add a task.
+     * Response when user want to add a task.
      *
-     * @param t task
-     * @param size number of task
-     * @return added
+     * @param t task.
+     * @param size number of task.
+     * @return added.
      */
     public String showAddMessage(Task t, int size) {
-        respone = "Got it. I've added this task:\n"
+        response = "Got it. I've added this task:\n"
                 + "  " + t + "\nNow you have "
                 + size + " tasks in the list.";
-        return respone;
+        return response;
     }
 
     /**
-     * Respone when user finish a task.
+     * Response when user finish a task.
      *
-     * @param t task
-     * @return done
+     * @param t task.
+     * @return done.
      */
     public String showDone(Task t) {
-        respone = "Nice! I've marked this task as done:\n  " + t;
-        return respone;
+        response = "Nice! I've marked this task as done:\n  " + t;
+        return response;
     }
 
     /**
-     * Respone when user want to delete a task.
+     * Response when user want to delete a task.
      *
-     * @param t task
-     * @param size number of task
-     * @return delete
+     * @param t task.
+     * @param size number of task.
+     * @return delete.
      */
     public String showDelete(Task t, int size) {
-        respone = "Noted. I've removed this task:\n  "
+        response = "Noted. I've removed this task:\n  "
                 + t + "\nNow you have "
                 + size + " tasks in the list.";
-        return respone;
+        return response;
     }
 
     /**
-     * Respone when user want to find tasks.
+     * Response when user want to find tasks.
      *
-     * @return find
+     * @return find.
      */
     public String showFind() {
-        respone = "Here are the matching tasks in your list:";
-        return respone;
+        response = "Here are the matching tasks in your list:";
+        return response;
     }
 
     /**
-     * Respone when user want to search for tasks on certain date.
+     * Response when user want to search for tasks on certain date.
      *
-     * @param time date
-     * @return date
+     * @param time date.
+     * @return date.
      */
     public String showDate(String time) {
-        respone = "Here are the tasks occurring on " + time + " in your list:";
-        return respone;
+        response = "Here are the tasks occurring on " + time + " in your list:";
+        return response;
     }
 }

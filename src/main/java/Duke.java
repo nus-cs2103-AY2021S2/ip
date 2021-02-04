@@ -22,18 +22,18 @@ public class Duke {
      * Command is created by parsing the input and then executed.
      * Error message is shown if there is DukeException.
      *
-     * @param input
-     * @return
+     * @param input user input.
+     * @return response.
      */
     public String getResponse(String input) {
-        String respone;
+        String response;
         try {
             Command c = Parser.getCommand(input);
-            respone = c.execute(tasks, ui, storage);
+            response = c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            respone = ui.showError(e.getMessage());
+            response = ui.showError(e.getMessage());
         }
-        return respone;
+        return response;
     }
 
 }

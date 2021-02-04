@@ -8,7 +8,7 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String task;
         String time;
-        String respone;
+        String response;
         int size;
         Task t;
 
@@ -27,9 +27,9 @@ public class AddCommand extends Command {
         size = tasks.size;
         t = (tasks.list).get(size - 1);
 
-        respone = ui.showAddMessage(t, size);
+        response = ui.showAddMessage(t, size);
         storage.store(tasks.list);
-        return respone;
+        return response;
     }
 
     public boolean isExit() {

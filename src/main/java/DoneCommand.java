@@ -8,7 +8,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int num;
         Task task;
-        String respone;
+        String response;
 
         try {
             num = Integer.parseInt(info);
@@ -22,11 +22,11 @@ public class DoneCommand extends Command {
             num--;
             tasks.doneTask(num);
             task = tasks.list.get(num);
-            respone = ui.showDone(task);
+            response = ui.showDone(task);
             storage.store(tasks.list);
         }
 
-        return respone;
+        return response;
     }
 
     @Override

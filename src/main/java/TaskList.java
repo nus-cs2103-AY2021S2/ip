@@ -6,7 +6,7 @@ public class TaskList {
     protected int size;
 
     /**
-     * Contructor to create a new TaskList
+     * Constructor to create a new TaskList
      */
     public TaskList() {
         this.list = new ArrayList<>();
@@ -14,7 +14,7 @@ public class TaskList {
     }
 
     /**
-     * Contructor to create the previous TaskList
+     * Constructor to create the previous TaskList
      */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -37,7 +37,6 @@ public class TaskList {
      */
     public void deleteTask(int num) {
         size = size - 1;
-        Task t = list.get(num);
         list.remove(num);
     }
 
@@ -64,49 +63,49 @@ public class TaskList {
      * Show all the tasks in the list.
      */
     public String listTask() {
-        String respone = "";
+        String response = "";
         for (int i = 0; i < size; i++) {
-            respone = respone + (i + 1) + "." + list.get(i) + "\n";
+            response = response + (i + 1) + "." + list.get(i) + "\n";
         }
-        return respone;
+        return response;
     }
 
     /**
      * Find the tasks which has similar name to the string.
      *
-     * @param task
+     * @param task string
      * @return task found
      */
     public String findTask(String task) {
         int num = 1;
-        String respone = "";
+        String response = "";
 
         for (int i = 0; i < size; i++) {
             String string = list.get(i).toString();
             if (string.contains(task)) {
-                respone = respone + num++ + "." + string + "\n";
+                response = response + num++ + "." + string + "\n";
             }
         }
-        return respone;
+        return response;
     }
 
     /**
      * Search for tasks which take place at that timing.
      *
-     * @param time
+     * @param time date
      * @return task found
      */
     public String searchDateTask(String time) {
         int num = 1;
-        String respone = "";
+        String response = "";
 
         for (int i = 0; i < size; i++) {
             String string = list.get(i).toString();
             if (string.contains(time)) {
-                respone = respone + num++ + "." + string + "\n";
+                response = response + num++ + "." + string + "\n";
             }
         }
-        return respone;
+        return response;
     }
 
 }
