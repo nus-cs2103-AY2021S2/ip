@@ -42,10 +42,10 @@ public class Task {
     /**
      * Get the status icon.
      * Tick for completed task.
-     * @return tick or space.
+     * @return tick or cross.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2717");
     }
 
     /**

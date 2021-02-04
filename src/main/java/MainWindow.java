@@ -30,10 +30,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showStartUpMessage();
     }
 
     public void setPercy(Percy p) {
         percy = p;
+    }
+
+    public void showStartUpMessage() {
+        String msg = "Woof! I am Percy! How can I help you?";
+        dialogContainer.getChildren().add(DialogBox.getPercyDialog(msg, dukeImage));
     }
 
     /**
@@ -46,7 +52,7 @@ public class MainWindow extends AnchorPane {
         String response = percy.getResponse(input, percy);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getPercyDialog(response, dukeImage)
         );
         userInput.clear();
 

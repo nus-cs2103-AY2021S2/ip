@@ -26,6 +26,8 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setPercy(percy);
             stage.show();
+            stage.setTitle("Percy");
+            stage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
