@@ -2,7 +2,7 @@ package dbot.parser;
 
 import dbot.command.Command;
 import dbot.command.TodoCommand;
-import dbot.exception.DukeException;
+import dbot.exception.DBotException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +18,7 @@ public class ParserTest {
             Command expectedTodo = new TodoCommand(todoDescription);
             Command actualTodo = Parser.parse(userInput);
             assertEquals(expectedTodo, actualTodo);
-        } catch (DukeException e) {
+        } catch (DBotException e) {
             fail("Duke Exception should not be thrown.");
         }
     }

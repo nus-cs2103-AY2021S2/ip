@@ -1,27 +1,35 @@
 package dbot.command;
 
 import dbot.ui.Ui;
-import dbot.exception.DukeException;
+import dbot.exception.DBotException;
 import dbot.storage.Storage;
 import dbot.task.Task;
 import dbot.tasklist.TaskList;
 
+/**
+ * A concrete subclass of Command that implements a Done Command.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     private Task doneTask;
 
+    /**
+     * Initializes a Done Command with the specified target index for a 0-indexed TaskList.
+     *
+     * @param targetIndex An integer representing the target index of a 0-indexed TaskList.
+     */
     public DoneCommand(int targetIndex) {
-        setTargetIndex(targetIndex);
+        super(targetIndex);
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
         quietExecute(tasks, storage);
         ui.printDone(doneTask);
     }
 
     @Override
-    public void quietExecute(TaskList tasks, Storage storage) throws DukeException {
+    public void quietExecute(TaskList tasks, Storage storage) throws DBotException {
         try {
             doneTask = tasks.get(getTargetIndex() - 1);
             doneTask.setDone(true);
@@ -32,7 +40,7 @@ public class DoneCommand extends Command {
             } else {
                 errorMessage = "The task list is empty and there is nothing to be marked as done.";
             }
-            throw new DukeException(errorMessage, e);
+            throw new DBotException(errorMessage, e);
         }
     }
 }

@@ -4,9 +4,15 @@ import dbot.ui.Ui;
 import dbot.storage.Storage;
 import dbot.tasklist.TaskList;
 
+/**
+ * A concrete subclass of Command that implements an Exit Command.
+ */
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 
+    /**
+     * Instantiates an Exit Command.
+     */
     public ExitCommand() {}
 
     @Override

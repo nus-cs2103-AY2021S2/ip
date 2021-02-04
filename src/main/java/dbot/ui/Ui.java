@@ -20,15 +20,16 @@ public class Ui {
     private final PrintStream err;
 
     /**
-     * Default initializer which uses the standard input, output, and error streams.
+     * Initializes the default Ui which uses the standard input, output, and error streams.
+     * These are the streams that the DBot will use to interact with a user.
      */
     public Ui() {
         this(System.in, System.out, System.err);
     }
 
     /**
-     * Initializer of the UI that allows users to specify the Input Stream, Print Stream, and Error
-     * Streams, that DBot should use, respectively.
+     * Initializes a Ui according to the specified Input Stream, Print Stream, and Error Stream provided.
+     * These are the streams that the DBot will use to interact with a user.
      *
      * @param in The InputStream that DBot should receive user inputs from.
      * @param out The PrintStream that DBot should print standard messages to.

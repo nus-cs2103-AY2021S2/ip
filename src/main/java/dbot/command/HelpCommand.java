@@ -4,9 +4,15 @@ import dbot.ui.Ui;
 import dbot.storage.Storage;
 import dbot.tasklist.TaskList;
 
+/**
+ * A concrete subclass of Command that implements a Help Command.
+ */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
 
+    /**
+     * Instantiates a Help Command.
+     */
     public HelpCommand() {}
 
     @Override

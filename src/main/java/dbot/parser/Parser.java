@@ -9,36 +9,55 @@ import dbot.command.ExitCommand;
 import dbot.command.HelpCommand;
 import dbot.command.ListCommand;
 import dbot.command.TodoCommand;
-import dbot.exception.DukeException;
+import dbot.exception.DBotException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input and generates representative DBot commands.
+ */
 public class Parser {
-    public static Command parse(String userInputText) throws DukeException {
+
+    /**
+     * Parses user input from direct DBot interactions with the user.
+     *
+     * @param userInputText A String containing the user input.
+     * @return A Command representing the user input.
+     * @throws DBotException If the user input cannot be parsed as a valid command.
+     */
+    public static Command parse(String userInputText) throws DBotException {
         return Parser.parse(userInputText.strip().split("\\s+", 2), false);
     }
 
-    public static Command parseSaved(String savedInputText) throws DukeException {
+    /**
+     * Parses input containing the string representation of a saved Task and recognises whether
+     * the Task was marked as done.
+     *
+     * @param savedInputText A String containing the string representation of a saved Task.
+     * @return A Command representing the saved Task.
+     * @throws DBotException If the input text cannot be parsed as a valid command.
+     */
+    public static Command parseSaved(String savedInputText) throws DBotException {
         String[] inputs = savedInputText.strip().split("\\|", 3);
         boolean commandDone = Boolean.parseBoolean(inputs[1].strip());
         return Parser.parse(new String[]{inputs[0], inputs[2]}, commandDone);
     }
 
-    public static Command parse(String[] inputs, boolean isDone) throws DukeException {
+    private static Command parse(String[] inputs, boolean isDone) throws DBotException {
         Command command;
         try {
             command = parseSwitch(inputs[0].strip(), inputs);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Command was not properly called");
+            throw new DBotException("Command was not properly called");
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date must be specified in YYYY-MM-DD format.");
+            throw new DBotException("Date must be specified in YYYY-MM-DD format.");
         }
         command.setIsDone(isDone);
         return command;
     }
 
-    public static Command parseSwitch(String commandType, String[] inputs) throws ArrayIndexOutOfBoundsException,
+    private static Command parseSwitch(String commandType, String[] inputs) throws ArrayIndexOutOfBoundsException,
             DateTimeParseException {
         // Variables that are used in the switch case
         Command command;
