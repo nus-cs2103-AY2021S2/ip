@@ -131,8 +131,17 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns available messages in messageQueue as a String else returns empty String.
+     * @return String of messages in messageQueue else returns empty String.
+     */
     public String getMessages() {
         StringBuilder message = new StringBuilder();
+
+        if (!this.hasPendingMessage()) {
+            return "";
+        }
+
         while (this.hasPendingMessage()) {
             message.append(messageQueue.poll() + "\n");
         }
@@ -140,6 +149,10 @@ public class Ui {
         return message.toString().trim();
     }
 
+    /**
+     * Adds message to messageQueue.
+     * @param s Message to be added to messageQueue.
+     */
     public static void addToMessageQueue(String s) {
         try {
             messageQueue.offer(s);
@@ -148,10 +161,17 @@ public class Ui {
         }
     }
 
+    /**
+     * Clears messages in messageQueue.
+     */
     public static void clearMessageQueue() {
         messageQueue.clear();
     }
 
+    /**
+     * Returns true if messageQueue is not empty.
+     * @return True if messageQueue is not empty.
+     */
     public static boolean hasPendingMessage() {
         return !messageQueue.isEmpty();
     }
