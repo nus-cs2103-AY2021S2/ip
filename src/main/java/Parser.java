@@ -20,10 +20,10 @@ public class Parser {
      * @param scanner takes in the a scanner to scan
      * @return Nothing.
      */
-    public void makingSenseOfUserCommand(ArrayList<Task> arrayList, String path, Scanner scanner) {
-        String input;
-        while (scanner.hasNextLine()) {
-            input = scanner.nextLine();
+    public String makingSenseOfUserCommand(ArrayList<Task> arrayList, String path, String input) {
+
+      //while (scanner.hasNextLine()) {
+       //     input = scanner.nextLine();
             try {
                 if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
                         || input.contains("list") || input.contains("done") || input.contains("delete") || input.contains("find"))) {
@@ -175,6 +175,6 @@ public class Parser {
                 counterTwo++;
             }
             new Storage().savingFile(arrayList, path);
-        }
+
     }
 }
