@@ -12,6 +12,6 @@ public class InvalidCommandException extends Exception {
     
     @Override
     public String getMessage() {
-        return "Command.Command '" + badCommand + "' is not recognized.";
+        return "Command '" + badCommand + "' is not recognized.";
     }
 }
