@@ -123,13 +123,15 @@ public class Ui {
      */
     public void showHelpMessage() {
         String helpMessage = "Use any of the following commands:\n" +
-                "To view all stored tasks: 'list'\n" +
+                "To view all stored tasks: list\n" +
+                "To find relevant stored tasks: find TERM\n" +
                 "To add a new 'todo': todo DESC\n" +
                 "To add a new 'event': event DESC /at DATE\n" +
                 "To add a new 'deadline': deadline DESC /by DATE\n" +
-                "To terminate DBot and save existing tasks: 'bye'\n\n" +
+                "To terminate DBot and save existing tasks: bye\n\n" +
                 "\tDESC - Description of the task\n" +
-                "\tDATE - Date of the task in YYYY-MM-DD format";
+                "\tDATE - Date of the task in YYYY-MM-DD format\n" +
+                "\tTERM - A search term that should match a part of a Tasks description";
         out.println(helpMessage);
     }
 
