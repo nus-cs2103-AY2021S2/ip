@@ -1,0 +1,6 @@
+
+T | 0 | eat and sleep
+E | 0 | eat | 2020-03-02 2pm
+T | 0 | eat
+T | 0 | sleep
+D | 0 | eat | 2020-02-02 2pm

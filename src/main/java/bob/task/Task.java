@@ -1,11 +1,11 @@
-package duke;
+package bob.task;
 
 /**
  * Represents a task
  */
 public class Task {
     protected String name;
-    protected boolean done = false;
+    protected boolean isDone = false;
 
     /**
      * Constructor of a task
@@ -18,19 +18,27 @@ public class Task {
     /**
      * Constructor of a task
      * @param name Name of task
-     * @param done Status of task
+     * @param isDone Status of task
      */
-    public Task(String name, boolean done) {
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getDone() {
+        return this.isDone;
     }
 
     /**
      * Updates the status of the task
-     * @param done The boolean value representing the status of the task
+     * @param isDone The boolean value representing the status of the task
      */
-    public void status(boolean done) {
-        this.done = done;
+    public void setStatus(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -39,7 +47,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X] " + this.name;
         } else {
             return "[ ] " + this.name;

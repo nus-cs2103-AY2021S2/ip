@@ -1,4 +1,9 @@
-package duke;
+package bob;
+
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -88,7 +93,7 @@ public class Storage {
     public void appendToDo(Todo task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt", true);
-            fw.write("T | 0 | " + task.name + System.lineSeparator());
+            fw.write("T | 0 | " + task.getName() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             throw new DukeException("File cannot be found.", e);
@@ -105,7 +110,7 @@ public class Storage {
     public void appendEvent(Event task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt", true);
-            fw.write("E | 0 | " + task.name + " | " + task.getDate() + " "
+            fw.write("E | 0 | " + task.getName() + " | " + task.getDate() + " "
                     + task.getTime() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -123,7 +128,7 @@ public class Storage {
     public void appendDeadline(Deadline task) throws DukeException {
         try {
             FileWriter fw = new FileWriter("duke.txt", true);
-            fw.write("D | 0 | " + task.name + " | " + task.getDeadline() + " "
+            fw.write("D | 0 | " + task.getName() + " | " + task.getDeadline() + " "
                     + task.getTime() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -142,9 +147,9 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter("duke.txt");
             for (Task nextTask : task.getTaskList()) {
-                String done = nextTask.done ? "1" : "0";
+                String done = nextTask.getDone() ? "1" : "0";
                 String type = nextTask.toString().substring(1, 2);
-                String name = nextTask.name;
+                String name = nextTask.getName();
                 String time = "";
                 if (type.equals("E")) {
                     int index = nextTask.toString().indexOf("at: ");

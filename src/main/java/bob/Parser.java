@@ -1,4 +1,8 @@
-package duke;
+package bob;
+
+import bob.command.Command;
+import bob.task.Deadline;
+import bob.task.Event;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -13,22 +17,23 @@ public class Parser {
      * @param userInput User's input
      * @return The command user is giving
      */
-    public Command parseCommand(String userInput) {
-        if (userInput.equals("bye")) {
+    public Command parseCommand(String[] userInput) {
+        String command = userInput[0].toLowerCase();
+        if (command.equals("bye")) {
             return Command.BYE;
-        } else if (userInput.equals("list")) {
+        } else if (command.equals("list")) {
             return Command.LIST;
-        } else if (userInput.length() >= 4 && userInput.startsWith("done")) {
+        } else if (command.equals("done")) {
             return Command.DONE;
-        } else if (userInput.length() >= 4 && userInput.startsWith("todo")) {
+        } else if (command.equals("todo")) {
             return Command.TODO;
-        } else if (userInput.length() >= 5 && userInput.startsWith("event")) {
+        } else if (command.equals("event")) {
             return Command.EVENT;
-        } else if (userInput.length() >= 8 && userInput.startsWith("deadline")) {
+        } else if (command.equals("deadline")) {
             return Command.DEADLINE;
-        } else if (userInput.length() >= 6 && userInput.startsWith("delete")) {
+        } else if (command.equals("delete")) {
             return Command.DELETE;
-        } else if (userInput.length() >= 4 && userInput.startsWith("find")) {
+        } else if (command.equals("find")) {
             return Command.FIND;
         } else {
             return Command.INVALID;
@@ -59,12 +64,22 @@ public class Parser {
     /**
      * Returns a string representing the task name given the user's input.
      * @param userInput User's full input
-     * @param start The index at which the name starts
      * @return A string representing the task name
      */
-    public String parseName(String userInput, int start) throws DukeException {
+    public String parseName(String userInput) throws DukeException {
         try {
-            return userInput.substring(start);
+            int startIndex = userInput.indexOf(" ") + 1;
+            int endIndex = userInput.indexOf("/");
+            String name = "";
+            if (startIndex == 0) {
+                throw new DukeException("No name detected. Please try again.");
+            }
+            if (endIndex == -1) {
+                name = userInput.substring(startIndex);
+            } else {
+                name = userInput.substring(startIndex, endIndex - 1);
+            }
+            return name;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No name detected. Please try again.", e);
         }
