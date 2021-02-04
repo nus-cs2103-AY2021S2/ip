@@ -70,4 +70,16 @@ public class Ui {
     public void showError(String message) {
         err.println(message);
     }
+
+    /**
+     * Shows the user a list of relevant Tasks.
+     *
+     * This method is to be called when a user attempts to find a Task via the Find Command.
+     *
+     * @param relevantTasks A TaskList containing relevant Tasks.
+     */
+    public void printRelevantTasks(TaskList relevantTasks) {
+        out.println("Here are the matching tasks in your list:");
+        printTasks(relevantTasks);
+    }
 }

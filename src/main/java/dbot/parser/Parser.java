@@ -6,6 +6,7 @@ import dbot.command.DeleteCommand;
 import dbot.command.DoneCommand;
 import dbot.command.EventCommand;
 import dbot.command.ExitCommand;
+import dbot.command.FindCommand;
 import dbot.command.HelpCommand;
 import dbot.command.ListCommand;
 import dbot.command.TodoCommand;
@@ -74,6 +75,9 @@ public class Parser {
             break;
         case ExitCommand.COMMAND_WORD:
             command = new ExitCommand();
+            break;
+        case FindCommand.COMMAND_WORD:
+            command = new FindCommand(inputs[1].strip());
             break;
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
