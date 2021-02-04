@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * A DialogueBox is a single row on the GUI containing the avatar and message.
+ */
 public class DialogueBox extends HBox {
     @FXML
     private Label messageBubble;

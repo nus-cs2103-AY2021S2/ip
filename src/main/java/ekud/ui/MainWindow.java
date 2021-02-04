@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * The main content of the GUI.
+ */
 public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));

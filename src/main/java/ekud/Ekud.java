@@ -6,6 +6,9 @@ import ekud.parser.Parser;
 import ekud.storage.Storage;
 import ekud.task.TaskList;
 
+/**
+ * The main chatbot containing all logic to process all commands sent.
+ */
 public class Ekud {
     private final Storage storage;
     private TaskList tasks;

@@ -5,6 +5,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The GUI frontend of Ekud.
+ */
 public class MainApp extends Application {
     private final Ekud ekud = new Ekud("data/tasks.txt");
 

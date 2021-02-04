@@ -1,5 +1,8 @@
 package ekud.common.exception;
 
+/**
+ * Exceptions meant for Ekud.
+ */
 public class EkudException extends Exception {
     protected String message;
 
