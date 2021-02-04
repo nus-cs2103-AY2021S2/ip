@@ -14,7 +14,7 @@
             <VBox fx:id="dialogContainer" VBox.vgrow="ALWAYS"/>
         </content>
     </ScrollPane>
-    <HBox minHeight="40.0" prefHeight="40.0" spacing="5" VBox.vgrow="NEVER">
+    <HBox fx:id="bottomContainer" minHeight="40.0" prefHeight="40.0" spacing="2" VBox.vgrow="NEVER">
         <padding>
             <Insets top="2" right="2" bottom="2" left="2"/>
         </padding>

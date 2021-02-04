@@ -7,12 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * Represents a dialogue box containing an avatar icon and the text message.
@@ -32,6 +37,13 @@ public class DialogBox extends HBox {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        Color backgroundColor = Color.rgb(250, 200, 200, 0.9);
+        CornerRadii cornerRadii = new CornerRadii(5);
+        Insets insets = new Insets(-4);
+        BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, cornerRadii, insets);
+        Background background = new Background(backgroundFill);
+        dialog.setBackground(background);
         dialog.setText(text);
         displayPicture.setImage(img);
     }

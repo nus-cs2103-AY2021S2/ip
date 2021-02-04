@@ -10,11 +10,18 @@ import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.tasks.TaskList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -32,7 +39,10 @@ public class MainWindow extends VBox {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private HBox bottomContainer;
 
+    private Image backgroundImage;
     private Image userImage;
     private Image dukeImage;
 
@@ -41,11 +51,16 @@ public class MainWindow extends VBox {
      */
     @FXML
     public void initialize() {
-        userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
-        dukeImage = new Image(getClass().getResourceAsStream("/images/duke.png"));
+        // Credits: Pictures from http://locusanimation.com/project/runningman/?lang=en
+        userImage = new Image(getClass().getResourceAsStream("/images/popo.png"));
+        dukeImage = new Image(getClass().getResourceAsStream("/images/kuga.png"));
 
         // Set the scroll pane to automatically scroll down when the text reaches the bottom
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(backgroundFill);
+        bottomContainer.setBackground(background);
     }
 
     /**
@@ -71,8 +86,8 @@ public class MainWindow extends VBox {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg, dukeImage));
 
         primaryStage.setTitle("Duke");
-        primaryStage.setMinWidth(400.0);
-        primaryStage.setMinHeight(500.0);
+        primaryStage.setMinWidth(500.0);
+        primaryStage.setMinHeight(400.0);
     }
 
     @FXML

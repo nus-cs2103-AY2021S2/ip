@@ -1,5 +1,11 @@
 .scroll-pane > .viewport {
-   -fx-background-color: LAVENDER;
+   -fx-background-image: url("../images/background.jpg");
+   -fx-background-position: center center;
+   -fx-background-size: stretch;
+}
+
+.hbox {
+   -fx-background-color: black;
 }
 
 .label {
