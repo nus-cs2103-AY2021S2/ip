@@ -1,137 +1,74 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static String h_rule = "────────────────────────────────────────────────────────────────────";
+    private Storage store;
+    private Ui ui;
+    private TaskList taskList;
+    private int count;
 
-    public static int dukeRunner(String log) throws DukeNotFoundException, DukeDescriptionException, DukeTimingException, FileNotFoundException {
-        Scanner sc = new Scanner(System.in);
+    public Duke(String path) {
+        this.store = new Storage(path);
+        this.taskList = new TaskList(this.store);
+        this.count = 0;
+        this.ui = new Ui();
+    }
 
-        String raw_in;
-        String[] input;
-        List<Task> itemList = new ArrayList<>();
-        int count = 0;
-        List<String> fileContents = null;
+    public int dukeRunner() {
+        Ui.printHello();
 
-        try {
-            fileContents = new ArrayList<>(Files.readAllLines(Paths.get(log)));
-        } catch (IOException e) {
-            System.out.println(e);
-        }
         while (true) {
-            raw_in = sc.nextLine().trim();
-            input = raw_in.split(" ");
-            System.out.println(h_rule);
-            String joined = "";
-            String timing = "";
-            if (raw_in.equals("bye")) {
-                System.out.println("Goodbye! Have a nice day!\n");
+            String userInput = ui.getInputFromUser();
+
+            ParserOutput parserOutput = null;
+            try {
+                parserOutput = Parser.parse(userInput);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+
+            ui.printHRule();
+
+            if (parserOutput.isBye()) {
                 break;
-            } else {
-                switch (input[0]) {
-                    case "list":
-                        int index = 1;
-                        for (Task s : itemList) {
-                            System.out.println(index + ". " + s.toString());
-                            index++;
-                        }
-                        break;
-                    case "done":
-                        int itemToBeUpdatedIndex = Integer.parseInt(input[1]) - 1;
-                        Task task = itemList.get(itemToBeUpdatedIndex);
-                        task.markDone();
-                        fileContents.set(itemToBeUpdatedIndex, task.toString());
-                        System.out.println("Alright, I will mark this as done.\n" + input[1] + ". " + task.toString());
-                        break;
-                    case "todo":
-                        for (int i = 1; i < input.length; i++) {
-                            joined = joined + " " + input[i];
-                        }
-                        itemList.add(new Todo(joined));
-                        fileContents.add(new Todo(joined).toString());
-                        count++;
-                        System.out.println("Added " + raw_in + "\nYou now have " + count + " items in your list.");
-                        break;
-                    case "deadline":
-                        int seq = 0;
-                        while (!input[seq].equals("/by")) {
-                            joined = joined + " " + input[seq];
-                            seq++;
-                            if (seq == input.length) {
-                                throw new DukeDescriptionException(input[0]);
-                            }
-                        }
-
-                        if (seq + 1 == input.length) {
-                            throw new DukeTimingException(input[0]);
-                        }
-
-                        for (int i = seq + 1; i < input.length; i++) {
-                            timing = timing + " " + input[i];
-                        }
-
-                        itemList.add(new Deadline(joined, timing.trim()));
-                        fileContents.add(new Deadline(joined, timing.trim()).toString());
-                        count++;
-                        System.out.println("Added " + joined + "\nYou now have " + count + " items in your list.");
-                        break;
-                    case "event":
-                        int seq2 = 0;
-                        while (!input[seq2].equals("/at")) {
-                            joined = joined + " " + input[seq2];
-                            seq2++;
-                            if (seq2 == input.length) {
-                                throw new DukeDescriptionException(input[0]);
-                            }
-                        }
-
-                        if (seq2 + 1 == input.length) {
-                            throw new DukeTimingException(input[0]);
-                        }
-
-                        for (int i = seq2 + 1; i < input.length; i++) {
-                            timing = timing + " " + input[i];
-                        }
-                        itemList.add(new Event(joined, timing.trim()));
-                        fileContents.add(new Event(joined, timing.trim()).toString());
-                        count++;
-                        System.out.println("Added " + joined + "\nYou now have " + count + " items in your list.");
-                        break;
-                    case "delete":
-                        count--;
-                        itemList.remove(Integer.parseInt(input[1]));
-                        fileContents.remove(Integer.parseInt(input[1]));
-                        System.out.println("I have removed item " + input[1] + ".");
-                    default:
-                        throw new DukeNotFoundException();
-                }
             }
-            System.out.println(h_rule);
-            PrintWriter writer = new PrintWriter(log);
-            for (String line : fileContents) {
-                writer.println(line);
-            }
-            writer.close();
+
+            this.readParse(parserOutput);
+
+            ui.printHRule();
         }
-        sc.close();
+
+        Ui.printGoodbye();
+
         return 0;
     }
 
+    private void readParse(ParserOutput parserOutput) {
+        switch (parserOutput.getAction()) {
+            case 1: //remove
+                this.taskList.remove(parserOutput.getIndex());
+                ui.printRemoved(parserOutput.getIndex());
+                break;
+            case 2: //done
+                Task doneTask = this.taskList.get(parserOutput.getIndex());
+                doneTask.markDone();
+                this.taskList.set(parserOutput.getIndex(), doneTask);
+                ui.printDone(doneTask);
+                break;
+            case 3: //add
+                this.taskList.add(parserOutput.getTask());
+                ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
+            case 4: //set
+                this.taskList.set(parserOutput.getIndex(), parserOutput.getTask());
+            case 5: //list
+                ui.printList(this.taskList);
+            default:
+                //TODO: add exception for this
+        }
+    }
+
     public static void main(String[] args) {
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println("Greetings! I am Duke! How may I assist you?\n" + h_rule);
-        int res = -1;
         File logFile = new File("./logs");
 
         try {
@@ -145,15 +82,9 @@ public class Duke {
                 logFile.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("early" + e);
+            System.out.println("no file created " + e);
         }
 
-        while (res != 0) {
-            try {
-                res = dukeRunner("./logs");
-            } catch (DukeException | FileNotFoundException e) {
-                System.out.println(e);
-            }
-        }
+        new Duke("./logs").dukeRunner();
     }
 }
