@@ -16,49 +16,63 @@ public class Ui {
         return raw_in;
     }
 
-    public static void printHello() {
+    public static String printHello() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        System.out.println("Greetings! I am Duke! How may I assist you?\n" + H_RULE);
+        String out = "Hello from\n" + logo + "\nGreetings! I am Duke! How may I assist you?";
+
+        System.out.println(out + "\n" + H_RULE);
+
+        return out;
     }
 
-    public static void printGoodbye() {
+    public static String printGoodbye() {
         System.out.println("\nGoodbye! Have a nice day!\n");
+        return "Goodbye! Have a nice day!";
     }
 
-    public static void printList(TaskList tasks) {
+    public static String printList(TaskList tasks) {
+        String out = "";
         for (int i = 1; i <= tasks.getSize(); i++) {
             System.out.println(i + ". " + tasks.get(i).toString());
+            out = out + i + ". " + tasks.get(i).toString() + "\n";
         }
+        return out;
     }
 
     public static void printHRule() {
         System.out.println(H_RULE);
     }
 
-    public void printDone(Task task) {
+    public String printDone(Task task) {
         System.out.println("Alright, I will mark this as done.\n" + task.toString());
+        return "Alright, I will mark this as done.\n" + task.toString();
     }
 
-    public void printAdded(Task task, int count) {
+    public String printAdded(Task task, int count) {
         System.out.println("Added " + task.getName() + ". \nYou now have " + count + " items in your list.");
+        return "Added " + task.getName() + ". \nYou now have " + count + " items in your list.";
     }
 
-    public void printRemoved(int index) {
+    public String printRemoved(int index) {
         System.out.println("I have removed item " + index + ".");
+        return "I have removed item " + index + ".";
     }
 
-    public void printSearch(List<Task> tasks, String searchString) {
+    public String printSearch(List<Task> tasks, String searchString) {
+        String out = "";
         System.out.println(String.format("Searching for %s...", searchString));
         System.out.println("Here you go!" );
+        out = out + "Here's what i found for " + searchString + ": \n";
         for (Task t : tasks) {
             System.out.println(t);
+            out = out + t.toString() + "\n";
         }
+        return out;
     }
 
 }

@@ -1,9 +1,11 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
 
@@ -17,6 +19,17 @@ public class Storage {
      * @param path address of file to be used for storage
      */
     public Storage (String path) {
+        File logFile = new File(path);
+        try {
+            if (logFile.isFile()) {
+                Scanner logs = new Scanner(logFile);
+                logs.close();
+            } else {
+                logFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("no file created " + e);
+        }
         this.path = path;
         try {
             this.itemList = new ArrayList<>(Files.readAllLines(Paths.get(path)));
