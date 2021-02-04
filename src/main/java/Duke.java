@@ -1,6 +1,9 @@
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Duke {
 
@@ -45,7 +48,6 @@ public class Duke {
                                 } catch (Exception e){
                                     System.out.println("Enter valid todo");
                                 }
-
                             }
                         }
                     } catch (DukeException e){
@@ -69,14 +71,19 @@ public class Duke {
                                 if(parts.length == 1){
                                     throw new DukeException("Please adhere to convention:\n(task /by deadline timing)");
                                 } else {
-                                    String deadline = parts[1];
-                                    System.out.println("Got it. I've added this deadline:");
-                                    Deadline newDeadline = new Deadline(deadlineDesc, deadline);
-                                    System.out.println(" " + newDeadline.toString());
-                                    myList.add(newDeadline);
-                                    System.out.println("Now you have " + myList.size() + " tasks in the list.");
-                                    database.writeTaskToFile(myList);
-
+                                    String dl = parts[1];
+                                    try{
+                                        LocalDate deadline = LocalDate.parse(dl);
+                                        System.out.println("Got it. I've added this deadline:");
+                                        Deadline newDeadline = new Deadline(deadlineDesc, deadline);
+                                        System.out.println(" " + newDeadline.toString());
+                                        myList.add(newDeadline);
+                                        System.out.println("Now you have " + myList.size() + " tasks in the list.");
+                                        database.writeTaskToFile(myList);
+                                    } catch (DateTimeParseException e){
+                                        System.out.println("Please enter date as following\n");
+                                        System.out.println("YYYY-MM-DD");
+                                    }
                                 }
                             } catch(DukeException e) {
                                 System.out.println(e.getMessage());
@@ -235,8 +242,9 @@ public class Duke {
                     String[] inputs = subString.split("by: ");
                     String name = inputs[0].substring(0, inputs[0].length()-2);
                     String deadline = inputs[1].substring(0, inputs[1].length()-1);
-                    Deadline deadline1 = new Deadline(name, deadline);
-                    tasks.add(deadline1);
+                    LocalDate deadline1 = LocalDate.parse(deadline);
+                    Deadline deadline2 = new Deadline(name, deadline1);
+                    tasks.add(deadline2);
                     break;
                 case 'T':
                     String subString1 = str.substring(7);
