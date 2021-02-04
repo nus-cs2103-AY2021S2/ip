@@ -15,7 +15,6 @@ public class Parser {
      * @param userInput
      * @return Different Command depending on input
      */
-
     public static Command parseCommand(String userInput) throws DukeToDoException, DukeCommandException {
         String[] splitInput = userInput.split(" ", 2);
         String command = splitInput[0];
@@ -77,7 +76,6 @@ public class Parser {
             String taskDescription = splitInput[1];
             return new TaskCommand(command, taskDescription);
 
-
         case "deadline":
             String[] taskDetails = splitInput[1].split("/by");
             taskDescription = taskDetails[0];
@@ -93,7 +91,5 @@ public class Parser {
         default:
             throw new DukeCommandException("Invalid Command.");
         }
-
     }
-
 }
