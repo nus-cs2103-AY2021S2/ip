@@ -19,12 +19,13 @@ public class Ui {
 
     private Scanner scForCommandLine = new Scanner(System.in);
 
+    private String messageToDisplay = "";
+
     /**
-     * displays the welcome message when first starting duke.
+     * Returns the welcome message when first starting duke.
      */
-    public void displayWelcomeMessage() {
-        System.out.println("Hello from\n" + LOGO);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public String displayWelcomeMessage() {
+        return "Hello from\n" + LOGO + "Hello! I'm Duke\nWhat can I do for you?";
     }
 
 
@@ -56,16 +57,32 @@ public class Ui {
 
 
     /**
-     * Prints all the tasks stored on the TaskList.
+     * Returns the string of all the tasks stored on the TaskList.
      */
 
-    public void showUserAllTasks(TaskList listOfTasks) {
+    public static String getDisplayOfAllTasks(TaskList listOfTasks) {
+        String output = "";
         int counter = 1;
         for (Task currentTask : listOfTasks) {
-            System.out.println(counter + "." + currentTask);
+            output += (counter + "." + currentTask + "\n");
             counter++;
         }
+        return output;
     }
+
+    public static String getDisplayOfNumberOfTasks(TaskList listOfTasks) {
+        return "Now you have " + listOfTasks.size() + " tasks in the list.";
+    }
+
+    public void setDisplayMessage(String messageToDisplay){
+        this.messageToDisplay = messageToDisplay;
+    }
+
+    public String getMessageToDisplay() {
+        return messageToDisplay;
+    }
+
+
 
 }
 

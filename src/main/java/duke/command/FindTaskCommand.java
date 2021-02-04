@@ -15,8 +15,8 @@ public class FindTaskCommand extends Command {
 
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) {
-        System.out.println("Here are the matching tasks in your list:");
         TaskList filteredTaskList = tasks.filterByWord(keyword);
-        ui.showUserAllTasks(filteredTaskList);
+        ui.setDisplayMessage("Here are the matching tasks in your list:" + "\n" +
+                ui.getDisplayOfAllTasks(filteredTaskList) );
     }
 }

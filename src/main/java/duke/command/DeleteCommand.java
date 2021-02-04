@@ -23,8 +23,8 @@ public class DeleteCommand extends Command {
         } catch (IOException err) {
             this.isExit = true;
         }
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("\t" + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String messageToDisplay = "Noted. I've removed this task:\n\t" + task
+                + "\n" + Ui.getDisplayOfNumberOfTasks(tasks);
+        ui.setDisplayMessage(messageToDisplay);
     }
 }

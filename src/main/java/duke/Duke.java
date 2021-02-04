@@ -13,6 +13,7 @@ public class Duke {
     private static Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean isExit = false;
 
     Duke() {
         this.storage = initializeStorage();
@@ -25,16 +26,7 @@ public class Duke {
         }
     }
 
-    /**
-     * Creates a Duke Chatbot and runs it.
-     *
-     * @param args
-     */
 
-    public static void main(String[] args) {
-        Duke chatbot = new Duke();
-        chatbot.run();
-    }
 
     private Storage initializeStorage() {
         File directory = new File("data"); // Check if directory exists.
@@ -52,23 +44,24 @@ public class Duke {
         return new Storage("data/duke.txt");
     }
 
-    /**
-     * Executes the main logic of Duke Chatbot.
-     */
+    public String start(){
+        return ui.displayWelcomeMessage();
+    }
 
-    public void run() {
-        ui.displayWelcomeMessage();
-        boolean shouldExit = false; // set to false is a command fails to execute exit command
-        while (!shouldExit) {
-            try {
-                String input = ui.getUserCommand();
-                Parser parser = new Parser(input);
-                Command command = parser.parseCommand();
-                command.execute(ui, tasks, storage);
-                shouldExit = command.shouldExit();
-            } catch (DukeException e) {
-                System.out.println("OOPS!!! " + e.getMessage());
-            }
+    public String run(String input) {
+        try {
+            Parser parser = new Parser(input);
+            Command command = parser.parseCommand();
+            command.execute(ui, tasks, storage);
+            this.isExit = command.shouldExit();
+            return ui.getMessageToDisplay();
+
+        } catch (DukeException e) {
+            return "OOPS!!! " + e.getMessage();
         }
+    }
+
+    boolean shouldExit(){
+        return isExit;
     }
 }

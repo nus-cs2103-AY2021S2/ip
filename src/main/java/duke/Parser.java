@@ -55,7 +55,7 @@ public class Parser {
      * @param input String representation of Task as it is stored in the hard disk.
      * @return the corresponding Task.
      */
-    public static Task parseTaskFromStoredFormat(String input) {
+    public static Task parseTaskFromStoredFormat(String input) throws DukeException {
         String[] fields = input.split(" \\| ");
         String commandCode = fields[0];
         Task parsedTask;
@@ -71,7 +71,7 @@ public class Parser {
             break;
         //default case throw a ParseError to be defined later...
         default:
-            parsedTask = null;
+            throw new DukeException("Please delete contents of the file data.duke and try again.");
         }
         boolean isDone = (Integer.parseInt(fields[1]) == 1);
         if (isDone && (parsedTask != null)) {
