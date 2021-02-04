@@ -10,6 +10,7 @@ import duke.util.Task;
 import duke.util.TaskList;
 import duke.util.Todo;
 import duke.util.Ui;
+import javafx.collections.ObservableList;
 
 /**
  * Duke is a task manager.
@@ -44,6 +45,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    // ObservableList<String> lst = FXCollections.observableArrayList("a","b","c");
 
     /**
      * Constructor to create Duke object.
@@ -115,7 +118,7 @@ public class Duke {
                     deleteTask(args);
                     break;
                 case "save":
-                    storage.saveTaskList(tasks.toList());
+                    storage.saveTaskList(tasks.getList());
                     ui.saved();
                     break;
                 case "load":
@@ -177,7 +180,7 @@ public class Duke {
         }
         if (s.equals("y")) {
             try {
-                storage.saveTaskList(tasks.toList());
+                storage.saveTaskList(tasks.getList());
                 ui.saved();
             } catch (DukeException e) {
                 ui.displayError(e);
@@ -186,5 +189,9 @@ public class Duke {
         }
         ui.exit();
         return true;
+    }
+
+    protected ObservableList<Task> getTaskList() {
+        return tasks.getList();
     }
 }
