@@ -1,8 +1,11 @@
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
+
+
+
 
 /**
  * Class Duke is the main class for the execution of Duke chatbot.
@@ -12,15 +15,8 @@ import java.io.IOException;
  */
 public class Duke {
 
-    /**
-     * This is the main method for the Duke class .
-     * @param args Unused.
-     * @return Nothing.
-     */
-
-    public static void main(String[] args) throws FileNotFoundException {
+    public String getResponse(String input) {
         ArrayList<Task> arrayList = new ArrayList<>();
-
         String path = "duke.txt";
         File dukeFile = new File("duke.txt"); // doest matter if the path exit
         boolean result;
@@ -28,7 +24,7 @@ public class Duke {
         try {
             result = dukeFile.createNewFile();
             if (result) {
-               System.out.println(".txt file created!");
+                System.out.println(".txt file created!");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -36,15 +32,18 @@ public class Duke {
         }
 
         //read from the file content into the arrayList at the start.
-        Scanner s = new Scanner(dukeFile);
+        Scanner s = null;
+        try {
+            s = new Scanner(dukeFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        assert s != null;
         new Storage().loadingFile(arrayList, s);
 
-        System.out.println("--------------------------");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("--------------------------");
+        return new Parser().makingSenseOfUserCommand(arrayList, path, input);
 
-        new Ui().interactWithUser(arrayList, path);
+
     }
 }
 
