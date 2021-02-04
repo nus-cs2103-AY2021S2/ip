@@ -1,6 +1,12 @@
 package chat;
 
-import chat.command.*;
+import chat.command.Command;
+import chat.command.ListCommand;
+import chat.command.DoneCommand;
+import chat.command.AddCommand;
+import chat.command.DeleteCommand;
+import chat.command.ExitCommand;
+import chat.command.FindCommand;
 
 /**
  * Parser class deals with making sense of user command.

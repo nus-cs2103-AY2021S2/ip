@@ -43,14 +43,12 @@ public abstract class Command {
     public Task checkCommandIndex(TaskList taskList, String commandName, String str) throws ChatException {
         //for commands with format: [command] [index]
         //returns valid index if index is correct
+        String formatStr = String.format("Please input with this format:\n" + 
+                "%s [index]", commandName);
         if (str.strip().equals(commandName)) {
-            throw new ChatException(String.format("Missing index\n" +
-                    "Please input with this format:\n" +
-                    "%s [index]", commandName));
+            throw new ChatException("Missing index\n" + formatStr);
         } else if (!str.contains(" ")) {
-            throw new ChatException(String.format("Missing space before index\n" +
-                    "Please input with this format:\n" +
-                    "%s [index]", commandName));
+            throw new ChatException("Missing space before index\n" + formatStr);
         }
         
         try {
@@ -62,9 +60,7 @@ public abstract class Command {
             throw new ChatException("List is empty or index is out of bounds");
         } catch (NumberFormatException e3){
             //i.e. [command] string
-            throw new ChatException(String.format("Index should be an integer\n" +
-                    "Please input with this format:\n" +
-                    "%s [index]", commandName));
+            throw new ChatException("Index should be an integer\n" + formatStr);
         }
     }
     
