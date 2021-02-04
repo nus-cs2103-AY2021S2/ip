@@ -9,17 +9,17 @@ import duke.common.Utils;
  */
 public class Event extends Task {
 
-    private final LocalDateTime at;
+    private final LocalDateTime eventDateTime;
 
     /**
      * Constructor for Event {@code Task}, specifying the description and occurrence date.
      *
      * @param description description of the event
-     * @param at occurrence date of the event
+     * @param eventDateTime occurrence date of the event
      */
-    public Event(String description, String at) {
+    public Event(String description, String eventDateTime) {
         super(description);
-        this.at = LocalDateTime.parse(at);
+        this.eventDateTime = LocalDateTime.parse(eventDateTime);
     }
 
     /**
@@ -27,24 +27,24 @@ public class Event extends Task {
      *
      * @param done integer value to indicate the event's status
      * @param description description of the event
-     * @param at occurrence date of the event
+     * @param eventDateTime occurrence date of the event
      */
-    public Event(int done, String description, String at) {
+    public Event(int done, String description, String eventDateTime) {
         super(done, description);
-        this.at = LocalDateTime.parse(at);
+        this.eventDateTime = LocalDateTime.parse(eventDateTime);
     }
 
-    public LocalDateTime getAt() {
-        return at;
+    public LocalDateTime getEventDateTime() {
+        return eventDateTime;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), Utils.formatDate(at));
+        return String.format("[E]%s (at: %s)", super.toString(), Utils.formatDate(eventDateTime));
     }
 
     @Override
     public String toStorageString() {
-        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, at);
+        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, eventDateTime);
     }
 }

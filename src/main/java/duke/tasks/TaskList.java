@@ -118,9 +118,9 @@ public class TaskList {
         LocalDate queryDate = LocalDate.parse(date);
         printTasks.removeIf(t -> {
             if (t instanceof Deadline) {
-                return !(((Deadline) t).getBy().toLocalDate().isEqual(queryDate));
+                return !(((Deadline) t).getDeadlineDateTime().toLocalDate().isEqual(queryDate));
             } else if (t instanceof Event) {
-                return !((Event) t).getAt().toLocalDate().isEqual(queryDate);
+                return !((Event) t).getEventDateTime().toLocalDate().isEqual(queryDate);
             }
             return true;
         });

@@ -70,7 +70,7 @@ public class Parser {
         }
 
         String input = inputs[1];
-        if (!Utils.numericChecker(input) && !input.equals("all")) {
+        if (!Utils.checkNumeric(input) && !input.equals("all")) {
             throw new DukeException("Your input is not recognised.");
         }
 
@@ -118,7 +118,7 @@ public class Parser {
             String date = String.join("T", Arrays.copyOfRange(inputs, index + 1, inputs.length));
 
             //ERROR: Invalid date time format
-            if (!Utils.validDateChecker(date)) {
+            if (!Utils.checkValidDate(date)) {
                 throw new DukeException("You have entered an invalid date time format.");
             }
 

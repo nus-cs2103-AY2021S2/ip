@@ -9,17 +9,17 @@ import duke.common.Utils;
  */
 public class Deadline extends Task {
 
-    private final LocalDateTime by;
+    private final LocalDateTime deadlineDateTime;
 
     /**
      * Constructor for Deadline {@code Task}, specifying the description and due date.
      *
      * @param description description of the deadline
-     * @param by due date of the deadline
+     * @param deadlineDateTime due date of the deadline
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String deadlineDateTime) {
         super(description);
-        this.by = LocalDateTime.parse(by);
+        this.deadlineDateTime = LocalDateTime.parse(deadlineDateTime);
     }
 
     /**
@@ -27,24 +27,24 @@ public class Deadline extends Task {
      *
      * @param done integer value to indicate the deadline's status
      * @param description description of the deadline
-     * @param by due date of the deadline
+     * @param deadlineDateTime due date of the deadline
      */
-    public Deadline(int done, String description, String by) {
+    public Deadline(int done, String description, String deadlineDateTime) {
         super(done, description);
-        this.by = LocalDateTime.parse(by);
+        this.deadlineDateTime = LocalDateTime.parse(deadlineDateTime);
     }
 
-    public LocalDateTime getBy() {
-        return by;
+    public LocalDateTime getDeadlineDateTime() {
+        return deadlineDateTime;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), Utils.formatDate(by));
+        return String.format("[D]%s (by: %s)", super.toString(), Utils.formatDate(deadlineDateTime));
     }
 
     @Override
     public String toStorageString() {
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
+        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, deadlineDateTime);
     }
 }

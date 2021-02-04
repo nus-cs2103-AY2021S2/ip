@@ -37,7 +37,7 @@ public class Utils {
      *
      * @param dateString a date String to be checked
      */
-    public static boolean validDateChecker(String dateString) {
+    public static boolean checkValidDate(String dateString) {
         try {
             LocalDateTime.parse(dateString);
             return true;
@@ -51,7 +51,7 @@ public class Utils {
      *
      * @param numberString a number String to be checked
      */
-    public static boolean numericChecker(String numberString) {
+    public static boolean checkNumeric(String numberString) {
         try {
             Integer.parseInt(numberString);
             return true;
