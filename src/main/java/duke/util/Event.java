@@ -83,4 +83,9 @@ public class Event extends Task {
         boolean isDone = args[1].equals("1");
         return new Event(args[2], LocalDate.parse(args[3]), isDone);
     }
+
+    @Override
+    public Event markComplete() {
+        return new Event(description, date, true);
+    }
 }

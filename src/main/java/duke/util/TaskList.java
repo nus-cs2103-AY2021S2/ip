@@ -5,17 +5,19 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  * Wrapper class for tasklist.
  */
 public class TaskList {
-    private List<Task> lst;
-
+    private ObservableList<Task> lst;
     /**
      * Creates empty tasklist.
      */
     public TaskList() {
-        lst = new ArrayList<>();
+        lst = FXCollections.observableArrayList();
     }
 
     /**
@@ -24,7 +26,7 @@ public class TaskList {
      * @param lst List of tasks.
      */
     public TaskList(List<Task> lst) {
-        this.lst = new ArrayList<>(lst);
+        this.lst = FXCollections.observableArrayList(lst);
     }
 
     /**
@@ -67,11 +69,13 @@ public class TaskList {
         try {
             t = lst.get(i);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInputException(String.format("\"%d\" is an invalid number!", i));
+            throw new DukeInputException(String.format("\"%d\" is an invalid number!", i - 1));
         }
-        t.markComplete();
 
-        return t;
+        Task completedTask = t.markComplete();
+        lst.set(i, completedTask);
+
+        return completedTask;
     }
 
     /**
@@ -104,8 +108,8 @@ public class TaskList {
      * 
      * @return List of tasks.
      */
-    public List<Task> toList() {
-        return new ArrayList<>(lst);
+    public ObservableList<Task> getList() {
+        return lst;
     }
 
     /**

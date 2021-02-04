@@ -83,4 +83,9 @@ public class Deadline extends Task {
         boolean isDone = args[1].equals("1");
         return new Deadline(args[2], LocalDate.parse(args[3]), isDone);
     }
+
+    @Override
+    public Deadline markComplete() {
+        return new Deadline(description, date, true);
+    }
 }

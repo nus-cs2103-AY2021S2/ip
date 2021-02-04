@@ -38,9 +38,7 @@ public abstract class Task {
     /**
      * Set task as completed.
      */
-    public void markComplete() {
-        isDone = true;
-    }
+    public abstract Task markComplete();
 
     private String getStatus() {
         return isDone ? "X" : " ";
