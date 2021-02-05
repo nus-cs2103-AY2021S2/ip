@@ -85,17 +85,11 @@ public class Storage {
     public void updateFile(TaskList taskList) {
         String updatedString = "";
         for (Task t : taskList.getTaskList()) {
-            updatedString += t.getType();
-            updatedString += " | ";
-            updatedString += (t.isDone() ? 1 : 0);
-            updatedString += " | ";
-            updatedString += t.getName();
+            updatedString += String.format("%s | %s | %s", t.getType(), (t.isDone() ? 1 : 0), t.getName());
             if (t.getType().equals(TaskType.DEADLINE)) {
-                updatedString += " | ";
-                updatedString += ((Deadline) t).getTime().toString();
+                updatedString += " | " + ((Deadline) t).getTime().toString();
             } else if (t.getType().equals(TaskType.EVENT)) {
-                updatedString += " | ";
-                updatedString += ((Event) t).getTime().toString();
+                updatedString += " | " + ((Event) t).getTime().toString();
             }
             updatedString += "\n";
         }

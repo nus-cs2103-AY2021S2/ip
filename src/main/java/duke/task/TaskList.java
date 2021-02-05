@@ -2,6 +2,8 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.DukeException;
 import duke.Ui;
@@ -81,12 +83,17 @@ public class TaskList {
             if (taskList.size() == 0) {
                 throw new DukeException("There's currently no task in the list.");
             }
-            String taskString = "";
-            taskString += "" + (1) + "." + taskList.get(0).toString();
-            for (int i = 1; i < taskList.size(); i++) {
-                taskString += "\n" + (i + 1) + "." + taskList.get(i).toString();
-            }
-            return Ui.printFormatMessage(taskString);
+            List<String> taskStrings = new ArrayList<>();
+            IntStream.range(0, taskList.size())
+                    .boxed()
+                    .forEach(index -> {
+                        if (index == 0) {
+                            taskStrings.add(String.format("%d.%s", (index + 1), taskList.get(index).toString()));
+                        } else {
+                            taskStrings.add(String.format("\n%d.%s", (index + 1), taskList.get(index).toString()));
+                        }
+                    });
+            return Ui.printFormatMessage(String.join("", taskStrings));
         } catch (DukeException ex) {
             return Ui.printFormatMessage(ex.toString());
         }
@@ -99,15 +106,17 @@ public class TaskList {
      * @param list the list given to be print out
      */
     public String printSpecifiedTasks(List<Task> list) {
-        if (list.size() == 0) {
-            return "";
-        }
-        String taskString = "";
-        taskString += "" + (1) + "." + list.get(0).toString();
-        for (int i = 1; i < list.size(); i++) {
-            taskString += "\n" + (i + 1) + "." + list.get(i).toString();
-        }
-        return Ui.printFormatMessage(taskString);
+        List<String> taskStrings = new ArrayList<>();
+        IntStream.range(0, list.size())
+                .boxed()
+                .forEach(index -> {
+                    if (index == 0) {
+                        taskStrings.add(String.format("%d.%s", (index + 1), list.get(index).toString()));
+                    } else {
+                        taskStrings.add(String.format("\n%d.%s", (index + 1), list.get(index).toString()));
+                    }
+                });
+        return Ui.printFormatMessage(String.join("", taskStrings));
     }
 
     /**
@@ -120,12 +129,12 @@ public class TaskList {
             if (taskList.size() == 0) {
                 throw new DukeException("There's currently no task in the list.");
             }
-            List<Task> targetTasks = new ArrayList<>();
-            for (Task t : taskList) {
-                if (t.getName().contains(target)) {
-                    targetTasks.add(t);
-                }
-            }
+            List<Task> targetTasks =
+                    taskList.stream()
+                            .filter(task -> {
+                                return task.getName().contains(target);
+                            })
+                            .collect(Collectors.toList());
             if (targetTasks.size() != 0) {
                 return printSpecifiedTasks(targetTasks);
             } else {
