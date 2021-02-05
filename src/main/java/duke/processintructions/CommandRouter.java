@@ -25,6 +25,8 @@ public class CommandRouter {
         LogicHandler logic = new LogicHandler();
         Ui ui = new Ui();
 
+        assert(command != null);
+
         switch (command) {
         case LIST:
             return logic.list(tasks.getList());

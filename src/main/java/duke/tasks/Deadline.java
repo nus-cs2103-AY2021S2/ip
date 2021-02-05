@@ -37,11 +37,13 @@ public class Deadline extends Task {
      * @return String representation of date in MMM d yyyy format.
      */
     public static String convertToDate(String input) {
+        assert input != null;
+
         try {
             LocalDate date = LocalDate.parse(input);
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (DateTimeException e) {
-            return input;
+            return "Error: " + e;
         }
     }
 

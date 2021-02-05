@@ -18,7 +18,8 @@ public class LogicHandler {
      * @param list List of tasks.
      */
     public String list(List<Task> list) {
-        // Check if the command is list and display the list of duke.tasks.
+        assert(list != null);
+
         String temp = "";
 
         for (int i = 0; i < list.size(); i++) {
