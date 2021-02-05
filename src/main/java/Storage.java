@@ -53,7 +53,6 @@ public class Storage {
 
     /**
      * Adds a task to the file.
-     *
      * @param task Task to be added.
      * @throws IOException On file error.
      */
@@ -121,7 +120,6 @@ public class Storage {
 
     /**
      * Deletes a task from the file.
-     *
      * @param task Task to be deleted.
      * @throws IOException On file error.
      */
@@ -145,7 +143,6 @@ public class Storage {
 
     /**
      * Marks a task in the file as completed.
-     *
      * @param task Task to be marked as completed.
      * @throws IOException On file error.
      */
@@ -172,7 +169,6 @@ public class Storage {
 
     /**
      * Copy the contents of one file into another.
-     *
      * @param input File containing the contents to be copied.
      * @param output File where the contents are to be copied into.
      * @throws IOException On file error.

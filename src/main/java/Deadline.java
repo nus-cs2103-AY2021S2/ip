@@ -14,7 +14,6 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline with the description and date by which the task should be completed.
-     *
      * @param name Description of the Deadline.
      * @param by The date by which the task should be completed.
      */
@@ -25,7 +24,6 @@ public class Deadline extends Task {
 
     /**
      * Parses the date in the format of "MMM dd yyyy".
-     *
      * @param date Date to be parsed.
      * @return A String representing the date in the new format.
      */
