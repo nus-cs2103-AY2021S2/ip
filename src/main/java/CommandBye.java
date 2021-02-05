@@ -7,13 +7,12 @@ public class CommandBye extends Command {
      * Closes the provided attributes of Duke object in preparation of ending the run.
      *
      * @param tasks TaskList of Duke object
-     * @param ui Ui of Duke object
      * @param storage Storage of Duke object
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         // TODO INITIATE SHUTDOWN IN ALL ARGUMENTS
-        ui.printCommand(this);
+        return this.toDukeOutput();
     }
 
     /**

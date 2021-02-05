@@ -6,12 +6,11 @@ public class CommandToDo extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         ToDo toDo = new ToDo(description);
         tasks.addTask(toDo);
         storage.save(tasks);
-        ui.printCommand(this);
-        ui.printTask(toDo);
+        return this.toDukeOutput() + "\n" + toDo.toString();
     }
 
     @Override

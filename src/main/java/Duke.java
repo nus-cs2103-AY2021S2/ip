@@ -1,5 +1,4 @@
 public class Duke {
-    private final Ui ui;
     private final Storage storage;
     private final TaskList tasks;
 
@@ -8,51 +7,30 @@ public class Duke {
      * user input.
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage();
 
         TaskList tempTasks;
         try {
             tempTasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.printErrorMessage(e);
-            tempTasks = new TaskList();
+            tempTasks = new TaskList(); // case where save file does not exist
         }
 
         this.tasks = tempTasks;
-        run();
     }
 
     /**
-     * Main method of Duke, entry point to run the program.
+     * Accepts the input and returns a String output representing the command execution message.
      *
-     * @param args arguments provided when running the program.
+     * @param input String input of user.
+     * @return String output of command completion.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-    }
-
-    private void run() {
-        boolean isRunning = true;
-        ui.printGreetings();
-
-        while (isRunning) {
-            try {
-                String input = ui.readInput();
-                Command command = Parser.parse(input);
-                command.execute(tasks, ui, storage);
-
-                if (command instanceof CommandBye) {
-                    isRunning = false;
-                }
-            } catch (DukeException e) {
-                ui.printErrorMessage(e);
-
-            } finally {
-                if (isRunning) {
-                    ui.printInputPrompt();
-                }
-            }
+    public String run(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

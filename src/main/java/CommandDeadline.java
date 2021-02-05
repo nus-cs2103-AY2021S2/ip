@@ -28,12 +28,11 @@ public class CommandDeadline extends Command {
      * @param storage Storage of Duke object, saves the TaskList into a text file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Deadline deadline = new Deadline(description, dateTime);
         tasks.addTask(deadline);
         storage.save(tasks);
-        ui.printCommand(this);
-        ui.printTask(deadline);
+        return this.toDukeOutput() + "\n" + deadline.toString();
     }
 
     /**

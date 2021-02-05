@@ -6,13 +6,12 @@ public class CommandFind extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printCommand(this);
-        tasks.findTasks(query);
+    public String execute(TaskList tasks, Storage storage) {
+        return this.toDukeOutput() + "\n" + tasks.findTasks(query);
     }
 
     @Override
     public String toDukeOutput() {
-        return "Sure thing boss, I'll find them in a jiffy. ";
+        return "Sure thing boss, I'll find them in a jiffy.";
     }
 }

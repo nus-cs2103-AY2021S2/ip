@@ -44,17 +44,22 @@ public class TaskList {
     /**
      * Prints all the tasks in the TaskList.
      */
-    public void printTasks() {
+    public String printTasks() {
         if (tasks.isEmpty()) {
-            System.out.println("It is empty boss.");
+            return "It is empty boss.";
         } else {
-            System.out.println("You have " + tasks.size() + " task(s) in the list:");
+            StringBuilder allTasks = new StringBuilder("You have ")
+                    .append(tasks.size())
+                    .append(" task(s) in the list:\n");
 
             int i = 1;
             for (Task task : tasks) {
-                System.out.println(i + ". " + task);
+                allTasks.append(i).append(". ").append(task).append("\n");
+
                 i++;
             }
+
+            return allTasks.toString();
         }
     }
 
@@ -62,20 +67,21 @@ public class TaskList {
      * Prints all the Tasks with String representation that contains the query term.
      * @param query The query term that the command string must include.
      */
-    public void findTasks(String query) {
+    public String findTasks(String query) {
         if (tasks.isEmpty()) {
-            System.out.println("Oops, the task list is empty boss, there's nothing to find!");
+            return "Oops, the task list is empty boss, there's nothing to find!";
         } else {
-            System.out.println("Here you go boss: ");
+            StringBuilder foundTasks = new StringBuilder("Here you go boss:\n");
 
             int i = 1;
             for (Task task : tasks) {
                 String string = task.toString();
                 if (string.contains(query)) {
-                    System.out.println(i + ". " + string);
+                    foundTasks.append(i).append(". ").append(string).append("\n");
                 }
                 i++;
             }
+            return foundTasks.toString();
         }
     }
 

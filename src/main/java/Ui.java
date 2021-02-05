@@ -1,3 +1,5 @@
+// DEPRECATED CLASS, REMNANTS OF WHEN DUKE STILL USES TEXT UI 
+
 import java.util.Scanner;
 
 public class Ui {

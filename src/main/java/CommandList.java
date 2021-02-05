@@ -1,8 +1,8 @@
 public class CommandList extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printCommand(this);
-        tasks.printTasks();
+    public String execute(TaskList tasks, Storage storage) {
+        return this.toDukeOutput() + "\n" + tasks.printTasks();
+
     }
 
     @Override

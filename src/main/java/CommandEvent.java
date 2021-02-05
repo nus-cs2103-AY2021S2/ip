@@ -28,12 +28,11 @@ public class CommandEvent extends Command {
      * @param storage Storage of Duke object, saves the TaskList into a text file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Event event = new Event(description, dateTime);
         tasks.addTask(event);
         storage.save(tasks);
-        ui.printCommand(this);
-        ui.printTask(event);
+        return this.toDukeOutput() + "\n" + event.toString();
     }
 
     /**
