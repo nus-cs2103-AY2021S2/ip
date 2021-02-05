@@ -77,10 +77,10 @@ public class Storage {
 
         if (task instanceof Deadline) {
             taskType = "D";
-            dateTimeString = ((Deadline) task).getByString();
+            dateTimeString = ((Deadline) task).getByDateTimeString();
         } else if (task instanceof Event) {
             taskType = "E";
-            dateTimeString = ((Event) task).getAtString();
+            dateTimeString = ((Event) task).getAtDateTimeString();
         } else {
             taskType = "T";
         }

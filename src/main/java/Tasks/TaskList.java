@@ -1,7 +1,6 @@
 package Tasks;
 
-import CustomExceptions.TaskNumberDoesNotExistException;
-import Tasks.Task;
+import CustomExceptions.TaskNumberNotExistException;
 
 import java.util.ArrayList;
 
@@ -23,9 +22,9 @@ public class TaskList {
     public Task getTaskByIndex(int index) {
         try {
             if (index > this.getSize()) {
-                throw new TaskNumberDoesNotExistException(index);
+                throw new TaskNumberNotExistException(index);
             }
-        } catch (TaskNumberDoesNotExistException e) {
+        } catch (TaskNumberNotExistException e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -36,9 +35,9 @@ public class TaskList {
     public Task popTaskByIndex(int index) {
         try {
             if (index > this.getSize()) {
-                throw new TaskNumberDoesNotExistException(index);
+                throw new TaskNumberNotExistException(index);
             }
-        } catch (TaskNumberDoesNotExistException e) {
+        } catch (TaskNumberNotExistException e) {
             System.out.println(e.getMessage());
             return null;
         }

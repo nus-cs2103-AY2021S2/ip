@@ -1,8 +1,8 @@
 package CustomExceptions;
 
-public class InvalidTaskNumberException extends Exception {
+public class TaskNumberNotIntException extends Exception {
 
-    public InvalidTaskNumberException() {
+    public TaskNumberNotIntException() {
         super("The input that follows a 'done' action should be an integer! :D");
     }
 }

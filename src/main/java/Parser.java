@@ -14,14 +14,14 @@ public class Parser {
             = new ArrayList<>(Arrays.asList("todo", "deadline", "event", "done", "delete", "list", "bye"));
 
     public static Command parse(String input) {
-        if (!inputIsValid(input)) {
+        if (!isInputValid(input)) {
             return new DoNothingCommand();
         }
 
         String action = getAction(input);
         String description = getDescription(input);
-        LocalDateTime by = convertToDateTime(getByString(input));
-        LocalDateTime at = convertToDateTime(getAtString(input));
+        LocalDateTime deadlineDateTime = convertToDateTime(getByDateTimeString(input));
+        LocalDateTime eventDateTime = convertToDateTime(getAtDateTimeString(input));
 
         switch (action) {
             case "bye":
@@ -35,9 +35,9 @@ public class Parser {
             case "todo":
                 return new AddToDoCommand(description);
             case "deadline":
-                return new AddDeadlineCommand(description, by);
+                return new AddDeadlineCommand(description, deadlineDateTime);
             case "event":
-                return new AddEventCommand(description, at);
+                return new AddEventCommand(description, eventDateTime);
             default:
                 return new DoNothingCommand();
         }
@@ -67,7 +67,7 @@ public class Parser {
         }
     }
 
-    private static String getByString(String input) {
+    private static String getByDateTimeString(String input) {
         String action = getAction(input);
         String remainingTokens = getRemainingTokens(input);
         if (action.equals("deadline") && remainingTokens.contains("/by")) {
@@ -76,7 +76,7 @@ public class Parser {
         return "";
     }
 
-    private static String getAtString(String input) {
+    private static String getAtDateTimeString(String input) {
         String action = getAction(input);
         String remainingTokens = getRemainingTokens(input);
         if (action.equals("event") && remainingTokens.contains("/at")) {
@@ -120,11 +120,11 @@ public class Parser {
         }
     }
 
-    private static boolean inputIsValid(String input) {
+    private static boolean isInputValid(String input) {
         String action = getAction(input);
         String description = getDescription(input);
-        String byString = getByString(input);
-        String atString = getAtString(input);
+        String byDateTimeString = getByDateTimeString(input);
+        String atDateTimeString = getAtDateTimeString(input);
 
         try {
             if (!validActions.contains(action)) {
@@ -136,31 +136,31 @@ public class Parser {
             }
 
             if ((action.equals("done") || action.equals("delete")) && (!isInteger(description))) {
-                throw new InvalidTaskNumberException();
+                throw new TaskNumberNotIntException();
             }
 
-            if (action.equals("deadline") && byString.length() == 0) {
+            if (action.equals("deadline") && byDateTimeString.length() == 0) {
                 throw new MissingDeadlineException();
             }
 
-            if (action.equals("event") && atString.length() == 0) {
+            if (action.equals("event") && atDateTimeString.length() == 0) {
                 throw new MissingEventTimeException();
             }
 
-            if (action.equals("deadline") && null == convertToDateTime(byString)) {
-                throw new DateTimeFormatNotRecognizedException(byString);
+            if (action.equals("deadline") && null == convertToDateTime(byDateTimeString)) {
+                throw new DateTimeFormatException(byDateTimeString);
             }
 
-            if (action.equals("event") && null == convertToDateTime(atString)) {
-                throw new DateTimeFormatNotRecognizedException(atString);
+            if (action.equals("event") && null == convertToDateTime(atDateTimeString)) {
+                throw new DateTimeFormatException(atDateTimeString);
             }
 
         } catch (MissingDescriptionException
                 | InvalidActionException
-                | InvalidTaskNumberException
+                | TaskNumberNotIntException
                 | MissingDeadlineException
                 | MissingEventTimeException
-                | DateTimeFormatNotRecognizedException e) {
+                | DateTimeFormatException e) {
             System.out.println(e.getMessage());
             return false;
         }

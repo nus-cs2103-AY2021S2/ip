@@ -4,18 +4,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private final LocalDateTime by;
+    private final LocalDateTime byDateTime;
 
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime byDateTime) {
         super(description);
-        this.by = by;
+        this.byDateTime = byDateTime;
     }
 
-    public String getByString() {
-        return this.by.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
+    public String getByDateTimeString() {
+        return this.byDateTime.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
     }
 
     public String getStatusString() {
-        return "[D]" + super.getStatusString() + " (by: " + this.getByString() + ")";
+        return "[D]" + super.getStatusString() + " (by: " + this.getByDateTimeString() + ")";
     }
 }
