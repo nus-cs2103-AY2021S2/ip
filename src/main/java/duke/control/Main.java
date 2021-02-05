@@ -2,13 +2,13 @@ package duke.control;
 
 import java.io.IOException;
 
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import duke.Duke;
 
 /**
  * A GUI for Duke using FXML.
