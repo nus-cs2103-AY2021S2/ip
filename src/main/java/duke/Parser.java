@@ -1,8 +1,12 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.InvalidCommandException;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
 
+import duke.exception.InvalidCommandException;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
