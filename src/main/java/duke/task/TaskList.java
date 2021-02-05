@@ -2,6 +2,8 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.DukeException;
 
@@ -63,14 +65,21 @@ public class TaskList {
      *
      * @param target the target keyword
      */
-    public List<Task> findTask(String target) throws DukeException {
-        if (taskList.size() == 0) {
-            throw new DukeException("There's currently no task in the list.");
-        }
-        List<Task> targetTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.getName().contains(target)) {
-                targetTasks.add(task);
+    public String findTask(String target) {
+        try {
+            if (taskList.size() == 0) {
+                throw new DukeException("There's currently no task in the list.");
+            }
+            List<Task> targetTasks =
+                    taskList.stream()
+                            .filter(task -> {
+                                return task.getName().contains(target);
+                            })
+                            .collect(Collectors.toList());
+            if (targetTasks.size() != 0) {
+                return printSpecifiedTasks(targetTasks);
+            } else {
+                throw new DukeException("There's currently no task name with \"" + target + "\".");
             }
         }
         if (targetTasks.size() != 0) {
