@@ -40,27 +40,6 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("src/data.txt").run();
-        /*
-        Ui ui = new Ui();
-        Storage storage = new Storage()
-        //ui.showLoadingError();
-        TaskList tasks = new TaskList();
-        ui.showWelcome();
-        boolean isExit = false;
-        while(!isExit) {
-                try {
-                    String readInputLine = ui.readCommand();
-                    ui.showLine();
-                    Command c = Parser.parse(readInputLine);
-                    c.execute(tasks, ui);
-                    isExit = c.isExit();
-                } catch (BaseException e) {
-                    ui.showError(e.getMessage());
-                } finally {
-                    ui.showLine();
-                }
-        }
-      */
 
     }
 }
