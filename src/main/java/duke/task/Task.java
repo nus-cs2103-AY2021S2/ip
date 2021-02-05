@@ -40,6 +40,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     /**
      * Returns true if description contains kw, false otherwise
      *
