@@ -2,9 +2,9 @@
 import java.io.IOException;
 import java.text.ParseException;
 
+
 /**
    * Duke is the main class of the app
-   * 
    * The main method runs the method run()
    * Which initiates the user for an input
    * This input would then be processed by parse to give a command
@@ -12,14 +12,13 @@ import java.text.ParseException;
    */
 
 public class Duke {
-    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -46,8 +45,17 @@ public class Duke {
             }
         }
     }
+    public String getResponse(String input) throws DukeException {
+        ui.showLine(); // show the divider line ("_______")
+        Command c = Parser.parse(input);
+        return c.execute(tasks, ui, storage);
+    }
+
+    public void welcomeResponse() {
+        ui.showWelcome();
+    }
 
     public static void main(String[] args) throws IOException, ParseException {
-        new Duke("data.txt").run();
+       new Duke().welcomeResponse();
     }
 }

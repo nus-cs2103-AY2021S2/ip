@@ -9,6 +9,7 @@ plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 checkstyle {
     toolVersion = '8.29'
@@ -17,6 +18,13 @@ checkstyle {
 repositories{
     mavenCentral()
 }
+
+javafx {
+    modules = ['javafx.controls','javafx.fxml']
+    version = '11.0.2'
+}
+
+sourceCompatibility = 11
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
@@ -41,13 +49,12 @@ test {
     useJUnitPlatform()
 }
 
-application {
-    mainClassName = '/Users/lkm/ip/src/main/java/Duke.java'
-}
-shadowJar{
-    archiveBaseName ='juke'
+shadowJar {
+    archiveBaseName = "duke"
     archiveClassifier = null
 }
-run {
-    enableAssertions = true
-}
+
+
+
+mainClassName = 'Main'
+
