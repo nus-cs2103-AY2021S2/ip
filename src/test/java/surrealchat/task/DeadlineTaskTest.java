@@ -2,13 +2,13 @@ package surrealchat.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTaskTest {
     private static final String TEST_DESCRIPTION = "Do CS2103T quiz";
-    private static final LocalDate TEST_DEADLINE = LocalDate.parse("2020-10-21");
+    private static final LocalDateTime TEST_DEADLINE = LocalDateTime.parse("2020-10-21T10:10:10");
     private static final DeadlineTask STARTING_TASK = DeadlineTask.createNewDeadlineTask(
             DeadlineTaskTest.TEST_DESCRIPTION, DeadlineTaskTest.TEST_DEADLINE);
 
@@ -18,7 +18,7 @@ public class DeadlineTaskTest {
     @Test
     public void testPrintStringConversion() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.toString(),
-                "[D][\u2718] Do CS2103T quiz (by: 2020-10-21)");
+                "[D][\u2718] Do CS2103T quiz (by: 2020-10-21, 10:10:10)");
     }
 
     /**
@@ -27,7 +27,7 @@ public class DeadlineTaskTest {
     @Test
     public void testFileStringConversion() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.saveTask(),
-                "D/split/0/split/Do CS2103T quiz /by 2020-10-21");
+                "D/split/0/split/Do CS2103T quiz /by 2020-10-21T10:10:10");
     }
 
     /**
@@ -63,7 +63,7 @@ public class DeadlineTaskTest {
     @Test
     public void testMarkDone() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.markAsDone().toString(),
-                "[D][\u2713] Do CS2103T quiz (by: 2020-10-21)");
+                "[D][\u2713] Do CS2103T quiz (by: 2020-10-21, 10:10:10)");
     }
 
     /**
@@ -72,6 +72,6 @@ public class DeadlineTaskTest {
     @Test
     public void testMarkUndone() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.markAsDone().markAsDone().toString(),
-                "[D][\u2718] Do CS2103T quiz (by: 2020-10-21)");
+                "[D][\u2718] Do CS2103T quiz (by: 2020-10-21, 10:10:10)");
     }
 }

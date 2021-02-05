@@ -22,10 +22,6 @@ public class DoneCommand extends Command {
         this.taskNumberString = taskNumberString;
     }
 
-    private boolean isInvalidTaskNumber(int taskNumber, TaskManagement taskManagement) {
-        return ((taskNumber <= 0) || (taskNumber > taskManagement.getNumberOfTasks()));
-    }
-
     private int getInputNumber(String description) {
         description = description.trim();
         if (description.isEmpty()) {
@@ -62,14 +58,12 @@ public class DoneCommand extends Command {
     public String execute(TaskManagement taskManagement) {
         try {
             int taskNumber = this.getInputNumber(this.taskNumberString);
-
-            if (this.isInvalidTaskNumber(taskNumber, taskManagement)) {
-                return "Invalid task number. Not stonks!\n";
-            }
+            assert taskNumber > 0 : "Invalid task number. Not stonks!\n";
+            assert taskNumber <= taskManagement.getNumberOfTasks() : "Invalid task number. Not stonks!\n";
 
             Task doneTask = taskManagement.markAsDone(taskNumber);
             return this.printOutput(doneTask);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return e.getMessage();
         }
     }

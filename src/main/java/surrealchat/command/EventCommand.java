@@ -2,7 +2,6 @@ package surrealchat.command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.NoSuchElementException;
 
 import surrealchat.task.EventTask;
 import surrealchat.task.Task;
@@ -32,9 +31,7 @@ public class EventCommand extends Command {
     }
 
     private EventTask addEvent(String taskDescription) {
-        if (taskDescription.isEmpty()) {
-            throw new NoSuchElementException("Empty event task description. Not stonks!\n");
-        }
+        assert !taskDescription.isEmpty() : "Empty event task description. Not stonks!\n";
 
         //Split the description into description and event
         String[] descriptionSplitArray = taskDescription.split("/at");
@@ -65,7 +62,7 @@ public class EventCommand extends Command {
             EventTask addedTask = this.addEvent(this.rawDescription);
             taskManagement.addTask(addedTask);
             return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return e.getMessage();
         }
     }

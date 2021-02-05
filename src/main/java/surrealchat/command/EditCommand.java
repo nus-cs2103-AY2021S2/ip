@@ -18,10 +18,6 @@ public class EditCommand extends Command {
         this.rawDescription = rawDescription;
     }
 
-    private boolean isInvalidTaskNumber(int taskNumber, TaskManagement taskManagement) {
-        return ((taskNumber <= 0) || (taskNumber > taskManagement.getNumberOfTasks()));
-    }
-
     private String printOutput(Task editedTask) {
         String outputString = "You have edited a task description to this:\n";
         outputString += String.format("%s\n", editedTask);
@@ -41,21 +37,20 @@ public class EditCommand extends Command {
         String[] descriptionSplitArray = this.rawDescription.split("/edit");
         try {
             int taskNumber = Integer.valueOf(descriptionSplitArray[0].trim());
-            String newDescription = descriptionSplitArray[1].trim();
+            assert taskNumber > 0 : "Invalid task number. Not stonks!\n";
+            assert taskNumber <= taskManagement.getNumberOfTasks() : "Invalid task number. Not stonks!\n";
 
-            //Edit task description
-            if (this.isInvalidTaskNumber(taskNumber, taskManagement)) {
-                return "Invalid task number. Not stonks!\n";
-            } else if (newDescription.isEmpty()) {
-                return "No description provided for editing. Not stonks!\n";
-            } else {
-                Task editedTask = taskManagement.editDescription(taskNumber, newDescription);
-                return this.printOutput(editedTask);
-            }
+            String newDescription = descriptionSplitArray[1].trim();
+            assert newDescription.isEmpty() == false : "No description provided for editing. Not stonks!\n";
+
+            Task editedTask = taskManagement.editDescription(taskNumber, newDescription);
+            return this.printOutput(editedTask);
         } catch (NumberFormatException e) { //Can happen if clean split does not occur.
             return "Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!\n";
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur.
             return "Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!\n";
+        } catch (AssertionError a) {
+            return a.getMessage();
         }
     }
 
