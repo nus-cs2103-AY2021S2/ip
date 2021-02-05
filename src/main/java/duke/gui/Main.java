@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -18,6 +20,8 @@ public class Main extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public static void main(String[] args) {
 
@@ -85,6 +89,13 @@ public class Main extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
     }
 
     private Label getDialogLabel(String text) {
@@ -95,5 +106,18 @@ public class Main extends Application {
         return textToAdd;
     }
 
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 
 }
