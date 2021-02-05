@@ -25,7 +25,7 @@ public abstract class Task {
      * @return A string containing this task's status icon.
      */
     protected String getStatusIcon() {
-        String icon = isDone ? "\u2713" : "\u2718";
+        String icon = (isDone) ? "\u2713" : "\u2718";
         return ("[" + icon + "]"); //return tick or X symbols within square brackets
     }
 
