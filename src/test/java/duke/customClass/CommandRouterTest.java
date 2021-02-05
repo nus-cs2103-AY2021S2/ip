@@ -1,7 +1,7 @@
 package duke.customClass;
 
+import duke.processintructions.CommandRouter;
 import org.junit.jupiter.api.Test;
-import duke.customClass.Command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

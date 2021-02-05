@@ -4,6 +4,10 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is a type of Task which has a description and date.
+ * It also maintains a state of isDone.
+ */
 public class Deadline extends Task {
     protected String by;
 
@@ -18,8 +22,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * returns string representation of Deadline when saving locally.
-     * @return string of Deadline when saving.
+     * Returns string representation of Deadline when saving locally.
+     *
+     * @return String of Deadline when saving.
      */
     public String saveString() {
         return isDone ? "D --- 1 --- " + description + " --- " + by : "D --- 0 --- " + description + " --- " + by;
@@ -27,8 +32,9 @@ public class Deadline extends Task {
 
     /**
      * Converts user input for date in yyyy-mm-dd format into MMM d yyyy format.
-     * @param input a string representation of a date in the format yyyy-mm-dd.
-     * @return string representation of date in MMM d yyyy format.
+     *
+     * @param input A string representation of a date in the format yyyy-mm-dd.
+     * @return String representation of date in MMM d yyyy format.
      */
     public static String convertToDate(String input) {
         try {
@@ -40,8 +46,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * returns string representation of Deadline.
-     * @return string of Deadline.
+     * Returns string representation of Deadline.
+     *
+     * @return String of Deadline.
      */
     @Override
     public String toString() {

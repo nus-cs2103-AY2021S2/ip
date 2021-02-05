@@ -1,4 +1,4 @@
-package duke.customClass;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -9,14 +9,10 @@ public class Ui {
 
     /**
      * A customized greeting message to be printed when the program starts.
+     *
+     * @return The welcome message to be printed at the start.
      */
     public String greetingMessage() {
-        String logo = "   ___     ___    _  _     ___     ___     _\n" +
-                "  |   \\   /   \\  | \\| |   |_ _|   | __|   | |\n" +
-                "  | |) |  | - |  | .` |    | |    | _|    | |__\n" +
-                "  |___/   |_|_|  |_|\\_|   |___|   |___|   |____|\n" +
-                "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|\n" +
-                "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\n";
         return "Welcome back Max"
                 + "\n"
                 + "What can I do for you?\n";
@@ -24,6 +20,8 @@ public class Ui {
 
     /**
      * The line separating the user's input and the program's output.
+     *
+     * @return A string that represents a break between the user and duke's response.
      */
     public String separatorLine() {
         return ("____________________________________________________________");
@@ -38,6 +36,7 @@ public class Ui {
 
     /**
      * Reads the user's input and returns the user's input as a string.
+     *
      * @return string of user's input.
      */
     public String readInput() {

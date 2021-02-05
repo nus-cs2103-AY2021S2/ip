@@ -1,8 +1,14 @@
 package duke.tasks;
 
+/**
+ * Task has a description and maintains a isDone state.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
+    private final String TICK = "\u2713";
+    private final String CROSS = "\u2718";
+
 
     public Task(String description) {
         this.description = description;
@@ -16,15 +22,17 @@ public class Task {
 
     /**
      * Returns a tick or cross string depending on whether the task is marked as isDone or not.
-     * @return a tick or cross string
+     *
+     * @return A tick or cross string.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? TICK : CROSS); //return tick or X symbols
     }
 
     /**
      * Toggles the value of isDone.
-     * @return updated boolean value after toggling.
+     *
+     * @return Updated boolean value after toggling.
      */
     public boolean toggleIsDone() {
         isDone = !isDone;
@@ -32,8 +40,9 @@ public class Task {
     }
 
     /**
-     * Updates isDone to true.
-     * @return true
+     * Updates isDone to true and returns true.
+     *
+     * @return The boolean value, true.
      */
     public boolean setIsDone() {
         isDone = true;
@@ -42,7 +51,8 @@ public class Task {
 
     /**
      * Generates the string to be saved for the next user session locally.
-     * @return string representing task state.
+     *
+     * @return String representing task state.
      */
 
     public String getDescription() {
@@ -55,7 +65,8 @@ public class Task {
 
     /**
      * Returns string representation of Task.
-     * @return string representation of task.
+     *
+     * @return String representation of task.
      */
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);

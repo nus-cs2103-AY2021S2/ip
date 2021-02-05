@@ -1,4 +1,4 @@
-package duke.customClass;
+package duke.storage;
 
 import duke.tasks.Task;
 
@@ -19,6 +19,7 @@ public class Storage {
      * Checks if there is a file which contains the saved data from a previous session.
      * If no file is found, then the program will create the file and continue as per normal.
      * If a file is found, then the tasks in the file will be returned as a string of Tasks at the start of the program.
+     *
      * @return A string of tasks in the save format, each separated by a newline.
      */
     public String loadData() {
@@ -56,7 +57,8 @@ public class Storage {
     }
 
     /**
-     * saves all the current tasks in the list as a string into a specified file that is stored locally.
+     * Saves all the current tasks in the list as a string into a specified file that is stored locally.
+     *
      * @param list List containing all the tasks.
      */
     public void save(List<Task> list) {

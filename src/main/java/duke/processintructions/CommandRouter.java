@@ -1,4 +1,7 @@
-package duke.customClass;
+package duke.processintructions;
+
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Matches the command called by a user to the command return logic to be called in LogicHandler.
@@ -13,9 +16,10 @@ public class CommandRouter {
     /**
      * Maps the string of the command name given in the user's input to the enumerated command handled by LogicHandler.
      * If no such command exists or there is an error, it will be mapped to the error command.
+     *
      * @param command Command specified.
      * @param tasks TaskList object.
-     * @param input input of the user as a String.
+     * @param input Input of the user as a String.
      */
     public String route(Command command, TaskList tasks, String input) {
         LogicHandler logic = new LogicHandler();
@@ -56,8 +60,9 @@ public class CommandRouter {
     }
 
     /**
-     * returns true if the command is BYE and false otherwise.
-     * @return true if command is BYE and false otherwise.
+     * Returns true if the command is BYE and false otherwise.
+     *
+     * @return True if command is BYE and false otherwise.
      */
     public boolean isExit() {
         return isExit;

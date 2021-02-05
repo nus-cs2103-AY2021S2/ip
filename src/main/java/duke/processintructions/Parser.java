@@ -1,11 +1,12 @@
-package duke.customClass;
+package duke.processintructions;
 
 
 public class Parser {
 
     /**
      * Converts the string of the name of the command into an enumerated command.
-     * @param input string name of command
+     *
+     * @param input String name of command.
      * @return Command object correlated to the name.
      */
     public static Command parse(String input) {

@@ -1,4 +1,4 @@
-package duke.customClass;
+package duke.processintructions;
 
 public enum Command {
     TODO,

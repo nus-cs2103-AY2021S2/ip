@@ -1,4 +1,4 @@
-package duke.customClass;
+package duke.tasklist;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -21,7 +21,8 @@ public class TaskList {
     /**
      * Converts the user's input from a valid string form to a Task object.
      * The object is then added to a list of objects.
-     * @param data string of user's input.
+     *
+     * @param data String of user's input.
      */
     public void dataInput(String data) {
         String[] ArrayOfTasksFromLoad = data.split("\n");
@@ -49,7 +50,8 @@ public class TaskList {
 
     /**
      * Returns a list of Tasks.
-     * @return list of Tasks.
+     *
+     * @return List of Tasks.
      */
     public List<Task> getList() {
         return list;

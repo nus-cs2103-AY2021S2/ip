@@ -1,4 +1,4 @@
-package duke.customClass;
+package duke.processintructions;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -14,6 +14,7 @@ public class LogicHandler {
     /**
      * Triggered by the user typing 'list'.
      * Prints out all tasks in the list currently.
+     *
      * @param list List of tasks.
      */
     public String list(List<Task> list) {
@@ -31,8 +32,8 @@ public class LogicHandler {
 
     /**
      * Updates the isDone status of a task of a specified index to true.
-     * @param input string input of user
-     * @param list list of tasks.
+     * @param input String input of user.
+     * @param list List of tasks.
      */
     public String done(String input, List<Task> list) {
         try {
@@ -51,8 +52,9 @@ public class LogicHandler {
 
     /**
      * Add a todo task to the list of tasks.
-     * @param input string input of user.
-     * @param list list of tasks.
+     *
+     * @param input String input of user.
+     * @param list List of tasks.
      */
     public String todo(String input, List<Task> list) {
         try {
@@ -67,8 +69,9 @@ public class LogicHandler {
 
     /**
      * Add a deadline task to the list of tasks.
-     * @param input string input of user.
-     * @param list list of tasks.
+     *
+     * @param input String input of user.
+     * @param list List of tasks.
      */
     public String deadline(String input, List<Task> list) {
         try {
@@ -86,8 +89,9 @@ public class LogicHandler {
 
     /**
      * Add an Event task to the list of tasks.
-     * @param input string input of user.
-     * @param list list of tasks.
+     *
+     * @param input String input of user.
+     * @param list List of tasks.
      */
     public String event(String input, List<Task> list) {
         try {
@@ -105,8 +109,9 @@ public class LogicHandler {
 
     /**
      * Deletes a task in the list of tasks given a specified task index integer.
-     * @param input string input of user.
-     * @param list list of tasks.
+     *
+     * @param input String input of user.
+     * @param list List of tasks.
      */
     public String delete(String input, List<Task> list) {
         try {
@@ -123,6 +128,13 @@ public class LogicHandler {
         }
     }
 
+    /**
+     * Finds a task in the list of tasks given a specified String input.
+     *
+     * @param input String input of user.
+     * @param list List of tasks.
+     * @return A list of all tasks that contains the specified String input.
+     */
     public String find(String input, List<Task> list) {
         try {
             Find find = new Find();

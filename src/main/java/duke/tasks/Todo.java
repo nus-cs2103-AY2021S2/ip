@@ -1,5 +1,9 @@
 package duke.tasks;
 
+/**
+ * Todo is a type of Task which has a description.
+ * It also maintains a isDone state.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
@@ -11,7 +15,8 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of a Todo object when saving locally.
-     * @return string of Todo for saving locally.
+     *
+     * @return String of Todo for saving locally.
      */
     public String saveString() {
         return isDone ? "T --- 1 --- " + description : "T --- 0 --- " + description;
@@ -19,7 +24,8 @@ public class Todo extends Task {
 
     /**
      * Returns string representation of Todo object.
-     * @return string of Todo.
+     *
+     * @return String of Todo.
      */
     @Override
     public String toString() {

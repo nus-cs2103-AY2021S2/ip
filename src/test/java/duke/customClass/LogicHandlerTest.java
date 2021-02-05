@@ -1,5 +1,6 @@
 package duke.customClass;
 
+import duke.processintructions.LogicHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,6 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.ArrayList;
 import duke.tasks.Task;
-import duke.tasks.Todo;
 
 import static org.junit.jupiter.api.Assertions.*;
 
