@@ -40,13 +40,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        // dialog.setTextFill(Color.BLACK);
-        dialog.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(5.0), Insets.EMPTY)));
+        dialog.setBackground(new Background(
+                new BackgroundFill(Color.rgb(240, 255, 220), new CornerRadii(7.0), Insets.EMPTY)));
 
         Circle c = new Circle(32, 32, 32);
         displayPicture.setClip(c);
-        dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setText(text);
     }
 
     /**
@@ -60,7 +60,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a DialogBox with a text message and an image display that represents the user.
+     * Returns a DialogBox with a green text message and an image display that represents the user.
      *
      * @param text Message in the dialog box.
      * @param img Image in the dialog box.
@@ -71,7 +71,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a flipped DialogBox with a text message and an image display that represents the bot.
+     * Returns a flipped DialogBox with a gray text message and an image display that represents the bot.
      *
      * @param text Message in the dialog box.
      * @param img Image in the dialog box.
@@ -79,6 +79,8 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setBackground(new Background(
+                new BackgroundFill(Color.rgb(250, 250, 250), new CornerRadii(7.0), Insets.EMPTY)));
         db.flip();
         return db;
     }
