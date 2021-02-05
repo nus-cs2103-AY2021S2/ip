@@ -1,63 +1,43 @@
 package duke.ui;
 
-import duke.storage.Storage;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Ui Class that handles passing output
  */
 public class Ui {
-    private final String CHATBOT_NAME = "Rawrz";
-    private Scanner scanner;
+    private final static String CHATBOT_NAME = "Rawrz";
+    private final static String BORDER = "___";
 
     /**
      * Constructor for Ui. Creates a Scanner with System.in
      */
     public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Reads and returns the input given
-     * @return String input passed into System
-     */
-    public String readCommand() {
-        return scanner.nextLine();
-    }
-
-    public void showLine() {
-        System.out.println("___");
     }
 
     /**
      * Shows the introduction message to the user.
      */
-    public void showIntro() {
-        showLine();
-        System.out.println("   Hello there! I'm " + CHATBOT_NAME + ", always here for you!\n   How can I help you today?");
-        showLine();
+    public String getIntroResponse() {
+        return "   Hello there! I'm " + CHATBOT_NAME + ", always here for you!\n   How can I help you today?";
     }
 
     /**
      * Shows the goodbye message to the user.
      */
-    public void showGoodbye() {
-        showLine();
-        System.out.println("   Bye! Hope to see you again! " + CHATBOT_NAME + "! :)");
-        showLine();
+    public String getGoodbyeResponse() {
+        return "\n   Bye! Hope to see you again! " + CHATBOT_NAME + "! :)";
     }
 
     /**
      * Shows the error message to the user.
      * @param error This is the String error message.
+     * @return This is Duke's response
      */
-    public void showError(String error) {
-        showLine();
-        System.out.println("   " + error);
-        showLine();
+    public String getErrorResponse(String error) {
+        return error;
     }
 
 
@@ -65,52 +45,46 @@ public class Ui {
      * Shows the remove message to the user.
      * @param task This is the task that is removed
      * @param noTasks This is the number of tasks left after removal.
+     * @return This is Duke's response
      */
-    public void showRemove(Task task, int noTasks) {
-        showLine();
-        System.out.println("   Okay! I've removed this task:");
-        System.out.println("      " + task);
-        System.out.println("   Now you have " + noTasks + " tasks in the list");
-        showLine();
+    public String getRemoveResponse(Task task, int noTasks) {
+        return "Okay! I've removed this task:\n" + task +"\nNow you have " + noTasks + " tasks in the list";
     }
 
     /**
      * Shows the list of tasks stored in the chatbot to the user
      * @param arrL This is the Storage that contains the list of Tasks stored.
+     * @return This is Duke's response
      */
-    public void showList(ArrayList<Task> arrL) {
-        showLine();
+    public String getListResponse(ArrayList<Task> arrL) {
+        String output;
         if (arrL.isEmpty()) {
-            System.out.println("   No Tasks found!");
+            output = "No Tasks found!";
         } else {
-            System.out.println("   Here are the results!");
+            output = "Here are the results!\n";
             for (int i = 0; i < arrL.size(); i++) {
-                System.out.println("   " + (i + 1) + ". " + arrL.get(i));
+                output = output.concat("   " + (i + 1) + ". " + arrL.get(i) + "\n");
             }
-            showLine();
         }
+        return output;
     }
 
     /**
      * Shows the done message to the user.
      * @param task This is the task that has been completed.
+     * @return This is Duke's response
      */
-    public void showDone(Task task) {
-        showLine();
-        System.out.println("   Nice! I've marked this task as done:");
-        System.out.println("      " + task);
-        showLine();
+    public String getDoneResponse(Task task) {
+        return "   Nice! I've marked this task as done:\n   " + task;
     }
 
     /**
      * Shows the add task message to the user.
      * @param task This is the task that is added.
      * @param noTasks This is the number of tasks that are now in the system.
+     * @return This is Duke's response
      */
-    public void showAdd(Task task, int noTasks) {
-        showLine();
-        System.out.println("   Got it! I've added this task:\n      " + task);
-        System.out.println("   Now you have " + noTasks + " tasks in the list");
-        showLine();
+    public String getAddResponse(Task task, int noTasks) {
+        return "Got it! I've added this task:\n   " + task + "\nNow you have " + noTasks + " tasks in the list";
     }
 }

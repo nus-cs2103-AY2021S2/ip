@@ -8,12 +8,12 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.ui.Ui;
 
+import java.util.ArrayList;
+
 /**
  * ParseCommands handles the parsing and execution of the inputs given to the system.
  * ParseCommands needs to validate the input before execution of the command.
  */
-import java.util.ArrayList;
-
 public class ParseCommands {
     private final CommandList command;
     private final String data;
@@ -65,49 +65,54 @@ public class ParseCommands {
      * @param ui ui to show output of the command execution
      * @param storage storage for accessing the tasks stored.
      */
-    public void executeCommand(Ui ui, Storage storage) {
+    public String executeCommand(Ui ui, Storage storage) {
+        String output = "";
         String date;
         switch (this.command) {
         case TODO:
             ToDo todo = new ToDo(this.data.strip());
             storage.add(todo);
-            ui.showAdd(todo, storage.getArrSize());
+            output = ui.getAddResponse(todo, storage.getArrSize());
             break;
         case DEADLINE:
             int byDate = this.data.lastIndexOf("/by ");
             date = this.data.substring(byDate + 4);
             Deadline deadline = new Deadline(this.data.substring(0, byDate).strip(), date);
             storage.add(deadline);
-            ui.showAdd(deadline, storage.getArrSize());
+            output = ui.getAddResponse(deadline, storage.getArrSize());
             break;
         case EVENT:
             int atDate = this.data.lastIndexOf("/at ");
             date = this.data.substring(atDate + 4);
             Event event = new Event(this.data.substring(0, atDate).strip(), date);
             storage.add(event);
-            ui.showAdd(event, storage.getArrSize());
+            output = ui.getAddResponse(event, storage.getArrSize());
             break;
         case DONE:
             int task_No = Integer.parseInt(this.data);
-            ui.showDone(storage.get(task_No - 1).doTask());
+            output = ui.getDoneResponse(storage.get(task_No - 1).doTask());
             break;
         case LIST:
-            ui.showList(storage.getArr());
+            output = ui.getListResponse(storage.getArr());
             break;
         case REMOVE:
             int remove_No = Integer.parseInt(this.data);
             Task task = storage.remove(remove_No - 1);
-            ui.showRemove(task, storage.getArrSize());
+            output = ui.getRemoveResponse(task, storage.getArrSize());
             break;
         case FIND:
             ArrayList<Task> results = storage.find(this.data);
-            ui.showList(results);
+            output = ui.getListResponse(results);
             break;
         case BYE:
             this.isExit = true;
-            ui.showGoodbye();
+            storage.beginClose();
+            storage.closeFile();
+            output = ui.getGoodbyeResponse();
             break;
         }
+
+        return output;
     }
 
     private static CommandList changeToCommand (String command) throws DukeException {

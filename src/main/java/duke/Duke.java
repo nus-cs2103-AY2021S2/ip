@@ -7,10 +7,9 @@ import duke.ui.Ui;
 /**
  * This is the main Duke class that runs the chatbot.
  */
-public class Duke {
+public class Duke{
     private final Ui ui;
     private final Storage fio;
-
     /**
      * This is the constructor for Duke, storing a new Ui and new Storage.
      */
@@ -19,29 +18,18 @@ public class Duke {
         this.fio = new Storage();
     }
 
-    /**
-     * This runs the Duke program to take in and execute inputs.
-     */
-    public void run() {
-        this.ui.showIntro();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ParseCommands parseCommands = ParseCommands.parseLine(fullCommand, this.fio.getArrSize());
-                parseCommands.executeCommand(ui, this.fio);
-                isExit = parseCommands.canExit();
-            } catch (DukeException e) {
-                ui.showError(e.toString());
-            }
-        }
-        fio.beginClose();
-        fio.closeFile();
+    public String startIntro() {
+        return this.ui.getIntroResponse();
     }
 
-    public static void main(String[] args) {
-
-        new Duke().run();
+    public String getResponse(String input) {
+        String output;
+        try {
+            ParseCommands parseCommands = ParseCommands.parseLine(input, this.fio.getArrSize());
+            output = parseCommands.executeCommand(ui, this.fio);
+        } catch (DukeException e) {
+            output = ui.getErrorResponse(e.toString());
+        }
+        return output;
     }
 }
