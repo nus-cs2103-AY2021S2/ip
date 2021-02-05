@@ -1,7 +1,7 @@
 package duke.customClass;
 
 /**
- * Matches the command called by a user to the command logic to be called in LogicHandler.
+ * Matches the command called by a user to the command return logic to be called in LogicHandler.
  */
 public class CommandRouter {
     private boolean isExit;
@@ -17,41 +17,41 @@ public class CommandRouter {
      * @param tasks TaskList object.
      * @param input input of the user as a String.
      */
-    public void route(Command command, TaskList tasks, String input) {
+    public String route(Command command, TaskList tasks, String input) {
         LogicHandler logic = new LogicHandler();
         Ui ui = new Ui();
 
         switch (command) {
         case LIST:
-            logic.list(tasks.getList());
-            break;
+            return logic.list(tasks.getList());
+            // break intentionally omitted
         case DONE:
-            logic.done(input, tasks.getList());
-            break;
+            return logic.done(input, tasks.getList());
+            // break intentionally omitted
         case TODO:
-            logic.todo(input, tasks.getList());
-            break;
+            return logic.todo(input, tasks.getList());
+            // break intentionally omitted
         case DEADLINE:
-            logic.deadline(input, tasks.getList());
-            break;
+            return logic.deadline(input, tasks.getList());
+            // break intentionally omitted
         case EVENT:
-            logic.event(input, tasks.getList());
-            break;
+            return logic.event(input, tasks.getList());
+            // break intentionally omitted
         case DELETE:
-            logic.delete(input, tasks.getList());
-            break;
+            return logic.delete(input, tasks.getList());
+            // break intentionally omitted
         case FIND:
-            logic.find(input, tasks.getList());
-            break;
+            return logic.find(input, tasks.getList());
+            // break intentionally omitted
         case ERROR:
-            System.out.println("Oops, that is not a command I support.");
-            break;
+            return ("Oops, that is not a command I support.");
+            // break intentionally omitted
         case BYE:
             isExit = true;
-            ui.exitMessage();
-            break;
+            return ui.exitMessage();
+            // break intentionally omitted
         default:
-            System.out.println("Internal error in code.");
+            return ("Internal error in code.");
         }
     }
 

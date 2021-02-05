@@ -16,7 +16,7 @@ public class LogicHandler {
      * Prints out all tasks in the list currently.
      * @param list List of tasks.
      */
-    public void list(List<Task> list) {
+    public String list(List<Task> list) {
         // Check if the command is list and display the list of duke.tasks.
         String temp = "";
 
@@ -26,7 +26,7 @@ public class LogicHandler {
                 temp += "\n";
             }
         }
-        System.out.println(temp);
+        return temp;
     }
 
     /**
@@ -34,20 +34,18 @@ public class LogicHandler {
      * @param input string input of user
      * @param list list of tasks.
      */
-    public void done(String input, List<Task> list) {
+    public String done(String input, List<Task> list) {
         try {
             int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
 
             list.get(itemNumber).setIsDone();
-            System.out.println(
-                    "Nice! I've marked this task as done:\n" + list.get(itemNumber)
-            );
+            return "Nice! I've marked this task as done:\n" + list.get(itemNumber);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Oops, your done command should have a task number behind.");
+            return ("Oops, your done command should have a task number behind.");
         } catch (NumberFormatException e) {
-            System.out.println("Oops, your done command should be followed by an integer.");
+            return ("Oops, your done command should be followed by an integer.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Oops, your done command included an invalid index in the task list.");
+            return ("Oops, your done command included an invalid index in the task list.");
         }
     }
 
@@ -56,14 +54,14 @@ public class LogicHandler {
      * @param input string input of user.
      * @param list list of tasks.
      */
-    public void todo(String input, List<Task> list) {
+    public String todo(String input, List<Task> list) {
         try {
             Todo todo = new Todo(input.split(" ", 2)[1]);
             list.add(todo);
-            System.out.println("added: " + todo);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
+            return ("added: " + todo + "\n"
+                    + "Now you have " + list.size() + " tasks in the list.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Oops, your todo requires at least a description.");
+            return "Oops, your todo requires at least a description.";
         }
     }
 
@@ -72,17 +70,17 @@ public class LogicHandler {
      * @param input string input of user.
      * @param list list of tasks.
      */
-    public void deadline(String input, List<Task> list) {
+    public String deadline(String input, List<Task> list) {
         try {
             String taskAndDate = input.split(" ", 2)[1];
             String task = taskAndDate.split(" /by ")[0];
             String date = taskAndDate.split(" /by ")[1];
             Deadline deadline = new Deadline(task, date);
             list.add(deadline);
-            System.out.println("added: " + deadline);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
+            return "added: " + deadline + "\n"
+                    + "Now you have " + list.size() + " tasks in the list.";
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Oops, your deadline requires both a description and date.");
+            return ("Oops, your deadline requires both a description and date.");
         }
     }
 
@@ -91,17 +89,17 @@ public class LogicHandler {
      * @param input string input of user.
      * @param list list of tasks.
      */
-    public void event(String input, List<Task> list) {
+    public String event(String input, List<Task> list) {
         try {
             String taskAndDate = input.split(" ", 2)[1];
             String task = taskAndDate.split(" /at ")[0];
             String date = taskAndDate.split(" /at ")[1];
             Event event = new Event(task, date);
             list.add(event);
-            System.out.println("added: " + event);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
+            return "added: " + event + "\n"
+                    + "Now you have " + list.size() + " tasks in the list.";
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Oops, your Event requires both a description and date");
+            return "Oops, your Event requires both a description and date";
         }
     }
 
@@ -110,22 +108,22 @@ public class LogicHandler {
      * @param input string input of user.
      * @param list list of tasks.
      */
-    public void delete(String input, List<Task> list) {
+    public String delete(String input, List<Task> list) {
         try {
             int index = Integer.valueOf(input.split(" ", 2)[1]);
-            System.out.println("Noted. I've removed the task:\n" + list.get(index - 1) +
-                    "\nNow you have " + (list.size() - 1) + " tasks in the list.");
             list.remove(index - 1);
+            return ("Noted. I've removed the task:\n" + list.get(index - 1)
+                    + "\nNow you have " + (list.size() - 1) + " tasks in the list.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Delete requires a number");
+            return ("Delete requires a number");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(e);
+            return ("Error: " + e);
         } catch (NumberFormatException e) {
-            System.out.println(e);
+            return ("Error: " + e);
         }
     }
 
-    public void find(String input, List<Task> list) {
+    public String find(String input, List<Task> list) {
         try {
             Find find = new Find();
 
@@ -140,13 +138,9 @@ public class LogicHandler {
                     temp += "\n";
                 }
             }
-            System.out.println(temp);
+            return temp;
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Oops, your find requires a string description to find a match.");
+            return ("Oops, your find requires a string description to find a match.");
         }
-    }
-
-    public void add(List<Task> list, Task t) {
-        list.add(t);
     }
 }
