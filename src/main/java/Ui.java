@@ -9,8 +9,7 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String LINE = "____________________________________________"
-            + "________________\n";
+    private static final String LINE = "_____________________\n";
 
     /**
      * Returns the line variable.

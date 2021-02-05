@@ -26,7 +26,7 @@ import java.util.Scanner;
 /**
  * Class that runs the entire Duke application
  */
-public class Duke extends Application {
+public class Duke {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -37,21 +37,22 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    @Override
-    public void start(Stage stage) {
-
+    //@Override
+    /*public void start(Stage stage) {
+        /*
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
         helloWorld.setFont(new Font("Arial", 50));
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
-
+        */
         /*
         Stage s = new Stage();
         Label l = new Label("sdf");
         s.setScene(new Scene((l)));
-        s.show();*/
-
+        s.show();
+        */
+        /*
         scrollPane = new ScrollPane();
         scrollPane.setPrefSize(400,585);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -62,9 +63,10 @@ public class Duke extends Application {
 
         dialogContainer = new VBox();
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        //scroll down to the end every time dialogcontainer's height changes
         dialogContainer.heightProperty().addListener(
                 observable -> scrollPane.setVvalue(1.0));
+        //scroll down to the end every time dialogcontainer's height changes
+        //listener basically reacts whenever theres a change
 
         scrollPane.setContent(dialogContainer);
 
@@ -116,6 +118,7 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     //not needed anymore
+    /*
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
@@ -127,7 +130,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-
+    /*
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -138,15 +141,8 @@ public class Duke extends Application {
                 DialogBox.getDialog(dukeText, duke, false)
         );
         userInput.clear();
-    }
+    }*/
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
 
     private static final String FOLDER_PATH = "./src/main/java/data/";
     private static final String FILE_NAME = "All Tasks.txt";
@@ -154,7 +150,7 @@ public class Duke extends Application {
     /**
      * Runs the Duke application
      */
-    public static void run() {
+    /*public static void run() {
         Scanner scanner = new Scanner(System.in);
         scanner.useDelimiter("\n");
         //only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
@@ -251,9 +247,105 @@ public class Duke extends Application {
             }
         }
         System.out.println(Ui.exit());
+    }*/
+
+    public String getResponse(String input) {
+        //Scanner scanner = new Scanner(System.in);
+        //scanner.useDelimiter("\n");
+        //only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
+        //String relPath = "./src/main/java/data/All Tasks.txt";//for runtest.sh put .. coz the path for that is diff
+        // compared to this
+
+        try {
+            //File f = new File("./");
+            //System.out.println(f.getAbsolutePath());//to get the path to see which path java is looking
+            ArrayList<Task> prevTasks = FileAccessor.readFromTasks(FOLDER_PATH + FILE_NAME, new ArrayList<Task>());
+            TaskList.setList(prevTasks);
+        } catch (FileNotFoundException | IllegalArgumentException e) {
+            //System.out.println("EXCEPTION");
+            try {
+                Files.createDirectory(Paths.get(FOLDER_PATH));
+                TaskList.setList(new ArrayList<Task>());
+            } catch (IOException e1) {
+                System.out.println(Ui.lineGetter() + " Cannot create new directory\n" + Ui.lineGetter());
+            }
+            //shld just be ioexception, shldnt come to this catch block
+            //File f = new File(relPath); //no need to create file here will get auto created when writing
+        }
+
+        String response = "";
+        //response += Ui.introduce(); dont want to respond each time!
+
+        input = Parser.trimWhiteSpaces(input);
+        if (input.equals("bye")) {
+            response += Ui.exit();
+        } else if (input.length() == 0) {
+            //if just enter spaces
+            response += Ui.informOnlySpaces();
+        } else if (input.equals("list")) {
+            try {
+                response += TaskList.printList();
+            } catch (IllegalArgumentException e) {
+                response += e.getMessage();
+            }
+        } else {
+            try {
+                String[] split = Parser.splitFirstAndRest(input);
+                if (split[0].equals("done")) {
+                    try {
+                        int num = Parser.makeToInt(split[1]);
+                        Task done = TaskList.doneTask(num - 1);
+                        response += Ui.doneTask(done);
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                        response += e.getMessage();
+                    }
+                } else if (split[0].equals("delete")) {
+                    try {
+                        int num = Parser.makeToInt(split[1]);
+                        Task del = TaskList.deleteTask(num - 1);
+                        response += Ui.deleteTask(del, TaskList.getListSize());
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                        response += e.getMessage();
+                    }
+                } else if (split[0].equals("find")) {
+                    try {
+                        response += TaskList.findTask(split[1]);
+                    } catch (IllegalArgumentException e) {
+                        response += e.getMessage();
+                    }
+                } else if (split[0].equals("todo") || split[0].equals("deadline")
+                        || split[0].equals("event")) {
+                    Task task;
+                    if (split[0].equals("todo")) {
+                        task = new Todo(split[1]);
+                    } else if (split[0].equals("deadline")) {
+                        task = new Deadline(split[1]);
+                    } else {
+                        task = new Event(split[1]);
+                    }
+                    TaskList.addTask(task);
+                    response += Ui.addTask(task, TaskList.getListSize());
+                } else {
+                    throw new IllegalArgumentException();
+                }
+
+                try {
+                    FileAccessor.writeToTasks(FOLDER_PATH + FILE_NAME, TaskList.getList());
+                } catch (IOException e) {
+                    System.out.println(Ui.informUnableSave());
+                }
+            } catch (IllegalArgumentException e) {
+                response += Ui.informIllegalArgExc();
+            } catch (DateTimeParseException e) {
+                response += Ui.informDateTimeParseExc();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                response += e.getMessage();
+            }
+        }
+        return response;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Duke.run();
-    }
+    }*/
 }

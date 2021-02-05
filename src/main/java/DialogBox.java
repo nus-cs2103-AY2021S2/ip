@@ -1,3 +1,4 @@
+/*
 import javafx.beans.Observable;
 
 import javafx.collections.FXCollections;
@@ -24,8 +25,7 @@ public class DialogBox extends HBox {
 
     public DialogBox(Label l, Image iv) {
         text = l;
-        text.setFont(new Font("Arial", 15));
-        //font type not changing
+        text.setStyle("-fx-font-size: 15px; -fx-font-family: 'DejaVu Serif'");
         ImagePattern displayPicture = new ImagePattern(iv);
         text.setWrapText(true);
         //displayPicture.setFitHeight(100.0);
@@ -42,7 +42,9 @@ public class DialogBox extends HBox {
     public static DialogBox getDialog(Label l, Image iv, boolean isUser) {
         DialogBox db = new DialogBox(l, iv);
         db.setPadding(new Insets(5, 5, 5,5));
+        //padding btw dialog box and outer area
         db.setSpacing(5);
+        //spacing btw the items in dialogbox
         if (isUser) {
             db.setStyle("-fx-background-color: #F0F0F0;");
             return db;
@@ -60,9 +62,9 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 }
+*/
 
 
-/*
 import java.io.IOException;
 import java.util.Collections;
 
@@ -81,7 +83,7 @@ import javafx.scene.layout.HBox;
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
- *//*
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -100,11 +102,13 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        //dialog.setMaxHeight(Double.MAX_VALUE);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
-     *//*
+     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -121,4 +125,4 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-}*/
+}
