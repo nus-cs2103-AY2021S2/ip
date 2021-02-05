@@ -61,11 +61,9 @@ public class Blarb {
      * @return A boolean value that shows the availability for the next command intake.
      */
     public boolean isActiveAfterExecuting(String input) {
-        Output output = processor.execute(input, tasklist, storage);
-        if (!processor.willTerminate(input)) {
-            if (output.warn != null) {
-                ui.warn(output.warn);
-            }
+        Output output = Processor.execute(input, tasklist, storage);
+        if (!Processor.leave(input)) {
+            output.warn.ifPresent(ui::warn);
             ui.blurt(output.normal);
             return true;
         }
@@ -80,13 +78,12 @@ public class Blarb {
      * @return Response string.
      */
     public String getResponse(String input) {
-        Output output = processor.execute(input, tasklist, storage);
-        if (output.warn == null) {
-            return output.normal;
-        }
-        return String.format("!!! %s\n%s",
-                output.warn,
-                output.normal);
+        Output output = Processor.execute(input, tasklist, storage);
+        String normal = output.normal;
+        String warn = output.warn
+                .map(x -> String.format("!!! %s\n", x))
+                .orElse("");
+        return String.format("%s%s", warn, normal);
     }
 
     /**
