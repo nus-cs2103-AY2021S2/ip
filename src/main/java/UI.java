@@ -43,11 +43,11 @@ public class UI {
     public void commandMessage(String[] commandAndParams, DukeList list) {
         switch(commandAndParams[0]) {
         case "done":
-            doneMessage();
+            doneMessage(commandAndParams[1]);
             showNoOfTaskLeft(list);
             break;
         case "delete":
-            deleteMessage();
+            deleteMessage(commandAndParams[1]);
             showNoOfTaskLeft(list);
             break;
         case "reset":
@@ -59,7 +59,7 @@ public class UI {
         case "todo":
         case "event":
         case "deadline":
-            addTaskMessage();
+            addTaskMessage(commandAndParams[1]);
             showNoOfTaskLeft(list);
             break;
         case "list":
@@ -103,16 +103,18 @@ public class UI {
 
     /**
      * Output message for "done" command
+     * @param taskName String of the task name
      */
-    public void doneMessage() {
-        showToUser("Good job! I have marked this task as done");
+    public void doneMessage(String taskName) {
+        showToUser("Good job! The following task has been marked as done:\n" + taskName);
     }
 
     /**
      * Output message for "delete" command
+     * @param taskName String of the task name
      */
-    public void deleteMessage() {
-        showToUser("Got it! The task has been deleted");
+    public void deleteMessage(String taskName) {
+        showToUser("Got it! The following task has been deleted:\n" + taskName);
     }
     /**
      * Output message for "reset" command
@@ -144,8 +146,8 @@ public class UI {
     /**
      * Output message after "todo" or "deadline" or "event" command
      */
-    public void addTaskMessage() {
-        showToUser("Got it! The task has been added");
+    public void addTaskMessage(String taskStr) {
+        showToUser("Got it! The following task has been added:\n" + taskStr );
     }
 
     /**
@@ -153,7 +155,7 @@ public class UI {
      * @param list DukeList object
      */
     public void showNoOfTaskLeft(DukeList list) {
-        showToUser("You have " + list.getSize() + " Task left in the list");
+        showToUser("\nYou have " + list.getSize() + " Task(s) left in the list");
     }
 
     /**

@@ -12,26 +12,33 @@ public class Parser {
         String[] commandStringArr = fullCommand.split(" ", 2);
         switch (commandStringArr[0]) {
         case "done":
-            list.markAsDone(Integer.parseInt(commandStringArr[1]) - 1);
+            int taskNumberDone = Integer.parseInt(commandStringArr[1]) - 1;
+            list.markAsDone(taskNumberDone);
+            commandStringArr[1] = list.get(taskNumberDone).toString();
             return commandStringArr;
         case "delete":
-            list.delete(Integer.parseInt(commandStringArr[1]) - 1);
+            int taskNumberToDelete = Integer.parseInt(commandStringArr[1]) - 1;
+            commandStringArr[1] = list.get(taskNumberToDelete).toString();
+            list.delete(taskNumberToDelete);
             return commandStringArr;
         case "todo":
             ToDos todo = new ToDos(commandStringArr[1]);
             list.add(todo);
+            commandStringArr[1] = todo.toString();
             return commandStringArr;
         case "deadline":
             String[] deadlineParamArr = commandStringArr[1].split(" /by ");
             LocalDate deadlineDate = LocalDate.parse(deadlineParamArr[1]);
             Deadlines deadline = new Deadlines(deadlineParamArr[0], deadlineDate);
             list.add(deadline);
+            commandStringArr[1] = deadline.toString();
             return commandStringArr;
         case "event":
             String[] eventParamArr = commandStringArr[1].split(" /at ");
             LocalDate eventDate = LocalDate.parse(eventParamArr[1]);
             Events event = new Events(eventParamArr[0], eventDate);
             list.add(event);
+            commandStringArr[1] = event.toString();
             return commandStringArr;
         case "reset":
             list.deleteAll();
