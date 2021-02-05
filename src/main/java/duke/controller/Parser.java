@@ -20,6 +20,7 @@ public class Parser {
      * @param ui Application.
      */
     public Parser(Ui ui) {
+        assert ui != null;
         this.ui = ui;
     }
 
@@ -29,6 +30,7 @@ public class Parser {
      * @param taskList List of Tasks.
      */
     public String handleList(TaskList taskList) {
+        assert taskList != null;
         return "Here are the tasks in your list:\n" + taskList.toString() + "\n";
     }
 
@@ -41,7 +43,11 @@ public class Parser {
      * @param taskList List of Tasks.
      * @throws DukeException If the user input is incorrect.
      */
-    public String handleDone(String input, TaskList taskList) throws DukeException {
+    public String handleDone(String input,
+                             TaskList taskList)
+            throws DukeException {
+        assert (input != null && input.length() > 0);
+        assert taskList != null;
         try {
             int index = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
             taskList.markAsDone(index);
@@ -63,7 +69,11 @@ public class Parser {
      * @param taskList List of Tasks.
      * @throws DukeException If the user input is incorrect.
      */
-    public String handleTodo(String input, TaskList taskList) throws DukeException {
+    public String handleTodo(String input,
+                             TaskList taskList)
+            throws DukeException {
+        assert (input != null && input.length() > 0);
+        assert taskList != null;
         if (!input.contains(" ")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -84,7 +94,13 @@ public class Parser {
      * @param taskList List of Tasks.
      * @throws DukeException If the user input is incorrect.
      */
-    public String handleTasksWithTime(String command, String input, TaskList taskList) throws DukeException {
+    public String handleTasksWithTime(String command,
+                                      String input,
+                                      TaskList taskList)
+            throws DukeException {
+        assert (command != null && command.length() > 0);
+        assert (input != null && input.length() > 0);
+        assert taskList != null;
         try {
             String taskName = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
             Task temp;
@@ -115,7 +131,11 @@ public class Parser {
      * @param taskList List of Tasks.
      * @throws DukeException If the user input is incorrect.
      */
-    public String handleDelete(String input, TaskList taskList) throws DukeException {
+    public String handleDelete(String input,
+                               TaskList taskList)
+            throws DukeException {
+        assert (input != null && input.length() > 0);
+        assert taskList != null;
         try {
             int index = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
             return this.ui.printOnListChange(
@@ -132,7 +152,11 @@ public class Parser {
         }
     }
 
-    public String handleFind(String input, TaskList taskList) throws DukeException {
+    public String handleFind(String input,
+                             TaskList taskList)
+            throws DukeException {
+        assert (input != null && input.length() > 0);
+        assert taskList != null;
         if (input.split(" ").length < 2) {
             throw new DukeException("Please provide a keyword.\n");
         }

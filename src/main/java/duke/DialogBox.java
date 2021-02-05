@@ -23,6 +23,7 @@ public class DialogBox extends HBox {
     private final boolean isDuke;
 
     private DialogBox(Label label, boolean isDuke) {
+        assert label != null;
         this.label = label;
         this.isDuke = isDuke;
 

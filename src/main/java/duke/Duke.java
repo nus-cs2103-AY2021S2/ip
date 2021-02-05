@@ -60,6 +60,7 @@ public class Duke {
     @FXML
     private void onSubmit() {
         String userInput = input.getText();
+        assert (userInput != null && userInput.length() > 0);
         content.getChildren().add(DialogBox.userDialogMaker(userInput));
         try {
             if (userInput.equals("list")) {

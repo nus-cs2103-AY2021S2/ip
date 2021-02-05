@@ -26,6 +26,7 @@ public class Storage {
      * @param fileName Name of the file.
      */
     public Storage(String fileName){
+        assert fileName != null;
         this.fileName = fileName;
     }
 
@@ -36,6 +37,7 @@ public class Storage {
      * @throws DukeException If an error occurs while saving data.
      */
     public void handleSave(TaskList taskList) throws DukeException {
+        assert taskList != null;
         try {
             FileWriter csvWriter = new FileWriter(fileName);
             for (int i = 1; i <= taskList.getNumberOfTasks(); i++) {
