@@ -28,7 +28,7 @@ public class Storage {
      * @throws IOException
      */
     public ArrayList<Task> load() throws IOException {
-        BufferedReader reader = null;
+        BufferedReader reader;
         ArrayList<Task> list = new ArrayList<>();
         try {
             reader = new BufferedReader(new FileReader(this.filePath));

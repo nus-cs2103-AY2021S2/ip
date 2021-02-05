@@ -19,6 +19,7 @@ public class Duke {
     }
 
     public String getResponse(String input) throws FileNotFoundException {
+        assert input != null : "Input is null.";
         Parser parser = new Parser(storage, ui, tasks);
         if (Parser.hasSaved(input)) {
             // TERMINATE APP
