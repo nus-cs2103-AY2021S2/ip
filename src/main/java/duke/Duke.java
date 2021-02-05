@@ -25,13 +25,6 @@ public class Duke {
         tasks.dataInput(storage.loadData());
     }
 
-    public Duke(String path) {
-        ui = new Ui();
-        storage = new Storage(path);
-        tasks = new TaskList();
-        tasks.dataInput(storage.loadData());
-    }
-
     /**
      * Returns the greeting message string
      */
@@ -53,10 +46,6 @@ public class Duke {
         storage.save(tasks.getList());
 
         return response;
-    }
-
-    public static void main(String[] args) {
-        new Duke(absoluteStorageFilePath).returnGreetingMessage();
     }
 }
 

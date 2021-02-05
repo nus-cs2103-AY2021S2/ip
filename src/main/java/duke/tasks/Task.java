@@ -30,16 +30,6 @@ public class Task {
     }
 
     /**
-     * Toggles the value of isDone.
-     *
-     * @return Updated boolean value after toggling.
-     */
-    public boolean toggleIsDone() {
-        isDone = !isDone;
-        return isDone;
-    }
-
-    /**
      * Updates isDone to true and returns true.
      *
      * @return The boolean value, true.
