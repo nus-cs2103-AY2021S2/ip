@@ -117,7 +117,7 @@ public class Parser {
                     temp,
                     taskList.getNumberOfTasks());
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("The timing of the task is not included." +
+            throw new DukeException("The timing of the task is not included. " +
                     "Please check your input. \n");
         } catch (java.time.format.DateTimeParseException e) {
             throw new DukeException("Please input a date with correct format (yyyy-mm-dd).\n");
@@ -178,8 +178,8 @@ public class Parser {
             return "Here are the tasks in the next " + numberOfDays + " days:\n"
                     + taskList.remind(numberOfDays);
         } catch (NumberFormatException e) {
-            throw new DukeException("Please input a positive integer," +
-                    "so that I know how many days after today I should look into and remind your tasks," +
+            throw new DukeException("Please input a positive integer, " +
+                    "so that I know how many days after today I should look into and remind your tasks, " +
                     "you forgetful :P.");
         }
     }
