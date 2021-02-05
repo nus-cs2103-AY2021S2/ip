@@ -1,24 +1,50 @@
+/**
+ * Represents a Deadline Task.
+ * @author Arihant Jain
+ */
 public class Task {
-    public String description;
-    public boolean isDone;
-    public static int count = 0;
+    /**
+     * The Task Description.
+     */
+    protected String description;
+    /**
+     * The boolean indicating if Task is completed.
+     */
+    protected boolean isDone;
 
+    /**
+     * Instantiates a new Task.
+     *
+     * @param description the task description
+     */
+    @SuppressWarnings({"checkstyle:HiddenField", "checkstyle:FinalParameters"})
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        count++;
     }
 
+    /**
+     * Gets completion status icon.
+     *
+     * @return the status icon
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); //return tick or X symbols
     }
 
-    public void markAsDone(){
+    /**
+     * Mark Task as completed.
+     */
+    public void markAsDone() {
         this.isDone = true;
     }
 
+    /***
+     * Get list variation Task String.
+     * @return String Task String
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
     }
 }
