@@ -40,22 +40,22 @@ public class Duke {
             response += ui.exit();
             break;
         case "list":
-            response += ui.listAllTasks(tasks.list);
+            response += ui.listAllTasks(tasks.getList());
             break;
         case "done":
             int numDone = Integer.parseInt(inputArr[1]);
-            Task task = tasks.list.get(numDone - 1);
+            Task task = tasks.getList().get(numDone - 1);
             tasks.checkAsDone(task);
             response += ui.checkAsDoneMessage(task);
             break;
         case "delete":
             int numDelete = Integer.parseInt(inputArr[1]);
             Task deletedTask = tasks.deleteTask(numDelete);
-            response += ui.deleteTaskMessage(tasks.list, deletedTask);
+            response += ui.deleteTaskMessage(tasks.getList(), deletedTask);
             break;
         case "find":
             String keyword = inputArr[1];
-            response += ui.findTask(keyword, tasks.list);
+            response += ui.findTask(keyword, tasks.getList());
             break;
         case "todo":
             try {
@@ -63,7 +63,7 @@ public class Duke {
                 String details = inputArr[1];
                 Task todo = new Todo(details);
                 tasks.addTask(todo);
-                response += ui.addTaskMessage(tasks.list, todo);
+                response += ui.addTaskMessage(tasks.getList(), todo);
             } catch (DukeException e) {
                 response += "OOPS!!! The description of a todo cannot be empty.\n";
             }
@@ -75,7 +75,7 @@ public class Duke {
                 String date = input.substring(input.indexOf("/") + 4);
                 Task deadline = new Deadline(details, date);
                 tasks.addTask(deadline);
-                response += ui.addTaskMessage(tasks.list, deadline);
+                response += ui.addTaskMessage(tasks.getList(), deadline);
             } catch (DukeException e) {
                 response += "OOPS!!! The description of a deadline cannot be empty.\n";
             }
@@ -87,7 +87,7 @@ public class Duke {
                 String date = input.substring(input.indexOf("/") + 4);
                 Task event = new Event(details, date);
                 tasks.addTask(event);
-                response += ui.addTaskMessage(tasks.list, event);
+                response += ui.addTaskMessage(tasks.getList(), event);
             } catch (DukeException e) {
                 response += "OOPS!!! The description of an event cannot be empty.\n";
             }
@@ -100,7 +100,7 @@ public class Duke {
             }
         }
         try {
-            storage.saveTasks(tasks.list);
+            storage.saveTasks(tasks.getList());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,13 +1,12 @@
 package duke;
 
-import duke.Task;
 import java.util.ArrayList;
 
 /**
  * TaskList class to store the list of tasks
  */
 public class TaskList {
-    public ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     public TaskList() {
         list = new ArrayList<>();
@@ -35,7 +34,7 @@ public class TaskList {
      * @param num number of task to be deleted
      */
     public Task deleteTask(int num) {
-        return list.remove(num-1);
+        return list.remove(num - 1);
     }
 
     /**
@@ -44,6 +43,10 @@ public class TaskList {
      */
     public void checkAsDone(Task task) {
         task.done();
+    }
+
+    public ArrayList<Task> getList() {
+        return this.list;
     }
 
 }

@@ -11,7 +11,7 @@ public class Todo extends Task {
      *
      * @param description description of the todo task
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description);
         this.type = 'T';
     }
