@@ -96,7 +96,12 @@ public class Storage {
         return loadTasks;
     }
 
-   
+    /**
+     * Save.
+     *
+     * @param taskList the tasks that will be saved to the text file
+     * @throws DukeException.FileLoadError the file load error
+     */
     public void save(TaskList taskList) throws DukeException.FileLoadError {
         Path path = Paths.get(this.filePath);
         String strOut = "";
