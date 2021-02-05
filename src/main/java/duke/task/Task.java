@@ -15,6 +15,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * get X if the task is done else get space.
+     *
+     * @return "X" if the task is done else return " ".
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); //return tick or X symbols
     }

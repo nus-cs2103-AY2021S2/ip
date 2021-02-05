@@ -32,7 +32,7 @@ public class Storage {
      * @return a list of task corresponding to the file.
      * @throws IOException if such filePath does not exist.
      */
-    public List<Task> load() throws IOException {
+    public List<Task> loadTasks() throws IOException {
         List<Task> tasks = new ArrayList<>();
         List<String> strings = Files.readAllLines(filePath);
         for (String line : strings) {
