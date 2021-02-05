@@ -43,12 +43,17 @@ public class Duke {
         content.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
 
         content.getChildren().add(DialogBox.dukeDialogMaker(ui.initialize() + "\n"));
+
         try {
             listOfTasks = storage.handleLoad();
         } catch (DukeException e) {
             System.out.println(e.toString());
             System.exit(1);
         }
+
+        content.getChildren().add(DialogBox.dukeDialogMaker(
+                "Also, in case you forgot, here are the tasks in the next week:\n" +
+                        listOfTasks.remind(7).toString()));
 
         parser = new Parser(ui);
 
@@ -75,28 +80,31 @@ public class Duke {
 
                 String textToAppend = "";
                 switch (command) {
-                case "done":
-                    textToAppend = parser.handleDone(userInput, listOfTasks);
-                    break;
-                case "todo":
-                    textToAppend = parser.handleTodo(userInput, listOfTasks);
-                    break;
-                case "delete":
-                    textToAppend = parser.handleDelete(userInput, listOfTasks);
-                    break;
-                case "deadline":
-                case "event":
-                    textToAppend = parser.handleTasksWithTime(command, userInput, listOfTasks);
-                    break;
-                case "find":
-                    textToAppend = parser.handleFind(userInput, listOfTasks);
-                    break;
-                case "bye":
-                    System.exit(0);
-                    break;
-                default:
-                    textToAppend = "I have no idea what that means, what do you want?\n";
-                    break;
+                    case "done":
+                        textToAppend = parser.handleDone(userInput, listOfTasks);
+                        break;
+                    case "todo":
+                        textToAppend = parser.handleTodo(userInput, listOfTasks);
+                        break;
+                    case "delete":
+                        textToAppend = parser.handleDelete(userInput, listOfTasks);
+                        break;
+                    case "deadline":
+                    case "event":
+                        textToAppend = parser.handleTasksWithTime(command, userInput, listOfTasks);
+                        break;
+                    case "find":
+                        textToAppend = parser.handleFind(userInput, listOfTasks);
+                        break;
+                    case "remind":
+                        textToAppend = parser.handleRemind(userInput, listOfTasks);
+                        break;
+                    case "bye":
+                        System.exit(0);
+                        break;
+                    default:
+                        textToAppend = "I have no idea what that means, what do you want?\n";
+                        break;
                 }
                 content.getChildren().add(DialogBox.dukeDialogMaker(textToAppend));
             }

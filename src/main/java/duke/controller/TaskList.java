@@ -1,7 +1,10 @@
 package duke.controller;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -98,5 +101,22 @@ public class TaskList {
                 .filter((task) -> task.getTaskName().
                         toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new)));
+    }
+
+    /**
+     * Remind users the undone Tasks in the next few days as requested by the user.
+     * @param days Number of days
+     * @return The undone tasks within the next <code>days</code> days after today.
+     */
+    public TaskList remind(int days) {
+        return new TaskList(this.listOfTasks.stream()
+                .filter(task -> task instanceof Event || task instanceof Deadline)
+                .filter(task -> // filter overdue tasks
+                        LocalDate.now().compareTo(task.getTaskTime()) < 0)
+                .filter(task -> // filter upcoming tasks
+                        LocalDate.now().plusDays(days).compareTo(task.getTaskTime()) > 0)
+                .filter(task -> !task.isDone())
+                .collect(Collectors.toCollection(ArrayList::new)));
+
     }
 }

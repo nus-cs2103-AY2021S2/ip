@@ -163,4 +163,24 @@ public class Parser {
         String keyword = input.substring(input.indexOf(" ") + 1);
         return "Here are the tasks that I can find:\n" + taskList.find(keyword).toString();
     }
+
+    public String handleRemind(String input,
+                               TaskList taskList)
+            throws DukeException {
+        assert (input != null && input.length() > 0);
+        assert taskList != null;
+        try {
+            if (input.split(" ").length < 2) {
+                return "Here are the tasks in the next week:\n"
+                        + taskList.remind(7);
+            }
+            int numberOfDays = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
+            return "Here are the tasks in the next " + numberOfDays + " days:\n"
+                    + taskList.remind(numberOfDays);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please input a positive integer," +
+                    "so that I know how many days after today I should look into and remind your tasks," +
+                    "you forgetful :P.");
+        }
+    }
 }
