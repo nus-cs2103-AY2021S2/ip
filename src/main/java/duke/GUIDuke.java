@@ -23,16 +23,22 @@ public class GUIDuke {
         }
     }
 
+    /**
+     * This method takes in the input from the GUI
+     *
+     * @param input
+     * @return the result of the command
+     */
     public String processGUI(String input) {
         String command = input;
         Parser p = new Parser(command);
         p.parse();
-        String TaskType = p.getTaskType();
+        String TaskType = p.getTaskType().toLowerCase();
         String result = "";
-        if (command.equals("bye") || command.equals("exit")) {
+        if (TaskType.equals("bye") || TaskType.equals("exit")) {
             storage.saveTask(taskList);
             result = "Goodbye for now.\nHope to see you soon!";
-        } else if (command.equals("list")) {
+        } else if (TaskType.equals("list")) {
             result = taskList.printTasks();
         } else if (p.getCommandLength() > 1) {
             if (TaskType.equals("done")) {
@@ -58,6 +64,7 @@ public class GUIDuke {
         }
         return result;
     }
+
 
     public String getResponse(String input) {
         return processGUI(input);
