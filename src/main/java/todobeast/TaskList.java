@@ -1,19 +1,15 @@
 package todobeast;
 
-import todobeast.tasks.Deadline;
-import todobeast.tasks.Event;
 import todobeast.tasks.Task;
-import todobeast.tasks.Todo;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import java.time.format.DateTimeFormatter;
-
+/**
+ * Wrapper class that stores all tasks for the application into a List.
+ */
 public class TaskList {
-    public List<Task> taskList;
+    private List<Task> taskList;
 
     public TaskList(List<Task> taskList) {
         this.taskList = new ArrayList<>(taskList);
@@ -47,6 +43,10 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     *Formats all tasks in the present TaskList into a format suitable for storing into a data text file.
+     * @return a String containing all the tasks that have been formatted by this method
+     */
     public String formatTaskListForStorage() {
         StringBuilder outputString = new StringBuilder();
         for (Task task : taskList) {
@@ -54,14 +54,5 @@ public class TaskList {
             outputString.append("\n");
         }
         return outputString.toString();
-    }
-
-    public void printTaskList() {
-        int count = 1;
-        System.out.print(Ui.line);
-        for (Task task : taskList) {
-            System.out.println("\t" + count++ + ". " + task);
-        }
-        System.out.println(Ui.line);
     }
 }

@@ -1,5 +1,8 @@
 package todobeast;
 
+/**
+ * Main client class for the application.
+ */
 public class ToDoBeast {
 
     Application app;

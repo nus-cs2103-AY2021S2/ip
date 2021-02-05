@@ -4,10 +4,15 @@ import todobeast.tasks.Task;
 
 import java.util.Scanner;
 
+/**
+ * Handles User Interface interactions for the application. This includes reading of commands, as well as displaying
+ * responses to the user. Note that the business logic of what to respond with is not included in here; this class
+ * merely contains all the possible responses that the app can produce.
+ */
 public class Ui {
-    Scanner sc;
-    static String line = "\t________________________________________________________________\n";
-    static String logo = "                                                     \n" +
+    private final Scanner sc;
+    private final static String line = "\t________________________________________________________________\n";
+    private final static String logo = "                                                     \n" +
             "\t88                                                   \n" +
             "\t88                                            ,d     \n" +
             "\t88                                            88     \n" +

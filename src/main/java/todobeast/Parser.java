@@ -10,8 +10,27 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+/**
+ * A utility class that parses commands given by the user, and generates the appropriate command for the application
+ * to execute.
+ *
+ * If the command given is invalid or in an invalid format, the Parser will throw an exception. Additional helper
+ * methods are provided in the class to check for such invalid inputs.
+ */
 public class Parser {
 
+    /**
+     * Provides the main logic to parse user input commands. Commands are given in the following format, and each
+     * parameter is separated by a comma (,):
+     * <code>command, taskDescription, at/by date in YYYY-MM-DD format (if applicable) and time in HH:MM (24-hr) format
+     * (if
+     * applicable) </code>
+     *
+     * @param fullCommand the full command input given by the user
+     * @return a Command corresponding to the user input given
+     * @throws ToDoBeastException if the command given by the user is invalid, or in an invalid format.
+     * @see Command
+     */
     public static Command parse(String fullCommand) throws ToDoBeastException {
 
         Command command = null;
@@ -72,7 +91,14 @@ public class Parser {
         return command;
     }
 
-    public static void checkTaskIndex(String[] commandArgs) throws InvalidInputException {
+    /**
+     * Checks validity of delete and done commands. They should be given in the following format:
+     * <code>delete/done, int task index</code>
+     * @param commandArgs the command parameters/arguments parsed from user input
+     * @throws InvalidInputException if the number of parameters provided is incorrect, or the index provided is not
+     * an integer
+     */
+    private static void checkTaskIndex(String[] commandArgs) throws InvalidInputException {
         if (commandArgs.length != 2) {
             throw new InvalidInputException("Invalid number of arguments provided.");
         } else {
@@ -84,7 +110,16 @@ public class Parser {
         }
     }
 
-    public static String[] splitDateAndTime(String dateAndTime, TaskType taskType) throws InvalidInputException {
+    /**
+     * Splits a given string with the appropriate date and time format into a String array. Tasks of "deadline" type
+     * must have a "by" prefix attached, and tasks of "event" type must have a "at" prefix attached.
+     *
+     * @param dateAndTime string containing the date and time in appropriate format
+     * @param taskType enumeration that determines the type of task that the date and time is being checked for
+     * @return a String array containing the date at index 0 and the time at index 1
+     * @throws InvalidInputException if "by" or "at" keyword is not specified
+     */
+    private static String[] splitDateAndTime(String dateAndTime, TaskType taskType) throws InvalidInputException {
         String[] tokens = dateAndTime.split(" ");
         switch (tokens[0]) {
         case "by":
@@ -104,7 +139,14 @@ public class Parser {
         return new String[]{tokens[1], tokens[2]};
     }
 
-    public static void checkValidDateAndTimeFormat(String date, String time) throws InvalidInputException {
+    /**
+     * Checks if given strings are in the appropriate format specified. YYYY-MM-DD for date, and HH:MM for time.
+     *
+     * @param date the date to be checked
+     * @param time the time to be checked
+     * @throws InvalidInputException if wrong format is provided
+     */
+    private static void checkValidDateAndTimeFormat(String date, String time) throws InvalidInputException {
         try {
             LocalDate ld = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
@@ -118,7 +160,13 @@ public class Parser {
         }
     }
 
-    public static void checkTaskArgsLength(String[] commandArgs, TaskType taskType) throws InvalidInputException {
+    /**
+     * Checks if the user-input command was split properly according to the specified delimiter
+     * @param commandArgs array containing user inputs that have been split according to the delimiter
+     * @param taskType enumeration that determines the type of task that is being checked for
+     * @throws InvalidInputException if the length of the user input array differs from what is expected
+     */
+    private static void checkTaskArgsLength(String[] commandArgs, TaskType taskType) throws InvalidInputException {
         boolean hasInvalidArgsLength = false;
         switch (taskType) {
         case TODO:
