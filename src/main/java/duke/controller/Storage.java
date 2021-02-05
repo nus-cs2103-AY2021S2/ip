@@ -25,7 +25,7 @@ public class Storage {
      *
      * @param fileName Name of the file.
      */
-    public Storage(String fileName){
+    public Storage(String fileName) {
         assert fileName != null;
         this.fileName = fileName;
     }
@@ -63,25 +63,27 @@ public class Storage {
             TaskList listOfTasks = new TaskList();
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line = reader.readLine();
-            while(line != null) {
+            while (line != null) {
                 String[] details = line.split(",");
-                switch (details[0]){
-                    case "T":
-                        listOfTasks.addTask(new ToDo(details[2],
-                                Boolean.parseBoolean(details[1])));
-                        break;
-                    case "D":
-                        LocalDate dateD = LocalDate.parse(details[3]);
-                        listOfTasks.addTask(new Deadline(details[2],
-                                Boolean.parseBoolean(details[1]),
-                                dateD));
-                        break;
-                    case "E":
-                        LocalDate dateE = LocalDate.parse(details[3]);
-                        listOfTasks.addTask(new Event(details[2],
-                                Boolean.parseBoolean(details[1]),
-                                dateE));
-                        break;
+                switch (details[0]) {
+                case "T":
+                    listOfTasks.addTask(new ToDo(details[2],
+                            Boolean.parseBoolean(details[1])));
+                    break;
+                case "D":
+                    LocalDate dateD = LocalDate.parse(details[3]);
+                    listOfTasks.addTask(new Deadline(details[2],
+                            Boolean.parseBoolean(details[1]),
+                            dateD));
+                    break;
+                case "E":
+                    LocalDate dateE = LocalDate.parse(details[3]);
+                    listOfTasks.addTask(new Event(details[2],
+                            Boolean.parseBoolean(details[1]),
+                            dateE));
+                    break;
+                default:
+                    break;
                 }
                 line = reader.readLine();
             }
@@ -92,7 +94,7 @@ public class Storage {
             makeNewFile();
             return new TaskList();
         } catch (IOException e) {
-            throw new DukeException( "An error occurred while loading." +
+            throw new DukeException("An error occurred while loading." +
                     "Please try again later.");
         }
     }
@@ -103,7 +105,7 @@ public class Storage {
      * @throws DukeException If an error occurs while making a new file.
      */
     private void makeNewFile() throws DukeException {
-        try{
+        try {
             new File(fileName).createNewFile();
         } catch (IOException e) {
             throw new DukeException("An error occurred while loading." +

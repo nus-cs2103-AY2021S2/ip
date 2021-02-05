@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Class for tasks with a deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     LocalDate deadLine;
 
     /**
@@ -56,7 +56,7 @@ public class Deadline extends Task{
      *
      * @return Deadline of the Task.
      */
-    public LocalDate getTaskTime(){
+    public LocalDate getTaskTime() {
         return deadLine;
     }
 }

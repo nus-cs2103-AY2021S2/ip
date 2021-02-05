@@ -6,28 +6,28 @@ package duke.task;
 public class ToDo extends Task {
 
     /**
-     * Constructs an undone ToDo java.duke.controller.task with a name.
+     * Constructs an undone ToDo Task with a name.
      *
-     * @param taskName Name of the java.duke.controller.task.
+     * @param taskName Name of the Task.
      */
     public ToDo(String taskName) {
         super(taskName);
     }
 
     /**
-     * Constructs a ToDo java.duke.controller.task with a name with status.
+     * Constructs a ToDo Task with a name with status.
      *
-     * @param taskName Name of the java.duke.controller.task.
-     * @param done Status of the java.duke.controller.task, done or not done.
+     * @param taskName Name of the Task.
+     * @param done Status of the Task, done or not done.
      */
     public ToDo(String taskName, boolean done) {
         super(taskName, done);
     }
 
     /**
-     * Returns a string representation of the ToDo java.duke.controller.task.
+     * Returns a string representation of the ToDo Task.
      *
-     * @return String representation of the ToDo java.duke.controller.task.
+     * @return String representation of the ToDo Task.
      */
     public String toString() {
         return "[T]" + super.toString();

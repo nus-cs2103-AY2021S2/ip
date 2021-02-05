@@ -14,7 +14,7 @@ public abstract class Task {
      *
      * @param taskName Name of the Task.
      */
-    Task (String taskName){
+    Task(String taskName) {
         this(taskName, false);
     }
 
@@ -65,8 +65,9 @@ public abstract class Task {
         String checkBox = this.done ? "[X]" : "[ ]";
         return checkBox + " " + this.taskName;
     }
+
     /**
-     * Parse the java.duke.controller.task to comply with CSV format.
+     * Parse the Task to comply with CSV format.
      *
      * @return A string that complies with CSV format.
      */
@@ -77,7 +78,7 @@ public abstract class Task {
      *
      * @return Time of the Task.
      */
-    public LocalDate getTaskTime(){
+    public LocalDate getTaskTime() {
         return null;
     }
 }

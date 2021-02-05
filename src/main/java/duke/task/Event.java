@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Class for tasks that are events.
  */
-public class Event extends Task{
+public class Event extends Task {
     LocalDate eventTime;
 
     /**
@@ -56,7 +56,7 @@ public class Event extends Task{
      *
      * @return Time of the Event.
      */
-    public LocalDate getTaskTime(){
+    public LocalDate getTaskTime() {
         return eventTime;
     }
 }

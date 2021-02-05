@@ -50,7 +50,7 @@ public class DialogBox extends HBox {
         container.getChildren().addAll(label, timestampLabel);
 
         Paint background;
-        if(isDuke) {
+        if (isDuke) {
             background = hasError ? Color.rgb(255, 100, 100) : Color.LIGHTBLUE;
         } else {
             background = Color.GAINSBORO;

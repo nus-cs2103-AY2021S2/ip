@@ -3,7 +3,7 @@ package duke;
 /**
  * Exception class to handle errors, especially user input errors.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * Constructs an exception with an error message.
      *

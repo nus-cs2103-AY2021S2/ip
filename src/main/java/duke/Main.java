@@ -18,7 +18,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-        try{
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/view/interface.fxml"));
             AnchorPane pane = fxmlLoader.load();
@@ -28,7 +28,7 @@ public class Main extends Application {
             primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

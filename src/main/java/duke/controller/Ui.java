@@ -25,6 +25,6 @@ public class Ui {
      */
     public String printOnListChange(String preMessage, Task t, int size) {
         return preMessage + "\n" + t + "\n" +
-        "Now you have " + size + " tasks in the list.\n";
+                "Now you have " + size + " tasks in the list.\n";
     }
 }

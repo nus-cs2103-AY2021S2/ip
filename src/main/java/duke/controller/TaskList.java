@@ -74,7 +74,7 @@ public class TaskList {
      *
      * @return The number of tasks in the current list.
      */
-    public int getNumberOfTasks(){
+    public int getNumberOfTasks() {
         return this.listOfTasks.size();
     }
 
@@ -98,8 +98,8 @@ public class TaskList {
      */
     public TaskList find(String keyword) {
         return new TaskList(this.listOfTasks.stream()
-                .filter((task) -> task.getTaskName().
-                        toLowerCase().contains(keyword.toLowerCase()))
+                .filter((task) -> task.getTaskName()
+                        .toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new)));
     }
 
