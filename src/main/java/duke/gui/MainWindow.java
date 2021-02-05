@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private String welcome = "Hello this is Duke\nHow may I help you?";
+    private String welcome = "Hello this is DUKE\nHow may I help you?";
 
     @FXML
     public void initialize() {
