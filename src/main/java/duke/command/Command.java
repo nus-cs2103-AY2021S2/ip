@@ -18,6 +18,7 @@ public class Command {
     protected static UI ui;
 
     /** Create command object
+     *
      * @param input
      */
     public Command (String input) {
