@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.DukeException;
 import duke.Ui;
@@ -120,12 +121,10 @@ public class TaskList {
             if (taskList.size() == 0) {
                 throw new DukeException("There's currently no task in the list.");
             }
-            List<Task> targetTasks = new ArrayList<>();
-            for (Task t : taskList) {
-                if (t.getName().contains(target)) {
-                    targetTasks.add(t);
-                }
-            }
+            List<Task> targetTasks =
+                    taskList.stream()
+                            .filter(task -> task.getName().contains(target))
+                            .collect(Collectors.toList());
             if (targetTasks.size() != 0) {
                 return printSpecifiedTasks(targetTasks);
             } else {
