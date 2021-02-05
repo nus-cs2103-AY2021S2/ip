@@ -7,9 +7,11 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        boolean appIsRunning = true;
         Scanner sc = new Scanner(System.in);
-        TaskList tasks = new TaskList();
+        Loader loader = new Loader();
+        TaskCollection tasks = loader.loadTasks();
+
+        boolean appIsRunning = true;
 
         while (appIsRunning) {
             InputHandler handler = new InputHandler(sc.nextLine());
@@ -27,6 +29,7 @@ public class Duke {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     appIsRunning = false;
+                    loader.saveTasks(tasks);
                     break;
 
                 case "list":
