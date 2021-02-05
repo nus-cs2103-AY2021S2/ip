@@ -34,7 +34,7 @@ public class Parser {
         case ByeCommand.COMMAND:
             return new ByeCommand();
         case FindCommand.COMMAND:
-            return new FindCommand(getKeyword());
+            return new FindCommand(getKeywords());
         default:
             return new UnknownCommand();
         }
@@ -163,10 +163,10 @@ public class Parser {
         }
     }
 
-    private static String getKeyword() throws PercyException {
+    private static String[] getKeywords() throws PercyException {
         try {
             String[] splitCommand = fullCmd.split(" ", 2);
-            return splitCommand[1].trim().toLowerCase();
+            return splitCommand[1].trim().toLowerCase().split(" ");
         } catch (IndexOutOfBoundsException e) {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The keyword is missing.");

@@ -18,19 +18,19 @@ public class FindCommand extends Command {
             "find: Finds a task by searching for a keyword.",
             "Parameters: KEYWORD",
             "Example: find book"));
-    private final String keyword;
+    private final String[] keywords;
 
     /**
      * Constructs find command.
      */
-    public FindCommand(String keyword) {
+    public FindCommand(String... keyword) {
         super(false);
-        this.keyword = keyword;
+        this.keywords = keyword;
     }
 
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        ArrayList<Task> filteredTasks = tasks.findTask(keyword);
+        ArrayList<Task> filteredTasks = tasks.findTask(keywords);
         TaskList filteredList = new TaskList(filteredTasks);
         return Ui.makeSearchResultsMsg(filteredList);
     }

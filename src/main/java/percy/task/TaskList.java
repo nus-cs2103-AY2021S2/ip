@@ -59,15 +59,19 @@ public class TaskList {
     }
 
     /**
-     * Filters the task list with tasks with the keyword.
-     * @param keyword the find keyword
+     * Filters the task list with any task containing keywords given.
+     * @param keywords the find keyword
      * @return filtered task list
      */
-    public ArrayList<Task> findTask(String keyword) {
+    public ArrayList<Task> findTask(String... keywords) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task t : list) {
-            if (t.getDescription().toLowerCase().contains(keyword)) {
-                filteredTasks.add(t);
+            for (String s : keywords) {
+                if (t.getDescription().toLowerCase().contains(s)) {
+                    if (!filteredTasks.contains(t)) {
+                        filteredTasks.add(t);
+                    }
+                }
             }
         }
         return filteredTasks;
