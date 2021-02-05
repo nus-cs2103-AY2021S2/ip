@@ -1,15 +1,19 @@
 package Tasks;
 
-public class Event extends Task {
-    private final String at;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    private final LocalDateTime at;
+
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
     private String getAtString() {
-        return "(at: " + this.at + ")";
+        String atString = this.at.format(DateTimeFormatter.ofPattern("dd MMM uuuu, HH:mm"));
+        return "(at: " + atString + ")";
     }
 
     public String getAt() {
