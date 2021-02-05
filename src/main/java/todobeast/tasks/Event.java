@@ -24,11 +24,14 @@ public class Event extends Task {
     }
 
     public String formatForStorage(String delimiter) {
-        return "EVENT" + delimiter + (isDone ? "1" : "0") + delimiter + taskDescription + delimiter + date.toString() + delimiter + time.toString();
+        return "EVENT" + delimiter + (isDone ? "1" : "0") + delimiter
+                + taskDescription + delimiter + date.toString() + delimiter + time.toString();
     }
 
     @Override
     public String toString() {
-        return "EVENT" + Task.TASK_DELIMITER + (isDone ? "done" : " ") + Task.TASK_DELIMITER + taskDescription + Task.TASK_DELIMITER + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ", " + time;
+        return "EVENT" + Task.TASK_DELIMITER + (isDone ? "done" : " ") + Task.TASK_DELIMITER
+                + taskDescription + Task.TASK_DELIMITER
+                + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ", " + time;
     }
 }

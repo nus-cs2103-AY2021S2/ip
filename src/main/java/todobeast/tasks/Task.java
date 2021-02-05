@@ -6,7 +6,7 @@ package todobeast.tasks;
 public abstract class Task {
     protected String taskDescription;
     protected boolean isDone;
-    public static final String TASK_DELIMITER = " | ";
+    public final static String TASK_DELIMITER = " | ";
 
     /**
      * Default constructor for new tasks.

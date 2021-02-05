@@ -1,9 +1,9 @@
 package todobeast.commands;
 
+import todobeast.exceptions.TaskNotFoundException;
 import todobeast.tasks.Task;
 import todobeast.TaskList;
 import todobeast.Ui;
-import todobeast.exceptions.TaskNotFoundException;
 
 /**
  * A Command that represents marking a task as done in the TaskList. Enclosing business logic is wrapped in the
@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     /**
      * The index of the task to be marked as done
      */
-    int taskNumber;
+    private final int taskNumber;
 
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;

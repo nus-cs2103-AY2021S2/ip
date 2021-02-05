@@ -5,7 +5,7 @@ package todobeast;
  */
 public class ToDoBeast {
 
-    Application app;
+    private final Application app;
 
     public ToDoBeast() {
         app = new Application();

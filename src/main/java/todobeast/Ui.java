@@ -1,9 +1,9 @@
 package todobeast;
 
-import todobeast.tasks.Task;
-
 import java.util.List;
 import java.util.Scanner;
+
+import todobeast.tasks.Task;
 
 /**
  * Handles User Interface interactions for the application. This includes reading of commands, as well as displaying
@@ -13,17 +13,17 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
     private final static String line = "\t________________________________________________________________\n";
-    private final static String logo = "                                                     \n" +
-            "\t88                                                   \n" +
-            "\t88                                            ,d     \n" +
-            "\t88                                            88     \n" +
-            "\t88,dPPYba,   ,adPPYba, ,adPPYYba, ,adPPYba, MM88MMM  \n" +
-            "\t88P'    \"8a a8P_____88 \"\"     `Y8 I8[    \"\"   88     \n" +
-            "\t88       d8 8PP\"\"\"\"\"\"\" ,adPPPPP88  `\"Y8ba,    88     \n" +
-            "\t88b,   ,a8\" \"8b,   ,aa 88,    ,88 aa    ]8I   88,    \n" +
-            "\t8Y\"Ybbd8\"'   `\"Ybbd8\"' `\"8bbdP\"Y8 `\"YbbdP\"'   \"Y888  \n" +
-            "\t                                                     \n" +
-            "\t                                                     \n";
+    private final static String logo = "                                                     \n"
+            + "\t88                                                   \n"
+            + "\t88                                            ,d     \n"
+            + "\t88                                            88     \n"
+            + "\t88,dPPYba,   ,adPPYba, ,adPPYYba, ,adPPYba, MM88MMM  \n"
+            + "\t88P'    \"8a a8P_____88 \"\"     `Y8 I8[    \"\"   88     \n"
+            + "\t88       d8 8PP\"\"\"\"\"\"\" ,adPPPPP88  `\"Y8ba,    88     \n"
+            + "\t88b,   ,a8\" \"8b,   ,aa 88,    ,88 aa    ]8I   88,    \n"
+            + "\t8Y\"Ybbd8\"'   `\"Ybbd8\"' `\"8bbdP\"Y8 `\"YbbdP\"'   \"Y888  \n"
+            + "\t                                                     \n"
+            + "\t                                                     \n";
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -66,9 +66,9 @@ public class Ui {
     }
 
     public void showWelcome() {
-        String greeting = line + logo + "\tWelcome to ToDoBeast, your best productivity task tracker tool!\n" +
-                "\tLet's get this bread! How would you like to be productive today?\n\n" +
-                "\t[Type \"instructions\" to display instructions]";
+        String greeting = line + logo + "\tWelcome to ToDoBeast, your best productivity task tracker tool!\n"
+                + "\tLet's get this bread! How would you like to be productive today?\n\n"
+                + "\t[Type \"instructions\" to display instructions]";
         System.out.println(greeting);
     }
 
@@ -88,15 +88,19 @@ public class Ui {
     }
 
     public void showInstructions() {
-        System.out.println("\tList of commands for ToDoBeast:\n\n" +
-                "\t1. bye/exit - to quit ToDoBeast\n" +
-                "\t2. list - lists all the tasks that have been stored in ToDoBeast\n" +
-                "\t3. delete, [index] - deletes the task with the corresponding [index]\n" +
-                "\t4. done, [index] - marks the task with the corresponding [index] as done\n" +
-                "\t5. find, [regex] - finds all tasks with the specified [regex]\n" +
-                "\t6. todo, [task description] - creates a to-do task with the specified [task description]\n" +
-                "\t7. deadline, [task description], by YYYY-MM-DD HH:MM - creates a deadline task with the specified [task description], date and time\n" +
-                "\t8. event, [task description], at YYYY-MM-DD HH:MM - creates an event task with the specified [task description], date and time\n");
+        System.out.println("\tList of commands for ToDoBeast:\n\n"
+                + "\t1. bye/exit - to quit ToDoBeast\n"
+                + "\t2. list - lists all the tasks that have been stored in ToDoBeast\n"
+                + "\t3. delete, [index] - deletes the task with the corresponding [index]\n"
+                + "\t4. done, [index] - marks the task with the corresponding [index] as done\n"
+                + "\t5. find, [regex] - finds all tasks with the specified [regex]\n"
+                + "\t6. todo, [task description] - creates a to-do task with the specified [task description]\n"
+                + "\t7. deadline, [task description], by YYYY-MM-DD HH:MM "
+                + "- creates a deadline task with the "
+                + "specified [task description], date and time\n"
+                + "\t8. event, [task description], at YYYY-MM-DD HH:MM "
+                + "- creates an event task with the specified "
+                + "[task description], date and time\n");
     }
 
     public void showError(String error) {
@@ -104,7 +108,8 @@ public class Ui {
     }
 
     public void showExit() {
-        String exitMsg = line + "\tThis app may have stopped but the grind never stops.\n\tSee you again soon!\n" + line;
+        String exitMsg = line + "\tThis app may have stopped but the grind never stops.\n"
+                + "\tSee you again soon!\n" + line;
         System.out.println(exitMsg);
         System.exit(0);
     }

@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     /**
      * The index of the task to be deleted
      */
-    int taskNumber;
+    private final int taskNumber;
 
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;

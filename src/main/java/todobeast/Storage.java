@@ -1,10 +1,5 @@
 package todobeast;
 
-import todobeast.tasks.Deadline;
-import todobeast.tasks.Event;
-import todobeast.tasks.Task;
-import todobeast.tasks.Todo;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,14 +11,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+import todobeast.tasks.Deadline;
+import todobeast.tasks.Event;
+import todobeast.tasks.Task;
+import todobeast.tasks.Todo;
+
 /**
  * Handles CRUD functionality for storing the data produced and required by the application into a text file.
  */
 public class Storage {
 
     private final File data;
-    public static final String STORAGE_DELIMITER = ".";
-    public static final String STORAGE_DELIMITER_REGEX = "[.]";
+    public final static String STORAGE_DELIMITER = ".";
+    public final static String STORAGE_DELIMITER_REGEX = "[.]";
 
     /**
      * Creates a text file to store data in the specified directory, and stores it such that future CRUD
@@ -72,11 +72,11 @@ public class Storage {
             Task newTask = null;
             String line = sc.nextLine();
             // debug
-//            System.out.println(line);
+            // System.out.println(line);
             String[] taskArgs = line.split(STORAGE_DELIMITER_REGEX);
 
-            //debug
-//            System.out.println(Arrays.toString(taskArgs));
+            // debug
+            // System.out.println(Arrays.toString(taskArgs));
             boolean isTaskDone = taskArgs[1].equals("1");
 
 

@@ -1,9 +1,9 @@
 package todobeast;
 
-import todobeast.tasks.Task;
-
 import java.util.List;
 import java.util.ArrayList;
+
+import todobeast.tasks.Task;
 
 /**
  * Wrapper class that stores all tasks for the application into a List.

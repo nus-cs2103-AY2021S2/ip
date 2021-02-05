@@ -1,5 +1,8 @@
 package todobeast.commands;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import todobeast.TaskList;
 import todobeast.Ui;
 import todobeast.exceptions.InvalidInputException;
@@ -8,19 +11,16 @@ import todobeast.tasks.Event;
 import todobeast.tasks.Task;
 import todobeast.tasks.Todo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 /**
  * A Command that represents adding a new Task to the TaskList. Enclosing business logic is wrapped in the execute()
  * method.
  */
 public class AddCommand extends Command {
 
-    TaskType taskType;
-    String taskDescription;
-    LocalDate taskDate;
-    LocalTime taskTime;
+    private final TaskType taskType;
+    private final String taskDescription;
+    private final LocalDate taskDate;
+    private final LocalTime taskTime;
 
     /**
      * Constructor for tasks that do not have a date and time requirement (e.g. todo-type tasks)
