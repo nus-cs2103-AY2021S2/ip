@@ -25,7 +25,7 @@ public class Task {
 
     /**
      * Returns boolean of the completion of the task
-     * @return
+     * @return isDone boolean
      */
     public boolean isTaskDone() {
         return isDone;

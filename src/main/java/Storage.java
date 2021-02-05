@@ -23,13 +23,14 @@ public class Storage {
         this.file = new File(filePath);
         if (!file.exists()) {
             File dataFile = new File("data");
-            if (!dataFile.exists()) {
-                dataFile.mkdir();
-            }
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Error occurred when trying to create save file");
+            if (dataFile.mkdir()) {
+                try {
+                    if (file.createNewFile()) {
+                        System.out.println("New save file created");
+                    }
+                } catch (IOException e) {
+                    System.out.println("Save file found");
+                }
             }
         }
     }
