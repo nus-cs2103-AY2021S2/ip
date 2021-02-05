@@ -8,13 +8,29 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage Object.
+ * @author Arihant Jain
+ */
 public class Storage {
 
     private String filePath;
+
+    /**
+     * Instantiates a new Storage object
+     *
+     * @param filePath the file path of text file we are reading and writing to
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Create file.
+     *
+     * @param path the path
+     * @throws DukeException.FileLoadError the file load error
+     */
     public static void createFile(Path path) throws DukeException.FileLoadError {
         File newFile = new File(path.toString());
         try {
@@ -25,6 +41,12 @@ public class Storage {
 
     }
 
+    /**
+     * Load array list.
+     *
+     * @return the array list of tasks loaded from text file
+     * @throws DukeException.FileLoadError the file load error
+     */
     public ArrayList<Task> load() throws DukeException.FileLoadError {
 
         ArrayList<Task> loadTasks = new ArrayList<>();
@@ -74,6 +96,7 @@ public class Storage {
         return loadTasks;
     }
 
+   
     public void save(TaskList taskList) throws DukeException.FileLoadError {
         Path path = Paths.get(this.filePath);
         String strOut = "";
