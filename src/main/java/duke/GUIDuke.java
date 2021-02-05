@@ -1,11 +1,13 @@
 package duke;
 
+import duke.gui.Main;
 import duke.register.Parser;
 import duke.register.Storage;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TaskList;
 import duke.task.TodoTask;
+import javafx.application.Application;
 
 /**
  * This special duke class is only used to integrate the GUI
@@ -70,4 +72,7 @@ public class GUIDuke {
         return processGUI(input);
     }
 
+    public static void main(String[] args){
+        Application.launch(Main.class, args);
+    }
 }

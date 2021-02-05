@@ -3,3 +3,4 @@ todo read book done
 deadline attend meeting /by 2021-05-18 done
 event attend dinner /at 2021-03-15 undone
 todo prepare coffee undone
+deadline do homework /by 2021-10-31 undone
