@@ -82,7 +82,7 @@ public class Ui {
 
     /**
      * Prints the list of tasks.
-     * @param tasks
+     * @param tasks Tasks at hand.
      */
     public String printTasks(TaskList tasks) {
         ArrayList<Task> taskList = tasks.getTasks();
@@ -127,7 +127,7 @@ public class Ui {
 
     /**
      * Prints the message when a task is marked as done.
-     * @param marked
+     * @param marked Task to be marked as done.
      */
     public String printMarkDone(Task marked) {
         return "This task is marked as done:\n" + marked.getStatus();
@@ -136,8 +136,8 @@ public class Ui {
 
     /**
      * Prints the message when a task is deleted.
-     * @param deleted
-     * @param taskList
+     * @param deleted Task to be deleted.
+     * @param taskList TaskList stored.
      */
     public String printDeleteTask(Task deleted, TaskList taskList) {
         String toReturn = "This task has been removed:\n" + deleted.getStatus();
@@ -147,7 +147,7 @@ public class Ui {
 
     /**
      * Read the next input line from user.
-     * @return
+     * @return Returns the next line of input.
      */
     public String readCommand() {
         return this.sc.nextLine();

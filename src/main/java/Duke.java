@@ -65,13 +65,4 @@ public class Duke {
         }
         return "Failed?";
     }
-
-    /**
-     * Main method for the Duke class.
-     * Creates a new Duke and calls Duke.run().
-     * @param args Args for main method.
-     */
-    /*public static void main(String[] args) {
-        new Duke("data/savedTasks.txt").run();
-    }*/
 }
