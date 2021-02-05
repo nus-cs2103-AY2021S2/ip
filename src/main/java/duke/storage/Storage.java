@@ -4,7 +4,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,7 +37,7 @@ public class Storage {
         }
     }
 
-    private File initiateFile () {
+    private File initiateFile() {
         String home = System.getProperty("user.home");
 
         // inserts correct file path separator on *nix and Windows
@@ -68,7 +67,7 @@ public class Storage {
         return file;
     }
 
-    private void populateList (ArrayList<Task> arr) {
+    private void populateList(ArrayList<Task> arr) {
         try {
             Scanner reader = new Scanner(this.file);
             while (reader.hasNextLine()) {
@@ -118,7 +117,7 @@ public class Storage {
 
     public void writeToFile(Task task) {
         try {
-            this.fio.write(task.taskSave() + "\n");
+            this.fio.write(task.saveTask() + "\n");
         } catch (IOException e) {
             System.out.println("Unable to write to file");
             e.printStackTrace();
@@ -138,7 +137,7 @@ public class Storage {
     /**
      * This closes the FileWriter used by the chatbot in Storage.
      */
-    public void closeFile () {
+    public void closeFile() {
         try {
             this.fio.close();
         } catch (IOException e) {

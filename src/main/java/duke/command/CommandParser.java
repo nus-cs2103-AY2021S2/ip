@@ -14,7 +14,7 @@ import duke.ui.Ui;
  */
 import java.util.ArrayList;
 
-public class ParseCommands {
+public class CommandParser {
     private final CommandList command;
     private final String data;
     private boolean isExit;
@@ -25,7 +25,7 @@ public class ParseCommands {
      * @param command This is the command that needs to be executed.
      * @param data This is the data for the corresponding command.
      */
-    public ParseCommands(CommandList command, String data) {
+    public CommandParser(CommandList command, String data) {
         this.command = command;
         this.data = data;
         this.isExit = false;
@@ -39,9 +39,9 @@ public class ParseCommands {
      * @return Returns a valid ParseCommand that can be executed.
      * @throws DukeException Throws a DukeException if the input given is not valid and cannot be executed.
      */
-    public static ParseCommands parseLine(String input, int counter) throws DukeException {
+    public static CommandParser parseLine(String input, int counter) throws DukeException {
         int first = input.indexOf(" ");
-        ParseCommands parseCommands;
+        CommandParser commandParser;
         CommandList commandList;
         String line = "";
         String command;
@@ -53,11 +53,11 @@ public class ParseCommands {
             line = input.substring(first).strip();
         }
 
-        commandList = changeToCommand(command);
+        commandList = createCommandFromString(command);
         checkCommand(input, commandList, first, counter);
-        parseCommands = new ParseCommands(commandList, line);
+        commandParser = new CommandParser(commandList, line);
 
-        return parseCommands;
+        return commandParser;
     }
 
     /**
@@ -110,7 +110,7 @@ public class ParseCommands {
         }
     }
 
-    private static CommandList changeToCommand (String command) throws DukeException {
+    private static CommandList createCommandFromString(String command) throws DukeException {
         CommandList commandList;
         try {
             commandList = CommandList.valueOf(command);

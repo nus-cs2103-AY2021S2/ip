@@ -1,6 +1,6 @@
 package duke.task;
 
-public enum Task_State {
+public enum taskState {
     NOTDONE {
         @Override
         public String toString() {

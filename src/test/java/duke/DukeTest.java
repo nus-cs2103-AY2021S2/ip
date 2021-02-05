@@ -1,9 +1,9 @@
 package duke;
 
 import duke.command.CommandList;
-import duke.command.ParseCommands;
+import duke.command.CommandParser;
 import duke.task.Deadline;
-import duke.task.Task_State;
+import duke.task.taskState;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,16 +19,16 @@ public class DukeTest {
     public void taskTest() {
         Deadline deadline = new Deadline("Bake Cake", "Mar 20 2021");
         deadline.doTask();
-        assertEquals(Task_State.DONE, deadline.getState());
+        assertEquals(taskState.DONE, deadline.getState());
     }
 
     @Test
     public void parseCommandTest_givenEventWithDate_commandIsEqual() {
-        ParseCommands parseCommandsA = new ParseCommands(CommandList.EVENT, "Eat Cake /at Mar 20 2021");
+        CommandParser commandParserA = new CommandParser(CommandList.EVENT, "Eat Cake /at Mar 20 2021");
         try {
-            ParseCommands parseCommandsB = ParseCommands.parseLine("eVenT Eat Cake /at Mar 20 2021", 0);
-            assertEquals(parseCommandsA.getData(), parseCommandsB.getData());
-            assertEquals(parseCommandsA.getCommand(), parseCommandsB.getCommand());
+            CommandParser commandParserB = CommandParser.parseLine("eVenT Eat Cake /at Mar 20 2021", 0);
+            assertEquals(commandParserA.getData(), commandParserB.getData());
+            assertEquals(commandParserA.getCommand(), commandParserB.getCommand());
         } catch (DukeException e) {
             fail();
         }

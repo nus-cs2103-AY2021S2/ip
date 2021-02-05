@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Task {
     private final String input;
-    private Task_State state;
+    private taskState state;
 
     /**
      * This is the Task constructor.
@@ -13,7 +13,7 @@ public class Task {
      */
     public Task(String input) {
         this.input = input;
-        this.state = Task_State.NOTDONE;
+        this.state = taskState.NOTDONE;
     }
 
     /**
@@ -21,7 +21,7 @@ public class Task {
      * @return This returns the modified done Task.
      */
     public Task doTask() {
-        this.state = Task_State.DONE;
+        this.state = taskState.DONE;
         return this;
     }
 
@@ -37,7 +37,7 @@ public class Task {
      * This returns the current state of the Task.
      * @return This returns Task_State of the task.
      */
-    public Task_State getState() {
+    public taskState getState() {
         return state;
     }
 
@@ -45,9 +45,9 @@ public class Task {
      * This passes the tasks to be saved to Storage in a readable manner for Storage.
      * @return This returns the modified save message that's stored on a file for saving.
      */
-    public String taskSave() {
+    public String saveTask() {
         String stateB;
-        if (state == Task_State.DONE) {
+        if (state == taskState.DONE) {
             stateB = "1";
         } else {
             stateB = "0";

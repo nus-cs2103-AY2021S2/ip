@@ -20,9 +20,9 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String taskSave() {
+    public String saveTask() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-        return "D" + super.taskSave() + " | " + localDate.format(dateTimeFormatter);
+        return "D" + super.saveTask() + " | " + localDate.format(dateTimeFormatter);
     }
 
     @Override

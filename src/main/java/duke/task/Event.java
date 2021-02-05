@@ -20,9 +20,9 @@ public class Event extends Task{
     }
 
     @Override
-    public String taskSave() {
+    public String saveTask() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-        return "E" + super.taskSave() + " | " + localDate.format(dateTimeFormatter);
+        return "E" + super.saveTask() + " | " + localDate.format(dateTimeFormatter);
     }
 
     @Override

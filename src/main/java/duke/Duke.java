@@ -1,6 +1,6 @@
 package duke;
 
-import duke.command.ParseCommands;
+import duke.command.CommandParser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -29,9 +29,9 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ParseCommands parseCommands = ParseCommands.parseLine(fullCommand, this.fio.getArrSize());
-                parseCommands.executeCommand(ui, this.fio);
-                isExit = parseCommands.canExit();
+                CommandParser commandParser = CommandParser.parseLine(fullCommand, this.fio.getArrSize());
+                commandParser.executeCommand(ui, this.fio);
+                isExit = commandParser.canExit();
             } catch (DukeException e) {
                 ui.showError(e.toString());
             }
