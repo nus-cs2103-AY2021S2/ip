@@ -29,12 +29,13 @@ public class SurrealChat {
     protected static final String TASK_FILE_PATH = "tasks.txt";
     protected final TaskManagement taskManagement;
     protected final FileManagement fileManagement;
+    protected final String fileLoadOutput;
 
     private SurrealChat(TaskManagement taskManagement,
                         FileManagement fileManagement) {
         this.taskManagement = taskManagement;
         this.fileManagement = fileManagement;
-        this.loadFile();
+        fileLoadOutput = loadFile();
     }
 
     /**
@@ -58,7 +59,7 @@ public class SurrealChat {
      * @return Output to be printed.
      */
     public String commandLogic(String inputString) {
-        String[] separatedWords = this.splitString(inputString);
+        String[] separatedWords = splitString(inputString);
         String userCommand = separatedWords[0];
         String restOfInput = "";
 
@@ -68,45 +69,48 @@ public class SurrealChat {
         }
         restOfInput = restOfInput.trim();
 
-        //Generate output
-        switch(userCommand) {
+        return executeCommand(userCommand, restOfInput);
+    }
+
+    private String executeCommand(String command, String restOfInput) {
+        switch(command) {
         case "help":
             return HelpMode.displayHelp(restOfInput);
         case "list":
             Command listCommand = new ListCommand();
-            String outputList = listCommand.execute(this.taskManagement);
+            String outputList = listCommand.execute(taskManagement);
             return outputList;
         case "todo":
             Command addToDoCommand = new ToDoCommand(restOfInput);
-            String outputString = addToDoCommand.execute(this.taskManagement);
+            String outputString = addToDoCommand.execute(taskManagement);
             return outputString;
         case "deadline":
             Command addDeadlineCommand = new DeadlineCommand(restOfInput);
-            outputString = addDeadlineCommand.execute(this.taskManagement);
+            outputString = addDeadlineCommand.execute(taskManagement);
             return outputString;
         case "event":
             Command addEventCommand = new EventCommand(restOfInput);
-            outputString = addEventCommand.execute(this.taskManagement);
+            outputString = addEventCommand.execute(taskManagement);
             return outputString;
         case "edit":
             Command editCommand = new EditCommand(restOfInput);
-            outputString = editCommand.execute(this.taskManagement);
+            outputString = editCommand.execute(taskManagement);
             return outputString;
         case "done":
             Command doneCommand = new DoneCommand(restOfInput);
-            outputString = doneCommand.execute(this.taskManagement);
+            outputString = doneCommand.execute(taskManagement);
             return outputString;
         case "delete":
             Command deleteCommand = new DeleteCommand(restOfInput);
-            outputString = deleteCommand.execute(this.taskManagement);
+            outputString = deleteCommand.execute(taskManagement);
             return outputString;
         case "scronch":
             Command scronchCommand = new ScronchCommand();
-            outputString = scronchCommand.execute(this.taskManagement);
+            outputString = scronchCommand.execute(taskManagement);
             return outputString;
         case "find":
             Command findCommand = new FindCommand(restOfInput);
-            outputString = findCommand.execute(this.taskManagement);
+            outputString = findCommand.execute(taskManagement);
             return outputString;
         case "orang":
             EasterEgg orangEasterEgg = new OrangEasterEgg();
@@ -130,12 +134,12 @@ public class SurrealChat {
     /**
      * Loads the tasks from file.
      */
-    public void loadFile() {
+    public String loadFile() {
         try {
-            List<String> fileLines = this.fileManagement.loadTaskFile();
-            this.taskManagement.parseFileLines(fileLines);
+            List<String> fileLines = fileManagement.loadTaskFile();
+            return taskManagement.parseFileLines(fileLines);
         } catch (IOException e) {
-            return;
+            return "File loading error. Not stonks!\n";
         }
     }
 
@@ -144,8 +148,8 @@ public class SurrealChat {
      * @return A string indicating that tasks are being saved.
      */
     public String saveFile() {
-        List<String> fileTaskList = this.taskManagement.convertTasksForFile();
-        this.fileManagement.saveTasksToFile(fileTaskList);
+        List<String> fileTaskList = taskManagement.convertTasksForFile();
+        fileManagement.saveTasksToFile(fileTaskList);
         return "Saving tasks now...\n";
     }
 }

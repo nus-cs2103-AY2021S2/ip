@@ -41,7 +41,7 @@ public class DeadlineTask extends Task {
      * @return New DeadlineTask with edited description
      */
     public DeadlineTask editDescription(String newDescription) {
-        return new DeadlineTask(newDescription, this.deadline, this.isDone);
+        return new DeadlineTask(newDescription, deadline, isDone);
     }
 
     /**
@@ -49,7 +49,7 @@ public class DeadlineTask extends Task {
      * @return Deadline that is marked as done/undone.
      */
     public DeadlineTask markAsDone() {
-        return new DeadlineTask(this.getDescription(), this.deadline, !this.isDone);
+        return new DeadlineTask(getDescription(), deadline, !isDone);
     }
 
 
@@ -59,7 +59,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String saveTask() {
-        return String.format("%s /by %s", super.saveTask(), this.deadline);
+        return String.format("%s /by %s", super.saveTask(), deadline);
     }
 
     /**
@@ -69,6 +69,6 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return String.format("%s (by: %s, %s)",
-                super.toString(), this.deadline.toLocalDate(), this.deadline.toLocalTime());
+                super.toString(), deadline.toLocalDate(), deadline.toLocalTime());
     }
 }
