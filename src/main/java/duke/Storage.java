@@ -37,7 +37,7 @@ public class Storage {
      * @return the list of tasks from previous session
      */
     public TaskList readFile() {
-        List<Task> taskList = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filePath);
             if (!file.createNewFile()) {
@@ -50,19 +50,19 @@ public class Storage {
                     }
                     switch (data[0]) {
                     case "TODO":
-                        taskList.add(new ToDo(data[2], TaskType.TODO,
+                        tasks.add(new ToDo(data[2], TaskType.TODO,
                                 data[1].equals("1")));
                         break;
                     case "DEADLINE":
-                        taskList.add(new Deadline(data[2], TaskType.DEADLINE,
+                        tasks.add(new Deadline(data[2], TaskType.DEADLINE,
                                 LocalDate.parse(data[3]), data[1].equals("1")));
                         break;
                     case "EVENT":
-                        taskList.add(new Event(data[2], TaskType.EVENT,
+                        tasks.add(new Event(data[2], TaskType.EVENT,
                                 LocalDate.parse(data[3]), data[1].equals("1")));
                         break;
                     default:
-                        return new TaskList(taskList);
+                        return new TaskList(tasks);
                     }
 
                 }
@@ -74,38 +74,39 @@ public class Storage {
             e.printStackTrace();
         }
         System.out.println("(Your tasks from previous session has been successfully loaded.)");
-        return new TaskList(taskList);
+        return new TaskList(tasks);
     }
 
     /**
      * Updates the file with newest task data, write the updated tasks into the file.
      *
-     * @param taskList the updated task list
+     * @param tasks the updated task list
      */
-    public void updateFile(TaskList taskList) {
+    public void updateFile(TaskList tasks) {
         String updatedString = "";
-        for (Task t : taskList.getTaskList()) {
-            updatedString += t.getType();
+        for (Task task : tasks.getTaskList()) {
+            updatedString += task.getType();
             updatedString += " | ";
-            updatedString += (t.isDone() ? 1 : 0);
+            updatedString += (task.isDone() ? 1 : 0);
             updatedString += " | ";
-            updatedString += t.getName();
-            if (t.getType().equals(TaskType.DEADLINE)) {
+            updatedString += task.getName();
+            if (task.getType().equals(TaskType.DEADLINE)) {
                 updatedString += " | ";
-                updatedString += ((Deadline) t).getTime().toString();
-            } else if (t.getType().equals(TaskType.EVENT)) {
+                updatedString += ((Deadline) task).getTime().toString();
+            } else if (task.getType().equals(TaskType.EVENT)) {
                 updatedString += " | ";
-                updatedString += ((Event) t).getTime().toString();
+                updatedString += ((Event) task).getTime().toString();
             }
             updatedString += "\n";
         }
         try {
             FileWriter file = new FileWriter(filePath);
             file.write(updatedString);
+            file.flush();
             file.close();
-            System.out.println("(Your tasks are successfully saved to the file.)\n");
+            System.out.println("(Your tasks are successfully saved to the file.)");
         } catch (IOException e) {
-            System.out.println("(Your tasks fail to saved to the file.)\n");
+            System.out.println("(Your tasks fail to saved to the file.)");
         }
 
     }
