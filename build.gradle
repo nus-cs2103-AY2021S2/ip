@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "kuga.Launcher"
+    mainClassName = "popo.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "kuga"
+    archiveBaseName = "popo"
     archiveClassifier = null
 }
 

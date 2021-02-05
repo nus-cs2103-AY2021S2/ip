@@ -1,12 +1,15 @@
-# Kuga
+# Popo
 ## Personal Task Manager
 
 A personal task list manager that keeps track of multiple types of task.
 
 
 ## Example
-![example](readme_example_img.png)
+![example.png](readme_example_img.png)
 
 
 ## Notes
 A Java greenfield project for NUS software engineering students
+
+## Credits
+Images by [omatian](https://omatian.sg/)
