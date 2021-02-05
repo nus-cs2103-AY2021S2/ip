@@ -2,7 +2,7 @@ package percy.command;
 
 import java.io.IOException;
 
-import percy.exception.NoDescriptionException;
+import percy.exception.ParsingException;
 import percy.storage.Storage;
 import percy.task.Task;
 import percy.task.TaskList;
@@ -37,9 +37,9 @@ public class TodoCommand extends Command {
     public String execute(TaskList taskList, Storage storage) throws IOException {
         try {
             if (todoDescription.isEmpty()) {
-                throw new NoDescriptionException("todo");
+                throw new ParsingException("todo");
             }
-        } catch (NoDescriptionException ex) {
+        } catch (ParsingException ex) {
             return Ui.makeMsg(ex.toString());
         }
         Task todo = new Todo(todoDescription);

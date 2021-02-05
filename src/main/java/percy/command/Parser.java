@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import percy.exception.ParsingException;
 import percy.exception.PercyException;
 import percy.ui.Ui;
 
@@ -46,11 +47,16 @@ public class Parser {
         return Integer.valueOf(taskNumber);
     }
 
-    private static String getTodoDescription() {
+    private static String getTodoDescription() throws PercyException {
         String[] splitCommand = fullCmd.split(" ", 2);
         String description = "";
         if (splitCommand.length == 2) {
             description = splitCommand[1].trim();
+        }
+        try {
+            String description = split
+        } catch (IndexOutOfBoundsException e) {
+            throw new ParsingException()
         }
         return description;
     }
@@ -62,8 +68,9 @@ public class Parser {
             String description = args[0].trim();
             return description;
         } catch (IndexOutOfBoundsException e) {
+
             ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The description or  date/time of an event cannot be empty.");
+            arr.add("OOPS!!! The description or date/time of an event cannot be empty.");
             arr.addAll(EventCommand.USAGE_GUIDE);
             throw new PercyException(Ui.makeMsg(arr));
         }
@@ -114,6 +121,7 @@ public class Parser {
             String[] splitCommand = fullCmd.split(" ", 2);
             String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
             String description = args[0].trim();
+            assert !description.isEmpty();
             return description;
         } catch (IndexOutOfBoundsException e) {
             ArrayList<String> arr = new ArrayList<String>();
@@ -174,5 +182,4 @@ public class Parser {
             throw new PercyException(Ui.makeMsg(arr));
         }
     }
-
 }

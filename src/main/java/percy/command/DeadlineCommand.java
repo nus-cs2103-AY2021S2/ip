@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import percy.exception.NoDescriptionException;
+import percy.exception.ParsingException;
 import percy.storage.Storage;
 import percy.task.Deadline;
 import percy.task.Task;
@@ -39,6 +39,8 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand(String deadlineDescription, LocalDate date, LocalTime time) {
         super(false);
+        assert !deadlineDescription.isEmpty();
+
         this.deadlineDescription = deadlineDescription;
         this.date = date;
         this.time = time;
@@ -56,9 +58,9 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList taskList, Storage storage) throws IOException { // Is task list Immutable?
         try {
             if (deadlineDescription.isEmpty()) {
-                throw new NoDescriptionException("deadline");
+                throw new ParsingException("deadline");
             }
-        } catch (NoDescriptionException ex) {
+        } catch (ParsingException ex) {
             Ui.makeMsg(ex.toString());
         }
 
