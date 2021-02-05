@@ -31,6 +31,7 @@ public class Duke {
 
         int ctr = 0;
         HashMap<Integer, String> commands = new HashMap<Integer, String>();
+        String separator = " ";
 
         while (true) {
             String input = sc.nextLine();
@@ -41,18 +42,38 @@ public class Duke {
 
             if (input.equals("list")) {
                 System.out.println(spacer);
-                for (Integer i : commands.keySet()) {
-                    String key = i.toString();
-                    String value = commands.get(i);
-                    System.out.println(key + ". " + value);
-                }
+                printList(commands);
                 System.out.println(spacer);
+
+            } else if (input.contains("done")) {
+                //split input to get int
+                //int
+                String[] doneCommand = input.split(separator);
+                String markedInput = "[X] " + input;
+                int id = Integer.parseInt(doneCommand[1]);
+                commands.replace(id, markedInput);
+
+                System.out.println(spacer + "Woof! I have completed these commands before: " + "\n");
+                printList(commands);
+                System.out.println(spacer);
+
             } else {
                 ctr++;
-                commands.put(ctr, input);
+                String emptyInput = "[ ] " + input;
+                commands.put(ctr, emptyInput);
                 System.out.println(spacer + "added: " + input + spacer);
             }
         }
         sc.close();
     }
+
+    static void printList(HashMap<Integer, String> hm) {
+        for (Integer i : hm.keySet()) {
+            String key = i.toString();
+            String value = hm.get(i);
+            System.out.println(key + ". " + value);
+        }
+    }
+
+
 }
