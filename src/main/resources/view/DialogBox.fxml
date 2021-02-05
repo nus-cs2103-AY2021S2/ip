@@ -10,7 +10,7 @@
   <children>
       <Pane prefHeight="98.0" prefWidth="280.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
          <children>
-          <Label fx:id="dialog" layoutX="14.0" prefHeight="98.0" prefWidth="258.0" text="Label" wrapText="true">
+          <Label fx:id="dialog" layoutX="14.0" prefHeight="98.0" prefWidth="252.0" text="Label" wrapText="true">
                <padding>
                   <Insets bottom="15.0" />
                </padding></Label>
