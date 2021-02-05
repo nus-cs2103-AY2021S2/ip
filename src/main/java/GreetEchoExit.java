@@ -21,11 +21,19 @@ public class GreetEchoExit {
             if (command.equals("Hello")) {
                 System.out.println("Hello! I'm Duke");
                 System.out.println("What can I do for you?");
+            } else if (command.equals("list")) {
+                enumerateTasks();
+            } else if (command.contains("done")) {
+                String[] delString = command.split("\\s+");
+                markAsDone(Integer.parseInt(delString[1]));
             } else {
                 System.out.println(String.format("added: %s", command));
             }
             command = sc.nextLine();
-            taskList.add(new Task(command));
+            if (!command.equals("list") && !command.equals("done")) {
+                taskList.add(new Task(command));
+            }
+
         }
 
         System.out.println("Bye. Hope to see you again soon!");
