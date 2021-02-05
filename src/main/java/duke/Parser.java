@@ -1,9 +1,5 @@
 package duke;
 
-import duke.Database;
-import duke.Deadline;
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -15,11 +11,11 @@ public class Parser {
         try {
             String s1 = input.nextLine();
             if (s1.equals("")) {
-                throw new DukeException(" Enter a valid todo");
+                throw new DukeException(" Enter a valid todo task");
             } else {
                 char[] chars = s1.toCharArray();
                 if(chars[1] == ' '){
-                    throw new DukeException(" Enter valid todo");
+                    throw new DukeException(" Enter valid todo task");
                 } else {
                     try{
                         String desc = s1.substring(1);
@@ -28,7 +24,7 @@ public class Parser {
                         ui.showSuccessfulAddedMessage(myList.size(), newTodo);
                         database.writeTaskToFile(myList);
                     } catch (Exception e){
-                        System.out.println(" Enter a valid todo");
+                        System.out.println(" Enter a valid todo task");
                     }
                 }
             }
@@ -41,7 +37,7 @@ public class Parser {
         try{
             String s1 = input.nextLine();
             if(s1.equals("")){
-                throw new DukeException(" Enter valid duke.Event.");
+                throw new DukeException(" Enter a valid event task.");
             } else {
                 try {
                     String wholeString = s1.substring(1);
@@ -88,8 +84,7 @@ public class Parser {
                             ui.showSuccessfulAddedMessage(myList.size(), newDeadline);
                             database.writeTaskToFile(myList);
                         } catch (DateTimeParseException e){
-                            System.out.println(" Please enter date as following\n");
-                            System.out.println(" YYYY-MM-DD");
+                            ui.showErrorMessage(" Please enter date as follows\n YYYY-MM-DD");
                         }
                     }
                 } catch(DukeException e) {

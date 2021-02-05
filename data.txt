@@ -1,4 +1,0 @@
-[T][✘] alnfd
-[T][✘] sad
-[D][✘] deadline (by: 2021-12-15)
-[E][✘] event (at: ldknsf)

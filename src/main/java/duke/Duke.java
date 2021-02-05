@@ -8,15 +8,13 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private Ui ui;
-
-
     public static void main(String[] args) throws DukeException, FileNotFoundException {
         Ui ui = new Ui();
         Parser parser = new Parser();
         Database database = new Database(ui.FILE_PATH);
         ArrayList<String> listOfTasks;
         ArrayList<Task> myList;
+        TaskList taskList = new TaskList();
         try {
             listOfTasks = database.readFile();
             myList = readInput(listOfTasks);
@@ -66,7 +64,6 @@ public class Duke {
                     parser.parseDefault(input,ui);
                     break;
             }
-
         }
     }
 
