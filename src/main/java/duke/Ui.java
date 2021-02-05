@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     public static void execute(Command command, TaskList taskList, String status) {
         switch (command) {
