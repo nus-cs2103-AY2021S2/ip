@@ -4,13 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Converter to convert date and time string inputs into LocalDateTime objects.
+ *
+ * @author  Nicole Ang
+ */
 public class DateTimeConverter {
     protected String[] inputSplit;
 
     /**
      * Constructs a new DateTimeConverter object to convert date and time Strings to LocalDate and LocalTime.
      *
-     * @param inputSplit  String input that has been split into description, date, from time and to time.
+     * @param inputSplit    String input that has been split into description, date, from time and to time.
      */
     public DateTimeConverter(String[] inputSplit) {
         this.inputSplit = inputSplit;
@@ -36,7 +41,7 @@ public class DateTimeConverter {
     /**
      * Returns LocalTime object converted from user inputted time of format h AM/PM.
      *
-     * @param s  Type of time, start (indicated by "from") or end (indicated by "to") time.
+     * @param s Type of time, start (indicated by "from") or end (indicated by "to") time.
      * @return LocalTime created from input time.
      */
     public LocalTime convertTime(String s) {

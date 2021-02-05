@@ -1,5 +1,10 @@
 package duke.error;
 
+/**
+ * Exception thrown when 'todo', 'deadline' or 'event' input is incorrectly formatted.
+ *
+ * @author  Nicole Ang
+ */
 public class IllegalTaskException extends StringIndexOutOfBoundsException {
     protected String taskType;
 
@@ -21,6 +26,6 @@ public class IllegalTaskException extends StringIndexOutOfBoundsException {
      */
     @Override
     public String toString() {
-        return "You forgot to enter the description of the " + taskType + "!\n" + "Please re-enter!";
+        return "Your input for the " + taskType + " task is not formatted correctly!\n" + "Please re-enter!";
     }
 }

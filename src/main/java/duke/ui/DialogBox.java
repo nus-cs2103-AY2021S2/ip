@@ -15,10 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-/**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+/**This control represents a dialog box consisting of an ImageView to represent the speaker's face, a label
+ * containing the speaker's name and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -51,23 +49,33 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
-//        tmp.addAll(messageContent);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         vbox.setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns dialogue box containing user's dialogue.
+     *
+     * @param text  Dialogue text.
+     * @param img   Image representing user.
+     * @return Dialogue box containing user's dialogue.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-//        var db = new DialogBox(text, img);
         var db = new DialogBox("user", text, img);
         db.flip();
         db.senderName.setId("userName");
         return db;
     }
 
+    /**
+     * Returns dialogue box containing bot's dialogue.
+     *
+     * @param text  Dialogue text.
+     * @param img   Image representing bot.
+     * @return Dialogue box containing bot's dialogue.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
-//        return new DialogBox(text, img);
-//        return new DialogBox("tabby", text, img);
         var db = new DialogBox("tabby", text, img);
         db.senderName.setId("tabbyName");
         return db;

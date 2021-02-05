@@ -1,5 +1,10 @@
 package duke.error;
 
+/**
+ * Exception thrown when 'find' input is incorrectly formatted.
+ *
+ * @author  Nicole Ang
+ */
 public class IllegalFindException extends StringIndexOutOfBoundsException {
     /**
      * Constructs a new IllegalFindException.

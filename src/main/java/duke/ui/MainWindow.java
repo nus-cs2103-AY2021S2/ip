@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user icon.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/tabby icon.png"));
 
+    /**
+     * Invokes display of welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -33,25 +36,33 @@ public class MainWindow extends AnchorPane {
         welcomeUser();
     }
 
+    /**
+     * Sets controller for application.
+     *
+     * @param d Controller.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
+    /**
+     * Displays welcome message.
+     */
     private void welcomeUser() {
-        String welcomeMessage = "Hi, I'm Tabby the task bot!\n" +
-                "I'll help you keep tabs on your to-dos, deadlines and events!\n" +
-                "Enter help for a summary of commands.";
-//        String input = userInput.getText();
-//        String response = duke.getResponse(input);
+        String welcomeMessage = "Hi, I'm Tabby the task bot!\n"
+                + "I'll help you keep tabs on your to-dos, deadlines and events!\n"
+                + "Enter help for a summary of commands.";
+        // String input = userInput.getText();
+        // String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(input, userImage),
+                // DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)
         );
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends
+     * them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {

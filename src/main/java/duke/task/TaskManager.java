@@ -1,42 +1,89 @@
 package duke.task;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+//import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import duke.Duke;
 import duke.datetime.DateTimeConverter;
 import duke.error.ErrorChecker;
 import duke.file.FileSaver;
 
+/**
+ * Task manager decides what type of action to take based on the user input.
+ *
+ * @author  Nicole Ang
+ */
 public class TaskManager {
     protected ArrayList<Task> tasks;
     protected FileSaver fileSaver;
 
-    protected final String HELP_RESPONSE = "list: list all tasks\ndone {i}: mark task at position {i} as done\n" +
-            "delete {i}: delete task at position {i}\nfind {keyword}: find and list all tasks containing {keyword}\n" +
-            "todo {description}: creates a new todo\ndeadline {description} /by {date}: creates a new deadline\n" +
-            "event {description} /on {date} /from {time} /to {time}: creates a new event";
+    private boolean isBye;
+    private boolean isHelp;
+    private boolean isList;
+    private boolean isDone;
+    private boolean isDelete;
+    private boolean isFind;
+    private boolean isTodo;
+    private boolean isDeadline;
+    private boolean isEvent;
 
+    private final String BYE_RESPONSE = "Bye! See you soon :)";
+    private final String HELP_RESPONSE = "list: list all tasks\ndone {i}: mark task at position {i} as done\n"
+            + "delete {i}: delete task at position {i}\nfind {keyword}: find and list all tasks containing {keyword}\n"
+            + "todo {description}: creates a new todo\ndeadline {description} /by {date}: creates a new deadline\n"
+            + "event {description} /on {date} /from {time} /to {time}: creates a new event";
+
+    /**
+     * Constructs a new TaskManager object to process tasks.
+     */
     public TaskManager() {
         tasks = new ArrayList<>();
         fileSaver = new FileSaver();
     }
 
+    /**
+     * Takes the user input and decides how to handle it.
+     * Returns a feedback message to let user know if action has been taken successfully or not.
+     *
+     * @param input User input.
+     * @param tasks Current task list.
+     * @return Feedback message.
+     */
     public String takeEvent(String input, ArrayList<Task> tasks) {
         this.tasks = tasks;
         ErrorChecker e = new ErrorChecker(input, tasks);
+        categoriseTask(input);
 
-        if (input.equals("help")) {
+        // if (input.equals("help")) {
+        //    return HELP_RESPONSE;
+        // } else if (input.equals("list")) {
+        //    return listEvents();
+        // } else if (e.isValid()) {
+        //    if (input.startsWith("done")) {
+        //        return markDone(input);
+        //    } else if (input.startsWith("delete")) {
+        //        return deleteTask(input);
+        //    } else if (input.startsWith("find")) {
+        //        return findTasks(input);
+        //    } else {
+        //        return addNewTask(input);
+        //    }
+        // } else {
+        //    return e.getMessage();
+        // }
+
+        if (isBye) {
+            return BYE_RESPONSE;
+        } else if (isHelp) {
             return HELP_RESPONSE;
-        } else if (input.equals("list")) {
+        } else if (isList) {
             return listEvents();
         } else if (e.isValid()) {
-            if (input.startsWith("done")) {
+            if (isDone) {
                 return markDone(input);
-            } else if (input.startsWith("delete")) {
+            } else if (isDelete) {
                 return deleteTask(input);
-            } else if (input.startsWith("find")) {
+            } else if (isFind) {
                 return findTasks(input);
             } else {
                 return addNewTask(input);
@@ -47,17 +94,47 @@ public class TaskManager {
 
     }
 
+    /**
+     * Categorises input into 'help', 'done', 'delete', 'find', 'todo', 'deadline' or 'event'.
+     *
+     * @param input User input.
+     */
+    public void categoriseTask(String input) {
+        isBye = input.equals("bye");
+        isHelp = input.equals("help");
+        isList = input.equals("list");
+        isDone = input.startsWith("done");
+        isDelete = input.startsWith("delete");
+        isFind = input.startsWith("find");
+        isTodo = input.startsWith("todo");
+        isDeadline = input.startsWith("deadline");
+        isEvent = input.startsWith("event");
+    }
+
+    /**
+     * Marks task as done.
+     *
+     * @param input User input.
+     * @return Feedback message letting user know task was successfully marked as done.
+     */
     public String markDone(String input) {
         Task task = tasks.get(Integer.parseInt(input.substring(5)) - 1);
         task.markAsDone();
         return "Good job! You got " + task.description + " done!";
     }
 
+    /**
+     * Adds new task to the task list.
+     * Saves an updated copy of current task list to local file.
+     *
+     * @param input User input.
+     * @return Feedback message letting user know task was successfully added to task list.
+     */
     public String addNewTask(String input) {
         Task newTask;
-        if (input.startsWith("todo")) {
+        if (isTodo) {
             newTask = new TodoTask(input.substring(5));
-        } else if (input.startsWith("deadline")) {
+        } else if (isDeadline) {
             String[] inputSplit = input.split("/");
             DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
             newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1),
@@ -69,36 +146,47 @@ public class TaskManager {
                     dateTimeConverter.convertDate(), dateTimeConverter.convertTime("from"),
                     dateTimeConverter.convertTime("to"));
         }
-//        return "fine up till here";
         tasks.add(newTask);
 
-//        try {
-//            fileSaver.saveToFile("DukeList.txt", tasks);
-//        } catch (IOException ex) {
-////            System.out.println("File path not found: " + ex.getMessage());
-//            return "File path not found: " + ex.getMessage();
-//        }
+        try {
+            fileSaver.saveToFile("DukeList.txt", tasks);
+        } catch (IOException ex) {
+            return "File path not found: " + ex.getMessage();
+        }
 
-        return "Added: " + newTask.toString() ;
+        return "Added: " + newTask.toString();
     }
 
+    /**
+     * Deletes task from the task list.
+     * Saves an updated copy of current task list to local file.
+     *
+     * @param input User input.
+     * @return Feedback message letting user know task was successfully deleted from task list.
+     */
     public String deleteTask(String input) {
         Task task = tasks.get(Integer.parseInt(input.substring(7)) - 1);
         tasks.remove(Integer.parseInt(input.substring(7)) - 1);
 
-//        try {
-//            fileSaver.saveToFile("DukeList.txt", tasks);
-//        } catch (IOException ex) {
-////            System.out.println("File path not found: " + ex.getMessage());
-//            return "File path not found: " + ex.getMessage();
-//        }
+        try {
+            fileSaver.saveToFile("DukeList.txt", tasks);
+        } catch (IOException ex) {
+            return "File path not found: " + ex.getMessage();
+        }
 
         return "Deleted: " + task.toString();
     }
 
+    /**
+     * Finds tasks containing a specified keyword in their description.
+     * Tasks are listed with their position in the task list displayed.
+     *
+     * @param input User input.
+     * @return List of tasks containing the keyword in their description.
+     */
     public String findTasks(String input) {
         String description = input.substring(5);
-        String output = "Here is a list of your tasks that contain " + description +":";
+        String output = "Here is a list of your tasks that contain " + description + ":";
 
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).description.contains(description)) {
@@ -106,11 +194,14 @@ public class TaskManager {
             }
         }
 
-//        System.out.println(Duke.LINE);
-//        output = output + "\n" + Duke.LINE;
         return output;
     }
 
+    /**
+     * Lists all tasks in the task list in the order they were added.
+     *
+     * @return Task list.
+     */
     public String listEvents() {
         String output = "Here is a list of your tasks:";
 
@@ -118,99 +209,6 @@ public class TaskManager {
             output = output + "\n" + (i + 1) + ". " + tasks.get(i).toString();
         }
 
-//        output = output + "\n" + Duke.LINE;
         return output;
     }
-
-
-
-//    public void takeEvent(String input, ArrayList<Task> tasks) {
-//        this.tasks = tasks;
-//        ErrorChecker e = new ErrorChecker(input, tasks);
-//
-//        if (input.equals("list")) {
-//            listEvents();
-//            return;
-//        } else if (e.isValid()) {
-//            if (input.startsWith("done")) {
-//                markDone(input);
-//            } else if (input.startsWith("delete")) {
-//                deleteTask(input);
-//            } else if (input.startsWith("find")) {
-//                findTasks(input);
-//            } else {
-//                addNewTask(input);
-//            }
-//        }
-//
-//    }
-
-//    public void markDone(String input) {
-//        Task task = tasks.get(Integer.parseInt(input.substring(5)) - 1);
-//        task.markAsDone();
-//        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Good job! You got " + task.description
-//                + " done!\n" + Duke.LINE);
-//    }
-//
-//    public void addNewTask(String input) {
-//        Task newTask;
-//        if (input.startsWith("todo")) {
-//            newTask = new TodoTask(input.substring(5));
-//        } else if (input.startsWith("deadline")) {
-//            String[] inputSplit = input.split("/");
-//            DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
-//            newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1),
-//                    dateTimeConverter.convertDate());
-//        } else {
-//            String[] inputSplit = input.split("/");
-//            DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
-//            newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1),
-//                    dateTimeConverter.convertDate(), dateTimeConverter.convertTime("from"),
-//                    dateTimeConverter.convertTime("to"));
-//        }
-//        tasks.add(newTask);
-//
-//        try {
-//            fileSaver.saveToFile("DukeList.txt", tasks);
-//        } catch (IOException ex) {
-//            System.out.println("File path not found: " + ex.getMessage());
-//        }
-//
-//        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Added: " + newTask.toString() + "\n" + Duke.LINE);
-//    }
-//
-//    public void deleteTask(String input) {
-//        Task task = tasks.get(Integer.parseInt(input.substring(7)) - 1);
-//        tasks.remove(Integer.parseInt(input.substring(7)) - 1);
-//
-//        try {
-//            fileSaver.saveToFile("DukeList.txt", tasks);
-//        } catch (IOException ex) {
-//            System.out.println("File path not found: " + ex.getMessage());
-//        }
-//
-//        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Deleted: " + task.toString() + "\n" + Duke.LINE);
-//    }
-//
-//    public void findTasks(String input) {
-//        String description = input.substring(5);
-//
-//        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Here is a list of your tasks:");
-//
-//        for (int i = 0; i < tasks.size(); i++) {
-//            if (tasks.get(i).description.contains(description)) {
-//                System.out.println("" + (char) 9 + (char) 9 + (char) 9 + (i + 1) + ". " + tasks.get(i).toString());
-//            }
-//        }
-//
-//        System.out.println(Duke.LINE);
-//    }
-//
-//    public void listEvents() {
-//        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Here is a list of your tasks:");
-//        for (int i = 0; i < tasks.size(); i++) {
-//            System.out.println("" + (char) 9 + (char) 9 + (char) 9 + (i + 1) + ". " + tasks.get(i).toString());
-//        }
-//        System.out.println(Duke.LINE);
-//    }
 }

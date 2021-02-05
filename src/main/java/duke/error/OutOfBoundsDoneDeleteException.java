@@ -1,5 +1,10 @@
 package duke.error;
 
+/**
+ * Exception thrown when task to delete or mark as done does not exist.
+ *
+ * @author  Nicole Ang
+ */
 public class OutOfBoundsDoneDeleteException extends IndexOutOfBoundsException {
     /**
      * Constructs a new OutOfBoundsDoneDeleteException.

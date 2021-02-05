@@ -1,6 +1,2 @@
-[T][ ] read book
-[D][X] return book (by: 2021-06-06)
-[T][X] join sports club
-[D][ ] return book (by: 2021-12-31)
 [E][ ] project meeting (on: 2021-08-12, 14:00 - 16:00)
-[E][ ] project meeting (on: 2021-08-08, 19:00 - 21:00)
+[T][ ] read book

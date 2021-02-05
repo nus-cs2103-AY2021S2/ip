@@ -1,5 +1,10 @@
 package duke.error;
 
+/**
+ * Exception thrown when task to delete or mark as done is not specified.
+ *
+ * @author  Nicole Ang
+ */
 public class IllegalDoneDeleteException extends StringIndexOutOfBoundsException {
     protected String taskType;
 

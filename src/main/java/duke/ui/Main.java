@@ -16,6 +16,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Sets up the GUI.
+     *
+     * @param stage JavaFX stage for the task bot application.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -27,7 +32,6 @@ public class Main extends Application {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-//            e.getCause();
         }
     }
 }

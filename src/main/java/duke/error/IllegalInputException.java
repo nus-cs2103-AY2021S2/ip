@@ -1,5 +1,10 @@
 package duke.error;
 
+/**
+ * Exception thrown when input is not of the valid types.
+ *
+ * @author  Nicole Ang
+ */
 public class IllegalInputException extends IllegalArgumentException {
     /**
      * Constructs a new IllegalInputException.
