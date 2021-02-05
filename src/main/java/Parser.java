@@ -16,6 +16,7 @@ public class Parser {
 
     /**
      * Creates a new instance of a Parser to make sense of user command.
+     *
      * @param storage Storage of tasks on hard disk.
      * @param tasks List of user's tasks.
      * @param ui Ui for user interaction.
@@ -31,19 +32,19 @@ public class Parser {
      * @throws IOException On file error when adding the ToDo task
      * to the file in the hard disk.
      */
-    public void handleToDo() throws IOException {
+    public String handleToDo() throws IOException {
         String descriptionTask = command.substring(index + 1);
         ToDo newToDo = new ToDo(descriptionTask);
 
         tasks.add(newToDo);
         storage.addTask(newToDo);
-        ui.responseToAddTask(newToDo, tasks.getSize());
+        return ui.responseToAddTask(newToDo, tasks.getSize());
     }
 
     /**
      * Handles the Deadline command.
      */
-    public void handleDeadline() {
+    public String handleDeadline() {
         try {
             Validation.checkForSchedule(command, findSlash);
             String descriptionDeadline = command.substring(index + 1, findSlash - 1);
@@ -52,17 +53,17 @@ public class Parser {
 
             tasks.add(newDeadline);
             storage.addTask(newDeadline);
-            ui.responseToAddTask(newDeadline, tasks.getSize());
+            return ui.responseToAddTask(newDeadline, tasks.getSize());
 
         } catch (DukeException | IOException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
     /**
      * Handles the Event command.
      */
-    public void handleEvent() {
+    public String handleEvent() {
         try {
             Validation.checkForSchedule(command, findSlash);
             String descriptionEvent = command.substring(index + 1, findSlash - 1);
@@ -71,34 +72,34 @@ public class Parser {
 
             tasks.add(newEvent);
             storage.addTask(newEvent);
-            ui.responseToAddTask(newEvent, tasks.getSize());
+            return ui.responseToAddTask(newEvent, tasks.getSize());
 
         } catch (DukeException | IOException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
     /**
      * Handles the Done command.
      */
-    public void handleDone() {
+    public String handleDone() {
         try {
             taskIdentifier = Integer.parseInt(command.substring(index + 1));
             Validation.checkValidRange(tasks.getSize(), taskIdentifier);
             Task toMark = tasks.find(taskIdentifier - 1);
 
             storage.markTask(toMark);
-            ui.responseToDone(toMark);
+            return ui.responseToDone(toMark);
 
         } catch (DukeException | IOException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
     /**
      * Handles the Delete command.
      */
-    public void handleDelete() {
+    public String handleDelete() {
         try {
             taskIdentifier = Integer.parseInt(command.substring(index + 1));
             Validation.checkValidRange(tasks.getSize(), taskIdentifier);
@@ -106,27 +107,30 @@ public class Parser {
 
             tasks.delete(taskIdentifier - 1);
             storage.deleteTask(selected);
-            ui.responseToDelete(selected, tasks.getSize());
+            return ui.responseToDelete(selected, tasks.getSize());
 
         } catch (DukeException | IOException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
     /**
      * Handles the Find command.
      */
-    public void handleFind() {
+    public String handleFind() {
         String keyword = command.substring(index + 1);
-        tasks.findWithKeyword(keyword);
+        return tasks.findWithKeyword(keyword);
     }
 
     /**
      * Main method to make sense of the user command and to determine
      * which command it is.
+     *
      * @param command User's command input.
      */
-    public void handleCommand(String command) {
+    public String handleCommand(String command) {
+        System.out.println("HERE !!!!!");
+        String output = "";
         this.command = command;
         try {
             Validation.checkValidCommand(command);
@@ -137,22 +141,22 @@ public class Parser {
                 String type = command.substring(0, index);
                 switch (type) {
                 case "todo":
-                    handleToDo();
+                    output = handleToDo();
                     break;
                 case "deadline":
-                    handleDeadline();
+                    output = handleDeadline();
                     break;
                 case "event":
-                    handleEvent();
+                    output = handleEvent();
                     break;
                 case "done":
-                    handleDone();
+                    output = handleDone();
                     break;
                 case "delete":
-                    handleDelete();
+                    output = handleDelete();
                     break;
                 case "find":
-                    handleFind();
+                    output = handleFind();
                     break;
                 default:
                     break;
@@ -160,18 +164,19 @@ public class Parser {
             } else {
                 switch (command) {
                 case "bye":
-                    ui.responseToBye();
+                    output = ui.responseToBye();
                     break;
                 case "list":
-                    ui.responseToList(tasks.getSize());
-                    tasks.list();
+                    output = ui.responseToList(tasks.getSize()) + "\n" + tasks.list();
                     break;
                 default:
                     break;
                 }
             }
+            System.out.println(output);
+            return output;
         } catch (DukeException | IOException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 

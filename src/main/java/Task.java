@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Creates a new instance of a Task.
+     *
      * @param name Description of task.
      */
     public Task(String name) {
