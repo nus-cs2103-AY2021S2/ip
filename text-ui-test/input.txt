@@ -1,13 +1,13 @@
 todo wakeup
 bla
-event field trip at 7am
+event field trip at 2020-01-20
 todo bring bread
-deadline project by thursday 2359
+deadline project by 2020-01-21
 done 1
 done 3
 list
 deadline
-deadline lab excel by wednesday 9pm
+deadline lab excel by 2020-01-22
 done 4
 list
 delete 5

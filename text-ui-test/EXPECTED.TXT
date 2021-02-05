@@ -14,7 +14,7 @@ Now you have 1 tasks in the list.
 :( OOPS! i'm sorry but i don't know what that means.
 ----------------------------------------------------------
 Got it. I've added this task:
-[E][ ] field trip (at: 7am)
+[E][ ] field trip (at: Jan 20 2020)
 Now you have 2 tasks in the list.
 ----------------------------------------------------------
 Got it. I've added this task:
@@ -22,7 +22,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ----------------------------------------------------------
 Got it. I've added this task:
-[D][ ] project (by: thursday 2359)
+[D][ ] project (by: Jan 21 2020)
 Now you have 4 tasks in the list.
 ----------------------------------------------------------
 Wahoo you completed one task!
@@ -30,30 +30,29 @@ Wahoo you completed one task!
 Wahoo you completed one task!
 ----------------------------------------------------------
 1. [T][✓] wakeup
-2. [E][ ] field trip (at: 7am)
+2. [E][ ] field trip (at: Jan 20 2020)
 3. [T][✓] bring bread
-4. [D][ ] project (by: thursday 2359)
+4. [D][ ] project (by: Jan 21 2020)
 ----------------------------------------------------------
 :( OOPS! the description of a task cannot be empty.
 ----------------------------------------------------------
 Got it. I've added this task:
-[D][ ] lab excel (by: wednesday 9pm)
+[D][ ] lab excel (by: Jan 22 2020)
 Now you have 5 tasks in the list.
 ----------------------------------------------------------
 Wahoo you completed one task!
 ----------------------------------------------------------
 1. [T][✓] wakeup
-2. [E][ ] field trip (at: 7am)
+2. [E][ ] field trip (at: Jan 20 2020)
 3. [T][✓] bring bread
-4. [D][✓] project (by: thursday 2359)
-5. [D][ ] lab excel (by: wednesday 9pm)
+4. [D][✓] project (by: Jan 21 2020)
+5. [D][ ] lab excel (by: Jan 22 2020)
 ----------------------------------------------------------
 Task deleted.
 ----------------------------------------------------------
 1. [T][✓] wakeup
-2. [E][ ] field trip (at: 7am)
+2. [E][ ] field trip (at: Jan 20 2020)
 3. [T][✓] bring bread
-4. [D][✓] project (by: thursday 2359)
+4. [D][✓] project (by: Jan 21 2020)
 ----------------------------------------------------------
 Byebye~ Hope to see you again soon!
-----------------------------------------------------------
