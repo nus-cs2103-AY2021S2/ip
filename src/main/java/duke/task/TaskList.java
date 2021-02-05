@@ -29,7 +29,7 @@ public class TaskList {
         taskList.add(newTask);
         return Ui.printFormatMessage("Got it. I've added this task:\n"
                 + newTask.toString() + "\nNow you have " + taskList.size()
-                + " taskList in the list.");
+                + " tasks in the list.");
     }
 
     /**
