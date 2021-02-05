@@ -2,10 +2,11 @@ package Commands;
 
 import Tasks.Event;
 import Tasks.TaskList;
+import UserInterface.Ui;
 
 import java.time.LocalDateTime;
 
-public class AddEventCommand extends AddCommand {
+public class AddEventCommand extends Command {
     private final String description;
     private final LocalDateTime at;
 
@@ -14,8 +15,13 @@ public class AddEventCommand extends AddCommand {
         this.at = at;
     }
 
-    public void execute(TaskList tasks) {
+    public boolean isExit() {
+        return false;
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
         Event event = new Event(this.description, this.at);
-        this.executeAddTask(tasks, event);
+        tasks.addTask(event);
+        ui.handleAddTask(tasks, event);
     }
 }

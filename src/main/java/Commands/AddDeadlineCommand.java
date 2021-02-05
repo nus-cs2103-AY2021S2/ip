@@ -2,10 +2,11 @@ package Commands;
 
 import Tasks.Deadline;
 import Tasks.TaskList;
+import UserInterface.Ui;
 
 import java.time.LocalDateTime;
 
-public class AddDeadlineCommand extends AddCommand {
+public class AddDeadlineCommand extends Command {
     private final String description;
     private final LocalDateTime by;
 
@@ -14,8 +15,13 @@ public class AddDeadlineCommand extends AddCommand {
         this.by = by;
     }
 
-    public void execute(TaskList tasks) {
+    public boolean isExit() {
+        return false;
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
         Deadline deadline = new Deadline(this.description, this.by);
-        this.executeAddTask(tasks, deadline);
+        tasks.addTask(deadline);
+        ui.handleAddTask(tasks, deadline);
     }
 }

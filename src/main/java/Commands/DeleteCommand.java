@@ -2,6 +2,7 @@ package Commands;
 
 import Tasks.Task;
 import Tasks.TaskList;
+import UserInterface.Ui;
 
 public class DeleteCommand extends Command {
     private final String description;
@@ -10,11 +11,10 @@ public class DeleteCommand extends Command {
         this.description = description;
     }
 
-    public void execute(TaskList tasks) {
+    public void execute(TaskList tasks, Ui ui) {
         Task deletedTask = tasks.popTaskByIndex(Integer.parseInt(description));
         if (null != deletedTask) {
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(deletedTask.getStatusString());
+            ui.handleDelete(deletedTask);
         }
     }
 
