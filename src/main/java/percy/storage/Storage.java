@@ -22,21 +22,25 @@ import percy.task.Todo;
  */
 public class Storage {
     private static final String DELIMITER = " \\| ";
+    private final String filePath = "./data/percy.txt";
+
     private File file;
-    private final String filePath = "data/percy.txt";
 
     /**
      * Constructs storage.
      */
     public Storage() {
         this.file = new File(filePath);
-        /*
-        // assert file != null;
-        if (!this.file.exists()) { // If file does not exist, folder does not exist
-            file.getParentFile().mkdir(); // Creates data folder
-            file.createNewFile(); // throws IOException  create a file in abstract directory
+        assert file != null;
+        try {
+            if (!this.file.exists()) { // If file does not exist, folder does not exist
+                file.getParentFile().mkdir(); // Creates data folder
+                file.createNewFile(); // throws IOException  create a file in abstract directory
+            }
         }
-        */
+        catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
 
     /**

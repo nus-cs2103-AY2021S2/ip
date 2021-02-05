@@ -10,7 +10,7 @@ checkstyle {
 }
 
 shadowJar {
-    mainClassName = 'Percy'
+    mainClassName = 'Launcher'
 }
 
 repositories {
