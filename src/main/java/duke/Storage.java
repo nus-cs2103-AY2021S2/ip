@@ -38,11 +38,11 @@ public class Storage {
             }
         } else {
             try {
-                FileInputStream fis = new FileInputStream(savedTasks);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                TaskList result = (TaskList) ois.readObject();
-                ois.close();
-                fis.close();
+                FileInputStream fileInputStream = new FileInputStream(savedTasks);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                TaskList result = (TaskList) objectInputStream.readObject();
+                objectInputStream.close();
+                fileInputStream.close();
                 return result;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -60,11 +60,11 @@ public class Storage {
         File dir = new File("data");
         File savedTasks = new File(dir, "saved_tasks");
         try {
-            FileOutputStream fos = new FileOutputStream(savedTasks);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(tasks);
-            oos.close();
-            fos.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(savedTasks);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(tasks);
+            objectOutputStream.close();
+            fileOutputStream.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

@@ -39,8 +39,8 @@ public class Parser {
      *                       the description of the ToDo after the command.
      */
     public ToDo parseToDo(String input) throws DukeException {
-        String[] arr = input.split(" ");
-        if (arr.length < 2) {
+        String[] words = input.split(" ");
+        if (words.length < 2) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         return new ToDo(input.substring(5));
@@ -57,21 +57,21 @@ public class Parser {
      *                       or when the date and time is not in the correct format.
      */
     public Deadline parseDeadline(String input) throws DukeException {
-        String[] arr = input.split(" ");
-        String[] arr2 = input.split(" /by ");
-        if (arr.length < 2 || arr2[0].split(" ").length < 2) {
+        String[] words = input.split(" ");
+        String[] numSentenceParts = input.split(" /by ");
+        if (words.length < 2 || numSentenceParts[0].split(" ").length < 2) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
-        if (arr2.length < 2) {
+        if (numSentenceParts.length < 2) {
             throw new DukeException("OOPS!!! You did not set a deadline using '/by'.");
         }
         LocalDateTime deadlineDate;
         try {
-            deadlineDate = LocalDateTime.parse(arr2[1], INPUT_DATETIME_FORMAT);
+            deadlineDate = LocalDateTime.parse(numSentenceParts[1], INPUT_DATETIME_FORMAT);
         } catch (DateTimeParseException dateTimeParseException) {
             throw new DukeException("OOPS!!! Please input date and time in the following format: dd-MM-yyyy HHmm.");
         }
-        return new Deadline(arr2[0].substring(9), deadlineDate);
+        return new Deadline(numSentenceParts[0].substring(9), deadlineDate);
     }
 
     /**
@@ -85,21 +85,21 @@ public class Parser {
      *                       or when the date and time is not in the correct format.
      */
     public Event parseEvent(String input) throws DukeException {
-        String[] arr = input.split(" ");
-        String[] arr3 = input.split(" /at ");
-        if (arr.length < 2 || arr3[0].split(" ").length < 2) {
+        String[] words = input.split(" ");
+        String[] numSentenceParts = input.split(" /at ");
+        if (words.length < 2 || words[0].split(" ").length < 2) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
-        if (arr3.length < 2) {
+        if (numSentenceParts.length < 2) {
             throw new DukeException("OOPS!!! You did not set the date/time of the event using '/at'.");
         }
         LocalDateTime eventDate;
         try {
-            eventDate = LocalDateTime.parse(arr3[1], INPUT_DATETIME_FORMAT);
+            eventDate = LocalDateTime.parse(numSentenceParts[1], INPUT_DATETIME_FORMAT);
         } catch (DateTimeParseException dateTimeParseException) {
             throw new DukeException("OOPS!!! Please input date and time in the following format: dd-MM-yyyy HHmm.");
         }
-        return new Event(arr3[0].substring(6), eventDate);
+        return new Event(numSentenceParts[0].substring(6), eventDate);
     }
 
     /**
@@ -114,12 +114,12 @@ public class Parser {
      */
     public int parseDone(String input, TaskList taskList) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
-        String[] arr = input.split(" ");
-        if (arr.length < 2) {
+        String[] words = input.split(" ");
+        if (words.length < 2) {
             throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
         }
         try {
-            int argument = Integer.parseInt(arr[1]);
+            int argument = Integer.parseInt(words[1]);
             if (argument < 1 || argument > tasks.size()) {
                 throw new DukeException("OOPS!!! The numbered task does not exist.");
             }
@@ -141,12 +141,12 @@ public class Parser {
      */
     public int parseDelete(String input, TaskList taskList) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
-        String[] arr = input.split(" ");
-        if (arr.length < 2) {
+        String[] words = input.split(" ");
+        if (words.length < 2) {
             throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
         }
         try {
-            int argument = Integer.parseInt(arr[1]);
+            int argument = Integer.parseInt(words[1]);
             if (argument < 1 || argument > tasks.size()) {
                 throw new DukeException("OOPS!!! The numbered task does not exist.");
             }
@@ -165,13 +165,13 @@ public class Parser {
      *                       or none at all.
      */
     public String parseKeyword(String input) throws DukeException {
-        String[] arr = input.split(" ");
-        if (arr.length < 2) {
+        String[] words = input.split(" ");
+        if (words.length < 2) {
             throw new DukeException("OOPS!!! Please enter a keyword.");
         }
-        if (arr.length > 2) {
+        if (words.length > 2) {
             throw new DukeException("OOPS!!! Please enter only one keyword.");
         }
-        return arr[1];
+        return words[1];
     }
 }

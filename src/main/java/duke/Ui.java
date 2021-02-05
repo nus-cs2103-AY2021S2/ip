@@ -9,16 +9,14 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    protected static String lineSpacing = "____________________________________________________________";
-
-    protected static String taskConfirmation = "Got it. I've added this task:\n";
+    protected static final String TASK_CONFIRMATION = "Got it. I've added this task:\n";
 
     /**
      * Prints a greeting message for the user
      * when the Duke program starts.
      */
     public void greet() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n" + lineSpacing);
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
     /**
@@ -32,107 +30,114 @@ public class Ui {
     }
 
     /**
-     * Prints a message informing the user
+     * Returns a String message informing the user
      * of the Task added to the TaskList
      * along with the total number of Tasks in the TaskList.
      *
      * @param t        the Task that was added to the TaskList.
      * @param taskList the TaskList in which the Task was added to.
+     * @return String message informing the user of the Task added to the TaskList.
      */
-    public void printTaskAddedConfirmation(Task t, TaskList taskList) {
+    public String getTaskAddedConfirmation(Task t, TaskList taskList) {
         int numTasks = taskList.getTasks().size();
-        System.out.println(taskConfirmation + t
+        return TASK_CONFIRMATION + t
                 + "\nNow you have " + numTasks
-                + (numTasks < 2 ? " task " : " tasks ") + "in the list.\n"
-                + lineSpacing);
+                + (numTasks < 2 ? " task " : " tasks ") + "in the list.\n";
     }
 
     /**
-     * Prints the details of all the Tasks in the TaskList
-     * in numerical order.
+     * Returns a String message containing the details of
+     * all the Tasks in the TaskList in numerical order.
      *
      * @param taskList the TaskList containing the Tasks to be printed.
+     * @return String message containing all Tasks in the TaskList.
      */
-    public void listTasks(TaskList taskList) {
+    public String getAllTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         if (tasks.isEmpty()) {
-            System.out.println("There are no tasks in your list. Hooray!\n" + lineSpacing);
-            return;
+            return "There are no tasks in your list. Hooray!\n";
+        } else {
+            String message = "Here are the tasks in your list:\n";
+            int num = 1;
+            for (Task task : tasks) {
+                message += (num + "." + task + "\n");
+                num++;
+            }
+            return message;
         }
-        System.out.println("Here are the tasks in your list:");
-        int num = 1;
-        for (Task task : tasks) {
-            System.out.println(num + "." + task);
-            num++;
-        }
-        System.out.println(lineSpacing);
     }
 
     /**
-     * Prints a message informing the user
+     * Returns a String message informing the user
      * of the Task that was marked as done.
      *
      * @param task the Task that was marked as done.
+     * @return String message of the Task marked as done.
      */
-    public void printTaskDoneConfirmation(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task
-                + "\n" + lineSpacing);
+    public String getTaskDoneConfirmation(Task task) {
+        return "Nice! I've marked this task as done:\n" + task
+                + "\n";
     }
 
     /**
-     * Prints a message informing the user
+     * Returns a String message informing the user
      * of the Task that was deleted from the TaskList
      * along with the remaining number of Tasks in that TaskList.
      *
      * @param taskList the TaskList from which the Task was deleted.
      * @param task     the Task to be deleted.
+     * @return String message of deleted Task.
      */
-    public void printTaskDeleteConfirmation(TaskList taskList, Task task) {
+    public String getTaskDeleteConfirmation(TaskList taskList, Task task) {
         ArrayList<Task> tasks = taskList.getTasks();
-        System.out.println("Noted! I've removed this task:\n" + task
+        return "Noted! I've removed this task:\n" + task
                 + "\nNow you have " + tasks.size()
-                + (tasks.size() == 1 ? " task " : " tasks ") + "in the list.\n"
-                + lineSpacing);
+                + (tasks.size() == 1 ? " task " : " tasks ") + "in the list.\n";
     }
 
     /**
-     * Prints the details of all the Tasks in the TaskList,
+     * Returns a String message containing the details
+     * of all the Tasks in the TaskList,
      * that matched a keyword input by the user,
      * in numerical order.
      *
      * @param taskList the TaskList containing the matched Tasks to be printed.
+     * @return String message containing matching Tasks.
      */
-    public void printMatchingTasks(TaskList taskList) {
+    public String getMatchingTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         if (tasks.isEmpty()) {
-            System.out.println("There are no matching tasks in your list. :(\n" + lineSpacing);
+            return "There are no matching tasks in your list. :(\n";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String message = "Here are the matching tasks in your list:\n";
             int num = 1;
             for (Task task : tasks) {
-                System.out.println(num + "." + task);
+                message += (num + "." + task) + "\n";
                 num++;
             }
-            System.out.println(lineSpacing);
+            return message;
         }
     }
 
     /**
-     * Prints a message that signals
+     * Returns a String message that signals
      * the termination of the Duke program.
+     *
+     * @return String message that signals termination.
      */
-    public void printByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!\n" + lineSpacing);
+    public String getByeMessage() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
-     * Prints a message informing the user that
+     * Returns a String message informing the user that
      * user input was invalid along with the error message.
      *
      * @param e the DukeException containing the details of the error.
+     * @return String message containing error.
      */
-    public void printDukeExceptionMessage(DukeException e) {
-        System.out.println("Duke has encountered an error: " + e.getMessage()
-                + "\n" + lineSpacing);
+    public String getDukeExceptionMessage(DukeException e) {
+        return "Duke has encountered an error:\n" + e.getMessage()
+                + "\n";
     }
 }
