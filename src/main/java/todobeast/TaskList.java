@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Wrapper class that stores all tasks for the application into a List.
  */
 public class TaskList {
-    private List<Task> taskList;
+    protected List<Task> taskList;
 
     public TaskList(List<Task> taskList) {
         this.taskList = new ArrayList<>(taskList);
