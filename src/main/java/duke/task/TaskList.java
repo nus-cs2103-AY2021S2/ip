@@ -3,7 +3,6 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import duke.DukeException;
 
@@ -72,9 +71,7 @@ public class TaskList {
             }
             List<Task> targetTasks =
                     taskList.stream()
-                            .filter(task -> {
-                                return task.getName().contains(target);
-                            })
+                            .filter(task -> task.getName().contains(target))
                             .collect(Collectors.toList());
             if (targetTasks.size() != 0) {
                 return printSpecifiedTasks(targetTasks);
