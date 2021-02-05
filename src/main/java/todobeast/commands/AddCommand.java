@@ -1,6 +1,7 @@
 package todobeast.commands;
 
-import todobeast.*;
+import todobeast.TaskList;
+import todobeast.Ui;
 import todobeast.exceptions.InvalidInputException;
 import todobeast.tasks.Deadline;
 import todobeast.tasks.Event;

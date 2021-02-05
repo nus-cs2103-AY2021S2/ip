@@ -1,6 +1,12 @@
 package todobeast;
 
-import todobeast.commands.*;
+import todobeast.commands.Command;
+import todobeast.commands.AddCommand;
+import todobeast.commands.ExitCommand;
+import todobeast.commands.DeleteCommand;
+import todobeast.commands.DoneCommand;
+import todobeast.commands.ListCommand;
+import todobeast.commands.TaskType;
 import todobeast.exceptions.InvalidCommandException;
 import todobeast.exceptions.InvalidInputException;
 import todobeast.exceptions.ToDoBeastException;

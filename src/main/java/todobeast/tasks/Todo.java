@@ -1,7 +1,5 @@
 package todobeast.tasks;
 
-import todobeast.tasks.Task;
-
 public class Todo extends Task {
     public Todo(String toDoDescription) {
         super(toDoDescription);

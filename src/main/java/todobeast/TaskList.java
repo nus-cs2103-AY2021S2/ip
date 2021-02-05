@@ -1,16 +1,10 @@
 package todobeast;
 
-import todobeast.tasks.Deadline;
-import todobeast.tasks.Event;
-import todobeast.tasks.Task;
-import todobeast.tasks.Todo;
 
-import java.time.LocalDate;
+import todobeast.tasks.Task;
+
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import java.time.format.DateTimeFormatter;
 
 public class TaskList {
     public List<Task> taskList;
@@ -56,12 +50,4 @@ public class TaskList {
         return outputString.toString();
     }
 
-    public void printTaskList() {
-        int count = 1;
-        System.out.print(Ui.line);
-        for (Task task : taskList) {
-            System.out.println("\t" + count++ + ". " + task);
-        }
-        System.out.println(Ui.line);
-    }
 }

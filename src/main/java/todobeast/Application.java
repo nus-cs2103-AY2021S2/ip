@@ -2,13 +2,8 @@ package todobeast;
 
 import todobeast.commands.Command;
 import todobeast.exceptions.ToDoBeastException;
-import todobeast.tasks.Deadline;
-import todobeast.tasks.Event;
-import todobeast.tasks.Task;
-import todobeast.tasks.Todo;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
