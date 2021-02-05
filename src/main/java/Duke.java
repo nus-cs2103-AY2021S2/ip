@@ -1,5 +1,6 @@
 import Tasks.*;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Duke {
@@ -20,8 +21,8 @@ public class Duke {
 
             String action = handler.getAction();
             String description = handler.getDescription();
-            String by = handler.getBy();
-            String at = handler.getAt();
+            LocalDateTime by = handler.getBy();
+            LocalDateTime at = handler.getAt();
 
             switch (action) {
                 case "bye":

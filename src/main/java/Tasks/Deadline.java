@@ -1,15 +1,19 @@
 package Tasks;
 
-public class Deadline extends Task {
-    private final String by;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private final LocalDateTime by;
+
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
     private String getByString() {
-        return "(by: " + this.by + ")";
+        String byString = this.by.format(DateTimeFormatter.ofPattern("dd MMM uuuu, HH:mm"));
+        return "(by: " + byString + ")";
     }
 
     public String getStatusString() {
