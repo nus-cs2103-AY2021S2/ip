@@ -23,8 +23,8 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        Label header = new Label("Welcome to EventLab!"); // Creating a new Label control
+        Scene scene = new Scene(header); // Setting the scene to be our Label
 
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
@@ -44,7 +44,6 @@ public class Duke extends Application {
             Command c = new Command("null");
             c.execute();
             output= Parser.parse(tasks, input);
-            System.out.println("output is " + output);
         } catch (DukeException | IOException e) {
             return ui.showError(e.getMessage());
         }
