@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
     private GUIDuke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
