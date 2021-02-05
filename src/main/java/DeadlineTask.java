@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a deadline task.
  */
@@ -9,9 +14,21 @@ public class DeadlineTask extends Task {
      * Creates a new instance of <code>DeadlineTask</code>.
      * @param description Description of deadline task.
      */
-    public DeadlineTask(String description, String deadlline) {
+    public DeadlineTask(String description, String deadline) {
         super(description);
-        this.deadline = deadlline;
+        this.deadline = deadline;
+    }
+
+    public LocalDate getDeadlineDate() {
+        String[] deadlineArr = this.deadline.split(" ");
+        LocalDate deadlineDate = LocalDate.parse(deadlineArr[0]);
+        return deadlineDate;
+    }
+
+    public LocalTime getDeadlineTime() {
+        String[] deadlineArr = this.deadline.split(" ");
+        LocalTime deadlineTime = LocalTime.parse(deadlineArr[1]);
+        return deadlineTime;
     }
 
     /**
@@ -21,6 +38,7 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return "[D]" + "[" + getStatusIcon() + "] " + this.description
-                + " (by: " + this.deadline + ")";
+                + " (by: " + this.getDeadlineDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + this.getDeadlineTime().format(DateTimeFormatter.ofPattern("h:mma")) + ")";
     }
 }

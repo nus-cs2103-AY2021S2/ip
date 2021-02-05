@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -59,12 +61,17 @@ public class Duke {
                 } else if (inputArr[0].equals("done")) {
                     int taskNo = Integer.parseInt(inputArr[1]);
                     taskList.getTask(taskNo).markAsDone();
+                } else if (inputArr[0].equals("taskdate")) {
+                    LocalDate date = LocalDate.parse(inputArr[1]);
+                    taskList.printTasksOn(date);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
             } catch (DukeException e) {
                 System.out.println(e);
+            } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
             }
         }
 

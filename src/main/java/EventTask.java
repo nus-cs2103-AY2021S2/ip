@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a event task.
  */
@@ -14,6 +18,19 @@ public class EventTask extends Task {
         this.eventDate = eventDate;
     }
 
+    public LocalDate getEventDateDate() {
+        String[] eventDateArr = this.eventDate.split(" ");
+        LocalDate eventDateDate = LocalDate.parse(eventDateArr[0]);
+        return eventDateDate;
+    }
+
+    public LocalTime getEventDateTime() {
+        String[] eventDateArr = this.eventDate.split(" ");
+        LocalTime eventDateTime = LocalTime.parse(eventDateArr[1]);
+        return eventDateTime;
+    }
+
+
     /**
      * Returns String representation of event task.
      * @return String representation of event task.
@@ -21,6 +38,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return "[E]" + "[" + getStatusIcon() + "] " + this.description
-                + " (at: " + this.eventDate + ")";
+                + " (at: " + this.getEventDateDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + this.getEventDateTime().format(DateTimeFormatter.ofPattern("h:mma")) + ")";
     }
 }
