@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Contains the main logic of the ToDoBeast application.
+ */
 public class Application {
 
     private Storage storage;
@@ -17,6 +20,9 @@ public class Application {
     private static final String DATA_DIRECTORY_NAME = "./data/";
     private static final String DATA_FILE_NAME = "data.txt";
 
+    /**
+     *Creates a new Application with new Storage, Ui and TaskList components to assist in program logic.
+     */
     public Application() {
         storage = new Storage(DATA_DIRECTORY_NAME, DATA_FILE_NAME);
         ui = new Ui();
@@ -30,6 +36,9 @@ public class Application {
         }
     }
 
+    /**
+     * Contains the main logic of the application. The program will run until the "exit" command is given.
+     */
     public void runApplication() {
         ui.showWelcome();
         ui.showInstructions();
@@ -55,7 +64,7 @@ public class Application {
                 ui.showLine();
             }
         }
-
+        ui.showExit();
     }
 
 }

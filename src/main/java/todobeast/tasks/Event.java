@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A Task that represents a event-type task. Events have a time and date component.
+ */
 public class Event extends Task {
     private LocalDate date;
     private LocalTime time;

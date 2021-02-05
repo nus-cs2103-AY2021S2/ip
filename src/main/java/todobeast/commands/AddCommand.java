@@ -11,6 +11,10 @@ import todobeast.tasks.Todo;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * A Command that represents adding a new Task to the TaskList. Enclosing business logic is wrapped in the execute()
+ * method.
+ */
 public class AddCommand extends Command {
 
     TaskType taskType;
@@ -18,6 +22,11 @@ public class AddCommand extends Command {
     LocalDate taskDate;
     LocalTime taskTime;
 
+    /**
+     * Constructor for tasks that do not have a date and time requirement (e.g. todo-type tasks)
+     * @param taskType enumeration representing the type of task to be created
+     * @param taskDescription the description corresponding to the current task
+     */
     public AddCommand(TaskType taskType, String taskDescription) {
         this.taskType = taskType;
         this.taskDescription = taskDescription;
@@ -25,6 +34,13 @@ public class AddCommand extends Command {
         this.taskTime = null;
     }
 
+    /**
+     * Constructor for tasks that have a date and time requirement (e.g. deadline and event-type tasks)
+     * @param taskType enumeration representing the type of task to be created
+     * @param taskDescription the description corresponding to the current task
+     * @param taskDate the date corresponding to the current task
+     * @param taskTime the time corresponding to the current task
+     */
     public AddCommand(TaskType taskType, String taskDescription, LocalDate taskDate, LocalTime taskTime) {
         this.taskType = taskType;
         this.taskDescription = taskDescription;
@@ -32,6 +48,12 @@ public class AddCommand extends Command {
         this.taskTime = taskTime;
     }
 
+    /**
+     * Handles the creation of a new task within the application.
+     * @param taskList the TaskList that belongs to this application
+     * @param ui the Ui that belongs to this application
+     * @throws InvalidInputException if the command provided by the user is invalid
+     */
     public void execute(TaskList taskList, Ui ui) throws InvalidInputException {
 
         Task newTask = null;

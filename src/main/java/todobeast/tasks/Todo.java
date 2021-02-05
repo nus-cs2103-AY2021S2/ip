@@ -1,5 +1,8 @@
 package todobeast.tasks;
 
+/**
+ * A Task that represents a todo-type task. Todos do not have a date and time component to them.
+ */
 public class Todo extends Task {
     public Todo(String toDoDescription) {
         super(toDoDescription);

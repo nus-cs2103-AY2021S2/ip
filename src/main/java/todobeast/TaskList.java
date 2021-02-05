@@ -1,13 +1,15 @@
 package todobeast;
 
-
 import todobeast.tasks.Task;
 
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Wrapper class that stores all tasks for the application into a List.
+ */
 public class TaskList {
-    public List<Task> taskList;
+    private List<Task> taskList;
 
     public TaskList(List<Task> taskList) {
         this.taskList = new ArrayList<>(taskList);
@@ -41,6 +43,10 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     *Formats all tasks in the present TaskList into a format suitable for storing into a data text file.
+     * @return a String containing all the tasks that have been formatted by this method
+     */
     public String formatTaskListForStorage() {
         StringBuilder outputString = new StringBuilder();
         for (Task task : taskList) {
