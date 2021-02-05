@@ -1,5 +1,7 @@
 package blarb;
 
+import java.util.Arrays;
+
 /**
  * {@code Command} is an enumeration of the possible commands.
  */
@@ -20,13 +22,10 @@ enum Command {
      * @return The command
      */
     public static Command command(String string) {
-        String command = string.toLowerCase();
-        for (Command c : Command.values()) {
-            if (c.command.equals(command)) {
-                return c;
-            }
-        }
-        return UNKNOWN;
+        return Arrays.stream(Command.values())
+                .filter(x -> x.command.equals(string.toLowerCase()))
+                .findAny()
+                .orElse(UNKNOWN);
     }
 
 }
