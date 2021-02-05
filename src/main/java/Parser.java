@@ -11,19 +11,78 @@ public class Parser {
     public static Command parse(String command) throws DukeException {
         String[] info = command.split(" ");
         if (info[0].equals("todo") || info[0].equals("event") || info[0].equals("deadline")) {
+            checkAddCommand(info);
             return new AddCommand(info);
         } else if (info[0].equals("done")) {
+            checkDoneCommand(info);
             return new DoneCommand(info);
         } else if (info[0].equals("delete")) {
+            checkDeleteCommand(info);
             return new DeleteCommand(info);
         } else if (info[0].equals("list")) {
+            checkPrintCommand(info);
             return new PrintCommand(info);
         } else if (info[0].equals("bye")) {
+            checkByeCommand(info);
             return new ByeCommand();
         } else if (info[0].equals("find")) {
+            checkFindCommand(info);
             return new FindCommand(info);
         } else {
-            throw new DukeException("Sorry but I don't understand what that means! :-(");
+            throw new DukeException("Sorry but I don't understand what that means! :(");
+        }
+    }
+
+    private static void checkFindCommand(String[] info) throws DukeException {
+        if (info.length == 1) {
+            throw new DukeException("OOPS! No keyword is given!");
+        }
+    }
+
+    private static void checkByeCommand(String[] info) throws DukeException {
+        if (info.length > 1) {
+            throw new DukeException("Please remove the additional information provided!");
+        }
+    }
+
+    private static void checkPrintCommand(String[] info) throws DukeException {
+        if (info.length > 1) {
+            throw new DukeException("Please remove the additional information provided!");
+        }
+    }
+
+    private static void checkDeleteCommand(String[] info) throws DukeException {
+        int length = info.length;
+        if (length == 1) {
+            throw new DukeException("Please provide the number of the task to delete");
+        }
+        try {
+            int taskNumber = Integer.parseInt(info[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please provide a valid command :(");
+        }
+    }
+
+    private static void checkDoneCommand(String[] info) throws DukeException {
+        int length = info.length;
+        if (length == 1) {
+            throw new DukeException("OOPS! Task completed is not specified");
+        }
+        try {
+            int taskNumber = Integer.parseInt(info[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please provide a valid command :(");
+        }
+    }
+
+    private static void checkAddCommand(String[] info) throws DukeException {
+        int length = info.length;
+        if (info[0].equals("todo") && length == 1) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty");
+        } else if (info[0].equals("event") && length == 1) {
+            throw new DukeException("OOPS! Specifics are needed for this event");
+        } else if (info[0].equals("deadline") && length == 1) {
+            throw new DukeException("OOPS! Specifics are needed for this deadline");
         }
     }
 }
