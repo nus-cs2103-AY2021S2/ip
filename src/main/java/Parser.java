@@ -10,23 +10,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
-    private final String input;
     private static final ArrayList<String> validActions
             = new ArrayList<>(Arrays.asList("todo", "deadline", "event", "done", "delete", "list", "bye"));
 
-    public Parser(String input) {
-        this.input = input;
-    }
-
-    public Command getCommand() {
-        if (!this.inputsAreValid()) {
+    public static Command parse(String input) {
+        if (!inputIsValid(input)) {
             return new DoNothingCommand();
         }
 
-        String action = this.getAction();
-        String description = this.getDescription();
-        LocalDateTime by = this.getBy();
-        LocalDateTime at = this.getAt();
+        String action = getAction(input);
+        String description = getDescription(input);
+        LocalDateTime by = convertToDateTime(getByString(input));
+        LocalDateTime at = convertToDateTime(getAtString(input));
 
         switch (action) {
             case "bye":
@@ -48,20 +43,20 @@ public class Parser {
         }
     }
 
-    public String getAction() {
+    private static String getAction(String input) {
         return (input + " ").split(" ")[0].toLowerCase();
     }
 
-    private String getRemainingTokens() {
+    private static String getRemainingTokens(String input) {
         if (!input.contains(" ")) {
             return "";
         }
-        return this.input.split(" ", 2)[1];
+        return input.split(" ", 2)[1];
     }
 
-    public String getDescription() {
-        String action = this.getAction();
-        String remainingTokens = this.getRemainingTokens();
+    private static String getDescription(String input) {
+        String action = getAction(input);
+        String remainingTokens = getRemainingTokens(input);
 
         if (action.equals("deadline") && remainingTokens.contains("/by")) {
             return remainingTokens.split("/by")[0].trim();
@@ -72,37 +67,64 @@ public class Parser {
         }
     }
 
-    public LocalDateTime getBy() {
-        return convertToDateTime(this.getByString());
-    }
-
-    public LocalDateTime getAt() {
-        return convertToDateTime(this.getAtString());
-    }
-
-    private String getByString() {
-        String action = this.getAction();
-        String remainingTokens = this.getRemainingTokens();
+    private static String getByString(String input) {
+        String action = getAction(input);
+        String remainingTokens = getRemainingTokens(input);
         if (action.equals("deadline") && remainingTokens.contains("/by")) {
             return remainingTokens.split("/by", 2)[1].trim();
         }
         return "";
     }
 
-    private String getAtString() {
-        String action = this.getAction();
-        String remainingTokens = this.getRemainingTokens();
+    private static String getAtString(String input) {
+        String action = getAction(input);
+        String remainingTokens = getRemainingTokens(input);
         if (action.equals("event") && remainingTokens.contains("/at")) {
             return remainingTokens.split("/at", 2)[1].trim();
         }
         return "";
     }
 
-    public boolean inputsAreValid() {
-        String action = this.getAction();
-        String description = this.getDescription();
-        String byString = this.getByString();
-        String atString = this.getAtString();
+    private static boolean isInteger(String str) {
+        if (str == null) {
+            return false;
+        }
+
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static LocalDateTime convertToDateTime(String dateTimeString) {
+        LocalDateTime dateTime;
+
+        try {
+            dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
+        } catch (DateTimeParseException e) {
+            dateTime = null;
+        }
+
+        if (null != dateTime) {
+            return dateTime;
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(dateTimeString, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
+            return LocalDateTime.of(date, LocalTime.MIDNIGHT);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    private static boolean inputIsValid(String input) {
+        String action = getAction(input);
+        String description = getDescription(input);
+        String byString = getByString(input);
+        String atString = getAtString(input);
 
         try {
             if (!validActions.contains(action)) {
@@ -144,40 +166,5 @@ public class Parser {
         }
 
         return true;
-    }
-
-    private static boolean isInteger(String str) {
-        if (str == null) {
-            return false;
-        }
-
-        try {
-            Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public static LocalDateTime convertToDateTime(String dateTimeString) {
-        LocalDateTime dateTime;
-
-        try {
-            dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
-        } catch (DateTimeParseException e) {
-            dateTime = null;
-        }
-
-        if (null != dateTime) {
-            return dateTime;
-        }
-
-        try {
-            LocalDate date = LocalDate.parse(dateTimeString, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
-            return LocalDateTime.of(date, LocalTime.MIDNIGHT);
-        } catch (DateTimeParseException e) {
-            return null;
-        }
     }
 }

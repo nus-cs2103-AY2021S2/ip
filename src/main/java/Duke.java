@@ -19,7 +19,7 @@ public class Duke {
 
         while (!isExit) {
             String input = this.ui.readInput();
-            Command c = new Parser(input).getCommand();
+            Command c = Parser.parse(input);
             c.execute(this.tasks, this.ui);
             isExit = c.isExit();
         }
