@@ -32,6 +32,11 @@ public abstract class Task {
         isDone = true;
     }
 
+    /**
+     * Returns true if the regex provided is found within the task description of this particular task.
+     * @param regex the regex used to match
+     * @return true if the regex is found within the task description, false otherwise
+     */
     public boolean containsStringInDesc(String regex) {
         return taskDescription.contains(regex);
     }
