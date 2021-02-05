@@ -28,7 +28,7 @@ public class Task implements Serializable {
      * @return String representation of whether this Task is done.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); //return X or blank
+        return (isDone ? "X" : " ");
     }
 
     /**
