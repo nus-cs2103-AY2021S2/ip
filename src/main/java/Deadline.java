@@ -11,7 +11,7 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Construct Deadline object
+     * Constructs Deadline object
      *
      * @param description the description of the Deadline task
      * @param by the deadline

@@ -8,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Construct a Task object
+     * Constructs a Task object
      *
      * @param description the description of the Task object
      */
@@ -18,7 +18,7 @@ public class Task {
     }
 
     /**
-     * Get the status icon of the task
+     * Gets the status icon of the task
      *
      * @return "1" if task is completed, "0" otherwise
      */
@@ -27,10 +27,14 @@ public class Task {
     }
 
     /**
-     * Mark the task as completed
+     * Marks the task as completed
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public void setDone(boolean hasDone) {
+        this.isDone = hasDone;
     }
 
     @Override

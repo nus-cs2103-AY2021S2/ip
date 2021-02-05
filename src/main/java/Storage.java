@@ -21,8 +21,8 @@ public class Storage {
     }
 
     /**
-     * Read pre-existing file from previous usage of bot into a list.
-     * If no such file can be found, then create a new .txt file.
+     * Reads pre-existing file from previous usage of bot into a list.
+     * If no such file can be found, then create a new .txt file to store tasks.
      *
      * @return existing list of tasks
      * @throws IOException
@@ -37,20 +37,28 @@ public class Storage {
             line = reader.readLine();
             while (line != null) {
                 String[] tokens = line.split(" \\| ");
-                if (tokens[0].equals("T")) {
-                    task = new Todo(tokens[2]);
-                    task.isDone = tokens[1].equals("1");
+                String typeIndicator = tokens[0];
+                boolean completionIndicator = tokens[1].equals("1");
+                String description = tokens[2];
+                if (typeIndicator.equals("T")) {
+                    task = new Todo(description);
+                    boolean hasDone = completionIndicator;
+                    task.setDone(hasDone);
                     list.add(task);
                     line = reader.readLine();
-                } else if (tokens[0].equals("D")) {
-                    LocalDate date = LocalDate.parse(tokens[3], DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                    task = new Deadline(tokens[2], date);
-                    task.isDone = tokens[1].equals("1");
+                } else if (typeIndicator.equals("D")) {
+                    String by = tokens[3];
+                    LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                    task = new Deadline(description, date);
+                    boolean hasDone = completionIndicator;
+                    task.setDone(hasDone);
                     list.add(task);
                     line = reader.readLine();
-                } else if (tokens[0].equals("E")) {
-                    task = new Event(tokens[2], tokens[3]);
-                    task.isDone = tokens[1].equals("1");
+                } else if (typeIndicator.equals("E")) {
+                    String at = tokens[3];
+                    task = new Event(description, at);
+                    boolean hasDone = completionIndicator;
+                    task.setDone(hasDone);
                     list.add(task);
                     line = reader.readLine();
                 }
@@ -62,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Update tasks on file with the updated list of tasks
+     * Updates tasks on file with the updated list of tasks
      *
      * @param updatedList the finalised list of tasks after program terminates
      * @throws FileNotFoundException
@@ -71,6 +79,7 @@ public class Storage {
         PrintWriter writer = new PrintWriter(filePath);
         for (Task task : updatedList) {
             writer.println(task.toString());
-        } writer.close();
+        }
+        writer.close();
     }
 }
