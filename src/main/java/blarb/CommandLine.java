@@ -15,6 +15,7 @@ class CommandLine {
      */
     public CommandLine(Command command, String ...description) {
         this.command = command;
+        assert description.length < 2;
         if (description.length > 0) {
             this.description = description[0];
         } else {

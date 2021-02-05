@@ -136,8 +136,11 @@ public class Processor {
                     ? "Hasta la vista, baby."
                     : "Type \"bye\" to see me go.";
             break;
-        default:
+        case UNKNOWN:
             outputs[0] = String.format("I have detailed files on human anatomy, but not %s.", input);
+            break;
+        default:
+            assert false;
         }
         return new Output(outputs[0], outputs[1]);
     }
