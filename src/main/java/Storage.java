@@ -81,7 +81,8 @@ public class Storage {
             String curr = s.nextLine();
             String[] currArray = curr.split("\\|");
 
-            if (currArray[0].equals("T")) {
+            switch (currArray[0]) {
+            case "T": {
                 ToDos currTask;
                 if (currArray[1].equals("0")) {
                     currTask = new ToDos(currArray[2]);
@@ -89,7 +90,9 @@ public class Storage {
                     currTask = new ToDos(currArray[2], true);
                 }
                 list.add(currTask);
-            } else if (currArray[0].equals("D")) {
+                break;
+            }
+            case "D": {
                 Deadlines currTask;
                 if (currArray[1].equals("0")) {
                     currTask = new Deadlines(currArray[2], LocalDate.parse(currArray[3]));
@@ -97,7 +100,9 @@ public class Storage {
                     currTask = new Deadlines(currArray[2], LocalDate.parse(currArray[3]), true);
                 }
                 list.add(currTask);
-            } else if (currArray[0].equals("E")) {
+                break;
+            }
+            case "E": {
                 Events currTask;
                 if (currArray[1].equals("0")) {
                     currTask = new Events(currArray[2], LocalDate.parse(currArray[3]));
@@ -105,6 +110,8 @@ public class Storage {
                     currTask = new Events(currArray[2], LocalDate.parse(currArray[3]), true);
                 }
                 list.add(currTask);
+                break;
+            }
             }
         }
         return list;

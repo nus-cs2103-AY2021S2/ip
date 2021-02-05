@@ -1,0 +1,151 @@
+____________________________________________________________
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I'm Duke
+What can I do for you today?
+____________________________________________________________
+
+Got it! The following task has been added:
+[T][ ] go work
+
+You have 1 Task(s) left in the list
+____________________________________________________________
+
+Got it! The following task has been added:
+[T][ ] sleep
+
+You have 2 Task(s) left in the list
+____________________________________________________________
+
+Got it! The following task has been added:
+[D][ ] go school (by: Feb 2 2021)
+
+You have 3 Task(s) left in the list
+____________________________________________________________
+
+Got it! The following task has been added:
+[D][ ] cook dinner (by: May 5 2022)
+
+You have 4 Task(s) left in the list
+____________________________________________________________
+
+Got it! The following task has been added:
+[E][ ] exam (at: Feb 2 2021)
+
+You have 5 Task(s) left in the list
+____________________________________________________________
+
+Got it! The following task has been added:
+[D][ ] exam in school (by: Sep 9 2022)
+
+You have 6 Task(s) left in the list
+____________________________________________________________
+
+Here are tasks matching the keyword provided
+1.[E][ ] exam (at: Feb 2 2021)
+2.[D][ ] exam in school (by: Sep 9 2022)
+____________________________________________________________
+
+Here are tasks matching the keyword provided
+1.[D][ ] go school (by: Feb 2 2021)
+2.[D][ ] exam in school (by: Sep 9 2022)
+____________________________________________________________
+
+Here are tasks matching the keyword provided
+____________________________________________________________
+
+Here are your task!
+1.[T][ ] go work
+2.[T][ ] sleep
+3.[D][ ] go school (by: Feb 2 2021)
+4.[D][ ] cook dinner (by: May 5 2022)
+5.[E][ ] exam (at: Feb 2 2021)
+6.[D][ ] exam in school (by: Sep 9 2022)
+____________________________________________________________
+
+Good job! The following task has been marked as done:
+[T][X] go work
+
+You have 6 Task(s) left in the list
+____________________________________________________________
+
+Good job! The following task has been marked as done:
+[T][X] sleep
+
+You have 6 Task(s) left in the list
+____________________________________________________________
+
+Good job! The following task has been marked as done:
+[D][X] go school (by: Feb 2 2021)
+
+You have 6 Task(s) left in the list
+____________________________________________________________
+
+Got it! The following task has been deleted:
+[T][X] sleep
+
+You have 5 Task(s) left in the list
+____________________________________________________________
+
+Here are your task!
+1.[T][X] go work
+2.[D][X] go school (by: Feb 2 2021)
+3.[D][ ] cook dinner (by: May 5 2022)
+4.[E][ ] exam (at: Feb 2 2021)
+5.[D][ ] exam in school (by: Sep 9 2022)
+____________________________________________________________
+
+Here are your task on Feb 2 2021
+1.[D][X] go school (by: Feb 2 2021)
+2.[E][ ] exam (at: Feb 2 2021)
+____________________________________________________________
+
+Error! Your command has invalid argument(s)!
+Try Again!
+____________________________________________________________
+
+Here are your task on May 5 2022
+1.[D][ ] cook dinner (by: May 5 2022)
+____________________________________________________________
+
+I'm sorry, I do not know what that means
+____________________________________________________________
+
+I'm sorry, I do not know what that means
+____________________________________________________________
+
+Error! Your command has missing argument(s)!
+Try Again!
+____________________________________________________________
+
+Error! Your command has missing argument(s)!
+Try Again!
+____________________________________________________________
+
+Error! Your command has invalid argument(s)!
+Try Again!
+____________________________________________________________
+
+Error! Your command has invalid argument(s)!
+Try Again!
+____________________________________________________________
+
+Error! Your command has missing argument(s)!
+Try Again!
+____________________________________________________________
+
+Error! Your command has missing argument(s)!
+Try Again!
+____________________________________________________________
+
+Got it! All tasks have been deleted
+____________________________________________________________
+
+____________________________________________________________
+
+Good bye! Stay calm and keep coding o7
+____________________________________________________________

@@ -1,11 +1,10 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
  * Custom arraylist for task objects
  */
 public class DukeList {
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
     private int size;
 
     public DukeList() {
@@ -45,8 +44,8 @@ public class DukeList {
     }
 
     public void deleteAll() {
-        for (int i = size - 1; i >= 0; i--) {
-            list.remove(i);
+        if (size > 0) {
+            list.subList(0, size).clear();
         }
         size = 0;
     }

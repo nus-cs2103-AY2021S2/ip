@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Duke {
     private DukeList list;
-    private UI ui;
-    private Storage storage;
+    private final UI ui;
+    private final Storage storage;
 
     public static void main(String[] args)  {
        new Duke("data/duke.txt").run();
