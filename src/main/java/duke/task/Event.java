@@ -6,7 +6,7 @@ public class Event extends Task{
     private String eventPeriod;
 
     /**
-     * C
+     * Creates an Event that has a description and a duration.
      *
      * @param description Description of event
      * @param eventPeriod When the event takes place

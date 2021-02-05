@@ -6,6 +6,12 @@ public abstract class Task {
     private final String description;
     private boolean isDone; //TODO: Figure out if I can restrict access
 
+    /**
+     * Creates a Task that has a description
+     *
+     * @param description Description of Task
+     * @throws EmptyArgumentException Description is empty or whitespace
+     */
     public Task(String description) throws EmptyArgumentException {
         description = description.trim();
         if (description.isEmpty()){

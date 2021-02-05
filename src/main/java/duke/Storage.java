@@ -87,6 +87,12 @@ public class Storage {
         return new TaskList(store);
     }
 
+    /**
+     * Saves TaskList to disk.
+     *
+     * @param data TaskList to save to disk
+     * @throws IOException Unable to create subfolder
+     */
     public static void saveTaskList(TaskList data) throws IOException {
         List<Task> store = data.getRawData();
         StringBuilder saveText = new StringBuilder();

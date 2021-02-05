@@ -10,6 +10,15 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * Creates a Task with a description and a deadline date that it needs
+     * to be done by.
+     *
+     * @param description Description of Deadline
+     * @param by When the task needs to be completed
+     * @throws EmptyArgumentException Some argument, either 'description' or 'by' is empty.
+     * @throws BadDateArgumentException When 'by' is not well formatted
+     */
     public Deadline(String description, String by) throws EmptyArgumentException, BadDateArgumentException {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");

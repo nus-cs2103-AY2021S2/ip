@@ -23,6 +23,12 @@ public class TaskList {
         this.store = store;
     }
 
+    /**
+     * Get Raw data for extraction of File ready data from Task directly
+     * TODO: Push the preparation of data to TaskList
+     *
+     * @return Underlying data structure
+     */
     public List<Task> getRawData(){
         return this.store;
     }
@@ -105,6 +111,12 @@ public class TaskList {
         store.remove(deleteIndex);
         return returnValue;
     }
+
+    /**
+     * Gets a user friendly list of all the task in TaskList
+     *
+     * @return User friendly state of TaskList
+     */
     public String getList(){
         StringBuilder builder = new StringBuilder();
         for (int i = 0 ; i < store.size(); i++) {
