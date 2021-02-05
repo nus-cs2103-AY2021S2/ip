@@ -53,7 +53,7 @@ public class StorageHandler {
             tasksFile.createNewFile();
         } catch (IOException e) {
             //special case of directly accessing controller due to critical error
-            UiHandler.fxmlLoader.<UiHandler>getController().showResponse("Terminated: Steve has no permission"
+            UiHandler.getFxmlLoader().<UiHandler>getController().showResponse("Terminated: Steve has no permission"
                     + "to create storage file. Please check and restart the application.");
         }
 

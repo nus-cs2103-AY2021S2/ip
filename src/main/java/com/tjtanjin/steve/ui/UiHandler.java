@@ -15,6 +15,9 @@ import javafx.scene.layout.VBox;
  * Controller for UiHandler. Provides the layout for the other controls.
  */
 public class UiHandler extends AnchorPane {
+
+    private static FXMLLoader fxmlLoader;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -25,7 +28,6 @@ public class UiHandler extends AnchorPane {
     private Button sendButton;
 
     private Steve steve;
-    public static FXMLLoader fxmlLoader;
 
     private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image STEVE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/steve.png"));
@@ -40,7 +42,15 @@ public class UiHandler extends AnchorPane {
     }
 
     /**
-     * Set private attribute Steve.
+     * Gets fxml loader.
+     * @return fxml loader
+     */
+    public static FXMLLoader getFxmlLoader() {
+        return fxmlLoader;
+    }
+
+    /**
+     * Sets private attribute Steve.
      *
      * @param steve steve parsed from main class
      */
