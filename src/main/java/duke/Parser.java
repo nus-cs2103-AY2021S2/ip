@@ -10,15 +10,38 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 public class Parser {
-    
+
     /**
-     * Returns a Command with enum type by parsing the string of command that the user inputs.
+     * Returns a Command with enum type by parsing user input of single word.
      *
-     * @param input the string represents command that the user inputs.
+     * @param input the string that the user inputs.
      * @return a Command of the enum type.
      */
-    public static Command parseCommand(String input) {
+    public static Command parseCommandForSingleWord(String input) {
         return Command.valueOf(input.toUpperCase(Locale.ROOT));
+    }
+
+    /**
+     * Returns a Command with enum type by parsing user input of multiple words.
+     *
+     * @param input the string that the user inputs.
+     * @return a Command of the enum type.
+     */
+    public static Command parseCommandForMultipleWords(String input) {
+        int endOfFirstWord = input.indexOf(' ');
+        String commandInput = input.substring(0, endOfFirstWord);
+        return Command.valueOf(commandInput.toUpperCase(Locale.ROOT));
+    }
+
+    /**
+     * Returns the rest input apart from the command by parsing user input.
+     *
+     * @param input the string that the user inputs.
+     * @return the rest input.
+     */
+    public static String parseRestInput(String input) {
+        int endOfFirstWord = input.indexOf(' ');
+        return input.substring(endOfFirstWord + 1);
     }
 
     /**
@@ -120,6 +143,44 @@ public class Parser {
     }
 
     /**
+     * Parses ToDo stored in the file.
+     *
+     * @param line one line represents a todo task in the flie.
+     * @return a ToDo task.
+     */
+    public static ToDo parseForToDoInFile(String line) {
+        return new ToDo(line.substring(8));
+    }
+
+    /**
+     * Parses Deadline stored in the file.
+     *
+     * @param line one line represents a deadline task in the flie.
+     * @return a Deadline task.
+     */
+    public static Task parseForDeadlineInFile(String line) {
+        int endOfDescription = line.indexOf("by: ");
+        String description = line.substring(8, endOfDescription);
+        String deadline = line.substring(endOfDescription + 4, line.length() - 1);
+        LocalDate date = LocalDate.parse(deadline);
+        return new Deadline(description, date);
+    }
+
+    /**
+     * Parses Event stored in the file.
+     *
+     * @param line one line represents an event task in the flie.
+     * @return an Event task.
+     */
+    public static Task parseForEventInFile(String line) {
+        int endOfDescription = line.indexOf("at: ");
+        String description = line.substring(8, endOfDescription);
+        String time = line.substring(endOfDescription + 4, line.length() - 1);
+        LocalDate date = LocalDate.parse(time);
+        return new Event(description, date);
+    }
+
+    /**
      * Returns a task corresponding to the line of file stored in the disk.
      *
      * @param line line of the file stored in the disk.
@@ -128,19 +189,11 @@ public class Parser {
     public static Task parseInFile(String line) {
         Task task;
         if (line.charAt(1) == 'T') {
-            task = new ToDo(line.substring(8));
+            task = parseForToDoInFile(line);
         } else if (line.charAt(1) == 'D' && line.contains("by: ")) {
-            int endOfDescription = line.indexOf("by: ");
-            String description = line.substring(8, endOfDescription);
-            String deadline = line.substring(endOfDescription + 4, line.length() - 1);
-            LocalDate date = LocalDate.parse(deadline);
-            task = new Deadline(description, date);
+            task = parseForDeadlineInFile(line);
         } else if (line.charAt(1) == 'E' && line.contains("at: ")) {
-            int endOfDescription = line.indexOf("at: ");
-            String description = line.substring(8, endOfDescription);
-            String time = line.substring(endOfDescription + 4, line.length() - 1);
-            LocalDate date = LocalDate.parse(time);
-            task = new Event(description, date);
+            task = parseForEventInFile(line);
         } else {
             throw new ParseException("OOPS!!! It seems there is file corruption.\n");
         }
