@@ -27,6 +27,7 @@ public class TaskList {
      */
     public String addTask(Task newTask) {
         taskList.add(newTask);
+        assert taskList.size() > 0 : "The size of the task list should be at least 1";
         return Ui.printFormatMessage("Got it. I've added this task:\n"
                 + newTask.toString() + "\nNow you have " + taskList.size()
                 + " taskList in the list.");
@@ -65,6 +66,7 @@ public class TaskList {
                 throw new DukeException("This task has been finished before.");
             }
             taskList.get(order).markAsDone();
+            assert taskList.get(order).done : "The markAsDone() is not functioning";
             return Ui.printFormatMessage("Nice! I've marked this task as done:\n"
                     + taskList.get(order).toString());
         } catch (DukeException ex) {
@@ -99,9 +101,7 @@ public class TaskList {
      * @param list the list given to be print out
      */
     public String printSpecifiedTasks(List<Task> list) {
-        if (list.size() == 0) {
-            return "";
-        }
+        assert list.size() > 0 : "The task list to be printed should have at least 1 task";
         String taskString = "";
         taskString += "" + (1) + "." + list.get(0).toString();
         for (int i = 1; i < list.size(); i++) {
