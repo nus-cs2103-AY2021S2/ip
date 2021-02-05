@@ -7,6 +7,8 @@ import duke.task.Task;
 
 public class Ui {
     private Scanner scanner;
+    private int paddingGui = 4;
+
     public Ui() {
         scanner = new Scanner(System.in);
     }
@@ -19,23 +21,35 @@ public class Ui {
                 + padSpaces("What can I do for you?", 5)));
     }
 
+    public String returnWelcomeLine() {
+        return "Hello! I'm Duke\n" + "What can I do for you?";
+    }
+
     public void showGoodbyeLine() {
         System.out.println(defaultFormatting("Bye. Hope to see you again soon!"));
+    }
+
+    public String returnGoodbyeLine() {
+        return "Bye. Hope to see you again soon!" + "\n Please close this window by typing q or using the button!";
     }
 
     private String numberOfTasksLine(int numberOfTasks) {
         return padSpaces("Now you have " + numberOfTasks + " task in the list.", 5);
     }
 
+    private String numberOfTasksLineGui(int numberOfTasks) {
+        return padSpaces("Now you have " + numberOfTasks + " task in the list.", paddingGui);
+    }
+
     /**
      * Shows a task list to the user in the appropriate format
      * @param taskArray task array list to show to the viewer
      */
-    public void showReturnTaskList(ArrayList<Task> taskArray) {
+    public void showTaskList(ArrayList<Task> taskArray) {
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalLine()).append('\n');
 
-        sb.append(indentedString("Here are the task in your list:\n"));
+        sb.append(padSpaces("Here are the task in your list:\n", 5));
         for (int i = 0; i < taskArray.size(); i++) {
 
             Task currentTask = taskArray.get(i);
@@ -43,26 +57,41 @@ public class Ui {
             String numberIndicator = (i + 1) + ".";
             String temp = numberIndicator + currentTask.toString() + '\n';
 
-            sb.append(indentedString(temp));
+            sb.append(padSpaces(temp, 5));
         }
         sb.append(horizontalLine());
         System.out.println(sb.toString());
     }
 
-    /**
-     * Shows a specificed error message
-     * @param errorMsg error message to show to the user
-     */
-    public void showLoadingError(String errorMsg) {
-        System.out.println(defaultFormatting(errorMsg));
+    public String returnTaskList(ArrayList<Task> taskArray) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the task in your list:\n");
+        for (int i = 0; i < taskArray.size(); i++) {
+
+            Task currentTask = taskArray.get(i);
+
+            String numberIndicator = (i + 1) + ".";
+            String temp = numberIndicator + currentTask.toString() + '\n';
+
+            sb.append(padSpaces(temp, paddingGui));
+        }
+        return sb.toString();
     }
 
     public void showLoadingSucess() {
         System.out.println(defaultFormatting("Data Successfuly Restored"));
     }
 
-    public void showErrorMsg(String msg) {
-        System.out.println(defaultFormatting(msg));
+    /**
+     * Shows a specificed error message
+     * @param errorMsg error message to show to the user
+     */
+    public void showErrorMsg(String errorMsg) {
+        System.out.println(defaultFormatting(errorMsg));
+    }
+
+    public String returnErrorMsg(String errorMsg) {
+        return "ERROR: " + errorMsg;
     }
 
     /**
@@ -72,6 +101,11 @@ public class Ui {
     public void showTaskDone(Task doneTask) {
         System.out.println(defaultFormatting("Nice! I've marked this task as done:\n"
                 + padSpaces(doneTask.toString(), 7)));
+    }
+
+    public String returnTaskDone(Task doneTask) {
+        return "Nice! I've marked this task as done:\n"
+                + padSpaces(doneTask.toString(), paddingGui);
     }
 
     /**
@@ -86,6 +120,13 @@ public class Ui {
         System.out.println(defaultFormatting(a));
     }
 
+    public String returnTaskDeleted(Task deletedTask, int numberOfTasks) {
+        String temp = "Noted. I've removed this task:\n" + padSpaces(deletedTask.toString(), paddingGui)
+                + "\n" + numberOfTasksLineGui(numberOfTasks);
+
+        return temp;
+    }
+
     /**
      * Shows the user the task that has been added to duke
      * @param addedTask Task that has been added
@@ -98,37 +139,11 @@ public class Ui {
         System.out.println(defaultFormatting(temp));
     }
 
+    public String returnAddedTask(Task addedTask, int numberOfTasks) {
+        String temp = "Got it. I've added this task:\n" + padSpaces(addedTask.toString(), paddingGui)
+                + "\n" + numberOfTasksLineGui(numberOfTasks);
 
-    public String readCommand() {
-        return scanner.nextLine().trim();
-    }
-
-    private static String horizontalLine() {
-        return padSpaces("____________________________________________________________", 4);
-    }
-
-    private static String indentedString(String input) {
-        return padSpaces(input, 5);
-    }
-
-    private static String defaultFormatting(String input) {
-        return horizontalLine() + '\n' + indentedString(input) + '\n' + horizontalLine();
-    }
-
-    /**
-     * pad a string with spaces at its front
-     * @param input input string
-     * @param numOfSpacesToPad number of spaces to add in front of a string
-     * @return string padded with spaces
-     */
-    private static String padSpaces(String input, int numOfSpacesToPad) {
-        String toreturn = "";
-
-        for (int i = 0; i < numOfSpacesToPad; i++) {
-            toreturn = toreturn + ' ';
-        }
-
-        return toreturn + input;
+        return temp;
     }
 
     /**
@@ -139,7 +154,7 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalLine()).append('\n');
 
-        sb.append(indentedString("Here are the matching tasks in your list:\n"));
+        sb.append(padSpaces("Here are the matching tasks in your list:\n", 5));
         for (int i = 0; i < taskArray.size(); i++) {
 
             Task currentTask = taskArray.get(i);
@@ -147,9 +162,51 @@ public class Ui {
             String numberIndicator = (i + 1) + ".";
             String temp = numberIndicator + currentTask.toString() + '\n';
 
-            sb.append(indentedString(temp));
+            sb.append(padSpaces(temp, 5));
         }
         sb.append(horizontalLine());
         System.out.println(sb.toString());
+    }
+
+    public String returnFoundTaskList(ArrayList<Task> taskArray) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < taskArray.size(); i++) {
+
+            Task currentTask = taskArray.get(i);
+
+            String numberIndicator = (i + 1) + ".";
+            String temp = numberIndicator + currentTask.toString() + '\n';
+
+            sb.append(padSpaces(temp, 4));
+        }
+        return sb.toString();
+    }
+
+    public String readCommand() {
+        return scanner.nextLine().trim();
+    }
+
+    private static String horizontalLine() {
+        return padSpaces("____________________________________________________________", 4);
+    }
+
+    private static String defaultFormatting(String input) {
+        return horizontalLine() + '\n' + padSpaces(input, 5) + '\n' + horizontalLine();
+    }
+
+    /**
+     * pad a string with spaces at its front
+     * @param input input string
+     * @param numOfSpacesToPad number of spaces to add in front of a string
+     * @return string padded with spaces
+     */
+    private static String padSpaces(String input, int numOfSpacesToPad) {
+        StringBuilder toreturn = new StringBuilder();
+
+        toreturn.append(" ".repeat(Math.max(0, numOfSpacesToPad)));
+
+        return toreturn.toString() + input;
     }
 }

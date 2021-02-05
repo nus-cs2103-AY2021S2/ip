@@ -10,4 +10,6 @@ import duke.maincomponents.Ui;
 
 public interface Command {
     public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage);
+
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage);
 }

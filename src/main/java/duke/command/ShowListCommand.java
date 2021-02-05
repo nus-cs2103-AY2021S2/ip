@@ -13,11 +13,6 @@ import duke.task.Task;
  * ShowListCommand, which shows the tasks on main.java.duke Task List when executed
  */
 public class ShowListCommand implements Command {
-    /**
-     * Constructor for ShowListCommand
-     */
-    public ShowListCommand() {
-    }
 
     /**
      * Executes ShowListCommand, which shows the tasks on main.java.duke Task List
@@ -28,6 +23,12 @@ public class ShowListCommand implements Command {
     @Override
     public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
         ArrayList<Task> currentTaskList = dukeTaskList.getCurrentTaskList();
-        dukeUi.showReturnTaskList(currentTaskList);
+        dukeUi.showTaskList(currentTaskList);
+    }
+
+    @Override
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+        ArrayList<Task> currentTaskList = dukeTaskList.getCurrentTaskList();
+        return dukeUi.returnTaskList(currentTaskList);
     }
 }

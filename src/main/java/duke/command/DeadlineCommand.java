@@ -12,7 +12,7 @@ import duke.task.Task;
  * Deadline Command, which adds a deadline task to Duke's TaskList when executed
  */
 public class DeadlineCommand implements Command {
-    private ArrayList<String> eventDescription;
+    private final ArrayList<String> eventDescription;
 
     /**
      * Constuct a DeadlineCommand object
@@ -36,6 +36,16 @@ public class DeadlineCommand implements Command {
             dukeUi.showAddedTask(deadlineTask, dukeTaskList.getNumberOfTasks());
         } catch (DukeException e) {
             dukeUi.showErrorMsg(e.getMessage());
+        }
+    }
+
+    @Override
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+        try {
+            Task deadlineTask = dukeTaskList.addDeadlineTask(eventDescription);
+            return dukeUi.returnAddedTask(deadlineTask, dukeTaskList.getNumberOfTasks());
+        } catch (DukeException e) {
+            return dukeUi.returnErrorMsg(e.getMessage());
         }
     }
 }

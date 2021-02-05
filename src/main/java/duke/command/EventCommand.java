@@ -8,7 +8,7 @@ import duke.maincomponents.Ui;
 import duke.task.Task;
 
 public class EventCommand implements Command {
-    private ArrayList<String> eventDescription;
+    private final ArrayList<String> eventDescription;
     public EventCommand(ArrayList<String> a) {
         eventDescription = a;
     }
@@ -20,5 +20,9 @@ public class EventCommand implements Command {
         dukeUi.showAddedTask(eventTask, dukeTaskList.getNumberOfTasks());
     }
 
-
+    @Override
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+        Task eventTask = dukeTaskList.addEventTask(eventDescription);
+        return dukeUi.returnAddedTask(eventTask, dukeTaskList.getNumberOfTasks());
+    }
 }

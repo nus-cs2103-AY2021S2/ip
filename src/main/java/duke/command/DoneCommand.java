@@ -10,7 +10,7 @@ import duke.task.Task;
  * DoneCommand, which marks a task as done when executed
  */
 public class DoneCommand implements Command {
-    private int taskDoneInt;
+    private final int taskDoneInt;
 
     /**
      * Constructor of DoneCommand
@@ -33,6 +33,16 @@ public class DoneCommand implements Command {
             dukeUi.showTaskDone(doneTask);
         } catch (DukeException e) {
             dukeUi.showErrorMsg(e.getMessage());
+        }
+    }
+
+    @Override
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+        try {
+            Task doneTask = dukeTaskList.checkTaskAsDone(taskDoneInt);
+            return dukeUi.returnTaskDone(doneTask);
+        } catch (DukeException e) {
+            return dukeUi.returnErrorMsg(e.getMessage());
         }
     }
 }
