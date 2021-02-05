@@ -47,7 +47,8 @@ public class Storage {
             csvWriter.flush();
             csvWriter.close();
         } catch (IOException e) {
-            throw new DukeException("An error occurred while saving your changes. Please try again later.");
+            throw new DukeException("An error occurred while saving your changes." +
+                    "Please try again later.");
         }
     }
 
@@ -66,26 +67,33 @@ public class Storage {
                 String[] details = line.split(",");
                 switch (details[0]){
                     case "T":
-                        listOfTasks.addTask(new ToDo(details[2], Boolean.parseBoolean(details[1])));
+                        listOfTasks.addTask(new ToDo(details[2],
+                                Boolean.parseBoolean(details[1])));
                         break;
                     case "D":
                         LocalDate dateD = LocalDate.parse(details[3]);
-                        listOfTasks.addTask(new Deadline(details[2], Boolean.parseBoolean(details[1]), dateD));
+                        listOfTasks.addTask(new Deadline(details[2],
+                                Boolean.parseBoolean(details[1]),
+                                dateD));
                         break;
                     case "E":
                         LocalDate dateE = LocalDate.parse(details[3]);
-                        listOfTasks.addTask(new Event(details[2], Boolean.parseBoolean(details[1]), dateE));
+                        listOfTasks.addTask(new Event(details[2],
+                                Boolean.parseBoolean(details[1]),
+                                dateE));
                         break;
                 }
                 line = reader.readLine();
             }
             return listOfTasks;
         } catch (FileNotFoundException e) {
-            System.out.println("It seems like you do not have a save file. A new one will be created.");
+            System.out.println("It seems like you do not have a save file." +
+                    "A new one will be created.");
             makeNewFile();
             return new TaskList();
         } catch (IOException e) {
-            throw new DukeException( "An error occurred while loading. Please try again later.");
+            throw new DukeException( "An error occurred while loading." +
+                    "Please try again later.");
         }
     }
 
@@ -98,7 +106,8 @@ public class Storage {
         try{
             new File(fileName).createNewFile();
         } catch (IOException e) {
-            throw new DukeException("An error occurred while loading. Please try again later.");
+            throw new DukeException("An error occurred while loading." +
+                    "Please try again later.");
         }
     }
 }
