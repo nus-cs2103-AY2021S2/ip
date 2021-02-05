@@ -66,8 +66,9 @@ public class Ui {
     }
 
     public void showWelcome() {
-        String greeting = line + logo + "\tWelcome to ToDoBeast, your best productivity task tracker tool!\n"
-                + "\tLet's get this bread! How would you like to be productive today?\n";
+        String greeting = line + logo + "\tWelcome to ToDoBeast, your best productivity task tracker tool!\n" +
+                "\tLet's get this bread! How would you like to be productive today?\n\n" +
+                "\t[Type \"instructions\" to display instructions]";
         System.out.println(greeting);
     }
 
@@ -87,7 +88,15 @@ public class Ui {
     }
 
     public void showInstructions() {
-        System.out.println("\tinstructions or wtv");
+        System.out.println("\tList of commands for ToDoBeast:\n\n" +
+                "\t1. bye/exit - to quit ToDoBeast\n" +
+                "\t2. list - lists all the tasks that have been stored in ToDoBeast\n" +
+                "\t3. delete, [index] - deletes the task with the corresponding [index]\n" +
+                "\t4. done, [index] - marks the task with the corresponding [index] as done\n" +
+                "\t5. find, [regex] - finds all tasks with the specified [regex]\n" +
+                "\t6. todo, [task description] - creates a to-do task with the specified [task description]\n" +
+                "\t7. deadline, [task description], by YYYY-MM-DD HH:MM - creates a deadline task with the specified [task description], date and time\n" +
+                "\t8. event, [task description], at YYYY-MM-DD HH:MM - creates an event task with the specified [task description], date and time\n");
     }
 
     public void showError(String error) {

@@ -1,13 +1,6 @@
 package todobeast;
 
-import todobeast.commands.Command;
-import todobeast.commands.AddCommand;
-import todobeast.commands.ExitCommand;
-import todobeast.commands.DeleteCommand;
-import todobeast.commands.DoneCommand;
-import todobeast.commands.ListCommand;
-import todobeast.commands.FindCommand;
-import todobeast.commands.TaskType;
+import todobeast.commands.*;
 import todobeast.exceptions.InvalidCommandException;
 import todobeast.exceptions.InvalidInputException;
 import todobeast.exceptions.ToDoBeastException;
@@ -50,6 +43,10 @@ public class Parser {
 
         // command will reside in index 0
         switch (commandArgs[0].toLowerCase()) {
+        case "instructions":
+        case "instruction":
+            command = new ShowInstructionsCommand();
+            break;
         case "bye":
         case "exit":
             command = new ExitCommand();

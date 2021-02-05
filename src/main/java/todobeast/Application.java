@@ -41,7 +41,6 @@ public class Application {
      */
     public void runApplication() {
         ui.showWelcome();
-        ui.showInstructions();
         ui.showLine();
 
         boolean isExit = false;
