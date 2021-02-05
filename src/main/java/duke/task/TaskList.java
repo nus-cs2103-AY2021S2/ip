@@ -54,6 +54,7 @@ public class TaskList {
             throw new DukeException("This task has been finished before.");
         }
         taskList.get(order).markAsDone();
+        assert taskList.get(order).done : "The markAsDone() is not functioning";
     }
 
 
