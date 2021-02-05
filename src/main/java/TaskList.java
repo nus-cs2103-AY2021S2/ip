@@ -35,12 +35,10 @@ public class TaskList {
     /**
      * Prints out all the tasks in the task list.
      */
-    public String list() {
-        String output = "";
+    public void list() {
         for (int i = 0; i < tasks.size(); i++) {
-            output = output + "\n" + (i + 1) + "." + tasks.get(i).toString();
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
-        return output;
     }
 
     /**
@@ -56,8 +54,7 @@ public class TaskList {
      * Finds the tasks that contain the keyword input by user.
      * @param keyword Keyword input by user.
      */
-    public String findWithKeyword(String keyword) {
-        String output = "";
+    public void findWithKeyword(String keyword) {
         int numberOfMatches = 0;
         int tracker = 0;
         for (int i = 0; i < tasks.size(); i++) {
@@ -65,17 +62,16 @@ public class TaskList {
             boolean isPresent = task.toLowerCase().contains(keyword.toLowerCase());
             if (isPresent) {
                 if (tracker == 0) {
-                    output = Ui.responseToFind() + "\n";
+                    Ui.responseToFind();
                     tracker++;
                 }
-                output = output + task + "\n";
+                System.out.println(task);
                 numberOfMatches++;
             }
         }
         if (numberOfMatches == 0) {
-            output = Ui.responseToNoMatches();
+            Ui.responseToNoMatches();
         }
-        return output;
     }
 
     /**
