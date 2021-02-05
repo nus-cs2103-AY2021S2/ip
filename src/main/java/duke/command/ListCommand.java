@@ -27,6 +27,7 @@ public class ListCommand extends Command {
     public String execute() throws DukeException, IOException {
         tasklist.setTaskArraylist(storage.loadFile());
         String allTaskMsg =  tasklist.showAllTask("list");
+
         if(allTaskMsg.isEmpty()){
             return ui.printNoTaskMessage();
         }else{

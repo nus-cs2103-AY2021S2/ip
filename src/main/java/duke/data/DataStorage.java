@@ -11,7 +11,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 public class DataStorage {
-    private static final String filePath = "./src/main/java/duke/data/data.txt";
+    private static final String FILE_PATH = "./src/main/java/duke/data/data.txt";
 
     /** Retrieve data file if present
      * Else create new data file
@@ -20,7 +20,7 @@ public class DataStorage {
      */
     public static File getFile() throws DukeException {
 
-        File file = new File(filePath);
+        File file = new File(FILE_PATH);
         file.getParentFile().mkdirs();
 
         if (!file.exists()) {
@@ -32,7 +32,6 @@ public class DataStorage {
         }
         return file;
     }
-
 
     /** Save task into data file
      * @param taskAL array list of task
@@ -50,9 +49,7 @@ public class DataStorage {
         } catch (Exception e) {
             throw new DukeException("error writing into file");
         }
-
     }
-
 
     /** Load data in file when program starts
      * @return array lise of task
@@ -74,7 +71,6 @@ public class DataStorage {
             throw new DukeException("Error finding file");
         }
         return taskAL;
-
     }
 
 }

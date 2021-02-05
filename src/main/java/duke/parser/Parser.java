@@ -20,15 +20,11 @@ import duke.exception.DukeException;
  * A class to handle all user input
  */
 public class Parser {
-    //  private static DataStorage storage = new DataStorage();
-  //  private static TaskList taskList = new TaskList();
 
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
-    //Global Variable
     private static String taskName;
-
 
     /** Call onto the respective command classes to handle different cases of command
      * @param list

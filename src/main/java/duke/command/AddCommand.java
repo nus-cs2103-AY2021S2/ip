@@ -26,17 +26,16 @@ public class AddCommand extends Command {
      */
     public AddCommand(String input, String type, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(input);
-        this.type= type;
-        this.dueDate =date;
+        this.type = type;
+        this.dueDate = date;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    /** Add task into task list and return task list
+    /** Adds task into task list and return task list
      * @return TaskList
      * @throws DukeException
      */
-
     public String execute() throws DukeException {
         switch (type) {
         case ("todo"):
@@ -57,6 +56,4 @@ public class AddCommand extends Command {
 
         return ui.displayAddedTaskMessage(tasklist.getTask(currentSize), currentSize+1);
     }
-
-
 }

@@ -36,14 +36,14 @@ public class Duke extends Application {
     }
 
     /**
-     * Method to start program
+     * Returns bot's response after processing user input
      */
     public String getResponse(String input) {
         String output = null;
         try {
             Command c = new Command("null");
             c.execute();
-            output= Parser.parse(tasks, input);
+            output = Parser.parse(tasks, input);
         } catch (DukeException | IOException e) {
             return ui.showError(e.getMessage());
         }
