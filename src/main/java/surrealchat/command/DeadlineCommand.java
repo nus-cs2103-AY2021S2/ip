@@ -2,7 +2,6 @@ package surrealchat.command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.NoSuchElementException;
 
 import surrealchat.task.DeadlineTask;
 import surrealchat.task.Task;
@@ -32,9 +31,7 @@ public class DeadlineCommand extends Command {
     }
 
     private DeadlineTask addDeadline(String taskDescription) {
-        if (taskDescription.isEmpty()) {
-            throw new NoSuchElementException("Empty deadline task description. Not stonks!\n");
-        }
+        assert !taskDescription.isEmpty() : "Empty deadline task description. Not stonks!\n";
 
         //Split the description into description and deadline
         String[] descriptionSplitArray = taskDescription.split("/by");
@@ -65,7 +62,7 @@ public class DeadlineCommand extends Command {
             DeadlineTask addedTask = addDeadline(rawDescription);
             taskManagement.addTask(addedTask);
             return printOutput(addedTask, taskManagement.getNumberOfTasks());
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return e.getMessage();
         }
     }

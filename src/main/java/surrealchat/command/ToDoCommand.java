@@ -1,7 +1,5 @@
 package surrealchat.command;
 
-import java.util.NoSuchElementException;
-
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
 import surrealchat.task.ToDoTask;
@@ -22,10 +20,7 @@ public class ToDoCommand extends Command {
     }
 
     private ToDoTask addToDo(String taskDescription) {
-        if (taskDescription.isEmpty()) {
-            throw new NoSuchElementException("Empty todo task description. Not stonks!\n");
-        }
-
+        assert !taskDescription.isEmpty() : "Empty todo task description. Not stonks!\n";
         return ToDoTask.createNewToDoTask(taskDescription.trim());
     }
 
@@ -45,7 +40,7 @@ public class ToDoCommand extends Command {
             ToDoTask addedTask = addToDo(taskDescription);
             taskManagement.addTask(addedTask);
             return printOutput(addedTask, taskManagement.getNumberOfTasks());
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return e.getMessage();
         }
     }
