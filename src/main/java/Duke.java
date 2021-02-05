@@ -1,3 +1,16 @@
+//import javafx.application.Application;
+//import javafx.scene.Scene;
+//import javafx.scene.control.Button;
+//import javafx.scene.control.Label;
+//import javafx.scene.control.ScrollPane;
+//import javafx.scene.control.TextField;
+//import javafx.scene.layout.AnchorPane;
+//import javafx.scene.layout.VBox;
+//import javafx.stage.Stage;
+//import javafx.scene.layout.Region;
+//import javafx.scene.image.Image;
+//import javafx.scene.image.ImageView;
+
 public class Duke {
 
     private boolean isActive;
@@ -14,21 +27,7 @@ public class Duke {
         this.parser = new Parser(taskList, ui);
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
-    }
-
-    private void start() {
-        ui.greet();
-        while (isActive) {
-            String input = ui.askForInput();
-            try {
-                isActive = parser.parse(input);
-                storage.saveTasks(taskList.getList());
-            } catch (DukeException e) {
-                ui.displayError(e.getMessage());
-            }
-        }
+    public String getResponse(String input) {
+        return parser.parse(input);
     }
 }

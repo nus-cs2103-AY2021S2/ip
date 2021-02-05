@@ -24,53 +24,47 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public void greet() {
-        String greeting = "Hello! I'm Duke" + "\n" + "What can I do for you?";
-        print(greeting);
+    public String greet() {
+        return "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
     /**
      * Says bye to the user.
      */
-    public void bye() {
-        String output = "Bye. Hope to see you again soon!";
-        print(output);
+    public String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Display added task.
      * @param task Added task
      */
-    public void displayAdded(Task task) {
-        String output = "I've added this task: \n" + task.toString();
-        print(output);
+    public String displayAdded(Task task) {
+        return "I've added this task: \n" + task.toString();
     }
 
     /**
      * Display done task.
      * @param task Done task
      */
-    public void displayDone(Task task) {
-        String output = "Marked as done: \n" + task;
-        print(output);
+    public String displayDone(Task task) {
+        return "Marked as done: \n" + task;
     }
 
     /**
      * Display deleted task.
      * @param task Deleted task
      */
-    public void displayDeleted(Task task) {
-        String output = "I removed this task: \n" + task;
-        print(output);
+    public String displayDeleted(Task task) {
+        return "I removed this task: \n" + task;
     }
 
     /**
      * Display error message.
      * @param message Error message
      */
-    public void displayError(String message) {
-        String output = "ERROR: " + message;
-        print(output);
+    public String displayError(String message) {
+        return "ERROR: " + message;
     }
 
     /**
