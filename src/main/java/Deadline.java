@@ -8,19 +8,23 @@ public class Deadline extends Task {
 
     String formattedDescription;
 
+    String dateString;
+
     Deadline(String description) throws EmptyArgumentException, BadDateException {
         super(description);
         int indexOfDate = description.indexOf("/") + 4;
         try {
             localDate = LocalDate.parse(description.substring(indexOfDate));
-            String date = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            formattedDescription = description.substring(0, indexOfDate) + date;
+            dateString = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            formattedDescription = description.substring(0, indexOfDate) + dateString;
         }
         catch(DateTimeParseException e) {
             throw new BadDateException();
         }
     }
-
+    public String getDateString() {
+        return dateString;
+    }
     @Override
     public String toString() {
         return "[D]" +  "[" + (isCompleted ? "X" : " ") + "] " + formattedDescription;
