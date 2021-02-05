@@ -6,6 +6,7 @@ import todobeast.commands.ExitCommand;
 import todobeast.commands.DeleteCommand;
 import todobeast.commands.DoneCommand;
 import todobeast.commands.ListCommand;
+import todobeast.commands.FindCommand;
 import todobeast.commands.TaskType;
 import todobeast.exceptions.InvalidCommandException;
 import todobeast.exceptions.InvalidInputException;
