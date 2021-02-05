@@ -1,27 +1,24 @@
-import java.io.IOException;
-
 /**
  * Command to find a Task based on a keyword.
  */
 public class FindCommand extends Command {
-    private final String keyword;
+    private final String[] keywords;
 
     /**
      * Constructor to keep track of the keyword used.
-     * @param keyword Used to find a task.
+     * @param input Used to find a task.
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String ... input) {
+        this.keywords = input;
     }
 
     /**
      * Goes through the TaskList to search for related Tasks.
-     * @param taskList
-     * @param ui
-     * @param storage
-     * @throws IOException
+     * @param taskList TaskList that contains all tasks at hand.
+     * @param ui Ui that deals with interaction with the user.
+     * @param storage Storage that deals with storing TaskList into hard drive.
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        return ui.printSomeTasks(taskList.findTasks(this.keyword));
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printSomeTasks(taskList.findTasks(this.keywords));
     }
 }

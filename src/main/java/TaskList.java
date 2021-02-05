@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Keeps track of the tasks at hand.
@@ -56,16 +57,23 @@ public class TaskList {
 
     /**
      * Finds the tasks that contains the keyword provided.
-     * @param keyword Keyword for searching a task.
+     * @param keywords Keyword for searching a task.
      * @return An ArrayList of the Tasks that contains the specific keyword.
      */
-    public ArrayList<Task> findTasks(String keyword) {
+    public ArrayList<Task> findTasks(String[] keywords) {
         ArrayList<Task> relatedTasks = new ArrayList<>();
-        for (Task current : this.tasks) {
-            String taskName = current.getName();
-            if (taskName.contains(keyword)) {
-                relatedTasks.add(current);
+        HashSet<Integer> toAdd = new HashSet<>();
+        for (String keyword : keywords) {
+            for (int i = 0; i < this.tasks.size(); i++) {
+                Task current = this.tasks.get(i);
+                String taskName = current.getName();
+                if (taskName.contains(keyword)) {
+                    toAdd.add(i);
+                }
             }
+        }
+        for (int taskToAdd : toAdd) {
+            relatedTasks.add(this.tasks.get(taskToAdd));
         }
         return relatedTasks;
     }

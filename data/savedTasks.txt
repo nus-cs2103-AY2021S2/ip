@@ -1,2 +1,2 @@
 T 0 borrow book
-T 0 borrow another book
+T 0 sell gme

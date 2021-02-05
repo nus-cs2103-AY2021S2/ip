@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  * Inherits from the superclass Task.
  */
 public class Deadline extends Task {
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Constructor to create a Deadline Task.

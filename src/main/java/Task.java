@@ -2,7 +2,7 @@
  * Represents a possible Task to be added.
  */
 public class Task {
-    private String name;
+    private final String name;
     private boolean isDone;
 
     /**
