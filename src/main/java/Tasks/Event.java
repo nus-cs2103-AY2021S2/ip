@@ -11,16 +11,11 @@ public class Event extends Task {
         this.at = at;
     }
 
-    private String getAtString() {
-        String atString = this.at.format(DateTimeFormatter.ofPattern("dd MMM uuuu, HH:mm"));
-        return "(at: " + atString + ")";
-    }
-
-    public String getAt() {
-        return this.at;
+    public String getAtString() {
+        return this.at.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
     }
 
     public String getStatusString() {
-        return "[E]" + super.getStatusString() + " " + this.getAtString();
+        return "[E]" + super.getStatusString() + " (at: " + this.getAtString() + ")";
     }
 }

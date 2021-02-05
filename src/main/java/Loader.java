@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Loader {
@@ -47,15 +48,16 @@ public class Loader {
         String taskType = taskDetailsArray[0].trim();
         String done = taskDetailsArray[1].trim();
         String description = taskDetailsArray[2].trim();
-        String time = taskDetailsArray[3].trim();
+        String dateTimeString = taskDetailsArray[3].trim();
+        LocalDateTime dateTime = InputHandler.convertToDateTime(dateTimeString);
 
         Task newTask;
         if (taskType.equals("T")) {
             newTask = new ToDo(description);
         } else if (taskType.equals("D")) {
-            newTask = new Deadline(description, time);
+            newTask = new Deadline(description, dateTime);
         } else {
-            newTask = new Event(description, time);
+            newTask = new Event(description, dateTime);
         }
 
         if (done.equals("1")) {
@@ -66,15 +68,15 @@ public class Loader {
     }
 
     private String convertToSavableString(Task task) {
-        String time = "";
+        String dateTimeString = "";
         String taskType;
 
         if (task instanceof Deadline) {
             taskType = "D";
-            time = ((Deadline) task).getBy();
+            dateTimeString = ((Deadline) task).getByString();
         } else if (task instanceof Event) {
             taskType = "E";
-            time = ((Event) task).getAt();
+            dateTimeString = ((Event) task).getAtString();
         } else {
             taskType = "T";
         }
@@ -82,6 +84,6 @@ public class Loader {
         String done = task.isDone() ? "1" : "0";
         String description = task.getDescription();
 
-        return taskType + " | " + done + " | " + description + " | " + time + "\n";
+        return taskType + " | " + done + " | " + description + " | " + dateTimeString + "\n";
     }
 }

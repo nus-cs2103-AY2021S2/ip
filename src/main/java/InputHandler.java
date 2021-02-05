@@ -10,8 +10,6 @@ import java.util.Arrays;
 
 public class InputHandler {
     private final String input;
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
-    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
     private static final ArrayList<String> validActions
             = new ArrayList<>(Arrays.asList("todo", "deadline", "event", "done", "delete", "list", "bye"));
 
@@ -44,11 +42,11 @@ public class InputHandler {
     }
 
     public LocalDateTime getBy() {
-        return this.convertToDateTime(this.getByString());
+        return convertToDateTime(this.getByString());
     }
 
     public LocalDateTime getAt() {
-        return this.convertToDateTime(this.getAtString());
+        return convertToDateTime(this.getAtString());
     }
 
     private String getByString() {
@@ -96,11 +94,11 @@ public class InputHandler {
                 throw new MissingEventTimeException();
             }
 
-            if (action.equals("deadline") && null == this.convertToDateTime(byString)) {
+            if (action.equals("deadline") && null == convertToDateTime(byString)) {
                 throw new DateTimeFormatNotRecognizedException(byString);
             }
 
-            if (action.equals("event") && null == this.convertToDateTime(atString)) {
+            if (action.equals("event") && null == convertToDateTime(atString)) {
                 throw new DateTimeFormatNotRecognizedException(atString);
             }
 
@@ -131,11 +129,11 @@ public class InputHandler {
         return true;
     }
 
-    private LocalDateTime convertToDateTime(String dateTimeString) {
+    public static LocalDateTime convertToDateTime(String dateTimeString) {
         LocalDateTime dateTime;
 
         try {
-            dateTime = LocalDateTime.parse(dateTimeString, this.dateTimeFormatter);
+            dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
         } catch (DateTimeParseException e) {
             dateTime = null;
         }
@@ -145,7 +143,7 @@ public class InputHandler {
         }
 
         try {
-            LocalDate date = LocalDate.parse(dateTimeString, this.dateFormatter);
+            LocalDate date = LocalDate.parse(dateTimeString, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
             return LocalDateTime.of(date, LocalTime.MIDNIGHT);
         } catch (DateTimeParseException e) {
             return null;
