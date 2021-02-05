@@ -41,20 +41,20 @@ public class Duke {
                 storage.saveTask(taskList);
                 break;
             } else if (command.equals("list")) {
-                taskList.printTasks();
+                printMessage(taskList.printTasks());
             } else if (p.getCommandLength() > 1) {
                 if (TaskType.equals("done")) {
-                    taskList.markAsDone(Integer.parseInt(p.getIndex()));
+                    printMessage(taskList.markAsDone(Integer.parseInt(p.getIndex())));
                 } else if (TaskType.equals("delete") || TaskType.equals("remove")) {
-                    taskList.DeleteTask(Integer.parseInt(p.getIndex()));
+                    printMessage(taskList.DeleteTask(Integer.parseInt(p.getIndex())));
                 } else if (TaskType.equals("find") || TaskType.equals("search")) {
-                    taskList.findTask(p.getTaskName());
+                    printMessage(taskList.findTask(p.getTaskName()));
                 } else if (TaskType.equals("todo")) {
-                    taskList.addTask(new TodoTask(command));
+                    printMessage(taskList.addTask(new TodoTask(command)));
                 } else if (TaskType.equals("deadline")) {
-                    taskList.addTask(new DeadlineTask(command));
+                    printMessage(taskList.addTask(new DeadlineTask(command)));
                 } else if (TaskType.equals("event")) {
-                    taskList.addTask(new EventTask(command));
+                    printMessage(taskList.addTask(new EventTask(command)));
                 }
             } else {
                 if (TaskType.equals("todo") || TaskType.equals("deadline")
@@ -108,6 +108,10 @@ public class Duke {
 
     public String getResponse(String input) {
         return processGUI(input);
+    }
+
+    public void printMessage(String out){
+        System.out.println(out);
     }
 
     //Main method where duke is initialized

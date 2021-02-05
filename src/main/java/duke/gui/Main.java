@@ -1,6 +1,6 @@
 package duke.gui;
 
-import duke.Duke;
+import duke.GUIDuke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/dukeGUI.txt");
+    private GUIDuke duke = new GUIDuke("data/dukeGUI.txt");
 
     @Override
     public void start(Stage stage) {
