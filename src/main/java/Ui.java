@@ -14,16 +14,16 @@ public class Ui {
         this.welcome = "Hello! I'm Duke\n" + "What can I do for you?\n";
     }
 
-    void showWelcome() {
-        System.out.println(this.welcome);
+    String showWelcome() {
+        return (this.welcome);
     }
 
-    void showLine() {
-        System.out.println("____________________________________________________________");
+    String showLine() {
+        return ("____________________________________________________________");
     }
 
-    void showLoadingError() {
-        System.out.println("\u00a9 OOPS!!! Error loading file :-(");
+    String showLoadingError() {
+        return ("\u00a9 OOPS!!! Error loading file :-(");
     }
 
     public String readCommand() {
@@ -33,44 +33,48 @@ public class Ui {
         return line;
     }
 
-    public void addCommandString(int size, String string) {
-        System.out.println("Got it. I've added this task:\n  " + string + "\nNow you have " + size + " tasks in the list.");
+    public String addCommandString(int size, String string) {
+        return ("Got it. I've added this task:\n  " + string + "\nNow you have " + size + " tasks in the list.");
     }
 
-    public void showError(String message) {
-        System.out.println("\u00a9 OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String showError(String message) {
+        return ("\u00a9 OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public void exitCommandString() {
-        System.out.println( "Bye. Hope to see you again soon!");
+    public String exitCommandString() {
+        return ( "Bye. Hope to see you again soon!");
 	}
 
-    public void addDeleteString(int size, String string) {
-        System.out.println("Noted. I've removed this task:\n  " + string + "\nNow you have " + size + " tasks in the list.");
+    public String addDeleteString(int size, String string) {
+        return ("Noted. I've removed this task:\n  " + string + "\nNow you have " + size + " tasks in the list.");
         
 	}
 
-    public void addDoneString(String string) {
-        System.out.println("Nice! I've marked this task as done:\n" + string);
+    public String addDoneString(String string) {
+        return("Nice! I've marked this task as done:\n" + string);
 	}
 
-    public void list(Scanner scanner) {
-        System.out.println("Here are the tasks in your list");
+    public String list(Scanner scanner) {
+        String value;
+        value = ("Here are the tasks in your list\n");
         while (scanner.hasNext()) {
-            System.out.println(scanner.nextLine());
+            value += scanner.nextLine();
         }
+        return value;
 
     }
 
-    public void list(Scanner scanner, String date) {
+    public String list(Scanner scanner, String date) {
+        String value;
         if (date.equals("")) {
-            System.out.println("Here are the tasks in your list");
+            value = ("Here are the tasks in your list\n");
             while (scanner.hasNext()) {
-                System.out.println(scanner.nextLine());
+                value += (scanner.nextLine());
             }
+            return value;
         } else {
             LocalDate thisDate = LocalDate.parse(date);
-            System.out.println("Here are the tasks in your list due on "
+            value = ("Here are the tasks in your list due on "
                     + thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
             while (scanner.hasNext()) {
                 String curTask = scanner.nextLine();
@@ -78,22 +82,24 @@ public class Ui {
                 if (string.length > 1) {
                     String dueDate = string[1].replace(")", "");
                     if (dueDate.equals(thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))) {
-                        System.out.println(curTask);
+                        value += (curTask);
                     }
                 }
 
             }
+            return value;
         }
     }
 
-    public void findTaskString(String task, Scanner scanner) {
-        System.out.println("Here are the tasks in your list:\n");
+    public String findTaskString(String task, Scanner scanner) {
+        String value;
+        value = ("Here are the tasks in your list:\n");
         while (scanner.hasNext()) {
             String curTask = scanner.nextLine();
             if (curTask.contains(task)) {
-                System.out.println(curTask);
+               value += (curTask);
             }
         }
+        return value;
 	}
-
 }

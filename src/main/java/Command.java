@@ -15,7 +15,7 @@ public abstract class Command {
         this.date = date;
     }
     
-    abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     abstract boolean isExit();
 }

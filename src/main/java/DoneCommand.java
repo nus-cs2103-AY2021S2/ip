@@ -12,12 +12,13 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
             int index = Integer.valueOf(this.task);
             Task curTask = taskList.get(index);
             curTask.markAsDone();
-            ui.addDoneString(curTask.toString());
+
             storage.rewrite(taskList);
+        return ui.addDoneString(curTask.toString());
     }
 
     @Override

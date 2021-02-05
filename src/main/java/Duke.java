@@ -45,8 +45,10 @@ public class Duke {
             }
         }
     }
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) throws DukeException {
+        ui.showLine(); // show the divider line ("_______")
+        Command c = Parser.parse(input);
+        return c.execute(tasks, ui, storage);
     }
 
     public void welcomeResponse() {

@@ -12,8 +12,8 @@
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
-        ui.findTaskString(this.task, storage.read());
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+        return ui.findTaskString(this.task, storage.read());
     }
 
     @Override
