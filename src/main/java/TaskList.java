@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class TaskList {
     protected static ArrayList<Task> updatedTaskList;
     protected static ArrayList<String> loadedTaskList;
+    private static final int DEADLINE_TASK_INDEX = 16;
+    private static final int EVENT_TASK_INDEX = 16;
+    private static final int TODO_TASK_INDEX = 16;
 
     /**
      * Initializes a TaskList object in the situation where the specified
@@ -26,6 +29,8 @@ public class TaskList {
     public TaskList(ArrayList<String> loadedList) throws DukeException {
         updatedTaskList = new ArrayList<>();
         TaskList.loadedTaskList = loadedList;
+        assert loadedTaskList.size() >= 0 : "The list of tasks loaded from the file"
+                + " must have a size of 0 or more";
         updateTaskList();
     }
 
@@ -69,7 +74,7 @@ public class TaskList {
      * @return the todo task description
      */
     public static String getTodoTask(String input) {
-        return input.substring(16);
+        return input.substring(TODO_TASK_INDEX);
     }
 
     /**
@@ -79,7 +84,7 @@ public class TaskList {
      */
     public static String getDeadlineTask(String input) {
         int dateIndex = input.indexOf("(by: ");
-        return input.substring(16, dateIndex - 1);
+        return input.substring(DEADLINE_TASK_INDEX, dateIndex - 1);
     }
 
     /**
@@ -89,7 +94,7 @@ public class TaskList {
      */
     public static String getDeadlineDate(String input) {
         int dateIndex = input.indexOf("(by: ");
-        return input.substring(dateIndex + 5, dateIndex + 15);
+        return input.substring(dateIndex + 5, dateIndex + 16);
     }
 
     /**
@@ -99,7 +104,7 @@ public class TaskList {
      */
     public static String getEventTask(String input) {
         int dateIndex = input.indexOf("(at: ");
-        return input.substring(16, dateIndex - 1);
+        return input.substring(EVENT_TASK_INDEX, dateIndex - 1);
     }
 
     /**
@@ -108,8 +113,8 @@ public class TaskList {
      * @return the event task date
      */
     public static String getEventDate(String input) {
-        int dateIndex = input.indexOf("(at: ");
-        return input.substring(dateIndex + 5, input.length() - 2);
+        int dateIndex = input.indexOf("(at: ") + 5;
+        return input.substring(dateIndex, input.length() - 2);
     }
 
     /**

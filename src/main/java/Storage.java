@@ -32,8 +32,7 @@ public class Storage {
             String task = s.nextLine();
             loadedTasks.add(task);
         }
-        assert loadedTasks.size() >= 0 : "The list of tasks loaded from the specified file "
-                + "must have size >= 0";
+        assert loadedTasks.size() >= 0 : "The list of tasks loaded from the file must have size >= 0";
         return loadedTasks;
     }
 
