@@ -151,6 +151,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Filters Tasks based on user input.
+     * @param input     User input.
+     * @param taskList  List of Tasks
+     * @return Filtered list of Tasks matching the keyword.
+     * @throws DukeException If there is an error in user input.
+     */
     public String handleFind(String input,
                              TaskList taskList)
             throws DukeException {
@@ -163,6 +170,13 @@ public class Parser {
         return "Here are the tasks that I can find:\n" + taskList.find(keyword).toString();
     }
 
+    /**
+     * Returns a list of Tasks which occurs in the next few days.
+     * @param input    User input.
+     * @param taskList List of Tasks
+     * @return Lists of Tasks within the next few days.
+     * @throws DukeException If there is an error in user input.
+     */
     public String handleRemind(String input,
                                TaskList taskList)
             throws DukeException {
@@ -178,8 +192,8 @@ public class Parser {
                     + taskList.remind(numberOfDays);
         } catch (NumberFormatException e) {
             throw new DukeException("Please input a positive integer, " +
-                    "so that I know how many days after today I should look into and remind your tasks, " +
-                    "you forgetful :P.");
+                    "so that I know how many days after today I should look into " +
+                    "and remind your tasks, you forgetful :P.");
         }
     }
 }
