@@ -1,6 +1,7 @@
 public class Task {
 
     protected String description;
+    protected String eventDate;
     protected boolean isDone;
 
     enum Level {
@@ -18,17 +19,22 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.eventDate = "";
     }
 
     /**
      * Overriden method to mark a task as done.
      * @param description Description of method
-     * @param isDone Boolean flag indicating whether task is done
+     * @param eventDate Boolean flag indicating whether task is done
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, String eventDate) {
         this.description = description;
-        this.isDone = isDone;
+        this.eventDate = eventDate;
     }
+
+    public String getTaskType() {
+        return "";
+    };
 
     public String getStatusIcon() {
         return isDone ? "X" : "";
@@ -36,6 +42,10 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String getEventDate() {
+        return this.eventDate;
     }
 
     public void markAsDone() {
