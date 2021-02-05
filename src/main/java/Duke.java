@@ -1,5 +1,8 @@
-import java.io.File;
 import java.io.IOException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 
 /**
@@ -29,6 +32,15 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
+        System.out.println("So here are the rules!: ");
+        System.out.println("-- list:  Prints current tasks in the list\n"
+                + "-- todo <nameOfToDoTask>:  Adds a todo task to your list\n"
+                + "-- deadline <nameOfDeadlineTask> /by <YYYY-MM-DD HH:MM>:  Adds a deadline task to your list\n"
+                + "-- event <nameOfEventTask> /at <YYYY-MM-DD HH:MM>:  Adds an event task to your list\n"
+                + "-- delete <taskNumber>:  Deletes specified task\n"
+                + "-- done <taskNumber>:  Marks specified task as done\n"
+                + "-- taskdate <YYYY-MM-DD>:  Prints tasks in your list that match the specified date");
 
         TaskList taskList = new TaskList();
         String filePath = "data/duke.txt";
@@ -65,12 +77,17 @@ public class Duke {
                 } else if (inputArr[0].equals("done")) {
                     int taskNo = Integer.parseInt(inputArr[1]);
                     taskList.getTask(taskNo).markAsDone();
+                } else if (inputArr[0].equals("taskdate")) {
+                    LocalDate date = LocalDate.parse(inputArr[1]);
+                    taskList.printTasksOn(date);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
             } catch (DukeException | IOException e) {
                 System.out.println(e);
+            } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
             }
         }
 

@@ -1,6 +1,11 @@
 import java.io.IOException;
+
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Represents a list of tasks.
@@ -42,12 +47,28 @@ public class TaskList {
             if (descriptionArr.length == 1) {
                 throw new DukeException("Your description is not given in the correct format!");
             }
+
+            Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
+            Matcher matcher = pattern.matcher(descriptionArr[1]);
+            if (!matcher.find()) {
+                throw new DukeException("Your deadline is given in the wrong format! "
+                        + "Please make sure it is in the following format: YYYY-MM-DD HH:MM");
+            }
+
             newTask = new DeadlineTask(descriptionArr[0], descriptionArr[1]);
         } else if (taskType == TaskType.EVENT) {
             String[] descriptionArr = description.split(" /at ");
             if (descriptionArr.length == 1) {
                 throw new DukeException("Your description is not given in the correct format!");
             }
+
+            Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
+            Matcher matcher = pattern.matcher(descriptionArr[1]);
+            if (!matcher.find()) {
+                throw new DukeException("Your event date is given in the wrong format! "
+                        + "Please make sure it is in the following format: YYYY-MM-DD HH:MM");
+            }
+
             newTask = new EventTask(descriptionArr[0], descriptionArr[1]);
         }
         this.taskList.add(newTask);
@@ -82,7 +103,7 @@ public class TaskList {
     }
 
     /**
-     * Print tasks in task list.
+     * Prints tasks in task list.
      */
     public void printTaskList() {
         if (this.taskList.size() == 0) {
@@ -91,6 +112,27 @@ public class TaskList {
             System.out.println("Here are the tasks in your list:");
             for (int i = 1; i <= this.taskList.size(); i++) {
                 System.out.println(i + "." + this.taskList.get(i - 1));
+            }
+        }
+    }
+
+    /**
+     * Prints tasks that match the given date.
+     *
+     * @param date Date to be matched to tasks.
+     */
+    public void printTasksOn(LocalDate date) {
+        for (int i = 0; i < this.taskList.size(); i++) {
+            if (taskList.get(i) instanceof DeadlineTask) {
+                LocalDate deadlineDate = ((DeadlineTask) taskList.get(i)).getDeadlineDate();
+                if (deadlineDate.compareTo(date) == 0) {
+                    System.out.println(taskList.get(i));
+                }
+            } else if (taskList.get(i) instanceof EventTask) {
+                LocalDate eventDateDate = ((EventTask) taskList.get(i)).getEventDateDate();
+                if (eventDateDate.compareTo(date) == 0) {
+                    System.out.println(taskList.get(i));
+                }
             }
         }
     }

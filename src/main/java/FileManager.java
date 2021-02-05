@@ -5,8 +5,7 @@ import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 /**
@@ -44,7 +43,7 @@ public class FileManager {
     /**
      * Create and writes to a new file.
      *
-     * @param filePath Path of file.
+     * @param filePath  Path of file.
      * @param textToAdd Text to write into file.
      * @throws IOException If there are input or output errors.
      */
@@ -57,7 +56,7 @@ public class FileManager {
     /**
      * Append text to existing file.
      *
-     * @param filePath Path of file.
+     * @param filePath     Path of file.
      * @param textToAppend Text to append to existing file.
      * @throws IOException If there are input or output errors.
      */
@@ -86,7 +85,7 @@ public class FileManager {
     /**
      * Deletes a specific line from a file.
      *
-     * @param filePath Path of file.
+     * @param filePath   Path of file.
      * @param lineNumber Number of line to be deleted (1-based indexing).
      * @throws IOException If there are input or output errors.
      */
@@ -113,7 +112,7 @@ public class FileManager {
      *
      * @param filePath Path of file.
      * @return Task list of existing tasks in file.
-     * @throws IOException If there are input or output errors.
+     * @throws IOException   If there are input or output errors.
      * @throws DukeException If description of task is not in the correct format.
      */
     public static TaskList textFileToArrayList(String filePath) throws IOException, DukeException {
@@ -139,5 +138,4 @@ public class FileManager {
 
         return taskList;
     }
-
 }
