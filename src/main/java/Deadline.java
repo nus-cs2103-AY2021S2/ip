@@ -21,6 +21,15 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Reschedule Deadline object
+     *
+     * @param updated the updated deadline of the Deadline task
+     */
+    public void updateDate(LocalDate updated) {
+        this.by = updated;
+    }
+
     @Override
     public String toString() {
         return "D | " + super.toString() + " | "

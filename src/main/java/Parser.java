@@ -77,6 +77,10 @@ public class Parser {
         return commandType.equals("deadline");
     }
 
+    private boolean isDeadline(int taskIndex) {
+        return this.tasks.list.get(taskIndex) instanceof Deadline;
+    }
+
     static boolean isEvent(String commandType) {
         return commandType.equals("event");
     }
@@ -133,6 +137,19 @@ public class Parser {
         tasks.removeTask(taskIndex);
     }
 
+    static int parseRescheduleIndex(String command) {
+        return Integer.parseInt(command.substring(11).split(" /to ")[0]);
+    }
+
+    static LocalDate parseRescheduleTime(String command) {
+        return LocalDate.parse(command.substring(11).split(" /to ")[1]);
+    }
+
+    private void rescheduleTask(String command, int taskIndex) {
+        LocalDate updated = Parser.parseRescheduleTime(command);
+        ((Deadline) tasks.list.get(taskIndex)).updateDate(updated);
+    }
+
     public String parseCommand(String command) {
         assert !command.isEmpty() : "Command is empty.";
         String commandType = Parser.parseCommandType(command);
@@ -175,6 +192,15 @@ public class Parser {
                 String keyword = Parser.parseKeyword(command);
                 ArrayList<Task> matchingTasks = getMatchingTasks(keyword);
                 return ui.showMatchingTasks(matchingTasks);
+            } else if (commandType.equals("reschedule")) {
+                // RESCHEDULE DEADLINE TASK
+                int taskIndex = Parser.parseRescheduleIndex(command) - 1;
+                if (isDeadline(taskIndex)) {
+                    rescheduleTask(command, taskIndex);
+                    return ui.showRescheduledTask(tasks.list, taskIndex);
+                } else {
+                    throw new DukeException(ui.showInvalidType());
+                }
             } else {
                 throw new DukeException(ui.showInvalidCommand());
             }
