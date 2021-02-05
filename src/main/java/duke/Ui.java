@@ -34,13 +34,17 @@ public class Ui {
     /**
      * Formats the task that was deleted and outputs a string to be printed to the user.
      *
-     * @param task task that was deleted.
+     * @param taskList lists of tasks that were deleted.
      * @param numOfTasks current number of tasks the user has.
      * @return string message to be printed to the user.
      */
-    public String showRemovedTask(Task task, int numOfTasks) {
-        return "Noted. I've removed this task:\n"
-                + task + "\nNow you have " + numOfTasks + " tasks in the list. \n";
+    public String showRemovedTask(ArrayList<Task> taskList, int numOfTasks) {
+        String result = "Noted. I've removed this task(s): \n";
+        for (Task task : taskList) {
+            result = result + task + "\n";
+        }
+        result = result + "\nNow you have " + numOfTasks + " tasks in the list. \n";
+        return result;
     }
 
     /**

@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.Storage;
@@ -29,10 +30,14 @@ public class DeleteCommand extends Command {
      * @throws DukeException If the task number specified as done is not valid.
      */
     public String execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException, IOException {
-        String taskNumber = super.parsedCommand[1];
-        Task completedTask = taskManager.delete(Integer.parseInt(taskNumber));
+        String[] taskNumbers = super.parsedCommand[1].split(" ");
+        ArrayList<Task> deletedTasks = new ArrayList<>();
+        for (int i = 0; i < taskNumbers.length; i++) {
+            Task task = taskManager.delete(Integer.parseInt(taskNumbers[i]) - i);
+            deletedTasks.add(task);
+        }
         storage.store(taskManager.retrieveTasksforStorage());
-        return ui.showRemovedTask(completedTask, taskManager.getNumOfTasks());
+        return ui.showRemovedTask(deletedTasks, taskManager.getNumOfTasks());
     }
 
 }

@@ -81,7 +81,10 @@ public class Parser {
             throw new DukeException("Missing task number! Please try again.");
         } else {
             try {
-                int taskNumber = Integer.parseInt(inputArray[1]);
+                String[] taskNumbers = inputArray[1].split(" ");
+                for (int i = 0; i < taskNumbers.length; i++) {
+                    Integer.parseInt(taskNumbers[i]);
+                }
                 return new DeleteCommand(inputArray);
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid task number! Please try again.");
