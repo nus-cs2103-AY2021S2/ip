@@ -100,6 +100,7 @@ public class Task {
      */
     @Override
     public String toString() {
+        assert this.getStatus().equals(true) || this.getStatus().equals(false);
         return this.getTaskName() + "[" + this.getStatus() + "] ";
     }
 }
