@@ -53,9 +53,11 @@ class Processor {
         case BYE:
             outputs = executeBye(cml);
             break;
-        default:
+        case UNKNOWN:
             outputs[0] = String.format("I have detailed files on human anatomy, but not %s.", input);
             outputs[1] = null;
+        default:
+            assert false;
         }
         return new Output(outputs);
     }
