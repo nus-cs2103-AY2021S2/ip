@@ -1,4 +1,4 @@
 deadline do assignment /by 2021-01-01
 todo read book
-todo buy coffee
 todo read book
+deadline attend meeting /by 2021-05-18
