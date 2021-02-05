@@ -12,16 +12,20 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Initialises a new Deadline with text description.
+     * Initialises a new Deadline with text description and date.
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDate.parse(by);
+        if (by.contains("-")) {
+            this.by = LocalDate.parse(by);
+        } else {
+            this.by = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
     }
 
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(), 
-            super.toString(), this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                super.toString(), this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }

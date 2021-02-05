@@ -5,7 +5,7 @@ package duke;
  */
 public class Ui {
 
-	/**
+    /**
      * Prints a big Duke and greets the user. Prompts user to start input.
      */
     public void greet() {
@@ -16,20 +16,27 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke :) What can I do for you?");
-        System.out.println("----------------------------------------------------------");
+        this.separateLine();
     }
 
     /**
      * Prints a line to separate each reply.
      */
     public void separateLine() {
-    	System.out.println("----------------------------------------------------------");
+        System.out.println("----------------------------------------------------------");
+    }
+
+    /**
+     * Displays intended message to user.
+     */
+    public void replyWith(String msg) {
+        System.out.println(msg);
     }
 
     /**
      * Prints a bye statement before exit.
      */
     public void sayBye() {
-    	System.out.println("Byebye~ Hope to see you again soon!");
+        System.out.println("Byebye~ Hope to see you again soon!");
     }
 }

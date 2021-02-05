@@ -12,7 +12,7 @@ public abstract class Task {
 
     /**
      * Initialise a new undone Task with text description.
-     * @param description Text represent of what task is about.
+     * @param description Text representation of what task is about.
      */
     public Task(String description) {
         this.description = description;

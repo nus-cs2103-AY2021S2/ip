@@ -12,16 +12,20 @@ public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Initialises a new Event with text description.
+     * Initialises a new Event with text description and date.
      */
     public Event(String description, String at) {
         super(description);
-        this.at = LocalDate.parse(at);
+        if (at.contains("-")) {
+            this.at = LocalDate.parse(at);
+        } else {
+            this.at = LocalDate.parse(at, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
     }
 
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), 
-            super.toString(), this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                super.toString(), this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }

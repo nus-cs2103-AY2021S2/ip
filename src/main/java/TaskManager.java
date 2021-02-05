@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,8 +10,25 @@ import java.io.IOException;
  * Supports operations to modify and display stored tasks.
  */
 public class TaskManager {
-	/** List of all tasks entered by user. */
-    private ArrayList<Task> store = new ArrayList<>();
+    /** List of all tasks entered by user. */
+    private List<Task> store;
+
+    /** Initialises a task manager with no tasks. */
+    public TaskManager() {
+        this.store = new ArrayList<>();
+    }
+
+    /** Initialises a task manager with pre-loaded list of tasks. */
+    public TaskManager(List<Task> store) {
+        this.store = store;
+    }
+
+    /** Retrieves the whole list of tasks.
+     * @return List of tasks.
+     */
+    public List<Task> getStore() {
+        return this.store;
+    }
 
     /**
      * Adds new task to list of all tasks.
@@ -30,7 +48,7 @@ public class TaskManager {
      * Prints the list of all tasks and their statuses.
      */
     public void displayTasks() {
-    	int counter = 1;
+        int counter = 1;
         for (Task elem: this.store) {
             System.out.println(counter + ". " + elem.toString());
             counter += 1;
@@ -40,7 +58,7 @@ public class TaskManager {
     /**
      * Accesses task at target index and mark it as done.
      */
-    public void taskDone(int n) {
+    public void markTaskDone(int n) {
         this.store.get(n - 1).markAsDone();
     }
 
@@ -62,21 +80,6 @@ public class TaskManager {
                 System.out.println(counter + ". " + t.toString());
             }
             counter += 1;
-        }
-    }
-
-    /**
-     * Saves the latest list and states of tasks to a file.
-     */
-    public void writeToDisk() {
-        try {
-            FileWriter fw = new FileWriter("tasklist/mytasks.txt");
-            for (Task t: this.store) {
-                fw.write(t.toString() + "\n");
-            }
-            fw.close();
-        } catch (IOException err) {
-            err.printStackTrace();
         }
     }
 }
