@@ -11,6 +11,7 @@ public class Parser {
      * @return corresponding command (enum)
      */
     public Command parseStringToCommand(String... taskString) {
+        assert taskString.length > 0 : "The size of user input string array should be at least 1";
         if (taskString[0].toLowerCase().equals("list")) {
             return Command.LIST;
         } else if (taskString[0].toLowerCase().contains("done")) {
