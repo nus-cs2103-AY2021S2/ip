@@ -6,7 +6,7 @@
 public class Todo extends Task {
 
     /**
-     * Construct a Todo object
+     * Constructs a Todo object
      *
      * @param description the description of the Todo task
      */

@@ -32,8 +32,8 @@ public class Ui {
     }
 
     public String showAddTask(ArrayList<Task> list) {
-        return "Got it. I've added this task:\n" + list.get(list.size() - 1) +
-                "\nNow you have " +  list.size() + " task(s) in the list.\n";
+        return "Got it. I've added this task:\n" + list.get(list.size() - 1)
+                + "\nNow you have " +  list.size() + " task(s) in the list.\n";
     }
 
     public String showInvalidTodo() {
@@ -41,8 +41,8 @@ public class Ui {
     }
 
     public String showDeleteTask(ArrayList<Task> list, Task deletedTask) {
-        return "Noted. I've removed this task:\n" + deletedTask.toString() +
-               "\nNow you have " + list.size() + " tasks in the list.\n";
+        return "Noted. I've removed this task:\n" + deletedTask.toString()
+                + "\nNow you have " + list.size() + " tasks in the list.\n";
     }
 
     public String showClear() {
