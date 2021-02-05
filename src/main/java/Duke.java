@@ -1,10 +1,8 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
+import java.util.Scanner;
 
 public class Duke {
 
-    static void level1() {
+    public static void level1() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
 
         Scanner sc = new Scanner(System.in);

@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    List<Task> taskList;
+    protected List<Task> taskList;
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
@@ -30,9 +30,9 @@ public class TaskList {
             newTask = new EventTask(descriptionArr[0], descriptionArr[1]);
         }
         this.taskList.add(newTask);
-        System.out.println("Got it. I've added this task: \n" +
-                "  " + newTask + "\n" +
-                "Now you have " + this.taskList.size() + " tasks in the list.");
+        System.out.println("Got it. I've added this task: \n"
+                + "  " + newTask + "\n"
+                + "Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
     public void deleteTask(int taskNo) throws DukeException {
