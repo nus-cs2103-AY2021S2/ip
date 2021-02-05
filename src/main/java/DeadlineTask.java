@@ -12,6 +12,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Creates a new instance of <code>DeadlineTask</code>.
+     *
      * @param description Description of deadline task.
      */
     public DeadlineTask(String description, String deadline) {
@@ -19,12 +20,22 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Returns date of deadline.
+     *
+     * @return Date of deadline.
+     */
     public LocalDate getDeadlineDate() {
         String[] deadlineArr = this.deadline.split(" ");
         LocalDate deadlineDate = LocalDate.parse(deadlineArr[0]);
         return deadlineDate;
     }
 
+    /**
+     * Returns time of deadline.
+     *
+     * @return Time of deadline.
+     */
     public LocalTime getDeadlineTime() {
         String[] deadlineArr = this.deadline.split(" ");
         LocalTime deadlineTime = LocalTime.parse(deadlineArr[1]);

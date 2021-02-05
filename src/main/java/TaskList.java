@@ -94,7 +94,7 @@ public class TaskList {
     }
 
     /**
-     * Print tasks in task list.
+     * Prints tasks in task list.
      */
     public void printTaskList() {
         if (this.taskList.size() == 0) {
@@ -107,6 +107,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints tasks that match the given date.
+     *
+     * @param date Date to be matched to tasks.
+     */
     public void printTasksOn(LocalDate date) {
         for (int i = 0; i < this.taskList.size(); i++) {
             if (taskList.get(i) instanceof DeadlineTask) {

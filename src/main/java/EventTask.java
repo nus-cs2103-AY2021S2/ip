@@ -18,12 +18,22 @@ public class EventTask extends Task {
         this.eventDate = eventDate;
     }
 
+    /**
+     * Returns date of event.
+     *
+     * @return Date of event.
+     */
     public LocalDate getEventDateDate() {
         String[] eventDateArr = this.eventDate.split(" ");
         LocalDate eventDateDate = LocalDate.parse(eventDateArr[0]);
         return eventDateDate;
     }
 
+    /**
+     * Returns time of event.
+     *
+     * @return Time of event.
+     */
     public LocalTime getEventDateTime() {
         String[] eventDateArr = this.eventDate.split(" ");
         LocalTime eventDateTime = LocalTime.parse(eventDateArr[1]);

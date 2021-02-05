@@ -30,6 +30,15 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        System.out.println("So here are the rules!: ");
+        System.out.println("-- list:  Prints current tasks in the list\n"
+                + "-- todo <nameOfToDoTask>:  Adds a todo task to your list\n"
+                + "-- deadline <nameOfDeadlineTask> /by <YYYY-MM-DD HH:MM>:  Adds a deadline task to your list\n"
+                + "-- event <nameOfEventTask> /at <YYYY-MM-DD HH:MM>:  Adds an event task to your list\n"
+                + "-- delete <taskNumber>:  Deletes specified task\n"
+                + "-- done <taskNumber>:  Marks specified task as done\n"
+                + "-- taskdate <YYYY-MM-DD>:  Prints tasks in your list that match the specified date");
+
         TaskList taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
 
