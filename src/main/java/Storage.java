@@ -7,11 +7,15 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-public class Loader {
-    private final String path = "data/duke.txt";
+public class Storage {
+    private final String path;
 
-    public TaskCollection loadTasks() {
-        TaskCollection tasks = new TaskCollection();
+    public Storage(String filePath) {
+        this.path = filePath;
+    }
+
+    public TaskList loadTasks() {
+        TaskList tasks = new TaskList();
         File file = new File(this.path);
 
         try {
@@ -27,7 +31,7 @@ public class Loader {
         }
     }
 
-    public void saveTasks(TaskCollection tasks) {
+    public void saveTasks(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(this.path);
 
@@ -49,7 +53,7 @@ public class Loader {
         String done = taskDetailsArray[1].trim();
         String description = taskDetailsArray[2].trim();
         String dateTimeString = taskDetailsArray[3].trim();
-        LocalDateTime dateTime = InputHandler.convertToDateTime(dateTimeString);
+        LocalDateTime dateTime = Parser.convertToDateTime(dateTimeString);
 
         Task newTask;
         if (taskType.equals("T")) {

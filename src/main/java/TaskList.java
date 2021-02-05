@@ -3,10 +3,10 @@ import Tasks.Task;
 
 import java.util.ArrayList;
 
-public class TaskCollection {
+public class TaskList {
     private final ArrayList<Task> tasks;
 
-    public TaskCollection() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 

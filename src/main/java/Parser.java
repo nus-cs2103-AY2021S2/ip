@@ -8,17 +8,17 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class InputHandler {
+public class Parser {
     private final String input;
     private static final ArrayList<String> validActions
             = new ArrayList<>(Arrays.asList("todo", "deadline", "event", "done", "delete", "list", "bye"));
 
-    public InputHandler(String input) {
+    public Parser(String input) {
         this.input = input;
     }
 
     public String getAction() {
-        return (input + " ").split(" ")[0];
+        return (input + " ").split(" ")[0].toLowerCase();
     }
 
     private String getRemainingTokens() {
