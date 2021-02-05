@@ -25,8 +25,8 @@ public class UI {
         showToUser(GOODBYE_MESSAGE + LS + DIVIDER);
     }
 
-    public void commandMessage(String command, DukeList list) {
-        switch(command) {
+    public void commandMessage(String[] commandAndParams, DukeList list) {
+        switch(commandAndParams[0]) {
         case "done":
             doneMessage();
             showNoOfTaskLeft(list);

@@ -8,45 +8,40 @@ public class Parser {
      * @param list DukeList object in use
      * @return String
      */
-    public static String parse(String fullCommand, DukeList list) {
+    public static String[] parse(String fullCommand, DukeList list) {
         String[] commandStringArr = fullCommand.split(" ", 2);
-        String commandName = commandStringArr[0];
-        switch (commandName) {
+        switch (commandStringArr[0]) {
         case "done":
             list.done(Integer.parseInt(commandStringArr[1]) - 1);
-            return "done";
+            return commandStringArr;
         case "delete":
             list.delete(Integer.parseInt(commandStringArr[1]) - 1);
-            return "delete";
+            return commandStringArr;
         case "todo":
             ToDos todo = new ToDos(commandStringArr[1]);
             list.add(todo);
-            return "todo";
+            return commandStringArr;
         case "deadline":
             String[] deadlineParamArr = commandStringArr[1].split(" /by ");
             LocalDate deadlineDate = LocalDate.parse(deadlineParamArr[1]);
             Deadlines deadline = new Deadlines(deadlineParamArr[0], deadlineDate);
             list.add(deadline);
-            return "deadline";
+            return commandStringArr;
         case "event":
             String[] eventParamArr = commandStringArr[1].split(" /at ");
             LocalDate eventDate = LocalDate.parse(eventParamArr[1]);
             Events event = new Events(eventParamArr[0], eventDate);
             list.add(event);
-            return "event";
+            return commandStringArr;
         case "show":
             LocalDate date = LocalDate.parse(commandStringArr[1]);
             list.setDate(date);
-            return "show";
+            return commandStringArr;
         case "reset":
             list.deleteAll();
-            return "reset";
-        case "list":
-            return "list";
-        case "bye":
-            return "bye";
+            return commandStringArr;
         default:
-            return "unknown";
+            return commandStringArr;
         }
     }
 }
