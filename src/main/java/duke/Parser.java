@@ -58,6 +58,7 @@ public class Parser {
         if (input.charAt(0) == ' ') {
             input = input.substring(1);
         }
+        assert input.isEmpty() : false;
         return new ToDo(input);
     }
 
@@ -107,6 +108,7 @@ public class Parser {
             if (input.charAt(0) == ' ') {
                 input = input.substring(1);
             }
+            assert !input.contains("/at ") : false;
             int endOfDescription = input.indexOf("/at ");
             String description = input.substring(0, endOfDescription);
             String time = input.substring(endOfDescription + 4);

@@ -53,9 +53,11 @@ public class Storage {
             if (!Files.exists(directoryPath)) {
                 Files.createDirectory(directoryPath);
             }
+            assert !Files.exists(directoryPath) : false;
             if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
             }
+            assert !Files.exists(filePath) : false;
             BufferedWriter bufferedWriter = Files.newBufferedWriter(filePath);
             for (Task task : taskList.getTasks()) {
                 bufferedWriter.write(task.toString() + "\n");
