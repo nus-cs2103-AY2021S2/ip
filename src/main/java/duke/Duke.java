@@ -15,6 +15,13 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(System.getProperty("user.dir") + "/data/duke.tasks.txt");
+        tasks = new TaskList();
+        tasks.dataInput(storage.loadData());
+    }
+
     public Duke(String path) {
         ui = new Ui();
         storage = new Storage(path);
@@ -23,27 +30,27 @@ public class Duke {
     }
 
     /**
+     * Returns the greeting message string
+     */
+    public String returnGreetingMessage() {
+        return ui.greetingMessage();
+    }
+
+    /**
      * This method call each of the respective classes to execute a command that the user input
      */
-    public void run() {
+    public String getResponse(String input) {
         CommandRouter commandRouter = new CommandRouter();
-        boolean isExit = false;
+        Command parsedCommand = Parser.parse(input);
+        String response = commandRouter.route(parsedCommand, tasks, input);
 
-        ui.greetingMessage();
-
-        while (!isExit) {
-            String inputCommand = ui.readInput();
-            ui.separatorLine();
-            Command parsedCommand = Parser.parse(inputCommand);
-            commandRouter.route(parsedCommand, tasks, inputCommand);
-            isExit = commandRouter.isExit();
-            ui.separatorLine();
-        }
         storage.save(tasks.getList());
+
+        return response;
     }
 
     public static void main(String[] args) {
-        new Duke(System.getProperty("user.dir") + "/data/duke.tasks.txt").run();
+        new Duke(System.getProperty("user.dir") + "/data/duke.tasks.txt").returnGreetingMessage();
     }
 }
 
