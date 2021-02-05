@@ -57,7 +57,7 @@ public class Gui extends AnchorPane {
                 DialogBox.getDukeDialog(dukeText, bot)
         );
         userInput.clear();
-        if (blarb.leave(userText)) {
+        if (blarb.willTerminate(userText)) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

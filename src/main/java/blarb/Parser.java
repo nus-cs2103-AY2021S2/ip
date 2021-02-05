@@ -16,6 +16,7 @@ class Parser {
         if (tokens.length == 1) {
             return new CommandLine(command);
         }
+        assert tokens.length < 3;
         return new CommandLine(command, tokens[1]);
     }
 }

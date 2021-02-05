@@ -47,9 +47,9 @@ class Task {
     }
 
     /**
-     * String representation of the blarb.Task.
+     * String representation of the Task.
      *
-     * @return blarb.Task in check list form.
+     * @return Task in check list form.
      */
     @Override
     public String toString() {
