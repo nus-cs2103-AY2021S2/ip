@@ -3,7 +3,6 @@ package pason.commands;
 import pason.storage.Storage;
 import pason.tasks.Task;
 import pason.tasks.TaskList;
-import pason.ui.Ui;
 
 public class AddCommand extends Command {
     protected Task task;
@@ -19,11 +18,11 @@ public class AddCommand extends Command {
     /**
      * Executes the command.
      */
-    public void execute(TaskList tasks, Storage storage, Ui ui) throws Exception {
+    public CommandResult execute(TaskList tasks, Storage storage) throws Exception {
         tasks.addTask(task);
-        ui.printMessage("Done! I've added a new task:\n\t"
+        return new CommandResult("Done! I've added a new task:\n\t"
                 + task + "\nNow there are " + tasks.getTasks().size()
-                        + " tasks in your list.");
+                + " tasks in your list.", CommandResultType.CHAT_PASON);
     }
 
     public boolean isExit() {

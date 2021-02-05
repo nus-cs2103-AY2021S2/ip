@@ -2,7 +2,6 @@ package pason.commands;
 
 import pason.storage.Storage;
 import pason.tasks.TaskList;
-import pason.ui.Ui;
 
 public class FindCommand extends Command {
     private final String keyword;
@@ -17,9 +16,10 @@ public class FindCommand extends Command {
     /**
      * Exxecutes the command.
      */
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public CommandResult execute(TaskList tasks, Storage storage) {
         if (tasks.getTasks().size() == 0) {
-            ui.printMessage("There are no tasks in your list. Time to add some!");
+            return new CommandResult("There are no tasks in your list. Time to add some!",
+                    CommandResultType.CHAT_PASON);
         } else {
             int matchingResults = 0;
             String output = "Here are the matching tasks in your list:\n";
@@ -30,9 +30,10 @@ public class FindCommand extends Command {
                 }
             }
             if (matchingResults == 0) {
-                ui.printMessage("There are no matching tasks with that keyword.");
+                return new CommandResult("There are no matching tasks with that keyword.",
+                        CommandResultType.CHAT_PASON);
             } else {
-                ui.printMessage(output);
+                return new CommandResult(output, CommandResultType.CHAT_PASON);
             }
         }
     }

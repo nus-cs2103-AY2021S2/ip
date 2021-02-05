@@ -2,7 +2,6 @@ package pason.commands;
 
 import pason.storage.Storage;
 import pason.tasks.TaskList;
-import pason.ui.Ui;
 
 public class DeleteCommand extends Command {
     protected int index;
@@ -17,11 +16,11 @@ public class DeleteCommand extends Command {
     /**
      * Executes the command.
      */
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public CommandResult execute(TaskList tasks, Storage storage) {
         try {
-            ui.printMessage(tasks.deleteTask(this.index));
+            return new CommandResult(tasks.deleteTask(this.index), CommandResultType.CHAT_PASON);
         } catch (Exception e) {
-            ui.printMessage(e.getMessage());
+            return new CommandResult(e.getMessage(), CommandResultType.ERROR);
         }
     }
 
