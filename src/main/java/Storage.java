@@ -71,7 +71,7 @@ public class Storage {
             String done = fileScanner.next();
             fileScanner.next();
             if (type.equals("T")) {
-                String desc = fileScanner.next() + fileScanner.nextLine();
+                String desc = fileScanner.nextLine().substring(1);
                 TaskList.tasks.add(new ToDo(desc));
                 if (done.equals("1")) {
                     TaskList.tasks.get(i).markAsDone();
