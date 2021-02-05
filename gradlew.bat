@@ -68,8 +68,6 @@ echo location of your Java installation.
 
 goto fail
 
-<<<<<<< HEAD
-=======
 :init
 @rem Get command-line arguments, handling Windows variants
 

@@ -3,6 +3,12 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+javafx {
+    version = "15.0.1"
+    modules = [ 'javafx.controls' ]
 }
 
 repositories {
@@ -10,6 +16,8 @@ repositories {
 }
 
 dependencies {
+    String javaFxVersion = '11'
+
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
@@ -29,11 +37,11 @@ test {
 }
 
 application {
-    mainClassName = "Sweh"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "sweh"
+    archiveBaseName = "launcher"
     archiveClassifier = null
 }
 

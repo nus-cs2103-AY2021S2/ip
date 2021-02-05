@@ -41,9 +41,9 @@ public class TaskList {
         try {
             taskList.get(position).markDone();
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Error: Please incude the index of the task.");
+            throw new NoSuchElementException("Please include the index of the task.");
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Error: Please enter a number within the list.");
+            throw new IndexOutOfBoundsException("Please enter a number within the list.");
         }
         return "Nice, another job well done!\n"
                 + taskList.get(position).toString();
@@ -56,9 +56,9 @@ public class TaskList {
             position = Integer.parseInt(argMap.get("desc")) - 1;
             taskList.get(position).markDone();
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Error: Please incude the index of the task.");
+            throw new NoSuchElementException("Please include the index of the task.");
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Error: Please enter a number within the list.");
+            throw new IndexOutOfBoundsException("Please enter a number within the list.");
         }
 
         saveToDisk();
@@ -76,9 +76,9 @@ public class TaskList {
             taskToRemove = taskList.get(position);
             taskList.remove(position);
         } catch (NoSuchElementException | NumberFormatException e) {
-            throw new NoSuchElementException("Error: Please include the index of the task.");
+            throw new NoSuchElementException("Please include the index of the task.");
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Error: Please enter a number within the list.");
+            throw new IndexOutOfBoundsException("Please enter a number within the list.");
         }
 
         saveToDisk();
@@ -98,7 +98,7 @@ public class TaskList {
 
     public String findTask(HashMap<String, String> argMap) throws NoSuchElementException {
         if (!argMap.containsKey("desc")) {
-            throw new NoSuchElementException("Error: Search keyword cannot be empty.");
+            throw new NoSuchElementException("Search keyword cannot be empty.");
         }
 
         return "Tasks that match \"" + argMap.get("desc") + "\": \n" + Formatter.formatList(taskList
