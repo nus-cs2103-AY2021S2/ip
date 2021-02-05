@@ -15,10 +15,17 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Marks the task as done
+     */
     public void setDone(){
         this.isDone = true;
     }
 
+    /**
+     * Gets the symbol for the status of the task.
+     * @return Symbol representing the task status
+     */
     public String getStatusIcon() {
         return (isDone ? "*" : " "); //Don't use unicode, cause it can't test properly
     }
@@ -29,6 +36,10 @@ public abstract class Task {
                 description;
     }
 
+    /**
+     * Converts the Task into a format suitable for file system storage
+     * @return A savable string.
+     */
     public abstract String toFileString();
 
     @Override
@@ -36,6 +47,11 @@ public abstract class Task {
         return this.toString().hashCode();
     }
 
+    /**
+     * Converts raw Task data common to all Tasks into
+     * a format suitable for file system storage.
+     * @return A common partial savable string.
+     */
     String toBaseFileString(){
         return (isDone ? "1" : "0") + "," + description.length() + "," + description;
     }

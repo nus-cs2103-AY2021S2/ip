@@ -27,6 +27,15 @@ public class TaskList {
         return this.store;
     }
 
+    /**
+     * Runs command on TaskList and returns command specific output.
+     * Side effects are present on some commands
+     *
+     * @param c Command to be run
+     * @return Output meant for Ui Class
+     * @throws EmptyArgumentException At least one argument is missing
+     * @throws BadDateArgumentException An argument that is expected to be a date is ill formatted
+     */
     public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
         String[] args = c.run();
         String results;
@@ -52,9 +61,19 @@ public class TaskList {
         }
         return results;
     }
+
+    /**
+     * Mark the changes in the TaskList as saved to disk.
+     */
     public void markSaved(){
         edited = false;
     }
+
+    /**
+     * Check whether TaskList has been edited from when it has been last saved to disk
+     *
+     * @return Whether the TaskList has changed
+     */
     public boolean isEdited(){
         return this.edited;
     }

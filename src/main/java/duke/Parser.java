@@ -8,6 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
+    /**
+     * Parses line of input for commands to the application
+     *
+     * @param line The line to be parsed
+     * @return Command to the application
+     * @throws ParseException If the line could not be reasonably interpreted
+     * @throws InvalidCommandException If there is an unknown instruction at the start
+     */
     public static Command parse(String line) throws ParseException, InvalidCommandException {
         line = line.trim();
         Command c = null;
