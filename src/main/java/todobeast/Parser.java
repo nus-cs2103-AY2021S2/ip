@@ -68,6 +68,9 @@ public class Parser {
             int deleteIndex = Integer.parseInt(commandArgs[1]);
             command = new DeleteCommand(deleteIndex);
             break;
+        case "find":
+            command = new FindCommand(commandArgs[1]);
+            break;
         // format e.g.: todo, thing
         case "todo":
             TaskType todoType = TaskType.TODO;

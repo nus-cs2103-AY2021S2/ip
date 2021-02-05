@@ -32,6 +32,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public boolean containsStringInDesc(String regex) {
+        return taskDescription.contains(regex);
+    }
+
     /**
      * Formats the current task for storage in the disk and returns a String representation of it
      * @param delimiter the delimiter used to join the various attributes within the task

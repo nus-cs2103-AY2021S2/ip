@@ -2,6 +2,7 @@ package todobeast;
 
 import todobeast.tasks.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -70,10 +71,17 @@ public class Ui {
         System.out.println(greeting);
     }
 
-    public void printTaskList(TaskList taskList) {
+    public void listTasks() {
         System.out.println("\tHere are your tasks:");
+    }
+
+    public void findTasks() {
+        System.out.println("\tHere are the matching tasks in your list:");
+    }
+
+    public void printTaskList(List<Task> taskList) {
         int count = 1;
-        for (Task task : taskList.getTaskList()) {
+        for (Task task : taskList) {
             System.out.println("\t" + count++ + ". " + task);
         }
     }
