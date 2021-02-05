@@ -8,7 +8,6 @@ import duke.command.Command;
 import javafx.scene.image.Image;
 
 
-
 public class Duke {
     private Storage storage;
     private TaskManager taskManager;

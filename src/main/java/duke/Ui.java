@@ -7,25 +7,52 @@ import duke.task.Task;
 
 public class Ui {
 
+    /**
+     * Formats the string to be printed to the user.
+     *
+     * @param error error message that is to be printed.
+     * @return string to be printed to the user.
+     */
     public String showError(String error) {
         System.out.println(error);
         System.out.println("");
         return error + "\n";
     }
 
+    /**
+     * Formats the task that was added and outputs a string to be printed to the user.
+     *
+     * @param task task that was added.
+     * @param numOfTasks current number of tasks the user has.
+     * @return string message to be printed to the user.
+     */
     public String showAddedTask(Task task, int numOfTasks) {
         return "Got it. I've added this task:\n" + task
                 + "\nNow you have " + numOfTasks + " tasks in the list. \n";
     }
 
+    /**
+     * Formats the task that was deleted and outputs a string to be printed to the user.
+     *
+     * @param task task that was deleted.
+     * @param numOfTasks current number of tasks the user has.
+     * @return string message to be printed to the user.
+     */
     public String showRemovedTask(Task task, int numOfTasks) {
         return "Noted. I've removed this task:\n"
                 + task + "\nNow you have " + numOfTasks + " tasks in the list. \n";
     }
 
+    /**
+     * Formats the task that was marked as done and outputs a string to be printed to the user.
+     *
+     * @param task task that was marked done.
+     * @return string message to be printed to the user.
+     */
     public String showDoneTask(Task task) {
         return "Nice! I've marked this task as done:\n" + task + "\n";
     }
+
 
     public String showAllTasks(ArrayList<Task> list) {
         if (list.size() == 0) {
@@ -39,6 +66,10 @@ public class Ui {
         }
     }
 
+    /** Returns a string containing a bye message that is to be printed to the user.
+     *
+     * @return String which is a bye message.
+     */
     public String showByeMessage() {
         return "Bye. Hope to see you again soon!";
     }
