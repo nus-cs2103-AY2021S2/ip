@@ -10,6 +10,7 @@ public class Main {
      * @param args Relative filepath to storage file. (Optional)
      */
     public static void main(String[] args) {
+        assert args.length < 2;
         Blarb blarb;
         if (args.length > 0) {
             blarb = new Blarb(args[0]);
