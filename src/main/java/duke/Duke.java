@@ -15,9 +15,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    private static String storageFilePath = "/data/duke.tasks.txt";
+    private static String absoluteStorageFilePath = System.getProperty("user.dir") + storageFilePath;
+
     public Duke() {
         ui = new Ui();
-        storage = new Storage(System.getProperty("user.dir") + "/data/duke.tasks.txt");
+        storage = new Storage(absoluteStorageFilePath);
         tasks = new TaskList();
         tasks.dataInput(storage.loadData());
     }
@@ -53,7 +56,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(System.getProperty("user.dir") + "/data/duke.tasks.txt").returnGreetingMessage();
+        new Duke(absoluteStorageFilePath).returnGreetingMessage();
     }
 }
 
