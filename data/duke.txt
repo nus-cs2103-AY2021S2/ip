@@ -1,11 +1,8 @@
-todo read books
-todo go gym
-todo read news
-todo buy pencil
-todo add books
-todo get coffee
-todo print assignment
-deadline do assignment /by 2021-03-15
-todo visit museum
-deadline finish lab /by 2021-06-21
-deadline finish draft \by 2021-03-21
+deadline do assignment /by 2021-01-01 undone
+todo read book done
+deadline attend meeting /by 2021-05-18 done
+event attend dinner /at 2021-03-15 undone
+todo prepare coffee undone
+deadline do homework /by 2021-10-31 undone
+event attend wedding /at 2021-02-15 undone
+todo go exercise done
