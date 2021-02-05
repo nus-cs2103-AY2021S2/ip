@@ -1,6 +1,7 @@
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 saveFile.json
+bin
 
 # Created by https://www.toptal.com/developers/gitignore/api/intellij+all,gradle,java,vscode,macos,windows,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij+all,gradle,java,vscode,macos,windows,linux
