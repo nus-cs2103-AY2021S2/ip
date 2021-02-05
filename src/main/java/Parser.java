@@ -1,3 +1,4 @@
+import Commands.*;
 import CustomExceptions.*;
 
 import java.time.LocalDate;
@@ -15,6 +16,36 @@ public class Parser {
 
     public Parser(String input) {
         this.input = input;
+    }
+
+    public Command getCommand() {
+        if (!this.inputsAreValid()) {
+            return new DoNothingCommand();
+        }
+
+        String action = this.getAction();
+        String description = this.getDescription();
+        LocalDateTime by = this.getBy();
+        LocalDateTime at = this.getAt();
+
+        switch (action) {
+            case "bye":
+                return new ByeCommand();
+            case "list":
+                return new ListCommand();
+            case "done":
+                return new DoneCommand(description);
+            case "delete":
+                return new DeleteCommand(description);
+            case "todo":
+                return new AddToDoCommand(description);
+            case "deadline":
+                return new AddDeadlineCommand(description, by);
+            case "event":
+                return new AddEventCommand(description, at);
+            default:
+                return new DoNothingCommand();
+        }
     }
 
     public String getAction() {

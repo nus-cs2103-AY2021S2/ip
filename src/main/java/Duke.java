@@ -1,3 +1,5 @@
+import Tasks.TaskList;
+
 public class Duke {
     private final Storage storage;
     private final Ui ui;
@@ -8,9 +10,9 @@ public class Duke {
     }
 
     public void run() {
-        TaskList existingTasks = this.storage.loadTasks();
-        TaskList finalTasks = this.ui.run(existingTasks);
-        this.storage.saveTasks(finalTasks);
+        TaskList tasks = this.storage.loadTasks();
+        this.ui.run(tasks);
+        this.storage.saveTasks(tasks);
     }
 
     public static void main(String[] args) {
