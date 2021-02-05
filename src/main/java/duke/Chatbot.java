@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 import duke.task.Deadline;
@@ -55,7 +56,7 @@ public class Chatbot {
             int tempOrder;
             switch (command) {
             case LIST:
-                return tasks.printTaskList();
+                return Printer.printTaskList(tasks.getTaskList());
             case DONE:
                 return doneCommand(taskTypeSplit);
             case DELETE:
@@ -83,26 +84,29 @@ public class Chatbot {
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of done cannot be empty.");
         }
-        int tempOrder = Integer.parseInt(taskTypeSplit[1]);
+        int doneOrder = Integer.parseInt(taskTypeSplit[1]) - 1;
+        tasks.markAsDone(doneOrder);
         storage.updateFile(tasks);
-        return tasks.markAsDone(tempOrder - 1);
+        return Printer.printDoneReply(tasks.getTask(doneOrder));
     }
 
     public String deleteCommand(String... taskTypeSplit) throws DukeException {
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of delete cannot be empty.");
         }
-        int tempOrder = Integer.parseInt(taskTypeSplit[1]);
+        int deleteOrder = Integer.parseInt(taskTypeSplit[1]) - 1;
+        Task removedTask = tasks.deleteTask(deleteOrder);
         storage.updateFile(tasks);
-        return tasks.deleteTask(tempOrder - 1);
+        return Printer.printDeleteReply(removedTask);
     }
 
     public String findCommand(String... taskTypeSplit) throws DukeException {
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of find cannot be empty.");
         }
+        List<Task> targetTasks = tasks.findTask(taskTypeSplit[1]);
         storage.updateFile(tasks);
-        return tasks.findTask(taskTypeSplit[1]);
+        return Printer.printFindReply(targetTasks);
     }
 
     public String todoCommand(String input, String... taskTypeSplit) throws DukeException {
@@ -110,8 +114,9 @@ public class Chatbot {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         Task newTask = new ToDo(input.substring(5), TaskType.TODO);
+        tasks.addTask(newTask);
         storage.updateFile(tasks);
-        return tasks.addTask(newTask);
+        return Printer.printAddReply(newTask, tasks.size());
     }
 
     public String deadlineCommand(String input, String... taskTypeSplit) throws DukeException {
@@ -124,8 +129,9 @@ public class Chatbot {
         }
         Task newTask = new Deadline(taskTimeSplit[0].substring(9),
                 TaskType.DEADLINE, LocalDate.parse(taskTimeSplit[1]));
+        tasks.addTask(newTask);
         storage.updateFile(tasks);
-        return tasks.addTask(newTask);
+        return Printer.printAddReply(newTask, tasks.size());
     }
 
     public String eventCommand(String input, String... taskTypeSplit) throws DukeException {
@@ -138,8 +144,9 @@ public class Chatbot {
         }
         Task newTask = new Event(taskTimeSplit[0].substring(6),
                 TaskType.EVENT, LocalDate.parse(taskTimeSplit[1]));
+        tasks.addTask(newTask);
         storage.updateFile(tasks);
-        return tasks.addTask(newTask);
+        return Printer.printAddReply(newTask, tasks.size());
     }
 
 }

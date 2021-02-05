@@ -102,10 +102,11 @@ public class Storage {
         try {
             FileWriter file = new FileWriter(filePath);
             file.write(updatedString);
+            file.flush();
             file.close();
-            System.out.println("(Your tasks are successfully saved to the file.)\n");
+            System.out.println("(Your tasks are successfully saved to the file.)");
         } catch (IOException e) {
-            System.out.println("(Your tasks fail to saved to the file.)\n");
+            System.out.println("(Your tasks fail to saved to the file.)");
         }
 
     }
