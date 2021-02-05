@@ -45,7 +45,7 @@ public class Parser {
         try {
             int index = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
             taskList.markAsDone(index);
-            return "Nice! I've marked this java.duke.controller.task as done:\n" +
+            return "Nice! I've marked this task as done:\n" +
                     (taskList.getTaskAtIndex(index));
         } catch (IndexOutOfBoundsException e) {
             return
@@ -71,7 +71,7 @@ public class Parser {
         Task temp = new ToDo(task);
         taskList.addTask(temp);
         return this.ui.printOnListChange(
-                "Got it. I have added the following java.duke.controller.task:",
+                "Got it. I have added the following task:",
                 temp,
                 taskList.getNumberOfTasks());
     }
@@ -97,11 +97,11 @@ public class Parser {
             }
             taskList.addTask(temp);
             return this.ui.printOnListChange(
-                    "Got it. I have added the following java.duke.controller.task:",
+                    "Got it. I have added the following task:",
                     temp,
                     taskList.getNumberOfTasks());
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("The timing of the java.duke.controller.task is not included." +
+            throw new DukeException("The timing of the task is not included." +
                     "Please check your input. \n");
         } catch (java.time.format.DateTimeParseException e) {
             throw new DukeException("Please input a date with correct format (yyyy-mm-dd).\n");
@@ -119,7 +119,7 @@ public class Parser {
         try {
             int index = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
             return this.ui.printOnListChange(
-                    "Noted. I have removed the following java.duke.controller.task:",
+                    "Noted. I have removed the following task:",
                     taskList.deleteTask(index),
                     taskList.getNumberOfTasks()
             );
