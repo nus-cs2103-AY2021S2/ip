@@ -11,9 +11,8 @@ public class Ui {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    void intro() {
-        System.out.println("Hey there! This is Kums");
-        System.out.println("How can i help?");
+    String intro() {
+        return "Hey there! This is Einstein" + "\n" + "How can I help?";
     }
 
     void showLine() {

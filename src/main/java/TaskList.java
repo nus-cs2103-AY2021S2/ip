@@ -21,61 +21,73 @@ public class TaskList {
      * @param info String array containing details of the user input
      * @throws DukeException if the user input is not specified properly
      */
-    void add(String[] info) throws DukeException {
+    void addTodo(String[] info) throws DukeException {
         int length = info.length;
-        Task task = null;
-        if (info[0].equals("todo")) {
-            if (length == 1) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty");
-            }
-            StringBuffer sb = new StringBuffer();
-            for (int i = 1; i < info.length; i++) {
-                sb.append(info[i]);
-                if (i != info.length - 1) {
-                    sb.append(" ");
-                }
-            }
-            task = new ToDo(sb.toString(), "T");
-        } else if (info[0].equals("event") || info[0].equals("deadline")) {
-            if (length == 1) {
-                if (info[0].equals("event")) {
-                    throw new DukeException("OOPS! Specifics are needed for this event");
-                } else {
-                    throw new DukeException("OOPS! Specifics are needed for this deadline");
-                }
-            }
-            StringBuffer description = new StringBuffer();
-            StringBuffer dateAndTime = new StringBuffer();
-            boolean isDescriptionDone = false;
-            for (int i = 1; i < info.length; i++) {
-                if (info[i].equals("/at") || info[i].equals("/by")) {
-                    isDescriptionDone = true;
-                    i++;
-                }
-                if (isDescriptionDone) {
-                    dateAndTime.append(info[i]);
-                    if (i != info.length - 1) {
-                        dateAndTime.append(" ");
-                    }
-                } else {
-                    description.append(info[i]);
-                    if (i != info.length - 1) {
-                        description.append(" ");
-                    }
-                }
-            }
-            if (info[0].equals("event")) {
-                String[] details = dateAndTime.toString().split(" ");
-                Date date = new Date(details[0]);
-                task = new Event(description.toString(), date, details[1], "E");
-            } else if (info[0].equals("deadline")) {
-                Date date = new Date(dateAndTime.toString());
-                task = new Deadline(description.toString(), date, "D");
+        StringBuffer sb = new StringBuffer();
+        for (int i = 1; i < info.length; i++) {
+            sb.append(info[i]);
+            if (i != info.length - 1) {
+                sb.append(" ");
             }
         }
+        Task task = new ToDo(sb.toString(), "T");
         taskList.add(task);
         listLength++;
+    }
 
+    void addEvent(String[] info) {
+        StringBuffer description = new StringBuffer();
+        StringBuffer dateAndTime = new StringBuffer();
+        boolean isDescriptionDone = false;
+        for (int i = 1; i < info.length; i++) {
+            if (info[i].equals("/at")) {
+                isDescriptionDone = true;
+                i++;
+            }
+            if (isDescriptionDone) {
+                dateAndTime.append(info[i]);
+                if (i != info.length - 1) {
+                    dateAndTime.append(" ");
+                }
+            } else {
+                description.append(info[i]);
+                if (i != info.length - 1) {
+                    description.append(" ");
+                }
+            }
+        }
+        String[] details = dateAndTime.toString().split(" ");
+        Date date = new Date(details[0]);
+        Task task = new Event(description.toString(), date, details[1], "E");
+        taskList.add(task);
+        listLength++;
+    }
+
+    void addDeadline(String[] info) {
+        StringBuffer description = new StringBuffer();
+        StringBuffer dateAndTime = new StringBuffer();
+        boolean isDescriptionDone = false;
+        for (int i = 1; i < info.length; i++) {
+            if (info[i].equals("/by")) {
+                isDescriptionDone = true;
+                i++;
+            }
+            if (isDescriptionDone) {
+                dateAndTime.append(info[i]);
+                if (i != info.length - 1) {
+                    dateAndTime.append(" ");
+                }
+            } else {
+                description.append(info[i]);
+                if (i != info.length - 1) {
+                    description.append(" ");
+                }
+            }
+        }
+        Date date = new Date(dateAndTime.toString());
+        Task task = new Deadline(description.toString(), date, "D");
+        taskList.add(task);
+        listLength++;
     }
 
 
@@ -89,7 +101,7 @@ public class TaskList {
      */
     Task delete(String[] info) throws DukeException {
         int taskIndex = Integer.parseInt(info[1]) - 1;
-        if (taskIndex > listLength || taskIndex < 0) {
+        if (taskIndex >= listLength || taskIndex < 0) {
             throw new DukeException("OOPS!!! There is no task in that line to delete");
         }
         Task task = taskList.remove(taskIndex);
@@ -107,11 +119,10 @@ public class TaskList {
      * @throws DukeException if the task number provided is less than 0 or more than the number of tasks in the TaskList
      */
     Task done(String[] info) throws DukeException {
-        if (info.length == 1) {
-            throw new DukeException("OOPS! Task completed is not specified");
-        }
-        if (Integer.parseInt(info[1]) > listLength || Integer.parseInt(info[1]) <= 0) {
-            throw new DukeException("OOPS! There is no such specified task");
+        int taskNumber = Integer.parseInt(info[1]);
+        assert taskNumber <= 0 : "invalid number";
+        if (taskNumber > listLength) {
+            throw new DukeException("Invalid number! You only have " + listLength + " tasks!");
         }
         Task tobeDone = taskList.get(Integer.parseInt(info[1]) - 1);
         tobeDone.completed();
@@ -119,9 +130,6 @@ public class TaskList {
     }
 
     TaskList find(String keyword) throws DukeException {
-        if (keyword.length() == 0) {
-            throw new DukeException("OOPS! No keyword is given!");
-        }
         String keywordLowerCased = keyword.toLowerCase();
         TaskList filteredList = new TaskList();
         for (Task task : taskList) {
