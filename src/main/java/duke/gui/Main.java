@@ -12,14 +12,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class Main extends Application{
+public class Main extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
     }
 
@@ -70,7 +70,7 @@ public class Main extends Application{
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -83,6 +83,8 @@ public class Main extends Application{
             userInput.clear();
         });
 
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
     }
 
     private Label getDialogLabel(String text) {
@@ -92,4 +94,6 @@ public class Main extends Application{
 
         return textToAdd;
     }
+
+
 }
