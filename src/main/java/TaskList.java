@@ -10,6 +10,7 @@ public class TaskList {
 
     /**
      * Creates a TaskList.
+     *
      * @param tasks Tasks to be added into the TaskList.
      */
     public TaskList(List<Task> tasks) {
@@ -18,6 +19,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
+     *
      * @param task Task to be added.
      */
     public void add(Task task) {
@@ -26,6 +28,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the task list.
+     *
      * @param taskNumber Task number of the task that is to be deleted.
      */
     public void delete(int taskNumber) {
@@ -33,16 +36,20 @@ public class TaskList {
     }
 
     /**
-     * Prints out all the tasks in the task list.
+     * Lists out all the tasks in the task list.
+     * @return A string consisting of all the tasks.
      */
-    public void list() {
+    public String list() {
+        String output = "";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            output = output + "\n" + (i + 1) + "." + tasks.get(i).toString();
         }
+        return output;
     }
 
     /**
      * Returns a Task, based on the task number specified by users.
+     *
      * @param taskNumber Task number of selected task.
      * @return Task.
      */
@@ -52,9 +59,12 @@ public class TaskList {
 
     /**
      * Finds the tasks that contain the keyword input by user.
+     *
      * @param keyword Keyword input by user.
+     * @return A String consists of all the matching tasks.
      */
-    public void findWithKeyword(String keyword) {
+    public String findWithKeyword(String keyword) {
+        String output = "";
         int numberOfMatches = 0;
         int tracker = 0;
         for (int i = 0; i < tasks.size(); i++) {
@@ -62,16 +72,17 @@ public class TaskList {
             boolean isPresent = task.toLowerCase().contains(keyword.toLowerCase());
             if (isPresent) {
                 if (tracker == 0) {
-                    Ui.responseToFind();
+                    output = Ui.responseToFind() + "\n";
                     tracker++;
                 }
-                System.out.println(task);
+                output = output + task + "\n";
                 numberOfMatches++;
             }
         }
         if (numberOfMatches == 0) {
-            Ui.responseToNoMatches();
+            output = Ui.responseToNoMatches();
         }
+        return output;
     }
 
     /**
