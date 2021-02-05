@@ -6,7 +6,7 @@ public class Ui {
      * Print greeting message to user
      */
 
-    public static String greeting(){
+    public static String greeting() {
         return "I am Donald Trump, the Greatest American President ever\nWhat can I do for you?";
     }
 

@@ -9,8 +9,7 @@ public class Duke {
      * Constructor for the Duke object
      */
 
-
-    public Duke(){
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
         this.taskList = new TaskList(storage);
@@ -34,7 +33,6 @@ public class Duke {
         Ui.greeting();
         this.taskList.addTaskFromFile();
     }
-
 
     public String getResponse(String input) throws IOException, DukeException {
         Parser parser = new Parser(this.taskList);

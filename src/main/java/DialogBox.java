@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -40,7 +41,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setClip(new Circle(50, 50, 50));
         displayPicture.setImage(img);
-        this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE,null,null)));
+        this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
     }
 
     /**

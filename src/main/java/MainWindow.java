@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -45,12 +46,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             duke.exit();
             Platform.exit();
             userInput.clear();
         } else {
-            try{
+            try {
                 String response = duke.getResponse(input);
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage),
@@ -58,7 +59,8 @@ public class MainWindow extends AnchorPane {
                 );
                 userInput.clear();
             }  catch (DukeException | IOException e) {
-            System.out.println(e.getMessage());
+
+                System.out.println(e.getMessage());
 
             }
 

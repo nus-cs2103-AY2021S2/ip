@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Parser {
     private static final String SAVED_FORMAT_DELIMITER = " \\| ";
     private final TaskList taskList;
@@ -29,7 +27,7 @@ public class Parser {
             case "D":
                 String descriptionDeadlines = split[2];
                 String byDeadlines = split[3];
-                Deadlines taskD = new Deadlines(descriptionDeadlines, byDeadlines, true);
+                Deadline taskD = new Deadline(descriptionDeadlines, byDeadlines, true);
                 if (isDone.equals("X")) {
                     taskD.markAsDone();
                 }
@@ -37,7 +35,7 @@ public class Parser {
             case "E":
                 String descriptionEvents = split[2];
                 String byEvents = split[3];
-                Deadlines taskE = new Deadlines(descriptionEvents, byEvents, true);
+                Deadline taskE = new Deadline(descriptionEvents, byEvents, true);
                 if (isDone.equals("X")) {
                     taskE.markAsDone();
                 }
@@ -81,7 +79,7 @@ public class Parser {
             }
             String description = res[0];
             String by = res[1];
-            Task task = new Deadlines(description, by, false);
+            Task task = new Deadline(description, by, false);
             return this.taskList.addTask(task);
         }
 

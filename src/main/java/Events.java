@@ -1,5 +1,5 @@
 public class Events extends Task {
-    protected String by;
+    private final String by;
     Events(String name, String by) {
         super(name);
         this.by = by;

@@ -1,13 +1,13 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadlines extends Task {
+public class Deadline extends Task {
     private final String by;
-    private boolean savedBefore;
-    Deadlines(String name, String by, boolean savedBefore) {
+    private boolean isSavedBefore;
+    Deadline(String name, String by, boolean savedBefore) {
         super(name);
         this.by = by;
-        this.savedBefore = savedBefore;
+        this.isSavedBefore = savedBefore;
     }
 
     /**
@@ -21,13 +21,13 @@ public class Deadlines extends Task {
 
     /**
      * Return the saved Format of Deadline task
-     * @return
+     * @return saveFormat of deadline task
      */
 
     @Override
     public String toSaveFormat() {
         return "D | " + (isDone() ? "1" : "0")
-                + " | " + this.getTaskName() + " | " + (this.savedBefore ? this.by : this.parseDate());
+                + " | " + this.getTaskName() + " | " + (this.isSavedBefore ? this.by : this.parseDate());
     }
 
     public String parseDate() {
@@ -36,8 +36,7 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-
         return "[D]" + (this.done ? "[X] " : "[ ] ") + this.getTaskName() + " (by: "
-                + (savedBefore ? this.by : parseDate()) + ")";
+                + (isSavedBefore ? this.by : parseDate()) + ")";
     }
 }
