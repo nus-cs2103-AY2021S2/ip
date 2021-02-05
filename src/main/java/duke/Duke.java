@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -34,7 +35,16 @@ public class Duke {
 
     @FXML
     private void initialize() {
+
+
+        initializeScreen();
+        initializeInputField();
+    }
+
+    private void initializeScreen() {
         Ui ui = new Ui();
+        parser = new Parser(ui);
+
         scrollPane.setContent(content);
 
         scrollPane.setVvalue(1.0);
@@ -54,12 +64,17 @@ public class Duke {
         content.getChildren().add(DialogBox.dukeDialogMaker(
                 "Also, in case you forgot, here are the tasks in the next week:\n" +
                         listOfTasks.remind(7).toString(), false));
+    }
 
-        parser = new Parser(ui);
-
+    private void initializeInputField() {
         submit.setDisable(true);
         input.textProperty().addListener((observable, oldValue, newValue) ->
                 submit.setDisable(newValue.equals("")));
+        input.setOnKeyPressed((ke) -> {
+            if (ke.getCode().equals(KeyCode.ENTER) && input.getText().length() > 0) {
+                onSubmit();
+            }
+        });
     }
 
     @FXML

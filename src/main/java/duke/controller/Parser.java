@@ -54,8 +54,7 @@ public class Parser {
             return "Nice! I've marked this task as done:\n" +
                     (taskList.getTaskAtIndex(index));
         } catch (IndexOutOfBoundsException e) {
-            return
-                    "You have " + taskList.getNumberOfTasks()
+            return "You have " + taskList.getNumberOfTasks()
                             + " tasks in your list. Please check your input.";
         } catch (NumberFormatException e) {
             throw new DukeException("The input must be a positive integer!");
