@@ -1,3 +1,5 @@
+import DukeTools.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -25,7 +27,7 @@ public class Duke {
 //        Scanner scan = new Scanner(System.in);
         String input = " ";
 
-//        Create Parser
+//        Create Tools.Parser
         Parser parser = new Parser();
 
         while(!input.equals("bye")) {

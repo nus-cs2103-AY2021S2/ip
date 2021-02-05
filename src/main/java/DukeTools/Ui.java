@@ -1,3 +1,5 @@
+package DukeTools;
+
 public class Ui {
 
     public void printIntro() {
@@ -7,7 +9,7 @@ public class Ui {
                 " |_|  |_|\\___/|___/ \\___/ \\___|   |_| |_|  |_|\n" +
                 "                                              \n";
         String line = "---------------------------------------\n";
-        String line2 = "It is I, MODOC_TM... \n(Mechanized Organism Designed Only for Computing and Task Management) \n";
+        String line2 = "It is I, MODOC_TM... \n(Mechanized Organism Designed Only for Computing and Tools.Task Management) \n";
         String line3 = "Feed me the commands I so desire...\n";
         String line4 = "---------------------------------------";
 

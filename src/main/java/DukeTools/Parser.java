@@ -1,7 +1,9 @@
+package DukeTools;
+
 import java.util.Scanner;
 
 public class Parser {
-    protected String read;
+    public String read;
 
     Scanner scan = new Scanner(System.in);
 

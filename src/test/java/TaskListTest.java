@@ -1,8 +1,9 @@
+import DukeTools.Task;
+import DukeTools.TaskList;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
 

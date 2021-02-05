@@ -1,6 +1,8 @@
+package DukeTools;
+
 public class Task {
     protected boolean isDone;
-    protected String name;
+    public String name;
 
     public Task(String name) {
         this.isDone = false;

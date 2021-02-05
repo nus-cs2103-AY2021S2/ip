@@ -1,9 +1,9 @@
-import org.junit.jupiter.api.Test;
+import DukeTools.Todo;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TodoTest {
-
     @Test
     void testToString() {
         Todo todo = new Todo("homework");
