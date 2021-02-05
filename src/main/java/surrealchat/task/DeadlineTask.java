@@ -30,7 +30,8 @@ public class DeadlineTask extends Task {
      * @param isDone Whether task was previously marked as done.
      * @return DeadlineTask as loaded from file.
      */
-    public static DeadlineTask loadDeadlineTaskFromFile(String taskDescription, LocalDateTime deadline, boolean isDone) {
+    public static DeadlineTask loadDeadlineTaskFromFile(
+            String taskDescription, LocalDateTime deadline, boolean isDone) {
         return new DeadlineTask(taskDescription, deadline, isDone);
     }
 
