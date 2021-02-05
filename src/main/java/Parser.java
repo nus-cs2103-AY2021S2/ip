@@ -56,6 +56,7 @@ public class Parser {
         return command.equals("exit"); }
 
     public String parseCommand(String command) {
+        assert !command.isEmpty() : "Command is empty.";
         String commandType = Parser.parseCommandType(command);
         try {
             if (commandType.equals("list")) {
