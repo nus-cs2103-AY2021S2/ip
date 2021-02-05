@@ -38,4 +38,8 @@ public class Duke {
         Storage.store(FILE_PATH_SAVED_TASKS);
         return Parser.handleUserCommand(input, ui);
     }
+
+    public String greeting() {
+        return Ui.greetUser();
+    }
 }

@@ -11,19 +11,13 @@ public class Ui {
      * Initializes a Ui object and greets the user
      */
     public Ui() {
-        greetUser();
     }
 
     /**
      * Displays a hello message to the user
      */
-    public static void greetUser() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\nHow can I help?\n");
+    public static String greetUser() {
+        return "Hello! I'm Duke!\n" + "\nHow can I help?\n";
     }
 
     /**
@@ -46,8 +40,8 @@ public class Ui {
         System.out.println("File ./savedTasks.txt not found! Creating one...\n");
     }
 
-    public String showTaskAdded(int taskListSize) {
-        return "added!\n" + "you have " + taskListSize + " tasks in your list";
+    public String showTaskAdded(Task task, int taskListSize) {
+        return "Added!\n" + task + "\nYou have " + taskListSize + " task(s) in your list!";
     }
 
     /**
@@ -59,12 +53,12 @@ public class Ui {
      * task list size
      */
     public String showTaskDeleted(Task taskDeleted, int taskListSize) {
-        return "Noted. I've removed this task: " + taskDeleted + "\n"
-                + "you have " + taskListSize + " tasks in your list";
+        return "Noted! I've removed this task: " + taskDeleted + "\n"
+                + "You have " + taskListSize + " task(s) in your list!";
     }
 
     public String showTaskMarkedDone(Task completedTask) {
-        return "Nice! I've marked this task as done:" + completedTask;
+        return "Nice! I've marked this task as done: " + completedTask;
     }
 
     /**

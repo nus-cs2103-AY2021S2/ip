@@ -5,14 +5,14 @@ import java.util.ArrayList;
  * Makes sense of the user command
  */
 public class Parser {
-    private static int TODO_TASK_INDEX = 5;
-    private static int KEYWORD_INDEX = 5;
-    private static int COMPLETED_TASK_INDEX = 5;
-    private static int DELETE_TASK_INDEX = 7;
-    private static int EVENT_TASK_INDEX = 6;
-    private static int EVENT_DATE_INDEX = 3;
-    private static int DEADLINE_TASK_INDEX = 9;
-    private static int DEADLINE_DATE_INDEX = 3;
+    private static final int TODO_TASK_INDEX = 5;
+    private static final int KEYWORD_INDEX = 5;
+    private static final int COMPLETED_TASK_INDEX = 5;
+    private static final int DELETE_TASK_INDEX = 7;
+    private static final int EVENT_TASK_INDEX = 6;
+    private static final int EVENT_DATE_INDEX = 3;
+    private static final int DEADLINE_TASK_INDEX = 9;
+    private static final int DEADLINE_DATE_INDEX = 3;
     /**
      * Returns the response to the user's input
      * @param input input supplied by the user
@@ -44,21 +44,24 @@ public class Parser {
             TaskList.createTodoTask(todoTask);
 
             int currentTaskListSize = TaskList.updatedTaskList.size();
-            return ui.showTaskAdded(currentTaskListSize);
+            Task taskAdded = TaskList.updatedTaskList.get(currentTaskListSize - 1);
+            return ui.showTaskAdded(taskAdded, currentTaskListSize);
         } else if (input.startsWith("event ")) {
             String eventTask = getEventTask(input);
             String date = getEventDate(input);
             TaskList.createEventTask(eventTask, date);
 
             int currentTaskListSize = TaskList.updatedTaskList.size();
-            return ui.showTaskAdded(currentTaskListSize);
+            Task taskAdded = TaskList.updatedTaskList.get(currentTaskListSize - 1);
+            return ui.showTaskAdded(taskAdded, currentTaskListSize);
         } else if (input.startsWith("deadline ")) {
             String deadlineTask = getDeadlineTask(input);
             LocalDate deadline = getDeadlineDate(input);
             TaskList.createDeadlineTask(deadlineTask, deadline);
 
             int currentTaskListSize = TaskList.updatedTaskList.size();
-            return ui.showTaskAdded(currentTaskListSize);
+            Task taskAdded = TaskList.updatedTaskList.get(currentTaskListSize - 1);
+            return ui.showTaskAdded(taskAdded, currentTaskListSize);
         } else if (input.startsWith("delete ")) {
             int taskNumber = getTaskNumberToBeDeleted(input);
             Task taskDeleted = getTaskToBeDeleted(taskNumber);
@@ -140,7 +143,7 @@ public class Parser {
      * @return deadline task description
      */
     public static String getDeadlineTask(String input) {
-        return input.substring(DELETE_TASK_INDEX).split("/", 2)[0];
+        return input.substring(DEADLINE_TASK_INDEX).split("/", 2)[0];
     }
 
     /**

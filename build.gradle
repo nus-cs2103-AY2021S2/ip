@@ -52,7 +52,7 @@ checkstyle {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
