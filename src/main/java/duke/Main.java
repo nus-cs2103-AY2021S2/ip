@@ -8,7 +8,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Class to initialize the application.
+ */
 public class Main extends Application {
+    /**
+     * Initializes the application and load the user interface.
+     * @param primaryStage Main window.
+     */
     @Override
     public void start(Stage primaryStage) {
         try{

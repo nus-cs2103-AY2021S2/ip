@@ -13,6 +13,10 @@ public class DukeException extends Exception{
         super(errorMessage);
     }
 
+    /**
+     * Returns the message of the exception.
+     * @return Message of the exception.
+     */
     public String toString() {
         return super.getMessage();
     }

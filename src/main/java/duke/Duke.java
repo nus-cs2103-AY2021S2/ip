@@ -35,8 +35,6 @@ public class Duke {
 
     @FXML
     private void initialize() {
-
-
         initializeScreen();
         initializeInputField();
     }
