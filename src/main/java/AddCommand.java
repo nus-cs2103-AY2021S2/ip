@@ -9,6 +9,7 @@ public class AddCommand extends Command {
 
     @Override
     public boolean isBye() {
+        assert info.length > 0 : "Empty command";
         return info[0].equals("bye");
     }
 
