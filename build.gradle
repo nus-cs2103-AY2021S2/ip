@@ -9,7 +9,7 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-mainClassName = 'duke.Duke'
+mainClassName = 'duke.Launcher'
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
