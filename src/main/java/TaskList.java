@@ -11,6 +11,7 @@ public class TaskList {
     private static final int DEADLINE_TASK_INDEX = 16;
     private static final int EVENT_TASK_INDEX = 16;
     private static final int TODO_TASK_INDEX = 16;
+    private static final int DEADLINE_DATE_LENGTH = 16;
 
     /**
      * Initializes a TaskList object in the situation where the specified
@@ -94,7 +95,7 @@ public class TaskList {
      */
     public static String getDeadlineDate(String input) {
         int dateIndex = input.indexOf("(by: ");
-        return input.substring(dateIndex + 5, dateIndex + 16);
+        return input.substring(dateIndex + 5, dateIndex + DEADLINE_DATE_LENGTH);
     }
 
     /**
