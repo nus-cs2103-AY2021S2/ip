@@ -36,10 +36,6 @@ public class DeleteCommand extends Command {
         }
     }
 
-    private boolean isInvalidTaskNumber(int taskNumber, TaskManagement taskManagement) {
-        return ((taskNumber <= 0) || (taskNumber > taskManagement.getNumberOfTasks()));
-    }
-
     private String printOutput(Task deletedTask, int size) {
         String outputString = "This task has been deleted:\n";
         outputString += String.format("%s\n", deletedTask);
@@ -55,13 +51,11 @@ public class DeleteCommand extends Command {
     public String execute(TaskManagement taskManagement) {
         try {
             int taskNumber = this.getInputNumber(this.taskNumberString);
-
-            if (this.isInvalidTaskNumber(taskNumber, taskManagement)) {
-                return "Invalid task number. Not stonks!\n";
-            }
+            assert taskNumber > 0 : "Invalid task number. Not stonks!\n";
+            assert taskNumber <= taskManagement.getNumberOfTasks() : "Invalid task number. Not stonks!\n";
             Task deletedTask = taskManagement.deleteTask(taskNumber);
             return this.printOutput(deletedTask, taskManagement.getNumberOfTasks());
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return e.getMessage();
         }
     }

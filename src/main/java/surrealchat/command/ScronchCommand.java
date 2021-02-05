@@ -1,8 +1,8 @@
 package surrealchat.command;
 
-import surrealchat.task.TaskManagement;
-
 import java.util.NoSuchElementException;
+
+import surrealchat.task.TaskManagement;
 
 /**
  * Command object for deleting all tasks objects, essentially emptying task list.
