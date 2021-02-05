@@ -5,7 +5,6 @@
    * @param date the due date specified by user
    */
 
-@SuppressWarnings("checkstyle:JavadocType")
 public class AddCommand extends Command {
 
     public AddCommand(String command, String task, String date) {

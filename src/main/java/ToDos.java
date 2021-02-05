@@ -6,6 +6,7 @@
 @SuppressWarnings("checkstyle:JavadocType")
 class ToDos extends Task {
 
+    @SuppressWarnings({"checkstyle:WhitespaceAround", "checkstyle:SingleSpaceSeparator"})
     public ToDos(String description)  {
         super(description);
     }
