@@ -64,7 +64,9 @@ public class Duke {
         content.getChildren().add(DialogBox.userDialogMaker(userInput));
         try {
             if (userInput.equals("list")) {
-                content.getChildren().add(DialogBox.dukeDialogMaker(parser.handleList(listOfTasks)));
+                content.getChildren().add(
+                        DialogBox.dukeDialogMaker(
+                                parser.handleList(listOfTasks)));
             } else {
                 // handle the commands with arguments
                 int spaceIndex = userInput.indexOf(" ");
