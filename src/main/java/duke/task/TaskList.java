@@ -14,10 +14,13 @@ public class TaskList {
     }
 
     //Adds a task to the task list.
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         Tasks.add(task);
-        System.out.println("Got it! Added: \n" + task);
-        System.out.println("Now you have " + numOfTasks() + " items in your list");
+        String out = "Got it! Added: \n" + task + "\n"
+                + "Now you have " + numOfTasks() + " items in your list";
+    //    System.out.println("Got it! Added: \n" + task);
+    //    System.out.println("Now you have " + numOfTasks() + " items in your list");
+        return out;
     }
 
     //Second add method which does not print any message
@@ -26,7 +29,8 @@ public class TaskList {
     }
 
     //Returns a taskList of the tasks that have matching keyword.
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
+        String out = "";
         TaskList matches = new TaskList();
         for (Task t : Tasks) {
             String task = t.getTaskName();
@@ -40,32 +44,44 @@ public class TaskList {
             }
         }
         if (matches.numOfTasks() > 0) {
+            out += "We have found the following tasks\n";
             System.out.println("We have found the following tasks");
-            matches.printTasks();
+            out += matches.printTasks();
         } else {
-            System.out.println("Sorry! Could not find any matches :(");
+            out += "Sorry! Could not find any matches :(";
+        //    System.out.println("Sorry! Could not find any matches :(");
         }
+        return out;
     }
 
     //Delete a task
-    public void DeleteTask(int idx) {
+    public String DeleteTask(int idx) {
+        String out = "";
         if (idx <= Tasks.size()) {
-            System.out.println("Noted. Task removed: \n" + Tasks.get(idx - 1));
+        //    System.out.println("Noted. Task removed: \n" + Tasks.get(idx - 1));
+            out += "Noted. Task removed: \n" + Tasks.get(idx - 1) + "\n";
             Tasks.remove(idx - 1);
-            System.out.println("Now you have " + numOfTasks() + " items in your list");
+        //    System.out.println("Now you have " + numOfTasks() + " items in your list");
+            out += "Now you have " + numOfTasks() + " items in your list";
         } else {
-            System.out.println("Sorry! The system does not have that many elements. Try again :(");
+        //    System.out.println("Sorry! The system does not have that many elements. Try again :(");
+            out += "Sorry! The system does not have that many elements. Try again :(";
         }
+        return out;
     }
 
     //Marks a task as done
-    public void markAsDone(int idx) {
+    public String markAsDone(int idx) {
+        String out;
         if (idx <= Tasks.size()) {
             Tasks.get(idx - 1).markDone();
-            System.out.println("Task " + idx + " is complete:\n" + Tasks.get(idx - 1));
+        //    System.out.println("Task " + idx + " is complete:\n" + Tasks.get(idx - 1));
+            out = "Task " + idx + " is complete:\n" + Tasks.get(idx - 1);
         } else {
-            System.out.println("Sorry! The system does not have that many elements. Try again :(");
+        //    System.out.println("Sorry! The system does not have that many elements. Try again :(");
+            out = "Sorry! The system does not have that many elements. Try again :(";
         }
+        return out;
     }
 
     //Retrieves the number of tasks
@@ -79,18 +95,24 @@ public class TaskList {
     }
 
     //Prints all the tasks
-    public void printTasks() {
-        System.out.println("Contents: ");
+    public String printTasks() {
+    //    System.out.println("Contents: ");
+        String out = "Contents: \n";
         for (int j = 0; j < Tasks.size(); j++) {
             if (Tasks.get(j) instanceof TodoTask) {
-                System.out.println(j + 1 + "." + Tasks.get(j));
+            //    System.out.println(j + 1 + "." + Tasks.get(j));
+                out += j + 1 + "." + Tasks.get(j) + "\n";
             } else if (Tasks.get(j) instanceof DeadlineTask) {
-                System.out.println(j + 1 + "." + Tasks.get(j));
+            //    System.out.println(j + 1 + "." + Tasks.get(j));
+                out += j + 1 + "." + Tasks.get(j) + "\n";
             } else if (Tasks.get(j) instanceof EventTask) {
-                System.out.println(j + 1 + "." + Tasks.get(j));
+            //    System.out.println(j + 1 + "." + Tasks.get(j));
+                out += j + 1 + "." + Tasks.get(j) + "\n";
             } else {
-                System.out.println(j + 1 + "." + Tasks.get(j));
+            //    System.out.println(j + 1 + "." + Tasks.get(j));
+                out += j + 1 + "." + Tasks.get(j) + "\n";
             }
         }
+        return out;
     }
 }
