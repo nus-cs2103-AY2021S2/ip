@@ -73,6 +73,7 @@ public class TaskList {
                 task = new Deadline(description.toString(), date, "D");
             }
         }
+        assert task != null : "no task given";
         taskList.add(task);
         listLength++;
 
@@ -107,6 +108,7 @@ public class TaskList {
      * @throws DukeException if the task number provided is less than 0 or more than the number of tasks in the TaskList
      */
     Task done(String[] info) throws DukeException {
+        assert info.length == 2 : "invalid command";
         if (info.length == 1) {
             throw new DukeException("OOPS! Task completed is not specified");
         }
