@@ -30,7 +30,7 @@ public class StringParser {
      * @return Spitted string.
      */
     public static String newLiner(String str, int length) {
-        assert length > 0;
+        assert length > 0 : "length is not handled correctly by printer.";
         StringBuilder resultStr = new StringBuilder();
         while (str.length() > length) {
             resultStr.append(str, 0, length).append("\n");

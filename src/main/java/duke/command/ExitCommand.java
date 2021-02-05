@@ -21,6 +21,6 @@ public class ExitCommand extends Command {
 
     @Override
     public String toString() {
-        return "Test usage: this is an EXIT command";
+        return "Test usage: this is an EXIT command.";
     }
 }

@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
         try {
             index = Integer.parseInt(command.substring(5)) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid Argument: Input must to be integer");
+            throw new DukeException("Invalid Argument: Input must to be integer.");
         }
         if (index < list.getSize() && index >= 0) {
             Task currTask = list.getJob(index);
@@ -41,12 +41,12 @@ public class DoneCommand extends Command {
             return "This task is marked as done: \n"
                     + currTask.toString();
         } else {
-            return "No such task in the list\n";
+            return "No such task in the list.\n";
         }
     }
 
     @Override
     public String toString() {
-        return "Test usage: this is a DONE command";
+        return "Test usage: this is a DONE command.";
     }
 }

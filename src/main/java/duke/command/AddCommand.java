@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         } else {
             String subStr = command.substring(5);
             if (StringParser.isBlank(subStr)) {
-                throw new DukeException("Invalid argument: Content field is blank");
+                throw new DukeException("Invalid argument: Content field is blank.");
             } else {
                 return new Todo(command.substring(5));
             }
@@ -66,14 +66,14 @@ public class AddCommand extends Command {
             String subStrContent = command.substring(6, indexOfAt);
             String subStrTime = command.substring(indexOfAt + 5);
             if (StringParser.isBlank(subStrContent)) {
-                throw new DukeException("Void argument: Content field is blank");
+                throw new DukeException("Void argument: Content field is blank.");
             } else if (StringParser.isBlank(subStrTime)) {
-                throw new DukeException("Void argument: Time field is blank");
+                throw new DukeException("Void argument: Time field is blank.");
             } else {
                 try {
                     return new Event(subStrContent, StringParser.parseTime(subStrTime));
                 } catch (DateTimeException e) {
-                    throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm");
+                    throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm.");
                 }
             }
         }
@@ -96,14 +96,14 @@ public class AddCommand extends Command {
             String subStrContent = command.substring(9, indexOfBy);
             String subStrTime = command.substring(indexOfBy + 5);
             if (StringParser.isBlank(subStrContent)) {
-                throw new DukeException("Void argument: Content field is blank");
+                throw new DukeException("Void argument: Content field is blank.");
             } else if (StringParser.isBlank(subStrTime)) {
-                throw new DukeException("Void argument: Time field is blank");
+                throw new DukeException("Void argument: Time field is blank.");
             } else {
                 try {
                     return new Deadline(subStrContent, StringParser.parseTime(subStrTime));
                 } catch (DateTimeException e) {
-                    throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm");
+                    throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm.");
                 }
             }
         }
@@ -134,20 +134,21 @@ public class AddCommand extends Command {
         list.addJob(task);
         return "Task added:\n" + task.toString()
                 + "Now you have " + list.getSize()
-                + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
+                + (list.getSize() == 1 ? " task in the list.\n" : " tasks in the list.\n");
     }
 
     @Override
     public String toString() {
         switch (this.cmdType) {
         case Todo:
-            return "Test usage: this is a TODO command";
+            return "Test usage: this is a TODO command.";
         case Deadline:
-            return "Test usage: this is a DEADLINE command";
+            return "Test usage: this is a DEADLINE command.";
         case Event:
-            return "Test usage: this is an EVENT command";
+            return "Test usage: this is an EVENT command.";
         default:
-            return "Error: this will never happen";
+            assert false : "This line will never be reached.";
+            return "Error: this will never happen.";
         }
     }
 }

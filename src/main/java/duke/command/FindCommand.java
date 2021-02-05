@@ -33,7 +33,7 @@ public class FindCommand extends Command {
         } else {
             String subStr = command.substring(5);
             if (StringParser.isBlank(subStr)) {
-                throw new DukeException("Invalid argument: Content field is blank");
+                throw new DukeException("Invalid argument: Content field is blank.");
             } else {
                 TaskList tempList = new TaskList();
                 for (int i = 0; i < list.getSize(); i++) {
@@ -42,7 +42,7 @@ public class FindCommand extends Command {
                     }
                 }
                 if (tempList.getSize() == 0) {
-                    return "No result found\n";
+                    return "No result found.\n";
                 } else {
                     return "Here are the matching tasks in the list:\n"
                             + tempList.formatList();

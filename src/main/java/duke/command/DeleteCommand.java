@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
         try {
             index = Integer.parseInt(command.substring(7)) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid Argument: Input must to be integer");
+            throw new DukeException("Invalid Argument: Input must to be integer.");
         }
         if (index < list.getSize() && index >= 0) {
             Task currTask = list.getJob(index);
@@ -40,14 +40,14 @@ public class DeleteCommand extends Command {
             return "This task is deleted: \n"
                     + currTask.toString()
                     + "Now you have " + list.getSize()
-                    + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
+                    + (list.getSize() == 1 ? " task in the list.\n" : " tasks in the list.\n");
         } else {
-            return "No such task in the list\n";
+            return "No such task in the list.\n";
         }
     }
 
     @Override
     public String toString() {
-        return "Test usage: this is a DELETE command";
+        return "Test usage: this is a DELETE command.";
     }
 }
