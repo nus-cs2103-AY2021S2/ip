@@ -29,7 +29,7 @@ public class ScronchCommand extends Command {
     public String execute(TaskManagement taskManagement) {
         try {
             taskManagement.deleteAllTasks();
-            return this.printOutput(taskManagement.getNumberOfTasks());
+            return printOutput(taskManagement.getNumberOfTasks());
         } catch (NoSuchElementException e) {
             return e.getMessage();
         }

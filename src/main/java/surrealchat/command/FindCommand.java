@@ -53,7 +53,7 @@ public class FindCommand extends Command {
             }
         }
         try {
-            return this.compileSearchResults(searchResults);
+            return compileSearchResults(searchResults);
         } catch (NoSuchElementException e) {
             return e.getMessage();
         }

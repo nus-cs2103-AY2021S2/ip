@@ -62,7 +62,7 @@ public class DoneCommand extends Command {
             assert taskNumber <= taskManagement.getNumberOfTasks() : "Invalid task number. Not stonks!\n";
 
             Task doneTask = taskManagement.markAsDone(taskNumber);
-            return this.printOutput(doneTask);
+            return printOutput(doneTask);
         } catch (Throwable e) {
             return e.getMessage();
         }

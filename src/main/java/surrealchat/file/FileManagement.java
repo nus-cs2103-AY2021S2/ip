@@ -29,8 +29,8 @@ public class FileManagement {
      */
     public List<String> loadTaskFile() throws IOException {
         //Create file if not available and scan the file
-        this.file.createNewFile();
-        Scanner fileScanner = new Scanner(this.file);
+        file.createNewFile();
+        Scanner fileScanner = new Scanner(file);
 
         //Obtain task lines
         List<String> fileLines = new ArrayList<String>();
@@ -48,7 +48,7 @@ public class FileManagement {
     public void saveTasksToFile(List<String> fileTaskList) {
         try {
             //Write the tasks to file
-            FileWriter fw = new FileWriter(this.file);
+            FileWriter fw = new FileWriter(file);
             for (int i = 0; i < fileTaskList.size(); i++) {
                 fw.write(String.format("%s\n", fileTaskList.get(i)));
             }

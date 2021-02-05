@@ -37,9 +37,9 @@ public class ToDoCommand extends Command {
      */
     public String execute(TaskManagement taskManagement) {
         try {
-            ToDoTask addedTask = this.addToDo(this.taskDescription);
+            ToDoTask addedTask = addToDo(taskDescription);
             taskManagement.addTask(addedTask);
-            return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
+            return printOutput(addedTask, taskManagement.getNumberOfTasks());
         } catch (Throwable e) {
             return e.getMessage();
         }

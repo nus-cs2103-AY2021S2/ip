@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
             assert taskNumber > 0 : "Invalid task number. Not stonks!\n";
             assert taskNumber <= taskManagement.getNumberOfTasks() : "Invalid task number. Not stonks!\n";
             Task deletedTask = taskManagement.deleteTask(taskNumber);
-            return this.printOutput(deletedTask, taskManagement.getNumberOfTasks());
+            return printOutput(deletedTask, taskManagement.getNumberOfTasks());
         } catch (Throwable e) {
             return e.getMessage();
         }
