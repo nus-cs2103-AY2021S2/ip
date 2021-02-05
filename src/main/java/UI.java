@@ -36,11 +36,11 @@ public class UI {
 
     /**
      * reads parsed commands to output appropriate response to user
-     * @param command string command parsed by Parser
+     * @param commandAndParams string arr containing a string command and a string of parameter Parser
      * @param list DukeList object
      */
-    public void commandMessage(String command, DukeList list) {
-        switch(command) {
+    public void commandMessage(String[] commandAndParams, DukeList list) {
+        switch(commandAndParams[0]) {
         case "done":
             doneMessage();
             showNoOfTaskLeft(list);
@@ -67,7 +67,7 @@ public class UI {
         case "bye":
             isExit = true;
             break;
-        case "unknown":
+        default:
             unknownCommandMessage();
             break;
         }
@@ -174,7 +174,7 @@ public class UI {
      * Output error message when NumberFormatException | DateTimeParseException | IndexOutOfBoundsException is caught
      */
     public void showWrongArgsError() {
-        showToUser("Error! Your command has invalid arguement(s)!\nTry Again!");
+        showToUser("Error! Your command has invalid argument(s)!\nTry Again!");
     }
 
     /**
@@ -187,7 +187,7 @@ public class UI {
 
     /**
      * signals whether "bye command has been called"
-     * @return
+     * @return boolean
      */
     public boolean getIsExit() {
         return isExit;
