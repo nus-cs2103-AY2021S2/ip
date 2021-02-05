@@ -1,17 +1,36 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     protected List<Task> taskList;
 
+    /**
+     * Creates a new instance of <code>TaskList</code>.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Returns this task list.
+     *
+     * @param taskNo Task number.
+     * @return Task for the given task number.
+     */
     public Task getTask(int taskNo) {
         return this.taskList.get(taskNo - 1);
     }
 
+    /**
+     * Adds task to task list.
+     *
+     * @param taskType Type of task.
+     * @param description Description of task.
+     * @throws DukeException If description is not given in the correct format.
+     */
     public void addTask(TaskType taskType, String description) throws DukeException {
         Task newTask = new Task(description);
         if (taskType == TaskType.TODO) {
@@ -35,6 +54,12 @@ public class TaskList {
                 + "Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
+    /**
+     * Deletes task from task list.
+     *
+     * @param taskNo Task number.
+     * @throws DukeException If task number does not exist.
+     */
     public void deleteTask(int taskNo) throws DukeException {
          if (taskNo > this.taskList.size()) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
@@ -49,6 +74,9 @@ public class TaskList {
         System.out.println("Now you have " + this.taskList.size() + taskOrTasks + " in the list.");
     }
 
+    /**
+     * Print tasks in task list.
+     */
     public void printTaskList() {
         if (this.taskList.size() == 0) {
             System.out.println("There are currently no tasks in your list!");

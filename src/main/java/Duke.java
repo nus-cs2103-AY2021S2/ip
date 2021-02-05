@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Represents a task manager that allows users to add, delete and mark tasks as done.
+ */
 public class Duke {
 
     public static void level1() {
