@@ -13,8 +13,7 @@ public class Event extends Task {
             this.eventDate = Task.dateStringToDate(eventDateString);
             this.eventDateString = eventDate.getMonth().toString().toLowerCase() + " " +
                     eventDate.getDayOfMonth() + " " + eventDate.getYear();
-        }
-        catch (DateTimeException e) {
+        } catch (DateTimeException e) {
             System.err.println("Please input date in yyyy-MM-dd format.");
         }
     }

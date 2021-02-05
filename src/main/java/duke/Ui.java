@@ -89,8 +89,7 @@ public class Ui {
         System.out.println("Here are the matching tasks in your list:");
         if (tasksFound.getTaskListSize() == 0) {
             System.out.println("Sorry. No tasks found :-(");
-        }
-        else {
+        } else {
             this.printTaskList(tasksFound);
         }
     }

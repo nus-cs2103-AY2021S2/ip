@@ -76,10 +76,9 @@ public class Storage {
                     taskList.add(taskInList);
                     break;
                 default:
-
+                    // do nothing
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
         }
@@ -97,15 +96,13 @@ public class Storage {
         for (int i = 0; i < data.size(); i++) {
             if (i == data.size() - 1) {
                 stringOfData += data.get(i).toString();
-            }
-            else {
+            } else {
                 stringOfData += data.get(i).toString() + "\n";
             }
         }
         try {
             Files.writeString(Paths.get(this.filePath), stringOfData);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println(e);
         }
     }
