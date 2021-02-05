@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +30,10 @@ public class TaskList {
      *
      * @param taskType Type of task.
      * @param description Description of task.
+     * @param isReadingFile True if a file is being read, false if a file is not being read.
      * @throws DukeException If description is not given in the correct format.
      */
-    public void addTask(TaskType taskType, String description) throws DukeException {
+    public void addTask(TaskType taskType, String description, boolean isReadingFile) throws DukeException, IOException {
         Task newTask = new Task(description);
         if (taskType == TaskType.TODO) {
             newTask = new ToDoTask(description);
@@ -49,9 +51,12 @@ public class TaskList {
             newTask = new EventTask(descriptionArr[0], descriptionArr[1]);
         }
         this.taskList.add(newTask);
-        System.out.println("Got it. I've added this task: \n"
-                + "  " + newTask + "\n"
-                + "Now you have " + this.taskList.size() + " tasks in the list.");
+        if (!isReadingFile) {
+            FileManager.appendToFile("data/duke.txt", newTask.toString());
+            System.out.println("Got it. I've added this task: \n"
+                    + "  " + newTask + "\n"
+                    + "Now you have " + this.taskList.size() + " tasks in the list.");
+        }
     }
 
     /**
@@ -60,8 +65,8 @@ public class TaskList {
      * @param taskNo Task number.
      * @throws DukeException If task number does not exist.
      */
-    public void deleteTask(int taskNo) throws DukeException {
-         if (taskNo > this.taskList.size()) {
+    public void deleteTask(int taskNo) throws DukeException, IOException {
+        if (taskNo > this.taskList.size()) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
         }
 
@@ -72,6 +77,8 @@ public class TaskList {
                 ? " task"
                 : " tasks";
         System.out.println("Now you have " + this.taskList.size() + taskOrTasks + " in the list.");
+        FileManager.deleteLine("data/duke.txt", taskNo);
+
     }
 
     /**

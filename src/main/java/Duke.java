@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -20,7 +22,7 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -29,6 +31,10 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         TaskList taskList = new TaskList();
+        String filePath = "data/duke.txt";
+        if (FileManager.doesExist(filePath)) {
+            taskList = FileManager.textFileToArrayList(filePath);
+        }
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -50,7 +56,7 @@ public class Duke {
                     }
                     TaskType taskType = TaskType.valueOf(inputArr[0].toUpperCase());
                     String description = input.split(inputArr[0] + " ")[1];
-                    taskList.addTask(taskType, description);
+                    taskList.addTask(taskType, description, false);
                 } else if (inputArr[0].equals("delete")) {
                     if (inputArr.length == 1) {
                         throw new DukeException("☹ OOPS!!! The task number has not been specified.");
@@ -63,7 +69,7 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e);
             }
         }
