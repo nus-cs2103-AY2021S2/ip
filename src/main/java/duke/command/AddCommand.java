@@ -16,6 +16,17 @@ import duke.task.Todo;
  */
 public class AddCommand extends Command {
 
+    private static final String ERROR_EMPTY_ARGUMENT = "Invalid argument: Argument field cannot be empty.";
+    private static final String ERROR_EMPTY_CONTENT = "Invalid argument: Content field is blank.";
+    private static final String ERROR_EMPTY_TIME = "Void argument: Time field is blank.";
+    private static final String ERROR_UNDETECTED_AT = "Invalid argument: /at not detected or no argument before /at.";
+    private static final String ERROR_UNDETECTED_BY = "Invalid argument: /by not detected or no argument before /by.";
+    private static final String ERROR_INCORRECT_FORMAT = "Incorrect time format: Correct format is yyyy-MM-dd HHmm.";
+
+    private static final String MARK_AT = " /at ";
+    private static final String MARK_BY = " /by ";
+
+
     private final String command;
     private final CommandType cmdType;
 
@@ -38,11 +49,11 @@ public class AddCommand extends Command {
      */
     private Task convertToTodo() throws DukeException {
         if (command.length() <= 5) {
-            throw new DukeException("Invalid argument: Argument field cannot be empty.");
+            throw new DukeException(ERROR_EMPTY_ARGUMENT);
         } else {
             String subStr = command.substring(5);
             if (StringParser.isBlank(subStr)) {
-                throw new DukeException("Invalid argument: Content field is blank");
+                throw new DukeException(ERROR_EMPTY_CONTENT);
             } else {
                 return new Todo(command.substring(5));
             }
@@ -57,23 +68,23 @@ public class AddCommand extends Command {
      */
     private Task convertToEvent() throws DukeException {
         if (command.length() <= 6) {
-            throw new DukeException("Invalid argument: Argument field cannot be empty.");
+            throw new DukeException(ERROR_EMPTY_ARGUMENT);
         } else {
-            int indexOfAt = command.toLowerCase().indexOf(" /at ");
+            int indexOfAt = command.toLowerCase().indexOf(MARK_AT);
             if (indexOfAt < 6) {
-                throw new DukeException("Invalid argument: /at not detected or no argument before /at.");
+                throw new DukeException(ERROR_UNDETECTED_AT);
             }
             String subStrContent = command.substring(6, indexOfAt);
             String subStrTime = command.substring(indexOfAt + 5);
             if (StringParser.isBlank(subStrContent)) {
-                throw new DukeException("Void argument: Content field is blank");
+                throw new DukeException(ERROR_EMPTY_CONTENT);
             } else if (StringParser.isBlank(subStrTime)) {
-                throw new DukeException("Void argument: Time field is blank");
+                throw new DukeException(ERROR_EMPTY_TIME);
             } else {
                 try {
                     return new Event(subStrContent, StringParser.parseTime(subStrTime));
                 } catch (DateTimeException e) {
-                    throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm");
+                    throw new DukeException(ERROR_INCORRECT_FORMAT);
                 }
             }
         }
@@ -87,23 +98,23 @@ public class AddCommand extends Command {
      */
     private Task convertToDeadline() throws DukeException {
         if (command.length() <= 9) {
-            throw new DukeException("Invalid argument: Argument field cannot be empty.");
+            throw new DukeException(ERROR_EMPTY_ARGUMENT);
         } else {
-            int indexOfBy = command.toLowerCase().indexOf(" /by ");
+            int indexOfBy = command.toLowerCase().indexOf(MARK_BY);
             if (indexOfBy < 9) {
-                throw new DukeException("Invalid argument: /by not detected or no argument before /by.");
+                throw new DukeException(ERROR_UNDETECTED_BY);
             }
             String subStrContent = command.substring(9, indexOfBy);
             String subStrTime = command.substring(indexOfBy + 5);
             if (StringParser.isBlank(subStrContent)) {
-                throw new DukeException("Void argument: Content field is blank");
+                throw new DukeException(ERROR_EMPTY_CONTENT);
             } else if (StringParser.isBlank(subStrTime)) {
-                throw new DukeException("Void argument: Time field is blank");
+                throw new DukeException(ERROR_EMPTY_TIME);
             } else {
                 try {
                     return new Deadline(subStrContent, StringParser.parseTime(subStrTime));
                 } catch (DateTimeException e) {
-                    throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm");
+                    throw new DukeException(ERROR_INCORRECT_FORMAT);
                 }
             }
         }
