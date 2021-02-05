@@ -31,7 +31,6 @@ public class TaskTest {
         assertEquals(" | 0 | \n", testTask.saveStatus());
     }
 
-    
     @Test
     public void testDoesDescriptionContain() {
         Task testTask = new Task("");
