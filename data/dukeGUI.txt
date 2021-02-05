@@ -1,5 +1,5 @@
-deadline do assignment /by 2021-01-01
-todo read book
-deadline attend meeting /by 2021-05-18
-event attend dinner /at 2021-03-15
-todo prepare coffee
+deadline do assignment /by 2021-01-01 undone
+todo read book done
+deadline attend meeting /by 2021-05-18 done
+event attend dinner /at 2021-03-15 undone
+todo prepare coffee undone

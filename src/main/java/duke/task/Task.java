@@ -14,7 +14,7 @@ public class Task {
         this.done = true;
     }
 
-    public boolean getStatus() {
+    public boolean isDone() {
         return this.done;
     }
 
@@ -24,7 +24,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (this.getStatus()) {
+        if (this.isDone()) {
             return "[X] " + this.task;
         } else {
             return "[ ] " + this.task;

@@ -29,7 +29,7 @@ public class EventTask extends Task {
         String dateFormat = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String taskRepresent = divideCommand[1] + " " + divideCommand[2]
                 + " (" + divideCommand[3].substring(1) + ": " + dateFormat + ")";
-        if (this.getStatus()) {
+        if (this.isDone()) {
             return "[E][X] " + taskRepresent;
         } else {
             return "[E][ ] " + taskRepresent;

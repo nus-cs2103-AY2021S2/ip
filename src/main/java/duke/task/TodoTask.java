@@ -9,7 +9,7 @@ public class TodoTask extends Task {
 
     @Override
     public String toString() {
-        if (this.getStatus()) {
+        if (this.isDone()) {
             return "[T][X] " + task;
         } else {
             return "[T][ ] " + task;

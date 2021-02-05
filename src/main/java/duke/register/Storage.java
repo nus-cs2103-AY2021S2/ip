@@ -1,9 +1,7 @@
 package duke.register;
+
 import duke.exception.DukeException;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.TaskList;
-import duke.task.TodoTask;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,6 +40,7 @@ public class Storage {
 
     /**
      * Reads the data from the file and returns then in a task list
+     *
      * @return
      * @throws DukeException
      */
@@ -52,12 +51,26 @@ public class Storage {
             while (fio.hasNextLine()) {
                 String line = fio.nextLine();
                 String[] command = line.split(" ");
-                if (command[0].equals("todo")) {
-                    taskList.addTask(new TodoTask(line));
-                } else if (command[0].equals("deadline")) {
-                    taskList.addTask(new DeadlineTask(line));
-                } else if (command[0].equals("event")) {
-                    taskList.addTask(new EventTask(line));
+                String type = command[0];
+                String status = command[command.length - 1];
+                if (type.equals("todo")) {
+                    TodoTask task = new TodoTask(createTask(command));
+                    if (status.equals("done")) {
+                        task.markDone();
+                    }
+                    taskList.addTask(task);
+                } else if (type.equals("deadline")) {
+                    DeadlineTask task = new DeadlineTask(createTask(command));
+                    if (status.equals("done")) {
+                        task.markDone();
+                    }
+                    taskList.addTask(task);
+                } else if (type.equals("event")) {
+                    EventTask task = new EventTask(createTask(command));
+                    if (status.equals("done")) {
+                        task.markDone();
+                    }
+                    taskList.addTask(task);
                 }
             }
             fio.close();
@@ -65,6 +78,21 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("failed to load file");
         }
+    }
+
+    /**
+     * Creates a task line from the command array
+     *
+     * @param command
+     * @return task line
+     */
+    public String createTask(String[] command) {
+        String result = "";
+        for (int i = 0; i < command.length - 1; i++) {
+            result += i == command.length - 2
+                    ? command[i] : command[i] + " ";
+        }
+        return result;
     }
 
     /**
@@ -77,7 +105,8 @@ public class Storage {
         try {
             PrintWriter pw = new PrintWriter(file);
             for (int i = 0; i < tasks.numOfTasks(); i++) {
-                pw.println(tasks.getTask(i).getTaskName());
+                String status = tasks.getTask(i).isDone() ? "done" : "undone";
+                pw.println(tasks.getTask(i).getTaskName() + " " + status);
             }
             pw.close();
         } catch (FileNotFoundException e) {
