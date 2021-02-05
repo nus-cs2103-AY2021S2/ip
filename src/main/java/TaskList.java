@@ -14,10 +14,19 @@ public class TaskList {
     protected List<Task> taskList;
 
     /**
-     * Creates a new instance of <code>TaskList</code>.
+     * Creates a new instance of <code>TaskList</code> when no existing tasks are available.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    /**
+     * Creates a new instance of <code>TaskList</code> when existing tasks are available.
+     *
+     * @param existingTaskList TaskList with existing tasks.
+     */
+    public TaskList(TaskList existingTaskList) {
+        this.taskList = existingTaskList.taskList;
     }
 
     /**
@@ -30,15 +39,21 @@ public class TaskList {
         return this.taskList.get(taskNo - 1);
     }
 
+    public int getTaskListSize() {
+        return this.taskList.size();
+    }
+
     /**
      * Adds task to task list.
      *
      * @param taskType Type of task.
      * @param description Description of task.
      * @param isReadingFile True if a file is being read, false if a file is not being read.
+     * @param storage Storage.
      * @throws DukeException If description is not given in the correct format.
+     * @throws IOException If there are any input and output issues.
      */
-    public void addTask(TaskType taskType, String description, boolean isReadingFile) throws DukeException, IOException {
+    public void addTask(TaskType taskType, String description, boolean isReadingFile, Storage storage) throws DukeException, IOException {
         Task newTask = new Task(description);
         if (taskType == TaskType.TODO) {
             newTask = new ToDoTask(description);
@@ -73,7 +88,7 @@ public class TaskList {
         }
         this.taskList.add(newTask);
         if (!isReadingFile) {
-            FileManager.appendToFile("data/duke.txt", newTask.toString());
+            storage.appendToFile("data/duke.txt", newTask.toString());
             System.out.println("Got it. I've added this task: \n"
                     + "  " + newTask + "\n"
                     + "Now you have " + this.taskList.size() + " tasks in the list.");
@@ -84,9 +99,10 @@ public class TaskList {
      * Deletes task from task list.
      *
      * @param taskNo Task number.
+     * @param storage Storage.
      * @throws DukeException If task number does not exist.
      */
-    public void deleteTask(int taskNo) throws DukeException, IOException {
+    public void deleteTask(int taskNo, Storage storage) throws DukeException, IOException {
         if (taskNo > this.taskList.size()) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
         }
@@ -98,7 +114,7 @@ public class TaskList {
                 ? " task"
                 : " tasks";
         System.out.println("Now you have " + this.taskList.size() + taskOrTasks + " in the list.");
-        FileManager.deleteLine("data/duke.txt", taskNo);
+        FileManager.deleteLine("data/duke.txt", taskNo, storage);
 
     }
 

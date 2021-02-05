@@ -14,6 +14,7 @@ public class DeadlineTask extends Task {
      * Creates a new instance of <code>DeadlineTask</code>.
      *
      * @param description Description of deadline task.
+     * @param deadline Deadline of deadline task.
      */
     public DeadlineTask(String description, String deadline) {
         super(description);
@@ -25,7 +26,7 @@ public class DeadlineTask extends Task {
      *
      * @return Date of deadline.
      */
-    public LocalDate getDeadlineDate() {
+    public LocalDate getDeadlineDate() throws DateTimeParseException {
         String[] deadlineArr = this.deadline.split(" ");
         LocalDate deadlineDate = LocalDate.parse(deadlineArr[0]);
         return deadlineDate;
@@ -36,7 +37,7 @@ public class DeadlineTask extends Task {
      *
      * @return Time of deadline.
      */
-    public LocalTime getDeadlineTime() {
+    public LocalTime getDeadlineTime() throws DateTimeParseException {
         String[] deadlineArr = this.deadline.split(" ");
         LocalTime deadlineTime = LocalTime.parse(deadlineArr[1]);
         return deadlineTime;

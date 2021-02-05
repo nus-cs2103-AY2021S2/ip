@@ -1,0 +1,42 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class TaskdateCommand extends Command {
+
+    public TaskdateCommand(String description) {
+        this.type = "taskdate";
+        this.description = description;
+        this.isExit = false;
+    }
+
+    /**
+     * Filters out tasks that match given date.
+     *
+     * @param tasks Task list.
+     * @param ui User interface.
+     * @param storage Storage.
+     * @throws DukeException If description is in the wrong format or is invalid.
+     */
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
+        Matcher matcher = pattern.matcher(description);
+        if (!matcher.find()) {
+            throw new DukeException("Your deadline is given in the wrong format! "
+                    + "Please make sure it is in the following format: YYYY-MM-DD HH:MM");
+        }
+        try {
+            LocalDate date = LocalDate.parse(this.description);
+            tasks.printTasksOn(date);
+        } catch (DateTimeParseException e) {
+            ui.showError("This date is invalid!");
+        }
+    }
+
+    @Override
+    public boolean isExit() {
+        return this.isExit;
+    }
+}

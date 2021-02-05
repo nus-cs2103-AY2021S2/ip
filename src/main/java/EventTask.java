@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a event task.
@@ -23,7 +24,7 @@ public class EventTask extends Task {
      *
      * @return Date of event.
      */
-    public LocalDate getEventDateDate() {
+    public LocalDate getEventDateDate() throws DateTimeParseException {
         String[] eventDateArr = this.eventDate.split(" ");
         LocalDate eventDateDate = LocalDate.parse(eventDateArr[0]);
         return eventDateDate;
@@ -34,7 +35,7 @@ public class EventTask extends Task {
      *
      * @return Time of event.
      */
-    public LocalTime getEventDateTime() {
+    public LocalTime getEventDateTime() throws DateTimeParseException {
         String[] eventDateArr = this.eventDate.split(" ");
         LocalTime eventDateTime = LocalTime.parse(eventDateArr[1]);
         return eventDateTime;
