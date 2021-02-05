@@ -17,7 +17,7 @@ public class Duke {
         TaskList taskList = new TaskList();
         try {
             listOfTasks = database.readFile();
-            myList = readInput(listOfTasks);
+            taskList = readInput(listOfTasks);
         } catch (FileNotFoundException e){
             throw new FileNotFoundException("No File Detected");
         }
@@ -28,22 +28,22 @@ public class Duke {
             switch (s){
                 case "todo":
 
-                    parser.parseTodoCommand(input,myList,ui,database);
+                    parser.parseTodoCommand(input,taskList,ui,database);
                     break;
 
                 case "deadline":
 
-                    parser.parseDeadlineCommand(input,myList,ui,database);
+                    parser.parseDeadlineCommand(input,taskList,ui,database);
                     break;
 
                 case "event":
 
-                    parser.parseEventCommand(input, myList, ui, database);
+                    parser.parseEventCommand(input, taskList, ui, database);
                     break;
 
                 case "list":
 
-                    parser.parseListCommand(myList, ui);
+                    parser.parseListCommand(taskList, ui);
                     break;
 
                 case "bye":
@@ -51,12 +51,12 @@ public class Duke {
                     break;
                 case "done":
 
-                    parser.parseDoneCommand(input,myList,ui,database);
+                    parser.parseDoneCommand(input,taskList,ui,database);
                     break;
 
                 case "delete":
 
-                    parser.parseDeleteCommand(input, myList, ui, database);
+                    parser.parseDeleteCommand(input, taskList, ui, database);
                     break;
 
                 default:
@@ -67,8 +67,8 @@ public class Duke {
         }
     }
 
-    private static ArrayList<Task> readInput(ArrayList<String> strings) {
-        ArrayList<Task> tasks = new ArrayList<>();
+    private static TaskList readInput(ArrayList<String> strings) {
+        TaskList tasks = new TaskList();
         for(String str: strings) {
             char identifier = str.charAt(1);
             switch(identifier) {
@@ -79,12 +79,12 @@ public class Duke {
                     String deadline = inputs[1].substring(0, inputs[1].length()-1);
                     LocalDate deadline1 = LocalDate.parse(deadline);
                     Deadline deadline2 = new Deadline(name, deadline1);
-                    tasks.add(deadline2);
+                    tasks.addTask(deadline2);
                     break;
                 case 'T':
                     String subString1 = str.substring(7);
                     Todo todo1 = new Todo(subString1);
-                    tasks.add(todo1);
+                    tasks.addTask(todo1);
                     break;
                 case 'E':
                     String subString2 = str.substring(7);
@@ -92,7 +92,7 @@ public class Duke {
                     String desc = inputs1[0].substring(0, inputs1[0].length()-2);
                     String at = inputs1[1].substring(0, inputs1[1].length()-1);
                     Event event1 = new Event(desc, at);
-                    tasks.add(event1);
+                    tasks.addTask(event1);
 
                     break;
             }

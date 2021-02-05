@@ -1,13 +1,11 @@
 package duke;
 
-import java.util.ArrayList;
-
 public class Ui {
 
     public static final String HORIZONTAL_LINE = "________________________________________________";
     public static final String FILE_PATH = "data.txt";
     private static final String greeting =" Hello! I'm duke.\n What can I do for you?\n";
-    private static String farewell = " Bye. Hope to see you again soon!\n";
+    private static String farewell = " Bye. Hope to see you again soon!";
 
     public static void initGreating() {
         System.out.println(HORIZONTAL_LINE + "\n" + greeting + HORIZONTAL_LINE + "\n");
@@ -24,14 +22,16 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    public static void showListContent(ArrayList<Task> list){
+    public static void showListContent(TaskList taskList){
         System.out.println(HORIZONTAL_LINE);
-        if(list.isEmpty()){
+        System.out.println(" Here are your remaining tasks!\n");
+        if(taskList.getSize() ==0){
             System.out.println(" The list is empty!\n Please add tasks into the list :))");
         }
-        for(int i=1; i< list.size()+1; i++){
-            System.out.println(" " + i + ". " + list.get(i-1).toString());
-        }
+//        for(int i=1; i< list.size()+1; i++){
+//            System.out.println(" " + i + ". " + list.get(i-1).toString());
+//        }
+        System.out.println(taskList.toString());
         System.out.println(HORIZONTAL_LINE);
     }
 

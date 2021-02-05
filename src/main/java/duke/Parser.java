@@ -2,12 +2,11 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
 
-    public static void parseTodoCommand(Scanner input, ArrayList<Task> myList, Ui ui, Database database){
+    public static void parseTodoCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try {
             String s1 = input.nextLine();
             if (s1.equals("")) {
@@ -20,9 +19,9 @@ public class Parser {
                     try{
                         String desc = s1.substring(1);
                         Todo newTodo = new Todo(desc);
-                        myList.add(newTodo);
-                        ui.showSuccessfulAddedMessage(myList.size(), newTodo);
-                        database.writeTaskToFile(myList);
+                        taskList.addTask(newTodo);
+                        ui.showSuccessfulAddedMessage(taskList.getSize(), newTodo);
+                        database.writeTaskToFile(taskList.getList());
                     } catch (Exception e){
                         System.out.println(" Enter a valid todo task");
                     }
@@ -33,7 +32,7 @@ public class Parser {
         }
     }
 
-    public static void parseEventCommand(Scanner input, ArrayList<Task> myList, Ui ui, Database database){
+    public static void parseEventCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
             String s1 = input.nextLine();
             if(s1.equals("")){
@@ -48,9 +47,9 @@ public class Parser {
                     } else {
                         String eventDetails = parts[1];
                         Event newEvent = new Event(eventDesc, eventDetails);
-                        myList.add(newEvent);
-                        ui.showSuccessfulAddedMessage(myList.size(), newEvent);
-                        database.writeTaskToFile(myList);
+                        taskList.addTask(newEvent);
+                        ui.showSuccessfulAddedMessage(taskList.getSize(), newEvent);
+                        database.writeTaskToFile(taskList.getList());
                     }
                 } catch(DukeException e) {
                     ui.showErrorMessage(e.getMessage());
@@ -63,7 +62,7 @@ public class Parser {
 
     }
 
-    public static void parseDeadlineCommand(Scanner input, ArrayList<Task> myList, Ui ui, Database database){
+    public static void parseDeadlineCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
             String s1 = input.nextLine();
             if(s1.equals("")){
@@ -80,9 +79,9 @@ public class Parser {
                         try{
                             LocalDate deadline = LocalDate.parse(dl);
                             Deadline newDeadline = new Deadline(deadlineDesc, deadline);
-                            myList.add(newDeadline);
-                            ui.showSuccessfulAddedMessage(myList.size(), newDeadline);
-                            database.writeTaskToFile(myList);
+                            taskList.addTask(newDeadline);
+                            ui.showSuccessfulAddedMessage(taskList.getSize(), newDeadline);
+                            database.writeTaskToFile(taskList.getList());
                         } catch (DateTimeParseException e){
                             ui.showErrorMessage(" Please enter date as follows\n YYYY-MM-DD");
                         }
@@ -97,7 +96,7 @@ public class Parser {
 
     }
 
-    public static void parseDoneCommand(Scanner input, ArrayList<Task> myList, Ui ui, Database database){
+    public static void parseDoneCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
             String s1 = input.nextLine();
             if(s1.equals("")){
@@ -110,10 +109,10 @@ public class Parser {
                     try {
                         String indexString = parts[1];
                         int index =Integer.parseInt(indexString);
-                        Task t = myList.get(index - 1);
+                        Task t = taskList.getList().get(index - 1);
                         t.markAsDone();
                         ui.markTaskAsDone(t);
-                        database.writeTaskToFile(myList);
+                        database.writeTaskToFile(taskList.getList());
                     } catch (Exception e){
                         ui.showErrorMessage(" Please enter a valid index");
                     }
@@ -125,7 +124,7 @@ public class Parser {
         }
     }
 
-    public static void parseDeleteCommand(Scanner input, ArrayList<Task> myList, Ui ui, Database database){
+    public static void parseDeleteCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
             String s1 = input.nextLine();
             if(s1.equals("")){
@@ -138,10 +137,10 @@ public class Parser {
                     try {
                         String indexString = parts[1];
                         int index =Integer.parseInt(indexString);
-                        Task t = myList.get(index-1);
-                        myList.remove(index-1);
+                        Task t = taskList.getList().get(index-1);
+                        taskList.removeTask(index-1);
                         ui.showTaskAsDeleted(t);
-                        database.writeTaskToFile(myList);
+                        database.writeTaskToFile(taskList.getList());
 
                     } catch (Exception e){
                         ui.showErrorMessage(" Please enter a valid index");
@@ -154,8 +153,8 @@ public class Parser {
         }
     }
 
-    public static void parseListCommand(ArrayList<Task> myList, Ui ui){
-        ui.showListContent(myList);
+    public static void parseListCommand(TaskList taskList, Ui ui){
+        ui.showListContent(taskList);
 
     }
 

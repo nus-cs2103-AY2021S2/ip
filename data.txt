@@ -1,0 +1,3 @@
+[T][✓] hello
+[E][✘] event (at: lanflaf)
+[D][✓] deadline (by: 1999-12-12)

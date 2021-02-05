@@ -29,7 +29,7 @@ public class TaskList {
      * @param index Index of task to be removed.
      * @return Task removed.
      */
-    public Task deleteTask(int index) {
+    public Task removeTask(int index) {
         Task removed = tasks.remove(index);
         return removed;
     }
@@ -44,6 +44,10 @@ public class TaskList {
         task.markAsDone();
         tasks.add(index, task);
         tasks.remove(index + 1);
+    }
+
+    public ArrayList<Task> getList(){
+        return this.tasks;
     }
 
     /**
@@ -67,6 +71,14 @@ public class TaskList {
     }
 
     public String toString(){
-        return "";
+        String output = "";
+        for(int i = 0; i< tasks.size(); i++){
+            if(i != tasks.size() - 1){
+                output += " " + tasks.get(i).toString() + "\n";
+            } else {
+                output += " " + tasks.get(i).toString();
+            }
+        }
+        return output;
     }
 }
