@@ -14,6 +14,7 @@ public class TaskManager {
     private ArrayList<Task> list = new ArrayList<>(100);
 
     public Task add(String type, String task, boolean isCompleted) {
+        assert !task.equals("") : "Missing task description";
         if (type.equals(TODO)) {
             Task newTask = new ToDo(task, isCompleted);
             list.add(newTask);
@@ -35,6 +36,7 @@ public class TaskManager {
 
     public Task delete(int taskId) throws DukeException {
         if (taskId <= list.size() && taskId >= 1) {
+            assert taskId >= 0 : "Invalid task number";
             Task deletedTask = list.get(taskId - 1);
             list.remove(taskId - 1);
             return deletedTask;
@@ -45,6 +47,7 @@ public class TaskManager {
 
     public Task done(int taskId) throws DukeException {
         if (taskId <= list.size() && taskId >= 1) {
+            assert taskId >= 0 : "Invalid task number";
             Task completedTask = list.get(taskId - 1);
             completedTask.markComplete();
             return completedTask;
@@ -55,6 +58,7 @@ public class TaskManager {
 
     public ArrayList<Task> getTasksOn(String date) {
         LocalDate currentDate = LocalDate.parse(date);
+        assert currentDate != null : "Invalid date format";
         System.out.println("Here are the tasks due on " + date + ": ");
         ArrayList<Task> dueList = new ArrayList<>();
         for (Task task : list) {
