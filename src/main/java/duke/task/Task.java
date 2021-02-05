@@ -16,9 +16,9 @@ public class Task {
     public Task(String description, int status) {
         this.description = description;
         this.status = status;
-        if(status == 1) {
+        if (status == 1) {
             this.isDone = true;
-        }else{
+        } else {
             this.isDone = false;
         }
     }
@@ -27,7 +27,7 @@ public class Task {
      * Gets the task description.
      * @return Task description.
      */
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -60,8 +60,8 @@ public class Task {
      * @return Message output for Task.
      */
     @Override
-    public String toString(){
-        return "[" + this.getStatusIcon() + "] " + this.description ;
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
 }

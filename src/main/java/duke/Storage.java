@@ -1,15 +1,17 @@
 package duke;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
+
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
 
 /**
  * Represents local storage of task data.
@@ -34,7 +36,7 @@ public class Storage {
     public TaskList openFile() throws DukeException {
         File file = new File(path);
 
-        if(!file.exists()) {
+        if (!file.exists()) {
             try {
                 file.getParentFile().mkdir();
                 file.createNewFile();
@@ -45,13 +47,13 @@ public class Storage {
 
         try {
             Scanner sc = new Scanner(file);
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String txtLine = sc.nextLine();
                 Task task = processContent(txtLine);
                 taskList.addTask(task);
             }
             return taskList;
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException("File cannot be found.");
         }
     }
@@ -62,7 +64,7 @@ public class Storage {
      * @return Task based on the file content.
      * @throws DukeException If text is invalid.
      */
-    public Task processContent (String txtLine) throws DukeException{
+    public Task processContent (String txtLine) throws DukeException {
         String[] content = txtLine.split(" \\| ");
         String taskType = content[0];
         int taskStatus = Integer.parseInt(content[1]);
@@ -85,10 +87,10 @@ public class Storage {
     /**
      * Updates the local file every time there is a change in the task list.
      */
-    public void updateFile(){
-        try{
+    public void updateFile() {
+        try {
             FileWriter fw = new FileWriter(path);
-            for(Task t : taskList.getTasks()) {
+            for (Task t : taskList.getTasks()) {
                 fw.write(t.toTxt());
             }
             fw.close();

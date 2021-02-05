@@ -3,7 +3,15 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.command.*;
+import duke.command.AddDeadline;
+import duke.command.AddEvent;
+import duke.command.AddTodo;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -18,7 +26,7 @@ public class Parser {
      * @return A command based on the input.
      * @throws DukeException If invalid command is given.
      */
-    public static Command parse(String commandLine) throws DukeException{
+    public static Command parse(String commandLine) throws DukeException {
         String[] messages = commandLine.split(" ");
         String commandType = messages[0];
 
@@ -85,7 +93,7 @@ public class Parser {
      * @param message Input string to be processed.
      * @return A task description.
      */
-    public static String processTask(String message){
+    public static String processTask(String message) {
         return message.substring(message.indexOf(' ') + 1);
     }
 
@@ -93,9 +101,8 @@ public class Parser {
      * Generates a AddEvent command from the task description.
      * @param description Event description.
      * @return A command that adds a Event to the task list.
-     * @throws Exception If invalid description is given.
      */
-    public static AddEvent generateEvent(String description) throws Exception {
+    public static AddEvent generateEvent(String description) {
 
         String name = description.substring(0, description.indexOf(" /at "));
         String time = description.substring(description.indexOf(" /at ") + 5);
@@ -110,9 +117,8 @@ public class Parser {
      * Generates a AddDeadline command from the task description.
      * @param description Deadline description.
      * @return A command that adds a Deadline to the task list.
-     * @throws Exception If invalid description is given.
      */
-    public static AddDeadline generateDeadline(String description) throws Exception {
+    public static AddDeadline generateDeadline(String description) {
         String name = description.substring(0, description.indexOf(" /by "));
         String time = description.substring(description.indexOf(" /by ") + 5);
 

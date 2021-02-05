@@ -11,7 +11,7 @@ public class Todo extends Task {
      * @param status To check if the todo task is done.
      */
     public Todo(String description, int status) {
-        super(description,status);
+        super(description, status);
     }
 
     /**

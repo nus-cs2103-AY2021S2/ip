@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+
 import duke.task.Task;
 
 /**
@@ -38,7 +39,7 @@ public class TaskList {
      * @return Number of tasks in the list.
      */
     public int getSize() {
-        if(tasks.isEmpty()) {
+        if (tasks.isEmpty()) {
             return 0;
         } else {
             return tasks.size();
@@ -59,7 +60,7 @@ public class TaskList {
      * @return Task to be removed.
      */
     public Task removeTask(int id) {
-        return tasks.remove(id-1);
+        return tasks.remove(id - 1);
     }
 
     /**
@@ -69,7 +70,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder message = new StringBuilder("Here are the tasks in your list:\n");
-        if(this.getSize()==0) {
+        if (this.getSize() == 0) {
             message.append("There is no task in the list.\n");
         } else {
             for (int i = 1; i <= this.getSize(); i++) {

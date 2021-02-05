@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.task.Task;
 
 /**
@@ -39,7 +40,7 @@ public class Ui {
     public void showAdded(Task task, TaskList tasks) {
         System.out.println("Got it. I've added this task:\n  " + task);
         System.out.println("Now you have " + tasks.getSize() + " task"
-                + (tasks.getSize()>1 ? "s in the list." : " in the list."));
+                + (tasks.getSize() > 1 ? "s in the list." : " in the list."));
     }
 
     /**
@@ -50,7 +51,7 @@ public class Ui {
     public void showDeleted(Task task, TaskList tasks) {
         System.out.println("Noted. I've removed this task:\n  " + task);
         System.out.println("Now you have " + tasks.getSize() + " task"
-                + (tasks.getSize()>1 ? "s in the list." : " in the list."));
+                + (tasks.getSize() > 1 ? "s in the list." : " in the list."));
 
     }
 
@@ -98,7 +99,7 @@ public class Ui {
             }
         }
 
-        if(count == 1) {
+        if (count == 1) {
             System.out.println("There is no matching task in the list. You can try another keyword.");
         }
 

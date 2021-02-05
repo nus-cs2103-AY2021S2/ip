@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Represents any deadline specified with deadline description, status and due date and time.
@@ -18,7 +17,7 @@ public class Deadline extends Task {
      * @param by Due date and time.
      */
     public Deadline(String description, int status, LocalDateTime by) {
-        super(description,status);
+        super(description, status);
         this.by = by;
     }
 
@@ -27,7 +26,7 @@ public class Deadline extends Task {
      * @return The text stored in the local file.
      */
     @Override
-    public String toTxt(){
+    public String toTxt() {
         return "D " + super.toTxt() + " | " + by.format(DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")) + "\n";
     }
 
