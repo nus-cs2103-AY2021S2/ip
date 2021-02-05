@@ -21,17 +21,17 @@ public class MainWindow extends AnchorPane {
 
     private SurrealChat surrealChat;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Meme Orang Disguise.png"));
-    private Image surrealImage = new Image(this.getClass().getResourceAsStream("/images/Meme Man.png"));
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/Meme Orang Disguise.png"));
+    private Image surrealImage = new Image(getClass().getResourceAsStream("/images/Meme Man.png"));
 
     /**
      * Initialises the dialog box.
      */
     @FXML
     public void initialize() {
-        this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
-        this.dialogContainer.getChildren().addAll(
-                DialogBox.getSurrealDialog(this.initialGreeting(), this.surrealImage)
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getSurrealDialog(initialGreeting(), surrealImage)
         );
     }
 
@@ -54,13 +54,13 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = this.textField.getText();
-        String response = this.surrealChat.commandLogic(input);
-        response += this.surrealChat.saveFile();
-        this.dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, this.userImage),
-                DialogBox.getSurrealDialog(response, this.surrealImage)
+        String input = textField.getText();
+        String response = surrealChat.commandLogic(input);
+        response += surrealChat.saveFile();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getSurrealDialog(response, surrealImage)
         );
-        this.textField.clear();
+        textField.clear();
     }
 }

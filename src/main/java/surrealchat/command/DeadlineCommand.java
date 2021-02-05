@@ -39,7 +39,7 @@ public class DeadlineCommand extends Command {
         //Split the description into description and deadline
         String[] descriptionSplitArray = taskDescription.split("/by");
         try {
-            LocalDateTime deadlineDateTime = this.parseDate(descriptionSplitArray[1].trim());
+            LocalDateTime deadlineDateTime = parseDate(descriptionSplitArray[1].trim());
 
             //Create Deadline task
             return DeadlineTask.createNewDeadlineTask(descriptionSplitArray[0].trim(),
@@ -62,9 +62,9 @@ public class DeadlineCommand extends Command {
      */
     public String execute(TaskManagement taskManagement) {
         try {
-            DeadlineTask addedTask = this.addDeadline(this.rawDescription);
+            DeadlineTask addedTask = addDeadline(rawDescription);
             taskManagement.addTask(addedTask);
-            return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
+            return printOutput(addedTask, taskManagement.getNumberOfTasks());
         } catch (Exception e) {
             return e.getMessage();
         }

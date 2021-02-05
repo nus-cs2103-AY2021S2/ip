@@ -39,7 +39,7 @@ public class EventCommand extends Command {
         //Split the description into description and event
         String[] descriptionSplitArray = taskDescription.split("/at");
         try {
-            LocalDateTime eventDateTime = this.parseDate(descriptionSplitArray[1].trim());
+            LocalDateTime eventDateTime = parseDate(descriptionSplitArray[1].trim());
 
             //Create Event task
             return EventTask.createNewEventTask(descriptionSplitArray[0].trim(),
@@ -62,9 +62,9 @@ public class EventCommand extends Command {
      */
     public String execute(TaskManagement taskManagement) {
         try {
-            EventTask addedTask = this.addEvent(this.rawDescription);
+            EventTask addedTask = addEvent(rawDescription);
             taskManagement.addTask(addedTask);
-            return this.printOutput(addedTask, taskManagement.getNumberOfTasks());
+            return printOutput(addedTask, taskManagement.getNumberOfTasks());
         } catch (Exception e) {
             return e.getMessage();
         }

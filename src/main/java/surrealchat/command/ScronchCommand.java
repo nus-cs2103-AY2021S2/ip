@@ -1,8 +1,8 @@
 package surrealchat.command;
 
-import surrealchat.task.TaskManagement;
-
 import java.util.NoSuchElementException;
+
+import surrealchat.task.TaskManagement;
 
 /**
  * Command object for deleting all tasks objects, essentially emptying task list.
@@ -29,7 +29,7 @@ public class ScronchCommand extends Command {
     public String execute(TaskManagement taskManagement) {
         try {
             taskManagement.deleteAllTasks();
-            return this.printOutput(taskManagement.getNumberOfTasks());
+            return printOutput(taskManagement.getNumberOfTasks());
         } catch (NoSuchElementException e) {
             return e.getMessage();
         }

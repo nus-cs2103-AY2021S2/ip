@@ -34,23 +34,23 @@ public class EditCommand extends Command {
      * @return String to describe the new task.
      */
     public String execute(TaskManagement taskManagement) {
-        if (this.rawDescription.isEmpty()) {
+        if (rawDescription.isEmpty()) {
             return "Did you forget to add the task number and new description? Not stonks!\n";
         }
         //Split the description into task number and description
-        String[] descriptionSplitArray = this.rawDescription.split("/edit");
+        String[] descriptionSplitArray = rawDescription.split("/edit");
         try {
             int taskNumber = Integer.valueOf(descriptionSplitArray[0].trim());
             String newDescription = descriptionSplitArray[1].trim();
 
             //Edit task description
-            if (this.isInvalidTaskNumber(taskNumber, taskManagement)) {
+            if (isInvalidTaskNumber(taskNumber, taskManagement)) {
                 return "Invalid task number. Not stonks!\n";
             } else if (newDescription.isEmpty()) {
                 return "No description provided for editing. Not stonks!\n";
             } else {
                 Task editedTask = taskManagement.editDescription(taskNumber, newDescription);
-                return this.printOutput(editedTask);
+                return printOutput(editedTask);
             }
         } catch (NumberFormatException e) { //Can happen if clean split does not occur.
             return "Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!\n";

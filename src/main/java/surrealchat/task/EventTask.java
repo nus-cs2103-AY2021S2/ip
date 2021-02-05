@@ -40,7 +40,7 @@ public class EventTask extends Task {
      * @return New EventTask with edited description
      */
     public EventTask editDescription(String newDescription) {
-        return new EventTask(newDescription, this.event, this.isDone);
+        return new EventTask(newDescription, event, isDone);
     }
 
     /**
@@ -48,7 +48,7 @@ public class EventTask extends Task {
      * @return EventTask that is marked as done/undone.
      */
     public EventTask markAsDone() {
-        return new EventTask(this.getDescription(), this.event, !this.isDone);
+        return new EventTask(getDescription(), event, !isDone);
     }
 
     /**
@@ -57,7 +57,7 @@ public class EventTask extends Task {
      */
     @Override
     public String saveTask() {
-        return String.format("%s /at %s", super.saveTask(), this.event);
+        return String.format("%s /at %s", super.saveTask(), event);
     }
 
     /**
@@ -66,6 +66,6 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (at: %s, %s)", super.toString(), this.event.toLocalDate(), this.event.toLocalTime());
+        return String.format("%s (at: %s, %s)", super.toString(), event.toLocalDate(), event.toLocalTime());
     }
 }

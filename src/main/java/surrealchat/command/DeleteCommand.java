@@ -54,13 +54,13 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskManagement taskManagement) {
         try {
-            int taskNumber = this.getInputNumber(this.taskNumberString);
+            int taskNumber = getInputNumber(taskNumberString);
 
-            if (this.isInvalidTaskNumber(taskNumber, taskManagement)) {
+            if (isInvalidTaskNumber(taskNumber, taskManagement)) {
                 return "Invalid task number. Not stonks!\n";
             }
             Task deletedTask = taskManagement.deleteTask(taskNumber);
-            return this.printOutput(deletedTask, taskManagement.getNumberOfTasks());
+            return printOutput(deletedTask, taskManagement.getNumberOfTasks());
         } catch (Exception e) {
             return e.getMessage();
         }

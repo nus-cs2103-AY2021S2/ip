@@ -2,13 +2,13 @@ package surrealchat.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
 public class EventTaskTest {
     private static final String TEST_DESCRIPTION = "Do CS2103T quiz";
-    private static final LocalDate TEST_EVENT = LocalDate.parse("2020-10-21");
+    private static final LocalDateTime TEST_EVENT = LocalDateTime.parse("2020-10-21T10:10:10");
     private static final EventTask STARTING_TASK = EventTask.createNewEventTask(
             EventTaskTest.TEST_DESCRIPTION, EventTaskTest.TEST_EVENT);
 
@@ -18,7 +18,7 @@ public class EventTaskTest {
     @Test
     public void testPrintStringConversion() {
         assertEquals(EventTaskTest.STARTING_TASK.toString(),
-                "[E][\u2718] Do CS2103T quiz (at: 2020-10-21)");
+                "[E][\u2718] Do CS2103T quiz (at: 2020-10-21, 10:10:10)");
     }
 
     /**
@@ -27,7 +27,7 @@ public class EventTaskTest {
     @Test
     public void testFileStringConversion() {
         assertEquals(EventTaskTest.STARTING_TASK.saveTask(),
-                "E/split/0/split/Do CS2103T quiz /at 2020-10-21");
+                "E/split/0/split/Do CS2103T quiz /at 2020-10-21T10:10:10");
     }
 
     /**
@@ -63,7 +63,7 @@ public class EventTaskTest {
     @Test
     public void testMarkDone() {
         assertEquals(EventTaskTest.STARTING_TASK.markAsDone().toString(),
-                "[E][\u2713] Do CS2103T quiz (at: 2020-10-21)");
+                "[E][\u2713] Do CS2103T quiz (at: 2020-10-21, 10:10:10)");
     }
 
     /**
@@ -72,6 +72,6 @@ public class EventTaskTest {
     @Test
     public void testMarkUndone() {
         assertEquals(EventTaskTest.STARTING_TASK.markAsDone().markAsDone().toString(),
-                "[E][\u2718] Do CS2103T quiz (at: 2020-10-21)");
+                "[E][\u2718] Do CS2103T quiz (at: 2020-10-21, 10:10:10)");
     }
 }

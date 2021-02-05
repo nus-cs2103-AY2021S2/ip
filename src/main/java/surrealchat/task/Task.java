@@ -23,7 +23,7 @@ public abstract class Task {
     }
 
     public String getType() {
-        return this.type;
+        return type;
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class Task {
      * @return 1 if task was completed and 0 if task was not completed.
      */
     public int getStatusInt() {
-        if (this.isDone) {
+        if (isDone) {
             return 1;
         } else {
             return 0;
@@ -51,7 +51,7 @@ public abstract class Task {
      * @return Task description.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -73,7 +73,7 @@ public abstract class Task {
      * @return Task in string format for file storage.
      */
     public String saveTask() {
-        return String.format("%s/split/%s/split/%s", this.getType(), this.getStatusInt(), this.getDescription());
+        return String.format("%s/split/%s/split/%s", getType(), getStatusInt(), getDescription());
     }
 
     /**
@@ -82,6 +82,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.getType(), this.getStatusIcon(), this.getDescription());
+        return String.format("[%s][%s] %s", getType(), getStatusIcon(), getDescription());
     }
 }

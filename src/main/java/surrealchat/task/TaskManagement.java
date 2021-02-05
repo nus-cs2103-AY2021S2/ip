@@ -11,6 +11,9 @@ import java.util.NoSuchElementException;
  * Handles storing of tasks and file loading/unloading operations.
  */
 public class TaskManagement {
+    protected static final String TODO_TYPE = "T";
+    protected static final String DEADLINE_TYPE = "D";
+    protected static final String EVENT_TYPE = "E";
     protected List<Task> taskList;
 
     /**
@@ -26,7 +29,7 @@ public class TaskManagement {
      * @return List of tasks.
      */
     public List<Task> getTaskList() {
-        return this.taskList;
+        return taskList;
     }
 
     /**
@@ -34,7 +37,7 @@ public class TaskManagement {
      * @return Number of tasks stored.
      */
     public int getNumberOfTasks() {
-        return this.getTaskList().size();
+        return getTaskList().size();
     }
 
     /**
@@ -42,7 +45,7 @@ public class TaskManagement {
      * @param task Task to be added.
      */
     public void addTask(Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
     }
 
     /**
@@ -52,8 +55,8 @@ public class TaskManagement {
      * @return Task that has been edited.
      */
     public Task editDescription(int taskNumber, String newDescription) {
-        Task editedTask = this.taskList.get(taskNumber - 1).editDescription(newDescription);
-        this.taskList.set(taskNumber - 1, editedTask);
+        Task editedTask = taskList.get(taskNumber - 1).editDescription(newDescription);
+        taskList.set(taskNumber - 1, editedTask);
         return editedTask;
     }
 
@@ -63,8 +66,8 @@ public class TaskManagement {
      * @return Task that has been marked as done/undone.
      */
     public Task markAsDone(int taskNumber) {
-        Task doneTask = this.taskList.get(taskNumber - 1).markAsDone();
-        this.taskList.set(taskNumber - 1, doneTask);
+        Task doneTask = taskList.get(taskNumber - 1).markAsDone();
+        taskList.set(taskNumber - 1, doneTask);
         return doneTask;
     }
 
@@ -75,26 +78,26 @@ public class TaskManagement {
      * @return Deleted task.
      */
     public Task deleteTask(int taskNumber) {
-        return this.taskList.remove(taskNumber - 1);
+        return taskList.remove(taskNumber - 1);
     }
 
     /**
      * Deletes all tasks from the list.
      */
     public void deleteAllTasks() {
-        if (this.taskList.isEmpty()) {
+        if (taskList.isEmpty()) {
             throw new NoSuchElementException("List is already empty. Not stonks!\n");
         }
-        this.taskList.clear();
+        taskList.clear();
     }
 
     private String spellTaskType(String taskType) {
         switch(taskType) {
-        case "T":
+        case TODO_TYPE:
             return "todo";
-        case "D":
+        case DEADLINE_TYPE:
             return "deadline";
-        case "E":
+        case EVENT_TYPE:
             return "event";
         default:
             throw new InputMismatchException("The task type in task is invalid. Not Stonks!\n");
@@ -106,11 +109,27 @@ public class TaskManagement {
         int total = taskList.size();
         for (int i = 0; i < total; i++) {
             Task task = taskList.get(i);
-            String printTaskType = this.spellTaskType(task.getType());
+            String printTaskType = spellTaskType(task.getType());
             outputString += String.format("Meme Man has added %s task from file: %s\n", printTaskType, task);
         }
         outputString += String.format("Total number of tasks loaded from file: %s\n", total);
         return outputString;
+    }
+
+    private void convertToTasks(String taskType, String description, boolean taskDone) {
+        switch(taskType) {
+        case TODO_TYPE:
+            addToDoFromFile(description, taskDone);
+            return;
+        case DEADLINE_TYPE:
+            addDeadlineFromFile(description, taskDone);
+            return;
+        case EVENT_TYPE:
+            addEventFromFile(description, taskDone);
+            return;
+        default:
+            throw new InputMismatchException("The task type scanned from file is invalid. Not Stonks!\n");
+        }
     }
 
     /**
@@ -123,27 +142,15 @@ public class TaskManagement {
             //Parse strings
             String[] taskComponents = fileLines.get(i).split("/split/");
             String taskType = taskComponents[0];
-            boolean taskDone = this.parseDoneFromInt(Integer.valueOf(taskComponents[1]));
+            boolean taskDone = parseDoneFromInt(Integer.valueOf(taskComponents[1]));
             String description = taskComponents[2];
 
             //Convert to Task objects
-            switch(taskType) {
-            case "T":
-                this.addToDoFromFile(description, taskDone);
-                break;
-            case "D":
-                this.addDeadlineFromFile(description, taskDone);
-                break;
-            case "E":
-                this.addEventFromFile(description, taskDone);
-                break;
-            default:
-                throw new InputMismatchException("The task type scanned from file is invalid. Not Stonks!\n");
-            }
+            convertToTasks(taskType, description, taskDone);
         }
         //Obtain list for printing
-        List<Task> taskList = this.getTaskList();
-        return this.printFileLoadOutput(taskList);
+        List<Task> taskList = getTaskList();
+        return printFileLoadOutput(taskList);
     }
 
     private boolean parseDoneFromInt(int doneInt) {
@@ -164,7 +171,7 @@ public class TaskManagement {
         }
 
         ToDoTask newTask = ToDoTask.loadToDoTaskFromFile(taskDescription.trim(), isDone);
-        this.addTask(newTask);
+        addTask(newTask);
         return newTask;
     }
 
@@ -184,12 +191,12 @@ public class TaskManagement {
         //Split the description into description and deadline
         String[] descriptionSplitArray = taskDescription.split("/by");
         try {
-            LocalDateTime deadlineDateTime = this.parseDate(descriptionSplitArray[1].trim());
+            LocalDateTime deadlineDateTime = parseDate(descriptionSplitArray[1].trim());
 
             //Create Deadline task
             DeadlineTask newTask = DeadlineTask.loadDeadlineTaskFromFile(descriptionSplitArray[0].trim(),
                     deadlineDateTime, isDone);
-            this.addTask(newTask);
+            addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
             throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/by'? Not stonks!\n");
@@ -204,12 +211,12 @@ public class TaskManagement {
         //Split the description into description and event
         String[] descriptionSplitArray = taskDescription.split("/at");
         try {
-            LocalDateTime eventDateTime = this.parseDate(descriptionSplitArray[1].trim());
+            LocalDateTime eventDateTime = parseDate(descriptionSplitArray[1].trim());
 
             //Create Event task
             EventTask newTask = EventTask.loadEventTaskFromFile(descriptionSplitArray[0].trim(),
                     eventDateTime, isDone);
-            this.addTask(newTask);
+            addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
             throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/at'? Not stonks!\n");
@@ -221,7 +228,7 @@ public class TaskManagement {
      * @return List of tasks in file string format.
      */
     public List<String> convertTasksForFile() {
-        List<Task> rawTaskList = this.getTaskList();
+        List<Task> rawTaskList = getTaskList();
         List<String> fileTaskList = new ArrayList<String>();
         for (int i = 0; i < rawTaskList.size(); i++) {
             fileTaskList.add(rawTaskList.get(i).saveTask());
@@ -234,7 +241,7 @@ public class TaskManagement {
      * @return List of tasks in print string format.
      */
     public String listOutTasks() {
-        List<Task> rawTaskList = this.getTaskList();
+        List<Task> rawTaskList = getTaskList();
         if (rawTaskList.isEmpty()) {
             throw new NoSuchElementException("I have nothing to print. Not stonks!\n");
         }

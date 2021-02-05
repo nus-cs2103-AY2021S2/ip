@@ -61,14 +61,14 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskManagement taskManagement) {
         try {
-            int taskNumber = this.getInputNumber(this.taskNumberString);
+            int taskNumber = getInputNumber(taskNumberString);
 
-            if (this.isInvalidTaskNumber(taskNumber, taskManagement)) {
+            if (isInvalidTaskNumber(taskNumber, taskManagement)) {
                 return "Invalid task number. Not stonks!\n";
             }
 
             Task doneTask = taskManagement.markAsDone(taskNumber);
-            return this.printOutput(doneTask);
+            return printOutput(doneTask);
         } catch (Exception e) {
             return e.getMessage();
         }

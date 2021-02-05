@@ -33,7 +33,7 @@ public class ToDoTask extends Task {
      * @return New ToDoTask with edited description
      */
     public ToDoTask editDescription(String newDescription) {
-        return new ToDoTask(newDescription, this.isDone);
+        return new ToDoTask(newDescription, isDone);
     }
 
     /**
@@ -41,6 +41,6 @@ public class ToDoTask extends Task {
      * @return ToDoTask that is marked as done/undone.
      */
     public ToDoTask markAsDone() {
-        return new ToDoTask(this.getDescription(), !this.isDone);
+        return new ToDoTask(getDescription(), !isDone);
     }
 }
