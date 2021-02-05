@@ -23,7 +23,6 @@ public class Momo {
         try {
             tasks = new TaskList(storage.load());
         } catch (ParseException | IOException e) {
-            //String s = Ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -38,10 +37,10 @@ public class Momo {
     public String getResponse(String input) {
         try {
             int endOfFirstWord = input.indexOf(' ');
-            String restInput = input.substring(endOfFirstWord);
+            String restInput = input.substring(endOfFirstWord + 1);
         } catch (StringIndexOutOfBoundsException e) {
             try {
-                Command command = Parser.parseCommand(input);
+                Parser.parseCommand(input);
             } catch (IllegalArgumentException e1) {
                 return TextUi.showGeneralError();
             }
@@ -57,6 +56,7 @@ public class Momo {
         }
         try {
             int endOfFirstWord = input.indexOf(' ');
+            assert endOfFirstWord < input.length() : "Doesn't handle the input not containing space";
             String commandInput = input.substring(0, endOfFirstWord);
             String restInput = input.substring(endOfFirstWord + 1);
             System.out.println(restInput);
