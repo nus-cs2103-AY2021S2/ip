@@ -69,7 +69,7 @@ public class Parser {
      * @return Index of Task to be deleted.
      */
     public int parseDeleteCommand(String command) {
-        return Integer.parseInt(command.split("")[1]);
+        return Integer.parseInt(command.split(" ")[1]);
     }
 
     /**
