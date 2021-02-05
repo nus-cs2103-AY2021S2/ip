@@ -129,6 +129,7 @@ public class AddCommand extends Command {
             task = convertToDeadline();
             break;
         default:
+            assert false : "This line will never be reached.";
             throw new DukeException("Unexpected value: " + this.cmdType);
         }
         list.addJob(task);
