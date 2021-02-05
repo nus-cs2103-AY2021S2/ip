@@ -33,10 +33,6 @@ public class Parser {
             Events event = new Events(eventParamArr[0], eventDate);
             list.add(event);
             return commandStringArr;
-        case "show":
-            LocalDate date = LocalDate.parse(commandStringArr[1]);
-            list.setDate(date);
-            return commandStringArr;
         case "reset":
             list.deleteAll();
             return commandStringArr;

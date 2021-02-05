@@ -34,6 +34,7 @@ public class UI {
         showToUser(GOODBYE_MESSAGE + LS + DIVIDER);
     }
 
+
     /**
      * reads parsed commands to output appropriate response to user
      * @param commandAndParams string arr containing a string command and a string of parameter Parser
@@ -53,7 +54,7 @@ public class UI {
             resetMessage();
             break;
         case "show":
-            showMessage(list);
+            showMessage(list, commandAndParams[1]);
             break;
         case "todo":
         case "event":
@@ -63,6 +64,9 @@ public class UI {
             break;
         case "list":
             listMessage(list);
+            break;
+        case "find":
+            findMessage(list, commandAndParams[1]);
             break;
         case "bye":
             isExit = true;
@@ -77,6 +81,18 @@ public class UI {
      * Output all tasks in DukeList object
      * @param list DukeList object
      */
+    private void findMessage(DukeList list, String keyword) {
+        int size = list.getSize();
+        int counter = 1;
+        showToUser("Here are tasks matching the keyword provided");
+        for (int i = 0; i < size; i++) {
+            if (list.get(i).getTaskName().contains(keyword)) {
+                showToUser((counter) + "." + list.get(i));
+                counter++;
+            }
+        }
+    }
+
     public void listMessage(DukeList list) {
         int size = list.getSize();
         showToUser("Here are your task!");
@@ -105,23 +121,19 @@ public class UI {
         showToUser("Got it! All tasks have been deleted");
     }
 
-    /**
-     * Output message for "show command
-     * @param list DukeList object
-     */
-    public void showMessage(DukeList list) {
-        LocalDate day = list.getDate();
+    public void showMessage(DukeList list, String dateStr) {
+        LocalDate date = LocalDate.parse(dateStr);
         int counter = 1;
-        showToUser("Here are your task on " + day.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        showToUser("Here are your task on " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         for (int i = 0; i < list.getSize(); i++) {
             Task curr = list.get(i);
             if (curr instanceof Deadlines) {
-                if (((Deadlines) curr).getBy().equals(day)) {
+                if (((Deadlines) curr).getBy().equals(date)) {
                     showToUser(counter + "." + curr);
                     counter++;
                 }
             } else if (curr instanceof Events) {
-                if (((Events) curr).getDuration().equals(day)) {
+                if (((Events) curr).getDuration().equals(date)) {
                     showToUser(counter + "." + curr);
                     counter++;
                 }

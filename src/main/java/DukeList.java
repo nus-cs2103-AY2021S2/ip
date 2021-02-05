@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class DukeList {
     private ArrayList<Task> list;
     private int size;
-    private LocalDate date;
 
     public DukeList() {
         this.list = new ArrayList<>();
@@ -65,12 +64,4 @@ public class DukeList {
         return list.get(x);
     }
 
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
 }
