@@ -116,6 +116,7 @@ public class TaskList {
             throw new DukeException("Deleting a task as done needs to be done like this: "
                     + "done [task number from list]. Task numbers need to be written as digits and not text.");
         }
+
         try {
             int taskIdx = Integer.parseInt(taskToDeleteStr) - 1;
             Task taskToDelete = tasks.get(taskIdx);
@@ -168,6 +169,7 @@ public class TaskList {
         if (searchTerm == "") {
             throw new DukeException("To find a task, please use enter the following: find [search term]");
         }
+
         List<Task> foundList = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getTaskName().contains(searchTerm)) {
