@@ -13,6 +13,7 @@ import surrealchat.command.EventCommand;
 import surrealchat.command.FindCommand;
 import surrealchat.command.ListCommand;
 import surrealchat.command.ScronchCommand;
+import surrealchat.command.SortCommand;
 import surrealchat.command.ToDoCommand;
 import surrealchat.easteregg.EasterEgg;
 import surrealchat.easteregg.HandEasterEgg;
@@ -129,6 +130,10 @@ public class SurrealChat {
         case "find":
             Command findCommand = new FindCommand(restOfInput);
             outputString = findCommand.execute(taskManagement);
+            return outputString;
+        case "sort":
+            Command sortCommand = new SortCommand(restOfInput);
+            outputString = sortCommand.execute(taskManagement);
             return outputString;
         case "orang":
             checkExcessArguments(restOfInput);

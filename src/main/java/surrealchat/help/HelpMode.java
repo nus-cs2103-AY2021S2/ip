@@ -8,6 +8,7 @@ import surrealchat.command.EventCommand;
 import surrealchat.command.FindCommand;
 import surrealchat.command.ListCommand;
 import surrealchat.command.ScronchCommand;
+import surrealchat.command.SortCommand;
 import surrealchat.command.ToDoCommand;
 import surrealchat.easteregg.HandEasterEgg;
 import surrealchat.easteregg.OrangEasterEgg;
@@ -45,6 +46,8 @@ public class HelpMode {
             return ListCommand.displayHelp();
         case "edit":
             return EditCommand.displayHelp();
+        case "sort":
+            return SortCommand.displayHelp();
         case "orang":
             return OrangEasterEgg.displayHelp();
         case "vegetal":

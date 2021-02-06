@@ -7,6 +7,7 @@ import surrealchat.exception.SurrealException;
 import surrealchat.task.EventTask;
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
+import surrealchat.task.TaskPriority;
 
 /**
  * Command object for creating a new EventTask object.
@@ -36,16 +37,19 @@ public class EventCommand extends Command {
             throw new SurrealException("Empty event task description. Not stonks!\n");
         }
 
-        //Split the description into description and event
-        String[] descriptionSplitArray = taskDescription.split("/at");
+        //Split the description into description, event and priority
+        String[] descriptionSplitArray = taskDescription.split(";");
         try {
             LocalDateTime eventDateTime = parseDate(descriptionSplitArray[1].trim());
-
-            //Create Event task
+            int intPriority = Integer.valueOf(descriptionSplitArray[2].trim());
+            TaskPriority taskPriority = TaskPriority.getPriorityType(intPriority);
+            //Create Deadline task
             return EventTask.createNewEventTask(descriptionSplitArray[0].trim(),
-                    eventDateTime);
+                    eventDateTime, taskPriority);
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
-            throw new SurrealException("Wrong formatting. Did you forget to put '/at'? Not stonks!\n");
+            throw new SurrealException("Wrong formatting. Did you forget to put ';'? Not stonks!\n");
+        } catch (NumberFormatException e) { //Happens if correct int is not passed in for priority
+            throw new SurrealException("Priority argument must be integer in range 1-3! Not stonks!\n");
         }
     }
 
@@ -76,7 +80,7 @@ public class EventCommand extends Command {
      */
     public static String displayHelp() {
         String outputString = "Given a description and event date, stores event task.\n";
-        outputString += "Format of arguments: event [description] /at [event date and time]\n";
+        outputString += "Format of arguments: event [description] ; [event date and time] ; [priority]\n";
         outputString += "[event date and time] must be of the form {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock\n";
         return outputString;
     }

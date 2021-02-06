@@ -3,6 +3,7 @@ package surrealchat.command;
 import surrealchat.exception.SurrealException;
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
+import surrealchat.task.TaskPriority;
 import surrealchat.task.ToDoTask;
 
 /**
@@ -24,7 +25,16 @@ public class ToDoCommand extends Command {
         if (taskDescription.isEmpty()) {
             throw new SurrealException("Empty todo task description. Not stonks!\n");
         }
-        return ToDoTask.createNewToDoTask(taskDescription.trim());
+        try {
+            String[] descriptionSplitArray = taskDescription.split(";");
+            int intPriority = Integer.valueOf(descriptionSplitArray[1].trim());
+            TaskPriority taskPriority = TaskPriority.getPriorityType(intPriority);
+            return ToDoTask.createNewToDoTask(descriptionSplitArray[0].trim(), taskPriority);
+        } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
+            throw new SurrealException("Wrong formatting. Did you forget to put ';'? Not stonks!\n");
+        } catch (NumberFormatException e) { //Happens if correct int is not passed in for priority
+            throw new SurrealException("Priority argument must be integer in range 1-3! Not stonks!\n");
+        }
     }
 
     private String printOutput(Task task, int size) {
@@ -54,7 +64,7 @@ public class ToDoCommand extends Command {
      */
     public static String displayHelp() {
         String outputString = "Given a description, stores todo task.\n";
-        outputString += "Format of arguments: todo [description]\n";
+        outputString += "Format of arguments: todo [description] ; [priority]\n";
         return outputString;
     }
 }
