@@ -1,6 +1,6 @@
 package command;
 
-public class CommandFormatException extends Exception{
+public class CommandFormatException extends Exception {
     public CommandFormatException(String message) {
         super(message);
     }

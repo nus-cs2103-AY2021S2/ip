@@ -1,6 +1,9 @@
 package entry;
 
-public class Task {
+public abstract class Task {
+    String description;
+    boolean isDone;
+
     /** base class for the Task
      * @param description description of the task
      */
@@ -29,15 +32,11 @@ public class Task {
         this.isDone = !this.isDone;
     }
 
-    String description;
-    boolean isDone;
-
     @Override
     public String toString() {
         String doneStatus = "[" + getStatusIcon() + "]";
         return doneStatus + " " + this.description;
     }
-
 
     /***
      * Format = {done}{description}
