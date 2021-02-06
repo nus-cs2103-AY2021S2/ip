@@ -23,7 +23,7 @@ public class Task {
      *
      * @return Category label of task as a char
      */
-    public char getCat() {
+    public char getCategory() {
         return this.cat;
     }
 
@@ -53,7 +53,7 @@ public class Task {
      * @return Icon as string
      * */
     public String getStatusIcon() {
-        return (isCompleted ? "X" : " "); //return tick or blank
+        return (isCompleted ? "X" : " ");
     }
 
     public String toString() {
