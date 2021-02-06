@@ -59,6 +59,7 @@ public class DateTime {
      */
     public static LocalTime parseTime(String input) throws DateTimeParseException {
         String[] dateAndTime = input.split(" ");
-        return dateAndTime.length < 2 ? null : LocalTime.parse(dateAndTime[1]);
+        boolean isTimeFieldPresent = dateAndTime.length >= 2;
+        return isTimeFieldPresent ? LocalTime.parse(dateAndTime[1]) : null;
     }
 }
