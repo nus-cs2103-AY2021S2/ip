@@ -69,12 +69,12 @@ public class TaskList {
     public String addToDo(String input) throws DukeException { //when user keys in todo abc
         String[] temp = input.split(" ", 2);
         try {
-            Task t = new Todo(temp[1]);
-            this.taskList.add(t);
+            Task todoTask = new Todo(temp[1]);
+            this.taskList.add(todoTask);
             storage.saveData(this);
 
             return "Got it. I've added this task:\n"
-                    + t + "\nNow you have " + this.taskList.size()
+                    + todoTask + "\nNow you have " + this.taskList.size()
                     + " tasks in the list.";
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyToDoException();
@@ -111,16 +111,16 @@ public class TaskList {
         String[] temp = input.split(" ", 2);
         String data = temp[1];
         String description = data.split(" /by ", 2)[0];
-        String by = data.split(" /by ", 2)[1];
+        String byDateAndTime = data.split(" /by ", 2)[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
-            Task t = new Deadline(description, dateTime);
-            this.taskList.add(t);
+            LocalDateTime dateTime = LocalDateTime.parse(byDateAndTime, formatter);
+            Task deadlineTask = new Deadline(description, dateTime);
+            this.taskList.add(deadlineTask);
             storage.saveData(this);
 
             return "Got it. I've added this task:\n"
-                    + t + "\nNow you have " + this.taskList.size()
+                    + deadlineTask + "\nNow you have " + this.taskList.size()
                     + " tasks in the list.";
         } catch (DateTimeParseException e) {
             throw new EmptyDateTimeException();
@@ -156,16 +156,16 @@ public class TaskList {
         String[] temp = input.split(" ", 2);
         String data = temp[1];
         String description = data.split(" /at ", 2)[0];
-        String at = data.split(" /at ", 2)[1];
+        String atDateAndTime = data.split(" /at ", 2)[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
-            Task t = new Event(description, dateTime);
+            LocalDateTime dateTime = LocalDateTime.parse(atDateAndTime, formatter);
+            Task eventTask = new Event(description, dateTime);
             storage.saveData(this);
 
-            this.taskList.add(t);
+            this.taskList.add(eventTask);
             return "Got it. I've added this task:\n"
-                    + t + "\nNow you have " + this.taskList.size()
+                    + eventTask + "\nNow you have " + this.taskList.size()
                     + " tasks in the list.";
         } catch (DateTimeParseException e) {
             throw new EmptyDateTimeException();
@@ -229,11 +229,12 @@ public class TaskList {
         }
         String[] temp = input.split(" ", 2);
         int index = Integer.parseInt(temp[1]) - 1;
+        Task taskToBeDeleted = taskList.get(index);
         this.taskList.remove(index);
         storage.saveData(this);
 
         return "Noted. I've removed this task:\n"
-                + this.taskList.get(index) + "\nNow you have "
+                + taskToBeDeleted + "\nNow you have "
                 + this.taskList.size() + " tasks in the list.";
     }
 

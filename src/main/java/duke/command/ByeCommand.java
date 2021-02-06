@@ -23,15 +23,6 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Returns the user input of command
-     *
-     * @return user input
-     */
-    public String getUserInput() {
-        return this.userInput;
-    }
-
-    /**
      * Executes the Command in DataHandler.
      *
      * @param tasks list of tasks where this new task is added to

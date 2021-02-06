@@ -32,32 +32,21 @@ public class Storage {
     }
 
     /**
-     * Gets filePath.
-     *
-     * @return gets file path of storage location
-     */
-    public String getFilePath() {
-        return this.filePath;
-    }
-
-    /**
      * Saves data back in file in designated filePath.
      *
-     * @param li TaskList of data to be saved
+     * @param taskList TaskList of data to be saved
      * @throws IOException  If file is corrupt
      */
-    public static void saveData(TaskList li) {
-        //potential problem: saveData doesnt update .txt file
-        //when i change done status of item to done. only updates after bye command
+    public static void saveData(TaskList taskList) {
         try {
             Path currPath = Paths.get("");
-            FileWriter fw = new FileWriter(currPath.toAbsolutePath().toString()
+            FileWriter fileWriter = new FileWriter(currPath.toAbsolutePath().toString()
                     + "/src/main/java/duke/duke.txt");
-            for (int i = 0; i < li.getSize(); i++) {
-                String write = li.getInd(i) + "\n";
-                fw.write(write);
+            for (int i = 0; i < taskList.getSize(); i++) {
+                String write = taskList.getInd(i) + "\n";
+                fileWriter.write(write);
             }
-            fw.close();
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -80,82 +69,87 @@ public class Storage {
             Scanner sc = new Scanner(info);
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
-                String[] arr = task.split("");
-                if (arr[1].equals("T")) {
-                    Boolean done = false;
-                    if (arr[4].equals("X")) {
-                        done = true;
+                String[] taskAsArray = task.split("");
+                if (taskAsArray[1].equals("T")) {
+                    Boolean isDone = false;
+                    if (taskAsArray[4].equals("X")) {
+                        isDone = true;
                     }
                     String taskDetails = "";
-                    for (int j = 7; j < arr.length; j++) {
-                        taskDetails += arr[j];
+                    for (int j = 7; j < taskAsArray.length; j++) {
+                        taskDetails += taskAsArray[j];
                     }
 
-                    Task t = new Todo(taskDetails);
-                    if (done) {
-                        t.setDone();
+                    Task todoTask = new Todo(taskDetails);
+                    if (isDone) {
+                        todoTask.setDone();
                     }
-                    list.addToDo(t);
-                } else if (arr[1].equals("D")) {
+                    list.addToDo(todoTask);
+                } else if (taskAsArray[1].equals("D")) {
+                    Boolean isDone = false;
+                    if (taskAsArray[4].equals("X")) {
+                        isDone = true;
+                    }
+                    String taskDetailsDateAndTime = "";
+                    for (int j = 7; j < taskAsArray.length; j++) {
+                        taskDetailsDateAndTime += taskAsArray[j];
+                    }
+                    String[] taskDetailsDateAndTimeAsArray = taskDetailsDateAndTime.split("[(]");
+                    String[] taskDetailsAsArray = taskDetailsDateAndTimeAsArray[0].split("");
                     String taskDetails = "";
-                    Boolean done = false;
-                    if (arr[4].equals("X")) {
-                        done = true;
+                    for (int t = 0; t < taskDetailsAsArray[0].length() - 1; t++) {
+                        taskDetails += taskDetailsAsArray[t];
                     }
-                    for (int j = 7; j < arr.length; j++) {
-                        taskDetails += arr[j];
+
+                    taskDetails = taskDetailsDateAndTimeAsArray[1];
+                    String[] taskDateAndTimeAsArray = taskDetails.split(" by:", 2);
+                    String taskDateAndTime = "";
+                    String dateAndTime = taskDateAndTimeAsArray[0];
+                    taskDateAndTimeAsArray = dateAndTime.split("");
+                    for (int k = 4; k < taskDateAndTimeAsArray.length - 1; k++) {
+                        taskDateAndTime += taskDateAndTimeAsArray[k];
                     }
-                    arr = taskDetails.split("[(]");
-                    String[] deets = arr[0].split("");
-                    String description = "";
-                    for (int t = 0; t < arr[0].length() - 1; t++) {
-                        description += deets[t];
-                    }
-                    taskDetails = arr[1];
-                    arr = taskDetails.split(" by:", 2);
-                    String by = "";
-                    String details = arr[0];
-                    arr = details.split("");
-                    for (int k = 4; k < arr.length - 1; k++) {
-                        by += arr[k];
-                    }
+
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-                    LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
-                    Task t = new Deadline(description, dateTime);
-                    if (done) {
-                        t.setDone();
+                    LocalDateTime dateTime = LocalDateTime.parse(taskDateAndTime, formatter);
+                    Task deadlineTask = new Deadline(taskDetails, dateTime);
+
+                    if (isDone) {
+                        deadlineTask.setDone();
                     }
-                    list.addDeadline(t);
-                } else if (arr[1].equals("E")) {
+                    list.addDeadline(deadlineTask);
+                } else if (taskAsArray[1].equals("E")) {
+                    Boolean isDone = false;
+                    if (taskAsArray[4].equals("X")) {
+                        isDone = true;
+                    }
+                    String taskDetailsDateAndTime = "";
+                    for (int j = 7; j < taskAsArray.length; j++) {
+                        taskDetailsDateAndTime += taskAsArray[j];
+                    }
+                    String[] taskDetailsDateAndTimeAsArray = taskDetailsDateAndTime.split("[(]");
+                    String[] taskDetailsAsArray = taskDetailsDateAndTimeAsArray[0].split("");
                     String taskDetails = "";
-                    Boolean done = false;
-                    if (arr[4].equals("X")) {
-                        done = true;
+                    for (int t = 0; t < taskDetailsAsArray[0].length() - 1; t++) {
+                        taskDetails += taskDetailsAsArray[t];
                     }
-                    for (int j = 7; j < arr.length; j++) {
-                        taskDetails += arr[j];
+
+                    taskDetails = taskDetailsDateAndTimeAsArray[1];
+                    String[] taskDateAndTimeAsArray = taskDetails.split(" at:", 2);
+                    String taskDateAndTime = "";
+                    String dateAndTime = taskDateAndTimeAsArray[0];
+                    taskDateAndTimeAsArray = dateAndTime.split("");
+                    for (int k = 4; k < taskDateAndTimeAsArray.length - 1; k++) {
+                        taskDateAndTime += taskDateAndTimeAsArray[k];
                     }
-                    arr = taskDetails.split("[(]");
-                    String[] deets = arr[0].split("");
-                    String description = "";
-                    for (int t = 0; t < arr[0].length() - 1; t++) {
-                        description += deets[t];
-                    }
-                    taskDetails = arr[1];
-                    arr = taskDetails.split(" at: ");
-                    String at = "";
-                    String details = arr[0];
-                    arr = details.split("");
-                    for (int k = 4; k < arr.length - 1; k++) {
-                        at += arr[k];
-                    }
+
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-                    LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
-                    Task t = new Event(description, dateTime);
-                    if (done) {
-                        t.setDone();
+                    LocalDateTime dateTime = LocalDateTime.parse(taskDateAndTime, formatter);
+                    Task eventTask = new Event(taskDetails, dateTime);
+
+                    if (isDone) {
+                        eventTask.setDone();
                     }
-                    list.addEvent(t);
                 }
             }
         } else { //create new file in folder

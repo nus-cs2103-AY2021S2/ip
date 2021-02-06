@@ -21,14 +21,14 @@ public class DeleteCommand extends Command {
         this.userInput = input;
     }
 
-    /**
-     * Returns the user input of command
-     *
-     * @return user input
-     */
-    public String getUserInput() {
-        return this.userInput;
-    }
+    //    /**
+    //     * Returns the user input of command
+    //     *
+    //     * @return user input
+    //     */
+    //    public String getUserInput() {
+    //        return this.userInput;
+    //    }
 
     /**
      * Executes the Command in DataHandler.

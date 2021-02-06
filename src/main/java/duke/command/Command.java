@@ -18,7 +18,8 @@ public abstract class Command {
      * @param input details of the task
      * @param storage handles the various tasks according to their type
      */
-    public abstract String execute(TaskList tasks, String input, Storage storage) throws IOException, DukeException;
+    public abstract String execute(TaskList tasks, String input, Storage storage)
+            throws IOException, DukeException;
 
     /**
      * Checks if it is time to exit Duke.

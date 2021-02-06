@@ -22,15 +22,6 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Returns the user input of command
-     *
-     * @return user input
-     */
-    public String getUserInput() {
-        return this.userInput;
-    }
-
-    /**
      * Executes the Command in DataHandler.
      *
      * @param tasks list of tasks where this new task is added to
@@ -39,7 +30,7 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList tasks, String input, Storage storage) {
         if (tasks.getSize() == 0) {
-            return "You have no tasks on your list.\n Add one now!";
+            return "You have no tasks on your list.\nAdd one now!";
         } else {
             return tasks.list();
         }
