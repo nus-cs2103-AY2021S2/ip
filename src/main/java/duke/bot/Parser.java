@@ -62,6 +62,10 @@ public class Parser {
         }
     }
 
+    private static String extractParams(String commandType, String text) {
+        return text.substring(commandType.length()).stripLeading();
+    }
+
     private static void throwIfToDoInvalid(String params) throws DukeCommandException {
         if (params.length() == 0) {
             throw new DukeCommandException("todo", params, "Description of ToDo cannot be empty");
@@ -76,7 +80,7 @@ public class Parser {
      * @throws DukeCommandException if the command string contains an empty description
      */
     public static ToDoCommand parseToDo(String text) throws DukeCommandException {
-        String desc = text.substring(4).stripLeading();
+        String desc = extractParams("todo", text);
 
         throwIfToDoInvalid(desc);
 
@@ -108,13 +112,14 @@ public class Parser {
      * @throws DukeCommandException if the command string has insufficient parameters or invalid date time format
      */
     public static DeadlineCommand parseDeadline(String text) throws DukeCommandException {
-        String params = text.substring(8).stripLeading();
+        String params = extractParams("deadline", text);
 
         throwIfDeadlineInvalid(params);
 
         String[] splits = params.split(" /by ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
         LocalDateTime dateTime = LocalDateTime.parse(splits[1], formatter);
+
         return new DeadlineCommand(splits[0], dateTime);
     }
 
@@ -146,7 +151,7 @@ public class Parser {
      * @throws DukeCommandException if the command string has insufficient parameters or invalid date time format
      */
     public static EventCommand parseEvent(String text) throws DukeCommandException {
-        String params = text.substring(5).stripLeading();
+        String params = extractParams("event", text);
 
         throwIfEventInvalid(params);
 
@@ -154,6 +159,7 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
         LocalDateTime startDateTime = LocalDateTime.parse(splits[1], formatter);
         LocalDateTime endDateTime = LocalDateTime.parse(splits[2], formatter);
+
         return new EventCommand(splits[0], startDateTime, endDateTime);
     }
 
@@ -172,7 +178,7 @@ public class Parser {
      * @throws DukeCommandException if the index in the command string is invalid
      */
     public static DoneCommand parseDone(String text) throws DukeCommandException {
-        String params = text.substring(4).stripLeading();
+        String params = extractParams("done", text);
 
         throwIfDoneInvalid(params);
 
@@ -194,7 +200,7 @@ public class Parser {
      * @throws DukeCommandException if the index in the command string is invalid
      */
     public static DeleteCommand parseDelete(String text) throws DukeCommandException {
-        String params = text.substring(6).stripLeading();
+        String params = extractParams("delete", text);
 
         throwIfDeleteInvalid(params);
 
@@ -236,7 +242,7 @@ public class Parser {
      * @throws DukeCommandException if the parameters are empty or in invalid format
      */
     public static FindCommand parseFind(String text) throws DukeCommandException {
-        String params = text.substring(4).stripLeading();
+        String params = extractParams("find", text);
 
         throwIfFindInvalid(params);
 
