@@ -15,6 +15,6 @@ public class ListCommand extends Command {
     @Override
     public String execute() throws DukeCommandException {
         List<Task> tasks = taskManager.getTasks();
-        return ui.constructTaskList(tasks);
+        return ui.constructTaskListMessage(tasks);
     }
 }
