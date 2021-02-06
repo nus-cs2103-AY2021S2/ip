@@ -9,12 +9,6 @@ public class EventsCommand extends Command {
                 fullCommand.substring(fullCommand.indexOf('/') + 4)));
         ui.taskAddMsg(taskList);
         storage.save(taskList);
-        /*
-        System.out.println("Got it. I've added this task:\n"
-                + taskList.getTasksList().get(taskList.getTasksCount() - 1)
-                + "\nNow you have " + taskList.getTasksCount() + " tasks in the list.");
-
-         */
     }
     public Boolean isExit() {
         return false;

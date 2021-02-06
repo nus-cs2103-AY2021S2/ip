@@ -1,14 +1,17 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+/**
+ * The type Duke.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiates a new Duke.
+     *
+     * @param filePath the file path
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,7 +21,9 @@ public class Duke {
             ui.showError(e.toString());
         }
     }
-
+    /**
+     * Run.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -36,10 +41,12 @@ public class Duke {
             }
         }
     }
-
-
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
-        new Duke("src/data.txt").run();
-
+        new Duke("src/main/java/data.txt").run();
     }
 }

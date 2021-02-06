@@ -13,7 +13,7 @@ public class TaskList {
      * Instantiates a new Task list.
      */
     public TaskList() {
-        this.tasksList = new ArrayList<Task>();
+        this.tasksList = new ArrayList<>();
     }
 
     /**
@@ -23,7 +23,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> loadTasksList) {
 
-            this.tasksList = new ArrayList<Task>();
+            this.tasksList = new ArrayList<>();
             this.tasksList.addAll(loadTasksList);
 
 
