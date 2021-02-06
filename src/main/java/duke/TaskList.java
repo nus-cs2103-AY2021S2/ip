@@ -21,9 +21,9 @@ public class TaskList {
 
     /**
      * Overloaded constructor for TaskList object.
-     * Used when no ArrayList of Task is passed in as a Parameter.
+     * Used when no ArrayList<Task> is passed in as a Parameter
      */
-    public TaskList() {
+    TaskList() {
         this.userList = new ArrayList<>();
     }
 
@@ -71,7 +71,8 @@ public class TaskList {
      * @return The task that got removed.
      */
     public Task removeTask(int taskNumber) {
-        return this.userList.remove(taskNumber);
+        Task deletedTask = this.userList.remove(taskNumber);
+        return deletedTask;
     }
 
 }
