@@ -5,7 +5,7 @@ public abstract class Task {
     boolean isDone;
 
     /** base class for the Task
-     * @param description description of the task
+     * @param description: description of the task
      */
     public Task(String description) {
         this.description = description;
@@ -13,8 +13,8 @@ public abstract class Task {
     }
 
     /**
-     * @param isDone boolean to indicate if the task is done
-     * @param description description of the task
+     * @param isDone: boolean to indicate if the task is done
+     * @param description: description of the task
      */
     public Task(Boolean isDone, String description) {
         this.description = description;
