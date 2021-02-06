@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -29,6 +31,9 @@ public class Storage {
     }
 
     private static void setupSaveFile() throws DukeSaveException {
+        File dir = new File(FOLDER_NAME);
+        assert (dir.exists() && dir.isDirectory());
+
         try {
             File file = new File(PATH);
             new PrintWriter(PATH).close();
@@ -61,19 +66,23 @@ public class Storage {
         writeTasksToSave(tasks);
     }
 
+
     private static void readTask(String entry, TaskManager manager) throws DukeLoadException {
+        File dir = new File(FOLDER_NAME);
+        assert (dir.exists() && dir.isDirectory());
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
         String[] params = entry.split(" \\| ");
 
         Task task;
 
         try {
-            if (params[0] == "T") {
+            if (params[0].equals("T")) {
                 task = manager.addToDo(params[2]);
-            } else if (params[0] == "D") {
+            } else if (params[0].equals("D")) {
                 LocalDateTime due = LocalDateTime.parse(params[3], formatter);
                 task = manager.addDeadline(params[2], due);
-            } else if (params[0] == "E") {
+            } else if (params[0].equals("E")) {
                 LocalDateTime start = LocalDateTime.parse(params[3], formatter);
                 LocalDateTime end = LocalDateTime.parse(params[4], formatter);
                 task = manager.addEvent(params[2], start, end);
@@ -98,7 +107,8 @@ public class Storage {
                 Scanner scanner = new Scanner(file);
 
                 while (scanner.hasNextLine()) {
-                    readTask(scanner.nextLine(), manager);
+                    String line = scanner.nextLine();
+                    readTask(line, manager);
                 }
             }
         } catch (IOException e) {
