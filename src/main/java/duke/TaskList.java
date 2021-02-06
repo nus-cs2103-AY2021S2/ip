@@ -32,6 +32,7 @@ public class TaskList {
      * @return the retrieved task
      */
     public Task get(int index) {
+        assert index < lst.size();
         return this.lst.get(index);
     }
 
@@ -60,6 +61,7 @@ public class TaskList {
      * @return the task removed
      */
     public Task delete(int index) {
+        assert index < lst.size();
         return this.lst.remove(index);
     }
 

@@ -32,6 +32,7 @@ public class Storage {
                 Files.createFile(storagePath);
             }
 
+            assert Files.exists(storagePath);
             taskLst = Files.readAllLines(storagePath);
 
         } catch (IOException err) {
