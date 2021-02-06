@@ -44,6 +44,7 @@ public class Parser {
             }
             case "find": {
                 String[] ar = line.split(" ");
+                assert ar.length > 0;
                 if (ar.length > 2) {
                     throw new CommandException("I can only handle one keyword!");
                 } else if (ar.length == 1) {
@@ -54,6 +55,7 @@ public class Parser {
             }
             case "done": {
                 String[] ar = line.split(" ", 2);
+                assert ar.length > 0;
                 if (ar.length == 1) {
                     throw new CommandException("Which task are you done with?");
                 }
@@ -63,6 +65,7 @@ public class Parser {
             }
             case "delete": {
                 String[] ar = line.split(" ", 2);
+                assert ar.length > 0;
                 if (ar.length == 1) {
                     throw new CommandException("Which task are you deleting?");
                 }
@@ -72,6 +75,7 @@ public class Parser {
             }
             case "todo": {
                 String[] ar = line.split(" ", 2);
+                assert ar.length > 0;
                 if (ar.length == 1) {
                     throw new CommandException("I can't add an empty task to the list!");
                 }
@@ -80,6 +84,7 @@ public class Parser {
             }
             case "deadline": {
                 String[] ar = line.split(" ", 2);
+                assert ar.length > 0;
                 if (ar.length == 1) {
                     throw new CommandException("I can't add an empty task to the list!");
                 }
@@ -97,6 +102,7 @@ public class Parser {
             }
             case "event": {
                 String[] ar = line.split(" ", 2);
+                assert ar.length > 0;
                 if (ar.length == 1) {
                     throw new CommandException("I can't add an empty task to the list!");
                 }
