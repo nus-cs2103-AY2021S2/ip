@@ -9,15 +9,15 @@ public class Deadline extends Task {
     /**
      * Date/Timing information for task to be completed by.
      */
-    protected String by;
+    protected String dueDate;
 
-    public Deadline(String description, String by, boolean isDone, boolean existing) {
+    public Deadline(String description, String dueDate, boolean isDone, boolean taskExists) {
         super(description, isDone);
-        if (existing) {
-            this.by = by;
+        if (taskExists) {
+            this.dueDate = dueDate;
         } else {
-            LocalDate date = LocalDate.parse(by);
-            this.by = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            LocalDate date = LocalDate.parse(dueDate);
+            this.dueDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
 
     }
@@ -29,6 +29,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.dueDate + ")";
     }
 }

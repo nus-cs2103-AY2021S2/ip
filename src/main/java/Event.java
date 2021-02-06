@@ -9,15 +9,15 @@ public class Event extends Task {
     /**
      * Date/Timing information for task to be carried out at.
      */
-    protected String at;
+    protected String eventDate;
 
-    public Event(String description, String at, boolean isDone, boolean existing) {
+    public Event(String description, String eventDate, boolean isDone, boolean taskExists) {
         super(description, isDone);
-        if (existing) {
-            this.at = at;
+        if (taskExists) {
+            this.eventDate = eventDate;
         } else {
-            LocalDate date = LocalDate.parse(at);
-            this.at = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            LocalDate date = LocalDate.parse(eventDate);
+            this.eventDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
 
     }
@@ -29,6 +29,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + eventDate + ")";
     }
 }
