@@ -1,7 +1,5 @@
 package duke;
 
-import javafx.util.Duration;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,24 +20,22 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-    
     private Duke duke;
-    
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat3.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cat2.jpg"));
-    
+    /**
+     * The method initializes the MainWindow class to set the images of Duke and the User and the children nodes
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.printWelcome(), dukeImage)
+                DialogBox.getDukeDialog(Ui.getWelcomeMessage(), dukeImage)
         );
     }
-    
     public void setDuke(Duke d) {
         duke = d;
     }
-    
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -47,18 +43,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        
         String response = duke.getResponse(input);
- 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-    
-        if (response.equals(Ui.printBye())) {
+        if (response.equals(Ui.getByeMessage())) {
             Platform.exit();
         }
-        
         userInput.clear();
     }
 }

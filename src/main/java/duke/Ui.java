@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.List;
-import java.util.Scanner;
 
 import duke.tasks.Task;
 
@@ -10,16 +9,11 @@ import duke.tasks.Task;
  * UI class that is responsible for reading user input and printing
  */
 public class Ui {
-    /**
-     * Constructor to initialize the UI Class
-     */
-    public Ui() {
-    }
-    
+
     /**
      * Prints the welcome message.
      */
-    public static String printWelcome() {
+    public static String getWelcomeMessage() {
         String introduction = "     Hello! I'm Duke\n" + "     What can I do for you?\n";
         return introduction;
     }
@@ -27,7 +21,7 @@ public class Ui {
     /**
      * Prints the goodbye message.
      */
-    public static String printBye() {
+    public static String getByeMessage() {
         String farewell = "     Bye. Hope to see you again soon!\n";
         return farewell;
     }
@@ -39,7 +33,6 @@ public class Ui {
      */
     public String printTask(Task task) {
         return task.toString() + "\n";
-        //System.out.println(task);
     }
 
     /**
@@ -63,7 +56,6 @@ public class Ui {
      * Prints the error when attempting to load file message.
      */
     public String showLoadingError() {
-    
         String unableToLoad = "     Unable to load file. Creating new one\n";
         return unableToLoad;
     }

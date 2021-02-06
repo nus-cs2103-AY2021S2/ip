@@ -24,7 +24,6 @@ public class TaskList {
     public TaskList() {
         this.inputList = new ArrayList<>();
     }
-
     /**
      * TaskList constructor to intialize a new TaskList with a given ArrayList of tasks
      * the tasks are all stored as string format which is processed before being
@@ -35,38 +34,39 @@ public class TaskList {
         for (String taskStr: tasks) {
             String[] arr = taskStr.split("\\|");
 
+            assert arr.length > 1 : "TaskList tasks not loaded properly or has issue";
             for (int i = 0; i < arr.length; i++) {
                 arr[i] = arr[i].trim();
             }
 
-            if (arr[0].equals("D")) {
-                String[] deadline = arr[3].split("-");
-                String reformattedDeadline = deadline[2] + "-" + deadline[1] + "-" + deadline[0];
+            boolean isDeadlineTask = arr[0].equals("D");
+            boolean isEventTask = arr[0].equals("E");
+            boolean isToDoTask = arr[0].equals("T");
+            boolean taskIsDone = arr[1].equals("1");
+            String description = arr[2];
+            if (isDeadlineTask) {
+                String reformattedDeadline = reformatDate(arr[3]);
 
-                DeadlineTask deadlineTask = new DeadlineTask(arr[2], reformattedDeadline);
-
-                if (arr[1].equals("1")) {
+                DeadlineTask deadlineTask = new DeadlineTask(description, reformattedDeadline);
+                if (taskIsDone) {
                     deadlineTask.markAsDone();
                 }
 
                 inputList.add(deadlineTask);
 
-            } else if (arr[0].equals("E")) {
-                String[] timing = arr[3].split("-");
-                String reformattedTiming = timing[2] + "-" + timing[1] + "-" + timing[0];
+            } else if (isEventTask) {
+                String reformattedDate = reformatDate(arr[3]);
 
-                EventTask eventTask = new EventTask(arr[2], reformattedTiming);
-
-                if (arr[1].equals("1")) {
+                EventTask eventTask = new EventTask(description, reformattedDate);
+                if (taskIsDone) {
                     eventTask.markAsDone();
                 }
 
                 inputList.add(eventTask);
 
-            } else {
-                ToDoTask toDoTask = new ToDoTask(arr[2]);
-
-                if (arr[1].equals("1")) {
+            } else if (isToDoTask) {
+                ToDoTask toDoTask = new ToDoTask(description);
+                if (taskIsDone) {
                     toDoTask.markAsDone();
                 }
 
@@ -74,7 +74,17 @@ public class TaskList {
             }
         }
     }
-
+    /**
+     * Function to reformat the date before printing
+     *
+     * @param date the date in string to be reformatted
+     * @return String containing the reformatted date
+     */
+    public String reformatDate(String date) {
+        String[] brokenDate = date.split("-");
+        String reformattedDate = brokenDate[2] + "-" + brokenDate[1] + "-" + brokenDate[0];
+        return reformattedDate;
+    }
     /**
      * Returns The list of tasks.
      *
@@ -91,16 +101,6 @@ public class TaskList {
      */
     public void add(Task task) {
         this.inputList.add(task);
-    }
-
-    /**
-     * Returns The task inside the task list at the index specified
-     *
-     * @param index index of task inside the tasklist
-     * @return A task
-     */
-    public Task get(int index) {
-        return this.inputList.get(index);
     }
 
     /**
@@ -150,7 +150,6 @@ public class TaskList {
     public DeadlineTask handleDeadlineTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
-        
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
         String deadline = action.substring(descriptionIndex + 4);
 
@@ -194,7 +193,7 @@ public class TaskList {
      *
      * @return A string to be written into the file.
      */
-    public String getListToWrite() {
+    public String getListToString() {
 
         String result = "";
 

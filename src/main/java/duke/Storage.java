@@ -12,15 +12,14 @@ import duke.exceptions.DukeOnlyIoException;
  * Storage class that is used for the reading and writing of the list file
  */
 public class Storage {
-
     /** Filewriter instance used to write into the file */
-    private FileWriter writer = null;
+    private FileWriter writer;
 
     /** File instance that will be used to load file */
-    private File file = null;
+    private File file;
 
     /** Scanner instance that will be used to load file contents into Duke */
-    private Scanner sc = null;
+    private Scanner sc;
 
     /**
      * Storage class constructor to initialize the Storage object
@@ -30,12 +29,10 @@ public class Storage {
 
         try {
             this.file = new File(filepath);
-            
             if (!this.file.exists()) {
                 this.file.getParentFile().mkdir();
                 this.file.createNewFile();
             }
-    
             sc = new Scanner(this.file);
 
         } catch (IOException err) {
@@ -44,11 +41,11 @@ public class Storage {
     }
 
     /**
-     * Returns a arraylist of String objects that will be used to load the TaskList
+     * Returns an Arraylist of String objects that will be used to load the TaskList
      *
      * @return An ArrayList of String
      */
-    public ArrayList<String> load() {
+    public ArrayList<String> loadFileIntoArrayList() {
 
         ArrayList<String> list = new ArrayList<>();
 
@@ -70,7 +67,7 @@ public class Storage {
         try {
 
             this.writer = new FileWriter(file, false);
-            this.writer.write(list.getListToWrite());
+            this.writer.write(list.getListToString());
 
             this.writer.close();
 
