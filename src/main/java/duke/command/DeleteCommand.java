@@ -21,15 +21,6 @@ public class DeleteCommand extends Command {
         this.userInput = input;
     }
 
-    //    /**
-    //     * Returns the user input of command
-    //     *
-    //     * @return user input
-    //     */
-    //    public String getUserInput() {
-    //        return this.userInput;
-    //    }
-
     /**
      * Executes the Command in DataHandler.
      *
@@ -42,7 +33,7 @@ public class DeleteCommand extends Command {
         assert !input.isEmpty() : "Input should not be blank.";
 
         try {
-            String temp = input.split(" ", 2)[1];
+            String taskNumber = input.split(" ", 2)[1];
             return tasks.delete(input);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyDeleteException();

@@ -36,7 +36,7 @@ public class FindCommand extends Command {
         assert !input.isEmpty() : "Input should not be blank.";
 
         try {
-            String temp = input.split(" ", 2) [1];
+            String taskNumber = input.split(" ", 2) [1];
             return tasks.find(input);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidInstructionException();

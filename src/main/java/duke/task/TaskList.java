@@ -21,7 +21,6 @@ import duke.storage.Storage;
 public class TaskList {
     private ArrayList<Task> taskList;
     private Storage storage = new Storage();
-    private final String line = "------------------------------------------";
 
     /**
      * Creates TaskList which is essentially an ArrayList of Task.
@@ -67,19 +66,24 @@ public class TaskList {
      * @throws DukeException If task has no details
      */
     public String addToDo(String input) throws DukeException { //when user keys in todo abc
-        String[] temp = input.split(" ", 2);
+        String[] inputDetails = input.split(" ", 2);
         try {
-            Task todoTask = new Todo(temp[1]);
+            Task todoTask = new Todo(inputDetails[1]);
             this.taskList.add(todoTask);
             storage.saveData(this);
 
-            return "Got it. I've added this task:\n"
+            int numberOfItems = this.taskList.size();
+            if (numberOfItems == 1) {
+                return "Got it. I've added this task:\n"
+                    + todoTask + "\nNow you have 1 task in the list.";
+            } else {
+                return "Got it. I've added this task:\n"
                     + todoTask + "\nNow you have " + this.taskList.size()
                     + " tasks in the list.";
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyToDoException();
         }
-
     }
 
     /**
@@ -104,28 +108,33 @@ public class TaskList {
      */
     public String addDeadline(String input) throws DukeException { //when user keys in deadline abc
         try {
-            String temp = input.split(" ", 2) [1];
+            String inputDetails = input.split(" ", 2) [1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyDeadlineException();
         }
-        String[] temp = input.split(" ", 2);
-        String data = temp[1];
-        String description = data.split(" /by ", 2)[0];
-        String byDateAndTime = data.split(" /by ", 2)[1];
+        String[] inputDetailsDateAndTimeAsArray = input.split(" ", 2);
+        String inputDetailsDateAndTime = inputDetailsDateAndTimeAsArray[1];
+        String description = inputDetailsDateAndTime.split(" /by ", 2)[0];
+        String dateAndTime = inputDetailsDateAndTime.split(" /by ", 2)[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(byDateAndTime, formatter);
+            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
             Task deadlineTask = new Deadline(description, dateTime);
             this.taskList.add(deadlineTask);
             storage.saveData(this);
 
-            return "Got it. I've added this task:\n"
+            int numberOfItems = this.taskList.size();
+            if (numberOfItems == 1) {
+                return "Got it. I've added this task:\n"
+                    + deadlineTask + "\nNow you have 1 task in the list.";
+            } else {
+                return "Got it. I've added this task:\n"
                     + deadlineTask + "\nNow you have " + this.taskList.size()
                     + " tasks in the list.";
+            }
         } catch (DateTimeParseException e) {
             throw new EmptyDateTimeException();
         }
-
     }
 
     /**
@@ -149,24 +158,30 @@ public class TaskList {
      */
     public String addEvent(String input) throws DukeException { ////when user keys in event abc
         try {
-            String temp = input.split(" ", 2)[1];
+            String inputDetails = input.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyEventException();
         }
-        String[] temp = input.split(" ", 2);
-        String data = temp[1];
-        String description = data.split(" /at ", 2)[0];
-        String atDateAndTime = data.split(" /at ", 2)[1];
+        String[] inputDetailsDateAndTimeAsArray = input.split(" ", 2);
+        String inputDetailsDateAndTime = inputDetailsDateAndTimeAsArray[1];
+        String description = inputDetailsDateAndTime.split(" /at ", 2)[0];
+        String dateAndTime = inputDetailsDateAndTime.split(" /at ", 2)[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(atDateAndTime, formatter);
+            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
             Task eventTask = new Event(description, dateTime);
+            this.taskList.add(eventTask);
             storage.saveData(this);
 
-            this.taskList.add(eventTask);
-            return "Got it. I've added this task:\n"
-                    + eventTask + "\nNow you have " + this.taskList.size()
-                    + " tasks in the list.";
+            int numberOfItems = this.taskList.size();
+            if (numberOfItems == 1) {
+                return "Got it. I've added this task:\n"
+                        + eventTask + "\nNow you have 1 task in the list.";
+            } else {
+                return "Got it. I've added this task:\n"
+                        + eventTask + "\nNow you have " + this.taskList.size()
+                        + " tasks in the list.";
+            }
         } catch (DateTimeParseException e) {
             throw new EmptyDateTimeException();
         }
@@ -209,33 +224,41 @@ public class TaskList {
      */
     public String delete(String input) throws DukeException {
         try {
-            String temp = input.split(" ", 2)[1];
+            String taskNumber = input.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyDeleteException();
         }
 
         try {
-            String[] temp = input.split(" ", 2);
-            this.taskList.get(Integer.parseInt(temp[1]) - 1);
+            String[] inputDetails = input.split(" ", 2);
+            int taskIndex = Integer.parseInt(inputDetails[1]) - 1;
+            this.taskList.get(taskIndex);
         } catch (NumberFormatException e) {
             throw new AlphabetsInsteadOfNumberException();
         }
 
         try {
-            String[] temp = input.split(" ", 2);
-            this.taskList.get(Integer.parseInt(temp[1]) - 1);
+            String[] inputDetails = input.split(" ", 2);
+            int taskIndex = Integer.parseInt(inputDetails[1]) - 1;
+            this.taskList.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new EmptyListDeletionException();
         }
-        String[] temp = input.split(" ", 2);
-        int index = Integer.parseInt(temp[1]) - 1;
-        Task taskToBeDeleted = taskList.get(index);
-        this.taskList.remove(index);
+        String[] inputDetails = input.split(" ", 2);
+        int taskIndex = Integer.parseInt(inputDetails[1]) - 1;
+        Task taskToBeDeleted = taskList.get(taskIndex);
+        this.taskList.remove(taskIndex);
         storage.saveData(this);
 
-        return "Noted. I've removed this task:\n"
+        int numberOfItems = this.taskList.size();
+        if (numberOfItems == 1) {
+            return "Noted. I've removed this task:\n"
+                + taskToBeDeleted + "\nNow you have 1 task in the list.";
+        } else {
+            return "Noted. I've removed this task:\n"
                 + taskToBeDeleted + "\nNow you have "
                 + this.taskList.size() + " tasks in the list.";
+        }
     }
 
     /**
@@ -261,17 +284,17 @@ public class TaskList {
      */
     public String find(String input) throws DukeException {
         try {
-            String temp = input.split(" ", 2)[1];
+            String taskNumber = input.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyDeleteException();
         }
-        String item = input.split(" ", 2)[1];
+        String taskDetails = input.split(" ", 2)[1];
         String toPrint = "Here are the matching tasks in your list:\n";
         int counter = 1;
         ArrayList<Task> list = this.taskList;
         for (int i = 0; i < this.taskList.size(); i++) {
-            String deets = list.get(i).getTaskDetails().split("]" + " ", 2)[1];
-            if (deets.contains(item)) {
+            String details = list.get(i).getTaskDetails().split("]" + " ", 2)[1];
+            if (details.contains(taskDetails)) {
                 toPrint += counter + "." + list.get(i) + "\n";
                 counter++;
             }

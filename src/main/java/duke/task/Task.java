@@ -25,7 +25,7 @@ public class Task {
             assert !toPrint.isEmpty() : "Something should be printed.";
             return toPrint;
         } else {
-            String toPrint = String.format("[  ] %s", this.name);
+            String toPrint = String.format("[ ] %s", this.name);
             assert !toPrint.isEmpty() : "Something should be printed.";
             return toPrint;
         }

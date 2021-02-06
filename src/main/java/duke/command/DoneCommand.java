@@ -21,7 +21,6 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String input) {
         this.userInput = input;
-
     }
 
     /**
@@ -37,7 +36,7 @@ public class DoneCommand extends Command {
         assert !input.isEmpty() : "Input should not be blank.";
 
         try {
-            String temp = input.split(" ", 2)[1];
+            String taskNumber = input.split(" ", 2)[1];
             return tasks.markDone(input);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyDoneException();
