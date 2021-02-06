@@ -37,7 +37,6 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
             while (sc.hasNextLine()) {
                 String currLine = sc.nextLine();
-                //System.out.println(currLine);
                 String[] information = currLine.split("\\|");
                 if (information[0].charAt(0) == 'T') {
                     Task newTask = new Todo(information[2]);
@@ -51,7 +50,8 @@ public class Storage {
                         newTask.markAsDone();
                     }
                     tasks.add(newTask);
-                } else if (information[0].charAt(0) == 'E') {
+                } else {
+                    assert information[0].charAt(0) == 'E';
                     Task newTask = new Event(information[2], information[3]);
                     if (information[1].trim().equals("1")) {
                         newTask.markAsDone();
