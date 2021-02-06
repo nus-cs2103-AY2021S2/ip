@@ -14,12 +14,12 @@ import duke.tasks.TaskList;
 public class AddEventCommand extends Command {
     private final Event event;
 
-    public AddEventCommand(String description) throws DukeException {
-        if (description.isBlank()) {
+    public AddEventCommand(String descriptionString) throws DukeException {
+        if (descriptionString.isBlank()) {
             throw new UnknownInputException("event");
         }
 
-        String[] name = description.split(" /at ", 2);
+        String[] name = descriptionString.split(" /at ", 2);
 
         if (name.length != 2) {
             throw new MissingDateException("");

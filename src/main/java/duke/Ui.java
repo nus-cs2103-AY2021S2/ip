@@ -11,20 +11,46 @@ public class Ui {
 
     }
 
+    /**
+     * Displays the output upon addition of Task.
+     *
+     * @param task task.
+     * @param num task number.
+     * @return a String of the description.
+     */
     public String displayAddedTask(Task task, int num) {
         return "☺ Got it. I've added this task: \n" + task + "\n"
                 + "Now you have " + num + " tasks in the list.";
     }
 
+    /**
+     * Displays output upon completion of Task.
+     *
+     * @param task Completed task.
+     * @return a String of the description.
+     */
     public String displayDoneTask(Task task) {
         return "☺ Nice! I've marked this task as done: \n" + task;
     }
 
+    /**
+     * Displays output upon deletion of task.
+     *
+     * @param task Deleted task.
+     * @param num Number of tasks left.
+     * @return a String of the description.
+     */
     public String displayDeletedTask(Task task, int num) {
         return "☺ Noted. I've removed this task: \n" + task + "\n"
                 + "Now you have " + num + " tasks in the list.";
     }
 
+    /**
+     * Displays a list of matching tasks.*
+     *
+     * @param tasks A list of tasks.
+     * @return a String of the description.
+     */
     public String displayMatchingTasks(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list: \n");
@@ -35,6 +61,12 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Displays a list of tasks.
+     *
+     * @param tasks A list of tasks.
+     * @return a String of the description.
+     */
     public String displayList(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
@@ -45,6 +77,11 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Displays the goodbye message.
+     *
+     * @return a String of the description.
+     */
     public String goodbyeMessage() {
         return "Bye. Hope to see you again soon! ☺";
     }

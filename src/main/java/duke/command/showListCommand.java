@@ -13,11 +13,12 @@ public class showListCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String result;
         if (tasks.getNumOfTasks() == 0) {
             throw new DukeException("There are currently no duke.tasks in your list.");
         }
 
-        String result = ui.displayList(tasks.getTasks());
+        result = ui.displayList(tasks.getTasks());
         return result;
     }
 

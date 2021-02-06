@@ -15,7 +15,7 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 
 public class Storage {
-    private final File f;
+    private final File file;
 
     private final String path = "/Users/rachel/Desktop/ip/src/main/java/duke/data/myDuke.txt";
 
@@ -25,7 +25,7 @@ public class Storage {
      * @throws DukeException due to IOException.
      */
     public Storage() throws DukeException {
-        this.f = new File(path);
+        this.file = new File(path);
         createFile();
     }
 
@@ -36,11 +36,10 @@ public class Storage {
      */
     public void createFile() throws DukeException {
         try {
-            if (f.getParentFile().mkdirs()) {
+            if (file.getParentFile().mkdirs()) {
                 System.out.println("File is loading...");
             } else {
-                f.createNewFile();
-
+                file.createNewFile();
                 System.out.println("File already exists!");
             }
         } catch (IOException e) {
@@ -57,7 +56,7 @@ public class Storage {
     public ArrayList<Task> displayTasks() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            Scanner s = new Scanner(f);
+            Scanner s = new Scanner(file);
             while (s.hasNextLine()) {
                 Task task = parseTasks(s.nextLine());
                 tasks.add(task);
@@ -78,30 +77,30 @@ public class Storage {
      */
     public Task parseTasks(String task) throws DukeException {
         String[] description = task.split(" / ", 4);
-        Task t = null;
+        Task myTask = null;
         try {
             LocalDateTime dateTime;
             String type = description[0];
             switch (type) {
             case "T":
-                t = new ToDo(description[2]);
+                myTask = new ToDo(description[2]);
                 break;
 
             case "D":
                 dateTime = LocalDateTime.parse(description[3]);
-                t = new Deadline(description[2], dateTime);
+                myTask = new Deadline(description[2], dateTime);
                 break;
 
             case "E":
                 dateTime = LocalDateTime.parse(description[3]);
-                t = new Event(description[2], dateTime);
+                myTask = new Event(description[2], dateTime);
                 break;
             default:
             }
 
             if (description[1].equals("1")) {
-                assert t != null;
-                t.markAsDone();
+                assert myTask != null;
+                myTask.markAsDone();
             }
 
         } catch (Exception e) {
@@ -111,7 +110,7 @@ public class Storage {
 
         }
 
-        return t;
+        return myTask;
     }
 
     /**
