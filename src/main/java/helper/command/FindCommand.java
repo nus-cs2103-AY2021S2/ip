@@ -1,6 +1,5 @@
 package helper.command;
 
-import helper.DukeException;
 import helper.Storage;
 import helper.TaskList;
 import helper.Ui;
@@ -26,6 +25,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> cloneList = new ArrayList<>(tasks.getTaskList());
-        return ui.dukePrint(filterTasks(cloneList));
+        return ui.listOfTaskToString(filterTasks(cloneList));
     }
 }
