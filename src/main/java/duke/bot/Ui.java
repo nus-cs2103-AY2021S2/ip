@@ -23,7 +23,8 @@ public class Ui {
      * @return A formatted string containing the constructed welcome message
      */
     public String constructWelcomeMessage(String botName) {
-        return constructMessage(String.format("Meow, I'm %s\nWhat can I do for you today?", botName));
+        String msg = String.format("Meow, I'm %s\nWhat can I do for you today?", botName);
+        return constructMessage(msg);
     }
 
     /**
@@ -43,9 +44,9 @@ public class Ui {
      * @return A formatted string containing the constructed task addition message
      */
     public String constructAddMessage(Task task, int tasksSize) {
-        String msg = "Got it meow. I've added this task:\n" + String.format("  [%s][%s] %s\n", task.getTypeSymbol(),
-                task.getStatusSymbol(), task.getDesc()) + String.format("Now you have %d tasks in the list.\n",
-                tasksSize);
+        String msg = "Got it meow. I've added this task:\n"
+                + String.format("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc())
+                + String.format("Now you have %d tasks in the list.\n", tasksSize);
         return constructMessage(msg);
     }
 
@@ -57,8 +58,9 @@ public class Ui {
      * @return A formatted string containing the constructed task completion message
      */
     public String constructDoneMessage(int index, Task task) {
-        String msg = "Good job meow, I've marked this task as done:\n" + String.format("%d.[%s][%s] %s\n", index + 1,
-                task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
+        String msg = "Good job meow, I've marked this task as done:\n"
+                + String.format("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+                task.getDesc());
         return constructMessage(msg);
     }
 
@@ -70,10 +72,20 @@ public class Ui {
      * @return A formatted string containing the constructed task deletion message
      */
     public String constructDeleteMessage(Task task, int tasksSize) {
-        String msg = "Noted meow. I've removed this task:\n" + String.format("  [%s][%s] %s\n", task.getTypeSymbol(),
-                task.getStatusSymbol(), task.getDesc()) + String.format("Now you have %d tasks in the list.\n",
-                tasksSize);
+        String msg = "Noted meow. I've removed this task:\n"
+                + String.format("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc())
+                + String.format("Now you have %d tasks in the list.\n", tasksSize);
         return constructMessage(msg);
+    }
+
+    private String taskListToMessage(List<Task> tasks) {
+        String msg = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+                    task.getDesc());
+        }
+        return msg;
     }
 
     /**
@@ -83,12 +95,7 @@ public class Ui {
      * @return A formatted string containing the constructed search result message
      */
     public String constructFoundMessage(List<Task> tasks) {
-        String msg = "Meow, here are the matching tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
-                    task.getDesc());
-        }
+        String msg = "Meow, here are the matching tasks in your list:\n" + taskListToMessage(tasks);
         return constructMessage(msg);
     }
 
@@ -99,12 +106,7 @@ public class Ui {
      * @return A formatted string containing the constructed task list message
      */
     public String constructTaskListMessage(List<Task> tasks) {
-        String msg = "Meow, here are the tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
-                    task.getDesc());
-        }
+        String msg = "Meow, here are the tasks in your list:\n" + taskListToMessage(tasks);
         return constructMessage(msg);
     }
 
