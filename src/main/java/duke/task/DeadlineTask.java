@@ -33,9 +33,9 @@ public class DeadlineTask extends Task {
         String taskRepresent = divideCommand[1] + " " + divideCommand[2]
                 + " (" + divideCommand[3].substring(1) + ": " + dateFormat + ")";
         if (this.isDone()) {
-            return "D||X " + taskRepresent;
+            return "[D][X] " + taskRepresent;
         } else {
-            return "D||0 " + taskRepresent;
+            return "[D][-] " + taskRepresent;
         }
     }
 }

@@ -20,9 +20,9 @@ public class TodoTask extends Task {
     @Override
     public String toString() {
         if (this.isDone()) {
-            return "T||X " + createTask(divideCommand);
+            return "[T][X] " + createTask(divideCommand);
         } else {
-            return "T||0 " + createTask(divideCommand);
+            return "[T][-] " + createTask(divideCommand);
         }
     }
 }

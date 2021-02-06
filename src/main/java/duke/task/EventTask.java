@@ -34,9 +34,9 @@ public class EventTask extends Task {
         String taskRepresent = divideCommand[1] + " " + divideCommand[2]
                 + " (" + divideCommand[3].substring(1) + ": " + dateFormat + ")";
         if (this.isDone()) {
-            return "E||X " + taskRepresent;
+            return "[E][X] " + taskRepresent;
         } else {
-            return "E||0 " + taskRepresent;
+            return "[E][-] " + taskRepresent;
         }
     }
 }
