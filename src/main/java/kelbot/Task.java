@@ -6,9 +6,8 @@ public class Task implements Serializable {
     private String name;
     private boolean isDone;
     /**
-     * Initializes Task
-     *
-     * @param name The name of the task
+     * Initializes Task.
+     * @param name The name of the task.
      */
     public Task(String name) {
         this.name = name;
@@ -22,8 +21,7 @@ public class Task implements Serializable {
     }
     /**
      * Provide the status icon for the toString() method.
-     *
-     * @return the status icon
+     * @return the status icon.
      */
     public String getStatusIcon() {
         if (isDone) {
@@ -33,10 +31,9 @@ public class Task implements Serializable {
         }
     }
     /**
-     * Checks if the task name has given keyword
-     *
-     * @param keyword The keyword to be searched
-     * @return True if the task name has given keyword, False otherwise
+     * Checks if the task name has given keyword.
+     * @param keyword The keyword to be searched.
+     * @return True if the task name has given keyword, False otherwise.
      */
     public boolean hasKeyword(String keyword) {
         return name.contains(keyword);

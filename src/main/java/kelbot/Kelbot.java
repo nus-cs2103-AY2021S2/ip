@@ -13,7 +13,7 @@ public class Kelbot {
     private TaskList taskList;
     private UI ui;
     /**
-     * Initializes Kelbot
+     * Initializes Kelbot.
      */
     public Kelbot() {
         ui = new UI();
@@ -25,6 +25,11 @@ public class Kelbot {
             taskList = new TaskList();
         }
     }
+    /**
+     * Gets a response from the user input to be delivered to the user.
+     * @param input That the user puts in.
+     * @return The response to be delivered to the user.
+     */
     public String getResponse(String input) {
         String response;
         try {
@@ -45,56 +50,11 @@ public class Kelbot {
                 } else if (command == Command.LIST) {
                     response = ui.printList(taskList);
                 } else if (command == Command.DONE || command == Command.DELETE) {
-                    try {
-                        assert !taskList.getTaskList().isEmpty();
-                        if (command == Command.DONE) {
-                            Task task = taskList.complete(taskNumber);
-                            response = ui.printDone(task);
-                        } else {
-                            Task task = taskList.delete(taskNumber);
-                            response = ui.printDelete(task);
-                        }
-                    } catch (IndexOutOfBoundsException e) {
-                        response = "The list is not that long!";
-                    }
+                    response = doneOrDelete(command, taskList, taskNumber);
                 } else if (command == Command.FIND) {
-                    try {
-                        if (keyword.equals("")) {
-                            throw new KelbotException("Keyword cannot be empty!");
-                        } else {
-                            assert !taskList.getTaskList().isEmpty();
-                            TaskList taskListToPrint = new TaskList(taskList.search(keyword));
-                            if (taskListToPrint.toString().equals("")) {
-                                response = "No tasks match your search!";
-                            } else {
-                                response = ui.printRelevantTasks(taskListToPrint);
-                            }
-                        }
-                    } catch (KelbotException e) {
-                        response = e.getMessage();
-                    }
+                    response = find(taskList, keyword);
                 } else {
-                    try {
-                        if (taskName == "") {
-                            throw new KelbotException("Task name cannot be empty!");
-                        } else if (command == Command.TODO) {
-                            TodoTask newTodoTask = new TodoTask(taskName);
-                            taskList.add(newTodoTask);
-                            response = ui.printAdd(newTodoTask, taskList.getSize());
-                        } else if (date == null) {
-                            throw new KelbotException("Date cannot be empty!");
-                        } else if (command == Command.DEADLINE) {
-                            DeadlineTask newDeadlineTask = new DeadlineTask(taskName, date);
-                            taskList.add(newDeadlineTask);
-                            response = ui.printAdd(newDeadlineTask, taskList.getSize());
-                        } else {
-                            EventTask newEventTask = new EventTask(taskName, date);
-                            taskList.add(newEventTask);
-                            response = ui.printAdd(newEventTask, taskList.getSize());
-                        }
-                    } catch (KelbotException e) {
-                        response = e.getMessage();
-                    }
+                    response = add(command, taskList, taskName, date);
                 }
             } catch (DateTimeParseException e) {
                 response = "Invalid Date!";
@@ -108,11 +68,91 @@ public class Kelbot {
         return response;
     }
     /**
-     * Gets Task List
-     *
-     * @return Task List
+     * Gets Task List.
+     * @return Task List.
      */
     public TaskList getTaskList() {
         return taskList;
+    }
+    /**
+     * Completes or deletes a task, depending on the command.
+     * @param command Either a DONE or DELETE command.
+     * @param taskList The task list to be acted on.
+     * @param taskNumber The task number to index the task in the task list.
+     * @return The string to be printed.
+     */
+    public String doneOrDelete(Command command, TaskList taskList, int taskNumber) {
+        String response;
+        try {
+            assert !taskList.getTaskList().isEmpty();
+            if (command == Command.DONE) {
+                Task task = taskList.complete(taskNumber);
+                response = ui.printDone(task);
+            } else {
+                Task task = taskList.delete(taskNumber);
+                response = ui.printDelete(task);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            response = "The list is not that long!";
+        }
+        return response;
+    }
+    /**
+     * Finds a keyword from the task list.
+     * @param taskList The task list where the keyword will be searched from.
+     * @param keyword The keyword to search for in the task list.
+     * @return The tasks that have the keywords.
+     */
+    public String find(TaskList taskList, String keyword) {
+        String response;
+        try {
+            if (keyword.equals("")) {
+                throw new KelbotException("Keyword cannot be empty!");
+            } else {
+                assert !taskList.getTaskList().isEmpty();
+                TaskList taskListToPrint = new TaskList(taskList.search(keyword));
+                if (taskListToPrint.toString().equals("")) {
+                    response = "No tasks match your search!";
+                } else {
+                    response = ui.printRelevantTasks(taskListToPrint);
+                }
+            }
+        } catch (KelbotException e) {
+            response = e.getMessage();
+        }
+        return response;
+    }
+    /**
+     * Adds a task to the task list.
+     * @param command The command that indicates which task to add.
+     * @param taskList The task list to be added to.
+     * @param taskName The name of the task that will be added.
+     * @param date The date of the task that will be added, if applicable.
+     * @return The response to be printed to the user.
+     */
+    public String add(Command command, TaskList taskList, String taskName, LocalDate date) {
+        String response;
+        try {
+            if (taskName == "") {
+                throw new KelbotException("Task name cannot be empty!");
+            } else if (command == Command.TODO) {
+                TodoTask newTodoTask = new TodoTask(taskName);
+                taskList.add(newTodoTask);
+                response = ui.printAdd(newTodoTask, taskList.getSize());
+            } else if (date == null) {
+                throw new KelbotException("Date cannot be empty!");
+            } else if (command == Command.DEADLINE) {
+                DeadlineTask newDeadlineTask = new DeadlineTask(taskName, date);
+                taskList.add(newDeadlineTask);
+                response = ui.printAdd(newDeadlineTask, taskList.getSize());
+            } else {
+                EventTask newEventTask = new EventTask(taskName, date);
+                taskList.add(newEventTask);
+                response = ui.printAdd(newEventTask, taskList.getSize());
+            }
+        } catch (KelbotException e) {
+            response = e.getMessage();
+        }
+        return response;
     }
 }

@@ -11,10 +11,9 @@ public class Parser {
     private LocalDate date = null;
     private boolean isValid = true;
     /**
-     * Initializes Parser
-     *
-     * @param input The input given by the user
-     * @throws DateTimeParseException if the date is invalid
+     * Initializes Parser.
+     * @param input The input given by the user.
+     * @throws DateTimeParseException if the date is invalid.
      */
     public Parser(String input) throws DateTimeParseException {
         String[] commands = input.split(" ");
@@ -71,19 +70,15 @@ public class Parser {
     public Command getCommand() {
         return command;
     }
-
     public String getTaskName() {
         return taskName;
     }
-
     public String getKeyword() {
         return keyword;
     }
-
     public Integer getTaskNumber() {
         return taskNumber;
     }
-
     public LocalDate getDate() {
         return date;
     }

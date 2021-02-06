@@ -7,10 +7,9 @@ import java.time.format.FormatStyle;
 public class EventTask extends Task {
     protected LocalDate date;
     /**
-     * Initializes Event Task
-     *
-     * @param name The name of the Event Task
-     * @param date The date that the Event Task must be completed by
+     * Initializes Event Task.
+     * @param name The name of the Event Task.
+     * @param date The date that the Event Task must be completed by.
      */
     public EventTask(String name, LocalDate date) {
         super(name);
