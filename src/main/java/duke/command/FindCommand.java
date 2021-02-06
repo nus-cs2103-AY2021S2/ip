@@ -70,7 +70,6 @@ public class FindCommand extends Command {
         List<Task> tasksFound = taskManager.getTasks().stream()
                 .filter(task -> isMatch(task))
                 .collect(Collectors.toList());
-                
         return ui.constructFoundMessage(tasksFound);
     }
 }
