@@ -29,18 +29,19 @@ public class DoneCommand extends Command {
         if (taskManager.getTasksSize() == 0) {
             throw new DukeCommandException("done", String.valueOf(this.index), "There are no task to be completed.");
         } else if (index < 0 || index >= taskManager.getTasksSize()) {
-            throw new DukeCommandException("done", String.valueOf(this.index), "Please enter a valid task index "
-                    + "ranging from 1 to " + taskManager.getTasksSize() + " (inclusive).");
+            String msg = "Please enter a valid task index ranging from 1 to " + taskManager.getTasksSize()
+                    + " (inclusive).";
+            throw new DukeCommandException("done", String.valueOf(this.index), msg);
         } else if (taskManager.getTask(this.index).getStatusSymbol().equals("X")) {
             throw new DukeCommandException("done", String.valueOf(this.index), "This task is already completed.");
-        } else {
-            try {
-                taskManager.completeTask(this.index);
-                Storage.save(taskManager.getTasks());
-                return ui.constructDoneMessage(this.index, taskManager.getTask(this.index));
-            } catch (DukeException e) {
-                throw new DukeCommandException("done", String.valueOf(index), e.getMessage());
-            }
+        }
+
+        try {
+            taskManager.completeTask(this.index);
+            Storage.save(taskManager.getTasks());
+            return ui.constructDoneMessage(this.index, taskManager.getTask(this.index));
+        } catch (DukeException e) {
+            throw new DukeCommandException("done", String.valueOf(index), e.getMessage());
         }
     }
 }
