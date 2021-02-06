@@ -119,6 +119,8 @@ public class FakeBot {
             return processDeleteCommand(command);
         case FIND:
             return Parser.getTaskListPrintMessage(new TaskList(taskList.findTasks(command.getDescription())));
+        case HELP:
+            return command.getDescription();
         default:
             assert false : "All command type should be handle in switch";
             break;

@@ -32,6 +32,19 @@ public class Parser {
     private static final String EVENT_SPLIT_REGEX = " /at ";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
+    private static final String HELP_COMMAND = "help";
+
+    private static final String HELP_STRING = "List of Command Available:\n"
+            + "Deadline Command: " + DEADLINE_COMMAND + " [Description]"+DEADLINE_SPLIT_REGEX+"\n"
+            + "                   [yyyy-mm-dd] [hh:ss]\n"
+            + "Delete   Command: " + DELETE_COMMAND + " [index]\n"
+            + "Done     Command: " + DONE_COMMAND + " [index]\n"
+            + "Event    Command: " + EVENT_COMMAND + " [Description]"+EVENT_SPLIT_REGEX+"\n"
+            + "                   [yyyy-mm-dd] [hh:ss] [yyyy-mm-dd] [hh:ss]\n"
+            + "Find     Command: " + FIND_COMMAND + "[ description]\n"
+            + "List     Command: " + LIST_COMMAND + "\n"
+            + "Todo     Command: " + TODO_COMMAND + " [Description]\n"
+            + "Exit     Command: " + EXIT_COMMAND + "\n";
 
 
     /**
@@ -267,7 +280,7 @@ public class Parser {
             } else if (isCommandWithIndexDescription(command)) {
                 throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
             }
-            throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new CommandException("OOPS!!! I'm sorry, but I don't know what that means :-( , type \"help\" for help.");
         }
 
         String commandName = command.substring(0, firstSplit);
@@ -280,7 +293,7 @@ public class Parser {
             return parseCommandWithDescription(commandName, description);
         }
 
-        throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new CommandException("OOPS!!! I'm sorry, but I don't know what that means :-( , type \"help\" for help.");
     }
 
     /**
@@ -290,12 +303,9 @@ public class Parser {
      * @return true if the command do not need a description.
      */
     private static Boolean isCommandWithoutDescription(String command) {
-        if (command.equals(EXIT_COMMAND)) {
-            return true;
-        } else if (command.equals(LIST_COMMAND)) {
-            return true;
-        }
-        return false;
+        boolean isCommandWithoutDescription = command.equals(EXIT_COMMAND) || command.equals(LIST_COMMAND)
+                || command.equals(HELP_COMMAND);
+        return isCommandWithoutDescription;
     }
 
     /**
@@ -308,7 +318,9 @@ public class Parser {
         if (command.equals(EXIT_COMMAND)) {
             return new Command(CommandType.BYE);
         } else if (command.equals(LIST_COMMAND)) {
-            return new Command(CommandType.LIST);
+            return new Command(CommandType.LIST);}
+        else if (command.equals(HELP_COMMAND)) {
+            return new Command(CommandType.HELP, HELP_STRING);
         } else {
             assert false : "Invalid calling of parse command without description";
             return null;
