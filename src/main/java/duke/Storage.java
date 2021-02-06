@@ -5,7 +5,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.File;
@@ -59,7 +59,7 @@ public class Storage {
      * @param taskList
      * @throws IOException
      */
-    public void writeData(List<Task> taskList) throws IOException {
+    public void saveData(List<Task> taskList) throws IOException {
         FileWriter file = new FileWriter(DEFAULT_PATH);
         for (Task task : taskList) {
             String toBeSaved = "";
@@ -100,8 +100,8 @@ public class Storage {
      * @param taskList
      * @throws IOException
      */
-    public void writeData(TaskList taskList) throws IOException {
-        writeData(taskList.getTaskList());
+    public void saveData(TaskList taskList) throws IOException {
+        saveData(taskList.getTaskList());
     }
 
 
@@ -118,13 +118,13 @@ public class Storage {
             Task taskToBeAdded = null;
             switch (taskType) {
                 case "DEADLINE":
-                    taskToBeAdded = new Deadline(taskDescription, LocalDate.parse(storedTask[3]), isDone);
+                    taskToBeAdded = new Deadline(taskDescription, LocalDateTime.parse(storedTask[3]), isDone);
                     break;
                 case "TODO":
                     taskToBeAdded = new ToDo(taskDescription, isDone);
                     break;
                 case "EVENT":
-                    taskToBeAdded = new Event(taskDescription, LocalDate.parse(storedTask[3]), isDone);
+                    taskToBeAdded = new Event(taskDescription, LocalDateTime.parse(storedTask[3]), isDone);
                     break;
                 default:
                     continue;

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void validTaskCommand() {
+    public void checkValidTaskCommand() {
         String dummyInput = "hello";
         assertEquals(Parser.isValidTaskCommand(dummyInput), false);
     }

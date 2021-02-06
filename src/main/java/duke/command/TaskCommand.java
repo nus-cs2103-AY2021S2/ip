@@ -9,10 +9,11 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.Ui;
 
-import java.time.LocalDate;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class TaskCommand extends Command {
-    private LocalDate time = null;
+    private LocalDateTime time = null;
     private String description;
     private String taskType;
 
@@ -21,7 +22,7 @@ public class TaskCommand extends Command {
         this.description = description;
     }
 
-    public TaskCommand(String taskType, String description, LocalDate time) {
+    public TaskCommand(String taskType, String description, LocalDateTime time) {
         this.taskType = taskType;
         this.description = description;
         this.time = time;
@@ -29,25 +30,29 @@ public class TaskCommand extends Command {
 
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException {
+    public void execute(TaskList taskList, Ui ui, Storage storage)
+            throws IllegalArgumentException, IOException {
         Task newTask;
         switch(taskType) {
         case "todo":
             ToDo newToDo = new ToDo(this.description);
             taskList.addTask(newToDo);
             ui.printAddToDo(newToDo);
+            storage.saveData(taskList);
             break;
 
         case "deadline":
             Deadline newDeadLine = new Deadline(this.description, this.time);
             taskList.addTask(newDeadLine);
             ui.printAddDeadLine(newDeadLine);
+            storage.saveData(taskList);
             break;
 
         case "event":
             Event newEvent = new Event(this.description, this.time);
             taskList.addTask(newEvent);
             ui.printAddEvent(newEvent);
+            storage.saveData(taskList);
             break;
         }
 

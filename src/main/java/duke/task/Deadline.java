@@ -1,17 +1,17 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     private static String taskType = "DEADLINE";
-    private LocalDate endTime;
+    private LocalDateTime endTime;
 
-    public Deadline(String taskDescription, LocalDate endTime) {
+    public Deadline(String taskDescription, LocalDateTime endTime) {
         super(taskDescription);
         this.endTime = endTime;
     }
 
-    public Deadline(String taskDescription, LocalDate endTime, boolean isDone) {
+    public Deadline(String taskDescription, LocalDateTime endTime, boolean isDone) {
         super(taskDescription, isDone);
         this.endTime = endTime;
     }
@@ -21,7 +21,7 @@ public class Deadline extends Task {
         return taskType;
     }
 
-    public LocalDate getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 }

@@ -1,19 +1,19 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Event extends Task {
     private static String taskType = "EVENT";
 //    private String startTime;
 //    private String endTime;
-    private LocalDate eventTime;
+    private LocalDateTime eventTime;
 
-    public Event(String description, LocalDate eventTime) {
+    public Event(String description, LocalDateTime eventTime) {
         super(description);
         this.eventTime = eventTime;
     }
 
-    public Event(String description, LocalDate eventTime, boolean isDone) {
+    public Event(String description, LocalDateTime eventTime, boolean isDone) {
         super(description, isDone);
         this.eventTime = eventTime;
     }
@@ -22,7 +22,7 @@ public class Event extends Task {
         return taskType;
     }
 
-    public LocalDate getEventTime() {
+    public LocalDateTime getEventTime() {
         return eventTime;
     }
 }

@@ -17,6 +17,6 @@ public class DoneCommand extends Command{
         // System.out.printf(">>> Nice! I've marked this task as done:\n  [%s] [%s] %s\n",
         //         taskList..getTaskType(), newTask.getStatusIcon(), newTask.getTaskDescription());
         ui.printTaskDone(taskList.getTask(index));
-        storage.writeData(taskList);
+        storage.saveData(taskList);
     }
 }

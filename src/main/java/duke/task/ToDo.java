@@ -15,4 +15,9 @@ public class ToDo extends Task {
     public  String getTaskType() {
         return taskType;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s", taskType, getStatusIcon(), getTaskDescription());
+    }
 }

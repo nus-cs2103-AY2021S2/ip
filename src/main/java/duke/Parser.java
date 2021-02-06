@@ -4,7 +4,8 @@ import duke.command.*;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeToDoException;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class Parser {
@@ -25,11 +26,13 @@ public class Parser {
             return parseDone(splitInput[1]);
         } else if (command.equals("delete")){
             return parseDelete(splitInput[1]);
-        } else if (isValidTaskCommand(command)) {
+        } else if (command.equals("find")){
+            return parseFind(splitInput[1]);
+        }else if (isValidTaskCommand(command)) {
             return parseTask(userInput);
         } else {
             throw new DukeCommandException("Sorry Human. I do not comprehend.\n"+
-                    "Please read the user manual and try again");
+                    "         Please read the user manual and try again");
         }
 
     }
@@ -59,12 +62,23 @@ public class Parser {
     }
 
     /**
+     * Parse the command args in the context of Find
+     * @param arg
+     * @return FindCommand
+     */
+    public static Command parseFind(String arg) {
+        String keyword = arg;
+        return new FindCommand(keyword);
+    }
+
+
+    /**
      * Parse the command in the context of Task
      * @param input
      * @return TaskCommand
      */
     public static Command parseTask(String input) throws DukeToDoException, DukeCommandException {
-
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
 
@@ -79,13 +93,15 @@ public class Parser {
         case "deadline":
             String[] taskDetails = splitInput[1].split("/by");
             taskDescription = taskDetails[0];
-            LocalDate endTime =  LocalDate.parse(taskDetails[1].trim());
+            LocalDateTime endTime =  LocalDateTime.parse(taskDetails[1].trim(),
+                    dateTimeFormatter);
             return new TaskCommand(command, taskDescription, endTime);
 
         case "event":
             taskDetails = splitInput[1].split("/at");
             taskDescription = taskDetails[0];
-            LocalDate eventTime =  LocalDate.parse(taskDetails[1].trim());
+            LocalDateTime eventTime =  LocalDateTime.parse(taskDetails[1].trim(),
+                    dateTimeFormatter);
             return new TaskCommand(command, taskDescription, eventTime);
 
         default:
