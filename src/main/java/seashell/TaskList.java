@@ -9,6 +9,10 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Prints out all the tasks that are currently in the task list
+     * @throws SeashellException if the task list is empty
+     */
     public void listTasks() throws SeashellException {
         if (this.taskList.isEmpty()) {
             throw new SeashellException("OOPS!!! Task list is currently still empty!");
@@ -20,11 +24,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Set a specified task in the task list as done
+     * @param command input from user
+     * @param saveHandler save handler object to update save file
+     * @return updated task list after setting the specified task as done
+     * @throws SeashellException if specified task index is out of bounds
+     */
     public TaskList setDone(String command, SaveHandler saveHandler) throws SeashellException {
         String num = command.substring(5);
         int index = Integer.parseInt(num);
         if (this.taskList.size() < index) {
-            throw new SeashellException("OOPS!!! Task does not exist!");
+            throw new SeashellException("OOPS!!! Task index is out of bounds!");
         } else {
             ArrayList<Task> updatedList = new ArrayList<>(this.taskList);
             Task updated = updatedList.get(index - 1).setDone();
@@ -35,11 +46,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete a task from the task list
+     * @param command input from user
+     * @param saveHandler save handler object to update save file
+     * @return updated task list after setting the specified task is deleted
+     * @throws SeashellException if specified task index is out of bounds
+     */
     public TaskList delete(String command, SaveHandler saveHandler) throws SeashellException {
         String num = command.substring(7);
         int index = Integer.parseInt(num);
         if (taskList.size() < index) {
-            throw new SeashellException("OOPS!!! Task does not exist!");
+            throw new SeashellException("OOPS!!! Task index is out of bounds!");
         } else {
             ArrayList<Task> updatedList = new ArrayList<>(this.taskList);
             Task toRemove = updatedList.remove(index - 1);
@@ -50,6 +68,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Create a todo task item and add it to the task list
+     * @param command input from user
+     * @param saveHandler save handler object to update save file
+     * @return updated task list after the created todo task is added
+     * @throws SeashellException if no task description is given
+     */
     public TaskList createTodo(String command, SaveHandler saveHandler) throws SeashellException {
         String taskName = command.substring(4).stripLeading();
         if (taskName.equals("")) {
@@ -65,6 +90,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Create a deadline task item and add it to the task list
+     * @param command input from user
+     * @param saveHandler save handler object to update save file
+     * @return updated task list after the created deadline task is added
+     * @throws SeashellException if no task description is given or the syntax of the command is invalid
+     */
     public TaskList createDeadline(String command, SaveHandler saveHandler) throws SeashellException {
         String taskName = command.substring(8).stripLeading();
         if (taskName.equals("")) {
@@ -84,6 +116,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Create a event task item and add it to the task list
+     * @param command input from user
+     * @param saveHandler save handler object to update save file
+     * @return updated task list after the created event task is added
+     * @throws SeashellException if no task description is given or the syntax of the command is invalid
+     */
     public TaskList createEvent(String command, SaveHandler saveHandler) throws SeashellException {
         String taskName = command.substring(5).stripLeading();
         if (taskName.equals("")) {
@@ -103,6 +142,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Clear the task list
+     * @param saveHandler save handler object to update save file
+     * @return an empty Task list object
+     * @throws SeashellException if task list is empty
+     */
     public TaskList clear(SaveHandler saveHandler) throws SeashellException {
         if (this.taskList.isEmpty()) {
             throw new SeashellException("OOPS!!! Task list is already empty!");

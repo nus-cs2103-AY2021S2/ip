@@ -11,8 +11,8 @@ public class SaveHandler {
     public static final String FILE_PATH = DIR_PATH + "/saveFile.txt";
 
     /**
-     * If
-     * @return
+     * If save file exists, read the save file and return the task list read from the save file
+     * @return the task arraylist read from save file
      */
     public ArrayList<Task> loadSave() {
         try {
@@ -48,6 +48,10 @@ public class SaveHandler {
         }
     }
 
+    /**
+     * Add a task to the save file
+     * @param task to be added
+     */
     public void addTaskToSaveFile(Task task) {
         try {
             FileWriter fileWriter = new FileWriter(FILE_PATH, true);
@@ -59,6 +63,10 @@ public class SaveHandler {
         }
     }
 
+    /**
+     * Update save file with the specified task list
+     * @param taskList to replace current task list
+     */
     public void updateSaveFile(ArrayList<Task> taskList) {
         try {
             clearSaveFile();
@@ -73,6 +81,9 @@ public class SaveHandler {
         }
     }
 
+    /**
+     * Clear the save file
+     */
     public void clearSaveFile() {
         try {
             FileWriter fileEraser = new FileWriter(FILE_PATH);
