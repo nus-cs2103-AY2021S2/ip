@@ -5,11 +5,14 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import fakebot.task.Deadlines;
-import fakebot.task.Events;
+import fakebot.command.Command;
+import fakebot.command.CommandException;
+import fakebot.command.CommandType;
+import fakebot.task.Deadline;
+import fakebot.task.Event;
 import fakebot.task.Task;
 import fakebot.task.TaskList;
-import fakebot.task.ToDos;
+import fakebot.task.Todo;
 
 /**
  * Parser class use for processing syntax
@@ -18,6 +21,18 @@ public class Parser {
 
     private static final String DIVIDER = "____________________________________________________________\n";
     private static final String SPLIT_REGEX = "-'@,-@,1'-";
+
+    private static final String EXIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String DEADLINE_SPLIT_REGEX = " /by ";
+    private static final String EVENT_COMMAND = "event";
+    private static final String EVENT_SPLIT_REGEX = " /at ";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
+
 
     /**
      * Enum for different task type.
@@ -48,43 +63,80 @@ public class Parser {
      * @return Return parsed Task.
      */
     public static String convertTaskToString(Task task) {
-        StringBuilder currentString = new StringBuilder();
-        if (task instanceof ToDos) {
-            currentString.append(TaskType.TODO.name());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(task.isComplete());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(task.getTaskName());
-        } else if (task instanceof Events) {
-            Events events = (Events) task;
-            currentString.append(TaskType.EVENT.name());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(task.isComplete());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(events.getTaskName());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(events.getStartDate());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(events.getStartTime());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(events.getEndDate());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(events.getEndTime());
-        } else if (task instanceof Deadlines) {
-            Deadlines deadlines = (Deadlines) task;
-            currentString.append(TaskType.DEADLINE.name());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(task.isComplete());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(deadlines.getTaskName());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(deadlines.getDeadlineDate());
-            currentString.append(SPLIT_REGEX);
-            currentString.append(deadlines.getDeadlineTime());
-        }else {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (task instanceof Todo) {
+            Todo todo = (Todo) task;
+            stringBuilder.append(convertTodoToString(todo));
+        } else if (task instanceof Event) {
+            Event event = (Event) task;
+            stringBuilder.append(convertEventToString(event));
+        } else if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            stringBuilder.append(convertDeadlineToString(deadline));
+        } else {
             assert false : "Task being handle should be handle";
         }
-        return currentString.toString();
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Converts Todo to String.
+     *
+     * @param todo Todo to be parsed to string.
+     * @return Return parsed Todo.
+     */
+    private static String convertTodoToString(Todo todo) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(TaskType.TODO.name());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(todo.isComplete());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(todo.getTaskName());
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Converts Event to String.
+     *
+     * @param event Event to be parsed to string.
+     * @return Return parsed Event.
+     */
+    private static String convertEventToString(Event event) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(TaskType.EVENT.name());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(event.isComplete());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(event.getTaskName());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(event.getStartDate());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(event.getStartTime());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(event.getEndDate());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(event.getEndTime());
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Converts Deadline to String.
+     *
+     * @param deadline Deadline to be parsed to string.
+     * @return Return parsed Deadline.
+     */
+    private static String convertDeadlineToString(Deadline deadline) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(TaskType.DEADLINE.name());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(deadline.isComplete());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(deadline.getTaskName());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(deadline.getDeadlineDate());
+        stringBuilder.append(SPLIT_REGEX);
+        stringBuilder.append(deadline.getDeadlineTime());
+        return stringBuilder.toString();
     }
 
     /**
@@ -109,19 +161,19 @@ public class Parser {
      * @param string Parsed Task.
      * @return Return task parsed from string.
      */
-    public static Task parseStringToTask(String string) {
+    public static Task convertStringToTask(String string) {
         String[] parts = string.split(SPLIT_REGEX);
         Task currentTask = null;
         switch (TaskType.valueOf(parts[0])) {
         case TODO:
-            currentTask = new ToDos(parts[2]);
+            currentTask = new Todo(parts[2]);
             break;
         case EVENT:
-            currentTask = new Events(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]),
+            currentTask = new Event(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]),
                     LocalDate.parse(parts[5]), LocalTime.parse(parts[6]));
             break;
         case DEADLINE:
-            currentTask = new Deadlines(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]));
+            currentTask = new Deadline(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]));
             break;
         default:
             assert false : "String being parsed should be a type of parsed Task";
@@ -141,11 +193,11 @@ public class Parser {
      * @param stringList string of list.
      * @return Return list of Task parsed from list of string.
      */
-    public static List<Task> parseStringsToTasks(List<String> stringList) {
+    public static List<Task> convertStringsToTasks(List<String> stringList) {
         List<Task> tasks = new ArrayList<Task>();
 
         for (String line : stringList) {
-            tasks.add(parseStringToTask(line));
+            tasks.add(convertStringToTask(line));
         }
         return tasks;
     }
@@ -194,4 +246,207 @@ public class Parser {
         return getStringListPrintMessage("Here are the tasks in your list:\n", messages);
     }
 
+
+    /**
+     * Parses User Input to Command.
+     *
+     * @param command Command String that is yet to be parsed.
+     */
+    public static Command parseUserInputToCommand(String command) throws CommandException {
+        if(isCommandWithoutDescription(command)) {
+            return parseCommandWithoutDescription(command);
+        }
+
+        int firstSplit = command.indexOf(' ');
+        //Command with description should contain at least one space
+        if (firstSplit < 0) {
+            if(isCommandWithDescription(command)) {
+                throw new CommandException("OOPS!!! The description of a " + command + " cannot be empty.");
+            }else if (isCommandWithIndexDescription(command)) {
+                throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
+            }
+            throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        String commandName = command.substring(0, firstSplit);
+        String description = command.substring(firstSplit + 1);
+
+        if(isCommandWithIndexDescription(commandName)) {
+            return parseCommandWithIndexDescription(commandName, description);
+        }
+        if(isCommandWithDescription(commandName)) {
+            return parseCommandWithDescription(commandName, description);
+        }
+
+        throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    /**
+     * Check if the command need a description.
+     * @param command Command String to be checked.
+     * @return Returns true if the command do not need a description.
+     */
+    private static Boolean isCommandWithoutDescription(String command) {
+        if (command.equals(EXIT_COMMAND)) {
+            return true;
+        } else if (command.equals(LIST_COMMAND)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * parse the command that do not need description to Command class.
+     * @param command Command String that do not need description.
+     * @return Return Command.
+     */
+    private static Command parseCommandWithoutDescription(String command) {
+        if (command.equals(EXIT_COMMAND)) {
+            return new Command(CommandType.BYE);
+        } else if (command.equals(LIST_COMMAND)) {
+            return new Command(CommandType.LIST);
+        }else {
+            assert false : "Invalid calling of parse command without description";
+            return null;
+        }
+    }
+
+    /**
+     * Check if the command need a index description.
+     * @param command Command String to be checked.
+     * @return Returns true if the command do not need a description.
+     */
+    private static Boolean isCommandWithIndexDescription(String command) {
+        boolean isCommandWithIndexDescription = command.equals(DONE_COMMAND) || command.equals(DELETE_COMMAND);
+        return isCommandWithIndexDescription;
+    }
+
+    /**
+     * Parses the command that need a index description to Command class.
+     * @param command Command String that need a index description.
+     * @return Return Command that need a index description.
+     */
+    private static Command parseCommandWithIndexDescription(String command, String description) throws CommandException {
+        if (description.isEmpty()) {
+            throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
+        }
+
+        try {
+            int index = Integer.parseInt(description);
+        } catch (NumberFormatException e) {
+            throw new CommandException("OOPS!!! Invalid Task Index Format.");
+        }
+
+        if (command.equals(DONE_COMMAND)) {
+            return new Command(CommandType.DONE, description);
+
+        } else if (command.equals(DELETE_COMMAND)) {
+            return new Command(CommandType.DELETE, description);
+        }else {
+            assert false : "Invalid calling of parse command with index description";
+            return null;
+        }
+    }
+
+    /**
+     * Check if the command need a description.
+     * @param command Command String to be checked.
+     * @return Returns true if the command do need a description.
+     */
+    private static Boolean isCommandWithDescription(String command) {
+        boolean isCommandWithDescription = command.equals(TODO_COMMAND) || command.equals(EVENT_COMMAND)
+                || command.equals(DEADLINE_COMMAND) || command.equals(FIND_COMMAND);
+        return isCommandWithDescription;
+    }
+
+    /**
+     * Parses the command that need a description to Command class.
+     * @param command Command name.
+     * @param description Command description.
+     * @return Return Command that need a description.
+     */
+    private static Command parseCommandWithDescription(String command, String description) throws CommandException {
+        if (description.isEmpty()) {
+            throw new CommandException("OOPS!!! The description of a " + command + " cannot be empty.");
+        }
+        if (command.equals(FIND_COMMAND)) {
+            return parseFindCommand(description);
+        } else if (command.equals(TODO_COMMAND)) {
+            return parseTodoCommand(description);
+        } else if (command.equals(DEADLINE_COMMAND)) {
+            return parseDeadlineCommand(description);
+        } else if (command.equals(EVENT_COMMAND)) {
+            return parseEventCommand(description);
+        }else {
+            assert false : "Invalid calling of parse command with description";
+            return null;
+        }
+    }
+
+
+    /**
+     * Parses todo command
+     * @param description Command description.
+     * @return Return Todo command.
+     */
+    private static Command parseTodoCommand(String description) {
+        return new Command(CommandType.TODO, description);
+    }
+
+    /**
+     * Parses find command
+     * @param description Command description.
+     * @return Return Find command.
+     */
+    private static Command parseFindCommand(String description) {
+        return new Command(CommandType.FIND, description);
+    }
+
+    /**
+     * Parses event command
+     * @param description Command description.
+     * @return Return Event command.
+     */
+    private static Command parseEventCommand(String description) throws CommandException {
+        if (!description.contains(EVENT_SPLIT_REGEX)) {
+            throw new CommandException("OOPS!!! The description of a " + EVENT_COMMAND
+                    + " must contain Date and Duration indicated by \"" + EVENT_SPLIT_REGEX + "\".");
+        }
+        try {
+            String[] eventDetails = description.split(EVENT_SPLIT_REGEX);
+            String[] dates = eventDetails[1].split(" ");
+            LocalDate startDate = LocalDate.parse(dates[0]);
+            LocalTime startTime = LocalTime.parse(dates[1]);
+            LocalDate endDate = LocalDate.parse(dates[2]);
+            LocalTime endTime = LocalTime.parse(dates[3]);
+        } catch (Exception e) {
+            throw new CommandException("OOPS!!! The Date format of a "
+                    + EVENT_COMMAND + " must be yyyy-mm-dd hh:ss yyyy-mm-dd hh:ss.");
+        }
+        return new Command(CommandType.EVENT, description);
+    }
+
+    /**
+     * Parses deadline command.
+     * @param description Command description.
+     * @return Return Deadline command.
+     */
+    private static Command parseDeadlineCommand(String description) throws CommandException {
+        if (!description.contains(DEADLINE_SPLIT_REGEX)) {
+            throw new CommandException("OOPS!!! The description of a "
+                    + DEADLINE_COMMAND + " must contain Date indicated by \""
+                    + DEADLINE_SPLIT_REGEX + "\".");
+        }
+        try {
+            String[] deadlineDetails = description.split(DEADLINE_SPLIT_REGEX);
+            String[] dates = deadlineDetails[1].split(" ");
+            LocalDate date = LocalDate.parse(dates[0]);
+            LocalTime time = LocalTime.parse(dates[1]);
+        } catch (Exception e) {
+            throw new CommandException("OOPS!!! The Date format of a "
+                    + DEADLINE_COMMAND + " must be yyyy-mm-dd hh:ss.");
+
+        }
+        return new Command(CommandType.DEADLINE, description);
+    }
 }

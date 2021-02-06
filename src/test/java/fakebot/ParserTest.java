@@ -8,10 +8,10 @@ import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
-import fakebot.task.Deadlines;
-import fakebot.task.Events;
+import fakebot.task.Deadline;
+import fakebot.task.Event;
 import fakebot.task.Task;
-import fakebot.task.ToDos;
+import fakebot.task.Todo;
 
 
 class ParserTest {
@@ -28,18 +28,18 @@ class ParserTest {
     @Test
     public void parseTodoGetTaskName_equal() {
         String taskName = "Test";
-        ToDos todo = new ToDos(taskName);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(todo));
-        todo = (ToDos) task;
+        Todo todo = new Todo(taskName);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(todo));
+        todo = (Todo) task;
         assertEquals(taskName, todo.getTaskName(), "Task Name does not match");
     }
 
     @Test
     public void parseTodoMarkComplete_success() {
-        ToDos todo = new ToDos("Test");
+        Todo todo = new Todo("Test");
         todo.markComplete();
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(todo));
-        todo = (ToDos) task;
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(todo));
+        todo = (Todo) task;
         assertEquals(true, todo.isComplete(), "Task not completed");
     }
 
@@ -51,9 +51,9 @@ class ParserTest {
         LocalTime startTime = LocalTime.parse(startTimeString);
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
-        Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(event));
-        event = (Events) task;
+        Event event = new Event(taskName, startDate, startTime, endDate, endTime);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(event));
+        event = (Event) task;
         assertEquals(taskName, event.getTaskName(), "Task Name does not match");
     }
 
@@ -63,10 +63,10 @@ class ParserTest {
         LocalTime startTime = LocalTime.parse(startTimeString);
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
-        Events event = new Events(taskName, startDate, startTime, endDate, endTime);
+        Event event = new Event(taskName, startDate, startTime, endDate, endTime);
         event.markComplete();
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(event));
-        event = (Events) task;
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(event));
+        event = (Event) task;
         assertEquals(true, event.isComplete(), "Task not completed");
     }
 
@@ -76,9 +76,9 @@ class ParserTest {
         LocalTime startTime = LocalTime.parse(startTimeString);
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
-        Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(event));
-        event = (Events) task;
+        Event event = new Event(taskName, startDate, startTime, endDate, endTime);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(event));
+        event = (Event) task;
         assertEquals(startDateString, event.getStartDate(), "Start Date does not match");
     }
 
@@ -88,9 +88,9 @@ class ParserTest {
         LocalTime startTime = LocalTime.parse(startTimeString);
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
-        Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(event));
-        event = (Events) task;
+        Event event = new Event(taskName, startDate, startTime, endDate, endTime);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(event));
+        event = (Event) task;
         assertEquals(startTimeString, event.getStartTime(), "Start Time does not match");
     }
 
@@ -100,9 +100,9 @@ class ParserTest {
         LocalTime startTime = LocalTime.parse(startTimeString);
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
-        Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(event));
-        event = (Events) task;
+        Event event = new Event(taskName, startDate, startTime, endDate, endTime);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(event));
+        event = (Event) task;
         assertEquals(endDateString, event.getEndDate(), "End Date does not match");
     }
 
@@ -112,9 +112,9 @@ class ParserTest {
         LocalTime startTime = LocalTime.parse(startTimeString);
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
-        Events event = new Events(taskName, startDate, startTime, endDate, endTime);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(event));
-        event = (Events) task;
+        Event event = new Event(taskName, startDate, startTime, endDate, endTime);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(event));
+        event = (Event) task;
         assertEquals(endTimeString, event.getEndTime(), "End Time does not match");
     }
 
@@ -122,9 +122,9 @@ class ParserTest {
     public void parseDeadlineGetTaskName_equal() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
-        Deadlines deadline = new Deadlines(taskName, date, time);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(deadline));
-        deadline = (Deadlines) task;
+        Deadline deadline = new Deadline(taskName, date, time);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(deadline));
+        deadline = (Deadline) task;
         assertEquals(taskName, deadline.getTaskName(), "Task Name does not match");
     }
 
@@ -132,10 +132,10 @@ class ParserTest {
     public void parseDeadlineMarkComplete_success() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
-        Deadlines deadline = new Deadlines(taskName, date, time);
+        Deadline deadline = new Deadline(taskName, date, time);
         deadline.markComplete();
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(deadline));
-        deadline = (Deadlines) task;
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(deadline));
+        deadline = (Deadline) task;
         assertEquals(true, deadline.isComplete(), "Task not completed");
     }
 
@@ -143,9 +143,9 @@ class ParserTest {
     public void parseDeadlineGetDeadlineDate_equal() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
-        Deadlines deadline = new Deadlines(taskName, date, time);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(deadline));
-        deadline = (Deadlines) task;
+        Deadline deadline = new Deadline(taskName, date, time);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(deadline));
+        deadline = (Deadline) task;
         assertEquals(dateString, deadline.getDeadlineDate(), "Deadline Date does not match");
     }
 
@@ -153,9 +153,9 @@ class ParserTest {
     public void parseDeadlineGetDeadlineTime_equal() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
-        Deadlines deadline = new Deadlines(taskName, date, time);
-        Task task = Parser.parseStringToTask(Parser.convertTaskToString(deadline));
-        deadline = (Deadlines) task;
+        Deadline deadline = new Deadline(taskName, date, time);
+        Task task = Parser.convertStringToTask(Parser.convertTaskToString(deadline));
+        deadline = (Deadline) task;
         assertEquals(timeString, deadline.getDeadlineTime(), "Deadline Time does not match");
     }
 }

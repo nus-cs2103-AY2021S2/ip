@@ -58,7 +58,7 @@ public class TaskList {
      * @param search String to search.
      * @return Return list of task that contain search string.
      */
-    public List<Task> find(String search) {
+    public List<Task> findTasks(String search) {
         List<Task> foundTask = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getTaskName().contains(search)) {

@@ -6,7 +6,7 @@ import java.time.LocalTime;
 /**
  * Event Task Type
  */
-public class Events extends Task {
+public class Event extends Task {
     private LocalDate startDate;
     private LocalTime startTime;
     private LocalDate endDate;
@@ -16,7 +16,7 @@ public class Events extends Task {
      * Class constructor specifying the task description, event start date, event start time,
      * event end date, event end time.
      */
-    public Events(String name, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
+    public Event(String name, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
         super(name);
         this.startDate = startDate;
         this.startTime = startTime;
@@ -63,8 +63,8 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: "
-                + printDateFormat.format(startDate) + " " + printTimeFormat.format(startTime) + " to "
-                + printDateFormat.format(endDate) + " " + printTimeFormat.format(endTime) + ")";
+        String startDateTimeString = printDateFormat.format(startDate) + " " + printTimeFormat.format(startTime);
+        String endDateTimeString = printDateFormat.format(endDate) + " " + printTimeFormat.format(endTime);
+        return "[E]" + super.toString() + " (from: " + startDateTimeString + " to " + endDateTimeString+ ")";
     }
 }
