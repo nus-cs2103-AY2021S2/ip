@@ -72,7 +72,7 @@ public class TaskList {
             boolean isPresent = task.toLowerCase().contains(keyword.toLowerCase());
             if (isPresent) {
                 if (tracker == 0) {
-                    output = Ui.responseToFind() + "\n";
+                    output = Ui.respondToFind() + "\n";
                     tracker++;
                 }
                 output = output + task + "\n";
@@ -80,7 +80,7 @@ public class TaskList {
             }
         }
         if (numberOfMatches == 0) {
-            output = Ui.responseToNoMatches();
+            output = Ui.respondToNoMatches();
         }
         return output;
     }

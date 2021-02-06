@@ -2,6 +2,20 @@
  * Ui handles the interactions with the user.
  */
 public class Ui {
+
+    /**
+     * Prints the response depending on whether the list has 1 or more than 1 task.
+     * @param taskListSize Number of tasks in the list.
+     * @return A String depending on whether there is 1 task or more than 1 task.
+     */
+    public String printResponse(int taskListSize) {
+        if (taskListSize == 1) {
+            return "task";
+        } else {
+            return "tasks";
+        }
+    }
+
     /**
      * Creates the response after successfully adding a task.
      *
@@ -10,9 +24,9 @@ public class Ui {
      * @return A string including the acknowledgement of the new task, and the total
      * number of tasks in the list.
      */
-    public String responseToAddTask(Task task, int taskListSize) {
+    public String respondToAddTask(Task task, int taskListSize) {
         return "Done! One new task:\n" + task.toString() + "\nNow you have "
-                 + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list";
+                 + taskListSize + " " + printResponse(taskListSize) + " in the list";
     }
 
     /**
@@ -23,16 +37,16 @@ public class Ui {
      * @return A string including the deletion of the task, and the total
      * number of tasks in the list.
      */
-    public String responseToDelete(Task task, int taskListSize) {
+    public String respondToDelete(Task task, int taskListSize) {
         return "Noted, I've removed this task:\n" + task.toString()
-                 + "\nNow you have " + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list";
+                 + "\nNow you have " + taskListSize + " " + printResponse(taskListSize) + " in " + "the list";
     }
 
     /**
      * Creates the response after user inputs 'bye'.
      * @return A string.
      */
-    public String responseToBye() {
+    public String respondToBye() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -43,7 +57,7 @@ public class Ui {
      * @param taskListSize Number of tasks in the TaskList.
      * @return A string, depending on whether the list is empty.
      */
-    public String responseToList(int taskListSize) {
+    public String respondToList(int taskListSize) {
         if (taskListSize != 0) {
             return "Here are the tasks in your list:";
         } else {
@@ -57,7 +71,7 @@ public class Ui {
      * @param task Task that was marked completed.
      * @return A string.
      */
-    public String responseToDone(Task task) {
+    public String respondToDone(Task task) {
         return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
@@ -65,7 +79,7 @@ public class Ui {
      * Creates the response after successfully finding matching tasks.
      * @return A string.
      */
-    public static String responseToFind() {
+    public static String respondToFind() {
         return "Here are the matching tasks in your list:";
     }
 
@@ -73,7 +87,7 @@ public class Ui {
      * Creates the response after being unable to find any matching tasks.
      * @return A string.
      */
-    public static String responseToNoMatches() {
+    public static String respondToNoMatches() {
         return "There are no matching tasks! Time to add one!";
     }
 

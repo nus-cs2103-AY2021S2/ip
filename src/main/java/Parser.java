@@ -6,6 +6,9 @@ import java.time.LocalDate;
  */
 public class Parser {
 
+    public static final int INDEX_OFFSET = 1;
+    public static final int OFFSET_TO_NEXT_REQUIRED_DATA = 4;
+
     protected Storage storage;
     protected TaskList tasks;
     protected Ui ui;
@@ -33,12 +36,12 @@ public class Parser {
      * to the file in the hard disk.
      */
     public String handleToDo() throws IOException {
-        String descriptionTask = command.substring(index + 1);
+        String descriptionTask = command.substring(index + INDEX_OFFSET);
         ToDo newToDo = new ToDo(descriptionTask);
 
         tasks.add(newToDo);
         storage.addTask(newToDo);
-        return ui.responseToAddTask(newToDo, tasks.getSize());
+        return ui.respondToAddTask(newToDo, tasks.getSize());
     }
 
     /**
@@ -47,13 +50,13 @@ public class Parser {
     public String handleDeadline() {
         try {
             Validation.checkForSchedule(command, findSlash);
-            String descriptionDeadline = command.substring(index + 1, findSlash - 1);
-            LocalDate date = DateValidation.handleDate(command.substring(findSlash + 4));
+            String descriptionDeadline = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
+            LocalDate date = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
             Deadline newDeadline = new Deadline(descriptionDeadline, date);
 
             tasks.add(newDeadline);
             storage.addTask(newDeadline);
-            return ui.responseToAddTask(newDeadline, tasks.getSize());
+            return ui.respondToAddTask(newDeadline, tasks.getSize());
 
         } catch (DukeException | IOException e) {
             return e.toString();
@@ -66,13 +69,13 @@ public class Parser {
     public String handleEvent() {
         try {
             Validation.checkForSchedule(command, findSlash);
-            String descriptionEvent = command.substring(index + 1, findSlash - 1);
-            String time = command.substring(findSlash + 4);
+            String descriptionEvent = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
+            String time = command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA);
             Event newEvent = new Event(descriptionEvent, time);
 
             tasks.add(newEvent);
             storage.addTask(newEvent);
-            return ui.responseToAddTask(newEvent, tasks.getSize());
+            return ui.respondToAddTask(newEvent, tasks.getSize());
 
         } catch (DukeException | IOException e) {
             return e.toString();
@@ -84,12 +87,12 @@ public class Parser {
      */
     public String handleDone() {
         try {
-            taskIdentifier = Integer.parseInt(command.substring(index + 1));
+            taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
             Validation.checkValidRange(tasks.getSize(), taskIdentifier);
-            Task toMark = tasks.find(taskIdentifier - 1);
+            Task toMark = tasks.find(taskIdentifier - INDEX_OFFSET);
 
             storage.markTask(toMark);
-            return ui.responseToDone(toMark);
+            return ui.respondToDone(toMark);
 
         } catch (DukeException | IOException e) {
             return e.toString();
@@ -101,13 +104,13 @@ public class Parser {
      */
     public String handleDelete() {
         try {
-            taskIdentifier = Integer.parseInt(command.substring(index + 1));
+            taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
             Validation.checkValidRange(tasks.getSize(), taskIdentifier);
-            Task selected = tasks.find(taskIdentifier - 1);
+            Task selected = tasks.find(taskIdentifier - INDEX_OFFSET);
 
-            tasks.delete(taskIdentifier - 1);
+            tasks.delete(taskIdentifier - INDEX_OFFSET);
             storage.deleteTask(selected);
-            return ui.responseToDelete(selected, tasks.getSize());
+            return ui.respondToDelete(selected, tasks.getSize());
 
         } catch (DukeException | IOException e) {
             return e.toString();
@@ -118,7 +121,7 @@ public class Parser {
      * Handles the Find command.
      */
     public String handleFind() {
-        String keyword = command.substring(index + 1);
+        String keyword = command.substring(index + INDEX_OFFSET);
         return tasks.findWithKeyword(keyword);
     }
 
@@ -164,10 +167,10 @@ public class Parser {
             } else {
                 switch (command) {
                 case "bye":
-                    output = ui.responseToBye();
+                    output = ui.respondToBye();
                     break;
                 case "list":
-                    output = ui.responseToList(tasks.getSize()) + "\n" + tasks.list();
+                    output = ui.respondToList(tasks.getSize()) + "\n" + tasks.list();
                     break;
                 default:
                     break;

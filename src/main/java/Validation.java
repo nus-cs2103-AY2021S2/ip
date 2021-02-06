@@ -30,11 +30,10 @@ public class Validation {
             String[] secondValidation = new String[] {"todo", "deadline", "event", "done", "delete", "find"};
             List<String> secondListOfCommands = Arrays.asList(secondValidation);
 
-            if (secondListOfCommands.contains(first.toLowerCase())) {
-                if (index <= -1 || command.substring(index).isBlank()) {
-                    throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete/find "
-                             + "cannot be empty!!");
-                }
+            if (secondListOfCommands.contains(first.toLowerCase())
+                    && (index <= -1 || command.substring(index).isBlank())) {
+                throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete/find "
+                            + "cannot be empty!!");
             }
         }
     }

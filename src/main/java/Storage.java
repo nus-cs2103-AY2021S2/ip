@@ -75,7 +75,7 @@ public class Storage {
             try {
                 contents = new Scanner((this.localFile));
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                e.toString();
             }
 
             while (contents.hasNext()) {

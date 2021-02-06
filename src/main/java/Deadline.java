@@ -10,7 +10,9 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
+    static final String DATE_FORMAT = "MMM dd yyyy";
     protected LocalDate by;
+
 
     /**
      * Creates a Deadline with the description and date by which the task should be completed.
@@ -30,7 +32,7 @@ public class Deadline extends Task {
      * @return A String representing the date in the new format.
      */
     public String parseDate(LocalDate date) {
-        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
 
     }
 

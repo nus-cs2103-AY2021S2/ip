@@ -7,6 +7,8 @@ import java.time.format.DateTimeParseException;
  */
 public class DateValidation {
 
+    static final String DATE_FORMAT = "MMM dd yyyy";
+
     /**
      * Checks if the input is in the correct format of "yyyy-mm-dd".
      *
@@ -31,7 +33,7 @@ public class DateValidation {
      * @return A LocalDate object created.
      */
     public LocalDate convertDate(String date) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_FORMAT);
         LocalDate createDate = LocalDate.parse(date, format);
         return createDate;
 
