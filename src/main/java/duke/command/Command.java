@@ -1,4 +1,11 @@
+package duke.command;
+
 import java.io.IOException;
+
+import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
 
 public abstract class Command {
 

@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents an exception for <code>Duke</code>.
  */

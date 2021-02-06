@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents the different task types available.
  */
