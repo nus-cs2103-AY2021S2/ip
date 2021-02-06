@@ -59,7 +59,7 @@ public class Chatbot {
             Command command = parser.parseStringToCommand(taskTypeSplit);
             switch (command) {
             case LIST:
-                return handleListCommand();
+                return handleListCommand(input);
             case DONE:
                 return handleDoneCommand(input);
             case DELETE:
@@ -89,7 +89,11 @@ public class Chatbot {
      * @return reply message from Duke
      * @throws DukeException no task in the list
      */
-    public String handleListCommand() throws DukeException {
+    public String handleListCommand(String input) throws DukeException {
+        String[] taskTypeSplit = input.split(" ");
+        if (taskTypeSplit.length > 1) {
+            throw new DukeException("List command doesn't have parameter.");
+        }
         return Printer.printTaskList(tasks.getTaskList());
     }
 
