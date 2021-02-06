@@ -1,8 +1,3 @@
 todo hello
-event hello /at 2020-08-15
-deadline bye /by 2019-04-16
-list
+todo hello 2
 done 2
-done 3
-list
-save

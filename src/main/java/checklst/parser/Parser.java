@@ -23,12 +23,13 @@ public class Parser {
      * @return Response String. 
      */
     public String parse(String[] input, Ui ui, TaskList taskList, Storage storage) {
-        storage.addCommand(input);
         String output = "";
+        boolean addCommand = true;
         try {
             switch (input[0]) {
             case "list":
                 output = ui.sendOutput(taskList.toString());
+                addCommand = false;
                 break;
             case "done":
                 int doneIndex = Integer.parseInt(input[1]);
@@ -53,16 +54,22 @@ public class Parser {
             case "save":
                 storage.saveToFile();
                 output = ui.sendOutput("History sucessfully saved!");
+                addCommand = false;
                 break;
             case "find":
                 output = ui.sendOutput("Here are the matching tasks in your list!\n\t" + taskList.findTask(input[1]));
+                addCommand = false;
                 break;
             default:
                 throw new ChecklstException("Sorry I didn't understand that command!!");
             }
         } catch (ChecklstException e) {
-            storage.removeLastCommand(); // Remove invalid commands
+            addCommand = false;
             output = ui.sendOutput(e.getMessage());
+        }
+
+        if (addCommand) {
+            storage.addCommand(input);
         }
         return output;
     }
@@ -72,8 +79,10 @@ public class Parser {
      * but without ui output or storage.
      * @param input Input string.
      * @param taskList TaskList instance for manipulating tasks.
+     * @param storage Storage instance for saving of commands.
      */
-    public void parseHistoryCommand(String[] input, TaskList taskList) {
+    public void parseHistoryCommand(String[] input, TaskList taskList, Storage storage) {
+        storage.addCommand(input);
         try {
             switch (input[0]) {
             case "done":
