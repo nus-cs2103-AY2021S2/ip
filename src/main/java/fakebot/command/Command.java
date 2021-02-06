@@ -32,27 +32,27 @@ public class Command {
     }
 
     /**
-     * Returns Command Type.
+     * Returns command cype.
      *
-     * @return CommandType of the Command.
+     * @return a CommandType of the command.
      */
     public CommandType getCommand() {
         return type;
     }
 
     /**
-     * Returns Command Descriptions.
+     * Returns command descriptions.
      *
-     * @return Descriptions of the Command.
+     * @return a string containing descriptions of the command.
      */
     public String[] getDescriptions() {
         return descriptions;
     }
 
     /**
-     * Returns Command Description.
+     * Returns command description.
      *
-     * @return Description of the Command.
+     * @return a string containing description of the command.
      */
     public String getDescription() {
         return descriptions[0];

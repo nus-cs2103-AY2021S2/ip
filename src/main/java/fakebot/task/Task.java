@@ -3,7 +3,7 @@ package fakebot.task;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Abstract Task Class.
+ * Abstract task class.
  */
 public abstract class Task {
     protected String taskName;
@@ -30,25 +30,25 @@ public abstract class Task {
     }
 
     /**
-     * Returns Task Name.
+     * Returns task name.
      *
-     * @return Task Name.
+     * @return task name.
      */
     public String getTaskName() {
         return taskName;
     }
 
     /**
-     * Marks Task as Complete.
+     * Marks task as complete.
      */
     public void markComplete() {
         isComplete = true;
     }
 
     /**
-     * Returns if Task is Complete.
+     * Returns if task is complete.
      *
-     * @return If Task is Complete.
+     * @return true if task is complete.
      */
     public boolean isComplete() {
         return isComplete;

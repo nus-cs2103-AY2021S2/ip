@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * TaskList Class use to store Task
+ * TaskList class use to store task
  */
 public class TaskList {
     private List<Task> tasks;
@@ -17,10 +17,10 @@ public class TaskList {
     }
 
     /**
-     * Returns Task at Index i.
+     * Returns task at index i.
      *
-     * @param i Index of Task.
-     * @return Return Task.
+     * @param i index of the task.
+     * @return a task.
      */
     public Task getTask(int i) {
         return tasks.get(i);
@@ -29,16 +29,16 @@ public class TaskList {
     /**
      * Adds task to task list.
      *
-     * @param task Task to add to TaskList.
+     * @param task to add to list.
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Removes Task index i.
+     * Removes task index i.
      *
-     * @param i Index of Task to be removed.
+     * @param i Index of task to be removed.
      */
     public void removeTask(int i) {
         tasks.remove(i);
@@ -47,7 +47,7 @@ public class TaskList {
     /**
      * Returns size of task list.
      *
-     * @return Return Size of Task List.
+     * @return the size of task list.
      */
     public int getSize() {
         return tasks.size();
@@ -56,8 +56,8 @@ public class TaskList {
     /**
      * Finds all task that contain search string.
      *
-     * @param search String to search.
-     * @return Return list of task that contain search string.
+     * @param search a string to be search.
+     * @return a list of task that contain search string.
      */
     public List<Task> findTasks(String search) {
         return tasks.stream()

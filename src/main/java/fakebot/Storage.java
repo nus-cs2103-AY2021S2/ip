@@ -34,10 +34,10 @@ public class Storage {
     }
 
     /**
-     * Creates Directory if file path doesn't exist.
+     * Creates directory if file path doesn't exist.
      *
      * @param filePath path of file.
-     * @return Return path created, return empty path if path is invalid.
+     * @return a path created, return empty path if path is invalid.
      */
     private String createDirectory(String filePath) {
         File file = new File(filePath);
@@ -52,7 +52,7 @@ public class Storage {
     }
 
     /**
-     * Writes Tasks to File.
+     * Writes tasks to file.
      *
      * @param taskList Tasks to write to file.
      */
@@ -66,7 +66,7 @@ public class Storage {
     }
 
     /**
-     * Writes String to File.
+     * Writes string to file.
      *
      * @param textToAdd write text to file.
      */
@@ -77,9 +77,9 @@ public class Storage {
     }
 
     /**
-     * Reads Task from File.
+     * Reads task from file.
      *
-     * @return Return list of task read from File.
+     * @return a list of task read from file.
      */
     public List<Task> tryReadTaskFile() {
         List<Task> taskList = new ArrayList<Task>();
@@ -93,9 +93,9 @@ public class Storage {
     }
 
     /**
-     * Reads String from File.
+     * Reads string from file.
      *
-     * @return Return list of string read from File.
+     * @return a list of string read from file.
      */
     private List<String> readFile() throws FileNotFoundException {
         List<String> stringList = new ArrayList<String>();

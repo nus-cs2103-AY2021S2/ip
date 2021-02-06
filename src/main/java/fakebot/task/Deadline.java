@@ -21,18 +21,18 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns Task Deadline Date.
+     * Returns task deadline date.
      *
-     * @return Return Deadline Date as String.
+     * @return an string containing deadline time.
      */
     public String getDeadlineDate() {
         return saveDateFormat.format(deadlineDate);
     }
 
     /**
-     * Returns Task Deadline Time.
+     * Returns task deadline time.
      *
-     * @return Return Deadline Time as String.
+     * @return an string containing deadline time.
      */
     public String getDeadlineTime() {
         return saveTimeFormat.format(deadlineTime);

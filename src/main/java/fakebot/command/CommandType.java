@@ -1,4 +1,5 @@
 package fakebot.command;
+
 /**
  * Command Type Enum.
  */

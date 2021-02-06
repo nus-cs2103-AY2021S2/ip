@@ -28,7 +28,7 @@ public class DialogBox extends HBox {
     /**
      * Constructors for DialogBox specifying label and image view
      *
-     * @param l text to be display
+     * @param l  text to be display
      * @param iv user profile image to be display
      */
     public DialogBox(Label l, ImageView iv) {
@@ -71,7 +71,8 @@ public class DialogBox extends HBox {
 
     /**
      * Returns dialog box for user
-     * @param l text of user
+     *
+     * @param l  text of user
      * @param iv imageView of user
      * @return Returns dialog box of the user
      */
@@ -82,7 +83,8 @@ public class DialogBox extends HBox {
 
     /**
      * Returns dialog box for fakebot
-     * @param l text of fakebot
+     *
+     * @param l  text of fakebot
      * @param iv imageView of fakebot
      * @return Returns dialog box of the fakebot
      */

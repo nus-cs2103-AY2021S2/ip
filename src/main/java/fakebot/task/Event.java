@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Event Task Type
+ * Event task type
  */
 public class Event extends Task {
     private LocalDate startDate;
@@ -25,36 +25,36 @@ public class Event extends Task {
     }
 
     /**
-     * Returns Task Start Date.
+     * Returns task start date.
      *
-     * @return Return Start Date as String.
+     * @return an string containing start date.
      */
     public String getStartDate() {
         return saveDateFormat.format(startDate);
     }
 
     /**
-     * Returns Task Start Time.
+     * Returns task start time.
      *
-     * @return Return Start Time as String.
+     * @return an string containing start time.
      */
     public String getStartTime() {
         return saveTimeFormat.format(startTime);
     }
 
     /**
-     * Returns Task End Date.
+     * Returns task end date.
      *
-     * @return Return End Date as String.
+     * @return an string containing end date.
      */
     public String getEndDate() {
         return saveDateFormat.format(endDate);
     }
 
     /**
-     * Returns Task End Time.
+     * Returns task end time.
      *
-     * @return Return End Time as String.
+     * @return an string containing end time.
      */
     public String getEndTime() {
         return saveTimeFormat.format(endTime);
@@ -65,6 +65,6 @@ public class Event extends Task {
     public String toString() {
         String startDateTimeString = printDateFormat.format(startDate) + " " + printTimeFormat.format(startTime);
         String endDateTimeString = printDateFormat.format(endDate) + " " + printTimeFormat.format(endTime);
-        return "[E]" + super.toString() + " (from: " + startDateTimeString + " to " + endDateTimeString+ ")";
+        return "[E]" + super.toString() + " (from: " + startDateTimeString + " to " + endDateTimeString + ")";
     }
 }

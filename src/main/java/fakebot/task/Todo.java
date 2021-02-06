@@ -1,4 +1,5 @@
 package fakebot.task;
+
 /**
  * ToDos Task Type
  */

@@ -15,7 +15,7 @@ import fakebot.task.TaskList;
 import fakebot.task.Todo;
 
 /**
- * Parser class use for processing syntax
+ * Parser class use for processing syntax.
  */
 public class Parser {
 
@@ -42,10 +42,10 @@ public class Parser {
     }
 
     /**
-     * Converts Task to String.
+     * Converts task to string.
      *
      * @param stringList List of string to be converted to string.
-     * @return Return string.
+     * @return a string containing string converted from string list.
      */
     public static String convertStringListToString(List<String> stringList) {
         StringBuilder builder = new StringBuilder();
@@ -57,33 +57,32 @@ public class Parser {
     }
 
     /**
-     * Converts Task to String.
+     * Converts task to string.
      *
      * @param task Task to be parsed to string.
-     * @return Return parsed Task.
+     * @return a string containing parsed task.
      */
     public static String convertTaskToString(Task task) {
-        StringBuilder stringBuilder = new StringBuilder();
         if (task instanceof Todo) {
             Todo todo = (Todo) task;
-            stringBuilder.append(convertTodoToString(todo));
+            return convertTodoToString(todo);
         } else if (task instanceof Event) {
             Event event = (Event) task;
-            stringBuilder.append(convertEventToString(event));
+            return convertEventToString(event);
         } else if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
-            stringBuilder.append(convertDeadlineToString(deadline));
+            return convertDeadlineToString(deadline);
         } else {
             assert false : "Task being handle should be handle";
+            return null;
         }
-        return stringBuilder.toString();
     }
 
     /**
-     * Converts Todo to String.
+     * Converts Todo to string.
      *
      * @param todo Todo to be parsed to string.
-     * @return Return parsed Todo.
+     * @return a string containing parsed todo.
      */
     private static String convertTodoToString(Todo todo) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -96,10 +95,10 @@ public class Parser {
     }
 
     /**
-     * Converts Event to String.
+     * Converts Event to string.
      *
-     * @param event Event to be parsed to string.
-     * @return Return parsed Event.
+     * @param event to be parsed to string.
+     * @return a string containing parsed event.
      */
     private static String convertEventToString(Event event) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -120,10 +119,10 @@ public class Parser {
     }
 
     /**
-     * Converts Deadline to String.
+     * Converts Deadline to string.
      *
-     * @param deadline Deadline to be parsed to string.
-     * @return Return parsed Deadline.
+     * @param deadline to be parsed to string.
+     * @return a string containing parsed Deadline.
      */
     private static String convertDeadlineToString(Deadline deadline) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -140,10 +139,10 @@ public class Parser {
     }
 
     /**
-     * Converts List of Task to List of String.
+     * Converts list of task to list of string.
      *
      * @param taskList string of list.
-     * @return Return list of String parsed from list of Task.
+     * @return a list of String parsed from list of task.
      */
     public static List<String> convertTasksToStrings(TaskList taskList) {
         List<String> strings = new ArrayList<String>();
@@ -156,10 +155,10 @@ public class Parser {
     }
 
     /**
-     * Converts String to Task.
+     * Converts string to task.
      *
-     * @param string Parsed Task.
-     * @return Return task parsed from string.
+     * @param string parsed task.
+     * @return a task parsed from string.
      */
     public static Task convertStringToTask(String string) {
         String[] parts = string.split(SPLIT_REGEX);
@@ -188,10 +187,10 @@ public class Parser {
     }
 
     /**
-     * Converts List of String to List of Task.
+     * Converts list of string to list of task.
      *
      * @param stringList string of list.
-     * @return Return list of Task parsed from list of string.
+     * @return a list of task parsed from list of string.
      */
     public static List<Task> convertStringsToTasks(List<String> stringList) {
         List<Task> tasks = new ArrayList<Task>();
@@ -203,11 +202,11 @@ public class Parser {
     }
 
 
-
     /**
-     * Returns Standard Print Message.
+     * Returns standard print message.
      *
-     * @param message Message to print.
+     * @param message to print.
+     * @return a string containing print message.
      */
     public static String getBotMPrintMessage(String message) {
         String printMessage = DIVIDER + message + "\n" + DIVIDER;
@@ -215,10 +214,11 @@ public class Parser {
     }
 
     /**
-     * Returns List of String Print Message.
+     * Returns list of string print message.
      *
-     * @param startingMessage Starting message to print before the list.
-     * @param messages        List of String to print.
+     * @param startingMessage to print before the list.
+     * @param messages        list of string to print.
+     * @return a string containing print message.
      */
     public static String getStringListPrintMessage(String startingMessage, List<String> messages) {
         StringBuilder printMessage = new StringBuilder(DIVIDER);
@@ -234,9 +234,10 @@ public class Parser {
     }
 
     /**
-     * Returns List of Task Print Message.
+     * Returns list of task print message.
      *
-     * @param taskList List of Task to convert.
+     * @param taskList list of task to convert.
+     * @return a string containing print message.
      */
     public static String getTaskListPrintMessage(TaskList taskList) {
         List<String> messages = new ArrayList<>();
@@ -248,21 +249,22 @@ public class Parser {
 
 
     /**
-     * Parses User Input to Command.
+     * Parses user input to command.
      *
-     * @param command Command String that is yet to be parsed.
+     * @param command user input to be parsed.
+     * @return a command.
      */
     public static Command parseUserInputToCommand(String command) throws CommandException {
-        if(isCommandWithoutDescription(command)) {
+        if (isCommandWithoutDescription(command)) {
             return parseCommandWithoutDescription(command);
         }
 
         int firstSplit = command.indexOf(' ');
         //Command with description should contain at least one space
         if (firstSplit < 0) {
-            if(isCommandWithDescription(command)) {
+            if (isCommandWithDescription(command)) {
                 throw new CommandException("OOPS!!! The description of a " + command + " cannot be empty.");
-            }else if (isCommandWithIndexDescription(command)) {
+            } else if (isCommandWithIndexDescription(command)) {
                 throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
             }
             throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -271,10 +273,10 @@ public class Parser {
         String commandName = command.substring(0, firstSplit);
         String description = command.substring(firstSplit + 1);
 
-        if(isCommandWithIndexDescription(commandName)) {
+        if (isCommandWithIndexDescription(commandName)) {
             return parseCommandWithIndexDescription(commandName, description);
         }
-        if(isCommandWithDescription(commandName)) {
+        if (isCommandWithDescription(commandName)) {
             return parseCommandWithDescription(commandName, description);
         }
 
@@ -283,8 +285,9 @@ public class Parser {
 
     /**
      * Check if the command need a description.
-     * @param command Command String to be checked.
-     * @return Returns true if the command do not need a description.
+     *
+     * @param command a string to be checked.
+     * @return true if the command do not need a description.
      */
     private static Boolean isCommandWithoutDescription(String command) {
         if (command.equals(EXIT_COMMAND)) {
@@ -297,15 +300,16 @@ public class Parser {
 
     /**
      * parse the command that do not need description to Command class.
-     * @param command Command String that do not need description.
-     * @return Return Command.
+     *
+     * @param command a string that do not need description.
+     * @return a command.
      */
     private static Command parseCommandWithoutDescription(String command) {
         if (command.equals(EXIT_COMMAND)) {
             return new Command(CommandType.BYE);
         } else if (command.equals(LIST_COMMAND)) {
             return new Command(CommandType.LIST);
-        }else {
+        } else {
             assert false : "Invalid calling of parse command without description";
             return null;
         }
@@ -313,8 +317,9 @@ public class Parser {
 
     /**
      * Check if the command need a index description.
-     * @param command Command String to be checked.
-     * @return Returns true if the command do not need a description.
+     *
+     * @param command a string to be checked.
+     * @return true if the command do not need a description.
      */
     private static Boolean isCommandWithIndexDescription(String command) {
         boolean isCommandWithIndexDescription = command.equals(DONE_COMMAND) || command.equals(DELETE_COMMAND);
@@ -322,11 +327,13 @@ public class Parser {
     }
 
     /**
-     * Parses the command that need a index description to Command class.
-     * @param command Command String that need a index description.
-     * @return Return Command that need a index description.
+     * Parses the command that need a index description to command class.
+     *
+     * @param command a string that need a index description.
+     * @return a command that need a index description.
      */
-    private static Command parseCommandWithIndexDescription(String command, String description) throws CommandException {
+    private static Command parseCommandWithIndexDescription(String command, String description)
+            throws CommandException {
         if (description.isEmpty()) {
             throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
         }
@@ -342,7 +349,7 @@ public class Parser {
 
         } else if (command.equals(DELETE_COMMAND)) {
             return new Command(CommandType.DELETE, description);
-        }else {
+        } else {
             assert false : "Invalid calling of parse command with index description";
             return null;
         }
@@ -350,8 +357,9 @@ public class Parser {
 
     /**
      * Check if the command need a description.
-     * @param command Command String to be checked.
-     * @return Returns true if the command do need a description.
+     *
+     * @param command a String to be checked.
+     * @return true if the command do need a description.
      */
     private static Boolean isCommandWithDescription(String command) {
         boolean isCommandWithDescription = command.equals(TODO_COMMAND) || command.equals(EVENT_COMMAND)
@@ -360,10 +368,11 @@ public class Parser {
     }
 
     /**
-     * Parses the command that need a description to Command class.
-     * @param command Command name.
-     * @param description Command description.
-     * @return Return Command that need a description.
+     * Parses the command that need a description to command class.
+     *
+     * @param command     the name.
+     * @param description the description.
+     * @return a command that need a description.
      */
     private static Command parseCommandWithDescription(String command, String description) throws CommandException {
         if (description.isEmpty()) {
@@ -377,7 +386,7 @@ public class Parser {
             return parseDeadlineCommand(description);
         } else if (command.equals(EVENT_COMMAND)) {
             return parseEventCommand(description);
-        }else {
+        } else {
             assert false : "Invalid calling of parse command with description";
             return null;
         }
@@ -385,27 +394,30 @@ public class Parser {
 
 
     /**
-     * Parses todo command
+     * Parses todo command.
+     *
      * @param description Command description.
-     * @return Return Todo command.
+     * @return a Todo command.
      */
     private static Command parseTodoCommand(String description) {
         return new Command(CommandType.TODO, description);
     }
 
     /**
-     * Parses find command
+     * Parses find command.
+     *
      * @param description Command description.
-     * @return Return Find command.
+     * @return a Find command.
      */
     private static Command parseFindCommand(String description) {
         return new Command(CommandType.FIND, description);
     }
 
     /**
-     * Parses event command
+     * Parses event command.
+     *
      * @param description Command description.
-     * @return Return Event command.
+     * @return an Event command.
      */
     private static Command parseEventCommand(String description) throws CommandException {
         if (!description.contains(EVENT_SPLIT_REGEX)) {
@@ -428,8 +440,9 @@ public class Parser {
 
     /**
      * Parses deadline command.
+     *
      * @param description Command description.
-     * @return Return Deadline command.
+     * @return a Deadline command.
      */
     private static Command parseDeadlineCommand(String description) throws CommandException {
         if (!description.contains(DEADLINE_SPLIT_REGEX)) {

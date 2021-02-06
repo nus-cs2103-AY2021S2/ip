@@ -46,16 +46,16 @@ public class FakeBot {
     }
 
     /**
-     * Saves History to Storage.
+     * Saves history to storage.
      */
     public void saveHistory() {
         storage.writeTasksToFile(taskList);
     }
 
     /**
-     * Returns Hello Message used at the start of the project.
+     * Returns hello message used at the start of the project.
      *
-     * @return Returns Hello Message
+     * @return hello message.
      */
     public String getHelloMessage() {
         return Parser.getBotMPrintMessage("Hello from\n" + LOGO + "What can I do for you?");
@@ -64,8 +64,8 @@ public class FakeBot {
     /**
      * Returns message to show that the task is done.
      *
-     * @param task Task to print.
-     * @return Returns Done Message
+     * @param task to print.
+     * @return a string containing resulted from done.
      */
     public String getDoneMessage(Task task) {
         return Parser.getBotMPrintMessage("Nice! I've marked this task as done:\n " + task.toString());
@@ -75,8 +75,8 @@ public class FakeBot {
     /**
      * Returns message to show that the task is deleted and print the remaining number of task left.
      *
-     * @param task Deleted Task.
-     * @return Returns Delete Message
+     * @param task deleted Task.
+     * @return a string containing resulted from deleting.
      */
     public String getDeleteMessage(Task task) {
         return Parser.getBotMPrintMessage("Noted. I've removed this task:\n " + task.toString()
@@ -86,8 +86,8 @@ public class FakeBot {
     /**
      * Returns message to show that the task is deleted and print the remaining number of task left.
      *
-     * @param task Added Task.
-     * @return Returns Added Task Message
+     * @param task added Task.
+     * @return a string containing resulted from adding.
      */
     public String getAddedTaskMessage(Task task) {
         return Parser.getBotMPrintMessage("Got it. I've added this task: \n  " + task.toString()
@@ -95,11 +95,11 @@ public class FakeBot {
     }
 
     /**
-     * Process Command given by user.
+     * Process command given by user.
      * Returns process command result message
      *
-     * @param command Total number of Task Left.
-     * @return Returns process command result message
+     * @param command to be processed.
+     * @return a string containing resulted from the process.
      */
     public String processCommand(Command command) throws CommandException {
         switch (command.getCommand()) {
@@ -128,10 +128,10 @@ public class FakeBot {
     }
 
     /**
-     * Process Done Command.
+     * Process done command.
      *
-     * @param command Command to Process.
-     * @return Returns process Done command result message
+     * @param command to be process.
+     * @return a string containing resulted from the process.
      */
     private String processDoneCommand(Command command) throws CommandException {
         int doneIndex = Integer.parseInt(command.getDescription()) - 1;
@@ -145,10 +145,10 @@ public class FakeBot {
     }
 
     /**
-     * Process Todos Command.
+     * Process todo command.
      *
-     * @param command Command to Process.
-     * @return Returns process ToDos command result message
+     * @param command to be process.
+     * @return a string containing resulted from the process.
      */
     private String processTodoCommand(Command command) {
         Todo todoTask = new Todo(command.getDescription());
@@ -158,10 +158,10 @@ public class FakeBot {
     }
 
     /**
-     * Process Deadline Command.
+     * Process deadline command.
      *
-     * @param command Command to Process.
-     * @return Returns process Deadline command result message
+     * @param command to be process.
+     * @return a string containing resulted from the process.
      */
     private String processDeadlineCommand(Command command) {
         String[] deadlineDetails = command.getDescriptions();
@@ -175,10 +175,10 @@ public class FakeBot {
     }
 
     /**
-     * Process Event Command.
+     * Process event command.
      *
-     * @param command Command to Process.
-     * @return Returns process Event command result message
+     * @param command to be process.
+     * @return a string containing resulted from the process.
      */
     private String processEventCommand(Command command) {
         String[] eventDetails = command.getDescriptions();
@@ -194,11 +194,12 @@ public class FakeBot {
     }
 
     /**
-     * Process Delete Command.
+     * Process delete command.
      *
-     * @param command Command to Process.
+     * @param command to be process.
+     * @return a string containing resulted from the process.
      */
-    private String processDeleteCommand(Command command) throws CommandException{
+    private String processDeleteCommand(Command command) throws CommandException {
         int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
         boolean isIndexOutOfRange = deleteIndex >= taskList.getSize() || deleteIndex < 0;
         if (isIndexOutOfRange) {

@@ -33,7 +33,7 @@ public class Ui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    AnchorPane mainLayout;
+    private AnchorPane mainLayout;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Logo.png"));
     private Image fakeBotImage = new Image(this.getClass().getResourceAsStream("/images/wolf.png"));
@@ -53,8 +53,8 @@ public class Ui extends Application {
     @Override
     public void start(Stage stage) {
         setupRequiredComponents();
-        FormateWindow(stage);
-        AddListener();
+        formateWindow(stage);
+        addListener();
 
         //Creating hello text
         addTextToContainer(fakeBot.getHelloMessage());
@@ -64,7 +64,7 @@ public class Ui extends Application {
     }
 
     /**
-     * setup required Ui components.
+     * Setup required Ui components.
      */
     private void setupRequiredComponents() {
         //Setting up required components
@@ -82,9 +82,9 @@ public class Ui extends Application {
     }
 
     /**
-     * Add Event Listener.
+     * Add event listener.
      */
-    private void AddListener() {
+    private void addListener() {
         //Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput(userInput.getText());
@@ -101,11 +101,11 @@ public class Ui extends Application {
     }
 
     /**
-     * Formates the window to look as expected.
-     * 
-     * @param stage Window Stage.
+     * Format the window to look as expected.
+     *
+     * @param stage window stage.
      */
-    private void FormateWindow(Stage stage) {
+    private void formateWindow(Stage stage) {
         stage.setTitle("FakeBot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -132,13 +132,14 @@ public class Ui extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
     /**
-     * Handle User Input.
-     * @param userInput User Input String.
+     * Handle user input.
+     *
+     * @param userInput yser input string.
      */
     private void handleUserInput(String userInput) {
         Command command;
@@ -161,12 +162,12 @@ public class Ui extends Application {
     /**
      * Creates a label with the specified text and adds it to the dialog container.
      *
-     * @param text String containing text to add
+     * @param text string containing text to add.
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
-        textToAdd.setFont(Font.font ("Courier New", 12));
+        textToAdd.setFont(Font.font("Courier New", 12));
         textToAdd.setWrapText(true);
 
         return textToAdd;
@@ -174,9 +175,9 @@ public class Ui extends Application {
 
 
     /**
-     * Add text to container
+     * Add text to container.
      *
-     * @param text text to be add to Container
+     * @param text text to be add to container.
      */
     private void addTextToContainer(String text) {
         Label userText = getDialogLabel(text);
@@ -184,10 +185,10 @@ public class Ui extends Application {
     }
 
     /**
-     * Add text to container
+     * Add text to container.
      *
-     * @param inputText inputText to be add to Container
-     * @param outputText outputText to be add to Container
+     * @param inputText  inputText to be add to container.
+     * @param outputText outputText to be add to container.
      */
     private void addTextToContainer(String inputText, String outputText) {
 
