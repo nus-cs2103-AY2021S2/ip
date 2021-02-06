@@ -16,11 +16,11 @@ public class TaskList {
      * Creates a new TaskList, which stores the tasks. This class provides some abstraction for the underlying
      * ArrayList<Task
      *
-     * @param load given the raw strings from the storage file, we create the tasks
+     * @param stringsToLoad: given the raw strings from the storage file, we create the tasks
      */
-    public TaskList(List<String> load) {
+    public TaskList(List<String> stringsToLoad) {
         this.tasklist = new ArrayList<>();
-        for (String s : load) {
+        for (String s : stringsToLoad) {
             String[] sorted = s.split("\u001E");
             Boolean isDone = sorted[1].equals("T");
             try {
@@ -61,7 +61,7 @@ public class TaskList {
     /**
      * Get corresponds to the equivalent operation in the ArrayList object
      *
-     * @param i the index of the task to be gotten
+     * @param i: the index of the task to be gotten
      * @return Task
      */
     public Task get(int i) {
@@ -71,7 +71,7 @@ public class TaskList {
     /**
      * MarkDone marks the task indicated by the index in the ArrayList as Done
      *
-     * @param i the index of the task to be marked done
+     * @param i: the index of the task to be marked done
      */
     public void markDone(int i) {
         tasklist.get(i).markDone();
@@ -80,7 +80,7 @@ public class TaskList {
     /**
      * Add corresponds to the equivalent operation in the ArrayList object
      *
-     * @param task is the Task to be added
+     * @param task: is the Task to be added
      */
     public void add(Task task) {
         this.tasklist.add(task);
@@ -89,7 +89,7 @@ public class TaskList {
     /**
      * Remove corresponds to the equivalent operation in the ArrayList object
      *
-     * @param i the index of the task to be removed
+     * @param i: the index of the task to be removed
      */
     public Task remove(int i) {
         return this.tasklist.remove(i);
