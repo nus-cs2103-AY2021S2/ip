@@ -10,6 +10,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.CommandException;
@@ -37,8 +38,12 @@ public class Parser {
         String command = line.split(" ")[0];
         try {
             switch (command) {
-            case "bye":
+            case "bye": {
                 return new ByeCommand();
+            }
+            case "help": {
+                return new HelpCommand();
+            }
             case "list": {
                 return new ListCommand();
             }
@@ -61,7 +66,7 @@ public class Parser {
                 return parseEvent(line);
             }
             default: {
-                throw new CommandException("I don't understand");
+                throw new CommandException("I don't understand, maybe try typing \"help\" for a little help");
             }
             }
 
