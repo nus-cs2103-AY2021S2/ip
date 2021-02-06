@@ -7,12 +7,16 @@ public class Event extends Task {
 
     protected LocalDate at;
 
-    public Event(String name, String at) {
+    /**
+     * Create a deadline object with specified name and
+     * @param name
+     */
+    protected Event(String name, String at) {
         super(name);
         this.at = LocalDate.parse(at);
     }
 
-    public Event(String name, LocalDate at) {
+    protected Event(String name, LocalDate at) {
         super(name);
         this.at = at;
     }
@@ -20,8 +24,8 @@ public class Event extends Task {
 
     @Override
     public Event setDone() {
-        Event doneTask = new Event(this.name, this.at);
-        doneTask.isDone = true;
+        Event doneTask = new Event(this.getName(), this.at);
+        doneTask.setDone();
         return doneTask;
     }
 

@@ -2,7 +2,7 @@ package seashell;
 
 public class Parser {
 
-    public CommandType parse(String input) {
+    protected CommandType parse(String input) {
         if (input.stripTrailing().equals("bye")) {
             return CommandType.EXIT;
         } else if (input.stripTrailing().equals("list")) {

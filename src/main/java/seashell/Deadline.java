@@ -5,24 +5,22 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-//    protected String by;
-
     protected LocalDate by;
 
-    public Deadline(String name, String by) {
+    protected Deadline(String name, String by) {
         super(name);
         this.by = LocalDate.parse(by);
     }
 
-    public Deadline(String name, LocalDate by) {
+    protected Deadline(String name, LocalDate by) {
         super(name);
         this.by = by;
     }
 
     @Override
     public Deadline setDone() {
-        Deadline doneTask = new Deadline(this.name, this.by);
-        doneTask.isDone = true;
+        Deadline doneTask = new Deadline(this.getName(), this.by);
+        doneTask.setDone();
         return doneTask;
     }
 

@@ -157,6 +157,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find tasks that contain some keyword specified by user
+     * @param command
+     * @return a task list with tasks that contain keyword
+     * @throws SeashellException if task list is empty or no tasks found
+     */
     public TaskList find(String command) throws SeashellException {
         String toFind = command.substring(5);
         if (this.taskList.isEmpty()) {
@@ -164,7 +170,7 @@ public class TaskList {
         } else {
             ArrayList<Task> foundList = new ArrayList<>();
             for (Task t : this.taskList) {
-                if (t.name.contains(toFind)) {
+                if (t.getName().contains(toFind)) {
                     foundList.add(t);
                 }
             }

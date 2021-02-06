@@ -2,14 +2,14 @@ package seashell;
 
 public class Todo extends Task {
 
-    public Todo(String name) {
+    protected Todo(String name) {
         super(name);
     }
 
     @Override
     public Todo setDone() {
-        Todo doneTask = new Todo(this.name);
-        doneTask.isDone = true;
+        Todo doneTask = new Todo(this.getName());
+        doneTask.setDone();
         return doneTask;
     }
 

@@ -1,21 +1,40 @@
 package seashell;
 
 public class Task {
-    public boolean isDone;
-    public String name;
+    private boolean isDone;
+    private String name;
 
-    // constructor
+    /**
+     * Create a task object with specified name
+     * @param name
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    /**
+     * Set this task as done
+     * @return a new task which is marked as done
+     */
     public Task setDone() {
         Task doneTask = new Task(this.name);
         doneTask.isDone = true;
         return doneTask;
     }
 
+    /**
+     * Parse this task object into a save string
+     * @return string representing task object to be saved in save file
+     */
     public String getSaveText() {
         StringBuilder sb = new StringBuilder();
         if (this.isDone) {
@@ -27,6 +46,10 @@ public class Task {
         return sb.toString();
     }
 
+    /**
+     * Get icon to signify if task is done
+     * @return tick symbol if task is done or cross if task is not done
+     */
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

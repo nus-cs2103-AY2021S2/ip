@@ -1,7 +1,7 @@
 package seashell;
 
 public class SeashellException extends Exception {
-    SeashellException(String errorMessage){
+    SeashellException(String errorMessage) {
         super(errorMessage);
     }
 }
