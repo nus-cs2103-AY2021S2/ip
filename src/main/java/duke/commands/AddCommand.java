@@ -59,6 +59,9 @@ public class AddCommand extends Command {
 
         if (checkCommands[0].equals("todo") || checkCommands[0].equals("deadline")
                 || checkCommands[0].equals("event")) {
+
+            assert checkCommands.length > 0;
+
             if (checkCommands.length == 1) {
                 throw new DescriptionNotFoundException();
             }
