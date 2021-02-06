@@ -66,7 +66,6 @@ public class TaskList {
 
     /**
      * Returns the List of DukeTasks.
-     *
      * @return List of DukeTasks.
      */
     public List<DukeTask> getList() {
