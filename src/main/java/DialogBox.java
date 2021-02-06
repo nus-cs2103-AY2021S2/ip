@@ -31,6 +31,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        // set full dialog height if it overflows
+        this.setHeight(dialog.getHeight());
+
         displayPicture.setFill(new ImagePattern(image));
         displayPicture.setRadius(image.getHeight() / 4);
     }

@@ -1,12 +1,6 @@
 package duke.views;
 
 public class Greeting {
-    private static final String divider = "---";
-
-    private static String stringWithSpacing(String text) {
-        return String.format("\n%s\n%s\n%s\n", divider, text, divider);
-    }
-
     /**
      * Outputs the standard greeting with duke.Duke Logo
      */
@@ -21,7 +15,7 @@ public class Greeting {
      * Outputs the standard bye greeting for a user
      */
     public static String bye() {
-        return stringWithSpacing("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -30,6 +24,6 @@ public class Greeting {
      * @param exception exception caught during runtime in Ui
      */
     public static String printErrorMessage(Exception exception) {
-        return stringWithSpacing(exception.getMessage());
+        return exception.getMessage();
     }
 }

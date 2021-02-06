@@ -8,9 +8,6 @@ import java.util.stream.IntStream;
 import duke.models.Todo;
 
 public class TodosView {
-    /** Denotes the divider to use to go between lines */
-    private static final String DIVIDER = "---";
-
     /**
      * Explicit definition of the default constructor to create a new Todos View renderer
      */
@@ -33,11 +30,11 @@ public class TodosView {
      * @return String containing tasks that match the input keywords
      */
     public static String renderMatchedTodosList(List<Optional<? extends Todo>> matchingTodosList) {
-        return padStringWithSpacing(String.format("Here are the matching tasks in your list:\n%s",
+        return String.format("Here are the matching tasks in your list:\n%s",
                 IntStream.range(0, matchingTodosList.size())
                         .mapToObj(idx -> String.format("%d.%s", idx + 1,
                                 renderTodoLine(matchingTodosList.get(idx))))
-                        .collect(Collectors.joining("\n"))));
+                        .collect(Collectors.joining("\n")));
     }
 
     /**
@@ -47,10 +44,10 @@ public class TodosView {
      * @return String containing rendered view of listed Todos
      */
     public static String renderListOfTodos(List<Optional<? extends Todo>> todosList) {
-        return padStringWithSpacing(String.format("Here are the tasks in your list:\n%s",
+        return String.format("Here are the tasks in your list:\n%s",
                 IntStream.range(0, todosList.size()).mapToObj(
                     idx -> String.format("%d.%s", idx + 1, renderTodoLine(todosList.get(idx))))
-                        .collect(Collectors.joining("\n"))));
+                        .collect(Collectors.joining("\n")));
     }
 
     /**
@@ -60,9 +57,8 @@ public class TodosView {
      * @return String showing todo that got added along with todos list size
      */
     public static String renderAddTodoReply(Optional<? extends Todo> newTodo, int listSize) {
-        return padStringWithSpacing(String.format(
-                "Got it! I've added this task:\n%s\nNow you have %d tasks in the list.",
-                renderTodoLine(newTodo), listSize));
+        return String.format("Got it! I've added this task:\n%s\nNow you have %d tasks in the list.",
+                renderTodoLine(newTodo), listSize);
     }
 
     /**
@@ -72,9 +68,8 @@ public class TodosView {
      * @return String containing reply to deleting a Todo
      */
     public static String renderDeleteTodoReply(Optional<? extends Todo> deletedTodo, int listSize) {
-        return padStringWithSpacing(String.format(
-                "Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
-                renderTodoLine(deletedTodo), listSize));
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+                renderTodoLine(deletedTodo), listSize);
     }
 
     /**
@@ -83,16 +78,6 @@ public class TodosView {
      * @return String containing reply to marking a todo as done
      */
     public static String renderMarkTodoAsDoneReply(Optional<? extends Todo> newTodo) {
-        return padStringWithSpacing(
-                String.format("Nice! I've marked this task as done:\n%s", renderTodoLine(newTodo)));
-    }
-
-    /**
-     * Private method padStringWithSpacing adds divider around the text passed in to be printed
-     * @param input String to be padded with divider put around it
-     * @return input String padded with dividers and spacing
-     */
-    private static String padStringWithSpacing(String input) {
-        return String.format("\n%s\n%s\n%s\n%n", DIVIDER, input, DIVIDER);
+        return String.format("Nice! I've marked this task as done:\n%s", renderTodoLine(newTodo));
     }
 }

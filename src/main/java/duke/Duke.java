@@ -2,6 +2,7 @@ package duke;
 
 import duke.controllers.Ui;
 import duke.models.Storage;
+import duke.views.Greeting;
 
 public class Duke {
     /** Storage object to be passed to AppController for reading / writing to db */
@@ -27,4 +28,7 @@ public class Duke {
         return ui.respondToInput(input);
     }
 
+    public String getGreeting() {
+        return Greeting.greet();
+    }
 }
