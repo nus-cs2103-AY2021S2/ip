@@ -57,4 +57,12 @@ public class UI {
     public String printRelevantTasks(TaskList taskList) {
         return "These are the tasks that have your keyword\n" + taskList;
     }
+    /**
+     * Prints the task that has just been snoozed.
+     * @param task The task that is snoozed.
+     * @return String to be printed.
+     */
+    public String printSnooze(Task task) {
+        return "You have rescheduled this task:\n" + task;
+    }
 }

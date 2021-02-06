@@ -12,6 +12,6 @@ enum Command {
     EVENT,
     FIND,
     LIST,
+    SNOOZE,
     TODO
-
 }
