@@ -15,6 +15,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        assert taskList != null;
         if (taskList.isEmpty()) {
             return new CommandResult(false, MESSAGE_EMPTY_TASKLIST);
         }

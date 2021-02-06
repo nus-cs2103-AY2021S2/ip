@@ -29,6 +29,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        assert taskList != null;
         StringBuilder tasksWithSearchWord = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.getTask(i - 1);

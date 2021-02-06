@@ -27,6 +27,7 @@ public class DoneCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
+            assert taskList != null;
             taskList.completeTask(index);
             return new CommandResult(taskList, false,
                     MESSAGE_DONE_TASK + "\n",
