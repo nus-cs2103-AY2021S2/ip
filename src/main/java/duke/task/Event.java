@@ -39,6 +39,7 @@ public class Event extends Task {
      *
      * @return the deadline time to be returned
      */
+    @Override
     public LocalDate getTime() {
         return time;
     }

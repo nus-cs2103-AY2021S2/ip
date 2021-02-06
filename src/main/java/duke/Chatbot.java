@@ -58,6 +58,8 @@ public class Chatbot {
             String[] taskTypeSplit = input.split(" ");
             Command command = parser.parseStringToCommand(taskTypeSplit);
             switch (command) {
+            case SORT:
+                return handleSortCommand(input);
             case LIST:
                 return handleListCommand(input);
             case DONE:
@@ -84,10 +86,37 @@ public class Chatbot {
     }
 
     /**
+     * Sort the tasks based on date.
+     * Handles sort command and returns Duke reply message.
+     *
+     * @return reply message from Duke
+     * @throws DukeException no task in the list or has extra parameter
+     */
+    public String handleSortCommand(String input) throws DukeException {
+        String[] taskTypeSplit = input.split(" ");
+        if (taskTypeSplit.length > 1) {
+            throw new DukeException("Sort command doesn't have parameter.");
+        }
+        tasks.getTaskList().sort((task1, task2) -> {
+            if (task1.getTime() == null && task2.getTime() == null) {
+                return task1.getName().compareTo(task2.getName());
+            } else if (task1.getTime() == null) {
+                return -1;
+            } else if (task2.getTime() == null) {
+                return 1;
+            } else {
+                return task1.getTime().compareTo(task2.getTime());
+            }
+        });
+        storage.updateFile(tasks);
+        return Printer.printTaskList(tasks.getTaskList());
+    }
+
+    /**
      * Handles list command and returns Duke reply message.
      *
      * @return reply message from Duke
-     * @throws DukeException no task in the list
+     * @throws DukeException no task in the list or has extra parameter
      */
     public String handleListCommand(String input) throws DukeException {
         String[] taskTypeSplit = input.split(" ");

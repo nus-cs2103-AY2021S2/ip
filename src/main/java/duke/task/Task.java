@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * The parent class for all types of tasks.
  */
@@ -45,6 +47,15 @@ public class Task {
      */
     public TaskType getType() {
         return type;
+    }
+
+    /**
+     * Returns the time of the deadline.
+     *
+     * @return the deadline time to be returned
+     */
+    public LocalDate getTime() {
+        return null;
     }
 
     /**
