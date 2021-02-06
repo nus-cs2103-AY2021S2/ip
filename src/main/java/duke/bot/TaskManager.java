@@ -45,7 +45,6 @@ public class TaskManager {
             }
 
             Deadline deadline = (Deadline) task;
-            System.out.println("Type: " + task.getTypeSymbol() + " desc: " + task.getDesc() + " equal: " + deadline.getDateTime().isEqual(dateTime));
             return deadline.getDesc().equals(desc) && deadline.getDateTime().isEqual(dateTime);
         });
     }
