@@ -34,6 +34,7 @@ public class Duke {
         if (taskList.size() == 0) {
             this.taskList = new TaskList();
         }
+        Parser.populateCommands();
     }
 
     /**
@@ -43,6 +44,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             String response = Parser.parse(input, this.taskList, this.storage);
+            assert response != null : "No user input";
             if (response.contains("Bye")) {
                 Platform.exit();
             }
