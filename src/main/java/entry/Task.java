@@ -1,11 +1,9 @@
 package entry;
 
-/**
- * This is the base abstract class for Task. Currently, Oracle uses the following 3 Tasks
- * Todo, Deadline, and Event. Each class should at the least have a description and an indicator for
- * whether it has been completed
- */
-public class Task {
+public abstract class Task {
+    String description;
+    boolean isDone;
+
     /** base class for the Task
      * @param description description of the task
      */
@@ -34,15 +32,11 @@ public class Task {
         this.isDone = !this.isDone;
     }
 
-    String description;
-    boolean isDone;
-
     @Override
     public String toString() {
         String doneStatus = "[" + getStatusIcon() + "]";
         return doneStatus + " " + this.description;
     }
-
 
     /***
      * Format = {done}{description}

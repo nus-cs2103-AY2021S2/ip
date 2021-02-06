@@ -8,8 +8,8 @@ public class EventCommand implements Command {
     private final String taskTime;
 
     /**
-     * @param taskDescription description of the Event
-     * @param taskTime string to be formatted into a LocalDateTime
+     * @param taskDescription: description of the Event
+     * @param taskTime: string to be formatted into a LocalDateTime
      */
     public EventCommand(String taskDescription, String taskTime) {
         this.taskDescription = taskDescription;
@@ -17,9 +17,9 @@ public class EventCommand implements Command {
     }
 
     /** Creates a new Event
-     * @param ui helper to interact with user
-     * @param tasks we add the new created event here
-     * @return true
+     * @param ui: helper to interact with user
+     * @param tasks: we add the new created event here
+     * @return true: tells Oracle whether the loop should be terminated
      */
     @Override
     public boolean execute(Ui ui, TaskList tasks) {

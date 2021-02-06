@@ -147,6 +147,10 @@ public class Ui {
     }
 
     public void showSearchResults(String keyword, ArrayList<Task> results) {
+        if (results.size() == 0) {
+            System.out.println("No results found for: \"" + keyword + "\"");
+            return;
+        }
         System.out.println("Here are the results we found for: \"" + keyword + "\"");
         for (Task t : results) {
             System.out.println(t);

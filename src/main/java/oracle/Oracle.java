@@ -19,7 +19,6 @@ public class Oracle {
      * Create a new Oracle object
      */
     public Oracle() {
-
         ui = new Ui();
         parser = new Parser(ui);
         // storage holds the arraylist used to store all the tasks given to THE ORACLE

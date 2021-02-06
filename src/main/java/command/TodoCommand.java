@@ -3,20 +3,20 @@ import oracle.TaskList;
 import oracle.Ui;
 import entry.Todo;
 
-public class TodoCommand implements Command{
+public class TodoCommand implements Command {
     private final String taskDescription;
 
     /**
-     * @param taskDescription description of the todo
+     * @param taskDescription: description of the todo
      */
     public TodoCommand(String taskDescription) {
         this.taskDescription = taskDescription;
     }
 
     /** Creates a new Todo
-     * @param ui helper to interact with user
-     * @param tasks we add the new created todo here
-     * @return true
+     * @param ui: helper to interact with user
+     * @param tasks: we add the new created todo here
+     * @return true: tells Oracle whether the loop should be terminated
      */
     @Override
     public boolean execute(Ui ui, TaskList tasks) {
