@@ -12,8 +12,8 @@ import duketask.ToDo;
 
 public class Parser {
     // members
-    private static String delimiter = " :: ";
-    private static DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(
+    private static final String DELIMITER = " :: ";
+    private static final DateTimeFormatter DATETIME_PARSE_FORMAT = DateTimeFormatter.ofPattern(
         "yyyy-MM-dd HHmm");
 
     // methods
@@ -24,7 +24,7 @@ public class Parser {
      *              Parser delimiter and datetime parseFormat.
      */
     public static String taskToCommand (Task task) {
-        return task.toCommand(Parser.delimiter, Parser.parseFormat);
+        return task.toCommand(Parser.DELIMITER, Parser.DATETIME_PARSE_FORMAT);
     }
 
     /**
@@ -38,22 +38,22 @@ public class Parser {
             Task.EmptyDescriptionException {
 
         // format = type :: state :: description :: createdTime :: others
-        String[] parsedCommand = command.split(Parser.delimiter);
+        String[] parsedCommand = command.split(Parser.DELIMITER);
 
         switch (parsedCommand[0]) {
         case "T":
             return new ToDo(parsedCommand[2], (Integer.parseInt(parsedCommand[1]) > 0),
-                    LocalDateTime.parse(parsedCommand[3], Parser.parseFormat));
+                    LocalDateTime.parse(parsedCommand[3], Parser.DATETIME_PARSE_FORMAT));
 
         case "E":
             return new Event(parsedCommand[2], (Integer.parseInt(parsedCommand[1]) > 0),
-                    LocalDateTime.parse(parsedCommand[3], Parser.parseFormat),
-                    LocalDateTime.parse(parsedCommand[4], Parser.parseFormat));
+                    LocalDateTime.parse(parsedCommand[3], Parser.DATETIME_PARSE_FORMAT),
+                    LocalDateTime.parse(parsedCommand[4], Parser.DATETIME_PARSE_FORMAT));
 
         case "D":
             return new Deadline(parsedCommand[2], (Integer.parseInt(parsedCommand[1]) > 0),
-                    LocalDateTime.parse(parsedCommand[3], Parser.parseFormat),
-                    LocalDateTime.parse(parsedCommand[4], Parser.parseFormat));
+                    LocalDateTime.parse(parsedCommand[3], Parser.DATETIME_PARSE_FORMAT),
+                    LocalDateTime.parse(parsedCommand[4], Parser.DATETIME_PARSE_FORMAT));
 
         default:
             throw new Duke.UnrecognisedCommandException(parsedCommand[0]);
@@ -92,7 +92,7 @@ public class Parser {
 
             task = new Event (command.substring(0, subcommandIndex - 1).trim(),
                     LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
-                    Parser.parseFormat));
+                    Parser.DATETIME_PARSE_FORMAT));
             break;
 
         case "deadline":
@@ -103,7 +103,7 @@ public class Parser {
 
             task = new Deadline (command.substring(0, subcommandIndex - 1).trim(),
                     LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
-                    Parser.parseFormat));
+                    Parser.DATETIME_PARSE_FORMAT));
             break;
 
         default:

@@ -1,38 +1,50 @@
 package dukegui;
+import java.io.IOException;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
+    @FXML
     private Label content;
+    @FXML
     private ImageView display;
 
-    public DialogBox(Label text, ImageView picture, boolean reverse) {
-        content = text;
-        display = picture;
+    public DialogBox(String text, Image image, boolean reverse) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(
+                    "/view/DialogBox.fxml"));
 
-        content.setWrapText(true);
-        display.setFitWidth(100.0);
-        display.setFitHeight(100.0);
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(content, display);
+        content.setText(text);
+        display.setImage(image);
 
         if (reverse) {
             this.setAlignment(Pos.TOP_LEFT);
-            ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+            ObservableList<Node> tmp = FXCollections.observableArrayList(
+                    this.getChildren());
+
             FXCollections.reverse(tmp);
             this.getChildren().setAll(tmp);
         }
     }
 
     // default constructor in user perspective
-    public DialogBox(Label text, ImageView picture) {
-        this(text, picture, false);
+    public DialogBox(String text, Image image) {
+        this(text, image, false);
     }
 }

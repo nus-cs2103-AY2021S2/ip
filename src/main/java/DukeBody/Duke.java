@@ -3,14 +3,11 @@ package dukebody;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import java.time.format.DateTimeParseException;
 
 import duketask.Task;
-import dukegui.DukeApp;
+import dukegui.MainApp;
+import dukegui.MainWindow;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 public class Duke {
     public static class ExpectedSubcommandException extends Exception  {
@@ -27,9 +24,10 @@ public class Duke {
     }
 
     String username = "";
-    DukeApp app;
     TaskList tasks;
     DataBase connection = new DataBase();
+
+    MainWindow mainWindow;
 
     // accessors
     public boolean hasSetupUser() {
@@ -37,18 +35,18 @@ public class Duke {
     }
 
     // mutators
-    public void syncDukeApp (DukeApp app) {
-        this.app = app;
+    public void syncWindow (MainWindow window) {
+        mainWindow = window;
     }
 
     public void userSetup (String name) {
         username = name;
-        app.dukeOutput("HenLo " + username + ", reading tasks from secret database...");
+        mainWindow.dukeOutput("Henlo " + username + ", reading tasks from secret database...");
         try {
             tasks = connection.queryTasks(username);
-            app.dukeOutput("... very success! what can doge do for you now?");
+            mainWindow.dukeOutput("... very success! what can doge do for you now?");
         } catch (DataBase.LegacyDataException e) {
-            app.dukeOutput("doge could not read userdata! previous tasks go brrrrrrrr...\n"
+            mainWindow.dukeOutput("doge could not read userdata! previous tasks go brrrrrrrr...\n"
                     + "sorry hooman, what can doge do for you now?");
         }
     }
@@ -108,7 +106,7 @@ public class Duke {
                     tasks.get(taskNumber).markAsDone();
                     output.append("marked the task as done! yip yip.\n");
                     output.append(tasks.get(taskNumber).taskInformation(
-                            app.getDateformat()));
+                            mainWindow.getDateFormat()));
                     break;
 
                 case "delete":
@@ -124,7 +122,7 @@ public class Duke {
                     Task removed = tasks.get(taskNumber);
                     output.append("removed the task! begone!\n");
                     output.append(tasks.remove(taskNumber).taskInformation(
-                            app.getDateformat()));
+                            mainWindow.getDateFormat()));
                     break;
 
                 default:
@@ -134,7 +132,7 @@ public class Duke {
                         tasks.add(Parser.parseNewCommand(subcommands[0].trim(), subcommands[1].trim()));
                         output.append("added the task for hooman!\n");
                         output.append(tasks.get(tasks.size() - 1).taskInformation(
-                                app.getDateformat()));
+                                mainWindow.getDateFormat()));
                     }
             }
         } catch (InputMismatchException e) {
@@ -147,7 +145,7 @@ public class Duke {
             output.append(e.getMessage());
         }
 
-        app.dukeOutput(output.toString());
+        mainWindow.dukeOutput(output.toString());
     }
 
     private String outputTasks (TaskList tasks) {
@@ -155,7 +153,7 @@ public class Duke {
 
         for (int i = 0; i < tasks.size(); ++ i) {
             output.append(i + 1);
-            output.append(". " + tasks.get(i).taskInformation(app.getDateformat())
+            output.append(". " + tasks.get(i).taskInformation(mainWindow.getDateFormat())
                     + "\n");
         }
 
@@ -163,6 +161,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Application.launch(DukeApp.class, args);
+        Application.launch(MainApp.class, args);
     }
 }
