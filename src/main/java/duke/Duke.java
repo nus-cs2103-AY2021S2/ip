@@ -34,8 +34,7 @@ public class Duke {
 
         try {
             storage = new Storage(filePath);
-            tasks = new TaskList(storage.load());
-
+            tasks = new TaskList(storage.loadFileIntoArrayList());
         } catch (DukeException e) {
 
             ui.showLoadingError();
@@ -107,7 +106,7 @@ public class Duke {
                 break;
 
             case "bye":
-                toReply += Ui.printBye();
+                toReply += Ui.getByeMessage();
                 break;
 
             case "delete":

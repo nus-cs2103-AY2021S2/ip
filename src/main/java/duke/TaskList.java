@@ -94,16 +94,6 @@ public class TaskList {
     }
 
     /**
-     * Returns The task inside the task list at the index specified
-     *
-     * @param index index of task inside the tasklist
-     * @return A task
-     */
-    public Task get(int index) {
-        return this.inputList.get(index);
-    }
-
-    /**
      * Returns a ToDoTask based on the user input and adds it to the list
      *
      * @param action  The string action input by the user
@@ -193,7 +183,7 @@ public class TaskList {
      *
      * @return A string to be written into the file.
      */
-    public String getListToWrite() {
+    public String getListToString() {
 
         String result = "";
 
