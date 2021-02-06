@@ -5,9 +5,10 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     private Command command;
-    private Integer taskNumber = null;
+    private Integer taskNumber = Integer.MAX_VALUE;
     private String keyword = "";
     private String taskName = "";
+    private String tagName = "";
     private LocalDate date = null;
     private boolean isValid = true;
     /**
@@ -21,6 +22,10 @@ public class Parser {
             command = Command.BYE;
         } else if (input.equals("list")) {
             command = Command.LIST;
+        } else if (commands[0].equals("tag")) {
+            command = Command.TAG;
+            taskNumber = Integer.parseInt(commands[1]) - 1;
+            tagName = commands[2];
         } else if (commands[0].equals("done")) {
             command = Command.DONE;
             taskNumber = Integer.parseInt(commands[1]) - 1;
@@ -79,6 +84,9 @@ public class Parser {
     }
     public String getKeyword() {
         return keyword;
+    }
+    public String getTagName() {
+        return tagName;
     }
     public Integer getTaskNumber() {
         return taskNumber;

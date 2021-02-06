@@ -42,12 +42,15 @@ public class Kelbot {
             Integer taskNumber = parser.getTaskNumber();
             String keyword = parser.getKeyword();
             String taskName = parser.getTaskName();
+            String tagName = parser.getTagName();
             LocalDate date = parser.getDate();
             if (command == Command.BYE) {
                 response = ui.sayGoodbye();
                 Platform.exit();
             } else if (command == Command.LIST) {
                 response = ui.printList(taskList);
+            } else if (command == Command.TAG) {
+                response = tag(taskList, tagName, taskNumber);
             } else if (command == Command.DONE || command == Command.DELETE) {
                 response = doneOrDelete(command, taskList, taskNumber);
             } else if (command == Command.FIND) {
@@ -73,10 +76,27 @@ public class Kelbot {
         return taskList;
     }
     /**
+     * Tags a task.
+     * @param taskList The task list to be acted on.
+     * @param tagName The tag name to tag on the task.
+     * @param taskNumber The index of the task in the task list to be tagged.
+     * @return The string to be printed.
+     */
+    public String tag(TaskList taskList, String tagName, Integer taskNumber) {
+        String response;
+        try {
+            Task task = taskList.tag(taskNumber, tagName);
+            response = ui.printTag(task);
+        } catch (IndexOutOfBoundsException e) {
+            response = "The list is not that long!";
+        }
+        return response;
+    }
+    /**
      * Completes or deletes a task, depending on the command.
      * @param command Either a DONE or DELETE command.
      * @param taskList The task list to be acted on.
-     * @param taskNumber The task number to index the task in the task list.
+     * @param taskNumber The index of the task in the task list to be completed or deleted.
      * @return The string to be printed.
      */
     public String doneOrDelete(Command command, TaskList taskList, Integer taskNumber) {

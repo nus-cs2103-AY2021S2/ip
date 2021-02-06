@@ -7,13 +7,13 @@ public class UI {
     public UI() {
     }
     /**
-     * Print out Goodbye message.
+     * Prints out Goodbye message.
      */
     public String sayGoodbye() {
         return "Bye le bye! See you next time!";
     }
     /**
-     * Print out full list.
+     * Prints out full list.
      * @param taskList The task list to be printed.
      * @return String to be printed.
      */
@@ -21,7 +21,7 @@ public class UI {
         return taskList.toString();
     }
     /**
-     * Print out message to show that task has been done.
+     * Prints the task has been done.
      * @param task The task that has been marked done.
      * @return String to be printed.
      */
@@ -29,7 +29,7 @@ public class UI {
         return "Well done! You have completed this task!\n" + task;
     }
     /**
-     * Print out message to show that task has been deleted.
+     * Prints out message to show that task has been deleted.
      * @param task The task that has been deleted.
      * @return String to be printed.
      */
@@ -37,7 +37,7 @@ public class UI {
         return "Noted! You have deleted this task!\n" + task;
     }
     /**
-     * Print out message to show that task has been added.
+     * Prints the task that has been added.
      * @param task The task that has been added.
      * @param taskListSize The number of tasks in the task list.
      * @return String to be printed.
@@ -64,5 +64,13 @@ public class UI {
      */
     public String printSnooze(Task task) {
         return "You have rescheduled this task:\n" + task;
+    }
+    /**
+     * Prints the task that has just been tagged.
+     * @param task The task that is tagged.
+     * @return String to be printed.
+     */
+    public String printTag(Task task) {
+        return "You have tagged this task:\n" + task;
     }
 }
