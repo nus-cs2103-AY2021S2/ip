@@ -91,11 +91,11 @@ public class StorageTest {
             TaskManager taskManager = new TaskManager();
             Storage.loadTasksTo(taskManager);
 
-            assertEquals("T | 0 | DESCRIPTION 1", taskManager.getTask(0).toSaveInfoString());
+            assertEquals("T | 0 | DESCRIPTION 1", taskManager.getTask(0).toSaveFileString());
             assertEquals("D | 1 | DESCRIPTION 2 | " + dateTime.format(formatter),
-                    taskManager.getTask(1).toSaveInfoString());
+                    taskManager.getTask(1).toSaveFileString());
             assertEquals("E | 0 | DESCRIPTION 3 | " + dateTime.format(formatter) + " | " +
-                    dateTime.format(formatter), taskManager.getTask(2).toSaveInfoString());
+                    dateTime.format(formatter), taskManager.getTask(2).toSaveFileString());
         } catch(DukeLoadException e) {
             assertFalse(true, "Failed to load task from save");
         } catch(IOException e) {

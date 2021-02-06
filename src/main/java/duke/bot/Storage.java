@@ -44,7 +44,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(PATH);
             for (Task task : tasks) {
-                writer.write(task.toSaveInfoString() + "\n");
+                writer.write(task.toSaveFileString() + "\n");
             }
             writer.close();
         } catch (IOException e) {
