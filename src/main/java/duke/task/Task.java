@@ -6,9 +6,15 @@ package duke.task;
 public class Task {
     String task;
     boolean done = false;
+    String[] divideCommand;
 
     Task(String task) {
         this.task = task;
+        divideCommand = task.split(" ");
+    }
+
+    public String getType(){
+        return divideCommand[0];
     }
 
     public void markDone() {

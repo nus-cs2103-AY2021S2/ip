@@ -7,3 +7,6 @@ deadline do homework /by 2021-10-31 undone
 event attend wedding /at 2021-02-15 undone
 todo visit gym done
 event visit workshop /at 2021-03-15 undone
+deadline finish homework /by 2021-04-02 done
+event attend meeting /at 2021-03-16 undone
+todo prepare tea undone
