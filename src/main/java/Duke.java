@@ -127,7 +127,8 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input, String[] parts) throws InsufficientArgumentsException, FileNotFoundException {
+    String getResponse(String input, String[] parts) throws InsufficientArgumentsException,
+            FileNotFoundException, IllegalKeywordException {
         int listCounter = 1;
         switch (input) {
         case "done": {

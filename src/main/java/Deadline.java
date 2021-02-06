@@ -4,13 +4,18 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadlines are Tasks that must be completed before a certain date.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements EventDeadline {
 
     protected LocalDate by;
 
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
+        super.taskType = DEADLINE;
+    }
+
+    public LocalDate getDateInfo() {
+        return this.by;
     }
 
     /**
