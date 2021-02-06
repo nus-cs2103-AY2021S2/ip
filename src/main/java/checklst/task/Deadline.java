@@ -57,7 +57,7 @@ public class Deadline extends Task {
     public String export() {
         String output = "D ; ";
 
-        if (this.completed) {
+        if (this.isCompleted) {
             output += "X ; ";
         } else {
             output += "O ; ";

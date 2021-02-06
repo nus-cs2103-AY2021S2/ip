@@ -39,7 +39,7 @@ public class Todo extends Task {
     public String export() {
         String output = "T ; ";
         
-        if (this.completed) {
+        if (this.isCompleted) {
             output += "X ; ";
         } else {
             output += "O ; ";

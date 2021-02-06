@@ -157,7 +157,7 @@ public class Checklst extends Application {
 
     private void addUserMessage(String input) {
         this.dialogContainer.getChildren()
-            .add(DialogBox.getUserDialog(new Label(input), new ImageView(duke)));
+            .add(DialogBox.getUserDialog(new Label(input), new ImageView(user)));
     }
 
     @Override

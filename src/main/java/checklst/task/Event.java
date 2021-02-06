@@ -57,13 +57,13 @@ public class Event extends Task {
     public String export() {
         String output = "E ; ";
 
-        if (this.completed) {
+        if (this.isCompleted) {
             output += "X ; ";
         } else {
             output += "O ; ";
         }
 
-        output += this.name + " ; " + this.dateTime.toString();
+        output += this.name + " ; " + this.eventDate.toString();
 
         return output;
     } 
