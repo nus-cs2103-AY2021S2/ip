@@ -14,7 +14,7 @@ public class TaskList {
 
     /** Creates a new TaskList, which stores the tasks. This class provides some abstraction for the underlying
      * ArrayList<Task>
-     * @param load given the raw strings from the storage file, we create the tasks
+     * @param load: given the raw strings from the storage file, we create the tasks
      */
     public TaskList(List<String> load) {
         this.tasklist = new ArrayList<>();
@@ -52,7 +52,7 @@ public class TaskList {
     }
 
     /** Get corresponds to the equivalent operation in the ArrayList object
-     * @param i the index of the task to be gotten
+     * @param i: the index of the task to be gotten
      * @return Task
      */
     public Task get(int i) {
@@ -60,21 +60,21 @@ public class TaskList {
     }
 
     /** MarkDone marks the task indicated by the index in the ArrayList as Done
-     * @param i the index of the task to be marked done
+     * @param i: the index of the task to be marked done
      */
     public void markDone(int i) {
         tasklist.get(i).markDone();
     }
 
     /** Add corresponds to the equivalent operation in the ArrayList object
-     * @param task is the Task to be added
+     * @param task: is the Task to be added
      */
     public void add(Task task) {
         this.tasklist.add(task);
     }
 
     /** Remove corresponds to the equivalent operation in the ArrayList object
-     * @param i the index of the task to be removed
+     * @param i: the index of the task to be removed
      */
     public void remove(int i) {
         this.tasklist.remove(i);

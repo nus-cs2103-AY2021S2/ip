@@ -14,7 +14,7 @@ public class Storage {
     private final String filePath;
 
     /**
-     * @param filePath filePath of the storage file
+     * @param filePath: filePath of the storage file
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -40,7 +40,7 @@ public class Storage {
 
     /**
      * Store the tasks in the txt file. Format of the text file is handled by the Task classes
-     * @param tasks this is the arraylist used during runtime, to be converted to text file.
+     * @param tasks: this is the arraylist used during runtime, to be converted to text file.
      */
     public void store(ArrayList<Task> tasks) {
         // store data
