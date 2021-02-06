@@ -1,48 +1,32 @@
-import storage.Storage;
 import task.*;
+import storage.Storage;
 import ui.Ui;
 
-import java.util.Scanner;
+import java.util.*;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Duke extends Application {
+import javax.print.DocFlavor;
+
+
+public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
     public Duke() {
-
         this.ui = new Ui();
         this.storage = new Storage(System.getProperty("user.dir") + "/data/", "duke.txt");
         this.taskList = storage.load();
-
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+    public String getResponse(String input) {
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
-
-    public void run() {
-
-        Scanner sc = new Scanner(System.in);
-
-        ui.printWelcomeMessage();
-
-        boolean isExit = false;
-
-        while(sc.hasNextLine()) {
-
-            String input = sc.nextLine();
+        String response;
 
             String[] tokens = input.split(" ", 2);
 
@@ -50,89 +34,80 @@ public class Duke extends Application {
             String argument = tokens.length == 2 ? tokens[1] : null;
 
             if (command.equals("bye")) {
-                isExit = executeByeCommand();
+                response = executeByeCommand();
 
             } else if (command.equals("list")) {
-                isExit = executeListCommand();
+                response = executeListCommand();
 
             } else if(command.equals("done")) {
-                isExit = executeDoneCommand(argument);
+                response = executeDoneCommand(argument);
 
             } else if (command.equals("todo")) {
-                isExit = executeTodoCommand(argument);
+                response = executeTodoCommand(argument);
 
             } else if (command.equals("deadline")) {
-                isExit = executeDeadlineCommand(argument);
+                response = executeDeadlineCommand(argument);
 
             } else if (command.equals("event")) {
-                isExit = executeEventCommand(argument);
+                response = executeEventCommand(argument);
 
             } else if (command.equals("delete")) {
-                isExit = executeDeleteCommand(argument);
+                response = executeDeleteCommand(argument);
 
             } else if (command.equals("find")) {
-                isExit = executeFindCommand(argument);
+                response = executeFindCommand(argument);
 
             } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                response = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             }
 
-            if (isExit) {
-                break;
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-
-        new Duke().run();
-
+        return response;
     }
 
     /**
      * Executes Bye Command
      *
-     * @return          boolean to represent termination of the program
+     * @return String to represent termination of the program
      */
-    private boolean executeByeCommand() {
-        System.out.println("Bye. Hope to see you again soon!");
+    private String executeByeCommand() {
         storage.save(taskList);
-        return true;
+        return "bye";
     }
 
     /**
      * Lists out all tasks
      *
-     * @return          boolean to represent termination of the program
+     * @return String to represent termination of the program
      */
-    private boolean executeListCommand() {
+    private String executeListCommand() {
+
+        StringBuilder sb = new StringBuilder();
+
         if (taskList.size() == 0) {
-            System.out.println("There are no tasks in your task list");
+            sb.append("There are no tasks in your task list\n");
         } else {
-            System.out.println("Here are the tasks in your task list:");
+            sb.append("Here are the tasks in your task list:\n");
             for (int i = 0; i < taskList.size() ; i++ ) {
-                System.out.println((i + 1) + ". "
+                sb.append(Integer.toString(i + 1) + ". "
                         + taskList.get(i).getTypeIcon()
                         + taskList.get(i).getStatusIcon() + " "
-                        + taskList.get(i).getDescription()
+                        + taskList.get(i).getDescription() + "\n"
                 );
             }
         }
-
-        return false;
+        return sb.toString();
     }
 
     /**
      * Executes Done Command
      *
      * @param argument  command arguments
-     * @return          boolean to represent termination of the program
+     * @return String to represent termination of the program
      */
-    private boolean executeDoneCommand(String argument) {
+    private String executeDoneCommand(String argument) {
         // check for correct number of arguments
         if (argument == null) {
-            System.out.println("☹ OOPS!!! The description of a done cannot be empty.");
-            return false;
+            return "OOPS!!! The description of a done cannot be empty.";
         }
 
         // check if argument is an integer
@@ -140,60 +115,61 @@ public class Duke extends Application {
         try {
             taskId = Integer.parseInt(argument) - 1;
         } catch (NumberFormatException e) {
-            System.out.println("☹ OOPS!!! The id of a done must be an integer.");
-            return false;
+            return "OOPS!!! The id of a done must be an integer.";
         }
 
         // check if integer is within bounds
         if (taskId >= taskList.size() || taskId < 0) {
-            System.out.println("☹ OOPS!!! That is an invalid task id.");
-            return false;
+            return "OOPS!!! That is an invalid task id.";
         }
 
         Task task = taskList.get(taskId);
         task.markAsDone();
+        StringBuilder sb = new StringBuilder();
 
-        System.out.println("Nice! I've marked this task as done: \n"
+        sb.append("Nice! I've marked this task as done: \n"
                 + task.getStatusIcon() + " "
                 + task.getDescription()
         );
 
-        return false;
+        return sb.toString();
     }
 
     /**
      * Executes Todo Command
      *
      * @param argument  command arguments
-     * @return          boolean to represent termination of the program
+     * @return String to represent termination of the program
      */
-    private boolean executeTodoCommand(String argument) {
+    private String executeTodoCommand(String argument) {
         if (argument == null) {
-            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-            return false;
+            return "OOPS!!! The description of a todo cannot be empty.";
         }
 
         Task task = new Todo(argument);
         taskList.add(task);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
-                + task.getDescription());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
-        return false;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Got it. I've added this task:\n");
+        sb.append("  " + task.getTypeIcon() + task.getStatusIcon() + " "
+                + task.getDescription() + "\n");
+        sb.append("Now you have " + taskList.size() + " tasks in the list");
+        return sb.toString();
     }
 
     /**
      * Executes Deadline Command
      *
      * @param argument  command arguments
-     * @return          boolean to represent termination of the program
+     * @return String to represent termination of the program
      */
-    private boolean executeDeadlineCommand(String argument) {
+    private String executeDeadlineCommand(String argument) {
         if (argument == null) {
-            System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-            return false;
+            return "OOPS!!! The description of a deadline cannot be empty.";
         }
+
+        StringBuilder sb = new StringBuilder();
 
         String[] split = argument.split("/by", 2);
         String description = split[0];
@@ -201,23 +177,22 @@ public class Duke extends Application {
         Task task = new Deadlines(description, by);
         taskList.add(task);
 
-        System.out.println("Got it. I have added this task:");
-        System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
-                + task.getDescription());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-        return false;
+        sb.append("Got it. I have added this task:\n");
+        sb.append("  " + task.getTypeIcon() + task.getStatusIcon() + " "
+                + task.getDescription() + "\n");
+        sb.append("Now you have " + taskList.size() + " tasks in the list.");
+        return sb.toString();
     }
 
     /**
      * Executes Events Command
      *
      * @param argument  command arguments
-     * @return          boolean to represent termination of the program
+     * @return String to represent termination of the program
      */
-    private boolean executeEventCommand(String argument) {
+    private String executeEventCommand(String argument) {
         if (argument == null) {
-            System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
-            return false;
+            return "OOPS!!! The description of an event cannot be empty.";
         }
 
         String[] split = argument.split("/at", 2);
@@ -226,59 +201,58 @@ public class Duke extends Application {
         Task task = new Events(description, at);
         taskList.add(task);
 
-        System.out.println("Got it. I have added this task:");
-        System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
-                + task.getDescription());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        StringBuilder sb = new StringBuilder();
 
-        return false;
+        sb.append("Got it. I have added this task:\n");
+        sb.append("  " + task.getTypeIcon() + task.getStatusIcon() + " "
+                + task.getDescription() + "\n");
+        sb.append("Now you have " + taskList.size() + " tasks in the list.");
+
+        return sb.toString();
     }
 
     /**
      * Executes Delete Command
      *
      * @param argument  command arguments
-     * @return          boolean to represent termination of the program
+     * @return String to represent termination of the program
      */
-    private boolean executeDeleteCommand(String argument) {
+    private String executeDeleteCommand(String argument) {
         if (argument == null) {
-            System.out.println("☹ OOPS!!! The description of a delete cannot be empty.");
-            return false;
+            return "OOPS!!! The description of a delete cannot be empty.";
         }
 
         int taskId;
         try {
             taskId = Integer.parseInt(argument) - 1;
         } catch (NumberFormatException e) {
-            System.out.println("☹ OOPS!!! The id of a delete must be an integer.");
-            return false;
+            return "OOPS!!! The id of a delete must be an integer.";
         }
 
         if (taskId >= taskList.size() || taskId < 0) {
-            System.out.println("☹ OOPS!!! That is an invalid task id.");
-            return false;
+            return "OOPS!!! That is an invalid task id.";
         }
 
         Task task = taskList.remove(taskId);
+        StringBuilder sb = new StringBuilder();
 
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
-                + task.getDescription());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        sb.append("Noted. I've removed this task:\n");
+        sb.append("  " + task.getTypeIcon() + task.getStatusIcon() + " "
+                + task.getDescription() + "\n");
+        sb.append("Now you have " + taskList.size() + " tasks in the list.");
 
-        return false;
+        return sb.toString();
     }
 
     /**
      * Executes find Command
      *
      * @param argument  command arguments
-     * @return          boolean to represent termination of the program
+     * @return String to represent termination of the program
      */
-    private boolean executeFindCommand(String argument) {
+    private String executeFindCommand(String argument) {
         if (argument == null) {
-            System.out.println("☹ OOPS!!! The description of a find cannot be empty.");
-            return false;
+            return "OOPS!!! The description of a find cannot be empty.";
         }
 
         TaskList subList = new TaskList();
@@ -289,19 +263,21 @@ public class Duke extends Application {
             }
         }
 
+        StringBuilder sb = new StringBuilder();
+
         if (subList.size() == 0) {
-            System.out.println("There are no tasks that matches your search");
+            return "There are no tasks that matches your search";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            sb.append("Here are the matching tasks in your list:");
             for (int i = 0; i < subList.size() ; i++ ) {
-                System.out.println((i + 1) + ". "
+                sb.append(Integer.toString(i + 1) + ". "
                         + subList.get(i).getTypeIcon()
                         + subList.get(i).getStatusIcon() + " "
-                        + subList.get(i).getDescription()
+                        + subList.get(i).getDescription() + "\n"
                 );
             }
         }
 
-        return false;
+        return sb.toString();
     }
 }
