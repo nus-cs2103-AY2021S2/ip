@@ -41,11 +41,13 @@ public class Ui {
             msg = "    ____________________________________________________________\n"
                     + "     You have no matching tasks in your list :(\n"
                     + "    ____________________________________________________________";
+            System.out.println(msg);
         } else {
             Duke.respond = "Here are the matching tasks in your list:\n" + msg;
             msg = "    ____________________________________________________________\n"
                     + "     Here are the matching tasks in your list:\n"
                     + msg + "    ____________________________________________________________";
+            System.out.println(msg);
         }
     }
 

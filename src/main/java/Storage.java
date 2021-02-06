@@ -11,7 +11,7 @@ import java.util.Scanner;
  * A class that deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    String filePath;
+    static String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -27,6 +27,7 @@ public class Storage {
      *                       cannot be created, or cannot be opened for any other reason
      */
     public List<Task> check() throws IOException, DukeException {
+        assert filePath.length() > 0;
         File file = new File(filePath);
         if (!file.exists()) {
             File directory = new File("data");
@@ -56,11 +57,10 @@ public class Storage {
     /**
      * Scan the file to retrieve saved tasks from the previous login.
      *
-     * @throws DukeException         If an invalid command is given by the user. It also happens when there's lack of
-     *                               information when task is created such as no description, date and time.
      * @throws FileNotFoundException If the attempt to open the file denoted by a specified pathname has failed.
      */
-    public void scanFile() throws FileNotFoundException, DukeException {
+    public void scanFile() throws FileNotFoundException {
+        assert filePath.length() > 0;
         File file = new File(filePath);
 
         Scanner fileScanner = new Scanner(file);
@@ -121,7 +121,7 @@ public class Storage {
      *                     cannot be created, or cannot be opened for any other reason.
      */
     public static void save() throws IOException {
-        FileWriter fw = new FileWriter("data/duke.txt");
+        FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < TaskList.tasks.size(); i++) {
             Task task = TaskList.tasks.get(i);
             if (task instanceof ToDo) {
