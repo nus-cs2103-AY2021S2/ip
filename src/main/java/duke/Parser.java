@@ -67,49 +67,78 @@ public class Parser {
     }
 
     private static String[] extractFlagFromArgument(String arg, String[] flags) {
-        String[] output = new String[4];
+        String[] output = new String[3];
         for (String flag : flags) {
             if (!arg.contains(flag)) {
                 continue;
             }
             String[] data = arg.split(" " + flag + " ", 2);
-            String[] temp = data[1].split(" ");
+            String beforeFlag = data[0];
+            String afterFlag = data[1];
 
-            output[0] = data[0];
-            output[1] = temp[0];
-            output[2] = temp[1];
-            output[3] = flag;
-            break;
+            return new String[] {beforeFlag, afterFlag, flag};
         }
         return output;
     }
 
     private static String[] extractOptionalFlags(String[] args, String[] optionalFlags) {
         //[name, date, instances, interval, type]
-        String[] output = new String[5];
+        String name;
+        String date;
+        String instance = null;
+        String interval = null;
+        String type = null;
 
         if (isFlagInArgument(args[0], optionalFlags)) {
             String[] temp = extractFlagFromArgument(args[0], optionalFlags);
 
-            output[0] = temp[0]; //name
-            output[1] = args[1]; //date
-            output[2] = temp[1]; //instance
-            output[3] = temp[2]; //interval
-            output[4] = temp[3]; //type
+            name = temp[0];
+            date = args[1];
+            instance = temp[1].split(" ")[0];
+            interval = temp[1].split(" ")[1];
+            type = temp[2];
+
         } else if (isFlagInArgument(args[1], optionalFlags)) {
             String[] temp = extractFlagFromArgument(args[1], optionalFlags);
-            System.out.println(temp[1]);
-            output[0] = args[0]; //name
-            output[1] = temp[0]; //date
-            output[2] = temp[1]; //instance
-            output[3] = temp[2]; //interval
-            output[4] = temp[3]; //type
+
+            name = args[0];
+            date = temp[0];
+            instance = temp[1].split(" ")[0];
+            interval = temp[1].split(" ")[1];
+            type = temp[2];
+
         } else {
-            output[0] = args[0];
-            output[1] = args[1];
+            name = args[0];
+            date = args[1];
         }
 
-        return output;
+        return new String[] {name, date, instance, interval, type};
+    }
+
+    private static EventCommand eventTaskHandler(String[] params) throws DukeException {
+        try {
+            String[] args;
+            args = extractFlag(params[0], params[1], "/at");
+
+            //optional flag can come before or after the mandatory flag
+            args = extractOptionalFlags(args, intervalFlags);
+
+            assert args.length > 1 : "Broken splitting";
+
+            String name = args[0];
+            LocalDate date = processDate(args[1]);
+
+            if (args[2] != null) {
+                int instances = Integer.parseInt(args[2]);
+                int interval = Integer.parseInt(args[3]);
+                String intervalType = args[4];
+                return new EventCommand(name, date, instances, interval, intervalType);
+            }
+            return new EventCommand(name, date);
+
+        } catch (Exception e) {
+            throw new DukeInvalidParametersException();
+        }
     }
 
     /**
@@ -157,20 +186,7 @@ public class Parser {
                 date = processDate(args[1]);
                 return new DeadlineCommand(args[0], date);
             case "event":
-                args = extractFlag(params[0], params[1], "/at");
-                //optional flag can come before or after the mandatory flag
-                args = extractOptionalFlags(args, intervalFlags);
-                assert args.length > 1 : "Broken splitting";
-                //System.out.println(args[2]);
-                date = processDate(args[1]);
-
-                if (args[2] != null) {
-                    int instances = Integer.parseInt(args[2]);
-                    int interval = Integer.parseInt(args[3]);
-                    return new EventCommand(args[0], date, instances, interval, args[4]);
-                }
-
-                return new EventCommand(args[0], date);
+                return eventTaskHandler(params);
             case "find":
                 return new FindCommand(params[1]);
             default:
