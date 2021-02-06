@@ -7,6 +7,7 @@ public class Parser {
 
     /**
      * Create a new Parser object
+     *
      * @param ui: stores ui given to log errors if they occur.
      */
     public Parser(Ui ui) {
@@ -16,11 +17,12 @@ public class Parser {
     /**
      * Parses the input gotten by the Ui, returns a command to the Oracle to execute, but doesnt execute anything
      * by itself
+     *
      * @param input: this is the raw String given by the user
      * @return specified Command
      */
     public Command parse(String input) {
-        assert(!input.isEmpty()); // assert that we have non-empty string
+        assert (!input.isEmpty()); // assert that we have non-empty string
         String[] split = input.split(" ", 2); // Split user input - used for operations with params
         if (input.equals("bye")) {
             return new ExitCommand();
@@ -38,14 +40,38 @@ public class Parser {
             return parseDeadlineCommand(split);
         } else if (split[0].equals("find")) {
             return parseFindCommand(split);
+        } else if (split[0].equals("postpone")) {
+            return parsePostponeCommand(split);
         } else {
             ui.showFormatException();
             return new EmptyCommand();
         }
     }
-    /** CASE: FIND TASKS BASED ON KEYWORD
+
+    /**
+     * CASE: POSTPONE TASK
+     * use: find the task with the given index and postpone it by the given amount
+     * form: 'postpone {id} {value} {measure}'
+     * measure: 'mins', 'hrs', 'days', or 'weeks'
+     * @param split: contains the arguments of instruction
+     * @return FindCommand (success), EmptyCommand (failure)
+     */
+    private Command parsePostponeCommand(String[] split) {
+        try {
+            String[] params = split[1].split(" ", 3);
+            int taskIndex = Integer.parseInt(params[0]) - 1;
+            return new PostponeCommand(taskIndex, Integer.parseInt(params[1]), params[2]);
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            ui.showFormatException("PostponeCommand");
+            return new EmptyCommand();
+        }
+    }
+
+    /**
+     * CASE: FIND TASKS BASED ON KEYWORD
      * use: find all the tasks containing the user specified keyword
-     * form: 'event {description} /{deadline}'
+     * form: 'find {description} /{deadline}'
+     *
      * @param split: contains the arguments of instruction
      * @return FindCommand (success), EmptyCommand (failure)
      */
@@ -59,9 +85,11 @@ public class Parser {
         return new EmptyCommand();
     }
 
-    /** CASE: CREATE DEADLINE
+    /**
+     * CASE: CREATE DEADLINE
      * use: creates a deadline with the given description and deadline
-     * form: 'event {description} /{deadline}'
+     * form: 'deadline {description} /{deadline}'
+     *
      * @param split: contains the arguments of instruction
      * @return DeadlineCommand (success), EmptyCommand (failure)
      */
@@ -75,9 +103,11 @@ public class Parser {
         return new EmptyCommand();
     }
 
-    /** CASE: CREATE EVENT
+    /**
+     * CASE: CREATE EVENT
      * use: creates a event with the given description and time
      * form: 'event {description} /{time}'
+     *
      * @param split: contains the arguments of instruction
      * @return EventCommand (success), EmptyCommand (failure)
      */
@@ -91,9 +121,11 @@ public class Parser {
         return new EmptyCommand();
     }
 
-    /** CASE: CREATE TODO
+    /**
+     * CASE: CREATE TODO
      * use: creates a todo with the given description
      * form: 'todo {description}'
+     *
      * @param split contains the arguments of instruction
      * @return TodoCommand (success), EmptyCommand (failure)
      */
@@ -106,9 +138,11 @@ public class Parser {
         return new EmptyCommand();
     }
 
-    /** CASE: DELETE TASK
+    /**
+     * CASE: DELETE TASK
      * use: deletes the task with the given id from the arraylist
      * form: 'delete {id}', where id is a valid int corresponding to size of tasklist
+     *
      * @param split contains the arguments of instruction
      * @return DeleteCommand (success), EmptyCommand (failure)
      */
@@ -124,9 +158,11 @@ public class Parser {
         return new EmptyCommand();
     }
 
-    /** CASE: MARK TASK AS DONE
+    /**
+     * CASE: MARK TASK AS DONE
      * use: marks the task with given id as done
      * form: 'done {id}', where id is a valid int corresponding to size of tasklist
+     *
      * @param split: contains the arguments of instruction
      * @return DoneCommand (success), EmptyCommand (failure)
      */

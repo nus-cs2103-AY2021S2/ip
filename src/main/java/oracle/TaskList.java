@@ -63,7 +63,7 @@ public class TaskList {
      * @param i: the index of the task to be gotten
      * @return Task
      */
-    public Task get(int i) {
+    public Task get(int i) throws IndexOutOfBoundsException {
         return this.tasklist.get(i);
     }
 

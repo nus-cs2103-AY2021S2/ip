@@ -44,6 +44,14 @@ public class Deadline extends Task {
         }
     }
 
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
+
     /** Parses the String to produce a LocalDateTime. If information is wrong, throws CommandFormatException,
      * which will be eventually handled to remind users to use correct format. See Ui.
      * @param sorted: the sorted tags corresponding to various "time" arguments

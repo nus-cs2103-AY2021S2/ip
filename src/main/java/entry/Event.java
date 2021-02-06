@@ -9,6 +9,7 @@ import java.util.Locale;
 
 public class Event extends Task {
     LocalDateTime time;
+
     /**
      * Returns an Task.Event
      * sorted should have 4 arguments, delimited by spaces
@@ -41,6 +42,14 @@ public class Event extends Task {
         } catch (NumberFormatException e){
             throw new CommandFormatException(e.getMessage());
         }
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
     /** Parses the String to produce a LocalDateTime. If information is wrong, throws CommandFormatException,

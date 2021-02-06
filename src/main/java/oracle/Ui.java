@@ -1,5 +1,6 @@
 package oracle;
 
+import entry.Deadline;
 import entry.Task;
 
 import java.util.ArrayList;
@@ -16,7 +17,8 @@ public class Ui {
             "EventCommand", "   event {description} /{day} {month} {year} {hour}{minute}",
             "MarkDoneCommand", "done {taskIndex}",
             "FindCommand", "    find {keyword}",
-            "DeleteCommand", "  delete {taskIndex}"
+            "DeleteCommand", "  delete {taskIndex}",
+            "PostponeCommand", "postpone {taskIndex} {value} {measure}"
             );
 
     /**
@@ -115,10 +117,18 @@ public class Ui {
 
     /** Show recently deleted task
      * @param i index of deleted task
-     * @param t deleted Task
+     * @param task deleted Task
      */
-    public void showDeleteTask(int i, Task t) {
-        System.out.println("Erased: " + (i + 1) + ". " + t);
+    public void showDeleteTask(int i, Task task) {
+        System.out.println("Erased: " + (i + 1) + ". " + task);
+    }
+
+    /** Show recently deleted task
+     * @param i index of postponed task
+     * @param task postponed Task
+     */
+    public void showPostponedTask(int i, Task task) {
+        System.out.println("Postponed: " + (i + 1) + ". " + task);
     }
 
     /** Clarifies the format of the given command to the user
