@@ -43,18 +43,22 @@ public class Parser {
             } else if (commandStr.trim().toLowerCase().equals("list")) {
                 command = new ListCommand();
             } else if (commandStr.toLowerCase().split(" ")[0].equals("done")) {
+                assert commandStr.substring(0, 4).toLowerCase().equals("done") : "done parse failed";
                 int doneIndex = Integer.parseInt(commandStr.split(" ")[1]) - 1;
                 command = new DoneCommand(doneIndex);
             } else if (commandStr.toLowerCase().split(" ")[0].equals("delete")) {
+                assert commandStr.substring(0, 6).toLowerCase().equals("delete") : "delete parse failed";
                 int deleteIndex = Integer.parseInt(commandStr.split(" ")[1]) - 1;
                 command = new DeleteCommand(deleteIndex);
             } else if (commandStr.toLowerCase().split(" ")[0].equals("todo")) {
+                assert commandStr.substring(0, 4).toLowerCase().equals("todo") : "todo parse failed";
                 String todoName = commandStr.substring(5);
                 if (todoName.trim().length() == 0) {
                     throw new IllegalInputFormatException();
                 }
                 command = new AddTodoCommand(todoName);
             } else if (commandStr.toLowerCase().split(" ")[0].equals("deadline")) {
+                assert commandStr.substring(0, 8).toLowerCase().equals("deadline") : "deadline parse failed";
                 String[] arr = commandStr.split(" /");
                 String name = arr[0].substring(9);
                 String[] arr2 = arr[1].split(" ", 2);
@@ -65,6 +69,7 @@ public class Parser {
                     command = new AddDeadlineCommand(name, arr2[0], arr2[1]);
                 }
             } else if (commandStr.toLowerCase().split(" ")[0].equals("event")) {
+                assert commandStr.substring(0, 5).toLowerCase().equals("event") : "event parse failed";
                 String[] arr = commandStr.split(" /");
                 String name = arr[0].substring(6);
                 String[] arr2 = arr[1].split(" ", 2);
@@ -75,6 +80,7 @@ public class Parser {
                     command = new AddEventCommand(name, arr2[0], arr2[1]);
                 }
             } else if (commandStr.toLowerCase().split(" ")[0].equals("find")) {
+                assert commandStr.substring(0, 4).toLowerCase().equals("find") : "find parse failed";
                 String keyword = commandStr.substring(5);
                 if (keyword.trim().length() == 0) {
                     throw new IllegalInputFormatException();
