@@ -9,8 +9,9 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.utils.Command;
+import duke.utils.HelpMessages;
+import duke.utils.Messages;
 
 /**
  * Main class of the application.
@@ -39,7 +40,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             String[] tokens = Parser.splitIntoSubstrings(input);
-            Command command = Parser.parseCommand(tokens);
+            Command command = Parser.parseCommand(tokens[0]);
             return runUserCommand(command, tokens);
         } catch (DukeException e) {
             return e.getMessage();
@@ -76,13 +77,13 @@ public class Duke {
         String message = null;
         switch (command) {
         case BYE:
-            message = Ui.GOODBYE_MESSAGE;
+            message = Messages.getGoodbyeMessage();
             System.exit(0);
             break;
         case DONE:
             try {
                 Task task = taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
-                message = Ui.getSuccessfullyDoneMessage(task);
+                message = Messages.getSuccessfullyDoneMessage(task);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new IncompleteInputException(command);
             }
@@ -90,24 +91,28 @@ public class Duke {
         case DELETE:
             try {
                 Task task = taskList.delete(Integer.parseInt(tokens[1]) - 1);
-                message = Ui.getSuccessfullyDeletedMessage(taskList.getSize(), task);
+                message = Messages.getSuccessfullyDeletedMessage(taskList.getSize(), task);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new IncompleteInputException(command);
             }
             break;
         case FIND:
             String[] searchParameters = tokens[1].toLowerCase().split(" ");
-            message = Ui.getFilteredTasksMessage(taskList.getFilteredTaskList(searchParameters));
+            message = Messages.getFilteredTasksMessage(taskList.getFilteredTaskList(searchParameters));
             break;
         case LIST:
-            message = Ui.getAllTasksMessage(taskList.getTasks());
+            message = Messages.getAllTasksMessage(taskList.getTasks());
+            break;
+        case HELP:
+            boolean isDescriptionEmpty = tokens.length < 2;
+            message = isDescriptionEmpty ? HelpMessages.getMessage("") : HelpMessages.getMessage(tokens[1]);
             break;
         case TODO:
         case DEADLINE:
         case EVENT:
             try {
                 Task task = taskList.addTask(command, tokens[1].trim());
-                message = Ui.getSuccessfullyAddedTaskMessage(taskList.getSize(), task);
+                message = Messages.getSuccessfullyAddedTaskMessage(taskList.getSize(), task);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new IncompleteInputException(command);
             }

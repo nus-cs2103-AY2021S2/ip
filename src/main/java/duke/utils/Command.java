@@ -10,6 +10,7 @@ public enum Command {
     DONE,
     EVENT,
     FIND,
+    HELP,
     LIST,
     TODO
 }

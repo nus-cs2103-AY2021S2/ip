@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.utils.Messages;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -30,7 +31,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        displayDukeMessage(Ui.WELCOME_MESSAGE);
+        displayDukeMessage(Messages.getWelcomeMessage());
     }
 
     public void setDuke(Duke d) {
