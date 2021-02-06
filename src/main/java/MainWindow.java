@@ -21,8 +21,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat2_png.png"));
+    private Image dukeNormalImage = new Image(this.getClass().getResourceAsStream("/images/cat3_png.png"));
+    private Image dukeErrorImage = new Image(this.getClass().getResourceAsStream("/images/cat1_png.png"));
 
     @FXML
     public void initialize() {
@@ -30,7 +31,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(
-                        "hello", dukeImage)
+                        "hello", dukeNormalImage)
         );
     }
 
@@ -47,10 +48,19 @@ public class MainWindow extends AnchorPane {
         if (!duke.getIsTerminated()) {
             String input = userInput.getText();
             String response = duke.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
+
+            if (!duke.getIsCurrentError()) {
+
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, dukeNormalImage)
+                );
+            } else {
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, dukeErrorImage)
+                );
+            }
             userInput.clear();
         } else {
             if (userInput.getText().equals("q")) {

@@ -30,7 +30,7 @@ public class Ui {
     }
 
     public String returnGoodbyeLine() {
-        return "Bye. Hope to see you again soon!" + "\n Please close this window by typing q or using the button!";
+        return "Bye. Hope to see you again soon!" + "\nPlease close this window by typing q or using the button!";
     }
 
     private String numberOfTasksLine(int numberOfTasks) {
@@ -46,36 +46,44 @@ public class Ui {
      * @param taskArray task array list to show to the viewer
      */
     public void showTaskList(ArrayList<Task> taskArray) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(horizontalLine()).append('\n');
+        if (taskArray.size() > 0) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(horizontalLine()).append('\n');
 
-        sb.append(padSpaces("Here are the task in your list:\n", 5));
-        for (int i = 0; i < taskArray.size(); i++) {
+            sb.append(padSpaces("Here are the task in your list:\n", 5));
+            for (int i = 0; i < taskArray.size(); i++) {
 
-            Task currentTask = taskArray.get(i);
+                Task currentTask = taskArray.get(i);
 
-            String numberIndicator = (i + 1) + ".";
-            String temp = numberIndicator + currentTask.toString() + '\n';
+                String numberIndicator = (i + 1) + ".";
+                String temp = numberIndicator + currentTask.toString() + '\n';
 
-            sb.append(padSpaces(temp, 5));
+                sb.append(padSpaces(temp, 5));
+            }
+            sb.append(horizontalLine());
+            System.out.println(sb.toString());
+        } else {
+            System.out.println(defaultFormatting("There are no tasks on your list currently!"));
         }
-        sb.append(horizontalLine());
-        System.out.println(sb.toString());
     }
 
     public String returnTaskList(ArrayList<Task> taskArray) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the task in your list:\n");
-        for (int i = 0; i < taskArray.size(); i++) {
+        if (taskArray.size() > 0) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the task in your list:\n");
+            for (int i = 0; i < taskArray.size(); i++) {
 
-            Task currentTask = taskArray.get(i);
+                Task currentTask = taskArray.get(i);
 
-            String numberIndicator = (i + 1) + ".";
-            String temp = numberIndicator + currentTask.toString() + '\n';
+                String numberIndicator = (i + 1) + ".";
+                String temp = numberIndicator + currentTask.toString() + '\n';
 
-            sb.append(padSpaces(temp, paddingGui));
+                sb.append(padSpaces(temp, paddingGui));
+            }
+            return sb.toString();
+        } else {
+            return "There are no tasks on your list currently!";
         }
-        return sb.toString();
     }
 
     public void showLoadingSucess() {
@@ -91,7 +99,7 @@ public class Ui {
     }
 
     public String returnErrorMsg(String errorMsg) {
-        return "ERROR: " + errorMsg;
+        return errorMsg;
     }
 
     /**

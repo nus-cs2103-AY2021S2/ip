@@ -15,8 +15,6 @@ public class Main extends Application {
     private static final String RELATIVE_PATH = FOLDER_NAME + "/" + FILE_NAME;
     private Duke duke = new Duke(RELATIVE_PATH, FOLDER_NAME);
 
-    public Stage myStage;
-
     @Override
     public void start(Stage stage) {
         try {
@@ -30,5 +28,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
 }

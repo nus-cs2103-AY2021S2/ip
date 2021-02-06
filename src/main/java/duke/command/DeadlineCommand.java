@@ -30,22 +30,22 @@ public class DeadlineCommand implements Command {
      * @param dukeStorage give dukeStorage
      */
     @Override
-    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException {
         try {
             Task deadlineTask = dukeTaskList.addDeadlineTask(eventDescription);
             dukeUi.showAddedTask(deadlineTask, dukeTaskList.getNumberOfTasks());
         } catch (DukeException e) {
-            dukeUi.showErrorMsg(e.getMessage());
+            throw e;
         }
     }
 
     @Override
-    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException {
         try {
             Task deadlineTask = dukeTaskList.addDeadlineTask(eventDescription);
             return dukeUi.returnAddedTask(deadlineTask, dukeTaskList.getNumberOfTasks());
         } catch (DukeException e) {
-            return dukeUi.returnErrorMsg(e.getMessage());
+            throw e;
         }
     }
 }

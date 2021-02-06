@@ -12,13 +12,12 @@ public class Duke {
     private static final String FILE_NAME = "dukedata.txt";
     private static final String FOLDER_NAME = "data";
     private static final String RELATIVE_PATH = FOLDER_NAME + "/" + FILE_NAME;
-
+    private boolean isTerminated;
     private Storage dukeStorage;
     private TaskList dukeTaskList;
     private Ui dukeUi;
     private Parser stringParser;
-
-    boolean isTerminated;
+    private boolean isCurrentError;
 
     /**
      * Default Constructor for Duke
@@ -28,6 +27,7 @@ public class Duke {
     public Duke(String filePath, String folderName) {
         dukeUi = new Ui();
         stringParser = new Parser();
+        isCurrentError = false;
         try {
             dukeStorage = new Storage(filePath, folderName);
             dukeTaskList = new TaskList(dukeStorage.load());
@@ -37,7 +37,6 @@ public class Duke {
             dukeTaskList = new TaskList();
         }
         System.out.println();
-
     }
 
     /**
@@ -50,11 +49,13 @@ public class Duke {
         boolean isExit = stringParser.checkIfExit(userInput);
 
         while (!isExit) {
+            isCurrentError = false;
             try {
                 Command c = stringParser.parse(userInput);
                 c.execute(dukeTaskList, dukeUi, dukeStorage);
             } catch (DukeException e) {
                 dukeUi.showErrorMsg(e.getMessage());
+                isCurrentError = true;
             }
             userInput = dukeUi.readCommand();
             isExit = stringParser.checkIfExit(userInput);
@@ -71,30 +72,29 @@ public class Duke {
     public String getResponse(String userInput) {
         String toReturnString;
         boolean isExit = stringParser.checkIfExit(userInput);
-
+        isCurrentError = false;
         if (!isExit) {
             try {
                 Command c = stringParser.parse(userInput);
                 toReturnString = c.executeGui(dukeTaskList, dukeUi, dukeStorage);
             } catch (DukeException e) {
                 toReturnString = dukeUi.returnErrorMsg(e.getMessage());
+                isCurrentError = true;
             }
-
             try {
                 dukeStorage.saveToFile(dukeTaskList.getCurrentTaskList());
             } catch (DukeException e) {
-                dukeUi.showErrorMsg(e.getMessage());
+                toReturnString = dukeUi.returnErrorMsg(e.getMessage());
+                isCurrentError = true;
             }
             return toReturnString;
-        }else{
+        } else {
             isTerminated = true;
             return getGoodbyeLine();
         }
     }
-
-
-    public static void main(String[] args) {
-        new Duke(RELATIVE_PATH, FOLDER_NAME).run();
+    public boolean getIsCurrentError() {
+        return isCurrentError;
     }
 
     public String getWelcomeLine() {
@@ -105,7 +105,12 @@ public class Duke {
         return dukeUi.returnGoodbyeLine();
     }
 
-    public boolean getIsTerminated(){
+    public boolean getIsTerminated() {
         return isTerminated;
     }
+
+    public static void main(String[] args) {
+        new Duke(RELATIVE_PATH, FOLDER_NAME).run();
+    }
+
 }

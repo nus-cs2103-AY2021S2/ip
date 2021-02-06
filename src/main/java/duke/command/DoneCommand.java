@@ -27,22 +27,22 @@ public class DoneCommand implements Command {
      * @param dukeStorage give dukeStorage
      */
     @Override
-    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException {
         try {
             Task doneTask = dukeTaskList.checkTaskAsDone(taskDoneInt);
             dukeUi.showTaskDone(doneTask);
         } catch (DukeException e) {
-            dukeUi.showErrorMsg(e.getMessage());
+            throw e;
         }
     }
 
     @Override
-    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException {
         try {
             Task doneTask = dukeTaskList.checkTaskAsDone(taskDoneInt);
             return dukeUi.returnTaskDone(doneTask);
         } catch (DukeException e) {
-            return dukeUi.returnErrorMsg(e.getMessage());
+            throw e;
         }
     }
 }

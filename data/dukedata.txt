@@ -1,4 +1,1 @@
-D|1|return book|20-11-2021
-E|1|buy book|popular
-T|0|Level 10
-E|0|sleep|bed
+D|0|sleep|06-02-2020

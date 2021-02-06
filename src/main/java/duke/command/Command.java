@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.DukeException;
 import duke.maincomponents.Storage;
 import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
@@ -9,7 +10,8 @@ import duke.maincomponents.Ui;
  */
 
 public interface Command {
-    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage);
+    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException;
 
-    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage);
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException;
+
 }

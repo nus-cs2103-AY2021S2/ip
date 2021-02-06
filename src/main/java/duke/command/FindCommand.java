@@ -20,12 +20,10 @@ public class FindCommand implements Command {
         ArrayList<Task> newTaskList = new ArrayList<>();
 
         for (Task currentTask : currentTaskList) {
-
             if (currentTask.descriptionContains(stringToFind)) {
                 newTaskList.add(currentTask);
             }
         }
-
         dukeUi.showFoundTaskList(newTaskList);
     }
 
@@ -35,12 +33,10 @@ public class FindCommand implements Command {
         ArrayList<Task> newTaskList = new ArrayList<>();
 
         for (Task currentTask : currentTaskList) {
-
             if (currentTask.descriptionContains(stringToFind)) {
                 newTaskList.add(currentTask);
             }
         }
-
         return dukeUi.returnFoundTaskList(newTaskList);
     }
 }

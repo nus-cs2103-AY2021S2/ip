@@ -13,22 +13,22 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+    public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException {
         try {
             Task deletedTask = dukeTaskList.deleteTask(taskDeleteInt);
             dukeUi.showTaskDeleted(deletedTask, dukeTaskList.getNumberOfTasks());
         } catch (DukeException e) {
-            dukeUi.showErrorMsg(e.getMessage());
+            throw e;
         }
     }
 
     @Override
-    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) {
+    public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException {
         try {
             Task deletedTask = dukeTaskList.deleteTask(taskDeleteInt);
             return dukeUi.returnTaskDeleted(deletedTask, dukeTaskList.getNumberOfTasks());
         } catch (DukeException e) {
-            return dukeUi.returnErrorMsg(e.getMessage());
+            throw e;
         }
     }
 }
