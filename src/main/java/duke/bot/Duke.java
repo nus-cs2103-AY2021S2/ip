@@ -24,14 +24,14 @@ public class Duke {
         Command.setup(ui, taskManager);
 
         try {
-            Storage.loadTasksTo(taskManager);
+            Storage.loadTasks(taskManager);
         } catch (DukeLoadException e) {
-            ui.constructErrorMsg(e.getMessage());
+            ui.constructErrorMessage(e.getMessage());
         }
     }
 
     public String getBootupMsg() {
-        return ui.constructWelcomeMsg(CHATBOT_NAME);
+        return ui.constructWelcomeMessage(CHATBOT_NAME);
     }
 
     /**
@@ -51,7 +51,7 @@ public class Duke {
     }
 
     public String getExitMsg() {
-        return ui.constructGoodbyeMsg();
+        return ui.constructGoodbyeMessage();
     }
 
     public boolean hasClosed() {

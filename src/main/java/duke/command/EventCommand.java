@@ -12,21 +12,21 @@ public class EventCommand extends Command {
     /** Description of an Event that is going to be created */
     private String desc = "";
     /** Starting date and time of an Event that is going to be created  */
-    private LocalDateTime start;
+    private LocalDateTime startDateTime;
     /** Ending date and time of an Event that is going to be created */
-    private LocalDateTime end;
+    private LocalDateTime endDateTime;
 
     /**
      * Constructor of an EventCommand
      *
      * @param desc Description of an Event that is going to be created
-     * @param start Starting date and time of an Event that is going to be created
-     * @param end Ending date and time of an Event that is going to be created
+     * @param startDateTime Starting date and time of an Event that is going to be created
+     * @param endDateTime Ending date and time of an Event that is going to be created
      */
-    public EventCommand(String desc, LocalDateTime start, LocalDateTime end) {
+    public EventCommand(String desc, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.desc = desc;
-        this.start = start;
-        this.end = end;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     /**
@@ -38,9 +38,9 @@ public class EventCommand extends Command {
     @Override
     public String execute() throws DukeCommandException {
         try {
-            Event event = taskManager.addEvent(this.desc, this.start, this.end);
+            Event event = taskManager.addEvent(this.desc, this.startDateTime, this.endDateTime);
             Storage.saveTasks(taskManager.getTasks());
-            return ui.constructAddMsg(event, taskManager.getTasksSize());
+            return ui.constructAddMessage(event, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("event", desc, e.getMessage());
         }

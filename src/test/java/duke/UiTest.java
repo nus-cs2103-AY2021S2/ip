@@ -40,7 +40,7 @@ public class UiTest {
         String expected = BORDER + "\r\n" + msg + "\r\n" + BORDER;
 
         Ui ui = new Ui();
-        ui.constructMsg(msg);
+        ui.constructMessage(msg);
         assertEquals(expected, outputStream.toString().trim());
     }
 
@@ -52,7 +52,7 @@ public class UiTest {
         List<Task> tasks = new ArrayList<>();
 
         Ui ui = new Ui();
-        ui.constructTaskList(tasks);
+        ui.constructTaskListMessage(tasks);
         assertEquals(expected, outputStream.toString().trim());
     }
 
@@ -72,7 +72,7 @@ public class UiTest {
         tasks.add(new Event("DESCRIPTION 3", dateTime, dateTime));
 
         Ui ui = new Ui();
-        ui.constructTaskList(tasks);
+        ui.constructTaskListMessage(tasks);
         assertEquals(expected, outputStream.toString().trim());
     }
 
@@ -95,15 +95,15 @@ public class UiTest {
         Event event = new Event("DESCRIPTION 3", dateTime, dateTime);
 
         Ui ui = new Ui();
-        ui.constructAddMsg(toDo, 99);
+        ui.constructAddMessage(toDo, 99);
         assertEquals(expectedToDo, outputStream.toString().trim());
 
         outputStream.reset();
-        ui.constructAddMsg(deadline, 99);
+        ui.constructAddMessage(deadline, 99);
         assertEquals(expectedDeadline, outputStream.toString().trim());
 
         outputStream.reset();
-        ui.constructAddMsg(event, 99);
+        ui.constructAddMessage(event, 99);
         assertEquals(expectedEvent, outputStream.toString().trim());
     }
 
@@ -126,15 +126,15 @@ public class UiTest {
         Event event = new Event("DESCRIPTION 3", dateTime, dateTime);
 
         Ui ui = new Ui();
-        ui.constructDoneMsg(99, toDo);
+        ui.constructDoneMessage(99, toDo);
         assertEquals(expectedToDo, outputStream.toString().trim());
 
         outputStream.reset();
-        ui.constructDoneMsg(99, deadline);
+        ui.constructDoneMessage(99, deadline);
         assertEquals(expectedDeadline, outputStream.toString().trim());
 
         outputStream.reset();
-        ui.constructDoneMsg(99, event);
+        ui.constructDoneMessage(99, event);
         assertEquals(expectedEvent, outputStream.toString().trim());
     }
 
@@ -157,15 +157,15 @@ public class UiTest {
         Event event = new Event("DESCRIPTION 3", dateTime, dateTime);
 
         Ui ui = new Ui();
-        ui.constructDeleteMsg(toDo, 99);
+        ui.constructDeleteMessage(toDo, 99);
         assertEquals(expectedToDo, outputStream.toString().trim());
 
         outputStream.reset();
-        ui.constructDeleteMsg(deadline, 99);
+        ui.constructDeleteMessage(deadline, 99);
         assertEquals(expectedDeadline, outputStream.toString().trim());
 
         outputStream.reset();
-        ui.constructDeleteMsg(event, 99);
+        ui.constructDeleteMessage(event, 99);
         assertEquals(expectedEvent, outputStream.toString().trim());
     }
 
@@ -186,7 +186,7 @@ public class UiTest {
         tasks.add(new Event("DESCRIPTION 3", dateTime, dateTime));
 
         Ui ui = new Ui();
-        ui.constructFoundMsg(tasks);
+        ui.constructFoundMessage(tasks);
         assertEquals(expected, outputStream.toString().trim());
     }
 
