@@ -12,7 +12,9 @@ public class Ui {
      * @return welcome message
      */
     public static String showWelcome() {
-        return "Hello! I'm Duke\n" + "What can I do for you?";
+        String toPrint = "Hello! I'm Duke\n" + "What can I do for you?";
+        assert !toPrint.isEmpty() : "Something should be printed.";
+        return toPrint;
     }
     /**
      * Prints an exit message.
@@ -20,7 +22,8 @@ public class Ui {
      * @return exit message
      */
     public String exitDuke() {
-        return "Bye. Hope to see you again soon!";
-
+        String toPrint = "Bye. Hope to see you again soon!";
+        assert !toPrint.isEmpty() : "Something should be printed.";
+        return toPrint;
     }
 }

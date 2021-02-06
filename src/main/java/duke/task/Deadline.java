@@ -22,8 +22,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
+        String toPrint = "[D]" + super.toString() + " (by: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+        assert !toPrint.isEmpty() : "Something should be printed.";
+        return toPrint;
     }
 
     /**

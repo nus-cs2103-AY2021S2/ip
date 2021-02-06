@@ -18,7 +18,9 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String toPrint = "[T]" + super.toString();
+        assert !toPrint.isEmpty() : "Something should be printed.";
+        return toPrint;
     }
 
     /**

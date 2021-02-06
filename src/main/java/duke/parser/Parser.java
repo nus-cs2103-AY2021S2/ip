@@ -44,6 +44,8 @@ public class Parser {
         } else {
             throw new InvalidInstructionException();
         }
+        assert false : "All possiblilities have been handled.";
+
         return command;
     }
 }

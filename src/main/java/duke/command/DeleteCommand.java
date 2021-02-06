@@ -39,6 +39,8 @@ public class DeleteCommand extends Command {
      * @throws DukeException in case there is no input
      */
     public String execute(TaskList tasks, String input, Storage storage) throws DukeException {
+        assert !input.isEmpty() : "Input should not be blank.";
+
         try {
             String temp = input.split(" ", 2)[1];
             return tasks.delete(input);

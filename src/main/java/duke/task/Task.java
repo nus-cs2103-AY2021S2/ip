@@ -21,9 +21,13 @@ public class Task {
     @Override
     public String toString() {
         if (this.done) {
-            return String.format("[X] %s", this.name);
+            String toPrint = String.format("[X] %s", this.name);
+            assert !toPrint.isEmpty() : "Something should be printed.";
+            return toPrint;
         } else {
-            return String.format("[  ] %s", this.name);
+            String toPrint = String.format("[  ] %s", this.name);
+            assert !toPrint.isEmpty() : "Something should be printed.";
+            return toPrint;
         }
     }
 
@@ -41,5 +45,9 @@ public class Task {
      */
     public String getTaskDetails() {
         return this.name;
+    }
+
+    public boolean isEmpty() {
+        return false;
     }
 }

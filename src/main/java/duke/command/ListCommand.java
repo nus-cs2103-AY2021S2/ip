@@ -29,6 +29,8 @@ public class ListCommand extends Command {
      * @param storage handles the various tasks according to their type
      */
     public String execute(TaskList tasks, String input, Storage storage) {
+        assert !input.isEmpty() : "Input should not be blank.";
+
         if (tasks.getSize() == 0) {
             return "You have no tasks on your list.\nAdd one now!";
         } else {

@@ -33,6 +33,8 @@ public class FindCommand extends Command {
      */
 
     public String execute(TaskList tasks, String input, Storage storage) throws DukeException {
+        assert !input.isEmpty() : "Input should not be blank.";
+
         try {
             String temp = input.split(" ", 2) [1];
             return tasks.find(input);

@@ -31,6 +31,7 @@ public class AddCommand extends Command {
      * @throws DukeException in case input is invalid
      */
     public String execute(TaskList tasks, String input, Storage storage) {
+        assert !input.isEmpty() : "Input should not be blank.";
         String type = input.split(" ")[0];
 
         try {
@@ -41,6 +42,7 @@ public class AddCommand extends Command {
             } else if (type.equals("event")) {
                 return tasks.addEvent(input);
             }
+            assert false : "All task commands should be handled.";
         } catch (DukeException e) {
             return e.getMessage();
         }

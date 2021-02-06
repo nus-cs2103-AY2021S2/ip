@@ -81,6 +81,8 @@ public class Storage {
                     }
 
                     Task todoTask = new Todo(taskDetails);
+                    assert todoTask.isEmpty() : "Task should not be empty.";
+
                     if (isDone) {
                         todoTask.setDone();
                     }
@@ -113,6 +115,7 @@ public class Storage {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
                     LocalDateTime dateTime = LocalDateTime.parse(taskDateAndTime, formatter);
                     Task deadlineTask = new Deadline(taskDetails, dateTime);
+                    assert deadlineTask.isEmpty() : "Task should not be empty.";
 
                     if (isDone) {
                         deadlineTask.setDone();
@@ -146,6 +149,7 @@ public class Storage {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
                     LocalDateTime dateTime = LocalDateTime.parse(taskDateAndTime, formatter);
                     Task eventTask = new Event(taskDetails, dateTime);
+                    assert eventTask.isEmpty() : "Task should not be empty.";
 
                     if (isDone) {
                         eventTask.setDone();
