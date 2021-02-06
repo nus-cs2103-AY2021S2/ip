@@ -2,6 +2,8 @@ package main.java;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import main.java.command.AddDeadlineCommand;
 import main.java.command.AddEventCommand;
@@ -46,8 +48,16 @@ public class Parser {
                 int doneIndex = Integer.parseInt(commandStr.split(" ")[1]) - 1;
                 command = new DoneCommand(doneIndex);
             } else if (commandStr.toLowerCase().split(" ")[0].equals("delete")) {
-                int deleteIndex = Integer.parseInt(commandStr.split(" ")[1]) - 1;
-                command = new DeleteCommand(deleteIndex);
+                List<Integer> deleteList = new ArrayList<>();
+                try {
+                    String[] deleteArr = commandStr.substring(7).split(" ");
+                    for (String indexStr : deleteArr) {
+                        deleteList.add(Integer.parseInt(indexStr) - 1);
+                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                command = new DeleteCommand(deleteList);
             } else if (commandStr.toLowerCase().split(" ")[0].equals("todo")) {
                 String todoName = commandStr.substring(5);
                 if (todoName.trim().length() == 0) {

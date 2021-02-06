@@ -67,6 +67,19 @@ public class TaskManager {
     }
 
     /**
+     * Delete all tasks appearing in parameter list
+     * @param taskList list of tasks to be deleted
+     * @return the deleted taskList
+     */
+    public List<Task> deleteTask(List<Task> taskList) {
+        for (Task task : taskList) {
+            list.remove(task);
+        }
+        storage.updateFile(list);
+        return taskList;
+    }
+
+    /**
      * Get the task list
      * @return task list
      */

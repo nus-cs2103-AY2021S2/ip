@@ -17,7 +17,7 @@ public class Ui {
     static final String DISPLAY_EMPTY_LIST = PREFIX + "Currently there is nothing on your list.";
     static final String DISPLAY_ADDED = PREFIX + "Got it. I've added this task:";
     static final String DISPLAY_DONE = PREFIX + "Nice! I've mark this task as done:";
-    static final String DISPLAY_RENAME = PREFIX + "Noted, I've removed this task:";
+    static final String DISPLAY_REMOVE = PREFIX + "Noted, I've removed the following task(s):";
     static final String GREETINGS = "Dear user, welcome to the world of duke!";
     static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -159,10 +159,12 @@ public class Ui {
      * @param size task list size after deleting the task
      * @param task task deleted
      */
-    public String displayAfterDelete(int size, Task task) {
-        String display = DISPLAY_RENAME;
-        display += "\n" + PREFIX + task.toString();
-        display += "\n" + displayListSize(size);
+    public String displayAfterDelete(int size, List<Task> taskList) {
+        String display = DISPLAY_REMOVE;
+        for (Task task : taskList) {
+            display += "\n" + PREFIX + task.toString();
+            display += "\n" + displayListSize(size);
+        }
         return display;
     }
 
