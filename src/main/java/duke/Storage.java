@@ -28,24 +28,18 @@ public class Storage {
      * Attempts to read the file named "duke.txt". Will print out
      * error messages if caught.
      */
-    public void read() {
-        try {
-            FileReader reader = new FileReader(FILE_NAME);
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            String taskString;
+    public void read() throws FileNotFoundException, IOException{
+        FileReader reader = new FileReader(FILE_NAME);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        String taskString;
+        taskString = bufferedReader.readLine();
+        while (taskString != null) {
+            System.out.println(taskString);
+            String[] taskArray = taskString.split("\\|");
+            this.tasks.addTask(taskArray);
             taskString = bufferedReader.readLine();
-            while (taskString != null) {
-                String[] taskArray = taskString.split("\\|");
-                this.tasks.addTask(taskArray);
-                taskString = bufferedReader.readLine();
-            }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("No existing file found.");
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        reader.close();
     }
 
     /**

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -8,14 +9,17 @@ import duke.task.Task;
  */
 public class DeleteCommand implements ICommand {
     private TaskList tasks;
+    private Ui ui;
 
     /**
      * Constructor method for DeleteCommand.
      *
+     * @param ui Ui to display
      * @param tasks TaskList object that the command will delete from when executed
      */
-    public DeleteCommand(TaskList tasks) {
+    public DeleteCommand(Ui ui,TaskList tasks) {
         this.tasks = tasks;
+        this.ui = ui;
     }
 
     /**
@@ -29,14 +33,15 @@ public class DeleteCommand implements ICommand {
         try {
             int count = Integer.parseInt(parameters.strip());
             Task removedTask = tasks.deleteTask(count);
-
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(removedTask.toString());
-            System.out.println(String.format("Now you have %d tasks in the list", tasks.getTasks().size()));
+            String string = "";
+            string += "Noted. I've removed this task:\n";
+            string += removedTask.toString() + "\n";
+            string += String.format("Now you have %d tasks in the list", tasks.getTasks().size()) + "\n";
+            ui.createDukeDialog(string);
         } catch (NumberFormatException e) {
-            System.out.println("Error: Invalid argument for delete");
+            ui.createDukeDialog("Error: Invalid argument for delete");
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            ui.handleError(e);
         }
     }
 

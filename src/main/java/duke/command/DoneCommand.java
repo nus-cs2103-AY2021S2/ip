@@ -1,25 +1,40 @@
 package duke.command;
 
 import duke.TaskList;
-
+import duke.Ui;
+/**
+ * Command to mark a given task as done.
+ */
 public class DoneCommand implements ICommand {
     private TaskList tasks;
+    private Ui ui;
 
-    public DoneCommand(TaskList tasks) {
+    /**
+     * Constructor for DoneCommand
+     * @param ui Ui to display after execution
+     * @param tasks TaskList object responsible for task management
+     */
+    public DoneCommand(Ui ui, TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Marks the given task in parameters as done.
+     * Prints out the error to ui if caught.
+     */
     @Override
     public void execute(String parameters) {
         try {
             Integer count = Integer.parseInt(parameters);
             tasks.setTaskDone(count);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks.getTasks().get(count - 1));
+            String string = "";
+            string += "Nice! I've marked this task as done:";
+            string += tasks.getTasks().get(count - 1);
+            ui.createDukeDialog(string);
         } catch (NumberFormatException e) {
-            System.out.println("Error: Invalid argument for done");
+            ui.handleError(e);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            ui.handleError(e);
         }
     }
 }

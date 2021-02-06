@@ -3,6 +3,7 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
+import duke.Ui;
 
 /**
  * Wrapper Command that writes all tasks from taskList to file
@@ -11,15 +12,18 @@ import duke.Storage;
 public class CommandWrite implements ICommand {
     private ICommand decoratedCommand;
     private Storage storage;
+    private Ui ui;
 
     /**
      * Creates the command that will write to file when decoratedCommand
      * is executed.
      *
      * @param decoratedCommand Command to executed before writing to file.
+     * @param ui Ui object responsible for displaying the output.
      * @param storage Object responsible for writing the contents in taskList to file.
      */
-    public CommandWrite(ICommand decoratedCommand, Storage storage) {
+    public CommandWrite(Ui ui, Storage storage, ICommand decoratedCommand) {
+        this.ui = ui;
         this.storage = storage;
         this.decoratedCommand = decoratedCommand;
     }
@@ -34,7 +38,7 @@ public class CommandWrite implements ICommand {
             decoratedCommand.execute(parameters);
             storage.write();
         } catch (IOException e) {
-            System.out.println("Error: Unable to write to file");
+            ui.handleError(e);
         }
     }
 }
