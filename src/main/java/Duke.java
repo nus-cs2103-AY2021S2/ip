@@ -1,3 +1,12 @@
+/**
+ * Doge Duke implements a virtual pet application that
+ * returns different commands passed by owner (user).
+ *
+ * @author Chia Jia-Xi, Kymie
+ * @version 1.0
+ * @since 2021-01-31
+ */
+
 import java.util.Scanner;
 import java.util.HashMap;
 
@@ -20,10 +29,11 @@ public class Duke {
         System.out.println("Greetings from\n" + logo);
 
         String spacer = "\n____________________________________________________________\n";
-        String greet = "Woof! I'm Doge\n"
+        String greet = "Woof! I'm Doge Duke\n"
                 + "What do you want me to do?\n"
                 + "Type your request in below!\n";
-        String goodbye = "Bye! Hope I was a good dog, see you again soon!";
+        String goodbye = "Bye! Hope I was a good dog,"
+                + "see you again soon!";
         String terminate = "bye";
 
 
@@ -40,33 +50,43 @@ public class Duke {
                 break;
             }
 
+            // To recognise List user input
             if (input.equals("list")) {
                 System.out.println(spacer);
                 printList(commands);
                 System.out.println(spacer);
 
+            // To recognise Done user input
             } else if (input.contains("done")) {
-                //split input to get int
-                //int
                 String[] doneCommand = input.split(separator);
                 String markedInput = "[X] " + input;
                 int id = Integer.parseInt(doneCommand[1]);
                 commands.replace(id, markedInput);
 
-                System.out.println(spacer + "Woof! I have completed these commands before: " + "\n");
+                System.out.println(spacer + "Woof!"
+                        + "I have completed these commands before: "
+                        + "\n");
                 printList(commands);
                 System.out.println(spacer);
 
+            // To recognise Add user input
             } else {
                 ctr++;
                 String emptyInput = "[ ] " + input;
                 commands.put(ctr, emptyInput);
-                System.out.println(spacer + "added: " + input + spacer);
+                System.out.println(spacer + "added: "
+                        + input + spacer);
             }
         }
         sc.close();
     }
 
+    /**
+     * Displays Hashmap of all commands Duke is
+     * trained to do
+     *
+     * @param hm HashMap that retains all commands
+     */
     static void printList(HashMap<Integer, String> hm) {
         for (Integer i : hm.keySet()) {
             String key = i.toString();
@@ -74,6 +94,4 @@ public class Duke {
             System.out.println(key + ". " + value);
         }
     }
-
-
 }
