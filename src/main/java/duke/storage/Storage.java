@@ -15,6 +15,7 @@ import java.util.Scanner;
 import duke.exceptions.SaveFileInvalidFormatException;
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
+import duke.tasks.FixedDurationTask;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.TodoTask;
@@ -24,8 +25,8 @@ import duke.tasks.TodoTask;
  */
 public class Storage {
     private String filePath;
-    private final char COMPLETE = '1';
-    private final char INCOMPLETE = '0';
+    private final char complete = '1';
+    private final char incomplete = '0';
 
     /**
      * Constructs a Storage with the given save file location.
@@ -82,7 +83,6 @@ public class Storage {
             Task task = createTasks(taskString);
 
             assert (taskCompletion == '0' || taskCompletion == '1');
-          
             markTaskAsDone(task, taskCompletion);
 
 
@@ -92,22 +92,40 @@ public class Storage {
     }
 
     private void markTaskAsDone(Task task, char taskCompletion) {
-        if (taskCompletion == COMPLETE) {
+        if (taskCompletion == complete) {
             task.markAsDone();
         }
     }
 
     private Task createTasks(String taskString) throws SaveFileInvalidFormatException {
         char taskType = taskString.charAt(0);
-        if (taskType == 'T') {
+        if (isTodoTask(taskType)) {
             return createTodoTask(taskString);
-        } else if (taskType == 'D') {
+        } else if (isDeadlineTask(taskType)) {
             return createDeadlineTask(taskString);
-        } else if (taskType == 'E') {
+        } else if (isEventTask(taskType)) {
             return createEventTask(taskString);
+        } else if (isFixedDurationTask(taskType)) {
+            return createFixedDurationTask(taskString);
         } else {
             throw new SaveFileInvalidFormatException();
         }
+    }
+
+    private boolean isTodoTask(char taskType) {
+        return taskType == 'T';
+    }
+
+    private boolean isDeadlineTask(char taskType) {
+        return taskType == 'D';
+    }
+
+    private boolean isEventTask(char taskType) {
+        return taskType == 'E';
+    }
+
+    private boolean isFixedDurationTask(char taskType) {
+        return taskType == 'F';
     }
 
     private void checkSaveStringLength(String taskString) throws SaveFileInvalidFormatException {
@@ -123,7 +141,7 @@ public class Storage {
     }
 
     private boolean isWrongTaskCompletionFormat(char taskCompletion) {
-        return taskCompletion != COMPLETE && taskCompletion != INCOMPLETE;
+        return taskCompletion != complete && taskCompletion != incomplete;
     }
 
     private TodoTask createTodoTask(String taskString) {
@@ -234,6 +252,30 @@ public class Storage {
         return new EventTask(taskDescription, taskDate, taskStartTime, taskEndTime);
     }
 
+    private FixedDurationTask createFixedDurationTask(String taskString) throws SaveFileInvalidFormatException {
+        int durationIndex = taskString.substring(8).indexOf('|');
+        if (hasNoDurationGiven(durationIndex)) {
+            throw new SaveFileInvalidFormatException();
+        }
+
+        String taskDescription = taskString.substring(8, durationIndex + 8).trim();
+        String taskDurationString = taskString.substring(durationIndex + 9).trim();
+        if (hasNoDurationGiven(taskDurationString)) {
+            throw new SaveFileInvalidFormatException();
+        }
+
+        int taskDuration = Integer.parseInt(taskDurationString);
+        return new FixedDurationTask(taskDescription, taskDuration);
+    }
+
+    private boolean hasNoDurationGiven(int durationIndex) {
+        return durationIndex == -1;
+    }
+
+    private boolean hasNoDurationGiven(String taskDurationString) {
+        return taskDurationString.isEmpty();
+    }
+
     /**
      * Saves the contents of TaskList into save file in the valid format.
      *
@@ -253,5 +295,7 @@ public class Storage {
             fileWriter.write(saveLine);
         }
     }
+
+
 
 }
