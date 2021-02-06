@@ -14,6 +14,7 @@ public class Storage {
     private String filePath;
 
     public Storage(String fp) {
+        assert fp.length() > 0 : "Empty Filepath";
         this.filePath = fp;
     }
 

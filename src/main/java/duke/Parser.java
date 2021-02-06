@@ -37,6 +37,7 @@ public class Parser {
     }
 
     private static LocalDate processDate(String dateString) throws DukeInvalidDateException {
+        assert dateString.length() > 0 : "Empty Date String";
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
             return LocalDate.parse(dateString, formatter);
@@ -94,10 +95,12 @@ public class Parser {
                 return new ToDoCommand(params[1]);
             case "deadline":
                 args = extractFlag(params[0], params[1], "/by");
+                assert args.length > 1 : "Broken splitting";
                 date = processDate(args[1]);
                 return new DeadlineCommand(args[0], date);
             case "event":
                 args = extractFlag(params[0], params[1], "/at");
+                assert args.length > 1 : "Broken splitting";
                 date = processDate(args[1]);
                 return new EventCommand(args[0], date);
             case "find":
