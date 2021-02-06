@@ -21,6 +21,8 @@ public class FindCommand extends Command {
      * @param fullCommand Full command line input.
      */
     public FindCommand(String fullCommand) {
+        assert fullCommand.length() > 0;
+
         this.fullCommand = fullCommand;
     }
 

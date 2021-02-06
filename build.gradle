@@ -29,6 +29,7 @@ dependencies {
 
 application {
     mainClassName = "duke.Launcher"
+    applicationDefaultJvmArgs = ['-ea']
 }
 
 shadowJar {

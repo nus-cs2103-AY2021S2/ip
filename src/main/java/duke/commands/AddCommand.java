@@ -63,6 +63,9 @@ public class AddCommand extends Command {
     private Task createTasks() throws DukeException,
             DateTimeParseException, StringIndexOutOfBoundsException {
         if (isValidCommand()) {
+          
+            assert checkCommands.length > 0;
+          
             if (hasNoDescription()) {
                 throw new DescriptionNotFoundException();
             }

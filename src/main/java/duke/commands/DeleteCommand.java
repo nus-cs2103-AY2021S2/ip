@@ -22,6 +22,8 @@ public class DeleteCommand extends Command {
      * @param fullCommand Full command line input.
      */
     public DeleteCommand(String fullCommand) {
+        assert fullCommand.length() > 0;
+
         this.checkCommands = fullCommand.split(" ");
     }
 

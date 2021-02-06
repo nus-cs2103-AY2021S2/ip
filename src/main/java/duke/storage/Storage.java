@@ -33,6 +33,8 @@ public class Storage {
      * @param filePath File path of the save file.
      */
     public Storage(String filePath) {
+        assert filePath.length() > 0;
+
         this.filePath = filePath;
     }
 
@@ -79,7 +81,10 @@ public class Storage {
 
             Task task = createTasks(taskString);
 
+            assert (taskCompletion == '0' || taskCompletion == '1');
+          
             markTaskAsDone(task, taskCompletion);
+
 
             taskList.add(task);
         }
