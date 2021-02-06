@@ -9,6 +9,12 @@ import duke.TaskList;
  */
 public class FindCommand extends Command {
 
+    private static final int LENGTH_FIND = "find ".length();
+
+    private static final String ERROR_EMPTY_ARGUMENT = "Invalid argument: Argument field cannot be empty.";
+    private static final String ERROR_EMPTY_CONTENT = "Invalid argument: Content field is blank.";
+    private static final String MESSAGE_OBJECT_NOT_FOUND = "No result found";
+
     private final String command;
 
     /**
@@ -28,12 +34,12 @@ public class FindCommand extends Command {
      */
     @Override
     public String executeAndPrint(TaskList list) throws DukeException {
-        if (command.length() <= 5) {
-            throw new DukeException("Invalid argument: Argument field cannot be empty.");
+        if (command.length() <= LENGTH_FIND) {
+            throw new DukeException(ERROR_EMPTY_ARGUMENT);
         } else {
-            String subStr = command.substring(5);
+            String subStr = command.substring(LENGTH_FIND);
             if (StringParser.isBlank(subStr)) {
-                throw new DukeException("Invalid argument: Content field is blank");
+                throw new DukeException(ERROR_EMPTY_CONTENT);
             } else {
                 TaskList tempList = new TaskList();
                 for (int i = 0; i < list.getSize(); i++) {
@@ -42,7 +48,7 @@ public class FindCommand extends Command {
                     }
                 }
                 if (tempList.getSize() == 0) {
-                    return "No result found\n";
+                    return MESSAGE_OBJECT_NOT_FOUND + "\n";
                 } else {
                     return "Here are the matching tasks in the list:\n"
                             + tempList.formatList();

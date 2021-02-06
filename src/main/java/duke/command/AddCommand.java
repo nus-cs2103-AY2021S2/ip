@@ -16,6 +16,11 @@ import duke.task.Todo;
  */
 public class AddCommand extends Command {
 
+    private static final int LENGTH_TODO = "todo ".length();
+    private static final int LENGTH_EVENT = "event ".length();
+    private static final int LENGTH_DEADLINE = "deadline ".length();
+    private static final int LENGTH_SEPARATOR = 5;
+
     private static final String ERROR_EMPTY_ARGUMENT = "Invalid argument: Argument field cannot be empty.";
     private static final String ERROR_EMPTY_CONTENT = "Invalid argument: Content field is blank.";
     private static final String ERROR_EMPTY_TIME = "Void argument: Time field is blank.";
@@ -48,14 +53,14 @@ public class AddCommand extends Command {
      * @throws DukeException When command argument is invalid.
      */
     private Task convertToTodo() throws DukeException {
-        if (command.length() <= 5) {
+        if (command.length() <= LENGTH_TODO) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
         } else {
-            String subStr = command.substring(5);
+            String subStr = command.substring(LENGTH_TODO);
             if (StringParser.isBlank(subStr)) {
                 throw new DukeException(ERROR_EMPTY_CONTENT);
             } else {
-                return new Todo(command.substring(5));
+                return new Todo(command.substring(LENGTH_TODO));
             }
         }
     }
@@ -67,15 +72,15 @@ public class AddCommand extends Command {
      * @throws DukeException When command argument is invalid.
      */
     private Task convertToEvent() throws DukeException {
-        if (command.length() <= 6) {
+        if (command.length() <= LENGTH_EVENT) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
         } else {
             int indexOfAt = command.toLowerCase().indexOf(MARK_AT);
-            if (indexOfAt < 6) {
+            if (indexOfAt < LENGTH_EVENT) {
                 throw new DukeException(ERROR_UNDETECTED_AT);
             }
-            String subStrContent = command.substring(6, indexOfAt);
-            String subStrTime = command.substring(indexOfAt + 5);
+            String subStrContent = command.substring(LENGTH_EVENT, indexOfAt);
+            String subStrTime = command.substring(indexOfAt + LENGTH_SEPARATOR);
             if (StringParser.isBlank(subStrContent)) {
                 throw new DukeException(ERROR_EMPTY_CONTENT);
             } else if (StringParser.isBlank(subStrTime)) {
@@ -97,15 +102,15 @@ public class AddCommand extends Command {
      * @throws DukeException When command argument is invalid.
      */
     private Task convertToDeadline() throws DukeException {
-        if (command.length() <= 9) {
+        if (command.length() <= LENGTH_DEADLINE) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
         } else {
             int indexOfBy = command.toLowerCase().indexOf(MARK_BY);
-            if (indexOfBy < 9) {
+            if (indexOfBy < LENGTH_DEADLINE) {
                 throw new DukeException(ERROR_UNDETECTED_BY);
             }
-            String subStrContent = command.substring(9, indexOfBy);
-            String subStrTime = command.substring(indexOfBy + 5);
+            String subStrContent = command.substring(LENGTH_DEADLINE, indexOfBy);
+            String subStrTime = command.substring(indexOfBy + LENGTH_SEPARATOR);
             if (StringParser.isBlank(subStrContent)) {
                 throw new DukeException(ERROR_EMPTY_CONTENT);
             } else if (StringParser.isBlank(subStrTime)) {
