@@ -8,12 +8,19 @@ import java.util.ArrayList;
 public class TaskList {
     ArrayList<Task> Tasks;
 
-    //Initializes the taskList
+    /**
+     * Initializes the task list as an arraylist
+     */
     public TaskList() {
         Tasks = new ArrayList<Task>();
     }
 
-    //Adds a task to the task list.
+    /**
+     * Adds the task to the end of the list
+     *
+     * @param task
+     * @return Success message of adding
+     */
     public String addTask(Task task) {
         Tasks.add(task);
         String out = "Got it! Added: \n" + task + "\n"
@@ -21,13 +28,24 @@ public class TaskList {
         return out;
     }
 
-    //Second add method which does not print any message
+    /**
+     * This method silently adds the task to the end of the list
+     *
+     * @param task
+     */
     public void silentAdd(Task task) {
         Tasks.add(task);
     }
 
 
-    //Returns a taskList of the tasks that have matching keyword.
+    /**
+     * This method finds the tasks if they match the keyword
+     * As an additional feature, partial match will also yeild results
+     * Integrate BetterSearch into the existing findTask method
+     *
+     * @param keyword
+     * @return
+     */
     public String findTask(String keyword) {
         String out = "";
         TaskList matches = new TaskList();
@@ -40,6 +58,8 @@ public class TaskList {
             } else if (taskName[0].contains(keyword) || taskName[1].contains(keyword)
                     || taskName[2].contains(keyword)) {
                 matches.silentAdd(t);
+            } else if (task.contains(keyword)) {
+                matches.silentAdd(t);
             }
         }
         if (matches.numOfTasks() > 0) {
@@ -51,7 +71,12 @@ public class TaskList {
         return out;
     }
 
-    //Delete a task
+    /**
+     * Deletes the task at idx
+     *
+     * @param idx
+     * @return Message upon completion of the task
+     */
     public String DeleteTask(int idx) {
         String out = "";
         if (idx <= Tasks.size()) {
@@ -64,7 +89,12 @@ public class TaskList {
         return out;
     }
 
-    //Marks a task as done
+    /**
+     * Marks task at idx as done
+     *
+     * @param idx
+     * @return Message upon the completion of task
+     */
     public String markAsDone(int idx) {
         String out;
         if (idx <= Tasks.size()) {
@@ -76,17 +106,30 @@ public class TaskList {
         return out;
     }
 
-    //Retrieves the number of tasks
+    /**
+     * Gets the number of tasks
+     *
+     * @return number of tasks
+     */
     public int numOfTasks() {
         return Tasks.size();
     }
 
-    //Retrieves the task at the given index
+    /**
+     * Gets the task at a given index
+     *
+     * @param idx
+     * @return task at idx
+     */
     public Task getTask(int idx) {
         return Tasks.get(idx);
     }
 
-    //Prints all the tasks
+    /**
+     * The method returns all the tasks in a String representation
+     *
+     * @return all the tasks
+     */
     public String printTasks() {
         String out = "Contents: \n";
         for (int j = 0; j < Tasks.size(); j++) {
