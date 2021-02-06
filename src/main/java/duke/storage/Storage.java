@@ -31,6 +31,8 @@ public class Storage {
      * @param filePath File path of the save file.
      */
     public Storage(String filePath) {
+        assert filePath.length() > 0;
+
         this.filePath = filePath;
     }
 
@@ -64,6 +66,8 @@ public class Storage {
             if (taskString.length() < 9) {
                 throw new SaveFileInvalidFormatException();
             }
+
+            assert taskString.length() > 0;
 
             Task task;
             char taskType = taskString.charAt(0);
@@ -141,6 +145,8 @@ public class Storage {
             } else {
                 throw new SaveFileInvalidFormatException();
             }
+
+            assert (taskCompletion == '0' || taskCompletion == '1');
 
             if (taskCompletion == '1') {
                 task.markAsDone();
