@@ -1,3 +1,5 @@
+package seashell.command;
+
 public class Parser {
 
     public CommandType parse(String input) {
@@ -17,6 +19,8 @@ public class Parser {
             return CommandType.EVENT;
         } else if (input.stripTrailing().equals("help")) {
             return CommandType.HELP;
+        } else if (input.stripTrailing().equals("clear")) {
+            return CommandType.CLEAR;
         } else {
             return CommandType.INVALID;
         }

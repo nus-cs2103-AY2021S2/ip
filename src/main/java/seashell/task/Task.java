@@ -1,3 +1,5 @@
+package seashell.task;
+
 public class Task {
     public boolean isDone;
     public String name;

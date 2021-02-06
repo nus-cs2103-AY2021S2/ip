@@ -1,3 +1,5 @@
+package seashell.main;
+
 public class Ui {
     public final static String HELP_TEXT = """
             Welcome to Seashells! You can start by trying out some of these commands
@@ -7,6 +9,7 @@ public class Ui {
             event <task name> /at <datetime> - add an event task
             done <task index> - mark the task at the specified index as done
             delete <task index> - remove the task at the specified index from the list
+            clear - clears the task list
             bye - exits the program""";
 
     public void showWelcome() {

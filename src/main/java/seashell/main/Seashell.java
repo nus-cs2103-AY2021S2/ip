@@ -1,4 +1,8 @@
+package seashell.main;
+
 import java.util.Scanner;
+import seashell.command.CommandType;
+import seashell.command.Parser;
 
 public class Seashell {
 
@@ -46,6 +50,9 @@ public class Seashell {
                         break;
                     case HELP:
                         System.out.println(Ui.HELP_TEXT);
+                        break;
+                    case CLEAR:
+                        this.taskListObj = this.taskListObj.clear(this.saveHandler);
                         break;
                     case INVALID:
                         throw new SeashellException("OOPS!!! I'm sorry, but I don't know what that means :-(");
