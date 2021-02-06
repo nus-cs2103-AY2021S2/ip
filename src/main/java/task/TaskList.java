@@ -194,6 +194,7 @@ public class TaskList {
      * @param storage DataStorage object to persist the tasks to.
      */
     public void persist(DataStorage storage) {
+        assert storage != null;
         try {
             storage.saveTasks(tasks);
         } catch (DukeException dukeException) {

@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * Controller for ui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private long EXIT_DELAY = 1000;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -57,7 +59,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (ui.getNextAction() == FurtherAction.EXIT) {
-            Platform.exit();
+            CompletableFuture.delayedExecutor(EXIT_DELAY, TimeUnit.MILLISECONDS).execute(() -> Platform.exit());
         }
     }
 }
