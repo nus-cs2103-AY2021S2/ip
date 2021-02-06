@@ -20,11 +20,12 @@ public class FileTaskStringConverter {
      *
      * @param list List of Tasks to convert to Strings.
      * @return List of Strings.
+     * @throws InvalidTaskTypeException if one of the Tasks in taskList is not a valid Task.
      */
     public static List<String> allTaskToAllString(List<Task> list) throws InvalidTaskTypeException {
         List<String> result = new ArrayList<>();
-        for (Task t : list) {
-            result.add(taskToString(t));
+        for (Task task : list) {
+            result.add(taskToString(task));
         }
         return result;
     }

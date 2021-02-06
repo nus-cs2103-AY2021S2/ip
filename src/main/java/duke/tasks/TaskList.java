@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -30,9 +30,8 @@ public class TaskList {
     public String getListInString () {
         if (this.taskList.size() == 0) {
             return getEmptyListInString();
-        } else {
-            return getNonEmptyListInString().toString();
         }
+        return getNonEmptyListInString().toString();
     }
 
     private String getEmptyListInString() {

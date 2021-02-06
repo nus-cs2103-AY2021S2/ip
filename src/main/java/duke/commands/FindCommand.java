@@ -37,9 +37,8 @@ public class FindCommand extends Command {
         if (results.size() == 0) {
             String noMatchingTaskMsg = "There are no tasks matching your input :(";
             return noMatchingTaskMsg;
-        } else {
-            return listToString(results).toString();
         }
+        return listToString(results).toString();
     }
 
     private StringBuilder listToString(List<Task> results) {

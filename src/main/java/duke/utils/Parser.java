@@ -134,20 +134,18 @@ public class Parser {
         } else {
             if (this.taskList.getList().size() == 0) {
                 throw new EmptyListException();
-            } else {
-                return new FindCommand(this.taskList, this.storage, arguments[1]);
             }
+            return new FindCommand(this.taskList, this.storage, arguments[1]);
         }
     }
 
     private int calcListPos(String taskIndex, String command) throws InvalidIndexInputException {
-        Matcher m = checkNum.matcher(taskIndex);
-        if (m.find()) {
-            return Integer.parseInt(taskIndex) - 1;
-        } else {
+        Matcher matcher = checkNum.matcher(taskIndex);
+        if (!matcher.find()) {
             throw new InvalidIndexInputException("'" + command + "' is command word; please pass a numerical index or "
                     + "start your task with another word!");
         }
+        return Integer.parseInt(taskIndex) - 1;
     }
 
     private Command prepareDone(String[] arguments) throws InvalidIndexInputException, EmptyArgumentException {
@@ -161,9 +159,8 @@ public class Parser {
             } else if (position >= this.taskList.getList().size() || position < 0) {
                 throw new InvalidIndexInputException("Please input an index from 1 to "
                         + this.taskList.getList().size() + "!");
-            } else {
-                return new DoneCommand(this.taskList, this.storage, position);
             }
+            return new DoneCommand(this.taskList, this.storage, position);
         }
     }
 
@@ -178,9 +175,8 @@ public class Parser {
             } else if (position >= this.taskList.getList().size() || position < 0) {
                 throw new InvalidIndexInputException("Please input an index from 1 to "
                         + this.taskList.getList().size() + "!");
-            } else {
-                return new DeleteCommand(this.taskList, this.storage, position);
             }
+            return new DeleteCommand(this.taskList, this.storage, position);
         }
     }
 
