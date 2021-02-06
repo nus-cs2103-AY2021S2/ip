@@ -15,7 +15,7 @@ public class Command {
     protected static String input;
     protected static TaskList tasklist = new TaskList();
     protected static DataStorage storage;
-    protected static UI ui;
+    protected static UI ui = new UI();
 
     /** Create command object
      *

@@ -95,12 +95,20 @@ public class Task {
         }
     }
 
+    /** Check for duplicate of task
+     * @return boolean
+     */
+
+    public boolean isSameTask(Task t){
+        return this.getTaskName().equals(t.getTaskName());
+    }
+
     /** Print customized representation of task to user
      * @return String
      */
     @Override
     public String toString() {
-        assert this.getStatus().equals(true) || this.getStatus().equals(false);
+       // assert this.getStatus().equals(true) || this.getStatus().equals(false);
         return this.getTaskName() + "[" + this.getStatus() + "] ";
     }
 }
