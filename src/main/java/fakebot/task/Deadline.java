@@ -44,5 +44,16 @@ public class Deadline extends Task {
         String deadlineTimeString = printTimeFormat.format(deadlineTime);
         return "[D]" + super.toString() + " (by: " + deadlineDateString + " " + deadlineTimeString + ")";
     }
+    @Override
+    public boolean equals(Object other) {
+        boolean sameSuperClass = super.equals(other);
+        if(!sameSuperClass || !(other instanceof Deadline)) {
+            return false;
+        }
+        Deadline d2 = (Deadline) other;
+        boolean sameDeadlineDate = getDeadlineDate().equals(d2.getDeadlineDate());
+        boolean sameDeadlineTime = getDeadlineTime().equals(d2.getDeadlineTime());
+        return sameDeadlineDate && sameDeadlineTime;
+    }
 }
 

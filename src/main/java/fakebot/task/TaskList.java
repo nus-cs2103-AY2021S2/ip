@@ -64,4 +64,13 @@ public class TaskList {
                 .filter(t -> t.getTaskName().contains(search))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Check if task list contain the same task.
+     * @param task a task to be check.
+     * @return true if task exist
+     */
+    public boolean containTask(Task task) {
+        return tasks.contains(task);
+    }
 }

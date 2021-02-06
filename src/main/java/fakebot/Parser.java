@@ -240,6 +240,10 @@ public class Parser {
      * @return a string containing print message.
      */
     public static String getTaskListPrintMessage(TaskList taskList) {
+        if(taskList.getSize() == 0) {
+            return getBotMPrintMessage("Task list is currently empty");
+        }
+
         List<String> messages = new ArrayList<>();
         for (int i = 0; i < taskList.getSize(); i++) {
             messages.add(taskList.getTask(i).toString());
@@ -431,11 +435,12 @@ public class Parser {
             LocalTime startTime = LocalTime.parse(dates[1]);
             LocalDate endDate = LocalDate.parse(dates[2]);
             LocalTime endTime = LocalTime.parse(dates[3]);
+
+            return new Command(CommandType.EVENT, eventDetails);
         } catch (Exception e) {
             throw new CommandException("OOPS!!! The Date format of a "
                     + EVENT_COMMAND + " must be yyyy-mm-dd hh:ss yyyy-mm-dd hh:ss.");
         }
-        return new Command(CommandType.EVENT, description);
     }
 
     /**
@@ -455,11 +460,11 @@ public class Parser {
             String[] dates = deadlineDetails[1].split(" ");
             LocalDate date = LocalDate.parse(dates[0]);
             LocalTime time = LocalTime.parse(dates[1]);
+
+            return new Command(CommandType.DEADLINE, deadlineDetails);
         } catch (Exception e) {
             throw new CommandException("OOPS!!! The Date format of a "
                     + DEADLINE_COMMAND + " must be yyyy-mm-dd hh:ss.");
-
         }
-        return new Command(CommandType.DEADLINE, description);
     }
 }

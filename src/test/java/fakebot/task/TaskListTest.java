@@ -1,7 +1,10 @@
 package fakebot.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -10,6 +13,10 @@ class TaskListTest {
 
     private String description1 = "test1";
     private String description2 = "test2";
+    private String startDateString = "2000-10-01";
+    private String startTimeString = "01:04";
+    private String endDateString = "2011-10-01";
+    private String endTimeString = "04:04";
 
     @Test
     void getTask_equal() {
@@ -66,5 +73,30 @@ class TaskListTest {
         taskList.addTask(test1);
         assertEquals(6, taskList.findTasks("est1").size(), "Task size found does not match");
         assertEquals(4, taskList.findTasks("est2").size(), "Task size found does not match");
+    }
+
+    @Test
+    void containTask_true() {
+        TaskList taskList = new TaskList(new ArrayList<>());
+        Task test1 = new Todo(description1);
+        Task test2 = new Todo(description1);
+        Task test3 = new Todo(description1);
+        Task test4 = new Todo(description1);
+        LocalDate startDate = LocalDate.parse(startDateString);
+        LocalTime startTime = LocalTime.parse(startTimeString);
+        LocalDate endDate = LocalDate.parse(endDateString);
+        LocalTime endTime = LocalTime.parse(endTimeString);
+        Deadline test5 = new Deadline(description1,startDate, startTime);
+        Deadline test6 = new Deadline(description1,startDate, startTime);
+        Event test7 = new Event(description1,startDate, startTime, endDate, endTime);
+        Event test8 = new Event(description1,startDate, startTime, endDate, endTime);
+        taskList.addTask(test1);
+        taskList.addTask(test3);
+        taskList.addTask(test5);
+        taskList.addTask(test7);
+        assertTrue(taskList.containTask(test2), "Task does not contain in list");
+        assertTrue(taskList.containTask(test4), "Task does not contain in list");
+        assertTrue(taskList.containTask(test6), "Task does not contain in list");
+        assertTrue(taskList.containTask(test8), "Task does not contain in list");
     }
 }

@@ -58,4 +58,10 @@ public abstract class Task {
     public String toString() {
         return (isComplete ? "[X] " + taskName : "[ ] " + taskName);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        boolean sameClass = other instanceof Task;
+        return sameClass && taskName.equals(((Task) other).getTaskName());
+    }
 }

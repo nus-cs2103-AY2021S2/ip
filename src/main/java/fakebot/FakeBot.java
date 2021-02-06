@@ -152,9 +152,7 @@ public class FakeBot {
      */
     private String processTodoCommand(Command command) {
         Todo todoTask = new Todo(command.getDescription());
-        taskList.addTask(todoTask);
-        saveHistory();
-        return getAddedTaskMessage(todoTask);
+        return addTask(todoTask);
     }
 
     /**
@@ -169,9 +167,7 @@ public class FakeBot {
         LocalDate date = LocalDate.parse(dates[0]);
         LocalTime time = LocalTime.parse(dates[1]);
         Deadline deadlineTask = new Deadline(deadlineDetails[0], date, time);
-        taskList.addTask(deadlineTask);
-        saveHistory();
-        return getAddedTaskMessage(deadlineTask);
+        return addTask(deadlineTask);
     }
 
     /**
@@ -188,9 +184,21 @@ public class FakeBot {
         LocalDate endDate = LocalDate.parse(eventDates[2]);
         LocalTime endTime = LocalTime.parse(eventDates[3]);
         Event eventTask = new Event(eventDetails[0], startDate, startTime, endDate, endTime);
-        taskList.addTask(eventTask);
+        return addTask(eventTask);
+    }
+
+    /**
+     * Adds task to task list
+     * @param task to be added to list
+     * @return a string containing result of adding task
+     */
+    private String addTask(Task task) {
+        if(taskList.containTask(task)) {
+            return Parser.getBotMPrintMessage("Duplicate task detected! Task not added");
+        }
+        taskList.addTask(task);
         saveHistory();
-        return getAddedTaskMessage(eventTask);
+        return getAddedTaskMessage(task);
     }
 
     /**
@@ -210,4 +218,6 @@ public class FakeBot {
         saveHistory();
         return getDeleteMessage(deletedTask);
     }
+
+
 }
