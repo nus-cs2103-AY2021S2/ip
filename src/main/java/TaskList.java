@@ -16,7 +16,7 @@ public class TaskList {
         overallArray = tasks;
         todoArray = new ArrayList<>();
         eventDeadlineArray = new ArrayList<>();
-        for (Task t : tasks ) {
+        for (Task t : tasks) {
             if (t.getTaskType() == 0) {
                 todoArray.add(t);
                 mergeArrays();
@@ -77,7 +77,8 @@ public class TaskList {
             todoArray.remove(toRemove);
             System.out.println(toRemove.toString());
             mergeArrays();
-        } if (toRemove.getTaskType() == 1 || toRemove.getTaskType() == 2) {
+        }
+        if (toRemove.getTaskType() == 1 || toRemove.getTaskType() == 2) {
             eventDeadlineArray.remove((EventDeadline) toRemove);
             mergeArrays();
             sortByDate(eventDeadlineArray);
@@ -93,6 +94,9 @@ public class TaskList {
     }
 
 
+    /**
+     * Combines the Todo array with the EventDeadline array.
+     */
     public void mergeArrays() {
         sortByDate(eventDeadlineArray);
         ArrayList<Task> todoClone = new ArrayList<>(todoArray);
@@ -102,6 +106,11 @@ public class TaskList {
         overallArray = todoClone;
     }
 
+
+    /**
+     * Sorts the Events and Deadlines in the list according to date in ascending order.
+     * @param list The list used to store Events and Deadlines
+     */
     public static void sortByDate(ArrayList<? extends EventDeadline> list) {
         Collections.sort(list, (Comparator<EventDeadline>) (o1, o2) -> {
             int compareDate = 0;

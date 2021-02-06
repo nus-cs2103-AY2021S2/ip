@@ -8,10 +8,10 @@ public class Deadline extends Task implements EventDeadline {
 
     protected LocalDate by;
 
-    public Deadline(String description, LocalDate by) {
+    Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
-        super.taskType = DEADLINE;
+        super.taskType = DEADLINE_NUMBER;
     }
 
     public LocalDate getDateInfo() {
