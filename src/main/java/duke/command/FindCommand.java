@@ -45,7 +45,7 @@ public class FindCommand extends Command {
     @Override
     public String execute() throws DukeCommandException {
         List<Task> tasksFound = taskManager.getTasks().stream()
-                .filter(task -> {
+                .filter((task) -> {
                     if (task.getDesc().contains(keyword)) {
                         if (targetDate != null) {
                             switch (task.getTypeSymbol()) {
