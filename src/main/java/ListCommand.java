@@ -1,20 +1,17 @@
 public class ListCommand extends Command {
 
-    public ListCommand(String action, String info) {
-        super(action, info);
+    public ListCommand(String info) {
+        super(info);
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String response;
-
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assert tasks.size >= 0;
         if (tasks.size == 0) {
             throw new DukeException("OOPS!!! There is currently no tasks for you.");
         } else {
-            response = ui.showList() + "\n" + tasks.listTask();
+            ui.showList(tasks.listTask());
         }
-        return response;
     }
 
     @Override

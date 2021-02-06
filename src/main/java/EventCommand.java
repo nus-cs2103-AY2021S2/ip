@@ -1,28 +1,35 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class EventCommand extends Command {
 
-    public EventCommand(String action, String info) {
-        super(action, info);
+    public EventCommand(String info) {
+        super(info);
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String task;
         String time;
-        String response;
         int size;
         Task t;
 
-        task = Parser.getTask(info);
-        time = Parser.getTimeAt(info);
+        try {
+            task = Parser.getTask(info);
+            time = Parser.getTimeAt(info);
+            LocalDate date = LocalDate.parse(time);
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!!! The timing is not in the correct format.");
+        }
 
-        tasks.addEvent(action, task, time);
+        tasks.addEvent(task, time);
         size = tasks.size;
         t = (tasks.list).get(size - 1);
 
-        response = ui.showAddMessage(t, size);
+        ui.showAddMessage(t, size);
         storage.store(tasks.list);
-
-        return response;
     }
 
     public boolean isExit() {

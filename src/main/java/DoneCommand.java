@@ -1,14 +1,13 @@
 public class DoneCommand extends Command {
 
-    public DoneCommand(String action, String info) {
-        super(action, info);
+    public DoneCommand(String info) {
+        super(info);
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int num;
         Task task;
-        String response;
 
         try {
             num = Integer.parseInt(info);
@@ -23,11 +22,9 @@ public class DoneCommand extends Command {
             num--;
             tasks.doneTask(num);
             task = tasks.list.get(num);
-            response = ui.showDone(task);
+            ui.showDone(task);
             storage.store(tasks.list);
         }
-
-        return response;
     }
 
     @Override

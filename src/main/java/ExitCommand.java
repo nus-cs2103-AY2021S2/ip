@@ -1,12 +1,12 @@
 public class ExitCommand extends Command {
 
-    public ExitCommand(String action, String info) {
-        super(action, info);
+    public ExitCommand(String info) {
+        super(info);
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showGoodBye();
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.showGoodBye();
     }
 
     @Override

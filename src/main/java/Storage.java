@@ -9,8 +9,8 @@ public class Storage {
 
     protected String filepath;
 
-    public Storage(String filepath) {
-        this.filepath = filepath;
+    public Storage() {
+        this.filepath = "Duke.txt";
     }
 
     /**
@@ -22,14 +22,12 @@ public class Storage {
     public void store(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filepath);
-            int size = tasks.size();
-
             String string;
             String task;
             String time;
 
-            for (int i = 0; i < size; i++) {
-                string = tasks.get(i).toString();
+            for (Task value : tasks) {
+                string = value.toString();
                 if (string.contains("(")) {
                     String[] str = string.split("\\(", 2);
                     task = str[0];
@@ -87,13 +85,17 @@ public class Storage {
                     time = "";
                 }
 
-                if (action == 'T') {
+                switch (action) {
+                case 'T':
                     task = new Todo(info);
-                } else if (action == 'D') {
+                    break;
+                case 'D':
                     task = new Deadline(info, time);
-                } else if (action == 'E') {
+                    break;
+                case 'E':
                     task = new Event(info, time);
-                } else {
+                    break;
+                default:
                     throw new DukeException("OOPS!!! There is an error in loading the file.");
                 }
 
@@ -105,7 +107,7 @@ public class Storage {
 
             return list;
         } catch (FileNotFoundException e) {
-            throw new DukeException("OOPS!!! There is an error in loading the file.");
+            throw new DukeException("OOPS!!! There is no Duke.txt file.");
         }
     }
 

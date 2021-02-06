@@ -43,29 +43,9 @@ public class TaskList {
     /**
      * Add the required task into the list of tasks.
      *
-     * @param action command.
-     * @param task description.
-     * @param time required for deadline and event.
-     */
-    public void addTask(String action, String task, String time) {
-        size = size + 1;
-
-        if (action.equals("todo")) {
-            list.add(new Todo(task));
-        } else if (action.equals("deadline")) {
-            list.add(new Deadline(task, time));
-        } else if (action.equals("event")) {
-            list.add(new Event(task, time));
-        }
-    }
-
-    /**
-     * Add the required task into the list of tasks.
-     *
-     * @param action command.
      * @param task description.
      */
-    public void addTodo(String action, String task) {
+    public void addTodo(String task) {
         size = size + 1;
         list.add(new Todo(task));
     }
@@ -74,11 +54,10 @@ public class TaskList {
     /**
      * Add the required task into the list of tasks.
      *
-     * @param action command.
      * @param task description.
      * @param time required for deadline and event.
      */
-    public void addDeadline(String action, String task, String time) {
+    public void addDeadline(String task, String time) {
         size = size + 1;
         list.add(new Deadline(task, time));
     }
@@ -86,11 +65,10 @@ public class TaskList {
     /**
      * Add the required task into the list of tasks.
      *
-     * @param action command.
      * @param task description.
      * @param time required for deadline and event.
      */
-    public void addEvent(String action, String task, String time) {
+    public void addEvent(String task, String time) {
         size = size + 1;
         list.add(new Event(task, time));
     }

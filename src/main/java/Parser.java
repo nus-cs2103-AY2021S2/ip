@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -9,9 +6,8 @@ public class Parser {
      *
      * @param string input.
      * @return command.
-     * @throws DukeException if command cannot be created.
      */
-    public static Command getCommand(String string) throws DukeException {
+    public static Command getCommand(String string) {
         String action;
         String info;
         Command command;
@@ -26,35 +22,35 @@ public class Parser {
         }
 
         switch (action) {
-            case "todo":
-                command = new TodoCommand(action, info);
-                break;
-            case "deadline":
-                command = new DeadlineCommand(action, info);
-                break;
-            case "event":
-                command = new EventCommand(action, info);
-                break;
-            case "done":
-                command = new DoneCommand(action, info);
-                break;
-            case "delete":
-                command = new DeleteCommand(action, info);
-                break;
-            case "bye":
-                command = new ExitCommand(action, info);
-                break;
-            case "list":
-                command = new ListCommand(action, info);
-                break;
-            case "find":
-                command = new FindCommand(action, info);
-                break;
-            case "date":
-                command = new DateCommand(action, info);
-                break;
-            default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
+        case "todo":
+            command = new TodoCommand(info);
+            break;
+        case "deadline":
+            command = new DeadlineCommand(info);
+            break;
+        case "event":
+            command = new EventCommand(info);
+            break;
+        case "done":
+            command = new DoneCommand(info);
+            break;
+        case "delete":
+            command = new DeleteCommand(info);
+            break;
+        case "bye":
+            command = new ExitCommand(info);
+            break;
+        case "list":
+            command = new ListCommand(info);
+            break;
+        case "find":
+            command = new FindCommand(info);
+            break;
+        case "date":
+            command = new DateCommand(info);
+            break;
+        default:
+            command = new ErrorCommand(info);
         }
 
         return command;
@@ -65,14 +61,9 @@ public class Parser {
      *
      * @param info details.
      * @return task.
-     * @throws DukeException if there is no task.
      */
-    public static String getTask(String info) throws DukeException {
+    public static String getTask(String info) {
         String task;
-
-        if (info.equals("")) {
-            throw new DukeException("OOPS!!! The description cannot be empty.");
-        }
 
         if (info.contains(" /")) {
             String[] str = info.split(" /", 2);
@@ -89,22 +80,17 @@ public class Parser {
      *
      * @param info detail.
      * @return time at.
-     * @throws DukeException if the time is wrong.
      */
-    public static String getTimeAt(String info) throws DukeException {
+    public static String getTimeAt(String info) {
         String time;
 
         if (info.contains(" /at ")) {
             String[] str = info.split(" /at ", 2);
-            try {
-                LocalDate date = LocalDate.parse(str[1]);
-                time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            } catch (DateTimeParseException e) {
-                throw new DukeException("OOPS!!! The timing is not in the correct format.");
-            }
+            time = str[1];
         } else {
-            throw new DukeException("OOPS!!! The timing cannot be empty.");
+            time = "";
         }
+
         return time;
     }
 
@@ -113,21 +99,15 @@ public class Parser {
      *
      * @param info detail.
      * @return time by.
-     * @throws DukeException if time is wrong.
      */
-    public static String getTimeBy(String info) throws DukeException {
+    public static String getTimeBy(String info) {
         String time;
 
         if (info.contains(" /by ")) {
-            String[] str = info.split(" /by ", 2);
-            try {
-                LocalDate date = LocalDate.parse(str[1]);
-                time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            } catch (DateTimeParseException e) {
-                throw new DukeException("OOPS!!! The timing is not in the correct format.");
-            }
+            String[] str = info.split(" /at ", 2);
+            time = str[1];
         } else {
-            throw new DukeException("OOPS!!! The timing cannot be empty.");
+            time = "";
         }
 
         return time;

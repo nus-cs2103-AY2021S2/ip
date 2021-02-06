@@ -1,26 +1,27 @@
 public class TodoCommand extends Command {
 
-    public TodoCommand(String action, String info) {
-        super(action, info);
+    public TodoCommand(String info) {
+        super(info);
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String task;
-        String response;
         int size;
         Task t;
 
         task = Parser.getTask(info);
 
-        tasks.addTodo(action, task);
+        if (task.equals("")) {
+            throw new DukeException("OOPS!!! The description cannot be empty.");
+        }
+
+        tasks.addTodo(task);
         size = tasks.size;
         t = (tasks.list).get(size - 1);
 
-        response = ui.showAddMessage(t, size);
+        ui.showAddMessage(t, size);
         storage.store(tasks.list);
-
-        return response;
     }
 
     public boolean isExit() {

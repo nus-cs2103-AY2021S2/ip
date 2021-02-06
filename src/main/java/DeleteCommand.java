@@ -1,15 +1,14 @@
 public class DeleteCommand extends Command {
 
-    public DeleteCommand(String action, String info) {
-        super(action, info);
+    public DeleteCommand(String info) {
+        super(info);
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int num;
         int size;
         Task t;
-        String response;
 
         assert info != null;
         try {
@@ -26,11 +25,9 @@ public class DeleteCommand extends Command {
             t = (tasks.list).get(num);
             tasks.deleteTask(num);
             size = tasks.size;
-            response = ui.showDelete(t, size);
+            ui.showDelete(t, size);
             storage.store(tasks.list);
         }
-
-        return response;
     }
 
     @Override
