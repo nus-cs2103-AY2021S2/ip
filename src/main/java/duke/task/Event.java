@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     private LocalDate dueAt;
 
-    private static final String DUE_COMMAND = "/at";
+    private final static String DUE_COMMAND = "/at";
 
     public Event(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
@@ -59,7 +59,7 @@ public class Event extends Task {
                 + "[" + taskStringCheck + "] "
                 + super.getTaskName()
                 + " (at: " + formatDate(dueAt)
-                +  ")";
+                + ")";
     }
 
     private String formatDate(LocalDate date) {

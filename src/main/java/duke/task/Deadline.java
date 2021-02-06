@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
     private LocalDate dueBy;
-    private static final String DUE_COMMAND = "/by";
+    private final static String DUE_COMMAND = "/by";
 
     public Deadline(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
@@ -60,7 +60,7 @@ public class Deadline extends Task {
     public String toString() {
         String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
         return "[D]" + "[" + taskStringCheck + "] " + super.getTaskName()
-                + " (by: " + formatDate(dueBy) +  ")";
+                + " (by: " + formatDate(dueBy) + ")";
     }
 
     private String formatDate(LocalDate date) {

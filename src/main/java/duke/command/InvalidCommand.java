@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * Command for invalid input
  */
-public class InvalidCommand extends Command{
+public class InvalidCommand extends Command {
 
     /**
      * Prints invalid message
