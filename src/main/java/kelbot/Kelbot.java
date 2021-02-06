@@ -38,31 +38,29 @@ public class Kelbot {
                 return "Invalid Command!";
             }
             assert parser.getIsValid();
-            try {
-                Command command = parser.getCommand();
-                Integer taskNumber = parser.getTaskNumber();
-                String keyword = parser.getKeyword();
-                String taskName = parser.getTaskName();
-                LocalDate date = parser.getDate();
-                if (command == Command.BYE) {
-                    response = ui.sayGoodbye();
-                    Platform.exit();
-                } else if (command == Command.LIST) {
-                    response = ui.printList(taskList);
-                } else if (command == Command.DONE || command == Command.DELETE) {
-                    response = doneOrDelete(command, taskList, taskNumber);
-                } else if (command == Command.FIND) {
-                    response = find(taskList, keyword);
-                } else {
-                    response = add(command, taskList, taskName, date);
-                }
-            } catch (DateTimeParseException e) {
-                response = "Invalid Date!";
+            Command command = parser.getCommand();
+            Integer taskNumber = parser.getTaskNumber();
+            String keyword = parser.getKeyword();
+            String taskName = parser.getTaskName();
+            LocalDate date = parser.getDate();
+            if (command == Command.BYE) {
+                response = ui.sayGoodbye();
+                Platform.exit();
+            } else if (command == Command.LIST) {
+                response = ui.printList(taskList);
+            } else if (command == Command.DONE || command == Command.DELETE) {
+                response = doneOrDelete(command, taskList, taskNumber);
+            } else if (command == Command.FIND) {
+                response = find(taskList, keyword);
+            } else if (command == Command.SNOOZE) {
+                response = snooze(taskList, taskNumber, date);
+            } else {
+                response = add(command, taskList, taskName, date);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            response = "Which task are you referring to?";
         } catch (DateTimeParseException e) {
-            response = "Date cannot be empty!";
+            response = "Date format is wrong!";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            response = "Incomplete command!";
         }
         storage.save(taskList.getTaskList());
         return response;
@@ -81,7 +79,7 @@ public class Kelbot {
      * @param taskNumber The task number to index the task in the task list.
      * @return The string to be printed.
      */
-    public String doneOrDelete(Command command, TaskList taskList, int taskNumber) {
+    public String doneOrDelete(Command command, TaskList taskList, Integer taskNumber) {
         String response;
         try {
             assert !taskList.getTaskList().isEmpty();
@@ -108,14 +106,13 @@ public class Kelbot {
         try {
             if (keyword.equals("")) {
                 throw new KelbotException("Keyword cannot be empty!");
+            }
+            assert !taskList.getTaskList().isEmpty();
+            TaskList taskListToPrint = new TaskList(taskList.search(keyword));
+            if (taskListToPrint.toString().equals("")) {
+                response = "No tasks match your search!";
             } else {
-                assert !taskList.getTaskList().isEmpty();
-                TaskList taskListToPrint = new TaskList(taskList.search(keyword));
-                if (taskListToPrint.toString().equals("")) {
-                    response = "No tasks match your search!";
-                } else {
-                    response = ui.printRelevantTasks(taskListToPrint);
-                }
+                response = ui.printRelevantTasks(taskListToPrint);
             }
         } catch (KelbotException e) {
             response = e.getMessage();
@@ -152,6 +149,28 @@ public class Kelbot {
             }
         } catch (KelbotException e) {
             response = e.getMessage();
+        }
+        return response;
+    }
+    /**
+     * Snooze a task in the task list.
+     * @param taskList The task list that contains the task to be snoozed.
+     * @param taskNumber The index of the task in the task list to be snoozed.
+     * @param date The new date of the task.
+     * @return The response to be printed to the user.
+     */
+    public String snooze(TaskList taskList, Integer taskNumber, LocalDate date) {
+        String response;
+        try {
+            if (date == null) {
+                throw new KelbotException("Date cannot be empty!");
+            }
+            Task taskToSnooze = taskList.snooze(taskNumber, date);
+            response = ui.printSnooze(taskToSnooze);
+        } catch (KelbotException e) {
+            response = e.getMessage();
+        } catch (IndexOutOfBoundsException e) {
+            response = "The list is not that long!";
         }
         return response;
     }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     private Command command;
-    private Integer taskNumber = Integer.MAX_VALUE;
+    private Integer taskNumber = null;
     private String keyword = "";
     private String taskName = "";
     private LocalDate date = null;
@@ -23,15 +23,19 @@ public class Parser {
             command = Command.LIST;
         } else if (commands[0].equals("done")) {
             command = Command.DONE;
-            taskNumber = Integer.parseInt(commands[1]);
+            taskNumber = Integer.parseInt(commands[1]) - 1;
         } else if (commands[0].equals("delete")) {
             command = Command.DELETE;
-            taskNumber = Integer.parseInt(commands[1]);
+            taskNumber = Integer.parseInt(commands[1]) - 1;
         } else if (commands[0].equals("find")) {
             command = Command.FIND;
             for (int i = 1; i < commands.length; i++) {
                 keyword += " " + commands[i];
             }
+        } else if (commands[0].equals("snooze")) {
+            command = Command.SNOOZE;
+            taskNumber = Integer.parseInt(commands[1]) - 1;
+            date = LocalDate.parse(commands[2]);
         } else if (commands[0].equals("todo")) {
             command = Command.TODO;
             for (int i = 1; i < commands.length; i++) {

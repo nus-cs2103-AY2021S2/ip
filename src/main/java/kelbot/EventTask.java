@@ -15,6 +15,9 @@ public class EventTask extends Task {
         super(name);
         this.date = date;
     }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
     @Override
     public String toString() {
         return "[E] " + super.toString() + " at " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));

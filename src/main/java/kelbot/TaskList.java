@@ -1,5 +1,6 @@
 package kelbot;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -48,7 +49,7 @@ public class TaskList {
      * @return The task that is being marked.
      */
     public Task complete(int taskNumber) {
-        Task taskToComplete = taskList.get(taskNumber - 1);
+        Task taskToComplete = taskList.get(taskNumber);
         taskToComplete.complete();
         return taskToComplete;
     }
@@ -58,7 +59,7 @@ public class TaskList {
      * @return The task that is being deleted.
      */
     public Task delete(int taskNumber) {
-        Task taskToDelete = taskList.remove(taskNumber - 1);
+        Task taskToDelete = taskList.remove(taskNumber);
         return taskToDelete;
     }
     /**
@@ -74,6 +75,26 @@ public class TaskList {
             }
         }
         return taskListToPrint;
+    }
+    /**
+     * Reschedules a DeadlineTask or EventTask.
+     * @param taskNumber Index of the task in the task list.
+     * @param date The new date of the task.
+     * @return The task that has been rescheduled.
+     * @throws KelbotException If the task if a TodoTask.
+     */
+    public Task snooze(int taskNumber, LocalDate date) throws KelbotException {
+        if (taskList.get(taskNumber) instanceof DeadlineTask) {
+            DeadlineTask deadlineTaskToSnooze = (DeadlineTask) taskList.get(taskNumber);
+            deadlineTaskToSnooze.setDate(date);
+            return deadlineTaskToSnooze;
+        } else if (taskList.get(taskNumber) instanceof EventTask) {
+            EventTask eventTaskToSnooze = (EventTask) taskList.get(taskNumber);
+            eventTaskToSnooze.setDate(date);
+            return eventTaskToSnooze;
+        } else {
+            throw new KelbotException("Todo Task does not have date!");
+        }
     }
     @Override
     public String toString() {
