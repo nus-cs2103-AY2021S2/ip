@@ -29,7 +29,6 @@ class Storage {
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
-            System.out.println(file.getAbsolutePath());
             fr = new FileReader(file);
             br = new BufferedReader(fr);
         } catch (IOException e) {
