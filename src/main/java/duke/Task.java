@@ -29,8 +29,6 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    //    accept dates in a format such as yyyy-mm-dd format (e.g., 2019-10-15) and
-//    print in a different format such as MMM dd yyyy e.g., (Oct 15 2019)
     protected static LocalDate dateStringToDate(String inputDate) {
         String customInputDate = inputDate.replaceAll("-", " ");
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy MM dd");
