@@ -95,8 +95,7 @@ public class Duke {
         try {
             switch (command) {
             case "bye":
-                isWaitingSaveFileResponse = true;
-                return ui.saveFilePrompt();
+                return exit();
             case "list":
                 return ui.displayList(tasks.listOutTask());
             case "done":
@@ -108,17 +107,13 @@ public class Duke {
             case "event":
                 return addTask(Event.createEvent(args));
             case "delete":
-                taskToBeDeleted = Integer.parseInt(args);
-                isWaitingDeleteTaskResponse = true;
-                return ui.deleteTaskPrompt();
+                return deleteTask(args);
             case "save":
-                storage.saveTaskList(tasks.getList());
-                return ui.displaySaveMessage();
+                return save();
             case "load":
-                tasks = new TaskList(storage.loadTaskList());
-                return ui.displayLoadMessage();
+                return load();
             case "help":
-                return ui.help();
+                return ui.displayHelp();
             case "search":
                 return ui.displayList(tasks.search(args));
             default:
@@ -178,6 +173,27 @@ public class Duke {
             }
         }
         return "shutdownConfirm";
+    }
+
+    private String load() throws DukeException {
+        tasks = new TaskList(storage.loadTaskList());
+        return ui.displayLoadMessage();
+    }
+
+    private String save() throws DukeException {
+        storage.saveTaskList(tasks.getList());
+        return ui.displaySaveMessage();
+    }
+
+    private String deleteTask(String args) {
+        taskToBeDeleted = Integer.parseInt(args);
+        isWaitingDeleteTaskResponse = true;
+        return ui.displayDeleteTaskPrompt();
+    }
+
+    private String exit() {
+        isWaitingSaveFileResponse = true;
+        return ui.displaySaveFilePrompt();
     }
 
     /**

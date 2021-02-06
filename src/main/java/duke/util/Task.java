@@ -54,6 +54,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns date of task.
+     *
+     * @return Date of task.
+     */
+    public LocalDate getDate() {
+        return date;
+    }
+
+    /**
      * Returns String in the form "[status] description".
      *
      * @return String representation of Task.

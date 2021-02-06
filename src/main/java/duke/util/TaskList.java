@@ -48,8 +48,7 @@ public class TaskList {
         Task t;
 
         try {
-            t = lst.get(i);
-            lst.remove(i);
+            t = lst.remove(i);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInputException(String.format("\"%d\" is an invalid number!", i - 1));
         }
@@ -123,8 +122,8 @@ public class TaskList {
         List<String> results = new ArrayList<>();
 
         for (int i = 0; i < lst.size(); i++) {
-            if (d.equals(lst.get(i).date)) {
-                results.add(String.format("%d. %s", i + 1, lst.get(i).toString()));
+            if (d.equals(lst.get(i).getDate())) {
+                results.add(String.format("%d. %s", i + 1, lst.get(i)));
             }
         }
 
@@ -142,13 +141,14 @@ public class TaskList {
         try {
             LocalDate date = LocalDate.parse(keyword);
             return searchByDate(date);
+
         } catch (DateTimeParseException e) {
 
             List<String> results = new ArrayList<>();
 
             for (int i = 0; i < lst.size(); i++) {
                 if (lst.get(i).getDescription().contains(keyword)) {
-                    results.add(String.format("%d. %s", i + 1, lst.get(i).toString()));
+                    results.add(String.format("%d. %s", i + 1, lst.get(i)));
                 }
             }
 
