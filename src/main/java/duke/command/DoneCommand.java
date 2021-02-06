@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.PlaceList;
 import duke.TaskList;
 import duke.task.Task;
 
@@ -28,21 +29,22 @@ public class DoneCommand extends Command {
     /**
      * Execute and print a done command.
      *
-     * @param list Passes TaskList in case of reading and writing to the list.
+     * @param listT Passes TaskList in case of reading and writing to the list.
+     * @param listP Passes PlaceList in case of reading and writing to the list.
      * @throws DukeException When encounter an error in command argument.
      */
     @Override
-    public String executeAndPrint(TaskList list) throws DukeException {
+    public String executeAndPrint(TaskList listT, PlaceList listP) throws DukeException {
         int index;
         try {
             index = Integer.parseInt(command.substring(LENGTH_DONE)) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException(ERROR_INCORRECT_FORMAT);
         }
-        if (index < list.getSize() && index >= 0) {
-            Task currTask = list.getJob(index);
+        if (index < listT.getSize() && index >= 0) {
+            Task currTask = listT.getJob(index);
             currTask.markAsDone();
-            list.replaceJob(index, currTask);
+            listT.replaceJob(index, currTask);
             return "This task is marked as done: \n"
                     + currTask.toString();
         } else {

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.PlaceList;
 import duke.StringParser;
 import duke.TaskList;
 
@@ -29,11 +30,12 @@ public class FindCommand extends Command {
     /**
      * Execute and print a find command.
      *
-     * @param list Passes TaskList in case of reading and writing to the list.
+     * @param listT Passes TaskList in case of reading and writing to the list.
+     * @param listP Passes PlaceList in case of reading and writing to the list.
      * @throws DukeException When encounter an error in command argument.
      */
     @Override
-    public String executeAndPrint(TaskList list) throws DukeException {
+    public String executeAndPrint(TaskList listT, PlaceList listP) throws DukeException {
         if (command.length() <= LENGTH_FIND) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
         }
@@ -44,9 +46,9 @@ public class FindCommand extends Command {
         }
 
         TaskList tempList = new TaskList();
-        for (int i = 0; i < list.getSize(); i++) {
-            if (list.getJob(i).getDescription().contains(subStr)) {
-                tempList.addJob(list.getJob(i));
+        for (int i = 0; i < listT.getSize(); i++) {
+            if (listT.getJob(i).getDescription().contains(subStr)) {
+                tempList.addJob(listT.getJob(i));
             }
         }
         if (tempList.getSize() == 0) {

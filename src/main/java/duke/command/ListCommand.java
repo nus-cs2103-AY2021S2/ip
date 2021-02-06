@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.PlaceList;
 import duke.TaskList;
 
 /**
@@ -13,15 +14,16 @@ public class ListCommand extends Command {
     /**
      * Execute and print a list command.
      *
-     * @param list Passes TaskList in case of reading and writing to the list.
+     * @param listT Passes TaskList in case of reading and writing to the list.
+     * @param listP Passes PlaceList in case of reading and writing to the list.
      * @throws DukeException When encounter an error in command argument.
      */
     @Override
-    public String executeAndPrint(TaskList list) throws DukeException {
-        if (list.getSize() == 0) {
+    public String executeAndPrint(TaskList listT, PlaceList listP) throws DukeException {
+        if (listT.getSize() == 0) {
             return MESSAGE_LIST_EMPTY + "\n";
         } else {
-            return list.formatList();
+            return listT.formatList();
         }
     }
 

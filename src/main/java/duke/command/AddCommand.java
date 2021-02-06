@@ -2,10 +2,7 @@ package duke.command;
 
 import java.time.DateTimeException;
 
-import duke.CommandType;
-import duke.DukeException;
-import duke.StringParser;
-import duke.TaskList;
+import duke.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -30,7 +27,6 @@ public class AddCommand extends Command {
 
     private static final String MARK_AT = " /at ";
     private static final String MARK_BY = " /by ";
-
 
     private final String command;
     private final CommandType cmdType;
@@ -132,11 +128,12 @@ public class AddCommand extends Command {
     /**
      * Executes and prints command according to its command type.
      *
-     * @param list Passes TaskList in case of reading and writing to the list.
+     * @param listT Passes TaskList in case of reading and writing to the list.
+     * @param listP Passes PlaceList in case of reading and writing to the list.
      * @throws DukeException When encounter an error in command argument.
      */
     @Override
-    public String executeAndPrint(TaskList list) throws DukeException {
+    public String executeAndPrint(TaskList listT, PlaceList listP) throws DukeException {
         Task task;
         switch (this.cmdType) {
         case Todo:
@@ -152,10 +149,10 @@ public class AddCommand extends Command {
             assert false : "This line will never be reached.";
             throw new DukeException("Unexpected value: " + this.cmdType);
         }
-        list.addJob(task);
+        listT.addJob(task);
         return "Task added:\n" + task.toString()
-                + "Now you have " + list.getSize()
-                + (list.getSize() == 1 ? " task in the list.\n" : " tasks in the list.\n");
+                + "Now you have " + listT.getSize()
+                + (listT.getSize() == 1 ? " task in the list.\n" : " tasks in the list.\n");
     }
 
     @Override

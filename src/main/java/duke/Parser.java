@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 /**
  * A class that identify the keyword of given string.
@@ -20,6 +14,7 @@ public class Parser {
     private static final int LENGTH_TODO = "todo ".length();
     private static final int LENGTH_DONE = "done ".length();
     private static final int LENGTH_FIND = "find ".length();
+    private static final int LENGTH_GO = "go ".length();
 
     private static final String STRING_BYE = "bye";
     private static final String STRING_LIST = "list";
@@ -29,6 +24,8 @@ public class Parser {
     private static final String STRING_TODO = "todo ";
     private static final String STRING_DONE = "done ";
     private static final String STRING_FIND = "find ";
+    private static final String STRING_GO = "go ";
+    private static final String STRING_PLACE = "place";
 
     private static final String ERROR_INVALID = "Invalid command.";
 
@@ -55,6 +52,8 @@ public class Parser {
         } else if (strLength >= LENGTH_EVENT
                 && str.substring(0, LENGTH_EVENT).equalsIgnoreCase(STRING_EVENT)) {
             return new AddCommand(str, CommandType.Event);
+        } else if (str.equalsIgnoreCase(STRING_PLACE)) {
+            return new PlaceCommand();
         } else if (strLength >= LENGTH_TODO
                 && str.substring(0, LENGTH_TODO).equalsIgnoreCase(STRING_TODO)) {
             return new AddCommand(str, CommandType.Todo);
@@ -64,6 +63,9 @@ public class Parser {
         } else if (strLength >= LENGTH_FIND
                 && str.substring(0, LENGTH_FIND).equalsIgnoreCase(STRING_FIND)) {
             return new FindCommand(str);
+        } else if (strLength >= LENGTH_GO
+                && str.substring(0, LENGTH_GO).equalsIgnoreCase(STRING_GO)) {
+            return new GoCommand(str);
         } else {
             throw new DukeException(ERROR_INVALID);
         }

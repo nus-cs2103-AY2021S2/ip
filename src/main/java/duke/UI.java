@@ -33,7 +33,8 @@ public class UI {
             + "|  Always be with you.     |\n"
             + "|__________________________|\n";
 
-    private static TaskList list = new TaskList();
+    private static TaskList listT = new TaskList();
+    private static PlaceList listP = new PlaceList();
 
     /**
      * Print DukeException.
@@ -55,7 +56,8 @@ public class UI {
             e.printStackTrace();
         }
 
-        list = Storage.loadToList();
+        listT = Storage.loadToTaskList();
+        listP = Storage.loadToPlaceList();
         return WELCOME;
     }
 
@@ -63,7 +65,7 @@ public class UI {
      * Saves the data to save data file and says goodbye.
      */
     public static String saveAndGoodBye() {
-        Storage.writeToData(list);
+        Storage.writeToData(listT, listP);
         return BYE;
     }
 
@@ -76,7 +78,7 @@ public class UI {
     public static String respond(String commandStr) {
         try {
             Command command = Parser.parseCommand(commandStr);
-            return command.executeAndPrint(list);
+            return command.executeAndPrint(listT, listP);
         } catch (DukeException e) {
             return printError(e);
         }
