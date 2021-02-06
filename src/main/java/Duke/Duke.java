@@ -131,7 +131,10 @@ public class Duke {
         StringBuilder output = new StringBuilder();
         output.append(Constants.START_LISTING).append('\n');
         for (int i = 0; i < list.size(); i++) {
-            output.append(i + 1).append(". ").append(list.get(i)).append('\n');
+            output.append(i + 1).append(". ").append(list.get(i));
+            if (i != list.size() - 1) {
+                output.append('\n');
+            }
         }
         return output.toString();
     }
