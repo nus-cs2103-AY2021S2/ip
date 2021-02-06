@@ -52,6 +52,9 @@ public class Seashell {
                     case CLEAR:
                         this.taskListObj = this.taskListObj.clear(this.saveHandler);
                         break;
+                    case FIND:
+                        this.taskListObj.find(command);
+                        break;
                     case INVALID:
                         throw new SeashellException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
