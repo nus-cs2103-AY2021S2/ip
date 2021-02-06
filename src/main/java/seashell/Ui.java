@@ -1,7 +1,7 @@
 package seashell;
 
 public class Ui {
-    public final static String HELP_TEXT = " Welcome to Seashells! You can start by trying out some of these commands + " +
+    public final static String HELP_TEXT = "Welcome to Seashells! You can start by trying out some of these commands" +
             "\n todo <task name> - add a todo task" +
             "\n deadline <task name> /by <datetime> - add a deadline task" +
             "\n event <task name> /at <datetime> - add an event task" +
@@ -11,7 +11,7 @@ public class Ui {
             "\n bye - exits the program";
 
     public void showWelcome() {
-        System.out.println("Hello I'm seashell.Seashell, a task manager! What can I do for you? Type \"help\" for more " +
+        System.out.println("Hello I'm Seashell, a task manager! What can I do for you? Type \"help\" for more " +
                 "information on the commands you can give me!");
     }
 

@@ -1,7 +1,5 @@
 package seashell;
 
-import seashell.CommandType;
-
 public class Parser {
 
     public CommandType parse(String input) {
