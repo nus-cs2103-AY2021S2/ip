@@ -1,12 +1,17 @@
 T0  borrow book
+D1  return book           by:2019-10-15
+E0  project meeting           at:2019-10-19
+T0  borrow book
+D0  return book           by:2019-10-15
+E0  project meeting           at:2019-10-19
+T0  borrow book
+D0  return book           by:2019-10-15
+E0  project meeting           at:2019-10-19
+T0  borrow book
+D0  return book          by:2019-10-15
+E0  project meeting          at:2019-10-19
+T0  borrow book
 D1  return book      by:2019-10-15
 E0  project meeting      at:2019-10-19
-T0  borrow book
-D0  return book      by:2019-10-15
-E0  project meeting      at:2019-10-19
-T0  borrow book
-D0  return book      by:2019-10-15
-E0  project meeting      at:2019-10-19
-T0  borrow book
-D0  return book     by:2019-10-15
-E0  project meeting     at:2019-10-19
+T0 clean house
+T0 clean bedroom
