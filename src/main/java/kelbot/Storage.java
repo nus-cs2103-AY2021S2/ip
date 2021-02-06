@@ -49,6 +49,7 @@ public class Storage {
     public void save(ArrayList<Task> taskList) {
         File file = new File(path.toString());
         file.getParentFile().mkdirs();
+        assert fileExists;
         try {
             FileOutputStream fos = new FileOutputStream(path.toString());
             ObjectOutputStream oos = new ObjectOutputStream(fos);
