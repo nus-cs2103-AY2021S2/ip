@@ -10,10 +10,12 @@ import duke.exceptions.CommandNotValidException;
 import duke.exceptions.DateTimeNotFoundException;
 import duke.exceptions.DescriptionNotFoundException;
 import duke.exceptions.DukeException;
+import duke.exceptions.DurationNotFoundException;
 import duke.exceptions.TimeDurationInvalidException;
 import duke.storage.Storage;
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
+import duke.tasks.FixedDurationTask;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.TodoTask;
@@ -52,7 +54,8 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException,
-            DateTimeParseException, StringIndexOutOfBoundsException, IOException {
+            DateTimeParseException, StringIndexOutOfBoundsException, IOException,
+            NumberFormatException {
 
         Task task = createTasks();
         tasks.add(task);
@@ -63,9 +66,7 @@ public class AddCommand extends Command {
     private Task createTasks() throws DukeException,
             DateTimeParseException, StringIndexOutOfBoundsException {
         if (isValidCommand()) {
-          
             assert checkCommands.length > 0;
-          
             if (hasNoDescription()) {
                 throw new DescriptionNotFoundException();
             }
@@ -73,8 +74,10 @@ public class AddCommand extends Command {
                 return createTodoTask();
             } else if (isDeadlineCommand()) {
                 return createDeadlineTask();
-            } else {
+            } else if (isEventCommand()) {
                 return createEventTask();
+            } else {
+                return createFixedDurationTask();
             }
         } else {
             throw new CommandNotValidException();
@@ -83,11 +86,15 @@ public class AddCommand extends Command {
 
     private boolean isValidCommand() {
         return checkCommands[0].equals("todo") || checkCommands[0].equals("deadline")
-                || checkCommands[0].equals("event");
+                || checkCommands[0].equals("event") || checkCommands[0].equals("duration");
     }
 
     private boolean hasNoDescription() {
         return checkCommands.length == 1;
+    }
+
+    private boolean hasNoDescription(String description) {
+        return description.isEmpty();
     }
 
     private boolean isTodoCommand() {
@@ -98,13 +105,16 @@ public class AddCommand extends Command {
         return checkCommands[0].equals("deadline");
     }
 
+    private boolean isEventCommand() {
+        return checkCommands[0].equals("event");
+    }
+
     private TodoTask createTodoTask() {
         String description = fullCommand.substring(5).trim();
         return new TodoTask(description);
     }
 
-    private DeadlineTask createDeadlineTask() throws
-            DateTimeNotFoundException, DescriptionNotFoundException {
+    private DeadlineTask createDeadlineTask() throws DukeException {
         int timeIndex = fullCommand.indexOf("/by");
         if (hasNoDateTime(timeIndex)) {
             throw new DateTimeNotFoundException();
@@ -145,12 +155,9 @@ public class AddCommand extends Command {
         return dateTime.isEmpty();
     }
 
-    private boolean hasNoDescription(String description) {
-        return description.isEmpty();
-    }
 
-    private EventTask createEventTask() throws
-            DateTimeNotFoundException, DescriptionNotFoundException, TimeDurationInvalidException {
+
+    private EventTask createEventTask() throws DukeException {
         int timeIndex = fullCommand.indexOf("/at");
         if (hasNoDateTime(timeIndex)) {
             throw new DateTimeNotFoundException();
@@ -206,5 +213,33 @@ public class AddCommand extends Command {
             throw new TimeDurationInvalidException();
         }
         return new EventTask(description, date, startTime, endTime);
+    }
+
+    private FixedDurationTask createFixedDurationTask() throws DukeException, NumberFormatException {
+        int durationIndex = fullCommand.indexOf("/within");
+        if (hasNoDuration(durationIndex)) {
+            throw new DurationNotFoundException();
+        }
+
+        String description = fullCommand.substring(9, durationIndex).trim();
+        if (hasNoDescription(description)) {
+            throw new DescriptionNotFoundException();
+        }
+
+        String durationString = fullCommand.substring(durationIndex + 7).trim();
+        if (hasNoDuration(durationString)) {
+            throw new DurationNotFoundException();
+        }
+
+        int duration = Integer.parseInt(durationString);
+        return new FixedDurationTask(description, duration);
+    }
+
+    private boolean hasNoDuration(int durationIndex) {
+        return durationIndex == -1;
+    }
+
+    private boolean hasNoDuration(String durationString) {
+        return durationString.isEmpty();
     }
 }
