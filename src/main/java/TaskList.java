@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Abstracts the data structure and relevant methods used to store the Task objects.
@@ -6,14 +8,29 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private static ArrayList<Task> tasks;
+    private static ArrayList<Task> todoArray;
+    private static ArrayList<EventDeadline> eventDeadlineArray;
+    private static ArrayList<? extends Task> overallArray;
 
     TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+        overallArray = tasks;
+        todoArray = new ArrayList<>();
+        eventDeadlineArray = new ArrayList<>();
+        for (Task t : tasks ) {
+            if (t.getTaskType() == 0) {
+                todoArray.add(t);
+                mergeArrays();
+            }
+            if (t.getTaskType() == 1 || t.getTaskType() == 2) {
+                eventDeadlineArray.add((EventDeadline) t);
+                mergeArrays();
+                sortByDate(eventDeadlineArray);
+            }
+        }
     }
 
     TaskList() {
-        this.tasks = new ArrayList<>();
+        overallArray = new ArrayList<>();
     }
 
     /**
@@ -21,7 +38,16 @@ public class TaskList {
      * @param task A task object.
      */
     public void add(Task task) {
-        tasks.add(task);
+        System.out.println(task.getTaskType());
+        if (task.getTaskType() == 0) {
+            todoArray.add(task);
+            mergeArrays();
+        }
+        if (task.getTaskType() == 1 || task.getTaskType() == 2) {
+            eventDeadlineArray.add((EventDeadline) task);
+            mergeArrays();
+            sortByDate(eventDeadlineArray);
+        }
     }
 
     /**
@@ -29,7 +55,7 @@ public class TaskList {
      * @return the number of task objects in the ArrayList.
      */
     public int size() {
-        return tasks.size();
+        return overallArray.size();
     }
 
     /**
@@ -38,22 +64,55 @@ public class TaskList {
      * @return the task object at the specific index in the ArrayList.
      */
     public Task get(int index) {
-        return tasks.get(index);
+        return overallArray.get(index);
     }
 
     /**
      * Deletes an item at a specific index in the data structure.
      * @param index Index where the task object is to be deleted.
      */
-    public void remove(int index) {
-        tasks.remove(index);
+    public void remove(int index) throws IllegalKeywordException {
+        Task toRemove = overallArray.get(index);
+        switch (toRemove.getTaskType()) {
+        case 1: {
+            todoArray.remove(toRemove);
+            mergeArrays();
+        }
+        case 2:
+        case 3: {
+            eventDeadlineArray.remove((EventDeadline) toRemove);
+            mergeArrays();
+            sortByDate(eventDeadlineArray);
+        }
+        default: {
+            throw new IllegalKeywordException("No type of task specified");
+        }
+        }
     }
 
     /**
      * Allows other classes to ask for a copy of the data structure.
      * @return the ArrayList.
      */
-    public static ArrayList<Task> getTasklist() {
-        return tasks;
+    public static ArrayList<? extends Task> getTasklist() {
+        return overallArray;
+    }
+
+
+    public void mergeArrays() {
+        sortByDate(eventDeadlineArray);
+        ArrayList<Task> todoClone = new ArrayList<>(todoArray);
+        for (EventDeadline e : eventDeadlineArray) {
+            todoClone.add((Task) e);
+        }
+        overallArray = todoClone;
+    }
+
+    public static void sortByDate(ArrayList<? extends EventDeadline> list) {
+        Collections.sort(list, (Comparator<EventDeadline>) (o1, o2) -> {
+            int compareDate = 0;
+            compareDate = o1.getDateInfo().compareTo(o2.getDateInfo());
+            return compareDate;
+        });
     }
 }

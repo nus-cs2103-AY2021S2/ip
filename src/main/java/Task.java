@@ -1,7 +1,14 @@
+import java.time.LocalDate;
+
 /**
  * A task object that describes what the task is.
  */
 public class Task {
+
+    protected static int TODO = 0;
+    protected static int DEADLINE = 1;
+    protected static int EVENT = 2;
+
 
     protected String description;
 
@@ -28,6 +35,10 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public int getTaskType() {
+        return this.taskType;
     }
 
     /**
