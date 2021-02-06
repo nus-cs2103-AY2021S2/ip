@@ -1,8 +1,10 @@
-import controllers.Ui;
-import models.Storage;
+package duke;
+
+import duke.controllers.Ui;
+import duke.models.Storage;
 
 public class Duke {
-    /** Constant to store the database path for Duke's commands */
+    /** Constant to store the database path for duke.Duke's commands */
     private static final String DATABASE_FILE_PATH = "data/duke.txt";
     /** Constant storing database directory path */
     private static final String DATABASE_DIRECTORY_PATH = "data/";
@@ -14,11 +16,11 @@ public class Duke {
     }
 
     /**
-     * Main method to run Duke
+     * Main method to run duke.Duke
      * @param args
      */
     public static void main(String[] args) {
-        // creating new Duke run
+        // creating new duke.Duke run
         new Duke(DATABASE_FILE_PATH, DATABASE_DIRECTORY_PATH).run();
     }
 

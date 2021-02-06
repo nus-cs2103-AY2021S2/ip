@@ -1,4 +1,4 @@
-package controllers;
+package duke.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,14 +9,14 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import exceptions.DukeBlankDetailsException;
-import exceptions.DukeBlankTaskException;
-import exceptions.DukeCommandNotFoundException;
-import exceptions.DukeDateTimeParseException;
-import models.Deadline;
-import models.Event;
-import models.Parser;
-import models.Todo;
+import duke.exceptions.DukeBlankDetailsException;
+import duke.exceptions.DukeBlankTaskException;
+import duke.exceptions.DukeCommandNotFoundException;
+import duke.exceptions.DukeDateTimeParseException;
+import duke.models.Deadline;
+import duke.models.Event;
+import duke.models.Parser;
+import duke.models.Todo;
 
 public class TaskListTest {
     private final TaskList taskList = new TaskList(new ArrayList<>());

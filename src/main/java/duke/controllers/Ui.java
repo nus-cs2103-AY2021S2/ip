@@ -1,17 +1,17 @@
-package controllers;
+package duke.controllers;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import exceptions.DukeBlankTaskException;
-import exceptions.DukeCommandNotFoundException;
-import exceptions.DukeTaskIndexOutOfRangeException;
-import models.Parser;
-import models.Storage;
-import models.Todo;
-import views.Greeting;
+import duke.exceptions.DukeBlankTaskException;
+import duke.exceptions.DukeCommandNotFoundException;
+import duke.exceptions.DukeTaskIndexOutOfRangeException;
+import duke.models.Parser;
+import duke.models.Storage;
+import duke.models.Todo;
+import duke.views.Greeting;
 
 public class Ui {
     private final Storage storage;
@@ -109,7 +109,7 @@ public class Ui {
                     sc.close();
 
                     // return is called here to end start()
-                    // thereby, stopping the instance of Duke
+                    // thereby, stopping the instance of duke.Duke
                     return;
                 case UNKNOWN:
                     // Fallthrough

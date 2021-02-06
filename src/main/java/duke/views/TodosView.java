@@ -1,11 +1,11 @@
-package views;
+package duke.views;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import models.Todo;
+import duke.models.Todo;
 
 public class TodosView {
     /** Denotes the divider to use to go between lines */

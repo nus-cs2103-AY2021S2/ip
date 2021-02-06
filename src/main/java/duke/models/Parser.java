@@ -1,9 +1,9 @@
-package models;
+package duke.models;
 
 import java.util.List;
 import java.util.Optional;
 
-import exceptions.DukeCommandNotFoundException;
+import duke.exceptions.DukeCommandNotFoundException;
 
 public class Parser {
     private Optional<String> command;

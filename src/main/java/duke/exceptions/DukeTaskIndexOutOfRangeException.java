@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class DukeTaskIndexOutOfRangeException extends Exception {
     public DukeTaskIndexOutOfRangeException(String message) {

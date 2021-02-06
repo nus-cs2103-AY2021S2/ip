@@ -1,4 +1,4 @@
-package views;
+package duke.views;
 
 public class Greeting {
     private static final String divider = "---";
@@ -8,7 +8,7 @@ public class Greeting {
     }
 
     /**
-     * Outputs the standard greeting with Duke Logo
+     * Outputs the standard greeting with duke.Duke Logo
      */
     public void greet() {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
