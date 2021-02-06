@@ -1,5 +1,3 @@
-package main.java;
-
 /*
  * A type of DukeException.
  * An exception for incomplete commands.

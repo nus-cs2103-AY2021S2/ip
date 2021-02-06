@@ -1,20 +1,36 @@
-package main.java;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Storage {
     private final String filePath;
+    private TaskList taskList;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public String getFilePath() {
-        return this.filePath;
+    public void retrieveOrCreate() {
+        Path path = Paths.get(filePath);
+        if (Files.exists(path)) {
+            taskList = readFromFile();
+        } else {
+            try {
+                Files.createDirectories(path.getParent());
+                Files.createFile(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     public void writeToFile(TaskList taskList) {
@@ -23,7 +39,7 @@ public class Storage {
             output += taskList.getTask(i).toString() + "\n";
         }
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(this.filePath));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
             bw.write(output);
             bw.close();
         } catch (IOException e) {
@@ -34,7 +50,7 @@ public class Storage {
     public TaskList readFromFile() {
         TaskList taskList = new TaskList();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(this.filePath));
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
             String input = br.readLine();
             String type = "";
             int length = 0;

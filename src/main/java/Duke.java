@@ -1,55 +1,133 @@
-package main.java;
-
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.util.Scanner;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /*
  * The main class for the Duke app.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
     private Ui ui;
+    private Parser parser;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList();
+        storage = new Storage("C:/ip/src/main/java/Duke.java");
+        taskList = new TaskList();
+        parser = new Parser(taskList, ui, storage);
     }
 
-    /*
-     * Run the Duke app.
-     */
-    public void run() {
+    public void initiate() {
+        ui.greet();
+        storage.retrieveOrCreate();
+        taskList = storage.getTaskList();
         Scanner sc = new Scanner(System.in);
-        ui.reply();
-        Path path = Paths.get(this.storage.getFilePath());
-        if (Files.exists(path)) {
-            this.tasks = storage.readFromFile();
-        } else {
-            try {
-                Files.createDirectories(path.getParent());
-                Files.createFile(path);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Parser parser = new Parser(tasks, ui, storage);
         while (true) {
-            String command = sc.nextLine();
-            parser.insertCommand(command);
-            parser.process();
-            if (parser.isFinished()) {
+            String input = sc.nextLine();
+            parser.insertCommand(input);
+            System.out.println(parser.process());
+            if (parser.hasTerminated()) {
                 break;
             }
         }
         System.exit(0);
     }
 
+    @Override
+    public void start(Stage stage) {
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        //Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        //Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    public String getResponse(String input) {
+        parser.insertCommand(input);
+        return parser.process();
+    }
+
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke().initiate();
     }
 }

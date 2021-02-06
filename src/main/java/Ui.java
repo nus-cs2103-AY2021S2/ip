@@ -1,39 +1,68 @@
-package main.java;
-
 /*
  * Deal with interactions with the users.
  */
 public class Ui {
-    private String response;
 
-    public Ui() {
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        response = "Hello from\n" + logo + "\n" + "What can I do for you?";
+        String greeting = "Hello from\n" + logo + "What can I do for you?";
+        System.out.println(greeting);
+        return greeting;
     }
 
-    public Ui(String statement) {
-        response = statement;
+    public String giveList(String list) {
+        return "Here are the tasks in your list:\n" + list;
     }
 
-    /*
-     * Respond with the current response.
-     */
-    public void reply() {
-        System.out.println(response);
+    public String addTaskReply(String task, String numOfTasks) {
+        return "Got it. I've added this task:\n" + task + "\n" + "Now you have " + numOfTasks + " tasks in the list.";
     }
 
-    /*
-     * Replace the current response with a new one.
-     * Respond with the new response.
-     *
-     * @param statement The new response that will replace the current one.
-     */
-    public void replace(String statement) {
-        response = statement;
-        System.out.println(response);
+    public String doneReply(String task) {
+        return "Nice! I've marked this task as done:\n" + task;
+    }
+
+    public String deleteReply(String task, String numOfTasks) {
+        return "Noted. I've removed this task:\n" + task + "\n" + "Now you have " + numOfTasks + " tasks in the list.";
+    }
+
+    public String noDescReply() {
+        return "The description cannot be empty.";
+    }
+
+    public String noDateReply() {
+        return "The date cannot be empty.";
+    }
+
+    public String noTimeReply() {
+        return "The time cannot be empty.";
+    }
+
+    public String noLineReply() {
+        return "The line number cannot be empty.";
+    }
+
+    public String wrongLineReply() {
+        return "Invalid line number.";
+    }
+
+    public String foundReply(String tasks) {
+        return "Here are the matching tasks in your list:\n" + tasks;
+    }
+
+    public String notFoundReply() {
+        return "Your list does not contain this word.";
+    }
+
+    public String confusedReply() {
+        return "I'm sorry, but I do not know what that means.";
+    }
+
+    public String bidFarewell() {
+        return "Goodbye! Hope to see you again soon!";
     }
 }

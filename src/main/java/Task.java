@@ -1,5 +1,3 @@
-package main.java;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,16 +14,16 @@ public class Task {
         this.date = date;
         this.time = time;
         this.symbol = symbol;
-        this.isAt = flag;
-        this.isDone = false;
+        isAt = flag;
+        isDone = false;
     }
 
     public String getDate() {
-        return this.date;
+        return date;
     }
 
     public String getTime() {
-        return this.time;
+        return time;
     }
 
     public void setTime(String time) {
@@ -38,14 +36,14 @@ public class Task {
      * @return The same task with a changed done status.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /*
      * Convert the date from "DD/MM/YYYY" format to "D MMM YYYY" format.
      */
     public void formatDate() {
-        String copy = this.date;
+        String copy = date;
         String year = "";
         String month = "";
         String day = "";
@@ -71,7 +69,7 @@ public class Task {
         String formattedDate = year + "-" + month + "-" + day;
         LocalDate ld = LocalDate.parse(formattedDate);
         formattedDate = ld.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
-        this.date = formattedDate;
+        date = formattedDate;
     }
 
     /*
@@ -80,7 +78,7 @@ public class Task {
      * Add am or pm depending on time of the day.
      */
     public void formatTime() {
-        String copy = this.time;
+        String copy = time;
         char[] cArr = copy.toCharArray();
         Integer tensHour = cArr[0] - '0';
         Integer onesHour = cArr[1] - '0';
@@ -115,26 +113,26 @@ public class Task {
         } else {
             formattedTime += "am";
         }
-        this.time = formattedTime;
+        time = formattedTime;
     }
 
     @Override
     public String toString() {
         String copy = "";
-        if (this.date.length() > 0) {
-            if (this.isAt) {
+        if (date.length() > 0) {
+            if (isAt) {
                 copy += "(at: ";
             } else {
                 copy += "(by: ";
             }
-            copy += this.date;
-            if (this.time.length() > 0) {
-                copy += ", " + this.time;
+            copy += date;
+            if (time.length() > 0) {
+                copy += ", " + time;
             }
             copy += ")";
         }
-        copy = this.description + copy;
-        if (this.isDone) {
+        copy = description + copy;
+        if (isDone) {
             return symbol + " " + "[/] " + copy;
         } else {
             return symbol + " " + "[] " + copy;
