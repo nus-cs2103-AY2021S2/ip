@@ -25,6 +25,8 @@ public class Jeff {
         }
     }
 
+    //public Jeff() { }
+
     /**
      * Runs the Jeff chatbot until isExit is true.
      */
