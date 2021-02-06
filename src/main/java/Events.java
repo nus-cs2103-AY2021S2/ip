@@ -92,7 +92,7 @@ public class Events extends Task {
         return this.at;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
     /***

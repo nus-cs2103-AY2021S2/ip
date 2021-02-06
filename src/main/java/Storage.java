@@ -17,7 +17,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Instantiates a new Storage object
+     * Instantiates a new Storage object.
      *
      * @param filePath the file path of text file we are reading and writing to
      */
@@ -31,13 +31,15 @@ public class Storage {
      * @param path the path
      * @throws DukeException.FileLoadError the file load error
      */
-    public static void createFile(Path path) throws DukeException.FileLoadError {
-        File newFile = new File(path.toString());
-        try {
-            newFile.createNewFile();
-        } catch (IOException e) {
-            throw new DukeException.FileLoadError("File at: " + path.toString() + " cannot be created");
-        }
+    public static void createFile(Path path)
+            throws DukeException.FileLoadError {
+                File newFile = new File(path.toString());
+                try {
+                    newFile.createNewFile();
+                } catch (IOException e) {
+                    throw new DukeException.FileLoadError("File at: " +
+                            path.toString() + " cannot be created");
+                }
 
     }
 
@@ -80,7 +82,8 @@ public class Storage {
                         loadTasks.add(newTask);
                     } else if (fileLine.charAt(0) == 'E') {
                         int idx = fileLine.lastIndexOf("|");
-                        Events newTask = new Events(fileLine.substring(8, idx - 1),
+                        Events newTask =
+                                new Events(fileLine.substring(8, idx - 1),
                                 fileLine.substring(idx + 2));
                         if (fileLine.charAt(4) == '1') {
                             newTask.markAsDone();
@@ -90,7 +93,8 @@ public class Storage {
 
                 }
             } catch (FileNotFoundException e) {
-                throw new DukeException.FileLoadError("File at: " + path.toString() + " cannot be read");
+                throw new DukeException.FileLoadError("File at: "
+                        + path.toString() + " cannot be read");
             }
         }
         return loadTasks;
@@ -116,12 +120,15 @@ public class Storage {
                 str = str + "1";
             }
 
-            str = "| " + str + " | " + taskList.getTasksList().get(i).description;
+            str = "| " + str + " | " +
+                    taskList.getTasksList().get(i).description;
 
             if (taskList.getTasksList().get(i) instanceof Deadlines) {
-                str = "D " + str + " | " + ((Deadlines) taskList.getTasksList().get(i)).getBy();
+                str = "D " + str + " | " +
+                        ((Deadlines) taskList.getTasksList().get(i)).getBy();
             } else if (taskList.getTasksList().get(i) instanceof Events) {
-                str = "E " + str + " | " + ((Events) taskList.getTasksList().get(i)).getAt();
+                str = "E " + str + " | " +
+                        ((Events) taskList.getTasksList().get(i)).getAt();
             } else {
                 str = "T " + str;
             }
@@ -134,7 +141,8 @@ public class Storage {
         }
 
         try {
-            Files.write(path, strOut.getBytes(StandardCharsets.UTF_8));
+            Files.write(path,
+                    strOut.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             try {
                 createFile(path);
