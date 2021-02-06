@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Momo momo = new Momo("data/tasks.txt");
+    private final Momo momo = new Momo("data/tasks.txt");
 
     @Override
     public void start(Stage stage) {

@@ -4,10 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Period;
 
 public class Parser {
 
@@ -60,6 +61,8 @@ public class Parser {
             return parseDeadline(input);
         case EVENT:
             return parseEvent(input);
+        case PERIOD:
+            return parsePeriod(input);
         default:
             throw new ParseException("the first argument command is not valid.");
         }
@@ -143,13 +146,45 @@ public class Parser {
     }
 
     /**
+     * Returns a Period by parsing the input behind the command.
+     * Used when the command is period.
+     * Works when the input is "{description} /from YYYY-MM-DD /to YYYY-MM-DD".
+     *
+     * @param input input of users.
+     * @return a task of Period corresponding to the input.
+     * @throws ParseException if the description is empty.
+     * @throws DateTimeParseException if the format of data time is not correct.
+     */
+    private static Period parsePeriod(String input) throws ParseException, DateTimeParseException {
+        if (input.isEmpty() || input.equals(" ")) {
+            throw new ParseException("OOPS!!! The description of an event cannot be empty.\n");
+        }
+        if (input.contains("/from ") && input.contains("/to ")) {
+            if (input.charAt(0) == ' ') {
+                input = input.substring(1);
+            }
+            assert !input.contains("/from ") : false;
+            int endOfDescription = input.indexOf("/from ");
+            int endOfStartTime = input.indexOf("/to ");
+            String description = input.substring(0, endOfDescription);
+            String startTime = input.substring(endOfDescription + 6, endOfStartTime - 1);
+            String endTime = input.substring(endOfStartTime + 4);
+            LocalDate startDate = LocalDate.parse(startTime);
+            LocalDate endDate = LocalDate.parse(endTime);
+            return new Period(description, startDate, endDate);
+        } else {
+            throw new ParseException("OOPS!!! Please enter '/at YYYY-MM-DD' after description\n");
+        }
+    }
+
+    /**
      * Parses ToDo stored in the file.
      *
      * @param line one line represents a todo task in the flie.
      * @return a ToDo task.
      */
     public static ToDo parseForToDoInFile(String line) {
-        return new ToDo(line.substring(8));
+        return new ToDo(line.substring(7));
     }
 
     /**
@@ -160,7 +195,7 @@ public class Parser {
      */
     public static Task parseForDeadlineInFile(String line) {
         int endOfDescription = line.indexOf("by: ");
-        String description = line.substring(8, endOfDescription);
+        String description = line.substring(7, endOfDescription);
         String deadline = line.substring(endOfDescription + 4, line.length() - 1);
         LocalDate date = LocalDate.parse(deadline);
         return new Deadline(description, date);
@@ -174,10 +209,27 @@ public class Parser {
      */
     public static Task parseForEventInFile(String line) {
         int endOfDescription = line.indexOf("at: ");
-        String description = line.substring(8, endOfDescription);
+        String description = line.substring(7, endOfDescription);
         String time = line.substring(endOfDescription + 4, line.length() - 1);
         LocalDate date = LocalDate.parse(time);
         return new Event(description, date);
+    }
+
+    /**
+     * Parses Period stored in the file.
+     *
+     * @param line one line represents an event task in the flie.
+     * @return an period task.
+     */
+    public static Task parseForPeriodInFile(String line) {
+        int endOfDescription = line.indexOf("from: ");
+        int endOfStartTime = line.indexOf("to: ");
+        String description = line.substring(7, endOfDescription - 2);
+        String startTime = line.substring(endOfDescription + 6, endOfStartTime - 1);
+        String endTime = line.substring(endOfStartTime + 4, line.length() - 1);
+        LocalDate startDate = LocalDate.parse(startTime);
+        LocalDate endDate = LocalDate.parse(endTime);
+        return new Period(description, startDate, endDate);
     }
 
     /**
@@ -194,6 +246,8 @@ public class Parser {
             task = parseForDeadlineInFile(line);
         } else if (line.charAt(1) == 'E' && line.contains("at: ")) {
             task = parseForEventInFile(line);
+        } else if (line.charAt(1) == 'P' && line.contains("from: ") && line.contains("to: ")) {
+            task = parseForPeriodInFile(line);
         } else {
             throw new ParseException("OOPS!!! It seems there is file corruption.\n");
         }

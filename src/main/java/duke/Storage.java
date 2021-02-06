@@ -15,7 +15,7 @@ import duke.task.Task;
  */
 public class Storage {
 
-    private Path filePath;
+    private final Path filePath;
 
     /**
      * Creates a storage corresponding to the path.

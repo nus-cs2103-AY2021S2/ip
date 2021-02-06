@@ -1,16 +1,14 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 import duke.ui.TextUi;
+import duke.task.Task;
 
 public class Momo {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
 
     /**
