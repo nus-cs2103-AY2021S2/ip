@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
+import static java.lang.System.out;
 
 /**
  * Skeleton class for the Duke chatbox.
@@ -22,13 +23,18 @@ public class Skeleton {
     }
 
     public void run() {
-        ui.greeting();
+        //ui.greeting();
         storage.loadFile(tasks);
-        parser.readCommands(tasks, storage);
+        //parser.readCommands(tasks, storage);
     }
 
     public static void main(String[] args) {
         Skeleton skeleton = new Skeleton();
         skeleton.run();
+    }
+
+    public String getResponse(String input) {
+        String output = parser.readCommands(tasks, storage, input);
+        return "COMMAND RECEIVED! + \n" + output;
     }
 }

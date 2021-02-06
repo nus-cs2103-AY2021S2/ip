@@ -14,17 +14,16 @@ public class FindCommand {
         this.findList = new ArrayList<>();
     }
 
-    public void find(TaskList tasks, String keyword) {
+    public String find(TaskList tasks, String keyword) {
+        String output = "";
+        output += "-------------------------- +\n";
+        output += "Here are the matching tasks in your list: +\n";
         for (int i = 0; i < tasks.storage.size(); i++) {
             if (tasks.storage.get(i).getDescription().contains(keyword)) {
                 findList.add(tasks.storage.get(i));
+                output += (i + 1) + " " + findList.get(i) + "\n";
             }
         }
-        System.out.println("------------------------------");
-        System.out.println("Here are the matching tasks in your list: ");
-        for (int i = 0; i < findList.size(); i++) {
-            System.out.println((i + 1) + "." + findList.get(i));
-        }
-        System.out.println("------------------------------");
+        return output;
     }
 }
