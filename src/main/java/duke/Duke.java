@@ -51,6 +51,8 @@ public class Duke {
             result = taskList.getAllTasks();
         } else if (TaskType.equals("note")) {
             result = noteList.getAllTasks();
+        } else if (TaskType.equals("reminders") || TaskType.equals("dues")) {
+            result = taskList.getReminders();
         } else if (p.getCommandLength() > 1) {
             if (TaskType.equals("done")) {
                 result = taskList.markAsDone(Integer.parseInt(p.getIndex()));
@@ -70,8 +72,6 @@ public class Duke {
                 result = taskList.addTask(new EventTask(command));
             } else if (TaskType.equals("add")) {
                 result = noteList.addTask(new Notes(input));
-            } else if (TaskType.equals("reminders") || TaskType.equals("dues")){
-                result = taskList.getReminders();
             }
         } else {
             if (TaskType.equals("todo") || TaskType.equals("deadline")

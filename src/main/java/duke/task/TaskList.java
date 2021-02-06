@@ -126,6 +126,12 @@ public class TaskList {
         return Tasks.get(idx);
     }
 
+    /**
+     * Checks the tasks' due dates with current date
+     * If the the task is after/on current date, push reminder
+     *
+     * @return List of all the due tasks
+     */
     public String getReminders() {
         String out = "These are the due tasks: \n";
         TaskList dues = new TaskList();
@@ -134,7 +140,7 @@ public class TaskList {
             if (!t.isDone()) {
                 if (t.getType().toLowerCase().equals("deadline")
                         || t.getType().toLowerCase().equals("events")) {
-                    if(today.compareTo(t.getDate()) >= 0){
+                    if (today.compareTo(t.getDate()) <= 0) {
                         dues.silentAdd(t);
                     }
                 }
