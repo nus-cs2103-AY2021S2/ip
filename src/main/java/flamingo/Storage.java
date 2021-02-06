@@ -19,7 +19,7 @@ public class Storage {
     private Path path;
 
     /**
-     * Creates a new flamingo.Storage.
+     * Creates a new Storage.
      */
     public Storage() {
         this.currentDirectory = System.getProperty("user.dir");
@@ -35,7 +35,7 @@ public class Storage {
      * Transfers contents from tasks ArrayList to data.txt file.
      * If data.txt file exists, the previous content is cleared.
      *
-     * @param tasks flamingo.TaskList of tasks.
+     * @param tasks TaskList of tasks.
      * @throws IOException If data cannot be saved into file.
      */
     public void saveData(TaskList tasks) throws IOException {

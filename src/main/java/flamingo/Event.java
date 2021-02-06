@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Creates an flamingo.Event task with a date and time.
+ * Creates an Event task with a date and time.
  */
 public class Event extends Task {
     protected LocalDateTime dateAndTime;
 
     /**
-     * Creates a new flamingo.Event.
+     * Creates a new Event.
      * @param description Description of the event.
      * @param dateAndTime Date and time of the event.
      */
