@@ -15,6 +15,9 @@ public class TaskList {
         this.storage = storage;
     }
 
+    /**
+     * load the task in file to arrayList
+     */
     public void addTaskFromFile() throws IOException {
         File file = this.storage.getFile();
         Scanner sc = new Scanner(file);
@@ -66,6 +69,11 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Mark the task as done
+     * @param index
+     */
+
     public String finishTask(int index) {
         Task task = this.ls.get(index - 1);
         task.markAsDone();
@@ -84,8 +92,8 @@ public class TaskList {
         Task task = this.ls.get(index - 1);
         this.ls.remove(index - 1);
         int len = this.ls.size();
-        String res = "\t" + "\n\t" + " Noted. I've removed this task:\n\t\t" + task +
-                "\n\tNow you have " + len + " tasks in the list.\n\t";
+        String res = "\t" + "\n\t" + " Noted. I've removed this task:\n\t\t" + task
+                + "\n\tNow you have " + len + " tasks in the list.\n\t";
         return res;
 
     }
@@ -96,7 +104,7 @@ public class TaskList {
 
     public String listTask() {
         String res = "";
-        if (ls.isEmpty()){
+        if (ls.isEmpty()) {
             res = "\t" + "\n\tWell Done! All task has been completed\n";
         } else {
             res = "\t" + "\n\tHere are the tasks in your list:\n";
@@ -111,7 +119,7 @@ public class TaskList {
     @Override
     public String toString() {
         String res = "";
-        for (Task task : this.ls){
+        for (Task task : this.ls) {
             res += task.toString() + "\n";
         }
         return res;
