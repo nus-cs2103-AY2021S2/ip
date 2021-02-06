@@ -5,7 +5,6 @@ import java.time.LocalTime;
 
 import fakebot.command.Command;
 import fakebot.command.CommandException;
-import fakebot.command.CommandType;
 import fakebot.task.Deadline;
 import fakebot.task.Event;
 import fakebot.task.Task;
@@ -120,7 +119,9 @@ public class FakeBot {
             return processDeleteCommand(command);
         case FIND:
             return Parser.getTaskListPrintMessage(new TaskList(taskList.findTasks(command.getDescription())));
-        default: break;
+        default:
+            assert false : "All command type should be handle in switch";
+            break;
         }
 
         return "";
