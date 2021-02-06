@@ -9,6 +9,7 @@ public abstract class Task {
     protected final String description;
     protected final String type;
     protected final boolean isDone;
+    protected final TaskPriority taskPriority;
 
     /**
      * Creates instance of Task object.
@@ -16,10 +17,11 @@ public abstract class Task {
      * @param type Type in terms of todo (denoted "T"), deadline (denoted "D"), event (denoted "E").
      * @param isDone Boolean flag of whether task is done or not.
      */
-    public Task(String description, String type, boolean isDone) {
+    public Task(String description, String type, boolean isDone, TaskPriority taskPriority) {
         this.description = description;
         this.type = type;
         this.isDone = isDone;
+        this.taskPriority = taskPriority;
     }
 
     public String getType() {
@@ -73,7 +75,8 @@ public abstract class Task {
      * @return Task in string format for file storage.
      */
     public String saveTask() {
-        return String.format("%s/split/%s/split/%s", getType(), getStatusInt(), getDescription());
+        return String.format("%s/split/%s/split/%s/split/%s",
+                getType(), getStatusInt(), taskPriority.getPriorityLevel(), getDescription());
     }
 
     /**
@@ -82,6 +85,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", getType(), getStatusIcon(), getDescription());
+        return String.format("[%s][%s] %s | Priority: %s",
+                getType(), getStatusIcon(), getDescription(), taskPriority.getPriorityLevel());
     }
 }

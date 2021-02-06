@@ -9,8 +9,9 @@ import org.junit.jupiter.api.Test;
 public class DeadlineTaskTest {
     private static final String TEST_DESCRIPTION = "Do CS2103T quiz";
     private static final LocalDateTime TEST_DEADLINE = LocalDateTime.parse("2020-10-21T10:10:10");
+    private static final TaskPriority TASK_PRIORITY = TaskPriority.HIGH;
     private static final DeadlineTask STARTING_TASK = DeadlineTask.createNewDeadlineTask(
-            DeadlineTaskTest.TEST_DESCRIPTION, DeadlineTaskTest.TEST_DEADLINE);
+            TEST_DESCRIPTION, TEST_DEADLINE, TASK_PRIORITY);
 
     /**
      * Tests the functionality of toString() method in DeadlineTask class.
@@ -18,7 +19,7 @@ public class DeadlineTaskTest {
     @Test
     public void testPrintStringConversion() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.toString(),
-                "[D][\u2718] Do CS2103T quiz (by: 2020-10-21, 10:10:10)");
+                "[D][\u2718] Do CS2103T quiz | Priority: 3 (by: 2020-10-21, 10:10:10)");
     }
 
     /**
@@ -27,7 +28,7 @@ public class DeadlineTaskTest {
     @Test
     public void testFileStringConversion() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.saveTask(),
-                "D/split/0/split/Do CS2103T quiz /by 2020-10-21T10:10:10");
+                "D/split/0/split/3/split/Do CS2103T quiz /by 2020-10-21T10:10:10");
     }
 
     /**
@@ -63,7 +64,7 @@ public class DeadlineTaskTest {
     @Test
     public void testMarkDone() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.markAsDone().toString(),
-                "[D][\u2713] Do CS2103T quiz (by: 2020-10-21, 10:10:10)");
+                "[D][\u2713] Do CS2103T quiz | Priority: 3 (by: 2020-10-21, 10:10:10)");
     }
 
     /**
@@ -72,6 +73,6 @@ public class DeadlineTaskTest {
     @Test
     public void testMarkUndone() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.markAsDone().markAsDone().toString(),
-                "[D][\u2718] Do CS2103T quiz (by: 2020-10-21, 10:10:10)");
+                "[D][\u2718] Do CS2103T quiz | Priority: 3 (by: 2020-10-21, 10:10:10)");
     }
 }

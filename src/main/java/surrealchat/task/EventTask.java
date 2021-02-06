@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class EventTask extends Task {
     private LocalDateTime event;
 
-    private EventTask(String taskDescription, LocalDateTime event, boolean isDone) {
-        super(taskDescription, "E", isDone);
+    private EventTask(String taskDescription, LocalDateTime event, boolean isDone, TaskPriority taskPriority) {
+        super(taskDescription, "E", isDone, taskPriority);
         this.event = event;
     }
 
@@ -19,8 +19,9 @@ public class EventTask extends Task {
      * @param event LocalDateTime object of the date and time at which task should happen.
      * @return New EventTask that is not done.
      */
-    public static EventTask createNewEventTask(String taskDescription, LocalDateTime event) {
-        return new EventTask(taskDescription, event, false);
+    public static EventTask createNewEventTask(
+            String taskDescription, LocalDateTime event, TaskPriority taskPriority) {
+        return new EventTask(taskDescription, event, false, taskPriority);
     }
 
     /**
@@ -30,8 +31,9 @@ public class EventTask extends Task {
      * @param isDone Whether task was previously marked as done.
      * @return EventTask as loaded from file.
      */
-    public static EventTask loadEventTaskFromFile(String taskDescription, LocalDateTime event, boolean isDone) {
-        return new EventTask(taskDescription, event, isDone);
+    public static EventTask loadEventTaskFromFile(
+            String taskDescription, LocalDateTime event, boolean isDone, TaskPriority taskPriority) {
+        return new EventTask(taskDescription, event, isDone, taskPriority);
     }
 
     /**
@@ -40,7 +42,7 @@ public class EventTask extends Task {
      * @return New EventTask with edited description
      */
     public EventTask editDescription(String newDescription) {
-        return new EventTask(newDescription, event, isDone);
+        return new EventTask(newDescription, event, isDone, taskPriority);
     }
 
     /**
@@ -48,7 +50,7 @@ public class EventTask extends Task {
      * @return EventTask that is marked as done/undone.
      */
     public EventTask markAsDone() {
-        return new EventTask(getDescription(), event, !isDone);
+        return new EventTask(getDescription(), event, !isDone, taskPriority);
     }
 
     /**

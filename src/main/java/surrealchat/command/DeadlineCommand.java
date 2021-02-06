@@ -7,6 +7,7 @@ import surrealchat.exception.SurrealException;
 import surrealchat.task.DeadlineTask;
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
+import surrealchat.task.TaskPriority;
 
 /**
  * Command object for creating a new DeadlineTask object.
@@ -36,16 +37,19 @@ public class DeadlineCommand extends Command {
             throw new SurrealException("Empty deadline task description. Not stonks!\n");
         }
 
-        //Split the description into description and deadline
-        String[] descriptionSplitArray = taskDescription.split("/by");
+        //Split the description into description, deadline and priority
+        String[] descriptionSplitArray = taskDescription.split(";");
         try {
             LocalDateTime deadlineDateTime = parseDate(descriptionSplitArray[1].trim());
-
+            int intPriority = Integer.valueOf(descriptionSplitArray[2].trim());
+            TaskPriority taskPriority = TaskPriority.getPriorityType(intPriority);
             //Create Deadline task
             return DeadlineTask.createNewDeadlineTask(descriptionSplitArray[0].trim(),
-                    deadlineDateTime);
+                    deadlineDateTime, taskPriority);
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
-            throw new SurrealException("Wrong formatting. Did you forget to put '/by'? Not stonks!\n");
+            throw new SurrealException("Wrong formatting. Did you forget to put ';'? Not stonks!\n");
+        } catch (NumberFormatException e) { //Happens if correct int is not passed in for priority
+            throw new SurrealException("Priority argument must be integer in range 1-3! Not stonks!\n");
         }
     }
 
@@ -76,7 +80,7 @@ public class DeadlineCommand extends Command {
      */
     public static String displayHelp() {
         String outputString = "Given a description and deadline, stores deadline task.\n";
-        outputString += "Format of arguments: deadline [description] /by [deadline]\n";
+        outputString += "Format of arguments: deadline [description] ; [deadline] ; [priority]\n";
         outputString += "[deadline] must be of the form {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock\n";
         return outputString;
     }

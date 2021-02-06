@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class ToDoTaskTest {
     private static final String TEST_DESCRIPTION = "Do CS2103T quiz";
-    private static final ToDoTask STARTING_TASK = ToDoTask.createNewToDoTask(TEST_DESCRIPTION);
+    private static final TaskPriority TASK_PRIORITY = TaskPriority.LOW;
+    private static final ToDoTask STARTING_TASK = ToDoTask.createNewToDoTask(TEST_DESCRIPTION, TASK_PRIORITY);
 
     /**
      * Tests the functionality of toString() method in ToDoTask class.
@@ -14,7 +15,7 @@ public class ToDoTaskTest {
     @Test
     public void testPrintStringConversion() {
         assertEquals(ToDoTaskTest.STARTING_TASK.toString(),
-                "[T][\u2718] Do CS2103T quiz");
+                "[T][\u2718] Do CS2103T quiz | Priority: 1");
     }
 
     /**
@@ -23,7 +24,7 @@ public class ToDoTaskTest {
     @Test
     public void testFileStringConversion() {
         assertEquals(ToDoTaskTest.STARTING_TASK.saveTask(),
-                "T/split/0/split/Do CS2103T quiz");
+                "T/split/0/split/1/split/Do CS2103T quiz");
     }
 
     /**
@@ -59,7 +60,7 @@ public class ToDoTaskTest {
     @Test
     public void testMarkDone() {
         assertEquals(ToDoTaskTest.STARTING_TASK.markAsDone().toString(),
-                "[T][\u2713] Do CS2103T quiz");
+                "[T][\u2713] Do CS2103T quiz | Priority: 1");
     }
 
     /**
@@ -68,6 +69,6 @@ public class ToDoTaskTest {
     @Test
     public void testMarkUndone() {
         assertEquals(ToDoTaskTest.STARTING_TASK.markAsDone().markAsDone().toString(),
-                "[T][\u2718] Do CS2103T quiz");
+                "[T][\u2718] Do CS2103T quiz | Priority: 1");
     }
 }

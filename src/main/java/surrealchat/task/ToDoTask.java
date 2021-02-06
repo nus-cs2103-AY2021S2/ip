@@ -4,8 +4,8 @@ package surrealchat.task;
  * Represents a task with no condition.
  */
 public class ToDoTask extends Task {
-    private ToDoTask(String taskDescription, boolean isDone) {
-        super(taskDescription, "T", isDone);
+    private ToDoTask(String taskDescription, boolean isDone, TaskPriority taskPriority) {
+        super(taskDescription, "T", isDone, taskPriority);
     }
 
     /**
@@ -13,8 +13,8 @@ public class ToDoTask extends Task {
      * @param taskDescription The description of new task.
      * @return New ToDoTask that is not done.
      */
-    public static ToDoTask createNewToDoTask(String taskDescription) {
-        return new ToDoTask(taskDescription, false);
+    public static ToDoTask createNewToDoTask(String taskDescription, TaskPriority taskPriority) {
+        return new ToDoTask(taskDescription, false, taskPriority);
     }
 
     /**
@@ -23,8 +23,8 @@ public class ToDoTask extends Task {
      * @param isDone Whether task was previously marked as done.
      * @return ToDoTask as loaded from file.
      */
-    public static ToDoTask loadToDoTaskFromFile(String taskDescription, boolean isDone) {
-        return new ToDoTask(taskDescription, isDone);
+    public static ToDoTask loadToDoTaskFromFile(String taskDescription, boolean isDone, TaskPriority taskPriority) {
+        return new ToDoTask(taskDescription, isDone, taskPriority);
     }
 
     /**
@@ -33,7 +33,7 @@ public class ToDoTask extends Task {
      * @return New ToDoTask with edited description
      */
     public ToDoTask editDescription(String newDescription) {
-        return new ToDoTask(newDescription, isDone);
+        return new ToDoTask(newDescription, isDone, taskPriority);
     }
 
     /**
@@ -41,6 +41,6 @@ public class ToDoTask extends Task {
      * @return ToDoTask that is marked as done/undone.
      */
     public ToDoTask markAsDone() {
-        return new ToDoTask(getDescription(), !isDone);
+        return new ToDoTask(getDescription(), !isDone, taskPriority);
     }
 }

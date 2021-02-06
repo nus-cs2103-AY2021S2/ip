@@ -36,6 +36,9 @@ You can add 3 types of tasks:
 2. Deadline tasks (Be sure not to miss these deadlines!)
 3. Event tasks (Used to reserve certain timings like a calendar app)
 
+### Prioritise tasks
+You can prioritise tasks with numbers 1, 2 and 3 in increasing order of priority.
+
 ### Delete tasks
 If you feel that keeping them on the list is not necessary, Meme Man will delete them for you.
 Even better, you can delete them all in one go!
@@ -65,48 +68,63 @@ If you are not sure how a command works, Meme Man will show you the format if yo
 ## Commands related to tasks
 
 ###  Add ToDo task - `todo`
-Format: `todo DESCRIPTION`
+Format: `todo DESCRIPTION ; PRIORITY`
 
-Key this command in along with task description to cause Meme Man to add a ToDo task.
+Key this command in along with task description and priority number to cause Meme Man to add a ToDo task.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
-`todo Watch CS2103T lecture`
+`todo Watch CS2103T lecture ; 1`
 
-Expected outcome:
+Expected Outcome:
 
 ```
-Meme Man is now adding to-do task: [T][✘] Watch CS2103T lecture
+Meme Man is now adding to-do task: [T][✘] Watch CS2103T lecture | Priority: 1
 Total number of tasks: 1
 ```
 
-### Add Deadline task - `deadline`
-Format: `deadline DESCRIPTION /by DATE`
+Outcome if ";" is missing:
+```
+Wrong formatting. Did you forget to put ';'? Not stonks!
+```
 
-Key this command in along with task description and deadline date to cause Meme Man to add a Deadline task.
-Deadline date must be in this format: {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock.
+Outcome for wrong priority input:
+```
+Priority argument must be integer in range 1-3! Not stonks!
+```
+
+### Add Deadline task - `deadline`
+Format: `deadline DESCRIPTION ; DATE ; PRIORITY`
+
+Key this command in along with task description, deadline datetime and priority number to cause Meme Man to add a Deadline task.
+Deadline datetime must be in this format: {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
 ```
-deadline Do CS2103T lecture quiz /by 2021-01-12T10:10:10
-deadline Do CS2103T ip /by 2021-01-13T10:10:10
+deadline Do CS2103T lecture quiz ; 2021-01-12T10:10:10 ; 3
+deadline Do CS2103T ip ; 2021-01-13T10:10:10 ; 3
 ```
 
-Expected outcome:
+Expected Outcome:
 
 ```
-Meme Man is now adding deadline task: [D][✘] Do CS2103T lecture quiz (by: 2021-01-12, 10:10:10)
+Meme Man is now adding deadline task: [D][✘] Do CS2103T lecture quiz | Priority: 3 (by: 2021-01-12, 10:10:10)
 Total number of tasks: 2
-Meme Man is now adding deadline task: [D][✘] Do CS2103T ip (by: 2021-01-13, 10:10:10)
+Meme Man is now adding deadline task: [D][✘] Do CS2103T ip | Priority: 3 (by: 2021-01-13, 10:10:10)
 Total number of tasks: 3
 ```
 
-Outcome if "/by" is missing:
+Outcome if ";" is missing:
 ```
-Wrong formatting. Did you forget to put '/by'? Not stonks!
+Wrong formatting. Did you forget to put ';'? Not stonks!
+```
+
+Outcome for wrong priority input:
+```
+Priority argument must be integer in range 1-3! Not stonks!
 ```
 
 Outcome for incorrect date time format:
@@ -115,25 +133,30 @@ Outcome for incorrect date time format:
 ```
 
 ### Add Event task - `event`
-Format: `event DESCRIPTION /at DATE`
+Format: `event DESCRIPTION ; DATETIME ; PRIORITY`
 
-Key this command in along with task description and event date to cause Meme Man to add a Event task.
+Key this command in along with task description, event datetime and priority number to cause Meme Man to add a Event task.
 Event date must be in this format: {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
-`event Attend CS2101 class /at 2021-01-14T10:10:10`
+`event Attend CS2101 class ; 2021-01-14T10:10:10 ; 2`
 
-Expected outcome:
+Expected Outcome:
 
 ```
-Meme Man is now adding event task: [E][✘] Attend CS2101 class (at: 2021-01-14, 10:10:10)
+Meme Man is now adding event task: [E][✘] Attend CS2101 class | Priority: 2 (at: 2021-01-14, 10:10:10)
 Total number of tasks: 4
 ```
 Outcome if "/at" is missing:
 ```
-Wrong formatting. Did you forget to put '/at'? Not stonks!
+Wrong formatting. Did you forget to put ';'? Not stonks!
+```
+
+Outcome for wrong priority input:
+```
+Priority argument must be integer in range 1-3! Not stonks!
 ```
 
 Outcome for incorrect date time format:
@@ -156,7 +179,7 @@ Example of usage:
 
 `edit 1 /edit Do CS2103T optional ip tasks`
 
-Expected outcome:
+Expected Outcome:
 ```
 You have edited a task description to this:
 Do CS2103T optional ip tasks
@@ -193,16 +216,16 @@ Example of usage:
 
 `done 1`
 
-Expected outcome if undone task is marked as done:
+Expected Outcome if undone task is marked as done:
 ```
 Stonks! You've done this task:
-Do CS2103T lecture quiz
+[D][✓] Do CS2103T lecture quiz | Priority: 3 (by: 2021-01-12, 10:10:10)
 ```
 
-Expected outcome if done task is marked as undone:
+Expected Outcome if done task is marked as undone:
 ```
 Not stonks! This task has been marked as undone: 
-Do CS2103T lecture quiz
+[D][✘] Do CS2103T lecture quiz | Priority: 3 (by: 2021-01-12, 10:10:10)
 ```
 
 Outcome if number field is empty:
@@ -234,23 +257,23 @@ Key this command in to cause Meme Man to show you your tasks in order and whethe
 
 Now suppose you have 4 tasks:
 ```
-1. Watch CS2103T lecture (ToDo, Done)
-2. Do CS2103T lecture quiz (Deadline of this Saturday, Done)
-3. Do CS2103T ip (Deadline of next Monday, Not done)
-4. Attend CS2101 class (Event happens next Tuesday, Not done)
+1. Watch CS2103T lecture (ToDo, Done) Priority 1
+2. Do CS2103T lecture quiz (Deadline of this Saturday 10:10:10, Done)  Priority 3
+3. Do CS2103T ip (Deadline of next Monday 10:10:10, Not done) Priority 3
+4. Attend CS2101 class (Event happens next Tuesday 10:10:10, Not done) Priority 2
 ```
 
 How to get Meme Man to list out above tasks:
 
 `list`
 
-Expected outcome:
+Expected Outcome:
 ```
 I print the tasks:
-1. [T][✓] Watch CS2103T lecture
-2. [D][✓] Do CS2103T lecture quiz (by: 2021-01-12)
-3. [D][✘] Do CS2103T ip (by: 2021-01-13)
-4. [E][✘] Attend CS2101 class (at: 2021-01-14)
+1. [T][✓] Watch CS2103T lecture | Priority: 1
+2. [D][✓] Do CS2103T lecture quiz | Priority: 3 (by: 2021-01-12, 10:10:10)
+3. [D][✘] Do CS2103T ip | Priority: 3 (by: 2021-01-13, 10:10:10)
+4. [E][✘] Attend CS2101 class | Priority: 2 (at: 2021-01-14, 10:10:10)
 Hmmst've... Stonks
 ```
 
@@ -269,10 +292,10 @@ Example of usage:
 
 `delete 1`
 
-Expected outcome:
+Expected Outcome:
 ```
 This task has been deleted:
-[T][✓] Watch CS2103T lecture
+[T][✓] Watch CS2103T lecture | Priority: 1
 Total number of tasks: 3
 ```
 
@@ -299,7 +322,7 @@ Key this command in to delete all tasks and empty task list.
 Example usage:
 `scronch`
 
-Expected outcome:
+Expected Outcome:
 ```
 Scronching all tasks...
 Total number of tasks: 0
@@ -319,12 +342,12 @@ Case-insensitive.
 Example usage:
 `find CS2103T` 
 
-Expected outcome:
+Expected Outcome:
 ```
 Here are my search results:
-1. [T][✘] Watch CS2103T lecture
-2. [D][✘] Do CS2103T lecture quiz (by: 2021-01-12)
-3. [D][✘] Do CS2103T ip (by: 2021-01-13)
+1. [T][✘] Watch CS2103T lecture | Priority: 1
+2. [D][✘] Do CS2103T lecture quiz | Priority: 3 (by: 2021-01-12)
+3. [D][✘] Do CS2103T ip | Priority: 3 (by: 2021-01-13)
 Hmmst've... Stonks
 ```
 
@@ -336,6 +359,47 @@ No keyword given! Not stonks!
 Outcome if no tasks are returned:
 ```
 My search returned nothing. Not stonks!
+```
+
+## Sort - `sort`
+Format: `sort CRITERIA`
+
+Key this command in along with sorting criteria to sort the tasks.
+Currently supported criteria are:
+1) Priority Level - `priority`
+2) Task done status - `done`
+
+Example usage:
+`sort priority`
+
+Expected Outcome:
+```
+I have sorted the tasks. Stonks!
+```
+
+Expected List:
+```
+I print the tasks:
+1. [D][✓] Do CS2103T lecture quiz | Priority: 3 (by: 2021-01-12, 10:10:10)
+2. [D][✘] Do CS2103T ip | Priority: 3 (by: 2021-01-13, 10:10:10)
+3. [E][✘] Attend CS2101 class | Priority: 2 (at: 2021-01-14, 10:10:10)
+4. [T][✓] Watch CS2103T lecture | Priority: 1
+Hmmst've... Stonks
+```
+
+Outcome if there is no sorting criteria given:
+```
+No sorting criteria given! Not stonks!
+```
+
+Outcome if list is empty:
+```
+I have nothing to sort. Not stonks!
+```
+
+Outcome if criteria is unsupported/invalid:
+```
+Sort type not supported or invalid. Not stonks!
 ```
 
 ## Other commands
@@ -350,7 +414,7 @@ Example usage:
 Expected Outcome:
 ```
 Given a description, stores todo task.
-Format of arguments: todo [description]
+Format of arguments: todo [description] ; [priority]
 ```
 Outcome if you do not give a command:
 ```

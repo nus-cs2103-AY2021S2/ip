@@ -122,18 +122,18 @@ public class TaskManagement {
         return outputString;
     }
 
-    private void convertToTasks(String taskType, String description, boolean taskDone) {
+    private void convertToTasks(String taskType, String description, boolean taskDone, TaskPriority taskPriority) {
         assert taskType != null : "Somehow there was a null taskType. Not stonks!\n";
         assert description != null : "Somehow, description was empty. Not stonks!\n";
         switch(taskType) {
         case TODO_TYPE:
-            addToDoFromFile(description, taskDone);
+            addToDoFromFile(description, taskDone, taskPriority);
             return;
         case DEADLINE_TYPE:
-            addDeadlineFromFile(description, taskDone);
+            addDeadlineFromFile(description, taskDone, taskPriority);
             return;
         case EVENT_TYPE:
-            addEventFromFile(description, taskDone);
+            addEventFromFile(description, taskDone, taskPriority);
             return;
         default:
             throw new InputMismatchException("The task type scanned from file is invalid. Not Stonks!\n");
@@ -144,10 +144,11 @@ public class TaskManagement {
         String[] taskComponents = fileLine.split("/split/");
         String taskType = taskComponents[0];
         boolean taskDone = parseDoneFromInt(Integer.valueOf(taskComponents[1]));
-        String description = taskComponents[2];
+        TaskPriority taskPriority = TaskPriority.getPriorityType(Integer.valueOf(taskComponents[2]));
+        String description = taskComponents[3];
 
         //Convert to Task objects
-        convertToTasks(taskType, description, taskDone);
+        convertToTasks(taskType, description, taskDone, taskPriority);
     }
 
     /**
@@ -176,12 +177,12 @@ public class TaskManagement {
         }
     }
 
-    private ToDoTask addToDoFromFile(String taskDescription, boolean isDone) {
+    private ToDoTask addToDoFromFile(String taskDescription, boolean isDone, TaskPriority taskPriority) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty todo task description. Not stonks!\n");
         }
 
-        ToDoTask newTask = ToDoTask.loadToDoTaskFromFile(taskDescription.trim(), isDone);
+        ToDoTask newTask = ToDoTask.loadToDoTaskFromFile(taskDescription.trim(), isDone, taskPriority);
         addTask(newTask);
         return newTask;
     }
@@ -194,7 +195,7 @@ public class TaskManagement {
         }
     }
 
-    private DeadlineTask addDeadlineFromFile(String taskDescription, boolean isDone) {
+    private DeadlineTask addDeadlineFromFile(String taskDescription, boolean isDone, TaskPriority taskPriority) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty deadline task description. Not stonks!\n");
         }
@@ -206,7 +207,7 @@ public class TaskManagement {
 
             //Create Deadline task
             DeadlineTask newTask = DeadlineTask.loadDeadlineTaskFromFile(descriptionSplitArray[0].trim(),
-                    deadlineDateTime, isDone);
+                    deadlineDateTime, isDone, taskPriority);
             addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -214,7 +215,7 @@ public class TaskManagement {
         }
     }
 
-    private EventTask addEventFromFile(String taskDescription, boolean isDone) {
+    private EventTask addEventFromFile(String taskDescription, boolean isDone, TaskPriority taskPriority) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty event task description. Not stonks!\n");
         }
@@ -226,7 +227,7 @@ public class TaskManagement {
 
             //Create Event task
             EventTask newTask = EventTask.loadEventTaskFromFile(descriptionSplitArray[0].trim(),
-                    eventDateTime, isDone);
+                    eventDateTime, isDone, taskPriority);
             addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -277,5 +278,19 @@ public class TaskManagement {
             }
         }
         return searchResults;
+    }
+
+    /**
+     * Sorts the task list in level of priority order.
+     * @param sortBy The criteria by which to sort taskList.
+     * @throws SurrealException If no sort criteria given, taskList is empty or sort criteria is unsupported.
+     */
+    public void sort(String sortBy) throws SurrealException {
+        if (sortBy.isEmpty()) {
+            throw new SurrealException("No sorting criteria given! Not stonks!\n");
+        } else if (taskList.isEmpty()) {
+            throw new SurrealException("I have nothing to sort. Not stonks!\n");
+        }
+        taskList.sort(TaskSort.getComparator(sortBy));
     }
 }
