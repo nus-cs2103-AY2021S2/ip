@@ -2,6 +2,7 @@ package main.java;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import main.java.entity.Task;
 
@@ -125,9 +126,8 @@ public class Ui {
      */
     public String displayAllTasks(List<Task> list) {
         String display = "";
-        for (int i = 0; i < list.size(); i++) {
-            display += PREFIX + (i + 1) + ". " + list.get(i) + "\n";
-        }
+        AtomicInteger i = new AtomicInteger(1);
+        display = list.stream().reduce("", (x, y) -> (x + PREFIX + (i.getAndIncrement()) + ". " + y.toString() +"\n"), (x, y) -> x + y);
         return display;
     }
 
@@ -176,9 +176,7 @@ public class Ui {
             display = PREFIX + "Sorry, there is no task found.";
         } else {
             display = PREFIX + "We found " + result.size() + " results:\n";
-            for (Task task: result) {
-                display += PREFIX + task + "\n";
-            }
+            display = result.stream().reduce(display, (x, y) -> (x + PREFIX + y.toString() + "\n"), (x, y) -> x + y);
         }
         return display;
     }

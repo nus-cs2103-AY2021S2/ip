@@ -25,9 +25,7 @@ public class DialogBox extends HBox {
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
-
         text.setWrapText(true);
-
         AnchorPane dialogLayout = new AnchorPane();
         displayPicture.setFitWidth(60.0);
         displayPicture.setFitHeight(60.0);
