@@ -1,10 +1,3 @@
-package seashell.main;
-
-import seashell.task.Deadline;
-import seashell.task.Event;
-import seashell.task.Task;
-import seashell.task.Todo;
-
 import java.util.ArrayList;
 
 public class TaskList {
