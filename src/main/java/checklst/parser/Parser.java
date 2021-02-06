@@ -16,46 +16,44 @@ public class Parser {
     /**
      * Processes input commands and calls the respective command methods.
      * @param input Input string.
-     * @param ui Ui instance for output.
      * @param taskList TaskList instance for manipulating tasks.
-     * @param storage Storage instance for saving of commands.
      * @return Response String. 
      */
-    public String parse(String[] input, Ui ui, TaskList taskList) {
+    public String parse(String[] input, TaskList taskList) {
         String output = "";
         try {
             switch (input[0]) {
             case "list":
-                output = ui.sendOutput(taskList.toString());
+                output = taskList.toString();
                 break;
             case "done":
                 int doneIndex = Integer.parseInt(input[1]);
-                output = ui.sendOutput("Nice! I've marked this task as done!\n\t" + taskList.completeTask(doneIndex));
+                output = "Nice! I've marked this task as done!\n" + taskList.completeTask(doneIndex);
                 break;
             case "delete":
                 int deleteIndex = Integer.parseInt(input[1]);
-                output = ui.sendOutput("Alright! I've deleted this task!\n\t" + taskList.deleteTask(deleteIndex));
+                output = "Alright! I've deleted this task!\n" + taskList.deleteTask(deleteIndex);
                 break;
             case "todo":
                 Task newTodo = Todo.makeTodo(input[1]);
-                output = ui.sendOutput(taskList.add(newTodo));
+                output = taskList.add(newTodo);
                 break;
             case "event":
                 Task newEvent = Event.makeEvent(input[1]);
-                output = ui.sendOutput(taskList.add(newEvent));
+                output = taskList.add(newEvent);
                 break;
             case "deadline":
                 Task newDeadline = Deadline.makeDeadline(input[1]);
-                output = ui.sendOutput(taskList.add(newDeadline));
+                output = taskList.add(newDeadline);
                 break;
             case "find":
-                output = ui.sendOutput("Here are the matching tasks in your list!\n\t" + taskList.findTask(input[1]));
+                output = "Here are the matching tasks in your list!\n" + taskList.findTask(input[1]);
                 break;
             default:
                 throw new ChecklstException("Sorry I didn't understand that command!!");
             }
         } catch (ChecklstException e) {
-            output = ui.sendOutput(e.getMessage());
+            output = e.getMessage();
         }
 
         return output;

@@ -12,6 +12,7 @@ import checklst.storage.Storage;
 import checklst.task.TaskList;
 import checklst.ui.Ui;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,31 +48,6 @@ public class Checklst extends Application {
 
     @Override
     public void start(Stage stage) {
-
-        try {
-            String[] history = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
-            for (String task: history) {
-                this.parser.parseHistory(task, this.taskList);
-            }
-        } catch (InvalidPathException | IOException e) {
-            
-        } catch (ChecklstException e) {
-
-        }
-
-        // try {
-        //     String[] pastCommandHistory = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
-        //     for (String command: pastCommandHistory) {
-        //         if (command.equals("")) {
-        //             continue;
-        //         }
-        //         input = command.split(" ", 2);
-        //         this.parser.parseHistoryCommand(input, this.taskList, this.storage);
-        //     }
-        //     this.ui.sendOutput("History successfully restored!");
-        // } catch (InvalidPathException | IOException e) {
-        //     this.ui.sendOutput("No history found... Initializing from blank state!");
-        // }
 
         //Step 1. Formatting the window to look as expected.
         scrollPane = new ScrollPane();
@@ -131,6 +107,19 @@ public class Checklst extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         this.dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+        // Get History
+        try {
+            String[] history = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
+            for (String task: history) {
+                this.parser.parseHistory(task, this.taskList);
+            }
+            this.addDukeMessage("History successfully parsed");
+        } catch (InvalidPathException | IOException e) {
+            this.addDukeMessage("No history found... Initializing from blank state!");
+        } catch (ChecklstException e) {
+            this.addDukeMessage(e.getMessage());
+        }
+
         this.addDukeMessage(this.ui.sendWelcome());
     }
 
@@ -140,12 +129,16 @@ public class Checklst extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+        if (userInput.getText().equals("exit")) {
+            try {
+                Platform.exit();
+            } catch (Exception e) {
+            }
+        }
+
+        this.addUserMessage(userInput.getText());
+        this.addDukeMessage(getResponse(userInput.getText()));
+        
         userInput.clear();
     }
 
@@ -154,7 +147,7 @@ public class Checklst extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return parser.parse(input.split(" ", 2), this.ui, this.taskList);
+        return parser.parse(input.split(" ", 2), this.taskList);
     }
 
     private void addDukeMessage(String input) {

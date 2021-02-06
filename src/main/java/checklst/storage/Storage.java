@@ -1,7 +1,9 @@
 package checklst.storage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +21,17 @@ public class Storage {
 
     /**
      * Saves the command history to the save file.
-     * @throws ChecklstException Exception when the file is not found, prompts user to create it.
+     * @throws ChecklstException Exception when unable to save or write to file.
      */
     public void saveToFile(TaskList taskList) throws ChecklstException {
+        File history = new File("./data/checklst.txt");
+        history.getParentFile().mkdirs();
+        try {
+            history.createNewFile();
+        } catch (IOException | SecurityException e) {
+            throw new ChecklstException("Unable to make file!");
+        }
+        
         try (PrintStream out = new PrintStream(new FileOutputStream("./data/checklst.txt"))) {
             exportList = taskList.getTaskList().stream().map(x -> x.export()).collect(Collectors.toList());
             out.print(this.exportList.toString().replace("[", "").replace("]", "").replace(", ", "\n"));
