@@ -61,7 +61,7 @@ public class Duke {
      * Processes input after it is parsed by the parser.
      *
      * @param command Command that is to be executed.
-     * @param tokens  Input String split into tokens.
+     * @param tokens Input String split into tokens.
      * @throws DukeException If command cannot be executed.
      */
     public String runUserCommand(Command command, String[] tokens) throws DukeException {
@@ -104,6 +104,7 @@ public class Duke {
         }
 
         saveData();
+        assert !message.equals("") : "message should not be empty string";
         return message;
     }
 }
