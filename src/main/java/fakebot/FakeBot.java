@@ -136,7 +136,7 @@ public class FakeBot {
         int doneIndex = Integer.parseInt(command.getDescription()) - 1;
         boolean isIndexOutOfRange = doneIndex >= taskList.getSize() || doneIndex < 0;
         if (isIndexOutOfRange) {
-            throw new CommandException("☹ OOPS!!! Task number out of range.");
+            throw new CommandException("OOPS!!! Task number out of range.");
         }
         taskList.getTask(doneIndex).markComplete();
         saveHistory();
@@ -201,7 +201,7 @@ public class FakeBot {
         int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
         boolean isIndexOutOfRange = deleteIndex >= taskList.getSize() || deleteIndex < 0;
         if (isIndexOutOfRange) {
-            throw new CommandException("☹ OOPS!!! Task number out of range.");
+            throw new CommandException("OOPS!!! Task number out of range.");
         }
         Task deletedTask = taskList.getTask(deleteIndex);
         taskList.removeTask(deleteIndex);

@@ -245,7 +245,7 @@ public class Parser {
 
 
     /**
-     * Validates User Input.
+     * Parses User Input to Command.
      *
      * @param command Command String that is yet to be parsed.
      */
@@ -258,9 +258,9 @@ public class Parser {
         //Command with description should contain at least one space
         if (firstSplit < 0) {
             if(isCommandWithDescription(command)) {
-                throw new CommandException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                throw new CommandException("OOPS!!! The description of a " + command + " cannot be empty.");
             }else if (isCommandWithIndexDescription(command)) {
-                throw new CommandException("☹ OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
+                throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
             }
             throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -325,13 +325,13 @@ public class Parser {
      */
     private static Command parseCommandWithIndexDescription(String command, String description) throws CommandException {
         if (description.isEmpty()) {
-            throw new CommandException("☹ OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
+            throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
         }
 
         try {
             int index = Integer.parseInt(description);
         } catch (NumberFormatException e) {
-            throw new CommandException("☹ OOPS!!! Invalid Task Index Format.");
+            throw new CommandException("OOPS!!! Invalid Task Index Format.");
         }
 
         if (command.equals(DONE_COMMAND)) {
@@ -364,7 +364,7 @@ public class Parser {
      */
     private static Command parseCommandWithDescription(String command, String description) throws CommandException {
         if (description.isEmpty()) {
-            throw new CommandException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+            throw new CommandException("OOPS!!! The description of a " + command + " cannot be empty.");
         }
         if (command.equals(FIND_COMMAND)) {
             return parseFindCommand(description);
@@ -406,7 +406,7 @@ public class Parser {
      */
     private static Command parseEventCommand(String description) throws CommandException {
         if (!description.contains(EVENT_SPLIT_REGEX)) {
-            throw new CommandException("☹ OOPS!!! The description of a " + EVENT_COMMAND
+            throw new CommandException("OOPS!!! The description of a " + EVENT_COMMAND
                     + " must contain Date and Duration indicated by \"" + EVENT_SPLIT_REGEX + "\".");
         }
         try {
@@ -417,7 +417,7 @@ public class Parser {
             LocalDate endDate = LocalDate.parse(dates[2]);
             LocalTime endTime = LocalTime.parse(dates[3]);
         } catch (Exception e) {
-            throw new CommandException("☹ OOPS!!! The Date format of a "
+            throw new CommandException("OOPS!!! The Date format of a "
                     + EVENT_COMMAND + " must be yyyy-mm-dd hh:ss yyyy-mm-dd hh:ss.");
         }
         return new Command(CommandType.EVENT, description);
@@ -430,7 +430,7 @@ public class Parser {
      */
     private static Command parseDeadlineCommand(String description) throws CommandException {
         if (!description.contains(DEADLINE_SPLIT_REGEX)) {
-            throw new CommandException("☹ OOPS!!! The description of a "
+            throw new CommandException("OOPS!!! The description of a "
                     + DEADLINE_COMMAND + " must contain Date indicated by \""
                     + DEADLINE_SPLIT_REGEX + "\".");
         }
@@ -440,7 +440,7 @@ public class Parser {
             LocalDate date = LocalDate.parse(dates[0]);
             LocalTime time = LocalTime.parse(dates[1]);
         } catch (Exception e) {
-            throw new CommandException("☹ OOPS!!! The Date format of a "
+            throw new CommandException("OOPS!!! The Date format of a "
                     + DEADLINE_COMMAND + " must be yyyy-mm-dd hh:ss.");
 
         }
