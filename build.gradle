@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "fakebot.FakeBot"
+    mainClassName = "fakebot.Launcher"
 }
 
 shadowJar {
