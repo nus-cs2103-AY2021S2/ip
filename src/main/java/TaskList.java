@@ -60,6 +60,42 @@ public class TaskList {
     }
 
     /**
+     * Add the required task into the list of tasks.
+     *
+     * @param action command.
+     * @param task description.
+     */
+    public void addTodo(String action, String task) {
+        size = size + 1;
+        list.add(new Todo(task));
+    }
+
+
+    /**
+     * Add the required task into the list of tasks.
+     *
+     * @param action command.
+     * @param task description.
+     * @param time required for deadline and event.
+     */
+    public void addDeadline(String action, String task, String time) {
+        size = size + 1;
+        list.add(new Deadline(task, time));
+    }
+
+    /**
+     * Add the required task into the list of tasks.
+     *
+     * @param action command.
+     * @param task description.
+     * @param time required for deadline and event.
+     */
+    public void addEvent(String action, String task, String time) {
+        size = size + 1;
+        list.add(new Event(task, time));
+    }
+
+    /**
      * Show all the tasks in the list.
      */
     public String listTask() {
