@@ -10,11 +10,18 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class Storage {
+    /** Constant containing index of type character for any Todo */
     private static final int TODO_TYPE_INDEX = 0;
+    /** Constant containing index of is done integer for any Todo */
     private static final int TODO_IS_DONE_INDEX = 1;
+    /** Constant containing index of message String for any Todo */
     private static final int TODO_MESSAGE_INDEX = 2;
+    /** Constant containing index of extra message for Deadline and Event */
     private static final int TODO_EXTRA_MESSAGE_INDEX = 3;
+
+    /** filePath containing saved Todos */
     private final String filePath;
+    /** directory of file containing saved Todos */
     private final String directoryPath;
 
     /**
@@ -38,14 +45,18 @@ public class Storage {
         try {
             // get local file
             File localFile = new File(this.filePath);
+            // start scanner for file
             Scanner sc = new Scanner(localFile);
+            // init empty array
             List<Optional<? extends Todo>> existingTodosList = new ArrayList<>();
+            // scan through inputs in file
             while (sc.hasNextLine()) {
                 // get line, splitting by special character delimiter |
                 List<String> line = Arrays.asList(sc.nextLine().split("\\|"));
 
                 // line = [type, isDone, message, extraMessage (event / deadline)]
                 String type = line.get(TODO_TYPE_INDEX);
+                // isDone would be "1" if done, "0" if not done
                 boolean isDone = line.get(TODO_IS_DONE_INDEX).equals("1");
                 String message = line.get(TODO_MESSAGE_INDEX);
 
@@ -70,10 +81,13 @@ public class Storage {
                                         line.get(TODO_EXTRA_MESSAGE_INDEX))));
                     break;
                 default:
+                    // should not reach default case
                     break;
                 }
             }
+            // close scanner
             sc.close();
+            // return arraylist of todos
             return existingTodosList;
         } catch (Exception e) {
             // exception will be caught if no existing data file is found
@@ -142,7 +156,6 @@ public class Storage {
 
             // close writer on complete
             writer.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
