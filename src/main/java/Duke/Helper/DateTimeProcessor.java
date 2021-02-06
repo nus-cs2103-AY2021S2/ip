@@ -3,6 +3,8 @@ package Duke.Helper;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import Duke.Constant.Constants;
+
 /**
  * A helper class that converted a time string to a more meaningful version.
  */
@@ -26,7 +28,6 @@ public class DateTimeProcessor {
                 return null;
             }
             int timeInt = Integer.parseInt(time);
-            assert timeInt < 0 : "Time value cannot be negative number";
             if (timeInt < 0) {
                 return null;
             }
@@ -95,12 +96,12 @@ public class DateTimeProcessor {
     public String getFullDateTime() {
         String[] array = processInput();
         if (array == null) {
-            return "Invalid format for date and time.";
+            return Constants.INVALID_DATETIME_FORMAT_SHORT;
         }
         String date = processDate(array[0]);
         String time = processTime(array[1]);
         if (date == null || time == null) {
-            return "Invalid format for date and time.";
+            return Constants.INVALID_DATETIME_FORMAT_SHORT;
         }
         return (time.isEmpty()) ? date : date + " " + time;
     }

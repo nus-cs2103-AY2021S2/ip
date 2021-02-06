@@ -60,73 +60,19 @@ public class Duke {
      * @return The output shows to the user screen.
      */
     public String getResponse(String command) {
+        command = command.trim();
         if (command.equalsIgnoreCase(Command.LIST.getAction())) {
-            ArrayList<Task> list = taskList.getList();
-            if (list.isEmpty()) {
-                return Constants.EMPTY_TASK_LIST;
-            }
-            StringBuilder output = new StringBuilder();
-            output.append(Constants.START_LISTING).append('\n');
-            for (int i = 0; i < list.size(); i++) {
-                output.append(i + 1).append(". ").append(list.get(i)).append('\n');
-            }
-            return output.toString();
+            return handleListCommand();
         } else if (command.equalsIgnoreCase(Command.STATISTICS.getAction())) {
-            ArrayList<Task> list = taskList.getList();
-            if (list.isEmpty()) {
-                return Constants.EMPTY_TASK_LIST;
-            } else {
-                int[][] stats = taskList.statistics();
-                return ui.stats(stats);
-            }
-        } else if (command.equalsIgnoreCase(Command.DONE.getAction())
-                || command.equalsIgnoreCase(Command.DELETE.getAction())) {
-            try {
-                throw new InvalidIndex(command, taskList.getList().size());
-            } catch (InvalidIndex e) {
-                return e.getMessage();
-            }
+            return handleStatCommand();
         } else if (command.toLowerCase().startsWith(Command.DONE.getAction())) {
-            try {
-                int doneIndex = Integer.parseInt(command.substring(5));
-                return taskList.finishTask(doneIndex);
-            } catch (NumberFormatException | InvalidIndex e) {
-                return e.getMessage();
-            }
+            return handleDoneCommand(command);
         } else if (command.toLowerCase().startsWith(Command.DELETE.getAction())) {
-            try {
-                int deleteIndex = Integer.parseInt(command.substring(7));
-                return taskList.deleteTask(deleteIndex);
-            } catch (NumberFormatException | InvalidIndex e) {
-                return e.getMessage();
-            }
-        } else if (command.equalsIgnoreCase(Command.FIND.getAction())) {
-            try {
-                throw new EmptyFindContent();
-            } catch (EmptyFindContent e) {
-                return e.getMessage();
-            }
+            return handleDeleteCommand(command);
         } else if (command.toLowerCase().startsWith(Command.FIND.getAction())) {
-            String[] keyword = command.substring(5).split(" ");
-            ArrayList<Task> filter = taskList.findTask(keyword);
-            if (filter.isEmpty()) {
-                return Constants.FIND_FAIL;
-            } else {
-                StringBuilder output = new StringBuilder();
-                output.append(Constants.FIND_SUCCESS).append('\n');
-                for (int i = 0; i < filter.size(); i++) {
-                    output.append(i + 1).append(". ").append(filter.get(i)).append('\n');
-                }
-                return output.toString();
-            }
+            return handleFindCommand(command);
         } else {
-            try {
-                String status = taskList.addTask(command);
-                storage.writeDataToFile(taskList.getList());
-                return status;
-            } catch (NoSuchCommandException | EmptyTaskException | InvalidTask e) {
-                return e.getMessage();
-            }
+            return handleAddCommand(command);
         }
     }
 
@@ -139,58 +85,104 @@ public class Duke {
                 ui.printResponse(Constants.BYE);
                 break;
             } else if (command.equalsIgnoreCase(Command.LIST.getAction())) {
-                ui.printAllTask(taskList.getList());
+                ui.printResponse(handleListCommand());
             } else if (command.equalsIgnoreCase(Command.STATISTICS.getAction())) {
-                ArrayList<Task> list = taskList.getList();
-                if (list.isEmpty()) {
-                    ui.printResponse(Constants.EMPTY_TASK_LIST);
-                } else {
-                    int[][] stats = taskList.statistics();
-                    ui.printResponse(ui.stats(stats));
-                }
-            } else if (command.equalsIgnoreCase(Command.DONE.getAction())
-                    || command.equalsIgnoreCase(Command.DELETE.getAction())) {
-                try {
-                    throw new InvalidIndex(command, taskList.getList().size());
-                } catch (InvalidIndex e) {
-                    ui.printResponse(e.getMessage());
-                }
+                ui.printResponse(handleStatCommand());
             } else if (command.toLowerCase().startsWith(Command.DONE.getAction())) {
-                try {
-                    int doneIndex = Integer.parseInt(command.substring(5));
-                    String result = taskList.finishTask(doneIndex);
-                    ui.printResponse(result);
-                } catch (NumberFormatException | InvalidIndex e) {
-                    System.out.println(e.getMessage());
-                }
+                ui.printResponse(handleDoneCommand(command));
             } else if (command.toLowerCase().startsWith(Command.DELETE.getAction())) {
-                try {
-                    int deleteIndex = Integer.parseInt(command.substring(7));
-                    String result = taskList.deleteTask(deleteIndex);
-                    ui.printResponse(result);
-                } catch (NumberFormatException | InvalidIndex e) {
-                    ui.printResponse(e.getMessage());
-                }
-            } else if (command.equalsIgnoreCase(Command.FIND.getAction())) {
-                try {
-                    throw new EmptyFindContent();
-                } catch (EmptyFindContent e) {
-                    ui.printResponse(e.getMessage());
-                }
+                ui.printResponse(handleDeleteCommand(command));
             } else if (command.toLowerCase().startsWith(Command.FIND.getAction())) {
-                String[] keyword = command.substring(5).split(" ");
-                ArrayList<Task> filter = taskList.findTask(keyword);
-                ui.printMatchedTask(filter);
+                ui.printResponse(handleFindCommand(command));
             } else {
-                try {
-                    String status = taskList.addTask(command);
-                    ui.printResponse(status);
-                } catch (NoSuchCommandException | EmptyTaskException | InvalidTask e) {
-                    ui.printResponse(e.getMessage());
+                ui.printResponse(handleAddCommand(command));
+            }
+        }
+    }
+    private String handleFindCommand(String command) {
+        if (command.equalsIgnoreCase(Command.FIND.getAction())) {
+            try {
+                throw new EmptyFindContent();
+            } catch (EmptyFindContent e) {
+                return e.getMessage();
+            }
+        }
+        String[] keyword = command.substring(5).split(" ");
+        ArrayList<Task> filter = taskList.findTask(keyword);
+        if (filter.isEmpty()) {
+            return Constants.FIND_FAIL;
+        } else {
+            StringBuilder output = new StringBuilder();
+            output.append(Constants.FIND_SUCCESS).append('\n');
+            for (int i = 0; i < filter.size(); i++) {
+                output.append(i + 1).append(". ").append(filter.get(i));
+                if (i != filter.size() - 1) {
+                    output.append('\n');
                 }
             }
-            //update the file
+            return output.toString();
+        }
+    }
+    private String handleListCommand() {
+        ArrayList<Task> list = taskList.getList();
+        if (list.isEmpty()) {
+            return Constants.EMPTY_TASK_LIST;
+        }
+        StringBuilder output = new StringBuilder();
+        output.append(Constants.START_LISTING).append('\n');
+        for (int i = 0; i < list.size(); i++) {
+            output.append(i + 1).append(". ").append(list.get(i)).append('\n');
+        }
+        return output.toString();
+    }
+    private String handleStatCommand() {
+        ArrayList<Task> list = taskList.getList();
+        if (list.isEmpty()) {
+            return Constants.EMPTY_TASK_LIST;
+        } else {
+            int[][] stats = taskList.statistics();
+            return ui.stats(stats);
+        }
+    }
+    private String handleDoneCommand(String command) {
+        if (command.equalsIgnoreCase(Command.DONE.getAction())) {
+            try {
+                throw new InvalidIndex(command, taskList.getList().size());
+            } catch (InvalidIndex e) {
+                return e.getMessage();
+            }
+        } else {
+            try {
+                int doneIndex = Integer.parseInt(command.substring(5));
+                return taskList.finishTask(doneIndex);
+            } catch (NumberFormatException | InvalidIndex e) {
+                return e.getMessage();
+            }
+        }
+    }
+    private String handleDeleteCommand(String command) {
+        if (command.equalsIgnoreCase(Command.DELETE.getAction())) {
+            try {
+                throw new InvalidIndex(command, taskList.getList().size());
+            } catch (InvalidIndex e) {
+                return e.getMessage();
+            }
+        } else {
+            try {
+                int deleteIndex = Integer.parseInt(command.substring(7));
+                return taskList.deleteTask(deleteIndex);
+            } catch (NumberFormatException | InvalidIndex e) {
+                return e.getMessage();
+            }
+        }
+    }
+    private String handleAddCommand(String command) {
+        try {
+            String status = taskList.addTask(command);
             storage.writeDataToFile(taskList.getList());
+            return status;
+        } catch (NoSuchCommandException | EmptyTaskException | InvalidTask e) {
+            return e.getMessage();
         }
     }
 }

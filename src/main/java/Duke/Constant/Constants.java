@@ -18,6 +18,7 @@ public class Constants {
     public static final String INVALID_DATETIME_FORMAT = "Invalid format for date and time." + "\n"
             + "Your date (and time) should have format yyyy-mm-dd (HH-MM)" + "\n"
             + "For example: 2019-10-15 or 2019-10-15 1800";
+    public static final String INVALID_DATETIME_FORMAT_SHORT = "Invalid format for date and time.";
     private static final String LOGO = " ____        _        \n"
                                     + "|  _ \\ _   _| | _____ \n"
                                     + "| | | | | | | |/ / _ \\\n"

@@ -42,25 +42,6 @@ public class Ui {
     }
 
     /**
-     * Prints all the matched tasks for find command.
-     * @param list List of tasks that match the keyword.
-     */
-    public void printMatchedTask(ArrayList<Task> list) {
-        System.out.println(LINES);
-        if (list.isEmpty()) {
-            System.out.println(Constants.FIND_FAIL);
-        } else {
-            System.out.println(Constants.FIND_SUCCESS);
-            for (int i = 0; i < list.size(); i++) {
-                Task task = list.get(i);
-                System.out.println((i + 1) + ". " + task);
-            }
-        }
-        System.out.println(LINES);
-        System.out.println();
-    }
-
-    /**
      * Returns the string containing the statistics about the tasks in the list.
      * @param stat The statistics about the tasks in the list.
      * @return A string version that is printed out for the user.

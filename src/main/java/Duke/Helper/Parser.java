@@ -1,5 +1,6 @@
 package Duke.Helper;
 
+import Duke.Constant.Constants;
 import Duke.Exception.EmptyTaskException;
 import Duke.Exception.InvalidTask;
 import Duke.Task.Deadline;
@@ -44,7 +45,7 @@ public class Parser {
             String by = content.substring(byIndex + 4);
             DateTimeProcessor processor = new DateTimeProcessor(by);
             String time = processor.getFullDateTime();
-            if (time.equals("Invalid format for date and time.")) {
+            if (time.equals(Constants.INVALID_DATETIME_FORMAT_SHORT)) {
                 return null;
             } else {
                 return new Deadline(description, time);
@@ -72,7 +73,7 @@ public class Parser {
             String at = content.substring(atIndex + 4);
             DateTimeProcessor processor = new DateTimeProcessor(at);
             String time = processor.getFullDateTime();
-            if (time.equals("Invalid format for date and time.")) {
+            if (time.equals(Constants.INVALID_DATETIME_FORMAT_SHORT)) {
                 return null;
             } else {
                 return new Event(description, time);
