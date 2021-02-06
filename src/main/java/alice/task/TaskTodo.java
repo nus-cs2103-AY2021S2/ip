@@ -16,7 +16,7 @@ public class TaskTodo extends Task {
 
 	@Override
 	public TaskTodo clone() {
-		return new TaskTodo(this.name, this.done);
+		return new TaskTodo(this.name, this.isDone);
 	}
 
 	@Override
