@@ -15,6 +15,10 @@ public class Duke {
         this.storage = new Storage(filePath, directoryPath);
     }
 
+    public String getResponse(String input) {
+        return input;
+    }
+
     /**
      * Main method to run duke.Duke
      * @param args
