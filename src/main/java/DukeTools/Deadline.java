@@ -2,6 +2,14 @@ package DukeTools;
 
 import java.time.LocalDate;
 
+/**
+ * The Deadline class inherits from Task and allows
+ * for date arguments to be parsed.
+ *
+ * @author  Justin Gnoh
+ * @version 1.0
+ * @since   2021-02-06
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 
@@ -16,7 +24,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-
+    /**
+     * This method is used to process a given date format into
+     * a desired format.
+     *
+     * @param originalDate This receives an unparsed date
+     * @return String This returns a String date in "MMM dd yyyy" format
+     */
     public String processDate(LocalDate originalDate) {
 //        LocalDate date = LocalDate.parse(originalDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String month = originalDate.getMonth().toString();

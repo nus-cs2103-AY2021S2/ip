@@ -10,6 +10,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * The Storage class loads and saves
+ * data into a specified filepath.
+ *
+ * @author  Justin Gnoh
+ * @version 1.0
+ * @since   2021-02-06
+ */
 public class Storage {
     String filePath;
 
@@ -17,6 +25,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * This method loads data from file path and
+     * store into an ArrayList of tasks.
+     *
+     * @return ArrayList<Task> This returns an ArrayList of tasks
+     * @throws DukeException On file not found error
+     */
     public ArrayList<Task> load() throws DukeException {
 //        fetchTasks()
         ArrayList<Task> result = new ArrayList<>();
@@ -52,8 +67,13 @@ public class Storage {
         return result;
     }
 
-//    Currently hard-coded into position
+    /**
+     * This method saves a given task into the taskList.
+     *
+     * @param tasks This is the task to be saved
+     */
     public void save(TaskList tasks) {
+        //    Currently hard-coded into position
         String currDir = System.getProperty("user.dir");
         String expectedDir = currDir + "/data";
 
