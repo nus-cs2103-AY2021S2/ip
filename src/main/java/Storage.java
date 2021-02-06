@@ -23,6 +23,7 @@ class Storage {
 
     private File file;
     private BufferedReader br;
+    private FileWriter fw;
     protected Storage(String filepath) {
         this.file = new File(filepath);
         FileReader fr;
@@ -80,16 +81,19 @@ class Storage {
 
     protected void updateFile(List<Task> list) {
         try {
-            FileWriter fw = new FileWriter(file, false);
-            for (Task task : list) {
-                String output = task.toFileString();
-                fw.write(output);
-                fw.write("\n");
-                fw.flush();
-            }
-        } catch (Exception e) {
-            System.err.println("Failed to update file");
+            fw = new FileWriter(file, false);
+        } catch (IOException e) {
+            System.out.println("Failed to open file writer.");
             e.printStackTrace();
         }
+        list.forEach((t) -> {
+            try {
+                fw.write(t.toFileString() + "\n");
+                fw.flush();
+            } catch (IOException e) {
+                System.err.println("Failed to update file.");
+                e.printStackTrace();
+            }
+        });
     }
 }
