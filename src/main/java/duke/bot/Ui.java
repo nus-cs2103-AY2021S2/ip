@@ -12,7 +12,7 @@ public class Ui {
      * @param msg Message to be displayed
      * @return A formatted string containing the constructed message
      */
-    public String constructMsg(String msg) {
+    public String constructMessage(String msg) {
         return msg + "\n";
     }
 
@@ -22,17 +22,18 @@ public class Ui {
      * @param botName Name of the chat bot to greet with
      * @return A formatted string containing the constructed welcome message
      */
-    public String constructWelcomeMsg(String botName) {
-        return constructMsg(String.format("Meow, I'm %s\nWhat can I do for you today?", botName));
+    public String constructWelcomeMessage(String botName) {
+        String msg = String.format("Meow, I'm %s\nWhat can I do for you today?", botName);
+        return constructMessage(msg);
     }
 
     /**
      * Constructs a default exit message
      *
      * @return A formatted string containing the constructed exit message
-     * */
-    public String constructGoodbyeMsg() {
-        return constructMsg("Meow. Hope to see you again soon!");
+     */
+    public String constructGoodbyeMessage() {
+        return constructMessage("Meow. Hope to see you again soon!");
     }
 
     /**
@@ -42,11 +43,11 @@ public class Ui {
      * @param tasksSize Number of total tasks after adding that new task
      * @return A formatted string containing the constructed task addition message
      */
-    public String constructAddMsg(Task task, int tasksSize) {
-        String msg = "Got it meow. I've added this task:\n" + String.format("  [%s][%s] %s\n", task.getTypeSymbol(),
-                task.getStatusSymbol(), task.getDesc()) + String.format("Now you have %d tasks in the list.\n",
-                tasksSize);
-        return constructMsg(msg);
+    public String constructAddMessage(Task task, int tasksSize) {
+        String msg = "Got it meow. I've added this task:\n"
+                + String.format("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc())
+                + String.format("Now you have %d tasks in the list.\n", tasksSize);
+        return constructMessage(msg);
     }
 
     /**
@@ -56,10 +57,11 @@ public class Ui {
      * @param task Task that was completed
      * @return A formatted string containing the constructed task completion message
      */
-    public String constructDoneMsg(int index, Task task) {
-        String msg = "Good job meow, I've marked this task as done:\n" + String.format("%d.[%s][%s] %s\n", index + 1,
-                task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
-        return constructMsg(msg);
+    public String constructDoneMessage(int index, Task task) {
+        String msg = "Good job meow, I've marked this task as done:\n"
+                + String.format("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+                task.getDesc());
+        return constructMessage(msg);
     }
 
     /**
@@ -69,11 +71,21 @@ public class Ui {
      * @param tasksSize Number of total tasks left after deleting that task
      * @return A formatted string containing the constructed task deletion message
      */
-    public String constructDeleteMsg(Task task, int tasksSize) {
-        String msg = "Noted meow. I've removed this task:\n" + String.format("  [%s][%s] %s\n", task.getTypeSymbol(),
-                task.getStatusSymbol(), task.getDesc()) + String.format("Now you have %d tasks in the list.\n",
-                tasksSize);
-        return constructMsg(msg);
+    public String constructDeleteMessage(Task task, int tasksSize) {
+        String msg = "Noted meow. I've removed this task:\n"
+                + String.format("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc())
+                + String.format("Now you have %d tasks in the list.\n", tasksSize);
+        return constructMessage(msg);
+    }
+
+    private String taskListToMessage(List<Task> tasks) {
+        String msg = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+                    task.getDesc());
+        }
+        return msg;
     }
 
     /**
@@ -82,14 +94,9 @@ public class Ui {
      * @param tasks A list of tasks as search results
      * @return A formatted string containing the constructed search result message
      */
-    public String constructFoundMsg(List<Task> tasks) {
-        String msg = "Meow, here are the matching tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
-                    task.getDesc());
-        }
-        return constructMsg(msg);
+    public String constructFoundMessage(List<Task> tasks) {
+        String msg = "Meow, here are the matching tasks in your list:\n" + taskListToMessage(tasks);
+        return constructMessage(msg);
     }
 
     /**
@@ -98,14 +105,9 @@ public class Ui {
      * @param tasks List of tasks
      * @return A formatted string containing the constructed task list message
      */
-    public String constructTaskList(List<Task> tasks) {
-        String msg = "Meow, here are the tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
-                    task.getDesc());
-        }
-        return constructMsg(msg);
+    public String constructTaskListMessage(List<Task> tasks) {
+        String msg = "Meow, here are the tasks in your list:\n" + taskListToMessage(tasks);
+        return constructMessage(msg);
     }
 
     /**
@@ -114,7 +116,7 @@ public class Ui {
      * @param msg Error message
      * @return A formatted string containing the constructed error message
      */
-    public String constructErrorMsg(String msg) {
-        return constructMsg(String.format("ERROR MEOW! %s", msg));
+    public String constructErrorMessage(String msg) {
+        return constructMessage(String.format("ERROR MEOW! %s", msg));
     }
 }

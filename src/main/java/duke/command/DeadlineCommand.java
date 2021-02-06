@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command {
         try {
             Deadline deadline = taskManager.addDeadline(this.desc, this.dateTime);
             Storage.saveTasks(taskManager.getTasks());
-            return ui.constructAddMsg(deadline, taskManager.getTasksSize());
+            return ui.constructAddMessage(deadline, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("deadline", desc, e.getMessage());
         }
