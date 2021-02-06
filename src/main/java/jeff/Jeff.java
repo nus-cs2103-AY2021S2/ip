@@ -6,7 +6,6 @@ package jeff;
 public class Jeff {
     private final Storage storage;
     private TaskList tasks;
-    private final Ui ui;
 
     /**
      * Constructor for the Jeff class.
@@ -15,41 +14,19 @@ public class Jeff {
      * @param filePath File path to load/store tasks from.
      */
     public Jeff(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (JeffException e) {
-            ui.printError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
-    //public Jeff() { }
-
-    /**
-     * Runs the Jeff chatbot until isExit is true.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullMessage = ui.readMessage();
-            try {
-                isExit = Parser.execute(fullMessage, tasks, ui, storage);
-            } catch (JeffException d) {
-                ui.printError(d.getMessage());
-            }
+    public String getResponse (String message) {
+        try {
+            return Parser.execute(message, tasks, storage);
+        } catch (JeffException e) {
+            return e.getMessage();
         }
-    }
-
-    /**
-     * Main method for the Jeff chatbot.
-     * Creates a new Jeff object and runs it.
-     *
-     * @param args Command line arguments passed in.
-     */
-    public static void main(String[] args) {
-        new Jeff("data.txt").run();
     }
 }
