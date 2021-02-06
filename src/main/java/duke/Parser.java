@@ -39,30 +39,23 @@ public class Parser {
 
         boolean aTaskCommandEntered = parsedAction[0].equals("todo") || parsedAction[0].equals("deadline")
                                         || parsedAction[0].equals("event");
-        
         boolean incompleteCommand = parsedAction.length <= 1;
-        
-        /** Guard Clauses to check if input is valid depending on the user input value */
+
         if (aTaskCommandEntered && incompleteCommand) {
             throw new MissingTaskInputException(parsedAction[0]);
         }
-        
         if (parsedAction[0].equals("done") && incompleteCommand) {
             throw new DukeIncompleteInputException("done not completed");
         }
-        
         if (parsedAction[0].equals("delete") && incompleteCommand) {
             throw new DukeIncompleteInputException("delete not completed");
         }
-        
         if (parsedAction[0].equals("check") && incompleteCommand) {
             throw new DukeIncompleteInputException("check not completed");
         }
-        
         if (parsedAction[0].equals("find") && incompleteCommand) {
             throw new DukeIncompleteInputException("find not completed");
         }
-
     }
     /**
      * Returns the result of the action parsed by the parser

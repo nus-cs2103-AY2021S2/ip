@@ -24,21 +24,6 @@ public class TaskList {
     public TaskList() {
         this.inputList = new ArrayList<>();
     }
-    
-    /**
-     * Function to reformat the date before printing
-     *
-     * @param date the date in string to be reformatted
-     * @return String containing the reformatted date
-     */
-    public String reformatDate(String date) {
-        String[] brokenDate = date.split("-");
-        String reformattedDate = brokenDate[2] + "-" + brokenDate[1] + "-" + brokenDate[0];
-        
-        return reformattedDate;
-    }
-    
-    
     /**
      * TaskList constructor to intialize a new TaskList with a given ArrayList of tasks
      * the tasks are all stored as string format which is processed before being
@@ -50,7 +35,6 @@ public class TaskList {
             String[] arr = taskStr.split("\\|");
 
             assert arr.length > 1 : "TaskList tasks not loaded properly or has issue";
-            
             for (int i = 0; i < arr.length; i++) {
                 arr[i] = arr[i].trim();
             }
@@ -58,15 +42,12 @@ public class TaskList {
             boolean isDeadlineTask = arr[0].equals("D");
             boolean isEventTask = arr[0].equals("E");
             boolean isToDoTask = arr[0].equals("T");
-            
             boolean taskIsDone = arr[1].equals("1");
             String description = arr[2];
-            
             if (isDeadlineTask) {
                 String reformattedDeadline = reformatDate(arr[3]);
 
                 DeadlineTask deadlineTask = new DeadlineTask(description, reformattedDeadline);
-                
                 if (taskIsDone) {
                     deadlineTask.markAsDone();
                 }
@@ -77,7 +58,6 @@ public class TaskList {
                 String reformattedDate = reformatDate(arr[3]);
 
                 EventTask eventTask = new EventTask(description, reformattedDate);
-                
                 if (taskIsDone) {
                     eventTask.markAsDone();
                 }
@@ -86,7 +66,6 @@ public class TaskList {
 
             } else if (isToDoTask) {
                 ToDoTask toDoTask = new ToDoTask(description);
-                
                 if (taskIsDone) {
                     toDoTask.markAsDone();
                 }
@@ -95,7 +74,17 @@ public class TaskList {
             }
         }
     }
-
+    /**
+     * Function to reformat the date before printing
+     *
+     * @param date the date in string to be reformatted
+     * @return String containing the reformatted date
+     */
+    public String reformatDate(String date) {
+        String[] brokenDate = date.split("-");
+        String reformattedDate = brokenDate[2] + "-" + brokenDate[1] + "-" + brokenDate[0];
+        return reformattedDate;
+    }
     /**
      * Returns The list of tasks.
      *

@@ -42,106 +42,70 @@ public class Duke {
 
         }
     }
-    
     /**
      * Returns a String containing the tasks that have this date
      *
      * @param parsedInput the parsed input to decide the action
-     * @param originalInput the orignal Input to aid in the action to take
+     * @param input the original Input to aid in the action to take
      * @param toReply the current String Duke is supposed to reply with
      * @return A string representing the response of Duke
      * @throws UnknownInputException when there the input or command is not known
      */
-    protected String chooseAction(String[] parsedInput, String originalInput, String toReply) throws UnknownInputException{
+    protected String chooseAction(String[] parsedInput, String input, String toReply) throws UnknownInputException {
         String response = toReply;
-        
         switch (parsedInput[0]) {
         case "todo":
             response += ui.addPrint();
-            ToDoTask todo = tasks.handleToDoTask(originalInput);
+            ToDoTask todo = tasks.handleToDoTask(input);
             response += ui.printTask(todo);
             response += ui.countTasks(tasks);
-        
             break;
-    
         case "deadline":
             response += ui.addPrint();
-        
-            DeadlineTask deadlineTask = tasks.handleDeadlineTask(originalInput);
-        
+            DeadlineTask deadlineTask = tasks.handleDeadlineTask(input);
             response += ui.printTask(deadlineTask);
             response += ui.countTasks(tasks);
-        
             break;
-    
         case "event":
-        
             response += ui.addPrint();
-        
-            EventTask eventTask = tasks.handleEventTask(originalInput);
-        
+            EventTask eventTask = tasks.handleEventTask(input);
             response += ui.printTask(eventTask);
             response += ui.countTasks(tasks);
-        
             break;
-    
         case "list":
             response += ui.printStored(tasks);
-        
             break;
-    
         case "done":
             int number = Integer.valueOf(parsedInput[1]);
-        
             response += ui.printMarked();
-        
             Task completed = tasks.handleDone(number);
-        
             response += ui.printTask(completed);
-        
             break;
-    
         case "check":
-        
             String result = tasks.findOnDateTasks((parsedInput[1]));
-        
             response += ui.print(result);
             break;
-    
         case "bye":
             response += Ui.getByeMessage();
             break;
-    
         case "delete":
             int index = Integer.valueOf(parsedInput[1]);
-        
             response += ui.printRemoved();
-        
             Task task = tasks.handleDelete(index);
-        
             response += ui.printTask(task);
             response += ui.countTasks(tasks);
-        
             break;
-    
         case "find":
             String keyword = parsedInput[1];
-        
             response += ui.printMatching();
-        
             List<Task> matches = tasks.getMatch(keyword);
-        
             response += ui.printList(matches);
-        
             break;
-    
         default:
             throw new UnknownInputException();
         }
-        
         return response;
     }
-    
     /**
      * Function to make the response of Duke depending on the user input
      * @param input representing the user input
@@ -154,7 +118,6 @@ public class Duke {
             parser.check();
             String[] parsedInput = parser.getParsedAction();
             toReply = chooseAction(parsedInput, input, toReply);
-            
             storage.write(tasks);
         } catch (DukeException e) {
             return e.getMessage();
