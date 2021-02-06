@@ -42,7 +42,7 @@ public class Storage {
             }
         } catch (IOException ex) {
             throw new InvalidFolderException();
-        }  catch (InvalidFileDataException ex) {
+        } catch (InvalidFileDataException ex) {
             ex.getMessage();
         }
     }

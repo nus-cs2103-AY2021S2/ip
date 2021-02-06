@@ -34,6 +34,9 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(this.getClass()
             .getResourceAsStream("/images/BayMax.png"));
 
+    /**
+     * Initializes dialog box. 
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
