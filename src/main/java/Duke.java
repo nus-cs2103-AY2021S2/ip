@@ -19,6 +19,7 @@ public class Duke {
 
     /**
      * Generates a response to user input.
+     *
      * @param input The user input.
      * @return Return the correct output from the given input.
      * @throws FileNotFoundException Exception thrown when the file does not exist, should not happen.

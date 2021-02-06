@@ -5,6 +5,7 @@ public class Ui {
 
     /**
      * Greets the user when the Duke is launched.
+     *
      * @return A string showing correct GUI output.
      */
     public String showWelcomeMsg() {
@@ -13,7 +14,8 @@ public class Ui {
 
     /**
      * Show the user that a todo task has been added.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
+     *
+     * @param tasks      The Task Arraylist containing user tasks in sequence.
      * @param totalTasks Total number of tasks in the list.
      */
     public String showTodoMsg(TaskList tasks, int totalTasks) {
@@ -23,7 +25,8 @@ public class Ui {
 
     /**
      * Show the user that a deadline task has been added.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
+     *
+     * @param tasks      The Task Arraylist containing user tasks in sequence.
      * @param totalTasks Total number of tasks in the list.
      * @return A string showing correct GUI output.
      */
@@ -34,7 +37,8 @@ public class Ui {
 
     /**
      * Show the user that a event task has been added.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
+     *
+     * @param tasks      The Task Arraylist containing user tasks in sequence.
      * @param totalTasks Total number of tasks in the list.
      * @return A string showing correct GUI output.
      */
@@ -45,8 +49,9 @@ public class Ui {
 
     /**
      * Show the user that a task of choice has been deleted.
+     *
      * @param taskRemoved The description of the task deleted.
-     * @param totalTasks Total number of tasks in the list.
+     * @param totalTasks  Total number of tasks in the list.
      * @return A string showing correct GUI output.
      */
     public String showDeleteMsg(String taskRemoved, int totalTasks) {
@@ -56,7 +61,8 @@ public class Ui {
 
     /**
      * Show the user that a task has been marked done.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
+     *
+     * @param tasks   The Task Arraylist containing user tasks in sequence.
      * @param itemNum The item number that is marked done.
      * @return A string showing correct GUI output.
      */
@@ -66,6 +72,7 @@ public class Ui {
 
     /**
      * Show the user the list of tasks.
+     *
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @return A string showing correct GUI output.
      */
@@ -75,8 +82,9 @@ public class Ui {
 
     /**
      * Show the user the list of tasks with matching keyword.
+     *
      * @param keyword The keyword to search for match.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param tasks   The Task Arraylist containing user tasks in sequence.
      * @return A string showing correct GUI output.
      */
     public String showFindMsg(String keyword, TaskList tasks) {

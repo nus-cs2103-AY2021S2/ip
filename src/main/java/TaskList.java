@@ -12,6 +12,7 @@ public class TaskList {
 
     /**
      * Initialise Task List with existing taskList.
+     *
      * @param taskList The task list that was loaded from Storage.
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -20,6 +21,7 @@ public class TaskList {
 
     /**
      * Return size of taskList.
+     *
      * @return Size of task list.
      */
     public int getSize() {
@@ -32,6 +34,7 @@ public class TaskList {
 
     /**
      * Get task List.
+     *
      * @return Task List.
      */
     public ArrayList<Task> getTaskList() {
@@ -40,6 +43,7 @@ public class TaskList {
 
     /**
      * Add task to task List.
+     *
      * @param task The task to be added.
      */
     public void add(Task task) {
@@ -48,12 +52,13 @@ public class TaskList {
 
     /**
      * Search through all the tasks to see which ones contains the given keyword.
+     *
      * @param keyword The keyword to be searched.
      * @return The task list that contains only the relevant tasks.
      */
     public ArrayList<Task> search(String keyword) {
-        ArrayList<Task>taskListToPrint = new ArrayList<>();
-        for (Task task: taskList) {
+        ArrayList<Task> taskListToPrint = new ArrayList<>();
+        for (Task task : taskList) {
             if (task.toString().contains(keyword)) {
                 taskListToPrint.add(task);
             }
@@ -63,6 +68,7 @@ public class TaskList {
 
     /**
      * A toString method to display all the tasks in the task list.
+     *
      * @return return a string containing all the tasks in the task list.
      */
     @Override

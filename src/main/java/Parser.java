@@ -2,38 +2,41 @@ import javafx.application.Platform;
 
 public class Parser {
 
-    /** The number of tasks at the start of the program. */
+    /**
+     * The number of tasks at the start of the program.
+     */
     public static int totalTasks = 0;
 
     /**
      * Process the user input to make sense for the system.
+     *
      * @param nextInput The user input.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct message.
+     * @param tasks     The Task Arraylist containing user tasks in sequence.
+     * @param ui        UI structure to show the user correct message.
      * @return Return the correct logic and GUI output.
      */
     public String processInput(String nextInput, TaskList tasks, Ui ui) {
         String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
         try {
             switch (command) {
-                case "todo":
-                    return todo(nextInput, tasks, ui);
-                case "deadline":
-                    return deadline(nextInput, tasks, ui);
-                case "event":
-                    return event(nextInput, tasks, ui);
-                case "done":
-                    return done(nextInput, tasks, totalTasks, ui);
-                case "delete":
-                    return delete(nextInput, tasks, totalTasks, ui);
-                case "list":
-                    return list(tasks, ui);
-                case "find":
-                    return find(nextInput, tasks, ui);
-                case "exit":
-                    return exitCommand();
-                default:
-                    return wrongCommand();
+            case "todo":
+                return todo(nextInput, tasks, ui);
+            case "deadline":
+                return deadline(nextInput, tasks, ui);
+            case "event":
+                return event(nextInput, tasks, ui);
+            case "done":
+                return done(nextInput, tasks, totalTasks, ui);
+            case "delete":
+                return delete(nextInput, tasks, totalTasks, ui);
+            case "list":
+                return list(tasks, ui);
+            case "find":
+                return find(nextInput, tasks, ui);
+            case "exit":
+                return exitCommand();
+            default:
+                return wrongCommand();
             }
         } catch (DukeException e) {
             return e.getMessage();
@@ -56,13 +59,14 @@ public class Parser {
 
     /**
      * Adds a Todo task.
+     *
      * @param nextInput The description of the task.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct message.
+     * @param tasks     The Task Arraylist containing user tasks in sequence.
+     * @param ui        UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public String todo(String nextInput, TaskList tasks, Ui ui) throws DukeException{
+    public String todo(String nextInput, TaskList tasks, Ui ui) throws DukeException {
         if (nextInput.length() < 6) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
@@ -74,16 +78,17 @@ public class Parser {
 
     /**
      * Adds a Deadline task.
+     *
      * @param nextInput The description of the task.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct message.
+     * @param tasks     The Task Arraylist containing user tasks in sequence.
+     * @param ui        UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public String deadline(String nextInput, TaskList tasks, Ui ui) throws DukeException{
+    public String deadline(String nextInput, TaskList tasks, Ui ui) throws DukeException {
         if (nextInput.length() < 10) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-        } else if (!nextInput.contains("/")){
+        } else if (!nextInput.contains("/")) {
             throw new DukeException("OOPS!!! The date information of a deadline cannot be empty.");
         }
         String command = nextInput.substring(9, nextInput.indexOf("/") - 1);
@@ -95,13 +100,14 @@ public class Parser {
 
     /**
      * Adds a Event task.
+     *
      * @param nextInput The description of the task.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct message.
+     * @param tasks     The Task Arraylist containing user tasks in sequence.
+     * @param ui        UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public String event(String nextInput, TaskList tasks, Ui ui) throws DukeException{
+    public String event(String nextInput, TaskList tasks, Ui ui) throws DukeException {
         if (nextInput.length() < 7) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else if (!nextInput.contains("/")) {
@@ -116,14 +122,15 @@ public class Parser {
 
     /**
      * Mark the task in the given task number as done.
+     *
      * @param command The command given by user input.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param count The current number of tasks stored inside the Task Arraylist.
-     * @param ui UI structure to show the user correct message.
+     * @param tasks   The Task Arraylist containing user tasks in sequence.
+     * @param count   The current number of tasks stored inside the Task Arraylist.
+     * @param ui      UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
-    public String done(String command, TaskList tasks, int count, Ui ui) throws DukeException{
+    public String done(String command, TaskList tasks, int count, Ui ui) throws DukeException {
         if (command.length() < 6) {
             throw new DukeException("OOPS!!! The item number cannot be empty.");
         }
@@ -138,10 +145,11 @@ public class Parser {
 
     /**
      * Delete the task corresponding to the number input by the user.
+     *
      * @param command The command given by user input.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param count The current number of tasks stored inside the Task Arraylist.
-     * @param ui UI structure to show the user correct message.
+     * @param tasks   The Task Arraylist containing user tasks in sequence.
+     * @param count   The current number of tasks stored inside the Task Arraylist.
+     * @param ui      UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
@@ -158,12 +166,13 @@ public class Parser {
         tasks.getTaskList().remove(itemNum - 1);
         taskDeleted();
         return ui.showDeleteMsg(taskRemoved, totalTasks);
-   }
+    }
 
     /**
      * List out all user inputs in sequence.
+     *
      * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct message.
+     * @param ui    UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      */
     public String list(TaskList tasks, Ui ui) {
@@ -172,9 +181,10 @@ public class Parser {
 
     /**
      * Find tasks matching the keyword in the command given by the user.
+     *
      * @param command The command given by user input.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param ui UI structure to show the user correct message.
+     * @param tasks   The Task Arraylist containing user tasks in sequence.
+     * @param ui      UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the user input is invalid.
      */
@@ -188,6 +198,7 @@ public class Parser {
 
     /**
      * Tells the user that the input given is invalid.
+     *
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the user input is invalid.
      */
@@ -197,6 +208,7 @@ public class Parser {
 
     /**
      * Terminate the GUI when the user decides to.
+     *
      * @return Nothing since this command will close the GUI.
      */
     public String exitCommand() {

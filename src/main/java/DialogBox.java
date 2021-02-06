@@ -51,7 +51,7 @@ public class DialogBox extends HBox {
         clip.setArcWidth(100);
         clip.setArcHeight(100);
         displayPicture.setClip(clip);
-        dialog.setPadding(new Insets(0,10,0,10));
+        dialog.setPadding(new Insets(0, 10, 0, 10));
 
         this.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(20), Insets.EMPTY)));
     }

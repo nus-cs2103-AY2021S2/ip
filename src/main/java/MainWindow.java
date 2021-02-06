@@ -4,7 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
 
@@ -30,7 +31,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.setPadding(new Insets(10,0,0,10));
+        dialogContainer.setPadding(new Insets(10, 0, 0, 10));
         dialogContainer.setSpacing(10);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(ui.showWelcomeMsg(), dukeImage)

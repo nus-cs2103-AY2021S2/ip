@@ -11,7 +11,9 @@ import java.util.List;
 
 public class Storage {
 
-    /** Default path to store the user tasks. */
+    /**
+     * Default path to store the user tasks.
+     */
     public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
     public TaskList tasks;
 
@@ -21,6 +23,7 @@ public class Storage {
 
     /**
      * Read file if it exist, else will create a new file with the name.
+     *
      * @throws IOException Throw IO exception.
      */
     public void readOrCreateFile() throws IOException {
@@ -35,7 +38,8 @@ public class Storage {
 
     /**
      * Read the existing task file and create the list of tasks when the program is run.
-     * @param file The name of the file.
+     *
+     * @param file  The name of the file.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      */
     public void readFileIntoList(String file, TaskList tasks) {
@@ -47,7 +51,7 @@ public class Storage {
             e.printStackTrace();
         }
 
-        for (String object: lines) {
+        for (String object : lines) {
             if (object.charAt(1) == 'T') {
                 if (object.charAt(4) == '-') {
                     tasks.add(new Todo(object.substring(7), true));
@@ -76,12 +80,13 @@ public class Storage {
 
     /**
      * Update the tasks into the file at the end of the program.
+     *
      * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
      */
     public void writeListIntoFile() throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(DEFAULT_STORAGE_FILEPATH);
         ArrayList<Task> items = tasks.getTaskList();
-        for (Task item: items) {
+        for (Task item : items) {
             writer.println(item.toString());
         }
         writer.close();
