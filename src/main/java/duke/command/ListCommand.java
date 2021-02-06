@@ -8,6 +8,8 @@ import duke.TaskList;
  */
 public class ListCommand extends Command {
 
+    private static final String MESSAGE_LIST_EMPTY = "List is empty";
+
     /**
      * Execute and print a list command.
      *
@@ -17,7 +19,7 @@ public class ListCommand extends Command {
     @Override
     public String executeAndPrint(TaskList list) throws DukeException {
         if (list.getSize() == 0) {
-            return "List is empty.\n";
+            return MESSAGE_LIST_EMPTY + "\n";
         } else {
             return list.formatList();
         }

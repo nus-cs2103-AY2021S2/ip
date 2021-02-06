@@ -18,6 +18,25 @@ import duke.task.Todo;
  */
 public class Storage {
 
+
+    private static final int POSITION_DONE = 4;
+    private static final int POSITION_AT = 8;
+
+    private static final char MARK_TASK = 'T';
+    private static final char MARK_DEADLINE = 'D';
+    private static final char MARK_DONE = '0';
+    private static final String MARK_AT = "@@@";
+    private static final String MARK_SEPARATE = " | ";
+    private static final String MARK_STATUS_ZERO = "0";
+    private static final String MARK_STATUS_ONE = "1";
+
+    private static final String FILE_PATH = "data";
+    private static final String FILE_NAME = "data.txt";
+
+    private static final String ERROR_SAVE = "Unable to save file.";
+
+
+
     // Output date and time in this manner.
     private static final DateTimeFormatter FORMAT_PRINT =
             DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
@@ -33,25 +52,25 @@ public class Storage {
      */
     public static Task loadData(String command) {
 
-        if (command.charAt(0) == 'T') {
-            Todo result = new Todo(command.substring(8));
-            if (command.charAt(4) != '0') {
+        if (command.charAt(0) == MARK_TASK) {
+            Todo result = new Todo(command.substring(POSITION_AT));
+            if (command.charAt(POSITION_DONE) != MARK_DONE) {
                 result.markAsDone();
             }
             return result;
-        } else if (command.charAt(0) == 'D') {
-            int position = command.indexOf("@@@");
-            Deadline result = new Deadline(command.substring(8, position - 1),
-                    LocalDateTime.from(FORMAT_PRINT.parse(command.substring(position + 3))));
-            if (command.charAt(4) != '0') {
+        } else if (command.charAt(0) == MARK_DEADLINE) {
+            int position = command.indexOf(MARK_AT);
+            Deadline result = new Deadline(command.substring(POSITION_AT, position - 1),
+                    LocalDateTime.from(FORMAT_PRINT.parse(command.substring(position + MARK_AT.length()))));
+            if (command.charAt(POSITION_DONE) != MARK_DONE) {
                 result.markAsDone();
             }
             return result;
         } else {
-            int position = command.indexOf("@@@");
-            Event result = new Event(command.substring(8, position - 1),
-                    LocalDateTime.from(FORMAT_PRINT.parse(command.substring(position + 3))));
-            if (command.charAt(4) != '0') {
+            int position = command.indexOf(MARK_AT);
+            Event result = new Event(command.substring(POSITION_AT, position - 1),
+                    LocalDateTime.from(FORMAT_PRINT.parse(command.substring(position + MARK_AT.length()))));
+            if (command.charAt(POSITION_DONE) != MARK_DONE) {
                 result.markAsDone();
             }
             return result;
@@ -65,12 +84,14 @@ public class Storage {
      * @return Output string that need to be written into save data.
      */
     public static String saveData(Task task) {
-        if (task.getSaveType() == "T") {
-            return task.getSaveType() + " | " + (task.getStatus() ? "1" : "0")
-                    + " | " + task.getDescription() + "\n";
+        if (task.getSaveType().charAt(0) == MARK_TASK) {
+            return task.getSaveType() + MARK_SEPARATE
+                    + (task.getStatus() ? MARK_STATUS_ONE : MARK_STATUS_ZERO)
+                    + MARK_SEPARATE + task.getDescription() + "\n";
         } else {
-            return task.getSaveType() + " | " + (task.getStatus() ? "1" : "0")
-                    + " | " + task.getDescription() + " @@@" + task.getSaveTime() + "\n";
+            return task.getSaveType() + MARK_SEPARATE
+                    + (task.getStatus() ? MARK_STATUS_ONE : MARK_STATUS_ZERO)
+                    + MARK_SEPARATE + task.getDescription() + " " + MARK_AT + task.getSaveTime() + "\n";
         }
     }
 
@@ -80,11 +101,11 @@ public class Storage {
      * @throws IOException When unable to create a file due to any security reason.
      */
     public static void init() throws IOException {
-        File dir = new File("data");
+        File dir = new File(FILE_PATH);
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        file = new File("data" + File.separatorChar + "data.txt");
+        file = new File(FILE_PATH + File.separatorChar + FILE_NAME);
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -120,7 +141,7 @@ public class Storage {
             writer.write(saveData);
             writer.close();
         } catch (IOException e) {
-            System.out.println("Unable to save file.");
+            System.out.println(ERROR_SAVE);
         }
     }
 }

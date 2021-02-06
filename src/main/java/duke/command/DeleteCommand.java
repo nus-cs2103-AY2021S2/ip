@@ -9,6 +9,11 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
+    private static final int LENGTH_DELETE = "delete ".length();
+
+    private static final String ERROR_INCORRECT_FORMAT = "Invalid Argument: Input must to be integer";
+    private static final String MESSAGE_OBJECT_NOT_FOUND = "No such task in the list";
+
     private final String command;
 
     /**
@@ -30,9 +35,9 @@ public class DeleteCommand extends Command {
     public String executeAndPrint(TaskList list) throws DukeException {
         int index;
         try {
-            index = Integer.parseInt(command.substring(7)) - 1;
+            index = Integer.parseInt(command.substring(LENGTH_DELETE)) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid Argument: Input must to be integer.");
+            throw new DukeException(ERROR_INCORRECT_FORMAT);
         }
         if (index < list.getSize() && index >= 0) {
             Task currTask = list.getJob(index);
@@ -42,7 +47,7 @@ public class DeleteCommand extends Command {
                     + "Now you have " + list.getSize()
                     + (list.getSize() == 1 ? " task in the list.\n" : " tasks in the list.\n");
         } else {
-            return "No such task in the list.\n";
+            return MESSAGE_OBJECT_NOT_FOUND + "\n";
         }
     }
 
