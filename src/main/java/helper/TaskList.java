@@ -25,6 +25,7 @@ public class TaskList {
      * @return
      */
     public Task get(int index) {
+        assert taskList != null;
         return taskList.get(index);
     }
 
@@ -33,6 +34,7 @@ public class TaskList {
      * @param task
      */
     public void add(Task task) {
+        assert taskList != null;
         taskList.add(task);
     }
 
@@ -41,6 +43,7 @@ public class TaskList {
      * @param index
      */
     public void remove(int index) {
+        assert taskList != null;
         taskList.remove(index);
     }
 
@@ -49,6 +52,7 @@ public class TaskList {
      * @return Size of tasklist
      */
     public int size() {
+        assert taskList != null;
         return taskList.size();
     }
 
@@ -57,6 +61,7 @@ public class TaskList {
      * @return List of tasks
      */
     public List<Task> getTaskList() {
+        assert taskList != null;
         return taskList;
     }
 }

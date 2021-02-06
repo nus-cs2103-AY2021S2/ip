@@ -73,6 +73,7 @@ public class Duke {
 
     public String getResponse(String input) {
         String response = "";
+        assert response.equals("");
         try {
             Command c = parser.parse(input);
             response = c.execute(tasks, ui, storage);
