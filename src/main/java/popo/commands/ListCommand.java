@@ -18,15 +18,19 @@ public class ListCommand extends Command {
         if (taskList.isEmpty()) {
             return new CommandResult(false, MESSAGE_EMPTY_TASKLIST);
         }
+        String taskListAsString = getTaskListAsString();
+        String trimmedTaskListDescription = taskListAsString.trim();
+        return new CommandResult(false,
+                MESSAGE_SHOW_TASKLIST + "\n",
+                trimmedTaskListDescription);
+    }
+
+    private String getTaskListAsString() {
         StringBuilder taskListAsString = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
             taskListAsString.append(String.format(MESSAGE_INDEX_TASK_FORMAT, i, taskList.getTask(i - 1)));
-            if (i != taskList.size()) {
-                taskListAsString.append("\n");
-            }
+            taskListAsString.append("\n");
         }
-        return new CommandResult(false,
-                MESSAGE_SHOW_TASKLIST + "\n",
-                taskListAsString.toString());
+        return taskListAsString.toString();
     }
 }

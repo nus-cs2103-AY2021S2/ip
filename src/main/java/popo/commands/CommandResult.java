@@ -15,7 +15,7 @@ public class CommandResult {
      * and sets whether the application will be exiting after the command.
      *
      * @param isExiting Boolean that sets whether the application is exiting.
-     * @param messages Arguments that represent the messages to show to user.
+     * @param messages  Arguments that represent the messages to show to user.
      */
     public CommandResult(boolean isExiting, String... messages) {
         updatedTaskList = null;
@@ -32,8 +32,8 @@ public class CommandResult {
      * and sets whether the application will be exiting after the command.
      *
      * @param updatedTaskList Updated task list after execution of a command.
-     * @param isExiting Boolean that sets whether the application is exiting.
-     * @param messages Arguments that represent the messages to show to user.
+     * @param isExiting       Boolean that sets whether the application is exiting.
+     * @param messages        Arguments that represent the messages to show to user.
      */
     public CommandResult(TaskList updatedTaskList, boolean isExiting, String... messages) {
         this.updatedTaskList = updatedTaskList;
@@ -79,7 +79,7 @@ public class CommandResult {
      *
      * @param obj The object to compare this {@code CommandResult} against.
      * @return True if the given object represents a {@code CommandResult} equivalent to this CommandResult,
-     *         false otherwise.
+     * false otherwise.
      */
     @Override
     public boolean equals(Object obj) {

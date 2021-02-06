@@ -29,21 +29,26 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        String tasksWithSearchWord = findTasks();
+        String trimmedTasksString = tasksWithSearchWord.trim();
+
+        if (trimmedTasksString.length() == 0) {
+            return new CommandResult(false, MESSAGE_NO_MATCHES);
+        }
+        return new CommandResult(false,
+                MESSAGE_FOUND_TASKS + "\n",
+                trimmedTasksString);
+    }
+
+    private String findTasks() {
         StringBuilder tasksWithSearchWord = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.getTask(i - 1);
             if (task.getName().contains(searchWord)) {
-                tasksWithSearchWord.append(String.format(MESSAGE_INDEX_TASK_FORMAT, i, taskList.getTask(i - 1)));
+                tasksWithSearchWord.append(String.format(MESSAGE_INDEX_TASK_FORMAT, i, task.toString()));
                 tasksWithSearchWord.append("\n");
             }
         }
-        if (tasksWithSearchWord.length() == 0) {
-            return new CommandResult(false, MESSAGE_NO_MATCHES);
-        }
-
-        tasksWithSearchWord.deleteCharAt(tasksWithSearchWord.length() - 1);
-        return new CommandResult(false,
-                MESSAGE_FOUND_TASKS + "\n",
-                tasksWithSearchWord.toString());
+        return tasksWithSearchWord.toString();
     }
 }

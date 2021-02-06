@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Creates a {@code Ui} object that handles the GUI.
      *
-     * @param storage {@code Storage} object that handles file operations.
+     * @param storage  {@code Storage} object that handles file operations.
      * @param taskList The loaded task list from storage.
      */
     public Ui(Storage storage, TaskList taskList) {
@@ -36,14 +36,24 @@ public class Ui {
     public void start(Stage primaryStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            VBox vBox = fxmlLoader.load();
-            Scene scene = new Scene(vBox);
+            VBox mainWindow = fxmlLoader.load();
             fxmlLoader.<MainWindow>getController().setComponents(storage, taskList, primaryStage);
+            fxmlLoader.<MainWindow>getController().addWelcomeMessage();
+
+            Scene scene = new Scene(mainWindow);
             scene.getStylesheets().add(Main.class.getResource("/view/Styles.css").toExternalForm());
+
+            setStageTitleAndSize(primaryStage);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void setStageTitleAndSize(Stage primaryStage) {
+        primaryStage.setTitle("Popo");
+        primaryStage.setMinWidth(500.0);
+        primaryStage.setMinHeight(400.0);
     }
 }

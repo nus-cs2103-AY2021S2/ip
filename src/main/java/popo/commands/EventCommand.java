@@ -21,7 +21,7 @@ public class EventCommand extends Command {
     /**
      * Creates an {@code EventCommand} object with the given task name and description of the event time.
      *
-     * @param taskName Name of the task.
+     * @param taskName  Name of the task.
      * @param eventTime Description of the event time.
      */
     public EventCommand(String taskName, String eventTime) {
