@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
+import checklst.exception.ChecklstException;
 import checklst.gui.DialogBox;
 import checklst.parser.Parser;
 import checklst.storage.Storage;
@@ -44,35 +45,33 @@ public class Checklst extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    /**
-     * The main function of the Checklst Program.
-     * Creates and initializes an instance of Checklst and runs it.
-     * @param args CLI Arguments.
-     */
-    public static void main(String[] args) {
-        Checklst checklst = new Checklst();
-        checklst.run();
-    }
-
     @Override
     public void start(Stage stage) {
 
-        // Get History
-        String[] input;
-
         try {
-            String[] pastCommandHistory = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
-            for (String command: pastCommandHistory) {
-                if (command.equals("")) {
-                    continue;
-                }
-                input = command.split(" ", 2);
-                this.parser.parseHistoryCommand(input, this.taskList, this.storage);
+            String[] history = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
+            for (String task: history) {
+                this.parser.parseHistory(task, this.taskList);
             }
-            this.ui.sendOutput("History successfully restored!");
         } catch (InvalidPathException | IOException e) {
-            this.ui.sendOutput("No history found... Initializing from blank state!");
+            
+        } catch (ChecklstException e) {
+
         }
+
+        // try {
+        //     String[] pastCommandHistory = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
+        //     for (String command: pastCommandHistory) {
+        //         if (command.equals("")) {
+        //             continue;
+        //         }
+        //         input = command.split(" ", 2);
+        //         this.parser.parseHistoryCommand(input, this.taskList, this.storage);
+        //     }
+        //     this.ui.sendOutput("History successfully restored!");
+        // } catch (InvalidPathException | IOException e) {
+        //     this.ui.sendOutput("No history found... Initializing from blank state!");
+        // }
 
         //Step 1. Formatting the window to look as expected.
         scrollPane = new ScrollPane();
@@ -155,7 +154,7 @@ public class Checklst extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return parser.parse(input.split(" ", 2), this.ui, this.taskList, this.storage);
+        return parser.parse(input.split(" ", 2), this.ui, this.taskList);
     }
 
     private void addDukeMessage(String input) {
@@ -170,41 +169,7 @@ public class Checklst extends Application {
 
     @Override
     public void stop() throws Exception {
-        this.storage.saveToFile();
-    }
-
-    /**
-     * Main function to run the Checklst Program.
-     */
-    public void run() {
-
-        String[] input;
-
-        try {
-            String[] pastCommandHistory = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
-            for (String command: pastCommandHistory) {
-                if (command.equals("")) {
-                    continue;
-                }
-                input = command.split(" ", 2);
-                this.parser.parseHistoryCommand(input, this.taskList, this.storage);
-            }
-            this.ui.sendOutput("History successfully restored!");
-        } catch (InvalidPathException | IOException e) {
-            this.ui.sendOutput("No history found... Initializing from blank state!");
-        }
-
-        this.ui.sendWelcome();
-
-        input = ui.readCommand();
-
-        while (!input[0].equals("bye")) {
-            this.parser.parse(input, ui, this.taskList, storage);
-            input = ui.readCommand();
-        }
-
-        this.ui.sendOutput("Bye! Hope to see you again!");
-
+        this.storage.saveToFile(this.taskList);
     }
 
 }

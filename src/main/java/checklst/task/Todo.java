@@ -27,6 +27,29 @@ public class Todo extends Task {
         return new Todo(name);
     }
 
+    public static Todo parseTodo(String input) {
+        String[] splitInput = input.split(" ; ");
+        String name = splitInput[2];
+        boolean completed = splitInput[1].equals("X") ? true : false;
+
+        return new Todo(name, completed);
+    }
+
+    @Override
+    public String export() {
+        String output = "T ; ";
+        
+        if (this.completed) {
+            output += "X ; ";
+        } else {
+            output += "O ; ";
+        }
+
+        output += this.name;
+
+        return output;
+    }
+
     @Override
     public Task complete() {
         return new Todo(this.name, true);

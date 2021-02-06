@@ -103,7 +103,7 @@ public class TaskList {
         return taskListOutput;
     }
 
-    protected List<Task> getTaskList() {
+    public List<Task> getTaskList() {
         return this.taskList;
     }
 
