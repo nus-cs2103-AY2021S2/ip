@@ -75,7 +75,7 @@ public class Storage {
                     taskList.add(taskInList);
                     break;
                 default:
-
+                    // do nothing
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -91,18 +91,18 @@ public class Storage {
      * @param data : the user's task list
      */
     public void writeData(List<Task> data) {
-        StringBuilder stringOfData = new StringBuilder();
+        String stringOfData = "";
         for (int i = 0; i < data.size(); i++) {
             if (i == data.size() - 1) {
-                stringOfData.append(data.get(i).toString());
+                stringOfData += data.get(i).toString();
             } else {
-                stringOfData.append(data.get(i).toString()).append("\n");
+                stringOfData += data.get(i).toString() + "\n";
             }
         }
         try {
-            Files.writeString(Paths.get(this.filePath), stringOfData.toString());
+            Files.writeString(Paths.get(this.filePath), stringOfData);
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            System.err.println(e);
         }
     }
 }
