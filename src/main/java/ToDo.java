@@ -9,8 +9,8 @@ public class ToDo extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return "T | " + (isDone() ? "1" : "0") +
-                " | " + this.getTaskName();
+        return "T | " + (isDone() ? "1" : "0")
+                + " | " + this.getTaskName();
     }
 
 
