@@ -2,17 +2,6 @@ package duke;
 
 import java.util.List;
 
-import javafx.application.Application;
-import javafx.scene.layout.Region;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownInputException;
 import duke.tasks.DeadlineTask;
@@ -69,6 +58,8 @@ public class Duke{
                 
                 switch (parsedInput[0]) {
                 case "todo":
+                    
+                    assert parsedInput.length > 1 : "Something went wrong with the parsing!";
                     toReply += ui.addPrint();
                     ToDoTask todo = tasks.handleToDoTask(input);
                     toReply += ui.printTask(todo);
@@ -77,7 +68,8 @@ public class Duke{
                     break;
 
                 case "deadline":
-                    
+    
+                    assert parsedInput.length > 1 : "Something went wrong with the parsing!";
                     toReply += ui.addPrint();
 
                     DeadlineTask deadlineTask = tasks.handleDeadlineTask(input);
@@ -89,6 +81,7 @@ public class Duke{
 
                 case "event":
     
+                    assert parsedInput.length > 1 : "Something went wrong with the parsing!";
                     toReply += ui.addPrint();
 
                     EventTask eventTask = tasks.handleEventTask(input);
@@ -104,6 +97,8 @@ public class Duke{
                     break;
 
                 case "done":
+    
+                    assert parsedInput.length > 1 : "Something went wrong with the parsing!";
                     int number = Integer.valueOf(parsedInput[1]);
     
                     toReply += ui.printMarked();
@@ -115,7 +110,8 @@ public class Duke{
                     break;
 
                 case "check":
-
+    
+                    assert parsedInput.length > 1 : "Something went wrong with the parsing!";
                     String result = tasks.findOnDateTasks((parsedInput[1]));
     
                     toReply += ui.print(result);
@@ -126,6 +122,8 @@ public class Duke{
                     break;
 
                 case "delete":
+    
+                    assert parsedInput.length > 1 : "Something went wrong with the parsing!";
                     int index = Integer.valueOf(parsedInput[1]);
     
                     toReply += ui.printRemoved();
@@ -138,6 +136,8 @@ public class Duke{
                     break;
 
                 case "find":
+    
+                    assert parsedInput.length > 1 : "Something went wrong with the parsing!";
                     String keyword = parsedInput[1];
     
                     toReply += ui.printMatching();
