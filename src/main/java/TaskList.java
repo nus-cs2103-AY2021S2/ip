@@ -71,22 +71,16 @@ public class TaskList {
      * Deletes an item at a specific index in the data structure.
      * @param index Index where the task object is to be deleted.
      */
-    public void remove(int index) throws IllegalKeywordException {
+    public void remove(int index) {
         Task toRemove = overallArray.get(index);
-        switch (toRemove.getTaskType()) {
-        case 1: {
+        if (toRemove.getTaskType() == 0) {
             todoArray.remove(toRemove);
+            System.out.println(toRemove.toString());
             mergeArrays();
-        }
-        case 2:
-        case 3: {
+        } if (toRemove.getTaskType() == 1 || toRemove.getTaskType() == 2) {
             eventDeadlineArray.remove((EventDeadline) toRemove);
             mergeArrays();
             sortByDate(eventDeadlineArray);
-        }
-        default: {
-            throw new IllegalKeywordException("No type of task specified");
-        }
         }
     }
 
