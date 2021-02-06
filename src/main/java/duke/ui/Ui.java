@@ -167,4 +167,20 @@ public class Ui {
     public void showFileCreationError() {
         System.out.println("Error happened while trying to create save file");
     }
+
+    /**
+     * Returns a message to indicate wrong duration format.
+     *
+     * @return String indicating wrong duration format.
+     */
+    public String getWrongDurationFormatString() {
+        return "Please enter an integer value in minutes for duration.";
+    }
+
+    /**
+     * Prints a message indicating invalid duration format in save file.
+     */
+    public void showInvalidSaveFileDurationFormat() {
+        System.out.println("Error: Invalid duration format in save file.");
+    }
 }
