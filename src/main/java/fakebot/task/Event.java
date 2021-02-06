@@ -67,4 +67,18 @@ public class Event extends Task {
         String endDateTimeString = printDateFormat.format(endDate) + " " + printTimeFormat.format(endTime);
         return "[E]" + super.toString() + " (from: " + startDateTimeString + " to " + endDateTimeString + ")";
     }
+
+    @Override
+    public boolean equals(Object other) {
+        boolean sameSuperClass = super.equals(other);
+        if(!sameSuperClass || !(other instanceof Event)) {
+            return false;
+        }
+        Event e2 = (Event) other;
+        boolean sameStartDate = getStartDate().equals(e2.getStartDate());
+        boolean sameStartTime = getStartTime().equals(e2.getStartTime());
+        boolean sameEndDate = getEndDate().equals(e2.getEndDate());
+        boolean sameEndTime = getEndTime().equals(e2.getEndTime());
+        return sameStartDate && sameStartTime && sameEndDate && sameEndTime;
+    }
 }

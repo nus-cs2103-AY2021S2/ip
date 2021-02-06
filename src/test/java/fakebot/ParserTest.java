@@ -2,10 +2,12 @@ package fakebot;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import fakebot.command.Command;
 import org.junit.jupiter.api.Test;
 
 import fakebot.task.Deadline;
@@ -157,5 +159,29 @@ class ParserTest {
         Task task = Parser.convertStringToTask(Parser.convertTaskToString(deadline));
         deadline = (Deadline) task;
         assertEquals(timeString, deadline.getDeadlineTime(), "Deadline Time does not match");
+    }
+
+    @Test
+    void parseUserInputToCommand_noError() {
+        String[] userInputs = {
+                "todo test",
+                "deadline test /by 2011-01-10 01:01",
+                "event test /at 2011-01-10 02:01 2012-01-10 02:03",
+                "done 1",
+                "delete 1",
+                "find test",
+                "list",
+                "bye"
+        };
+
+        FakeBot fakeBot = new FakeBot("","");
+        try {
+            for (String input : userInputs) {
+                Command command = Parser.parseUserInputToCommand(input);
+                String outputText = fakeBot.processCommand(command);
+            }
+        }catch (Exception e) {
+            assertTrue(false, e.getMessage());
+        }
     }
 }
