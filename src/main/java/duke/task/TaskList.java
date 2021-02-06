@@ -140,8 +140,8 @@ public class TaskList {
      * @return List of tasks.
      */
     public Task[] getFilteredTaskList(String... searchParameters) {
-        return tasks.stream().filter(x -> Arrays.stream(searchParameters).anyMatch(
-            x.description.toLowerCase()::contains)).toArray(Task[]::new);
+        return tasks.stream().filter(x -> Arrays.stream(searchParameters)
+                    .anyMatch(x.description.toLowerCase()::contains)).toArray(Task[]::new);
     }
 
     /**
