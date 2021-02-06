@@ -19,6 +19,7 @@ public class Ui {
      * @param totalTasks Total number of tasks in the list.
      */
     public String showTodoMsg(TaskList tasks, int totalTasks) {
+        assert tasks.getSize() >= 0: tasks.getSize();
         return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(totalTasks - 1).toString() + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
