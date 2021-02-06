@@ -67,6 +67,7 @@ public class MainWindow extends AnchorPane {
 	@FXML
 	private void handleUserInput() {
 		String input = userInput.getText();
+		TaskList tasks = loadTasks();
 		if (this.alice == null) {
 			alice = new Alice(loadTasks(), false);
 		}
@@ -74,6 +75,9 @@ public class MainWindow extends AnchorPane {
 		String response = alice.getCurrentMessage();
 		if (alice.hasDelta() && !saveTasks(alice.getData())) {
 			System.out.println("Error saving tasks to " + getDataPath());
+		}
+		if (alice.getIsDone()) {
+			System.exit(0);
 		}
 		dialogContainer.getChildren().addAll(
 				DialogBox.getUserDialog(input, userImage),

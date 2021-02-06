@@ -22,7 +22,7 @@ public class TaskDeadline extends Task {
 
 	@Override
 	public TaskDeadline clone() {
-		return new TaskDeadline(this.name, this.done, this.deadline);
+		return new TaskDeadline(this.name, this.isDone, this.deadline);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ import alice.command.CommandAdd;
 import alice.command.CommandEcho;
 import alice.command.CommandList;
 import alice.command.Parser;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

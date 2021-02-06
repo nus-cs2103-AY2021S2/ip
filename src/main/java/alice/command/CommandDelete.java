@@ -37,13 +37,13 @@ public class CommandDelete extends Command {
 			List<Task> dataList = agent.getData().getTasks().stream().map(Task::clone).collect(Collectors.toList());
 			dataList.remove(index - 1);
 			String response = String.format(SUCCESS_MESSAGE, agent.getData().getTasks().get(index - 1));
-			newAgent = new Alice(response, new TaskList(dataList), agent.getDone(), true);
+			newAgent = new Alice(response, new TaskList(dataList), agent.getIsDone(), true);
 		} catch (NumberFormatException numberFormatException) {
-			newAgent = new Alice("Invalid number", agent.getData(), agent.getDone(), false);
+			newAgent = new Alice("Invalid number", agent.getData(), agent.getIsDone(), false);
 		} catch (AliceException aliceException) {
-			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getDone(), false);
+			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getIsDone(), false);
 		} catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-			newAgent = new Alice(USAGE, agent.getData(), agent.getDone(), false);
+			newAgent = new Alice(USAGE, agent.getData(), agent.getIsDone(), false);
 		}
 		return newAgent;
 	}

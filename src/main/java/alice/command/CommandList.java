@@ -27,7 +27,7 @@ public class CommandList extends Command {
 					.mapToObj(i -> (i + 1) + "." + agent.getData().getTasks().get(i))
 					.collect(Collectors.joining("\n"));
 		}
-		return new Alice(response, agent.getData(), agent.getDone(), false);
+		return new Alice(response, agent.getData(), agent.getIsDone(), false);
 	}
 
 	/**

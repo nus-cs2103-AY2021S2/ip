@@ -22,7 +22,7 @@ public class TaskEvent extends Task {
 
 	@Override
 	public TaskEvent clone() {
-		return new TaskEvent(this.name, this.done, this.time);
+		return new TaskEvent(this.name, this.isDone, this.time);
 	}
 
 	@Override

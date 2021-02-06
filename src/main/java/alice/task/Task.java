@@ -7,24 +7,20 @@ public abstract class Task implements Cloneable, java.io.Serializable {
 	protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy L dd, E");
 
 	protected final String name;
-	protected final boolean done;
+	protected final boolean isDone;
 
 	public Task(String name) {
 		this.name = name;
-		this.done = false;
+		this.isDone = false;
 	}
 
-	public Task(String name, boolean done) {
+	public Task(String name, boolean isDone) {
 		this.name = name;
-		this.done = done;
+		this.isDone = isDone;
 	}
 
 	public String getName() {
 		return this.name;
-	}
-
-	public boolean getDone() {
-		return this.done;
 	}
 
 	public abstract Task setDone(boolean done);
@@ -34,7 +30,7 @@ public abstract class Task implements Cloneable, java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("[%s] %s", this.done ? "\u2713" : "\u2718", this.name);
+		return String.format("[%s] %s", this.isDone ? "\u2713" : "\u2718", this.name);
 	}
 
 	@Override
@@ -49,13 +45,13 @@ public abstract class Task implements Cloneable, java.io.Serializable {
 		if (!this.name.equals(task.name)) {
 			return false;
 		}
-		return this.done == task.done;
+		return this.isDone == task.isDone;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = name != null ? name.hashCode() : 0;
-		result = 31 * result + (done ? 1 : 0);
+		result = 31 * result + (isDone ? 1 : 0);
 		return result;
 	}
 }

@@ -12,7 +12,7 @@ import alice.task.TaskList;
 public class Alice {
 	public static final String GREETING = "Hello!";
 
-	private final boolean done;
+	private final boolean isDone;
 	private final boolean hasDelta;
 	private final String currentMessage;
 	private final TaskList data;
@@ -21,13 +21,13 @@ public class Alice {
 	 * Constructs a new agent specifying tasks and if it's done.
 	 *
 	 * @param newData The tasks to be specified.
-	 * @param done If the agent is done operating.
+	 * @param isDone If the agent is done operating.
 	 */
-	public Alice(TaskList newData, boolean done) {
+	public Alice(TaskList newData, boolean isDone) {
 		this.currentMessage = String.format("%s\nInitialized with %d tasks",
 				GREETING, newData.count());
 		this.data = newData;
-		this.done = done;
+		this.isDone = isDone;
 		this.hasDelta = false;
 	}
 
@@ -37,13 +37,13 @@ public class Alice {
 	 *
 	 * @param currentMessage The agent's response.
 	 * @param newData The tasks to be specified.
-	 * @param done If the agent is done operating.
+	 * @param isDone If the agent is done operating.
 	 * @param hasDelta If the data in the agent has changed from some other instance.
 	 */
-	public Alice(String currentMessage, TaskList newData, boolean done, boolean hasDelta) {
+	public Alice(String currentMessage, TaskList newData, boolean isDone, boolean hasDelta) {
 		this.currentMessage = currentMessage;
 		this.data = newData;
-		this.done = done;
+		this.isDone = isDone;
 		this.hasDelta = hasDelta;
 	}
 
@@ -52,8 +52,8 @@ public class Alice {
 	 *
 	 * @return True if the agent is no longer expecting any command otherwise false.
 	 */
-	public boolean getDone() {
-		return done;
+	public boolean getIsDone() {
+		return isDone;
 	}
 
 	/**
