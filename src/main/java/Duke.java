@@ -65,7 +65,7 @@ public class Duke {
      * @throws DukeException If command cannot be executed.
      */
     public String runUserCommand(Command command, String[] tokens) throws DukeException {
-        String message;
+        String message = null;
         switch (command) {
         case BYE:
             message = Ui.GOODBYE_MESSAGE;
@@ -94,13 +94,18 @@ public class Duke {
         case LIST:
             message = Ui.getAllTasksMessage(taskList.getTasks());
             break;
-        default:
+        case TODO:
+        case DEADLINE:
+        case EVENT:
             try {
                 Task task = taskList.addTask(command, tokens[1].trim());
                 message = Ui.getSuccessfullyAddedTaskMessage(taskList.getSize(), task);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new IncompleteInputException(command);
             }
+            break;
+        default:
+            assert false : "command not recognised";
         }
 
         saveData();
