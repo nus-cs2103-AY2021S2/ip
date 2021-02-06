@@ -13,6 +13,7 @@ public class Duke {
      *  @param filePath Relative filepath to persistent storage.
      */
     public Duke(String filePath) {
+        assert filePath.length() > 0 : "Empty Filepath";
         tm = new TaskManager();
         st = new Storage(filePath);
         try {

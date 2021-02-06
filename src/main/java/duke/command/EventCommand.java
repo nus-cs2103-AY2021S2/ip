@@ -17,6 +17,7 @@ public class EventCommand extends Command {
      *  @param date Date of Event Task.
      */
     public EventCommand(String name, LocalDate date) {
+        assert name.length() > 0 : "Empty Name";
         this.name = name;
         this.date = date;
     }

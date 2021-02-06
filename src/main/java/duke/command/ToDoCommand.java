@@ -13,6 +13,7 @@ public class ToDoCommand extends Command {
      *  @param name Name of ToDo Task.
      */
     public ToDoCommand(String name) {
+        assert name.length() > 0 : "Empty Name";
         this.name = name;
     }
 
