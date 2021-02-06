@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.Locale;
+
 /**
  * A FindCommand is when the user wants to find tasks containing a particular keyword
  */
@@ -30,7 +32,7 @@ public class FindCommand extends Command {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < list.getSize(); i++) {
-            if (list.getItem(i).getDescription().contains(keyword)) {
+            if (list.getItem(i).getDescription().toLowerCase(Locale.ROOT).contains(keyword)) {
                 sb.append("\t");
                 sb.append(i + 1).append(". ").append(list.getItem(i));
                 sb.append("\n");
