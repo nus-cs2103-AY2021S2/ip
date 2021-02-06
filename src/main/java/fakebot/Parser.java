@@ -81,6 +81,8 @@ public class Parser {
             currentString.append(deadlines.getDeadlineDate());
             currentString.append(SPLIT_REGEX);
             currentString.append(deadlines.getDeadlineTime());
+        }else {
+            assert false : "Task being handle should be handle";
         }
         return currentString.toString();
     }
@@ -121,7 +123,9 @@ public class Parser {
         case DEADLINE:
             currentTask = new Deadlines(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]));
             break;
-        default: break;
+        default:
+            assert false : "String being parsed should be a type of parsed Task";
+            break;
         }
 
         if (Boolean.parseBoolean(parts[1])) {
