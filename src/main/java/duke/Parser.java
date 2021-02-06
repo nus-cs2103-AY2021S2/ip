@@ -20,13 +20,15 @@ public class Parser {
         String[] splitInput = userInput.split(" ", 2);
         String command = splitInput[0];
 
-        if (command.equals("list")) {
+        if (command.equals("bye")) {
+            return new ExitCommand();
+        } else if (command.equals("list")) {
             return new ListCommand();
-        } else if (command.equals("done")){
+        } else if (command.equals("done")) {
             return parseDone(splitInput[1]);
-        } else if (command.equals("delete")){
+        } else if (command.equals("delete")) {
             return parseDelete(splitInput[1]);
-        } else if (command.equals("find")){
+        } else if (command.equals("find")) {
             return parseFind(splitInput[1]);
         }else if (isValidTaskCommand(command)) {
             return parseTask(userInput);

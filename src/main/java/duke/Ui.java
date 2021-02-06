@@ -49,6 +49,7 @@ public class Ui {
         out.println(LINE_PREFIX + WELCOME_MESSAGE);
     }
 
+
     public void showBye() {
         out.println(LINE_PREFIX + EXIT_MESSAGE);
     }

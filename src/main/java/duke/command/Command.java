@@ -13,6 +13,10 @@ public abstract class Command {
         this.isExit = false;
     }
 
+    public void setExit(boolean exit) {
+        isExit = exit;
+    }
+
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
     public boolean isExit() {
