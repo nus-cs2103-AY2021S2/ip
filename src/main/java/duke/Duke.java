@@ -49,14 +49,12 @@ public class Duke {
             return msg;
         } catch (FileNotFoundException e) {
             taskList = new TaskList();
-            return "Cannot access file at specified location.\n" + e.getMessage();
+            String cannotAccessFileMsg = "Cannot access file at specified location.\n" + e.getMessage();
+            return cannotAccessFileMsg;
         } catch (InvalidTaskTypeException e) {
             taskList = new TaskList();
-            return "Erroneous task type in file. Please check your file again!";
+            String erroneousInput = "Erroneous task type in file. Please check your file again!";
+            return erroneousInput;
         }
-    }
-
-    public boolean isExit() {
-        return this.isExit;
     }
 }

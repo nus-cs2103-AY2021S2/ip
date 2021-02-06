@@ -36,29 +36,19 @@ public class TaskList {
     }
 
     private String getEmptyListInString() {
-        System.out.println("You have completed all tasks!");
-        return "You have completed all tasks!";
+        String completedAllTasksMsg = "You have completed all tasks!";
+        return completedAllTasksMsg;
     }
 
     private StringBuilder getNonEmptyListInString() {
-        System.out.println("Here are the tasks in your list:");
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list:");
         int counter = 1;
-        for (Task t : this.taskList) {
-            System.out.println(counter + ". " + t);
-            sb.append("\n" + counter + ". " + t);
+        for (Task task : this.taskList) {
+            System.out.println(counter + ". " + task);
+            stringBuilder.append("\n" + counter + ". " + task);
             counter++;
         }
-        return sb;
-    }
-
-    /**
-     * Prints the task at the specified position.
-     *
-     * @param pos position of task to be printed.
-     */
-    public void printTask(int pos) {
-        System.out.println(this.taskList.get(pos));
+        return stringBuilder;
     }
 
     public List<Task> getList() {
@@ -81,12 +71,5 @@ public class TaskList {
      */
     public void deleteTask(int pos) {
         this.taskList.remove(pos);
-    }
-
-    /**
-     * Prints the number of existing tasks in the list.
-     */
-    public void printNumTasksInList() {
-        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
     }
 }

@@ -6,7 +6,7 @@ import duke.utils.Storage;
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
-    private int position;
+    private final int position;
 
     /**
      * Creates a DoneCommand object to store the done command input from the user.
@@ -26,6 +26,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute() {
         this.taskList.setTaskDone(this.position);
-        return "Nice! I've marked this task as done:\n" + this.taskList.getList().get(this.position);
+        String markedDoneMsg = "Nice! I've marked this task as done:\n" + this.taskList.getList().get(this.position);
+        return markedDoneMsg;
     }
 }

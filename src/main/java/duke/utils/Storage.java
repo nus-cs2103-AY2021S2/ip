@@ -33,20 +33,20 @@ public class Storage {
     public TaskList loadFromFile() throws FileNotFoundException, InvalidTaskTypeException {
         File file = new File(filepath);
 
-        List<String> txt = new ArrayList<>();
+        List<String> txtInput = new ArrayList<>();
         if (file.exists()) {
             Scanner scannerFile = new Scanner(file);
             while (scannerFile.hasNextLine()) {
-                txt.add(scannerFile.nextLine());
+                txtInput.add(scannerFile.nextLine());
             }
             scannerFile.close();
         }
 
-        if (txt.size() == 0) {
+        if (txtInput.size() == 0) {
             return new TaskList();
         } else {
-            List<Task> converted = FileTaskStringConverter.allStringToAllTask(txt);
-            TaskList taskList = new TaskList(converted);
+            List<Task> convertedTaskList = FileTaskStringConverter.allStringToAllTask(txtInput);
+            TaskList taskList = new TaskList(convertedTaskList);
             taskList.getListInString();
             return taskList;
         }
@@ -60,14 +60,14 @@ public class Storage {
      */
     public void writeToFile(TaskList taskList) throws IOException {
         List<String> allStringTasks = FileTaskStringConverter.allTaskToAllString(taskList.getList());
-        FileWriter fw = new FileWriter(this.filepath);
+        FileWriter fileWriter = new FileWriter(this.filepath);
 
         StringBuilder text = new StringBuilder();
-        for (String s : allStringTasks) {
-            text.append(s).append("\n");
+        for (String stringTask : allStringTasks) {
+            text.append(stringTask).append("\n");
         }
 
-        fw.write(text.toString());
-        fw.close();
+        fileWriter.write(text.toString());
+        fileWriter.close();
     }
 }

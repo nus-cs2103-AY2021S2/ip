@@ -20,8 +20,8 @@ public class ByeCommand extends Command {
     public String execute() {
         try {
             this.storage.writeToFile(this.taskList);
-
-            return "Bye. Hope to see you again soon!";
+            String byeMsg = "Bye. Hope to see you again soon!";
+            return byeMsg;
         } catch (IOException e) {
             return e.getMessage();
         }

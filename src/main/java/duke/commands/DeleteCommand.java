@@ -6,7 +6,7 @@ import duke.utils.Storage;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
-    private int position;
+    private final int position;
 
     /**
      * Creates a DeleteCommand object to store the delete command input from the user.

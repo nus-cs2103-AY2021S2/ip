@@ -9,8 +9,8 @@ import duke.utils.Storage;
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
 
-    private String task;
-    private LocalDateTime dateTime;
+    private final String task;
+    private final LocalDateTime dateTime;
 
     /**
      * Creates a EventCommand object to store the event command input from the user.
@@ -31,8 +31,9 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute() {
-        Event e = new Event(this.task, this.dateTime);
-        this.taskList.addTask(e);
-        return "Got it. I've added this task:\n" + e;
+        Event event = new Event(this.task, this.dateTime);
+        this.taskList.addTask(event);
+        String successAddMsg = "Got it. I've added this task:\n" + event;
+        return successAddMsg;
     }
 }

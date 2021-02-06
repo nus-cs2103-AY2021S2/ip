@@ -7,7 +7,7 @@ import duke.utils.Storage;
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 
-    private String todo;
+    private final String todo;
 
     /**
      * Creates a ToDoCommand object to store the todo command input from the user.
@@ -26,8 +26,9 @@ public class ToDoCommand extends Command {
      */
     @Override
     public String execute() {
-        ToDo t = new ToDo(this.todo);
-        this.taskList.addTask(t);
-        return "Got it. I've added this task:\n" + t;
+        ToDo todo = new ToDo(this.todo);
+        this.taskList.addTask(todo);
+        String successAddMsg = "Got it. I've added this task:\n" + todo;
+        return successAddMsg;
     }
 }

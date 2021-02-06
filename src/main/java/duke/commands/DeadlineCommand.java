@@ -9,11 +9,12 @@ import duke.utils.Storage;
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
 
-    private String task;
-    private LocalDateTime dateTime;
+    private final String task;
+    private final LocalDateTime dateTime;
 
     /**
      * Creates a DeadlineCommand object to store the deadline command input from the user.
+     *
      * @param taskList the current list of Tasks.
      * @param storage the object in charge of writing to the local storage file.
      * @param task the task input by the user.
@@ -27,13 +28,14 @@ public class DeadlineCommand extends Command {
 
     /**
      * Adds a Deadline task with previously specified description and dateTime to taskList.
+     *
      * @return confirmation message for added Deadline Task.
      */
     @Override
     public String execute() {
-        Deadline d = new Deadline(this.task, this.dateTime);
-        String msg = "Got it. I've added this task:\n" + d;
-        this.taskList.addTask(d);
-        return msg;
+        Deadline deadline = new Deadline(this.task, this.dateTime);
+        String successAddMsg = "Got it. I've added this task:\n" + deadline;
+        this.taskList.addTask(deadline);
+        return successAddMsg;
     }
 }

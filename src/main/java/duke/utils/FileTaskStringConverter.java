@@ -62,23 +62,23 @@ public class FileTaskStringConverter {
         char taskType = separated[0].charAt(0);
 
         if (taskType == 'T') {
-            ToDo t = new ToDo(separated[2]);
+            ToDo todo = new ToDo(separated[2]);
             if (separated[1].equals("1")) {
-                t.markAsDone();
+                todo.markAsDone();
             }
-            return t;
+            return todo;
         } else if (taskType == 'D') {
-            Deadline d = new Deadline(separated[2], LocalDateTime.parse(separated[3], formatter));
+            Deadline deadline = new Deadline(separated[2], LocalDateTime.parse(separated[3], formatter));
             if (separated[1].equals("1")) {
-                d.markAsDone();
+                deadline.markAsDone();
             }
-            return d;
+            return deadline;
         } else if (taskType == 'E') {
-            Event e = new Event(separated[2], LocalDateTime.parse(separated[3], formatter));
+            Event event = new Event(separated[2], LocalDateTime.parse(separated[3], formatter));
             if (separated[1].equals("1")) {
-                e.markAsDone();
+                event.markAsDone();
             }
-            return e;
+            return event;
         } else {
             throw new InvalidTaskTypeException();
         }

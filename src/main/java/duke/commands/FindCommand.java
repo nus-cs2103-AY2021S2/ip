@@ -11,7 +11,7 @@ import duke.utils.Storage;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-    private String toFind;
+    private final String toFind;
 
     /**
      * Creates a FindCommand object to store the find command input from the user.
@@ -32,31 +32,32 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute() {
-        Pattern p = Pattern.compile(toFind, Pattern.CASE_INSENSITIVE);
-        List<Task> results = searchList(p);
+        Pattern regexPattern = Pattern.compile(toFind, Pattern.CASE_INSENSITIVE);
+        List<Task> results = searchList(regexPattern);
         if (results.size() == 0) {
-            return "There are no tasks matching your input :(";
+            String noMatchingTaskMsg = "There are no tasks matching your input :(";
+            return noMatchingTaskMsg;
         } else {
             return printList(results).toString();
         }
     }
 
     private StringBuilder printList(List<Task> results) {
-        StringBuilder sb = new StringBuilder("These are the search results:");
+        StringBuilder stringBuilder = new StringBuilder("These are the search results:");
         int counter = 1;
-        for (Task t : results) {
-            sb.append("\n" + counter + ". " + t.toString());
+        for (Task task : results) {
+            stringBuilder.append("\n").append(counter).append(". ").append(task.toString());
             counter++;
         }
-        return sb;
+        return stringBuilder;
     }
 
     private List<Task> searchList(Pattern regEx) {
         List<Task> results = new ArrayList<>();
         for (Task t : this.taskList.getList()) {
             String description = t.getDescription();
-            Matcher m = regEx.matcher(description);
-            if (m.find()) {
+            Matcher matcher = regEx.matcher(description);
+            if (matcher.find()) {
                 results.add(t);
             }
         }
