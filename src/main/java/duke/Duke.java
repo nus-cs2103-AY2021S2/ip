@@ -40,6 +40,10 @@ public class Duke {
                 tasks.listTasks(ui);
                 break;
             }
+            case "sort": {
+                tasks.listTasksSorted(ui);
+                break;
+            }
             case "done": {
                 tasks.markTaskAsDone(parsedCommands, ui);
                 break;

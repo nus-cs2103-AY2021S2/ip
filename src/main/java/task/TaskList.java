@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,6 +44,12 @@ public class TaskList {
             builder.append(String.format("%d. %s\n", i + 1, customTaskList.get(i).toString()));
         }
         ui.setResponse(builder.toString().trim());
+    }
+
+    public void listTasksSorted(Ui ui) {
+        List<Task> sortedList = new ArrayList<Task>(tasks);
+        Collections.sort(sortedList);
+        listTasks(sortedList, ui);
     }
 
     /**

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = Event.class, name = "Event")
 })
 
-public class Task {
+public class Task implements Comparable<Task> {
     protected String taskName;
     protected boolean done;
 
@@ -44,6 +44,11 @@ public class Task {
 
     public void setDone() {
         this.done = true;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return String.CASE_INSENSITIVE_ORDER.compare(this.taskName, task.getTaskName());
     }
 }
 
