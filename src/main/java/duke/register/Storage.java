@@ -27,7 +27,7 @@ public class Storage {
     /**
      * Checks if the file exist
      */
-    public void checkIfExist() {
+    public void createIfNotExist() {
         if (file.exists()) {
             return;
         }
@@ -71,6 +71,8 @@ public class Storage {
                         task.markDone();
                     }
                     taskList.addTask(task);
+                } else if (type.equals("add")){
+                    taskList.addTask(new Notes(createTask(command)));
                 }
             }
             fio.close();
@@ -101,7 +103,7 @@ public class Storage {
      * @param tasks
      */
     public void saveTask(TaskList tasks) {
-        this.checkIfExist();
+        this.createIfNotExist();
         try {
             PrintWriter pw = new PrintWriter(file);
             for (int i = 0; i < tasks.numOfTasks(); i++) {

@@ -5,10 +5,7 @@ import duke.gui.Main;
 import duke.register.Parser;
 import duke.register.Storage;
 
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.TaskList;
-import duke.task.TodoTask;
+import duke.task.*;
 
 import javafx.application.Application;
 
@@ -17,14 +14,20 @@ import javafx.application.Application;
  */
 public class Duke {
     private TaskList taskList;
-    private Storage storage;
+    private TaskList noteList;
 
-    public Duke(String path) {
-        storage = new Storage(path);
+    private Storage storage;
+    private Storage notesStorage;
+
+    public Duke() {
+        storage = new Storage("data/dukeGUI.txt");
+        notesStorage = new Storage("data/dukeGUINotes.txt");
         try {
             taskList = storage.load();
+            noteList = notesStorage.load();
         } catch (Exception e) {
             taskList = new TaskList();
+            noteList = new TaskList();
         }
     }
 
@@ -42,9 +45,12 @@ public class Duke {
         String result = "";
         if (TaskType.equals("bye") || TaskType.equals("exit")) {
             storage.saveTask(taskList);
+            notesStorage.saveTask(noteList);
             result = "Goodbye for now.\nHope to see you soon!";
         } else if (TaskType.equals("list")) {
             result = taskList.printTasks();
+        } else if (TaskType.equals("note")) {
+            result = noteList.printTasks();
         } else if (p.getCommandLength() > 1) {
             if (TaskType.equals("done")) {
                 result = taskList.markAsDone(Integer.parseInt(p.getIndex()));
@@ -58,6 +64,8 @@ public class Duke {
                 result = taskList.addTask(new DeadlineTask(command));
             } else if (TaskType.equals("event")) {
                 result = taskList.addTask(new EventTask(command));
+            } else if (TaskType.equals("add")) {
+                result = noteList.addTask(new Notes(input));
             }
         } else {
             if (TaskType.equals("todo") || TaskType.equals("deadline")
@@ -72,6 +80,7 @@ public class Duke {
 
     /**
      * Returns Duke's response to the GUI
+     *
      * @param input
      * @return response
      */
@@ -81,6 +90,7 @@ public class Duke {
 
     /**
      * The main method launching Duke
+     *
      * @param args
      */
     public static void main(String[] args) {
