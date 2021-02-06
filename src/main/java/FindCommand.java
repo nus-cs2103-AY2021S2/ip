@@ -1,8 +1,16 @@
 import java.util.ArrayList;
 
+/**
+ * The type Find command.
+ */
 public class FindCommand extends Command {
     private String fullCommand;
 
+    /**
+     * Instantiates a new Find command.
+     *
+     * @param fullCommand the full command
+     */
     public FindCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
