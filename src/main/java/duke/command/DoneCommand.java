@@ -9,6 +9,11 @@ import duke.task.Task;
  */
 public class DoneCommand extends Command {
 
+    private static final int LENGTH_DONE = "done ".length();
+
+    private static final String ERROR_INCORRECT_FORMAT = "Invalid Argument: Input must to be integer";
+    private static final String MESSAGE_OBJECT_NOT_FOUND = "No such task in the list";
+
     private final String command;
 
     /**
@@ -30,9 +35,9 @@ public class DoneCommand extends Command {
     public String executeAndPrint(TaskList list) throws DukeException {
         int index;
         try {
-            index = Integer.parseInt(command.substring(5)) - 1;
+            index = Integer.parseInt(command.substring(LENGTH_DONE)) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid Argument: Input must to be integer");
+            throw new DukeException(ERROR_INCORRECT_FORMAT);
         }
         if (index < list.getSize() && index >= 0) {
             Task currTask = list.getJob(index);
@@ -41,7 +46,7 @@ public class DoneCommand extends Command {
             return "This task is marked as done: \n"
                     + currTask.toString();
         } else {
-            return "No such task in the list\n";
+            return MESSAGE_OBJECT_NOT_FOUND + "\n";
         }
     }
 

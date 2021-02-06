@@ -23,23 +23,6 @@ public class StringParser {
     }
 
     /**
-     * String splitter, when characters exceed length, split the string into two lines.
-     *
-     * @param str Input string.
-     * @param length Desired length of a line.
-     * @return Spitted string.
-     */
-    public static String newLiner(String str, int length) {
-        assert length > 0;
-        StringBuilder resultStr = new StringBuilder();
-        while (str.length() > length) {
-            resultStr.append(str, 0, length).append("\n");
-            str = str.substring(length);
-        }
-        return resultStr.toString() + str + "\n";
-    }
-
-    /**
      * To generate underline.
      *
      * @param length Length of underline.
