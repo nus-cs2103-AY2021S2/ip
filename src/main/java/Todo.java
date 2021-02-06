@@ -3,9 +3,9 @@
  */
 public class Todo extends Task {
 
-    public Todo(String description) {
+    Todo(String description) {
         super(description);
-        super.taskType = TODO;
+        super.taskType = TODO_NUMBER;
     }
 
     /**

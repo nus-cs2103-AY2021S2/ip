@@ -8,10 +8,10 @@ public class Event extends Task implements EventDeadline {
 
     protected LocalDate time;
 
-    public Event(String description, LocalDate time) {
+    Event(String description, LocalDate time) {
         super(description);
         this.time = time;
-        super.taskType = EVENT;
+        super.taskType = EVENT_NUMBER;
     }
 
 

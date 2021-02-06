@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.FileNotFoundException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -40,7 +41,8 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InsufficientArgumentsException, FileNotFoundException, IllegalKeywordException {
+    private void handleUserInput() throws InsufficientArgumentsException, FileNotFoundException,
+            IllegalKeywordException {
         String input = userInput.getText();
         String[] parts = input.split(" ");
         String keyword = parts[0];

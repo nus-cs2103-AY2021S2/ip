@@ -1,7 +1,5 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -32,7 +30,7 @@ public class Duke extends Application {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
 
-    String name;
+    private String name;
 
     public Duke(String filepath) {
         ui = new Ui();
@@ -44,9 +42,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-    //Step 1. Setting up required components
 
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -78,8 +74,7 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(  Region.USE_COMPUTED_SIZE);
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
 
@@ -173,8 +168,8 @@ public class Duke extends Application {
                     }
                     byStringBuilder.append(parts[k]);
                 }
-                String DateString = byStringBuilder.toString();
-                LocalDate date = LocalDate.parse(DateString);
+                String dateString = byStringBuilder.toString();
+                LocalDate date = LocalDate.parse(dateString);
                 if (input.equals("deadline")) {
                     Deadline deadline = new Deadline(taskString, date);
                     tasks.add(deadline);
@@ -230,8 +225,12 @@ public class Duke extends Application {
             storage.save();
             return findStringBuilder.toString();
         }
+        default:
+            return "duke says hello";
         }
-        return "duke says hello";
     }
-
 }
+
+
+
+

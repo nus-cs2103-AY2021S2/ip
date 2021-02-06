@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -14,9 +12,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filepath;
-
     private ArrayList<Task> tasks;
-    
     private Parser parser;
 
     Storage(String filepath) {
@@ -71,7 +67,7 @@ public class Storage {
                 }
                 myReader.close();
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("An error occurred");
             e.printStackTrace();
         }

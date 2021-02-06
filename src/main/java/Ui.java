@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Ui is a class that handles the input/output of Duke.
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     Ui() {
         this.sc = new Scanner(System.in);

@@ -1,13 +1,12 @@
-import java.time.LocalDate;
 
 /**
  * A task object that describes what the task is.
  */
 public class Task {
 
-    protected static int TODO = 0;
-    protected static int DEADLINE = 1;
-    protected static int EVENT = 2;
+    protected static int TODO_NUMBER = 0;
+    protected static int DEADLINE_NUMBER = 1;
+    protected static int EVENT_NUMBER = 2;
 
 
     protected String description;
@@ -16,7 +15,7 @@ public class Task {
 
     protected int taskType;
 
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -31,12 +30,15 @@ public class Task {
 
     /**
      * Changes the status of a Task from undone to done.
-     * @return a string representation of the Task object with an updated status.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Gets the type of task.
+     * @return an integer representing the type of task.
+     */
     public int getTaskType() {
         return this.taskType;
     }
