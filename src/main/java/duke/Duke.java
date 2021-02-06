@@ -2,17 +2,6 @@ package duke;
 
 import java.util.List;
 
-import javafx.application.Application;
-import javafx.scene.layout.Region;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownInputException;
 import duke.tasks.DeadlineTask;
@@ -23,7 +12,7 @@ import duke.tasks.ToDoTask;
 /**
  * Duke class that simulates the running of the Duke Program
  */
-public class Duke{
+public class Duke {
 
     /** Storage instance that is used by Duke during run for loading and writing of file*/
     private Storage storage;
@@ -54,111 +43,103 @@ public class Duke{
 
         }
     }
-    
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        String toReply="";
+        String toReply = "";
         try {
-                Parser parser = new Parser(input);
-                parser.check();
-            
-                String[] parsedInput = parser.getParsedAction();
-                
-                switch (parsedInput[0]) {
-                case "todo":
-                    toReply += ui.addPrint();
-                    ToDoTask todo = tasks.handleToDoTask(input);
-                    toReply += ui.printTask(todo);
-                    toReply += ui.countTasks(tasks);
+            Parser parser = new Parser(input);
+            parser.check();
+            String[] parsedInput = parser.getParsedAction();
+            switch (parsedInput[0]) {
+            case "todo":
+                toReply += ui.addPrint();
+                ToDoTask todo = tasks.handleToDoTask(input);
+                toReply += ui.printTask(todo);
+                toReply += ui.countTasks(tasks);
 
-                    break;
+                break;
 
-                case "deadline":
-                    
-                    toReply += ui.addPrint();
+            case "deadline":
+                toReply += ui.addPrint();
 
-                    DeadlineTask deadlineTask = tasks.handleDeadlineTask(input);
-    
-                    toReply += ui.printTask(deadlineTask);
-                    toReply += ui.countTasks(tasks);
+                DeadlineTask deadlineTask = tasks.handleDeadlineTask(input);
 
-                    break;
+                toReply += ui.printTask(deadlineTask);
+                toReply += ui.countTasks(tasks);
 
-                case "event":
-    
-                    toReply += ui.addPrint();
+                break;
 
-                    EventTask eventTask = tasks.handleEventTask(input);
-    
-                    toReply += ui.printTask(eventTask);
-                    toReply += ui.countTasks(tasks);
+            case "event":
 
-                    break;
+                toReply += ui.addPrint();
 
-                case "list":
-                    toReply += ui.printStored(tasks);
+                EventTask eventTask = tasks.handleEventTask(input);
 
-                    break;
+                toReply += ui.printTask(eventTask);
+                toReply += ui.countTasks(tasks);
 
-                case "done":
-                    int number = Integer.valueOf(parsedInput[1]);
-    
-                    toReply += ui.printMarked();
+                break;
 
-                    Task completed = tasks.handleDone(number);
-    
-                    toReply += ui.printTask(completed);
+            case "list":
+                toReply += ui.printStored(tasks);
 
-                    break;
+                break;
 
-                case "check":
+            case "done":
+                int number = Integer.valueOf(parsedInput[1]);
 
-                    String result = tasks.findOnDateTasks((parsedInput[1]));
-    
-                    toReply += ui.print(result);
-                    break;
+                toReply += ui.printMarked();
 
-                case "bye":
-                    toReply += Ui.printBye();
-                    break;
+                Task completed = tasks.handleDone(number);
 
-                case "delete":
-                    int index = Integer.valueOf(parsedInput[1]);
-    
-                    toReply += ui.printRemoved();
+                toReply += ui.printTask(completed);
 
-                    Task task = tasks.handleDelete(index);
-    
-                    toReply += ui.printTask(task);
-                    toReply += ui.countTasks(tasks);
+                break;
 
-                    break;
+            case "check":
 
-                case "find":
-                    String keyword = parsedInput[1];
-    
-                    toReply += ui.printMatching();
+                String result = tasks.findOnDateTasks((parsedInput[1]));
 
-                    List<Task> matches = tasks.getMatch(keyword);
-    
-                    toReply += ui.printList(matches);
+                toReply += ui.print(result);
+                break;
 
-                    break;
+            case "bye":
+                toReply += Ui.printBye();
+                break;
 
-                default:
-                    throw new UnknownInputException();
-                }
-                
+            case "delete":
+                int index = Integer.valueOf(parsedInput[1]);
+
+                toReply += ui.printRemoved();
+
+                Task task = tasks.handleDelete(index);
+
+                toReply += ui.printTask(task);
+                toReply += ui.countTasks(tasks);
+
+                break;
+
+            case "find":
+                String keyword = parsedInput[1];
+
+                toReply += ui.printMatching();
+
+                List<Task> matches = tasks.getMatch(keyword);
+
+                toReply += ui.printList(matches);
+
+                break;
+
+            default:
+                throw new UnknownInputException();
+            }
             storage.write(tasks);
-        
         } catch (DukeException e) {
             return e.getMessage();
         }
-    
         return toReply;
     }
-    
 }

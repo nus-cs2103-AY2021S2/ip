@@ -24,7 +24,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -34,11 +33,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
         dialog.setText(text);
         displayPicture.setImage(img);
     }
-    
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -48,11 +45,9 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
-    
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
-    
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

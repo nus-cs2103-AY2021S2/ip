@@ -30,12 +30,10 @@ public class Storage {
 
         try {
             this.file = new File(filepath);
-            
             if (!this.file.exists()) {
                 this.file.getParentFile().mkdir();
                 this.file.createNewFile();
             }
-    
             sc = new Scanner(this.file);
 
         } catch (IOException err) {

@@ -150,7 +150,6 @@ public class TaskList {
     public DeadlineTask handleDeadlineTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
-        
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
         String deadline = action.substring(descriptionIndex + 4);
 

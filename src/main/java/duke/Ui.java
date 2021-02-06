@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.List;
-import java.util.Scanner;
 
 import duke.tasks.Task;
 
@@ -15,7 +14,6 @@ public class Ui {
      */
     public Ui() {
     }
-    
     /**
      * Prints the welcome message.
      */
@@ -63,7 +61,6 @@ public class Ui {
      * Prints the error when attempting to load file message.
      */
     public String showLoadingError() {
-    
         String unableToLoad = "     Unable to load file. Creating new one\n";
         return unableToLoad;
     }
