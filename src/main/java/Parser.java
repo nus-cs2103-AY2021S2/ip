@@ -137,6 +137,7 @@ public class Parser {
         case "bye":
         case "list":
             throw new InvalidArgumentException("Too many arguments provided. Did you mean '" + command + "'?");
+            // future extension: reply yes and duke understands what you meant
         default:
             break;
         }

@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Entry point of the duke programme
+     * Entry point of the duke programme if run from terminal.
      * @param args Irrelevant argument
      */
     public static void main(String[] args) {

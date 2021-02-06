@@ -18,7 +18,7 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        duke.runDuke(sc);
+        duke.runDuke(sc); // is this only relevant for command line running?
     }
 
     @Override
