@@ -123,108 +123,28 @@ public class Duke extends Application {
             FileNotFoundException {
         int listCounter = 1;
         switch (input) {
-        case "done": {
-            int index = Integer.parseInt(parts[1]);
-            assert index >= 1 : "Value must be at least 1";
-            Task toMark = tasks.get(index - 1);
-            toMark.markAsDone();
-            TaskList.getTasklist().get(index - 1).markAsDone();
+        case "done":
+            String doneString = new DoneCommand(input, parts, tasks).execute();
             storage.save();
-            return toMark.toString();
-        }
+            return doneString;
         case "todo":
         case "deadline":
         case "event":
-            if (parts.length == 1) {
-                throw new InsufficientArgumentsException("Insufficient arguments provided");
-            }
-            StringBuilder str = new StringBuilder();
-            if (input.equals("todo")) {
-                for (int i = 1; i < parts.length; i++) {
-                    str.append(" ");
-                    str.append(parts[i]);
-                }
-                String taskString = str.toString();
-                Todo todo = new Todo(taskString);
-                tasks.add(todo);
-                storage.save();
-                return todo.toString();
-            } else {
-                int slashIndex = 0;
-                for (int i = 0; i < parts.length; i++) {
-                    if (parts[i].contains(Character.toString('/'))) {
-                        slashIndex = i;
-                    }
-                }
-                for (int j = 1; j < slashIndex; j++) {
-                    str.append(" ");
-                    str.append(parts[j]);
-                }
-                String taskString = str.toString();
-                StringBuilder byStringBuilder = new StringBuilder();
-                for (int k = slashIndex + 1; k < parts.length; k++) {
-                    if (k != slashIndex + 1) {
-                        byStringBuilder.append(" ");
-                    }
-                    byStringBuilder.append(parts[k]);
-                }
-                String dateString = byStringBuilder.toString();
-                LocalDate date = LocalDate.parse(dateString);
-                if (input.equals("deadline")) {
-                    Deadline deadline = new Deadline(taskString, date);
-                    tasks.add(deadline);
-                    storage.save();
-                    return deadline.toString();
-                } else {
-                    Event event = new Event(taskString, date);
-                    tasks.add(event);
-                    storage.save();
-                    return event.toString();
-                }
-            }
-
-        case "delete": {
-            if (parts.length > 2) {
-                throw new InsufficientArgumentsException("Wrong arguments");
-            }
-            int index = Integer.parseInt(parts[1]);
-            assert index >= 1 : "Value must be at least 1";
-            Task toBeRemoved = tasks.get(index - 1);
-            tasks.remove(index - 1);
+            String addString = new AddCommand(input, parts, tasks).execute();
             storage.save();
-            return "Noted. I've removed this task:\n" + toBeRemoved.toString();
-        }
-        case "list": {
-            StringBuilder listStringBuilder = new StringBuilder();
-            for (Task t : TaskList.getTasklist()) {
-                listStringBuilder.append(listCounter).append(".").append(t.toString());
-                listStringBuilder.append("\n");
-                listCounter++;
-            }
+            return addString;
+        case "delete":
+            String deleteString = new DeleteCommand(input, parts, tasks).execute();
             storage.save();
-            return listStringBuilder.toString();
-        }
-        case "find": {
-            if (parts.length == 1) {
-                throw new InsufficientArgumentsException("Insufficient arguments provided");
-            }
-            String greetingMessage = "Here are the matching tasks in your list";
-            StringBuilder keyString = new StringBuilder();
-            StringBuilder findStringBuilder = new StringBuilder();
-            findStringBuilder.append(greetingMessage).append("\n");
-            for (int i = 1; i < parts.length; i++) {
-                keyString.append(" ");
-                keyString.append(parts[i]);
-            }
-            String findString = keyString.toString();
-            for (Task t: TaskList.getTasklist()) {
-                if (t.toString().contains(findString)) {
-                    findStringBuilder.append(t.toString()).append("\n");
-                }
-            }
+            return deleteString;
+        case "list":
+            String listString = new ListCommand(input, parts, tasks, listCounter).execute();
             storage.save();
-            return findStringBuilder.toString();
-        }
+            return listString;
+        case "find":
+            String findString = new FindCommand(input, parts, tasks).execute();
+            storage.save();
+            return findString;
         default:
             return "duke says hello";
         }
