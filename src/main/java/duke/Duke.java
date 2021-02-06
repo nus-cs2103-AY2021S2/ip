@@ -20,6 +20,7 @@ public class Duke {
      * Runs the Duke chatbot loop
      */
     public void getResponse(String input, Ui ui) {
+        assert tasks != null;
         try {
             HashMap<String, String> parsedCommands = Parser.parseCommand(input);
             switch (parsedCommands.get("command")) {
@@ -89,6 +90,7 @@ public class Duke {
      * Shuts down the Duke program gracefully after writing any tasks in memory to the backing store.
      */
     public void shutdown() {
+        assert tasks != null;
         tasks.persist(storage);
     }
 }
