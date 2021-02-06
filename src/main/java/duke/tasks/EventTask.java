@@ -58,13 +58,13 @@ public class EventTask extends Task {
         return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
-    private String getStartTimeString() {
+    private String getStartTimeSaveString() {
         return this.startTime == null
                 ? ""
                 : " | " + this.startTime.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
-    private String getEndTimeString() {
+    private String getEndTimeSaveString() {
         return this.endTime == null
                 ? ""
                 : " | " + this.endTime.format(DateTimeFormatter.ofPattern("HHmm"));
@@ -78,7 +78,7 @@ public class EventTask extends Task {
     @Override
     public String getSaveString() {
         return super.getSaveString() + " | " + getDateSaveString()
-                + getStartTimeString() + getEndTimeString();
+                + getStartTimeSaveString() + getEndTimeSaveString();
     }
 
     /**
@@ -89,13 +89,25 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
-                + (this.startTime == null
-                ? ""
-                : " " + this.startTime.format(DateTimeFormatter.ofPattern("hh:mm a")))
-                + (this.endTime == null
-                ? ""
-                : "-" + this.endTime.format(DateTimeFormatter.ofPattern("hh:mm a")))
+                + getDateString()
+                + getStartTimeString()
+                + getEndTimeString()
                 + ")";
+    }
+
+    private String getDateString() {
+        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    }
+
+    private String getStartTimeString() {
+        return this.startTime == null
+                ? ""
+                : " " + this.startTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
+    private String getEndTimeString() {
+        return this.endTime == null
+                ? ""
+                : "-" + this.endTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 }
