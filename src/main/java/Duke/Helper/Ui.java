@@ -1,6 +1,7 @@
 package Duke.Helper;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import Duke.Constant.Constants;
 import Duke.Task.Task;
@@ -16,29 +17,8 @@ public class Ui {
      * @param response A string that needed to be formatted before printing out.
      */
     public void printResponse(String response) {
-        System.out.println(LINES);
-        System.out.println(response);
-        System.out.println(LINES);
-        System.out.println();
-    }
-
-    /**
-     * Lists all available tasks in the database.
-     * @param list A list containing all the current tasks
-     */
-    public void printAllTask(ArrayList<Task> list) {
-        System.out.println(LINES);
-        if (list.isEmpty()) {
-            System.out.println(Constants.EMPTY_TASK_LIST);
-        } else {
-            System.out.println(Constants.START_LISTING);
-            for (int i = 0; i < list.size(); i++) {
-                Task task = list.get(i);
-                System.out.println((i + 1) + ". " + task);
-            }
-        }
-        System.out.println(LINES);
-        System.out.println();
+        Consumer<String> output = (s) -> System.out.println(LINES + '\n' + s + '\n' + LINES + '\n');
+        output.accept(response);
     }
 
     /**

@@ -1,6 +1,7 @@
 package Duke.Helper;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import Duke.Command.Command;
 import Duke.Constant.Constants;
@@ -8,10 +9,7 @@ import Duke.Exception.EmptyTaskException;
 import Duke.Exception.InvalidIndex;
 import Duke.Exception.InvalidTask;
 import Duke.Exception.NoSuchCommandException;
-import Duke.Task.Deadline;
-import Duke.Task.Event;
 import Duke.Task.Task;
-import Duke.Task.Todo;
 
 /**
  * A wrapper class that contains all available tasks.
@@ -83,31 +81,29 @@ public class TaskList {
                 || command.equalsIgnoreCase(Command.EVENT.getAction())) {
             throw new EmptyTaskException(command);
         } else if (command.toLowerCase().startsWith(Command.TODO.getAction() + " ")) {
-            Todo task = parser.parseTodo(command);
-            list.add(task);
-            return Constants.ADD_TASK_SUCCESS
-                    + "  " + task + "\n"
-                    + "Now you have " + list.size() + " tasks in the list.";
+            return Optional.of(parser.parseTodo(command))
+                    .map(todo -> {
+                        list.add(todo);
+                        return Constants.ADD_TASK_SUCCESS
+                                + "  " + todo + "\n"
+                                + "Now you have " + list.size() + " tasks in the list.";
+                    }).get();
         } else if (command.toLowerCase().startsWith(Command.DEADLINE.getAction() + " ")) {
-            Deadline task = parser.parseDeadline(command);
-            if (task == null) {
-                return Constants.INVALID_DATETIME_FORMAT;
-            } else {
-                list.add(task);
-                return Constants.ADD_TASK_SUCCESS
-                        + "  " + task + "\n"
-                        + "Now you have " + list.size() + " tasks in the list.";
-            }
+            return Optional.ofNullable(parser.parseDeadline(command))
+                    .map(deadline -> {
+                        list.add(deadline);
+                        return Constants.ADD_TASK_SUCCESS
+                                + "  " + deadline + "\n"
+                                + "Now you have " + list.size() + " tasks in the list.";
+                    }).orElse(Constants.INVALID_DATETIME_FORMAT);
         } else if (command.toLowerCase().startsWith(Command.EVENT.getAction() + " ")) {
-            Event task = parser.parseEvent(command);
-            if (task == null) {
-                return Constants.INVALID_DATETIME_FORMAT;
-            } else {
-                list.add(task);
-                return Constants.ADD_TASK_SUCCESS
-                        + "  " + task + "\n"
-                        + "Now you have " + list.size() + " tasks in the list.";
-            }
+            return Optional.ofNullable(parser.parseEvent(command))
+                    .map(event -> {
+                        list.add(event);
+                        return Constants.ADD_TASK_SUCCESS
+                                + "  " + event + "\n"
+                                + "Now you have " + list.size() + " tasks in the list.";
+                    }).orElse(Constants.INVALID_DATETIME_FORMAT);
         } else {
             throw new NoSuchCommandException();
         }
