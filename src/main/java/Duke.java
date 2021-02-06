@@ -113,7 +113,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -126,11 +125,12 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input, String[] parts) throws InsufficientArgumentsException,
-            FileNotFoundException, IllegalKeywordException {
+            FileNotFoundException {
         int listCounter = 1;
         switch (input) {
         case "done": {
             int index = Integer.parseInt(parts[1]);
+            assert index >= 1 : "Value must be at least 1";
             Task toMark = tasks.get(index - 1);
             toMark.markAsDone();
             TaskList.getTasklist().get(index - 1).markAsDone();
@@ -193,6 +193,7 @@ public class Duke extends Application {
                 throw new InsufficientArgumentsException("Wrong arguments");
             }
             int index = Integer.parseInt(parts[1]);
+            assert index >= 1 : "Value must be at least 1";
             Task toBeRemoved = tasks.get(index - 1);
             tasks.remove(index - 1);
             storage.save();
