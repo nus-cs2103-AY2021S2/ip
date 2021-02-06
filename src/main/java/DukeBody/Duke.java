@@ -110,16 +110,16 @@ public class Duke {
                     break;
 
                 case "delete":
+                    // Fallthrough
                 case "remove":
                     if (subcommands.length == 1) {
-                        throw new Duke.ExpectedSubcommandException("<task_number>");
+                         throw new Duke.ExpectedSubcommandException("<task_number>");
                     }
 
                     scanner = new Scanner(subcommands[1]);
                     taskNumber = scanner.nextInt() - 1;
                     scanner.close();
 
-                    Task removed = tasks.get(taskNumber);
                     output.append("removed the task! begone!\n");
                     output.append(tasks.remove(taskNumber).taskInformation(
                             mainWindow.getDateFormat()));

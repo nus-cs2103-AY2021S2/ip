@@ -42,7 +42,6 @@ public class DataBase {
      *          previously. TaskList is empty is it is a new user.
      */
     public TaskList queryTasks (String username) throws DataBase.LegacyDataException {
-
         TaskList tasks = new TaskList();
 
         try {
@@ -70,6 +69,7 @@ public class DataBase {
             Files.createDirectories(dirpath);
         }
 
+        assert Files.exists(dirpath): "database directory not found on update.";
         FileWriter writer = new FileWriter(dirpath.toAbsolutePath()
                 + File.separator + username + ".txt");
 
