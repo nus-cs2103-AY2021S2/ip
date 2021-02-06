@@ -13,7 +13,7 @@ public class TaskList {
     private final ArrayList<Task> tasklist;
 
     /** Creates a new TaskList, which stores the tasks. This class provides some abstraction for the underlying
-     * ArrayList<Task
+     * ArrayList<Task>
      * @param load given the raw strings from the storage file, we create the tasks
      */
     public TaskList(List<String> load) {
