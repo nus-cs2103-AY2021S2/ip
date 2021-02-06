@@ -35,6 +35,15 @@ public class Task {
     }
 
     /**
+     * Provides the info of the task
+     *
+     * @return Information of the task
+     */
+    public String getInfo() {
+        return this.desc;
+    }
+
+    /**
      * Provides the symbol for the task type
      *
      * @return Symbol for the task type

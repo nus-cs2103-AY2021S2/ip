@@ -45,7 +45,7 @@ public class Ui {
      */
     public String constructAddMessage(Task task, int tasksSize) {
         String msg = "Got it meow. I've added this task:\n"
-                + String.format("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc())
+                + String.format("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getInfo())
                 + String.format("Now you have %d tasks in the list.\n", tasksSize);
         return constructMessage(msg);
     }
@@ -60,7 +60,7 @@ public class Ui {
     public String constructDoneMessage(int index, Task task) {
         String msg = "Good job meow, I've marked this task as done:\n"
                 + String.format("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
-                task.getDesc());
+                task.getInfo());
         return constructMessage(msg);
     }
 
@@ -73,7 +73,7 @@ public class Ui {
      */
     public String constructDeleteMessage(Task task, int tasksSize) {
         String msg = "Noted meow. I've removed this task:\n"
-                + String.format("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc())
+                + String.format("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getInfo())
                 + String.format("Now you have %d tasks in the list.\n", tasksSize);
         return constructMessage(msg);
     }
@@ -83,7 +83,7 @@ public class Ui {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             msg += String.format("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(),
-                    task.getDesc());
+                    task.getInfo());
         }
         return msg;
     }

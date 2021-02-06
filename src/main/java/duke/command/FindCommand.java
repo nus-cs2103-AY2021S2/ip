@@ -56,7 +56,7 @@ public class FindCommand extends Command {
             return isInRange;
         }
 
-        return task.getDesc().contains(keyword);
+        return task.getInfo().contains(keyword);
     }
 
     /**

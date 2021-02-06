@@ -15,6 +15,10 @@ public class TaskManager {
     /** A list of tasks tracked by the chat bot */
     private List<Task> tasks = new ArrayList<>();
 
+    private boolean hasToDo(String desc) {
+        return tasks.stream().anyMatch(task -> (task.getTypeSymbol().equals("T") && task.getDesc().equals(desc)));
+    }
+
     /**
      * Adds a new ToDo into the task list
      *
@@ -25,11 +29,25 @@ public class TaskManager {
     public ToDo addToDo(String desc) throws DukeTaskException {
         if (desc.length() == 0) {
             throw new DukeTaskException("The description of a ToDo cannot be empty.");
+        } else if (hasToDo(desc)) {
+            throw new DukeTaskException("This todo has already been added! Try add with a different name.");
         }
 
         ToDo toDo = new ToDo(desc);
         tasks.add(toDo);
         return toDo;
+    }
+
+    private boolean hasDeadline(String desc, LocalDateTime dateTime) {
+        return tasks.stream().anyMatch(task -> {
+            if (!task.getTypeSymbol().equals("D")) {
+                return false;
+            }
+
+            Deadline deadline = (Deadline) task;
+            System.out.println("Type: " + task.getTypeSymbol() + " desc: " + task.getDesc() + " equal: " + deadline.getDateTime().isEqual(dateTime));
+            return deadline.getDesc().equals(desc) && deadline.getDateTime().isEqual(dateTime);
+        });
     }
 
     /**
@@ -43,11 +61,25 @@ public class TaskManager {
     public Deadline addDeadline(String desc, LocalDateTime dateTime) throws DukeTaskException {
         if (desc.length() == 0) {
             throw new DukeTaskException("The description of a Deadline cannot be empty.");
+        } else if (hasDeadline(desc, dateTime)) {
+            throw new DukeTaskException("This deadline has already been added! Try add with a different name.");
         }
 
         Deadline deadline = new Deadline(desc, dateTime);
         tasks.add(deadline);
         return deadline;
+    }
+
+    private boolean hasEvent(String desc, LocalDateTime start, LocalDateTime end) {
+        return tasks.stream().anyMatch(task -> {
+            if (!task.getTypeSymbol().equals("E")) {
+                return false;
+            }
+
+            Event event = (Event) task;
+            return event.getDesc().equals(desc) && event.getStartDateTime().isEqual(start)
+                    && event.getEndDateTime().isEqual(end);
+        });
     }
 
     /**
@@ -62,6 +94,8 @@ public class TaskManager {
     public Event addEvent(String desc, LocalDateTime start, LocalDateTime end) throws DukeTaskException {
         if (desc.length() == 0) {
             throw new DukeTaskException("The description of an Event cannot be empty.");
+        } else if (hasEvent(desc, start, end)) {
+            throw new DukeTaskException("This event has already been added! Try add with a different name.");
         }
 
         Event event = new Event(desc, start, end);

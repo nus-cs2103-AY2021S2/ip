@@ -43,7 +43,7 @@ public class Event extends Task {
      * @return Description of the Event
      */
     @Override
-    public String getDesc() {
+    public String getInfo() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
         return this.desc + " (Start: " + this.start.format(formatter) + " | End: " + this.end.format(formatter) + ")";
     }
