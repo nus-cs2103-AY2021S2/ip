@@ -133,12 +133,13 @@ public class Checklst extends Application {
             try {
                 Platform.exit();
             } catch (Exception e) {
+                // Do nothing
             }
         }
 
         this.addUserMessage(userInput.getText());
         this.addDukeMessage(getResponse(userInput.getText()));
-        
+
         userInput.clear();
     }
 

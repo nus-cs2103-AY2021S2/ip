@@ -44,6 +44,11 @@ public class Deadline extends Task {
         return new Deadline(splitInput[0], dueDate);
     }
 
+    /**
+     * Parses a saved Deadline string.
+     * @param input Deadline string.
+     * @return Deadline object.
+     */
     public static Deadline parseDeadline(String input) {
         String[] splitInput = input.split(" ; ");
         String name = splitInput[2];
@@ -62,11 +67,11 @@ public class Deadline extends Task {
         } else {
             output += "O ; ";
         }
-        
+
         output += this.name + " ; " + this.dueDate.toString();
 
         return output;
-    } 
+    }
 
     @Override
     public Task complete() {

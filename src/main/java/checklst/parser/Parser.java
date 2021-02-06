@@ -6,7 +6,6 @@ import checklst.task.Event;
 import checklst.task.Task;
 import checklst.task.TaskList;
 import checklst.task.Todo;
-import checklst.ui.Ui;
 
 /**
  * The Parser class makes sense of inputs and runs the respective follow up methods.
@@ -17,7 +16,7 @@ public class Parser {
      * Processes input commands and calls the respective command methods.
      * @param input Input string.
      * @param taskList TaskList instance for manipulating tasks.
-     * @return Response String. 
+     * @return Response String.
      */
     public String parse(String[] input, TaskList taskList) {
         String output = "";
@@ -59,6 +58,12 @@ public class Parser {
         return output;
     }
 
+    /**
+     * Processes history commands and run the relevant Task parser.
+     * @param input Input string containing a Task.
+     * @param taskList TaskList to add Tasks to.
+     * @throws ChecklstException Exception if strings are corrupted.
+     */
     public void parseHistory(String input, TaskList taskList) throws ChecklstException {
         if (input.charAt(0) == 'T') {
             taskList.add(Todo.parseTodo(input));

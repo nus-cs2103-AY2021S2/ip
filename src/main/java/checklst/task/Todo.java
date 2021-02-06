@@ -27,6 +27,11 @@ public class Todo extends Task {
         return new Todo(name);
     }
 
+    /**
+     * Parses a saved Todo String.
+     * @param input Todo String.
+     * @return Todo Object.
+     */
     public static Todo parseTodo(String input) {
         String[] splitInput = input.split(" ; ");
         String name = splitInput[2];
@@ -38,7 +43,7 @@ public class Todo extends Task {
     @Override
     public String export() {
         String output = "T ; ";
-        
+
         if (this.isCompleted) {
             output += "X ; ";
         } else {

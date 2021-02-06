@@ -14,16 +14,6 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
-    }
-
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
-        db.flip();
-        return db;
-    }
-
     private DialogBox(Label l, ImageView iv) {
         text = l;
         text.setFont(new Font("Arial", 14));
@@ -35,6 +25,16 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+    }
+
+    public static DialogBox getUserDialog(Label l, ImageView iv) {
+        return new DialogBox(l, iv);
+    }
+
+    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+        var db = new DialogBox(l, iv);
+        db.flip();
+        return db;
     }
 
     /**

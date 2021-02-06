@@ -44,6 +44,11 @@ public class Event extends Task {
         return new Event(splitInput[0], eventDate);
     }
 
+    /**
+     * Parses a saved Event string.
+     * @param input Event string.
+     * @return Event object.
+     */
     public static Event parseEvent(String input) {
         String[] splitInput = input.split(" ; ");
         String name = splitInput[2];
@@ -66,7 +71,7 @@ public class Event extends Task {
         output += this.name + " ; " + this.eventDate.toString();
 
         return output;
-    } 
+    }
 
     @Override
     public Task complete() {

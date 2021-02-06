@@ -20,7 +20,7 @@ public abstract class Task {
 
     /**
      * Returns a String representation of the Task for exporting.
-     * Format: "<Type> | <Completed> | <Name> | <Optional: Date>"
+     * Format: "Type | Completed | Name | Optional: Date"
      * @return String representation of Task.
      */
     public abstract String export();

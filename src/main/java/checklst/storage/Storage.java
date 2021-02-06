@@ -31,7 +31,7 @@ public class Storage {
         } catch (IOException | SecurityException e) {
             throw new ChecklstException("Unable to make file!");
         }
-        
+
         try (PrintStream out = new PrintStream(new FileOutputStream("./data/checklst.txt"))) {
             exportList = taskList.getTaskList().stream().map(x -> x.export()).collect(Collectors.toList());
             out.print(this.exportList.toString().replace("[", "").replace("]", "").replace(", ", "\n"));
