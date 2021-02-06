@@ -1,8 +1,8 @@
-package Commands;
+package duke.commands;
 
-import Tasks.Task;
-import Tasks.TaskList;
-import UserInterface.Ui;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private final String description;

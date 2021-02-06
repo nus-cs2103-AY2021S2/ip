@@ -1,10 +1,10 @@
-package Duke;
+package duke;
 
-import Commands.Command;
-import Tasks.Storage;
-import Tasks.TaskList;
-import UserInterface.Parser;
-import UserInterface.Ui;
+import duke.commands.Command;
+import duke.tasks.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Parser;
+import duke.ui.Ui;
 
 public class Duke {
     private final Storage storage;

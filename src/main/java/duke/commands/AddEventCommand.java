@@ -1,8 +1,8 @@
-package Commands;
+package duke.commands;
 
-import Tasks.Event;
-import Tasks.TaskList;
-import UserInterface.Ui;
+import duke.tasks.Event;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 

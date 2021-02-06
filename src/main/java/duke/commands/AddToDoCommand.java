@@ -1,8 +1,8 @@
-package Commands;
+package duke.commands;
 
-import Tasks.TaskList;
-import Tasks.ToDo;
-import UserInterface.Ui;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+import duke.ui.Ui;
 
 public class AddToDoCommand extends Command {
     private final String description;

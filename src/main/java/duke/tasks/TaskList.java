@@ -1,6 +1,6 @@
-package Tasks;
+package duke.tasks;
 
-import CustomExceptions.TaskNumberNotExistException;
+import duke.exceptions.TaskNumberNotExistException;
 
 import java.util.ArrayList;
 

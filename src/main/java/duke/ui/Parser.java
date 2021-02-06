@@ -1,7 +1,7 @@
-package UserInterface;
+package duke.ui;
 
-import Commands.*;
-import CustomExceptions.*;
+import duke.commands.*;
+import duke.exceptions.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

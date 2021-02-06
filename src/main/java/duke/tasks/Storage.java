@@ -1,6 +1,6 @@
-package Tasks;
+package duke.tasks;
 
-import UserInterface.Parser;
+import duke.ui.Parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;

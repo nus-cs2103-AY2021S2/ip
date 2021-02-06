@@ -1,7 +1,7 @@
-package Commands;
+package duke.commands;
 
-import Tasks.TaskList;
-import UserInterface.Ui;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui);

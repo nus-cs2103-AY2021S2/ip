@@ -1,4 +1,4 @@
-package CustomExceptions;
+package duke.exceptions;
 
 public class MissingEventTimeException extends Exception {
 
