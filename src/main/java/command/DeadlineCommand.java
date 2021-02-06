@@ -8,8 +8,8 @@ public class DeadlineCommand implements Command {
     private final String taskDeadline;
 
     /**
-     * @param taskDescription description of the deadline
-     * @param taskDeadline string to be formatted into a LocalDateTime
+     * @param taskDescription: description of the deadline
+     * @param taskDeadline: string to be formatted into a LocalDateTime
      */
     public DeadlineCommand(String taskDescription, String taskDeadline) {
         this.taskDescription = taskDescription;
@@ -17,9 +17,9 @@ public class DeadlineCommand implements Command {
     }
 
     /** Creates a new Deadline
-     * @param ui helper to interact with user
-     * @param tasks we add the new created deadline here
-     * @return true
+     * @param ui: helper to interact with user
+     * @param tasks: we add the new created deadline here
+     * @return true: tells Oracle whether the loop should be terminated
      */
     @Override
     public boolean execute(Ui ui, TaskList tasks) {

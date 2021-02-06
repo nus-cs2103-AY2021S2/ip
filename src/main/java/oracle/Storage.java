@@ -25,7 +25,7 @@ public class Storage {
      * to a task. Throws file not found error, but handling of the error is done by the Oracle object
      * @throws FileNotFoundException to be handled by Oracle
      */
-    public List<String> load() throws FileNotFoundException{
+    public List<String> load() throws FileNotFoundException {
         ArrayList<String> res = new ArrayList<>();
         //load file if available
         File store = new File(filePath);
@@ -33,7 +33,6 @@ public class Storage {
         while (myReader.hasNextLine()) {
             res.add(myReader.nextLine());
         }
-        System.out.println("Loaded stored information from ./oracle_data.txt");
         myReader.close();
         return res;
     }
@@ -43,17 +42,13 @@ public class Storage {
      * @param tasks this is the arraylist used during runtime, to be converted to text file.
      */
     public void store(ArrayList<Task> tasks) {
-        // store data
         try {
             FileWriter myWriter = new FileWriter(filePath);
-            for (Task task : tasks){
-                myWriter.write(task.toStorage()+ '\n');
+            for (Task task : tasks) {
+                myWriter.write(task.toStorage() + '\n');
             }
             myWriter.close();
-            System.out.println("Successfully saved the information");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 }

@@ -8,20 +8,19 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Event extends Task {
+    LocalDateTime time;
     /**
      * Returns an Task.Event
-     *
-     * @param description description of the event
-     * @param time        String to be converted to a LocalDateTime
+     * sorted should have 4 arguments, delimited by spaces
+     *  1. Day
+     *  2. Month
+     *  3. Year
+     *  4. Hour/Minute
+     * @param description: description of the event
+     * @param time: String to be converted to a LocalDateTime
      **/
     public Event(String description, String time) throws CommandFormatException {
         super(description);
-        /* sorted should have 4 args, delimited by spaces
-        1. Day
-        2. Month
-        3. Year
-        4. Hour/Minute
-         */
         try {
             this.time = parseDate(time.split(" "));
         } catch (NumberFormatException e){
@@ -30,9 +29,9 @@ public class Event extends Task {
     }
 
     /** Called during initialisation only, when storage pulls stored tasks from txt file.
-     * @param isDone boolean to indicate whether Task is done
-     * @param description description of the Event
-     * @param time String to be converted to a LocalDateTime
+     * @param isDone: boolean to indicate whether Task is done
+     * @param description: description of the Event
+     * @param time: String to be converted to a LocalDateTime
      * @throws CommandFormatException user has typed the command in a wrong format
      */
     public Event(Boolean isDone, String description, String time) throws CommandFormatException {
@@ -46,9 +45,9 @@ public class Event extends Task {
 
     /** Parses the String to produce a LocalDateTime. If information is wrong, throws CommandFormatException,
      * which will be eventually handled to remind users to use correct format. See Ui.
-     * @param sorted the sorted tags corresponding to various "time" arguments
+     * @param sorted: the sorted tags corresponding to various "time" arguments
      * @return LocalDateTime
-     * @throws CommandFormatException user has typed the command in a wrong format
+     * @throws CommandFormatException: user has typed the command in a wrong format
      */
     private LocalDateTime parseDate(String[] sorted) throws CommandFormatException{
         try {
@@ -79,6 +78,7 @@ public class Event extends Task {
      * @return wrapper around LocalDateTime corresponding method, but well formatted
      */
     private String getTimeHour(){
+        assert(this.time != null);
         return this.time.getHour() < 10 ? "0" + this.time.getHour(): String.valueOf(this.time.getHour());
     }
 
@@ -86,15 +86,17 @@ public class Event extends Task {
      * @return wrapper around LocalDateTime corresponding method, but well formatted
      */
     private String getTimeMinute(){
+        assert(this.time != null);
         return this.time.getMinute() < 10 ? "0" + this.time.getMinute(): String.valueOf(this.time.getMinute());
     }
-
 
     /***
      * Format = {type}{done}{description}{deadline}
      * @return String to be stored in the txt file for storage.
      */
     public String toStorage(){
+        assert(!this.description.isEmpty()); // important assertions to not write rubbish into storage file
+        assert(this.time != null);
         //type
         String res = "D";
         //done status
@@ -106,5 +108,4 @@ public class Event extends Task {
                 this.time.getYear(), this.getTimeHour(), this.getTimeMinute());
         return res;
     }
-    LocalDateTime time;
 }

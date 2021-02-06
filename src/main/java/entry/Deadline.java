@@ -8,6 +8,8 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Deadline extends Task {
+    LocalDateTime deadline;
+
     /**
      * Returns a Task.Deadline
      * sorted should have 4 args, delimited by spaces
@@ -15,9 +17,8 @@ public class Deadline extends Task {
      *  2. Month
      *  3. Year
      *  4. Hour/Minute
-     *
-     * @param description description of the deadline
-     * @param deadline    String to be converted to a LocalDateTime
+     * @param description: description of the deadline
+     * @param deadline: String to be converted to a LocalDateTime
      **/
     public Deadline(String description, String deadline) throws CommandFormatException {
         super(description);
@@ -29,9 +30,9 @@ public class Deadline extends Task {
     }
 
     /** Called during initialisation only, when storage pulls stored tasks from txt file.
-     * @param isDone boolean to indicate whether Task is done
-     * @param description description of the deadline
-     * @param deadline String to be converted to a LocalDateTime
+     * @param isDone: boolean to indicate whether Task is done
+     * @param description: description of the deadline
+     * @param deadline: String to be converted to a LocalDateTime
      * @throws CommandFormatException user has typed the command in a wrong format
      */
     public Deadline(Boolean isDone, String description, String deadline) throws CommandFormatException{
@@ -45,9 +46,9 @@ public class Deadline extends Task {
 
     /** Parses the String to produce a LocalDateTime. If information is wrong, throws CommandFormatException,
      * which will be eventually handled to remind users to use correct format. See Ui.
-     * @param sorted the sorted tags corresponding to various "time" arguments
+     * @param sorted: the sorted tags corresponding to various "time" arguments
      * @return LocalDateTime
-     * @throws CommandFormatException user has typed the command in a wrong format
+     * @throws CommandFormatException: user has typed the command in a wrong format
      */
     private LocalDateTime parseDate(String[] sorted) throws CommandFormatException{
         try {
@@ -79,6 +80,7 @@ public class Deadline extends Task {
      * @return wrapper around LocalDateTime corresponding method, but well formatted
      */
     private String getDeadlineHour() {
+        assert(this.deadline != null);
         return this.deadline.getHour() < 10 ? "0" + this.deadline.getHour() : String.valueOf(this.deadline.getHour());
     }
 
@@ -86,6 +88,7 @@ public class Deadline extends Task {
      * @return wrapper around LocalDateTime corresponding method, but well formatted
      */
     private String getDeadlineMinute() {
+        assert(this.deadline != null);
         return this.deadline.getMinute() < 10 ? "0" + this.deadline.getMinute() : String.valueOf(this.deadline.getMinute());
     }
 
@@ -94,6 +97,8 @@ public class Deadline extends Task {
      * @return String to be stored in the txt file for storage.
      */
     public String toStorage() {
+        assert(!this.description.isEmpty()); // important assertions to not write rubbish into storage file
+        assert(this.deadline != null);
         //type
         String res = "D";
         //done status
@@ -105,6 +110,4 @@ public class Deadline extends Task {
                 this.deadline.getYear(), this.getDeadlineHour(), this.getDeadlineMinute());
         return res;
     }
-
-    LocalDateTime deadline;
 }
