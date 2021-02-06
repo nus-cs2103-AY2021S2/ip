@@ -1,7 +1,7 @@
 package kelbot;
 
 /**
- * Categories for the different Commands available
+ * Categories for the different Commands available.
  */
 
 enum Command {
