@@ -45,13 +45,13 @@ public class EventCommand extends Command {
         this.instances = i;
         this.interval = interval;
         switch (type) {
-        case "y":
+        case "/year":
             this.isYearRecurrence = true;
             break;
-        case "m":
+        case "/month":
             this.isMonthRecurrence = true;
             break;
-        case "d":
+        case "/day":
             this.isDayRecurrence = true;
             break;
         }
@@ -80,7 +80,7 @@ public class EventCommand extends Command {
     public String execute(TaskManager tm, Storage st) throws DukeException {
         LocalDate currDate = date;
         for (int i = 0; i < instances; i++) {
-            tm.addEventTask(name, date);
+            tm.addEventTask(name, currDate);
             currDate = incrementDate(currDate);
         }
         st.save(tm);
