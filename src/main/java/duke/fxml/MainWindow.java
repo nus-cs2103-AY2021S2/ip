@@ -37,8 +37,16 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        Ui ui = new Ui();
+        scrollPaneSetup();
+        showGreetings();
+    }
+
+    private void scrollPaneSetup() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    private void showGreetings() {
+        Ui ui = new Ui();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.getGreeting(), dukeImage));
     }
 
@@ -56,8 +64,16 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
         DialogBox dukeDialog = DialogBox.getDukeDialog(response, dukeImage);
-        dialogContainer.getChildren().addAll(userDialog, dukeDialog);
+        addToDialogContainer(userDialog, dukeDialog);
         userInput.clear();
+        handleExit(input);
+    }
+
+    private void addToDialogContainer(DialogBox userDialog, DialogBox dukeDialog) {
+        dialogContainer.getChildren().addAll(userDialog, dukeDialog);
+    }
+
+    private void handleExit(String input) {
         if (input.equals("bye")) {
             Timer timer = new Timer();
             TimerTask timerTask = new TimerTask() {
