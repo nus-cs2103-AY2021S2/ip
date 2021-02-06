@@ -15,7 +15,6 @@ public class TaskList {
     /**
      * Creates a new TaskList, which stores the tasks. This class provides some abstraction for the underlying
      * ArrayList<Task
-     *
      * @param stringsToLoad: given the raw strings from the storage file, we create the tasks
      */
     public TaskList(List<String> stringsToLoad) {
