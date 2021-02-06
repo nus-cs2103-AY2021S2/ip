@@ -29,7 +29,8 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.getTaskList());
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -88,7 +89,8 @@ public class Duke {
                 case ADD_TODO_COMMAND:
                     if (commandArr.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                    } else {
+                    }
+                    else {
                         newTask = parser.parseAddTodo(command);
                         ui.printAddedTask(tasks, newTask);
                     }
@@ -112,7 +114,8 @@ public class Duke {
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException ex) {
+            }
+            catch (DukeException ex) {
                 System.err.println(ex.getMessage());
             }
         }

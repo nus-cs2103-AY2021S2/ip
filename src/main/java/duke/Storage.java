@@ -18,7 +18,7 @@ public class Storage {
      * Constructor for Storage object.
      * Makes file tasks.txt if non-existent. Else, validates existence of file
      *
-     * @param filePath the file path where user's TaskList is to be stored.
+     * @param filePath
      * @throws IOException if filePath is not "data/tasks.txt"
      * @see Files
      * @see Paths
@@ -52,7 +52,8 @@ public class Storage {
     public ArrayList<Task> getTaskList() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         List<String> fileLines = Files.readAllLines(Paths.get(filePath));
-        for (String line : fileLines) {
+        for (int i = 0; i < fileLines.size(); i++) {
+            String line = fileLines.get(i);
             String[] userTask = line.split(" \\| ");
             String eventType = userTask[0];
             Task taskInList;
@@ -77,7 +78,8 @@ public class Storage {
                 default:
 
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 System.err.println(e.getMessage());
             }
         }
@@ -86,23 +88,26 @@ public class Storage {
 
     /**
      * Writes user's task list into tasks.txt local file.
-     * If the task list isn't been able to be written into filePath, IOException thrown.
+     * If the task list isnt been able to be written into filePath, IOException thrown.
      *
      * @param data : the user's task list
      */
     public void writeData(List<Task> data) {
-        StringBuilder stringOfData = new StringBuilder();
+        String stringOfData = "";
         for (int i = 0; i < data.size(); i++) {
             if (i == data.size() - 1) {
-                stringOfData.append(data.get(i).toString());
-            } else {
-                stringOfData.append(data.get(i).toString()).append("\n");
+                stringOfData += data.get(i).toString();
+            }
+            else {
+                stringOfData += data.get(i).toString() + "\n";
             }
         }
         try {
-            Files.writeString(Paths.get(this.filePath), stringOfData.toString());
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+            Files.writeString(Paths.get(this.filePath), stringOfData);
+        }
+        catch (IOException e) {
+            System.err.println(e);
         }
     }
+
 }

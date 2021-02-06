@@ -85,16 +85,12 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
-    /**
-     * Prints all tasks found when key search words are entered by user.
-     *
-     * @param tasksFound
-     */
     public void printFoundTasks(TaskList tasksFound) {
         System.out.println("Here are the matching tasks in your list:");
         if (tasksFound.getTaskListSize() == 0) {
             System.out.println("Sorry. No tasks found :-(");
-        } else {
+        }
+        else {
             this.printTaskList(tasksFound);
         }
     }

@@ -11,11 +11,10 @@ public class Event extends Task {
         super(eventDetail);
         try {
             this.eventDate = Task.dateStringToDate(eventDateString);
-            this.eventDateString = String.format("%s %d %d",
-                    eventDate.getMonth().toString().toLowerCase(),
-                    eventDate.getDayOfMonth(),
-                    eventDate.getYear());
-        } catch (DateTimeException e) {
+            this.eventDateString = eventDate.getMonth().toString().toLowerCase() + " " +
+                    eventDate.getDayOfMonth() + " " + eventDate.getYear();
+        }
+        catch (DateTimeException e) {
             System.err.println("Please input date in yyyy-MM-dd format.");
         }
     }
