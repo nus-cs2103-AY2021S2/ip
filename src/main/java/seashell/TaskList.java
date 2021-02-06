@@ -59,7 +59,7 @@ public class TaskList {
             ArrayList<Task> updatedList = new ArrayList<>(this.taskList);
             updatedList.add(newTask);
             System.out.println("Added " + newTask + " to the task list!");
-            System.out.println("You now have " + taskList.size() + " items in the task list");
+            System.out.println("You now have " + updatedList.size() + " items in the task list");
             saveHandler.addTaskToSaveFile(newTask);
             return new TaskList(updatedList);
         }
@@ -70,7 +70,7 @@ public class TaskList {
         if (taskName.equals("")) {
             throw new SeashellException("OOPS!!! The description of a task cannot be empty.");
         } else if (command.indexOf("/by") == -1) {
-            throw new SeashellException("OOPS!!! The syntax of adding a deadline should be [name] /by [date/time]");
+            throw new SeashellException("OOPS!!! The syntax of adding a deadline should be [name] /by [yyyy-mm-dd]");
         } else {
             taskName = command.substring(8, command.indexOf("/by") - 1).stripLeading();
             String by = command.substring(command.indexOf("/by") + 4);
@@ -89,7 +89,7 @@ public class TaskList {
         if (taskName.equals("")) {
             throw new SeashellException("OOPS!!! The description of a task cannot be empty.");
         } else if (command.indexOf("/at") == -1) {
-            throw new SeashellException("OOPS!!! The syntax of adding an event should be [name] /at [date/time]");
+            throw new SeashellException("OOPS!!! The syntax of adding an event should be [name] /at [yyyy-mm-dd]");
         } else {
             taskName = command.substring(5, command.indexOf("/at") - 1).stripLeading();
             String at = command.substring(command.indexOf("/at") + 4);
