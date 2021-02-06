@@ -11,7 +11,7 @@ Based on the Duke chatbot.
 
 ## How to interpret this guide
 Commands usually come in the following format:
-`command (arguments if any)`
+`command (ARGUMENTS IF ANY)`
 
 For date and time inputs, they would be given as such:
 
@@ -320,6 +320,11 @@ Expected Outcome:
 Given a description, stores todo task.
 Format of arguments: todo [description]
 ```
+Outcome if you do not give a command:
+```
+Command not given! Not stonks!
+```
+
 Outcome for invalid commands:
 ```
 Helper does not recognise command. Not Stonks!
@@ -382,4 +387,9 @@ Command not recognised. Not stonks!
 If you key in additional inputs next to a no-input command such as `list`, this is what Meme Man has to say:
 ```
 Excessive inputs for a no-input command. Not stonks!
+```
+### Nothing given
+If you do not key in anything but press enter anyway, this is what Meme Man has to say:
+```
+Nothing was typed in! Not stonks!
 ```

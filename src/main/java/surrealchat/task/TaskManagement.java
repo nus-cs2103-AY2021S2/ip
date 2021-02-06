@@ -7,6 +7,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import surrealchat.exception.SurrealException;
+
 /**
  * Handles storing of tasks and file loading/unloading operations.
  */
@@ -14,13 +16,14 @@ public class TaskManagement {
     protected static final String TODO_TYPE = "T";
     protected static final String DEADLINE_TYPE = "D";
     protected static final String EVENT_TYPE = "E";
-    protected List<Task> taskList;
+    protected final List<Task> taskList; //Protect taskList from being changed to null.
 
     /**
      * Creates instance of TaskManagement object.
      * @param taskList List of tasks.
      */
     public TaskManagement(List<Task> taskList) {
+        assert taskList != null : "Null taskList passed in! Not stonks!\n"; //Protection against null
         this.taskList = taskList;
     }
 
@@ -83,15 +86,17 @@ public class TaskManagement {
 
     /**
      * Deletes all tasks from the list.
+     * @throws SurrealException If list was empty to begin with.
      */
-    public void deleteAllTasks() {
+    public void deleteAllTasks() throws SurrealException {
         if (taskList.isEmpty()) {
-            throw new NoSuchElementException("List is already empty. Not stonks!\n");
+            throw new SurrealException("List is already empty. Not stonks!\n");
         }
         taskList.clear();
     }
 
     private String spellTaskType(String taskType) {
+        assert taskType != null : "Somehow there was a null taskType. Not stonks!\n";
         switch(taskType) {
         case TODO_TYPE:
             return "todo";
@@ -117,6 +122,8 @@ public class TaskManagement {
     }
 
     private void convertToTasks(String taskType, String description, boolean taskDone) {
+        assert taskType != null : "Somehow there was a null taskType. Not stonks!\n";
+        assert description != null : "Somehow, description was empty. Not stonks!\n";
         switch(taskType) {
         case TODO_TYPE:
             addToDoFromFile(description, taskDone);
@@ -239,11 +246,12 @@ public class TaskManagement {
     /**
      * Converts list of tasks into string form for printing.
      * @return List of tasks in print string format.
+     * @throws SurrealException If list is empty.
      */
-    public String listOutTasks() {
+    public String listOutTasks() throws SurrealException {
         List<Task> rawTaskList = getTaskList();
         if (rawTaskList.isEmpty()) {
-            throw new NoSuchElementException("I have nothing to print. Not stonks!\n");
+            throw new SurrealException("I have nothing to print. Not stonks!\n");
         }
         String outputTasks = "";
         for (int i = 1; i <= rawTaskList.size(); i++) {

@@ -1,5 +1,7 @@
 package surrealchat.command;
 
+import java.util.InputMismatchException;
+
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
 
@@ -37,11 +39,14 @@ public class EditCommand extends Command {
         String[] descriptionSplitArray = rawDescription.split("/edit");
         try {
             int taskNumber = Integer.valueOf(descriptionSplitArray[0].trim());
-            assert taskNumber > 0 : "Invalid task number. Not stonks!\n";
-            assert taskNumber <= taskManagement.getNumberOfTasks() : "Invalid task number. Not stonks!\n";
+            if (Command.isInvalidTaskNumber(taskNumber, taskManagement.getNumberOfTasks())) {
+                throw new InputMismatchException("Invalid task number. Not stonks!\n");
+            }
 
             String newDescription = descriptionSplitArray[1].trim();
-            assert newDescription.isEmpty() == false : "No description provided for editing. Not stonks!\n";
+            if (newDescription.isEmpty()) {
+                throw new InputMismatchException("No description provided for editing. Not stonks!\n");
+            }
 
             Task editedTask = taskManagement.editDescription(taskNumber, newDescription);
             return printOutput(editedTask);
@@ -49,8 +54,8 @@ public class EditCommand extends Command {
             return "Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!\n";
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur.
             return "Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!\n";
-        } catch (AssertionError a) {
-            return a.getMessage();
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 

@@ -3,6 +3,7 @@ package surrealchat.command;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import surrealchat.exception.SurrealException;
 import surrealchat.task.DeadlineTask;
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
@@ -22,16 +23,18 @@ public class DeadlineCommand extends Command {
         this.rawDescription = rawDescription;
     }
 
-    private LocalDateTime parseDate(String dateString) {
+    private LocalDateTime parseDate(String dateString) throws SurrealException {
         try {
             return LocalDateTime.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Input date time format is incorrect. Not stonks!\n");
+            throw new SurrealException("Input date time format is incorrect. Not stonks!\n");
         }
     }
 
-    private DeadlineTask addDeadline(String taskDescription) {
-        assert !taskDescription.isEmpty() : "Empty deadline task description. Not stonks!\n";
+    private DeadlineTask addDeadline(String taskDescription) throws SurrealException {
+        if (taskDescription.isEmpty()) {
+            throw new SurrealException("Empty deadline task description. Not stonks!\n");
+        }
 
         //Split the description into description and deadline
         String[] descriptionSplitArray = taskDescription.split("/by");
@@ -42,7 +45,7 @@ public class DeadlineCommand extends Command {
             return DeadlineTask.createNewDeadlineTask(descriptionSplitArray[0].trim(),
                     deadlineDateTime);
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
-            throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/by'? Not stonks!\n");
+            throw new SurrealException("Wrong formatting. Did you forget to put '/by'? Not stonks!\n");
         }
     }
 
@@ -62,7 +65,7 @@ public class DeadlineCommand extends Command {
             DeadlineTask addedTask = addDeadline(rawDescription);
             taskManagement.addTask(addedTask);
             return printOutput(addedTask, taskManagement.getNumberOfTasks());
-        } catch (Throwable e) {
+        } catch (SurrealException e) {
             return e.getMessage();
         }
     }

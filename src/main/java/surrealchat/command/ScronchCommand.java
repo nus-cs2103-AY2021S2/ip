@@ -1,7 +1,6 @@
 package surrealchat.command;
 
-import java.util.NoSuchElementException;
-
+import surrealchat.exception.SurrealException;
 import surrealchat.task.TaskManagement;
 
 /**
@@ -30,7 +29,7 @@ public class ScronchCommand extends Command {
         try {
             taskManagement.deleteAllTasks();
             return printOutput(taskManagement.getNumberOfTasks());
-        } catch (NoSuchElementException e) {
+        } catch (SurrealException e) {
             return e.getMessage();
         }
     }

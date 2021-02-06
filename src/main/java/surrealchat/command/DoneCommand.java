@@ -1,7 +1,6 @@
 package surrealchat.command;
 
-import java.util.NoSuchElementException;
-
+import surrealchat.exception.SurrealException;
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
 
@@ -20,21 +19,6 @@ public class DoneCommand extends Command {
     public DoneCommand(String taskNumberString) {
         super("done");
         this.taskNumberString = taskNumberString;
-    }
-
-    private int getInputNumber(String description) {
-        description = description.trim();
-        if (description.isEmpty()) {
-            throw new NoSuchElementException(
-                    "Did you forget to put a number for the command you just typed in? Not stonks!\n");
-        } else {
-            try {
-                return Integer.valueOf(description);
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException(
-                        "Did you put something other than a number or did you put a number incorrectly? Not stonks!\n");
-            }
-        }
     }
 
     private String printOutput(Task task) {
@@ -57,13 +41,14 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskManagement taskManagement) {
         try {
-            int taskNumber = this.getInputNumber(this.taskNumberString);
-            assert taskNumber > 0 : "Invalid task number. Not stonks!\n";
-            assert taskNumber <= taskManagement.getNumberOfTasks() : "Invalid task number. Not stonks!\n";
+            int taskNumber = Command.getInputNumber(this.taskNumberString);
+            if (Command.isInvalidTaskNumber(taskNumber, taskManagement.getNumberOfTasks())) {
+                throw new SurrealException("Invalid task number. Not stonks!\n");
+            }
 
             Task doneTask = taskManagement.markAsDone(taskNumber);
             return printOutput(doneTask);
-        } catch (Throwable e) {
+        } catch (SurrealException e) {
             return e.getMessage();
         }
     }

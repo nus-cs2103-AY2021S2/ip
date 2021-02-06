@@ -23,6 +23,9 @@ public class HelpMode {
      * @return String related to how the above command works.
      */
     public static String displayHelp(String command) {
+        if (command.isEmpty()) {
+            return "Command not given! Not stonks!\n";
+        }
         switch(command.trim()) {
         case "todo":
             return ToDoCommand.displayHelp();

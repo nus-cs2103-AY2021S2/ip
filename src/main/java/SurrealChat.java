@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import surrealchat.command.Command;
@@ -33,6 +34,8 @@ public class SurrealChat {
 
     private SurrealChat(TaskManagement taskManagement,
                         FileManagement fileManagement) {
+        assert taskManagement != null : "Null taskManagement! Not stonks!\n";
+        assert fileManagement != null : "Null fileManagement! Not stonks!\n";
         this.taskManagement = taskManagement;
         this.fileManagement = fileManagement;
         fileLoadOutput = loadFile();
@@ -44,6 +47,7 @@ public class SurrealChat {
      * @return SurrealChat instance.
      */
     public static SurrealChat initSurrealChat(File filePath) {
+        assert filePath != null : "Null filePath. File path needed for save/load. Not stonks!\n";
         TaskManagement taskManagement = new TaskManagement(new ArrayList<Task>());
         FileManagement fileManagement = new FileManagement(filePath);
         return new SurrealChat(taskManagement, fileManagement);
@@ -53,12 +57,21 @@ public class SurrealChat {
         return inputString.split(" ");
     }
 
+    private void checkExcessArguments(String excess) {
+        if (!excess.isEmpty()) {
+            throw new InputMismatchException("Excessive inputs for a no-input command. Not stonks!\n");
+        }
+    }
+
     /**
      * Generates output to be printed based on what command is executed.
      * @param inputString The entire command, inclusive of arguments if any.
      * @return Output to be printed.
      */
     public String commandLogic(String inputString) {
+        if (inputString.isEmpty()) {
+            return "Nothing was typed in! Not stonks!\n";
+        }
         String[] separatedWords = splitString(inputString);
         String userCommand = separatedWords[0];
         String restOfInput = "";
@@ -68,8 +81,11 @@ public class SurrealChat {
             restOfInput += String.format("%s ", separatedWords[i]);
         }
         restOfInput = restOfInput.trim();
-
-        return executeCommand(userCommand, restOfInput);
+        try {
+            return executeCommand(userCommand, restOfInput);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     private String executeCommand(String command, String restOfInput) {
@@ -77,6 +93,7 @@ public class SurrealChat {
         case "help":
             return HelpMode.displayHelp(restOfInput);
         case "list":
+            checkExcessArguments(restOfInput);
             Command listCommand = new ListCommand();
             String outputList = listCommand.execute(taskManagement);
             return outputList;
@@ -105,6 +122,7 @@ public class SurrealChat {
             outputString = deleteCommand.execute(taskManagement);
             return outputString;
         case "scronch":
+            checkExcessArguments(restOfInput);
             Command scronchCommand = new ScronchCommand();
             outputString = scronchCommand.execute(taskManagement);
             return outputString;
@@ -113,16 +131,19 @@ public class SurrealChat {
             outputString = findCommand.execute(taskManagement);
             return outputString;
         case "orang":
+            checkExcessArguments(restOfInput);
             EasterEgg orangEasterEgg = new OrangEasterEgg();
             outputString = orangEasterEgg.execute();
             return outputString;
         case "vegetal":
+            checkExcessArguments(restOfInput);
             EasterEgg vegetalEasterEgg = new VegetalEasterEgg();
             outputString = vegetalEasterEgg.execute();
             return outputString;
         case "icandoit":
             //Fallthrough to aikendueet
         case "aikendueet":
+            checkExcessArguments(restOfInput);
             EasterEgg handEasterEgg = new HandEasterEgg();
             outputString = handEasterEgg.execute();
             return outputString;

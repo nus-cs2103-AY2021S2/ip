@@ -1,5 +1,6 @@
 package surrealchat.command;
 
+import surrealchat.exception.SurrealException;
 import surrealchat.task.Task;
 import surrealchat.task.TaskManagement;
 import surrealchat.task.ToDoTask;
@@ -19,8 +20,10 @@ public class ToDoCommand extends Command {
         this.taskDescription = taskDescription;
     }
 
-    private ToDoTask addToDo(String taskDescription) {
-        assert !taskDescription.isEmpty() : "Empty todo task description. Not stonks!\n";
+    private ToDoTask addToDo(String taskDescription) throws SurrealException {
+        if (taskDescription.isEmpty()) {
+            throw new SurrealException("Empty todo task description. Not stonks!\n");
+        }
         return ToDoTask.createNewToDoTask(taskDescription.trim());
     }
 
@@ -40,7 +43,7 @@ public class ToDoCommand extends Command {
             ToDoTask addedTask = addToDo(taskDescription);
             taskManagement.addTask(addedTask);
             return printOutput(addedTask, taskManagement.getNumberOfTasks());
-        } catch (Throwable e) {
+        } catch (SurrealException e) {
             return e.getMessage();
         }
     }
