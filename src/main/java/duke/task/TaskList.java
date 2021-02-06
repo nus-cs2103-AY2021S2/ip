@@ -64,19 +64,14 @@ public class TaskList {
      *
      * @param target the target keyword
      */
-    public String findTask(String target) {
-        try {
-            if (taskList.size() == 0) {
-                throw new DukeException("There's currently no task in the list.");
-            }
-            List<Task> targetTasks =
-                    taskList.stream()
-                            .filter(task -> task.getName().contains(target))
-                            .collect(Collectors.toList());
-            if (targetTasks.size() != 0) {
-                return printSpecifiedTasks(targetTasks);
-            } else {
-                throw new DukeException("There's currently no task name with \"" + target + "\".");
+    public List<Task> findTask(String target) throws DukeException {
+        if (taskList.size() == 0) {
+            throw new DukeException("There's currently no task in the list.");
+        }
+        List<Task> targetTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getName().contains(target)) {
+                targetTasks.add(task);
             }
         }
         if (targetTasks.size() != 0) {

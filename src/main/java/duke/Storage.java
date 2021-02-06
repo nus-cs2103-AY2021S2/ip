@@ -84,12 +84,12 @@ public class Storage {
      */
     public void updateFile(TaskList tasks) {
         String updatedString = "";
-        for (Task t : taskList.getTaskList()) {
-            updatedString += String.format("%s | %s | %s", t.getType(), (t.isDone() ? 1 : 0), t.getName());
-            if (t.getType().equals(TaskType.DEADLINE)) {
-                updatedString += " | " + ((Deadline) t).getTime().toString();
-            } else if (t.getType().equals(TaskType.EVENT)) {
-                updatedString += " | " + ((Event) t).getTime().toString();
+        for (Task task : tasks.getTaskList()) {
+            updatedString += String.format("%s | %s | %s", task.getType(), (task.isDone() ? 1 : 0), task.getName());
+            if (task.getType().equals(TaskType.DEADLINE)) {
+                updatedString += " | " + ((Deadline) task).getTime().toString();
+            } else if (task.getType().equals(TaskType.EVENT)) {
+                updatedString += " | " + ((Event) task).getTime().toString();
             }
             updatedString += "\n";
         }
