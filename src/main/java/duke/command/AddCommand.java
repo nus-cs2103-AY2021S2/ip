@@ -55,14 +55,14 @@ public class AddCommand extends Command {
     private Task convertToTodo() throws DukeException {
         if (command.length() <= LENGTH_TODO) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
-        } else {
-            String subStr = command.substring(LENGTH_TODO);
-            if (StringParser.isBlank(subStr)) {
-                throw new DukeException(ERROR_EMPTY_CONTENT);
-            } else {
-                return new Todo(command.substring(LENGTH_TODO));
-            }
         }
+
+        String subStr = command.substring(LENGTH_TODO);
+        if (StringParser.isBlank(subStr)) {
+            throw new DukeException(ERROR_EMPTY_CONTENT);
+        }
+
+        return new Todo(command.substring(LENGTH_TODO));
     }
 
     /**
@@ -74,24 +74,25 @@ public class AddCommand extends Command {
     private Task convertToEvent() throws DukeException {
         if (command.length() <= LENGTH_EVENT) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
-        } else {
-            int indexOfAt = command.toLowerCase().indexOf(MARK_AT);
-            if (indexOfAt < LENGTH_EVENT) {
-                throw new DukeException(ERROR_UNDETECTED_AT);
-            }
-            String subStrContent = command.substring(LENGTH_EVENT, indexOfAt);
-            String subStrTime = command.substring(indexOfAt + LENGTH_SEPARATOR);
-            if (StringParser.isBlank(subStrContent)) {
-                throw new DukeException(ERROR_EMPTY_CONTENT);
-            } else if (StringParser.isBlank(subStrTime)) {
-                throw new DukeException(ERROR_EMPTY_TIME);
-            } else {
-                try {
-                    return new Event(subStrContent, StringParser.parseTime(subStrTime));
-                } catch (DateTimeException e) {
-                    throw new DukeException(ERROR_INCORRECT_FORMAT);
-                }
-            }
+        }
+
+        int indexOfAt = command.toLowerCase().indexOf(MARK_AT);
+        if (indexOfAt < LENGTH_EVENT) {
+            throw new DukeException(ERROR_UNDETECTED_AT);
+        }
+
+        String subStrContent = command.substring(LENGTH_EVENT, indexOfAt);
+        String subStrTime = command.substring(indexOfAt + LENGTH_SEPARATOR);
+        if (StringParser.isBlank(subStrContent)) {
+            throw new DukeException(ERROR_EMPTY_CONTENT);
+        } else if (StringParser.isBlank(subStrTime)) {
+            throw new DukeException(ERROR_EMPTY_TIME);
+        }
+
+        try {
+            return new Event(subStrContent, StringParser.parseTime(subStrTime));
+        } catch (DateTimeException e) {
+            throw new DukeException(ERROR_INCORRECT_FORMAT);
         }
     }
 
@@ -104,24 +105,24 @@ public class AddCommand extends Command {
     private Task convertToDeadline() throws DukeException {
         if (command.length() <= LENGTH_DEADLINE) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
-        } else {
-            int indexOfBy = command.toLowerCase().indexOf(MARK_BY);
-            if (indexOfBy < LENGTH_DEADLINE) {
-                throw new DukeException(ERROR_UNDETECTED_BY);
-            }
-            String subStrContent = command.substring(LENGTH_DEADLINE, indexOfBy);
-            String subStrTime = command.substring(indexOfBy + LENGTH_SEPARATOR);
-            if (StringParser.isBlank(subStrContent)) {
-                throw new DukeException(ERROR_EMPTY_CONTENT);
-            } else if (StringParser.isBlank(subStrTime)) {
-                throw new DukeException(ERROR_EMPTY_TIME);
-            } else {
-                try {
-                    return new Deadline(subStrContent, StringParser.parseTime(subStrTime));
-                } catch (DateTimeException e) {
-                    throw new DukeException(ERROR_INCORRECT_FORMAT);
-                }
-            }
+        }
+        int indexOfBy = command.toLowerCase().indexOf(MARK_BY);
+        if (indexOfBy < LENGTH_DEADLINE) {
+            throw new DukeException(ERROR_UNDETECTED_BY);
+        }
+
+        String subStrContent = command.substring(LENGTH_DEADLINE, indexOfBy);
+        String subStrTime = command.substring(indexOfBy + LENGTH_SEPARATOR);
+        if (StringParser.isBlank(subStrContent)) {
+            throw new DukeException(ERROR_EMPTY_CONTENT);
+        } else if (StringParser.isBlank(subStrTime)) {
+            throw new DukeException(ERROR_EMPTY_TIME);
+        }
+
+        try {
+            return new Deadline(subStrContent, StringParser.parseTime(subStrTime));
+        } catch (DateTimeException e) {
+            throw new DukeException(ERROR_INCORRECT_FORMAT);
         }
     }
 
