@@ -61,7 +61,11 @@ public class Task {
      * @return String of task to be saved.
      */
     public String getSaveString() {
-        return this.type + " | " + (this.isDone ? "1" : "0") + " | " + this.description;
+        return this.type + " | " + getIsDoneString() + " | " + this.description;
+    }
+
+    private String getIsDoneString() {
+        return (this.isDone ? "1" : "0");
     }
 
     /**
