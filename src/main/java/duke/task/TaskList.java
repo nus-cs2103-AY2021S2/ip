@@ -41,7 +41,7 @@ public class TaskList {
     /**
      * This method finds the tasks if they match the keyword
      * As an additional feature, partial match will also yeild results
-     * Integrate BetterSearch
+     * Integrate BetterSearch into the existing findTask method
      *
      * @param keyword
      * @return
