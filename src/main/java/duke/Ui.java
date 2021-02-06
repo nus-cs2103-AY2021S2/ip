@@ -17,7 +17,7 @@ public class Ui {
 
     private static final String LINE_PREFIX = ">>> ";
     private static final String WELCOME_MESSAGE = "Hello Human, I am Bob.";
-    private static final String EXIT_MESSAGE = "Goodbye Human.";
+    private static final String EXIT_MESSAGE = "Goodbye Human. See You Again.";
 
     private final Scanner in;
     private final PrintStream out;
