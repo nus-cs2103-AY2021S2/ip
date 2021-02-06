@@ -20,15 +20,15 @@ public class Parser {
     /**
      * Parse user input.
      *
-     * @param subStrings substrings of user input.
+     * @param commandString user input.
      * @return Command that has been parsed.
      * @throws UnknownCommandException If input cannot be parsed.
      */
-    public static Command parseCommand(String[] subStrings) throws UnknownCommandException {
+    public static Command parseCommand(String commandString) throws UnknownCommandException {
         try {
-            return Command.valueOf(subStrings[0].trim().toUpperCase());
+            return Command.valueOf(commandString.trim().toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new UnknownCommandException(subStrings[0].trim());
+            throw new UnknownCommandException(commandString.trim());
         }
     }
 }

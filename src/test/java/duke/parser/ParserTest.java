@@ -10,13 +10,13 @@ import duke.utils.Command;
 public class ParserTest {
     @Test
     public void parseCommand_validCommand_success() throws UnknownCommandException {
-        String[] todo = {"todo", ""};
-        String[] deadline = {"deadline", ""};
-        String[] event = {"event", ""};
-        String[] delete = {"delete", ""};
-        String[] bye = {"bye", ""};
-        String[] done = {"done", ""};
-        String[] list = {"list", ""};
+        String todo = "todo";
+        String deadline = "deadline";
+        String event = "event";
+        String delete = "delete";
+        String bye = "bye";
+        String done = "done";
+        String list = "list";
 
         assertEquals(Command.TODO, Parser.parseCommand(todo));
         assertEquals(Command.DEADLINE, Parser.parseCommand(deadline));

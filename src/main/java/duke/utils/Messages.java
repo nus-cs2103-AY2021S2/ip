@@ -1,21 +1,17 @@
-package duke.ui;
+package duke.utils;
 
 import java.util.ArrayList;
 
 import duke.task.Task;
 
 /**
- * Handles Ui related functions such as input and output.
+ * Format messages to be send by program.
  */
-public class Ui {
-    /**
-     * Message shown when user opens the application
-     */
-    public static final String WELCOME_MESSAGE = "Hello! I'm Chip the Squirrel! How can I help you today?";
-    /**
-     * Message shown when user closes the application
-     */
-    public static final String GOODBYE_MESSAGE = "Bye! Hope to see you again soon!";
+public class Messages {
+
+    private static final String WELCOME_MESSAGE =
+        "Hello! I'm Chip the Squirrel! How can I help you today? If you need any help, type \"help\".";
+    private static final String GOODBYE_MESSAGE = "Bye! Hope to see you again soon!";
 
     private static String joinStringsWithNewLines(String... strings) {
         return String.join("\n", strings);
@@ -37,7 +33,7 @@ public class Ui {
      * Returns a message to be shown after a task is successfully deleted.
      *
      * @param numTasks Number of tasks left in the list.
-     * @param task     Task that was deleted.
+     * @param task Task that was deleted.
      * @return Message shown after task is successfully deleted.
      */
     public static String getSuccessfullyDeletedMessage(int numTasks, Task task) {
@@ -92,11 +88,31 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns a message to be shown after a task is successfully added.
+     * @param numTasks Number of tasks left in the list.
+     * @param task Task that was added.
+     * @return Message shown after task is successfully added.
+     */
     public static String getSuccessfullyAddedTaskMessage(int numTasks, Task task) {
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
         assert task != null : "task should not be null";
         return joinStringsWithNewLines("Got it! I've added this task:",
             "  " + task.toString(),
             "Now you have " + formattedTasksCount + " in the list.");
+    }
+
+    /**
+     * Returns message shown when user opens the application
+     */
+    public static String getWelcomeMessage() {
+        return WELCOME_MESSAGE;
+    }
+
+    /**
+     * Returns Message shown when user closes the application
+     */
+    public static String getGoodbyeMessage() {
+        return GOODBYE_MESSAGE;
     }
 }
