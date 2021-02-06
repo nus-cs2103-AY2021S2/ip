@@ -52,8 +52,9 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a dialog box formatted for the user input.
+     *
      * @param text Command the user input.
-     * @param img Display image.
+     * @param img  Display image.
      * @return A dialog box.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -62,8 +63,9 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a dialog box formatted for the response.
+     *
      * @param text Response.
-     * @param img Display image.
+     * @param img  Display image.
      * @return A dialog box.
      */
     public static DialogBox getDukeDialog(String text, Image img) {

@@ -57,20 +57,19 @@ public class Storage {
             if (!input.equals("")) {
                 String[] tokens = input.split("\\|");
                 Command taskType = Command.valueOf(tokens[0]);
+                boolean isTimeFieldPresent = tokens.length >= 5;
                 Task task;
-
                 String date;
                 String time;
-
                 switch (taskType) {
                 case EVENT:
                     date = tokens[3];
-                    time = tokens.length < 5 ? "" : " " + tokens[4];
+                    time = isTimeFieldPresent ? " " + tokens[4] : "";
                     task = new Event(tokens[2], date + time);
                     break;
                 case DEADLINE:
                     date = tokens[3];
-                    time = tokens.length < 5 ? "" : " " + tokens[4];
+                    time = isTimeFieldPresent ? " " + tokens[4] : "";
                     task = new Deadline(tokens[2], date + time);
                     break;
                 case TODO:

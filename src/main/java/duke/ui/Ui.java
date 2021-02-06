@@ -17,7 +17,7 @@ public class Ui {
      */
     public static final String GOODBYE_MESSAGE = "Bye! Hope to see you again soon!";
 
-    private static String joinStringsWithNewlines(String... strings) {
+    private static String joinStringsWithNewLines(String... strings) {
         return String.join("\n", strings);
     }
 
@@ -28,7 +28,7 @@ public class Ui {
      * @return Message shown after task is successfully marked as done.
      */
     public static String getSuccessfullyDoneMessage(Task task) {
-        return joinStringsWithNewlines("Good Job! I've marked this task as done!",
+        return joinStringsWithNewLines("Good Job! I've marked this task as done!",
             task.toString());
     }
 
@@ -42,7 +42,7 @@ public class Ui {
     public static String getSuccessfullyDeletedMessage(int numTasks, Task task) {
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
 
-        return joinStringsWithNewlines("Got it! I've removed this task:",
+        return joinStringsWithNewLines("Got it! I've removed this task:",
             "  " + task.toString(),
             "Now you have " + formattedTasksCount + " in the list.");
     }
@@ -65,7 +65,7 @@ public class Ui {
                 outputArr[i + 1] = (i + 1) + "." + tasks.get(i).toString();
             }
 
-            return joinStringsWithNewlines(outputArr);
+            return joinStringsWithNewLines(outputArr);
         }
     }
 
@@ -85,14 +85,14 @@ public class Ui {
                 tasksArr[i] = (i + 1) + "." + tasks.get(i).toString();
             }
 
-            return joinStringsWithNewlines(tasksArr);
+            return joinStringsWithNewLines(tasksArr);
         }
     }
 
     public static String getSuccessfullyAddedTaskMessage(int numTasks, Task task) {
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
 
-        return joinStringsWithNewlines("Got it! I've added this task:",
+        return joinStringsWithNewLines("Got it! I've added this task:",
             "  " + task.toString(),
             "Now you have " + formattedTasksCount + " in the list.");
     }

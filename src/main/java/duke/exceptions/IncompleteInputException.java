@@ -10,6 +10,7 @@ public class IncompleteInputException extends DukeException {
 
     /**
      * Creates an instance of exception thrown when input is incomplete.
+     *
      * @param command Command that was called.
      */
     public IncompleteInputException(Command command) {

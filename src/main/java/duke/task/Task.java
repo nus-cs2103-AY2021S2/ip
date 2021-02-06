@@ -4,13 +4,18 @@ package duke.task;
  * Task represents a task that is to be done.
  */
 public abstract class Task {
-    /** Description of task. */
+    /**
+     * Description of task.
+     */
     protected String description;
-    /** Status of task. */
+    /**
+     * Status of task.
+     */
     protected boolean isDone;
 
     /**
      * Creates new instance of a task.
+     *
      * @param description Description of task.
      */
     public Task(String description) {
@@ -20,6 +25,7 @@ public abstract class Task {
 
     /**
      * Returns a status icon depending on status of task.
+     *
      * @return status icon.
      */
     public String getStatusIcon() {
@@ -35,6 +41,7 @@ public abstract class Task {
 
     /**
      * Returns String representation of task to be saved to save file.
+     *
      * @return String representation of task.
      */
     public abstract String serialise();

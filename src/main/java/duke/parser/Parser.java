@@ -9,6 +9,7 @@ import duke.utils.Command;
 public class Parser {
     /**
      * Splits input into substrings.
+     *
      * @param input User input.
      * @return String[] array of substrings.
      */
@@ -18,6 +19,7 @@ public class Parser {
 
     /**
      * Parse user input.
+     *
      * @param subStrings substrings of user input.
      * @return Command that has been parsed.
      * @throws UnknownCommandException If input cannot be parsed.

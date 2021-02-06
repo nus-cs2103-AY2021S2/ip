@@ -46,11 +46,11 @@ public class TaskList {
      * Adds a task to the list of tasks.
      *
      * @param command Command to determine type of task to add.
-     * @param input   Input string.
+     * @param input Input string.
      * @return Task The task that was added.
      * @throws ArrayIndexOutOfBoundsException If input is not complete.
-     * @throws InvalidDateException           If date is invalid.
-     * @throws UnknownCommandException        If command is invalid.
+     * @throws InvalidDateException If date is invalid.
+     * @throws UnknownCommandException If command is invalid.
      */
     public Task addTask(Command command, String input)
         throws ArrayIndexOutOfBoundsException, InvalidDateException, UnknownCommandException {
