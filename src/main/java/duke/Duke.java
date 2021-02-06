@@ -1,9 +1,10 @@
 package duke;
 
 import java.util.NoSuchElementException;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 import duke.command.AddCommand;
-import duke.command.CommandBorder;
 import duke.command.CommandWrite;
 import duke.command.DefaultCommand;
 import duke.command.DeleteCommand;
@@ -11,87 +12,94 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ICommand;
-import duke.command.PrintCommand;
 import duke.command.PrintListCommand;
 import duke.task.DeadlineFactory;
 import duke.task.EventFactory;
 import duke.task.ToDoFactory;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Main class for Duke app.
  */
-public class Duke {
+public class Duke extends Application{
     private Storage storage;
     private CommandMap commands;
     private TaskList taskList;
     private Ui ui;
 
     /**
-     * Constructor method for Duke app. Initialises app to run.
+     * Constructor method for Duke app. Initialises main components.
      */
     public Duke() {
         this.taskList = new TaskList();
         this.storage = new Storage(taskList);
-        this.commands = new CommandMap(new CommandBorder(new DefaultCommand()));
-        this.ui = new Ui();
+        this.ui = new Ui(this);
+        this.commands = new CommandMap(new DefaultCommand(this.ui));
     }
 
     /**
-     * Main method. Args fed in will not accept the behaviour of the application.
-     * @param args Arguments
+     * Starts the application. Not to be called explicitly.
+     * @param stage Stage to be displayed
      */
-    public static void main(String[] args) {
-        Duke currentSession = new Duke();
-        currentSession.initialiseCommandMap();
-        currentSession.run();
+    @Override
+    public void start(Stage stage) {
+        Scene scene = new Scene(ui);
+        stage.setScene(scene);
+        initialiseCommandMap();
+        this.run();
+        stage.show();
     }
 
-    /**
-     * Run application and continue to accept inputs.
-     */
-    public void run() {
-        ICommand printCommand = new CommandBorder(new PrintCommand());
-        printCommand.execute(ui.getIntro());
+    private void run() {
         try {
+            ui.handleIntro();
             this.storage.read();
-            while (!taskList.hasExited()) {
-                String input = ui.getLine();
-                String[] inputArray = Parser.parse(input);
-                if (inputArray.length == 2) {
-                    commands.get(inputArray[0]).execute(inputArray[1]);
-                } else if (inputArray.length == 1) {
-                    //for commands with only one word, will give error msg if command requires more than 1.
-                    commands.get(inputArray[0]).execute(" ");
-                }
-            }
-        } catch (NoSuchElementException e) {
-            printCommand.execute(ui.showNoMoreLinesError());
+        } catch (FileNotFoundException e) {
+            ui.createDukeDialog("Creating duke.txt");
+        } catch (IOException e){
+            ui.handleError(e);
         }
+    }
 
+    /**
+     * Passes the input to parser to be parsed.
+     * @param input input to be parsed.
+     */
+    public void handleInput(String input) {
+        String[] inputArray = Parser.parse(input);
+        if (inputArray.length == 2) {
+            commands.get(inputArray[0]).execute(inputArray[1]);
+        } else if (inputArray.length == 1) {
+            //for commands with only one word, will give error msg if command requires more than 1.
+            commands.get(inputArray[0]).execute(" ");
+        }
     }
 
     private void initialiseCommandMap() {
 
-        ICommand doneCommand = new CommandBorder(new DoneCommand(taskList));
-        doneCommand = new CommandWrite(doneCommand, storage);
+        ICommand doneCommand = new DoneCommand(ui, taskList);
+        doneCommand = new CommandWrite(ui, storage, doneCommand);
 
-        ICommand listCommand = new CommandBorder(new PrintListCommand(taskList));
+        ICommand listCommand = new PrintListCommand(ui, taskList);
 
-        ICommand exitCommand = new CommandBorder(new ExitCommand(taskList));
+        ICommand exitCommand = new ExitCommand(ui);
 
-        ICommand eventCommand = new CommandBorder(new AddCommand(taskList, new EventFactory()));
-        eventCommand = new CommandWrite(eventCommand, storage);
+        ICommand eventCommand = new AddCommand(ui,taskList, new EventFactory());
+        eventCommand = new CommandWrite(ui, storage, eventCommand);
 
-        ICommand deadlineCommand = new CommandBorder(new AddCommand(taskList, new DeadlineFactory()));
-        deadlineCommand = new CommandWrite(deadlineCommand, storage);
+        ICommand deadlineCommand = new AddCommand(ui,taskList, new DeadlineFactory());
+        deadlineCommand = new CommandWrite(ui, storage, deadlineCommand);
 
-        ICommand toDoCommand = new CommandBorder(new AddCommand(taskList, new ToDoFactory()));
-        toDoCommand = new CommandWrite(toDoCommand, storage);
+        ICommand toDoCommand = new AddCommand(ui,taskList, new ToDoFactory());
+        toDoCommand = new CommandWrite(ui, storage, toDoCommand);
 
-        ICommand deleteCommand = new CommandBorder(new DeleteCommand(taskList));
-        deleteCommand = new CommandWrite(deleteCommand, storage);
+        ICommand deleteCommand = new DeleteCommand(ui,taskList);
+        deleteCommand = new CommandWrite(ui, storage, deleteCommand);
 
-        ICommand findCommand = new CommandBorder(new FindCommand(taskList));
+        ICommand findCommand = new FindCommand(ui,taskList);
 
         commands.add("done", doneCommand);
         commands.add("list", listCommand);

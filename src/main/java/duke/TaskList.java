@@ -53,17 +53,15 @@ public class TaskList {
         newTask = new ToDo(desc);
         if (type.equals("T")) {
             newTask = new ToDo(desc);
-            this.addTask(task);
+            this.addTask(newTask);
         } else if (type.equals("D")) {
             String byDate = task[3];
             newTask = new Deadline(desc, byDate);
-            this.addTask(task);
+            this.addTask(newTask);
         } else if (type.equals("E")) {
             String atDate = task[3];
             newTask = new Event(desc, atDate);
-            this.addTask(task);
-        } else {
-            System.out.println("File has invalid entries");
+            this.addTask(newTask);
         }
         if (done.equals("1")) {
             newTask.setDone();
@@ -113,20 +111,4 @@ public class TaskList {
         }
         return tasksWithString;
     }
-
-    /**
-     * To be deprecated, i.e move to another class of more relevance.
-     */
-    public void setExited() {
-        this.isDone = true;
-    }
-
-    /**
-     * To be deprecated, i.e move to another class of more relevance.
-     * @return boolean whether app has exited.
-     */
-    public boolean hasExited() {
-        return this.isDone;
-    }
-
 }

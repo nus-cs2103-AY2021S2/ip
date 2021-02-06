@@ -1,17 +1,21 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.Ui;
 
 public class ExitCommand implements ICommand {
-    private TaskList tasks;
+    private Ui ui;
 
-    public ExitCommand(TaskList tasks) {
-        this.tasks = tasks;
+    /**
+     * Constructor method for ExitCommand
+     * @param tasks
+     */
+    public ExitCommand(Ui ui) {
+        this.ui = ui;
     }
 
     @Override
     public void execute(String parameters) {
-        tasks.setExited();
-        System.out.println("Bye. Hope to see you again soon!");
+        ui.createDukeDialog("Bye. Hope to see you again soon!");
+        ui.handleExit();
     }
 }
