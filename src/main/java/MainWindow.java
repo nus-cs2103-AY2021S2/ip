@@ -23,7 +23,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private boolean isFirst;
+    private boolean isFirst = true;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -31,7 +31,9 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         if(isFirst) {
-            DialogBox.getDukeDialog("Hello! I am Duke :P", dukeImage);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog("Hello! I am Duke :P\nWhat can I do for you?", dukeImage)
+            );
             isFirst = false;
         }
     }
@@ -41,8 +43,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() throws IOException, DukeException {
