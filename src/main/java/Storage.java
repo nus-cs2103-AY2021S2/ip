@@ -14,11 +14,15 @@ public class Storage {
     /**
      * Default path to store the user tasks.
      */
-    public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
-    public TaskList tasks;
+    public static final String DEFAULT_TASKS_STORAGE_FILEPATH = "tasks.txt";
+    public static final String DEFAULT_NOTES_STORAGE_FILEPATH = "notes.txt";
+
+    public ItemList tasks;
+    public ItemList notes;
 
     public Storage() {
-        tasks = new TaskList();
+        tasks = new ItemList();
+        notes = new ItemList();
     }
 
     /**
@@ -27,26 +31,47 @@ public class Storage {
      * @throws IOException Throw IO exception.
      */
     public void readOrCreateFile() throws IOException {
-        File myObj = new File(DEFAULT_STORAGE_FILEPATH);
-        if (myObj.exists()) {
-            readFileIntoList(DEFAULT_STORAGE_FILEPATH, tasks);
+        File tasksObj = new File(DEFAULT_TASKS_STORAGE_FILEPATH);
+        File notesObj = new File(DEFAULT_NOTES_STORAGE_FILEPATH);
+
+        if (tasksObj.exists()) {
+            readTaskFileIntoList(tasks);
         } else {
             //noinspection ResultOfMethodCallIgnored
-            myObj.createNewFile();
+            tasksObj.createNewFile();
+        }
+
+        if (notesObj.exists()) {
+            readNotesFileIntoList(notes);
+        } else {
+            //noinspection ResultOfMethodCallIgnored
+            notesObj.createNewFile();
+        }
+    }
+
+    private void readNotesFileIntoList(ItemList notes) {
+        List<String> lines = Collections.emptyList();
+
+        try {
+            lines = Files.readAllLines(Paths.get(Storage.DEFAULT_NOTES_STORAGE_FILEPATH), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (String object : lines) {
         }
     }
 
     /**
      * Read the existing task file and create the list of tasks when the program is run.
      *
-     * @param file  The name of the file.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      */
-    public void readFileIntoList(String file, TaskList tasks) {
+    private void readTaskFileIntoList(ItemList tasks) {
         List<String> lines = Collections.emptyList();
 
         try {
-            lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
+            lines = Files.readAllLines(Paths.get(Storage.DEFAULT_TASKS_STORAGE_FILEPATH), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,7 +99,7 @@ public class Storage {
                     }
                 }
             }
-            Parser.taskAdded();
+//            Parser.taskAdded();
         }
     }
 
@@ -84,7 +109,7 @@ public class Storage {
      * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
      */
     public void writeListIntoFile() throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(DEFAULT_STORAGE_FILEPATH);
+        PrintWriter writer = new PrintWriter(DEFAULT_TASKS_STORAGE_FILEPATH);
         ArrayList<Task> items = tasks.getTaskList();
         for (Task item : items) {
             writer.println(item.toString());

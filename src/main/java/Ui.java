@@ -18,7 +18,7 @@ public class Ui {
      * @param tasks      The Task Arraylist containing user tasks in sequence.
      * @param totalTasks Total number of tasks in the list.
      */
-    public String showTodoMsg(TaskList tasks, int totalTasks) {
+    public String showTodoMsg(ItemList tasks, int totalTasks) {
         assert tasks.getSize() >= 0: tasks.getSize();
         return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(totalTasks - 1).toString() + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.";
@@ -31,7 +31,7 @@ public class Ui {
      * @param totalTasks Total number of tasks in the list.
      * @return A string showing correct GUI output.
      */
-    public String showDeadlineMsg(TaskList tasks, int totalTasks) {
+    public String showDeadlineMsg(ItemList tasks, int totalTasks) {
         return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(totalTasks - 1).toString() + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.";
     }
@@ -43,7 +43,7 @@ public class Ui {
      * @param totalTasks Total number of tasks in the list.
      * @return A string showing correct GUI output.
      */
-    public String showEventMsg(TaskList tasks, int totalTasks) {
+    public String showEventMsg(ItemList tasks, int totalTasks) {
         return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(totalTasks - 1).toString() + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.";
     }
@@ -67,7 +67,7 @@ public class Ui {
      * @param itemNum The item number that is marked done.
      * @return A string showing correct GUI output.
      */
-    public String showDoneMsg(TaskList tasks, int itemNum) {
+    public String showDoneMsg(ItemList tasks, int itemNum) {
         return "Nice! I've marked this task as done:\n" + "    " + tasks.getTaskList().get(itemNum - 1).toString();
     }
 
@@ -77,7 +77,7 @@ public class Ui {
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @return A string showing correct GUI output.
      */
-    public String showListMsg(TaskList tasks) {
+    public String showListMsg(ItemList tasks) {
         return "Here are the tasks in your list:" + "\n" + tasks.toString();
     }
 
@@ -88,9 +88,9 @@ public class Ui {
      * @param tasks   The Task Arraylist containing user tasks in sequence.
      * @return A string showing correct GUI output.
      */
-    public String showFindMsg(String keyword, TaskList tasks) {
+    public String showFindMsg(String keyword, ItemList tasks) {
         ArrayList<Task> matchingTasks = tasks.search(keyword);
-        TaskList matchedTasks = new TaskList(matchingTasks);
+        ItemList matchedTasks = new ItemList(matchingTasks);
         return "Here are the matching tasks in your list:" + "\n" + matchedTasks.toString();
     }
 }
