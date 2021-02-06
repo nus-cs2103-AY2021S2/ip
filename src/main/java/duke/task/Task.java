@@ -21,6 +21,7 @@ public abstract class Task {
      *  @param name Name of Task.
      */
     public Task(String name) {
+        assert name.length() > 0 : "Empty Name";
         this.name = name;
         this.done = Status.NOT_DONE;
     }

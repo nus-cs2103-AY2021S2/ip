@@ -17,6 +17,7 @@ public class DeadlineCommand extends Command {
      *  @param date Date of Deadline Task.
      */
     public DeadlineCommand(String name, LocalDate date) {
+        assert name.length() > 0 : "Empty Name";
         this.name = name;
         this.date = date;
     }
