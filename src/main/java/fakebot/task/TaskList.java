@@ -1,7 +1,8 @@
 package fakebot.task;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * TaskList Class use to store Task
  */
@@ -59,12 +60,8 @@ public class TaskList {
      * @return Return list of task that contain search string.
      */
     public List<Task> findTasks(String search) {
-        List<Task> foundTask = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getTaskName().contains(search)) {
-                foundTask.add(tasks.get(i));
-            }
-        }
-        return foundTask;
+        return tasks.stream()
+                .filter(t -> t.getTaskName().contains(search))
+                .collect(Collectors.toList());
     }
 }

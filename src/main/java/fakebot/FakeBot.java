@@ -209,5 +209,4 @@ public class FakeBot {
         saveHistory();
         return getDeleteMessage(deletedTask);
     }
-
 }
