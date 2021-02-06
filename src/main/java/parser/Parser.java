@@ -34,7 +34,6 @@ public class Parser {
                 throw new DukeException("EmptyIndex");
             }
         }
-
         if (line.equals("todo") || line.equals("deadline") || line.equals("event") || line.equals("find")) {
             if (doneLine.length == 1) {
                 throw new DukeException("EmptyDescription", line);
