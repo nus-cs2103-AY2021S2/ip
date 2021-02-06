@@ -27,7 +27,7 @@ public class Storage {
     /**
      * Checks if the file exist
      */
-    public void createIfNotExist() {
+    private void createIfNotExist() {
         if (file.exists()) {
             return;
         }

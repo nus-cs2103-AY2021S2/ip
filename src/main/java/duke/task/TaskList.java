@@ -43,8 +43,7 @@ public class TaskList {
             }
         }
         if (matches.numOfTasks() > 0) {
-            out += "We have found the following tasks\n";
-            System.out.println("We have found the following tasks");
+            out += "We have found the following items\n";
             out += matches.printTasks();
         } else {
             out += "Sorry! Could not find any matches :(";
@@ -56,7 +55,7 @@ public class TaskList {
     public String DeleteTask(int idx) {
         String out = "";
         if (idx <= Tasks.size()) {
-            out += "Noted. Task removed: \n" + Tasks.get(idx - 1) + "\n";
+            out += "Noted. Item removed: \n" + Tasks.get(idx - 1) + "\n";
             Tasks.remove(idx - 1);
             out += "Now you have " + numOfTasks() + " items in your list";
         } else {

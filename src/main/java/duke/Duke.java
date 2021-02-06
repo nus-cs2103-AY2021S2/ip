@@ -56,8 +56,12 @@ public class Duke {
                 result = taskList.markAsDone(Integer.parseInt(p.getIndex()));
             } else if (TaskType.equals("delete") || TaskType.equals("remove")) {
                 result = taskList.DeleteTask(Integer.parseInt(p.getIndex()));
+            } else if (TaskType.equals("delete-note") || TaskType.equals("remove-note")) {
+                result = noteList.DeleteTask(Integer.parseInt(p.getIndex()));
             } else if (TaskType.equals("find") || TaskType.equals("search")) {
                 result = taskList.findTask(p.getTaskName());
+            } else if (TaskType.equals("find-note") || TaskType.equals("search-note")) {
+                result = noteList.findTask(p.getTaskName());
             } else if (TaskType.equals("todo")) {
                 result = taskList.addTask(new TodoTask(command));
             } else if (TaskType.equals("deadline")) {
