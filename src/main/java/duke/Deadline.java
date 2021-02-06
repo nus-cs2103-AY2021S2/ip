@@ -3,11 +3,13 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * The Deadline class extends the Task class and includes a due date
  * to represent the time that the deadline must be completed.
  */
 public class Deadline extends Task {
+    static final String DATE_FORMAT = "MMM dd yyyy";
     private LocalDate dueDates;
 
     /**
@@ -32,6 +34,6 @@ public class Deadline extends Task {
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + dueDates.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString() + "(by: " + dueDates.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) + ")";
     }
 }
