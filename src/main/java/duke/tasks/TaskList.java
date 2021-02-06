@@ -21,7 +21,7 @@ public class TaskList {
 
     public Task getTaskByIndex(int index) {
         try {
-            if (index > this.getSize()) {
+            if (index > this.getSize() || index <= 0) {
                 throw new TaskNumberNotExistException(index);
             }
         } catch (TaskNumberNotExistException e) {
@@ -34,7 +34,7 @@ public class TaskList {
 
     public Task popTaskByIndex(int index) {
         try {
-            if (index > this.getSize()) {
+            if (index > this.getSize() || index <= 0) {
                 throw new TaskNumberNotExistException(index);
             }
         } catch (TaskNumberNotExistException e) {

@@ -5,11 +5,11 @@ todo CS2107 Revision
 deadline
 deadline CS2103 Week 4 Quiz
 deadline CS2103 Week 4 Quiz /by
-deadline CS2103 Week 4 Quiz /by 5 Feb 2021 2:00 AM
+deadline CS2103 Week 4 Quiz /by 2021-02-05
 event
 event CS2107 In-Lecture Quiz
 event CS2107 In-Lecture Quiz /at
-event CS2107 In-Lecture Quiz /at 4 Feb 2021 10:00 AM to 10:30 AM
+event CS2107 In-Lecture Quiz /at 2021-02-04 10:00
 list
 done 1
 done 4

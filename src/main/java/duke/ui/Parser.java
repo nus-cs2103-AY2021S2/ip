@@ -25,7 +25,7 @@ public class Parser {
         LocalDateTime deadlineDateTime = convertToDateTime(getByDateTimeString(input));
         LocalDateTime eventDateTime = convertToDateTime(getAtDateTimeString(input));
 
-        switch (action.toUpperCase()) {
+        switch (action) {
             case "BYE":
                 return new ByeCommand();
             case "LIST":
@@ -46,7 +46,7 @@ public class Parser {
     }
 
     private static String getAction(String input) {
-        return (input + " ").split(" ")[0];
+        return (input + " ").split(" ")[0].toUpperCase();
     }
 
     private static String getRemainingTokens(String input) {
@@ -60,9 +60,9 @@ public class Parser {
         String action = getAction(input);
         String remainingTokens = getRemainingTokens(input);
 
-        if (action.equals("deadline") && remainingTokens.contains("/by")) {
+        if (action.equals("DEADLINE") && remainingTokens.contains("/by")) {
             return remainingTokens.split("/by")[0].trim();
-        } else if (action.equals("event") && remainingTokens.contains("/at")) {
+        } else if (action.equals("EVENT") && remainingTokens.contains("/at")) {
             return remainingTokens.split("/at")[0].trim();
         } else {
             return remainingTokens;
@@ -72,7 +72,7 @@ public class Parser {
     private static String getByDateTimeString(String input) {
         String action = getAction(input);
         String remainingTokens = getRemainingTokens(input);
-        if (action.equals("deadline") && remainingTokens.contains("/by")) {
+        if (action.equals("DEADLINE") && remainingTokens.contains("/by")) {
             return remainingTokens.split("/by", 2)[1].trim();
         }
         return "";
@@ -81,7 +81,7 @@ public class Parser {
     private static String getAtDateTimeString(String input) {
         String action = getAction(input);
         String remainingTokens = getRemainingTokens(input);
-        if (action.equals("event") && remainingTokens.contains("/at")) {
+        if (action.equals("EVENT") && remainingTokens.contains("/at")) {
             return remainingTokens.split("/at", 2)[1].trim();
         }
         return "";
@@ -129,31 +129,31 @@ public class Parser {
         String atDateTimeString = getAtDateTimeString(input);
 
         try {
-            if (!validActions.contains(action.toUpperCase())) {
+            if (!validActions.contains(action)) {
                 throw new InvalidActionException(action);
             }
 
-            if ((!action.equals("bye") && !action.equals("list")) & description.length() == 0) {
+            if ((!action.equals("BYE") && !action.equals("LIST")) & description.length() == 0) {
                 throw new MissingDescriptionException(action);
             }
 
-            if ((action.equals("done") || action.equals("delete")) && (!isInteger(description))) {
+            if ((action.equals("DONE") || action.equals("DELETE")) && (!isInteger(description))) {
                 throw new TaskNumberNotIntException();
             }
 
-            if (action.equals("deadline") && byDateTimeString.length() == 0) {
+            if (action.equals("DEADLINE") && byDateTimeString.length() == 0) {
                 throw new MissingDeadlineException();
             }
 
-            if (action.equals("event") && atDateTimeString.length() == 0) {
+            if (action.equals("EVENT") && atDateTimeString.length() == 0) {
                 throw new MissingEventTimeException();
             }
 
-            if (action.equals("deadline") && null == convertToDateTime(byDateTimeString)) {
+            if (action.equals("DEADLINE") && null == convertToDateTime(byDateTimeString)) {
                 throw new DateTimeFormatException(byDateTimeString);
             }
 
-            if (action.equals("event") && null == convertToDateTime(atDateTimeString)) {
+            if (action.equals("EVENT") && null == convertToDateTime(atDateTimeString)) {
                 throw new DateTimeFormatException(atDateTimeString);
             }
 

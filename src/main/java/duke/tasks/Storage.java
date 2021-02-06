@@ -24,7 +24,7 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String taskDetails = sc.nextLine();
-                Task newTask = createTask(taskDetails);
+                Task newTask = createTaskFromSavedString(taskDetails);
                 tasks.addTask(newTask);
             }
             return tasks;
@@ -38,7 +38,7 @@ public class Storage {
             FileWriter writer = new FileWriter(this.path);
 
             for (Task task : tasks.getListOfTasks()) {
-                writer.write(convertToSavableString(task));
+                writer.write(convertTaskToSavableString(task));
             }
 
             writer.close();
@@ -49,7 +49,7 @@ public class Storage {
 
     }
 
-    private Task createTask(String taskDetails) {
+    private Task createTaskFromSavedString(String taskDetails) {
         String[] taskDetailsArray = taskDetails.split("\\|", 4);
         String taskType = taskDetailsArray[0].trim();
         String done = taskDetailsArray[1].trim();
@@ -73,7 +73,7 @@ public class Storage {
         return newTask;
     }
 
-    private String convertToSavableString(Task task) {
+    private String convertTaskToSavableString(Task task) {
         String dateTimeString = "";
         String taskType;
 
