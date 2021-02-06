@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
+import percy.exception.DateTimeParsingException;
 import percy.exception.ParsingException;
 import percy.exception.PercyException;
-import percy.ui.Ui;
 
 public class Parser {
     private static String fullCmd;
@@ -49,14 +48,11 @@ public class Parser {
 
     private static String getTodoDescription() throws PercyException {
         String[] splitCommand = fullCmd.split(" ", 2);
-        String description = "";
-        if (splitCommand.length == 2) {
-            description = splitCommand[1].trim();
-        }
+        String description;
         try {
-            String description = split
+            description = splitCommand[1];
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException()
+            throw new ParsingException(TodoCommand.COMMAND);
         }
         return description;
     }
@@ -68,11 +64,7 @@ public class Parser {
             String description = args[0].trim();
             return description;
         } catch (IndexOutOfBoundsException e) {
-
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The description or date/time of an event cannot be empty.");
-            arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new ParsingException(EventCommand.COMMAND);
         }
     }
 
@@ -84,15 +76,9 @@ public class Parser {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             return date;
         } catch (IndexOutOfBoundsException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The description or date/time of an event cannot be empty.");
-            arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new ParsingException(EventCommand.COMMAND);
         } catch (DateTimeParseException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The date and time format of an event is wrong.");
-            arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new DateTimeParsingException(EventCommand.COMMAND);
         }
     }
 
@@ -104,15 +90,9 @@ public class Parser {
             LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
             return time;
         } catch (IndexOutOfBoundsException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The description or date/time of an event cannot be empty.");
-            arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new ParsingException(EventCommand.COMMAND);
         } catch (DateTimeParseException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The date and time format of an event is wrong.");
-            arr.addAll(EventCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new DateTimeParsingException(EventCommand.COMMAND);
         }
     }
 
@@ -124,10 +104,7 @@ public class Parser {
             assert !description.isEmpty();
             return description;
         } catch (IndexOutOfBoundsException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
-            arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new ParsingException(DeadlineCommand.COMMAND);
         }
     }
 
@@ -139,15 +116,9 @@ public class Parser {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             return date;
         } catch (IndexOutOfBoundsException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
-            arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new ParsingException(DeadlineCommand.COMMAND);
         } catch (DateTimeParseException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The date and time format of a deadline is wrong.");
-            arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new DateTimeParsingException(DeadlineCommand.COMMAND);
         }
     }
 
@@ -159,15 +130,9 @@ public class Parser {
             LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
             return time;
         } catch (IndexOutOfBoundsException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
-            arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new ParsingException(DeadlineCommand.COMMAND);
         } catch (DateTimeParseException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The date and time format of a deadline is wrong.");
-            arr.addAll(DeadlineCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new DateTimeParsingException(DeadlineCommand.COMMAND);
         }
     }
 
@@ -176,10 +141,7 @@ public class Parser {
             String[] splitCommand = fullCmd.split(" ", 2);
             return splitCommand[1].trim().toLowerCase().split(" ");
         } catch (IndexOutOfBoundsException e) {
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("OOPS!!! The keyword is missing.");
-            arr.addAll(FindCommand.USAGE_GUIDE);
-            throw new PercyException(Ui.makeMsg(arr));
+            throw new ParsingException(FindCommand.COMMAND);
         }
     }
 }

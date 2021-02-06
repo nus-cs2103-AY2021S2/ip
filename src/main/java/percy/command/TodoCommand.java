@@ -1,6 +1,8 @@
 package percy.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import percy.exception.ParsingException;
 import percy.storage.Storage;
@@ -11,6 +13,11 @@ import percy.ui.Ui;
 
 public class TodoCommand extends Command {
     public static final String COMMAND = "todo";
+    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
+            "todo: Adds a generic task with a description",
+            "Parameters: TASK_DESCRIPTION",
+            "Example: todo feed dog"));
+
 
     private String todoDescription;
     private String date;

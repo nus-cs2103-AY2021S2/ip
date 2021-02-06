@@ -1,12 +1,17 @@
 package percy.exception;
 
-import percy.command.EventCommand;
-import percy.command.TodoCommand;
+import java.util.ArrayList;
+
 import percy.command.DeadlineCommand;
+import percy.command.DeleteCommand;
+import percy.command.EventCommand;
+import percy.command.FindCommand;
+import percy.command.TodoCommand;
+import percy.ui.Ui;
 
 
 public class ParsingException extends PercyException {
-    private String taskType;
+    protected String taskType;
 
     /**
      * Constructs NoDescriptionException.
@@ -18,11 +23,30 @@ public class ParsingException extends PercyException {
 
     @Override
     public String toString() {
+        ArrayList<String> arr = new ArrayList<>();
         switch (taskType) {
         case TodoCommand.COMMAND:
-            return " ☹ OOPS!!! The description of a " + taskType + " cannot be empty.";
+            arr.add("☹ OOPS!!! The description of a todo cannot be empty.\n");
+            arr.addAll(TodoCommand.USAGE_GUIDE);
+            return Ui.makeMsg(arr);
+        case EventCommand.COMMAND:
+            arr.add("☹ OOPS!!! The description or date/time of an event cannot be empty.\n");
+            arr.addAll(EventCommand.USAGE_GUIDE);
+            return Ui.makeMsg(arr);
+        case DeadlineCommand.COMMAND:
+            arr.add("☹ OOPS!!! The description or date/time of an event cannot be empty.\n");
+            arr.addAll(DeadlineCommand.USAGE_GUIDE);
+            return Ui.makeMsg(arr);
+        case FindCommand.COMMAND:
+            arr.add("OOPS!!! The keyword is missing.\n");
+            arr.addAll(FindCommand.USAGE_GUIDE);
+            return Ui.makeMsg(arr);
+        case DeleteCommand.COMMAND:
+            arr.add("OOPS!!! The task number given is invalid.\n");
+            arr.addAll(DeleteCommand.USAGE_GUIDE);
+            return Ui.makeMsg(arr);
         default:
-            return " ☹ OOPS!!! The description or date/time of a " + taskType + " cannot be empty.";
+            return Ui.makeMsg(arr);
         }
     }
 }

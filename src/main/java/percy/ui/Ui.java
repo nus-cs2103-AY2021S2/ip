@@ -176,8 +176,4 @@ public class Ui {
             return s;
         }
     }
-
-    public static makeErrorMsg(, String type) {
-
-    }
 }
