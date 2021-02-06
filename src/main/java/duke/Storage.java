@@ -78,30 +78,30 @@ public class Storage {
      */
     public Task parseTasks(String task) throws DukeException {
         String[] description = task.split(" / ", 4);
-        Task t = null;
+        Task myTask = null;
         try {
             LocalDateTime dateTime;
             String type = description[0];
             switch (type) {
             case "T":
-                t = new ToDo(description[2]);
+                myTask = new ToDo(description[2]);
                 break;
 
             case "D":
                 dateTime = LocalDateTime.parse(description[3]);
-                t = new Deadline(description[2], dateTime);
+                myTask = new Deadline(description[2], dateTime);
                 break;
 
             case "E":
                 dateTime = LocalDateTime.parse(description[3]);
-                t = new Event(description[2], dateTime);
+                myTask = new Event(description[2], dateTime);
                 break;
             default:
             }
 
             if (description[1].equals("1")) {
-                assert t != null;
-                t.markAsDone();
+                assert myTask != null;
+                myTask.markAsDone();
             }
 
         } catch (Exception e) {
@@ -111,7 +111,7 @@ public class Storage {
 
         }
 
-        return t;
+        return myTask;
     }
 
     /**
