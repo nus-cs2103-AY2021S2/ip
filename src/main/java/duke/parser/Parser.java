@@ -41,13 +41,19 @@ public class Parser {
         Command command;
 
         if (potentialCommand.equalsIgnoreCase("TODO")) {
-            String description = input.substring(endIndex).strip();
+            String description = (endIndex == -1) ? "" : input.substring(endIndex).strip();
             command = new TodoCommand(description);
         } else if (potentialCommand.equalsIgnoreCase("DEADLINE")) {
-            String[] descriptions = input.substring(endIndex).strip().split("/by");
+            String[] descriptions = {""};
+            if (endIndex != -1) {
+                descriptions = input.substring(endIndex).strip().split("/by");
+            }
             command = new DeadlineCommand(descriptions);
         } else if (potentialCommand.equalsIgnoreCase("EVENT")) {
-            String[] descriptions = input.substring(endIndex).strip().split("/at");
+            String[] descriptions = {""};
+            if (endIndex != -1) {
+                descriptions = input.substring(endIndex).strip().split("/at");
+            }
             command = new EventCommand(descriptions);
         } else if (potentialCommand.equalsIgnoreCase("LIST")) {
             command = new ListCommand();
