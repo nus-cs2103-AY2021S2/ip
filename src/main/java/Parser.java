@@ -47,6 +47,7 @@ public class Parser {
      * Increase the total number of tasks in the list by 1.
      */
     public static void taskAdded() {
+        assert totalTasks >= 0: totalTasks;
         totalTasks++;
     }
 
@@ -55,6 +56,7 @@ public class Parser {
      */
     public static void taskDeleted() {
         totalTasks--;
+        assert totalTasks >= 0: totalTasks;
     }
 
     /**
@@ -140,6 +142,7 @@ public class Parser {
             throw new DukeException("Item number selected is out of range.");
         }
         tasks.getTaskList().get(itemNum - 1).makeDone();
+        assert tasks.getTaskList().get(itemNum - 1).isDone: tasks.getTaskList().get(itemNum - 1).description;
         return ui.showDoneMsg(tasks, itemNum);
     }
 
