@@ -35,6 +35,8 @@ public class Storage {
             dir.mkdir();
         }
 
+        assert dir.exists();
+
         File file = new File(PATH);
         try {
             // Erase any existing list in the file
@@ -63,6 +65,8 @@ public class Storage {
         if (!dir.exists()) {
             dir.mkdir();
         }
+
+        assert dir.exists();
 
         // Load the save file or create one if missing
         File file = new File(PATH);
