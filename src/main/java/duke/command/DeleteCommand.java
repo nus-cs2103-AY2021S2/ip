@@ -10,12 +10,12 @@ import duke.tasks.TaskList;
 public class DeleteCommand extends Command {
     private final int taskNum;
 
-    public DeleteCommand(String description) throws DukeException {
-        if (description.isBlank()) {
+    public DeleteCommand(String descriptionString) throws DukeException {
+        if (descriptionString.isBlank()) {
             throw new DukeException("Please key in a task number!");
         }
 
-        int num = Integer.parseInt(description);
+        int num = Integer.parseInt(descriptionString);
         this.taskNum = num;
 
     }

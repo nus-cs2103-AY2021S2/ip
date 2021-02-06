@@ -9,12 +9,12 @@ import duke.tasks.TaskList;
 public class DoneCommand extends Command {
     private final int taskNum;
 
-    public DoneCommand(String description) throws DukeException {
-        if (description.isBlank()) {
+    public DoneCommand(String descriptionString) throws DukeException {
+        if (descriptionString.isBlank()) {
             throw new DukeException("Please key in a task number!");
         }
 
-        this.taskNum = Integer.parseInt(description);
+        this.taskNum = Integer.parseInt(descriptionString);
     }
 
     @Override

@@ -10,12 +10,12 @@ import duke.tasks.ToDo;
 public class AddToDoCommand extends Command {
     private final ToDo todo;
 
-    public AddToDoCommand(String description) throws DukeException {
-        if (description.isBlank()) {
+    public AddToDoCommand(String descriptionString) throws DukeException {
+        if (descriptionString.isBlank()) {
             throw new UnknownInputException("todo");
         }
 
-        this.todo = new ToDo(description);
+        this.todo = new ToDo(descriptionString);
     }
 
     @Override

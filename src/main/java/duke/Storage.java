@@ -15,7 +15,7 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 
 public class Storage {
-    private final File f;
+    private final File file;
 
     private final String path = "/Users/rachel/Desktop/ip/src/main/java/duke/data/myDuke.txt";
 
@@ -25,7 +25,7 @@ public class Storage {
      * @throws DukeException due to IOException.
      */
     public Storage() throws DukeException {
-        this.f = new File(path);
+        this.file = new File(path);
         createFile();
     }
 
@@ -36,11 +36,10 @@ public class Storage {
      */
     public void createFile() throws DukeException {
         try {
-            if (f.getParentFile().mkdirs()) {
+            if (file.getParentFile().mkdirs()) {
                 System.out.println("File is loading...");
             } else {
-                f.createNewFile();
-
+                file.createNewFile();
                 System.out.println("File already exists!");
             }
         } catch (IOException e) {
@@ -57,7 +56,7 @@ public class Storage {
     public ArrayList<Task> displayTasks() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            Scanner s = new Scanner(f);
+            Scanner s = new Scanner(file);
             while (s.hasNextLine()) {
                 Task task = parseTasks(s.nextLine());
                 tasks.add(task);

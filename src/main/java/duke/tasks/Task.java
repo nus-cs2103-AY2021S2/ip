@@ -20,6 +20,7 @@ public class Task {
 
     /**
      * Returns the description of the task.
+     *
      * @return a String of description of task.
      */
     public String getTaskName() {

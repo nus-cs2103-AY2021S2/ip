@@ -14,12 +14,12 @@ import duke.tasks.TaskList;
 public class AddDeadlineCommand extends Command {
     private final Deadline deadline;
 
-    public AddDeadlineCommand(String description) throws DukeException {
-        if (description.isBlank()) {
+    public AddDeadlineCommand(String descriptionString) throws DukeException {
+        if (descriptionString.isBlank()) {
             throw new UnknownInputException("deadline");
         }
 
-        String[] name = description.split(" /by ", 2);
+        String[] name = descriptionString.split(" /by ", 2);
 
         if (name.length != 2) {
             throw new MissingDateException("");
