@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -16,16 +14,6 @@ public class Ui {
      */
     public String getGreeting() {
         return "Hello! I'm Duke\nWhat can I do for you?";
-    }
-
-    /**
-     * Returns the user input as a string.
-     *
-     * @return user input string.
-     */
-    public String readCommand() {
-        Scanner reader = new Scanner(System.in);
-        return reader.nextLine();
     }
 
     /**
