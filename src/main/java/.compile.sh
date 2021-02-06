@@ -1,12 +1,12 @@
 echo "compiling controllers..."
-javac controllers/*.java
+javac duke.controllers/*.java
 echo "compiling models..."
-javac models/*.java
+javac duke.models/*.java
 echo "compiling exceptions..."
-javac exceptions/*.java
+javac duke.exceptions/*.java
 echo "compiling views..."
-javac views/*.java
+javac duke.views/*.java
 echo "compiling Duke..."
-javac Duke.java
+javac duke.Duke.java
 echo "done!"
 

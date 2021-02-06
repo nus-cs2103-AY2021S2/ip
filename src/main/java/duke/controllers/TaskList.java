@@ -1,4 +1,4 @@
-package controllers;
+package duke.controllers;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import exceptions.DukeBlankDetailsException;
-import exceptions.DukeBlankTaskException;
-import exceptions.DukeDateTimeParseException;
-import exceptions.DukeTaskIndexOutOfRangeException;
-import models.Deadline;
-import models.Event;
-import models.Todo;
-import views.TodosView;
+import duke.exceptions.DukeBlankDetailsException;
+import duke.exceptions.DukeBlankTaskException;
+import duke.exceptions.DukeDateTimeParseException;
+import duke.exceptions.DukeTaskIndexOutOfRangeException;
+import duke.models.Deadline;
+import duke.models.Event;
+import duke.models.Todo;
+import duke.views.TodosView;
 
 public class TaskList {
     /** todosList contains the state of the todos */
