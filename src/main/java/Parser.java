@@ -52,6 +52,7 @@ public class Parser {
      * @param commandFromUser
      */
     public String parseUserCommand(String commandFromUser) throws DukeException {
+        assert commandFromUser.isEmpty() : "command should not be empty";
         if (commandFromUser.equals("list")) {
             return this.taskList.listTask();
 

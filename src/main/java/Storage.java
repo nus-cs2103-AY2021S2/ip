@@ -40,6 +40,7 @@ public class Storage {
      */
 
     public void update(TaskList taskList) throws IOException {
+        assert taskList != null : "the taskList should not be null";
         FileWriter fw = new FileWriter(this.file);
         for (Task task : taskList.getList()) {
             fw.write(task.toSaveFormat() + "\n");

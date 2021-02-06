@@ -80,6 +80,7 @@ public class TaskList {
      */
 
     public String deleteTask(int index) {
+        assert index < 0 : "index should not be not be negative";
         Task task = this.ls.get(index - 1);
         this.ls.remove(index - 1);
         int len = this.ls.size();
