@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Deadline extends Task {
+public class Deadline extends Task {
     protected boolean isDone;
     protected LocalDate time;
     protected final static String type = "[D]";

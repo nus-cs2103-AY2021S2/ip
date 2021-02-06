@@ -74,14 +74,14 @@ public class TaskList {
             System.out.println("____________________________________________________________\n"
                     + "Got it. I've added this task: \n"
                     + myTask.toString());
-            Remark();
+            remark();
         }
     }
 
     /**
      * Prints the number of tasks in the list.
      */
-    public void Remark() {
+    public void remark() {
         if (numberOfTask() <= 1) {
             System.out.println("Now you have " + numberOfTask() + " task in the list."
                     + "\n____________________________________________________________\n");
@@ -118,7 +118,7 @@ public class TaskList {
                         System.out.println("____________________________________________________________\n"
                                 + "Got it. I've added this task: \n"
                                 + myTask.toString());
-                        Remark();
+                        remark();
                     } catch (DateTimeParseException e) {
                         throw new InvalidDeadlineException(deadline);
                     }
@@ -156,7 +156,7 @@ public class TaskList {
                         System.out.println("____________________________________________________________\n"
                                 + "Got it. I've added this task: \n"
                                 + myTask.toString());
-                        Remark();
+                        remark();
 
                     } catch (DateTimeParseException e) {
                         throw new InvalidEventException(event);

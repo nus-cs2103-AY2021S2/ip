@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
     protected String filePath;
 
     public Storage(String filePath) {

@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Duke {
@@ -37,7 +37,7 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
 
-        duke.ui.Greet();
+        duke.ui.greet();
 
         Storage dukeBot = new Storage(path);
         dukeBot.taskRecorder();
@@ -46,7 +46,7 @@ public class Duke {
 
 
 
-        while(!canExit) {
+        while (!canExit) {
             try {
                 duke.run();
             } catch (InvalidCommandException e) {
@@ -55,8 +55,6 @@ public class Duke {
         }
 
         dukeBot.record(taskList);
-        duke.ui.Exit();
-
-        
+        duke.ui.exit();
     }
 }

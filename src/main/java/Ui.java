@@ -1,6 +1,6 @@
 public class Ui {
 
-        public void Greet() {
+        public void greet() {
             String greeting = "____________________________________________________________\n"
                     + "Hello! I'm Duke, 恭喜发财 \u263a.\n"
                     + "What can I do for you?\n"
@@ -9,7 +9,7 @@ public class Ui {
 
         }
 
-    public void Exit() {
+    public void exit() {
         String exit = "____________________________________________________________\n"
                 + "Bye. Hope to see you again soon!\n"
                 + "Wish you all the best for CS2103T\n"
