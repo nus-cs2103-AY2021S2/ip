@@ -96,6 +96,17 @@ public class TaskList {
             throw new KelbotException("Todo Task does not have date!");
         }
     }
+    /**
+     * Tags selected task with given tag name.
+     * @param taskNumber Index of the task to be tagged in the task list.
+     * @param tagName The tag to be given to task.
+     * @return The task that has been tagged.
+     */
+    public Task tag(int taskNumber, String tagName) {
+        Task taskToTag = taskList.get(taskNumber);
+        taskToTag.setTag(tagName);
+        return taskToTag;
+    }
     @Override
     public String toString() {
         String result = "";

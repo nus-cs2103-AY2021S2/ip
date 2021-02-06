@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
     private String name;
+    private String tag = "";
     private boolean isDone;
     /**
      * Initializes Task.
@@ -14,20 +15,31 @@ public class Task implements Serializable {
         this.isDone = false;
     }
     /**
-     * Called when the task has been completed by the user. It will mark the task as done.
+     * Completes task as done.
      */
     public void complete() {
         isDone = true;
     }
     /**
-     * Provide the status icon for the toString() method.
-     * @return the status icon.
+     * Provides the status icon for the toString() method.
+     * @return The status icon.
      */
     public String getStatusIcon() {
         if (isDone) {
             return "[X]";
         } else {
             return "[ ]";
+        }
+    }
+    /**
+     * Provides the tag for the toString() method.
+     * @return The tag.
+     */
+    public String getStringTag() {
+        if (tag.equals("")) {
+            return "";
+        } else {
+            return " " + tag;
         }
     }
     /**
@@ -38,8 +50,11 @@ public class Task implements Serializable {
     public boolean hasKeyword(String keyword) {
         return name.contains(keyword);
     }
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
     @Override
     public String toString() {
-        return this.getStatusIcon() + name;
+        return this.getStatusIcon() + name + getStringTag();
     }
 }

@@ -13,5 +13,6 @@ enum Command {
     FIND,
     LIST,
     SNOOZE,
+    TAG,
     TODO
 }
