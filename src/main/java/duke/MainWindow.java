@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
             .getResourceAsStream("/images/BayMax.png"));
 
     /**
-     * Initializes dialog box. 
+     * Initializes dialog box.
      */
     @FXML
     public void initialize() {
