@@ -12,7 +12,7 @@ public class TodoTask extends Task {
         if (this.isDone()) {
             return "[T][X] " + task;
         } else {
-            return "[T][ ] " + task;
+            return "[T][0] " + task;
         }
     }
 }

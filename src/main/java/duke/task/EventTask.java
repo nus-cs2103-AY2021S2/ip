@@ -32,7 +32,7 @@ public class EventTask extends Task {
         if (this.isDone()) {
             return "[E][X] " + taskRepresent;
         } else {
-            return "[E][ ] " + taskRepresent;
+            return "[E][0] " + taskRepresent;
         }
     }
 }

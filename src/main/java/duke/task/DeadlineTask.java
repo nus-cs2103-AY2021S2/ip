@@ -31,7 +31,7 @@ public class DeadlineTask extends Task {
         if (this.isDone()) {
             return "[D][X] " + taskRepresent;
         } else {
-            return "[D][ ] " + taskRepresent;
+            return "[D][0] " + taskRepresent;
         }
     }
 }

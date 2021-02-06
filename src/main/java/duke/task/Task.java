@@ -27,7 +27,7 @@ public class Task {
         if (this.isDone()) {
             return "[X] " + this.task;
         } else {
-            return "[ ] " + this.task;
+            return "[0] " + this.task;
         }
     }
 }
