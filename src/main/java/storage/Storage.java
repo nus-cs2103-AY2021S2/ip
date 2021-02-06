@@ -34,15 +34,15 @@ public class Storage {
 
     public File getFileFromPath() {
         if (!Files.exists(this.dataFolder) || !Files.exists(this.dukeTxt)) {
-            System.out.println("Oops! You don't seem to have a load file!");
-            System.out.println("Creating one now!!\n");
+            System.out.println("Oops! You don't seem to have a load file!\n"
+                    + "Creating one now!!\n");
         }
         try {
             Files.createDirectory(this.dataFolder);
             Files.createFile(this.dukeTxt);
         } catch (IOException e) {
-            System.out.println("Nice! We found your load file!");
-            System.out.println("Loading...\n");
+            System.out.println("Nice! We found your load file!\n"
+                    + "Loading...\n");
         }
         File loadData = this.dukeTxt.toFile();
         return loadData;
@@ -79,6 +79,7 @@ public class Storage {
                         } else {
                             this.loadFile.add(new Deadlines(info2[1], false, info2[2]));
                         }
+
                         break;
                     case ("E"):
                         String[] info3 = lineData[1].split(" [|] ", 3);
@@ -92,6 +93,7 @@ public class Storage {
                         }
                         break;
                     default:
+                        System.out.println("Invalid Type of Task found!\n");
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("It seems one of your tasks is missing some info:");

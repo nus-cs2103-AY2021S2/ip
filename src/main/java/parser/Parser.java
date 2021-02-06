@@ -35,28 +35,23 @@ public class Parser {
             }
         }
 
-        switch (line) {
-        case ("bye"):
-            return new ByeCommand();
-        case("help"):
-            return new HelpCommand();
-        case ("list"):
-            return new ListCommand();
-        case ("done"):
-            return new DoneCommand(index);
-        case ("delete"):
-            return new DeleteCommand(index);
-        default:
-        }
-
         if (line.equals("todo") || line.equals("deadline") || line.equals("event") || line.equals("find")) {
             if (doneLine.length == 1) {
                 throw new DukeException("EmptyDescription", line);
             }
         }
-
         try {
             switch (line) {
+            case ("bye"):
+                return new ByeCommand();
+            case ("help"):
+                return new HelpCommand();
+            case ("list"):
+                return new ListCommand();
+            case ("done"):
+                return new DoneCommand(index);
+            case ("delete"):
+                return new DeleteCommand(index);
             case ("find"):
                 return new FindCommand(doneLine[1]);
             case ("todo"):
