@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
+    public String execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // print custom help message
         String allCommands = "todo\n"
                 + "deadline *text* /by yyyy-mm-dd\n"
@@ -26,6 +26,6 @@ public class HelpCommand extends Command {
                 + "list\n"
                 + "delete *number*\n"
                 + "bye";
-        Ui.printMessage(allCommands);
+        return Ui.message(allCommands);
     }
 }

@@ -17,11 +17,11 @@ public class DoneCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
+    public String execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // update task to done
         task.setDone();
 
         // print message
-        Ui.printTaskDoneMessage(task);
+        return Ui.taskDoneMessage(task);
     }
 }

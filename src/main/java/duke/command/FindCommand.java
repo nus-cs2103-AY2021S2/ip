@@ -20,11 +20,11 @@ public class FindCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(String searchString, Task task, TaskList taskList, Storage storage) {
+    public String execute(String searchString, Task task, TaskList taskList, Storage storage) {
         // filter tasks that contains the search string
         List<Task> searchResult = taskList.filterTasks(searchString);
 
         // print the search result
-        Ui.printMatchingList(searchResult);
+        return Ui.matchingList(searchResult);
     }
 }

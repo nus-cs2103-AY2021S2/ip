@@ -1,10 +1,11 @@
 package duke;
 
 import duke.command.Command;
+import duke.controller.MainWindow;
 import duke.exceptions.EmptyTaskDukeException;
 import duke.parser.Parser;
-import duke.storage.Storage;
 import duke.task.Task;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -19,6 +20,7 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui(new Scanner(System.in));
@@ -27,37 +29,34 @@ public class Duke {
     }
 
     /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    /**
      * Runs the entire logic for Duke
      */
-    public void run() {
-        // show welcome message
-        ui.printWelcomeMessage();
-
-        boolean isDukeOnline = true;
-        while (isDukeOnline) {
-            // do something
-            try {
-                String fullInput = ui.readCommand();
-                Command c = Parser.parseCommand(fullInput);
-                Task task = Parser.parseTask(fullInput, taskList);
-                String taskDescription = Parser.parseDescription(fullInput);
-                c.execute(taskDescription, task, taskList, storage);
-                // check online condition
-                isDukeOnline = c.isDukeOnline();
-            } catch (EmptyTaskDukeException e) {
-                Ui.printError(e.getMessage());
-            } catch (NumberFormatException e) {
-                Ui.printError(e.getMessage()
-                        + "\nPlease enter a valid task number.");
-            } catch (IndexOutOfBoundsException e) {
-                Ui.printError(e.getMessage()
-                        + "\nPlease enter a valid task number.");
-            } catch (DateTimeParseException e) {
-                Ui.printError(e.getMessage()
-                        + "\nPlease enter the date in the correct format.");
-            }
-
+    public String run(String fullInput) {
+        // do something
+        try {
+            Command c = Parser.parseCommand(fullInput);
+            Task task = Parser.parseTask(fullInput, taskList);
+            String taskDescription = Parser.parseDescription(fullInput);
+            return c.execute(taskDescription, task, taskList, storage);
+        } catch (EmptyTaskDukeException e) {
+            return e.getMessage();
+        } catch (NumberFormatException e) {
+            return e.getMessage()
+                    + "\nPlease enter a valid task number.";
+        } catch (IndexOutOfBoundsException e) {
+            return e.getMessage()
+                    + "\nPlease enter a valid task number.";
+        } catch (DateTimeParseException e) {
+            return e.getMessage()
+                    + "\nPlease enter the date in the correct format.";
         }
-        ui.close();
     }
 }
