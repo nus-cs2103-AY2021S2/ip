@@ -29,7 +29,7 @@ public class ToDoCommand extends Command {
     public String execute() throws DukeCommandException {
         try {
             ToDo toDo = taskManager.addToDo(this.desc);
-            Storage.save(taskManager.getTasks());
+            Storage.saveTasks(taskManager.getTasks());
             return ui.constructAddMessage(toDo, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("todo", desc, e.getMessage());

@@ -47,7 +47,7 @@ public class StorageTest {
         tasks.add(new Event("DESCRIPTION 3", dateTime, dateTime));
 
         try {
-            Storage.save(tasks);
+            Storage.saveTasks(tasks);
         } catch(DukeSaveException e) {
             assumeFalse(true, "Failed to save tasks");
         }
@@ -89,7 +89,7 @@ public class StorageTest {
             writer.close();
 
             TaskManager taskManager = new TaskManager();
-            Storage.loadTasksTo(taskManager);
+            Storage.loadTasks(taskManager);
 
             assertEquals("T | 0 | DESCRIPTION 1", taskManager.getTask(0).toSaveFileString());
             assertEquals("D | 1 | DESCRIPTION 2 | " + dateTime.format(formatter),

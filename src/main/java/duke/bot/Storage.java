@@ -12,10 +12,7 @@ import java.util.Scanner;
 import duke.exception.DukeLoadException;
 import duke.exception.DukeSaveException;
 import duke.exception.DukeTaskException;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
 
 /** An utility class that provide read/write related operations */
 public class Storage {
@@ -58,64 +55,67 @@ public class Storage {
      * @param tasks A list of tasks
      * @throws DukeSaveException if there is an issue writing into the hard disk
      */
-    public static void save(List<Task> tasks) throws DukeSaveException {
+    public static void saveTasks(List<Task> tasks) throws DukeSaveException {
         setupSaveFolder();
         setupSaveFile();
         writeTasksToSave(tasks);
     }
 
-    /**
-     * Loads tasks from the hard disk into current session's task list
-     *
-     * @param taskManager TaskManager that contains the current session's task list
-     * @throws DukeLoadException if there is an issue reading tasks from the hard disk
-     */
-    public static void loadTasksTo(TaskManager taskManager) throws DukeLoadException {
-        setupSaveFolder();
-
-        // Load the save file or create one if missing
-        File file = new File(PATH);
+    private static void readTask(String entry, TaskManager manager) throws DukeLoadException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
+        String[] params = entry.split(" \\| ");
+
+        Task task;
 
         try {
-            // If the save file already exists, load its tasks
+            if (params[0] == "T") {
+                task = manager.addToDo(params[2]);
+            } else if (params[0] == "D") {
+                LocalDateTime due = LocalDateTime.parse(params[3], formatter);
+                task = manager.addDeadline(params[2], due);
+            } else if (params[0] == "E") {
+                LocalDateTime start = LocalDateTime.parse(params[3], formatter);
+                LocalDateTime end = LocalDateTime.parse(params[4], formatter);
+                task = manager.addEvent(params[2], start, end);
+            } else {
+                throw new DukeLoadException("Invalid task type found: " + params[0]);
+            }
+        } catch (DukeTaskException e) {
+            throw new DukeLoadException(e.getMessage());
+        }
+
+        boolean isDone = params[1].equals("1");
+        if (isDone) {
+            task.markAsDone();
+        }
+    }
+
+    private static void readSaveTo(TaskManager manager) throws DukeLoadException {
+        try {
+            File file = new File(PATH);
+
             if (!file.createNewFile()) {
                 Scanner scanner = new Scanner(file);
-                while (scanner.hasNextLine()) {
-                    String[] splits = scanner.nextLine().split(" \\| ");
-                    boolean isDone = splits[1].equals("1");
 
-                    switch (splits[0]) {
-                    case "T":
-                        ToDo toDo = taskManager.addToDo(splits[2]);
-                        if (isDone) {
-                            toDo.markAsDone();
-                        }
-                        break;
-                    case "D":
-                        LocalDateTime dateTime = LocalDateTime.parse(splits[3], formatter);
-                        Deadline deadline = taskManager.addDeadline(splits[2], dateTime);
-                        if (isDone) {
-                            deadline.markAsDone();
-                        }
-                        break;
-                    case "E":
-                        LocalDateTime start = LocalDateTime.parse(splits[3], formatter);
-                        LocalDateTime end = LocalDateTime.parse(splits[4], formatter);
-                        Event event = taskManager.addEvent(splits[2], start, end);
-                        if (isDone) {
-                            event.markAsDone();
-                        }
-                        break;
-                    default:
-                        throw new DukeLoadException("Invalid task type found: " + splits[0]);
-                    }
+                while (scanner.hasNextLine()) {
+                    readTask(scanner.nextLine(), manager);
                 }
             }
         } catch (IOException e) {
             throw new DukeLoadException("Issue with IO while loading tasks");
-        } catch (DukeTaskException e) {
+        } catch (DukeLoadException e) {
             throw new DukeLoadException(e.getMessage());
         }
+    }
+
+    /**
+     * Loads tasks from the hard disk into current session's task list
+     *
+     * @param manager TaskManager that contains the current session's task list
+     * @throws DukeLoadException if there is an issue reading tasks from the hard disk
+     */
+    public static void loadTasks(TaskManager manager) throws DukeLoadException {
+        setupSaveFolder();
+        readSaveTo(manager);
     }
 }

@@ -39,7 +39,7 @@ public class EventCommand extends Command {
     public String execute() throws DukeCommandException {
         try {
             Event event = taskManager.addEvent(this.desc, this.startDateTime, this.endDateTime);
-            Storage.save(taskManager.getTasks());
+            Storage.saveTasks(taskManager.getTasks());
             return ui.constructAddMessage(event, taskManager.getTasksSize());
         } catch (DukeException e) {
             throw new DukeCommandException("event", desc, e.getMessage());

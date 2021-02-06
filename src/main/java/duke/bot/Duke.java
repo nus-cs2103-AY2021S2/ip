@@ -24,7 +24,7 @@ public class Duke {
         Command.setup(ui, taskManager);
 
         try {
-            Storage.loadTasksTo(taskManager);
+            Storage.loadTasks(taskManager);
         } catch (DukeLoadException e) {
             ui.constructErrorMessage(e.getMessage());
         }
