@@ -11,13 +11,15 @@ public class DeleteCommand extends Command {
         Task t;
         String response;
 
+        assert info != null;
         try {
             num = Integer.parseInt(info);
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! There is no such task number.");
         }
 
-        if (num > tasks.size || num == 0) {
+        assert tasks.size > 0;
+        if (num > tasks.size || num <= 0) {
             throw new DukeException("OOPS!!! There is no such task number.");
         } else {
             num--;

@@ -18,6 +18,7 @@ public class DateCommand extends Command {
         } else {
             try {
                 LocalDate date = LocalDate.parse(info);
+                assert date != null;
                 time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             } catch (DateTimeParseException e) {
                 throw new DukeException("OOPS!!! The timing is not in the correct format.");
