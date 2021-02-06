@@ -11,8 +11,11 @@ import duke.exception.EmptyDateTimeException;
 import duke.exception.EmptyDeadlineException;
 import duke.exception.EmptyDeleteException;
 import duke.exception.EmptyEventException;
+import duke.exception.EmptyFindException;
 import duke.exception.EmptyListDeletionException;
-import duke.exception.EmptyToDoException;
+import duke.exception.EmptyTodoException;
+import duke.exception.EmptyUpdateException;
+import duke.exception.WrongUpdateTypeException;
 import duke.storage.Storage;
 
 /**
@@ -82,7 +85,7 @@ public class TaskList {
                     + " tasks in the list.";
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyToDoException();
+            throw new EmptyTodoException();
         }
     }
 
@@ -286,7 +289,7 @@ public class TaskList {
         try {
             String taskNumber = input.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyDeleteException();
+            throw new EmptyFindException();
         }
         String taskDetails = input.split(" ", 2)[1];
         String toPrint = "Here are the matching tasks in your list:\n";
@@ -300,5 +303,108 @@ public class TaskList {
             }
         }
         return toPrint;
+    }
+
+    /**
+     * Method to update an event in the list.
+     *
+     * @param input of user with details to be ammended
+     * @return confirmation message that the update was successful
+     * @throws DukeException in case of wrong type or insufficient information
+     */
+    public String updateEvent(String input) throws DukeException {
+        try {
+            String taskNumber = input.split(" ")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyDeleteException();
+        }
+
+        try {
+            int taskNumber = Integer.parseInt(input.split(" ")[1]);
+        } catch (NumberFormatException e) {
+            throw new EmptyUpdateException();
+        }
+
+        int taskNumber = Integer.parseInt(input.split(" ")[1]);
+        int taskIndex = taskNumber - 1;
+        String taskType = this.taskList.get(taskIndex).getTaskType();
+        try {
+            String newDetails = input.split("/to ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new WrongUpdateTypeException();
+        }
+        String newDetails = input.split("/to ", 2)[1];
+
+        if (taskType.equals("todo")) {
+            if (newDetails.contains("/by")) {
+                throw new WrongUpdateTypeException();
+            } else if (newDetails.contains("/at")) {
+                throw new WrongUpdateTypeException();
+            } else {
+                this.taskList.get(taskIndex).updateTaskDetails(newDetails);
+                Task newTask = this.taskList.get(taskIndex);
+                storage.saveData(this);
+
+                return "Noted. I've updated this task:\n"
+                        + taskNumber + "." + newTask;
+            }
+        } else if (taskType.equals("deadline")) {
+            try {
+                String deadlineDetails = input.split("/by ", 2)[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new EmptyUpdateException();
+            }
+
+            if (newDetails.contains("/at")) {
+                throw new WrongUpdateTypeException();
+            } else {
+                String description = newDetails.split(" /by ", 2)[0];
+                String dateAndTime = newDetails.split(" /by ", 2)[1];
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                try {
+                    LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+                    this.taskList.get(taskIndex).updateTaskDetails(description);
+                    this.taskList.get(taskIndex).updateTaskDateAndTime(dateTime);
+                    Task newTask = this.taskList.get(taskIndex);
+                    storage.saveData(this);
+
+                    return "Noted. I've updated this task:\n"
+                            + taskNumber + "." + newTask;
+
+                } catch (DateTimeParseException e) {
+                    throw new EmptyDateTimeException();
+                }
+            }
+        } else if (taskType.equals("event")) {
+            try {
+                String eventDetails = input.split("/at ", 2)[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new EmptyUpdateException();
+            }
+
+            if (newDetails.contains("/by")) {
+                throw new WrongUpdateTypeException();
+            } else {
+                String description = newDetails.split(" /at ", 2)[0];
+                String dateAndTime = newDetails.split(" /at ", 2)[1];
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                try {
+                    LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+                    this.taskList.get(taskIndex).updateTaskDetails(description);
+                    this.taskList.get(taskIndex).updateTaskDateAndTime(dateTime);
+                    Task newTask = this.taskList.get(taskIndex);
+                    storage.saveData(this);
+
+                    return "Noted. I've updated this task:\n"
+                            + taskNumber + "." + newTask;
+
+                } catch (DateTimeParseException e) {
+                    throw new EmptyDateTimeException();
+                }
+            }
+        } else {
+            assert false : "All cases should be handled by here.";
+            return "";
+        }
     }
 }

@@ -1,20 +1,40 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Todo class which creates a todo task.
  */
 
 public class Todo extends Task {
-    private String task;
+    private String taskType;
 
     /**
      * Creates Todo task which keeps track of task details.
      *
-     * @param task details of the todo task
+     * @param todoDetails of the todo task
      */
-    public Todo(String task) {
-        super(task);
+    public Todo(String todoDetails) {
+        super(todoDetails);
+        this.taskType = "todo";
     }
+
+    /**
+     * Method to get the type of task
+     *
+     * @return type of task
+     */
+    @Override
+    public String getTaskType() {
+        return this.taskType;
+    }
+
+    /**
+     * Method to ammend task details
+     *
+     * @params newDetails to be updated
+     */
+    public void updateTaskDateAndTime(LocalDateTime newDateTime) {}
 
     @Override
     public String toString() {

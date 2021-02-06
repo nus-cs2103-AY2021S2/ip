@@ -9,7 +9,7 @@ import duke.task.TaskList;
  * ListCommand class which is a type of Command to be executed.
  */
 
-public class FindCommand extends Command {
+public class UpdateCommand extends Command {
     private String userInput;
 
     /**
@@ -19,7 +19,7 @@ public class FindCommand extends Command {
      * @param input details of the task
      *
      */
-    public FindCommand(String input) {
+    public UpdateCommand(String input) {
         this.userInput = input;
     }
 
@@ -31,13 +31,12 @@ public class FindCommand extends Command {
      * @param storage handles the various tasks according to their type
      * @throws DukeException in case input is invalid
      */
-
     public String execute(TaskList tasks, String input, Storage storage) throws DukeException {
         assert !input.isEmpty() : "Input should not be blank.";
 
         try {
-            String taskNumber = input.split(" ", 2) [1];
-            return tasks.find(input);
+            String taskNumber = input.split(" ") [1];
+            return tasks.updateEvent(input);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidInstructionException();
         }

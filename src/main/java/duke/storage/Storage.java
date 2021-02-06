@@ -99,21 +99,21 @@ public class Storage {
                     String[] taskDetailsDateAndTimeAsArray = taskDetailsDateAndTime.split("[(]");
                     String[] taskDetailsAsArray = taskDetailsDateAndTimeAsArray[0].split("");
                     String taskDetails = "";
-                    for (int t = 0; t < taskDetailsAsArray[0].length() - 1; t++) {
-                        taskDetails += taskDetailsAsArray[t];
+                    for (int k = 0; k < taskDetailsAsArray.length - 1; k++) {
+                        taskDetails += taskDetailsAsArray[k];
                     }
 
-                    taskDetails = taskDetailsDateAndTimeAsArray[1];
-                    String[] taskDateAndTimeAsArray = taskDetails.split(" by:", 2);
-                    String taskDateAndTime = "";
-                    String dateAndTime = taskDateAndTimeAsArray[0];
-                    taskDateAndTimeAsArray = dateAndTime.split("");
-                    for (int k = 4; k < taskDateAndTimeAsArray.length - 1; k++) {
-                        taskDateAndTime += taskDateAndTimeAsArray[k];
+                    String taskDateAndTime = taskDetailsDateAndTimeAsArray[1];
+                    String[] taskDateAndTimeAsArray = taskDateAndTime.split("by: ", 2);
+                    taskDateAndTime = taskDateAndTimeAsArray[1];
+                    String dateAndTime = "";
+                    taskDateAndTimeAsArray = taskDateAndTime.split("");
+                    for (int k = 0; k < taskDateAndTimeAsArray.length - 1; k++) {
+                        dateAndTime += taskDateAndTimeAsArray[k];
                     }
 
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-                    LocalDateTime dateTime = LocalDateTime.parse(taskDateAndTime, formatter);
+                    LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
                     Task deadlineTask = new Deadline(taskDetails, dateTime);
                     assert deadlineTask.isEmpty() : "Task should not be empty.";
 
@@ -133,27 +133,28 @@ public class Storage {
                     String[] taskDetailsDateAndTimeAsArray = taskDetailsDateAndTime.split("[(]");
                     String[] taskDetailsAsArray = taskDetailsDateAndTimeAsArray[0].split("");
                     String taskDetails = "";
-                    for (int t = 0; t < taskDetailsAsArray[0].length() - 1; t++) {
-                        taskDetails += taskDetailsAsArray[t];
+                    for (int k = 0; k < taskDetailsAsArray.length - 1; k++) {
+                        taskDetails += taskDetailsAsArray[k];
                     }
 
-                    taskDetails = taskDetailsDateAndTimeAsArray[1];
-                    String[] taskDateAndTimeAsArray = taskDetails.split(" at:", 2);
-                    String taskDateAndTime = "";
-                    String dateAndTime = taskDateAndTimeAsArray[0];
-                    taskDateAndTimeAsArray = dateAndTime.split("");
-                    for (int k = 4; k < taskDateAndTimeAsArray.length - 1; k++) {
-                        taskDateAndTime += taskDateAndTimeAsArray[k];
+                    String taskDateAndTime = taskDetailsDateAndTimeAsArray[1];
+                    String[] taskDateAndTimeAsArray = taskDateAndTime.split("at: ", 2);
+                    taskDateAndTime = taskDateAndTimeAsArray[1];
+                    String dateAndTime = "";
+                    taskDateAndTimeAsArray = taskDateAndTime.split("");
+                    for (int k = 0; k < taskDateAndTimeAsArray.length - 1; k++) {
+                        dateAndTime += taskDateAndTimeAsArray[k];
                     }
 
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-                    LocalDateTime dateTime = LocalDateTime.parse(taskDateAndTime, formatter);
+                    LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
                     Task eventTask = new Event(taskDetails, dateTime);
                     assert eventTask.isEmpty() : "Task should not be empty.";
 
                     if (isDone) {
                         eventTask.setDone();
                     }
+                    list.addEvent(eventTask);
                 }
             }
         } else { //create new file in folder

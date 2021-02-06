@@ -49,6 +49,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
         circle.setFill(new ImagePattern(image));
     }
 

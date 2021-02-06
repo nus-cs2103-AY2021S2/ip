@@ -1,11 +1,13 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Class Task which keeps track of the details of the task
  * and whether the task is done.
  */
-public class Task {
-    private String name;
+public abstract class Task {
+    private String details;
     private boolean done;
 
     /**
@@ -14,18 +16,19 @@ public class Task {
      * @param name details of the task
      */
     public Task(String name) {
-        this.name = name;
+        this.details = name;
         this.done = false;
     }
+
 
     @Override
     public String toString() {
         if (this.done) {
-            String toPrint = String.format("[X] %s", this.name);
+            String toPrint = String.format("[X] %s", this.details);
             assert !toPrint.isEmpty() : "Something should be printed.";
             return toPrint;
         } else {
-            String toPrint = String.format("[ ] %s", this.name);
+            String toPrint = String.format("[ ] %s", this.details);
             assert !toPrint.isEmpty() : "Something should be printed.";
             return toPrint;
         }
@@ -44,10 +47,34 @@ public class Task {
      * @return details of the task
      */
     public String getTaskDetails() {
-        return this.name;
+        return this.details;
     }
+
+    public String getTaskType() {
+        return "";
+    }
+
+    /**
+     * Method to ammend task details
+     *
+     * @params newDetails to be updated
+     */
+    public void updateTaskDetails(String newDetails) {
+        this.details = newDetails;
+    }
+
+    /**
+     * Method to ammend task details
+     *
+     * @params newDetails to be updated
+     */
+    public abstract void updateTaskDateAndTime(LocalDateTime newDateTime);
+
 
     public boolean isEmpty() {
         return false;
     }
 }
+
+
+

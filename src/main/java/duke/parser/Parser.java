@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateCommand;
 import duke.exception.InvalidInstructionException;
 
 /**
@@ -41,6 +42,8 @@ public class Parser {
             command = new FindCommand(input);
         } else if (type.equals("bye")) {
             command = new ByeCommand(input);
+        } else if (type.equals("update")) {
+            command = new UpdateCommand(input);
         } else {
             throw new InvalidInstructionException();
         }

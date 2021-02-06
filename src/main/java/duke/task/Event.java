@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Event class which creates an event task.
  */
 public class Event extends Task {
-    private final LocalDateTime date;
+    private LocalDateTime date;
+    private String taskType;
 
     /**
      * Creates Event task which keeps track of task details and timings.
@@ -18,6 +19,17 @@ public class Event extends Task {
     public Event(String description, LocalDateTime at) {
         super(description);
         this.date = at;
+        this.taskType = "event";
+    }
+
+    /**
+     * Method to get the type of task
+     *
+     * @return type of task
+     */
+    @Override
+    public String getTaskType() {
+        return this.taskType;
     }
 
     @Override
@@ -26,6 +38,15 @@ public class Event extends Task {
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
         assert !toPrint.isEmpty() : "Something should be printed.";
         return toPrint;
+    }
+
+    /**
+     * Method to ammend task details
+     *
+     * @params newDetails to be updated
+     */
+    public void updateTaskDateAndTime(LocalDateTime newDateTime) {
+        this.date = newDateTime;
     }
 
     /**

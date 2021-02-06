@@ -34,7 +34,7 @@ public class AddCommandTest {
 
             addDeadlineCommand.execute(taskList, deadlineInput, storage);
         } catch (NullPointerException e) {
-            assertEquals("Cannot invoke \"TaskList.addDeadline(String)\" because \"tasks\" is null",
+            assertEquals(null,
                     e.getMessage());
 
         }
@@ -48,7 +48,7 @@ public class AddCommandTest {
 
             addEventCommand.execute(taskList, eventInput, storage);
         } catch (NullPointerException e) {
-            assertEquals("Cannot invoke \"TaskList.addEvent(String)\" because \"tasks\" is null",
+            assertEquals(null,
                     e.getMessage());
 
         }
