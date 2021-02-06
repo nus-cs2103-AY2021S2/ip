@@ -12,3 +12,5 @@ event attend meeting /at 2021-03-16 undone
 todo prepare tea undone
 event attend gala /at 2021-03-17 undone
 deadline do exercise /by 2021-03-19 undone
+todo visit zoo undone
+todo play soccer undone
