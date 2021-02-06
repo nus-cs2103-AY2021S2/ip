@@ -21,6 +21,8 @@ public class Parser {
             return CommandType.HELP;
         } else if (input.stripTrailing().equals("clear")) {
             return CommandType.CLEAR;
+        } else if (input.startsWith("find ")) {
+            return CommandType.FIND;
         } else {
             return CommandType.INVALID;
         }

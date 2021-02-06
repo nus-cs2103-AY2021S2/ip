@@ -111,4 +111,26 @@ public class TaskList {
             return new TaskList(new ArrayList<>());
         }
     }
+
+    public TaskList find(String command) throws SeashellException {
+        String toFind = command.substring(5);
+        if (this.taskList.isEmpty()) {
+            throw new SeashellException("OOPS!!! Task list is already empty!");
+        } else {
+            ArrayList<Task> foundList = new ArrayList<>();
+            for (Task t : this.taskList) {
+                if (t.name.contains(toFind)) {
+                    foundList.add(t);
+                }
+            }
+            if (foundList.isEmpty()) {
+                throw new SeashellException("No tasks with the keyword " + toFind + " was found!");
+            } else {
+                TaskList foundTaskList = new TaskList(foundList);
+                System.out.println("Here are the matching tasks in your list:");
+                foundTaskList.listTasks();
+                return foundTaskList;
+            }
+        }
+    }
 }
