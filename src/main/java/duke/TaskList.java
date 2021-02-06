@@ -59,8 +59,8 @@ public class TaskList {
                 int index = userInput.indexOf('/');
 
                 String dateString = userInput.substring(index + 4);
-                LocalDateTime dateTime = LocalDateTime.parse(dateString,
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
 
                 if (userInput.startsWith("deadline")) {
                     newTask = new Deadline(userInput.substring(9, index), dateTime);

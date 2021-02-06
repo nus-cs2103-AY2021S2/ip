@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exceptions.InvalidFileDataException;
 import duke.exceptions.InvalidFolderException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -21,15 +22,15 @@ import duke.task.ToDo;
  * tasks from the file and saving tasks in the file.
  */
 public class Storage {
+    private static final String filePath = "./data/duke.txt";
 
     /**
      * Constructor for Storage class.
      * Initializes File for the task file.
      *
-     * @param filePath Filepath of the file that saves task
      * @throws InvalidFolderException If folder to store the file does not exist.
      */
-    public Storage(String filePath) throws InvalidFolderException {
+    public Storage() throws InvalidFolderException {
         try {
             File file = new File(filePath);
 
@@ -37,49 +38,56 @@ public class Storage {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             } else {
-                readFileContents(filePath);
+                readFileContents();
             }
         } catch (IOException ex) {
             throw new InvalidFolderException();
+        }  catch (InvalidFileDataException ex) {
+            ex.getMessage();
         }
     }
 
     /**
      * Returns a List of existing tasks from the file when Duke starts up.
      *
-     * @param filePath Filepath of the file that saves task.
      * @return List of existing tasks in the file.
      * @throws FileNotFoundException If the file cannot be found.
      */
-    public List<Task> readFileContents(String filePath)
-            throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
+    public List<Task> readFileContents()
+            throws FileNotFoundException, InvalidFileDataException {
+        File file = new File(filePath);
+        Scanner scanner = new Scanner(file);
         List<Task> list = new ArrayList<>();
 
-        Task task;
-        String taskDescription;
-        LocalDateTime taskDate;
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        while (scanner.hasNextLine()) {
+            String taskString = scanner.nextLine();
+            String[] splitString = taskString.split(" \\| ");
+            Task task;
 
-        while (s.hasNextLine()) {
-            String taskString = s.nextLine();
-            String taskDone = taskString.substring(4, 5);
-            int indexOfDivider = taskString.indexOf('|', 8);
+            String taskType = splitString[0];
+            String taskDone = splitString[1];
+            String taskDescription = splitString[2] + " ";
+            LocalDateTime taskDate;
 
-            if (taskString.startsWith("T")) {
-                taskDescription = taskString.substring(8);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+
+            switch (taskType) {
+            case "T":
                 task = new ToDo(taskDescription);
-            } else {
-                taskDescription = taskString.substring(8, indexOfDivider);
-                taskDate = LocalDateTime.parse(taskString.substring(indexOfDivider + 2), df);
+                break;
 
-                if (taskString.startsWith("D")) {
-                    task = new Deadline(taskDescription, taskDate);
-                } else {
-                    assert taskString.startsWith("E"): "Invalid task string";
-                    task = new Event(taskDescription, taskDate);
-                }
+            case "D":
+                taskDate = LocalDateTime.parse(splitString[3], formatter);
+                task = new Deadline(taskDescription, taskDate);
+                break;
+
+            case "E":
+                taskDate = LocalDateTime.parse(splitString[3], formatter);
+                task = new Event(taskDescription, taskDate);
+                break;
+
+            default:
+                throw new InvalidFileDataException();
             }
 
             if (taskDone.equals("1")) {
@@ -93,10 +101,9 @@ public class Storage {
     /**
      * Saves the tasks in the file whenever the task list changes.
      *
-     * @param filePath Filepath of the file that saves task.
      * @param list List of existing tasks.
      */
-    public void overWriteFile(String filePath, List<Task> list) {
+    public void overWriteFile(List<Task> list) {
         try {
             FileWriter fw = new FileWriter(filePath);
 

@@ -28,7 +28,8 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return this.date.format(formatter);
     }
 
     /**

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.InvalidFileDataException;
 import duke.exceptions.InvalidFolderException;
 import duke.exceptions.InvalidInputException;
 import duke.task.Task;
@@ -15,7 +16,7 @@ public class Duke {
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
-    private static final String filePath = "./data/duke.txt";
+    private static Parser parser;
 
     /**
      * Constructor for Duke class.
@@ -23,11 +24,13 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
+        parser = new Parser();
 
         try {
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.readFileContents(filePath));
-        } catch (FileNotFoundException | InvalidFolderException e) {
+            storage = new Storage();
+            tasks = new TaskList(storage.readFileContents());
+        } catch (FileNotFoundException | InvalidFolderException
+                | InvalidFileDataException e) {
             tasks = new TaskList();
         }
     }
@@ -39,12 +42,11 @@ public class Duke {
      */
     public String getResponse(String userInput) {
         StringBuilder response = new StringBuilder();
+        String[] parsedUserInput = parser.parseUserInput(userInput);
 
         try {
-            Parser parser = new Parser(userInput);
-            String[] parsedUserInput = parser.parseUserInput();
-            parser.checkUserInput(tasks.list);
-            String userAction = parser.getUserAction();
+            parser.checkUserInput(tasks.list, userInput);
+            String userAction = parsedUserInput[0];
 
             switch (userAction) {
             case "bye":
@@ -84,7 +86,7 @@ public class Duke {
             default:
                 throw new InvalidInputException();
             }
-            storage.overWriteFile(filePath, tasks.list);
+            storage.overWriteFile(tasks.list);
         } catch (DukeException ex) {
             response.append(ex.getMessage());
         }
