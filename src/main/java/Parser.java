@@ -25,22 +25,36 @@ public class Parser {
             info = "";
         }
 
-        if (action.equals("todo") || action.equals("deadline") || action.equals("event")) {
-            command = new AddCommand(action, info);
-        } else if (action.equals("done")) {
-            command = new DoneCommand(action, info);
-        } else if (action.equals("delete")) {
-            command = new DeleteCommand(action, info);
-        } else if (action.equals("bye")) {
-            command = new ExitCommand(action, info);
-        } else if (action.equals("list")) {
-            command = new ListCommand(action, info);
-        } else if (action.equals("find")) {
-            command = new FindCommand(action, info);
-        } else if (action.equals("date")) {
-            command = new DateCommand(action, info);
-        } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
+        switch (action) {
+            case "todo":
+                command = new TodoCommand(action, info);
+                break;
+            case "deadline":
+                command = new DeadlineCommand(action, info);
+                break;
+            case "event":
+                command = new EventCommand(action, info);
+                break;
+            case "done":
+                command = new DoneCommand(action, info);
+                break;
+            case "delete":
+                command = new DeleteCommand(action, info);
+                break;
+            case "bye":
+                command = new ExitCommand(action, info);
+                break;
+            case "list":
+                command = new ListCommand(action, info);
+                break;
+            case "find":
+                command = new FindCommand(action, info);
+                break;
+            case "date":
+                command = new DateCommand(action, info);
+                break;
+            default:
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
         }
 
         return command;
