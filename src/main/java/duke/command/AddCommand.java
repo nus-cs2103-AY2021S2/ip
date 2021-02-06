@@ -53,6 +53,7 @@ public class AddCommand extends Command {
      * @throws DukeException When command argument is invalid.
      */
     private Task convertToTodo() throws DukeException {
+
         if (command.length() <= LENGTH_TODO) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
         }
@@ -72,6 +73,7 @@ public class AddCommand extends Command {
      * @throws DukeException When command argument is invalid.
      */
     private Task convertToEvent() throws DukeException {
+
         if (command.length() <= LENGTH_EVENT) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
         }
@@ -103,6 +105,7 @@ public class AddCommand extends Command {
      * @throws DukeException When command argument is invalid.
      */
     private Task convertToDeadline() throws DukeException {
+
         if (command.length() <= LENGTH_DEADLINE) {
             throw new DukeException(ERROR_EMPTY_ARGUMENT);
         }
@@ -146,25 +149,27 @@ public class AddCommand extends Command {
             task = convertToDeadline();
             break;
         default:
+            assert false : "This line will never be reached.";
             throw new DukeException("Unexpected value: " + this.cmdType);
         }
         list.addJob(task);
         return "Task added:\n" + task.toString()
                 + "Now you have " + list.getSize()
-                + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
+                + (list.getSize() == 1 ? " task in the list.\n" : " tasks in the list.\n");
     }
 
     @Override
     public String toString() {
         switch (this.cmdType) {
         case Todo:
-            return "Test usage: this is a TODO command";
+            return "Test usage: this is a TODO command.";
         case Deadline:
-            return "Test usage: this is a DEADLINE command";
+            return "Test usage: this is a DEADLINE command.";
         case Event:
-            return "Test usage: this is an EVENT command";
+            return "Test usage: this is an EVENT command.";
         default:
-            return "Error: this will never happen";
+            assert false : "This line will never be reached.";
+            return "Error: this will never happen.";
         }
     }
 }

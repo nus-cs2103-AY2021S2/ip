@@ -27,6 +27,6 @@ public class ListCommand extends Command {
 
     @Override
     public String toString() {
-        return "Test usage: this is a LIST command";
+        return "Test usage: this is a LIST command.";
     }
 }

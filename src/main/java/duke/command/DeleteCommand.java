@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
             return "This task is deleted: \n"
                     + currTask.toString()
                     + "Now you have " + list.getSize()
-                    + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
+                    + (list.getSize() == 1 ? " task in the list.\n" : " tasks in the list.\n");
         } else {
             return MESSAGE_OBJECT_NOT_FOUND + "\n";
         }
@@ -53,6 +53,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-        return "Test usage: this is a DELETE command";
+        return "Test usage: this is a DELETE command.";
     }
 }

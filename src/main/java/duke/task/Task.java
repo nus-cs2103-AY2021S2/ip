@@ -47,7 +47,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + description;
+        return "[" + this.getStatusIcon() + "] " + description + ".";
     }
 
 }

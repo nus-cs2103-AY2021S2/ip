@@ -34,11 +34,13 @@ public class TaskList {
      * @param newTask New Task to add.
      */
     public void replaceJob(int index, Task newTask) {
+        assert this.list.get(index) != null : "Index not handled correctly by done command.";
         this.list.remove(index);
         this.list.add(index, newTask);
     }
 
     public void deleteJob(int index) {
+        assert this.list.get(index) != null : "Index not handled correctly by delete command.";
         this.list.remove(index);
     }
 

@@ -52,6 +52,6 @@ public class DoneCommand extends Command {
 
     @Override
     public String toString() {
-        return "Test usage: this is a DONE command";
+        return "Test usage: this is a DONE command.";
     }
 }

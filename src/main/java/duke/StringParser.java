@@ -23,6 +23,7 @@ public class StringParser {
     }
 
     /**
+
      * To generate underline.
      *
      * @param length Length of underline.

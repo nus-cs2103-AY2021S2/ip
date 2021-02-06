@@ -109,6 +109,7 @@ public class Storage {
         if (!file.exists()) {
             file.createNewFile();
         }
+        assert file.exists() : "Cannot save data.";
         sc = new Scanner(file);
     }
 
