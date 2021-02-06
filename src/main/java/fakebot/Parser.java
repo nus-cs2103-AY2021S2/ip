@@ -73,7 +73,8 @@ public class Parser {
         } else if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
             stringBuilder.append(convertDeadlineToString(deadline));
-
+        } else {
+            assert false : "Task being handle should be handle";
         }
         return stringBuilder.toString();
     }
@@ -174,7 +175,9 @@ public class Parser {
         case DEADLINE:
             currentTask = new Deadline(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]));
             break;
-        default: break;
+        default:
+            assert false : "String being parsed should be a type of parsed Task";
+            break;
         }
 
         if (Boolean.parseBoolean(parts[1])) {
