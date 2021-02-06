@@ -46,7 +46,6 @@ public class Parser {
             return new DoneCommand(index);
         case ("delete"):
             return new DeleteCommand(index);
-        default:
         }
 
         if (line.equals("todo") || line.equals("deadline") || line.equals("event") || line.equals("find")) {

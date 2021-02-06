@@ -44,6 +44,10 @@ public class Storage {
             System.out.println("Nice! We found your load file!");
             System.out.println("Loading...\n");
         }
+
+        assert(Files.exists(this.dataFolder));
+        assert(Files.exists(this.dukeTxt));
+
         File loadData = this.dukeTxt.toFile();
         return loadData;
     }
