@@ -76,7 +76,9 @@ public class TaskList {
      * @param num Integer index.
      */
     public void markAsDone(int num) {
-        tasks.get(num - 1).markAsDone();
+        Task task = tasks.get(num - 1);
+        assert task != null;
+        task.markAsDone();
     }
 
     /**
