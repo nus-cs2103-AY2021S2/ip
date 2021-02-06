@@ -25,8 +25,20 @@ public class TaskList {
     /**Add a todo task to arraylist
      * @param description
      */
-    public void addToDo(String description) {
-        taskArraylist.add(new ToDo(description));
+    public Boolean addToDo(String description) {
+
+        Task toDo = new ToDo(description);
+        boolean isDuplicate = false;
+        for(int i=0; i< taskArraylist.size(); i++){
+            isDuplicate = this.getTaskListArray().get(i).isSameTask(toDo);
+            if(isDuplicate){
+                break;
+            }
+        }
+        if(!isDuplicate) {
+            taskArraylist.add(toDo);
+        }
+        return isDuplicate;
     }
 
     /**Add a deadline task to arraylist
@@ -34,8 +46,19 @@ public class TaskList {
      * @param dueDate
      * @param endTime
      */
-    public void addDeadline(String description, LocalDate dueDate, LocalTime endTime) {
-        taskArraylist.add(new Deadline(description, dueDate, endTime));
+    public Boolean addDeadline(String description, LocalDate dueDate, LocalTime endTime) {
+        Task deadline = new Deadline(description, dueDate, endTime);
+        boolean isDuplicate = false;
+        for(int i=0; i< taskArraylist.size(); i++){
+            isDuplicate = this.getTaskListArray().get(i).isSameTask(deadline);
+            if(isDuplicate){
+                break;
+            }
+        }
+        if(!isDuplicate) {
+            taskArraylist.add(deadline);
+        }
+        return isDuplicate;
     }
 
     /**Add an event task to arraylist
@@ -44,8 +67,21 @@ public class TaskList {
      * @param startTime
      * @param endTime
      */
-    public void addEvent(String description, LocalDate dueDate, LocalTime startTime, LocalTime endTime) {
-        taskArraylist.add(new Event(description, false , dueDate, startTime, endTime));
+    public Boolean addEvent(String description, LocalDate dueDate, LocalTime startTime, LocalTime endTime) {
+        Task event = new Event(description, false , dueDate, startTime, endTime);
+        boolean isDuplicate = false;
+        for(int i=0; i< taskArraylist.size(); i++){
+            isDuplicate = this.getTaskListArray().get(i).isSameTask(event);
+            if(isDuplicate){
+                break;
+            }
+        }
+
+        if(!isDuplicate) {
+            taskArraylist.add(event);
+        }
+
+        return isDuplicate;
     }
 
     /**

@@ -28,6 +28,13 @@ public class UI {
         return (count + 1) + "." + task.toString();
     }
 
+
+    public String printDuplicateMessage() {
+        return "Existing entries with same task description was found. " +
+                "Please add a new task.";
+    }
+
+
     public String printNoTaskMessage() {
         return "There are currently no task available.";
     }
