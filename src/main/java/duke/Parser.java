@@ -16,6 +16,7 @@ public class Parser {
         acceptedCommands.add("find");
         acceptedCommands.add("list");
         acceptedCommands.add("bye");
+        acceptedCommands.add("empty");
     }
 
     /**
@@ -28,6 +29,8 @@ public class Parser {
             return Executor.list(taskList);
         } else if (command.equals("bye")) {
             return Executor.exit(taskList, storage);
+        } else if (command.equals("empty")) {
+            return Executor.empty(taskList);
         }
         String type, desc, time;
         if (command.contains(" ")) {

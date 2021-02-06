@@ -66,6 +66,15 @@ public class TaskList {
     }
 
     /**
+     * Empties the TaskList
+     */
+    public void empty() {
+        for (int i = lst.size() - 1; i >= 0; i--) {
+            delete(i);
+        }
+    }
+
+    /**
      * Returns every tasks that match several keywords.
      *
      * @param keywords the keywords to be searched.

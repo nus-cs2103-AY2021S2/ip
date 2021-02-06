@@ -36,6 +36,10 @@ public class Executor {
                 + "task:\n" + "  " + task + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
     }
+    public static String empty(TaskList taskList) {
+        taskList.empty();
+        return ("Noted. I've emptied the list.\n");
+    }
 
     public static String find(TaskList taskList, String ... keywords) {
         return taskList.find(keywords).toString();
