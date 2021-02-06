@@ -70,6 +70,8 @@ public class Duke {
                 result = taskList.addTask(new EventTask(command));
             } else if (TaskType.equals("add")) {
                 result = noteList.addTask(new Notes(input));
+            } else if (TaskType.equals("reminders") || TaskType.equals("dues")){
+                result = taskList.getReminders();
             }
         } else {
             if (TaskType.equals("todo") || TaskType.equals("deadline")

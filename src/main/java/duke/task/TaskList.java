@@ -125,7 +125,11 @@ public class TaskList {
         return Tasks.get(idx);
     }
 
-    
+    public String getReminders(){
+        String out = "These are the due tasks: \n";
+
+        return out;
+    }
 
     /**
      * The method returns all the tasks in a String representation
