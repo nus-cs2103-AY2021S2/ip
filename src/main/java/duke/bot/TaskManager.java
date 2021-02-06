@@ -25,11 +25,11 @@ public class TaskManager {
     public ToDo addToDo(String desc) throws DukeTaskException {
         if (desc.length() == 0) {
             throw new DukeTaskException("The description of a ToDo cannot be empty.");
-        } else {
-            ToDo toDo = new ToDo(desc);
-            tasks.add(toDo);
-            return toDo;
         }
+
+        ToDo toDo = new ToDo(desc);
+        tasks.add(toDo);
+        return toDo;
     }
 
     /**
@@ -43,11 +43,11 @@ public class TaskManager {
     public Deadline addDeadline(String desc, LocalDateTime dateTime) throws DukeTaskException {
         if (desc.length() == 0) {
             throw new DukeTaskException("The description of a Deadline cannot be empty.");
-        } else {
-            Deadline deadline = new Deadline(desc, dateTime);
-            tasks.add(deadline);
-            return deadline;
         }
+
+        Deadline deadline = new Deadline(desc, dateTime);
+        tasks.add(deadline);
+        return deadline;
     }
 
     /**
@@ -62,11 +62,11 @@ public class TaskManager {
     public Event addEvent(String desc, LocalDateTime start, LocalDateTime end) throws DukeTaskException {
         if (desc.length() == 0) {
             throw new DukeTaskException("The description of an Event cannot be empty.");
-        } else {
-            Event event = new Event(desc, start, end);
-            tasks.add(event);
-            return event;
         }
+
+        Event event = new Event(desc, start, end);
+        tasks.add(event);
+        return event;
     }
 
     /**
@@ -82,9 +82,9 @@ public class TaskManager {
         } else if (index < 0 || index >= tasks.size()) {
             throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size()
                     + " (inclusive).");
-        } else {
-            return tasks.remove(index);
         }
+
+        return tasks.remove(index);
     }
 
     /**
@@ -99,10 +99,9 @@ public class TaskManager {
         } else if (index < 0 || index >= tasks.size()) {
             throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size()
                     + " (inclusive).");
-        } else {
-            Task task = tasks.get(index);
-            task.markAsDone();
         }
+
+        tasks.get(index).markAsDone();
     }
 
     /**

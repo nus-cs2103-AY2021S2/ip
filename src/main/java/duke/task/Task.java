@@ -57,7 +57,7 @@ public class Task {
      *
      * @return Task's detail in a savable format
      */
-    public String toSaveInfoString() {
+    public String toSaveFileString() {
         return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc;
     }
 }

@@ -37,7 +37,7 @@ public class ToDo extends Task {
      * @return ToDo's detail in a savable format
      */
     @Override
-    public String toSaveInfoString() {
+    public String toSaveFileString() {
         return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc;
     }
 }

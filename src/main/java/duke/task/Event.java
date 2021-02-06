@@ -64,7 +64,7 @@ public class Event extends Task {
      * @return Event's detail in a savable format
      */
     @Override
-    public String toSaveInfoString() {
+    public String toSaveFileString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
         return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | "
                 + this.start.format(formatter) + " | " + this.end.format(formatter);
