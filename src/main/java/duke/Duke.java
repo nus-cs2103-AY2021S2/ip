@@ -45,6 +45,9 @@ public class Duke {
         } catch (IOException e) {
             ui.showFileCreationError();
             System.exit(1);
+        } catch (NumberFormatException e) {
+            ui.showInvalidSaveFileDurationFormat();
+            System.exit(1);
         }
     }
 
@@ -65,6 +68,8 @@ public class Duke {
             return ui.getOutOfBoundsErrorString();
         } catch (DateTimeParseException e) {
             return ui.getDateTimeParseErrorString();
+        } catch (NumberFormatException e) {
+            return ui.getWrongDurationFormatString();
         }
     }
 }
