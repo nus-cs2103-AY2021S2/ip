@@ -68,7 +68,6 @@ public class FindCommand extends Command {
                     }
                 })
                 .collect(Collectors.toList());
-
         return ui.constructFoundMsg(tasksFound);
     }
 }
