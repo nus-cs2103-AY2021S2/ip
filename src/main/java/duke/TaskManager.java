@@ -44,15 +44,19 @@ public class TaskManager {
                 Task t;
                 LocalDate d;
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
-                if (type.equals("T")) {
+                switch (type) {
+                case "T":
                     t = new ToDoTask(name, isCompleted);
-                } else if (type.equals("D")) {
+                    break;
+                case "D":
                     d = LocalDate.parse(params[3], formatter);
                     t = new DeadlineTask(name, d, isCompleted);
-                } else if (type.equals("E")) {
+                    break;
+                case "E":
                     d = LocalDate.parse(params[3], formatter);
                     t = new EventTask(name, d, isCompleted);
-                } else {
+                    break;
+                default:
                     throw new DukeCorruptFileException();
                 }
                 this.tasks.add(t);
