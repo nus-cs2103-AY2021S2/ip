@@ -1,3 +1,5 @@
+package main.java;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,17 +23,31 @@ import java.util.Scanner;
 
 public class MisterDuke {
 
-    private final Ui ui;
-    private final Storage storage;
+    private static Ui ui = new Ui();
+    private static Storage storage;
     private ArrayList<Task> tasks;
 
-    public MisterDuke(String filePath) throws IOException {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    /**
+     * Main driver function
+     * @param args command line args
+     * @throws IOException when the input is wrong/incomplete
+     */
+//    public static void main(String[] args) throws IOException {
+//        new MisterDuke("src\\main\\data\\duke.txt").run();
+//    }
+
+    /**
+     * Constructor method.
+     */
+    public MisterDuke() {
         try {
-            tasks = new ArrayList<>(storage.load());
+            this.storage = new Storage();
+            tasks = new ArrayList<Task>(storage.load());
+        } catch (FileNotFoundException e) {
+            ui.showDefaultError(e);
+            tasks = new ArrayList<Task>();
         } catch (IOException e) {
-            tasks = new ArrayList<>();
+            e.printStackTrace();
         }
     }
 
@@ -62,12 +78,15 @@ public class MisterDuke {
     }
 
     /**
-     * Main driver function
-     * @param args command line args
-     * @throws IOException when the input is wrong/incomplete
+     * Mister Duke's response to user input.
      */
-    public static void main(String[] args) throws IOException {
-        new MisterDuke("src\\main\\data\\duke.txt").run();
+    public String getResponse(String input) {
+        try {
+            Command cmd = Parser.parse(input);
+            return cmd.executeCommand(ui, storage, tasks);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
 
@@ -76,7 +95,6 @@ public class MisterDuke {
  *
  */
 class Ui {
-
     /**
      * Prints horizontal line to partition Mister Duke's messages
      */
@@ -99,27 +117,26 @@ class Ui {
     /**
      * Displays Mister Duke's welcome message
      */
-    public void showWelcome() {
-        System.out.println("     Hello! Nice to meet you, I'm Mister Duke :)");
-        System.out.println("     What can I do for you today?");
+    public String showWelcome() {
+        return "Hello! Nice to meet you, I'm Mister Duke. What can I do for you today?";
     }
 
     /**
      * Displays Mister Duke's goodbye message
      */
-    public void showGoodbye() {
-        System.out.println("     Bye. Hope to see you again soon! :)");
+    public String showGoodbye() {
+        return "Bye. Hope to see you again soon! :)";
     }
 
     /**
      * Displays number of tasks in the list
      * @param numOfTasks in the list
      */
-    public void showTaskList(int numOfTasks) {
+    public String showTaskList(int numOfTasks) {
         if (numOfTasks == 1) {
-            System.out.println("     Now you have " + numOfTasks + " task in the list.");
+            return "Now you have " + numOfTasks + " task in the list.";
         } else {
-            System.out.println("     Now you have " + numOfTasks + " tasks in the list.");
+            return "Now you have " + numOfTasks + " tasks in the list.";
         }
     }
 
@@ -127,32 +144,34 @@ class Ui {
      * Informs user that the task input has been added to the list
      * @param task specified by user that needs to be added to the list
      */
-    public void showTaskAdded(Task task) {
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + task.toString());
+    public String showTaskAdded(Task task) {
+        return "Got it. I've added this task: \n" +
+                "  " + task.toString();
     }
 
     /**
      * Indicates that the specified task has been completed
      * @param task specified by user that has been completed
      */
-    public void showTaskDone(Task task) {
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + task.toString());
+    public String showTaskDone(Task task) {
+        return "Nice! I've marked this task as done:" +
+                "  " + task.toString();
     }
 
     /**
      * Lists the tasks
      * @param tasksArray array list of tasks
      */
-    public void showList(ArrayList<Task> tasksArray) {
+    public String showList(ArrayList<Task> tasksArray) {
         if (tasksArray.isEmpty()) {
-            System.out.println("     Your list is empty, there is nothing to do. Yay!");
+            return "Your list is empty, there is nothing to do. Yay!";
         } else {
-            System.out.println("     Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
             for (int i = 0; i < tasksArray.size(); i++) {
-                System.out.println("       " + (i + 1) + ". " + tasksArray.get(i).toString());
+//                sb.append(String.format("%d. %s", (i + 1), tasksArray.get(i).toString()) + "\n");
+                sb.append(String.valueOf(i + 1) + ". " + tasksArray.get(i).toString() + "\n");
             }
+            return sb.toString();
         }
     }
 
@@ -161,14 +180,14 @@ class Ui {
      * @param tasksArray array list of tasks
      * @param commandNumber the task in the list that will be removed
      */
-    public void showTaskDelete(ArrayList<Task> tasksArray, String commandNumber) {
+    public String showTaskDelete(ArrayList<Task> tasksArray, String commandNumber) {
         if (tasksArray.isEmpty()) {
-            System.out.println("     Oops! You have no tasks to delete.");
+            return "Oops! You have no tasks to delete.";
         } else {
             int cmdNum = Integer.parseInt(commandNumber); //strArray[1]
-            System.out.println("     Noted. I've removed this task: ");
-            System.out.println("       " + tasksArray.get(cmdNum - 1).toString());
             tasksArray.remove(cmdNum - 1);
+            return "Noted. I've removed this task: \n" +
+                    "  " + tasksArray.get(cmdNum - 1).toString();
         }
     }
 
@@ -176,22 +195,24 @@ class Ui {
      * Informs the user of wrong/incomplete input
      * @param e error message that specifies wrong/incomplete input
      */
-    public void showDefaultError(Exception e) {
-        System.out.println(e.getMessage());
+    public String showDefaultError(Exception e) {
+        return e.getMessage();
     }
 
-    public void showOutOfBounds() {
-        System.out.println("     Oops! You don't have that many tasks");
+    public String showOutOfBounds() {
+        return "Oops! You don't have that many tasks";
     }
 
-    public void showMatchingItems(ArrayList<Task> tasksArray) {
+    public String showMatchingItems(ArrayList<Task> tasksArray) {
         if (tasksArray.isEmpty()) {
-            System.out.println("     Oh no! There are no matching tasks :(");
+            return "Oh no! There are no matching tasks :(";
         } else {
-            System.out.println("     Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder("Here are the matching tasks in your list: \n");
             for (int i = 0; i < tasksArray.size(); i++) {
-                System.out.println("       " + (i + 1) + ". " + tasksArray.get(i).toString());
+//                sb.append(String.format("%d. %s", (i + 1), tasksArray.get(i).toString()) + "\n");
+                sb.append(String.valueOf(i + 1) + ". " + tasksArray.get(i).toString() + "\n");
             }
+            return sb.toString();
         }
     }
 }
@@ -203,8 +224,8 @@ class Ui {
 class Storage {
     private final File txtFile;
 
-    public Storage (String filePath) throws IOException {
-        this.txtFile = new File(filePath);
+    public Storage() throws IOException {
+        this.txtFile = new File("src\\\\main\\\\data\\\\duke.txt");
         if (txtFile.createNewFile()) {
             System.out.println("File created!");
         } else {
@@ -325,13 +346,13 @@ class Parser {
         } else if (cmd.equalsIgnoreCase("find")) {
             return new FindCommand(command);
         } else {
-            throw new DukeException("     Oops! I'm sorry but I don't know what you mean by that :(");
+            throw new DukeException("Oops! I'm sorry but I don't know what you mean by that :(");
         }
     }
 }
 
 abstract class Command {
-    public abstract void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException;
+    public abstract String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException;
 
     public abstract boolean isRunning();
 }
@@ -347,19 +368,18 @@ class ToDoCommand extends Command {
     }
 
     @Override
-    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String input = command.trim();
         String[] strArray = input.split(" ", 2);
         String cmd = strArray[0];
 
         if (input.equalsIgnoreCase("todo")) {
-            throw new DukeException("     Could you please specify your task? :)");
+            throw new DukeException("Could you please specify your task? :)");
         }
         String cmdTask = strArray[1];
         ToDo tempTask = new ToDo(cmdTask);
         taskList.add(tempTask);
-        ui.showTaskAdded(tempTask);
-        ui.showTaskList(taskList.size());
+        return ui.showTaskAdded(tempTask);
     }
 
     public boolean isRunning() {
@@ -378,15 +398,15 @@ class DeadlineCommand extends Command {
     }
 
     @Override
-    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String input = command.trim();
         if (input.equalsIgnoreCase("deadline")) {
-            throw new DukeException("     Could you please specify your task? :)");
+            throw new DukeException("Could you please specify your task? :)");
         }
         
         String[] strArray = input.split(" ", 2);
         if (!strArray[1].contains("/by")) {
-            throw new DukeException("     Uh oh! Please specify a timing using /by.");
+            throw new DukeException("Uh oh! Please specify a timing using /by.");
         }
         
         String cmd = strArray[0];
@@ -399,12 +419,11 @@ class DeadlineCommand extends Command {
         try {
             date = format.parse(inputDate);
         } catch (Exception e) {
-            throw new DukeException("     Uh oh! Please enter a timing in the format dd-mm-yyyy HHmm");
+            throw new DukeException("Uh oh! Please enter a timing in the format dd-mm-yyyy HHmm");
         }
         Deadline tempTask = new Deadline(tempStrArray[0], date);
         taskList.add(tempTask);
-        ui.showTaskAdded(tempTask);
-        ui.showTaskList(taskList.size());
+        return ui.showTaskAdded(tempTask);
     }
 
     public boolean isRunning() {
@@ -423,23 +442,22 @@ class EventCommand extends Command {
     }
 
     @Override
-    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String input = command.trim();
         if (input.equalsIgnoreCase("event")) {
-            throw new DukeException("     Could you please specify your task? :)");
+            throw new DukeException("Could you please specify your task? :)");
         }
         String[] strArray = input.split(" ", 2);
         String cmd = strArray[0];
         String cmdTask = strArray[1];
 
         if (!strArray[1].contains("/at")) {
-            throw new DukeException("     Uh oh! Please specify a timing using /at.");
+            throw new DukeException("Uh oh! Please specify a timing using /at.");
         }
         String[] tempStrArray = cmdTask.split("/at", 2);
         Event tempTask = new Event(tempStrArray[0], tempStrArray[1]);
         taskList.add(tempTask);
-        ui.showTaskAdded(tempTask);
-        ui.showTaskList(taskList.size());
+        return ui.showTaskAdded(tempTask);
     }
 
     public boolean isRunning() {
@@ -459,8 +477,8 @@ class ListCommand extends Command {
     }
 
     @Override
-    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
-        ui.showList(taskList);
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+        return ui.showList(taskList);
     }
 
     public boolean isRunning() {
@@ -480,14 +498,14 @@ class DoneCommand extends Command {
     }
 
     @Override
-    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String[] commandArray = command.trim().split(" ");
         if (Integer.parseInt(commandArray[1]) > taskList.size()) {
-            ui.showOutOfBounds();
+            return ui.showOutOfBounds();
         } else {
             Task completedTask = taskList.get(Integer.parseInt(commandArray[1]) - 1);
             completedTask.markAsDone();
-            ui.showTaskDone(completedTask);
+            return ui.showTaskDone(completedTask);
         }
     }
 
@@ -509,12 +527,12 @@ class DeleteCommand extends Command {
     }
 
     @Override
-    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String[] commandArray = command.trim().split(" ");
         if (Integer.parseInt(commandArray[1]) > taskList.size()) {
-            ui.showOutOfBounds();
+            return ui.showOutOfBounds();
         } else {
-            ui.showTaskDelete(taskList, commandArray[1]);
+            return ui.showTaskDelete(taskList, commandArray[1]);
         }
     }
 
@@ -535,8 +553,8 @@ class ExitCommand extends Command {
     }
 
     @Override
-    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
-        ui.showGoodbye();
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+        return ui.showGoodbye();
     }
 
     public boolean isRunning() {
@@ -552,7 +570,7 @@ class FindCommand extends Command {
     }
 
     @Override
-    public void executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String input = command.trim();
         String[] strArray = input.split(" ", 2);
         String cmd = strArray[0];
@@ -563,7 +581,7 @@ class FindCommand extends Command {
                 tempTaskList.add(task);
             }
         }
-        ui.showMatchingItems(tempTaskList);
+        return ui.showMatchingItems(tempTaskList);
     }
 
     public boolean isRunning() {
