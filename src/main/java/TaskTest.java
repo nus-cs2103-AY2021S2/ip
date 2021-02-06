@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskTest {
 
-	@Test
-	public void testMarKAsDone() {
-		assertEquals(true, new Todo("bring water").markAsDone());
-	}
+    @Test
+    public void testMarKAsDone() {
+        assertEquals(true, new Todo("bring water").markAsDone());
+    }
 
-	@Test
-	public void testStringConversion() {
-		assertEquals("[D][ ] project (by: Jan 21 2020)", 
-            new Deadline("project", "2020-01-21").toString());
-	}
+    @Test
+    public void testStringConversion() {
+        assertEquals("[D][ ] project (by: Jan 21 2020)", 
+                new Deadline("project", "2020-01-21").toString());
+    }
 }

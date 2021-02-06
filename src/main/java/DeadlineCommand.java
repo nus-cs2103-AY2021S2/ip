@@ -17,7 +17,8 @@ public class DeadlineCommand extends AddCommand {
      * @param storage Storage that interacts with information stored on harddrive.
      */
     public void execute(TaskManager manager, Ui ui, Storage storage) {
-        Task t = new Deadline(this.description.split(" by ")[0], this.description.split(" by ")[1]);;
+        Task t = new Deadline(this.description.split(" by ")[0], 
+                this.description.split(" by ")[1]);;
         manager.addTask(t);
         this.message += t.toString() + "\n" 
             + String.format("Now you have %s tasks in the list.", manager.taskVolume());
