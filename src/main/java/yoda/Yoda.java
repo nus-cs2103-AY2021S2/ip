@@ -1,10 +1,10 @@
 package yoda;
 
-import yoda.task.TaskList;
-import yoda.storage.Storage;
-import yoda.ui.Ui;
 import yoda.command.Command;
 import yoda.parser.Parser;
+import yoda.storage.Storage;
+import yoda.task.TaskList;
+import yoda.ui.Ui;
 
 /**
  * Yoda chatbot to keep track of tasks.
@@ -49,7 +49,7 @@ public class Yoda {
      */
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
-        String filePath = home+"/dukeTasks.txt";
+        String filePath = home + "/dukeTasks.txt";
         Yoda duke = new Yoda(filePath);
         duke.runYoda();
     }

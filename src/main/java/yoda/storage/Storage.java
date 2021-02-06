@@ -1,17 +1,23 @@
 package yoda.storage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import yoda.task.Task;
 import yoda.task.TaskList;
-
-import java.io.*;
-import java.util.ArrayList;
 
 /**
  * Storage class to handle storing and retrieval of the tasklist from the hard disk.
  */
 public class Storage {
     /** Filepath of the file containing the tasklist */
-    String filePath;
+    private String filePath;
 
     /**
      * Creates a storage object.

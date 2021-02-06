@@ -5,18 +5,18 @@ import java.util.Scanner;
 /**
  * Ui class to handle interactions with the user.
  */
-public class Ui{
+public class Ui {
+    /** Divider to divide between successive instructions */
+    private static final String DIVIDER = "--------------------------------";
+    /** Valid inputs that are available to the user */
+    private static final String HELP_LIST = "HELP!";
     /** Scanner to scan user input */
     private Scanner s;
-    /** Valid inputs that are available to the user */
-    private final static String HELP_LIST = "HELP!";
-    /** Divider to divide between successive instructions */
-    private final static String DIVIDER = "--------------------------------";
 
     /**
      * Creates a Ui object.
      */
-    public Ui(){
+    public Ui() {
         s = new Scanner(System.in);
     }
 

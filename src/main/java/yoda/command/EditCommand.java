@@ -1,19 +1,19 @@
 package yoda.command;
 
+import yoda.storage.Storage;
 import yoda.task.Task;
 import yoda.task.TaskList;
 import yoda.ui.Ui;
-import yoda.storage.Storage;
 
 /**
  * EditCommand class that handles task states and a child of the Command class.
  */
-public class EditCommand extends Command{
+public class EditCommand extends Command {
     /**
      * Creates an EditCommand object.
      * @param details Details of EditCommand object.
      */
-    public EditCommand(String[] details){
+    public EditCommand(String[] details) {
         super(details);
         commandType = CommandType.valueOf(details[0]);
     }

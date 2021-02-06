@@ -1,8 +1,8 @@
 package yoda.parser;
 
+import yoda.command.AddCommand;
 import yoda.command.Command;
 import yoda.command.CommandType;
-import yoda.command.AddCommand;
 import yoda.command.EditCommand;
 import yoda.command.ExitCommand;
 import yoda.command.HelpCommand;

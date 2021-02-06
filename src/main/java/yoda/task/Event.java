@@ -3,7 +3,7 @@ package yoda.task;
 /**
  * Event class that is a specialised version of the Task class and extends the Task class.
  */
-public class Event extends Task{
+public class Event extends Task {
     /**
      * Creates an Event object.
      * @param description Description of Event object.

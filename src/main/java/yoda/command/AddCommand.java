@@ -1,17 +1,17 @@
 package yoda.command;
 
-import yoda.task.Task;
-import yoda.task.ToDo;
+import yoda.storage.Storage;
 import yoda.task.Deadline;
 import yoda.task.Event;
+import yoda.task.Task;
 import yoda.task.TaskList;
+import yoda.task.ToDo;
 import yoda.ui.Ui;
-import yoda.storage.Storage;
 
 /**
  * AddCommand class that handles adding tasks to TaskList and is a child of Command class.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     /**
      * Creates an AddCommand object.
      * @param details Details of AddCommand object.

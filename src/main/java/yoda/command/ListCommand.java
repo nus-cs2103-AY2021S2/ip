@@ -1,8 +1,8 @@
 package yoda.command;
 
+import yoda.storage.Storage;
 import yoda.task.TaskList;
 import yoda.ui.Ui;
-import yoda.storage.Storage;
 
 /**
  * ListCommand class that handles listing out the tasks in the TaskList

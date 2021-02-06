@@ -1,18 +1,18 @@
 package yoda.command;
 
+import yoda.storage.Storage;
 import yoda.task.TaskList;
 import yoda.ui.Ui;
-import yoda.storage.Storage;
 
 /**
  * ExitCommand class that handles exiting the Yoda chatbot after the user is done using and
  * a child of the Command class.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * Creates an ExitCommand object.
      */
-    public ExitCommand(){
+    public ExitCommand() {
         super.isExit = true;
     }
 
