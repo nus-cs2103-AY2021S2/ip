@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class Duke {
     private final Storage storage;
 
     /**
-     * Creates a new instance of Duke.
+     * Creates a new instance of duke.Duke.
      *
      * @param filePath The save file path.
      */
@@ -28,7 +30,13 @@ public class Duke {
         loadData();
     }
 
-    protected String getResponse(String input) {
+    /**
+     * Returns a response from duke based on the input.
+     *
+     * @param input User input.
+     * @return Response from duke.
+     */
+    public String getResponse(String input) {
         try {
             String[] tokens = Parser.splitIntoSubstrings(input);
             Command command = Parser.parseCommand(tokens);
@@ -61,7 +69,7 @@ public class Duke {
      * Processes input after it is parsed by the parser.
      *
      * @param command Command that is to be executed.
-     * @param tokens Input String split into tokens.
+     * @param tokens  Input String split into tokens.
      * @throws DukeException If command cannot be executed.
      */
     public String runUserCommand(Command command, String[] tokens) throws DukeException {
