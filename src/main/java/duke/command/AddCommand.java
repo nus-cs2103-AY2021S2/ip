@@ -23,7 +23,6 @@ public class AddCommand extends Command {
      * Adds a new task to taskList
      *
      * @param taskList
-     * @param ui
      * @param storage
      * @throws DukeException
      */

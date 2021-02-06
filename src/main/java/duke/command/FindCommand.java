@@ -21,7 +21,6 @@ public class FindCommand extends Command {
      * Finds tasks with matching keyword kw
      *
      * @param taskList
-     * @param ui
      * @param storage
      * @throws DukeException
      */

@@ -13,7 +13,6 @@ public class ListCommand extends Command {
      * Lists all tasks in taskList
      *
      * @param taskList
-     * @param ui
      * @param storage
      * @throws DukeException
      */

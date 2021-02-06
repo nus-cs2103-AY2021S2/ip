@@ -28,10 +28,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the MainWindow on first launch.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hello I'm Duke.\nWhat can I do for you?", dukeImage));
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog("Hello I'm Duke.\nWhat can I do for you?", dukeImage));
     }
 
     public void setDuke(Duke d) {

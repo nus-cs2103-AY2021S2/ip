@@ -36,11 +36,10 @@ public class AddCommandTest {
     @Test
     public void testExecute() throws DukeException, IOException {
         AddCommand addCmd = new AddCommand(new Todo("borrow book"));
-        addCmd.execute(new TaskList(), new StorageStub());
-        String expectedOutput = String.format("%s\n%s\n%s\n",
-                "    Got it. I've added this task:",
-                "        [T][ ] borrow book",
-                "    Now you have 1 tasks in the list.");
-        assertEquals(expectedOutput, outContent.toString());
+        String expectedOutput = String.format("%s\n%s\n%s",
+                "Got it. I've added this task:",
+                "    [T][ ] borrow book",
+                "Now you have 1 tasks in the list.");
+        assertEquals(expectedOutput, addCmd.execute(new TaskList(), new StorageStub()));
     }
 }

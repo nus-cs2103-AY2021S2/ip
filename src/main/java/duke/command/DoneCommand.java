@@ -21,15 +21,14 @@ public class DoneCommand extends Command {
      * Marks task at index idx of taskList as done
      *
      * @param taskList
-     * @param ui
      * @param storage
      * @throws DukeException
      */
     public String execute(TaskList taskList, Storage storage) throws DukeException {
-        assert idx >= 0: "Index should be non-negative";
+        assert idx >= 0 : "Index should be non-negative";
         taskList.markDone(idx);
         storage.write(taskList.toDataString());
-        assert taskList.get(idx).isDone(): "The task should have been marked done";
+        assert taskList.get(idx).isDone() : "The task should have been marked done";
         return String.format("Yay you're completed task %d!", idx + 1);
     }
 }

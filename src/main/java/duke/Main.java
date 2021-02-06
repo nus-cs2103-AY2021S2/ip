@@ -20,7 +20,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             duke = new Duke("data/duke.txt");
-            assert duke != null: "duke should not be null";
+            assert duke != null : "duke should not be null";
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

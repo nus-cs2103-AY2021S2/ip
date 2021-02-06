@@ -25,7 +25,7 @@ public class Parser {
             return new ListCommand();
         } else if (userInput.equals("bye")) {
             return new ExitCommand();
-        } 
+        }
         String[] splitInput = userInput.split(" ", 2);
         switch (splitInput[0]) {
         case "done":
@@ -45,6 +45,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a DoneCommand based on user input.
+     *
+     * @param splitInput
+     * @return Command
+     * @throws DukeException
+     */
     public static final Command parseDone(String[] splitInput) throws DukeException {
         if (splitInput.length < 2) {
             throw new DukeException("The task index is missing.");
@@ -52,6 +59,13 @@ public class Parser {
         return new DoneCommand(Integer.parseInt(splitInput[1]));
     }
 
+    /**
+     * Returns a DeleteCommand based on user input.
+     *
+     * @param splitInput
+     * @return Command
+     * @throws DukeException
+     */
     public static final Command parseDelete(String[] splitInput) throws DukeException {
         if (splitInput.length < 2) {
             throw new DukeException("The task index is missing.");
@@ -59,6 +73,13 @@ public class Parser {
         return new DeleteCommand(Integer.parseInt(splitInput[1]));
     }
 
+    /**
+     * Returns a AddCommand that will create a new Todo task based on user input.
+     *
+     * @param splitInput
+     * @return Command
+     * @throws DukeException
+     */
     public static final Command parseTodo(String[] splitInput) throws DukeException {
         if (splitInput.length < 2) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -66,6 +87,13 @@ public class Parser {
         return new AddCommand(new Todo(splitInput[1]));
     }
 
+    /**
+     * Returns a AddCommand that will create a new Deadline based on user input.
+     *
+     * @param splitInput
+     * @return Command
+     * @throws DukeException
+     */
     public static final Command parseDeadline(String[] splitInput) throws DukeException {
         if (splitInput.length < 2) {
             throw new DukeException("The description of a deadline cannot be empty.");
@@ -77,6 +105,13 @@ public class Parser {
         return new AddCommand(new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]));
     }
 
+    /**
+     * Returns a AddCommand that will create a new Event based on user input.
+     *
+     * @param splitInput
+     * @return Command
+     * @throws DukeException
+     */
     public static final Command parseEvent(String[] splitInput) throws DukeException {
         if (splitInput.length < 2) {
             throw new DukeException("The description of an event cannot be empty.");
@@ -88,6 +123,13 @@ public class Parser {
         return new AddCommand(new Event(splitEventInput[0], splitEventInput[1]));
     }
 
+    /**
+     * Returns a FindCommand that will find tasks that match the provided keyword.
+     *
+     * @param splitInput
+     * @return Command
+     * @throws DukeException
+     */
     public static final Command parseFind(String[] splitInput) throws DukeException {
         if (splitInput.length < 2) {
             throw new DukeException("Keyword is missing");
