@@ -43,7 +43,17 @@ public class Duke {
         }
     }
     
-    protected String chooseAction(String[] parsedInput, String originalInput, String response) throws UnknownInputException{
+    /**
+     * Returns a String containing the tasks that have this date
+     *
+     * @param parsedInput the parsed input to decide the action
+     * @param originalInput the orignal Input to aid in the action to take
+     * @param toReply the current String Duke is supposed to reply with
+     * @return A string representing the response of Duke
+     * @throws UnknownInputException when there the input or command is not known
+     */
+    protected String chooseAction(String[] parsedInput, String originalInput, String toReply) throws UnknownInputException{
+        String response = toReply;
         
         switch (parsedInput[0]) {
         case "todo":
@@ -133,8 +143,9 @@ public class Duke {
     }
     
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Function to make the response of Duke depending on the user input
+     * @param input representing the user input
+     * @returns String representing the response of Duke
      */
     protected String getResponse(String input) {
         String toReply = "";

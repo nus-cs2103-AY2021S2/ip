@@ -37,26 +37,28 @@ public class Parser {
      */
     public void check() throws MissingTaskInputException, DukeIncompleteInputException {
 
-        if (parsedAction[0].equals("todo") || parsedAction[0].equals("deadline")
-                || parsedAction[0].equals("event")) {
-
-            if (parsedAction.length <= 1) {
-                throw new MissingTaskInputException(parsedAction[0]);
-            }
-
-        } else if (parsedAction[0].equals("done") && parsedAction.length <= 1) {
+        boolean aTaskCommandEntered = parsedAction[0].equals("todo") || parsedAction[0].equals("deadline")
+                                        || parsedAction[0].equals("event");
+        
+        boolean incompleteCommand = parsedAction.length <= 1;
+        
+        if (aTaskCommandEntered && incompleteCommand) {
+            
+            throw new MissingTaskInputException(parsedAction[0]);
+            
+        } else if (parsedAction[0].equals("done") && incompleteCommand) {
 
             throw new DukeIncompleteInputException("done not completed");
 
-        } else if (parsedAction[0].equals("delete") && parsedAction.length <= 1) {
+        } else if (parsedAction[0].equals("delete") && incompleteCommand) {
 
             throw new DukeIncompleteInputException("delete not completed");
 
-        } else if (parsedAction[0].equals("check") && parsedAction.length <= 1) {
+        } else if (parsedAction[0].equals("check") && incompleteCommand) {
 
             throw new DukeIncompleteInputException("check not completed");
 
-        } else if (parsedAction[0].equals("find") && parsedAction.length <= 1) {
+        } else if (parsedAction[0].equals("find") && incompleteCommand) {
 
             throw new DukeIncompleteInputException("find not completed");
         }

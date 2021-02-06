@@ -63,7 +63,7 @@ public class TaskList {
 
                 inputList.add(eventTask);
 
-            } else {
+            } else if (arr[0].equals("T")) {
                 ToDoTask toDoTask = new ToDoTask(arr[2]);
 
                 if (arr[1].equals("1")) {
