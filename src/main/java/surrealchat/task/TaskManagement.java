@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import surrealchat.exception.SurrealException;
 
@@ -139,6 +140,16 @@ public class TaskManagement {
         }
     }
 
+    private void parseTaskFromFile(String fileLine) {
+        String[] taskComponents = fileLine.split("/split/");
+        String taskType = taskComponents[0];
+        boolean taskDone = parseDoneFromInt(Integer.valueOf(taskComponents[1]));
+        String description = taskComponents[2];
+
+        //Convert to Task objects
+        convertToTasks(taskType, description, taskDone);
+    }
+
     /**
      * Parses lines that were loaded form file into tasks.
      * @param fileLines Lines from the loaded file.
@@ -146,14 +157,7 @@ public class TaskManagement {
      */
     public String parseFileLines(List<String> fileLines) {
         for (int i = 0; i < fileLines.size(); i++) {
-            //Parse strings
-            String[] taskComponents = fileLines.get(i).split("/split/");
-            String taskType = taskComponents[0];
-            boolean taskDone = parseDoneFromInt(Integer.valueOf(taskComponents[1]));
-            String description = taskComponents[2];
-
-            //Convert to Task objects
-            convertToTasks(taskType, description, taskDone);
+            parseTaskFromFile(fileLines.get(i));
         }
         //Obtain list for printing
         List<Task> taskList = getTaskList();
@@ -236,10 +240,7 @@ public class TaskManagement {
      */
     public List<String> convertTasksForFile() {
         List<Task> rawTaskList = getTaskList();
-        List<String> fileTaskList = new ArrayList<String>();
-        for (int i = 0; i < rawTaskList.size(); i++) {
-            fileTaskList.add(rawTaskList.get(i).saveTask());
-        }
+        List<String> fileTaskList = rawTaskList.stream().map(x -> x.saveTask()).collect(Collectors.toList());
         return fileTaskList;
     }
 
@@ -258,5 +259,23 @@ public class TaskManagement {
             outputTasks += String.format("%d. %s\n", i, rawTaskList.get(i - 1));
         }
         return outputTasks;
+    }
+
+    /**
+     * Obtains the tasks with keyword and corresponding numbers.
+     * @param keyword The keyword for which to search.
+     * @return List of tasks with their corresponding numbers in string form.
+     */
+    public List<String> getSearchResults(String keyword) {
+        assert keyword != null : "Null keyword somehow bypassed FindCommand exception. Not stonks!\n";
+        List<String> searchResults = new ArrayList<String>();
+        for (int i = 1; i <= taskList.size(); i++) {
+            Task task = taskList.get(i - 1);
+            if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                String taskString = String.format("%d. %s\n", i, task);
+                searchResults.add(taskString);
+            }
+        }
+        return searchResults;
     }
 }

@@ -227,6 +227,38 @@ Outcome if task number is invalid:
 Invalid task number. Not stonks!
 ```
 
+### List - `list`
+Format: `list`
+
+Key this command in to cause Meme Man to show you your tasks in order and whether you have completed the tasks.
+
+Now suppose you have 4 tasks:
+```
+1. Watch CS2103T lecture (ToDo, Done)
+2. Do CS2103T lecture quiz (Deadline of this Saturday, Done)
+3. Do CS2103T ip (Deadline of next Monday, Not done)
+4. Attend CS2101 class (Event happens next Tuesday, Not done)
+```
+
+How to get Meme Man to list out above tasks:
+
+`list`
+
+Expected outcome:
+```
+I print the tasks:
+1. [T][✓] Watch CS2103T lecture
+2. [D][✓] Do CS2103T lecture quiz (by: 2021-01-12)
+3. [D][✘] Do CS2103T ip (by: 2021-01-13)
+4. [E][✘] Attend CS2101 class (at: 2021-01-14)
+Hmmst've... Stonks
+```
+
+Outcome if there is nothing in task list:
+```
+I have nothing to print. Not stonks!
+```
+
 ### Delete task - `delete`
 Format: `delete TASK_NUMBER`
 
@@ -328,38 +360,6 @@ Command not given! Not stonks!
 Outcome for invalid commands:
 ```
 Helper does not recognise command. Not Stonks!
-```
-
-### List - `list`
-Format: `list`
-
-Key this command in to cause Meme Man to show you your tasks in order and whether you have completed the tasks.
-
-Now suppose you have 4 tasks:
-```
-1. Watch CS2103T lecture (ToDo, Done)
-2. Do CS2103T lecture quiz (Deadline of this Saturday, Done)
-3. Do CS2103T ip (Deadline of next Monday, Not done)
-4. Attend CS2101 class (Event happens next Tuesday, Not done)
-```
-
-How to get Meme Man to list out above tasks:
-
-`list` 
-
-Expected outcome:
-```
-I print the tasks:
-1. [T][✓] Watch CS2103T lecture
-2. [D][✓] Do CS2103T lecture quiz (by: 2021-01-12)
-3. [D][✘] Do CS2103T ip (by: 2021-01-13)
-4. [E][✘] Attend CS2101 class (at: 2021-01-14)
-Hmmst've... Stonks
-```
-
-Outcome if there is nothing in task list:
-```
-I have nothing to print. Not stonks!
 ```
 
 ### Easter egg - `orang`
