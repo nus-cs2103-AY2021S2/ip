@@ -33,6 +33,7 @@ public class Ui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    AnchorPane mainLayout;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Logo.png"));
     private Image fakeBotImage = new Image(this.getClass().getResourceAsStream("/images/wolf.png"));
@@ -51,8 +52,22 @@ public class Ui extends Application {
     //Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
     @Override
     public void start(Stage stage) {
+        setupRequiredComponents();
+        FormateWindow(stage);
+        AddListener();
+
+        //Creating hello text
+        addTextToContainer(fakeBot.getHelloMessage());
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    /**
+     * setup required Ui components.
+     */
+    private void setupRequiredComponents() {
         //Setting up required components
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -60,12 +75,37 @@ public class Ui extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        AnchorPane mainLayout = new AnchorPane();
+        mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+    }
 
-        //Formatting the window to look as expected
+    /**
+     * Add Event Listener.
+     */
+    private void AddListener() {
+        //Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput(userInput.getText());
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput(userInput.getText());
+            userInput.clear();
+        });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Formates the window to look as expected.
+     * 
+     * @param stage Window Stage.
+     */
+    private void FormateWindow(Stage stage) {
         stage.setTitle("FakeBot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -94,39 +134,27 @@ public class Ui extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput(userInput.getText());
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput(userInput.getText());
-            userInput.clear();
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Creating hello text
-        addTextToContainer(fakeBot.getHelloMessage());
-        stage.setScene(scene);
-        stage.show();
-
     }
 
+    /**
+     * Handle User Input.
+     * @param userInput User Input String.
+     */
     private void handleUserInput(String userInput) {
         Command command;
         try {
-            command = fakeBot.validateCommand(userInput);
+            command = Parser.parseUserInputToCommand(userInput);
+            String outputText = fakeBot.processCommand(command);
+
+            if (outputText.length() > 0) {
+                addTextToContainer(userInput, outputText);
+            } else {
+                Stage stage = (Stage) scene.getWindow();
+                stage.close();
+            }
+
         } catch (CommandException e) {
             addTextToContainer(userInput, e.getMessage());
-            return;
-        }
-        String outputText = fakeBot.processCommand(command);
-        if (outputText.length() > 0) {
-            addTextToContainer(userInput, outputText);
         }
     }
 
