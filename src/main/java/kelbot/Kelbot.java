@@ -32,6 +32,7 @@ public class Kelbot {
             if (!parser.getIsValid()) {
                 return "Invalid Command!";
             }
+            assert parser.getIsValid();
             try {
                 Command command = parser.getCommand();
                 Integer taskNumber = parser.getTaskNumber();
@@ -45,6 +46,7 @@ public class Kelbot {
                     response = ui.printList(taskList);
                 } else if (command == Command.DONE || command == Command.DELETE) {
                     try {
+                        assert !taskList.getTaskList().isEmpty();
                         if (command == Command.DONE) {
                             Task task = taskList.complete(taskNumber);
                             response = ui.printDone(task);
@@ -60,6 +62,7 @@ public class Kelbot {
                         if (keyword.equals("")) {
                             throw new KelbotException("Keyword cannot be empty!");
                         } else {
+                            assert !taskList.getTaskList().isEmpty();
                             TaskList taskListToPrint = new TaskList(taskList.search(keyword));
                             if (taskListToPrint.toString().equals("")) {
                                 response = "No tasks match your search!";
