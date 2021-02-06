@@ -42,6 +42,96 @@ public class Duke {
 
         }
     }
+    
+    protected String chooseAction(String[] parsedInput, String originalInput, String response) throws UnknownInputException{
+        
+        switch (parsedInput[0]) {
+        case "todo":
+            response += ui.addPrint();
+            ToDoTask todo = tasks.handleToDoTask(originalInput);
+            response += ui.printTask(todo);
+            response += ui.countTasks(tasks);
+        
+            break;
+    
+        case "deadline":
+            response += ui.addPrint();
+        
+            DeadlineTask deadlineTask = tasks.handleDeadlineTask(originalInput);
+        
+            response += ui.printTask(deadlineTask);
+            response += ui.countTasks(tasks);
+        
+            break;
+    
+        case "event":
+        
+            response += ui.addPrint();
+        
+            EventTask eventTask = tasks.handleEventTask(originalInput);
+        
+            response += ui.printTask(eventTask);
+            response += ui.countTasks(tasks);
+        
+            break;
+    
+        case "list":
+            response += ui.printStored(tasks);
+        
+            break;
+    
+        case "done":
+            int number = Integer.valueOf(parsedInput[1]);
+        
+            response += ui.printMarked();
+        
+            Task completed = tasks.handleDone(number);
+        
+            response += ui.printTask(completed);
+        
+            break;
+    
+        case "check":
+        
+            String result = tasks.findOnDateTasks((parsedInput[1]));
+        
+            response += ui.print(result);
+            break;
+    
+        case "bye":
+            response += Ui.getByeMessage();
+            break;
+    
+        case "delete":
+            int index = Integer.valueOf(parsedInput[1]);
+        
+            response += ui.printRemoved();
+        
+            Task task = tasks.handleDelete(index);
+        
+            response += ui.printTask(task);
+            response += ui.countTasks(tasks);
+        
+            break;
+    
+        case "find":
+            String keyword = parsedInput[1];
+        
+            response += ui.printMatching();
+        
+            List<Task> matches = tasks.getMatch(keyword);
+        
+            response += ui.printList(matches);
+        
+            break;
+    
+        default:
+            throw new UnknownInputException();
+        }
+        
+        return response;
+    }
+    
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
@@ -52,89 +142,8 @@ public class Duke {
             Parser parser = new Parser(input);
             parser.check();
             String[] parsedInput = parser.getParsedAction();
-            switch (parsedInput[0]) {
-            case "todo":
-                toReply += ui.addPrint();
-                ToDoTask todo = tasks.handleToDoTask(input);
-                toReply += ui.printTask(todo);
-                toReply += ui.countTasks(tasks);
-
-                break;
-
-            case "deadline":
-                toReply += ui.addPrint();
-
-                DeadlineTask deadlineTask = tasks.handleDeadlineTask(input);
-
-                toReply += ui.printTask(deadlineTask);
-                toReply += ui.countTasks(tasks);
-
-                break;
-
-            case "event":
-
-                toReply += ui.addPrint();
-
-                EventTask eventTask = tasks.handleEventTask(input);
-
-                toReply += ui.printTask(eventTask);
-                toReply += ui.countTasks(tasks);
-
-                break;
-
-            case "list":
-                toReply += ui.printStored(tasks);
-
-                break;
-
-            case "done":
-                int number = Integer.valueOf(parsedInput[1]);
-
-                toReply += ui.printMarked();
-
-                Task completed = tasks.handleDone(number);
-
-                toReply += ui.printTask(completed);
-
-                break;
-
-            case "check":
-
-                String result = tasks.findOnDateTasks((parsedInput[1]));
-
-                toReply += ui.print(result);
-                break;
-
-            case "bye":
-                toReply += Ui.getByeMessage();
-                break;
-
-            case "delete":
-                int index = Integer.valueOf(parsedInput[1]);
-
-                toReply += ui.printRemoved();
-
-                Task task = tasks.handleDelete(index);
-
-                toReply += ui.printTask(task);
-                toReply += ui.countTasks(tasks);
-
-                break;
-
-            case "find":
-                String keyword = parsedInput[1];
-
-                toReply += ui.printMatching();
-
-                List<Task> matches = tasks.getMatch(keyword);
-
-                toReply += ui.printList(matches);
-
-                break;
-
-            default:
-                throw new UnknownInputException();
-            }
+            toReply = chooseAction(parsedInput, input, toReply);
+            
             storage.write(tasks);
         } catch (DukeException e) {
             return e.getMessage();
