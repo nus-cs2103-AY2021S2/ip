@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-
 public class Duke {
     protected static final ArrayList<Task> taskList = new ArrayList<>();
     protected static boolean canExit = false;
@@ -38,7 +37,7 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
 
-        duke.ui.Greet();
+        duke.ui.greet();
 
         Storage dukeBot = new Storage(path);
         dukeBot.taskRecorder();
@@ -56,8 +55,6 @@ public class Duke {
         }
 
         dukeBot.record(taskList);
-        duke.ui.Exit();
-
-        
+        duke.ui.exit();
     }
 }

@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Event extends Task{
+public class Event extends Task{
     protected boolean isDone;
     protected LocalDateTime time;
     protected final static String type = "[E]";
