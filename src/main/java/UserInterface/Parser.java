@@ -1,3 +1,5 @@
+package UserInterface;
+
 import Commands.*;
 import CustomExceptions.*;
 
@@ -11,7 +13,7 @@ import java.util.Arrays;
 
 public class Parser {
     private static final ArrayList<String> validActions
-            = new ArrayList<>(Arrays.asList("todo", "deadline", "event", "done", "delete", "list", "bye"));
+            = new ArrayList<>(Arrays.asList("TODO", "DEADLINE", "EVENT", "DONE", "DELETE", "LIST", "BYE"));
 
     public static Command parse(String input) {
         if (!isInputValid(input)) {
@@ -23,20 +25,20 @@ public class Parser {
         LocalDateTime deadlineDateTime = convertToDateTime(getByDateTimeString(input));
         LocalDateTime eventDateTime = convertToDateTime(getAtDateTimeString(input));
 
-        switch (action) {
-            case "bye":
+        switch (action.toUpperCase()) {
+            case "BYE":
                 return new ByeCommand();
-            case "list":
+            case "LIST":
                 return new ListCommand();
-            case "done":
+            case "DONE":
                 return new DoneCommand(description);
-            case "delete":
+            case "DELETE":
                 return new DeleteCommand(description);
-            case "todo":
+            case "TODO":
                 return new AddToDoCommand(description);
-            case "deadline":
+            case "DEADLINE":
                 return new AddDeadlineCommand(description, deadlineDateTime);
-            case "event":
+            case "EVENT":
                 return new AddEventCommand(description, eventDateTime);
             default:
                 return new DoNothingCommand();
@@ -44,7 +46,7 @@ public class Parser {
     }
 
     private static String getAction(String input) {
-        return (input + " ").split(" ")[0].toLowerCase();
+        return (input + " ").split(" ")[0];
     }
 
     private static String getRemainingTokens(String input) {
@@ -127,7 +129,7 @@ public class Parser {
         String atDateTimeString = getAtDateTimeString(input);
 
         try {
-            if (!validActions.contains(action)) {
+            if (!validActions.contains(action.toUpperCase())) {
                 throw new InvalidActionException(action);
             }
 

@@ -1,5 +1,9 @@
+package Duke;
+
 import Commands.Command;
+import Tasks.Storage;
 import Tasks.TaskList;
+import UserInterface.Parser;
 import UserInterface.Ui;
 
 public class Duke {

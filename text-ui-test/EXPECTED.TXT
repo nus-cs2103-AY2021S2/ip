@@ -1,4 +1,4 @@
-Hello! I'm Duke
+Hello! I'm Duke.Duke
 What can I do for you?
 OOPS!!! I'm sorry, but I don't know what 'actionthattheappdoesnotsupport' means :-(
 You have no tasks in your list yet :)

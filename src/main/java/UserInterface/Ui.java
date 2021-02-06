@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ui {
 
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm Duke.Duke");
         System.out.println("What can I do for you?");
     }
 
