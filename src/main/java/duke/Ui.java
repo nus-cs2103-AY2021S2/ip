@@ -56,8 +56,13 @@ public class Ui {
     public void printTasks(TaskList taskList) {
         int i = 1;
         for( Task t : taskList.getTaskList()) {
-            out.printf("    %d: [%s] [%s] %s\n", i,
-                    t.getTaskType(), t.getStatusIcon(), t.getTaskDescription());
+            if (t.getTaskType().equals("TODO")) {
+                out.printf("    %d: [%s] [%s] %s\n", i,
+                        t.getTaskType(), t.getStatusIcon(), t.getTaskDescription());
+            } else {
+                out.printf("    %d: %s", i, t);
+            }
+
             i++;
         }
     }

@@ -25,4 +25,13 @@ public class Event extends Task {
     public LocalDateTime getEventTime() {
         return eventTime;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] [%s] %s (at: %s %s %s %s:%s)\n",
+                this.getTaskType(), this.getStatusIcon(),
+                this.getTaskDescription(), eventTime.getMonth(),
+                eventTime.getDayOfMonth(), eventTime.getYear(),
+                eventTime.getHour(), eventTime.getMinute());
+    }
 }

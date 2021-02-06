@@ -24,4 +24,13 @@ public class Deadline extends Task {
     public LocalDateTime getEndTime() {
         return endTime;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] [%s] %s (by: %s %s %s %s:%s)\n",
+                this.getTaskType(), this.getStatusIcon(),
+                this.getTaskDescription(), endTime.getMonth(),
+                endTime.getDayOfMonth(), endTime.getYear(),
+                endTime.getHour(), endTime.getMinute());
+    }
 }
