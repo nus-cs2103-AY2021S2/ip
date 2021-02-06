@@ -50,16 +50,13 @@ public class Storage {
                     }
                     switch (data[0]) {
                     case "TODO":
-                        tasks.add(new ToDo(data[2], TaskType.TODO,
-                                data[1].equals("1")));
+                        tasks.add(new ToDo(data[2], data[1].equals("1")));
                         break;
                     case "DEADLINE":
-                        tasks.add(new Deadline(data[2], TaskType.DEADLINE,
-                                LocalDate.parse(data[3]), data[1].equals("1")));
+                        tasks.add(new Deadline(data[2], LocalDate.parse(data[3]), data[1].equals("1")));
                         break;
                     case "EVENT":
-                        tasks.add(new Event(data[2], TaskType.EVENT,
-                                LocalDate.parse(data[3]), data[1].equals("1")));
+                        tasks.add(new Event(data[2], LocalDate.parse(data[3]), data[1].equals("1")));
                         break;
                     default:
                         return new TaskList(tasks);

@@ -16,8 +16,8 @@ public class Deadline extends Task {
      * @param type type Deadline
      * @param time deadline time
      */
-    public Deadline(String name, TaskType type, LocalDate time) {
-        super(name, type);
+    public Deadline(String name, LocalDate time) {
+        super(name, TaskType.DEADLINE);
         this.time = time;
     }
 
@@ -25,12 +25,11 @@ public class Deadline extends Task {
      * Constructs a Deadline object with isDone status specified.
      *
      * @param name   deadline name
-     * @param type   type Deadline
      * @param time   deadline time
      * @param isDone the status of the deadline
      */
-    public Deadline(String name, TaskType type, LocalDate time, boolean isDone) {
-        super(name, type, isDone);
+    public Deadline(String name, LocalDate time, boolean isDone) {
+        super(name, TaskType.DEADLINE, isDone);
         this.time = time;
     }
 

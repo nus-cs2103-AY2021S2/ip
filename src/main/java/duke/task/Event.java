@@ -13,11 +13,10 @@ public class Event extends Task {
      * Constructs a Event object.
      *
      * @param name event name
-     * @param type type Event
      * @param time event time
      */
-    public Event(String name, TaskType type, LocalDate time) {
-        super(name, type);
+    public Event(String name, LocalDate time) {
+        super(name, TaskType.EVENT);
         this.time = time;
     }
 
@@ -25,12 +24,11 @@ public class Event extends Task {
      * Constructs a Event object with isDone status specified.
      *
      * @param name   event name
-     * @param type   type Event
      * @param time   event time
      * @param isDone the status of the event
      */
-    public Event(String name, TaskType type, LocalDate time, boolean isDone) {
-        super(name, type, isDone);
+    public Event(String name, LocalDate time, boolean isDone) {
+        super(name, TaskType.EVENT, isDone);
         this.time = time;
     }
 

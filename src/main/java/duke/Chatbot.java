@@ -9,7 +9,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.TaskType;
 import duke.task.ToDo;
 
 
@@ -191,7 +190,7 @@ public class Chatbot {
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
-        Task newTask = new ToDo(input.substring(5), TaskType.TODO);
+        Task newTask = new ToDo(input.substring(5));
         tasks.addTask(newTask);
         storage.updateFile(tasks);
         return Printer.printAddReply(newTask, tasks.size());
@@ -213,8 +212,7 @@ public class Chatbot {
         if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
             throw new DukeException("The time of a deadline cannot be empty.");
         }
-        Task newTask = new Deadline(taskTimeSplit[0].substring(9),
-                TaskType.DEADLINE, LocalDate.parse(taskTimeSplit[1]));
+        Task newTask = new Deadline(taskTimeSplit[0].substring(9), LocalDate.parse(taskTimeSplit[1]));
         tasks.addTask(newTask);
         storage.updateFile(tasks);
         return Printer.printAddReply(newTask, tasks.size());
@@ -236,8 +234,7 @@ public class Chatbot {
         if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
             throw new DukeException("The time of an event cannot be empty.");
         }
-        Task newTask = new Event(taskTimeSplit[0].substring(6),
-                TaskType.EVENT, LocalDate.parse(taskTimeSplit[1]));
+        Task newTask = new Event(taskTimeSplit[0].substring(6), LocalDate.parse(taskTimeSplit[1]));
         tasks.addTask(newTask);
         storage.updateFile(tasks);
         return Printer.printAddReply(newTask, tasks.size());
