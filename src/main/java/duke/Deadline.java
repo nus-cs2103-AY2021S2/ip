@@ -11,10 +11,11 @@ public class Deadline extends Task {
         super(deadlineDetail);
         try {
             this.deadlineDate = Task.dateStringToDate(deadlineDateString);
-            this.deadlineDateString = deadlineDate.getMonth().toString().toLowerCase() + " " +
-                    deadlineDate.getDayOfMonth() + " " + deadlineDate.getYear();
-        }
-        catch (DateTimeException e) {
+            this.deadlineDateString = String.format("%s %d %d",
+                    deadlineDate.getMonth().toString().toLowerCase(),
+                    deadlineDate.getDayOfMonth(),
+                    deadlineDate.getYear());
+        } catch (DateTimeException e) {
             System.err.println("Please input date in yyyy-MM-dd format.");
         }
     }
