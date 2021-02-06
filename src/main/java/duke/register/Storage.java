@@ -71,7 +71,7 @@ public class Storage {
                         task.markDone();
                     }
                     taskList.addTask(task);
-                } else if (type.equals("add")){
+                } else if (type.equals("add")) {
                     taskList.addTask(new Notes(createTask(command)));
                 }
             }
@@ -112,7 +112,7 @@ public class Storage {
             }
             pw.close();
         } catch (FileNotFoundException e) {
-
+            e.printStackTrace();
         }
     }
 
