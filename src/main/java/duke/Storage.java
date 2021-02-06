@@ -77,6 +77,7 @@ public class Storage {
                 if (taskString.startsWith("D")) {
                     task = new Deadline(taskDescription, taskDate);
                 } else {
+                    assert taskString.startsWith("E"): "Invalid task string";
                     task = new Event(taskDescription, taskDate);
                 }
             }

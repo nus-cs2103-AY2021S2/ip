@@ -65,6 +65,7 @@ public class TaskList {
                 if (userInput.startsWith("deadline")) {
                     newTask = new Deadline(userInput.substring(9, index), dateTime);
                 } else {
+                    assert userInput.startsWith("event");
                     newTask = new Event(userInput.substring(6, index), dateTime);
                 }
             }
