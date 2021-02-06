@@ -47,28 +47,31 @@ public class Chatbot {
 
     }
 
+    /**
+     * Gets the reply message from Duke.
+     *
+     * @param input user input message
+     * @return duke reply message
+     */
     public String getDukeReply(String input) {
-        String[] taskTimeSplit;
-        Task newTask;
         try {
             String[] taskTypeSplit = input.split(" ");
             Command command = parser.parseStringToCommand(taskTypeSplit);
-            int tempOrder;
             switch (command) {
             case LIST:
-                return Printer.printTaskList(tasks.getTaskList());
+                return handleListCommand();
             case DONE:
-                return doneCommand(taskTypeSplit);
+                return handleDoneCommand(input);
             case DELETE:
-                return deleteCommand(taskTypeSplit);
+                return handleDeleteCommand(input);
             case FIND:
-                return findCommand(taskTypeSplit);
+                return handleFindCommand(input);
             case TODO:
-                return todoCommand(input, taskTypeSplit);
+                return handleTodoCommand(input);
             case DEADLINE:
-                return deadlineCommand(input, taskTypeSplit);
+                return handleDeadlineCommand(input);
             case EVENT:
-                return eventCommand(input, taskTypeSplit);
+                return handleEventCommand(input);
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
@@ -80,7 +83,25 @@ public class Chatbot {
 
     }
 
-    public String doneCommand(String... taskTypeSplit) throws DukeException {
+    /**
+     * Handles list command and returns Duke reply message.
+     *
+     * @return reply message from Duke
+     * @throws DukeException no task in the list
+     */
+    public String handleListCommand() throws DukeException {
+        return Printer.printTaskList(tasks.getTaskList());
+    }
+
+    /**
+     * Handles done command and returns Duke reply message.
+     *
+     * @param input user input
+     * @return reply message from Duke
+     * @throws DukeException incomplete user input
+     */
+    public String handleDoneCommand(String input) throws DukeException {
+        String[] taskTypeSplit = input.split(" ");
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of done cannot be empty.");
         }
@@ -90,7 +111,15 @@ public class Chatbot {
         return Printer.printDoneReply(tasks.getTask(doneOrder));
     }
 
-    public String deleteCommand(String... taskTypeSplit) throws DukeException {
+    /**
+     * Handles delete command and returns Duke reply message.
+     *
+     * @param input user input
+     * @return reply message from Duke
+     * @throws DukeException incomplete user input
+     */
+    public String handleDeleteCommand(String input) throws DukeException {
+        String[] taskTypeSplit = input.split(" ");
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of delete cannot be empty.");
         }
@@ -100,7 +129,15 @@ public class Chatbot {
         return Printer.printDeleteReply(removedTask);
     }
 
-    public String findCommand(String... taskTypeSplit) throws DukeException {
+    /**
+     * Handles find command and returns Duke reply message.
+     *
+     * @param input user input
+     * @return reply message from Duke
+     * @throws DukeException incomplete user input
+     */
+    public String handleFindCommand(String input) throws DukeException {
+        String[] taskTypeSplit = input.split(" ");
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of find cannot be empty.");
         }
@@ -109,7 +146,15 @@ public class Chatbot {
         return Printer.printFindReply(targetTasks);
     }
 
-    public String todoCommand(String input, String... taskTypeSplit) throws DukeException {
+    /**
+     * Handles todo command and returns Duke reply message.
+     *
+     * @param input user input
+     * @return reply message from Duke
+     * @throws DukeException incomplete user input
+     */
+    public String handleTodoCommand(String input) throws DukeException {
+        String[] taskTypeSplit = input.split(" ");
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -119,7 +164,15 @@ public class Chatbot {
         return Printer.printAddReply(newTask, tasks.size());
     }
 
-    public String deadlineCommand(String input, String... taskTypeSplit) throws DukeException {
+    /**
+     * Handles deadline command and returns Duke reply message.
+     *
+     * @param input user input
+     * @return reply message from Duke
+     * @throws DukeException incomplete user input
+     */
+    public String handleDeadlineCommand(String input) throws DukeException {
+        String[] taskTypeSplit = input.split(" ");
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
@@ -134,7 +187,15 @@ public class Chatbot {
         return Printer.printAddReply(newTask, tasks.size());
     }
 
-    public String eventCommand(String input, String... taskTypeSplit) throws DukeException {
+    /**
+     * Handles event command and returns Duke reply message.
+     *
+     * @param input user input
+     * @return reply message from Duke
+     * @throws DukeException incomplete user input
+     */
+    public String handleEventCommand(String input) throws DukeException {
+        String[] taskTypeSplit = input.split(" ");
         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
             throw new DukeException("The description of an event cannot be empty.");
         }

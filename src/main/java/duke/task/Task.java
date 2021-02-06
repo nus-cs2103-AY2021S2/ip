@@ -6,17 +6,17 @@ package duke.task;
 public class Task {
     protected final String name;
     protected final TaskType type;
-    protected boolean done;
+    protected boolean isDone;
 
     Task(String name, TaskType type) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
         this.type = type;
     }
 
-    Task(String name, TaskType type, boolean done) {
+    Task(String name, TaskType type, boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
         this.type = type;
     }
 
@@ -35,7 +35,7 @@ public class Task {
      * @return whether or not the task is done
      */
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -51,12 +51,12 @@ public class Task {
      * Marks the task as done.
      */
     public void markAsDone() {
-        done = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        String returnString = "[" + type.getType() + "][" + (done ? "X" : " ") + "] ";
+        String returnString = "[" + type.getType() + "][" + (isDone ? "X" : " ") + "] ";
         return returnString + name;
     }
 }

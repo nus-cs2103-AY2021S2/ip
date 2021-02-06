@@ -9,13 +9,28 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDate time;
 
+    /**
+     * Constructs a Deadline object.
+     *
+     * @param name deadline name
+     * @param type type Deadline
+     * @param time deadline time
+     */
     public Deadline(String name, TaskType type, LocalDate time) {
         super(name, type);
         this.time = time;
     }
 
-    public Deadline(String name, TaskType type, LocalDate time, boolean done) {
-        super(name, type, done);
+    /**
+     * Constructs a Deadline object with isDone status specified.
+     *
+     * @param name   deadline name
+     * @param type   type Deadline
+     * @param time   deadline time
+     * @param isDone the status of the deadline
+     */
+    public Deadline(String name, TaskType type, LocalDate time, boolean isDone) {
+        super(name, type, isDone);
         this.time = time;
     }
 

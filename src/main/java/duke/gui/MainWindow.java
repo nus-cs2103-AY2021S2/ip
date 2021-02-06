@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     private Chatbot duke;
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

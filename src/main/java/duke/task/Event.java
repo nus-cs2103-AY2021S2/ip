@@ -9,13 +9,28 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDate time;
 
+    /**
+     * Constructs a Event object.
+     *
+     * @param name event name
+     * @param type type Event
+     * @param time event time
+     */
     public Event(String name, TaskType type, LocalDate time) {
         super(name, type);
         this.time = time;
     }
 
-    public Event(String name, TaskType type, LocalDate time, boolean done) {
-        super(name, type, done);
+    /**
+     * Constructs a Event object with isDone status specified.
+     *
+     * @param name   event name
+     * @param type   type Event
+     * @param time   event time
+     * @param isDone the status of the event
+     */
+    public Event(String name, TaskType type, LocalDate time, boolean isDone) {
+        super(name, type, isDone);
         this.time = time;
     }
 
