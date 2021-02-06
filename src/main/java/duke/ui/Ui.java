@@ -28,6 +28,7 @@ public class Ui {
      * @return Message shown after task is successfully marked as done.
      */
     public static String getSuccessfullyDoneMessage(Task task) {
+        assert task != null : "task should not be null";
         return joinStringsWithNewLines("Good Job! I've marked this task as done!",
             task.toString());
     }
@@ -41,7 +42,7 @@ public class Ui {
      */
     public static String getSuccessfullyDeletedMessage(int numTasks, Task task) {
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
-
+        assert task != null : "task should not be null";
         return joinStringsWithNewLines("Got it! I've removed this task:",
             "  " + task.toString(),
             "Now you have " + formattedTasksCount + " in the list.");
@@ -55,6 +56,7 @@ public class Ui {
      * @return string representation of list of tasks.
      */
     public static String getFilteredTasksMessage(Task[] tasks) {
+        assert tasks != null : "tasks should not be null";
         if (tasks.length == 0) {
             return "No matching tasks were found.";
         } else {
@@ -76,6 +78,7 @@ public class Ui {
      * @return string representation of list of tasks.
      */
     public static String getAllTasksMessage(ArrayList<Task> tasks) {
+        assert tasks != null : "tasks should not be null";
         if (tasks.size() == 0) {
             return "You have not added any tasks.";
         } else {
@@ -91,7 +94,7 @@ public class Ui {
 
     public static String getSuccessfullyAddedTaskMessage(int numTasks, Task task) {
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
-
+        assert task != null : "task should not be null";
         return joinStringsWithNewLines("Got it! I've added this task:",
             "  " + task.toString(),
             "Now you have " + formattedTasksCount + " in the list.");
