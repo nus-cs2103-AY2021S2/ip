@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidInputException;
@@ -138,20 +139,9 @@ public class TaskList {
      * @param searchParameters Strings to compare tasks with.
      * @return List of tasks.
      */
-    public ArrayList<Task> getFilteredTaskList(String... searchParameters) {
-        ArrayList<Task> filteredArr = new ArrayList<>();
-
-        for (Task task : tasks) {
-            String taskDescription = task.description.toLowerCase();
-            for (String s : searchParameters) {
-                if (taskDescription.contains(s)) {
-                    filteredArr.add(task);
-                    break;
-                }
-            }
-        }
-
-        return filteredArr;
+    public Task[] getFilteredTaskList(String... searchParameters) {
+        return tasks.stream().filter(x -> Arrays.stream(searchParameters)
+                    .anyMatch(x.description.toLowerCase()::contains)).toArray(Task[]::new);
     }
 
     /**

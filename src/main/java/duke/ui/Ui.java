@@ -55,16 +55,16 @@ public class Ui {
      * @param tasks List of tasks.
      * @return string representation of list of tasks.
      */
-    public static String getFilteredTasksMessage(ArrayList<Task> tasks) {
+    public static String getFilteredTasksMessage(Task[] tasks) {
         assert tasks != null : "tasks should not be null";
-        if (tasks.size() == 0) {
+        if (tasks.length == 0) {
             return "No matching tasks were found.";
         } else {
-            String[] outputArr = new String[tasks.size() + 1];
+            String[] outputArr = new String[tasks.length + 1];
             outputArr[0] = "Here are the matching tasks in your list:";
 
-            for (int i = 0; i < tasks.size(); i++) {
-                outputArr[i + 1] = (i + 1) + "." + tasks.get(i).toString();
+            for (int i = 0; i < tasks.length; i++) {
+                outputArr[i + 1] = (i + 1) + "." + tasks[i].toString();
             }
 
             return joinStringsWithNewLines(outputArr);
