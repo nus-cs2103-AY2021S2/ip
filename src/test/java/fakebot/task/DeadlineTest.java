@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 
-class DeadlinesTest {
+class DeadlineTest {
     private String taskName = "Test";
     private String dateString = "2000-10-01";
     private String timeString = "01:04";
@@ -17,7 +17,7 @@ class DeadlinesTest {
     public void getTaskName_equal() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
-        Deadlines deadline = new Deadlines(taskName, date, time);
+        Deadline deadline = new Deadline(taskName, date, time);
         assertEquals(taskName, deadline.getTaskName(), "Task Name does not match");
     }
 
@@ -25,7 +25,7 @@ class DeadlinesTest {
     public void markComplete_success() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
-        Deadlines deadline = new Deadlines(taskName, date, time);
+        Deadline deadline = new Deadline(taskName, date, time);
         deadline.markComplete();
         assertEquals(true, deadline.isComplete(), "Task not completed");
     }
@@ -34,7 +34,7 @@ class DeadlinesTest {
     public void getDeadlineDate_equal() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
-        Deadlines deadline = new Deadlines(taskName, date, time);
+        Deadline deadline = new Deadline(taskName, date, time);
         assertEquals(dateString, deadline.getDeadlineDate(), "Deadline Date does not match");
     }
 
@@ -42,7 +42,7 @@ class DeadlinesTest {
     public void getDeadlineTime_equal() {
         LocalDate date = LocalDate.parse(dateString);
         LocalTime time = LocalTime.parse(timeString);
-        Deadlines deadline = new Deadlines(taskName, date, time);
+        Deadline deadline = new Deadline(taskName, date, time);
         assertEquals(timeString, deadline.getDeadlineTime(), "Deadline Time does not match");
     }
 }

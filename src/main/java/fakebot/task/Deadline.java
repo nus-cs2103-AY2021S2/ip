@@ -6,14 +6,14 @@ import java.time.LocalTime;
 /**
  * Deadline Task Type.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
 
     /**
      * Class constructor specifying the task description, deadline date, deadline time,
      */
-    public Deadlines(String name, LocalDate deadlineDate, LocalTime deadlineTime) {
+    public Deadline(String name, LocalDate deadlineDate, LocalTime deadlineTime) {
         super(name);
         this.deadlineDate = deadlineDate;
         this.deadlineTime = deadlineTime;
@@ -40,8 +40,9 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + printDateFormat.format(deadlineDate) + " " + printTimeFormat.format(deadlineTime) + ")";
+        String deadlineDateString = printDateFormat.format(deadlineDate);
+        String deadlineTimeString = printTimeFormat.format(deadlineTime);
+        return "[D]" + super.toString() + " (by: " + deadlineDateString + " " + deadlineTimeString + ")";
     }
 }
 

@@ -5,7 +5,7 @@ package fakebot.command;
  */
 public class Command {
     private CommandType type;
-    private String description;
+    private String[] descriptions;
 
     /**
      * Class constructor specifying the command type.
@@ -18,9 +18,17 @@ public class Command {
     /**
      * Class constructor specifying the command type and description.
      */
+    public Command(CommandType type, String[] descriptions) {
+        this.type = type;
+        this.descriptions = descriptions;
+    }
+
+    /**
+     * Class constructor specifying the command type and description.
+     */
     public Command(CommandType type, String description) {
         this.type = type;
-        this.description = description;
+        descriptions = new String[]{description};
     }
 
     /**
@@ -33,12 +41,21 @@ public class Command {
     }
 
     /**
-     * Returns Command Description Type.
+     * Returns Command Descriptions.
+     *
+     * @return Descriptions of the Command.
+     */
+    public String[] getDescriptions() {
+        return descriptions;
+    }
+
+    /**
+     * Returns Command Description.
      *
      * @return Description of the Command.
      */
     public String getDescription() {
-        return description;
+        return descriptions[0];
     }
 
 }

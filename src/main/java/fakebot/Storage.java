@@ -56,7 +56,7 @@ public class Storage {
      *
      * @param taskList Tasks to write to file.
      */
-    public void writeTasksToFIle(TaskList taskList) {
+    public void writeTasksToFile(TaskList taskList) {
         String textToAdd = Parser.convertStringListToString(Parser.convertTasksToStrings(taskList));
         try {
             writeToFile(textToAdd);
@@ -85,7 +85,7 @@ public class Storage {
         List<Task> taskList = new ArrayList<Task>();
         try {
             List<String> stringList = readFile();
-            taskList = Parser.parseStringsToTasks(stringList);
+            taskList = Parser.convertStringsToTasks(stringList);
         } catch (FileNotFoundException e) {
             //Do nothing, return empty list.
         }
