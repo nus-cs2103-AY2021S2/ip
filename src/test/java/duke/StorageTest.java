@@ -1,29 +1,29 @@
 package duke;
 
-import duke.bot.Storage;
-import duke.bot.TaskManager;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.exception.DukeLoadException;
-import duke.exception.DukeSaveException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import duke.bot.Storage;
+import duke.bot.TaskManager;
+import duke.exception.DukeLoadException;
+import duke.exception.DukeSaveException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /** Tests to be run on the read/write functionality of the chat bot */
 public class StorageTest {
@@ -32,7 +32,7 @@ public class StorageTest {
 
     /** Tests for saving tasks without any previously existing save file */
     @Test
-    public void saveTasks_NoExisting() {
+    public void saveTasks_noExisting() {
         File file = new File(PATH);
         if (file.exists()) {
             file.delete();
@@ -48,7 +48,7 @@ public class StorageTest {
 
         try {
             Storage.saveTasks(tasks);
-        } catch(DukeSaveException e) {
+        } catch (DukeSaveException e) {
             assumeFalse(true, "Failed to save tasks");
         }
 
@@ -60,18 +60,18 @@ public class StorageTest {
                 content += scanner.nextLine() + "\n";
             }
 
-            String expected = "T | 0 | DESCRIPTION 1\nD | 1 | DESCRIPTION 2 | " + dateTime.format(formatter) +
-                    "\nE | 0 | DESCRIPTION 3 | " + dateTime.format(formatter) + " | " + dateTime.format(formatter) +
-                    "\n";
+            String expected = "T | 0 | DESCRIPTION 1\nD | 1 | DESCRIPTION 2 | " + dateTime.format(formatter)
+                    + "\nE | 0 | DESCRIPTION 3 | " + dateTime.format(formatter) + " | " + dateTime.format(formatter)
+                    + "\n";
             assertEquals(expected, content);
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             assumeFalse(true, "Save file cannot be found after saving");
         }
     }
 
     /** Tests for loading tasks from a save file when there is no previously existing save file */
     @Test
-    public void loadTasksTo_NoExisting() {
+    public void loadTasksTo_noExisting() {
         // Create the 'data' folder if missing
         File dir = new File("data");
         if (!dir.exists()) {
@@ -84,8 +84,8 @@ public class StorageTest {
             LocalDateTime dateTime = LocalDateTime.now();
 
             FileWriter writer = new FileWriter(file);
-            writer.write("T | 0 | DESCRIPTION 1\nD | 1 | DESCRIPTION 2 | " + dateTime.format(formatter) + "\n" +
-                    "E | 0 | DESCRIPTION 3 | " + dateTime.format(formatter) + " | " + dateTime.format(formatter));
+            writer.write("T | 0 | DESCRIPTION 1\nD | 1 | DESCRIPTION 2 | " + dateTime.format(formatter) + "\n"
+                    + "E | 0 | DESCRIPTION 3 | " + dateTime.format(formatter) + " | " + dateTime.format(formatter));
             writer.close();
 
             TaskManager taskManager = new TaskManager();
@@ -94,11 +94,11 @@ public class StorageTest {
             assertEquals("T | 0 | DESCRIPTION 1", taskManager.getTask(0).toSaveFileString());
             assertEquals("D | 1 | DESCRIPTION 2 | " + dateTime.format(formatter),
                     taskManager.getTask(1).toSaveFileString());
-            assertEquals("E | 0 | DESCRIPTION 3 | " + dateTime.format(formatter) + " | " +
-                    dateTime.format(formatter), taskManager.getTask(2).toSaveFileString());
-        } catch(DukeLoadException e) {
+            assertEquals("E | 0 | DESCRIPTION 3 | " + dateTime.format(formatter) + " | "
+                    + dateTime.format(formatter), taskManager.getTask(2).toSaveFileString());
+        } catch (DukeLoadException e) {
             assertFalse(true, "Failed to load task from save");
-        } catch(IOException e) {
+        } catch (IOException e) {
             assertFalse(true, "Failed to create a mock save file");
         }
     }

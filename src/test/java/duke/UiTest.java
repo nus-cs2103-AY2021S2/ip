@@ -1,23 +1,23 @@
 package duke;
 
-import duke.bot.Ui;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Deadline;
-import duke.task.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.bot.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /** Tests to be run on the message output process of the chat bot */
 public class UiTest {
@@ -26,7 +26,7 @@ public class UiTest {
     /** A mock output stream to capture outputs from the Ui */
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     /** Borderlines to contain a display message*/
-    private final String BORDER = "___________________________________________________________";
+    private final String border = "___________________________________________________________";
 
     /** Replace the system's output stream with a custom stream to capture the output */
     @BeforeEach
@@ -37,7 +37,7 @@ public class UiTest {
     @Test
     public void printMsg_test() {
         String msg = "Testing Message 1234567890!";
-        String expected = BORDER + "\r\n" + msg + "\r\n" + BORDER;
+        String expected = border + "\r\n" + msg + "\r\n" + border;
 
         Ui ui = new Ui();
         ui.constructMessage(msg);
@@ -47,7 +47,7 @@ public class UiTest {
     /** Tests printing of task list when the list is empty */
     @Test
     public void printTaskList_emptyList() {
-        String expected = BORDER + "\r\n" + "Meow, here are the tasks in your list:\r\n" + BORDER;
+        String expected = border + "\r\n" + "Meow, here are the tasks in your list:\r\n" + border;
 
         List<Task> tasks = new ArrayList<>();
 
@@ -58,13 +58,13 @@ public class UiTest {
 
     /** Tests printing of task list when the list has 3 items */
     @Test
-    public void printTaskList_3Items() {
+    public void printTaskList_threeItems() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
         LocalDateTime dateTime = LocalDateTime.now();
-        String expected = BORDER + "\r\nMeow, here are the tasks in your list:\r\n" +
-                "1.[T][ ] DESCRIPTION 1\n" + "2.[D][ ] DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n" +
-                "3.[E][ ] DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter)
-                + ")\n" + BORDER;
+        String expected = border + "\r\nMeow, here are the tasks in your list:\r\n"
+                + "1.[T][ ] DESCRIPTION 1\n" + "2.[D][ ] DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n"
+                + "3.[E][ ] DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: "
+                + dateTime.format(formatter) + ")\n" + border;
 
         List<Task> tasks = new ArrayList<>();
         tasks.add(new ToDo("DESCRIPTION 1"));
@@ -82,13 +82,13 @@ public class UiTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
         LocalDateTime dateTime = LocalDateTime.now();
 
-        String expectedToDo = BORDER + "\r\nGot it meow. I've added this task:\r\n  [T][ ] DESCRIPTION 1\nNow you " +
-                "have 99 tasks in the list.\n" + BORDER;
-        String expectedDeadline = BORDER + "\r\nGot it meow. I've added this task:\r\n  [D][ ] DESCRIPTION 2 (By: " +
-                dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n" + BORDER;
-        String expectedEvent = BORDER + "\r\nGot it meow. I've added this task:\r\n  [E][ ] DESCRIPTION 3 (Start: " +
-                dateTime.format(formatter) + " | End: " + dateTime.format(formatter) + ")\n" +
-                "Now you have 99 tasks in the list.\n" + BORDER;
+        String expectedToDo = border + "\r\nGot it meow. I've added this task:\r\n  [T][ ] DESCRIPTION 1\nNow you "
+                + "have 99 tasks in the list.\n" + border;
+        String expectedDeadline = border + "\r\nGot it meow. I've added this task:\r\n  [D][ ] DESCRIPTION 2 (By: "
+                + dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n" + border;
+        String expectedEvent = border + "\r\nGot it meow. I've added this task:\r\n  [E][ ] DESCRIPTION 3 (Start: "
+                + dateTime.format(formatter) + " | End: " + dateTime.format(formatter) + ")\n"
+                + "Now you have 99 tasks in the list.\n" + border;
 
         ToDo toDo = new ToDo("DESCRIPTION 1");
         Deadline deadline = new Deadline("DESCRIPTION 2", dateTime);
@@ -113,13 +113,13 @@ public class UiTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
         LocalDateTime dateTime = LocalDateTime.now();
 
-        String expectedToDo = BORDER + "\r\nGood job meow, I've marked this task as done:\r\n100.[T][ ] DESCRIPTION" +
-                " 1\n" + BORDER;
-        String expectedDeadline = BORDER + "\r\nGood job meow, I've marked this task as done:\r\n100.[D][ ] " +
-                "DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n" + BORDER;
-        String expectedEvent = BORDER + "\r\nGood job meow, I've marked this task as done:\r\n100.[E][ ] " +
-                "DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter) +
-                ")\n" + BORDER;
+        String expectedToDo = border + "\r\nGood job meow, I've marked this task as done:\r\n100.[T][ ] DESCRIPTION"
+                + " 1\n" + border;
+        String expectedDeadline = border + "\r\nGood job meow, I've marked this task as done:\r\n100.[D][ ] "
+                + "DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n" + border;
+        String expectedEvent = border + "\r\nGood job meow, I've marked this task as done:\r\n100.[E][ ] "
+                + "DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter)
+                + ")\n" + border;
 
         ToDo toDo = new ToDo("DESCRIPTION 1");
         Deadline deadline = new Deadline("DESCRIPTION 2", dateTime);
@@ -144,13 +144,14 @@ public class UiTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
         LocalDateTime dateTime = LocalDateTime.now();
 
-        String expectedToDo = BORDER + "\r\nNoted meow. I've removed this task:\r\n  [T][ ] DESCRIPTION" +
-                " 1\nNow you have 99 tasks in the list.\n" + BORDER;
-        String expectedDeadline = BORDER + "\r\nNoted meow. I've removed this task:\r\n  [D][ ] " +
-                "DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n" + BORDER;
-        String expectedEvent = BORDER + "\r\nNoted meow. I've removed this task:\r\n  [E][ ] " +
-                "DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter) +
-                ")\nNow you have 99 tasks in the list.\n" + BORDER;
+        String expectedToDo = border + "\r\nNoted meow. I've removed this task:\r\n  [T][ ] DESCRIPTION"
+                + " 1\nNow you have 99 tasks in the list.\n" + border;
+        String expectedDeadline = border + "\r\nNoted meow. I've removed this task:\r\n  [D][ ] "
+                + "DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n"
+                + border;
+        String expectedEvent = border + "\r\nNoted meow. I've removed this task:\r\n  [E][ ] "
+                + "DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: "
+                + dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n" + border;
 
         ToDo toDo = new ToDo("DESCRIPTION 1");
         Deadline deadline = new Deadline("DESCRIPTION 2", dateTime);
@@ -175,10 +176,10 @@ public class UiTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
         LocalDateTime dateTime = LocalDateTime.now();
 
-        String expected = BORDER + "\r\nMeow, here are the matching tasks in your list:\r\n" +
-                "1.[T][ ] DESCRIPTION 1\n" + "2.[D][ ] DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n" +
-                "3.[E][ ] DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter)
-                + ")\n" + BORDER;
+        String expected = border + "\r\nMeow, here are the matching tasks in your list:\r\n"
+                + "1.[T][ ] DESCRIPTION 1\n" + "2.[D][ ] DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n"
+                + "3.[E][ ] DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: "
+                + dateTime.format(formatter) + ")\n" + border;
 
         List<Task> tasks = new ArrayList<>();
         tasks.add(new ToDo("DESCRIPTION 1"));
