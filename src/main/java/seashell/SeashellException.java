@@ -1,4 +1,4 @@
-package seashell.main;
+package seashell;
 
 public class SeashellException extends Exception {
     SeashellException(String errorMessage){

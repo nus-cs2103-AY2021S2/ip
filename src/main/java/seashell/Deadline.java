@@ -1,4 +1,4 @@
-package seashell.task;
+package seashell;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

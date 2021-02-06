@@ -1,8 +1,6 @@
-package seashell.main;
+package seashell;
 
 import java.util.Scanner;
-import seashell.command.CommandType;
-import seashell.command.Parser;
 
 public class Seashell {
 

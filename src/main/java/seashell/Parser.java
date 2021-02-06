@@ -1,4 +1,6 @@
-package seashell.command;
+package seashell;
+
+import seashell.CommandType;
 
 public class Parser {
 

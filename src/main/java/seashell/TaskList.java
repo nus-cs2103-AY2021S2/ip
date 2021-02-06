@@ -1,3 +1,5 @@
+package seashell;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -101,4 +103,12 @@ public class TaskList {
         }
     }
 
+    public TaskList clear(SaveHandler saveHandler) throws SeashellException {
+        if (this.taskList.isEmpty()) {
+            throw new SeashellException("OOPS!!! Task list is already empty!");
+        } else {
+            saveHandler.clearSaveFile();
+            return new TaskList(new ArrayList<>());
+        }
+    }
 }

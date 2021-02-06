@@ -1,4 +1,4 @@
-package seashell.task;
+package seashell;
 
 public class Todo extends Task {
 

@@ -1,9 +1,4 @@
-package seashell.main;
-
-import seashell.task.Deadline;
-import seashell.task.Event;
-import seashell.task.Task;
-import seashell.task.Todo;
+package seashell;
 
 import java.io.File;
 import java.io.FileWriter;
