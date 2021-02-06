@@ -76,7 +76,7 @@ public class Parser {
                 checkValidDeadline(String.join(" /by ", args));
                 break;
             case "E":
-                checkValidDeadline(String.join(" /at ", args));
+                checkValidEvent(String.join(" /at ", args));
                 break;
             default:
                 throw new DukeInputException("Not a valid Task type");

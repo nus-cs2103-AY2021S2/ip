@@ -1,5 +1,6 @@
 package duke.util;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,18 @@ public class ParserTest {
 
     @Test
     public void parseInputTest() {
+        assertDoesNotThrow(() -> Parser.parseInput("bye"));
+        assertDoesNotThrow(() -> Parser.parseInput("list"));
+        assertDoesNotThrow(() -> Parser.parseInput("done 1"));
+        assertDoesNotThrow(() -> Parser.parseInput("todo a"));
+        assertDoesNotThrow(() -> Parser.parseInput("deadline a /by 2011-01-01"));
+        assertDoesNotThrow(() -> Parser.parseInput("event a /at 2011-01-01"));
+        assertDoesNotThrow(() -> Parser.parseInput("delete 1"));
+        assertDoesNotThrow(() -> Parser.parseInput("save"));
+        assertDoesNotThrow(() -> Parser.parseInput("load"));
+        assertDoesNotThrow(() -> Parser.parseInput("help"));
+        assertDoesNotThrow(() -> Parser.parseInput("search a"));
+
         assertThrows(DukeInputException.class, () -> Parser.parseInput(""));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("a"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("a "));
@@ -37,6 +50,10 @@ public class ParserTest {
 
     @Test
     public void checkImportFormatTest() {
+        assertDoesNotThrow(() -> Parser.checkImportFormat("T;1;a"));
+        assertDoesNotThrow(() -> Parser.checkImportFormat("D;1;a;2011-01-01"));
+        assertDoesNotThrow(() -> Parser.checkImportFormat("E;0;a;2011-01-01"));
+
         assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("Z;1;a;2011-01-01"));
         assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;3;;2011-01-01"));
         assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;a;201-01-01"));
@@ -51,6 +68,9 @@ public class ParserTest {
 
     @Test
     public void parseYesNoTest() {
+        assertDoesNotThrow(() -> Parser.parseYesNo("y"));
+        assertDoesNotThrow(() -> Parser.parseYesNo("n"));
+
         assertThrows(DukeInputException.class, () -> Parser.parseYesNo(""));
         assertThrows(DukeInputException.class, () -> Parser.parseYesNo("a"));
     }
