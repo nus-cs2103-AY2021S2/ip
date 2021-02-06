@@ -11,6 +11,10 @@ public abstract class Command {
     /** A TaskManager instance that all commands will act upon */
     protected static TaskManager taskManager;
 
+    protected Command() {
+        assert Command.ui != null && Command.taskManager != null;
+    }
+
     /**
      * Setups the Ui and TaskManager instance
      *
