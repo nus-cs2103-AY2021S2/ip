@@ -1,5 +1,6 @@
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 
 public class Duke {
@@ -46,7 +47,7 @@ public class Duke {
 
 
 
-        while(!canExit) {
+        while (!canExit) {
             try {
                 duke.run();
             } catch (InvalidCommandException e) {
