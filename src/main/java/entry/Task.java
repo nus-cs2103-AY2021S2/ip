@@ -1,5 +1,10 @@
 package entry;
 
+/**
+ * This is the base abstract class for Task. Currently, Oracle uses the following 3 Tasks
+ * Todo, Deadline, and Event. Each class should at the least have a description and an indicator for
+ * whether it has been completed
+ */
 public class Task {
     /** base class for the Task
      * @param description description of the task
