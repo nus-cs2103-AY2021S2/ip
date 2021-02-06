@@ -55,18 +55,21 @@ public class Duke {
         String response = toReply;
         switch (parsedInput[0]) {
         case "todo":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
             response += ui.addPrint();
             ToDoTask todo = tasks.handleToDoTask(input);
             response += ui.printTask(todo);
             response += ui.countTasks(tasks);
             break;
         case "deadline":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
             response += ui.addPrint();
             DeadlineTask deadlineTask = tasks.handleDeadlineTask(input);
             response += ui.printTask(deadlineTask);
             response += ui.countTasks(tasks);
             break;
         case "event":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
             response += ui.addPrint();
             EventTask eventTask = tasks.handleEventTask(input);
             response += ui.printTask(eventTask);
@@ -76,12 +79,14 @@ public class Duke {
             response += ui.printStored(tasks);
             break;
         case "done":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
             int number = Integer.valueOf(parsedInput[1]);
             response += ui.printMarked();
             Task completed = tasks.handleDone(number);
             response += ui.printTask(completed);
             break;
         case "check":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
             String result = tasks.findOnDateTasks((parsedInput[1]));
             response += ui.print(result);
             break;
@@ -89,6 +94,7 @@ public class Duke {
             response += Ui.getByeMessage();
             break;
         case "delete":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
             int index = Integer.valueOf(parsedInput[1]);
             response += ui.printRemoved();
             Task task = tasks.handleDelete(index);
@@ -96,6 +102,7 @@ public class Duke {
             response += ui.countTasks(tasks);
             break;
         case "find":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
             String keyword = parsedInput[1];
             response += ui.printMatching();
             List<Task> matches = tasks.getMatch(keyword);
