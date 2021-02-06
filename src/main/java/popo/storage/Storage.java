@@ -78,7 +78,9 @@ public class Storage {
         try {
             // Create directories in the file path that do not exist yet
             Path pathToParentDirectory = path.getParent();
-            Files.createDirectories(pathToParentDirectory);
+            if (pathToParentDirectory != null) {
+                Files.createDirectories(pathToParentDirectory);
+            }
 
             List<String> taskStrings = Storage.convertAllTasksToString(taskList);
             Files.write(path, taskStrings);
