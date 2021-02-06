@@ -64,7 +64,7 @@ public class TaskList {
         }
         if (matches.numOfTasks() > 0) {
             out += "We have found the following items\n";
-            out += matches.printTasks();
+            out += matches.getAllTasks();
         } else {
             out += "Sorry! Could not find any matches :(";
         }
@@ -125,12 +125,14 @@ public class TaskList {
         return Tasks.get(idx);
     }
 
+    
+
     /**
      * The method returns all the tasks in a String representation
      *
      * @return all the tasks
      */
-    public String printTasks() {
+    public String getAllTasks() {
         String out = "Contents: \n";
         for (int j = 0; j < Tasks.size(); j++) {
             if (Tasks.get(j) instanceof TodoTask) {

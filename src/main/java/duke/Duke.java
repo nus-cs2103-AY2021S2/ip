@@ -48,9 +48,9 @@ public class Duke {
             notesStorage.saveTask(noteList);
             result = "Goodbye for now.\nHope to see you soon!";
         } else if (TaskType.equals("list")) {
-            result = taskList.printTasks();
+            result = taskList.getAllTasks();
         } else if (TaskType.equals("note")) {
-            result = noteList.printTasks();
+            result = noteList.getAllTasks();
         } else if (p.getCommandLength() > 1) {
             if (TaskType.equals("done")) {
                 result = taskList.markAsDone(Integer.parseInt(p.getIndex()));

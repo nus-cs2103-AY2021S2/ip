@@ -41,7 +41,7 @@ public class DukeText {
                 storage.saveTask(taskList);
                 break;
             } else if (command.equals("list")) {
-                printMessage(taskList.printTasks());
+                printMessage(taskList.getAllTasks());
             } else if (p.getCommandLength() > 1) {
                 if (TaskType.equals("done")) {
                     printMessage(taskList.markAsDone(Integer.parseInt(p.getIndex())));
@@ -78,7 +78,7 @@ public class DukeText {
             storage.saveTask(taskList);
             result = "Goodbye for now.\nHope to see you soon!";
         } else if (command.equals("list")) {
-            result = taskList.printTasks();
+            result = taskList.getAllTasks();
         } else if (p.getCommandLength() > 1) {
             if (TaskType.equals("done")) {
                 result = taskList.markAsDone(Integer.parseInt(p.getIndex()));
