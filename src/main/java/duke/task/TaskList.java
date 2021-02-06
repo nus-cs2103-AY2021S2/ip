@@ -139,7 +139,7 @@ public class TaskList {
         for (Task t : Tasks) {
             if (!t.isDone()) {
                 if (t.getType().toLowerCase().equals("deadline")
-                        || t.getType().toLowerCase().equals("events")) {
+                        || t.getType().toLowerCase().equals("event")) {
                     if (today.compareTo(t.getDate()) <= 0) {
                         dues.silentAdd(t);
                     }

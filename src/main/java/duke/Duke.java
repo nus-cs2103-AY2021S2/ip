@@ -49,7 +49,7 @@ public class Duke {
             result = "Goodbye for now.\nHope to see you soon!";
         } else if (TaskType.equals("list")) {
             result = taskList.getAllTasks();
-        } else if (TaskType.equals("note")) {
+        } else if (TaskType.equals("notes")) {
             result = noteList.getAllTasks();
         } else if (TaskType.equals("reminders") || TaskType.equals("dues")) {
             result = taskList.getReminders();
