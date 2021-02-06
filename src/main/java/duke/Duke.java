@@ -49,28 +49,12 @@ public class Duke {
             result = "Goodbye for now.\nHope to see you soon!";
         } else if (TaskType.equals("list")) {
             result = taskList.getAllTasks();
-        } else if (TaskType.equals("note")) {
+        } else if (TaskType.equals("notes")) {
             result = noteList.getAllTasks();
+        } else if (TaskType.equals("reminders") || TaskType.equals("dues")) {
+            result = taskList.getReminders();
         } else if (p.getCommandLength() > 1) {
-            if (TaskType.equals("done")) {
-                result = taskList.markAsDone(Integer.parseInt(p.getIndex()));
-            } else if (TaskType.equals("delete") || TaskType.equals("remove")) {
-                result = taskList.DeleteTask(Integer.parseInt(p.getIndex()));
-            } else if (TaskType.equals("delete-note") || TaskType.equals("remove-note")) {
-                result = noteList.DeleteTask(Integer.parseInt(p.getIndex()));
-            } else if (TaskType.equals("find") || TaskType.equals("search")) {
-                result = taskList.findTask(p.getTaskName());
-            } else if (TaskType.equals("find-note") || TaskType.equals("search-note")) {
-                result = noteList.findTask(p.getTaskName());
-            } else if (TaskType.equals("todo")) {
-                result = taskList.addTask(new TodoTask(command));
-            } else if (TaskType.equals("deadline")) {
-                result = taskList.addTask(new DeadlineTask(command));
-            } else if (TaskType.equals("event")) {
-                result = taskList.addTask(new EventTask(command));
-            } else if (TaskType.equals("add")) {
-                result = noteList.addTask(new Notes(input));
-            }
+            result = processLongCommands(p, command);
         } else {
             if (TaskType.equals("todo") || TaskType.equals("deadline")
                     || TaskType.equals("event")) {
@@ -78,6 +62,39 @@ public class Duke {
             } else {
                 result = "Oops!!! Invalid Input :(";
             }
+        }
+        return result;
+    }
+
+    /**
+     * Method created to shorten the process method
+     *
+     * @param p
+     * @param command
+     * @return Duke response
+     */
+    public String processLongCommands(Parser p, String command) {
+        p.parse();
+        String TaskType = p.getTaskType().toLowerCase();
+        String result = "";
+        if (TaskType.equals("done")) {
+            result = taskList.markAsDone(Integer.parseInt(p.getIndex()));
+        } else if (TaskType.equals("delete") || TaskType.equals("remove")) {
+            result = taskList.DeleteTask(Integer.parseInt(p.getIndex()));
+        } else if (TaskType.equals("delete-note") || TaskType.equals("remove-note")) {
+            result = noteList.DeleteTask(Integer.parseInt(p.getIndex()));
+        } else if (TaskType.equals("find") || TaskType.equals("search")) {
+            result = taskList.findTask(p.getTaskName());
+        } else if (TaskType.equals("find-note") || TaskType.equals("search-note")) {
+            result = noteList.findTask(p.getTaskName());
+        } else if (TaskType.equals("todo")) {
+            result = taskList.addTask(new TodoTask(command));
+        } else if (TaskType.equals("deadline")) {
+            result = taskList.addTask(new DeadlineTask(command));
+        } else if (TaskType.equals("event")) {
+            result = taskList.addTask(new EventTask(command));
+        } else if (TaskType.equals("add")) {
+            result = noteList.addTask(new Notes(command));
         }
         return result;
     }

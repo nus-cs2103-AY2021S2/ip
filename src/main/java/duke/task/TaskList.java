@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -125,7 +126,29 @@ public class TaskList {
         return Tasks.get(idx);
     }
 
-    
+    /**
+     * Checks the tasks' due dates with current date
+     * If the the task is after/on current date, push reminder
+     *
+     * @return List of all the due tasks
+     */
+    public String getReminders() {
+        String out = "These are the due tasks: \n";
+        TaskList dues = new TaskList();
+        LocalDate today = LocalDate.now();
+        for (Task t : Tasks) {
+            if (!t.isDone()) {
+                if (t.getType().toLowerCase().equals("deadline")
+                        || t.getType().toLowerCase().equals("event")) {
+                    if (today.compareTo(t.getDate()) <= 0) {
+                        dues.silentAdd(t);
+                    }
+                }
+            }
+        }
+        out += dues.getAllTasks();
+        return out;
+    }
 
     /**
      * The method returns all the tasks in a String representation
