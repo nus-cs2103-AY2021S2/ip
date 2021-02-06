@@ -19,6 +19,13 @@ public abstract class Task {
     }
 
     /**
+     * Returns a String representation of the Task for exporting.
+     * Format: "<Type> | <Completed> | <Name> | <Optional: Date>"
+     * @return String representation of Task.
+     */
+    public abstract String export();
+
+    /**
      * Returns a new Task object which has been completed.
      * @return New completed Task.
      */

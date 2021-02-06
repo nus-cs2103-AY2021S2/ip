@@ -5,12 +5,14 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
+import checklst.exception.ChecklstException;
 import checklst.gui.DialogBox;
 import checklst.parser.Parser;
 import checklst.storage.Storage;
 import checklst.task.TaskList;
 import checklst.ui.Ui;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,16 +46,6 @@ public class Checklst extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    /**
-     * The main function of the Checklst Program.
-     * Creates and initializes an instance of Checklst and runs it.
-     * @param args CLI Arguments.
-     */
-    public static void main(String[] args) {
-        Checklst checklst = new Checklst();
-        checklst.run();
-    }
-
     @Override
     public void start(Stage stage) {
 
@@ -62,10 +54,10 @@ public class Checklst extends Application {
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
-        userInput = new TextField();
-        userInput.setFont(STANDARD_FONT);
-        sendButton = new Button("Send");
-        sendButton.setFont(STANDARD_FONT);
+        this.userInput = new TextField();
+        this.userInput.setFont(STANDARD_FONT);
+        this.sendButton = new Button("Send");
+        this.sendButton.setFont(STANDARD_FONT);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -83,18 +75,18 @@ public class Checklst extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        this.scrollPane.setPrefSize(385, 535);
+        this.scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        this.scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
+        this.scrollPane.setVvalue(1.0);
+        this.scrollPane.setFitToWidth(true);
 
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        this.dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        this.userInput.setPrefWidth(325.0);
 
-        sendButton.setPrefWidth(55.0);
+        this.sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
@@ -104,19 +96,31 @@ public class Checklst extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         // Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+        this.sendButton.setOnMouseClicked((event) -> {
+            this.handleUserInput();
         });
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
+        this.userInput.setOnAction((event) -> {
+            this.handleUserInput();
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        this.dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(ui.sendWelcome()), new ImageView(duke)));
+        // Get History
+        try {
+            String[] history = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
+            for (String task: history) {
+                this.parser.parseHistory(task, this.taskList);
+            }
+            this.addDukeMessage("History successfully parsed");
+        } catch (InvalidPathException | IOException e) {
+            this.addDukeMessage("No history found... Initializing from blank state!");
+        } catch (ChecklstException e) {
+            this.addDukeMessage(e.getMessage());
+        }
 
+        this.addDukeMessage(this.ui.sendWelcome());
     }
 
     /**
@@ -125,12 +129,16 @@ public class Checklst extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+        if (userInput.getText().equals("exit")) {
+            try {
+                Platform.exit();
+            } catch (Exception e) {
+            }
+        }
+
+        this.addUserMessage(userInput.getText());
+        this.addDukeMessage(getResponse(userInput.getText()));
+        
         userInput.clear();
     }
 
@@ -139,41 +147,22 @@ public class Checklst extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return parser.parse(input.split(" ", 2), this.ui, this.taskList, this.storage);
+        return parser.parse(input.split(" ", 2), this.taskList);
     }
 
-    /**
-     * Main function to run the Checklst Program.
-     */
-    public void run() {
+    private void addDukeMessage(String input) {
+        this.dialogContainer.getChildren()
+            .add(DialogBox.getDukeDialog(new Label(input), new ImageView(duke)));
+    }
 
-        String[] input;
+    private void addUserMessage(String input) {
+        this.dialogContainer.getChildren()
+            .add(DialogBox.getUserDialog(new Label(input), new ImageView(duke)));
+    }
 
-        try {
-            String[] pastCommandHistory = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
-            for (String command: pastCommandHistory) {
-                if (command.equals("")) {
-                    continue;
-                }
-                input = command.split(" ", 2);
-                this.parser.parseHistoryCommand(input, this.taskList);
-            }
-            this.ui.sendOutput("History successfully restored!");
-        } catch (InvalidPathException | IOException e) {
-            this.ui.sendOutput("No history found... Initializing from blank state!");
-        }
-
-        this.ui.sendWelcome();
-
-        input = ui.readCommand();
-
-        while (!input[0].equals("bye")) {
-            this.parser.parse(input, ui, this.taskList, storage);
-            input = ui.readCommand();
-        }
-
-        this.ui.sendOutput("Bye! Hope to see you again!");
-
+    @Override
+    public void stop() throws Exception {
+        this.storage.saveToFile(this.taskList);
     }
 
 }

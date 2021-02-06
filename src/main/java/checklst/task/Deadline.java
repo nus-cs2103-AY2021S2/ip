@@ -44,6 +44,30 @@ public class Deadline extends Task {
         return new Deadline(splitInput[0], dueDate);
     }
 
+    public static Deadline parseDeadline(String input) {
+        String[] splitInput = input.split(" ; ");
+        String name = splitInput[2];
+        boolean completed = splitInput[1].equals("X") ? true : false;
+        LocalDate dueDate = LocalDate.parse(splitInput[3]);
+
+        return new Deadline(name, completed, dueDate);
+    }
+
+    @Override
+    public String export() {
+        String output = "D ; ";
+
+        if (this.completed) {
+            output += "X ; ";
+        } else {
+            output += "O ; ";
+        }
+        
+        output += this.name + " ; " + this.dueDate.toString();
+
+        return output;
+    } 
+
     @Override
     public Task complete() {
         return new Deadline(this.name, true, this.dueDate);

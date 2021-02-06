@@ -44,6 +44,30 @@ public class Event extends Task {
         return new Event(splitInput[0], eventDate);
     }
 
+    public static Event parseEvent(String input) {
+        String[] splitInput = input.split(" ; ");
+        String name = splitInput[2];
+        boolean completed = splitInput[1].equals("X") ? true : false;
+        LocalDate dateTime = LocalDate.parse(splitInput[3]);
+
+        return new Event(name, completed, dateTime);
+    }
+
+    @Override
+    public String export() {
+        String output = "E ; ";
+
+        if (this.completed) {
+            output += "X ; ";
+        } else {
+            output += "O ; ";
+        }
+
+        output += this.name + " ; " + this.dateTime.toString();
+
+        return output;
+    } 
+
     @Override
     public Task complete() {
         return new Event(this.name, true, this.eventDate);

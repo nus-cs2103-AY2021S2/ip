@@ -1,49 +1,43 @@
 package checklst.storage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import checklst.exception.ChecklstException;
+import checklst.task.TaskList;
 
 /**
  * The Storage class stores and processes the saved commands.
  */
 public class Storage {
 
-    private final ArrayList<String> commandHistory = new ArrayList<>();
-
-    /**
-     * Adds the given command to the history list.
-     * @param command Command to be saved.
-     */
-    public void addCommand(String[] command) {
-        this.commandHistory.add(String.join(" ", command));
-    }
-
-    /**
-     * Removes the latest command from the history list. Used when there is an
-     * errorneous command detected.
-     */
-    public void removeLastCommand() {
-        this.commandHistory.remove(this.commandHistory.size() - 1);
-    }
+    private List<String> exportList = new ArrayList<>();
 
     /**
      * Saves the command history to the save file.
-     * @throws ChecklstException Exception when the file is not found, prompts user to create it.
+     * @throws ChecklstException Exception when unable to save or write to file.
      */
-    public void saveToFile() throws ChecklstException {
+    public void saveToFile(TaskList taskList) throws ChecklstException {
+        File history = new File("./data/checklst.txt");
+        history.getParentFile().mkdirs();
+        try {
+            history.createNewFile();
+        } catch (IOException | SecurityException e) {
+            throw new ChecklstException("Unable to make file!");
+        }
+        
         try (PrintStream out = new PrintStream(new FileOutputStream("./data/checklst.txt"))) {
-            out.print(this.commandHistory.toString().replace("[", "").replace("]", "").replace(", ", "\n"));
+            exportList = taskList.getTaskList().stream().map(x -> x.export()).collect(Collectors.toList());
+            out.print(this.exportList.toString().replace("[", "").replace("]", "").replace(", ", "\n"));
         } catch (FileNotFoundException e) {
             throw new ChecklstException("File not found! Please create a file at path ./data/checklst.txt");
         }
-    }
-
-    protected ArrayList<String> getCommandHistory() {
-        return this.commandHistory;
     }
 
 }
