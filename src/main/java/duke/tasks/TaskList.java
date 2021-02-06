@@ -44,7 +44,6 @@ public class TaskList {
         StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list:");
         int counter = 1;
         for (Task task : this.taskList) {
-            System.out.println(counter + ". " + task);
             stringBuilder.append("\n" + counter + ". " + task);
             counter++;
         }

@@ -15,8 +15,6 @@ public class Duke {
     private static final Storage STORAGE = new Storage(FILE_PATH);
     private static TaskList taskList;
 
-    private boolean isExit = false;
-
     /**
      * Gets input from the user via the GUI and processes it.
      */
@@ -25,7 +23,6 @@ public class Duke {
             Parser p = new Parser(taskList, STORAGE);
             Command c = p.parse(input);
             String output = c.execute();
-            this.isExit = c.isExit();
             return output;
         } catch (DukeException e) {
             return e.getMessage();
