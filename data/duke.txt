@@ -1,2 +1,1 @@
-T|0|hello world
-E|1|say hello|12/02/2020 1800
+E|1|say goodbye|12/02/2022 1900
