@@ -10,9 +10,9 @@ public class TodoTask extends Task {
     @Override
     public String toString() {
         if (this.isDone()) {
-            return "[T][X] " + task;
+            return "T||X " + task;
         } else {
-            return "[T][0] " + task;
+            return "T||0 " + task;
         }
     }
 }

@@ -14,24 +14,28 @@ public class DeadlineTask extends Task {
 
     String[] divideCommand = task.split(" ");
 
+    public LocalDate getDate(){
+        return this.date;
+    }
+
     @Override
     public String toString() {
-        String time = "";
+        String StringDate = "";
         for (int i = 4; i < divideCommand.length; i++) {
             if (i == divideCommand.length - 1) {
-                time += divideCommand[i];
+                StringDate += divideCommand[i];
             } else {
-                time += divideCommand[i] + " ";
+                StringDate += divideCommand[i] + " ";
             }
         }
-        date = LocalDate.parse(time);
+        date = LocalDate.parse(StringDate);
         String dateFormat = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String taskRepresent = divideCommand[1] + " " + divideCommand[2]
                 + " (" + divideCommand[3].substring(1) + ": " + dateFormat + ")";
         if (this.isDone()) {
-            return "[D][X] " + taskRepresent;
+            return "D||X " + taskRepresent;
         } else {
-            return "[D][0] " + taskRepresent;
+            return "D||0 " + taskRepresent;
         }
     }
 }

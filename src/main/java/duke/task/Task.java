@@ -25,9 +25,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone()) {
-            return "[X] " + this.task;
+            return "X " + this.task;
         } else {
-            return "[0] " + this.task;
+            return "0 " + this.task;
         }
     }
 }
