@@ -53,92 +53,158 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException,
             DateTimeParseException, StringIndexOutOfBoundsException, IOException {
-        Task temp;
-        String description;
-        String dateTime;
 
-        if (checkCommands[0].equals("todo") || checkCommands[0].equals("deadline")
-                || checkCommands[0].equals("event")) {
+        Task task = createTasks();
+        tasks.add(task);
+        storage.save(tasks);
+        return ui.getAddTaskString(tasks, task);
+    }
 
+    private Task createTasks() throws DukeException,
+            DateTimeParseException, StringIndexOutOfBoundsException {
+        if (isValidCommand()) {
+          
             assert checkCommands.length > 0;
-
-            if (checkCommands.length == 1) {
+          
+            if (hasNoDescription()) {
                 throw new DescriptionNotFoundException();
             }
-            if (checkCommands[0].equals("todo")) {
-                description = fullCommand.substring(5).trim();
-                temp = new TodoTask(description);
-            } else if (checkCommands[0].equals("deadline")) {
-                int index = fullCommand.indexOf("/by");
-                if (index == -1) {
-                    throw new DateTimeNotFoundException();
-                }
-
-                description = fullCommand.substring(9, index).trim();
-                if (description.isEmpty()) {
-                    throw new DescriptionNotFoundException();
-                }
-
-                dateTime = fullCommand.substring(index + 3).trim();
-                if (dateTime.isEmpty()) {
-                    throw new DateTimeNotFoundException();
-                }
-
-                String dateString = dateTime.substring(0, 10);
-                LocalDate date = LocalDate
-                        .parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                String timeString = dateTime.substring(10).trim();
-                if (timeString.isEmpty()) {
-                    temp = new DeadlineTask(description, date);
-                } else {
-                    LocalTime time = LocalTime
-                            .parse(dateTime.substring(10).trim(), DateTimeFormatter.ofPattern("HHmm"));
-                    temp = new DeadlineTask(description, date, time);
-                }
+            if (isTodoCommand()) {
+                return createTodoTask();
+            } else if (isDeadlineCommand()) {
+                return createDeadlineTask();
             } else {
-                int index = fullCommand.indexOf("/at");
-                if (index == -1) {
-                    throw new DateTimeNotFoundException();
-                }
-
-                description = fullCommand.substring(6, index).trim();
-                if (description.isEmpty()) {
-                    throw new DescriptionNotFoundException();
-                }
-
-                dateTime = fullCommand.substring(index + 3).trim();
-                if (dateTime.isEmpty()) {
-                    throw new DateTimeNotFoundException();
-                }
-
-                String dateString = dateTime.substring(0, 10);
-                LocalDate date = LocalDate
-                        .parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                String timeString = dateTime.substring(10).trim();
-                if (timeString.isEmpty()) {
-                    temp = new EventTask(description, date);
-                } else {
-                    String startTimeString = timeString.substring(0, 4);
-                    LocalTime startTime = LocalTime
-                            .parse(startTimeString, DateTimeFormatter.ofPattern("HHmm"));
-                    String endTimeString = timeString.substring(4).trim();
-                    if (endTimeString.isEmpty()) {
-                        temp = new EventTask(description, date, startTime);
-                    } else {
-                        LocalTime endTime = LocalTime
-                                .parse(endTimeString, DateTimeFormatter.ofPattern("HHmm"));
-                        if (endTime.compareTo(startTime) < 0) {
-                            throw new TimeDurationInvalidException();
-                        }
-                        temp = new EventTask(description, date, startTime, endTime);
-                    }
-                }
+                return createEventTask();
             }
         } else {
             throw new CommandNotValidException();
         }
-        tasks.add(temp);
-        storage.save(tasks);
-        return ui.getAddTaskString(tasks, temp);
+    }
+
+    private boolean isValidCommand() {
+        return checkCommands[0].equals("todo") || checkCommands[0].equals("deadline")
+                || checkCommands[0].equals("event");
+    }
+
+    private boolean hasNoDescription() {
+        return checkCommands.length == 1;
+    }
+
+    private boolean isTodoCommand() {
+        return checkCommands[0].equals("todo");
+    }
+
+    private boolean isDeadlineCommand() {
+        return checkCommands[0].equals("deadline");
+    }
+
+    private TodoTask createTodoTask() {
+        String description = fullCommand.substring(5).trim();
+        return new TodoTask(description);
+    }
+
+    private DeadlineTask createDeadlineTask() throws
+            DateTimeNotFoundException, DescriptionNotFoundException {
+        int timeIndex = fullCommand.indexOf("/by");
+        if (hasNoDateTime(timeIndex)) {
+            throw new DateTimeNotFoundException();
+        }
+
+        String description = fullCommand.substring(9, timeIndex).trim();
+        if (hasNoDescription(description)) {
+            throw new DescriptionNotFoundException();
+        }
+
+        String dateTime = fullCommand.substring(timeIndex + 3).trim();
+        if (hasNoDateTime(dateTime)) {
+            throw new DateTimeNotFoundException();
+        }
+
+        String dateString = dateTime.substring(0, 10);
+        LocalDate date = LocalDate
+                .parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String timeString = dateTime.substring(10).trim();
+        if (timeString.isEmpty()) {
+            return new DeadlineTask(description, date);
+        } else {
+            return createDeadlineTaskWithTime(dateTime, description, date);
+        }
+    }
+
+    private DeadlineTask createDeadlineTaskWithTime(String dateTime, String description, LocalDate date) {
+        LocalTime time = LocalTime
+                .parse(dateTime.substring(10).trim(), DateTimeFormatter.ofPattern("HHmm"));
+        return new DeadlineTask(description, date, time);
+    }
+
+    private boolean hasNoDateTime(int timeIndex) {
+        return timeIndex == -1;
+    }
+
+    private boolean hasNoDateTime(String dateTime) {
+        return dateTime.isEmpty();
+    }
+
+    private boolean hasNoDescription(String description) {
+        return description.isEmpty();
+    }
+
+    private EventTask createEventTask() throws
+            DateTimeNotFoundException, DescriptionNotFoundException, TimeDurationInvalidException {
+        int timeIndex = fullCommand.indexOf("/at");
+        if (hasNoDateTime(timeIndex)) {
+            throw new DateTimeNotFoundException();
+        }
+
+        String description = fullCommand.substring(6, timeIndex).trim();
+        if (hasNoDescription(description)) {
+            throw new DescriptionNotFoundException();
+        }
+
+        String dateTime = fullCommand.substring(timeIndex + 3).trim();
+        if (hasNoDateTime(dateTime)) {
+            throw new DateTimeNotFoundException();
+        }
+
+        String dateString = dateTime.substring(0, 10);
+        LocalDate date = LocalDate
+                .parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String timeString = dateTime.substring(10).trim();
+        if (hasNoTime(timeString)) {
+            return new EventTask(description, date);
+        } else {
+            return createEventTaskWithTime(timeString, description, date);
+        }
+    }
+
+    private boolean hasNoTime(String timeString) {
+        return timeString.isEmpty();
+    }
+
+    private EventTask createEventTaskWithTime(String timeString, String description, LocalDate date)
+            throws TimeDurationInvalidException {
+        String startTimeString = timeString.substring(0, 4);
+        LocalTime startTime = LocalTime
+                .parse(startTimeString, DateTimeFormatter.ofPattern("HHmm"));
+        String endTimeString = timeString.substring(4).trim();
+        if (endTimeString.isEmpty()) {
+            return createEventTaskWithStartTime(description, date, startTime);
+        } else {
+            return createEventTaskWithEndTime(description, endTimeString, date, startTime);
+        }
+    }
+
+    private EventTask createEventTaskWithStartTime(String description, LocalDate date, LocalTime startTime) {
+        return new EventTask(description, date, startTime);
+    }
+
+    private EventTask createEventTaskWithEndTime(String description,
+            String endTimeString, LocalDate date, LocalTime startTime) throws TimeDurationInvalidException {
+        LocalTime endTime = LocalTime
+                .parse(endTimeString, DateTimeFormatter.ofPattern("HHmm"));
+        if (endTime.compareTo(startTime) < 0) {
+            throw new TimeDurationInvalidException();
+        }
+        return new EventTask(description, date, startTime, endTime);
     }
 }
