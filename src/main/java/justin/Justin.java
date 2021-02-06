@@ -1,3 +1,5 @@
+package justin;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -19,17 +21,17 @@ public class Justin {
     public void run() {
 
         /*
-         * Justin is a chatbot that help users plan and organise tasks
-         * Justin stands for JUSt a TImetable(New) : JUSTIN
+         * justin.Justin is a chatbot that help users plan and organise tasks
+         * justin.Justin stands for JUSt a TImetable(New) : JUSTIN
          *
-         * Justin is able to create and manage new tasks
+         * justin.Justin is able to create and manage new tasks
          *   1) Mark tasks off as done
          *   2) Set tasks as To Do's - <keyword> <name>
-         *   3) Set tasks as Deadline's - keyword  : <keyword> <name> /by <day>
-         *   4) Set tasks as Event's - keyword : <keyword> <name> /at <day time>
+         *   3) Set tasks as justin.Deadline's - keyword  : <keyword> <name> /by <day>
+         *   4) Set tasks as justin.Event's - keyword : <keyword> <name> /at <day time>
          *   5) Supports deletion of completed tasks with command delete <int>
          *
-         * Justin also supports viewing the entire tasks list with the command list - keyword : <keyword>
+         * justin.Justin also supports viewing the entire tasks list with the command list - keyword : <keyword>
          * To end off the session user can input bye to terminate program - keyword : <keyword>
          *
          * @author Goh Wei Kiat aka github : mrweikiat

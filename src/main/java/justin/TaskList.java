@@ -1,3 +1,10 @@
+package justin;
+
+import justin.Deadline;
+import justin.Event;
+import justin.JustinException;
+import justin.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -136,7 +143,7 @@ public class TaskList {
 
     public ArrayList<String> find(String key) {
 
-        boolean isFound = false; // if any tasks matches description we can return a TaskList
+        boolean isFound = false; // if any tasks matches description we can return a justin.TaskList
         ArrayList<String> holder = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {

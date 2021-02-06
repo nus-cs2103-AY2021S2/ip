@@ -1,3 +1,7 @@
+package justin;
+
+import justin.Task;
+
 public class Todo extends Task {
 
     public Todo(String description) {

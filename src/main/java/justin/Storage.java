@@ -1,3 +1,8 @@
+package justin;
+
+import justin.Deadline;
+import justin.Event;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -141,6 +146,7 @@ public class Storage {
             System.out.println("Unable to write to file justin.txt");
         }
     }
+
 
 
 }

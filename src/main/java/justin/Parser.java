@@ -1,3 +1,7 @@
+package justin;
+
+import justin.JustinException;
+
 public class Parser {
 
     private String fullText;
