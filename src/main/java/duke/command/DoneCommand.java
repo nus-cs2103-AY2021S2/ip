@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
         } else {
             try {
                 taskManager.completeTask(this.index);
-                Storage.saveTasks(taskManager.getTasks());
+                Storage.save(taskManager.getTasks());
                 return ui.constructDoneMessage(this.index, taskManager.getTask(this.index));
             } catch (DukeException e) {
                 throw new DukeCommandException("done", String.valueOf(index), e.getMessage());

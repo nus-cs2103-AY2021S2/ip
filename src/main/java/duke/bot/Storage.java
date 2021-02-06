@@ -20,7 +20,37 @@ import duke.task.ToDo;
 /** An utility class that provide read/write related operations */
 public class Storage {
     /** Directory path of the save file */
-    private static final String PATH = "data/duke.txt";
+    private static final String FOLDER_NAME = "data";
+    private static final String FILE_NAME = "duke.txt";
+    private static final String PATH = FOLDER_NAME + "/" + FILE_NAME;
+
+    private static void setupSaveFolder() {
+        File folder = new File(FOLDER_NAME);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+    }
+
+    private static void setupSaveFile() throws DukeSaveException {
+        try {
+            File file = new File(PATH);
+            new PrintWriter(PATH).close();
+        } catch (IOException e) {
+            throw new DukeSaveException("Failed to setup save file");
+        }
+    }
+
+    private static void writeTasksToSave(List<Task> tasks) throws DukeSaveException {
+        try {
+            FileWriter writer = new FileWriter(PATH);
+            for (Task task : tasks) {
+                writer.write(task.toSaveInfoString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeSaveException("Failed to write to save file");
+        }
+    }
 
     /**
      * Saves all tasks in the current session into the hard disk
@@ -28,27 +58,10 @@ public class Storage {
      * @param tasks A list of tasks
      * @throws DukeSaveException if there is an issue writing into the hard disk
      */
-    public static void saveTasks(List<Task> tasks) throws DukeSaveException {
-        // Create the 'data' folder if missing
-        File dir = new File("data");
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-
-        File file = new File(PATH);
-        try {
-            // Erase any existing list in the file
-            new PrintWriter(PATH).close();
-
-            // Save each task as a row in the file
-            FileWriter writer = new FileWriter(PATH);
-            for (Task task : tasks) {
-                writer.write(task.toSaveInfoString() + "\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            throw new DukeSaveException("Issue with IO while saving tasks");
-        }
+    public static void save(List<Task> tasks) throws DukeSaveException {
+        setupSaveFolder();
+        setupSaveFile();
+        writeTasksToSave(tasks);
     }
 
     /**
@@ -58,11 +71,7 @@ public class Storage {
      * @throws DukeLoadException if there is an issue reading tasks from the hard disk
      */
     public static void loadTasksTo(TaskManager taskManager) throws DukeLoadException {
-        // Create the 'data' folder if missing
-        File dir = new File("data");
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
+        setupSaveFolder();
 
         // Load the save file or create one if missing
         File file = new File(PATH);

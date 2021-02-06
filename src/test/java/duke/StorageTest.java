@@ -47,7 +47,7 @@ public class StorageTest {
         tasks.add(new Event("DESCRIPTION 3", dateTime, dateTime));
 
         try {
-            Storage.saveTasks(tasks);
+            Storage.save(tasks);
         } catch(DukeSaveException e) {
             assumeFalse(true, "Failed to save tasks");
         }
