@@ -72,6 +72,7 @@ public class Parser {
 
     private Command parseFind(String line) throws CommandException {
         String[] ar = line.split(" ");
+        assert ar.length > 0;
         if (ar.length > 2) {
             throw new CommandException("I can only handle one keyword!");
         } else if (ar.length == 1) {
@@ -83,6 +84,7 @@ public class Parser {
 
     private Command parseDone(String line) throws CommandException {
         String[] ar = line.split(" ", 2);
+        assert ar.length > 0;
         if (ar.length == 1) {
             throw new CommandException("Which task are you done with?");
         }
@@ -93,6 +95,7 @@ public class Parser {
 
     private Command parseDelete(String line) throws CommandException {
         String[] ar = line.split(" ", 2);
+        assert ar.length > 0;
         if (ar.length == 1) {
             throw new CommandException("Which task are you deleting?");
         }
@@ -103,6 +106,7 @@ public class Parser {
 
     private Command parseTodo(String line) throws CommandException {
         String[] ar = line.split(" ", 2);
+        assert ar.length > 0;
         if (ar.length == 1) {
             throw new CommandException("I can't add an empty task to the list!");
         }
@@ -112,6 +116,7 @@ public class Parser {
 
     private Command parseDeadline(String line) throws CommandException {
         String[] ar = line.split(" ", 2);
+        assert ar.length > 0;
         if (ar.length == 1) {
             throw new CommandException("I can't add an empty task to the list!");
         }
@@ -130,6 +135,7 @@ public class Parser {
 
     private Command parseEvent(String line) throws CommandException {
         String[] ar = line.split(" ", 2);
+        assert ar.length > 0;
         if (ar.length == 1) {
             throw new CommandException("I can't add an empty task to the list!");
         }
