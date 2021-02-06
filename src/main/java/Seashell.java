@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Seashell {
 
     private ArrayList<Task> taskList;
-    private final static String HELP_TEXT = """
+    public final static String HELP_TEXT = """
             Welcome to Seashells! You can start by trying out some of these commands
             
             todo <task name> - add a todo task
@@ -24,28 +24,40 @@ public class Seashell {
         System.out.println("Hello I'm Seashell, a task manager! What can I do for you? Type \"help\" for more " +
                 "information on the commands you can give me!");
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        Parser parser = new Parser();
+        boolean isExit = false;
+        while (!isExit) {
             String command = sc.nextLine();
             try {
-                if (command.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-                } else if (command.stripTrailing().equals("list")) {
-                    listTasks(taskList);
-                } else if (command.startsWith("done ")) {
-                    done(command, taskList);
-                } else if (command.startsWith("delete ")) {
-                    delete(command, taskList);
-                } else if (command.startsWith("todo")) {
-                    createTodo(command, taskList);
-                } else if (command.startsWith("deadline")) {
-                    createDeadline(command, taskList);
-                } else if (command.startsWith("event")) {
-                    createEvent(command, taskList);
-                } else if (command.stripTrailing().equals("help")) {
-                    System.out.println(HELP_TEXT);
-                } else {
-                    throw new SeashellException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                CommandType commandType = parser.parse(command);
+                switch (commandType) {
+                    case EXIT:
+                        System.out.println("Bye. Hope to see you again soon!");
+                        isExit = true;
+                        break;
+                    case LIST:
+                        listTasks(taskList);
+                        break;
+                    case DONE:
+                        done(command, taskList);
+                        break;
+                    case DELETE:
+                        delete(command, taskList);
+                        break;
+                    case TODO:
+                        createTodo(command, taskList);
+                        break;
+                    case DEADLINE:
+                        createDeadline(command, taskList);
+                        break;
+                    case EVENT:
+                        createEvent(command, taskList);
+                        break;
+                    case HELP:
+                        System.out.println(HELP_TEXT);
+                        break;
+                    case INVALID:
+                        throw new SeashellException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (SeashellException e) {
                 System.out.println(e);
