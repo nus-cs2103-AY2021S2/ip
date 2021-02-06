@@ -42,24 +42,24 @@ public class Parser {
         
         boolean incompleteCommand = parsedAction.length <= 1;
         
+        /** Guard Clauses to check if input is valid depending on the user input value */
         if (aTaskCommandEntered && incompleteCommand) {
-            
             throw new MissingTaskInputException(parsedAction[0]);
-            
-        } else if (parsedAction[0].equals("done") && incompleteCommand) {
-
+        }
+        
+        if (parsedAction[0].equals("done") && incompleteCommand) {
             throw new DukeIncompleteInputException("done not completed");
-
-        } else if (parsedAction[0].equals("delete") && incompleteCommand) {
-
+        }
+        
+        if (parsedAction[0].equals("delete") && incompleteCommand) {
             throw new DukeIncompleteInputException("delete not completed");
-
-        } else if (parsedAction[0].equals("check") && incompleteCommand) {
-
+        }
+        
+        if (parsedAction[0].equals("check") && incompleteCommand) {
             throw new DukeIncompleteInputException("check not completed");
-
-        } else if (parsedAction[0].equals("find") && incompleteCommand) {
-
+        }
+        
+        if (parsedAction[0].equals("find") && incompleteCommand) {
             throw new DukeIncompleteInputException("find not completed");
         }
 
