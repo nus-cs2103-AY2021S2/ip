@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -125,9 +126,21 @@ public class TaskList {
         return Tasks.get(idx);
     }
 
-    public String getReminders(){
+    public String getReminders() {
         String out = "These are the due tasks: \n";
-
+        TaskList dues = new TaskList();
+        LocalDate today = LocalDate.now();
+        for (Task t : Tasks) {
+            if (!t.isDone()) {
+                if (t.getType().toLowerCase().equals("deadline")
+                        || t.getType().toLowerCase().equals("events")) {
+                    if(today.compareTo(t.getDate()) >= 0){
+                        dues.silentAdd(t);
+                    }
+                }
+            }
+        }
+        out += dues.getAllTasks();
         return out;
     }
 
