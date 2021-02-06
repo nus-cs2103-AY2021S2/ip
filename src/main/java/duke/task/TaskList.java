@@ -79,7 +79,7 @@ public class TaskList {
      * @return Message upon completion of the task
      */
     public String DeleteTask(int idx) {
-        assert idx > 0 : "Invalid index!";
+        assert idx > 0 : "Invalid Index!";
         String out = "";
         if (idx <= Tasks.size()) {
             out += "Noted. Item removed: \n" + Tasks.get(idx - 1) + "\n";
@@ -98,7 +98,7 @@ public class TaskList {
      * @return Message upon the completion of task
      */
     public String markAsDone(int idx) {
-        assert idx > 0 : "Invalid index!";
+        assert idx > 0 : "Invalid Index!";
         String out;
         if (idx <= Tasks.size()) {
             Tasks.get(idx - 1).markDone();
@@ -125,7 +125,7 @@ public class TaskList {
      * @return task at idx
      */
     public Task getTask(int idx) {
-        assert idx >= 0 : "Invalid index!";
+        assert idx >= 0 : "Invalid Index!";
         return Tasks.get(idx);
     }
 
