@@ -14,6 +14,7 @@ public class Main extends Application {
     /** Constant storing database directory path */
     private static final String DATABASE_DIRECTORY_PATH = "data/";
 
+    /** Create private instance of Duke on init */
     private Duke duke = new Duke(DATABASE_FILE_PATH, DATABASE_DIRECTORY_PATH);
 
     @Override

@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +8,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import duke.Duke;
+
+import java.util.concurrent.TimeUnit;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -45,11 +48,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        // duke getResponse returns response from Duke's logic
         String response = duke.getResponse(input);
+        // add response and input to DialogBox
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        // clear user input
         userInput.clear();
     }
 }
