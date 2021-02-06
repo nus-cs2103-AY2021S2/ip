@@ -17,7 +17,7 @@ public class AddCommand extends Command {
      * @param storage the storage instance used to save files into internal storage
      */
     @Override
-    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
+    public String execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // Add task to task list
         taskList.addTask(task);
 
@@ -25,7 +25,7 @@ public class AddCommand extends Command {
         storage.saveTasksToStorage(taskList);
 
         // Print success message
-        Ui.printTaskAddedMessage(task);
+        return Ui.taskAddedMessage(task);
     }
 
 }

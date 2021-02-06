@@ -17,8 +17,8 @@ public class InvalidCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
+    public String execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // print invalid task message
-        Ui.printInvalidCommandMessage();
+        return Ui.invalidCommandMessage();
     }
 }

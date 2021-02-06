@@ -41,60 +41,60 @@ public class Ui {
      * Prints custom message when tasks are added
      * @param task
      */
-    public static void printTaskAddedMessage(Task task) {
-        System.out.println(formatMessage("Got it. I've added this task:\n"
-                + task + "\n" + Task.getNumOfTasksString()));
+    public static String taskAddedMessage(Task task) {
+        return formatMessage("Got it. I've added this task:\n"
+                + task + "\n" + Task.getNumOfTasksString());
     }
 
     /**
      * Prints custom message when tasks are removed
      * @param task
      */
-    public static void printTaskRemovedMessage(Task task) {
-        System.out.println(formatMessage("The following task has been removed:\n"
-                + task + "\n" + Task.getNumOfTasksString()));
+    public static String taskRemovedMessage(Task task) {
+        return formatMessage("The following task has been removed:\n"
+                + task + "\n" + Task.getNumOfTasksString());
     }
 
     /**
      * Prints custom message when tasks are set to done
      * @param task
      */
-    public static void printTaskDoneMessage(Task task) {
-        System.out.println(formatMessage("You have completed the following task:\n"
-                + task + "\n" + "Keep up the good work!"));
+    public static String taskDoneMessage(Task task) {
+        return formatMessage("You have completed the following task:\n"
+                + task + "\n" + "Keep up the good work!");
     }
 
     /**
      * Prints custom error message when an invalid command is received
      */
-    public static void printInvalidCommandMessage() {
-        System.out.println(formatMessage("Please enter a valid command! \n"
-                + "Type help for a list of commands"));
+    public static String invalidCommandMessage() {
+        return formatMessage("Please enter a valid command! \n"
+                + "Type help for a list of commands");
     }
 
     /**
      * Prints custom message when Duke is shutting down
      */
-    public static void printDukeExitMessage() {
-        System.out.println(formatMessage("Thanks for using Duke, have a great day ahead!"));
+    public static String dukeExitMessage() {
+        return formatMessage("Thanks for using Duke, have a great day ahead!");
     }
 
-    public static void printMatchingList(List<Task> taskList) {
+    public static String matchingList(List<Task> taskList) {
         String taskListString = "Here are the matching results on your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             String taskString = (i + 1) + ". " + taskList.get(i);
             taskListString = taskListString + taskString
                     + (i == taskList.size() - 1 ? "" : "\n");
         }
-        System.out.println(formatMessage(taskListString));
+        return formatMessage(taskListString);
     }
 
     /**
      * Prints information to user
      * @param message the message to print
      */
-    public static void printMessage(String message) {
-        System.out.println(formatMessage(message));
+    public static String message(String message) {
+        return formatMessage(message);
     }
 
     /**
@@ -106,8 +106,6 @@ public class Ui {
     }
 
     private static String formatMessage(String str) {
-        return "____________________________________________________________"
-                + "\n" + str + "\n"
-                + "____________________________________________________________\n";
+        return str;
     }
 }

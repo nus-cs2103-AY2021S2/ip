@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
      * @param storage the storage instance used to save files into internal storage
      */
     @Override
-    public void execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
+    public String execute(String taskDescription, Task task, TaskList taskList, Storage storage) {
         // delete task
         taskList.removeTask(task);
 
@@ -25,6 +25,6 @@ public class DeleteCommand extends Command {
         storage.saveTasksToStorage(taskList);
 
         // print message
-        Ui.printTaskRemovedMessage(task);
+        return Ui.taskRemovedMessage(task);
     }
 }
