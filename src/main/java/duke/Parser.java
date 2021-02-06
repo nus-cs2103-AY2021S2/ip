@@ -13,15 +13,11 @@ import duke.task.Task;
  */
 public class Parser {
     protected static String task;
-    protected String userInput;
-
     /**
      * Constructor for Parser class.
      *
-     * @param userInput User input in the command line.
      */
-    public Parser(String userInput) {
-        this.userInput = userInput;
+    public Parser() {
     }
 
     /**
@@ -29,18 +25,8 @@ public class Parser {
      *
      * @return An array of Strings of the parsed user input.
      */
-    public String[] parseUserInput() {
+    public String[] parseUserInput(String userInput) {
         return userInput.split(" ");
-    }
-
-    /**
-     * Retrieves the user's task action by accessing
-     * the array of parsed user input Strings.
-     *
-     * @return User command task action.
-     */
-    public String getUserAction() {
-        return userInput.split(" ")[0];
     }
 
     /**
@@ -51,7 +37,7 @@ public class Parser {
      * @throws InvalidTaskNumberException If the task number is outside the list range.
      * @throws EmptyDescriptionException If there is no description for the task action.
      */
-    public void checkUserInput(List<Task> list)
+    public void checkUserInput(List<Task> list, String userInput)
             throws MissingTaskNumberException,
             InvalidTaskNumberException,
             EmptyDescriptionException,

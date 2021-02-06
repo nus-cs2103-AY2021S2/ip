@@ -8,7 +8,6 @@ import duke.task.Task;
  * <code>Ui</code> class handles the interactions with the user.
  */
 public class Ui {
-
     /**
      * Constructor for Ui class.
      */
@@ -45,6 +44,7 @@ public class Ui {
             return "There is currently no task in your list.";
         } else {
             assert list.size() > 0: "List size must be greater than 0";
+
             String firstReply = "Here are the tasks in your list:\n";
             StringBuilder stringBuilder = new StringBuilder();
 
