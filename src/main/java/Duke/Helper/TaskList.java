@@ -119,6 +119,7 @@ public class TaskList {
      * @return A list of tasks containing the keyword.
      */
     public ArrayList<Task> findTask(String... keywords) {
+        assert keywords.length != 0 : "There must be at least 1 keyword";
         ArrayList<Task> result = new ArrayList<>();
         for (String keyword : keywords) {
             for (Task task : list) {
@@ -137,7 +138,8 @@ public class TaskList {
      * @return a 3x2 matrix represent the statistics.
      */
     public int[][] statistics() {
-        int[][] result = new int[3][2]; //td: first row, deadline: second row, event: third row; done: second col, not done: first col
+        int[][] result = new int[3][2];
+        //td: first row, deadline: second row, event: third row; done: second col, not done: first col
         for (Task task : list) {
             int row = -1;
             int col = task.getStatusNumber();
@@ -145,7 +147,8 @@ public class TaskList {
                 row = 0;
             } else if (task.getType().equals("D")) {
                 row = 1;
-            } else if (task.getType().equals("E")) {
+            } else {
+                assert task.getType().equals("E");
                 row = 2;
             }
             result[row][col] += 1;
