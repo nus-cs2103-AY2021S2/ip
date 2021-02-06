@@ -58,7 +58,7 @@ public class Storage {
      * @param taskList list of all tasks.
      * @throws IOException if unable to write to file completely.
      */
-    public void writeToFile(TaskList taskList) throws IOException {
+    public void writeToFile(TaskList taskList) throws IOException, InvalidTaskTypeException {
         List<String> allStringTasks = FileTaskStringConverter.allTaskToAllString(taskList.getList());
         FileWriter fileWriter = new FileWriter(this.filepath);
 

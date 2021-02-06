@@ -21,7 +21,7 @@ public class FileTaskStringConverter {
      * @param list List of Tasks to convert to Strings.
      * @return List of Strings.
      */
-    public static List<String> allTaskToAllString(List<Task> list) {
+    public static List<String> allTaskToAllString(List<Task> list) throws InvalidTaskTypeException {
         List<String> result = new ArrayList<>();
         for (Task t : list) {
             result.add(taskToString(t));
@@ -45,15 +45,17 @@ public class FileTaskStringConverter {
         return result;
     }
 
-    private static String taskToString(Task task) {
+    private static String taskToString(Task task) throws InvalidTaskTypeException {
         String done = task.isDone() ? "1" : "0";
 
         if (task instanceof ToDo) {
             return "T | " + done + " | " + task.getDescription();
         } else if (task instanceof Event) {
             return "E | " + done + " | " + task.getDescription() + " | " + ((Event) task).getDateToStore();
-        } else {
+        } else if (task instanceof Deadline) {
             return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDateToStore();
+        } else {
+            throw new InvalidTaskTypeException();
         }
     }
 

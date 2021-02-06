@@ -38,11 +38,11 @@ public class FindCommand extends Command {
             String noMatchingTaskMsg = "There are no tasks matching your input :(";
             return noMatchingTaskMsg;
         } else {
-            return printList(results).toString();
+            return listToString(results).toString();
         }
     }
 
-    private StringBuilder printList(List<Task> results) {
+    private StringBuilder listToString(List<Task> results) {
         StringBuilder stringBuilder = new StringBuilder("These are the search results:");
         int counter = 1;
         for (Task task : results) {

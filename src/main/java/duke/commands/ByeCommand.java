@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.io.IOException;
 
+import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.TaskList;
 import duke.utils.Storage;
 
@@ -22,17 +23,8 @@ public class ByeCommand extends Command {
             this.storage.writeToFile(this.taskList);
             String byeMsg = "Bye. Hope to see you again soon!";
             return byeMsg;
-        } catch (IOException e) {
+        } catch (IOException | InvalidTaskTypeException e) {
             return e.getMessage();
         }
-    }
-
-    /**
-     * Returns signal indicating to exit the program.
-     * @return boolean signal indicating to exit the program.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
     }
 }
