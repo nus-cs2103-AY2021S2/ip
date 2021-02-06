@@ -6,6 +6,7 @@ import exception.DukeException;
 import parser.Parser;
 import storage.DataStorage;
 import task.TaskList;
+import ui.FurtherAction;
 import ui.Ui;
 
 
@@ -52,6 +53,7 @@ public class Duke {
             }
             case "bye": {
                 ui.setResponse("Bye. Hope to see you again soon!");
+                ui.setNextAction(FurtherAction.EXIT);
                 shouldRun = false;
                 break;
             }
