@@ -1,4 +1,4 @@
-import DukeTools.*;
+import duke.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,95 +20,91 @@ public class Duke {
     }
 
     public void run() {
-//        Welcome Page
         ui.printIntro();
 
-//        Read Commands
-//        Scanner scan = new Scanner(System.in);
         String input = " ";
 
-//        Create Tools.Parser
         Parser parser = new Parser();
 
-        while(!input.equals("bye")) {
+        while (!input.equals("bye")) {
             parser.readLine();
             input = parser.read;
             String command = parser.getCommand(input);
 
             switch (command) {
-                case "bye":
-                    storage.save(taskList);
-                    ui.printBye();
-                    break;
+            case "bye":
+                storage.save(taskList);
+                ui.printBye();
+                break;
 
-                case "list":
-                    ui.printList(taskList);
-                    break;
+            case "list":
+                ui.printList(taskList);
+                break;
 
-                case "done":
-//                    Possible Error: index provided is out of bounds (NullPointerException
-                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    Task task = taskList.getSingleTask(index);
-                    task.markDone();
+            case "done":
+                // Possible Error: index provided is out of bounds (NullPointerException
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                Task task = taskList.getSingleTask(index);
+                task.markDone();
 
-                    ui.printDone(task);
-                    break;
+                ui.printDone(task);
+                break;
 
-                case "todo":
-                    try {
-                        String name = getTodoName(input);
-                        Todo todo = new Todo(name);
-                        taskList.addTask(todo);
-                        ui.printTask(todo, taskList.getSize());
-                    } catch(DukeException e) {
-                        e.printError("Come On Fella! Your ToDo description cannot be empty!");
-                    }
-                    break;
+            case "todo":
+                try {
+                    String name = getTodoName(input);
+                    Todo todo = new Todo(name);
+                    taskList.addTask(todo);
+                    ui.printTask(todo, taskList.getSize());
+                } catch (DukeException e) {
+                    e.printError("Come On Fella! Your ToDo description cannot be empty!");
+                }
+                break;
 
-                case "deadline":
-                    try{
-                        String name = getEventOrDeadlineName(input);
-                        String by = getEventOrDeadlineAttribute(input);
-                        LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                        Deadline deadline = new Deadline(name, date);
-                        taskList.addTask(deadline);
-                        ui.printTask(deadline, taskList.getSize());
+            case "deadline":
+                try {
+                    String name = getEventOrDeadlineName(input);
+                    String by = getEventOrDeadlineAttribute(input);
+                    LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    Deadline deadline = new Deadline(name, date);
+                    taskList.addTask(deadline);
+                    ui.printTask(deadline, taskList.getSize());
 
-                    } catch (DukeException e) {
-                        e.printError("Hmm... You are either lacking a name or /by details!");
-                    }
-                    break;
+                } catch (DukeException e) {
+                    e.printError("Hmm... You are either lacking a name or /by details!");
+                }
+                break;
 
-                case "event":
-                    try {
-                        String name = getEventOrDeadlineName(input);
-                        String at = getEventOrDeadlineAttribute(input);
-                        Event event = new Event(name,at);
-                        taskList.addTask(event);
-                        ui.printTask(event, taskList.getSize());
+            case "event":
+                try {
+                    String name = getEventOrDeadlineName(input);
+                    String at = getEventOrDeadlineAttribute(input);
+                    Event event = new Event(name,at);
+                    taskList.addTask(event);
+                    ui.printTask(event, taskList.getSize());
 
-                    } catch (DukeException e) {
-                        e.printError("Hmm... You are either lacking a name or /at details!");
-                    }
-                    break;
+                } catch (DukeException e) {
+                    e.printError("Hmm... You are either lacking a name or /at details!");
+                }
+                break;
 
-                case "delete":
-                    int i = Integer.parseInt(input.split(" ")[1]) - 1;
-                    ui.printDelete(taskList.getSingleTask(i), taskList.getSize()-1);
-                    taskList.deleteTask(i);
-                    break;
+            case "delete":
+                int i = Integer.parseInt(input.split(" ")[1]) - 1;
+                ui.printDelete(taskList.getSingleTask(i), taskList.getSize()-1);
+                taskList.deleteTask(i);
+                break;
 
-                default:
-//                    Does not exactly throw an exception*
-                    ui.printUnknownCommand();
-                    break;
+            default:
+                //Does not exactly throw an exception*
+                ui.printUnknownCommand();
+                break;
             }
         }
 
     }
 
     public static void main(String[] args) {
-//        filePath has been hard-coded: /data/<filename>
+        // filePath has been hard-coded: /data/<filename>
         new Duke("/data/modoc_tm.txt").run();
     }
 

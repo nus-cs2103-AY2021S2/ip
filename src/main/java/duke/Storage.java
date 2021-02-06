@@ -1,4 +1,4 @@
-package DukeTools;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -52,7 +52,7 @@ public class Storage {
         return result;
     }
 
-//    Currently hard-coded into position
+    // Currently hard-coded into position
     public void save(TaskList tasks) {
         String currDir = System.getProperty("user.dir");
         String expectedDir = currDir + "/data";

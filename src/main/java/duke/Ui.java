@@ -1,4 +1,4 @@
-package DukeTools;
+package duke;
 
 public class Ui {
 

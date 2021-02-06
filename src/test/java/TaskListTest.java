@@ -1,5 +1,5 @@
-import DukeTools.Task;
-import DukeTools.TaskList;
+import duke.Task;
+import duke.TaskList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
