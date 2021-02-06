@@ -22,12 +22,11 @@ public class DeleteCommand extends Command {
      * Deletes task at index idx from taskList
      *
      * @param taskList
-     * @param ui
      * @param storage
      * @throws DukeException
      */
     public String execute(TaskList taskList, Storage storage) throws DukeException {
-        assert idx >= 0: "Index should be non-negative";
+        assert idx >= 0 : "Index should be non-negative";
         Task deleted = taskList.remove(idx);
         storage.write(taskList.toDataString());
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",

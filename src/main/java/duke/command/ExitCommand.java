@@ -13,7 +13,6 @@ public class ExitCommand extends Command {
      * Exits programme
      *
      * @param taskList
-     * @param ui
      * @param storage
      * @throws DukeException
      */
