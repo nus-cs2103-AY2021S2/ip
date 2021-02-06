@@ -2,6 +2,7 @@ package tasklist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import tasks.DukeTask;
 
@@ -44,20 +45,16 @@ public class TaskList {
         this.list.remove(index - 1);
     }
 
-
     /**
      * Returns the size of the TaskList.
      *
      * @return Number of DukeTasks in the list.
      */
     public List<DukeTask> find(String word) {
-        List<DukeTask> finder = new ArrayList<>();
-        for (DukeTask task : this.list) {
-            if (task.getName().contains(word)) {
-                finder.add(task);
-            }
-        }
-        return finder;
+        return this.list.stream()
+                .filter(x -> x.contain(word))
+                .collect(Collectors
+                .toList());
     }
 
     public int size() {

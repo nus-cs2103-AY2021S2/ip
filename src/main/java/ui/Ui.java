@@ -2,6 +2,7 @@ package ui;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import tasklist.TaskList;
 import tasks.DukeTask;
@@ -126,14 +127,15 @@ public class Ui {
      * @return the String output for this command.
      */
     public String list(TaskList taskList) {
-        int i = 1;
-        String output = "";
-        output += "Here are the tasks in your list:\n";
-        for (DukeTask items : taskList.getList()) {
-            output += String.format("%d.%s\n", i, items);
-            i++;
-        }
-        return output;
+        AtomicInteger count = new AtomicInteger(1);
+        StringBuilder output = new StringBuilder( "Here are the tasks in your list:\n");
+
+        taskList.getList().stream().map(x -> "." + x.toString() + "\n")
+                .forEach(x -> {
+                    output.append(count.getAndIncrement());
+                    output.append(x);
+                });
+        return output.toString();
     }
 
     /**
@@ -143,14 +145,15 @@ public class Ui {
      * @return the String output for this command.
      */
     public String find(List<DukeTask> taskList) {
-        int i = 1;
-        String output = "";
-        output += "Here are the matching tasks in your list:\n";
-        for (DukeTask items : taskList) {
-            output += String.format("%d.%s", i, items);
-            i++;
-        }
-        return output;
+        AtomicInteger count = new AtomicInteger(1);
+        StringBuilder output = new StringBuilder( "Here are the matching tasks in your list:\n");
+
+        taskList.stream().map(x -> "." + x.toString() + "\n")
+                .forEach(x -> {
+                    output.append(count.getAndIncrement());
+                    output.append(x);
+                });
+        return output.toString();
     }
 
     /**
@@ -197,11 +200,9 @@ public class Ui {
      * @return the String output for this command.
      */
     public String emptyDetailsError(String tasktype) {
-        if (tasktype.equals("deadline")) {
-            return "☹ OOPS!!! The date of a deadline cannot be empty.\n";
-        } else {
-            return "☹ OOPS!!! The timing of an event cannot be empty.\n";
-        }
+        return tasktype.equals("deadline")
+                ? "☹ OOPS!!! The date of a deadline cannot be empty.\n"
+                : "☹ OOPS!!! The timing of an event cannot be empty.\n";
     }
 
     /**

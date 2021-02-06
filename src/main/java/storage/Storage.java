@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import exceptions.DukeException;
 import tasklist.TaskList;
@@ -117,11 +118,11 @@ public class Storage {
      * @param updatedList Current TaskList.
      */
     public void save(TaskList updatedList) {
-        List<String> lister = new ArrayList<>();
+        List<DukeTask> listOfTasks = updatedList.getList();
 
-        for (DukeTask dukes : updatedList.getList()) {
-            lister.add(dukes.formatDuke());
-        }
+        List<String> lister = listOfTasks.stream()
+                .map(x -> x.formatDuke())
+                .collect(Collectors.toList());
         try {
             Files.write(dukeTxt, lister);
         } catch (IOException e) {

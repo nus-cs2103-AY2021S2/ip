@@ -68,6 +68,10 @@ public class DukeTask {
     public String getName() {
         return this.name;
     }
+
+    public boolean contain(String word) {
+        return this.name.contains(word);
+    }
     @Override
     public String toString() {
         return this.type + this.getStatusIcon() + " " + this.name;
