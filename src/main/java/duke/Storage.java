@@ -87,7 +87,7 @@ public class Storage {
 
     /**
      * Writes user's task list into tasks.txt local file.
-     * If the task list isnt been able to be written into filePath, IOException thrown.
+     * If the task list is not been able to be written into filePath, IOException thrown.
      *
      * @param data : the user's task list
      */

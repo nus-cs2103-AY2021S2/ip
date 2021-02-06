@@ -13,11 +13,19 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE + "\nHello! I am Duke\n" + "What can I do for you?\n" + HORIZONTAL_RULE);
     }
 
+    public String getWelcomeGreetingString() {
+        return "\nHello! I am Duke\n" + "What can I do for you?\n";
+    }
+
     /**
      * Prints the exit message when user executes command to quit the duke application.
      */
     public void printExitMessage() {
         System.out.println("GoodBye. Hope to see you again soon!\n" + HORIZONTAL_RULE);
+    }
+
+    public String getExitMessageString() {
+        return "GoodBye. Hope to see you again soon!\n";
     }
 
     /**
@@ -39,6 +47,14 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    public String getPrintTaskListString(TaskList userList) {
+        String stringToBeReturned = "";
+        for (int i = 0; i < userList.getTaskListSize(); i++) {
+            stringToBeReturned += (i + 1) + "." + userList.getTask(i).toString();
+        }
+        return stringToBeReturned.length() == 0 ? "Your list is empty.\n" : stringToBeReturned + "\n";
+    }
+
     /**
      * Prints the message when a task is assigned as "done".
      *
@@ -55,11 +71,20 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    public String getPrintDoneTaskString(TaskList userTaskList, int taskNumber) {
+        String doneTaskString = "";
+        Task doneTask = userTaskList.getTask(taskNumber - 1);
+        doneTask.markAsDone();
+        doneTaskString += ("Nice! I've marked this task as done:\n" + "[" + doneTask.getStatusIcon() + "] \n" +
+                doneTask.getTaskDetail() + "\n");
+        return doneTaskString;
+    }
+
     /**
      * Prints the message when a task is added to the Task list.
      *
      * @param userTaskList Task list of the user.
-     * @param task         Task to be added to the Task list.
+     * @param task task to be added to the Task list.
      * @see TaskList
      * @see Task
      */
@@ -71,11 +96,21 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    public String getPrintAddedTaskString(TaskList userTaskList, Task task) {
+        String addedTaskString = "";
+        addedTaskString += "Got it. I've added this task:\n";
+        addedTaskString += task.toString() + "\n";
+        userTaskList.addTask(task);
+        addedTaskString += "Now you have " + (userTaskList.getTaskListSize()) + " tasks in the list.\n";
+        return addedTaskString;
+
+    }
+
     /**
      * Prints the message when task is deleted from Task List.
      *
      * @param userTaskList Task list of the user.
-     * @param taskNumber   Task to be added to the Task list.
+     * @param taskNumber Task to be added to the Task list.
      */
     public void printDeletedTask(TaskList userTaskList, int taskNumber) {
         Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
@@ -85,6 +120,15 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    public String getPrintDeletedTaskString(TaskList userTaskList, int taskNumber) {
+        Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
+        String deletedTaskString = "";
+        deletedTaskString += "Noted. I've removed this task\n";
+        deletedTaskString += taskToBeDeleted.toString() + "\n";
+        deletedTaskString += "Now you have " + (userTaskList.getTaskListSize()) + " tasks in the list.\n";
+        return deletedTaskString;
+    }
+
     public void printFoundTasks(TaskList tasksFound) {
         System.out.println("Here are the matching tasks in your list:");
         if (tasksFound.getTaskListSize() == 0) {
@@ -92,5 +136,12 @@ public class Ui {
         } else {
             this.printTaskList(tasksFound);
         }
+    }
+
+    public String getPrintFoundTasksString(TaskList tasksFound) {
+        String foundTasksString = "Here are the matching tasks in your list:\n";
+        return tasksFound.getTaskListSize() == 0
+                ? foundTasksString + "Sorry. No tasks found :-(\n"
+                : foundTasksString + getPrintTaskListString(tasksFound) + "\n";
     }
 }
