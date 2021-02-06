@@ -48,7 +48,10 @@ public class Events extends DukeTask {
      */
     public static String[] parseEvent(String datetime) {
         String[] days = datetime.split(" ", 2);
+        assert(days.length == 2);
+
         String[] time = days[1].split(" - ", 2);
+        assert(time.length == 2);
 
         return new String[]{days[0], time[0], time[1]};
     }

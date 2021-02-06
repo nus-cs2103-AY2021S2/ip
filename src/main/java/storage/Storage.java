@@ -18,15 +18,14 @@ import tasks.Events;
 import tasks.Todo;
 
 
-
 public class Storage {
 
     private final Path dataFolder = Paths.get(System.getProperty("user.dir"), "data");
     private final Path dukeTxt = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
-    private List<DukeTask> loadfile;
+    private List<DukeTask> loadFile;
 
     public Storage() {
-        this.loadfile = new ArrayList<>();
+        this.loadFile = new ArrayList<>();
     }
 
     public List<DukeTask> load() throws DukeException {
@@ -45,7 +44,6 @@ public class Storage {
             System.out.println("Nice! We found your load file!");
             System.out.println("Loading...\n");
         }
-
         File loadData = this.dukeTxt.toFile();
         return loadData;
     }
@@ -68,28 +66,28 @@ public class Storage {
                     case ("T"):
                         String[] info = lineData[1].split(" [|] ", 2);
                         if (info[0].equals("1")) {
-                            this.loadfile.add(new Todo(info[1], true));
+                            this.loadFile.add(new Todo(info[1], true));
                         } else {
-                            this.loadfile.add(new Todo(info[1], false));
+                            this.loadFile.add(new Todo(info[1], false));
                         }
                         break;
                     case ("D"):
                         String[] info2 = lineData[1].split(" [|] ", 3);
 
                         if (info2[0].equals("1")) {
-                            this.loadfile.add(new Deadlines(info2[1], true, info2[2]));
+                            this.loadFile.add(new Deadlines(info2[1], true, info2[2]));
                         } else {
-                            this.loadfile.add(new Deadlines(info2[1], false, info2[2]));
+                            this.loadFile.add(new Deadlines(info2[1], false, info2[2]));
                         }
                         break;
                     case ("E"):
                         String[] info3 = lineData[1].split(" [|] ", 3);
                         String[] information = Events.parseEvent(info3[2]);
                         if (info3[0].equals("1")) {
-                            this.loadfile.add(new Events(info3[1], true, information[0],
+                            this.loadFile.add(new Events(info3[1], true, information[0],
                                     information[1], information[2]));
                         } else {
-                            this.loadfile.add(new Events(info3[1], false, information[0],
+                            this.loadFile.add(new Events(info3[1], false, information[0],
                                     information[1], information[2]));
                         }
                         break;
@@ -105,7 +103,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("LoadFileError");
         }
-        return this.loadfile;
+        return this.loadFile;
     }
 
     /**
