@@ -36,10 +36,13 @@ public class Event extends Task {
         if (command.length == 1) {
             throw new DukeException("There's not enough information about your Event order!");
         }
+
         String[] args = command[1].split(" /at ", 2);
+
         if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()) {
             throw new DukeException("Looks like your Event order isn't complete...");
         }
+
         return new Event(args[0], DateTime.convertStringToDate(args[1]));
     }
 
