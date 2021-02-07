@@ -173,4 +173,28 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints tasks that match the given keyword.
+     *
+     * @param keyword Keyword to be matched to tasks.
+     */
+    public void printTasksWith(String keyword) {
+        List<Task> list = new ArrayList();
+        for (Task task : this.tasks) {
+            if (task.description.contains(keyword)) {
+                list.add(task);
+            }
+
+        }
+
+        if (list.size() == 0) {
+            System.out.println("There are no matching tasks with this keyword!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 1; i <= list.size(); i++) {
+                System.out.println(i + "." + list.get(i - 1));
+            }
+        }
+    }
+
 }
