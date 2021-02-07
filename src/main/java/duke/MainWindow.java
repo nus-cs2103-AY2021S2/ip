@@ -30,6 +30,7 @@ public class MainWindow extends SplitPane {
 
     private Duke duke;
 
+    //Icon made by Freepik from www.flaticon.com
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
@@ -39,17 +40,25 @@ public class MainWindow extends SplitPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // Add number to listView and change color
         listView.setCellFactory(new Callback<ListView<Task>, ListCell<Task>>() {
             @Override
             public ListCell<Task> call(ListView<Task> list) {
                 return new ListCell<>() {
-                    @Override protected void updateItem(Task item, boolean empty) {
+                    @Override
+                    protected void updateItem(Task item, boolean empty) {
                         super.updateItem(item, empty);
-                        setText(item == null ? "" : (this.getIndex() + 1) + ". " + item.toString());
+                        setText(empty ? "" : (getIndex() + 1) + ". " + item.toString());
+                        setStyle("-fx-text-fill:white;-fx-background-color:"
+                                + (getIndex() % 2 == 0
+                                ? "rgb(140, 140, 140);"
+                                : "rgb(130, 130, 130);"));
                     }
                 };
             }
         });
+
     }
 
     /**

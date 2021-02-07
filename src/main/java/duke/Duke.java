@@ -122,7 +122,6 @@ public class Duke {
             case "search":
                 return ui.displayList(tasks.search(args));
             default:
-                // Should never reach here unless parser missed an invalid input.
                 assert false : "Parser missed an invalid input";
             }
         } catch (DukeException e) {
@@ -149,6 +148,8 @@ public class Duke {
         } catch (DukeInputException e) {
             return ui.displayError(e);
         }
+        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
+
         isWaitingDeleteTaskResponse = false;
         if (s.equals("y")) {
             Task t;
@@ -169,6 +170,8 @@ public class Duke {
         } catch (DukeInputException e) {
             return ui.displayError(e);
         }
+        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
+
         isWaitingSaveFileResponse = false;
         if (s.equals("y")) {
             try {
