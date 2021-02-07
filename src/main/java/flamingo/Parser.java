@@ -24,7 +24,7 @@ public class Parser {
             }
             return Parser.startResponse(userInput);
         } catch (IllegalArgumentException e) {
-            return "Oh no Flamingo! I need more information to do that.";
+            return "Oh no Flamingo! I need more information\nto do that.";
         } catch (IndexOutOfBoundsException e) {
             return "Oh no Flamingo! The task does not exist.";
         } catch (NullPointerException e) {
@@ -68,6 +68,7 @@ public class Parser {
                 throw new IllegalArgumentException();
             }
             int temp = userInput.indexOf('/') - 1;
+            assert temp > 9;
             Task currentTask = new Deadline(userInput.substring(9, temp),
                     LocalDate.parse(userInput.substring(temp + 5)));
             return tasks.addTask(currentTask);
@@ -76,6 +77,7 @@ public class Parser {
                 throw new IllegalArgumentException();
             }
             int temp = userInput.indexOf('/') - 1;
+            assert temp > 6;
             Task currentTask = new Event(userInput.substring(6, temp),
                     LocalDateTime.parse(userInput.substring(temp + 5)));
             return tasks.addTask(currentTask);

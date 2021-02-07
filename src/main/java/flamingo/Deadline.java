@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Creates a flamingo.Deadline task with a date.
+ * Creates a Deadline task with a date.
  */
 public class Deadline extends Task {
     protected LocalDate date;
 
     /**
-     * Creates a new flamingo.Deadline.
+     * Creates a new Deadline.
      * @param description Description of the task.
      * @param date Date of the deadline.
      */

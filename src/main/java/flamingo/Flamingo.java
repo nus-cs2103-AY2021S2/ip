@@ -35,6 +35,7 @@ public class Flamingo {
      */
     public static String getResponse(String input) {
         String response = Parser.run(input);
+        assert response != null;
         return response;
     }
 }

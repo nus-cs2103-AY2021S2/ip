@@ -1,7 +1,7 @@
 package flamingo;
 
 /**
- * Creates a flamingo.Todo flamingo.Task with a description.
+ * Creates a Todo Task with a description.
  */
 public class Todo extends Task {
 

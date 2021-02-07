@@ -19,7 +19,7 @@ public class TaskList {
     }
 
     /**
-     * Creates a new empty flamingo.Task List.
+     * Creates a new empty Task List.
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -46,7 +46,7 @@ public class TaskList {
     /**
      * Adds a task to the ArrayList.
      *
-     * @param task flamingo.Task from user input.
+     * @param task Task from user input.
      */
     public String addTask(Task task) {
         tasks.add(numTasks, task);
