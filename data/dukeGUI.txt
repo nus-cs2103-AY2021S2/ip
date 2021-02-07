@@ -14,3 +14,5 @@ event attend gala /at 2021-03-17 undone
 deadline do exercise /by 2021-03-19 undone
 todo visit zoo undone
 todo play soccer undone
+deadline finish lab /by 2021-05-02 undone
+event attend beach-party /at 2021-04-17 undone

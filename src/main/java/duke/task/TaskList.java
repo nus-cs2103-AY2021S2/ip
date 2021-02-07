@@ -65,7 +65,7 @@ public class TaskList {
         }
         if (matches.numOfTasks() > 0) {
             out += "We have found the following " + matches.numOfTasks()
-                    + " items\n";
+                    + " item(s)\n";
             out += matches.getAllTasks();
         } else {
             out += "Sorry! Could not find any matches :(";
