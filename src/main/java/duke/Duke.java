@@ -31,6 +31,7 @@ public class Duke {
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         Duke iceBear = new Duke();
+        System.out.println(iceBear.greet());
         while (true) {
             String nextCommand = scan.nextLine();
             if (nextCommand.equals("bye")) {
@@ -44,6 +45,12 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * This method will return a message greeting the user.
+     *
+     * @return a string representation of Duke's greeting
+     */
     public String greet() {
         String greetingMessage = "Hello! I'm Icebear\nWhat can I do for you?";
         return greetingMessage;
