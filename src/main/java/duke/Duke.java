@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * The run method of Duke. Execute `new Duke().run()` to start Duke.
+     * The run method of Duke CLI. Execute `new Duke().run()` to start Duke.
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
@@ -52,8 +52,18 @@ public class Duke {
                 storage.saveTaskLst(taskLst);
 
                 ui.print(resp);
+
             } catch (DukeException e) {
                 ui.print(e.getMessage());
+
+            } catch (Exception e) {
+                // For some reason, stackTrace can only be printed at the front or back of a single response.
+                e.printStackTrace();
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(String.format("[ERROR] %s: %s\n", e.getClass().getCanonicalName(), e.getMessage()));
+                sb.append(ui.getDefaultErrorMessage());
+                ui.print(sb.toString());
             }
         }
     }

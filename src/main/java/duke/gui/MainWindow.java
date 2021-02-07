@@ -2,6 +2,7 @@ package duke.gui;
 
 import duke.Duke;
 import duke.exception.DukeException;
+import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,6 +25,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Ui ui = new Ui();
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -58,22 +60,21 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
 
         try {
-            String response = duke.getResponse(input);
-
-            printInteraction(input, response);
-
             if (duke.isExitInput(input)) {
                 System.exit(0);
             }
+
+            String response = duke.getResponse(input);
+            printInteraction(input, response);
+
         } catch (DukeException e) {
             printInteraction(input, e.getMessage());
+
         } catch (Exception e) {
             System.out.printf("[ERROR] %s: %s\n", e.getClass().getCanonicalName(), e.getMessage());
             e.printStackTrace();
 
-            String DEFAULT_ERR_MSG = "An unknown error occurred. Please try another command " +
-                    "or contact the developer for help.";
-            printInteraction(input, DEFAULT_ERR_MSG);
+            printInteraction(input, ui.getDefaultErrorMessage());
         }
     }
 }

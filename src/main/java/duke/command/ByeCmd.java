@@ -6,7 +6,7 @@ import duke.task.TaskList;
  * Represents the execution of Bye Command
  */
 public class ByeCmd extends Command {
-    private static final String byeMsg = "Bye. Hope to see you again soon!\n";
+    private static final String BYE_MSG = "Bye. Hope to see you again soon!\n";
 
     /**
      * Returns true if processed command wants the bot to exit
@@ -26,6 +26,6 @@ public class ByeCmd extends Command {
      */
     @Override
     public String execute(TaskList lst) {
-        return byeMsg;
+        return BYE_MSG;
     }
 }

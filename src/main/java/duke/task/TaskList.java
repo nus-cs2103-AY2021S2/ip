@@ -63,7 +63,7 @@ public class TaskList {
         lst.forEach(action);
     }
 
-    public List<Task> find(String target) {
+    public List<Task> findTasksWithStr(String target) {
         return lst.stream().filter(task -> task.hasStrInProps(target)).collect(Collectors.toList());
     }
 }

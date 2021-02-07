@@ -44,7 +44,7 @@ public class AddCmd extends Command {
     public String execute(TaskList lst) {
         assert lst != null : "TaskList parameter should not be null";
 
-        Task task = null;
+        Task task;
         String[] words;
 
         validateNotEmpty(cmdArgs, "OOPS!!! The description of a task cannot be empty");
@@ -63,6 +63,8 @@ public class AddCmd extends Command {
             trimStrArr(words);
             task = new Deadline(words[0], words[1]);
             break;
+        default:
+            throw new DukeException(String.format("Processing of %s taskType is not implemented in AddCmd", taskType));
         }
 
         lst.add(task);
