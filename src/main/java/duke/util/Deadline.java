@@ -6,7 +6,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
- * Represents an deadline task.
+ * Represents a deadline task.
+ * <br>A deadline task has a description and a date where it is due.
  */
 public class Deadline extends Task {
 
@@ -44,6 +45,7 @@ public class Deadline extends Task {
             throw new DukeInputException("Wrong date format! Please use YYYY-MM-DD");
         }
 
+        assert date != null : "Date was not parsed.";
         return new Deadline(details[0], date);
     }
 
@@ -80,6 +82,8 @@ public class Deadline extends Task {
      * @return Deadline object.
      */
     protected static Deadline importData(String[] args) {
+        assert args[1].equals("1") || args[1].equals("0") : "Parser.checkImportFormat() missed an invalid input";
+
         boolean isDone = args[1].equals("1");
         return new Deadline(args[2], LocalDate.parse(args[3]), isDone);
     }

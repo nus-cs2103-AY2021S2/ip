@@ -28,9 +28,11 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             SplitPane sp = fxmlLoader.load();
             Scene scene = new Scene(sp);
+
             stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/Icon.png")));
             stage.setScene(scene);
             stage.setTitle("Duke");
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().showGreetings();
             stage.show();

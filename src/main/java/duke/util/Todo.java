@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Represents a Todo task.
+ * <br>A todo task has a description.
  */
 public class Todo extends Task {
 
@@ -61,6 +62,8 @@ public class Todo extends Task {
      * @return Todo object.
      */
     protected static Todo importData(String[] args) {
+        assert args[1].equals("1") || args[1].equals("0") : "Parser.checkImportFormat() missed an invalid input";
+
         boolean isDone = args[1].equals("1");
         return new Todo(args[2], isDone);
     }

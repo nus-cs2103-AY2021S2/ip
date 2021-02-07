@@ -138,21 +138,21 @@ public class TaskList {
      * @return List of numbered tasks containing the given keyword.
      */
     public List<String> search(String keyword) {
+
         try {
             LocalDate date = LocalDate.parse(keyword);
             return searchByDate(date);
-
         } catch (DateTimeParseException e) {
-
-            List<String> results = new ArrayList<>();
-
-            for (int i = 0; i < lst.size(); i++) {
-                if (lst.get(i).getDescription().contains(keyword)) {
-                    results.add(String.format("%d. %s", i + 1, lst.get(i)));
-                }
-            }
-
-            return results;
+            // Keyword is not a date
         }
+
+        List<String> results = new ArrayList<>();
+
+        for (int i = 0; i < lst.size(); i++) {
+            if (lst.get(i).getDescription().contains(keyword)) {
+                results.add(String.format("%d. %s", i + 1, lst.get(i)));
+            }
+        }
+        return results;
     }
 }

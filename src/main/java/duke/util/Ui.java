@@ -8,9 +8,11 @@ import java.util.List;
 public class Ui {
 
     private String echo(String... msgs) {
-        String msg = "";
-        for (String s : msgs) {
-            msg += s + "\n";
+        assert msgs.length != 0;
+
+        String msg = msgs[0];
+        for (int i = 1; i < msgs.length; i++) {
+            msg += "\n" + msgs[i];
         }
         return msg;
     }
