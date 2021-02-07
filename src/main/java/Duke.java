@@ -2,8 +2,10 @@ import  java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
 
+    public static String line= "__________________________________________________";
+
+    public static void main(String[] args) {
 
 
         String logo = " ____        _        \n"
@@ -13,9 +15,21 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         //while(sc.hasNext()){
+        System.out.println("Welcome to my todo list");
+        int ran_output = -1;
+        while (ran_output!= 0){
+            try {
+                ran_output = run();
+            }catch (DukeException e){
+                System.out.println(e);
+            }
 
 
+        }
 
+
+    }
+    public static int run() throws DukeException, NotFoundException, TimeException, DescriptionException{
         Scanner sc = new Scanner(System.in);
         String[] input;
         ArrayList<Task> arr = new ArrayList<>();
@@ -23,6 +37,7 @@ public class Duke {
 
 
         while(true){
+            System.out.println(line);
             String next = sc.nextLine().trim();
             String task_in = "";
             String time = "";
@@ -44,6 +59,9 @@ public class Duke {
                         System.out.println(input[1] + arr.get(Integer.parseInt(input[1]) - 1).toString());
                         continue;
                     case "todo":
+                        if(input.length == 1){
+                            throw new DescriptionException(input[0]);
+                        }
                         for (int i = 1; i < input.length; i++) {
                             task_in = task_in + input[1];
                         }
@@ -54,8 +72,15 @@ public class Duke {
                         System.out.println("you now have " + number + " tasks in the list");
                         break;
                     case "deadline":
+                        if(input.length == 1){
+                            throw new DescriptionException(input[0]);
+                        }
                         int index = 0;
                         while (!input[index].equals("/by")){
+                            if(index == input.length -1){
+                                throw new DescriptionException(input[0]);
+                            }
+
                             if(task_in == ""){
                                 task_in = input[index];
                                 index++;
@@ -63,6 +88,9 @@ public class Duke {
                                 task_in = task_in + " " + input[index];
                                 index++;
                             }
+                        }
+                        if(index + 1 == input.length){
+                            throw new TimeException(input[0]);
                         }
                         for (int i = index + 1; i < input.length; i++){
                             time = time + " " + input [i];
@@ -74,8 +102,15 @@ public class Duke {
                         System.out.println("you now have " + number + " tasks in the list");
                         break;
                     case "event":
+                        if(input.length == 1){
+                            throw new DescriptionException(input[0]);
+                        }
                         int index_2 = 0;
                         while (!input[index_2].equals("/at")){
+                            if(index_2 == input.length -1){
+                                throw new DescriptionException(input[0]);
+                            }
+
                             if(task_in == ""){
                                 task_in = input[index_2];
                                 index_2++;
@@ -83,6 +118,9 @@ public class Duke {
                                 task_in = task_in + " " + input[index_2];
                                 index_2++;
                             }
+                        }
+                        if(index_2 + 1 == input.length){
+                            throw new TimeException(input[0]);
                         }
                         for (int i = index_2 + 1; i < input.length; i++){
                             time = time + " " + input [i];
@@ -93,11 +131,15 @@ public class Duke {
                         System.out.println(task_in + " at"+ time);
                         System.out.println("you now have " + number + " tasks in the list");
                         break;
+                    default:
+                        throw new NotFoundException();
                 }
+
             }
 
 
         }
         sc.close();
+        return 0;
     }
 }
