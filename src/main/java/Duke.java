@@ -1,7 +1,10 @@
 import java.nio.file.Path;
 import java.time.format.DateTimeParseException;
 
-import duke.*;
+import duke.GuiUi;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.ParseException;
@@ -65,6 +68,7 @@ public class Duke {
      * @return Tasker's response
      */
     public String getResponse(String input) {
+        assert(input != null);
         try {
             int indexOfWhitespaceAfterCommand = input.indexOf(' ');
             input.substring(indexOfWhitespaceAfterCommand);
