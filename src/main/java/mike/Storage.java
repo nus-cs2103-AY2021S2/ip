@@ -57,7 +57,7 @@ public class Storage {
      * @return a list of tasks corresponding to the filePath
      * @throws IOException
      */
-    public List<Task> load() throws IOException {
+    public List<Task> loadTasks() throws IOException {
         List<Task> taskList = new ArrayList<>();
         File f = new File(filePath.toString());
         if (!f.exists()) {

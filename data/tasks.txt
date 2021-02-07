@@ -1,4 +1,6 @@
 [T][?]read books
-[D][?]return books  (by: Jan 25 2021)
-[E][?]drinks  (at: Feb 01 2021)
+[D][?]return book (by: Jan 25 2021)
+[E][?]drink (at: Feb 01 2021)
 [T][?]join sports club
+[T][?]go home
+[E][?]drink  (at: Jan 01 2021)

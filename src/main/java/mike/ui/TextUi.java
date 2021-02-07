@@ -44,7 +44,7 @@ public class TextUi {
     /**
      * Displays when the "bye" command is received and exits
      */
-    public String exit() {
+    public String showExitUi() {
         return formatInChatBox("Bye. Hope to see you again soon!\n");
     }
 
@@ -53,7 +53,7 @@ public class TextUi {
      *
      * @param taskList the TaskList to be listed
      */
-    public String showList(TaskList taskList) {
+    public String showListUi(TaskList taskList) {
         int numOfText = taskList.size();
         StringBuilder output = new StringBuilder();
 
