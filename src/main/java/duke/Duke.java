@@ -46,7 +46,7 @@ public class Duke extends Application {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
+        assert(text != null);
         return textToAdd;
     }
 
