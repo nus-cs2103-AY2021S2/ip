@@ -30,12 +30,13 @@ public class MainWindow extends AnchorPane {
 
     // data members
     private Duke duke = new Duke();
+    private DialogBox mostRecentDialogBox;
+    private boolean hasRecentDukeOutput = false;
+
     private Image userFace = new Image(this.getClass().getResourceAsStream(
             "/images/DefaultUser.png"));;
-
     private Image dukeFace = new Image(this.getClass().getResourceAsStream(
             "/images/DogeDuke.png"));
-
     private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(
             "eee, dd MMM yyyy HH:mm a");
 
@@ -93,21 +94,27 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         dialogContainer.getChildren().add(new DialogBox(input, userFace));
         userInput.clear();
+        hasRecentDukeOutput = false;
         return input;
     }
 
     /**
      * Pushes a message to a dialog box in the dialog container as an
      * output from duke.
-     * @param messages  the message to output into the dialog.
+     * @param message  the message to output into the dialog.
      */
     @FXML
-    public void dukeOutput (String ... messages) {
-        for (String message: messages) {
-            dialogContainer.getChildren().add(new DialogBox(message, dukeFace,
-                    true));
+    public void dukeOutput (String message) {
+        if (hasRecentDukeOutput) {
+            mostRecentDialogBox.appendText(message);
+        } else {
+            mostRecentDialogBox = new DialogBox(message, dukeFace, true);
+            dialogContainer.getChildren().add(mostRecentDialogBox);
         }
+
+        hasRecentDukeOutput  = true;
     }
+
 
     /**
      * Changes the datetime format of the window dialog contents

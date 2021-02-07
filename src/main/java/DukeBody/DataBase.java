@@ -81,7 +81,7 @@ public class DataBase {
     }
 
     // mutators
-    public void changePath (String path) {
+    public void changePath (String path) throws java.nio.file.InvalidPathException {
         dirpath = Paths.get(path);
     }
 }

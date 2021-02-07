@@ -1,12 +1,16 @@
 package dukebody;
 
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
 import dukegui.MainApp;
 import dukegui.MainWindow;
 import javafx.application.Application;
+import duketask.Deadline;
+import duketask.Event;
+import duketask.ToDo;
 
 public class Duke {
     public static class ExpectedSubcommandException extends Exception  {
@@ -51,17 +55,28 @@ public class Duke {
      * Setups the user profile through the username. Loads any
      * previously saved tasks under the same alias from the
      * default database directory path.
-     * @param name  the user alias used to setup the user profile.
+     * @param input  the user alias used to setup the user profile.
      */
-    public void userSetup (String name) {
-        username = name;
-        mainWindow.dukeOutput("Henlo " + username + ", reading tasks from secret database...");
+    public void userSetup (String input) {
+        try {
+            String[] commandBreakdown = Parser.parseSubcommand(input, "/read_from:");
+            username = commandBreakdown[0];
+            connection.changePath(commandBreakdown[1]);
+            mainWindow.dukeOutput("HENLO " + username + ", reading tasks from "
+                    + commandBreakdown[1] + " ...");
+        } catch (InvalidPathException e) {
+            mainWindow.dukeOutput("An invalid path was given to Doge! Connecting to default database ...");
+        } catch (Duke.ExpectedSubcommandException e) {
+            username = input;
+            mainWindow.dukeOutput("HENLO " + username + ", reading tasks from secret database...");
+        }
+
         try {
             tasks = connection.queryTasks(username);
             mainWindow.dukeOutput("... very success! what can doge do for you now?");
         } catch (DataBase.LegacyDataException e) {
-            mainWindow.dukeOutput("doge could not read userdata! previous tasks go brrrrrrrr...\n"
-                    + "sorry hooman, what can doge do for you now?");
+            mainWindow.dukeOutput("doge could not read userdata! previous tasks go brrrrrrrr...");
+            mainWindow.dukeOutput("sorry hooman, what can doge do for you now?");
         }
     }
 
@@ -73,43 +88,42 @@ public class Duke {
      */
     public void respondToCommand (String command) {
         String[] subcommands = command.split(" ", 2);
-        StringBuilder output = new StringBuilder();
+        String[] commandBreakdown;
         Scanner scanner;
         int taskNumber;
 
         try {
-            switch (subcommands[0].trim()) {
+            switch (subcommands[0].trim().toLowerCase()) {
                 case "bye":
                     connection.updateTasks(username, tasks);
-                    output.append("bye hooman, come back soon!");
+                    mainWindow.dukeOutput("bye hooman, come back soon!");
                     break;
 
                 case "list":
                     if (tasks.size() > 0) {
-                        output.append("hooman has the following tasks:\n");
-                        output.append(outputTasks(tasks));
+                        mainWindow.dukeOutput("hooman has the following tasks:");
+                        outputTasks(tasks);
                     } else{
-                        output.append("hooman has no tasks... why tho");
+                        mainWindow.dukeOutput("hooman has no tasks... why tho");
                     }
                     break;
 
                 case "find":
-                    output.append("sniff... sniff... I've found these tasks hooman!\n");
-
                     if (subcommands.length == 1) {
                         throw new Duke.ExpectedSubcommandException("<search_text>");
                     }
 
-                    output.append(outputTasks(tasks.getMatchedTasks(subcommands[1].trim())));
+                    mainWindow.dukeOutput("sniff... sniff... I've found these tasks hooman!");
+                    outputTasks(tasks.getMatchedTasks(subcommands[1].trim()));
                     break;
 
                 case "undone":
-                    TaskList undone = tasks.getUndoneTasks();
-                    if (undone.size() > 0) {
-                        output.append("These are undone... so concern...\n");
-                        output.append(outputTasks(undone));
+                    TaskList undoneTasks = tasks.getUndoneTasks();
+                    if (undoneTasks.size() > 0) {
+                        mainWindow.dukeOutput("These are undone... so concern...");
+                        outputTasks(undoneTasks);
                     } else {
-                        output.append("No more tasks! very speed. much wow");
+                        mainWindow.dukeOutput("No more tasks! very speed. much wow");
                     }
 
                     break;
@@ -124,13 +138,12 @@ public class Duke {
                     scanner.close();
 
                     tasks.get(taskNumber).markAsDone();
-                    output.append("marked the task as done! yip yip.\n");
-                    output.append(tasks.get(taskNumber).getTaskInformation(
+                    mainWindow.dukeOutput("marked the task as done! yip yip.");
+                    mainWindow.dukeOutput(tasks.get(taskNumber).getTaskInformation(
                             mainWindow.getDateFormat()));
                     break;
 
-                case "delete":
-                    // Fallthrough
+                case "delete": // Fallthrough
                 case "remove":
                     if (subcommands.length == 1) {
                          throw new Duke.ExpectedSubcommandException("<task_number>");
@@ -140,32 +153,50 @@ public class Duke {
                     taskNumber = scanner.nextInt() - 1;
                     scanner.close();
 
-                    output.append("removed the task! begone!\n");
-                    output.append(tasks.remove(taskNumber).getTaskInformation(
+                    mainWindow.dukeOutput("removed the task! begone!");
+                    mainWindow.dukeOutput(tasks.remove(taskNumber).getTaskInformation(
                             mainWindow.getDateFormat()));
                     break;
 
+                case "todo":
+                    tasks.add(new ToDo((subcommands.length == 1) ? "" : subcommands[1].trim()));
+                    outputNewTask();
+                    break;
+
+                case "deadline":
+                    commandBreakdown = Parser.parseSubcommand(subcommands[1], "/by");
+                    tasks.add(new Deadline(commandBreakdown[0], Parser.parseDateTime(
+                            commandBreakdown[1])));
+
+                    outputNewTask();
+                    break;
+
+                case "event":
+                    commandBreakdown = Parser.parseSubcommand(subcommands[1], "/at");
+                    tasks.add(new Event(commandBreakdown[0], Parser.parseDateTime(
+                            commandBreakdown[1])));
+
+                    outputNewTask();
+                    break;
+
                 default:
-                    if (subcommands.length == 1) {
-                        throw new Duke.UnrecognisedCommandException(subcommands[0]);
-                    } else {
-                        tasks.add(Parser.parseNewCommand(subcommands[0].trim(), subcommands[1].trim()));
-                        output.append("added the task for hooman!\n");
-                        output.append(tasks.get(tasks.size() - 1).getTaskInformation(
-                                mainWindow.getDateFormat()));
-                    }
+                    throw new Duke.UnrecognisedCommandException(subcommands[0]);
             }
         } catch (InputMismatchException e) {
-            output.append("oh no, task number must be an integer!");
+            mainWindow.dukeOutput("oh no, task number must be an integer!");
         } catch (IndexOutOfBoundsException e) {
-            output.append("no such task number exists hooman... ?");
+            mainWindow.dukeOutput("no such task number exists hooman... ?");
         } catch (IOException e) {
-            output.append("spectacular failure! doge cannot save tasks...");
+            mainWindow.dukeOutput("spectacular failure! doge cannot save tasks...");
         } catch (Exception e) {
-            output.append(e.getMessage());
+            mainWindow.dukeOutput(e.getMessage());
         }
+    }
 
-        mainWindow.dukeOutput(output.toString());
+    private void outputNewTask () {
+        mainWindow.dukeOutput("added the task for hooman!");
+        mainWindow.dukeOutput(tasks.get(tasks.size() - 1).getTaskInformation(
+                mainWindow.getDateFormat()));
     }
 
     /**
@@ -173,16 +204,11 @@ public class Duke {
      * @param tasks     the list of tasks.
      * @return          the formatted string to output.
      */
-    private String outputTasks (TaskList tasks) {
-        StringBuilder output = new StringBuilder();
-
+    private void outputTasks (TaskList tasks) {
         for (int i = 0; i < tasks.size(); ++ i) {
-            output.append(i + 1);
-            output.append(". " + tasks.get(i).getTaskInformation(mainWindow.getDateFormat())
-                    + "\n");
+            mainWindow.dukeOutput(i + 1 + ". " + tasks.get(i).getTaskInformation(
+                    mainWindow.getDateFormat()));
         }
-
-        return output.toString();
     }
 
     /**

@@ -47,4 +47,9 @@ public class DialogBox extends HBox {
     public DialogBox(String text, Image image) {
         this(text, image, false);
     }
+
+    // mutators
+    public void appendText (String text) {
+        content.setText(content.getText() + "\n" + text);
+    }
 }

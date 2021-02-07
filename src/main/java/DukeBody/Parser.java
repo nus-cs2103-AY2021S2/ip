@@ -16,6 +16,13 @@ public class Parser {
     private static final DateTimeFormatter DATETIME_PARSE_FORMAT = DateTimeFormatter.ofPattern(
         "yyyy-MM-dd HHmm");
 
+    // exception class
+    public static class ParserDateTimeParseException extends Exception {
+        public ParserDateTimeParseException () {
+            super("The datetime format must be:\n" + Parser.DATETIME_PARSE_FORMAT.toString());
+        }
+    }
+
     // methods
     /**
      * Returns the string command representing the task information to be parsed.
@@ -61,55 +68,32 @@ public class Parser {
     }
 
     /**
-     * Returns the task object created by parsing user input commands.
-     * @param taskType      the type of task to create. must be todo, event or deadline.
-     * @param command       the task description and subcommands where applicable such
-     *                      as /at in event and /by in deadline task creations.
-     * @return              the task object in default UNDONE state and created at the
-     *                      current datetime.
-     * @throws Duke.UnrecognisedCommandException
+     * Parses the command input for the subcommand.
+     * @param command
+     * @param subcommand
+     * @return
      * @throws Duke.ExpectedSubcommandException
-     * @throws Task.EmptyDescriptionException
-     * @throws DateTimeParseException
      */
-    public static Task parseNewCommand (String taskType, String command)
-            throws Duke.UnrecognisedCommandException, Duke.ExpectedSubcommandException,
-            Task.EmptyDescriptionException, DateTimeParseException {
+    public static String[] parseSubcommand (String command, String subcommand) throws
+            Duke.ExpectedSubcommandException {
 
-        int subcommandIndex;
-        Task task;
+        String[] commandBreakdown = new String[2];
+        int subcommandIndex = command.indexOf(subcommand);
 
-        switch (taskType) {
-        case "todo":
-            task = new ToDo(command);
-            break;
-
-        case "event":
-            subcommandIndex = command.indexOf("/at");
-            if (subcommandIndex < 0) {
-                throw new Duke.ExpectedSubcommandException("/at");
-            }
-
-            task = new Event (command.substring(0, subcommandIndex - 1).trim(),
-                    LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
-                    Parser.DATETIME_PARSE_FORMAT));
-            break;
-
-        case "deadline":
-            subcommandIndex = command.indexOf("/by");
-            if (subcommandIndex < 0) {
-                throw new Duke.ExpectedSubcommandException("/by");
-            }
-
-            task = new Deadline (command.substring(0, subcommandIndex - 1).trim(),
-                    LocalDateTime.parse(command.substring(subcommandIndex + 3).trim(),
-                    Parser.DATETIME_PARSE_FORMAT));
-            break;
-
-        default:
-            throw new Duke.UnrecognisedCommandException(taskType);
+        if (subcommandIndex < 0) {
+            throw new Duke.ExpectedSubcommandException(subcommand);
         }
 
-        return task;
+        commandBreakdown[0] = (subcommandIndex == 0) ? "" : command.substring(0, subcommandIndex - 1).trim();
+        commandBreakdown[1] = command.substring(subcommandIndex + subcommand.length()).trim();
+        return commandBreakdown;
+    }
+
+    public static LocalDateTime parseDateTime (String dateTime) throws Parser.ParserDateTimeParseException {
+        try {
+            return LocalDateTime.parse(dateTime, Parser.DATETIME_PARSE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new Parser.ParserDateTimeParseException();
+        }
     }
 }

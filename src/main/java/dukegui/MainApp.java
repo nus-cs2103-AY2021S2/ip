@@ -25,8 +25,9 @@ public class MainApp extends Application {
             stage.show();
 
             // greet user
-            fxmlLoader.<MainWindow>getController().dukeOutput("I am duke. what are you?\n"
-                    + "please type in your username.");
+            fxmlLoader.<MainWindow>getController().dukeOutput("I am DogeDuke. what are you?\n"
+                    + "Please type in your username.\n\nTo specify a database to "
+                    + "connect to, input /read_from:<path>");
         } catch (IOException e) {
             e.printStackTrace();
         }
