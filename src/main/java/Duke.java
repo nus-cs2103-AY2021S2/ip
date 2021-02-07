@@ -126,7 +126,7 @@ public class Duke {
                 } catch (DukeException e) {
                     return GuiUi.displayFailToSaveError();
                 } catch (ParseException e) {
-                    return GuiUi.insertMsgIntoChatBox(e.getMsgDes());
+                    return GuiUi.insertMsgIntoChatBox(e.getErrMsg());
                 } catch (DateTimeParseException e) {
                     return GuiUi.displayParseError();
                 }

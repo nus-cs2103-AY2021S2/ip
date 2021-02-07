@@ -5,19 +5,19 @@ package duke.exceptions;
  */
 public class ParseException extends RuntimeException {
 
-    private final String msgDes;
+    private final String errMsg;
 
     /**
-     * Builds the exception with given message.
+     * Returns a ParseException exception with given error message.
      *
-     * @param message the information of the error message.
+     * @param errMsg error message
      */
-    public ParseException(String message) {
-        super(message);
-        msgDes = message;
+    public ParseException(String errMsg) {
+        super(errMsg);
+        this.errMsg = errMsg;
     }
 
-    public String getMsgDes() {
-        return msgDes;
+    public String getErrMsg() {
+        return errMsg;
     }
 }

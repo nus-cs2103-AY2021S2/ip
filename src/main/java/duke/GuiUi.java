@@ -39,7 +39,7 @@ public class GuiUi {
         try {
             throw new ParseException("Tasker does not understand what you did there!\n");
         } catch (ParseException e) {
-            return insertMsgIntoChatBox(e.getMsgDes());
+            return insertMsgIntoChatBox(e.getErrMsg());
         }
     }
 
