@@ -28,6 +28,6 @@ jobs:
       - name: Perform IO redirection test (*NIX)
         working-directory:  ${{ github.workspace }}/text-ui-test
         run: |
-          apt-get update
-          apt-get install -y dos2unix
+          sudo apt-get update
+          sudo apt-get install -y dos2unix
           ./runtest.sh
