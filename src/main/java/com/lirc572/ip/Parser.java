@@ -141,7 +141,9 @@ public class Parser {
                                 tasks.add(task);
                                 response += Ui.printLine("Got it! I've added this task:");
                                 response += Ui.printLine("  " + task);
-                                response += Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
+                                response += Ui.printLine(
+                                        String.format("Now you have %d tasks in the list.", tasks.getSize())
+                                );
                             } catch (DateTimeParseException e) {
                                 throw new Exception("Datetime in the wrong format!");
                             }
@@ -172,7 +174,9 @@ public class Parser {
                                 tasks.add(task);
                                 response += Ui.printLine("Got it! I've added this task:");
                                 response += Ui.printLine("  " + task);
-                                response += Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
+                                response += Ui.printLine(
+                                        String.format("Now you have %d tasks in the list.", tasks.getSize())
+                                );
                             } catch (DateTimeParseException e) {
                                 throw new Exception("Datetime in the wrong format!");
                             }
@@ -205,7 +209,9 @@ public class Parser {
                 }
                 response += Ui.printLine("Here are the matching tasks in your list:");
                 for (int i = 0; i < matchedTaskIndices.size(); i++) {
-                    response += Ui.printLine(String.format("%d.%s", matchedTaskIndices.get(i), matchedTaskStrings.get(i)));
+                    response += Ui.printLine(
+                            String.format("%d.%s", matchedTaskIndices.get(i), matchedTaskStrings.get(i))
+                    );
                 }
             } else {
                 throw new Exception("Unknown command!");

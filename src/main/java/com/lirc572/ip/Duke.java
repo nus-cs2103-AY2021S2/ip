@@ -158,7 +158,9 @@ public class Duke extends Application {
             welcomeText += Ui.printLogo();
             welcomeText += Ui.printEmptyLine();
         }
-        welcomeText += Ui.printLine("Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?");
+        welcomeText += Ui.printLine(
+                "Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?"
+        );
         welcomeText += Ui.printLine("Sou, watashi desu!");
         return welcomeText;
     }

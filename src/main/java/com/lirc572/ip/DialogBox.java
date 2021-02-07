@@ -1,7 +1,5 @@
 package com.lirc572.ip;
 
-import java.io.InputStream;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
