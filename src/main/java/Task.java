@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Finish the current Task
+     * Finish the current Task and return a new Task
      * @return New Task object that has been done
      */
     public Task finishTask() throws DukeException {
@@ -44,7 +44,7 @@ public class Task {
     }
 
     /**
-     * String representation of Task object
+     * Returns a String representation of Task object
      * @return String representation of Task object
      */
     @Override

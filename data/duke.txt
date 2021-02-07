@@ -1,4 +1,6 @@
-D|1|makan|2020-10-10
 T|1|menikah
-E|1|menikah|2359
-D|0|nikah|2020-10-03
+E|0|menikah|2359
+D|0|minum|2021-12-10
+E|1|nikahan|2012
+T|0|makan
+T|0|minum
