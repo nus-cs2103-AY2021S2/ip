@@ -1,3 +1,9 @@
-deadline | not done | return book  | 2/12/2019 1800
-deadline | not done | return book  | 2/12/2019 1800
 todo | not done | 1
+todo | not done | 2
+todo | not done | 3
+todo | not done | 4
+todo | not done | 5
+todo | not done | 6
+todo | not done | 7
+todo | not done | 8
+todo | not done | 3

@@ -37,8 +37,8 @@ public class ConsoleUI {
     /**
      * Duke says bye
      */
-    public void bye() {
-        this.formatBox("Bye. Hope to see you again soon!");
+    public String bye() {
+        return this.formatBox("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -46,10 +46,9 @@ public class ConsoleUI {
      *
      * @param str input string within chat boxes
      */
-    public void formatBox(String str) {
-        System.out.println("------------------------------------");
-        System.out.println(str);
-        System.out.println("------------------------------------");
+    public String formatBox(String str) {
+        return "-----------------------------------\n"
+                + str + "\n-----------------------------------\n";
     }
 
     /**
@@ -57,18 +56,18 @@ public class ConsoleUI {
      *
      * @param doneTask returns a message in String and Task.toString()
      */
-    public void markDone(String doneTask) {
-        this.formatBox("Nice! I've marked this task as done:\n" + doneTask);
+    public String markDone(String doneTask) {
+        return this.formatBox("Nice! I've marked this task as done:\n" + doneTask);
     }
 
     /**
      * Formatter for addTaskMessage and deleteTaskMessage
      */
-    public void changeTaskMessage(String headerMessage, String changedTask, int numTask) {
+    public String changeTaskMessage(String headerMessage, String changedTask, int numTask) {
         String formattedInput = headerMessage;
         formattedInput = formattedInput.concat(changedTask).concat("\n");
         formattedInput = formattedInput.concat("Now you have " + numTask + " tasks in the list.");
-        this.formatBox(formattedInput);
+        return this.formatBox(formattedInput);
     }
 
     /**
@@ -78,9 +77,9 @@ public class ConsoleUI {
      * @param addedTask Task.toString() of the added task
      * @param numTask   the number of tasks currently in list of tasks
      */
-    public void addTaskMessage(String addedTask, int numTask) {
+    public String addTaskMessage(String addedTask, int numTask) {
         String formattedInput = "Got it. I've added this task:\n  ";
-        this.changeTaskMessage(formattedInput, addedTask, numTask);
+        return this.changeTaskMessage(formattedInput, addedTask, numTask);
     }
 
     /**
@@ -90,9 +89,9 @@ public class ConsoleUI {
      * @param deletedTask Task.toString() of the deleted task
      * @param numTask     the number of tasks currently in list of tasks
      */
-    public void deleteTaskMessage(String deletedTask, int numTask) {
+    public String deleteTaskMessage(String deletedTask, int numTask) {
         String formattedInput = "Got it. I've removed this task:\n  ";
-        this.changeTaskMessage(formattedInput, deletedTask, numTask);
+        return this.changeTaskMessage(formattedInput, deletedTask, numTask);
     }
 
     /**
@@ -100,17 +99,26 @@ public class ConsoleUI {
      *
      * @param taskArr array of Task objects
      */
-    public void list(Task[] taskArr) {
+    public String list(Task[] taskArr) {
+        String output = "++++++++++++++++++++++++++++++++++++\n" +
+                "Here are the tasks in your list: \n" +
+                "TaskType | isDone | taskName | time (if any)\n";
+        /*
         System.out.println("+++++++++++++++++++++++++++++++++++++");
         System.out.println("Here are the tasks in your list: ");
         System.out.println("TaskType | isDone | taskName | time (if any)");
+        */
         for (Task t : taskArr) {
             if (t == null) {
                 break;
             }
-            System.out.println(t.toString());
+            // System.out.println(t.toString());
+            output = output + t.toString() + "\n";
         }
-        System.out.println("+++++++++++++++++++++++++++++++++++++");
+        // System.out.println("+++++++++++++++++++++++++++++++++++++");
+        output = output + "++++++++++++++++++++++++++++++++++++\n";
+
+        return output;
     }
 
     /**
