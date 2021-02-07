@@ -1,5 +1,8 @@
 package commands;
 
+import exceptions.InvalidArgumentException;
+import exceptions.UnsupportedCommandException;
+import format.Ui;
 import tasklist.TaskList;
 
 public class ByeCommand extends CommandWithNoParameters {
@@ -13,6 +16,9 @@ public class ByeCommand extends CommandWithNoParameters {
         // make sure that parser always sends trimmed strings?
         if (commandBody == null) {
             this.hasSentExitDukeSignal = true;
+            this.commandOutputMsg = Ui.getExitMessage();
+        } else {
+            handleTooManyArgs();
         }
     }
 }
