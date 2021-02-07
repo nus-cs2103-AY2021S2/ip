@@ -47,22 +47,22 @@ public class Parser {
                 return new Parser("list", null, null, -1);
             } else if (parts[0].equals("done")) {
                 if (parts.length == 1) {
-                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
-                            "description of done cannot be empty.");
+                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The "
+                            + "description of done cannot be empty.");
                 }
                 int taskDone = Integer.parseInt(parts[1]);
                 return new Parser("done", null, null, taskDone);
             } else if (parts[0].equals("delete")) {
                 if (parts.length == 1) {
-                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
-                            "description of delete cannot be empty.");
+                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The "
+                            + "description of delete cannot be empty.");
                 }
                 int taskToDelete = Integer.parseInt(parts[1]);
                 return new Parser("delete", null, null, taskToDelete);
             } else if (parts[0].equals("find")) {
                 if (parts.length == 1) {
-                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
-                            "description of find cannot be empty.");
+                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The "
+                            + "description of find cannot be empty.");
                 }
                 String toFind = "";
                 for (int i = 1; i < parts.length; ++i) {
@@ -75,30 +75,30 @@ public class Parser {
                 return new Parser("find", toFind, null, -1);
             } else if (parts[0].equals("todo")) {
                 if (parts.length == 1) {
-                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
-                            "description of a todo cannot be empty.");
+                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The "
+                            + "description of a todo cannot be empty.");
                 }
                 String taskDescription = this.getDescription(parts, "\n");
                 return new Parser("todo", taskDescription, null, -1);
             } else if (parts[0].equals("deadline")) {
                 if (parts.length == 1) {
-                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
-                            "description of a deadline cannot be empty.");
+                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The "
+                            + "description of a deadline cannot be empty.");
                 }
                 LocalDate due = this.getDueDate(parts, "/by");
                 String taskDescription = this.getDescription(parts, "/by");
                 return new Parser("deadline", taskDescription, due, -1);
             } else if (parts[0].equals("event")) {
                 if (parts.length == 1) {
-                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The " +
-                            "description of an event cannot be empty.");
+                    throw new InsufficientArgumentsException("     ☹ OOPS!!! The "
+                            + "description of an event cannot be empty.");
                 }
                 LocalDate due = this.getDueDate(parts, "/at");
                 String taskDescription = this.getDescription(parts, "/at");
                 return new Parser("event", taskDescription, due, -1);
             } else {
-                throw new WrongArgumentException("     ☹ OOPS!!! I'm sorry, " +
-                        "but I don't know what that means :-(");
+                throw new WrongArgumentException("     ☹ OOPS!!! I'm sorry, "
+                        + "but I don't know what that means :-(");
             }
         } catch (InsufficientArgumentsException e) {
             return new Parser("", e.getMessage(), null, -1);
@@ -138,7 +138,8 @@ public class Parser {
      * @return Due date of the task of concern
      */
     private LocalDate getDueDate(String[] parts, String delimiter) {
-        boolean flag = false, first = true;
+        boolean flag = false;
+        boolean first = true;
         String dueDate = "";
         for (String s : parts) {
             if (flag) {

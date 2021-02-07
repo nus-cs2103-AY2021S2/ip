@@ -1,6 +1,6 @@
 import java.time.LocalDate;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Ui allows interactions with the user and prompts user for command

@@ -1,12 +1,11 @@
-import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Duke allows the user to maintain a list of tasks
  */
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -61,7 +60,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
-
     /*public static void main(String[] args) {
         String logo = " ____         _        \n"
                     + "|  _ \\ _   _| | _____ \n"

@@ -4,8 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Storage loads existing tasks from the file and saves tasks to the file when required
@@ -17,7 +17,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException{
+    public ArrayList<Task> load() throws FileNotFoundException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         ArrayList<Task> tasks = new ArrayList<Task>();
         File file = new File(this.filePath);
