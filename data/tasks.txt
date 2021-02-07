@@ -3,4 +3,4 @@
 [E][?]drink (at: Feb 01 2021)
 [T][?]join sports club
 [T][?]go home
-[E][?]drink  (at: Jan 01 2021)
+[F][?]running(needs: 1 hour)

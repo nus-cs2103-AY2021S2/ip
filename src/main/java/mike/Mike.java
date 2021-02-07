@@ -74,9 +74,12 @@ public class Mike {
         try {
             int i = Integer.parseInt(descriptionInput);
             Task deletedTask = taskList.delete(i);
+            storage.save(this.taskList);
             return ui.showDeleteSuccess(taskList, deletedTask);
         } catch (IndexOutOfBoundsException e) {
             return ui.showIndexOutOfBoundsError(taskList);
+        } catch (IOException e1) {
+            return ui.showGeneralError();
         }
     }
 

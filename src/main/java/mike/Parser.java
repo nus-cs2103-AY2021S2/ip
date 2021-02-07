@@ -1,9 +1,6 @@
 package mike;
 
-import mike.task.Deadline;
-import mike.task.Event;
-import mike.task.Task;
-import mike.task.ToDo;
+import mike.task.*;
 
 import java.util.Locale;
 
@@ -28,6 +25,8 @@ public class Parser {
             return parseDeadline(input);
         case EVENT:
             return parseEvent(input);
+        case FIXED:
+            return parseFixedDurationTask(input);
         default:
             throw new ParseException("The command is not valid");
         }
@@ -94,6 +93,21 @@ public class Parser {
         }
     }
 
+    private static FixedDurationTask parseFixedDurationTask(String input) throws ParseException {
+        if (input.equals(" ") || input.isEmpty()) {
+            throw new ParseException("OOPS!!! The description of a fixed duration task cannot be empty.");
+        } else if (input.contains("/needs ")) {
+            int endIndexOfDescription = input.indexOf("/needs ");
+            String fixedDurationTaskDescription = input.substring(0, endIndexOfDescription);
+            assert !fixedDurationTaskDescription.isEmpty() : "Description of an event cannot be empty";
+            String fixedDurationTaskTime = input.substring(endIndexOfDescription + 7);
+            return new FixedDurationTask(fixedDurationTaskDescription, fixedDurationTaskTime);
+        } else {
+            throw new ParseException("OOPS!!! Please enter '/at YYYY-MM-DD after the description");
+        }
+    }
+
+
     /**
      * Returns a Task that is parsed from a String
      * Used to parse lines from a file for tasks
@@ -109,6 +123,8 @@ public class Parser {
             task = parseForDeadlineInFile(line);
         } else if (line.charAt(1) == 'E') {
             task = parseForEventInFile(line);
+        } else if (line.charAt(1) == 'F') {
+            task = parseForFixedDurationTaskInFile(line);
         } else {
             throw new ParseException("OOPS!!! It seems that the file might be corrupted.");
         }
@@ -185,5 +201,12 @@ public class Parser {
         String eventDescription = line.substring(6, endIndexOfDescription - 2);
         String eventTime = line.substring(endIndexOfDescription + 4, line.length() - 1);
         return new Event(eventDescription, eventTime);
+    }
+
+    private static FixedDurationTask parseForFixedDurationTaskInFile(String line) {
+        int endIndexOfDescription = line.indexOf("needs: ");
+        String fixedDurationTaskDescription = line.substring(6, endIndexOfDescription - 2);
+        String fixedDurationTaskTime = line.substring(endIndexOfDescription + 7, line.length() - 1);
+        return new FixedDurationTask(fixedDurationTaskDescription, fixedDurationTaskTime);
     }
 }
