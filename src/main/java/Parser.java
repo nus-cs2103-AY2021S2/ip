@@ -37,7 +37,6 @@ public class Parser {
                     }
                     return "";
                 case "done":
-                    System.out.println(this.description.substring(5).trim());
                     return this.description.substring(5);
                 case "delete":
                     return this.description.substring(7);

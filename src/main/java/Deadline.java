@@ -24,7 +24,6 @@ public class Deadline extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
             this.deadline = LocalDate.parse(deadline, formatter);
         } catch (DateTimeParseException e) {
-            System.out.println(e.getMessage());
             throw new DukeExceptionDeadline("Wrong format of date." +
                     " The format should be yyyy-MM-dd");
         }
