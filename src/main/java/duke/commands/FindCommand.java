@@ -9,9 +9,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.utils.ConvertType;
 import duke.utils.Storage;
+import duke.utils.TaskStringConverter;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
@@ -19,6 +22,7 @@ public class FindCommand extends Command {
 
     /**
      * Creates a FindCommand object to store the find command input from the user.
+     *
      * @param taskList the current list of Tasks.
      * @param storage the object in charge of writing to the local storage file.
      * @param toFind the phrase to search in all the tasks.
@@ -30,6 +34,7 @@ public class FindCommand extends Command {
 
     /**
      * Searches TaskList for Tasks with descriptions matching toFind String.
+     *
      * If there exist such Tasks, prints these Tasks.
      * Else, display message indicating no matching Tasks.
      * @return message showing all the relevant Tasks.
@@ -41,10 +46,9 @@ public class FindCommand extends Command {
         if (results.size() == 0) {
             String noMatchingTaskMsg = "There are no tasks matching your input :(";
             return noMatchingTaskMsg;
-        } else {
-            String msg = "These are the search results:" + listToString(results).toString();
-            return msg;
         }
+        String msg = "These are the search results:" + listToString(results).toString();
+        return msg;
     }
 
     private StringBuilder listToString(List<Task> results) {

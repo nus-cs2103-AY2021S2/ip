@@ -10,6 +10,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a DeleteCommand object to store the delete command input from the user.
+     *
      * @param taskList the current list of Tasks.
      * @param storage the object in charge of writing to the local storage file.
      * @param position the position of the task to delete from the taskList.
@@ -21,6 +22,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes Task at the previously specified position in the taskList.
+     *
      * Thereafter, prints confirmation and remaining number of tasks.
      * @return message confirming that indicated task is deleted.
      */

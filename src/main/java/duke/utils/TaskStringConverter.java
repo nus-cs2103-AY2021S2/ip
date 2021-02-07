@@ -20,13 +20,43 @@ public class TaskStringConverter {
      *
      * @param list List of Tasks to convert to Strings.
      * @return List of Strings.
+     * @throws InvalidTaskTypeException if one of the Tasks in taskList is not a valid Task.
      */
-    public static List<String> allTaskToAllString(List<Task> list) {
+    public static List<String> listTaskToListString(List<Task> list, ConvertType type) throws InvalidTaskTypeException {
         List<String> result = new ArrayList<>();
+
         for (Task task : list) {
-            result.add(taskToString(task));
+            switch (type) {
+            case FILE:
+                result.add(taskToStringFile(task));
+                break;
+            case PROGRAM:
+                result.add(taskToStringProgram(task));
+                break;
+            default:
+                throw new InvalidTaskTypeException(); // placeholder
+            }
         }
+
         return result;
+    }
+
+    private static String taskToStringProgram(Task task) {
+        return task.toString();
+    }
+
+    private static String taskToStringFile(Task task) throws InvalidTaskTypeException {
+        String done = task.isDone() ? "1" : "0";
+
+        if (task instanceof ToDo) {
+            return "T | " + done + " | " + task.getDescription();
+        } else if (task instanceof Event) {
+            return "E | " + done + " | " + task.getDescription() + " | " + ((Event) task).getDateToStore();
+        } else if (task instanceof Deadline) {
+            return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDateToStore();
+        } else {
+            throw new InvalidTaskTypeException();
+        }
     }
 
     /**
@@ -43,18 +73,6 @@ public class TaskStringConverter {
             result.add(stringInputToTask(s));
         }
         return result;
-    }
-
-    private static String taskToString(Task task) {
-        String done = task.isDone() ? "1" : "0";
-
-        if (task instanceof ToDo) {
-            return "T | " + done + " | " + task.getDescription();
-        } else if (task instanceof Event) {
-            return "E | " + done + " | " + task.getDescription() + " | " + ((Event) task).getDateToStore();
-        } else {
-            return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDateToStore();
-        }
     }
 
     private static Task stringInputToTask(String input) throws InvalidTaskTypeException {

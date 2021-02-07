@@ -12,6 +12,7 @@ public class ListCommand extends Command {
 
     /**
      * Prints all tasks in taskList.
+     *
      * @return String representation of all tasks in taskList.
      */
     @Override

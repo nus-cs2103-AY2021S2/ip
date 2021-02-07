@@ -14,6 +14,7 @@ public class EventCommand extends Command {
 
     /**
      * Creates a EventCommand object to store the event command input from the user.
+     *
      * @param taskList the current list of Tasks.
      * @param storage the object in charge of writing to the local storage file.
      * @param task the task input by the user.
@@ -27,6 +28,7 @@ public class EventCommand extends Command {
 
     /**
      * Adds an Event task with previously specified description and dateTime to taskList.
+     *
      * @return confirmation message for added Deadline Task.
      */
     @Override
