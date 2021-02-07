@@ -51,26 +51,10 @@ public class TaskManager {
      */
     public String takeEvent(String input, ArrayList<Task> tasks) {
         this.tasks = tasks;
+        assert input != null : "input should not be null";
+        assert tasks != null : "tasks should not be null";
         ErrorChecker e = new ErrorChecker(input, tasks);
         categoriseTask(input);
-
-        // if (input.equals("help")) {
-        //    return HELP_RESPONSE;
-        // } else if (input.equals("list")) {
-        //    return listEvents();
-        // } else if (e.isValid()) {
-        //    if (input.startsWith("done")) {
-        //        return markDone(input);
-        //    } else if (input.startsWith("delete")) {
-        //        return deleteTask(input);
-        //    } else if (input.startsWith("find")) {
-        //        return findTasks(input);
-        //    } else {
-        //        return addNewTask(input);
-        //    }
-        // } else {
-        //    return e.getMessage();
-        // }
 
         if (isBye) {
             return BYE_RESPONSE;
@@ -136,11 +120,13 @@ public class TaskManager {
             newTask = new TodoTask(input.substring(5));
         } else if (isDeadline) {
             String[] inputSplit = input.split("/");
+            assert inputSplit.length == 2 : "deadline task input formatted wrongly";
             DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
             newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1),
                     dateTimeConverter.convertDate());
         } else {
             String[] inputSplit = input.split("/");
+            assert inputSplit.length == 4 : "event task input formatted wrongly";
             DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
             newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1),
                     dateTimeConverter.convertDate(), dateTimeConverter.convertTime("from"),
