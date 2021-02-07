@@ -24,7 +24,7 @@ public class Parser {
      * Returns a Task Object by parsing the description depending on the Command
      *
      * @param command an object of the Command type
-     * @param input the input of the user
+     * @param input   the input of the user
      * @return the Task corresponding to the user's command
      * @throws ParseException if parsing fails
      */
@@ -52,9 +52,10 @@ public class Parser {
     private static ToDo parseToDo(String input) throws ParseException {
         if (input.equals(" ") || input.isEmpty()) {
             throw new ParseException("OOPS!!! The description of a todo cannot be empty.");
-        } else {
-            return new ToDo(input);
         }
+        assert !input.isEmpty() : "Input cannot be empty";
+        return new ToDo(input);
+
     }
 
     /**
@@ -71,6 +72,7 @@ public class Parser {
         } else if (input.contains("/by ")) {
             int endIndexOfDescription = input.indexOf("/by ");
             String deadlineDescription = input.substring(0, endIndexOfDescription);
+            assert !deadlineDescription.isEmpty() : "Description of a deadline should not empty";
             String deadline = input.substring(endIndexOfDescription + 4);
             return new Deadline(deadlineDescription, deadline);
         } else {
@@ -92,6 +94,7 @@ public class Parser {
         } else if (input.contains("/at ")) {
             int endIndexOfDescription = input.indexOf("/at ");
             String eventDescription = input.substring(0, endIndexOfDescription);
+            assert !eventDescription.isEmpty() : "Description of an event cannot be empty";
             String eventTime = input.substring(endIndexOfDescription + 4);
             return new Event(eventDescription, eventTime);
         } else {

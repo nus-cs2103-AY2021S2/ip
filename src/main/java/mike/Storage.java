@@ -37,9 +37,11 @@ public class Storage {
         if (!Files.exists(dirPath)) {
             Files.createDirectory(dirPath);
         }
+        assert !Files.exists(dirPath) : false;
         if (!Files.exists(filePath)) {
             Files.createFile(filePath);
         }
+        assert !Files.exists(filePath) : false;
         FileWriter fw = new FileWriter(filePath.toString());
 
         String textToAdd = "";
