@@ -6,25 +6,28 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <Pane prefHeight="98.0" prefWidth="280.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+      <Pane maxHeight="1.7976931348623157E308" minHeight="-Infinity" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
          <children>
-          <Label fx:id="dialog" layoutX="14.0" prefHeight="98.0" prefWidth="252.0" text="Label" wrapText="true">
+          <Label fx:id="dialog" layoutX="3.0" layoutY="12.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" text="Label" textAlignment="JUSTIFY" wrapText="true">
                <padding>
-                  <Insets bottom="15.0" />
+                  <Insets left="7.0" right="3.0" />
                </padding></Label>
          </children>
          <HBox.margin>
-            <Insets right="10.0" />
+            <Insets bottom="20.0" left="5.0" right="10.0" top="20.0" />
          </HBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </Pane>
-    <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
-            <Insets right="20.0" top="20.0" />
+            <Insets right="10.0" top="15.0" />
          </HBox.margin></ImageView>
   </children>
-  <padding>
-    <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-  </padding>
+   <padding>
+      <Insets left="10.0" right="10.0" top="5.0" />
+   </padding>
 </fx:root>
