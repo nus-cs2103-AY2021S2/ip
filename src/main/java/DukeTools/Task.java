@@ -1,5 +1,13 @@
 package DukeTools;
 
+/**
+ * The Task class encapsulates
+ * task descriptions and their completion status
+ *
+ * @author  Justin Gnoh
+ * @version 1.0
+ * @since   2021-02-06
+ */
 public class Task {
     protected boolean isDone;
     public String name;
@@ -14,10 +22,19 @@ public class Task {
         this.name = name;
     }
 
+    /**
+     * This method marks a task as done
+     */
     public void markDone() {
         this.isDone = true;
     }
 
+    /**
+     * This method gets the current task completion status
+     * and returns a symbol accordingly
+     *
+     * @return String This is a tick or a cross
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
