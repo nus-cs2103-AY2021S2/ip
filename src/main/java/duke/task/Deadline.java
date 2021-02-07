@@ -30,6 +30,9 @@ public class Deadline extends Task {
      * @throws DukeException if insufficient or invalid arguments are passed.
      */
     public static Task createDeadline(String[] command) throws DukeException {
+
+        assert command != null : "Deadline commands cannot be null";
+
         if (command.length == 1) {
             throw new DukeException("There's not enough information about your Deadline order!");
         }

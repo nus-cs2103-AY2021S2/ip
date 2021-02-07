@@ -30,6 +30,9 @@ public class Event extends Task {
      * @throws DukeException if insufficient or invalid arguments are passed.
      */
     public static Task createEvent(String[] command) throws DukeException {
+
+        assert command != null : "Event commands cannot be null";
+
         if (command.length == 1) {
             throw new DukeException("There's not enough information about your Event order!");
         }
