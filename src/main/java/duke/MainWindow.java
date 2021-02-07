@@ -42,17 +42,17 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-
+/*
     private String getResponse(String input) {
         Duke iceBear = new Duke();
         if (input.equals("bye")) {
             return "Bye. Hope to see you again soon!";
         }
         try {
-            String[] processedText = iceBear.processCommand(input);
+            String[] processedText = iceBear.parseCommand(input);
             return iceBear.process(processedText);
         } catch (DukeException exception) {
             return exception.toString();
         }
-    }
+    }*/
 }

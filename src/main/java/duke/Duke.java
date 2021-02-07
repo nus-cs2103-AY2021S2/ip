@@ -3,13 +3,14 @@ import java.util.Scanner;
 
 
 /**
- * The main driver class for Duke. The tasklist contains the task list. The Ui deals
- * with interactions with the user. The parser deals with making sense of the user
- * commands.
+ * The main driver class for Dukebot.
  */
 class Duke {
+    // Contains the task list, with operations to add/delete tasks.
     private TaskList taskList;
+    // Deals with making sense of the user command.
     private Parser parser;
+    // Deals with interactions with the user.
     private Ui ui;
 
     /**
@@ -20,15 +21,14 @@ class Duke {
         this.taskList = new TaskList();
         this.parser = new Parser();
         this.ui = new Ui();
-        System.out.println("Hello! I'm Icebear");
-        System.out.println("What can I do for you?");
+        System.out.println(this.greet());
     }
 
     /**
-     * The main method of our program. The program terminates with the "bye" command.
+     * The main driver method to test our program. The method terminates with the "bye" command.
      *
-     * @param args
-     * @throws Exception
+     * @param args the user input
+     * @throws Exception the program terminates when an exception is thrown
      */
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
@@ -36,34 +36,35 @@ class Duke {
         while (true) {
             String nextCommand = scan.nextLine();
             if (nextCommand.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println(iceBear.exit());
                 break;
-            } else {
-                try {
-                    String[] processedText = iceBear.parser.processCommand(nextCommand);
-                    iceBear.process(processedText);
-                } catch (DukeException exception) {
-                    System.out.println(exception);
-                }
+            }
+            try {
+                System.out.println(iceBear.process(nextCommand));
+            } catch (DukeException exception) {
+                System.out.println(exception);
             }
         }
     }
-    public String[] processCommand(String input) throws DukeException {
-        return this.parser.processCommand(input);
+    private String greet() {
+        String greetingMessage = "Hello! I'm Icebear\nWhat can I do for you?";
+        return greetingMessage;
     }
-
-    public String process(String[] processedInput) {
-        return this.ui.processCommand(processedInput, this.taskList);
+    private String exit() {
+        String farewellMessage = "Bye. Hope to see you again soon!";
+        return farewellMessage;
     }
-
+    private String process(String input) throws DukeException {
+        String[] parsedCommand = this.parser.parseCommand(input);
+        return this.ui.processCommand(parsedCommand, this.taskList);
+    }
     public String getResponse(String input) {
         Duke iceBear = new Duke();
         if (input.equals("bye")) {
             return "Bye. Hope to see you again soon!";
         }
         try {
-            String[] processedText = iceBear.processCommand(input);
-            return iceBear.process(processedText);
+            return iceBear.process(input);
         } catch (DukeException exception) {
             return exception.toString();
         }

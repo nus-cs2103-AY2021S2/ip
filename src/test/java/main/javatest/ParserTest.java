@@ -2,6 +2,7 @@ package main.javatest;
 
 import duke.DukeException;
 import duke.Parser;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -13,7 +14,7 @@ public class ParserTest {
         Parser parser = new Parser();
         String[] actual = {"event", "Dinner", "2019-12-11"};
         try {
-            assertEquals(actual[0], parser.processCommand("event Dinner /at 2019-12-11")[0]);
+            assertEquals(actual[0], parser.parseCommand("event Dinner /at 2019-12-11")[0]);
         } catch (DukeException e) {
             System.out.println(e);
         }
@@ -23,10 +24,10 @@ public class ParserTest {
     public void parserDeadline() {
         Parser parser = new Parser();
         try {
-            assertEquals(null, parser.processCommand("deadline Dinner 2019-12-11"));
+            assertEquals(null, parser.parseCommand("deadline Dinner 2019-12-11"));
             fail();
         } catch (DukeException e) {
-            assertEquals(new DukeException("Invalid description of deadline").toString(),e.toString());
+            assertEquals(new DukeException("Invalid description of deadline").toString(), e.toString());
         }
     }
 
@@ -34,7 +35,7 @@ public class ParserTest {
     public void parserToDo() {
         Parser parser = new Parser();
         try {
-            assertEquals(null, parser.processCommand("todo"));
+            assertEquals(null, parser.parseCommand("todo"));
             fail();
         } catch (DukeException e) {
             assertEquals(new DukeException("Invalid input, description "
