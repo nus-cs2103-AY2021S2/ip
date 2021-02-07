@@ -24,7 +24,7 @@ public class Task {
      * @return X for done or SPACE for not done.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); //return tick or X symbols
+        return (isDone) ? "X" : " "; //return tick or X symbols
     }
 
     /**

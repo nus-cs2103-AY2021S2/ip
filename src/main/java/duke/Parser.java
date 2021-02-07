@@ -32,9 +32,7 @@ public class Parser {
             return new ExitCommand();
         } else if (type.equals("todo") || type.equals("deadline") || type.equals("event")) {
             if (fullCommand.split(" ").length == 1) {
-                String aOrAn = type.equals("event")
-                        ? "an "
-                        : "a ";
+                String aOrAn = (type.equals("event")) ? "an " : "a ";
                 throw new DukeException("☹ OOPS!!! The description of " + aOrAn + type + " cannot be empty.");
             }
             description = fullCommand.split(type + " ")[1];
