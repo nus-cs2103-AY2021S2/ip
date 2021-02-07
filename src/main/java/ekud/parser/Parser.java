@@ -17,6 +17,7 @@ import ekud.command.DeleteCommand;
 import ekud.command.DoneCommand;
 import ekud.command.FindCommand;
 import ekud.command.ListCommand;
+import ekud.command.ViewCommand;
 import ekud.common.exception.EkudException;
 import ekud.common.exception.IncompleteDetailException;
 import ekud.common.exception.InvalidCommandException;
@@ -31,7 +32,6 @@ public class Parser {
     private static final Pattern TIMED_TASK_ARGS = Pattern.compile("(?<description>.*)\\s+"
             + "(?<separator>/(?:by|at))\\s+"
             + "(?<datetime>.*)");
-    private static final Pattern DATE_TIME_FORMAT = Pattern.compile("^[0-3]?\\d/[0-1]?\\d/\\d{4}\\s+\\d{4}");
 
     /**
      * Create an AddCommand from specified command type and arguments.
@@ -77,6 +77,21 @@ public class Parser {
         return command;
     }
 
+    private static ViewCommand createViewCommand(String arguments) throws EkudException {
+        if (arguments.isBlank()) {
+            throw new IncompleteDetailException("date");
+        }
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(arguments, DateTimeFormatter.ofPattern("d/M/yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new EkudException("Invalid date format, use d/M/yyyy");
+        }
+
+        return new ViewCommand(date);
+    }
+
     /**
      * Parse a given line of command into an executable Command.
      *
@@ -108,13 +123,7 @@ public class Parser {
                 return new ListCommand();
             }
 
-            LocalDate date;
-            try {
-                date = LocalDate.parse(arguments, DateTimeFormatter.ofPattern("d/M/yyyy"));
-            } catch (DateTimeParseException e) {
-                throw new EkudException("Invalid date format, use d/M/yyyy");
-            }
-            return new ListCommand(date);
+            return new ListCommand();
 
         case DONE:
             try {
@@ -138,16 +147,21 @@ public class Parser {
         case TODO:
         case DEADLINE:
         case EVENT:
-            if (arguments.isBlank()) {
-                throw new NoTaskDescriptionException();
-            }
             return createAddCommand(func, arguments);
 
         case FIND:
             if (arguments.isBlank()) {
                 throw new IncompleteDetailException("keyword");
             }
+
             return new FindCommand(arguments);
+
+        case VIEW:
+            if (arguments.isBlank()) {
+                throw new IncompleteDetailException("date");
+            }
+
+            return createViewCommand(arguments);
 
         default:
             throw new InvalidCommandException();
@@ -162,6 +176,7 @@ public class Parser {
         TODO,
         DEADLINE,
         EVENT,
-        FIND
+        FIND,
+        VIEW
     }
 }
