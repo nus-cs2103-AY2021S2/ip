@@ -71,6 +71,8 @@ public class Parser {
             }
         }
 
+        assert command != null : "No add command created!";
+
         return command;
     }
 
