@@ -4,7 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.task.TaskList;
 
-public class FindCommand extends Command {
+public class FindCommand implements Command {
     private String kw;
 
     /**
@@ -13,7 +13,6 @@ public class FindCommand extends Command {
      * @param kw
      */
     public FindCommand(String kw) {
-        super(false);
         this.kw = kw;
     }
 

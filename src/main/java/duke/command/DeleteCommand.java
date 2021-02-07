@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class DeleteCommand extends Command {
+public class DeleteCommand extends UndoRedoableCommand implements Command {
     private int idx;
 
     /**
@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
      * @param idx
      */
     public DeleteCommand(int idx) {
-        super(false);
+        super();
         this.idx = idx - 1;
     }
 

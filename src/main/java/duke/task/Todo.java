@@ -27,4 +27,8 @@ public class Todo extends Task {
     public String toSavedString() {
         return String.format("T | %d | %s", super.isDone ? 1 : 0, super.description);
     }
+
+    public Task clone() {
+        return new Todo(description, isDone);
+    }
 }

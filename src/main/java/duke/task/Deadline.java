@@ -26,8 +26,12 @@ public class Deadline extends Task {
      * @param deadline
      */
     public Deadline(String description, boolean isDone, String deadline) {
+        this(description, isDone, LocalDate.parse(deadline));
+    }
+
+    private Deadline(String description, boolean isDone, LocalDate deadline) {
         super(description, isDone);
-        this.deadline = LocalDate.parse(deadline);
+        this.deadline = deadline;
     }
 
     /**
@@ -48,5 +52,9 @@ public class Deadline extends Task {
      */
     public String toSavedString() {
         return String.format("D | %d | %s | %s", super.isDone ? 1 : 0, super.description, deadline);
+    }
+
+    public Task clone() {
+        return new Deadline(description, deadline.toString());
     }
 }

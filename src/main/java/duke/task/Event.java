@@ -26,8 +26,19 @@ public class Event extends Task {
      * @param time
      */
     public Event(String description, boolean isDone, String time) {
+        this(description, isDone, LocalDate.parse(time));
+    }
+
+    /**
+     * Creates an Event task with given description, isDone status, and time.
+     *
+     * @param description
+     * @param isDone
+     * @param time
+     */
+    public Event(String description, boolean isDone, LocalDate time) {
         super(description, isDone);
-        this.time = LocalDate.parse(time);
+        this.time = time;
     }
 
     /**
@@ -48,5 +59,9 @@ public class Event extends Task {
      */
     public String toSavedString() {
         return String.format("E | %d | %s | %s", super.isDone ? 1 : 0, super.description, time);
+    }
+
+    public Task clone() {
+        return new Event(description, isDone, time);
     }
 }

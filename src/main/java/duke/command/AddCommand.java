@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class AddCommand extends Command {
+public class AddCommand extends UndoRedoableCommand implements Command {
     private Task task;
 
     /**
@@ -15,7 +15,7 @@ public class AddCommand extends Command {
      * @param task
      */
     public AddCommand(Task task) {
-        super(false);
+        super();
         this.task = task;
     }
 
