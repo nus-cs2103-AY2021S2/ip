@@ -36,40 +36,40 @@ public class Parser {
 
         case "delete":
             if (messages.length == 1) {
-                throw new MonicaException("The task index is missing.");
+                throw new MonicaException("The delete index is missing.\n");
             }
             return new DeleteCommand(Integer.parseInt(messages[1]));
 
         case "done":
             if (messages.length == 1) {
-                throw new MonicaException("The task index is missing.");
+                throw new MonicaException("The done index is missing.\n");
             }
             int id = Integer.parseInt(messages[1]);
             return new DoneCommand(id);
 
         case "deadline":
             if (messages.length == 1) {
-                throw new MonicaException("The task description is missing.");
+                throw new MonicaException("The deadline description is missing.\n");
             }
             try {
                 return generateDeadline(processTask(commandLine));
             } catch (Exception ex) {
-                throw new MonicaException("Deadline description is in wrong format.");
+                throw new MonicaException("The deadline description is in wrong format.\n");
             }
 
         case "event":
             if (messages.length == 1) {
-                throw new MonicaException("The task description is missing.");
+                throw new MonicaException("The event description is missing.\n");
             }
             try {
                 return generateEvent(processTask(commandLine));
             } catch (Exception ex) {
-                throw new MonicaException("Event description is in wrong format.");
+                throw new MonicaException("The event description is in wrong format.\n");
             }
 
         case "todo":
             if (messages.length == 1) {
-                throw new MonicaException("The task description is missing.");
+                throw new MonicaException("The todo description is missing.\n");
             }
             return new AddTodo(new Todo(processTask(commandLine), 0));
 
@@ -78,12 +78,12 @@ public class Parser {
 
         case "find":
             if (messages.length == 1) {
-                throw new MonicaException("The keyword is missing.");
+                throw new MonicaException("The keyword is missing.\n");
             }
             return new FindCommand(processTask(commandLine));
 
         default:
-            throw new MonicaException("I'm sorry, but I don't know what " + commandType + " means.");
+            throw new MonicaException("I don't know what " + commandType + " means.\n");
 
         }
     }

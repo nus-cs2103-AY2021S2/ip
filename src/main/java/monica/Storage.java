@@ -8,8 +8,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import monica.task.*;
-
+import monica.task.Deadline;
+import monica.task.Event;
+import monica.task.Task;
+import monica.task.TaskList;
+import monica.task.Todo;
 /**
  * Represents local storage of task data.
  */

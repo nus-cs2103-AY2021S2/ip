@@ -2,9 +2,9 @@ package monica.command;
 
 import monica.MonicaException;
 import monica.Storage;
+import monica.task.Task;
 import monica.task.TaskList;
 import monica.ui.Ui;
-import monica.task.Task;
 
 /**
  * Represents a command that deletes task from the task list.

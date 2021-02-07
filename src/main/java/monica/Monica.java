@@ -5,7 +5,7 @@ import monica.task.TaskList;
 import monica.ui.Ui;
 
 /**
- * Represents the main class of the application <code>Duke</code>.
+ * Represents the read-and-respond action of the application <code>Monica</code>.
  */
 public class Monica {
     private Storage storage;
@@ -14,7 +14,7 @@ public class Monica {
     private final String filePath = "src/main/java/data/tasks.txt";
 
     /**
-     * Constructor for Duke class that initiates task storage locally.
+     * Constructor for Monica class that initiates task storage locally.
      */
     public Monica() {
         ui = new Ui();
@@ -27,7 +27,7 @@ public class Monica {
     }
 
     /**
-     * Executes the command lines from a user.
+     * Responds to the command lines from a user.
      */
     public String getResponse(String input) {
         try {

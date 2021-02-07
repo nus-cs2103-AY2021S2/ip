@@ -1,9 +1,9 @@
 package monica.command;
 
 import monica.Storage;
+import monica.task.Task;
 import monica.task.TaskList;
 import monica.ui.Ui;
-import monica.task.Task;
 
 /**
  * Represents a command that adds task into the task list.

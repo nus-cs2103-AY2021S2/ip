@@ -1,7 +1,7 @@
 package monica.ui;
 
-import monica.task.TaskList;
 import monica.task.Task;
+import monica.task.TaskList;
 
 /**
  * Represents the responses to the user.
@@ -24,7 +24,7 @@ public class Ui {
     public String showAdded(Task task, TaskList tasks) {
         return "Got it. I've added this task:\n  " + task
                 + "\nNow you have " + tasks.getSize() + " task"
-                + (tasks.getSize() > 1 ? "s in the list." : " in the list.");
+                + (tasks.getSize() > 1 ? "s in the list." : " in the list.\n");
     }
 
     /**
@@ -35,7 +35,7 @@ public class Ui {
     public String showDeleted(Task task, TaskList tasks) {
         return "Noted. I've removed this task:\n  " + task
                 + "\nNow you have " + tasks.getSize() + " task"
-                + (tasks.getSize() > 1 ? "s in the list." : " in the list.");
+                + (tasks.getSize() > 1 ? "s in the list." : " in the list.\n");
 
     }
 
@@ -44,8 +44,8 @@ public class Ui {
      * @param id Task ID.
      * @param tasks Task List.
      */
-    public  String showDone(int id, TaskList tasks) {
-        return "Nice! I've marked this task as done:\n" + tasks.getTask(id);
+    public String showDone(int id, TaskList tasks) {
+        return "Nice! I've marked this task as done:\n" + tasks.getTask(id) + "\n";
     }
 
     /**

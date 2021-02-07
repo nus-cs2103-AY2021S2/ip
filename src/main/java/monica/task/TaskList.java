@@ -2,8 +2,6 @@ package monica.task;
 
 import java.util.ArrayList;
 
-import monica.task.Task;
-
 /**
  * Represents a list of tasks.
  */

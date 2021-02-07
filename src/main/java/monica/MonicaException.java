@@ -1,12 +1,12 @@
 package monica;
 /**
- * Represents exceptions specified by Duke application.
+ * Represents exceptions specified by Monica application.
  */
 public class MonicaException extends Exception {
     protected String message;
 
     /**
-     * Constructor for DukeException class that handles exceptions.
+     * Constructor for MonicaException class that handles exceptions.
      * @param message Error message.
      */
     public MonicaException(String message) {
@@ -17,6 +17,6 @@ public class MonicaException extends Exception {
      * Generates output message when an exception is caught.
      */
     public String toString() {
-        return ":< OOPS!!! " + message;
+        return ":< OOPS!!! " + message + "Enter 'help' to find out more.\n";
     }
 }
