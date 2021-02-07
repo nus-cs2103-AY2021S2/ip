@@ -22,6 +22,7 @@ public class Event extends Task {
      *
      * @return a String of the type.
      */
+    @Override
     public String getTaskType() {
         return "Event";
     }

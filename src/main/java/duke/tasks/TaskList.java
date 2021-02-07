@@ -53,11 +53,17 @@ public class TaskList {
     }
 
     /**
-     * Add task to list.
+     * Adds toDo to list.
      *
-     * @param task Task.
+     * @param task task.
+     * @throws DukeException if Duplicates are present.
      */
-    public void add(Task task) {
+    public void add(Task task) throws DukeException {
+        for (Task myTask : tasks) {
+            if (myTask.isEqual(task)) {
+                throw new DukeException("Duplicates are not allowed!");
+            }
+        }
         tasks.add(task);
     }
 

@@ -12,9 +12,11 @@ public class ToDo extends Task {
      *
      * @return the String of the type.
      */
+    @Override
     public String getTaskType() {
         return "ToDo";
     }
+
 
     /**
      * Returns a string of description to be saved in the myDuke.txt.

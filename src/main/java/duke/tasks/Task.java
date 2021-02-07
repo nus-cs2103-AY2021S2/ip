@@ -27,6 +27,14 @@ public class Task {
         return this.taskName;
     }
 
+    public String getTaskType() {
+        return "Task";
+    }
+
+    public boolean isEqual(Task task) {
+        return this.taskName.equals(task.taskName);
+    }
+
     /**
      * Marks the given task as completed.
      */
