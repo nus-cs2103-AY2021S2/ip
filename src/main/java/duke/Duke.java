@@ -34,6 +34,12 @@ public class Duke {
         storage.loadTasks(tasks);
     }
 
+    /**
+     * Function method to be used in main to start Duke
+     *
+     * @throws DukeException
+     */
+
     public void run() throws DukeException {
         ui.start();
         boolean isExit = false;

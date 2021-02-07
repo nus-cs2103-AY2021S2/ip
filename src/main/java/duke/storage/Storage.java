@@ -19,7 +19,6 @@ import java.nio.file.Paths;
  * Saves the Arraylist of Tasks into a .txt file.
  * Loads the Arraylist of Tasks from a .txt file into a ArrayList Object
  */
-
 public class Storage {
     public static String DIRECTORY;
 
@@ -28,7 +27,6 @@ public class Storage {
      *
      * @param directory, the path of storage file
      */
-
     public Storage(String directory) {
         this.DIRECTORY = directory;
     }
@@ -38,7 +36,6 @@ public class Storage {
      * into a .txt file.
      * @param taskList
      */
-
     public void saveTaskList(TaskList taskList) {
         Path path = Paths.get(this.DIRECTORY, "Data");
         try {
@@ -87,7 +84,6 @@ public class Storage {
      *
      * @param taskList
      */
-
     public void loadTasks(TaskList taskList) {
         Path filePath = Paths.get(this.DIRECTORY, "Data", "taskList.txt");
 
@@ -129,6 +125,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if the task has been marked done before
+     *
+     * @param item, task to be checked
+     * @return boolean indicating whether it has been marked done before
+     */
     private static boolean checkDone (String item) {
         return item.equals("1");
     }

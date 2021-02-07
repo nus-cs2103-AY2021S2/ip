@@ -11,6 +11,16 @@ public class ByeCommand extends Command {
         super(description);
     }
 
+    /**
+     * Gives a goodbye greeting
+     *
+     * @param taskList, the list of tasks
+     * @param ui, the UI object
+     * @param storage, the storage object
+     * @return String which is a goodbye greeting after saving taskList into storage
+     * @throws DukeException
+     */
+
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] inputList = description.trim().split(" ", 2);
 

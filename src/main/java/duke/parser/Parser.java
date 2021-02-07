@@ -46,7 +46,7 @@ public class Parser {
     }
 
     /**
-     * Checks if the command given is "todo"
+     * Checks if the command given is "todo".
      *
      * @param check, the command to be checked
      * @return boolean, where true means command is indeed "todo"

@@ -12,6 +12,16 @@ public class AddCommand extends Command {
         super(description);
     }
 
+    /**
+     * Adds a new task to taskList
+     *
+     * @param taskList, the list of tasks
+     * @param ui, the UI object
+     * @param storage, the storage object
+     * @return String message based on AddCommand
+     * @throws DukeException
+     */
+
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task taskItem;
         String[] inputList = description.trim().split(" ", 2);

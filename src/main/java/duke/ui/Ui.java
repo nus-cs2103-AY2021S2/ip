@@ -87,25 +87,7 @@ public class Ui {
         formatAndPrintType2a(message);
         return message;
     }
-//
-//    /**
-//     * Prints out all the tasks in the list
-//     * @param tasks, the current taskList object containing all the tasks
-//     */
-//    public static String getList(TaskList tasks) {
-//        sb = new StringBuilder();
-//        String message = "Here is a list of your tasks, Master:";
-//        sb.append(message);
-//
-//        for (int i = 0; i < tasks.getSize(); i++) {
-//            sb.append("\n" + String.valueOf(i + 1) + ". " + tasks.getTask(i).toString());
-//
-//        }
-//        String messageFinal = sb.toString();
-//        formatAndPrintType1(messageFinal);
-//
-//        return messageFinal;
-//    }
+
 //
 //    /**
 //     * Prints message for number of tasks left in list.

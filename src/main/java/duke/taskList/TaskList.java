@@ -7,7 +7,6 @@ import java.util.ArrayList;
 /**
  * A taskList class which stores Task objects in an ArrayList object.
  */
-
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -20,7 +19,6 @@ public class TaskList {
      *
      * @param task
      */
-
     public void addTask(Task task) {
         taskList.add(task);
     }
@@ -31,7 +29,6 @@ public class TaskList {
      *
      * @param i, the index position of the task Object
      */
-
     public Task removeTask(int i) {
         return taskList.remove(i);
     }
@@ -41,7 +38,6 @@ public class TaskList {
      *
      * @return int, size of the taskList
      */
-
     public int getSize() {
         return taskList.size();
     }
@@ -52,7 +48,6 @@ public class TaskList {
      * @param i, index of the task
      * @return Task, at the given index
      */
-
     public Task getTask(int i) {
         return taskList.get(i);
     }
