@@ -18,7 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for ui.controllers.MainWindow. Provides the layout for the other controls.
+ * Controller for ui.controllers.MainWindow. Provides the layout for the other
+ * controls.
  */
 public class MainWindow extends AnchorPane {
     private static final long EXIT_DELAY_MILLISECONDS = 2000;
@@ -58,30 +59,35 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * Duke's reply and then appends them to the dialog container. Clears the user
+     * input after processing.
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         addDialog(input, DialogUser.USER);
 
-        DukeResponse response = null;
-        String message;
-        try {
-            response = duke.getResponse(input);
-            message = response.getMessage();
-        } catch (IOException ioe) {
-            message = "Failed to save. Please restart the program.";
-        }
-
-        addDialog(message, DialogUser.DUKE);
         userInput.clear();
+
+        DukeResponse response = getDukeReponse(input);
+        addDialog(response.getMessage(), DialogUser.DUKE);
 
         if (response != null && response.isExit()) {
             CompletableFuture.delayedExecutor(EXIT_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
                     .execute(() -> Platform.exit());
         }
+    }
+
+    private DukeResponse getDukeReponse(String input) {
+        DukeResponse response = null;
+        try {
+            response = duke.getResponse(input);
+        } catch (IOException ioe) {
+            response = new DukeResponse("Failed to save. Please restart the program.");
+        }
+
+        return response;
     }
 
     /**
@@ -108,6 +114,5 @@ public class MainWindow extends AnchorPane {
  * Enum to determine which user the dialog belongs to
  */
 enum DialogUser {
-    USER,
-    DUKE
+    USER, DUKE
 }
