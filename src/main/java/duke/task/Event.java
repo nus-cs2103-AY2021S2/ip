@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * <code>Event</code> class represents any event task with a description and date.
  */
 public class Event extends Task {
-    private final LocalDateTime date;
+    private LocalDateTime date;
 
     /**
      * Constructor for <code>Event</code> class
@@ -30,6 +30,12 @@ public class Event extends Task {
     public String getTaskDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return this.date.format(formatter);
+    }
+
+    @Override
+    public void setDateTime(String newDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.date = LocalDateTime.parse(newDateTime, formatter);
     }
 
     /**

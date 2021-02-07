@@ -61,7 +61,7 @@ public class Ui {
      * Prints a validation message when user adds a new Task to the list.
      *
      * @param newTask New Task added by the user.
-     * @param list List of existing tasks.
+     * @param list    List of existing tasks.
      * @return String message of the task added to the list.
      */
     public String printAddTask(Task newTask, List<Task> list) {
@@ -74,7 +74,7 @@ public class Ui {
      * Prints a validation message when user marks a Task as done.
      *
      * @param taskNumber Number of the task that the user marked as done.
-     * @param list List of existing tasks.
+     * @param list       List of existing tasks.
      * @return String message of the task marked as done.
      */
     public String printDoneTask(int taskNumber, List<Task> list) {
@@ -111,5 +111,17 @@ public class Ui {
         }
         stringBuilder.append(firstReply);
         return stringBuilder.toString();
+    }
+
+    /**
+     * Prints a validation message when user updates a task.
+     *
+     * @param list List of existing tasks.
+     * @param taskNumber Number of the task to be updated.
+     * @return String message of the updated task.
+     */
+    public String printUpdatePrompt(List<Task> list, int taskNumber) {
+        return "Noted. I've updated the following task to:\n"
+                + "        " + list.get(taskNumber);
     }
 }

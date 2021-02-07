@@ -56,6 +56,7 @@ public class Parser {
         case "todo":
         case "deadline":
         case "event":
+        case "update":
             if (userInputArr.length == 1) {
                 throw new EmptyDescriptionException(task);
             }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -118,5 +119,38 @@ public class TaskList {
             }
         }
         return tempList;
+    }
+
+    /**
+     * Updates an existing task in the list.
+     *
+     * @param taskNumber Number of the task to be updated.
+     * @param detailToUpdate Detail of the task to be updated.
+     * @param newDetail New detail to update to.
+     */
+    public void updateTask(int taskNumber, String detailToUpdate, String newDetail)
+            throws InvalidInputException {
+        Task task = list.get(taskNumber);
+
+        switch(detailToUpdate) {
+        case "done":
+            if (task.isDone()) {
+                task.markAsUndone();
+            } else {
+                task.markAsDone();
+            }
+            break;
+
+        case "description":
+            task.setDescription(newDetail);
+            break;
+
+        case "date/time":
+            task.setDateTime(newDetail);
+            break;
+
+        default:
+            throw new InvalidInputException();
+        }
     }
 }

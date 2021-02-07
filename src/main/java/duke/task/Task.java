@@ -35,6 +35,19 @@ public class Task {
         this.isDone = true;
     }
 
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
+    /**
+     * Checks if the task is marked as done.
+     *
+     * @return True if the task is done otherwise false.
+     */
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     /**
      * Generates the date of the task.
      *
@@ -62,14 +75,11 @@ public class Task {
         return this.taskType;
     }
 
-    /**
-     * Checks if the task is marked as done.
-     *
-     * @return True if the task is done otherwise false.
-     */
-    public boolean isDone() {
-        return this.isDone;
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
     }
+
+    public void setDateTime(String newDateTime) {}
 
     /**
      * Generates details of a task - description, done.

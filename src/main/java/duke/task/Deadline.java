@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * <code>Deadline</code> class represents any deadline task with a description and date.
  */
 public class Deadline extends Task {
-    private final LocalDateTime date;
+    private LocalDateTime date;
 
     /**
      * Constructor for <code>Deadline</code> class.
@@ -30,6 +30,12 @@ public class Deadline extends Task {
     public String getTaskDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return this.date.format(formatter);
+    }
+
+    @Override
+    public void setDateTime(String newDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.date = LocalDateTime.parse(newDateTime, formatter);
     }
 
     /**
