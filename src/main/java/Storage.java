@@ -47,13 +47,11 @@ public class Storage {
                     LocalDate d = LocalDate.of(year, mon, day);
                     tasks.add(new Event(name, d, done));
                 }
-
             }
             myReader.close();
         } else {
             myObj.createNewFile();
         }
-
         return tasks;
     }
 }
