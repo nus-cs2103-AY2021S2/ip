@@ -1,0 +1,10 @@
+random task
+todo nothing
+done 0
+done 1
+deadline do hw /by 11
+event meetup /at 12
+done 2
+done 3
+list
+bye
