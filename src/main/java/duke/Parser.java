@@ -38,7 +38,6 @@ public class Parser {
         case "bye":
             return new ByeCommand();
         case "done":
-            Command returnCommand;
             if (processedInput.length == 1) {
                 throw new DukeException("Please enter valid numerical input to mark done");
             } else if (!processedInput[1].matches("[0-9]+")) {
@@ -97,6 +96,7 @@ public class Parser {
     }
 
     private static String processDescription(String[] processedInput) {
+        assert processedInput.length >= 1 : "input length must be at least 1";
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < processedInput.length; i++) {
             sb.append(processedInput[i] + " ");

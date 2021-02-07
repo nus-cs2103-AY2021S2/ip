@@ -51,6 +51,7 @@ public class Duke {
         ui.printLine();
         try {
             command = Parser.parse(input);
+            assert command != null : "Parser.parse should return a command";
             isRunning = !command.shouldExit();
             taskList = command.execute(taskList);
             storageHandler.write(taskList);
