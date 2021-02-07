@@ -20,10 +20,10 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Parser p = new Parser(taskList, STORAGE);
-            Command c = p.parse(input);
-            String output = c.execute();
-            return output;
+            Parser parser = new Parser(taskList, STORAGE);
+            Command command = parser.parse(input);
+            String response = command.execute();
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -38,6 +38,7 @@ public class Duke {
         try {
             String msg = "Hello! I'm Duke.\n";
             taskList = STORAGE.loadFromFile();
+
             if (taskList.getList().size() == 0) {
                 msg += "You have no existing tasks!";
             } else {

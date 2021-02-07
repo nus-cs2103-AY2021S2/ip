@@ -43,6 +43,8 @@ public class FindCommand extends Command {
     }
 
     private StringBuilder printList(List<Task> results) {
+        assert results.size() >= 1;
+
         StringBuilder stringBuilder = new StringBuilder("These are the search results:");
         int counter = 1;
         for (Task task : results) {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -36,11 +36,15 @@ public class TaskList {
     }
 
     private String getEmptyListInString() {
+        assert this.taskList.size() == 0;
+
         String completedAllTasksMsg = "You have completed all tasks!";
         return completedAllTasksMsg;
     }
 
     private StringBuilder getNonEmptyListInString() {
+        assert this.taskList.size() >= 1;
+
         StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list:");
         int counter = 1;
         for (Task task : this.taskList) {
@@ -69,6 +73,8 @@ public class TaskList {
      * @param pos position of the task to be removed.
      */
     public void deleteTask(int pos) {
+        assert pos >= 0 && pos < this.taskList.size();
+
         this.taskList.remove(pos);
     }
 }
