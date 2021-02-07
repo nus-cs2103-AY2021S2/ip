@@ -10,8 +10,8 @@ class Deadline extends Task {
     /**
      * Creates a new deadline task object.
      *
-     * @param taskName The name of the deadline
-     * @param deadline The date in which the deadline is due
+     * @param taskName The name of the deadline task
+     * @param deadline The date on which the deadline task is due
      */
     public Deadline(String taskName, LocalDate deadline) {
         super(taskName);
@@ -20,11 +20,11 @@ class Deadline extends Task {
 
     /**
      * Overloaded constructor to create a deadline task object. It accepts one extra argument
-     * to determine if the task is already done.
+     * to determine if the task is already completed.
      *
-     * @param taskName The name of the deadline
-     * @param isDone Whether the deadline is already done
-     * @param deadline The date in which the deadline is due
+     * @param taskName The name of the deadline task
+     * @param isDone Whether the deadline task is already completed
+     * @param deadline The date in which the deadline task is due
      */
     public Deadline(String taskName, boolean isDone, LocalDate deadline) {
         super(taskName, isDone);
@@ -32,7 +32,7 @@ class Deadline extends Task {
     }
 
     /**
-     * Getter method to get the date in which the deadline is due.
+     * Getter method to get the date on which the deadline is due.
      *
      * @return the date in which the deadline is due
      */
@@ -41,16 +41,19 @@ class Deadline extends Task {
     }
 
     /**
-     * Prints the details of the deadline in a special format.
+     * Prints the details of the deadline task in a special format.
      *
-     * @return the details of the deadline, such as the type, whether it is done and its due date.
+     * @return the details of the deadline task as a String.
      */
     @Override
     public String toString() {
+        String type = "[D]";
+        String isCompleted;
         if (this.isDone) {
-            return "[D][X] " + this.taskName + " (by: " + Task.printDate(date) + ")";
+            isCompleted = "[X]";
         } else {
-            return "[D][ ] " + this.taskName + " (by: " + Task.printDate(date) + ")";
+            isCompleted = "[ ]";
         }
+        return type + isCompleted + " " + this.taskName + " (by: " + Task.printDate(date) + ")";
     }
 }

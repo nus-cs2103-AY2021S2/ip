@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The class that deals with loading tasks from the file and saving tasks in the file.
+ * Contains static methods that deal with loading tasks from the file and saving tasks in the file.
  */
 class Storage {
 
