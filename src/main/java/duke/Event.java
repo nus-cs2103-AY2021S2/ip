@@ -28,6 +28,7 @@ public class Event extends Task {
         } else {
             throw new DateTimeParseException("", "", 1);
         }
+        assert(this.time != null);
     }
 
     /**
