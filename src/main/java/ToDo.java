@@ -26,6 +26,10 @@ public class ToDo extends Task {
                                         this.description);
     }
 
+    @Override
+    public ToDo reschedule(String fullCommand) {
+        return this;
+    }
 
     public LocalDate getDate() {
         return null;

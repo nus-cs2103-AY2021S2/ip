@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Deadline extends Task {
-    private final LocalDate dateBy;
-    private final LocalTime timeBy;
+    private LocalDate dateBy;
+    private LocalTime timeBy;
 
     /**
      * Constructor takes in three parameters, <code>description</code>,
@@ -58,6 +58,18 @@ public class Deadline extends Task {
                 DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                         + timeBy.format(
                                 DateTimeFormatter.ofPattern("hh:mma")) + ")";
+    }
+
+    public Deadline reschedule(String newDateAndTime) {
+        String[] splitInputs = newDateAndTime.split(" "); //2021-02-03 1400
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String date = splitInputs[0];
+        String time = splitInputs[1];
+        LocalDate newDateBy = LocalDate.parse(date);
+        LocalTime newTimeBy = LocalTime.parse(time, formatter);
+        this.dateBy = newDateBy;
+        this.timeBy = newTimeBy;
+        return this;
     }
 
     @Override

@@ -34,6 +34,8 @@ public class Parser {
             return new DateCommand(userInput, "date");
         } else if (typeOfCommand.equals("find")) {
             return new FindCommand(userInput, "find");
+        } else if (typeOfCommand.equals("reschedule")) {
+            return new RescheduleCommand(userInput, "reschedule");
         } else {
             throw new DukeException("OOPS! Sorry, I have no idea what that means :(");
         }

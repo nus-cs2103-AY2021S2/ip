@@ -17,6 +17,15 @@ public class TaskList {
     }
 
     /**
+     * Returns a task with the specified task number.
+     * @param taskNo the task number
+     * @return the task in the task list with the specified task number
+     */
+    public Task get(int taskNo) {
+        return tasks.get(taskNo);
+    }
+
+    /**
      * Generates a string consisting of a list of all the tasks in the task list.
      * @return a list of the tasks in the task list
      */
@@ -112,12 +121,9 @@ public class TaskList {
         int indexOfDate = fullCommand.indexOf("/");
         String dateAndTime = fullCommand.substring(indexOfDate + 4);
         String date = dateAndTime.split(" ")[0];
-        String startTime = dateAndTime
-                .split(" ")[1]
-                .split("-")[0];
-        String endTime = dateAndTime
-                .split(" ")[1]
-                .split("-")[1];
+        String timeRange = dateAndTime.split(" ")[1];
+        String startTime = timeRange.split("-")[0];
+        String endTime = timeRange.split("-")[1];
         Event newEvent = new Event(fullCommand.substring(6, indexOfDate), LocalDate.parse(date),
                 LocalTime.parse(startTime, formatter), LocalTime.parse(endTime, formatter));
         tasks.add(newEvent);
@@ -180,5 +186,9 @@ public class TaskList {
             }
         }
         return tasksWithKeywords;
+    }
+
+    public Task rescheduleTask(TaskList tasks, int taskNo, String newDateAndTime) {
+        return tasks.get(taskNo).reschedule(newDateAndTime);
     }
 }
