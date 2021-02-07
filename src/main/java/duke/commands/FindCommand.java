@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.utils.ConvertType;
 import duke.utils.Storage;
+import duke.utils.TaskStringConverter;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
@@ -40,17 +43,26 @@ public class FindCommand extends Command {
             String noMatchingTaskMsg = "There are no tasks matching your input :(";
             return noMatchingTaskMsg;
         }
-        return listToString(results).toString();
+        return listToString(results);
     }
 
-    private StringBuilder listToString(List<Task> results) {
+    private String listToString(List<Task> results) {
         StringBuilder stringBuilder = new StringBuilder("These are the search results:");
         int counter = 1;
-        for (Task task : results) {
-            stringBuilder.append("\n").append(counter).append(". ").append(task.toString());
-            counter++;
+        try {
+            List<String> tasksAsProgramString = TaskStringConverter.listTaskToListString(results, ConvertType.PROGRAM);
+            for (String taskProgramString : tasksAsProgramString) {
+                stringBuilder.append("\n")
+                        .append(counter)
+                        .append(". ")
+                        .append(taskProgramString);
+                counter++;
+            }
+            return stringBuilder.toString();
+        } catch (InvalidTaskTypeException e) {
+            return e.getMessage();
         }
-        return stringBuilder;
+
     }
 
     private List<Task> searchList(Pattern regEx) {

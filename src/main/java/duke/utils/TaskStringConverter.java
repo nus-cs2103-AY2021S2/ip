@@ -11,7 +11,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-public class FileTaskStringConverter {
+public class TaskStringConverter {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
             + "[dd-MM-yy HHmm]");
 
@@ -22,12 +22,40 @@ public class FileTaskStringConverter {
      * @return List of Strings.
      * @throws InvalidTaskTypeException if one of the Tasks in taskList is not a valid Task.
      */
-    public static List<String> allTaskToAllString(List<Task> list) throws InvalidTaskTypeException {
+    public static List<String> listTaskToListString(List<Task> list, ConvertType type) throws InvalidTaskTypeException {
         List<String> result = new ArrayList<>();
         for (Task task : list) {
-            result.add(taskToString(task));
+            switch (type) {
+            case FILE:
+                result.add(taskToStringFile(task));
+                break;
+            case PROGRAM:
+                result.add(taskToStringProgram(task));
+                break;
+            default:
+                throw new InvalidTaskTypeException(); // placeholder
+            }
         }
+
         return result;
+    }
+
+    private static String taskToStringProgram(Task task) {
+        return task.toString();
+    }
+
+    private static String taskToStringFile(Task task) throws InvalidTaskTypeException {
+        String done = task.isDone() ? "1" : "0";
+
+        if (task instanceof ToDo) {
+            return "T | " + done + " | " + task.getDescription();
+        } else if (task instanceof Event) {
+            return "E | " + done + " | " + task.getDescription() + " | " + ((Event) task).getDateToStore();
+        } else if (task instanceof Deadline) {
+            return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDateToStore();
+        } else {
+            throw new InvalidTaskTypeException();
+        }
     }
 
     /**
@@ -44,20 +72,6 @@ public class FileTaskStringConverter {
             result.add(stringToTask(s));
         }
         return result;
-    }
-
-    private static String taskToString(Task task) throws InvalidTaskTypeException {
-        String done = task.isDone() ? "1" : "0";
-
-        if (task instanceof ToDo) {
-            return "T | " + done + " | " + task.getDescription();
-        } else if (task instanceof Event) {
-            return "E | " + done + " | " + task.getDescription() + " | " + ((Event) task).getDateToStore();
-        } else if (task instanceof Deadline) {
-            return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDateToStore();
-        } else {
-            throw new InvalidTaskTypeException();
-        }
     }
 
     private static Task stringToTask(String input) throws InvalidTaskTypeException {

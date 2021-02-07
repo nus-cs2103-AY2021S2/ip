@@ -45,7 +45,7 @@ public class Storage {
         if (txtInput.size() == 0) {
             return new TaskList();
         }
-        List<Task> convertedTaskList = FileTaskStringConverter.allStringToAllTask(txtInput);
+        List<Task> convertedTaskList = TaskStringConverter.allStringToAllTask(txtInput);
         TaskList taskList = new TaskList(convertedTaskList);
         taskList.getListInString();
 
@@ -60,7 +60,7 @@ public class Storage {
      * @throws InvalidTaskTypeException if one of the Tasks in taskList is not a valid Task.
      */
     public void writeToFile(TaskList taskList) throws IOException, InvalidTaskTypeException {
-        List<String> allStringTasks = FileTaskStringConverter.allTaskToAllString(taskList.getList());
+        List<String> allStringTasks = TaskStringConverter.listTaskToListString(taskList.getList(), ConvertType.FILE);
         FileWriter fileWriter = new FileWriter(this.filepath);
 
         StringBuilder text = new StringBuilder();
