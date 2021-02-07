@@ -60,20 +60,29 @@ public class Storage {
      * Writes the task list provided to local storage.
      * @param taskList Task list to be written to local storage.
      * @throws IOException If an error occurs during writing to file.
-     * @throws DukeException If unable to format file contents.
+     * @throws DukeException If unable to build file contents.
      */
     public void write(TaskList taskList) throws IOException, DukeException {
         assert taskList != null : "taskList has not been initialized";
         FileWriter fw = new FileWriter(path);
         StringBuilder sb = new StringBuilder();
+        createStringFormat(taskList, sb);
+        fw.write(sb.toString());
+        fw.close();
+    }
 
+    /**
+     * Create the string to be written as file contents.
+     * @param taskList Task list to be written to local storage.
+     * @param sb StringBuilder object to hold the formatted strings.
+     * @throws DukeException If unable to format file contents.
+     */
+    private void createStringFormat(TaskList taskList, StringBuilder sb) throws DukeException {
         for (int i = 1; i <= taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
             sb.append(formatFileContents(task));
             sb.append("\n");
         }
-        fw.write(sb.toString());
-        fw.close();
     }
 
     /**
@@ -101,7 +110,20 @@ public class Storage {
         String format;
         String description = task.getDescription();
         int status = task.isDone() ? 1 : 0;
+        format = serializeTask(task, description, status);
+        return format;
+    }
 
+    /**
+     * Serializes the format of the task depending on its type.
+     * @param task Task to be formatted into a string.
+     * @param description Description of the task.
+     * @param status Status of the task completion.
+     * @return Format of the task provided.
+     * @throws DukeException If task type is unknown.
+     */
+    private String serializeTask(Task task, String description, int status) throws DukeException {
+        String format;
         if (task instanceof ToDoTask) {
             format = String.format("T | %d | %s", status, description);
         } else if (task instanceof DeadlineTask) {
