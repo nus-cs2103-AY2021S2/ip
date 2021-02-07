@@ -1,6 +1,7 @@
 package popo.tasks;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -66,6 +67,15 @@ public class TaskList {
      */
     public void completeTask(int index) {
         taskList.get(index).completeTask();
+    }
+
+    /**
+     * Returns an unmodifiable view of the task list.
+     *
+     * @return An unmodifiable {@code List} of tasks.
+     */
+    public List<Task> unmodifiableList() {
+        return Collections.unmodifiableList(taskList);
     }
 
     @Override

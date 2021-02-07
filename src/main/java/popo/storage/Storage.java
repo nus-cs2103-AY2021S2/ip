@@ -102,9 +102,9 @@ public class Storage {
             return taskList;
         }
         List<String> taskStrings = Files.readAllLines(path);
-        for (String s : taskStrings) {
-            taskList.addTask(Storage.convertStringToTask(s));
-        }
+        taskStrings.stream()
+                .map(taskString -> Storage.convertStringToTask(taskString))
+                .forEach(task -> taskList.addTask(task));
         return taskList;
     }
 
@@ -160,10 +160,10 @@ public class Storage {
      */
     public static List<String> convertAllTasksToString(TaskList taskList) {
         List<String> taskStrings = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.getTask(i);
-            taskStrings.add(Storage.convertTaskToString(task));
-        }
+        taskList.unmodifiableList()
+                .stream()
+                .map(task -> Storage.convertTaskToString(task))
+                .forEach(taskString -> taskStrings.add(taskString));
         return taskStrings;
     }
 
