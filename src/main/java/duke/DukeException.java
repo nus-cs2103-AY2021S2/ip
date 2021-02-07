@@ -14,6 +14,7 @@ public class DukeException extends Exception {
      * @param errorMessage that contains details on why the exception was thrown.
      */
     public DukeException(String errorMessage) {
+        assert !errorMessage.equals("") : "error message should not be empty";
         this.errorMessage = errorMessage;
     }
 

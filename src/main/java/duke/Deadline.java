@@ -54,6 +54,7 @@ class Deadline extends Task {
         } else {
             isCompleted = "[ ]";
         }
+        assert (this.taskName.equals("")) : "Name of deadline cannot be empty";
         return type + isCompleted + " " + this.taskName + " (by: " + Task.printDate(date) + ")";
     }
 }
