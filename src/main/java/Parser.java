@@ -31,7 +31,10 @@ public class Parser {
     public String getDescription() throws DukeException{
         try {
             if (this.command.equals("list")) {
-                return command;
+                if (this.description.length() != 4) {
+                    throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
+                }
+                return "";
             } else if (this.command.equals("done") || this.command.equals("delete")
                     || this.command.equals("todo") || this.command.equals("find")) {
                 return this.description.substring(this.command.length() + 1);

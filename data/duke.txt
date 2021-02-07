@@ -1,3 +1,4 @@
 D|1|makan|2020-10-10
 T|1|menikah
 E|1|menikah|2359
+D|0|nikah|2020-10-03
