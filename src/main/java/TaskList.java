@@ -23,6 +23,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void add(Task task) {
+        assert task != null;
         tasks.add(task);
     }
 
@@ -32,6 +33,8 @@ public class TaskList {
      * @param taskNumber Task number of the task that is to be deleted.
      */
     public void delete(int taskNumber) {
+        assert tasks.size() > 0;
+        assert taskNumber >= 0 && taskNumber < tasks.size();
         tasks.remove(taskNumber);
     }
 
@@ -54,6 +57,7 @@ public class TaskList {
      * @return Task.
      */
     public Task find(int taskNumber) {
+        assert taskNumber >= 0 && taskNumber < tasks.size();
         return tasks.get(taskNumber);
     }
 
