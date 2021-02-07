@@ -1,10 +1,8 @@
 package duke.exceptions;
 
 /**
- * The ListOutOfBoundsException class is an exception thrown
- * by the TaskList when the user attempts to mark a task
- * that is not in the list as done, or delete a task that is
- * not in the list.
+ * The ListOutOfBoundsException class is an exception thrown by the TaskList when the user attempts to mark a
+ * task that is not in the list as done, or delete a task that is not in the list.
  *
  * @author  arsatis
  * @version 1.0
@@ -15,11 +13,10 @@ public class ListOutOfBoundsException extends Exception {
     /**
      * Default constructor for the ListOutOfBoundsException class.
      *
-     * @param size The current size of the list in a TaskList
-     *             object.
+     * @param size The current size of the list in a TaskList object.
      */
     public ListOutOfBoundsException(int size) {
-        super("OOPS!!! The list currently only has " + size + " elements.");
+        super("I'm sorry, the list currently only has " + size + " elements.");
     }
 
 }

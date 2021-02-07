@@ -3,8 +3,7 @@ package duke.subfiles;
 import java.util.Scanner;
 
 /**
- * The Ui class manages interactions with the user, based on
- * user input.
+ * The Ui class manages interactions with the user, based on user input.
  *
  * @author  arsatis
  * @version 1.1
