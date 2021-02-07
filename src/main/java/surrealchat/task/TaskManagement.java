@@ -113,11 +113,11 @@ public class TaskManagement {
     private String printFileLoadOutput(List<Task> taskList) {
         String outputString = "";
         int total = taskList.size();
-        for (int i = 0; i < total; i++) {
-            Task task = taskList.get(i);
-            String printTaskType = spellTaskType(task.getType());
-            outputString += String.format("Meme Man has added %s task from file: %s\n", printTaskType, task);
-        }
+        outputString = taskList.stream().reduce("", (x, y) -> {
+            String printTaskType = spellTaskType(y.getType());
+            x += String.format("Meme Man has added %s task from file: %s\n", printTaskType, y);
+            return x;
+        }, (x, y) -> x + y);
         outputString += String.format("Total number of tasks loaded from file: %s\n", total);
         return outputString;
     }

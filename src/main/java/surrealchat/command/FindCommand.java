@@ -25,10 +25,7 @@ public class FindCommand extends Command {
         if (searchResults.isEmpty()) {
             throw new NoSuchElementException("My search returned nothing. Not stonks!\n");
         }
-        outputString += "Here are my search results:\n";
-        for (int i = 0; i < searchResults.size(); i++) {
-            outputString += searchResults.get(i);
-        }
+        outputString = searchResults.stream().reduce("Here are my search results:\n", (x, y) -> x + y);
         outputString += "Hmmst've... Stonks\n";
         return outputString;
     }
