@@ -1,4 +1,4 @@
-package duke;
+package userinterface;
 
 import javafx.application.Application;
 

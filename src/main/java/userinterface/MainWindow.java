@@ -1,4 +1,6 @@
-package duke;
+package userinterface;
+
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,15 +20,16 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
-    private Duke duke;
+    @FXML
+    private Duke duke = new Duke();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/iceBear.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/iceBear.png"));
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.greet(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -42,17 +45,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-/*
-    private String getResponse(String input) {
-        Duke iceBear = new Duke();
-        if (input.equals("bye")) {
-            return "Bye. Hope to see you again soon!";
-        }
-        try {
-            String[] processedText = iceBear.parseCommand(input);
-            return iceBear.process(processedText);
-        } catch (DukeException exception) {
-            return exception.toString();
-        }
-    }*/
 }

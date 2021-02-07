@@ -32,10 +32,13 @@ class ToDo extends Task {
      */
     @Override
     public String toString() {
+        String type = "[T]";
+        String isCompleted;
         if (this.isDone) {
-            return "[T][X] " + this.taskName;
+            isCompleted = "[X]";
         } else {
-            return "[T][ ] " + this.taskName;
+            isCompleted = "[ ]";
         }
+        return type + isCompleted + " " + this.taskName;
     }
 }

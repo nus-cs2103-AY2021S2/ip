@@ -30,7 +30,7 @@ class Ui {
                 return taskList.find(input[1]);
             }
         } catch (DukeException dukeException) {
-            System.out.println(dukeException);
+            return dukeException.toString();
         }
         return null;
     }

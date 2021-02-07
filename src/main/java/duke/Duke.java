@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * The main driver class for Dukebot.
  */
-class Duke {
+public class Duke {
     // Contains the task list, with operations to add/delete tasks.
     private TaskList taskList;
     // Deals with making sense of the user command.
@@ -14,14 +14,12 @@ class Duke {
     private Ui ui;
 
     /**
-     * Constructor for our Dukebot. The Dukebot will always start by first greeting the user
-     * whenever it is instantiated.
+     * Constructor for our Dukebot.
      */
     public Duke() {
         this.taskList = new TaskList();
         this.parser = new Parser();
         this.ui = new Ui();
-        System.out.println(this.greet());
     }
 
     /**
@@ -46,7 +44,7 @@ class Duke {
             }
         }
     }
-    private String greet() {
+    public String greet() {
         String greetingMessage = "Hello! I'm Icebear\nWhat can I do for you?";
         return greetingMessage;
     }
@@ -59,12 +57,11 @@ class Duke {
         return this.ui.processCommand(parsedCommand, this.taskList);
     }
     public String getResponse(String input) {
-        Duke iceBear = new Duke();
         if (input.equals("bye")) {
             return "Bye. Hope to see you again soon!";
         }
         try {
-            return iceBear.process(input);
+            return this.process(input);
         } catch (DukeException exception) {
             return exception.toString();
         }
