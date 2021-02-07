@@ -32,6 +32,7 @@ public class Duke {
         try {
             commandParser.parse(input);
             String action = commandParser.getCommand(input);
+            assert action.length() > 1 : "Action not retrieved accurately";
             String desc = commandParser.getDesc(input);
             switch (action) {
             case "bye":

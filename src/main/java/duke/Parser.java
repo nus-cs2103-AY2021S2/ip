@@ -16,6 +16,7 @@ public class Parser {
     public void parse(String command) throws MissingInputException, MissingTaskException {
         String[] arr = command.split(" ", 2);
         String action = arr[0];
+        assert action != null : "Command action should not be empty";
 
         Boolean isDeadline = action.equals("deadline");
         Boolean isEvent = action.equals("event");
@@ -72,6 +73,7 @@ public class Parser {
     public String getDate(String command) {
         int descIndx = command.indexOf("/");
         String date = command.substring(descIndx + 4);
+        assert date.length() == 10 : "Task date not proper";
         return date;
     }
 }
