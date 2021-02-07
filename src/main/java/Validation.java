@@ -25,7 +25,7 @@ public class Validation {
         }
 
         if (!commands.contains(first.toLowerCase())) {
-            throw new DukeException(":( OOPS! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(":( OOPS! I'm sorry, but I don't know what that means!!!");
         } else {
             String[] secondValidation = new String[] {"todo", "deadline", "event", "done", "delete", "find"};
             List<String> secondListOfCommands = Arrays.asList(secondValidation);

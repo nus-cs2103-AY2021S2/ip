@@ -32,6 +32,7 @@ public class Parser {
 
     /**
      * Handles the ToDo command.
+     * @return A string with the response to the command.
      * @throws IOException On file error when adding the ToDo task
      * to the file in the hard disk.
      */
@@ -46,6 +47,7 @@ public class Parser {
 
     /**
      * Handles the Deadline command.
+     * @return A string with the response to the command.
      */
     public String handleDeadline() {
         try {
@@ -59,12 +61,13 @@ public class Parser {
             return ui.respondToAddTask(newDeadline, tasks.getSize());
 
         } catch (DukeException | IOException e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
 
     /**
      * Handles the Event command.
+     * @return A string with the response to the command.
      */
     public String handleEvent() {
         try {
@@ -78,12 +81,13 @@ public class Parser {
             return ui.respondToAddTask(newEvent, tasks.getSize());
 
         } catch (DukeException | IOException e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
 
     /**
      * Handles the Done command.
+     * @return A string with the response to the command.
      */
     public String handleDone() {
         try {
@@ -95,12 +99,13 @@ public class Parser {
             return ui.respondToDone(toMark);
 
         } catch (DukeException | IOException e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
 
     /**
      * Handles the Delete command.
+     * @return A string with the response to the command.
      */
     public String handleDelete() {
         try {
@@ -113,12 +118,13 @@ public class Parser {
             return ui.respondToDelete(selected, tasks.getSize());
 
         } catch (DukeException | IOException e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
 
     /**
      * Handles the Find command.
+     * @return A string with the response to the command.
      */
     public String handleFind() {
         String keyword = command.substring(index + INDEX_OFFSET);
@@ -128,8 +134,8 @@ public class Parser {
     /**
      * Main method to make sense of the user command and to determine
      * which command it is.
-     *
      * @param command User's command input.
+     * @return A string with the response to the command.
      */
     public String handleCommand(String command) {
         System.out.println("HERE !!!!!");
@@ -179,10 +185,8 @@ public class Parser {
             System.out.println(output);
             return output;
         } catch (DukeException | IOException e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
-
-
 
 }
