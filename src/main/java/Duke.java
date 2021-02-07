@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Duke {
@@ -27,55 +29,71 @@ public class Duke {
                         // split input into action and detail
                         String[] splitInput = input.split(" ", 2);
 
-                        // check that field is not empty
-
                         if (splitInput[0].equals("done")) {
                             // done
                             int taskNum = Integer.parseInt(splitInput[1]);
                             Task finishedTask = taskList.get(taskNum - 1);
                             finishedTask.setCompletion(true);
                             printMessage("Nice! I've marked this task as done:\n   " + finishedTask);
+
                         } else if (splitInput[0].equals("delete")) {
                             int taskNum = Integer.parseInt(splitInput[1]);
                             Task deletedTask = taskList.remove(taskNum - 1);
                             printMessage("Noted. I've removed this task:\n" + "  " + deletedTask + "Now you have "
                                     + taskList.size() + " tasks in the list.");
-                        } else {
-                            if (splitInput[0].equals("todo")) {
-                                // check for empty task
-                                if (splitInput.length < 2) {
-                                    throw new EmptyTaskException("todo");
-                                }
 
-                                // add todo
-                                addTask(taskList, new ToDo(splitInput[1]));
-                            } else if (splitInput[0].equals("deadline")) {
-                                // check for empty task
-                                if (splitInput.length < 2) {
-                                    throw new EmptyTaskException("deadline");
-                                }
-
-                                // add deadline
-                                String[] details = splitInput[1].split(" /by ");
-                                addTask(taskList, new Deadline(details[0], details[1]));
-                            } else if (splitInput[0].equals("event")) {
-                                // check for empty task
-                                if (splitInput.length < 2) {
-                                    throw new EmptyTaskException("event");
-                                }
-                                // add event
-                                String[] details = splitInput[1].split(" /at ");
-                                addTask(taskList, new Deadline(details[0], details[1]));
-                            } else {
-                                throw new NotDukeCommandException();
+                        } else if (splitInput[0].equals("check")) {
+                            // list events and deadlines on a specific date
+                            if (splitInput.length < 2) {
+                                throw new EmptyCheckException();
                             }
+                            LocalDate dateToCheck = LocalDate.parse(splitInput[1]);
+                            ArrayList<Task> filteredList = new ArrayList<>();
+
+                            for (int i = 0; i < taskList.size(); i++) {
+                                Task currTask = taskList.get(i);
+                                if (dateToCheck.equals(currTask.getDate())) {
+                                    filteredList.add(currTask);
+                                }
+                            }
+                            printList(filteredList);
+                        } else if (splitInput[0].equals("todo")) {
+                            // check for empty task
+                            if (splitInput.length < 2) {
+                                throw new EmptyTaskException("todo");
+                            }
+
+                            // add todo
+                            addTask(taskList, new ToDo(splitInput[1]));
+                        } else if (splitInput[0].equals("deadline")) {
+                            // check for empty task
+                            if (splitInput.length < 2) {
+                                throw new EmptyTaskException("deadline");
+                            }
+
+                            // add deadline
+                            String[] details = splitInput[1].split(" /by ");
+                            addTask(taskList, new Deadline(details[0], details[1]));
+                        } else if (splitInput[0].equals("event")) {
+                            // check for empty task
+                            if (splitInput.length < 2) {
+                                throw new EmptyTaskException("event");
+                            }
+                            // add event
+                            String[] details = splitInput[1].split(" /at ");
+                            addTask(taskList, new Deadline(details[0], details[1]));
+                        } else {
+                            throw new NotDukeCommandException();
                         }
                     }
-                    input = sc.nextLine().strip();
+
                 } catch (DukeException e) {
                     printMessage(e.getMessage());
-                    input = sc.nextLine().strip();
+                } catch (DateTimeParseException e) {
+                    printMessage("Date given is not in the correct format!\nPlease try again in the format YYYY-MM-DD");
                 }
+
+                input = sc.nextLine();
             }
 
             // exit
