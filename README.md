@@ -1,7 +1,6 @@
 # Duke
 
 ![Checkstyle](https://github.com/lirc572/ip/workflows/Checkstyle/badge.svg)
-![Text UI Test](https://github.com/lirc572/ip/workflows/Text%20UI%20Test/badge.svg)
 ![Unit Test](https://github.com/lirc572/ip/workflows/Unit%20Test/badge.svg)
 ![Create JAR](https://github.com/lirc572/ip/workflows/Create%20JAR/badge.svg)
 
