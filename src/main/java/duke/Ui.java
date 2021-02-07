@@ -1,7 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
+import duke.tasks.Deadline;
 import duke.tasks.Task;
 
 

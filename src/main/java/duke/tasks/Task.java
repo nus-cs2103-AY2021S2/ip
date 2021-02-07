@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String taskName;
     protected boolean isDone;
@@ -35,6 +38,16 @@ public class Task {
         return this.taskName.equals(task.taskName);
     }
 
+    /**
+     * Returns a LocalDateTime object
+     *
+     * @return a LocalDateTime object
+     */
+    public LocalDateTime getLocalDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse("31/12/2030 0000", formatter);
+        return dateTime;
+    }
     /**
      * Marks the given task as completed.
      */

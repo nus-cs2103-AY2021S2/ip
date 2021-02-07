@@ -37,6 +37,10 @@ public class Event extends Task {
                 DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
     }
 
+    @Override
+    public LocalDateTime getLocalDateTime() {
+        return this.dateTime;
+    }
     /**
      * Returns a string of description to be saved in the myDuke.txt.
      *
