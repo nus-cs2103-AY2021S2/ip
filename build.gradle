@@ -49,6 +49,7 @@ application {
 
 run {
     standardInput = System.in
+    enableAssertions(true)
 }
 
 shadowJar {
@@ -65,6 +66,7 @@ task runCli(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     description = "Runs the CLI version of Duke"
     standardInput = System.in
+    enableAssertions(true)
 }
 
 task runGui(type: JavaExec) {
@@ -72,4 +74,5 @@ task runGui(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     description = 'Runs the GUI version of Duke'
     standardInput = System.in
+    enableAssertions(true)
 }
