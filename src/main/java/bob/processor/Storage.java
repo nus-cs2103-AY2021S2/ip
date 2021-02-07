@@ -1,9 +1,7 @@
-package bob;
+package bob.processor;
 
-import bob.task.Deadline;
-import bob.task.Event;
-import bob.task.Task;
-import bob.task.Todo;
+import bob.DukeException;
+import bob.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

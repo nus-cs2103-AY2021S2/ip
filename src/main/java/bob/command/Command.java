@@ -1,9 +1,9 @@
 package bob.command;
 
 import bob.DukeException;
-import bob.Parser;
-import bob.Storage;
-import bob.TaskList;
+import bob.processor.Parser;
+import bob.processor.Storage;
+import bob.task.TaskList;
 import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;

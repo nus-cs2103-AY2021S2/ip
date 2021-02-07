@@ -1,4 +1,7 @@
-package bob;
+package bob.processor;
+
+import bob.DukeException;
+import bob.task.TaskList;
 
 /**
  * Bob is a program that helps you keep track of tasks.

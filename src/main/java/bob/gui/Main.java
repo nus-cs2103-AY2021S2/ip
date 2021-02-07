@@ -2,7 +2,7 @@ package bob.gui;
 
 import java.io.IOException;
 
-import bob.Bob;
+import bob.processor.Bob;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

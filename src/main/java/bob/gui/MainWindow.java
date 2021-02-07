@@ -1,7 +1,6 @@
 package bob.gui;
 
-import bob.Bob;
-import bob.gui.DialogBox;
+import bob.processor.Bob;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

@@ -1,5 +1,6 @@
-package bob;
+package bob.processor;
 
+import bob.DukeException;
 import bob.command.Command;
 import bob.task.Deadline;
 import bob.task.Event;

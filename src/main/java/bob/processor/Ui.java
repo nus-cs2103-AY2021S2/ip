@@ -1,10 +1,7 @@
-package bob;
+package bob.processor;
 
 import bob.command.Command;
-import bob.task.Deadline;
-import bob.task.Event;
-
-import java.util.Scanner;
+import bob.task.TaskList;
 
 public class Ui {
 
