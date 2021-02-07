@@ -106,7 +106,7 @@ public class Parser {
             case "find":
                 return new FindCommand(words[1]);
             case "schedule":
-                assert words.length > 0 : "Error: please key in a date in the format of dd MMM yyyy";
+                assert words.length > 1 : "Error: please key in a date in the format of dd MMM yyyy";
                 return new ScheduleCommand(words[1]);
             case "done":
                 return new DoneCommand(Integer.parseInt(words[1]));
