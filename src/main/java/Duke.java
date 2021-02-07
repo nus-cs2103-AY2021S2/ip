@@ -18,6 +18,7 @@ public class Duke {
             String description = this.parser.getDescription();
             String deadline = this.parser.getDeadLine();
             if (parsedCommand.equals("list")) {
+                assert(description.equals(""));
                 output = taskList.iterateList();
             } else if (parsedCommand.equals("done")) {
                 output = taskList.finishATask(description);
@@ -39,6 +40,7 @@ public class Duke {
         } catch (DukeException e) {
             output = Ui.showMessage(e.getMessage());
         }
+        assert(!output.equals(""));
         return output;
     }
 
@@ -50,7 +52,7 @@ public class Duke {
      */
     public Duke(String filepath) throws DukeExceptionFolder, DukeExceptionCorruptedData {
         this.storage = new Storage(filepath);
-        this.taskList = new TaskList(storage.load());
+        this.taskList = this.storage.load();
     }
 
     /**

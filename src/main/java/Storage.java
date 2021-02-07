@@ -53,7 +53,7 @@ public class Storage {
      * @throws DukeExceptionFolder The folder doesn't exist
      * @throws DukeExceptionCorruptedData The data format is incompatible
      */
-    public List<Task> load() throws DukeExceptionFolder,DukeExceptionCorruptedData {
+    public TaskList load() throws DukeExceptionFolder,DukeExceptionCorruptedData {
         List<Task> tasks = new ArrayList<>();
         File file = new File(this.filePath);
         try {
@@ -63,7 +63,7 @@ public class Storage {
                 String[] commands = line.split("\\|");
                 tasks.add(processData(commands[0], commands[1], Arrays.copyOfRange(commands, 2, 5)));
             }
-            return tasks;
+            return new TaskList(tasks);
         } catch (FileNotFoundException e) {
             try {
                 file.createNewFile();
@@ -71,7 +71,7 @@ public class Storage {
                 throw new DukeExceptionFolder("No 'data' folder in this directory");
             }
         }
-        return tasks;
+        return new TaskList();
     }
 
     /**
