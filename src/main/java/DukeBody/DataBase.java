@@ -88,6 +88,11 @@ public class DataBase {
     }
 
     // mutators
+    /**
+     * Changes the directory path associated with the database connection.
+     * @param path      the new path to store and read tasks from.
+     * @throws java.nio.file.InvalidPathException
+     */
     public void changePath (String path) throws java.nio.file.InvalidPathException {
         dirpath = Paths.get(path);
     }
