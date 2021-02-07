@@ -1,12 +1,10 @@
 public class Task {
-    String type;
     String name;
     boolean done;
 
-    Task(String type, String name, boolean done){
-        this.type = type;
+    Task( String name){
         this.name = name;
-        this.done = done;
+        this.done = false;
     }
 
     public boolean getDone(){
@@ -20,9 +18,9 @@ public class Task {
     @Override
     public String toString() {
         if (done){
-            return "[" + type + "]" + "[X]" + name ;
+            return  "[X]    " + name;
         }else{
-            return "[" + type + "]" + "[ ]" + name;
+            return  "[ ]    " + name;
         }
     }
 }
