@@ -1,3 +1,2 @@
 T|1|makan
-D|1|makan|2020-10-10
-T|0|menikah
+E|1|go tutorial|May 2019
