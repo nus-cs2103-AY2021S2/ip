@@ -36,35 +36,53 @@ public class Storage {
      *
      * @throws FileNotFoundException is thrown when there the file could not be found
      */
-    void scanTaskList() throws FileNotFoundException {
+    public void scanTaskList() throws FileNotFoundException {
         Scanner sc = new Scanner(myFile);
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            Task task;
-
-            if (input.contains("[T]")) {
-                String[] tokens = input.split("] ", 2);
-                String taskInfo = tokens[1];
-                task = new ToDo(taskInfo);
-            } else if (input.contains("[D]")) {
-                String[] tokens = input.split("] ", 2);
-                String[] nextTokens = tokens[1].split(" ", 2);
-                String date = nextTokens[1].substring(nextTokens[1].indexOf(':') + 2, nextTokens[1].indexOf(')'));
-                task = new Deadline(nextTokens[0], date);
-            } else {
-                String[] tokens = input.split("] ", 2);
-                String[] nextTokens = tokens[1].split(" ", 2);
-                String date = nextTokens[1].substring(nextTokens[1].indexOf(':') + 2, nextTokens[1].indexOf(')'));
-                task = new Event(nextTokens[0], date);
-            }
-
-            if (input.contains("\u2713")) {
-                task.markAsDone();
-            }
-
+            Task task = getTask(input);
+            markTaskAsDone(input, task);
             tasks.add(task);
         }
+    }
+
+    /**
+     * Marks the task as done if the input contains [O]
+     *
+     * @param input A string
+     * @param task  Task to be marked as done
+     */
+    private void markTaskAsDone(String input, Task task) {
+        if (input.contains("[O]")) {
+            task.markAsDone();
+        }
+    }
+
+    /**
+     * Gets the Task as represented from the input
+     *
+     * @param input A string of task description
+     * @return Task that is represented from the string
+     */
+    private Task getTask(String input) {
+        Task task;
+        if (input.contains("[T]")) {
+            String[] tokens = input.split("] ", 2);
+            String taskInfo = tokens[1];
+            task = new ToDo(taskInfo);
+        } else if (input.contains("[D]")) {
+            String[] tokens = input.split("] ", 2);
+            String[] nextTokens = tokens[1].split(" ", 2);
+            String date = nextTokens[1].substring(nextTokens[1].indexOf(':') + 2, nextTokens[1].indexOf(')'));
+            task = new Deadline(nextTokens[0], date);
+        } else {
+            String[] tokens = input.split("] ", 2);
+            String[] nextTokens = tokens[1].split(" ", 2);
+            String date = nextTokens[1].substring(nextTokens[1].indexOf(':') + 2, nextTokens[1].indexOf(')'));
+            task = new Event(nextTokens[0], date);
+        }
+        return task;
     }
 
     /**
