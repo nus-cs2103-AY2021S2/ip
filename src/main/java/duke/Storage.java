@@ -14,13 +14,30 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Storage class manages loading tasks from a file
+ * when a new instance of Duke is created and saving tasks
+ * to a file when a running instance of Duke is closed.
+ */
 public class Storage {
     private File file;
 
+    /**
+     * Constructs a new instance of a Storage object.
+     * The storage object will attempt to read and write to a file.
+     * @param pathname The pathname of the file.
+     */
     public Storage(String pathname) {
         this.file = new File(pathname);
     }
 
+    /**
+     * Attempts to load tasks from a file associated
+     * with an instance of the Storage object and
+     * returns a task list representation of that file.
+     * @return The task list saved to the file.
+     * @throws DukeException Error trying to load tasks from the file.
+     */
     public List<Task> loadTasksFromFile() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -64,6 +81,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Attempts to save a list of tasks to a file
+     * associated with an instance of the Storage object.
+     * @param tasks The list of tasks to be saved.
+     * @throws DukeException Error trying to save tasks to the file.
+     */
     public void saveTasksToFile(TaskList tasks) throws DukeException {
         StringBuilder taskString = new StringBuilder();
         tasks.forEach(task -> taskString.append(task.toSaveFormat()));

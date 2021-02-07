@@ -3,11 +3,22 @@ package duke;
 import duke.command.Command;
 import duke.task.TaskList;
 
+/**
+ * The Duke class serves as the main entry point to the program.
+ * Duke is a personal assistant chat bot that helps a person to
+ * keep track of various tasks. It uses a CLI to interact with
+ * the user and allows users to create, update, delete tasks.
+ */
 public class Duke {
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
 
+    /**
+     * Constructs a new instance of a Duke object.
+     * Will attempt to load previously saved tasks from a file.
+     * @param pathname The pathname of the file for local data storage.
+     */
     public Duke(String pathname) {
         ui = new Ui();
         storage = new Storage(pathname);
@@ -20,6 +31,9 @@ public class Duke {
 
     }
 
+    /**
+     * Starts running the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
