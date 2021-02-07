@@ -8,8 +8,10 @@ import java.time.format.DateTimeFormatter;
  * Its details include the description
  */
 public class DeadlineTask extends Task {
+    
     /** The deadline of the deadline task */
     private LocalDate deadline;
+    
     /**
      * Constructor to initalize a Deadline Task
      *
@@ -18,6 +20,18 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String description, String deadline) {
         super(description, "[D]");
+        this.deadline = LocalDate.parse(deadline);
+    }
+    
+    /**
+     * Constructor to initalize a Deadline Task
+     *
+     * @param description the description of the task
+     * @param deadline the task deadline
+     * @param priority the priority to be assigned for the task
+     */
+    public DeadlineTask(String description, String deadline, String priority) {
+        super(description, "[D]", priority);
         this.deadline = LocalDate.parse(deadline);
     }
 
@@ -52,11 +66,13 @@ public class DeadlineTask extends Task {
     public LocalDate getDeadlineAsLocalDate() {
         return this.deadline;
     }
+    
     /**
      * toString method of DeadlineTask which prints out details of the deadline task
      */
     @Override
     public String toString() {
-        return "       " + this.type + super.toString().trim() + " " + this.getDeadline();
+        return "       " + this.type + super.toString().trim() + " " + this.getDeadline()
+                    + "\n       Priority: " + this.priority.getValue();
     }
 }

@@ -12,17 +12,24 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    
     @FXML
     private ScrollPane scrollPane;
+    
     @FXML
     private VBox dialogContainer;
+    
     @FXML
     private TextField userInput;
+    
     @FXML
     private Button sendButton;
+    
     private Duke duke;
+    
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat3.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cat2.jpg"));
+    
     /**
      * The method initializes the MainWindow class to set the images of Duke and the User and the children nodes
      */
@@ -33,9 +40,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(Ui.getWelcomeMessage(), dukeImage)
         );
     }
+    
     public void setDuke(Duke d) {
         duke = d;
     }
+    
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -44,13 +53,16 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+    
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+    
         if (response.equals(Ui.getByeMessage())) {
             Platform.exit();
         }
+    
         userInput.clear();
     }
 }
