@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.command.Command;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -7,17 +8,24 @@ public class Ui {
     private static final String NEW_LINE = "\n";
     private static final String GREETING_MESSAGE =
             "Hi there! I am Moomin" + NEW_LINE + "What can I do for you today?";
-    private static final String FAREWELL_MESSAGE = "Goodbye. Have a nice day!!";
+    public static final String FAREWELL_MESSAGE = "Goodbye. Have a nice day!!";
     private static final String ERROR_START = "Hmm... ";
     private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
+    private static final String UNDO_TASK_ADDED_MESSAGE = "Got it. I've removed this task:";
     private static final String TASK_COMPLETED_MESSAGE = "Congratulations! You have completed this task:";
+    private static final String UNDO_TASK_COMPLETED_MESSAGE = "Okay! I have marked this task as not done:";
     private static final String TASK_ALR_COMPLETED_MESSAGE = "You have already completed this task:";
     private static final String TASK_REMOVED_MESSAGE = "Noted. This task has been removed:";
+    private static final String UNDO_TASK_REMOVED_MESSAGE = "Noted. This task has been added back:";
     private static final String EMPTY_LIST_MESSAGE = "It seems like there is nothing in your list.";
     private static final String PRINT_LIST_MESSAGE = "Here are the tasks in your list:";
+    private static final String UNDO_LIST_MESSAGE = "You wanna see the list again?";
     private static final String NO_FOUND_TASK_MESSAGE =
             "It seems like there is no task matching your keyword:";
     private static final String PRINT_FOUND_TASKS_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String UNDO_FOUND_TASKS_MESSAGE = "Hmm.. How do I unfind the tasks?";
+    private static final String UNDO_UNDO_MESSAGE = "Hmm.. How do I undo an undo?";
+    private static final String NO_UNDO_MESSAGE = "I can't find any commands to undo.";
 
     /**
      * Gets the greeting message.
@@ -35,6 +43,24 @@ public class Ui {
      */
     public String getFarewellMessage() {
         return FAREWELL_MESSAGE;
+    }
+
+    /**
+     * Gets a feedback message after user undos an undo task.
+     *
+     * @return Undo message.
+     */
+    public String getUndoUndoMessage() {
+        return UNDO_UNDO_MESSAGE;
+    }
+
+    /**
+     * Gets a feedback message when there is no command to undo.
+     *
+     * @return Undo message.
+     */
+    public String getNoUndoMessage() {
+        return NO_UNDO_MESSAGE;
     }
 
     /**
@@ -81,6 +107,17 @@ public class Ui {
     }
 
     /**
+     * Gets a feedback message after user undos an add task command.
+     *
+     * @param task  Task added by user.
+     * @param tasks List of tasks the task was added to.
+     * @return Undo message.
+     */
+    public String getUndoAddTaskMessage(Task task, TaskList tasks) {
+        return combineMessages(UNDO_TASK_ADDED_MESSAGE, getTaskInfo(task), getTaskCountInfo(tasks));
+    }
+
+    /**
      * Gets a feedback message after user marks a task as done.
      *
      * @param task    Task marked as done.
@@ -93,6 +130,16 @@ public class Ui {
     }
 
     /**
+     * Gets a feedback message after user undos an mark as done command.
+     *
+     * @param task Task marked as done.
+     * @return Undo message.
+     */
+    public String getUndoMarkAsDoneMessage(Task task) {
+        return combineMessages(UNDO_TASK_COMPLETED_MESSAGE, getTaskInfo(task));
+    }
+
+    /**
      * Gets a feedback message after user deletes a task.
      *
      * @param task  Task deleted by user.
@@ -101,6 +148,17 @@ public class Ui {
      */
     public String getDeleteTaskMessage(Task task, TaskList tasks) {
         return combineMessages(TASK_REMOVED_MESSAGE, getTaskInfo(task), getTaskCountInfo(tasks));
+    }
+
+    /**
+     * Gets a feedback message after user undos an delete task command.
+     *
+     * @param task  Task deleted by user.
+     * @param tasks List of tasks the task was deleted from.
+     * @return Undo message.
+     */
+    public String getUndoDeleteTaskMessage(Task task, TaskList tasks) {
+        return combineMessages(UNDO_TASK_REMOVED_MESSAGE, getTaskInfo(task), getTaskCountInfo(tasks));
     }
 
     /**
@@ -127,6 +185,15 @@ public class Ui {
     }
 
     /**
+     * Gets a feedback message after user undos a list task command.
+     *
+     * @return Undo message.
+     */
+    public String getUndoListTaskMessage() {
+        return combineMessages(UNDO_LIST_MESSAGE);
+    }
+
+    /**
      * Gets all the tasks found by a keyword after formatting.
      *
      * @param tasks List of found tasks.
@@ -137,6 +204,15 @@ public class Ui {
             return NO_FOUND_TASK_MESSAGE;
         }
         return combineMessages(PRINT_FOUND_TASKS_MESSAGE, combineTasksToString(tasks));
+    }
+
+    /**
+     * Gets a feedback message after user undos a find task command.
+     *
+     * @return Undo message.
+     */
+    public String getUndoFindTaskMessage() {
+        return combineMessages(UNDO_FOUND_TASKS_MESSAGE);
     }
 
     /**

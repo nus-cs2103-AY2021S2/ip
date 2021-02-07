@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.command.Command;
 import duke.parser.Parser;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -16,6 +17,8 @@ import java.io.IOException;
 
 public class Storage {
     private File file;
+
+    private Command mostRecentCommand;
 
     private final String SAVE_FORMAT_DELIMITER = " \\| ";
 
@@ -122,6 +125,14 @@ public class Storage {
             throw new DukeException(
                     "There is an error while writing to file " + file.getName());
         }
+    }
+
+    public Command getMostRecentCommand() {
+        return mostRecentCommand;
+    }
+
+    public void setMostRecentCommand(Command command) {
+        mostRecentCommand = command;
     }
 }
 

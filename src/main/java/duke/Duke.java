@@ -21,6 +21,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
+    private Boolean isExited = false;
 
     /**
      * Sets up the required objects.
@@ -51,8 +52,12 @@ public class Duke {
      * @return Response
      */
     public String getResponse(String input) {
+        if (isExited) {
+            return null;
+        }
         try {
             Command command = Parser.parse(input);
+            isExited = command.isExitCommand();
             return command.getResponse(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.getErrorMessage(e.getMessage());

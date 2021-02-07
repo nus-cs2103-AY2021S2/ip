@@ -8,6 +8,7 @@ import duke.command.MarkTaskAsDoneCommand;
 import duke.command.FindTaskCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.ListTaskCommand;
+import duke.command.UndoCommand;
 import duke.command.ByeCommand;
 import duke.exception.DukeException;
 
@@ -79,6 +80,8 @@ public class Parser {
             return new DeleteTaskCommand(details);
         case LIST:
             return new ListTaskCommand(details);
+        case UNDO:
+            return new UndoCommand(details);
         case BYE:
             return new ByeCommand(details);
         default:

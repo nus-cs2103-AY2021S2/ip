@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -42,10 +43,20 @@ public class AddDeadlineCommand extends Command {
     @Override
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(deadline);
+        storage.setMostRecentCommand(this);
         storage.saveTasksToFile(tasks);
         return ui.getAddTaskReport(deadline, tasks);
 
     }
+
+    @Override
+    public String undo(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task task = tasks.getTask(tasks.getTaskCount() - 1);
+        tasks.deleteTask(tasks.getTaskCount() - 1);
+        storage.saveTasksToFile(tasks);
+        return ui.getUndoAddTaskMessage(task, tasks);
+    }
+
 
     @Override
     public boolean isExitCommand() {

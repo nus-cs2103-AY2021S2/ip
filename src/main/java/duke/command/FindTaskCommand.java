@@ -21,8 +21,15 @@ public class FindTaskCommand extends Command {
     @Override
     public String getResponse(TaskList tasks, Ui ui, Storage storage) {
         TaskList foundTasks = tasks.findTask(keyword);
+        storage.setMostRecentCommand(this);
         return ui.getAllFoundTasks(foundTasks);
     }
+
+    @Override
+    public String undo(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.getUndoFindTaskMessage();
+    }
+
 
     @Override
     public boolean isExitCommand() {

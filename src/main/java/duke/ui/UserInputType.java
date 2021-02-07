@@ -8,5 +8,6 @@ public enum UserInputType {
     FIND,
     DELETE,
     LIST,
+    UNDO,
     BYE
 }

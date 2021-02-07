@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
@@ -22,8 +23,17 @@ public class AddTodoCommand extends Command {
     @Override
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(todo);
+        storage.setMostRecentCommand(this);
         storage.saveTasksToFile(tasks);
         return ui.getAddTaskReport(todo, tasks);
+    }
+
+    @Override
+    public String undo(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task task = tasks.getTask(tasks.getTaskCount() - 1);
+        tasks.deleteTask(tasks.getTaskCount() - 1);
+        storage.saveTasksToFile(tasks);
+        return ui.getUndoAddTaskMessage(task, tasks);
     }
 
     @Override

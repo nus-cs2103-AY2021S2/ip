@@ -3,14 +3,15 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.task.Todo;
 import duke.ui.Ui;
 
-public class ByeCommand extends Command {
+public class UndoCommand extends Command {
 
-    private static final String ERROR_MESSAGE = "Wait, you want to leave or what?";
+    private static final String ERROR_MESSAGE = "Wait, you want to undo or what?";
 
 
-    public ByeCommand(String details) throws DukeException {
+    public UndoCommand(String details) throws DukeException {
         if (!details.isBlank()) {
             throw new DukeException(ERROR_MESSAGE);
         }
@@ -18,18 +19,23 @@ public class ByeCommand extends Command {
 
     @Override
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        storage.saveTasksToFile(tasks);
+        Command mostRecentCommand = storage.getMostRecentCommand();
+        if (mostRecentCommand == null) {
+            storage.setMostRecentCommand(this);
+            return ui.getNoUndoMessage();
+        }
         storage.setMostRecentCommand(this);
-        return ui.getFarewellMessage();
+        return mostRecentCommand.undo(tasks, ui, storage);
     }
 
     @Override
     public String undo(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return "";
+        return ui.getUndoUndoMessage();
     }
+
 
     @Override
     public boolean isExitCommand() {
-        return true;
+        return false;
     }
 }

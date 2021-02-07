@@ -50,6 +50,13 @@ public class Task {
     }
 
     /**
+     * Marks the task as not done.
+     */
+    public void markAsNotDone() {
+        isDone = false;
+    }
+
+    /**
      * Converts the task to a string which will be saved in a file.
      *
      * @return String representing the task in its save format.

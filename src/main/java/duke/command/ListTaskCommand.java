@@ -18,8 +18,15 @@ public class ListTaskCommand extends Command {
     @Override
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.saveTasksToFile(tasks);
+        storage.setMostRecentCommand(this);
         return ui.getAllTasks(tasks);
     }
+
+    @Override
+    public String undo(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.getUndoListTaskMessage();
+    }
+
 
     @Override
     public boolean isExitCommand() {
