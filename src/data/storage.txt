@@ -1,0 +1,21 @@
+T|1|todo1
+T|1|todo2
+E|1|lz bd|on|23rd Jan
+D|1|homework|by|24th Jan
+T|1|todo3
+E|1|watching drama|on|25th jan night
+D|1|homework2|by|26th Jan
+E|1|my birthday|on|2020-04-02
+D|1|celebrate new year|by|2nd march
+E|1|alice's bd|on|23rd march 2020
+E|1|get book|by|tmr
+E|0|get book|by|tmr
+E|0|new year|on|2020-11-23
+T|1|14
+E|0|new day|on|2021-01-26
+T|0|get bottle
+E|1|get bottle from james|on|2021-04-24
+T|1|get money
+E|0|celebrate bd again|on|4th april 2020
+E|1|checkout|on|today
+E|0|get again|by|2020-11-23

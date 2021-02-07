@@ -1,0 +1,11 @@
+todo get book from Jack
+event party at pgp /on 2nd jan 2021
+list
+event alice bd at 12 kent ridge drive /in afternoon 3rd jan
+deadline homework /by monday
+list
+done 2
+list
+done 1
+list
+todo finish testing
