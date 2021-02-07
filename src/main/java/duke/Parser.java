@@ -10,7 +10,19 @@ import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
+/**
+ * The Parser class handles user input, classifies the
+ * input based on a command and directs the execution
+ * of the command.
+ */
 public class Parser {
+    /**
+     * Attempts to parse user input into a Command
+     * which an instance of Duke can execute.
+     * @param userInput The raw string user input.
+     * @return The corresponding Command.
+     * @throws DukeException Error if user input is not in an appropriate format.
+     */
     public static Command parseCommand(String userInput) throws DukeException {
         userInput = userInput.trim();
         checkValidInput(userInput);
