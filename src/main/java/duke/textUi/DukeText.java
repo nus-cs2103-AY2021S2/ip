@@ -13,9 +13,9 @@ import duke.task.TodoTask;
  * The main class where the duke text ui is run
  */
 public class DukeText {
-    private Ui ui;
+    private final Ui ui;
     private TaskList taskList;
-    private Storage storage;
+    private final Storage storage;
 
     public DukeText(String path) {
         ui = new Ui();

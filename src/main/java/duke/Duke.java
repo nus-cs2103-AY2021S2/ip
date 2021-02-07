@@ -13,8 +13,8 @@ public class Duke {
     private TaskList taskList;
     private TaskList noteList;
 
-    private Storage storage;
-    private Storage notesStorage;
+    private final Storage storage;
+    private final Storage notesStorage;
 
     public Duke() {
         storage = new Storage("data/dukeGUI.txt");

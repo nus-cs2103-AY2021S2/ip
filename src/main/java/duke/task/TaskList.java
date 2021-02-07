@@ -141,8 +141,8 @@ public class TaskList {
         LocalDate today = LocalDate.now();
         for (Task t : Tasks) {
             if (!t.isDone()) {
-                if (t.getType().toLowerCase().equals("deadline")
-                        || t.getType().toLowerCase().equals("event")) {
+                if (t.getType().equalsIgnoreCase("deadline")
+                        || t.getType().equalsIgnoreCase("event")) {
                     if (today.compareTo(t.getDate()) <= 0) {
                         dues.silentAdd(t);
                     }

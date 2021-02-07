@@ -13,8 +13,8 @@ import java.util.Scanner;
  * Storage class to store the data in a file
  */
 public class Storage {
-    private String path;
-    private File file;
+    private final String path;
+    private final File file;
 
     /**
      * Constructor to initialize storage
