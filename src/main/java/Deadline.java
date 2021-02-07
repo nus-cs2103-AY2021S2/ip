@@ -8,17 +8,16 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Deadline extends Task {
-    private final LocalDate dateBy; //deadline of task
+    private final LocalDate dateBy;
     private final LocalTime timeBy;
 
     /**
-     * Constructor takes in three parameters, <code>description</code> (description of deadline),
-     * <code>dateBy</code> (date of deadline) and <code>timeBy</code> (time of deadline)
-     * @param description a <code>String</code> that describes the deadline
-     * @param dateBy a <code>LocalDate</code> specifying the date of deadline
-     * @param timeBy a <code>LocalTime</code> specifying the time of deadline
+     * Constructor takes in three parameters, <code>description</code>,
+     * <code>dateBy</code> and <code>timeBy</code>.
+     * @param description a description of the deadline
+     * @param dateBy the date of deadline
+     * @param timeBy the time of deadline
      */
-
     public Deadline(String description, LocalDate dateBy, LocalTime timeBy) {
         super(description);
         this.dateBy = dateBy;
@@ -26,9 +25,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * A method that returns the date of the deadline
-     * @return a <code>LocalDate</code> object that specifies the date of
-     * the deadline
+     * Returns the date of the deadline
+     * @return the date of the deadline
      */
     @Override
     public LocalDate getDate() {
@@ -36,8 +34,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * A method that generates the text to be stored into the text file
-     * at the end of execution
+     * Generates the text of this task in the proper format to be stored
+     * into the text file at the end of execution.
      * @return A <code>String</code> text in the proper format to be stored
      * into the text file
      */
@@ -51,12 +49,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * A method that returns the date and time of deadline in the format of
+     * Returns the date and time of deadline in the format of
      * MMM-d-yyyy hh:mma
      * @return a <code>String</code> of the date ond time of deadline
      */
-
-    public String getDeadline() { //get deadline in format of String eg. (by: Sunday)
+    public String getDeadline() {
         return "(by: " + dateBy.format(
                 DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                         + timeBy.format(

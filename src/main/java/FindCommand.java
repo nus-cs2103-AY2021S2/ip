@@ -1,10 +1,25 @@
 import java.util.List;
 
+/**
+ * Represents a command to find tasks that contain a certain keyword.
+ */
 public class FindCommand extends Command {
-    public FindCommand(String fullCommand, String action) {
-        super(fullCommand, action);
+
+    /**
+     * Constructor that takes in two parameters, <code>fullCommand</code> and <code>typeOfCommand</code>.
+     * @param fullCommand the full user input
+     * @param typeOfCommand the type of command to be executed, in this case should be "find"
+     */
+    public FindCommand(String fullCommand, String typeOfCommand) {
+        super(fullCommand, typeOfCommand);
     }
 
+    /**
+     * Prints out all the tasks that contain the user specified keyword
+     * @param tasks the task list consisting all the tasks
+     * @return a String consisting a list of the tasks with the user specified keyword
+     * @throws DukeException if no keyword is specified, or if user inputs more than one keyword
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String response = "";

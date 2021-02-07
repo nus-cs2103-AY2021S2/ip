@@ -5,25 +5,23 @@
 
 public abstract class Command {
     protected final String fullCommand;
-    protected final String action;
+    protected final String typeOfCommand;
 
     /**
-     * Constructor takes in a <code>fullCommand</code>, the full user input
-     * consisting of the desired command, and a <code>action</code> which
-     * states the type of command to be executed
+     * Constructor that takes in two parameters, <code>fullCommand</code> and <code>typeOfCommand</code>.
      * @param fullCommand the full user input
-     * @param action the type of command to be executed
+     * @param typeOfCommand the type of command to be executed
      */
-
-    public Command(String fullCommand, String action) {
+    public Command(String fullCommand, String typeOfCommand) {
         this.fullCommand = fullCommand;
-        this.action = action;
+        this.typeOfCommand = typeOfCommand;
     }
 
     /**
-     * A method that carries out the desired command taken from the user
-     * on the task list
+     * Carries out the desired command taken from the user on the task list and
+     * returns a response to display to the user
      * @param tasks the task list that the command must be carried out on
+     * @return a response to be displayed to the user after executing the command
      * @throws DukeException
      */
     public abstract String execute(TaskList tasks) throws DukeException;
