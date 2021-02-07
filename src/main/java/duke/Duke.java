@@ -1,23 +1,19 @@
 package duke;
 
 import duke.Exceptions.DukeExceptions;
-import duke.Exceptions.MissingInputException;
 import duke.Exceptions.UnclearInputException;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
 import duke.Tasks.Task;
-import duke.Tasks.Todo;
 
 public class Duke {
 
     /** TaskList instance to store and handle tasks */
-    private TaskList tasks;
+    private final TaskList tasks;
 
     /** Storage instance to read and write file */
-    private Storage storage;
+    private final Storage storage;
 
     /** Ui instance to interact with user */
-    private Ui ui;
+    private final Ui ui;
 
     /** Constructs a new Duke object
      *
@@ -47,31 +43,27 @@ public class Duke {
                 break;
             case "done":
                 int n = Integer.parseInt(desc);
-                Task t = tasks.getTask(n);
-                tasks.markComplete(n);
+                Task t = tasks.completeTask(n, tasks);
                 speech += ui.printChecked(t);
                 break;
             case "todo":
-                Task todo = new Todo(desc);
-                tasks.storeTask(todo);
+                Task todo = tasks.addTodo(desc, tasks);
                 speech += ui.printAdded(tasks.getTaskList(), todo);
                 break;
             case "event":
                 String date = commandParser.getDate(input);
-                System.out.println(date);
-                Task event = new Event(desc, date);
-                tasks.storeTask(event);
+                Task event = tasks.addEvent(desc, date, tasks);
                 speech += ui.printAdded(tasks.getTaskList(), event);
                 break;
             case "deadline":
                 String due = commandParser.getDate(input);
-                Task deadline = new Deadline(desc, due);
-                tasks.storeTask(deadline);
+                Task deadline = tasks.addDeadline(desc, due, tasks);
                 speech += ui.printAdded(tasks.getTaskList(), deadline);
                 break;
             case "delete":
-                Task task = tasks.getTask(Integer.parseInt(desc));
-                tasks.deleteTask(Integer.parseInt(desc));
+                int index = Integer.parseInt(desc);
+                Task task = tasks.getTask(index);
+                tasks.deleteTask(index);
                 speech += ui.printDeleted(tasks.getTaskList(), task);
                 break;
             case "find":
@@ -80,14 +72,10 @@ public class Duke {
             default:
                 throw new UnclearInputException();
             }
-        } catch (MissingInputException e) {
-            return e.getMessage();
-        } catch (UnclearInputException e) {
-            return e.getMessage();
         } catch (DukeExceptions e) {
             return e.getMessage();
         }
-        storage.write(tasks);
+        storage.write();
         return speech;
     }
 }

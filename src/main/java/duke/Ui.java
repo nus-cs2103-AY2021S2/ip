@@ -19,7 +19,7 @@ public class Ui {
     }
 
     /** Prints message to say goodbye to user */
-    public String sayGoodbye() {
+    public static String sayGoodbye() {
         String msg = "Duchess: Bye, Have an awesome day!";
         return msg;
     }

@@ -19,7 +19,7 @@ public class Storage {
     private FileWriter writer;
 
     /** File instance to store data */
-    private File dataFile;
+    private final File dataFile;
 
     /** Tasklist instance to store and handle tasks */
     private TaskList tasks;
@@ -27,17 +27,18 @@ public class Storage {
     /** Constructs a new Storage objective
      *
      * @param path of the file
-     * @param tasks in tasklist
+     * @param tasklist tasks in tasklist
      */
-    public Storage(String path, TaskList tasks) {
+    public Storage(String path, TaskList tasklist) {
         dataFile = new File(path);
+        tasks = tasklist;
         try {
             if (!dataFile.exists()) {
                 File parent = dataFile.getParentFile();
                 parent.mkdir();
                 dataFile.createNewFile();
             } else {
-                fileToList(tasks);
+                fileToList();
             }
         } catch (IOException e) {
             System.out.println((e.getMessage()));
@@ -47,9 +48,8 @@ public class Storage {
     /**
      * Reads a file and stores tasks in TaskList
      *
-     * @param taskList to store tasks
      * */
-    public void fileToList(TaskList taskList) {
+    public void fileToList() {
         try {
             Scanner reader = new Scanner(dataFile);
             while (reader.hasNextLine()) {
@@ -64,20 +64,20 @@ public class Storage {
                     if (completed == "1") {
                         event.checkTask();
                     }
-                    taskList.storeTask(event);
+                    tasks.storeTask(event);
                 } else if (cat.equals("D")) {
                     String date = arr[3];
                     Deadline deadline = new Deadline(des, date);
                     if (completed.equals("1")) {
                         deadline.checkTask();
                     }
-                    taskList.storeTask(deadline);
+                    tasks.storeTask(deadline);
                 } else {
                     Todo todo = new Todo(des);
                     if (completed.equals("1")) {
                         todo.checkTask();
                     }
-                    taskList.storeTask(todo);
+                    tasks.storeTask(todo);
                 }
             }
             reader.close();
@@ -90,14 +90,13 @@ public class Storage {
     /**
      * Goes through TaskList and parses task into string
      *
-     * @param tasks tasklist
      * @return String of tasks
      * */
-    public String taskListToString(TaskList tasks) {
+    public String taskListToString() {
         String res = "";
         ArrayList<Task> taskList = tasks.getTaskList();
         for (Task task : taskList) {
-            char cat = task.getCat();
+            char cat = task.getCategory();
             String name = task.getName();
             int checked;
             if (task.getCompleted()) {
@@ -122,17 +121,15 @@ public class Storage {
 
     /** Writes the tasks in TaskList to file
      *
-     * @param taskList tasks to be written
      * @throws IOException if there is an IO exception
      * */
-    public void write(TaskList taskList) {
+    public void write() {
         try {
             writer = new FileWriter(dataFile);
-            writer.write(taskListToString(taskList));
+            writer.write(taskListToString());
             writer.close();
         } catch (IOException e) {
             System.out.println((e.getMessage()));
         }
     }
-
 }

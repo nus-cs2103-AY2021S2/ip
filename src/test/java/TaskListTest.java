@@ -11,7 +11,7 @@ public class TaskListTest {
         TaskList tasklist = new TaskList();
         Task task = new Task("Buy candies");
         tasklist.storeTask(task);
-        assertEquals(tasklist.taskList.contains(task), true);
+        assertEquals(tasklist.getTaskList().contains(task), true);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class TaskListTest {
         Task task = new Task("Buy candies");
         tasklist.storeTask(task);
         tasklist.deleteTask(1);
-        assertEquals(tasklist.taskList.contains(task), false);
+        assertEquals(tasklist.getTaskList().contains(task), false);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class TaskListTest {
         TaskList tasklist = new TaskList();
         tasklist.storeTask(task);
         tasklist.markComplete(1);
-        assertEquals(tasklist.taskList.get(0).getCompleted(), true);
+        assertEquals(tasklist.getTaskList().get(0).getCompleted(), true);
     }
 
 }
