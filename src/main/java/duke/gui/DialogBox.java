@@ -10,12 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -35,18 +35,41 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Cut height instead of width
+        Circle clip = new Circle(displayPicture.getFitWidth() / 2);
+        clip.setCenterX(displayPicture.getFitWidth() / 2);
+        clip.setCenterY(displayPicture.getFitHeight() / 2);
+        displayPicture.setClip(clip);
+
         dialog.setText(text);
         displayPicture.setImage(img);
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Recursively flips the dialog box so that its HBox children are all flipped. This is to have the ImageView on the
+     * left and text on the right.
      */
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        DialogBox.flip(this);
+    }
+
+    /**
+     * Helper method to recursively flip children in HBox.
+     *
+     * @param hBox hBox to flip
+     */
+    private static void flip(HBox hBox) {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(hBox.getChildren());
+
+        for (Node n: tmp) {
+            if (n instanceof HBox) {
+                DialogBox.flip((HBox)n);
+            }
+        }
+
         Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        hBox.getChildren().setAll(tmp);
+        hBox.setAlignment(Pos.TOP_LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

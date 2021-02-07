@@ -7,10 +7,27 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" prefWidth="310.0" style="-fx-background-color: #eaeded; -fx-background-radius: 10 10 10 10;" HBox.hgrow="ALWAYS">
+            <children>
+                <Label fx:id="dialog" minHeight="-Infinity" text="Label" wrapText="true">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Label>
+            </children>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </HBox>
+        <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+            <HBox.margin>
+                <Insets left="5.0" right="5.0" />
+            </HBox.margin></ImageView>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
 </fx:root>
