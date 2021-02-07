@@ -2,8 +2,12 @@ package duke.commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.Task;
@@ -43,37 +47,41 @@ public class FindCommand extends Command {
             String noMatchingTaskMsg = "There are no tasks matching your input :(";
             return noMatchingTaskMsg;
         }
-        return listToString(results);
+        String msg = "These are the search results:" + listToString(results).toString();
+        return msg;
     }
 
-    private String listToString(List<Task> results) {
-        StringBuilder stringBuilder = new StringBuilder("These are the search results:");
-        int counter = 1;
-        try {
-            List<String> tasksAsProgramString = TaskStringConverter.listTaskToListString(results, ConvertType.PROGRAM);
-            for (String taskProgramString : tasksAsProgramString) {
-                stringBuilder.append("\n")
-                        .append(counter)
-                        .append(". ")
-                        .append(taskProgramString);
-                counter++;
-            }
-            return stringBuilder.toString();
-        } catch (InvalidTaskTypeException e) {
-            return e.getMessage();
-        }
+    private StringBuilder listToString(List<Task> results) {
+        StringBuilder stringBuilder = new StringBuilder();
 
+        Stream.iterate(1, index -> index <= results.size(), index -> index + 1)
+                .forEach(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer index) {
+                        Task task = results.get(index - 1);
+                        stringBuilder.append("\n")
+                                .append(index)
+                                .append(". ")
+                                .append(task.toString());
+                    }
+                });
+
+        return stringBuilder;
     }
 
     private List<Task> searchList(Pattern regEx) {
-        List<Task> results = new ArrayList<>();
-        for (Task t : this.taskList.getList()) {
-            String description = t.getDescription();
-            Matcher matcher = regEx.matcher(description);
-            if (matcher.find()) {
-                results.add(t);
-            }
-        }
+        List<Task> results = taskList.getList()
+                .stream()
+                .filter(new Predicate<Task>() {
+                    @Override
+                    public boolean test(Task task) {
+                        String description = task.getDescription();
+                        Matcher matcher = regEx.matcher(description);
+                        return matcher.find();
+                    }
+                })
+                .collect(Collectors.toList());
+
         return results;
     }
 }

@@ -2,6 +2,9 @@ package duke.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class TaskList {
     private final List<Task> taskList;
@@ -31,22 +34,40 @@ public class TaskList {
         if (this.taskList.size() == 0) {
             return getEmptyListInString();
         }
-        return getNonEmptyListInString().toString();
+        return getNonEmptyListInString();
     }
 
     private String getEmptyListInString() {
+        assert this.taskList.size() == 0;
+
         String completedAllTasksMsg = "You have completed all tasks!";
         return completedAllTasksMsg;
     }
 
-    private StringBuilder getNonEmptyListInString() {
-        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list:");
-        int counter = 1;
-        for (Task task : this.taskList) {
-            stringBuilder.append("\n" + counter + ". " + task);
-            counter++;
-        }
-        return stringBuilder;
+    private String getNonEmptyListInString() {
+        String allTasks = Stream.iterate(1, index -> index <= this.taskList.size(), index -> index + 1)
+                .map(new Function<Integer, StringBuilder>() {
+                    @Override
+                    public StringBuilder apply(Integer index) {
+                        Task task = taskList.get(index - 1);
+                        StringBuilder stringBuilder = new StringBuilder("\n");
+                        stringBuilder.append(index)
+                                .append(". ")
+                                .append(task.toString());
+                        return stringBuilder;
+                    }
+                })
+                .reduce(new BinaryOperator<StringBuilder>() {
+                    @Override
+                    public StringBuilder apply(StringBuilder stringBuilder1, StringBuilder stringBuilder2) {
+                        stringBuilder1.append(stringBuilder2);
+                        return stringBuilder1;
+                    }
+                })
+                .get()
+                .toString();
+
+        return allTasks;
     }
 
     public List<Task> getList() {
@@ -68,6 +89,8 @@ public class TaskList {
      * @param pos position of the task to be removed.
      */
     public void deleteTask(int pos) {
+        assert pos >= 0 && pos < this.taskList.size();
+
         this.taskList.remove(pos);
     }
 }

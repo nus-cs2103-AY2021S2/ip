@@ -46,6 +46,7 @@ public class Storage {
             return new TaskList();
         }
         List<Task> convertedTaskList = TaskStringConverter.allStringToAllTask(txtInput);
+        assert convertedTaskList.size() > 0;
         TaskList taskList = new TaskList(convertedTaskList);
         taskList.getListInString();
 
