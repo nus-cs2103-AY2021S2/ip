@@ -62,7 +62,6 @@ public class Parser {
             } catch (DateTimeParseException de) {
                 return ui.errorMessage("dateTimeError");
             } catch (Exception e) {
-                //System.out.println(e);
                 return ui.errorMessage("invalidEvent");
             }
         case "delete":
