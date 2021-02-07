@@ -87,18 +87,22 @@ public class Ui {
         String taskMarkedMessage = "     Nice! I've marked this task as done:\n";
         return taskMarkedMessage;
     }
+    
     /**
      * @param list the Task list to be printed
      * Prints out the current task list
      */
     public String printList(List<Task> list) {
         String printedList = "";
+        
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             printedList += "      " + (i + 1) + "." + task.toString().trim() + "\n";
         }
+        
         return printedList;
     }
+    
     /**
      * Prints out the number of tasks inside the TaskList on list command.
      *
@@ -111,11 +115,20 @@ public class Ui {
 
         return taskListMessage + this.printList(taskList);
     }
+    
     /**
      * Prints out the matching message when user is finding for a keyword in the list
      */
     public String printMatching() {
         String printMatchingMessage = "     Here are the matching tasks in your list: \n";
         return printMatchingMessage;
+    }
+    
+    /**
+     * Prints out a message when user is setting the priority for a certain task
+     */
+    public String getSetPriorityMessage() {
+        String setPriorityMessage = "    The following task priority has been changed!";
+        return setPriorityMessage;
     }
 }

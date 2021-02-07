@@ -11,6 +11,7 @@ public class EventTask extends Task {
 
     /** Timing of the event task */
     private LocalDate timing;
+    
     /**
      * Constructor to initialize the EventTask
      *
@@ -19,6 +20,18 @@ public class EventTask extends Task {
      */
     public EventTask(String description, String timing) {
         super(description, "[E]");
+        this.timing = LocalDate.parse(timing);
+    }
+    
+    /**
+     * Constructor to initialize the EventTask
+     *
+     * @param description the description of the EventTask
+     * @param timing the EventTask timing
+     * @param priority the priority to be assigned for the task
+     */
+    public EventTask(String description, String timing, String priority) {
+        super(description, "[E]", priority);
 
         this.timing = LocalDate.parse(timing);
     }
@@ -54,11 +67,13 @@ public class EventTask extends Task {
     public LocalDate getTimingAsLocalDate() {
         return this.timing;
     }
+    
     /**
      * toString method of EventTask which prints out details of the EventTask
      */
     @Override
     public String toString() {
-        return "       " + this.type + super.toString().trim() + " " + getTiming();
+        return "       " + this.type + super.toString().trim() + " " + getTiming()
+                    + "\n       Priority: " + this.priority.getValue();
     }
 }

@@ -4,12 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.constants.Priority;
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.ToDoTask;
-
-
 
 /**
  * TaskList class contains a list in which stores all the tasks that the user has inputted and not deltted
@@ -18,12 +17,14 @@ public class TaskList {
 
     /** The list of tasks */
     private List<Task> inputList = new ArrayList<>();
+
     /**
      * TaskList constructor to intialize a new empty TaskList
      */
     public TaskList() {
         this.inputList = new ArrayList<>();
     }
+
     /**
      * TaskList constructor to intialize a new TaskList with a given ArrayList of tasks
      * the tasks are all stored as string format which is processed before being
@@ -43,11 +44,15 @@ public class TaskList {
             boolean isEventTask = arr[0].equals("E");
             boolean isToDoTask = arr[0].equals("T");
             boolean taskIsDone = arr[1].equals("1");
+
             String description = arr[2];
+
             if (isDeadlineTask) {
+                String priority = arr[4];
                 String reformattedDeadline = reformatDate(arr[3]);
 
-                DeadlineTask deadlineTask = new DeadlineTask(description, reformattedDeadline);
+                DeadlineTask deadlineTask = new DeadlineTask(description, reformattedDeadline, priority);
+
                 if (taskIsDone) {
                     deadlineTask.markAsDone();
                 }
@@ -56,8 +61,9 @@ public class TaskList {
 
             } else if (isEventTask) {
                 String reformattedDate = reformatDate(arr[3]);
+                String priority = arr[4];
+                EventTask eventTask = new EventTask(description, reformattedDate, priority);
 
-                EventTask eventTask = new EventTask(description, reformattedDate);
                 if (taskIsDone) {
                     eventTask.markAsDone();
                 }
@@ -65,7 +71,10 @@ public class TaskList {
                 inputList.add(eventTask);
 
             } else if (isToDoTask) {
-                ToDoTask toDoTask = new ToDoTask(description);
+
+                String priority = arr[3];
+                ToDoTask toDoTask = new ToDoTask(description, priority);
+
                 if (taskIsDone) {
                     toDoTask.markAsDone();
                 }
@@ -74,6 +83,7 @@ public class TaskList {
             }
         }
     }
+
     /**
      * Function to reformat the date before printing
      *
@@ -83,8 +93,10 @@ public class TaskList {
     public String reformatDate(String date) {
         String[] brokenDate = date.split("-");
         String reformattedDate = brokenDate[2] + "-" + brokenDate[1] + "-" + brokenDate[0];
+
         return reformattedDate;
     }
+
     /**
      * Returns The list of tasks.
      *
@@ -120,6 +132,7 @@ public class TaskList {
 
         return toDoTask;
     }
+
     /**
      * Returns a EventTask based on the user input and adds it to the list
      *
@@ -149,6 +162,7 @@ public class TaskList {
      */
     public DeadlineTask handleDeadlineTask(String action) {
         int actionIndex = action.indexOf(" ");
+
         int descriptionIndex = action.indexOf("/");
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
         String deadline = action.substring(descriptionIndex + 4);
@@ -203,7 +217,10 @@ public class TaskList {
 
             String status = task.getStatusIcon().equals(" ") ? "0" : "1";
             String description = task.getDescription();
+            
             String date = "";
+            
+            String priority = task.getPriority().getValue().toLowerCase();
 
             if (type == 'D') {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
@@ -217,11 +234,10 @@ public class TaskList {
 
             result += type + " | " + status + " | " + description;
 
-            if (date.equals("")) {
-                result += "\n";
-            } else {
-                result += " | " + date + "\n";
+            if (!date.equals("")) {
+                result += " | " + date;
             }
+            result += " | " + priority + "\n";
         }
 
         return result;
@@ -259,6 +275,7 @@ public class TaskList {
 
         return result;
     }
+    
     /**
      * Returns a List of tasks that match the keyword inputted
      *
@@ -275,5 +292,28 @@ public class TaskList {
         }
 
         return matchList;
+    }
+    
+    /**
+     * Returns a Task who priority has been changed
+     *
+     * @param number the task number in the list
+     * @return the priority of the task that one wishes to set
+     */
+    public Task handleSetPriority(int number, String priority) {
+        Task task = this.inputList.get(number - 1);
+        Priority priorityToBeSet = Priority.UNASSIGNED;
+        
+        if (priority.equals("high")) {
+            priorityToBeSet = Priority.HIGH;
+        } else if (priority.equals("medium")) {
+            priorityToBeSet = Priority.MEDIUM;
+        } else if (priority.equals("low")) {
+            priorityToBeSet = Priority.LOW;
+        }
+        
+        task.setPriority(priorityToBeSet);
+        
+        return task;
     }
 }

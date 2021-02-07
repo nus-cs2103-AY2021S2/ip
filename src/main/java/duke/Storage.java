@@ -3,6 +3,7 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,10 +30,12 @@ public class Storage {
 
         try {
             this.file = new File(filepath);
+
             if (!this.file.exists()) {
                 this.file.getParentFile().mkdir();
                 this.file.createNewFile();
             }
+            
             sc = new Scanner(this.file);
 
         } catch (IOException err) {

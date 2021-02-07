@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.constants.Priority;
+
 /**
  * Task class models an actual task that the user is about to do or has completed
  * Its details include the description as well as the type of the task
@@ -13,6 +15,10 @@ public class Task {
 
     /** type of Task */
     protected String type = "";
+    
+    /** Priority of the Task, will be initialized to Unassigned */
+    protected Priority priority;
+    
     /**
      * @param description the description of the task
      * @param  type the task type
@@ -21,6 +27,29 @@ public class Task {
         this.description = description;
         this.type = type;
         this.isDone = false;
+        this.priority = Priority.UNASSIGNED;
+    }
+    
+    /**
+     * @param description the description of the task
+     * @param  type the task type
+     */
+    public Task(String description, String type, String priority) {
+        this.description = description;
+        this.type = type;
+        this.isDone = false;
+    
+        Priority toSet = Priority.UNASSIGNED;
+    
+        if (priority.equals("high")) {
+            toSet = Priority.HIGH;
+        } else if (priority.equals("medium")) {
+            toSet = Priority.MEDIUM;
+        } else if (priority.equals("low")) {
+            toSet = Priority.LOW;
+        }
+    
+        this.priority = toSet;
     }
 
     /**
@@ -65,11 +94,27 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+    
     /**
      * toString method of Task which prints out details of the task
      */
     @Override
     public String toString() {
         return "       " + this.getStatus() + " " + this.description;
+    }
+    
+    /**
+     * Method for setting the priority of the task
+     * @param priority priority that is to be assigned to the task
+     */
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+    
+    /**
+     * Method for getting the priority of the task
+     */
+    public Priority getPriority() {
+        return this.priority;
     }
 }

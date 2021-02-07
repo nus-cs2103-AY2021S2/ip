@@ -13,6 +13,7 @@ public class Parser {
 
     /** Action input from user that is parsed into an array for checking */
     private String [] parsedAction = null;
+    
     /**
      * Constructor to initialize the Parser object
      */
@@ -44,19 +45,24 @@ public class Parser {
         if (aTaskCommandEntered && incompleteCommand) {
             throw new MissingTaskInputException(parsedAction[0]);
         }
+        
         if (parsedAction[0].equals("done") && incompleteCommand) {
             throw new DukeIncompleteInputException("done not completed");
         }
+        
         if (parsedAction[0].equals("delete") && incompleteCommand) {
             throw new DukeIncompleteInputException("delete not completed");
         }
+        
         if (parsedAction[0].equals("check") && incompleteCommand) {
             throw new DukeIncompleteInputException("check not completed");
         }
+        
         if (parsedAction[0].equals("find") && incompleteCommand) {
             throw new DukeIncompleteInputException("find not completed");
         }
     }
+    
     /**
      * Returns the result of the action parsed by the parser
      *
