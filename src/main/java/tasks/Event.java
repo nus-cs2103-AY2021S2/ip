@@ -1,6 +1,9 @@
+package tasks;
+
 import static java.lang.Boolean.parseBoolean;
 
-import java.time.LocalDateTime;
+import datetime.ParseDateTime;
+import java.time.LocalDateTime; // todo wrap localdate time in parsedatetime
 
 /**
  * This class implements a type of task that users can add to their tasklist on this app.
@@ -20,6 +23,13 @@ public class Event extends Task {
         this.eventTiming = ParseDateTime.parse(eventTiming);
     }
 
+    // created trying to bug fix
+    public Event(String desc, LocalDateTime eventTiming) {
+        super(desc);
+        this.eventTiming = eventTiming;
+    }
+
+    // used when parsing event task from file
     private Event(String desc, String eventTiming, boolean isDone) {
         super(desc, isDone);
         this.eventTiming = ParseDateTime.parse(eventTiming);
@@ -45,7 +55,7 @@ public class Event extends Task {
      * Creates a deadline object based on the string stored in the hard disk.
      * Example stored string for this class: "//E;;desc;;true;;timing".
      * @param oneLine One line of stored input to be parsed into a deadline
-     * @return Deadline Object
+     * @return tasks.Deadline Object
      */
     public static Event parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly

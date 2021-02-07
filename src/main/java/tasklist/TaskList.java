@@ -1,8 +1,15 @@
+package tasklist;
+
+import exceptions.InvalidArgumentException;
+import format.Ui;
+import tasks.Task;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class TaskList {
     private final ArrayList<Task> taskArrayList;
@@ -21,6 +28,7 @@ public class TaskList {
         return this.taskArrayList.size();
     }
 
+    // need to get rid of this get for OOP
     public Task get(int i) {
         return this.taskArrayList.get(i);
     }
@@ -34,46 +42,19 @@ public class TaskList {
         return this.taskArrayList.isEmpty();
     }
 
-    // setup at default location
-    public static TaskList setupTaskList() throws IOException {
-        if (Storage.doesTaskFileExist()) {
-            TaskList t = new TaskList();
-            Storage.loadFromHardDisk(t);
-            return t;
-        } else {
-            return new TaskList();
-        }
-    }
 
-    /**
-     * Saves the entire task list to hard drive
-     * @throws IOException
-     */
-    public void saveTasksList() throws IOException {
-        File f = new File(Storage.TASK_LIST_FILE_PATH.toString());
-        // doesn't actually create a new file i think, converts an existing file
-
-        FileWriter fw = new FileWriter(f);
-        BufferedWriter bw = new BufferedWriter(fw);
-
-        for (Task task : this.taskArrayList) {
-            bw.write(task.unparse());
-        }
-
-        bw.flush();
-        bw.close();
-    }
 
     /**
      * Adds task to array list and prints success message with task details
      * @param t task object to add
      */
-    public void addTask(Task t) {
+    public String addTask(Task t) {
         taskArrayList.add(t);
 
-        String[] messages = {"Success. I've added this task:", Ui.EXTRA_INDENT + t};
-
-        Ui.print(messages);
+        return Ui.formatMultiLineMessages(
+                "Success. I've added this task:",
+                t.toString()
+        );
     }
 
     /**
@@ -81,19 +62,24 @@ public class TaskList {
      * @param i index of task to be deleted
      * @throws InvalidArgumentException
      */
-    public void deleteTask(int i) throws InvalidArgumentException {
+    public String deleteTask(int i) throws InvalidArgumentException {
         if (i < 1 || i > taskArrayList.size()) {
             throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskArrayList.size()));
         }
 
-        Ui.print(
-            new String[]{
-                "Got you. I've deleted this task:",
-                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)
-            }
-        );
+//        Ui.print(
+//            new String[]{
+//                "Got you. I've deleted this task:",
+//                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)
+//            }
+//        );
+//
+//        taskArrayList.remove(i - 1);
 
-        taskArrayList.remove(i - 1);
+        return Ui.formatMultiLineMessages(
+                "Got you. I've deleted this task:",
+                taskArrayList.remove(i - 1)
+        );
     }
 
 
@@ -102,7 +88,7 @@ public class TaskList {
      * @param i index of task to mark done
      * @throws InvalidArgumentException
      */
-    public void markDone(int i) throws InvalidArgumentException {
+    public String markDone(int i) throws InvalidArgumentException {
         if (i < 1 || i > taskArrayList.size()) {
             throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskArrayList.size()));
         }
@@ -110,11 +96,16 @@ public class TaskList {
         taskArrayList.get(i - 1).markAsDone();
 
         // todo checkstyle doesn't allow 8 space formatting
-        Ui.print(
-            new String[]{
+//        Ui.print(
+//            new String[]{
+//                "Good work! I've marked this task done:",
+//                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)
+//            }
+//        );
+
+        return Ui.formatMultiLineMessages(
                 "Good work! I've marked this task done:",
-                Ui.EXTRA_INDENT + taskArrayList.get(i - 1)
-            }
+                taskArrayList.get(i - 1)
         );
     }
 
@@ -136,13 +127,13 @@ public class TaskList {
      * matching tasks.
      * @param s Search keyword, inputted by user
      */
-    public void findTasks(String s) {
+    public String findTasks(String s) {
         TaskList filtered = new TaskList();
         for (Task t : taskArrayList) {
-            if (t.description.contains(s)) {
+            if (t.getDescription().contains(s)) {
                 filtered.add(t);
             }
         }
-        Ui.printTaskList(filtered);
+        return Ui.stringifyTaskList(filtered);
     }
 }

@@ -1,3 +1,5 @@
+package exceptions;
+
 public class UnsupportedCommandException extends Exception {
     public UnsupportedCommandException(String errorMessage, Throwable err) {
         super(errorMessage, err);

@@ -1,3 +1,12 @@
+import exceptions.InvalidArgumentException;
+import exceptions.MissingArgumentException;
+import exceptions.UnsupportedCommandException;
+import format.Ui;
+import tasklist.TaskList;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
+
 import java.io.IOException;
 
 public class Parser {
@@ -137,6 +146,7 @@ public class Parser {
         case "bye":
         case "list":
             throw new InvalidArgumentException("Too many arguments provided. Did you mean '" + command + "'?");
+            // future extension: reply yes and duke understands what you meant
         default:
             break;
         }
@@ -207,7 +217,7 @@ public class Parser {
             // UPON SUCCESSFUL COMMAND EXECUTION
             // save tasksFile
             // todo still saveTasksList in parser?
-            taskList.saveTasksList();
+            Storage.saveTasksList(taskList);
 
         } catch (UnsupportedCommandException | InvalidArgumentException | MissingArgumentException e) {
             // is it better to detect unsupported first command earlier?
