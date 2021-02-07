@@ -4,25 +4,30 @@
 
 public class DeleteCommand extends Command {
     /**
-     * Constructor takes in a <code>fullCommand</code>, the full user input
-     * consisting of the desired command, and a <code>action</code> which
-     * in this case should specify "delete"
+     * Constructor that takes in two parameters, <code>fullCommand</code> and <code>typeOfCommand</code>.
      * @param fullCommand the full user input
-     * @param action should be "delete"
+     * @param typeOfCommand the type of command to be executed, in this case should be "delete"
      */
-    public DeleteCommand(String fullCommand, String action) {
-        super(fullCommand, action);
+    public DeleteCommand(String fullCommand, String typeOfCommand) {
+        super(fullCommand, typeOfCommand);
     }
 
     /**
      * Deletes a task from the given task list
      * @param tasks the task list consisting the task to be deleted
-     * @throws DukeException
+     * @return a response to be displayed to the user after deleting the task from the
+     * task list
+     * @throws DukeException if user did not enter a task number to be deleted
      */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String response;
-        int taskNo = Integer.parseInt(String.valueOf(fullCommand.charAt(7))) - 1;
+        String[] splitInputs = this.fullCommand.split(" ");
+        if (splitInputs.length == 1) {
+            throw new DukeException("OOPS! Please give me the number of the task that " +
+                    "you want to delete!");
+        }
+        int taskNo = Integer.parseInt(splitInputs[1]) - 1;
         String toPrint = tasks.remove(taskNo);
         response = "Alright! I've removed this task:\n" + toPrint + "\n" + "Now you have a whopping "
                     + tasks.size() + " task(s) in the list.";

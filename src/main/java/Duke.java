@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    private static final Scanner sc = new Scanner(System.in);
     private static TaskList tasks;
     private static FileHandler fh;
     private static Ui ui;

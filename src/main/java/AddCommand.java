@@ -1,61 +1,91 @@
 /**
- * Represents a command to add a task(ToDo/Deadline/Event) to
+ * Represents a command to add a <code>Task</code> into
  * the existing task list.
  */
 
 public class AddCommand extends Command {
     /**
-     * Constructor that takes in two parameters, <code>fullCommand</code> and <code>action</code>,
-     * where <code>fullCommand</code> is the full input entered by the user, and
-     * <code>action</code> is the type of task (<code>ToDo</code>/<code>Deadline</code>/<code>Event</code>)
-     * that is to be added
+     * Constructor that takes in two parameters, <code>fullCommand</code> and <code>typeOfCommand</code>.
      * @param fullCommand the full user input
-     * @param action the type of task to be added
+     * @param typeOfCommand the type of command to be executed, in this case, the type
+     *                      of task to be added
      */
-    public AddCommand(String fullCommand, String action) {
-        super(fullCommand, action);
+    public AddCommand(String fullCommand, String typeOfCommand) {
+        super(fullCommand, typeOfCommand);
     }
 
     /**
-     * Adds a task (<code>ToDo</code>/<code>Deadline</code>/<code>Event</code>)
-     * into the given task list.
-     * @param tasks a task list that the task in question is to be added into
-     * @throws DukeException If the given command does not correspond to adding
-     * either a <code>Todo</code>, <code>Deadline</code> or <code>Event</code>
+     * Adds a task into the given <code>TaskList</code>.
+     * @param tasks the task list that the task in question is to be added into
+     * @return a response to be displayed to the user after adding the task into the
+     * task list
+     * @throws DukeException if the user does not enter any input after the command,
+     * or if the user enters an unknown command
      */
-
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        String response;
-        String[] inputs = this.fullCommand.split(" ");
-        String action = inputs[0];
-        if (action.equals("todo")) {
-            if (inputs.length == 1) {
+        String[] splitInputs = this.fullCommand.split(" ");
+        if (typeOfCommand.equals("todo")) {
+            if (splitInputs.length == 1) {
                 throw new DukeException("OOPS! The description of a todo cannot be empty.");
             }
-            String toPrint = tasks.addByCommand(fullCommand, "todo");
-            response = "Sure! I've added this todo: \n" + toPrint + "\n" + "Now you have a whopping "
-                        + tasks.size() + " task(s) in the list.";
-            return response;
-        } else if (action.equals("deadline")) { //input format yyyy-mm-dd tttt
-            if (inputs.length == 1) {
+            return executeToDo(tasks);
+        } else if (typeOfCommand.equals("deadline")) {
+            if (splitInputs.length == 1) {
                 throw new DukeException("OOPS! The description of a deadline cannot be empty.");
             }
-            String toPrint = tasks.addByCommand(fullCommand, "deadline");
-            response = "Sure! I've added this deadline: \n" + toPrint + "\n" + "Now you have a whopping "
-                    + tasks.size() + " task(s) in the list.";
-            return response;
-        } else if (action.equals("event")) { //input format: yyyy-mm-dd tttt-tttt
-            if (inputs.length == 1) {
+            return executeDeadline(tasks);
+        } else if (typeOfCommand.equals("event")) {
+            if (splitInputs.length == 1) {
                 throw new DukeException("OOPS! The description of an event cannot be empty.");
             }
-            String toPrint = tasks.addByCommand(fullCommand,
-                    "event");
-            response = "Sure! I've added this event: \n" + toPrint + "\n" + "Now you have a whopping "
-                    + tasks.size() + " task(s) in the list.";
-            return response;
+            return executeEvent(tasks);
         } else {
             throw new DukeException("OOPS! Sorry, I have no idea what that means :(");
         }
+    }
+
+    /**
+     * Returns a String that is to be displayed to the user after adding a <code>ToDo</code> task
+     * into the task list
+     * @param tasks the task list that the task in question is to be added into
+     * @return a String that is to be displayed to the user
+     */
+
+    public String executeToDo(TaskList tasks) {
+        String response;
+        String toPrint = tasks.addByCommand(fullCommand, "todo");
+        response = "Sure! I've added this todo: \n" + toPrint + "\n" + "Now you have a whopping "
+                + tasks.size() + " task(s) in the list.";
+        return response;
+    }
+
+    /**
+     * Returns a String that is to be displayed to the user after adding a <code>Deadline</code> task
+     * into the task list
+     * @param tasks the task list that the task in question is to be added into
+     * @return a String that is to be displayed to the user
+     */
+
+    public String executeDeadline(TaskList tasks) {
+        String response;
+        String toPrint = tasks.addByCommand(fullCommand, "deadline");
+        response = "Sure! I've added this deadline: \n" + toPrint + "\n" + "Now you have a whopping "
+                + tasks.size() + " task(s) in the list.";
+        return response;
+    }
+
+    /**
+     * Returns a String that is to be displayed to the user after adding an <code>Event</code> task
+     * into the task list
+     * @param tasks the task list that the task in question is to be added into
+     * @return a String that is to be displayed to the user
+     */
+    public String executeEvent(TaskList tasks) {
+        String response;
+        String toPrint = tasks.addByCommand(fullCommand, "event");
+        response = "Sure! I've added this event: \n" + toPrint + "\n" + "Now you have a whopping "
+                + tasks.size() + " task(s) in the list.";
+        return response;
     }
 }
