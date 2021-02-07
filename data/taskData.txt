@@ -1,5 +1,6 @@
 D|0|return book|23 Dec 2021
-E|0|project meeting|23 Dec 2021 03:00 pm|23 Dec 2021 05:00 pm
+E|1|project meeting|23 Dec 2021 03:00 pm|23 Dec 2021 05:00 pm
 T|1|eat breakfast
 T|1|eat dinner
 E|0|sleep|22 Nov 2021 09:00 pm|22 Nov 2021 10:00 pm
+T|0|hfdaf
