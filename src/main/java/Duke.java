@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,10 +16,20 @@ public class Duke {
      * Main class to take in user input.
      * @param args Filler
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 
         String command = "Hello";
+
+        // Creating directory if it does not exist
+        File directory = new File("data");
+        if (!directory.exists()) {
+            boolean success = directory.mkdir();
+            if (!success) {
+                System.out.println("Directory creation was unsuccessful. Please " +
+                        "manually create it.");
+            }
+        }
 
         while (!command.equalsIgnoreCase("bye")) {
             if (command.equals("Hello")) {
@@ -34,7 +48,6 @@ public class Duke {
                 } catch (StringIndexOutOfBoundsException indexError) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-
             } else if (command.startsWith("event")) {
                 try {
                     String[] splitString = command.split("/at");
@@ -71,6 +84,10 @@ public class Duke {
 
         }
 
+        BufferedWriter out = new BufferedWriter(new FileWriter("data/Duke.txt",
+                false));
+        out.write(logAllTasks());
+        out.close();
         System.out.println("Bye. Hope to see you again soon!");
 
     }
@@ -104,6 +121,14 @@ public class Duke {
             System.out.println(String.format("%d. %s", counter, eachTask));
             counter++;
         }
+    }
+
+    protected static String logAllTasks() {
+        StringBuilder out = new StringBuilder();
+        for (Task eachTask : taskList) {
+            out.append(eachTask + "\n");
+        }
+        return out.toString();
     }
 
     /**

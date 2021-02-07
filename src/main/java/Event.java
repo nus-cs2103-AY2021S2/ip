@@ -9,7 +9,7 @@ public class Event extends Task {
     }
 
     /**
-     * Overriden constructor to account for deadline and events that have timestamps.
+     * Overloaded constructor to account for deadline and events that have timestamps.
      * @param description Description of given task.
      * @param eventDate Timestamp of given task.
      */
