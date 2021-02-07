@@ -17,8 +17,8 @@ public class Duke {
     /**
      * Gets response based on input.
      *
-     * @param input user input
-     * @return response that is to be printed onto GUI
+     * @param input user input.
+     * @return response that is to be printed onto GUI.
      */
     public String getResponse(String input) {
         Parser.parseAndProcess(input);

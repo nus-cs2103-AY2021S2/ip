@@ -1,6 +1,7 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,9 +38,9 @@ class TaskListTest {
         tasks.add(event);
 
         assertEquals(tasks.size(), 3);
-        assertEquals(todo, TaskList.deleteTask(0, tasks));
-        assertEquals(deadline, TaskList.deleteTask(0, tasks));
-        assertEquals(event, TaskList.deleteTask(0, tasks));
+        assertTrue(TaskList.deleteTask(todo, tasks));
+        assertTrue(TaskList.deleteTask(deadline, tasks));
+        assertTrue(TaskList.deleteTask(event, tasks));
         assertEquals(tasks.size(), 0);
     }
 }

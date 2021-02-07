@@ -96,26 +96,33 @@ public class Ui {
     }
 
     /**
-     * Prints deleted task.
+     * Prints deleted tasks.
      *
-     * @param task  task that was deleted.
-     * @param tasks all existing tasks.
+     * @param deletedTasks tasks that were deleted.
+     * @param tasks        all existing tasks.
      */
-    public static void displayDeletedTask(Task task, ArrayList<Task> tasks) {
-        String str = "Aw man... I told Donald that was a bad item to put on the menu.\n"
-                + "Here you go, I've removed this item from your order list!\n\n    "
-                + task
-                + "\nYou have " + tasks.size() + " order(s) left!";
-        assignResponse(str);
+    public static void displayDeletedTask(ArrayList<Task> deletedTasks, ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Here you go, I've removed these item(s) from your order list!\n\n");
+        for (Task t : deletedTasks) {
+            sb.append(t);
+        }
+        sb.append("\nYou have " + tasks.size() + " order(s) left!");
+        assignResponse(sb.toString());
     }
 
     /**
-     * Prints task that was marked as done.
+     * Prints tasks that were marked as done.
      *
-     * @param task task that was marked as done.
+     * @param tasks task(s) that were marked as done.
      */
-    public static void displayDone(Task task) {
-        assignResponse("Your order has been served!\n\n  " + task);
+    public static void displayDone(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        for (Task t : tasks) {
+            sb.append(t);
+        }
+        assignResponse("Your order(s) have been served!\n\n" + sb);
     }
 
     /**
