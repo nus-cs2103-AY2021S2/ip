@@ -1,10 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.ParseException;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 public class GuiUi {
 
@@ -25,9 +25,9 @@ public class GuiUi {
      * @return String of error message
      */
     public static String displayParseError() {
-        return insertMsgIntoChatBox("Input not accepted. " +
-                "Hint: Use '/by OR /at YYYY-MM-DD' after description" +
-                " and '/time HH:mm:ss' after date is specified.\n");
+        return insertMsgIntoChatBox("Input not accepted. "
+                + "Hint: Use '/by OR /at YYYY-MM-DD' after description"
+                + " and '/time HH:mm:ss' after date is specified.\n");
     }
 
     /**
@@ -92,8 +92,8 @@ public class GuiUi {
      * Displays when Tasker receives "bye" command and exits.
      */
     public static String displayExitMsg() {
-        String goodbye = "Bye. Remember to do your tasks!\n" +
-                "See you next time on Tasker!\n";
+        String goodbye = "Bye. Remember to do your tasks!\n"
+                + "See you next time on Tasker!\n";
         return insertMsgIntoChatBox(goodbye);
     }
 
@@ -145,9 +145,7 @@ public class GuiUi {
      */
     public static String displayDeleteSuccess(TaskList taskList, Task task) {
         return insertMsgIntoChatBox("Got it. I've removed this task:" + '\n'
-                + task + "\n" + "Now you have " +
-                taskList.getTasks().size() + " tasks in the list.\n");
+                + task + "\n" + "Now you have "
+                + taskList.getTasks().size() + " tasks in the list.\n");
     }
-
-
 }

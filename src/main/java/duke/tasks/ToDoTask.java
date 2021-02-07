@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 public class ToDoTask extends Task {
     /**
      * Creates a ToDoTask object.
