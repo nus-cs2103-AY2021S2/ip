@@ -45,7 +45,7 @@ public class Storage {
         if (txtInput.size() == 0) {
             return new TaskList();
         } else {
-            List<Task> convertedTaskList = FileTaskStringConverter.allStringToAllTask(txtInput);
+            List<Task> convertedTaskList = TaskStringConverter.allStringToAllTask(txtInput);
             TaskList taskList = new TaskList(convertedTaskList);
             taskList.getListInString();
             return taskList;
@@ -59,7 +59,7 @@ public class Storage {
      * @throws IOException if unable to write to file completely.
      */
     public void writeToFile(TaskList taskList) throws IOException {
-        List<String> allStringTasks = FileTaskStringConverter.allTaskToAllString(taskList.getList());
+        List<String> allStringTasks = TaskStringConverter.allTaskToAllString(taskList.getList());
         FileWriter fileWriter = new FileWriter(this.filepath);
 
         StringBuilder text = new StringBuilder();

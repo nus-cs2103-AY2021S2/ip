@@ -11,7 +11,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-public class FileTaskStringConverter {
+public class TaskStringConverter {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
             + "[dd-MM-yy HHmm]");
 
@@ -40,7 +40,7 @@ public class FileTaskStringConverter {
     public static List<Task> allStringToAllTask(List<String> list) throws InvalidTaskTypeException {
         List<Task> result = new ArrayList<>();
         for (String s : list) {
-            result.add(stringToTask(s));
+            result.add(stringInputToTask(s));
         }
         return result;
     }
@@ -57,7 +57,7 @@ public class FileTaskStringConverter {
         }
     }
 
-    private static Task stringToTask(String input) throws InvalidTaskTypeException {
+    private static Task stringInputToTask(String input) throws InvalidTaskTypeException {
         String[] separated = input.split(" \\| ");
         char taskType = separated[0].charAt(0);
 
