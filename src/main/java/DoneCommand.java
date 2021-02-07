@@ -5,7 +5,8 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui,
+                        Storage storage, Statistics stat) throws DukeException {
         int num;
         Task task;
 
@@ -21,6 +22,7 @@ public class DoneCommand extends Command {
         } else {
             num--;
             tasks.doneTask(num);
+            stat.changeStat(1, "done");
             task = tasks.list.get(num);
             ui.showDone(task);
             storage.store(tasks.list);

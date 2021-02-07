@@ -5,7 +5,8 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui,
+                        Storage storage, Statistics stat) throws DukeException {
         String task;
         int size;
         Task t;
@@ -17,6 +18,7 @@ public class TodoCommand extends Command {
         }
 
         tasks.addTodo(task);
+        stat.changeStat(1, "todo");
         size = tasks.size;
         t = (tasks.list).get(size - 1);
 

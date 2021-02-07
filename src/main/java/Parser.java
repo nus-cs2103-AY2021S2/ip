@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -6,8 +9,9 @@ public class Parser {
      *
      * @param string input.
      * @return command.
+     * @throws DukeException if no command can be created.
      */
-    public static Command getCommand(String string) {
+    public static Command parseInput(String string) throws DukeException {
         String action;
         String info;
         Command command;
@@ -49,8 +53,11 @@ public class Parser {
         case "date":
             command = new DateCommand(info);
             break;
+        case "show":
+            command = new ShowCommand(info);
+            break;
         default:
-            command = new ErrorCommand(info);
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
         }
 
         return command;
@@ -104,13 +111,95 @@ public class Parser {
         String time;
 
         if (info.contains(" /by ")) {
-            String[] str = info.split(" /at ", 2);
+            String[] str = info.split(" /by ", 2);
             time = str[1];
         } else {
             time = "";
         }
 
         return time;
+    }
+
+    /**
+     * Parse the timing to get the format.
+     *
+     * @param info detail,
+     * @return time.
+     * @throws DukeException if fails.
+     */
+    public static String parseTime(String info) throws DukeException {
+        String time;
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd/MMM/yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("MM dd yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd MM yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info);
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!!! The timing is not in the correct format.");
+        }
     }
 
 }

@@ -1,7 +1,7 @@
-
 public class Duke {
 
     private final Storage storage;
+    private final Statistics stat;
     private final Ui ui;
     private TaskList tasks;
 
@@ -12,6 +12,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage();
         tasks = new TaskList();
+        stat = new Statistics();
     }
 
     /**
@@ -29,7 +30,7 @@ public class Duke {
      */
     public String loading() {
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.load(stat));
             ui.showList(tasks.listTask());
             return ui.getMessage();
         } catch (DukeException e) {
@@ -46,15 +47,13 @@ public class Duke {
      * @return response.
      */
     public String getResponse(String input) {
-        String response;
         try {
-            Command c = Parser.getCommand(input);
-            c.execute(tasks, ui, storage);
-            response = ui.getMessage();
+            Command c = Parser.parseInput(input);
+            c.execute(tasks, ui, storage, stat);
         } catch (DukeException e) {
-            response = e.getMessage();
+            ui.showError(e);
         }
-        return response;
+        return ui.getMessage();
     }
 
 }

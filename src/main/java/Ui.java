@@ -1,4 +1,3 @@
-
 public class Ui {
 
     protected String response;
@@ -19,8 +18,8 @@ public class Ui {
      *
      * @param error error
      */
-    public void showError(String error) {
-        response = error;
+    public void showError(DukeException error) {
+        response = error.getMessage();
     }
 
     /**
@@ -85,4 +84,14 @@ public class Ui {
     public void showDate(String time, String list) {
         response = "Here are the tasks occurring on " + time + " in your list:\n" + list;
     }
+
+    /**
+     * Response when user want to know about the statistic.
+     *
+     * @param stat statistic
+     */
+    public void showStatistic(String stat) {
+        response = stat;
+    }
+
 }
