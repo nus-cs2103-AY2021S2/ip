@@ -56,24 +56,24 @@ public class Parser {
         String details = userInputArr[1].trim();
 
         switch (parseUserInputType(userInputArr[0].trim())) {
-            case TODO:
-                return new AddTodoCommand(details);
-            case DEADLINE:
-                return new AddDeadlineCommand(details);
-            case EVENT:
-                return new AddEventCommand(details);
-            case DONE:
-                return new MarkTaskAsDoneCommand(details);
-            case FIND:
-                return new FindTaskCommand(details);
-            case DELETE:
-                return new DeleteTaskCommand(details);
-            case LIST:
-                return new ListTaskCommand(details);
-            case BYE:
-                return new ByeCommand(details);
-            default:
-                throw new DukeException("Sorry, I dont understand what that means :-(");
+        case TODO:
+            return new AddTodoCommand(details);
+        case DEADLINE:
+            return new AddDeadlineCommand(details);
+        case EVENT:
+            return new AddEventCommand(details);
+        case DONE:
+            return new MarkTaskAsDoneCommand(details);
+        case FIND:
+            return new FindTaskCommand(details);
+        case DELETE:
+            return new DeleteTaskCommand(details);
+        case LIST:
+            return new ListTaskCommand(details);
+        case BYE:
+            return new ByeCommand(details);
+        default:
+            throw new DukeException("Sorry, I dont understand what that means :-(");
         }
     }
 

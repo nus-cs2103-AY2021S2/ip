@@ -37,7 +37,7 @@ public class Duke {
     }
 
     /**
-     * Gets greeting message
+     * Gets greeting message.
      *
      * @return Greeting message
      */
