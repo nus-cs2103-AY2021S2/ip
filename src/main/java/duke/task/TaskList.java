@@ -63,6 +63,12 @@ public class TaskList {
         lst.forEach(action);
     }
 
+    /**
+     * Finds tasks with the specified target string in it.
+     *
+     * @param target target string to find
+     * @return list of Task objects that matches the target string
+     */
     public List<Task> findTasksWithStr(String target) {
         return lst.stream().filter(task -> task.hasStrInProps(target)).collect(Collectors.toList());
     }
