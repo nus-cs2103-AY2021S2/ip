@@ -19,50 +19,20 @@ public class Parser {
      */
     public static void parse(String command) throws DukeException, IOException {
         Ui ui = new Ui();
-
-        boolean cond1 = command.length() == 4;
-        boolean cond2 = command.length() == 5;
-        boolean cond3 = command.length() == 6 && !command.substring(0, 6).equals("delete")
-                && !command.substring(0, 4).equals("find") && !command.substring(0, 4).equals("done");
-        boolean cond4 = command.length() == 8 && !command.substring(0, 8).equals("deadline")
-                && !command.substring(0, 4).equals("find") && !command.substring(0, 4).equals("done")
-                && !command.substring(0, 6).equals("delete");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         if (command.equals("bye")) {
             ui.bye();
             Duke.respond = "Bye bye!";
         } else if (command.equals("list")) {
             TaskList.list();
-        } else if (command.length() <= 3) {
-            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-            throw (new DukeException("\n    ____________________________________________________________\n"
-                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________"));
-        } else if (cond1) {
-            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-            throw (new DukeException("\n    ____________________________________________________________\n"
-                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________"));
-        } else if (cond2) {
-            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-            throw (new DukeException("\n    ____________________________________________________________\n"
-                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________"));
-        } else if (cond3) {
-            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-            throw (new DukeException("\n    ____________________________________________________________\n"
-                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________"));
-        } else if (cond4) {
-            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-            throw (new DukeException("\n    ____________________________________________________________\n"
-                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________"));
-        } else if (command.substring(0, 4).equals("done")) {
-            TaskList.done(Integer.parseInt(command.substring(5)));
         } else if (command.substring(0, 4).equals("todo")) {
+            assert command.length() >= 6;
             ui.todo(command.substring(5));
+        } else if (command.substring(0, 4).equals("done")) {
+            assert command.length() >= 6;
+            TaskList.done(Integer.parseInt(command.substring(5)));
         } else if (command.substring(0, 4).equals("find")) {
+            assert command.length() >= 6;
             ui.find(command.substring(5));
         } else if (command.substring(0, 5).equals("event")) {
             String desc = "";
@@ -85,6 +55,7 @@ public class Parser {
                     date += command.charAt(i);
                 }
             }
+            assert desc.length() > 0;
             start = command.substring(desc.length() + 12 + date.length(), desc.length() + 16 + date.length());
             end = command.substring(desc.length() + 17 + date.length(), desc.length() + 21 + date.length());
             if (desc.equals("")) {
@@ -101,6 +72,7 @@ public class Parser {
                 ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localStart), LocalTime.parse(localEnd));
             }
         } else if (command.substring(0, 6).equals("delete")) {
+            assert command.length() > 8;
             TaskList.delete(Integer.parseInt(command.substring(7)));
         } else if (command.substring(0, 8).equals("deadline")) {
             String desc = "";
@@ -121,6 +93,7 @@ public class Parser {
                     date += command.charAt(i);
                 }
             }
+            assert desc.length() >= 10;
             time = command.substring(desc.length() + 15 + date.length());
             localTime += time.substring(0, 2) + ":" + time.substring(2, 4);
             if (desc.equals("")) {
@@ -131,11 +104,59 @@ public class Parser {
                 ui.deadline(desc, LocalDate.parse(format(date), formatter), null);
             }
             ui.deadline(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime));
+        } else if (command.length() <= 3) {
+            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            throw (new DukeException("\n    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________"));
         } else {
             Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw (new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________"));
+        }
+    }
+
+    /**
+     * Finds task and print out the details of the tasks that is related to the keyword provided.
+     *
+     * @param keyword Parts of the description of the task that a user wants to find.
+     */
+    public void find(String keyword) {
+        String msg = "";
+        int num = 1;
+        for (int i = 0; i < TaskList.tasks.size(); i++) {
+            Task task = TaskList.tasks.get(i);
+            String word = "";
+            for (int j = 0; j < task.description.length(); j++) {
+                if (task.description.charAt(j) == ' ') {
+                    if (word.equals(keyword)) {
+                        msg += "     " + num + "." + task + "\n";
+                        num++;
+                    }
+                    word = "";
+                    continue;
+                } else {
+                    word += task.description.charAt(j);
+                    if (j == task.description.length() - 1) {
+                        if (word.equals(keyword)) {
+                            msg += "     " + num + "." + task + "\n";
+                            num++;
+                        }
+                    }
+                }
+            }
+        }
+        if (num == 1) {
+            Duke.respond = "You have no matching tasks in your list :(\n" + msg;
+            msg = "    ____________________________________________________________\n"
+                    + "     You have no matching tasks in your list :(\n"
+                    + "    ____________________________________________________________";
+        } else {
+            Duke.respond = "Here are the matching tasks in your list:\n" + msg;
+            msg = "    ____________________________________________________________\n"
+                    + "     Here are the matching tasks in your list:\n"
+                    + msg + "    ____________________________________________________________";
         }
     }
 
