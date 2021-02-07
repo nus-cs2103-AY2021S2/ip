@@ -12,9 +12,7 @@ public class ExitCommand extends Command {
     /**
      * Creates an ExitCommand object.
      */
-    public ExitCommand() {
-        super.isExit = true;
-    }
+    public ExitCommand() {}
 
     /**
      * Exits the Yoda chatbot after writing TaskList to the file.
@@ -23,8 +21,8 @@ public class ExitCommand extends Command {
      * @param storage Storage associated with the ExitCommand being executed.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         storage.write(taskList);
-        ui.exit();
+        return ui.exit();
     }
 }

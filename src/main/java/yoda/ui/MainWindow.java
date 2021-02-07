@@ -1,7 +1,7 @@
 package yoda.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -40,12 +40,14 @@ public class MainWindow extends AnchorPane{
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = "HMM";
+        String response = yoda.runYoda(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getYodaDialog(response, yodaImage)
         );
         userInput.clear();
+        if (response.toLowerCase() == "bye") {
+            Platform.exit();
+        }
     }
-
 }

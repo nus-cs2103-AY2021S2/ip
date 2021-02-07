@@ -3,6 +3,7 @@ package yoda.task;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Abstract task class to handle task-related information.
@@ -37,8 +38,8 @@ public abstract class Task implements Serializable {
      * @param dateTime The date and time associated with the task.
      */
     public void setDateTime(String dateTime) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        this.dateTime = LocalDateTime.parse(dateTime, format);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.dateTime = LocalDateTime.parse(dateTime, format);
     }
 
     /**

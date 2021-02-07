@@ -31,16 +31,8 @@ public class Yoda {
     /**
      * Runs the Yoda chatbot.
      */
-    public String runYoda() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            String command = ui.readInput();
-            ui.showLine();
-            Command c = Parser.parse(command);
-            c.execute(tasks, ui, storage);
-            ui.showLine();
-            isExit = c.isExit();
-        }
+    public String runYoda(String input) {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
     }
 }

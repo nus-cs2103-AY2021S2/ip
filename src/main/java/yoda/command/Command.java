@@ -12,15 +12,11 @@ public abstract class Command {
     protected String[] details;
     /** Type of command referred to by user input */
     protected CommandType commandType;
-    /** Shows if the user is done using the Yoda chatbot */
-    protected boolean isExit;
 
     /**
      * Creates a command object.
      */
-    public Command() {
-        this.isExit = false;
-    }
+    public Command() {}
 
     /**
      * Creates a command object.
@@ -28,15 +24,6 @@ public abstract class Command {
      */
     public Command(String[] details) {
         this.details = details;
-        this.isExit = false;
-    }
-
-    /**
-     * Checks if the user is done using the Yoda chatbot.
-     * @return Whether the user is done using the Yoda chatbot.
-     */
-    public boolean isExit() {
-        return isExit;
     }
 
     /**
@@ -45,5 +32,5 @@ public abstract class Command {
      * @param ui Ui associated with the command being executed.
      * @param storage Storage associated with the command being executed.
      */
-    public abstract void execute (TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute (TaskList taskList, Ui ui, Storage storage);
 }
