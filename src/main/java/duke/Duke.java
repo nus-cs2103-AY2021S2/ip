@@ -18,7 +18,7 @@ public class Duke {
     /**
      * Sole constructor for class Duke.
      *
-     * @param   filePath    the file path location at which Duke stores data.
+     * @param filePath the file path location at which Duke stores data.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -62,9 +62,17 @@ public class Duke {
     }
 
     /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    /**
      * Runs the program with the file path location of "./data/task.txt".
      *
-     * @param   args    unused
+     * @param args unused
      */
     public static void main(final String[] args) {
         new Duke("./data/tasks.txt").run();
