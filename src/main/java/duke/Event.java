@@ -37,7 +37,7 @@ public class Event extends Task {
      * @return the Event as a String to be saved.
      */
     public String saveToData() {
-        if (this.done) {
+        if (this.isDone) {
             return ("E | 1 | " + todo + " | " + time.toString().replace("T", " "));
         } else {
             return ("E | 0 | " + todo + " | " + time.toString().replace("T", " "));
@@ -46,7 +46,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if (!this.done) {
+        if (!this.isDone) {
             return ("[E][ ] " + this.todo + " (at:" + dateFormat(this.time) + ")");
         } else {
             return ("[E][X] " + this.todo + " (at:" + dateFormat(this.time) + ")");

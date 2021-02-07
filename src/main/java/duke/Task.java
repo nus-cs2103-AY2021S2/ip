@@ -11,20 +11,20 @@ public class Task {
     /**
      * Whether or not the task is complete
      */
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Instantiates a task.
      *
-     * @param s
+     * @param s The name of the task to be added.
      */
     public Task(String s) {
         this.todo = s;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public String getTodo() {
@@ -37,7 +37,7 @@ public class Task {
      * @return the Task as a String to be saved.
      */
     public String saveToData() {
-        if (this.done) {
+        if (this.isDone) {
             return ("T | 1 | " + todo);
         } else {
             return ("T | 0 | " + todo);
@@ -56,7 +56,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (!this.done) {
+        if (!this.isDone) {
             return ("[T][ ] " + todo);
         } else {
             return ("[T][X] " + todo);

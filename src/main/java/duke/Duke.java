@@ -7,27 +7,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-//import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
-
-
 public class Duke extends Application {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
+    private Parser parser;
+    private Stage stage;
     private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/User.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/Duwuke.jpg"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/User.jpg"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/Duwuke.jpg"));
 
     /**
      * Instantiates a Duke object.
@@ -52,11 +49,15 @@ public class Duke extends Application {
 
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
+        String dukeText = parser.parse(taskList, userInput.getText());
+        storage.saveAsFile(taskList);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeText, duke)
         );
+        if (userText.equals("bye")) {
+            stage.close();
+        }
         userInput.clear();
     }
 
@@ -65,13 +66,10 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts and runs Duke.
-     *
-     * @param stage The stage for Duke GUI.
+     * Generates the GUI and its various components for Duwuke.
      */
-    @Override
-    public void start(Stage stage) {
-        Parser parser = new Parser();
+    public void generateGui() {
+        parser = new Parser();
 
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -83,12 +81,12 @@ public class Duke extends Application {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Duwuke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -115,38 +113,27 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.greet(), duke));
+    }
 
-        sendButton.setOnMouseClicked((event) -> {
-            String userText = userInput.getText();
-            String dukeText = parser.parse(taskList, userInput.getText());
-            storage.saveAsFile(taskList);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, user),
-                    DialogBox.getDukeDialog(dukeText, duke)
-            );
-            if (userText.equals("bye")) {
-                stage.close();
-            }
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            //handleUserInput();
-            String userText = userInput.getText();
-            String dukeText = parser.parse(taskList, userInput.getText());
-            storage.saveAsFile(taskList);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, user),
-                    DialogBox.getDukeDialog(dukeText, duke)
-            );
-            if (userText.equals("bye")) {
-                stage.close();
-            }
-            userInput.clear();
-        });
-
+    /**
+     * Creates the GUI and waits for input.
+     */
+    public void showGui() {
+        generateGui();
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
+        userInput.setOnAction((event) -> handleUserInput());
         dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
+    }
 
+    /**
+     * Starts and runs Duke.
+     *
+     * @param stage The stage for Duke GUI.
+     */
+    @Override
+    public void start(Stage stage) {
+        this.stage = stage;
+        showGui();
     }
 
 }

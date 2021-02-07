@@ -5,34 +5,34 @@ import java.util.List;
 
 public class TaskList {
 
-    private List<Task> leest;
+    private List<Task> taskList;
 
     public TaskList() {
-        this.leest = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
     public void add(Task t) {
-        this.leest.add(t);
+        this.taskList.add(t);
     }
 
     public boolean isEmpty() {
-        return this.leest.isEmpty();
+        return this.taskList.isEmpty();
     }
 
     public int size() {
-        return this.leest.size();
+        return this.taskList.size();
     }
 
     public Task get(int i) {
-        return this.leest.get(i);
+        return this.taskList.get(i);
     }
 
     public void remove(Task t) {
-        this.leest.remove(t);
+        this.taskList.remove(t);
     }
 
     public List<Task> getList() {
-        return this.leest;
+        return this.taskList;
     }
 
 }
