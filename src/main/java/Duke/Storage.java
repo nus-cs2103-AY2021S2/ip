@@ -70,12 +70,14 @@ public class Storage {
     /**
      * Stores the <code>TaskList</code> into a file
      *
-     * @param tasklist A class that stores the ArrayList of <code>Tasks</code>
+     * @param taskList A class that stores the ArrayList of <code>Tasks</code>
      * @throws IOException is thrown when there is an error related to input and output
      */
-    public void writeToFile(TaskList tasklist) throws IOException {
+    public void writeToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        ArrayList<Task> tasks = tasklist.getList();
+        ArrayList<Task> tasks = taskList.getList();
+
+        assert tasks.size() > 0;
 
         for (Task t : tasks) {
             fw.write(t + "\n");
