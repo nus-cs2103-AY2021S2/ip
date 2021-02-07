@@ -2,7 +2,6 @@ package duke.handler;
 
 import duke.Storage;
 import duke.Ui;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
