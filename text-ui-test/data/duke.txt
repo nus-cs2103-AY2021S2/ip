@@ -1,0 +1,3 @@
+T # 0 # get a goldendoodle 
+E # 0 # ethel's birthday party  # 2021-01-26 2000-0000
+T # 0 # get a manicure 

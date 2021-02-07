@@ -1,0 +1,4 @@
+T # 0 # buy dog
+D # 1 # eat dinner  # 2021-02-03 1400
+E # 0 # project meeting  # 2021-02-03 1800-2000
+E # 0 # see sloth  # 2021-02-07 1400-1600
