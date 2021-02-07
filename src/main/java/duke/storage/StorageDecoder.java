@@ -19,14 +19,14 @@ public class StorageDecoder {
 
     /**
      * Returns ArrayList of Task decoded from the save file.
-     * @param encodeTasks data representation of the TaskList from save file.
-     * @return ArrayList of Task from the encodeTasks.
+     * @param encodedTasks data representation of the TaskList from save file.
+     * @return ArrayList of Task from the encodedTasks.
      * @throws DukeCorruptedStorageException when the encodedTasks does not conform with the
      *     proper save file format.
      */
-    public static ArrayList<Task> decodeSave(ArrayList<String> encodeTasks) throws DukeCorruptedStorageException {
+    public static ArrayList<Task> decodeSave(ArrayList<String> encodedTasks) throws DukeCorruptedStorageException {
         ArrayList<Task> tasks = new ArrayList<>();
-        for (String encodedTask : encodeTasks) {
+        for (String encodedTask : encodedTasks) {
             SpecificCommandType command = Parser.parseCommandType(encodedTask);
             Task task;
             switch (command) {
@@ -55,11 +55,11 @@ public class StorageDecoder {
         assert(!encodedTask.isEmpty());
         boolean isDone = Parser.isEncodedTaskDone(encodedTask);
         String description = Parser.obtainEncodedDescription(encodedTask);
-        Task t = new Todo(description);
+        Task task = new Todo(description);
         if (isDone) {
-            t.done();
+            task.done();
         }
-        return t;
+        return task;
     }
 
     /**
@@ -78,20 +78,20 @@ public class StorageDecoder {
         boolean isDone = Parser.isEncodedTaskDone(encodedTask);
         String description = Parser.obtainEncodedDescription(encodedTask);
         LocalDate date = Parser.obtainEncodedDate(encodedTask);
-        Task t;
+        Task task;
         switch (command) {
         case EVENT:
-            t = new Event(description, date);
+            task = new Event(description, date);
             break;
         case DEADLINE:
-            t = new Deadline(description, date);
+            task = new Deadline(description, date);
             break;
         default:
             throw new DukeCorruptedStorageException();
         }
         if (isDone) {
-            t.done();
+            task.done();
         }
-        return t;
+        return task;
     }
 }

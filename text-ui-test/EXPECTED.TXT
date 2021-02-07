@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 	__________________________________
-	 Hello! I'm Duke
+	 Hello! I'm duke.gui.Duke
 	 What can I do for you?
 	__________________________________
 

@@ -14,7 +14,6 @@ import duke.exceptions.DukeCreateDirectoryException;
 import duke.exceptions.DukeCreateFileException;
 import duke.exceptions.DukeSaveFileException;
 import duke.tasks.Task;
-import duke.ui.Ui;
 
 /**
  * Represents the Storage file that is used to store and update the save file.
@@ -22,10 +21,9 @@ import duke.ui.Ui;
 public class Storage {
     private static final String DATA_DIR = new File("data").getAbsolutePath();
     private static Storage storage;
-    private static final Ui ui = new Ui();
     private final File saveFile = new File(DATA_DIR + "/save.txt");
 
-    private Storage() {
+    private Storage() throws DukeCreateDirectoryException {
         createDirectory();
     }
 
@@ -33,7 +31,7 @@ public class Storage {
      * Returns a new Storage or an existing one.
      * @return a new or existing Storage class.
      */
-    public static Storage getInstance() {
+    public static Storage getInstance() throws DukeCreateDirectoryException {
         if (storage == null) {
             storage = new Storage();
         }
@@ -44,13 +42,13 @@ public class Storage {
      * Updates the save file in the hardware with the new TaskList.
      * @param tasks The TaskList used to update the save file.
      */
-    public void update(ArrayList<Task> tasks) {
+    public void update(ArrayList<Task> tasks) throws DukeSaveFileException {
         try {
             FileWriter fw = new FileWriter(saveFile);
             fw.write(StorageEncoder.encodeTasks(tasks));
             fw.close();
         } catch (IOException e) {
-            ui.printErrorMsg(new DukeSaveFileException());
+            throw new DukeSaveFileException();
         }
     }
 
@@ -58,7 +56,7 @@ public class Storage {
      * Returns an ArrayList of Task from the save file.
      * @return an ArrayList of Task from the save file.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeCreateFileException, DukeCorruptedStorageException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             if (!saveFile.createNewFile()) {
@@ -70,9 +68,7 @@ public class Storage {
                 tasks = StorageDecoder.decodeSave(inputs);
             }
         } catch (IOException e) {
-            ui.printErrorMsg(new DukeCreateFileException());
-        } catch (DukeCorruptedStorageException e) {
-            ui.printErrorMsg(e);
+            throw new DukeCreateFileException();
         }
         return tasks;
     }
@@ -80,12 +76,12 @@ public class Storage {
     /**
      * Creates a data directory from source unless it already exists.
      */
-    private void createDirectory() {
+    private void createDirectory() throws DukeCreateDirectoryException {
         Path dataPath = Paths.get(DATA_DIR);
         try {
             Files.createDirectories(dataPath);
         } catch (IOException e) {
-            ui.printErrorMsg(new DukeCreateDirectoryException(DATA_DIR));
+            throw new DukeCreateDirectoryException(DATA_DIR);
         }
     }
 }

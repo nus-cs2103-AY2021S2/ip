@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 import duke.Parser;
 import duke.commands.SpecificCommandType;
+import duke.exceptions.DukeCorruptedStorageException;
+import duke.exceptions.DukeCreateFileException;
 import duke.exceptions.DukeEmptyListException;
 import duke.exceptions.DukeNoDescriptionException;
+import duke.exceptions.DukeSaveFileException;
 import duke.exceptions.DukeUnknownArgumentsException;
 import duke.storage.Storage;
 import duke.ui.Message;
-import duke.ui.Ui;
 
 /**
  * Represents the TaskList to store all the tasks inputted by the user. Tasklist contains a Ui
@@ -19,16 +21,20 @@ import duke.ui.Ui;
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
-    private final Ui ui;
 
     /**
      * Constructs TaskList containing an ArrayList of Task and the Ui.
      * @param storage Use to load the latest TaskList from save file.
-     * @param ui Ui to be used to output the results from input.
      */
-    public TaskList(Storage storage, Ui ui) {
+    public TaskList(Storage storage) throws DukeCorruptedStorageException, DukeCreateFileException {
         tasks = storage.load();
-        this.ui = ui;
+    }
+
+    /**
+     * Creates new empty TaskList.
+     */
+    public TaskList() {
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -43,7 +49,7 @@ public class TaskList {
      * Updates the save file in the hardware.
      * @param storage Storage class used for storage in the hardware.
      */
-    public void updateSave(Storage storage) {
+    public void updateSave(Storage storage) throws DukeSaveFileException {
         storage.update(tasks);
     }
 
@@ -56,7 +62,6 @@ public class TaskList {
         Task task = tasks.get(index);
         task.done();
         return Message.getDoneMsg(task);
-        //ui.printDoneMsg(task);
     }
 
     /**
@@ -136,10 +141,8 @@ public class TaskList {
             }
         } catch (DukeNoDescriptionException e) {
             return Message.getErrorMsg(e);
-            //ui.printErrorMsg(e);
         } catch (DateTimeParseException e) {
             return Message.getErrorMsg(e);
-            //ui.printErrorMsg(e);
         }
         return output;
     }
@@ -162,7 +165,6 @@ public class TaskList {
         }
         tasks.add(task);
         return Message.getAddMsg(task, tasks.size());
-        //ui.printAddMsg(task, tasks.size());
     }
 
     /**
@@ -177,7 +179,6 @@ public class TaskList {
      * @param tasks the tasks used for printing.
      */
     private String print(ArrayList<Task> tasks) {
-        //ui.printTaskList(tasks);
         return Message.getTaskListMsg(tasks);
     }
 
@@ -195,6 +196,5 @@ public class TaskList {
             }
         }
         return Message.getFindMsg(selectedTask);
-        //ui.printFindMsg(selectedTask);
     }
 }
