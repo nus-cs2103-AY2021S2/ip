@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Represents a Todo task.
+ * <br>A todo task has a description.
  */
 public class Todo extends Task {
 

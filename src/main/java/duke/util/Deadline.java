@@ -6,7 +6,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
- * Represents an deadline task.
+ * Represents a deadline task.
+ * <br>A deadline task has a description and a date where it is due.
  */
 public class Deadline extends Task {
 

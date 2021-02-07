@@ -11,7 +11,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -42,23 +41,17 @@ public class MainWindow extends SplitPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         // Add number to listView and change color
-        listView.setCellFactory(new Callback<ListView<Task>, ListCell<Task>>() {
+        listView.setCellFactory(list -> new ListCell<>() {
             @Override
-            public ListCell<Task> call(ListView<Task> list) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(Task item, boolean empty) {
-                        super.updateItem(item, empty);
-                        setText(empty ? "" : (getIndex() + 1) + ". " + item.toString());
-                        setStyle("-fx-text-fill:white;-fx-background-color:"
-                                + (getIndex() % 2 == 0
-                                ? "rgb(140, 140, 140);"
-                                : "rgb(130, 130, 130);"));
-                    }
-                };
+            protected void updateItem(Task item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : (getIndex() + 1) + ". " + item);
+                setStyle("-fx-text-fill:white;-fx-background-color:"
+                        + (getIndex() % 2 == 0
+                        ? "rgb(140, 140, 140);"
+                        : "rgb(130, 130, 130);"));
             }
         });
-
     }
 
     /**

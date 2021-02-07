@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Represents an Event task.
+ * <br>An event task contains a description and a date when the event is occuring.
  */
 public class Event extends Task {
 
