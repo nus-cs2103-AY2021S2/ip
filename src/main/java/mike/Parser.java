@@ -5,20 +5,12 @@ import mike.task.Event;
 import mike.task.Task;
 import mike.task.ToDo;
 
+import java.util.Locale;
+
 /**
  * Parses input from the user
  */
 public class Parser {
-
-    /**
-     * Returns a Command with the enum type by parsing the input
-     *
-     * @param input String object representing the user's input
-     * @return a Command of the enum type
-     */
-    public static Command parseCommand(String input) {
-        return Command.valueOf(input.toUpperCase());
-    }
 
     /**
      * Returns a Task Object by parsing the description depending on the Command
@@ -112,24 +104,86 @@ public class Parser {
     public static Task parseLineInFile(String line) {
         Task task;
         if (line.charAt(1) == 'T') {
-            task = new ToDo(line.substring(6));
+            task = parseForToDoInFile(line);
         } else if (line.charAt(1) == 'D') {
-            int endIndexOfDescription = line.indexOf("by: ");
-            String deadlineDescription = line.substring(6, endIndexOfDescription - 3);
-            String deadline = line.substring(endIndexOfDescription + 4, line.length() - 1);
-            task = new Deadline(deadlineDescription, deadline);
+            task = parseForDeadlineInFile(line);
         } else if (line.charAt(1) == 'E') {
-            int endIndexOfDescription = line.indexOf("at: ");
-            String eventDescription = line.substring(6, endIndexOfDescription - 3);
-            String eventTime = line.substring(endIndexOfDescription + 4, line.length() - 1);
-            task = new Event(eventDescription, eventTime);
+            task = parseForEventInFile(line);
         } else {
             throw new ParseException("OOPS!!! It seems that the file might be corrupted.");
         }
-        if (line.charAt(4) == 'X') {
+        if (line.charAt(4) == '\u2713') {
             task.markAsDone();
         }
         return task;
     }
 
+    /**
+     * Parse a single-word user input and returns a Command
+     *
+     * @param input user input as a String
+     * @return a Command of the enum type
+     */
+    public static Command parseCommandForSingleWord(String input) {
+        return Command.valueOf(input.toUpperCase(Locale.ROOT));
+    }
+
+    /**
+     * Parse a multiple-words user input and return a Command
+     *
+     * @param input user input as a String
+     * @return a Command of the enum type
+     */
+    public static Command parseCommandForMultipleWords(String input) {
+        int endIndexOfCommand = input.indexOf(' ');
+        String commandInput = input.substring(0, endIndexOfCommand);
+        return Command.valueOf(commandInput.toUpperCase(Locale.ROOT));
+    }
+
+    /**
+     * Returns the description portion of the user input
+     *
+     * @param input user input as a String
+     * @return the description portion of the user input as a String
+     */
+    public static String parseDescriptionInput(String input) {
+        int endIndexOfCommand = input.indexOf(' ');
+        return input.substring(endIndexOfCommand + 1);
+    }
+
+    /**
+     * Parses ToDo Tasks stored in a file
+     *
+     * @param line line representing a ToDo Task in the file
+     * @return a ToDo Task
+     */
+    private static ToDo parseForToDoInFile(String line) {
+        return new ToDo(line.substring(6));
+    }
+
+    /**
+     * parses Deadline Tasks stored in a file
+     *
+     * @param line line representing a Deadline Task in the file
+     * @return a Deadline Task
+     */
+    private static Deadline parseForDeadlineInFile(String line) {
+        int endIndexOfDescription = line.indexOf("by: ");
+        String deadlineDescription = line.substring(6, endIndexOfDescription - 2);
+        String deadline = line.substring(endIndexOfDescription + 4, line.length() - 1);
+        return new Deadline(deadlineDescription, deadline);
+    }
+
+    /**
+     * Parses Event Tasks stored in a file
+     *
+     * @param line line representing a Event Task in the file
+     * @return a Event Task
+     */
+    private static Event parseForEventInFile(String line) {
+        int endIndexOfDescription = line.indexOf("at: ");
+        String eventDescription = line.substring(6, endIndexOfDescription - 2);
+        String eventTime = line.substring(endIndexOfDescription + 4, line.length() - 1);
+        return new Event(eventDescription, eventTime);
+    }
 }
