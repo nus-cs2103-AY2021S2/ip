@@ -32,10 +32,6 @@ public class Duke {
      * @return string response.
      */
     public String getResponse(String input) {
-        String response = parser.parseCommand(input);
-        if (input.equals("bye")) {
-            //close();
-        }
-        return response;
+        return parser.parseCommand(input);
     }
 }

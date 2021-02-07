@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import duke.Parser;
-import duke.Task;
 import duke.TaskList;
+import duke.task.Task;
 
 class ParserTest {
     private static TaskList tl;

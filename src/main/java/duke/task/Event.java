@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a task with a duration specified in the "at" argument.

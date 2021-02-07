@@ -1,11 +1,13 @@
 package duke;
 
+import duke.task.Task;
+
 /**
  * Parser for Duke commands, with access to its task list, and storage.
  */
 public class Parser {
-    private TaskList tasks;
-    private Storage storage;
+    private final TaskList tasks;
+    private final Storage storage;
 
     /**
      * Creates a Parser object for the Duke instance.
@@ -29,9 +31,6 @@ public class Parser {
         command = command.trim();
         try {
             switch (command.split(" ")[0]) {
-            case "bye":
-                response = "Bye. Hope to see you again soon!";
-                break;
             case "list":
                 response = Ui.printList(tasks);
                 break;
@@ -49,7 +48,7 @@ public class Parser {
                 Task newTask = Task.dispatchTaskCreation(command);
                 response = addTask(newTask);
                 if (storage != null) {
-                    storage.storeTask(command);
+                    storage.storeTaskCommand(command);
                 }
                 break;
             case "find":
@@ -61,9 +60,8 @@ public class Parser {
             }
         } catch (DukeException | IllegalArgumentException e) {
             response = e.getMessage();
-        } finally {
-            return response;
         }
+        return response;
     }
 
     /**
@@ -75,14 +73,14 @@ public class Parser {
      * @return feedback whether task is marked done successfully or not.
      */
     private String handleDone(String command) {
-        String reply = "";
+        String reply;
         try {
-            int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task currentTask = tasks.get(taskNum);
+            int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task currentTask = tasks.get(taskNumber);
             currentTask.markDone();
             reply = "Noice. It's done. \n" + currentTask;
             if (storage != null) {
-                storage.updateTaskDone(taskNum);
+                storage.updateTaskDone(taskNumber);
             }
         } catch (NumberFormatException e) {
             reply = "Please enter a number from 1 to " + tasks.size() + " after done!";
@@ -104,14 +102,14 @@ public class Parser {
      * @return feedback whether the task is deleted successfully.
      */
     private String handleDelete(String command) {
-        String reply = "";
+        String reply;
         try {
-            int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task currentTask = tasks.remove(taskNum);
+            int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task currentTask = tasks.remove(taskNumber);
             reply = "See la. It's deleted. \n" + currentTask
                     + "\nYou currently have " + tasks.size() + " task(s) in the list.";
             if (storage != null) {
-                storage.deleteTask(taskNum);
+                storage.deleteTask(taskNumber);
             }
         } catch (NumberFormatException e) {
             reply = "Please enter a number from 1 to " + tasks.size() + " after delete!";
@@ -144,24 +142,28 @@ public class Parser {
      * @return string of tasks matching argument.
      */
     private String handleFind(String command) {
-        StringBuffer reply = new StringBuffer();
+        String query;
         try {
-            String query = command.split(" ", 2)[1].trim();
-            boolean isFound = false;
-            for (int i = 1; i <= tasks.size(); i++) {
-                if (tasks.get(i - 1).toString().contains(query)) {
-                    isFound = true;
-                    reply.append(i + "." + tasks.get(i - 1) + "\n");
-                }
-            }
-            if (isFound) {
-                reply.insert(0, "Here are the matching tasks in your list:\n");
-            } else {
-                return "There are no tasks that match \"" + query + "\"!";
-            }
+            query = command.split(" ", 2)[1].trim();
         } catch (IndexOutOfBoundsException e) {
             return "Please type in your query after find!";
         }
-        return reply.toString();
+
+        StringBuilder reply = new StringBuilder();
+        boolean isFound = false;
+        // Loop through tasks to find descriptions matching given argument.
+        for (int i = 1; i <= tasks.size(); i++) {
+            if (tasks.get(i - 1).toString().contains(query)) {
+                isFound = true;
+                reply.append(i + "." + tasks.get(i - 1) + "\n");
+            }
+        }
+
+        if (isFound) {
+            reply.insert(0, "Here are the matching tasks in your list:\n");
+            return reply.toString();
+        } else {
+            return "There are no tasks that match \"" + query + "\"!";
+        }
     }
 }

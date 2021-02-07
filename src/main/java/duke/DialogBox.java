@@ -59,9 +59,11 @@ public class DialogBox extends HBox {
                 Color.rgb(255, 255, 255),
                 new CornerRadii(5.0),
                 new Insets(0, 5, 0, 5))));
+
         ImageView imageNode = new ImageView(image);
         imageNode.setFitWidth(50.0);
         imageNode.setFitHeight(50.0);
+
         dukeDialogBox.getChildren().add(imageNode);
         dukeDialogBox.flip();
         return dukeDialogBox;
