@@ -31,6 +31,7 @@ public class TaskList {
     }
 
     public String makeDone(int taskNo) {
+        assert taskNo > 0 : "Task number cannot be negative";
         tasks.get(taskNo).markAsDone();
         return tasks.get(taskNo).toString();
     }
@@ -83,6 +84,7 @@ public class TaskList {
     }
 
     public String remove(int taskNo) {
+        assert taskNo > 0 : "Task number cannot be negative";
         Task removed = tasks.remove(taskNo);
         this.size--;
         return removed.toString();
