@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task in the form of an event which has a date,
- * an event starting time and an event ending time
+ * an event starting time and an event ending time.
  */
 
 public class Event extends Task {
@@ -14,11 +14,11 @@ public class Event extends Task {
 
     /**
      * Constructor takes in four parameters <code>description</code>,
-     * <code>date</code>, <code>startTime</code> and <code>endTime</code>
-     * @param description the description of the event in the form of a <code>String</code>
-     * @param date the date of the event in the form of a <code>LocalDate</code>
-     * @param startTime the starting time of the event in the form of a <code>LocalTime</code>
-     * @param endTime the ending time of the event in the form of a <code>LocalTime</code>
+     * <code>date</code>, <code>startTime</code> and <code>endTime</code>.
+     * @param description the description of the event
+     * @param date the date of the event
+     * @param startTime the starting time of the event
+     * @param endTime the ending time of the event
      */
     public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
@@ -28,19 +28,17 @@ public class Event extends Task {
     }
 
     /**
-     * A method returning the date of the event
-     * @return a <code>LocalDate</code> object that specifies
-     * the date of the event
+     * Returns the date of the event
+     * @return the date of the event
      */
-
     @Override
     public LocalDate getDate() {
         return this.date;
     }
 
     /**
-     * A method that generates the text to be stored into the text file
-     * at the end of execution
+     * Generates the text of this task in the proper format to be stored
+     * into the text file at the end of execution.
      * @return A <code>String</code> text in the proper format to be stored
      * into the text file
      */
@@ -54,12 +52,11 @@ public class Event extends Task {
     }
 
     /**
-     * A method that returns the date, starting time and ending time of the event
-     * in the format of MMM-d-yyyy hh:mma-hh:mma
-     * @return a <code>String</code> of the date, starting time and ending time
-     * of the event
+     * Returns the date, starting time and ending time of event in the format of
+     * MMM-d-yyyy hh:mma-hh:mma.
+     * @return the date, starting time and ending time of the event
      */
-    public String getTime() {
+    public String getDateAndTime() {
         return "(at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + this.startTime.format(DateTimeFormatter.ofPattern("hh:mma")) + "-"
                         + this.endTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
@@ -68,9 +65,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[E][X] " + this.description + this.getTime();
+            return "[E][X] " + this.description + this.getDateAndTime();
         } else {
-            return "[E][ ] " + this.description + this.getTime();
+            return "[E][ ] " + this.description + this.getDateAndTime();
         }
     }
 }

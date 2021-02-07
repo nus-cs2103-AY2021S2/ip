@@ -1,22 +1,21 @@
 /**
- * Represents a command to mark a task as done within the task list
+ * Represents a command to mark a task as done within the task list.
  */
 
 public class DoneCommand extends Command {
     /**
-     * Constructor takes in a <code>fullCommand</code>, the full user input
-     * consisting of the desired command, and a <code>action</code> which
-     * in this case should specify "done"
+     * Constructor that takes in two parameters, <code>fullCommand</code> and <code>typeOfCommand</code>.
      * @param fullCommand the full user input
-     * @param action should be "done"
+     * @param typeOfCommand the type of command to be executed, in this case should be "done"
      */
-    public DoneCommand(String fullCommand, String action) {
-        super(fullCommand, action);
+    public DoneCommand(String fullCommand, String typeOfCommand) {
+        super(fullCommand, typeOfCommand);
     }
 
     /**
      * Marks a task within the task list as done
      * @param tasks the task list consisting the task to be marked as done
+     * @return a response to be displayed to the user after marking the task as done
      * @throws DukeException if user did not type in a task number
      */
     public String execute(TaskList tasks) throws DukeException {

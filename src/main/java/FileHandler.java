@@ -17,69 +17,101 @@ public class FileHandler {
     public FileHandler() { }
 
     /**
-     * A method that reads a command containing a task and stores it in a task list
-     * @param command a <code>String</code> specifying a task to be stored
-     * @param tasks a <code>TaskList</code>
-     * @return a <code>TaskList</code> with the new task added
+     * Reads a command containing a task and stores it in a task list
+     * @param command a String in the proper format specifying the task to be stored
+     * @param tasks the task list to store the task into
+     * @return a task list with the new task added
      * @throws DukeException if the command is not "T" (for ToDo),
      * "D" (for Deadline) or "E" (for Event)
      */
     public TaskList handleFileCommand(String command, TaskList tasks) throws DukeException {
-        String[] inputs = command.split(" # ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
-        String action = inputs[0];
-        if (action.equals("T")) {
-            ToDo newTask = new ToDo(inputs[2]);
-            if (Integer.parseInt(inputs[1]) == 1) {
-                newTask.markAsDone();
-            }
-            tasks = tasks.addByTask(newTask);
-        } else if (action.equals("D")) {
-            String dateAndTime = inputs[3];
-            String date = dateAndTime.split(" ")[0];
-            String time = dateAndTime.split(" ")[1];
-            Deadline newDeadline = new Deadline(inputs[2], LocalDate.parse(date),
-                    LocalTime.parse(time, formatter));
-            if (Integer.parseInt(inputs[1]) == 1) {
-                newDeadline.markAsDone();
-            }
-            tasks = tasks.addByTask(newDeadline);
-        } else if (action.equals("E")) {
-            String dateAndTime = inputs[3];
-            String date = dateAndTime.split(" ")[0];
-            String startTime = dateAndTime
-                                    .split(" ")[1]
-                                            .split("-")[0];
-            String endTime = dateAndTime
-                                    .split(" ")[1]
-                                            .split("-")[1];
-            Event newEvent = new Event(inputs[2], LocalDate.parse(date),
-                    LocalTime.parse(startTime, formatter),
-                            LocalTime.parse(endTime, formatter));
-
-            if (Integer.parseInt(inputs[1]) == 1) {
-                newEvent.markAsDone();
-            }
-            tasks = tasks.addByTask(newEvent);
+        String[] splitInputs = command.split(" # ");
+        String typeOfCommand = splitInputs[0];
+        if (typeOfCommand.equals("T")) {
+            return addToDoFromFile(splitInputs, tasks);
+        } else if (typeOfCommand.equals("D")) {
+            return addDeadlineFromFile(splitInputs, tasks);
+        } else if (typeOfCommand.equals("E")) {
+            return addEventFromFile(splitInputs, tasks);
         } else {
             throw new DukeException("Sorry! No such command is allowed.");
         }
+    }
+
+    /**
+     * Adds a <code>ToDo</code> task specified from the file in a proper format to the task list
+     * @param splitInputs the split inputs from the full command in the file
+     * @param tasks the task list where the <code>ToDo</code> is to be added into
+     * @return a task list with the new <code>ToDo</code> added
+     */
+    public TaskList addToDoFromFile(String[] splitInputs, TaskList tasks) {
+        ToDo newTask = new ToDo(splitInputs[2]);
+        if (Integer.parseInt(splitInputs[1]) == 1) {
+            newTask.markAsDone();
+        }
+        tasks = tasks.addByTask(newTask);
         return tasks;
     }
 
     /**
-     * A method that reads from a text file and stores all the tasks specified within
-     * into a task list
-     * @param tasks a <code>TaskList</code> to store the tasks into
-     * @return a <code>TaskList</code> containing all the new tasks
-     * read from the file
-     * @throws IOException
-     * @throws DukeException
+     * Adds a <code>Deadline</code> task specified from the file in a proper format to the task list
+     * @param splitInputs the split inputs from the full command in the file
+     * @param tasks the task list where the <code>Deadline</code> is to be added into
+     * @return a task list with the new <code>Deadline</code> added
      */
+    public TaskList addDeadlineFromFile(String[] splitInputs, TaskList tasks) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String dateAndTime = splitInputs[3];
+        String date = dateAndTime.split(" ")[0];
+        String time = dateAndTime.split(" ")[1];
+        Deadline newDeadline = new Deadline(splitInputs[2], LocalDate.parse(date),
+                LocalTime.parse(time, formatter));
+        if (Integer.parseInt(splitInputs[1]) == 1) {
+            newDeadline.markAsDone();
+        }
+        tasks = tasks.addByTask(newDeadline);
+        return tasks;
+    }
 
+    /**
+     * Adds an <code>Event</code> task specified from the file in a proper format to the task list
+     * @param splitInputs the split inputs from the full command in the file
+     * @param tasks the task list where the <code>Event</code> is to be added into
+     * @return a task list with the new <code>Event</code> added
+     */
+    public TaskList addEventFromFile(String[] splitInputs, TaskList tasks) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String dateAndTime = splitInputs[3];
+        String date = dateAndTime.split(" ")[0];
+        String startTime = dateAndTime
+                .split(" ")[1]
+                .split("-")[0];
+        String endTime = dateAndTime
+                .split(" ")[1]
+                .split("-")[1];
+        Event newEvent = new Event(splitInputs[2], LocalDate.parse(date),
+                LocalTime.parse(startTime, formatter),
+                LocalTime.parse(endTime, formatter));
+
+        if (Integer.parseInt(splitInputs[1]) == 1) {
+            newEvent.markAsDone();
+        }
+        tasks = tasks.addByTask(newEvent);
+        return tasks;
+    }
+
+    /**
+     * Reads from a text file and stores all the tasks specified within
+     * into a task list
+     * @param tasks a task list to store the tasks into
+     * @return a task list containing all the new tasks read from the file
+     * @throws IOException
+     * @throws DukeException if the file contains input of an invalid format
+     */
     public TaskList readFromFile(TaskList tasks) throws IOException, DukeException {
         File directory = new File("data");
-        if (!directory.exists()) { //creating directory if it doesn't exist
+        //creating directory if it doesn't exist
+        if (!directory.exists()) {
             directory.mkdir();
         }
         File f = new File("data/duke.txt");
@@ -90,7 +122,7 @@ public class FileHandler {
         while (scf.hasNext()) {
             try {
                 String nextLine = scf.nextLine();
-                tasks = handleFileCommand(nextLine, tasks); //input format: deadline 0 return book /by June 6th
+                tasks = handleFileCommand(nextLine, tasks);
             } catch (DukeException ex) {
                 System.out.println(ex);
             }
@@ -99,16 +131,15 @@ public class FileHandler {
     }
 
     /**
-     * A method to write all the tasks contained within the task list into a text file
-     * @param list the <code>TaskList</code> that contains the tasks to be written
+     * Writes all the tasks contained within the task list into a text file.
+     * @param list the task list that contains the tasks to be written
      *             into the text file
      * @throws IOException
      */
-
     public void writeToFile(TaskList list) throws IOException {
-        //before writing to it, clear file to make sure it is empty and no content is leftover from last run
         FileWriter fw = new FileWriter("data/duke.txt");
         PrintWriter pw = new PrintWriter("data/duke.txt");
+        //before writing to it, clear file to make sure it is empty and no content is leftover from last run
         pw.print("");
         pw.close();
         String textToAdd = "";
