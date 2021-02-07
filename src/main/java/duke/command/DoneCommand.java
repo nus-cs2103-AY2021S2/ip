@@ -17,13 +17,14 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         if (0 <= index && index < tasks.size()) {
             tasks.markAsDone(index);
-            System.out.println("\tNice! I've marked this task as done:");
-            System.out.printf("\t%s\n", tasks.getTaskDescription(index));
+            String headerText = "\tNice! I've marked this task as done:\n";
+            String taskMarkedText = String.format("\t%s\n", tasks.getTaskDescription(index));
+            return headerText + taskMarkedText;
         } else {
-            System.out.println("\tOops! The index is out of bound.");
+            return "\tOops! The index is out of bound.\n";
         }
     }
 

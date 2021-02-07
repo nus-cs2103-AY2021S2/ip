@@ -6,5 +6,5 @@ import duke.Ui;
 
 public interface Command {
     boolean isExit();
-    void execute(TaskList tasks, Ui ui, Storage storage);
+    String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage);
 }

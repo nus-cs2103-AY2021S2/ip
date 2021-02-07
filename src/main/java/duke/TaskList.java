@@ -72,11 +72,13 @@ public class TaskList {
     /**
      * Returns the task description of all Task instances in this TaskList instance.
      */
-    public void list() {
+    public String list() {
+        final StringBuilder sb = new StringBuilder();
         int i = 0;
         for (final Task t : tasks) {
-            System.out.printf("\t%d. %s\n", ++i, t);
+            sb.append(String.format("\t%d. %s\n", ++i, t));
         }
+        return sb.toString();
     }
 
     /**

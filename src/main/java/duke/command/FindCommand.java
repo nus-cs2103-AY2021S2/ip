@@ -19,24 +19,24 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
-            System.out.println("\tHmm... You do not have any tasks!");
-            return;
+            return "\tHmm... You do not have any tasks!\n";
         }
 
         final List<String> matchingTasks = tasks.find(keyword);
 
         if (matchingTasks.size() == 0) {
-            System.out.println("\tHmm... You do not have any matching tasks!");
-            return;
+            return "\tHmm... You do not have any matching tasks!\n";
         }
 
-        System.out.println("\tHere are the matching tasks in your list:");
+        String headerText = "\tHere are the matching tasks in your list:\n";
+        StringBuilder sb = new StringBuilder();
         int i = 0;
         for (String str : matchingTasks) {
-            System.out.printf("\t%d. %s\n", ++i, str);
+            sb.append(String.format("\t%d. %s\n", ++i, str));
         }
+        return headerText + sb.toString();
     }
 
 }

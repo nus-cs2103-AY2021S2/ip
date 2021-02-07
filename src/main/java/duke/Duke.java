@@ -49,7 +49,7 @@ public class Duke {
             } else {
                 try {
                     final Command command = Parser.parseCommand(input);
-                    command.execute(tasks, ui, storage);
+                    System.out.print(command.executeAndGetResponse(tasks, ui, storage));
                     isExit = command.isExit();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -66,7 +66,16 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        if (input.equals("")) {
+            return"\t...";
+        } else {
+            try {
+                final Command command = Parser.parseCommand(input);
+                return command.executeAndGetResponse(tasks, ui, storage);
+            } catch (Exception e) {
+                return e.getMessage();
+            }
+        }
     }
 
     /**

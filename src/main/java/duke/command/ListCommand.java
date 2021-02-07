@@ -12,13 +12,14 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
+        String headerText;
         if (tasks.size() == 0) {
-            System.out.println("\tHmm... You do not have any tasks!");
+            headerText = "\tHmm... You do not have any tasks!\n";
         } else {
-            System.out.println("\tHere are the tasks in your list:");
+            headerText = "\tHere are the tasks in your list:\n";
         }
-        tasks.list();
+        return headerText + tasks.list();
     }
 
 }
