@@ -14,6 +14,7 @@ public class FindTaskCommand extends Command {
         if (keyword.isBlank()) {
             throw new DukeException(NO_KEYWORD_ERROR_MESSAGE);
         }
+        assert !keyword.isBlank() : NO_KEYWORD_ERROR_MESSAGE;
         this.keyword = keyword;
     }
 

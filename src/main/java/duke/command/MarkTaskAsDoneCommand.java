@@ -18,6 +18,7 @@ public class MarkTaskAsDoneCommand extends Command {
             throw new DukeException(NO_TASK_INDEX_ERROR_MESSAGE);
         }
         try {
+            assert !taskIndex.isBlank() : NO_TASK_INDEX_ERROR_MESSAGE;
             this.taskIndex = Integer.parseInt(taskIndex.trim());
         } catch (NumberFormatException e) {
             throw new DukeException(INDEX_NOT_NUMBER_ERROR_MESSAGE);
