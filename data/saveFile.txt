@@ -1,2 +1,4 @@
-T | 0 | read book
-D | 0 | return book /by 2019-12-12
+D | 1 | return books /by 2019-12-12
+D | 0 | finish work /by 2021-05-05
+E | 1 | meeting /at 2021-02-07
+T | 0 | read text book

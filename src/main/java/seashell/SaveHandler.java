@@ -1,5 +1,10 @@
 package seashell;
 
+import seashell.task.Deadline;
+import seashell.task.Event;
+import seashell.task.Task;
+import seashell.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

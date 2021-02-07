@@ -1,8 +1,8 @@
-package seashell;
+package seashell.task;
 
 public class Todo extends Task {
 
-    protected Todo(String name) {
+    public Todo(String name) {
         super(name);
     }
 

@@ -1,30 +1,62 @@
 package seashell;
 
+import seashell.command.*;
+import seashell.task.TaskType;
+
 public class Parser {
 
-    protected CommandType parse(String input) {
+    protected static Command parse(String input) throws SeashellException {
         if (input.stripTrailing().equals("bye")) {
-            return CommandType.EXIT;
+            return new ExitCommand();
         } else if (input.stripTrailing().equals("list")) {
-            return CommandType.LIST;
+            return new ListCommand();
         } else if (input.startsWith("done ")) {
-            return CommandType.DONE;
+            String num = input.substring(5);
+            int index = Integer.parseInt(num);
+            System.out.println(index);
+            return new DoneCommand(index);
         } else if (input.startsWith("delete ")) {
-            return CommandType.DELETE;
+            String num = input.substring(7);
+            int index = Integer.parseInt(num);
+            return new DeleteCommand(index);
         } else if (input.startsWith("todo")) {
-            return CommandType.TODO;
+            String taskName = input.substring(4).stripLeading();
+            if (taskName.equals("")) {
+                throw new SeashellException("OOPS!!! The description of a task cannot be empty.");
+            } else {
+                return new AddCommand(TaskType.TODO, taskName);
+            }
         } else if (input.startsWith("deadline")) {
-            return CommandType.DEADLINE;
+            String taskName = input.substring(8).stripLeading();
+            if (taskName.equals("")) {
+                throw new SeashellException("OOPS!!! The description of a task cannot be empty.");
+            } else if (input.indexOf("/by") == -1) {
+                throw new SeashellException("OOPS!!! The syntax of adding a deadline should be [name] /by [yyyy-mm-dd]");
+            } else {
+                taskName = input.substring(8, input.indexOf("/by") - 1).stripLeading();
+                String by = input.substring(input.indexOf("/by") + 4);
+                return new AddCommand(TaskType.DEADLINE, taskName, by);
+            }
         } else if (input.startsWith("event")) {
-            return CommandType.EVENT;
+            String taskName = input.substring(5).stripLeading();
+            if (taskName.equals("")) {
+                throw new SeashellException("OOPS!!! The description of a task cannot be empty.");
+            } else if (input.indexOf("/at") == -1) {
+                throw new SeashellException("OOPS!!! The syntax of adding an event should be [name] /at [yyyy-mm-dd]");
+            } else {
+                taskName = input.substring(5, input.indexOf("/at") - 1).stripLeading();
+                String at = input.substring(input.indexOf("/at") + 4);
+                return new AddCommand(TaskType.EVENT, taskName, at);
+            }
         } else if (input.stripTrailing().equals("help")) {
-            return CommandType.HELP;
+            return new HelpCommand();
         } else if (input.stripTrailing().equals("clear")) {
-            return CommandType.CLEAR;
+            return new ClearCommand();
         } else if (input.startsWith("find ")) {
-            return CommandType.FIND;
+            String toFind = input.substring(5);
+            return new FindCommand(toFind);
         } else {
-            return CommandType.INVALID;
+            throw new SeashellException("OOPS!!! Command is not recognised!");
         }
     }
 

@@ -10,16 +10,16 @@ public class Ui {
             + "\n clear - clears the task list"
             + "\n bye - exits the program";
 
-    protected void showWelcome() {
-        System.out.println("Hello I'm Seashell, a task manager! What can I do for you? Type \"help\" for more "
-                + "information on the commands you can give me!");
+    public static String showWelcome() {
+        return "Hello I'm Seashell, a task manager! What can I do for you? Type \"help\" for more "
+                + "information on the commands you can give me!";
     }
 
-    protected void showExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String showExit() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    protected void showError(String errMessage) {
+    public static void showError(String errMessage) {
         System.err.println(errMessage);
     }
 }

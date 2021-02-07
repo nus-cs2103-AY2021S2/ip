@@ -2,67 +2,66 @@ package seashell;
 
 import java.util.Scanner;
 
+import javafx.scene.control.Label;
+import seashell.command.Command;
+
 public class Seashell {
 
-    private TaskList taskListObj;
-    private final SaveHandler saveHandler;
+    public TaskList taskListObj;
+    public final SaveHandler saveHandler;
     private final Ui ui;
 
-    protected Seashell() {
+    /**
+     * Create a new Seashell instance
+     */
+    public Seashell() {
         this.saveHandler = new SaveHandler();
         this.taskListObj = new TaskList(this.saveHandler.loadSave());
         this.ui = new Ui();
     }
 
-    protected void start() {
-        ui.showWelcome();
-        Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser();
-        boolean isExit = false;
-        while (!isExit) {
-            String command = sc.nextLine();
-            try {
-                CommandType commandType = parser.parse(command);
-                switch (commandType) {
-                case EXIT:
-                    ui.showExit();
-                    isExit = true;
-                    break;
-                case LIST:
-                    this.taskListObj.listTasks();
-                    break;
-                case DONE:
-                    this.taskListObj = this.taskListObj.setDone(command, this.saveHandler);
-                    break;
-                case DELETE:
-                    this.taskListObj = this.taskListObj.delete(command, this.saveHandler);
-                    break;
-                case TODO:
-                    this.taskListObj = this.taskListObj.createTodo(command, this.saveHandler);
-                    break;
-                case DEADLINE:
-                    this.taskListObj = this.taskListObj.createDeadline(command, this.saveHandler);
-                    break;
-                case EVENT:
-                    this.taskListObj = this.taskListObj.createEvent(command, this.saveHandler);
-                    break;
-                case HELP:
-                    System.out.println(Ui.HELP_TEXT);
-                    break;
-                case CLEAR:
-                    this.taskListObj = this.taskListObj.clear(this.saveHandler);
-                    break;
-                case FIND:
-                    this.taskListObj.find(command);
-                    break;
-                case INVALID:
-                    throw new SeashellException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                default:
-                    break;
-                }
-            } catch (SeashellException e) {
-                ui.showError(e.getMessage());
-            }
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(this.taskListObj, this.saveHandler);
+        } catch (SeashellException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return e.getMessage();
         }
     }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+//    protected void start() {
+//        ui.showWelcome();
+//        Scanner sc = new Scanner(System.in);
+//        Parser parser = new Parser();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            String input = sc.nextLine();
+//            try {
+//                Command command = parser.parse(input);
+//                command.execute(this.taskListObj, this.saveHandler);
+//                isExit = command.isExit();
+//            } catch (SeashellException e) {
+//                ui.showError(e.getMessage());
+//            }
+//        }
+//    }
 }

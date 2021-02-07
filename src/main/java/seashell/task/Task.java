@@ -1,4 +1,4 @@
-package seashell;
+package seashell.task;
 
 public class Task {
     private boolean isDone;
@@ -11,6 +11,11 @@ public class Task {
     public Task(String name) {
         this.name = name;
         this.isDone = false;
+    }
+
+    protected Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
     }
 
     public String getName() {
@@ -26,8 +31,7 @@ public class Task {
      * @return a new task which is marked as done
      */
     public Task setDone() {
-        Task doneTask = new Task(this.name);
-        doneTask.isDone = true;
+        Task doneTask = new Task(this.name, true);
         return doneTask;
     }
 

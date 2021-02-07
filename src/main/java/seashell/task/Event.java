@@ -1,4 +1,4 @@
-package seashell;
+package seashell.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +11,7 @@ public class Event extends Task {
      * Create a deadline object with specified name and
      * @param name
      */
-    protected Event(String name, String at) {
+    public Event(String name, String at) {
         super(name);
         this.at = LocalDate.parse(at);
     }
@@ -21,11 +21,15 @@ public class Event extends Task {
         this.at = at;
     }
 
+    protected Event(String name, LocalDate at, boolean isDone) {
+        super(name, isDone);
+        this.at = at;
+    }
+
 
     @Override
     public Event setDone() {
-        Event doneTask = new Event(this.getName(), this.at);
-        doneTask.setDone();
+        Event doneTask = new Event(this.getName(), this.at, true);
         return doneTask;
     }
 
