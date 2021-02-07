@@ -16,9 +16,25 @@ public class Ui {
      * @return welcome message at the start of application.
      */
     public static String welcomeString() {
-        return "Welcome!\n"
-                + "I'm Ronald the McSpicy.\n"
-                + "What can I do for you today?";
+        return "Hi! I'm Ronald the McSpicy.\n"
+                + "What can I do for you today?\n\n"
+                + "(Type [help] to see what I can do.)";
+    }
+
+    public static void displayHelp() {
+        String str = "If you would like to add a TODO, type\n"
+                + "[todo <orderName>]\n\n"
+                + "If you would like to add a DEADLINE, type\n"
+                + "[deadline <orderName> /by <dd/MM/yyyy HHmm>]\n\n"
+                + "If you would like to add an EVENT, type\n"
+                + "[event <orderName> /at <dd/MM/yyyy HHmm>]\n\n"
+                + "If you would like to remove an item from your menu, type\n"
+                + "[delete <orderNumber>] or [delete <start>-<end>]\n\n"
+                + "If you would like to mark an order as complete, type\n"
+                + "[done <orderNumber>] or [done <start>-<end>]\n\n"
+                + "If you would like to find orders containing a particular keyword, type\n"
+                + "[find <keyword>]\n";
+        assignResponse(str);
     }
 
     /**
@@ -38,25 +54,13 @@ public class Ui {
     public static void displayAllTasks(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
-            sb.append("You don't have anything on your menu at the moment!\n\n"
-                    + "If you would like to add a TODO, type\n"
-                    + "[todo <orderName>]\n\n"
-                    + "If you would like to add a DEADLINE, type\n"
-                    + "[deadline <orderName> /by <dd/MM/yyyy HHmm>]\n\n"
-                    + "If you would like to add an EVENT, type\n"
-                    + "[event <orderName> /at <dd/MM/yyyy HHmm>]\n\n");
+            sb.append("You don't have anything on your menu at the moment!");
         } else {
             sb.append("Here's what you've ordered so far:\n\n");
             for (int i = 1; i <= tasks.size(); i++) {
                 String formattedTask = i + ". " + tasks.get(i - 1).toString();
                 sb.append(formattedTask);
             }
-            sb.append("\nIf you would like to remove an item from your menu, type\n"
-                    + "[delete <orderNumber>]\n\n"
-                    + "If you would like to mark an order as complete, type\n"
-                    + "[done <orderNumber>]\n\n"
-                    + "If you would like to find orders containing a particular keyword, type\n"
-                    + "[find <keyword>]\n");
         }
         assignResponse(sb.toString());
     }

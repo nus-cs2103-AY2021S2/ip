@@ -1,16 +1,7 @@
-package duke;
+package duke.util;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.CommandType;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.DukeException;
+import duke.command.*;
 import duke.ui.Ui;
 
 /**
@@ -43,6 +34,9 @@ public class Parser {
         try {
             CommandType type = getCommandType(args[0]);
             switch (type) {
+            case HELP:
+                command = new HelpCommand();
+                break;
             case BYE:
                 command = new ByeCommand();
                 break;

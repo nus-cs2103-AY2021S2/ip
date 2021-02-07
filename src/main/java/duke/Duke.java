@@ -2,6 +2,7 @@ package duke;
 
 import duke.storage.Storage;
 import duke.ui.Ui;
+import duke.util.Parser;
 
 public class Duke {
     private static final String PATHNAME = "./data.txt";

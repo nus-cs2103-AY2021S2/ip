@@ -32,7 +32,7 @@ public class MassOps {
         } else if (range.length == 2) {
             int start = Integer.parseInt(range[0]);
             int end = Integer.parseInt(range[1]);
-            if (start > end) {
+            if (start >= end) {
                 throw new DukeException("Please select a valid range!");
             }
             taskRange[0] = start;

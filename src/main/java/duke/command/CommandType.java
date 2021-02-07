@@ -13,5 +13,6 @@ public enum CommandType {
     DELETE,
     FIND,
     INVALID,
-    BYE
+    BYE,
+    HELP
 }
