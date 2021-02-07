@@ -1,4 +1,4 @@
-package DukeTools;
+package duke;
 
 import java.time.LocalDate;
 
@@ -18,7 +18,7 @@ public class Deadline extends Task {
 
 
     public String processDate(LocalDate originalDate) {
-//        LocalDate date = LocalDate.parse(originalDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        // LocalDate date = LocalDate.parse(originalDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String month = originalDate.getMonth().toString();
         String threeLetteredMonth = month.substring(0,1) + month.substring(1,3).toLowerCase();
         String day = Integer.toString(originalDate.getDayOfMonth());
