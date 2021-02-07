@@ -51,8 +51,7 @@ public class TaskList {
     public String addTask(Task task) {
         tasks.add(numTasks, task);
         numTasks++;
-        return "Okay, I've added this task:\n" + task.toString()
-                + "\nYou now have a total of " + numTasks + " tasks.";
+        return Ui.addTask(task, numTasks);
     }
 
     /**
@@ -63,9 +62,7 @@ public class TaskList {
     public String markAsDone(int num) {
         Task currentTask = tasks.get(num - 1);
         currentTask.markAsDone();
-
-        return "Okay, this task has been marked as done:\n"
-                + num + ". " + currentTask.toString();
+        return Ui.markAsDone(num, currentTask);
     }
 
     /**
@@ -74,12 +71,14 @@ public class TaskList {
      * @param num Number representing task in the list.
      */
     public String deleteTask(int num) {
-        String taskToDelete = tasks.get(num - 1).toString();
+        String taskToDelete = getTaskToDelete(num);
         tasks.remove(num - 1);
         numTasks--;
+        return Ui.deleteTask(taskToDelete, numTasks);
+    }
 
-        return "Okay, I've deleted this task:\n" + taskToDelete
-                + "\nYou now have a total of " + numTasks + " tasks.";
+    private String getTaskToDelete(int num) {
+        return tasks.get(num - 1).toString();
     }
 
     /**
@@ -88,31 +87,40 @@ public class TaskList {
      * @param keyword Keyword from user input.
      */
     public String findTask(String keyword) {
-        boolean hasMatch = false;
         ArrayList<Task> matches = new ArrayList<>();
-        ArrayList<Integer> taskNumber = new ArrayList<>();
-        int num = 1;
+        ArrayList<Integer> taskNumbers = new ArrayList<>();
+        boolean hasMatch = findMatches(keyword, matches, taskNumbers);
+
+        if (hasMatch) {
+            return Ui.printOutMatches(matches, taskNumbers);
+        } else {
+            return Ui.noMatchesFound();
+        }
+    }
+
+    /**
+     * Finds matches in the task list given a keyword.
+     *
+     * @param keyword Keyword from user input.
+     * @param matches ArrayList of matches found.
+     * @param taskNumbers ArrayList of taskNumbers found.
+     * @return True if a match is found, false if a match is not found.
+     */
+    private boolean findMatches(String keyword, ArrayList<Task> matches,
+                                ArrayList<Integer> taskNumbers) {
+        boolean isMatchFound = false;
+        int taskNum = 1;
 
         for (Task t : tasks) {
             String temp = t.toString();
 
             if (temp.contains(keyword)) {
-                hasMatch = true;
+                isMatchFound = true;
                 matches.add(t);
-                taskNumber.add(num);
+                taskNumbers.add(taskNum);
             }
-            num++;
+            taskNum++;
         }
-
-        if (hasMatch) {
-            String listOfMatches = "";
-            for (int j = 0; j < matches.size(); j++) {
-                listOfMatches += taskNumber.get(j) + ". " + matches.get(j) + "\n";
-            }
-            return "Bingo Flamingo! I've found these matches:\n"
-                    + listOfMatches;
-        } else {
-            return "Oh no Flamingo! No matches were found.";
-        }
+        return isMatchFound;
     }
 }

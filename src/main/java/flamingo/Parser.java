@@ -18,10 +18,6 @@ public class Parser {
      */
     public static String run(String userInput) {
         try {
-            // Save data when user says bye
-            if (userInput.equals("bye")) {
-                storage.saveData(tasks);
-            }
             return Parser.startResponse(userInput);
         } catch (IllegalArgumentException e) {
             return "Oh no Flamingo! I need more information to do that.";
@@ -45,54 +41,111 @@ public class Parser {
      */
     public static String startResponse(String userInput) throws Exception {
         if (userInput.equals("bye")) {
+            // Save data when user says bye
+            storage.saveData(tasks);
             return Ui.sayBye();
         } else if (userInput.equals("list")) {
-            if (TaskList.numTasks == 0) {
-                throw new NullPointerException();
-            }
+            checkListValidity();
             return tasks.listTasks();
         } else if (userInput.contains("done")) {
-            int taskNumber = Integer.parseInt(userInput.substring(5));
-            if (taskNumber <= 0 || taskNumber > TaskList.numTasks) {
-                throw new IndexOutOfBoundsException();
-            }
+            int taskNumber = getTaskNumberFrom(userInput);
+            checkDoneValidity(taskNumber);
             return tasks.markAsDone(taskNumber);
         } else if (userInput.contains("todo")) {
-            if (userInput.length() <= 5) {
-                throw new IllegalArgumentException();
-            }
-            Task currentTask = new Todo(userInput.substring(5));
+            checkTodoValidity(userInput);
+            String todoDescription = getTodoDescriptionFrom(userInput);
+            Task currentTask = new Todo(todoDescription);
             return tasks.addTask(currentTask);
         } else if (userInput.contains("deadline")) {
-            if (userInput.length() <= 9 || !userInput.contains("/")) {
-                throw new IllegalArgumentException();
-            }
-            int temp = userInput.indexOf('/') - 1;
-            Task currentTask = new Deadline(userInput.substring(9, temp),
-                    LocalDate.parse(userInput.substring(temp + 5)));
+            checkDeadlineValidity(userInput);
+            Task currentTask = getDeadlineTaskFrom(userInput);
             return tasks.addTask(currentTask);
         } else if (userInput.contains("event")) {
-            if (userInput.length() <= 5 || !userInput.contains("/")) {
-                throw new IllegalArgumentException();
-            }
-            int temp = userInput.indexOf('/') - 1;
-            Task currentTask = new Event(userInput.substring(6, temp),
-                    LocalDateTime.parse(userInput.substring(temp + 5)));
+            checkEventValidity(userInput);
+            Task currentTask = getEventTaskFrom(userInput);
             return tasks.addTask(currentTask);
         } else if (userInput.contains("delete")) {
-            int taskNumber = Integer.parseInt(userInput.substring(7));
-            if (taskNumber <= 0 || taskNumber > TaskList.numTasks) {
-                throw new IndexOutOfBoundsException();
-            }
+            int taskNumber = getDeleteTaskNumFrom(userInput);
+            checkDeleteValidity(taskNumber);
             return tasks.deleteTask(taskNumber);
         } else if (userInput.contains("find")) {
-            if (userInput.length() <= 5) {
-                throw new IllegalArgumentException();
-            }
-            String keyword = userInput.substring(5);
+            checkFindValidity(userInput);
+            String keyword = getKeywordFrom(userInput);
             return tasks.findTask(keyword);
         } else {
             throw new Exception();
         }
+    }
+
+    private static void checkListValidity() {
+        if (TaskList.numTasks == 0) {
+            throw new NullPointerException();
+        }
+    }
+
+    private static void checkDoneValidity(int taskNumber) {
+        if (taskNumber <= 0 || taskNumber > TaskList.numTasks) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private static void checkTodoValidity(String userInput) {
+        if (userInput.length() <= 5) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void checkDeadlineValidity(String userInput) {
+        if (userInput.length() <= 9 || !userInput.contains("/")) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void checkEventValidity(String userInput) {
+        if (userInput.length() <= 5 || !userInput.contains("/")) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void checkDeleteValidity(int taskNumber) {
+        if (taskNumber <= 0 || taskNumber > TaskList.numTasks) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private static void checkFindValidity(String userInput) {
+        if (userInput.length() <= 5) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static int getTaskNumberFrom(String userInput) {
+        return Integer.parseInt(userInput.substring(5));
+    }
+
+    private static int getDeleteTaskNumFrom(String userInput) {
+        return Integer.parseInt(userInput.substring(7));
+    }
+
+    private static String getTodoDescriptionFrom(String userInput) {
+        return userInput.substring(5);
+    }
+
+    private static String getKeywordFrom(String userInput) {
+        return userInput.substring(5);
+    }
+
+    private static Task getDeadlineTaskFrom(String userInput) {
+        int temp = userInput.indexOf('/') - 1;
+        Task task = new Deadline(userInput.substring(9, temp),
+                LocalDate.parse(userInput.substring(temp + 5)));
+        return task;
+    }
+
+    private static Task getEventTaskFrom(String userInput) {
+        int temp = userInput.indexOf('/') - 1;
+        Task task = new Event(userInput.substring(6, temp),
+                LocalDateTime.parse(userInput.substring(temp + 5)));
+        return task;
     }
 }
