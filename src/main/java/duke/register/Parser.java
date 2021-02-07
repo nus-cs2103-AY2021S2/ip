@@ -1,4 +1,5 @@
 package duke.register;
+
 /**
  * This class processes the command by breaking down into components
  */
@@ -64,7 +65,7 @@ public class Parser {
         return date;
     }
 
-    public String getIndex(){
+    public String getIndex() {
         return index;
     }
 

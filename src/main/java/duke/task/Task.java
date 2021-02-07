@@ -16,7 +16,7 @@ public class Task {
         divideCommand = task.split(" ");
     }
 
-    public String getType(){
+    public String getType() {
         return divideCommand[0];
     }
 
