@@ -27,24 +27,13 @@ public class TaskList {
 
     /**
      * Removes a Task object from the taskList based on
-     * the Task object itself.
-     *
-     * @param task, the Task Object to be removed
-     */
-
-    public void removeTask(Task task) {
-        taskList.remove(task);
-    }
-
-    /**
-     * Removes a Task object from the taskList based on
      * index position of the task.
      *
      * @param i, the index position of the task Object
      */
 
-    public void removeTask(int i) {
-        taskList.remove(i);
+    public Task removeTask(int i) {
+        return taskList.remove(i);
     }
 
     /**

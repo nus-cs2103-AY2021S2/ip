@@ -42,85 +42,92 @@ public class Ui {
      */
     public void start() {
         System.out.println(logo + "\nHello Master. Nice to meet you, my name is Alfred.\n" +
-                "How may I be of service, Master?\n");
+                "How may I be of service, Master?");
     }
 
     /**
      * Output message when closing the bot
      */
-    public void goodBye() {
+    public static String goodBye() {
         String message = "Have a good day, Master. Take care.";
         formatAndPrintType1(message);
+        return message;
     }
 
     /**
      * Output message when marking the completion of a task
      * @param task, the task that is to be marked done
      */
-    public void taskDone(Task task) {
+    public static String taskDone(Task task) {
         String message = "Well done, Master! I've marked this task as done:\n" +
                 task.toString();
         formatAndPrintType1(message);
+        return message;
     }
 
     /**
      * Output message when a task is deleted
      * @param task, the task to be deleted from the list
      */
-    public void deleteTask(Task task) {
+    public static String deletedTask(Task task) {
         String message = "Understood Master. I've removed this task from the list:\n" +
                 task.toString();
         formatAndPrintType2a(message);
+        return message;
     }
 
     /**
      * Output message when a task is added
      * @param task, the task that is added into the list.
      */
-    public void addTask(Task task) {
+    public static String addedTask(Task task) {
         String message = "As requested, I've added a new task for you, Master:\n" +
                 task.toString();
 
         formatAndPrintType2a(message);
+        return message;
     }
-
-    /**
-     * Prints out all the tasks in the list
-     * @param tasks, the current taskList object containing all the tasks
-     */
-    public void getList(TaskList tasks) {
-        sb = new StringBuilder();
-        String message = "Here is a list of your tasks, Master:";
-        sb.append(message);
-
-        for (int i = 0; i < tasks.getSize(); i++) {
-            sb.append("\n" + String.valueOf(i + 1) + ". " + tasks.getTask(i).toString());
-
-        }
-        String messageFinal = sb.toString();
-        formatAndPrintType1(messageFinal);
-    }
-
-    /**
-     * Prints message for number of tasks left in list.
-     * @param tasks, the current taskList object containing all the tasks
-     */
-    public void getTaskListSize(TaskList tasks) {
-        String message;
-        if (tasks.getSize() <= 1) {
-            message = "You have " + tasks.getSize() + " task left in the list, Master.";
-        } else {
-            message = "You have " + tasks.getSize() + " tasks left in the list, Master.";
-        }
-        formatAndPrintType2b(message);
-    }
+//
+//    /**
+//     * Prints out all the tasks in the list
+//     * @param tasks, the current taskList object containing all the tasks
+//     */
+//    public static String getList(TaskList tasks) {
+//        sb = new StringBuilder();
+//        String message = "Here is a list of your tasks, Master:";
+//        sb.append(message);
+//
+//        for (int i = 0; i < tasks.getSize(); i++) {
+//            sb.append("\n" + String.valueOf(i + 1) + ". " + tasks.getTask(i).toString());
+//
+//        }
+//        String messageFinal = sb.toString();
+//        formatAndPrintType1(messageFinal);
+//
+//        return messageFinal;
+//    }
+//
+//    /**
+//     * Prints message for number of tasks left in list.
+//     * @param tasks, the current taskList object containing all the tasks
+//     */
+//    public static String getTaskListSize(TaskList tasks) {
+//        String message;
+//        if (tasks.getSize() <= 1) {
+//            message = "You have " + tasks.getSize() + " task left in the list, Master.";
+//        } else {
+//            message = "You have " + tasks.getSize() + " tasks left in the list, Master.";
+//        }
+//        formatAndPrintType2b(message);
+//        return message;
+//    }
 
     /**
      * Formats the message fully with upper
      * and lower borders while printing out the message
      * @param message, the message to be printed
      */
-    public void formatAndPrintType1(String message) {
+    public static void formatAndPrintType1(String message) {
         System.out.println(borders);
         System.out.println(message);
         System.out.println(borders + "\n");
@@ -131,7 +138,7 @@ public class Ui {
      * and prints out the message
      * @param message, the message to be printed
      */
-    public void formatAndPrintType2a(String message) {
+    public static void formatAndPrintType2a(String message) {
         System.out.println(borders);
         System.out.println(message);
     }
@@ -141,7 +148,7 @@ public class Ui {
      * and prints out the message
      * @param message, the message to be printed
      */
-    public void formatAndPrintType2b(String message) {
+    public static void formatAndPrintType2b(String message) {
         System.out.println("\n" + message);
         System.out.println(borders + "\n");
     }

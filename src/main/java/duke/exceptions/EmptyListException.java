@@ -5,8 +5,13 @@ package duke.exceptions;
  * is used but the task list is empty.
  */
 
-public class EmptyListException extends Exception {
+public class EmptyListException extends DukeException {
     public EmptyListException(String error) {
         super(error);
+    }
+
+    @Override
+    public String toString() {
+        return "\nThe list is empty, Master.";
     }
 }

@@ -6,8 +6,8 @@ package duke.exceptions;
  * being inputted.
  */
 
-public class DateTimeFormatException extends Exception {
-    public DateTimeFormatException(String error) {
-        super(error);
+public class DateTimeFormatException extends DukeException {
+    public DateTimeFormatException() {
+        super("\nMaster, please input the date and time as such: \"YYYY-MM-DD HH:MM\"");
     }
 }
