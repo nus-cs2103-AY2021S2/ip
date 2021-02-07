@@ -4,12 +4,11 @@ import duke.subfiles.TaskList;
 import duke.subfiles.Ui;
 
 /**
- * The ExitCommand class is a command whose execution triggers the
- * Duke program to terminate its execution.
+ * The ExitCommand class is a command whose execution triggers the Duke program to terminate its execution.
  *
  * @author  arsatis
- * @version 1.1
- * @since   2021-01-26
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class ExitCommand extends Command {
 
@@ -23,10 +22,9 @@ public class ExitCommand extends Command {
     /**
      * Does nothing.
      *
-     * @param taskList A TaskList object containing the list of tasks
-     *                 which the program currently has.
-     * @param ui A Ui object which the current program is using to manage
-     *           interactions with the user.
+     * @param taskList A TaskList object containing the list of tasks which the program currently has.
+     * @param ui A Ui object which the current program is using to manage interactions with the user.
+     * @return An empty response by Duke.
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {

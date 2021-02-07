@@ -6,12 +6,12 @@ import duke.subfiles.TaskList;
 import duke.subfiles.Ui;
 
 /**
- * The DoneCommand class is a command whose execution triggers the
- * marking of a task in the TaskList as done, based on the user input.
+ * The DoneCommand class is a command whose execution triggers the marking of a task in the TaskList as done,
+ * based on the user input.
  *
  * @author  arsatis
- * @version 1.1
- * @since   2021-01-26
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class DoneCommand extends Command {
 
@@ -22,17 +22,17 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String command) {
         super(command);
+
+        assert(command != null && !command.equals(""));
     }
 
     /**
-     * Calls the task manager to mark a specified task as done
-     * upon receiving a user input that attempts to mark a task
-     * as done.
+     * Calls the task manager to mark a specified task as done upon receiving a user input that attempts to
+     * mark a task as done.
      *
-     * @param taskList A TaskList object containing the list of tasks
-     *                 which the program currently has.
-     * @param ui A Ui object which the current program is using to manage
-     *           interactions with the user.
+     * @param taskList A TaskList object containing the list of tasks which the program currently has.
+     * @param ui A Ui object which the current program is using to manage interactions with the user.
+     * @return Duke's response to the user.
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {

@@ -15,13 +15,12 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * The TaskList class contains a list of tasks created by
- * user input, and allows the user to add, print, or delete
- * tasks, as well as to mark a task in the list as done.
+ * The TaskList class contains a list of tasks created by user input,
+ * and allows the user to add, print, or delete tasks, as well as to mark a task in the list as done.
  *
  * @author  arsatis
- * @version 1.1
- * @since   2021-01-26
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class TaskList {
     /** List of tasks created by user input. */
@@ -37,16 +36,13 @@ public class TaskList {
     /**
      * Adds a to-do to the list of tasks.
      *
-     * @param s User input triggering the addition of a to-do
-     *          to the list of tasks.
-     * @throws EmptyDescriptionException If no description is provided
-     *                                   for the to-do.
+     * @param input User input triggering the addition of a to-do to the list of tasks.
+     * @throws EmptyDescriptionException If no description is provided for the to-do.
      */
-    private void addTodo(String s)
-            throws EmptyDescriptionException {
+    private void addTodo(String input) throws EmptyDescriptionException {
         try {
-            s = s.substring(5);
-            tasks.add(new ToDo(s));
+            input = input.substring(5);
+            tasks.add(new ToDo(input));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException("todo");
         }
@@ -55,21 +51,18 @@ public class TaskList {
     /**
      * Adds a deadline to the list of tasks.
      *
-     * @param s User input triggering the addition of a deadline
-     *          to the list of tasks.
-     * @throws EmptyDescriptionException If no description is provided
-     *                                   for the deadline.
+     * @param input User input triggering the addition of a deadline to the list of tasks.
+     * @throws EmptyDescriptionException If no description is provided for the deadline.
      * @throws EmptyDateException If no date is specified for the deadline.
-     * @throws DateFormatException If the specified date is incorrectly
-     *                             formatted.
+     * @throws DateFormatException If the specified date is incorrectly formatted.
      */
-    private void addDeadline(String s)
-            throws EmptyDescriptionException, EmptyDateException, DateFormatException {
+    private void addDeadline(String input) throws EmptyDescriptionException, EmptyDateException,
+            DateFormatException {
         try {
-            String[] sArray = s.split("/", 2);
-            s = sArray[0].substring(9, sArray[0].length() - 1);
+            String[] sArray = input.split("/", 2);
+            input = sArray[0].substring(9, sArray[0].length() - 1);
             LocalDate t = LocalDate.parse(sArray[1].substring(3));
-            tasks.add(new Deadline(s, t));
+            tasks.add(new Deadline(input, t));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException("deadline");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -82,21 +75,18 @@ public class TaskList {
     /**
      * Adds an event to the list of tasks.
      *
-     * @param s User input triggering the addition of an event
-     *          to the list of tasks.
-     * @throws EmptyDescriptionException If no description is provided
-     *                                   for the event.
+     * @param input User input triggering the addition of an event to the list of tasks.
+     * @throws EmptyDescriptionException If no description is provided for the event.
      * @throws EmptyDateException If no date is specified for the event.
-     * @throws DateFormatException If the specified date is incorrectly
-     *                             formatted.
+     * @throws DateFormatException If the specified date is incorrectly formatted.
      */
-    private void addEvent(String s)
-            throws EmptyDescriptionException, EmptyDateException, DateFormatException {
+    private void addEvent(String input) throws EmptyDescriptionException, EmptyDateException,
+            DateFormatException {
         try {
-            String[] sArray = s.split("/", 2);
-            s = sArray[0].substring(6, sArray[0].length() - 1);
+            String[] sArray = input.split("/", 2);
+            input = sArray[0].substring(6, sArray[0].length() - 1);
             LocalDate t = LocalDate.parse(sArray[1].substring(3));
-            tasks.add(new Event(s, t));
+            tasks.add(new Event(input, t));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException("event");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -107,36 +97,30 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list of tasks. Calls either addTodo,
-     * addDeadline, or addEvent, depending on the type of task
-     * specified by the user.
+     * Adds a task to the list of tasks. Calls either addTodo,  addDeadline, or addEvent,
+     * depending on the type of task specified by the user.
      *
-     * @param s User input triggering the addition of a task
-     *          to the list of tasks.
-     * @throws EmptyDescriptionException If no description is provided
-     *                                   for the task.
-     * @throws EmptyDateException If no date or time is specified for
-     *                            the task, which is either a deadline
-     *                            or an event.
-     * @throws InvalidInputException If the task is neither a to-do, a
-     *                               deadline, nor an event.
-     * @throws DateFormatException If the specified date is incorrectly
-     *                             formatted.
+     * @param input User input triggering the addition of a task to the list of tasks.
+     * @return Duke's response to the user.
+     * @throws EmptyDescriptionException If no description is provided for the task.
+     * @throws EmptyDateException If no date or time is specified for the task,
+     *                            which is either a deadline or an event.
+     * @throws InvalidInputException If the task is neither a to-do, a deadline, nor an event.
+     * @throws DateFormatException If the specified date is incorrectly formatted.
      */
-    public String addTask(String s)
-            throws EmptyDescriptionException, EmptyDateException, InvalidInputException,
-            DateFormatException {
-        String command = s.split(" ", 2)[0];
+    public String addTask(String input) throws EmptyDescriptionException, EmptyDateException,
+            InvalidInputException, DateFormatException {
+        String command = input.split(" ", 2)[0];
 
         switch (command) {
         case "todo":
-            addTodo(s);
+            addTodo(input);
             break;
         case "deadline":
-            addDeadline(s);
+            addDeadline(input);
             break;
         case "event":
-            addEvent(s);
+            addEvent(input);
             break;
         default:
             throw new InvalidInputException();
@@ -150,15 +134,13 @@ public class TaskList {
     }
 
     /**
-     * Adds a to-do, deadline, or event, to the list of tasks, based on
-     * previously saved data.
+     * Adds a to-do, deadline, or event, to the list of tasks, based on previously saved data.
      *
-     * @param s A line from the user's save data.
-     * @throws DateFormatException If the specified date is incorrectly
-     *                             formatted.
+     * @param data A line from the user's save data.
+     * @throws DateFormatException If the specified date is incorrectly formatted.
      */
-    public void addTaskFromData(String s) throws DateFormatException {
-        String[] sArray = s.split(" \\| ");
+    public void addTaskFromData(String data) throws DateFormatException {
+        String[] sArray = data.split(" \\| ");
 
         try {
             if (sArray[0].equals("T")) {
@@ -178,8 +160,9 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of tasks added by the user till this point,
-     * based on the order they were added by the user.
+     * Prints the list of tasks added by the user till this point, based on the order they were added by the user.
+     *
+     * @return Duke's response to the user.
      */
     public String printTasks() {
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
@@ -193,11 +176,11 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of deadlines added by the user till this point,
-     * due on the date specified by the user, based on the order they
-     * were added by the user.
+     * Prints the list of deadlines added by the user till this point, due on the date specified by the user,
+     * based on the order they were added by the user.
      *
      * @param date The date specified by the user.
+     * @return Duke's response to the user.
      */
     private String printDeadlinesOnDate(LocalDate date) {
         StringBuilder output;
@@ -228,11 +211,11 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of events added by the user till this point,
-     * happening on the date specified by the user, based on the order
-     * they were added by the user.
+     * Prints the list of events added by the user till this point, happening on the date specified by the user,
+     * based on the order they were added by the user.
      *
      * @param date The date specified by the user.
+     * @return Duke's response to the user.
      */
     private String printEventsOnDate(LocalDate date) {
         StringBuilder output;
@@ -264,16 +247,15 @@ public class TaskList {
 
     /**
      * Prints the list of deadlines and events added by the user till this point,
-     * due or happening on the date specified by the user, based on the order
-     * they were added by the user.
+     * due or happening on the date specified by the user, based on the order they were added by the user.
      *
-     * @param s The date specified by the user.
-     * @throws DateFormatException If the specified date is incorrectly
-     *                             formatted.
+     * @param input The date specified by the user.
+     * @return Duke's response to the user.
+     * @throws DateFormatException If the specified date is incorrectly formatted.
      */
-    public String printTasksOnDate(String s) throws DateFormatException {
+    public String printTasksOnDate(String input) throws DateFormatException {
         try {
-            LocalDate date = LocalDate.parse(s);
+            LocalDate date = LocalDate.parse(input);
             String outputUpper = printDeadlinesOnDate(date);
             String outputLower = printEventsOnDate(date);
             return outputUpper + "\n" + outputLower;
@@ -283,14 +265,14 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of tasks added by the user till this point,
-     * containing the keyword specified by the user, based on the order
-     * they were added by the user.
+     * Prints the list of tasks added by the user till this point, containing the keyword specified by the user,
+     * based on the order they were added by the user.
      *
-     * @param s User input containing the keyword.
+     * @param input User input containing the keyword.
+     * @return Duke's response to the user.
      */
-    public String findTasksWithKeyword(String s) {
-        String keyword = s.split(" ", 2)[1].toLowerCase();
+    public String findTasksWithKeyword(String input) {
+        String keyword = input.split(" ", 2)[1].toLowerCase();
         StringBuilder output;
         ArrayList<Task> matchingTasks = new ArrayList<>();
 
@@ -316,22 +298,20 @@ public class TaskList {
     }
 
     /**
-     * Marks a task that is specified by the user as done. The
-     * user should specify the index of the task in the list
-     * which he or she intends to mark as done.
+     * Marks a task that is specified by the user as done. The user should specify the index of the task
+     * in the list which he or she intends to mark as done.
      *
-     * @param s User input containing the index of the task to be marked as done
-     *          in the list of tasks, in String format.
-     * @throws InvalidInputException If the user provided a non-integer index
-     *                               in the user input.
-     * @throws ListOutOfBoundsException If the user provided an index which is
-     *                                  not in the list.
+     * @param input User input containing the index of the task to be marked as done in the list of tasks,
+     *              in String format.
+     * @return Duke's response to the user.
+     * @throws InvalidInputException If the user provided a non-integer index in the user input.
+     * @throws ListOutOfBoundsException If the user provided an index which is not in the list.
      */
-    public String markDone(String s)
-            throws InvalidInputException, ListOutOfBoundsException {
+    public String markDone(String input) throws InvalidInputException, ListOutOfBoundsException {
         int index;
+
         try {
-            String[] sArray = s.split(" ");
+            String[] sArray = input.split(" ");
             index = Integer.parseInt(sArray[1]) - 1;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException();
@@ -350,21 +330,20 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task that is specified by the user from the
-     * list of tasks. The user should specify the index of the
-     * task in the list which he or she intends to delete.
+     * Deletes a task that is specified by the user from the list of tasks. The user should specify the index
+     * of the task in the list which he or she intends to delete.
      *
-     * @param s User input containing the index of the task to be deleted from
-     *          the list of tasks, in String format.
-     * @throws InvalidInputException If the user provided a non-integer index
-     *                               in the user input.
-     * @throws ListOutOfBoundsException If the user provided an index which is
-     *                                  not in the list.
+     * @param input User input containing the index of the task to be deleted from the list of tasks,
+     *              in String format.
+     * @return Duke's response to the user.
+     * @throws InvalidInputException If the user provided a non-integer index in the user input.
+     * @throws ListOutOfBoundsException If the user provided an index which is not in the list.
      */
-    public String deleteTask(String s) throws InvalidInputException, ListOutOfBoundsException {
+    public String deleteTask(String input) throws InvalidInputException, ListOutOfBoundsException {
         int index;
+
         try {
-            String[] sArray = s.split(" ");
+            String[] sArray = input.split(" ");
             index = Integer.parseInt(sArray[1]) - 1;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException();
@@ -384,8 +363,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the list of tasks which the user currently has in his/her
-     * task list.
+     * Returns the list of tasks which the user currently has in his/her task list.
      *
      * @return The list of tasks which the user currently has.
      */

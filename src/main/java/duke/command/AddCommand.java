@@ -8,12 +8,12 @@ import duke.subfiles.TaskList;
 import duke.subfiles.Ui;
 
 /**
- * The AddCommand class is a command whose execution triggers the
- * addition of a task into the TaskList, based on the user input.
+ * The AddCommand class is a command whose execution triggers the addition of a task into the TaskList,
+ * based on the user input.
  *
  * @author  arsatis
- * @version 1.1
- * @since   2021-01-26
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class AddCommand extends Command {
 
@@ -27,14 +27,12 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Calls the task manager to add a specified task to the
-     * list upon receiving a user input that attempts to add
-     * a task to the list.
+     * Calls the task manager to add a specified task to the list upon receiving a user input that attempts to
+     * add a task to the list.
      *
-     * @param taskList A TaskList object containing the list of tasks
-     *                 which the program currently has.
-     * @param ui A Ui object which the current program is using to manage
-     *           interactions with the user.
+     * @param taskList A TaskList object containing the list of tasks which the program currently has.
+     * @param ui A Ui object which the current program is using to manage interactions with the user.
+     * @return Duke's response to the user.
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
