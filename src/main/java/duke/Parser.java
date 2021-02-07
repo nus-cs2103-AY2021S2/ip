@@ -7,8 +7,10 @@ import java.time.format.DateTimeParseException;
 
 import duke.commands.ByeCommand;
 import duke.commands.ChatBotCommand;
+import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.ScheduleCommand;
