@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import data.Event;
+import data.TagList;
 import data.TaskList;
 import ui.TextUi;
 
@@ -27,7 +28,7 @@ public class AddEventCommandTest {
     @Test
     @DisplayName("AddEventCommand should add to TaskList")
     void testOutput() throws IOException {
-        Event event = new Event("a", LocalDate.parse("2020-01-01"));
+        Event event = new Event("a", new TagList(), LocalDate.parse("2020-01-01"));
         Command command = new AddEventCommand(event);
 
         command.execute(tasks, ui);
