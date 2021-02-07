@@ -21,9 +21,16 @@ import duke.task.TodoTask;
 public class Storage {
 
     private String filePath;
+    private Ui ui;
 
+    /**
+     * Create an initialize a storage object to handle loading and saving of tasks to a saved data file.
+     *
+     * @param filePath The path of the file to save the list of tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
+        this.ui = new Ui();
     }
 
     /**
@@ -41,14 +48,14 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Failed to save data.");
+            throw new DukeException(ui.saveDataError());
         }
     }
 
     /**
      * Populates the task list with the tasks saved in the task data file upon start of program.
      *
-     * @param taskList The task list to be populated
+     * @param taskList The task list to be populated.
      * @throws DukeException if the file is unable to be found or the file's contents are in the wrong format.
      */
     public void initializeTaskList(TaskList taskList) throws DukeException {
@@ -64,8 +71,9 @@ public class Storage {
                     taskList.add(currTask);
                 }
             }
-        } catch (IOException e) {
-            throw new DukeException("Saved data file corrupted.");
+        } catch (IOException | DukeException e) { // cannot read file or contents of file do not follow format
+            taskList.clear();
+            throw new DukeException(ui.corruptDataFileError());
         }
     }
 
@@ -78,7 +86,12 @@ public class Storage {
      */
     public Task loadTaskFromFile(String taskString) throws DukeException {
         String[] taskStringArr = taskString.split("\\|");
-        CommandName commandName = CommandName.valueOf(taskStringArr[0]);
+        CommandName commandName = null;
+        try {
+            commandName = CommandName.valueOf(taskStringArr[0]);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(ui.corruptDataFileError());
+        }
         int taskStatus = -1;
         String taskName;
         String taskDate;
@@ -98,7 +111,7 @@ public class Storage {
                 LocalDateTime ldtEvent = LocalDateTime.parse(taskDate, dtf);
                 taskToReturn = new EventTask(taskName, ldtEvent);
             } catch (DateTimeParseException e) {
-                throw new DukeException("Save data file corrupted");
+                throw new DukeException(ui.corruptDataFileError());
             }
             break;
         case DEADLINE:
@@ -109,14 +122,14 @@ public class Storage {
                 LocalDateTime ldtDeadline = LocalDateTime.parse(taskDate, dtf);
                 taskToReturn = new DeadlineTask(taskName, ldtDeadline);
             } catch (DateTimeParseException e) {
-                throw new DukeException("Save data file corrupted");
+                throw new DukeException(ui.corruptDataFileError());
             }
             break;
         default:
-            throw new DukeException("Save data file corrupted");
+            throw new DukeException(ui.corruptDataFileError());
         }
         if (taskStatus == -1 || taskToReturn == null) {
-            throw new DukeException("Saved data file corrupted.");
+            throw new DukeException(ui.corruptDataFileError());
         }
         if (taskStatus == 1) {
             taskToReturn.markDone();

@@ -18,13 +18,40 @@ public class Ui {
     }
 
     /**
+     * Returns an error message in a string when a user inputs a command that has not been programmed.
+     *
+     * @return String containing error message of invalid command.
+     */
+    public String invalidCmdError() {
+        return "Sorry human, I have not been trained to process that command.";
+    }
+
+    /**
+     * Returns an error message in a string when the saved data file is unable to be read.
+     *
+     * @return String containing error message of reading from saved data file.
+     */
+    public String corruptDataFileError() {
+        return "Save data file corrupted";
+    }
+
+    /**
+     * Returns an error message in a string when the saved data file is unable to be written to.
+     *
+     * @return String containing error message of writing to saved data file.
+     */
+    public String saveDataError() {
+        return "Failed to save data.";
+    }
+
+    /**
      * Returns an error message in a string when a user inputs the list command with the wrong format.
      *
      * @return String containing error message of invalid list command.
      */
     public String listCmdError() {
         String errorMsg = "Sorry human, I do not understand your command."
-                + "To access your list, enter 'list' with no additional descriptions.";
+                + " To access your list, enter 'list' with no additional descriptions.";
         return errorMsg;
     }
 
@@ -68,8 +95,17 @@ public class Ui {
     public String eventFormatError() {
         String eErrorMsg = "Invalid format. Please enter as such:"
                 + "\n"
-                + "event <EVENT_NAME> /at <EVENT_TIME>";
+                + "event <EVENT_NAME> /at <DATE_TIME>";
         return eErrorMsg;
+    }
+
+    /**
+     * Returns an error message in a string when a user inputs the todo command with the wrong format.
+     *
+     * @return String containing error message of invalid todo command.
+     */
+    public String todoFormatError() {
+        return "Sorry human, please enter a name for this task.";
     }
 
     /**
@@ -80,7 +116,7 @@ public class Ui {
     public String deadlineFormatError() {
         String dErrorMsg = "Invalid format. Please enter as such:"
                 + "\n"
-                + "deadline <TASK_NAME> /by <DEADLINE_TIME>";
+                + "deadline <TASK_NAME> /by <DATE_TIME>";
         return dErrorMsg;
     }
 
@@ -106,6 +142,42 @@ public class Ui {
                 + "\n"
                 + "I am unable to process more than one task at one time.";
         return errorMsg;
+    }
+
+    /**
+     * Returns an error message in a string when a user inputs the delete command with no parameters.
+     *
+     * @return String containing error message of invalid delete command.
+     */
+    public String deleteCmdNoArgsError() {
+        return "Sorry human, please enter a task number to delete";
+    }
+
+    /**
+     * Returns an error message in a string when a user inputs the delete command with invalid parameters.
+     *
+     * @return String containing error message of invalid delete command.
+     */
+    public String deleteCmdInvalidArgsError() {
+        return "Sorry human, please enter the number of the task you want me to delete.";
+    }
+
+    /**
+     * Returns an error message in a string when a user inputs the find command with no parameters.
+     *
+     * @return String containing error message of invalid find command.
+     */
+    public String findNoArgsError() {
+        return "Sorry human, please enter a task number to find.";
+    }
+
+    /**
+     * Returns an error message in a string when a user inputs a command with a task number that does not exist.
+     *
+     * @return String containing error message of invalid task number.
+     */
+    public String taskDoesNotExistError() {
+        return "Sorry human, no such task seems to exist.";
     }
 
     /**
@@ -141,7 +213,6 @@ public class Ui {
                 + "I have marked it as done." + "\n"
                 + PADDING + task + "\n";
     }
-
 
     /**
      * Returns all tasks.
