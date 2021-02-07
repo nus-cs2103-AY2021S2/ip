@@ -14,11 +14,11 @@ public class ByeCommand extends CommandWithNoParameters {
     @Override
     public void run(TaskList taskList) {
         // make sure that parser always sends trimmed strings?
-        if (commandBody == null) {
+        if (commandBody.isEmpty()) {
             this.hasSentExitDukeSignal = true;
             this.commandOutputMsg = Ui.getExitMessage();
         } else {
-            handleTooManyArgs();
+            handleTooManyArgs(); // should this be in try-catch block
         }
     }
 }

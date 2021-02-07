@@ -10,7 +10,7 @@ public class ListCommand extends CommandWithNoParameters {
 
     @Override
     public void run(TaskList taskList) {
-        if (commandBody == null) {
+        if (commandBody.isEmpty()) {
             this.commandOutputMsg = Ui.stringifyTaskList(taskList);
         } else {
             handleTooManyArgs();

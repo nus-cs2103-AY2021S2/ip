@@ -113,9 +113,9 @@ public class Ui {
      * @param messages
      * @return
      */
-    private static String indent(String... messages) {
+    private static String indent(Object... messages) {
         String res = "";
-        for (String s : messages) {
+        for (Object s : messages) {
             res += DEFAULT_INDENT;
             res += s;
             res += '\n';
@@ -123,9 +123,10 @@ public class Ui {
         return res;
     }
 
-    private static String addExtraIndent(String... messages) {
+    // changed params to Obj so that toString invoked
+    private static String addExtraIndent(Object... messages) {
         String res = "";
-        for (String s : messages) {
+        for (Object s : messages) {
             res += EXTRA_INDENT;
             res += s;
 //            res += '\n';
@@ -139,11 +140,11 @@ public class Ui {
     }
 
     // rename this
-    private static String formatMultiLineMessages(String firstLine, String ... moreIndentedLines) {
+    public static String formatMultiLineMessages(String firstLine, Object ... moreIndentedLines) {
         return addDividers(indent(firstLine, addExtraIndent(moreIndentedLines)));
     }
 
-    private static String formatSingleLineMsg(String firstLine) {
+    public static String formatSingleLineMsg(String firstLine) {
         return addDividers(indent(firstLine));
     }
 

@@ -1,1 +1,10 @@
+T;;oop;;true
 T;;hello;;false
+T;;yello;;false
+T;;well;;false
+T;;iwqoepiru;;false
+T;;hello;;false
+T;;eruiear;;false
+T;;awosdu;;false
+T;;hkadsd;;false
+T;;sadoi;;false

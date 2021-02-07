@@ -1,8 +1,11 @@
 package commands;
 
+import datetime.ParseDateTime;
 import exceptions.InvalidArgumentException;
 import format.Ui;
 import tasklist.TaskList;
+
+import java.time.LocalDateTime;
 
 public abstract class Command {
 
@@ -13,7 +16,7 @@ public abstract class Command {
      * could do better. Should correspond with the command to type in? */
     String commandName;
 
-    protected String commandBody;
+    protected final String commandBody;
     protected String commandOutputMsg;
     protected boolean hasRunSuccessfully = false;
     protected boolean hasSentExitDukeSignal = false;
@@ -53,11 +56,20 @@ public abstract class Command {
     }
 
     protected void handleInvalidOnEmptyList() {
-        this.commandBody =
+        this.commandOutputMsg =
                 new InvalidArgumentException("This command cannot be done on an empty task list.").getMessage();
     }
 
     protected void handleException(Exception e) {
-        this.commandBody = Ui.formatException(e.getMessage());
+        this.commandOutputMsg = Ui.formatException(e.getMessage());
+    }
+
+    public void debug() {
+        System.out.println(this.commandBody);
+    }
+
+    // used by event, deadline subclasses
+    protected LocalDateTime parseInputStringToDateTime(String s) {
+        return ParseDateTime.parse(s);
     }
 }

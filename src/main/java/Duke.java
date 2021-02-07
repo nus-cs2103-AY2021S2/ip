@@ -127,6 +127,7 @@ public class Duke {
             }
         }
 
+        c.debug();
         return "Duke heard: " + c.getCommandOutputMsg();
     }
 }

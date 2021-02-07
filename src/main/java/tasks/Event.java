@@ -23,6 +23,13 @@ public class Event extends Task {
         this.eventTiming = ParseDateTime.parse(eventTiming);
     }
 
+    // created trying to bug fix
+    public Event(String desc, LocalDateTime eventTiming) {
+        super(desc);
+        this.eventTiming = eventTiming;
+    }
+
+    // used when parsing event task from file
     private Event(String desc, String eventTiming, boolean isDone) {
         super(desc, isDone);
         this.eventTiming = ParseDateTime.parse(eventTiming);

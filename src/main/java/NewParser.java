@@ -1,6 +1,4 @@
-import commands.ByeCommand;
-import commands.Command;
-import commands.ListCommand;
+import commands.*;
 import exceptions.InvalidArgumentException;
 import exceptions.MissingArgumentException;
 import exceptions.UnsupportedCommandException;
@@ -74,27 +72,29 @@ public class NewParser {
             // maybe should save list of supported commands in another file (String[]{todo, deadline, event}
             Ui.printException(e.getMessage());
             return true;
-        } catch (IOException e) {
-            // todo see if you can offer better help
-            Ui.print(new String[]{"Oops, error occurred in saving the file.", e.getMessage()});
-            return true;
-        } catch (Exception e) {
-            String errMsg = "didn't expect this exception " + e;
-            Ui.printException(errMsg);
-            return true;
-        }
 
-        return true;
-
+            default message for unexpected exception
          */
     }
 
     private Command parseIntoCommand(String firstWord, String commandBody) throws UnsupportedCommandException {
         switch (firstWord) {
         case "list":
+            System.out.println("helloo");
+            System.out.println(commandBody);
             return new ListCommand(commandBody);
         case "bye":
             return new ByeCommand(commandBody);
+        case "todo":
+            return new TodoCommand(commandBody);
+        case "event":
+            return new EventCommand(commandBody);
+        case "deadline":
+            return new DeadlineCommand(commandBody);
+        case "done":
+            return new DoneCommand(commandBody);
+        case "delete":
+            return new DeleteCommand(commandBody);
         default:
             throw new UnsupportedCommandException();
         }

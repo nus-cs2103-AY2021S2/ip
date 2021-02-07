@@ -1,12 +1,13 @@
 package commands;
 
+import datetime.ParseDateTime;
 import tasklist.TaskList;
 import tasks.Event;
 
 public class EventCommand extends AddTaskWithTimeCommand {
     protected String timeArgDelimiter = "/at";
 
-    protected EventCommand(String commandBody) {
+    public EventCommand(String commandBody) {
         super("event", commandBody);
         // todo this hardcoded string...
         // actually why do we need it, why not put it in toString or something
@@ -16,9 +17,12 @@ public class EventCommand extends AddTaskWithTimeCommand {
     public void run(TaskList taskList) {
         try {
             handleSplittingArgs();
+            this.commandOutputMsg = taskList.addTask(new Event(
+                    secondArg, parseInputStringToDateTime(thirdArg)));
         } catch (Exception e) {
             handleException(e);
         }
-        taskList.addTask(new Event(secondArg, thirdArg));
+
+        assert !this.commandOutputMsg.isEmpty();
     }
 }
