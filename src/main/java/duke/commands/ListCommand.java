@@ -20,7 +20,6 @@ public class ListCommand extends Command {
      * @return String which is the list of tasks in taskList
      * @throws DukeException
      */
-
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] inputList = description.trim().split(" ", 2);
 
