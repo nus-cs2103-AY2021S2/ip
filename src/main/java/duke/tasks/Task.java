@@ -4,16 +4,19 @@ package duke.tasks;
 public abstract class Task {
     protected boolean isDone;
     protected String taskName;
+    protected String type;
 
     /**
      *  Task constructor.
      *
      *  @param taskName represents the name of the task.
+     *  @param type represents the type of the task.
      */
-    public Task(String taskName) {
+    public Task(String taskName, String type) {
         assert taskName.length() > 0 : "Error: you must enter a task name for the task";
         this.taskName = taskName;
         this.isDone = false;
+        this.type = type;
     }
 
     //when task is done change the isDone to true
@@ -23,6 +26,10 @@ public abstract class Task {
 
     public String getTaskName() {
         return this.taskName;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public boolean getIsDone() {

@@ -12,7 +12,7 @@ public class TodoTask extends Task {
      *  @param taskName represents the name of the event task.
      */
     public TodoTask(String taskName) {
-        super(taskName);
+        super(taskName, "[T]");
         this.type = "[T]";
     }
 

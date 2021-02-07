@@ -17,9 +17,9 @@ public class DeadlineTask extends Task {
      *  @param deadline represents the time of the task that has to be done.
      */
     public DeadlineTask(String taskName, LocalDate deadline) {
-        super(taskName);
-        this.type = "[D]";
+        super(taskName, "[D]");
         this.deadline = deadline;
+        this.type = "[D]";
     }
 
     public String getType() {

@@ -19,10 +19,10 @@ public class EventTask extends Task {
      *  @param endTime represents the ending time of the task.
      */
     public EventTask(String taskName, LocalDateTime startTime, LocalDateTime endTime) {
-        super(taskName);
-        this.type = "[E]";
+        super(taskName, "[E]");
         this.startTime = startTime;
         this.endTime = endTime;
+        this.type = "[E]";
     }
 
     public String getType() {

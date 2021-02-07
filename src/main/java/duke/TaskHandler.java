@@ -97,6 +97,26 @@ public class TaskHandler {
     }
 
     /**
+     * Returns an arraylist of tasks of the date specified
+     *
+     * @return An ArrayList of Task
+     */
+    public ArrayList<Task> findTaskOfDay(String date) {
+        ArrayList<Task> matchTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getType().equals("[D]") || task.getType().equals("[E]")) {
+                String[] taskAsString = task.writeToFileFormat().split("\\|");
+                String dateAsString = taskAsString[3].substring(0, 11);
+                System.out.println(dateAsString);
+                if (dateAsString.equals(date)) {
+                    matchTasks.add(task);
+                }
+            }
+        }
+        return matchTasks;
+    }
+
+    /**
      * Reads from the task data file.
      *
      * @param storedTaskList an ArrayList of tasks in file format.

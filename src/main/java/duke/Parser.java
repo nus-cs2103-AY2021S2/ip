@@ -5,15 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.commands.ByeCommand;
-import duke.commands.ChatBotCommand;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.TodoCommand;
+import duke.commands.*;
 import duke.exceptions.ChatBotException;
 import duke.exceptions.InvalidCommandTypeException;
 import duke.exceptions.InvalidDateFormatException;
@@ -23,7 +15,7 @@ import duke.exceptions.MissingDescriptionException;
 
 public class Parser {
     private static final String[] COMMAND_TYPE_ARRAY = {
-        "bye", "list", "todo", "deadline", "event", "find", "done", "delete"
+        "bye", "list", "todo", "deadline", "event", "find", "done", "delete", "schedule"
     };
     private static LocalDate formatDate(String date) throws InvalidDateFormatException {
         assert date.length() > 0 : "Error: you must enter a date";
@@ -104,6 +96,9 @@ public class Parser {
                 }
             case "find":
                 return new FindCommand(words[1]);
+            case "schedule":
+                assert words.length > 0 : "Error: please key in a date in the format of dd MMM yyyy";
+                return new ScheduleCommand(words[1]);
             case "done":
                 return new DoneCommand(Integer.parseInt(words[1]));
             case "delete":
