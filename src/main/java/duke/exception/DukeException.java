@@ -1,4 +1,4 @@
-package duke.main;
+package duke.exception;
 
 /**
  * Exception class for project duke.

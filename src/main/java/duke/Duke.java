@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.Command;
-import duke.main.DukeException;
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.UI;

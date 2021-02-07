@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Finds all tasks containing the given description.

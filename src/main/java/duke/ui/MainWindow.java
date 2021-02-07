@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import duke.Duke;
-import duke.main.DukeException;
+import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

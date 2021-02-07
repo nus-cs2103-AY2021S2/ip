@@ -1,4 +1,4 @@
-package duke.main;
+package duke.tasks;
 
 /**
  * Parent class for all tasks in Duke

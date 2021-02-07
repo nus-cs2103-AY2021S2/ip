@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.main.DukeException;
+import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.tasklist.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Deletes a task to the taskList.

@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.main.DukeException;
-import duke.main.Task;
+import duke.exception.DukeException;
+import duke.tasks.Task;
 import duke.storage.Storage;
-import duke.tasklist.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Adds a task to the taskList.

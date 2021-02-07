@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import duke.main.Deadline;
-import duke.main.DukeException;
-import duke.main.Event;
-import duke.main.Task;
-import duke.main.Todo;
-import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
+import duke.exception.DukeException;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.tasks.TaskList;
 
 
 /**

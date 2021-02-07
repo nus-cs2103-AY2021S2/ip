@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Lists all tasks in the taskList.

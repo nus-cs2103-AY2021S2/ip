@@ -1,4 +1,4 @@
-package duke.main;
+package duke.tasks;
 
 /**
  * Inherited from Task, used to store information related to tasks of type 'todo'.

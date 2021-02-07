@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.main.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Parent class for all commands ued in Duke
