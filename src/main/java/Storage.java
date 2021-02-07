@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,9 +12,11 @@ import java.util.Scanner;
  * A class that deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    String filePath;
+    static String filePath;
+    static Scanner fileScanner;
 
     public Storage(String filePath) {
+        assert filePath.length() > 0;
         this.filePath = filePath;
     }
 
@@ -53,63 +56,55 @@ public class Storage {
         return TaskList.tasks;
     }
 
+
     /**
      * Scan the file to retrieve saved tasks from the previous login.
      *
-     * @throws DukeException         If an invalid command is given by the user. It also happens when there's lack of
-     *                               information when task is created such as no description, date and time.
      * @throws FileNotFoundException If the attempt to open the file denoted by a specified pathname has failed.
      */
-    public void scanFile() throws FileNotFoundException, DukeException {
+    public void scanFile() throws FileNotFoundException {
         File file = new File(filePath);
-
-        Scanner fileScanner = new Scanner(file);
-        int i = 0;
+        fileScanner = new Scanner(file);
         while (fileScanner.hasNextLine()) {
             String type = fileScanner.next();
             fileScanner.next();
             String done = fileScanner.next();
             fileScanner.next();
-            if (type.equals("T")) {
-                String desc = fileScanner.nextLine().substring(1);
-                TaskList.tasks.add(new ToDo(desc));
-                if (done.equals("1")) {
-                    TaskList.tasks.get(i).markAsDone();
-                }
-            } else if (type.equals("D")) {
-                String desc = fileScanner.next();
-                while (true) {
-                    String curr = fileScanner.next();
-                    if (curr.equals("|")) {
-                        break;
-                    }
-                    desc += " " + curr;
-                }
-                String by = fileScanner.next();
-                String time = fileScanner.next();
-                TaskList.tasks.add(new Deadline(desc, LocalDate.parse(by), LocalTime.parse(time)));
-                if (done.equals("1")) {
-                    TaskList.tasks.get(i).markAsDone();
-                }
-            } else {
-                String desc = fileScanner.next();
-                while (true) {
-                    String curr = fileScanner.next();
-                    if (curr.equals("|")) {
-                        break;
-                    }
-                    desc += " " + curr;
-                }
-                String at = fileScanner.next();
-                String time = fileScanner.next();
-                String start = time.substring(0, 5);
-                String end = time.substring(6, 11);
-                TaskList.tasks.add(new Event(desc, LocalDate.parse(at), LocalTime.parse(start), LocalTime.parse(end)));
-                if (done.equals("1")) {
-                    TaskList.tasks.get(i).markAsDone();
-                }
+            scanTask(type, done);
+        }
+    }
+
+    /**
+     * Scan details of task based on type given.
+     */
+    public void scanTask(String type, String done) {
+        int index = TaskList.tasks.size();
+        if (type.equals("T")) {
+            TaskList.tasks.add(new ToDo(fileScanner.nextLine().substring(1)));
+            if (done.equals("1")) {
+                TaskList.tasks.get(index).markAsDone();
             }
-            i++;
+            return;
+        }
+        String description = fileScanner.next();
+        while (true) {
+            String nextString = fileScanner.next();
+            if (nextString.equals("|")) {
+                break;
+            }
+            description += " " + nextString;
+        }
+        if (type.equals("D")) {
+            TaskList.tasks.add(new Deadline(description, LocalDate.parse(fileScanner.next()),
+                    LocalTime.parse(fileScanner.next())));
+        } else {
+            String at = fileScanner.next();
+            String time = fileScanner.next();
+            TaskList.tasks.add(new Event(description, LocalDate.parse(at), LocalTime.parse(time.substring(0, 5)),
+                    LocalTime.parse(time.substring(6, 11))));
+        }
+        if (done.equals("1")) {
+            TaskList.tasks.get(index).markAsDone();
         }
     }
 
@@ -121,27 +116,19 @@ public class Storage {
      *                     cannot be created, or cannot be opened for any other reason.
      */
     public static void save() throws IOException {
-        FileWriter fw = new FileWriter("data/duke.txt");
+        FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < TaskList.tasks.size(); i++) {
+            int isDone = 0;
             Task task = TaskList.tasks.get(i);
+            if (task.isDone) {
+                isDone = 1;
+            }
             if (task instanceof ToDo) {
-                int isDone = 0;
-                if (task.isDone) {
-                    isDone = 1;
-                }
                 fw.write("T | " + isDone + " | " + task.description);
             } else if (task instanceof Event) {
-                int isDone = 0;
-                if (task.isDone) {
-                    isDone = 1;
-                }
                 fw.write("E | " + isDone + " | " + task.description + " | " + ((Event) task).at + " "
                         + ((Event) task).start + "-" + ((Event) task).end);
             } else {
-                int isDone = 0;
-                if (task.isDone) {
-                    isDone = 1;
-                }
                 fw.write("D | " + isDone + " | " + task.description + " | " + ((Deadline) task).by + " "
                         + ((Deadline) task).time);
             }

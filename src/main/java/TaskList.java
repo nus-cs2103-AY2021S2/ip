@@ -22,9 +22,9 @@ public class TaskList extends ArrayList<Task> {
                 + tasks.get(num - 1) + "\n"
                 + "     Now you have " + (tasks.size() - 1) + " tasks in the list.\n"
                 + "    ____________________________________________________________");
-        tasks.remove(num - 1);
         Duke.respond = "Noted. I've removed this task:\n" + tasks.get(num - 1) + "\nNow you have "
                 + (tasks.size() - 1) + " tasks in the list.";
+        tasks.remove(num - 1);
     }
 
     /**
