@@ -1,11 +1,12 @@
-package duke;
+package bob;
+
 /**
- * Duke is a program that helps you keep track of tasks.
+ * Bob is a program that helps you keep track of tasks.
  *
  * @author Sylvia
  * @version 0.1
  */
-public class Duke {
+public class Bob  {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -16,8 +17,7 @@ public class Duke {
      * @param filePath This is the path of the file that stores the list
      *                 of tasks from the current working directory.
      */
-
-    public Duke(String filePath) {
+    public Bob(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -29,19 +29,10 @@ public class Duke {
     }
 
     /**
-     * Duke starts to take in commands.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showGreetings();
-        boolean toContinue = true;
-
-        while (toContinue) {
-            String userInput = ui.listenToCommand();
-            toContinue = ui.respondToCommand(userInput, tasks, storage);
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getResponse(String input) {
+        return ui.respondToCommand(input, tasks, storage);
     }
 }
