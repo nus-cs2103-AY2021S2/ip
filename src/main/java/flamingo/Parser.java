@@ -20,7 +20,7 @@ public class Parser {
         try {
             return Parser.startResponse(userInput);
         } catch (IllegalArgumentException e) {
-            return "Oh no Flamingo! I need more information\nto do that.";
+            return "Oh no Flamingo! I need more information to do that.";
         } catch (IndexOutOfBoundsException e) {
             return "Oh no Flamingo! The task does not exist.";
         } catch (NullPointerException e) {
