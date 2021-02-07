@@ -77,13 +77,9 @@ public class TaskList {
      */
     public TaskList findTask(String keyword) {
         TaskList foundTasks = new TaskList();
-        for (int i = 0; i < getTaskCount(); ++i) {
-            Task task = getTask(i);
-            Boolean isFound = task.getDescription().toLowerCase().contains(keyword.toLowerCase());
-            if (isFound) {
-                foundTasks.addTask(task);
-            }
-        }
+        tasks.stream()
+                .filter(t -> t.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                .forEach(foundTasks::addTask);
         return foundTasks;
     }
 }
