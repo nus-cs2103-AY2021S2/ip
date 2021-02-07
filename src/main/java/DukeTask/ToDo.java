@@ -3,7 +3,18 @@ package duketask;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Subclass of Task representing a todo task.
+ */
 public class ToDo extends Task {
+    /**
+     * Default constructor of ToDo which calls the
+     * default super constructor:
+     * state defaults to UNDONE.
+     * createdDateTime defaults to current datetime.
+     * @param description   the task description.
+     * @throws Task.EmptyDescriptionException
+     */
     public ToDo (String description) throws Task.EmptyDescriptionException {
         super(description);
     }
@@ -14,8 +25,8 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String taskInformation (DateTimeFormatter outputFormat) {
-        return "[T]" + super.taskInformation(outputFormat);
+    public String getTaskInformation(DateTimeFormatter outputFormat) {
+        return "[T]" + super.getTaskInformation(outputFormat);
     }
 
     @Override

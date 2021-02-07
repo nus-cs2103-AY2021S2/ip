@@ -65,8 +65,8 @@ public class Parser {
      * @param taskType      the type of task to create. must be todo, event or deadline.
      * @param command       the task description and subcommands where applicable such
      *                      as /at in event and /by in deadline task creations.
-     * @return      the task object in default undone state and created at the
-     *              current datetime.
+     * @return              the task object in default UNDONE state and created at the
+     *                      current datetime.
      * @throws Duke.UnrecognisedCommandException
      * @throws Duke.ExpectedSubcommandException
      * @throws Task.EmptyDescriptionException

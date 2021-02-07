@@ -37,7 +37,7 @@ public abstract class Task {
      * Enum switch state for whether the task is done or not.
      */
     protected enum TaskState {
-        done, undone;
+        DONE, UNDONE;
     }
 
     protected String description;
@@ -58,7 +58,7 @@ public abstract class Task {
             throw new Task.EmptyDescriptionException();
         }
 
-        this.state = (isDone ? TaskState.done : TaskState.undone);
+        this.state = (isDone ? TaskState.DONE : TaskState.UNDONE);
         this.description = description;
         this.createdDateTime = createdDateTime;
     }
@@ -76,7 +76,7 @@ public abstract class Task {
 
     // accessors
     public boolean isDone () {
-        return (this.state == TaskState.done);
+        return (this.state == TaskState.DONE);
     }
 
     public boolean inDescription (String keyphrase) {
@@ -91,8 +91,8 @@ public abstract class Task {
      *              and the datetime of creation in the format of the
      *              specified outputFormat.
      */
-    public String taskInformation (DateTimeFormatter outputFormat) {
-        return "[" + (this.state == TaskState.done ? "X" : " ")
+    public String getTaskInformation(DateTimeFormatter outputFormat) {
+        return "[" + (this.state == TaskState.DONE ? "X" : " ")
                 + "] " + this.description + " [ created: "
                 + this.createdDateTime.format(outputFormat) + " ]";
     }
@@ -119,11 +119,11 @@ public abstract class Task {
      */
     public void markAsDone () throws Task.MarkedAsDoneException {
         switch (this.state) {
-        case done:
+        case DONE:
             throw new Task.MarkedAsDoneException();
 
-        case undone:
-            this.state = TaskState.done;
+        case UNDONE:
+            this.state = TaskState.DONE;
             break;
 
         default:
