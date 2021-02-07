@@ -67,22 +67,23 @@ public class Ui {
     /**
      * To output the <code>Tasks</code> in a TaskList
      *
-     * @param tasklist stores the <code>Duke.Tasks.Task</code> in an ArrayList
+     * @param taskList stores the <code>Duke.Tasks.Task</code> in an ArrayList
      * @return String to consists of <code>Duke.Tasks.Task</code> in an ArrayList
      */
     public String printList(TaskList tasklist) {
         StringBuilder listStringBuilder = new StringBuilder("Here are the tasks in your list:\n");
         ArrayList<Task> tasks = tasklist.getList();
-
+      
         for (int j = 0; j < tasks.size(); j++) {
             listStringBuilder.append(j + 1).append(".").append(tasks.get(j).toString()).append("\n");
         }
 
+        assert listStringBuilder.length() > 0;
         return listStringBuilder.toString();
     }
 
     /**
-     * To ouput a message to indicate that the task is marked
+     * To output a message to indicate that the task is marked
      *
      * @param task the <code>Duke.Tasks.Task</code>> to be marked
      * @return String that indicates the <code>Duke.Tasks.Task</code>> to be marked
@@ -94,7 +95,7 @@ public class Ui {
     /**
      * To output a message to indicate that the task is deleted
      *
-     * @param tasklist  stores the <code>Duke.Tasks.Task</code> in an ArrayList
+     * @param taskList  stores the <code>Duke.Tasks.Task</code> in an ArrayList
      * @param taskIndex indicates the <code>Duke.Tasks.Task</code> index in the ArrayList
      * @return String that consists of deleted tasks
      */
@@ -104,14 +105,13 @@ public class Ui {
         String taskName = list.get(taskIndex).toString();
         String displayTaskName = "Ok! I've removed this task:\n" + taskName + "\n";
         String displayLeftoverTasks =  "Currently, you have " + (size - 1) + " task(s) in the list!";
-
         return displayTaskName + displayLeftoverTasks;
     }
 
     /**
      * To output the added <code>Duke.Tasks.Task</code> to the ArrayList
      *
-     * @param tasklist stores the <code>Duke.Tasks.Task</code> in an ArrayList
+     * @param taskList stores the <code>Duke.Tasks.Task</code> in an ArrayList
      * @return String that consists of the task added
      */
     public String showAddTask(TaskList tasklist) {
@@ -120,7 +120,6 @@ public class Ui {
         String taskName = list.get(size - 1).toString();
         String displayTaskName = "Ok! I've added this task:\n" + taskName;
         String displayLeftoverTasks = "\nCurrently, you have " + size + " task(s) in the list!";
-
         return displayTaskName + displayLeftoverTasks;
     }
 }

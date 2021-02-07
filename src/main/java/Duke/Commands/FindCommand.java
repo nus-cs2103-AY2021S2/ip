@@ -22,14 +22,14 @@ public class FindCommand extends Command {
      * Executes the find command and finds the <code>Tasks</code> that matches the keyword from the <code>TaskList</code>
      * Uses <code>Duke.Ui</code> to print the <code>TaskList</code> of the matching keyword <code>Tasks</code>
      *
-     * @param tasklist contains the task list and operations to manipulate the list
+     * @param taskList contains the task list and operations to manipulate the list
      * @param ui       deals with interaction with the user
      * @param storage  deals with loading tasks from a file and saving into it
      * @return String that consists of found tasks
      */
     @Override
-    public String execute(TaskList tasklist, Ui ui, Storage storage) {
-        ArrayList<Task> matchingArrayList = tasklist.findTask(this.keyWord);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        ArrayList<Task> matchingArrayList = taskList.findTask(this.keyWord);
         TaskList matchingList = new TaskList(matchingArrayList);
 
         return ui.printList(matchingList);

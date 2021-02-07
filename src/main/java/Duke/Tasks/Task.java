@@ -1,7 +1,5 @@
 package Duke.Tasks;
 
-import Duke.Duke;
-
 /**
  * Represents the tasks that the user has input into the program. The task has a description and a boolean to
  * indicate that it is completed

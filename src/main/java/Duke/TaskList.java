@@ -29,6 +29,8 @@ public class TaskList {
      * @throws InvalidDescriptionException is thrown when there is an error related to an invalid description
      */
     public void deleteTask(int taskIndex) throws InvalidDescriptionException {
+        assert taskIndex >= 0;
+
         if (taskIndex >= tasks.size()) {
             throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
         }
@@ -43,6 +45,8 @@ public class TaskList {
      * @throws DukeException is thrown when there is an error related to duke
      */
     public void markTask(int taskIndex) throws DukeException {
+        assert taskIndex >= 0;
+
         if (taskIndex >= tasks.size()) {
             throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
         }

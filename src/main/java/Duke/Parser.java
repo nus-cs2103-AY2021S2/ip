@@ -81,6 +81,8 @@ public class Parser {
      */
     public Command parse(String fullCommand) throws DukeException {
         String[] tokens = fullCommand.split(" ", 2);
+        assert tokens.length > 0;
+
         String taskType = tokens[0];
 
         invalidCommandChecker(taskType);
