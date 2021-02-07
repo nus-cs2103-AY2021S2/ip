@@ -102,6 +102,6 @@ public class Ui {
      * Displays farewell message.
      */
     public static String sayBye() {
-        return "Bye. Hope to see you again soon!\n";
+        return "Bye. Hope to see you again soon!\n" + "I'm leaving in 3 seconds...\n";
     }
 }

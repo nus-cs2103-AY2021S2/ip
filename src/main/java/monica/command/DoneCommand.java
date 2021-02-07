@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MonicaException {
         if (id < 1 || id > tasks.getSize()) {
-            throw new MonicaException("The task id is invalid.");
+            throw new MonicaException("The done id is invalid.");
         }
         tasks.getTask(id).markAsDone();
         storage.updateFile();

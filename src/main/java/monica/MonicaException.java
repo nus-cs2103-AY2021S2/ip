@@ -17,6 +17,6 @@ public class MonicaException extends Exception {
      * Generates output message when an exception is caught.
      */
     public String toString() {
-        return ":< OOPS!!! " + message + "Enter 'help' to find out more.\n";
+        return ":< OOPS!!! " + message + "\nEnter 'help' to find out more.\n";
     }
 }

@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MonicaException {
         if (id < 1 || id > tasks.getSize()) {
-            throw new MonicaException("The task id is invalid.");
+            throw new MonicaException("The delete id is invalid.");
         }
         Task removed = tasks.removeTask(id);
         storage.updateFile();

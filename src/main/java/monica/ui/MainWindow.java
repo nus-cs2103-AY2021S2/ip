@@ -10,6 +10,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import monica.Monica;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow.
  * Provides the layout for the other controls.
@@ -26,13 +29,13 @@ public class MainWindow extends AnchorPane {
 
     private Monica monica;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Monica.png"));
+    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image MONICA_IMAGE = new Image(this.getClass().getResourceAsStream("/images/Monica.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcome(), MONICA_IMAGE));
     }
 
     public void setDuke(Monica monica) {
@@ -48,12 +51,14 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = monica.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeDialog(response, MONICA_IMAGE)
         );
-        userInput.clear();
         if (input.equals("bye")) {
-            Platform.exit();
+            new Timer().schedule(new TimerTask() {
+                public void run () { System.exit(0); }
+            }, 3000);
         }
+        userInput.clear();
     }
 }
