@@ -37,7 +37,7 @@ public class Deadline extends Task {
      * @return the Deadline as a String to be saved.
      */
     public String saveToData() {
-        if (this.done) {
+        if (this.isDone) {
             return ("D | 1 | " + todo + " | " + doneBy.toString().replace("T", " "));
         } else {
             return ("D | 0 | " + todo + " | " + doneBy.toString().replace("T", " "));
@@ -46,7 +46,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        if (!this.done) {
+        if (!this.isDone) {
             return ("[D][ ] " + this.todo + " (by:" + dateFormat(this.doneBy) + ")");
         } else {
             return ("[D][X] " + this.todo + " (by:" + dateFormat(this.doneBy) + ")");

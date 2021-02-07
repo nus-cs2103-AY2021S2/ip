@@ -19,7 +19,7 @@ public class Ui {
     }
 
     public String emptyListMessage() {
-        return ("☹ OOPS!!! Your list is currently empty uwu.");
+        return ("OOPS!!! Your list is currently empty uwu.");
     }
 
     public String showTaskListSize(int listSize) {
@@ -34,20 +34,20 @@ public class Ui {
     public String errorMessage(String s) {
         switch (s) {
         case "unknownInput":
-            return ("☹ OOPS!!! Sumimasen, but I don't know what that means T^T");
+            return ("OOPS!!! Sumimasen, but I don't know what that means T^T");
         case "invalidDelete":
-            return ("☹ OOPS!!! Please indicate a valid task to delete uwu");
+            return ("OOPS!!! Please indicate a valid task to delete uwu");
         case "invalidEvent":
-            return ("☹ OOPS!!! Please define your event properly uwu.");
+            return ("OOPS!!! Please define your event properly uwu.");
         case "dateTimeError":
-            return ("☹ OOPS!!! Please define your todo date/time in the " +
-                    "YYYY-MM-DD HH:MM format uwu.");
+            return ("OOPS!!! Please define your todo date/time in the "
+                    + "YYYY-MM-DD HH:MM format uwu.");
         case "invalidDeadline":
-            return ("☹ OOPS!!! Please define your deadline properly uwu.");
+            return ("OOPS!!! Please define your deadline properly uwu.");
         case "invalidTodo":
-            return ("☹ OOPS!!! Please define your todo properly uwu.");
+            return ("OOPS!!! Please define your todo properly uwu.");
         case "invalidDone":
-            return ("☹ OOPS!!! Please indicate a valid task to complete uwu");
+            return ("OOPS!!! Please indicate a valid task to complete uwu");
         default:
             return "Something went really really wrong uwu.";
         }
