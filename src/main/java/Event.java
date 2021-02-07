@@ -7,7 +7,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String toMemString() {
+        return super.toMemString() + " | " + this.time;
+    }
+
+    @Override
     public String toString() {
-        return super.toString() + " (at: " + time + ")";
+        return super.toString() + this.time;
     }
 }

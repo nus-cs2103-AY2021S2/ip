@@ -1,96 +1,105 @@
 import java.util.Scanner;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        // task list
-        ArrayList<Task> ls = new ArrayList<>();
 
-        // greet
-        printMessage("Hello! I'm Duke\nWhat can I do for you?");
+        try {
+            // task list
+            FileReaderWriter frw = new FileReaderWriter();
+            ArrayList<Task> taskList = frw.getMemList();
 
-        // setup scanner for inputs
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine().strip();
+            // greet
+            printMessage("Hello! I'm Duke\nWhat can I do for you?");
 
-        // input loop
-        while (!input.equals("bye")) {
-            try {
-                if (input.equals("list")) {
-                    // list
-                    printList(ls);
-                } else {
-                    String[] splitInput = input.split(" ", 2);
+            // setup scanner for inputs
+            Scanner sc = new Scanner(System.in);
+            String input = sc.nextLine().strip();
 
-                    // check that field is not empty
-
-                    if (splitInput[0].equals("done")) {
-                        // done
-                        int taskNum = Integer.parseInt(splitInput[1]);
-                        Task finishedTask = ls.get(taskNum - 1);
-                        finishedTask.setCompletion(true);
-                        printMessage("Nice! I've marked this task as done:\n   " + finishedTask);
-                    } else if (splitInput[0].equals("delete")) {
-                        int taskNum = Integer.parseInt(splitInput[1]);
-                        Task deletedTask = ls.remove(taskNum - 1);
-                        printMessage("Noted. I've removed this task:\n" + "  " + deletedTask + "Now you have "
-                                + ls.size() + " tasks in the list.");
+            // input loop
+            while (!input.equals("bye")) {
+                try {
+                    if (input.equals("list")) {
+                        // list
+                        printList(taskList);
                     } else {
-                        if (splitInput[0].equals("todo")) {
-                            // check for empty task
-                            if (splitInput.length < 2) {
-                                throw new EmptyTaskException("todo");
-                            }
+                        // split input into action and detail
+                        String[] splitInput = input.split(" ", 2);
 
-                            // add todo
-                            addTask(ls, new ToDo(splitInput[1]));
-                        } else if (splitInput[0].equals("deadline")) {
-                            // check for empty task
-                            if (splitInput.length < 2) {
-                                throw new EmptyTaskException("deadline");
-                            }
+                        // check that field is not empty
 
-                            // add deadline
-                            String[] details = splitInput[1].split(" /by ");
-                            addTask(ls, new Deadline(details[0], details[1]));
-                        } else if (splitInput[0].equals("event")) {
-                            // check for empty task
-                            if (splitInput.length < 2) {
-                                throw new EmptyTaskException("event");
-                            }
-                            // add event
-                            String[] details = splitInput[1].split(" /at ");
-                            addTask(ls, new Deadline(details[0], details[1]));
+                        if (splitInput[0].equals("done")) {
+                            // done
+                            int taskNum = Integer.parseInt(splitInput[1]);
+                            Task finishedTask = taskList.get(taskNum - 1);
+                            finishedTask.setCompletion(true);
+                            printMessage("Nice! I've marked this task as done:\n   " + finishedTask);
+                        } else if (splitInput[0].equals("delete")) {
+                            int taskNum = Integer.parseInt(splitInput[1]);
+                            Task deletedTask = taskList.remove(taskNum - 1);
+                            printMessage("Noted. I've removed this task:\n" + "  " + deletedTask + "Now you have "
+                                    + taskList.size() + " tasks in the list.");
                         } else {
-                            throw new NotDukeCommandException();
+                            if (splitInput[0].equals("todo")) {
+                                // check for empty task
+                                if (splitInput.length < 2) {
+                                    throw new EmptyTaskException("todo");
+                                }
+
+                                // add todo
+                                addTask(taskList, new ToDo(splitInput[1]));
+                            } else if (splitInput[0].equals("deadline")) {
+                                // check for empty task
+                                if (splitInput.length < 2) {
+                                    throw new EmptyTaskException("deadline");
+                                }
+
+                                // add deadline
+                                String[] details = splitInput[1].split(" /by ");
+                                addTask(taskList, new Deadline(details[0], details[1]));
+                            } else if (splitInput[0].equals("event")) {
+                                // check for empty task
+                                if (splitInput.length < 2) {
+                                    throw new EmptyTaskException("event");
+                                }
+                                // add event
+                                String[] details = splitInput[1].split(" /at ");
+                                addTask(taskList, new Deadline(details[0], details[1]));
+                            } else {
+                                throw new NotDukeCommandException();
+                            }
                         }
                     }
+                    input = sc.nextLine().strip();
+                } catch (DukeException e) {
+                    printMessage(e.getMessage());
+                    input = sc.nextLine().strip();
                 }
-                input = sc.nextLine().strip();
-            } catch (DukeException e) {
-                printMessage(e.getMessage());
-                input = sc.nextLine().strip();
             }
-        }
 
-        // exit
-        printMessage("Bye. Hope to see you again soon!");
-        sc.close();
+            // exit
+            printMessage("Bye. Hope to see you again soon!");
+            sc.close();
+            frw.storeMemList(taskList);
+        } catch (IOException e) {
+            System.err.print(e);
+        }
     }
 
     // add task function
-    private static void addTask(ArrayList<Task> ls, Task addedTask) {
-        ls.add(addedTask);
-        String numOfTasks = ls.size() + (ls.size() > 1 ? " tasks" : " task");
+    private static void addTask(ArrayList<Task> taskList, Task addedTask) {
+        taskList.add(addedTask);
+        String numOfTasks = taskList.size() + (taskList.size() > 1 ? " tasks" : " task");
         printMessage(
                 "Got it. I've added this task:\n  " + addedTask + "\nNow you have " + numOfTasks + " in the list.");
     }
 
     // prints list item number and string
-    private static void printList(ArrayList<Task> ls) {
+    private static void printList(ArrayList<Task> taskList) {
         System.out.println("    ____________________________________________________________");
-        for (int i = 0; i < ls.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + ls.get(i).toString());
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println("     " + (i + 1) + "." + taskList.get(i).toString());
         }
         System.out.println("    ____________________________________________________________\n");
     }

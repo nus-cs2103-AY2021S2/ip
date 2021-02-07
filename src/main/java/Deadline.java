@@ -7,7 +7,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toMemString() {
+        return super.toMemString() + " | " + this.date;
+    }
+
+    @Override
     public String toString() {
-        return super.toString() + " (by: " + date + ")";
+        return super.toString() + " (by: " + this.date + ")";
     }
 }
