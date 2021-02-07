@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents the component of the Duke program
@@ -10,24 +9,6 @@ import java.util.Scanner;
 public class Ui {
 
     protected static final String TASK_CONFIRMATION = "Got it. I've added this task:\n";
-
-    /**
-     * Prints a greeting message for the user
-     * when the Duke program starts.
-     */
-    public void greet() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
-    }
-
-    /**
-     * Returns a String representing the user input.
-     *
-     * @return a String representing the user input.
-     */
-    public String readInput() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
 
     /**
      * Returns a String message informing the user

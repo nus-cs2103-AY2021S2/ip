@@ -22,9 +22,9 @@ public class Parser {
      *                       does not match any valid Duke Commands.
      */
     public Command parseCommand(String input) throws DukeException {
-        String[] arr = input.split(" ");
+        String[] words = input.split(" ");
         try {
-            return Command.valueOf(arr[0].toUpperCase());
+            return Command.valueOf(words[0].toUpperCase());
         } catch (IllegalArgumentException illegalArgumentException) {
             throw new DukeException("OOPS!!! I'm sorry, but that is an invalid command :-(");
         }
@@ -40,7 +40,8 @@ public class Parser {
      */
     public ToDo parseToDo(String input) throws DukeException {
         String[] words = input.split(" ");
-        if (words.length < 2) {
+        boolean containDescription = words.length >= 2;
+        if (!containDescription) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         return new ToDo(input.substring(5));
@@ -59,7 +60,9 @@ public class Parser {
     public Deadline parseDeadline(String input) throws DukeException {
         String[] words = input.split(" ");
         String[] numSentenceParts = input.split(" /by ");
-        if (words.length < 2 || numSentenceParts[0].split(" ").length < 2) {
+        boolean containOnlyCommand = words.length < 2;
+        boolean containDescription = numSentenceParts[0].split(" ").length >= 2;
+        if (containOnlyCommand || !containDescription) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
         if (numSentenceParts.length < 2) {
@@ -87,7 +90,9 @@ public class Parser {
     public Event parseEvent(String input) throws DukeException {
         String[] words = input.split(" ");
         String[] numSentenceParts = input.split(" /at ");
-        if (words.length < 2 || words[0].split(" ").length < 2) {
+        boolean containOnlyCommand = words.length < 2;
+        boolean containDescription = numSentenceParts[0].split(" ").length >= 2;
+        if (containOnlyCommand || !containDescription) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
         if (numSentenceParts.length < 2) {
@@ -142,7 +147,8 @@ public class Parser {
     public int parseDelete(String input, TaskList taskList) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
         String[] words = input.split(" ");
-        if (words.length < 2) {
+        boolean containOnlyCommand = words.length < 2;
+        if (containOnlyCommand) {
             throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
         }
         try {
@@ -166,10 +172,12 @@ public class Parser {
      */
     public String parseKeyword(String input) throws DukeException {
         String[] words = input.split(" ");
-        if (words.length < 2) {
+        boolean containOnlyCommand = words.length < 2;
+        boolean containTooManyKeywords = words.length > 2;
+        if (containOnlyCommand) {
             throw new DukeException("OOPS!!! Please enter a keyword.");
         }
-        if (words.length > 2) {
+        if (containTooManyKeywords) {
             throw new DukeException("OOPS!!! Please enter only one keyword.");
         }
         return words[1];
