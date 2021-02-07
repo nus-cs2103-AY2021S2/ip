@@ -1,10 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import duke.command.Command;
 
@@ -48,7 +44,6 @@ public class Duke {
      */
     public String getResponse(String input) {
         Command command;
-        ui.printLine();
         try {
             command = Parser.parse(input);
             assert command != null : "Parser.parse should return a command";

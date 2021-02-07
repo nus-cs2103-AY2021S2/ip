@@ -19,6 +19,21 @@ import duke.command.ListCommand;
 public class Parser {
 
     /**
+     * The types of commands available.
+     */
+    enum CommandType {
+        HELP,
+        LIST,
+        BYE,
+        DONE,
+        TODO,
+        EVENT,
+        DEADLINE,
+        DELETE,
+        FIND;
+    }
+
+    /**
      * Parses the input provided and returns a command.
      * @param input Input string to be parsed.
      * @return A command after parsing the input.
@@ -27,53 +42,57 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
 
         String[] processedInput = input.split(" ");
-        String command = processedInput[0];
         String description = processDescription(processedInput);
+        CommandType commandType = identifyCommandType(processedInput);
+        assert commandType != null : "commandType should not be null";
 
-        switch (command) {
-        case "help":
+        switch (commandType) {
+        case HELP:
             return new HelpCommand();
-        case "list":
+        case LIST:
             return new ListCommand();
-        case "bye":
+        case BYE:
             return new ByeCommand();
-        case "done":
+        case DONE:
             if (processedInput.length == 1) {
                 throw new DukeException("Please enter valid numerical input to mark done");
-            } else if (!processedInput[1].matches("[0-9]+")) {
+            } else if (isValidNumericalValue(processedInput[1])) {
                 throw new DukeException("Please enter a valid task number to mark done");
-            } else {
-                return new DoneCommand(Integer.parseInt(processedInput[1]));
             }
-        case "todo":
-            return new AddToDo(command, description);
-        case "event":
+            return new DoneCommand(Integer.parseInt(processedInput[1]));
+        case TODO:
+            return new AddToDo("todo", description);
+        case EVENT:
             try {
                 return processEvent(input);
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new DukeException("\nPlease enter a valid format '/at YYYY-MM-DD XXXX-YYYY'");
             }
-        case "deadline":
+        case DEADLINE:
             try {
                 return processDeadline(input);
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new DukeException("\nPlease enter a valid format '/by YYYY-MM-DD TIME'");
             }
-        case "delete":
+        case DELETE:
             if (processedInput.length == 1) {
                 throw new DukeException("Please enter a task number to delete");
-            } else if (!processedInput[1].matches("[0-9]+")) {
+            } else if (isValidNumericalValue(processedInput[1])) {
                 throw new DukeException("Please enter a valid task number to delete");
-            } else {
-                return new DeleteCommand(Integer.parseInt(processedInput[1]));
             }
-        case "find":
+
+            return new DeleteCommand(Integer.parseInt(processedInput[1]));
+        case FIND:
             return new FindCommand(processedInput[1]);
         default:
             throw new DukeException("Invalid command. Please enter a valid one");
         }
+    }
+
+    private static boolean isValidNumericalValue(String s) {
+        return !s.matches("[0-9]+");
     }
 
     private static AddDeadline processDeadline(String input) throws Exception {
@@ -102,6 +121,32 @@ public class Parser {
             sb.append(processedInput[i] + " ");
         }
         return sb.toString();
+    }
+
+    private static CommandType identifyCommandType(String[] processedInput) throws DukeException {
+        String commandString = processedInput[0];
+        switch (commandString) {
+        case "help":
+            return CommandType.HELP;
+        case "list":
+            return CommandType.LIST;
+        case "bye":
+            return CommandType.BYE;
+        case "done":
+            return CommandType.DONE;
+        case "todo":
+            return CommandType.TODO;
+        case "event":
+            return CommandType.EVENT;
+        case "deadline":
+            return CommandType.DEADLINE;
+        case "delete":
+            return CommandType.DELETE;
+        case "find":
+            return CommandType.FIND;
+        default:
+            throw new DukeException("Invalid command. Please enter a valid one");
+        }
     }
 
 }
