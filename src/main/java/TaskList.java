@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import java.util.stream.Collectors;
+
 /**
  * Class that encapsulate, control, and evaluate a list of task.
  */
@@ -20,11 +22,7 @@ public class TaskList {
      * @param tasks List of Task
      */
     TaskList(List<Task> tasks) {
-        List<Task> newTasks = new ArrayList<Task>();
-        for (Task task : tasks) {
-            newTasks.add(task);
-        }
-        this.tasks = newTasks;
+        this.tasks = tasks.stream().collect(Collectors.toList()); //deep-copy
     }
 
     /**
@@ -95,11 +93,7 @@ public class TaskList {
     public String findTasks(String keyword) {
         List<Task> temp = new ArrayList<>();
         Predicate<Task> findKeywordFromTask = task -> task.toString().contains(keyword);
-        for (Task task: this.tasks) {
-            if (findKeywordFromTask.test(task)) {
-                temp.add(task);
-            }
-        }
+        temp = this.tasks.stream().filter(findKeywordFromTask).collect(Collectors.toList());
         if (temp.size() == 0) {
             return Ui.showMessage("No matching task");
         }
