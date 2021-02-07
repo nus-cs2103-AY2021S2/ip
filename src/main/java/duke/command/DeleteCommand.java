@@ -7,7 +7,16 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-public class DeleteCommand extends Command{
+/**
+ * Represents a command to delete a task.
+ */
+public class DeleteCommand extends Command {
+
+    /**
+     * Creates a new instance of <code>DeleteCommand</code>.
+     *
+     * @param description Task number to delete.
+     */
     public DeleteCommand(String description) {
         this.type = "delete";
         this.description = description;

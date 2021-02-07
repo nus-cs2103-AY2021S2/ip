@@ -7,6 +7,9 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Represents a command called by the user.
+ */
 public abstract class Command {
 
     protected String type;

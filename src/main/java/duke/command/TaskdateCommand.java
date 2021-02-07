@@ -10,8 +10,16 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a command to list all tasks that corresponds to a given date.
+ */
 public class TaskdateCommand extends Command {
 
+    /**
+     * Creates a new instance of <code>TaskdateCommand</code>.
+     *
+     * @param description Date to be matched to current tasks.
+     */
     public TaskdateCommand(String description) {
         this.type = "taskdate";
         this.description = description;

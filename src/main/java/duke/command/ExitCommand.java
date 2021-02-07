@@ -4,8 +4,15 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
+/**
+ * Represents a command to exit Duke.
+ */
 public class ExitCommand extends Command {
 
+    /**
+     * Creates a new instance of <code>ExitCommand</code>.
+     * <code>isExit</code> is set to true.
+     */
     public ExitCommand() {
         this.type = "bye";
         this.description = "";

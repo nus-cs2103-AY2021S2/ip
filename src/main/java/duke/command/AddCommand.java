@@ -8,8 +8,17 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskType;
 
+/**
+ * Represents a command to add a task.
+ */
 public class AddCommand extends Command {
 
+    /**
+     * Creates a new instance of <code>AddCommand</code>.
+     *
+     * @param type Type of add command (todo, deadline, event).
+     * @param description Description of task.
+     */
     public AddCommand(String type, String description) {
         this.type = type;
         this.description = description;

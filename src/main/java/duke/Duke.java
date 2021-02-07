@@ -8,8 +8,6 @@ import java.io.IOException;
 
 import java.time.format.DateTimeParseException;
 
-import java.util.Scanner;
-
 /**
  * Represents a task manager that allows users to add, delete and mark tasks as done.
  */

@@ -5,8 +5,16 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Represents a command to mark a task as done.
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * Creates a new instance of <code>DoneCommand</code>.
+     *
+     * @param description Task number to be marked as done.
+     */
     public DoneCommand(String description) {
         this.type = "done";
         this.description = description;

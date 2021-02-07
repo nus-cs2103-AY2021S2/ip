@@ -4,8 +4,14 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
+/**
+ * Represents a command to list all current tasks.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Creates a new instance of <code>ListCommand</code>.
+     */
     public ListCommand() {
         this.type = "list";
         this.description = "";
