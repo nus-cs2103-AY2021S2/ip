@@ -28,6 +28,7 @@ public class ToDoCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        assert taskList != null;
         ToDoTask task = new ToDoTask(taskName);
         taskList.addTask(task);
         return new CommandResult(taskList, false,

@@ -63,6 +63,8 @@ public class Parser {
         // Get the arguments as captured by the named-capturing group
         String arguments = matcher.group("arguments").strip();
 
+        assert !command.isEmpty() : "The command word should not be empty at this point";
+
         switch (command) {
         case ToDoCommand.COMMAND_WORD:
             return parseArgumentsForToDo(arguments);
@@ -121,6 +123,7 @@ public class Parser {
         }
         // Split the user input into the task name and the datetime string
         String[] deadlineInputArr = arguments.split("/by", 2);
+        assert deadlineInputArr.length == 2;
         String deadlineTaskName = deadlineInputArr[0].strip();
         String userInputDateTime = deadlineInputArr[1].strip();
 
@@ -133,6 +136,7 @@ public class Parser {
             // User did not enter a time string
             return new DeadlineCommand(deadlineTaskName, deadlineDate);
         } else {
+            assert userInputDateTimeArr.length == 2 : "There should be a time component string in the array";
             // User entered a time string
             String userInputTime = userInputDateTimeArr[1].strip();
             LocalTime deadlineTime = parseTime(userInputTime);
@@ -192,7 +196,8 @@ public class Parser {
                     + MESSAGE_FOLLOW_USAGE + "\n"
                     + EventCommand.MESSAGE_USAGE);
         }
-        String[] eventInputArr = arguments.split("/at");
+        String[] eventInputArr = arguments.split("/at", 2);
+        assert eventInputArr.length == 2;
         String eventTaskName = eventInputArr[0].strip();
         String eventTime = eventInputArr[1].strip();
         return new EventCommand(eventTaskName, eventTime);
