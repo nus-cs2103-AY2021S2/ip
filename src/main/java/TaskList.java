@@ -8,10 +8,8 @@ import java.util.ArrayList;
 public class TaskList {
     protected static ArrayList<Task> updatedTaskList;
     protected static ArrayList<String> loadedTaskList;
-    private static final int DEADLINE_TASK_INDEX = 16;
-    private static final int EVENT_TASK_INDEX = 16;
-    private static final int TODO_TASK_INDEX = 16;
     private static final int DEADLINE_DATE_LENGTH = 16;
+    private static final int TASK_DESCRIPTION_INDEX = 16;
 
     /**
      * Initializes a TaskList object in the situation where the specified
@@ -75,7 +73,7 @@ public class TaskList {
      * @return the todo task description
      */
     public static String getTodoTask(String input) {
-        return input.substring(TODO_TASK_INDEX);
+        return input.substring(TASK_DESCRIPTION_INDEX);
     }
 
     /**
@@ -85,7 +83,7 @@ public class TaskList {
      */
     public static String getDeadlineTask(String input) {
         int dateIndex = input.indexOf("(by: ");
-        return input.substring(DEADLINE_TASK_INDEX, dateIndex - 1);
+        return input.substring(TASK_DESCRIPTION_INDEX, dateIndex - 1);
     }
 
     /**
@@ -105,7 +103,7 @@ public class TaskList {
      */
     public static String getEventTask(String input) {
         int dateIndex = input.indexOf("(at: ");
-        return input.substring(EVENT_TASK_INDEX, dateIndex - 1);
+        return input.substring(TASK_DESCRIPTION_INDEX, dateIndex - 1);
     }
 
     /**
