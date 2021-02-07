@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Class that encapsulate, control, and evaluate a list of task.
@@ -93,8 +94,9 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         List<Task> temp = new ArrayList<>();
+        Predicate<Task> findKeywordFromTask = task -> task.toString().contains(keyword);
         for (Task task: this.tasks) {
-            if (task.toString().contains(keyword)) {
+            if (findKeywordFromTask.test(task)) {
                 temp.add(task);
             }
         }
