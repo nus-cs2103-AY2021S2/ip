@@ -33,7 +33,6 @@ public class Duke {
      */
     public String getResponse(String input) {
         String output;
-        boolean isExit = false;
         try {
             ChatBotCommand c = Parser.parse(input);
 
