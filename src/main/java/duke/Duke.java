@@ -1,14 +1,14 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
 

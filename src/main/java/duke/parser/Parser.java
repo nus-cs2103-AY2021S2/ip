@@ -1,5 +1,7 @@
 package duke.parser;
 
+import java.util.Arrays;
+
 import duke.command.AddCmd;
 import duke.command.ByeCmd;
 import duke.command.Command;
@@ -9,8 +11,6 @@ import duke.command.FindCmd;
 import duke.command.ListCmd;
 import duke.exception.DukeException;
 import duke.task.TaskType;
-
-import java.util.Arrays;
 
 /**
  * Interprets user input and routes them to the correct command

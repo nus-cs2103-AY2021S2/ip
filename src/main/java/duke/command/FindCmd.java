@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.util.HashSet;
 import java.util.Iterator;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class FindCmd extends Command {
     private final String cmdArgs;
