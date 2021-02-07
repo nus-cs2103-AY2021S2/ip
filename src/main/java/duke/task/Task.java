@@ -3,8 +3,8 @@ package duke.task;
 import duke.DukeException;
 
 /**
- * Represents a task listed in Duke and can be marked as done. Can statically create subclasses of Task, namely:
- * Event, Deadline, ToDo
+ * Represents a task listed in Duke and can be marked as done. Can statically
+ * create subclasses of Task, namely: Event, Deadline, ToDo
  */
 public class Task {
     protected boolean isDone;
@@ -77,6 +77,7 @@ public class Task {
      * @return Task created.
      * @throws DukeException if there is no description of the task.
      * @throws DukeException if there is no deadline specified by "/by".
+     * @throws DukeException if there are multiple "/by".
      */
     private static Task createDeadline(String command) throws DukeException {
         int charactersInDeadline = 8;
@@ -91,6 +92,9 @@ public class Task {
         if (splitDescription.length == 1 || splitDescription[1].trim().length() == 0) {
             throw new DukeException("Expected argument \"/by\" specifying deadline of task for \"deadline\"");
         }
+        if (splitDescription.length != 2) {
+            throw new DukeException("Multiple \"/by\" not allowed in for \"deadline\"");
+        }
         return new Deadline(splitDescription[0].trim(), splitDescription[1].trim());
     }
 
@@ -101,6 +105,7 @@ public class Task {
      * @return Task created.
      * @throws DukeException if there is no description of the task.
      * @throws DukeException if there is no duration specified by "/at".
+     * @throws DukeException if there are multiple "/at".
      */
     private static Task createEvent(String command) throws DukeException {
         int charactersInEvent = 5;
@@ -114,6 +119,9 @@ public class Task {
         // Must check length before checking 2nd argument or else nullPointerException.
         if (splitDescription.length == 1 || splitDescription[1].trim().length() == 0) {
             throw new DukeException("Expected argument \"/at\" specifying duration of task for \"event\"");
+        }
+        if (splitDescription.length != 2) {
+            throw new DukeException("Multiple \"/at\" not allowed in for \"event\"");
         }
         return new Event(splitDescription[0].trim(), splitDescription[1].trim());
     }

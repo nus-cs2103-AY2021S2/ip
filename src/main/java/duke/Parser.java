@@ -66,13 +66,14 @@ public class Parser {
 
     /**
      * Finds and marks task specified in the command string after calling done.
-     * Handles exceptions that include index out of bounds and number format.
-     * Saves to storage.
+     * Handles exceptions that include index out of bounds and number format. Saves
+     * to storage.
      *
      * @param command "done {task number}".
      * @return feedback whether task is marked done successfully or not.
      */
     private String handleDone(String command) {
+        assert command.split(" ")[0].equals("done") : "handleDone() called without done command.";
         String reply;
         try {
             int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
@@ -95,19 +96,20 @@ public class Parser {
     }
 
     /**
-     * Deletes the task in the list. Updates storage.
-     * Handles number format and index out of bounds exceptions.
+     * Deletes the task in the list. Updates storage. Handles number format and
+     * index out of bounds exceptions.
      *
      * @param command "delete {task number}".
      * @return feedback whether the task is deleted successfully.
      */
     private String handleDelete(String command) {
+        assert command.split(" ")[0].equals("delete") : "handleDelete() called without delete command.";
         String reply;
         try {
             int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
             Task currentTask = tasks.remove(taskNumber);
-            reply = "See la. It's deleted. \n" + currentTask
-                    + "\nYou currently have " + tasks.size() + " task(s) in the list.";
+            reply = "See la. It's deleted. \n" + currentTask + "\nYou currently have " + tasks.size()
+                    + " task(s) in the list.";
             if (storage != null) {
                 storage.deleteTask(taskNumber);
             }
@@ -131,17 +133,18 @@ public class Parser {
      */
     private String addTask(Task task) {
         tasks.add(task);
-        return "Your task has been added: " + task
-                + "\nYou currently have " + tasks.size() + " task(s) in the list.";
+        return "Your task has been added: " + task + "\nYou currently have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
-     * Loops through the existing TaskList and finds all tasks that match the given argument.
+     * Loops through the existing TaskList and finds all tasks that match the given
+     * argument.
      *
      * @param command "find {string to match}".
      * @return string of tasks matching argument.
      */
     private String handleFind(String command) {
+        assert command.split(" ", 2)[0].equals("find") : "handleFind() called without find command.";
         String query;
         try {
             query = command.split(" ", 2)[1].trim();

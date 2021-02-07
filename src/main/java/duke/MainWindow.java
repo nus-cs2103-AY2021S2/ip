@@ -34,8 +34,14 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Creates a Duke DialogBox showing the welcome message.
+     */
     public void showWelcome() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.showWelcome(), dukeImage));
+        assert duke != null : "Duke called to show welcome before being set.";
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(duke.showWelcome(), dukeImage)
+        );
     }
 
     /**
