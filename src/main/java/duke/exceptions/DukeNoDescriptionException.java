@@ -19,6 +19,6 @@ public class DukeNoDescriptionException extends DukeException {
      * @return string representation for the cause of the exception.
      */
     public String toString() {
-        return String.format("☹ OOPS!!! The description of a %s cannot be empty.", command);
+        return String.format("OOPS!!! The description of a %s cannot be empty.", command);
     }
 }
