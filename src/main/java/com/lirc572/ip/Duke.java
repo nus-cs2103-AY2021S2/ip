@@ -3,6 +3,7 @@ package com.lirc572.ip;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -43,8 +44,8 @@ public class Duke extends Application {
     public void start(Stage primaryStage) throws Exception {
         //Step 1. Setting up required components
 
-        this.userImageSrc = "/images/dialogPic/Elaina/majo_elaina1.jpg";
-        this.dukeImageSrc = "/images/dialogPic/User/majo_saya2.jpg";
+        this.userImageSrc = "/images/dialogPic/User/majo_saya2.jpg";
+        this.dukeImageSrc = "/images/dialogPic/Elaina/majo_elaina1.jpg";
 
         this.scrollPane = new ScrollPane();
         this.dialogContainer = new VBox();
@@ -81,7 +82,8 @@ public class Duke extends Application {
         this.scrollPane.setFitToWidth(true);
 
         this.dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        this.dialogContainer.setPadding(new Insets(10, 10, 10, 10));
+        this.dialogContainer.setPadding(new Insets(10.0, 10.0, 10.0, 10.0));
+        this.dialogContainer.setSpacing(10.0);
 
         this.userInput.setPrefWidth(325.0);
 
@@ -106,6 +108,13 @@ public class Duke extends Application {
         });
 
         this.dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        //Step 4. Print welcome message.
+        for (String line : this.getWelcomeText(false).split("\n")) {
+            this.dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialogBox(line, this.dukeImageSrc)
+            );
+        }
     }
 
     private Label getDialogLabel(String text) {
@@ -125,10 +134,33 @@ public class Duke extends Application {
                 DialogBox.getDukeDialogBox(dukeText, this.dukeImageSrc)
         );
         this.userInput.clear();
+        if (dukeText.equals("Bye. Hope to see you again soon!\n")) {
+            Platform.exit();
+            System.exit(0);
+        }
     }
 
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        String response = null;
+        try {
+            response = Parser.processCommand(input, this.tasks);
+        } catch (Exception e) {
+            String errorText = "";
+            errorText += Ui.printError(e);
+            response = errorText;
+        }
+        return response;
+    }
+
+    private String getWelcomeText(boolean withLogo) {
+        String welcomeText = "";
+        if (withLogo) {
+            welcomeText += Ui.printLogo();
+            welcomeText += Ui.printEmptyLine();
+        }
+        welcomeText += Ui.printLine("Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?");
+        welcomeText += Ui.printLine("Sou, watashi desu!");
+        return welcomeText;
     }
 
     /**
@@ -136,23 +168,25 @@ public class Duke extends Application {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        Ui.printHorizontalLine();
-        Ui.printEmptyLine();
-        Ui.printLogo();
-        Ui.printEmptyLine();
-        Ui.printLine("Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?");
-        Ui.printLine("Sou, watashi desu!");
-        Ui.printHorizontalLine();
-        Ui.printEmptyLine();
+        System.out.print(
+                Ui.printHorizontalLine()
+                        + Ui.printEmptyLine()
+                        + this.getWelcomeText(true)
+                        + Ui.printHorizontalLine()
+                        + Ui.printEmptyLine()
+        );
         for (; ; ) {
             try {
-                if (!Parser.processCommand(sc.nextLine(), this.tasks)) {
+                String response = Parser.processCommand(sc.nextLine(), this.tasks);
+                if (response.equals("")) {
                     break;
                 }
+                System.out.print(response);
             } catch (Exception e) {
-                Ui.printError(e);
-                Ui.printHorizontalLine();
-                Ui.printEmptyLine();
+                String errorText = "";
+                errorText += Ui.printError(e);
+                errorText += Ui.printEmptyLine();
+                System.out.print(errorText);
             }
         }
         sc.close();

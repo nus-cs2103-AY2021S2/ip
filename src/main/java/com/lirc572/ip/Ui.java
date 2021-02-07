@@ -19,31 +19,33 @@ public class Ui {
      *
      * @param line The line to print.
      */
-    public static void printLine(String line) {
-        System.out.println("     " + line);
+    public static String printLine(String line) {
+        return line + "\n";
     }
 
     /**
      * Prints a horizontal line.
      */
-    public static void printHorizontalLine() {
-        System.out.println("    " + "____________________________________________________________");
+    public static String printHorizontalLine() {
+        return "________________________________________\n";
     }
 
     /**
      * Prints an empty line.
      */
-    public static void printEmptyLine() {
-        System.out.println();
+    public static String printEmptyLine() {
+        return "\n";
     }
 
     /**
      * Prints the Duke logo.
      */
-    public static void printLogo() {
+    public static String printLogo() {
+        String res = "";
         for (String line : logo.split("\n")) {
-            printLine(line);
+            res += printLine(line);
         }
+        return res;
     }
 
     /**
@@ -51,8 +53,8 @@ public class Ui {
      *
      * @param errorMessage The error message to print.
      */
-    public static void printError(String errorMessage) {
-        printLine("Error: " + errorMessage);
+    public static String printError(String errorMessage) {
+        return printLine("Error: " + errorMessage);
     }
 
     /**
@@ -60,7 +62,7 @@ public class Ui {
      *
      * @param e The Exception whose error message is to be printed.
      */
-    public static void printError(Exception e) {
-        printError(e.getMessage());
+    public static String printError(Exception e) {
+        return printError(e.getMessage());
     }
 }

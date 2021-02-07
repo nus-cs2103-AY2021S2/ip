@@ -37,7 +37,7 @@ public class DialogBox extends HBox {
         this.imageCircle.setEffect(new DropShadow(15.0, Color.BLACK));
 
         this.textLabel.setWrapText(true);
-        this.textLabel.setPadding(new Insets(0, 10, 0, 10));
+        this.textLabel.setPadding(new Insets(0.0, 10.0, 0.0, 10.0));
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(this.textLabel, this.imageCircle);
