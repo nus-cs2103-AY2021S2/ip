@@ -8,22 +8,10 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        platform: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.platform }}
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Set up repository
-        uses: actions/checkout@master
-
-      - name: Set up repository
-        uses: actions/checkout@master
-        with:
-          ref: master
-
-      - name: Merge to master
-        run: git checkout --progress --force ${{ github.sha }}
+      - uses: actions/checkout@v2
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -38,17 +26,8 @@ jobs:
         run: ./gradlew check
 
       - name: Perform IO redirection test (*NIX)
-        if: runner.os == 'Linux'
         working-directory:  ${{ github.workspace }}/text-ui-test
-        run: ./runtest.sh
-
-      - name: Perform IO redirection test (MacOS)
-        if: always() && runner.os == 'macOS'
-        working-directory:  ${{ github.workspace }}/text-ui-test
-        run: ./runtest.sh
-
-      - name: Perform IO redirection test (Windows)
-        if: always() && runner.os == 'Windows'
-        working-directory:  ${{ github.workspace }}/text-ui-test
-        shell: cmd
-        run: runtest.bat
+        run: |
+          apt-get update
+          apt-get install -y dos2unix
+          ./runtest.sh
