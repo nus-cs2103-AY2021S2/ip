@@ -40,7 +40,8 @@ public class Storage {
         Path path = Path.of(this.filePath);
         if (Files.notExists(path)) {
             this.createFile();
-            throw new DukeException("File path does not exist! A new file has been created according to given file path.");
+            throw new DukeException("File path does not exist! "
+                    + "A new file has been created according to given file path.");
         } else {
             return this.textFileToArrayList();
         }
@@ -96,11 +97,13 @@ public class Storage {
                 taskList.addTask(TaskType.TODO, nextLine.substring(7), true, this);
             } else if (taskTypeLetter.equals("D")) {
                 String[] nextLineArr = nextLine.substring(7).split(" \\(by: ");
-                String description = nextLineArr[0] + " /by " + nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")"));
+                String description = nextLineArr[0] + " /by "
+                        + nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")"));
                 taskList.addTask(TaskType.DEADLINE, description, true, this);
             } else if (taskTypeLetter.equals("E")) {
                 String[] nextLineArr = nextLine.substring(7).split(" \\(at: ");
-                String description = nextLineArr[0] + " /at " + nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")"));
+                String description = nextLineArr[0] + " /at "
+                        + nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")"));
                 taskList.addTask(TaskType.EVENT, description, true, this);
             }
         }

@@ -17,13 +17,13 @@ import java.util.regex.Pattern;
  * Represents a list of tasks.
  */
 public class TaskList {
-    protected List<Task> taskList;
+    protected List<Task> tasks;
 
     /**
      * Creates a new instance of <code>TaskList</code> when no existing tasks are available.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @param existingTaskList TaskList with existing tasks.
      */
     public TaskList(TaskList existingTaskList) {
-        this.taskList = existingTaskList.taskList;
+        this.tasks = existingTaskList.tasks;
     }
 
     /**
@@ -42,11 +42,11 @@ public class TaskList {
      * @return Task for the given task number.
      */
     public Task getTask(int taskNo) {
-        return this.taskList.get(taskNo - 1);
+        return this.tasks.get(taskNo - 1);
     }
 
     public int getTaskListSize() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     /**
@@ -59,7 +59,8 @@ public class TaskList {
      * @throws DukeException If description is not given in the correct format.
      * @throws IOException If there are any input and output issues.
      */
-    public void addTask(TaskType taskType, String description, boolean isReadingFile, Storage storage) throws DukeException, IOException {
+    public void addTask(TaskType taskType, String description, boolean isReadingFile, Storage storage)
+            throws DukeException, IOException {
         Task newTask = new Task(description);
         if (taskType == TaskType.TODO) {
             newTask = new ToDoTask(description);
@@ -92,12 +93,12 @@ public class TaskList {
 
             newTask = new EventTask(descriptionArr[0], descriptionArr[1]);
         }
-        this.taskList.add(newTask);
+        this.tasks.add(newTask);
         if (!isReadingFile) {
             storage.appendToFile("data/duke.txt", newTask.toString());
             System.out.println("Got it. I've added this task: \n"
                     + "  " + newTask + "\n"
-                    + "Now you have " + this.taskList.size() + " tasks in the list.");
+                    + "Now you have " + this.tasks.size() + " tasks in the list.");
         }
     }
 
@@ -109,17 +110,17 @@ public class TaskList {
      * @throws DukeException If task number does not exist.
      */
     public void deleteTask(int taskNo, Storage storage) throws DukeException, IOException {
-        if (taskNo > this.taskList.size()) {
+        if (taskNo > this.tasks.size()) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
         }
 
         System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + this.taskList.get(taskNo - 1));
-        this.taskList.remove(taskNo - 1);
-        String taskOrTasks = (this.taskList.size() <= 1)
+        System.out.println("  " + this.tasks.get(taskNo - 1));
+        this.tasks.remove(taskNo - 1);
+        String taskOrTasks = (this.tasks.size() <= 1)
                 ? " task"
                 : " tasks";
-        System.out.println("Now you have " + this.taskList.size() + taskOrTasks + " in the list.");
+        System.out.println("Now you have " + this.tasks.size() + taskOrTasks + " in the list.");
         FileManager.deleteLine("data/duke.txt", taskNo, storage);
 
     }
@@ -128,12 +129,12 @@ public class TaskList {
      * Prints tasks in task list.
      */
     public void printTaskList() {
-        if (this.taskList.size() == 0) {
+        if (this.tasks.size() == 0) {
             System.out.println("There are currently no tasks in your list!");
         } else {
             System.out.println("Here are the tasks in your list:");
-            for (int i = 1; i <= this.taskList.size(); i++) {
-                System.out.println(i + "." + this.taskList.get(i - 1));
+            for (int i = 1; i <= this.tasks.size(); i++) {
+                System.out.println(i + "." + this.tasks.get(i - 1));
             }
         }
     }
@@ -144,16 +145,16 @@ public class TaskList {
      * @param date Date to be matched to tasks.
      */
     public void printTasksOn(LocalDate date) {
-        for (int i = 0; i < this.taskList.size(); i++) {
-            if (taskList.get(i) instanceof DeadlineTask) {
-                LocalDate deadlineDate = ((DeadlineTask) taskList.get(i)).getDeadlineDate();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (tasks.get(i) instanceof DeadlineTask) {
+                LocalDate deadlineDate = ((DeadlineTask) tasks.get(i)).getDeadlineDate();
                 if (deadlineDate.compareTo(date) == 0) {
-                    System.out.println(taskList.get(i));
+                    System.out.println(tasks.get(i));
                 }
-            } else if (taskList.get(i) instanceof EventTask) {
-                LocalDate eventDateDate = ((EventTask) taskList.get(i)).getEventDateDate();
+            } else if (tasks.get(i) instanceof EventTask) {
+                LocalDate eventDateDate = ((EventTask) tasks.get(i)).getEventDateDate();
                 if (eventDateDate.compareTo(date) == 0) {
-                    System.out.println(taskList.get(i));
+                    System.out.println(tasks.get(i));
                 }
             }
         }
