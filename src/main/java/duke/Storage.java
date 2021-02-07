@@ -22,12 +22,12 @@ public class Storage {
     }
 
     public List<Task> loadTasksFromFile() throws DukeException {
-        List<Task> taskList = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         try {
             if (!this.file.exists()) {
                 file.getParentFile().mkdir();
                 file.createNewFile();
-                return taskList;
+                return tasks;
             }
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
@@ -55,13 +55,13 @@ public class Storage {
                     task.setDone(true);
                 }
 
-                taskList.add(task);
+                tasks.add(task);
             }
 
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-        return taskList;
+        return tasks;
     }
 
     public void saveTasksToFile(TaskList tasks) throws DukeException {

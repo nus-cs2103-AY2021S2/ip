@@ -4,9 +4,9 @@ import duke.command.Command;
 import duke.task.TaskList;
 
 public class Duke {
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
 
     public Duke(String pathname) {
         ui = new Ui();
