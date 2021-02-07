@@ -35,7 +35,7 @@ public class Task {
     /**
      * Checks if a task is done
      *
-     * @return
+     * @return status of task
      */
     public boolean isDone() {
         return this.done;
@@ -44,7 +44,7 @@ public class Task {
     /**
      * Returns the full task
      *
-     * @return
+     * @return entire task/command
      */
     public String getTaskName() {
         return this.task;
@@ -53,7 +53,7 @@ public class Task {
     /**
      * Gets only the task name
      *
-     * @return
+     * @return just the task name
      */
     public String getName() {
         return divideCommand[1] + " " + divideCommand[2];
@@ -61,9 +61,9 @@ public class Task {
 
     /**
      * returns the date of task to be completed
-     * applicable to deadlines and events
+     * applicable to deadlines and events tasks
      *
-     * @return
+     * @return the date of the task
      */
     public LocalDate getDate() {
         String StringDate = "";
@@ -74,6 +74,11 @@ public class Task {
         return LocalDate.parse(StringDate);
     }
 
+    /**
+     * Formats the date according to the specification
+     *
+     * @return the formatted date
+     */
     public String getDateFormat() {
         return getDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
