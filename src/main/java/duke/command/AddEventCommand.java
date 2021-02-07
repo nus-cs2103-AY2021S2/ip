@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class AddEventCommand extends Command {
-    private Event event;
-
     private static final String EMPTY_EVENT_ERROR_MESSAGE = "You can't create an empty event!";
     private static final String NO_DATETIME_ERROR_MESSAGE = "You can't add an event without a datetime!";
-    private static final String WRONG_DATETIME_FORMAT_ERROR_MESSAGE = "Please follow the datetime format of dd/mm/yyyy hhmm.";
+    private static final String WRONG_DATETIME_FORMAT_ERROR_MESSAGE =
+            "Please follow the datetime format of dd/mm/yyyy hhmm.";
+
+    private Event event;
 
     public AddEventCommand(String details) throws DukeException {
         try {

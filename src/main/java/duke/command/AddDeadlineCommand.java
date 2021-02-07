@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class AddDeadlineCommand extends Command {
-    private Deadline deadline;
-
     private static final String EMPTY_DEADLINE_ERROR_MESSAGE = "You can't create an empty deadline!";
     private static final String NO_DATETIME_ERROR_MESSAGE = "You can't add a deadline without a datetime!";
-    private static final String WRONG_DATETIME_FORMAT_ERROR_MESSAGE = "Please follow the datetime format of dd/mm/yyyy hhmm.";
+    private static final String WRONG_DATETIME_FORMAT_ERROR_MESSAGE =
+            "Please follow the datetime format of dd/mm/yyyy hhmm.";
+
+    private Deadline deadline;
 
     public AddDeadlineCommand(String details) throws DukeException {
         try {

@@ -7,11 +7,11 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class MarkTaskAsDoneCommand extends Command {
-    private int taskIndex;
-
     private static final String NO_TASK_INDEX_ERROR_MESSAGE = "I'm not sure which task you want to mark as done!";
     private static final String INDEX_NOT_NUMBER_ERROR_MESSAGE = "I can only find a task with its index number.";
     private static final String INDEX_OOB_ERROR_MESSAGE = "I cannot find the task you are referring to.";
+
+    private int taskIndex;
 
     public MarkTaskAsDoneCommand(String taskIndex) throws DukeException {
         if (taskIndex.isBlank()) {

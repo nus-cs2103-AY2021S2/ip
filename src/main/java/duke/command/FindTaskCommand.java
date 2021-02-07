@@ -6,9 +6,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class FindTaskCommand extends Command {
-    private String keyword;
-
     private static final String NO_KEYWORD_ERROR_MESSAGE = "I can't find a ask without you giving me a keyword.";
+
+    private String keyword;
 
     public FindTaskCommand(String keyword) throws DukeException {
         if (keyword.isBlank()) {

@@ -46,6 +46,11 @@ public class Ui {
         return ERROR_START + message;
     }
 
+    /**
+     * Combines messages to a single string.
+     *
+     * @return Combined message.
+     */
     public String combineMessages(String... messages) {
         StringBuilder sb = new StringBuilder();
         for (String message : messages) {

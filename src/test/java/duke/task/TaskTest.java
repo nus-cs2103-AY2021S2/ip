@@ -2,7 +2,9 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskTest {
 
@@ -26,7 +28,7 @@ class TaskTest {
     }
 
     @Test
-    void getStatusIcon_DoneTask() {
+    void getStatusIcon_doneTask() {
         Task task = new Task("task");
         task.markAsDone();
         assertEquals("\u2718", task.getStatusIcon());

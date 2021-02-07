@@ -7,9 +7,9 @@ import duke.task.Todo;
 import duke.ui.Ui;
 
 public class AddTodoCommand extends Command {
-    private Todo todo;
-
     private static final String EMPTY_TODO_ERROR_MESSAGE = "You can't add an empty todo!";
+
+    private Todo todo;
 
     public AddTodoCommand(String details) throws DukeException {
         if (details.isBlank()) {

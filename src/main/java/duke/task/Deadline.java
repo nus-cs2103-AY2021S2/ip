@@ -26,8 +26,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return "D | " + (isDone ? "1" : "0") +
-                " | " + description + " | " + Parser.parseDateTimeToString(by);
+        return "D | " + (isDone ? "1" : "0")
+                + " | " + description + " | " + Parser.parseDateTimeToString(by);
     }
 
     /**
