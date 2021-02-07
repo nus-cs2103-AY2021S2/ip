@@ -7,6 +7,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -32,6 +33,8 @@ public class Parser {
             return new DoneCommand(userInputArr[1]);
         case DELETE:
             return new DeleteCommand(userInputArr[1]);
+        case FIND:
+            return new FindCommand(userInputArr[1]);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

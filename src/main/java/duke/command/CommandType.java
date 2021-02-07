@@ -10,7 +10,8 @@ public enum CommandType {
     BYE("bye"),
     LIST("list"),
     DONE("done"),
-    DELETE("delete");
+    DELETE("delete"),
+    FIND("find");
 
     private final String label;
     private static final Map<String, CommandType> BY_LABEL = new HashMap<>();
