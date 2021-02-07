@@ -1,13 +1,13 @@
 package duke.textUi;
 
 import duke.exception.DukeException;
+import duke.register.Parser;
 import duke.register.Storage;
 import duke.register.Ui;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TaskList;
 import duke.task.TodoTask;
-import duke.register.Parser;
 
 /**
  * The main class where the duke text ui is run

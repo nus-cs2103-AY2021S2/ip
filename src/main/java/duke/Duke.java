@@ -1,12 +1,9 @@
 package duke;
 
 import duke.gui.Main;
-
 import duke.register.Parser;
 import duke.register.Storage;
-
 import duke.task.*;
-
 import javafx.application.Application;
 
 /**
