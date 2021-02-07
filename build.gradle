@@ -49,7 +49,7 @@ application {
 
 shadowJar {
     archiveBaseName.set("ekud")
-    archiveClassifier.set("v0.1")
+    archiveClassifier.set("v0.2")
 }
 
 checkstyle {
