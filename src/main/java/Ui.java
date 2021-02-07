@@ -1,10 +1,10 @@
 /**
- * Class that control how Duke interacts with user.
+ * A class that control how Duke interacts with user.
  */
 public class Ui {
 
     /**
-     * Show a message with an additional newline
+     * Return a message with an additional newline
      * @param message Message wanted to be shown
      */
     public static String showMessage(String message) {
@@ -12,7 +12,7 @@ public class Ui {
     }
 
     /**
-     * Welcome message when starting Duke
+     * Returns a welcome message when starting Duke
      */
 
     public static String getWelcomeMessage() {
@@ -26,7 +26,7 @@ public class Ui {
     }
 
     /**
-     * Closing message when closing Duke
+     * Returns a closing message when closing Duke
      */
     public static String doBye() {
         return "Bye. Hope to see you again soon!\n";
@@ -34,7 +34,7 @@ public class Ui {
 
 
     /**
-     * Message when finishing a Task
+     * Returns a message when finishing a Task
      * @param message message of finishing a task
      */
     public static String finishTaskMessage(String message) {
@@ -42,7 +42,7 @@ public class Ui {
     }
 
     /**
-     * Message when deleting a Task
+     * Returns a message when deleting a Task
      * @param message message of deleting a task
      * @param newSize new size of the TaskList
      */
@@ -52,7 +52,7 @@ public class Ui {
     }
 
     /**
-     * Message when adding a Task
+     * Returns a message when adding a Task
      * @param message messsage of adding a task
      * @param newSize new size of the TaskList
      */

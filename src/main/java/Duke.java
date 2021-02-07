@@ -17,19 +17,12 @@ public class Duke {
             String parsedCommand = this.parser.getCommand();
             String description = this.parser.getDescription();
             String deadline = this.parser.getDeadLine();
-            if (parsedCommand.equals("list")) {
-                assert(description.equals(""));
-                output = taskList.iterateList();
-            } else if (parsedCommand.equals("done")) {
-                output = taskList.finishATask(description);
-            } else if (parsedCommand.equals("delete")) {
-                output = taskList.deleteATask(description);
-            } else if (parsedCommand.equals("find")) {
-                output = taskList.findTasks(description);
-            } else {
+            output = processCommand(parsedCommand, description);
+            if (output.equals("")){
                 Task task = processTask(parsedCommand, description, deadline);
                 output = taskList.addTask(task);
             }
+            return output;
         } catch (DukeException e) {
             output = Ui.showMessage(e.getMessage());
         } catch (DukeExceptionDeadline e) {
@@ -66,13 +59,29 @@ public class Duke {
      */
     public static Task processTask(String command, String description, String deadline)
             throws DukeException, DukeExceptionDeadline {
-        if (command.equals("todo")) {
-            return new Todo(description);
-        } else if (command.equals("deadline")) {
-            return new Deadline(description, deadline);
-        } else if (command.equals("event")) {
-            return new Event(description, deadline);
+        switch (command){
+            case "todo":
+                return new Todo(description);
+            case "deadline":
+                return new Deadline(description, deadline);
+            case "event":
+                return new Event(description, deadline);
         }
         throw new DukeException("Invalid Command");
+    }
+
+    public String processCommand(String command, String description) throws DukeException {
+        switch (command){
+            case "list":
+                assert (description.equals(""));
+                return taskList.iterateList();
+            case "done":
+                return taskList.finishATask(description);
+            case "delete":
+                return taskList.deleteATask(description);
+            case "find":
+                return taskList.findTasks(description);
+        }
+        return "";
     }
 }

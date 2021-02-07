@@ -41,7 +41,7 @@ public class TaskList {
     }
 
     /**
-     * Set a task to be done
+     * Set a task to be done and ask Ui to print the completion
      * @param input The String representation of the index of the task
      * @throws DukeException Index out of bound
      */
@@ -59,7 +59,7 @@ public class TaskList {
     }
 
     /**
-     * Delete a task
+     * Delete a task and ask Ui to print the completion
      * @param input The String representation of the index of the task
      * @throws DukeException Index out of bound
      */
@@ -79,7 +79,7 @@ public class TaskList {
     }
 
     /**
-     * Add task to the current TaskList
+     * Add task to the current TaskList and ask Ui to print the completion
      * @param task Task that is going to be added
      */
     public String addTask(Task task) {
@@ -88,7 +88,7 @@ public class TaskList {
     }
 
     /**
-     * Finding Tasks that match the keyword
+     * Finding Tasks that match the keyword and ask Ui to print them
      * @param keyword Keyword to find in list of Tasks
      */
     public String findTasks(String keyword) {
