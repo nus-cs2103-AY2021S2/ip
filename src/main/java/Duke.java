@@ -121,7 +121,7 @@ public class Duke {
                     command = new emptyAdd(input);
                     commands.put(ctr, command);
                     System.out.println(spacer
-                            + "Mlem I've added a new command with a Ded-line: \n"
+                            + "Much excites! I've added a new command: \n"
                             + commands.get(ctr)
                             + "\n"
                             + "Now I can do a total of "
