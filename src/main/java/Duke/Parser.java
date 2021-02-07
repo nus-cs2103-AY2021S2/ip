@@ -29,9 +29,11 @@ public class Parser {
      * @throws InvalidCommandException is thrown when there is an error related to unknown command
      */
     void invalidCommandChecker(String taskType) throws InvalidCommandException {
-        if (!(taskType.equals("todo") || taskType.equals("done") || taskType.equals("list") || taskType.equals("event")
-                || taskType.equals("deadline") || taskType.equals("delete") || taskType.equals("bye")
-                || taskType.equals("find"))) {
+        boolean isATask = taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event");
+        boolean isACommand = taskType.equals("done") || taskType.equals("list")
+                || taskType.equals("delete") || taskType.equals("find");
+
+        if (!(isATask || isACommand)) {
             throw new InvalidCommandException("Sorry, I don't know what that means...");
         }
     }
@@ -82,7 +84,21 @@ public class Parser {
         String taskType = tokens[0];
 
         invalidCommandChecker(taskType);
+        return getCommandType(tokens, taskType);
+    }
 
+    /**
+     * Returns a command after making sense of the String array of tokens
+     *
+     * @param tokens   String array that represents the full command
+     * @param taskType Part of the command
+     * @return A command that represents the string array of tokens
+     * @throws EmptyDescriptionException   An exception that occurs when there is an empty description
+     * @throws InvalidDescriptionException An exception that occurs when there is an invalid description
+     * @throws InvalidCommandException     An exception that occurs when there is an invalid command
+     */
+    private Command getCommandType(String[] tokens, String taskType) throws EmptyDescriptionException,
+            InvalidDescriptionException, InvalidCommandException {
         switch (taskType) {
         case "list": {
             return new PrintListCommand();
@@ -161,11 +177,8 @@ public class Parser {
 
             return new FindCommand(taskInfo);
         }
-        case "bye": {
-            return new ExitCommand();
-        }
         default: {
-            return null;
+            throw new InvalidCommandException("Sorry, I don't know what that means...");
         }
         }
     }

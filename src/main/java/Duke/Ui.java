@@ -50,20 +50,18 @@ public class Ui {
      * @return String of welcome message
      */
     public String showWelcome() {
-        String message = "Hi! I'm Timmy!\nWhat can Timmy note down for you today?";
-        message = message + "\nPlease type in any of these format!" + "\ntodo [title]"
-                + "\nevent [title] /at [yyyy-mm-dd] [HH:MM]" + "\ndeadline [title] /by [yyyy-mm-dd] [HH:MM]"
-                + "\nlist" + "\ndelete [index]" + "\ndone [index]";
-        return message;
-    }
+        String introductionMessage = "Hi! I'm Timmy!\nWhat can Timmy note down for you today?";
+        String displayFormatMessage = "\nPlease type in any of these format!";
+        String displayToDoFormat = "\ntodo [title]";
+        String displayEventFormat = "\nevent [title] /at [yyyy-mm-dd] [HH:MM]";
+        String displayDeadlineFormat = "\ndeadline [title] /by [yyyy-mm-dd] [HH:MM]";
+        String displayListFormat = "\nlist";
+        String displayDeleteFormat = "\ndelete [index]";
+        String displayDoneFormat = "\ndone [index]";
 
-    /**
-     * To output an exit message
-     *
-     * @return String of an exit message
-     */
-    public String showExit() {
-        return "Bye! Hope to see you again!";
+        return introductionMessage + displayFormatMessage + displayToDoFormat
+                + displayEventFormat + displayDeadlineFormat
+                + displayListFormat + displayDeleteFormat + displayDoneFormat;
     }
 
     /**
@@ -73,15 +71,14 @@ public class Ui {
      * @return String to consists of <code>Duke.Tasks.Task</code> in an ArrayList
      */
     public String printList(TaskList tasklist) {
-        StringBuilder message = new StringBuilder("Here are the tasks in your list:\n");
-
+        StringBuilder listStringBuilder = new StringBuilder("Here are the tasks in your list:\n");
         ArrayList<Task> tasks = tasklist.getList();
 
         for (int j = 0; j < tasks.size(); j++) {
-            message.append(j + 1).append(".").append(tasks.get(j).toString()).append("\n");
+            listStringBuilder.append(j + 1).append(".").append(tasks.get(j).toString()).append("\n");
         }
 
-        return message.toString();
+        return listStringBuilder.toString();
     }
 
     /**
@@ -102,10 +99,13 @@ public class Ui {
      * @return String that consists of deleted tasks
      */
     public String showDeleteTask(TaskList tasklist, int taskIndex) {
-        String message = "Ok! I've removed this task:\n" + tasklist.getList().get(taskIndex).toString() + "\n";
-        message = message + "Currently, you have " + (tasklist.getList().size() - 1) + " task(s) in the list!";
+        ArrayList<Task> list = tasklist.getList();
+        int size = list.size();
+        String taskName = list.get(taskIndex).toString();
+        String displayTaskName = "Ok! I've removed this task:\n" + taskName + "\n";
+        String displayLeftoverTasks =  "Currently, you have " + (size - 1) + " task(s) in the list!";
 
-        return message;
+        return displayTaskName + displayLeftoverTasks;
     }
 
     /**
@@ -115,9 +115,12 @@ public class Ui {
      * @return String that consists of the task added
      */
     public String showAddTask(TaskList tasklist) {
-        String message = "Ok! I've added this task:\n" + tasklist.getList().get(tasklist.getList().size() - 1).toString();
-        message = message + "\nCurrently, you have " + tasklist.getList().size() + " task(s) in the list!";
+        ArrayList<Task> list = tasklist.getList();
+        int size = list.size();
+        String taskName = list.get(size - 1).toString();
+        String displayTaskName = "Ok! I've added this task:\n" + taskName;
+        String displayLeftoverTasks = "\nCurrently, you have " + size + " task(s) in the list!";
 
-        return message;
+        return displayTaskName + displayLeftoverTasks;
     }
 }
