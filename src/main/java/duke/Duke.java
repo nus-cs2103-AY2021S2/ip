@@ -95,11 +95,12 @@ public class Duke {
                 System.exit(0);
                 break;
             default:
-                response = "unreachable statement";
+                throw new AssertionError(command);
             }
         } catch (DukeException dukeException) {
             response = ui.getDukeExceptionMessage(dukeException);
         }
+        assert response != null;
         return response;
     }
 
