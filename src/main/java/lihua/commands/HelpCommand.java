@@ -6,12 +6,9 @@ import lihua.commons.Messages;
  * Command class representing a command to get help.
  */
 public class HelpCommand extends Command {
-    /** Command word for help command */
-    public static final String COMMAND_WORD = "help";
     /** Command help information for help command */
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows application usage instructions.\n"
-            + "---- Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = "help: Shows application usage instructions.\n"
+            + "---- Example: help";
     private boolean isAskingForHelp = true;
 
     /**

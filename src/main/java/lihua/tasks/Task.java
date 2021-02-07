@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * Set the status of the task; e.g. done or not done
+     * Sets the status of the task; e.g. done or not done
      * @param isDone the status to set to the task
      */
     public void setDone(boolean isDone) {

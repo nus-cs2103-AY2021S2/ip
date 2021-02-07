@@ -7,12 +7,9 @@ import lihua.tasks.Task;
  * Command class representing a command to delete a task.
  */
 public class DeleteCommand extends Command {
-    /** Command word for deleting command */
-    public static final String COMMAND_WORD = "delete";
     /** Command help information for deleting command */
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Remove a specific task from the list.\n"
-            + "---- Example: " + COMMAND_WORD + " [valid index number]";
+    public static final String MESSAGE_USAGE = "delete: Remove a specific task from the list.\n"
+            + "---- Example: delete [valid index number]";
 
     /**
      * Initializes a new DeleteCommand with a task index.

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import lihua.ui.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Lihua using FXML.
  */
 public class Main extends Application {
     private static final String GUI_RESOURCE_PATH = "/view/MainWindow.fxml";

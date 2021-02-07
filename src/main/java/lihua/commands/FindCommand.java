@@ -4,11 +4,8 @@ package lihua.commands;
  * Command class representing a command to find tasks by keyword.
  */
 public class FindCommand extends Command {
-    /** Command word for find command */
-    public static final String COMMAND_WORD = "find";
     /** Command help information for help command */
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": List down all the tasks containing the key word specified.";
+    public static final String MESSAGE_USAGE = "find: List down all the tasks containing the key word specified.";
     /** Keyword to find in tasks */
     private final String keyWord;
 

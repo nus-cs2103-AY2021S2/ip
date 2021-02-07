@@ -6,12 +6,9 @@ import lihua.commons.Messages;
  * Command class representing a command to exit the application.
  */
 public class ExitCommand extends Command {
-    /** Command word for exit command */
-    public static final String COMMAND_WORD = "bye";
     /** Command help information for exit command */
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exit the application. Data will be auto-saved.\n"
-            + "---- Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = "bye: Exit the application. Data will be auto-saved.\n"
+            + "---- Example: bye";
 
     /**
      * Initializes a new ExitCommand.

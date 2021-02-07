@@ -7,13 +7,9 @@ import lihua.tasks.Task;
  * Command class representing a command to get a task done.
  */
 public class DoneCommand extends Command {
-    /** Command word for done command */
-    public static final String COMMAND_WORD = "done";
     /** Command help information for done command */
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Get a specific task done.\n"
-            + "---- Example: " + COMMAND_WORD
-            + " [valid index number]";
+    public static final String MESSAGE_USAGE = "done: Get a specific task done.\n"
+            + "---- Example: done [valid index number]";
 
     public DoneCommand(int targetIndex) {
         super(targetIndex);

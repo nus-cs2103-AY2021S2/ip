@@ -8,14 +8,12 @@ import lihua.tasks.Task;
  * The task might be a todo, a deadline, or an event.
  */
 public class AddCommand extends Command {
-    /** Command word for adding command */
-    public static final String COMMAND_WORD = "todo/deadline/event";
     /** Command help information for adding command */
     public static final String MESSAGE_USAGE =
-            String.format("%s: add a task of a specific type to the task list.\n"
+            "todo/deadline/event: add a task of a specific type to the task list.\n"
                       + "---- Example 1: todo [task name]\n"
                       + "---- Example 2: deadline [task name] /by [yyyy-mm-dd]\n"
-                      + "---- Example 3: event [task name] /at [yyyy-mm-dd]", COMMAND_WORD);
+                      + "---- Example 3: event [task name] /at [yyyy-mm-dd]";
     private final Task toAdd;
 
     /**
