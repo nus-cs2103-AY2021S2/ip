@@ -46,29 +46,30 @@ public class Parser {
             throw new NoTaskDescriptionException();
         }
 
-        AddCommand command;
         if (commandType == CommandType.TODO) {
-            command = new AddTodoCommand(arguments);
+            return new AddTodoCommand(arguments);
+        }
+
+        /* either Deadline or Event */
+        final Matcher matcher = TIMED_TASK_ARGS.matcher(arguments);
+
+        if (!matcher.matches()) {
+            throw new EkudException("Invalid command format!");
+        }
+
+        String dateTimeString = matcher.group("datetime").trim();
+        LocalDateTime dateTime;
+        try {
+            dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new EkudException("Invalid date and time format, use d/M/yyyy HHmm");
+        }
+
+        AddCommand command;
+        if (matcher.group("separator").equals("/by")) {
+            command = new AddDeadlineCommand(matcher.group("description"), dateTime);
         } else {
-            final Matcher matcher = TIMED_TASK_ARGS.matcher(arguments);
-
-            if (!matcher.matches()) {
-                throw new EkudException("Invalid command format!");
-            }
-
-            String dateTimeString = matcher.group("datetime").trim();
-            LocalDateTime dateTime;
-            try {
-                dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-            } catch (DateTimeParseException e) {
-                throw new EkudException("Invalid date and time format, use d/M/yyyy HHmm");
-            }
-
-            if (matcher.group("separator").equals("/by")) {
-                command = new AddDeadlineCommand(matcher.group("description"), dateTime);
-            } else {
-                command = new AddEventCommand(matcher.group("description"), dateTime);
-            }
+            command = new AddEventCommand(matcher.group("description"), dateTime);
         }
 
         assert command != null : "No add command created!";
@@ -91,7 +92,8 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("command");
-        final String arguments = matcher.group("arguments") == null ? "" : matcher.group("arguments").trim();
+        final boolean hasArguments = matcher.group("arguments") == null;
+        final String arguments = hasArguments ? "" : matcher.group("arguments").trim();
 
         CommandType func;
         try {

@@ -92,12 +92,17 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Method that will quit the application after 3 seconds, useful for spawning another thread to not interrupt the
+     * main execution thread.
+     */
     private void countDownAndQuit() {
         try {
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         Platform.exit();
     }
 }
