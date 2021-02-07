@@ -41,6 +41,17 @@ public class TaskList {
         this.tasks.remove(index);
     }
 
+    public TaskList matchTasks(String match) {
+        TaskList output = new TaskList();
+        for (int f = 0; f < this.getSize(); f++) {
+            Task selectedTask = this.getSingleTask(f);
+            if (selectedTask.toString().contains(match)) {
+                output.addTask(selectedTask);
+            }
+        }
+        return output;
+    }
+
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }

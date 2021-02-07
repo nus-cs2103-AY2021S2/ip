@@ -53,11 +53,11 @@ public class Duke {
                 ui.printList(taskList);
                 break;
 
-            case "done":
-                // Possible Error: index provided is out of bounds (NullPointerException
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                Task task = taskList.getSingleTask(index);
-                task.markDone();
+                case "done":
+                    // Possible Error: index provided is out of bounds (NullPointerException
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    Task task = taskList.getSingleTask(index);
+                    task.markDone();
 
                 ui.printDone(task);
                 break;
@@ -73,14 +73,15 @@ public class Duke {
                 }
                 break;
 
-            case "deadline":
-                try {
-                    String name = getEventOrDeadlineName(input);
-                    String by = getEventOrDeadlineAttribute(input);
-                    LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    Deadline deadline = new Deadline(name, date);
-                    taskList.addTask(deadline);
-                    ui.printTask(deadline, taskList.getSize());
+                case "deadline":
+                    try{
+                        String name = getEventOrDeadlineName(input);
+                        String by = getEventOrDeadlineAttribute(input);
+                        LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                        Deadline deadline = new Deadline(name, date);
+                        taskList.addTask(deadline);
+                        ui.printTask(deadline, taskList.getSize());
 
                 } catch (DukeException e) {
                     e.printError("Hmm... You are either lacking a name or /by details!");
@@ -100,16 +101,22 @@ public class Duke {
                 }
                 break;
 
-            case "delete":
-                int i = Integer.parseInt(input.split(" ")[1]) - 1;
-                ui.printDelete(taskList.getSingleTask(i), taskList.getSize()-1);
-                taskList.deleteTask(i);
-                break;
+                case "delete":
+                    int deleteIndex = parser.getDeleteIndex(input);
+                    ui.printDelete(taskList.getSingleTask(deleteIndex), taskList.getSize()-1);
+                    taskList.deleteTask(deleteIndex);
+                    break;
 
-            default:
-                //Does not exactly throw an exception*
-                ui.printUnknownCommand();
-                break;
+                case "find":
+                    String arguments = parser.getArguments(input);
+                    TaskList output = taskList.matchTasks(arguments);
+                    ui.printMatchingTask(output);
+                    break;
+
+                default:
+//                    Does not exactly throw an exception*
+                    ui.printUnknownCommand();
+                    break;
             }
         }
 
@@ -169,7 +176,8 @@ public class Duke {
      */
     public static String getEventOrDeadlineAttribute(String byDate) throws DukeException {
         try {
-            String atBy = byDate.split("/")[1].split(" ",2)[1].trim();
+            //String atBy = byDate.split("/")[1].split(" ",2)[1].trim();
+            String atBy = byDate.split("/by ")[1];
             return atBy;
         } catch (Exception e) {
             throw new DukeException();
