@@ -72,20 +72,20 @@ public class Storage {
     public void parseTasksFromFile(TaskList tasks, String taskString) throws IndexOutOfBoundsException {
         String[] taskStringArr = taskString.split(SAVE_FORMAT_DELIMITER);
         switch (taskStringArr[0].trim()) {
-            case "T":
-                Todo todo = new Todo(taskStringArr[2]);
-                addToTasks(tasks, todo, taskStringArr[1]);
-                break;
-            case "D":
-                Deadline deadline = new Deadline(taskStringArr[2], Parser.parseDateTimeFromFile(taskStringArr[3]));
-                addToTasks(tasks, deadline, taskStringArr[1]);
-                break;
-            case "E":
-                Event event = new Event(taskStringArr[2], Parser.parseDateTimeFromFile(taskStringArr[3]));
-                addToTasks(tasks, event, taskStringArr[1]);
-                break;
-            default:
-                break;
+        case "T":
+            Todo todo = new Todo(taskStringArr[2]);
+            addToTasks(tasks, todo, taskStringArr[1]);
+            break;
+        case "D":
+            Deadline deadline = new Deadline(taskStringArr[2], Parser.parseDateTimeFromFile(taskStringArr[3]));
+            addToTasks(tasks, deadline, taskStringArr[1]);
+            break;
+        case "E":
+            Event event = new Event(taskStringArr[2], Parser.parseDateTimeFromFile(taskStringArr[3]));
+            addToTasks(tasks, event, taskStringArr[1]);
+            break;
+        default:
+            break;
         }
     }
 
