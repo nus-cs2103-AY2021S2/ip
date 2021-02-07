@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
      * <code>Duke.Ui</code> prints the task marked.
      * <code>Duke.Storage</code> helps to mark the task in the text file.
      *
-     * @param tasklist contains the task list and operations to manipulate the list
+     * @param taskList contains the task list and operations to manipulate the list
      * @param ui       deals with interactions with the user
      * @param storage  deals with loading tasks from the file and saving tasks in the file
      * @return String that consists of done message
@@ -31,11 +31,11 @@ public class DoneCommand extends Command {
      * @throws DukeException is thrown when there is an error related to duke
      */
     @Override
-    public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         String message;
-        tasklist.markTask(taskIndex);
-        message = ui.showMarkTask(tasklist.getList().get(taskIndex));
-        storage.writeToFile(tasklist);
+        taskList.markTask(taskIndex);
+        message = ui.showMarkTask(taskList.getList().get(taskIndex));
+        storage.writeToFile(taskList);
 
         return message;
     }

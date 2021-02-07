@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
      * <code>Duke.Ui</code> prints the task deleted.
      * <code>Duke.Storage</code> helps the task to be deleted from the text file.
      *
-     * @param tasklist contains the task list and operations to manipulate the list
+     * @param taskList contains the task list and operations to manipulate the list
      * @param ui       deals with interactions with the user
      * @param storage  deals with loading tasks from the file and saving tasks in the file
      * @return String that consists of deleted task
@@ -31,11 +31,11 @@ public class DeleteCommand extends Command {
      * @throws DukeException is thrown when there is an error related to duke
      */
     @Override
-    public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         String message;
-        message = ui.showDeleteTask(tasklist, taskIndex);
-        tasklist.deleteTask(taskIndex);
-        storage.writeToFile(tasklist);
+        message = ui.showDeleteTask(taskList, taskIndex);
+        taskList.deleteTask(taskIndex);
+        storage.writeToFile(taskList);
 
         return message;
     }

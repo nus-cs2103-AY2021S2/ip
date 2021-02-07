@@ -9,10 +9,10 @@ public class Duke {
 
     private final Ui ui;
     private final Parser parser;
+    boolean isExit = false;
     private Storage storage;
     private TaskList tasklist;
     private String message = "";
-    boolean isExit = false;
 
     public Duke(String filePath) {
         this.ui = new Ui();
