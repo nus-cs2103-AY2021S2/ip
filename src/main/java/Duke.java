@@ -3,6 +3,13 @@ import duke.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A CLI-based task management application that allows users
+ * to add tasks, events and deadlines.
+ *
+ * @author Justin Gnoh
+ * @since 2021-02-06
+ */
 public class Duke {
     private Ui ui;
     private TaskList taskList;
@@ -19,6 +26,11 @@ public class Duke {
         }
     }
 
+    /**
+     * This method runs the programme and is
+     * kept in "busy-waiting" state after each command
+     * until the "bye" command is input.
+     */
     public void run() {
         ui.printIntro();
 
@@ -103,11 +115,26 @@ public class Duke {
 
     }
 
+    /**
+     * This is the main method which runs the Duke
+     * programme and saves date at specified file path.
+     *
+     * @param args Unused.
+     * @return Nothing.
+     */
+
     public static void main(String[] args) {
         // filePath has been hard-coded: /data/<filename>
         new Duke("/data/modoc_tm.txt").run();
     }
 
+    /**
+     * This method gets the name of a Todo task
+     *
+     * @param input This is the user input
+     * @return String This is the Todo task name
+     * @throws DukeException On input error.
+     */
     public static String getTodoName(String input) throws DukeException {
         try {
             String name = input.split(" ",2)[1].trim();
@@ -117,6 +144,13 @@ public class Duke {
         }
     }
 
+    /**
+     * This method gets the Event or Deadline name
+     *
+     * @param input This is the user input
+     * @return String This is the Event or Deadline name
+     * @throws DukeException On input error.
+     */
     public static String getEventOrDeadlineName(String input) throws DukeException {
         try {
             String name = input.split("/")[0].split(" ",2)[1].trim();
@@ -126,6 +160,13 @@ public class Duke {
         }
     }
 
+    /**
+     * This method gets the Event or Deadline attrribute
+     *
+     * @param byDate This is the task attribute
+     * @return String This is the Event or Deadline attribute
+     * @throws DukeException On input error.
+     */
     public static String getEventOrDeadlineAttribute(String byDate) throws DukeException {
         try {
             String atBy = byDate.split("/")[1].split(" ",2)[1].trim();

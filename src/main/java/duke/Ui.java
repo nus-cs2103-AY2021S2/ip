@@ -1,5 +1,13 @@
 package duke;
 
+/**
+ * The Ui class is a collection of print statements
+ * that guides the user's interaction.
+ *
+ * @author  Justin Gnoh
+ * @version 1.0
+ * @since   2021-02-06
+ */
 public class Ui {
 
     public void printIntro() {
@@ -60,6 +68,10 @@ public class Ui {
         System.out.println("---------------------------------------" );
     }
 
+    /**
+     * This method is called when there are not tasks to be loaded
+     * from storage.
+     */
     public void showLoadingError() {
         System.out.println("Existing tasks not found.");
     }
