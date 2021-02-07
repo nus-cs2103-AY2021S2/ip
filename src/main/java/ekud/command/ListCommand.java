@@ -1,10 +1,10 @@
 package ekud.command;
 
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import ekud.common.exception.EkudException;
 import ekud.storage.Storage;
-import ekud.task.Task;
 import ekud.task.TaskList;
 import ekud.task.TaskWithDateTime;
 
@@ -47,30 +47,26 @@ public class ListCommand extends Command {
             }
 
             String reply = "Get working! You need finish these things:";
-            for (int i = 0; i < tasks.size(); i++) {
-                reply = String.join(System.lineSeparator(),
-                        reply,
-                        String.format("  %d. %s", i + 1, tasks.get(i).toString()));
-            }
-            return reply;
+            StringBuilder replyBuilder = new StringBuilder("Get working! You need finish these things:");
+            AtomicInteger atomicIndex = new AtomicInteger(0);
+            tasks.forEach(task -> replyBuilder.append(System.lineSeparator())
+                    .append(String.format("  %d. %s", atomicIndex.incrementAndGet(), task.toString())));
+            return replyBuilder.toString();
         }
 
         // list tasks due on a particular day
-        String reply = "";
-        for (Task task : tasks) {
-            if (task instanceof TaskWithDateTime) {
-                TaskWithDateTime t = (TaskWithDateTime) task;
-                if (t.getDateTime().toLocalDate().equals(date)) {
-                    reply = String.join(System.lineSeparator(),
-                            reply,
-                            t.toString());
-                }
-            }
-        }
-        if (reply.isBlank()) {
+        StringBuilder replyBuilder = new StringBuilder();
+        tasks.stream()
+                .filter(task -> task instanceof TaskWithDateTime)
+                .filter(task -> ((TaskWithDateTime) task).getDateTime().toLocalDate().equals(date))
+                .forEach(task -> replyBuilder.append(System.lineSeparator()).append(task.toString()));
+
+        if (replyBuilder.length() == 0) {
             return "You're free for the day!";
         } else {
-            return "You have these deadlines/events:%n" + reply;
+            return replyBuilder.insert(0, System.lineSeparator())
+                    .insert(0, "You have these deadlines/events:")
+                    .toString();
         }
     }
 }

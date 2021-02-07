@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Stream;
 
 import ekud.common.exception.InvalidTaskIndexException;
 
@@ -150,5 +151,14 @@ public class TaskList implements Iterable<Task> {
      */
     public List<Task> export() {
         return Collections.unmodifiableList(taskArray);
+    }
+
+    /**
+     * Expose the underlying container as a stream.
+     *
+     * @return Stream of the array containing the task list.
+     */
+    public Stream<Task> stream() {
+        return taskArray.stream();
     }
 }
