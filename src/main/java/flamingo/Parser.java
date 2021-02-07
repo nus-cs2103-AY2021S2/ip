@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
  */
 public class Parser {
     protected static Storage storage = Flamingo.getStorage();
-    protected static TaskList tasks = Flamingo.getTasks();
+    protected static TaskList activeTasks = Flamingo.getTasks();
+    protected static ArchivedTaskList archivedTasks = Flamingo.getArchivedTasks();
 
     /**
      * Checks user input and catches exceptions.
@@ -42,43 +43,67 @@ public class Parser {
     public static String startResponse(String userInput) throws Exception {
         if (userInput.equals("bye")) {
             // Save data when user says bye
-            storage.saveData(tasks);
+            storage.saveData(activeTasks);
+            storage.saveArchive(archivedTasks);
             return Ui.sayBye();
         } else if (userInput.equals("list")) {
             checkListValidity();
-            return tasks.listTasks();
+            return activeTasks.listTasks();
         } else if (userInput.contains("done")) {
             int taskNumber = getTaskNumberFrom(userInput);
             checkDoneValidity(taskNumber);
-            return tasks.markAsDone(taskNumber);
+            return activeTasks.markAsDone(taskNumber);
         } else if (userInput.contains("todo")) {
             checkTodoValidity(userInput);
             String todoDescription = getTodoDescriptionFrom(userInput);
             Task currentTask = new Todo(todoDescription);
-            return tasks.addTask(currentTask);
+            return activeTasks.addTask(currentTask);
         } else if (userInput.contains("deadline")) {
             checkDeadlineValidity(userInput);
             Task currentTask = getDeadlineTaskFrom(userInput);
-            return tasks.addTask(currentTask);
+            return activeTasks.addTask(currentTask);
         } else if (userInput.contains("event")) {
             checkEventValidity(userInput);
             Task currentTask = getEventTaskFrom(userInput);
-            return tasks.addTask(currentTask);
+            return activeTasks.addTask(currentTask);
         } else if (userInput.contains("delete")) {
             int taskNumber = getDeleteTaskNumFrom(userInput);
             checkDeleteValidity(taskNumber);
-            return tasks.deleteTask(taskNumber);
+            return activeTasks.deleteTask(taskNumber);
         } else if (userInput.contains("find")) {
             checkFindValidity(userInput);
             String keyword = getKeywordFrom(userInput);
-            return tasks.findTask(keyword);
+            return activeTasks.findTask(keyword);
+        } else if (userInput.equals("archive")) {
+            // View list of archived tasks
+            checkArchiveListValidity();
+            return archivedTasks.listArchivedTasks();
+        } else if (userInput.equals("archive all")) {
+            return activeTasks.archiveAllTasks();
+        } else if (userInput.contains("archive")) {
+            // To archive a task
+            int taskNumber = getArchivedTaskNumFrom(userInput);
+            checkArchiveValidity(taskNumber);
+            return activeTasks.archiveTask(taskNumber);
         } else {
             throw new Exception();
         }
     }
 
+    private static void checkArchiveValidity(int taskNumber) {
+        if (taskNumber <= 0 || taskNumber > TaskList.numTasks) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
     private static void checkListValidity() {
         if (TaskList.numTasks == 0) {
+            throw new NullPointerException();
+        }
+    }
+
+    private static void checkArchiveListValidity() {
+        if (ArchivedTaskList.numArchivedTasks == 0) {
             throw new NullPointerException();
         }
     }
@@ -147,5 +172,9 @@ public class Parser {
         Task task = new Event(userInput.substring(6, temp),
                 LocalDateTime.parse(userInput.substring(temp + 5)));
         return task;
+    }
+
+    private static int getArchivedTaskNumFrom(String userInput) {
+        return Integer.parseInt(userInput.substring(8));
     }
 }

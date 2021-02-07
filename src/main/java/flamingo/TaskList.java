@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     protected static int numTasks;
-    protected ArrayList<Task> tasks;
+    protected static ArrayList<Task> tasks;
 
     /**
      * Creates a task list given existing ArrayList of tasks.
@@ -122,5 +122,34 @@ public class TaskList {
             taskNum++;
         }
         return isMatchFound;
+    }
+
+    /**
+     * Archives a task. The task is moved from list of tasks to the archive of tasks.
+     *
+     * @param num Task number of the task to be archived.
+     * @return String confirming a task has been archived.
+     */
+    public String archiveTask(int num) {
+        Task taskToArchive = tasks.get(num - 1);
+        String taskString = ArchivedTaskList.addTaskToArchive(taskToArchive);
+        tasks.remove(num - 1);
+        numTasks--;
+
+        return taskString;
+    }
+
+    /**
+     * Archives all tasks from the active task list.
+     *
+     * @return String confirming all tasks are archived.
+     */
+    public String archiveAllTasks() {
+        String taskString = ArchivedTaskList.addAllTasksToArchive(tasks);
+        for (int i = 0; i < numTasks; i++) {
+            tasks.remove(0);
+        }
+        numTasks = 0;
+        return taskString;
     }
 }
