@@ -8,6 +8,7 @@ import duke.command.Command;
 import duke.command.DeleteCmd;
 import duke.command.DoneCmd;
 import duke.command.FindCmd;
+import duke.command.HelpCmd;
 import duke.command.ListCmd;
 import duke.exception.DukeException;
 import duke.task.TaskType;
@@ -54,6 +55,9 @@ public class Parser {
             break;
         case "find":
             cmd = new FindCmd(cmdArgs);
+            break;
+        case "help":
+            cmd = new HelpCmd();
             break;
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that command means :-(");
