@@ -47,39 +47,29 @@ application {
     mainClassName = "duke.Launcher"
 }
 
+run {
+    standardInput = System.in
+}
+
 shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    archiveBaseName.set("duke")
+    archiveClassifier.set(null)
 }
 
 checkstyle {
     toolVersion = '8.29'
 }
 
-run {
-    standardInput = System.in
-}
-
 task runCli(type: JavaExec) {
     main = 'duke.Duke'
-    classpath = jar.outputs.files
+    classpath = sourceSets.main.runtimeClasspath
     description = "Runs the CLI version of Duke"
     standardInput = System.in
 }
 
-// TODO: Not working now, will come back to this later
-//task runGui(type: JavaExec) {
-//    jar {
-//        manifest {
-//            attributes(
-//                    'Main-Class': 'duke.Launcher'
-//            )
-//        }
-//    }
-//    mainClassName = 'duke.Launcher'
-//    classpath = jar.outputs.files
-//    description = 'Runs the GUI version of Duke'
-//    standardInput = System.in
-//    checkstyleMain.enabled(false)
-//    checkstyleTest.enabled(false)
-//}
+task runGui(type: JavaExec) {
+    main = 'duke.Launcher'
+    classpath = sourceSets.main.runtimeClasspath
+    description = 'Runs the GUI version of Duke'
+    standardInput = System.in
+}
