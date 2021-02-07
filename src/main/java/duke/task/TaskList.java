@@ -27,14 +27,14 @@ public class TaskList {
     /**
      * Deletes a task from an ArrayList of tasks.
      *
-     * @param taskId index of the task to be deleted.
-     * @param tasks  ArrayList to delete the task from.
+     * @param task  task to be deleted.
+     * @param tasks ArrayList to delete the task from.
      * @return Task that was deleted.
      * @throws DukeException if ArrayList is not initialised or taskId is invalid.
      */
-    public static Task deleteTask(int taskId, ArrayList<Task> tasks) throws DukeException {
+    public static boolean deleteTask(Task task, ArrayList<Task> tasks) throws DukeException {
         try {
-            return tasks.remove(taskId);
+            return tasks.remove(task);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
