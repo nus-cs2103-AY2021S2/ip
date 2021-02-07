@@ -1,4 +1,4 @@
-package bob.task;
+package duke;
 
 /**
  * Represents Todo tasks
@@ -16,10 +16,10 @@ public class Todo extends Task {
     /**
      * Constructor of Todo tasks
      * @param name Name of the task
-     * @param isDone Status of the task
+     * @param done Status of the task
      */
-    public Todo(String name, boolean isDone) {
-        super(name, isDone);
+    public Todo(String name, boolean done) {
+        super(name, done);
     }
 
     /**
@@ -28,7 +28,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        if (this.isDone) {
+        if (this.done) {
             return "[T][X] " + this.name;
         } else {
             return "[T][ ] " + this.name;

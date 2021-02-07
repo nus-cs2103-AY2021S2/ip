@@ -1,4 +1,4 @@
-package bob.task;
+package duke;
 
 import java.time.LocalDate;
 
@@ -24,12 +24,12 @@ public class Deadline extends Task {
     /**
      * Constructor of a deadline
      * @param name Name of the deadline
-     * @param isDone Status of the task
+     * @param done Status of the task
      * @param deadline The deadline of the task
      * @param time The due time of the task
      */
-    public Deadline(String name, boolean isDone, LocalDate deadline, String time) {
-        super(name, isDone);
+    public Deadline(String name, boolean done, LocalDate deadline, String time) {
+        super(name, done);
         this.deadline = deadline;
         this.time = time;
     }
@@ -49,7 +49,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String head = "[D][ ] ";
-        if (this.isDone) {
+        if (this.done) {
             head = "[D][X] ";
         }
         return head + this.name + " (by: " + this.deadline.getMonth() + " "

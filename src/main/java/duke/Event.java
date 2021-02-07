@@ -1,4 +1,4 @@
-package bob.task;
+package duke;
 
 import java.time.LocalDate;
 
@@ -24,12 +24,12 @@ public class Event extends Task {
     /**
      * Constructor of an event
      * @param name Name of the event
-     * @param isDone Status of the Event
+     * @param done Status of the Event
      * @param date Date of the event
      * @param time Time of the event
      */
-    public Event(String name, boolean isDone, LocalDate date, String time) {
-        super(name, isDone);
+    public Event(String name, boolean done, LocalDate date, String time) {
+        super(name, done);
         this.date = date;
         this.time = time;
     }
@@ -49,7 +49,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String head = "[E][ ] ";
-        if (this.isDone) {
+        if (this.done) {
             head = "[E][X] ";
         }
         return head + this.name + " (at: " + this.date.getMonth() + " "
