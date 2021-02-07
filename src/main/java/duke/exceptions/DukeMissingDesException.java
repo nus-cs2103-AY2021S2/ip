@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-public class DukeMissingDesException extends DukeException{
+public class DukeMissingDesException extends DukeException {
     private String keyword;
     private String message;
 

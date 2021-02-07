@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-public class DukeIdkException extends DukeException{
+public class DukeIdkException extends DukeException {
     private String message;
 
     /**

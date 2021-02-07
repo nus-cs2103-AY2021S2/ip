@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-public class DeleteHandler implements CommandHandler{
+public class DeleteHandler implements CommandHandler {
     private int taskNum;
     private String response;
 

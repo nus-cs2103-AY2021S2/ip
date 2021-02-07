@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.Ui;
 import duke.tasks.TaskList;
 
-public class ByeHandler implements CommandHandler{
+public class ByeHandler implements CommandHandler {
     private static String RESPONSE = "Bye. Hope to see you again soon!";
 
     @Override

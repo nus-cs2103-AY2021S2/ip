@@ -4,7 +4,7 @@ import duke.Storage;
 import duke.Ui;
 import duke.tasks.TaskList;
 
-public class ListHandler implements CommandHandler{
+public class ListHandler implements CommandHandler {
     private String response ="";
 
     @Override

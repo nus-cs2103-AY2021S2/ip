@@ -3,7 +3,7 @@ package duke.exceptions;
 /**
  * Custom exception for the Duke app.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     private  String message = "OOPS!";
 
     public DukeException(String s) {

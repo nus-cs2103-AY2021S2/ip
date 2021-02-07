@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-public class DukeDateTimeException extends DukeException{
+public class DukeDateTimeException extends DukeException {
     private String message;
 
     /**

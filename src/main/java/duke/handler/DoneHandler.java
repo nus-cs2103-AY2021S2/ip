@@ -6,7 +6,7 @@ import duke.exceptions.DukeInvalidDesException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-public class DoneHandler implements CommandHandler{
+public class DoneHandler implements CommandHandler {
     private int taskNum;
     private String response;
 
