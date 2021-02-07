@@ -20,8 +20,9 @@ public class Deadline extends Task {
     public Deadline(String description, String date) throws InvalidFormatException, DateTimeParseException {
         super(description, "D");
 
-        if(date.equals(""))
+        if(date.equals("")) {
             throw new InvalidFormatException("Please specify both task description and date/time using /by");
+        }
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 

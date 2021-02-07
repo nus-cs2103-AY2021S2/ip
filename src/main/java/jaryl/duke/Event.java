@@ -20,8 +20,9 @@ public class Event extends Task {
     public Event(String description, String date) throws InvalidFormatException, DateTimeParseException {
         super(description, "E");
 
-        if(date.equals(""))
+        if(date.equals("")) {
             throw new InvalidFormatException("Please specify both task description and date/time using /at");
+        }
 
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
