@@ -12,7 +12,8 @@ import java.util.Scanner;
 class Storage {
 
     /**
-     * Creates a new text file so that the list of tasks can be saved on the hard disk.
+     * Creates a new text file on the local computer so that the list of tasks can be saved on the
+     * hard disk.
      */
     public static void createFile() throws java.io.IOException {
         File textFile = new File("./data/duke.txt");
