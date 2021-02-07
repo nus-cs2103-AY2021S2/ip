@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import duke.Storage;
 
 public class StorageTest {
-    private String path = "./data/JUnitTesting.txt";
-    private File file = new File(path);
+    private final String path = "./data/JUnitTesting.txt";
+    private final File file = new File(path);
 
     @BeforeEach
     void setup() {
@@ -31,7 +31,9 @@ public class StorageTest {
     @Test
     void storeTaskInFile() throws FileNotFoundException {
         Storage storage = Storage.createStorage(path);
-        storage.storeTask("stored task successfully");
+        assert storage != null;
+        String dummyTaskCommand = "stored task successfully";
+        storage.storeTaskCommand(dummyTaskCommand);
         Scanner sc = new Scanner(new File(path));
         String content = "";
         if (sc.hasNextLine()) {

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 /**
  * Parser for Duke commands, with access to its task list, and storage.
  */
@@ -29,9 +31,6 @@ public class Parser {
         command = command.trim();
         try {
             switch (command.split(" ")[0]) {
-            case "bye":
-                response = "Bye. Hope to see you again soon!";
-                break;
             case "list":
                 response = Ui.printList(tasks);
                 break;
@@ -49,7 +48,7 @@ public class Parser {
                 Task newTask = Task.dispatchTaskCreation(command);
                 response = addTask(newTask);
                 if (storage != null) {
-                    storage.storeTask(command);
+                    storage.storeTaskCommand(command);
                 }
                 break;
             case "find":
@@ -67,8 +66,8 @@ public class Parser {
 
     /**
      * Finds and marks task specified in the command string after calling done.
-     * Handles exceptions that include index out of bounds and number format.
-     * Saves to storage.
+     * Handles exceptions that include index out of bounds and number format. Saves
+     * to storage.
      *
      * @param command "done {task number}".
      * @return feedback whether task is marked done successfully or not.
@@ -77,12 +76,12 @@ public class Parser {
         assert command.split(" ")[0].equals("done") : "handleDone() called without done command.";
         String reply;
         try {
-            int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task currentTask = tasks.get(taskNum);
+            int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task currentTask = tasks.get(taskNumber);
             currentTask.markDone();
             reply = "Noice. It's done. \n" + currentTask;
             if (storage != null) {
-                storage.updateTaskDone(taskNum);
+                storage.updateTaskDone(taskNumber);
             }
         } catch (NumberFormatException e) {
             reply = "Please enter a number from 1 to " + tasks.size() + " after done!";
@@ -97,8 +96,8 @@ public class Parser {
     }
 
     /**
-     * Deletes the task in the list. Updates storage.
-     * Handles number format and index out of bounds exceptions.
+     * Deletes the task in the list. Updates storage. Handles number format and
+     * index out of bounds exceptions.
      *
      * @param command "delete {task number}".
      * @return feedback whether the task is deleted successfully.
@@ -107,12 +106,12 @@ public class Parser {
         assert command.split(" ")[0].equals("delete") : "handleDelete() called without delete command.";
         String reply;
         try {
-            int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
-            Task currentTask = tasks.remove(taskNum);
-            reply = "See la. It's deleted. \n" + currentTask
-                    + "\nYou currently have " + tasks.size() + " task(s) in the list.";
+            int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task currentTask = tasks.remove(taskNumber);
+            reply = "See la. It's deleted. \n" + currentTask + "\nYou currently have " + tasks.size()
+                    + " task(s) in the list.";
             if (storage != null) {
-                storage.deleteTask(taskNum);
+                storage.deleteTask(taskNumber);
             }
         } catch (NumberFormatException e) {
             reply = "Please enter a number from 1 to " + tasks.size() + " after delete!";
@@ -134,36 +133,40 @@ public class Parser {
      */
     private String addTask(Task task) {
         tasks.add(task);
-        return "Your task has been added: " + task
-                + "\nYou currently have " + tasks.size() + " task(s) in the list.";
+        return "Your task has been added: " + task + "\nYou currently have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
-     * Loops through the existing TaskList and finds all tasks that match the given argument.
+     * Loops through the existing TaskList and finds all tasks that match the given
+     * argument.
      *
      * @param command "find {string to match}".
      * @return string of tasks matching argument.
      */
     private String handleFind(String command) {
         assert command.split(" ", 2)[0].equals("find") : "handleFind() called without find command.";
-        StringBuilder reply = new StringBuilder();
+        String query;
         try {
-            String query = command.split(" ", 2)[1].trim();
-            boolean isFound = false;
-            for (int i = 1; i <= tasks.size(); i++) {
-                if (tasks.get(i - 1).toString().contains(query)) {
-                    isFound = true;
-                    reply.append(i + "." + tasks.get(i - 1) + "\n");
-                }
-            }
-            if (isFound) {
-                reply.insert(0, "Here are the matching tasks in your list:\n");
-            } else {
-                return "There are no tasks that match \"" + query + "\"!";
-            }
+            query = command.split(" ", 2)[1].trim();
         } catch (IndexOutOfBoundsException e) {
             return "Please type in your query after find!";
         }
-        return reply.toString();
+
+        StringBuilder reply = new StringBuilder();
+        boolean isFound = false;
+        // Loop through tasks to find descriptions matching given argument.
+        for (int i = 1; i <= tasks.size(); i++) {
+            if (tasks.get(i - 1).toString().contains(query)) {
+                isFound = true;
+                reply.append(i + "." + tasks.get(i - 1) + "\n");
+            }
+        }
+
+        if (isFound) {
+            reply.insert(0, "Here are the matching tasks in your list:\n");
+            return reply.toString();
+        } else {
+            return "There are no tasks that match \"" + query + "\"!";
+        }
     }
 }

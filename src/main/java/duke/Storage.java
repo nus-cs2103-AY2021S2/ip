@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.task.Task;
+
 /**
  * Encompasses the abstraction of file operations for Duke as a Storage.
  * Stores tasks as "{isDone ? 1 : 0} {command to create task}" in individual lines.
@@ -44,99 +46,125 @@ public class Storage {
      * found/created.
      */
     public void loadTaskList(TaskList tasks) {
+        Scanner reader;
         try {
-            Scanner reader = new Scanner(file);
-            while (reader.hasNextLine()) {
-                boolean isDone = reader.nextInt() == 1;
-                String command = reader.nextLine();
-                Task newTask = Task.dispatchTaskCreation(command);
-                if (isDone) {
-                    newTask.markDone();
-                }
-                tasks.add(newTask);
-            }
-            reader.close();
+            reader = new Scanner(file);
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
+            return;
         }
+
+        while (reader.hasNextLine()) {
+            boolean isDone = reader.nextInt() == 1;
+            String command = reader.nextLine();
+            Task newTask = Task.dispatchTaskCreation(command);
+            if (isDone) {
+                newTask.markDone();
+            }
+            tasks.add(newTask);
+        }
+        reader.close();
     }
 
     /**
-     * Updates task specified by the lineNumber according to the type of update.
+     * Updates task specified by the targetLineNumber to be done.
      *
-     * @param lineNumber Refers to the zero-indexed line of the task in the file.
+     * @param targetLineNumber Refers to the zero-indexed line of the task in the file to be updated.
      * @throws IndexOutOfBoundsException if the taskNumber is out of range of the lines in the file.
      */
-    public void updateTaskDone(int lineNumber) throws IndexOutOfBoundsException {
+    public void updateTaskDone(int targetLineNumber) throws IndexOutOfBoundsException {
+        Scanner reader;
         try {
-            Scanner reader = new Scanner(file);
-            StringBuffer buffer = new StringBuffer();
-            int currLine = 0;
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                if (currLine == lineNumber) {
-                    line = line.replaceFirst("0", "1");
-                }
+            reader = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        int currentLineNumber = 0;
+        while (reader.hasNextLine()) {
+            String line = reader.nextLine();
+            // Replace first character indicating isDone of task if currentLine is the targetLine.
+            if (currentLineNumber == targetLineNumber) {
+                line = line.replaceFirst("0", "1");
+            }
+            // Append all lines
+            buffer.append(line + "\n");
+            currentLineNumber++;
+        }
+        reader.close();
+
+        if (targetLineNumber >= currentLineNumber || targetLineNumber < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        // lineNumber is valid, then write to file
+        writeCharSequenceToFile(file, buffer);
+    }
+
+    /**
+     * Deletes the task on the line on targetLineNumber in this storage's file.
+     *
+     * @param targetLineNumber Refers to the zero-indexed line of the task in the file to be deleted.
+     * @throws IndexOutOfBoundsException if the taskNumber is out of range of the lines in the file.
+     */
+    public void deleteTask(int targetLineNumber) throws IndexOutOfBoundsException {
+        Scanner reader;
+        try {
+            reader = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        int currentLineNumber = 0;
+        while (reader.hasNextLine()) {
+            String line = reader.nextLine();
+            // Append all lines except the line that matches lineNumber
+            if (currentLineNumber != targetLineNumber) {
                 buffer.append(line + "\n");
-                currLine++;
             }
-            reader.close();
-
-            FileWriter writer = new FileWriter(file);
-            writer.append(buffer);
-            writer.flush();
-
-            if (lineNumber >= currLine || lineNumber < 0) {
-                throw new IndexOutOfBoundsException();
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+            currentLineNumber++;
         }
+        reader.close();
+
+        if (targetLineNumber >= currentLineNumber || targetLineNumber < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        // lineNumber is valid, then write to file.
+        writeCharSequenceToFile(file, buffer);
     }
 
     /**
-     * Deletes the task on the line on lineNumber in this storage's file.
+     * Store the command that creates a task to the back of this storage's file,
+     * such that it can be called to create a Task directly upon an instantiation of storage.
      *
-     * @param lineNumber Refers to the zero-indexed line of the task in the file.
-     * @throws IndexOutOfBoundsException if the taskNumber is out of range of the lines in the file.
+     * @param command Command that creates a Task to be added into the file.
      */
-    public void deleteTask(int lineNumber) throws IndexOutOfBoundsException {
-        try {
-            Scanner reader = new Scanner(file);
-            StringBuffer buffer = new StringBuffer();
-            int lineNum = 0;
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                if (lineNum != lineNumber) {
-                    buffer.append(line + "\n");
-                }
-                lineNum++;
-            }
-            reader.close();
-
-            FileWriter writer = new FileWriter(file);
-            writer.append(buffer);
-            writer.flush();
-
-            if (lineNumber >= lineNum || lineNumber < 0) {
-                throw new IndexOutOfBoundsException();
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Store the task to the back of this storage's file.
-     *
-     * @param task Task to be added into the file.
-     */
-    public void storeTask(String task) throws IndexOutOfBoundsException {
+    public void storeTaskCommand(String command) {
         try {
             FileWriter writer = new FileWriter(file, true);
-            writer.append("0 " + task + "\n");
+            String line = "0 " + command + "\n";
+            writer.append(line);
             writer.flush();
             writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Writes CharSequence to File using a FileWriter.
+     *
+     * @param file File to be written to.
+     * @param chars CharSequence that holds the content to be written to the file.
+     */
+    private void writeCharSequenceToFile(File file, CharSequence chars) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.append(chars);
+            writer.flush();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

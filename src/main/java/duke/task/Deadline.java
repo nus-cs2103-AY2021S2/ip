@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,25 +26,25 @@ public class Deadline extends Task {
         super(description);
         this.inputAfterBy = inputAfterBy;
 
-        try {
-            byDateTime = LocalDateTime.parse(inputAfterBy, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
-        } catch (DateTimeParseException ignored) {
+        String[] dateTimePatterns = {"yyyy-MM-dd kkmm", "dd/MM/yyyy kkmm", "dd-MM-yyyy kkmm"};
+        String[] datePatterns = {"dd-MM-yyyy", "dd/MM/yyyy"};
+
+        // Try parsing inputAfterBy as LocalDateTime
+        for (String dateTimePattern : dateTimePatterns) {
+            try {
+                byDateTime = LocalDateTime.parse(inputAfterBy, DateTimeFormatter.ofPattern(dateTimePattern));
+            } catch (DateTimeParseException e) {
+                System.out.println("Input after \"/by\" not of " + dateTimePattern + " format.");
+            }
         }
-        try {
-            byDateTime = LocalDateTime.parse(inputAfterBy, DateTimeFormatter.ofPattern("dd/MM/yyyy kkmm"));
-        } catch (DateTimeParseException ignored) {
-        }
-        try {
-            byDateTime = LocalDateTime.parse(inputAfterBy, DateTimeFormatter.ofPattern("dd-MM-yyyy kkmm"));
-        } catch (DateTimeParseException ignored) {
-        }
-        try {
-            byDate = LocalDate.parse(inputAfterBy, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        } catch (DateTimeParseException ignored) {
-        }
-        try {
-            byDate = LocalDate.parse(inputAfterBy, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (DateTimeParseException ignored) {
+
+        // Try parsing inputAfterBy as LocalDate
+        for (String datePattern : datePatterns) {
+            try {
+                byDate = LocalDate.parse(inputAfterBy, DateTimeFormatter.ofPattern(datePattern));
+            } catch (DateTimeParseException e) {
+                System.out.println("Input after \"/by\" not of " + datePattern + " format.");
+            }
         }
     }
 
@@ -56,6 +56,7 @@ public class Deadline extends Task {
             return "[D]" + super.toString()
                     + " (by: " + byDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, ha")) + ")";
         } else {
+            // byDate is not null
             return "[D]" + super.toString()
                     + " (by: " + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
         }
