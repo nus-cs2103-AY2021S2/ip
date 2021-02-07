@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+
 import duke.util.Deadline;
 import duke.util.DukeException;
 import duke.util.DukeInputException;
@@ -20,16 +22,16 @@ import javafx.collections.ObservableList;
  * <br>  - Prompt user to save tasklist. Then closes Duke.
  * <br>list
  * <br>  - List out all task
- * <br>done [number]
- * <br>  - Mark selected task as done
+ * <br>done [number(s)]
+ * <br>  - Mark multiple task as done eg. (done 1 2 3)
  * <br>todo [description]
  * <br>  - Add a todo task
  * <br>deadline [description] /by [due date]
  * <br>  - Add a deadline task with a due date (YYYY-MM-DD)
  * <br>event [description] /at [date]
  * <br>  - Add a event task with a date (YYYY-MM-DD)
- * <br>delete [number]
- * <br>  - Delete a task
+ * <br>delete [number(s)]
+ * <br>  - Delete multiple tasks eg. (delete 1 2 3)
  * <br>save
  * <br>  - save checklist to "data/dukeData.txt"
  * <br>load
@@ -48,7 +50,7 @@ public class Duke {
 
     private boolean isWaitingSaveFileResponse = false;
     private boolean isWaitingDeleteTaskResponse = false;
-    private int taskToBeDeleted;
+    private int[] tasksToBeDeleted;
 
     /**
      * Constructor to create Duke object.
@@ -58,11 +60,12 @@ public class Duke {
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
+        tasks = new TaskList();
 
         try {
-            tasks = new TaskList(storage.loadTaskList());
+            tasks.load(storage.loadTaskList());
         } catch (DukeException e) {
-            tasks = new TaskList();
+            // No file loaded..
         }
     }
 
@@ -108,14 +111,12 @@ public class Duke {
             case "event":
                 return addTask(Event.createEvent(args));
             case "delete":
-                taskToBeDeleted = Integer.parseInt(args);
-                isWaitingDeleteTaskResponse = true;
-                return ui.deleteTaskPrompt();
+                return deleteTask(args);
             case "save":
                 storage.saveTaskList(tasks.getList());
                 return ui.displaySaveMessage();
             case "load":
-                tasks = new TaskList(storage.loadTaskList());
+                tasks.load(storage.loadTaskList());
                 return ui.displayLoadMessage();
             case "help":
                 return ui.help();
@@ -133,9 +134,13 @@ public class Duke {
     }
 
     private String completeTask(String num) throws DukeInputException {
-        int taskNum = Integer.parseInt(num);
-        Task t = tasks.completeTask(taskNum - 1);
-        return ui.completeTask(t.toString());
+
+        int[] tasksNum = Arrays.stream(num.split(" "))
+              .mapToInt(x -> Integer.parseInt(x) - 1)
+              .toArray();
+
+        String[] completedTasks = tasks.completeTask(tasksNum);
+        return ui.completeTask(completedTasks);
     }
 
     private String addTask(Task t) {
@@ -150,14 +155,19 @@ public class Duke {
             return ui.displayError(e);
         }
         isWaitingDeleteTaskResponse = false;
+
+
+
         if (s.equals("y")) {
-            Task t;
+            String[] deletedTasks;
+
             try {
-                t = tasks.deleteTask(taskToBeDeleted - 1);
+                deletedTasks = tasks.deleteTask(tasksToBeDeleted);
             } catch (DukeInputException e) {
                 return ui.displayError(e);
             }
-            return ui.deleteTask(t.toString(), tasks.size());
+            return ui.deleteTask(deletedTasks, tasks.size());
+
         } else {
             return ui.abortDelete();
         }
@@ -179,6 +189,15 @@ public class Duke {
         }
         return "shutdownConfirm";
     }
+
+    private String deleteTask(String num) {
+        tasksToBeDeleted = Arrays.stream(num.split(" "))
+                .mapToInt(x -> Integer.parseInt(x) - 1)
+                .toArray();
+        isWaitingDeleteTaskResponse = true;
+        return ui.displayDeleteTaskPrompt(tasksToBeDeleted.length == 1);
+    }
+
 
     /**
      * Returns TaskList.

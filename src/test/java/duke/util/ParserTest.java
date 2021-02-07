@@ -12,10 +12,14 @@ public class ParserTest {
         assertDoesNotThrow(() -> Parser.parseInput("bye"));
         assertDoesNotThrow(() -> Parser.parseInput("list"));
         assertDoesNotThrow(() -> Parser.parseInput("done 1"));
+        assertDoesNotThrow(() -> Parser.parseInput("done 1 2"));
+        assertDoesNotThrow(() -> Parser.parseInput("done 1 2 3"));
         assertDoesNotThrow(() -> Parser.parseInput("todo a"));
         assertDoesNotThrow(() -> Parser.parseInput("deadline a /by 2011-01-01"));
         assertDoesNotThrow(() -> Parser.parseInput("event a /at 2011-01-01"));
         assertDoesNotThrow(() -> Parser.parseInput("delete 1"));
+        assertDoesNotThrow(() -> Parser.parseInput("delete 1 2"));
+        assertDoesNotThrow(() -> Parser.parseInput("delete 1 2 3"));
         assertDoesNotThrow(() -> Parser.parseInput("save"));
         assertDoesNotThrow(() -> Parser.parseInput("load"));
         assertDoesNotThrow(() -> Parser.parseInput("help"));
@@ -36,11 +40,17 @@ public class ParserTest {
         assertThrows(DukeInputException.class, () -> Parser.parseInput("event /at a /at b"));
 
         assertThrows(DukeInputException.class, () -> Parser.parseInput("done"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("done 1 1"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("done 1  2"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("done 1 2  3"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("done a"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("done 1a2"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("done     1"));
 
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("delete 1 1"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("delete 1  2"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("delete 1 2  3"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete a"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete 1a2"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete    1"));

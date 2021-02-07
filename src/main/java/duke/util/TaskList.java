@@ -3,6 +3,7 @@ package duke.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -26,9 +27,11 @@ public class TaskList {
      *
      * @param lst List of tasks.
      */
-    public TaskList(List<Task> lst) {
-        this.lst = FXCollections.observableArrayList(lst);
+    public void load(List<Task> lst) {
+        lst.clear();
+        lst.addAll(lst);
     }
+
 
     /**
      * Adds task to the tasklist.
@@ -38,45 +41,59 @@ public class TaskList {
     }
 
     /**
-     * Deletes task from the tasklist.
+     * Delete tasks from the tasklist.
      *
-     * @param i Index of task to be deleted.
-     * @return Task that has been deleted.
-     * @throws DukeInputException If the given index is out of range.
+     * @param tasksNum Index of tasks to be deleted.
+     * @return Tasks that has been deleted.
+     * @throws DukeInputException If any of given index is out of range.
      */
-    public Task deleteTask(int i) throws DukeInputException {
-        Task t;
+    public String[] deleteTask(int[] tasksNum) throws DukeInputException {
+        assert tasksNum.length != 0;
 
-        try {
-            t = lst.get(i);
-            lst.remove(i);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeInputException(String.format("\"%d\" is an invalid number!", i - 1));
+        for (int i : tasksNum) {
+            if (i < 0 || i >= lst.size()) {
+                throw new DukeInputException(String.format("\"%d\" is an invalid number!", i + 1));
+            }
         }
 
-        return t;
+        List<String> deletedTasks = new ArrayList<>();
+
+        //Remove in descending index to avoid wrong deletion.
+        Arrays.sort(tasksNum);
+        for (int i = tasksNum.length - 1; i >= 0; i--) {
+            Task deletedTask = lst.remove(tasksNum[i]);
+            deletedTasks.add(deletedTask.toString());
+        }
+
+        return deletedTasks.toArray(String[]::new);
     }
 
     /**
-     * Marks task in tasklist as completed.
+     * Mark tasks in tasklist as completed.
      *
-     * @param i Index of task that has been completed.
-     * @return Task that has been completed.
-     * @throws DukeInputException If the given index is out of range.
+     * @param tasksNum Index of tasks that has been completed.
+     * @return Tasks that has been completed.
+     * @throws DukeInputException If any of the given index is out of range.
      */
-    public Task completeTask(int i) throws DukeInputException {
-        Task t;
+    public String[] completeTask(int[] tasksNum) throws DukeInputException {
+        assert tasksNum.length != 0;
 
-        try {
-            t = lst.get(i);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeInputException(String.format("\"%d\" is an invalid number!", i - 1));
+        for (int i : tasksNum) {
+            if (i < 0 || i >= lst.size()) {
+                throw new DukeInputException(String.format("\"%d\" is an invalid number!", i + 1));
+            }
         }
 
-        Task completedTask = t.markDone();
-        lst.set(i, completedTask);
+        List<String> completedTasks = new ArrayList<>();
 
-        return completedTask;
+        for (int i : tasksNum) {
+            Task t = lst.get(i);
+            Task completedTask = t.markDone();
+            lst.set(i, completedTask);
+            completedTasks.add(completedTask.toString());
+        }
+
+        return completedTasks.toArray(String[]::new);
     }
 
     /**

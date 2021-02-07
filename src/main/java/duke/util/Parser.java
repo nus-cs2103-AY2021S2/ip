@@ -2,6 +2,7 @@ package duke.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 /**
  * Parser checks for invalid input.
@@ -27,7 +28,7 @@ public class Parser {
         case "list":
             break;
         case "done":
-            checkValidDone(args);
+            checkValidDoneDelete(args);
             break;
         case "todo":
             checkValidTodo(args);
@@ -39,7 +40,7 @@ public class Parser {
             checkValidEvent(args);
             break;
         case "delete":
-            checkValidDelete(args);
+            checkValidDoneDelete(args);
             break;
         case "save":
             break;
@@ -126,10 +127,18 @@ public class Parser {
         }
     }
 
-    private static void checkValidDone(String s) throws DukeInputException {
-        if (s.length() == 0) {
+    private static void checkValidDoneDelete(String input) throws DukeInputException {
+        if (input.length() == 0) {
             throw new DukeInputException("Please input a task number!");
-        } else {
+        }
+
+        String[] args = input.split(" ");
+
+        for (String s : args) {
+            if (s.isEmpty()) {
+                throw new DukeInputException("Please only leave one space between numbers!");
+            }
+
             try {
                 Integer.parseInt(s);
             } catch (NumberFormatException e) {
@@ -137,17 +146,12 @@ public class Parser {
                         String.format("\"%s\" is not a valid number!", s));
             }
         }
-    }
 
-    private static void checkValidDelete(String s) throws DukeInputException {
-        if (s.length() == 0) {
-            throw new DukeInputException("Please input a task number!");
-        } else {
-            try {
-                Integer.parseInt(s);
-            } catch (NumberFormatException e) {
-                throw new DukeInputException(
-                        String.format("\"%s\" is not a valid number!", s));
+
+        Arrays.sort(args);
+        for (int i = 1; i < args.length; i++) {
+            if (args[i].equals(args[i - 1])) {
+                throw new DukeInputException("Please do not input duplicate numbers!");
             }
         }
     }
