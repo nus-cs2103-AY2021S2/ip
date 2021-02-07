@@ -57,6 +57,7 @@ public class Mike {
 
         try {
             int endIndOfCommand = input.indexOf(' ');
+            assert endIndOfCommand < input.length() : "Input should have a space after the command";
             String commandInput = input.substring(0, endIndOfCommand);
             String descriptionInput = input.substring(endIndOfCommand + 1);
             System.out.println(descriptionInput);
