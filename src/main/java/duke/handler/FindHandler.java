@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.Ui;
 import duke.tasks.TaskList;
 
+/**
+ * FindHandler handles the command find.
+ */
 public class FindHandler implements CommandHandler{
     String findWord = "";
     String response ="";
