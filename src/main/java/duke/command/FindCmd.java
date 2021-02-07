@@ -20,7 +20,7 @@ public class FindCmd extends Command {
 
         HashSet<Task> hs = new HashSet<>();
         for (String word: wordsToFind) {
-            hs.addAll(lst.find(word));
+            hs.addAll(lst.findTasksWithStr(word));
         }
 
         Iterator<Task> iter = hs.iterator();
