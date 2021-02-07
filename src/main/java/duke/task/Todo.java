@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Objects;
+
 /**
  * Represents a task that needs to be done.
  */
@@ -46,6 +48,23 @@ public class Todo extends Task {
     @Override
     public boolean hasStrInProps(String str) {
         return getContent().contains(str);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Todo todo = (Todo) o;
+        return super.equals(todo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, isDone, content);
     }
 
     @Override
