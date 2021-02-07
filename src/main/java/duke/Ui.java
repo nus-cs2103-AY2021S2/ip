@@ -40,7 +40,7 @@ public class Ui {
      * Shows a line break.
      */
     public void showLine() {
-        System.out.println("_________________");
+        System.out.println("____________________________________________________________");
     }
 
     /**

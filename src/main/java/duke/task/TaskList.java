@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import java.time.LocalDate;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -145,17 +146,29 @@ public class TaskList {
      * @param date Date to be matched to tasks.
      */
     public void printTasksOn(LocalDate date) {
+        List<Task> list = new ArrayList();
         for (int i = 0; i < this.tasks.size(); i++) {
             if (tasks.get(i) instanceof DeadlineTask) {
                 LocalDate deadlineDate = ((DeadlineTask) tasks.get(i)).getDeadlineDate();
                 if (deadlineDate.compareTo(date) == 0) {
-                    System.out.println(tasks.get(i));
+                    list.add(tasks.get(i));
                 }
             } else if (tasks.get(i) instanceof EventTask) {
                 LocalDate eventDateDate = ((EventTask) tasks.get(i)).getEventDateDate();
                 if (eventDateDate.compareTo(date) == 0) {
-                    System.out.println(tasks.get(i));
+                    list.add(tasks.get(i));
                 }
+            }
+        }
+
+        if (list.size() == 0) {
+            System.out.println("There are no tasks with this date!");
+        } else {
+            System.out.println("Here are the tasks on "
+                    + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + " in your list:");
+            for (Task task : list) {
+                System.out.println(task);
             }
         }
     }

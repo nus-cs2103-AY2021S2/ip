@@ -43,7 +43,7 @@ public class Storage {
             throw new DukeException("File path does not exist! "
                     + "A new file has been created according to given file path.");
         } else {
-            return this.textFileToArrayList();
+            return this.convertTextFileToTaskList();
         }
     }
 
@@ -85,7 +85,7 @@ public class Storage {
      * @throws IOException   If there are input or output errors.
      * @throws DukeException If description of task is not in the correct format.
      */
-    public TaskList textFileToArrayList() throws IOException, DukeException {
+    public TaskList convertTextFileToTaskList() throws IOException, DukeException {
         File f = new File(this.filePath);
         Scanner sc = new Scanner(f);
         TaskList taskList = new TaskList();
@@ -97,17 +97,79 @@ public class Storage {
                 taskList.addTask(TaskType.TODO, nextLine.substring(7), true, this);
             } else if (taskTypeLetter.equals("D")) {
                 String[] nextLineArr = nextLine.substring(7).split(" \\(by: ");
+                String[] dateTime = nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")")).split(", ");
                 String description = nextLineArr[0] + " /by "
-                        + nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")"));
+                        + Storage.convertOutputDateToInputDate(dateTime[0]) + " "
+                        + Storage.convertOutputTimeToInputTime(dateTime[1]);
                 taskList.addTask(TaskType.DEADLINE, description, true, this);
             } else if (taskTypeLetter.equals("E")) {
                 String[] nextLineArr = nextLine.substring(7).split(" \\(at: ");
+                String[] dateTime = nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")")).split(", ");
                 String description = nextLineArr[0] + " /at "
-                        + nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")"));
+                        + Storage.convertOutputDateToInputDate(dateTime[0]) + " "
+                        + Storage.convertOutputTimeToInputTime(dateTime[1]);
                 taskList.addTask(TaskType.EVENT, description, true, this);
             }
         }
 
         return taskList;
+    }
+
+    /**
+     * Converts output date format into a format that can be parsed into <code>LocalDate</code>.
+     *
+     * @param outputDate Output date.
+     * @return Date in a format that can be parsed into <code>LocalDate</code>
+     */
+    public static String convertOutputDateToInputDate(String outputDate) {
+        String[] outputDateArr = outputDate.split(" ");
+        String year = outputDateArr[2];
+        String month;
+        if (outputDateArr[0].equals("Jan")) {
+            month = "01";
+        } else if (outputDateArr[0].equals("Feb")) {
+            month = "02";
+        } else if (outputDateArr[0].equals("Mar")) {
+            month = "03";
+        } else if (outputDateArr[0].equals("Apr")) {
+            month = "04";
+        } else if (outputDateArr[0].equals("May")) {
+            month = "05";
+        } else if (outputDateArr[0].equals("Jun")) {
+            month = "06";
+        } else if (outputDateArr[0].equals("Jul")) {
+            month = "07";
+        } else if (outputDateArr[0].equals("Aug")) {
+            month = "08";
+        } else if (outputDateArr[0].equals("Sep")) {
+            month = "09";
+        } else if (outputDateArr[0].equals("Oct")) {
+            month = "10";
+        } else if (outputDateArr[0].equals("Nov")) {
+            month = "11";
+        } else {
+            month = "12";
+        }
+        String day = String.format("%02d", Integer.parseInt(outputDateArr[1]));
+        return year + "-" + month + "-" + day;
+    }
+
+    /**
+     * Converts output time format into a format that can be parsed into <code>LocalTime</code>.
+     *
+     * @param outputTime Output time.
+     * @return Time in a format that can be parsed into <code>LocalTime</code>
+     */
+    public static String convertOutputTimeToInputTime(String outputTime) {
+        String amOrPm = outputTime.substring(outputTime.length() - 2);
+        String time = outputTime.substring(0, outputTime.length() - 2);
+        String[] timeArr = time.split(":");
+        int additionalHours = 0;
+        if (amOrPm.equals("PM")) {
+            additionalHours = 12;
+        }
+
+        String hour = String.format("%02d", Integer.parseInt(timeArr[0]) + additionalHours);
+        return hour + ":" + timeArr[1];
     }
 }
