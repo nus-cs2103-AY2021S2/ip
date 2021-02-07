@@ -26,6 +26,7 @@ public class Ui {
                 + "-- delete <taskNumber>:  Deletes specified task\n"
                 + "-- done <taskNumber>:  Marks specified task as done\n"
                 + "-- taskdate <YYYY-MM-DD>:  Prints tasks in your list that match the specified date\n"
+                + "-- find <keyword>:  Prints tasks in your list that match the keyword\n"
                 + "-- bye:  Exits Duke");
     }
 
@@ -40,7 +41,7 @@ public class Ui {
      * Shows a line break.
      */
     public void showLine() {
-        System.out.println("_________________");
+        System.out.println("____________________________________________________________");
     }
 
     /**
