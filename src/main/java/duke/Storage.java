@@ -23,7 +23,7 @@ public class Storage {
      *
      * @throws IOException when the filename does not exist
      */
-    public static void saveTaskList() throws IOException {
+    public static String saveTaskList() throws IOException {
         try {
             File file = new File("src/main/java/duke/duke.txt");
             FileWriter fw = new FileWriter(file);
@@ -34,6 +34,7 @@ public class Storage {
         } catch (Exception ex) {
             System.out.println("error" + ex.getMessage());
         }
+        return ("Your tasks are saved");
     }
 
     /**
@@ -41,7 +42,7 @@ public class Storage {
      *
      * @throws FileNotFoundException if the specified file does not exist
      */
-    public static void loadTaskList() throws FileNotFoundException {
+    public static String loadTaskList() throws FileNotFoundException {
         String line = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/main/java/duke/duke.txt"));
@@ -97,5 +98,6 @@ public class Storage {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return ("Your tasks are loaded");
     }
 }

@@ -26,7 +26,8 @@ public class Ui {
     /**
      * Displays exit message when user exits the chatbot
      */
-    public static void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String exit() {
+        String output = "Bye. Hope to see you again soon!";
+        return output;
     }
 }

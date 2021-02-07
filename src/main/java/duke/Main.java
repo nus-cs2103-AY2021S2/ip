@@ -25,7 +25,7 @@ public class Main extends Application {
     private Scene scene;
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws DukeException, Exception {
         //Step 1. Formatting the window to look as expected.
 
         scrollPane = new ScrollPane();
@@ -47,11 +47,11 @@ public class Main extends Application {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(600.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(600, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(580, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -61,7 +61,7 @@ public class Main extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(580.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -87,11 +87,19 @@ public class Main extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -104,7 +112,7 @@ public class Main extends Application {
         return textToAdd;
     }
 
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException, Exception {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -114,7 +122,7 @@ public class Main extends Application {
         userInput.clear();
     }
 
-    private String getResponse(String input) {
-        return Parser.read();
+    private String getResponse(String input) throws DukeException, Exception {
+        return Parser.read(input);
     }
 }
