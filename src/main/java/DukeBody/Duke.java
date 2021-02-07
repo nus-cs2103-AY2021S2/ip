@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-import duketask.Task;
 import dukegui.MainApp;
 import dukegui.MainWindow;
 import javafx.application.Application;
@@ -30,15 +29,30 @@ public class Duke {
     MainWindow mainWindow;
 
     // accessors
+    /**
+     * Checks if the user profile has been setup.
+     * @return  boolean whether the user profile has been setup.
+     */
     public boolean hasSetupUser() {
         return username.length() > 0;
     }
 
     // mutators
+    /**
+     * Syncs duke with the main window in order to directly output
+     * responses into the window dialog box.
+     * @param window    the main window to syn in the application.
+     */
     public void syncWindow (MainWindow window) {
         mainWindow = window;
     }
 
+    /**
+     * Setups the user profile through the username. Loads any
+     * previously saved tasks under the same alias from the
+     * default database directory path.
+     * @param name  the user alias used to setup the user profile.
+     */
     public void userSetup (String name) {
         username = name;
         mainWindow.dukeOutput("Henlo " + username + ", reading tasks from secret database...");
@@ -51,6 +65,12 @@ public class Duke {
         }
     }
 
+    /**
+     * The duke logic to response and act on the user inputs from the
+     * main window by recognition of specific commands and necessary
+     * subcommands.
+     * @param command   the entire user input from the main window
+     */
     public void respondToCommand (String command) {
         String[] subcommands = command.split(" ", 2);
         StringBuilder output = new StringBuilder();
@@ -80,11 +100,11 @@ public class Duke {
                         throw new Duke.ExpectedSubcommandException("<search_text>");
                     }
 
-                    output.append(outputTasks(tasks.matchedTasks(subcommands[1].trim())));
+                    output.append(outputTasks(tasks.getMatchedTasks(subcommands[1].trim())));
                     break;
 
                 case "undone":
-                    TaskList undone = tasks.undoneTasks();
+                    TaskList undone = tasks.getUndoneTasks();
                     if (undone.size() > 0) {
                         output.append("These are undone... so concern...\n");
                         output.append(outputTasks(undone));
@@ -105,7 +125,7 @@ public class Duke {
 
                     tasks.get(taskNumber).markAsDone();
                     output.append("marked the task as done! yip yip.\n");
-                    output.append(tasks.get(taskNumber).taskInformation(
+                    output.append(tasks.get(taskNumber).getTaskInformation(
                             mainWindow.getDateFormat()));
                     break;
 
@@ -121,7 +141,7 @@ public class Duke {
                     scanner.close();
 
                     output.append("removed the task! begone!\n");
-                    output.append(tasks.remove(taskNumber).taskInformation(
+                    output.append(tasks.remove(taskNumber).getTaskInformation(
                             mainWindow.getDateFormat()));
                     break;
 
@@ -131,7 +151,7 @@ public class Duke {
                     } else {
                         tasks.add(Parser.parseNewCommand(subcommands[0].trim(), subcommands[1].trim()));
                         output.append("added the task for hooman!\n");
-                        output.append(tasks.get(tasks.size() - 1).taskInformation(
+                        output.append(tasks.get(tasks.size() - 1).getTaskInformation(
                                 mainWindow.getDateFormat()));
                     }
             }
@@ -148,18 +168,27 @@ public class Duke {
         mainWindow.dukeOutput(output.toString());
     }
 
+    /**
+     * Formats a list of tasks to output in the window dialog box.
+     * @param tasks     the list of tasks.
+     * @return          the formatted string to output.
+     */
     private String outputTasks (TaskList tasks) {
         StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); ++ i) {
             output.append(i + 1);
-            output.append(". " + tasks.get(i).taskInformation(mainWindow.getDateFormat())
+            output.append(". " + tasks.get(i).getTaskInformation(mainWindow.getDateFormat())
                     + "\n");
         }
 
         return output.toString();
     }
 
+    /**
+     * Launches the main application
+     * @param args  variable arguments from CMD
+     */
     public static void main(String[] args) {
         Application.launch(MainApp.class, args);
     }

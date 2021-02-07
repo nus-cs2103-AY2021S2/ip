@@ -13,6 +13,11 @@ import javafx.scene.layout.VBox;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The main GUI window for the duke application
+ * which handles the construction of scene settings,
+ * nodes and the input / output from the dialog.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -39,6 +44,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Syncs the window with Duke in order to directly
+     * trigger a response upon receiving an input as well
+     * as making duke sync with the window.
+     * @param duke  the duke logic for the application
+     */
     public void syncDuke (Duke duke) {
         this.duke = duke;
         duke.syncWindow(this);
@@ -61,11 +72,22 @@ public class MainWindow extends AnchorPane {
     }
 
     // accessors
+
+    /**
+     * Accesses the window's current datetime format setting
+     * @return  current datetime format being used in dialog text.
+     */
     public DateTimeFormatter getDateFormat () {
         return dateFormat;
     }
 
     // mutators
+
+    /**
+     * Pushes the user input from the text box to a dialog box in
+     * the dialog container and clears the text box.
+     * @return      the user input to output into the dialog.
+     */
     @FXML
     private String pushUserInput () {
         String input = userInput.getText();
@@ -74,6 +96,11 @@ public class MainWindow extends AnchorPane {
         return input;
     }
 
+    /**
+     * Pushes a message to a dialog box in the dialog container as an
+     * output from duke.
+     * @param messages  the message to output into the dialog.
+     */
     @FXML
     public void dukeOutput (String ... messages) {
         for (String message: messages) {
@@ -82,6 +109,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Changes the datetime format of the window dialog contents
+     * @param formatExpression  an expression that represents the datetime format.
+     */
     public void changeDateFormat (String formatExpression) {
         dateFormat = DateTimeFormatter.ofPattern(formatExpression);
     }

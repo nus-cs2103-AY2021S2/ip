@@ -12,7 +12,7 @@ public class TaskList extends ArrayList<Task> {
     private static final long serialVersionUID = 6951591508963981354L;
 
     // accessors
-    public TaskList undoneTasks () {
+    public TaskList getUndoneTasks() {
         TaskList undone = new TaskList();
 
         for (Task task: this) {
@@ -24,7 +24,7 @@ public class TaskList extends ArrayList<Task> {
         return undone;
     }
 
-    public TaskList matchedTasks (String keyphrase) {
+    public TaskList getMatchedTasks(String keyphrase) {
         TaskList matched = new TaskList();
 
         for (Task task: this) {
