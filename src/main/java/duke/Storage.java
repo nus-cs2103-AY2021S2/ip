@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Storage {
@@ -56,7 +57,7 @@ public class Storage {
      * @throws DukeException If data could not be loaded.
      */
     public ArrayList<Task> loadData() throws DukeException {
-        ArrayList<Task> ledger = new ArrayList<>(100);
+        ArrayList<Task> ledger = new ArrayList<>();
         try {
             BufferedReader bufferedReader = Files.newBufferedReader(saveFilePath);
             String record = bufferedReader.readLine();
@@ -109,13 +110,15 @@ public class Storage {
             String by = savedRecord[3].strip();
             LocalDate byDate = LocalDate.parse(by);
             String byTime = savedRecord[4].strip();
-            output = new DeadlineTask(description, isDone, byDate, byTime);
+            LocalTime byLocalTime = LocalTime.parse(byTime);
+            output = new DeadlineTask(description, isDone, byDate, byLocalTime);
             break;
         case "E":
             String at = savedRecord[3].strip();
             LocalDate atDate = LocalDate.parse(at);
             String atTime = savedRecord[4].strip();
-            output = new EventTask(description, isDone, atDate, atTime);
+            LocalTime atLocalTime = LocalTime.parse(atTime);
+            output = new EventTask(description, isDone, atDate, atLocalTime);
             break;
         default:
             throw new DukeException("Unexpected value: " + taskType);

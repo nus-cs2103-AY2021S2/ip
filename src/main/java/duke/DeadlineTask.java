@@ -1,11 +1,12 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
     private LocalDate byDate;
-    private String time;
+    private LocalTime time;
 
     /**
      * Creates a DeadlineTask object.
@@ -14,7 +15,7 @@ public class DeadlineTask extends Task {
      * @param byDate deadline date
      * @param time time on deadline date
      */
-    public DeadlineTask(String description, boolean isDone, LocalDate byDate, String time) {
+    public DeadlineTask(String description, boolean isDone, LocalDate byDate, LocalTime time) {
         super(description);
         super.isDone = isDone;
         this.time = time;

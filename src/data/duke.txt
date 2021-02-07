@@ -1,3 +1,4 @@
-E | 1 | DryEat | 2018-07-23 | 12am
-T | 1 | WEWE
-T | 0 | hihi
+D | 1 | eat goof | 2019-03-21 | 13:12:12
+D | 1 | eat junk | 2019-03-21 | 20:20
+E | 1 | flu boy | 2019-03-21 | 23:40:30
+T | 1 | sell books

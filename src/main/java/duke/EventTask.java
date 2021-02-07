@@ -1,13 +1,14 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
     /** Date of event **/
     private LocalDate atDate;
     /** Time of event **/
-    private String time;
+    private LocalTime time;
 
     /**
      * Constructs an EventTask object.
@@ -17,7 +18,7 @@ public class EventTask extends Task {
      * @param time Time of event
      */
     public EventTask(String description, boolean isDone,
-                     LocalDate atDate, String time) {
+                     LocalDate atDate, LocalTime time) {
         super(description);
         super.isDone = isDone;
         this.atDate = atDate;
