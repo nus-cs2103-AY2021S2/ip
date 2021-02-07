@@ -28,6 +28,8 @@ class Ui {
                 return taskList.addEvent(input[1], LocalDate.parse(input[2]));
             } else if (input[0].equals("find")) {
                 return taskList.find(input[1]);
+            } else if (input[0].equals("sort")) {
+                return taskList.sort(input[1]);
             }
         } catch (DukeException dukeException) {
             return dukeException.toString();

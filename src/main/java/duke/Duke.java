@@ -7,11 +7,11 @@ import java.util.Scanner;
  */
 public class Duke {
     // Contains the task list, with operations to add/delete tasks.
-    private TaskList taskList;
+    private final TaskList taskList;
     // Deals with making sense of the user command.
-    private Parser parser;
+    private final Parser parser;
     // Deals with interactions with the user.
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructor for our Dukebot.
@@ -26,9 +26,8 @@ public class Duke {
      * The main driver method to test our program. The method terminates with the "bye" command.
      *
      * @param args the user input
-     * @throws Exception the program terminates when an exception is thrown
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Duke iceBear = new Duke();
         System.out.println(iceBear.greet());
@@ -52,7 +51,7 @@ public class Duke {
      * @return a string representation of Duke's greeting
      */
     public String greet() {
-        String greetingMessage = "Hello! I'm Icebear\nWhat can I do for you?";
+        String greetingMessage = "Hello! I'm IceBear\nWhat can I do for you?";
         return greetingMessage;
     }
     private String exit() {

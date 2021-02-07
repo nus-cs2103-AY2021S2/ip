@@ -145,6 +145,41 @@ class TaskList {
         }
         return dukeMessage;
     }
+    public String sort(String sortType) {
+        if (sortType.equals("name")) {
+            return sortByName();
+        } else if (sortType.equals("done")) {
+            return sortByDone();
+        } else if (sortType.equals("notdone")) {
+            return sortByNotDone();
+        } else {
+            return null;
+        }
+    }
+
+    public String sortByName() {
+        String message = "The list is now sorted by name\n";
+        taskList.sort(new NameComparator());
+        Storage.update(this.taskList);
+        message += this.listTask();
+        return message;
+    }
+
+    public String sortByDone() {
+        String message = "The list is now sorted with the completed tasks being listed first\n";
+        taskList.sort(new DoneComparator());
+        Storage.update(this.taskList);
+        message += this.listTask();
+        return message;
+    }
+
+    public String sortByNotDone() {
+        String message = "The list is now sorted with the incomplete tasks being listed first\n";
+        taskList.sort(new NotDoneComparator());
+        Storage.update(this.taskList);
+        message += this.listTask();
+        return message;
+    }
 
     /**
      * Displays the number of tasks in the list in a special format.

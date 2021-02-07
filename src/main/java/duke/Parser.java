@@ -30,7 +30,10 @@ public class Parser {
             return this.processEvent(input);
         } else if (command.equals("find")) {
             return this.processFind(input);
-        } else {
+        } else if (command.equals("sort")) {
+            return this.processSort(input);
+        }
+        else {
             throw new DukeException("Invalid command");
         }
     }
@@ -144,5 +147,25 @@ public class Parser {
             parsedInput[1] = removeSpaces;
             return parsedInput;
         }
+    }
+
+    private String[] processSort(String input) throws DukeException {
+        String[] parsedInput = new String[2];
+        String errorMessage = "Invalid input for sort. The commands for sort are:\n";
+        errorMessage += "sort name";
+        errorMessage += "\nsort done";
+        errorMessage += "\nsort notdone";
+        if (input.length() <= 5) {
+            throw new DukeException(errorMessage);
+        }
+        String removeSpaces = input.substring(5);
+        boolean isWrong = !(removeSpaces.equals("name") || removeSpaces.equals("done")
+                || removeSpaces.equals("notdone"));
+        if (isWrong) {
+            throw new DukeException(errorMessage);
+        }
+        parsedInput[0] = "sort";
+        parsedInput[1] = removeSpaces;
+        return parsedInput;
     }
 }
