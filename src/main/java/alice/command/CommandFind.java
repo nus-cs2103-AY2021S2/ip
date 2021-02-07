@@ -20,7 +20,7 @@ public class CommandFind extends Command {
 
 	@Override
 	public Alice execute(Alice agent) {
-		try{
+		try {
 			if (tokens.length < 2 || tokens[1].length() == 0) {
 				throw new IllegalArgumentException();
 			}

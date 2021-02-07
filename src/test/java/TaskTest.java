@@ -4,13 +4,15 @@ import alice.task.TaskBuilder;
 import alice.task.TaskDeadline;
 import alice.task.TaskEvent;
 import alice.task.TaskList;
-import alice.task.TaskTodo;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import alice.task.TaskTodo;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;

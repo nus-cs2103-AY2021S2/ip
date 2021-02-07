@@ -9,7 +9,6 @@ public abstract class Command {
 	/** Tokens in the command **/
 	protected String[] tokens;
 
-
 	/**
 	 * Class constructor.
 	 */
