@@ -15,10 +15,10 @@ public class Task {
 
     /** type of Task */
     protected String type = "";
-    
+
     /** Priority of the Task, will be initialized to Unassigned */
     protected Priority priority;
-    
+
     /**
      * @param description the description of the task
      * @param  type the task type
@@ -29,7 +29,7 @@ public class Task {
         this.isDone = false;
         this.priority = Priority.UNASSIGNED;
     }
-    
+
     /**
      * @param description the description of the task
      * @param  type the task type
@@ -38,9 +38,9 @@ public class Task {
         this.description = description;
         this.type = type;
         this.isDone = false;
-    
+
         Priority toSet = Priority.UNASSIGNED;
-    
+
         if (priority.equals("high")) {
             toSet = Priority.HIGH;
         } else if (priority.equals("medium")) {
@@ -48,7 +48,7 @@ public class Task {
         } else if (priority.equals("low")) {
             toSet = Priority.LOW;
         }
-    
+
         this.priority = toSet;
     }
 
@@ -94,7 +94,7 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
-    
+
     /**
      * toString method of Task which prints out details of the task
      */
@@ -102,7 +102,7 @@ public class Task {
     public String toString() {
         return "       " + this.getStatus() + " " + this.description;
     }
-    
+
     /**
      * Method for setting the priority of the task
      * @param priority priority that is to be assigned to the task
@@ -110,7 +110,7 @@ public class Task {
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
-    
+
     /**
      * Method for getting the priority of the task
      */

@@ -217,9 +217,9 @@ public class TaskList {
 
             String status = task.getStatusIcon().equals(" ") ? "0" : "1";
             String description = task.getDescription();
-            
+
             String date = "";
-            
+
             String priority = task.getPriority().getValue().toLowerCase();
 
             if (type == 'D') {
@@ -275,7 +275,7 @@ public class TaskList {
 
         return result;
     }
-    
+
     /**
      * Returns a List of tasks that match the keyword inputted
      *
@@ -293,7 +293,7 @@ public class TaskList {
 
         return matchList;
     }
-    
+
     /**
      * Returns a Task who priority has been changed
      *
@@ -303,7 +303,7 @@ public class TaskList {
     public Task handleSetPriority(int number, String priority) {
         Task task = this.inputList.get(number - 1);
         Priority priorityToBeSet = Priority.UNASSIGNED;
-        
+
         if (priority.equals("high")) {
             priorityToBeSet = Priority.HIGH;
         } else if (priority.equals("medium")) {
@@ -311,9 +311,9 @@ public class TaskList {
         } else if (priority.equals("low")) {
             priorityToBeSet = Priority.LOW;
         }
-        
+
         task.setPriority(priorityToBeSet);
-        
+
         return task;
     }
 }

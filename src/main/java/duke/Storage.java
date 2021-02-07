@@ -34,7 +34,7 @@ public class Storage {
                 this.file.getParentFile().mkdir();
                 this.file.createNewFile();
             }
-            
+
             sc = new Scanner(this.file);
 
         } catch (IOException err) {
