@@ -43,7 +43,7 @@ public class AddCommand extends Command {
             try {
                 taskItem = new Deadline(taskDeadline[0].trim(), taskDeadline[1].trim());
             } catch (Exception e) {
-                throw new DeadLineException("test deadline exception");
+                throw new DeadLineException();
             }
         } else if (Parser.isEvent(command)) {
             String[] taskEvent = inputList[1].trim().split("/at", 2);

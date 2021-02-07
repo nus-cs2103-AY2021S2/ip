@@ -12,6 +12,7 @@ public class Parser {
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     /**
      * Checks if the command given is "bye"
@@ -86,6 +87,16 @@ public class Parser {
     }
 
     /**
+     * Checks if the command given is "find"
+     *
+     * @param check, the command to be checked
+     * @return boolean, where true means command is indeed "find"
+     */
+    public static boolean isFind(String check) {
+        return check.equals(FIND_COMMAND);
+    }
+
+    /**
      * Checks if the input is a number
      *
      * @param num, the input to be checked
@@ -114,6 +125,8 @@ public class Parser {
             return new AddCommand(input);
         } else if (isDelete(input)) {
             return new DeleteCommand(input);
+        } else if (isFind(command)) {
+            return new FindCommand(input);
         } else {
             throw new InvalidCommandException();
         }
