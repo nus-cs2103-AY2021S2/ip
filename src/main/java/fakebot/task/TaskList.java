@@ -67,6 +67,7 @@ public class TaskList {
 
     /**
      * Check if task list contain the same task.
+     *
      * @param task a task to be check.
      * @return true if task exist
      */

@@ -35,11 +35,11 @@ public class Parser {
     private static final String HELP_COMMAND = "help";
 
     private static final String HELP_STRING = "List of Command Available:\n"
-            + "Deadline Command: " + DEADLINE_COMMAND + " [Description]"+DEADLINE_SPLIT_REGEX+"\n"
+            + "Deadline Command: " + DEADLINE_COMMAND + " [Description]" + DEADLINE_SPLIT_REGEX + "\n"
             + "                   [yyyy-mm-dd] [hh:ss]\n"
             + "Delete   Command: " + DELETE_COMMAND + " [index]\n"
             + "Done     Command: " + DONE_COMMAND + " [index]\n"
-            + "Event    Command: " + EVENT_COMMAND + " [Description]"+EVENT_SPLIT_REGEX+"\n"
+            + "Event    Command: " + EVENT_COMMAND + " [Description]" + EVENT_SPLIT_REGEX + "\n"
             + "                   [yyyy-mm-dd] [hh:ss] [yyyy-mm-dd] [hh:ss]\n"
             + "Find     Command: " + FIND_COMMAND + "[ description]\n"
             + "List     Command: " + LIST_COMMAND + "\n"
@@ -253,7 +253,7 @@ public class Parser {
      * @return a string containing print message.
      */
     public static String getTaskListPrintMessage(TaskList taskList) {
-        if(taskList.getSize() == 0) {
+        if (taskList.getSize() == 0) {
             return getBotMPrintMessage("Task list is currently empty");
         }
 
@@ -284,7 +284,8 @@ public class Parser {
             } else if (isCommandWithIndexDescription(command)) {
                 throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
             }
-            throw new CommandException("OOPS!!! I'm sorry, but I don't know what that means :-( , type \"help\" for help.");
+            throw new CommandException("OOPS!!! I'm sorry, but I don't know what that means :-( , "
+                    + "type \"help\" for help.");
         }
 
         String commandName = command.substring(0, firstSplit);
@@ -322,8 +323,8 @@ public class Parser {
         if (command.equals(EXIT_COMMAND)) {
             return new Command(CommandType.BYE);
         } else if (command.equals(LIST_COMMAND)) {
-            return new Command(CommandType.LIST);}
-        else if (command.equals(HELP_COMMAND)) {
+            return new Command(CommandType.LIST);
+        } else if (command.equals(HELP_COMMAND)) {
             return new Command(CommandType.HELP, HELP_STRING);
         } else {
             assert false : "Invalid calling of parse command without description";

@@ -86,10 +86,10 @@ class TaskListTest {
         LocalTime startTime = LocalTime.parse(startTimeString);
         LocalDate endDate = LocalDate.parse(endDateString);
         LocalTime endTime = LocalTime.parse(endTimeString);
-        Deadline test5 = new Deadline(description1,startDate, startTime);
-        Deadline test6 = new Deadline(description1,startDate, startTime);
-        Event test7 = new Event(description1,startDate, startTime, endDate, endTime);
-        Event test8 = new Event(description1,startDate, startTime, endDate, endTime);
+        Deadline test5 = new Deadline(description1, startDate, startTime);
+        Deadline test6 = new Deadline(description1, startDate, startTime);
+        Event test7 = new Event(description1, startDate, startTime, endDate, endTime);
+        Event test8 = new Event(description1, startDate, startTime, endDate, endTime);
         taskList.addTask(test1);
         taskList.addTask(test3);
         taskList.addTask(test5);

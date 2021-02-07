@@ -71,7 +71,7 @@ public class Event extends Task {
     @Override
     public boolean equals(Object other) {
         boolean sameSuperClass = super.equals(other);
-        if(!sameSuperClass || !(other instanceof Event)) {
+        if (!sameSuperClass || !(other instanceof Event)) {
             return false;
         }
         Event e2 = (Event) other;

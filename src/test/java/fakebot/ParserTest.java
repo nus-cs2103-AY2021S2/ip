@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import fakebot.command.Command;
 import org.junit.jupiter.api.Test;
 
+import fakebot.command.Command;
 import fakebot.task.Deadline;
 import fakebot.task.Event;
 import fakebot.task.Task;
@@ -44,7 +44,6 @@ class ParserTest {
         todo = (Todo) task;
         assertEquals(true, todo.isComplete(), "Task not completed");
     }
-
 
 
     @Test
@@ -163,24 +162,23 @@ class ParserTest {
 
     @Test
     void parseUserInputToCommand_noError() {
-        String[] userInputs = {
-                "todo test",
-                "deadline test /by 2011-01-10 01:01",
-                "event test /at 2011-01-10 02:01 2012-01-10 02:03",
-                "done 1",
-                "delete 1",
-                "find test",
-                "list",
-                "bye"
+        String[] userInputs = {"todo test",
+            "deadline test /by 2011-01-10 01:01",
+            "event test /at 2011-01-10 02:01 2012-01-10 02:03",
+            "done 1",
+            "delete 1",
+            "find test",
+            "list",
+            "bye"
         };
 
-        FakeBot fakeBot = new FakeBot("","");
+        FakeBot fakeBot = new FakeBot("", "");
         try {
             for (String input : userInputs) {
                 Command command = Parser.parseUserInputToCommand(input);
                 String outputText = fakeBot.processCommand(command);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             assertTrue(false, e.getMessage());
         }
     }

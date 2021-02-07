@@ -191,11 +191,12 @@ public class FakeBot {
 
     /**
      * Adds task to task list
+     *
      * @param task to be added to list
      * @return a string containing result of adding task
      */
     private String addTask(Task task) {
-        if(taskList.containTask(task)) {
+        if (taskList.containTask(task)) {
             return Parser.getBotMPrintMessage("Duplicate task detected! Task not added");
         }
         taskList.addTask(task);
