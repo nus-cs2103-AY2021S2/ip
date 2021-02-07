@@ -11,6 +11,7 @@ public abstract class Task {
      *  @param taskName represents the name of the task.
      */
     public Task(String taskName) {
+        assert taskName.length() > 0 : "Error: you must enter a task name for the task";
         this.taskName = taskName;
         this.isDone = false;
     }

@@ -12,11 +12,12 @@ public class Duke {
     private TaskHandler th;
 
     /**
-     *  ChatBot constructor.
+     *  Duke constructor.
      *
      *  @param filePath Relative filepath to persistent storage.
      */
     public Duke(String filePath) {
+        assert filePath.length() > 0 : "Error: you must enter a filepath";
         storage = new Storage(filePath);
         th = new TaskHandler();
         try {

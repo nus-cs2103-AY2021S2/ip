@@ -16,6 +16,7 @@ public class TodoCommand extends ChatBotCommand {
      * @param taskName String that stores task name.
      */
     public TodoCommand(String taskName) {
+        assert taskName.length() > 0 : "Error: you must enter a task name for the task";
         this.taskName = taskName;
     }
 

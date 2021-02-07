@@ -16,7 +16,13 @@ import duke.tasks.Task;
 public class Storage {
     private String filePath;
 
+    /**
+     *  Storage constructor.
+     *
+     *  @param filePath Relative filepath to persistent storage.
+     */
     public Storage(String filePath) {
+        assert filePath.length() > 0 : "Error: you must enter a filepath";
         this.filePath = filePath;
     }
 
