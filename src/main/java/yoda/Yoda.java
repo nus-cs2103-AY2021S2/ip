@@ -19,18 +19,19 @@ public class Yoda {
 
     /**
      * Creates a Yoda chatbot object.
-     * @param filePath Location of tasklist on hard disk.
      */
-    public Yoda(String filePath) {
-        this.ui = new Ui();
+    public Yoda() {
+        String home = System.getProperty("user.home");
+        String filePath = home + "/dukeTasks.txt";
         storage = new Storage(filePath);
+        this.ui = new Ui();
         this.tasks = storage.load();
     }
 
     /**
      * Runs the Yoda chatbot.
      */
-    public void runYoda() {
+    public String runYoda() {
         ui.greet();
         boolean isExit = false;
         while (!isExit) {
@@ -41,16 +42,5 @@ public class Yoda {
             ui.showLine();
             isExit = c.isExit();
         }
-    }
-
-    /**
-     * Executes the Yoda chatbot by giving it a location to store the tasklist and running it.
-     * @param args A String array of arguments.
-     */
-    public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        String filePath = home + "/dukeTasks.txt";
-        Yoda duke = new Yoda(filePath);
-        duke.runYoda();
     }
 }
