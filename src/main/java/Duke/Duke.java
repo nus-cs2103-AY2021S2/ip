@@ -1,3 +1,8 @@
+package Duke;
+
+import Duke.Commands.Command;
+import Duke.Exceptions.DukeException;
+
 import java.io.IOException;
 
 public class Duke {
@@ -49,13 +54,5 @@ public class Duke {
 
     public String welcomeMessage() {
         return ui.showLine() + "\n" + ui.showWelcome() + "\n" + ui.showLine();
-    }
-
-    public String exitMessage() {
-        return ui.showExit() + "\n" + ui.showLine();
-    }
-
-    public boolean getExitStatus() {
-        return isExit;
     }
 }

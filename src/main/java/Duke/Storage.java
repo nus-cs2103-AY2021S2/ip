@@ -1,3 +1,10 @@
+package Duke;
+
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.Task;
+import Duke.Tasks.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -25,7 +32,7 @@ public class Storage {
     }
 
     /**
-     * Scans the file and save the tasks into an ArrayList of Task
+     * Scans the file and save the tasks into an ArrayList of Duke.Tasks.Task
      *
      * @throws FileNotFoundException is thrown when there the file could not be found
      */
@@ -80,7 +87,7 @@ public class Storage {
     /**
      * Loads the ArrayList
      *
-     * @return Returns the ArrayList of <code>Task</code>
+     * @return Returns the ArrayList of <code>Duke.Tasks.Task</code>
      */
     public ArrayList<Task> load() {
         return tasks;

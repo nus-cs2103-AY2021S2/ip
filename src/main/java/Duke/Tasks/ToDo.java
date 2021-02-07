@@ -1,5 +1,7 @@
+package Duke.Tasks;
+
 /**
- * A subclass of Task that has a description and overrides the toString() method of <code>Task</code>
+ * A subclass of Duke.Tasks.Task that has a description and overrides the toString() method of <code>Duke.Tasks.Task</code>
  */
 public class ToDo extends Task {
 

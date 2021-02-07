@@ -1,6 +1,8 @@
+package Duke.Tasks;
+
 /**
- * A subclass of <code>Task</code>that has an extra variable to keep track of date and overrides toString() method of
- * <code>Task</code>
+ * A subclass of <code>Duke.Tasks.Task</code>that has an extra variable to keep track of date and overrides toString() method of
+ * <code>Duke.Tasks.Task</code>
  */
 public class Event extends Task {
 

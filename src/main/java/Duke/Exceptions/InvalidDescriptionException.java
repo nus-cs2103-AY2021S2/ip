@@ -1,5 +1,7 @@
+package Duke.Exceptions;
+
 /**
- * A subclass of Duke exception for an invalid description given
+ * A subclass of Duke.Duke exception for an invalid description given
  */
 public class InvalidDescriptionException extends DukeException {
 

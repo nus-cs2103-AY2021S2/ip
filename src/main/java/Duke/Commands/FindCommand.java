@@ -1,7 +1,14 @@
+package Duke.Commands;
+
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Tasks.Task;
+import Duke.Ui;
+
 import java.util.ArrayList;
 
 /**
- * A subclass of the <code>Command</code>class that represents a command to find a keyword the the ArrayList
+ * A subclass of the <code>Duke.Duke.Commands.Command</code>class that represents a command to find a keyword the the ArrayList
  */
 public class FindCommand extends Command {
 
@@ -13,7 +20,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the find command and finds the <code>Tasks</code> that matches the keyword from the <code>TaskList</code>
-     * Uses <code>Ui</code> to print the <code>TaskList</code> of the matching keyword <code>Tasks</code>
+     * Uses <code>Duke.Ui</code> to print the <code>TaskList</code> of the matching keyword <code>Tasks</code>
      *
      * @param tasklist contains the task list and operations to manipulate the list
      * @param ui       deals with interaction with the user

@@ -1,3 +1,6 @@
+import Duke.Commands.*;
+import Duke.Exceptions.DukeException;
+import Duke.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

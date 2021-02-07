@@ -1,7 +1,14 @@
+package Duke.Commands;
+
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Tasks.Task;
+import Duke.Ui;
+
 import java.io.IOException;
 
 /**
- * A command that represents adding a <code>Task</code> into a <code>TaskList</code>
+ * A command that represents adding a <code>Duke.Tasks.Task</code> into a <code>TaskList</code>
  */
 public class AddCommand extends Command {
     Task task;
@@ -12,7 +19,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes the adding command and adds the task to the TaskList.
-     * <code>Ui</code> prints the task added
+     * <code>Duke.Ui</code> prints the task added
      * and the storage stores the task into the text file.
      *
      * @param tasklist contains the task list and operations to manipulate the list

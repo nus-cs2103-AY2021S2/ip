@@ -1,3 +1,7 @@
+package Duke.Tasks;
+
+import Duke.Duke;
+
 /**
  * Represents the tasks that the user has input into the program. The task has a description and a boolean to
  * indicate that it is completed
@@ -13,7 +17,7 @@ public class Task {
     }
 
     /**
-     * Gets the status of the <code>Task</code>> to determine if it is done.
+     * Gets the status of the <code>Duke.Tasks.Task</code>> to determine if it is done.
      *
      * @return a String of a Tick symbol if it is done and a Cross symbol if it is not
      */
@@ -22,7 +26,7 @@ public class Task {
     }
 
     /**
-     * Marks the <code>Task</code> as done
+     * Marks the <code>Duke.Tasks.Task</code> as done
      */
     public void markAsDone() {
         this.isDone = true;

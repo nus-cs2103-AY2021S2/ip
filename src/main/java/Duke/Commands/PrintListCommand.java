@@ -1,3 +1,9 @@
+package Duke.Commands;
+
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
+
 /**
  * A command that represents printing the <code>TaskList</code>
  */

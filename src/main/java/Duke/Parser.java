@@ -1,3 +1,14 @@
+package Duke;
+
+import Duke.Commands.*;
+import Duke.Exceptions.DukeException;
+import Duke.Exceptions.EmptyDescriptionException;
+import Duke.Exceptions.InvalidCommandException;
+import Duke.Exceptions.InvalidDescriptionException;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.ToDo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -63,7 +74,7 @@ public class Parser {
      * Makes sense of the command given in string for the program to be able to take action
      *
      * @param fullCommand the entire string of the user input
-     * @return Returns a <code>Command</code> that specifies what the user is asking the program to do
+     * @return Returns a <code>Duke.Duke.Commands.Command</code> that specifies what the user is asking the program to do
      * @throws DukeException is thrown when there is an error related to duke
      */
     public Command parse(String fullCommand) throws DukeException {

@@ -1,5 +1,7 @@
+package Duke.Exceptions;
+
 /**
- * A subclass of Duke exception for empty description after a command
+ * A subclass of Duke.Duke exception for empty description after a command
  */
 public class EmptyDescriptionException extends DukeException {
 

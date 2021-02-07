@@ -1,3 +1,7 @@
+package Duke;
+
+import Duke.Tasks.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,15 +44,6 @@ public class Ui {
         return "Unable to load file!";
     }
 
-//    /**
-//     * Takes in user input
-//     *
-//     * @return the full user command in String
-//     */
-//    public String readCommand() {
-//        return sc.nextLine();
-//    }
-
     /**
      * To output a welcome message
      *
@@ -74,26 +69,26 @@ public class Ui {
     /**
      * To output the <code>Tasks</code> in a TaskList
      *
-     * @param tasklist stores the <code>Task</code> in an ArrayList
-     * @return String to consists of <code>Task</code> in an ArrayList
+     * @param tasklist stores the <code>Duke.Tasks.Task</code> in an ArrayList
+     * @return String to consists of <code>Duke.Tasks.Task</code> in an ArrayList
      */
     public String printList(TaskList tasklist) {
-        String message = "Here are the tasks in your list:\n";
+        StringBuilder message = new StringBuilder("Here are the tasks in your list:\n");
 
         ArrayList<Task> tasks = tasklist.getList();
 
         for (int j = 0; j < tasks.size(); j++) {
-            message = message + (j + 1) + "." + tasks.get(j).toString() + "\n";
+            message.append(j + 1).append(".").append(tasks.get(j).toString()).append("\n");
         }
 
-        return message;
+        return message.toString();
     }
 
     /**
      * To ouput a message to indicate that the task is marked
      *
-     * @param task the <code>Task</code>> to be marked
-     * @return String that indicates the <code>Task</code>> to be marked
+     * @param task the <code>Duke.Tasks.Task</code>> to be marked
+     * @return String that indicates the <code>Duke.Tasks.Task</code>> to be marked
      */
     public String showMarkTask(Task task) {
         return "Nice! I've marked this task as done:\n" + task.toString();
@@ -102,8 +97,8 @@ public class Ui {
     /**
      * To output a message to indicate that the task is deleted
      *
-     * @param tasklist  stores the <code>Task</code> in an ArrayList
-     * @param taskIndex indicates the <code>Task</code> index in the ArrayList
+     * @param tasklist  stores the <code>Duke.Tasks.Task</code> in an ArrayList
+     * @param taskIndex indicates the <code>Duke.Tasks.Task</code> index in the ArrayList
      * @return String that consists of deleted tasks
      */
     public String showDeleteTask(TaskList tasklist, int taskIndex) {
@@ -114,9 +109,9 @@ public class Ui {
     }
 
     /**
-     * To output the added <code>Task</code> to the ArrayList
+     * To output the added <code>Duke.Tasks.Task</code> to the ArrayList
      *
-     * @param tasklist stores the <code>Task</code> in an ArrayList
+     * @param tasklist stores the <code>Duke.Tasks.Task</code> in an ArrayList
      * @return String that consists of the task added
      */
     public String showAddTask(TaskList tasklist) {
