@@ -64,7 +64,8 @@ public class TaskList {
             }
         }
         if (matches.numOfTasks() > 0) {
-            out += "We have found the following items\n";
+            out += "We have found the following " + matches.numOfTasks()
+                    + " item(s)\n";
             out += matches.getAllTasks();
         } else {
             out += "Sorry! Could not find any matches :(";
@@ -141,8 +142,8 @@ public class TaskList {
         LocalDate today = LocalDate.now();
         for (Task t : Tasks) {
             if (!t.isDone()) {
-                if (t.getType().toLowerCase().equals("deadline")
-                        || t.getType().toLowerCase().equals("event")) {
+                if (t.getType().equalsIgnoreCase("deadline")
+                        || t.getType().equalsIgnoreCase("event")) {
                     if (today.compareTo(t.getDate()) <= 0) {
                         dues.silentAdd(t);
                     }

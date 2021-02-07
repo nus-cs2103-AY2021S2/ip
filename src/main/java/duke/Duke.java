@@ -1,12 +1,9 @@
 package duke;
 
 import duke.gui.Main;
-
 import duke.register.Parser;
 import duke.register.Storage;
-
 import duke.task.*;
-
 import javafx.application.Application;
 
 /**
@@ -16,8 +13,8 @@ public class Duke {
     private TaskList taskList;
     private TaskList noteList;
 
-    private Storage storage;
-    private Storage notesStorage;
+    private final Storage storage;
+    private final Storage notesStorage;
 
     public Duke() {
         storage = new Storage("data/dukeGUI.txt");

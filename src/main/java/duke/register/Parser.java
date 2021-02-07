@@ -4,8 +4,8 @@ package duke.register;
  * This class processes the command by breaking down into components
  */
 public class Parser {
-    private String command;
-    private String[] commandSeparate;
+    private final String command;
+    private final String[] commandSeparate;
     private String taskType;
     private String taskName;
     private String date = "";
