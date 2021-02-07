@@ -64,6 +64,13 @@ public class DataBase {
         return tasks;
     }
 
+    /**
+     * Saves the task to the stored database location determined by the dirpath
+     * member and the username.
+     * @param username  the username which doubles as the file name.
+     * @param tasks     the list of tasks to save.
+     * @throws IOException
+     */
     public void updateTasks (String username, TaskList tasks) throws IOException {
         if (!Files.exists(dirpath)) {
             Files.createDirectories(dirpath);
