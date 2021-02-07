@@ -4,8 +4,8 @@ package duke;
  * Parser for Duke commands, with access to its task list, and storage.
  */
 public class Parser {
-    private TaskList tasks;
-    private Storage storage;
+    private final TaskList tasks;
+    private final Storage storage;
 
     /**
      * Creates a Parser object for the Duke instance.
@@ -61,9 +61,8 @@ public class Parser {
             }
         } catch (DukeException | IllegalArgumentException e) {
             response = e.getMessage();
-        } finally {
-            return response;
         }
+        return response;
     }
 
     /**
@@ -75,7 +74,8 @@ public class Parser {
      * @return feedback whether task is marked done successfully or not.
      */
     private String handleDone(String command) {
-        String reply = "";
+        assert command.split(" ")[0].equals("done") : "handleDone() called without done command.";
+        String reply;
         try {
             int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
             Task currentTask = tasks.get(taskNum);
@@ -104,7 +104,8 @@ public class Parser {
      * @return feedback whether the task is deleted successfully.
      */
     private String handleDelete(String command) {
-        String reply = "";
+        assert command.split(" ")[0].equals("delete") : "handleDelete() called without delete command.";
+        String reply;
         try {
             int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
             Task currentTask = tasks.remove(taskNum);
@@ -144,7 +145,8 @@ public class Parser {
      * @return string of tasks matching argument.
      */
     private String handleFind(String command) {
-        StringBuffer reply = new StringBuffer();
+        assert command.split(" ", 2)[0].equals("find") : "handleFind() called without find command.";
+        StringBuilder reply = new StringBuilder();
         try {
             String query = command.split(" ", 2)[1].trim();
             boolean isFound = false;
