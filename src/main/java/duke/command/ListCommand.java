@@ -9,7 +9,6 @@ import duke.Ui;
  * The ListCommand class encapsulates information and methods about a ListCommand.
  */
 public class ListCommand implements Command {
-    private String fullCmd;
     private String[] fullCmdStrArray;
     private Ui ui;
 
@@ -20,7 +19,6 @@ public class ListCommand implements Command {
      * @param ui The ui object responsible for displaying list messages to the CLI.
      */
     public ListCommand(String fullCmd, Ui ui) {
-        this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;
         this.ui = ui;
     }

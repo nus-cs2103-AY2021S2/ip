@@ -11,7 +11,6 @@ import duke.task.Task;
  * The DoneCommand class encapsulates information and methods about a DoneCommand.
  */
 public class DoneCommand implements Command {
-    private String fullCmd;
     private String[] fullCmdStrArray;
     private Ui ui;
 
@@ -22,7 +21,6 @@ public class DoneCommand implements Command {
      * @param ui The ui object responsible for displaying done to the CLI.
      */
     public DoneCommand(String fullCmd, Ui ui) {
-        this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;
         this.ui = ui;
     }
@@ -54,13 +52,12 @@ public class DoneCommand implements Command {
 
         int taskIndex = Integer.parseInt(fullCmdStrArray[1]) - 1;
         if (taskIndex > taskList.getSize() - 1 || taskIndex < 0) {
-            throw new DukeException("Sorry human, that task does not seem to exist.");
+            throw new DukeException(ui.taskDoesNotExistError());
         }
         Task doneTask = taskList.getIndex(taskIndex);
         doneTask.markDone();
         storage.saveTaskList(taskList);
         return ui.returnDoneMsg(doneTask);
-
     }
 
 }

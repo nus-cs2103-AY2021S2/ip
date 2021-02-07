@@ -33,7 +33,7 @@ public class Parser {
         try {
             cmd = CommandName.valueOf(fullCmdStrArray[0].toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new DukeException("Sorry human, I have not been trained to process that command.");
+            throw new DukeException(ui.invalidCmdError());
         }
         switch(cmd) {
         case LIST:
@@ -61,7 +61,7 @@ public class Parser {
             toRun = new ByeCommand(fullCmd, ui);
             break;
         default:
-            throw new DukeException("Sorry human, I have not been trained to process that command.");
+            throw new DukeException(ui.invalidCmdError());
         }
         return toRun;
     }

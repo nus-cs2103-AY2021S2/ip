@@ -40,13 +40,13 @@ public class TodoCommand implements Command {
         assert taskList != null : "Tasklist cannot be null";
 
         if (fullCmdStrArray.length == 1) { // handle todo without parameters
-            throw new DukeException("Sorry human, please enter a name for this task.");
+            throw new DukeException(ui.todoFormatError());
         }
         String taskName = fullCmd.substring(5); // remove "todo "
         TodoTask newTodoTask = new TodoTask(taskName);
 
         taskList.add(newTodoTask);
-        storage.saveTaskList(taskList);
+        storage.saveTaskList(taskList); // update saved task list
         return ui.returnAddToListMsg(newTodoTask, taskList);
     }
 
