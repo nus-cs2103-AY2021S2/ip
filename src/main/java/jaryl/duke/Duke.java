@@ -111,6 +111,7 @@ public class Duke extends Application {
     }
 
     protected String getResponse(String input) {
+        assert !input.isEmpty() : "Please enter a valid input";
         return this.run(input);
     }
 
