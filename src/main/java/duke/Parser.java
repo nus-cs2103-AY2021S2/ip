@@ -7,6 +7,8 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RedoCommand;
+import duke.command.UndoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -25,6 +27,10 @@ public class Parser {
             return new ListCommand();
         } else if (userInput.equals("bye")) {
             return new ExitCommand();
+        } else if (userInput.equals("undo")) {
+            return new UndoCommand();
+        } else if (userInput.equals("redo")) {
+            return new RedoCommand();
         }
         String[] splitInput = userInput.split(" ", 2);
         switch (splitInput[0]) {

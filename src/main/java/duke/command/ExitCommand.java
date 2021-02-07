@@ -4,11 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.task.TaskList;
 
-public class ExitCommand extends Command {
-    public ExitCommand() {
-        super(true);
-    }
-
+public class ExitCommand implements Command {
     /**
      * Exits programme
      *

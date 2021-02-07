@@ -4,7 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.task.TaskList;
 
-public class DoneCommand extends Command {
+public class DoneCommand extends UndoRedoableCommand implements Command {
     private int idx;
 
     /**
@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
      * @param idx
      */
     public DoneCommand(int idx) {
-        super(false);
+        super();
         this.idx = idx - 1;
     }
 

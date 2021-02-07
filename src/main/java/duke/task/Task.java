@@ -55,4 +55,6 @@ public abstract class Task {
     }
 
     public abstract String toSavedString();
+
+    public abstract Task clone();
 }

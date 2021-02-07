@@ -4,13 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.task.TaskList;
 
-public abstract class Command {
-    private boolean isExit;
-
-    public Command(boolean isExit) {
-        this.isExit = isExit;
-    }
-
+public interface Command {
     /**
      * Executes the command
      *
@@ -18,14 +12,5 @@ public abstract class Command {
      * @param storage
      * @throws DukeException
      */
-    public abstract String execute(TaskList taskList, Storage storage) throws DukeException;
-
-    /**
-     * Returns whether the current command is going to exit the programme
-     *
-     * @return boolean
-     */
-    public boolean isExit() {
-        return isExit;
-    }
+    public String execute(TaskList taskList, Storage storage) throws DukeException;
 }

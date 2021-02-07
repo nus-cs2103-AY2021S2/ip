@@ -12,6 +12,10 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    public TaskList(TaskList taskList) {
+        this.taskList = new ArrayList<>(taskList.taskList);
+    }
+
     /**
      * Returns task as index i
      *
@@ -76,5 +80,22 @@ public class TaskList {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * Returns a deep clone of the taskList.
+     *
+     * @return TaskList
+     */
+    public TaskList clone() {
+        TaskList newTaskList = new TaskList();
+        for (Task t : taskList) {
+            newTaskList.add(t.clone());
+        }
+        return newTaskList;
+    }
+
+    public void setTaskList(TaskList other) {
+        taskList = other.taskList;
     }
 }
