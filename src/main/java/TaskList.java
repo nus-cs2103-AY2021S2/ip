@@ -4,14 +4,12 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task>  taskList;
+    protected ArrayList<Task> taskList;
+    protected Ui ui;
 
-    public TaskList(ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList, Ui ui) {
         this.taskList = taskList;
-    }
-
-    public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.ui = ui;
     }
 
     public int numberOfTask() {
@@ -21,25 +19,12 @@ public class TaskList {
     /**
      * Prints all tasks in taskList.
      */
-    public void getTasks() {
-        int i = 1;
-
+    public String getTasks() {
         if (taskList.size() == 0) {
-            System.out.println("____________________________________________________________\n"
-                    + "You have no task for now, yay!\n"
-                    + "____________________________________________________________");
+            return ui.noTask();
         } else {
-
-            System.out.println("____________________________________________________________\n"
-                    + (numberOfTask() == 1 ? "Here is the task in your list: \n" : "Here are the tasks in your list: \n"));
-
-            for (Task t : taskList) {
-                System.out.println(i + ". "
-                        + t.toString());
-                i++;
-            }
-
-            System.out.println("____________________________________________________________\n");
+            return ui.listingTasksTitle(numberOfTask())
+                    + ui.printTasks(taskList);
         }
     }
 
@@ -48,13 +33,9 @@ public class TaskList {
      *
      * @param index of the task in taskList
      */
-    public void updateTaskStatus(Integer index) {
+    public String updateTaskStatus(Integer index) {
         taskList.get(index - 1).markAsDone();
-
-        System.out.println("____________________________________________________________\n"
-                + "Nice! I've marked this task as done:\n"
-                + taskList.get(index - 1).toString()
-                + "\n____________________________________________________________\n");
+        return ui.doneConfirmMessage(taskList.get(index - 1).toString());
     }
 
     /**
@@ -64,31 +45,22 @@ public class TaskList {
      * @param todo description of todo task
      * @throws InvalidTodoException if description of todo is empty
      */
-    public void addTodos(String todo) throws InvalidTodoException {
+    public String addTodos(String todo) throws InvalidTodoException {
         if (todo.length() <= 5) {
             throw new InvalidTodoException();
         } else {
             String taskContent = todo.substring(4);
             Todo myTask = new Todo(taskContent);
             taskList.add(myTask);
-            System.out.println("____________________________________________________________\n"
-                    + "Got it. I've added this task: \n"
-                    + myTask.toString());
-            remark();
+            return ui.addTaskConfirmMessage(myTask.toString()) + remark();
         }
     }
 
     /**
      * Prints the number of tasks in the list.
      */
-    public void remark() {
-        if (numberOfTask() <= 1) {
-            System.out.println("Now you have " + numberOfTask() + " task in the list."
-                    + "\n____________________________________________________________\n");
-        } else {
-            System.out.println("Now you have " + numberOfTask() + " tasks in the list."
-                    + "\n____________________________________________________________\n");
-        }
+    public String remark() {
+        return ui.taskNumberReminder(numberOfTask());
     }
 
     /**
@@ -98,7 +70,7 @@ public class TaskList {
      * @param deadline description of a deadline task.
      * @throws InvalidDeadlineException if deadline description is empty or description format is wrong.
      */
-    public void addDeadlines(String deadline) throws InvalidDeadlineException {
+    public String addDeadlines(String deadline) throws InvalidDeadlineException {
         if (deadline.length() <= 9) {
             throw new InvalidDeadlineException(deadline);
         } else {
@@ -115,10 +87,7 @@ public class TaskList {
                         LocalDate t = LocalDate.parse(taskTime);
                         Deadline myTask = new Deadline(taskContent, t);
                         taskList.add(myTask);
-                        System.out.println("____________________________________________________________\n"
-                                + "Got it. I've added this task: \n"
-                                + myTask.toString());
-                        remark();
+                        return ui.addTaskConfirmMessage(myTask.toString()) + remark();
                     } catch (DateTimeParseException e) {
                         throw new InvalidDeadlineException(deadline);
                     }
@@ -135,7 +104,7 @@ public class TaskList {
      * @param event description of an event task.
      * @throws InvalidEventException if description of the event is empty or format of description is wrong.
      */
-    public void addEvents(String event) throws InvalidEventException {
+    public String addEvents(String event) throws InvalidEventException {
         if (event.length() <= 6) {
             throw new InvalidEventException(event);
         } else {
@@ -152,11 +121,7 @@ public class TaskList {
                         LocalDateTime t = LocalDateTime.parse(taskTime);
                         Event myTask = new Event(taskContent, t);
                         taskList.add(myTask);
-
-                        System.out.println("____________________________________________________________\n"
-                                + "Got it. I've added this task: \n"
-                                + myTask.toString());
-                        remark();
+                        return ui.addTaskConfirmMessage(myTask.toString()) + remark();
 
                     } catch (DateTimeParseException e) {
                         throw new InvalidEventException(event);
@@ -171,14 +136,10 @@ public class TaskList {
      *
      * @param index of task in taskList to be deleted.
      */
-    public void Delete(Integer index) {
-        System.out.println("____________________________________________________________\n"
-                + "Noted. I've removed this task:\n"
-                + taskList.get(index - 1).toString()
-                + "\n____________________________________________________________\n");
-
+    public String delete(Integer index) {
+        String deletedTask = taskList.get(index - 1).toString();
         taskList.remove(index - 1);
-
+        return ui.deleteTaskConfirmMessage(deletedTask);
     }
 
     /**
@@ -188,38 +149,23 @@ public class TaskList {
      * @param keyword within a task description
      */
 
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         ArrayList<Task> searchResults = new ArrayList<>();
         if (taskList.size() == 0) {
-            System.out.println("____________________________________________________________\n"
-                    + "You have no task for now, yay!\n"
-                    + "____________________________________________________________");
+            return ui.noTask();
         } else {
             int i = 1;
             for (Task t : taskList) {
                 if (t.getDescription().contains(keyword)) {
                     searchResults.add(t);
                 }
-                }
             }
+        }
         if (searchResults.size() == 0) {
-            System.out.println("____________________________________________________________\n"
-                    + "You have no matching task in the list\n"
-                    + "____________________________________________________________");
+            return ui.noMatchingTaskMessage();
         } else {
-            System.out.println("____________________________________________________________\n"
-                    + (searchResults.size() == 1 ? "Here is the matching task in your list: \n"
-                    : "Here are the matching tasks in your list: \n"));
-
-            int i = 1;
-            for (Task t : searchResults) {
-                System.out.println(i + ". "
-                        + t.toString());
-                i++;
-            }
-
+            return ui.matchingTasksTitle(searchResults.size()) + ui.printTasks(searchResults);
         }
-        }
-
+    }
 
 }

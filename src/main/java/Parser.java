@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Parser {
     protected ArrayList<Task> taskList;
     protected TaskList tasks;
+    protected Ui ui;
     //user commands
     private final static String listCommand = "list";
     private final static String doneCommand = "done";
@@ -14,77 +15,67 @@ public class Parser {
     private final static String Events = "event"; //tasks that start at a specific time and ends at a specific time
 
 
-    public Parser(ArrayList<Task> taskList, TaskList tasks) {
+    public Parser(ArrayList<Task> taskList, TaskList tasks, Ui ui) {
         this.taskList = taskList;
         this.tasks = tasks;
+        this.ui = ui;
     }
 
-    public void readCommand(String description) throws InvalidCommandException{
+    public String readCommand(String description) throws InvalidCommandException {
 
         if (description.equalsIgnoreCase(listCommand)) {
-            tasks.getTasks();
+            return tasks.getTasks();
 
         } else if (description.equalsIgnoreCase(exitCommand)) {
             Duke.canExit = true;
+            return ui.sayBye();
 
         } else if (description.toLowerCase().contains(doneCommand)) {
             try {
                 int taskIndex = Integer.parseInt(
                         description.replaceAll("[^0-9]", ""));
-                tasks.updateTaskStatus(taskIndex);
+                return tasks.updateTaskStatus(taskIndex);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(
-                        "\n___________________________________________________________________\n"
-                                + "\u2639 OOPS!!! the task you are referring to does not seem to exist :-( \n"
-                                + "___________________________________________________________________\n");
+                return ui.taskNotExist();
             } catch (NumberFormatException e) {
-                System.out.println(
-                        "\n___________________________________________________________________\n"
-                                + "\u2639 OOPS!!! you need to enter the index of the task :-( \n"
-                                + "___________________________________________________________________\n");
+                return ui.missingIndex();
             }
 
         } else if (description.toLowerCase().contains(deleteCommand)) {
             try {
                 int taskIndex = Integer.parseInt(
                         description.replaceAll("[^0-9]", ""));
-                tasks.Delete(taskIndex);
+                return tasks.delete(taskIndex);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(
-                        "\n___________________________________________________________________\n"
-                                + "\u2639 OOPS!!! the task you are referring to does not seem to exist :-( \n"
-                                + "___________________________________________________________________\n");
+                return ui.taskNotExist();
             } catch (NumberFormatException e) {
-                System.out.println(
-                        "\n___________________________________________________________________\n"
-                                + "\u2639 OOPS!!! you need to enter the index of the task :-( \n"
-                                + "___________________________________________________________________\n");
+                return ui.missingIndex();
             }
 
         } else if (description.toLowerCase().contains(FindCommand)) {
             String[] seg = description.split(" ");
             String keyword = seg[seg.length - 1];
-            tasks.findTask(keyword);
+            return tasks.findTask(keyword);
 
         } else if (description.toLowerCase().contains(Deadlines)) {
             try {
-                tasks.addDeadlines(description);
+                return tasks.addDeadlines(description);
             } catch (InvalidDeadlineException e) {
-                System.out.println(e.toString());
+                return e.toString();
             }
 
         } else if (description.toLowerCase().contains(Events)) {
             try {
-                tasks.addEvents(description);
+                return tasks.addEvents(description);
             } catch (InvalidEventException e) {
-                System.out.println(e.toString());
+                return e.toString();
             }
 
         } else if (description.toLowerCase().contains(ToDos)) {
             try {
-                tasks.addTodos(description);
+                return tasks.addTodos(description);
             } catch (InvalidTodoException e) {
-                System.out.println(e.toString());
+                return e.toString();
             }
 
         } else {

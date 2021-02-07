@@ -25,22 +25,25 @@ public class Storage {
 
     /**
      * Prints the tasks stored from last usage of Duke.
-     *
-     * @param path of the file to store user history.
      */
-    public void taskHistory(String path) {
+    public String taskHistory() {
         try {
-            File history = new File(path);
+            File history = new File(filePath);
             Scanner s = new Scanner(history);
+            String myTasks = "\nyour current tasks:\n";
             while (s.hasNext()) {
                 String str = s.nextLine();
-                System.out.println(str);
+                myTasks += str + "\n";
             }
             s.close();
+            if (myTasks == "\nyour current tasks:\n") {
+                return "";
+            } else {
+                return myTasks;
+            }
         } catch (FileNotFoundException e) {
-            System.out.println("user history is empty");
+            return "user history is empty";
         }
-
     }
 
     /**
@@ -70,11 +73,11 @@ public class Storage {
      *
      * @param taskList that stores tasks.
      */
-    public void load(ArrayList<Task> taskList)  {
+    public void load(ArrayList<Task> taskList) {
         try {
             File history = new File(filePath);
             Scanner s = new Scanner(history);
-            while(s.hasNext()) {
+            while (s.hasNext()) {
                 String task = s.nextLine();
                 if (task.contains("[T]")) {
                     Todo myTask = Todo.parseTodo(task);

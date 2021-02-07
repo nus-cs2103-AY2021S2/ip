@@ -3,10 +3,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Event extends Task{
+public class Event extends Task {
+    protected static final String type = "[E]";
     protected boolean isDone;
     protected LocalDateTime time;
-    protected final static String type = "[E]";
+
 
     public Event(String description, LocalDateTime time) {
         super(description);
@@ -55,7 +56,7 @@ public class Event extends Task{
             String[] taskSeg = record.split("\u2718 ");
             String taskContent = taskSeg[taskSeg.length - 1];
             String taskContentWithDate = taskContent.replace(" (at:", "");
-            taskContentWithDate= taskContentWithDate.replace(")", "");
+            taskContentWithDate = taskContentWithDate.replace(")", "");
             Pattern p = Pattern.compile("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})");
             Matcher m = p.matcher(taskContentWithDate);
             m.find();
