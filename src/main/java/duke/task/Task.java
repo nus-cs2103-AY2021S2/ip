@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.exception.DukeException;
 /**
  * Represents a task. A <code>Task</code> consist of
  * name, type (todo, event, deadline), status and deadline (if applicable).
@@ -99,14 +99,14 @@ public class Task {
         if (type.equals("E") || type.equals("D")) {
             return String.format("[%s][%s] %s (%s: %s)",
                     type,
-                    (isDone) ? "X" : " ",
+                    isDone ? "X" : " ",
                     name,
                     preposition,
                     date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         } else {
             return String.format("[%s][%s] %s",
                     type,
-                    (isDone) ? "X" : " ",
+                    isDone ? "X" : " ",
                     name);
         }
     }
@@ -136,7 +136,7 @@ public class Task {
      * @param type the type of the task
      * @param date the date of the task (if applicable)
      * @param preposition the preposition for the task (if applicable)
-     * @return
+     * @return the Task created
      * @throws DukeException
      */
     public static Task createTask(String taskName, String type, String date, String preposition) throws DukeException {

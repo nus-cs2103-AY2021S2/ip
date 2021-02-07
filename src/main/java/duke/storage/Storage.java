@@ -1,17 +1,15 @@
 package duke.storage;
 
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.exception.DukeException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 /**
  * A class for handling saving and loading of data.
  */
@@ -67,10 +65,10 @@ public class Storage {
      * Return a LinkedList of <code>Task</code> by reading from a file.
      * This method will read through the saved file and return a list of <code>Task</code>.
      *
-     * @return
+     * @return LinkedList of Task
      * @throws DukeException
      */
-    public LinkedList<Task> load() throws DukeException{
+    public LinkedList<Task> load() throws DukeException {
         try {
             LinkedList<Task> list = new LinkedList<>();
             if (saveFile.exists()) {

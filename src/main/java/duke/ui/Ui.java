@@ -1,10 +1,10 @@
 package duke.ui;
 
-import duke.task.TaskList;
-import duke.task.Task;
-
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * A class for handling input and output for Duke.
@@ -121,6 +121,11 @@ public class Ui {
         printFormatted(msg);
     }
 
+    /**
+     * Reads the user input and return as a String
+     *
+     * @return String representing user input
+     */
     public String readLine() {
         return this.scanner.nextLine();
     }

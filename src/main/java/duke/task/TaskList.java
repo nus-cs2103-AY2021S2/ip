@@ -1,13 +1,14 @@
 package duke.task;
 
-import duke.exception.DukeException;
 import java.util.LinkedList;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a list of task.
  */
 public class TaskList {
-    LinkedList<Task> list;
+    private LinkedList<Task> list;
 
     /**
      * Constructor for <code>TaskList</code>.
