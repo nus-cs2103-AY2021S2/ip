@@ -57,7 +57,9 @@ public class Ui {
                 "  - Display list of commands",
                 "search [keyword]",
                 "  - Display all task containing the following keyword.",
-                "  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.");
+                "  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.",
+                "sort",
+                "  - Order tasklist with Todos first and then by date.");
     }
 
     /**
@@ -176,5 +178,14 @@ public class Ui {
      */
     public String abortDelete() {
         return "Deletion cancelled.";
+    }
+
+    /**
+     * Returns sort tasklist message.
+     *
+     * @return Sort tasklist message.
+     */
+    public String displaySortMessage() {
+        return "TaskList have been sorted!";
     }
 }

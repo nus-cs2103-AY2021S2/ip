@@ -173,4 +173,11 @@ public class TaskList {
         }
         return results;
     }
+
+    /**
+     * Sort tasklist by todo task first, and then by date.
+     */
+    public void sort() {
+        lst.sort(null);
+    }
 }
