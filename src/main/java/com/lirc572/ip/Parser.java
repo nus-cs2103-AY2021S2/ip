@@ -67,16 +67,17 @@ public class Parser {
      * Processes a command.
      *
      * @param command The command to process.
-     * @return Whether the program should continue (<code>true</code> if not an exit command).
+     * @return The response.
      */
-    public static boolean processCommand(String command, TaskList tasks) throws Exception {
+    public static String processCommand(String command, TaskList tasks) throws Exception {
         String[] tokens = tokenizeCommand(command);
-        Ui.printHorizontalLine();
+        String response = "";
+        // response += Ui.printHorizontalLine();
         if (EXIT_COMMANDS.contains(command)) {
-            Ui.printLine("Bye. Hope to see you again soon!");
+            response += Ui.printLine("Bye. Hope to see you again soon!");
         } else {
             if (tokens[0].equals("list")) {
-                Ui.printLine("Here are the tasks in your list:");
+                response += Ui.printLine("Here are the tasks in your list:");
                 tasks.printAll();
             } else if (tokens[0].equals("done")) {
                 if (tokens.length < 2) {
@@ -89,8 +90,8 @@ public class Parser {
                     }
                     if (taskNumber <= tasks.getSize()) {
                         tasks.markAsDone(taskNumber);
-                        Ui.printLine("Nice! I've marked this task as done:");
-                        Ui.printLine(String.format("  %s", tasks.getTaskString(taskNumber)));
+                        response += Ui.printLine("Nice! I've marked this task as done:");
+                        response += Ui.printLine(String.format("  %s", tasks.getTaskString(taskNumber)));
                     } else {
                         throw new Exception("Task does not exist!");
                     }
@@ -108,9 +109,9 @@ public class Parser {
                     }
                     if (taskNumber <= tasks.getSize()) {
                         String taskString = tasks.delete(taskNumber);
-                        Ui.printLine("Noted. I've removed this task:");
-                        Ui.printLine(String.format("  %s", taskString));
-                        Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
+                        response += Ui.printLine("Noted. I've removed this task:");
+                        response += Ui.printLine(String.format("  %s", taskString));
+                        response += Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                     } else {
                         throw new Exception("Task does not exist!");
                     }
@@ -123,9 +124,9 @@ public class Parser {
                 }
                 Task task = new TodoTask(tokens[1]);
                 tasks.add(task);
-                Ui.printLine("Got it! I've added this task:");
-                Ui.printLine("  " + task);
-                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
+                response += Ui.printLine("Got it! I've added this task:");
+                response += Ui.printLine("  " + task);
+                response += Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
             } else if (tokens[0].equals("deadline")) {
                 if (tokens.length < 2) {
                     throw new Exception("Please provide a task name!");
@@ -138,9 +139,9 @@ public class Parser {
                             try {
                                 Task task = new DeadlineTask(tokens[1], tokens[index + 1]);
                                 tasks.add(task);
-                                Ui.printLine("Got it! I've added this task:");
-                                Ui.printLine("  " + task);
-                                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
+                                response += Ui.printLine("Got it! I've added this task:");
+                                response += Ui.printLine("  " + task);
+                                response += Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                             } catch (DateTimeParseException e) {
                                 throw new Exception("Datetime in the wrong format!");
                             }
@@ -153,9 +154,9 @@ public class Parser {
                 if (dueTimeNotProvided) {
                     Task task = new DeadlineTask(tokens[1]);
                     tasks.add(task);
-                    Ui.printLine("Got it! I've added this task:");
-                    Ui.printLine("  " + task);
-                    Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
+                    response += Ui.printLine("Got it! I've added this task:");
+                    response += Ui.printLine("  " + task);
+                    response += Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                 }
             } else if (tokens[0].equals("event")) {
                 if (tokens.length < 2) {
@@ -169,9 +170,9 @@ public class Parser {
                             try {
                                 Task task = new EventTask(tokens[1], tokens[index + 1]);
                                 tasks.add(task);
-                                Ui.printLine("Got it! I've added this task:");
-                                Ui.printLine("  " + task);
-                                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
+                                response += Ui.printLine("Got it! I've added this task:");
+                                response += Ui.printLine("  " + task);
+                                response += Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                             } catch (DateTimeParseException e) {
                                 throw new Exception("Datetime in the wrong format!");
                             }
@@ -184,9 +185,9 @@ public class Parser {
                 if (eventTimeNotProvided) {
                     Task task = new EventTask(tokens[1]);
                     tasks.add(task);
-                    Ui.printLine("Got it! I've added this task:");
-                    Ui.printLine("  " + task);
-                    Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
+                    response += Ui.printLine("Got it! I've added this task:");
+                    response += Ui.printLine("  " + task);
+                    response += Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.getSize()));
                 }
             } else if (tokens[0].equals("find")) {
                 if (tokens.length < 2) {
@@ -202,17 +203,17 @@ public class Parser {
                         matchedTaskIndices.add(i);
                     }
                 }
-                Ui.printLine("Here are the matching tasks in your list:");
+                response += Ui.printLine("Here are the matching tasks in your list:");
                 for (int i = 0; i < matchedTaskIndices.size(); i++) {
-                    Ui.printLine(String.format("%d.%s", matchedTaskIndices.get(i), matchedTaskStrings.get(i)));
+                    response += Ui.printLine(String.format("%d.%s", matchedTaskIndices.get(i), matchedTaskStrings.get(i)));
                 }
             } else {
                 throw new Exception("Unknown command!");
             }
         }
         Storage.saveToFile(tasks);
-        Ui.printHorizontalLine();
-        Ui.printEmptyLine();
-        return !EXIT_COMMANDS.contains(command);
+        // response += Ui.printHorizontalLine();
+        // response += Ui.printEmptyLine();
+        return response;
     }
 }
