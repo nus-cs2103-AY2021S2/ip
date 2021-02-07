@@ -1,14 +1,13 @@
 package duke.ui;
 
-import duke.command.Command;
 import duke.task.Task;
 import duke.task.TaskList;
 
 public class Ui {
+    public static final String FAREWELL_MESSAGE = "Goodbye. Have a nice day!!";
     private static final String NEW_LINE = "\n";
     private static final String GREETING_MESSAGE =
             "Hi there! I am Moomin" + NEW_LINE + "What can I do for you today?";
-    public static final String FAREWELL_MESSAGE = "Goodbye. Have a nice day!!";
     private static final String ERROR_START = "Hmm... ";
     private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
     private static final String UNDO_TASK_ADDED_MESSAGE = "Got it. I've removed this task:";
