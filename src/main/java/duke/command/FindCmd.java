@@ -15,6 +15,8 @@ public class FindCmd extends Command {
 
     @Override
     public String execute(TaskList lst) {
+        assert lst != null : "TaskList parameter should not be null";
+
         // Split the search terms and search individually
         String[] wordsToFind = cmdArgs.split(" ");
 

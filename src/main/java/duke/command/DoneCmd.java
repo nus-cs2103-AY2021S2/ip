@@ -22,6 +22,8 @@ public class DoneCmd extends Command {
      */
     @Override
     public String execute(TaskList lst) {
+        assert lst != null : "TaskList parameter should not be null";
+
         int idx = Integer.parseInt(cmdArgs) - 1;
         if (idx < 0 || idx >= lst.size()) {
             throw new DukeException(String.format("Item no. %d cannot be found in list", idx + 1));

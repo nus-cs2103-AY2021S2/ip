@@ -55,7 +55,8 @@ public class Storage {
 
             br.close();
 
-        } catch (FileNotFoundException ignored) {
+        } catch (FileNotFoundException e) {
+            assert false : "Data file should exist as its existence is already verified in the constructor.";
         }
 
         return taskLst;

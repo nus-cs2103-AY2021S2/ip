@@ -42,6 +42,8 @@ public class AddCmd extends Command {
      */
     @Override
     public String execute(TaskList lst) {
+        assert lst != null : "TaskList parameter should not be null";
+
         Task task;
         String[] words;
 
