@@ -21,6 +21,7 @@ public class EventCommand extends ChatBotCommand {
      * @param endTime LocalDate to store the ending time of the task.
      */
     public EventCommand(String taskName, LocalDateTime startTime, LocalDateTime endTime) {
+        assert taskName.length() > 0 : "Error: you must enter a task name for the task";
         this.taskName = taskName;
         this.startTime = startTime;
         this.endTime = endTime;

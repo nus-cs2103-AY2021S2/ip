@@ -21,6 +21,7 @@ public class DeadlineCommand extends ChatBotCommand {
      * @param deadline LocalDate to store the deadline.
      */
     public DeadlineCommand(String taskName, LocalDate deadline) {
+        assert taskName.length() > 0 : "Error: you must enter a task name for the task";
         this.taskName = taskName;
         this.deadline = deadline;
     }

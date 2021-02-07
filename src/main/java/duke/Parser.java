@@ -14,7 +14,11 @@ import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
-import duke.exceptions.*;
+import duke.exceptions.ChatBotException;
+import duke.exceptions.InvalidCommandTypeException;
+import duke.exceptions.InvalidDateFormatException;
+import duke.exceptions.InvalidTimeFormatException;
+import duke.exceptions.MissingDescriptionException;
 
 
 public class Parser {
@@ -22,6 +26,7 @@ public class Parser {
         "bye", "list", "todo", "deadline", "event", "find", "done", "delete"
     };
     private static LocalDate formatDate(String date) throws InvalidDateFormatException {
+        assert date.length() > 0 : "Error: you must enter a date";
         try {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MM yyyy");
             return LocalDate.parse(date, dateFormat);
@@ -31,6 +36,7 @@ public class Parser {
     }
 
     private static LocalDateTime formatTime(String time) throws InvalidTimeFormatException {
+        assert time.length() > 0 : "Error: you must enter a time";
         try {
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MM yyyy hh:mm a");
             return LocalDateTime.parse(time, timeFormat);
@@ -74,6 +80,7 @@ public class Parser {
                 }
             case "deadline":
                 String[] deadlineArray = words[1].split(" /by ");
+                assert deadlineArray.length > 1 : "Error: there is a missing description";
                 if (deadlineArray.length < 2) {
                     throw new MissingDescriptionException("deadline");
                 } else {
@@ -83,6 +90,7 @@ public class Parser {
                 }
             case "event":
                 String[] timeArray = words[1].split(" /at ");
+                assert timeArray.length > 1 : "Error: there is a missing description";
                 if (timeArray.length < 2) {
                     throw new MissingDescriptionException("event");
                 } else {
