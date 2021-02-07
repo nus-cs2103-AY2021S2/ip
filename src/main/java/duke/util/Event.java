@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Represents an Event task.
+ * <br>An event task contains a description and a date when the event is occuring.
  */
 public class Event extends Task {
 
@@ -44,6 +45,7 @@ public class Event extends Task {
             throw new DukeInputException("Wrong date format! Please use YYYY-MM-DD");
         }
 
+        assert date != null : "Date was not parsed.";
         return new Event(details[0], date);
     }
 
@@ -80,6 +82,8 @@ public class Event extends Task {
      * @return Event object.
      */
     protected static Event importData(String[] args) {
+        assert args[1].equals("1") || args[1].equals("0") : "Parser.checkImportFormat() missed an invalid input";
+
         boolean isDone = args[1].equals("1");
         return new Event(args[2], LocalDate.parse(args[3]), isDone);
     }

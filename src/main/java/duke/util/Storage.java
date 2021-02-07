@@ -97,10 +97,10 @@ public class Storage {
                 lst.add(Event.importData(s));
                 break;
             default:
-                // Should never reach here unless parser missed an invalid input.
                 assert false : "Parser missed an invalid input";
             }
         }
+
         return lst;
     }
 }

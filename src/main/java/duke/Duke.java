@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Arrays;
+import java.util.List;
 
 import duke.util.Deadline;
 import duke.util.DukeException;
@@ -98,10 +99,9 @@ public class Duke {
         try {
             switch (command) {
             case "bye":
-                isWaitingSaveFileResponse = true;
-                return ui.saveFilePrompt();
+                return exit();
             case "list":
-                return ui.displayList(tasks.listOutTask());
+                return listOutTask();
             case "done":
                 return completeTask(args);
             case "todo":
@@ -113,24 +113,21 @@ public class Duke {
             case "delete":
                 return deleteTask(args);
             case "save":
-                storage.saveTaskList(tasks.getList());
-                return ui.displaySaveMessage();
+                return save();
             case "load":
-                tasks.load(storage.loadTaskList());
-                return ui.displayLoadMessage();
+                return load();
             case "help":
-                return ui.help();
+                return displayHelp();
             case "search":
-                return ui.displayList(tasks.search(args));
+                return search(args);
             default:
-                // Should never reach here unless parser missed an invalid input.
                 assert false : "Parser missed an invalid input";
             }
         } catch (DukeException e) {
             return ui.displayError(e);
         }
-
-        throw new RuntimeException("ERROR in Duke's getResponse method"); // Should never reach here;
+        // Should never reach here
+        throw new RuntimeException("ERROR in Duke's getResponse method");
     }
 
     private String completeTask(String num) throws DukeInputException {
@@ -154,6 +151,8 @@ public class Duke {
         } catch (DukeInputException e) {
             return ui.displayError(e);
         }
+        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
+
         isWaitingDeleteTaskResponse = false;
 
 
@@ -179,6 +178,8 @@ public class Duke {
         } catch (DukeInputException e) {
             return ui.displayError(e);
         }
+        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
+
         isWaitingSaveFileResponse = false;
         if (s.equals("y")) {
             try {
@@ -198,6 +199,34 @@ public class Duke {
         return ui.displayDeleteTaskPrompt(tasksToBeDeleted.length == 1);
     }
 
+    private String load() throws DukeException {
+        tasks.load(storage.loadTaskList());
+        return ui.displayLoadMessage();
+    }
+
+    private String save() throws DukeException {
+        storage.saveTaskList(tasks.getList());
+        return ui.displaySaveMessage();
+    }
+
+    private String exit() {
+        isWaitingSaveFileResponse = true;
+        return ui.displaySaveFilePrompt();
+    }
+
+    private String listOutTask() {
+        List<String> lst = tasks.listOutTask();
+        return ui.displayList(lst);
+    }
+
+    private String displayHelp() {
+        return ui.displayHelp();
+    }
+
+    private String search(String args) {
+        List<String> results = tasks.search(args);
+        return ui.displayList(results);
+    }
 
     /**
      * Returns TaskList.

@@ -33,7 +33,7 @@ public class Ui {
      *
      * @return Help message.
      */
-    public String help() {
+    public String displayHelp() {
         return echo("List of commands:",
                 "bye",
                 "- Close Duke",
@@ -75,7 +75,7 @@ public class Ui {
      *
      * @return Goodbye message.
      */
-    public String exit() {
+    public String displayExitMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -154,7 +154,7 @@ public class Ui {
      *
      * @return Save file message.
      */
-    public String saveFilePrompt() {
+    public String displaySaveFilePrompt() {
         return "Do you want to save the current tasklist? y/n";
     }
 
