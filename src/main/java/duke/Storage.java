@@ -63,6 +63,7 @@ public class Storage {
      * @throws DukeException If unable to format file contents.
      */
     public void write(TaskList taskList) throws IOException, DukeException {
+        assert taskList != null : "taskList has not been initialized";
         FileWriter fw = new FileWriter(path);
         StringBuilder sb = new StringBuilder();
 
@@ -96,6 +97,7 @@ public class Storage {
      * @throws DukeException If unknown task type.
      */
     private String formatFileContents(Task task) throws DukeException {
+        assert task != null : "task should not be null";
         String format;
         String description = task.getDescription();
         int status = task.isDone() ? 1 : 0;
