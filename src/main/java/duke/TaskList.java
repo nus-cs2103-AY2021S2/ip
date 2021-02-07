@@ -6,9 +6,14 @@ import duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> taskList;
+    private Ui ui;
 
+    /**
+     * Create and initialize a TaskList that handles the modifying of the list of tasks.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
+        this.ui = new Ui();
     }
 
     public int getSize() {
@@ -27,6 +32,10 @@ public class TaskList {
         this.taskList.remove(i);
     }
 
+    public void clear() {
+        this.taskList.clear();
+    }
+
     /**
      * Returns a TaskList of all tasks containing the keyword.
      *
@@ -42,7 +51,7 @@ public class TaskList {
             }
         }
         if (toReturn.getSize() == 0) {
-            throw new DukeException("Sorry human, no such task seems to exists.");
+            throw new DukeException(ui.taskDoesNotExistError());
         }
         return toReturn;
     }

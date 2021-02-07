@@ -40,21 +40,16 @@ public class DeleteCommand implements Command {
         }
 
         if (fullCmdStrArray.length < 2) { // no parameter
-            String errorMsg = "Sorry human, please enter a task number.";
-            throw new DukeException(errorMsg);
+            throw new DukeException(ui.deleteCmdNoArgsError());
         }
 
         if (!Parser.isNumber(fullCmdStrArray[1])) { // handle commands such as 'delete a', 'delete hello'
-            String errorMsg = "Sorry human, please enter the number of the task you want me to"
-                    + "\n"
-                    + "  "
-                    + "delete.";
-            throw new DukeException(errorMsg);
+            throw new DukeException(ui.deleteCmdInvalidArgsError());
         }
 
         int taskIndex = Integer.parseInt(fullCmdStrArray[1]) - 1;
         if (taskIndex > taskList.getSize() - 1 || taskIndex < 0) {
-            throw new DukeException("Sorry human, that task does not seem to exist.");
+            throw new DukeException(ui.taskDoesNotExistError());
         }
         Task deletedTask = taskList.getIndex(taskIndex);
         taskList.removeIndex(taskIndex);

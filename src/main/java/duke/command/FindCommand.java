@@ -6,7 +6,6 @@ import duke.TaskList;
 import duke.Ui;
 
 public class FindCommand implements Command {
-    private String fullCmd;
     private String[] fullCmdStrArray;
     private Ui ui;
 
@@ -17,14 +16,13 @@ public class FindCommand implements Command {
      * @param ui The ui object responsible for displaying find messages to the CLI.
      */
     public FindCommand(String fullCmd, Ui ui) {
-        this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ", 2);
         this.ui = ui;
     }
     @Override
     public String run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle find without parameters
-            throw new DukeException("Sorry human, please tell me what to find.");
+            throw new DukeException(ui.findNoArgsError());
         }
         String toFind = fullCmdStrArray[1];
         TaskList matchingTasks = taskList.find(toFind);
