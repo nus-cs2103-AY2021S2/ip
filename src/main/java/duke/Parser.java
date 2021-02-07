@@ -25,6 +25,8 @@ public class Parser {
      * @throws DukeException if the user input a command with invalid format.
      */
     public Command parse(String fullCmd) throws DukeException {
+        assert fullCmd != null : "Command string cannot be null";
+        
         String[] fullCmdStrArray = fullCmd.split(" ");
         Command toRun = null;
         CommandName cmd;
