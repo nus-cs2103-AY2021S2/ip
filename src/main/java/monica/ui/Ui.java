@@ -59,7 +59,7 @@ public class Ui {
             output.append("There is no task in the list.");
         } else {
             for (int i = 1; i <= tasks.getSize(); i++) {
-                output.append(i + ". " + tasks.getTask(i) + "\n");
+                output.append(i).append(". ").append(tasks.getTask(i)).append("\n");
             }
         }
         return output.toString();
@@ -77,7 +77,7 @@ public class Ui {
         for (int i = 1; i <= tasks.getSize(); i++) {
             Task task = tasks.getTask(i);
             if (task.getDescription().contains(keyword)) {
-                output.append(count + ". " + tasks.getTask(i) + "\n");
+                output.append(count).append(". ").append(tasks.getTask(i)).append("\n");
                 count++;
             }
         }
