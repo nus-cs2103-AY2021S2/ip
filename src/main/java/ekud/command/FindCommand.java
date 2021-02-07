@@ -1,7 +1,6 @@
 package ekud.command;
 
 import ekud.storage.Storage;
-import ekud.task.Task;
 import ekud.task.TaskList;
 
 /**
@@ -29,16 +28,20 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         TaskList toPrint = new TaskList();
-        for (Task task : tasks) {
+        tasks.forEach(task -> {
             if (task.getDescription().contains(keyword)) {
                 toPrint.add(task);
             }
-        }
+        });
 
-        String reply = toPrint.isEmpty() ? "Nothing found, try another keyword?" : "Here's what I found!";
-        for (Task task : toPrint) {
-            reply = String.join(System.lineSeparator(), reply, "  " + task.toString());
-        }
-        return reply;
+        StringBuilder replyBuilder = new StringBuilder(toPrint.isEmpty()
+                ? "Nothing found, try another keyword?"
+                : "Here's what I found!");
+        toPrint.forEach(task -> {
+            replyBuilder.append(System.lineSeparator());
+            replyBuilder.append(task.toString());
+        });
+
+        return replyBuilder.toString();
     }
 }
