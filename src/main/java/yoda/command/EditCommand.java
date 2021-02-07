@@ -25,20 +25,17 @@ public class EditCommand extends Command {
      * @param storage Storage associated with the EditCommand being executed.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         int taskToBeEdited = Integer.parseInt(details[1]) - 1;
         Task task = taskList.accessTask(taskToBeEdited);
         if (commandType == CommandType.DELETE) {
             taskList.deleteTask(taskToBeEdited);
-            System.out.println("Noted! I've deleted this task:\n"
-                    + task
-                    + "\nNow you have " + taskList.length() + " tasks left in the list!");
+            return ui.printDeletedTask(task, taskList.length());
         } else if (commandType == CommandType.DONE) {
             taskList.markTaskAsDone(taskToBeEdited);
-            System.out.println("Noice! I've marked this task as done:\n"
-                    + task
-                    + "\nNow you have " + taskList.length() + " tasks left in the list!");
+            return ui.printFinishedTask(task, taskList.length());
+        } else {
+            return "The greatest teacher, failure is.";
         }
-        storage.write(taskList);
     }
 }

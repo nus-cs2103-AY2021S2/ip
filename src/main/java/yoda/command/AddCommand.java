@@ -47,10 +47,10 @@ public class AddCommand extends Command {
      * @param storage Storage associated with the AddCommand being executed.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = makeTask();
         taskList.addTask(task);
         storage.write(taskList);
-        System.out.println("Got it! Added this task to the list!\n" + task);
+        return ui.printAddedTask(task);
     }
 }

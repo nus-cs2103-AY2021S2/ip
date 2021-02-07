@@ -26,10 +26,13 @@ public class HelpCommand extends Command {
      * @param storage Storage associated with the HelpCommand being executed.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (commandType == CommandType.ERROR) {
-            System.out.println("That is not a valid command! Here's some help!");
+            return ui.showError();
+        } else if (commandType == CommandType.HELP) {
+            return ui.showHelp();
+        } else {
+            return "The greatest teacher, failure is.";
         }
-        ui.showHelp();
     }
 }

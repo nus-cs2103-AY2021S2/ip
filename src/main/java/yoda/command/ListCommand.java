@@ -23,30 +23,26 @@ public class ListCommand extends Command {
      * @param ui Ui associated with the ListCommand being executed.
      * @param storage Storage associated with the ListCommand being executed.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (details[0] == "FIND") {
-            System.out.println("Here are the matching tasks in your list:\n"
-                    + taskList.filterByTask(details[1]));
+            TaskList keywordList = taskList.filterByTask(details[1]);
+            return ui.printTasks("find", keywordList.toString());
         } else {
             if (details.length == 1) {
-                System.out.println("Here are all the tasks in your list\n" + taskList);
+                return ui.printTasks("all", taskList.toString());
             } else {
                 switch (details[1]) {
                 case "-d":
-                    System.out.println("These are the deadlines in your list:\n"
-                            + taskList.filterByTask("Deadline"));
-                    break;
+                    TaskList deadlineList = taskList.filterByTask("Deadline");
+                    return ui.printTasks("deadline", deadlineList.toString());
                 case "-e":
-                    System.out.println("These are the events in your list:\n"
-                            + taskList.filterByTask("Event"));
-                    break;
+                    TaskList eventList = taskList.filterByTask("Event");
+                    return ui.printTasks("event", eventList.toString());
                 case "-t":
-                    System.out.println("These are the todos in your list:\n"
-                            + taskList.filterByTask("ToDo"));
-                    break;
+                    TaskList todoList = taskList.filterByTask("ToDo");
+                    return ui.printTasks("todo", todoList.toString());
                 default:
-                    System.out.println("Bruh! Only use -d, -e, -t to get the "
-                            + "specific type of task you want!");
+                    return ui.printTasks("bad", "");
                 }
             }
         }

@@ -1,5 +1,8 @@
 package yoda.ui;
 
+import yoda.task.Task;
+import yoda.task.TaskList;
+
 import java.util.Scanner;
 
 /**
@@ -51,14 +54,60 @@ public class Ui {
     /**
      * Bids farewell to the user after user is done using the Yoda chatbot.
      */
-    public void exit() {
-        System.out.println("Cya!");
+    public String exit() {
+        return "See you soon, I will!";
     }
 
-    /**
-     * Shows the user the valid commands available to them.
-     */
-    public void showHelp() {
-        System.out.println(HELP_LIST);
+
+    public String showError() {
+        return "The greatest teacher, failure is \n"
+                + "Recognise your request, I do not"
+                + showHelp();
+    }
+
+    public String showHelp() {
+        return HELP_LIST;
+    }
+
+    public String printAddedTask(Task task) {
+        return "Do or do not. There is no try.\n"
+                + "Added this task to the list, I have:\n" + task;
+    }
+
+    public String printDeletedTask(Task task, int numberOfTasksLeft) {
+        return "Deleted this task, I have:\n" + task
+                + "\n" + numberOfTasksLeft + " in the list, you have left!";
+    }
+
+    public String printFinishedTask(Task task, int numberOfTasksLeft) {
+        return "Well done my young Padawan!\n"
+                + "Marked this task as done, I have:\n"
+                + task
+                + "\n" + numberOfTasksLeft + " in the list, you have left!";
+    }
+
+    public String printTasks(String identifier, String list) {
+        switch(identifier) {
+        case "all":
+            return "All the tasks in your list, I present to you\n"
+                    + list;
+        case "find":
+            return "The matching tasks in your list, I present to you\n"
+                    + list;
+        case "deadline":
+            return "The deadline(s) in your list, I present to you\n"
+                    + list;
+        case "event":
+            return "The event(s) in your list, I present to you\n"
+                    + list;
+        case "todo":
+            return "The todo(s) in your list, I present to you\n"
+                    + list;
+        case "bad":
+            return "To get a specific type of task, use list -d/-t/-e.\n"
+                    + "Else, the find request, you can use instead";
+        default:
+            return "The greatest teacher failure is.";
+        }
     }
 }
