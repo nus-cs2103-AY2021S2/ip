@@ -16,7 +16,7 @@ public class CommandEcho extends Command {
 	 */
 	@Override
 	public Alice execute(Alice agent) {
-		return new Alice(tokens[0], agent.getData(), false, false);
+		return new Alice(tokens[0], agent.getData(), false, false, agent.getPrevious());
 	}
 
 	/**

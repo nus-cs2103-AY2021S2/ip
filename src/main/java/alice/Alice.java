@@ -16,6 +16,7 @@ public class Alice {
 	private final boolean hasDelta;
 	private final String currentMessage;
 	private final TaskList data;
+	private final Alice previous;
 
 	/**
 	 * Constructs a new agent specifying tasks and if it's done.
@@ -29,6 +30,7 @@ public class Alice {
 		this.data = newData;
 		this.done = done;
 		this.hasDelta = false;
+		this.previous = null;
 	}
 
 	/**
@@ -40,11 +42,12 @@ public class Alice {
 	 * @param done If the agent is done operating.
 	 * @param hasDelta If the data in the agent has changed from some other instance.
 	 */
-	public Alice(String currentMessage, TaskList newData, boolean done, boolean hasDelta) {
+	public Alice(String currentMessage, TaskList newData, boolean done, boolean hasDelta, Alice previous) {
 		this.currentMessage = currentMessage;
 		this.data = newData;
 		this.done = done;
 		this.hasDelta = hasDelta;
+		this.previous = previous;
 	}
 
 	/**
@@ -72,6 +75,10 @@ public class Alice {
 	 */
 	public TaskList getData() {
 		return this.data;
+	}
+
+	public Alice getPrevious() {
+		return this.previous;
 	}
 
 	/**
