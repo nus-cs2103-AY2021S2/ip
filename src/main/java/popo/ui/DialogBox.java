@@ -34,17 +34,32 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            initialize(text, img);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
 
+    private void initialize(String text, Image img) {
+        setUpBackground();
+        setUpText(text);
+        setUpAvatar(img);
+    }
+
+    private void setUpBackground() {
         Color backgroundColor = Color.rgb(250, 200, 200, 0.9);
         CornerRadii cornerRadii = new CornerRadii(5);
         Insets insets = new Insets(-4);
         BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, cornerRadii, insets);
         Background background = new Background(backgroundFill);
         dialog.setBackground(background);
+    }
+
+    private void setUpText(String text) {
         dialog.setText(text);
+    }
+
+    private void setUpAvatar(Image img) {
         displayPicture.setImage(img);
     }
 
@@ -52,7 +67,7 @@ public class DialogBox extends HBox {
      * Creates a user dialogue box with the given user message text and the avatar icon.
      *
      * @param text Text message.
-     * @param img Avatar icon image.
+     * @param img  Avatar icon image.
      * @return {@code DialogBox} representing a user command.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -63,7 +78,7 @@ public class DialogBox extends HBox {
      * Creates a dialogue box with the given message text and the avatar icon.
      *
      * @param text Text message.
-     * @param img Avatar icon image.
+     * @param img  Avatar icon image.
      * @return {@code DialogBox} representing a reply.
      */
     public static DialogBox getPopoDialog(String text, Image img) {

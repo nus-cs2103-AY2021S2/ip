@@ -27,7 +27,6 @@ public class Main extends Application {
         List<String> parameters = applicationParameters.getUnnamed();
         String[] args = parameters.toArray(new String[0]);
 
-        // Initialize the required components
         initialize(args);
     }
 
@@ -44,7 +43,6 @@ public class Main extends Application {
      */
     private void initialize(String[] args) {
         try {
-            // Initialize the required components
             storage = initializeStorage(args);
             taskList = storage.loadTasks();
             ui = new Ui(storage, taskList);

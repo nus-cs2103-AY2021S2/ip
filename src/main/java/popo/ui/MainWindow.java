@@ -49,12 +49,21 @@ public class MainWindow extends VBox {
      */
     @FXML
     public void initialize() {
+        setUpAvatarIcons();
+        automateScrolling();
+        setUpContainerBackground();
+    }
+
+    private void setUpAvatarIcons() {
         userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
         popoImage = new Image(getClass().getResourceAsStream("/images/popo.png"));
+    }
 
-        // Set the scroll pane to automatically scroll down when the text reaches the bottom
+    private void automateScrolling() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
 
+    private void setUpContainerBackground() {
         BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(backgroundFill);
         bottomContainer.setBackground(background);
@@ -63,28 +72,23 @@ public class MainWindow extends VBox {
     /**
      * Sets up the required components for the MainWindow.
      *
-     * @param storage {@code Storage} object that handles file operations.
-     * @param taskList The loaded task list from storage.
+     * @param storage      {@code Storage} object that handles file operations.
+     * @param taskList     The loaded task list from storage.
      * @param primaryStage The primary stage of the application.
      */
     public void setComponents(Storage storage, TaskList taskList, Stage primaryStage) {
         this.storage = storage;
         this.taskList = taskList;
         this.primaryStage = primaryStage;
-        loadAdditionalConstraints();
     }
 
     /**
-     * Sets the size of the primary stage that show the application and
-     * adds the welcome message label.
+     * Adds the welcome message label.
      */
-    public void loadAdditionalConstraints() {
+    public void addWelcomeMessage() {
         String welcomeMsg = "Hello! I'm Popo, a personal assistant for managing task.\nWhat can I do for you?";
-        dialogContainer.getChildren().add(DialogBox.getPopoDialog(welcomeMsg, popoImage));
-
-        primaryStage.setTitle("Popo");
-        primaryStage.setMinWidth(500.0);
-        primaryStage.setMinHeight(400.0);
+        DialogBox greetingDialog = DialogBox.getPopoDialog(welcomeMsg, popoImage);
+        dialogContainer.getChildren().add(greetingDialog);
     }
 
     @FXML
