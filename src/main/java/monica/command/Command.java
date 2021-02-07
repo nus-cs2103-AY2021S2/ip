@@ -1,9 +1,9 @@
-package duke.command;
+package monica.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import monica.MonicaException;
+import monica.Storage;
+import monica.task.TaskList;
+import monica.ui.Ui;
 
 /**
  * Represents a general command which can be executed and can decide whether to exit the programme or stay.
@@ -15,9 +15,9 @@ public abstract class Command {
      * @param tasks The task list used for execution of the command.
      * @param ui Interactions with users.
      * @param storage Data stored in the local file path.
-     * @throws DukeException If there is any invalid command.
+     * @throws MonicaException If there is any invalid command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws MonicaException;
 
     /**
      * Returns a boolean value to signal the chat bot to exit.

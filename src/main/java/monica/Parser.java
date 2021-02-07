@@ -1,20 +1,20 @@
-package duke;
+package monica;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.command.AddDeadline;
-import duke.command.AddEvent;
-import duke.command.AddTodo;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
+import monica.command.AddDeadline;
+import monica.command.AddEvent;
+import monica.command.AddTodo;
+import monica.command.Command;
+import monica.command.DeleteCommand;
+import monica.command.DoneCommand;
+import monica.command.ExitCommand;
+import monica.command.FindCommand;
+import monica.command.ListCommand;
+import monica.task.Deadline;
+import monica.task.Event;
+import monica.task.Todo;
 
 /**
  * Represents a parser that processes input command lines from a user.
@@ -24,9 +24,9 @@ public class Parser {
      * Parses the input line from a user.
      * @param commandLine Input string to be parsed.
      * @return A command based on the input.
-     * @throws DukeException If invalid command is given.
+     * @throws MonicaException If invalid command is given.
      */
-    public static Command parse(String commandLine) throws DukeException {
+    public static Command parse(String commandLine) throws MonicaException {
         String[] messages = commandLine.split(" ");
         String commandType = messages[0];
 
@@ -36,40 +36,40 @@ public class Parser {
 
         case "delete":
             if (messages.length == 1) {
-                throw new DukeException("The task index is missing.");
+                throw new MonicaException("The task index is missing.");
             }
             return new DeleteCommand(Integer.parseInt(messages[1]));
 
         case "done":
             if (messages.length == 1) {
-                throw new DukeException("The task index is missing.");
+                throw new MonicaException("The task index is missing.");
             }
             int id = Integer.parseInt(messages[1]);
             return new DoneCommand(id);
 
         case "deadline":
             if (messages.length == 1) {
-                throw new DukeException("The task description is missing.");
+                throw new MonicaException("The task description is missing.");
             }
             try {
                 return generateDeadline(processTask(commandLine));
             } catch (Exception ex) {
-                throw new DukeException("Deadline description is in wrong format.");
+                throw new MonicaException("Deadline description is in wrong format.");
             }
 
         case "event":
             if (messages.length == 1) {
-                throw new DukeException("The task description is missing.");
+                throw new MonicaException("The task description is missing.");
             }
             try {
                 return generateEvent(processTask(commandLine));
             } catch (Exception ex) {
-                throw new DukeException("Event description is in wrong format.");
+                throw new MonicaException("Event description is in wrong format.");
             }
 
         case "todo":
             if (messages.length == 1) {
-                throw new DukeException("The task description is missing.");
+                throw new MonicaException("The task description is missing.");
             }
             return new AddTodo(new Todo(processTask(commandLine), 0));
 
@@ -78,12 +78,12 @@ public class Parser {
 
         case "find":
             if (messages.length == 1) {
-                throw new DukeException("The keyword is missing.");
+                throw new MonicaException("The keyword is missing.");
             }
             return new FindCommand(processTask(commandLine));
 
         default:
-            throw new DukeException("I'm sorry, but I don't know what " + commandType + " means.");
+            throw new MonicaException("I'm sorry, but I don't know what " + commandType + " means.");
 
         }
     }

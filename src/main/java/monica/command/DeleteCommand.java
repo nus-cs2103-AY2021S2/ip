@@ -1,10 +1,10 @@
-package duke.command;
+package monica.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
+import monica.MonicaException;
+import monica.Storage;
+import monica.task.TaskList;
+import monica.ui.Ui;
+import monica.task.Task;
 
 /**
  * Represents a command that deletes task from the task list.
@@ -25,16 +25,16 @@ public class DeleteCommand extends Command {
      * @param tasks The task list used for execution of the command.
      * @param ui Interactions with users.
      * @param storage Data stored in the local file path.
-     * @throws DukeException If there is any invalid command.
+     * @throws MonicaException If there is any invalid command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MonicaException {
         if (id < 1 || id > tasks.getSize()) {
-            throw new DukeException("The task id is invalid.");
+            throw new MonicaException("The task id is invalid.");
         }
         Task removed = tasks.removeTask(id);
-        ui.showDeleted(removed, tasks);
         storage.updateFile();
+        return ui.showDeleted(removed, tasks);
     }
 
     /**

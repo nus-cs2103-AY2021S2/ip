@@ -1,6 +1,6 @@
-package duke.command;
+package monica.command;
 
-import duke.task.Event;
+import monica.task.Event;
 
 /**
  * Represents a command that adds Event into the task list.

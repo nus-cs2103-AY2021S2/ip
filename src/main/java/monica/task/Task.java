@@ -1,4 +1,4 @@
-package duke.task;
+package monica.task;
 
 /**
  * Represents any task specified with task description and status.

@@ -1,9 +1,9 @@
-package duke.command;
+package monica.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
+import monica.Storage;
+import monica.task.TaskList;
+import monica.ui.Ui;
+import monica.task.Task;
 
 /**
  * Represents a command that adds task into the task list.
@@ -26,10 +26,10 @@ public class AddCommand extends Command {
      * @param storage Data stored in the local file path.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
-        ui.showAdded(task, tasks);
         storage.updateFile();
+        return ui.showAdded(task, tasks);
     }
 
     /**

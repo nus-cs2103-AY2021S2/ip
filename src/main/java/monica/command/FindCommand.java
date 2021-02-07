@@ -1,8 +1,8 @@
-package duke.command;
+package monica.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import monica.Storage;
+import monica.task.TaskList;
+import monica.ui.Ui;
 
 /**
  * Represents a command that displays all the tasks that contain a specified keyword.
@@ -25,8 +25,8 @@ public class FindCommand extends Command {
      * @param storage Data stored in the local file path.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFound(keyword, tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showFound(keyword, tasks);
     }
 
     /**

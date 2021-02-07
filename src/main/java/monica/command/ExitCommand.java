@@ -1,14 +1,13 @@
-package duke.command;
+package monica.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import monica.Storage;
+import monica.task.TaskList;
+import monica.ui.Ui;
 
 /**
- * Represents a command that displays all tasks in the task list.
+ * Represents a command that makes the chat bot exit.
  */
-public class ListCommand extends Command {
-
+public class ExitCommand extends Command {
     /**
      * Executes the command.
      * @param tasks The task list used for execution of the command.
@@ -16,16 +15,16 @@ public class ListCommand extends Command {
      * @param storage Data stored in the local file path.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.sayBye();
     }
 
     /**
      * Returns a boolean value to signal the chat bot to exit.
-     * @return False as the command does not signal the bot to exit.
+     * @return True as the command signals the bot to exit.
      */
     @Override
     public boolean isExit() {
-        return false;
+        return true;
     }
 }

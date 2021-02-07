@@ -1,4 +1,4 @@
-package duke.task;
+package monica.task;
 
 /**
  * Represents any todo task specified with event description and status.

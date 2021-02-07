@@ -1,6 +1,6 @@
-package duke.command;
+package monica.command;
 
-import duke.task.Todo;
+import monica.task.Todo;
 
 /**
  * Represents a command that adds Todo into the task list.

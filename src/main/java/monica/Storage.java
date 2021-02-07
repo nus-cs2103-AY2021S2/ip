@@ -1,4 +1,4 @@
-package duke;
+package monica;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,10 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import monica.task.*;
 
 /**
  * Represents local storage of task data.
@@ -31,9 +28,9 @@ public class Storage {
     /**
      * Loads and opens the file with a specified path.
      * @return Task list.
-     * @throws DukeException If file for storage cannot be created.
+     * @throws MonicaException If file for storage cannot be created.
      */
-    public TaskList openFile() throws DukeException {
+    public TaskList openFile() throws MonicaException {
         File file = new File(path);
 
         if (!file.exists()) {
@@ -41,7 +38,7 @@ public class Storage {
                 file.getParentFile().mkdir();
                 file.createNewFile();
             } catch (IOException e) {
-                throw new DukeException("File cannot be created.");
+                throw new MonicaException("File cannot be created.");
             }
         }
 
@@ -54,7 +51,7 @@ public class Storage {
             }
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new DukeException("File cannot be found.");
+            throw new MonicaException("File cannot be found.");
         }
     }
 
@@ -62,9 +59,9 @@ public class Storage {
      * Retrieves a task by processing the content stored locally.
      * @param txtLine A line of text stored in the txt file.
      * @return Task based on the file content.
-     * @throws DukeException If text is invalid.
+     * @throws MonicaException If text is invalid.
      */
-    public Task processContent (String txtLine) throws DukeException {
+    public Task processContent (String txtLine) throws MonicaException {
         String[] content = txtLine.split(" \\| ");
         String taskType = content[0];
         int taskStatus = Integer.parseInt(content[1]);
@@ -80,7 +77,7 @@ public class Storage {
         case "T":
             return new Todo(taskDescription, taskStatus);
         default:
-            throw new DukeException(taskType + " is an invalid text type. Please modify the file accordingly.");
+            throw new MonicaException(taskType + " is an invalid text type. Please modify the file accordingly.");
         }
     }
 

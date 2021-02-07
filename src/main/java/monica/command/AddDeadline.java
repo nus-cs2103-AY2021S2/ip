@@ -1,6 +1,6 @@
-package duke.command;
+package monica.command;
 
-import duke.task.Deadline;
+import monica.task.Deadline;
 
 /**
  * Represents a command that adds Deadline into the task list.

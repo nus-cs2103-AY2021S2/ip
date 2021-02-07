@@ -1,15 +1,15 @@
-package duke;
+package monica;
 /**
  * Represents exceptions specified by Duke application.
  */
-public class DukeException extends Exception {
+public class MonicaException extends Exception {
     protected String message;
 
     /**
      * Constructor for DukeException class that handles exceptions.
      * @param message Error message.
      */
-    public DukeException(String message) {
+    public MonicaException(String message) {
         this.message = message;
     }
 

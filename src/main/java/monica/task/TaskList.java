@@ -1,8 +1,8 @@
-package duke;
+package monica.task;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
+import monica.task.Task;
 
 /**
  * Represents a list of tasks.
