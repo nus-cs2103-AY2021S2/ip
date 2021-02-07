@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
@@ -30,6 +31,11 @@ test {
 
 application {
     mainClassName = "com.lirc572.ip.Duke"
+}
+
+javafx {
+    version = "15.0.1"
+    modules = [ 'javafx.controls' ]
 }
 
 shadowJar {
