@@ -39,16 +39,16 @@ public class Ui {
                 "- Close Duke",
                 "list",
                 "  - List out all task",
-                "done [number]",
-                "  - Mark selected task as done",
+                "done [number(s)]",
+                "  - Mark multiple task as done eg. (done 1 2 3)",
                 "todo [description]",
                 "  - Add a todo task",
                 "deadline [description] /by [due date]",
                 "  - Add a deadline task with a due date (YYYY-MM-DD)",
                 "event [description] /at [date]",
                 "  - Add a event task with a date (YYYY-MM-DD)",
-                "delete [number]",
-                "  - Delete a task",
+                "delete [number(s)]",
+                "  - Delete multiple tasks eg. (delete 1 2 3)",
                 "save",
                 "  - save checklist to \"data/dukeData.txt\"",
                 "load",
@@ -94,13 +94,15 @@ public class Ui {
     }
 
     /**
-     * Returns message after task is marked as done.
+     * Returns message after tasks are marked as done.
      *
-     * @param task Task marked as done.
-     * @return Task done message.
+     * @param tasks Tasks marked as done.
+     * @return Tasks done message.
      */
-    public String completeTask(String task) {
-        return echo("Nice! I've marked this task as done:", task);
+    public String completeTask(String... tasks) {
+        return String.format("Nice! I've marked %s as done:\n%s",
+                tasks.length == 1 ? "this task" : "these tasks",
+                echo(tasks));
     }
 
     /**
@@ -117,16 +119,16 @@ public class Ui {
     }
 
     /**
-     * Returns deleted task and the current number of task in the TaskList.
+     * Return deleted tasks and the current number of task in the TaskList.
      *
-     * @param task Task deleted from TaskList.
+     * @param tasks Tasks deleted from TaskList.
      * @param size Current size of TaskList.
-     * @return Delete task message.
+     * @return Delete tasks message.
      */
-    public String deleteTask(String task, int size) {
-        return echo("Noted. I've removed this task:",
-                task,
-                "Now you have " + size + " tasks in the list.");
+    public String deleteTask(String[] tasks, int size) {
+        return String.format("Noted. I've removed %s:\n", tasks.length == 1 ? "this task" : "these tasks")
+                + echo(tasks) + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
@@ -157,12 +159,14 @@ public class Ui {
     }
 
     /**
-     * Confirms if user want to delete this task.
+     * Confirms if user want to delete these tasks.
      *
-     * @return Delete task confirmation message.
+     * @param isSingle Is a single or multiple task(s).
+     * @return Delete tasks confirmation message.
      */
-    public String displayDeleteTaskPrompt() {
-        return "Are you sure you want to delete this task? y/n";
+    public String displayDeleteTaskPrompt(boolean isSingle) {
+        return String.format("Are you sure you want to delete %s? y/n",
+                isSingle ? "this task" : "these tasks");
     }
 
     /**

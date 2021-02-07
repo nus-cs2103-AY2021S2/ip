@@ -3,6 +3,8 @@ package duke.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
@@ -15,19 +17,26 @@ public class TaskListTest {
 
         Task t = Todo.createTodo("test");
         lst.addTask(t);
-        assertEquals(t, lst.deleteTask(0));
+        lst.addTask(t);
+        lst.addTask(t);
+        assertEquals("[[T][ ] test, [T][ ] test]", Arrays.toString(lst.deleteTask(new int[]{0, 1})));
+        assertEquals("[[T][ ] test]", Arrays.toString(lst.deleteTask(new int[]{0})));
 
-        assertThrows(DukeException.class, () -> lst.deleteTask(0));
-        assertThrows(DukeException.class, () -> lst.deleteTask(-1));
-        assertThrows(DukeException.class, () -> lst.deleteTask(100));
+        assertThrows(DukeException.class, () -> lst.deleteTask(new int[]{0}));
+        assertThrows(DukeException.class, () -> lst.deleteTask(new int[]{-1}));
+        assertThrows(DukeException.class, () -> lst.deleteTask(new int[]{100}));
     }
 
     @Test
-    public void completeTaskTest() {
+    public void completeTaskTest() throws DukeInputException {
         lst = new TaskList();
-        assertThrows(DukeException.class, () -> lst.completeTask(0));
-        assertThrows(DukeException.class, () -> lst.completeTask(-1));
-        assertThrows(DukeException.class, () -> lst.completeTask(100));
+
+        Task t = Todo.createTodo("test");
+        lst.addTask(t);
+        assertEquals("[[T][X] test]", Arrays.toString(lst.completeTask(new int[]{0})));
+
+        assertThrows(DukeException.class, () -> lst.completeTask(new int[]{-1}));
+        assertThrows(DukeException.class, () -> lst.completeTask(new int[]{100}));
     }
 
     @Test
