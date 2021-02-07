@@ -15,4 +15,14 @@ public class Parser {
         String command = input.split(" ")[0];
         return command;
     }
+
+    public String getArguments(String input) {
+        String arguments = input.split(" ", 2)[1];
+        return arguments;
+    }
+
+    public int getDeleteIndex(String input) {
+        int i = Integer.parseInt(input.split(" ")[1]) - 1;
+        return i;
+    }
 }

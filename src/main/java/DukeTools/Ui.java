@@ -60,6 +60,15 @@ public class Ui {
         System.out.println("---------------------------------------" );
     }
 
+    public void printMatchingTask(TaskList taskList) {
+        System.out.println("\n---------------------------------------" );
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < taskList.getSize(); i++) {
+            System.out.println(String.valueOf(i+1) + "." + taskList.getSingleTask(i).toString());
+        }
+        System.out.println("---------------------------------------" );
+    }
+
     public void showLoadingError() {
         System.out.println("Existing tasks not found.");
     }
