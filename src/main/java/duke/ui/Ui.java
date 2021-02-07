@@ -117,9 +117,8 @@ public class Ui {
     public String getAllTasks(TaskList tasks) {
         if (tasks.isEmpty()) {
             return EMPTY_LIST_MESSAGE;
-        } else {
-            return combineMessages(PRINT_LIST_MESSAGE, combineTasksToString(tasks));
         }
+        return combineMessages(PRINT_LIST_MESSAGE, combineTasksToString(tasks));
     }
 
     /**
@@ -131,9 +130,8 @@ public class Ui {
     public String getAllFoundTasks(TaskList tasks) {
         if (tasks.isEmpty()) {
             return NO_FOUND_TASK_MESSAGE;
-        } else {
-            return combineMessages(PRINT_FOUND_TASKS_MESSAGE, combineTasksToString(tasks));
         }
+        return combineMessages(PRINT_FOUND_TASKS_MESSAGE, combineTasksToString(tasks));
     }
 
     /**
