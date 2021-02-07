@@ -11,5 +11,6 @@ public enum CommandName {
     EVENT,
     DEADLINE,
     FIND,
+    STATS,
     BYE
 }

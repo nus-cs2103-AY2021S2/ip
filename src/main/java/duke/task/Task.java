@@ -1,9 +1,12 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 public class Task {
     private static final String SEPARATOR = "|";
     protected String taskName;
     protected boolean isDone;
+    protected LocalDateTime doneDate;
 
 
     /**
@@ -14,14 +17,51 @@ public class Task {
     public Task (String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+        this.doneDate = null;
     }
 
     public String getTaskName() {
         return this.taskName;
     }
 
+    /**
+     * Marks a task as done and saves the date and time the task was marked as done.
+     */
     public void markDone () {
         this.isDone = true;
+        this.doneDate = LocalDateTime.now();
+    }
+
+    /**
+     * Marks a task as done but sets the done date and time as pastDate.
+     *
+     * @param pastDate The saved date and time of when the task was marked as done.
+     */
+    public void markDonePast (LocalDateTime pastDate) {
+        this.isDone = true;
+        this.doneDate = pastDate;
+    }
+
+    public boolean isWithinNextWeek() {
+        return true;
+    }
+
+    public boolean isDoneWithinPastWeek() {
+        assert doneDate != null : "Done Date cannot be null";
+        LocalDateTime taskDoneDateTime = this.doneDate;
+
+        LocalDateTime currDateTime = LocalDateTime.now();
+        LocalDateTime pastWeek = currDateTime.minusWeeks(1);
+
+        return (taskDoneDateTime.isAfter(pastWeek) && taskDoneDateTime.isBefore(currDateTime));
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public LocalDateTime getDoneDate() {
+        return this.doneDate;
     }
 
     @Override

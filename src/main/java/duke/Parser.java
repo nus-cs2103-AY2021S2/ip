@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.StatsCommand;
 import duke.command.TodoCommand;
 
 /**
@@ -26,7 +27,7 @@ public class Parser {
      */
     public Command parse(String fullCmd) throws DukeException {
         assert fullCmd != null : "Command string cannot be null";
-        
+
         String[] fullCmdStrArray = fullCmd.split(" ");
         Command toRun = null;
         CommandName cmd;
@@ -56,6 +57,9 @@ public class Parser {
             break;
         case FIND:
             toRun = new FindCommand(fullCmd, ui);
+            break;
+        case STATS:
+            toRun = new StatsCommand(fullCmd, ui);
             break;
         case BYE:
             toRun = new ByeCommand(fullCmd, ui);

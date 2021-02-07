@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import duke.task.Task;
@@ -55,4 +56,36 @@ public class TaskList {
         }
         return toReturn;
     }
+
+    public int getNumDoneTasks() {
+        int numDoneTasks = 0;
+        for (Task t : this.taskList) {
+            if (t.isDone()) {
+                numDoneTasks++;
+            }
+        }
+        return numDoneTasks;
+    }
+
+    public int getNumDoneTasksWithinWeek() {
+        int numDoneTasksWithinWeek = 0;
+        for (Task t : this.taskList) {
+            if (t.isDone() && t.isDoneWithinPastWeek()) {
+                numDoneTasksWithinWeek++;
+            }
+        }
+        return numDoneTasksWithinWeek;
+    }
+
+    public int getNumUpcomingTasksWithinWeek() {
+        int numUpcomingTasks = 0;
+        for (Task t : this.taskList) {
+            if (!t.isDone() && t.isWithinNextWeek()) {
+                numUpcomingTasks++;
+            }
+        }
+        return numUpcomingTasks;
+    }
+
+
 }
