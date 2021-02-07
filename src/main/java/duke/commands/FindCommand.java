@@ -2,8 +2,12 @@ package duke.commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -38,31 +42,42 @@ public class FindCommand extends Command {
             String noMatchingTaskMsg = "There are no tasks matching your input :(";
             return noMatchingTaskMsg;
         } else {
-            return printList(results).toString();
+            String msg = "These are the search results:" + listToString(results).toString();
+            return msg;
         }
     }
 
-    private StringBuilder printList(List<Task> results) {
-        assert results.size() >= 1;
+    private StringBuilder listToString(List<Task> results) {
+        StringBuilder stringBuilder = new StringBuilder();
 
-        StringBuilder stringBuilder = new StringBuilder("These are the search results:");
-        int counter = 1;
-        for (Task task : results) {
-            stringBuilder.append("\n").append(counter).append(". ").append(task.toString());
-            counter++;
-        }
+        Stream.iterate(1, index -> index <= results.size(), index -> index + 1)
+                .forEach(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer index) {
+                        Task task = results.get(index - 1);
+                        stringBuilder.append("\n")
+                                .append(index)
+                                .append(". ")
+                                .append(task.toString());
+                    }
+                });
+
         return stringBuilder;
     }
 
     private List<Task> searchList(Pattern regEx) {
-        List<Task> results = new ArrayList<>();
-        for (Task t : this.taskList.getList()) {
-            String description = t.getDescription();
-            Matcher matcher = regEx.matcher(description);
-            if (matcher.find()) {
-                results.add(t);
-            }
-        }
+        List<Task> results = taskList.getList()
+                .stream()
+                .filter(new Predicate<Task>() {
+                    @Override
+                    public boolean test(Task task) {
+                        String description = task.getDescription();
+                        Matcher matcher = regEx.matcher(description);
+                        return matcher.find();
+                    }
+                })
+                .collect(Collectors.toList());
+
         return results;
     }
 }
