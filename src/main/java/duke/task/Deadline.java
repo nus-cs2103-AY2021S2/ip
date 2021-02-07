@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Objects;
+
 import duke.util.DateTime;
 
 /**
@@ -61,6 +63,23 @@ public class Deadline extends Task {
     @Override
     public boolean hasStrInProps(String str) {
         return getContent().contains(str);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Deadline other = (Deadline) o;
+        return super.equals(other) && by.equals(other.by);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * super.hashCode() + Objects.hash(by);
     }
 
     @Override

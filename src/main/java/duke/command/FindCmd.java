@@ -41,8 +41,8 @@ public class FindCmd extends Command {
 
         Collections.sort(result);
 
-        for (int i = 1; i < result.size(); i++) {
-            sb.append(String.format("%d. %s\n", i, result.get(i)));
+        for (int i = 0; i < result.size(); i++) {
+            sb.append(String.format("%d. %s\n", i + 1, result.get(i)));
         }
 
         return sb.toString();

@@ -4,16 +4,18 @@ package duke.task;
  * Base Task class.
  */
 public abstract class Task implements Comparable<Task> {
-    private final String content;
-    private boolean isDone;
-    private static int NEXT_ID = 0;
-    private int id;
+    private static int nextId = 0;
+
+    protected int id;
+    protected final String content;
+    protected boolean isDone;
 
     public Task(String content) {
+        id = nextId;
+        nextId++;
+
         this.content = content;
         isDone = false;
-        id = NEXT_ID;
-        NEXT_ID++;
     }
 
     protected Task(String content, boolean isDone) {
@@ -44,6 +46,18 @@ public abstract class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task other) {
         return Integer.compare(id, other.id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Task other = (Task) o;
+        return id == other.id && content.equals(other.content) && isDone == other.isDone;
     }
 
     @Override
