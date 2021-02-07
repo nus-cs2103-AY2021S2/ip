@@ -1,25 +1,20 @@
 package duke;
 
-import duke.exceptions.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeInvalidDesException;
 import duke.handler.*;
-import duke.tasks.*;
-import duke.tasks.Event;
+import duke.tasks.TaskList;
 
-import java.awt.*;
-import java.io.File;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * Main class for Duke.
  */
 public class Duke {
-    private boolean exit = false;
+    private boolean willExit = false;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -50,13 +45,13 @@ public class Duke {
      */
     public void run() {
         ui.displayIntro();
-        while (exit == false) {
+        while (willExit == false) {
             try {
                 CommandHandler commandHandler = Parser.parseFromInput(ui.readCommand());
                 checkDeleteDonePossible(commandHandler, tasks);
                 commandHandler.execute(ui, storage, tasks);
                 if (commandHandler instanceof ByeHandler) {
-                    exit = true;
+                    willExit = true;
                 }
             } catch (DukeException e) {
                 String output = e.getMessage();

@@ -21,7 +21,7 @@ import java.util.Scanner;
  * and updating of task information in data file.
  */
 public class Storage {
-    private static String STORAGE_PATH;
+    private static String storagePath;
     private static final int MARK_INDEX = 2;
 
     /**
@@ -29,7 +29,7 @@ public class Storage {
      * @param storagePath path to the storage file.
      */
     public Storage(String storagePath) {
-        STORAGE_PATH = storagePath;
+        this.storagePath = storagePath;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Storage {
         TaskList tasks = new TaskList();
         Scanner dataReader = null;
         try{
-            File file = new File(STORAGE_PATH);
+            File file = new File(storagePath);
             file.getParentFile().mkdirs();
             file.createNewFile();
 
@@ -64,7 +64,7 @@ public class Storage {
      */
     public void addTask(Task task){
         try {
-            FileWriter fw = new FileWriter(STORAGE_PATH, true);
+            FileWriter fw = new FileWriter(storagePath, true);
             String toWrite ="";
             switch(task.getType()) {
             case "TODO":
@@ -103,7 +103,7 @@ public class Storage {
      */
     public void markDoneInStorage(Task task, int taskNum) {
         try {
-            Path path = Paths.get(STORAGE_PATH);
+            Path path = Paths.get(storagePath);
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             String line = lines.get(taskNum - 1);
             StringBuilder updatedLine = new StringBuilder(line);
@@ -122,7 +122,7 @@ public class Storage {
      */
     public void delete(int taskNum) {
         try {
-            Path path = Paths.get(STORAGE_PATH);
+            Path path = Paths.get(storagePath);
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             lines.remove(taskNum - 1);
             Files.write(path, lines, StandardCharsets.UTF_8);

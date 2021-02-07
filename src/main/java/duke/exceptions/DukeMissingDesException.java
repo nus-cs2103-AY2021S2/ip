@@ -16,6 +16,7 @@ public class DukeMissingDesException extends DukeException{
         case "DONE":
             message += "Your request for DONE is empty.\n"
                     + "Have you specified a task number?";
+            break;
         case "DELETE":
             message += "Your request for DELETE is empty.\n"
                     + "Have you specified a task number?";
@@ -31,6 +32,7 @@ public class DukeMissingDesException extends DukeException{
         case "TODO":
             message += "Your request for TODO is empty.\n"
                     + "Have you specified a task description?";
+            break;
         default:
             message += "Your request is missing a description.";
         }

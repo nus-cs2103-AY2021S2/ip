@@ -1,6 +1,11 @@
 package duke.handler;
 
-import duke.exceptions.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeDateTimeException;
+import duke.exceptions.DukeMissingDesException;
+import duke.exceptions.DukeInvalidDesException;
+import duke.exceptions.DukeIdkException;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -41,7 +46,7 @@ public class Parser {
         if (Queries.containsValue(keyword_UC)) {
             query = Queries.valueOf(keyword_UC);
         } else {
-            throw new DukeIDKException();
+            throw new DukeIdkException();
         }
 
         try {
