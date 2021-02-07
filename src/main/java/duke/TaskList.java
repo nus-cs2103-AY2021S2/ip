@@ -13,7 +13,7 @@ class TaskList {
 
     /**
      * If there is no existing data on the local hard disk, Dukebot will startup with an
-     * empty task list. If there is an existing text file, then Dukebok will copy over the
+     * empty task list. If there is an existing text file, then Dukebot will copy over the
      * text file into the task list.
      */
     public TaskList() {
@@ -32,14 +32,14 @@ class TaskList {
      * Iterates over the task list and prints out all the tasks.
      */
     public String listTask() {
-        String result = "";
-        result += "Here are the tasks in your list:";
+        String dukeMessage = "";
+        dukeMessage += "Here are the tasks in your list:";
         for (int i = 0; i < taskList.size(); i++) {
+            dukeMessage += "\n";
             Task currTask = taskList.get(i);
-            result += "\n";
-            result += i + 1 + "." + currTask;
+            dukeMessage += (i + 1) + "." + currTask;
         }
-        return result;
+        return dukeMessage;
     }
 
     /**
@@ -49,17 +49,16 @@ class TaskList {
      * @throws DukeException is thrown when the index given is invalid
      */
     protected String doneTask(int index) throws DukeException {
-        String result = "";
-        if (this.taskList.size() >= index) {
-            Task currTask = this.taskList.get(index - 1);
-            currTask.completeTask();
-            result += "Nice! I've marked this task as done:\n";
-            result += "  " + currTask;
-        } else {
-            result += "Task not found";
+        String dukeMessage = "";
+        if (this.taskList.size() < index) {
+            dukeMessage += "Task not found";
+            return dukeMessage;
         }
+        Task currTask = this.taskList.get(index - 1);
+        currTask.completeTask();
+        dukeMessage += "Nice! I've marked this task as done:\n " + currTask;
         Storage.update(this.taskList);
-        return result;
+        return dukeMessage;
     }
 
     /**
@@ -68,17 +67,17 @@ class TaskList {
      * @param index the index of the task to be deleted
      */
     public String delete(int index) {
-        String result = "";
+        String dukeMessage = "";
         int deleteIndex = index;
         if (this.taskList.size() >= deleteIndex) {
-            result += "Noted. I've removed this task:\n";
-            result += "  " + this.taskList.remove(deleteIndex - 1);
-            result += this;
+            dukeMessage += "Noted. I've removed this task:\n";
+            dukeMessage += "  " + this.taskList.remove(deleteIndex - 1);
+            dukeMessage += this;
         } else {
-            result += "Task not found";
+            dukeMessage += "Task not found";
         }
         Storage.update(this.taskList);
-        return result;
+        return dukeMessage;
     }
 
     /**
@@ -87,64 +86,64 @@ class TaskList {
      * @param taskName the name of the todo task
      */
     public String addToDo(String taskName) {
-        String result = "";
+        String dukeMessage = "";
         ToDo newTask = new ToDo(taskName);
         this.taskList.add(newTask);
-        result += "Got it. I've added this task:\n";
-        result += "  " + newTask + "\n";
-        result += this;
+        dukeMessage += "Got it. I've added this task:\n";
+        dukeMessage += "  " + newTask + "\n";
+        dukeMessage += this;
         Storage.update(this.taskList);
-        return result;
+        return dukeMessage;
     }
 
     /**
      * Adds a new event task to the task list.
      *
      * @param taskName the name of the event task
-     * @param date the date in which the event takes place
+     * @param date the date on which the event takes place
      */
     public String addEvent(String taskName, LocalDate date) {
-        String result = "";
+        String dukeMessage = "";
         Event newTask = new Event(taskName, date);
         this.taskList.add(newTask);
-        result += "Got it. I've added this task:\n";
-        result += "  " + newTask + "\n";
-        result += this;
+        dukeMessage += "Got it. I've added this task:\n";
+        dukeMessage += "  " + newTask + "\n";
+        dukeMessage += this;
         Storage.update(this.taskList);
-        return result;
+        return dukeMessage;
     }
 
     /**
      * Adds a new deadline task to the task list.
      *
      * @param taskName the name of the deadline task
-     * @param date the date in which the deadline is due
+     * @param date the date on which the deadline is due
      */
     public String addDeadline(String taskName, LocalDate date) {
-        String result = "";
+        String dukeMessage = "";
         Deadline newTask = new Deadline(taskName, date);
         this.taskList.add(newTask);
-        result += "Got it. I've added this task:\n";
-        result += "  " + newTask + "\n";
-        result += this;
+        dukeMessage += "Got it. I've added this task:\n";
+        dukeMessage += "  " + newTask + "\n";
+        dukeMessage += this;
         Storage.update(this.taskList);
-        return result;
+        return dukeMessage;
     }
 
     public String find(String keyWord) {
-        String result = "";
+        String dukeMessage = "";
         boolean isFirst = true;
-        for (Task t : taskList) {
-            if (t.getTaskName().toString().contains(keyWord)) {
+        for (Task currTask : taskList) {
+            if (currTask.getTaskName().contains(keyWord)) {
                 if (isFirst) {
                     isFirst = false;
                 } else {
-                    result += "\n";
+                    dukeMessage += "\n";
                 }
-                result += t;
+                dukeMessage += currTask;
             }
         }
-        return result;
+        return dukeMessage;
     }
 
     /**
@@ -154,10 +153,13 @@ class TaskList {
      */
     @Override
     public String toString() {
+        String taskSingularOrPlural = "";
         if (this.taskList.size() == 1) {
-            return "Now you have " + this.taskList.size() + " task in the list";
+            taskSingularOrPlural = "task";
         } else {
-            return "Now you have " + this.taskList.size() + " tasks in the list";
+            taskSingularOrPlural = "tasks";
         }
+        return "Now you have " + this.taskList.size() + " "
+                + taskSingularOrPlural + " in the list";
     }
 }

@@ -4,16 +4,17 @@ package duke;
  * Customised exception for Dukebot.
  */
 public class DukeException extends Exception {
+    // Contains details on why the exception was thrown.
     private final String errorMessage;
 
     /**
      * The constructor takes in an argument which corresponds to the message to be displayed
      * when an exception is created.
      *
-     * @param error the error that causes the exception
+     * @param errorMessage that contains details on why the exception was thrown.
      */
-    public DukeException(String error) {
-        this.errorMessage = error;
+    public DukeException(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     /**

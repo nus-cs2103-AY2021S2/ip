@@ -5,13 +5,14 @@ import java.time.LocalDate;
  * This class represents an event Task.
  */
 class Event extends Task {
+    // The date of the event.
     private final LocalDate date;
 
     /**
      * Creates a new event task object.
      *
      * @param taskName The name of the event
-     * @param date The date of the event
+     * @param date The date in which the event is held on
      */
     public Event(String taskName, LocalDate date) {
         super(taskName);
@@ -20,10 +21,10 @@ class Event extends Task {
 
     /**
      * Overloaded constructor to create an event task object. It accepts one extra argument
-     * to determine if the task is already done.
+     * to determine if the event is already done.
      *
      * @param taskName The name of the event
-     * @param isDone Whether the event is already done
+     * @param isDone Whether the event is already over
      * @param date The date of the event
      */
     public Event(String taskName, boolean isDone, LocalDate date) {
@@ -32,7 +33,7 @@ class Event extends Task {
     }
 
     /**
-     * Getter method to get the date in which the event is due.
+     * Getter method to get the date in which the event is held on.
      *
      * @return the date of the event
      */
@@ -47,10 +48,13 @@ class Event extends Task {
      */
     @Override
     public String toString() {
+        String type = "[E]";
+        String isCompleted;
         if (this.isDone) {
-            return "[E][X] " + this.taskName + " (at: " + Task.printDate(date) + ")";
+            isCompleted = "[X]";
         } else {
-            return "[E][ ] " + this.taskName + " (at: " + Task.printDate(date) + ")";
+            isCompleted = "[ ]";
         }
+        return type + isCompleted + " " + this.taskName + " (by: " + Task.printDate(date) + ")";
     }
 }
