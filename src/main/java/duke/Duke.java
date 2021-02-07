@@ -68,6 +68,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets Duke's response for a given input string. This input should come from the user interacting with the bot.
+     *
+     * @param input input string from user
+     * @return Duke's response to user input
+     */
     public String getResponse(String input) {
         Command cmd = Parser.parse(input);
         String resp = cmd.execute(taskLst);
@@ -75,6 +81,12 @@ public class Duke {
         return resp;
     }
 
+    /**
+     * Checks if the input wants Duke to exit.
+     *
+     * @param input input to check
+     * @return true if input wants Duke to exit and false otherwise
+     */
     public boolean isExitInput(String input) {
         Command cmd = Parser.parse(input);
         return cmd.isExit();

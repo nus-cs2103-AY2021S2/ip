@@ -63,7 +63,7 @@ public class DialogBox extends HBox {
 
         for (Node n: tmp) {
             if (n instanceof HBox) {
-                DialogBox.flip((HBox)n);
+                DialogBox.flip((HBox) n);
             }
         }
 

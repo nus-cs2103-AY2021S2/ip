@@ -10,26 +10,24 @@ import java.util.Arrays;
  * Represents a date-time object without a timezone.
  */
 public class DateTime {
-    private final LocalDateTime ldt;
-    private final boolean dateOnly;
-
     /** Formatter used for parsing date/datetime strings */
-    private final static DateTimeFormatter PARSE_FORMATTER;
+    private static final DateTimeFormatter PARSE_FORMATTER;
 
     /** Output formatter used when instance does not have dateOnly */
-    private final static DateTimeFormatter DATETIME_FORMATTER;
+    private static final DateTimeFormatter DATETIME_FORMATTER;
 
     /** Output formatter used when instance has dateOnly */
-    private final static DateTimeFormatter DATE_FORMATTER;
+    private static final DateTimeFormatter DATE_FORMATTER;
 
     static {
-        // Put the pattern with more info in front as
-        // longer datetime strings are unable to be parsed by shorter formatters
+        // Put the pattern with more info in front as longer datetime strings with additional info
+        // such as HHmm are unable to be parsed by shorter formatters.
         String[] patterns = new String[]{"dd/MM/yyyy HHmm", "dd/MM/yyyy"};
 
         DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
         Arrays.stream(patterns).map(DateTimeFormatter::ofPattern).forEach(builder::appendOptional);
 
+        // Put in default values for hour, minute and second or else the formatter will fail.
         PARSE_FORMATTER = builder
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                 .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
@@ -40,10 +38,19 @@ public class DateTime {
         DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     }
 
-    public DateTime(String str) {
+    private final LocalDateTime ldt;
+    private final boolean dateOnly;
+
+    /**
+     * Constructor to create a DateTime object from the given string. The string should match one of the
+     * formats specified in PARSE_FORMATTER.
+     *
+     * @param dateTimeStr the dateTimeStr to be parsed by PARSE_FORMATTER
+     */
+    public DateTime(String dateTimeStr) {
         // Length of dd/MM/yyyy
-        dateOnly = str.length() <= 10;
-        ldt = LocalDateTime.parse(str, PARSE_FORMATTER);
+        dateOnly = dateTimeStr.length() <= 10;
+        ldt = LocalDateTime.parse(dateTimeStr, PARSE_FORMATTER);
     }
 
     private DateTime(LocalDateTime ldt, boolean dateOnly) {
@@ -57,7 +64,7 @@ public class DateTime {
      *
      * @return an ISO-8601 datetime string
      */
-    public String toISODateTime() {
+    public String toIsoDateTime() {
         return ldt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
@@ -69,7 +76,7 @@ public class DateTime {
      * @param dateOnly the boolean indicating if time details should be ignored
      * @return a DateTime instance created from the given ISO-8601 datetime string
      */
-    public static DateTime fromISODateTime(String str, boolean dateOnly) {
+    public static DateTime fromIsoDateTime(String str, boolean dateOnly) {
         return new DateTime(LocalDateTime.parse(str, DateTimeFormatter.ISO_LOCAL_DATE_TIME), dateOnly);
     }
 

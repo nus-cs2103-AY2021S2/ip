@@ -38,7 +38,7 @@ public class Deadline extends Task {
         boolean isDateOnly = Boolean.parseBoolean(words[3]);
         String isoStr = words[4];
 
-        return new Deadline(content, isDone, DateTime.fromISODateTime(isoStr, isDateOnly));
+        return new Deadline(content, isDone, DateTime.fromIsoDateTime(isoStr, isDateOnly));
     }
 
     /**
@@ -49,7 +49,7 @@ public class Deadline extends Task {
     @Override
     public String getSerialized() {
         return String.format("D | %s | %s | %s | %s", getIsDone(), getContent(),
-                by.getDateOnly(), by.toISODateTime());
+                by.getDateOnly(), by.toIsoDateTime());
     }
 
     /**

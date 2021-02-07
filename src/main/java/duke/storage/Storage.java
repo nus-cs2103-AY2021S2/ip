@@ -21,8 +21,8 @@ import duke.task.Todo;
  *
  */
 public class Storage {
-    private final static String DIR_NAME = System.getProperty("user.dir") + File.separator + "data";
-    private final static String FILE_NAME = DIR_NAME + File.separator + "tasks.txt";
+    private static final String DIR_NAME = System.getProperty("user.dir") + File.separator + "data";
+    private static final String FILE_NAME = DIR_NAME + File.separator + "tasks.txt";
 
     private final File file;
 
