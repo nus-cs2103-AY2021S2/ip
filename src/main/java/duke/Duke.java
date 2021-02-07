@@ -7,8 +7,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Scanner;
-
 /**
  * Duke is a program for task tracking.
  */
@@ -39,11 +37,10 @@ public class Duke {
      */
     public void run() {
         ui.showWelcome();
-        Scanner sc = new Scanner(System.in);
         String request = "";
 
         while (!request.equals("bye")) {
-            Parser parser = new Parser(sc.nextLine());
+            Parser parser = new Parser(ui.readLine());
             request = parser.getRequest();
             String args = parser.getArgs();
 

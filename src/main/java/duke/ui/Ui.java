@@ -4,18 +4,21 @@ import duke.task.TaskList;
 import duke.task.Task;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 /**
- * A class for outputting messages to user.
+ * A class for handling input and output for Duke.
  */
 public class Ui {
 
-    public Ui() {
+    private Scanner scanner;
 
+    public Ui() {
+        this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Print the welcome message of Duke.
+     * Prints the welcome message of Duke.
      */
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -28,7 +31,7 @@ public class Ui {
     }
 
     /**
-     * Print a formatted message.
+     * Prints a formatted message.
      * This method take in a message and print the formatted message
      * instantly.
      * @param msg a string to print
@@ -41,14 +44,14 @@ public class Ui {
     }
 
     /**
-     * Print the exit message of Duke.
+     * Prints the exit message of Duke.
      */
     public void showBye() {
         printFormatted("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Print all <code>Task</code> in the <code>TaskList</code>.
+     * Prints all <code>Task</code> in the <code>TaskList</code>.
      *
      * @param tasks a <code>TaskList</code> consisting of tasks
      */
@@ -65,7 +68,7 @@ public class Ui {
     }
 
     /**
-     * Print a message when <code>Task</code> is added.
+     * Prints a message when <code>Task</code> is added.
      *
      * @param tasks the <code>TaskList</code> containing all the tasks
      * @param task the <code>Task</code> that is added
@@ -78,7 +81,7 @@ public class Ui {
     }
 
     /**
-     * Print a message when <code>Task</code> is removed.
+     * Prints a message when <code>Task</code> is removed.
      *
      * @param tasks the <code>TaskList</code> containing all the tasks
      * @param task the <code>Task</code> that is added
@@ -91,7 +94,7 @@ public class Ui {
     }
 
     /**
-     * Print a message when <code>Task</code> is marked done.
+     * Prints a message when <code>Task</code> is marked done.
      *
      * @param task the <code>Task</code> that is added
      */
@@ -101,6 +104,11 @@ public class Ui {
         printFormatted(msg);
     }
 
+    /**
+     * Prints all the <code>Task</code> in <code>TaskList</code> with a message
+     *
+     * @param tasks TaskList to be printed
+     */
     public void printFound(TaskList tasks) {
         LinkedList<Task> lst = tasks.getList();
         String msg = "Here are the matching tasks in your list:\n";
@@ -111,5 +119,9 @@ public class Ui {
             }
         }
         printFormatted(msg);
+    }
+
+    public String readLine() {
+        return this.scanner.nextLine();
     }
 }
