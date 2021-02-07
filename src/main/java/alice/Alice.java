@@ -42,7 +42,7 @@ public class Alice {
 	 * @param isDone If the agent is done operating.
 	 * @param hasDelta If the data in the agent has changed from some other instance.
 	 */
-	public Alice(String currentMessage, TaskList newData, boolean done, boolean hasDelta, Alice previous) {
+	public Alice(String currentMessage, TaskList newData, boolean isDone, boolean hasDelta, Alice previous) {
 		this.currentMessage = currentMessage;
 		this.data = newData;
 		this.isDone = isDone;

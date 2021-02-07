@@ -35,10 +35,10 @@ public class CommandAdd extends Command {
 			String response = String.format(SUCCESS_MESSAGE, task, newStore.size());
 			newAgent = new Alice(response, new TaskList(newStore), false, true, agent);
 		} catch (AliceException aliceException) {
-			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getDone(), false, agent.getPrevious());
+			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getIsDone(), false, agent.getPrevious());
 		} catch (IllegalStateException illegalStateException) {
 			newAgent = new Alice("Something that was not supposed to happen happened", agent.getData(),
-					agent.getDone(), false, agent.getPrevious());
+					agent.getIsDone(), false, agent.getPrevious());
 		} catch (ArrayIndexOutOfBoundsException | IllegalArgumentException exception) {
 			String usage;
 			switch (tokens[0]) {
@@ -51,7 +51,7 @@ public class CommandAdd extends Command {
 			default:
 				usage = USAGE_EVENT;
 			}
-			newAgent = new Alice(usage, agent.getData(), agent.getDone(), false, agent.getPrevious());
+			newAgent = new Alice(usage, agent.getData(), agent.getIsDone(), false, agent.getPrevious());
 		}
 		return newAgent;
 	}

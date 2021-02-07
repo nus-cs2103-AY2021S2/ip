@@ -37,13 +37,13 @@ public class CommandDone extends Command {
 			List<Task> dataList = agent.getData().getTasks().stream().map(Task::clone).collect(Collectors.toList());
 			dataList.set(index - 1, dataList.get(index - 1).setDone(true));
 			String response = String.format(SUCCESS_MESSAGE, dataList.get(index - 1));
-			newAgent = new Alice(response, new TaskList(dataList), agent.getDone(), true, agent);
+			newAgent = new Alice(response, new TaskList(dataList), agent.getIsDone(), true, agent);
 		} catch (NumberFormatException numberFormatException) {
-			newAgent = new Alice("Invalid number", agent.getData(), agent.getDone(), false, agent.getPrevious());
+			newAgent = new Alice("Invalid number", agent.getData(), agent.getIsDone(), false, agent.getPrevious());
 		} catch (AliceException aliceException) {
-			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getDone(), false, agent.getPrevious());
+			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getIsDone(), false, agent.getPrevious());
 		} catch (ArrayIndexOutOfBoundsException | IllegalArgumentException exception) {
-			newAgent = new Alice(USAGE, agent.getData(), agent.getDone(), false, agent.getPrevious());
+			newAgent = new Alice(USAGE, agent.getData(), agent.getIsDone(), false, agent.getPrevious());
 		}
 		return newAgent;
 	}

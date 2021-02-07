@@ -3,6 +3,9 @@ package alice.task;
 import java.util.List;
 
 public class TaskList implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1;
+
 	private final List<Task> tasks;
 
 	public TaskList(List<Task> tasks) {
