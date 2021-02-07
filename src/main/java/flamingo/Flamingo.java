@@ -9,17 +9,8 @@ public class Flamingo {
     private static Storage storage = new Storage();
     private static TaskList tasks;
 
-    /**
-     * Loads tasks if the data text file exists.
-     * Else, create a new Task List.
-     */
     public Flamingo() {
-        try {
-            tasks = new TaskList(storage.loadData());
-        } catch (FileNotFoundException e) {
-            Ui.showLoadingError();
-            tasks = new TaskList();
-        }
+        loadTasks();
     }
 
     public static Storage getStorage() {
@@ -31,11 +22,21 @@ public class Flamingo {
     }
 
     /**
+     * Loads tasks if the data text file exists.
+     * Else, create a new Task List.
+     */
+    private void loadTasks() {
+        try {
+            tasks = new TaskList(storage.loadData());
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
+        }
+    }
+
+    /**
      * Generates a response.
      */
     public static String getResponse(String input) {
-        String response = Parser.run(input);
-        assert response != null;
-        return response;
+        return Parser.run(input);
     }
 }

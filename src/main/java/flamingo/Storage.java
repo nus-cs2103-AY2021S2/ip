@@ -15,8 +15,8 @@ import java.util.Scanner;
  */
 public class Storage {
     protected boolean pathExists;
-    private String currentDirectory;
-    private Path path;
+    private final String currentDirectory;
+    private final Path path;
 
     /**
      * Creates a new Storage.
@@ -55,7 +55,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("\nOh no Flamingo! I cannot save the data!\n");
+            System.out.println("Oh no Flamingo! I cannot save the data!");
         }
     }
 
@@ -69,31 +69,52 @@ public class Storage {
     public ArrayList<Task> loadData() throws FileNotFoundException {
         if (pathExists) {
             Scanner taskList = new Scanner(new File(String.valueOf(path)));
-            ArrayList<Task> tasks = new ArrayList<>();
-            while (taskList.hasNextLine()) {
-                String currentTask = taskList.nextLine();
-                char typeOfTask = currentTask.charAt(0);
-                boolean isTaskDone = (currentTask.charAt(2) == '1');
-                int temp = currentTask.indexOf('|');
-                Task taskToAdd = new Task("");
-
-                if (typeOfTask == 'T') {
-                    taskToAdd = new Todo(currentTask.substring(4));
-                } else if (typeOfTask == 'D') {
-                    taskToAdd = new Deadline(currentTask.substring(4, temp - 1),
-                            LocalDate.parse(currentTask.substring(temp + 1)));
-                } else if (typeOfTask == 'E') {
-                    taskToAdd = new Event(currentTask.substring(4, temp - 1),
-                            LocalDateTime.parse(currentTask.substring(temp + 1)));
-                }
-                if (isTaskDone) {
-                    taskToAdd.markAsDone();
-                }
-                tasks.add(taskToAdd);
-            }
-            return tasks;
+            return createTaskArrayList(taskList);
         } else {
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * Creates ArrayList of tasks using the data.txt file.
+     *
+     * @param taskList TaskList from the data.txt file.
+     * @return ArrayList of tasks.
+     */
+    private ArrayList<Task> createTaskArrayList(Scanner taskList) {
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        // Go through the task list from data file
+        while (taskList.hasNextLine()) {
+            String currentTask = taskList.nextLine();
+            char typeOfTask = currentTask.charAt(0);
+            boolean isTaskDone = (currentTask.charAt(2) == '1');
+            int temp = currentTask.indexOf('|');
+            Task taskToAdd = new Task("");
+
+            switch(typeOfTask) {
+            case('T'):
+                taskToAdd = new Todo(currentTask.substring(4));
+                break;
+            case('D'):
+                taskToAdd = new Deadline(currentTask.substring(4, temp - 1),
+                        LocalDate.parse(currentTask.substring(temp + 1)));
+                break;
+            case('E'):
+                taskToAdd = new Event(currentTask.substring(4, temp - 1),
+                        LocalDateTime.parse(currentTask.substring(temp + 1)));
+                break;
+            default:
+                break;
+            }
+
+            // Mark tasks as done if they are already done
+            if (isTaskDone) {
+                taskToAdd.markAsDone();
+            }
+
+            tasks.add(taskToAdd);
+        }
+        return tasks;
     }
 }
