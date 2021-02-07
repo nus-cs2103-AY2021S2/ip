@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Represents a date-time object without a timezone.
@@ -82,6 +83,23 @@ public class DateTime {
 
     public boolean getDateOnly() {
         return dateOnly;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DateTime dateTime = (DateTime) o;
+        return dateOnly == dateTime.dateOnly && ldt.equals(dateTime.ldt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ldt, dateOnly);
     }
 
     @Override

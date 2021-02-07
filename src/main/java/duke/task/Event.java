@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Objects;
+
 /**
  * Represents a task that happens at a specific location and/or date and time.
  */
@@ -55,6 +57,23 @@ public class Event extends Task {
     @Override
     public boolean hasStrInProps(String str) {
         return getContent().contains(str) || at.contains(str);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Event other = (Event) o;
+        return super.equals(other) && at.equals(other.at);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * super.hashCode() + Objects.hash(at);
     }
 
     @Override

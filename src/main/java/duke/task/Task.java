@@ -3,11 +3,17 @@ package duke.task;
 /**
  * Base Task class.
  */
-public abstract class Task {
-    private final String content;
-    private boolean isDone;
+public abstract class Task implements Comparable<Task> {
+    private static int nextId = 0;
+
+    protected int id;
+    protected final String content;
+    protected boolean isDone;
 
     public Task(String content) {
+        id = nextId;
+        nextId++;
+
         this.content = content;
         isDone = false;
     }
@@ -18,7 +24,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     public String getContent() {
@@ -36,6 +42,23 @@ public abstract class Task {
     public abstract String getSerialized();
 
     public abstract boolean hasStrInProps(String str);
+
+    @Override
+    public int compareTo(Task other) {
+        return Integer.compare(id, other.id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Task other = (Task) o;
+        return id == other.id && content.equals(other.content) && isDone == other.isDone;
+    }
 
     @Override
     public String toString() {
