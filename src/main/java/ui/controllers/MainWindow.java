@@ -18,7 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for ui.controllers.MainWindow. Provides the layout for the other controls.
+ * Controller for ui.controllers.MainWindow. Provides the layout for the other
+ * controls.
  */
 public class MainWindow extends AnchorPane {
     private static final long EXIT_DELAY_MILLISECONDS = 2000;
@@ -53,13 +54,15 @@ public class MainWindow extends AnchorPane {
      * @param duke
      */
     public void initialiseDuke(Duke duke) {
+        assert duke != null : "duke is null";
         this.duke = duke;
         addDialog(duke.getGreetingMessage(), DialogUser.DUKE);
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * Duke's reply and then appends them to the dialog container. Clears the user
+     * input after processing.
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
@@ -108,6 +111,5 @@ public class MainWindow extends AnchorPane {
  * Enum to determine which user the dialog belongs to
  */
 enum DialogUser {
-    USER,
-    DUKE
+    USER, DUKE
 }
