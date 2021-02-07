@@ -22,10 +22,13 @@ public class AddEventCommand extends Command {
             if (details.isEmpty()) {
                 throw new DukeException(EMPTY_EVENT_ERROR_MESSAGE);
             }
+            assert !details.isEmpty() : EMPTY_EVENT_ERROR_MESSAGE;
             String[] detailsArr = details.split(" /at ", 2);
             if (detailsArr.length != 2) {
                 throw new DukeException(NO_DATETIME_ERROR_MESSAGE);
             }
+            assert detailsArr.length == 2 : NO_DATETIME_ERROR_MESSAGE;
+
             LocalDateTime date = Parser.parseDateTimeFromInput(detailsArr[1]);
             this.event = new Event(detailsArr[0], date);
         } catch (DateTimeParseException e) {

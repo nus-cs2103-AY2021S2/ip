@@ -22,10 +22,13 @@ public class AddDeadlineCommand extends Command {
             if (details.isEmpty()) {
                 throw new DukeException(EMPTY_DEADLINE_ERROR_MESSAGE);
             }
+            assert !details.isEmpty() : EMPTY_DEADLINE_ERROR_MESSAGE;
             String[] detailsArr = details.split(" /by ", 2);
             if (detailsArr.length != 2) {
                 throw new DukeException(NO_DATETIME_ERROR_MESSAGE);
             }
+            assert detailsArr.length == 2 : NO_DATETIME_ERROR_MESSAGE;
+
             LocalDateTime date = Parser.parseDateTimeFromInput(detailsArr[1]);
             this.deadline = new Deadline(detailsArr[0], date);
         } catch (DateTimeParseException e) {

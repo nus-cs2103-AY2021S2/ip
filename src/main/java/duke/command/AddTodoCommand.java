@@ -15,6 +15,7 @@ public class AddTodoCommand extends Command {
         if (details.isBlank()) {
             throw new DukeException(EMPTY_TODO_ERROR_MESSAGE);
         }
+        assert !details.isEmpty() : EMPTY_TODO_ERROR_MESSAGE;
         this.todo = new Todo(details);
     }
 
