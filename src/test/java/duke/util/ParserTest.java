@@ -24,6 +24,7 @@ public class ParserTest {
         assertDoesNotThrow(() -> Parser.parseInput("load"));
         assertDoesNotThrow(() -> Parser.parseInput("help"));
         assertDoesNotThrow(() -> Parser.parseInput("search a"));
+        assertDoesNotThrow(() -> Parser.parseInput("sort"));
 
         assertThrows(DukeInputException.class, () -> Parser.parseInput(""));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("a"));

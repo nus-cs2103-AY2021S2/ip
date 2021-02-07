@@ -7,7 +7,7 @@ import java.util.List;
  * Represents a Task.
  * Includes description of the task and an indicator of whether it is completed.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
     protected LocalDate date;
@@ -78,4 +78,19 @@ public abstract class Task {
      * @return List of task details.
      */
     protected abstract List<String> exportData();
+
+    @Override
+    public int compareTo(Task other) {
+        if (date == null && other.date == null) {
+            return description.compareTo(other.description);
+        } else if (date == null) {
+            return -1;
+        } else if (other.date == null) {
+            return 1;
+        } else if (date.equals(other.date)) {
+            return description.compareTo(other.description);
+        } else {
+            return date.compareTo(other.date);
+        }
+    }
 }

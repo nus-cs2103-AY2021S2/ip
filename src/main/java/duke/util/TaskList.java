@@ -25,11 +25,11 @@ public class TaskList {
     /**
      * Fills tasklist with contents of the given list.
      *
-     * @param lst List of tasks.
+     * @param tasks List of tasks.
      */
-    public void load(List<Task> lst) {
+    public void load(List<Task> tasks) {
         lst.clear();
-        lst.addAll(lst);
+        lst.addAll(tasks);
     }
 
 
@@ -172,5 +172,12 @@ public class TaskList {
             }
         }
         return results;
+    }
+
+    /**
+     * Sort tasklist by todo task first, and then by date.
+     */
+    public void sort() {
+        lst.sort(null);
     }
 }

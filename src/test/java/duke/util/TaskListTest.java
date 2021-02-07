@@ -66,4 +66,21 @@ public class TaskListTest {
         assertEquals(0, lst.search("test").size());
     }
 
+    @Test
+    public void sortTest() throws DukeInputException {
+        lst = new TaskList();
+        lst.addTask(Deadline.createDeadline("c /by 2011-01-01"));
+        lst.addTask(Deadline.createDeadline("a /by 2011-01-01"));
+        lst.addTask(Event.createEvent("b /at 2011-02-02"));
+        lst.addTask(Todo.createTodo("a"));
+        lst.addTask(Todo.createTodo("b"));
+        lst.sort();
+
+        assertEquals("[T][ ] a", lst.getList().get(0).toString());
+        assertEquals("[T][ ] b", lst.getList().get(1).toString());
+        assertEquals("[D][ ] a (by: 1 Jan)", lst.getList().get(2).toString());
+        assertEquals("[D][ ] c (by: 1 Jan)", lst.getList().get(3).toString());
+        assertEquals("[E][ ] b (at: 2 Feb)", lst.getList().get(4).toString());
+    }
+
 }

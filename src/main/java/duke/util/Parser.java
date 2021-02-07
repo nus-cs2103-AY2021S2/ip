@@ -51,6 +51,8 @@ public class Parser {
         case "search":
             checkValidSearch(args);
             break;
+        case "sort":
+            break;
         default:
             throw new DukeInputException("I'm sorry, but I don't know what that means :-(");
         }

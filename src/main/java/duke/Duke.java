@@ -42,6 +42,8 @@ import javafx.collections.ObservableList;
  * <br>search [keyword/date]
  * <br>  - Display all task containing the following keyword.
  * <br>  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.
+ * <br>sort
+ * <br>  - Order tasklist with Todos first and then by date.
  */
 public class Duke {
 
@@ -120,6 +122,8 @@ public class Duke {
                 return displayHelp();
             case "search":
                 return search(args);
+            case "sort":
+                return sort();
             default:
                 assert false : "Parser missed an invalid input";
             }
@@ -226,6 +230,11 @@ public class Duke {
     private String search(String args) {
         List<String> results = tasks.search(args);
         return ui.displayList(results);
+    }
+
+    private String sort() {
+        tasks.sort();
+        return ui.displaySortMessage();
     }
 
     /**
