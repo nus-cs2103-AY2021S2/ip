@@ -25,6 +25,7 @@ import ekud.task.ToDo;
 public class Storage {
     private static final String deliminator = "\\|";
     private static final Pattern PARENT_DIRECTORY = Pattern.compile("(?<parentDirectory>^.*/).*$");
+
     private final String filePath;
     private final File file;
     private boolean canSave;
@@ -42,6 +43,7 @@ public class Storage {
                     ? "./"
                     : matcher.group("parentDirectory"));
             File folder = new File(parentDirectory);
+
             if (!folder.exists()) {
                 canSave = folder.mkdirs();
             } else {
@@ -71,6 +73,7 @@ public class Storage {
             String line = s.nextLine();
             String[] data;
             data = line.split(deliminator, 0);
+
             switch (data[0]) {
             case "T":
                 ret.add(new ToDo(data[2]));
@@ -85,11 +88,12 @@ public class Storage {
                 throw new EkudException("Unknown task type");
             }
 
-            // mark as read accordingly
+            /* mark as read accordingly */
             if (Boolean.parseBoolean(data[1])) {
                 ret.lastElement().markAsDone();
             }
         }
+
         return ret;
     }
 
