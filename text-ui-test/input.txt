@@ -1,0 +1,7 @@
+todo meet friends
+deadline do 2103 /by 123
+event lecture /at 456
+list
+done 1
+list
+bye

@@ -69,7 +69,7 @@ public class Duke {
                         }
                         arr.add(new Deadline(task_in, time.trim()));
                         number++;
-                        System.out.println("Got it. I've added this task: ");
+                        System.out.println("Got it. I've added this task:");
                         System.out.println(task_in + " by" + time);
                         System.out.println("you now have " + number + " tasks in the list");
                         break;
@@ -89,7 +89,7 @@ public class Duke {
                         }
                         arr.add(new Event(task_in, time.trim()));
                         number++;
-                        System.out.println("Got it. I've added this task: ");
+                        System.out.println("Got it. I've added this task:");
                         System.out.println(task_in + " at"+ time);
                         System.out.println("you now have " + number + " tasks in the list");
                         break;
