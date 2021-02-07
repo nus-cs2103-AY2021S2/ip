@@ -30,7 +30,7 @@ public class DeadlineTest {
         @DisplayName("convert to string")
         void toStringTest() {
             assertEquals(
-                    "[D][✘] " + DEADLINE_DESCRIPTION + " (by: " + DATE_TIME.format(FORMATTER) + ")",
+                    "[D][\u2718] " + DEADLINE_DESCRIPTION + " (by: " + DATE_TIME.format(FORMATTER) + ")",
                     deadline.toString());
         }
 
@@ -53,7 +53,7 @@ public class DeadlineTest {
             @DisplayName("convert to string")
             void toStringTest() {
                 assertEquals(
-                        "[D][✓] " + DEADLINE_DESCRIPTION + " (by: " + DATE_TIME.format(FORMATTER) + ")",
+                        "[D][\u2713] " + DEADLINE_DESCRIPTION + " (by: " + DATE_TIME.format(FORMATTER) + ")",
                         deadline.toString());
             }
 

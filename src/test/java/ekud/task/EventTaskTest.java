@@ -30,7 +30,7 @@ public class EventTaskTest {
         @DisplayName("convert to string")
         void toStringTest() {
             assertEquals(
-                    "[E][✘] " + EVENT_DESCRIPTION + " (at: " + DATE_TIME.format(FORMATTER) + ")",
+                    "[E][\u2718] " + EVENT_DESCRIPTION + " (at: " + DATE_TIME.format(FORMATTER) + ")",
                     eventTask.toString());
         }
 
@@ -53,7 +53,7 @@ public class EventTaskTest {
             @DisplayName("convert to string")
             void toStringTest() {
                 assertEquals(
-                        "[E][✓] " + EVENT_DESCRIPTION + " (at: " + DATE_TIME.format(FORMATTER) + ")",
+                        "[E][\u2713] " + EVENT_DESCRIPTION + " (at: " + DATE_TIME.format(FORMATTER) + ")",
                         eventTask.toString());
             }
 

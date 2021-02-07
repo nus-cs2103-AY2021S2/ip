@@ -26,7 +26,7 @@ public class ToDoTest {
         @Test
         @DisplayName("convert to string")
         void toStringTest() {
-            assertEquals("[T][✘] " + TODO_DESCRIPTION, toDo.toString());
+            assertEquals("[T][\u2718] " + TODO_DESCRIPTION, toDo.toString());
         }
 
         @Test
@@ -47,7 +47,7 @@ public class ToDoTest {
             @Test
             @DisplayName("convert to string")
             void toStringTest() {
-                assertEquals("[T][✓] " + TODO_DESCRIPTION, toDo.toString());
+                assertEquals("[T][\u2713] " + TODO_DESCRIPTION, toDo.toString());
             }
 
             @Test
