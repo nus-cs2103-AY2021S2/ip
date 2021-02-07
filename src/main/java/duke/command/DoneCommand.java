@@ -37,6 +37,9 @@ public class DoneCommand implements Command {
      */
     @Override
     public String run(Storage storage, TaskList taskList) throws DukeException {
+        assert storage != null : "Storage cannot be null";
+        assert taskList != null : "Tasklist cannot be null";
+
         if (fullCmdStrArray.length > 2) { // too many parameters (>1)
             throw new DukeException(ui.doneCmdTooManyArgsError());
         }

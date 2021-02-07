@@ -36,6 +36,9 @@ public class TodoCommand implements Command {
      */
     @Override
     public String run(Storage storage, TaskList taskList) throws DukeException {
+        assert storage != null : "Storage cannot be null";
+        assert taskList != null : "Tasklist cannot be null";
+
         if (fullCmdStrArray.length == 1) { // handle todo without parameters
             throw new DukeException("Sorry human, please enter a name for this task.");
         }

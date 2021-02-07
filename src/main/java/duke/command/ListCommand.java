@@ -34,6 +34,9 @@ public class ListCommand implements Command {
      */
     @Override
     public String run(Storage storage, TaskList taskList) throws DukeException {
+        assert storage != null : "Storage cannot be null";
+        assert taskList != null : "Tasklist cannot be null";
+
         if (fullCmdStrArray.length > 1) { // handle commands such as "list abc", "list 1 2 3"
             throw new DukeException(ui.listCmdError());
         }
