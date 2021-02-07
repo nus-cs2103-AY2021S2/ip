@@ -31,8 +31,8 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("test/duke.txt");
 
+        storage = new Storage("test/duke.txt");
         try {
             taskList = storage.load();
         } catch (Exception e) {
@@ -72,12 +72,12 @@ public class Duke extends Application {
         parser = new Parser();
 
         scrollPane = new ScrollPane();
+        userInput = new TextField();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
-        userInput = new TextField();
-        sendButton = new Button("Send");
 
+        sendButton = new Button("Send");
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 

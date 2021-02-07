@@ -38,18 +38,22 @@ public class Event extends Task {
      */
     public String saveToData() {
         if (this.isDone) {
-            return ("E | 1 | " + todo + " | " + time.toString().replace("T", " "));
+            return ("E | 1 | " + todo + " | " + time.toString().replace("T", " ")
+                    + " | " + saveTags());
         } else {
-            return ("E | 0 | " + todo + " | " + time.toString().replace("T", " "));
+            return ("E | 0 | " + todo + " | " + time.toString().replace("T", " ")
+                    + " | " + saveTags());
         }
     }
 
     @Override
     public String toString() {
         if (!this.isDone) {
-            return ("[E][ ] " + this.todo + " (at:" + dateFormat(this.time) + ")");
+            return ("[E][ ] " + this.todo + " (at:" + dateFormat(this.time) + ")"
+                    + " " + showTags());
         } else {
-            return ("[E][X] " + this.todo + " (at:" + dateFormat(this.time) + ")");
+            return ("[E][X] " + this.todo + " (at:" + dateFormat(this.time) + ")"
+                    + " " + showTags());
         }
     }
 }

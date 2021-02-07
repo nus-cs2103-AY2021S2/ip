@@ -21,6 +21,22 @@ public class Storage {
     }
 
     /**
+     * Sets the appropriate tags onto the task given.
+     *
+     * @param task The task to update tags.
+     * @param tags The tags to be put onto the task.
+     */
+    public void updateTags(Task task, String tags) {
+        if (tags == null || tags == "") {
+            return;
+        }
+        String[] split = tags.split("\\s+");
+        for (String s : split) {
+            task.setTag(s);
+        }
+    }
+
+    /**
      * Loads a TaskList from storage, if it exists.
      * Else creates a new storage file.
      *
@@ -42,6 +58,9 @@ public class Storage {
                     if (line[1].equals("1")) {
                         task.setDone();
                     }
+                    if (line.length > 3) {
+                        updateTags(task, line[3]);
+                    }
                     leest.add(task);
                     break;
                 case "D":
@@ -49,12 +68,18 @@ public class Storage {
                     if (line[1].equals("1")) {
                         deadline.setDone();
                     }
+                    if (line.length > 4) {
+                        updateTags(deadline, line[4]);
+                    }
                     leest.add(deadline);
                     break;
                 case "E":
                     Event event = new Event(line[2], line[3]);
                     if (line[1].equals("1")) {
                         event.setDone();
+                    }
+                    if (line.length > 4) {
+                        updateTags(event, line[4]);
                     }
                     leest.add(event);
                     break;

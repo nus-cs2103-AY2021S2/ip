@@ -47,7 +47,9 @@ public class Ui {
         case "invalidTodo":
             return ("OOPS!!! Please define your todo properly uwu.");
         case "invalidDone":
-            return ("OOPS!!! Please indicate a valid task to complete uwu");
+            return ("OOPS!!! Please indicate a valid task to complete uwu.");
+        case "badTag":
+            return ("OOPS!!! Please provide a tag uwu.");
         default:
             return "Something went really really wrong uwu.";
         }
@@ -77,6 +79,10 @@ public class Ui {
 
     public String setDone(Task t) {
         return ("Sugoi! I've marked this task as done uwu:\n" + t);
+    }
+
+    public String setTag(Task t) {
+        return ("I see! What an interesting tag uwu\n" + t);
     }
 
     /**

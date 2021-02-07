@@ -2,17 +2,13 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Task {
-    /**
-     * The task that needs to be done, as a String
-     */
     protected String todo;
-    /**
-     * Whether or not the task is complete
-     */
     protected boolean isDone;
-
+    protected List<String> tags;
     /**
      * Instantiates a task.
      *
@@ -21,6 +17,7 @@ public class Task {
     public Task(String s) {
         this.todo = s;
         this.isDone = false;
+        this.tags = new ArrayList<>();
     }
 
     public void setDone() {
@@ -38,9 +35,9 @@ public class Task {
      */
     public String saveToData() {
         if (this.isDone) {
-            return ("T | 1 | " + todo);
+            return ("T | 1 | " + todo + " | " + saveTags());
         } else {
-            return ("T | 0 | " + todo);
+            return ("T | 0 | " + todo + " | " + saveTags());
         }
     }
 
@@ -54,12 +51,32 @@ public class Task {
         return (date.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmm a")));
     }
 
+    public void setTag(String tag) {
+        this.tags.add(tag);
+    }
+
+    protected String showTags() {
+        String toReturn = "";
+        for (String s : tags) {
+            toReturn += ("#" + s + " ");
+        }
+        return toReturn;
+    }
+
+    protected String saveTags() {
+        String toReturn = "";
+        for (String s : tags) {
+            toReturn += (s + " ");
+        }
+        return toReturn;
+    }
+
     @Override
     public String toString() {
         if (!this.isDone) {
-            return ("[T][ ] " + todo);
+            return ("[T][ ] " + todo + " " + showTags());
         } else {
-            return ("[T][X] " + todo);
+            return ("[T][X] " + todo + " " + showTags());
         }
     }
 

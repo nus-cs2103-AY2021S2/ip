@@ -38,18 +38,22 @@ public class Deadline extends Task {
      */
     public String saveToData() {
         if (this.isDone) {
-            return ("D | 1 | " + todo + " | " + doneBy.toString().replace("T", " "));
+            return ("D | 1 | " + todo + " | " + doneBy.toString().replace("T", " ")
+                    + " | " + saveTags());
         } else {
-            return ("D | 0 | " + todo + " | " + doneBy.toString().replace("T", " "));
+            return ("D | 0 | " + todo + " | " + doneBy.toString().replace("T", " ")
+                    + " | " + saveTags());
         }
     }
 
     @Override
     public String toString() {
         if (!this.isDone) {
-            return ("[D][ ] " + this.todo + " (by:" + dateFormat(this.doneBy) + ")");
+            return ("[D][ ] " + this.todo + " (by:" + dateFormat(this.doneBy) + ")"
+                    + " " + showTags());
         } else {
-            return ("[D][X] " + this.todo + " (by:" + dateFormat(this.doneBy) + ")");
+            return ("[D][X] " + this.todo + " (by:" + dateFormat(this.doneBy) + ")"
+                    + " " + showTags());
         }
     }
 }
