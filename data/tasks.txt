@@ -1,0 +1,6 @@
+[T][?]read books
+[D][?]return book (by: Jan 25 2021)
+[E][?]drink (at: Feb 01 2021)
+[T][?]join sports club
+[T][?]go home
+[F][?]running(needs: 1 hour)
