@@ -35,7 +35,7 @@ public class TaskTest {
         @Test
         @DisplayName("convert to string")
         void toStringTest() {
-            assertEquals("[ ] " + TASK_DESCRIPTION, task.toString());
+            assertEquals("[✘] " + TASK_DESCRIPTION, task.toString());
         }
 
         @Test
@@ -63,7 +63,7 @@ public class TaskTest {
             @Test
             @DisplayName("convert to string")
             void toStringTest() {
-                assertEquals("[X] " + TASK_DESCRIPTION, task.toString());
+                assertEquals("[✓] " + TASK_DESCRIPTION, task.toString());
             }
 
             @Test
