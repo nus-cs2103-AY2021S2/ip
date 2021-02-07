@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  * @see Task
  */
 class Deadline extends Task {
-    private final LocalDate by;
+    private LocalDate by;
 
     /**
      * Constructs a new uncompleted {@code Deadline}.
@@ -21,6 +21,17 @@ class Deadline extends Task {
     public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
         this.by = LocalDate.parse(by);
+    }
+
+    @Override
+    public void update(String description) {
+        try {
+            String[] fragments = description.split(" /by ");
+            super.update(fragments[0]);
+            this.by = LocalDate.parse(fragments[1]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            throw new ParsingException("Type the deadline, then give the time using \"/by\".");
+        }
     }
 
     /**

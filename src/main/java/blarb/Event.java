@@ -6,7 +6,7 @@ package blarb;
  * @see Task
  */
 class Event extends Task {
-    private final String at;
+    private String at;
 
     /**
      * Constructs a new uncompleted {@code Event}.
@@ -16,6 +16,17 @@ class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
+    }
+
+    @Override
+    public void update(String description) {
+        try {
+            String[] fragments = description.split(" /at ");
+            super.update(fragments[0]);
+            this.at = fragments[1];
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            throw new ParsingException("Type the event, then give the time using \"/at\".");
+        }
     }
 
     /**

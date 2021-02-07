@@ -6,7 +6,7 @@ import java.util.Arrays;
  * {@code Command} is an enumeration of the possible commands.
  */
 enum Command {
-    DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"),
+    DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), EDIT("edit"),
     LIST("list"), DELETE("delete"), BYE("bye"), FIND("find"), UNKNOWN("");
 
     private final String command;

@@ -28,8 +28,8 @@ class Tasklist implements Iterable<Task> {
     public String find(String input) {
         CharSequence target = input.subSequence(0, input.length());
         String result = IntStream.rangeClosed(1, list.size())
-                .filter(idx -> list.get(idx).getDescription().contains(target))
-                .mapToObj(idx -> String.format("\n%d. %s", idx, list.get(idx).toString()))
+                .filter(idx -> list.get(idx - 1).getDescription().contains(target))
+                .mapToObj(idx -> String.format("\n%d. %s", idx, list.get(idx - 1).toString()))
                 .collect(() -> new StringBuilder("Here are the matching tasks in your list:"),
                         StringBuilder::append,
                         StringBuilder::append)
@@ -51,7 +51,7 @@ class Tasklist implements Iterable<Task> {
             return "You have nothing on your list.";
         } else {
             return IntStream.rangeClosed(1, list.size())
-                    .mapToObj(idx -> String.format("\n%d. %s", idx, list.get(idx).toString()))
+                    .mapToObj(idx -> String.format("\n%d. %s", idx, list.get(idx - 1).toString()))
                     .collect(() -> new StringBuilder("Here are your tasks:\n"),
                             StringBuilder::append,
                             StringBuilder::append)
@@ -77,7 +77,6 @@ class Tasklist implements Iterable<Task> {
      * Adds multiple new Tasks to the task list.
      *
      * @param list List of tasks to be added.
-     * @return String interpretation of added task.
      */
     public void addAll(List<Task> list) {
         this.list.addAll(list);
@@ -106,6 +105,14 @@ class Tasklist implements Iterable<Task> {
         String delete = "The task is terminated:\n%s";
         Task output = list.remove(index);
         return String.format(delete, output);
+    }
+
+    public String update(int index, String description) throws IndexOutOfBoundsException {
+        String update = "The task is updated from\n%s\nto\n%s";
+        String in = list.get(index).toString();
+        list.get(index).update(description);
+        String out = list.get(index).toString();
+        return String.format(update, in, out);
     }
 
     /**

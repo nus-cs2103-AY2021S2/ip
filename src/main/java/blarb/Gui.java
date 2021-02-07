@@ -24,6 +24,7 @@ public class Gui extends AnchorPane {
     @FXML
     private Button sendButton;
     private Blarb blarb;
+    private boolean canTerminate = false;
 
     /**
      * Initializes the GUI.
@@ -57,12 +58,13 @@ public class Gui extends AnchorPane {
                 DialogBox.getDukeDialog(dukeText, bot)
         );
         userInput.clear();
-        if (blarb.willTerminate(userText)) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        canTerminate = blarb.willTerminate(userText) || canTerminate;
+    }
+
+    @FXML
+    private void exit() throws InterruptedException {
+        if (canTerminate)  {
+            Thread.sleep(1000);
             Platform.exit();
         }
     }

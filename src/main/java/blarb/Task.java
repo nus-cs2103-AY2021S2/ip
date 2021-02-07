@@ -3,8 +3,8 @@ package blarb;
 /**
  * {@code Task} contains an action and its completion status.
  */
-class Task {
-    private final String description;
+abstract class Task {
+    private String description;
     private boolean isDone;
 
     /**
@@ -35,6 +35,10 @@ class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public void update(String description) {
+        this.description = description;
     }
 
     /**
