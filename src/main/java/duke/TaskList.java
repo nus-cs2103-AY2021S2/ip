@@ -1,8 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.tasks.Task;
 
-import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
