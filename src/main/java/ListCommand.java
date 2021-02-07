@@ -23,8 +23,8 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String response;
-        String[] inputs = this.fullCommand.split(" ");
-        if (inputs.length == 0) {
+        String[] splitInputs = this.fullCommand.split(" ");
+        if (splitInputs.length == 0) {
             throw new DukeException("OOPS! Please enter a command or say bye so I can go back to sleep!");
         }
         response = "Here are the tasks in your list:\n" + tasks.listAllTasks();

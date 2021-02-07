@@ -45,6 +45,10 @@ public class Task {
         return this.description;
     }
 
+    public Task reschedule(String fullCommand) {
+        return this;
+    }
+
     @Override
     public String toString() {
         if (isDone) {

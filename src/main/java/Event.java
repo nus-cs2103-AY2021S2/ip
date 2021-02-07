@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Event extends Task {
-    private final LocalDate date;
-    private final LocalTime startTime; //in 24h format
-    private final LocalTime endTime;
+    private LocalDate date;
+    private LocalTime startTime; //in 24h format
+    private LocalTime endTime;
 
     /**
      * Constructor takes in four parameters <code>description</code>,
@@ -60,6 +60,22 @@ public class Event extends Task {
         return "(at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + this.startTime.format(DateTimeFormatter.ofPattern("hh:mma")) + "-"
                         + this.endTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
+    }
+
+    public Event reschedule(String newDateAndTime) {
+        String[] splitInputs = newDateAndTime.split(" "); //2021-02-03 1400-1500
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String date = splitInputs[0];
+        String timeRange = splitInputs[1];
+        String startTime = timeRange.split("-")[0];
+        String endTime = timeRange.split("-")[1];
+        LocalDate newDate = LocalDate.parse(date);
+        LocalTime newStartTime = LocalTime.parse(startTime, formatter);
+        LocalTime newEndTime = LocalTime.parse(endTime, formatter);
+        this.date = newDate;
+        this.startTime = newStartTime;
+        this.endTime = newEndTime;
+        return this;
     }
 
     @Override
