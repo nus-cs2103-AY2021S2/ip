@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class ItemList {
+public class TaskList {
     private final ArrayList<Task> taskList;
 
     /**
      * Initialise Task List with new taskList.
      */
-    public ItemList() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
@@ -15,7 +15,7 @@ public class ItemList {
      *
      * @param taskList The task list that was loaded from Storage.
      */
-    public ItemList(ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
@@ -48,6 +48,10 @@ public class ItemList {
      */
     public void add(Task task) {
         taskList.add(task);
+    }
+
+    public void delete(int itemNum) {
+        taskList.remove(itemNum);
     }
 
     /**

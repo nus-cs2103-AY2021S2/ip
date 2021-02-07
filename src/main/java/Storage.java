@@ -15,14 +15,14 @@ public class Storage {
      * Default path to store the user tasks.
      */
     public static final String DEFAULT_TASKS_STORAGE_FILEPATH = "tasks.txt";
-    public static final String DEFAULT_NOTES_STORAGE_FILEPATH = "notes.txt";
+    public static final String DEFAULT_CONTACTS_STORAGE_FILEPATH = "notes.txt";
 
-    public ItemList tasks;
-    public ItemList notes;
+    public TaskList tasks;
+    public ContactList contacts;
 
     public Storage() {
-        tasks = new ItemList();
-        notes = new ItemList();
+        tasks = new TaskList();
+        contacts = new ContactList();
     }
 
     /**
@@ -32,7 +32,7 @@ public class Storage {
      */
     public void readOrCreateFile() throws IOException {
         File tasksObj = new File(DEFAULT_TASKS_STORAGE_FILEPATH);
-        File notesObj = new File(DEFAULT_NOTES_STORAGE_FILEPATH);
+        File notesObj = new File(DEFAULT_CONTACTS_STORAGE_FILEPATH);
 
         if (tasksObj.exists()) {
             readTaskFileIntoList(tasks);
@@ -42,23 +42,27 @@ public class Storage {
         }
 
         if (notesObj.exists()) {
-            readNotesFileIntoList(notes);
+            readContactsFileIntoList(contacts);
         } else {
             //noinspection ResultOfMethodCallIgnored
             notesObj.createNewFile();
         }
     }
 
-    private void readNotesFileIntoList(ItemList notes) {
+    private void readContactsFileIntoList(ContactList contacts) {
         List<String> lines = Collections.emptyList();
 
         try {
-            lines = Files.readAllLines(Paths.get(Storage.DEFAULT_NOTES_STORAGE_FILEPATH), StandardCharsets.UTF_8);
+            lines = Files.readAllLines(Paths.get(Storage.DEFAULT_CONTACTS_STORAGE_FILEPATH), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         for (String object : lines) {
+            String[] fullDetails = object.split(":");
+            String name = fullDetails[0];
+            String number = fullDetails[1].substring(1);
+            contacts.add(new Contact(name, number));
         }
     }
 
@@ -67,7 +71,7 @@ public class Storage {
      *
      * @param tasks The Task Arraylist containing user tasks in sequence.
      */
-    private void readTaskFileIntoList(ItemList tasks) {
+    private void readTaskFileIntoList(TaskList tasks) {
         List<String> lines = Collections.emptyList();
 
         try {
@@ -99,7 +103,6 @@ public class Storage {
                     }
                 }
             }
-//            Parser.taskAdded();
         }
     }
 
@@ -108,10 +111,19 @@ public class Storage {
      *
      * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
      */
-    public void writeListIntoFile() throws FileNotFoundException {
+    public void writeTaskListIntoFile() throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(DEFAULT_TASKS_STORAGE_FILEPATH);
         ArrayList<Task> items = tasks.getTaskList();
         for (Task item : items) {
+            writer.println(item.toString());
+        }
+        writer.close();
+    }
+
+    public void writeContactListIntoFile() throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(DEFAULT_CONTACTS_STORAGE_FILEPATH);
+        ArrayList<Contact> items = contacts.getContactList();
+        for (Contact item : items) {
             writer.println(item.toString());
         }
         writer.close();

@@ -8,12 +8,15 @@ public class Duke {
 
     private final Ui ui;
     private final Storage storage;
-    private final Parser parser;
+    private final TaskParser taskParser;
+    private final ContactParser contactParser;
+    private int listType = 3;
 
     public Duke() throws IOException {
         ui = new Ui();
         storage = new Storage();
-        parser = new Parser();
+        taskParser = new TaskParser();
+        contactParser = new ContactParser();
         storage.readOrCreateFile();
     }
 
@@ -25,9 +28,23 @@ public class Duke {
      * @throws FileNotFoundException Exception thrown when the file does not exist, should not happen.
      */
     String getResponse(String input) throws FileNotFoundException {
-        String result = parser.processInput(input, storage.tasks, ui);
-        storage.writeListIntoFile();
-        return result;
+        if (input.equals("tasks")) {
+            listType = 0;
+            return "I got you!";
+        } else if (input.equals("contacts")) {
+            listType = 1;
+            return "I got you!";
+        } else {
+            String result;
+            if (listType == 0) {
+                result = taskParser.processInput(input, storage.tasks, ui);
+                storage.writeTaskListIntoFile();
+            } else {
+                result = contactParser.processInput(input, storage.contacts, ui);
+                storage.writeContactListIntoFile();
+            }
+            return result;
+        }
     }
 }
 

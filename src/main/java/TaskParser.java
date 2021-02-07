@@ -1,6 +1,6 @@
 import javafx.application.Platform;
 
-public class Parser {
+public class TaskParser {
 
     /**
      * Process the user input to make sense for the system.
@@ -10,7 +10,7 @@ public class Parser {
      * @param ui        UI structure to show the user correct message.
      * @return Return the correct logic and GUI output.
      */
-    public String processInput(String nextInput, ItemList tasks, Ui ui) {
+    public String processInput(String nextInput, TaskList tasks, Ui ui) {
         String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
         try {
             switch (command) {
@@ -47,14 +47,14 @@ public class Parser {
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public String todo(String nextInput, ItemList tasks, Ui ui) throws DukeException {
+    public String todo(String nextInput, TaskList tasks, Ui ui) throws DukeException {
         if (nextInput.length() < 6) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         String command = nextInput.substring(5);
         tasks.add(new Todo(command, false));
 //        taskAdded();
-        return ui.showTodoMsg(tasks, tasks.getSize());
+        return ui.showTodoMsg(tasks);
     }
 
     /**
@@ -66,7 +66,7 @@ public class Parser {
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public String deadline(String nextInput, ItemList tasks, Ui ui) throws DukeException {
+    public String deadline(String nextInput, TaskList tasks, Ui ui) throws DukeException {
         if (nextInput.length() < 10) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else if (!nextInput.contains("/")) {
@@ -76,7 +76,7 @@ public class Parser {
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Deadline(command, dateInfo, false, false));
 //        taskAdded();
-        return ui.showDeadlineMsg(tasks, tasks.getSize());
+        return ui.showDeadlineMsg(tasks);
     }
 
     /**
@@ -88,7 +88,7 @@ public class Parser {
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public String event(String nextInput, ItemList tasks, Ui ui) throws DukeException {
+    public String event(String nextInput, TaskList tasks, Ui ui) throws DukeException {
         if (nextInput.length() < 7) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else if (!nextInput.contains("/")) {
@@ -98,7 +98,7 @@ public class Parser {
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Event(command, dateInfo, false, false));
 //        taskAdded();
-        return ui.showEventMsg(tasks, tasks.getSize());
+        return ui.showEventMsg(tasks);
     }
 
     /**
@@ -110,7 +110,7 @@ public class Parser {
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
-    public String done(String command, ItemList tasks, Ui ui) throws DukeException {
+    public String done(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.length() < 6) {
             throw new DukeException("OOPS!!! The item number cannot be empty.");
         }
@@ -133,7 +133,7 @@ public class Parser {
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
-    public String delete(String command, ItemList tasks, Ui ui) throws DukeException {
+    public String delete(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.length() < 8) {
             throw new DukeException("OOPS!!! The item number cannot be empty.");
         }
@@ -143,9 +143,8 @@ public class Parser {
             throw new DukeException("Item number selected is out of range.");
         }
         String taskRemoved = tasks.getTaskList().get(itemNum - 1).toString();
-        tasks.getTaskList().remove(itemNum - 1);
-//        taskDeleted();
-        return ui.showDeleteMsg(taskRemoved, tasks.getSize());
+        tasks.delete(itemNum - 1);
+        return ui.showDeleteTaskMsg(taskRemoved, tasks.getSize());
     }
 
     /**
@@ -155,8 +154,8 @@ public class Parser {
      * @param ui    UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      */
-    public String list(ItemList tasks, Ui ui) {
-        return ui.showListMsg(tasks);
+    public String list(TaskList tasks, Ui ui) {
+        return ui.showTaskListMsg(tasks);
     }
 
     /**
@@ -168,7 +167,7 @@ public class Parser {
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the user input is invalid.
      */
-    public String find(String command, ItemList tasks, Ui ui) throws DukeException {
+    public String find(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.length() < 6) {
             throw new DukeException("OOPS!!! The keyword cannot be empty.");
         }
