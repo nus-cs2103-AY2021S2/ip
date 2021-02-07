@@ -26,13 +26,12 @@ public abstract class IndexCommand extends Command {
 
         if (doneInstructions.length != 2) {
             throw new DescriptionMissingException("Argument missing!");
-        } else {
-            try {
-                String indexString = doneInstructions[1].strip();
-                return Integer.parseInt(indexString) - 1;
-            } catch (NumberFormatException e) {
-                throw new DescriptionMissingException("Invalid argument!");
-            }
+        }
+        try {
+            String indexString = doneInstructions[1].strip();
+            return Integer.parseInt(indexString) - 1;
+        } catch (NumberFormatException e) {
+            throw new DescriptionMissingException("Invalid argument!");
         }
     }
 

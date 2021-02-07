@@ -30,6 +30,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert(fullCommand.length() >= 4);
         String keyword = fullCommand.substring(4).strip();
         if (keyword.equals("")) {
             throw new DescriptionMissingException("Argument missing!");

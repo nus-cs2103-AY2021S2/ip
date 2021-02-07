@@ -1,14 +1,10 @@
 package duke.command;
 
-import java.time.LocalDateTime;
-
 import duke.exception.DescriptionMissingException;
 import duke.exception.DukeException;
-import duke.exception.InvalidDateTimeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.EnumTask;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -36,6 +32,7 @@ public class EventCommand extends AddCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert(descriptions.length != 0);
         String name = descriptions[0];
         if (name.equals("")) {
             throw new DescriptionMissingException("Please include the name!");

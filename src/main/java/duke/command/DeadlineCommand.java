@@ -36,6 +36,7 @@ public class DeadlineCommand extends AddCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert(descriptions.length != 0);
         String name = descriptions[0];
         if (name.equals("")) {
             throw new DescriptionMissingException("Please include the name!");
