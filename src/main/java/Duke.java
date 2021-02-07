@@ -5,7 +5,6 @@ import duke.GuiUi;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.ParseException;
 import duke.tasks.Task;
@@ -36,31 +35,6 @@ public class Duke {
         }
     }
 
-//    /**
-//     * Runs the Tasker program which allows user to interact with
-//     * to organize the user's Tasks.
-//     */
-//    public void run() {
-//        try {
-//            ui.greetUser();
-//            ui.indicateReady();
-//            sc = new Scanner(System.in);
-//            String input = sc.nextLine();
-//            String[] command = input.split(" ");
-//            while (!input.equals("bye")) {
-//                parser.receive(command);
-//                input = sc.nextLine();
-//                command = input.split(" ");
-//            }
-//            ArrayList<Task> arrToSave = parser.consolidate();
-//            storage.saveData(arrToSave);
-//            ui.sayGoodbye();
-//        } catch (DukeException e) {
-//            System.out.println(e.getMessage());
-//        } finally {
-//            sc.close();
-//        }
-//    }
     /**
      * Get responses from Tasker depending on the user's input
      *
