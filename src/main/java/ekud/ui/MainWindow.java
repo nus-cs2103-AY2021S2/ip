@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import ekud.Ekud;
+import ekud.common.core.Messages;
 import ekud.common.exception.EkudException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -48,9 +49,13 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Start-up procedures for the MainWindow
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogueContainer.heightProperty());
+        dialogueContainer.getChildren().add(DialogueBox.genEkudDialogue(Messages.WELCOME_MESSAGE, dukeImage));
     }
 
     /**
