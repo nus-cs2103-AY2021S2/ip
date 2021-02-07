@@ -55,7 +55,8 @@ public class Storage {
 
             br.close();
 
-        } catch (FileNotFoundException ignored) {
+        } catch (FileNotFoundException e) {
+            assert false : "Data file does not exist even though it is already created in the constructor.";
         }
 
         return taskLst;
