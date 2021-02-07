@@ -22,22 +22,22 @@ public class Parser {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(" d.MMM.yyyy HH:mm");
 
     public static Task parseFromData(String dataInput) {
-        String[] splitInput = dataInput.split("\\|", -1);
+        String[] splitInputs = dataInput.split("\\|", -1);
         Task task;
-        switch (splitInput[0]) {
+        switch (splitInputs[0]) {
         case "T":
-            task = new Todo(splitInput[2]);
+            task = new Todo(splitInputs[2]);
             break;
         case "D":
-            task = new Deadline(splitInput[2], LocalDateTime.parse(splitInput[3]));
+            task = new Deadline(splitInputs[2], LocalDateTime.parse(splitInputs[3]));
             break;
         case "E":
-            task = new Event(splitInput[2], LocalDateTime.parse(splitInput[3]));
+            task = new Event(splitInputs[2], LocalDateTime.parse(splitInputs[3]));
             break;
         default:
-            throw new IllegalStateException("Unexpected value: " + splitInput[0]);
+            throw new IllegalStateException("Unexpected value: " + splitInputs[0]);
         }
-        return splitInput[1].equals("X")
+        return splitInputs[1].equals("X")
                 ? task.markDone()
                 : task;
     }
