@@ -3,6 +3,9 @@ import java.time.format.DateTimeParseException;
 
 import duke.*;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.ParseException;
+import duke.tasks.Task;
 import javafx.scene.image.Image;
 
 // potential exceptions to catch:

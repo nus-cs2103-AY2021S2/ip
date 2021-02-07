@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * Extends RuntimeException and is used when parsing fails.

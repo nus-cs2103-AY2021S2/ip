@@ -2,6 +2,7 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.tasks.ToDoTask;
 import org.junit.jupiter.api.Test;
 
 /**

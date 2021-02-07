@@ -1,5 +1,9 @@
 package duke;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.ParseException;
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class GuiUi {
