@@ -44,6 +44,9 @@ class Processor {
         case EVENT:
             outputs = executeEvent(cml, tasklist, storage);
             break;
+        case EDIT:
+            outputs = executeEdit(cml, tasklist, storage);
+            break;
         case FIND:
             outputs = executeFind(cml, tasklist);
             break;
@@ -56,10 +59,11 @@ class Processor {
         case UNKNOWN:
             outputs[0] = String.format("I have detailed files on human anatomy, but not %s.", input);
             outputs[1] = null;
+            break;
         default:
             assert false;
         }
-        return new Output(outputs);
+        return new Output(outputs[0], outputs[1]);
     }
 
     /**
@@ -199,7 +203,6 @@ class Processor {
             storage.file(task);
         } catch (IOException ex) {
             outputs[1] = "Cannot access storage.";
-
         } catch (ArrayIndexOutOfBoundsException ex) {
             outputs[0] = "Type the event, then give the time using \"/at\".";
         } catch (InputMismatchException ex) {
@@ -257,6 +260,39 @@ class Processor {
         outputs[0] = cml.isSingleCommand()
                 ? "Hasta la vista, baby."
                 : "Type \"bye\" to see me go.";
+        return outputs;
+    }
+
+    /**
+     * Executes the edit command.
+     *
+     *
+     */
+
+    private String[] executeEdit(CommandLine cml, Tasklist tasklist, Storage storage) {
+        String[] outputs = new String[2];
+        outputs[1] = null;
+        try {
+            if (cml.isSingleCommand()) {
+                throw new InputMismatchException();
+            }
+            String[] fragments = cml.description.split(" ", 2);
+            String output = tasklist.update(Integer.parseInt(fragments[0]) - 1, fragments[1]);
+            outputs[0] = output;
+            storage.refile(tasklist);
+        } catch (IOException ex) {
+            outputs[1] = "Cannot access storage.";
+        } catch (ParsingException ex) {
+            outputs[0] = ex.getMessage();
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            outputs[0] = "Enter the edited task.";
+        } catch (IndexOutOfBoundsException ex) {
+            outputs[0] = "There is no such task.";
+        } catch (NumberFormatException ex) {
+            outputs[0] = "You can't edit your past.";
+        } catch (InputMismatchException ex) {
+            outputs[0] = "Give me a clue to edit stuff.";
+        }
         return outputs;
     }
 }

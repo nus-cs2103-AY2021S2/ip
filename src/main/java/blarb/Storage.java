@@ -64,7 +64,7 @@ class Storage {
         sc.useDelimiter("\n");
         sc.forEachRemaining(str -> {
             String[] tokens = str.split(" / ");
-            Task task;
+            Task task = null;
             switch (tokens[0]) {
             case "T":
                 task = new ToDo(tokens[2]);
