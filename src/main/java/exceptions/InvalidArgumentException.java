@@ -1,3 +1,5 @@
+package exceptions;
+
 public class InvalidArgumentException extends Exception {
     /**
      * Invalid argument exception for e.g. when an unapplicable command is used on an empty list

@@ -1,3 +1,7 @@
+package tasks;
+
+import datetime.ParseDateTime;
+
 import static java.lang.Boolean.parseBoolean;
 
 import java.time.LocalDateTime;
@@ -45,7 +49,7 @@ public class Deadline extends Task {
     /**
      * Creates a deadline object based on the string stored in the hard disk.
      * @param oneLine One line of stored input to be parsed into a deadline
-     * @return Deadline Object
+     * @return tasks.Deadline Object
      */
     public static Deadline parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly

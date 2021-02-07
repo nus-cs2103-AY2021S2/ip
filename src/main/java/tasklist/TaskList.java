@@ -1,8 +1,15 @@
+package tasklist;
+
+import exceptions.InvalidArgumentException;
+import format.Ui;
+import tasks.Task;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class TaskList {
     private final ArrayList<Task> taskArrayList;
@@ -21,6 +28,7 @@ public class TaskList {
         return this.taskArrayList.size();
     }
 
+    // need to get rid of this get for OOP
     public Task get(int i) {
         return this.taskArrayList.get(i);
     }
@@ -34,35 +42,7 @@ public class TaskList {
         return this.taskArrayList.isEmpty();
     }
 
-    // setup at default location
-    public static TaskList setupTaskList() throws IOException {
-        if (Storage.doesTaskFileExist()) {
-            TaskList t = new TaskList();
-            Storage.loadFromHardDisk(t);
-            return t;
-        } else {
-            return new TaskList();
-        }
-    }
 
-    /**
-     * Saves the entire task list to hard drive
-     * @throws IOException
-     */
-    public void saveTasksList() throws IOException {
-        File f = new File(Storage.TASK_LIST_FILE_PATH.toString());
-        // doesn't actually create a new file i think, converts an existing file
-
-        FileWriter fw = new FileWriter(f);
-        BufferedWriter bw = new BufferedWriter(fw);
-
-        for (Task task : this.taskArrayList) {
-            bw.write(task.unparse());
-        }
-
-        bw.flush();
-        bw.close();
-    }
 
     /**
      * Adds task to array list and prints success message with task details
@@ -139,7 +119,7 @@ public class TaskList {
     public void findTasks(String s) {
         TaskList filtered = new TaskList();
         for (Task t : taskArrayList) {
-            if (t.description.contains(s)) {
+            if (t.getDescription().contains(s)) {
                 filtered.add(t);
             }
         }

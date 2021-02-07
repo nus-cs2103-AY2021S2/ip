@@ -1,4 +1,6 @@
-package commands; 
+package commands;
+
+import tasklist.TaskList;
 
 public abstract class Command {
 
@@ -21,11 +23,13 @@ public abstract class Command {
         this.commandBody = commandBody;
     }
 
+    // think all commands should have a general run method?
     /**
      * Runs a command and stores output and status in instance variables.
      * @param
      */
-    public abstract void run(); // todo TaskList taskList
+    public abstract void run(TaskList taskList);
+    // exceptions thrown from running these commands should be caught in this run method so they can be stored in command output?
 
     @Override
     public String toString() {

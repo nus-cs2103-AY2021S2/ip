@@ -1,4 +1,12 @@
+import tasklist.TaskList;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -53,7 +61,7 @@ public class Storage {
      */
     public static void setupTasksFile() throws IOException {
         if (doesTaskFileExist()) {
-            // probably not gonna be used due to TaskList.java impl
+            // probably not gonna be used due to tasklist.TaskList.java impl
             return;
         } else {
             java.nio.file.Path dataDirPath = java.nio.file.Paths.get(PROJECT_DIR, "src", "data");
@@ -111,9 +119,43 @@ public class Storage {
                 isAnyTaskFound = true;
             }
         } else {
-            // probably not gonna be used due to TaskList.java impl
+            // probably not gonna be used due to tasklist.TaskList.java impl
             setupTasksFile();
         }
         return isAnyTaskFound;
     }
+
+
+    // setup at default location
+    public static TaskList setupTaskList() throws IOException {
+        if (Storage.doesTaskFileExist()) {
+            TaskList t = new TaskList();
+            Storage.loadFromHardDisk(t);
+            return t;
+        } else {
+            return new TaskList();
+        }
+    }
+
+    /**
+     * Saves the entire task list to hard drive (default location).
+     * @throws IOException
+     */
+    public static void saveTasksList(TaskList taskList) throws IOException {
+        File f = new File(Storage.TASK_LIST_FILE_PATH.toString());
+        // doesn't actually create a new file i think, converts an existing file
+
+        FileWriter fw = new FileWriter(f);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        // maybe taskList should include something that takes in lambda that you can run on each method...
+        // for (Task task : this.taskArrayList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            bw.write(taskList.get(i).unparse());
+        }
+
+        bw.flush();
+        bw.close();
+    }
+
 }

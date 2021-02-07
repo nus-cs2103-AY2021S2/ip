@@ -1,5 +1,7 @@
 package commands;
 
+import tasklist.TaskList;
+
 public class ByeCommand extends CommandWithNoParameters {
 
     public ByeCommand(String commandBody) {
@@ -7,7 +9,7 @@ public class ByeCommand extends CommandWithNoParameters {
     }
 
     @Override
-    public void run() {
+    public void run(TaskList taskList) {
         // make sure that parser always sends trimmed strings?
         if (commandBody == null) {
             this.hasSentExitDukeSignal = true;

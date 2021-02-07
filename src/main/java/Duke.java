@@ -1,9 +1,13 @@
+import format.Ui;
+import tasklist.TaskList;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     // todo should duke be instantiated?
     private static TaskList taskList;
+    private boolean hasExitCommandBeenSent;
 
     /**
      * The driver of the duke object
@@ -11,7 +15,7 @@ public class Duke {
      */
     public void runDuke(Scanner sc) {
         try {
-            taskList = TaskList.setupTaskList();
+            taskList = Storage.setupTaskList();
         } catch (IOException e) {
             Ui.print(new String[]{"Something went wrong in loading the task file and parsing",
                     e.getMessage()});
@@ -41,7 +45,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         try {
-            taskList = TaskList.setupTaskList();
+            taskList = Storage.setupTaskList();
         } catch (IOException e) {
             Ui.print(new String[]{"Something went wrong in loading the task file and parsing",
                     e.getMessage()});
@@ -71,6 +75,12 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
+        // parse command
+        // run command
+        // return command output
+        // change exit cmd boolean if needed
+//        if (command.)
+        this.hasExitCommandBeenSent = true;
         return "Duke heard: " + input;
     }
 }

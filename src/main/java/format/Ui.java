@@ -1,3 +1,7 @@
+package format;
+
+import tasklist.TaskList;
+
 public class Ui {
     // formatting for print messages
     public static final String EXTRA_INDENT = "  "; // an extra indent for listing tasks, is used outside this class
@@ -21,7 +25,7 @@ public class Ui {
 
     /**
      * Prints a formatted task list.
-     * @param taskList Task list to be printed
+     * @param taskList tasks.Task list to be printed
      */
     public static void printTaskList(TaskList taskList) {
         System.out.println(DIVIDER_LINE);
@@ -156,7 +160,7 @@ public class Ui {
         System.out.println(ui.formatException(er));
     }
     
-    private static String stringifyTaskList(TaskList taskList) {
+    public static String stringifyTaskList(TaskList taskList) {
         String s = "";
         String nl = "\n";
         s += (DIVIDER_LINE);

@@ -1,3 +1,5 @@
+package tasks;
+
 public abstract class Task {
     protected static String delimiter = ";;";
     protected String description;
@@ -50,6 +52,14 @@ public abstract class Task {
     public abstract String unparse();
 
     // parse from text file to become a task object todo - this needs to be static so can't be abstract
-    // public abstract Task parse(String oneLine);
+    // public abstract tasks.Task parse(String oneLine);
 
+
+    /**
+     * Description asked for tasklist.find. Todo maybe contains method should be brought in here instead
+     * @return
+     */
+    public String getDescription() {
+        return description;
+    }
 }

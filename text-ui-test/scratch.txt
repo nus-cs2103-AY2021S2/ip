@@ -9,7 +9,7 @@ deadline coffee /by 4pm
 deadline /by 4pm
 deadline coffee
 deadline
-Deadline
+tasks.Deadline
 event read books /at 4-6pm monday
 event /at 4-6pm monday
 event read books
