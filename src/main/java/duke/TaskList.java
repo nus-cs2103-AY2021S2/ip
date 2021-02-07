@@ -27,6 +27,7 @@ public class TaskList {
      * @return Task deleted
      */
     public Task delete(int index) {
+        assert(index >= 0);
         return tasks.remove(index - 1);
     }
 
@@ -38,6 +39,7 @@ public class TaskList {
      * @return Task marked done
      */
     public Task mark(int index) {
+        assert(index >= 0);
         Task task = tasks.get(index - 1);
         task.markAsDone();
         return task;
@@ -66,6 +68,7 @@ public class TaskList {
      * @param task Task to be added
      */
     public void add(Task task) {
+        assert(task != null);
         tasks.add(task);
     }
 }
