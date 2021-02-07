@@ -8,9 +8,9 @@ import java.time.format.DateTimeParseException;
 
 public class Mike {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private TextUi ui;
+    private final TextUi ui;
 
     /**
      * Create a Mike Object with a taskList from an existing file
