@@ -83,6 +83,7 @@ public class Storage {
             }
 
             List<String> taskStrings = Storage.convertAllTasksToString(taskList);
+            assert taskStrings != null;
             Files.write(path, taskStrings);
         } catch (IOException ex) {
             throw new StorageException(MESSAGE_ERROR_WRITING_TO_FILE + path);
@@ -114,7 +115,7 @@ public class Storage {
      * @return {@code Task}.
      */
     public static Task convertStringToTask(String taskString) {
-        String[] arr = taskString.split("\\s\\|\\s");
+        String[] arr = taskString.split("\\s\\|\\s", 4);
         String taskType = arr[0];
         String taskStatus = arr[1];
         String taskName = arr[2];
@@ -127,7 +128,7 @@ public class Storage {
             break;
         case DeadlineTask.IDENTIFIER:
             String deadlineTaskDescription = arr[3];
-            String[] deadlineTaskDescriptionArr = deadlineTaskDescription.split(",");
+            String[] deadlineTaskDescriptionArr = deadlineTaskDescription.split(",", 2);
             String deadlineDateString = deadlineTaskDescriptionArr[0].strip();
             LocalDate deadlineDate = LocalDate.parse(deadlineDateString, OutputDateTimeFormat.OUTPUT_DATE_FORMAT);
             if (deadlineTaskDescriptionArr.length == 1) {
@@ -135,6 +136,7 @@ public class Storage {
                 task = new DeadlineTask(taskName, isTaskCompleted, deadlineDate);
             } else {
                 // There is a time component
+                assert deadlineTaskDescriptionArr.length == 2 : "There should be a time component string in the array";
                 String deadlineTimeString = deadlineTaskDescriptionArr[1].strip();
                 LocalTime deadlineTime = LocalTime.parse(deadlineTimeString, OutputDateTimeFormat.OUTPUT_TIME_FORMAT);
                 task = new DeadlineTask(taskName, isTaskCompleted, deadlineDate, deadlineTime);
@@ -145,8 +147,7 @@ public class Storage {
             task = new EventTask(taskName, isTaskCompleted, eventTaskDescription);
             break;
         default:
-            // Should not reach here
-            throw new RuntimeException();
+            throw new AssertionError(taskType);
         }
         return task;
     }
@@ -176,16 +177,16 @@ public class Storage {
      */
     public static String convertTaskToString(Task task) {
         StringBuilder encodedTaskString = new StringBuilder();
-
         encodedTaskString.append(task.getTaskType());
         encodedTaskString.append(" | ");
-
         encodedTaskString.append(task.isDone() ? "1" : "0");
         encodedTaskString.append(" | ");
-
         encodedTaskString.append(task.getName());
 
-        switch (task.getTaskType()) {
+        String taskType = task.getTaskType();
+        switch (taskType) {
+        case ToDoTask.IDENTIFIER:
+            return encodedTaskString.toString();
         case DeadlineTask.IDENTIFIER:
             DeadlineTask deadlineTask = (DeadlineTask) task;
             encodedTaskString.append(" | ");
@@ -197,7 +198,7 @@ public class Storage {
             encodedTaskString.append(eventTask.getEventTime());
             return encodedTaskString.toString();
         default:
-            return encodedTaskString.toString();
+            throw new AssertionError(taskType);
         }
     }
 }

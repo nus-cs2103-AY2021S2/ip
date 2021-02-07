@@ -52,6 +52,7 @@ public class DeadlineCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        assert taskList != null;
         DeadlineTask task = new DeadlineTask(taskName, deadlineDate, deadlineTime);
         taskList.addTask(task);
         return new CommandResult(taskList, false,
