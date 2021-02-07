@@ -25,6 +25,7 @@ public class TaskList {
      * */
     public void markComplete(int index) {
         Task temp = this.taskList.get(index - 1);
+        assert temp != null : "Task index out of bounds";
         temp.checkTask();
     }
 
