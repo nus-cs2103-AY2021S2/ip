@@ -14,48 +14,88 @@ import java.util.Scanner;
  * Loads and saves data.
  */
 public class Storage {
-    protected boolean pathExists;
+    protected boolean isPathToDataExists;
+    protected boolean isPathToArchiveExists;
     private final String currentDirectory;
-    private final Path path;
+    private final Path pathToData;
+    private final Path pathToArchive;
 
     /**
      * Creates a new Storage.
      */
     public Storage() {
         this.currentDirectory = System.getProperty("user.dir");
-        this.path = java.nio.file.Paths.get(currentDirectory, "data.txt");
-        this.pathExists = java.nio.file.Files.exists(path);
+        this.pathToData = java.nio.file.Paths.get(currentDirectory, "data.txt");
+        this.pathToArchive = java.nio.file.Paths.get(currentDirectory, "archive.txt");
+
+        this.isPathToDataExists = java.nio.file.Files.exists(pathToData);
+        this.isPathToArchiveExists = java.nio.file.Files.exists(pathToArchive);
     }
 
-    public boolean getPathExists() {
-        return pathExists;
+    public boolean getPathToDataExists() {
+        return isPathToDataExists;
     }
 
     /**
      * Transfers contents from tasks ArrayList to data.txt file.
-     * If data.txt file exists, the previous content is cleared.
      *
      * @param tasks TaskList of tasks.
      * @throws IOException If data cannot be saved into file.
      */
-    public void saveData(TaskList tasks) throws IOException {
+    public void saveData(TaskList tasks) {
         try {
-            if (pathExists) {
-                java.nio.file.Files.write(path, "".getBytes(),
-                        StandardOpenOption.TRUNCATE_EXISTING);
+            if (isPathToDataExists) {
+                overwriteExistingFile(pathToData);
             }
-
-            for (Task t : tasks.tasks) {
-                byte[] bytes = t.saveTask().getBytes();
-                if (!pathExists) {
-                    java.nio.file.Files.write(path, bytes);
-                    pathExists = true;
-                } else {
-                    java.nio.file.Files.write(path, bytes, StandardOpenOption.APPEND);
-                }
-            }
+            writeToData(tasks);
         } catch (IOException e) {
-            System.out.println("Oh no Flamingo! I cannot save the data!");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Transfers contents from archivedTasks ArrayList to archive.txt file.
+     *
+     * @param tasks ArrayList of archived tasks.
+     * @throws IOException If data cannot be saved into file.
+     */
+    public void saveArchive(ArchivedTaskList tasks) throws IOException {
+        try {
+            if (isPathToArchiveExists) {
+                overwriteExistingFile(pathToArchive);
+            }
+            writeToArchive(tasks);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void overwriteExistingFile(Path path) throws IOException {
+        java.nio.file.Files.write(path, "".getBytes(),
+                StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    private void writeToData(TaskList tasks) throws IOException {
+        for (Task t : tasks.tasks) {
+            byte[] bytes = t.saveTask().getBytes();
+            if (!isPathToDataExists) {
+                java.nio.file.Files.write(pathToData, bytes);
+                isPathToDataExists = true;
+            } else {
+                java.nio.file.Files.write(pathToData, bytes, StandardOpenOption.APPEND);
+            }
+        }
+    }
+
+    private void writeToArchive(ArchivedTaskList tasks) throws IOException {
+        for (Task t : tasks.archivedTasks) {
+            byte[] bytes = t.saveTask().getBytes();
+            if (!isPathToArchiveExists) {
+                java.nio.file.Files.write(pathToArchive, bytes);
+                isPathToArchiveExists = true;
+            } else {
+                java.nio.file.Files.write(pathToArchive, bytes, StandardOpenOption.APPEND);
+            }
         }
     }
 
@@ -67,9 +107,25 @@ public class Storage {
      * @throws FileNotFoundException If data.txt file cannot be found.
      */
     public ArrayList<Task> loadData() throws FileNotFoundException {
-        if (pathExists) {
-            Scanner taskList = new Scanner(new File(String.valueOf(path)));
+        if (isPathToDataExists) {
+            Scanner taskList = new Scanner(new File(String.valueOf(pathToData)));
             return createTaskArrayList(taskList);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Loads archive from archive.txt into archivedTasks ArrayList if the file exists.
+     * Else, it creates a new ArrayList.
+     *
+     * @return ArrayList of archived tasks.
+     * @throws FileNotFoundException If archive.txt file cannot be found.
+     */
+    public ArrayList<Task> loadArchive() throws FileNotFoundException {
+        if (isPathToArchiveExists) {
+            Scanner archivedTaskList = new Scanner(new File(String.valueOf(pathToArchive)));
+            return createTaskArrayList(archivedTaskList);
         } else {
             return new ArrayList<>();
         }
@@ -84,7 +140,7 @@ public class Storage {
     private ArrayList<Task> createTaskArrayList(Scanner taskList) {
         ArrayList<Task> tasks = new ArrayList<>();
 
-        // Go through the task list from data file
+        // Go through the task list from file
         while (taskList.hasNextLine()) {
             String currentTask = taskList.nextLine();
             char typeOfTask = currentTask.charAt(0);

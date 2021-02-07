@@ -7,9 +7,14 @@ import java.io.FileNotFoundException;
  */
 public class Flamingo {
     private static Storage storage = new Storage();
-    private static TaskList tasks;
+    private static TaskList tasks = new TaskList();
+    private static ArchivedTaskList archivedTasks = new ArchivedTaskList();
 
+    /**
+     * Loads the existing save data if the files exist.
+     */
     public Flamingo() {
+        loadArchive();
         loadTasks();
     }
 
@@ -21,6 +26,10 @@ public class Flamingo {
         return tasks;
     }
 
+    public static ArchivedTaskList getArchivedTasks() {
+        return archivedTasks;
+    }
+
     /**
      * Loads tasks if the data text file exists.
      * Else, create a new Task List.
@@ -30,6 +39,14 @@ public class Flamingo {
             tasks = new TaskList(storage.loadData());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
+        }
+    }
+
+    private void loadArchive() {
+        try {
+            archivedTasks = new ArchivedTaskList(storage.loadArchive());
+        } catch (FileNotFoundException e) {
+            archivedTasks = new ArchivedTaskList();
         }
     }
 

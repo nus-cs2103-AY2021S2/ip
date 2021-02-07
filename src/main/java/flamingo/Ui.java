@@ -70,4 +70,27 @@ public class Ui {
     public static String noMatchesFound() {
         return "Oh no Flamingo! No matches were found.";
     }
+
+    /**
+     * Returns confirmation when task is archived.
+     *
+     * @param task Task to be archived.
+     * @param numArchivedTasks Number of archived tasks.
+     * @return String of task archived.
+     */
+    public static String addArchivedTask(Task task, int numArchivedTasks) {
+        return "Okay, I've archived this task:\n" + task.toString()
+                + "\nYou have archived " + numArchivedTasks + " tasks.";
+    }
+
+    /**
+     * Returns confirmation when all tasks are archived.
+     *
+     * @param numArchivedTasks Total number of tasks archived.
+     * @return String confirming all tasks are archived.
+     */
+    public static String allTasksArchived(int numArchivedTasks) {
+        return "All tasks have been archived!\n"
+                + "You have archived " + numArchivedTasks + " tasks.";
+    }
 }

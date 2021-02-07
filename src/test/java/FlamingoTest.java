@@ -35,6 +35,6 @@ public class FlamingoTest {
     public void openFileTest() throws Exception {
         Storage s = new Storage();
         s.loadData();
-        assertEquals(false, s.getPathExists());
+        assertEquals(false, s.getPathToDataExists());
     }
 }
