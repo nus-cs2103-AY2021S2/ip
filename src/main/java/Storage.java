@@ -14,11 +14,18 @@ public class Storage {
     /**
      * Default path to store the user tasks.
      */
-    public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
+    public static final String DEFAULT_TASKS_STORAGE_FILEPATH = "tasks.txt";
+    /**
+     * Default path to store the user contacts.
+     */
+    public static final String DEFAULT_CONTACTS_STORAGE_FILEPATH = "notes.txt";
+
     public TaskList tasks;
+    public ContactList contacts;
 
     public Storage() {
         tasks = new TaskList();
+        contacts = new ContactList();
     }
 
     /**
@@ -27,26 +34,56 @@ public class Storage {
      * @throws IOException Throw IO exception.
      */
     public void readOrCreateFile() throws IOException {
-        File myObj = new File(DEFAULT_STORAGE_FILEPATH);
-        if (myObj.exists()) {
-            readFileIntoList(DEFAULT_STORAGE_FILEPATH, tasks);
+        File tasksObj = new File(DEFAULT_TASKS_STORAGE_FILEPATH);
+        File notesObj = new File(DEFAULT_CONTACTS_STORAGE_FILEPATH);
+
+        if (tasksObj.exists()) {
+            readTaskFileIntoList(tasks);
         } else {
             //noinspection ResultOfMethodCallIgnored
-            myObj.createNewFile();
+            tasksObj.createNewFile();
+        }
+
+        if (notesObj.exists()) {
+            readContactsFileIntoList(contacts);
+        } else {
+            //noinspection ResultOfMethodCallIgnored
+            notesObj.createNewFile();
+        }
+    }
+
+    /**
+     * Read the existing contacts file and create the list of contacts when the program is run.
+     *
+     * @param contacts The Contact Arraylist containing user contacts in sequence.
+     */
+    private void readContactsFileIntoList(ContactList contacts) {
+        List<String> lines = Collections.emptyList();
+
+        try {
+            lines = Files.readAllLines(Paths.get(Storage.DEFAULT_CONTACTS_STORAGE_FILEPATH), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (String object : lines) {
+            String[] fullDetails = object.split(":");
+            String name = fullDetails[0];
+            String number = fullDetails[1].substring(1);
+            contacts.add(new Contact(name, number));
         }
     }
 
     /**
      * Read the existing task file and create the list of tasks when the program is run.
      *
-     * @param file  The name of the file.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      */
-    public void readFileIntoList(String file, TaskList tasks) {
+    private void readTaskFileIntoList(TaskList tasks) {
         List<String> lines = Collections.emptyList();
 
         try {
-            lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
+            lines = Files.readAllLines(Paths.get(Storage.DEFAULT_TASKS_STORAGE_FILEPATH), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,19 +111,32 @@ public class Storage {
                     }
                 }
             }
-            Parser.taskAdded();
         }
     }
 
     /**
-     * Update the tasks into the file at the end of the program.
+     * Update the tasks into the file after each user input.
      *
      * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
      */
-    public void writeListIntoFile() throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(DEFAULT_STORAGE_FILEPATH);
+    public void writeTaskListIntoFile() throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(DEFAULT_TASKS_STORAGE_FILEPATH);
         ArrayList<Task> items = tasks.getTaskList();
         for (Task item : items) {
+            writer.println(item.toString());
+        }
+        writer.close();
+    }
+
+    /**
+     * Update the contacts into the file after eatch user input.
+     *
+     * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
+     */
+    public void writeContactListIntoFile() throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(DEFAULT_CONTACTS_STORAGE_FILEPATH);
+        ArrayList<Contact> items = contacts.getContactList();
+        for (Contact item : items) {
             writer.println(item.toString());
         }
         writer.close();

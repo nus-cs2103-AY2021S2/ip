@@ -1,11 +1,6 @@
 import javafx.application.Platform;
 
-public class Parser {
-
-    /**
-     * The number of tasks at the start of the program.
-     */
-    public static int totalTasks = 0;
+public class TaskParser {
 
     /**
      * Process the user input to make sense for the system.
@@ -26,9 +21,9 @@ public class Parser {
             case "event":
                 return event(nextInput, tasks, ui);
             case "done":
-                return done(nextInput, tasks, totalTasks, ui);
+                return done(nextInput, tasks, ui);
             case "delete":
-                return delete(nextInput, tasks, totalTasks, ui);
+                return delete(nextInput, tasks, ui);
             case "list":
                 return list(tasks, ui);
             case "find":
@@ -41,22 +36,6 @@ public class Parser {
         } catch (DukeException e) {
             return e.getMessage();
         }
-    }
-
-    /**
-     * Increase the total number of tasks in the list by 1.
-     */
-    public static void taskAdded() {
-        assert totalTasks >= 0: totalTasks;
-        totalTasks++;
-    }
-
-    /**
-     * Decrease the total number of tasks in the list by 1.
-     */
-    public static void taskDeleted() {
-        totalTasks--;
-        assert totalTasks >= 0: totalTasks;
     }
 
     /**
@@ -74,8 +53,7 @@ public class Parser {
         }
         String command = nextInput.substring(5);
         tasks.add(new Todo(command, false));
-        taskAdded();
-        return ui.showTodoMsg(tasks, totalTasks);
+        return ui.showTodoMsg(tasks);
     }
 
     /**
@@ -96,8 +74,7 @@ public class Parser {
         String command = nextInput.substring(9, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Deadline(command, dateInfo, false, false));
-        taskAdded();
-        return ui.showDeadlineMsg(tasks, totalTasks);
+        return ui.showDeadlineMsg(tasks);
     }
 
     /**
@@ -118,8 +95,7 @@ public class Parser {
         String command = nextInput.substring(6, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Event(command, dateInfo, false, false));
-        taskAdded();
-        return ui.showEventMsg(tasks, totalTasks);
+        return ui.showEventMsg(tasks);
     }
 
     /**
@@ -127,22 +103,21 @@ public class Parser {
      *
      * @param command The command given by user input.
      * @param tasks   The Task Arraylist containing user tasks in sequence.
-     * @param count   The current number of tasks stored inside the Task Arraylist.
      * @param ui      UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
-    public String done(String command, TaskList tasks, int count, Ui ui) throws DukeException {
+    public String done(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.length() < 6) {
             throw new DukeException("OOPS!!! The item number cannot be empty.");
         }
         String[] commandToWords = command.split(" ");
         int itemNum = Integer.parseInt(commandToWords[1]);
-        if (itemNum > count || itemNum < 1) {
+        if (itemNum > tasks.getSize() || itemNum < 1) {
             throw new DukeException("Item number selected is out of range.");
         }
         tasks.getTaskList().get(itemNum - 1).makeDone();
-        assert tasks.getTaskList().get(itemNum - 1).isDone: tasks.getTaskList().get(itemNum - 1).description;
+        assert tasks.getTaskList().get(itemNum - 1).isDone : tasks.getTaskList().get(itemNum - 1).description;
         return ui.showDoneMsg(tasks, itemNum);
     }
 
@@ -151,24 +126,22 @@ public class Parser {
      *
      * @param command The command given by user input.
      * @param tasks   The Task Arraylist containing user tasks in sequence.
-     * @param count   The current number of tasks stored inside the Task Arraylist.
      * @param ui      UI structure to show the user correct message.
      * @return A string showing correct GUI output.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
-    public String delete(String command, TaskList tasks, int count, Ui ui) throws DukeException {
+    public String delete(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.length() < 8) {
             throw new DukeException("OOPS!!! The item number cannot be empty.");
         }
         String[] commandToWords = command.split(" ");
         int itemNum = Integer.parseInt(commandToWords[1]);
-        if (itemNum > count || itemNum < 1) {
+        if (itemNum > tasks.getSize() || itemNum < 1) {
             throw new DukeException("Item number selected is out of range.");
         }
         String taskRemoved = tasks.getTaskList().get(itemNum - 1).toString();
-        tasks.getTaskList().remove(itemNum - 1);
-        taskDeleted();
-        return ui.showDeleteMsg(taskRemoved, totalTasks);
+        tasks.delete(itemNum - 1);
+        return ui.showDeleteTaskMsg(taskRemoved, tasks.getSize());
     }
 
     /**
@@ -179,7 +152,7 @@ public class Parser {
      * @return A string showing correct GUI output.
      */
     public String list(TaskList tasks, Ui ui) {
-        return ui.showListMsg(tasks);
+        return ui.showTaskListMsg(tasks);
     }
 
     /**

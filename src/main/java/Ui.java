@@ -15,37 +15,34 @@ public class Ui {
     /**
      * Show the user that a todo task has been added.
      *
-     * @param tasks      The Task Arraylist containing user tasks in sequence.
-     * @param totalTasks Total number of tasks in the list.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
      */
-    public String showTodoMsg(TaskList tasks, int totalTasks) {
-        assert tasks.getSize() >= 0: tasks.getSize();
-        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(totalTasks - 1).toString() + "\n"
+    public String showTodoMsg(TaskList tasks) {
+        assert tasks.getSize() >= 0 : tasks.getSize();
+        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString() + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
      * Show the user that a deadline task has been added.
      *
-     * @param tasks      The Task Arraylist containing user tasks in sequence.
-     * @param totalTasks Total number of tasks in the list.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
      * @return A string showing correct GUI output.
      */
-    public String showDeadlineMsg(TaskList tasks, int totalTasks) {
-        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(totalTasks - 1).toString() + "\n"
-                + "Now you have " + totalTasks + " tasks in the list.";
+    public String showDeadlineMsg(TaskList tasks) {
+        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString() + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
      * Show the user that a event task has been added.
      *
-     * @param tasks      The Task Arraylist containing user tasks in sequence.
-     * @param totalTasks Total number of tasks in the list.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
      * @return A string showing correct GUI output.
      */
-    public String showEventMsg(TaskList tasks, int totalTasks) {
-        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(totalTasks - 1).toString() + "\n"
-                + "Now you have " + totalTasks + " tasks in the list.";
+    public String showEventMsg(TaskList tasks) {
+        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString() + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
@@ -55,7 +52,7 @@ public class Ui {
      * @param totalTasks  Total number of tasks in the list.
      * @return A string showing correct GUI output.
      */
-    public String showDeleteMsg(String taskRemoved, int totalTasks) {
+    public String showDeleteTaskMsg(String taskRemoved, int totalTasks) {
         return "Noted. I've removed this task:\n" + "    " + taskRemoved + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.";
     }
@@ -77,8 +74,12 @@ public class Ui {
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @return A string showing correct GUI output.
      */
-    public String showListMsg(TaskList tasks) {
+    public String showTaskListMsg(TaskList tasks) {
         return "Here are the tasks in your list:" + "\n" + tasks.toString();
+    }
+
+    public String showContactListMsg(ContactList contacts) {
+        return "Here are the contacts in your list:" + "\n" + contacts.toString();
     }
 
     /**
@@ -92,5 +93,40 @@ public class Ui {
         ArrayList<Task> matchingTasks = tasks.search(keyword);
         TaskList matchedTasks = new TaskList(matchingTasks);
         return "Here are the matching tasks in your list:" + "\n" + matchedTasks.toString();
+    }
+
+    /**
+     * Show the user that a contact has been added to the list.
+     *
+     * @param contacts The Contact Arraylist containing user contacts in sequence.
+     * @return A string showing the correct GUI output.
+     */
+    public String showAddContactMsg(ContactList contacts) {
+        return "Got it. I've added this contact:\n" + "    "
+                + contacts.getContactList().get(contacts.getSize() - 1).toString() + "\n" + "Now you have "
+                + contacts.getSize() + " contacts in the list.";
+    }
+
+    /**
+     * Show the user that a contact has been deleted from the list.
+     *
+     * @param contactRemoved The detail of the contact deleted.
+     * @param totalContacts  The total number of contacts in the list.
+     * @return A string showing the correct GUI output.
+     */
+    public String showDeleteContactMsg(String contactRemoved, int totalContacts) {
+        return "Noted. I've removed this contact:\n" + "    " + contactRemoved + "\n" + "Now you have "
+                + totalContacts + " contacts in the list.";
+    }
+
+    /**
+     * Show the uer that a contact has been updated.
+     *
+     * @param contacts The Contact Arraylist containing user contacts in sequence.
+     * @return A string showing the correct GUI output.
+     */
+    public String showUpdateContactMsg(ContactList contacts) {
+        return "Got it. I've updated this contact:\n" + "    "
+                + contacts.getContactList().get(contacts.getSize() - 1).toString();
     }
 }
