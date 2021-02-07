@@ -12,7 +12,8 @@ public class HelpCommand extends Command {
 
     @Override
     public String execute() {
-        String validCommandMsg = "Valid commands include the following:\n" + "'todo', 'deadline', 'event', 'list', 'delete', 'bye'\n";
+        String validCommandMsg = "Valid commands include the following:\n"
+                + "'todo', 'deadline', 'event', 'list', 'delete', 'bye'\n";
         String suggestionMsg = "Please start your input with one of the above commands!";
         return validCommandMsg + suggestionMsg;
     }

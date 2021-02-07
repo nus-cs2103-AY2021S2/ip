@@ -11,6 +11,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Creates a ToDoCommand object to store the todo command input from the user.
+     *
      * @param taskList the current list of Tasks.
      * @param storage the object in charge of writing to the local storage file.
      * @param todo the task input by the user.
@@ -22,6 +23,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Adds a ToDo task with previously specified description to taskList.
+     * 
      * @return message confirming that indicated ToDo task is added.
      */
     @Override

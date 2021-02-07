@@ -56,10 +56,10 @@ public class TaskList {
     /**
      * Adds a task to the existing list of tasks.
      *
-     * @param t task to be added to the list.
+     * @param task task to be added to the list.
      */
-    public void addTask(Task t) {
-        this.taskList.add(t);
+    public void addTask(Task task) {
+        this.taskList.add(task);
     }
 
     /**

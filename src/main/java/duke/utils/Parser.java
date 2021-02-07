@@ -93,50 +93,51 @@ public class Parser {
     private Command prepareDeadline(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException {
         if (arguments.length == 1) {
             throw new EmptyArgumentException("Please input a valid task description!");
-        } else {
-            String description = arguments[1];
-            String[] taskInputAndDate = description.split("/", 2);
+        }
 
-            taskInputAndDate[0] = taskInputAndDate[0].trim();
-            taskInputAndDate[1] = taskInputAndDate[1].trim();
+        String description = arguments[1];
+        String[] taskInputAndDate = description.split("/", 2);
 
-            try {
-                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
-                return new DeadlineCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateTimeException();
-            }
+        taskInputAndDate[0] = taskInputAndDate[0].trim();
+        taskInputAndDate[1] = taskInputAndDate[1].trim();
+
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
+            return new DeadlineCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
         }
     }
 
     private Command prepareEvent(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException {
         if (arguments.length == 1) {
             throw new EmptyArgumentException("Please input a valid task description!");
-        } else {
-            String description = arguments[1];
-            String[] taskInputAndDate = description.split("/", 2);
+        }
 
-            taskInputAndDate[0] = taskInputAndDate[0].trim();
-            taskInputAndDate[1] = taskInputAndDate[1].trim();
+        String description = arguments[1];
+        String[] taskInputAndDate = description.split("/", 2);
 
-            try {
-                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
-                return new EventCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateTimeException();
-            }
+        taskInputAndDate[0] = taskInputAndDate[0].trim();
+        taskInputAndDate[1] = taskInputAndDate[1].trim();
+
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
+            return new EventCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
         }
     }
 
     private Command prepareFind(String[] arguments) throws EmptyArgumentException, EmptyListException {
         if (arguments.length == 1) {
             throw new EmptyArgumentException("Please pass a word after the 'find' command!");
-        } else {
-            if (this.taskList.getList().size() == 0) {
-                throw new EmptyListException();
-            }
-            return new FindCommand(this.taskList, this.storage, arguments[1]);
         }
+
+        if (this.taskList.getList().size() == 0) {
+            throw new EmptyListException();
+        }
+
+        return new FindCommand(this.taskList, this.storage, arguments[1]);
     }
 
     private int calcListPos(String taskIndex, String command) throws InvalidIndexInputException {
@@ -151,33 +152,35 @@ public class Parser {
     private Command prepareDone(String[] arguments) throws InvalidIndexInputException, EmptyArgumentException {
         if (arguments.length == 1) {
             throw new EmptyArgumentException("Please pass an index after the 'done' command!");
-        } else {
-            int position = calcListPos(arguments[1], arguments[0]);
-
-            if (this.taskList.getList().size() == 0) {
-                throw new InvalidIndexInputException("You have already done all tasks!");
-            } else if (position >= this.taskList.getList().size() || position < 0) {
-                throw new InvalidIndexInputException("Please input an index from 1 to "
-                        + this.taskList.getList().size() + "!");
-            }
-            return new DoneCommand(this.taskList, this.storage, position);
         }
+
+        int position = calcListPos(arguments[1], arguments[0]);
+
+        if (this.taskList.getList().size() == 0) {
+            throw new InvalidIndexInputException("You have already done all tasks!");
+        } else if (position >= this.taskList.getList().size() || position < 0) {
+            throw new InvalidIndexInputException("Please input an index from 1 to "
+                    + this.taskList.getList().size() + "!");
+        }
+
+        return new DoneCommand(this.taskList, this.storage, position);
     }
 
     private Command prepareDelete(String[] arguments) throws InvalidIndexInputException, EmptyArgumentException {
         if (arguments.length == 1) {
             throw new EmptyArgumentException("Please pass an index after the 'delete' command!");
-        } else {
-            int position = calcListPos(arguments[1], arguments[0]);
-
-            if (this.taskList.getList().size() == 0) {
-                throw new InvalidIndexInputException("There are no tasks to delete!");
-            } else if (position >= this.taskList.getList().size() || position < 0) {
-                throw new InvalidIndexInputException("Please input an index from 1 to "
-                        + this.taskList.getList().size() + "!");
-            }
-            return new DeleteCommand(this.taskList, this.storage, position);
         }
+
+        int position = calcListPos(arguments[1], arguments[0]);
+
+        if (this.taskList.getList().size() == 0) {
+            throw new InvalidIndexInputException("There are no tasks to delete!");
+        } else if (position >= this.taskList.getList().size() || position < 0) {
+            throw new InvalidIndexInputException("Please input an index from 1 to "
+                    + this.taskList.getList().size() + "!");
+        }
+
+        return new DeleteCommand(this.taskList, this.storage, position);
     }
 
     private Command prepareList() {

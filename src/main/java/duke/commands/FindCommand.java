@@ -15,6 +15,7 @@ public class FindCommand extends Command {
 
     /**
      * Creates a FindCommand object to store the find command input from the user.
+     *
      * @param taskList the current list of Tasks.
      * @param storage the object in charge of writing to the local storage file.
      * @param toFind the phrase to search in all the tasks.
@@ -26,6 +27,7 @@ public class FindCommand extends Command {
 
     /**
      * Searches TaskList for Tasks with descriptions matching toFind String.
+     *
      * If there exist such Tasks, prints these Tasks.
      * Else, display message indicating no matching Tasks.
      * @return message showing all the relevant Tasks.

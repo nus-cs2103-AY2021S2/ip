@@ -15,6 +15,7 @@ public class ByeCommand extends Command {
 
     /**
      * Saves all Tasks in taskList to local file, and then prints exit message.
+     *
      * @return exit message to be displayed.
      */
     @Override
