@@ -23,8 +23,8 @@ public class TaskStringConverter {
      */
     public static List<String> allTaskToAllString(List<Task> list) {
         List<String> result = new ArrayList<>();
-        for (Task t : list) {
-            result.add(taskToString(t));
+        for (Task task : list) {
+            result.add(taskToString(task));
         }
         return result;
     }
@@ -59,21 +59,25 @@ public class TaskStringConverter {
 
     private static Task stringInputToTask(String input) throws InvalidTaskTypeException {
         String[] separated = input.split(" \\| ");
+        assert separated.length >= 3;
         char taskType = separated[0].charAt(0);
 
         if (taskType == 'T') {
+            assert separated.length == 3;
             ToDo todo = new ToDo(separated[2]);
             if (separated[1].equals("1")) {
                 todo.markAsDone();
             }
             return todo;
         } else if (taskType == 'D') {
+            assert separated.length == 4;
             Deadline deadline = new Deadline(separated[2], LocalDateTime.parse(separated[3], formatter));
             if (separated[1].equals("1")) {
                 deadline.markAsDone();
             }
             return deadline;
         } else if (taskType == 'E') {
+            assert separated.length == 4;
             Event event = new Event(separated[2], LocalDateTime.parse(separated[3], formatter));
             if (separated[1].equals("1")) {
                 event.markAsDone();

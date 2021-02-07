@@ -7,7 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class TaskList {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -39,6 +39,8 @@ public class TaskList {
     }
 
     private String getEmptyListInString() {
+        assert this.taskList.size() == 0;
+
         String completedAllTasksMsg = "You have completed all tasks!";
         return completedAllTasksMsg;
     }
@@ -88,6 +90,8 @@ public class TaskList {
      * @param pos position of the task to be removed.
      */
     public void deleteTask(int pos) {
+        assert pos >= 0 && pos < this.taskList.size();
+
         this.taskList.remove(pos);
     }
 }

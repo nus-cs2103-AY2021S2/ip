@@ -31,6 +31,7 @@ public abstract class Task {
      * Marks current task as done.
      */
     public void markAsDone() {
+        assert !this.isDone;
         this.isDone = true;
     }
 
