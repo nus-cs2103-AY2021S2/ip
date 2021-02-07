@@ -41,6 +41,7 @@ public class FindCommand extends Command {
     }
 
     private String findTasks() {
+        assert taskList != null;
         StringBuilder tasksWithSearchWord = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.getTask(i - 1);

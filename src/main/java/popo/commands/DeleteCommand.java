@@ -30,6 +30,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
+            assert taskList != null;
             Task task = taskList.getTask(index);
             taskList.deleteTask(index);
             return new CommandResult(taskList, false,

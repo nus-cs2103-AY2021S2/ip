@@ -31,6 +31,7 @@ public class EventCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        assert taskList != null;
         EventTask task = new EventTask(taskName, eventTime);
         taskList.addTask(task);
         return new CommandResult(taskList, false,
