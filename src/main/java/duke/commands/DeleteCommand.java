@@ -21,7 +21,6 @@ public class DeleteCommand extends Command {
      * @return String message based on Delete Command
      * @throws DukeException
      */
-
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] inputList = description.trim().split(" ",2);
         int currentIndex = Integer.parseInt(inputList[1]) - 1;

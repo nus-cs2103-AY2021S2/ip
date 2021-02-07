@@ -26,7 +26,6 @@ public class Duke {
     /**
      * Constructor for Duke object
      */
-
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(DIRECTORY);
@@ -40,6 +39,10 @@ public class Duke {
      * @throws DukeException
      */
 
+    /**
+     * Function to get Duke application to start running
+     * @throws DukeException
+     */
     public void run() throws DukeException {
         ui.start();
         boolean isExit = false;

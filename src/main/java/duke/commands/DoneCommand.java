@@ -22,7 +22,6 @@ public class DoneCommand extends Command {
      * @return String messaged based on Done Command
      * @throws DukeException
      */
-
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] inputList = description.trim().split(" ", 2);
         int currentIndex = Integer.parseInt(inputList[1]) - 1;
