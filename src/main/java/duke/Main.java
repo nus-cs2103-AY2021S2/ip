@@ -12,11 +12,6 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-    Ui ui = new Ui();
-    Storage storage = new Storage();
-    Parser parser = new Parser();
-    TaskList taskList = storage.readFromFile();
     private Duke duke = new Duke();
 
     @Override
