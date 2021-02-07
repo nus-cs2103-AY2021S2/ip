@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,93 +23,20 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         if (command.equals("bye")) {
             ui.bye();
-            Duke.respond = "Bye bye!";
         } else if (command.equals("list")) {
             TaskList.list();
-        } else if (command.substring(0, 4).equals("todo")) {
-            assert command.length() >= 6;
-            ui.todo(command.substring(5));
         } else if (command.substring(0, 4).equals("done")) {
-            assert command.length() >= 6;
             TaskList.done(Integer.parseInt(command.substring(5)));
         } else if (command.substring(0, 4).equals("find")) {
-            assert command.length() >= 6;
             ui.find(command.substring(5));
+        } else if (command.substring(0, 4).equals("todo")) {
+            TaskList.addTask(new ToDo(Parser.getDescription(command, "T")));
         } else if (command.substring(0, 5).equals("event")) {
-            String desc = "";
-            String date = "";
-            String start = "";
-            String end = "";
-            String localStart = "";
-            String localEnd = "";
-            for (int i = 6; i < command.length(); i++) {
-                if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
-                    break;
-                } else {
-                    desc += command.charAt(i);
-                }
-            }
-            for (int i = desc.length() + 11; i < command.length(); i++) {
-                if (command.charAt(i) == ' ') {
-                    break;
-                } else {
-                    date += command.charAt(i);
-                }
-            }
-            assert desc.length() > 0;
-            start = command.substring(desc.length() + 12 + date.length(), desc.length() + 16 + date.length());
-            end = command.substring(desc.length() + 17 + date.length(), desc.length() + 21 + date.length());
-            if (desc.equals("")) {
-                ui.event("", null, null, null);
-            } else if (date.equals("")) {
-                ui.event(desc, null, null, null);
-            } else if (start.equals("")) {
-                ui.event(desc, LocalDate.parse(format(date), formatter), null, null);
-            } else if (end.equals("")) {
-                ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localStart), null);
-            } else {
-                localStart += start.substring(0, 2) + ":" + start.substring(2, 4);
-                localEnd += end.substring(0, 2) + ":" + end.substring(2, 4);
-                ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localStart), LocalTime.parse(localEnd));
-            }
+            addEvent(command);
         } else if (command.substring(0, 6).equals("delete")) {
-            assert command.length() > 8;
             TaskList.delete(Integer.parseInt(command.substring(7)));
         } else if (command.substring(0, 8).equals("deadline")) {
-            String desc = "";
-            String date = "";
-            String time = "";
-            String localTime = "";
-            for (int i = 9; i < command.length(); i++) {
-                if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
-                    break;
-                } else {
-                    desc += command.charAt(i);
-                }
-            }
-            for (int i = desc.length() + 14; i < command.length(); i++) {
-                if (command.charAt(i) == ' ') {
-                    break;
-                } else {
-                    date += command.charAt(i);
-                }
-            }
-            assert desc.length() >= 10;
-            time = command.substring(desc.length() + 15 + date.length());
-            localTime += time.substring(0, 2) + ":" + time.substring(2, 4);
-            if (desc.equals("")) {
-                ui.deadline("", null, null);
-            } else if (date.equals("")) {
-                ui.deadline(desc, null, null);
-            } else if (time.equals("")) {
-                ui.deadline(desc, LocalDate.parse(format(date), formatter), null);
-            }
-            ui.deadline(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime));
-        } else if (command.length() <= 3) {
-            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-            throw (new DukeException("\n    ____________________________________________________________\n"
-                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________"));
+            addDeadline(command);
         } else {
             Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw (new DukeException("\n    ____________________________________________________________\n"
@@ -118,46 +46,115 @@ public class Parser {
     }
 
     /**
-     * Finds task and print out the details of the tasks that is related to the keyword provided.
+     * Add event into TaskList.
      *
-     * @param keyword Parts of the description of the task that a user wants to find.
+     * @param command User command.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description, date and time.
      */
-    public void find(String keyword) {
-        String msg = "";
-        int num = 1;
-        for (int i = 0; i < TaskList.tasks.size(); i++) {
-            Task task = TaskList.tasks.get(i);
-            String word = "";
-            for (int j = 0; j < task.description.length(); j++) {
-                if (task.description.charAt(j) == ' ') {
-                    if (word.equals(keyword)) {
-                        msg += "     " + num + "." + task + "\n";
-                        num++;
-                    }
-                    word = "";
-                    continue;
+    public static void addEvent(String command) throws DukeException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        String eventDescription = Parser.getDescription(command, "E");
+        String date = Parser.getDate(command, "E", eventDescription.length() + 11);
+        int currentIndexOfString = eventDescription.length() + date.length();
+        if (command.length() < currentIndexOfString + 16) {
+            throw new DukeException("startTime need to be included!");
+        } else if (command.length() < currentIndexOfString + 21) {
+            throw new DukeException("endTime need to be included!");
+        }
+        String startTime = command.substring(currentIndexOfString + 12, currentIndexOfString + 16);
+        String endTime = command.substring(currentIndexOfString + 17, currentIndexOfString + 21);
+        String localStart = startTime.substring(0, 2) + ":" + startTime.substring(2, 4);
+        String localEnd = endTime.substring(0, 2) + ":" + endTime.substring(2, 4);
+        TaskList.addTask(new Event(eventDescription, LocalDate.parse(format(date), formatter),
+                LocalTime.parse(localStart), LocalTime.parse(localEnd)));
+    }
+
+    /**
+     * Add Deadline into TaskList.
+     *
+     * @param command User command.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description, date and time.
+     */
+    public static void addDeadline(String command) throws DukeException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        String deadlineDescription = Parser.getDescription(command, "D");
+        String date = Parser.getDate(command, "D", deadlineDescription.length() + 14);
+        int currentIndexOfString = deadlineDescription.length() + date.length();
+        if (command.length() < currentIndexOfString + 15) {
+            throw new DukeException("Time need to be included!");
+        }
+        String time = command.substring(currentIndexOfString + 15);
+        String localTime = time.substring(0, 2) + ":" + time.substring(2, 4);
+        TaskList.addTask(new Deadline(deadlineDescription, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime)));
+    }
+
+    /**
+     * Returns date from user command.
+     *
+     * @param command User command.
+     * @param type    Command type.
+     * @param start   First index of date.
+     * @return Return date from user command.
+     */
+    public static String getDate(String command, String type, int start) throws DukeException {
+        String date = "";
+        if (type.equals("E")) {
+            for (int i = start; i < command.length(); i++) {
+                if (command.charAt(i) == ' ') {
+                    break;
                 } else {
-                    word += task.description.charAt(j);
-                    if (j == task.description.length() - 1) {
-                        if (word.equals(keyword)) {
-                            msg += "     " + num + "." + task + "\n";
-                            num++;
-                        }
-                    }
+                    date += command.charAt(i);
+                }
+            }
+        } else if (type.equals("D")) {
+            for (int i = start; i < command.length(); i++) {
+                if (command.charAt(i) == ' ') {
+                    break;
+                } else {
+                    date += command.charAt(i);
                 }
             }
         }
-        if (num == 1) {
-            Duke.respond = "You have no matching tasks in your list :(\n" + msg;
-            msg = "    ____________________________________________________________\n"
-                    + "     You have no matching tasks in your list :(\n"
-                    + "    ____________________________________________________________";
-        } else {
-            Duke.respond = "Here are the matching tasks in your list:\n" + msg;
-            msg = "    ____________________________________________________________\n"
-                    + "     Here are the matching tasks in your list:\n"
-                    + msg + "    ____________________________________________________________";
+        if (date.length() == 0) {
+            throw new DukeException("Date cannot be empty");
         }
+        return date;
+    }
+
+    /**
+     * Returns the description of task from user command.
+     *
+     * @param command User command.
+     * @param type    Command type.
+     * @return Description of task from user command.
+     */
+    public static String getDescription(String command, String type) throws DukeException {
+        String description = "";
+        if (type.equals("T")) {
+            description = command.substring(5);
+        } else if (type.equals("E")) {
+            for (int i = 6; i < command.length(); i++) {
+                if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
+                    break;
+                } else {
+                    description += command.charAt(i);
+                }
+            }
+        } else if (type.equals("D")) {
+            for (int i = 9; i < command.length(); i++) {
+                if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
+                    break;
+                } else {
+                    description += command.charAt(i);
+                }
+            }
+        }
+        if (description.length() == 0) {
+            throw new DukeException("Description cannot be empty");
+        }
+        return description;
     }
 
     /**

@@ -17,7 +17,6 @@ public class TaskList extends ArrayList<Task> {
      * @param num Index of the task in the taskList that needs to be deleted.
      */
     public static void delete(int num) {
-        assert num <= tasks.size() && num != 0;
         System.out.println("    ____________________________________________________________\n"
                 + "     Noted. I've removed this task: \n     "
                 + tasks.get(num - 1) + "\n"
@@ -26,7 +25,6 @@ public class TaskList extends ArrayList<Task> {
         Duke.respond = "Noted. I've removed this task:\n" + tasks.get(num - 1) + "\nNow you have "
                 + (tasks.size() - 1) + " tasks in the list.";
         tasks.remove(num - 1);
-
     }
 
     /**
@@ -47,8 +45,7 @@ public class TaskList extends ArrayList<Task> {
             System.out.println("    ____________________________________________________________\n     " +
                     "Here are the tasks in your list:\n     " + s +
                     "    ____________________________________________________________\n");
-        }
-    }
+        }   }
 
     /**
      * Add the task to the taskList.
@@ -72,7 +69,6 @@ public class TaskList extends ArrayList<Task> {
      * @param num Mark the task of the specified index as done.
      */
     public static void done(int num) {
-        assert num <= tasks.size() && num != 0;
         Task task = tasks.get(num - 1);
         task.markAsDone();
         Duke.respond = "Nice! I've marked this task as done:\n" + task;
