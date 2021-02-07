@@ -72,6 +72,8 @@ public class Parser {
             command = new AddEventCommand(matcher.group("description"), dateTime);
         }
 
+        assert command != null : "No add command created!";
+
         return command;
     }
 

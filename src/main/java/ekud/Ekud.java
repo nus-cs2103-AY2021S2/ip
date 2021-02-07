@@ -41,6 +41,8 @@ public class Ekud {
         if (c.isExit()) {
             isOnline = false;
         }
+
+        assert isOnline;
         return c.execute(tasks, storage);
     }
 
