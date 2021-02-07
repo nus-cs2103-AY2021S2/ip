@@ -131,6 +131,13 @@ public class Duke {
                         System.out.println(task_in + " at"+ time);
                         System.out.println("you now have " + number + " tasks in the list");
                         break;
+                    case "delete":
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(arr.get(Integer.parseInt(input[1]) -1));
+                        arr.remove(Integer.parseInt(input[1]) -1 );
+                        number--;
+                        System.out.println("you now have " + number + " tasks in the list");
+                        break;
                     default:
                         throw new NotFoundException();
                 }
