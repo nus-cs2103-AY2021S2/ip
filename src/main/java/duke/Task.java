@@ -59,7 +59,8 @@ public class Task {
      * @throws DukeException if there is no description of the task.
      */
     private static Task createToDo(String command) throws DukeException {
-        if (command.substring(4).trim().length() == 0) {
+        int lengthOfTaskDescription = command.substring(4).trim().length();
+        if (lengthOfTaskDescription == 0) {
             throw new DukeException("Expected argument describing task after \"todo\"");
         }
         return new ToDo(command.substring(5));
@@ -81,6 +82,9 @@ public class Task {
         if (splitCommand.length == 1 || splitCommand[1].trim().length() == 0) {
             throw new DukeException("Expected argument \"/by\" specifying deadline of task for \"deadline\"");
         }
+        if (splitCommand.length != 2) {
+            throw new DukeException("Multiple \"/by\" not allowed in for \"deadline\"");
+        }
         return new Deadline(splitCommand[0].trim(), splitCommand[1].trim());
     }
 
@@ -99,6 +103,9 @@ public class Task {
         }
         if (splitCommand.length == 1 || splitCommand[1].trim().length() == 0) {
             throw new DukeException("Expected argument \"/at\" specifying duration of task for \"event\"");
+        }
+        if (splitCommand.length != 2) {
+            throw new DukeException("Multiple \"/at\" not allowed in for \"event\"");
         }
         return new Event(splitCommand[0].trim(), splitCommand[1].trim());
     }
