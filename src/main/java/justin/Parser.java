@@ -2,13 +2,38 @@ package justin;
 
 import justin.JustinException;
 
+/**
+ * This class creates a Parser class
+ * that takes in a String input
+ * and generate a command to be executed
+ *
+ * @author Goh Wei Kiat aka github : mrweikiat
+ * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
+ */
+
+
 public class Parser {
 
     private String fullText;
 
+    /**
+     * This method creates a Parser class
+     *
+     * @param fullText of the user input
+     */
+
     public Parser(String fullText) {
         this.fullText = fullText;
     }
+
+    /**
+     * This method checks the user input
+     * and generate a command
+     * to be executed
+     *
+     * @return String The command to be executed
+     * @throws JustinException command not valid
+     */
 
     public String checkCommand() throws JustinException {
         try {

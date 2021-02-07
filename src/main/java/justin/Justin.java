@@ -3,12 +3,35 @@ package justin;
 import java.io.File;
 import java.util.Scanner;
 
+
+/**
+ * justin.Justin is a chatbot that help users plan and organise tasks
+ * justin.Justin stands for JUSt a TImetable(New) : JUSTIN
+ *
+ * justin.Justin is able to create and manage new tasks
+ *   1) Mark tasks off as done
+ *   2) Set tasks as To Do's - [keyword] [name]
+ *   3) Set tasks as justin.Deadline's - keyword  : [keyword] [name] /by [day]
+ *   4) Set tasks as justin.Event's - keyword : [keyword] [name] /at [day time]
+ *   5) Supports deletion of completed tasks with command delete [int]
+ *
+ *
+ * @author Goh Wei Kiat aka github : mrweikiat
+ * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
+ */
+
 public class Justin {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+
+    /**
+     * This is method creates a class Justin that will take in user inputs to execute commands
+     *
+     * @param filePath This is the path of the file to be read and created
+     */
 
     public Justin(String filePath) {
 
@@ -18,26 +41,14 @@ public class Justin {
 
     }
 
+
+    /**
+     * This is the run method that will generate the UI messages at the start
+     * user will give inputs and Justin will execute the commands given
+     *
+     */
+
     public void run() {
-
-        /*
-         * justin.Justin is a chatbot that help users plan and organise tasks
-         * justin.Justin stands for JUSt a TImetable(New) : JUSTIN
-         *
-         * justin.Justin is able to create and manage new tasks
-         *   1) Mark tasks off as done
-         *   2) Set tasks as To Do's - <keyword> <name>
-         *   3) Set tasks as justin.Deadline's - keyword  : <keyword> <name> /by <day>
-         *   4) Set tasks as justin.Event's - keyword : <keyword> <name> /at <day time>
-         *   5) Supports deletion of completed tasks with command delete <int>
-         *
-         * justin.Justin also supports viewing the entire tasks list with the command list - keyword : <keyword>
-         * To end off the session user can input bye to terminate program - keyword : <keyword>
-         *
-         * @author Goh Wei Kiat aka github : mrweikiat
-         * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
-         */
-
 
         Scanner sc = new Scanner(System.in);
 
@@ -147,7 +158,14 @@ public class Justin {
         sc.close();
     }
 
-        public static void main(String[]args){
+
+    /**
+     * Main method inputs the file path to justin.txt to retrieve any list data stored within
+     *
+     * @param args unused
+     */
+
+    public static void main(String[]args){
 
             String userDir = System.getProperty("user.dir");
             String filePath = userDir + File.separator + "data" + File.separator + "justin.txt";

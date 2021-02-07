@@ -4,6 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
 
+/**
+ * This class creates an Event
+ * that is an extension of Task Class
+ *
+ *
+ * @author Goh Wei Kiat aka github : mrweikiat
+ * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
+ */
+
 public class Event extends Task {
 
     protected String dateTime;
@@ -11,6 +20,13 @@ public class Event extends Task {
     protected String time;
     protected LocalDate date1;
     protected LocalTime time1;
+
+    /**
+     * This method creates an event class
+     *
+     * @param description of the given task
+     * @param dateTime of the given task
+     */
 
     public Event(String description, String dateTime) {
         super(description);

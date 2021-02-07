@@ -7,9 +7,18 @@ import justin.Task;
 
 import java.util.ArrayList;
 
+/**
+ * This class creates a TaskList class that stores an ArrayList of tasks
+ *
+ * @author Goh Wei Kiat aka github : mrweikiat
+ * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
+ */
+
+
 public class TaskList {
 
     ArrayList<Task> list;
+
 
     public TaskList() {
         this.list = new ArrayList<>();
@@ -18,6 +27,14 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return this.list;
     }
+
+
+    /**
+     * This method adds a deadline to a task class
+     *
+     * @param description of the task
+     * @param date of the given task
+     */
 
     public void addDeadline(String description, String date) {
 
@@ -52,6 +69,12 @@ public class TaskList {
             System.out.println("Now you have " + list.size() + " tasks in the list");
         }
     }
+
+    /**
+     * This method adds a new tod0 class
+     *
+     * @param description of the given task
+     */
 
     public void addToDo(String description) {
         boolean ifExist = false; // checking if there is an instance of a default tasks
@@ -88,6 +111,14 @@ public class TaskList {
 
     }
 
+    /**
+     * This method adds a new event to the ArrayList
+     *
+     * @param description of the given task
+     * @param date of the given task
+     */
+
+
     public void addEvent(String description, String date) {
 
         boolean ifExist = false;
@@ -123,6 +154,14 @@ public class TaskList {
             printLineBreaker();
         }
     }
+
+
+    /**
+     * This method deletes a task entry at position num from the list
+     *
+     * @param num position of the task to be deleted
+     * @throws JustinException cannot delete an invalid entry task
+     */
 
     public void delete(String num) throws JustinException {
         try {

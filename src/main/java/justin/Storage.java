@@ -1,7 +1,6 @@
 package justin;
 
-import justin.Deadline;
-import justin.Event;
+
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,10 +8,24 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * This class creates a storage class that hold information of the task list
+ * @author Goh Wei Kiat aka github : mrweikiat
+ * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
+ */
+
+
 public class Storage {
 
     protected String filePath;
     protected File file;
+
+    /**
+     * This method takes in a String filepath and creates a new Storage class with a file that contains path to
+     * the txt file storing the list information
+     *
+     * @param filePath The absolute filepath of justin.txt
+     */
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -20,9 +33,24 @@ public class Storage {
 
     }
 
+    /**
+     * This method calls to a storage class and return
+     * the absolute file path in String
+     *
+     * @return String containing abosulute file path to justin.txt
+     */
+
     public String getFilePath() {
         return this.filePath;
     }
+
+    /**
+     * This method taks in the filepath containing list of tasks in .txt and
+     * returns a TaskList contain all the different classes of Tasks
+     *
+     * @param filePath The absolute filepath of justin.txt
+     * @return TaskList This returns a loaded Tasklist
+     */
 
     public TaskList loadFile(String filePath)  {
 
@@ -89,46 +117,59 @@ public class Storage {
 
     }
 
+    /**
+     * This method takes in the absolute file path of justin.txt and the current tasklist
+     * and attempts to save the information of each tasks into the .txt file
+     *
+     * @param tasks The TaskList class containing arraylist of Tasks
+     * @param filePath The absolute filepath of justin.txt
+     */
+
+
     // method to save contents of list onto justin.txt
-    public static void saveFile(TaskList task, String filePath) {
+    public static void saveFile(TaskList tasks, String filePath) {
 
         try {
 
             StringBuffer sb = new StringBuffer(""); // create empty sb to store content of list
 
-            for (int i = 0; i < task.getList().size(); i++) {
+            for (int i = 0; i < tasks.getList().size(); i++) {
 
                 String holder = ""; // to hold content of current line to be stored into sb
 
-                if (task.getList().get(i) instanceof Todo) { // is a t0do class
-                    if (task.getList().get(i).isDone) {
-                        holder = "T" + "|" + "1" + "|" + task.getList().get(i).description;
+                if (tasks.getList().get(i) instanceof Todo) { // is a t0do class
+                    if (tasks.getList().get(i).isDone) {
+                        holder = "T" + "|" + "1" + "|" + tasks.getList().get(i).description;
                     } else {
-                        holder = "T" + "|" + "0" + "|" + task.getList().get(i).description;
+                        holder = "T" + "|" + "0" + "|" + tasks.getList().get(i).description;
                     }
-                } else if (task.getList().get(i) instanceof Deadline) { // is a deadline class
-                    if (task.getList().get(i).isDone) {
-                        holder = "D" + "|" + "1" + "|" + task.getList().get(i).description + "|" + ((Deadline) task.getList().get(i)).by;
+                } else if (tasks.getList().get(i) instanceof Deadline) { // is a deadline class
+                    if (tasks.getList().get(i).isDone) {
+                        holder = "D" + "|" + "1" + "|" + tasks.getList().get(i).description +
+                                "|" + ((Deadline) tasks.getList().get(i)).by;
                     } else {
-                        holder = "D" + "|" + "0" + "|" + task.getList().get(i).description + "|" + ((Deadline) task.getList().get(i)).by;
+                        holder = "D" + "|" + "0" + "|" + tasks.getList().get(i).description +
+                                "|" + ((Deadline) tasks.getList().get(i)).by;
                     }
-                } else if (task.getList().get(i) instanceof Event) {
-                    if (task.getList().get(i).isDone) {
-                        holder = "E" + "|" + "1" + "|" + task.getList().get(i).description + "|" + ((Event) task.getList().get(i)).dateTime;
+                } else if (tasks.getList().get(i) instanceof Event) {
+                    if (tasks.getList().get(i).isDone) {
+                        holder = "E" + "|" + "1" + "|" + tasks.getList().get(i).description +
+                                "|" + ((Event) tasks.getList().get(i)).dateTime;
                     } else {
-                        holder = "E" + "|" + "1" + "|" + task.getList().get(i).description + "|" + ((Event) task.getList().get(i)).dateTime;
+                        holder = "E" + "|" + "1" + "|" + tasks.getList().get(i).description +
+                                "|" + ((Event) tasks.getList().get(i)).dateTime;
                     }
                 } else {
                     // vanilla event
-                    if (task.getList().get(i).isDone) {
-                        holder = "1" + "|" + task.getList().get(i).description;
+                    if (tasks.getList().get(i).isDone) {
+                        holder = "1" + "|" + tasks.getList().get(i).description;
                     } else {
-                        holder = "1" + "|" + task.getList().get(i).description;
+                        holder = "1" + "|" + tasks.getList().get(i).description;
                     }
 
                 }
 
-                if (i < task.getList().size()) {
+                if (i < tasks.getList().size()) {
                     sb.append((holder + "\n"));
                 } else {
                     sb.append(holder);

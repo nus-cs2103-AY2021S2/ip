@@ -8,6 +8,15 @@ import java.io.FileReader;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * This class performs JUnit tests on Task.java
+ * to ensure that input and output are of
+ * expected values
+ *
+ * @author Goh Wei Kiat aka github : mrweikiat
+ * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
+ */
+
 public class TaskTest {
 
 
