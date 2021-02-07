@@ -1,5 +1,5 @@
 T : 1 : Buy book
 D : 1 : Quiz : 2021-01-28
 E : 0 :  Dinner : 2021-03-05
-T : 0 : Buy bananas
+T : 1 : Buy bananas
 E : 0 : Party : 2021-01-30
