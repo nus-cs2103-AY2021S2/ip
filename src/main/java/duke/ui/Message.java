@@ -12,23 +12,16 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 /**
- * Message class used to create output strings for UI class to be shown as output of Duke.
+ * Message class used to create output strings for UI class to be shown as output of duke.gui.Duke.
  */
 public class Message {
-    private static final String INDENT = "\t";
+    private static final String INDENT = "    ";
     private static final String NEWLINE = System.lineSeparator();
-    private static final String LOGO =
-            " ____        _        " + NEWLINE
-                    + "|  _ \\ _   _| | _____ " + NEWLINE
-                    + "| | | | | | | |/ / _ \\" + NEWLINE
-                    + "| |_| | |_| |   <  __/" + NEWLINE
-                    + "|____/ \\__,_|_|\\_\\___|" + NEWLINE;
     public static final String LINE = INDENT
             + "__________________________________________________"
             + "______________" + NEWLINE;
-    private static final String START_MSG =
-            "Hello from" + NEWLINE + LOGO + LINE + INDENT + "Hello! I'm Duke" + NEWLINE + INDENT
-                    + "What can I do for you?" + NEWLINE + LINE;
+    private static final String START_MSG = INDENT + "Hello! I'm Duke" + NEWLINE
+            + INDENT + "What can I do for you?" + NEWLINE;
     private static final String BYE_MSG =
             INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
 
@@ -115,5 +108,9 @@ public class Message {
             index++;
         }
         return msg;
+    }
+
+    public static String getUserInput(String input) {
+        return input + INDENT;
     }
 }

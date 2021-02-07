@@ -1,55 +1,48 @@
 package duke;
 
 import duke.commands.BasicCommandType;
-import duke.exceptions.DukeEmptyListException;
-import duke.exceptions.DukeUnknownArgumentsException;
+import duke.exceptions.*;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Message;
-import duke.ui.Ui;
 
 /**
- * Represents the Controller used to control the logic of the Duke program. Controller contains
+ * Represents the Controller used to control the logic of the duke.gui.Duke program. Controller contains
  * the TaskList, Storage, and Ui.
  */
 public class Controller {
     private static final String END_COMMAND = "bye";
-    private final TaskList tasks;
-    private final Storage storage;
-    private final Ui ui;
+    private TaskList tasks;
+    private Storage storage;
 
     /**
-     * Constructs a Controller class. Defaulted with UI used to get user inputs and show outputs,
-     * Storage used to get save file from data directory, and tasklist from the save file or a new
-     * task list.
+     * Initialises the new Controller for the logic of the Duke application.
+     * @return Error messages if there are issues present, else returns the starting message.
      */
-    public Controller() {
-        this.ui = new Ui();
-        storage = Storage.getInstance();
-        tasks = new TaskList(storage, ui);
+    public String initialise() {
+        try {
+            storage = Storage.getInstance();
+            tasks = new TaskList(storage);
+        } catch (DukeCorruptedStorageException e) {
+            tasks = new TaskList();
+            return Message.getErrorMsg(e);
+        } catch (DukeCreateFileException e) {
+            return Message.getErrorMsg(e);
+        } catch (DukeCreateDirectoryException e) {
+            return Message.getErrorMsg(e);
+        }
+        return Message.getStartMsg();
     }
 
     /**
      * Starts the program and accepting user inputs.
      */
     public String run(String input) {
-        //ui.printStartMsg();
-        //String input = ui.getUserCommand();
-
-        /*
-        while (!input.equals(END_COMMAND)) {
-            ui.printDivider();
-            handleInput(input);
-            ui.printDivider();
-            input = ui.getUserCommand();
-        }
-         */
         if (input.equals("bye")) {
             return Message.getByeMsg();
         }
 
         return handleInput(input);
-        //ui.printByeMsg();
     }
 
     /**
@@ -89,13 +82,12 @@ public class Controller {
             return output;
         } catch (DukeUnknownArgumentsException | DukeEmptyListException e) {
             return Message.getErrorMsg(e);
-            //ui.printErrorMsg(e);
+        } catch (DukeSaveFileException e) {
+            return Message.getErrorMsg(e);
         } catch (NumberFormatException e) {
             return Message.getErrorMsg(e);
-            //ui.printErrorMsg(e);
         } catch (IndexOutOfBoundsException e) {
             return Message.getErrorMsg(e, tasks);
-            //ui.printErrorMsg(e, tasks);
         }
     }
 
