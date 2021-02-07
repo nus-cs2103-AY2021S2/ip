@@ -25,11 +25,11 @@ public class TaskList {
     /**
      * Fills tasklist with contents of the given list.
      *
-     * @param lst List of tasks.
+     * @param tasks List of tasks.
      */
-    public void load(List<Task> lst) {
+    public void load(List<Task> tasks) {
         lst.clear();
-        lst.addAll(lst);
+        lst.addAll(tasks);
     }
 
 
