@@ -7,28 +7,25 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
- * Task is the parent class for all other types of tasks.
- * The JsonTypeInfo is to enable Jackson to properly serialize and deserialize with json.
- * The property "d" acts as a discrimator for the type of task in json so that Jackson
- * can reconstruct the correct task type from json.
+ * Task is the parent class for all other types of tasks. The JsonTypeInfo is to
+ * enable Jackson to properly serialize and deserialize with json. The property
+ * "d" acts as a discrimator for the type of task in json so that Jackson can
+ * reconstruct the correct task type from json.
  */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "d")
-@JsonSubTypes({
-        @Type(value = Todo.class, name = "Todo"),
-        @Type(value = Deadline.class, name = "Deadline"),
-        @Type(value = Event.class, name = "Event")
-})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "d")
+@JsonSubTypes({ @Type(value = Todo.class, name = "Todo"), @Type(value = Deadline.class, name = "Deadline"),
+        @Type(value = Event.class, name = "Event") })
 public class Task {
 
     @JsonProperty
     protected boolean isDone;
     @JsonProperty
     protected String description;
+    @JsonProperty
+    protected TagList tags;
 
     protected Task() {
+        tags = new TagList();
     }
 
     /**
@@ -36,8 +33,9 @@ public class Task {
      *
      * @param description
      */
-    public Task(String description) {
+    public Task(String description, TagList tags) {
         this.description = description;
+        this.tags = tags;
         this.isDone = false;
     }
 
@@ -87,12 +85,28 @@ public class Task {
     }
 
     /**
+     * Gets the tags of the task
+     *
+     * @return tags
+     */
+    public TagList getTags() {
+        return tags;
+    }
+
+    /**
      * Returns a task as a string with status icon
      *
      * @return task string
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[").append(getStatusIcon()).append("] ").append(getDescription());
+
+        for (Tag tag : tags) {
+            stringBuilder.append(" #").append(tag.getName());
+        }
+
+        return stringBuilder.toString();
     }
 }

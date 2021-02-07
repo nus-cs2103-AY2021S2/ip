@@ -20,8 +20,8 @@ public class Deadline extends Task {
      * @param description
      * @param by
      */
-    public Deadline(String description, LocalDate by) {
-        super(description);
+    public Deadline(String description, TagList tags, LocalDate by) {
+        super(description, tags);
         this.by = by;
     }
 

@@ -20,8 +20,8 @@ public class Event extends Task {
      * @param description
      * @param at
      */
-    public Event(String description, LocalDate at) {
-        super(description);
+    public Event(String description, TagList tags, LocalDate at) {
+        super(description, tags);
         this.at = at;
     }
 
@@ -32,7 +32,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + " (at: " + at.format(DateTimeFormatter.ofPattern(localDateOutputFormat)) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern(localDateOutputFormat))
+                + ")";
     }
 }

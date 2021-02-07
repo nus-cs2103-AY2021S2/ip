@@ -69,22 +69,26 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         addDialog(input, DialogUser.USER);
 
-        DukeResponse response = null;
-        String message;
-        try {
-            response = duke.getResponse(input);
-            message = response.getMessage();
-        } catch (IOException ioe) {
-            message = "Failed to save. Please restart the program.";
-        }
-
-        addDialog(message, DialogUser.DUKE);
         userInput.clear();
+
+        DukeResponse response = getDukeReponse(input);
+        addDialog(response.getMessage(), DialogUser.DUKE);
 
         if (response != null && response.isExit()) {
             CompletableFuture.delayedExecutor(EXIT_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
                     .execute(() -> Platform.exit());
         }
+    }
+
+    private DukeResponse getDukeReponse(String input) {
+        DukeResponse response = null;
+        try {
+            response = duke.getResponse(input);
+        } catch (IOException ioe) {
+            response = new DukeResponse("Failed to save. Please restart the program.");
+        }
+
+        return response;
     }
 
     /**

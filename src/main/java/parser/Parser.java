@@ -14,6 +14,8 @@ import commands.FindCommand;
 import commands.ListCommand;
 import data.Deadline;
 import data.Event;
+import data.Tag;
+import data.TagList;
 import data.Todo;
 
 public class Parser {
@@ -27,6 +29,7 @@ public class Parser {
     public Command parseCommand(String input) throws ParserException {
         String[] tokens = input.split(" ");
         String commandWord = tokens[0];
+
         switch (commandWord) {
         case AddTodoCommand.COMMAND_TEXT:
             return prepareAddTodo(input, tokens);
@@ -51,70 +54,59 @@ public class Parser {
 
     private Command prepareAddTodo(String input, String[] tokens) throws ParserException {
         int minTokens = 2;
-        int descriptionOffset = 5;
 
         if (tokens.length < minTokens) {
             throw new ParserException("Todo requires a description.");
         }
 
-        Todo todo = new Todo(input.substring(descriptionOffset));
+        String description = getDescription(input);
+        TagList tags = getTags(input);
+
+        Todo todo = new Todo(description, tags);
         return new AddTodoCommand(todo);
     }
 
     private Command prepareAddDeadline(String input, String[] tokens) throws ParserException {
-        int byOffset = 4;
-        int descriptionOffset = 9;
+        String bySwitch = "/by";
 
-        int bySwitchIndex = input.indexOf("/by");
-        if (bySwitchIndex == -1 || bySwitchIndex + byOffset > input.length()) {
-            throw new ParserException("Deadline requires '/by' to be specified.");
-        }
+        String description = getDescription(input);
 
-        String description = input.substring(descriptionOffset, bySwitchIndex);
-        if (description.trim().equals("")) {
-            throw new ParserException("Deadline requires a description.");
-        }
-        String byStr = input.substring(bySwitchIndex + byOffset);
-        if (byStr.trim().equals("")) {
-            throw new ParserException("Deadline requires '/by' to be specified.");
-        }
+        TagList tags = getTags(input);
 
         LocalDate by;
         try {
-            by = LocalDate.parse(byStr);
+            by = getDate(input, bySwitch);
         } catch (DateTimeException dte) {
             throw new ParserException("Deadline /by needs to be in a valid format (e.g. yyyy-MM-dd)");
         }
 
-        Deadline deadline = new Deadline(description, by);
+        if (by == null) {
+            throw new ParserException("Deadline requires '/by' to be specified.");
+        }
+
+        Deadline deadline = new Deadline(description, tags, by);
         return new AddDeadlineCommand(deadline);
     }
 
     private Command prepareAddEvent(String input, String[] tokens) throws ParserException {
-        int atOffset = 4;
-        int descriptionOffset = 6;
+        String atSwitch = "/at";
 
-        int atSwitchIndex = input.indexOf("/at");
-        if (atSwitchIndex == -1 || atSwitchIndex + atOffset > input.length()) {
-            throw new ParserException("Event requires '/at' to be specified.");
-        }
-        String description = input.substring(descriptionOffset, atSwitchIndex);
-        if (description.trim().equals("")) {
-            throw new ParserException("Event requires a description.");
-        }
-        String atStr = input.substring(atSwitchIndex + atOffset);
-        if (atStr.trim().equals("")) {
-            throw new ParserException("Event requires '/at' to be specified.");
-        }
+        String description = getDescription(input);
+
+        TagList tags = getTags(input);
 
         LocalDate at;
         try {
-            at = LocalDate.parse(atStr);
+            at = getDate(input, atSwitch);
         } catch (DateTimeException dte) {
             throw new ParserException("Event /at needs to be in a valid format (e.g. yyyy-MM-dd)");
         }
 
-        Event event = new Event(description, at);
+        if (at == null) {
+            throw new ParserException("Event requires '/at' to be specified.");
+        }
+
+        Event event = new Event(description, tags, at);
         return new AddEventCommand(event);
     }
 
@@ -160,5 +152,66 @@ public class Parser {
         }
 
         return new FindCommand(input.substring(5));
+    }
+
+    private String getDescription(String input) throws ParserException {
+        int spaceOffset = 1;
+        int firstSpaceIndex = input.indexOf(" ");
+
+        int endOfDescription = input.indexOf("/", firstSpaceIndex + spaceOffset);
+        if (endOfDescription == firstSpaceIndex + spaceOffset) {
+            throw new ParserException("Description must come before all switches");
+        }
+
+        if (endOfDescription == -1) {
+            endOfDescription = input.length();
+        }
+
+        return input.substring(firstSpaceIndex + spaceOffset, endOfDescription);
+    }
+
+    private TagList getTags(String input) {
+        int tagOffset = 5;
+
+        TagList tags = new TagList();
+
+        int tagSwitchIndex = input.indexOf("/tag");
+        if (tagSwitchIndex == -1) {
+            return tags;
+        }
+
+        int endOfTags = input.indexOf("/", tagSwitchIndex + tagOffset);
+        if (endOfTags == -1) {
+            endOfTags = input.length();
+        }
+
+        String[] tagTokens = input.substring(tagSwitchIndex + tagOffset, endOfTags).split(" ");
+        for (String tagToken : tagTokens) {
+            tags.add(new Tag(tagToken));
+        }
+
+        return tags;
+    }
+
+    private LocalDate getDate(String input, String switchText) {
+        int switchOffset = switchText.length() + 1;
+        int switchIndex = input.indexOf(switchText);
+        if (switchIndex == -1 || switchIndex + switchOffset > input.length()) {
+            return null;
+        }
+
+        int endOfSwitch = input.indexOf("/", switchIndex + switchOffset);
+        if (endOfSwitch == -1) {
+            endOfSwitch = input.length();
+        }
+
+        String switchStr = input.substring(switchIndex + switchOffset, endOfSwitch).trim();
+        if (switchStr.trim().equals("")) {
+            return null;
+        }
+
+        LocalDate date = LocalDate.parse(switchStr);
+
+        return date;
     }
 }

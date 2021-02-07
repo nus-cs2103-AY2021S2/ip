@@ -16,14 +16,11 @@ import data.TaskList;
 public class StorageFile {
 
     private static final String WORKING_DIR_PATH = System.getProperty("user.dir");
-    private static final String DEFAULT_STORAGE_FILE_PATH = java.nio.file.Paths
-            .get(WORKING_DIR_PATH, "saveFile.json")
+    private static final String DEFAULT_STORAGE_FILE_PATH = java.nio.file.Paths.get(WORKING_DIR_PATH, "saveFile.json")
             .toString();
 
     // To map java objects to json
-    private final ObjectMapper mapper = JsonMapper.builder()
-            .findAndAddModules()
-            .build();
+    private final ObjectMapper mapper = JsonMapper.builder().findAndAddModules().build();
 
     private File saveFile;
 
@@ -49,8 +46,7 @@ public class StorageFile {
      */
     public void save(TaskList tasks) throws IOException {
         saveFile.createNewFile();
-        try (BufferedOutputStream outSaveFile = new BufferedOutputStream(new FileOutputStream(saveFile, false))
-        ) {
+        try (BufferedOutputStream outSaveFile = new BufferedOutputStream(new FileOutputStream(saveFile, false))) {
             // https://github.com/FasterXML/jackson-databind/pull/1309
             mapper.writeValue(outSaveFile, tasks);
         }
@@ -63,8 +59,8 @@ public class StorageFile {
      * @throws IOException
      */
     public TaskList load() throws IOException {
-        try (BufferedInputStream inSaveFile = new BufferedInputStream(new FileInputStream(saveFile))
-        ) {
+        saveFile.createNewFile();
+        try (BufferedInputStream inSaveFile = new BufferedInputStream(new FileInputStream(saveFile))) {
             return mapper.readValue(inSaveFile, TaskList.class);
         } catch (MismatchedInputException mie) {
             // empty saveFile.json or invalid file format
