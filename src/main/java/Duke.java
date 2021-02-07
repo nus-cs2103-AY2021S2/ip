@@ -32,7 +32,7 @@ public class Duke {
         String greet = "Woof! I'm Doge Duke\n"
                 + "What do you want me to do?\n"
                 + "Type your request in below!\n";
-        String goodbye = "Bye! Hope I was a good dog,"
+        String goodbye = "Bye! Hope I was a good dog, "
                 + "see you again soon!";
         String terminate = "bye";
 
@@ -40,11 +40,13 @@ public class Duke {
         System.out.println(spacer + greet + spacer);
 
         int ctr = 0;
-        HashMap<Integer, String> commands = new HashMap<Integer, String>();
+        HashMap<Integer, Command> commands = new HashMap<Integer, Command>();
         String separator = " ";
 
         while (true) {
             String input = sc.nextLine();
+
+            // To recognise terminating condition
             if (input.equals(terminate)) {
                 System.out.println(spacer + goodbye + spacer);
                 break;
@@ -59,23 +61,74 @@ public class Duke {
             // To recognise Done user input
             } else if (input.contains("done")) {
                 String[] doneCommand = input.split(separator);
-                String markedInput = "[X] " + input;
                 int id = Integer.parseInt(doneCommand[1]);
-                commands.replace(id, markedInput);
+                Command command = commands.get(id);
+                commands.replace(id, command.markDone());
 
-                System.out.println(spacer + "Woof!"
+                System.out.println(spacer + "Woof! "
                         + "I have completed these commands before: "
                         + "\n");
                 printList(commands);
                 System.out.println(spacer);
 
-            // To recognise Add user input
             } else {
                 ctr++;
-                String emptyInput = "[ ] " + input;
-                commands.put(ctr, emptyInput);
-                System.out.println(spacer + "added: "
-                        + input + spacer);
+                Command command;
+
+                // To recognise ToDo user input
+                if (input.contains("todo")) {
+                    command = new ToDo(input);
+                    commands.put(ctr, command);
+                    System.out.println(spacer
+                            + "Mlem I've added a new command for you to do: \n"
+                            + commands.get(ctr)
+                            + "\n"
+                            + "Now I can do a total of "
+                            + ctr
+                            + " commands!"
+                            + spacer);
+
+                // To recognise Event user input
+                } else if (input.contains("event")) {
+                    String[] inputTime = input.split(" /at ");
+                    command = new Event(inputTime[0], inputTime[1]);
+                    commands.put(ctr, command);
+                    System.out.println(spacer
+                            + "Much wow! I've added a new command with an Event: \n"
+                            + commands.get(ctr)
+                            + "\n"
+                            + "Now I can do a total of "
+                            + ctr
+                            + " commands!"
+                            + spacer);
+
+                // To recognise Deadline user input
+                } else if (input.contains("deadline")) {
+                    String[] inputTime = input.split(" /by ");
+                    command = new Deadline(inputTime[0], inputTime[1]);
+                    commands.put(ctr, command);
+                    System.out.println(spacer
+                            + "Woofers! I've added a new command with a Ded-line: \n"
+                            + commands.get(ctr)
+                            + "\n"
+                            + "Now I can do a total of "
+                            + ctr
+                            + " commands!"
+                            + spacer);
+
+                // To recognise Add user input
+                } else {
+                    command = new emptyAdd(input);
+                    commands.put(ctr, command);
+                    System.out.println(spacer
+                            + "Mlem I've added a new command with a Ded-line: \n"
+                            + commands.get(ctr)
+                            + "\n"
+                            + "Now I can do a total of "
+                            + ctr
+                            + " commands!"
+                            + spacer);
+                }
             }
         }
         sc.close();
@@ -87,10 +140,10 @@ public class Duke {
      *
      * @param hm HashMap that retains all commands
      */
-    static void printList(HashMap<Integer, String> hm) {
+    static void printList(HashMap<Integer, Command> hm) {
         for (Integer i : hm.keySet()) {
             String key = i.toString();
-            String value = hm.get(i);
+            Command value = hm.get(i);
             System.out.println(key + ". " + value);
         }
     }
