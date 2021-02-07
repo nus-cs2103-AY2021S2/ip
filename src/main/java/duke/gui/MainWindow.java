@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -36,6 +37,14 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    @FXML
+    private void printInteraction(String input, String response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage));
+        userInput.clear();
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -43,17 +52,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
 
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        try {
+            String response = duke.getResponse(input);
 
-        userInput.clear();
+            printInteraction(input, response);
 
-        if (duke.isExitInput(input)) {
-            System.exit(0);
+            if (duke.isExitInput(input)) {
+                System.exit(0);
+            }
+        } catch (DukeException e) {
+            printInteraction(input, e.getMessage());
+        } catch (Exception e) {
+            System.out.printf("[ERROR] %s: %s\n", e.getClass().getCanonicalName(), e.getMessage());
+            e.printStackTrace();
+
+            String DEFAULT_ERR_MSG = "An unknown error occurred. Please try another command " +
+                    "or contact the developer for help.";
+            printInteraction(input, DEFAULT_ERR_MSG);
         }
     }
 }

@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * The run method of Duke. Do `new Duke().run()` to start Duke.
+     * The run method of Duke. Execute `new Duke().run()` to start Duke.
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
