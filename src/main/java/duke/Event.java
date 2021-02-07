@@ -55,6 +55,7 @@ class Event extends Task {
         } else {
             isCompleted = "[ ]";
         }
+        assert (this.taskName.equals("")) : "Name of event cannot be empty";
         return type + isCompleted + " " + this.taskName + " (by: " + Task.printDate(date) + ")";
     }
 }

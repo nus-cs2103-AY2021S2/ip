@@ -39,6 +39,7 @@ class ToDo extends Task {
         } else {
             isCompleted = "[ ]";
         }
+        assert (this.taskName.equals("")) : "Name of todo cannot be empty";
         return type + isCompleted + " " + this.taskName;
     }
 }
