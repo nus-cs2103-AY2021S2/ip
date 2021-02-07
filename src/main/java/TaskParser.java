@@ -53,7 +53,6 @@ public class TaskParser {
         }
         String command = nextInput.substring(5);
         tasks.add(new Todo(command, false));
-//        taskAdded();
         return ui.showTodoMsg(tasks);
     }
 
@@ -75,7 +74,6 @@ public class TaskParser {
         String command = nextInput.substring(9, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Deadline(command, dateInfo, false, false));
-//        taskAdded();
         return ui.showDeadlineMsg(tasks);
     }
 
@@ -97,7 +95,6 @@ public class TaskParser {
         String command = nextInput.substring(6, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Event(command, dateInfo, false, false));
-//        taskAdded();
         return ui.showEventMsg(tasks);
     }
 
@@ -120,7 +117,7 @@ public class TaskParser {
             throw new DukeException("Item number selected is out of range.");
         }
         tasks.getTaskList().get(itemNum - 1).makeDone();
-        assert tasks.getTaskList().get(itemNum - 1).isDone: tasks.getTaskList().get(itemNum - 1).description;
+        assert tasks.getTaskList().get(itemNum - 1).isDone : tasks.getTaskList().get(itemNum - 1).description;
         return ui.showDoneMsg(tasks, itemNum);
     }
 

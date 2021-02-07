@@ -4,7 +4,7 @@ public class TaskList {
     private final ArrayList<Task> taskList;
 
     /**
-     * Initialise Task List with new taskList.
+     * Initialise Task List with new arrayList.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Return size of taskList.
+     * Get size of taskList.
      *
      * @return Size of task list.
      */
@@ -73,7 +73,7 @@ public class TaskList {
     /**
      * A toString method to display all the tasks in the task list.
      *
-     * @return return a string containing all the tasks in the task list.
+     * @return A string containing all the tasks in the task list.
      */
     @Override
     public String toString() {

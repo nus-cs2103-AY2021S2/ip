@@ -3,14 +3,18 @@ import java.util.ArrayList;
 public class ContactList {
     private final ArrayList<Contact> contactList;
 
+    /**
+     * Initialise Contact List with new arrayList.
+     */
     public ContactList() {
         this.contactList = new ArrayList<>();
     }
 
-    public ContactList(ArrayList<Contact> contactList) {
-        this.contactList = contactList;
-    }
-
+    /**
+     * Get size of the list.
+     *
+     * @return The size of the list.
+     */
     public int getSize() {
         if (contactList.isEmpty()) {
             return 0;
@@ -19,18 +23,38 @@ public class ContactList {
         }
     }
 
+    /**
+     * Get task list.
+     *
+     * @return Task List.
+     */
     public ArrayList<Contact> getContactList() {
         return contactList;
     }
 
+    /**
+     * Add contact to the list.
+     *
+     * @param contact The contact to be added to the list.
+     */
     public void add(Contact contact) {
         contactList.add(contact);
     }
 
+    /**
+     * Delete contact from the list.
+     *
+     * @param itemNum The item number corresponding to the contact to be deleted.
+     */
     public void delete(int itemNum) {
         contactList.remove(itemNum);
     }
 
+    /**
+     * A toString method to display all the contacts in the contact list.
+     *
+     * @return A string containing all the contacts in the contact list.
+     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

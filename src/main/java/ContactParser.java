@@ -2,6 +2,14 @@ import javafx.application.Platform;
 
 public class ContactParser {
 
+    /**
+     * Process the user input to make sense for the system.
+     *
+     * @param nextInput The input given by user.
+     * @param contacts  The Contact Arraylist containing user contacts in sequence.
+     * @param ui        UI structure to show the user correct message.
+     * @return Return the correct logic and GUI output.
+     */
     public String processInput(String nextInput, ContactList contacts, Ui ui) {
         String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
         try {
@@ -24,6 +32,15 @@ public class ContactParser {
         }
     }
 
+    /**
+     * Add a contact.
+     *
+     * @param userInput The input given by user.
+     * @param contacts  The Contact Arraylist containing user contacts in sequence.
+     * @param ui        UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
+     * @throws DukeException Exception thrown if the user input is invalid.
+     */
     public String addContact(String userInput, ContactList contacts, Ui ui) throws DukeException {
         if (userInput.length() < 14) {
             throw new DukeException("OOPS!!! Please fill in the full detail of the contact.");
@@ -36,6 +53,15 @@ public class ContactParser {
         return ui.showAddContactMsg(contacts);
     }
 
+    /**
+     * Delete a contact.
+     *
+     * @param userInput The input given by user.
+     * @param contacts  The Contact Arraylist containing user contacts in sequence.
+     * @param ui        UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
+     * @throws DukeException Exception thrown if the user input is invalid.
+     */
     public String deleteContact(String userInput, ContactList contacts, Ui ui) throws DukeException {
         if (userInput.length() < 8) {
             throw new DukeException("OOPS!!! The item number cannot be empty.");
@@ -54,6 +80,15 @@ public class ContactParser {
         return ui.showDeleteContactMsg(taskRemoved, contacts.getSize());
     }
 
+    /**
+     * Update an old contact to a new version.
+     *
+     * @param userInput The input given by user.
+     * @param contacts  The Contact Arraylist containing user contacts in sequence.
+     * @param ui        UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
+     * @throws DukeException Exception thrown if the user input is invalid.
+     */
     public String updateContact(String userInput, ContactList contacts, Ui ui) throws DukeException {
         if (userInput.length() < 16) {
             throw new DukeException("OOPS!!! Please fill in the full detail of the contact");
@@ -73,6 +108,13 @@ public class ContactParser {
         return ui.showUpdateContactMsg(contacts);
     }
 
+    /**
+     * List out all user inputs in sequence.
+     *
+     * @param contacts The Contact Arraylist containing user contacts in sequence.
+     * @param ui       UI structure to show the user correct message.
+     * @return A string showing correct GUI output.
+     */
     public String listContacts(ContactList contacts, Ui ui) {
         return ui.showContactListMsg(contacts);
     }

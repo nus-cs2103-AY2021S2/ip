@@ -15,6 +15,9 @@ public class Storage {
      * Default path to store the user tasks.
      */
     public static final String DEFAULT_TASKS_STORAGE_FILEPATH = "tasks.txt";
+    /**
+     * Default path to store the user contacts.
+     */
     public static final String DEFAULT_CONTACTS_STORAGE_FILEPATH = "notes.txt";
 
     public TaskList tasks;
@@ -49,6 +52,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Read the existing contacts file and create the list of contacts when the program is run.
+     *
+     * @param contacts The Contact Arraylist containing user contacts in sequence.
+     */
     private void readContactsFileIntoList(ContactList contacts) {
         List<String> lines = Collections.emptyList();
 
@@ -107,7 +115,7 @@ public class Storage {
     }
 
     /**
-     * Update the tasks into the file at the end of the program.
+     * Update the tasks into the file after each user input.
      *
      * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
      */
@@ -120,6 +128,11 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Update the contacts into the file after eatch user input.
+     *
+     * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
+     */
     public void writeContactListIntoFile() throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(DEFAULT_CONTACTS_STORAGE_FILEPATH);
         ArrayList<Contact> items = contacts.getContactList();
