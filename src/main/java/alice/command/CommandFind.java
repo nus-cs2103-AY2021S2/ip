@@ -29,15 +29,15 @@ public class CommandFind extends Command {
 					.filter(t -> t.getName().toLowerCase(Locale.ROOT).contains(tokens[1].toLowerCase(Locale.ROOT)))
 					.collect(Collectors.toList());
 			if (identified.size() <= 0) {
-				return new Alice("No items found", agent.getData(), agent.getIsDone(), false);
+				return new Alice("No items found", agent.getData(), agent.getDone(), false, agent.getPrevious());
 			}
 			String response = String.format(SUCCESS_MESSAGE,
 					IntStream.range(0, identified.size())
 							.mapToObj(i -> (i + 1) + " " + identified.get(i))
 							.collect(Collectors.joining("\n")));
-			return new Alice(response, agent.getData(), agent.getIsDone(), false);
+			return new Alice(response, agent.getData(), agent.getDone(), false, agent.getPrevious());
 		} catch (IllegalArgumentException illegalArgumentException) {
-			return new Alice(USAGE, agent.getData(), agent.getIsDone(), false);
+			return new Alice(USAGE, agent.getData(), agent.getDone(), false, agent.getPrevious());
 		}
 
 	}

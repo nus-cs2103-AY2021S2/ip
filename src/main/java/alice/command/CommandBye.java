@@ -25,7 +25,7 @@ public class CommandBye extends Command {
 	 */
 	@Override
 	public Alice execute(Alice agent) {
-		return new Alice(SUCCESS_MESSAGE, agent.getData(), true, false);
+		return new Alice(SUCCESS_MESSAGE, agent.getData(), true, false, null);
 	}
 
 	/**
