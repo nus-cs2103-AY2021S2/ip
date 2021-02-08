@@ -69,6 +69,12 @@ public class Duke {
             case "find":
                 speech += tasks.findTasks(desc);
                 break;
+            case "today":
+                speech += tasks.getReminder(tasks);
+                break;
+            case "weekly":
+                speech += tasks.getNextReminder(tasks);
+                break;
             default:
                 throw new UnclearInputException();
             }
