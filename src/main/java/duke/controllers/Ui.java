@@ -43,7 +43,7 @@ public class Ui {
             switch (command.getCommand()) {
             case LIST:
                 // list all the current todos
-                return taskList.listTodos();
+                return TodosView.formatListOfTodosToString(taskList.getTodos());
             case EVENT:
                 // add a new todo to the tasklist
                 try {
@@ -56,7 +56,7 @@ public class Ui {
                     Optional<? extends Todo> newEvent = addEventReturn.getSecond();
 
                     // return string reply to adding of new event
-                    return TodosView.renderAddTodoReply(newEvent, taskList.todosSize());
+                    return TodosView.addTodoReply(newEvent, taskList.todosSize());
                 } catch (Exception e) {
                     return Greeting.printErrorMessage(e);
                 }
@@ -72,7 +72,7 @@ public class Ui {
                     Optional<? extends Todo> newTodo = addTodoReturn.getSecond();
 
                     // return rendered reply for todo
-                    return TodosView.renderAddTodoReply(newTodo, taskList.todosSize());
+                    return TodosView.addTodoReply(newTodo, taskList.todosSize());
                 } catch (DukeBlankTaskException e) {
                     return Greeting.printErrorMessage(e);
                 }
@@ -90,7 +90,7 @@ public class Ui {
                     Optional<? extends Todo> newDeadline = addDeadlineReturn.getSecond();
 
                     // return rendered String of deadline
-                    return TodosView.renderAddTodoReply(newDeadline, taskList.todosSize());
+                    return TodosView.addTodoReply(newDeadline, taskList.todosSize());
                 } catch (Exception e) {
                     return Greeting.printErrorMessage(e);
                 }
@@ -108,7 +108,7 @@ public class Ui {
                     Optional<? extends Todo> todoMarkedAsDone = markAsDoneReturn.getSecond();
 
                     // reply with the String output
-                    return TodosView.renderMarkTodoAsDoneReply(todoMarkedAsDone);
+                    return TodosView.markTodoAsDoneReply(todoMarkedAsDone);
                 } catch (DukeTaskIndexOutOfRangeException e) {
                     return Greeting.printErrorMessage(e);
                 }
@@ -126,13 +126,13 @@ public class Ui {
                     Optional<? extends Todo> deletedTodo = deleteTodoReturn.getSecond();
 
                     // return reply of deleted todo
-                    return TodosView.renderDeleteTodoReply(deletedTodo, taskList.todosSize());
+                    return TodosView.deleteTodoReply(deletedTodo, taskList.todosSize());
                 } catch (Exception e) {
                     return Greeting.printErrorMessage(e);
                 }
             case FIND:
                 // find a todo with the relevant keyword
-                return taskList.findByKeyword(command.getCommandArgs());
+                return TodosView.formatMatchedTodosToString(taskList.findByKeyword(command.getCommandArgs()));
             case BYE:
                 // save current todosController tasks to local db before exit
                 storage.saveTasksToLocalDatabase(taskList.getTodos());

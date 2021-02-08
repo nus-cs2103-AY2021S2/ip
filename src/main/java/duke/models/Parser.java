@@ -6,8 +6,16 @@ import java.util.Optional;
 import duke.exceptions.DukeCommandNotFoundException;
 
 public class Parser {
+    /** Command Index for a command is at index 0 */
+    private static final int COMMAND_INDEX = 0;
+    /** Command Index for a command args are at index 1 */
+    private static final int COMMAND_ARG_START_INDEX = 1;
+
+    /** Contains Optional String containing command from command input */
     private Optional<String> command;
+    /** Contains String after command string input */
     private Optional<List<String>> commandArgs;
+    /** Contains whole input string -> used in Level-1 */
     private Optional<List<String>> fullCommand;
 
     /**
@@ -16,21 +24,21 @@ public class Parser {
      * use of Optionals
      */
     public Parser(List<String> fullCommand) {
-        this.command = Optional.ofNullable(fullCommand.get(0));
-        this.commandArgs = Optional.of(fullCommand.subList(1, fullCommand.size()));
+        this.command = Optional.ofNullable(fullCommand.get(COMMAND_INDEX));
+        this.commandArgs = Optional.of(fullCommand.subList(
+                COMMAND_ARG_START_INDEX, fullCommand.size()));
         this.fullCommand = Optional.of(fullCommand);
     }
 
     /**
      * Gets the first String passed in from the list of inputs, which is the Command in the input
      * line
-     *
      * @return Commands enum depicting which command is to be executed by the bot.
      * @throws DukeCommandNotFoundException when the command is blank
      */
     public Commands getCommand() throws DukeCommandNotFoundException {
         return this.command.map(commandString -> {
-            //@formatter:off
+            // @formatter:off
             switch (commandString) {
             case "done":
                 return Commands.DONE;
@@ -57,7 +65,6 @@ public class Parser {
     /**
      * Gets the remaining arguments passed into the command in the terminal as the arguments of the
      * command
-     *
      * @return List of Strings which contains the rest of the arguments passed into the terminal
      * @throws DukeCommandNotFoundException when command is blank
      */
@@ -69,7 +76,6 @@ public class Parser {
     /**
      * Used for level 1 to get full argument passed into the CLI, where todo, events and deadline
      * were yet to be implemented
-     *
      * @return List of Strings which contains the rest of the arguments passed into the terminal
      * @throws DukeCommandNotFoundException when the command is blank
      */

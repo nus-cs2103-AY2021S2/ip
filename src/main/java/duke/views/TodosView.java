@@ -29,7 +29,7 @@ public class TodosView {
      * @param matchingTodosList List of Optional Todos that matches the keywords to be rendered
      * @return String containing tasks that match the input keywords
      */
-    public static String renderMatchedTodosList(List<Optional<? extends Todo>> matchingTodosList) {
+    public static String formatMatchedTodosToString(List<Optional<? extends Todo>> matchingTodosList) {
         return String.format("Here are the matching tasks in your list:\n%s",
                 IntStream.range(0, matchingTodosList.size())
                         .mapToObj(idx -> String.format("%d.%s", idx + 1,
@@ -43,7 +43,7 @@ public class TodosView {
      * @param todosList List of optional todos passed in from TodosController
      * @return String containing rendered view of listed Todos
      */
-    public static String renderListOfTodos(List<Optional<? extends Todo>> todosList) {
+    public static String formatListOfTodosToString(List<Optional<? extends Todo>> todosList) {
         return String.format("Here are the tasks in your list:\n%s",
                 IntStream.range(0, todosList.size()).mapToObj(
                     idx -> String.format("%d.%s", idx + 1, renderTodoLine(todosList.get(idx))))
@@ -56,7 +56,7 @@ public class TodosView {
      * @param listSize Integer list size taken to return the number of tasks user currently has
      * @return String showing todo that got added along with todos list size
      */
-    public static String renderAddTodoReply(Optional<? extends Todo> newTodo, int listSize) {
+    public static String addTodoReply(Optional<? extends Todo> newTodo, int listSize) {
         return String.format("Got it! I've added this task:\n%s\nNow you have %d tasks in the list.",
                 renderTodoLine(newTodo), listSize);
     }
@@ -67,7 +67,7 @@ public class TodosView {
      * @param listSize Integer list size taken to return number of tasks user currently has
      * @return String containing reply to deleting a Todo
      */
-    public static String renderDeleteTodoReply(Optional<? extends Todo> deletedTodo, int listSize) {
+    public static String deleteTodoReply(Optional<? extends Todo> deletedTodo, int listSize) {
         return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
                 renderTodoLine(deletedTodo), listSize);
     }
@@ -77,7 +77,7 @@ public class TodosView {
      * @param newTodo Optional Todo to be marked as Done
      * @return String containing reply to marking a todo as done
      */
-    public static String renderMarkTodoAsDoneReply(Optional<? extends Todo> newTodo) {
+    public static String markTodoAsDoneReply(Optional<? extends Todo> newTodo) {
         return String.format("Nice! I've marked this task as done:\n%s", renderTodoLine(newTodo));
     }
 }

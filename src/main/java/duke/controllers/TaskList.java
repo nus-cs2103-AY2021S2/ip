@@ -21,26 +21,17 @@ import duke.views.TodosView;
 
 public class TaskList {
     /** index offset constant for 1-based indexing of todos to client */
-    private static final int INDEX_OFFSET = 1;
+    private static final int ONE_BASED_INDEX_OFFSET = 1;
 
     /** todosList contains the state of the todos */
     private final List<Optional<? extends Todo>> todos;
 
     /**
      * Constructor of TodosController which takes in an existing List of Optional Todos
-     * @param todosList is an existing List of Optional Todos
+     * @param todos is an existing List of Optional Todos
      */
-    public TaskList(List<Optional<? extends Todo>> todosList) {
-        this.todos = todosList;
-    }
-
-    /**
-     * Passes list of todos in the TodosController to TodosView to render the view of the list of
-     * Todos
-     * @return String containing rendered view of todos list
-     */
-    public String listTodos() {
-        return TodosView.renderListOfTodos(this.todos);
+    public TaskList(List<Optional<? extends Todo>> todos) {
+        this.todos = todos;
     }
 
     /**
@@ -64,9 +55,10 @@ public class TaskList {
      * Takes in a list of keywords and prints todos with messages that contains any of the keywords
      * passed in
      * @param keywordList String list of keywords to be matched
+     * @return list of todos checked to see if any strings match any given keyword
      */
-    public String findByKeyword(List<String> keywordList) {
-        return TodosView.renderMatchedTodosList(this.todos.stream().filter(optTodo -> {
+    public List<Optional<? extends Todo>> findByKeyword(List<String> keywordList) {
+        return this.todos.stream().filter(optTodo -> {
             // check if todo message contains keyword
             return optTodo.map(Todo::getMessage).map(message -> {
                 // split message by space as delimiter
@@ -74,7 +66,7 @@ public class TaskList {
                 // if any part of split message is contained in keywordList, return true
                 return messagesSplitByWhitespace.stream().anyMatch(keywordList::contains);
             }).orElse(false);
-        }).collect(Collectors.toList()));
+        }).collect(Collectors.toList());
     }
 
     /**
@@ -133,7 +125,7 @@ public class TaskList {
     /**
      * Takes in the list containing details about the new deadline and returns a Pair of new
      * TaskList with updated tasks and the new deadline added
-     * @param newDeadlineList takes in list of arguments provided to the command for processing into
+     * @param deadlineCommandArgsSplitByWhitespace takes in list of arguments provided to the command for processing into
      *        a Deadline object
      * @return Pair of TaskList and added Deadline
      * @throws DukeBlankTaskException Exception is thrown when user does not add in any details
@@ -143,34 +135,34 @@ public class TaskList {
      * @throws DukeDateTimeParseException Exception is thrown when date time passed into CLI is of
      *         the wrong format
      */
-    public Pair<TaskList, Optional<? extends Todo>> addDeadline(List<String> newDeadlineList)
+    public Pair<TaskList, Optional<? extends Todo>> addDeadline(List<String> deadlineCommandArgsSplitByWhitespace)
             throws DukeBlankTaskException, DukeBlankDetailsException, DukeDateTimeParseException {
-        if (newDeadlineList.size() == 0) {
+        if (deadlineCommandArgsSplitByWhitespace.size() == 0) {
             throw new DukeBlankTaskException("The Deadline you are trying to add cannot be blank!");
         }
 
-        ArrayList<String> messages = new ArrayList<>();
-        ArrayList<String> deadlines = new ArrayList<>();
+        ArrayList<String> newDeadlineMessages = new ArrayList<>();
+        ArrayList<String> newDeadlineDateTimeStrings = new ArrayList<>();
 
         // iterate through list to find where escape character is
         // once found, everything after is part of the deadline
-        newDeadlineList.stream().forEach(substring -> {
+        deadlineCommandArgsSplitByWhitespace.stream().forEach(substring -> {
             if (substring.contains("/")) {
-                deadlines.add(substring);
-            } else if (deadlines.size() == 0) {
-                messages.add(substring);
+                newDeadlineDateTimeStrings.add(substring);
+            } else if (newDeadlineDateTimeStrings.size() == 0) {
+                newDeadlineMessages.add(substring);
             } else {
-                deadlines.add(substring);
+                newDeadlineDateTimeStrings.add(substring);
             }
         });
 
         // if no message, throw exception
-        if (messages.size() == 0) {
+        if (newDeadlineMessages.size() == 0) {
             throw new DukeBlankTaskException("Please define a task message for your Deadline");
         }
 
         // if no deadline input or /by without any deadline, throw exception
-        if (deadlines.size() <= 1) {
+        if (newDeadlineDateTimeStrings.size() <= 1) {
             // @formatter:off
             String exceptionMessage = "Please add a /by followed by the deadline time and date in DD/MM/YYYY "
                     + "HHMM to specify a time and date for the Deadline task. If there is no time for "
@@ -178,16 +170,14 @@ public class TaskList {
             throw new DukeBlankDetailsException(exceptionMessage);
         }
 
-        // Create new Deadline object, slicing deadline array from index 1 since we
+        // Create new Deadline object, slicing newDeadlineDateTimeStrings array from index 1 since we
         // added the '/by' which shouldn't be in the actual Deadline object
         // creating a new deadline might throw an exception if the date time is in the
         // wrong format
         Optional<Deadline> newDeadline;
         try {
-            newDeadline = Optional.of(new Deadline(String.join(" ", messages),
-                    String.join(" ", deadlines.subList(1, deadlines.size()))));
-            // new deadline should never be null if no exception is thrown
-            assert newDeadline.isEmpty() : "Added Deadline is null";
+            newDeadline = Optional.of(new Deadline(String.join(" ", newDeadlineMessages),
+                    String.join(" ", newDeadlineDateTimeStrings.subList(1, newDeadlineDateTimeStrings.size()))));
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
                     "Please format your date after /by to be DD/MM/YYYY HHMM");
@@ -201,7 +191,7 @@ public class TaskList {
     /**
      * Takes in the list containing details about the new deadline and returns a Pair of updated
      * TaskList and added Event
-     * @param newEventList takes in list of arguments provided to the command for processing into a
+     * @param newEventCommandArgs takes in list of arguments provided to the command for processing into a
      *        Event object
      * @return Pair of updated TaskList and added Event
      * @throws DukeBlankTaskException Exception is thrown when user does not add in any details
@@ -211,35 +201,36 @@ public class TaskList {
      * @throws DukeDateTimeParseException Exception is thrown when date time passed into CLI is of
      *         the wrong format
      */
-    public Pair<TaskList, Optional<? extends Todo>> addEvent(List<String> newEventList)
+    public Pair<TaskList, Optional<? extends Todo>> addEvent(List<String> newEventCommandArgs)
             throws DukeBlankDetailsException, DukeBlankTaskException, DukeDateTimeParseException {
         // if list is empty, throw error
-        if (newEventList.size() == 0) {
+        if (newEventCommandArgs.size() == 0) {
             throw new DukeBlankTaskException("The Event you are trying to add cannot be blank!");
         }
 
-        ArrayList<String> messages = new ArrayList<>();
-        ArrayList<String> eventTimes = new ArrayList<>();
+        ArrayList<String> newEventMessages = new ArrayList<>();
+        // newEventDateTimeStrings will contain /at command
+        ArrayList<String> newEventDateTimeStrings = new ArrayList<>();
 
         // iterate through list to find where escape character is
         // once found, everything after is part of the deadline
-        newEventList.forEach(substring -> {
+        newEventCommandArgs.forEach(substring -> {
             if (substring.contains("/")) {
-                eventTimes.add(substring);
-            } else if (eventTimes.size() == 0) {
-                messages.add(substring);
+                newEventDateTimeStrings.add(substring);
+            } else if (newEventDateTimeStrings.size() == 0) {
+                newEventMessages.add(substring);
             } else {
-                eventTimes.add(substring);
+                newEventDateTimeStrings.add(substring);
             }
         });
 
         // if no message, throw exception
-        if (messages.size() == 0) {
+        if (newEventMessages.size() == 0) {
             throw new DukeBlankTaskException("Please define a task message for your Event");
         }
 
         // if no deadline input or /by without any deadline, throw exception
-        if (eventTimes.size() <= 1) {
+        if (newEventDateTimeStrings.size() <= 1) {
             // @formatter:off
             String exceptionMessage = "Please add a /by followed by the event time and date in DD/MM/YYYY "
                             + "HHMM to specify a time and date for the Event task. If there is no time for "
@@ -247,13 +238,13 @@ public class TaskList {
             throw new DukeBlankDetailsException(exceptionMessage);
         }
 
-        // Create new Event object, slicing eventTime array from index 1 since we
+        // Create new Event object, slicing newEventDateTimeStrings array from index 1 since we
         // added the '/at' which shouldn't be in the actual Event object
         // Creating an event might throw an exception if the date is in the wrong format
         Optional<Event> newEvent;
         try {
-            newEvent = Optional.of(new Event(String.join(" ", messages),
-                    String.join(" ", eventTimes.subList(1, eventTimes.size()))));
+            newEvent = Optional.of(new Event(String.join(" ", newEventMessages),
+                    String.join(" ", newEventDateTimeStrings.subList(1, newEventDateTimeStrings.size()))));
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
                     "Please format your date after /at to be DD/MM/YYYY HHMM");
@@ -267,14 +258,14 @@ public class TaskList {
     /**
      * Index of todo passed in to be marked as done is lesser than length of todosList,
      * else there would be an ArrayOutOfBoundsException thrown
-     * @param doneArgs should be a List of Strings with size 1 containing one argument that is the ID of
+     * @param doneCommandArgs should be a List of Strings with size 1 containing one argument that is the ID of
      *        which todo to mark as done and uses a 1-based indexing of the todos
      * @return Pair of TaskList and todo that is marked as done
      * @throws DukeTaskIndexOutOfRangeException Exception is thrown when the user specifies a task
      *         index that is out of range.
      */
-    public Pair<TaskList, Optional<? extends Todo>> markAsDone(List<String> doneArgs) throws DukeTaskIndexOutOfRangeException {
-        int idxIsDone = Integer.parseInt(doneArgs.get(0)) - INDEX_OFFSET;
+    public Pair<TaskList, Optional<? extends Todo>> markAsDone(List<String> doneCommandArgs) throws DukeTaskIndexOutOfRangeException {
+        int idxIsDone = Integer.parseInt(doneCommandArgs.get(0)) - ONE_BASED_INDEX_OFFSET;
         if (idxIsDone >= this.todos.size()) {
             throw new DukeTaskIndexOutOfRangeException("The index you input has an index that is "
                             + "beyond the range of the number of tasks you currently have. "
