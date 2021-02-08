@@ -28,7 +28,6 @@ public class DukeException {
         }
     }
 
-
     public static class EmptyEventDate extends IllegalArgumentException {
         public EmptyEventDate() {
             super(DukeString.EXCEPTION_EMPTY_EVENT_DATE);

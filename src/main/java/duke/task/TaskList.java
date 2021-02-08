@@ -125,7 +125,7 @@ public class TaskList {
         int i = 1;
 
         for (Task task : tasks) {
-            if (task.containsTerm(str)) {
+            if (task.containsKeyword(str)) {
                 out.append(i++);
                 out.append(". ");
                 out.append(task.toString());

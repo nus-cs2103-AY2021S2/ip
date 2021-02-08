@@ -30,11 +30,11 @@ public abstract class Task {
     /**
      * Searches the description for the given term.
      *
-     * @param term the term to search for.
+     * @param keyword the term to search for.
      * @return a boolean containing whether the description contains the term.
      */
-    public boolean containsTerm(String term) {
-        return this.description.contains(term);
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
     }
 
     @Override
