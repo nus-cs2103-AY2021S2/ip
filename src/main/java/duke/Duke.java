@@ -31,8 +31,7 @@ public class Duke {
         try {
             command = Parser.handleInput(input);
             String response = this.executeCommand(command);
-            //Must always respond with something
-            assert response != null && response.length() > 0;
+            assert response != null && response.length() > 0 : "Duke must always respond with something";
             return response;
         } catch (DukeException e) {
             return e.getMessage();

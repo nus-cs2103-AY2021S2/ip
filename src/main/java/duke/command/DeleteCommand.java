@@ -6,6 +6,9 @@ import duke.TaskList;
 public class DeleteCommand extends Command {
     public DeleteCommand(String[] commandSplit) {
         super(commandSplit);
+        assert commandSplit.length > 1 && commandSplit[0].equals("delete")
+                && commandSplit[1].chars().allMatch(Character::isDigit)
+                : "Must have delete keyword and integer as argument";
     }
 
     /**

@@ -38,7 +38,7 @@ public class Parser {
             return new AddCommand(splitBySpaces);
         } else if (keyword.equals("delete")) {
             return new DeleteCommand(splitBySpaces);
-        } else if (keyword.equals("bye")) {
+        } else if (keyword.equals("bye") && splitBySpaces.length == 1) {
             return new ByeCommand(splitBySpaces);
         } else if (keyword.equals("find")) {
             return new FindCommand(splitBySpaces);
