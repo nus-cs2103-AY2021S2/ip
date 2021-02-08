@@ -15,9 +15,7 @@ public class Ui {
      * @param msg the message to be printed.
      */
     public static void printOut(final String msg) {
-        System.out.println(DukeString.SEPARATOR);
-        System.out.println(msg);
-        System.out.println(DukeString.SEPARATOR);
+        System.out.println(DukeString.SEPARATOR + msg + DukeString.SEPARATOR);
     }
 
     /**
@@ -26,8 +24,6 @@ public class Ui {
      * @param msg the message to be printed.
      */
     public static void printErr(final String msg) {
-        System.out.println(DukeString.SEPARATOR_ERR);
-        System.out.println(msg);
-        System.out.println(DukeString.SEPARATOR_ERR);
+        System.out.println(DukeString.SEPARATOR_ERR + msg + DukeString.SEPARATOR_ERR);
     }
 }

@@ -15,9 +15,9 @@ public class TodoTask extends Task {
         super(desc);
     }
 
-    private TodoTask(boolean done, String desc) {
+    private TodoTask(boolean isDone, String desc) {
         super(desc);
-        super.isDone = done;
+        super.isDone = isDone;
     }
 
     @Override
