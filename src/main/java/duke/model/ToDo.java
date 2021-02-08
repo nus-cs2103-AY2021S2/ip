@@ -1,5 +1,7 @@
 package duke.model;
 
+import java.time.LocalDate;
+
 /**
  * A ToDo class denotes a to-do item.
  */
@@ -11,6 +13,16 @@ public class ToDo extends Task {
      */
     public ToDo(Boolean isCompleted, String taskName) {
         super('T', isCompleted, taskName);
+    }
+
+    /**
+     * Check if the given date equals to the task date time.
+     * @param date   A local date.
+     * @return       False.
+     */
+    @Override
+    public boolean checkEqualDate(LocalDate date) {
+        return false;
     }
 
     /**

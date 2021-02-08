@@ -31,6 +31,16 @@ public class Event extends Task {
     }
 
     /**
+     * Check if the given date equals to the task date time.
+     * @param date   A local date.
+     * @return       True if the given date equals to the task date time, otherwise false.
+     */
+    @Override
+    public boolean checkEqualDate(LocalDate date) {
+        return dateTime.isEqual(date);
+    }
+
+    /**
      * A string representation of an event.
      * @return  A string representing an event.
      */
