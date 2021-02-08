@@ -1,5 +1,7 @@
 package lihua.commands;
 
+import lihua.commands.feedback.CommandResult;
+
 /**
  * Command class representing a command to find tasks by keyword.
  */

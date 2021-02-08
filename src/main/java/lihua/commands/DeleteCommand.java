@@ -1,5 +1,6 @@
 package lihua.commands;
 
+import lihua.commands.feedback.CommandResult;
 import lihua.commons.Messages;
 import lihua.tasks.Task;
 

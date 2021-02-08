@@ -1,4 +1,4 @@
-package lihua.commands;
+package lihua.commands.feedback;
 
 /**
  * Command Result class representing the result and feedback after the command is executed.

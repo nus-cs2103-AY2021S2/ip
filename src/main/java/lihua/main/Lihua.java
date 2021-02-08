@@ -1,7 +1,7 @@
 package lihua.main;
 
 import lihua.commands.Command;
-import lihua.commands.CommandResult;
+import lihua.commands.feedback.CommandResult;
 import lihua.commands.ExitCommand;
 import lihua.parser.Parser;
 import lihua.storage.Storage;
