@@ -66,29 +66,37 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         String feedback;
-        try {
-            int arg = Integer.parseInt(argStr);
-            if (arg < 1 || arg > tasks.taskCount()) {
-                // Argument out of range
-                feedback = String.format("Task %d does not exist!\n"
-                        + "Valid task numbers are 1 to %d.", arg, tasks.taskCount());
-            } else {
-                // Valid argument in range
-                int index = arg - 1;
-                Task t = tasks.getAt(index);
-                tasks.removeAt(index);
 
-                feedback = String.format("Noted. I've removed this task:\n"
-                                + "%s\n"
-                                + "Now you have %d task(s) in the list.",
-                        t.toString(), tasks.taskCount());
-            }
+        if (tasks.taskCount() == 0) {
+            feedback = "There are no tasks to delete.";
+            return new CommandResult(feedback);
+        }
+
+        int arg;
+        try {
+            arg = Integer.parseInt(argStr);
         } catch (NumberFormatException nfe) {
             // Argument of wrong type
             feedback = String.format("Illegal argument: '%s'. Expected integer.\n"
                     + "Valid task numbers are 1 to %d.", argStr, tasks.taskCount());
+            return new CommandResult(feedback);
         }
 
+        if (arg < 1 || arg > tasks.taskCount()) {
+            // Argument out of range
+            feedback = String.format("Task %d does not exist!\n"
+                    + "Valid task numbers are 1 to %d.", arg, tasks.taskCount());
+            return new CommandResult(feedback);
+        }
+
+        int index = arg - 1;
+        Task t = tasks.getAt(index);
+        tasks.removeAt(index);
+
+        feedback = String.format("Noted. I've removed this task:\n"
+                        + "%s\n"
+                        + "Now you have %d task(s) in the list.",
+                t.toString(), tasks.taskCount());
         return new CommandResult(feedback);
     }
 }
