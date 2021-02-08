@@ -8,13 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Database acts as a storage to store tasklist as Strings
+ */
+
 public class Database {
 
-    String name;
+    private String name;
 
+    /**
+     * Initialize a database object to handle loading and saving of tasks.
+     *
+     * @param name The name of the path of the file
+     */
     public Database(String name){
         this.name = name;
     }
+
+
+    /**
+     * Read from file and initialize Strings of tasks
+     * @return list of strings representing tasks toString method.
+     */
 
     public ArrayList<String> readFile() throws FileNotFoundException {
         try {
@@ -29,6 +44,12 @@ public class Database {
             throw new FileNotFoundException("File not found");
         }
     }
+
+
+    /**
+     * Write to file and update strings
+     * @params Updated list of tasks.
+     */
 
     public  void writeTaskToFile(List<Task> tasks){
         String string = "";
@@ -47,4 +68,3 @@ public class Database {
 
 
  }
-

@@ -4,7 +4,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+
+/**
+ *  The Parser class contains methods to handle user's input commands.
+ */
 public class Parser {
+
+    /**
+     *Parses the rest of the input string after todo and updates database
+     *
+     * @param input Scanner
+     * @param taskList the current taskList
+     * @param ui the current ui
+     * @param database the current database
+     * @throws DukeException if the user input a command with invalid format.
+     */
 
     public static void parseTodoCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try {
@@ -31,6 +45,16 @@ public class Parser {
             ui.showErrorMessage(e.getMessage());
         }
     }
+
+    /**
+     *Parses the rest of the input string after event and updates database
+     *
+     * @param input Scanner
+     * @param taskList the current taskList
+     * @param ui the current ui
+     * @param database the current database
+     * @throws DukeException if the user input a command with invalid format.
+     */
 
     public static void parseEventCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
@@ -61,6 +85,16 @@ public class Parser {
         }
 
     }
+
+    /**
+     *Parses the rest of the input string after deadline and updates database
+     *
+     * @param input Scanner
+     * @param taskList the current taskList
+     * @param ui the current ui
+     * @param database the current database
+     * @throws DukeException if the user input a command with invalid format.
+     */
 
     public static void parseDeadlineCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
@@ -96,6 +130,16 @@ public class Parser {
 
     }
 
+    /**
+     *Parses the rest of the input string after done and updates database
+     *
+     * @param input Scanner
+     * @param taskList the current taskList
+     * @param ui the current ui
+     * @param database the current database
+     * @throws DukeException if the user input a command with invalid format.
+     */
+
     public static void parseDoneCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
             String s1 = input.nextLine();
@@ -123,6 +167,16 @@ public class Parser {
             ui.showErrorMessage(e.getMessage());
         }
     }
+
+    /**
+     *Parses the rest of the input string after delete and updates database
+     *
+     * @param input Scanner
+     * @param taskList the current taskList
+     * @param ui the current ui
+     * @param database the current database
+     * @throws DukeException if the user input a command with invalid format.
+     */
 
     public static void parseDeleteCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
@@ -153,16 +207,35 @@ public class Parser {
         }
     }
 
+    /**
+     *Parses the rest of the input string after List and calls ui to print tasks in TaskList
+     *
+     * @param taskList the current taskList
+     * @param ui the current ui
+     */
+
     public static void parseListCommand(TaskList taskList, Ui ui){
         ui.showListContent(taskList);
 
     }
 
+    /**
+     *
+     * Calls ui to print bye message
+     * Empties buffer is System
+     * @param ui the current ui
+     */
     public static void parseByeCommand(Ui ui){
         ui.showByeMessage();
         System.exit(0);
     }
 
+    /**
+     *
+     * Calls ui to print default message
+     * @param input the scanner
+     * @param ui the current ui
+     */
     public static void parseDefault(Scanner input, Ui ui){
         input.nextLine();
         ui.showDefaultStatement();

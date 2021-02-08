@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+/**
+ * The Duke class scans users inputs as command line arguments.
+ * It prints the relevant information for the user requests to the CLI.
+ */
+
 public class Duke {
 
     public static void main(String[] args) throws DukeException, FileNotFoundException {
@@ -66,6 +71,13 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Reads string as input from database and initialize TaskList with tasks
+     *
+     * @param strings from Database.
+     * @return tasklist as saved in database.
+     */
 
     private static TaskList readInput(ArrayList<String> strings) {
         TaskList tasks = new TaskList();

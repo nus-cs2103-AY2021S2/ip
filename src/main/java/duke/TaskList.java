@@ -2,6 +2,10 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ *  Contains methods in TaskList object
+ */
+
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -51,7 +55,10 @@ public class TaskList {
     }
 
     /**
+<<<<<<< HEAD
      * Returns number of tasks in task list.
+=======
+>>>>>>> branch-A-JavaDoc
      *
      * @return Number of tasks in task list.
      */
