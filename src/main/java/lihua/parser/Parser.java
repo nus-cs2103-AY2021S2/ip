@@ -1,6 +1,7 @@
 package lihua.parser;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import lihua.commands.AddCommand;
 import lihua.commands.Command;
@@ -16,8 +17,6 @@ import lihua.tasks.ToDo;
 
 public class Parser {
 
-    // need to handle input argument mismatch here
-    // e.g. if the input is 'wrong', the program should handle the exception and prompt get-help message
     /**
      * Parses user input string and returns relevant command.
      *
@@ -28,60 +27,62 @@ public class Parser {
         // Allow multiple white spaces between:
         // first argument, center argument(s), and last argument.
         String[] split = userInput.split("\\s+"); // Split by one or more white spaces.
-        String firstArgument = split[0].toLowerCase();
         Command command;
         try {
-            switch (firstArgument) {
-            case "bye":
-                command = new ExitCommand();
-                break;
-            case "todo":
-                ToDo todo = getToDo(userInput);
-                command = new AddCommand(todo);
-                break;
-            case "event":
-                Event event = getEvent(userInput);
-                command = new AddCommand(event);
-                break;
-            case "deadline":
-                Deadline deadline = getDeadline(userInput);
-                command = new AddCommand(deadline);
-                break;
-            case "done":
-                command = new DoneCommand(Integer.valueOf(split[1]));
-                break;
-            case "delete":
-                command = new DeleteCommand(Integer.valueOf(split[1]));
-                break;
-            case "list":
-                // try to see if second argument (date) exists
-                try {
-                    String dateString = split[1];
-                    // date exists
-                    LocalDate date = LocalDate.parse(dateString);
-                    command = new ListCommand(date); // list on a specific date
-                } catch (IndexOutOfBoundsException e) {
-                    // date does not exists
-                    command = new ListCommand(); // list all
-                }
-                // If date format is incorrect, an exception will be thrown and caught by below catch statement.
-                // A helper command would then be prompted.
-                break;
-            case "help":
-                command = new HelpCommand();
-                break;
-            case "find":
-                command = new FindCommand(split[1]);
-                break;
-            default:
-                command = new HelpCommand(false);
-                break;
-            }
-        } catch (Exception e) {
+            String firstArgument = split[0].toLowerCase();
+            command = parseUserInput(userInput, firstArgument, split);
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             command = new HelpCommand(false);
         }
-
+        assert command != null;
         return command;
+    }
+
+    /**
+     * Parses user input string and returns relevant command.
+     *
+     * @param userInput User input string.
+     * @param firstArgument First argument in the user input string.
+     * @param split User input string. Split by one or more white spaces.
+     * @return Relevant command, as specified in the userInput.
+     * @throws IndexOutOfBoundsException If the command is not in the correct format, then an exception will be thrown.
+     */
+    private Command parseUserInput(String userInput, String firstArgument, String[] split) throws IndexOutOfBoundsException {
+        assert firstArgument.toLowerCase().equals(firstArgument);
+        switch (firstArgument) {
+        case "bye":
+            return new ExitCommand();
+        case "todo":
+            return new AddCommand(getToDo(userInput));
+        case "event":
+            return new AddCommand(getEvent(userInput));
+        case "deadline":
+            return new AddCommand(getDeadline(userInput));
+        case "done":
+            // exception could be thrown here, if first argument is not of integer format
+            return new DoneCommand(Integer.valueOf(split[1]));
+        case "delete":
+            // same as above
+            return new DeleteCommand(Integer.valueOf(split[1]));
+        case "list":
+            return getListCommand(split);
+        case "help":
+            return new HelpCommand(true);
+        case "find":
+            return new FindCommand(split[1]);
+        default:
+            return new HelpCommand(false);
+        }
+    }
+
+    private Command getListCommand(String[] split) {
+        try {
+            String dateString = split[1];
+            LocalDate date = LocalDate.parse(dateString);
+            return new ListCommand(date);
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+            return new ListCommand();
+        }
     }
 
     /**
@@ -89,10 +90,10 @@ public class Parser {
      *
      * @param userInput User input string.
      * @return The deadline object, as specified by the user input string.
-     * @throws Exception If the user input string starts with 'deadline' but the format is incorrect,
+     * @throws IndexOutOfBoundsException If the user input string starts with 'deadline' but the format is incorrect,
      * an exception will be thrown.
      */
-    private Deadline getDeadline(String userInput) throws Exception {
+    private Deadline getDeadline(String userInput) throws IndexOutOfBoundsException {
         String[] split = userInput.split("\\s+/by\\s+");
         String date = split[1]; // Assume the argument is correct, or an Exception will be thrown.
         userInput = split[0];
@@ -111,10 +112,10 @@ public class Parser {
      *
      * @param userInput User input string.
      * @return The event object, as specified by the user input string.
-     * @throws Exception If the user input string starts with 'event' but the format is incorrect,
+     * @throws IndexOutOfBoundsException If the user input string starts with 'event' but the format is incorrect,
      * an exception will be thrown.
      */
-    private Event getEvent(String userInput) throws Exception {
+    private Event getEvent(String userInput) throws IndexOutOfBoundsException {
         String[] split = userInput.split("\\s+/at\\s+");
         String date = split[1]; // Assume the argument is correct, or an Exception will be thrown.
         userInput = split[0];
@@ -134,10 +135,10 @@ public class Parser {
      *
      * @param userInput User input string.
      * @return The todo object, as specified by the user input string.
-     * @throws Exception If the user input string starts with 'todo' but the format is incorrect,
+     * @throws IndexOutOfBoundsException If the user input string starts with 'todo' but the format is incorrect,
      * an exception will be thrown.
      */
-    private ToDo getToDo(String userInput) throws Exception {
+    private ToDo getToDo(String userInput) throws IndexOutOfBoundsException {
         int index = userInput.indexOf("todo") + 4;
         while (userInput.charAt(index) == ' ') {
             index++;

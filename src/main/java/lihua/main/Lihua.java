@@ -6,20 +6,17 @@ import lihua.commands.ExitCommand;
 import lihua.parser.Parser;
 import lihua.storage.Storage;
 import lihua.tasks.Tasks;
-import lihua.ui.Ui;
 
 // Design idea adapted from https://github.com/se-edu/addressbook-level2
 public class Lihua {
     private final Tasks tasks;
     private final Storage storage;
-    private final Ui ui;
     private final Parser parser;
 
     /**
      * Constructor for Lihua. Initializing necessary fields.
      */
     public Lihua() {
-        ui = new Ui();
         storage = new Storage();
         tasks = storage.load();
         parser = new Parser();
@@ -56,7 +53,6 @@ public class Lihua {
             storage.saveTasks(tasks);
             return result;
         } catch (Exception e) {
-            ui.showFeedbackToUser(e.getMessage());
             throw new RuntimeException(e);
         }
     }
