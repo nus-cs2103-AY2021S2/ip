@@ -23,7 +23,7 @@ public class ToDo extends Task {
      * Constructs a ToDo with the given description and done status.
      *
      * @param description The task description.
-     * @param isDone The done status.
+     * @param isDone      The done status.
      */
     public ToDo(String description, boolean isDone) {
         super(description, TYPE, isDone);
@@ -65,11 +65,12 @@ public class ToDo extends Task {
      */
     public static boolean isToDo(String serialized) {
         String[] fields = serialized.split(SEPARATOR);
-        if (fields.length > 0) {
-            String type = fields[0];
-            return type.equals(TYPE);
+        if (fields.length == 0) {
+            return false;
         }
-        return false;
+
+        String type = fields[0];
+        return type.equals(TYPE);
     }
 
     /**

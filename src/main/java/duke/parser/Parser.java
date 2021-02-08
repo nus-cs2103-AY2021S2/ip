@@ -26,6 +26,7 @@ public class Parser {
      * @return The relevant command.
      */
     public Command parseCmd(String rawInput) {
+        assert rawInput != null : "rawInput must not be null!";
         String cmd = rawInput.trim();
 
         try {
