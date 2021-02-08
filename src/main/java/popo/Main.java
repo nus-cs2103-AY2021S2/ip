@@ -2,19 +2,25 @@ package popo;
 
 import java.io.IOException;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 import popo.storage.InvalidStorageFilePathException;
 import popo.storage.Storage;
+import popo.storage.StorageException;
 import popo.tasks.TaskList;
 import popo.ui.Ui;
+
 
 /**
  * The main entry point to the chatbot application.
  * Initializes the application and starts user interaction.
  */
 public class Main extends Application {
+    private static final String MESSAGE_TERMINATE = "Press OK to terminate the programme.";
+    private static final String ERROR_BOX_TITLE = "Error";
+
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
@@ -22,17 +28,14 @@ public class Main extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        // Get the command line argument
         Application.Parameters applicationParameters = getParameters();
         List<String> parameters = applicationParameters.getUnnamed();
         String[] args = parameters.toArray(new String[0]);
-
         initialize(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        // Start the ui and show the GUI
         ui.start(primaryStage);
     }
 
@@ -46,9 +49,12 @@ public class Main extends Application {
             storage = initializeStorage(args);
             taskList = storage.loadTasks();
             ui = new Ui(storage, taskList);
-        } catch (InvalidStorageFilePathException | IOException ex) {
-            // Exit the application if there is an error loading the storage file or reading from the file
-            System.exit(1);
+        } catch (InvalidStorageFilePathException | IOException | StorageException ex) {
+            JOptionPane.showMessageDialog(null,
+                    ex.getMessage() + "\n" + MESSAGE_TERMINATE,
+                    ERROR_BOX_TITLE,
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
     }
 

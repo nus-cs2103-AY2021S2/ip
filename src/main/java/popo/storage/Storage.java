@@ -6,6 +6,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,12 @@ public class Storage {
     private static final String MESSAGE_FAILED_INITIALIZATION = "Failed to initialize storage." + "\n"
             + "This error could be due to an invalid file path." + "\n"
             + "Exiting...";
-    private static final String MESSAGE_ERROR_WRITING_TO_FILE = "Error writing data to file: ";
+    private static final String MESSAGE_ERROR_READING_FROM_FILE = "Error parsing data from file..." + "\n"
+            + "The file may have been corrupted or is in the wrong format.";
+    private static final String MESSAGE_ERROR_WRITING_TO_FILE = "Error writing data to file...";
+
+    private static final int TASK_NOT_COMPLETED = 0;
+    private static final int TASK_COMPLETED = 1;
 
     private final Path path;
 
@@ -61,8 +67,28 @@ public class Storage {
      * @param filePath File path to be checked.
      * @return True if the file path ends with '.txt', else false.
      */
-    private static boolean isValidFilePath(String filePath) {
+    private boolean isValidFilePath(String filePath) {
         return filePath.endsWith(".txt");
+    }
+
+    /**
+     * Loads the list of tasks found in the file and parses the tasks into an operational format.
+     *
+     * @return {@code TaskList} that represents the current list of tasks in the file.
+     * @throws IOException      If an error occurs while reading from the file.
+     * @throws StorageException If an error occurs while parsing the data from the file.
+     */
+    public TaskList loadTasks() throws IOException, StorageException {
+        TaskList taskList = new TaskList();
+        if (!Files.exists(path) || !Files.isRegularFile(path)) {
+            return taskList;
+        }
+        List<String> taskStrings = Files.readAllLines(path);
+        for (String taskString : taskStrings) {
+            Task task = convertStringToTask(taskString);
+            taskList.addTask(task);
+        }
+        return taskList;
     }
 
     /**
@@ -82,7 +108,7 @@ public class Storage {
                 Files.createDirectories(pathToParentDirectory);
             }
 
-            List<String> taskStrings = Storage.convertAllTasksToString(taskList);
+            List<String> taskStrings = convertAllTasksToString(taskList);
             assert taskStrings != null;
             Files.write(path, taskStrings);
         } catch (IOException ex) {
@@ -91,65 +117,79 @@ public class Storage {
     }
 
     /**
-     * Loads the list of tasks found in the file and parses the tasks into an operational format.
-     *
-     * @return {@code TaskList} that represents the current list of tasks in the file.
-     * @throws IOException If an error occurs while reading from the file.
-     */
-    public TaskList loadTasks() throws IOException {
-        TaskList taskList = new TaskList();
-        if (!Files.exists(path) || !Files.isRegularFile(path)) {
-            return taskList;
-        }
-        List<String> taskStrings = Files.readAllLines(path);
-        taskStrings.stream()
-                .map(taskString -> Storage.convertStringToTask(taskString))
-                .forEach(task -> taskList.addTask(task));
-        return taskList;
-    }
-
-    /**
      * Converts a task string into a {@code Task} object.
      *
      * @param taskString Task string to be converted.
      * @return {@code Task}.
+     * @throws StorageException If an error occurs while parsing the data from the file.
      */
-    public static Task convertStringToTask(String taskString) {
-        String[] arr = taskString.split("\\s\\|\\s", 4);
-        String taskType = arr[0];
-        String taskStatus = arr[1];
-        String taskName = arr[2];
-        boolean isTaskCompleted = taskStatus.equals("1");
+    private Task convertStringToTask(String taskString) throws StorageException {
+        String[] arr = taskString.split("\\|", 4);
+        if (arr.length < 3) {
+            throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
+        }
+        String taskType = arr[0].strip();
+        String taskStatus = arr[1].strip();
+        String taskName = arr[2].strip();
+        boolean isTaskCompleted = isTaskCompleted(taskStatus);
 
-        Task task;
-        switch (taskType) {
-        case ToDoTask.IDENTIFIER:
-            task = new ToDoTask(taskName, isTaskCompleted);
-            break;
-        case DeadlineTask.IDENTIFIER:
-            String deadlineTaskDescription = arr[3];
-            String[] deadlineTaskDescriptionArr = deadlineTaskDescription.split(",", 2);
-            String deadlineDateString = deadlineTaskDescriptionArr[0].strip();
+        try {
+            switch (taskType) {
+            case ToDoTask.IDENTIFIER:
+                return createToDoTaskFromString(taskName, isTaskCompleted);
+            case DeadlineTask.IDENTIFIER:
+                String deadlineTaskDescription = arr[3].strip();
+                return createDeadlineTaskFromString(taskName, isTaskCompleted, deadlineTaskDescription);
+            case EventTask.IDENTIFIER:
+                String eventTaskDescription = arr[3].strip();
+                return createEventTaskFromString(taskName, isTaskCompleted, eventTaskDescription);
+            default:
+                throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
+            }
+        } catch (IndexOutOfBoundsException ex) {
+            throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
+        }
+    }
+
+    private boolean isTaskCompleted(String status) throws StorageException {
+        int taskStatus = Integer.parseInt(status);
+        switch (taskStatus) {
+        case TASK_NOT_COMPLETED:
+            return false;
+        case TASK_COMPLETED:
+            return true;
+        default:
+            throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
+        }
+    }
+
+    private Task createToDoTaskFromString(String name, boolean isTaskCompleted) {
+        return new ToDoTask(name, isTaskCompleted);
+    }
+
+    private Task createDeadlineTaskFromString(String name, boolean isTaskCompleted, String deadline)
+            throws StorageException {
+        try {
+            String[] deadlineArr = deadline.split(",", 2);
+            String deadlineDateString = deadlineArr[0].strip();
             LocalDate deadlineDate = LocalDate.parse(deadlineDateString, OutputDateTimeFormat.OUTPUT_DATE_FORMAT);
-            if (deadlineTaskDescriptionArr.length == 1) {
+            if (deadlineArr.length == 1) {
                 // There is no time component
-                task = new DeadlineTask(taskName, isTaskCompleted, deadlineDate);
+                return new DeadlineTask(name, isTaskCompleted, deadlineDate);
             } else {
                 // There is a time component
-                assert deadlineTaskDescriptionArr.length == 2 : "There should be a time component string in the array";
-                String deadlineTimeString = deadlineTaskDescriptionArr[1].strip();
+                assert deadlineArr.length == 2;
+                String deadlineTimeString = deadlineArr[1].strip();
                 LocalTime deadlineTime = LocalTime.parse(deadlineTimeString, OutputDateTimeFormat.OUTPUT_TIME_FORMAT);
-                task = new DeadlineTask(taskName, isTaskCompleted, deadlineDate, deadlineTime);
+                return new DeadlineTask(name, isTaskCompleted, deadlineDate, deadlineTime);
             }
-            break;
-        case EventTask.IDENTIFIER:
-            String eventTaskDescription = arr[3];
-            task = new EventTask(taskName, isTaskCompleted, eventTaskDescription);
-            break;
-        default:
-            throw new AssertionError(taskType);
+        } catch (DateTimeParseException ex) {
+            throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
         }
-        return task;
+    }
+
+    private Task createEventTaskFromString(String name, boolean isTaskCompleted, String eventTime) {
+        return new EventTask(name, isTaskCompleted, eventTime);
     }
 
     /**
@@ -158,11 +198,11 @@ public class Storage {
      * @param taskList Task list to be converted.
      * @return A list of formatted task strings.
      */
-    public static List<String> convertAllTasksToString(TaskList taskList) {
+    private List<String> convertAllTasksToString(TaskList taskList) {
         List<String> taskStrings = new ArrayList<>();
         taskList.unmodifiableList()
                 .stream()
-                .map(task -> Storage.convertTaskToString(task))
+                .map(task -> convertTaskToString(task))
                 .forEach(taskString -> taskStrings.add(taskString));
         return taskStrings;
     }
@@ -175,7 +215,7 @@ public class Storage {
      * @param task Task object to be converted.
      * @return Formatted string describing the task.
      */
-    public static String convertTaskToString(Task task) {
+    private String convertTaskToString(Task task) {
         StringBuilder encodedTaskString = new StringBuilder();
         encodedTaskString.append(task.getTaskType());
         encodedTaskString.append(" | ");
