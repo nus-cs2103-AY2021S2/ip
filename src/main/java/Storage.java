@@ -24,6 +24,7 @@ public class Storage {
     }
 
     private void addTodo(String[] parts, TaskList tasks) {
+        assert parts.length == 3 : "There should be 3 parts to this line of data";
         Task todo = new Todo(parts[2]);
         if (parts[1].equals("X")) {
             todo.markDone();
@@ -32,6 +33,7 @@ public class Storage {
     }
 
     private void addDeadline(String[] parts, TaskList tasks) throws DateTimeParseException {
+        assert parts.length == 4 : "There should be 4 parts to this line of data";
         Task deadline = new Deadline(parts[2], parts[3]);
         if (parts[1].equals("X")) {
             deadline.markDone();
@@ -40,6 +42,7 @@ public class Storage {
     }
 
     private void addEvent(String[] parts, TaskList tasks) {
+        assert parts.length == 4 : "There should be 4 parts to this line of data";
         Task event = new Event(parts[2], parts[3]);
         if (parts[1].equals("X")) {
             event.markDone();
