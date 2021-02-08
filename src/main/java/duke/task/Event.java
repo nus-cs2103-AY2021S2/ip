@@ -7,18 +7,18 @@ import java.time.format.DateTimeFormatter;
  * A Event class to which represents a event task.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    protected LocalDate date;
 
     /**
      * Constructs Event.
      *
      * @param isDone      Determines if task is completed.
      * @param description Task description.
-     * @param at          Date of Event.
+     * @param date        Date of Event.
      */
-    public Event(int isDone, String description, LocalDate at) {
+    public Event(int isDone, String description, LocalDate date) {
         super('E', isDone, description);
-        this.at = at;
+        this.date = date;
     }
 
     /**
@@ -28,12 +28,12 @@ public class Event extends Task {
      */
     @Override
     public String getFileString() {
-        return super.getFileString() + " // " + this.at;
+        return super.getFileString() + " // " + this.date;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

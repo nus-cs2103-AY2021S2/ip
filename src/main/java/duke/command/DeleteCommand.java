@@ -23,13 +23,13 @@ public class DeleteCommand extends Command {
     /**
      * Executes task deletion.
      *
-     * @param taskList The list of tasks.
+     * @param tasks The list of tasks.
      * @param storage  The storage handler.
      * @return Output for GUI.
      * @throws DukeException If user input format is wrong.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
-        return taskList.delete(this.fullCommand);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        return tasks.delete(this.fullCommand);
     }
 }
