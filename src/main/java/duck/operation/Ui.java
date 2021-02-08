@@ -26,6 +26,7 @@ public class Ui {
 
     /**
      * read command from input
+     *
      * @return a full command
      */
     public String readCommand() {
@@ -35,6 +36,7 @@ public class Ui {
 
     /**
      * show the reply for command including hello,bye,list and so on
+     *
      * @param command different kind of command
      * @param tasks
      */
@@ -65,6 +67,7 @@ public class Ui {
 
     /**
      * show the reply for error
+     *
      * @param reply the kind of error
      */
     public void showErrorReply(String reply) {
@@ -109,6 +112,7 @@ public class Ui {
 
     /**
      * show the reply for done command
+     *
      * @param number the number of task in task list
      * @param tasks task list
      */
@@ -121,6 +125,7 @@ public class Ui {
 
     /**
      * show the reply for delete command
+     *
      * @param number the number of task in task list
      * @param tasks task list
      */
@@ -134,6 +139,7 @@ public class Ui {
 
     /**
      * show the reply for date command
+     *
      * @param number the number of task in task list
      * @param tasks task list
      */
@@ -143,6 +149,11 @@ public class Ui {
         System.out.println(INDENTATION + HORIZON);
     }
 
+    /**
+     * show the reply for find command
+     *
+     * @param result the finding result string array
+     */
     public void showFindReply(String[] result) {
         System.out.println(INDENTATION + HORIZON);
         if (result[0] == null) {

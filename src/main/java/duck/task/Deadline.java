@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * initialize Deadline object
+     *
      * @param description the description of task
      * @param by          the deadline of task (YYYY-MM-DD)
      */
@@ -20,6 +21,7 @@ public class Deadline extends Task {
 
     /**
      * get task information
+     *
      * @return a string show information of task
      */
     @Override
@@ -30,6 +32,7 @@ public class Deadline extends Task {
 
     /**
      * get period from now to deadline
+     *
      * @return the number of period
      */
     @Override
@@ -40,6 +43,7 @@ public class Deadline extends Task {
 
     /**
      * get the task information showing in the file
+     *
      * @return
      */
     @Override

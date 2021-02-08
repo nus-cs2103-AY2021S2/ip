@@ -3,6 +3,7 @@ package duck.operation;
 public class Parser {
     /**
      * Recognize the full command and divide it into command and descriptions
+     *
      * @param fullCommand
      * @return Command class
      */

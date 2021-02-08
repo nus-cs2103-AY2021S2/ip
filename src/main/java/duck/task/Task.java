@@ -6,6 +6,7 @@ public class Task {
 
     /**
      * initialize the task
+     *
      * @param description the description of task
      */
     public Task(String description) {
@@ -15,6 +16,7 @@ public class Task {
 
     /**
      * get status of task
+     *
      * @return  tick or X symbols
      */
     public String getStatusIcon() {
@@ -23,6 +25,7 @@ public class Task {
 
     /**
      * get description of task
+     *
      * @return description
      */
     public String getDescription() {
@@ -31,6 +34,7 @@ public class Task {
 
     /**
      * get task information
+     *
      * @return a string show information of task
      */
     public String getTaskInfo() {
@@ -39,6 +43,7 @@ public class Task {
 
     /**
      * get period from now to starting time
+     *
      * @return the number of period
      */
     public String getTaskInfoOfFile() {

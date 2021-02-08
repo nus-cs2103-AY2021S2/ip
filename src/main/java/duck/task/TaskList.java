@@ -32,6 +32,7 @@ public class TaskList {
 
     /**
      * get size of task list
+     *
      * @return number of tasks
      */
     public int getSizeOfTasks() {
@@ -40,6 +41,7 @@ public class TaskList {
 
     /**
      * get a task from task list
+     *
      * @param number the number of task
      * @return task
      */
@@ -49,6 +51,7 @@ public class TaskList {
 
     /**
      * remove task from task list
+     *
      * @param number the number of the choosing task
      */
     public void removeTask(Integer number) {
@@ -57,6 +60,7 @@ public class TaskList {
 
     /**
      * add a new task to task list
+     *
      * @param task
      */
     public void addTask(Task task) {

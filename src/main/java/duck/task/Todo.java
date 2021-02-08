@@ -4,6 +4,7 @@ public class Todo extends Task {
 
     /**
      * initialize Todo object
+     *
      * @param description the description of task
      */
     public Todo(String description) {
@@ -12,6 +13,7 @@ public class Todo extends Task {
 
     /**
      * get task information
+     *
      * @return a string show information of task
      */
     @Override
@@ -21,7 +23,8 @@ public class Todo extends Task {
 
     /**
      * get the task information showing in the file
-     * @return
+     *
+     * @return a string of task information which is shown in the datafile
      */
     @Override
     public String getTaskInfoOfFile() {
@@ -30,6 +33,7 @@ public class Todo extends Task {
 
     /**
      * get period from now to starting time
+     *
      * @return the string because Todo task doesn't have time
      */
     @Override

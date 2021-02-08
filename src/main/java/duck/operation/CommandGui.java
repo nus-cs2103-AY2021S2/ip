@@ -14,7 +14,8 @@ public class CommandGui {
 
     /**
      * Initialize the Command object
-     * @param command the command getting from ui.
+     *
+     * @param command     the command getting from ui.
      * @param description the description of command,includes things to do, time and so on.
      * @return Lateral location.
      */
@@ -25,8 +26,9 @@ public class CommandGui {
 
     /**
      * execute the command
-     * @param tasks the task list used to  record various tasks
-     * @param gui deals with interactions with the user
+     *
+     * @param tasks   the task list used to  record various tasks
+     * @param gui     deals with interactions with the user
      * @param storage deals with loading tasks from the file and saving tasks in the file
      * @throws IOException
      */
@@ -41,7 +43,7 @@ public class CommandGui {
             try {
                 tasks.getTask(Integer.parseInt(description) - 1).markAsDone();
                 storage.updateFile(tasks);
-                return  gui.showDoneReply(Integer.parseInt(description) - 1, tasks);
+                return gui.showDoneReply(Integer.parseInt(description) - 1, tasks);
             } catch (ArrayIndexOutOfBoundsException e) {
                 gui.showErrorReply("error_done_empty");
             } catch (NumberFormatException e) {
@@ -74,7 +76,7 @@ public class CommandGui {
         case "date":
             try {
                 tasks.getTask(Integer.parseInt(description) - 1);
-                return  gui.showDateReply(Integer.parseInt(description) - 1, tasks);
+                return gui.showDateReply(Integer.parseInt(description) - 1, tasks);
             } catch (ArrayIndexOutOfBoundsException e) {
                 gui.showErrorReply("error_date_empty");
             } catch (NumberFormatException e) {
@@ -89,7 +91,7 @@ public class CommandGui {
             try {
                 String test = description;
             } catch (ArrayIndexOutOfBoundsException e) {
-               return gui.showErrorReply("error_todo_empty");
+                return gui.showErrorReply("error_todo_empty");
             }
             tasks.addTask(new Todo(description));
             storage.updateFile(tasks);
@@ -122,14 +124,14 @@ public class CommandGui {
                 storage.updateFile(tasks);
                 return gui.showCommandReply(command, tasks);
             } catch (ArrayIndexOutOfBoundsException e) {
-               return gui.showErrorReply("error_event_at");
+                return gui.showErrorReply("error_event_at");
             } catch (DateTimeParseException e) {
                 return gui.showErrorReply("error_event_at");
             }
         case "find":
             try {
                 String[] result = tasks.findTask(description);
-               return gui.showFindReply(result);
+                return gui.showFindReply(result);
             } catch (NullPointerException e) {
                 return gui.showErrorReply("find_empty");
             }

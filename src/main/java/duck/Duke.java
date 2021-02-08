@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Duke extends Application{
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -35,6 +35,38 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Set the showing scene
+     *
+     * @param stage  the stage which control the scene
+     * @param scene  the showing scene
+     * @param title  the title of scene
+     * @param height the height of scene
+     * @param width  the width of scene
+     */
+    private void setScene(Stage stage, Scene scene, String title, double height, double width) {
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle(title);
+        stage.setResizable(false);
+        stage.setMinHeight(height);
+        stage.setMinWidth(width);
+    }
+
+    /**
+     * Set scrollPane
+     *
+     * @param scrollPane
+     * @param prefWidth the width of scroll pane
+     * @param prefHeight the height of scroll pane
+     */
+    private void setScrollPane(ScrollPane scrollPane, double prefWidth, double prefHeight) {
+        scrollPane.setPrefSize(prefWidth, prefHeight);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -54,22 +86,11 @@ public class Duke extends Application{
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(800.0);
-        stage.setMinWidth(600.0);
+        setScene(stage, scene, "Duck", 800.0, 600.0);
 
         mainLayout.setPrefSize(600.0, 800.0);
 
-        scrollPane.setPrefSize(585, 735);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
+        setScrollPane(scrollPane, 585, 735);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
@@ -78,11 +99,9 @@ public class Duke extends Application{
         sendButton.setPrefWidth(155.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         Label userText = new Label(userInput.getText());
@@ -92,7 +111,7 @@ public class Duke extends Application{
         );
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        //Part 3. Add functionality to handle user input.
+
         sendButton.setOnMouseClicked((event) -> {
             try {
                 handleUserInput();
@@ -111,7 +130,6 @@ public class Duke extends Application{
     }
 
 
-
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -128,15 +146,14 @@ public class Duke extends Application{
 
     /**
      * function to generate a response to user input.
+     *
      * @param input String input text to show
      * @return the specified text
      */
     private String getResponse(String input) throws IOException {
         CommandGui c = Parser.parse(input);
-
-        return  c.execute(tasks, gui, storage);
+        return c.execute(tasks, gui, storage);
     }
-
 
 
 }

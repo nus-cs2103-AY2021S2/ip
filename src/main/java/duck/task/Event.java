@@ -9,6 +9,7 @@ public class Event extends Task {
 
     /**
      * initialize Event object
+     *
      * @param description the description of task
      * @param at the starting time of task (YYYY-MM-DD)
      */
@@ -19,6 +20,7 @@ public class Event extends Task {
 
     /**
      * get task information
+     *
      * @return a string show information of task
      */
     @Override
@@ -29,6 +31,7 @@ public class Event extends Task {
 
     /**
      * get period from now to starting time
+     *
      * @return the number of period
      */
     @Override
@@ -39,6 +42,7 @@ public class Event extends Task {
 
     /**
      * get the task information showing in the file
+     *
      * @return
      */
     @Override

@@ -5,3 +5,5 @@ T | 0 | afjnca
 T | 0 | avshdja
 T | 0 | null
 T | 1 | homework
+T | 0 | washing
+E | 1 | housework | 2021-02-06
