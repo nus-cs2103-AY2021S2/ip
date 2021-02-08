@@ -9,7 +9,7 @@ import owen.command.CommandType;
 public class Parser {
     /**
      * Parses command from a string.
-     * 
+     *
      * @param commandString String to parse command from.
      * @return Parsed Command.
      * @throws OwenException Command cannot be parsed from string.
@@ -39,7 +39,7 @@ public class Parser {
 
     /**
      * Parses task number from string.
-     * 
+     *
      * @param taskNumber String to parse.
      * @return Parsed integer.
      * @throws OwenException Integer could not be parsed from string.

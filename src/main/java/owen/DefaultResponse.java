@@ -8,7 +8,7 @@ public class DefaultResponse implements Response {
 
     /**
      * Creates a default formatted chatbot response from a String.
-     * 
+     *
      * @param response Raw unformatted response string.
      */
     public DefaultResponse(String response) {
