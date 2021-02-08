@@ -37,6 +37,7 @@ public class DukeCommandList extends DukeCommand {
             }
 
             // Sort in order: Todo < Event (chronological) < Deadline (chronological)
+            // Lambdas already used here
             view.sort((t1, t2) -> {
                 if (t1 instanceof Todo) {
                     return -1;
