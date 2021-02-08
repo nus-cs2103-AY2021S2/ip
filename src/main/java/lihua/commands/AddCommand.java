@@ -35,7 +35,7 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         try {
             tasks.addTask(toAdd);
-
+            assert tasks.getSize() >= 1;
             String noun = tasks.getSize() <= 1 ? "task" : "tasks";
             String message = String.format("Got it. I have added this task to your list:\n---- %s\n"
                             + "Now you have %d %s in total. Good luck.", toAdd.toString(), tasks.getSize(), noun);

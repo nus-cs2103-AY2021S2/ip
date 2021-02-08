@@ -65,10 +65,10 @@ public class Storage {
                 } else if (type.equals("event")) {
                     t = new Event(description, time);
                 }
+                assert t != null;
+                t.setDone(isDone);
+                tasks.addTask(t);
             }
-            assert t != null;
-            t.setDone(isDone);
-            tasks.addTask(t);
         }
     }
 

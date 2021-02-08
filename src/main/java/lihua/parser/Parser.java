@@ -24,6 +24,7 @@ public class Parser {
      * @return Relevant command, as specified in the userInput.
      */
     public Command parseUserInput(String userInput) {
+        assert userInput != null;
         // Allow multiple white spaces between:
         // first argument, center argument(s), and last argument.
         String[] split = userInput.split("\\s+"); // Split by one or more white spaces.
@@ -94,6 +95,7 @@ public class Parser {
      * an exception will be thrown.
      */
     private Deadline getDeadline(String userInput) throws IndexOutOfBoundsException {
+        assert userInput != null;
         String[] split = userInput.split("\\s+/by\\s+");
         String date = split[1]; // Assume the argument is correct, or an Exception will be thrown.
         userInput = split[0];
@@ -116,6 +118,7 @@ public class Parser {
      * an exception will be thrown.
      */
     private Event getEvent(String userInput) throws IndexOutOfBoundsException {
+        assert userInput != null;
         String[] split = userInput.split("\\s+/at\\s+");
         String date = split[1]; // Assume the argument is correct, or an Exception will be thrown.
         userInput = split[0];
@@ -139,6 +142,7 @@ public class Parser {
      * an exception will be thrown.
      */
     private ToDo getToDo(String userInput) throws IndexOutOfBoundsException {
+        assert userInput != null;
         int index = userInput.indexOf("todo") + 4;
         while (userInput.charAt(index) == ' ') {
             index++;

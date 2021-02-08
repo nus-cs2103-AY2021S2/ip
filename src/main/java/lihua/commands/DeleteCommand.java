@@ -30,6 +30,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute() {
         try {
             Task deleted = tasks.removeTask(targetIndex);
+            assert tasks.getSize() >= 0;
             String noun = tasks.getSize() <= 1 ? "task" : "tasks";
             String message = String.format("Got it. I have removed this task from your list:\n---- %s\n"
                             + "Now you have %d %s in total. Good luck.", deleted.toString(), tasks.getSize(), noun);
