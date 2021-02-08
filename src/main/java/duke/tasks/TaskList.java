@@ -1,12 +1,12 @@
 package duke.tasks;
 
-import duke.exceptions.DukeExceptionIllegalArgument;
-
 import java.util.ArrayList;
+
+import duke.exceptions.DukeExceptionIllegalArgument;
 
 public class TaskList {
 
-    ArrayList<Task> tasks; // composition
+    private ArrayList<Task> tasks; // composition
 
     /**
      * Constructor for TaskList.
@@ -25,13 +25,15 @@ public class TaskList {
      * @param taskStrings List of task Strings.
      * @throws DukeExceptionIllegalArgument When parsing fails.
      */
-    public TaskList(ArrayList<String> taskStrings) throws DukeExceptionIllegalArgument {
-        tasks = new ArrayList<>(); // if fail, none imported
+    public static TaskList fromFileStrings(ArrayList<String> taskStrings) throws DukeExceptionIllegalArgument {
+        TaskList tasklist = new TaskList();
+        List<= new ArrayList<>(); // if fail, none imported
         boolean isImportSuccess = true;
         for (String s: taskStrings) {
             Task t = Task.parseFileString(s);
             tasks.add(t);
         }
+        return tasks
     }
 
     /**

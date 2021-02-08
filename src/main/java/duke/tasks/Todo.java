@@ -17,7 +17,7 @@ public final class Todo extends Task {
      * @param description Description of todo.
      * @param isDone Whether task is completed.
      */
-    private Todo(String description, boolean isDone) {
+    public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
