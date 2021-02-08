@@ -37,6 +37,8 @@ public class TaskList {
         String line;
         while (input.hasNextLine()) {
             line = input.nextLine();
+            assert !line.isEmpty();
+
             if (line.equals("\n")) {
                 break;
             }

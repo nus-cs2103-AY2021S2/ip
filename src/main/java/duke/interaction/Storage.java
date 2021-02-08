@@ -59,9 +59,11 @@ public class Storage {
      */
     public void writeTasks(TaskList taskList) {
         this.saveFile.getParentFile().mkdirs();
+        assert this.saveFile.getParentFile() != null;
 
         try {
             this.saveFile.createNewFile();
+            assert this.saveFile != null;
 
             FileWriter fw = new FileWriter(saveFile);
             fw.write(taskList.serialise());
