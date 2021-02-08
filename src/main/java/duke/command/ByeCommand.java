@@ -27,12 +27,4 @@ public class ByeCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         return ui.byeCommandInteraction();
     }
-
-    /**
-     * Exit the Duke program
-     * @return   A signal that indicate the termination of the Duke program.
-     */
-    public boolean isExit() {
-        return true;
-    }
 }

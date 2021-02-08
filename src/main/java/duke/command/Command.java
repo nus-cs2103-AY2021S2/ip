@@ -26,10 +26,4 @@ public abstract class Command {
      * @return         The message replied by Duke chat bot.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage);
-
-    /**
-     * Determine whether the command will terminate the program.
-     * @return   A signal to terminate the program.
-     */
-    public abstract boolean isExit();
 }

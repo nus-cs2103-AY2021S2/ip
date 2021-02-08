@@ -91,7 +91,7 @@ public class Ui {
         } else {
             String message = "     Here are the matching tasks in your list:";
             for (Task task: matchingTasks) {
-                message += ("     " + task);
+                message += ("\n     " + task);
             }
             return message;
         }

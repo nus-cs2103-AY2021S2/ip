@@ -86,7 +86,7 @@ public class TaskList {
         try {
             return tasks.get(index);
         } catch (IndexOutOfBoundsException ex) {
-            throw ex;
+            throw new InvalidDescriptionException("Description cannot be empty");
         }
     }
 
@@ -100,7 +100,6 @@ public class TaskList {
      */
     public ArrayList<Task> delete(int index, Storage storage) throws InvalidDescriptionException, IOException {
         try {
-            Task task = this.getTask(index);
             tasks.remove(index);
             storage.overwrite(tasks);
             return tasks;

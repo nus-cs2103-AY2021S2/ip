@@ -27,12 +27,4 @@ public class ListCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         return taskList.list();
     }
-
-    /**
-     * Do not exit the Duke program
-     * @return   A signal that indicate a continuation of the Duke program.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

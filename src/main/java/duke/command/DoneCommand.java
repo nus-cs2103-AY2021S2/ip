@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.InvalidDescriptionException;
 import duke.logging.Storage;
 import duke.logging.TaskList;
 import duke.logging.Ui;
@@ -27,6 +28,9 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
+            if (taskDescription.isEmpty()) {
+                throw new InvalidDescriptionException("Description cannot be empty");
+            }
             int index = Integer.parseInt(taskDescription.substring(0, 1)) - 1;
             Task task = taskList.getTask(index);
             taskList.done(index, storage);
@@ -34,13 +38,5 @@ public class DoneCommand extends Command {
         } catch (Exception ex) {
             return "     " + ex.getMessage();
         }
-    }
-
-    /**
-     * Do not exit the Duke program
-     * @return   A signal that indicate a continuation of the Duke program.
-     */
-    public boolean isExit() {
-        return false;
     }
 }

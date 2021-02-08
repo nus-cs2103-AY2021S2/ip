@@ -43,12 +43,4 @@ public class AddCommand extends Command {
             return "     " + e.getMessage();
         }
     }
-
-    /**
-     * Do not exit the Duke program
-     * @return   A signal that indicate a continuation of the Duke program.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

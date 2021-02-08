@@ -36,13 +36,4 @@ public class FindCommand extends Command {
             return "     " + ex.getMessage();
         }
     }
-
-    /**
-     * Do not exit the Duke program
-     * @return   A signal that indicate a continuation of the Duke program.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
