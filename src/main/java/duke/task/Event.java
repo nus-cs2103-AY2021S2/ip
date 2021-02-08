@@ -31,13 +31,7 @@ public class Event extends Task {
      */
     @Override
     public String toFileString() {
-        String done;
-        if (this.getDone()) {
-            done = "1";
-        } else {
-            done = "0";
-        }
-        String string = "E|" + done + "|" + this.getDesc() + "|" + this.timeRange;
+        String string = "E|" + super.toFileString() + "|" + this.timeRange;
         return string;
     }
 }

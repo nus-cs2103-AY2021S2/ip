@@ -11,14 +11,17 @@ import java.time.format.DateTimeParseException;
 public abstract class Task {
     private String content;
     private boolean isDone;
+    private Priority priority;
 
     /**
      * Abstract Class constructor.
+     * Default priority is set to Medium.
      *
      * @param content description of the task.
      */
     public Task(String content) {
         this.content = content;
+        this.priority = Priority.MEDIUM;
         this.isDone = false;
     }
 
@@ -28,7 +31,15 @@ public abstract class Task {
      *
      * @return String representation in file
      */
-    public abstract String toFileString();
+    public String toFileString() {
+        String done;
+        if (this.getDone()) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+        return done + "|" + priority.getValue() + "|" + this.getDesc();
+    }
 
     /**
      * String representation of whether the task is done.
@@ -37,10 +48,7 @@ public abstract class Task {
      * @return [X] content if done [ ] content otherwise.
      */
     public String toString() {
-        String string = "";
-        string += String.format("[%s] ", isDone ? "X" : " ");
-        string += this.content;
-        return string;
+        return String.format("[%s][%s]%s", isDone ? "X" : " ",this.getPriority(),this.getDesc());
     }
 
     /**
@@ -82,5 +90,21 @@ public abstract class Task {
      */
     public boolean getDone() {
         return this.isDone;
+    }
+
+    /**
+     * Sets the current task priority to the one stated.
+     * @param priority Priority to be set.
+     */
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    /**
+     * Gets the priority the task has.
+     * @return priority of the task.
+     */
+    public Priority getPriority() {
+        return priority;
     }
 }

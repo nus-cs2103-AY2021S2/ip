@@ -3,15 +3,7 @@ package duke;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-import duke.command.AddCommand;
-import duke.command.CommandWrite;
-import duke.command.DefaultCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ICommand;
-import duke.command.PrintListCommand;
+import duke.command.*;
 import duke.task.DeadlineFactory;
 import duke.task.EventFactory;
 import duke.task.ToDoFactory;
@@ -100,6 +92,8 @@ public class Duke extends Application{
 
         ICommand findCommand = new FindCommand(ui,taskList);
 
+        ICommand setPriorityCommand = new SetPriorityCommand(ui,taskList);
+
         commands.add("done", doneCommand);
         commands.add("list", listCommand);
         commands.add("bye", exitCommand);
@@ -108,5 +102,6 @@ public class Duke extends Application{
         commands.add("deadline", deadlineCommand);
         commands.add("delete", deleteCommand);
         commands.add("find", findCommand);
+        commands.add("priority", setPriorityCommand);
     }
 }
