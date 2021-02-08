@@ -1,5 +1,10 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.DatetimeParser;
 import duke.parser.UserInputTokenSet;
@@ -8,11 +13,6 @@ import duke.tasks.DateTask;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Find command.
@@ -25,6 +25,12 @@ public class DukeCommandFind extends DukeCommand {
     protected Optional<LocalDateTime> to;
     protected String search;
 
+    /**
+     * Constructor to record date range and search query.
+     *
+     * @param tokenSet user input tokens
+     * @throws DukeExceptionIllegalArgument When dates cannot be parsed
+     */
     public DukeCommandFind(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
         from = Optional.empty(); // datetime lower bound
         to = Optional.empty(); // datetime upper bound
@@ -41,8 +47,16 @@ public class DukeCommandFind extends DukeCommand {
         }
     }
 
+    /**
+     * Prints tasks from tasklist according to search query, writes to file and displays success
+     *
+     * @param tasks tasklist
+     * @param ui user interface
+     * @param loader storage
+     * @throws DukeExceptionIllegalArgument when task fails to be parsed
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, FileLoader loader) throws DukeExceptionIllegalArgument{
+    public void execute(TaskList tasks, Ui ui, FileLoader loader) throws DukeExceptionIllegalArgument {
         boolean datedSearch = (from.isPresent() || to.isPresent());
         ArrayList<Task> view = new ArrayList<>();
         ArrayList<Integer> viewIndex = new ArrayList<>();
@@ -67,7 +81,7 @@ public class DukeCommandFind extends DukeCommand {
             // If date enabled, must sort by DateTasks only.
 
             view.add(task);
-            viewIndex.add(i+1);
+            viewIndex.add(i + 1);
         }
 
         // Empty task view list
@@ -86,15 +100,6 @@ public class DukeCommandFind extends DukeCommand {
             ui.showMessage(lines);
             return;
         }
-
-        // Sorting disabled to allow list indexing... Might re-enable as option
-        // Print list in sorted order of datetime
-        // IntelliJ's coding recommendations reduced it to this, pretty impressive
-        // if (datedSearch) {
-        //     view.sort(Comparator.comparing(t -> ((DateTask) t).getDatetime()));
-        // } else {
-        //    view.sort(Comparator.comparing(Task::getDescription));
-        // }
 
         // Get output
         List<String> lines = new ArrayList<>();

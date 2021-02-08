@@ -18,6 +18,12 @@ public class DukeCommandDone extends DukeCommand {
 
     private final ArrayList<Integer> indices = new ArrayList<>();
 
+    /**
+     * Constructor to track task indices to mark as done.
+     *
+     * @param tokenSet user input tokens
+     * @throws DukeExceptionIllegalArgument When indices cannot be parsed as integers
+     */
     public DukeCommandDone(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
         try {
             String indices = tokenSet.get("/text");
@@ -29,6 +35,15 @@ public class DukeCommandDone extends DukeCommand {
         }
     }
 
+    /**
+     * Marks tasks as done in tasklist, writes to file and displays success
+     *
+     * @param tasks tasklist
+     * @param ui user interface
+     * @param loader storage
+     * @throws DukeExceptionFileNotWritable when loader fails to write to file
+     * @throws DukeExceptionIllegalArgument when task fails to be parsed
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
             throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument {

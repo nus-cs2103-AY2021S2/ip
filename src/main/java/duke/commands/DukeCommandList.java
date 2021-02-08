@@ -1,16 +1,17 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.UserInputTokenSet;
 import duke.storage.FileLoader;
-import duke.tasks.Event;
-import duke.tasks.Todo;
 import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.tasks.Todo;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
 
 /**
  * List command.
@@ -68,7 +69,7 @@ public class DukeCommandList extends DukeCommand {
         } else {
             ArrayList<String> lines = new ArrayList<>();
             for (int i = 0; i < tasks.size(); i++) {
-                lines.add((i+1) + ". " + tasks.getTask(i));
+                lines.add((i + 1) + ". " + tasks.getTask(i));
             }
             ui.showMessage("Here are the tasks in your list:", lines);
         }

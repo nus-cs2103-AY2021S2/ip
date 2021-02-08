@@ -1,14 +1,14 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.UserInputTokenSet;
 import duke.storage.FileLoader;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
 
 /**
  * Delete command.
@@ -21,6 +21,12 @@ public class DukeCommandDelete extends DukeCommand {
     private final ArrayList<Integer> indices = new ArrayList<>();
     private boolean isDeleteAll = false;
 
+    /**
+     * Constructor to track task indices to delete.
+     *
+     * @param tokenSet user input tokens
+     * @throws DukeExceptionIllegalArgument When indices cannot be parsed as integers
+     */
     public DukeCommandDelete(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
         if (tokenSet.contains("all")) {
             isDeleteAll = true;
@@ -34,9 +40,17 @@ public class DukeCommandDelete extends DukeCommand {
                 throw new DukeExceptionIllegalArgument("Need to specify task number to delete.");
             }
         }
-
     }
 
+    /**
+     * Deletes tasks from tasklist, writes to file and displays success
+     *
+     * @param tasks tasklist
+     * @param ui user interface
+     * @param loader storage
+     * @throws DukeExceptionFileNotWritable when loader fails to write to file
+     * @throws DukeExceptionIllegalArgument when task fails to be parsed
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
             throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument {
