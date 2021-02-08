@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
@@ -66,7 +65,7 @@ public class TaskList {
         if (inputArr.length == 1) {
             throw new DukeException("       OOPS!!! The task number cannot be empty.");
         }
-        if (isNotNumeric(inputArr[1])) {
+        if (checkIfNotNumeric(inputArr[1])) {
             throw new DukeException("       OOPS!!! The task number must be numeric.");
         }
         int i = Integer.parseInt(inputArr[1]) - 1;
@@ -98,7 +97,7 @@ public class TaskList {
         if (inputArr.length == 1) {
             throw new DukeException("       OOPS!!! The task number cannot be empty.");
         }
-        if (isNotNumeric(inputArr[1])) {
+        if (checkIfNotNumeric(inputArr[1])) {
             throw new DukeException("       OOPS!!! The task number must be numeric.");
 
         }
@@ -154,6 +153,7 @@ public class TaskList {
      * @throws DukeException If user input format is wrong.
      */
     public String addTask(String type, String fullCommand) throws DukeException {
+        int currSize = tasks.size();
         String[] inputArr = fullCommand.split(" ");
         String[] details = new String[]{};
         LocalDate date = LocalDate.now();
