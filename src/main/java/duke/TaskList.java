@@ -7,8 +7,8 @@ import java.util.function.Predicate;
 import duke.task.Task;
 
 public class TaskList {
-    private ArrayList<Task> list;
-    private Storage storage;
+    private final ArrayList<Task> list;
+    private final Storage storage;
 
     /**
      * Reads task from storage and stores into an ArrayList
@@ -21,7 +21,9 @@ public class TaskList {
 
     /**
      * Adds a task to the list of tasks and prints to console the number of tasks in the list.
-     * @param task task to be added to list
+     * @param task the Task to be added to list.
+     * @return response that task has been added.
+     * @throws DukeException if fail to write the added task to storage.
      */
     public String add(Task task) throws DukeException {
         this.list.add(task);
@@ -37,6 +39,7 @@ public class TaskList {
     /**
      * Marks a task as done and also rewrite all tasks in the storage to reflect this change.
      * @param taskNumber task number of the task to be marked as done.
+     * @return response that a task has been marked as done.
      * @throws DukeException if failed to rewrite tasks to storage.
      */
     public String done(int taskNumber) throws DukeException {
@@ -48,6 +51,8 @@ public class TaskList {
     /**
      * Removes a task from the list and prints to console number of tasks left in the list.
      * @param taskNumber task number of task to be removed.
+     * @return response that a task has been removed.
+     * @throws DukeException if fail to rewrite tasks.
      */
     public String remove(int taskNumber) throws DukeException {
         this.list.remove(taskNumber - 1);
@@ -62,14 +67,17 @@ public class TaskList {
     }
 
     /**
-     * Returns the formatted string containing all tasks that are present in this TaskList.
+     * Formats tasks into a numbered list of tasks.
+     * @return a String representation of the TaskList.
      */
-    public String formatList() {
+    @Override
+    public String toString() {
         String[] printedArray = new String[this.list.size() + 1];
         printedArray[0] = "Here are the tasks in your list:" + System.lineSeparator();
         for (int i = 0; i < this.list.size(); i++) {
-            String listEntry = String.valueOf(i + 1) + "."
-                    + this.list.get(i).toString();
+            String numberIndex = String.valueOf(i + 1);
+            String taskInString = this.list.get(i).toString();
+            String listEntry = numberIndex + "." + taskInString;
             printedArray[i + 1] = listEntry;
         }
         return Helper.formatStrings(printedArray);

@@ -81,7 +81,7 @@ public class Storage {
 
     /**
      * Appends the task to the end of the storage file.
-     * @param task task to be appended.
+     * @param task Task to be appended.
      * @throws DukeException if failed to write task to storage.
      */
     public void writeTaskToFile(Task task) throws DukeException {

@@ -46,7 +46,7 @@ public class ListCommand extends Command {
                     + System.lineSeparator() + Helper.formatStrings(taskStrings);
 
         } else {
-            return list.formatList();
+            return list.toString();
         }
     }
 }

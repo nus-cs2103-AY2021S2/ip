@@ -8,24 +8,32 @@ import java.util.stream.IntStream;
  */
 public class Helper {
     /**
-     * Joins a sub-array of strings into 1 string where each element in sub-array is separate by a space.
+     * Joins a sub-array of strings into 1 string where each element in the sub-array is separated by a space.
      *
      * @param arr array containing sub-array to join
      * @param start start index of sub-array to join
-     * @param end end index of sub-array to join
+     * @param end end index (inclusive) of sub-array to join
      * @return string of sub-array joined with space
      */
     public static String join(String[] arr, int start, int end) {
-        StringBuilder output = new StringBuilder();
+        StringBuilder outputBuilder = new StringBuilder();
         for (int i = start; i <= end; i++) {
-            output.append(arr[i]);
+            outputBuilder.append(arr[i]);
             if (i < end) {
-                output.append(" ");
+                outputBuilder.append(" ");
             }
         }
-        return output.toString();
+        return outputBuilder.toString();
     }
 
+    /**
+     * Joins a sub-array of strings into 1 string where each element in the sub-array is separated by a space.
+     * The sub-array consists of every element from the provided start index to the end of the array.
+     *
+     * @param arr array containing sub-array to join
+     * @param start start index of sub-array to join
+     * @return string of sub-array joined with space
+     */
     public static String join(String[] arr, int start) {
         return join(arr, start, arr.length - 1);
     }
@@ -36,6 +44,8 @@ public class Helper {
 
     /**
      * Concatenates the input strings with a new line between them, except the last string.
+     * @param input an array of strings to be formatted.
+     * @return the formatted string.
      */
     public static String formatStrings(String ... input) {
         StringBuilder output = new StringBuilder();
@@ -49,7 +59,9 @@ public class Helper {
     }
 
     /**
-     * Concatenates the input strings from the List with a new line between them, except the last string.
+     * Concatenates the input strings from the List with a line separator between them.
+     * @param input the List of Strings to be formatted.
+     * @return the formatted String.
      */
     public static String formatStrings(List<String> input) {
         StringBuilder output = new StringBuilder();

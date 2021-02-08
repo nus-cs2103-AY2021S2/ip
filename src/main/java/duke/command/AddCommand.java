@@ -17,6 +17,7 @@ public class AddCommand extends Command {
      * Checks what type of add command it is (event, to do, deadline) then call the respective functions
      * e.g. addDeadline to add a new task.
      * @param list the task list.
+     * @return response that the task has been added.
      * @throws DukeException if adding a task failed.
      */
     @Override

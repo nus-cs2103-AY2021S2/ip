@@ -22,13 +22,18 @@ public class Duke {
     }
 
     /**
-     *  Provides responses to commands that are passed in by the user.
+     * Provides responses to commands that are passed in by the user.
+     * @param input the user input.
+     * @return response that duke has, corresponding to the user input.
      */
     public String getResponse(String input) {
         Command command;
         try {
             command = Parser.handleInput(input);
-            return this.executeCommand(command);
+            String response = this.executeCommand(command);
+            //Must always respond with something
+            assert response != null && response.length() > 0;
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
