@@ -23,7 +23,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Adds a ToDo task with previously specified description to taskList.
-     * 
+     *
      * @return message confirming that indicated ToDo task is added.
      */
     @Override

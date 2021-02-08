@@ -1,12 +1,10 @@
 package duke.tasks;
 
-import duke.utils.TaskStringConverter;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.stream.Stream;
+
+import duke.utils.TaskStringConverter;
+
 
 public class TaskList {
     private final List<Task> taskList;

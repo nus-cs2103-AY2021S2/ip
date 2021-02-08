@@ -1,12 +1,10 @@
 package duke.commands;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
