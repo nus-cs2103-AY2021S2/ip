@@ -9,6 +9,7 @@ import duke.exceptions.EmptyDateException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.InvalidInputException;
 import duke.exceptions.ListOutOfBoundsException;
+import duke.exceptions.LoadFailureException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -177,7 +178,7 @@ public class TaskList {
      * @param data A line from the user's save data.
      * @throws DateFormatException If the specified date is incorrectly formatted.
      */
-    public void addTaskFromData(String data) throws DateFormatException {
+    public void addTaskFromData(String data) throws DateFormatException, LoadFailureException {
         String splitRegex = " \\| ";
 
         String[] sArray = data.split(splitRegex);
@@ -194,7 +195,7 @@ public class TaskList {
                 tasks.add(new Event(sArray[2], LocalDate.parse(sArray[3])));
                 break;
             default:
-                break;
+                throw new LoadFailureException();
             }
 
             String doneIndicator = "1";
