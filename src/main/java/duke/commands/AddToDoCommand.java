@@ -5,7 +5,7 @@ import duke.tasks.ToDo;
 import duke.ui.Ui;
 
 /**
- * Handles the logic of adding a to-do task to the tasks list.
+ * Handles the logic of adding a to-do task to the to-do list.
  */
 public class AddToDoCommand extends Command {
     private final String description;

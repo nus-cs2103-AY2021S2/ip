@@ -5,7 +5,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the logic of marking a task in the tasks list as done.
+ * Handles the logic of marking a task in the to-do as done.
  */
 public class DoneCommand extends Command {
     private final String description;

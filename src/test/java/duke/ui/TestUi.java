@@ -18,6 +18,7 @@ public class TestUi {
         ui.handleList(this.tasks);
         ui.handleDone(this.dummyTask);
         ui.handleDelete(this.dummyTask);
+        ui.handleFind(this.tasks, "dummy keyword");
         ui.handleAddTask(this.tasks, this.dummyTask);
     }
 }

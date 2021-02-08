@@ -5,7 +5,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the logic of deleting a task from the tasks list.
+ * Handles the logic of deleting a task from the to-do list.
  */
 public class DeleteCommand extends Command {
     private final String description;

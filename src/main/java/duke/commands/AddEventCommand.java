@@ -7,7 +7,7 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 
 /**
- * Handles the logic of adding an event task to the tasks list.
+ * Handles the logic of adding an event task to the to-do list.
  */
 public class AddEventCommand extends Command {
     private final String description;

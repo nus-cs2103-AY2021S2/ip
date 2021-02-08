@@ -8,6 +8,7 @@ import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.DoNothingCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 
 import duke.exceptions.DateTimeFormatException;
@@ -31,17 +32,17 @@ import java.util.Scanner;
  * runs the application.
  */
 public class Parser {
+    private static final String BYE = "BYE";
+    private static final String LIST = "LIST";
+    private static final String DONE = "DONE";
+    private static final String DELETE = "DELETE";
+    private static final String FIND = "FIND";
     private static final String TODO = "TODO";
     private static final String DEADLINE = "DEADLINE";
     private static final String EVENT = "EVENT";
-    private static final String DONE = "DONE";
-    private static final String DELETE = "DELETE";
-    private static final String LIST = "LIST";
-    private static final String BYE = "BYE";
-    private static final String FIND = "FIND";
 
     private static final ArrayList<String> validActions
-            = new ArrayList<>(Arrays.asList(TODO, DEADLINE, EVENT, DONE, DELETE, LIST, BYE, FIND));
+            = new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, TODO, DEADLINE, EVENT));
 
     /**
      * Initializes a scanner to read a new line of user input (as a <code>String</code>).
@@ -81,14 +82,14 @@ public class Parser {
                 return new DoneCommand(description);
             case DELETE:
                 return new DeleteCommand(description);
+            case FIND:
+                return new FindCommand(description);
             case TODO:
                 return new AddToDoCommand(description);
             case DEADLINE:
                 return new AddDeadlineCommand(description, deadlineDateTime);
             case EVENT:
                 return new AddEventCommand(description, eventDateTime);
-            case FIND:
-                return new FindCommand(description);
             default:
                 return new DoNothingCommand();
         }

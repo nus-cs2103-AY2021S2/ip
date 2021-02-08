@@ -21,6 +21,7 @@ public class TestParser {
         assertTrue(Parser.parse("list") instanceof ListCommand);
         assertTrue(Parser.parse("done 1") instanceof DoneCommand);
         assertTrue(Parser.parse("delete 1") instanceof DeleteCommand);
+        assertTrue(Parser.parse("find CS") instanceof FindCommand);
         assertTrue(Parser.parse("todo CS2103 Quiz") instanceof AddToDoCommand);
         assertTrue(Parser.parse("deadline CS2103 Quiz /by 2021-02-06 23:30") instanceof AddDeadlineCommand);
         assertTrue(Parser.parse("deadline CS2103 Quiz /by 2021-02-06") instanceof AddDeadlineCommand);
@@ -34,6 +35,7 @@ public class TestParser {
                 "done something",
                 "delete",
                 "delete something",
+                "find",
                 "todo",
                 "deadline",
                 "deadline something",

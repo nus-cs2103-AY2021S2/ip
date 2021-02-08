@@ -18,14 +18,14 @@ public class Ui {
     }
 
     /**
-     * Prints message for when the app terminates.
+     * Prints message for when the app terminates. That is, when the ByeCommand is executed.
      */
     public void handleBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints message for when users list the existing tasks.
+     * Prints message for when users list the existing tasks. That is, when the ListCommand is executed.
      *
      * @param tasks A <code>TaskList</code> object, representing a collection of <Task>Task</Task>
      *              objects to be printed.
@@ -41,6 +41,7 @@ public class Ui {
 
     /**
      * Prints message for when users mark a particular tasks as done.
+     * That is, when the DoneCommand is executed.
      *
      * @param doneTask The <code>Task</code> object marked as done.
      */
@@ -51,6 +52,7 @@ public class Ui {
 
     /**
      * Prints message for when users delete a partciular task from the to-do list.
+     * That is, when the DeleteCommand is executed.
      *
      * @param deletedTask The deleted <code>Task</code> object.
      */
@@ -60,7 +62,25 @@ public class Ui {
     }
 
     /**
+     * Prints message for when users search the to-do list for tasks matching certain input keywords.
+     * That is, when the FindCommand is executed.
+     *
+     * @param tasks   A <code>TaskList</code> object containing only task(s) with descriptions
+     *                that match the keyword(s) used for the search.
+     * @param keyword Keyword(s) used for the search
+     */
+    public void handleFind(TaskList tasks, String keyword) {
+        if (tasks.getSize() == 0) {
+            System.out.println("There are no tasks matching the '" + keyword + "' in your list :O");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            tasks.printTasks();
+        }
+    }
+
+    /**
      * Prints message for when users add a new task to the to-do list.
+     * That is, when the AddToDoCommand, the AddDeadlineCommand or the AddEventCommand is executed.
      *
      * @param tasks   A <code>TaskList</code> object to which a new <code>Task</code>
      *                object was added.
@@ -70,14 +90,5 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println(newTask.getStatusString());
         System.out.println("Now you have " + tasks.getSize() + " task(s) in the list.");
-    }
-
-    public void handleFind(TaskList tasks) {
-        if (tasks.getSize() == 0) {
-            System.out.println("There are no matching tasks in your list :O");
-        } else {
-            System.out.println("Here are the matching tasks in your list:");
-            tasks.printTasks();
-        }
     }
 }

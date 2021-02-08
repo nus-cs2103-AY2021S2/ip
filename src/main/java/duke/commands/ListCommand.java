@@ -4,7 +4,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the logic of listing the tasks in the tasks list.
+ * Handles the logic of listing the tasks in the to-do list.
  */
 public class ListCommand extends Command {
 

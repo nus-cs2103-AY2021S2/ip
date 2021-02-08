@@ -7,7 +7,7 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 
 /**
- * Handles the logic of adding a deadline task to the tasks list.
+ * Handles the logic of adding a deadline task to the to-do list.
  */
 public class AddDeadlineCommand extends Command {
     private final String description;
