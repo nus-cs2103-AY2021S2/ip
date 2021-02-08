@@ -14,6 +14,7 @@ public class Parser {
      * @throws OwenException Command cannot be parsed from string.
      */
     public static Command parseCommand(String commandString) throws OwenException {
+        assert commandString.length() > 0 : "commandString must not be empty";
         String[] commandStringSplit = commandString.split(" ", 2);
         String commandTypeString = commandStringSplit[0];
 
