@@ -13,8 +13,11 @@ import duke.task.TaskList;
  * @author Benedict Khoo
  */
 public class DoneCommand extends Command {
-    private static final Pattern DONE_KEYWORD = Pattern.compile("(?i)done\\b");
-    private static final Pattern DONE_INDEX = Pattern.compile("(?i)done\\s+(\\d+)$");
+    private static final Pattern DONE_KEYWORD = Pattern.compile("(?i)(?:^done|^d)\\b");
+    private static final Pattern DONE_INDEX = Pattern.compile("(?i)(?:^done|^d)\\s+(\\d+)$");
+    private static final String ACCEPTED_FORMAT_MSG = "Accepted formats:\n"
+            + "  done <TASK NUMBER>\n"
+            + "  d <TASK NUMBER>";
 
     private final String argStr;
 
@@ -44,7 +47,7 @@ public class DoneCommand extends Command {
         Matcher doneMatcher = DONE_INDEX.matcher(input);
         if (!doneMatcher.find()) {
             throw new DukeException("A done command must specify a task number.\n"
-                    + "Expected format: done <TASK NUMBER>");
+                    + ACCEPTED_FORMAT_MSG);
         }
 
         String argStr = doneMatcher.group(1);

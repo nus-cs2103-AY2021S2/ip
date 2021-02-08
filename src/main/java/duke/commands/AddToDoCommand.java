@@ -13,8 +13,11 @@ import duke.task.ToDo;
  * @author Benedict Khoo
  */
 public class AddToDoCommand extends Command {
-    private static final Pattern ADD_TODO_KEYWORD = Pattern.compile("(?i)todo\\b");
-    private static final Pattern ADD_TODO_DESC = Pattern.compile("(?i)todo\\s+(\\w.*)");
+    private static final Pattern ADD_TODO_KEYWORD = Pattern.compile("(?i)(?:^todo|^t)\\b");
+    private static final Pattern ADD_TODO_DESC = Pattern.compile("(?i)(?:^todo|^t)\\s+(\\w.*)");
+    private static final String ACCEPTED_FORMAT_MSG = "Accepted formats:\n"
+            + "  todo <DESCRIPTION>\n"
+            + "  t <DESCRIPTION>";
 
     private final String taskDesc;
 
@@ -45,7 +48,7 @@ public class AddToDoCommand extends Command {
         if (!toDoMatcher.find()) {
             // Matched command but invalid argument
             throw new DukeException("The description of a todo cannot be empty!\n"
-                    + "Expected format: todo <DESCRIPTION>");
+                    + ACCEPTED_FORMAT_MSG);
         }
 
         String taskDesc = toDoMatcher.group(1);

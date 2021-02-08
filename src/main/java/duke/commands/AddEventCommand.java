@@ -13,9 +13,12 @@ import duke.task.TaskList;
  * @author Benedict Khoo
  */
 public class AddEventCommand extends Command {
-    private static final Pattern ADD_EVENT_KEYWORD = Pattern.compile("(?i)event\\b");
-    private static final Pattern ADD_EVENT_DESC = Pattern.compile("(?i)event\\s+(\\w.*)");
-    private static final Pattern ADD_EVENT_PERIOD = Pattern.compile("(?i)event\\s+(\\w.*)\\s+/at\\s+(\\w.*)");
+    private static final Pattern ADD_EVENT_KEYWORD = Pattern.compile("(?i)(?:^event|^e)\\b");
+    private static final Pattern ADD_EVENT_DESC = Pattern.compile("(?i)(?:^event|^e)\\s+(\\w.*)");
+    private static final Pattern ADD_EVENT_PERIOD = Pattern.compile("(?i)(?:^event|^e)\\s+(\\w.*)\\s+/at\\s+(\\w.*)");
+    private static final String ACCEPTED_FORMAT_MSG = "Accepted formats:\n"
+            + "  event <DESCRIPTION> /at <PERIOD>\n"
+            + "  e <DESCRIPTION> /at <PERIOD>";
 
     private final String taskDesc;
     private final String period;
@@ -48,14 +51,14 @@ public class AddEventCommand extends Command {
         Matcher descMatcher = ADD_EVENT_DESC.matcher(input);
         if (!descMatcher.find()) {
             throw new DukeException("The description of an event cannot be empty!\n"
-                    + "Expected format: event <DESCRIPTION> /at <PERIOD>");
+                    + ACCEPTED_FORMAT_MSG);
         }
 
         // check period exists
         Matcher periodMatcher = ADD_EVENT_PERIOD.matcher(input);
         if (!periodMatcher.find()) {
             throw new DukeException("An event must have a period!\n"
-                    + "Expected format: event <DESCRIPTION> /at <PERIOD>");
+                    + ACCEPTED_FORMAT_MSG);
         }
 
         String taskDesc = periodMatcher.group(1);

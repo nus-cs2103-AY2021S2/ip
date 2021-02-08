@@ -13,8 +13,11 @@ import duke.task.TaskList;
  * @author Benedict Khoo
  */
 public class ListCommand extends Command {
-    private static final Pattern LIST_KEYWORD = Pattern.compile("(?i)list\\b");
-    private static final Pattern LIST_ONLY = Pattern.compile("(?i)list(\\s*)$");
+    private static final Pattern LIST_KEYWORD = Pattern.compile("(?i)(?:^list|^l)\\b");
+    private static final Pattern LIST_ONLY = Pattern.compile("(?i)(?:^list|^l)(\\s*)$");
+    private static final String ACCEPTED_FORMAT_MSG = "Accepted formats:\n"
+            + "  list\n"
+            + "  l";
 
     private ListCommand() {
     }
@@ -41,7 +44,7 @@ public class ListCommand extends Command {
         Matcher listMatcher = LIST_ONLY.matcher(input);
         if (!listMatcher.find()) {
             throw new DukeException("Please do not include any arguments after the list command.\n"
-                    + "Expected format: list");
+                    + ACCEPTED_FORMAT_MSG);
         }
 
         return new ListCommand();
