@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -18,14 +19,15 @@ import javafx.stage.Stage;
 /**
  * The entry point of the program.
  */
-public class Duke extends Application {
+public class Elaina extends Application {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private String userImageSrc;
-    private String dukeImageSrc;
-    private String dukeImage2Src;
+    private String elainaImageSrc;
+    private String elainaImage2Src;
+    private String elainaIconSrc;
 
     /**
      * The task list.
@@ -33,9 +35,9 @@ public class Duke extends Application {
     private final TaskList tasks;
 
     /**
-     * Constructs a Duke object.
+     * Constructs an Elaina object.
      */
-    public Duke() {
+    public Elaina() {
         this.tasks = new TaskList();
         Storage.readFromFile(this.tasks);
     }
@@ -45,8 +47,9 @@ public class Duke extends Application {
         // Step 1. Setting up required components
 
         this.userImageSrc = "/images/dialogPic/User/majo_saya2.jpg";
-        this.dukeImageSrc = "/images/dialogPic/Elaina/majo_elaina1.jpg";
-        this.dukeImage2Src = "/images/dialogPic/Elaina/majo_elaina0.jpg";
+        this.elainaImageSrc = "/images/dialogPic/Elaina/majo_elaina1.jpg";
+        this.elainaImage2Src = "/images/dialogPic/Elaina/majo_elaina0.jpg";
+        this.elainaIconSrc = "/images/dialogPic/Elaina/majo_elaina2.jpg";
 
         this.scrollPane = new ScrollPane();
         this.dialogContainer = new VBox();
@@ -65,10 +68,11 @@ public class Duke extends Application {
 
         // Step 2. Formatting the window to look as expected
 
-        primaryStage.setTitle("Duke");
+        primaryStage.setTitle("Elaina");
         primaryStage.setResizable(false);
         primaryStage.setMinHeight(600.0);
         primaryStage.setMinWidth(400.0);
+        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream(this.elainaIconSrc)));
 
         mainLayout.setPrefSize(400.0, 600.0);
 
@@ -108,7 +112,7 @@ public class Duke extends Application {
 
         // Step 4. Print welcome message.
         for (String line : this.getWelcomeText(false).split("\n")) {
-            this.dialogContainer.getChildren().add(DialogBox.getDukeDialogBox(line, this.dukeImageSrc));
+            this.dialogContainer.getChildren().add(DialogBox.getElainaDialogBox(line, this.elainaImageSrc));
         }
     }
 
@@ -117,18 +121,18 @@ public class Duke extends Application {
         if (userText.equals("")) {
             return;
         }
-        String dukeText = this.getResponse(userInput.getText());
-        if (dukeText.startsWith("Error: ")) {
+        String elainaText = this.getResponse(userInput.getText());
+        if (elainaText.startsWith("Error: ")) {
             this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialogBox(userText, this.userImageSrc),
-                DialogBox.getDukeDialogBox(dukeText, this.dukeImage2Src));
+                DialogBox.getElainaDialogBox(elainaText, this.elainaImage2Src));
         } else {
             this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialogBox(userText, this.userImageSrc),
-                DialogBox.getDukeDialogBox(dukeText, this.dukeImageSrc));
+                DialogBox.getElainaDialogBox(elainaText, this.elainaImageSrc));
         }
         this.userInput.clear();
-        if (dukeText.equals("Bye. Hope to see you again soon!\n")) {
+        if (elainaText.equals("Bye. Hope to see you again soon!\n")) {
             Platform.exit();
             System.exit(0);
         }
@@ -183,13 +187,13 @@ public class Duke extends Application {
     }
 
     /**
-     * Constructs a Duke object and run it.
+     * Constructs an Elaina object and run it.
      *
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
         // Start in CLI mode
-        // new Duke().run();
+        // new Elaina().run();
 
         // Start in GUI mode
         launch();

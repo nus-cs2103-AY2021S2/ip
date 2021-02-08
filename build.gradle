@@ -47,7 +47,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "elaina"
     archiveClassifier = null
     project.configurations.implementation.canBeResolved = true
     configurations = [project.configurations.implementation]

@@ -18,7 +18,7 @@ REM remove saved data
 if exist tasks.data del tasks.data
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -cp ..\bin com.lirc572.ip.Duke < input.txt > ACTUAL.TXT
+java -cp ..\bin com.lirc572.ip.Elaina < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT

@@ -52,12 +52,12 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Constructs a new DialogBox object for duke (on the left).
+     * Constructs a new DialogBox object for Elaina (on the left).
      * @param labelString text in the dialog box.
      * @param imageSrc path to the image in the dialog.
      * @return a new DialogBox object.
      */
-    public static DialogBox getDukeDialogBox(String labelString, String imageSrc) {
+    public static DialogBox getElainaDialogBox(String labelString, String imageSrc) {
         var dialogBox = new DialogBox(labelString, imageSrc);
         dialogBox.flip();
         return dialogBox;
