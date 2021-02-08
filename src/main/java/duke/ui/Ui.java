@@ -71,6 +71,7 @@ public class Ui {
             int index = message.indexOf('\n');
             String firstLine = message.substring(0, index);
             String[] restLines = message.substring(index+1).split("\n");
+            // Streams already used here
             List<String> lines = Arrays.stream(restLines).map(s -> "  "+s).collect(Collectors.toList());
             showMessage("☹ OOPS!!! " + firstLine, lines);
         } else {
