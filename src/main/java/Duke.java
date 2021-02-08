@@ -120,12 +120,13 @@ public class Duke {
                                 + " commands!"
                                 + spacer);
 
-                    } else { }
+                    } else {}
                 }
 
             } catch (Exception e) {
                 System.out.println(e);
             }
+
         }
         sc.close();
     }
@@ -145,10 +146,9 @@ public class Duke {
     }
 
     /**
-     * Displays Hashmap of all commands Duke is
-     * trained to do
+     * Identifies different error types
      *
-     * @param hm HashMap that retains all commands
+     * @param errorInput user inputs
      */
     static void errorHandling(String errorInput) throws DukeException {
         String[] inputArr = errorInput.split(" ");
@@ -158,7 +158,6 @@ public class Duke {
                 errorInput.contains("deadline") ||
                 errorInput.contains("event") &&
                 inputArr[1].isEmpty()) {
-
             throw new DukeException("Whoops :( Your command description cannot be empty. Try again!");
 
         // Invalid description: unknown
