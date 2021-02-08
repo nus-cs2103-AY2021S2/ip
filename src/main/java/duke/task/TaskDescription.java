@@ -51,6 +51,5 @@ public class TaskDescription {
         } catch (IndexOutOfBoundsException e) {
             throw new DescriptionIndexOutOfBoundsException("Argument missing! ");
         }
-
     }
 }
