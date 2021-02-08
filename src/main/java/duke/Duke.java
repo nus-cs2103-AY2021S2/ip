@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.NoSuchElementException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
@@ -19,7 +18,6 @@ import duke.task.ToDoFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * Main class for Duke app.
@@ -71,7 +69,7 @@ public class Duke extends Application{
      * @param input input to be parsed.
      */
     public void handleInput(String input) {
-        String[] inputArray = Parser.parse(input);
+        String[] inputArray = Parser.parseInitial(input);
         if (inputArray.length == 2) {
             commands.get(inputArray[0]).execute(inputArray[1]);
         } else if (inputArray.length == 1) {
@@ -81,7 +79,6 @@ public class Duke extends Application{
     }
 
     private void initialiseCommandMap() {
-
         ICommand doneCommand = new DoneCommand(ui, taskList);
         doneCommand = new CommandWrite(ui, storage, doneCommand);
 

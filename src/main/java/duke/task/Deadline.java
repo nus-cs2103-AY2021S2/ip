@@ -29,12 +29,17 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
+        String done = parseDone();
+        return "D|" + done + "|" + this.getDesc() + "|" + this.deadline;
+    }
+
+    private String parseDone() {
         String done;
         if (this.getDone()) {
             done = "1";
         } else {
             done = "0";
         }
-        return "D|" + done + "|" + this.getDesc() + "|" + this.deadline;
+        return done;
     }
 }

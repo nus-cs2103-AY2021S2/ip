@@ -37,6 +37,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.autosize();
         name.setText(nameInput);
     }
 

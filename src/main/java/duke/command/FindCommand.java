@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Parser;
 import duke.TaskList;
 import duke.task.Task;
 import duke.Ui;
@@ -25,22 +26,14 @@ public class FindCommand implements ICommand {
      * Lists out all the tasks with the given keyword.
      */
     @Override
-    public void execute(String parameters) {
+    public void execute(String keyword) {
         String string = "";
         string += "Here are the matching tasks in your list:\n";
-        string += listToString(parameters.strip());
+        string += listToString(keyword.strip());
         ui.createDukeDialog(string);
     }
 
     private String listToString(String keyword) {
-        String content = "";
-        Integer count = 1;
-        for (Task t: tasks.findTasksWithString(keyword)) {
-            content += count.toString() + ".";
-            content += t.toString();
-            content += "\n";
-            count++;
-        }
-        return content.trim();
+        return Parser.listTaskToString(this.tasks.findTasksWithString(keyword));
     }
 }

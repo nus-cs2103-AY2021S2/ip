@@ -34,6 +34,8 @@ public class Ui extends AnchorPane {
         } catch (IOException e) {
            handleError(e);
         }
+        this.layout();
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
