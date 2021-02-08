@@ -3,13 +3,16 @@
  */
 public class Ui {
 
+    public static final int EMPTY_LIST = 0;
+    public static final int SINGLE_TASK_IN_LIST = 1;
+
     /**
      * Prints the response depending on whether the list has 1 or more than 1 task.
      * @param taskListSize Number of tasks in the list.
      * @return A String depending on whether there is 1 task or more than 1 task.
      */
     public String printResponse(int taskListSize) {
-        if (taskListSize == 1) {
+        if (taskListSize == SINGLE_TASK_IN_LIST) {
             return "task";
         } else {
             return "tasks";
@@ -58,7 +61,7 @@ public class Ui {
      * @return A string, depending on whether the list is empty.
      */
     public String respondToList(int taskListSize) {
-        if (taskListSize != 0) {
+        if (taskListSize != EMPTY_LIST) {
             return "Here are the tasks in your list:";
         } else {
             return "Your list is currently empty! Let's start adding tasks!";

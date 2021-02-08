@@ -17,9 +17,8 @@ public class DateValidation {
      * @throws DukeException On invalid input. Input format is wrong.
      */
     public static LocalDate handleDate(String date) throws DukeException {
-        LocalDate verifiedDate = null;
         try {
-            verifiedDate = LocalDate.parse(date);
+            LocalDate verifiedDate = LocalDate.parse(date);
             return verifiedDate;
         } catch (DateTimeParseException e) {
             throw new DukeException(":( Date format is invalid! Please enter in yyyy-mm-dd format!");

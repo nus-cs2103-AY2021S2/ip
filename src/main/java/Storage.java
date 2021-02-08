@@ -46,7 +46,7 @@ public class Storage {
                 this.isFileOriginallyPresent = false;
                 localFile.createNewFile();
             } catch (IOException e) {
-                System.out.println(e);
+                e.getMessage();
             }
         }
     }
@@ -75,7 +75,7 @@ public class Storage {
             try {
                 contents = new Scanner((this.localFile));
             } catch (FileNotFoundException e) {
-                e.toString();
+                e.getMessage();
             }
 
             while (contents.hasNext()) {
