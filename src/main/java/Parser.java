@@ -28,8 +28,24 @@ public class Parser {
         } else if (info[0].equals("find")) {
             checkFindCommand(info);
             return new FindCommand(info);
+        } else if (info[0].equals("mark")) {
+            checkPriorityCommand(info);
+            return new PriorityCommand(info);
         } else {
             throw new DukeException("Sorry but I don't understand what that means! :(");
+        }
+    }
+
+    private static void checkPriorityCommand(String[] info) throws DukeException {
+        if (info.length <= 2) {
+            throw new DukeException("Don't forget to provide the task number and priority level");
+        } else if (info.length > 3) {
+            throw new DukeException("OOPS! You provided extra information I don't need.");
+        }
+        try {
+            int taskNumber = Integer.parseInt(info[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please provide a valid task number :(");
         }
     }
 

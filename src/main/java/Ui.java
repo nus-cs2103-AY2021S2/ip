@@ -24,7 +24,7 @@ public class Ui {
     }
 
     String bye() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye! Please press the red button on the top left corner to close the application.";
     }
 
     String readCommand() throws IOException {
@@ -109,6 +109,12 @@ public class Ui {
             result = result + "\n" + (i + 1) + task.toString();
             //System.out.println((i + 1) + "." + list.get(i));
         }
+        return result;
+    }
+
+    public String addedPriority(Task task) {
+        String result = "Nice! I've marked this task's priority as " + task.priority
+                + "\n" + "    " + task.toString();
         return result;
     }
 }

@@ -29,7 +29,6 @@ public class Storage {
             if (task.type.equals("T")) {
                 s = task.isDone ? "T" + " , " + "1" + " , " + task.description
                         : "T" + " , " + "0" + " , " + task.description;
-
             } else if (task.type.equals("E")) {
                 Event myTask = (Event) task;
                 s = task.isDone
@@ -41,6 +40,9 @@ public class Storage {
                 s = task.isDone ? "D" + " , " + "1" + " , " + task.description + " , " + myTask.by
                         : "D" + " , " + "0" + " , " + task.description + " , " + myTask.by;
 
+            }
+            if (task.priority != null) {
+                s = s + " , " + task.priority;
             }
             fw.write(s + System.lineSeparator());
         }
@@ -63,18 +65,28 @@ public class Storage {
         while (task != null) {
             Task taskObject = null;
             String[] taskInfo = task.split(" , ");
+            int taskInfoLength = taskInfo.length;
             if (taskInfo[0].equals("T")) {
                 taskObject = new ToDo(taskInfo[2], "T");
-                taskObject.isDone = taskInfo[1].equals("1") ? true : false;
             } else if (taskInfo[0].equals("E")) {
                 Date date = new Date(taskInfo[3]);
                 taskObject = new Event(taskInfo[2], date, taskInfo[4], "E");
-                taskObject.isDone = taskInfo[1].equals("1") ? true : false;
             } else if (taskInfo[0].equals("D")) {
                 Date date = new Date(taskInfo[3]);
                 taskObject = new Deadline(taskInfo[2], date, "D");
-                taskObject.isDone = taskInfo[1].equals("1") ? true : false;
             }
+            if (taskInfo[1].equals("1")) {
+                taskObject.completed();
+            }
+            String lastInfo = taskInfo[taskInfoLength - 1];
+            if (lastInfo.equals(Priority.HIGH.toString())) {
+                taskObject.setPriority(Priority.HIGH);
+            } else if (lastInfo.equals(Priority.MEDIUM.toString())) {
+                taskObject.setPriority(Priority.MEDIUM);
+            } else if (lastInfo.equals(Priority.LOW.toString())) {
+                taskObject.setPriority(Priority.LOW);
+            }
+            assert taskObject != null : "task cannot be null";
             list.add(taskObject);
             task = br.readLine();
         }

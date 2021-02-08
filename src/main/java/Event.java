@@ -16,6 +16,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.toFormattedString() + " " + duration + ")";
+        String result = "[E]" + super.toString() + " (at: " + date.toFormattedString() + " " + duration + ")";
+        System.out.println(priority);
+        return priority != null
+                ? result + " " + "[" + priority.toString() + "]"
+                : result;
     }
 }

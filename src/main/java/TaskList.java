@@ -142,6 +142,28 @@ public class TaskList {
         return filteredList;
     }
 
+    Task addPriority(String[] info) throws DukeException {
+        String priorityLevel = info[2].toUpperCase();
+        int taskNumber = Integer.parseInt(info[1]) - 1;
+        Task task = taskList.get(taskNumber);
+        if (taskNumber >= listLength || taskNumber < 0) {
+            throw new DukeException("OOPS! You only have " + listLength + " tasks in your list.");
+        }
+        if (priorityLevel.equals(Priority.LOW.toString())) {
+            task.setPriority(Priority.LOW);
+            taskList.set(taskNumber, task);
+        } else if (priorityLevel.equals(Priority.MEDIUM.toString())) {
+            task.setPriority(Priority.MEDIUM);
+            taskList.set(taskNumber, task);
+        } else if (priorityLevel.equals(Priority.HIGH.toString())) {
+            task.setPriority(Priority.HIGH);
+            taskList.set(taskNumber, task);
+        } else {
+            throw new DukeException("Incorrect priority given!");
+        }
+        return task;
+    }
+
     public ArrayList<Task> getList() {
         return taskList;
     }

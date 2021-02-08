@@ -2,6 +2,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
+    protected Priority priority;
 
     public Task(String description, String type) {
         this.description = description;
@@ -21,5 +22,9 @@ public class Task {
     @Override
     public String toString() {
         return this.isDone ? "[X] " + description : "[ ] " + description;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }

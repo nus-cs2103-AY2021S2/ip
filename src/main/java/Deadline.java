@@ -1,5 +1,4 @@
 
-
 public class Deadline extends Task {
     protected Date by;
 
@@ -16,7 +15,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.toFormattedString() + ")";
+        String result = "[D]" + super.toString() + " (by: " + by.toFormattedString() + ")";
+        System.out.println(priority);
+        return priority != null
+                ? result + " " + "[" + priority.toString() + "]"
+                : result;
     }
 
 }

@@ -11,6 +11,10 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String result = "[T]" + super.toString();
+        System.out.println(priority);
+        return priority != null
+                ? result + " " + "[" + priority.toString() + "]"
+                : result;
     }
 }
