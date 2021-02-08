@@ -1,4 +1,4 @@
-package com.jetbrains;
+package duke;
 
 class Task {
     String task;
@@ -8,13 +8,23 @@ class Task {
     }
 
     Task(String task) {
-        this.task = task;
+        this.task = task.trim();
         isDone = false;
     }
 
     Task markDone() {
         isDone = true;
         return this;
+    }
+
+    static Task fileReader(String line) {
+        if (line.contains("TODO")) {
+            return ToDo.fileReader(line);
+        } else if (line.contains("DDLN")) {
+            return Deadline.fileReader(line);
+        } else {
+            return Event.fileReader(line);
+        }
     }
 
     @Override
