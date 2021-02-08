@@ -1,7 +1,5 @@
 package duke.common;
 
-import java.time.format.DateTimeParseException;
-
 /**
  * A utility class to consolidate all exceptions related to Duke.
  */
