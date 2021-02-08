@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
      * Executes the command.
      */
     public CommandResult execute(TaskList tasks, Storage storage) {
+        assert tasks != null : "TaskList cannot be null.";
         try {
             return new CommandResult(tasks.deleteTask(this.index), CommandResultType.CHAT_PASON);
         } catch (Exception e) {
