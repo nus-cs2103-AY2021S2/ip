@@ -44,6 +44,8 @@ public class Ui {
         }
     }
 
+    public void println(String s) {;}
+
     /**
      * Returns one line of user input from stdin, with message prompt to user.
      *

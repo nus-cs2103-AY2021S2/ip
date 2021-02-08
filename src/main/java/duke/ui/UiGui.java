@@ -59,7 +59,7 @@ public class UiGui extends Ui {
         dialogContainer.getChildren().add(getDialogLabel(text));
     }
 
-    private void println(String text) {
+    public void println(String text) {
         dialogContainer.getChildren().add(getDialogLabel(text + "\n"));
     }
 

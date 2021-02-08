@@ -131,6 +131,7 @@ public class Duke extends Application {
     private void handleUserInput() {
         try {
             String input = userInput.getText();
+            ui.println(input);
             DukeCommand cmd = DukeCommand.parse(input);
             cmd.execute(tasks, ui, loader);
             if (cmd.isExit()) {
