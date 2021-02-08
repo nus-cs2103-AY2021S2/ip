@@ -50,7 +50,6 @@ public class Gui extends AnchorPane implements Ui {
      */
     @FXML
     public void initialize() {
-        System.out.println("init");
         userInput.setOnAction(this::handleUserInput);
         sendButton.setOnAction(this::handleUserInput);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -132,7 +131,6 @@ public class Gui extends AnchorPane implements Ui {
      * @param stage The JavaFX stage to use.
      */
     public void start(Stage stage) {
-        System.out.println("start");
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
