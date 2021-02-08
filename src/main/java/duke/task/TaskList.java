@@ -3,6 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of tasks.
@@ -87,11 +88,9 @@ public class TaskList {
      * @return A serialized string of this task list.
      */
     public String serialize() {
-        StringBuilder serial = new StringBuilder();
-        for (Task t : tasks) {
-            serial.append(t.serialize()).append("\n");
-        }
-        return serial.toString();
+        return tasks.stream()
+                .map(task -> task.serialize() + "\n")
+                .collect(Collectors.joining());
     }
 
     /**
