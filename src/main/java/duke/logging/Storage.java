@@ -60,6 +60,7 @@ public class Storage {
      * @throws IOException  If file cannot be written or open.
      */
     public void overwrite(ArrayList<Task> tasks) throws IOException {
+        assert tasks != null : "Tasks cannot be null";
         FileWriter fw = new FileWriter(file);
         for (Task task : tasks) {
             fw.write(task.generateFileFormatString() + "\n");
@@ -73,6 +74,7 @@ public class Storage {
      * @throws IOException  If file cannot be written or open.
      */
     public void append(Task task) throws IOException {
+        assert task != null : "Tasks cannot be null";
         FileWriter fw = new FileWriter(file, true);
         fw.write(task.generateFileFormatString() + "\n");
         fw.close();
