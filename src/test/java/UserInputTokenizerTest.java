@@ -1,8 +1,10 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.exceptions.DukeExceptionIllegalCommand;
 import duke.parser.UserInputTokenSet;
 import duke.parser.UserInputTokenizer;
 
@@ -98,5 +100,10 @@ public class UserInputTokenizerTest {
         assertEquals("hi", tokenSet.get("/text"));
         assertEquals("cmd2", tokenSet.get("command"));
         assertEquals("hey", tokenSet.get("text"));
+    }
+
+    @Test
+    void parse_faultyInput_noCommand() {
+        assertThrows(DukeExceptionIllegalCommand.class, () -> UserInputTokenizer.parse(""));
     }
 }
