@@ -144,6 +144,7 @@ public class Gui extends AnchorPane implements Ui {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Ying Jen: Your Personal Assistant");
+            stage.setResizable(false);
             stage.getIcons().add(appIcon);
             stage.show();
         } catch (IOException e) {
