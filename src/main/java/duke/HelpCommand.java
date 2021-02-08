@@ -11,15 +11,15 @@ public class HelpCommand extends Command {
      * If it is, help message is printed.
      * Otherwise, it prints the exception faced.
      */
-    private void help() {
+    private String help() {
         try {
             if (parser.canParseHelpCommand(input)) {
-                ui.printHelp();
+                return ui.printHelp();
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
     }
 
@@ -27,7 +27,7 @@ public class HelpCommand extends Command {
      * Executes the help command.
      */
     @Override
-    public void execute() {
-        help();
+    public String execute() {
+        return help();
     }
 }

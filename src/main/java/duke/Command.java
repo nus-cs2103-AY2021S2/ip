@@ -27,5 +27,5 @@ public abstract class Command {
     /**
      * Executes the command based on the user input and task list.
      */
-    public abstract void execute();
+    public abstract String execute();
 }

@@ -11,17 +11,17 @@ public class DeleteTaskCommand extends Command {
      * If it is, it removes the task and prints the Delete message.
      * Otherwise, it prints the exception faced.
      */
-    private void removeTask() {
+    private String removeTask() {
         try {
             if (parser.canParseIndexCommand(input, taskList.getSize())) {
                 int index = parser.parseIndex(input);
                 Task deleted = taskList.deleteTask(index);
-                ui.printDeleteTask(deleted);
+                return ui.printDeleteTask(deleted);
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
     }
 
@@ -29,7 +29,7 @@ public class DeleteTaskCommand extends Command {
      * Executes the command to remove task.
      */
     @Override
-    public void execute() {
-        removeTask();
+    public String execute() {
+        return removeTask();
     }
 }

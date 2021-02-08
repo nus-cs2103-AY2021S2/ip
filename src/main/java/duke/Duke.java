@@ -3,49 +3,29 @@ package duke;
 import java.util.Scanner;
 
 public class Duke {
-    private TaskList tasks;
     private Storage storage;
     private Ui ui;
     private Parser parser;
+    private TaskList tasks;
 
     public Duke() {
-        this.tasks = new TaskList();
         this.storage = new Storage("C:/Users/Jeremias/Documents/GitHub/ip/data/", "data.txt");
         this.ui = new Ui();
         this.parser = new Parser();
+        this.tasks = new TaskList();
+        storage.loadTaskList(tasks);
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 
-    /**
-     * Starts the Duke program.
-     */
-    public void run() {
-        ui.printGreeting();
-        storage.loadTaskList(tasks);
-        Scanner sc = new Scanner(System.in);
-        boolean shouldExit = false;
-        while (!shouldExit) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                shouldExit = true;
-                ui.printBye();
-            } else {
-                executeCommand(input);
-                save();
-            }
-        }
-    }
 
     /**
      * Executes the command that the user inputs.
      *
      * @param input User input.
      */
-    private void executeCommand(String input) {
+    private String executeCommand(String input) {
         String command = parser.parseCommand(input);
         Command cmd = null;
         try {
@@ -61,16 +41,21 @@ public class Duke {
                 cmd = new HelpCommand(command, input, tasks);
             } else if (command.equals("find")) {
                 cmd = new FindCommand(command, input, tasks);
+            } else if (command.equals("bye")) {
+                cmd = new ByeCommand(command, input, tasks);
             } else {
                 throw new WrongCommandDukeException();
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
+        String str = "";
         if (cmd != null) {
-            cmd.execute();
+            str = cmd.execute();
             tasks = cmd.getTaskList();
+            save();
         }
+        return str;
     }
 
     /**
@@ -82,5 +67,21 @@ public class Duke {
             str += tasks.getTask(i).formatToSave() + "\n";
         }
         storage.saveTaskList(str);
+    }
+
+    public static String greeting() {
+        return new Ui().printGreeting();
+    }
+
+    public static String help() {
+        return new Ui().printHelp();
+    }
+
+    public String getResponse(String input) {
+        try {
+            return executeCommand(input);
+        } catch (Exception e) {
+            return ui.printError(e);
+        }
     }
 }

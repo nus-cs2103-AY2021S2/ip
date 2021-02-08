@@ -11,15 +11,15 @@ public class ListTaskCommand extends Command {
      * If it is, it prints the task list.
      * Otherwise, it prints the error faced.
      */
-    private void listTask() {
+    private String listTask() {
         try {
             if (parser.canParseListCommand(input)) {
-                ui.printTaskList(taskList);
+                return ui.printTaskList(taskList);
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
     }
 
@@ -27,7 +27,7 @@ public class ListTaskCommand extends Command {
      * Executes the list task command.
      */
     @Override
-    public void execute() {
-        listTask();
+    public String execute() {
+        return listTask();
     }
 }

@@ -11,17 +11,17 @@ public class DoneTaskCommand extends Command {
      * If it is, it marks the task as done and prints the Done message.
      * Otherwise, it prints the exception faced.
      */
-    private void doTask() {
+    private String doTask() {
         try {
             if (parser.canParseIndexCommand(input, taskList.getSize())) {
                 int index = parser.parseIndex(input);
                 taskList.doneTask(index);
-                ui.printDoneTask(taskList.getTask(index));
+                return ui.printDoneTask(taskList.getTask(index));
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
     }
 
@@ -29,7 +29,7 @@ public class DoneTaskCommand extends Command {
      * Executes the done task command.
      */
     @Override
-    public void execute() {
-        doTask();
+    public String execute() {
+        return doTask();
     }
 }

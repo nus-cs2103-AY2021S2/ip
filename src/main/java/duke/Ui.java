@@ -10,25 +10,23 @@ public class Ui {
     /**
      * Prints the greeting when Duke is started.
      */
-    public void printGreeting() {
-        printSpacer();
-        System.out.println("Hello my name is Mr. C!" +
+    public String printGreeting() {
+        String str = "Hello my name is Mr. C!" +
                 "\nYou may type the command 'help' to see my list of commands." +
-                "\nHow may I assist you?");
-        printSpacer();
+                "\nHow may I assist you?";
+        return str;
     }
 
     /**
      * Prints the goodbye message when Duke is exited.
      */
-    public void printBye() {
-        printSpacer();
-        System.out.println("Farewell sir/ma'am. I hope to see you again soon.");
-        printSpacer();
+    public String printBye() {
+        String str = "Farewell sir/ma'am. I hope to see you again soon.";
+        return str;
     }
 
-    private void printTask(Task task) {
-        System.out.println(task);
+    private String printTask(Task task) {
+        return task.toString();
     }
 
     /**
@@ -37,12 +35,11 @@ public class Ui {
      * @param task Task to be added.
      * @param size Number of tasks currently in the list.
      */
-    public void printAddTask(Task task, int size) {
-        printSpacer();
-        System.out.println("I have added the following task to your list:");
-        printTask(task);
-        System.out.println(String.format("There are %d tasks in your list. I hope this pleases you.", size));
-        printSpacer();
+    public String printAddTask(Task task, int size) {
+        String str = "I have added the following task to your list:\n" +
+                printTask(task) +
+                String.format("\nThere are %d tasks in your list. I hope this pleases you.", size);
+        return str;
     }
 
     /**
@@ -50,12 +47,11 @@ public class Ui {
      *
      * @param task Task to be marked as done.
      */
-    public void printDoneTask(Task task) {
-        printSpacer();
-        System.out.println("Congratulations on conquering this task:");
-        printTask(task);
-        System.out.println("You are one step closer to victory");
-        printSpacer();
+    public String printDoneTask(Task task) {
+        String str = "Congratulations on conquering this task:\n" +
+                printTask(task) +
+                "\nYou are one step closer to victory";
+        return str;
     }
 
     /**
@@ -63,12 +59,11 @@ public class Ui {
      *
      * @param task Task to be removed.
      */
-    public void printDeleteTask(Task task) {
-        printSpacer();
-        System.out.println("I have removed the following task from your list:");
-        printTask(task);
-        System.out.println("Does this bring you the satisfaction you so crave?");
-        printSpacer();
+    public String printDeleteTask(Task task) {
+        String str = "I have removed the following task from your list:\n" +
+                printTask(task) +
+                "\nDoes this bring you the satisfaction you so crave?";
+        return str;
     }
 
     /**
@@ -76,14 +71,15 @@ public class Ui {
      *
      * @param taskList List of tasks.
      */
-    public void printTaskList(TaskList taskList) {
-        printSpacer();
-        System.out.println("Here are the tasks in your list:");
+    public String printTaskList(TaskList taskList) {
+        String str = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.getSize(); i++) {
-            System.out.println(String.format("%d. ", i) + taskList.getTask(i - 1).toString());
+            str += String.format("%d. ", i) +
+                    taskList.getTask(i - 1).toString() +
+                    "\n";
         }
-        System.out.println("\nDo what you will with this information.");
-        printSpacer();
+        str += "Do what you will with this information.";
+        return str;
     }
 
     /**
@@ -91,29 +87,27 @@ public class Ui {
      *
      * @param e Exception that has occurred.
      */
-    public void printError(DukeException e) {
-        printSpacer();
-        System.out.println(e);
-        printSpacer();
+    public String printError(Exception e) {
+        return e.toString();
     }
 
     /**
      * Prints the help message.
      */
-    public void printHelp() {
-        printSpacer();
-        System.out.println("These are the following commands that I understand:");
-        System.out.println("'help' (shows the list of commands)");
-        System.out.println("'list' (shows the list of tasks you have on your list)");
-        System.out.println("'todo (task description)' (adds a To Do task to your list)");
-        System.out.println("'deadline (task description) /by (DD/MM/YYYY TIME)' (adds a Deadline task to your list)");
-        System.out.println("'event (task description) /from (DD/MM/YYYY TIME) /to (DD/MM/YYYY TIME)' (adds an Event task to your list)");
-        System.out.println("'done (valid index)' (checks a task on your list)");
-        System.out.println("'delete (valid index)' (removes a task from your list)");
-        System.out.println("'find (keyword)' (searches for all tasks in your list containing the keyword)");
-        System.out.println("Do omit the parentheses in the actual command.");
-        System.out.println("I pray that I will be of use to you.");
-        printSpacer();
+    public String printHelp() {
+        String str = "These are the following commands that I understand:" +
+                "\n'help' (shows the list of commands)" +
+                "\n'list' (shows the list of tasks you have on your list)" +
+                "\n'todo (task description)' (adds a To Do task to your list)" +
+                "\n'deadline (task description) /by (DD/MM/YYYY TIME)' (adds a Deadline task to your list)" +
+                "\n'event (task description) /from (DD/MM/YYYY TIME) /to (DD/MM/YYYY TIME)' (adds an Event task to your list)" +
+                "\n'done (valid index)' (checks a task on your list)" +
+                "\n'delete (valid index)' (removes a task from your list)" +
+                "\n'find (keyword)' (searches for all tasks in your list containing the keyword)" +
+                "\n'bye' (exits Duke)" +
+                "\nDo omit the parentheses in the actual command." +
+                "\nI pray that I will be of use to you.";
+        return str;
     }
 
     /**
@@ -121,13 +115,13 @@ public class Ui {
      *
      * @param taskList Task list that only contains found tasks.
      */
-    public void printFoundTaskList(TaskList taskList) {
-        printSpacer();
-        System.out.println("Here are the tasks that fit your search criteria:");
+    public String printFoundTaskList(TaskList taskList) {
+        String str = "Here are the tasks that fit your search criteria:\n";
         for (int i = 1; i <= taskList.getSize(); i++) {
-            System.out.println(String.format("%d. ", i) + taskList.getTask(i - 1).toString());
+            str += String.format("%d. ", i) +
+                    taskList.getTask(i - 1).toString() + "\n";
         }
-        System.out.println("I can only pray that I have been of use to you.");
-        printSpacer();
+        str += "I can only pray that I have been of use to you.";
+        return str;
     }
 }

@@ -11,7 +11,7 @@ public class FindCommand extends Command {
      * If it is, it prints the find message.
      * Otherwise, it prints the exception faced.
      */
-    private void find() {
+    private String find() {
         try {
             if (parser.canParseFindCommand(input)) {
                 String keyword = parser.parseKeyword(input);
@@ -25,13 +25,13 @@ public class FindCommand extends Command {
                 if (tempTaskList.getSize() == 0) {
                     throw new NoSuchKeywordException(keyword);
                 } else {
-                    ui.printFoundTaskList(tempTaskList);
+                    return ui.printFoundTaskList(tempTaskList);
                 }
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
     }
 
@@ -39,7 +39,7 @@ public class FindCommand extends Command {
      * Executes the find command.
      */
     @Override
-    public void execute() {
-        find();
+    public String execute() {
+        return find();
     }
 }

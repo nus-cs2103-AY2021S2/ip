@@ -14,18 +14,18 @@ public class AddTaskCommand extends Command {
      * If it is, it adds the To-do to the task list and prints the Add task message.
      * Otherwise, it prints the exception faced.
      */
-    private void addTodo() {
+    private String addTodo() {
         try {
             if (parser.canParseTodo(input)) {
                 String description = parser.parseTodoDescription(input);
                 Task task = new Todo(description);
                 taskList.addTask(task);
-                ui.printAddTask(task, taskList.getSize());
+                return ui.printAddTask(task, taskList.getSize());
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
     }
 
@@ -34,7 +34,7 @@ public class AddTaskCommand extends Command {
      * If it is, it adds the Deadline to the task list and prints the Add task message.
      * Otherwise, it prints the exception faced.
      */
-    private void addDeadline() {
+    private String addDeadline() {
         try {
             if (parser.canParseDeadline(input)) {
                 try {
@@ -42,15 +42,15 @@ public class AddTaskCommand extends Command {
                     String description = parser.parseDeadlineDescription(input);
                     Deadline task = new Deadline(dateTime, description);
                     taskList.addTask(task);
-                    ui.printAddTask(task, taskList.getSize());
+                    return ui.printAddTask(task, taskList.getSize());
                 } catch (DateTimeParseException e) {
-                    ui.printError(new WrongFormatDukeException(command));
+                    return ui.printError(new WrongFormatDukeException(command));
                 }
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
     }
 
@@ -59,7 +59,7 @@ public class AddTaskCommand extends Command {
      * If it is, it adds the Event to the task list and prints the Add task message.
      * Otherwise, it prints the exception faced.
      */
-    private void addEvent() {
+    private String addEvent() {
         try {
             if (parser.canParseEvent(input)) {
                 try {
@@ -68,15 +68,15 @@ public class AddTaskCommand extends Command {
                     String description = parser.parseEventDescription(input);
                     Event task = new Event(startDateTime, endDateTime, description);
                     taskList.addTask(task);
-                    ui.printAddTask(task, taskList.getSize());
+                    return ui.printAddTask(task, taskList.getSize());
                 } catch (DateTimeParseException e) {
-                    ui.printError(new WrongFormatDukeException(command));
+                    return ui.printError(new WrongFormatDukeException(command));
                 }
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            return ui.printError(e);
         }
     }
 
@@ -84,13 +84,15 @@ public class AddTaskCommand extends Command {
      * Executes the add task command.
      */
     @Override
-    public void execute() {
+    public String execute() {
         if (command.equals("todo")) {
-            addTodo();
+            return addTodo();
         } else if (command.equals("deadline")) {
-            addDeadline();
+            return addDeadline();
         } else if (command.equals("event")) {
-            addEvent();
+            return addEvent();
+        } else {
+            return "Something went wrong";
         }
     }
 }

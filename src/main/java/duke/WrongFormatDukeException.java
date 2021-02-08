@@ -9,6 +9,7 @@ public class WrongFormatDukeException extends DukeException {
     private final String LIST = "list";
     private final String HELP = "help";
     private final String FIND = "find (keyword)";
+    private final String BYE = "bye";
     private String command;
 
     public WrongFormatDukeException(String command) {
@@ -39,6 +40,8 @@ public class WrongFormatDukeException extends DukeException {
             str += HELP;
         } else if (command.equals("find")) {
             str += FIND;
+        } else if (command.equals("bye")) {
+            str += BYE;
         }
         return str;
     }
