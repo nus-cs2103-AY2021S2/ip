@@ -1,7 +1,7 @@
 package duke.tasks;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
-import duke.parser.Parser;
+import duke.parser.DatetimeParser;
 
 import java.time.LocalDateTime;
 
@@ -42,7 +42,7 @@ public class Deadline extends DateTask {
      * Input validation for date present. Dates should be provided as an argument
      * to the '/by' flag, following the description, e.g.
      * {@code deadline <description> /by <datetime>}.
-     * Datetime formats are specified in {@link duke.parser.Parser }.
+     * Datetime formats are specified in {@link DatetimeParser }.
      *
      * @param s User input.
      * @return Deadline.
@@ -63,7 +63,7 @@ public class Deadline extends DateTask {
                     "An deadline must have both description and time,\ndelimited by '/by'.");
         }
 
-        LocalDateTime dt = Parser.parseDate(tokens[1].strip());
+        LocalDateTime dt = DatetimeParser.parseDate(tokens[1].strip());
         return new Deadline(tokens[0], dt);
     }
 
@@ -74,7 +74,7 @@ public class Deadline extends DateTask {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Parser.formatDate(datetime) + ")";
+        return "[D]" + super.toString() + " (by: " + DatetimeParser.formatDate(datetime) + ")";
     }
 
     /**
@@ -83,6 +83,6 @@ public class Deadline extends DateTask {
      * @return String representation of Deadline.
      */
     public String toFileString() {
-        return "D\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + Parser.formatDateISO(datetime);
+        return "D\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + DatetimeParser.formatDateISO(datetime);
     }
 }

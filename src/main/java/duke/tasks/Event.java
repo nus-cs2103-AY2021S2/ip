@@ -1,7 +1,8 @@
 package duke.tasks;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
-import duke.parser.Parser;
+import duke.parser.DatetimeParser;
+import duke.parser.UserInputTokenSet;
 
 import java.time.LocalDateTime;
 
@@ -41,28 +42,23 @@ public class Event extends DateTask {
      * Input validation for date present. Dates should be provided as an argument
      * to the '/at' flag, following the description, e.g.
      * {@code event <description> /at <datetime>}.
-     * Datetime formats are specified in {@link duke.parser.Parser }.
+     * Datetime formats are specified in {@link DatetimeParser }.
      *
      * @param s User input.
      * @return Event.
      * @throws DukeExceptionIllegalArgument When description is empty, datetime is empty,
      *                                      or datetime is invalid.
      */
-    public static Event parse(String s) throws DukeExceptionIllegalArgument {
-        if (s.equals("")) {
+    public static Event parse(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
+        if (tokenSet.get("/text").isEmpty()) {
             throw new DukeExceptionIllegalArgument("The description of an event cannot be empty.");
         }
-
-        String[] tokens = s.split(" /at ");
-        if (tokens[0].equals("")) {
-            throw new DukeExceptionIllegalArgument("The description of an event cannot be empty.");
-        }
-        if (tokens.length == 1 || tokens[1].equals("")) {
+        if (tokenSet.get("at").isEmpty()) {
             throw new DukeExceptionIllegalArgument(
                     "An event must have both description and time,\ndelimited by '/at'.");
         }
 
-        LocalDateTime dt = Parser.parseDate(tokens[1].strip());
+        LocalDateTime dt = DatetimeParser.parseDate(tokens[1].strip());
         return new Event(tokens[0], dt);
     }
 
@@ -73,7 +69,7 @@ public class Event extends DateTask {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Parser.formatDate(datetime) + ")";
+        return "[E]" + super.toString() + " (at: " + DatetimeParser.formatDate(datetime) + ")";
     }
 
     /**
@@ -82,6 +78,6 @@ public class Event extends DateTask {
      * @return String representation of Event.
      */
     public String toFileString() {
-        return "E\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + Parser.formatDateISO(datetime);
+        return "E\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + DatetimeParser.formatDateISO(datetime);
     }
 }

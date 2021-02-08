@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
  *
  * Handles primarily date parsing.
  */
-public class Parser {
+public class DatetimeParser {
 
     /**
      * List of supported datetime formats for parsing,

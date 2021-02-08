@@ -1,17 +1,13 @@
 import duke.exceptions.DukeExceptionIllegalArgument;
-import duke.parser.Parser;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-import static duke.parser.Parser.parseDate;
+import static duke.parser.DatetimeParser.parseDate;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParserTest {
+public class DatetimeParserTest {
 
 
     // No idea how to test for current dates...
