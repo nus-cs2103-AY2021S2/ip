@@ -18,15 +18,15 @@ public class ByeCommand extends Command {
     /**
      * Executes program exit.
      *
-     * @param taskList The list of tasks.
+     * @param tasks The list of tasks.
      * @param storage  The storage handler.
      * @return Output for GUI.
      * @throws DukeException If there is storage operation error.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         storage.clear();
-        storage.save(taskList.getTaskList());
+        storage.save(tasks.getTaskList());
         return "     Bye. Hope to see you again soon!";
     }
 }
