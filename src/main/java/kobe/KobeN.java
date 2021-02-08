@@ -151,8 +151,8 @@ public class KobeN extends Application {
         Label kobeText = new Label(getResponse(userInput.getText()));
 
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(kobeText, new ImageView(kobe))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getKobeDialog(kobeText, new ImageView(kobe))
         );
 
         userInput.clear();
