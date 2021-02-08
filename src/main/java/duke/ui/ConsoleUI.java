@@ -100,24 +100,16 @@ public class ConsoleUI {
      * @param taskArr array of Task objects
      */
     public String list(Task[] taskArr) {
-        String output = "++++++++++++++++++++++++++++++++++++\n" +
-                "Here are the tasks in your list: \n" +
-                "TaskType | isDone | taskName | time (if any)\n";
-        /*
-        System.out.println("+++++++++++++++++++++++++++++++++++++");
-        System.out.println("Here are the tasks in your list: ");
-        System.out.println("TaskType | isDone | taskName | time (if any)");
-        */
+        String output = "++++++++++++++++++++++++++++++++++++\n"
+                + "Here are the tasks in your list: \n"
+                + "TaskType | isDone | taskName | time (if any)\n";
         for (Task t : taskArr) {
             if (t == null) {
                 break;
             }
-            // System.out.println(t.toString());
             output = output + t.toString() + "\n";
         }
-        // System.out.println("+++++++++++++++++++++++++++++++++++++");
         output = output + "++++++++++++++++++++++++++++++++++++\n";
-
         return output;
     }
 

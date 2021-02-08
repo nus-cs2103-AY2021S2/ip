@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
 import java.io.IOException;
 import java.util.Collections;
 
@@ -25,6 +24,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor
+     * @param text Text to display on screen.
+     * @param img Image to display on screen, user currently manually sets the image in MainWindow.java.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,10 +53,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Show user side input (right side of window).
+     * @param text Text to display on screen.
+     * @param img User image to display on screen, user currently manually sets the image in MainWindow.java.
+     * @return
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Show duke side output (left side of window).
+     * @param text Text to display on screen.
+     * @param img Duke image to display on screen, user currently manually sets the image in MainWindow.java.
+     * @return
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

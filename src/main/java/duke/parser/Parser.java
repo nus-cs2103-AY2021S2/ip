@@ -10,6 +10,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Parser for user input and spits output if input is valid.
+ * If input invalid, spits error messages.
+ */
 public class Parser {
     ConsoleUI ui;
     boolean isBye;
@@ -17,7 +21,8 @@ public class Parser {
 
     /**
      * Constructor of the Parser.
-     * @param ui Handler for user interface.
+     *
+     * @param ui        Handler for user interface.
      * @param validator Valid date format for tasks.
      */
     public Parser(ConsoleUI ui, DateValidator validator) {
@@ -50,12 +55,12 @@ public class Parser {
 
     /**
      * Parses lines of user input and outputs corresponding command.
-     * @param tasks List of tasks from file.
+     *
+     * @param tasks        List of tasks from file.
      * @param taskIterator Integer to count number of tasks at a time.
      * @return New number of tasks after any addition or deletion.
      */
     public Tuple2<Integer, String> parseInput(String input, Task[] tasks, int taskIterator) {
-        // String input = ui.nextLine();
         String[] inputArr = input.split(" ", 2);
         Tuple2 results = new Tuple2();
         results.setInteger(taskIterator);
@@ -67,14 +72,11 @@ public class Parser {
                 results = new Tuple2(taskIterator, ui.bye());
                 break;
             case "list":
-                // ui.list(tasks);
-                // System.out.println("Num tasks: " + taskIterator);
                 results = new Tuple2(taskIterator, ui.list(tasks));
                 break;
             case "done":
                 int taskNum = Integer.parseInt(inputArr[1]) - 1;
                 tasks[taskNum].markDone();
-                // ui.markDone(tasks[taskNum].toFormattedString());
                 results = new Tuple2(taskIterator, ui.markDone(tasks[taskNum].toFormattedString()));
                 break;
             case "todo":
@@ -107,15 +109,13 @@ public class Parser {
                     }
                 }
                 taskIterator = taskIterator + 1;
-                // ui.addTaskMessage(tasks[taskIterator - 1].toFormattedString(), taskIterator);
-                results = new Tuple2(taskIterator, ui.addTaskMessage(tasks[taskIterator - 1].toFormattedString(), taskIterator));
+                results = new Tuple2(taskIterator,
+                        ui.addTaskMessage(tasks[taskIterator - 1].toFormattedString(), taskIterator));
                 break;
             case "delete":
                 int removeIndex = Integer.parseInt(inputArr[1]);
                 taskIterator = taskIterator - 1; // reduce task count in list
-                // ui.deleteTaskMessage(tasks[removeIndex - 1].toFormattedString(), taskIterator);
                 Task removedTask = tasks[removeIndex - 1];
-                // actually delete the task and move all other tasks forward
                 for (int i = removeIndex - 1; i < tasks.length - 1; i++) {
                     tasks[i] = tasks[i + 1];
                 }

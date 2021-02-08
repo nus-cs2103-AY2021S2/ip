@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Chatbot Duke created from the Duke Project Template, a greenfield Java Project.
+ */
 public class Duke {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/you.jpg"));
@@ -25,41 +28,23 @@ public class Duke {
     private Task[] tasks;
     private Storage storage;
 
+    /**
+     * Default constructor to be passed to Main, which will output based on the methods called by Duke.
+     */
     public Duke() {
         dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
         validator = new DateValidatorLocalDate(dateFormatter);
         ui = new ConsoleUI(System.in);
-        // ui.introduction();
         parser = new Parser(ui, validator);
         tasks = new Task[100];
         storage = new Storage("./src/main/java/duke/data/taskList.txt");
         taskIterator = storage.readTaskListToArray(tasks, validator);
     }
-    /**
-     * Chatbot Duke created from the Duke Project Template, a greenfield Java Project
-     */
-    /*
-    public static void main(String[] args) {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
-        DateValidator validator = new DateValidatorLocalDate(dateFormatter);
-        ConsoleUI ui = new ConsoleUI(System.in);
-        ui.introduction();
-        Parser parser = new Parser(ui, validator);
-        Task[] tasks = new Task[100];
-        Storage storage = new Storage("./src/main/java/duke/data/taskList.txt");
-        int taskIterator = storage.readTaskListToArray(tasks, validator);
-
-        while (parser.getIsBye() == false) {
-            taskIterator = parser.parseInput(tasks, taskIterator);
-        }
-        storage.writeTasks(tasks);
-        ui.bye();
-    }
-    */
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Outputs the correct results given user input.
+     * @param input User input.
+     * @return Output in string after processing by Duke.
      */
     public String getResponse(String input) {
         Tuple2 results = parser.parseInput(input, tasks, taskIterator);
