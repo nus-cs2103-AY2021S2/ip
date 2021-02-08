@@ -34,6 +34,7 @@ public class Duke {
      * @throws IOException If an error occurs while writing to the file.
      */
     public String addTodo(Command command) throws IOException {
+        assert command != null : "Command should be defined";
         Task todo = new Todo(command.getArgs());
         tasks.add(todo);
         storage.writeToFile(todo);
@@ -49,6 +50,7 @@ public class Duke {
      * @throws DateTimeParseException If date provided is not of the "dd/mm/yyyy hhmm" or "dd/mm/yyyy" format.
      */
     public String addDeadline(Command command) throws IOException, DateTimeParseException {
+        assert command != null : "Command should be defined";
         String[] parts = command.getArgs().split("/by");
 
         if (parts.length != 2) {
@@ -69,6 +71,7 @@ public class Duke {
      * @throws IOException If an error occurs while writing to the file.
      */
     public String addEvent(Command command) throws IOException {
+        assert command != null : "Command should be defined";
         String[] parts = command.getArgs().split("/at");
 
         if (parts.length != 2) {
@@ -89,6 +92,7 @@ public class Duke {
      * @throws IOException If an error occurs while writing to the file.
      */
     public String done(Command command) throws IOException {
+        assert command != null : "Command should be defined";
         int index = getIndex(command.getArgs());
 
         if (index < 0 || index >= tasks.size()) {
@@ -108,6 +112,7 @@ public class Duke {
      * @throws IOException If an error occurs while writing to the file.
      */
     public String delete(Command command) throws IOException {
+        assert command != null : "Command should be defined";
         int index = getIndex(command.getArgs());
 
         if (index < 0 || index >= tasks.size()) {
@@ -126,6 +131,7 @@ public class Duke {
      * @return Reply to find command
      */
     public String find(Command command) {
+        assert command != null : "Command should be defined";
         String keyword = command.getArgs();
 
         TaskList matchingTasks = tasks.findMatchingTasks(keyword);
