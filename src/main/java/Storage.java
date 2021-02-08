@@ -22,10 +22,6 @@ public class Storage {
     this.file = filestr;
   }
 
-  public Storage() {
-
-  }
-
   /**
    * Iterates through the task arraylist and stores each element into a textfile.
    */

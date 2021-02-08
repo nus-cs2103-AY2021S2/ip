@@ -20,7 +20,7 @@ public class TaskList {
    * Iterates the arraylist and outputs each tasks inside.
    */
 
-  public String list() {
+  public String listTask() {
     int i = 1;
     StringBuilder output = new StringBuilder("\tHere are the tasks in your list:\n");
     for (Task task : tasklist) {
@@ -42,8 +42,8 @@ public class TaskList {
 
   public String delete(int num) {
     Task task = this.tasklist.remove(num - 1);
-    String output = "\tNoted. I've removed this task: \n" + task + "\n" +
-            "Now you have " + this.tasklist.size() + " tasks in the list.";
+    String output = "\tNoted. I've removed this task: \n" + task + "\n"
+            + "Now you have " + this.tasklist.size() + " tasks in the list.";
     return output;
   }
 
@@ -51,7 +51,7 @@ public class TaskList {
    * Outputs matching taks in the arraylist to a keyword
    */
 
-  public String findtask(String keyword) {
+  public String findTask(String keyword) {
     ArrayList<Task> list = new ArrayList<>();
     int i = 1;
     for (Task t : this.tasklist) {
