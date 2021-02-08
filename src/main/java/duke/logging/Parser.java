@@ -31,19 +31,22 @@ public class Parser {
             taskDescription = "";
         }
 
-        if (type.equals("list")) {
+        switch (type) {
+        case "list":
             return new ListCommand(taskDescription);
-        } else if (type.equals("bye")) {
-            return new ByeCommand(taskDescription);
-        } else if (type.equals("todo") || type.equals("deadline") || type.equals("event")) {
+        case "bye":
+            new ByeCommand(taskDescription);
+        case "todo":
+        case "deadline":
+        case "event":
             return new AddCommand(type, taskDescription);
-        } else if (type.equals("done")) {
+        case "done":
             return new DoneCommand(taskDescription);
-        } else if (type.equals("delete")) {
+        case "delete":
             return new DeleteCommand(taskDescription);
-        } else if (type.equals("find")) {
+        case "find":
             return new FindCommand(taskDescription);
-        } else {
+        default:
             return new UnknownCommand(taskDescription);
         }
     }
