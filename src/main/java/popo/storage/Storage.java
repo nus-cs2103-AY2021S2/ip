@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import popo.tasks.DeadlineTask;
+import popo.tasks.DurationTask;
 import popo.tasks.EventTask;
 import popo.tasks.PeriodTask;
 import popo.tasks.Task;
@@ -33,6 +37,10 @@ public class Storage {
 
     private static final int TASK_NOT_COMPLETED = 0;
     private static final int TASK_COMPLETED = 1;
+
+    private static final String UNIT_DAYS = "day(s)";
+    private static final String UNIT_HOURS = "hour(s)";
+    private static final String UNIT_MINUTES = "minute(s)";
 
     private final Path path;
 
@@ -149,6 +157,9 @@ public class Storage {
                 String periodTaskEndDateString = arr[4].strip();
                 return createPeriodTaskFromString(taskName, isTaskCompleted,
                         periodTaskStartDateString, periodTaskEndDateString);
+            case DurationTask.IDENTIFIER:
+                String durationTaskDescription = arr[3].strip();
+                return createDurationTaskFromString(taskName, isTaskCompleted, durationTaskDescription);
             default:
                 throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
             }
@@ -209,6 +220,35 @@ public class Storage {
         }
     }
 
+    private Task createDurationTaskFromString(String name, boolean isTaskCompleted, String durationString)
+            throws StorageException {
+        try {
+            String[] durationArr = durationString.split("\\s", 2);
+            String amountString = durationArr[0].strip();
+            String unitString = durationArr[1].strip();
+            long amount = Long.parseLong(amountString);
+            TemporalUnit unit;
+            switch (unitString) {
+            case UNIT_DAYS:
+                unit = ChronoUnit.DAYS;
+                break;
+            case UNIT_HOURS:
+                unit = ChronoUnit.HOURS;
+                break;
+            case UNIT_MINUTES:
+                unit = ChronoUnit.MINUTES;
+                break;
+            default:
+                throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
+            }
+            assert unit != null;
+            Duration duration = Duration.of(amount, unit);
+            return new DurationTask(name, isTaskCompleted, duration);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
+        }
+    }
+
     /**
      * Converts a list of tasks into a list of strings formatted to be stored in a file.
      *
@@ -260,6 +300,11 @@ public class Storage {
             encodedTaskString.append(periodTask.getStartDate());
             encodedTaskString.append(" | ");
             encodedTaskString.append(periodTask.getEndDate());
+            break;
+        case DurationTask.IDENTIFIER:
+            DurationTask durationTask = (DurationTask) task;
+            encodedTaskString.append(" | ");
+            encodedTaskString.append(durationTask.getDuration());
             break;
         default:
             throw new AssertionError(taskType);

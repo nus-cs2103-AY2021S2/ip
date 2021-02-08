@@ -9,8 +9,11 @@ import static popo.utils.Messages.MESSAGE_INVALID_SYNTAX;
 import static popo.utils.Messages.MESSAGE_INVALID_TASK_INDEX;
 import static popo.utils.Messages.MESSAGE_MISSING_SEARCH_WORD;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +22,7 @@ import popo.commands.Command;
 import popo.commands.DeadlineCommand;
 import popo.commands.DeleteCommand;
 import popo.commands.DoneCommand;
+import popo.commands.DurationCommand;
 import popo.commands.EventCommand;
 import popo.commands.FindCommand;
 import popo.commands.HelpCommand;
@@ -71,6 +75,8 @@ public class Parser {
             return parseArgumentsForPeriod(arguments);
         case EventCommand.COMMAND_WORD:
             return parseArgumentsForEvent(arguments);
+        case DurationCommand.COMMAND_WORD:
+            return parseArgumentsForDuration(arguments);
         case ByeCommand.COMMAND_WORD:
             return new ByeCommand();
         case DoneCommand.COMMAND_WORD:
@@ -196,6 +202,51 @@ public class Parser {
         String eventTaskName = eventInputArr[0].strip();
         String eventTime = eventInputArr[1].strip();
         return new EventCommand(eventTaskName, eventTime);
+    }
+
+    /**
+     * Parses the arguments for the duration command.
+     *
+     * @param arguments User input arguments string.
+     * @return {@code DurationCommand}.
+     * @throws NoDescriptionException      If the description of the task is empty.
+     * @throws InvalidDescriptionException If the format of the duration is invalid.
+     */
+    private Command parseArgumentsForDuration(String arguments) throws NoDescriptionException,
+            InvalidDescriptionException {
+        if (arguments.isBlank()) {
+            throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
+        }
+        if (!arguments.contains("/days") && !arguments.contains("/hours") && !arguments.contains("/minutes")) {
+            throw new InvalidDescriptionException(MESSAGE_INVALID_SYNTAX + "\n"
+                    + MESSAGE_FOLLOW_USAGE + "\n"
+                    + DurationCommand.MESSAGE_USAGE);
+        }
+        try {
+            String[] durationInputArr;
+            TemporalUnit unit;
+            if (arguments.contains("/days")) {
+                durationInputArr = arguments.split("/days", 2);
+                unit = ChronoUnit.DAYS;
+            } else if (arguments.contains("/hours")) {
+                durationInputArr = arguments.split("/hours", 2);
+                unit = ChronoUnit.HOURS;
+            } else {
+                assert arguments.contains("/minutes");
+                durationInputArr = arguments.split("/minutes", 2);
+                unit = ChronoUnit.MINUTES;
+            }
+            assert durationInputArr != null;
+            assert durationInputArr.length == 2;
+            assert unit != null;
+            String durationTaskName = durationInputArr[0].strip();
+            String durationString = durationInputArr[1].strip();
+            long amount = Long.parseLong(durationString);
+            Duration duration = Duration.of(amount, unit);
+            return new DurationCommand(durationTaskName, duration);
+        } catch (NumberFormatException ex) {
+            throw new InvalidDescriptionException("Please enter a valid number.");
+        }
     }
 
     /**
