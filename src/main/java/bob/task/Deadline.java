@@ -1,13 +1,16 @@
 package bob.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a deadline task
  */
 public class Deadline extends Task {
-    private LocalDate deadline;
-    private String time;
+    private final LocalDate deadline;
+    private final LocalTime time;
 
     /**
      * Constructor of a deadline
@@ -15,7 +18,7 @@ public class Deadline extends Task {
      * @param deadline The deadline of the task
      * @param time The due time of the task
      */
-    public Deadline(String name, LocalDate deadline, String time) {
+    public Deadline(String name, LocalDate deadline, LocalTime time) {
         super(name);
         this.deadline = deadline;
         this.time = time;
@@ -28,7 +31,7 @@ public class Deadline extends Task {
      * @param deadline The deadline of the task
      * @param time The due time of the task
      */
-    public Deadline(String name, boolean isDone, LocalDate deadline, String time) {
+    public Deadline(String name, boolean isDone, LocalDate deadline, LocalTime time) {
         super(name, isDone);
         this.deadline = deadline;
         this.time = time;
@@ -38,8 +41,18 @@ public class Deadline extends Task {
         return this.deadline;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return this.time;
+    }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return LocalDateTime.of(deadline, time);
+    }
+
+    @Override
+    public String getType() {
+        return "D";
     }
 
     /**
@@ -52,8 +65,9 @@ public class Deadline extends Task {
         if (this.isDone) {
             head = "[D][X] ";
         }
-        return head + this.name + " (by: " + this.deadline.getMonth() + " "
-                + this.deadline.getDayOfMonth() + " " + this.deadline.getYear() + " "
-                + this.time + ")";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
+        return head + this.name + " (by: " + this.deadline.format(dateFormatter)
+                + " " + this.time.format(timeFormatter) + ")";
     }
 }

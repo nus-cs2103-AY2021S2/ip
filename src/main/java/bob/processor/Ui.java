@@ -22,31 +22,28 @@ public class Ui {
      * @return A boolean value indicating whether to continue taking in commands or not
      */
     public String respondToCommand(String userInput, TaskList taskList, Storage storage) {
-        String[] wordsInInput = userInput.split(" ");
-        Parser parser = new Parser();
-        Command command = parser.parseCommand(wordsInInput);
+        String[] wordsInInput = userInput.split(" ", 2);
+        String command = wordsInInput[0].toLowerCase();
 
         switch (command) {
-        case BYE:
+        case "bye":
             return Command.BYE.executeCommand(userInput, taskList, storage);
-        case LIST:
+        case "list":
             return Command.LIST.executeCommand(userInput, taskList, storage);
-        case FIND:
+        case "find":
             return Command.FIND.executeCommand(userInput, taskList, storage);
-        case DONE:
+        case "done":
             return Command.DONE.executeCommand(userInput, taskList, storage);
-        case DELETE:
+        case "delete":
             return Command.DELETE.executeCommand(userInput, taskList, storage);
-        case TODO:
+        case "todo":
             return Command.TODO.executeCommand(userInput, taskList, storage);
-        case EVENT:
+        case "event":
             return Command.EVENT.executeCommand(userInput, taskList, storage);
-        case DEADLINE:
+        case "deadline":
             return Command.DEADLINE.executeCommand(userInput, taskList, storage);
-        case INVALID:
-            return Command.INVALID.executeCommand(userInput, taskList, storage);
         default:
-            return "";
+            return Command.INVALID.executeCommand(userInput, taskList, storage);
         }
     }
 }

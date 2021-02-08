@@ -22,6 +22,11 @@ public class Todo extends Task {
         super(name, isDone);
     }
 
+    @Override
+    public String getType() {
+        return "T";
+    }
+
     /**
      * Prints out the details of Todo task, including the status and name
      * @return A string representing the Todo task
