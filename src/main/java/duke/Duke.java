@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.command.Parser;
 
@@ -18,7 +16,7 @@ public class Duke {
     /**
      * Sole constructor for class Duke.
      *
-     * @param filePath the file path location at which Duke stores data.
+     * @param filePath the file path location at which Duke stores data
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -33,41 +31,14 @@ public class Duke {
     }
 
     /**
-     * Runs the program. This method is the starting point of the program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        final Scanner scan = new Scanner(System.in);
-        while (!isExit && scan.hasNextLine()) {
-            final String input = scan.nextLine().strip();
-            ui.showLine();
-
-            if (input.equals("")) {
-                System.out.println("\t...");
-            } else {
-                try {
-                    final Command command = Parser.parseCommand(input);
-                    System.out.print(command.executeAndGetResponse(tasks, ui, storage));
-                    isExit = command.isExit();
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-            ui.showLine();
-        }
-        scan.close();
-
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response from Duke by entering an user input command.
+     *
+     * @param   input   input command by the user
+     * @return          appropriate response to the input command
      */
     public String getResponse(String input) {
         if (input.equals("")) {
-            return"\t...";
+            return "\t...";
         } else {
             try {
                 final Command command = Parser.parseCommand(input);
@@ -76,15 +47,6 @@ public class Duke {
                 return e.getMessage();
             }
         }
-    }
-
-    /**
-     * Runs the program with the file path location of "./data/task.txt".
-     *
-     * @param args unused
-     */
-    public static void main(final String[] args) {
-        new Duke("./data/tasks.txt").run();
     }
 
 }
