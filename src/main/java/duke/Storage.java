@@ -42,6 +42,7 @@ public class Storage {
         try {
             File file = new File(LIST_FILE);
             FileWriter fw;
+            //If file already exists and we are not overwriting it
             if (file.exists() && !clearFile) {
                 fw = new FileWriter(LIST_FILE, true);
             } else {

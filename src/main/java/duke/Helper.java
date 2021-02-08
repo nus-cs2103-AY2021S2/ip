@@ -38,8 +38,14 @@ public class Helper {
         return join(arr, start, arr.length - 1);
     }
 
+
     public static <T> int arrayIndexOf(T[] arr, T value) {
-        return IntStream.range(0, arr.length).filter(i -> arr[i].equals(value)).findFirst().orElse(-1);
+        IntStream myStream = IntStream.range(0, arr.length);
+        //Filters the stream to get indices of array which has elements equal to value that we are looking for.
+        IntStream filteredStream = myStream.filter(i -> arr[i].equals(value));
+        //First index in the stream.
+        int firstIndex = filteredStream.findFirst().orElse(-1);
+        return firstIndex;
     }
 
     /**
