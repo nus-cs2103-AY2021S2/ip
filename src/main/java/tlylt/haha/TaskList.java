@@ -211,7 +211,8 @@ public class TaskList {
             this.updateFile();
             break;
         default:
-            throw new IllegalStateException("Unexpected value: " + command);
+            assert false : command;
+            throw new AssertionError(command);
         }
         return response;
     }
