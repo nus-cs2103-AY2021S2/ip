@@ -1,7 +1,5 @@
 package bob.task;
 
-import java.time.LocalDateTime;
-
 /**
  * Represents a task
  */
@@ -33,14 +31,6 @@ public class Task {
 
     public boolean getDone() {
         return this.isDone;
-    }
-
-    public String getType() {
-        return "Task";
-    }
-
-    public LocalDateTime getDateTime() {
-        return null;
     }
 
     /**

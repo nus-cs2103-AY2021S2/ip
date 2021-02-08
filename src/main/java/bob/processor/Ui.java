@@ -1,5 +1,6 @@
 package bob.processor;
 
+import bob.BobException;
 import bob.command.Command;
 import bob.task.TaskList;
 
@@ -21,30 +22,34 @@ public class Ui {
      * @param storage The storage containing the saved list of task
      * @return A boolean value indicating whether to continue taking in commands or not
      */
-
-    public String respondToCommand(String userInput, TaskList taskList, Storage storage) {
-        String[] wordsInInput = userInput.split(" ", 2);
-        String command = wordsInInput[0].toLowerCase();
+    public String respondToCommand(String userInput, TaskList taskList, Storage storage) throws BobException {
+        String[] wordsInInput = userInput.split(" ");
+        Parser parser = new Parser();
+        Command command = parser.parseCommand(wordsInInput);
 
         switch (command) {
-        case "bye":
+        case BYE:
             return Command.BYE.executeCommand(userInput, taskList, storage);
-        case "list":
+        case LIST:
             return Command.LIST.executeCommand(userInput, taskList, storage);
-        case "find":
+        case FIND:
             return Command.FIND.executeCommand(userInput, taskList, storage);
-        case "done":
+        case DONE:
+            storage.rewrite(taskList);
             return Command.DONE.executeCommand(userInput, taskList, storage);
-        case "delete":
+        case DELETE:
+            storage.rewrite(taskList);
             return Command.DELETE.executeCommand(userInput, taskList, storage);
-        case "todo":
+        case TODO:
             return Command.TODO.executeCommand(userInput, taskList, storage);
-        case "event":
+        case EVENT:
             return Command.EVENT.executeCommand(userInput, taskList, storage);
-        case "deadline":
+        case DEADLINE:
             return Command.DEADLINE.executeCommand(userInput, taskList, storage);
-        default:
+        case INVALID:
             return Command.INVALID.executeCommand(userInput, taskList, storage);
+        default:
+            return "";
         }
     }
 }
