@@ -9,10 +9,7 @@ import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static void main(String[] args) {
-
-
         ArrayList<Task> list = loadFile();
-
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
