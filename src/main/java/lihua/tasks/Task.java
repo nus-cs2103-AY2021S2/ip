@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 /**
  * Represent a task in the task list
  */
-public class Task {
+public class Task implements Comparable<Task> {
     /** The name/description/content of the task */
     protected String name;
     /** Indicator of whether the task is done or not */
@@ -20,6 +20,17 @@ public class Task {
     public Task(String name) {
         this.name = name;
         isDone = false;
+    }
+
+    /**
+     * Compares to another task.
+     *
+     * @param o Reference to another task
+     * @return >0 if this task's name is larger than o's name in dictionary order. <0 other wise. =0 if draws.
+     */
+    @Override
+    public int compareTo(Task o) {
+        return name.compareTo(o.name);
     }
 
     /**

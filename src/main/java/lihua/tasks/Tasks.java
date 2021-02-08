@@ -1,9 +1,10 @@
 package lihua.tasks;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+import lihua.commands.ListTagCode;
+import lihua.commons.TimeTaskComparatorChronological;
 import org.json.simple.JSONArray;
 
 /**
@@ -26,6 +27,7 @@ public class Tasks {
      */
     public void addTask(Task t) {
         tasks.add(t);
+        Collections.sort(tasks);
     }
 
     /**
@@ -36,6 +38,7 @@ public class Tasks {
      * @throws IndexOutOfBoundsException If the i specified is invalid for the list.
      */
     public Task removeTask(int i) throws IndexOutOfBoundsException {
+        // the sorted  order will be maintained, if an item is
         return tasks.remove(i - 1);
     }
 
@@ -83,18 +86,20 @@ public class Tasks {
      * @return If the specified date is null, returns the string representation for all tasks;
      * if the specified date is not null, returns the string representation of all the tasks on the date.
      */
-    public String listTasks(LocalDate date) {
-        String message = "";
+    public String listTasks(LocalDate date, ListTagCode code) {
         assert tasks != null;
-        for (int i = 1; i <= tasks.size(); i++) {
-            if (date != null) {
-                boolean isTaskOnTheDaySpecified = date.equals(tasks.get(i - 1).getDate());
-                if (isTaskOnTheDaySpecified) {
-                    message += String.format("%d. %s\n", i, tasks.get(i - 1));
-                }
-            } else {
-                message += String.format("%d. %s\n", i, tasks.get(i - 1));
-            }
+        List<? extends Task> validTasks = getValidTasks(date); // only sorted by name, by default
+        List<? extends Task> sortedTasks = sortTasksAccordingToCodeIfAppicable(validTasks, code);
+
+        String message = constructMessage(sortedTasks);
+
+        return message;
+    }
+
+    private String constructMessage(List<? extends Task> sortedTasks) {
+        String message = "";
+        for (int i = 1; i <= sortedTasks.size(); i++) {
+            message += String.format("%d. %s\n", i, sortedTasks.get(i - 1));
         }
         if (message.equals("")) {
             message = "You do not have any task right now. Please add one first. :')";
@@ -103,6 +108,46 @@ public class Tasks {
         }
         assert !message.equals("");
         return message;
+    }
+
+    private List<? extends Task> sortTasksAccordingToCodeIfAppicable(List<? extends Task> validTasks, ListTagCode code) {
+        switch (code) {
+            case NORMAL:
+                return validTasks;
+            case TIME_NORMAL:
+                // we only consider TimeTask here
+                List<TimeTask> timeTasks = getTimeTasks(validTasks);
+                timeTasks.sort(new TimeTaskComparatorChronological());
+                return timeTasks;
+        }
+        assert false;
+        return null;
+    }
+
+    private List<TimeTask> getTimeTasks(List<? extends Task> validTasks) {
+        List<TimeTask> timeTasks = new ArrayList<>();
+        for (Task t : validTasks) {
+            if (t instanceof TimeTask) {
+                timeTasks.add((TimeTask)t);
+            }
+        }
+        return timeTasks;
+    }
+
+    private List<Task> getValidTasks(LocalDate date) {
+        assert tasks != null;
+        List<Task> validTasks = new ArrayList<>();
+        for (int i = 1; i <= tasks.size(); i++) {
+            if (date != null) {
+                boolean isTaskOnTheDaySpecified = date.equals(tasks.get(i - 1).getDate());
+                if (isTaskOnTheDaySpecified) {
+                    validTasks.add(tasks.get(i - 1));
+                }
+            } else {
+                validTasks.add(tasks.get(i - 1));
+            }
+        }
+        return validTasks;
     }
 
     /**

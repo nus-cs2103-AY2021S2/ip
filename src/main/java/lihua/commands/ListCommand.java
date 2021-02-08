@@ -9,10 +9,13 @@ public class ListCommand extends Command {
     /** Command help information for list command */
     public static final String MESSAGE_USAGE = "list: List down all the tasks. "
             + "List down all the tasks on a specific date, if additional date argument is given\n"
+            + "List down all time-related tasks in a chronological order, if additional tag -t is given.\n"
             + "---- Example 1: list\n"
-            + "---- Example 2: list [yyyy-mm-dd]";
+            + "---- Example 2: list [yyyy-mm-dd]\n"
+            + "---- Example 3: list -time";
     /** Optional argument indicating the date of tasks to be listed */
     private final LocalDate date;
+    private ListTagCode tagCode = ListTagCode.NORMAL;
 
     /**
      * Initializes a new ListCommand with a LocalDate.
@@ -29,7 +32,12 @@ public class ListCommand extends Command {
      */
     public ListCommand() {
         super();
-        this.date = null;
+        date = null;
+    }
+
+    public ListCommand(ListTagCode code) {
+        date = null;
+        tagCode = code;
     }
 
     /**
@@ -40,7 +48,7 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        String message = tasks.listTasks(date);
+        String message = tasks.listTasks(date, tagCode);
         assert message != null;
         assert !message.equals(" ");
         return new CommandResult(message);

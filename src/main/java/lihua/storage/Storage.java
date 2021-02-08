@@ -43,7 +43,7 @@ public class Storage {
 
             populateTasks(jsonArray, tasks);
         } catch (IOException | ParseException | DateTimeParseException e) {
-            System.err.println("Storage issues encountered. Task cannot be stored.");
+            System.err.println("Storage issues encountered. Task cannot be loaded.");
         }
         return tasks;
     }
@@ -66,22 +66,32 @@ public class Storage {
                     t = new Event(description, time);
                 }
                 assert t != null;
-                t.setDone(isDone);
-                tasks.addTask(t);
             }
+            t.setDone(isDone);
+            tasks.addTask(t);
         }
     }
 
     /** Returns true if the file previously exists */
-    private boolean createFileRecursively() throws IOException {
-        File fileChecker = new File(DATA_PATH);
-        if (!fileChecker.exists()) {
-            fileChecker.getParentFile().mkdir();
-            fileChecker.createNewFile();
-            return false;
-        } else {
+    private boolean createFileRecursively() {
+        try {
+            File fileChecker = new File(DATA_PATH);
+            if (!fileChecker.exists()) {
+                fileChecker.getParentFile().mkdir();
+                fileChecker.createNewFile();
+                writeDummyDataToInitializedDataFile();
+                return false;
+            }
             return true;
+        } catch (IOException e) {
+            return false;
         }
+    }
+
+    // will only be called if a new file is initialized
+    private void writeDummyDataToInitializedDataFile() throws IOException {
+        JSONArray emptyJsonArray = new JSONArray();
+        writeToFile(emptyJsonArray);
     }
 
     /**
