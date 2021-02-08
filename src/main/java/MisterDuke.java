@@ -170,6 +170,7 @@ class Ui {
             for (int i = 0; i < tasksArray.size(); i++) {
 //                sb.append(String.format("%d. %s", (i + 1), tasksArray.get(i).toString()) + "\n");
                 sb.append(String.valueOf(i + 1) + ". " + tasksArray.get(i).toString() + "\n");
+                System.out.println(sb.toString());
             }
             return sb.toString();
         }
@@ -185,9 +186,10 @@ class Ui {
             return "Oops! You have no tasks to delete.";
         } else {
             int cmdNum = Integer.parseInt(commandNumber); //strArray[1]
+            String deletedTask = tasksArray.get(cmdNum - 1).toString();
             tasksArray.remove(cmdNum - 1);
             return "Noted. I've removed this task: \n" +
-                    "  " + tasksArray.get(cmdNum - 1).toString();
+                    "  " + deletedTask;
         }
     }
 
