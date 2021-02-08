@@ -101,7 +101,7 @@ public class Duke {
                         commands.add(command);
                         int len = commands.size();
                         System.out.println(spacer
-                                + "Mlem I've added a new command for you to do: \n"
+                                + "Mlem I've added a new command for you to do:\n"
                                 + commands.get(len-1)
                                 + "\n"
                                 + "Now I can do a total of "
@@ -116,7 +116,7 @@ public class Duke {
                         commands.add(command);
                         int len = commands.size();
                         System.out.println(spacer
-                                + "Much wow! I've added a new command with an Event: \n"
+                                + "Much wow! I've added a new command with an Event:\n"
                                 + commands.get(len-1)
                                 + "\n"
                                 + "Now I can do a total of "
@@ -131,7 +131,7 @@ public class Duke {
                         commands.add(command);
                         int len = commands.size();
                         System.out.println(spacer
-                                + "Woofers! I've added a new command with a Ded-line: \n"
+                                + "Woofers! I've added a new command with a Ded-line:\n"
                                 + commands.get(len-1)
                                 + "\n"
                                 + "Now I can do a total of "
@@ -182,12 +182,16 @@ public class Duke {
                 || errorInput.contains("event"))
                 && inputArr[1] == null) {
 
-            throw new DukeException("Whoops :( Your command description cannot be empty. Try again!");
+            throw new DukeException("Eh? Your command description cannot be empty. Try again!");
 
         } else if (errorInput.contains("list")
-                || errorInput.contains("bye")
-                || errorInput.contains("done")) {
+                || errorInput.contains("bye")) {
             //Do nothing
+
+        } else if ((errorInput.contains("done")
+                || errorInput.contains("delete"))
+                && inputArr[1] == null) {
+            throw new DukeException("What are you referring to? Remember to key in the correct command id!");
 
         } else if (inputArr[1] != null) {
             //Do nothing

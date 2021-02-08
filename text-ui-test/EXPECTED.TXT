@@ -51,7 +51,7 @@ Woof! I have completed these commands before:
 
 ____________________________________________________________
 
-DukeException: Whoops :( Your command description cannot be empty. Try again!
+DukeException: Eh? Your command description cannot be empty. Try again!
 
 ____________________________________________________________
 Woof! I have completed these commands before:
@@ -62,6 +62,7 @@ Woof! I have completed these commands before:
 
 ____________________________________________________________
 
+DukeException: What are you referring to? Remember to key in the correct command id!
 
 ____________________________________________________________
 Noted! This task has been removed:
