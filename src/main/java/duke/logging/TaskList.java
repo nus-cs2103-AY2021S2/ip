@@ -51,13 +51,11 @@ public class TaskList {
         Task task;
         if (taskDescription.length() == 0) {
             throw new InvalidDescriptionException("OOPS!!! The description of " + type + " cannot be empty.");
-        }else if ((type.equals("deadline") && !taskDescription.contains("/by"))
+        } else if (type.equals("todo")) {
+            task = new ToDo(false, taskDescription);
+        } else if ((type.equals("deadline") && !taskDescription.contains("/by"))
                 || (type.equals("event")) && !taskDescription.contains("/at")) {
             throw new InvalidDescriptionException("OOPS!!! The description format of " + type + " is wrong.");
-        }
-
-        if (type.equals("todo")) {
-            task = new ToDo(false, taskDescription);
         } else {
             int index = type.equals("deadline")
                     ? taskDescription.indexOf("/by")
@@ -88,7 +86,7 @@ public class TaskList {
         try {
             return tasks.get(index);
         } catch (IndexOutOfBoundsException ex) {
-            throw new InvalidDescriptionException("Description cannot be empty");
+            throw new InvalidDescriptionException("The index given is incorrect.");
         }
     }
 
