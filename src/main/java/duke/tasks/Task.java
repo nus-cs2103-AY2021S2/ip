@@ -69,7 +69,7 @@ public class Task {
      * @throws DukeExceptionIllegalArgument If invalid task string supplied.
      */
     public static Task parseFileString(String s) throws DukeExceptionIllegalArgument {
-        String[] args = s.split(" \\| ");
+        String[] args = s.split("\t");
         boolean isDone = args[1].equals("1");
 
         Task task;
