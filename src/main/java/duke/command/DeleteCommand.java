@@ -27,17 +27,13 @@ public class DeleteCommand extends Command {
      * @param date date of the task.
      */
     private static String handleDelete(String task, String date) {
-        if (task.length() > 0 && date.equals("")) {
-            try {
-                int num = Integer.parseInt(task);
-                String result = TaskList.deleteTask(num);
-                return result;
-            } catch (NumberFormatException e) {
-                DukeException.numberFormatException();
-                ErrorBox.display(Ui.KEY_IN_NUMBER);
-            }
+        String response = "";
+        try {
+            int num = Integer.parseInt(task);
+            response = TaskList.deleteTask(num);
+        } catch (NumberFormatException e) {
+            ErrorBox.display(Ui.KEY_IN_NUMBER);
         }
-
-        return "";
+        return response;
     }
 }

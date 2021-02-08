@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-import duke.ui.Ui;
+
 
 
 /**
@@ -11,17 +11,4 @@ public class DukeException extends Exception {
         super(errorMessage);
     }
 
-
-    public static void numberFormatException() {
-        System.out.println(Ui.KEY_IN_NUMBER);
-    }
-
-    public static void taskErrorException() {
-        System.out.println(Ui.TASK_ERROR);
-    }
-
-
-    public static void saveToFileError() {
-        System.out.println(Ui.SAVE_TO_FILE_ERROR);
-    }
 }

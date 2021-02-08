@@ -38,34 +38,22 @@ public class AddCommand extends Command {
      * @param task name of the user task.
      */
     private static String handleToDo(String task) {
-
         Todo todo = new Todo(task);
         TaskList.addTask(todo);
-        System.out.println(Ui.biggerBox(todo));
-
         return Ui.biggerBox(todo);
-
     }
 
 
     private static String handleDeadline(String task, String date) {
-
-
         Deadlines deadlines = new Deadlines(task, date);
         TaskList.addTask(deadlines);
-        System.out.println(Ui.biggerBox(deadlines));
-
-
         return Ui.biggerBox(deadlines);
     }
 
 
     private static String handleEvent(String task, String date) {
-
         Event event = new Event(task, date);
         TaskList.addTask(event);
-        System.out.println(Ui.biggerBox(event));
-
         return Ui.biggerBox(event);
     }
 }

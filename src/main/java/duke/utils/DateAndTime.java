@@ -26,11 +26,9 @@ public class DateAndTime {
                 LocalDate d1 = LocalDate.parse(date.trim());
                 return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             } catch (DateTimeParseException e) {
-                ErrorBox.display(e.getMessage());
                 return Ui.WRONG_DATE_FORMAT;
             }
         } else {
-            ErrorBox.display(Ui.WRONG_DATE_FORMAT);
             return Ui.WRONG_DATE_FORMAT;
         }
     }
@@ -47,13 +45,9 @@ public class DateAndTime {
     }
 
     private static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
         try {
             Double.parseDouble(strNum);
         } catch (NumberFormatException nfe) {
-            ErrorBox.display(nfe.getMessage());
             return false;
         }
         return true;

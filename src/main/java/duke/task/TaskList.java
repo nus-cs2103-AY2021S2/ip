@@ -29,7 +29,6 @@ public class TaskList {
             String result = Ui.doneTask(t);
             return result;
         } catch (IndexOutOfBoundsException e) {
-            DukeException.taskErrorException();
             ErrorBox.display(e.getMessage());
         }
         return "";
@@ -97,7 +96,6 @@ public class TaskList {
             }
             return Ui.deleteTask(t);
         } catch (IndexOutOfBoundsException e) {
-            DukeException.taskErrorException();
             ErrorBox.display(e.getMessage());
             return "";
         }
