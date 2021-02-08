@@ -19,42 +19,58 @@ public class Parser {
     public static void parseInput(String input) throws DukeInputException {
         String[] s = input.split(" ", 2);
 
-        String command = s[0];
+        Command cmd;
         String args = s.length == 2 ? s[1] : "";
 
-        switch (command) {
-        case "bye":
+        try {
+            cmd = Command.valueOf(s[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new DukeInputException("I'm sorry, but I don't know what that means :-(");
+        }
+
+        if (args.equals("-h")) {
+            return;
+        }
+
+        switch(cmd) {
+        case BYE:
+            checkNoArgument(args);
             break;
-        case "list":
-            break;
-        case "done":
-            checkValidDoneDelete(args);
-            break;
-        case "todo":
-            checkValidTodo(args);
-            break;
-        case "deadline":
+        case DEADLINE:
             checkValidDeadline(args);
             break;
-        case "event":
-            checkValidEvent(args);
-            break;
-        case "delete":
+        case DELETE:
             checkValidDoneDelete(args);
             break;
-        case "save":
+        case DONE:
+            checkValidDoneDelete(args);
             break;
-        case "load":
+        case EVENT:
+            checkValidEvent(args);
             break;
-        case "help":
+        case HELP:
+            checkNoArgument(args);
             break;
-        case "search":
+        case LIST:
+            checkNoArgument(args);
+            break;
+        case LOAD:
+            checkNoArgument(args);
+            break;
+        case SAVE:
+            checkNoArgument(args);
+            break;
+        case SEARCH:
             checkValidSearch(args);
             break;
-        case "sort":
+        case SORT:
+            checkNoArgument(args);
+            break;
+        case TODO:
+            checkValidTodo(args);
             break;
         default:
-            throw new DukeInputException("I'm sorry, but I don't know what that means :-(");
+            break;
         }
     }
 
@@ -103,6 +119,12 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukeInputException(
                 String.format("\"%s\" is a wrong date format! Please use YYYY-MM-DD format.", s));
+        }
+    }
+
+    private static void checkNoArgument(String s) throws DukeInputException {
+        if (!s.isEmpty()) {
+            throw new DukeInputException("Please do not input extra arugments!");
         }
     }
 

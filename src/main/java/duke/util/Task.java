@@ -81,15 +81,26 @@ public abstract class Task implements Comparable<Task> {
 
     /**
      * Compares 2 task.
-     *     First, absence of date (eg. todo) is smaller.
-     *     Second, eariler date is smaller
-     *     Third, by description lexicographically.
+     *     First, completed task is smaller.
+     *     Second, absence of date (eg. todo) is smaller.
+     *     Third, eariler date is smaller
+     *     Last, by description lexicographically.
      *
      * @param other The task to be compared to.
      * @return -1 if this task is smaller, 0 if same, 1 if other task is smaller.
      */
     @Override
     public int compareTo(Task other) {
+        if (!(isDone ^ other.isDone)) {
+            return compareDate(other);
+        } else if (isDone) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    private int compareDate(Task other) {
         if (date == null && other.date == null) {
             return description.compareTo(other.description);
         } else if (date == null) {

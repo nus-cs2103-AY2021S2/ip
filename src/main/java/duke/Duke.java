@@ -3,6 +3,7 @@ package duke;
 import java.util.Arrays;
 import java.util.List;
 
+import duke.util.Command;
 import duke.util.Deadline;
 import duke.util.DukeException;
 import duke.util.DukeInputException;
@@ -21,29 +22,33 @@ import javafx.collections.ObservableList;
  * Currently supports these functionalities:
  * <br>bye
  * <br>  - Prompt user to save tasklist. Then closes Duke.
- * <br>list
- * <br>  - List out all task
- * <br>done [number(s)]
- * <br>  - Mark multiple task as done eg. (done 1 2 3)
- * <br>todo [description]
- * <br>  - Add a todo task
- * <br>deadline [description] /by [due date]
+ * <br>deadline [description] /by [date]
  * <br>  - Add a deadline task with a due date (YYYY-MM-DD)
+ * <br>delete [int (int int...)]
+ * <br>  - Delete one or more tasks eg. (delete 1 2 3)
+ * <br>done [int (int int...)]
+ * <br>  - Mark one or more tasks as done eg. (done 1 2 3)
  * <br>event [description] /at [date]
- * <br>  - Add a event task with a date (YYYY-MM-DD)
- * <br>delete [number(s)]
- * <br>  - Delete multiple tasks eg. (delete 1 2 3)
- * <br>save
- * <br>  - save checklist to "data/dukeData.txt"
- * <br>load
- * <br>  - Load previously saved checklist
+ * <br>  - Add an event task with a date (YYYY-MM-DD)
  * <br>help
  * <br>  - Display list of commands
- * <br>search [keyword/date]
+ * <br>list
+ * <br>  - List out all tasks
+ * <br>load
+ * <br>  - Load tasklist from saved file
+ * <br>save
+ * <br>  - save tasklist to "data/dukeData.txt"
+ * <br>search [keyword | date]
  * <br>  - Display all task containing the following keyword.
  * <br>  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.
  * <br>sort
- * <br>  - Order tasklist with Todos first and then by date.
+ * <br>  - Order tasklist in the following priority
+ * <br>    1. Incomplete task
+ * <br>    2. Todo task
+ * <br>    3. Eariler date
+ * <br>    4. lexicographically";
+ * <br>todo [description]
+ * <br>  - Add a todo task
  */
 public class Duke {
 
@@ -95,10 +100,10 @@ public class Duke {
         }
 
         String[] s = input.split(" ", 2);
-        String command = s[0];
+        Command cmd = Command.valueOf(s[0].toUpperCase());
         String args = s.length == 2 ? s[1] : "";
 
-        return processCommand(command, args);
+        return processCommand(cmd, args);
     }
 
     private String completeTask(String num) throws DukeInputException {
@@ -201,35 +206,39 @@ public class Duke {
         return ui.displaySortMessage();
     }
 
-    private String processCommand(String command, String args) {
+    private String processCommand(Command command, String args) {
+        if (args.equals("-h")) {
+            return command.getHelp();
+        }
+
         try {
-            switch (command) {
-            case "bye":
+            switch(command) {
+            case BYE:
                 return exit();
-            case "list":
-                return listOutTask();
-            case "done":
-                return completeTask(args);
-            case "todo":
-                return addTask(Todo.createTodo(args));
-            case "deadline":
+            case DEADLINE:
                 return addTask(Deadline.createDeadline(args));
-            case "event":
-                return addTask(Event.createEvent(args));
-            case "delete":
+            case DELETE:
                 return deleteTask(args);
-            case "save":
-                return save();
-            case "load":
-                return load();
-            case "help":
+            case DONE:
+                return completeTask(args);
+            case EVENT:
+                return addTask(Event.createEvent(args));
+            case HELP:
                 return displayHelp();
-            case "search":
+            case LIST:
+                return listOutTask();
+            case LOAD:
+                return load();
+            case SAVE:
+                return save();
+            case SEARCH:
                 return search(args);
-            case "sort":
+            case SORT:
                 return sort();
+            case TODO:
+                return addTask(Todo.createTodo(args));
             default:
-                assert false : "Parser missed an invalid input";
+                break;
             }
         } catch (DukeException e) {
             return ui.displayError(e);

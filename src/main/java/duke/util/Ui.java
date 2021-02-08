@@ -29,37 +29,25 @@ public class Ui {
     }
 
     /**
-     * Lists out commands and their functions.
+     * Lists out commands.
      *
      * @return Help message.
      */
     public String displayHelp() {
-        return echo("List of commands:",
+        return echo("Use \"command -h\" to find out more about the command!\n",
+                "List of commands:",
                 "bye",
-                "- Close Duke",
-                "list",
-                "  - List out all task",
-                "done [number(s)]",
-                "  - Mark multiple task as done eg. (done 1 2 3)",
-                "todo [description]",
-                "  - Add a todo task",
                 "deadline [description] /by [due date]",
-                "  - Add a deadline task with a due date (YYYY-MM-DD)",
+                "delete [int (int int...)]",
+                "done [int (int int...)]",
                 "event [description] /at [date]",
-                "  - Add a event task with a date (YYYY-MM-DD)",
-                "delete [number(s)]",
-                "  - Delete multiple tasks eg. (delete 1 2 3)",
-                "save",
-                "  - save checklist to \"data/dukeData.txt\"",
-                "load",
-                "  - Load previously saved checklist",
                 "help",
-                "  - Display list of commands",
-                "search [keyword]",
-                "  - Display all task containing the following keyword.",
-                "  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.",
+                "list",
+                "load",
+                "save",
+                "search search [keyword | date]",
                 "sort",
-                "  - Order tasklist with Todos first and then by date.");
+                "todo [description]");
     }
 
     /**
@@ -117,7 +105,7 @@ public class Ui {
     public String addTask(String task, int size) {
         return echo("Got it. I've added this task:",
                 task,
-                "Now you have " + size + " tasks in the list.");
+                String.format("Now you have %d task%s in the list.", size, size == 1 ? "" : "s"));
     }
 
     /**
@@ -130,7 +118,7 @@ public class Ui {
     public String deleteTask(String[] tasks, int size) {
         return String.format("Noted. I've removed %s:\n", tasks.length == 1 ? "this task" : "these tasks")
                 + echo(tasks) + "\n"
-                + "Now you have " + size + " tasks in the list.";
+                + String.format("Now you have %d task%s in the list.", size, size == 1 ? "" : "s");
     }
 
     /**

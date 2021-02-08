@@ -57,6 +57,13 @@ public class ParserTest {
         assertThrows(DukeInputException.class, () -> Parser.parseInput("delete    1"));
 
         assertThrows(DukeInputException.class, () -> Parser.parseInput("search"));
+
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("bye a"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("list a"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("save a"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("load a"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("help a"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("sort a"));
     }
 
     @Test
