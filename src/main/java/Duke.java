@@ -55,12 +55,12 @@ public class Duke {
 
         if (parts.length != 2) {
             throw new InvalidTaskException(command.getInstruction());
-        } else {
-            Task deadline = new Deadline(parts[0], parts[1]);
-            tasks.add(deadline);
-            storage.writeToFile(deadline);
-            return Ui.addedTaskReply(deadline, tasks.size());
         }
+
+        Task deadline = new Deadline(parts[0], parts[1]);
+        tasks.add(deadline);
+        storage.writeToFile(deadline);
+        return Ui.addedTaskReply(deadline, tasks.size());
     }
 
     /**
@@ -76,12 +76,12 @@ public class Duke {
 
         if (parts.length != 2) {
             throw new InvalidTaskException(command.getInstruction());
-        } else {
-            Task event = new Event(parts[0], parts[1]);
-            tasks.add(event);
-            storage.writeToFile(event);
-            return Ui.addedTaskReply(event, tasks.size());
         }
+
+        Task event = new Event(parts[0], parts[1]);
+        tasks.add(event);
+        storage.writeToFile(event);
+        return Ui.addedTaskReply(event, tasks.size());
     }
 
     /**
@@ -97,11 +97,11 @@ public class Duke {
 
         if (index < 0 || index >= tasks.size()) {
             throw new TaskNotFoundException();
-        } else {
-            tasks.getTaskAt(index).markDone();
-            storage.updateFile(tasks);
-            return Ui.markDoneReply(tasks.getTaskAt(index));
         }
+
+        tasks.getTaskAt(index).markDone();
+        storage.updateFile(tasks);
+        return Ui.markDoneReply(tasks.getTaskAt(index));
     }
 
     /**
@@ -117,11 +117,11 @@ public class Duke {
 
         if (index < 0 || index >= tasks.size()) {
             throw new TaskNotFoundException();
-        } else {
-            Task deletedTask = tasks.remove(index);
-            storage.updateFile(tasks);
-            return Ui.deleteReply(deletedTask, tasks.size());
         }
+
+        Task deletedTask = tasks.remove(index);
+        storage.updateFile(tasks);
+        return Ui.deleteReply(deletedTask, tasks.size());
     }
 
     /**
@@ -176,6 +176,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns true if the provided input matches the bye command.
+     *
+     * @param input String entered by user.
+     * @return True if the provided input matches the bye command, else false.
+     */
     public boolean shouldExit(String input) {
         Command command = Parser.parseInput(input.trim());
         return command.getInstruction().equals(Command.BYE);

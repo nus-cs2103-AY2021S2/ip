@@ -23,31 +23,29 @@ public class Storage {
         this.file = new File(dirName + "/" + fileName);
     }
 
+    private void markDoneAndAdd(Task task, String donePart, TaskList tasks) {
+        if (donePart.equals("X")) {
+            task.markDone();
+        }
+        tasks.add(task);
+    }
+
     private void addTodo(String[] parts, TaskList tasks) {
         assert parts.length == 3 : "There should be 3 parts to this line of data";
         Task todo = new Todo(parts[2]);
-        if (parts[1].equals("X")) {
-            todo.markDone();
-        }
-        tasks.add(todo);
+        markDoneAndAdd(todo, parts[1], tasks);
     }
 
     private void addDeadline(String[] parts, TaskList tasks) throws DateTimeParseException {
         assert parts.length == 4 : "There should be 4 parts to this line of data";
         Task deadline = new Deadline(parts[2], parts[3]);
-        if (parts[1].equals("X")) {
-            deadline.markDone();
-        }
-        tasks.add(deadline);
+        markDoneAndAdd(deadline, parts[1], tasks);
     }
 
     private void addEvent(String[] parts, TaskList tasks) {
         assert parts.length == 4 : "There should be 4 parts to this line of data";
         Task event = new Event(parts[2], parts[3]);
-        if (parts[1].equals("X")) {
-            event.markDone();
-        }
-        tasks.add(event);
+        markDoneAndAdd(event, parts[1], tasks);
     }
 
     private void parseLine(String line, TaskList tasks) {

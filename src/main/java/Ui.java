@@ -73,16 +73,22 @@ public class Ui {
                 + formatLine("Now you have " + numTasks + " tasks in the list.");
     }
 
+    /**
+     * Returns a string of the list of matching tasks.
+     *
+     * @param tasks Tasklist of matching tasks.
+     * @return String of the list of matching tasks.
+     */
     public static String listMatchingTasks(TaskList tasks) {
-        if (tasks.size() > 0) {
-            StringBuilder msg = new StringBuilder(formatLine("Here are the matching tasks in your list:"));
-
-            for (int i = 0; i < tasks.size(); i++) {
-                msg.append(formatLine((i + 1) + ". " + tasks.getTaskAt(i)));
-            }
-            return msg.toString();
-        } else {
+        if (tasks.size() <= 0) {
             return formatLine("No matching tasks were found.");
         }
+
+        StringBuilder msg = new StringBuilder(formatLine("Here are the matching tasks in your list:"));
+
+        for (int i = 0; i < tasks.size(); i++) {
+            msg.append(formatLine((i + 1) + ". " + tasks.getTaskAt(i)));
+        }
+        return msg.toString();
     }
 }

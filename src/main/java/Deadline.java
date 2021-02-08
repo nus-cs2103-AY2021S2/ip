@@ -5,22 +5,31 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
 public class Deadline extends Task {
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String TIME_FORMAT = "[ HHmm]";
     private static final DateTimeFormatter BY_FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("dd/MM/yyyy")
-            .appendPattern("[ HHmm]")
+            .appendPattern(DATE_FORMAT)
+            .appendPattern(TIME_FORMAT)
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
             .toFormatter();
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
 
-    private final boolean hasTime;
     protected LocalDateTime by;
+    private final boolean hasTime;
 
+    /**
+     * Constructor for the Deadline class.
+     *
+     * @param description Description of the Deadline task.
+     * @param by Due date of the Deadline task.
+     * @throws DateTimeParseException If an invalid "by" date is provided.
+     */
     public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
         this.by = LocalDateTime.parse(by.trim(), BY_FORMATTER);
-        this.hasTime = (by.trim().length() > 10);
+        this.hasTime = (by.trim().length() > DATE_FORMAT.length());
     }
 
     @Override

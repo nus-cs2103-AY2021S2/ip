@@ -1,5 +1,5 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
     private final List<Task> tasks;
@@ -24,6 +24,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Returns a new TaskList containing tasks that matched the keyword.
+     *
+     * @param keyword String to search for in tasks.
+     * @return TaskList containing tasks that matched the keyword.
+     */
     public TaskList findMatchingTasks(String keyword) {
         TaskList matchingTasks = new TaskList();
         for (Task task: tasks) {
