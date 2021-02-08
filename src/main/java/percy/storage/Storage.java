@@ -23,7 +23,6 @@ import percy.task.Todo;
 public class Storage {
     private static final String DELIMITER = " \\| ";
     private final String filePath = "./data/percy.txt";
-
     private File file;
 
     /**

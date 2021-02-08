@@ -2,6 +2,7 @@ package percy.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import percy.storage.Storage;
 import percy.task.Task;
@@ -10,6 +11,11 @@ import percy.ui.Ui;
 
 public class DoneCommand extends Command {
     public static final String COMMAND = "done";
+    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
+            "done: Marks a task as done.",
+            "Parameters: TASK_NUMBER",
+            "Example: done 2"));
+
     private int taskNum;
 
     /**
