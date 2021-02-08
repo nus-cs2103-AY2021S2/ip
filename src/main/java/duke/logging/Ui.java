@@ -96,4 +96,16 @@ public class Ui {
             return message;
         }
     }
+
+    public String scheduleCommandInteraction(ArrayList<Task> scheduledTasks) {
+        if (scheduledTasks.size() == 0) {
+            return "     No task scheduled";
+        } else {
+            String message = "    Here are your scheduled task:";
+            for (Task task: scheduledTasks) {
+                message += ("\n     " + task);
+            }
+            return message;
+        }
+    }
 }

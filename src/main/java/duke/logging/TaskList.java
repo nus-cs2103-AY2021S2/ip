@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import duke.exception.InvalidDescriptionException;
 import duke.model.Deadline;
@@ -145,12 +146,21 @@ public class TaskList {
         if (taskDescription.length() == 0) {
             throw new InvalidDescriptionException("OOPS!!! The description cannot be empty.");
         }
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task: tasks) {
-            if (task.containSubstring(taskDescription.strip())) {
-                matchingTasks.add(task);
-            }
+
+        return tasks.stream().filter(task -> task.containSubstring(taskDescription.strip()))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public ArrayList<Task> filterSchedule(String taskDescription) throws InvalidDescriptionException {
+        if (!taskDescription.contains("on")) {
+            throw new InvalidDescriptionException("Your view schedule command should be in this format:" +
+                    "schedule on (data)");
         }
-        return matchingTasks;
+
+        int index = taskDescription.indexOf("on");
+        String dateTimeString = taskDescription.substring(index + 3).strip().replace("/", "-");
+        LocalDate userScheduledDate = LocalDate.parse(dateTimeString);
+        return tasks.stream().filter(task -> task.checkEqualDate(userScheduledDate))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

@@ -1,9 +1,10 @@
 package duke.model;
 
+import java.time.LocalDate;
 /**
  * A task class denotes a task.
  */
-public class Task {
+public abstract class Task {
     private final char taskType;
     private boolean isCompleted;
     private final String taskName;
@@ -35,9 +36,21 @@ public class Task {
         this.isCompleted = true;
     }
 
+    /**
+     * Check task name contains the substring str.
+     * @param str  A substring.
+     * @return     True if task name contains str, otherwise false.
+     */
     public boolean containSubstring(String str) {
         return this.taskName.contains(str);
     }
+
+    /**
+     * Check if the given date equals to the task date time.
+     * @param date   A local date.
+     * @return       True if the given date equals to the task date time, otherwise false.
+     */
+    public abstract boolean checkEqualDate(LocalDate date);
 
     /**
      * A string representation of a task.

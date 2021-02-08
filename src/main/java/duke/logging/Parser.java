@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.ScheduleCommand;
 import duke.command.UnknownCommand;
 
 
@@ -35,7 +36,7 @@ public class Parser {
         case "list":
             return new ListCommand(taskDescription);
         case "bye":
-            new ByeCommand(taskDescription);
+            return new ByeCommand(taskDescription);
         case "todo":
         case "deadline":
         case "event":
@@ -46,6 +47,8 @@ public class Parser {
             return new DeleteCommand(taskDescription);
         case "find":
             return new FindCommand(taskDescription);
+        case "schedule":
+            return new ScheduleCommand(taskDescription);
         default:
             return new UnknownCommand(taskDescription);
         }
