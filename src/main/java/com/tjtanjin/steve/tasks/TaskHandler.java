@@ -71,19 +71,19 @@ public class TaskHandler {
             Task task = TASKS.get(index);
             if (task.getStatus().equals("complete")) {
                 return "Error: Task is already completed!";
-            } else {
-                task.markCompleted();
-                String taskName = task.getTaskName();
-                String taskType = task.getType().toUpperCase();
-                LocalDate[] taskDates = task.getDates();
-                if (STORAGE_HANDLER.saveTask(index, "DONE",
-                        taskName, "complete", taskType, taskDates)) {
-                    return "Info: Yay your task is done! :D";
-                } else {
-                    return "Error: There was an error marking your task as done, "
-                            + "please check your syntax and try again.";
-                }
             }
+
+            task.markCompleted();
+            String taskName = task.getTaskName();
+            String taskType = task.getType().toUpperCase();
+            LocalDate[] taskDates = task.getDates();
+            if (STORAGE_HANDLER.saveTask(index, "DONE",
+                    taskName, "complete", taskType, taskDates)) {
+                return "Info: Yay your task is done! :D";
+            }
+
+            return "Error: There was an error marking your task as done, "
+                    + "please check your syntax and try again.";
         } catch (IndexOutOfBoundsException e) {
             return "Error: The specified task index does not exist!";
         }
@@ -105,10 +105,10 @@ public class TaskHandler {
             if (STORAGE_HANDLER.saveTask(index, "DELETE",
                     taskName, "complete", taskType, taskDates)) {
                 return "Info: The following task has been deleted:\n" + task;
-            } else {
-                return "Error: There was an error deleting your task, "
-                        + "please check your syntax and try again.";
             }
+
+            return "Error: There was an error deleting your task, "
+                    + "please check your syntax and try again.";
         } catch (IndexOutOfBoundsException e) {
             return "Error: The specified task index does not exist!";
         }
