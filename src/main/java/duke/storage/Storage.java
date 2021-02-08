@@ -51,6 +51,7 @@ public class Storage {
         } catch (IOException ex) {
             throw new DukeException("Unable to create new file.");
         }
+        assert file.exists(): "File does not exists or has not been created.";
     }
 
     /**
@@ -69,6 +70,8 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
             String[] currTask = sc.nextLine().split(" // ");
+            assert currTask[0].equals("T") || currTask[0].equals("D") || currTask[0].equals("E")
+                    : "Data has been changed/modified incorrectly.";
             String type = currTask[0];
             switch (type) {
             case "T":
@@ -95,6 +98,7 @@ public class Storage {
      * @throws DukeException If unable to save data.
      */
     public void save(ArrayList<Task> tasks) throws DukeException {
+        assert file.exists(): "File does not exist, cannot be saved.";
         try {
             FileWriter fw = new FileWriter(file, true);
             for (Task currTask : tasks) {
@@ -113,11 +117,13 @@ public class Storage {
      * @throws DukeException If unable to clear data.
      */
     public void clear() throws DukeException {
+        assert file.exists(): "File does not exist, cannot be cleared.";
         try {
             FileWriter cleaner = new FileWriter(file, false);
             cleaner.close();
         } catch (IOException ex) {
             throw new DukeException("       OOPS!!! Unable to clear data.");
         }
+        assert file.length() == 0: "File has not been cleared.";
     }
 }
