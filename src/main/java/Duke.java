@@ -1,19 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import javafx.application.Application;
-
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-
-import java.io.IOException;
 
 
 public class Duke {
@@ -40,7 +27,8 @@ public class Duke {
   }
 
   public String getResponse(String input) throws IOException {
-    return ui.readUserInput(input,storage,tasks);
+    assert(input != null);
+    return ui.readUserInput(input, storage, tasks);
   }
 
   /**
