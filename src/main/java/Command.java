@@ -11,6 +11,11 @@ public class Command {
     protected String instruction;
     protected String args;
 
+    /**
+     * Constructor for the Bye and List commands.
+     *
+     * @param instruction String entered by user.
+     */
     public Command(String instruction) {
         switch (instruction) {
         case BYE:
@@ -26,6 +31,12 @@ public class Command {
         }
     }
 
+    /**
+     * Constructor for the remaining commands.
+     *
+     * @param instruction First word entered by user.
+     * @param args Subsequent words entered by user.
+     */
     public Command(String instruction, String args) {
         switch (instruction) {
         case DONE:

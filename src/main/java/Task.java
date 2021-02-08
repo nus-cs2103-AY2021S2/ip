@@ -33,6 +33,7 @@ public class Task {
         return String.format("%c | %s", done, this.description);
     }
 
+    @Override
     public String toString() {
         char done = this.isDone ? 'X' : ' ';
         return String.format("[%c] %s", done, this.description);
