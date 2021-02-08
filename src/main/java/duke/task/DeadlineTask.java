@@ -53,9 +53,9 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return String.format(
-                "[D]%s (by: %s)",
+                DukeString.FORMAT_DEADLINE,
                 super.toString(),
-                deadline.format(DateTimeFormatter.ofPattern("dd LLL uu hhmma"))
+                deadline.format(DateTimeFormatter.ofPattern(DukeString.FORMAT_DATE_OUTPUT))
         );
     }
 }

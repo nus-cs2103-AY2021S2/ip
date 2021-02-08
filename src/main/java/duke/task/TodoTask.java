@@ -43,6 +43,6 @@ public class TodoTask extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format(DukeString.FORMAT_TODO, super.toString());
     }
 }

@@ -1,6 +1,8 @@
 package duke.interaction;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import duke.command.Command;
@@ -20,12 +22,14 @@ import duke.common.DukeString;
  */
 public class Parser {
     private boolean isBye;
+    private final DateTimeFormatter formatter;
 
     /**
      * Constructs a new Parser.
      */
     public Parser() {
         this.isBye = false;
+        this.formatter = DateTimeFormatter.ofPattern(DukeString.FORMAT_DATE_INPUT);
     }
 
     /**
@@ -53,12 +57,15 @@ public class Parser {
     public Command parseInput(final String input) throws
             DukeException.InvalidCommand,
             DukeException.InvalidTask,
+            DukeException.InvalidDateFormat,
             DukeException.EmptyDescription,
             DukeException.EmptyDeadlineDate,
             DukeException.EmptyEventDate,
             DukeException.InvalidEventEnd {
         Scanner scanner = new Scanner(input);
         String[] tokens;
+        LocalDateTime startDate;
+        LocalDateTime endDate;
 
         if (!scanner.hasNext()) {
             throw new DukeException.InvalidCommand();
@@ -90,7 +97,14 @@ public class Parser {
                 throw new DukeException.EmptyDeadlineDate();
             }
 
-            return new DeadlineCommand(tokens[0].trim(), LocalDateTime.parse(tokens[1].trim()));
+            try {
+                startDate = LocalDateTime.parse(tokens[1].trim(), formatter);
+            } catch (DateTimeParseException e) {
+                throw new DukeException.InvalidDateFormat();
+            }
+
+            return new DeadlineCommand(tokens[0].trim(), startDate);
+
         case DukeString.COMMAND_EVENT:
             if (!scanner.hasNext()) {
                 throw new DukeException.EmptyDescription(DukeString.COMMAND_EVENT);
@@ -107,15 +121,18 @@ public class Parser {
             if (dates.length < 2 || dates[0].isBlank() || dates[1].isBlank()) {
                 throw new DukeException.EmptyEventDate();
             }
-            if (LocalDateTime.parse(dates[0].trim()).compareTo(LocalDateTime.parse(dates[1].trim())) >= 0) {
+            try {
+                startDate = LocalDateTime.parse(dates[0].trim(), formatter);
+                endDate = LocalDateTime.parse(dates[1].trim(), formatter);
+            } catch (DateTimeParseException e) {
+                throw new DukeException.InvalidDateFormat();
+            }
+
+            if (startDate.compareTo(endDate) >= 0) {
                 throw new DukeException.InvalidEventEnd();
             }
 
-            return new EventCommand(
-                    tokens[0].trim(),
-                    LocalDateTime.parse(dates[0].trim()),
-                    LocalDateTime.parse(dates[1].trim())
-            );
+            return new EventCommand(tokens[0].trim(), startDate, endDate);
         case DukeString.COMMAND_TODO:
             if (!scanner.hasNext()) {
                 throw new DukeException.EmptyDescription(DukeString.COMMAND_TODO);

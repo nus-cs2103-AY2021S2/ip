@@ -30,9 +30,17 @@ public final class DukeString {
     public static final String COMMAND_FIND = "find";
     public static final String COMMAND_SNOOZE = "snooze";
 
+    public static final String FORMAT_DATE_INPUT = "dd-MM-yy HHmm";
+    public static final String FORMAT_DATE_OUTPUT = "dd LLL uu hhmma";
+    public static final String FORMAT_DEADLINE = "[D]%s (by: %s)";
+    public static final String FORMAT_EVENT = "[E]%s (from: %s to %s)";
+    public static final String FORMAT_TODO = "[T]%s";
+
     public static final String EXCEPTION_INVALID_COMMAND = "Sorry, I did not understand that.";
     public static final String EXCEPTION_EMPTY_DESCRIPTION = "Sorry, the description of a %s cannot be empty.";
     public static final String EXCEPTION_INVALID_TASK = "Sorry, I could not find that task.";
+    public static final String EXCEPTION_INVALID_DATE
+            = "Sorry, I did not understand that date. Please use dd-MM-yy HHmm.";
     public static final String EXCEPTION_EMPTY_DEADLINE_DATE = "Sorry, the date of a deadline must be specified.";
     public static final String EXCEPTION_EMPTY_EVENT_DATE =
             "Sorry, the start and end date of an event must be specified.";

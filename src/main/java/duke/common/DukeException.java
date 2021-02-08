@@ -1,5 +1,7 @@
 package duke.common;
 
+import java.time.format.DateTimeParseException;
+
 /**
  * A utility class to consolidate all exceptions related to Duke.
  */
@@ -19,6 +21,12 @@ public class DukeException {
     public static class InvalidTask extends IllegalArgumentException {
         public InvalidTask() {
             super(DukeString.EXCEPTION_INVALID_TASK);
+        }
+    }
+
+    public static class InvalidDateFormat extends IllegalArgumentException {
+        public InvalidDateFormat() {
+            super(DukeString.EXCEPTION_INVALID_DATE);
         }
     }
 

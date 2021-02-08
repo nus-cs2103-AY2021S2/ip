@@ -43,6 +43,7 @@ public class DukeBot {
                 this.storage.writeTasks(taskList);
             } catch (DukeException.InvalidCommand
                     | DukeException.InvalidTask
+                    | DukeException.InvalidDateFormat
                     | DukeException.EmptyDescription
                     | DukeException.EmptyDeadlineDate
                     | DukeException.EmptyEventDate
@@ -66,6 +67,7 @@ public class DukeBot {
             return out;
         } catch (DukeException.InvalidCommand
                 | DukeException.InvalidTask
+                | DukeException.InvalidDateFormat
                 | DukeException.EmptyDescription
                 | DukeException.EmptyDeadlineDate
                 | DukeException.EmptyEventDate
