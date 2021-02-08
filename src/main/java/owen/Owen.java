@@ -61,6 +61,7 @@ public class Owen implements Chatbot {
 
     @Override
     public Owen parseCommand(String commandString) {
+        assert commandString.length() > 0 : "commandString must not be empty";
         try {
             Command command = Parser.parseCommand(commandString);
 
@@ -96,6 +97,7 @@ public class Owen implements Chatbot {
      * @throws OwenException Task could not be parsed.
      */
     private Owen addTask(String task) throws OwenException {
+        assert task.length() > 0 : "task must not be empty";
         TaskList addedTaskList = this.taskList.addTask(task);
         int numTasks = addedTaskList.getNumTasks();
         String addedFormat = ""
@@ -126,6 +128,7 @@ public class Owen implements Chatbot {
      * @throws OwenException Task number does not exist.
      */
     private Owen doneTask(int taskNumber) throws OwenException {
+        assert taskNumber > 0 : "taskNumber must be more than 0";
         TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
         String doneFormat = "Nice! I've marked this task as done:\n    %s";
         String doneResponse = String.format(
@@ -142,6 +145,7 @@ public class Owen implements Chatbot {
      * @throws OwenException Task number does not exist.
      */
     private Owen deleteTask(int taskNumber) throws OwenException {
+        assert taskNumber > 0 : "taskNumber must be more than 0";
         TaskList deleteTaskList = this.taskList.deleteTask(taskNumber);
         String deleteFormat = ""
                 + "Noted. I've removed this task:\n"

@@ -42,6 +42,7 @@ public class TodoTask extends Task {
      * @return TodoTask deserialized from string.
      */
     public static TodoTask deserialize(String string) {
+        assert string.length() > 0 : "string cannot be empty";
         String[] fields = string.split(" \\| ");
         boolean isDone = Boolean.valueOf(fields[1]);
         String description = fields[2];

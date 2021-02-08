@@ -66,6 +66,7 @@ public class EventTask extends Task {
      * @throws OwenException Task could not be deserialized.
      */
     public static EventTask deserialize(String string) throws OwenException {
+        assert string.length() > 0 : "string cannot be empty";
         String[] fields = string.split(" \\| ");
         boolean isDone = Boolean.valueOf(fields[1]);
         String description = fields[2];
