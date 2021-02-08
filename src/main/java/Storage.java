@@ -32,8 +32,12 @@ public class Storage {
             case "D":
                 toAdd = new Deadline(spl[2], LocalDate.parse(spl[3]), LocalTime.parse(spl[4]));
                 break;
-            default: // Default is the case "E"
+            case "E":
                 toAdd = new Event(spl[2], LocalDate.parse(spl[3]), LocalTime.parse(spl[4]));
+                break;
+            default:
+                System.out.println("Error in uploading from hardDrive.");
+                return -1;
             }
 
             if (spl[1].equals("1")) {
