@@ -14,6 +14,7 @@ public class Parser {
      * @return String array with 2 elements.
      */
     public static String[] parseCommand(String command) {
+        assert command.length() != 0 : "Command String is empty";
         String[] stringArr = command.split(" ", 2);
         if (stringArr.length == 1) {
             stringArr = new String[]{command, ""};
@@ -38,6 +39,7 @@ public class Parser {
             throw new DukeException("The description of a "
                     + command.name().toLowerCase() + " cannot be empty.");
         }
+        assert command != null : "DukeCommand cannot be null";
         switch (command) {
         case DELETE:
             // Fallthrough
@@ -74,6 +76,8 @@ public class Parser {
      * @throws DukeException if the tasktype is invalid.
      */
     public static Task parseTaskFromFile(String line) throws DukeException {
+        assert line.length() != 0 : "Line cannot be empty";
+        assert line.contains(" ~ ") : "Line must be delimited by ' ~ '";
         String[] parsedLine = line.split(" ~ ");
         TaskType taskType = TaskType.fromString(parsedLine[0]);
         Boolean isDone = (Integer.valueOf(parsedLine[1]) == 1) ? true : false;
