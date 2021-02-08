@@ -2,7 +2,6 @@ package mike;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +15,6 @@ import command.ExceptionCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.TodoCommand;
-import exception.MikeInvalidInputException;
 
 public class Parser {
 
@@ -34,7 +32,7 @@ public class Parser {
      *
      * @return Command.Command type object with parameters entered by user
      */
-    public static Command parseInput(String userInput){
+    public static Command parseInput(String userInput) {
         String errMsg;
         String[] userInputArr = userInput.split(" ");
         Pattern pattern;

@@ -2,7 +2,7 @@ package command;
 
 import mike.TaskList;
 
-public class ExceptionCommand implements Command{
+public class ExceptionCommand implements Command {
     private String errMsg;
 
     public ExceptionCommand(String errMsg) {
