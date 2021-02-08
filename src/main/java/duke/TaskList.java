@@ -2,7 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Represents a List of Tasks, and is able to perform
