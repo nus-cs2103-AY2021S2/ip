@@ -1,6 +1,6 @@
 package bob.task;
 
-import bob.DukeException;
+import bob.BobException;
 
 import java.util.ArrayList;
 
@@ -31,13 +31,13 @@ public class TaskList {
      * @param isDone The status of the task to be updated
      * @return An updated Task object containing the changed task.
      */
-    public Task changeStatus(int index, boolean isDone) throws DukeException {
+    public Task changeStatus(int index, boolean isDone) throws BobException {
         try {
             Task updatedTask = this.taskList.get(index);
             updatedTask.setStatus(isDone);
             return updatedTask;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Please try again with a valid task index!", e);
+            throw new BobException("Please try again with a valid task index!", e);
         }
     }
 
@@ -100,11 +100,11 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder tasks = new StringBuilder();
+        StringBuilder task = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
-            tasks.append(index).append(".").append(taskList.get(i)).append("\n");
+            task.append(index).append(".").append(taskList.get(i)).append("\n");
         }
-        return tasks.toString();
+        return task.toString();
     }
 }
