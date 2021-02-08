@@ -27,7 +27,7 @@ public class Duke {
   }
 
   public String getResponse(String input) throws IOException {
-    assert(input != null);
+    assert (input != null);
     return ui.readUserInput(input, storage, tasks);
   }
 
@@ -37,13 +37,8 @@ public class Duke {
 
   public void run() throws IOException, DescriptionError {
     ui.greeting();
-    //Parser parse = new Parser();
-    //parse.userinput(tasks, storage);
   }
 
-  public void listtask() {
-    tasks.list();
-  }
 
   /**
    *  instantiate Duke class and starts the run command.

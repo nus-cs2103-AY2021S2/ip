@@ -19,39 +19,39 @@ public class Parser {
    */
 
   public String userinput(String command) throws IOException, DescriptionError {
-      String input = command;
-      String outputMessage = "";
-      if (input.equals("bye")) {
-        outputMessage = ui.bye();
-      } else if (input.equals("list")) {
-        outputMessage = tasklist.list();
-      } else if (input.split(" ")[0].equals("done")) {
-        outputMessage = done(input, tasklist, outputMessage);
-        store.save(tasklist.getTasklist());
-      } else if (input.split(" ")[0].equals("find")) {
-        outputMessage = tasklist.findtask(input.split(" ")[1]);
-      } else if (input.split(" ")[0].equals("todo")) {
-        outputMessage = todo(input, tasklist, outputMessage);
-        store.save(tasklist.getTasklist());
-      } else if (input.split(" ")[0].equals("deadline")) {
-        outputMessage = deadline(input, tasklist,outputMessage);
-        store.save(tasklist.getTasklist());
-      } else if (input.split(" ")[0].equals("event")) {
-        outputMessage = event(input, tasklist, outputMessage);
-        store.save(tasklist.getTasklist());
-      } else if (input.split(" ")[0].equals("delete")) {
-        outputMessage = deleteTask(input, tasklist,outputMessage);
-        store.save(tasklist.getTasklist());
-      } else {
-        try {
-          throw new UnknownInputError("☹ OOPS!!! I'm sorry, "
+    String input = command;
+    String outputMessage = "";
+    if (input.equals("bye")) {
+      outputMessage = ui.bye();
+    } else if (input.equals("list")) {
+      outputMessage = tasklist.listTask();
+    } else if (input.split(" ")[0].equals("done")) {
+      outputMessage = done(input, tasklist, outputMessage);
+      store.save(tasklist.getTasklist());
+    } else if (input.split(" ")[0].equals("find")) {
+      outputMessage = tasklist.findTask(input.split(" ")[1]);
+    } else if (input.split(" ")[0].equals("todo")) {
+      outputMessage = todo(input, tasklist, outputMessage);
+      store.save(tasklist.getTasklist());
+    } else if (input.split(" ")[0].equals("deadline")) {
+      outputMessage = deadline(input, tasklist, outputMessage);
+      store.save(tasklist.getTasklist());
+    } else if (input.split(" ")[0].equals("event")) {
+      outputMessage = event(input, tasklist, outputMessage);
+      store.save(tasklist.getTasklist());
+    } else if (input.split(" ")[0].equals("delete")) {
+      outputMessage = deleteTask(input, tasklist, outputMessage);
+      store.save(tasklist.getTasklist());
+    } else {
+      try {
+        throw new UnknownInputError("☹ OOPS!!! I'm sorry, "
                      + "but I don't know what that means :-(");
-        } catch (UnknownInputError e) {
-          outputMessage += e.getMessage();
-        }
+      } catch (UnknownInputError e) {
+        outputMessage += e.getMessage();
       }
-      return outputMessage;
     }
+    return outputMessage;
+  }
 
 
 
@@ -191,10 +191,10 @@ public class Parser {
    * Handles delete ommand by the user by removing the tasks inside the arraylist.
    */
 
-  public String deleteTask(String input, TaskList taskList,String output) {
+  public String deleteTask(String input, TaskList taskList, String output) {
     try {
       if (input.length() == 4) {
-        output +="☹ OOPS!!! The description of "
+        output += "☹ OOPS!!! The description of "
                 + "a delete task cannot be empty.";
         throw new DescriptionError("☹ OOPS!!! The description of "
                           + "a delete task cannot be empty.");
