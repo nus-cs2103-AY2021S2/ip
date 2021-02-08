@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
                 }
             };
             Timer timer = new Timer();
-            timer.schedule(closeApp, 2000);
+            timer.schedule(closeApp, 1500);
         }
     }
 }
