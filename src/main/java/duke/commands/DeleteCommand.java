@@ -27,6 +27,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert !input.isBlank() : "input should not be blank";
+        assert !input.isEmpty() : "input should not be empty";
+
         int listSize = taskList.size();
         if (listSize <= 0) {
             throw new DukeException("Your task list is empty.");
@@ -34,8 +37,10 @@ public class DeleteCommand extends Command {
 
         String returnMessage;
         if (input.equals("all")) {
+            //Cloning taskList for print message
             TaskList tl = taskList.clone();
             taskList.clear();
+            assert taskList.size() > 0 : "taskList should be emptied";
             storage.saveFile(taskList);
             returnMessage = ui.showDeleteMessage(tl);
         } else {
@@ -44,7 +49,9 @@ public class DeleteCommand extends Command {
                 throw new DukeException("The number you have entered is out of bound.");
             }
 
+            assert index >= 0 : "input should not be negative";
             Task task = taskList.delete(index);
+            assert taskList.get(index) == null : "task should be deleted";
             storage.saveFile(taskList);
             returnMessage = ui.showDeleteMessage(task, taskList.size());
         }

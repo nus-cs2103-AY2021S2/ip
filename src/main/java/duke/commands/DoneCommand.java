@@ -27,6 +27,9 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert !input.isBlank() : "input should not be blank";
+        assert !input.isEmpty() : "input should not be empty";
+
         int listSize = taskList.size();
         if (listSize <= 0) {
             throw new DukeException("Your task list is empty.");
@@ -41,9 +44,11 @@ public class DoneCommand extends Command {
             returnMessage = ui.showDoneMessage(taskList);
         } else {
             int index = Integer.parseInt(input) - 1;
+
             if (index < 0 || index >= listSize) {
                 throw new DukeException("The index you entered is out of bound.");
             }
+            assert index >= 0 : "input should not be negative";
 
             Task task = taskList.get(index);
             if (task.getDone()) {
@@ -51,6 +56,7 @@ public class DoneCommand extends Command {
             }
 
             task.setDone();
+            assert task.getDone() : "task should be set as done";
             returnMessage = ui.showDoneMessage(task);
         }
 

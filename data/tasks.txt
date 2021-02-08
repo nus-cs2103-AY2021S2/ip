@@ -1,2 +1,0 @@
-D | 0 | return books | 2019-11-01T18:00
-T | 0 | buy groceries
