@@ -50,7 +50,7 @@ public class DateTime {
 
     /**
      * Parse a date time string in DD/MM/YYYY HHMM format.
-     * 
+     *
      * @param string Date time string in DD/MM/YYYY HHMM format.
      * @return DateTime from parsed string.
      * @throws OwenException DateTime could not be parsed.
@@ -66,7 +66,7 @@ public class DateTime {
 
     /**
      * Returns date time string in DD/MM/YYYY HHMM format.
-     * 
+     *
      * @return Date time string in DD/MM/YYYY HHMM format.
      */
     public String getAsInputFormat() {
@@ -75,7 +75,7 @@ public class DateTime {
 
     /**
      * Returns date time string in Month DD YYYY HH:MM AM/PM format.
-     * 
+     *
      * @return Date time string in Month DD YYYY HH:MM AM/PM format.
      */
     public String getAsOutputFormat() {

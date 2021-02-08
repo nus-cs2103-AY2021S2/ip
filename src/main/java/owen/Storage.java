@@ -16,7 +16,7 @@ public class Storage {
 
     /**
      * Create storage backed by a file on disk.
-     * 
+     *
      * @param path Path to file on disk.
      */
     public Storage(String path) {
@@ -25,7 +25,7 @@ public class Storage {
 
     /**
      * Reads TaskList from disk.
-     * 
+     *
      * @return TaskList read from disk.
      */
     public TaskList readTaskList() {
@@ -51,7 +51,7 @@ public class Storage {
 
     /**
      * Writes TaskList to disk.
-     * 
+     *
      * @param taskList TaskList to write.
      * @return this Storage.
      * @throws OwenException Error writing to disk.

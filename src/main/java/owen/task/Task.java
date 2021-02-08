@@ -24,7 +24,7 @@ public abstract class Task {
 
     /**
      * Gets task description.
-     * 
+     *
      * @return Task description.
      */
     public String getDescription() {
@@ -33,14 +33,14 @@ public abstract class Task {
 
     /**
      * Marks task as done and return copy with updated state.
-     * 
+     *
      * @return Copy of task with the state updated to done.
      */
     public abstract Task markAsDone();
 
     /**
      * Serializes task into a String.
-     * 
+     *
      * @return Serialized version of task as string.
      */
     public abstract String serialize();
