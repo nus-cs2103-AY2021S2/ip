@@ -31,6 +31,7 @@ public abstract class AddCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task curTask = getTask();
+        assert(curTask != null);
         tasks.addTask(curTask);
         ui.printTaskListStatus(tasks, curTask);
     }

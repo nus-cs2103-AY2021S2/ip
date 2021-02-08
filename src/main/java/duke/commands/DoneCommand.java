@@ -23,6 +23,9 @@ public class DoneCommand implements Command {
         if (index >= tasks.size()) {
             throw new DukeException("The index of the task needs to be present in the list.");
         }
+
+        assert(tasks.size() > 0);
+
         Task curTask = tasks.getTask(index - 1);
         curTask.markAsDone();
         ui.printIndentOutput("Nice! I've marked this task as done:");

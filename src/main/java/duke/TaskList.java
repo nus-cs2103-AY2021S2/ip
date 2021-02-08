@@ -22,10 +22,13 @@ public class TaskList {
     }
 
     public void addTask(Task t) {
+        assert(t != null);
         this.tasks.add(t);
     }
 
     public Task getTask(int index) {
+        assert(index < this.tasks.size());
+        assert(index >= 0);
         return this.tasks.get(index);
     }
 
