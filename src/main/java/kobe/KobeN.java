@@ -123,6 +123,33 @@ public class KobeN extends Application {
 
         AnchorPane.setBottomAnchor(userInput, 1.0);
         AnchorPane.setLeftAnchor(userInput, 1.0);
+
+        //Step 3: Add functionality to handle user input
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) ->
+                scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Creates a label with the specified text and adds it to the dialog container.
+     *
+     * @param text String containing input text
+     * @return  a label with the specified user input text with word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true); //text wrapping (auto line creation)
+
+        return textToAdd;
     }
 
 }
