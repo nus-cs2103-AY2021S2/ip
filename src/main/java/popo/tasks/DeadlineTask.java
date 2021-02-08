@@ -19,7 +19,7 @@ public class DeadlineTask extends Task {
      * with the task set to initially not completed.
      *
      * @param name         Name of the task.
-     * @param deadlineDate Fate component of deadline.
+     * @param deadlineDate Date component of deadline.
      */
     public DeadlineTask(String name, LocalDate deadlineDate) {
         super(IDENTIFIER, name);

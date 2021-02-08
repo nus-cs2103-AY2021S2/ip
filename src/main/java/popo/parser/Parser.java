@@ -5,15 +5,12 @@ import static popo.utils.Messages.MESSAGE_ENTER_COMMAND;
 import static popo.utils.Messages.MESSAGE_FOLLOW_USAGE;
 import static popo.utils.Messages.MESSAGE_INDICATE_TASK;
 import static popo.utils.Messages.MESSAGE_INVALID_COMMAND;
-import static popo.utils.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static popo.utils.Messages.MESSAGE_INVALID_SYNTAX;
 import static popo.utils.Messages.MESSAGE_INVALID_TASK_INDEX;
-import static popo.utils.Messages.MESSAGE_INVALID_TIME_FORMAT;
 import static popo.utils.Messages.MESSAGE_MISSING_SEARCH_WORD;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,8 +26,8 @@ import popo.commands.InvalidCommandException;
 import popo.commands.InvalidDescriptionException;
 import popo.commands.ListCommand;
 import popo.commands.NoDescriptionException;
+import popo.commands.PeriodCommand;
 import popo.commands.ToDoCommand;
-import popo.utils.InputDateTimeFormat;
 
 /**
  * Parses user input.
@@ -70,6 +67,8 @@ public class Parser {
             return parseArgumentsForToDo(arguments);
         case DeadlineCommand.COMMAND_WORD:
             return parseArgumentsForDeadline(arguments);
+        case PeriodCommand.COMMAND_WORD:
+            return parseArgumentsForPeriod(arguments);
         case EventCommand.COMMAND_WORD:
             return parseArgumentsForEvent(arguments);
         case ByeCommand.COMMAND_WORD:
@@ -121,16 +120,14 @@ public class Parser {
                     + MESSAGE_FOLLOW_USAGE + "\n"
                     + DeadlineCommand.MESSAGE_USAGE);
         }
-        // Split the user input into the task name and the datetime string
         String[] deadlineInputArr = arguments.split("/by", 2);
         assert deadlineInputArr.length == 2;
         String deadlineTaskName = deadlineInputArr[0].strip();
         String userInputDateTime = deadlineInputArr[1].strip();
 
-        // Split the datetime string into a date string and a time string (if available)
         String[] userInputDateTimeArr = userInputDateTime.split("\\s*,*\\s+|\\s*,\\s*", 2);
         String userInputDate = userInputDateTimeArr[0].strip();
-        LocalDate deadlineDate = parseDate(userInputDate);
+        LocalDate deadlineDate = ParserUtil.parseDate(userInputDate);
 
         if (userInputDateTimeArr.length == 1) {
             // User did not enter a time string
@@ -139,43 +136,41 @@ public class Parser {
             assert userInputDateTimeArr.length == 2 : "There should be a time component string in the array";
             // User entered a time string
             String userInputTime = userInputDateTimeArr[1].strip();
-            LocalTime deadlineTime = parseTime(userInputTime);
+            LocalTime deadlineTime = ParserUtil.parseTime(userInputTime);
             return new DeadlineCommand(deadlineTaskName, deadlineDate, deadlineTime);
         }
     }
 
     /**
-     * Parses the input date string format into a {@code LocalDate} object.
+     * Parses the arguments for the period command.
      *
-     * @param dateString User input date string.
-     * @return {@code LocalDate} object representing the date.
-     * @throws InvalidDescriptionException If the format of the date is invalid.
+     * @param arguments User input arguments string.
+     * @return {@code PeriodCommand}.
+     * @throws NoDescriptionException      If the description of the task is empty.
+     * @throws InvalidDescriptionException If the formats of the dates are invalid.
      */
-    private static LocalDate parseDate(String dateString) throws InvalidDescriptionException {
-        try {
-            return LocalDate.parse(dateString, InputDateTimeFormat.INPUT_DATE_FORMAT);
-        } catch (DateTimeParseException ex) {
-            throw new InvalidDescriptionException(MESSAGE_INVALID_DATE_FORMAT + "\n"
-                    + MESSAGE_FOLLOW_USAGE + "\n"
-                    + DeadlineCommand.MESSAGE_USAGE);
+    private Command parseArgumentsForPeriod(String arguments) throws NoDescriptionException,
+            InvalidDescriptionException {
+        if (arguments.isBlank()) {
+            throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         }
-    }
+        if (!arguments.contains("/start") || !arguments.contains("/end")) {
+            throw new InvalidDescriptionException(MESSAGE_INVALID_SYNTAX + "\n"
+                    + MESSAGE_FOLLOW_USAGE + "\n"
+                    + PeriodCommand.MESSAGE_USAGE);
+        }
+        String[] periodInputArr = arguments.split("/start", 2);
+        assert periodInputArr.length == 2;
+        String periodTaskName = periodInputArr[0].strip();
+        String dates = periodInputArr[1].strip();
 
-    /**
-     * Parses the input time string format into a {@code LocalTime} object.
-     *
-     * @param timeString User input time string.
-     * @return {@code LocalTime} object representing the time.
-     * @throws InvalidDescriptionException If the format of the time is invalid.
-     */
-    private static LocalTime parseTime(String timeString) throws InvalidDescriptionException {
-        try {
-            return LocalTime.parse(timeString, InputDateTimeFormat.INPUT_TIME_FORMAT);
-        } catch (DateTimeParseException ex) {
-            throw new InvalidDescriptionException(MESSAGE_INVALID_TIME_FORMAT + "\n"
-                    + MESSAGE_FOLLOW_USAGE + "\n"
-                    + DeadlineCommand.MESSAGE_USAGE);
-        }
+        String[] datesArr = dates.split("/end", 2);
+        assert datesArr.length == 2;
+        String startDateString = datesArr[0].strip();
+        String endDateString = datesArr[1].strip();
+        LocalDate startDate = ParserUtil.parseDate(startDateString);
+        LocalDate endDate = ParserUtil.parseDate(endDateString);
+        return new PeriodCommand(periodTaskName, startDate, endDate);
     }
 
     /**
