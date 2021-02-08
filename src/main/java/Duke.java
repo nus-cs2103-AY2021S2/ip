@@ -1,9 +1,16 @@
 import java.util.Scanner;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Duke {
 
-    public static Task[] tasks = new Task[100];
-    public static int numTasks;
+    private static final String FILE_DIR = "data/";
+    private static final String FILE_PATH = FILE_DIR + "duke_data.txt";
+
+    public static TaskList taskList = new TaskList();
 
     public static void printMessage(String message) {
         String s = "     ";
@@ -30,116 +37,129 @@ public class Duke {
         printMessage("Bye. Hope to see you again soon!");
     }
 
-    public static void listTasks() {
-        int i = 0;
-        String listTasksMessage = "Here are the tasks in your list: \n";
-        while (i < numTasks) {
-            Task t = tasks[i];
-            i++;
-            listTasksMessage += String.valueOf(i) + ". " + t.toString() + "\n";
-        }
-        printMessage(listTasksMessage);
-    }
-
-    public static void addTask(String userCommand, String userDescription) {
-        if (String.valueOf(userDescription).equals("") == true) {
-            printMessage("Oops, the description of a '" + userCommand + "' cannot be empty.");
-            return;
-        }
-        Task t;
-        String taskDescription;
-        SplitString parsedUserDescription;
-        
-        switch (userCommand) {
-            case "todo":
-                taskDescription = userDescription;
-                t = new Task(taskDescription);
-                break;
-            case "deadline":
-                parsedUserDescription = new SplitString(userDescription, "/by ");
-                taskDescription = parsedUserDescription.getFirstString();
-                String taskBy = parsedUserDescription.getSecondString();
-                t = new Deadline(taskDescription, taskBy);
-                break;
-            case "event":
-                parsedUserDescription = new SplitString(userDescription, "/at ");
-                taskDescription = parsedUserDescription.getFirstString();
-                String taskAt = parsedUserDescription.getSecondString();
-                t = new Event(taskDescription, taskAt);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + userCommand);
-        }
-
-        tasks[numTasks] = t;
-        String addTaskMessage = "Got it. I've added this task: \n   " + tasks[numTasks].toString() + "\n";
-        numTasks++;
-        addTaskMessage += "Now you have " + String.valueOf(numTasks) + " task";
-        addTaskMessage += numTasks == 1 ? "" : "s";
-        addTaskMessage += " in the list.";
-        printMessage(addTaskMessage);
-    }
-
     public static void doTask(String userDescription) {
-        int taskNum = Integer.parseInt(userDescription);
-        Task t = tasks[taskNum - 1];
-        t.markAsDone();
-        String doTaskMessage = "Nice! I've marked this task as done: \n" + "   " + t.toString();
-        printMessage(doTaskMessage);
+
     }
 
-    public static void deleteTask(String userDescription) {
-        int taskNum = Integer.parseInt(userDescription);
-        Task t = tasks[taskNum - 1];
-        String deleteTaskMessage = "Noted, I've removed this task: \n" + "   " + t.toString() + "\n";
+    public static void doCommand(String userCommand, String userDesc) {
+        int taskNum;
+        String stringToPrint = "";
+        switch (userCommand) {
+        case "list":
+            stringToPrint = taskList.listTask();
+            break;
+        case "todo": //Fallthrough
+        case "deadline": //Fallthrough
+        case "event":
+            stringToPrint = taskList.addTask(userCommand, userDesc);
+            break;
+        case "done":
+            taskNum = Integer.parseInt(userDesc);
+            stringToPrint = taskList.doTask(taskNum);
+            break;
+        case "delete":
+            taskNum = Integer.parseInt(userDesc);
+            stringToPrint = taskList.deleteTask(taskNum);
+            break;
+        default:
+            stringToPrint = "Oops, the command '" + userCommand + "' is not recognised.\n";
+        }
+        printMessage(stringToPrint);
+    }
 
-        int i = taskNum;
-        while (i < 99) {
-            tasks[i - 1] = tasks[i];
+    public static void saveFile() {
+        String stringToWrite = "";
+        String taskIsDone, taskType, taskName, taskByAt;
+        Task t;
+        int i = 0;
+        while (i < taskList.numTask) {
+            t = taskList.tasks[i];
+            taskIsDone = t.getIsDone() ? "1" : "0";
+            taskType = "";
+            taskName = t.getDescription();
+            taskByAt = "";
+            if (t instanceof Deadline) {
+                taskType = "deadline ";
+                taskByAt = "/by " + ((Deadline) t).getBy();
+            } else if (t instanceof Event) {
+                taskType = "event ";
+                taskByAt = "/at " + ((Event) t).getAt();
+            } else {
+                taskType = "todo ";
+            }
+            stringToWrite += taskIsDone + "," + taskType + taskName + taskByAt + "\n";
             i++;
         }
 
-        numTasks--;
-        deleteTaskMessage += "Now you have " + String.valueOf(numTasks) + " task";
-        deleteTaskMessage += numTasks == 1 ? "" : "s";
-        deleteTaskMessage += " in the list.";
-        printMessage(deleteTaskMessage);
+        try {
+            FileWriter taskFileWriter = new FileWriter(FILE_PATH);
+            taskFileWriter.write(stringToWrite);
+            taskFileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadFile() {
+        try {
+            File taskDir = new File(FILE_DIR);
+            if (!taskDir.isDirectory()) {
+                taskDir.mkdir();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        File taskFile;
+
+        try {
+            taskFile = new File(FILE_PATH);
+            if (taskFile.exists() == false) {
+                taskFile.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String lineString, lineIsDone, lineRemaining, lineCommand, lineDesc;
+        try {
+            taskFile = new File(FILE_PATH);
+            Scanner taskFileScanner = new Scanner(taskFile);
+            int i = 0;
+            while (taskFileScanner.hasNextLine()) {
+                lineString = taskFileScanner.nextLine();
+                lineIsDone = new SplitString(lineString, ",").getFirstString();
+                lineRemaining = new SplitString(lineString, ",").getSecondString();
+                lineCommand = new SplitString(lineRemaining, " ").getFirstString();
+                lineDesc = new SplitString(lineRemaining, " ").getSecondString();
+
+                taskList.addTask(lineCommand, lineDesc);
+                if (String.valueOf(lineIsDone).equals("1") == true) {
+                    taskList.tasks[i].markAsDone();
+                }
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
+        loadFile();
         printWelcomeMessage();
 
-        String userInput, userCommand, userDescription;
-        SplitString parsedUserInput;
         Scanner scan = new Scanner(System.in);
+        String userInput = scan.nextLine();
+        String userCommand = new SplitString(userInput, " ").getFirstString().toLowerCase();
+        String userDesc = new SplitString(userInput, " ").getSecondString();
 
-        while (true) {
+        while (String.valueOf(userCommand).equals("bye") == false) {
+            doCommand(userCommand, userDesc);
+            saveFile();
+
             userInput = scan.nextLine();
-            parsedUserInput = new SplitString(userInput, " ");
-            userCommand = parsedUserInput.getFirstString().toLowerCase();
-            userDescription = parsedUserInput.getSecondString();
-
-            if (String.valueOf(userCommand).equals("bye") == true) {
-                break;
-            }
-            switch (userCommand) {
-                case "list":
-                    listTasks();
-                    break;
-                case "done":
-                    doTask(userDescription);
-                    break;
-                case "delete":
-                    deleteTask(userDescription);
-                    break;
-                case "todo": //Fallthrough
-                case "deadline": //Fallthrough
-                case "event":
-                    addTask(userCommand, userDescription);
-                    break;
-                default:
-                    printMessage("Oops, the command '" + userCommand + "' is not recognised.");
-            }
+            userCommand = new SplitString(userInput, " ").getFirstString().toLowerCase();
+            userDesc = new SplitString(userInput, " ").getSecondString();
         }
 
         scan.close();
