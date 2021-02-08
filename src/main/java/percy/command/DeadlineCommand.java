@@ -22,14 +22,14 @@ public class DeadlineCommand extends Command {
     /**
      * User guide for input format.
      */
-    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
+    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<>(List.of(
             "deadline: Adds a task that needs to be done before a specific date and time.",
             "Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) TIME(HHmm)",
             "Example: deadline return book /by 2021-01-27"));
 
-    private String deadlineDescription;
-    private LocalDate date;
-    private LocalTime time;
+    private final String deadlineDescription;
+    private final LocalDate date;
+    private final LocalTime time;
 
     /**
      * Constructor for Deadline Command.
@@ -55,15 +55,7 @@ public class DeadlineCommand extends Command {
      *
      * @param taskList The TaskList from the main Duke object.
      */
-    public String execute(TaskList taskList, Storage storage) throws IOException { // Is task list Immutable?
-        try {
-            if (deadlineDescription.isEmpty()) {
-                throw new ParsingException("deadline");
-            }
-        } catch (ParsingException ex) {
-            Ui.makeMsg(ex.toString());
-        }
-
+    public String execute(TaskList taskList, Storage storage) throws IOException {
         Task deadlineTask = new Deadline(deadlineDescription, date, time);
         taskList.addTaskToList(deadlineTask);
         storage.save(taskList);

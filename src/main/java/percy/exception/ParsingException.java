@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import percy.command.DeadlineCommand;
 import percy.command.DeleteCommand;
+import percy.command.DoneCommand;
 import percy.command.EventCommand;
 import percy.command.FindCommand;
 import percy.command.TodoCommand;
@@ -34,7 +35,7 @@ public class ParsingException extends PercyException {
             arr.addAll(EventCommand.USAGE_GUIDE);
             return Ui.makeMsg(arr);
         case DeadlineCommand.COMMAND:
-            arr.add("☹ OOPS!!! The description or date/time of an event cannot be empty.\n");
+            arr.add("☹ OOPS!!! The description or date/time of a deadline cannot be empty.\n");
             arr.addAll(DeadlineCommand.USAGE_GUIDE);
             return Ui.makeMsg(arr);
         case FindCommand.COMMAND:
@@ -44,6 +45,10 @@ public class ParsingException extends PercyException {
         case DeleteCommand.COMMAND:
             arr.add("OOPS!!! The task number given is invalid.\n");
             arr.addAll(DeleteCommand.USAGE_GUIDE);
+            return Ui.makeMsg(arr);
+        case DoneCommand.COMMAND:
+            arr.add("OOPS!!! The task number given is invalid.\n");
+            arr.addAll(DoneCommand.USAGE_GUIDE);
             return Ui.makeMsg(arr);
         default:
             return Ui.makeMsg(arr);

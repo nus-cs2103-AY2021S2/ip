@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.testng.reporters.FileStringBuffer;
 import percy.task.Deadline;
 import percy.task.Event;
 import percy.task.Task;
@@ -23,7 +22,7 @@ import percy.task.Todo;
 public class Storage {
     private static final String DELIMITER = " \\| ";
     private final String filePath = "./data/percy.txt";
-    private File file;
+    private final File file;
 
     /**
      * Constructs storage.
@@ -36,8 +35,7 @@ public class Storage {
                 file.getParentFile().mkdir(); // Creates data folder
                 file.createNewFile(); // throws IOException  create a file in abstract directory
             }
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.err.println(ex);
         }
     }
@@ -45,7 +43,6 @@ public class Storage {
     /**
      * Parses and then loads the tasks from storage into an ArrayList.
      * @return task list.
-     * @throws FileNotFoundException error
      */
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -88,12 +85,12 @@ public class Storage {
                     }
                     break;
                 default:
-                    System.out.println("Not found"); // change it to an error
+                    throw new FileNotFoundException();
                 }
             }
             scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
         }
         return taskList;
     }
@@ -103,7 +100,7 @@ public class Storage {
      * @param taskList the updated taskList.
      * @throws IOException error.
      */
-    public void save(TaskList taskList) throws IOException { // catch?
+    public void save(TaskList taskList) throws IOException {
         ArrayList<Task> taskArr = taskList.getTaskList();
         FileWriter file = new FileWriter(filePath);
         for (Task t: taskArr) {

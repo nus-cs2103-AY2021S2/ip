@@ -14,7 +14,7 @@ import percy.ui.Ui;
  */
 public class FindCommand extends Command {
     public static final String COMMAND = "find";
-    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
+    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<>(List.of(
             "find: Finds a task by searching for a keyword.",
             "Parameters: KEYWORD",
             "Example: find book"));

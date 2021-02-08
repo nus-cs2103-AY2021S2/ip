@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import percy.exception.ParsingException;
 import percy.storage.Storage;
 import percy.task.Task;
 import percy.task.TaskList;
@@ -11,12 +12,12 @@ import percy.ui.Ui;
 
 public class DoneCommand extends Command {
     public static final String COMMAND = "done";
-    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
+    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<>(List.of(
             "done: Marks a task as done.",
             "Parameters: TASK_NUMBER",
             "Example: done 2"));
 
-    private int taskNum;
+    private final int taskNum;
 
     /**
      * Constructs done command.
@@ -35,14 +36,16 @@ public class DoneCommand extends Command {
      *
      * @param taskList The TaskList from the main Duke object.
      */
-    public String execute(TaskList taskList, Storage storage) throws IOException { // Is task list Immutable?
-        ArrayList<Task> list = taskList.getTaskList();
-
-        Task doneTask = list.get(taskNum - 1);
-        doneTask.doTask();
-        storage.save(taskList);
-        // Task doneTask = list.get(taskNum - 1).doTask();
-        // list.set(taskNum - 1, doneTask);
-        return Ui.makeDoneMsg(doneTask);
+    public String execute(TaskList taskList, Storage storage) throws IOException {
+        try {
+            ArrayList<Task> list = taskList.getTaskList();
+            Task doneTask = list.get(taskNum - 1);
+            assert taskList.getTaskList().size() >= taskNum;
+            doneTask.doTask();
+            storage.save(taskList);
+            return Ui.makeDoneMsg(doneTask);
+        } catch (IndexOutOfBoundsException e) {
+            return new ParsingException(DoneCommand.COMMAND).toString();
+        }
     }
 }

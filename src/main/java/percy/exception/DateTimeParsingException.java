@@ -1,11 +1,11 @@
 package percy.exception;
 
+import java.util.ArrayList;
+
 import percy.command.DeadlineCommand;
 import percy.command.EventCommand;
-import percy.command.TodoCommand;
 import percy.ui.Ui;
 
-import java.util.ArrayList;
 
 public class DateTimeParsingException extends ParsingException {
 
@@ -15,7 +15,7 @@ public class DateTimeParsingException extends ParsingException {
 
     @Override
     public String toString() {
-        ArrayList<String> arr = new ArrayList<String>();
+        ArrayList<String> arr = new ArrayList<>();
         switch (taskType) {
         case EventCommand.COMMAND:
             arr.add("OOPS!!! The date and time format of an event is wrong.\n");
