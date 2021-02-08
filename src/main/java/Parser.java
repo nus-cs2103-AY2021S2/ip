@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private static final String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
     private static final String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
+    private static final String ERROR_INVALID_COMMAND = "OOPS!!! I`m sorry. but i don`t know what that means :-(";
 
     //TODO refactor code for SLAP
     /**
@@ -50,7 +51,7 @@ public class Parser {
             checkDescription(firstSpace, ERROR_DESCRIPTION);
             task = createTaskWithDeadline(fullCommand, keyword, firstSpace);
         } else {
-            return null;
+            throw new DukeException(ERROR_INVALID_COMMAND);
         }
 
         return new AddCommand(task);
@@ -64,6 +65,8 @@ public class Parser {
 
     private static Task createTaskWithDeadline(String fullCommand, String keyword, int firstSpace)
             throws DukeDeadlineException {
+        assert !keyword.trim().isEmpty();
+
         Task t = null;
         int firstSlash = fullCommand.indexOf("/");
 
@@ -100,6 +103,8 @@ public class Parser {
      */
 
     public static LocalDateTime[] parseDates(String data, String errorMessage) throws DukeDeadlineException {
+        assert !data.trim().isEmpty();
+
         int firstSpace = data.indexOf(" ");
         String date = data.substring(0, firstSpace);
         data = data.substring(firstSpace + 1);

@@ -24,6 +24,7 @@ public class Storage {
             while (s.hasNext()) {
                 String strTask = s.nextLine();
                 Task task = Parser.parseForText(strTask);
+                assert task != null;
                 tasks.add(task);
             }
             this.fileName = fileName;
