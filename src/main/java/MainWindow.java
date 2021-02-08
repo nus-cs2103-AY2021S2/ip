@@ -56,8 +56,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (input.equals("bye")) {
-            CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
+        if (input != null && input.equals("bye")) {
+            CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS).execute(() -> {
                 System.exit(0);
             });
         }
