@@ -23,6 +23,7 @@ public class Storage {
         while (s.hasNext()) {
             count++;
             String[] spl = s.nextLine().split("@@@", 5);
+            assert spl.length > 0 : "Impossible input. Error uploading to/from hardDrive.";
             Task toAdd;
             switch(spl[0]) {
             case "T":
@@ -38,6 +39,7 @@ public class Storage {
             if (spl[1].equals("1")) {
                 toAdd.finished();
             }
+
             TaskList.getStorage().add(toAdd);
         }
         return count;
@@ -48,7 +50,9 @@ public class Storage {
      */
     static void uploadToHardDrive() {
         try {
-            FileWriter fw = new FileWriter("./data/tasks.txt");
+            File file = new File("./data/tasks.txt");
+            assert file.exists() : "Impossible for the file to vanish right after the program finishes.";
+            FileWriter fw = new FileWriter(file);
             String between = "@@@";
             for (Task t : TaskList.getStorage()) {
                 String zero = t.getInitial();

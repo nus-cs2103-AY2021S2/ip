@@ -9,6 +9,7 @@ public class Parser {
      */
     static String parse(String inp) {
         String[] spl = inp.split(" ", 2);
+        assert spl.length > 0 : "Impossible input";
         String output;
         try {
             switch (spl[0]) {
@@ -76,7 +77,7 @@ public class Parser {
         try {
             int x = Integer.parseInt(s);
             if (x > TaskList.getCount()) {
-                throw new InvalidNumberException(Ui.invalidNumberExceptionMessage());
+                throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
             throw new InvalidNumberException(Ui.invalidNumberExceptionMessage());
