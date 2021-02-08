@@ -6,6 +6,6 @@ import todobeast.Ui;
 public class ShowInstructionsCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui) {
-        ui.showInstructions();
+        ui.addToResponseOutput(ui.showInstructions());
     }
 }

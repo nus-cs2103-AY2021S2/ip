@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
             throw new TaskNotFoundException("Task with index " + taskNumber + " does not exist in the list!");
         }
         taskList.deleteTask(taskNumber);
-        ui.showDeleted(taskList.getTask(taskNumber));
-        ui.showNumOfTasks(taskList.getNumOfTasks());
+        ui.addToResponseOutput(ui.showDeleted(taskList.getTask(taskNumber)));
+        ui.addToResponseOutput(ui.showNumOfTasks(taskList.getNumOfTasks()));
     }
 }

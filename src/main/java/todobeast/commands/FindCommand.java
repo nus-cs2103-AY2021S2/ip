@@ -24,7 +24,7 @@ public class FindCommand extends Command {
         List<Task> filteredList = tasks.stream()
                 .filter(task -> task.containsStringInDesc(regex))
                 .collect(Collectors.toList());
-        ui.findTasks();
-        ui.printTaskList(filteredList);
+        ui.addToResponseOutput(ui.findTasks());
+        ui.addToResponseOutput(ui.printTaskList(filteredList));
     }
 }

@@ -7,6 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -30,6 +35,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    @FXML
+    public void getWelcome() {
+        String welcome = toDoBeast.getWelcome();
+        dialogContainer.getChildren().add(DialogBox.getToDoBeastDialog(welcome, todobeast));
+    }
+
     public void setToDoBeast(ToDoBeast t) {
         toDoBeast = t;
     }
@@ -42,10 +53,23 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = toDoBeast.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, user),
-                DialogBox.getToDoBeastDialog(response, todobeast)
-        );
-        userInput.clear();
+        if (input.equals("exit")) {
+            handleExit();
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, user),
+                    DialogBox.getToDoBeastDialog(response, todobeast)
+            );
+            userInput.clear();
+        }
+
+    }
+
+    @FXML
+    private void handleExit() {
+        String exit = toDoBeast.getExit();
+        dialogContainer.getChildren().add(DialogBox.getToDoBeastDialog(exit, todobeast));
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.schedule(() -> System.exit(0), 3, TimeUnit.SECONDS);
     }
 }

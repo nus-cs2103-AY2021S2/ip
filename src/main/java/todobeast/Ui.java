@@ -12,6 +12,7 @@ import todobeast.tasks.Task;
  */
 public class Ui {
     private final Scanner sc;
+    private StringBuilder responseOutput;
     private final static String line = "\t________________________________________________________________\n";
     private final static String logo = "                                                     \n"
             + "\t88                                                   \n"
@@ -27,68 +28,85 @@ public class Ui {
 
     public Ui() {
         sc = new Scanner(System.in);
+        responseOutput = new StringBuilder();
+    }
+
+    public void addToResponseOutput(String response) {
+        responseOutput.append(response);
+    }
+
+    /**
+     * Returns the string that has been built by the responseOutput StringBuilder, and clears the StringBuilder
+     * @return the response output that has been built by the responseOutput StringBuilder
+     */
+    public String returnResponseOutput() {
+        String response = responseOutput.toString();
+        responseOutput.setLength(0);
+        return response;
     }
 
     public String readCommand() {
         return sc.nextLine();
     }
 
-    public void showLine() {
-        System.out.println(line);
+    public String showLine() {
+        return line;
     }
 
-    public void showLoading() {
-        System.out.println("\tLoading data from storage...");
+    public String showLoading() {
+        return "\tLoading data from storage...\n";
     }
 
-    public void showLoadingSuccess() {
-        System.out.println("\tData loaded successfully!");
+    public String showLoadingSuccess() {
+        return "\tData loaded successfully!\n";
     }
 
-    public void showLoadingError() {
-        System.out.println("\tFailed to load data!");
+    public String showLoadingError() {
+        return "\tFailed to load data!\n";
     }
 
-    public void showDone(Task task) {
-        System.out.println("\tGood job! You've just completed this task:\n" + "\t\t" + task);
+    public String showDone(Task task) {
+        return "\tGood job! You've just completed this task:\n" + "\t\t" + task + "\n";
     }
 
-    public void showDeleted(Task task) {
-        System.out.println("\tGot it! I've removed this task for you:\n\t\t" + task);
+    public String showDeleted(Task task) {
+        return "\tGot it! I've removed this task for you:\n\t\t" + task + "\n";
     }
 
-    public void showNumOfTasks(int numOfTasks) {
-        System.out.println("\tYou now have " + numOfTasks + " tasks in total.");
+    public String showNumOfTasks(int numOfTasks) {
+        return "\tYou now have " + numOfTasks + " tasks in total." + "\n";
     }
 
-    public void showAdded(Task task) {
-        System.out.println("\tOne more task added to the hustle:\n\t\t" + task);
+    public String showAdded(Task task) {
+        return "\tOne more task added to the hustle:\n\t\t" + task + "\n";
     }
 
-    public void showWelcome() {
-        String greeting = line + logo + "\tWelcome to ToDoBeast, your best productivity task tracker tool!\n"
+    public String showWelcome() {
+        String greeting = logo + "\tWelcome to ToDoBeast, your best productivity task tracker tool!\n"
                 + "\tLet's get this bread! How would you like to be productive today?\n\n"
-                + "\t[Type \"instructions\" to display instructions]";
-        System.out.println(greeting);
+                + "\t[Type \"instructions\" to display instructions]\n";
+        return greeting;
     }
 
-    public void listTasks() {
-        System.out.println("\tHere are your tasks:");
+    public String listTasks() {
+        return "\tHere are your tasks:\n";
     }
 
-    public void findTasks() {
-        System.out.println("\tHere are the matching tasks in your list:");
+    public String findTasks() {
+        return "\tHere are the matching tasks in your list:\n";
     }
 
-    public void printTaskList(List<Task> taskList) {
+    public String printTaskList(List<Task> taskList) {
+        StringBuilder output = new StringBuilder();
         int count = 1;
         for (Task task : taskList) {
-            System.out.println("\t" + count++ + ". " + task);
+            output.append("\t").append(count++).append(". ").append(task).append("\n");
         }
+        return output.toString();
     }
 
-    public void showInstructions() {
-        System.out.println("\tList of commands for ToDoBeast:\n\n"
+    public String showInstructions() {
+        String instructions = "\tList of commands for ToDoBeast:\n\n"
                 + "\t1. bye/exit - to quit ToDoBeast\n"
                 + "\t2. list - lists all the tasks that have been stored in ToDoBeast\n"
                 + "\t3. delete, [index] - deletes the task with the corresponding [index]\n"
@@ -100,17 +118,17 @@ public class Ui {
                 + "specified [task description], date and time\n"
                 + "\t8. event, [task description], at YYYY-MM-DD HH:MM "
                 + "- creates an event task with the specified "
-                + "[task description], date and time\n");
+                + "[task description], date and time\n";
+        return instructions;
     }
 
-    public void showError(String error) {
-        System.out.println("\t" + error);
+    public String showError(String error) {
+        return error;
     }
 
-    public void showExit() {
-        String exitMsg = line + "\tThis app may have stopped but the grind never stops.\n"
-                + "\tSee you again soon!\n" + line;
-        System.out.println(exitMsg);
-        System.exit(0);
+    public String showExit() {
+        String exitMsg = "This app may have stopped but the grind never stops.\n"
+                + "\tSee you again soon!\n";
+        return exitMsg;
     }
 }

@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
 
         Task currentTask = taskList.getTask(taskNumber);
         taskList.setTaskAsDone(currentTask);
-        ui.showDone(currentTask);
+        ui.addToResponseOutput(ui.showDone(currentTask));
     }
 }
 

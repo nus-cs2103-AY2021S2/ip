@@ -32,35 +32,63 @@ public class ToDoBeast {
         }
     }
 
-    String getResponse(String input) {
-        return "ToDoBeast heard: " + input;
+    String getResponse(String fullCommand) {
+        try {
+//            String fullCommand = ui.readCommand();
+//            ui.addToResponseOutput(ui.showLine());
+            Command command = Parser.parse(fullCommand);
+            command.execute(taskList, ui);
+
+            if (command.isExit()) {
+                return "exit";
+            }
+        } catch (ToDoBeastException e) {
+            ui.addToResponseOutput(ui.showError(e.getMessage()));
+        } finally {
+            try {
+                storage.saveToStorage(taskList.formatTaskListForStorage());
+            } catch (IOException e) {
+                ui.addToResponseOutput(ui.showError(e.getMessage()));
+            }
+//            ui.addToResponseOutput(ui.showLine());
+        }
+        return ui.returnResponseOutput();
+    }
+
+    String getWelcome() {
+        ui.addToResponseOutput(ui.showWelcome());
+//        ui.addToResponseOutput(ui.showLine());
+        return ui.returnResponseOutput();
+    }
+
+    String getExit() {
+        ui.addToResponseOutput(ui.showExit());
+        return ui.returnResponseOutput();
     }
 
     /**
      * Contains the main logic of the application. The program will run until the "exit" command is given.
      */
     public void runApplication() {
-        ui.showWelcome();
-        ui.showLine();
 
         boolean isExit = false;
 
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine();
+                ui.addToResponseOutput(ui.showLine());
                 Command command = Parser.parse(fullCommand);
                 command.execute(taskList, ui);
                 isExit = command.isExit();
             } catch (ToDoBeastException e) {
-                ui.showError(e.getMessage());
+                ui.addToResponseOutput(ui.showError(e.getMessage()));
             } finally {
                 try {
                     storage.saveToStorage(taskList.formatTaskListForStorage());
                 } catch (IOException e) {
                     ui.showError(e.getMessage());
                 }
-                ui.showLine();
+                ui.addToResponseOutput(ui.showLine());
             }
         }
         ui.showExit();

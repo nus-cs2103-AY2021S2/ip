@@ -20,7 +20,7 @@ public class ListCommand extends Command {
         if (taskList == null) {
             throw new ToDoBeastException("Task list cannot be found.");
         }
-        ui.listTasks();
-        ui.printTaskList(taskList.getTaskList());
+        ui.addToResponseOutput(ui.listTasks());
+        ui.addToResponseOutput(ui.printTaskList(taskList.getTaskList()));
     }
 }
