@@ -1,8 +1,8 @@
 
-T | 1 | join sports club
 D | 1 | return book  | 2019-09-09
 E | 0 | meeting | 2020-01-01
 T | 1 | sleep
 T | 0 | drink water
 D | 1 | iP  | 2019-09-09
 E | 0 | lecture | 2021-08-13
+

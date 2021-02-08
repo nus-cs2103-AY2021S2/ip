@@ -58,7 +58,7 @@ public class MainWindow extends GridPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         if ("bye".equals(input)) {
             Platform.setImplicitExit(true);
             Platform.exit();
