@@ -32,11 +32,10 @@ public class TaskList {
      */
     public TaskList findMatchingTasks(String keyword) {
         TaskList matchingTasks = new TaskList();
-        for (Task task: tasks) {
-            if (task.getDescription().contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
+
+        tasks.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .forEach(matchingTasks::add);
 
         return matchingTasks;
     }
