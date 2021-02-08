@@ -15,6 +15,7 @@ public class ListCommand extends Command {
      * Executes the command.
      */
     public CommandResult execute(TaskList tasks, Storage storage) {
+        assert tasks != null : "TaskList cannot be null.";
         if (tasks.getTasks().size() == 0) {
             return new CommandResult("There are no tasks in your list. Time to add some!",
                     CommandResultType.CHAT_PASON);

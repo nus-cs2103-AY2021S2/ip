@@ -19,6 +19,7 @@ public class AddCommand extends Command {
      * Executes the command.
      */
     public CommandResult execute(TaskList tasks, Storage storage) throws Exception {
+        assert tasks != null : "TaskList cannot be null.";
         tasks.addTask(task);
         return new CommandResult("Done! I've added a new task:\n\t"
                 + task + "\nNow there are " + tasks.getTasks().size()

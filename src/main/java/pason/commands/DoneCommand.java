@@ -17,6 +17,7 @@ public class DoneCommand extends Command {
      * Executes the command.
      */
     public CommandResult execute(TaskList tasks, Storage storage) {
+        assert tasks != null : "TaskList cannot be null.";
         try {
             return new CommandResult(tasks.doneTask(this.index), CommandResultType.CHAT_PASON);
         } catch (Exception e) {

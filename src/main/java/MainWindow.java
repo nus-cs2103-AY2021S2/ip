@@ -9,10 +9,8 @@ import javafx.scene.layout.VBox;
 import pason.commands.CommandResult;
 import pason.commands.CommandResultType;
 
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

@@ -50,6 +50,7 @@ public class Storage {
                 throw new PasonException(e.getMessage());
             }
         }
+        assert !file.exists() : "File should be readable.";
         List<Task> tasks = new ArrayList<>();
         Scanner s = new Scanner(file);
         Task task;
@@ -112,6 +113,7 @@ public class Storage {
      * @throws IOException  If target file not found.
      */
     public void saveAllTasks(List<Task> tasks) throws IOException {
+        assert tasks != null : "Tasks cannot be null.";
         try {
             FileWriter fw = new FileWriter(FILE_DIRECTORY
                     + "/" + FILE_NAME);
@@ -133,6 +135,7 @@ public class Storage {
      * @throws IOException  If target file not found.
      */
     public void appendTask(Task task) throws IOException {
+        assert task != null : "Task cannot be null.";
         try {
             FileWriter fw = new FileWriter(FILE_DIRECTORY
                     + "/" + FILE_NAME, true);
