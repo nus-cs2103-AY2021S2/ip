@@ -96,6 +96,7 @@ public class TaskList {
             } else {
                 try {
                     String[] separateDetails = split[1].split("/by |/at ");
+                    assert separateDetails.length > 1 : WRONG_FORMAT_RESPONSE;
                     String description = separateDetails[0];
 
                     String date = separateDetails[1];

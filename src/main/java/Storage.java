@@ -33,6 +33,7 @@ public class Storage {
                 lst.readTask(txt);
             }
         }
+        assert data.exists();
     }
 
     /**
@@ -44,6 +45,7 @@ public class Storage {
      */
     public void storeTasks(TaskList lst) throws IOException {
         File data = new File(filePath);
+        assert data.exists();
         // store Tasks in a file
         FileWriter fw = new FileWriter(data, false);
         List<Task> taskList = lst.fetchTasks();
