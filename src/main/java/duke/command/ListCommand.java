@@ -19,6 +19,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String[] execute() {
-        return TaskList.getAllTaskListInfo();
+        return TaskList.getAllTasksInfo();
     }
 }

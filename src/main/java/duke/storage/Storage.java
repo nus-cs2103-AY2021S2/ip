@@ -22,9 +22,9 @@ public class Storage {
     private static TaskList taskList;
     private static String rootProject = System.getProperty("user.dir");
     private static Path dataFilePath =
-        Paths.get(rootProject, "src", "main", "java", "duke", "data", "duke.txt");
+        Paths.get(rootProject,  "data", "duke.txt");
     private static Path dataFolderPath =
-        Paths.get(rootProject, "src", "main", "java", "duke", "data");
+        Paths.get(rootProject, "data");
 
     /**
      * Initializes the storage class
@@ -36,18 +36,24 @@ public class Storage {
 
     private static void init() throws DukeException {
         storageExistOrCreate();
-        taskList = new TaskList(loadData(dataFilePath));
+        taskList = loadTaskListFromStorage();
+    }
+
+    private static TaskList loadTaskListFromStorage() throws DukeException {
+        ArrayList<Task> tasks = loadDataFromStorage(dataFilePath);
+        return new TaskList(tasks);
     }
 
     /**
      * Saves the current task list into storage, used by the public.
      * @throws DukeException when an error occurs while saving data, eg. no access rights
      */
-    public static void saveData() throws DukeException {
-        saveData(dataFilePath, TaskList.getAllTasks());
+    public static void saveDataToStorage() throws DukeException {
+        ArrayList<Task> tasks = taskList.getAllTasks();
+        saveDataToStorage(dataFilePath, tasks);
     }
 
-    private static void saveData(Path filePath, ArrayList<Task> tasks) throws DukeException {
+    private static void saveDataToStorage(Path filePath, ArrayList<Task> tasks) throws DukeException {
         try {
             ArrayList<String> tasksInfoToStore = new ArrayList<>();
             for (Task task : tasks) {
@@ -56,28 +62,28 @@ public class Storage {
             Files.write(filePath, tasksInfoToStore);
         } catch (IOException e) {
             throw new DukeException("error in saving data."
-                    + System.lineSeparator()
-                    + "      " + e);
+                + System.lineSeparator()
+                + "      " + e);
         }
     }
 
-    private static ArrayList<Task> loadData(Path filePath) throws DukeException {
-        ArrayList<Task> res = new ArrayList<>();
+    private static ArrayList<Task> loadDataFromStorage(Path filePath) throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
             BufferedReader br = Files.newBufferedReader(filePath);
-            String line;
-            while ((line = br.readLine()) != null) {
-                Task task = stringToTask(line);
+            String taskInfoInString;
+            while ((taskInfoInString = br.readLine()) != null) {
+                Task task = stringToTask(taskInfoInString);
                 if (task != null) {
-                    res.add(task);
+                    tasks.add(task);
                 }
             }
         } catch (IOException e) {
             throw new DukeException("error when loading Data. Closing..."
-                    + System.lineSeparator()
-                    + "      " + e);
+                + System.lineSeparator()
+                + "      " + e);
         }
-        return res;
+        return tasks;
     }
 
     private static Task stringToTask(String taskInfo) throws DukeException {
@@ -85,23 +91,24 @@ public class Storage {
         String type = taskInfoArr[0].strip();
         boolean isDone = taskInfoArr[1].strip().equals("1");
         String description = taskInfoArr[2].strip();
-        Task res = null;
+
+        Task task = null;
         switch(type) {
         case "T":
-            res = new Todo(description, isDone);
+            task = new Todo(description, isDone);
             break;
         case "E":
             String at = taskInfoArr[3].strip();
-            res = new Event(description, isDone, at);
+            task = new Event(description, isDone, at);
             break;
         case "D":
             String by = taskInfoArr[3].strip();
-            res = new Deadline(description, isDone, by);
+            task = new Deadline(description, isDone, by);
             break;
         default:
-            throw new DukeException("Invalid Taskinfo found in storage.");
+            throw new DukeException("Invalid task info found in storage.");
         }
-        return res;
+        return task;
     }
 
     private static void storageExistOrCreate() throws DukeException {
@@ -114,8 +121,8 @@ public class Storage {
             }
         } catch (IOException e) {
             throw new DukeException("Unable to access data stored, access rights issue. Closing..."
-                    + System.lineSeparator()
-                    + "      " + e);
+                + System.lineSeparator()
+                + "      " + e);
         }
     }
 }
