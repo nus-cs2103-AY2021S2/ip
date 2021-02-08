@@ -1,8 +1,9 @@
 
 E | 0 | meeting | 2020-01-01
+D | 1 | tutorial | 2021-02-11
+D | 0 | assignment  | 2021-02-16
 E | 0 | lecture | 2021-08-13
 T | 0 | sleep
 D | 1 | iP | 2019-09-09
 D | 1 | return book | 2019-09-09
-D | 1 | assignment | 2020-09-09
 T | 1 | drink water

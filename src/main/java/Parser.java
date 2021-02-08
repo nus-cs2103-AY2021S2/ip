@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Parser processes commands.
  */
@@ -25,7 +27,8 @@ public class Parser {
      * <p> 5. Add deadline-task: deadline &lt;task_description&gt; /by &lt;date&gt; </p>
      * <p> 6. Add event-task: event &lt;event_description&gt; /at &lt;date&gt; </p>
      * <p> 7. Find task using keyword: find &lt;keyword&gt; </p>
-     * <p> 7. Exit Duke: bye </p>
+     * <p> 8. Remind tasks due soon: remind (optional: &lt;coming_within_this_number_of_days&gt;) </p>
+     * <p> 9. Exit Duke: bye </p>
      *
      * @param userInput Command from user.
      * @return String representing the output of processing command.
@@ -39,6 +42,8 @@ public class Parser {
             return deleteFromList(userInput);
         } else if (userInput.startsWith("find ")) {
             return findFromList(userInput);
+        } else if (userInput.startsWith("remind")) {
+            return remindTasks(userInput);
         } else {
             return addTaskToList(userInput, false);
         }
@@ -101,6 +106,40 @@ public class Parser {
             }
         }
         return printList(tasksMatchingKeyword);
+    }
+
+    /**
+     * Reminds user of all deadlines/events in the list that is due soon.
+     * With no input of number of days, default is 1 week.
+     *
+     * @param userInput Takes in command from user in the format:
+     *                  remind (optional: &lt;coming_within_this_number_of_days&gt;)
+     * @return String representing the output of processing command.
+     */
+    private String remindTasks(String userInput) {
+        TaskComparator compareTasks = new TaskComparator();
+        TaskList tasksToRemind = new TaskList();
+        String trimmedUserInput = userInput.trim();
+        int daysToGet = 7;
+        if (!trimmedUserInput.equals("remind")) {
+            try {
+                daysToGet = Integer.parseInt(userInput.substring(7));
+            } catch (NumberFormatException ex) {
+                return "Invalid input: Please try again with a valid integer or leave it blank! :)";
+            }
+        }
+        LocalDate fromDate = LocalDate.now();
+        LocalDate toDate = LocalDate.now().plusDays(daysToGet);
+        for (int i = 1; i <= tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
+            if (!task.isDone() && !compareTasks.isTodo(task)) {
+                LocalDate date = compareTasks.getTaskDate(task);
+                if (!date.isBefore(fromDate) && !date.isAfter(toDate)) {
+                    tasksToRemind.addTask(task);
+                }
+            }
+        }
+        return printList(tasksToRemind);
     }
 
     /**
@@ -221,12 +260,12 @@ public class Parser {
     }
 
     /**
-     * Returns the list of all matching events.
+     * Returns the list of all requested events.
      *
      * @return String representing the list of all matching events.
      */
     protected String printList(TaskList tasks) {
-        String listRepresentation = "Here are the matching tasks in your list:\n";
+        String listRepresentation = "Here are the tasks you requested for:\n";
         listRepresentation += tasks.toString();
         return listRepresentation;
     }

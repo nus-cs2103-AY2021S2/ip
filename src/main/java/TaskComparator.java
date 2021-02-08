@@ -1,8 +1,21 @@
 import java.time.LocalDate;
 import java.util.Comparator;
 
+/**
+ * Represents a task comparator object that implements a comparator on a Task object.
+ * Contains a compare method with additional helper methods.
+ */
 public class TaskComparator implements Comparator<Task> {
 
+    /**
+     * Compares the two tasks.
+     * Prioritizes events/deadlines that are not done yet.
+     * Prioritizes earlier dates.
+     *
+     * @param taskOne Task to be compared.
+     * @param taskTwo Task to be compared.
+     * @return Integer representing which task should be prioritized.
+     */
     @Override
     public int compare(Task taskOne, Task taskTwo) {
         String taskOneDescription = taskOne.getDescription();
@@ -36,7 +49,13 @@ public class TaskComparator implements Comparator<Task> {
         }
     }
 
-    private boolean isTodo(Task task) {
+    /**
+     * Checks if task is a Todo-task.
+     *
+     * @param task Task to check.
+     * @return Boolean representing whether the task is a Todo-task.
+     */
+    protected boolean isTodo(Task task) {
         if (task instanceof Deadline || task instanceof Event) {
             return false;
         } else {
@@ -44,7 +63,13 @@ public class TaskComparator implements Comparator<Task> {
         }
     }
 
-    private LocalDate getTaskDate(Task task) {
+    /**
+     * Obtains Date of Event/Deadline-task.
+     *
+     * @param task Task to obtain date of.
+     * @return LocalDate representing the date associated with this task.
+     */
+    protected LocalDate getTaskDate(Task task) {
         if (task instanceof Deadline) {
             return ((Deadline) task).getDate();
         } else {
