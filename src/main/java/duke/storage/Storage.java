@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.DateTimeParser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -60,11 +60,11 @@ public class Storage {
                     thisTask = new Todo(taskName);
                 } else if (taskType.equals("D")) {
                     taskName = keyWords[2];
-                    LocalDateTime cutOffDate = Parser.parseDateTime(keyWords[3]);
+                    LocalDateTime cutOffDate = DateTimeParser.parseDateTime(keyWords[3]);
                     thisTask = new Deadline(taskName, cutOffDate);
                 } else {
                     taskName = keyWords[2];
-                    LocalDateTime startDate = Parser.parseDateTime(keyWords[3]);
+                    LocalDateTime startDate = DateTimeParser.parseDateTime(keyWords[3]);
                     thisTask = new Event(taskName, startDate);
                 }
                 taskStatus = keyWords[1].strip();
