@@ -78,7 +78,7 @@ public class Parser {
         } else {
             if (tokens[0].equals("list")) {
                 response += Ui.printLine("Here are the tasks in your list:");
-                tasks.printAll();
+                response += tasks.printAll();
             } else if (tokens[0].equals("done")) {
                 if (tokens.length < 2) {
                     throw new Exception("Please provide a valid task number!");

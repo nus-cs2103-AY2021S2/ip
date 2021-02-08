@@ -60,11 +60,13 @@ public class TaskList {
     /**
      * Prints all tasks in a formatted manner.
      */
-    public void printAll() {
+    public String printAll() {
         int index = 0;
+        String res = "";
         for (Task task : this.tasks) {
-            Ui.printLine(String.format("%d.%s", ++index, task.toString()));
+            res += Ui.printLine(String.format("%d.%s", ++index, task.toString()));
         }
+        return res;
     }
 
     /**
