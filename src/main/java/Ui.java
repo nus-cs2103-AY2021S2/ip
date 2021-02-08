@@ -54,8 +54,10 @@ public class Ui {
             return "todo *description of task*";
         case "deadline":
             return "deadline *description of task* /by *date and time*";
-        default: //case "event"
+        case "event":
             return "event *description of task* /at *date and time*";
+        default:
+            return "Impossible output. Error in code.";
         }
     }
 
@@ -101,15 +103,15 @@ public class Ui {
     /**
      * Lists all the tasks with the searched for words.
      * @param storage Array List of tasks.
-     * @param spl Array with the words that are being searched for in the Array List.
+     * @param description The word/phrase the user wants to find in the currentlist.
      */
-    public static String outputMessageFind(ArrayList<Task> storage, String[] spl) {
+    public static String outputMessageFind(ArrayList<Task> storage, String description) {
         String output = LINE;
-        int i = 1;
-        for (Task t : storage) {
-            if (t.getDescription().contains(spl[1])) {
-                output += SPACE + i + ". " + t + "\n";
-                i++;
+        int index = 1;
+        for (Task task : storage) {
+            if (task.getDescription().contains(description)) {
+                output += SPACE + index + ". " + task + "\n";
+                index++;
             }
         }
         return output + LINE;

@@ -29,6 +29,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (By: " + dateFormat.format(date) + " by " + timeFormat.format(time) + ")";
+        String formattedDate = dateFormat.format(date);
+        String formattedTime = timeFormat.format(time);
+        return super.toString() + " (By: " + formattedDate + " by " + formattedTime + ")";
     }
 }
