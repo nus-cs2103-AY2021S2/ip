@@ -69,7 +69,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, chadRImage),
                 DialogBox.getDukeDialog(response, response.equals("I'm sorry, but I don't know what that means.")
                         ? soyjakCry
-                        : chadLImage)
+                        : chadLImage
+                )
         );
         userInput.clear();
 
