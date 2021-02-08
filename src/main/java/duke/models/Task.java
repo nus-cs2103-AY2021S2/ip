@@ -7,6 +7,10 @@ public abstract class Task {
     private final String taskName;
     private boolean isDone;
 
+    /**
+     * Creates a new Task object
+     * @param taskName name of the task
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;

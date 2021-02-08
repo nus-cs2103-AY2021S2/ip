@@ -12,6 +12,11 @@ import duke.models.Task;
 public class EventCommand extends AddCommand {
     private LocalDateTime dateTime;
 
+    /**
+     * Command relating to creating a new Event
+     * @param taskName name of the event
+     * @param dateTime date and time of the event
+     */
     public EventCommand(String taskName, LocalDateTime dateTime) {
         super(taskName);
         this.dateTime = dateTime;

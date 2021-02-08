@@ -12,6 +12,11 @@ import duke.models.Task;
 public class DeadlineCommand extends AddCommand {
     private LocalDateTime deadline;
 
+    /**
+     * Command relating to creating a new Deadline
+     * @param taskName name of the deadline
+     * @param deadline deadline of the specified task
+     */
     public DeadlineCommand(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.deadline = deadline;

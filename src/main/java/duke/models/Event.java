@@ -9,6 +9,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime dateTime;
 
+    /**
+     * Creates a new Deadline object
+     * @param taskName name of the event
+     * @param dateTime date and time of the specified event
+     */
     public Event(String taskName, LocalDateTime dateTime) {
         super(taskName);
         this.dateTime = dateTime;
