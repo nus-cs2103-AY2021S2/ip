@@ -21,18 +21,22 @@ public class Parser {
             String job = previousVersionTasks[0];
             String jobName = previousVersionTasks[1];
             Boolean done = Boolean.parseBoolean(previousVersionTasks[2]);
-            if (job.equals("ToDo")) {
-                ToDo task = new ToDo(jobName, done);
+            Task task;
+            LocalDate jobDate;
+            LocalTime jobTime;
+            switch (job) {
+            case "ToDo":
+                task = new ToDo(jobName, done);
                 lst.add(task);
-            } else if (job.equals("Deadline")) {
-                LocalDate jobDate = LocalDate.parse(previousVersionTasks[3]);
-                LocalTime jobTime = LocalTime.parse(previousVersionTasks[4]);
-                Deadline task = new Deadline(jobName, done, jobDate, jobTime);
+            case "Deadline":
+                jobDate = LocalDate.parse(previousVersionTasks[3]);
+                jobTime = LocalTime.parse(previousVersionTasks[4]);
+                task = new Deadline(jobName, done, jobDate, jobTime);
                 lst.add(task);
-            } else if (job.equals("Event")) {
-                LocalDate jobDate = LocalDate.parse(previousVersionTasks[3]);
-                LocalTime jobTime = LocalTime.parse(previousVersionTasks[4]);
-                Event task = new Event(jobName, done, jobDate, jobTime);
+            case "Event":
+                jobDate = LocalDate.parse(previousVersionTasks[3]);
+                jobTime = LocalTime.parse(previousVersionTasks[4]);
+                task = new Event(jobName, done, jobDate, jobTime);
                 lst.add(task);
             }
         }
@@ -88,23 +92,24 @@ public class Parser {
 
     public static Command parseCommand(String sentence, TaskList taskList) throws NoCommandException {
         String keyword = getKeyword(sentence);
-        if (keyword.equals("bye")) {
+        switch (keyword) {
+        case "bye":
             return new ByeCommand();
-        } else if (keyword.equals("list")) {
+        case "list":
             return new ListCommand();
-        } else if (keyword.equals("done")) {
+        case "done":
             return new DoneCommand();
-        } else if (keyword.equals("delete")) {
+        case "delete":
             return new DeleteCommand();
-        } else if (keyword.equals("find")) {
+        case "find":
             return new FindCommand();
-        } else if (keyword.equals("todo")) {
+        case "todo":
             return new AddToDoCommand();
-        } else if (keyword.equals("deadline")) {
+        case "deadline":
             return new AddDeadlineCommand();
-        } else if (keyword.equals("event")) {
+        case "event":
             return new AddEventCommand();
-        } else {
+        default:
             throw new NoCommandException("Daddy, I don't understand what that means :)");
         }
     }
