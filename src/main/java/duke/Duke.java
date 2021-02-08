@@ -69,7 +69,11 @@ public class Duke extends Application {
         }
 
         if (cmdResult.isExit()) {
-            Platform.exit();
+            exit();
         }
+    }
+
+    private void exit() {
+        Platform.exit();
     }
 }

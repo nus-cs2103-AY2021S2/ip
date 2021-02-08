@@ -6,6 +6,9 @@ package duke.task;
  * @author Benedict Khoo
  */
 public abstract class Task {
+    protected static final String DONE_ICON = "\u2713";
+    protected static final String NOT_DONE_ICON = " ";
+
     protected String description;
     protected boolean isDone;
     protected String type;
@@ -49,9 +52,9 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         if (isDone) {
-            return "\u2713";
+            return DONE_ICON;
         } else {
-            return " ";
+            return NOT_DONE_ICON;
         }
     }
 
