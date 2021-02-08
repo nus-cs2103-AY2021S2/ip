@@ -63,6 +63,7 @@ public class Ui {
                     DialogBox.getPasonDialog("PAson", message, pasonImage)
             );
             break;
+        default:
         }
     }
 }

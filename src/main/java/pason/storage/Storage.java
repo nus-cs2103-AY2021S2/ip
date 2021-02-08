@@ -77,25 +77,25 @@ public class Storage {
      * @return Task object parsed from text.
      */
     public static Task parseFileEntry(String text) {
-        String[] splitString = text.split(" \\| ");
-        if (splitString[0].equals("T") && splitString.length == 3) {
-            ToDo newToDo = new ToDo(splitString[2]);
-            if (splitString[1].equals("1")) {
+        String[] inputParts = text.split(" \\| ");
+        if (inputParts[0].equals("T") && inputParts.length == 3) {
+            ToDo newToDo = new ToDo(inputParts[2]);
+            if (inputParts[1].equals("1")) {
                 newToDo.markAsDone();
             }
             return newToDo;
-        } else if (splitString[0].equals("E") && splitString.length == 4) {
-            String[] eventDate = splitString[3].split(" ");
-            Event newEvent = new Event(splitString[2],
+        } else if (inputParts[0].equals("E") && inputParts.length == 4) {
+            String[] eventDate = inputParts[3].split(" ");
+            Event newEvent = new Event(inputParts[2],
                     LocalDate.parse(eventDate[0]), (eventDate.length == 1 ? null : eventDate[1]));
-            if (splitString[1].equals("1")) {
+            if (inputParts[1].equals("1")) {
                 newEvent.markAsDone();
             }
             return newEvent;
-        } else if (splitString[0].equals("D") && splitString.length == 4) {
-            Deadline newDeadline = new Deadline(splitString[2],
-                    LocalDateTime.parse(splitString[3]));
-            if (splitString[1].equals("1")) {
+        } else if (inputParts[0].equals("D") && inputParts.length == 4) {
+            Deadline newDeadline = new Deadline(inputParts[2],
+                    LocalDateTime.parse(inputParts[3]));
+            if (inputParts[1].equals("1")) {
                 newDeadline.markAsDone();
             }
             return newDeadline;
