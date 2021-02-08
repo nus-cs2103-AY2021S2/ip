@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.0.9'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
 group 'org.example'
@@ -22,7 +23,21 @@ javafx {
 }
 
 dependencies {
-    compile 'junit:junit:4.12'
-    implementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
-}
+    String javaFxVersion = '11'
 
+    compile 'junit:junit:4.12'
+
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+}
