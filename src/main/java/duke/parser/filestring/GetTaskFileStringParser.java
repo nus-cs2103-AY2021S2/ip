@@ -16,6 +16,7 @@ public class GetTaskFileStringParser {
     public TaskFileStringParser getFileStringParser(String fileString)
             throws DukeExceptionIllegalArgument {
         String[] tokens = fileString.split("\\t", 2);
+        assert tokens.length > 1;
         switch (tokens[0]) {
         case "event":
             return new EventFileStringParser();
