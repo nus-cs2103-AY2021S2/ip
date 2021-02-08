@@ -37,11 +37,8 @@ public class MikeTest {
         Mike mike = new Mike();
         mike.mikeInit();
 
-        try {
-            mikeResponse = mike.getResponse(new ListCommand());
-        } catch (MikeCommandExecutionException e) {
-            e.printStackTrace();
-        }
+        mikeResponse = mike.getResponse(new ListCommand());
+
         assertEquals(expectedResponse, mikeResponse);
     }
 }
