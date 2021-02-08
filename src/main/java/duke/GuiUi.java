@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.ParseException;
+import duke.expenses.Expense;
 import duke.tasks.Task;
 
 public class GuiUi {
@@ -28,6 +29,12 @@ public class GuiUi {
         return insertMsgIntoChatBox("Input not accepted. "
                 + "Hint: Use '/by OR /at YYYY-MM-DD' after description"
                 + " and '/time HH:mm:ss' after date is specified.\n");
+    }
+
+    public static String displaySpendParseError() {
+        return insertMsgIntoChatBox("Input not accepted. "
+                + "Hint: Use '/amt [amount spent]' after description"
+                + " and '/date YYYY-MM-DD' after amount spent is specified.\n");
     }
 
     /**
@@ -74,7 +81,7 @@ public class GuiUi {
      *
      * @param taskList list of tasks
      */
-    public static String displayList(TaskList taskList) {
+    public static String displayListOfTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         int n = tasks.size();
         if (n == 0) {
@@ -87,6 +94,21 @@ public class GuiUi {
         String output = new String(buffer);
         return insertMsgIntoChatBox("Here are your tasks:\n" + output);
     }
+
+    public static String displayListOfExpenses(ExpensesList expensesList) {
+        ArrayList<Expense> expenses = expensesList.getExpenses();
+        int n = expenses.size();
+        if (n == 0) {
+            return insertMsgIntoChatBox("There is no expense yet.\n");
+        }
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < n; i++) {
+            buffer.append(i + 1).append(") ").append(expenses.get(i)).append("\n");
+        }
+        String output = new String(buffer);
+        return insertMsgIntoChatBox("Here are your expenses:\n" + output);
+    }
+
 
     /**
      * Displays when Tasker receives "bye" command and exits.
@@ -126,6 +148,12 @@ public class GuiUi {
         return insertMsgIntoChatBox("Got it. I've added this task:" + '\n'
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size() + " tasks in the list.\n");
+    }
+
+    public static String displayAddExpenseSuccess(ExpensesList expensesList, Expense expense) {
+        return insertMsgIntoChatBox("Got it. I've added this expense:" + '\n'
+                + expense + "\n"
+                + "Now you have spent a total of $" + expensesList.sumUp() + ".\n");
     }
 
     /**
