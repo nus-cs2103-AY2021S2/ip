@@ -4,12 +4,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public class KobeN {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+public class KobeN extends Application {
     private Storage storage;
     private TaskList tasks; //ArrayList<Tasks> tasks
     private Ui ui;
     private static final String HOME = System.getProperty("user.home");
 
+    public KobeN() {}
 
     /**
      * Initialises Kobe.
@@ -54,5 +60,14 @@ public class KobeN {
 
     }
 
+    @Override
+    public void start (Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
 }
