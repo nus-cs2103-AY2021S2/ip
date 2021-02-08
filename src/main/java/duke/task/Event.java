@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /** Date which the event is held on. */
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
      * Default constructor for the Event class.

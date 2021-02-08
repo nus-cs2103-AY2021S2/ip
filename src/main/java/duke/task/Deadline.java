@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     /** Date which the deadline is due. */
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
      * Default constructor for the Deadline class.

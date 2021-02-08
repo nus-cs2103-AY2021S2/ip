@@ -27,8 +27,11 @@ public class Duke {
      * Default constructor for the Duke class.
      */
     public Duke() {
+        String pathToFile = "../data";
+        String filename = "duke.txt";
+
         taskList = new TaskList();
-        storage = new Storage("../data/", "duke.txt");
+        storage = new Storage(pathToFile, filename);
         ui = new Ui();
     }
 
