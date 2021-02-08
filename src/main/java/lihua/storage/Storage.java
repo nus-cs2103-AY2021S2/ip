@@ -42,9 +42,8 @@ public class Storage {
             JSONArray jsonArray = (JSONArray) parser.parse(reader);
 
             populateTasks(jsonArray, tasks);
-            reader.close();
         } catch (IOException | ParseException | DateTimeParseException e) {
-            System.err.println("Storage issues encountered. Task cannot be stored.");
+            System.err.println("Storage issues encountered. Task cannot be loaded.");
         }
         return tasks;
     }
@@ -80,12 +79,19 @@ public class Storage {
             if (!fileChecker.exists()) {
                 fileChecker.getParentFile().mkdir();
                 fileChecker.createNewFile();
+                writeDummyDataToInitializedDataFile();
                 return false;
             }
             return true;
         } catch (IOException e) {
             return false;
         }
+    }
+
+    // will only be called if a new file is initialized
+    private void writeDummyDataToInitializedDataFile() throws IOException {
+        JSONArray emptyJsonArray = new JSONArray();
+        writeToFile(emptyJsonArray);
     }
 
     /**

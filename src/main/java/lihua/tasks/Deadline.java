@@ -8,8 +8,7 @@ import org.json.simple.JSONObject;
 /**
  * Represents a lihua.tasks.Deadline item, which is a child of lihua.tasks.Task
  */
-public class Deadline extends Task {
-    private final LocalDate deadlineDate;
+public class Deadline extends TimeTask {
 
     /**
      * Initializes a lihua.tasks.Deadline item with a given end time
@@ -18,17 +17,7 @@ public class Deadline extends Task {
      * @param deadlineDate The end time of the item, assumed to be 'yyyy-mm-dd'
      */
     public Deadline(String name, LocalDate deadlineDate) {
-        super(name);
-        this.deadlineDate = deadlineDate;
-    }
-
-    /**
-     * Gets the date of the deadline.
-     *
-     * @return The date of the deadline.
-     */
-    public LocalDate getDate() {
-        return deadlineDate;
+        super(name, deadlineDate);
     }
 
     /**
@@ -39,7 +28,7 @@ public class Deadline extends Task {
     public String toString() {
         String doneMark = isDone ? "X" : " ";
         return String.format("[D][%s] %s (by: %s)", doneMark, name,
-                deadlineDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     /**
@@ -54,7 +43,7 @@ public class Deadline extends Task {
         jsonObject.put("type", "deadline");
         jsonObject.put("isDone", isDone);
         jsonObject.put("description", name);
-        jsonObject.put("time", deadlineDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        jsonObject.put("time", getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         return jsonObject;
     }
 }

@@ -8,9 +8,7 @@ import org.json.simple.JSONObject;
 /**
  * Represent an lihua.tasks.Event item, which is a child of lihua.tasks.Task
  */
-public class Event extends Task {
-    /** The date of the event */
-    private final LocalDate period;
+public class Event extends TimeTask {
 
     /**
      * Initialize an lihua.tasks.Event with a time period
@@ -18,18 +16,9 @@ public class Event extends Task {
      * @param period The date of the event, assumed to be 'yyyy-mm-dd'
      */
     public Event(String name, LocalDate period) {
-        super(name);
-        this.period = period;
+        super(name, period);
     }
 
-    /**
-     * Gets the date of the event.
-     *
-     * @return The date of the event.
-     */
-    public LocalDate getDate() {
-        return period;
-    }
 
     /**
      * toString method overriding the one in class lihua.tasks.Task
@@ -39,7 +28,7 @@ public class Event extends Task {
     public String toString() {
         String doneMark = isDone ? "X" : " ";
         return String.format("[E][%s] %s (at: %s)", doneMark, name,
-                period.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     /**
@@ -54,7 +43,7 @@ public class Event extends Task {
         jsonObject.put("type", "event");
         jsonObject.put("isDone", isDone);
         jsonObject.put("description", name);
-        jsonObject.put("time", period.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        jsonObject.put("time", getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         return jsonObject;
     }
 }

@@ -3,14 +3,7 @@ package lihua.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import lihua.commands.AddCommand;
-import lihua.commands.Command;
-import lihua.commands.DeleteCommand;
-import lihua.commands.DoneCommand;
-import lihua.commands.ExitCommand;
-import lihua.commands.FindCommand;
-import lihua.commands.HelpCommand;
-import lihua.commands.ListCommand;
+import lihua.commands.*;
 import lihua.tasks.Deadline;
 import lihua.tasks.Event;
 import lihua.tasks.ToDo;
@@ -66,7 +59,7 @@ public class Parser {
             // same as above
             return new DeleteCommand(Integer.valueOf(split[1]));
         case "list":
-            return getListCommand(split);
+            return getListCommand(userInput, split);
         case "help":
             return new HelpCommand(true);
         case "find":
@@ -76,13 +69,21 @@ public class Parser {
         }
     }
 
-    private Command getListCommand(String[] split) {
+    private Command getListCommand(String userInput, String[] split) {
         try {
+            String[] tagSplit = userInput.split("-");
+            String tag = tagSplit[1].split("\\s+")[0];
+            if (tag.equals("time")) {
+                return new ListCommand(ListTagCode.TIME_NORMAL);
+            }
+
             String dateString = split[1];
             LocalDate date = LocalDate.parse(dateString);
             return new ListCommand(date);
-        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+        } catch (IndexOutOfBoundsException e) {
             return new ListCommand();
+        } catch (DateTimeParseException e) {
+            return new HelpCommand(false);
         }
     }
 
