@@ -64,10 +64,17 @@ ____________________________________________________________
 
 
 ____________________________________________________________
+Noted! This task has been removed:
+[E] [ ] dog festival | at: monday 1400 hours
+Now you have 2 commands remaining.
+
+____________________________________________________________
+
+
+____________________________________________________________
 
 1. [T] [X] rollover
-2. [E] [ ] dog festival | at: monday 1400 hours
-3. [D] [X] finish doggo treats | by: friday 2359 hours
+2. [D] [X] finish doggo treats | by: friday 2359 hours
 
 ____________________________________________________________
 

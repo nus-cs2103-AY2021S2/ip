@@ -6,5 +6,6 @@ shake
 done 1
 todo
 done 3
+delete 2
 list
 bye
