@@ -1,7 +1,9 @@
 package duke;
-import java.io.File;
+
 import duke.tasks.TaskList;
 import duke.command.Command;
+
+import java.io.File;
 
 /**
  *  Juke is a chatbot that helps users keep track of tasks.
@@ -19,13 +21,16 @@ import duke.command.Command;
  * @version CS2103T AY20/21 Semester 2, Individual Project
  */
 public class Duke {
-
-
+        //javaDoc
         private Storage storage;
         private TaskList tasks;
         private Ui ui;
 
-        public Duke(String filePath) {
+    /**
+     * Constructor method to create a Duke object.
+     * @param filePath the path file to duke text file in the hard drive.
+     */
+    public Duke(String filePath) {
             ui = new Ui();
             storage = new Storage(filePath);
             try {
@@ -37,7 +42,10 @@ public class Duke {
             }
         }
 
-        public void run() {
+    /**
+     * Runs the Duke AI bot.
+     */
+    public void run() {
             ui.showWelcome();
             boolean isExit = false;
             while (!isExit) {
