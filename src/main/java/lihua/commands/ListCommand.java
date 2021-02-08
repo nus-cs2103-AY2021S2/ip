@@ -40,8 +40,9 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        // Let lihua.tasks.Tasks check if it is null or not, then perform relevant operations.
         String message = tasks.listTasks(date);
+        assert message != null;
+        assert !message.equals(" ");
         return new CommandResult(message);
     }
 }

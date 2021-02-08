@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            Task deleted = tasks.removeTask(targetIndex); // IndexOutOfBound Exception should be handled
+            Task deleted = tasks.removeTask(targetIndex);
             assert tasks.getSize() >= 0;
             String noun = tasks.getSize() <= 1 ? "task" : "tasks";
             String message = String.format("Got it. I have removed this task from your list:\n---- %s\n"

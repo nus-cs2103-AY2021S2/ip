@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class MessagesTest {
     public static final String MESSAGE_HELLO_EXPECTED =
-            "Hello! My name is lihua.entry.Lihua.\n"
+            "Hello! My name is Lihua.\n"
                     + "What can I do for you today? (=V=)";
     public static final String MESSAGE_GET_HELP_EXPECTED =
             "Sorry, I do not understand your command :')\n"
@@ -14,7 +14,7 @@ public class MessagesTest {
     public static final String MESSAGE_LINE_EXPECTED =
             "-------------------------------------------------";
     public static final String MESSAGE_INFORM_EXIT_EXPECTED =
-            "Exiting lihua.entry.Lihua as requested...\n"
+            "Exiting Lihua as requested...\n"
                     + "Goodbye! Hope to see you again soon! (=V=)";
     public static final String MESSAGE_REPORTING_ADDING_FAILURE_EXPECTED =
             "Sorry, the task adding failed. :( Please check your storage devices.";

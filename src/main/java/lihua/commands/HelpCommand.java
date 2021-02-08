@@ -9,14 +9,8 @@ public class HelpCommand extends Command {
     /** Command help information for help command */
     public static final String MESSAGE_USAGE = "help: Shows application usage instructions.\n"
             + "---- Example: help";
-    private boolean isAskingForHelp = true;
+    private boolean isAskingForHelp;
 
-    /**
-     * Initializes a new default HelpCommand.
-     */
-    public HelpCommand() {
-        super();
-    }
 
     /**
      * Initializes a new HelpCommand with additional boolean parameter.

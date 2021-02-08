@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,16 +17,11 @@ import lihua.tasks.Event;
 import lihua.tasks.Task;
 import lihua.tasks.Tasks;
 import lihua.tasks.ToDo;
+import org.json.simple.parser.ParseException;
 
 public class Storage {
     /** Default path in which the task data is stored */
     public static final String DATA_PATH = "data/lihua.json";
-
-    /**
-     * Initializes an storage instance.
-     */
-    public Storage() {
-    }
 
     /**
      * Loads the tasks from hard disk.
@@ -35,11 +31,9 @@ public class Storage {
     public Tasks load() {
         Tasks tasks = new Tasks();
         try {
-            // will create a file in the path, in case the file does not exist
-            File fileChecker = new File(DATA_PATH);
-            if (!fileChecker.exists()) {
-                fileChecker.getParentFile().mkdir();
-                fileChecker.createNewFile();
+            // create a file in the path, in case the file does not exist
+            boolean isTheFileOriginallyExist = createFileRecursively();
+            if (!isTheFileOriginallyExist) {
                 return tasks;
             }
 
@@ -47,31 +41,47 @@ public class Storage {
             Reader reader = new FileReader(DATA_PATH);
             JSONArray jsonArray = (JSONArray) parser.parse(reader);
 
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                String type = (String) jsonObject.get("type");
-                String description = (String) jsonObject.get("description");
-                boolean isDone = (boolean) jsonObject.get("isDone");
+            populateTasks(jsonArray, tasks);
+        } catch (IOException | ParseException | DateTimeParseException e) {
+            System.err.println("Storage issues encountered. Task cannot be stored.");
+        }
+        return tasks;
+    }
 
-                Task t = null;
-                if (type.equals("todo")) {
-                    t = new ToDo(description);
-                } else {
-                    LocalDate time = LocalDate.parse((String) jsonObject.get("time"));
-                    if (type.equals("deadline")) {
-                        t = new Deadline(description, time);
-                    } else if (type.equals("event")) {
-                        t = new Event(description, time);
-                    }
+    private void populateTasks(JSONArray jsonArray, Tasks tasks) throws ParseException, DateTimeParseException {
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+            String type = (String) jsonObject.get("type");
+            String description = (String) jsonObject.get("description");
+            boolean isDone = (boolean) jsonObject.get("isDone");
+
+            Task t = null;
+            if (type.equals("todo")) {
+                t = new ToDo(description);
+            } else {
+                LocalDate time = LocalDate.parse((String) jsonObject.get("time"));
+                if (type.equals("deadline")) {
+                    t = new Deadline(description, time);
+                } else if (type.equals("event")) {
+                    t = new Event(description, time);
                 }
                 assert t != null;
                 t.setDone(isDone);
                 tasks.addTask(t);
             }
-        } catch (Exception e) {
-            System.out.println("Something bad happens, cannot load data. :')");
         }
-        return tasks;
+    }
+
+    /** Returns true if the file previously exists */
+    private boolean createFileRecursively() throws IOException {
+        File fileChecker = new File(DATA_PATH);
+        if (!fileChecker.exists()) {
+            fileChecker.getParentFile().mkdir();
+            fileChecker.createNewFile();
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -81,17 +91,23 @@ public class Storage {
      */
     public void saveTasks(Tasks tasks) {
         JSONArray jsonArray = tasks.getJsonArray();
-
         try {
-            File fileToCreate = new File(DATA_PATH);
-            fileToCreate.getParentFile().mkdir();
-            fileToCreate.createNewFile();
-
-            FileWriter fileWriter = new FileWriter(DATA_PATH);
-            fileWriter.write(jsonArray.toJSONString());
-            fileWriter.close();
+            createFile();
+            writeToFile(jsonArray);
         } catch (IOException e) {
-            System.out.println("Sorry, this task cannot be saved right now. :')");
+            System.err.println("Storage issues encountered. Task cannot be stored.");
         }
+    }
+
+    private void createFile() throws IOException {
+        File fileToCreate = new File(DATA_PATH);
+        fileToCreate.getParentFile().mkdir();
+        fileToCreate.createNewFile();
+    }
+
+    private void writeToFile(JSONArray jsonArray) throws IOException {
+        FileWriter fileWriter = new FileWriter(DATA_PATH);
+        fileWriter.write(jsonArray.toJSONString());
+        fileWriter.close();
     }
 }

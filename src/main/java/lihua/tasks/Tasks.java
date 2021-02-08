@@ -59,9 +59,11 @@ public class Tasks {
      */
     public String listTasks(String keyWord) {
         String message = "";
-        // tasks is not null, but maybe empty
+        assert tasks != null;
         for (int i = 1; i <= tasks.size(); i++) {
-            if (tasks.get(i - 1).getName().toLowerCase().contains(keyWord.toLowerCase())) {
+            boolean doesTaskNameContainKeyword = tasks.get(i - 1).getName()
+                    .toLowerCase().contains(keyWord.toLowerCase());
+            if (doesTaskNameContainKeyword) {
                 message += String.format("%d. %s\n", i, tasks.get(i - 1));
             }
         }
@@ -83,13 +85,11 @@ public class Tasks {
      */
     public String listTasks(LocalDate date) {
         String message = "";
-        // tasks is not null, but maybe empty
+        assert tasks != null;
         for (int i = 1; i <= tasks.size(); i++) {
             if (date != null) {
-                // list on a specific date
-                // date is not null here
-                if (date.equals(tasks.get(i - 1).getDate())) {
-                    // getDate() is not null here
+                boolean isTaskOnTheDaySpecified = date.equals(tasks.get(i - 1).getDate());
+                if (isTaskOnTheDaySpecified) {
                     message += String.format("%d. %s\n", i, tasks.get(i - 1));
                 }
             } else {
