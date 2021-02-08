@@ -43,11 +43,12 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
     archiveBaseName = "duke"
+    archiveVersion = "v0.1.2"
     archiveClassifier = null
 }
 
