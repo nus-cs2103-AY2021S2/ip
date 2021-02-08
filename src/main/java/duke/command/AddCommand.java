@@ -1,5 +1,9 @@
 package duke.command;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import duke.DukeException;
 import duke.Helper;
 import duke.TaskList;
@@ -9,8 +13,15 @@ import duke.task.TaskException;
 import duke.task.ToDo;
 
 public class AddCommand extends Command {
+
+    private static boolean isValidAddKeyword(String keyword) {
+        Set<String> validKeywords = new HashSet<>(Arrays.asList("deadline", "event", "todo"));
+        return validKeywords.contains(keyword);
+    }
+
     public AddCommand(String[] commandSplit) {
         super(commandSplit);
+        assert commandSplit.length > 1 && isValidAddKeyword(commandSplit[0]): "Add command should have valid keyword.";
     }
 
     /**

@@ -38,7 +38,7 @@ public class Parser {
             return new AddCommand(splitBySpaces);
         } else if (keyword.equals("delete")) {
             return new DeleteCommand(splitBySpaces);
-        } else if (keyword.equals("bye")) {
+        } else if (keyword.equals("bye") && splitBySpaces.length == 1) {
             return new ByeCommand(splitBySpaces);
         } else if (keyword.equals("find")) {
             return new FindCommand(splitBySpaces);
@@ -52,7 +52,7 @@ public class Parser {
      * @param input input string to be parsed.
      * @return duke.task.Task object corresponding to input string.
      */
-    public static Task stringToTask(String input) throws TaskException, DukeException {
+    public static Task stringToTask(String input) throws TaskException {
         //Check if it is a valid task first
         Pattern toDoPattern = Pattern.compile(TODO_REGEX);
         Pattern deadlinePattern = Pattern.compile(DEADLINE_REGEX);
