@@ -13,11 +13,8 @@ import duke.ui.Ui;
  */
 public class DukeCommandDone extends DukeCommand {
 
-    private int index;
+    private final int index;
 
-    public DukeCommandDone(int index) {
-        this.index = index;
-    }
     public DukeCommandDone(String arg) throws DukeExceptionIllegalArgument {
         try {
             this.index = Integer.parseInt(arg) - 1;

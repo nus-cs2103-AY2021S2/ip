@@ -15,11 +15,8 @@ import duke.ui.Ui;
  */
 public class DukeCommandDelete extends DukeCommand {
 
-    private int index;
+    private final int index;
 
-    public DukeCommandDelete(int index) {
-        this.index = index;
-    }
     public DukeCommandDelete(String arg) throws DukeExceptionIllegalArgument {
         if (arg.equals("all")) {
             this.index = -1; // Special delete all
@@ -35,7 +32,7 @@ public class DukeCommandDelete extends DukeCommand {
 
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
-            throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument{
+            throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument {
         if (index == -1) {
             String reply = ui.getUserInput("Confirm deletion of all tasks (y/[n])? ");
             if (reply.equalsIgnoreCase("y")) {
