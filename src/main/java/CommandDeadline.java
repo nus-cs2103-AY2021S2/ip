@@ -24,7 +24,6 @@ public class CommandDeadline extends Command {
      * updated TaskList.
      *
      * @param tasks TaskList of Duke object, contains all the Tasks that were added.
-     * @param ui Ui of Duke object, prints the message of CommandDeadline and Deadline Task.
      * @param storage Storage of Duke object, saves the TaskList into a text file.
      */
     @Override
