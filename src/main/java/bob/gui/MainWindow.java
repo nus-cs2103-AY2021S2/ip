@@ -1,5 +1,6 @@
 package bob.gui;
 
+import bob.BobException;
 import bob.processor.Bob;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,7 +46,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws BobException {
         String input = userInput.getText();
         String response = bob.getResponse(input);
         dialogContainer.getChildren().addAll(
