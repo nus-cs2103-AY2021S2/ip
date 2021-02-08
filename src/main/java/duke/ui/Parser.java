@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class Parser {
     private static final ArrayList<String> validActions
-            = new ArrayList<>(Arrays.asList("TODO", "DEADLINE", "EVENT", "DONE", "DELETE", "LIST", "BYE"));
+            = new ArrayList<>(Arrays.asList("TODO", "DEADLINE", "EVENT", "DONE", "DELETE", "LIST", "BYE", "FIND"));
 
     public static Command parse(String input) {
         if (!isInputValid(input)) {
@@ -40,6 +40,8 @@ public class Parser {
                 return new AddDeadlineCommand(description, deadlineDateTime);
             case "EVENT":
                 return new AddEventCommand(description, eventDateTime);
+            case "FIND":
+                return new FindCommand(description);
             default:
                 return new DoNothingCommand();
         }

@@ -41,6 +41,15 @@ public class Ui {
         System.out.println("Now you have " + tasks.getSize() + " task(s) in the list.");
     }
 
+    public void handleFind(TaskList tasks) {
+        if (tasks.getSize() == 0) {
+            System.out.println("There are no matching tasks in your list :O");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            tasks.printTasks();
+        }
+    }
+
     public String readInput() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
