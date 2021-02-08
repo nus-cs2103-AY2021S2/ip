@@ -40,15 +40,20 @@ public class AddCommand extends Command {
         }
     }
 
+    private Integer getKeywordIndex(String keyword, String[] arr) {
+        int keywordIndex = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(keyword)) {
+                keywordIndex = i;
+            }
+        }
+        return keywordIndex;
+    }
+
     private String addDeadline(TaskList list) throws DukeException, TaskException {
         String[] userInputSplit = this.commandSplit;
         //Index of /by keyword
-        int byIndex = 0;
-        for (int i = 0; i < userInputSplit.length; i++) {
-            if (userInputSplit[i].equals("/by")) {
-                byIndex = i;
-            }
-        }
+        int byIndex = getKeywordIndex("/by", userInputSplit);
         if (byIndex == 0) {
             throw new DukeException("Missing /by keyword for new deadline.");
         } else if (byIndex == 1) {
@@ -74,12 +79,7 @@ public class AddCommand extends Command {
     private String addEvent(TaskList list) throws DukeException, TaskException {
         String[] userInputSplit = this.commandSplit;
         //Index of /at keyword
-        int atIndex = 0;
-        for (int i = 0; i < userInputSplit.length; i++) {
-            if (userInputSplit[i].equals("/at")) {
-                atIndex = i;
-            }
-        }
+        int atIndex = getKeywordIndex("/at", userInputSplit);
         if (atIndex == 0) {
             throw new DukeException("Missing /at keyword for new Event.");
         } else if (atIndex == 1) {
