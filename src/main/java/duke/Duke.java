@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 import duke.commands.Command;
 import duke.dukeexceptions.DukeException;
-import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.TaskList;
 import duke.utils.Parser;
 import duke.utils.Storage;
@@ -49,10 +48,6 @@ public class Duke {
             taskList = new TaskList();
             String cannotAccessFileMsg = "Cannot access file at specified location.\n" + e.getMessage();
             return cannotAccessFileMsg;
-        } catch (InvalidTaskTypeException e) {
-            taskList = new TaskList();
-            String erroneousInput = "Erroneous task type in file. Please check your file again!";
-            return erroneousInput;
         }
     }
 }

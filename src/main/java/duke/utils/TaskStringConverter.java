@@ -99,7 +99,7 @@ public class TaskStringConverter {
      * @throws InvalidTaskTypeException if local storage file contains invalid Task identified, i.e. not [T], [E] or
      *     [D].
      */
-    public static List<Task> listStringToListTask(List<String> list) throws InvalidTaskTypeException {
+    public static List<Task> listStringToListTask(List<String> list) {
         List<Task> result = list.stream()
                                 .map(string -> fileStringToTask(string))
                                 .collect(Collectors.toList());

@@ -30,7 +30,7 @@ public class Storage {
      *
      * @return TaskList populated with Tasks, if applicable.
      */
-    public TaskList loadFromFile() throws FileNotFoundException, InvalidTaskTypeException {
+    public TaskList loadFromFile() throws FileNotFoundException {
         File file = new File(filepath);
 
         List<String> txtInput = new ArrayList<>();
