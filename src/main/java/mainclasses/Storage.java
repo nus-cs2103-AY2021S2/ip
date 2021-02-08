@@ -111,6 +111,7 @@ public class Storage {
         if (done.equals("1")) {
             task.setDone(true);
         } else {
+            assert(done.equals("0"));
             task.setDone(false);
         }
 
@@ -137,6 +138,7 @@ public class Storage {
     }
 
     private String printInHardDrive(Task task) {
+        assert(task != null);
         if (task.getDate() != null || task.getTime() != null) {
             if (task.getDone()) {
                 return task.getType() + " | 1 | " + task.getOnlyDescription() + " | " + task.getDate() + " " + task.getTime() + "\n";
