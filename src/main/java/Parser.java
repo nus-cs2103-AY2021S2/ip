@@ -135,6 +135,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {
@@ -142,6 +143,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {
@@ -149,6 +151,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {
@@ -156,6 +159,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {
@@ -163,6 +167,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {
@@ -170,6 +175,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {
@@ -177,6 +183,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {
@@ -184,6 +191,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {
@@ -191,6 +199,7 @@ public class Parser {
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
+            assert true;
         }
 
         try {

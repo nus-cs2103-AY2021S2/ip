@@ -31,7 +31,8 @@ public class Duke {
     public String loading() {
         try {
             tasks = new TaskList(storage.load(stat));
-            ui.showList(tasks.listTask());
+            Command c = new ListCommand("");
+            c.execute(tasks, ui, storage, stat);
             return ui.getMessage();
         } catch (DukeException e) {
             tasks = new TaskList();
@@ -54,6 +55,21 @@ public class Duke {
             ui.showError(e);
         }
         return ui.getMessage();
+    }
+
+    /**
+     * Check whether to close the platform.
+     *
+     * @param input string
+     * @return isOver
+     */
+    public boolean isOver(String input) {
+        try {
+            Command c = Parser.parseInput(input);
+            return c.isExit();
+        } catch (DukeException e) {
+            return false;
+        }
     }
 
 }

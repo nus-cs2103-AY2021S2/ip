@@ -21,6 +21,12 @@ public class DoneCommand extends Command {
             throw new DukeException("OOPS!!! There is no such task number.");
         } else {
             num--;
+
+            task = tasks.list.get(num);
+            if (task.getStatusIcon().equals("X")) {
+                stat.changeStat(-1, "done");
+            }
+
             tasks.doneTask(num);
             stat.changeStat(1, "done");
             task = tasks.list.get(num);

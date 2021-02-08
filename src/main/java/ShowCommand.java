@@ -27,7 +27,10 @@ public class ShowCommand extends Command {
             ui.showStatistic("You have deleted " + stat.showStat("delete") + " tasks in this session.");
             break;
         case "size":
-            ui.showStatistic("There are " + tasks.size + " tasks in the list.");
+            ui.showStatistic("There are " + stat.showStat("size") + " tasks in the list.");
+            break;
+        case "error":
+            ui.showStatistic("You have " + stat.showStat("error") + " in this session.");
             break;
         default:
             throw new DukeException("OOPS! The description for show cannot be empty");

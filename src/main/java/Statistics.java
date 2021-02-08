@@ -20,6 +20,7 @@ public class Statistics {
         event = 0;
         undone = 0;
         size = 0;
+        error = 0;
     }
 
     /**
@@ -81,8 +82,12 @@ public class Statistics {
         case "delete":
             stat = delete;
             break;
+        case "error":
+            stat = error;
+            break;
         default:
-            stat = error++;
+            error++;
+            stat = 0;
         }
         return stat;
     }
