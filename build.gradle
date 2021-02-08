@@ -33,8 +33,9 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Launcher"
     archiveClassifier = null
+    mergeServiceFiles()
 }
 
 checkstyle {
