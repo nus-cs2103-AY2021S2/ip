@@ -1,2 +1,0 @@
-T | 0 | eat
-D | 0 | eat and shit | 2020-02-02 2pm
