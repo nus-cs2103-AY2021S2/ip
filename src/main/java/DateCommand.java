@@ -1,7 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class DateCommand extends Command {
 
     public DateCommand(String info) {
@@ -9,19 +5,14 @@ public class DateCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui,
+                        Storage storage, Statistics stat) throws DukeException {
         String time;
 
         if (info.equals("")) {
             throw new DukeException("OOPS!!! The description cannot be empty.");
         } else {
-            try {
-                LocalDate date = LocalDate.parse(info);
-                assert date != null;
-                time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            } catch (DateTimeParseException e) {
-                throw new DukeException("OOPS!!! The timing is not in the correct format.");
-            }
+            time = Parser.parseTime(info);
             ui.showDate(time, tasks.searchDateTask(time));
         }
     }

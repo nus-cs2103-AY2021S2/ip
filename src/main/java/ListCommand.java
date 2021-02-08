@@ -5,7 +5,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui,
+                        Storage storage, Statistics stat) throws DukeException {
         assert tasks.size >= 0;
         if (tasks.size == 0) {
             throw new DukeException("OOPS!!! There is currently no tasks for you.");

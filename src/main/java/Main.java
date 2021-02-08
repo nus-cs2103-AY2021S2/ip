@@ -28,4 +28,13 @@ public class Main extends Application {
         }
     }
 
+    @Override
+    public void stop() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            System.out.print(e.getMessage());
+        }
+    }
+
 }
