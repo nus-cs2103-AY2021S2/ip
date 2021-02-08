@@ -31,6 +31,7 @@ public class FindCommand extends Command {
         int prevIndex = 1;
         for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i);
+            assert task != null : "Task is null";
             if (task.getDescription().toLowerCase().contains(description.toLowerCase())) {
                 contents += String.format("\n\t%d.%s", prevIndex, task.toString());
                 prevIndex++;
