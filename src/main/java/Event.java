@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 
 /** Class Event that represents a Event task**/
-public class Event extends Task{
+public class Event extends Task {
     /** Symbol to represent a Event task **/
     private static final char SYMBOL = 'E';
     /** Start datetime of the event **/

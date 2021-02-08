@@ -6,6 +6,7 @@ public class Parser {
     private static final String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
     private static final String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
 
+    //TODO refactor code for SLAP
     /**
      * Returns a Command object based on the fullCommand given
      * @param fullCommand (command entered by the user)
@@ -61,7 +62,8 @@ public class Parser {
         }
     }
 
-    private static Task createTaskWithDeadline(String fullCommand, String keyword, int firstSpace) throws DukeDeadlineException {
+    private static Task createTaskWithDeadline(String fullCommand, String keyword, int firstSpace)
+            throws DukeDeadlineException {
         Task t = null;
         int firstSlash = fullCommand.indexOf("/");
 
@@ -99,7 +101,7 @@ public class Parser {
 
     public static LocalDateTime[] parseDates(String data, String errorMessage) throws DukeDeadlineException {
         int firstSpace = data.indexOf(" ");
-        String date = data.substring(0,firstSpace);
+        String date = data.substring(0, firstSpace);
         data = data.substring(firstSpace + 1);
         String[] timePeriod = data.split("-");
         if (timePeriod.length != 2) {
@@ -119,7 +121,7 @@ public class Parser {
      * @return LocalDateTime
      * @throws DukeDeadlineException
      */
-    public static LocalDateTime parseDate(String date, String errorMessage) throws DukeDeadlineException{
+    public static LocalDateTime parseDate(String date, String errorMessage) throws DukeDeadlineException {
         try {
             return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
         } catch (DateTimeParseException e) {
@@ -130,12 +132,11 @@ public class Parser {
     /**
      * Returns a Task Object based on the csvData provided
      * @param csvData (a row from the saved file)
-     * @param ui (UI object for pririnting
      * @return
      */
 
     public static Task parseForText(String csvData) throws DukeDeadlineException {
-        String errorMessage = "The deadline for this task is corrupted (Required : yyyy-M-d hhmm";
+        String errorMessage = "The deadline for this task is corrupted (Required : yyyy-M-d hhmm)";
         String[] taskArr = csvData.split(",");
         Task task = null;
         try {
@@ -158,7 +159,7 @@ public class Parser {
             if (taskArr[1] == "1") {
                 task.markAsDone();
             }
-        } catch (DukeDeadlineException e){
+        } catch (DukeDeadlineException e) {
             throw e;
         }
         return task;

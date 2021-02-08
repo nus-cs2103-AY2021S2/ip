@@ -28,7 +28,7 @@ public class TaskList {
     /**
      * Returns boolean that represent option being valid / invalid
      * @param option Input for checking
-     * @return
+     * @return boolean indicating the validity of index option
      */
     public boolean checkValidOption(int option) {
         boolean result = option < 0 || option >= this.tasks.size();

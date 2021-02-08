@@ -17,9 +17,9 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%c] %s",SYMBOL, super.toString());
+        return String.format("[%c] %s", SYMBOL, super.toString());
     }
-    
+
     /**
      * Returns the representation of a task for saving.
      * @return String representation of a task for saving

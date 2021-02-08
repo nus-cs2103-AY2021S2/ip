@@ -24,7 +24,7 @@ public abstract class Task {
      * @return boolean indicating if there is a change
      */
     public boolean markAsDone() {
-        if(!this.isDone) {
+        if (!this.isDone) {
             this.isDone = true;
             return true;
         }

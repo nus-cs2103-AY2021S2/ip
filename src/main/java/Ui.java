@@ -19,6 +19,11 @@ public class Ui {
         return GOODBYE;
     }
 
+    /**
+     * Loads tasks from the fileName provided.
+     * @param fileName (file to load tasks from)
+     * @return message to indicate success / failure
+     */
     public static String load(String fileName) {
         storage = new Storage();
         try {
@@ -111,6 +116,11 @@ public class Ui {
         storage.save(tasks.getTaskList());
     }
 
+    /**
+     * Main logic for Duke program.
+     * @param fullCommand , command to be executed
+     * @return display message for command received
+     */
     public static String parseAndPrint(String fullCommand) {
         try {
             Command command = Parser.parse(fullCommand);

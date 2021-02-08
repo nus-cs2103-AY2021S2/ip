@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 
 /** Class Deadline that represent a task with a deadline **/
-public class Deadline extends Task{
+public class Deadline extends Task {
     /** Symbol to represent a deadline task **/
     private static final char SYMBOL = 'D';
     /** deadline of the task **/
