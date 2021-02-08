@@ -7,7 +7,7 @@ import duke.commands.DukeCommandDelete;
 import duke.commands.DukeCommandDone;
 import duke.commands.DukeCommandFind;
 import duke.commands.DukeCommandList;
-import duke.exceptions.DukeExceptionCommandNotFound;
+import duke.exceptions.DukeExceptionIllegalCommand;
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -26,11 +26,11 @@ public final class DukeCommandFactory {
      *
      * @param line User input string.
      * @return DukeCommand.
-     * @throws DukeExceptionCommandNotFound When command supplied is invalid.
+     * @throws DukeExceptionIllegalCommand When command supplied is invalid.
      * @throws DukeExceptionIllegalArgument When task parsing error occurs.
      */
     public static DukeCommand getDukeCommand(String line)
-            throws DukeExceptionCommandNotFound, DukeExceptionIllegalArgument {
+            throws DukeExceptionIllegalCommand, DukeExceptionIllegalArgument {
         line = line.strip(); // input sanitization
         String arg = "";
         String cmd = line;
@@ -63,7 +63,7 @@ public final class DukeCommandFactory {
         case "find":
             return new DukeCommandFind(arg);
         default:
-            throw new DukeExceptionCommandNotFound("Command '" + cmd + "' is invalid. Valid commands:"
+            throw new DukeExceptionIllegalCommand("Command '" + cmd + "' is invalid. Valid commands:"
                     + "\nbye, list, done, delete, event, todo, deadline");
         }
     }
