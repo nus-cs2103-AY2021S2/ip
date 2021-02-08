@@ -198,7 +198,7 @@ public class Storage {
         return new EventTask(name, isTaskCompleted, eventTime);
     }
 
-    private Task createPeriodTaskFromString(String name,boolean isTaskCompleted, String startDateString,
+    private Task createPeriodTaskFromString(String name, boolean isTaskCompleted, String startDateString,
                                             String endDateString) throws StorageException {
         try {
             LocalDate startDate = LocalDate.parse(startDateString, OutputDateTimeFormat.OUTPUT_DATE_FORMAT);

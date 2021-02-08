@@ -3,7 +3,7 @@ package popo.utils;
 /**
  * Container for messages to be shown to user.
  */
-public class Messages { 
+public class Messages {
     public static final String MESSAGE_ADDED_TASK = "Got it. I've added this task:";
     public static final String MESSAGE_DELETED_TASK = "Noted. I've removed this task:";
     public static final String MESSAGE_DONE_TASK = "Nice! I've marked this task as done:";

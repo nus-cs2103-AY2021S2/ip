@@ -26,7 +26,7 @@ public class PeriodCommand extends Command {
      *
      * @param taskName  Name of the task.
      * @param startDate Starting date of the task.
-     * @param endDate  Ending date of the task.
+     * @param endDate   Ending date of the task.
      */
     public PeriodCommand(String taskName, LocalDate startDate, LocalDate endDate) {
         this.taskName = taskName;

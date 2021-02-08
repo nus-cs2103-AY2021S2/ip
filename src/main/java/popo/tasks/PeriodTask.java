@@ -19,7 +19,7 @@ public class PeriodTask extends Task {
      *
      * @param name      Name of the task.
      * @param startDate Starting date of the task.
-     * @param endDate Ending date of the task.
+     * @param endDate   Ending date of the task.
      */
     public PeriodTask(String name, LocalDate startDate, LocalDate endDate) {
         super(IDENTIFIER, name);
@@ -34,7 +34,7 @@ public class PeriodTask extends Task {
      * @param name        Name of the task.
      * @param isCompleted Boolean indicating whether the task has been completed.
      * @param startDate   Starting date of the task.
-     * @param endDate Ending date of the task.
+     * @param endDate     Ending date of the task.
      */
     public PeriodTask(String name, boolean isCompleted, LocalDate startDate, LocalDate endDate) {
         super(IDENTIFIER, name, isCompleted);
