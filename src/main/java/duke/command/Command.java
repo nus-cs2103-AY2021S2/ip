@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeCommandException;
 
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ public abstract class Command {
         isExit = exit;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeCommandException;
 
     public boolean isExit() {
         return this.isExit;

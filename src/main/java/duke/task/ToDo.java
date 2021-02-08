@@ -3,7 +3,8 @@ package duke.task;
 
 
 public class ToDo extends Task {
-    private static String taskType = "TODO";
+    private static final String TASK_TYPE = "TODO";
+
     public ToDo(String description) {
         super(description);
     }
@@ -13,11 +14,11 @@ public class ToDo extends Task {
     }
 
     public  String getTaskType() {
-        return taskType;
+        return TASK_TYPE;
     }
 
     @Override
     public String toString() {
-        return String.format("%s %s %s", taskType, getStatusIcon(), getTaskDescription());
+        return String.format("[%s] [%s] %s", TASK_TYPE, getStatusIcon(), getTaskDescription());
     }
 }
