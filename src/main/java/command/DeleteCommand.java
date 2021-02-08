@@ -30,16 +30,13 @@ public class DeleteCommand implements Command {
     @Override
     public TaskList runCommand(TaskList taskList) throws MikeCommandExecutionException {
         this.taskList = taskList;
+
         try {
-            for (int i = 1; i <= this.taskList.getNumTasks(); i++) {
-                if (i == taskIndexToDelete) {
-                    this.taskToDelete = this.taskList.getNthTask(i);
-                }
-            }
+            this.taskToDelete = this.taskList.getNthTask(taskIndexToDelete);
             this.taskList.deleteNthTask(taskIndexToDelete);
             return this.taskList;
-        } catch (NullPointerException e) {
-            throw new MikeCommandExecutionException("DeleteCommand", "The task is not in the list");
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            throw new MikeCommandExecutionException("Delete Command", " ☹ OOPS!!! The task is not in the list!");
         }
 
     }

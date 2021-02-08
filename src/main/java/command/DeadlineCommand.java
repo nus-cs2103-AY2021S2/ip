@@ -2,6 +2,7 @@ package command;
 
 import java.time.LocalDateTime;
 
+import exception.MikeCommandExecutionException;
 import mike.TaskList;
 import task.DeadlineTask;
 
@@ -25,9 +26,12 @@ public class DeadlineCommand extends AddCommand {
      * @return TaskList object after adding task to the list
      */
     @Override
-    public TaskList runCommand(TaskList taskList) {
+    public TaskList runCommand(TaskList taskList) throws MikeCommandExecutionException {
         this.taskList = taskList;
         this.taskToAdd = new DeadlineTask(this.taskDescription, this.deadline);
+        if (this.checkIfDuplicate(taskToAdd)) {
+            throw new MikeCommandExecutionException("Deadline Command", " ☹ OOPS!!! Task is a duplicate!");
+        }
         taskList.addTaskToList(taskToAdd);
         return taskList;
     }

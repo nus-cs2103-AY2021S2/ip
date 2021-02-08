@@ -1,4 +1,5 @@
 package command;
+import exception.MikeCommandExecutionException;
 import mike.TaskList;
 import task.Task;
 import task.TodoTask;
@@ -11,6 +12,15 @@ public abstract class AddCommand implements Command {
 
     public AddCommand(String taskDescription) {
         this.taskDescription = taskDescription;
+    }
+
+    protected boolean checkIfDuplicate(Task taskToAdd) {
+        for (int i = 1; i <= taskList.getNumTasks(); i++) {
+            if (taskToAdd.equals(taskList.getNthTask(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -29,9 +39,14 @@ public abstract class AddCommand implements Command {
      * @return TaskList object after adding task to the list
      */
     @Override
-    public TaskList runCommand(TaskList taskList) {
+    public TaskList runCommand(TaskList taskList) throws MikeCommandExecutionException {
         this.taskList = taskList;
         this.taskToAdd = new TodoTask(this.taskDescription);
+
+        if (this.checkIfDuplicate(taskToAdd)) {
+            throw new MikeCommandExecutionException("ToDo Command", " ☹ OOPS!!! Task is a duplicate!");
+        }
+
         taskList.addTaskToList(taskToAdd);
         return taskList;
     }
