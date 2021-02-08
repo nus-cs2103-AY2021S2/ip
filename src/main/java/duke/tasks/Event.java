@@ -37,7 +37,7 @@ public class Event extends Task {
      *
      * @return String format of this Event's date.
      */
-    public String getDateToStore() {
+    public String getDateForFile() {
         return this.dateTime.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 

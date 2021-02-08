@@ -37,7 +37,7 @@ public class Deadline extends Task {
      *
      * @return String format of this Deadline's date.
      */
-    public String getDateToStore() {
+    public String getDateForFile() {
         return this.dateTime.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 

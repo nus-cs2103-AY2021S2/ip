@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -45,12 +44,11 @@ public class Storage {
         if (txtInput.size() == 0) {
             return new TaskList();
         }
+
         List<Task> convertedTaskList = TaskStringConverter.listStringToListTask(txtInput);
         assert convertedTaskList.size() > 0;
-        TaskList taskList = new TaskList(convertedTaskList);
-        taskList.getListInString();
 
-        return taskList;
+        return new TaskList(convertedTaskList);
     }
 
     /**
@@ -58,12 +56,11 @@ public class Storage {
      *
      * @param taskList List of all Tasks.
      * @throws IOException if unable to write to file completely.
-     * @throws InvalidTaskTypeException if one of the Tasks in taskList is not a valid Task.
      */
-    public void writeToFile(TaskList taskList) throws IOException, InvalidTaskTypeException {
+    public void writeToFile(TaskList taskList) throws IOException {
         String stringToWrite = TaskStringConverter.stringTasksForFile(taskList.getList());
 
-        FileWriter fileWriter = new FileWriter(this.filepath);
+        FileWriter fileWriter = new FileWriter(filepath);
         fileWriter.write(stringToWrite);
         fileWriter.close();
     }

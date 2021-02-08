@@ -2,7 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.TaskList;
 import duke.utils.Storage;
 
@@ -24,7 +23,7 @@ public class ByeCommand extends Command {
             this.storage.writeToFile(this.taskList);
             String byeMsg = "Bye. Hope to see you again soon!";
             return byeMsg;
-        } catch (IOException | InvalidTaskTypeException e) {
+        } catch (IOException e) {
             return e.getMessage();
         }
     }

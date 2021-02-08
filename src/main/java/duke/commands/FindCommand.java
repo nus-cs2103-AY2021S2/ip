@@ -1,7 +1,6 @@
 package duke.commands;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -32,6 +31,7 @@ public class FindCommand extends Command {
      *
      * If there exist such Tasks, prints these Tasks.
      * Else, display message indicating no matching Tasks.
+     *
      * @return message showing all the relevant Tasks.
      */
     @Override
@@ -46,25 +46,22 @@ public class FindCommand extends Command {
         return msg;
     }
 
-    private String listToString(List<Task> results) {
-        String searchResults = TaskStringConverter.stringTasksForProgram(results);
-
-        return searchResults;
-    }
-
     private List<Task> searchList(Pattern regEx) {
         List<Task> results = taskList.getList()
                 .stream()
-                .filter(new Predicate<Task>() {
-                    @Override
-                    public boolean test(Task task) {
-                        String description = task.getDescription();
-                        Matcher matcher = regEx.matcher(description);
-                        return matcher.find();
-                    }
+                .filter(task -> {
+                    String description = task.getDescription();
+                    Matcher matcher = regEx.matcher(description);
+                    return matcher.find();
                 })
                 .collect(Collectors.toList());
 
         return results;
+    }
+
+    private String listToString(List<Task> results) {
+        String searchResults = TaskStringConverter.stringTasksForProgram(results);
+
+        return searchResults;
     }
 }
