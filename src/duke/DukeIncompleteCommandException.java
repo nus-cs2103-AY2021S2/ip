@@ -1,4 +1,4 @@
-package com.jetbrains;
+package duke;
 
 public class DukeIncompleteCommandException extends Exception {
     public String message;
