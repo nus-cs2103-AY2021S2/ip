@@ -18,6 +18,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "TODO" + Task.TASK_DELIMITER + (isDone ? "done" : " ") + Task.TASK_DELIMITER + taskDescription;
+        return "TODO" + Task.TASK_DELIMITER + (isDone ? "✓" : " ") + Task.TASK_DELIMITER + taskDescription;
     }
 }

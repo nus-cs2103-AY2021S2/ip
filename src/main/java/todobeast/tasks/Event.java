@@ -30,7 +30,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "EVENT" + Task.TASK_DELIMITER + (isDone ? "done" : " ") + Task.TASK_DELIMITER
+        return "EVENT" + Task.TASK_DELIMITER + (isDone ? "✓" : " ") + Task.TASK_DELIMITER
                 + taskDescription + Task.TASK_DELIMITER
                 + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ", " + time;
     }

@@ -113,16 +113,16 @@ public class Ui {
 
     public String showInstructions() {
         String instructions = "List of commands for ToDoBeast:\n\n"
-                + "\t1. bye/exit - to quit ToDoBeast\n"
-                + "\t2. list - lists all the tasks that have been stored in ToDoBeast\n"
-                + "\t3. delete, [index] - deletes the task with the corresponding [index]\n"
-                + "\t4. done, [index] - marks the task with the corresponding [index] as done\n"
-                + "\t5. find, [regex] - finds all tasks with the specified [regex]\n"
-                + "\t6. todo, [task description] - creates a to-do task with the specified [task description]\n"
-                + "\t7. deadline, [task description], by YYYY-MM-DD HH:MM "
+                + "1. bye/exit - to quit ToDoBeast\n"
+                + "2. list - lists all the tasks that have been stored in ToDoBeast\n"
+                + "3. delete, [index] - deletes the task with the corresponding [index]\n"
+                + "4. done, [index] - marks the task with the corresponding [index] as done\n"
+                + "5. find, [regex] - finds all tasks with the specified [regex]\n"
+                + "6. todo, [task description] - creates a to-do task with the specified [task description]\n"
+                + "7. deadline, [task description], by YYYY-MM-DD HH:MM "
                 + "- creates a deadline task with the "
                 + "specified [task description], date and time\n"
-                + "\t8. event, [task description], at YYYY-MM-DD HH:MM "
+                + "8. event, [task description], at YYYY-MM-DD HH:MM "
                 + "- creates an event task with the specified "
                 + "[task description], date and time\n";
         return instructions;
