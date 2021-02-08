@@ -1,8 +1,12 @@
 package mainclasses;
 
+import Helper.SortByDateTime;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -27,6 +31,17 @@ public class TaskList {
         }
     }
 
+    public String printTaskFromExternalList(List<Task> tasks) {
+        String newString = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDone()) {
+                newString += i + 1 + "." + "[" + tasks.get(i).type + "]" + "[X] " + tasks.get(i).getDescription() + "\n";
+            } else {
+                newString += i + 1 + "." + "[" + tasks.get(i).type + "]" + "[ ] " + tasks.get(i).getDescription() + "\n";
+            }
+        }
+        return newString;
+    }
     /**
      * Prints the task which includes description, task type and whether task is completed
      * @param task the task to be printed out
@@ -118,6 +133,29 @@ public class TaskList {
             }
         }
         return newStringLine;
+    }
+
+    public String sortTask(String taskType, String sortBy) {
+        TaskEnum taskTypeEnum = TaskEnum.valueOf(taskType);
+        List<Task> tasksToBeSorted = new ArrayList<>();
+        for (Task task : this.getNewStorage()) {
+            if (task.getType() == taskTypeEnum) {
+                tasksToBeSorted.add(task);
+            }
+        }
+        String newStringLine = "Here are the tasks sorted by " + sortBy + "\n";
+        if (sortBy.equals("date")) {
+            tasksToBeSorted = sortByDateTime(tasksToBeSorted);
+        }
+        newStringLine += printTaskFromExternalList(tasksToBeSorted);
+        return newStringLine;
+    }
+
+    private List<Task> sortByDateTime(List<Task> tasks) {
+        List<Task> taskList = new ArrayList<>();
+        Collections.sort(tasks, new SortByDateTime());
+        taskList = tasks;
+        return taskList;
     }
 
     public void setNewStorage(List<Task> newStorage) {

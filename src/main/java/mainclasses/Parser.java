@@ -36,6 +36,9 @@ public class Parser {
             return taskList.deleteTask(userInput);
         } else if (inputBreakdown[0].equals("find")) {
             return taskList.findTasksWithKeyword(inputBreakdown[1]);
+        } else if (inputBreakdown[0].equals("sort")) {
+            return taskList.sortTask(inputBreakdown[1], inputBreakdown[2]);
+
         } else {
             return taskList.addTask(userInput);
         }
@@ -55,6 +58,7 @@ public class Parser {
         possibleActionInputs.add("done");
         possibleActionInputs.add("delete");
         possibleSortInputs.add("find");
+        possibleSortInputs.add("sort");
         possibleSingleInputs.add("bye");
         possibleTaskInputs.add("todo");
         possibleTaskInputs.add("event");
@@ -102,15 +106,20 @@ public class Parser {
                 }
             }
         } else if (possibleSortInputs.contains(input[0])) {
-            if (input.length > 2) {
-                throw new DukeException("You can only search by a single word!");
+            if (input[0].equals("sort")) {
+                System.out.println("Sorting");
+            } else {
+                if (input.length > 2) {
+                    throw new DukeException("You can only search by a single word!");
+                }
+                try {
+                    int number = Integer.parseInt(input[1]);
+                    throw new DukeException("A number should not be entered for find");
+                } catch (NumberFormatException ex) { //If the code comes here means the userInput is not a number which is correct
+                    System.out.println("Finding...");
+                }
             }
-            try {
-                int number = Integer.parseInt(input[1]);
-                throw new DukeException("A number should not be entered for find");
-            } catch (NumberFormatException ex) { //If the code comes here means the userInput is not a number which is correct
-                System.out.println("Finding...");
-            }
+
         }
     }
 
