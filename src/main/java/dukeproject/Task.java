@@ -6,8 +6,8 @@ package dukeproject;
  * X for the isDone parameter means that the event has been completed.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for the task, specifying the description.
@@ -27,6 +27,10 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     /**

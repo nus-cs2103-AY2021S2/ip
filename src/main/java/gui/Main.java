@@ -1,3 +1,5 @@
+package gui;
+
 import java.io.IOException;
 
 import dukeproject.Duke;

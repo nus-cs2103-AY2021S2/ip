@@ -1,3 +1,2 @@
-[T][X] borrow book
 [T][ ] test
 [T][ ] borrow item

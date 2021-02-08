@@ -2,6 +2,7 @@ package dukeproject;
 
 import java.io.FileNotFoundException;
 
+import gui.Ui;
 import javafx.scene.control.TextArea;
 
 /**

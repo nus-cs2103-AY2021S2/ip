@@ -1,5 +1,6 @@
-package dukeproject;
+package gui;
 
+import dukeproject.TaskList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
@@ -8,7 +9,12 @@ public class Ui {
     @FXML
     private final TextArea textOutput;
 
-    Ui(TextArea textOutput) {
+    /**
+     * Constructor to create the text output and print initial greetings to the user.
+     *
+     * @param textOutput UI to output the text to the user.
+     */
+    public Ui(TextArea textOutput) {
         this.textOutput = textOutput;
         this.printInitialGreeting();
     }
@@ -99,7 +105,7 @@ public class Ui {
         for (int index = 0; index < taskList.size(); index++) {
             /* Only print the listing and increment the counter if the task descriptions
             contains the keyword */
-            if (taskList.get(index).description.contains(keyword)) {
+            if (taskList.get(index).getDescription().contains(keyword)) {
                 this.printWithSpace(counter + ". " + taskList.get(index).toString());
                 counter++;
             }
@@ -118,6 +124,7 @@ public class Ui {
      * @param stringToPrint String to be printed.
      */
     public void printWithSpace(String stringToPrint) {
+        assert textOutput != null : "The UI does not have a valid place to output its text.";
         textOutput.appendText(stringToPrint + "\n");
     }
 }
