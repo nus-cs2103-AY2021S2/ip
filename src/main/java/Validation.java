@@ -6,6 +6,9 @@ import java.util.List;
  */
 public class Validation {
 
+    public static final int VALID_INDEX_BOUND = -1;
+    public static final int INDEX_OFFSET = 1;
+
     /**
      * Checks if the user input is within the list of accepted commands.
      *
@@ -13,12 +16,12 @@ public class Validation {
      * @throws DukeException On invalid input.
      */
     public static void checkValidCommand(String command) throws DukeException {
-        String[] validCommands = new String[] {"todo", "deadline", "event", "list", "bye", "done", "delete", "find"};
+        String[] validCommands = new String[]{"todo", "deadline", "event", "list", "bye", "done", "delete", "find"};
         List<String> commands = Arrays.asList(validCommands);
 
         int index = command.indexOf(' ');
         String first = "";
-        if (index > -1) {
+        if (index > VALID_INDEX_BOUND) {
             first = command.substring(0, index);
         } else {
             first = command;
@@ -29,11 +32,12 @@ public class Validation {
         } else {
             String[] secondValidation = new String[] {"todo", "deadline", "event", "done", "delete", "find"};
             List<String> secondListOfCommands = Arrays.asList(secondValidation);
+            boolean isCommandInSecondList = secondListOfCommands.contains(first.toLowerCase());
 
-            if (secondListOfCommands.contains(first.toLowerCase())
-                    && (index <= -1 || command.substring(index).isBlank())) {
+            if (isCommandInSecondList
+                    && (index <= VALID_INDEX_BOUND || command.substring(index).isBlank())) {
                 throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete/find "
-                            + "cannot be empty!!");
+                        + "cannot be empty!!");
             }
         }
     }
@@ -46,7 +50,11 @@ public class Validation {
      * @throws DukeException On invalid time/date input.
      */
     public static void checkForSchedule(String command, int findSlash) throws DukeException {
-        if ((findSlash <= -1) || command.endsWith("/") || command.substring(findSlash + 1).isBlank()) {
+        boolean isSlashAbsent = (findSlash == VALID_INDEX_BOUND);
+        boolean isDescriptionNotComplete = command.endsWith("/");
+        boolean isDescriptionNotValid = command.substring(findSlash + INDEX_OFFSET).isBlank();
+
+        if (isSlashAbsent || isDescriptionNotComplete || isDescriptionNotValid) {
             throw new DukeException(":( OOPS! Please input a valid time/date");
         }
     }
@@ -59,7 +67,8 @@ public class Validation {
      * @throws DukeException On invalid input. Task does not exist.
      */
     public static void checkValidRange(int taskSize, int chosenNumber) throws DukeException {
-        if (chosenNumber > taskSize) {
+        boolean isOutOfBounds = chosenNumber > taskSize;
+        if (isOutOfBounds) {
             throw new DukeException(":( OOPS! This task does not exist! Use 'list' to check your task numbers!");
         }
     }

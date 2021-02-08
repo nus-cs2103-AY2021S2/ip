@@ -8,6 +8,7 @@ public class Parser {
 
     public static final int INDEX_OFFSET = 1;
     public static final int OFFSET_TO_NEXT_REQUIRED_DATA = 4;
+    public static final int VALID_INDEX_BOUND = -1;
 
     protected Storage storage;
     protected TaskList tasks;
@@ -31,18 +32,65 @@ public class Parser {
     }
 
     /**
+     * Helper function to obtain necessary details and create a ToDo.
+     * @return New ToDo created.
+     */
+    public ToDo createTodo() {
+        String descriptionTask = command.substring(index + INDEX_OFFSET);
+        ToDo newToDo = new ToDo(descriptionTask);
+        return newToDo;
+    }
+
+    /**
+     * Helper function to obtain necessary details and create a Deadline.
+     * @return New Deadline created.
+     */
+    public Deadline createDeadline() throws DukeException {
+        Validation.checkForSchedule(command, findSlash);
+        String descriptionDeadline = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
+        LocalDate date = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
+        Deadline newDeadline = new Deadline(descriptionDeadline, date);
+        return newDeadline;
+    }
+
+    /**
+     * Helper function to obtain necessary details and create an Event.
+     * @return New Event created.
+     */
+    public Event createEvent() throws DukeException {
+        Validation.checkForSchedule(command, findSlash);
+        String descriptionEvent = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
+        String time = command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA);
+        Event newEvent = new Event(descriptionEvent, time);
+        return newEvent;
+    }
+
+    /**
+     * Helper function to find a task needed for handling commands.
+     * @return Task needed.
+     */
+    public Task findTask() throws DukeException {
+        taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
+        Validation.checkValidRange(tasks.getSize(), taskIdentifier);
+        Task task = tasks.find(taskIdentifier - INDEX_OFFSET);
+        return task;
+    }
+
+    /**
      * Handles the ToDo command.
      * @return A string with the response to the command.
      * @throws IOException On file error when adding the ToDo task
      * to the file in the hard disk.
      */
-    public String handleToDo() throws IOException {
-        String descriptionTask = command.substring(index + INDEX_OFFSET);
-        ToDo newToDo = new ToDo(descriptionTask);
-
-        tasks.add(newToDo);
-        storage.addTask(newToDo);
-        return ui.respondToAddTask(newToDo, tasks.getSize());
+    public String handleToDo() {
+        try {
+            ToDo newToDo = createTodo();
+            tasks.add(newToDo);
+            storage.addTask(newToDo);
+            return ui.respondToAddTask(newToDo, tasks.getSize());
+        } catch (IOException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -51,16 +99,11 @@ public class Parser {
      */
     public String handleDeadline() {
         try {
-            Validation.checkForSchedule(command, findSlash);
-            String descriptionDeadline = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
-            LocalDate date = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
-            Deadline newDeadline = new Deadline(descriptionDeadline, date);
-
+            Deadline newDeadline = createDeadline();
             tasks.add(newDeadline);
             storage.addTask(newDeadline);
             return ui.respondToAddTask(newDeadline, tasks.getSize());
-
-        } catch (DukeException | IOException e) {
+        } catch (IOException | DukeException e) {
             return e.getMessage();
         }
     }
@@ -71,15 +114,10 @@ public class Parser {
      */
     public String handleEvent() {
         try {
-            Validation.checkForSchedule(command, findSlash);
-            String descriptionEvent = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
-            String time = command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA);
-            Event newEvent = new Event(descriptionEvent, time);
-
+            Event newEvent = createEvent();
             tasks.add(newEvent);
             storage.addTask(newEvent);
             return ui.respondToAddTask(newEvent, tasks.getSize());
-
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }
@@ -91,13 +129,9 @@ public class Parser {
      */
     public String handleDone() {
         try {
-            taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
-            Validation.checkValidRange(tasks.getSize(), taskIdentifier);
-            Task toMark = tasks.find(taskIdentifier - INDEX_OFFSET);
-
+            Task toMark = findTask();
             storage.markTask(toMark);
             return ui.respondToDone(toMark);
-
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }
@@ -109,14 +143,10 @@ public class Parser {
      */
     public String handleDelete() {
         try {
-            taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
-            Validation.checkValidRange(tasks.getSize(), taskIdentifier);
-            Task selected = tasks.find(taskIdentifier - INDEX_OFFSET);
-
+            Task selected = findTask();
             tasks.delete(taskIdentifier - INDEX_OFFSET);
             storage.deleteTask(selected);
             return ui.respondToDelete(selected, tasks.getSize());
-
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }
@@ -138,53 +168,41 @@ public class Parser {
      * @return A string with the response to the command.
      */
     public String handleCommand(String command) {
-        System.out.println("HERE !!!!!");
-        String output = "";
         this.command = command;
         try {
             Validation.checkValidCommand(command);
             index = command.indexOf(' ');
             findSlash = command.indexOf('/');
 
-            if (index > -1) {
+            if (index > VALID_INDEX_BOUND) {
                 String type = command.substring(0, index);
                 switch (type) {
                 case "todo":
-                    output = handleToDo();
-                    break;
+                    return handleToDo();
                 case "deadline":
-                    output = handleDeadline();
-                    break;
+                    return handleDeadline();
                 case "event":
-                    output = handleEvent();
-                    break;
+                    return handleEvent();
                 case "done":
-                    output = handleDone();
-                    break;
+                    return handleDone();
                 case "delete":
-                    output = handleDelete();
-                    break;
+                    return handleDelete();
                 case "find":
-                    output = handleFind();
-                    break;
+                    return handleFind();
                 default:
-                    break;
+                    return null;
                 }
             } else {
                 switch (command) {
                 case "bye":
-                    output = ui.respondToBye();
-                    break;
+                    return ui.respondToBye();
                 case "list":
-                    output = ui.respondToList(tasks.getSize()) + "\n" + tasks.list();
-                    break;
+                    return ui.respondToList(tasks.getSize()) + "\n" + tasks.list();
                 default:
-                    break;
+                    return null;
                 }
             }
-            System.out.println(output);
-            return output;
-        } catch (DukeException | IOException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
     }
