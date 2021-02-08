@@ -25,7 +25,8 @@ public class Parser {
      * @return A Command, whose type is based on the user input.
      */
     public static Command parse(String s) {
-        String[] sArray = s.split(" ");
+        String splitRegex = " ";
+        String[] sArray = s.split(splitRegex);
 
         switch (sArray[0]) {
         case "bye":

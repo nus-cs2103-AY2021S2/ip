@@ -28,7 +28,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            String filename = "/view/MainWindow.fxml";
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(filename));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
