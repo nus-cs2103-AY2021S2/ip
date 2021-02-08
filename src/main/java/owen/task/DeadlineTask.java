@@ -39,6 +39,11 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public boolean isDue(long days) {
+        return this.deadline.isSoon(days) && !this.isDone;
+    }
+
+    @Override
     public String serialize() {
         String serializeFormat = "DEADLINE | %b | %s | %s";
         return String.format(

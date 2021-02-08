@@ -44,7 +44,12 @@ public class DateTime {
         outputFormatter = builder.toFormatter();
     }
 
-    private DateTime(LocalDateTime dateTime) {
+    /**
+     * Creates new DateTime from LocalDateTime.
+     *
+     * @param dateTime LocalDateTime object.
+     */
+    public DateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -62,6 +67,13 @@ public class DateTime {
         } catch (DateTimeParseException exception) {
             throw new OwenException("Date and time must be in DD/MM/YYYY HHMM format...");
         }
+    }
+
+    /**
+     * Returns if date time is soon within specified days.
+     */
+    public boolean isSoon(long days) {
+        return this.dateTime.minusDays(days).isBefore(LocalDateTime.now());
     }
 
     /**

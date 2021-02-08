@@ -78,6 +78,8 @@ public class Owen implements Chatbot {
                 return this.deleteTask(Parser.parseTaskNumber(command.getArgs()));
             case FIND:
                 return this.findTask(command.getArgs());
+            case REMINDERS:
+                return this.listReminders(Parser.parseTaskNumber(command.getArgs()));
             case BYE:
                 return this.shutdown();
             default:
@@ -169,5 +171,18 @@ public class Owen implements Chatbot {
         String findFormat = "Here are the matching tasks in your list:\n%s";
         String findResponse = String.format(findFormat, findResult);
         return new Owen(this.isRunning, findResponse, this.taskList, this.storage);
+    }
+
+    /**
+     * List reminders of tasks that are due soon within specified days.
+     *
+     * @param days Days to check if tasks are due by.
+     * @return Copy of Owen with updated response.
+     */
+    private Owen listReminders(long days) {
+        String remindersResult = this.taskList.getDueTasks(days);
+        String remindersFormat = "Here are the tasks due within %d days:\n%s";
+        String remindersResponse = String.format(remindersFormat, days, remindersResult);
+        return new Owen(this.isRunning, remindersResponse, this.taskList, this.storage);
     }
 }
