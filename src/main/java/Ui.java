@@ -31,6 +31,7 @@ public class Ui {
   }
 
   public String readUserInput(String command, Storage storage, TaskList tasks) throws IOException {
+    assert(command!=null);
     Parser parser = new Parser(storage, tasks);
     String output = "";
     try {
