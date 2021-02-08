@@ -16,13 +16,19 @@ public class ErrorChecker {
     protected ArrayList<Task> tasks;
     protected String errorMessage;
 
+    private boolean isBye;
+    private boolean isHelp;
+    private boolean isList;
     private boolean isDone;
     private boolean isDelete;
     private boolean isFind;
     private boolean isTodo;
     private boolean isDeadline;
     private boolean isEvent;
+    private boolean isNewTask;
     private boolean isValidType;
+
+    private String taskType = "";
 
     /**
      * Constructs a new ErrorChecker object used for checking errors in user input.
@@ -34,13 +40,17 @@ public class ErrorChecker {
         this.input = input;
         this.tasks = tasks;
 
+        isBye = input.equals("bye");
+        isHelp = input.equals("help");
+        isList = input.equals("list");
         isDone = input.startsWith("done");
         isDelete = input.startsWith("delete");
         isFind = input.startsWith("find");
         isTodo = input.startsWith("todo");
         isDeadline = input.startsWith("deadline");
         isEvent = input.startsWith("event");
-        isValidType = isDone || isDelete || isFind || isTodo || isDeadline || isEvent;
+        isNewTask = isTodo || isDeadline || isEvent;
+        isValidType = isBye || isHelp || isList || isDone || isDelete || isFind || isNewTask;
     }
 
     /**
@@ -59,74 +69,20 @@ public class ErrorChecker {
      * @return True if input is valid and formatted correctly, and false otherwise.
      */
     public boolean isValid() {
-        String taskType = "";
-
-        // if (!input.equals("help") && !input.startsWith("done") && !input.startsWith("delete")
-        //        && !input.startsWith("find") && !input.startsWith("todo") && !input.startsWith("deadline")
-        //        && !input.startsWith("event")) {
-        //    errorMessage = new IllegalInputException("").toString();
-        //    return false;
-        // }
-
         if (!isValidType) {
             errorMessage = new IllegalInputException("").toString();
             return false;
         }
 
         try {
-            if (isDone) {
-                taskType = "done";
-                input.substring(6);
-                String taskToMark = input.substring(5);
-                int taskToMarkInt = Integer.parseInt(taskToMark);
-                tasks.get(taskToMarkInt - 1);
-            } else if (isDelete) {
-                taskType = "delete";
-                input.substring(8);
-                String taskToDelete = input.substring(7);
-                int taskToDeleteInt = Integer.parseInt(taskToDelete);
-                tasks.get(taskToDeleteInt - 1);
-            } else if (isFind) {
-                input.substring(6);
-            } else if (isTodo) {
-                taskType = "todo";
-                input.substring(6);
-            } else if (isDeadline) {
-                taskType = "deadline";
-                input.substring(10);
-
-                String[] inputSplit = input.split("/");
-
-                if (!inputSplit[1].startsWith("by")) {
-                    throw new IllegalTaskException("", "deadline");
-                }
-
-                DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
-                dateTimeConverter.convertDate();
-            } else if (isEvent) {
-                taskType = "event";
-                input.substring(7);
-
-                String[] inputSplit = input.split("/");
-
-                if (!inputSplit[1].startsWith("on")) {
-                    throw new IllegalTaskException("", "event");
-                }
-                if (!inputSplit[2].startsWith("from") || !inputSplit[3].startsWith("to")) {
-                    throw new IllegalTaskException("", "event");
-                }
-                DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
-                dateTimeConverter.convertDate();
-                dateTimeConverter.convertTime("from");
-                dateTimeConverter.convertTime("to");
-            }
+            checkInputFormat();
         } catch (StringIndexOutOfBoundsException ex) {
             if (isDone || isDelete) {
                 errorMessage = new IllegalDoneDeleteException(ex.getMessage(), taskType).toString();
                 return false;
             } else if (isFind) {
                 errorMessage = new IllegalFindException(ex.getMessage()).toString();
-            } else {
+            } else if (isNewTask) {
                 errorMessage = new IllegalTaskException(ex.getMessage(), taskType).toString();
                 return false;
             }
@@ -137,7 +93,7 @@ public class ErrorChecker {
             if (isDeadline) {
                 errorMessage = "Oops, I don't understand that date format!\n"
                         + "Please re-enter with the format DD-MM-YYYY!";
-            } else {
+            } else if (isEvent) {
                 errorMessage = "Oops, I don't understand that date format!\n"
                         + "Please re-enter with the format DD-MM-YYYY /from H AM/PM /to H AM/PM!";
             }
@@ -145,5 +101,75 @@ public class ErrorChecker {
         }
 
         return true;
+    }
+
+    private void checkInputFormat() {
+        if (isDone) {
+            taskType = "done";
+            checkDone();
+        } else if (isDelete) {
+            taskType = "delete";
+            checkDelete();
+        } else if (isFind) {
+            input.substring(6); // Checking that search keyword was specified
+        } else if (isTodo) {
+            taskType = "todo";
+            input.substring(6); // Checking that task description was specified
+        } else if (isDeadline) {
+            taskType = "deadline";
+            checkDeadline();
+        } else if (isEvent) {
+            taskType = "event";
+            checkEvent();
+        }
+    }
+
+    private void checkDone() {
+        input.substring(6); // Checking that task number was specified
+
+        // Checking that task exists in list
+        String taskToMark = input.substring(5);
+        int taskToMarkInt = Integer.parseInt(taskToMark);
+        tasks.get(taskToMarkInt - 1);
+    }
+
+    private void checkDelete() {
+        input.substring(8); // Checking that task number was specified
+
+        // Checking that task exists in list
+        String taskToDelete = input.substring(7);
+        int taskToDeleteInt = Integer.parseInt(taskToDelete);
+        tasks.get(taskToDeleteInt - 1);
+    }
+
+    private void checkDeadline() {
+        input.substring(10); // Checking that task description was specified
+
+        String[] inputSplit = input.split("/");
+        // Checking that format of deadline task input is correct
+        if (!inputSplit[1].startsWith("by")) {
+            throw new IllegalTaskException("", "deadline");
+        }
+        // Checking that format of date in input is correct
+        DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
+        dateTimeConverter.convertDate();
+    }
+
+    private void checkEvent() {
+        input.substring(7); // Checking that task description was specified
+
+        String[] inputSplit = input.split("/");
+        // Checking that format of deadline task input is correct
+        if (!inputSplit[1].startsWith("on")) {
+            throw new IllegalTaskException("", "event");
+        }
+        if (!inputSplit[2].startsWith("from") || !inputSplit[3].startsWith("to")) {
+            throw new IllegalTaskException("", "event");
+        }
+        // Checking that format of date and times in input is correct
+        DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
+        dateTimeConverter.convertDate();
+        dateTimeConverter.convertTime("from");
+        dateTimeConverter.convertTime("to");
     }
 }

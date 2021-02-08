@@ -52,12 +52,7 @@ public class MainWindow extends AnchorPane {
         String welcomeMessage = "Hi, I'm Tabby the task bot!\n"
                 + "I'll help you keep tabs on your to-dos, deadlines and events!\n"
                 + "Enter help for a summary of commands.";
-        // String input = userInput.getText();
-        // String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                // DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
-        );
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
     /**
