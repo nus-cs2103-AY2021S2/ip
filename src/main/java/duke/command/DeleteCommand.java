@@ -33,16 +33,21 @@ public class DeleteCommand implements ICommand {
         try {
             int count = Integer.parseInt(parameters.strip());
             Task removedTask = tasks.deleteTask(count);
-            String string = "";
-            string += "Noted. I've removed this task:\n";
-            string += removedTask.toString() + "\n";
-            string += String.format("Now you have %d tasks in the list", tasks.getTasks().size()) + "\n";
+            String string = getDeletedString(removedTask);
             ui.createDukeDialog(string);
         } catch (NumberFormatException e) {
             ui.createDukeDialog("Error: Invalid argument for delete");
         } catch (IllegalArgumentException e) {
             ui.handleError(e);
         }
+    }
+
+    private String getDeletedString(Task removedTask) {
+        String string = "";
+        string += "Noted. I've removed this task:\n";
+        string += removedTask.toString() + "\n";
+        string += String.format("Now you have %d tasks in the list", tasks.getTasks().size()) + "\n";
+        return string;
     }
 
 }

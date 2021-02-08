@@ -7,7 +7,7 @@ public class ExitCommand implements ICommand {
 
     /**
      * Constructor method for ExitCommand
-     * @param tasks
+     * @param ui Object responsible for managing the ui.
      */
     public ExitCommand(Ui ui) {
         this.ui = ui;
