@@ -1,18 +1,22 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.DukeExceptionCommandNotFound;
-import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.storage.FileLoader;
-import duke.tasks.Event;
-import duke.tasks.Todo;
-import duke.tasks.Deadline;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Superclass for all commands.
+ */
 public abstract class DukeCommand {
 
+    /**
+     * Passes instruction to main loop to terminate program.
+     *
+     * False by default for most commands.
+     *
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }
