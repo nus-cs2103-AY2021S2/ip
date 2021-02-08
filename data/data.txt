@@ -1,2 +1,0 @@
-T | X | return book
-T |   | burn book
