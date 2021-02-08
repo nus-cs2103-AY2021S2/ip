@@ -1,22 +1,37 @@
 package duke.command;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
 import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
+/**
+ * Command to mark a task as done.
+ */
 public class DoneCommand extends Command {
     public static final boolean IS_EXIT = false;
     protected String input;
 
+    /**
+     * Constructor method
+     * @param input The input command from the user.
+     */
     public DoneCommand(String input) {
         super(IS_EXIT);
         this.input = input;
     }
 
+    /**
+     * Executes a done command.
+     * Marks a task as done from the list of tasks.
+     * @param tasks The tasks in the TaskList.
+     * @param ui Standard UI object
+     * @param storage Standard storage object
+     * @throws DukeException is thrown if the description is missing or the input is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] array = input.split(" ");
@@ -47,6 +62,6 @@ public class DoneCommand extends Command {
                     e.getDate(), tasks.getSize());
 
         }
-        System.out.println("    Nice! I've marked this task as done:\n  " + t);
+        ui.printTaskDone(t);
     }
 }

@@ -9,23 +9,37 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.io.IOException;
 
+import java.util.ArrayList;
+
+
+/**
+ * Storage class responsible for loading and saving data into the hard drive.
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Constructor method for storage class.
+     * @param filePath The pathfile to access text file.
+     */
     public Storage(String filePath)  {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads Arraylist of tasks from text file in the hard drive .
+     * @return ArrayList containing Task objects
+     * @throws DukeException if there is error creating or reading the file.
+     */
     public ArrayList<Task> loadAllTasks() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
-        File f = new File(filePath);
+        File file = new File(filePath);
 
-        if(f.exists() && !f.isDirectory()) {
+        if(file.exists() && !file.isDirectory()) {
             try {
                 for(String line :  Files.readAllLines(Paths.get(filePath))) {
                     String[] dataArr = line.split(" \\| ");
@@ -71,8 +85,8 @@ public class Storage {
             }
         } else {
             try {
-                f.getParentFile().mkdirs();
-                f.createNewFile();
+                file.getParentFile().mkdirs();
+                file.createNewFile();
             } catch (IOException e) {
                 System.out.println("Error creating file" + e);
                 throw new DukeException("Error reading file");
@@ -81,6 +95,13 @@ public class Storage {
         return new ArrayList<>();
     }
 
+    /**
+     * Adds new data to the text file.
+     * @param taskType The type of Task i.e Event, Deadline, ToDo.
+     * @param done Whether the task is completed.
+     * @param description The description of the task.
+     * @param deadline The time of the task.
+     */
     public void addNewDataToFile(String taskType, String done, String description, String deadline) {
         try {
             FileWriter mw = new FileWriter(filePath, true);
@@ -99,6 +120,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Edits a task in the text file.
+     * @param taskNumber The index number of the task.
+     * @param taskType The type of the task.
+     * @param done Whether the task is completed.
+     * @param description The description of the task.
+     * @param deadline The time of the task.
+     * @param total The total number of tasks in the list.
+     */
     public void editDataInFile(int taskNumber, String taskType, String done,
                                       String description, String deadline, int total) {
         try {
@@ -151,6 +181,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Removes a task from the text file.
+     * @param taskNumber The index number of the task.
+     * @param total The total number of tasks in the list.
+     */
     public void removeDataInFile(int taskNumber, int total) {
         try {
             String currentDir = System.getProperty("user.dir");
