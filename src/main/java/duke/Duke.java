@@ -98,40 +98,7 @@ public class Duke {
         String command = s[0];
         String args = s.length == 2 ? s[1] : "";
 
-        try {
-            switch (command) {
-            case "bye":
-                return exit();
-            case "list":
-                return listOutTask();
-            case "done":
-                return completeTask(args);
-            case "todo":
-                return addTask(Todo.createTodo(args));
-            case "deadline":
-                return addTask(Deadline.createDeadline(args));
-            case "event":
-                return addTask(Event.createEvent(args));
-            case "delete":
-                return deleteTask(args);
-            case "save":
-                return save();
-            case "load":
-                return load();
-            case "help":
-                return displayHelp();
-            case "search":
-                return search(args);
-            case "sort":
-                return sort();
-            default:
-                assert false : "Parser missed an invalid input";
-            }
-        } catch (DukeException e) {
-            return ui.displayError(e);
-        }
-        // Should never reach here
-        throw new RuntimeException("ERROR in Duke's getResponse method");
+        return processCommand(command, args);
     }
 
     private String completeTask(String num) throws DukeInputException {
@@ -156,10 +123,7 @@ public class Duke {
             return ui.displayError(e);
         }
         assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
-
         isWaitingDeleteTaskResponse = false;
-
-
 
         if (s.equals("y")) {
             String[] deletedTasks;
@@ -235,6 +199,43 @@ public class Duke {
     private String sort() {
         tasks.sort();
         return ui.displaySortMessage();
+    }
+
+    private String processCommand(String command, String args) {
+        try {
+            switch (command) {
+            case "bye":
+                return exit();
+            case "list":
+                return listOutTask();
+            case "done":
+                return completeTask(args);
+            case "todo":
+                return addTask(Todo.createTodo(args));
+            case "deadline":
+                return addTask(Deadline.createDeadline(args));
+            case "event":
+                return addTask(Event.createEvent(args));
+            case "delete":
+                return deleteTask(args);
+            case "save":
+                return save();
+            case "load":
+                return load();
+            case "help":
+                return displayHelp();
+            case "search":
+                return search(args);
+            case "sort":
+                return sort();
+            default:
+                assert false : "Parser missed an invalid input";
+            }
+        } catch (DukeException e) {
+            return ui.displayError(e);
+        }
+        // Should never reach here
+        throw new RuntimeException("ERROR in Duke's getResponse method");
     }
 
     /**
