@@ -9,7 +9,7 @@ import java.util.List;
  * abstraction of a list of tasks.
  */
 public class TaskList implements Iterable<Task> {
-    List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Constructs an empty TaskList.

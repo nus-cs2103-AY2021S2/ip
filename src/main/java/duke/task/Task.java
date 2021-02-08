@@ -56,7 +56,7 @@ public class Task {
      */
     public String toSaveFormat() {
         throw new UnsupportedOperationException("Method must be implemented by child classes");
-    };
+    }
 
     /**
      * Converts a task to the format to be displayed to the user by the Ui.

@@ -14,9 +14,10 @@ public enum CommandType {
     FIND("find");
 
     private final String label;
-    private static final Map<String, CommandType> BY_LABEL = new HashMap<>();
+    private static final Map<String, CommandType> BY_LABEL;
 
     static {
+        BY_LABEL = new HashMap<>();
         for (CommandType command : values()) {
             BY_LABEL.put(command.label, command);
         }
