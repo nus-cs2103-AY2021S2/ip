@@ -27,7 +27,7 @@ public class TaskList {
      * @param str String to be checked.
      * @return True if not numeric, False otherwise.
      */
-    private static boolean isNotNumeric(String str) {
+    private static boolean checkIfNotNumeric(String str) {
         if (str == null || str.length() == 0) {
             return true;
         }
@@ -61,7 +61,7 @@ public class TaskList {
         if (inputArr.length < 3) {
             if (inputArr.length == 1) {
                 throw new DukeException("       OOPS!!! The task number cannot be empty.");
-            } else if (isNotNumeric(inputArr[1])) {
+            } else if (checkIfNotNumeric(inputArr[1])) {
                 throw new DukeException("       OOPS!!! The task number must be numeric.");
             } else {
                 int i = Integer.parseInt(inputArr[1]) - 1;
@@ -93,7 +93,7 @@ public class TaskList {
         if (inputArr.length < 3) {
             if (inputArr.length == 1) {
                 throw new DukeException("       OOPS!!! The task number cannot be empty.");
-            } else if (isNotNumeric(inputArr[1])) {
+            } else if (checkIfNotNumeric(inputArr[1])) {
                 throw new DukeException("       OOPS!!! The task number must be numeric.");
             } else {
                 int i = Integer.parseInt(inputArr[1]) - 1;
@@ -101,8 +101,11 @@ public class TaskList {
                     throw new DukeException("       OOPS!!! The task number is out of range. "
                             + "Please use \"list\" to see the list of tasks.");
                 } else {
+                    int currSize = this.tasks.size();
+                    Task removedTask = this.tasks.remove(i);
+                    assert tasks.size() == currSize - 1: "Task has not been removed properly.";
                     return "     Noted. I've removed this task:\n"
-                            + "       " + this.tasks.remove(i).toString() + "\n"
+                            + "       " + removedTask.toString() + "\n"
                             + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
                 }
             }
@@ -156,6 +159,7 @@ public class TaskList {
      */
     public String addTask(String type, String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
+        int currSize = tasks.size();
         switch (type) {
         case "todo":
             if (inputArr.length == 1) {
@@ -202,6 +206,7 @@ public class TaskList {
             break;
         default:
         }
+        assert tasks.size() == currSize + 1: "Task has not been added properly.";
         return "     Got it. I've added this task:\n"
                 + "       " + this.tasks.get(this.tasks.size() - 1).toString() + "\n"
                 + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
