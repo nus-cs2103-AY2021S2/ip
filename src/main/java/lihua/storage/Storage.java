@@ -54,8 +54,6 @@ public class Storage {
                 boolean isDone = (boolean) jsonObject.get("isDone");
 
                 Task t = null;
-                // either one of the cases will be entered
-                // <-> t will not be null
                 if (type.equals("todo")) {
                     t = new ToDo(description);
                 } else {
@@ -66,7 +64,7 @@ public class Storage {
                         t = new Event(description, time);
                     }
                 }
-                // t will not result in NPE
+                assert t != null;
                 t.setDone(isDone);
                 tasks.addTask(t);
             }

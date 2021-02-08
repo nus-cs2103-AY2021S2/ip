@@ -25,7 +25,7 @@ public class DoneCommand extends Command {
     public CommandResult execute() {
         try {
             Task done = tasks.getTaskDone(targetIndex); // IndexOutOfBound Exception should be handled
-
+            assert tasks.getSize() >= 0;
             String message = String.format("Got it. I have mark this task as done:\n---- %s", done.toString());
             return new CommandResult(message);
         } catch (IndexOutOfBoundsException e) {
