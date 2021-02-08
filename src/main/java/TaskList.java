@@ -12,6 +12,8 @@ public class TaskList {
     private static final String ADD_EVENT_COMMAND = "event";
 
     private static final String ADD_TASK_RESPONSE = "You got it! I added this task:\n   ";
+    private static final String ADD_DEADLINE_RESPONSE = "You got it! I added this deadline:\n   ";
+    private static final String ADD_EVENT_RESPONSE = "You got it! I added this event:\n   ";
     private static final String DELETE_TASK_RESPONSE = "Sweet! I have deleted the following task:\n";
     private static final String WRONG_COMMAND_RESPONSE = "Hey! What is this gibberish?";
     private static final String WRONG_FORMAT_RESPONSE = "Did you format your request properly? \n This is getting old.";
@@ -73,63 +75,86 @@ public class TaskList {
 
             Ui.formatText();
 
-            if (!command.equals(ADD_TODO_COMMAND) && !command.equals(ADD_DEADLINE_COMMAND)
-                    && !command.equals(ADD_EVENT_COMMAND)) {
-                // error: unknown command
+            boolean isValidCommand = command.equals(ADD_TODO_COMMAND) || command.equals(ADD_DEADLINE_COMMAND)
+                    || command.equals(ADD_EVENT_COMMAND);
+
+            if (!isValidCommand || split.length < 2) {
                 System.out.println(WRONG_COMMAND_RESPONSE);
                 return WRONG_COMMAND_RESPONSE;
-            } else if (split.length < 2) {
-                // error: command empty
-                System.out.println("You gotta give me a description to work with, buddy:\nCommand \""
-                        + command + "\" cannot be empty.");
-                return "You gotta give me a description to work with, buddy:\nCommand \""
-                        + command + "\" cannot be empty.";
             } else if (command.equals("todo")) {
-                Todo todo = new Todo(split[1]);
-                lst.add(todo);
-                System.out.println(ADD_TASK_RESPONSE
-                        + todo.toString());
-                countTasks();
-                return ADD_TASK_RESPONSE
-                        + todo.toString() + "\n"
-                        + countTasks();
+                return addTodo(split[1]);
             } else {
-                try {
-                    String[] separateDetails = split[1].split("/by |/at ");
-                    assert separateDetails.length > 1 : WRONG_FORMAT_RESPONSE;
-                    String description = separateDetails[0];
+                String[] separateDetails = split[1].split("/by |/at ");
+                assert separateDetails.length > 1 : WRONG_FORMAT_RESPONSE;
 
-                    String date = separateDetails[1];
-                    LocalDate localDate = LocalDate.parse(date);
+                String description = separateDetails[0];
+                String date = separateDetails[1];
+                LocalDate localDate = LocalDate.parse(date);
 
-                    if (command.startsWith(ADD_DEADLINE_COMMAND)) {
-                        Deadline deadline = new Deadline(description, localDate);
-
-                        lst.add(deadline);
-                        System.out.println(ADD_TASK_RESPONSE
-                                + deadline.toString());
-                        return ADD_TASK_RESPONSE
-                                + deadline.toString() + "\n" + countTasks();
-                    } else {
-                        // command is ADD_EVENT_COMMAND
-                        Event event = new Event(description, localDate);
-                        lst.add(event);
-                        System.out.println(ADD_TASK_RESPONSE
-                                + event.toString());
-                        return ADD_TASK_RESPONSE
-                                + event.toString() + "\n" + countTasks();
-                    }
-                    //countTasks();
-                } catch (ArrayIndexOutOfBoundsException e){
-                    System.err.println(WRONG_FORMAT_RESPONSE);
-                    return WRONG_FORMAT_RESPONSE;
+                if (command.startsWith(ADD_DEADLINE_COMMAND)) {
+                    return addDeadline(description, localDate);
+                } else {
+                    return addEvent(description, localDate);
                 }
             }
         } catch (DateTimeParseException e) {
             System.err.println("Your date formatting is invalid, use YYYY-MM-DD please...");
             return "Your date formatting is invalid, use YYYY-MM-DD please...";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Did you format your request properly?";
         }
     }
+
+    /**
+     * Adds todo task to task list.
+     *
+     * @param description description for todo task
+     * @return response message to user
+     */
+    public String addTodo(String description) {
+        Todo todo = new Todo(description);
+        lst.add(todo);
+        System.out.println(ADD_TASK_RESPONSE
+                + todo.toString());
+        countTasks();
+        return ADD_TASK_RESPONSE
+                + todo.toString() + "\n"
+                + countTasks();
+    }
+
+    /**
+     * Adds deadline task to task list.
+     *
+     * @param description description for deadline task
+     * @param localDate deadline for task
+     * @return response message to user
+     */
+    public String addDeadline(String description, LocalDate localDate) {
+        Deadline deadline = new Deadline(description, localDate);
+
+        lst.add(deadline);
+        System.out.println(ADD_DEADLINE_RESPONSE
+                + deadline.toString());
+        return ADD_DEADLINE_RESPONSE
+                + deadline.toString() + "\n" + countTasks();
+    }
+
+    /**
+     * Adds event to task list.
+     *
+     * @param description description for event
+     * @param localDate date for event
+     * @return response message to user
+     */
+    public String addEvent(String description, LocalDate localDate) {
+        Event event = new Event(description, localDate);
+        lst.add(event);
+        System.out.println(ADD_EVENT_RESPONSE
+                + event.toString());
+        return ADD_EVENT_RESPONSE
+                + event.toString() + "\n" + countTasks();
+    }
+
 
     /**
      * Deletes task from list of tasks.
