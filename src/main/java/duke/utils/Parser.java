@@ -93,14 +93,17 @@ public class Parser {
         return new ToDoCommand(this.taskList, this.storage, commandAndInput[1]);
     }
 
-<<<<<<< HEAD
-    private Command prepareDeadline(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException {
-        if (arguments.length == 1) {
-            throw new EmptyArgumentException("Please input a valid task description!");
+    private Command prepareDeadline(String[] commandAndInput) throws EmptyArgumentException, InvalidDateTimeException {
+        if (commandAndInput.length == 1) {
+            throw new EmptyArgumentException(INVALID_TASK_MSG);
         }
 
-        String description = arguments[1];
+        assert commandAndInput.length == 2;
+
+        String description = commandAndInput[1];
         String[] taskInputAndDate = description.split("/", 2);
+
+        assert taskInputAndDate.length == 2;
 
         taskInputAndDate[0] = taskInputAndDate[0].trim();
         taskInputAndDate[1] = taskInputAndDate[1].trim();
@@ -113,13 +116,17 @@ public class Parser {
         }
     }
 
-    private Command prepareEvent(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException {
-        if (arguments.length == 1) {
-            throw new EmptyArgumentException("Please input a valid task description!");
+    private Command prepareEvent(String[] commandAndInput) throws EmptyArgumentException, InvalidDateTimeException {
+        if (commandAndInput.length == 1) {
+            throw new EmptyArgumentException(INVALID_TASK_MSG);
         }
 
-        String description = arguments[1];
+        assert commandAndInput.length == 2;
+
+        String description = commandAndInput[1];
         String[] taskInputAndDate = description.split("/", 2);
+
+        assert taskInputAndDate.length == 2;
 
         taskInputAndDate[0] = taskInputAndDate[0].trim();
         taskInputAndDate[1] = taskInputAndDate[1].trim();
@@ -129,87 +136,26 @@ public class Parser {
             return new EventCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
-=======
-    private Command prepareDeadline(String[] commandAndInput) throws EmptyArgumentException, InvalidDateTimeException {
-        if (commandAndInput.length == 1) {
-            throw new EmptyArgumentException(INVALID_TASK_MSG);
-        } else {
-            assert commandAndInput.length == 2;
-
-            String description = commandAndInput[1];
-            String[] taskInputAndDate = description.split("/", 2);
-
-            assert taskInputAndDate.length == 2;
-
-            taskInputAndDate[0] = taskInputAndDate[0].trim();
-            taskInputAndDate[1] = taskInputAndDate[1].trim();
-
-            try {
-                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
-                return new DeadlineCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateTimeException();
-            }
-        }
-    }
-
-    private Command prepareEvent(String[] commandAndInput) throws EmptyArgumentException, InvalidDateTimeException {
-        if (commandAndInput.length == 1) {
-            throw new EmptyArgumentException(INVALID_TASK_MSG);
-        } else {
-            assert commandAndInput.length == 2;
-
-            String description = commandAndInput[1];
-            String[] taskInputAndDate = description.split("/", 2);
-
-            assert taskInputAndDate.length == 2;
-
-            taskInputAndDate[0] = taskInputAndDate[0].trim();
-            taskInputAndDate[1] = taskInputAndDate[1].trim();
-
-            try {
-                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
-                return new EventCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateTimeException();
-            }
->>>>>>> master
         }
     }
 
     private Command prepareFind(String[] commandAndInput) throws EmptyArgumentException, EmptyListException {
         if (commandAndInput.length == 1) {
             throw new EmptyArgumentException("Please pass a word after the 'find' command!");
-<<<<<<< HEAD
-=======
-        } else {
-            if (this.taskList.getList().size() == 0) {
-                throw new EmptyListException();
-            } else {
-                assert commandAndInput.length == 2;
-
-                return new FindCommand(this.taskList, this.storage, commandAndInput[1]);
-            }
->>>>>>> master
         }
 
         if (this.taskList.getList().size() == 0) {
             throw new EmptyListException();
         }
 
-        return new FindCommand(this.taskList, this.storage, arguments[1]);
+        assert commandAndInput.length == 2;
+
+        return new FindCommand(this.taskList, this.storage, commandAndInput[1]);
     }
 
     private int calcListPos(String taskIndex, String command) throws InvalidIndexInputException {
-<<<<<<< HEAD
-        Matcher matcher = checkNum.matcher(taskIndex);
-        if (!matcher.find()) {
-=======
         Matcher matcher = REGEX_CHECK_NUMBER.matcher(taskIndex);
-        if (matcher.find()) {
-            return Integer.parseInt(taskIndex) - 1;
-        } else {
->>>>>>> master
+        if (!matcher.find()) {
             throw new InvalidIndexInputException("'" + command + "' is command word; please pass a numerical index or "
                     + "start your task with another word!");
         }
@@ -219,25 +165,11 @@ public class Parser {
     private Command prepareDone(String[] commandAndInput) throws InvalidIndexInputException, EmptyArgumentException {
         if (commandAndInput.length == 1) {
             throw new EmptyArgumentException("Please pass an index after the 'done' command!");
-<<<<<<< HEAD
-=======
-        } else {
-            assert commandAndInput.length == 2;
-
-            int position = calcListPos(commandAndInput[1], commandAndInput[0]);
-
-            if (this.taskList.getList().size() == 0) {
-                throw new InvalidIndexInputException("You have already done all tasks!");
-            } else if (position >= this.taskList.getList().size() || position < 0) {
-                throw new InvalidIndexInputException("Please input an index from 1 to "
-                        + this.taskList.getList().size() + "!");
-            } else {
-                return new DoneCommand(this.taskList, this.storage, position);
-            }
->>>>>>> master
         }
 
-        int position = calcListPos(arguments[1], arguments[0]);
+        assert commandAndInput.length == 2;
+
+        int position = calcListPos(commandAndInput[1], commandAndInput[0]);
 
         if (this.taskList.getList().size() == 0) {
             throw new InvalidIndexInputException("You have already done all tasks!");
@@ -252,25 +184,11 @@ public class Parser {
     private Command prepareDelete(String[] commandAndInput) throws InvalidIndexInputException, EmptyArgumentException {
         if (commandAndInput.length == 1) {
             throw new EmptyArgumentException("Please pass an index after the 'delete' command!");
-<<<<<<< HEAD
-=======
-        } else {
-            assert commandAndInput.length == 2;
-
-            int position = calcListPos(commandAndInput[1], commandAndInput[0]);
-
-            if (this.taskList.getList().size() == 0) {
-                throw new InvalidIndexInputException("There are no tasks to delete!");
-            } else if (position >= this.taskList.getList().size() || position < 0) {
-                throw new InvalidIndexInputException("Please input an index from 1 to "
-                        + this.taskList.getList().size() + "!");
-            } else {
-                return new DeleteCommand(this.taskList, this.storage, position);
-            }
->>>>>>> master
         }
 
-        int position = calcListPos(arguments[1], arguments[0]);
+        assert commandAndInput.length == 2;
+
+        int position = calcListPos(commandAndInput[1], commandAndInput[0]);
 
         if (this.taskList.getList().size() == 0) {
             throw new InvalidIndexInputException("There are no tasks to delete!");

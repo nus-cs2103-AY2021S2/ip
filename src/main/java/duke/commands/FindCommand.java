@@ -1,6 +1,5 @@
 package duke.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -9,10 +8,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.utils.ConvertType;
 import duke.utils.Storage;
 import duke.utils.TaskStringConverter;
 
@@ -47,26 +44,14 @@ public class FindCommand extends Command {
             String noMatchingTaskMsg = "There are no tasks matching your input :(";
             return noMatchingTaskMsg;
         }
-        String msg = "These are the search results:" + listToString(results).toString();
+        String msg = "These are the search results:" + listToString(results);
         return msg;
     }
 
-    private StringBuilder listToString(List<Task> results) {
-        StringBuilder stringBuilder = new StringBuilder();
+    private String listToString(List<Task> results) {
+        String searchResults = TaskStringConverter.stringTasksForProgram(results);
 
-        Stream.iterate(1, index -> index <= results.size(), index -> index + 1)
-                .forEach(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer index) {
-                        Task task = results.get(index - 1);
-                        stringBuilder.append("\n")
-                                .append(index)
-                                .append(". ")
-                                .append(task.toString());
-                    }
-                });
-
-        return stringBuilder;
+        return searchResults;
     }
 
     private List<Task> searchList(Pattern regEx) {

@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.utils.TaskStringConverter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BinaryOperator;
@@ -45,27 +47,7 @@ public class TaskList {
     }
 
     private String getNonEmptyListInString() {
-        String allTasks = Stream.iterate(1, index -> index <= this.taskList.size(), index -> index + 1)
-                .map(new Function<Integer, StringBuilder>() {
-                    @Override
-                    public StringBuilder apply(Integer index) {
-                        Task task = taskList.get(index - 1);
-                        StringBuilder stringBuilder = new StringBuilder("\n");
-                        stringBuilder.append(index)
-                                .append(". ")
-                                .append(task.toString());
-                        return stringBuilder;
-                    }
-                })
-                .reduce(new BinaryOperator<StringBuilder>() {
-                    @Override
-                    public StringBuilder apply(StringBuilder stringBuilder1, StringBuilder stringBuilder2) {
-                        stringBuilder1.append(stringBuilder2);
-                        return stringBuilder1;
-                    }
-                })
-                .get()
-                .toString();
+        String allTasks = TaskStringConverter.stringTasksForProgram(this.taskList);
 
         return allTasks;
     }

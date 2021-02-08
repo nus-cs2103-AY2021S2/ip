@@ -2,8 +2,8 @@ package duke.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.Deadline;
@@ -16,36 +16,34 @@ public class TaskStringConverter {
             + "[dd-MM-yy HHmm]");
 
     /**
-     * Returns a List of Strings, each String representing 1 Task in the specified list.
+     * Returns concatenated String description of all Tasks to save to local storage.
      *
-     * @param list List of Tasks to convert to Strings.
-     * @return List of Strings.
-     * @throws InvalidTaskTypeException if one of the Tasks in taskList is not a valid Task.
+     * @param list List of Tasks to convert and concatenate.
+     * @return String description of all Tasks.
      */
-    public static List<String> listTaskToListString(List<Task> list, ConvertType type) throws InvalidTaskTypeException {
-        List<String> result = new ArrayList<>();
+    public static String stringTasksForFile(List<Task> list) {
+        List<String> stringTasks = listTaskToListStringFile(list);
 
-        for (Task task : list) {
-            switch (type) {
-            case FILE:
-                result.add(taskToStringFile(task));
-                break;
-            case PROGRAM:
-                result.add(taskToStringProgram(task));
-                break;
-            default:
-                throw new InvalidTaskTypeException(); // placeholder
-            }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String stringTask : stringTasks) {
+            stringBuilder.append(stringTask)
+                    .append("\n");
         }
+
+        return stringBuilder.deleteCharAt(stringBuilder.length() - 1).toString();
+    }
+
+    private static List<String> listTaskToListStringFile(List<Task> list) {
+        List<String> result = list.stream()
+                .map(task -> taskToStringFile(task))
+                .collect(Collectors.toList());
 
         return result;
     }
 
-    private static String taskToStringProgram(Task task) {
-        return task.toString();
-    }
+    private static String taskToStringFile(Task task) {
+        assert task instanceof ToDo || task instanceof Event || task instanceof Deadline;
 
-    private static String taskToStringFile(Task task) throws InvalidTaskTypeException {
         String done = task.isDone() ? "1" : "0";
 
         if (task instanceof ToDo) {
@@ -55,8 +53,42 @@ public class TaskStringConverter {
         } else if (task instanceof Deadline) {
             return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDateToStore();
         } else {
-            throw new InvalidTaskTypeException();
+            throw new AssertionError(task);
         }
+    }
+
+    /**
+     * Returns concatenated String description of all Tasks for display in GUI.
+     *
+     * @param list List of Tasks to convert and concatenate.
+     * @return String description of all Tasks.
+     */
+    public static String stringTasksForProgram(List<Task> list) {
+        List<String> stringTasks = listTaskToListStringProgram(list);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        int index = 1;
+        for (String stringTask : stringTasks) {
+            stringBuilder.append("\n")
+                    .append(index)
+                    .append(". ")
+                    .append(stringTask);
+            index++;
+        }
+
+        return stringBuilder.toString();
+    }
+
+    private static List<String> listTaskToListStringProgram(List<Task> list) {
+        List<String> result = list.stream()
+                .map(task -> taskToStringProgram(task))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+    private static String taskToStringProgram(Task task) {
+        return task.toString();
     }
 
     /**
@@ -67,42 +99,46 @@ public class TaskStringConverter {
      * @throws InvalidTaskTypeException if local storage file contains invalid Task identified, i.e. not [T], [E] or
      *     [D].
      */
-    public static List<Task> allStringToAllTask(List<String> list) throws InvalidTaskTypeException {
-        List<Task> result = new ArrayList<>();
-        for (String s : list) {
-            result.add(stringInputToTask(s));
-        }
+    public static List<Task> listStringToListTask(List<String> list) throws InvalidTaskTypeException {
+        List<Task> result = list.stream()
+                                .map(string -> fileStringToTask(string))
+                                .collect(Collectors.toList());
+
         return result;
     }
 
-    private static Task stringInputToTask(String input) throws InvalidTaskTypeException {
+    private static Task fileStringToTask(String input) {
         String[] separated = input.split(" \\| ");
         assert separated.length >= 3;
         char taskType = separated[0].charAt(0);
 
-        if (taskType == 'T') {
+        switch (taskType) {
+        case 'T':
             assert separated.length == 3;
             ToDo todo = new ToDo(separated[2]);
             if (separated[1].equals("1")) {
                 todo.markAsDone();
             }
             return todo;
-        } else if (taskType == 'D') {
-            assert separated.length == 4;
-            Deadline deadline = new Deadline(separated[2], LocalDateTime.parse(separated[3], formatter));
-            if (separated[1].equals("1")) {
-                deadline.markAsDone();
-            }
-            return deadline;
-        } else if (taskType == 'E') {
+
+        case 'E':
             assert separated.length == 4;
             Event event = new Event(separated[2], LocalDateTime.parse(separated[3], formatter));
             if (separated[1].equals("1")) {
                 event.markAsDone();
             }
             return event;
-        } else {
-            throw new InvalidTaskTypeException();
+
+        case 'D':
+            assert separated.length == 4;
+            Deadline deadline = new Deadline(separated[2], LocalDateTime.parse(separated[3], formatter));
+            if (separated[1].equals("1")) {
+                deadline.markAsDone();
+            }
+            return deadline;
+
+        default:
+            throw new AssertionError(taskType);
         }
     }
 }

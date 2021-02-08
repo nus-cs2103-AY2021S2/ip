@@ -16,7 +16,7 @@ public class TaskStringConverterTest {
         List<String> allInput = new ArrayList<>();
         allInput.add(inputFromFile);
         try {
-            List<Task> allTasks = TaskStringConverter.allStringToAllTask(allInput);
+            List<Task> allTasks = TaskStringConverter.listStringToListTask(allInput);
             assertEquals("[E][ ] project meeting (at: 15 Dec 2020, 9:11 AM)",
                     allTasks.get(0).toString());
         } catch (InvalidTaskTypeException e){
