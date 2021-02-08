@@ -27,7 +27,7 @@ public class DurationCommand extends Command {
     /**
      * Creates a {@code DurationCommand} object with the given task name and duration.
      *
-     * @param taskName  Name of the task.
+     * @param taskName Name of the task.
      * @param duration Duration of the task.
      */
     public DurationCommand(String taskName, Duration duration) {

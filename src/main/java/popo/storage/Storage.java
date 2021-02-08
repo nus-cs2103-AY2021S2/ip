@@ -169,13 +169,17 @@ public class Storage {
     }
 
     private boolean isTaskCompleted(String status) throws StorageException {
-        int taskStatus = Integer.parseInt(status);
-        switch (taskStatus) {
-        case TASK_NOT_COMPLETED:
-            return false;
-        case TASK_COMPLETED:
-            return true;
-        default:
+        try {
+            int taskStatus = Integer.parseInt(status);
+            switch (taskStatus) {
+            case TASK_NOT_COMPLETED:
+                return false;
+            case TASK_COMPLETED:
+                return true;
+            default:
+                throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
+            }
+        } catch (NumberFormatException ex) {
             throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
         }
     }
@@ -244,7 +248,7 @@ public class Storage {
             assert unit != null;
             Duration duration = Duration.of(amount, unit);
             return new DurationTask(name, isTaskCompleted, duration);
-        } catch (IndexOutOfBoundsException ex) {
+        } catch (IndexOutOfBoundsException | NumberFormatException ex) {
             throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
         }
     }

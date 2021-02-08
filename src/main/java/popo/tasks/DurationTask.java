@@ -17,7 +17,7 @@ public class DurationTask extends Task {
      * Creates a {@code DurationTask} object with the given task name and duration,
      * with the task set to initially not completed.
      *
-     * @param name      Name of the task.
+     * @param name     Name of the task.
      * @param duration Duration of the task.
      */
     public DurationTask(String name, Duration duration) {
@@ -31,7 +31,7 @@ public class DurationTask extends Task {
      *
      * @param name        Name of the task.
      * @param isCompleted Boolean indicating whether the task has been completed.
-     * @param duration Duration of the task.
+     * @param duration    Duration of the task.
      */
     public DurationTask(String name, boolean isCompleted, Duration duration) {
         super(IDENTIFIER, name, isCompleted);
