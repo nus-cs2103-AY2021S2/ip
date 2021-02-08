@@ -20,6 +20,7 @@ public class Ui {
         String initialGreeting = "Hello I'm Duke \n"
                 + "What can I do for you?";
         this.printWithSpace(initialGreeting);
+        this.printWithSpace(""); //blank space
     }
 
     // Good bye message before duke terminates
@@ -64,8 +65,8 @@ public class Ui {
      * @param taskIndex Index of the task this message is for.
      */
     public void printTaskSuccess(TaskList taskList, int taskIndex) {
-        this.printWithSpace("\"Nice! I've marked this task as done:\\n "
-            + "   " + taskList.get(taskIndex - 1).toString());
+        this.printWithSpace("\"Nice! I've marked this task as done: "
+            + "  \n " + taskList.get(taskIndex - 1).toString());
     }
 
     /**

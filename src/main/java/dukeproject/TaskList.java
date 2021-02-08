@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     /** Constructor to create an empty task list. */
     public TaskList() {
