@@ -2,11 +2,14 @@ package duke.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 public class TaskList {
     private List<Task> listOfTasks;
 
     public TaskList(List<Task> listOfTasks) {
-        this.listOfTasks = listOfTasks;
+        this.listOfTasks = listOfTasks.stream().collect(Collectors.toList()); //deep-copy
     }
 
     /**
@@ -54,13 +57,9 @@ public class TaskList {
      * @param toSearch the String we would like to find inside TaskList
      */
     public List<Task> find(String toSearch) {
-        List<Task> listFound = new ArrayList<>();
-        for (int i=0; i < listOfTasks.size(); i++) {
-            Task iElementListOfTasks = listOfTasks.get(i);
-            if (iElementListOfTasks.getJob().contains(toSearch)) {
-                listFound.add(iElementListOfTasks);
-            }
-        }
+        List<Task> listFound;
+        Predicate<Task> taskPredicate = task -> task.getJob().contains(toSearch);
+        listFound = this.listOfTasks.stream().filter(taskPredicate).collect(Collectors.toList());
         return listFound;
     }
 }
