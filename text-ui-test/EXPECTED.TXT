@@ -1,7 +1,31 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hey there! This is Kums
+How can i help?
+---------------------------------------
+---------------------------------------
+Got it. I've added this task:
+    [T][ ] 2101
+Now you have 1 tasks in the list.
+---------------------------------------
+---------------------------------------
+Got it. I've added this task:
+    [D][ ] 2103T  (by: Wed)
+Now you have 2 tasks in the list.
+---------------------------------------
+---------------------------------------
+Got it. I've added this task:
+    [E][ ] Party at Louis' house  (at: Sunday 9-11pm)
+Now you have 3 tasks in the list.
+---------------------------------------
+---------------------------------------
+ Noted. I've removed this task:
+[D][ ] 2103T  (by: Wed)
+Now you have 2 tasks in the list.
+---------------------------------------
+---------------------------------------
+Here are the tasks in your list:
+1.[T][ ] 2101
+2.[E][ ] Party at Louis' house  (at: Sunday 9-11pm)
+---------------------------------------
+---------------------------------------
+Bye. Hope to see you again soon!
+---------------------------------------

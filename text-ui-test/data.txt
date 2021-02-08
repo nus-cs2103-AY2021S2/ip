@@ -1,0 +1,2 @@
+E , 1 , play mahjong at my house  , 2021-02-06 , 2-5pm , MEDIUM
+E , 0 , go shoe shopping  , 2021-02-06 , 3-5pm , MEDIUM
