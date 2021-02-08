@@ -53,7 +53,7 @@ public abstract class Task {
     public String parseDate(String string) {
         try {
             LocalDate date = LocalDate.parse(string);
-            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         } catch (DateTimeParseException e) {
             return string;
         }
