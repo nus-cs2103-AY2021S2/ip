@@ -13,12 +13,21 @@ import duke.ui.Ui;
  */
 public class DukeCommandAdd extends DukeCommand {
 
-    private Task task;
+    private final Task task;
 
+    /** Constructor to track task */
     public DukeCommandAdd(Task task) {
         this.task = task;
     }
 
+    /**
+     * Adds task to tasklist, writes to file and displays success
+     *
+     * @param tasks tasklist
+     * @param ui user interface
+     * @param loader storage
+     * @throws DukeExceptionFileNotWritable when loader fails to write to file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader) throws DukeExceptionFileNotWritable {
         tasks.addTask(task);
