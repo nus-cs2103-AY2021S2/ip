@@ -1,11 +1,13 @@
 public class Duke {
     private boolean isSetUp = false;
+    private Ui ui;
 
     public String getResponse(String fullCommand) {
         if (!isSetUp) {
             isSetUp = true;
-            return Ui.load(fullCommand);
+            ui = new Ui();
+            return ui.load(fullCommand);
         }
-        return Ui.parseAndPrint(fullCommand);
+        return ui.parseAndPrint(fullCommand);
     }
 }

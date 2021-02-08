@@ -5,8 +5,8 @@ public class Ui {
     private static final String FAILURE_LOAD_START = "No task is found in file, what can i do for you? ";
     private static final String SUCCESS_LOAD_START = "File loaded, what can i do for you? ";
 
-    private static TaskList tasks;
-    private static Storage storage;
+    private TaskList tasks;
+    private Storage storage;
 
     /**
      * Display greeting messages
@@ -24,7 +24,7 @@ public class Ui {
      * @param fileName (file to load tasks from)
      * @return message to indicate success / failure
      */
-    public static String load(String fileName) {
+    public String load(String fileName) {
         storage = new Storage();
         try {
             tasks = new TaskList(storage.load(fileName));
@@ -112,7 +112,7 @@ public class Ui {
         return "There are no matching task with " + searchTerm;
     }
 
-    public static void save() {
+    public void save() {
         storage.save(tasks.getTaskList());
     }
 
@@ -121,10 +121,10 @@ public class Ui {
      * @param fullCommand , command to be executed
      * @return display message for command received
      */
-    public static String parseAndPrint(String fullCommand) {
+    public String parseAndPrint(String fullCommand) {
         try {
             Command command = Parser.parse(fullCommand);
-            return command.excute(tasks);
+            return command.excute(tasks, this);
         } catch (DukeException e) {
             return showError(e.getMessage());
         } catch (DukeDeadlineException e) {
