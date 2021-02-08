@@ -1,6 +1,6 @@
 package bob.processor;
 
-import bob.DukeException;
+import bob.BobException;
 import bob.task.*;
 
 import java.io.File;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 /**
  * Stores the list of tasks, and is responsible for
- * loading and changing the list of tasks in the hard disk.
+ * loading and changing the list of tasks in the hard disk
  */
 public class Storage {
     private final String filePath;
@@ -24,16 +24,17 @@ public class Storage {
     }
 
     /**
-     * Loads the list of tasks from the hard disk into Duke.
+     * Loads the list of tasks from the hard disk into Bob
+     *
      * @return An ArrayList containing all the tasks saved in hard disk
-     * @throws DukeException if the file cannot be found in the hard disk
+     * @throws BobException if the file cannot be found in the hard disk
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws BobException {
         File tasksFile = loadFile();
         return readFile(tasksFile);
     }
 
-    public File loadFile() throws DukeException {
+    public File loadFile() throws BobException {
         String currDirectory = System.getProperty("user.dir");
         java.nio.file.Path path = java.nio.file.Paths.get(currDirectory, "data");
 
@@ -47,11 +48,11 @@ public class Storage {
             }
             return tasksFile;
         } catch (IOException e) {
-            throw new DukeException("Unable to create file.", e);
+            throw new BobException("Unable to create file.", e);
         }
     }
 
-    public ArrayList<Task> readFile(File tasksFile) throws DukeException {
+    public ArrayList<Task> readFile(File tasksFile) throws BobException {
         ArrayList<Task> taskList = new ArrayList<>();
         Parser parser = new Parser();
         try {
@@ -62,19 +63,20 @@ public class Storage {
                 taskList.add(newTask);
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("No suitable file found.", e);
+            throw new BobException("No suitable file found.", e);
         }
         return taskList;
     }
 
     /**
      * Save the new Task in the hard disk
+     *
      * @param task new Task to be saved
-     * @throws DukeException if the named file exists but is a directory rather
+     * @throws BobException if the named file exists but is a directory rather
      * than a regular file, does not exist but cannot be created, or cannot
      * be opened for any other reason
      */
-    public void appendTask(Task task) throws DukeException {
+    public void appendTask(Task task) throws BobException {
         try {
             FileWriter fw = new FileWriter("data/tasks.txt", true);
             String done = task.getDone() ? "1" : "0";
@@ -90,18 +92,19 @@ public class Storage {
                     + dateTimeString + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("File cannot be found.", e);
+            throw new BobException("File cannot be found.", e);
         }
     }
 
     /**
      * Update changes in the hard disk
+     *
      * @param task The TaskList to be updated
-     * @throws DukeException if the named file exists but is a directory rather
+     * @throws BobException if the named file exists but is a directory rather
      * than a regular file, does not exist but cannot be created, or cannot
      * be opened for any other reason
      */
-    public void rewrite(TaskList task) throws DukeException {
+    public void rewrite(TaskList task) throws BobException {
         try {
             FileWriter fw = new FileWriter("data/tasks.txt");
             for (Task nextTask : task.getTaskList()) {
@@ -109,7 +112,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("File cannot be opened.", e);
+            throw new BobException("File cannot be opened.", e);
         }
     }
 }

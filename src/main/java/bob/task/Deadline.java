@@ -14,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor of a deadline
+     *
      * @param name Name of the deadline
      * @param deadline The deadline of the task
      * @param time The due time of the task
@@ -26,6 +27,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor of a deadline
+     *
      * @param name Name of the deadline
      * @param isDone Status of the task
      * @param deadline The deadline of the task
@@ -57,6 +59,7 @@ public class Deadline extends Task {
 
     /**
      * Prints out the details of the Deadline, including the name, the due date, and due time.
+     *
      * @return A string representing the deadline
      */
     @Override

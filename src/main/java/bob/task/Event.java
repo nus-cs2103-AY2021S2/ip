@@ -14,6 +14,7 @@ public class Event extends Task {
 
     /**
      * Constructor of an event
+     *
      * @param name Name of the event
      * @param date Date of the event
      * @param time Time of the event
@@ -26,6 +27,7 @@ public class Event extends Task {
 
     /**
      * Constructor of an event
+     *
      * @param name Name of the event
      * @param isDone Status of the Event
      * @param date Date of the event
@@ -56,8 +58,9 @@ public class Event extends Task {
     }
 
     /**
-     * Prints the details of the event, including the name, time, and date.
-     * @return A string representing the event.
+     * Prints the details of the event, including the name, time, and date
+     *
+     * @return A string representing the event
      */
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 package bob.command;
 
-import bob.DukeException;
+import bob.BobException;
 import bob.processor.Parser;
 import bob.processor.Storage;
 import bob.task.TaskList;
@@ -48,7 +48,7 @@ public enum Command {
                 } else {
                     message = "Oops, there is no matching task!";
                 }
-            } catch (DukeException e) {
+            } catch (BobException e) {
                 message = e.getMessage();
             }
             return message;
@@ -62,7 +62,7 @@ public enum Command {
                 Task updatedTask = taskList.changeStatus(index - 1, true);
                 storage.rewrite(taskList);
                 return "Good job! This task has been marked as done :)\n" + updatedTask.toString();
-            } catch (DukeException e) {
+            } catch (BobException e) {
                 return e.getMessage();
             }
         }
@@ -76,7 +76,7 @@ public enum Command {
                 storage.rewrite(taskList);
                 return "Alright, this task has been removed.\n" + removedTask
                         + "\nThere are " + taskList.getSize() + " tasks left.";
-            } catch (DukeException e) {
+            } catch (BobException e) {
                 return e.getMessage();
             }
         }
@@ -92,7 +92,7 @@ public enum Command {
                 return "Alright, I have added this new todo.\n"
                         + newTodo + "\n" + "There are a total of "
                         + taskList.getSize() + " tasks now.";
-            } catch (DukeException e) {
+            } catch (BobException e) {
                 return e.getMessage();
             }
         }
@@ -115,7 +115,7 @@ public enum Command {
                     return "There is no event timing detected!\n"
                             + "Please try again with a correct format";
                 }
-            } catch (DukeException e) {
+            } catch (BobException e) {
                 return e.getMessage();
             }
         }
@@ -138,7 +138,7 @@ public enum Command {
                     return "There is no deadline time and date detected!\n"
                             + "Please try again with a correct format";
                 }
-            } catch (DukeException e) {
+            } catch (BobException e) {
                 return e.getMessage();
             }
         }

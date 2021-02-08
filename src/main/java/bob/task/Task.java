@@ -11,6 +11,7 @@ public class Task {
 
     /**
      * Constructor of a task
+     *
      * @param name Name of task
      */
     public Task(String name) {
@@ -19,6 +20,7 @@ public class Task {
 
     /**
      * Constructor of a task
+     *
      * @param name Name of task
      * @param isDone Status of task
      */
@@ -45,6 +47,7 @@ public class Task {
 
     /**
      * Updates the status of the task
+     *
      * @param isDone The boolean value representing the status of the task
      */
     public void setStatus(boolean isDone) {
@@ -52,8 +55,9 @@ public class Task {
     }
 
     /**
-     * Prints the details of a task, including the status and name.
-     * @return A string representing a task.
+     * Prints the details of a task, including the status and name
+     *
+     * @return A string representing a task
      */
     @Override
     public String toString() {

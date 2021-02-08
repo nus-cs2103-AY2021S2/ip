@@ -7,7 +7,7 @@ public class Ui {
 
     /**
      * Returns an error message when the file containing the list of tasks
-     * cannot be found.
+     * cannot be found
      */
     public String showLoadingError() {
         return "There was an error in loading the file as it could not be found.";
@@ -15,7 +15,8 @@ public class Ui {
     
     /**
      * Provide relevant responses to user and accurate actions according to
-     * user's command.
+     * user's command
+     *
      * @param userInput User's command
      * @param taskList The list of tasks user has
      * @param storage The storage containing the saved list of task
