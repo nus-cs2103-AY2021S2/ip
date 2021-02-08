@@ -1,5 +1,6 @@
 package bob.processor;
 
+import bob.BobException;
 import bob.command.Command;
 import bob.task.TaskList;
 
@@ -21,7 +22,7 @@ public class Ui {
      * @param storage The storage containing the saved list of task
      * @return A boolean value indicating whether to continue taking in commands or not
      */
-    public String respondToCommand(String userInput, TaskList taskList, Storage storage) {
+    public String respondToCommand(String userInput, TaskList taskList, Storage storage) throws BobException {
         String[] wordsInInput = userInput.split(" ");
         Parser parser = new Parser();
         Command command = parser.parseCommand(wordsInInput);
@@ -34,8 +35,10 @@ public class Ui {
         case FIND:
             return Command.FIND.executeCommand(userInput, taskList, storage);
         case DONE:
+            storage.rewrite(taskList);
             return Command.DONE.executeCommand(userInput, taskList, storage);
         case DELETE:
+            storage.rewrite(taskList);
             return Command.DELETE.executeCommand(userInput, taskList, storage);
         case TODO:
             return Command.TODO.executeCommand(userInput, taskList, storage);

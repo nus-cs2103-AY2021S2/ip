@@ -1,6 +1,6 @@
 package bob.processor;
 
-import bob.DukeException;
+import bob.BobException;
 import bob.task.TaskList;
 
 /**
@@ -15,7 +15,7 @@ public class Bob  {
     private Ui ui;
 
     /**
-     * Constructor for Duke.
+     * Constructor for Bob.
      *
      * @param filePath This is the path of the file that stores the list
      *                 of tasks from the current working directory.
@@ -25,7 +25,7 @@ public class Bob  {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (BobException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -35,7 +35,7 @@ public class Bob  {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws BobException {
         return ui.respondToCommand(input, tasks, storage);
     }
 }

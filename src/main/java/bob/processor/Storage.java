@@ -1,6 +1,6 @@
 package bob.processor;
 
-import bob.DukeException;
+import bob.BobException;
 import bob.task.*;
 
 import java.io.File;
@@ -24,11 +24,11 @@ public class Storage {
     }
 
     /**
-     * Loads the list of tasks from the hard disk into Duke.
+     * Loads the list of tasks from the hard disk into Bob.
      * @return An ArrayList containing all the tasks saved in hard disk
-     * @throws DukeException if the file cannot be found in the hard disk
+     * @throws BobException if the file cannot be found in the hard disk
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws BobException {
         String currDirectory = System.getProperty("user.dir");
         java.nio.file.Path path = java.nio.file.Paths.get(currDirectory, "data");
 
@@ -42,7 +42,7 @@ public class Storage {
                 tasksFile.createNewFile();
             }
         } catch (IOException e) {
-            throw new DukeException("Unable to create file.", e);
+            throw new BobException("Unable to create file.", e);
         }
 
         try {
@@ -53,9 +53,14 @@ public class Storage {
                 String nextTask = readFile.nextLine();
                 boolean done = false;
                 if (nextTask.charAt(4) == '1') {
+                    assert nextTask.charAt(4) == '1' || nextTask.charAt(4) == '0';
                     done = true;
                 }
                 if (nextTask.startsWith("T")) {
+                    assert nextTask.startsWith("T")
+                            || nextTask.startsWith("D")
+                            || nextTask.startsWith("E")
+                            : "wrong format in hard disk";
                     taskName = nextTask.substring(8);
                     taskList.add(new Todo(taskName, done));
                 } else {
@@ -76,7 +81,7 @@ public class Storage {
 
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("No suitable file found.", e);
+            throw new BobException("No suitable file found.", e);
         }
         return taskList;
     }
@@ -84,66 +89,66 @@ public class Storage {
     /**
      * Save the Todo tasks in the hard disk
      * @param task new Todo task to be saved
-     * @throws DukeException if the named file exists but is a directory rather
+     * @throws BobException if the named file exists but is a directory rather
      * than a regular file, does not exist but cannot be created, or cannot
      * be opened for any other reason
      */
-    public void appendToDo(Todo task) throws DukeException {
+    public void appendToDo(Todo task) throws BobException {
         try {
-            FileWriter fw = new FileWriter("duke.txt", true);
+            FileWriter fw = new FileWriter("data/tasks.txt", true);
             fw.write("T | 0 | " + task.getName() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("File cannot be found.", e);
+            throw new BobException("File cannot be found.", e);
         }
     }
 
     /**
      * Save the Event in the hard disk
      * @param task new Event to be saved
-     * @throws DukeException if the named file exists but is a directory rather
+     * @throws BobException if the named file exists but is a directory rather
      * than a regular file, does not exist but cannot be created, or cannot
      * be opened for any other reason
      */
-    public void appendEvent(Event task) throws DukeException {
+    public void appendEvent(Event task) throws BobException {
         try {
-            FileWriter fw = new FileWriter("duke.txt", true);
+            FileWriter fw = new FileWriter("data/tasks.txt", true);
             fw.write("E | 0 | " + task.getName() + " | " + task.getDate() + " "
                     + task.getTime() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("File cannot be found.", e);
+            throw new BobException("File cannot be found.", e);
         }
     }
 
     /**
      * Save the new Deadline in the hard disk
      * @param task new Deadline to be saved
-     * @throws DukeException if the named file exists but is a directory rather
+     * @throws BobException if the named file exists but is a directory rather
      * than a regular file, does not exist but cannot be created, or cannot
      * be opened for any other reason
      */
-    public void appendDeadline(Deadline task) throws DukeException {
+    public void appendDeadline(Deadline task) throws BobException {
         try {
-            FileWriter fw = new FileWriter("duke.txt", true);
+            FileWriter fw = new FileWriter("data/tasks.txt", true);
             fw.write("D | 0 | " + task.getName() + " | " + task.getDeadline() + " "
                     + task.getTime() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("File cannot be found.", e);
+            throw new BobException("File cannot be found.", e);
         }
     }
 
     /**
      * Update changes in the hard disk
      * @param task The TaskList to be updated
-     * @throws DukeException if the named file exists but is a directory rather
+     * @throws BobException if the named file exists but is a directory rather
      * than a regular file, does not exist but cannot be created, or cannot
      * be opened for any other reason
      */
-    public void rewrite(TaskList task) throws DukeException {
+    public void rewrite(TaskList task) throws BobException {
         try {
-            FileWriter fw = new FileWriter("duke.txt");
+            FileWriter fw = new FileWriter("data/tasks.txt");
             for (Task nextTask : task.getTaskList()) {
                 String done = nextTask.getDone() ? "1" : "0";
                 String type = nextTask.toString().substring(1, 2);
@@ -161,7 +166,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("File cannot be opened.", e);
+            throw new BobException("File cannot be opened.", e);
         }
     }
 }

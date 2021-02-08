@@ -1,10 +1,6 @@
 package bob.task;
 
-import bob.DukeException;
-import bob.task.Deadline;
-import bob.task.Event;
-import bob.task.Task;
-import bob.task.Todo;
+import bob.BobException;
 
 import java.util.ArrayList;
 
@@ -35,13 +31,13 @@ public class TaskList {
      * @param isDone The status of the task to be updated
      * @return An updated Task object containing the changed task.
      */
-    public Task changeStatus(int index, boolean isDone) throws DukeException {
+    public Task changeStatus(int index, boolean isDone) throws BobException {
         try {
             Task updatedTask = this.taskList.get(index);
             updatedTask.setStatus(isDone);
             return updatedTask;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Please try again with a valid task index!", e);
+            throw new BobException("Please try again with a valid task index!", e);
         }
     }
 

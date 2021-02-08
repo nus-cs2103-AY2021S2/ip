@@ -1,6 +1,6 @@
 package bob.processor;
 
-import bob.DukeException;
+import bob.BobException;
 import bob.command.Command;
 import bob.task.Deadline;
 import bob.task.Event;
@@ -46,18 +46,18 @@ public class Parser {
      * @param userInput User's full input
      * @param index The index at which the number is at
      * @return An integer that is the index of the tasks which the user is done with or wants to remove.
-     * @throws DukeException if no integer was indicated or integer was invalid.
+     * @throws BobException if no integer was indicated or integer was invalid.
      */
-    public int parseNumber(String userInput, int index) throws DukeException {
+    public int parseNumber(String userInput, int index) throws BobException {
         int number;
         try {
             String indexString = userInput.substring(index).strip();
             number = Integer.parseInt(indexString);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Remember to specify which task you are done with "
+            throw new BobException("Remember to specify which task you are done with "
                     + "using a valid number", e);
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid format, please try again using numbers only.", e);
+            throw new BobException("Invalid format, please try again using numbers only.", e);
         }
         return number;
     }
@@ -67,13 +67,13 @@ public class Parser {
      * @param userInput User's full input
      * @return A string representing the task name
      */
-    public String parseName(String userInput) throws DukeException {
+    public String parseName(String userInput) throws BobException {
         try {
             int startIndex = userInput.indexOf(" ") + 1;
             int endIndex = userInput.indexOf("/");
             String name = "";
             if (startIndex == 0) {
-                throw new DukeException("No name detected. Please try again.");
+                throw new BobException("No name detected. Please try again.");
             }
             if (endIndex == -1) {
                 name = userInput.substring(startIndex);
@@ -82,7 +82,7 @@ public class Parser {
             }
             return name;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("No name detected. Please try again.", e);
+            throw new BobException("No name detected. Please try again.", e);
         }
     }
 
@@ -91,11 +91,12 @@ public class Parser {
      * @param userInput User's full input
      * @param timeIndex The index at which /at: starts
      * @return An event that corresponds to the user input
-     * @throws DukeException if user input do not include date or time, or
+     * @throws BobException if user input do not include date or time, or
      * invalid format of date and time given
      */
-    public Event parseEvent(String userInput, int timeIndex) throws DukeException {
+    public Event parseEvent(String userInput, int timeIndex) throws BobException {
         try {
+            assert timeIndex > 6;
             String name = userInput.substring(6, timeIndex - 1);
             String dateTime = userInput.substring(timeIndex + 5);
             String dateString = dateTime.substring(0, 10);
@@ -103,9 +104,9 @@ public class Parser {
             LocalDate date = LocalDate.parse(dateString);
             return new Event(name, date, timeString);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The description of an event includes date and time.", e);
+            throw new BobException("The description of an event includes date and time.", e);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter the date in the proper format: yyyy-mm-dd", e);
+            throw new BobException("Please enter the date in the proper format: yyyy-mm-dd", e);
         }
     }
 
@@ -114,11 +115,12 @@ public class Parser {
      * @param userInput User's full input
      * @param timeIndex The index at which /by: starts
      * @return A deadline task that corresponds to the user input
-     * @throws DukeException if user input do not include date or time, or
+     * @throws BobException if user input do not include date or time, or
      * invalid format of date and time given
      */
-    public Deadline parseDeadline(String userInput, int timeIndex) throws DukeException {
+    public Deadline parseDeadline(String userInput, int timeIndex) throws BobException {
         try {
+            assert timeIndex > 9;
             String name = userInput.substring(9, timeIndex - 1);
             String dateTime = userInput.substring(timeIndex + 5);
             String dateString = dateTime.substring(0, 10);
@@ -126,9 +128,9 @@ public class Parser {
             LocalDate deadline = LocalDate.parse(dateString);
             return new Deadline(name, deadline, timeString);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The description of a deadline includes date and time.", e);
+            throw new BobException("The description of a deadline includes date and time.", e);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter the date in the proper format: yyyy-mm-dd", e);
+            throw new BobException("Please enter the date in the proper format: yyyy-mm-dd", e);
         }
     }
 }
