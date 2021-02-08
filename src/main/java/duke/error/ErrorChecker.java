@@ -147,6 +147,9 @@ public class ErrorChecker {
 
         String[] inputSplit = input.split("/");
         // Checking that format of deadline task input is correct
+        if (inputSplit.length < 2) {
+            throw (new IllegalTaskException("", "deadline"));
+        }
         if (!inputSplit[1].startsWith("by")) {
             throw new IllegalTaskException("", "deadline");
         }
@@ -160,6 +163,9 @@ public class ErrorChecker {
 
         String[] inputSplit = input.split("/");
         // Checking that format of deadline task input is correct
+        if (inputSplit.length < 4) {
+            throw (new IllegalTaskException("", "deadline"));
+        }
         if (!inputSplit[1].startsWith("on")) {
             throw new IllegalTaskException("", "event");
         }

@@ -1,1 +1,2 @@
-[T][ ] read book
+[E][ ] project meeting (on: 2021-08-06, 14:00 - 16:00)
+[E][ ] project meeting (on: 2021-08-12, 14:00 - 16:00)

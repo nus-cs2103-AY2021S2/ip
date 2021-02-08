@@ -54,6 +54,8 @@ public class TaskManager {
      */
     public String takeEvent(String input, ArrayList<Task> tasks) {
         this.tasks = tasks;
+        assert input != null : "input should not be null";
+        assert tasks != null : "tasks should not be null";
         ErrorChecker e = new ErrorChecker(input, tasks);
         categoriseTask(input);
 
@@ -132,6 +134,7 @@ public class TaskManager {
             newTask = new DeadlineTask(description, by);
         } else if (isEvent) {
             String description = inputSplit[0].substring(6, inputSplit[0].length() - 1);
+
             DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
             LocalDate on = dateTimeConverter.convertDate();
             LocalTime from = dateTimeConverter.convertTime("from");
