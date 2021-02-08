@@ -4,6 +4,7 @@ import duck.task.TaskList;
 
 import java.util.Scanner;
 
+
 public class Gui {
 
     private static String logo = " ____        _        \n"
@@ -93,8 +94,9 @@ public class Gui {
                     + "Please enter according to the format eg.description /at YYYY-MM-DD\n";
         case "find_empty":
             return "OOPS!!! The enter the keyword of task. :-(";
+        default:
+            return "error";
         }
-        return "error";
     }
 
     /**
@@ -136,6 +138,11 @@ public class Gui {
 
     }
 
+    /**
+     * show the reply for find command
+     *
+     * @param result the finding result string array
+     */
     public String showFindReply(String[] result) {
 
         if (result[0] == null) {
