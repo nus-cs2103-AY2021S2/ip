@@ -1,16 +1,10 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    public Deadline(String message, String date) throws DateTimeParseException {
-        super("D", message, LocalDate.parse(date));
-    }
-
-    @Override
-    public String toMemString() {
-        return super.toMemString() + " | " + this.date;
+    public Deadline(String message, LocalDate date) {
+        super("D", message, date);
     }
 
     @Override

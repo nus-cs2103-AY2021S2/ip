@@ -3,13 +3,13 @@ import java.time.LocalDate;
 public abstract class Task {
     private String tag;
     private boolean isComplete;
-    private String message;
+    private String detail;
     protected LocalDate date;
 
-    protected Task(String tag, String message, LocalDate date) {
+    protected Task(String tag, String detail, LocalDate date) {
         this.tag = tag;
         this.isComplete = false;
-        this.message = message;
+        this.detail = detail;
         this.date = date;
     }
 
@@ -17,9 +17,16 @@ public abstract class Task {
         this.isComplete = isComplete;
     }
 
-    public String toMemString() {
-        int status = this.isComplete ? 1 : 0;
-        return this.tag + " | " + status + " | " + this.message;
+    public String getTag() {
+        return this.tag;
+    }
+
+    public boolean checkIsComplete() {
+        return this.isComplete;
+    }
+
+    public String getDetail() {
+        return this.detail;
     }
 
     public LocalDate getDate() {
@@ -29,6 +36,6 @@ public abstract class Task {
     @Override
     public String toString() {
         String status = this.isComplete ? "[X] " : "[ ] ";
-        return "[" + this.tag + "]" + status + this.message;
+        return "[" + this.tag + "]" + status + this.detail;
     }
 }

@@ -1,16 +1,10 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    public Event(String message, String date) throws DateTimeParseException {
-        super("E", message, LocalDate.parse(date));
-    }
-
-    @Override
-    public String toMemString() {
-        return super.toMemString() + " | " + this.date;
+    public Event(String message, LocalDate date) {
+        super("E", message, date);
     }
 
     @Override
