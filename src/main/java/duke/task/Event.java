@@ -75,11 +75,12 @@ public class Event extends Task {
      */
     public static boolean isEvent(String serialized) {
         String[] fields = serialized.split(SEPARATOR);
-        if (fields.length > 0) {
-            String type = fields[0];
-            return type.equals(TYPE);
+        if (fields.length == 0) {
+            return false;
         }
-        return false;
+
+        String type = fields[0];
+        return type.equals(TYPE);
     }
 
     /**
