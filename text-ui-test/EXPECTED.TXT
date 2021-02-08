@@ -22,21 +22,21 @@ DukeException: Whoops :( I'm sorry, I'm not sure what that means. Did you forget
 
 ____________________________________________________________
 Mlem I've added a new command for you to do:
-[T] [ ] rollover
+[T] [ ] todo roll over
 Now I can do a total of 1 commands!
 ____________________________________________________________
 
 
 ____________________________________________________________
 Much wow! I've added a new command with an Event:
-[E] [ ] dog festival | at: monday 1400 hours
+[E] [ ] event dog festival | at: monday 1400 hours
 Now I can do a total of 2 commands!
 ____________________________________________________________
 
 
 ____________________________________________________________
 Woofers! I've added a new command with a Ded-line:
-[D] [ ] finish doggo treats | by: friday 2359 hours
+[D] [ ] deadline finish doggo treats | by: friday 2359 hours
 Now I can do a total of 3 commands!
 ____________________________________________________________
 
@@ -45,9 +45,9 @@ DukeException: Whoops :( I'm sorry, I'm not sure what that means. Did you forget
 ____________________________________________________________
 Woof! I have completed these commands before:
 
-1. [T] [X] rollover
-2. [E] [ ] dog festival | at: monday 1400 hours
-3. [D] [ ] finish doggo treats | by: friday 2359 hours
+1. [T] [X] todo roll over
+2. [E] [ ] event dog festival | at: monday 1400 hours
+3. [D] [ ] deadline finish doggo treats | by: friday 2359 hours
 
 ____________________________________________________________
 
@@ -56,18 +56,18 @@ DukeException: Whoops :( Your command description cannot be empty. Try again!
 ____________________________________________________________
 Woof! I have completed these commands before:
 
-1. [T] [X] rollover
-2. [E] [ ] dog festival | at: monday 1400 hours
-3. [D] [X] finish doggo treats | by: friday 2359 hours
+1. [T] [X] todo roll over
+2. [E] [ ] event dog festival | at: monday 1400 hours
+3. [D] [X] deadline finish doggo treats | by: friday 2359 hours
 
 ____________________________________________________________
 
 
 ____________________________________________________________
 
-1. [T] [X] rollover
-2. [E] [ ] dog festival | at: monday 1400 hours
-3. [D] [X] finish doggo treats | by: friday 2359 hours
+1. [T] [X] todo roll over
+2. [E] [ ] event dog festival | at: monday 1400 hours
+3. [D] [X] deadline finish doggo treats | by: friday 2359 hours
 
 ____________________________________________________________
 

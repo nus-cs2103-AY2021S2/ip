@@ -1,5 +1,5 @@
 paw
-todo rollover
+todo roll over
 event dog festival /at monday 1400 hours
 deadline finish doggo treats /by friday 2359 hours
 shake
