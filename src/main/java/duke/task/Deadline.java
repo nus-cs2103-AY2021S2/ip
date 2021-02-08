@@ -30,7 +30,7 @@ public class Deadline extends Task {
     @Override
     public String toFileString() {
         String done = parseDone();
-        return "D|" + done + "|" + this.getDesc() + "|" + this.deadline;
+        return "D|" + super.toFileString() + "|" + this.deadline;
     }
 
     private String parseDone() {

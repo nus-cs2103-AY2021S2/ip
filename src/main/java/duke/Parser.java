@@ -53,6 +53,17 @@ public class Parser {
         }
     }
 
+    public static String[] parseSetPriority(String string) throws IllegalArgumentException {
+        String[] inputArray = string.trim().split(" ",2);
+        if (inputArray[0].isBlank()) {
+            throw new IllegalArgumentException("Error: Arguments should not be empty.");
+        } else if (inputArray.length == 1) {
+            throw new IllegalArgumentException("Error: Missing arguments found. priority [taskNumber] [0-2]");
+        } else {
+            assert inputArray.length == 2 : "Length of inputArray for parsing SetPriority should be 2.";
+            return inputArray;
+        }
+    }
     /**
      * Parses the given list of tasks into a string representation.
      * @param taskList The list of Tasks needed to turn to string.

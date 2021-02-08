@@ -8,7 +8,6 @@ public class ToDo extends Task {
      * ToDo constructor.
      *
      * @param content ToDo description
-     * @param ToDo String representation of the datetime the task has to be completed by.
      */
     public ToDo(String content) {
         super(content);
@@ -35,7 +34,7 @@ public class ToDo extends Task {
         } else {
             done = "0";
         }
-        String string = "T|" + done + "|" + this.getDesc();
+        String string = "T|" + super.toFileString();
         return string;
     }
 }

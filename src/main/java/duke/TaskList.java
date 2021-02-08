@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 /**
  * Class handling List of Tasks.
@@ -50,7 +47,8 @@ public class TaskList {
     public void addTask(String[] task) throws IllegalArgumentException {
         String type = task[0].strip();
         String done = task[1].strip();
-        String desc = task[2].strip();
+        String priority = task[2].strip();
+        String desc = task[3].strip();
 
         Task newTask;
 
@@ -71,6 +69,7 @@ public class TaskList {
         if (done.equals("1")) {
             newTask.setDone();
         }
+        newTask.setPriority(Priority.valueOf(Integer.parseInt(priority)));
 
         this.addTask(newTask);
     }
