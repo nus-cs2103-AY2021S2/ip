@@ -1,14 +1,16 @@
 package duke.ui;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeExceptionIllegalArgument;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import duke.exceptions.DukeException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 /**
  * Handles I/O for program.
@@ -17,45 +19,30 @@ import java.util.stream.Collectors;
  */
 public class Ui {
 
-    private final BufferedReader in;
     private static final String BORDER = "    ____________________________________________________________";
     private static final String INDENT = "     ";
+    private static final Font FONT = new Font("Consolas", 11);
+
+    private final VBox dialogContainer;
 
     /**
-     * Creates reader for stdin
+     * Creates reader from dialog box
      */
-    public Ui() {
-        in = new BufferedReader(new InputStreamReader(System.in));
+    public Ui(VBox dialogContainer) {
+        this.dialogContainer = dialogContainer;
     }
 
-    /**
-     * Returns one line of user input from stdin.
-     *
-     * Blocking call.
-     *
-     * @return User input.
-     * @throws DukeExceptionIllegalArgument When I/O Exception occurs.
-     */
-    public String getUserInput() throws DukeExceptionIllegalArgument {
-        try {
-            return in.readLine();
-        } catch (IOException e) {
-            throw new DukeExceptionIllegalArgument("Failed to read input.");
-        }
+    public boolean getUserConfirmation(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message);
+        Optional<ButtonType> result = alert.showAndWait();
+        return (result.isPresent() && result.get() == ButtonType.OK);
     }
 
-    public void println(String s) {;}
-
-    /**
-     * Returns one line of user input from stdin, with message prompt to user.
-     *
-     * @param pre Message prompt.
-     * @return User input.
-     * @throws DukeExceptionIllegalArgument When I/O Exception occurs.
-     */
-    public String getUserInput(String pre) throws DukeExceptionIllegalArgument {
-        System.out.print(pre);
-        return getUserInput();
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setFont(FONT);
+        textToAdd.setWrapText(true);
+        return textToAdd;
     }
 
     /**
@@ -70,13 +57,34 @@ public class Ui {
         if (message.contains("\n")) {
             int index = message.indexOf('\n');
             String firstLine = message.substring(0, index);
-            String[] restLines = message.substring(index+1).split("\n");
-            // Streams already used here
-            List<String> lines = Arrays.stream(restLines).map(s -> "  "+s).collect(Collectors.toList());
+            String[] restLines = message.substring(index + 1).split("\n");
+            List<String> lines = Arrays.stream(restLines).map(s -> "  " + s).collect(Collectors.toList());
             showMessage("☹ OOPS!!! " + firstLine, lines);
         } else {
             showMessage("☹ OOPS!!! " + message);
         }
+    }
+
+    /**
+     * Prints specified text
+     *
+     * @param text string
+     */
+    private void print(String text) {
+        dialogContainer.getChildren().add(getDialogLabel(text));
+    }
+
+    /**
+     * Prints user input as callback
+     *
+     * @param input string
+     */
+    public void printCallback(String input) {
+        dialogContainer.getChildren().add(getDialogLabel(input + "\n"));
+    }
+
+    private void println(String input) {
+        printCallback(input);
     }
 
     /**
@@ -88,7 +96,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.print(logo);
+        print(logo);
     }
 
     /**
@@ -175,21 +183,18 @@ public class Ui {
      */
     public void showMessage(String pre, List<String> lines, String post) {
 
-        System.out.println(BORDER);
+        println(BORDER);
         if (!pre.isEmpty()) {
-            System.out.print(INDENT);
-            System.out.println(pre);
+            println(INDENT + pre);
         }
         for (String line: lines) {
-            System.out.print(INDENT);
-            System.out.println(line);
+            println(INDENT + line);
         }
         if (!post.isEmpty()) {
-            System.out.print(INDENT);
-            System.out.println(post);
+            println(INDENT + post);
         }
-        System.out.println(BORDER);
-        System.out.println();
+        println(BORDER);
+        println("");
     }
 
     /**

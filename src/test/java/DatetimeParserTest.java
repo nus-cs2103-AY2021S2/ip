@@ -1,11 +1,16 @@
-import duke.exceptions.DukeExceptionIllegalArgument;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+
+import static duke.parser.DatetimeParser.parseDate;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 
-import static duke.parser.DatetimeParser.parseDate;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+
+import duke.exceptions.DukeExceptionIllegalArgument;
+
 
 public class DatetimeParserTest {
 
@@ -54,7 +59,7 @@ public class DatetimeParserTest {
         assertThrowsIllegal(() -> parseDate("90:3")); // wrong hour
         assertThrowsIllegal(() -> parseDate("30:4"));
         assertThrowsIllegal(() -> parseDate("9.3.2020")); // no such date
-         // no such date
+        // no such date
     }
 
     private void assertThrowsIllegal(Executable x) {

@@ -44,7 +44,8 @@ public final class UserInputTokenizer {
         UserInputTokenSet tokenSet = new UserInputTokenSet();
 
         // No command
-        if (tokens.isEmpty()) {
+        assert tokens.peek() != null;
+        if (tokens.peek().isEmpty()) {
             throw new DukeExceptionIllegalCommand("Command must be provided.");
         }
 

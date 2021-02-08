@@ -55,8 +55,8 @@ public class DukeCommandDelete extends DukeCommand {
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
             throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument {
         if (isDeleteAll) {
-            String reply = ui.getUserInput("Confirm deletion of all tasks (y/[n])? ");
-            if (reply.equalsIgnoreCase("y")) {
+            boolean isConfirmedDelete = ui.getUserConfirmation("Confirm deletion of all tasks? ");
+            if (isConfirmedDelete) {
                 tasks.deleteAll();
                 loader.write(tasks);
                 ui.showMessage("All tasks successfully deleted.");

@@ -9,7 +9,6 @@ import duke.parser.UserInputTokenizer;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
 import duke.ui.Ui; // Courtesy of https://se-education.org/guides/tutorials/javaFxPart2.html
-import duke.ui.UiGui;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -39,8 +38,7 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    public Duke() {
-    }
+    public Duke() {}
 
     /**
      * Initializes the main program given directory used to save user tasks.
@@ -77,7 +75,7 @@ public class Duke extends Application {
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
-        ui = new UiGui(dialogContainer);
+        ui = new Ui(dialogContainer);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -133,7 +131,7 @@ public class Duke extends Application {
         try {
             String input = userInput.getText();
             UserInputTokenSet tokenSet = UserInputTokenizer.parse(input);
-            ui.println(input);
+            ui.printCallback(input);
             DukeCommand cmd = DukeCommandFactory.getDukeCommand(tokenSet);
             cmd.execute(tasks, ui, loader);
             if (cmd.isExit()) {

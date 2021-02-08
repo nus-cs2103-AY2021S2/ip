@@ -31,7 +31,7 @@ public class EventTest {
         tokenSet.set("at", "2020-09-28");
         tokenSet.set("done", "");
         Event event = Event.parse(tokenSet);
-        assertEquals("event name", event.getDescription());
+        assertEquals("event name2", event.getDescription());
         // assertFalse(event.getDone());
     }
 }
