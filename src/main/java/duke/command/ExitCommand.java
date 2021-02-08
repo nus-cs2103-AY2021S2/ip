@@ -13,6 +13,7 @@ public class ExitCommand extends Command {
      * @param tasks Task list given.
      * @param ui User interface class object.
      * @param storage Storage path that is going to be updated.
+     * @return The message of farewell.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -21,7 +22,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns true.
+     * Returns ture because this is the ExitCommand.
      * @return True.
      */
     @Override

@@ -13,6 +13,7 @@ public class ListCommand extends Command {
      * @param tasks Task list given.
      * @param ui User interface class object.
      * @param storage Storage path that is going to be updated.
+     * @return All the tasks stored in the task list now.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -21,7 +22,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Returns false.
+     * Returns false because this is not the ExitCommand.
      * @return False.
      */
     @Override

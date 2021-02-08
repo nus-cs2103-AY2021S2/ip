@@ -1,8 +1,6 @@
 package duke.command;
 
-import duke.exception.DescriptionMissingException;
-import duke.exception.DukeException;
-import duke.exception.TaskIndexOutOfBoundException;
+import duke.exception.TaskIndexOutOfBoundsException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -14,7 +12,7 @@ import duke.ui.Ui;
 public class DoneCommand extends IndexCommand {
     /**
      * Constructs a DoneCommand.
-     * @param index The full command from user's input.
+     * @param index The index of the task that is completed.
      */
     public DoneCommand(int index) {
         super(index);
@@ -25,11 +23,11 @@ public class DoneCommand extends IndexCommand {
      * @param tasks Task list given.
      * @param ui User interface class object.
      * @param storage Storage path that is going to be updated.
-     * @throws DukeException If error occurs during the process.
+     * @return The message produced by completing a task.
+     * @throws TaskIndexOutOfBoundsException If the specified index is out of the bound of task list.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage)
-            throws DescriptionMissingException, TaskIndexOutOfBoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskIndexOutOfBoundsException {
         if (index < tasks.size()) {
             Task completedTask = tasks.get(index);
             completedTask.complete();
@@ -37,7 +35,7 @@ public class DoneCommand extends IndexCommand {
             ui.printTaskCompleted(completedTask);
             return ui.completeTaskResponse(completedTask);
         } else {
-            throw new TaskIndexOutOfBoundException("There is no task numbered " + (index + 1) + "!");
+            throw new TaskIndexOutOfBoundsException("There is no task numbered " + (index + 1) + "!");
         }
     }
 }

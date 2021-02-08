@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.exception.DescriptionMissingException;
-
 /**
  * An abstract class represents an IndexCommand.
  */
@@ -10,14 +8,14 @@ public abstract class IndexCommand extends Command {
 
     /**
      * Constructs an IndexCommand.
-     * @param index The full command from the user's input.
+     * @param index The index of the task specified.
      */
     public IndexCommand(int index) {
         this.index = index;
     }
 
     /**
-     * Returns false.
+     * Returns false because this is not an ExitCommand.
      * @return False.
      */
     @Override

@@ -2,7 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.CommandParser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -11,14 +11,9 @@ import duke.ui.Ui;
  */
 public class Duke {
     private TaskList tasks;
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
 
-    /**
-     * An empty constructor for the Duke bot.
-     */
-    public Duke() {
-    }
     /**
      * Constructs a Duke bot.
      * @param filePath The file path to store the tasks.
@@ -50,7 +45,7 @@ public class Duke {
             try {
                 String input = ui.readCommand();
                 ui.printLine();
-                Command command = Parser.parseCommand(input);
+                Command command = CommandParser.parseCommand(input);
                 command.execute(tasks, ui, storage);
                 isOver = command.isExit();
                 ui.printLine();
@@ -66,7 +61,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command command = Parser.parseCommand(input);
+            Command command = CommandParser.parseCommand(input);
             String response = command.execute(tasks, ui, storage);
             return response;
         } catch (DukeException e) {

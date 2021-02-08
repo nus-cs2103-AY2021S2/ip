@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -14,7 +13,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructs a FindCommand.
-     * @param keyword The full command from user's input.
+     * @param keyword The keyword to be used to find matching tasks.
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -25,7 +24,7 @@ public class FindCommand extends Command {
      * @param tasks Task list given.
      * @param ui User interface class object.
      * @param storage Storage path that is going to be updated.
-     * @throws DukeException If error occurs during the process.
+     * @return All the matching tasks in form of String.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -42,7 +41,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     *
+     * Returns false because this is not the ExitCommand.
      * @return False.
      */
     @Override

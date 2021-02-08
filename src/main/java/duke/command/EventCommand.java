@@ -1,11 +1,9 @@
 package duke.command;
 
-import java.time.LocalDateTime;
-
 import duke.exception.DescriptionIndexOutOfBoundsException;
 import duke.exception.DescriptionMissingException;
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.TaskParser;
 import duke.storage.Storage;
 import duke.task.EnumTask;
 import duke.task.Task;
@@ -19,7 +17,7 @@ import duke.ui.Ui;
 public class EventCommand extends AddCommand {
     /**
      * Constructs an EventCommand.
-     * @param descriptions The full command from user's input.
+     * @param descriptions The descriptions that contains name and time of the event.
      */
     public EventCommand(TaskDescription descriptions) {
         super(descriptions);
@@ -30,6 +28,7 @@ public class EventCommand extends AddCommand {
      * @param tasks Task list given.
      * @param ui User interface class object.
      * @param storage Storage path that is going to be updated.
+     * @return The message of adding an Event task.
      * @throws DukeException If error occurs during the process.
      */
     @Override
@@ -37,7 +36,7 @@ public class EventCommand extends AddCommand {
         try {
             String name = descriptions.getDescriptionOfIndex(NAME_INDEX);
             String dateAndTime = descriptions.getDescriptionOfIndex(DATE_TIME_INDEX);
-            Task event = Parser.parseTask(EnumTask.EVENT, name, dateAndTime);
+            Task event = TaskParser.parseTask(EnumTask.EVENT, name, dateAndTime);
             super.addThisTask(tasks, event, ui, storage);
             return ui.addTaskResponse(event, tasks);
         } catch (DescriptionMissingException e) {

@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DescriptionIndexOutOfBoundsException;
 import duke.exception.DescriptionMissingException;
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.TaskParser;
 import duke.storage.Storage;
 import duke.task.EnumTask;
 import duke.task.Task;
@@ -17,7 +17,7 @@ import duke.ui.Ui;
 public class DeadlineCommand extends AddCommand {
     /**
      * Constructs a DeadlineCommand.
-     * @param descriptions Full command from the user's input.
+     * @param descriptions The descriptions that contains name and time of the Deadline.
      */
     public DeadlineCommand(TaskDescription descriptions) {
         super(descriptions);
@@ -28,6 +28,7 @@ public class DeadlineCommand extends AddCommand {
      * @param tasks Task list given.
      * @param ui User interface class object.
      * @param storage Storage path that is going to be updated.
+     * @return The message of adding a Deadline Task.
      * @throws DukeException If error occurs during the process.
      */
     @Override
@@ -35,7 +36,7 @@ public class DeadlineCommand extends AddCommand {
         try {
             String name = descriptions.getDescriptionOfIndex(NAME_INDEX);
             String dateAndTime = descriptions.getDescriptionOfIndex(DATE_TIME_INDEX);
-            Task deadline = Parser.parseTask(EnumTask.DEADLINE, name, dateAndTime);
+            Task deadline = TaskParser.parseTask(EnumTask.DEADLINE, name, dateAndTime);
             super.addThisTask(tasks, deadline, ui, storage);
             return ui.addTaskResponse(deadline, tasks);
         } catch (DescriptionMissingException e) {
