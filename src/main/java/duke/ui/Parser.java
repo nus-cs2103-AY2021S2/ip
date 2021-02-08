@@ -38,9 +38,10 @@ public class Parser {
     private static final String DELETE = "DELETE";
     private static final String LIST = "LIST";
     private static final String BYE = "BYE";
+    private static final String FIND = "FIND";
 
     private static final ArrayList<String> validActions
-            = new ArrayList<>(Arrays.asList(TODO, DEADLINE, EVENT, DONE, DELETE, LIST, BYE));
+            = new ArrayList<>(Arrays.asList(TODO, DEADLINE, EVENT, DONE, DELETE, LIST, BYE, FIND));
 
     /**
      * Initializes a scanner to read a new line of user input (as a <code>String</code>).
@@ -86,6 +87,8 @@ public class Parser {
                 return new AddDeadlineCommand(description, deadlineDateTime);
             case EVENT:
                 return new AddEventCommand(description, eventDateTime);
+            case FIND:
+                return new FindCommand(description);
             default:
                 return new DoNothingCommand();
         }
