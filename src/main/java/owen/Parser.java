@@ -9,6 +9,7 @@ import owen.command.CommandType;
 public class Parser {
     /**
      * Parse command from a string.
+     * 
      * @param commandString String to parse command from.
      * @return Parsed Command.
      * @throws OwenException Command cannot be parsed from string.

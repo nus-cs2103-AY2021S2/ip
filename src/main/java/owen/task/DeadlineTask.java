@@ -11,6 +11,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Creates new deadline task with arguments.
+     * 
      * @param taskArgs Arguments in the format: description /by DD/MM/YYYY HHMM.
      * @throws OwenException Arguments could not be parsed.
      */
@@ -46,6 +47,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Deserialize string into a DeadlineTask.
+     * 
      * @param string String to deserialize.
      * @return DeadlineTask deserialized from string.
      * @throws OwenException Task could not be deserialized.

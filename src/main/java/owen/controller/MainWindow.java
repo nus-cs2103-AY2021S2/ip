@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates controller for main GUI interface window.
+     * 
      * @param bot Chatbot that GUI acts as an interface for.
      */
     public MainWindow(Chatbot bot) {

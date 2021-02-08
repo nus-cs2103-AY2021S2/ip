@@ -10,6 +10,7 @@ public class Main {
 
     /**
      * Starts GUI interface for interacting with Owen chatbot.
+     * 
      * @param args Program arguments.
      */
     public static void startGui(String[] args) {
@@ -18,6 +19,7 @@ public class Main {
 
     /**
      * Starts Terminal interface for interacting with Owen chatbot.
+     * 
      * @param args Program arguments.
      */
     public static void startTerminal(String[] args) {

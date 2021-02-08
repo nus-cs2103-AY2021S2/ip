@@ -8,6 +8,7 @@ import owen.OwenException;
 public class TodoTask extends Task {
     /**
      * Creates new todo task with arguments.
+     * 
      * @param taskArgs Arguments in the format: description.
      * @throws OwenException Arguments could not be parsed.
      */
@@ -36,6 +37,7 @@ public class TodoTask extends Task {
 
     /**
      * Deserialize string into a TodoTask.
+     * 
      * @param string String to deserialize.
      * @return TodoTask deserialized from string.
      */

@@ -17,6 +17,7 @@ public class Ui {
 
     /**
      * Output a formatted response to standard output.
+     * 
      * @param response Raw unformatted response string.
      */
     public void outputResponse(String response) {
@@ -26,6 +27,7 @@ public class Ui {
 
     /**
      * Get user input from standard input.
+     * 
      * @return User input string.
      */
     public String getInput() {
