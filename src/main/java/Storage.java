@@ -76,7 +76,7 @@ public class Storage {
         String isDoneString;
         String description;
 
-        assert splits.length == 3: "Error in storage file duke.txt format.";
+        assert splits.length == 3 : "Error in storage file duke.txt format.";
         isDoneString = splits[1].trim();
         description = splits[2].trim();
         assert (isDoneString.equals("1") || isDoneString.equals("0")) : "Error in storage file duke.txt format.";
@@ -95,7 +95,7 @@ public class Storage {
         String description;
         String date;
 
-        assert splits.length == 4: "Error in storage file duke.txt format.";
+        assert splits.length == 4 : "Error in storage file duke.txt format.";
         isDoneString = splits[1].trim();
         description = splits[2].trim();
         date = splits[3].trim();
@@ -106,7 +106,7 @@ public class Storage {
             Deadline addedTask = new Deadline(description, isDoneString.equals("1"), date);
             tasks.addTask(addedTask);
         } catch (DukeException e) {
-            assert false: "Error in storage file duke.txt format";
+            assert false : "Error in storage file duke.txt format";
         }
     }
 
@@ -120,7 +120,7 @@ public class Storage {
         String description;
         String date;
 
-        assert splits.length == 4: "Error in storage file duke.txt format.";
+        assert splits.length == 4 : "Error in storage file duke.txt format.";
         isDoneString = splits[1].trim();
         description = splits[2].trim();
         date = splits[3].trim();
@@ -131,7 +131,7 @@ public class Storage {
             Event addedTask = new Event(description, isDoneString.equals("1"), date);
             tasks.addTask(addedTask);
         } catch (DukeException e) {
-            assert false: "Error in storage file duke.txt format";
+            assert false : "Error in storage file duke.txt format";
         }
     }
 

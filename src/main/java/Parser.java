@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * Parser processes commands.
  */
@@ -145,7 +143,8 @@ public class Parser {
         String[] splits = userInput.split("todo ");
         String textToReturn = "";
         if (splits.length == 2) {
-            Todo addedTask = new Todo(Arrays.asList(splits).get(1), isDone);
+            String description = splits[1];
+            Todo addedTask = new Todo(description, isDone);
             tasks.addTask(addedTask);
             textToReturn += "Got it, I've added this task to the list: \n";
             textToReturn += "  " + addedTask;
@@ -168,9 +167,10 @@ public class Parser {
         String[] splits = userInput.split("deadline |/by ");
         String textToReturn = "";
         if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
+            String description = splits[1];
+            String date = splits[2];
             try {
-                Deadline addedTask = new Deadline(Arrays.asList(splits).get(1),
-                    isDone, Arrays.asList(splits).get(2));
+                Deadline addedTask = new Deadline(description, isDone, date);
                 tasks.addTask(addedTask);
                 textToReturn += "Got it, I've added this task to the list: \n";
                 textToReturn += "  " + addedTask;
@@ -196,9 +196,10 @@ public class Parser {
         String[] splits = userInput.split("event | /at ");
         String textToReturn = "";
         if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
+            String description = splits[1];
+            String date = splits[2];
             try {
-                Event addedTask = new Event(Arrays.asList(splits).get(1),
-                    isDone, Arrays.asList(splits).get(2));
+                Event addedTask = new Event(description, isDone, date);
                 tasks.addTask(addedTask);
                 textToReturn += "Got it, I've added this task to the list: \n";
                 textToReturn += "  " + addedTask;
