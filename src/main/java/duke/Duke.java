@@ -21,6 +21,11 @@ public class Duke {
         this(null, isCli);
     }
 
+    /**
+     * Creates new duke instance
+     * @param directoryPath path to store data
+     * @param isCli specify whether the duke instance is a command line interface
+     */
     public Duke(String directoryPath, boolean isCli) {
         if (isCli) {
             ui = new CliUi();
