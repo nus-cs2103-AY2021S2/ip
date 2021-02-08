@@ -2,6 +2,8 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -102,13 +104,9 @@ public class TaskList {
      * @return List of Tasks with the relevant keyword.
      */
     public List<Task> findTasksWithString(String keyword) {
-        List<Task> tasksWithString = new ArrayList<>();
-        for (Task t: list) {
-            String taskDesc = t.getDesc();
-            if (taskDesc.contains(keyword)) {
-                tasksWithString.add(t);
-            }
-        }
-        return tasksWithString;
+        Predicate<Task> byKeyword = task-> task.getDesc().contains(keyword);
+        return list.stream()
+                .filter(byKeyword)
+                .collect(Collectors.toList());
     }
 }
