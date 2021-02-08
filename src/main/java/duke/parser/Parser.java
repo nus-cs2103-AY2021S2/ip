@@ -51,9 +51,9 @@ public class Parser {
         } else if (potentialCommand.equalsIgnoreCase("BYE")) {
             command = new ExitCommand();
         } else if (potentialCommand.equalsIgnoreCase("DONE")) {
-            command = new DoneCommand(cleanerInput);
+            command = new DoneCommand(parseIndex(cleanerInput));
         } else if (potentialCommand.equalsIgnoreCase("DELETE")) {
-            command = new DeleteCommand(cleanerInput);
+            command = new DeleteCommand(parseIndex(cleanerInput));
         } else if (potentialCommand.equalsIgnoreCase("TODO")) {
             TaskDescription td = parseDescription(EnumTask.TODO, cleanerInput, endIndex);
             command = new TodoCommand(td);
@@ -102,6 +102,20 @@ public class Parser {
             return new TaskDescription(input.substring(index).strip().split("/at"));
         default:
             throw new DukeException("I do not know this task");
+        }
+    }
+
+    public static int parseIndex(String input) throws DescriptionMissingException {
+        String[] doneInstructions = input.trim().split(" ");
+
+        if (doneInstructions.length < 2) {
+            throw new DescriptionMissingException("Please specify the index!");
+        }
+        try {
+            String indexInString = doneInstructions[1].trim();
+            return Integer.parseInt(indexInString) - 1;
+        } catch (NumberFormatException e) {
+            throw new DescriptionMissingException("Input index is not valid");
         }
     }
 

@@ -14,10 +14,10 @@ import duke.ui.Ui;
 public class DeleteCommand extends IndexCommand {
     /**
      * Constructs a DeleteCommand.
-     * @param fullCommand Full command from the user's input.
+     * @param index Full command from the user's input.
      */
-    public DeleteCommand(String fullCommand) {
-        super(fullCommand);
+    public DeleteCommand(int index) {
+        super(index);
     }
 
     /**
@@ -30,7 +30,6 @@ public class DeleteCommand extends IndexCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DescriptionMissingException, TaskIndexOutOfBoundException {
-        int index = getIndex();
         if (index < tasks.size()) {
             Task removingTask = tasks.get(index);
             tasks.remove(index);

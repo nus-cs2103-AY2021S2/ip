@@ -14,10 +14,10 @@ import duke.ui.Ui;
 public class DoneCommand extends IndexCommand {
     /**
      * Constructs a DoneCommand.
-     * @param fullCommand The full command from user's input.
+     * @param index The full command from user's input.
      */
-    public DoneCommand(String fullCommand) {
-        super(fullCommand);
+    public DoneCommand(int index) {
+        super(index);
     }
 
     /**
@@ -30,7 +30,6 @@ public class DoneCommand extends IndexCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DescriptionMissingException, TaskIndexOutOfBoundException {
-        int index = getIndex();
         if (index < tasks.size()) {
             Task completedTask = tasks.get(index);
             completedTask.complete();

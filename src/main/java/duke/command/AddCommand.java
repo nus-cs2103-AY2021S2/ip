@@ -14,7 +14,7 @@ public abstract class AddCommand extends Command {
     protected final int DATE_TIME_INDEX = 1;
     protected final TaskDescription descriptions;
 
-    AddCommand(TaskDescription descriptions) {
+    public AddCommand(TaskDescription descriptions) {
         this.descriptions = descriptions;
     }
     /**
