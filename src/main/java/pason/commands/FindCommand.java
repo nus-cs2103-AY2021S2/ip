@@ -21,22 +21,20 @@ public class FindCommand extends Command {
         if (tasks.getTasks().size() == 0) {
             return new CommandResult("There are no tasks in your list. Time to add some!",
                     CommandResultType.CHAT_PASON);
-        } else {
-            int matchingResults = 0;
-            String output = "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < tasks.getTasks().size(); i++) {
-                if (tasks.getTasks().get(i).getDescription().toLowerCase().contains(this.keyword.toLowerCase())) {
-                    output += (i + 1) + ". " + tasks.getTasks().get(i) + "\n";
-                    matchingResults++;
-                }
-            }
-            if (matchingResults == 0) {
-                return new CommandResult("There are no matching tasks with that keyword.",
-                        CommandResultType.CHAT_PASON);
-            } else {
-                return new CommandResult(output, CommandResultType.CHAT_PASON);
+        }
+        int matchingResults = 0;
+        String output = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            if (tasks.getTasks().get(i).getDescription().toLowerCase().contains(this.keyword.toLowerCase())) {
+                output += (i + 1) + ". " + tasks.getTasks().get(i) + "\n";
+                matchingResults++;
             }
         }
+        if (matchingResults == 0) {
+            return new CommandResult("There are no matching tasks with that keyword.",
+                    CommandResultType.CHAT_PASON);
+        }
+        return new CommandResult(output, CommandResultType.CHAT_PASON);
     }
 
     public boolean isExit() {

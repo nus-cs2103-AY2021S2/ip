@@ -24,6 +24,9 @@ import pason.tasks.ToDo;
  * Parser class for validating commands and inputs.
  */
 public class Parser {
+    private static final String DATE_TIME_FORMAT = "dd/MM/yyyy HHmm";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String TODO_REGEX = "(todo) ([\\w ]*)";
     /**
      * Parses input string to command type.
      * Returns the appropriate command to execute.
@@ -67,16 +70,30 @@ public class Parser {
      */
     public static Command validateToDo(String input) throws Exception {
         try {
-            Pattern p = Pattern.compile("(todo) ([\\w ]*)");
+            Pattern p = Pattern.compile(TODO_REGEX);
             Matcher m = p.matcher(input);
-            if (!m.find()) {
+            if (!m.find()) { /* If matching of the TODO_REGEX fails */
                 throw new PasonException("Please include a description for your todo task.");
             }
-            ToDo newToDo = new ToDo(m.group(2));
-            return new AddCommand(input, newToDo);
+
+            String description = m.group(2);
+            return constructToDoCommand(description);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+    /**
+     * Constructs the AddCommand object for the ToDo.
+     * Returns the new Deadline object if successful, or throws exception.
+     *
+     * @param input  Description of ToDo
+     * @return AddCommand to be executed.
+     * @throws PasonException  If invalid input or formatting.
+     */
+    public static Command constructToDoCommand(String input) {
+        ToDo newToDo = new ToDo(input);
+        return new AddCommand(input, newToDo);
     }
 
     /**
@@ -89,29 +106,36 @@ public class Parser {
      */
     public static Command validateDeadline(String input) throws Exception {
         try {
-            String[] splitInput;
-            splitInput = input.substring(8).trim().split(" /by ");
-            if (splitInput.length == 2) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                LocalDateTime deadlineBy = LocalDateTime.parse(splitInput[1], formatter);
-                Deadline newDeadline = new Deadline(splitInput[0], deadlineBy);
-                return new AddCommand(input, newDeadline);
-            } else if (splitInput.length == 1) {
-                throw new PasonException("Please enter a by date for '"
-                        + splitInput[0] + "'");
-            } else if (splitInput.length == 0) {
-                throw new PasonException("Please enter a description followed by the date in the format: "
-                        + "deadline <description> /by <when>");
-            } else {
-                throw new PasonException("You've entered an invalid format. "
-                        + "Please use: deadline <description> /by <when>");
-            }
+            return constructDeadlineCommand(input);
         } catch (DateTimeParseException e) {
             throw new PasonException("Oops! You've entered an invalid date and time format.\n"
                     + "Please use: dd/mm/yyyy hh:mm");
         } catch (Exception e) {
             throw new PasonException(e.getMessage());
         }
+    }
+
+    /**
+     * Constructs the AddCommand object for the Deadline.
+     * Returns the new AddCommand object if successful, or throws exception.
+     *
+     * @param input  Input to be validated.
+     * @return AddCommand to be executed.
+     * @throws PasonException  If invalid input or formatting.
+     */
+    public static Command constructDeadlineCommand(String input) throws Exception {
+        String[] inputParts = input.substring(8).trim().split(" /by ");
+
+        if (inputParts.length != 2) {
+            throw new PasonException("You've entered an invalid format. "
+                    + "Please use: deadline <description> /by <when>");
+        }
+        String description = inputParts[0];
+        String deadline = inputParts[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+        LocalDateTime deadlineBy = LocalDateTime.parse(deadline, formatter);
+        Deadline newDeadline = new Deadline(description, deadlineBy);
+        return new AddCommand(input, newDeadline);
     }
 
     /**
@@ -124,30 +148,49 @@ public class Parser {
      */
     public static Command validateEvent(String input) throws Exception {
         try {
-            String[] splitInput;
-            splitInput = input.substring(5).trim().split(" /at ");
-            if (splitInput.length == 2) {
-                String[] dateAndTime = splitInput[1].split(" ");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate eventDate = LocalDate.parse(dateAndTime[0], formatter);
-                Event newEvent = new Event(splitInput[0], eventDate, (dateAndTime.length == 1 ? null : dateAndTime[1]));
-                return new AddCommand(input, newEvent);
-            } else if (splitInput.length == 1) {
-                System.out.println(splitInput[0]);
-                throw new PasonException("Please enter an at date for '"
-                        + splitInput[0] + "'");
-            } else if (splitInput.length == 0) {
-                throw new PasonException("Please enter a description followed by the date in the format: "
-                        + "event <description> /at <when>");
-            } else {
-                throw new PasonException("You've entered an invalid format. "
-                        + "Please use: event <description> /at <when>");
-            }
+            return constructEventCommand(input);
         } catch (DateTimeParseException e) {
             throw new PasonException("Oops! You've entered an invalid date format.\n"
                     + "Please use: dd/mm/yyyy");
         } catch (Exception e) {
             throw new PasonException(e.getMessage());
         }
+    }
+
+    /**
+     * Constructs the AddCommand object for the Event.
+     * Returns the new AddCommand object if successful, or throws exception.
+     *
+     * @param input  Input to be validated.
+     * @return AddCommand to be executed.
+     * @throws PasonException  If invalid input or formatting.
+     */
+    public static Command constructEventCommand(String input) throws Exception {
+        String[] inputParts = input.substring(5).trim().split(" /at ");
+        if (inputParts.length != 2) {
+            throw new PasonException("You've entered an invalid format. "
+                    + "Please use: event <description> /at <when>");
+        }
+
+        String[] dateAndTime = inputParts[1].split(" ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+
+        String description = inputParts[0];
+        LocalDate eventDate = LocalDate.parse(dateAndTime[0], formatter);
+        Event newEvent = new Event(description, eventDate, parseOptionalEventTime(dateAndTime));
+        return new AddCommand(input, newEvent);
+    }
+
+    /**
+     * Returns the event time if it exists.
+     *
+     * @param dateAndTime  array
+     * @return time, if exists, or null if invalid.
+     */
+    public static String parseOptionalEventTime(String[] dateAndTime) {
+        if (dateAndTime.length != 2) {
+            return null;
+        }
+        return dateAndTime[1];
     }
 }
