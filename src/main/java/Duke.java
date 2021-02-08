@@ -28,6 +28,9 @@ public class Duke  extends Application{
     /**
      * Driver code.
      */
+    public static final String REGEX_SPACE = "\\s+";
+
+
     private static String FILE_PATH = "./data/";
     private static String FILE_NAME = "data.txt";
     private static String hello = "What can I do for you?\n";
@@ -94,7 +97,6 @@ public class Duke  extends Application{
         String response = "";
         try {
             Task t = tasks.get(n);
-
             response = "Noted. I've removed this task: ";
             tasks.remove(n);
             response = response + "\n" +t.toString();
@@ -224,7 +226,7 @@ public class Duke  extends Application{
     private static ArrayList<Task> readInput(ArrayList<String> strings) {
         ArrayList<Task> tasks = new ArrayList<>();
         for(String i: strings) {
-            String[] texts = i.split("\\s+");
+            String[] texts = i.split(REGEX_SPACE);
             switch(texts[0].charAt(1)) {
                 case 'D':
                     tasks.add(Parser.stringToDeadline(i));
@@ -321,7 +323,7 @@ public class Duke  extends Application{
     }
 
     public String doCommand(String word){
-        String[] pre = word.split("\\s+");
+        String[] pre = word.split(REGEX_SPACE);
         String response = "";
         switch (pre[0]) {
             case "bye":
