@@ -45,47 +45,27 @@ public class TaskList {
         }
     }
 
-    /**
-     * Process the Todo task by adding it to the Task list, updating the number of tasks,
-     * and printing the output message.
-     * @param spl Contains the keyword and description in the array.
-     */
-    static String processTodo(String[] spl) {
-        storage.add(new Todo(spl[1]));
+    static String processTaskOutput(String task, String description, LocalDate date, LocalTime time) {
+        if (task.equals("todo")) {
+            storage.add(new Todo(description));
+        } else if (task.equals("deadline")) {
+            storage.add(new Deadline(description, date, time));
+        } else if (task.equals("event")) {
+            storage.add(new Event(description, date, time));
+        } else {
+            return "Error in Task processing.";
+        }
         count++;
-        return Ui.outputMessageTask(spl[0], storage.get(count - 1));
-    }
-
-    /**
-     * Process the Deadline task by adding it to the Task list, updating the number of tasks,
-     * and printing the output message.
-     * @param spl Contains the keyword, description and date in the array.
-     */
-    static String processDeadline(String[] spl, String[] spl2) {
-        storage.add(new Deadline(spl[0], LocalDate.parse(spl2[0]), LocalTime.parse(spl2[1])));
-        count++;
-        return Ui.outputMessageTask(spl[0], storage.get(count - 1));
-    }
-
-    /**
-     * Process the Event task by adding it to the Task list, updating the number of tasks,
-     * and printing the output message.
-     * @param spl Contains the keyword, description and date in the array.
-     */
-    static String processEvent(String[] spl, String[] spl2) {
-        storage.add(new Event(spl[0], LocalDate.parse(spl2[0]), LocalTime.parse(spl2[1])));
-        count++;
-        return Ui.outputMessageTask(spl[0], storage.get(count - 1));
+        return Ui.outputMessageTask(task, storage.get(count - 1));
     }
 
     /**
      * Process the done command by updating the Task to reflect that it has been completed.
      * It also prints an output message.
-     * @param spl Contains the keyword and the number of the task which has been completed.
+     * @param doneWithIndexNumber The index number of the Task which has been done by the user.
      */
-    static String processDone(String[] spl) {
-        int number = Integer.parseInt(spl[1]);
-        Task current = storage.get(number - 1);
+    static String processDoneOutput(int doneWithIndexNumber) {
+        Task current = storage.get(doneWithIndexNumber - 1);
         current.finished();
         return Ui.outputMessageDone(current);
     }
@@ -94,27 +74,27 @@ public class TaskList {
      * Prints the output message for a list of all the tasks which contain the keyword.
      * @param spl Contains the keyword and the word that is being searched in the array.
      */
-    static String processFind(String[] spl) {
-        return Ui.outputMessageFind(storage, spl);
+    static String processFindOutput(String[] spl) {
+        String description = spl[1];
+        return Ui.outputMessageFind(storage, description);
     }
 
     /**
      * Prints the output message for a list of all the tasks to be printed out.
      */
-    static String processList() {
+    static String processListOutput() {
         return Ui.outputMessageList(storage, count);
     }
 
     /**
      * Deletes the n-numbered Task from the task list, where n is the number given by the user.
-     * @param spl Contains the keyword, and the Task number that has to be deleted (n) in the array.
+     * @param deleteThisIndexNumber The index number of the Task which the user wants to delete.
      */
-    static String processDelete(String[] spl) {
-        int num = Integer.parseInt(spl[1]);
-        Task t = storage.get(num - 1);
-        storage.remove(num - 1);
+    static String processDeleteOutput(int deleteThisIndexNumber) {
+        Task toDelete = storage.get(deleteThisIndexNumber - 1);
+        storage.remove(deleteThisIndexNumber - 1);
         count--;
-        return Ui.outputMessageDelete(t);
+        return Ui.outputMessageDelete(toDelete);
     }
 
     /**
@@ -125,4 +105,5 @@ public class TaskList {
         Storage.uploadToHardDrive();
         return Ui.outputMessageBye();
     }
+
 }

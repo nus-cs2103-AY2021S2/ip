@@ -1,58 +1,42 @@
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Parses the inputs given by the user.
  */
 public class Parser {
+    private static String[] splitArray;
     /**
      * Determines the keyword and processes the input based on the keyword.
      */
     static String parse(String inp) {
-        String[] spl = inp.split(" ", 2);
+        splitArray = inp.split(" ", 2);
         String output;
         try {
-            switch (spl[0]) {
+            switch (splitArray[0]) {
             case "todo":
-                checkSplLength(spl, 2, "todo");
-                output = TaskList.processTodo(spl);
+                output = processTodo();
                 break;
             case "deadline":
-                checkSplLength(spl, 2, "deadline");
-                String[] spl2 = spl[1].split(" /by ", 2);
-                checkSplLength(spl2, 2, "deadline");
-                String[] spl3 = spl2[1].split(" ", 2);
-                checkSplLength(spl3, 2, "deadline");
-                output = TaskList.processDeadline(spl2, spl3);
+                output = processDeadlineAndEvent(" /by ");
                 break;
             case "event":
-                checkSplLength(spl, 2, "event");
-                String[] spl4 = spl[1].split(" /at ", 2);
-                checkSplLength(spl4, 2, "event");
-                String[] spl5 = spl4[1].split(" ", 2);
-                checkSplLength(spl5, 2, "event");
-                output = TaskList.processEvent(spl4, spl5);
+                output = processDeadlineAndEvent(" /at ");
                 break;
             case "done":
-                checkSplLength(spl, 2, "done");
-                isInt(spl[1]);
-                output = TaskList.processDone(spl);
+                output = processDone();
                 break;
             case "list":
-                checkSplLength(spl, 1, "list");
-                output = TaskList.processList();
+                output = processList();
                 break;
             case "delete":
-                checkSplLength(spl, 2, "delete");
-                isInt(spl[1]);
-                output = TaskList.processDelete(spl);
+                output = processDelete();
                 break;
             case "bye":
-                checkSplLength(spl, 1, "bye");
-                output = TaskList.processBye();
+                output = processBye();
                 break;
             case "find":
-                checkSplLength(spl, 2, "find");
-                output = TaskList.processFind(spl);
+                output = processFind();
                 break;
             default:
                 throw new InvalidKeywordException(Ui.invalidKeywordExceptionMessage());
@@ -95,5 +79,58 @@ public class Parser {
         if (spl.length != x) {
             throw new InvalidTaskFormatException(Ui.invalidTaskFormatExceptionMessage(task));
         }
+    }
+
+    static String processTodo() throws InvalidTaskFormatException {
+        checkSplLength(splitArray, 2, "todo");
+        String task = splitArray[0];
+        String description = splitArray[1];
+        return TaskList.processTaskOutput(task, description, null, null);
+    }
+
+    static String processDeadlineAndEvent(String regex) throws InvalidTaskFormatException {
+        String task = splitArray[0];
+        checkSplLength(splitArray, 2, task);
+
+        String[] splitDescriptionAndTime = splitArray[1].split(regex, 2);
+        checkSplLength(splitDescriptionAndTime, 2, task);
+
+        String[] splitDateAndTime = splitDescriptionAndTime[1].split(" ", 2);
+        checkSplLength(splitDateAndTime, 2, task);
+
+        String description = splitDescriptionAndTime[0];
+        LocalDate date = LocalDate.parse(splitDateAndTime[0]);
+        LocalTime time = LocalTime.parse(splitDateAndTime[1]);
+
+        return TaskList.processTaskOutput(task, description, date, time);
+    }
+
+    static String processDone() throws InvalidTaskFormatException, InvalidNumberException {
+        checkSplLength(splitArray, 2, "done");
+        isInt(splitArray[1]);
+        int doneWithIndexNumber = Integer.parseInt(splitArray[1]);
+        return TaskList.processDoneOutput(doneWithIndexNumber);
+    }
+
+    static String processList() throws InvalidTaskFormatException {
+        checkSplLength(splitArray, 1, "list");
+        return TaskList.processListOutput();
+    }
+
+    static String processDelete() throws InvalidTaskFormatException, InvalidNumberException {
+        checkSplLength(splitArray, 2, "delete");
+        isInt(splitArray[1]);
+        int deleteThisIndexNumber = Integer.parseInt(splitArray[1]);
+        return TaskList.processDeleteOutput(deleteThisIndexNumber);
+    }
+
+    static String processBye() throws InvalidTaskFormatException {
+        checkSplLength(splitArray, 1, "bye");
+        return TaskList.processBye();
+    }
+
+    static String processFind() throws InvalidTaskFormatException {
+        checkSplLength(splitArray, 2, "find");
+        return TaskList.processFindOutput(splitArray);
     }
 }

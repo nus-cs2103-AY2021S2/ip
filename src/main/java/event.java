@@ -30,6 +30,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (at: " + dateFormat.format(date) + " at " + timeFormat.format(time) + ")";
+        String formattedDate = dateFormat.format(date);
+        String formattedTime = timeFormat.format(time);
+        return super.toString() + " (at: " + formattedDate + " at " + formattedTime + ")";
     }
 }
