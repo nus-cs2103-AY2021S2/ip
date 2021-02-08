@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import percy.task.Task;
 import percy.task.TaskList;
@@ -96,14 +97,11 @@ public class Ui {
      * @return formatted multi-line string.
      */
     public static String makeMsg(ArrayList<String> stringArr) {
-        String str = "";
-        for (String s : stringArr) {
-            str += s + "\n";
-        }
+        String str = stringArr.stream().collect(Collectors.joining("\n"));
         return str;
     }
 
-    /**
+    /*
      * Formats the output message for listing of tasks.
      * @param list latest task list.
      * @return the output message for list command
