@@ -10,7 +10,7 @@ public class ToDoTask extends Task {
      * Creates a {@code ToDoTask} object with the given task name,
      * with the task set to initially not completed.
      *
-     * @param name name of the task
+     * @param name Name of the task.
      */
     public ToDoTask(String name) {
         super(IDENTIFIER, name);
