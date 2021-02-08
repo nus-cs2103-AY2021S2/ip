@@ -2,6 +2,7 @@ package command;
 
 import java.time.LocalDateTime;
 
+import exception.MikeCommandExecutionException;
 import mike.TaskList;
 import task.EventTask;
 
@@ -26,9 +27,12 @@ public class EventCommand extends AddCommand {
      * @return TaskList object after adding task to the list
      */
     @Override
-    public TaskList runCommand(TaskList taskList) {
+    public TaskList runCommand(TaskList taskList) throws MikeCommandExecutionException {
         this.taskList = taskList;
         this.taskToAdd = new EventTask(this.taskDescription, this.timeWindow);
+        if (this.checkIfDuplicate(taskToAdd)) {
+            throw new MikeCommandExecutionException("Event Command", " ☹ OOPS!!! Task is a duplicate!");
+        }
         taskList.addTaskToList(taskToAdd);
         return taskList;
     }

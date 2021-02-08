@@ -29,4 +29,12 @@ public abstract class Task {
     public void completeTask() {
         this.isDone = true;
     }
+
+    @Override
+    public boolean equals(Object t){
+        if (!(t instanceof Task)) {
+            return false;
+        }
+        return this.toString().equals(t.toString());
+    }
 }
