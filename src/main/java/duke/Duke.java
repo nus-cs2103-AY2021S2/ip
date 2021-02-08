@@ -56,10 +56,11 @@ public class Duke {
         ui.printIntro();
 
         Scanner stdin = new Scanner(System.in);
-        String line = stdin.nextLine();
+        String line;
         boolean end = false;
 
-        while (line != null) {
+        while (stdin.hasNextLine()) {
+            line = stdin.nextLine();
             ui.printHorizontalLine();
 
             getResponse(line);
@@ -69,8 +70,6 @@ public class Duke {
             if (end) {
                 break;
             }
-
-            line = stdin.nextLine();
         }
     }
 
