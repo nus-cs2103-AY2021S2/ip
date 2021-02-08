@@ -51,11 +51,13 @@ public class DateTimeConverter {
             String from = inputSplit[2].substring(5, inputSplit[2].length() - 1).toUpperCase();
             LocalTime formattedFrom = LocalTime.parse(from, timeFormatter);
             return formattedFrom;
-        } else {
+        } else if (s.equals(("to"))) {
             String to = inputSplit[3].substring(3).toUpperCase();
             LocalTime formattedTo = LocalTime.parse(to, timeFormatter);
             return formattedTo;
 
+        } else {
+            throw(new IllegalArgumentException());
         }
     }
 }

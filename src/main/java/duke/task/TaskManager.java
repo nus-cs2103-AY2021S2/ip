@@ -1,11 +1,13 @@
 package duke.task;
 
 import java.io.IOException;
-//import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import duke.datetime.DateTimeConverter;
 import duke.error.ErrorChecker;
+import duke.error.IllegalTaskException;
 import duke.file.FileSaver;
 
 /**
@@ -26,6 +28,7 @@ public class TaskManager {
     private boolean isTodo;
     private boolean isDeadline;
     private boolean isEvent;
+    private boolean isNewTask;
 
     private final String BYE_RESPONSE = "Bye! See you soon :)";
     private final String HELP_RESPONSE = "list: list all tasks\ndone {i}: mark task at position {i} as done\n"
@@ -56,22 +59,24 @@ public class TaskManager {
         ErrorChecker e = new ErrorChecker(input, tasks);
         categoriseTask(input);
 
+        if (!e.isValid()) {
+            return e.getMessage();
+        }
+
         if (isBye) {
             return BYE_RESPONSE;
         } else if (isHelp) {
             return HELP_RESPONSE;
         } else if (isList) {
             return listEvents();
-        } else if (e.isValid()) {
-            if (isDone) {
-                return markDone(input);
-            } else if (isDelete) {
-                return deleteTask(input);
-            } else if (isFind) {
-                return findTasks(input);
-            } else {
-                return addNewTask(input);
-            }
+        } else if (isDone) {
+            return markDone(input);
+        } else if (isDelete) {
+            return deleteTask(input);
+        } else if (isFind) {
+            return findTasks(input);
+        } else if (isNewTask) {
+            return addNewTask(input);
         } else {
             return e.getMessage();
         }
@@ -83,7 +88,7 @@ public class TaskManager {
      *
      * @param input User input.
      */
-    public void categoriseTask(String input) {
+    private void categoriseTask(String input) {
         isBye = input.equals("bye");
         isHelp = input.equals("help");
         isList = input.equals("list");
@@ -93,6 +98,7 @@ public class TaskManager {
         isTodo = input.startsWith("todo");
         isDeadline = input.startsWith("deadline");
         isEvent = input.startsWith("event");
+        isNewTask = isTodo || isDeadline || isEvent;
     }
 
     /**
@@ -101,7 +107,7 @@ public class TaskManager {
      * @param input User input.
      * @return Feedback message letting user know task was successfully marked as done.
      */
-    public String markDone(String input) {
+    private String markDone(String input) {
         Task task = tasks.get(Integer.parseInt(input.substring(5)) - 1);
         task.markAsDone();
         return "Good job! You got " + task.description + " done!";
@@ -114,24 +120,31 @@ public class TaskManager {
      * @param input User input.
      * @return Feedback message letting user know task was successfully added to task list.
      */
-    public String addNewTask(String input) {
+    private String addNewTask(String input) {
         Task newTask;
+        String[] inputSplit = input.split("/");
+
         if (isTodo) {
             newTask = new TodoTask(input.substring(5));
         } else if (isDeadline) {
-            String[] inputSplit = input.split("/");
-            assert inputSplit.length == 2 : "deadline task input formatted wrongly";
+            String description = inputSplit[0].substring(9, inputSplit[0].length() - 1);
             DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
-            newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1),
-                    dateTimeConverter.convertDate());
+            LocalDate by = dateTimeConverter.convertDate();
+
+            newTask = new DeadlineTask(description, by);
+        } else if (isEvent) {
+            String description = inputSplit[0].substring(6, inputSplit[0].length() - 1);
+
+            DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
+            LocalDate on = dateTimeConverter.convertDate();
+            LocalTime from = dateTimeConverter.convertTime("from");
+            LocalTime to = dateTimeConverter.convertTime("to");
+
+            newTask = new EventTask(description, on, from, to);
         } else {
-            String[] inputSplit = input.split("/");
-            assert inputSplit.length == 4 : "event task input formatted wrongly";
-            DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
-            newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1),
-                    dateTimeConverter.convertDate(), dateTimeConverter.convertTime("from"),
-                    dateTimeConverter.convertTime("to"));
+            throw(new IllegalTaskException("", ""));
         }
+
         tasks.add(newTask);
 
         try {
@@ -150,7 +163,7 @@ public class TaskManager {
      * @param input User input.
      * @return Feedback message letting user know task was successfully deleted from task list.
      */
-    public String deleteTask(String input) {
+    private String deleteTask(String input) {
         Task task = tasks.get(Integer.parseInt(input.substring(7)) - 1);
         tasks.remove(Integer.parseInt(input.substring(7)) - 1);
 
@@ -170,7 +183,7 @@ public class TaskManager {
      * @param input User input.
      * @return List of tasks containing the keyword in their description.
      */
-    public String findTasks(String input) {
+    private String findTasks(String input) {
         String description = input.substring(5);
         String output = "Here is a list of your tasks that contain " + description + ":";
 
@@ -188,7 +201,7 @@ public class TaskManager {
      *
      * @return Task list.
      */
-    public String listEvents() {
+    private String listEvents() {
         String output = "Here is a list of your tasks:";
 
         for (int i = 0; i < tasks.size(); i++) {
