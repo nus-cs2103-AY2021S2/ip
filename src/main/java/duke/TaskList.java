@@ -43,9 +43,9 @@ public class TaskList {
             throw new DukeException("OOPS!!! There is no item at that position.");
         }
         
-        Task t = taskList.remove(i-1);
+        Task task = taskList.remove(i-1);
         
-        return t;
+        return task;
     }
     
     /**
@@ -58,10 +58,10 @@ public class TaskList {
             throw new DukeException("OOPS!!! There is no item at that position.");
         }
         
-        Task t = taskList.get(i-1);
-        t.mark();
+        Task task = taskList.get(i-1);
+        task.mark();
         
-        return t;
+        return task;
     }
     
     /**
