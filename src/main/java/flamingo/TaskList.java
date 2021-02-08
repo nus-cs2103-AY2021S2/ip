@@ -34,7 +34,7 @@ public class TaskList {
      * Prints out the tasks in the ArrayList.
      */
     public String listTasks() {
-        String list = "";
+        String list = "Here is your to-do list:\n";
 
         for (int i = 1; i < numTasks + 1; i++) {
             list += (i + ". " + tasks.get(i - 1).toString() + "\n");

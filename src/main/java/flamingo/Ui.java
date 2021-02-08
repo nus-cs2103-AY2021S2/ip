@@ -93,4 +93,16 @@ public class Ui {
         return "All tasks have been archived!\n"
                 + "You have archived " + numArchivedTasks + " tasks.";
     }
+
+    /**
+     * Returns confirmation that a task has been removed from archive.
+     *
+     * @param taskToUnarchiveString String of the task that was unarchived.
+     * @param numArchivedTasks Total number of tasks archived.
+     * @return String that a task has been unarchived.
+     */
+    public static String unarchiveTask(String taskToUnarchiveString, int numArchivedTasks) {
+        return "Okay, I've unarchived this task:\n" + taskToUnarchiveString
+                + "\nYou now have " + numArchivedTasks + " tasks in the archive.";
+    }
 }

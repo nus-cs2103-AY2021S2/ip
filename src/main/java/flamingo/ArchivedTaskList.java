@@ -27,7 +27,7 @@ public class ArchivedTaskList extends TaskList {
      * Prints out the tasks in the ArrayList.
      */
     public String listArchivedTasks() {
-        String list = "";
+        String list = "Here is the archive:\n";
 
         for (int i = 1; i < numArchivedTasks + 1; i++) {
             list += (i + ". " + archivedTasks.get(i - 1).toString() + "\n");
@@ -60,5 +60,33 @@ public class ArchivedTaskList extends TaskList {
             numArchivedTasks++;
         }
         return Ui.allTasksArchived(numArchivedTasks);
+    }
+
+    /**
+     * Removes a task from the archive and adds it back to the todo list.
+     *
+     * @param taskNumber Task Number of the task.
+     * @return String confirming that the task has been unarchived.
+     */
+    public String unarchiveTask(int taskNumber) {
+        String taskString = getTaskString(taskNumber);
+        addTaskToList(taskNumber);
+        removeTaskFromArchive(taskNumber);
+        return Ui.unarchiveTask(taskString, numArchivedTasks);
+    }
+
+    private void addTaskToList(int taskNumber) {
+        Task taskToUnarchive = archivedTasks.get(taskNumber - 1);
+        TaskList.tasks.add(TaskList.getNumTasks(), taskToUnarchive);
+        TaskList.numTasks++;
+    }
+
+    private void removeTaskFromArchive(int taskNumber) {
+        archivedTasks.remove(taskNumber - 1);
+        numArchivedTasks--;
+    }
+
+    private String getTaskString(int taskNumber) {
+        return archivedTasks.get(taskNumber - 1).toString();
     }
 }

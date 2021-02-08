@@ -80,6 +80,10 @@ public class Parser {
             return archivedTasks.listArchivedTasks();
         } else if (userInput.equals("archive all")) {
             return activeTasks.archiveAllTasks();
+        } else if (userInput.contains("unarchive")) {
+            int taskNumber = getUnarchiveTaskNumFrom(userInput);
+            checkUnarchiveValidity(taskNumber);
+            return archivedTasks.unarchiveTask(taskNumber);
         } else if (userInput.contains("archive")) {
             // To archive a task
             int taskNumber = getArchivedTaskNumFrom(userInput);
@@ -92,6 +96,12 @@ public class Parser {
 
     private static void checkArchiveValidity(int taskNumber) {
         if (taskNumber <= 0 || taskNumber > TaskList.numTasks) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private static void checkUnarchiveValidity(int taskNumber) {
+        if (taskNumber <= 0 || taskNumber > ArchivedTaskList.numArchivedTasks) {
             throw new IndexOutOfBoundsException();
         }
     }
@@ -176,5 +186,9 @@ public class Parser {
 
     private static int getArchivedTaskNumFrom(String userInput) {
         return Integer.parseInt(userInput.substring(8));
+    }
+
+    private static int getUnarchiveTaskNumFrom(String userInput) {
+        return Integer.parseInt(userInput.substring(10));
     }
 }
