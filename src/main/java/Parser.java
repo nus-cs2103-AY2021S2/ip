@@ -42,6 +42,7 @@ public class Parser {
     } else if (input.split(" ")[0].equals("delete")) {
       outputMessage = deleteTask(input, tasklist, outputMessage);
       store.save(tasklist.getTasklist());
+
     } else {
       try {
         throw new UnknownInputError("☹ OOPS!!! I'm sorry, "
@@ -125,9 +126,14 @@ public class Parser {
     if (input.length() != 4) {
       String inputDes = this.inputEventDescription(input);
       Todo task = new Todo(inputDes);
-      output += "Got it. I've added this task: " + "\n";
-      taskList.getTasklist().add(task);
-      output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
+      if (detectDuplicate(task, taskList) == 1) {
+        output += "This task is already inside!";
+      }
+      if (detectDuplicate(task, taskList) != 1) {
+        output += "Got it. I've added this task: " + "\n";
+        taskList.getTasklist().add(task);
+        output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
+      }
     }
     return output;
   }
@@ -150,14 +156,19 @@ public class Parser {
     }
     if (input.length() != 8) {
       Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
-                      input.split("/by ")[1]);
+              input.split("/by ")[1]);
       if (task.dateError) {
         return "";
       } else {
-        output += "Got it. I've added this task: " + "\n";
-        taskList.addList(task);
-        output += task + "\n";
-        output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
+        if (detectDuplicate(task, taskList) == 1) {
+          output += "This task is already inside!";
+        }
+        if (detectDuplicate(task, taskList) != 1) {
+          output += "Got it. I've added this task: " + "\n";
+          taskList.addList(task);
+          output += task + "\n";
+          output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
+        }
       }
     }
     return output;
@@ -179,10 +190,15 @@ public class Parser {
     if (input.length() != 5) {
       Event task = new Event(input.split(" ")[1] + " " + input.split(" ")[2],
                       input.split("/at ")[1]);
-      output += "Got it. I've added this task: " + "\n";
-      taskList.getTasklist().add(task);
-      output += task + "\n";
-      output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
+      if (detectDuplicate(task, taskList) == 1) {
+        output += "This task is already inside!";
+      }
+      if (detectDuplicate(task, taskList) != 1) {
+        output += "Got it. I've added this task: " + "\n";
+        taskList.getTasklist().add(task);
+        output += task + "\n";
+        output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
+      }
     }
     return output;
   }
@@ -226,10 +242,21 @@ public class Parser {
     return output;
   }
 
-
-
-
-
+  /**
+   * returns 1 if task is already inside the tasklist or 0 if it is absent.
+   * @ param input The new task object that has been instantiated
+   * @ param taskList  tasklist object which contains the list where all the task is stored
+   */
+  public Integer detectDuplicate(Task input, TaskList taskList) {
+    for (Task t : taskList.getTasklist()) {
+      if (t.toString().equals(input.toString())) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+    return 0;
+  }
 
 }
 
