@@ -13,12 +13,13 @@ public class ListCommand extends Command {
 
     private final String date;
 
-    public ListCommand() {
-        this.date = null;
-    }
+    public ListCommand(String ... date) {
+        String _date = null;
+        if (date.length > 0) {
+            _date = date[0];
+        }
 
-    public ListCommand(String date) {
-        this.date = date;
+        this.date = _date;
     }
 
     /**
