@@ -29,6 +29,6 @@ public class Duke{
     }
 
     public String greeting() {
-        return ui.greetingMessage();
+        return ui.greeting();
     }
 }
