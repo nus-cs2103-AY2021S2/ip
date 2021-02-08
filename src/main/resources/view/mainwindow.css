@@ -1,0 +1,37 @@
+.main {
+    -fx-background-color: #fff;
+    -fx-background-position: center;
+    -fx-background-size: 100% 100% auto;
+}
+
+.scrollpane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.vbox {
+    -fx-background-color: transparent;
+}
+
+.label {
+    -fx-text-fill: #8f7240;
+    -fx-font-family: "Helvetica";
+}
+
+.button {
+    -fx-background-color:
+        linear-gradient(#b56868 0%, #702323 25%, #a93737 75%, #d27575 100%);
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0.0, 0.0);
+}
+
+.userinput {
+    -fx-background-color:  #eee;
+    -fx-text-fill: #8f7240;
+    -fx-font-size: 12px;
+    -fx-font-family: "Consolas";
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+}

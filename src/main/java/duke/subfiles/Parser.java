@@ -18,9 +18,8 @@ import duke.command.PrintCommand;
 public class Parser {
 
     /**
-     * Parses the user input as either an ExitCommand, PrintCommand, FindCommand,
-     * DoneCommand, DeleteCommand, or AddCommand, based on the
-     * user input.
+     * Parses the user input as either an ExitCommand, PrintCommand, FindCommand, DoneCommand,
+     * DeleteCommand, or AddCommand, based on the user input.
      *
      * @param s The user input.
      * @return A Command, whose type is based on the user input.

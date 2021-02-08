@@ -12,6 +12,10 @@ import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ *
+ * @author  arsatis
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,23 +28,31 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Image chadRImage = new Image(this.getClass().getResourceAsStream("/images/DaChadR.png"));
+    private Image chadLImage = new Image(this.getClass().getResourceAsStream("/images/DaChadL.png"));
+    private Image soyjakCry = new Image(this.getClass().getResourceAsStream("/images/DaSoyjakCry.png"));
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    // this will be used in the near future
+    private Image soyjakSmirk = new Image(this.getClass().getResourceAsStream("/images/DaSoyjakSmirk.png"));
 
     /**
-     * A placeholder Javadoc comment.
+     * Initializes the GUI.
      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the duke object in the Main class to be the duke object in the GUI.
+     *
+     * @param d The duke object in the Main class.
+     */
     public void setDuke(Duke d) {
         duke = d;
         duke.getStorage().loadData(duke.getTaskList());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! What can I do for you?", dukeImage)
+                DialogBox.getDukeDialog("Hello! What can I do for you?", chadLImage)
         );
     }
 
@@ -52,9 +64,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, chadRImage),
+                DialogBox.getDukeDialog(response, response.equals("I'm sorry, but I don't know what that means.")
+                        ? soyjakCry
+                        : chadLImage)
         );
         userInput.clear();
 
@@ -66,10 +81,11 @@ public class MainWindow extends AnchorPane {
                     Platform.exit();
                 } catch (InterruptedException e) {
                     dialogContainer.getChildren().addAll(
-                            DialogBox.getUserDialog(e.getMessage(), dukeImage)
+                            DialogBox.getUserDialog(e.getMessage(), chadRImage)
                     );
                 }
             });
         }
     }
+
 }
