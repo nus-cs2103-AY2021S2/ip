@@ -40,6 +40,7 @@ public class Parser {
         String potentialCommand = (endIndex == -1) ? input : input.substring(0, endIndex);
         Command command;
 
+        assert(!potentialCommand.equals(""));
         if (potentialCommand.equalsIgnoreCase("TODO")) {
             String description = (endIndex == -1) ? "" : input.substring(endIndex).strip();
             command = new TodoCommand(description);
