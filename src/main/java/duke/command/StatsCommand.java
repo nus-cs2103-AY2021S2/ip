@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * The StatsCommand class encapsulates information and methods about a StatsCommand.
@@ -26,7 +26,7 @@ public class StatsCommand implements Command {
     }
 
     /**
-     * Processes ...
+     * Processes the Stats command by collecting statistics from the Tasklist.
      *
      * @param storage The storage object that writes data to the saved data file of tasks.
      * @param taskList The list of tasks.
@@ -38,9 +38,15 @@ public class StatsCommand implements Command {
         assert taskList != null : "Tasklist cannot be null";
 
         if (fullCmdStrArray.length != 1) { // handle stats with unnecessary parameters
-            throw new DukeException("TEMP STATS ERROR LOLOL");
+            throw new DukeException(ui.statsCmdError());
         }
-        return (ui.returnStatsMessage(taskList));
+
+        int numTotalTasks = taskList.getSize();
+        int numDoneTasks = taskList.getNumDoneTasks();
+        int numDoneTasksWithinWeek = taskList.getNumDoneTasksWithinWeek();
+        int numUpcomingTasksWithinWeek = taskList.getNumUpcomingTasksWithinWeek();
+
+        return (ui.returnStatsMessage(numTotalTasks, numDoneTasks, numDoneTasksWithinWeek, numUpcomingTasksWithinWeek));
     }
 
 

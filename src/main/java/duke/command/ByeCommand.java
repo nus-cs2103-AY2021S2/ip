@@ -4,7 +4,7 @@ import duke.DukeException;
 import duke.Main;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class ByeCommand implements Command {
     private Ui ui;

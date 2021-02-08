@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.ui.MainWindow;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;

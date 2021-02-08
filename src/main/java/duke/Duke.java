@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.ui.Ui;
 
 /**
  * The Duke class is the entry point into the chatbot program.

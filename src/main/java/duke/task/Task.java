@@ -46,6 +46,11 @@ public class Task {
         return true;
     }
 
+    /**
+     * Checks if a task was completed within the past one week from the current date and time.
+     *
+     * @return True if task was completed within the past one week, false otherwise.
+     */
     public boolean isDoneWithinPastWeek() {
         assert doneDate != null : "Done Date cannot be null";
         LocalDateTime taskDoneDateTime = this.doneDate;

@@ -7,8 +7,8 @@ import java.time.format.DateTimeParseException;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.EventTask;
+import duke.ui.Ui;
 
 /**
  * The EventCommand class encapsulates information and methods about a EventCommand.

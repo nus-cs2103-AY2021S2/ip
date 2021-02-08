@@ -1,8 +1,10 @@
-package duke;
+package duke.ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.DukeException;
+import duke.TaskList;
 import duke.task.Task;
 
 /**
@@ -15,9 +17,8 @@ public class Ui {
      * Returns the chatbot's greeting message when a user starts the chatbot.
      */
     public String returnGreeting() {
-        String greeting = "Hello! I'm Chandler, here to help you keep track of measly tasks"
+        return "Hello! I'm Chandler, here to help you keep track of measly tasks"
                 + " in your mundane human life. How may I help you today?";
-        return greeting;
     }
 
     /**
@@ -53,9 +54,8 @@ public class Ui {
      * @return String containing error message of invalid list command.
      */
     public String listCmdError() {
-        String errorMsg = "Sorry human, I do not understand your command."
-                + " To access your list, enter 'list' with no additional descriptions.";
-        return errorMsg;
+        return "Sorry human, I do not understand your command."
+                + " To view your list, enter 'list' with no additional descriptions.";
     }
 
     /**
@@ -64,9 +64,8 @@ public class Ui {
      * @return String containing error message of invalid done command.
      */
     public String doneCmdTooManyArgsError() {
-        String errorMsg = "Sorry human, please enter only one task for me to mark as complete."
+        return "Sorry human, please enter only one task for me to mark as complete."
                 + "I am unable to process more than one task at one time.";
-        return errorMsg;
     }
 
     /**
@@ -75,8 +74,7 @@ public class Ui {
      * @return String containing error message of invalid done command.
      */
     public String doneCmdNoArgsError() {
-        String errorMsg = "Sorry human, please enter a task number.";
-        return errorMsg;
+        return "Sorry human, please enter a task number.";
     }
 
     /**
@@ -85,9 +83,8 @@ public class Ui {
      * @return String containing error message of invalid done command.
      */
     public String doneCmdInvalidArgsError() {
-        String errorMsg = "Sorry human, please enter the number of the task you want me to"
+        return "Sorry human, please enter the number of the task you want me to"
                 + " mark as complete.";
-        return errorMsg;
     }
 
     /**
@@ -96,10 +93,9 @@ public class Ui {
      * @return String containing error message of invalid event command.
      */
     public String eventFormatError() {
-        String eErrorMsg = "Invalid format. Please enter as such:"
+        return "Invalid format. Please enter as such:"
                 + "\n"
                 + "event <EVENT_NAME> /at <DATE_TIME>";
-        return eErrorMsg;
     }
 
     /**
@@ -117,10 +113,9 @@ public class Ui {
      * @return String containing error message of invalid deadline command.
      */
     public String deadlineFormatError() {
-        String dErrorMsg = "Invalid format. Please enter as such:"
+        return "Invalid format. Please enter as such:"
                 + "\n"
                 + "deadline <TASK_NAME> /by <DATE_TIME>";
-        return dErrorMsg;
     }
 
     /**
@@ -129,10 +124,9 @@ public class Ui {
      * @return String containing error message of invalid date input.
      */
     public String dateFormatError() {
-        String dateErrorMsg = "Invalid date format. Please enter as such:"
+        return "Invalid date format. Please enter as such:"
                 + "\n"
                 + "yyyy-MM-dd HHmm (e.g. 2019-10-15 1800)";
-        return dateErrorMsg;
     }
 
     /**
@@ -141,10 +135,9 @@ public class Ui {
      * @return String containing error message of invalid delete command.
      */
     public String deleteCmdTooManyArgsError() {
-        String errorMsg = "Sorry human, please enter only one task for me to delete."
+        return "Sorry human, please enter only one task for me to delete."
                 + "\n"
                 + "I am unable to process more than one task at one time.";
-        return errorMsg;
     }
 
     /**
@@ -231,7 +224,7 @@ public class Ui {
     }
 
     /**
-     * Prints added task to list message.
+     * Returns added task to list message.
      *
      * @param task Task that has just been added to list.
      * @param taskList List of all tasks.
@@ -243,17 +236,18 @@ public class Ui {
                 + (taskList.getSize() == 1 ? " task " : " tasks ") + "in your list." + "\n";
     }
 
-    /**
-     * Prints stats message.
-     *
-     * @param taskList List of all tasks.
-     */
-    public String returnStatsMessage(TaskList taskList) {
-        int numTotalTasks = taskList.getSize();
-        int numDoneTasks = taskList.getNumDoneTasks();
-        int numDoneTasksWithinWeek = taskList.getNumDoneTasksWithinWeek();
-        int numUpcomingTasksWithinWeek = taskList.getNumUpcomingTasksWithinWeek();
 
+    /**
+     * Returns the stats message.
+     *
+     * @param numTotalTasks The total number of tasks.
+     * @param numDoneTasks The total number of done tasks.
+     * @param numDoneTasksWithinWeek The total number of tasks that were completed within the past week.
+     * @param numUpcomingTasksWithinWeek The total number of tasks to be completed in the next week.
+     * @return
+     */
+    public String returnStatsMessage(int numTotalTasks, int numDoneTasks,
+                                     int numDoneTasksWithinWeek, int numUpcomingTasksWithinWeek) {
         return "Here are your stats:" + "\n"
                 + PADDING + "Total Tasks: " + numTotalTasks + "\n"
                 + PADDING + "Total Done Tasks: " + numDoneTasks + "\n"
@@ -263,10 +257,19 @@ public class Ui {
     }
 
     /**
+     * Returns an error message in a string when a user inputs the stats command with the wrong format.
+     *
+     * @return String containing error message of invalid stats command.
+     */
+    public String statsCmdError() {
+        return "Sorry human, I do not understand your command."
+                + " To view your statistics, enter 'stats' with no additional descriptions.";
+    }
+
+    /**
      * Returns goodbye message.
      */
     public String returnBye() {
-        String farewell = "Bye! Hope you complete your tasks!";
-        return farewell;
+        return "Bye! Hope you complete your tasks!";
     }
 }

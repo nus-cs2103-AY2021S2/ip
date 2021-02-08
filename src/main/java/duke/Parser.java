@@ -11,6 +11,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.StatsCommand;
 import duke.command.TodoCommand;
+import duke.ui.Ui;
 
 /**
  *  The Parser class encapsulates methods to handle user commands.

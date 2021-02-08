@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import duke.DukeException;
 import duke.StorageStub;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.DeadlineTask;
 
 public class DeadlineCommandTest {
