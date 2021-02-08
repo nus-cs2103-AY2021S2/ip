@@ -23,6 +23,7 @@ import javafx.stage.Stage;
  * @author Benedict Khoo
  */
 public class Gui extends AnchorPane implements Ui {
+    private static final String MAIN_WINDOW_FXML_PATH = "/view/MainWindow.fxml";
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/YingJen.jpg"));
     private final Image appIcon = new Image(this.getClass().getResourceAsStream("/images/YingJen.jpg"));
@@ -57,7 +58,7 @@ public class Gui extends AnchorPane implements Ui {
                 return;
             }
 
-            dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+            addUserDialogBox(input);
             userInput.clear();
 
             inputHandler.accept(input);
@@ -86,11 +87,11 @@ public class Gui extends AnchorPane implements Ui {
      */
     @Override
     public void showCommandResult(CommandResult result) {
-        if (result.hasFeedback()) {
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(result.getFeedback(), dukeImage)
-            );
+        if (!result.hasFeedback()) {
+            return;
         }
+
+        addDukeDialogBox(result.getFeedback());
     }
 
     /**
@@ -100,9 +101,7 @@ public class Gui extends AnchorPane implements Ui {
      */
     @Override
     public void showError(String errMsg) {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(errMsg, dukeImage)
-        );
+        addDukeDialogBox(errMsg);
     }
 
     /**
@@ -110,9 +109,7 @@ public class Gui extends AnchorPane implements Ui {
      */
     @Override
     public void showFarewell() {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Goodbye, cruel world!", dukeImage)
-        );
+        addDukeDialogBox("Goodbye, cruel world!");
     }
 
     /**
@@ -120,10 +117,8 @@ public class Gui extends AnchorPane implements Ui {
      */
     @Override
     public void showGreeting() {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hello, I am Ying Jen.\n"
-                        + "How may I help you?", dukeImage)
-        );
+        addDukeDialogBox("Hello, I am Ying Jen.\n"
+                + "How may I help you?");
     }
 
     /**
@@ -133,9 +128,7 @@ public class Gui extends AnchorPane implements Ui {
      */
     @Override
     public void showMessage(String msg) {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(msg, dukeImage)
-        );
+        addDukeDialogBox(msg);
     }
 
     /**
@@ -145,7 +138,7 @@ public class Gui extends AnchorPane implements Ui {
      */
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource(MAIN_WINDOW_FXML_PATH));
             fxmlLoader.setController(this);
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
@@ -156,6 +149,18 @@ public class Gui extends AnchorPane implements Ui {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void addDukeDialogBox(String msg) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(msg, dukeImage)
+        );
+    }
+
+    private void addUserDialogBox(String msg) {
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(msg, userImage)
+        );
     }
 
     private boolean isValid(String input) {

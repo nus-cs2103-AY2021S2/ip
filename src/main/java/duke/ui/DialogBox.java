@@ -21,6 +21,8 @@ import javafx.scene.shape.Circle;
  * @author Benedict Khoo
  */
 public class DialogBox extends HBox {
+    private static final String DIALOG_BOX_FXML_PATH = "/view/DialogBox.fxml";
+
     @FXML
     private Label dialog;
     @FXML
@@ -29,7 +31,7 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource(DIALOG_BOX_FXML_PATH));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -37,12 +39,10 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        initDisplayPictureMask();
+
         dialog.setText(text);
         displayPicture.setImage(img);
-        double centerX = displayPicture.getFitWidth() / 2.0;
-        double centerY = displayPicture.getFitHeight() / 2.0;
-        double radius = Math.min(displayPicture.getFitWidth(), displayPicture.getFitHeight()) / 2.0;
-        circleMask = new Circle(centerX, centerY, radius);
         displayPicture.setClip(circleMask);
     }
 
@@ -78,5 +78,12 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    private void initDisplayPictureMask() {
+        double centerX = displayPicture.getFitWidth() / 2.0;
+        double centerY = displayPicture.getFitHeight() / 2.0;
+        double radius = Math.min(displayPicture.getFitWidth(), displayPicture.getFitHeight()) / 2.0;
+        circleMask = new Circle(centerX, centerY, radius);
     }
 }

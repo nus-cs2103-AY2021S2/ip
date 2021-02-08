@@ -41,6 +41,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate date, boolean isDone) {
         super(description, TYPE, isDone);
+        assert date != null : "date must not be null!";
         this.date = date;
     }
 
@@ -87,11 +88,12 @@ public class Deadline extends Task {
      */
     public static boolean isDeadline(String serialized) {
         String[] fields = serialized.split(SEPARATOR);
-        if (fields.length > 0) {
-            String type = fields[0];
-            return type.equals(TYPE);
+        if (fields.length == 0) {
+            return false;
         }
-        return false;
+
+        String type = fields[0];
+        return type.equals(TYPE);
     }
 
     /**
