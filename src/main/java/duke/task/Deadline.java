@@ -28,7 +28,7 @@ public class Deadline extends Task {
     @Override
     public String toSaveFormat() {
         String status = super.isDone ? "1" : "0";
-        return String.format("D|%s|%s\n", status, super.description, this.time);
+        return String.format("D|%s|%s|%s\n", status, super.description, this.time);
     }
 
     /**
