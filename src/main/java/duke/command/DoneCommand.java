@@ -7,6 +7,9 @@ public class DoneCommand extends Command {
 
     public DoneCommand(String[] commandSplit) {
         super(commandSplit);
+        assert commandSplit.length > 1 && commandSplit[0].equals("done")
+                && commandSplit[1].chars().allMatch(Character::isDigit)
+                : "Must have done keyword and integer as argument";
     }
 
     /**

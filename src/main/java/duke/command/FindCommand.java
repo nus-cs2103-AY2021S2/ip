@@ -12,6 +12,7 @@ public class FindCommand extends Command {
 
     public FindCommand(String[] commandSplit) {
         super(commandSplit);
+        assert commandSplit.length >= 1 && commandSplit[0].equals("find"): "Must have find keyword.";
     }
 
     /**
