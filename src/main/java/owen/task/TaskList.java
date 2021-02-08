@@ -30,6 +30,7 @@ public class TaskList {
 
     /**
      * Gets number of tasks in task list.
+     * 
      * @return Number of tasks in task list.
      */
     public int getNumTasks() {
@@ -38,6 +39,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
+     * 
      * @param task Task to add to the list.
      * @return Copy of the task list with the new task added.
      * @throws OwenException Task could not be parsed.
@@ -82,6 +84,7 @@ public class TaskList {
 
     /**
      * Gets the nth task from the list.
+     * 
      * @param taskNumber The number of the task to get.
      * @return The nth task of the list.
      */
@@ -92,6 +95,7 @@ public class TaskList {
 
     /**
      * Marks the nth task as done.
+     * 
      * @param taskNumber The number of the task to mark as done.
      * @return Copy of the task list with the nth task marked as done.
      * @throws OwenException Task number does not exist.
@@ -109,6 +113,7 @@ public class TaskList {
 
     /**
      * Deletes the nth task from the task list.
+     * 
      * @param taskNumber The number of the task to delete.
      * @return Copy of the task list with the nth task deleted.
      * @throws OwenException Task number does not exist.
@@ -126,6 +131,7 @@ public class TaskList {
 
     /**
      * Finds tasks that contain a search string.
+     * 
      * @param searchString String to search within task descriptions.
      * @return Tasks that contain search string.
      */
@@ -145,7 +151,8 @@ public class TaskList {
     }
 
     /**
-     * Serialize TaskList into a String.
+     * Serializes TaskList into a String.
+     * 
      * @return Serialized version of TaskList as a String.
      */
     public String serialize() {
@@ -157,7 +164,8 @@ public class TaskList {
     }
 
     /**
-     * Deserialize Task and add it to TaskList.
+     * Deserializes Task and add it to TaskList.
+     * 
      * @param taskString Task string to deserialize.
      * @return Updated TaskList with deserialized task added.
      * @throws OwenException Task could not be deserialized.

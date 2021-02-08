@@ -9,14 +9,15 @@ public class Ui {
     private final Scanner scanner;
 
     /**
-     * Create new Terminal UI for handling user input and output.
+     * Creates new Terminal UI for handling user input and output.
      */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Output a formatted response to standard output.
+     * Outputs a formatted response to standard output.
+     * 
      * @param response Raw unformatted response string.
      */
     public void outputResponse(String response) {
@@ -25,7 +26,8 @@ public class Ui {
     }
 
     /**
-     * Get user input from standard input.
+     * Gets user input from standard input.
+     * 
      * @return User input string.
      */
     public String getInput() {

@@ -6,6 +6,7 @@ package owen;
 public class OwenException extends Exception {
     /**
      * Creates new OwenException with a message.
+     * 
      * @param message Message to attach to this exception.
      */
     public OwenException(String message) {

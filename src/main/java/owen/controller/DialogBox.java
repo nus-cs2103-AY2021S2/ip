@@ -49,6 +49,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates new user dialog box with dialog text on the left and avatar image on the right.
+     * 
      * @param text User dialog text.
      * @param img User avatar image.
      * @return New user dialog box.
@@ -59,6 +60,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates new bot dialog box with dialog text on the right and avatar image on the left.
+     * 
      * @param text Bot dialog text.
      * @param img Bot avatar image.
      * @return New bot dialog box.

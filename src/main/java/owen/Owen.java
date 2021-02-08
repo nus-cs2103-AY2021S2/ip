@@ -73,9 +73,9 @@ public class Owen implements Chatbot {
             case LIST:
                 return this.listTasks();
             case DONE:
-                return this.doneTask(parseTaskNumber(command.getArgs()));
+                return this.doneTask(Parser.parseTaskNumber(command.getArgs()));
             case DELETE:
-                return this.deleteTask(parseTaskNumber(command.getArgs()));
+                return this.deleteTask(Parser.parseTaskNumber(command.getArgs()));
             case FIND:
                 return this.findTask(command.getArgs());
             case BYE:
@@ -89,17 +89,9 @@ public class Owen implements Chatbot {
         }
     }
 
-    private static int parseTaskNumber(String taskNumber) throws OwenException {
-        assert taskNumber.length() > 0 : "taskNumber must not be empty";
-        try {
-            return Integer.parseInt(taskNumber);
-        } catch (NumberFormatException exception) {
-            throw new OwenException("Task number must be specified...");
-        }
-    }
-
     /**
      * Adds task to Owen task list.
+     * 
      * @param task Task string to add.
      * @return Copy of Owen updated with new task and response.
      * @throws OwenException Task could not be parsed.
@@ -120,6 +112,7 @@ public class Owen implements Chatbot {
 
     /**
      * Lists tasks in Owen task list.
+     * 
      * @return Copy of Owen updated with new response.
      */
     private Owen listTasks() {
@@ -129,6 +122,7 @@ public class Owen implements Chatbot {
 
     /**
      * Marks task as done in Owen task list.
+     * 
      * @param taskNumber Task number to mark as done.
      * @return Copy of Owen updated with modified task list and response.
      * @throws OwenException Task number does not exist.
@@ -145,6 +139,7 @@ public class Owen implements Chatbot {
 
     /**
      * Delete task from Owen task list.
+     * 
      * @param taskNumber Task number to delete.
      * @return Copy of Owen updated with modified task list and response.
      * @throws OwenException Task number does not exist.
@@ -165,6 +160,7 @@ public class Owen implements Chatbot {
 
     /**
      * Finds task in Owen task list.
+     * 
      * @param searchString Search string to search within tasks.
      * @return Copy of Owen with updated response.
      */

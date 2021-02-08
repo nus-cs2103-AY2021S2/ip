@@ -12,6 +12,7 @@ public class EventTask extends Task {
 
     /**
      * Creates new event task with arguments.
+     * 
      * @param taskArgs Arguments in the format: description /at DD/MM/YYYY HHMM - DD/MM/YYYY HHMM.
      * @throws OwenException Arguments could not be parsed.
      */
@@ -58,7 +59,8 @@ public class EventTask extends Task {
     }
 
     /**
-     * Deserialize string into a EventTask.
+     * Deserializes string into a EventTask.
+     * 
      * @param string String to deserialize.
      * @return EventTask deserialized from string.
      * @throws OwenException Task could not be deserialized.

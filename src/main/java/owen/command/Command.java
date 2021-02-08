@@ -11,6 +11,7 @@ public class Command {
 
     /**
      * Creates new Command.
+     * 
      * @param type Type of the command.
      * @param args Argument string to the command.
      * @param original Original command string.
@@ -23,6 +24,7 @@ public class Command {
 
     /**
      * Gets type of this command.
+     * 
      * @return Type of this command.
      */
     public CommandType getType() {
@@ -31,6 +33,7 @@ public class Command {
 
     /**
      * Gets argument string to this command.
+     * 
      * @return Argument string to this command.
      */
     public String getArgs() {
@@ -38,8 +41,9 @@ public class Command {
     }
 
     /**
-     * Gets original command string
-     * @return Original command string
+     * Gets original command string.
+     * 
+     * @return Original command string.
      */
     public String getOriginal() {
         return this.original;
