@@ -60,13 +60,16 @@ public class Parser {
         possibleTaskInputs.add("event");
         possibleTaskInputs.add("deadline");
         possibleSingleInputs.add("list");
-        if (!possibleActionInputs.contains(input[0]) && !possibleSingleInputs.contains(input[0])
-                && !possibleTaskInputs.contains(input[0]) && !possibleSortInputs.contains(input[0])) {
+        boolean isUnrecognisedInput = !possibleActionInputs.contains(input[0]) && !possibleSingleInputs.contains(input[0])
+                && !possibleTaskInputs.contains(input[0]) && !possibleSortInputs.contains(input[0]);
+        boolean hasNoDescription = (possibleTaskInputs.contains(input[0]) || possibleActionInputs.contains(input[0]))
+                && input.length == 1;
+        boolean hasDescriptionForSingleAction = possibleSingleInputs.contains(input[0]) && input.length > 1;
+        if (isUnrecognisedInput) {
             throw new DukeException("user action is not recognised!");
-        } else if ((possibleTaskInputs.contains(input[0]) || possibleActionInputs.contains(input[0]))
-                && input.length == 1) {
+        } else if (hasNoDescription) {
             throw new DukeException("no description added!");
-        } else if (possibleSingleInputs.contains(input[0]) && input.length > 1) {
+        } else if (hasDescriptionForSingleAction) {
             throw new DukeException("no description should be added for this command!");
         } else if (possibleTaskInputs.contains(input[0])) {
             switch(input[0]) {
@@ -105,19 +108,11 @@ public class Parser {
             try {
                 int number = Integer.parseInt(input[1]);
                 throw new DukeException("A number should not be entered for find");
-            } catch (NumberFormatException ex) {
+            } catch (NumberFormatException ex) { //If the code comes here means the userInput is not a number which is correct
                 System.out.println("Finding...");
             }
         }
     }
 
-    public static void indentInput(String input) {
-        String line = "";
-        for (int i = 0; i < 50; i++) {
-            line = line.concat("_");
-        }
-        System.out.println(line);
-        System.out.println("added: " + input);
-        System.out.println(line);
-    }
+
 }
