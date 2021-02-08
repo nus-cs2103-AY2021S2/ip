@@ -142,15 +142,14 @@ public class Parser {
     private String addTodo(String userInput, boolean isDone) {
         String[] splits = userInput.split("todo ");
         String textToReturn = "";
-        if (splits.length == 2) {
-            String description = splits[1];
-            Todo addedTask = new Todo(description, isDone);
-            tasks.addTask(addedTask);
-            textToReturn += "Got it, I've added this task to the list: \n";
-            textToReturn += "  " + addedTask;
-        } else {
-            textToReturn = new ArgumentException(1).toString();
+        if (splits.length != 2) {
+            return new ArgumentException(1).toString();
         }
+        String description = splits[1];
+        Todo addedTask = new Todo(description, isDone);
+        tasks.addTask(addedTask);
+        textToReturn += "Got it, I've added this task to the list: \n";
+        textToReturn += "  " + addedTask;
         return textToReturn;
     }
 
@@ -166,19 +165,18 @@ public class Parser {
     private String addDeadline(String userInput, boolean isDone) {
         String[] splits = userInput.split("deadline |/by ");
         String textToReturn = "";
-        if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
-            String description = splits[1];
-            String date = splits[2];
-            try {
-                Deadline addedTask = new Deadline(description, isDone, date);
-                tasks.addTask(addedTask);
-                textToReturn += "Got it, I've added this task to the list: \n";
-                textToReturn += "  " + addedTask;
-            } catch (DukeException ex) {
-                textToReturn = ex.toString();
-            }
-        } else {
-            textToReturn = new ArgumentException(2).toString();
+        if ((splits.length != 3) || (splits[1].equals("")) || (splits[2].equals(""))) {
+            return new ArgumentException(2).toString();
+        }
+        String description = splits[1];
+        String date = splits[2];
+        try {
+            Deadline addedTask = new Deadline(description, isDone, date);
+            tasks.addTask(addedTask);
+            textToReturn += "Got it, I've added this task to the list: \n";
+            textToReturn += "  " + addedTask;
+        } catch (DukeException ex) {
+            textToReturn = ex.toString();
         }
         return textToReturn;
     }
@@ -195,19 +193,18 @@ public class Parser {
     private String addEvent(String userInput, boolean isDone) {
         String[] splits = userInput.split("event | /at ");
         String textToReturn = "";
-        if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
-            String description = splits[1];
-            String date = splits[2];
-            try {
-                Event addedTask = new Event(description, isDone, date);
-                tasks.addTask(addedTask);
-                textToReturn += "Got it, I've added this task to the list: \n";
-                textToReturn += "  " + addedTask;
-            } catch (DukeException ex) {
-                textToReturn = ex.toString();
-            }
-        } else {
-            textToReturn = new ArgumentException(3).toString();
+        if ((splits.length != 3) || (splits[1].equals("")) || (splits[2].equals(""))) {
+            return new ArgumentException(3).toString();
+        }
+        String description = splits[1];
+        String date = splits[2];
+        try {
+            Event addedTask = new Event(description, isDone, date);
+            tasks.addTask(addedTask);
+            textToReturn += "Got it, I've added this task to the list: \n";
+            textToReturn += "  " + addedTask;
+        } catch (DukeException ex) {
+            textToReturn = ex.toString();
         }
         return textToReturn;
     }
