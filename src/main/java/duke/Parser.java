@@ -23,35 +23,11 @@ public class Parser {
      * @throws DukeException If given an empty description, empty selection, invalid integer, unrecognized command
      */
     public static Command parse(String text) throws DukeException {
-        String command = command(text);
-        String description = description(text);
+        String command = getCommand(text);
+        String description = getDescription(text);
         Command commandType;
 
-        // Throws exception for ToDo, find, Event and Deadline commands
-        if (command.equals("todo") || command.equals("event") || command.equals("deadline")) {
-            if (description.equals(command)) {
-                //Empty description
-                throw new DukeException(command, DukeExceptionType.EMPTY_DESCRIPTION);
-            }
-        }
-
-        // Throws exception for find command
-        if (command.equals("find")) {
-            if (description.equals(command)) {
-                //Empty keyword
-                throw new DukeException(command, DukeExceptionType.EMPTY_KEYWORD);
-            }
-        }
-
-        // Throws exception for done and delete commands
-        if (command.equals("done") || command.equals("delete")) {
-            if (description.equals(command)) {
-                throw new DukeException(command, DukeExceptionType.EMPTY_SELECTION);
-            } else if (!Utility.isNumeric(description)) {
-                // Selection not numeric
-                throw new DukeException(command, DukeExceptionType.INVALID_INTEGER);
-            }
-        }
+        handleInputErrors(command, description);
 
         switch (command) {
         case "find":
@@ -74,7 +50,7 @@ public class Parser {
             break;
         case "event":
         case "deadline":
-            String date = date(text);
+            String date = getDate(text);
             commandType = new AddCommand(command, description, date);
             break;
         default:
@@ -83,13 +59,13 @@ public class Parser {
         return commandType;
     }
 
-    private static String command(String text) {
+    private static String getCommand(String text) {
         String[] commandLine = text.split(" ");
         return commandLine[0];
     }
 
-    private static String description(String text) {
-        String command = command(text);
+    private static String getDescription(String text) {
+        String command = getCommand(text);
         text = text.replaceFirst(command + " ", "");
         String description = "";
 
@@ -113,8 +89,8 @@ public class Parser {
         return description;
     }
 
-    private static String date(String text) {
-        String command = command(text);
+    private static String getDate(String text) {
+        String command = getCommand(text);
         text = text.replaceFirst(command + " ", "");
         String date = "";
 
@@ -130,6 +106,35 @@ public class Parser {
         }
 
         return date;
+    }
+
+    private static void handleInputErrors(String command, String description) throws DukeException {
+        // Throws exception for ToDo, find, Event and Deadline commands
+        if (command.equals("todo") || command.equals("event") || command.equals("deadline")) {
+            if (description.equals(command)) {
+                //Empty description
+                throw new DukeException(command, DukeExceptionType.EMPTY_DESCRIPTION);
+            }
+        }
+
+        // Throws exception for find command
+        if (command.equals("find")) {
+            if (description.equals(command)) {
+                //Empty keyword
+                throw new DukeException(command, DukeExceptionType.EMPTY_KEYWORD);
+            }
+        }
+
+        // Throws exception for done and delete commands
+        if (command.equals("done") || command.equals("delete")) {
+            if (description.equals(command)) {
+                throw new DukeException(command, DukeExceptionType.EMPTY_SELECTION);
+            }
+            if (!Utility.isNumeric(description)) {
+                // Selection not numeric
+                throw new DukeException(command, DukeExceptionType.INVALID_INTEGER);
+            }
+        }
     }
 
 }

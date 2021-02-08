@@ -22,12 +22,17 @@ public class ListCommand extends Command {
     private String getTaskListContents(TaskList tasks) {
         String contents = "Here are the tasks in your list:";
 
-        for (int i = 1; i <= tasks.size(); i++) {
+        for (int i = 1; i <= tasks.getSize(); i++) {
             Task task = tasks.get(i);
             contents += String.format("\n\t%d.%s", i, task.toString());
         }
 
         return contents;
+    }
+
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
+        output = getTaskListContents(tasks);
     }
 
     /**
@@ -38,16 +43,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
-        output = getTaskListContents(tasks);
+        updateOutput(null, tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

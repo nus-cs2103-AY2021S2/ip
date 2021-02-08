@@ -27,12 +27,17 @@ public class DeleteCommand extends Command {
         int taskNum = Integer.parseInt(selection);
         Task task = tasks.get(taskNum);
         tasks.remove(task);
-        output = "Noted. I've removed this task: \n"
-                + task.toString() + getRemainingTasks(tasks);
+        updateOutput(task, tasks);
     }
 
     private String getRemainingTasks(TaskList tasks) {
-        return "\nNow you have " + tasks.size() + " tasks in the list.";
+        return "\nNow you have " + tasks.getSize() + " tasks in the list.";
+    }
+
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
+        output = "Noted. I've removed this task: \n"
+                + task.toString() + getRemainingTasks(tasks);
     }
 
     /**
@@ -44,21 +49,14 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        if (Integer.parseInt(description) > tasks.size() || Integer.parseInt(description) <= 0) {
-            // Selection out of taskList range
+        boolean isSelectionOutOfBounds = Integer.parseInt(description) > tasks.getSize()
+                || Integer.parseInt(description) <= 0;
+
+        if (isSelectionOutOfBounds) {
             throw new DukeException(command, DukeExceptionType.SELECTION_EXCEED_RANGE);
         }
         deleteProcess(description, tasks);
         storage.save(tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

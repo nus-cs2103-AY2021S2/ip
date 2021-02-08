@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -19,6 +20,11 @@ public class ByeCommand extends Command {
         super.date = "";
     }
 
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
+        output = "Bye. Hope to see you again soon!";
+    }
+
     /**
      * Outputs response to terminal
      *
@@ -27,16 +33,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
-        output = "Bye. Hope to see you again soon!";
+        updateOutput(null, tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return true
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

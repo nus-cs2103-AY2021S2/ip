@@ -94,7 +94,7 @@ public class Storage {
 
         try {
             FileWriter fileWriter = new FileWriter(file, false);
-            for (int i = 1; i <= tasks.size(); i++) {
+            for (int i = 1; i <= tasks.getSize(); i++) {
                 Task task = tasks.get(i);
                 fileWriter.write(task.writeContentFormat() + System.lineSeparator());
             }

@@ -27,6 +27,11 @@ public class DoneCommand extends Command {
         int taskNum = Integer.parseInt(selection);
         Task task = tasks.get(taskNum);
         task.markAsDone();
+        updateOutput(task, tasks);
+    }
+
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
         output = "Nice! I've marked this task as done:\n\t  "
                 + task.toString();
     }
@@ -40,21 +45,14 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        if (Integer.parseInt(description) > tasks.size() || Integer.parseInt(description) <= 0) {
-            // Selection out of taskList range
+        boolean isSelectionOutOfBounds = Integer.parseInt(description) > tasks.getSize()
+                || Integer.parseInt(description) <= 0;
+
+        if (isSelectionOutOfBounds) {
             throw new DukeException(command, DukeExceptionType.SELECTION_EXCEED_RANGE);
         }
         doneProcess(description, tasks);
         storage.save(tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
