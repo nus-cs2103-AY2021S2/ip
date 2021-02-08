@@ -7,7 +7,6 @@ import duke.task.TaskList;
  * Represents a command that lists the given tasks in the TaskList.
  */
 public class ListCommand implements Command {
-
     /**
      * Formats the task list into a human readable format
      *

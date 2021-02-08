@@ -4,8 +4,8 @@ package duke.common;
  * A utility class that consolidates strings used by Duke.
  */
 public final class DukeString {
-    public static final String SEPARATOR = "--------------------------------------";
-    public static final String SEPARATOR_ERR = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    public static final String SEPARATOR = "--------------------------------------\n";
+    public static final String SEPARATOR_ERR = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
 
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String MESSAGE_BYE = "Goodbye!";
