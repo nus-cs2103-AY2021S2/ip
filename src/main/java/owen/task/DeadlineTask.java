@@ -46,7 +46,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Deserialize string into a DeadlineTask.
+     * Deserializes string into a DeadlineTask.
      * 
      * @param string String to deserialize.
      * @return DeadlineTask deserialized from string.

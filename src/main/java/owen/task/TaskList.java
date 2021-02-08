@@ -151,7 +151,7 @@ public class TaskList {
     }
 
     /**
-     * Serialize TaskList into a String.
+     * Serializes TaskList into a String.
      * 
      * @return Serialized version of TaskList as a String.
      */
@@ -164,7 +164,7 @@ public class TaskList {
     }
 
     /**
-     * Deserialize Task and add it to TaskList.
+     * Deserializes Task and add it to TaskList.
      * 
      * @param taskString Task string to deserialize.
      * @return Updated TaskList with deserialized task added.

@@ -36,7 +36,7 @@ public class TodoTask extends Task {
     }
 
     /**
-     * Deserialize string into a TodoTask.
+     * Deserializes string into a TodoTask.
      * 
      * @param string String to deserialize.
      * @return TodoTask deserialized from string.

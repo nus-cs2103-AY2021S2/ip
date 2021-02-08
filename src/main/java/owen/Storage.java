@@ -24,7 +24,7 @@ public class Storage {
     }
 
     /**
-     * Read TaskList from disk.
+     * Reads TaskList from disk.
      * 
      * @return TaskList read from disk.
      */
@@ -50,7 +50,7 @@ public class Storage {
     }
 
     /**
-     * Write TaskList to disk.
+     * Writes TaskList to disk.
      * 
      * @param taskList TaskList to write.
      * @return this Storage.

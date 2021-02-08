@@ -32,14 +32,14 @@ public abstract class Task {
     }
 
     /**
-     * Mark task as done and return copy with updated state.
+     * Marks task as done and return copy with updated state.
      * 
      * @return Copy of task with the state updated to done.
      */
     public abstract Task markAsDone();
 
     /**
-     * Serialize task into a String.
+     * Serializes task into a String.
      * 
      * @return Serialized version of task as string.
      */

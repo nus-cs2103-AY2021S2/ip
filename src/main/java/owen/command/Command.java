@@ -41,9 +41,9 @@ public class Command {
     }
 
     /**
-     * Gets original command string
+     * Gets original command string.
      * 
-     * @return Original command string
+     * @return Original command string.
      */
     public String getOriginal() {
         return this.original;

@@ -59,7 +59,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Deserialize string into a EventTask.
+     * Deserializes string into a EventTask.
      * 
      * @param string String to deserialize.
      * @return EventTask deserialized from string.
