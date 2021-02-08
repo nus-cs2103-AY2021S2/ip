@@ -46,6 +46,7 @@ public class TaskList {
      * @return the Task.Task object
      */
     public task.Task getNthTask(int i) {
+        assert i <= numTasks && i > 0 : "Task to retrieve not within valid range";
         return this.taskList.get(i - 1);
     }
 
@@ -72,8 +73,11 @@ public class TaskList {
         LocalDateTime dateTimeObject;
 
         matcher.find();
+
+        assert matcher.group(3).length() == 1 : "Task done indicator is not valid";
         boolean isDoneTask = matcher.group(3).equals("X");
 
+        assert matcher.group(4) != null : "Task Description empty";
         switch(matcher.group(2)) {
         case "T":
             this.addTaskToList(new TodoTask(matcher.group(4)));

@@ -35,7 +35,6 @@ public class Parser {
      * @return Command.Command type object with parameters entered by user
      */
     public static Command parseInput(String userInput){
-//        String userInput = scanner.nextLine();
         String errMsg;
         String[] userInputArr = userInput.split(" ");
         Pattern pattern;
@@ -50,7 +49,11 @@ public class Parser {
 
         case DONE_COMMAND:
             try {
-                return new DoneCommand(Integer.parseInt(userInputArr[1]));
+                int taskIndexToDone = Integer.parseInt(userInputArr[1]);
+                if (taskIndexToDone <= 0) {
+                    throw new NumberFormatException();
+                }
+                return new DoneCommand(taskIndexToDone);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 errMsg = " ☹ OOPS!!! Input does not match Done command format. eg.\n"
                                 + "   Done <index of task to mark completed>";
@@ -101,8 +104,13 @@ public class Parser {
             break;
 
         case DELETE_COMMAND:
+            int taskIndexToDelete = 0;
             try {
-                return new DeleteCommand(Integer.parseInt(userInputArr[1]));
+                taskIndexToDelete = Integer.parseInt(userInputArr[1]);
+                if (taskIndexToDelete <= 0) {
+                    throw new NumberFormatException();
+                }
+                return new DeleteCommand(taskIndexToDelete);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 errMsg = " ☹ OOPS!!! Input does not match Delete command format. eg.\n"
                                 + "   Delete <index of task to delete>";
