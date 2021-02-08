@@ -2,10 +2,10 @@ package duke.command;
 
 import duke.TaskList.Action;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     String[] args;
 
-    public AddCommand(String[] args){
+    public AddCommand(String[] args) {
         this.args = args;
     }
 

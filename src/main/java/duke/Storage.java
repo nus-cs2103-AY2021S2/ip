@@ -29,13 +29,13 @@ public class Storage {
         File file = getOrCreateFile();
         Scanner s = new Scanner(file);
         generateLines: //TODO: Whats the code style for this.
-        while(s.hasNextLine()){
+        while (s.hasNextLine()) {
             Task t;
             String line = s.nextLine();
             String pattern = "([TED]),([01]),(\\d*),(.*)";
             Pattern r = Pattern.compile(pattern);
             Matcher m = r.matcher(line);
-            if(!m.find()){
+            if (!m.find()) {
                 badLines++;
                 break;
             }
@@ -45,7 +45,7 @@ public class Storage {
             String task = m.group(4).substring(0,taskLength);
             String leftover = m.group(4).substring(taskLength);
             try {
-                if (type.equals("E") || type.equals("D") ) {
+                if (type.equals("E") || type.equals("D")) {
                     line = leftover.substring(1);
                     pattern = "(\\d*),(.*)";
                     r = Pattern.compile(pattern);
@@ -71,14 +71,14 @@ public class Storage {
                 } else {
                     t = new ToDos(task);
                 }
-            }catch(EmptyArgumentException e){
+            }catch(EmptyArgumentException e) {
                 badLines++;
                 break;
-            }catch(BadDateArgumentException e){
+            } catch(BadDateArgumentException e) {
                 badLines++;
                 break;
             }
-            if (isDone){
+            if (isDone) {
                 t.setDone();
             }
             store.add(t);
@@ -90,7 +90,7 @@ public class Storage {
     public static void saveTaskList(TaskList data) throws IOException {
         List<Task> store = data.getRawData();
         StringBuilder saveText = new StringBuilder();
-        for (Task t: store){
+        for (Task t: store) {
             saveText.append(t.toFileString());
             saveText.append('\n');
         }

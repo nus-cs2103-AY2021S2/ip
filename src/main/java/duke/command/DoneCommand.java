@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.TaskList.Action;
 
-public class DoneCommand extends IndexedCommand{
+public class DoneCommand extends IndexedCommand {
     public DoneCommand(int position) {
         super(position);
     }

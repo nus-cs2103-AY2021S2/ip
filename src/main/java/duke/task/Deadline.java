@@ -16,7 +16,7 @@ public class Deadline extends Task {
         try {
             LocalDate date = LocalDate.parse(by, formatter);
             this.by = date;
-        }catch(DateTimeParseException e){
+        } catch(DateTimeParseException e) {
             throw new BadDateArgumentException();
         }
     }

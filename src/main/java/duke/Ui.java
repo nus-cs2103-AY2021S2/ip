@@ -16,7 +16,7 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private String separator = "------------------\n";
 
-    public void startUpMessage(){
+    public void startUpMessage() {
         System.out.println("Hello from\n" + logo);
         System.out.println("No unicode allowed");
     }
@@ -26,21 +26,21 @@ public class Ui {
     public void prompt(){
         System.out.print(separator + "Listening to your input: ");
     }
-    public void loadStart(){
+    public void loadStart() {
         System.out.println("Loading From File...");
     }
-    public void loadSuccess(){
+    public void loadSuccess() {
         System.out.println("Loaded");
     }
-    public void loadFail(){
+    public void loadFail() {
         System.out.println("Failed to Load file. Aborting.");
     }
-    public void dumpState(TaskList store){
+    public void dumpState(TaskList store) {
         System.out.println("Unable to save list. Dumping ...");
         System.out.print(store.getList());
         System.out.println("Continuing Normal operation");
     }
-    public void commandMessage(Command command, String data){
+    public void commandMessage(Command command, String data) {
         switch(command.getType()){
         case LIST:
             System.out.print(data);
@@ -60,7 +60,7 @@ public class Ui {
         }
     }
     //TODO: Figure out if this overloading is acceptable from a coding style perspective.
-    public void handleException(ParseException e){
+    public void handleException(ParseException e) {
         System.out.println("Command has invalid parsing.");
         System.out.println(e.getMessage());
     }

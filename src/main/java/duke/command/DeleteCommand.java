@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.TaskList.Action;
 
-public class DeleteCommand extends IndexedCommand{
+public class DeleteCommand extends IndexedCommand {
     public DeleteCommand(int position) {
         super(position);
     }

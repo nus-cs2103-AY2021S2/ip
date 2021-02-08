@@ -58,7 +58,7 @@ public class Parser {
     }
     private static String[] splitTokenIntoTwo(String parseTarget,String delimiter) throws ParseException {
         String[] tokens = parseTarget.split(delimiter,2);
-        if (tokens.length < 2){
+        if (tokens.length < 2) {
             throw new ParseException("Expected deliminter '"+ delimiter +"'", tokens[0].length());
         }
         return tokens;
@@ -67,7 +67,7 @@ public class Parser {
     private static String[] splitTokenIntoTwo(String parseTarget,String delimiter, String[] exception) throws ParseException{
         List<String> exceptionList = Arrays.asList(exception);
         String[] tokens = parseTarget.split(delimiter,2);
-        if (!exceptionList.contains(tokens[0]) && tokens.length < 2){
+        if (!exceptionList.contains(tokens[0]) && tokens.length < 2) {
             throw new ParseException("Expected deliminter '"+ delimiter +"'", tokens[0].length());
         }
         return tokens;

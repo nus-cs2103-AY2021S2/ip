@@ -24,12 +24,12 @@ public class Duke {
         }
         Scanner in = new Scanner(System.in);
         String line;
-        do{
+        do {
             ui.prompt();
             line = in.nextLine();
             try {
                 Command c = Parser.parse(line);
-                if (c==null){ //Bye command
+                if (c==null) { //Bye command
                     break;
                 }
                 String data = store.run(c);
@@ -52,7 +52,7 @@ public class Duke {
                     }
                 }
             }
-        }while(true);
+        } while (true);
         ui.goodByeMessage();
         in.close();
     }

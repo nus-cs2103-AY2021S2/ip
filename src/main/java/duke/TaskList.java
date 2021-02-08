@@ -11,7 +11,7 @@ import duke.task.ToDos;
 import java.util.List;
 
 public class TaskList {
-    public enum Action{
+    public enum Action {
         ADD,
         LIST,
         DONE,
@@ -30,7 +30,7 @@ public class TaskList {
     public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
         String[] args = c.run();
         String results;
-        switch(c.getType()){
+        switch (c.getType()) {
         case ADD:
             results = addTask(args);
             edited = true;
@@ -60,7 +60,7 @@ public class TaskList {
     }
     private String addTask(String[] tokens) throws EmptyArgumentException, BadDateArgumentException {
         Task t;
-        switch(tokens[0]){
+        switch (tokens[0]) {
         case "D":
             t = new Deadline(tokens[1], tokens[2]);
             break;
@@ -76,26 +76,26 @@ public class TaskList {
         store.add(t);
         return formatOrderedPrint(-1);
     }
-    private String setDone(int doneIndex){
+    private String setDone(int doneIndex) {
         Task t = store.get(doneIndex);
         t.setDone();
         return formatOrderedPrint(doneIndex);
     }
-    private String delete(int deleteIndex){
+    private String delete(int deleteIndex) {
         String returnValue = formatOrderedPrint(deleteIndex);
         store.remove(deleteIndex);
         return returnValue;
     }
-    public String getList(){
+    public String getList() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0 ; i < store.size(); i++) {
+        for (int i = 0; i < store.size(); i++) {
             builder.append(formatOrderedPrint(i));
             builder.append('\n');
         }
         return builder.toString();
     }
 
-    private String formatOrderedPrint(int i){
+    private String formatOrderedPrint(int i) {
         final int size = store.size();
         while (i < 0){
             i += size;
