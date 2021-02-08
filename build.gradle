@@ -30,7 +30,7 @@ test {
 }
 
 application {
-    mainClassName = "com.lirc572.ip.Duke"
+    mainClassName = "com.lirc572.ip.Starter"
 }
 
 javafx {
