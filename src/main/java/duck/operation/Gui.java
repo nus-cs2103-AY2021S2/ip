@@ -38,6 +38,7 @@ public class Gui {
      * @param tasks
      */
     public String showCommandReply(String command, TaskList tasks) {
+        assert (!command.isBlank());
         switch (command) {
         case "hello":
             return "Hello! I'm duck.Duke Y(^_^)Y\n"
@@ -51,7 +52,6 @@ public class Gui {
                 stringList.append((i + 1) + "." + tasks.getTask(i).getTaskInfo() + "\n");
             }
             return stringList.toString();
-
         default:
             return "Got it. I've added this task:\n"
                     + tasks.getTask(tasks.getSizeOfTasks() - 1).getTaskInfo() + "\n"
@@ -154,7 +154,5 @@ public class Gui {
             stringList.append(result[i] + "\n");
         }
         return stringList.toString();
-
-
     }
 }

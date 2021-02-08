@@ -71,8 +71,8 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        String filePathOfData = ".\\data\\duke.txt";
-        storage = new Storage(filePathOfData);
+        String dataFilePath = ".\\data\\duke.txt";
+        storage = new Storage(dataFilePath);
         tasks = new TaskList(storage.load());
         gui = new Gui();
 
@@ -153,7 +153,10 @@ public class Duke extends Application {
      */
     private String getResponse(String input) throws IOException {
         CommandGui c = Parser.parse(input);
-        return c.execute(tasks, gui, storage);
+        String response = c.execute(tasks, gui, storage);
+        assert (!response.equals(null));
+        return response;
+
     }
 
 
