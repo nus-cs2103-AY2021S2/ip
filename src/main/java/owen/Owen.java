@@ -72,9 +72,9 @@ public class Owen implements Chatbot {
             case LIST:
                 return this.listTasks();
             case DONE:
-                return this.doneTask(parseTaskNumber(command.getArgs()));
+                return this.doneTask(Parser.parseTaskNumber(command.getArgs()));
             case DELETE:
-                return this.deleteTask(parseTaskNumber(command.getArgs()));
+                return this.deleteTask(Parser.parseTaskNumber(command.getArgs()));
             case FIND:
                 return this.findTask(command.getArgs());
             case BYE:
@@ -85,14 +85,6 @@ public class Owen implements Chatbot {
         } catch (OwenException exception) {
             String exceptionResponse = exception.getMessage();
             return new Owen(this.isRunning, exceptionResponse, this.taskList, this.storage);
-        }
-    }
-
-    private static int parseTaskNumber(String taskNumber) throws OwenException {
-        try {
-            return Integer.parseInt(taskNumber);
-        } catch (NumberFormatException exception) {
-            throw new OwenException("Task number must be specified...");
         }
     }
 

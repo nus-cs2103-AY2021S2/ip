@@ -35,4 +35,19 @@ public class Parser {
 
         return new Command(commandType, args, commandString);
     }
+
+    /**
+     * Parses task number from string.
+     * 
+     * @param taskNumber String to parse.
+     * @return Parsed integer.
+     * @throws OwenException Integer could not be parsed from string.
+     */
+    public static int parseTaskNumber(String taskNumber) throws OwenException {
+        try {
+            return Integer.parseInt(taskNumber);
+        } catch (NumberFormatException exception) {
+            throw new OwenException("Task number must be specified...");
+        }
+    }
 }
