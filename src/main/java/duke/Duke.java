@@ -60,7 +60,11 @@ public class Duke extends Application {
 
     private void handleInput(String input) {
         Command cmd = parser.parseCmd(input);
+        assert cmd != null : "null command!";
+
         CommandResult cmdResult = cmd.execute(tasks, storage);
+        assert cmdResult != null : "null command result!";
+
         ui.showCommandResult(cmdResult);
         try {
             storage.save(tasks.serialize());

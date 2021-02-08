@@ -155,7 +155,7 @@ public class Gui extends AnchorPane implements Ui {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         userInput.clear();
 
-        inputHandler.accept(input);
+        inputHandler.accept(null);
     }
 
     private boolean isValid(String input) {
