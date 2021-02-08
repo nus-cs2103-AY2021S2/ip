@@ -71,9 +71,24 @@ public class Duke {
                     commands.set(id, command.markDone());
 
                     System.out.println(spacer + "Woof! "
-                            + "I have completed these commands before: "
-                            + "\n");
+                            + "I have completed these commands before:\n");
                     printList(commands);
+                    System.out.println(spacer);
+
+                } else if (input.contains("delete")) {
+                    String[] deleteCommand = input.split(separator);
+                    int id = Integer.parseInt(deleteCommand[1]) - 1;
+                    int len = commands.size();
+
+                    System.out.println(spacer + "Noted! "
+                            + "This task has been removed:\n"
+                            + commands.get(id)
+                            + "\n"
+                            + "Now you have "
+                            + (len - 1)
+                            + " commands remaining.");
+
+                    commands.remove(id);
                     System.out.println(spacer);
 
                 } else {
