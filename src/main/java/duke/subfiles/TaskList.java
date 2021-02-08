@@ -185,7 +185,8 @@ public class TaskList {
                 break;
             }
 
-            if (sArray[1].equals("1")) {
+            String done = "1";
+            if (sArray[1].equals(done)) {
                 tasks.get(tasks.size() - 1).setDone();
             }
         } catch (DateTimeParseException e) {
