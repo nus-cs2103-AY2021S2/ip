@@ -20,9 +20,9 @@ public class Duke {
     /**
      * Constructs a Duke chat bot.
      */
-    public Duke() {
+    public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage("data\\duke.txt");
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -56,6 +56,6 @@ public class Duke {
      * @return       The response string.
      */
     public String getResponse(String input) {
-        return new Duke().run(input);
+        return new Duke("data\\duke.txt").run(input);
     }
 }
