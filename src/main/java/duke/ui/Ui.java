@@ -23,11 +23,33 @@ public abstract class Ui {
     private static final String BORDER = "    ____________________________________________________________";
     private static final String INDENT = "     ";
 
-    public abstract boolean getUserConfirmation(String confirmationPrompt);
     public abstract String getUserInput(String inputPrompt, String inputHint);
+    public abstract String getUserInputSecondary(String inputPrompt, String inputHint);
+    public abstract boolean getUserConfirmation(String confirmationPrompt);
     public abstract void printError(DukeException e);
     public abstract void printCallback(String callbackText);
     public abstract void printResponse(String responseText);
+
+
+    /**
+     * Get user input from main prompt / window.
+     *
+     * @param inputPrompt user input prompt
+     * @return string user input
+     */
+    public String getUserInput(String inputPrompt) {
+        return getUserInput(inputPrompt, "");
+    }
+
+    /**
+     * Get user input from separate prompt / window.
+     *
+     * @param inputPrompt user input prompt
+     * @return string user input
+     */
+    public String getUserInputSecondary(String inputPrompt) {
+        return getUserInputSecondary(inputPrompt, "");
+    }
 
     /**
      * Prints user input as a line.

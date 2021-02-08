@@ -9,6 +9,7 @@ import duke.exceptions.DukeException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -18,11 +19,13 @@ public class UiGui extends Ui {
     private static final Font FONT = new Font("Consolas", 11);
 
     private final VBox dialogContainer;
+    private final TextField textField;
 
     /**
      * Creates reader from dialog box
      */
-    public UiGui(VBox dialogContainer) {
+    public UiGui(TextField textField, VBox dialogContainer) {
+        this.textField = textField;
         this.dialogContainer = dialogContainer;
     }
 
@@ -42,6 +45,11 @@ public class UiGui extends Ui {
 
     @Override
     public String getUserInput(String inputPrompt, String inputHint) {
+        return this.textField.getText();
+    }
+
+    @Override
+    public String getUserInputSecondary(String inputPrompt, String inputHint) {
         TextInputDialog dialog = new TextInputDialog(inputHint);
         dialog.setHeaderText(inputHint);
         Optional<String> result = dialog.showAndWait();

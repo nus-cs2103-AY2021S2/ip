@@ -76,10 +76,9 @@ public class Duke extends Application {
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
-        ui = new UiGui(dialogContainer);
-        scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
+        ui = new UiGui(userInput, dialogContainer); // input / output
+        scrollPane.setContent(dialogContainer);
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
@@ -130,7 +129,7 @@ public class Duke extends Application {
 
     private void handleUserInput() {
         try {
-            String input = userInput.getText();
+            String input = ui.getUserInput(">>> ", "");
             UserInputTokenSet tokenSet = UserInputTokenizer.parse(input);
             ui.printCallback(input);
             DukeCommand cmd = DukeCommandFactory.getDukeCommand(tokenSet);
