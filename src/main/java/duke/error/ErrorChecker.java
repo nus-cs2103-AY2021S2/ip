@@ -97,7 +97,9 @@ public class ErrorChecker {
 
                 String[] inputSplit = input.split("/");
 
-                if (!inputSplit[1].startsWith("by")) {
+                if (inputSplit.length != 2) {
+                    throw new IllegalTaskException("", "deadline");
+                } else if (!inputSplit[1].startsWith("by")) {
                     throw new IllegalTaskException("", "deadline");
                 }
 
@@ -109,10 +111,11 @@ public class ErrorChecker {
 
                 String[] inputSplit = input.split("/");
 
-                if (!inputSplit[1].startsWith("on")) {
+                if (inputSplit.length != 4) {
                     throw new IllegalTaskException("", "event");
-                }
-                if (!inputSplit[2].startsWith("from") || !inputSplit[3].startsWith("to")) {
+                } else if (!inputSplit[1].startsWith("on")) {
+                    throw new IllegalTaskException("", "event");
+                } else if (!inputSplit[2].startsWith("from") || !inputSplit[3].startsWith("to")) {
                     throw new IllegalTaskException("", "event");
                 }
                 DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
