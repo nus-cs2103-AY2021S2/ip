@@ -10,7 +10,7 @@ public class SaveCommand extends Command {
      * @param taskList
      * @return String , goodbye message to display
      */
-    public String excute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         ui.save();
         return Ui.showGoodbye();
     }

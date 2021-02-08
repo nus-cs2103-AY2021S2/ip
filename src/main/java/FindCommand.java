@@ -5,7 +5,7 @@ public class FindCommand extends Command {
         this.searchTerm = searchTerm;
     }
 
-    public String excute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         return taskList.search(searchTerm);
     }
 }

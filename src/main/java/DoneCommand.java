@@ -5,7 +5,7 @@ public class DoneCommand extends Command {
         this.option = option;
     }
 
-    public String excute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         return taskList.markAsDone(this.option);
     }
 }

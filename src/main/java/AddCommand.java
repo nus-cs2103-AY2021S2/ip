@@ -5,7 +5,7 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
-    public String excute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         return taskList.addTask(task);
     }
 }
