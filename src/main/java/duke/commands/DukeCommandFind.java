@@ -97,7 +97,7 @@ public class DukeCommandFind extends DukeCommand {
             if (!search.isBlank()) {
                 lines.add(" query: '" + search + "'");
             }
-            ui.showMessage(lines);
+            ui.showResponse(lines);
             return;
         }
 
@@ -118,6 +118,6 @@ public class DukeCommandFind extends DukeCommand {
             String s = "" + viewIndex.get(i) + ". " + view.get(i).toString();
             lines.add(s);
         }
-        ui.showMessage(lines);
+        ui.showResponse(lines);
     }
 }

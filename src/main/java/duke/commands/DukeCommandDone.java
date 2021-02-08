@@ -53,6 +53,6 @@ public class DukeCommandDone extends DukeCommand {
             taskStrings.add("  " + tasks.getTask(index));
         }
         loader.write(tasks);
-        ui.showMessage("Nice! I've marked these tasks as done:", taskStrings);
+        ui.showResponse("Nice! I've marked these tasks as done:", taskStrings);
     }
 }

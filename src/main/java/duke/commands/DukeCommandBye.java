@@ -29,6 +29,6 @@ public class DukeCommandBye extends DukeCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader) {
-        ui.showMessage("Bye. Hope to see you again soon!");
+        ui.showResponse("Bye. Hope to see you again soon!");
     }
 }

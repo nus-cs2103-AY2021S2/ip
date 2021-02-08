@@ -59,9 +59,9 @@ public class DukeCommandDelete extends DukeCommand {
             if (isConfirmedDelete) {
                 tasks.deleteAll();
                 loader.write(tasks);
-                ui.showMessage("All tasks successfully deleted.");
+                ui.showResponse("All tasks successfully deleted.");
             } else {
-                ui.showMessage("No tasks deleted.");
+                ui.showResponse("No tasks deleted.");
             }
 
         } else {
@@ -72,7 +72,7 @@ public class DukeCommandDelete extends DukeCommand {
                 tasks.setDone(index);
             }
             loader.write(tasks);
-            ui.showMessage(
+            ui.showResponse(
                     "Noted. I've removed these tasks:",
                     taskStrings,
                     "Now you have " + tasks.size() + " tasks in the list.");

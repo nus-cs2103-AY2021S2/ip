@@ -15,76 +15,36 @@ import javafx.scene.text.Font;
 /**
  * Handles I/O for program.
  *
- * Uses System.out and System.in exclusively.
+ * General class, requires subclass to handle IO.
+ * Consider overwriting showResponse to customize response as well.
  */
-public class Ui {
+public abstract class Ui {
 
     private static final String BORDER = "    ____________________________________________________________";
     private static final String INDENT = "     ";
-    private static final Font FONT = new Font("Consolas", 11);
 
-    private final VBox dialogContainer;
+    public abstract boolean getUserConfirmation(String confirmationPrompt);
+    public abstract String getUserInput(String inputPrompt, String inputHint);
+    public abstract void printError(DukeException e);
+    public abstract void printCallback(String callbackText);
+    public abstract void printResponse(String responseText);
 
     /**
-     * Creates reader from dialog box
+     * Prints user input as a line.
+     *
+     * @param callbackText user input
      */
-    public Ui(VBox dialogContainer) {
-        this.dialogContainer = dialogContainer;
-    }
-
-    public boolean getUserConfirmation(String message) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message);
-        Optional<ButtonType> result = alert.showAndWait();
-        return (result.isPresent() && result.get() == ButtonType.OK);
-    }
-
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setFont(FONT);
-        textToAdd.setWrapText(true);
-        return textToAdd;
+    public void printCallbackLine(String callbackText) {
+        printCallback(callbackText + "\n");
     }
 
     /**
-     * Send exception for pretty printing.
+     * Prints program response as a line.
      *
-     * Exception message can be composed of multiple lines.
-     *
-     * @param e Exception.
+     * @param responseText program response
      */
-    public void showError(DukeException e) {
-        String message = String.valueOf(e).strip();
-        if (message.contains("\n")) {
-            int index = message.indexOf('\n');
-            String firstLine = message.substring(0, index);
-            String[] restLines = message.substring(index + 1).split("\n");
-            List<String> lines = Arrays.stream(restLines).map(s -> "  " + s).collect(Collectors.toList());
-            showMessage("☹ OOPS!!! " + firstLine, lines);
-        } else {
-            showMessage("☹ OOPS!!! " + message);
-        }
-    }
-
-    /**
-     * Prints specified text
-     *
-     * @param text string
-     */
-    private void print(String text) {
-        dialogContainer.getChildren().add(getDialogLabel(text));
-    }
-
-    /**
-     * Prints user input as callback
-     *
-     * @param input string
-     */
-    public void printCallback(String input) {
-        dialogContainer.getChildren().add(getDialogLabel(input + "\n"));
-    }
-
-    private void println(String input) {
-        printCallback(input);
+    public void printResponseLine(String responseText) {
+        printResponse(responseText + "\n");
     }
 
     /**
@@ -96,7 +56,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        print(logo);
+        printResponseLine(logo);
     }
 
     /**
@@ -109,13 +69,13 @@ public class Ui {
      */
     public void showLoadingSuccess(int numTasks) {
         if (numTasks == 0) {
-            showMessage(
+            showResponse(
                     "Welcome to Duke!",
                     "",
                     "No existing tasks found.",
                     "A new task list has been created to get you started :)");
         } else {
-            showMessage(
+            showResponse(
                     "Welcome to Duke!",
                     "",
                     "Existing task list loaded successfully.",
@@ -133,7 +93,7 @@ public class Ui {
      * @param numTasks Number of tasks in loaded list.
      */
     public void showFileWriteError(int numTasks) {
-        showMessage(
+        showResponse(
                 "Welcome to Duke!",
                 "",
                 "Warning: Destination file cannot be written to.",
@@ -149,7 +109,7 @@ public class Ui {
      * or read.
      */
     public void showFileLoadingError() {
-        showMessage(
+        showResponse(
                 "Welcome to Duke!",
                 "",
                 "Warning: Destination file cannot be created/read.",
@@ -163,7 +123,7 @@ public class Ui {
      * as a task list.
      */
     public void showLoadingError() {
-        showMessage(
+        showResponse(
                 "Welcome to Duke!",
                 "",
                 "Warning: Existing task list cannot be loaded.",
@@ -181,20 +141,20 @@ public class Ui {
      * @param lines List of messages.
      * @param post Postfix message.
      */
-    public void showMessage(String pre, List<String> lines, String post) {
+    public void showResponse(String pre, List<String> lines, String post) {
 
-        println(BORDER);
+        printResponseLine(BORDER);
         if (!pre.isEmpty()) {
-            println(INDENT + pre);
+            printResponseLine(INDENT + pre);
         }
         for (String line: lines) {
-            println(INDENT + line);
+            printResponseLine(INDENT + line);
         }
         if (!post.isEmpty()) {
-            println(INDENT + post);
+            printResponseLine(INDENT + post);
         }
-        println(BORDER);
-        println("");
+        printResponseLine(BORDER);
+        printResponseLine("");
     }
 
     /**
@@ -205,8 +165,8 @@ public class Ui {
      * @param pre Prefix message.
      * @param lines List of messages.
      */
-    public void showMessage(String pre, List<String> lines) {
-        showMessage(pre, lines, "");
+    public void showResponse(String pre, List<String> lines) {
+        showResponse(pre, lines, "");
     }
 
     /**
@@ -217,9 +177,9 @@ public class Ui {
      * @param lines List of messages.
      * @param post Postfix message.
      */
-    public void showMessage(List<String> lines, String post) {
+    public void showResponse(List<String> lines, String post) {
         lines.add(post);
-        showMessage("", lines, post);
+        showResponse("", lines, post);
     }
 
     /**
@@ -229,8 +189,8 @@ public class Ui {
      *
      * @param lines List of messages.
      */
-    public void showMessage(List<String> lines) {
-        showMessage("", lines, "");
+    public void showResponse(List<String> lines) {
+        showResponse("", lines, "");
     }
 
     /**
@@ -240,7 +200,7 @@ public class Ui {
      *
      * @param lines Variable number of messages.
      */
-    public void showMessage(String ... lines) {
-        showMessage("", Arrays.asList(lines), "");
+    public void showResponse(String ... lines) {
+        showResponse("", Arrays.asList(lines), "");
     }
 }

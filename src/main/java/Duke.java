@@ -9,6 +9,7 @@ import duke.parser.UserInputTokenizer;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
 import duke.ui.Ui; // Courtesy of https://se-education.org/guides/tutorials/javaFxPart2.html
+import duke.ui.UiGui;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -75,7 +76,7 @@ public class Duke extends Application {
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
-        ui = new Ui(dialogContainer);
+        ui = new UiGui(dialogContainer);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -139,10 +140,10 @@ public class Duke extends Application {
             }
         } catch (DukeExceptionFileNotWritable e) {
             if (!isLocalTaskList) {
-                ui.showError(e);
+                ui.printError(e);
             }
         } catch (DukeException e) {
-            ui.showError(e);
+            ui.printError(e);
         }
         userInput.clear();
     }

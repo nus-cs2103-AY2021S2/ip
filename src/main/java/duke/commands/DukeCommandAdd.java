@@ -32,7 +32,7 @@ public class DukeCommandAdd extends DukeCommand {
     public void execute(TaskList tasks, Ui ui, FileLoader loader) throws DukeExceptionFileNotWritable {
         tasks.addTask(task);
         loader.write(tasks);
-        ui.showMessage(
+        ui.showResponse(
                 "Got it. I've added this task:",
                 "  " + task,
                 "Now you have " + tasks.size() + " tasks in the list.");

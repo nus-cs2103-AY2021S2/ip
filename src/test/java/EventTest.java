@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ public class EventTest {
         tokenSet.set("at", "2020-09-08");
         Event event = Event.parse(tokenSet);
         assertEquals("event name", event.getDescription());
-        // assertFalse(event.getDone());
+        assertFalse(event.getDone());
     }
 
     @Test
@@ -32,6 +33,6 @@ public class EventTest {
         tokenSet.set("done", "");
         Event event = Event.parse(tokenSet);
         assertEquals("event name2", event.getDescription());
-        // assertFalse(event.getDone());
+        assertFalse(event.getDone());
     }
 }
