@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     private static final Pattern FIND_KEYWORD = Pattern.compile("(?i)(?:^find|^f)\\b");
     private static final Pattern FIND_TERM = Pattern.compile("(?i)(?:^find|^f)\\s+(\\w.*)");
     private static final String ACCEPTED_FORMAT_MSG = "Accepted formats:\n"
-            + "  find <SEARCH TERM>"
+            + "  find <SEARCH TERM>\n"
             + "  f <SEARCH TERM>";
 
     private final String term;
