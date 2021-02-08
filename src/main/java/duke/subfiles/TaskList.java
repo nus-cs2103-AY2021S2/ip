@@ -40,12 +40,12 @@ public class TaskList {
      * @throws EmptyDescriptionException If no description is provided for the to-do.
      */
     private void addTodo(String input) throws EmptyDescriptionException {
-                String taskType = "todo";
+        String taskType = "todo";
+
         try {
             int startOfDescription = 5;
-
-            input = input.substring(startOfDescription);
-            tasks.add(new ToDo(input));
+            String description = input.substring(startOfDescription);
+            tasks.add(new ToDo(description));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException(taskType);
         }
@@ -65,12 +65,17 @@ public class TaskList {
 
         try {
             int startOfDescription = 9;
+            int startOfDate = 3;
+            int splitLimit = 2;
             String splitRegex = "/";
 
-            String[] sArray = input.split(splitRegex, 2);
-            input = sArray[0].substring(startOfDescription, sArray[0].length() - 1);
-            LocalDate t = LocalDate.parse(sArray[1].substring(3));
-            tasks.add(new Deadline(input, t));
+            String[] tempArray = input.split(splitRegex, splitLimit);
+            int endOfDescription = tempArray[0].length() - 1;
+
+            String description = tempArray[0].substring(startOfDescription, endOfDescription);
+            LocalDate date = LocalDate.parse(tempArray[1].substring(startOfDate));
+
+            tasks.add(new Deadline(description, date));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException(taskType);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -94,12 +99,17 @@ public class TaskList {
 
         try {
             int startOfDescription = 6;
+            int startOfDate = 3;
+            int splitLimit = 2;
             String splitRegex = "/";
 
-            String[] sArray = input.split(splitRegex, 2);
-            input = sArray[0].substring(startOfDescription, sArray[0].length() - 1);
-            LocalDate t = LocalDate.parse(sArray[1].substring(3));
-            tasks.add(new Event(input, t));
+            String[] tempArray = input.split(splitRegex, splitLimit);
+            int endOfDescription = tempArray[0].length() - 1;
+
+            String description = tempArray[0].substring(startOfDescription, endOfDescription);
+            LocalDate date = LocalDate.parse(tempArray[1].substring(startOfDate));
+
+            tasks.add(new Event(description, date));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException(taskType);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -123,7 +133,10 @@ public class TaskList {
      */
     public String addTask(String input) throws EmptyDescriptionException, EmptyDateException,
             InvalidInputException, DateFormatException {
-        String command = input.split(" ", 2)[0];
+        int splitLimit = 2;
+        String splitRegex = " ";
+
+        String command = input.split(splitRegex, splitLimit)[0];
 
         switch (command) {
         case "todo":
@@ -153,15 +166,23 @@ public class TaskList {
      * @throws DateFormatException If the specified date is incorrectly formatted.
      */
     public void addTaskFromData(String data) throws DateFormatException {
-        String[] sArray = data.split(" \\| ");
+        String splitRegex = " \\| ";
+
+        String[] sArray = data.split(splitRegex);
 
         try {
-            if (sArray[0].equals("T")) {
+            switch (sArray[0]) {
+            case "T":
                 tasks.add(new ToDo(sArray[2]));
-            } else if (sArray[0].equals("D")) {
+                break;
+            case "D":
                 tasks.add(new Deadline(sArray[2], LocalDate.parse(sArray[3])));
-            } else {
+                break;
+            case "E":
                 tasks.add(new Event(sArray[2], LocalDate.parse(sArray[3])));
+                break;
+            default:
+                break;
             }
 
             if (sArray[1].equals("1")) {
@@ -179,6 +200,7 @@ public class TaskList {
      */
     public String printTasks() {
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
+
         for (int i = 1; i < tasks.size() + 1; i++) {
             Task task = tasks.get(i - 1);
             output.append("\n").append(i).append(". ").append(task.toString());
@@ -269,9 +291,9 @@ public class TaskList {
     public String printTasksOnDate(String input) throws DateFormatException {
         try {
             LocalDate date = LocalDate.parse(input);
-            String outputUpper = printDeadlinesOnDate(date);
-            String outputLower = printEventsOnDate(date);
-            return outputUpper + "\n" + outputLower;
+            String upperOutput = printDeadlinesOnDate(date);
+            String lowerOutput = printEventsOnDate(date);
+            return upperOutput + "\n" + lowerOutput;
         } catch (DateTimeParseException e) {
             throw new DateFormatException();
         }
@@ -285,9 +307,12 @@ public class TaskList {
      * @return Duke's response to the user.
      */
     public String findTasksWithKeyword(String input) {
-        String keyword = input.split(" ", 2)[1].toLowerCase();
+        int splitLimit = 2;
+        String splitRegex = " ";
         StringBuilder output;
         ArrayList<Task> matchingTasks = new ArrayList<>();
+
+        String keyword = input.split(splitRegex, splitLimit)[1].toLowerCase();
 
         for (Task t : tasks) {
             if (t.getName().toLowerCase().contains(keyword)) {
@@ -324,7 +349,8 @@ public class TaskList {
         int index;
 
         try {
-            String[] sArray = input.split(" ");
+            String splitRegex = " ";
+            String[] sArray = input.split(splitRegex);
             index = Integer.parseInt(sArray[1]) - 1;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException();
@@ -333,8 +359,7 @@ public class TaskList {
         try {
             tasks.get(index).setDone();
 
-            String output = "Nice! I've marked this task as done:\n"
-                    + tasks.get(index).toString();
+            String output = "Nice! I've marked this task as done:\n" + tasks.get(index).toString();
             System.out.println(output);
             return output;
         } catch (IndexOutOfBoundsException e) {
@@ -356,7 +381,8 @@ public class TaskList {
         int index;
 
         try {
-            String[] sArray = input.split(" ");
+            String splitRegex = " ";
+            String[] sArray = input.split(splitRegex);
             index = Integer.parseInt(sArray[1]) - 1;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException();

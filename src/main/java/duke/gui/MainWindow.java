@@ -49,10 +49,12 @@ public class MainWindow extends AnchorPane {
      * @param d The duke object in the Main class.
      */
     public void setDuke(Duke d) {
+        String greetingMessage = "Hello! What can I do for you?";
+
         duke = d;
         duke.getStorage().loadData(duke.getTaskList());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! What can I do for you?", chadLImage)
+                DialogBox.getDukeDialog(greetingMessage, chadLImage)
         );
     }
 
@@ -62,18 +64,20 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        String errorResponse = "I'm sorry, but I don't know what that means.";
+        String byeResponse = "";
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, chadRImage),
-                DialogBox.getDukeDialog(response, response.equals("I'm sorry, but I don't know what that means.")
+                DialogBox.getDukeDialog(response, response.equals(errorResponse)
                         ? soyjakCry
                         : chadLImage)
         );
         userInput.clear();
 
-        if (response.equals("")) {
+        if (response.equals(byeResponse)) {
             duke.getStorage().saveData(duke.getTaskList());
             try {
                 Thread.sleep(500);
