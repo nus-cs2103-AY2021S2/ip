@@ -16,6 +16,7 @@ public class TaskManager {
      */
     public TaskAction execute() {
         TaskAction action = new TaskAction();
+        assert this.operator != "";
 
         switch (this.operator){
         case "bye":
@@ -54,6 +55,7 @@ public class TaskManager {
 
     private TaskAction addEvent(String[] details) {
         // create a new Event
+        assert details.length == 2;
         String description = details[0];
         String time = details[1];
         Event newTask = new Event(description, time);
@@ -62,6 +64,7 @@ public class TaskManager {
 
     private TaskAction addDeadline(String[] details) {
         // create a new Deadline
+        assert details.length == 2;
         String description = details[0];
         String time = details[1];
         Deadline newTask = new Deadline(description, time);
@@ -71,6 +74,7 @@ public class TaskManager {
 
     private TaskAction addToDo(String description) {
         // create a new ToDo
+        assert description != "";
         ToDo newTask = new ToDo(description);
         return new TaskAction(newTask, "add");
     }

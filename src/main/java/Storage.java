@@ -14,10 +14,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public String getPath(){
-        return this.filePath;
-    }
-
     /**
      * Return list of existing tasks stored in local text file.
      *
@@ -51,6 +47,7 @@ public class Storage {
             ArrayList<Task> tasks = taskList.getTaskList();
             // open the file and initialise a file writer
             FileWriter writer = new FileWriter(filePath);
+            assert writer != null;
             // write tasks into file by line
             for (Task t : tasks) {
                 writer.write(t.toString() + System.lineSeparator());
