@@ -56,12 +56,13 @@ public class TaskList {
         return true;
     }
 
-    public void add(String[] userInput, Ui ui) throws DukeException {
+    public String add(String[] userInput, Ui ui) throws DukeException {
+        String reportString = " ";
         switch (userInput[0]) {
             case "todo":
-                Todo t = new Todo(userInput[1]);
+                duke.task.Todo t = new Todo(userInput[1]);
                 task.add(t);
-                ui.reportTask(t, this);
+                reportString = ui.reportTask(t, this);
                 break;
 
             case "deadline":
@@ -74,9 +75,9 @@ public class TaskList {
                     LocalDate date = LocalDate.parse(time);
                     time = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
                 }
-                Deadline d = new Deadline(deadlineArr[0], time);
+                duke.task.Deadline d = new Deadline(deadlineArr[0], time);
                 task.add(d);
-                ui.reportTask(d, this);
+                reportString = ui.reportTask(d, this);
                 break;
 
             case "event":
@@ -84,61 +85,60 @@ public class TaskList {
                 if (eventArr.length != 2) {
                     throw new DukeException("Missing component: event date and time");
                 }
-                Event e = new Event(eventArr);
+                duke.task.Event e = new Event(eventArr);
                 task.add(e);
-                ui.reportTask(e, this);
+                reportString = ui.reportTask(e, this);
                 break;
-
             default:
                 break;
         }
+        return reportString;
     }
 
-    public void doneTask(String inputIndex, Ui ui) {
+    public String doneTask(String inputIndex, Ui ui) {
         try {
             ui.printLine();
             int index = Integer.parseInt(inputIndex.trim());
             Task t = task.get(index - 1);
             if (t.isDone()) {
-                ui.printMessage("This task was marked as done before");
+                return "This task was marked as done before";
             } else {
                 t.markAsDone();
-                ui.printMessage("You have done the following task:");
-                ui.printMessage(t.toString());
+                return "You have done the following task: \n" +
+                        t.toString() + "\n";
             }
-            ui.printLine();
         } catch (IndexOutOfBoundsException e) {
             // TODO: handle exception
-            ui.printErrorMessage("Sorry, I cannot find this task, please check your list again");
+            return "Sorry, I cannot find this task, please check your list again";
         } catch (NumberFormatException e) {
-            ui.printErrorMessage("Sorry, number not recognized");
+            return "Sorry, number not recognized";
         }
     }
 
-    public void deleteTask(String inputIndex, Ui ui) {
+    public String deleteTask(String inputIndex, Ui ui) {
         try {
             ui.printLine();
             int index = Integer.parseInt(inputIndex.trim());
             Task t = task.get(index - 1);
             task.remove(t);
-            ui.printMessage("The following task has been deleted:");
-            ui.printMessage(t.toString());
-            ui.printMessage("You now have " + task.size() + " task in your list");
+            return "The following task has been deleted:\n" +
+                    t.toString() + "\n" +
+                    "You now have " + task.size() + "  task in your list";
         } catch (IndexOutOfBoundsException e) {
             // TODO: handle exception
-            ui.printErrorMessage("Sorry, I cannot find this task, please check your list again");
+            return "Sorry, I cannot find this task, please check your list again";
         } catch (NumberFormatException e) {
-            ui.printErrorMessage("Sorry, number not recognized");
+            return "Sorry, number not recognized";
         }
     }
 
-    public void printTask(Ui ui) {
-        ui.printLine();
-        ui.printMessage("Here is your current tasks");
+    public String printTask(Ui ui) {
+        String taskList;
+        taskList = "Here is your current tasks\n";
         for (int i = 1; i <= task.size(); ++i) {
-            ui.printMessage(i + "." + task.get(i - 1).toString());
+            taskList += i + "." + task.get(i - 1).toString() + "\n";
         }
-        ui.printLine();
+        return taskList;
     }
 
     public List<Task> findTask(String taskInfo) {

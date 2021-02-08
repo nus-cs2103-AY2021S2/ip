@@ -1,33 +1,34 @@
 package duke;
-
 import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.fileSaver.FileSaver;
 import duke.task.TaskList;
 
-public class Duke {
-    private TaskList task;
+public class Duke{
+    private TaskList tasks;
     private Ui ui;
     private FileSaver fs;
 
-    public Duke (String folderName, String fileName) {
-        fs = new FileSaver(folderName, fileName);
+    public Duke() {
+        fs = new FileSaver("data", "duke.txt");
         ui = new Ui();
-        task = new TaskList();
-    }
-    public void run() {
-        ui.greeting();
+        tasks = new TaskList();
         try {
-            fs.load(task);
+            fs.load(tasks);
         } catch (DukeException e) {
-            //TODO: handle exception
             ui.printErrorMessage(e.getMessage());
         }
-        ui.runUi(task, fs);
-        ui.close();
     }
 
-    public static void main(String[] args) {
-        new Duke("data", "duke.txt").run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return ui.getResponse(input, tasks, fs);
+    }
+
+    public String greeting() {
+        return ui.greetingMessage();
     }
 }

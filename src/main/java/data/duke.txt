@@ -1,3 +1,0 @@
-T | 1 | task
-T | 1 | read java
-T | 0 | type java
