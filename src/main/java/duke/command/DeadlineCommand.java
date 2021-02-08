@@ -1,20 +1,34 @@
 package duke.command;
 
-import duke.tasks.TaskList;
 import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 import duke.tasks.Deadline;
+import duke.tasks.TaskList;
 
+/**
+ * Command to create a deadline task.
+ */
 public class DeadlineCommand extends Command {
     public static final boolean IS_EXIT = false;
     protected String input;
 
+    /**
+     * Constructor method
+     * @param input The user input command.
+     */
     public DeadlineCommand(String input) {
         super(IS_EXIT);
         this.input = input;
     }
 
+    /**
+     * The execute method for deadline.
+     * @param tasks The tasks in the TaskList.
+     * @param ui Standard UI object
+     * @param storage Standard storage object
+     * @throws DukeException if the deadline command is missing a description or the user input is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (input.length() <= 9 || !input.contains("/by")) {
@@ -23,15 +37,10 @@ public class DeadlineCommand extends Command {
         String[] strArr = input.split("/by ");
         String description = strArr[0].substring(9).trim();
         String by = strArr[1];
-        System.out.println("Got it. I've added this task:");
         Deadline d = new Deadline(description, by);
         tasks.addTask(d);
-        System.out.println(" " + d.toString());
+        ui.printTaskAdded(d);
         storage.addNewDataToFile("D", "0", d.getDescription(), d.getBy());
-        if(tasks.getSize() == 1) {
-            System.out.printf("Now you have %d task in the list.%n", tasks.getSize());
-        } else {
-            System.out.printf("Now you have %d tasks in the list.%n", tasks.getSize());
-        }
+        ui.printNoOfItems(tasks);
     }
 }
