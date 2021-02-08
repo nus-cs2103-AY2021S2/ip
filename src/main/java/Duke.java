@@ -242,6 +242,17 @@ public class Duke  extends Application{
     return tasks;
     }
 
+    /**
+     * Sort list of tasks alphabetically
+     * @param taskList list of tasks to convert.
+     */
+
+    public String sort(TaskList taskList){
+        String response = "List Sorted";
+        taskList = taskList.sort();
+        return response;
+
+    }
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -356,6 +367,10 @@ public class Duke  extends Application{
                     break;
                 case "find" :
                     response = findTasks(tasklist,pre[1]);
+                    break;
+                case "sort":
+                    response = sort(tasklist);
+                    storage.writeTasks(tasklist);
                     break;
                 default :
                     response = addError();

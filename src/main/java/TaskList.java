@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -76,5 +77,11 @@ public class TaskList {
             }
         }
         return new TaskList(answer);
+    }
+
+    public TaskList sort(){
+        ArrayList<Task> newList = this.getList();
+        Collections.sort(newList, (o1,o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        return new TaskList(newList);
     }
 }
