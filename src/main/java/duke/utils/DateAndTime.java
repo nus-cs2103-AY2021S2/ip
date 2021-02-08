@@ -26,7 +26,6 @@ public class DateAndTime {
                 LocalDate d1 = LocalDate.parse(date.trim());
                 return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             } catch (DateTimeParseException e) {
-                ErrorBox.display(e.getMessage());
                 return Ui.WRONG_DATE_FORMAT;
             }
         } else {

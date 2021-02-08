@@ -96,8 +96,9 @@ public class Parser {
      * @return String representation of the command word of the user input.
      */
     static String extractInstruction(String input) throws DukeException {
-
-        String instruction = input.trim().toLowerCase().split(" ")[0];
+        String[] splits = input.trim().toLowerCase().split(" ", 2);
+        assert splits.length >= 1 : "Command cannot be empty!";
+        String instruction = splits[0];
         if (input.replaceAll(" ", "").equals("")) {
             throw new DukeException(Ui.EMPTY_COMMAND);
         }
@@ -161,6 +162,7 @@ public class Parser {
         String body = input.replaceAll(instruction, "").trim();
         String[] parts = body.split("/", 2);
         if (parts.length == 2) {
+            assert parts[1].length() >= 15 : "Time Format is too long";
             String date = DateAndTime.converter(parts[1]);
             if (date.equals(Ui.WRONG_DATE_FORMAT)) {
                 throw new DukeException(Ui.WRONG_DATE_FORMAT);
