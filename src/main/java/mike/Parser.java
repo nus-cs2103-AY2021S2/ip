@@ -60,13 +60,12 @@ public class Parser {
         case TODO_COMMAND:
             pattern = Pattern.compile("(?i)todo (.+)");
             matcher = pattern.matcher(userInput);
-            if (matcher.find()) {
-                return new TodoCommand(matcher.group(1));
-            } else {
+            if (!matcher.find()) {
                 errMsg = " ☹ OOPS!!! Input does not match Todo command format. eg.\n"
-                                + "   todo <description>";
+                        + "   todo <description>";
+                break;
             }
-            break;
+            return new TodoCommand(matcher.group(1));
 
         case EVENT_COMMAND:
             try {
