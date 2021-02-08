@@ -32,18 +32,18 @@ public class Storage {
     private Task processData(String type, String bool, String[] commands)
             throws DukeExceptionCorruptedData {
         switch (type){
-            case "T":
-                return bool.equals("1") ? new Todo(commands[0], true) : new Todo(commands[0]);
-            case "D":
-                try {
-                    return bool.equals("1") ? new Deadline(commands[0], commands[1], true)
-                            : new Deadline(commands[0], commands[1]);
-                } catch (DukeExceptionDeadline e) {
-                    throw new DukeExceptionCorruptedData("The deadline task in the txt file corrupted");
-                }
-            case "E":
-                return bool.equals("1") ? new Event(commands[0], commands[1], true)
-                        : new Event(commands[0], commands[1]);
+        case "T":
+            return bool.equals("1") ? new Todo(commands[0], true) : new Todo(commands[0]);
+        case "D":
+            try {
+                return bool.equals("1") ? new Deadline(commands[0], commands[1], true)
+                        : new Deadline(commands[0], commands[1]);
+            } catch (DukeExceptionDeadline e) {
+                throw new DukeExceptionCorruptedData("The deadline task in the txt file corrupted");
+            }
+        case "E":
+            return bool.equals("1") ? new Event(commands[0], commands[1], true)
+                    : new Event(commands[0], commands[1]);
         }
         throw new DukeExceptionCorruptedData("The txt file is corrupted");
     }

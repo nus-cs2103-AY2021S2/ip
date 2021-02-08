@@ -55,4 +55,20 @@ public class Task {
         }
         return "[" + tick + "]" + " " + this.task;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        else if (o instanceof Task) {
+            Task otherTask = (Task) o;
+            return this.equals(otherTask);
+        }
+        return false;
+    }
+
+    public boolean equals(Task otherTask) {
+        return this.task.equals(otherTask.task);
+    }
 }
