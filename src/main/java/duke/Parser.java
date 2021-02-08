@@ -1,5 +1,6 @@
 package duke;
 
+import duke.task.Deadline;
 import duke.task.Task;
 
 /**
@@ -45,14 +46,13 @@ public class Parser {
             case "deadline":
                 // Fallthrough
             case "event":
-                Task newTask = Task.dispatchTaskCreation(command);
-                response = addTask(newTask);
-                if (storage != null) {
-                    storage.storeTaskCommand(command);
-                }
+                response = handleTaskCommand(command);
                 break;
             case "find":
                 response = handleFind(command);
+                break;
+            case "reminders":
+                response = handleReminders();
                 break;
             default:
                 Ui.throwIllegalArgumentEx(command);
@@ -126,14 +126,21 @@ public class Parser {
     }
 
     /**
-     * Adds specified task into task list and returns user feedback.
+     * Creates task by calling task creation from the Task class and adds the task created to the TaskList.
+     * Stores the task command in storage if storage exists.
      *
-     * @param task Task to be added.
+     * @param command "{task type} {task description}"
      * @return feedback for adding task successfully.
+     * @throws DukeException if task was not created successfully.
      */
-    private String addTask(Task task) {
-        tasks.add(task);
-        return "Your task has been added: " + task + "\nYou currently have " + tasks.size() + " task(s) in the list.";
+    private String handleTaskCommand(String command) throws DukeException {
+        Task newTask = Task.dispatchTaskCreation(command);
+        tasks.add(newTask);
+        if (storage != null) {
+            storage.storeTaskCommand(command);
+        }
+        return "Your task has been added: " + newTask + "\n"
+                + "You currently have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -167,6 +174,30 @@ public class Parser {
             return reply.toString();
         } else {
             return "There are no tasks that match \"" + query + "\"!";
+        }
+    }
+
+    /**
+     * Finds all Deadline tasks in the current TaskList and lists them.
+     *
+     * @return string of tasks that have deadlines.
+     */
+    private String handleReminders() {
+        StringBuilder reply = new StringBuilder();
+        boolean isFound = false;
+        // Loop through tasks to find all deadlines.
+        for (int i = 1; i <= tasks.size(); i++) {
+            if (tasks.get(i - 1) instanceof Deadline) {
+                isFound = true;
+                reply.append(i + "." + tasks.get(i - 1) + "\n");
+            }
+        }
+
+        if (isFound) {
+            reply.insert(0, "Here are the tasks with deadlines in your list:\n");
+            return reply.toString();
+        } else {
+            return "There are no tasks with deadlines! Yay!";
         }
     }
 }
