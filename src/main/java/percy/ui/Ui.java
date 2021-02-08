@@ -98,7 +98,7 @@ public class Ui {
     public static String makeMsg(ArrayList<String> stringArr) {
         String str = "";
         for (String s : stringArr) {
-            str += s.toString() + "\n";
+            str += s + "\n";
         }
         return str;
     }

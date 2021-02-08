@@ -13,14 +13,13 @@ import percy.ui.Ui;
 
 public class TodoCommand extends Command {
     public static final String COMMAND = "todo";
-    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
+    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<>(List.of(
             "todo: Adds a generic task with a description",
             "Parameters: TASK_DESCRIPTION",
             "Example: todo feed dog"));
 
 
-    private String todoDescription;
-    private String date;
+    private final String todoDescription;
 
     /**
      * Constructs todo command.

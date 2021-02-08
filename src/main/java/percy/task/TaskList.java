@@ -34,15 +34,6 @@ public class TaskList {
     }
 
     /**
-     * Replaces the ArrayList of this TaskList with another ArrayList of Tasks (given as an argument).
-     *
-     * @param list An ArrayList of Tasks to replace the ArrayList of this TaskList.
-     */
-    public void updateTaskList(ArrayList<Task> list) {
-        this.list = list;
-    }
-
-    /**
      * Adds task to TaskList.
      * @param task the task to be added.
      */

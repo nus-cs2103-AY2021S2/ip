@@ -43,7 +43,7 @@ public class Parser {
     private static int getTaskNumber() {
         String[] splitCommand = fullCmd.split(" ", 2);
         String taskNumber = splitCommand[1].trim();
-        return Integer.valueOf(taskNumber);
+        return Integer.parseInt(taskNumber);
     }
 
     private static String getTodoDescription() throws PercyException {
