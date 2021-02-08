@@ -15,4 +15,8 @@ public class Event extends Task {
         String dateFormatted = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[E]" + super.doneToString() + " (at: " + dateFormatted + ")";
     }
+
+    public String getAt() {
+        return this.at;
+    }
 }
