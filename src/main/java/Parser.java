@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    public Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws DukeException{
         switch (input) {
         case "bye":
             return new ExitCommand();
@@ -13,7 +13,7 @@ public class Parser {
         default:
             String[] splitInput = input.split(" ", 2);
 
-            switch (splitInput[0]):
+            switch (splitInput[0]) {
             case "done":
                 if (splitInput.length < 2) {
                     throw new DukeException("Please enter the task to mark as finished!");
@@ -36,7 +36,7 @@ public class Parser {
                 if (splitInput.length < 2) {
                     throw new ToDoException("Todo details cannot be empty!");
                 }
-                Todo todo = new Todo(splitInput[1]);
+                ToDo todo = new ToDo(splitInput[1]);
                 return new AddCommand(todo);
 
             case "deadline":
@@ -54,12 +54,12 @@ public class Parser {
                 return new AddCommand(event);                
 
             default:
-                throw new DukeException("I'm sorry ☹ I don't know what that means")
-
+                throw new DukeException("I'm sorry ☹\nI don't know what that means");
+            }
         }
     }
 
-    private Command getDoneCommand(String taskNumString) throws DukeException {
+    private static Command getDoneCommand(String taskNumString) throws DukeException {
         try {
             int taskNum = Integer.parseInt(taskNumString);
             return new DoneCommand(taskNum);
@@ -68,7 +68,7 @@ public class Parser {
         }
     }
 
-    private Command getDeleteCommand(String taskNumString) throws DukeException {
+    private static Command getDeleteCommand(String taskNumString) throws DukeException {
         try {
             int taskNum = Integer.parseInt(taskNumString);
             return new DeleteCommand(taskNum);
@@ -78,7 +78,7 @@ public class Parser {
         }
     }
 
-    private Command getCheckCommand(String dateString) throws DukeException {
+    private static Command getCheckCommand(String dateString) throws DukeException {
         try {
             LocalDate date = LocalDate.parse(dateString);
             return new CheckCommand(date);
@@ -87,12 +87,12 @@ public class Parser {
         }
     }
 
-    private Deadline getDeadline(String detail) {
-        if (detail.indexOf("/by") < 0) {
+    private static Deadline getDeadline(String detail) {
+        if (detail.indexOf(" /by ") < 0) {
             throw new DeadlineException("Missing a due date!");
         }
 
-        String[] splitDetails = detail.split("/by");
+        String[] splitDetails = detail.split(" /by ");
 
         if (splitDetails.length < 2) {
             throw new DeadlineException("Deadline details cannot be empty!");
@@ -108,12 +108,12 @@ public class Parser {
         }
     }
 
-    private Event getEvent(String detail) {
-        if (detail.indexOf("/at") < 0) {
+    private static Event getEvent(String detail) {
+        if (detail.indexOf(" /at ") < 0) {
             throw new EventException("Missing a due date!");
         }
 
-        String[] splitDetails = detail.split("/at");
+        String[] splitDetails = detail.split(" /at ");
 
         if (splitDetails.length < 2) {
             throw new EventException("Event details cannot be empty!");

@@ -1,8 +1,5 @@
-import java.util.Scanner;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class Duke {
     private Storage storage;
@@ -24,20 +21,17 @@ public class Duke {
     }
 
     public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
+        Command c = new WelcomeCommand();
+        c.execute(tasks, ui, storage);
+        while (!c.isExit()) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
+                c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
-                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printMessage(e.getMessage());
             }
         }
-
-        storage.store(tasks);
     }
 
     public static void main(String[] args) {

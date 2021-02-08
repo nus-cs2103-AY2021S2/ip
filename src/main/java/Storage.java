@@ -15,7 +15,10 @@ public class Storage {
     }
 
     public TaskList load() throws IOException, DateTimeParseException {
-        int lastDelimiterIndex = this.filePath.lastIndexOf("\\");
+        int lastDelimiterIndex = this.filePath.lastIndexOf("/");
+        if (lastDelimiterIndex < 0) {
+            lastDelimiterIndex = this.filePath.length() + 1;
+        }
         String dirPath = this.filePath.substring(0, lastDelimiterIndex);
         File dir = new File(dirPath);
 
@@ -62,13 +65,13 @@ public class Storage {
     public void store(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
 
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 1; i <= tasks.size(); i++) {
             Task currTask = tasks.get(i);
             String tag = currTask.getTag();
             int isComplete = currTask.checkIsComplete() ? 1 : 0;
             String detail = currTask.getDetail();
             String date = currTask.getDate() == null ? "" : currTask.getDate().toString();
-            fw.write(tag + " | " + isComplete + " | " + detail + " | " + date);
+            fw.write(tag + " | " + isComplete + " | " + detail + " | " + date + "\n");
         }
         fw.close();
 

@@ -17,11 +17,15 @@ public class TaskList {
     }
 
     public Task get(int taskNum) {
-        return this.tasks.get(taskNum);
+        return this.tasks.get(taskNum - 1);
+    }
+
+    public void done(int taskNum) {
+        this.tasks.get(taskNum - 1).setCompletion(true);
     }
 
     public void delete(int taskNum) {
-        this.tasks.remove(taskNum);
+        this.tasks.remove(taskNum - 1);
     }
 
     public int size() {
@@ -30,7 +34,7 @@ public class TaskList {
 
     public TaskList getTasksOnDate(LocalDate date) {
         ArrayList<Task> tasksOnDate = new ArrayList<>();
-        for (int i = 0; i < this.tasks.size(); i++) {
+        for (int i = 1; i <= this.tasks.size(); i++) {
             Task currTask = this.tasks.get(i);
             if (date.equals(currTask.getDate())) {
                 tasksOnDate.add(currTask);
@@ -42,8 +46,8 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder taskListString = new StringBuilder();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            taskListString.append((i + 1) + "." + tasks.get(i).toString());
+        for (int i = 1; i <= this.tasks.size(); i++) {
+            taskListString.append(i + "." + this.get(i).toString() + "\n");
         }
         return taskListString.toString();
     }
