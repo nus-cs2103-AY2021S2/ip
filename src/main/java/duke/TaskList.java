@@ -71,11 +71,7 @@ public class TaskList {
      */
     public TaskList findKeyWord(String key) {
         ArrayList<Task> temp = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.toString().contains(key)) {
-                temp.add(task);
-            }
-        }
+        tasks.stream().filter(task -> task.toString().contains(key)).forEach(temp::add);
         return new TaskList(temp);
     }
 
