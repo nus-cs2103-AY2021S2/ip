@@ -10,7 +10,10 @@ public class Parser {
      * Determines the keyword and processes the input based on the keyword.
      */
     static String parse(String inp) {
-        splitArray = inp.split(" ", 2);
+
+        String[] splitArray = inp.split(" ", 2);
+        assert splitArray.length > 0 : "Impossible input";
+
         String output;
         try {
             switch (splitArray[0]) {
@@ -60,7 +63,7 @@ public class Parser {
         try {
             int x = Integer.parseInt(s);
             if (x > TaskList.getCount()) {
-                throw new InvalidNumberException(Ui.invalidNumberExceptionMessage());
+                throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
             throw new InvalidNumberException(Ui.invalidNumberExceptionMessage());
