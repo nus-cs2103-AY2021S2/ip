@@ -50,4 +50,10 @@ public class Dialog extends HBox {
         var dialog = new Dialog(str, userImg);
         return dialog;
     }
+
+    public static Dialog getDukeDialog(String str, Image img) {
+        var dialog = new Dialog(str, img);
+        dialog.flip();
+        return dialog;
+    }
 }
