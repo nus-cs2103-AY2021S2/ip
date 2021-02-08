@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.task.Task;
 
 /**
@@ -220,11 +223,11 @@ public class Ui {
      * @param taskList List of all tasks.
      */
     public String returnList(TaskList taskList) {
-        String toReturn = "Here are the tasks in your list:" + "\n";
+        StringBuilder toReturn = new StringBuilder("Here are the tasks in your list:" + "\n");
         for (int i = 1; i <= taskList.getSize(); i++) {
-            toReturn += (i + ". " + taskList.getIndex(i - 1)) + "\n";
+            toReturn.append(i).append(". ").append(taskList.getIndex(i - 1)).append("\n");
         }
-        return toReturn;
+        return toReturn.toString();
     }
 
     /**
@@ -238,6 +241,25 @@ public class Ui {
                 + PADDING + task + "\n"
                 + "Now you have " + taskList.getSize()
                 + (taskList.getSize() == 1 ? " task " : " tasks ") + "in your list." + "\n";
+    }
+
+    /**
+     * Prints stats message.
+     *
+     * @param taskList List of all tasks.
+     */
+    public String returnStatsMessage(TaskList taskList) {
+        int numTotalTasks = taskList.getSize();
+        int numDoneTasks = taskList.getNumDoneTasks();
+        int numDoneTasksWithinWeek = taskList.getNumDoneTasksWithinWeek();
+        int numUpcomingTasksWithinWeek = taskList.getNumUpcomingTasksWithinWeek();
+
+        return "Here are your stats:" + "\n"
+                + PADDING + "Total Tasks: " + numTotalTasks + "\n"
+                + PADDING + "Total Done Tasks: " + numDoneTasks + "\n"
+                + PADDING + "Done Within This Week: " + numDoneTasksWithinWeek + "\n"
+                + PADDING + "Upcoming Next Week: " + numUpcomingTasksWithinWeek + "\n" + "\n"
+                + "Last Updated: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMM dd yyyy hh.mm a"));
     }
 
     /**

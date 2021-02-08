@@ -93,6 +93,7 @@ public class Storage {
             throw new DukeException(ui.corruptDataFileError());
         }
         int taskStatus = -1;
+        LocalDateTime doneDate = null;
         String taskName;
         String taskDate;
         Task taskToReturn = null;
@@ -101,6 +102,14 @@ public class Storage {
         case TODO:
             taskStatus = Integer.parseInt(taskStringArr[1]);
             taskName = taskStringArr[2];
+            if (taskStringArr.length == 4) { // has a doneDate
+                try {
+                    doneDate = LocalDateTime.parse(taskStringArr[3], dtf);
+                } catch (DateTimeParseException e) {
+                    throw new DukeException(ui.corruptDataFileError());
+                }
+                System.out.println("AAA");
+            }
             taskToReturn = new TodoTask(taskName);
             break;
         case EVENT:
@@ -110,6 +119,9 @@ public class Storage {
             try {
                 LocalDateTime ldtEvent = LocalDateTime.parse(taskDate, dtf);
                 taskToReturn = new EventTask(taskName, ldtEvent);
+                if (taskStringArr.length == 5) { // has a doneDate
+                    doneDate = LocalDateTime.parse(taskStringArr[4], dtf);
+                }
             } catch (DateTimeParseException e) {
                 throw new DukeException(ui.corruptDataFileError());
             }
@@ -121,6 +133,9 @@ public class Storage {
             try {
                 LocalDateTime ldtDeadline = LocalDateTime.parse(taskDate, dtf);
                 taskToReturn = new DeadlineTask(taskName, ldtDeadline);
+                if (taskStringArr.length == 5) { // has a doneDate
+                    doneDate = LocalDateTime.parse(taskStringArr[4], dtf);
+                }
             } catch (DateTimeParseException e) {
                 throw new DukeException(ui.corruptDataFileError());
             }
@@ -132,7 +147,8 @@ public class Storage {
             throw new DukeException(ui.corruptDataFileError());
         }
         if (taskStatus == 1) {
-            taskToReturn.markDone();
+            assert doneDate != null : "Done Date cannot be null";
+            taskToReturn.markDonePast(doneDate);
         }
         return taskToReturn;
     }
