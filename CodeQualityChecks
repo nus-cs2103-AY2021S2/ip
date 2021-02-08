@@ -1,0 +1,19 @@
+Readability:
+1. No long methods
+2. No deep nesting
+3. No complicated expressions
+4. No magic numbers
+5. Use explicit type casting instead of implicit
+6. Use brackets to group logic
+7. Use enums.
+8. SLAP
+9. Happy path should be unindented.
+
+Best pracitces:
+1. No duplication
+2. Minimise variable scope.
+
+Comments:
+1. Don't repeat obvious
+2. Address to audience, not yourself
+3. What, why not how.
