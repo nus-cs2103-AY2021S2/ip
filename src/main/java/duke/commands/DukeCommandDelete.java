@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.util.ArrayList;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.UserInputTokenSet;
@@ -53,7 +54,7 @@ public class DukeCommandDelete extends DukeCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
-            throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument {
+            throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument, DukeException {
         if (isDeleteAll) {
             boolean isConfirmedDelete = ui.getUserConfirmation("Confirm deletion of all tasks? ");
             if (isConfirmedDelete) {

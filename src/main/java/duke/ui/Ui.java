@@ -2,15 +2,8 @@ package duke.ui;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import duke.exceptions.DukeException;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * Handles I/O for program.
@@ -23,13 +16,10 @@ public abstract class Ui {
     private static final String BORDER = "    ____________________________________________________________";
     private static final String INDENT = "     ";
 
-    public abstract String getUserInput(String inputPrompt, String inputHint);
-    public abstract String getUserInputSecondary(String inputPrompt, String inputHint);
-    public abstract boolean getUserConfirmation(String confirmationPrompt);
-    public abstract void printError(DukeException e);
-    public abstract void printCallback(String callbackText);
-    public abstract void printResponse(String responseText);
-
+    public abstract boolean getUserConfirmation(String confirmationPrompt) throws DukeException;
+    public abstract void printError(DukeException e) throws DukeException;
+    public abstract void printCallback(String callbackText) throws DukeException;
+    public abstract void printResponse(String responseText) throws DukeException;
 
     /**
      * Get user input from main prompt / window.
@@ -37,9 +27,10 @@ public abstract class Ui {
      * @param inputPrompt user input prompt
      * @return string user input
      */
-    public String getUserInput(String inputPrompt) {
+    public String getUserInput(String inputPrompt) throws DukeException {
         return getUserInput(inputPrompt, "");
     }
+    public abstract String getUserInput(String inputPrompt, String inputHint) throws DukeException;
 
     /**
      * Get user input from separate prompt / window.
@@ -47,16 +38,17 @@ public abstract class Ui {
      * @param inputPrompt user input prompt
      * @return string user input
      */
-    public String getUserInputSecondary(String inputPrompt) {
+    public String getUserInputSecondary(String inputPrompt) throws DukeException {
         return getUserInputSecondary(inputPrompt, "");
     }
+    public abstract String getUserInputSecondary(String inputPrompt, String inputHint) throws DukeException;
 
     /**
      * Prints user input as a line.
      *
      * @param callbackText user input
      */
-    public void printCallbackLine(String callbackText) {
+    public void printCallbackLine(String callbackText) throws DukeException {
         printCallback(callbackText + "\n");
     }
 
@@ -66,7 +58,11 @@ public abstract class Ui {
      * @param responseText program response
      */
     public void printResponseLine(String responseText) {
-        printResponse(responseText + "\n");
+        try {
+            printResponse(responseText + "\n");
+        } catch (DukeException e) {
+            ;
+        }
     }
 
     /**

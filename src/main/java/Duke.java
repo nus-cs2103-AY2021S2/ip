@@ -9,6 +9,7 @@ import duke.parser.UserInputTokenizer;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
 import duke.ui.Ui; // Courtesy of https://se-education.org/guides/tutorials/javaFxPart2.html
+import duke.ui.UiCli;
 import duke.ui.UiGui;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -39,36 +40,19 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
+    public static void main(String[] args) {
+        new Duke(true);
+    }
+
+    /** Empty constructor used for initialization */
     public Duke() {}
 
-    /**
-     * Initializes the main program given directory used to save user tasks.
-     *
-     * Attempts to load the task list from the file, displaying the status
-     * of the task list depending on load success.
-     */
-    private void initDuke() {
-        String filePath = "./dukeData/tasks.txt";
-        ui.showWelcomeScreen();
-        isLocalTaskList = false;
-        try {
-            loader = new FileLoader(filePath);
-            tasks = loader.read();
-            loader.throwIfNotWritable(); // can read but cannot write
-            ui.showLoadingSuccess(tasks.size());
-
-        } catch (DukeExceptionFileNotWritable e) {
-            isLocalTaskList = true;
-            ui.showFileWriteError(tasks.size());
-
-        } catch (DukeExceptionFileNotAccessible e) {
-            isLocalTaskList = true;
-            tasks = new TaskList();
-            ui.showFileLoadingError();
-
-        } catch (DukeExceptionIllegalArgument e) {
-            tasks = new TaskList();
-            ui.showLoadingError();
+    /** Placeholder constructor for CLI interface */
+    public Duke(boolean placeholder) {
+        ui = new UiCli();
+        initDuke();
+        while (true) {
+            handleUserInput();
         }
     }
 
@@ -124,7 +108,37 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         initDuke();
+    }
 
+    /**
+     * Initializes the main program given directory used to save user tasks.
+     *
+     * Attempts to load the task list from the file, displaying the status
+     * of the task list depending on load success.
+     */
+    private void initDuke() {
+        String filePath = "./dukeData/tasks.txt";
+        ui.showWelcomeScreen();
+        isLocalTaskList = false;
+        try {
+            loader = new FileLoader(filePath);
+            tasks = loader.read();
+            loader.throwIfNotWritable(); // can read but cannot write
+            ui.showLoadingSuccess(tasks.size());
+
+        } catch (DukeExceptionFileNotWritable e) {
+            isLocalTaskList = true;
+            ui.showFileWriteError(tasks.size());
+
+        } catch (DukeExceptionFileNotAccessible e) {
+            isLocalTaskList = true;
+            tasks = new TaskList();
+            ui.showFileLoadingError();
+
+        } catch (DukeExceptionIllegalArgument e) {
+            tasks = new TaskList();
+            ui.showLoadingError();
+        }
     }
 
     private void handleUserInput() {
@@ -139,11 +153,18 @@ public class Duke extends Application {
             }
         } catch (DukeExceptionFileNotWritable e) {
             if (!isLocalTaskList) {
-                ui.printError(e);
+                try {
+                    ui.printError(e);
+                } catch (DukeException ee) {
+                    Platform.exit(); // unexpected error
+                }
             }
         } catch (DukeException e) {
-            ui.printError(e);
+            try {
+                ui.printError(e);
+            } catch (DukeException ee) {
+                Platform.exit(); // unexpected error
+            }
         }
-        userInput.clear();
     }
 }

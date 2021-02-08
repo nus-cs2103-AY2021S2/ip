@@ -45,7 +45,9 @@ public class UiGui extends Ui {
 
     @Override
     public String getUserInput(String inputPrompt, String inputHint) {
-        return this.textField.getText();
+        String text = textField.getText();
+        textField.clear();
+        return text;
     }
 
     @Override
