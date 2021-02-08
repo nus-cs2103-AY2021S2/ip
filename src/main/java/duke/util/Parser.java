@@ -28,16 +28,19 @@ public class Parser {
             case "ToDo":
                 task = new ToDo(jobName, done);
                 lst.add(task);
+                break;
             case "Deadline":
                 jobDate = LocalDate.parse(previousVersionTasks[3]);
                 jobTime = LocalTime.parse(previousVersionTasks[4]);
                 task = new Deadline(jobName, done, jobDate, jobTime);
                 lst.add(task);
+                break;
             case "Event":
                 jobDate = LocalDate.parse(previousVersionTasks[3]);
                 jobTime = LocalTime.parse(previousVersionTasks[4]);
                 task = new Event(jobName, done, jobDate, jobTime);
                 lst.add(task);
+                break;
             }
         }
         return lst;

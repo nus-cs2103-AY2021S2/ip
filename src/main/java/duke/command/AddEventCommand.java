@@ -2,10 +2,9 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.util.Ui;
-import duke.util.Event;
+
+import duke.exception.NameDuplicateException;
+import duke.util.*;
 import duke.exception.NoMeaningException;
 
 public class AddEventCommand extends Command {
@@ -28,15 +27,22 @@ public class AddEventCommand extends Command {
             String[] eventDateHours = eventTime.split(" ");
             LocalDate eventDate = LocalDate.parse(eventDateHours[1]);
             LocalTime eventHour = LocalTime.parse(eventDateHours[2]);
-            Event event = new Event(eventWord, eventDate, eventHour);
-            taskList.add(event);
-            storage.saveTasks(taskList);
-            return ui.getTaskFinally(event, taskList.size());
 
+            if (taskList.findExact(eventWord).size() == 0) {
+                Event event = new Event(eventWord, eventDate, eventHour);
+                taskList.add(event);
+                storage.saveTasks(taskList);
+                return ui.getTaskFinally(event, taskList.size());
+            } else {
+                storage.saveTasks(taskList);
+                throw new NameDuplicateException("Daddy, looks like you have already add this task");
+            }
         }  catch (StringIndexOutOfBoundsException e) {
             return ui.getTaskFail(new NoMeaningException(
                     "☹ OOPS!!! The description of a event cannot be empty.")
             );
+        }  catch (NameDuplicateException e) {
+            return ui.getTaskFail(e);
         }
     }
 }
