@@ -1,3 +1,20 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.CheckCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+
+import duke.task.Deadline;
+import duke.task.DeadlineException;
+import duke.task.Event;
+import duke.task.EventException;
+import duke.task.ToDo;
+import duke.task.ToDoException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 

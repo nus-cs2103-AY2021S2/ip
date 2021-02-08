@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class EventException extends DukeException {
     private static final long serialVersionUID = 1L;
 

@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.WelcomeCommand;
+import duke.task.TaskList;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 

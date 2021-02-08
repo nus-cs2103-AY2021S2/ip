@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Ui;
+import duke.Storage;
+
+import duke.task.TaskList;
+
 public class WelcomeCommand implements Command {
 
     public boolean isExit() {
