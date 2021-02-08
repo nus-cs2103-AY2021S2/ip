@@ -1,8 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Handles listing of tasks in TaskList
@@ -20,14 +21,17 @@ public class ListCommand extends Command {
     }
 
     private String getTaskListContents(TaskList tasks) {
-        String contents = "Here are the tasks in your list:";
+        StringBuilder contents = new StringBuilder("Here are the tasks in your list:");
+        AtomicInteger counter = new AtomicInteger(0);
 
-        for (int i = 1; i <= tasks.size(); i++) {
-            Task task = tasks.get(i);
-            contents += String.format("\n\t%d.%s", i, task.toString());
-        }
+        tasks.asList().forEach((task) -> {
+            if (task != null) {
+                contents.append(String.format("\n\t%d.%s", counter.intValue(), task.toString()));
+            }
+            counter.getAndIncrement();
+        });
 
-        return contents;
+        return contents.toString();
     }
 
     /**

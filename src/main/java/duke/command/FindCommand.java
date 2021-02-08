@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Handles finding matching keywords of a task name
  */
@@ -26,18 +28,20 @@ public class FindCommand extends Command {
      * @return List of keyword-matched tasks to output
      */
     private String getMatchedTaskListContents(TaskList tasks) {
-        String contents = "Here are the matching tasks in your list:";
-        // Tracks index of previously matched task
-        int prevIndex = 1;
-        for (int i = 1; i <= tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if (task.getDescription().toLowerCase().contains(description.toLowerCase())) {
-                contents += String.format("\n\t%d.%s", prevIndex, task.toString());
-                prevIndex++;
-            }
-        }
+        StringBuilder contents = new StringBuilder("Here are the tasks in your list:");
+        AtomicInteger counter = new AtomicInteger(1);
 
-        return contents;
+        tasks.asList().forEach((task) -> {
+            if (task != null) {
+                boolean isMatch = task.getDescription().toLowerCase().contains(description.toLowerCase());
+                if (isMatch) {
+                    contents.append(String.format("\n\t%d.%s", counter.intValue(), task.toString()));
+                    counter.getAndIncrement();
+                }
+            }
+        });
+
+        return contents.toString();
     }
 
     /**
