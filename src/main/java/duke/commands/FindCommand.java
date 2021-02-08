@@ -26,6 +26,9 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert !query.isBlank() : "input should not be blank";
+        assert !query.isEmpty() : "input should not be empty";
+
         TaskList printTaskList = new TaskList();
         for (Task task: taskList.getTaskList()) {
             if (task.getDescription().contains(query)) {
