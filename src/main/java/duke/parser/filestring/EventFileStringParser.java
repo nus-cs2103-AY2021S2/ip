@@ -2,6 +2,7 @@ package duke.parser.filestring;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.tasks.Event;
+import duke.tasks.Task;
 
 /**
  * Parser class to read and write Event to file.
@@ -11,10 +12,11 @@ public class EventFileStringParser extends TaskFileStringParser {
     /**
      * Generates file string for Event.
      *
-     * @param event Event
+     * @param task Event
      * @return string representation of event to be written to file
      */
-    public String toFileString(Event event) {
+    public String toFileString(Task task) {
+        Event event = (Event) task;
         String description = event.getDescription();
         String datetime = event.getDatetimeString();
         String done = event.getDone() ? "1" : "0";
@@ -28,7 +30,8 @@ public class EventFileStringParser extends TaskFileStringParser {
      * @return Event
      * @throws DukeExceptionIllegalArgument When Event parsing fails
      */
-    public static Event fromFileString(String eventFileString) throws DukeExceptionIllegalArgument {
+    @Override
+    public Task fromFileString(String eventFileString) throws DukeExceptionIllegalArgument {
         String[] data = eventFileString.split("\t");
         assert data.length == 4;
         assert data[0].equals("event");

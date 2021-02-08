@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.DatetimeParser;
+import duke.parser.UserInputTokenSet;
 import duke.storage.FileLoader;
 import duke.tasks.DateTask;
 import duke.tasks.Task;
@@ -24,46 +25,15 @@ public class DukeCommandFind extends DukeCommand {
     protected Optional<LocalDateTime> to;
     protected String search;
 
-    public DukeCommandFind(String input) throws DukeExceptionIllegalArgument {
-        // Process any keywords first, assumed stripped
-        search = "";
-        if (!input.startsWith("/from ")&&(!input.startsWith("/to "))) {
-            int searchIndex = input.length();
-            int fromIndex = input.indexOf(" /from");
-            int toIndex = input.indexOf(" /to");
-            if (fromIndex != -1 && searchIndex > fromIndex) {
-                searchIndex = fromIndex;
-            }
-            if (toIndex != -1 && searchIndex > toIndex) {
-                searchIndex = toIndex;
-            }
-
-            search = input.substring(0, searchIndex);
-            input = input.substring(searchIndex).strip();
-            input = input.strip();
+    public DukeCommandFind(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
+        from = Optional.empty(); // datetime lower bound
+        to = Optional.empty(); // datetime upper bound
+        search = tokenSet.get("/text"); // keyword search
+        if (tokenSet.contains("from")) {
+            from = Optional.of(DatetimeParser.parseDate(tokenSet.get("from")));
         }
-
-        // Date parsing
-        from = Optional.empty();
-        to = Optional.empty();
-        if (input.startsWith("/from ")) {
-            input = input.substring(6);
-            if (input.contains(" /to ")) {
-                String[] dates = input.split(" /to ");
-                from = Optional.of(DatetimeParser.parseDate(dates[0].strip()));
-                to = Optional.of(DatetimeParser.parseDate(dates[1].strip()));
-            } else {
-                from = Optional.of(DatetimeParser.parseDate(input));
-            }
-        } else if (input.startsWith("/to ")) {
-            input = input.substring(4);
-            if (input.contains(" /from ")) {
-                String[] dates = input.split(" /from ");
-                to = Optional.of(DatetimeParser.parseDate(dates[0].strip()));
-                from = Optional.of(DatetimeParser.parseDate(dates[1].strip()));
-            } else {
-                to = Optional.of(DatetimeParser.parseDate(input));
-            }
+        if (tokenSet.contains("to")) {
+            to = Optional.of(DatetimeParser.parseDate(tokenSet.get("to")));
         }
         if (from.isPresent() && to.isPresent() && from.get().isAfter(to.get())) {
             throw new DukeExceptionIllegalArgument(

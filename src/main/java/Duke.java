@@ -4,17 +4,16 @@ import duke.exceptions.DukeException;
 import duke.exceptions.DukeExceptionFileNotAccessible;
 import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.parser.UserInputTokenSet;
+import duke.parser.UserInputTokenizer;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
-
-// Courtesy of https://se-education.org/guides/tutorials/javaFxPart2.html
-import duke.ui.Ui;
+import duke.ui.Ui; // Courtesy of https://se-education.org/guides/tutorials/javaFxPart2.html
 import duke.ui.UiGui;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +23,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
+
+    private static final Font FONT = new Font("Consolas", 10);
 
     private FileLoader loader;
     private TaskList tasks;
@@ -36,8 +37,6 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-    private static final Font FONT = new Font("Consolas", 10);
 
     public Duke() {
     }
@@ -132,8 +131,9 @@ public class Duke extends Application {
     private void handleUserInput() {
         try {
             String input = userInput.getText();
+            UserInputTokenSet tokenSet = UserInputTokenizer.parse(input);
             ui.println(input);
-            DukeCommand cmd = DukeCommandFactory.getDukeCommand(input);
+            DukeCommand cmd = DukeCommandFactory.getDukeCommand(tokenSet);
             cmd.execute(tasks, ui, loader);
             if (cmd.isExit()) {
                 Platform.exit();

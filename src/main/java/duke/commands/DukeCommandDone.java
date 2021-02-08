@@ -1,7 +1,10 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.parser.UserInputTokenSet;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -13,11 +16,14 @@ import duke.ui.Ui;
  */
 public class DukeCommandDone extends DukeCommand {
 
-    private final int index;
+    private final ArrayList<Integer> indices = new ArrayList<>();
 
-    public DukeCommandDone(String arg) throws DukeExceptionIllegalArgument {
+    public DukeCommandDone(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
         try {
-            this.index = Integer.parseInt(arg) - 1;
+            String indices = tokenSet.get("/text");
+            for (String s : indices.split("\\s+")) {
+                this.indices.add(Integer.parseInt(s) - 1);
+            }
         } catch (Exception e) {
             throw new DukeExceptionIllegalArgument("Need to specify task number to mark as done.");
         }
@@ -26,8 +32,12 @@ public class DukeCommandDone extends DukeCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
             throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument {
-        tasks.setDone(index);
+        ArrayList<String> taskStrings = new ArrayList<>();
+        for (int index : indices) {
+            tasks.setDone(index);
+            taskStrings.add("  " + tasks.getTask(index));
+        }
         loader.write(tasks);
-        ui.showMessage("Nice! I've marked this task as done:", "  "+tasks.getTask(index));
+        ui.showMessage("Nice! I've marked these tasks as done:", taskStrings);
     }
 }

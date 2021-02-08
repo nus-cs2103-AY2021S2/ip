@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.parser.UserInputTokenSet;
 import duke.storage.FileLoader;
 import duke.tasks.Event;
 import duke.tasks.Todo;
@@ -21,8 +22,8 @@ public class DukeCommandList extends DukeCommand {
 
     protected boolean toSort;
 
-    public DukeCommandList(String arg) {
-        toSort = arg.equals("sort");
+    public DukeCommandList(UserInputTokenSet tokenSet) {
+        toSort = tokenSet.contains("sort");
     }
 
     @Override

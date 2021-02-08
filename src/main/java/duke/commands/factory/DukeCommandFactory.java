@@ -9,6 +9,7 @@ import duke.commands.DukeCommandFind;
 import duke.commands.DukeCommandList;
 import duke.exceptions.DukeExceptionIllegalCommand;
 import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.parser.UserInputTokenSet;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -24,44 +25,35 @@ public final class DukeCommandFactory {
      * Factory method for command subclass generation. The first-hop parsing occurs here.
      * The rest of the parsing is offloaded to the individual parsing classes.
      *
-     * @param line User input string.
+     * @param tokenSet User input string.
      * @return DukeCommand.
      * @throws DukeExceptionIllegalCommand When command supplied is invalid.
      * @throws DukeExceptionIllegalArgument When task parsing error occurs.
      */
-    public static DukeCommand getDukeCommand(String line)
+    public static DukeCommand getDukeCommand(UserInputTokenSet tokenSet)
             throws DukeExceptionIllegalCommand, DukeExceptionIllegalArgument {
-        line = line.strip(); // input sanitization
-        String arg = "";
-        String cmd = line;
-        if (line.contains(" ")) {
-            int splitIdx = line.indexOf(' ');
-            cmd = line.substring(0, splitIdx); // automatically stripped
-            arg = line.substring(splitIdx+1).strip();
-        }
-        cmd = cmd.toLowerCase();
-
+        String cmd = tokenSet.get("/command");
         Task task;
         switch (cmd) {
+        case "event":
+            task = Event.parse(tokenSet);
+            return new DukeCommandAdd(task);
+        case "todo":
+            task = Todo.parse(tokenSet);
+            return new DukeCommandAdd(task);
+        case "deadline":
+            task = Deadline.parse(tokenSet);
+            return new DukeCommandAdd(task);
         case "bye":
             return new DukeCommandBye();
         case "list":
-            return new DukeCommandList(arg);
+            return new DukeCommandList(tokenSet);
         case "done":
-            return new DukeCommandDone(arg);
+            return new DukeCommandDone(tokenSet);
         case "delete":
-            return new DukeCommandDelete(arg);
-        case "event":
-            task = Event.parse(arg);
-            return new DukeCommandAdd(task);
-        case "todo":
-            task = Todo.parse(arg);
-            return new DukeCommandAdd(task);
-        case "deadline":
-            task = Deadline.parse(arg);
-            return new DukeCommandAdd(task);
+            return new DukeCommandDelete(tokenSet);
         case "find":
-            return new DukeCommandFind(arg);
+            return new DukeCommandFind(tokenSet);
         default:
             throw new DukeExceptionIllegalCommand("Command '" + cmd + "' is invalid. Valid commands:"
                     + "\nbye, list, done, delete, event, todo, deadline");

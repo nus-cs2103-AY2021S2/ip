@@ -2,10 +2,13 @@ package duke.commands;
 
 import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.parser.UserInputTokenSet;
 import duke.storage.FileLoader;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * Delete command.
@@ -15,14 +18,18 @@ import duke.ui.Ui;
  */
 public class DukeCommandDelete extends DukeCommand {
 
-    private final int index;
+    private final ArrayList<Integer> indices = new ArrayList<>();
+    private boolean isDeleteAll = false;
 
-    public DukeCommandDelete(String arg) throws DukeExceptionIllegalArgument {
-        if (arg.equals("all")) {
-            this.index = -1; // Special delete all
+    public DukeCommandDelete(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
+        if (tokenSet.contains("all")) {
+            isDeleteAll = true;
         } else {
             try {
-                this.index = Integer.parseInt(arg) - 1;
+                String indices = tokenSet.get("/text");
+                for (String s : indices.split("\\s+")) {
+                    this.indices.add(Integer.parseInt(s) - 1);
+                }
             } catch (Exception e) {
                 throw new DukeExceptionIllegalArgument("Need to specify task number to delete.");
             }
@@ -33,7 +40,7 @@ public class DukeCommandDelete extends DukeCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
             throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument {
-        if (index == -1) {
+        if (isDeleteAll) {
             String reply = ui.getUserInput("Confirm deletion of all tasks (y/[n])? ");
             if (reply.equalsIgnoreCase("y")) {
                 tasks.deleteAll();
@@ -44,12 +51,16 @@ public class DukeCommandDelete extends DukeCommand {
             }
 
         } else {
-            Task task = tasks.getTask(index);
-            tasks.deleteTask(index);
+            ArrayList<String> taskStrings = new ArrayList<>();
+            for (int index : indices) {
+                taskStrings.add("  " + tasks.getTask(index));
+                tasks.deleteTask(index);
+                tasks.setDone(index);
+            }
             loader.write(tasks);
             ui.showMessage(
-                    "Noted. I've removed this task:",
-                    "  " + task,
+                    "Noted. I've removed these tasks:",
+                    taskStrings,
                     "Now you have " + tasks.size() + " tasks in the list.");
         }
     }

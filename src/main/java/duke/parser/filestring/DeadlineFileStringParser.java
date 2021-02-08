@@ -2,6 +2,7 @@ package duke.parser.filestring;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.tasks.Deadline;
+import duke.tasks.Task;
 
 /**
  * Parser class to read and write Deadline to file.
@@ -11,10 +12,11 @@ public class DeadlineFileStringParser extends TaskFileStringParser {
     /**
      * Generates file string for Deadline.
      *
-     * @param deadline Deadline
+     * @param task Deadline
      * @return string representation of deadline to be written to file
      */
-    public String toFileString(Deadline deadline) {
+    public String toFileString(Task task) {
+        Deadline deadline = (Deadline) task;
         String description = deadline.getDescription();
         String datetime = deadline.getDatetimeString();
         String done = deadline.getDone() ? "1" : "0";
@@ -28,7 +30,8 @@ public class DeadlineFileStringParser extends TaskFileStringParser {
      * @return Deadline
      * @throws DukeExceptionIllegalArgument When Deadline parsing fails
      */
-    public static Deadline fromFileString(String deadlineFileString) throws DukeExceptionIllegalArgument {
+    @Override
+    public Task fromFileString(String deadlineFileString) throws DukeExceptionIllegalArgument {
         String[] data = deadlineFileString.split("\t");
         assert data.length == 4;
         assert data[0].equals("deadline");

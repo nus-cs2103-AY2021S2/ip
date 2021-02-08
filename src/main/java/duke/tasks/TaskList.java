@@ -3,10 +3,11 @@ package duke.tasks;
 import java.util.ArrayList;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.parser.filestring.GetTaskFileStringParser;
 
 public class TaskList {
 
-    private ArrayList<Task> tasks; // composition
+    private final ArrayList<Task> tasks; // composition
 
     /**
      * Constructor for TaskList.
@@ -20,20 +21,19 @@ public class TaskList {
     /**
      * Constructor for TaskList
      *
-     * Initializes a TaskList based on an array of unparsed task strings.
+     * Initializes a TaskList based on an array of un-parsed task strings.
      *
      * @param taskStrings List of task Strings.
      * @throws DukeExceptionIllegalArgument When parsing fails.
      */
     public static TaskList fromFileStrings(ArrayList<String> taskStrings) throws DukeExceptionIllegalArgument {
         TaskList tasklist = new TaskList();
-        List<= new ArrayList<>(); // if fail, none imported
-        boolean isImportSuccess = true;
+        GetTaskFileStringParser parserFactory = new GetTaskFileStringParser();
         for (String s: taskStrings) {
-            Task t = Task.parseFileString(s);
-            tasks.add(t);
+            Task t = parserFactory.getFileStringParser(s).fromFileString(s);
+            tasklist.addTask(t);
         }
-        return tasks
+        return tasklist;
     }
 
     /**
@@ -110,11 +110,14 @@ public class TaskList {
      * For writing into file.
      *
      * @return ArrayList of task Strings.
+     * @throws DukeExceptionIllegalArgument When task type is not supported for conversion.
      */
-    public ArrayList<String> asArrayList() {
+    public ArrayList<String> asArrayList() throws DukeExceptionIllegalArgument {
+        GetTaskFileStringParser parserFactory = new GetTaskFileStringParser();
         ArrayList<String> taskStrings = new ArrayList<>();
         for (Task t: tasks) {
-            taskStrings.add(t.toFileString());
+            String taskString = parserFactory.getFileStringParser(t).toFileString(t);
+            taskStrings.add(taskString);
         }
         return taskStrings;
     }

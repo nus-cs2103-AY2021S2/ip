@@ -1,10 +1,5 @@
 package duke.storage;
 
-import duke.exceptions.DukeExceptionFileNotAccessible;
-import duke.exceptions.DukeExceptionFileNotWritable;
-import duke.exceptions.DukeExceptionIllegalArgument;
-import duke.tasks.TaskList;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,11 +7,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.exceptions.DukeExceptionFileNotAccessible;
+import duke.exceptions.DukeExceptionFileNotWritable;
+import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.tasks.TaskList;
+
 public class FileLoader {
 
     protected File f;
-    public boolean isWritable;
-    public boolean isReadable;
+    private boolean isWritable;
+    private boolean isReadable;
 
     /**
      * Loads the string path to the task database.
@@ -69,12 +69,14 @@ public class FileLoader {
      */
     public void write(TaskList t) throws DukeExceptionFileNotWritable {
         if (isWritable) {
-            try (FileWriter writer = new FileWriter(f, false)){
+            try (FileWriter writer = new FileWriter(f, false)) {
                 for (String s: t.asArrayList()) {
-                    writer.write(s+'\n');
+                    writer.write(s + '\n');
                 }
             } catch (IOException e) {
                 throw new DukeExceptionFileNotWritable("Unable to write to file.");
+            } catch (DukeExceptionIllegalArgument e) {
+                throw new DukeExceptionFileNotWritable("Problem with task.");
             }
         }
     }
@@ -93,7 +95,7 @@ public class FileLoader {
             while ((line = reader.readLine()) != null) {
                 tasks.add(line);
             }
-            return new TaskList(tasks);
+            return TaskList.fromFileStrings(tasks);
         } catch (IOException e) {
             // Can happen with directory change
             throw new DukeExceptionIllegalArgument("Error in reading file.");
