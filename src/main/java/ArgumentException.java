@@ -23,6 +23,7 @@ public class ArgumentException extends DukeException {
     public ArgumentException(int type) {
         super(MESSAGE);
         this.type = type;
+        assert (type == 1 || type == 2 || type == 3 || type == 4): "Problem in Argument Exception type.";
     }
 
     /**
@@ -49,7 +50,8 @@ public class ArgumentException extends DukeException {
             return super.toString()
                 + "Please enter a valid item number in the list.";
         default:
-            return super.toString();
+            assert false: "Problem in Argument Exception type.";
+            return "Problem in Argument Exception type.";
         }
     }
 }

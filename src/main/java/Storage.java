@@ -56,27 +56,51 @@ public class Storage {
      */
     private void readTaskList(String taskData) {
         String[] splits = taskData.split(" \\| ");
-        if (splits[0].equals("T")) {
-            Todo addedTask = new Todo(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"));
+        String taskType = splits[0].trim();
+        String isDoneString;
+        String description;
+        String date;
+        if (taskType.equals("T")) {
+            assert splits.length == 3: "Error in storage file duke.txt format.";
+            isDoneString = splits[1].trim();
+            description = splits[2].trim();
+            assert (isDoneString.equals("1") || isDoneString.equals("0")) : "Error in storage file duke.txt format.";
+            assert (!description.equals("")) : "Error in storage file duke.txt format.";
+            Todo addedTask = new Todo(description, isDoneString.equals("1"));
             tasks.addTask(addedTask);
-        } else if (splits[0].equals("D")) {
+        } else if (taskType.equals("D")) {
+            assert splits.length == 4: "Error in storage file duke.txt format.";
+            isDoneString = splits[1].trim();
+            description = splits[2].trim();
+            date = splits[3].trim();
+            assert (isDoneString.equals("1") || isDoneString.equals("0")) : "Error in storage file duke.txt format.";
+            assert (!description.equals("")) : "Error in storage file duke.txt format.";
+            assert (!date.equals("")) : "Error in storage file duke.txt format.";
             try {
-                Deadline addedTask = new Deadline(Arrays.asList(splits).get(2),
-                        Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
+                Deadline addedTask = new Deadline(description, isDoneString.equals("1"), date);
                 tasks.addTask(addedTask);
             } catch (DukeException e) {
-                System.out.println(e);
+                assert false: "Error in storage file duke.txt format";
             }
-        } else if (splits[0].equals("E")) {
+        } else if (taskType.equals("E")) {
+            assert splits.length == 4: "Error in storage file duke.txt format.";
+            isDoneString = splits[1].trim();
+            description = splits[2].trim();
+            date = splits[3].trim();
+            assert (isDoneString.equals("1") || isDoneString.equals("0")) : "Error in storage file duke.txt format.";
+            assert (!description.equals("")) : "Error in storage file duke.txt format.";
+            assert (!date.equals("")) : "Error in storage file duke.txt format.";
             try {
-                Event addedTask = new Event(Arrays.asList(splits).get(2),
-                        Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
+                Event addedTask = new Event(description, isDoneString.equals("1"), date);
                 tasks.addTask(addedTask);
             } catch (DukeException e) {
-                System.out.println(e);
+                assert false: "Error in storage file duke.txt format";
             }
+        } else if (!taskType.trim().equals("")) {
+            assert false : "Error in storage file duke.txt format.";
         }
     }
+
 
     private void writeNewFile(String userInput) throws IOException {
         FileWriter fw = new FileWriter(Storage.DUKE_FILE_PATH);
