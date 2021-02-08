@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    private static String taskType = "EVENT";
+    private static final String TASK_TYPE = "EVENT";
 //    private String startTime;
 //    private String endTime;
     private LocalDateTime eventTime;
@@ -18,8 +18,9 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    @Override
     public String getTaskType() {
-        return taskType;
+        return TASK_TYPE;
     }
 
     public LocalDateTime getEventTime() {
@@ -28,7 +29,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] [%s] %s (at: %s %s %s %s:%s)\n",
+        return String.format("[%s] [%s] %s (at: %s %s %s %s:%s)",
                 this.getTaskType(), this.getStatusIcon(),
                 this.getTaskDescription(), eventTime.getMonth(),
                 eventTime.getDayOfMonth(), eventTime.getYear(),

@@ -15,12 +15,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task deletedTask = taskList.getTask(index);
         taskList.deleteTask(index);
         // System.out.printf(">>> Nice! I've marked this task as done:\n  [%s] [%s] %s\n",
         //         taskList..getTaskType(), newTask.getStatusIcon(), newTask.getTaskDescription());
-        ui.printTaskDeleted(deletedTask);
         storage.saveData(taskList);
+        return ui.showTaskDeleted(deletedTask);
     }
 }

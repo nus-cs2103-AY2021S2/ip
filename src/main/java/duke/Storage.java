@@ -20,29 +20,17 @@ import java.util.List;
  * Storage class to save information to hard disk.
  */
 public class Storage {
-    private final String DEFAULT_PATH = "./duke.txt";
     private final Path filePath;
-
-    public Storage() {
-        this.filePath = Paths.get(DEFAULT_PATH);
-        File file = new File(DEFAULT_PATH);
-        if (Files.notExists(this.filePath)) {
-            try {
-                System.out.println("created new file");
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+    private final String filePathStr;
 
     /**
      * Constructor that takes in filepath to data file
-     * @param filePathStr
+     * @param filePathStr string of the file path to the data file
      */
     public Storage(String filePathStr) {
         this.filePath = Paths.get(filePathStr);
-        File file = new File(DEFAULT_PATH);
+        this.filePathStr = filePathStr;
+        File file = new File(filePathStr);
         if (Files.notExists(this.filePath)) {
             try {
                 System.out.println("created new file");
@@ -60,7 +48,7 @@ public class Storage {
      * @throws IOException
      */
     public void saveData(List<Task> taskList) throws IOException {
-        FileWriter file = new FileWriter(DEFAULT_PATH);
+        FileWriter file = new FileWriter(filePathStr);
         for (Task task : taskList) {
             String toBeSaved = "";
             switch (task.getTaskType()) {
@@ -76,7 +64,6 @@ public class Storage {
                             task.getTaskType(),
                             task.getIsDone(),
                             task.getTaskDescription());
-                    // System.out.println("im at todo");
                     break;
                 case "EVENT":
                     toBeSaved = String.format("%s|%s|%s|%s",
