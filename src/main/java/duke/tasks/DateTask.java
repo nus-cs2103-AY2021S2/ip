@@ -1,10 +1,10 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.DatetimeParser;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * DateTask class.
@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
  * Extension of Task class to include a datetime field and
  * the corresponding datetime getter. Field set during construction.
  */
-public class DateTask extends Task {
+public abstract class DateTask extends Task {
 
-    protected LocalDateTime datetime;
+    private LocalDateTime datetime;
 
     /**
      * Constructor for DateTask.
@@ -22,7 +22,7 @@ public class DateTask extends Task {
      * @param description Description of DateTask.
      * @param isDone Whether task is completed.
      */
-    public DateTask(String description, boolean isDone) {
+    protected DateTask(String description, boolean isDone) {
         super(description, isDone);
     }
 
@@ -43,7 +43,7 @@ public class DateTask extends Task {
     }
 
     /**
-     * Parses datetime for DateTask.
+     * Parses datetime for DateTask from string.
      *
      * @param datetime string representation of datetime
      * @return LocalDateTime
@@ -53,6 +53,11 @@ public class DateTask extends Task {
         return DatetimeParser.parseDate(datetime);
     }
 
+    /**
+     * Returns string representation of datetime in ISO format
+     *
+     * @return string representation of datetime
+     */
     public String getDatetimeString() {
         return DatetimeParser.formatDateISO(datetime);
     }

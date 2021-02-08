@@ -22,7 +22,7 @@ public final class Event extends DateTask {
      */
     public Event(String description, String datetime, boolean isDone) throws DukeExceptionIllegalArgument {
         super(description, isDone);
-        this.datetime = parseDatetime(datetime);
+        setDatetime(parseDatetime(datetime));
     }
 
     /**
@@ -61,15 +61,5 @@ public final class Event extends DateTask {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + getDatetimeString() + ")";
-    }
-
-    /**
-     * For minified printing into file.
-     *
-     * @return String representation of Event.
-     */
-    @Override
-    public String toFileString() {
-        return "E\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + getDatetimeString();
     }
 }

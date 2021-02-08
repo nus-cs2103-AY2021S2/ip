@@ -21,7 +21,7 @@ public final class Deadline extends DateTask {
      */
     public Deadline(String description, String datetime, boolean isDone) throws DukeExceptionIllegalArgument {
         super(description, isDone);
-        this.datetime = parseDatetime(datetime);
+        setDatetime(parseDatetime(datetime));
     }
 
     /**
@@ -60,14 +60,5 @@ public final class Deadline extends DateTask {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getDatetimeString() + ")";
-    }
-
-    /**
-     * For minified printing into file.
-     *
-     * @return String representation of Deadline.
-     */
-    public String toFileString() {
-        return "D\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + getDatetimeString();
     }
 }

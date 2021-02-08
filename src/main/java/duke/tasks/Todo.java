@@ -49,13 +49,4 @@ public final class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
-
-    /**
-     * For minified printing into file.
-     *
-     * @return String representation of Todo.
-     */
-    public String toFileString() {
-        return "T\t" + ((isDone) ? 1 : 0) + "\t" + description;
-    }
 }

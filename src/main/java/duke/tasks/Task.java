@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.exceptions.DukeExceptionIllegalArgument;
-
 /**
  * Task class.
  *
@@ -11,8 +9,8 @@ import duke.exceptions.DukeExceptionIllegalArgument;
  */
 public abstract class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for Task.
@@ -20,7 +18,7 @@ public abstract class Task {
      * @param description Description of Task.
      * @param isDone Whether task is completed.
      */
-    public Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -60,62 +58,12 @@ public abstract class Task {
     }
 
     /**
-     * Returns status icon representing completion of Task.
-     *
-     * @return Tick or cross.
-     */
-    public String getStatusIcon() {
-        return (isDone ? "\u2713": "\u2718");
-    }
-
-    /**
-     * Returns Task by parsing a task string.
-     *
-     * @param s Task string.
-     * @return Task.
-     * @throws DukeExceptionIllegalArgument If invalid task string supplied.
-     */
-    public static Task parseFileString(String s) throws DukeExceptionIllegalArgument {
-        String[] args = s.split("\t");
-        boolean isDone = args[1].equals("1");
-
-        Task task;
-        switch (args[0]) {
-        case "E":
-            // task = Event.parse(args[2] + " /at " + args[3]);
-            task = Todo.parse(args[2]);
-            break;
-        case "T":
-            task = Todo.parse(args[2]);
-            break;
-        case "D":
-            task = Deadline.parse(args[2] + " /by " + args[3]);
-            break;
-        default:
-            throw new DukeExceptionIllegalArgument("Incorrect task list data.");
-        }
-        if (isDone) {
-            task.setDone();
-        }
-        return task;
-    }
-
-    /**
      * For pretty printing on stdout.
      *
      * @return String representation of Task.
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
-    }
-
-    /**
-     * For minified printing into file.
-     *
-     * @return String representation of Task.
-     */
-    public String toFileString() {
-        return toString();
+        return "[" + (isDone ? "\u2713" : "\u2718") + "] " + getDescription();
     }
 }
