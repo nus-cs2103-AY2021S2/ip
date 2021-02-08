@@ -14,7 +14,7 @@ public class Ui {
     private final Scanner sc;
     private StringBuilder responseOutput;
     private final static String line = "\t________________________________________________________________\n";
-    private final static String logo = "                                                     \n"
+    private final static String oldLogo = "                                                     \n"
             + "\t88                                                   \n"
             + "\t88                                            ,d     \n"
             + "\t88                                            88     \n"
@@ -25,6 +25,12 @@ public class Ui {
             + "\t8Y\"Ybbd8\"'   `\"Ybbd8\"' `\"8bbdP\"Y8 `\"YbbdP\"'   \"Y888  \n"
             + "\t                                                     \n"
             + "\t                                                     \n";
+    private final static String logo = " _                    _   \n"
+            + "| |                  | |  \n"
+            + "| |__   ___  __ _ ___| |_ \n"
+            + "| '_ \\ / _ \\/ _` / __| __|\n"
+            + "| |_) |  __/ (_| \\__ \\ |_ \n"
+            + "|_.__/ \\___|\\__,_|___/\\__|\n";
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -54,46 +60,46 @@ public class Ui {
     }
 
     public String showLoading() {
-        return "\tLoading data from storage...\n";
+        return "Loading data from storage...\n";
     }
 
     public String showLoadingSuccess() {
-        return "\tData loaded successfully!\n";
+        return "Data loaded successfully!\n";
     }
 
     public String showLoadingError() {
-        return "\tFailed to load data!\n";
+        return "Failed to load data!\n";
     }
 
     public String showDone(Task task) {
-        return "\tGood job! You've just completed this task:\n" + "\t\t" + task + "\n";
+        return "Good job! You've just completed this task:\n" + "\t" + task + "\n";
     }
 
     public String showDeleted(Task task) {
-        return "\tGot it! I've removed this task for you:\n\t\t" + task + "\n";
+        return "Got it! I've removed this task for you:\n\t" + task + "\n";
     }
 
     public String showNumOfTasks(int numOfTasks) {
-        return "\tYou now have " + numOfTasks + " tasks in total." + "\n";
+        return "You now have " + numOfTasks + " tasks in total." + "\n";
     }
 
     public String showAdded(Task task) {
-        return "\tOne more task added to the hustle:\n\t\t" + task + "\n";
+        return "One more task added to the hustle:\n\t" + task + "\n";
     }
 
     public String showWelcome() {
-        String greeting = logo + "\tWelcome to ToDoBeast, your best productivity task tracker tool!\n"
-                + "\tLet's get this bread! How would you like to be productive today?\n\n"
-                + "\t[Type \"instructions\" to display instructions]\n";
+        String greeting = logo + "\nWelcome to ToDoBeast, your best productivity task tracker tool!\n"
+                + "Let's get this bread! How would you like to be productive today?\n\n"
+                + "[Type \"instructions\" to display instructions]\n";
         return greeting;
     }
 
     public String listTasks() {
-        return "\tHere are your tasks:\n";
+        return "Here are your tasks:\n";
     }
 
     public String findTasks() {
-        return "\tHere are the matching tasks in your list:\n";
+        return "Here are the matching tasks in your list:\n";
     }
 
     public String printTaskList(List<Task> taskList) {
@@ -106,7 +112,7 @@ public class Ui {
     }
 
     public String showInstructions() {
-        String instructions = "\tList of commands for ToDoBeast:\n\n"
+        String instructions = "List of commands for ToDoBeast:\n\n"
                 + "\t1. bye/exit - to quit ToDoBeast\n"
                 + "\t2. list - lists all the tasks that have been stored in ToDoBeast\n"
                 + "\t3. delete, [index] - deletes the task with the corresponding [index]\n"

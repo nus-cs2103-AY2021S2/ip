@@ -8,12 +8,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todobeast.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutX="14.0" layoutY="852.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="491.0" text="kk" AnchorPane.bottomAnchor="7.0" />
         <Button fx:id="sendButton" layoutX="517.0" layoutY="852.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutX="5.0" layoutY="4.0" prefHeight="837.0" prefWidth="591.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutX="5.0" layoutY="4.0" prefHeight="842.0" prefWidth="589.0" vvalue="1.0">
          <content>
-                <VBox fx:id="dialogContainer" prefHeight="843.0" prefWidth="551.0" />
+                <VBox fx:id="dialogContainer" />
          </content>
         </ScrollPane>
+        <TextField fx:id="userInput" layoutX="14.0" layoutY="852.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="491.0" AnchorPane.bottomAnchor="7.0" />
     </children>
 </AnchorPane>
