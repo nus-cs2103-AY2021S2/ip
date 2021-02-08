@@ -12,6 +12,7 @@ public class Ui {
      * @return A String depending on whether there is 1 task or more than 1 task.
      */
     public String printResponse(int taskListSize) {
+        assert taskListSize >= 0;
         if (taskListSize == SINGLE_TASK_IN_LIST) {
             return "task";
         } else {
@@ -28,6 +29,7 @@ public class Ui {
      * number of tasks in the list.
      */
     public String respondToAddTask(Task task, int taskListSize) {
+        assert task != null;
         return "Done! One new task:\n" + task.toString() + "\nNow you have "
                  + taskListSize + " " + printResponse(taskListSize) + " in the list";
     }
@@ -41,6 +43,7 @@ public class Ui {
      * number of tasks in the list.
      */
     public String respondToDelete(Task task, int taskListSize) {
+        assert taskListSize >= 0;
         return "Noted, I've removed this task:\n" + task.toString()
                  + "\nNow you have " + taskListSize + " " + printResponse(taskListSize) + " in " + "the list";
     }
@@ -61,6 +64,7 @@ public class Ui {
      * @return A string, depending on whether the list is empty.
      */
     public String respondToList(int taskListSize) {
+        assert taskListSize >= 0;
         if (taskListSize != EMPTY_LIST) {
             return "Here are the tasks in your list:";
         } else {
@@ -75,6 +79,7 @@ public class Ui {
      * @return A string.
      */
     public String respondToDone(Task task) {
+        assert task != null;
         return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
