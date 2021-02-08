@@ -59,6 +59,8 @@ public class Storage {
     public void writeToFile(TaskList taskList) throws FileNotFoundException {
         // Push the file content to the page
         FileWriter fileWriter;
+        assertFileCreated();
+
         try {
             fileWriter = new FileWriter(filePath);
 
@@ -81,6 +83,7 @@ public class Storage {
      */
     public ArrayList<String> loadFileContent() throws FileNotFoundException {
 
+        assertFileCreated();
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
         ArrayList<String> contents = new ArrayList<>();
@@ -93,5 +96,13 @@ public class Storage {
         sc.close();
 
         return contents;
+    }
+
+    /**
+     * Assertions that the file exist.
+     */
+    public void assertFileCreated() {
+        File folder = new File("data");
+        assert folder.exists() : "The folder should exist for us to write something.";
     }
 }

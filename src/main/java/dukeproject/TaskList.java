@@ -57,6 +57,9 @@ public class TaskList {
                 throw new DukeException();
             }
         }
+
+        assert contents.size() == taskList.size()
+            : "The created task list should have the same size as the contents";
     }
 
     /**
