@@ -117,7 +117,7 @@ public class Ui {
     }
 
     public String listMatchingTasksResponse(TaskList matchingTasks) {
-        String response = " Here are the tasks:\n";
+        String response = " Here are the matching tasks:\n";
         for (int i = 0; i < matchingTasks.size(); i++) {
             String thisTask = (i + 1) + ". " + matchingTasks.get(i).toString() + "\n";
             response += thisTask;

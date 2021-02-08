@@ -64,7 +64,7 @@ public class Parser {
             TaskDescription td = parseDescription(EnumTask.EVENT, cleanerInput, endIndex);
             command = new EventCommand(td);
         } else if (potentialCommand.equalsIgnoreCase("FIND")) {
-            command = new FindCommand(cleanerInput);
+            command = new FindCommand(parseKeyword(cleanerInput, endIndex));
         } else {
             throw new CommandNotFoundException("What do you mean? I do not know this command.");
         }
@@ -95,11 +95,11 @@ public class Parser {
         }
         switch (taskType) {
         case TODO:
-            return new TaskDescription(input.substring(index).strip());
+            return new TaskDescription(input.substring(index).trim());
         case DEADLINE:
-            return new TaskDescription(input.substring(index).strip().split("/by"));
+            return new TaskDescription(input.substring(index).trim().split("/by"));
         case EVENT:
-            return new TaskDescription(input.substring(index).strip().split("/at"));
+            return new TaskDescription(input.substring(index).trim().split("/at"));
         default:
             throw new DukeException("I do not know this task");
         }
@@ -117,6 +117,13 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DescriptionMissingException("Input index is not valid");
         }
+    }
+
+    public static String parseKeyword(String input, int index) throws DescriptionMissingException {
+        if (index == -1) {
+            throw new DescriptionMissingException("Please include the keyword!");
+        }
+        return input.substring(index).trim();
     }
 
     /**
