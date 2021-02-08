@@ -47,6 +47,8 @@ public class Duke  extends Application{
 
     public Duke(String filePath, String fileName) throws FileNotFoundException {
         storage = new Storage(filePath, fileName);
+        assert(user != null); // check user image exists
+        assert(duke != null); // check duke image exists
         try {
             tasklist = new TaskList(readInput(storage.readFile()));
         }
@@ -57,6 +59,8 @@ public class Duke  extends Application{
 
 
     public static void main(String[] args) throws FileNotFoundException {
+        assert(FILE_NAME != null); // check user image exists
+        assert(FILE_PATH != null); // check duke image exists
         Duke duke = new Duke(FILE_NAME,FILE_NAME);
         Scanner sc = new Scanner(System.in);
         String word = sc.nextLine();
