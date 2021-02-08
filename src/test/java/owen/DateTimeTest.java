@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import owen.DateTime;
@@ -23,5 +25,12 @@ public class DateTimeTest {
                     "Ooooo noo...\nDate and time must be in DD/MM/YYYY HHMM format...",
                     exception.getMessage());
         }
+    }
+
+    @Test
+    public void isSoon_correctArgs_success() throws OwenException {
+        DateTime dateTime = new DateTime(LocalDateTime.now().plusDays(10));
+        assertEquals(false, dateTime.isSoon(9));
+        assertEquals(true, dateTime.isSoon(11));
     }
 }

@@ -44,7 +44,12 @@ public class DateTime {
         outputFormatter = builder.toFormatter();
     }
 
-    private DateTime(LocalDateTime dateTime) {
+    /**
+     * Creates new DateTime from LocalDateTime.
+     *
+     * @param dateTime LocalDateTime object.
+     */
+    public DateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
