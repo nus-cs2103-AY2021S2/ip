@@ -63,6 +63,7 @@ public class Parser {
 			}
 		}
 		tmpList.add(0, tokens[0]);
+		assert functionMap.containsKey(tokens[0]);
 		return functionMap.get(tokens[0]).apply(tmpList.toArray(new String[]{}));
 	}
 }
