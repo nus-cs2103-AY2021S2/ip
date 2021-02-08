@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -76,5 +78,11 @@ public class TaskList {
         List<Task> lists = this.getList().stream().filter(taskPredicate).collect(Collectors.toList());
         ArrayList<Task> answer = new ArrayList<>(lists);
         return new TaskList(answer);
+    }
+
+    public TaskList sort(){
+        ArrayList<Task> newList = this.getList();
+        Collections.sort(newList, (o1,o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        return new TaskList(newList);
     }
 }

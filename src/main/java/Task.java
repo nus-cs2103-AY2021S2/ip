@@ -1,7 +1,7 @@
 import java.time.format.DateTimeFormatter;
 
 
-public class Task {
+public class Task{
     private final Boolean isDone;
     protected final String name;
     protected DateTimeFormatter Date;
@@ -56,4 +56,7 @@ public class Task {
             return "[ ] " + this.getName();
         }
     }
+
+
+
 }
