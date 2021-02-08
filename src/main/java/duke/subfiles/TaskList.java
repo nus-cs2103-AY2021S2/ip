@@ -34,6 +34,34 @@ public class TaskList {
     }
 
     /**
+     * Returns the task description specified in the user input.
+     *
+     * @param input The user input.
+     * @param startIndex Start index of the description in the user input.
+     * @return The task description specified in the user input.
+     */
+    private String getTaskDescription(String input, int startIndex) {
+        int splitLimit = 2;
+        String splitRegex = " /";
+        String[] tempArray = input.split(splitRegex, splitLimit);
+        return tempArray[0].substring(startIndex);
+    }
+
+    /**
+     * Returns the date specified in the user input.
+     *
+     * @param input The user input.
+     * @return The date specified in the user input.
+     */
+    private LocalDate getTaskDate(String input) {
+        int splitLimit = 2;
+        int startIndex = 3;
+        String splitRegex = " /";
+        String[] tempArray = input.split(splitRegex, splitLimit);
+        return LocalDate.parse(tempArray[1].substring(startIndex));
+    }
+
+    /**
      * Adds a to-do to the list of tasks.
      *
      * @param input User input triggering the addition of a to-do to the list of tasks.
@@ -44,7 +72,7 @@ public class TaskList {
 
         try {
             int startOfDescription = 5;
-            String description = input.substring(startOfDescription);
+            String description = getTaskDescription(input, startOfDescription);
             tasks.add(new ToDo(description));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException(taskType);
@@ -65,16 +93,8 @@ public class TaskList {
 
         try {
             int startOfDescription = 9;
-            int startOfDate = 3;
-            int splitLimit = 2;
-            String splitRegex = "/";
-
-            String[] tempArray = input.split(splitRegex, splitLimit);
-            int endOfDescription = tempArray[0].length() - 1;
-
-            String description = tempArray[0].substring(startOfDescription, endOfDescription);
-            LocalDate date = LocalDate.parse(tempArray[1].substring(startOfDate));
-
+            String description = getTaskDescription(input, startOfDescription);
+            LocalDate date = getTaskDate(input);
             tasks.add(new Deadline(description, date));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException(taskType);
@@ -99,16 +119,8 @@ public class TaskList {
 
         try {
             int startOfDescription = 6;
-            int startOfDate = 3;
-            int splitLimit = 2;
-            String splitRegex = "/";
-
-            String[] tempArray = input.split(splitRegex, splitLimit);
-            int endOfDescription = tempArray[0].length() - 1;
-
-            String description = tempArray[0].substring(startOfDescription, endOfDescription);
-            LocalDate date = LocalDate.parse(tempArray[1].substring(startOfDate));
-
+            String description = getTaskDescription(input, startOfDescription);
+            LocalDate date = getTaskDate(input);
             tasks.add(new Event(description, date));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException(taskType);
@@ -185,8 +197,8 @@ public class TaskList {
                 break;
             }
 
-            String done = "1";
-            if (sArray[1].equals(done)) {
+            String doneIndicator = "1";
+            if (sArray[1].equals(doneIndicator)) {
                 tasks.get(tasks.size() - 1).setDone();
             }
         } catch (DateTimeParseException e) {

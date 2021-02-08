@@ -86,11 +86,12 @@ public class Storage {
                     Deadline d = (Deadline) t;
                     String writeData = "D | " + (d.isDone() ? 1 : 0) + " | " + d.getName() + " | " + d.getDate();
                     fw.write(writeData);
-                } else {
+                } else if (t instanceof Event) {
                     Event e = (Event) t;
                     String writeData = "E | " + (e.isDone() ? 1 : 0) + " | " + e.getName() + " | " + e.getDate();
                     fw.write(writeData);
                 }
+
                 fw.write(System.lineSeparator());
             }
 
