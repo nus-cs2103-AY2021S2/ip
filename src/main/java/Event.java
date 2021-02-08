@@ -3,20 +3,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Event extends Task {
-    protected LocalDate at;
+    protected String atString;
+    protected LocalDate atLocalDate;
 
     public Event(String description, String at) {
         super(description);
-        this.at = LocalDate.parse(at);
+        atString = at;
+        atLocalDate = LocalDate.parse(at);
     }
 
     @Override
     public String toString() {
-        String dateFormatted = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[E]" + super.doneToString() + " (at: " + dateFormatted + ")";
+        String atDateFormatted = atLocalDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[E]" + super.doneToString() + " (at: " + atDateFormatted + ")";
     }
 
     public String getAt() {
-        return this.at;
+        return atString;
     }
 }

@@ -3,21 +3,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected String byString;
+    protected LocalDate byLocalDate;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDate.parse(by);
+        byString = by;
+        byLocalDate = LocalDate.parse(by);
     }
 
     @Override
     public String toString() {
-        String dateFormatted = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D]" + super.doneToString() + " (by: " + dateFormatted + ")";
+        String byDateFormatted = byLocalDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[D]" + super.doneToString() + " (by: " + byDateFormatted + ")";
     }
 
     public String getBy() {
-        return this.by;
+        return byString;
     }
-
 }
