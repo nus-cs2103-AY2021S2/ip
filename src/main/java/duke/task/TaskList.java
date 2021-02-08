@@ -1,7 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * A class represents a TaskList.
@@ -58,5 +60,17 @@ public class TaskList {
 
     public void forEach(Consumer<? super Task> action) {
         taskList.forEach(action);
+    }
+
+    /**
+     * Returns a sublist of TaskList that matches the keyword.
+     * @param keyword Is the keyword specified by user.
+     * @return A sublist of TaskList that matches the keyword.
+     */
+    public TaskList findMatchingTask(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        List<Task> matchingList = taskList.stream().filter(t -> t.matchKeyword(keyword)).collect(Collectors.toList());
+        matchingTasks.addAll(matchingList);
+        return new TaskList(matchingTasks);
     }
 }

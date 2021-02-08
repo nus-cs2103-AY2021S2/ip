@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -28,14 +27,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList matchingTasks = new TaskList();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task thisTask = tasks.get(i);
-            String thisName = thisTask.getName();
-            if (thisName.contains(keyword)) {
-                matchingTasks.add(thisTask);
-            }
-        }
+        TaskList matchingTasks = tasks.findMatchingTask(keyword);
         ui.listMatchingTasks(matchingTasks);
         return ui.listMatchingTasksResponse(matchingTasks);
     }

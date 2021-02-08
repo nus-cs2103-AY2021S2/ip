@@ -16,10 +16,6 @@ public class Task {
         isDone = false;
     }
 
-    public String getName() {
-        return name;
-    }
-
     /**
      * Marks the status of the Task as "completed".
      */
@@ -33,6 +29,10 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public boolean matchKeyword(String keyword) {
+        return this.name.contains(keyword);
     }
 
     /**
