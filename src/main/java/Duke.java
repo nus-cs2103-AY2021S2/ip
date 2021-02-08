@@ -1,4 +1,5 @@
 import duke.commands.DukeCommand;
+import duke.commands.factory.DukeCommandFactory;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeExceptionFileNotAccessible;
 import duke.exceptions.DukeExceptionFileNotWritable;
@@ -132,7 +133,7 @@ public class Duke extends Application {
         try {
             String input = userInput.getText();
             ui.println(input);
-            DukeCommand cmd = DukeCommand.parse(input);
+            DukeCommand cmd = DukeCommandFactory.getDukeCommand(input);
             cmd.execute(tasks, ui, loader);
             if (cmd.isExit()) {
                 Platform.exit();
