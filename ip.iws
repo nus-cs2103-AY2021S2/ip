@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a898240b-4d67-4018-9118-40dd9820aa98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ip.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ip.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/DukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/DukeException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/duke/DukeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/duke/DukeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/TaskList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasklist" beforeDir="false" afterPath="$PROJECT_DIR$/tasklist" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +170,6 @@
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="duke.Launcher" />
       <module name="ip.main" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="duke.*" />
@@ -217,6 +211,10 @@
         <option name="BuildArtifacts" enabled="false" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Duke" />
+      <item itemvalue="Application.Launcher" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Launcher" />
