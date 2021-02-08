@@ -28,6 +28,7 @@ public class DialogBox extends HBox {
     private DialogBox(String text, String nameInput) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Ui.class.getResource("DialogBox.fxml"));
+            assert fxmlLoader != null : "FXML file not loaded. Location specified might be wrong";
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -50,10 +51,20 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates the dialogue box object for the user input.
+     * @param text text the User has inputted
+     * @return the DialogBox representation of the User input.
+     */
     public static DialogBox getUserDialog(String text) {
         return new DialogBox(text, "User");
     }
 
+    /**
+     * Creates the dialogue box object for Duke output.
+     * @param text String representation of Duke output.
+     * @return the DialogBox representation of Duke output.
+     */
     public static DialogBox getDukeDialog(String text) {
         var db = new DialogBox(text, "Duke");
         db.flip();

@@ -1,7 +1,7 @@
 package duke;
 
+import java.lang.IllegalArgumentException;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,16 +25,16 @@ public class Storage {
     }
 
     /**
-     * Attempts to read the file named "duke.txt". Will print out
-     * error messages if caught.
+     * Attempts to read the file named "duke.txt".
+     * @throws IOException
+     * @throws IllegalArgumentException
      */
-    public void read() throws FileNotFoundException, IOException{
+    public void read() throws IOException, IllegalArgumentException{
         FileReader reader = new FileReader(FILE_NAME);
         BufferedReader bufferedReader = new BufferedReader(reader);
         String taskString;
         taskString = bufferedReader.readLine();
         while (taskString != null) {
-            System.out.println(taskString);
             String[] taskArray = taskString.split("\\|");
             this.tasks.addTask(taskArray);
             taskString = bufferedReader.readLine();

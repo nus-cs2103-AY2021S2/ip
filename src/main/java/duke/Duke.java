@@ -57,7 +57,9 @@ public class Duke extends Application{
             this.storage.read();
         } catch (FileNotFoundException e) {
             ui.createDukeDialog("Creating duke.txt");
-        } catch (IOException e){
+        } catch (IOException e) {
+            ui.handleError(e);
+        } catch (IllegalArgumentException e) {
             ui.handleError(e);
         }
     }

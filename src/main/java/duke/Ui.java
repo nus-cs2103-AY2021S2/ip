@@ -27,6 +27,7 @@ public class Ui extends AnchorPane {
         this.app = app;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+            assert fxmlLoader != null : "FXML file not loaded. Location specified might be wrong";
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
