@@ -7,8 +7,10 @@ import duke.command.Command;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.MainWindow;
-import duke.ui.Ui;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -19,27 +21,33 @@ import javafx.stage.Stage;
 public class Main extends Application {
     //private final static File f = new File("src/main/data/duke.txt");
     private static final File file = new File("duke.txt");
-    private MainWindow mainWindow;
 
     @Override
     public void init() {
-        mainWindow = new MainWindow();
+
     }
 
     @Override
     public void start(Stage stage) {
         Duke bot = startMain();
-        mainWindow.initialise(bot);
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-        stage.setScene(mainWindow.getScene());
-        stage.show();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            VBox ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setTitle("Duke");
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(bot);
+            fxmlLoader.<MainWindow>getController().showWelcomeMessage();
+            stage.setMinWidth(400.0);
+            stage.setMinHeight(600.0);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Initializes task list from storage and prints welcome greeting.
+     * Initializes task list from storage.
      * @return A Duke object that manages task list operations
      */
     public static Duke startMain() {
@@ -56,8 +64,6 @@ public class Main extends Application {
         if (bot == null) {
             bot = new Duke();
         }
-
-        Ui.showWelcomeMessage(bot);
         return bot;
     }
 

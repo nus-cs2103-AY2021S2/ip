@@ -15,8 +15,7 @@ public class Ui {
      * @param bot A Duke object that manages task list operations.
      */
     public static String showWelcomeMessage(Duke bot) {
-        return String.format("Hello from%n%s%n", bot.getLogo())
-                + "Hello! I'm Duke\n" + "What can I do for you?\n";
+        return String.format("Hello! I'm Duke\n%s\n%s\n", bot.getLogo(), "What can I do for you?");
     }
 
     /**

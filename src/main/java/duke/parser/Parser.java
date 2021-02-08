@@ -34,7 +34,7 @@ public class Parser {
     public static Command processInput(String userInput, Duke bot) throws InvalidCommandException,
             InvalidArgumentException {
         String[] userInputArray = userInput.split(" ", 2);
-        Command userCommand = null;
+        Command userCommand;
         if (userInputArray.length == 1) {
             if (!(userInputArray[0].equals("bye") || userInputArray[0].equals("list"))) {
                 if (userInputArray[0].equals("todo") || userInputArray[0].equals("done")
