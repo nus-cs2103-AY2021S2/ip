@@ -13,6 +13,7 @@ public class CommandResult {
      * @param feedbackToUser The feedback to user.
      */
     public CommandResult(String feedbackToUser) {
+        assert feedbackToUser != null;
         this.feedbackToUser = feedbackToUser;
     }
 
@@ -22,6 +23,7 @@ public class CommandResult {
      * @return The feedback for user.
      */
     public String getFeedBack() {
+        assert feedbackToUser != null;
         return feedbackToUser;
     }
 }

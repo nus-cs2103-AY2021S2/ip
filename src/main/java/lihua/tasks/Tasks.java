@@ -70,6 +70,7 @@ public class Tasks {
         } else {
             message = String.format("Here are all your tasks containing '%s':\n%sGood luck. :D", keyWord, message);
         }
+        assert !message.equals("");
         return message;
     }
 
@@ -100,6 +101,7 @@ public class Tasks {
         } else {
             message = "Here are all your tasks:\n" + message + "Good luck. :D";
         }
+        assert !message.equals("");
         return message;
     }
 
@@ -114,6 +116,7 @@ public class Tasks {
         for (Task t : tasks) {
             jsonArray.add(t.toJsonObject());
         }
+        assert jsonArray != null;
         return jsonArray;
     }
 
