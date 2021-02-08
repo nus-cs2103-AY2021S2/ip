@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import duke.task.DeadlineTask;
 import duke.task.Task;
@@ -88,6 +87,10 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Checks if the task list contains any clashing deadline tasks.
+     * @return True if there are clashing deadline tasks.
+     */
     public boolean isAnomalyPresent() {
         ArrayList<Task> deadlineTasks = new ArrayList<>();
         for (Task task : tasks) {
