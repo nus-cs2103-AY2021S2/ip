@@ -248,4 +248,14 @@ public class DatetimeParser {
     public static String formatDateISO(LocalDateTime dt) {
         return dt.format(ISO_DATETIME_FORMAT);
     }
+
+    /**
+     * Returns LocalDateTime from ISO format string.
+     *
+     * @param datetimeString datetime string in ISO format
+     * @return LocalDateTime
+     */
+    public static LocalDateTime parseDateIso(String datetimeString) {
+        return LocalDateTime.parse(datetimeString, ISO_DATETIME_FORMAT);
+    }
 }

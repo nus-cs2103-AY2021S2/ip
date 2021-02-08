@@ -9,19 +9,10 @@ import duke.exceptions.DukeExceptionIllegalArgument;
  * { @link https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html }.
  * General class representing all tasks. Should not be instantiated directly.
  */
-public class Task {
+public abstract class Task {
 
     protected String description;
     protected boolean isDone;
-
-    /**
-     * Constructor for Task.
-     *
-     * @param description Description of Task
-     */
-    public Task(String description) {
-        this(description, false);
-    }
 
     /**
      * Constructor for Task.
@@ -35,21 +26,37 @@ public class Task {
     }
 
     /**
-     * Marks task as done.
-     *
-     * No exception thrown if task is already marked as done.
-     */
-    public void setDone() {
-        isDone = true;
-    }
-
-    /**
      * Returns description of Task.
      *
      * @return Description.
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Replaces description of Task.
+     */
+    public void setDescription(String d) {
+        description = d;
+    }
+
+    /**
+     * Returns whether task is done.
+     *
+     * @return True if task is done.
+     */
+    public boolean getDone() {
+        return isDone;
+    }
+
+    /**
+     * Marks task as done.
+     *
+     * No exception thrown if task is already marked as done.
+     */
+    public void setDone() {
+        isDone = true;
     }
 
     /**
@@ -75,7 +82,8 @@ public class Task {
         Task task;
         switch (args[0]) {
         case "E":
-            task = Event.parse(args[2] + " /at " + args[3]);
+            // task = Event.parse(args[2] + " /at " + args[3]);
+            task = Todo.parse(args[2]);
             break;
         case "T":
             task = Todo.parse(args[2]);

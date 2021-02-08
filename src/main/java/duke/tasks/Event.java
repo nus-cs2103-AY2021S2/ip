@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import java.time.LocalDateTime;
-
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.DatetimeParser;
 import duke.parser.UserInputTokenSet;
@@ -20,12 +18,12 @@ public class Event extends DateTask {
      * Constructor for an Event.
      *
      * @param description Description of Event.
-     * @param dt LocalDateTime of Event.
+     * @param datetime LocalDateTime of Event.
      * @param isDone Whether task is completed.
      */
-    private Event(String description, LocalDateTime dt, boolean isDone) {
+    public Event(String description, String datetime, boolean isDone) throws DukeExceptionIllegalArgument {
         super(description, isDone);
-        this.datetime = dt;
+        this.datetime = parseDatetime(datetime);
     }
 
     /**
@@ -50,9 +48,10 @@ public class Event extends DateTask {
             throw new DukeExceptionIllegalArgument(
                     "An event must have both description and time,\ndelimited by '/at'.");
         }
-
-        LocalDateTime dt = DatetimeParser.parseDate(tokenSet.get("at"));
-        return new Event(tokenSet.get("/text"), dt, tokenSet.contains("done"));
+        return new Event(
+                tokenSet.get("/text"),
+                tokenSet.get("at"),
+                tokenSet.contains("done"));
     }
 
     /**
@@ -62,7 +61,7 @@ public class Event extends DateTask {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DatetimeParser.formatDate(datetime) + ")";
+        return "[E]" + super.toString() + " (at: " + getDatetimeString() + ")";
     }
 
     /**
@@ -70,7 +69,8 @@ public class Event extends DateTask {
      *
      * @return String representation of Event.
      */
+    @Override
     public String toFileString() {
-        return "E\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + DatetimeParser.formatDateISO(datetime);
+        return "E\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + getDatetimeString();
     }
 }
