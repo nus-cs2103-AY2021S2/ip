@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Represents a List of Tasks, and is able to perform
@@ -78,18 +79,20 @@ public class TaskList {
      *
      * @return String representing the tasks in the TaskList.
      */
-    public String findTask(String words) {
+    public String findTask(String wordString) {
         String str = "Here are the matching tasks in your list:\n      ";
-        String[] wordList = words.split(" ");
-        for (Task t: this.tasks) {
-            for (String word: wordList) {
-                if (t.description.contains(word)) {
-                    str += t.toString() + "\n      ";
-                    break;
+        String[] words = wordString.split(" ");
+        String taskString = this.tasks.stream().filter(task -> {
+            for (String word: words) {
+                if (task.description.contains(word)) {
+                    return true;
                 }
             }
-        }
-        return str.substring(0, str.length() - 7);
+            return false;
+        }).map(task -> {
+            return task.toString() + "\n      ";
+        }).reduce(str, String::concat);
+        return taskString.substring(0, taskString.length() - 7);
     }
 
     /**
@@ -101,7 +104,7 @@ public class TaskList {
         if (this.tasks.size() == 0) {
             return "You have no tasks in your list.";
         }
-        return this.toString();
+        return "Here are the tasks in your list:\n    " + this.toString();
     }
 
     /**
