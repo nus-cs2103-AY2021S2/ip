@@ -4,7 +4,7 @@ public class TaskAction {
     private String keyword;
     private String actionType;
 
-    public  TaskAction() {}
+    public TaskAction() {}
 
     public TaskAction(String actionType){
         this.actionType = actionType;

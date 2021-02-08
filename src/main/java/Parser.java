@@ -27,6 +27,12 @@ public class Parser {
         return operators ;
     }
 
+    /**
+     * Parse the user input to determine what command to execute later.
+     * @param userInput full text command input by user
+     * @return TaskManager object that contains extracted information from user input.
+     * @throws DukeException If operator or task details are not valid.
+     */
     public TaskManager parseCommand(String userInput) throws DukeException {
         String operator = parseOperator(userInput);
         // split command text by its first space into 2 parts
@@ -83,6 +89,7 @@ public class Parser {
         }
         return operator;
     }
+
 
     private boolean isValidOperator(String operator){
         return validOperators.contains(operator.toLowerCase());

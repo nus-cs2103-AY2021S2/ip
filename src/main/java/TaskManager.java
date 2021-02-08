@@ -10,6 +10,10 @@ public class TaskManager {
         this.taskDetail = taskDetail;
     }
 
+    /**
+     * Execute the TaskManager based its operator to generate corresponding TaskAction.
+     * @return TaskAction object that contains the detail of the task.
+     */
     public TaskAction execute() {
         TaskAction action = new TaskAction();
 

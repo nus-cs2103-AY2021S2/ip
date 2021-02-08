@@ -21,6 +21,12 @@ public class TaskList {
         this.totalTask = getSize();
     }
 
+    /**
+     * Execute the operations on this TaskList as instructed.
+     * @param taskAction TaskAction object contains actionType and related task details to instruct the operation.
+     * @return TaskResult object contains operation result as feedback to user.
+     * @throws DukeException If taskNumber is invalid.
+     */
     public TaskResult executeOperation(TaskAction taskAction) throws DukeException {
         Task relatedTask = taskAction.getRelatedTask();
         int relatedTaskNumber = taskAction.getRelatedTaskNumber();
