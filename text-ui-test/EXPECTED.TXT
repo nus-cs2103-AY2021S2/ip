@@ -1,7 +1,105 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+	____________________________________________________________
+	 Yo! I'm ekud.Ekud!
+	 What you want?
+	____________________________________________________________
+	____________________________________________________________
+	 Hmm, you got nothing better to do.
+	____________________________________________________________
+	____________________________________________________________
+	 Okay I remember for you liao:
+	 	[D][ ] return book (by: Sunday)
+	 Eh you got 1 task in total leh
+	____________________________________________________________
+	____________________________________________________________
+	 Okay I remember for you liao:
+	 	[E][ ] project meeting (at: Mon 2-4pm)
+	 Eh you got 2 tasks in total leh
+	____________________________________________________________
+	____________________________________________________________
+	 Okay I remember for you liao:
+	 	[D][ ] finish week 2 project (by: Saturday)
+	 Eh you got 3 tasks in total leh
+	____________________________________________________________
+	____________________________________________________________
+	 Go do work! You need finish these things:
+	 1. [D][ ] return book (by: Sunday)
+	 2. [E][ ] project meeting (at: Mon 2-4pm)
+	 3. [D][ ] finish week 2 project (by: Saturday)
+	____________________________________________________________
+	____________________________________________________________
+	 Good job! The task below is marked done!
+	 [E][X] project meeting (at: Mon 2-4pm)
+	____________________________________________________________
+	____________________________________________________________
+	 Okay I remember for you liao:
+	 	[T][ ] borrow book
+	 Eh you got 4 tasks in total leh
+	____________________________________________________________
+	____________________________________________________________
+	 Go do work! You need finish these things:
+	 1. [D][ ] return book (by: Sunday)
+	 2. [E][X] project meeting (at: Mon 2-4pm)
+	 3. [D][ ] finish week 2 project (by: Saturday)
+	 4. [T][ ] borrow book
+	____________________________________________________________
+	____________________________________________________________
+	 Okay I remember for you liao:
+	 	[D][ ] do homework (by: no idea :-p)
+	 Eh you got 5 tasks in total leh
+	____________________________________________________________
+	____________________________________________________________
+	 Good job! The task below is marked done!
+	 [D][X] return book (by: Sunday)
+	____________________________________________________________
+	____________________________________________________________
+	 Go do work! You need finish these things:
+	 1. [D][X] return book (by: Sunday)
+	 2. [E][X] project meeting (at: Mon 2-4pm)
+	 3. [D][ ] finish week 2 project (by: Saturday)
+	 4. [T][ ] borrow book
+	 5. [D][ ] do homework (by: no idea :-p)
+	____________________________________________________________
+	____________________________________________________________
+	 Okay I remember for you liao:
+	 	[E][ ] random event (at: some time in the future)
+	 Eh you got 6 tasks in total leh
+	____________________________________________________________
+	____________________________________________________________
+	 Okay I remember for you liao:
+	 	[T][ ] blah
+	 Eh you got 7 tasks in total leh
+	____________________________________________________________
+	____________________________________________________________
+	 Go do work! You need finish these things:
+	 1. [D][X] return book (by: Sunday)
+	 2. [E][X] project meeting (at: Mon 2-4pm)
+	 3. [D][ ] finish week 2 project (by: Saturday)
+	 4. [T][ ] borrow book
+	 5. [D][ ] do homework (by: no idea :-p)
+	 6. [E][ ] random event (at: some time in the future)
+	 7. [T][ ] blah
+	____________________________________________________________
+	____________________________________________________________
+	 Huh?! What talking you? I no get you...
+	____________________________________________________________
+	____________________________________________________________
+	 Poof! This task is gone:
+	 	[D][ ] finish week 2 project (by: Saturday)
+	 Eh you got 6 tasks in total leh
+	____________________________________________________________
+	____________________________________________________________
+	 Good job! The task below is marked done!
+	 [D][X] return book (by: Sunday)
+	____________________________________________________________
+	____________________________________________________________
+	 Go do work! You need finish these things:
+	 1. [D][X] return book (by: Sunday)
+	 2. [E][X] project meeting (at: Mon 2-4pm)
+	 3. [T][ ] borrow book
+	 4. [D][ ] do homework (by: no idea :-p)
+	 5. [E][ ] random event (at: some time in the future)
+	 6. [T][ ] blah
+	____________________________________________________________
+	____________________________________________________________
+	 Bye bye. Anything call me ah!
+	____________________________________________________________
