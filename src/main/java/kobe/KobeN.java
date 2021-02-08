@@ -14,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class KobeN extends Application {
     private Storage storage;
@@ -26,6 +28,9 @@ public class KobeN extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    private Image kobe = new Image(this.getClass().getResourceAsStream("/images/Loppie says hi.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Shibaban action.png"));
 
     public KobeN() {}
 
@@ -67,13 +72,11 @@ public class KobeN extends Application {
         } catch (CustomExceptions.IncorrectDecriptionException e) {
             System.out.println(e);
         }
-
         sc.close();
-
     }
 
     /**
-     * Building JavaFX GUi
+     * Building JavaFX GUI
      *
      * @param stage
      */
@@ -126,30 +129,54 @@ public class KobeN extends Application {
 
         //Step 3: Add functionality to handle user input
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         dialogContainer.heightProperty().addListener((observable) ->
                 scrollPane.setVvalue(1.0));
     }
 
-    /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing input text
-     * @return  a label with the specified user input text with word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true); //text wrapping (auto line creation)
 
-        return textToAdd;
+    /**
+     * Creates 2 dialog boxes, one echoing user input, the other containing Kobe's reply.
+     * Both boxes are appended to the dialog container.
+     * User input cleared afterwards.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label kobeText = new Label(getResponse(userInput.getText()));
+
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(kobeText, new ImageView(kobe))
+        );
+
+        userInput.clear();
     }
 
+    /**
+     * The user input is a command that is processed, and the corresponding line that
+     * Kobe is suppose to respond with is obtained in this method.
+     *
+     * @param input
+     * @return
+     */
+    private String getResponse(String input) {
+        try {
+            Parser.readInput(input, tasks, storage, ui);
+        } catch (CustomExceptions.IncompleteDecriptionException e) {
+//            System.out.println(e);
+            e.printStackTrace(); //Unwraps cause within InvocationTargetException
+            //Since the reflection layer will wrap any exception in an InvocationTargetException
+        } catch (CustomExceptions.IncorrectDecriptionException e) {
+//            System.out.println(e);
+            e.printStackTrace();
+        } finally {
+            return "Kobe heard: " + input;
+        }
+    }
 }
