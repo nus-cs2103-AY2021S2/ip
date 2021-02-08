@@ -17,7 +17,12 @@ public class DukeTest {
         tl.add(new Task("list 3", 'E', LocalDate.now()));
 
         Storage st = new Storage("tasklist2");
-        st.saveTaskList(tl);
+
+        try {
+            st.saveTaskList(tl);
+        } catch (DukeException e) {
+
+        }
 
         TaskList newTl = st.loadTaskList();
 

@@ -34,8 +34,7 @@ public class Storage {
             } else {
                 
                 BufferedReader br = new BufferedReader(new FileReader(file));
-                
-                TaskList tl = new TaskList();
+                TaskList taskList = new TaskList();
                 
                 String line;
                 while((line = br.readLine()) != null) {
@@ -44,9 +43,9 @@ public class Storage {
                     // Create new task for each line
                     char type = split[0].charAt(0);
                     
-                    boolean done = false;
+                    boolean isDone = false;
                     if (split[1].equals("D")) {
-                        done = true;
+                        isDone = true;
                     }
                     
                     String name = split[2];
@@ -54,28 +53,27 @@ public class Storage {
                     if (type == 'D' || type == 'E') {
                         LocalDate dateTime = LocalDate.parse(split[3]);
                         
-                        Task t = new Task(name, type, dateTime);
-                        if (done)
-                            t.mark();
-                        
-                        tl.add(t);
+                        Task task = new Task(name, type, dateTime);
+                        if (isDone)
+                            task.mark();
+
+                        taskList.add(task);
                         
                     } else {
-                        Task t = new Task(name);
-                        if (done)
-                            t.mark();
-                        
-                        tl.add(t);
+                        Task task = new Task(name);
+                        if (isDone)
+                            task.mark();
+
+                        taskList.add(task);
                     }
                 }
                 
-                return tl;
+                return taskList;
                     
                 
             }
             
         } catch(IOException e) {
-            System.out.println(e.toString());
             return new TaskList();
         }
         
@@ -85,14 +83,14 @@ public class Storage {
     * Saves the TaskList object provided in the argument into the file created by the constructor of this class.
     * @param TaskList object to be saved
     */
-    public void saveTaskList(TaskList tl){
+    public void saveTaskList(TaskList taskList) throws DukeException {
         
         try {
-            FileWriter fw = new FileWriter(file, false);
+            FileWriter fileWriter = new FileWriter(file, false);
             
-            for (int i = 0; i < tl.count(); i++) {
+            for (int i = 0; i < taskList.count(); i++) {
                 
-                Task t = tl.getTask(i);
+                Task t = taskList.getTask(i);
                 
                 String line = "" + t.getType() + "|";
                 if (t.getDone()) {
@@ -108,17 +106,16 @@ public class Storage {
                 }
                 
                 line += "\n";
-                
-                fw.write(line);
+
+                fileWriter.write(line);
                 
             }
-            
-            fw.flush();
-            fw.close();
+
+            fileWriter.flush();
+            fileWriter.close();
             
         } catch (IOException e) {
-            System.out.println("Error writing to file!");
-            
+            throw new DukeException("An error occured while saving the task list!");
         }
         
     }

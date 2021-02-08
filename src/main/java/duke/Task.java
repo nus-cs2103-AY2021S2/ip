@@ -9,31 +9,31 @@ public class Task {
     private String name;
     private char type;
     private LocalDate dateTime;
-    private boolean done;
+    private boolean isDone;
     
     /**
     * Constructor for the Task class. This constructor is used to create Tasks of types Event and Deadline.
     * <p>All tasks created are not done initially.
-    * @param n the name of the task
-    * @param t the type of the task ('D' for deadline and 'E' for event)
-    * @param dt the date of the deadline or event
+    * @param name the name of the task
+    * @param task the type of the task ('D' for deadline and 'E' for event)
+    * @param dateTime the date of the deadline or event
     */
-    public Task(String n, char t, LocalDate dt) {
-        name = n;
-        type = t;
-        dateTime = dt;
-        done = false;
+    public Task(String name, char task, LocalDate dateTime) {
+        this.name = name;
+        this.type = task;
+        this.dateTime = dateTime;
+        isDone = false;
     }
     
     /**
     * Constructor for the Task class. This constructor is used to create Tasks of type Todo.
     * <p>All tasks created are not done initially.
-    * @param n the name of the Todo task
+    * @param name the name of the Todo task
     */
-    public Task(String n) {
-        name = n;
-        type = 'T';
-        done = false;
+    public Task(String name) {
+        this.name = name;
+        this.type = 'T';
+        isDone = false;
     }
     
     /**
@@ -65,32 +65,32 @@ public class Task {
     * @return Whether Task is marked done.
     */
     public boolean getDone() {
-        return done;
+        return isDone;
     }
     
     /**
     * Sets the Task as done
     */
     public void mark() {
-        done = true;
+        isDone = true;
     }
 
     /**
     * This method checks whether the two Task objects are the same.
-    * @param t Task object to be compared
+    * @param task Task object to be compared
     * @return Whether the Task object is same
     */
-    public boolean equals(Task t) {
-        if (this.type == t.type) {
-            if (!this.name.equals(t.name))
+    public boolean equals(Task task) {
+        if (type == task.type) {
+            if (!name.equals(task.name))
                 return false;
 
-            if (this.type == 'D' || this.type == 'E') {
-                if (this.dateTime.compareTo(t.dateTime) != 0)
+            if (type == 'D' || type == 'E') {
+                if (this.dateTime.compareTo(task.dateTime) != 0)
                     return false;
             }
 
-            if (this.done != t.done)
+            if (isDone != task.isDone)
                 return false;
 
             return true;
@@ -106,23 +106,23 @@ public class Task {
     */
     public String toString() {
         
-        String str = "["+type+"]";
+        String returnStr = "[" + type + "]";
         
-        if (done)
-            str += "[X] "+name;
+        if (isDone)
+            returnStr += "[X] " + name;
         else
-            str += "[ ] "+name;
+            returnStr += "[ ] " + name;
         
         switch (type) {
         case 'D':
-            str += " (by: "+dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))+")";
+            returnStr += " (by: " + dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
             break;
         case 'E':
-            str += " (at: "+dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))+")";
+            returnStr += " (at: " + dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
             break;
         }
         
-        return str;
+        return returnStr;
         
     }
 }

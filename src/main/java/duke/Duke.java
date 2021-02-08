@@ -20,17 +20,6 @@ public class Duke extends Application{
     private Button sendButton;
     private Scene scene;
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-
-    }
-
     /**
      * Prints the greeting for the chatbot.
      */
@@ -45,15 +34,14 @@ public class Duke extends Application{
     }
 
     /**
-     * This method initiates the chatbot of the Duke program. It call upon various
-     * classes responsible for different functionalities of Duke.
+     * This method is used to start the Duke user interface
      */
     @Override
     public void start(Stage stage) {
-        Parser p = new Parser();
+        Parser parser = new Parser();
 
-        Storage st = new Storage("tasklist");
-        TaskList tl = st.loadTaskList();
+        Storage storage = new Storage("tasklist");
+        TaskList taskList = storage.loadTaskList();
 
         // Initialization
         scrollPane = new ScrollPane();
@@ -109,28 +97,12 @@ public class Duke extends Application{
             userInput.clear();
 
             // Call Parser
-            String out = p.process(input, tl);
+            String out = parser.process(input, taskList);
             dialogContainer.getChildren().add(getDialogLabel(out));
 
-            if (p.checkEnd()) {
+            if (parser.checkEnd()) {
 
-                st.saveTaskList(tl);
-
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(1000);
-                        Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 3 ")));
-                        Thread.sleep(1000);
-                        Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 2 ")));
-                        Thread.sleep(1000);
-                        Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 1 ")));
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        dialogContainer.getChildren().add(getDialogLabel(e.toString()));
-                    }
-
-                    System.exit(0);
-                }).start();
+                exitProcedure(dialogContainer, taskList, storage);
 
             }
         });
@@ -142,40 +114,45 @@ public class Duke extends Application{
             userInput.clear();
 
             // Call Parser
-            String out = p.process(input, tl);
+            String out = parser.process(input, taskList);
             dialogContainer.getChildren().add(getDialogLabel(out));
 
-            if (p.checkEnd()) {
+            if (parser.checkEnd()) {
 
-                st.saveTaskList(tl);
-
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(1000);
-                        Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 3 ")));
-                        Thread.sleep(1000);
-                        Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 2 ")));
-                        Thread.sleep(1000);
-                        Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 1 ")));
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        dialogContainer.getChildren().add(getDialogLabel(e.toString()));
-                    }
-
-                    System.exit(0);
-                }).start();
+                exitProcedure(dialogContainer, taskList, storage);
 
             }
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+    }
 
+    private void exitProcedure(VBox dialogContainer, TaskList taskList, Storage storage) {
+        try {
+            storage.saveTaskList(taskList);
+        } catch(DukeException e) {
+            dialogContainer.getChildren().add(getDialogLabel(e.toString()));
+        }
 
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+                Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 3 ")));
+                Thread.sleep(1000);
+                Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 2 ")));
+                Thread.sleep(1000);
+                Platform.runLater(() -> dialogContainer.getChildren().add(getDialogLabel("Application exiting in 1 ")));
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                dialogContainer.getChildren().add(getDialogLabel(e.toString()));
+            }
+
+            System.exit(0);
+        }).start();
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
