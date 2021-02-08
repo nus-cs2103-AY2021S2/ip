@@ -95,7 +95,7 @@ public class Ui {
      * Print whenever there is exception when task typed command is called.
      * @param e NoMeaningException that arises whenever task command failed.
      */
-    public String getTaskFail(NoMeaningException e) {
+    public String getTaskFail(Exception e) {
         return e.getMessage();
     }
 

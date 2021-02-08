@@ -2,6 +2,8 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import duke.exception.NameDuplicateException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -28,14 +30,22 @@ public class AddDeadlineCommand extends Command {
             String[] deadlineDateHours = deadlineTime.split(" ");
             LocalDate deadlineDate = LocalDate.parse(deadlineDateHours[1]);
             LocalTime deadlineHour = LocalTime.parse(deadlineDateHours[2]);
-            Deadline deadline = new Deadline(deadlineWord, deadlineDate, deadlineHour);
-            taskList.add(deadline);
-            storage.saveTasks(taskList);
-            return ui.getTaskFinally(deadline, taskList.size());
+
+            if (taskList.findExact(deadlineWord).size() == 0) {
+                Deadline deadline = new Deadline(deadlineWord, deadlineDate, deadlineHour);
+                taskList.add(deadline);
+                storage.saveTasks(taskList);
+                return ui.getTaskFinally(deadline, taskList.size());
+            } else {
+                storage.saveTasks(taskList);
+                throw new NameDuplicateException("Daddy, looks like you have already add this task");
+            }
         }  catch (StringIndexOutOfBoundsException e) {
             return ui.getTaskFail(new NoMeaningException(
                     "☹ OOPS!!! The description of a deadline cannot be empty.")
             );
+        }  catch (NameDuplicateException e) {
+            return ui.getTaskFail(e);
         }
     }
 }

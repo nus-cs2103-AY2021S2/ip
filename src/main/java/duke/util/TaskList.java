@@ -1,6 +1,5 @@
 package duke.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -59,6 +58,13 @@ public class TaskList {
     public List<Task> find(String toSearch) {
         List<Task> listFound;
         Predicate<Task> taskPredicate = task -> task.getJob().contains(toSearch);
+        listFound = this.listOfTasks.stream().filter(taskPredicate).collect(Collectors.toList());
+        return listFound;
+    }
+
+    public List<Task> findExact(String toSearch) {
+        List<Task> listFound;
+        Predicate<Task> taskPredicate = task -> task.getJob().equals(toSearch);
         listFound = this.listOfTasks.stream().filter(taskPredicate).collect(Collectors.toList());
         return listFound;
     }
