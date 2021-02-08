@@ -2,6 +2,8 @@ package duke.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+
 public class TaskList {
     private List<Task> listOfTasks;
 
@@ -55,9 +57,10 @@ public class TaskList {
      */
     public List<Task> find(String toSearch) {
         List<Task> listFound = new ArrayList<>();
+        Predicate<Task> taskPredicate = task -> task.getJob().contains(toSearch);
         for (int i=0; i < listOfTasks.size(); i++) {
             Task iElementListOfTasks = listOfTasks.get(i);
-            if (iElementListOfTasks.getJob().contains(toSearch)) {
+            if (taskPredicate.test(iElementListOfTasks)) {
                 listFound.add(iElementListOfTasks);
             }
         }
