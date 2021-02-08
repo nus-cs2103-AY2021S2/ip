@@ -28,7 +28,7 @@ public class TaskList {
      * @param str String to be checked.
      * @return True if not numeric, False otherwise.
      */
-    private static boolean isNotNumeric(String str) {
+    private static boolean checkIfNotNumeric(String str) {
         if (str == null || str.length() == 0) {
             return true;
         }
@@ -91,6 +91,7 @@ public class TaskList {
     public String delete(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length > 2) {
+
             throw new DukeException("       OOPS!!! The format should be "
                     + "\"delete ##\" where ## is the task number.");
         }
@@ -164,6 +165,7 @@ public class TaskList {
         if (!type.equals("todo")) {
             if (type.equals("deadline")) {
                 details = fullCommand.substring(9).split(" /by ");
+
             } else {
                 details = fullCommand.substring(6).split(" /at ");
             }
@@ -189,6 +191,7 @@ public class TaskList {
             break;
         default:
         }
+        assert tasks.size() == currSize + 1: "Task has not been added properly.";
         return "     Got it. I've added this task:\n"
                 + "       " + this.tasks.get(this.tasks.size() - 1).toString() + "\n"
                 + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
