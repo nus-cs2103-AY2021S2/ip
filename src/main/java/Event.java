@@ -29,6 +29,15 @@ public class Event extends Task {
     }
 
     /**
+     * Returns date of event.
+     *
+     * @return LocalDate representing date of the event.
+     */
+    protected LocalDate getDate() {
+        return this.at;
+    }
+
+    /**
      * Returns string object that formats the event-task to be saved.
      * Format: (Date format: d MMM yyyy)
      * <p> Event-task that is done: E | 1 | &lt;task_description&lt; | &lt;date&lt; </p>

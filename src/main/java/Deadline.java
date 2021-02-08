@@ -29,6 +29,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns date of deadline.
+     *
+     * @return LocalDate representing date of the deadline.
+     */
+    protected LocalDate getDate() {
+        return this.by;
+    }
+
+    /**
      * Returns string object that formats the deadline-task to be saved.
      * Format: (Date format: d MMM yyyy)
      * <p> Deadline-task that is done: D | 1 | &lt;task_description&lt; | &lt;date&lt; </p>

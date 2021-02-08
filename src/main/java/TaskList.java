@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * TaskList keeps a list of all tasks.
@@ -22,6 +23,7 @@ public class TaskList {
      */
     protected void addTask(Task taskToAdd) {
         this.list.add(taskToAdd);
+        this.sortList();
     }
 
     /**
@@ -31,6 +33,7 @@ public class TaskList {
      */
     protected void removeTask(int positionOfTask) {
         this.list.remove(positionOfTask - 1);
+        this.sortList();
     }
 
     /**
@@ -63,6 +66,11 @@ public class TaskList {
             joined += System.lineSeparator() + t.saveTask();
         }
         return joined;
+    }
+
+    protected void sortList() {
+        TaskComparator taskCompare = new TaskComparator();
+        Collections.sort(this.list, taskCompare);
     }
 
     /**

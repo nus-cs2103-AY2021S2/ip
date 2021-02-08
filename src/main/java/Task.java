@@ -2,7 +2,7 @@
  * Represents a task object.
  * Contains a description and status on whether the task is done.
  */
-public class Task {
+public class Task implements Comparable<Task> {
 
     /** Stores the description of this Task. */
     protected String description;
@@ -44,6 +44,15 @@ public class Task {
     }
 
     /**
+     * Checks whether the task is done or not.
+     *
+     * @return Boolean representing whether the task is done.
+     */
+    protected boolean isDone() {
+        return this.isDone;
+    }
+
+    /**
      * Marks the task as done.
      */
     protected void markAsDone() {
@@ -61,6 +70,18 @@ public class Task {
     protected String saveTask() {
         int done = isDone ? 1 : 0;
         return done + " | " + this.description;
+    }
+
+    /**
+     * Compares 2 tasks by task description.
+     *
+     * @param task Task that this task is being compared to.
+     * @return Integer that corresponds to the order of task.
+     */
+    public int compareTo(Task task) {
+        String myDescription = this.getDescription();
+        String otherDescription = task.getDescription();
+        return myDescription.compareTo(otherDescription);
     }
 
     /**
