@@ -163,6 +163,7 @@ public class TaskList {
      * @throws OwenException Task could not be deserialized.
      */
     public TaskList deserializeTask(String taskString) throws OwenException {
+        assert taskString.length() > 0 : "taskString cannot be empty";
         List<Task> newTaskList = new ArrayList<>(this.taskList);
 
         String taskTypeString = taskString.split(" | ", 2)[0];
