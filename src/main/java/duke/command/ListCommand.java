@@ -7,6 +7,7 @@ import duke.TaskList;
 public class ListCommand implements Command {
 
     private TaskList currentList;
+    private boolean isAnomalyPresent;
 
     /**
      * Returns a boolean value to signal the bot to exit.
@@ -21,7 +22,14 @@ public class ListCommand implements Command {
      * @return The reply message for this command.
      */
     public String getResponse() {
-        return "Here are the tasks in your list:\n" + currentList.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
+        sb.append(currentList.toString());
+        sb.append("\n\n");
+        if (isAnomalyPresent) {
+            sb.append("NOTE: There are tasks in your list that have clashing deadlines, please check the list above.");
+        }
+        return sb.toString();
     }
 
     /**
@@ -31,6 +39,7 @@ public class ListCommand implements Command {
      */
     public TaskList execute(TaskList taskList) {
         currentList = taskList;
+        isAnomalyPresent = taskList.isAnomalyPresent();
         return taskList;
     }
 
