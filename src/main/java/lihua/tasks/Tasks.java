@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.json.simple.JSONArray;
 
@@ -129,28 +130,24 @@ public class Tasks {
     }
 
     private List<TimeTask> getTimeTasks(List<? extends Task> validTasks) {
-        List<TimeTask> timeTasks = new ArrayList<>();
-        for (Task t : validTasks) {
-            if (t instanceof TimeTask) {
-                timeTasks.add((TimeTask) t);
-            }
-        }
+        List<TimeTask> timeTasks = validTasks.stream()
+                .filter(t -> t instanceof TimeTask).map(t -> (TimeTask) t).collect(Collectors.toList());
         return timeTasks;
     }
 
     private List<Task> getValidTasks(LocalDate date) {
         assert tasks != null;
-        List<Task> validTasks = new ArrayList<>();
-        for (int i = 1; i <= tasks.size(); i++) {
-            if (date != null) {
-                boolean isTaskOnTheDaySpecified = date.equals(tasks.get(i - 1).getDate());
-                if (isTaskOnTheDaySpecified) {
-                    validTasks.add(tasks.get(i - 1));
-                }
-            } else {
-                validTasks.add(tasks.get(i - 1));
-            }
-        }
+        List<Task> validTasks = tasks.stream()
+                .filter(t -> {
+                    if (date == null) {
+                        return true;
+                    }
+                    boolean isTaskOnTheDaySpecified = date.equals(t.getDate());
+                    if (isTaskOnTheDaySpecified) {
+                        return true;
+                    }
+                    return false;
+                }).collect(Collectors.toList());
         return validTasks;
     }
 
