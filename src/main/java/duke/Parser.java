@@ -119,10 +119,6 @@ public class Parser {
         assert processedInput.length >= 1 : "input length must be at least 1";
         StringBuilder sb = new StringBuilder();
         Arrays.stream(processedInput).forEach(inputLine -> sb.append(inputLine).append(" "));
-
-//        for (int i = 1; i < processedInput.length; i++) {
-//            sb.append(processedInput[i] + " ");
-//        }
         return sb.toString();
     }
 
