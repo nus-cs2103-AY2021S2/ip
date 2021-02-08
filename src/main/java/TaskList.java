@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -70,8 +71,9 @@ public class TaskList {
 
     public TaskList find(String keyword) {
         ArrayList<Task> answer = new ArrayList<Task>();
+        Predicate<Task> taskPredicate = task -> task.getName().contains(keyword);
         for(Task i: this.getList()) {
-            if(i.getName().contains(keyword)) {
+            if(taskPredicate.test(i)) {
                 answer.add(i);
             }
         }
