@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import duke.command.AddDeadline;
 import duke.command.AddEvent;
@@ -117,9 +118,11 @@ public class Parser {
     private static String processDescription(String[] processedInput) {
         assert processedInput.length >= 1 : "input length must be at least 1";
         StringBuilder sb = new StringBuilder();
-        for (int i = 1; i < processedInput.length; i++) {
-            sb.append(processedInput[i] + " ");
-        }
+        Arrays.stream(processedInput).forEach(inputLine -> sb.append(inputLine).append(" "));
+
+//        for (int i = 1; i < processedInput.length; i++) {
+//            sb.append(processedInput[i] + " ");
+//        }
         return sb.toString();
     }
 
