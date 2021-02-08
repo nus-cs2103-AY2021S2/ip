@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 repositories {
@@ -42,9 +43,7 @@ test {
     }
 }
 
-application {
-    mainClass = 'duke.Launcher'
-}
+mainClassName = 'duke.Launcher'
 
 checkstyle {
     toolVersion = '8.29'
