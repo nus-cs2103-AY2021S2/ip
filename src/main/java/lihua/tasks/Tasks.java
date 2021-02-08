@@ -2,6 +2,8 @@ package lihua.tasks;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -26,6 +28,7 @@ public class Tasks {
      */
     public void addTask(Task t) {
         tasks.add(t);
+        Collections.sort(tasks);
     }
 
     /**
@@ -36,6 +39,7 @@ public class Tasks {
      * @throws IndexOutOfBoundsException If the i specified is invalid for the list.
      */
     public Task removeTask(int i) throws IndexOutOfBoundsException {
+        // the sorted  order will be maintained, if an item is
         return tasks.remove(i - 1);
     }
 

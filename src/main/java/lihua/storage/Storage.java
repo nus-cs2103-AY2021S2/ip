@@ -42,6 +42,7 @@ public class Storage {
             JSONArray jsonArray = (JSONArray) parser.parse(reader);
 
             populateTasks(jsonArray, tasks);
+            reader.close();
         } catch (IOException | ParseException | DateTimeParseException e) {
             System.err.println("Storage issues encountered. Task cannot be stored.");
         }
@@ -66,21 +67,24 @@ public class Storage {
                     t = new Event(description, time);
                 }
                 assert t != null;
-                t.setDone(isDone);
-                tasks.addTask(t);
             }
+            t.setDone(isDone);
+            tasks.addTask(t);
         }
     }
 
     /** Returns true if the file previously exists */
-    private boolean createFileRecursively() throws IOException {
-        File fileChecker = new File(DATA_PATH);
-        if (!fileChecker.exists()) {
-            fileChecker.getParentFile().mkdir();
-            fileChecker.createNewFile();
-            return false;
-        } else {
+    private boolean createFileRecursively() {
+        try {
+            File fileChecker = new File(DATA_PATH);
+            if (!fileChecker.exists()) {
+                fileChecker.getParentFile().mkdir();
+                fileChecker.createNewFile();
+                return false;
+            }
             return true;
+        } catch (IOException e) {
+            return false;
         }
     }
 
