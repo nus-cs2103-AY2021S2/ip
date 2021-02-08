@@ -1,9 +1,7 @@
 package duke.tasks;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
-import duke.parser.DatetimeParser;
-
-import java.time.LocalDateTime;
+import duke.parser.UserInputTokenSet;
 
 /**
  * Deadline class.
@@ -12,28 +10,18 @@ import java.time.LocalDateTime;
  *
  * @see duke.tasks.Event
  */
-public class Deadline extends DateTask {
+public final class Deadline extends DateTask {
 
     /**
      * Constructor for a Deadline.
      *
      * @param description Description of Deadline.
-     * @param dt LocalDateTime of Deadline.
-     */
-    public Deadline(String description, LocalDateTime dt) {
-        this(description, dt, false);
-    }
-
-    /**
-     * Constructor for a Deadline.
-     *
-     * @param description Description of Deadline.
-     * @param dt LocalDateTime of deadline.
+     * @param datetime LocalDateTime of deadline.
      * @param isDone Whether task is completed.
      */
-    public Deadline(String description, LocalDateTime dt, boolean isDone)  {
+    public Deadline(String description, String datetime, boolean isDone) throws DukeExceptionIllegalArgument {
         super(description, isDone);
-        this.datetime = dt;
+        this.datetime = parseDatetime(datetime);
     }
 
     /**
@@ -41,30 +29,27 @@ public class Deadline extends DateTask {
      *
      * Input validation for date present. Dates should be provided as an argument
      * to the '/by' flag, following the description, e.g.
-     * {@code deadline <description> /by <datetime>}.
-     * Datetime formats are specified in {@link DatetimeParser }.
+     * {@code deadline <description> /by <datetime>}. '/done' flag can be optionally provided
+     * to mark as completed.
+     * Datetime formats are specified in {@link duke.parser.DatetimeParser }.
      *
-     * @param s User input.
-     * @return Deadline.
+     * @param tokenSet User input tokens
+     * @return Deadline
      * @throws DukeExceptionIllegalArgument When description is empty, datetime is empty,
      *                                      or datetime is invalid.
      */
-    public static Deadline parse(String s) throws DukeExceptionIllegalArgument {
-        if (s.equals("")) {
+    public static Deadline parse(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
+        if (tokenSet.get("/text").isEmpty()) {
             throw new DukeExceptionIllegalArgument("The description of a deadline cannot be empty.");
         }
-
-        String[] tokens = s.split(" /by ");
-        if (tokens[0].equals("")) {
-            throw new DukeExceptionIllegalArgument("The description of a deadline cannot be empty.");
-        }
-        if (tokens.length == 1 || tokens[1].equals("")) {
+        if (!tokenSet.contains("by")) {
             throw new DukeExceptionIllegalArgument(
-                    "An deadline must have both description and time,\ndelimited by '/by'.");
+                    "A deadline must have both description and time,\ndelimited by '/by'.");
         }
-
-        LocalDateTime dt = DatetimeParser.parseDate(tokens[1].strip());
-        return new Deadline(tokens[0], dt);
+        return new Deadline(
+                tokenSet.get("/text"),
+                tokenSet.get("by"),
+                tokenSet.contains("done"));
     }
 
     /**
@@ -74,7 +59,7 @@ public class Deadline extends DateTask {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DatetimeParser.formatDate(datetime) + ")";
+        return "[D]" + super.toString() + " (by: " + getDatetimeString() + ")";
     }
 
     /**
@@ -83,6 +68,6 @@ public class Deadline extends DateTask {
      * @return String representation of Deadline.
      */
     public String toFileString() {
-        return "D\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + DatetimeParser.formatDateISO(datetime);
+        return "D\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + getDatetimeString();
     }
 }

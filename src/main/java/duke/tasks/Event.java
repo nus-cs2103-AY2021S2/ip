@@ -11,7 +11,7 @@ import duke.parser.UserInputTokenSet;
  *
  * @see duke.tasks.Deadline
  */
-public class Event extends DateTask {
+public final class Event extends DateTask {
 
     /**
      * Constructor for an Event.
