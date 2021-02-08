@@ -151,6 +151,26 @@ public class TaskList {
     }
 
     /**
+     * Gets list of tasks that are due within specified days.
+     *
+     * @param days Days to check if tasks are due by.
+     * @return List of tasks that are due.
+     */
+    public String getDueTasks(long days) {
+        List<String> taskListStrings = new ArrayList<>();
+
+        String taskListFormat = "%d. %s";
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task task = this.taskList.get(i);
+            if (task.isDue(days)) {
+                taskListStrings.add(String.format(taskListFormat, i + 1, task));
+            }
+        }
+
+        return String.join("\n", taskListStrings);
+    }
+
+    /**
      * Serializes TaskList into a String.
      *
      * @return Serialized version of TaskList as a String.

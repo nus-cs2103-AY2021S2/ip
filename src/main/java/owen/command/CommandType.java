@@ -11,5 +11,6 @@ public enum CommandType {
     DONE,
     DELETE,
     FIND,
+    REMINDERS,
     BYE,
 }

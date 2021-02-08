@@ -65,6 +65,13 @@ public class DateTime {
     }
 
     /**
+     * Returns if date time is soon within specified days.
+     */
+    public boolean isSoon(long days) {
+        return this.dateTime.minusDays(days).isBefore(LocalDateTime.now());
+    }
+
+    /**
      * Returns date time string in DD/MM/YYYY HHMM format.
      *
      * @return Date time string in DD/MM/YYYY HHMM format.

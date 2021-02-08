@@ -39,6 +39,14 @@ public abstract class Task {
     public abstract Task markAsDone();
 
     /**
+     * Returns true if task is due within specified days.
+     *
+     * @param days Days to check if task is due by.
+     * @return Whether the task is due soon.
+     */
+    public abstract boolean isDue(long days);
+
+    /**
      * Serializes task into a String.
      *
      * @return Serialized version of task as string.

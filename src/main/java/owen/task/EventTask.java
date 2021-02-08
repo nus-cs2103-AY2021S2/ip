@@ -48,6 +48,11 @@ public class EventTask extends Task {
     }
 
     @Override
+    public boolean isDue(long days) {
+        return this.start.isSoon(days) && !this.isDone;
+    }
+
+    @Override
     public String serialize() {
         String serializeFormat = "EVENT | %b | %s | %s | %s";
         return String.format(

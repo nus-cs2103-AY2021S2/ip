@@ -30,6 +30,11 @@ public class TodoTask extends Task {
     }
 
     @Override
+    public boolean isDue(long days) {
+        return false;
+    }
+
+    @Override
     public String serialize() {
         String serializeFormat = "TODO | %b | %s";
         return String.format(serializeFormat, this.isDone, this.description);
