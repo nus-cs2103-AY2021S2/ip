@@ -1,11 +1,14 @@
 package lihua.tasks;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import lihua.commons.enums.ListTagCode;
-import lihua.commons.comparators.TimeTaskComparatorChronological;
 import org.json.simple.JSONArray;
+
+import lihua.commons.comparators.TimeTaskComparatorChronological;
+import lihua.commons.enums.ListTagCode;
 
 /**
  * Store all the tasks in a list DS
@@ -110,25 +113,26 @@ public class Tasks {
         return message;
     }
 
-    private List<? extends Task> sortTasksAccordingToCodeIfAppicable(List<? extends Task> validTasks, ListTagCode code) {
+    private List<? extends Task> sortTasksAccordingToCodeIfAppicable(List<? extends Task> validTasks,
+                                                                     ListTagCode code) {
         switch (code) {
-            case NORMAL:
-                return validTasks;
-            case TIME_NORMAL:
-                // we only consider TimeTask here
-                List<TimeTask> timeTasks = getTimeTasks(validTasks);
-                timeTasks.sort(new TimeTaskComparatorChronological());
-                return timeTasks;
+        case NORMAL:
+            return validTasks;
+        case TIME_NORMAL:
+            // we only consider TimeTask here
+            List<TimeTask> timeTasks = getTimeTasks(validTasks);
+            timeTasks.sort(new TimeTaskComparatorChronological());
+            return timeTasks;
+        default:
+            return null;
         }
-        assert false;
-        return null;
     }
 
     private List<TimeTask> getTimeTasks(List<? extends Task> validTasks) {
         List<TimeTask> timeTasks = new ArrayList<>();
         for (Task t : validTasks) {
             if (t instanceof TimeTask) {
-                timeTasks.add((TimeTask)t);
+                timeTasks.add((TimeTask) t);
             }
         }
         return timeTasks;

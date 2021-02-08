@@ -11,13 +11,13 @@ import java.time.format.DateTimeParseException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import lihua.tasks.Deadline;
 import lihua.tasks.Event;
 import lihua.tasks.Task;
 import lihua.tasks.Tasks;
 import lihua.tasks.ToDo;
-import org.json.simple.parser.ParseException;
 
 public class Storage {
     /** Default path in which the task data is stored */
