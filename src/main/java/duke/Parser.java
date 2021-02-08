@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import duke.exceptions.ParseException;
+import duke.expenses.Expense;
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
@@ -21,12 +22,14 @@ public class Parser {
     /** A collection of commands Tasker understands **/
     public enum Command {
         LIST,
+        LIST_E,
         DONE,
         DELETE,
         TODO,
         DEADLINE,
         EVENT,
         FIND,
+        SPEND,
         BYE
     }
 
@@ -71,6 +74,38 @@ public class Parser {
             throw new ParseException("Invalid command!");
         }
     }
+
+    public static Expense parseExpenseDescription(Command command, String description) throws ParseException {
+        switch (command) {
+        case SPEND:
+            return parseSpend(description);
+        default:
+            throw new ParseException("Invalid command!");
+        }
+    }
+
+    private static Expense parseSpend(String input) {
+        if (input.isEmpty() || input.equals(" ")) {
+            throw new ParseException("Invalid input! Description of a Spend cannot be empty.\n");
+        }
+        if (input.contains("/amt ")) {
+            if (input.charAt(0) == ' ') {
+                input = input.substring(1);
+            }
+            int indexOfEndOfDescription = input.indexOf("/amt ");
+            String description = input.substring(0, indexOfEndOfDescription);
+            int indexOfDate = input.indexOf("/date ");
+            String amtStr = input.substring(indexOfEndOfDescription + 5, indexOfDate - 1);
+            double amt = Double.parseDouble(amtStr);
+            String dateStr = input.substring(indexOfDate + 6);
+            LocalDate date = LocalDate.parse(dateStr);
+            return new Expense(description, amt, date);
+        } else {
+            throw new ParseException("Invalid input! Please enter using format: 'spend'_[description]_"
+                    + "'/amt [amount spent]'_'/date YYYY-MM-DD'\n");
+        }
+    }
+
 
     /**
      * Returns a ToDoTask by parsing the input behind the command.

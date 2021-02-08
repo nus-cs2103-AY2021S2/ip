@@ -1,12 +1,15 @@
 import java.nio.file.Path;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 import duke.GuiUi;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
+import duke.ExpensesList;
 import duke.exceptions.DukeException;
 import duke.exceptions.ParseException;
+import duke.expenses.Expense;
 import duke.tasks.Task;
 import javafx.scene.image.Image;
 
@@ -18,20 +21,19 @@ import javafx.scene.image.Image;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-
-    private Path filePath = Storage.getSaveFilePath();
-    private final Image user = new Image(this.getClass().getResourceAsStream("/images/Eloj.png"));
-    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/jeffBezox.png"));
+    private ExpensesList expenses;
 
     /**
      * Creates a Duke object
      */
     public Duke() throws DukeException {
         try {
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.loadData());
+            storage = new Storage();
+            tasks = new TaskList(storage.loadTasksData());
+            expenses = new ExpensesList(storage.loadExpensesData());
         } catch (DukeException e) {
             tasks = new TaskList();
+            expenses = new ExpensesList();
         }
     }
 
@@ -55,7 +57,9 @@ public class Duke {
             Parser.Command command = Parser.parseCommand(input);
             switch (command) {
             case LIST:
-                return GuiUi.displayList(this.tasks);
+                return GuiUi.displayListOfTasks(this.tasks);
+            case LIST_E:
+                return GuiUi.displayListOfExpenses(this.expenses);
             case BYE:
                 return GuiUi.displayExitMsg();
             default:
@@ -70,11 +74,24 @@ public class Duke {
             String inputAfterCommand = input.substring(indexOfSpaceAfterCommand + 1);
             Parser.Command command = Parser.parseCommand(commandWord);
             switch (command) {
+            case SPEND:
+                try {
+                    Expense expenseToBeAdded = Parser.parseExpenseDescription(command, inputAfterCommand);
+                    expenses.add(expenseToBeAdded);
+                    storage.saveExpensesData(expenses.getExpenses());
+                    return GuiUi.displayAddExpenseSuccess(expenses, expenseToBeAdded);
+                } catch (DukeException e) {
+                    return GuiUi.displayGenericError();
+                } catch (DateTimeParseException e) {
+                    return GuiUi.displaySpendParseError();
+                } catch (ParseException e) {
+                    return GuiUi.insertMsgIntoChatBox(e.getErrMsg());
+                }
             case DONE:
                 int indexToMark = Integer.parseInt(inputAfterCommand);
                 try {
                     String taskMarkedDone = GuiUi.displayMarkDoneSuccess(tasks.mark(indexToMark));
-                    storage.saveData(tasks.getTasks());
+                    storage.saveTasksData(tasks.getTasks());
                     return taskMarkedDone;
                 } catch (DukeException e) {
                     return GuiUi.displayFailToSaveError();
@@ -85,7 +102,7 @@ public class Duke {
                 int indexToDelete = Integer.parseInt(inputAfterCommand);
                 try {
                     Task taskDeleted = tasks.delete(indexToDelete);
-                    storage.saveData(tasks.getTasks());
+                    storage.saveTasksData(tasks.getTasks());
                     return GuiUi.displayDeleteSuccess(tasks, taskDeleted);
                 } catch (DukeException e) {
                     return GuiUi.displayFailToSaveError();
@@ -99,7 +116,7 @@ public class Duke {
                 try {
                     Task taskToBeAdded = Parser.parseDescription(command, inputAfterCommand);
                     tasks.add(taskToBeAdded);
-                    storage.saveData(tasks.getTasks());
+                    storage.saveTasksData(tasks.getTasks());
                     return GuiUi.displayAddSuccess(tasks, taskToBeAdded);
                 } catch (DukeException e) {
                     return GuiUi.displayFailToSaveError();
