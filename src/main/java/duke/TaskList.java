@@ -1,5 +1,6 @@
 package duke;
 
+import java.lang.IllegalArgumentException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +14,12 @@ import duke.task.ToDo;
  */
 public class TaskList {
     private final ArrayList<Task> list;
-    private boolean isDone;
 
     /**
      * Constructor method for TaskList.
      */
     public TaskList() {
         list = new ArrayList<>();
-        isDone = false;
     }
 
     /**
@@ -36,6 +35,7 @@ public class TaskList {
      * @param content task to be added
      */
     public void addTask(Task content) {
+        assert content != null : "Task should not be null";
         list.add(content);
     }
 
@@ -45,12 +45,14 @@ public class TaskList {
      *
      * @param task relevant string info for the new Task.
      */
-    public void addTask(String[] task) {
+    public void addTask(String[] task) throws IllegalArgumentException {
         String type = task[0].strip();
         String done = task[1].strip();
         String desc = task[2].strip();
+
         Task newTask;
-        newTask = new ToDo(desc);
+        newTask = new ToDo(desc); //default case. Will raise exception if used.
+
         if (type.equals("T")) {
             newTask = new ToDo(desc);
             this.addTask(newTask);
@@ -61,11 +63,15 @@ public class TaskList {
         } else if (type.equals("E")) {
             String atDate = task[3];
             newTask = new Event(desc, atDate);
-            this.addTask(newTask);
+        } else {
+            throw new IllegalArgumentException("Invalid type. Please check duke.txt. Skipping Entry...");
         }
+
         if (done.equals("1")) {
             newTask.setDone();
         }
+
+        this.addTask(newTask);
     }
 
     /**

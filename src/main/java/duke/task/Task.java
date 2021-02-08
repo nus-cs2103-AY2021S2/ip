@@ -34,11 +34,10 @@ public abstract class Task {
      * String representation of whether the task is done.
      * To be used by the concrete implementation of Tasks only.
      *
-     * @return [X] if done [ ] otherwise.
+     * @return [X] content if done [ ] content otherwise.
      */
     public String toString() {
         String string = "";
-        //Printing isDone
         string += String.format("[%s] ", isDone ? "X" : " ");
         string += this.content;
         return string;
