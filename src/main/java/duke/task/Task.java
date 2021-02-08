@@ -11,7 +11,7 @@ package duke.task;
  */
 public class Task {
     /** Description of the task. */
-    protected String name;
+    protected final String name;
 
     /** Indicates whether the task has been done by the user. */
     protected boolean isDone;

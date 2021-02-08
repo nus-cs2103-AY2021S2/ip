@@ -44,11 +44,15 @@ public class TaskList {
      */
     private void addTodo(String s)
             throws EmptyDescriptionException {
+        String taskType = "todo";
+
         try {
-            s = s.substring(5);
+            int startOfDescription = 5;
+
+            s = s.substring(startOfDescription);
             tasks.add(new ToDo(s));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException("todo");
+            throw new EmptyDescriptionException(taskType);
         }
     }
 
@@ -65,15 +69,20 @@ public class TaskList {
      */
     private void addDeadline(String s)
             throws EmptyDescriptionException, EmptyDateException, DateFormatException {
+        String taskType = "deadline";
+
         try {
-            String[] sArray = s.split("/", 2);
-            s = sArray[0].substring(9, sArray[0].length() - 1);
+            int startOfDescription = 9;
+            String splitRegex = "/";
+
+            String[] sArray = s.split(splitRegex, 2);
+            s = sArray[0].substring(startOfDescription, sArray[0].length() - 1);
             LocalDate t = LocalDate.parse(sArray[1].substring(3));
             tasks.add(new Deadline(s, t));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException("deadline");
+            throw new EmptyDescriptionException(taskType);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyDateException("deadline");
+            throw new EmptyDateException(taskType);
         } catch (DateTimeParseException e) {
             throw new DateFormatException();
         }
@@ -92,15 +101,20 @@ public class TaskList {
      */
     private void addEvent(String s)
             throws EmptyDescriptionException, EmptyDateException, DateFormatException {
+        String taskType = "event";
+
         try {
-            String[] sArray = s.split("/", 2);
-            s = sArray[0].substring(6, sArray[0].length() - 1);
+            int startOfDescription = 6;
+            String splitRegex = "/";
+
+            String[] sArray = s.split(splitRegex, 2);
+            s = sArray[0].substring(startOfDescription, sArray[0].length() - 1);
             LocalDate t = LocalDate.parse(sArray[1].substring(3));
             tasks.add(new Event(s, t));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException("event");
+            throw new EmptyDescriptionException(taskType);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyDateException("event");
+            throw new EmptyDateException(taskType);
         } catch (DateTimeParseException e) {
             throw new DateFormatException();
         }

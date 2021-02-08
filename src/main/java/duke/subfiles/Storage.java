@@ -45,20 +45,20 @@ public class Storage {
      *                 the current execution of the Duke program.
      */
     public void loadData(TaskList taskList) {
-        File f = new File(path);
-        if (!f.exists()) {
-            f.mkdir();
+        File pathToFile = new File(path);
+        if (!pathToFile.exists()) {
+            pathToFile.mkdir();
         }
 
-        f = new File(path + filename);
+        File file = new File(path + filename);
         try {
-            Scanner sc = new Scanner(f);
+            Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 taskList.addTaskFromData(sc.nextLine());
             }
         } catch (FileNotFoundException e) {
             try {
-                f.createNewFile();
+                file.createNewFile();
             } catch (IOException ex) {
                 System.out.println("Something went wrong during the creation of your save file.");
             }
@@ -81,16 +81,16 @@ public class Storage {
 
             for (Task t : tasks) {
                 if (t instanceof ToDo) {
-                    fw.write("T | " + (t.isDone() ? 1 : 0)
-                            + " | " + t.getName());
+                    String writeData = "T | " + (t.isDone() ? 1 : 0) + " | " + t.getName();
+                    fw.write(writeData);
                 } else if (t instanceof Deadline) {
                     Deadline d = (Deadline) t;
-                    fw.write("D | " + (d.isDone() ? 1 : 0) + " | "
-                            + d.getName() + " | " + d.getDate());
+                    String writeData = "D | " + (d.isDone() ? 1 : 0) + " | " + d.getName() + " | " + d.getDate();
+                    fw.write(writeData);
                 } else {
                     Event e = (Event) t;
-                    fw.write("E | " + (e.isDone() ? 1 : 0) + " | "
-                            + e.getName() + " | " + e.getDate());
+                    String writeData = "E | " + (e.isDone() ? 1 : 0) + " | " + e.getName() + " | " + e.getDate();
+                    fw.write(writeData);
                 }
                 fw.write(System.lineSeparator());
             }
