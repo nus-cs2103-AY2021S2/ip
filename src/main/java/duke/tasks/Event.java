@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
-import duke.parser.DatetimeParser;
 import duke.parser.UserInputTokenSet;
 
 
@@ -33,7 +32,7 @@ public class Event extends DateTask {
      * to the '/at' flag, following the description, e.g.
      * {@code event <description> /at <datetime>}. '/done' flag can be optionally provided
      * to mark as completed.
-     * Datetime formats are specified in {@link DatetimeParser }.
+     * Datetime formats are specified in {@link duke.parser.DatetimeParser }.
      *
      * @param tokenSet User input tokens
      * @return Event
