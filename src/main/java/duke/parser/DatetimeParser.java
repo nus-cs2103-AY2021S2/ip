@@ -1,12 +1,12 @@
 package duke.parser;
 
-import duke.exceptions.DukeExceptionIllegalArgument;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeExceptionIllegalArgument;
 
 /**
  * Parser class.
@@ -125,14 +125,14 @@ public class DatetimeParser {
     public static LocalDateTime parseDate(String input, LocalDateTime now) throws DukeExceptionIllegalArgument {
         input = input.strip();
         now = now.withSecond(0).withNano(0);
-        String inputAddYear = input+"_"+now.getYear();
+        String inputAddYear = input + "_" + now.getYear();
 
         for (int i = 0; i < DATE_FORMATS.length; i++) {
             LocalDateTime date;
             DateTimeFormatter fmt = DATE_FORMATS[i];
 
-            // No date supplied
             if (i == 0) {
+                // No date supplied
                 LocalTime readout;
                 try {
                     readout = LocalTime.parse(input, fmt);
@@ -143,10 +143,9 @@ public class DatetimeParser {
                 if (date.isBefore(now)) {
                     date = date.plusDays(1);
                 }
-            }
 
-            // No time supplied, assume midnight
-            else if (i <= 5) {
+            } else if (i <= 5) {
+                // No time supplied, assume midnight
                 LocalDate readout;
                 try {
                     readout = LocalDate.parse(input, fmt);
@@ -154,10 +153,9 @@ public class DatetimeParser {
                     continue;
                 }
                 date = readout.atTime(0, 0);
-            }
 
-            // No time and year supplied, manually added
-            else if (i <= 10) {
+            } else if (i <= 10) {
+                // No time and year supplied, manually added
                 LocalDate readout;
                 try {
                     readout = LocalDate.parse(inputAddYear, fmt);
@@ -168,19 +166,17 @@ public class DatetimeParser {
                 if (date.isBefore(now)) {
                     date = date.plusYears(1);
                 }
-            }
 
-            // All parameters supplied
-            else if (i <= 18) {
+            } else if (i <= 18) {
+                // All parameters supplied
                 try {
                     date = LocalDateTime.parse(input, fmt);
                 } catch (DateTimeParseException e) {
                     continue;
                 }
-            }
 
-            // No year supplied
-            else {
+            } else {
+                // No year supplied
                 try {
                     date = LocalDateTime.parse(inputAddYear, fmt);
                 } catch (DateTimeParseException e) {
@@ -245,7 +241,7 @@ public class DatetimeParser {
      * @param dt LocalDateTime.
      * @return Formatted datetime string.
      */
-    public static String formatDateISO(LocalDateTime dt) {
+    public static String formatDateIso(LocalDateTime dt) {
         return dt.format(ISO_DATETIME_FORMAT);
     }
 

@@ -59,6 +59,6 @@ public abstract class DateTask extends Task {
      * @return string representation of datetime
      */
     public String getDatetimeString() {
-        return DatetimeParser.formatDateISO(datetime);
+        return DatetimeParser.formatDateIso(datetime);
     }
 }
