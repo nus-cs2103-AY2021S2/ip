@@ -68,64 +68,85 @@ public class TaskList {
 
             Ui.formatText();
 
-            if (!command.equals(ADD_TODO_COMMAND) && !command.equals(ADD_DEADLINE_COMMAND)
-                    && !command.equals(ADD_EVENT_COMMAND)) {
-                // error: unknown command
+            boolean isValidCommand = command.equals(ADD_TODO_COMMAND) || command.equals(ADD_DEADLINE_COMMAND)
+                    || command.equals(ADD_EVENT_COMMAND);
+
+            if (!isValidCommand || split.length < 2) {
                 System.out.println("Hey! What is this gibberish?");
                 return "Hey! What is this gibberish?";
-            } else if (split.length < 2) {
-                // error: command empty
-                System.out.println("You gotta give me a description to work with, buddy:\nCommand \""
-                        + command + "\" cannot be empty.");
-                return "You gotta give me a description to work with, buddy:\nCommand \""
-                        + command + "\" cannot be empty.";
             } else if (command.equals("todo")) {
-                Todo todo = new Todo(split[1]);
-                lst.add(todo);
-                System.out.println("You got it! I added this task:\n   "
-                        + todo.toString());
-                countTasks();
-                return "You got it! I added this task:\n   "
-                        + todo.toString() + "\n"
-                        + countTasks();
+                return addTodo(split[1]);
             } else {
-                try {
-                    String[] separateDetails = split[1].split("/by |/at ");
-                    String description = separateDetails[0];
+                String[] separateDetails = split[1].split("/by |/at ");
+                String description = separateDetails[0];
 
-                    String date = separateDetails[1];
-                    LocalDate localDate = LocalDate.parse(date);
+                String date = separateDetails[1];
+                LocalDate localDate = LocalDate.parse(date);
 
-                    if (command.startsWith(ADD_DEADLINE_COMMAND)) {
-                        Deadline deadline = new Deadline(description, localDate);
-
-                        lst.add(deadline);
-                        System.out.println("You got it! I added this task:\n   "
-                                + deadline.toString());
-                        return "You got it! I added this task:\n   "
-                                + deadline.toString() + "\n" + countTasks();
-                    } else {
-                        // command is ADD_EVENT_COMMAND
-                        Event event = new Event(description, localDate);
-                        lst.add(event);
-                        System.out.println("You got it! I added this task:\n   "
-                                + event.toString());
-                        return "You got it! I added this task:\n   "
-                                + event.toString() + "\n" + countTasks();
-                    }
-                    //countTasks();
-                } catch (ArrayIndexOutOfBoundsException e){
-                    System.err.println("Did you format your request properly? " +
-                            "This is getting old.");
-                    return "Did you format your request properly? " +
-                            "This is getting old.";
+                if (command.startsWith(ADD_DEADLINE_COMMAND)) {
+                    return addDeadline(description, localDate);
+                } else {
+                    return addEvent(description, localDate);
                 }
             }
         } catch (DateTimeParseException e) {
             System.err.println("Your date formatting is invalid, use YYYY-MM-DD please...");
             return "Your date formatting is invalid, use YYYY-MM-DD please...";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Did you format your request properly?";
         }
     }
+
+    /**
+     * Adds todo task to task list.
+     *
+     * @param description description for todo task
+     * @return response message to user
+     */
+    public String addTodo(String description) {
+        Todo todo = new Todo(description);
+        lst.add(todo);
+        System.out.println("You got it! I added this task:\n   "
+                + todo.toString());
+        countTasks();
+        return "You got it! I added this task:\n   "
+                + todo.toString() + "\n"
+                + countTasks();
+    }
+
+    /**
+     * Adds deadline task to task list.
+     *
+     * @param description description for deadline task
+     * @param localDate deadline for task
+     * @return response message to user
+     */
+    public String addDeadline(String description, LocalDate localDate) {
+        Deadline deadline = new Deadline(description, localDate);
+
+        lst.add(deadline);
+        System.out.println("You got it! I added this deadline:\n   "
+                + deadline.toString());
+        return "You got it! I added this deadline:\n   "
+                + deadline.toString() + "\n" + countTasks();
+    }
+
+    /**
+     * Adds event to task list.
+     *
+     * @param description description for event
+     * @param localDate date for event
+     * @return response message to user
+     */
+    public String addEvent(String description, LocalDate localDate) {
+        Event event = new Event(description, localDate);
+        lst.add(event);
+        System.out.println("You got it! I added this event:\n   "
+                + event.toString());
+        return "You got it! I added this event:\n   "
+                + event.toString() + "\n" + countTasks();
+    }
+
 
     /**
      * Deletes task from list of tasks.

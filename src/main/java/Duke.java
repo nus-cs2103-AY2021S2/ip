@@ -51,13 +51,9 @@ public class Duke {
      * Generates a response to user input.
      */
     public String getResponse(String input) {
-        //try {
             parser = new Parser();
             storage = new Storage("duke.txt");
             return parser.execute(input, taskList, storage);
-        //} catch (DukeException e) {
-            //System.err.println(e.getMessage());
-        //}
     }
 
 
@@ -66,13 +62,24 @@ public class Duke {
      *
      * @throws IOException if filePath or system input is invalid.
      */
-
     public void run() throws IOException {
         ui.printHello();
         sc = new Scanner(System.in);
         storage = new Storage("duke.txt");
         parser = new Parser();
 
+        respond(sc, parser);
+
+        sc.close();
+        storage.storeTasks(taskList);
+    }
+
+    /**
+     * Runs and responds to input until exit command is detected.
+     * @param sc scanner for user input
+     * @param parser parser to deconstruct user commands
+     */
+    public void respond(Scanner sc, Parser parser) {
         while (true) {
             String input = sc.nextLine();
             boolean shouldExit = parser.parse(input, taskList);
@@ -80,8 +87,6 @@ public class Duke {
                 break;
             }
         }
-        sc.close();
-        storage.storeTasks(taskList);
     }
 
 
