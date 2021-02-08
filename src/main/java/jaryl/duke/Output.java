@@ -28,7 +28,7 @@ public class Output {
      */
     public String sendHelp() {
         return ("Duke has sent help! Here are a list of commands you can use:\n1. list\n2. done\n" +
-                "3. find\n4. todo\n" + "5. deadline\n6. event\n" + "7. delete\n8. help\n9. exit");
+                "3. find\n4. todo\n5. deadline\n6. event\n7. delete\n8. update\n9. help\n10. exit");
     }
 
     /**
@@ -42,6 +42,10 @@ public class Output {
         else {
             return "Noted. I've marked this task as undone: \n\t" + task;
         }
+    }
+
+    public String printUpdateMsg(Task task) {
+        return "Great! Here is your newly edited task: \n\t" + task;
     }
 
     /**
@@ -111,6 +115,43 @@ public class Output {
 
         dataManager.writeToFile(tasksList);
         return(printDoneMsg(done));
+    }
+
+    public String updateAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
+        String[] params = input.split(" ");
+
+        if (params.length < 4) {
+            throw new InvalidFormatException("Invalid event number. Please specify a valid event you would like to update");
+        } else if (Integer.parseInt(params[1]) <= 0 || Integer.parseInt(params[1]) > tasksList.size()) {
+            throw new InvalidFormatException("Invalid event number. Please specify a valid event you would like to update");
+        }
+
+        String taskType = params[2];
+        String taskDesc = "";
+        String dateTime = "";
+        if (taskType.equals("todo")) {
+            taskDesc = input.split(" todo ")[1];
+            Todo updatedTodo = new Todo(taskDesc);
+            tasksList.set(Integer.parseInt(params[1]) - 1, updatedTodo);
+            dataManager.writeToFile(tasksList);
+            return(printUpdateMsg(updatedTodo));
+        } else if (taskType.equals("deadline")) {
+            taskDesc = input.split(" deadline ")[1].split(" /by ")[0];
+            dateTime = input.split(" deadline ")[1].split(" /by ")[1];
+            Deadline updatedDeadline = new Deadline(taskDesc, dateTime);
+            tasksList.set(Integer.parseInt(params[1]) - 1, updatedDeadline);
+            dataManager.writeToFile(tasksList);
+            return(printUpdateMsg(updatedDeadline));
+        } else if (taskType.equals("event")) {
+            taskDesc = input.split(" event ")[1].split(" /at ")[0];
+            dateTime = input.split(" event ")[1].split(" /by ")[1];
+            Event updatedEvent = new Event(taskDesc, dateTime);
+            tasksList.set(Integer.parseInt(params[1]) - 1, updatedEvent);
+            dataManager.writeToFile(tasksList);
+            return(printUpdateMsg(updatedEvent));
+        } else {
+            throw new InvalidFormatException("Invalid command. Please specify the type of task you would like to update");
+        }
     }
 
     /**

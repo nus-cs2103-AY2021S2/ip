@@ -146,6 +146,9 @@ public class Duke extends Application {
                 case FIND:
                     resp = output.findAction(tasksList, input);
                     break;
+                case UPDATE:
+                    resp = output.updateAction(tasksList, input, dataManager);
+                    break;
                 case HELP:
                     resp = output.sendHelp();
                     break;

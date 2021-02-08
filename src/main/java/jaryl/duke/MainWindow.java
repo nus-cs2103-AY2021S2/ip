@@ -24,6 +24,8 @@ public class MainWindow {
 
     public void setDuke(Duke duke) {
         this.duke = duke;
+        Output output = new Output();
+        dialogBox.getChildren().add(Dialog.getDukeDialog(output.printWelcomeMsg(), dukeImg));
     }
 
     @FXML
