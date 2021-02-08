@@ -31,7 +31,7 @@ public abstract class Task {
     }
 
     @Override
-    public boolean equals(Object t){
+    public boolean equals(Object t) {
         if (!(t instanceof Task)) {
             return false;
         }
