@@ -88,6 +88,10 @@ public class StorageHandler {
 
         String type = (String) taskDetails.get("type");
 
+        assert taskName != null;
+        assert status != null;
+        assert type != null;
+
         if (type.equals("TODO")) {
             TASKS.add(new ToDo(taskName, status));
         } else if (type.equals("DEADLINE")) {
