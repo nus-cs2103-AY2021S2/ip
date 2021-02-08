@@ -58,8 +58,8 @@ public class TaskList {
             String description = userInput.substring(userInput.indexOf("event") + 6, userInput.indexOf("/at") - 1);
             String eventDate = userInput.substring(userInput.indexOf("/at") + 4, userInput.indexOf("/at") + 14);
             LocalDate date = LocalDate.parse(eventDate, formatter);
-            String deadLineTime = userInput.substring(userInput.indexOf("/at") + 15);
-            LocalTime time = LocalTime.parse(deadLineTime, timeFormatter);
+            String eventTime = userInput.substring(userInput.indexOf("/at") + 15);
+            LocalTime time = LocalTime.parse(eventTime, timeFormatter);
             task = new Event(description, date, time);
         }
         newStorage.add(task);
