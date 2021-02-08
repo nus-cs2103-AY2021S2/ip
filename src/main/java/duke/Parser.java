@@ -47,54 +47,73 @@ public class Parser {
         }
     }
 
+    private static ToDo parseTodo(String[] inputSplitBySpaces) {
+        //[ ] Task description
+        String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1);
+        // Refer to the above comment, task description starts at index 4.
+        int indexOfTaskDescription = 4;
+        String taskDescription = taskDescriptionWithDoneBrackets.substring(indexOfTaskDescription);
+        return new ToDo(taskDescription);
+    }
+
+    private static Deadline parseDeadline(String[] inputSplitBySpaces) throws TaskException {
+        //Index of /by
+        int byIndex = Helper.arrayIndexOf(inputSplitBySpaces, "(by:");
+        //E.g. [ ] sample_description
+        String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1, byIndex - 1);
+        String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
+        String dueDateWithClosingBracket = Helper.join(inputSplitBySpaces, byIndex + 1,
+                inputSplitBySpaces.length - 1);
+        String dueDate = dueDateWithClosingBracket.substring(0, dueDateWithClosingBracket.length() - 1);
+        return new Deadline(taskDescription, dueDate);
+    }
+
+    private static Event parseEvent(String[] inputSplitBySpaces) throws TaskException {
+        //Index of /at
+        int atIndex = Helper.arrayIndexOf(inputSplitBySpaces, "(at:");
+        //E.g. [ ] sample_description
+        String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1, atIndex - 1);
+        String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
+        String eventDateWithClosingBracket = Helper.join(inputSplitBySpaces, atIndex + 1,
+                inputSplitBySpaces.length - 1);
+        String eventDate = eventDateWithClosingBracket.substring(0,
+                eventDateWithClosingBracket.length() - 1);
+        return new Event(taskDescription, eventDate);
+    }
+
     /**
      * Parses input string as a duke.task.Task.
      * @param input input string to be parsed.
      * @return duke.task.Task object corresponding to input string.
      */
-    public static Task stringToTask(String input) throws TaskException {
-        //Check if it is a valid task first
+    public static Task stringToTask(String input) throws TaskException, DukeException {
         Pattern toDoPattern = Pattern.compile(TODO_REGEX);
         Pattern deadlinePattern = Pattern.compile(DEADLINE_REGEX);
         Pattern eventPattern = Pattern.compile(EVENT_REGEX);
-        //If it is a To Do command
-        if (toDoPattern.matcher(input).find()) {
-            String[] inputSplitBySpaces = input.trim().split("\\s+");
-            //[ ] Task description
-            String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1);
-            String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
-            return new ToDo(taskDescription);
-        } else {
-            boolean matchDeadline = deadlinePattern.matcher(input).find();
-            boolean matchEvent = eventPattern.matcher(input).find();
-            //If it is a deadline or event command
-            if (matchDeadline || matchEvent) {
-                String[] inputSplitBySpaces = input.trim().split("\\s+");
-                if (matchDeadline) {
-                    //Index of /by
-                    int byIndex = Helper.arrayIndexOf(inputSplitBySpaces, "(by:");
-                    //E.g. [ ] sample_description
-                    String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1, byIndex - 1);
-                    String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
-                    String dueDateWithClosingBracket = Helper.join(inputSplitBySpaces, byIndex + 1,
-                            inputSplitBySpaces.length - 1);
-                    String dueDate = dueDateWithClosingBracket.substring(0, dueDateWithClosingBracket.length() - 1);
-                    return new Deadline(taskDescription, dueDate);
-                } else {
-                    //Index of /at
-                    int atIndex = Helper.arrayIndexOf(inputSplitBySpaces, "(at:");
-                    //E.g. [ ] sample_description
-                    String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1, atIndex - 1);
-                    String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
-                    String eventDateWithClosingBracket = Helper.join(inputSplitBySpaces, atIndex + 1,
-                            inputSplitBySpaces.length - 1);
-                    String eventDate = eventDateWithClosingBracket.substring(0,
-                            eventDateWithClosingBracket.length() - 1);
-                    return new Event(taskDescription, eventDate);
-                }
-            } else {
-                throw new TaskException("Invalid task entry.");
-            }
+
+        boolean matchDeadline = deadlinePattern.matcher(input).find();
+        boolean matchEvent = eventPattern.matcher(input).find();
+        boolean matchTodo =  toDoPattern.matcher(input).find();
+
+        //If it is not deadline, todo or event, it is invalid task entry.
+        if (!matchDeadline && !matchEvent && !matchTodo) {
+            throw new TaskException("Invalid task entry.");
         }
+
+        //User input delimited by space.
+        String[] inputSplitBySpaces = input.trim().split("\\s+");
+
+        //If it is a To Do command
+        if (matchTodo) {
+            return parseTodo(inputSplitBySpaces);
+        }
+
+        //deadline task
+        if (matchDeadline) {
+            return parseDeadline(inputSplitBySpaces);
+        }
+
+        //event task
+        return parseEvent(inputSplitBySpaces);
     }
 }

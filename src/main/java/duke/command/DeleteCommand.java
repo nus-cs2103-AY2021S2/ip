@@ -18,11 +18,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList list) throws DukeException {
-        try {
-            int taskNumber = Integer.parseInt(commandSplit[1]);
-            return list.remove(taskNumber);
-        } catch (Exception e) {
-            throw new DukeException("Please enter a valid task number to delete a task.");
-        }
+        int taskNumber = Integer.parseInt(commandSplit[1]);
+        return list.remove(taskNumber);
     }
 }

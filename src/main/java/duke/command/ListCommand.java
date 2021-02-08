@@ -19,6 +19,15 @@ public class ListCommand extends Command {
         assert commandSplit.length >= 1 && commandSplit[0].equals("list"): "Must have list keyword";
     }
 
+    private LocalDate parseDate(String date) throws DukeException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd/MM/yyyy][yyyy-MM-dd][MMM dd yyyy]");
+            return LocalDate.parse(date, formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Incorrect date format. " + e.getMessage());
+        }
+    }
+
     /**
      * Lists out all tasks in the task list if user did not provide a date.
      * Else, lists out only tasks that are marked with the given date.
@@ -31,13 +40,7 @@ public class ListCommand extends Command {
         boolean hasDate = commandSplit.length > 1;
         if (hasDate) {
             String enteredDate = Helper.join(this.commandSplit, 1, this.commandSplit.length - 1);
-            LocalDate queryDate;
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd/MM/yyyy][yyyy-MM-dd][MMM dd yyyy]");
-                queryDate = LocalDate.parse(enteredDate, formatter);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Incorrect date format. " + e.getMessage());
-            }
+            LocalDate queryDate = parseDate(enteredDate);
             //Filter Tasks from TaskList against the date provided
             ArrayList<Task> matchedTasks = list.filter(x -> !x.getDate().equals(LocalDate.MIN)
                     && x.getDate().equals(queryDate));

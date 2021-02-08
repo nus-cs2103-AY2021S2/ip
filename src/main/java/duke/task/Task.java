@@ -39,6 +39,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return isDone ? "[X] " + this.description : "[ ] " + this.description;
+        String doneBracket = isDone ? "[X]" : "[ ]";
+        return doneBracket + " " + this.description;
     }
 }
