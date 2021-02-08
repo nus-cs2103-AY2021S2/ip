@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Event class represents a single event created by the
- * user via user input to the Duke program. It contains
- * functions which enable the user to mark the task as done,
+ * The Event class represents a single event created by the user via user input to the Duke program.
+ * It contains functions which enable the user to mark the task as done,
  * and a date which the event is held on.
  *
  * @author  arsatis
- * @version 1.1
- * @since   2021-01-26
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class Event extends Task {
     /** Date which the event is held on. */
@@ -26,6 +25,8 @@ public class Event extends Task {
     public Event(String name, LocalDate date) {
         super(name);
         this.date = date;
+
+        assert(this.name != null && this.date != null);
     }
 
     /**
@@ -47,8 +48,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a description of the event, formatted with its
-     * type, followed by an "X" if it has been marked as done.
+     * Returns a description of the event, formatted with its type,
+     * followed by an "X" if it has been marked as done.
      *
      * @return Formatted description of the event.
      */

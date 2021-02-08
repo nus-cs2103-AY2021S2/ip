@@ -1,9 +1,8 @@
 package duke.task;
 
 /**
- * The Task class represents a single task created by the
- * user via user input to the Duke program. It contains
- * functions which enable the user to mark the task as done.
+ * The Task class represents a single task created by the user via user input to the Duke program.
+ * It contains functions which enable the user to mark the task as done.
  *
  * @author  arsatis
  * @version 1.1
@@ -29,16 +28,14 @@ public class Task {
     /**
      * Checks whether the task has been marked as done.
      *
-     * @return True if the task has been marked as done, and
-     *         false otherwise.
+     * @return True if the task has been marked as done, and false otherwise.
      */
     public boolean isDone() {
         return isDone;
     }
 
     /**
-     * Sets the isDone field to true, indicating that the task
-     * has been marked as done.
+     * Sets the isDone field to true, indicating that the task has been marked as done.
      */
     public void setDone() {
         isDone = true;
@@ -54,8 +51,7 @@ public class Task {
     }
 
     /**
-     * Returns a description of the task, formatted with an
-     * "X" if it has been marked as done.
+     * Returns a description of the task, formatted with an "X" if it has been marked as done.
      *
      * @return Formatted description of the task.
      */

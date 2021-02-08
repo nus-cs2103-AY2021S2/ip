@@ -5,12 +5,12 @@ import duke.subfiles.TaskList;
 import duke.subfiles.Ui;
 
 /**
- * The PrintCommand class is a command whose execution triggers the
- * printing of tasks in the TaskList, based on the user input.
+ * The PrintCommand class is a command whose execution triggers the printing of tasks in the TaskList,
+ * based on the user input.
  *
  * @author  arsatis
- * @version 1.1
- * @since   2021-01-26
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class PrintCommand extends Command {
 
@@ -21,17 +21,17 @@ public class PrintCommand extends Command {
      */
     public PrintCommand(String command) {
         super(command);
+
+        assert(command != null && !command.equals(""));
     }
 
     /**
-     * Calls the task manager to either print the entire list of tasks
-     * in the TaskList, or the deadlines and events that are due or happening
-     * on the specified date.
+     * Calls the task manager to either print the entire list of tasks in the TaskList,
+     * or the deadlines and events that are due or happening on the specified date.
      *
-     * @param taskList A TaskList object containing the list of tasks
-     *                 which the program currently has.
-     * @param ui A Ui object which the current program is using to manage
-     *           interactions with the user.
+     * @param taskList A TaskList object containing the list of tasks which the program currently has.
+     * @param ui A Ui object which the current program is using to manage interactions with the user.
+     * @return Duke's response to the user.
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {

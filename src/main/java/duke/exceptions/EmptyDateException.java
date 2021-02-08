@@ -1,8 +1,7 @@
 package duke.exceptions;
 
 /**
- * The EmptyDateException class is an exception thrown
- * by the TaskList when a date is not supplied for a
+ * The EmptyDateException class is an exception thrown by the TaskList when a date is not supplied for a
  * deadline or event by the user input.
  *
  * @author  arsatis
@@ -17,7 +16,7 @@ public class EmptyDateException extends Exception {
      * @param s The type of task which triggered this exception.
      */
     public EmptyDateException(String s) {
-        super("OOPS!!! The date of a " + s + " cannot be empty.");
+        super("I'm sorry, the date of a " + s + " cannot be empty.");
     }
 
 }

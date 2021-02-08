@@ -7,12 +7,11 @@ import duke.subfiles.TaskList;
 import duke.subfiles.Ui;
 
 /**
- * The Duke program is an interactive application which
- * enables users to store and modify their tasks.
+ * The Duke program is an interactive application which enables users to store and modify their tasks.
  *
  * @author  arsatis
- * @version 1.1
- * @since   2021-01-26
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class Duke {
     /** Task list which manages the tasks created by user input. */
@@ -59,30 +58,42 @@ public class Duke {
         ui.bye();
     }
 
+    /**
+     * The main method which is executed when the Duke program is executed.
+     *
+     * @param args Unused.
+     */
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    /**
+     * Returns the storage associated with this Duke object.
+     *
+     * @return The storage associated with this Duke object.
+     */
     public Storage getStorage() {
         return storage;
     }
 
+    /**
+     * Returns the task list associated with this Duke object.
+     *
+     * @return The task list associated with this Duke object.
+     */
     public TaskList getTaskList() {
         return taskList;
     }
 
     /**
      * Generates a response to user input.
+     *
+     * @param input User input.
+     * @return Duke's response to the user input.
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
         return c.execute(taskList, ui);
-    }
-
-    /**
-     * The main method which is executed when the Duke program
-     * is executed.
-     *
-     * @param args Unused.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
     }
 
 }

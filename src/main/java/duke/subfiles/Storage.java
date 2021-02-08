@@ -34,6 +34,8 @@ public class Storage {
      */
     @SafeVarargs
     public Storage(String... filenames) {
+        assert(filenames != null);
+
         this.path = filenames[0];
         this.filename = filenames[1];
     }
@@ -41,8 +43,7 @@ public class Storage {
     /**
      * Loads the data stored in the save file.
      *
-     * @param taskList The list of tasks that the user has in
-     *                 the current execution of the Duke program.
+     * @param taskList The list of tasks that the user has in the current execution of the Duke program.
      */
     public void loadData(TaskList taskList) {
         File pathToFile = new File(path);
@@ -68,11 +69,9 @@ public class Storage {
     }
 
     /**
-     * Saves the list of tasks that the user currently has in
-     * the save file.
+     * Saves the list of tasks that the user currently has in the save file.
      *
-     * @param taskList The list of tasks that the user has in
-     *                 the current execution of the Duke program.
+     * @param taskList The list of tasks that the user has in the current execution of the Duke program.
      */
     public void saveData(TaskList taskList) {
         try {

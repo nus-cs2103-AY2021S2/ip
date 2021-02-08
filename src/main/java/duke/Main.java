@@ -11,11 +11,20 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @author  arsatis
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class Main extends Application {
-
+    /** Duke object which crafts responses for user inputs. */
     private Duke duke = new Duke();
 
+    /**
+     * Runs the GUI for the Duke program.
+     *
+     * @param stage The stage for the application.
+     */
     @Override
     public void start(Stage stage) {
         String filename = "/view/MainWindow.fxml";
@@ -31,4 +40,5 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
 }
