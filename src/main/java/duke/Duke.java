@@ -15,6 +15,10 @@ public class Duke {
      * @param directoryPath path to directory which contains text file of Duke's database
      */
     public Duke(String filePath, String directoryPath) {
+        // file path and directory path should never be null
+        // this will cause issues with Storage
+        assert filePath != null : "Database file path for Duke is null";
+        assert directoryPath != null : "Database directory path for Duke is null";
         this.storage = new Storage(filePath, directoryPath);
         this.ui = new Ui(storage);
     }
@@ -28,6 +32,10 @@ public class Duke {
         return ui.respondToInput(input);
     }
 
+    /**
+     * Returns String greeting from the Greeting class
+     * @return greeting for a user
+     */
     public String getGreeting() {
         return Greeting.greet();
     }

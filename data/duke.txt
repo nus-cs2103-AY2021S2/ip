@@ -1,1 +1,1 @@
-E|1|say goodbye|12/02/2022 1900
+T|1|say hello

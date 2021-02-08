@@ -36,6 +36,9 @@ public class MainWindow extends AnchorPane {
      * @param d contains Duke instance we are using
      */
     public void setDuke(Duke d) {
+        // duke should never be set to null
+        assert d != null : "Duke is set to null in MainWindow";
+        // set instance of duke to mainwindow for response
         duke = d;
         // add greeting whenever we set duke
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getGreeting(), dukeImage));

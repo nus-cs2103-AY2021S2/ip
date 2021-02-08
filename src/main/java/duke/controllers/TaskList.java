@@ -28,7 +28,6 @@ public class TaskList {
 
     /**
      * Constructor of TodosController which takes in an existing List of Optional Todos
-     *
      * @param todosList is an existing List of Optional Todos
      */
     public TaskList(List<Optional<? extends Todo>> todosList) {
@@ -124,7 +123,7 @@ public class TaskList {
                             + "currently have. Please try again.");
         }
 
-        // remove from stream
+        // remove from stream and return pair
         return new Pair<>(new TaskList(
                 IntStream.range(0, this.todos.size()).filter(idx -> idx != idxDelete)
                         .mapToObj(this.todos::get).collect(Collectors.toList())),
@@ -187,12 +186,14 @@ public class TaskList {
         try {
             newDeadline = Optional.of(new Deadline(String.join(" ", messages),
                     String.join(" ", deadlines.subList(1, deadlines.size()))));
+            // new deadline should never be null if no exception is thrown
+            assert newDeadline.isEmpty() : "Added Deadline is null";
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
                     "Please format your date after /by to be DD/MM/YYYY HHMM");
         }
 
-        // return new controller
+        // return new pair
         return new Pair<>(new TaskList(Stream.concat(this.todos.stream(), Stream.of(newDeadline))
                 .collect(Collectors.toList())), newDeadline);
     }
@@ -258,7 +259,7 @@ public class TaskList {
                     "Please format your date after /at to be DD/MM/YYYY HHMM");
         }
 
-        // return new controller
+        // return new pair
         return new Pair<>(new TaskList(Stream.concat(this.todos.stream(), Stream.of(newEvent))
                 .collect(Collectors.toList())), newEvent);
     }

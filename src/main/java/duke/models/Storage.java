@@ -18,6 +18,10 @@ public class Storage {
     private static final int TODO_MESSAGE_INDEX = 2;
     /** Constant containing index of extra message for Deadline and Event */
     private static final int TODO_EXTRA_MESSAGE_INDEX = 3;
+    /** Constant defining false for isDone for database file */
+    private static final String DATABASE_IS_DONE_FALSE = "0";
+    /** Constant defining true for isDone for database file */
+    private static final String DATABASE_IS_DONE_TRUE = "1";
 
     /** filePath containing saved Todos */
     private final String filePath;
@@ -57,7 +61,7 @@ public class Storage {
                 // line = [type, isDone, message, extraMessage (event / deadline)]
                 String type = line.get(TODO_TYPE_INDEX);
                 // isDone would be "1" if done, "0" if not done
-                boolean isDone = line.get(TODO_IS_DONE_INDEX).equals("1");
+                boolean isDone = line.get(TODO_IS_DONE_INDEX).equals(DATABASE_IS_DONE_TRUE);
                 String message = line.get(TODO_MESSAGE_INDEX);
 
                 // @formatter:off
@@ -106,9 +110,9 @@ public class Storage {
             // check if directory exists, if not, create it
             // else, delete file's current contents
             File databaseDirectory = new File(this.directoryPath);
+            File existingDatabase = new File(this.filePath);
             if (databaseDirectory.exists()) {
                 // delete existing file if it exists in directory
-                File existingDatabase = new File(this.filePath);
                 if (existingDatabase.exists()) {
                     // noinspection ResultOfMethodCallIgnored
                     existingDatabase.delete();
@@ -118,6 +122,12 @@ public class Storage {
                 // noinspection ResultOfMethodCallIgnored
                 databaseDirectory.mkdir();
             }
+
+            // at this point, databaseDirectory should exist
+            assert !databaseDirectory.exists()
+                    : "Database directory should be created but does not exist";
+            // and existingDatabase should be deleted before writing a new one
+            assert !existingDatabase.exists(): "Database file should be be deleted but exists";
 
             // Init to write file in append mode
             FileWriter writer = new FileWriter(this.filePath, true);
@@ -131,18 +141,23 @@ public class Storage {
                 if (optTodo.map(todo -> todo instanceof Event).orElse(false)) {
                     lineToWrite = optTodo.map(todo -> {
                         Event event = (Event) todo;
-                        return String.format("E|%s|%s|%s", event.isTodoDone() ? "1" : "0",
+                        return String.format("E|%s|%s|%s", event.isTodoDone()
+                                        ? DATABASE_IS_DONE_TRUE
+                                        : DATABASE_IS_DONE_FALSE,
                                 event.getRawMessage(), event.getEventTime());
                     }).orElse("");
                 } else if (optTodo.map(todo -> todo instanceof Deadline).orElse(false)) {
                     lineToWrite = optTodo.map(todo -> {
                         Deadline deadline = (Deadline) todo;
-                        return String.format("D|%s|%s|%s", deadline.isTodoDone() ? "1" : "0",
+                        return String.format("D|%s|%s|%s", deadline.isTodoDone()
+                                        ? DATABASE_IS_DONE_TRUE
+                                        : DATABASE_IS_DONE_FALSE,
                                 deadline.getRawMessage(), deadline.getDeadline());
                     }).orElse("");
                 } else {
                     lineToWrite = optTodo.map(todo -> String.format("T|%s|%s",
-                            todo.isTodoDone() ? "1" : "0", todo.getRawMessage())).orElse("");
+                            todo.isTodoDone() ? DATABASE_IS_DONE_TRUE : DATABASE_IS_DONE_FALSE,
+                            todo.getRawMessage())).orElse("");
                 }
 
                 // Write todo to line in database
