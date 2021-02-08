@@ -151,14 +151,28 @@ public class Duke {
      * @param errorInput user inputs
      */
     static void errorHandling(String errorInput) throws DukeException {
-        String[] inputArr = errorInput.split(" ");
+        String[] inputArr = new String[100];
+        if (errorInput.contains(" ")) {
+            inputArr = errorInput.split(" ");
+        } else {
+            inputArr[0] = errorInput;
+        }
 
         // Empty description
-        if (errorInput.contains("todo") ||
-                errorInput.contains("deadline") ||
-                errorInput.contains("event") &&
-                inputArr[1].isEmpty()) {
+        if ((errorInput.contains("todo")
+                || errorInput.contains("deadline")
+                || errorInput.contains("event"))
+                && inputArr[1] == null) {
+
             throw new DukeException("Whoops :( Your command description cannot be empty. Try again!");
+
+        } else if (errorInput.contains("list")
+                || errorInput.contains("bye")
+                || errorInput.contains("done")) {
+            //Do nothing
+
+        } else if (inputArr[1] != null) {
+            //Do nothing
 
         // Invalid description: unknown
         } else {
