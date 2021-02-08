@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Parser;
 import duke.TaskList;
 import duke.task.Task;
 import duke.Ui;
@@ -30,14 +31,6 @@ public class PrintListCommand implements ICommand {
     }
 
     private String listToString() {
-        String content = "";
-        Integer count = 1;
-        for (Task t: tasks.getTasks()) {
-            content += count.toString() + ".";
-            content += t.toString();
-            content += "\n";
-            count++;
-        }
-        return content.trim();
+        return Parser.listTaskToString(this.tasks.getTasks());
     }
 }
