@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 
 import duke.commands.CommandResult;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -51,8 +52,20 @@ public class Gui extends AnchorPane implements Ui {
      */
     @FXML
     public void initialize() {
-        userInput.setOnAction(this::handleUserInput);
-        sendButton.setOnAction(this::handleUserInput);
+        EventHandler<ActionEvent> handleUserInput = event -> {
+            String input = userInput.getText();
+            if (!isValid(input)) {
+                return;
+            }
+
+            addUserDialogBox(input);
+            userInput.clear();
+
+            inputHandler.accept(input);
+        };
+
+        userInput.setOnAction(handleUserInput);
+        sendButton.setOnAction(handleUserInput);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -148,19 +161,6 @@ public class Gui extends AnchorPane implements Ui {
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(msg, userImage)
         );
-    }
-
-    @FXML
-    private void handleUserInput(ActionEvent event) {
-        String input = userInput.getText();
-        if (!isValid(input)) {
-            return;
-        }
-
-        addUserDialogBox(input);
-        userInput.clear();
-
-        inputHandler.accept(null);
     }
 
     private boolean isValid(String input) {
