@@ -174,4 +174,21 @@ public class Ui {
             return s;
         }
     }
+
+    /**
+     * Make message for help box.
+     * @return string to be printed
+     */
+    public static String makeHelpMsg() {
+        return "Hello, I am Percy and I'm your personal assistant.\n"
+                + "Here are some commands that I can understand:\n"
+                + INDENT + "1. todo: e.g. \"todo feed dog\"\n"
+                + INDENT + "2. deadline: e.g. \"deadline renew pet license /by 2015-08-31\"\n"
+                + INDENT + "3. event: e.g. \"event pet expo /at 2015-08-31\"\n"
+                + INDENT + "4. list: e.g. \"list\"\n"
+                + INDENT + "5. delete: e.g. \"delete 1\"\n"
+                + INDENT + "6. done: e.g. \"done 1\"\n"
+                + INDENT + "7. find: e.g. \"find pet\"\n\n"
+                + "For more command-specific help, type \"help <COMMAND>\"";
+    }
 }

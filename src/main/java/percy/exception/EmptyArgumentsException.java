@@ -2,23 +2,19 @@ package percy.exception;
 
 import java.util.ArrayList;
 
-import percy.command.DeadlineCommand;
-import percy.command.DeleteCommand;
-import percy.command.DoneCommand;
-import percy.command.EventCommand;
-import percy.command.FindCommand;
-import percy.command.TodoCommand;
+import percy.command.*;
 import percy.ui.Ui;
 
 
-public class ParsingException extends PercyException {
+
+public class EmptyArgumentsException extends PercyException {
     protected String taskType;
 
     /**
      * Constructs NoDescriptionException.
      * @param taskType the type of task e.g. event, deadline, todo etc.
      */
-    public ParsingException(String taskType) {
+    public EmptyArgumentsException(String taskType) {
         this.taskType = taskType;
     }
 
@@ -43,11 +39,11 @@ public class ParsingException extends PercyException {
             arr.addAll(FindCommand.USAGE_GUIDE);
             return Ui.makeMsg(arr);
         case DeleteCommand.COMMAND:
-            arr.add("OOPS!!! The task number given is invalid.\n");
+            arr.add("OOPS!!! No task number given was given.\n");
             arr.addAll(DeleteCommand.USAGE_GUIDE);
             return Ui.makeMsg(arr);
         case DoneCommand.COMMAND:
-            arr.add("OOPS!!! The task number given is invalid.\n");
+            arr.add("OOPS!!! No task number was given.\n");
             arr.addAll(DoneCommand.USAGE_GUIDE);
             return Ui.makeMsg(arr);
         default:

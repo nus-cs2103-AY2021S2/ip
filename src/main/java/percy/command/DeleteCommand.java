@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import percy.exception.InvalidArgumentsException;
 import percy.exception.ParsingException;
 import percy.storage.Storage;
 import percy.task.Task;
@@ -46,7 +47,7 @@ public class DeleteCommand extends Command {
         } catch (IOException e) {
             return e.toString();
         } catch (IndexOutOfBoundsException e) {
-            return new ParsingException(DeleteCommand.COMMAND).toString();
+            return new InvalidArgumentsException(DeleteCommand.COMMAND).toString();
         }
     }
 }

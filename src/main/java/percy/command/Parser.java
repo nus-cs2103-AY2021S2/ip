@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 import percy.exception.DateTimeParsingException;
-import percy.exception.ParsingException;
+import percy.exception.EmptyArgumentsException;
+import percy.exception.InvalidArgumentsException;
 import percy.exception.PercyException;
 
 public class Parser {
@@ -26,24 +28,46 @@ public class Parser {
         case DeadlineCommand.COMMAND:
             return new DeadlineCommand(getDeadlineDescription(), getDeadlineDate(), getDeadlineTime());
         case DoneCommand.COMMAND:
-            return new DoneCommand(getTaskNumber());
+            return new DoneCommand(getTaskNumber(DoneCommand.COMMAND));
         case ListCommand.COMMAND:
             return new ListCommand();
         case DeleteCommand.COMMAND:
-            return new DeleteCommand(getTaskNumber());
+            return new DeleteCommand(getTaskNumber(DeleteCommand.COMMAND));
         case ByeCommand.COMMAND:
             return new ByeCommand();
         case FindCommand.COMMAND:
             return new FindCommand(getKeywords());
+        case HelpCommand.COMMAND:
+            return new HelpCommand(getHelpWord());
         default:
             return new UnknownCommand();
         }
     }
 
-    private static int getTaskNumber() {
+
+
+    private static int getTaskNumber(String commandType) throws PercyException {
         String[] splitCommand = fullCmd.split(" ", 2);
-        String taskNumber = splitCommand[1].trim();
-        return Integer.parseInt(taskNumber);
+        String taskNumber;
+        try {
+            taskNumber = splitCommand[1].trim();
+            return Integer.parseInt(taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            throw new EmptyArgumentsException(commandType);
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentsException(commandType);
+        }
+    }
+
+    private static Optional<String> getHelpWord() {
+        String[] splitCommand = fullCmd.split(" ", 2);
+        Optional<String> helpWord;
+        try {
+            helpWord = Optional.ofNullable(splitCommand[1].trim());
+        } catch (IndexOutOfBoundsException e) {
+            helpWord = Optional.ofNullable(null);
+        }
+        return helpWord;
     }
 
     private static String getTodoDescription() throws PercyException {
@@ -52,7 +76,7 @@ public class Parser {
         try {
             description = splitCommand[1];
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException(TodoCommand.COMMAND);
+            throw new EmptyArgumentsException(TodoCommand.COMMAND);
         }
         return description;
     }
@@ -64,7 +88,7 @@ public class Parser {
             String description = args[0].trim();
             return description;
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException(EventCommand.COMMAND);
+            throw new EmptyArgumentsException(EventCommand.COMMAND);
         }
     }
 
@@ -76,7 +100,7 @@ public class Parser {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             return date;
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException(EventCommand.COMMAND);
+            throw new EmptyArgumentsException(EventCommand.COMMAND);
         } catch (DateTimeParseException e) {
             throw new DateTimeParsingException(EventCommand.COMMAND);
         }
@@ -90,7 +114,7 @@ public class Parser {
             LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
             return time;
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException(EventCommand.COMMAND);
+            throw new EmptyArgumentsException(EventCommand.COMMAND);
         } catch (DateTimeParseException e) {
             throw new DateTimeParsingException(EventCommand.COMMAND);
         }
@@ -104,7 +128,7 @@ public class Parser {
             assert !description.isEmpty();
             return description;
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException(DeadlineCommand.COMMAND);
+            throw new EmptyArgumentsException(DeadlineCommand.COMMAND);
         }
     }
 
@@ -116,7 +140,7 @@ public class Parser {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             return date;
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException(DeadlineCommand.COMMAND);
+            throw new EmptyArgumentsException(DeadlineCommand.COMMAND);
         } catch (DateTimeParseException e) {
             throw new DateTimeParsingException(DeadlineCommand.COMMAND);
         }
@@ -130,7 +154,7 @@ public class Parser {
             LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
             return time;
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException(DeadlineCommand.COMMAND);
+            throw new EmptyArgumentsException(DeadlineCommand.COMMAND);
         } catch (DateTimeParseException e) {
             throw new DateTimeParsingException(DeadlineCommand.COMMAND);
         }
@@ -141,7 +165,7 @@ public class Parser {
             String[] splitCommand = fullCmd.split(" ", 2);
             return splitCommand[1].trim().toLowerCase().split(" ");
         } catch (IndexOutOfBoundsException e) {
-            throw new ParsingException(FindCommand.COMMAND);
+            throw new EmptyArgumentsException(FindCommand.COMMAND);
         }
     }
 }

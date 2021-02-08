@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import percy.exception.InvalidArgumentsException;
 import percy.exception.ParsingException;
 import percy.storage.Storage;
 import percy.task.Task;
@@ -45,7 +46,7 @@ public class DoneCommand extends Command {
             storage.save(taskList);
             return Ui.makeDoneMsg(doneTask);
         } catch (IndexOutOfBoundsException e) {
-            return new ParsingException(DoneCommand.COMMAND).toString();
+            return new InvalidArgumentsException(DoneCommand.COMMAND).toString();
         }
     }
 }
