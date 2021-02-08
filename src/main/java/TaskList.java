@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -70,13 +72,9 @@ public class TaskList {
      */
 
     public TaskList find(String keyword) {
-        ArrayList<Task> answer = new ArrayList<Task>();
         Predicate<Task> taskPredicate = task -> task.getName().contains(keyword);
-        for(Task i: this.getList()) {
-            if(taskPredicate.test(i)) {
-                answer.add(i);
-            }
-        }
+        List<Task> lists = this.getList().stream().filter(taskPredicate).collect(Collectors.toList());
+        ArrayList<Task> answer = new ArrayList<>(lists);
         return new TaskList(answer);
     }
 }
