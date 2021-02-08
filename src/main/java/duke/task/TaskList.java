@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 /**
  * A class represents a TaskList.
@@ -53,5 +54,9 @@ public class TaskList {
      */
     public Task get(int index) {
         return taskList.get(index);
+    }
+
+    public void forEach(Consumer<? super Task> action) {
+        taskList.forEach(action);
     }
 }

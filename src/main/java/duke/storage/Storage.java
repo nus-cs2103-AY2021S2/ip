@@ -88,9 +88,12 @@ public class Storage {
     public void updateInFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < tasks.size(); i++) {
-                fw.write(tasks.get(i).toFileString() + "\n");
-            }
+            StringBuilder sb = new StringBuilder();
+            tasks.forEach(t -> {
+                sb.append(t.toFileString());
+                sb.append("\n");
+            });
+            fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
             System.out.println("Has no targeted file in: " + e.getMessage());
