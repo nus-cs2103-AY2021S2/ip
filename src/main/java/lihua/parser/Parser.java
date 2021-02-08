@@ -3,7 +3,14 @@ package lihua.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import lihua.commands.*;
+import lihua.commands.AddCommand;
+import lihua.commands.Command;
+import lihua.commands.DeleteCommand;
+import lihua.commands.DoneCommand;
+import lihua.commands.ExitCommand;
+import lihua.commands.FindCommand;
+import lihua.commands.HelpCommand;
+import lihua.commands.ListCommand;
 import lihua.commons.enums.ListTagCode;
 import lihua.tasks.Deadline;
 import lihua.tasks.Event;
@@ -42,7 +49,8 @@ public class Parser {
      * @return Relevant command, as specified in the userInput.
      * @throws IndexOutOfBoundsException If the command is not in the correct format, then an exception will be thrown.
      */
-    private Command parseUserInput(String userInput, String firstArgument, String[] split) throws IndexOutOfBoundsException {
+    private Command parseUserInput(String userInput, String firstArgument, String[] split)
+            throws IndexOutOfBoundsException {
         assert firstArgument.toLowerCase().equals(firstArgument);
         switch (firstArgument) {
         case "bye":

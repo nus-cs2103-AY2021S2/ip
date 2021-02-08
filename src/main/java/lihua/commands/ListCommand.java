@@ -1,9 +1,10 @@
 package lihua.commands;
 
+import java.time.LocalDate;
+
 import lihua.commands.feedback.CommandResult;
 import lihua.commons.enums.ListTagCode;
 
-import java.time.LocalDate;
 
 /**
  * Command class representing a command to list tasks.
@@ -38,6 +39,11 @@ public class ListCommand extends Command {
         date = null;
     }
 
+    /**
+     * Initializes a ListCommand with a ListTagCode Enum Object.
+     *
+     * @param code A listTagCode Enum object specifying the type of tag the command is receiving.
+     */
     public ListCommand(ListTagCode code) {
         date = null;
         tagCode = code;
