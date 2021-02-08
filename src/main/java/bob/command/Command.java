@@ -1,27 +1,29 @@
 package bob.command;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import bob.BobException;
 import bob.processor.Parser;
 import bob.processor.Storage;
-import bob.task.TaskList;
 import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
+import bob.task.TaskList;
 import bob.task.Todo;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * Represents the different types of possible commands.
  */
 public enum Command {
     BYE {
+        @Override
         public String executeCommand(String userInput, TaskList taskList, Storage storage) {
             return "Bye! See you soon!";
         }
     },
     LIST {
+        @Override
         public String executeCommand(String userInput, TaskList taskList, Storage storage) {
             String message = "This is your list of tasks:\n";
             message += taskList.toString();
@@ -150,7 +152,15 @@ public enum Command {
         }
     };
 
-    Parser parser = new Parser();
+    private static Parser parser;
 
+    /**
+     * Executes the required actions for each command.
+     *
+     * @param userInput User's input.
+     * @param taskList The list of tasks user has.
+     * @param storage The storage of the list of tasks in the hard disk.
+     * @return
+     */
     public abstract String executeCommand(String userInput, TaskList taskList, Storage storage);
 }

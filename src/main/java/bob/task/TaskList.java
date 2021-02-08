@@ -1,7 +1,8 @@
 package bob.task;
 
-import bob.BobException;
 import java.util.ArrayList;
+
+import bob.BobException;
 
 /**
  * Represents a list of task

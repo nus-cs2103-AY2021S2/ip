@@ -1,8 +1,5 @@
 package bob.processor;
 
-import bob.BobException;
-import bob.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,6 +8,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import bob.BobException;
+import bob.task.Task;
+import bob.task.TaskList;
 
 /**
  * Stores the list of tasks, and is responsible for
@@ -34,6 +35,12 @@ public class Storage {
         return readFile(tasksFile);
     }
 
+    /**
+     * Returns a File in the specified directory.
+     *
+     * @return The File that stores the list of tasks in the hard disk.
+     * @throws BobException if the file is unable to be created
+     */
     public File loadFile() throws BobException {
         String currDirectory = System.getProperty("user.dir");
         java.nio.file.Path path = java.nio.file.Paths.get(currDirectory, "data");
@@ -52,6 +59,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the data in the file into an ArrayList.
+     *
+     * @param tasksFile  The file to be read.
+     * @return An ArrayList with the tasks loaded inside.
+     * @throws BobException if no such file is found.
+     */
     public ArrayList<Task> readFile(File tasksFile) throws BobException {
         ArrayList<Task> taskList = new ArrayList<>();
         Parser parser = new Parser();

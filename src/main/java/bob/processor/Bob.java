@@ -9,7 +9,7 @@ import bob.task.TaskList;
  * @author Sylvia
  * @version 0.1
  */
-public class Bob  {
+public class Bob {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

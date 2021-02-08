@@ -1,17 +1,17 @@
 package bob.processor;
 
-import bob.BobException;
-import bob.task.Deadline;
-import bob.task.Event;
-import bob.task.Task;
-import bob.task.Todo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.PatternSyntaxException;
+
+import bob.BobException;
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
 
 /**
  * Makes sense of the user command
@@ -93,6 +93,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a Task from a file line string.
+     *
+     * @param fileLine The file line to parse.
+     * @return The parsed Task.
+     */
     public Task parseLine(String fileLine) {
         String[] nextTaskDetails = fileLine.split(" \\| ", 0);
         String taskType = nextTaskDetails[0];
@@ -103,6 +109,7 @@ public class Parser {
         if (status.equals("1")) {
             done = true;
         }
+
         if (taskType.equals("T")) {
             return new Todo(taskName, done);
         } else {
@@ -111,7 +118,6 @@ public class Parser {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dateFormatter);
             LocalDate date = dateTime.toLocalDate();
             LocalTime time = dateTime.toLocalTime();
-
             if (taskType.equals("E")) {
                 return new Event(taskName, done, date, time);
             } else {

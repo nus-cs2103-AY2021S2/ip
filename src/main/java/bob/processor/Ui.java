@@ -12,7 +12,7 @@ public class Ui {
     public String showLoadingError() {
         return "There was an error in loading the file as it could not be found.";
     }
-    
+
     /**
      * Provide relevant responses to user and accurate actions according to
      * user's command
