@@ -33,6 +33,7 @@ public class Parser {
 
     /**
      * Constructors a Parser object, responsible for parsing input from the user.
+     *
      * @param taskList the list of tasks.
      * @param storage the object in charge of writing to the local storage file.
      */
@@ -105,8 +106,7 @@ public class Parser {
 
         assert taskInputAndDate.length == 2;
 
-        taskInputAndDate[0] = taskInputAndDate[0].trim();
-        taskInputAndDate[1] = taskInputAndDate[1].trim();
+        trimInputsInArray(taskInputAndDate);
 
         try {
             LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
@@ -128,8 +128,7 @@ public class Parser {
 
         assert taskInputAndDate.length == 2;
 
-        taskInputAndDate[0] = taskInputAndDate[0].trim();
-        taskInputAndDate[1] = taskInputAndDate[1].trim();
+        trimInputsInArray(taskInputAndDate);
 
         try {
             LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
@@ -153,15 +152,6 @@ public class Parser {
         return new FindCommand(this.taskList, this.storage, commandAndInput[1]);
     }
 
-    private int calcListPos(String taskIndex, String command) throws InvalidIndexInputException {
-        Matcher matcher = REGEX_CHECK_NUMBER.matcher(taskIndex);
-        if (!matcher.find()) {
-            throw new InvalidIndexInputException("'" + command + "' is command word; please pass a numerical index or "
-                    + "start your task with another word!");
-        }
-        return Integer.parseInt(taskIndex) - 1;
-    }
-
     private Command prepareDone(String[] commandAndInput) throws InvalidIndexInputException, EmptyArgumentException {
         if (commandAndInput.length == 1) {
             throw new EmptyArgumentException("Please pass an index after the 'done' command!");
@@ -169,7 +159,7 @@ public class Parser {
 
         assert commandAndInput.length == 2;
 
-        int position = calcListPos(commandAndInput[1], commandAndInput[0]);
+        int position = calcListPos(commandAndInput);
 
         if (this.taskList.getList().size() == 0) {
             throw new InvalidIndexInputException("You have already done all tasks!");
@@ -188,7 +178,7 @@ public class Parser {
 
         assert commandAndInput.length == 2;
 
-        int position = calcListPos(commandAndInput[1], commandAndInput[0]);
+        int position = calcListPos(commandAndInput);
 
         if (this.taskList.getList().size() == 0) {
             throw new InvalidIndexInputException("There are no tasks to delete!");
@@ -210,5 +200,23 @@ public class Parser {
 
     private Command prepareHelp() {
         return new HelpCommand(this.taskList, this.storage);
+    }
+
+    private void trimInputsInArray(String[] taskInputAndDate) {
+        taskInputAndDate[0] = taskInputAndDate[0].trim();
+        taskInputAndDate[1] = taskInputAndDate[1].trim();
+    }
+
+    private int calcListPos(String[] commandAndInput) throws InvalidIndexInputException {
+        String taskIndex = commandAndInput[1];
+        String command = commandAndInput[0];
+
+        Matcher matcher = REGEX_CHECK_NUMBER.matcher(taskIndex);
+        if (!matcher.find()) {
+            throw new InvalidIndexInputException("'" + command + "' is command word; please pass a numerical index or "
+                    + "start your task with another word!");
+        }
+
+        return Integer.parseInt(taskIndex) - 1;
     }
 }

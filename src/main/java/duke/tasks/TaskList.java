@@ -26,30 +26,6 @@ public class TaskList {
         taskList.get(pos).markAsDone();
     }
 
-    /**
-     * Prints the list of tasks.
-     * If the list is empty, a statement indicating so will be printed.
-     */
-    public String getListInString () {
-        if (this.taskList.size() == 0) {
-            return getEmptyListInString();
-        }
-        return getNonEmptyListInString();
-    }
-
-    private String getEmptyListInString() {
-        assert this.taskList.size() == 0;
-
-        String completedAllTasksMsg = "You have completed all tasks!";
-        return completedAllTasksMsg;
-    }
-
-    private String getNonEmptyListInString() {
-        String allTasks = TaskStringConverter.stringTasksForProgram(this.taskList);
-
-        return allTasks;
-    }
-
     public List<Task> getList() {
         return this.taskList;
     }
@@ -72,5 +48,31 @@ public class TaskList {
         assert pos >= 0 && pos < this.taskList.size();
 
         this.taskList.remove(pos);
+    }
+
+    /**
+     * Returns message indicating the contents of the TaskList.
+     *
+     * @return String message of concatenated List of Tasks, or message indicating an empty list.
+     */
+    public String getListInString () {
+        if (this.taskList.size() == 0) {
+            return getEmptyListInString();
+        }
+        return getNonEmptyListInString();
+    }
+
+    private String getEmptyListInString() {
+        assert this.taskList.size() == 0;
+
+        String completedAllTasksMsg = "You have completed all tasks!";
+        return completedAllTasksMsg;
+    }
+
+    private String getNonEmptyListInString() {
+        assert this.taskList.size() != 0;
+
+        String allTasks = TaskStringConverter.stringTasksForProgram(this.taskList);
+        return allTasks;
     }
 }
