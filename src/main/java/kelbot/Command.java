@@ -14,5 +14,6 @@ enum Command {
     LIST,
     SNOOZE,
     TAG,
-    TODO
+    TODO,
+    TRIVIA
 }

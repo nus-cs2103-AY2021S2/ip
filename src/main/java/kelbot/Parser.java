@@ -46,6 +46,11 @@ public class Parser {
             for (int i = 1; i < commands.length; i++) {
                 taskName += " " + commands[i];
             }
+        } else if (commands[0].equals("trivia")) {
+            command = Command.TRIVIA;
+            for (int i = 1; i < commands.length; i++) {
+                taskName += " " + commands[i];
+            }
         } else if (commands[0].equals("deadline")) {
             command = Command.DEADLINE;
             String deadlineDate = "";

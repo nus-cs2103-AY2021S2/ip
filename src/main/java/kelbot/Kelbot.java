@@ -156,6 +156,10 @@ public class Kelbot {
                 TodoTask newTodoTask = new TodoTask(taskName);
                 taskList.add(newTodoTask);
                 response = ui.printAdd(newTodoTask, taskList.getSize());
+            } else if (command == Command.TRIVIA) {
+                TriviaTask newTriviaTask = new TriviaTask(taskName);
+                taskList.add(newTriviaTask);
+                response = ui.printAdd(newTriviaTask, taskList.getSize());
             } else if (date == null) {
                 throw new KelbotException("Date cannot be empty!");
             } else if (command == Command.DEADLINE) {
