@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.Optional;
 
 import java.util.stream.Collectors;
 
@@ -8,13 +9,15 @@ import java.util.stream.Collectors;
  * Class that encapsulate, control, and evaluate a list of task.
  */
 public class TaskList {
-    private final List<Task> tasks;
+    private List<Task> tasks;
+    private Optional<List<Task>> prev;
 
     /**
      * Constructor of TaskList object
      */
     TaskList() {
         this.tasks = new ArrayList<Task>();
+        this.prev = Optional.empty();
     }
 
     /**
@@ -23,6 +26,7 @@ public class TaskList {
      */
     TaskList(List<Task> tasks) {
         this.tasks = tasks.stream().collect(Collectors.toList()); //deep-copy
+        this.prev = Optional.empty();
     }
 
     /**
@@ -45,6 +49,7 @@ public class TaskList {
      * @throws DukeException Index out of bound
      */
     public String finishATask(String input) throws DukeException {
+        this.prev = Optional.of(this.tasks.stream().collect(Collectors.toList()));
         try {
             int index = Integer.parseInt(input) - 1;
             this.tasks.set(index, this.tasks.get(index).finishTask());
@@ -63,6 +68,7 @@ public class TaskList {
      * @throws DukeException Index out of bound
      */
     public String deleteATask(String input) throws DukeException {
+        this.prev = Optional.of(this.tasks.stream().collect(Collectors.toList()));
         try {
             int index = Integer.parseInt(input) - 1;
             Task deleted = this.tasks.get(index);
@@ -81,7 +87,11 @@ public class TaskList {
      * Add task to the current TaskList and ask Ui to print the completion
      * @param task Task that is going to be added
      */
-    public String addTask(Task task) {
+    public String addTask(Task task) throws DukeException {
+        this.prev = Optional.of(this.tasks.stream().collect(Collectors.toList()));
+        if (this.tasks.stream().filter(item -> item.equals(task)).collect(Collectors.toList()).size() != 0) {
+            throw new DukeException("Same task has been added before !!!"); //duplicated items are not allowed
+        }
         this.tasks.add(task);
         return Ui.addTaskMessage(task.toString(), this.tasks.size());
     }
@@ -91,7 +101,7 @@ public class TaskList {
      * @param keyword Keyword to find in list of Tasks
      */
     public String findTasks(String keyword) {
-        List<Task> temp = new ArrayList<>();
+        List<Task> temp;
         Predicate<Task> findKeywordFromTask = task -> task.toString().contains(keyword);
         temp = this.tasks.stream().filter(findKeywordFromTask).collect(Collectors.toList());
         if (temp.size() == 0) {
@@ -105,6 +115,15 @@ public class TaskList {
 
     }
 
+    public String undo() throws DukeException{
+        if (this.prev.isEmpty()) {
+            throw new DukeException("Sorry, the history of TaskList is gone !!!");
+        }
+        this.tasks = this.prev.get();
+        this.prev = Optional.empty();
+        return "Succesfully undo to previous state!";
+    }
+
     /**
      * Get List of Task
      * @return List of Task
@@ -112,7 +131,5 @@ public class TaskList {
     public List<Task> getTasks() {
         return this.tasks;
     }
-
-
 }
 

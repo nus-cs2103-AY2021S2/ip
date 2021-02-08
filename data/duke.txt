@@ -1,4 +1,4 @@
-E|1|menikah|2359
-D|1|minum|2021-12-10
 T|1|makan
-T|1|minum
+E|0|minum|2020
+D|1|kuli|2020-10-10
+T|0|minuman

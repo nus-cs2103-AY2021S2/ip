@@ -6,8 +6,10 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
+    private String lastCommand = "";
 
     public String getResponse(String command) {
+        lastCommand = command;
         String output = "";
         if (command.equals("bye")) {
             return Ui.doBye();
@@ -60,27 +62,32 @@ public class Duke {
     public static Task processTask(String command, String description, String deadline)
             throws DukeException, DukeExceptionDeadline {
         switch (command){
-            case "todo":
-                return new Todo(description);
-            case "deadline":
-                return new Deadline(description, deadline);
-            case "event":
-                return new Event(description, deadline);
+        case "todo":
+            return new Todo(description);
+        case "deadline":
+            return new Deadline(description, deadline);
+        case "event":
+            return new Event(description, deadline);
         }
         throw new DukeException("Invalid Command");
     }
 
     public String processCommand(String command, String description) throws DukeException {
         switch (command){
-            case "list":
-                assert (description.equals(""));
-                return taskList.iterateList();
-            case "done":
-                return taskList.finishATask(description);
-            case "delete":
-                return taskList.deleteATask(description);
-            case "find":
-                return taskList.findTasks(description);
+        case "list":
+            assert (description.equals(""));
+            return taskList.iterateList();
+        case "done":
+            return taskList.finishATask(description);
+        case "delete":
+            return taskList.deleteATask(description);
+        case "find":
+            return taskList.findTasks(description);
+        case "undo":
+            if (this.lastCommand.equals("")) {
+                throw new DukeException("No command before. Cannot undo!");
+            }
+            return taskList.undo();
         }
         return "";
     }
