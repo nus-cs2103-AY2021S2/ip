@@ -36,11 +36,11 @@ public class TaskList {
      * @param date of the given task
      */
 
-    public void addDeadline(String description, String date) {
-
-        System.out.println("Got it. I've added this task:");
+    public String addDeadline(String description, String date) {
 
         boolean ifExist = false; // checking if there is an instance of a default tasks
+
+        String holder = "";
 
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).description.equals(description)) { // meaning this is the task we want to change
@@ -49,12 +49,12 @@ public class TaskList {
                     dl.markAsDone();
                 }
 
-                printLineBreaker();
-                System.out.println("Got it. I've added this task:");
+                //printLineBreaker();
+                holder += "Got it. I've added this task:\n";
                 list.set(i, dl);// insert into the list
-                System.out.println(" " + dl.toString());
-                System.out.println("Now you have " + list.size() + " tasks in the list");
-                printLineBreaker();
+                holder += " " + dl.toString() + "\n";
+                holder += "Now you have " + list.size() + " tasks in the list\n";
+                //printLineBreaker();
 
                 ifExist = true;
             }
@@ -63,21 +63,26 @@ public class TaskList {
         if (!ifExist) {
             Deadline dl = new Deadline(description, date);
             printLineBreaker();
-            System.out.println("Got it. I've added this task:");
+            holder += "Got it. I've added this task:\n";
             list.add(dl);
-            System.out.println(" " + dl.toString());
-            System.out.println("Now you have " + list.size() + " tasks in the list");
+            holder += " " + dl.toString() + "\n";
+            holder += "Now you have " + list.size() + " tasks in the list\n";
         }
+
+        return holder;
     }
 
     /**
      * This method adds a new tod0 class
      *
      * @param description of the given task
+     * @return The dialog for Justin
      */
 
-    public void addToDo(String description) {
+    public String addToDo(String description) {
         boolean ifExist = false; // checking if there is an instance of a default tasks
+
+        String holder = "";
 
         for (int i = 0; i < list.size(); i++) { // there is an instance of the item in list
             if (list.get(i).description.equals(description)) {
@@ -88,11 +93,11 @@ public class TaskList {
                 }
                 list.set(i, td); // insert into list
                 // formatting
-                printLineBreaker();
-                System.out.println("Got it. I've added this task:");
-                System.out.println(" " + td.toString());
-                System.out.println("Now you have " + list.size() + " tasks in the list");
-                printLineBreaker();
+                //printLineBreaker();
+                holder += "Got it. I've added this task:\n";
+                holder += " " + td.toString() + "\n";
+                holder += "Now you have " + list.size() + " tasks in the list\n";
+                //printLineBreaker();
                 ifExist = true;
             }
         }
@@ -102,12 +107,14 @@ public class TaskList {
             Todo td = new Todo(description);
             list.add(td);
             // formatting
-            printLineBreaker();
-            System.out.println("Got it. I've added this task:");
-            System.out.println(" " + td.toString());
-            System.out.println("Now you have " + list.size() + " tasks in the list");
-            printLineBreaker();
+            //printLineBreaker();
+            holder += "Got it. I've added this task:\n";
+            holder += " " + td.toString() + "\n";
+            holder += "Now you have " + list.size() + " tasks in the list\n";
+            //printLineBreaker();
         }
+
+        return holder;
 
     }
 
@@ -116,12 +123,15 @@ public class TaskList {
      *
      * @param description of the given task
      * @param date of the given task
+     * @return The string output for Justin
      */
 
 
-    public void addEvent(String description, String date) {
+    public String addEvent(String description, String date) {
 
         boolean ifExist = false;
+
+        String holder = "";
 
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).description.equals(description)) {
@@ -134,11 +144,11 @@ public class TaskList {
                 list.set(i, e); // insert into list
 
                 //formatting
-                printLineBreaker();
-                System.out.println("Got it. I've added this task:");
-                System.out.println(" " + e.toString());
-                System.out.println("Now you have " + list.size() + " tasks in the list");
-                printLineBreaker();
+                //printLineBreaker();
+                holder += "Got it. I've added this task:\n";
+                holder += " " + e.toString() + "\n";
+                holder += "Now you have " + list.size() + " tasks in the list\n";
+                //printLineBreaker();
                 ifExist = true;
             }
         }
@@ -147,12 +157,14 @@ public class TaskList {
             Event e = new Event(description, date);
             list.add(e);
             //formatting
-            printLineBreaker();
-            System.out.println("Got it. I've added this task:");
-            System.out.println(" " + e.toString());
-            System.out.println("Now you have " + list.size() + " tasks in the list");
-            printLineBreaker();
+            //printLineBreaker();
+            holder += "Got it. I've added this task:\n";
+            holder += " " + e.toString() + "\n";
+            holder += "Now you have " + list.size() + " tasks in the list\n";
+            //printLineBreaker();
         }
+
+        return holder;
     }
 
 
@@ -163,42 +175,41 @@ public class TaskList {
      * @throws JustinException cannot delete an invalid entry task
      */
 
-    public void delete(String num) throws JustinException {
+    public String delete(String num) throws JustinException {
         try {
+
+            String holder = "";
 
             int listNum = Integer.parseInt(num); // changes to int
             Task newTask = list.remove(listNum-1); // delete the entry of choice
             //format
-            printLineBreaker();
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(" " + newTask.toString());
-            System.out.println("Now you have " + list.size() + " tasks in the list");
-            printLineBreaker();
+            //printLineBreaker();
+            holder += "Noted. I've removed this task:\n";
+            holder += " " + newTask.toString() + "\n";
+            holder += "Now you have " + list.size() + " tasks in the list\n";
+            //printLineBreaker();
+            return holder;
 
         } catch(IndexOutOfBoundsException e) {
             throw new JustinException("OOPS!!! Cannot delete what you don't have!");
         }
     }
 
-    public ArrayList<String> find(String key) {
+    public String find(String key) {
 
-        boolean isFound = false; // if any tasks matches description we can return a justin.TaskList
-        ArrayList<String> holder = new ArrayList<>();
+
+        String holder = "";
 
         for (int i = 0; i < list.size(); i++) {
 
             String description = list.get(i).getDescription();
 
             if (description.contains(key)) {
-                holder.add(list.get(i).toString());
+                holder += (i+1) + ". " +list.get(i).toString() + "\n";
             }
-
-            isFound = true; // there is at least ONE instance of description with key word
         }
 
-
         return holder;
-
     }
 
 

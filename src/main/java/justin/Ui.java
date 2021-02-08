@@ -69,17 +69,27 @@ public class Ui {
         printLine();
     }
 
-    public void showListMessage() {
-        printLine();
-        System.out.println("Here are the tasks in your list:");
-        printSpace();
+
+    // Level 10 GUI edited
+    public String showListMessage() {
+        //printLine();
+        return "Here are the tasks in your list:\n";
+        //printSpace();
     }
 
-    public void showDoneMessage(TaskList tasks, int listNum) {
-        printLine();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.getList().get(listNum-1).toString());
-        printLine();
+    public String showDoneMessage(TaskList tasks, int listNum) {
+        //printLine();
+
+        String holder = "";
+
+        holder += "Nice! I've marked this task as done:\n";
+        holder += tasks.getList().get(listNum-1).toString() + "\n";
+
+        return holder;
+
+        //System.out.println("Nice! I've marked this task as done:");
+        //System.out.println(tasks.getList().get(listNum-1).toString());
+        //printLine();
 
     }
 
@@ -93,11 +103,14 @@ public class Ui {
         printLine();
     }
 
-    public void printList(TaskList tasks) {
+    public String printList(TaskList tasks) {
+        String holder = "";
         for (int i = 0; i < tasks.getList().size(); i++) {
-            System.out.println(i+1 + ". " + tasks.getList().get(i).toString());
+            holder += (i+1) + ". " + tasks.getList().get(i).toString() + "\n";
         }
-        printLine();
+        //printLine();
+
+        return holder;
     }
 
     public void printExceptionMessage(String m) {
@@ -107,27 +120,48 @@ public class Ui {
         printLine();
     }
 
-    public void printFoundTask(ArrayList<String> list) {
+    public String printFoundTask(String text) {
 
-        printLine();
+        String holder = "";
 
-        if (list.isEmpty()) {
-            System.out.println("OOPS!! There are no such tasks in the list! Try searching using another" +
-                    " key word instead!");
+        if (text.isEmpty()) {
+            holder += "OOPS!! There are no such tasks in the list! Try searching using another" +
+                    " key word instead!";
         } else {
-            System.out.println("Here are the matching tasks in your list");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(i+1 + "." + list.get(i));
-
-            }
+            holder += "Here are the matching tasks in your list\n";
+            holder = holder + text;
         }
 
-        printLine();
+        return holder;
 
     }
 
     public void printSpace() {
         System.out.println();
     }
+
+
+    // Level 10 GUI
+
+    public String welcomeMessage() {
+        return "Welcome! I am Justin, your personal Timetable planner";
+    }
+
+    public String terminateMessage() {
+        return "See you again soon!";
+    }
+
+    private String responseMessage = "";
+
+    public String getResponseMessage() {
+        return responseMessage;
+    }
+
+    public String editResponseMessage(String newText) {
+        String holder = getResponseMessage();
+        holder += newText;
+        return holder;
+    }
+
 
 }
