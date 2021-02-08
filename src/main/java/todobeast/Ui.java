@@ -95,18 +95,18 @@ public class Ui {
     }
 
     public String listTasks() {
-        return "Here are your tasks:\n";
+        return "Here are your tasks:\n\n";
     }
 
     public String findTasks() {
-        return "Here are the matching tasks in your list:\n";
+        return "Here are the matching tasks in your list:\n\n";
     }
 
     public String printTaskList(List<Task> taskList) {
         StringBuilder output = new StringBuilder();
         int count = 1;
         for (Task task : taskList) {
-            output.append("\t").append(count++).append(". ").append(task).append("\n");
+            output.append(count++).append(". ").append(task).append("\n");
         }
         return output.toString();
     }
