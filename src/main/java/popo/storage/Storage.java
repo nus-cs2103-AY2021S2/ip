@@ -12,6 +12,7 @@ import java.util.List;
 
 import popo.tasks.DeadlineTask;
 import popo.tasks.EventTask;
+import popo.tasks.PeriodTask;
 import popo.tasks.Task;
 import popo.tasks.TaskList;
 import popo.tasks.ToDoTask;
@@ -124,7 +125,7 @@ public class Storage {
      * @throws StorageException If an error occurs while parsing the data from the file.
      */
     private Task convertStringToTask(String taskString) throws StorageException {
-        String[] arr = taskString.split("\\|", 4);
+        String[] arr = taskString.split("\\|", 5);
         if (arr.length < 3) {
             throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
         }
@@ -143,6 +144,11 @@ public class Storage {
             case EventTask.IDENTIFIER:
                 String eventTaskDescription = arr[3].strip();
                 return createEventTaskFromString(taskName, isTaskCompleted, eventTaskDescription);
+            case PeriodTask.IDENTIFIER:
+                String periodTaskStartDateString = arr[3].strip();
+                String periodTaskEndDateString = arr[4].strip();
+                return createPeriodTaskFromString(taskName, isTaskCompleted,
+                        periodTaskStartDateString, periodTaskEndDateString);
             default:
                 throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
             }
@@ -192,6 +198,17 @@ public class Storage {
         return new EventTask(name, isTaskCompleted, eventTime);
     }
 
+    private Task createPeriodTaskFromString(String name,boolean isTaskCompleted, String startDateString,
+                                            String endDateString) throws StorageException {
+        try {
+            LocalDate startDate = LocalDate.parse(startDateString, OutputDateTimeFormat.OUTPUT_DATE_FORMAT);
+            LocalDate endDate = LocalDate.parse(endDateString, OutputDateTimeFormat.OUTPUT_DATE_FORMAT);
+            return new PeriodTask(name, isTaskCompleted, startDate, endDate);
+        } catch (DateTimeParseException ex) {
+            throw new StorageException(MESSAGE_ERROR_READING_FROM_FILE);
+        }
+    }
+
     /**
      * Converts a list of tasks into a list of strings formatted to be stored in a file.
      *
@@ -226,19 +243,27 @@ public class Storage {
         String taskType = task.getTaskType();
         switch (taskType) {
         case ToDoTask.IDENTIFIER:
-            return encodedTaskString.toString();
+            break;
         case DeadlineTask.IDENTIFIER:
             DeadlineTask deadlineTask = (DeadlineTask) task;
             encodedTaskString.append(" | ");
             encodedTaskString.append(deadlineTask.getDeadline());
-            return encodedTaskString.toString();
+            break;
         case EventTask.IDENTIFIER:
             EventTask eventTask = (EventTask) task;
             encodedTaskString.append(" | ");
             encodedTaskString.append(eventTask.getEventTime());
-            return encodedTaskString.toString();
+            break;
+        case PeriodTask.IDENTIFIER:
+            PeriodTask periodTask = (PeriodTask) task;
+            encodedTaskString.append(" | ");
+            encodedTaskString.append(periodTask.getStartDate());
+            encodedTaskString.append(" | ");
+            encodedTaskString.append(periodTask.getEndDate());
+            break;
         default:
             throw new AssertionError(taskType);
         }
+        return encodedTaskString.toString();
     }
 }
