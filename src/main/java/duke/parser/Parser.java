@@ -16,14 +16,15 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.CommandNotFoundException;
+import duke.exception.DescriptionMissingException;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.task.Deadline;
 import duke.task.EnumTask;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskDescription;
 import duke.task.Todo;
-
 
 /**
  * A class represents a Parser.
@@ -36,35 +37,34 @@ public class Parser {
      * @throws DukeException If error occurs during the process.
      */
     public static Command parseCommand(String input) throws DukeException {
-        int endIndex = input.indexOf(" ");
-        String potentialCommand = (endIndex == -1) ? input : input.substring(0, endIndex);
+        String cleanerInput = input.trim();
+        int endIndex = cleanerInput.indexOf(" ");
+        String potentialCommand = (endIndex == -1) ? cleanerInput : cleanerInput.substring(0, endIndex);
         Command command;
 
-        if (potentialCommand.equalsIgnoreCase("TODO")) {
-            String description = (endIndex == -1) ? "" : input.substring(endIndex).strip();
-            command = new TodoCommand(description);
-        } else if (potentialCommand.equalsIgnoreCase("DEADLINE")) {
-            String[] descriptions = {""};
-            if (endIndex != -1) {
-                descriptions = input.substring(endIndex).strip().split("/by");
-            }
-            command = new DeadlineCommand(descriptions);
-        } else if (potentialCommand.equalsIgnoreCase("EVENT")) {
-            String[] descriptions = {""};
-            if (endIndex != -1) {
-                descriptions = input.substring(endIndex).strip().split("/at");
-            }
-            command = new EventCommand(descriptions);
-        } else if (potentialCommand.equalsIgnoreCase("LIST")) {
+        if (potentialCommand.length() == 0) {
+            throw new DescriptionMissingException("Please enter something!");
+        }
+
+        if (potentialCommand.equalsIgnoreCase("LIST")) {
             command = new ListCommand();
-        } else if (potentialCommand.equalsIgnoreCase("DONE")) {
-            command = new DoneCommand(input);
         } else if (potentialCommand.equalsIgnoreCase("BYE")) {
             command = new ExitCommand();
+        } else if (potentialCommand.equalsIgnoreCase("DONE")) {
+            command = new DoneCommand(cleanerInput);
         } else if (potentialCommand.equalsIgnoreCase("DELETE")) {
-            command = new DeleteCommand(input);
+            command = new DeleteCommand(cleanerInput);
+        } else if (potentialCommand.equalsIgnoreCase("TODO")) {
+            TaskDescription td = parseDescription(EnumTask.TODO, cleanerInput, endIndex);
+            command = new TodoCommand(td);
+        } else if (potentialCommand.equalsIgnoreCase("DEADLINE")) {
+            TaskDescription td = parseDescription(EnumTask.DEADLINE, cleanerInput, endIndex);
+            command = new DeadlineCommand(td);
+        } else if (potentialCommand.equalsIgnoreCase("EVENT")) {
+            TaskDescription td = parseDescription(EnumTask.EVENT, cleanerInput, endIndex);
+            command = new EventCommand(td);
         } else if (potentialCommand.equalsIgnoreCase("FIND")) {
-            command = new FindCommand(input);
+            command = new FindCommand(cleanerInput);
         } else {
             throw new CommandNotFoundException("What do you mean? I do not know this command.");
         }
@@ -84,6 +84,22 @@ public class Parser {
             String eventTime = descriptions[1].strip();
             LocalDateTime startingTime = parseDateTime(eventTime);
             return new Event(name, startingTime);
+        default:
+            throw new DukeException("I do not know this task");
+        }
+    }
+
+    public static TaskDescription parseDescription(EnumTask taskType, String input, int index) throws DukeException {
+        if (index == -1) {
+            return new TaskDescription();
+        }
+        switch (taskType) {
+        case TODO:
+            return new TaskDescription(input.substring(index).strip());
+        case DEADLINE:
+            return new TaskDescription(input.substring(index).strip().split("/by"));
+        case EVENT:
+            return new TaskDescription(input.substring(index).strip().split("/at"));
         default:
             throw new DukeException("I do not know this task");
         }
