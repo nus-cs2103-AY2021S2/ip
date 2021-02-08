@@ -7,14 +7,6 @@ import org.junit.jupiter.api.Test;
 public class ParserTest {
 
     @Test
-    public void parseCommand_emptyCommand_emptyTwoElementArray() {
-        // dummyDuke.run()
-        String[] actual = Parser.parseCommand("");
-        assertEquals("", actual[0]);
-        assertEquals("", actual[1]);
-    }
-
-    @Test
     public void parseCommand_oneWordCommand_emptySecondElement() {
         String[] actual = Parser.parseCommand("test");
         assertEquals("test", actual[0]);

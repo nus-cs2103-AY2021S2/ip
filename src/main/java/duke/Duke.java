@@ -38,6 +38,9 @@ public class Duke {
      * @return {@code Pair<Integer, String>} representing a statusCode, and the message to be printed.
      */
     public Pair<DukeStatusCode, String> getResponse(String input) {
+        if (input.equals("")) {
+            return new Pair<DukeStatusCode, String> (DukeStatusCode.NO_ACTION, "");
+        }
         String[] commandArr = Parser.parseCommand(input);
         String[] params;
         int index;
@@ -138,6 +141,7 @@ enum DukeCommand {
 
 enum DukeStatusCode {
     OK,
+    NO_ACTION,
     ERROR,
     EXIT,
 }
