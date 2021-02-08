@@ -7,7 +7,7 @@ import lihua.parser.Parser;
 import lihua.storage.Storage;
 import lihua.tasks.Tasks;
 
-// Design idea adapted from https://github.com/se-edu/addressbook-level2
+// Adapted from https://github.com/se-edu/addressbook-level2 with modifications specific to the customized bot.
 public class Lihua {
     private final Tasks tasks;
     private final Storage storage;

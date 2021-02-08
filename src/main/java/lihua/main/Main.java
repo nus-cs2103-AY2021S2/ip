@@ -12,6 +12,8 @@ import lihua.ui.MainWindow;
 /**
  * A GUI for Lihua using FXML.
  */
+//@@author Cheng20010201
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications.
 public class Main extends Application {
     private static final String GUI_RESOURCE_PATH = "/view/MainWindow.fxml";
     private Lihua lihua = new Lihua();
@@ -31,3 +33,4 @@ public class Main extends Application {
         }
     }
 }
+//@@author

@@ -13,6 +13,8 @@ import lihua.main.Lihua;
 /**
  * Controller for lihua.ui.MainWindow. Provides the layout for the other controls.
  */
+//@@author Cheng20010201
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications.
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -66,3 +68,4 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 }
+//@@author
