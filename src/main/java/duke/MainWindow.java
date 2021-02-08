@@ -56,8 +56,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         // String response = duke.getResponse(input);
-        Pair<Integer, String> response = duke.getResponse(input);
-        if (response.getKey() != 0) {
+        Pair<DukeStatusCode, String> response = duke.getResponse(input);
+        if (response.getKey() == DukeStatusCode.EXIT) {
             Platform.exit();
             System.exit(0);
         }

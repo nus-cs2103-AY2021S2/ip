@@ -37,7 +37,7 @@ public class Duke {
      * @param input Input from the user.
      * @return {@code Pair<Integer, String>} representing a statusCode, and the message to be printed.
      */
-    public Pair<Integer, String> getResponse(String input) {
+    public Pair<DukeStatusCode, String> getResponse(String input) {
         String[] commandArr = Parser.parseCommand(input);
         String[] params;
         int index;
@@ -45,47 +45,47 @@ public class Duke {
         try {
             switch (command) {
             case BYE:
-                return new Pair<Integer, String> (1, MESSAGE_COMMAND_BYE);
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.EXIT, MESSAGE_COMMAND_BYE);
             case UNKNOWN:
-                return new Pair<Integer, String> (0, MESSAGE_COMMAND_UNKNOWN);
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.OK, MESSAGE_COMMAND_UNKNOWN);
             case LIST:
-                return new Pair<Integer, String> (0, this.tasks.listTasks());
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.OK, this.tasks.listTasks());
             case DELETE:
                 params = Parser.parseParams(command, commandArr[1]);
                 index = Parser.parseInt(params[0]);
-                return new Pair<Integer, String> (0, this.tasks.deleteTask(index));
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.OK, this.tasks.deleteTask(index));
             case DONE:
                 params = Parser.parseParams(command, commandArr[1]);
                 index = Parser.parseInt(params[0]);
-                return new Pair<Integer, String> (0, this.tasks.doTask(index));
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.OK, this.tasks.doTask(index));
             case FIND:
                 params = Parser.parseParams(command, commandArr[1]);
-                return new Pair<Integer, String> (0, this.tasks.findTask(params[0]));
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.OK, this.tasks.findTask(params[0]));
             case TODO:
                 params = Parser.parseParams(command, commandArr[1]);
-                return new Pair<Integer, String> (0, this.tasks.addTask(
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.OK, this.tasks.addTask(
                     new Todo(params[0], TaskType.TODO)
                 ));
             case EVENT:
                 params = Parser.parseParams(command, commandArr[1]);
-                return new Pair<Integer, String> (0, this.tasks.addTask(
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.OK, this.tasks.addTask(
                     new Event(params[0], TaskType.EVENT, params[1])
                 ));
             case DEADLINE:
                 params = Parser.parseParams(command, commandArr[1]);
-                return new Pair<Integer, String> (0, this.tasks.addTask(
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.OK, this.tasks.addTask(
                     new Deadline(params[0], TaskType.DEADLINE, params[1])
                 ));
             default:
                 throw new DukeException(MESSAGE_COMMAND_ERROR);
             }
         } catch (DukeException e) {
-            return new Pair<Integer, String> (0, this.showError(e));
+            return new Pair<DukeStatusCode, String> (DukeStatusCode.ERROR, this.showError(e));
         } finally {
             try {
                 this.storage.save(this.tasks);
             } catch (DukeException e) {
-                return new Pair<Integer, String> (0, this.showError(e));
+                return new Pair<DukeStatusCode, String> (DukeStatusCode.ERROR, this.showError(e));
             }
         }
     }
@@ -134,4 +134,10 @@ enum DukeCommand {
         }
         return DukeCommand.values()[0];
     }
+}
+
+enum DukeStatusCode {
+    OK,
+    ERROR,
+    EXIT,
 }
