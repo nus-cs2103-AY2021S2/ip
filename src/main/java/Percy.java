@@ -26,28 +26,6 @@ public class Percy {
      *
      * @throws IOException
      */
-    /*
-    public void run() throws IOException {
-        tasks.updateTaskList(storage.load());
-        Ui.printStartUpMsg();
-        while (true) {
-            String command = Ui.readCommand();
-            Parser parser = new Parser(command);
-            try {
-                Command cmd = parser.getCommand();
-                String response = cmd.execute(tasks, storage);
-                System.out.println(response);
-                if (cmd.isExit()) {
-                    break;
-                }
-            } catch (IOException e) {
-                break;
-            } catch (PercyException e) {
-                String response = e.toString());
-            }
-        }
-    }
-     */
 
     private String run(String command) throws IOException, PercyException {
         Parser parser = new Parser(command);
