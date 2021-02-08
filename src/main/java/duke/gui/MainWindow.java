@@ -60,14 +60,16 @@ public class MainWindow extends AnchorPane {
 
         if (response.equals("")) {
             duke.getStorage().saveData(duke.getTaskList());
-            try {
-                Thread.sleep(500);
-                Platform.exit();
-            } catch (InterruptedException e) {
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(e.getMessage(), dukeImage)
-                );
-            }
+            Platform.runLater(() -> {
+                try {
+                    Thread.sleep(500);
+                    Platform.exit();
+                } catch (InterruptedException e) {
+                    dialogContainer.getChildren().addAll(
+                            DialogBox.getUserDialog(e.getMessage(), dukeImage)
+                    );
+                }
+            });
         }
     }
 }
