@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exceptions.DateFormatException;
+import duke.exceptions.LoadFailureException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -65,6 +66,8 @@ public class Storage {
             }
         } catch (DateFormatException e) {
             System.out.println("There is an error with the format of a date in your save file.");
+        } catch (LoadFailureException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -86,11 +89,12 @@ public class Storage {
                     Deadline d = (Deadline) t;
                     String writeData = "D | " + (d.isDone() ? 1 : 0) + " | " + d.getName() + " | " + d.getDate();
                     fw.write(writeData);
-                } else {
+                } else if (t instanceof Event) {
                     Event e = (Event) t;
                     String writeData = "E | " + (e.isDone() ? 1 : 0) + " | " + e.getName() + " | " + e.getDate();
                     fw.write(writeData);
                 }
+
                 fw.write(System.lineSeparator());
             }
 
