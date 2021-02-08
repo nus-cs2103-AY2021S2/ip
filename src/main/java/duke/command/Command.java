@@ -14,6 +14,7 @@ public abstract class Command {
      * @param tasks Task list given.
      * @param ui User interface class object.
      * @param storage Storage path that is going to be updated.
+     * @return The relevant message produced.
      * @throws DukeException If error occurs during the process.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

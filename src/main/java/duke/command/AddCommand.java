@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.task.TaskDescription;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -10,6 +10,18 @@ import duke.ui.Ui;
  * An abstract class that represents "adding task" command.
  */
 public abstract class AddCommand extends Command {
+    protected static final int NAME_INDEX = 0;
+    protected static final int DATE_TIME_INDEX = 1;
+    protected final TaskDescription descriptions;
+
+    /**
+     * Constructs an "AddCommand" type of command.
+     * @param descriptions The descriptions for a task.
+     */
+    public AddCommand(TaskDescription descriptions) {
+        this.descriptions = descriptions;
+    }
+
     /**
      * Adds the task into a given task list while updating the file.
      * @param tasks Task list.
@@ -23,7 +35,7 @@ public abstract class AddCommand extends Command {
     }
 
     /**
-     * Returns false if this command is not ExitCommand.
+     * Returns false because this is an AddCommand.
      * @return false.
      */
     @Override
