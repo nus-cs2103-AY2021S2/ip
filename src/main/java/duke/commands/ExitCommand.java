@@ -11,7 +11,7 @@ import duke.task.TaskList;
  * @author Benedict Khoo
  */
 public class ExitCommand extends Command {
-    private static final Pattern EXIT_KEYWORD = Pattern.compile("(?i)bye\\b");
+    private static final Pattern EXIT_KEYWORD = Pattern.compile("(?i)(?:^bye|^b)\\b");
 
     /**
      * Constructs an exit command.

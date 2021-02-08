@@ -15,9 +15,14 @@ import duke.task.TaskList;
  * @author Benedict Khoo
  */
 public class AddDeadlineCommand extends Command {
-    private static final Pattern ADD_DEADLINE_KEYWORD = Pattern.compile("(?i)deadline\\b");
-    private static final Pattern ADD_DEADLINE_DESC = Pattern.compile("(?i)deadline\\s+(\\w.*)");
-    private static final Pattern ADD_DEADLINE_DATE = Pattern.compile("(?i)deadline\\s+(\\w.*)\\s+/by\\s+(\\w.*)");
+    private static final Pattern ADD_DEADLINE_KEYWORD = Pattern.compile("(?i)(?:^deadline|^de)\\b");
+    private static final Pattern ADD_DEADLINE_DESC = Pattern.compile("(?i)(?:^deadline|^de)\\s+(\\w.*)");
+    private static final Pattern ADD_DEADLINE_DATE = Pattern.compile(
+            "(?i)(?:^deadline|^de)\\s+(\\w.*)\\s+/by\\s+(\\w.*)"
+    );
+    private static final String ACCEPTED_FORMAT_MSG = "Accepted formats:\n"
+            + "  deadline <DESCRIPTION> /by <DATE>\n"
+            + "  de <DESCRIPTION> /by <DATE>";
 
     private final String taskDesc;
     private final LocalDate date;
@@ -50,14 +55,14 @@ public class AddDeadlineCommand extends Command {
         Matcher descMatcher = ADD_DEADLINE_DESC.matcher(input);
         if (!descMatcher.find()) {
             throw new DukeException("The description of a deadline cannot be empty!\n"
-                    + "Expected format: deadline <DESCRIPTION> /by <DATE>");
+                    + ACCEPTED_FORMAT_MSG);
         }
 
         // check date exists
         Matcher dateMatcher = ADD_DEADLINE_DATE.matcher(input);
         if (!dateMatcher.find()) {
             throw new DukeException("A deadline must have a date!\n"
-                    + "Expected format: deadline <DESCRIPTION> /by <DATE>");
+                    + ACCEPTED_FORMAT_MSG);
         }
 
         String taskDesc = dateMatcher.group(1);

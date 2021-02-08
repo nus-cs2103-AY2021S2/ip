@@ -13,8 +13,11 @@ import duke.task.TaskList;
  * @author Benedict Khoo
  */
 public class FindCommand extends Command {
-    private static final Pattern FIND_KEYWORD = Pattern.compile("(?i)find\\b");
-    private static final Pattern FIND_TERM = Pattern.compile("(?i)find\\s+(\\w.*)");
+    private static final Pattern FIND_KEYWORD = Pattern.compile("(?i)(?:^find|^f)\\b");
+    private static final Pattern FIND_TERM = Pattern.compile("(?i)(?:^find|^f)\\s+(\\w.*)");
+    private static final String ACCEPTED_FORMAT_MSG = "Accepted formats:\n"
+            + "  find <SEARCH TERM>"
+            + "  f <SEARCH TERM>";
 
     private final String term;
 
@@ -45,7 +48,7 @@ public class FindCommand extends Command {
         if (!findMatcher.find()) {
             // Matched command but invalid argument
             throw new DukeException("The search term of a find command cannot be empty!\n"
-                    + "Expected format: find <SEARCH TERM>");
+                    + ACCEPTED_FORMAT_MSG);
         }
 
         String term = findMatcher.group(1);
