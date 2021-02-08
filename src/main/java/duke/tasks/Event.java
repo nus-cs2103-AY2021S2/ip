@@ -1,13 +1,14 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.DatetimeParser;
 import duke.parser.UserInputTokenSet;
 
-import java.time.LocalDateTime;
 
 /**
- * Deadline class.
+ * Event class.
  *
  * A time-based class that tracks a description and an event time.
  *
@@ -20,32 +21,24 @@ public class Event extends DateTask {
      *
      * @param description Description of Event.
      * @param dt LocalDateTime of Event.
-     */
-    public Event(String description, LocalDateTime dt) {
-        this(description, dt, false);
-    }
-    /**
-     * Constructor for an Event.
-     *
-     * @param description Description of Event.
-     * @param dt LocalDateTime of Event.
      * @param isDone Whether task is completed.
      */
-    public Event(String description, LocalDateTime dt, boolean isDone) {
+    private Event(String description, LocalDateTime dt, boolean isDone) {
         super(description, isDone);
         this.datetime = dt;
     }
 
     /**
-     * Returns new Event by parsing user string input.
+     * Returns new Event by parsing user input tokens.
      *
      * Input validation for date present. Dates should be provided as an argument
      * to the '/at' flag, following the description, e.g.
-     * {@code event <description> /at <datetime>}.
+     * {@code event <description> /at <datetime>}. '/done' flag can be optionally provided
+     * to mark as completed.
      * Datetime formats are specified in {@link DatetimeParser }.
      *
-     * @param s User input.
-     * @return Event.
+     * @param tokenSet User input tokens
+     * @return Event
      * @throws DukeExceptionIllegalArgument When description is empty, datetime is empty,
      *                                      or datetime is invalid.
      */
@@ -53,13 +46,13 @@ public class Event extends DateTask {
         if (tokenSet.get("/text").isEmpty()) {
             throw new DukeExceptionIllegalArgument("The description of an event cannot be empty.");
         }
-        if (tokenSet.get("at").isEmpty()) {
+        if (!tokenSet.contains("at")) {
             throw new DukeExceptionIllegalArgument(
                     "An event must have both description and time,\ndelimited by '/at'.");
         }
 
-        LocalDateTime dt = DatetimeParser.parseDate(tokens[1].strip());
-        return new Event(tokens[0], dt);
+        LocalDateTime dt = DatetimeParser.parseDate(tokenSet.get("at"));
+        return new Event(tokenSet.get("/text"), dt, tokenSet.contains("done"));
     }
 
     /**
