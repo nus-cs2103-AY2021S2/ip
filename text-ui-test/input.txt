@@ -10,7 +10,7 @@ list
 
 dummyCommand
 todo
-deadline	
+deadline
 deadline a /by
 event
 event /at
