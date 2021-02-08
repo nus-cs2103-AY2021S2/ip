@@ -8,6 +8,7 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.UnknownCommand;
+import duke.command.UpdateCommand;
 
 /**
  * A Parser class to parse inputs given by user into Commands.
@@ -37,6 +38,8 @@ public class Parser {
             return new ByeCommand();
         case "find":
             return new FindCommand(fullCommand);
+        case "update":
+            return new UpdateCommand(fullCommand);
         default:
             return new UnknownCommand();
         }

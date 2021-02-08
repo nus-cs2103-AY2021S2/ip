@@ -35,6 +35,16 @@ public class TaskList {
     }
 
     /**
+     * Checks if given index is out of range of the TaskList.
+     *
+     * @param index Index to be checked.
+     * @return True if out of range, False otherwise.
+     */
+    private boolean checkIfOutOfRange(int index) {
+        return index < 0 || index >= this.tasks.size();
+    }
+
+    /**
      * Lists all tasks.
      *
      * @return Output for GUI.
@@ -68,13 +78,13 @@ public class TaskList {
         if (checkIfNotNumeric(inputArr[1])) {
             throw new DukeException("       OOPS!!! The task number must be numeric.");
         }
-        int i = Integer.parseInt(inputArr[1]) - 1;
-        if (i > (this.tasks.size() - 1) || i < 0) {
+        int index = Integer.parseInt(inputArr[1]) - 1;
+        if (checkIfOutOfRange(index)) {
             throw new DukeException("       OOPS!!! The task number is out of range. "
                     + "Please use \"list\" to see the list of tasks.");
         } else {
-            this.tasks.get(i).markAsDone();
-            Task currTask = tasks.get(i);
+            this.tasks.get(index).markAsDone();
+            Task currTask = tasks.get(index);
             return "     Nice! I've marked this task as done:\n"
                     + "       " + currTask.toString() + "\n";
         }
@@ -101,15 +111,14 @@ public class TaskList {
             throw new DukeException("       OOPS!!! The task number must be numeric.");
 
         }
-        int i = Integer.parseInt(inputArr[1]) - 1;
-        if (i > (this.tasks.size() - 1) || i < 0) {
+        int index = Integer.parseInt(inputArr[1]) - 1;
+        if (checkIfOutOfRange(index)) {
             throw new DukeException("       OOPS!!! The task number is out of range. "
                     + "Please use \"list\" to see the list of tasks.");
-        } else {
-            return "     Noted. I've removed this task:\n"
-                    + "       " + this.tasks.remove(i).toString() + "\n"
-                    + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
         }
+        return "     Noted. I've removed this task:\n"
+                + "       " + this.tasks.remove(index).toString() + "\n"
+                + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -165,7 +174,6 @@ public class TaskList {
         if (!type.equals("todo")) {
             if (type.equals("deadline")) {
                 details = fullCommand.substring(9).split(" /by ");
-
             } else {
                 details = fullCommand.substring(6).split(" /at ");
             }
@@ -191,10 +199,70 @@ public class TaskList {
             break;
         default:
         }
-        assert tasks.size() == currSize + 1: "Task has not been added properly.";
+        assert tasks.size() == currSize + 1 : "Task has not been added properly.";
         return "     Got it. I've added this task:\n"
                 + "       " + this.tasks.get(this.tasks.size() - 1).toString() + "\n"
                 + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
+    }
+
+    /**
+     * Updates a task in the TaskList.
+     *
+     * @param fullCommand Command given by user.
+     * @return Output for GUI.
+     * @throws DukeException If user input format is wrong.
+     */
+    public String updateTask(String fullCommand) throws DukeException {
+        String[] inputArr = fullCommand.split(" ", 3);
+
+        if (inputArr.length < 3) {
+            throw new DukeException("       OOPS!!! The description of the task update is not complete.");
+        }
+        if (checkIfNotNumeric(inputArr[1])) {
+            throw new DukeException("       OOPS!!! The task number must be numeric.");
+        }
+        int index = Integer.parseInt(inputArr[1]) - 1;
+        if (checkIfOutOfRange(index)) {
+            throw new DukeException("       OOPS!!! The task number is out of range. "
+                    + "Please use \"list\" to see the list of tasks.");
+        }
+
+        Task currTask = tasks.get(index);
+        char type = currTask.getType();
+        String[] updateInfo = inputArr[2].split(" ", 2);
+
+        if (type == 'D' || type == 'E') {
+            if (!updateInfo[0].equals("/description") && !updateInfo[0].equals("/date")) {
+                throw new DukeException("       OOPS!!! Only the description "
+                        + "or date of the task can be updated.");
+            }
+        }
+
+        switch (type) {
+        case 'T':
+            currTask.setDescription(inputArr[2]);
+            tasks.set(index, currTask);
+            break;
+        case 'D':
+            if (updateInfo[0].equals("/description")) {
+                currTask.setDescription(updateInfo[1]);
+            } else {
+                ((Deadline) currTask).setDate(LocalDate.parse(updateInfo[1]));
+            }
+            tasks.set(index, currTask);
+            break;
+        case 'E':
+            if (updateInfo[0].equals("/description")) {
+                currTask.setDescription(updateInfo[1]);
+            } else {
+                ((Event) currTask).setDate(LocalDate.parse(updateInfo[1]));
+            }
+            tasks.set(index, currTask);
+            break;
+        default:
+        }
+        return "     Got it. I've updated this task:\n"
+                + "       " + this.tasks.get(index).toString() + "\n";
     }
 
     public ArrayList<Task> getTaskList() {

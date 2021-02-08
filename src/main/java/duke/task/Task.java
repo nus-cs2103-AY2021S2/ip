@@ -50,6 +50,14 @@ public class Task {
         return this.description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public char getType() {
+        return this.type;
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + description;

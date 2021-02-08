@@ -31,6 +31,10 @@ public class Event extends Task {
         return super.getFileString() + " // " + this.date;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString()
