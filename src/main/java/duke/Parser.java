@@ -11,9 +11,9 @@ import java.util.Scanner;
  * @since   2021-02-06
  */
 public class Parser {
-    public String read;
+    private String read;
 
-    Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
 
     /**
      * This method reads a line on the command prompt and
@@ -43,5 +43,9 @@ public class Parser {
     public int getDeleteIndex(String input) {
         int i = Integer.parseInt(input.split(" ")[1]) - 1;
         return i;
+    }
+
+    public String getRead() {
+        return this.read;
     }
 }

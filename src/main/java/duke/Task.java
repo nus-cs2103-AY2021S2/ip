@@ -10,13 +10,25 @@ package duke;
  */
 public class Task {
     protected boolean isDone;
-    public String name;
+    private String name;
 
+    /**
+     * Creates a Task with specified description.
+     *
+     * @param name This is the Task description
+     */
     public Task(String name) {
         this.isDone = false;
         this.name = name;
     }
 
+    /**
+     * Creates a Task with specified description and
+     * completion status
+     *
+     * @param name This is the Task description
+     * @param isDone This is the Task completion status
+     */
     public Task(String name, Boolean isDone) {
         this.isDone = isDone;
         this.name = name;
@@ -37,6 +49,10 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     @Override

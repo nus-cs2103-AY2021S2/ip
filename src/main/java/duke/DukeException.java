@@ -10,9 +10,14 @@ public class DukeException extends Exception {
         super(message);
     }
 
+    /**
+     * Prints an error message
+     *
+     * @param message This is the error message
+     */
     public void printError(String message) {
-        System.out.println("\n---------------------------------------" );
+        System.out.println("\n---------------------------------------");
         System.out.println(message);
-        System.out.println("---------------------------------------" );
+        System.out.println("---------------------------------------");
     }
 }
