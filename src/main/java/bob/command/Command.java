@@ -9,6 +9,7 @@ import bob.task.Event;
 import bob.task.Task;
 import bob.task.Todo;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -57,8 +58,9 @@ public enum Command {
         @Override
         public String executeCommand(String userInput, TaskList taskList, Storage storage) {
             try {
-                int index = parser.parseNumber(userInput, 5);
+                int index = parser.parseNumber(userInput);
                 Task updatedTask = taskList.changeStatus(index - 1, true);
+                storage.rewrite(taskList);
                 return "Good job! This task has been marked as done :)\n" + updatedTask.toString();
             } catch (BobException e) {
                 return e.getMessage();
@@ -69,8 +71,9 @@ public enum Command {
         @Override
         public String executeCommand(String userInput, TaskList taskList, Storage storage) {
             try {
-                int index = parser.parseNumber(userInput, 7);
+                int index = parser.parseNumber(userInput);
                 Task removedTask = taskList.removeTask(index - 1);
+                storage.rewrite(taskList);
                 return "Alright, this task has been removed.\n" + removedTask
                         + "\nThere are " + taskList.getSize() + " tasks left.";
             } catch (BobException e) {
@@ -85,7 +88,7 @@ public enum Command {
                 String taskName = parser.parseName(userInput);
                 Todo newTodo = new Todo(taskName);
                 taskList.addToDo(newTodo);
-                storage.appendToDo(newTodo);
+                storage.appendTask(newTodo);
                 return "Alright, I have added this new todo.\n"
                         + newTodo + "\n" + "There are a total of "
                         + taskList.getSize() + " tasks now.";
@@ -98,11 +101,13 @@ public enum Command {
         @Override
         public String executeCommand(String userInput, TaskList taskList, Storage storage) {
             try {
-                int taskIndex = userInput.indexOf("/at");
+                int taskIndex = userInput.indexOf("/at:");
                 if (taskIndex != -1) {
-                    Event newEvent = parser.parseEvent(userInput, taskIndex);
+                    String name = parser.parseName(userInput);
+                    LocalDateTime dateTime = parser.parseDateTime(userInput, "event");
+                    Event newEvent = new Event(name, dateTime.toLocalDate(), dateTime.toLocalTime());
                     taskList.addEvent(newEvent);
-                    storage.appendEvent(newEvent);
+                    storage.appendTask(newEvent);
                     return "Alright, I have added this new event.\n"
                             + newEvent + "\n" + "There is a total of "
                             + taskList.getSize() + " tasks now.";
@@ -119,11 +124,13 @@ public enum Command {
         @Override
         public String executeCommand(String userInput, TaskList taskList, Storage storage) {
             try {
-                int deadlineIndex = userInput.indexOf("/by");
+                int deadlineIndex = userInput.indexOf("/by:");
                 if (deadlineIndex != -1) {
-                    Deadline newDeadline = parser.parseDeadline(userInput, deadlineIndex);
+                    String name = parser.parseName(userInput);
+                    LocalDateTime dateTime = parser.parseDateTime(userInput, "deadline");
+                    Deadline newDeadline = new Deadline(name, dateTime.toLocalDate(), dateTime.toLocalTime());
                     taskList.addDeadline(newDeadline);
-                    storage.appendDeadline(newDeadline);
+                    storage.appendTask(newDeadline);
                     return "Alright, I have added this new deadline.\n"
                             + newDeadline + "\n" + "There is a total of "
                             + taskList.getSize() + " tasks now.";

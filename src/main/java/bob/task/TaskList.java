@@ -1,7 +1,6 @@
 package bob.task;
 
 import bob.BobException;
-
 import java.util.ArrayList;
 
 /**
@@ -100,11 +99,11 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder task = new StringBuilder();
+        StringBuilder tasks = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
-            task.append(index).append(".").append(taskList.get(i)).append("\n");
+            tasks.append(index).append(".").append(taskList.get(i)).append("\n");
         }
-        return task.toString();
+        return tasks.toString();
     }
 }

@@ -1,12 +1,17 @@
 package bob.processor;
 
 import bob.BobException;
-import bob.command.Command;
 import bob.task.Deadline;
 import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Makes sense of the user command
@@ -14,45 +19,19 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     /**
-     * Indicate which command the user is giving
-     * @param userInput User's input
-     * @return The command user is giving
-     */
-    public Command parseCommand(String[] userInput) {
-        String command = userInput[0].toLowerCase();
-        if (command.equals("bye")) {
-            return Command.BYE;
-        } else if (command.equals("list")) {
-            return Command.LIST;
-        } else if (command.equals("done")) {
-            return Command.DONE;
-        } else if (command.equals("todo")) {
-            return Command.TODO;
-        } else if (command.equals("event")) {
-            return Command.EVENT;
-        } else if (command.equals("deadline")) {
-            return Command.DEADLINE;
-        } else if (command.equals("delete")) {
-            return Command.DELETE;
-        } else if (command.equals("find")) {
-            return Command.FIND;
-        } else {
-            return Command.INVALID;
-        }
-    }
-
-    /**
      * Returns a valid integer given a user's input.
      * @param userInput User's full input
-     * @param index The index at which the number is at
      * @return An integer that is the index of the tasks which the user is done with or wants to remove.
      * @throws BobException if no integer was indicated or integer was invalid.
      */
-    public int parseNumber(String userInput, int index) throws BobException {
+
+    public int parseNumber(String userInput) throws BobException {
         int number;
         try {
-            String indexString = userInput.substring(index).strip();
+            String indexString = userInput.split(" ")[1];
             number = Integer.parseInt(indexString);
+        } catch (PatternSyntaxException e) {
+            throw new BobException("Please try again with a spacing before the number");
         } catch (IndexOutOfBoundsException e) {
             throw new BobException("Remember to specify which task you are done with "
                     + "using a valid number", e);
@@ -71,7 +50,7 @@ public class Parser {
         try {
             int startIndex = userInput.indexOf(" ") + 1;
             int endIndex = userInput.indexOf("/");
-            String name = "";
+            String name;
             if (startIndex == 0) {
                 throw new BobException("No name detected. Please try again.");
             }
@@ -87,50 +66,56 @@ public class Parser {
     }
 
     /**
-     * Returns an event given the user's input
+     * Returns the date and time of the task given the user's input
      * @param userInput User's full input
-     * @param timeIndex The index at which /at: starts
-     * @return An event that corresponds to the user input
+     * @return A LocalDateTime object that corresponds to the user input
      * @throws BobException if user input do not include date or time, or
      * invalid format of date and time given
      */
-    public Event parseEvent(String userInput, int timeIndex) throws BobException {
+    public LocalDateTime parseDateTime(String userInput, String taskType) throws BobException {
         try {
-            assert timeIndex > 6;
-            String name = userInput.substring(6, timeIndex - 1);
-            String dateTime = userInput.substring(timeIndex + 5);
-            String dateString = dateTime.substring(0, 10);
-            String timeString = dateTime.substring(11);
-            LocalDate date = LocalDate.parse(dateString);
-            return new Event(name, date, timeString);
+            String dateTimeIndicator = "";
+            if (taskType.equals("event")) {
+                dateTimeIndicator = "/at: ";
+            } else if (taskType.equals("deadline")) {
+                dateTimeIndicator = "/by: ";
+            }
+            String[] taskDetails = userInput.split(dateTimeIndicator, 2);
+            String dateTimeString = taskDetails[1];
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            return LocalDateTime.parse(dateTimeString, dateFormatter);
         } catch (IndexOutOfBoundsException e) {
-            throw new BobException("The description of an event includes date and time.", e);
+            throw new BobException("The description of an event/deadline includes date and time.", e);
         } catch (DateTimeParseException e) {
-            throw new BobException("Please enter the date in the proper format: yyyy-mm-dd", e);
+            throw new BobException("Please enter the date and time in the proper format: yyyy-mm-dd hhmm", e);
         }
     }
 
-    /**
-     * Returns a deadline task given the user's input.
-     * @param userInput User's full input
-     * @param timeIndex The index at which /by: starts
-     * @return A deadline task that corresponds to the user input
-     * @throws BobException if user input do not include date or time, or
-     * invalid format of date and time given
-     */
-    public Deadline parseDeadline(String userInput, int timeIndex) throws BobException {
-        try {
-            assert timeIndex > 9;
-            String name = userInput.substring(9, timeIndex - 1);
-            String dateTime = userInput.substring(timeIndex + 5);
-            String dateString = dateTime.substring(0, 10);
-            String timeString = dateTime.substring(11);
-            LocalDate deadline = LocalDate.parse(dateString);
-            return new Deadline(name, deadline, timeString);
-        } catch (IndexOutOfBoundsException e) {
-            throw new BobException("The description of a deadline includes date and time.", e);
-        } catch (DateTimeParseException e) {
-            throw new BobException("Please enter the date in the proper format: yyyy-mm-dd", e);
+    public Task parseLine(String fileLine) {
+        String[] nextTaskDetails = fileLine.split(" \\| ", 0);
+        String taskType = nextTaskDetails[0];
+        String status = nextTaskDetails[1];
+        String taskName = nextTaskDetails[2];
+
+        boolean done = false;
+        if (status.equals("1")) {
+            done = true;
+        }
+        if (taskType.equals("T")) {
+            return new Todo(taskName, done);
+        } else {
+            String dateTimeString = nextTaskDetails[3];
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dateFormatter);
+            LocalDate date = dateTime.toLocalDate();
+            LocalTime time = dateTime.toLocalTime();
+
+            if (taskType.equals("E")) {
+                return new Event(taskName, done, date, time);
+            } else {
+                assert taskType.equals("D");
+                return new Deadline(taskName, done, date, time);
+            }
         }
     }
 }
