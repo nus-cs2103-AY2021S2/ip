@@ -25,10 +25,13 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        assert(userImage != null);
+        assert(dukeImage != null);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     public void setDuke(Duke d) {
+        assert(d != null);
         duke = d;
     }
 

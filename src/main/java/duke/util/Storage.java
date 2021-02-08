@@ -22,6 +22,7 @@ public class Storage {
      * @param filePath The name of the folder
      */
     private String makeDirectory(String filePath) {
+        assert(filePath!=null);
         File file = new File(filePath);
         Boolean bool = file.mkdirs();
         System.out.println(bool);
@@ -62,6 +63,8 @@ public class Storage {
      */
     private List<String> scanFile() throws FileNotFoundException {
         List<String> fileInString = new ArrayList<>();
+        assert(filePath!=null);
+        assert(fileName!=null);
         File file = new File(this.filePath + this.fileName);
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
