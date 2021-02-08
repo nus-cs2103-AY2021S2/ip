@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.task.DeadlineTask;
 import duke.task.Task;
 
 public class TaskList {
@@ -84,6 +85,31 @@ public class TaskList {
             sb.append(tasks.get(i).toString());
         }
         return sb.toString();
+    }
+
+    /**
+     * Checks if the task list contains any clashing deadline tasks.
+     * @return True if there are clashing deadline tasks.
+     */
+    public boolean isAnomalyPresent() {
+        ArrayList<Task> deadlineTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task instanceof DeadlineTask) {
+                deadlineTasks.add(task);
+            }
+        }
+        for (int i = 0; i < deadlineTasks.size(); i++) {
+            for (int j = 0; j < deadlineTasks.size(); j++) {
+                DeadlineTask firstTask = (DeadlineTask) deadlineTasks.get(i);
+                DeadlineTask secondTask = (DeadlineTask) deadlineTasks.get(j);
+                boolean isNotTheSameTask = i != j;
+                boolean isSameSchedule = firstTask.isClashingSchedule(secondTask);
+                if (isNotTheSameTask && isSameSchedule) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
