@@ -1,4 +1,4 @@
-// DEPRECATED CLASS, REMNANTS OF WHEN DUKE STILL USES TEXT UI 
+// DEPRECATED CLASS, REMNANTS OF WHEN DUKE STILL USES TEXT UI
 
 import java.util.Scanner;
 
@@ -39,15 +39,5 @@ public class Ui {
 
     public void printTask(Task task) {
         System.out.println(task);
-    }
-
-    /**
-     * Prints the error message of the input exception.
-     *
-     * @param e The caught error to be printed.
-     */
-    public void printErrorMessage(Exception e) {
-        System.out.println("Sorry boss something went wrong: ");
-        System.out.println(e.getMessage());
     }
 }
