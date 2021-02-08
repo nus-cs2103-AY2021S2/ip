@@ -11,6 +11,7 @@ public class Ui {
 
     /**
      * Reads the next user given command.
+     *
      * @return Command entered by the user.
      */
     public String readCommand() {
@@ -35,6 +36,7 @@ public class Ui {
 
     /**
      * Prints the error to output.
+     *
      * @param e error to be printed.
      */
     public String showError(Throwable e) {
@@ -43,6 +45,7 @@ public class Ui {
 
     /**
      * Prints the given message to output.
+     *
      * @param message String to be printed.
      */
     public String print(String message) {

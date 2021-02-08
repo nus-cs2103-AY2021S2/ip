@@ -22,13 +22,14 @@ public class Storage {
 
     /**
      * Appends a Duke readable String representation of a Task to the end of the file designated by filePath.
+     *
      * @param task the Task to be added.
      */
     public void addToFile(Task task) {
         File save = new File(this.filePath);
         try {
             FileWriter fw = new FileWriter(save, true);
-            fw.write(task.fileString() + System.lineSeparator());
+            fw.write(task.toFileString() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

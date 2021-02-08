@@ -18,6 +18,7 @@ public class Parser {
 
     /**
      * Primary parse method that takes in a String command and returns a Command object that represents it.
+     *
      * @param command User command to be parsed
      * @return Command object representing the given command
      * @throws DukeException if command given is not supported

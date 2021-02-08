@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Returns the Task located at the specified index.
+     *
      * @param index Index of Task to be retrieved.
      * @return Task at the specified index.
      */
@@ -26,6 +27,7 @@ public class TaskList {
 
     /**
      * Adds the given Task to the end of the list.
+     *
      * @param task Task to be added.
      * @return true if operation was successful, false otherwise.
      */
@@ -35,6 +37,7 @@ public class TaskList {
 
     /**
      * Removes the Task located at the given index.
+     *
      * @param index Index of Task to be removed.
      * @return the Task that was removed.
      */
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Returns the size (number of elements) in the TaskList.
+     *
      * @return  size of the TaskList.
      */
     public int size() {

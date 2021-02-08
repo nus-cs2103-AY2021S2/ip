@@ -2,26 +2,26 @@ package duke.task;
 
 public abstract class Task {
     protected String task;
-    protected boolean done;
+    protected boolean isDone;
 
     Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void doTask() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public String getTask() {
         return this.task;
     }
 
-    public abstract String fileString();
+    public abstract String toFileString();
 
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X] " + this.task;
         } else {
             return "[ ] " + this.task;

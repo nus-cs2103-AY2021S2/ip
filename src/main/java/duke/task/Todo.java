@@ -10,15 +10,15 @@ public class Todo extends Task {
 
     public Todo(boolean done, String task) {
         super(task);
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
      * Returns a String representation of this Todo for storage to a file.
      * @return String representation
      */
-    public String fileString() {
-        return "T | " + this.done + " | " + this.task;
+    public String toFileString() {
+        return "T | " + this.isDone + " | " + this.task;
     }
 
     @Override

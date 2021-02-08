@@ -14,15 +14,15 @@ public class Event extends Task {
     public Event(boolean done, String task, String at) {
         super(task);
         this.at = at;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
      * Returns a String representation of this Event for storage to a file.
      * @return String representation
      */
-    public String fileString() {
-        return "E | " + this.done + " | " + this.task + " | " + this.at;
+    public String toFileString() {
+        return "E | " + this.isDone + " | " + this.task + " | " + this.at;
     }
 
     @Override
