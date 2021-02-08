@@ -93,6 +93,7 @@ public class Parser {
             return new TaskCommand(command, taskDescription);
 
         case "deadline":
+            assert splitInput[1].contains("/by") : "Please include keyword '/by' ";
             String[] taskDetails = splitInput[1].split("/by");
             taskDescription = taskDetails[0];
             LocalDateTime endTime =  LocalDateTime.parse(taskDetails[1].trim(),
