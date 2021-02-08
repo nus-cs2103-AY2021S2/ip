@@ -17,10 +17,10 @@ public abstract class Command {
     /**
      * Abstract execute method for Command.
      *
-     * @param taskList The list of tasks.
+     * @param tasks The list of tasks.
      * @param storage  The storage handler.
      * @return Output for GUI.
      * @throws DukeException If there is error in execution.
      */
-    public abstract String execute(TaskList taskList, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 }

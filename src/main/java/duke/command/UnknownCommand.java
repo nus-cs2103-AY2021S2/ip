@@ -17,12 +17,12 @@ public class UnknownCommand extends Command {
     /**
      * Prints error message when unknown command encountered.
      *
-     * @param taskList The list of tasks.
+     * @param tasks The list of tasks.
      * @param storage  The storage handler.
      * @return Output for GUI.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         return "       OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }

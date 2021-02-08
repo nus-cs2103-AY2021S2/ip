@@ -17,12 +17,12 @@ public class ListCommand extends Command {
     /**
      * Executes the listing of tasks.
      *
-     * @param taskList The list of tasks.
+     * @param tasks The list of tasks.
      * @param storage  The storage handler.
      * @return Output for GUI.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
-        return taskList.list();
+    public String execute(TaskList tasks, Storage storage) {
+        return tasks.list();
     }
 }

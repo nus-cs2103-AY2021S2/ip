@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
@@ -58,26 +59,25 @@ public class TaskList {
      */
     public String done(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
-        if (inputArr.length < 3) {
-            if (inputArr.length == 1) {
-                throw new DukeException("       OOPS!!! The task number cannot be empty.");
-            } else if (checkIfNotNumeric(inputArr[1])) {
-                throw new DukeException("       OOPS!!! The task number must be numeric.");
-            } else {
-                int i = Integer.parseInt(inputArr[1]) - 1;
-                if (i > (this.tasks.size() - 1) || i < 0) {
-                    throw new DukeException("       OOPS!!! The task number is out of range. "
-                            + "Please use \"list\" to see the list of tasks.");
-                } else {
-                    this.tasks.get(i).markAsDone();
-                    Task currTask = tasks.get(i);
-                    return "     Nice! I've marked this task as done:\n"
-                            + "       " + currTask.toString() + "\n";
-                }
-            }
-        } else {
+        if (inputArr.length > 2) {
             throw new DukeException("       OOPS!!! The format should be "
                     + "\"done ##\" where ## is the task number.");
+        }
+        if (inputArr.length == 1) {
+            throw new DukeException("       OOPS!!! The task number cannot be empty.");
+        }
+        if (isNotNumeric(inputArr[1])) {
+            throw new DukeException("       OOPS!!! The task number must be numeric.");
+        }
+        int i = Integer.parseInt(inputArr[1]) - 1;
+        if (i > (this.tasks.size() - 1) || i < 0) {
+            throw new DukeException("       OOPS!!! The task number is out of range. "
+                    + "Please use \"list\" to see the list of tasks.");
+        } else {
+            this.tasks.get(i).markAsDone();
+            Task currTask = tasks.get(i);
+            return "     Nice! I've marked this task as done:\n"
+                    + "       " + currTask.toString() + "\n";
         }
     }
 
@@ -90,28 +90,26 @@ public class TaskList {
      */
     public String delete(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
-        if (inputArr.length < 3) {
-            if (inputArr.length == 1) {
-                throw new DukeException("       OOPS!!! The task number cannot be empty.");
-            } else if (checkIfNotNumeric(inputArr[1])) {
-                throw new DukeException("       OOPS!!! The task number must be numeric.");
-            } else {
-                int i = Integer.parseInt(inputArr[1]) - 1;
-                if (i > (this.tasks.size() - 1) || i < 0) {
-                    throw new DukeException("       OOPS!!! The task number is out of range. "
-                            + "Please use \"list\" to see the list of tasks.");
-                } else {
-                    int currSize = this.tasks.size();
-                    Task removedTask = this.tasks.remove(i);
-                    assert tasks.size() == currSize - 1: "Task has not been removed properly.";
-                    return "     Noted. I've removed this task:\n"
-                            + "       " + removedTask.toString() + "\n"
-                            + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
-                }
-            }
-        } else {
+        if (inputArr.length > 2) {
+
             throw new DukeException("       OOPS!!! The format should be "
                     + "\"delete ##\" where ## is the task number.");
+        }
+        if (inputArr.length == 1) {
+            throw new DukeException("       OOPS!!! The task number cannot be empty.");
+        }
+        if (isNotNumeric(inputArr[1])) {
+            throw new DukeException("       OOPS!!! The task number must be numeric.");
+
+        }
+        int i = Integer.parseInt(inputArr[1]) - 1;
+        if (i > (this.tasks.size() - 1) || i < 0) {
+            throw new DukeException("       OOPS!!! The task number is out of range. "
+                    + "Please use \"list\" to see the list of tasks.");
+        } else {
+            return "     Noted. I've removed this task:\n"
+                    + "       " + this.tasks.remove(i).toString() + "\n"
+                    + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
         }
     }
 
@@ -124,29 +122,27 @@ public class TaskList {
      */
     public String find(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
-        if (inputArr.length < 3) {
-            if (inputArr.length == 1) {
-                throw new DukeException("       OOPS!!! The keyword cannot be empty.");
-            } else {
-                StringBuilder sb = new StringBuilder("     Here are the matching tasks in your list:\n");
-                ArrayList<Task> temp = new ArrayList<>();
-                for (Task currTask : tasks) {
-                    String currDescription = currTask.getDescription();
-                    if (currDescription.contains(inputArr[1])) {
-                        temp.add(currTask);
-                    }
-                }
-                for (int j = 0; j < temp.size(); j++) {
-                    Task tempTask = temp.get(j);
-                    String msg = "     " + (j + 1) + "." + tempTask.toString() + "\n";
-                    sb.append(msg);
-                }
-                return sb.toString();
-            }
-        } else {
+        if (inputArr.length > 2) {
             throw new DukeException("       OOPS!!! The format should be "
                     + "\"find ####\" where #### is the keyword to search.");
         }
+        if (inputArr.length == 1) {
+            throw new DukeException("       OOPS!!! The keyword cannot be empty.");
+        }
+        StringBuilder sb = new StringBuilder("     Here are the matching tasks in your list:\n");
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task currTask : tasks) {
+            String currDescription = currTask.getDescription();
+            if (currDescription.contains(inputArr[1])) {
+                temp.add(currTask);
+            }
+        }
+        for (int j = 0; j < temp.size(); j++) {
+            Task tempTask = temp.get(j);
+            String msg = "     " + (j + 1) + "." + tempTask.toString() + "\n";
+            sb.append(msg);
+        }
+        return sb.toString();
     }
 
     /**
@@ -159,50 +155,39 @@ public class TaskList {
      */
     public String addTask(String type, String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
-        int currSize = tasks.size();
+        String[] details = new String[]{};
+        LocalDate date = LocalDate.now();
+
+        if (inputArr.length == 1) {
+            throw new DukeException("       OOPS!!! The description of the task cannot be empty.");
+        }
+
+        if (!type.equals("todo")) {
+            if (type.equals("deadline")) {
+                details = fullCommand.substring(9).split(" /by ");
+
+            } else {
+                details = fullCommand.substring(6).split(" /at ");
+            }
+            if (details.length == 1) {
+                throw new DukeException("       OOPS!!! The date of a deadline/event cannot be empty.");
+            }
+            try {
+                date = LocalDate.parse(details[1]);
+            } catch (DateTimeParseException ex) {
+                throw new DukeException("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
+            }
+        }
+
         switch (type) {
         case "todo":
-            if (inputArr.length == 1) {
-                throw new DukeException("       OOPS!!! The description of a todo cannot be empty.");
-            } else {
-                this.tasks.add(new Todo(0, fullCommand.substring(5)));
-            }
+            this.tasks.add(new Todo(0, fullCommand.substring(5)));
             break;
         case "deadline":
-            if (inputArr.length == 1) {
-                throw new DukeException("       OOPS!!! The description and due date "
-                        + "of a deadline cannot be empty.");
-            } else {
-                String[] details = fullCommand.substring(9).split(" /by ");
-                if (details.length == 1) {
-                    throw new DukeException("       OOPS!!! The due date of a deadline "
-                            + "cannot be empty.");
-                } else {
-                    try {
-                        this.tasks.add(new Deadline(0, details[0], LocalDate.parse(details[1])));
-                    } catch (DateTimeParseException ex) {
-                        throw new DukeException("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
-                    }
-                }
-            }
+            this.tasks.add(new Deadline(0, details[0], date));
             break;
         case "event":
-            if (inputArr.length == 1) {
-                throw new DukeException("       OOPS!!! The description and time frame "
-                        + "of an event cannot be empty.");
-            } else {
-                String[] details = fullCommand.substring(6).split(" /at ");
-                if (details.length == 1) {
-                    throw new DukeException("       OOPS!!! The time frame of an event "
-                            + "cannot be empty.");
-                } else {
-                    try {
-                        this.tasks.add(new Event(0, details[0], LocalDate.parse(details[1])));
-                    } catch (DateTimeParseException ex) {
-                        throw new DukeException("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
-                    }
-                }
-            }
+            this.tasks.add(new Event(0, details[0], date));
             break;
         default:
         }
