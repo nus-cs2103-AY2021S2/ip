@@ -110,12 +110,9 @@ public class TaskList {
      * @return a String representing a TaskList.
      */
     public String saveTaskListString() {
-        String str = "";
-        for (Task t: this.tasks) {
-            str += t.saveTaskString();
-            str += "\n";
-        }
-        return str;
+        return this.tasks.stream()
+                .map(task -> task.saveTaskString() + "\n")
+                .reduce("", String::concat);
     }
 
     /**
