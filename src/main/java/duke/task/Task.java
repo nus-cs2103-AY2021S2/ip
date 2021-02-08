@@ -28,6 +28,9 @@ public abstract class Task {
      * @param isDone      The done status.
      */
     protected Task(String description, String type, boolean isDone) {
+        assert description != null : "description must not be null!";
+        assert type != null : "type must not be null!";
+
         this.description = description;
         this.isDone = isDone;
         this.type = type;

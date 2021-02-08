@@ -22,6 +22,7 @@ public class Storage {
      * @param path The file path to use for saving and loading.
      */
     public Storage(String path) {
+        assert path != null : "path must not be null!";
         filePath = Path.of(path).toAbsolutePath();
         dirPath = filePath.getParent();
     }

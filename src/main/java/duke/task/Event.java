@@ -34,6 +34,7 @@ public class Event extends Task {
      */
     public Event(String description, String period, boolean isDone) {
         super(description, TYPE, isDone);
+        assert period != null : "period must not be null!";
         this.period = period;
     }
 
