@@ -1,20 +1,5 @@
-# User Guide
+# What is Elaina
 
-## Features 
+> Elaina is the ultimate personal assistant chatbot.
 
-### Feature 1 
-Description of feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+![Hero](/_media/hero.png)
