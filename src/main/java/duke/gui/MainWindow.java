@@ -73,7 +73,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, chadRImage),
                 DialogBox.getDukeDialog(response, response.equals(errorResponse)
                         ? soyjakCry
-                        : chadLImage)
+                        : chadLImage
+                )
         );
         userInput.clear();
 
