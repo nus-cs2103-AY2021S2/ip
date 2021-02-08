@@ -51,10 +51,6 @@ public class TaskList {
         String desc = task[2].strip();
 
         Task newTask;
-<<<<<<< HEAD
-=======
-        newTask = new ToDo(desc); //default case. Will raise exception if used.
->>>>>>> aaa8abdd5f2c0bdb19eba1d0e30c64783aa20e33
 
         if (type.equals("T")) {
             newTask = new ToDo(desc);
@@ -67,11 +63,7 @@ public class TaskList {
             String atDate = task[3];
             newTask = new Event(desc, atDate);
         } else {
-<<<<<<< HEAD
             throw new IllegalArgumentException("Invalid type. Duke.txt may have been tampered.");
-=======
-            throw new IllegalArgumentException("Invalid type. Please check duke.txt. Skipping Entry...");
->>>>>>> aaa8abdd5f2c0bdb19eba1d0e30c64783aa20e33
         }
 
         if (done.equals("1")) {
