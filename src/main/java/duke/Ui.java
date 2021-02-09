@@ -59,6 +59,7 @@ class Ui {
      * @param t the given TaskList
      */
     static String list(TaskList t) {
+        assert(t != null);
         return "    ____________________________________________________________\n\n"
 
             + "      Here are the tasks in your list:\n"
@@ -72,6 +73,7 @@ class Ui {
      * @param t the Task to be marked as done
      */
     static String done(Task t) {
+        assert(t != null);
         return "    ____________________________________________________________\n\n"
 
             + "      Nice! I've marked this task as done:\n"
@@ -86,6 +88,7 @@ class Ui {
      * @param n the size of TaskList after deletion
      */
     static String delete(Task t, int n) {
+        assert(t != null);
         return "    ____________________________________________________________\n\n"
 
             + "      Noted. I've removed this task:\n"
@@ -101,6 +104,7 @@ class Ui {
      * @param s the day that is given in yyy-mm-dd format (e.g. 2021-01-31)
      */
     static String tasksOnDay(TaskList t, String s) {
+        assert(t != null);
         LocalDate day = LocalDate.parse(s);
         return "    ____________________________________________________________\n\n"
 
@@ -111,6 +115,7 @@ class Ui {
     }
 
     static String find(TaskList t, String s) {
+        assert(t != null);
         return "    ____________________________________________________________\n\n"
 
             + "      Here are the matching tasks in your list:\n"

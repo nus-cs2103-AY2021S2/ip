@@ -43,6 +43,7 @@ class TaskList {
      * @param t Task to be appended
      */
     void store(Task t) {
+        assert(this.storage != null);
         this.list.add(t);
         this.storage.save(this.list);
     }
@@ -52,6 +53,7 @@ class TaskList {
      * @param t the task to be removed from the list
      */
     void delete(Task t) {
+        assert(this.storage != null);
         this.list.remove(t);
         this.storage.save(this.list);
     }
@@ -60,6 +62,7 @@ class TaskList {
      * resets the list into an empty list
      */
     void clear() {
+        assert(this.storage != null);
         this.list.clear();
         this.storage.save(this.list);
     }
