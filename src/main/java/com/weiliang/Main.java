@@ -14,14 +14,14 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke;
+    private final Duke duke;
 
     public Main() {
         this.duke = new Duke("SimpleBot");
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
 
