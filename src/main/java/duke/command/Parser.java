@@ -82,6 +82,7 @@ public class Parser {
      */
     public static Command parseCommand(String fullCommand) throws Exception {
         final String[] tokens = fullCommand.strip().split("\\s+", 2);
+        assert(tokens.length != 0);
         final String command = tokens[0];
         switch (command) {
         case "bye":

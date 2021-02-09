@@ -25,6 +25,7 @@ public class FindCommand implements Command {
         }
 
         final List<String> matchingTasks = tasks.find(keyword);
+        assert(matchingTasks != null);
         return ui.getFindTaskMessage(matchingTasks);
 
     }
