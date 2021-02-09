@@ -106,6 +106,8 @@ public class Ui {
      * @param input User input to be passed to Parser.
      */
     public void handleInput(Duke apollo, String input) {
+        assert apollo != null: "apollo should not be null!";
+
         try {
             Parser.handleInput(input, apollo.getTasks().getTaskList(), apollo);
         } catch (Exception e) {

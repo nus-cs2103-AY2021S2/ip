@@ -32,6 +32,7 @@ public class DateFormatter {
      * @return A date String in the dd MMM yyyy format.
      */
     public static String decodeDate(LocalDate date) {
+        assert date != null: "date should not be null!";
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
@@ -41,6 +42,7 @@ public class DateFormatter {
      * @return A date String in the yyyy-MM-dd format.
      */
     public static String decodeDateForStorage(LocalDate date) {
+        assert date != null: "date should not be null!";
         return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

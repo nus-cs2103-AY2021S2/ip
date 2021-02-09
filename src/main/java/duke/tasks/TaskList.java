@@ -29,6 +29,7 @@ public class TaskList {
      * @return ArrayList of Tasks.
      */
     public ArrayList<Task> getTaskList() {
+        assert taskList != null: "taskList should not be null!";
         return taskList;
     }
 }

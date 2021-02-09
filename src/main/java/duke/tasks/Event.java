@@ -38,6 +38,7 @@ public class Event extends Task {
      * @return A LocalDate representing the Event date.
      */
     public LocalDate getAt() {
+        assert this.at != null: "at should not be null!";
         return this.at;
     }
 

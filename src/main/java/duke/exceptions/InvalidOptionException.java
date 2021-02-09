@@ -51,6 +51,7 @@ public class InvalidOptionException extends DukeException {
      */
     @Override
     public String getMessage() {
+        assert message != null: "message should not be null!";
         return message;
     }
 }
