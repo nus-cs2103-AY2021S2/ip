@@ -30,7 +30,7 @@ class ToDo extends Task {
         } else {
             ans = "Error";
         }
-        assert !(ans.equals("Error")) : "Task must be either done or not";
+        assert (!ans.equals("Error")) : "The task should be either done or not";
         return ans;
     }
 

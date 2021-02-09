@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * the Deadline due date: dlTime
  */
 class Deadline extends Task {
-    private LocalDateTime dlTime;
+    private final LocalDateTime dlTime;
 
     /**
      * Returns a Deadline with specified description (name) and due date.
@@ -40,7 +40,8 @@ class Deadline extends Task {
         } else {
             ans = "Error";
         }
-        assert !(ans.equals("Error")) : "Task must be either done or not";
+        assert (!ans.equals("Error")) : "The task should be either done or not";
+
         return ans;
     }
 

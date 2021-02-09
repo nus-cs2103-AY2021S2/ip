@@ -55,41 +55,69 @@ class Storage {
         while (line != null) {
             switch (line.substring(1, 2)) {
             case "T":
-                if (line.charAt(4) == ' ') {
-                    taskList.add(new ToDo(line.substring(7)));
-                } else {
-                    ToDo newToDo = new ToDo(line.substring(7));
-                    newToDo.markAsDone();
-                    taskList.add(newToDo);
-                }
+                addTodo(taskList, line);
                 break;
             case "D":
-                int dlIndex = line.indexOf("(by: ");
-                LocalDateTime dlTime = LocalDateTime.parse(line.substring(dlIndex + 5, line.length() - 1),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                if (line.charAt(4) == ' ') {
-                    taskList.add(new Deadline(line.substring(7, dlIndex - 1), dlTime));
-                } else {
-                    Deadline newDL = new Deadline(line.substring(7, dlIndex - 1), dlTime);
-                    newDL.markAsDone();
-                    taskList.add(newDL);
-                }
+                addDeadline(taskList, line);
                 break;
             default:
-                int etIndex = line.indexOf("(at: ");
-                LocalDateTime eventTime = LocalDateTime.parse(line.substring(etIndex + 5, line.length() - 1),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                if (line.charAt(4) == ' ') {
-                    taskList.add(new Deadline(line.substring(7, etIndex - 1), eventTime));
-                } else {
-                    Deadline newDL = new Deadline(line.substring(7, etIndex - 1), eventTime);
-                    newDL.markAsDone();
-                    taskList.add(newDL);
-                }
+                addEvent(taskList, line);
             }
             line = reader.readLine();
         }
         reader.close();
+    }
+
+
+    /**
+     * Adds a new Event into task list.
+     * @param taskList the task list to add this new Event.
+     * @param line String description of this Event.
+     */
+    private void addEvent(ArrayList<Task> taskList, String line) {
+        int etIndex = line.indexOf("(at: ");
+        LocalDateTime eventTime = LocalDateTime.parse(line.substring(etIndex + 5, line.length() - 1),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        if (line.charAt(4) == ' ') {
+            taskList.add(new Deadline(line.substring(7, etIndex - 1), eventTime));
+        } else {
+            Deadline newDL = new Deadline(line.substring(7, etIndex - 1), eventTime);
+            newDL.markAsDone();
+            taskList.add(newDL);
+        }
+    }
+
+    /**
+     * Adds a new Deadline into task list.
+     * @param taskList the task list to add this new Event.
+     * @param line String description of this Event.
+     */
+    private void addDeadline(ArrayList<Task> taskList, String line) {
+        int dlIndex = line.indexOf("(by: ");
+        LocalDateTime dlTime = LocalDateTime.parse(line.substring(dlIndex + 5, line.length() - 1),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        if (line.charAt(4) == ' ') {
+            taskList.add(new Deadline(line.substring(7, dlIndex - 1), dlTime));
+        } else {
+            Deadline newDL = new Deadline(line.substring(7, dlIndex - 1), dlTime);
+            newDL.markAsDone();
+            taskList.add(newDL);
+        }
+    }
+
+    /**
+     * Adds a new Todo into task list.
+     * @param taskList the task list to add this new Event.
+     * @param line String description of this Event.
+     */
+    private void addTodo(ArrayList<Task> taskList, String line) {
+        if (line.charAt(4) == ' ') {
+            taskList.add(new ToDo(line.substring(7)));
+        } else {
+            ToDo newToDo = new ToDo(line.substring(7));
+            newToDo.markAsDone();
+            taskList.add(newToDo);
+        }
     }
 
     /**

@@ -5,7 +5,7 @@ package duke;
  * Task has 3 types: ToDo, Deadline, Event.
  */
 class Task {
-    private String taskName;
+    private final String taskName;
     private boolean taskDone;
 
     /**
@@ -40,6 +40,10 @@ class Task {
         this.taskDone = true;
     }
 
+    /**
+     * Returns the information whether a task is done or not.
+     * @return a boolean containing this information.
+     */
     public boolean isTaskDone() {
         return taskDone;
     }

@@ -40,8 +40,7 @@ class Ui {
      * Say Bye
      */
     public String echoBye() {
-        String ans = "Bye. Hope to see you again soon!\n";
-        return ans;
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -77,8 +76,7 @@ class Ui {
      * @param task Task done.
      */
     public String echoMarkTaskDone(Task task) {
-        String ans = "Nice! I've marked this task as done for you, Lisa: \n" + " " + task.printTask() + "\n";
-        return ans;
+        return "Nice! I've marked this task as done for you, Lisa: \n" + " " + task.printTask() + "\n";
     }
 
     /**
@@ -87,8 +85,7 @@ class Ui {
      * @param task Task deleted.
      */
     public String echoDeleteTask(Task task) {
-        String ans = "Noted. I've removed this task for you, Lisa: \n" + " " + task.printTask() + "\n";
-        return ans;
+        return "Noted. I've removed this task for you, Lisa: \n" + " " + task.printTask() + "\n";
     }
 
     /**
@@ -98,8 +95,7 @@ class Ui {
      */
 
     public String echoErrMsg(DukeException err) {
-        String ans = err.getMessage();
-        return ans;
+        return err.getMessage();
     }
 
     /**
