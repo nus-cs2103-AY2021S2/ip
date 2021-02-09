@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.util.Tuple;
 
 /**
  * Duke is a basic to-do list application.
@@ -12,6 +13,10 @@ public class Duke {
     private Ui ui;
     private TaskList taskList;
 
+    /**
+     * Constructs a Duke object with the given filePath as the file to load the task list from.
+     * @param filePath path to the of the task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -31,14 +36,14 @@ public class Duke {
     /**
      * Parses and subsequently executes the given command input String.
      *
-     * @return String output to be displayed
+     * @return Tuple containing output to be displayed and a boolean representing if it is an exit command.
      */
-    String getResponse(String input) {
+    Tuple<String, Boolean> getResponse(String input) {
         try {
             Command parsedCmd = Parser.parse(input);
-            return parsedCmd.execute(storage, ui, taskList);
+            return new Tuple<>(parsedCmd.execute(storage, ui, taskList), parsedCmd.isExit());
         } catch (DukeException e) {
-            return ui.showError(e);
+            return new Tuple<>(ui.toErrorString(e), false);
         }
     }
 }

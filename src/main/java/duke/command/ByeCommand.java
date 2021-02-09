@@ -17,6 +17,7 @@ public class ByeCommand extends Command {
 
     @Override
     public String execute(Storage storage, Ui ui, TaskList taskList) {
+        ui.showExit();
         return "I hope I have been of assistance. Goodbye. C:";
     }
 }
