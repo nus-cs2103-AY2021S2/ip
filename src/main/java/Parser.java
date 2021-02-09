@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -33,45 +31,48 @@ public class Parser {
      * @return TaskManager object that contains extracted information from user input.
      * @throws DukeException If operator or task details are not valid.
      */
-    public TaskManager parseCommand(String userInput) throws DukeException {
+    public Command parseCommand(String userInput) throws DukeException {
         String operator = parseOperator(userInput);
         assert validOperators.contains(operator);
 
         // split command text by its first space into 2 parts
         String[] taskDetail = userInput.split(" ", 2);
+        Command command = new Command();
 
-        TaskManager taskManager = new TaskManager(operator);
         // parse command details according to their operator
         switch (operator) {
+        case "bye":
+            command = new ExitCommand();
+            break;
         case "done":
             int taskNumberToComplete = parseDone(taskDetail);
-            taskManager =  new TaskManager(operator, Integer.toString(taskNumberToComplete));
+            command = new DoneCommand(taskNumberToComplete);
             break;
         case "delete":
             int taskNumberToDelete = parseDelete(taskDetail);
-            taskManager = new TaskManager(operator, Integer.toString(taskNumberToDelete));
+            command = new DeleteCommand(taskNumberToDelete);
             break;
         case "todo":
             String description = parseAddToDo(taskDetail);
-            taskManager = new TaskManager(operator, description);
+            command = new AddCommand(operator, description);
             break;
         case "deadline":
             String[] detailsDeadline = parseAddDeadline(taskDetail);
-            taskManager = new TaskManager(operator, detailsDeadline);
+            command = new AddCommand(operator, detailsDeadline);
             break;
         case "event":
             String[] detailsEvent = parseAddEvent(taskDetail);
-            taskManager = new TaskManager(operator, detailsEvent);
+            command = new AddCommand(operator, detailsEvent);
             break;
         case "list":
-            taskManager = new TaskManager(operator);
+            command = new ListCommand();
             break;
         case "find":
             String keyword = parseFindTask(taskDetail);
-            taskManager = new TaskManager(operator, keyword);
+            command = new FindCommand(keyword);
             break;
         }
-        return taskManager;
+        return command;
     }
 
     /**
@@ -219,7 +220,7 @@ public class Parser {
         // parse keyword of task
         assert taskDetail.length > 0;
         if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
-            throw new DukeException("OOPS!!! There is no matching task.");
+            throw new DukeException("OOPS!!! Keyword cannot be empty.");
         } else{
             String keyword = taskDetail[1];
             return keyword;
