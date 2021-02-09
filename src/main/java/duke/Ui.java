@@ -15,9 +15,10 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    private static final int EXIT_DELAY = 3;
     private static final String LINE_PREFIX = "";
-    private static final String WELCOME_MESSAGE = "Hello Human, I am Bob.";
-    private static final String EXIT_MESSAGE = "Goodbye Human. Exiting in 3 seconds.";
+    private static final String WELCOME_MESSAGE = "Hello Human, I am B.O.B";
+    private static final String EXIT_MESSAGE = "Goodbye Human. Exiting in " + EXIT_DELAY + " seconds...";
     private static final String LINE_DIVIDER = "-----------------------------\n";
 
     private final Scanner in;
@@ -38,6 +39,10 @@ public class Ui {
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
+    }
+
+    public static float getExitDelay() {
+        return EXIT_DELAY;
     }
 
     public String showWelcome() {
