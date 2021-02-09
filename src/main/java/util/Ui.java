@@ -14,8 +14,4 @@ public interface Ui {
                 + "\nYour Simple Word-Executed Helper!"
                 + "\nWhat shall we do today?\n";
     }
-
-    static String echo(String input) {
-        return input;
-    }
 }

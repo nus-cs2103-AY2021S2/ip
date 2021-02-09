@@ -81,10 +81,6 @@ public class Sweh extends Application {
         }
     }
 
-    public static String echo(String input) {
-        return input;
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -136,13 +132,9 @@ public class Sweh extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));

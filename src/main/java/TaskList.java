@@ -23,10 +23,6 @@ public class TaskList {
         return "\nNow you have " + taskList.size() + " task(s) in your list";
     }
 
-    public ArrayList<Task> getTaskList() {
-        return this.taskList;
-    }
-
     public String addTask(Task task) {
         taskList.add(task);
 
@@ -35,18 +31,6 @@ public class TaskList {
         return "Gotcha. I've added the task: \n    "
                 + task
                 + taskCountMsg();
-    }
-
-    public String markTaskDone(int position) throws NoSuchElementException, IndexOutOfBoundsException {
-        try {
-            taskList.get(position).markDone();
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Please include the index of the task.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Please enter a number within the list.");
-        }
-        return "Nice, another job well done!\n"
-                + taskList.get(position).toString();
     }
 
     public String markTaskDone(HashMap<String, String> argMap) throws NoSuchElementException,
