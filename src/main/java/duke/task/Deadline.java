@@ -1,6 +1,7 @@
 package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.WeakHashMap;
 
 /** Create a Deadline class
  *

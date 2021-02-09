@@ -37,16 +37,16 @@ public class AddCommand extends Command {
      * @throws DukeException
      */
     public String execute() throws DukeException {
-        boolean executedUnSuccessfully = false;
+        boolean executedUnsuccessfully = false;
         switch (type) {
         case ("todo"):
-            executedUnSuccessfully = tasklist.addToDo(input);
+            executedUnsuccessfully = tasklist.addToDo(input);
             break;
-        case ("deadlines"):
-            executedUnSuccessfully = tasklist.addDeadline(this.input, dueDate, startTime);
+        case ("deadline"):
+            executedUnsuccessfully = tasklist.addDeadline(this.input, dueDate, startTime);
             break;
         case ("events"):
-            executedUnSuccessfully = tasklist.addEvent(this.input, dueDate, startTime, endTime);
+            executedUnsuccessfully = tasklist.addEvent(this.input, dueDate, startTime, endTime);
             break;
         default:
             break;
@@ -55,12 +55,10 @@ public class AddCommand extends Command {
         int currentSize = tasklist.getTaskListArray().size()-1;
         DataStorage.save(tasklist.getTaskListArray());
 
-        System.out.println(executedUnSuccessfully);
-        System.out.println(input);
-        if(executedUnSuccessfully){
+        if(executedUnsuccessfully){
             return ui.printDuplicateMessage();
         }else{
-            return ui.displayAddedTaskMessage(tasklist.getTask(currentSize), currentSize+1);
+           return ui.displayAddedTaskMessage(tasklist.getTask(currentSize), currentSize+1);
         }
 
     }
