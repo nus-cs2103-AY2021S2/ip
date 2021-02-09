@@ -23,6 +23,7 @@ public class Parser {
      * @throws DukeException If input parsing fails.
      */
     public String parse(String input) {
+        assert input != null : "Input is null";
         try {
             if (input.equals("list")) {
                 return taskList.toString();

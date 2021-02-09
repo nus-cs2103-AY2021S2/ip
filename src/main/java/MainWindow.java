@@ -27,6 +27,7 @@ public class MainWindow {
     }
 
     public void setDuke(Duke d) {
+        assert d != null : "Duke is null";
         duke = d;
     }
 
