@@ -1,6 +1,7 @@
 package vergil.components;
 
-import vergil.types.VergilException;
+import vergil.types.exceptions.VergilException;
+import vergil.types.exceptions.VergilFileException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -40,7 +41,7 @@ public class Storage {
 
             fw.close();
         } catch (IOException e) {
-            throw new VergilException("Unable to save.");
+            throw new VergilFileException("Unable to save.");
         }
     }
 }

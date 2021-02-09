@@ -1,68 +1,34 @@
 package vergil.components;
 
-import java.util.Scanner;
-
 public class Ui {
-    private Scanner userInput;
-
     public Ui() {
-        userInput = new Scanner(System.in);
+        // Create a new Ui.
     }
 
-    /**
-     * Displays a welcome message.
-     */
-    public void displayWelcome() {
-        System.out.println("Welcome! I'm Vergil!");
-        System.out.println("How may I help you?");
-        System.out.println();
+    public String getWelcomeMessage() {
+        return "Hello! I'm Vergil\n"
+                + "What can I do for you today?";
     }
 
-    /**
-     * Reads the user's command input, and returns it as a String.
-     * @return the user's command input.
-     */
-    public String readCommand() {
-        System.out.print(">>> ");
-        return userInput.nextLine();
+    public String getFarewellMessage() {
+        return "Bye. See you soon!";
     }
 
-    /**
-     * Displays the contents of the given task list.
-     * @param tl the task list whose contents are to be displayed.
-     */
-    public void displayTaskList(TaskList tl) {
-        System.out.println(tl);
+    public String getListResponse(TaskList taskList) {
+        return "Here are your current tasks:\n"
+                + taskList.toString();
     }
 
-    /**
-     * Displays a success message.
-     */
-    public void displaySuccess() {
-        System.out.println("Success!");
+    public String getSuccessMessage(String details) {
+        return "Success! " + details;
     }
 
-    /**
-     * Displays an error message stating the error.
-     * @param message a string describing the actual error.
-     */
-    public void displayError(String message) {
-        System.out.println("Error! " + message);
+    public String getFoundMessage(TaskList taskList) {
+        return "Here's what I found:\n"
+                + taskList.toString();
     }
 
-    public void displayFindResult(TaskList resultsList) {
-        if (resultsList.getLength() > 0) {
-            System.out.println("Here's what I found: ");
-            displayTaskList(resultsList);
-        } else {
-            System.out.println("Oops! I couldn't find any task with the given keyword.");
-        }
-    }
-
-    /**
-     * Displays a farewell message.
-     */
-    public void displayBye() {
-        System.out.println("Bye. See you soon!");
+    public String getNotFoundMessage() {
+        return "There are no tasks matching with the given keywords.";
     }
 }

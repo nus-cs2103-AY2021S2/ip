@@ -4,7 +4,9 @@ import vergil.types.Task;
 import vergil.types.Todo;
 import vergil.types.Deadline;
 import vergil.types.Event;
-import vergil.types.VergilException;
+import vergil.types.exceptions.VergilException;
+import vergil.types.exceptions.VergilFileException;
+import vergil.types.exceptions.VergilIndexException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -58,7 +60,7 @@ public class TaskList {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new VergilException("Unable to find file.");
+            throw new VergilFileException("Unable to find the save file.");
         }
     }
 
@@ -71,6 +73,15 @@ public class TaskList {
         tasks.add(t);
     }
 
+    public String getAsString(int index) throws VergilException {
+        try {
+            return tasks.get(index)
+                    .toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new VergilIndexException();
+        }
+    }
+
     /**
      * Marks the task with the given list number as done.
      * @param listNum the number of the task on the list.
@@ -81,7 +92,7 @@ public class TaskList {
         try {
             tasks.get(listNum - 1).doTask();
         } catch (IndexOutOfBoundsException e) {
-            throw new VergilException("Unable to find task.");
+            throw new VergilIndexException();
         }
     }
 
@@ -95,7 +106,7 @@ public class TaskList {
         try {
             tasks.remove(listNum - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new VergilException("Unable to find task.");
+            throw new VergilIndexException("Unable to find task.");
         }
     }
 

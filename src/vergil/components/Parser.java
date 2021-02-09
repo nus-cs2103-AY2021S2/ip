@@ -1,14 +1,21 @@
 package vergil.components;
 
-import vergil.types.Command;
-import vergil.types.CommandType;
-import vergil.types.VergilException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import vergil.types.commands.*;
+import vergil.types.exceptions.VergilCommandException;
+import vergil.types.exceptions.VergilException;
+
+/**
+ * Represents a parser that parses commands given to Vergil.
+ */
 public class Parser {
+    /**
+     * Constructs a parser.
+     */
     public Parser() {
         // Create a new parser.
     }
@@ -21,70 +28,56 @@ public class Parser {
      * @throws VergilException if the command is unknown or invalid.
      */
     public Command parse(String command) throws VergilException {
+        String index;
+        String desc;
+        String dateTime;
+        String keywords;
+
         try {
             switch (command.split(" ")[0]) {
             case "bye":
-                return new Command(
-                        CommandType.BYE,
-                        null,
-                        null,
-                        0);
+                return new ByeCommand();
 
             case "list":
-                return new Command(
-                        CommandType.LIST,
-                        null,
-                        null,
-                        0);
+                return new ListCommand();
 
             case "done":
-                return new Command(
-                        CommandType.DONE,
-                        null,
-                        null,
-                        Integer.parseInt(command.split(" ")[1]));
+                index = command.split(" ")[1];
+                return new DoneCommand(index);
 
             case "delete":
-                return new Command(
-                        CommandType.DELETE,
-                        null,
-                        null,
-                        Integer.parseInt(command.split(" ")[1]));
+                index = command.split(" ")[1];
+                return new DeleteCommand(index);
 
             case "todo":
-                return new Command(
-                        CommandType.TODO,
-                        command.split(" /by ")[0].split(" ", 2)[1],
-                        null,
-                        0);
+                desc = command.split(" ", 2)[1];
+                return new TodoCommand(desc);
 
             case "deadline":
-                return new Command(
-                        CommandType.DEADLINE,
-                        command.split(" /by ")[0].split(" ", 2)[1],
-                        LocalDateTime.parse(command.split(" /by ")[1], DateTimeFormatter.ofPattern("d/M/y HHmm")),
-                        0);
+                desc = command.split(" /by ")[0]
+                        .split(" ", 2)[1];
+
+                dateTime = command.split(" /by ")[1];
+
+                return new DeadlineCommand(desc, dateTime);
 
             case "event":
-                return new Command(
-                        CommandType.EVENT,
-                        command.split(" /at ")[0].split(" ", 2)[1],
-                        LocalDateTime.parse(command.split(" /at ")[1], DateTimeFormatter.ofPattern("d/M/y HHmm")),
-                        0);
+                desc = command.split(" /at ")[0]
+                        .split(" ", 2)[1];
+
+                dateTime = command.split(" /at ")[1];
+
+                return new EventCommand(desc, dateTime);
 
             case "find":
-                return new Command(
-                        CommandType.FIND,
-                        command.split(" ", 2)[1],
-                        null,
-                        0
-                );
+                keywords = command.split(" ", 2)[1];
+                return new FindCommand(keywords);
 
             default:
-                throw new VergilException("Unable to resolve command.");
+                throw new VergilCommandException("Unable to resolve command.");
             }
-         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-            throw new VergilException("Command format is invalid.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new VergilCommandException("Command format is invalid.");
         }
     }
 }
