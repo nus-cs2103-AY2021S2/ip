@@ -12,15 +12,15 @@ public class TaskList {
     public TaskList() {}
 
     /**
-     * Returns and prints the specific Task type
-     * Adds the task into the list if the Task is either "Todo", "Deadline" or "Event"
-     * if the command given is "done", then the task will be marked as done but stay in the list
-     * if the command given is "delete", then the task wil be deleted and removed from the list
-     * if the command given is "find", then the task will proceed to scan through the list
-     * and return the respective tasks that have the matching keyword
-     * @param input the task to be added/deleted/edited in the list
-     * @param sc the scanner that was used to obtain the input
-     *           and will thus be used to obtain the remaining lines
+     * Returns and prints the specific Task type.
+     * Adds the task into the list if the Task is either "Todo", "Deadline" or "Event".
+     * if the command given is "done", then the task will be marked as done but stay in the list.
+     * if the command given is "delete", then the task wil be deleted and removed from the list.
+     * if the command given is "find", then the task will proceed to scan through the list.
+     * and return the respective tasks that have the matching keyword.
+     * @param input the task to be added/deleted/edited in the list.
+     * @param sc the scanner that was used to obtain the input.
+     *           and will thus be used to obtain the remaining lines.
      */
 
     public static void createTask(String input, Scanner sc, ArrayList<Task> lst) {
@@ -410,6 +410,7 @@ public class TaskList {
                 return "There are no tasks matching this keyword :-(\n";
             }
         } else {
+            assert input.length == 1 : "Oops!! What are you trying to say?";
             return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
     }
