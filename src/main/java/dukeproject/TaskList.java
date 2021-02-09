@@ -43,13 +43,13 @@ public class TaskList {
                 taskList.add(new ToDo(description, isDone == 'X'));
             } else if (taskType == 'D') {
                 // Get the description and date from the user's input (Deadline Task)
-                StringDatePair output = new Parser().parse(task, Parser.CommandType.FILE_DEADLINE);
+                StringDatePair output = new Parser().parseInputAndFileEvents(task, Parser.CommandType.FILE_DEADLINE);
 
                 // Add the task to the task list
                 taskList.add(new Deadline(output.getString(), output.getDate(), isDone == 'X'));
             } else if (taskType == 'E') {
                 // Get the description and date from the user's input (Event Task)
-                StringDatePair output = new Parser().parse(task, Parser.CommandType.FILE_EVENT);
+                StringDatePair output = new Parser().parseInputAndFileEvents(task, Parser.CommandType.FILE_EVENT);
 
                 // Add the task to the task list
                 taskList.add(new Event(output.getString(), output.getDate(), isDone == 'X'));
@@ -67,7 +67,7 @@ public class TaskList {
      *
      * @param newTask New task to be added to the task list.
      */
-    public void add(Task newTask) {
+    public void addTask(Task newTask) {
         taskList.add(newTask);
     }
 
@@ -76,7 +76,7 @@ public class TaskList {
      *
      * @param index The index of the item to be removed.
      */
-    public void remove(int index) {
+    public void removeTask(int index) {
         taskList.remove(index);
     }
 
@@ -86,7 +86,7 @@ public class TaskList {
      * @param index The index of the item to be retrieve.
      * @return The task based on the index given.
      */
-    public Task get(int index) {
+    public Task getTask(int index) {
         return taskList.get(index);
     }
 

@@ -6,7 +6,7 @@ package dukeproject;
  * X for the isDone parameter means that the event has been completed.
  */
 public class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     /**

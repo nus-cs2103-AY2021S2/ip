@@ -47,6 +47,7 @@ public class Duke {
      * Runs and understand the user input.
      *
      * @param userInput User input from the GUI's text box.
+     * @return Whether we should continue running the application
      */
     public boolean runUserInput(String userInput) {
         return new Parser().parseUserInput(userInput, ui, storage, taskList);

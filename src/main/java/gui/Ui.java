@@ -72,7 +72,7 @@ public class Ui {
      */
     public void printTaskSuccess(TaskList taskList, int taskIndex) {
         this.printWithSpace("\"Nice! I've marked this task as done: "
-            + "  \n " + taskList.get(taskIndex - 1).toString());
+            + "  \n " + taskList.getTask(taskIndex - 1).toString());
     }
 
     /**
@@ -85,7 +85,7 @@ public class Ui {
 
         // Shows the list of user inputs with its numbering starting from 1
         for (int index = 0; index < taskList.size(); index++) {
-            this.printWithSpace(index + 1 + ". " + taskList.get(index).toString());
+            this.printWithSpace(index + 1 + ". " + taskList.getTask(index).toString());
         }
         this.printWithSpace("");
     }
@@ -105,8 +105,8 @@ public class Ui {
         for (int index = 0; index < taskList.size(); index++) {
             /* Only print the listing and increment the counter if the task descriptions
             contains the keyword */
-            if (taskList.get(index).getDescription().contains(keyword)) {
-                this.printWithSpace(counter + ". " + taskList.get(index).toString());
+            if (taskList.getTask(index).getDescription().contains(keyword)) {
+                this.printWithSpace(counter + ". " + taskList.getTask(index).toString());
                 counter++;
             }
         }
