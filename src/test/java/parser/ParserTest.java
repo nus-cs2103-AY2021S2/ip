@@ -1,7 +1,5 @@
-package duke;
+package parser;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -12,13 +10,10 @@ import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.ListCommand;
 import exceptions.DukeException;
-import parser.Parser;
-import tasks.Deadlines;
-import tasks.Events;
-import tasks.Todo;
 
 
-public class DukeTest {
+
+public class ParserTest {
     @Test
     public void parserTest() throws DukeException {
         assertTrue(Parser.parse("bye") instanceof ByeCommand);
@@ -29,18 +24,4 @@ public class DukeTest {
         assertTrue(Parser.parse("deadline d1 /by 2020-06-02") instanceof AddCommand);
         assertTrue(Parser.parse("event e1 /at Monday 12:00 - 14:00") instanceof AddCommand);
     }
-
-    @Test
-    public void exitTest() {
-        assertEquals(true, new ByeCommand().isExit());
-        assertEquals(false, new ListCommand().isExit());
-        assertEquals(false, new DoneCommand(0).isExit());
-        assertEquals(false, new DeleteCommand(0).isExit());
-        assertEquals(false, new AddCommand(new Todo("test")).isExit());
-        assertEquals(false, new AddCommand(new Deadlines("test", "2020-06-02")).isExit());
-        assertEquals(false, new AddCommand(new Events("test", "Monday",
-                "10:00", "12:00")).isExit());
-    }
-
 }
-

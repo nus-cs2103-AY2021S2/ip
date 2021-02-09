@@ -55,6 +55,9 @@ public class Duke {
             if (e.getMessage().equals("UnknownCommand")) {
                 return ui.unknownCommandError();
             }
+            if (e.getMessage().equals("TypeNotFound")) {
+                return ui.typeNotFound();
+            }
         }
         return "Error! Please Try Another Command!";
     }

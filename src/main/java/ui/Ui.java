@@ -1,8 +1,10 @@
 package ui;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import tasklist.TaskList;
 import tasks.DukeTask;
@@ -42,15 +44,18 @@ public class Ui {
      * */
     public String help() {
         return "Here is the list of commands:"
-                + "\nShow list of commands:\n - help"
-                + "\nExit duke:\n - bye"
-                + "\nDisplay list of tasks:\n - list"
-                + "\nDelete task:\n - delete <task id>"
-                + "\nSet task as completed:\n - done <task id>"
-                + "\nFilter tasks by keyword (in description):\n - find <keyword>"
-                + "\nAdd a new task:\n - todo <task>"
-                + "\nAdd a new deadline:\n - deadline <task> /by <yyyy-mm-dd>"
-                + "\nAdd a new event:\n - event <name> /at <yyyy-mm-dd> <hh:mm> - <hh:mm>"
+                + "\nhelp           Show list of commands\n"
+                + "\nbye                Exit duke\n"
+                + "\nlist               Display list of tasks"
+                + "\n [todo]        Display only todos"
+                + "\n [deadline]    Display only deadline"
+                + "\n [events]      Display only events\n"
+                + "\ndelete <task id>   Delete task:\n"
+                + "\ndone <task id>     Set task as completed\n"
+                + "\nfind <keyword>     Filter tasks by keyword (in description)\n"
+                + "\ntodo <task>        Add a new task:\n"
+                + "\ndeadline <task> /by <yyyy-mm-dd>   Add a new deadline:\n"
+                + "\nevent <name> /at <yyyy-mm-dd> <hh:mm> - <hh:mm>    Add a new event:\n"
                 + "\n**REMEMBER to exclude the < > when entering keywords\n";
     }
 
@@ -121,21 +126,32 @@ public class Ui {
     }
 
     /**
-     * Lists the tasks in the taskList.
+     * Lists the tasks in the taskList, classified by types or list all.
      *
      * @param taskList The TaskList.
      * @return the String output for this command.
      */
-    public String list(TaskList taskList) {
+    public String list(TaskList taskList, Optional<DukeTask.TaskType> type) {
         AtomicInteger count = new AtomicInteger(1);
-        StringBuilder output = new StringBuilder( "Here are the tasks in your list:\n");
+        String header = "Here are the tasks in your list:\n";
+        StringBuilder output = new StringBuilder(header);
+        List<DukeTask> currentList = taskList.getList();
 
-        taskList.getList().stream().map(x -> "." + x.toString() + "\n")
-                .forEach(x -> {
-                    output.append(count.getAndIncrement());
-                    output.append(x);
-                });
-        return output.toString();
+        if (!type.isEmpty()) {
+            currentList = currentList.stream()
+                    .filter(x -> x.getType() == type.get())
+                    .collect(Collectors.toList());
+        }
+        currentList.stream()
+            .map(x -> "." + x.toString() + "\n")
+            .forEach(x -> {
+                output.append(count.getAndIncrement());
+                output.append(x);
+            });
+
+        return output.toString().equals(header)
+                ? "There are no such items in the list!\n"
+                : output.toString();
     }
 
     /**
@@ -146,7 +162,7 @@ public class Ui {
      */
     public String find(List<DukeTask> taskList) {
         AtomicInteger count = new AtomicInteger(1);
-        StringBuilder output = new StringBuilder( "Here are the matching tasks in your list:\n");
+        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
 
         taskList.stream().map(x -> "." + x.toString() + "\n")
                 .forEach(x -> {
@@ -212,6 +228,10 @@ public class Ui {
      */
     public String unknownCommandError() {
         return "☹ OOPS!!! Command is not recognized!!\n";
+    }
+
+    public String typeNotFound() {
+        return "☹ OOPS!!! No such type!!\n";
     }
 }
 

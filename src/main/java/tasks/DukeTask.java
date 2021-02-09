@@ -5,7 +5,7 @@ public class DukeTask {
     protected final boolean isDone;
     protected final TaskType type;
 
-    enum TaskType {
+    public enum TaskType {
         TODO("[T]"),
         DEADLINE("[D]"),
         EVENT("[E]");
@@ -65,12 +65,11 @@ public class DukeTask {
         return String.format("%s | %d | %s", task, done, this.name);
     }
 
-    public String getName() {
-        return this.name;
-    }
-
     public boolean contain(String word) {
         return this.name.contains(word);
+    }
+    public TaskType getType() {
+        return this.type;
     }
     @Override
     public String toString() {

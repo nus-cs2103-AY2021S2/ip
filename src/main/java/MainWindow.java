@@ -1,4 +1,6 @@
 import exceptions.DukeException;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,6 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.WindowEvent;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -46,7 +52,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (input.equals("bye")) {
+            exitDuke();
+        }
         userInput.clear();
+    }
+
+    private void exitDuke() {
+        Timer exit = new Timer();
+        exit.schedule(new TimerTask() {
+            public void run() {
+                System.exit(0);
+            }
+        }, 500);
     }
 }
 

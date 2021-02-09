@@ -46,7 +46,7 @@ public class Parser {
             case ("help"):
                 return new HelpCommand();
             case ("list"):
-                return new ListCommand();
+                return new ListCommand(doneLine);
             case ("done"):
                 return new DoneCommand(index);
             case ("delete"):
