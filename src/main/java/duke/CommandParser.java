@@ -5,6 +5,11 @@ package duke;
  */
 public class CommandParser {
     private static final int SPLIT_LIMIT = 2;
+    private static final String DONE_REGEX_MATCH = "^(do(ne)?|finish(ed)?|completed?) \\d+$";
+    private static final String DELETE_REGEX_MATCH = "^(delete|remove) \\d+$";
+    private static final String TASK_REGEX_MATCH = "^(todo|deadline|event)( .+)?$";
+    private static final String FIND_REGEX_MATCH = "^(find|search) \\d+$";
+
     private TaskList tasks;
     private Ui ui;
 
@@ -24,7 +29,7 @@ public class CommandParser {
         if (userInput.toLowerCase().equals("list")) {
             // display list
             reply = ui.displayList(tasks);
-        } else if (userInput.toLowerCase().matches("^(do(ne)?|finish(ed)?|completed?) \\d+$")) {
+        } else if (userInput.toLowerCase().matches(DONE_REGEX_MATCH)) {
             // finish a task
             String[] bits = userInput.split(" ");
             int idx = Integer.parseInt(bits[1]);
@@ -39,7 +44,7 @@ public class CommandParser {
                     reply = ui.showDoneTask(finishedTask);
                 }
             }
-        } else if (userInput.toLowerCase().matches("^(delete|remove) \\d+$")) {
+        } else if (userInput.toLowerCase().matches(DELETE_REGEX_MATCH)) {
             // manually remove task
             String[] bits = userInput.split(" ");
             int idx = Integer.parseInt(bits[1]);
@@ -49,12 +54,12 @@ public class CommandParser {
                 Task removedTask = tasks.remove(idx);
                 reply = ui.showRemovedTask(removedTask, tasks.size());
             }
-        } else if (userInput.toLowerCase().matches("^(todo|deadline|event)( .+)?$")) {
+        } else if (userInput.toLowerCase().matches(TASK_REGEX_MATCH)) {
             // add task to list
             Task newTask = TaskParser.parseTask(userInput);
             tasks.add(newTask);
             reply = ui.showAddedTask(newTask, tasks.size());
-        } else if (userInput.toLowerCase().startsWith("find")) {
+        } else if (userInput.toLowerCase().matches(FIND_REGEX_MATCH)) {
             // find task in list
             String[] bits = userInput.split(" ", SPLIT_LIMIT);
             if (bits.length == 1) {

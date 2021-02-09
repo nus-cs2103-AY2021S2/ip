@@ -6,6 +6,9 @@ import java.util.ArrayList;
  * Represents a list of Task objects, and governs interactions between Tasks and this List.
  */
 public class TaskList {
+    private static final String REGEX_PATTERN_START = "^.*";
+    private static final String REGEX_PATTERN_END = ".*$";
+
     private ArrayList<Task> tasks;
 
     public TaskList() {
@@ -53,20 +56,13 @@ public class TaskList {
     }
 
     /**
-     * Removes all Tasks from the TaskList.
-     */
-    public void clear() {
-        tasks.clear();
-    }
-
-    /**
      * Finds all Tasks whose descriptions contain the search parameter and returns them in a TaskList.
      * @param search Search parameter, as a String.
      * @return TaskList containing all the matching Tasks.
      */
     public TaskList find(String search) {
         TaskList matchingTasks = new TaskList();
-        String searchPattern = "^.*" + search.toLowerCase() + ".*$";
+        String searchPattern = REGEX_PATTERN_START + search.toLowerCase() + REGEX_PATTERN_END;
         for (Task task : tasks) {
             if (task.getDescription().toLowerCase().matches(searchPattern)) {
                 matchingTasks.add(task);
