@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
     private Snom snom;
     private Snomio snomio = new Snomio();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
-    private Image snomImage = new Image(this.getClass().getResourceAsStream("images/DaSnom.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("images/User.png"));
+    private Image snomImage = new Image(this.getClass().getResourceAsStream("images/Snom.png"));
 
     @FXML
     public void initialize() {
