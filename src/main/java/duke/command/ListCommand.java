@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      */
     public ListCommand(String commandType) {
         super.commandType = commandType;
-        super.commandDetails = "";
+        super.commandDetail = "";
         super.dateTime = "";
         super.outputMessage = "";
         // index is -1 because it is only used in done and delete tasks
@@ -26,9 +26,10 @@ public class ListCommand extends Command {
     private void retrieveList(TaskList taskList) {
         StringBuilder currText = new StringBuilder("Here are the tasks in your list:");
 
-        for (int num = 1; num <= taskList.size(); num++) {
-            Task currentTask = taskList.get(num - 1);
-            currText.append("\n\t ").append(num).append(".").append(currentTask.toString());
+        for (int num = 1; num <= taskList.getSize(); num++) {
+            Task currentTask = taskList.getTask(num - 1);
+            String taskDetail = currentTask.toString();
+            currText.append("\n\t ").append(num).append(".").append(taskDetail);
         }
         this.outputMessage = currText.toString();
     }

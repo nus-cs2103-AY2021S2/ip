@@ -16,17 +16,18 @@ import duke.task.ToDo;
 /**
  * AddTask handles the addition of event, deadline and todo tasks to the list only
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class AddTask extends Command {
 
     /**
      * AddTask Constructor
      *
      * @param command Task name
-     * @param commandDetails Task details
+     * @param commandDetail Task details
      */
-    public AddTask(String command, String commandDetails) {
+    public AddTask(String command, String commandDetail) {
         super.commandType = command;
-        super.commandDetails = commandDetails;
+        super.commandDetail = commandDetail;
         super.dateTime = "";
         super.outputMessage = "";
         // index is -1 because it is only used in done and delete tasks
@@ -40,44 +41,50 @@ public class AddTask extends Command {
         switch (this.commandType) {
         case "event":
             formatDateTime();
-            newTask = new Event(this.commandDetails,
+            newTask = new Event(this.commandDetail,
                     LocalDate.parse(this.dateTime, DateTimeFormatter.ofPattern("MMM dd yyyy")));
             break;
         case "deadline":
             formatDateTime();
-            newTask = new Deadline(this.commandDetails,
+            newTask = new Deadline(this.commandDetail,
                     LocalDate.parse(this.dateTime, DateTimeFormatter.ofPattern("MMM dd yyyy")));
             break;
         case "todo":
-            newTask = new ToDo(this.commandDetails);
+            newTask = new ToDo(this.commandDetail);
             break;
         default:
             break;
         }
-        taskList.add(newTask);
+        taskList.addTask(newTask);
 
-        this.outputMessage += "\t  " + newTask.toString() + "\n\t Now you have "
-                + taskList.size() + " tasks in the list.";
+        String taskDetail = newTask.toString();
+        int numTasks = taskList.getSize();
+        this.outputMessage += "\t  " + taskDetail + "\n\t Now you have " + numTasks + " tasks in the list.";
     }
 
     private void formatDateTime() throws DukeException {
-        String[] result;
+        String[] result = new String[2];
+        boolean isEventTask = this.commandType.equals("event");
+        boolean isDeadlineTask = this.commandType.equals("deadline");
 
-        if (this.commandType.equals("event")) {
-            result = this.commandDetails.trim().split(" /at ");
-        } else {
-            result = this.commandDetails.trim().split(" /by ");
+        if (isEventTask) { // Guard clause
+            result = this.commandDetail.trim().split(" /at ");
+        }
+
+        if (isDeadlineTask) { // Guard clause
+            result = this.commandDetail.trim().split(" /by ");
         }
 
         this.dateTime = result[1];
-        this.commandDetails = result[0];
+        this.commandDetail = result[0];
+        boolean isInvalidDateTime = !checkDateTime(this.dateTime);
 
-        if (!validDateTime(this.dateTime)) {
+        if (isInvalidDateTime) {
             throw new DukeException(ExceptionType.INVALID_DATETIME, "");
         }
     }
 
-    private boolean validDateTime(String dateTime) {
+    private boolean checkDateTime(String dateTime) {
         try {
             LocalDate.parse(dateTime, DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException ex) {

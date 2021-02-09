@@ -17,7 +17,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String commandType, String commandDetails) {
         super.commandType = commandType;
-        super.commandDetails = commandDetails;
+        super.commandDetail = commandDetails;
         super.dateTime = "";
         super.outputMessage = "";
         // index is -1 because it is only used in done and delete tasks
@@ -28,19 +28,21 @@ public class FindCommand extends Command {
         StringBuilder currText = new StringBuilder("Here are the matching tasks in your list:");
         int index = 0;
 
-        for (int num = 1; num <= taskList.size(); num++) {
-            Task currentTask = taskList.get(num - 1);
+        for (int num = 1; num <= taskList.getSize(); num++) {
+            Task currentTask = taskList.getTask(num - 1);
             String description = currentTask.getDescription();
+            boolean isValidKeyword = findKeyword(description, this.commandDetail);
 
-            if (ignoreCase(description, this.commandDetails)) {
+            if (isValidKeyword) {
                 index++;
-                currText.append("\n\t ").append(index).append(".").append(currentTask.toString());
+                String taskDetail = currentTask.toString();
+                currText.append("\n\t ").append(index).append(".").append(taskDetail);
             }
         }
         this.outputMessage = currText.toString();
     }
 
-    private boolean ignoreCase(String string, String subString) {
+    private boolean findKeyword(String string, String subString) {
         return string.toLowerCase().contains(subString.toLowerCase());
     }
 

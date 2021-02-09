@@ -63,8 +63,10 @@ public class MainWindow extends AnchorPane {
         try {
             String input = userInput.getText();
             String response = duke.getResponse(input);
+
             assert dukeImage != null : "Duke Image not found";
             assert userImage != null : "User Image not found";
+
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog("User:\n" + input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)

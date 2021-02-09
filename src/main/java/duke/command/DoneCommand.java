@@ -20,16 +20,17 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String commandType, int index) {
         super.commandType = commandType;
-        super.commandDetails = String.valueOf(index);
+        super.commandDetail = String.valueOf(index);
         super.dateTime = "";
         super.outputMessage = "";
         super.index = index;
     }
 
     private void markDoneTask(TaskList taskList) {
-        Task doneTask = taskList.get(this.index - 1);
+        Task doneTask = taskList.getTask(this.index - 1);
         doneTask.markAsDone();
-        this.outputMessage = "Nice! I've marked this task as done:\n" + "\t  " + doneTask.toString();
+        String taskDetail = doneTask.toString();
+        this.outputMessage = "Nice! I've marked this task as done:\n" + "\t  " + taskDetail;
     }
 
     /**
@@ -42,10 +43,11 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        if (index <= 0 || index > tasks.size()) {
+        boolean isValidIndex = this.index <= 0 || this.index > tasks.getSize();
+
+        if (isValidIndex) {
             throw new DukeException(ExceptionType.INVALID_INTEGER, "");
         }
-
         markDoneTask(tasks);
         storage.saveData(tasks);
     }

@@ -30,7 +30,7 @@ public class TaskList {
      *
      * @param task Task to be added
      */
-    public void add(Task task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
     }
 
@@ -39,7 +39,7 @@ public class TaskList {
      *
      * @param task Task to be removed
      */
-    public void remove(Task task) {
+    public void removeTask(Task task) {
         this.tasks.remove(task);
     }
 
@@ -48,8 +48,8 @@ public class TaskList {
      *
      * @return TaskList Size
      */
-    public int size() {
-        return tasks.size();
+    public int getSize() {
+        return this.tasks.size();
     }
 
     /**
@@ -58,7 +58,7 @@ public class TaskList {
      * @param index Index of task in the TaskList (starting from 0)
      * @return Task as requested by the Duke Bot
      */
-    public Task get(int index) {
+    public Task getTask(int index) {
         return this.tasks.get(index);
     }
 }
