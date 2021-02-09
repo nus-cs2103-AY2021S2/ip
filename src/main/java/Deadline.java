@@ -32,6 +32,20 @@ public class Deadline extends Task {
         this.hasTime = (by.trim().length() > DATE_FORMAT.length());
     }
 
+    /**
+     * Constructor for the Deadline class.
+     *
+     * @param description Description of the Deadline task.
+     * @param by Due date of the Deadline task.
+     * @param tags String of tags.
+     * @throws DateTimeParseException If an invalid "by" date is provided.
+     */
+    public Deadline(String description, String by, String tags) throws DateTimeParseException {
+        super(description, tags);
+        this.by = LocalDateTime.parse(by.trim(), BY_FORMATTER);
+        this.hasTime = (by.trim().length() > DATE_FORMAT.length());
+    }
+
     @Override
     public String toFileString() {
         return String.format("%s | %s | %s\n", Command.DEADLINE, super.toFileString(), this.by.format(BY_FORMATTER));
@@ -40,6 +54,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = this.hasTime ? DATETIME_FORMATTER : DATE_FORMATTER;
-        return "[D]" + super.toString() + " (by: " + this.by.format(formatter) + ")";
+        return String.format("[D]%s (by: %s)%s",
+                super.toStringWithoutTags(), this.by.format(formatter), super.getTagsString());
     }
 }

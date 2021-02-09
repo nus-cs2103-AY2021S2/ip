@@ -74,6 +74,18 @@ public class Ui {
     }
 
     /**
+     * Returns the reply to having tagged a task.
+     *
+     * @param taskToTag Task that was tagged.
+     * @param tag Tag that was added.
+     * @return Reply to having tagged a task.
+     */
+    public static String tagTaskReply(Task taskToTag, String tag) {
+        return formatLine("Nice! I've tagged this task as #" + tag)
+                + formatLine("  " + taskToTag);
+    }
+
+    /**
      * Returns a string of the list of matching tasks.
      *
      * @param tasks Tasklist of matching tasks.

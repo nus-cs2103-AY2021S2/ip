@@ -1,5 +1,5 @@
-todo | X | asdfasd fa f
-deadline |   | something | 10/10/2021 0000
-event | X | new thingo | park
-todo | X | okokokok
-event | X | ererqe | here
+todo | X | yuck | asdfasd fa f
+deadline |   | help | something | 10/10/2021 0000
+event | X | nope ok | new thingo | park
+todo | X |   | okokokok
+event | X |   | ererqe | here

@@ -7,9 +7,11 @@ public class Command {
     public static final String TODO = "todo";
     public static final String EVENT = "event";
     public static final String DEADLINE = "deadline";
+    public static final String TAG = "tag";
 
     protected String instruction;
     protected String args;
+    protected int index;
 
     /**
      * Constructor for the Bye and List commands.
@@ -41,12 +43,23 @@ public class Command {
         switch (instruction) {
         case DONE:
         case DELETE:
+        case TAG:
+            String[] parts = args.split(" ", 2);
+            try {
+                this.instruction = instruction;
+                this.index = Integer.parseInt(parts[0]) - 1;
+                this.args = parts.length > 1 ? parts[1] : "";
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException();
+            }
+            break;
         case FIND:
         case TODO:
         case EVENT:
         case DEADLINE:
             this.instruction = instruction;
             this.args = args;
+            this.index = -1;
             break;
         default:
             throw new UnknownCommandException();
@@ -69,5 +82,9 @@ public class Command {
      */
     public String getArgs() {
         return this.args;
+    }
+
+    public int getIndex() {
+        return this.index;
     }
 }

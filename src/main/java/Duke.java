@@ -93,7 +93,7 @@ public class Duke {
      */
     public String done(Command command) throws IOException {
         assert command != null : "Command should be defined";
-        int index = getIndex(command.getArgs());
+        int index = command.getIndex();
 
         if (index < 0 || index >= tasks.size()) {
             throw new TaskNotFoundException();
@@ -113,7 +113,7 @@ public class Duke {
      */
     public String delete(Command command) throws IOException {
         assert command != null : "Command should be defined";
-        int index = getIndex(command.getArgs());
+        int index = command.getIndex();
 
         if (index < 0 || index >= tasks.size()) {
             throw new TaskNotFoundException();
@@ -127,8 +127,8 @@ public class Duke {
     /**
      * Finds and returns a list of tasks matching the given keyword
      *
-     * @param command Command containing the keyword to search for
-     * @return Reply to find command
+     * @param command Command containing the keyword to search for.
+     * @return Reply to find command.
      */
     public String find(Command command) {
         assert command != null : "Command should be defined";
@@ -136,6 +136,27 @@ public class Duke {
 
         TaskList matchingTasks = tasks.findMatchingTasks(keyword);
         return Ui.listMatchingTasks(matchingTasks);
+    }
+
+    /**
+     * Adds a tag to a task and returns the reply.
+     *
+     * @param command Command containing the task to tag, and the tag to add.
+     * @return Reply to tag command.
+     * @throws IOException If an error occurs while writing to the file.
+     */
+    public String tagTask(Command command) throws IOException {
+        assert command != null : "Command should be defined";
+        int index = command.getIndex();
+
+        if (index < 0 || index >= tasks.size()) {
+            throw new TaskNotFoundException();
+        }
+
+        Task taskToTag = tasks.getTaskAt(index);
+        taskToTag.addTag(command.getArgs());
+        storage.updateFile(tasks);
+        return Ui.tagTaskReply(taskToTag, command.getArgs());
     }
 
     /**
@@ -165,14 +186,18 @@ public class Duke {
                 return addEvent(command);
             case Command.DEADLINE:
                 return addDeadline(command);
+            case Command.TAG:
+                return tagTask(command);
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | EmptyDescriptionException | InvalidTaskException
+        } catch (UnknownCommandException | EmptyDescriptionException | EmptyTagException | InvalidTaskException
                 | TaskNotFoundException | IOException exception) {
             return Ui.formatLine(exception.getMessage());
         } catch (DateTimeParseException exception) {
             return Ui.formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format");
+        } catch (NumberFormatException exception) {
+            return Ui.formatLine("☹ Please provide a valid index of the task that you would like to access.");
         }
     }
 
