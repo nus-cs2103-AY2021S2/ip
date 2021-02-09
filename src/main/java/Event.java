@@ -6,6 +6,13 @@ public class Event extends Task {
 
     protected LocalDateTime at;
 
+
+    /**
+     * Constructs event object.
+     *
+     * @param description Description of the event.
+     * @param at Date and time of the event.
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;

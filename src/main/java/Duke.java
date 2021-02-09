@@ -1,61 +1,46 @@
 import java.util.List;
-import java.util.Scanner;
-
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 
 public class Duke {
 
     /** List of tasks added by the user */
     private static final List<Task> tasks = Storage.getData();
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Liz.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Zee.jpg"));
-
     /**
      * Performs the specified action.
      *
      * @param command Command input by the user.
+     * @return Reply to the user's command.
      * @throws InvalidCommandException If the command cannot be recognised.
      */
     public static String runCommand(String command) throws InvalidCommandException {
         String reply;
+        String parsedCommand = Parser.parseCommand(command);
         if (command.equals("list")) {
             reply = TaskList.printList(tasks);
-        } else if (Parser.parseCommand(command).equals("done")) {
+        } else if (parsedCommand.equals("done")) {
             int index = Parser.parseDoneIndex(command);
             reply = TaskList.markDone(index, tasks);
-        } else if (Parser.parseCommand(command).equals("todo")) {
+        } else if (parsedCommand.equals("todo")) {
             try {
                 reply = TaskList.addTodo(command, tasks);
             } catch (InvalidTodoException e) {
                 reply = Ui.printEmptyTodoMessage();
             }
-        } else if (Parser.parseCommand(command).equals("deadline")) {
+        } else if (parsedCommand.equals("deadline")) {
             try {
                 reply = TaskList.addDeadline(command, tasks);
             } catch (InvalidDateTimeFormatException e) {
                 reply = Ui.printInvalidDateFormatMessage();
             }
-        } else if (Parser.parseCommand(command).equals("event")) {
+        } else if (parsedCommand.equals("event")) {
             try {
                 reply = TaskList.addEvent(command, tasks);
             } catch (InvalidDateTimeFormatException e) {
                 reply = Ui.printInvalidDateFormatMessage();
             }
-        } else if (Parser.parseCommand(command).equals("delete")) {
+        } else if (parsedCommand.equals("delete")) {
             reply = TaskList.deleteTask(command, tasks);
-        } else if (Parser.parseCommand(command).equals("find")) {
+        } else if (parsedCommand.equals("find")) {
             reply = TaskList.findTask(command, tasks);
         } else if (command.equals("bye")) {
             reply = Ui.printExitMessage();
@@ -64,23 +49,6 @@ public class Duke {
             throw new InvalidCommandException();
         }
         return reply;
-    }
-
-
-    public static void main(String[] args) {
-        Ui.printWelcomeMessage();
-        Scanner scanner = new Scanner(System.in);
-        String command = scanner.nextLine();
-        while (!command.equals("bye")) {
-            try {
-                runCommand(command);
-            } catch (InvalidCommandException e) {
-                Ui.printInvalidCommandMessage();
-            }
-            command = scanner.nextLine();
-        }
-        scanner.close();
-        Ui.printExitMessage();
     }
 
     public String getResponse(String input) {
@@ -92,6 +60,5 @@ public class Duke {
         }
         return reply;
     }
-
 
 }
