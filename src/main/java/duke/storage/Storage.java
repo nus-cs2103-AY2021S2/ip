@@ -25,12 +25,10 @@ public class Storage {
     /**
      * Constructor, creates a file of the searched file if it doesn't exist.
      * Afterwards, create a {@code FileWriter} which is used to write to the file.
-     * @param relativePath relative path of file to be searched for.
+     * @param absolutePath absolute path of file to be searched for.
      */
-    public Storage (String relativePath) {
-        this.relativePath = Paths.get(relativePath);
-        absolutePath = this.relativePath.toAbsolutePath();
-        taskText = new File(absolutePath.toString());
+    public Storage (String absolutePath) {
+        taskText = new File(absolutePath);
 
         try {
             if (!taskText.exists()) {
