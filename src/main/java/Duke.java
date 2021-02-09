@@ -84,6 +84,10 @@ public class Duke {
             return taskList.undo(description);
         case "sort":
             return taskList.sort();
+        case "statistics":
+            return taskList.statistics();
+        case "help":
+            return Ui.showHelpMessage();
         }
         return "";
     }

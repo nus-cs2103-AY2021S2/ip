@@ -37,6 +37,11 @@ public class Parser {
                     throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
                 }
                 return "";
+            case "help":
+                if (this.description.length() != "list".length()) {
+                    throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
+                }
+                return "";
             case "sort":
                 if (this.description.length() != "sort".length()) {
                     throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
@@ -44,6 +49,8 @@ public class Parser {
                 return "";
             case "undo":
                 return this.description.length() > 4 ? this.description.substring(5) : "";
+            case "statistics":
+                return this.description.length() > 10 ? this.description.substring(11) : "";
             case "done":
                 return this.description.substring(5);
             case "delete":
@@ -78,6 +85,8 @@ public class Parser {
             switch (command){
             case "list":
                 return "";
+            case "help":
+                return "";
             case "sort":
                 return "";
             case "done":
@@ -89,6 +98,8 @@ public class Parser {
             case "find":
                 return "";
             case "undo":
+                return "";
+            case "statistics":
                 return "";
             case "deadline":
                 String[] phrasesFromDeadline = this.description.split(" /by ");

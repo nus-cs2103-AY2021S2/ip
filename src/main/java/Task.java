@@ -32,6 +32,10 @@ public class Task {
         return new Task(this.task, true);
     }
 
+    public boolean hasDone() {
+        return this.isDone;
+    }
+
     /**
      * Return a String representation for saving in txt files
      * @return String representation in txt files

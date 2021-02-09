@@ -147,6 +147,15 @@ public class TaskList {
         return "TaskList successfully sorted alphabetically";
     }
 
+    public String statistics() throws DukeException {
+        if (this.tasks.isEmpty()) {
+            throw new DukeException("Sorry, the TaskList is empty");
+        }
+        int doneTasks = this.tasks.stream().filter(task -> task.hasDone()).
+                collect(Collectors.toList()).size();
+        return "Task done: " + doneTasks * 100 / this.tasks.size() + "% from " + this.tasks.size();
+    }
+
     /**
      * Get List of Task
      * @return List of Task
