@@ -1,6 +1,9 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Parser {
 
@@ -50,26 +53,21 @@ public class Parser {
         } else if (line.startsWith("find ")) {
             // Find string in the list of tasks
             String findStr = line.substring(5);
-            int index = 0;
-            boolean isFound = false;
-            for (AbstractTask task : tasks) {
-                if (task.toString().contains(findStr)) {
-                    isFound = true;
-                    break;
-                }
-            }
+            boolean isFound = tasks.stream()
+                                   .map(AbstractTask::toString)
+                                   .anyMatch(x -> x.contains(findStr));
             if (!isFound) {
                 return "No tasks with the keyword found!";
-            } else {
-                String response = "I've found the following task(s) with the specified keyword:\n";
-                for (AbstractTask task : tasks) {
-                    if (task.toString().contains(findStr)) {
-                        index++;
-                        response += String.format("%d. %s\n", index, task.toString());
-                    }
-                }
-                return response;
             }
+            String response = "I've found the following task(s) with the specified keyword:\n";
+            ArrayList<String> foundTasks = tasks.stream()
+                                                .map(AbstractTask::toString)
+                                                .filter(x -> x.contains(findStr))
+                                                .collect(Collectors.toCollection(ArrayList::new));
+            response += IntStream.range(0, foundTasks.size())
+                                 .mapToObj(x -> String.format("%d. %s\n", x + 1, foundTasks.get(x)))
+                                 .collect(Collectors.joining());
+            return response;
         } else {
             // No command, add the line task based on the prefix inside.
             try {
