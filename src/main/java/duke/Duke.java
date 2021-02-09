@@ -28,6 +28,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         String response = parser.processLine(input, tasks);
+        assert(response != null);
         storage.saveTasks(tasks);
         return response;
     }

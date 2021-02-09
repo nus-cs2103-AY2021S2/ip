@@ -51,6 +51,7 @@ public class Parser {
     public String commandList(String line, TaskList tasks) {
         String response = "";
         for (int i = 0; i < tasks.size(); i++) {
+            assert(tasks.get(i) != null);
             response += String.format("%d. %s\n", i + 1, tasks.get(i));
         }
         return response;
