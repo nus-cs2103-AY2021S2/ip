@@ -13,5 +13,5 @@ public abstract class Command {
         this.description = description;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

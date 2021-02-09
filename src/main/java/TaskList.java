@@ -8,19 +8,19 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public Task addTodoTask(Todo task){
+    public Task addTodoTask(Todo task) {
         taskList.add(task);
         taskListSize = taskList.size();
         return task;
     }
 
-    public Task addDeadlineTask(Deadline task){
+    public Task addDeadlineTask(Deadline task) {
         taskList.add(task);
         taskListSize = taskList.size();
         return task;
     }
 
-    public Task addEventTask(Event task){
+    public Task addEventTask(Event task) {
         taskList.add(task);
         taskListSize = taskList.size();
         return task;

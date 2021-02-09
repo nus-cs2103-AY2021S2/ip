@@ -9,15 +9,14 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             Deadline deadline = new Deadline(description, by);
             taskList.addDeadlineTask(deadline);
             storage.writeToFile(taskList.getList());
             ui.showTaskAdded(deadline);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date entered!");
+            throw new DukeException("Invalid date entered! Please type in valid yyyy-mm-dd format!");
         }
-
     }
 }
