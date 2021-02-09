@@ -8,7 +8,7 @@ import com.weiliang.DukeException;
 
 public class TaskList implements Iterable<Task> {
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     public TaskList() {
         this(new ArrayList<>());
@@ -38,10 +38,12 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
-    public void add(Task task) throws DukeException {
-        if (!tasks.add(task)) {
-            throw new DukeException("Failed to add task!");
-        }
+    public void add(Task task) {
+        tasks.add(task);
+    }
+
+    public boolean contains(Task task) {
+        return tasks.contains(task);
     }
 
     @Override

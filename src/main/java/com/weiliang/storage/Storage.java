@@ -21,7 +21,7 @@ public class Storage {
     /**
      * The filename to store to
      */
-    private String filename;
+    private final String filename;
 
     /**
      * Initializes a new storage
@@ -81,11 +81,12 @@ public class Storage {
 
     /**
      * Inner method for parsing information
-     * 
+     *
      * @param content raw string content
      * @return the parsed task
+     * @throws DukeException if file fails to load
      */
-    private Task parseTask(String content) {
+    private Task parseTask(String content) throws DukeException {
         // Format -> D | 1 | details | timing
         String[] parts = content.split(" \\| ");
         Task task;
@@ -99,7 +100,7 @@ public class Storage {
         }
 
         if (parts[1].equals("1")) {
-            task.complete();
+            task.markComplete();
         }
         return task;
     }
