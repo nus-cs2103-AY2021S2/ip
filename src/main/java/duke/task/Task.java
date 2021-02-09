@@ -13,7 +13,7 @@ public abstract class Task {
     }
 
     /**
-     * Serialise this task into a format that can be saved.
+     * Serialises this task into a format that can be saved.
      *
      * Implementation dependent.
      * @return a serialised version of the task, implementation dependent.
@@ -25,6 +25,24 @@ public abstract class Task {
      */
     public void markDone() {
         isDone = true;
+    }
+
+    /**
+     * Returns the description of the task.
+     *
+     * @return the description of the task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Returns the done status of the task.
+     *
+     * @return the done status of the task.
+     */
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**

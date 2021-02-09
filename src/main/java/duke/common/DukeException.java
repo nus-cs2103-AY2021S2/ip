@@ -46,6 +46,12 @@ public class DukeException {
         }
     }
 
+    public static class InvalidDateForTask extends UnsupportedOperationException {
+        public InvalidDateForTask(String task) {
+            super(String.format(DukeString.EXCEPTION_INVALID_DATE_FOR_TASK, task));
+        }
+    }
+
     public static class StorageReadError extends IllegalArgumentException {
         public StorageReadError() {
             super(DukeString.EXCEPTION_STORAGE_READ_ERROR);

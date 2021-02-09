@@ -25,7 +25,15 @@ public class EventTask extends Task {
         this.endDate = end;
     }
 
-    private EventTask(boolean done, String desc, final LocalDateTime start, final LocalDateTime end) {
+    /**
+     * Constructs a new event task with the given status, description and dates.
+     *
+     * @param done the done status of the task.
+     * @param desc the description of the task.
+     * @param start the start date of the event.
+     * @param end the end date of the event.
+     */
+    EventTask(boolean done, String desc, final LocalDateTime start, final LocalDateTime end) {
         super(desc);
         super.isDone = done;
         this.startDate = start;

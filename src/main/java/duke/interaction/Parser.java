@@ -13,6 +13,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SnoozeCommand;
 import duke.command.TodoCommand;
 import duke.common.DukeException;
 import duke.common.DukeString;
@@ -49,6 +50,7 @@ public class Parser {
      * @return the appropriate command with content and dates, if any.
      * @throws DukeException.InvalidCommand if there is no command found.
      * @throws DukeException.InvalidTask if the task specified for done or delete is invalid.
+     * @throws DukeException.InvalidDateFormat if the date format for an event or deadline is invalid.
      * @throws DukeException.EmptyDescription if the description for a task is empty.
      * @throws DukeException.EmptyDeadlineDate if the command is deadline and no date is specified.
      * @throws DukeException.EmptyEventDate if the command is event and both dates are not specified.
@@ -64,6 +66,7 @@ public class Parser {
             DukeException.InvalidEventEnd {
         Scanner scanner = new Scanner(input);
         String[] tokens;
+        String[] dates;
         LocalDateTime startDate;
         LocalDateTime endDate;
 
@@ -116,7 +119,7 @@ public class Parser {
                 throw new DukeException.EmptyEventDate();
             }
 
-            String[] dates = tokens[1].split(DukeString.COMMAND_EVENT_TO);
+            dates = tokens[1].split(DukeString.COMMAND_EVENT_TO);
 
             if (dates.length < 2 || dates[0].isBlank() || dates[1].isBlank()) {
                 throw new DukeException.EmptyEventDate();
@@ -143,6 +146,44 @@ public class Parser {
                 throw new DukeException.EmptyDescription(DukeString.COMMAND_FIND);
             }
             return new FindCommand(scanner.next());
+        case DukeString.COMMAND_SNOOZE:
+            if (!scanner.hasNext()) {
+                throw new DukeException.InvalidTask();
+            }
+
+            tokens = scanner.nextLine().split(DukeString.COMMAND_SNOOZE_REGEX);
+
+            if (tokens.length < 2 || tokens[1].isBlank()) {
+                throw new DukeException.EmptyDeadlineDate();
+            }
+            //Check if first token is a valid digit
+            if (!tokens[0].trim().matches("\\d+")) {
+                throw new DukeException.InvalidTask();
+            }
+
+            dates = tokens[1].split(DukeString.COMMAND_EVENT_TO);
+
+            try {
+                startDate = LocalDateTime.parse(dates[0].trim(), formatter);
+            } catch (DateTimeParseException e) {
+                throw new DukeException.InvalidDateFormat();
+            }
+
+            if (dates.length < 2 || !tokens[1].contains("/to")) {
+                return new SnoozeCommand(Integer.parseInt(tokens[0].trim()), startDate);
+            }
+
+            try {
+                endDate = LocalDateTime.parse(dates[1].trim(), formatter);
+            } catch (DateTimeParseException e) {
+                throw new DukeException.InvalidDateFormat();
+            }
+
+            if (startDate.compareTo(endDate) >= 0) {
+                throw new DukeException.InvalidEventEnd();
+            }
+
+            return new SnoozeCommand(Integer.parseInt(tokens[0].trim()), startDate, endDate);
         default:
             throw new DukeException.InvalidCommand();
 

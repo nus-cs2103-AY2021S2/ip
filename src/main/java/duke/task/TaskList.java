@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -140,6 +141,44 @@ public class TaskList {
         }
 
         return out.toString();
+    }
+
+    /**
+     * Replaces the DeadlineTask at the given index, if any, with a new DeadlineTask with an amended date.
+     *
+     * @param idx the index to replace the DeadlineTask at, if any.
+     * @param date the new date to amend the task to.
+     * @return the String format of the amended task.
+     * @throws DukeException.InvalidDateForTask if the task at the given index is not a DeadlineTask.
+     */
+    public String snoozeDeadlineTask(int idx, LocalDateTime date) throws DukeException.InvalidDateForTask {
+        if (!(tasks.get(idx - 1) instanceof DeadlineTask)) {
+            throw new DukeException.InvalidDateForTask(tasks.get(idx - 1).toString());
+        }
+        DeadlineTask currentTask = (DeadlineTask) tasks.get(idx - 1);
+        Task newTask = new DeadlineTask(currentTask.getIsDone(), currentTask.getDescription(), date);
+        tasks.set(idx - 1, newTask);
+        return newTask.toString();
+    }
+
+    /**
+     * Replaces the EventTask at the given index, if any, with a new EventTask with amended dates.
+     *
+     * @param idx the index to replace the EventTask at, if any.
+     * @param startDate the new start date to amend the task to.
+     * @param endDate the new end date to amend the task to.
+     * @return the String format of the amended task.
+     * @throws DukeException.InvalidDateForTask if the task at the given index is not a EventTask.
+     */
+    public String snoozeEventTask(int idx, LocalDateTime startDate, LocalDateTime endDate)
+            throws DukeException.InvalidDateForTask {
+        if (!(tasks.get(idx - 1) instanceof EventTask)) {
+            throw new DukeException.InvalidDateForTask(tasks.get(idx - 1).toString());
+        }
+        EventTask currentTask = (EventTask) tasks.get(idx - 1);
+        Task newTask = new EventTask(currentTask.getIsDone(), currentTask.getDescription(), startDate, endDate);
+        tasks.set(idx - 1, newTask);
+        return newTask.toString();
     }
 
     @Override

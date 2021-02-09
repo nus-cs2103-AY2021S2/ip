@@ -71,7 +71,8 @@ public class DukeBot {
                 | DukeException.EmptyDescription
                 | DukeException.EmptyDeadlineDate
                 | DukeException.EmptyEventDate
-                | DukeException.InvalidEventEnd e) {
+                | DukeException.InvalidEventEnd
+                | DukeException.InvalidDateForTask e) {
             return e.getMessage();
         }
     }
