@@ -50,9 +50,13 @@ public class TaskList {
             throw new InvalidTodoException();
         } else {
             String taskContent = todo.substring(4);
-            Todo myTask = new Todo(taskContent);
-            taskList.add(myTask);
-            return ui.addTaskConfirmMessage(myTask.toString()) + remark();
+            if (taskContent.matches(".*\\w.*")) {
+                Todo myTask = new Todo(taskContent);
+                taskList.add(myTask);
+                return ui.addTaskConfirmMessage(myTask.toString()) + remark();
+            } else {
+                throw new InvalidTodoException();
+            }
         }
     }
 
