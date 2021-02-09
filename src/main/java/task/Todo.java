@@ -15,6 +15,7 @@ public class Todo extends Task {
      */
     public Todo(String input) throws DukeException {
         this.type = "T";
+        assert input.length() > 0 : "string length is negative";
         if (input.length() != 0) {
             this.description = input;
         } else {
@@ -34,6 +35,7 @@ public class Todo extends Task {
     public Todo(String status, String input) throws DukeException {
         this.type = "T";
         this.isDone = status.equals("complete");
+        assert input.length() > 0 : "string length is negative";
         if (input.length() != 0) {
             this.description = input;
         } else {
