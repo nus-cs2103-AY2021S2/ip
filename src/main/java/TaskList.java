@@ -50,12 +50,14 @@ public class TaskList {
             throw new InvalidTodoException();
         } else {
             String taskContent = todo.substring(4);
-            if (taskContent.matches(".*\\w.*")) {
+            if (!taskContent.matches(".*\\w.*")) {
+                throw new InvalidTodoException();
+            } else {
+                assert taskContent.length() > 0 : "todo description is empty";
                 Todo myTask = new Todo(taskContent);
+                assert myTask.isDone == false : "newly added todo status should be \u2718";
                 taskList.add(myTask);
                 return ui.addTaskConfirmMessage(myTask.toString()) + remark();
-            } else {
-                throw new InvalidTodoException();
             }
         }
     }
@@ -90,6 +92,7 @@ public class TaskList {
                     try {
                         LocalDate t = LocalDate.parse(taskTime);
                         Deadline myTask = new Deadline(taskContent, t);
+                        assert myTask.isDone == false : "newly added deadline status should be \u2718";
                         taskList.add(myTask);
                         return ui.addTaskConfirmMessage(myTask.toString()) + remark();
                     } catch (DateTimeParseException e) {
@@ -124,6 +127,7 @@ public class TaskList {
                         String taskTime = taskSegments[taskSegments.length - 1];
                         LocalDateTime t = LocalDateTime.parse(taskTime);
                         Event myTask = new Event(taskContent, t);
+                        assert myTask.isDone == false : "newly added deadline status should be \u2718";
                         taskList.add(myTask);
                         return ui.addTaskConfirmMessage(myTask.toString()) + remark();
 
@@ -141,8 +145,11 @@ public class TaskList {
      * @param index of task in taskList to be deleted.
      */
     public String delete(Integer index) {
+        int beforeSize = taskList.size();
         String deletedTask = taskList.get(index - 1).toString();
         taskList.remove(index - 1);
+        int afterSize = taskList.size();
+        assert (beforeSize - afterSize) == 1 : "task is not deleted";
         return ui.deleteTaskConfirmMessage(deletedTask);
     }
 
