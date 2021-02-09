@@ -12,6 +12,10 @@ public class Command {
     private int listNumber;
 
     public Command(CommandType type, String desc, LocalDateTime time, int listNumber) {
+        assert type != null : "Command type cannot be null.";
+        assert desc != null : "Description cannot be null.";
+        assert time != null : "Date and time cannot be null.";
+
         this.type = type;
         this.desc = desc;
         this.time = time;

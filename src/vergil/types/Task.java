@@ -5,6 +5,7 @@ public abstract class Task {
     private boolean isDone;
 
     public Task(String description) {
+        assert description != null : "Description cannot be null.";
         this.description = description;
         this.isDone = false;
     }
@@ -14,6 +15,7 @@ public abstract class Task {
      * @param description a description of the task.
      */
     public Task(String description, boolean isDone) {
+        assert description != null : "Description cannot be null.";
         this.description = description;
         this.isDone = isDone;
     }

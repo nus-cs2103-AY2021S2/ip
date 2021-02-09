@@ -32,8 +32,8 @@ public class Vergil extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("resources/images/user.png"));
-    private Image vergil = new Image(this.getClass().getResourceAsStream("resources/images/vergil.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("images/user.png"));
+    private Image vergil = new Image(this.getClass().getResourceAsStream("images/vergil.png"));
 
     private Ui ui;
     private Storage storage;
@@ -137,7 +137,7 @@ public class Vergil extends Application {
 
         scene = new Scene(mainLayout);
 
-        stage.setTitle("Duke");
+        stage.setTitle("Vergil");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -200,10 +200,10 @@ public class Vergil extends Application {
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label vergilText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 getUserDialog(userText, new ImageView(user)),
-                getVergilDialog(dukeText, new ImageView(vergil))
+                getVergilDialog(vergilText, new ImageView(vergil))
         );
         userInput.clear();
     }
