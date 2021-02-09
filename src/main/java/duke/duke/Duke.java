@@ -55,7 +55,7 @@ public class Duke {
         default:
             System.out.println("No task added");
         }
-
+        assert task != null;
         list.addItem(task);
         return Ui.showAddTaskMessage(task, list.getLst());
     }
@@ -77,6 +77,7 @@ public class Duke {
      */
     public String markAsDone(String id) {
         int n = Integer.parseInt(id) - 1;
+        assert n < getList().size();
         list.doneTask(n);
         return Ui.showDoneTaskMessage(list.getLst(), n);
 

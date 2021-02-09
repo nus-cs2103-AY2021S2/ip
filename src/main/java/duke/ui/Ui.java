@@ -24,8 +24,12 @@ public class Ui {
      */
     public static String showTasksToUser(List<Task> list) {
         StringBuilder tasks = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            tasks.append(String.format("%d.%s%n", i + 1, list.get(i)));
+        if(list.isEmpty()) {
+            tasks.append("You have no tasks currently!\n");
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                tasks.append(String.format("%d.%s%n", i + 1, list.get(i)));
+            }
         }
         return tasks.toString();
     }
