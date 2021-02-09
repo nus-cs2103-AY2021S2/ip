@@ -1,9 +1,8 @@
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    private LocalDateTime at;
+//    private LocalDateTime at;
     private String type = "E";
 
     public Event(String description, String at) {
@@ -11,20 +10,20 @@ public class Event extends Task {
     }
 
     public Event(String description, String at, boolean isDone) {
-        super(description, isDone);
-        setTime(at);
+        super(description, at, isDone);
+//        setTime(at);
     }
-
-    private void setTime(String time) {
-        // convert time from String to LocalDateTime in specified format
-        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
-        this.at = dateTime;
-    }
+//
+//    private void setTime(String time) {
+//        // convert time from String to LocalDateTime in specified format
+//        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
+//        LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
+//        this.at = dateTime;
+//    }
 
     @Override
     public String toString() {
-        String time = this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
+        String time = this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
         return type + separator + super.toString() + separator + time;
     }
 }

@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -165,6 +166,23 @@ public class TaskList {
         }
         int totalTask = matchingTasks.size();
         return new TaskList(matchingTasks, totalTask);
+    }
+
+    public ArrayList<Task> getScheduleByDate(LocalDate time) throws DukeException {
+        try {
+            ArrayList<Task> tasksOnDate = new ArrayList<>();
+            for (Task task : this.taskList) {
+                if (task instanceof ToDo) {
+                    continue;
+                }
+                if (task.isSameDay(time)) {
+                    tasksOnDate.add(task);
+                }
+            }
+            return tasksOnDate;
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 }
 

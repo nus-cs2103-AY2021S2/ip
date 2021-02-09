@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class Parser {
         operators.add("done");
         operators.add("delete");
         operators.add("find");
+        operators.add("schedule");
         return operators ;
     }
 
@@ -71,6 +74,9 @@ public class Parser {
             String keyword = parseFindTask(taskDetail);
             command = new FindCommand(keyword);
             break;
+        case "schedule":
+            String targetDate = parseSchedule(taskDetail);
+            command = new ScheduleCommand(targetDate);
         }
         return command;
     }
@@ -177,7 +183,7 @@ public class Parser {
             // split details to description and time
             String[] details = taskDetail[1].split(" /by ", 2);
             if (details.length == 1 || !isValidTime(details[1])) {
-                throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-MM-dd HH:mm");
+                throw new DukeException("OOPS!! Please follow the correct date/time format: yyyy-MM-dd HH:mm");
             }
             String description = details[0];
             String by = details[1];
@@ -201,7 +207,7 @@ public class Parser {
             // split details to description and time
             String[] details = taskDetail[1].split(" /at ", 2);
             if (details.length == 1 || !isValidTime(details[1])) {
-                throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-MM-dd HH:mm");
+                throw new DukeException("OOPS!! Please follow the correct date/time format: yyyy-MM-dd HH:mm");
             }
             String description = details[0];
             String at = details[1];
@@ -227,6 +233,14 @@ public class Parser {
         }
     }
 
+    private String parseSchedule(String[] taskDetail) throws DukeException {
+        if (taskDetail.length == 1 || !isValidDate(taskDetail[1])) {
+            throw new DukeException("OOPS!! Please follow the correct date format: yyyy-MM-dd");
+        }
+        String time = taskDetail[1];
+        return time;
+    }
+
     /**
      * Return if the time entered by user is valid.
      *
@@ -239,6 +253,20 @@ public class Parser {
             // convert time from String to LocalDateTime
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm", Locale.ENGLISH);
             inputFormat.parse(time);
+        } catch (DateTimeParseException e){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidDate(String time) throws DateTimeParseException {
+        try {
+            // convert time from String to LocalDateTime
+//            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d");
+//            inputFormat.parse(time);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+            LocalDate dt = LocalDate.parse(time, formatter);
         } catch (DateTimeParseException e){
             return false;
         }
