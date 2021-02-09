@@ -1,6 +1,9 @@
 package duke;
 
 import duke.command.Command;
+import duke.task.Task;
+
+import java.util.ArrayList;
 
 /**
  * Represents the main logic used by the Duke chat bot.
@@ -38,6 +41,10 @@ public class Duke {
 
     public String welcomeUser() {
         return ui.showGreetings();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks.getList();
     }
 
     public String getResponse(String input) {

@@ -61,6 +61,20 @@ public class TaskList {
         return sb.toString();
     }
 
+    public Integer countTasks() {
+        return this.collection.size();
+    }
+
+    public Integer countCompletedTasks() {
+        int count = 0;
+        for (Task task : this.collection) {
+            if (task.getStatusIcon().equals("*")) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
     /**
      * Filters the task list to find tasks
      * that matches a certain keyword.
