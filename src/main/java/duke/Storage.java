@@ -102,7 +102,7 @@ public class Storage {
                 line += t.getName();
                 
                 if (t.getType() == 'D' | t.getType() == 'E') {
-                    line += "|" + t.getDate();
+                    line += "|" + t.getDateString();
                 }
                 
                 line += "\n";

@@ -194,7 +194,7 @@ public class Parser {
                     }
 
                     if (task.getType() == 'D' || task.getType() == 'E') {
-                        if (task.getDate().contains(searchTerm)) {
+                        if (task.getDateString().contains(searchTerm)) {
                             searchList.add(task);
                             continue;
                         }

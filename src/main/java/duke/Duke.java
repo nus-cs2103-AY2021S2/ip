@@ -13,6 +13,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+
 public class Duke extends Application{
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -23,7 +25,7 @@ public class Duke extends Application{
     /**
      * Prints the greeting for the chatbot.
      */
-    public void greeting() {
+    public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,6 +33,76 @@ public class Duke extends Application{
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         dialogContainer.getChildren().add(getDialogLabel("Hello from\n" + logo));
+    }
+
+    /**
+     *
+     */
+    public void remind(TaskList taskList){
+
+        HashMap<Task, Integer> taskMap = taskList.getDueTasks();
+        int upcoming = 0;
+        int overdue = 0;
+        int today = 0;
+
+        for (Task task : taskMap.keySet()) {
+            int due = taskMap.get(task);
+
+            if (due > 0) {
+                upcoming += 1;
+            } else if (due < 0) {
+                overdue += 1;
+            } else {
+                today += 1;
+            }
+        }
+
+        String updateString = "";
+
+        if (today != 0) {
+            String reminder = "You have " + today + " task(s) today:\n";
+
+            for (Task task : taskMap.keySet()) {
+                int due = taskMap.get(task);
+
+                if (due == 0) {
+                    reminder += task.toString() + "\n";
+                }
+            }
+
+            updateString += reminder + "\n";
+        }
+
+        if (upcoming != 0) {
+            String reminder = "You have " + upcoming + " upcoming task(s):\n";
+
+            for (Task task : taskMap.keySet()) {
+                int due = taskMap.get(task);
+
+                if (due > 0) {
+                    reminder += task.toString() + "\n";
+                }
+            }
+
+            updateString += reminder + "\n";
+        }
+
+        if (upcoming != 0) {
+            String reminder = "You have " + overdue + " overdue task(s):\nConsider removing these tasks\n";
+
+            for (Task task : taskMap.keySet()) {
+                int due = taskMap.get(task);
+
+                if (due < 0) {
+                    reminder += task.toString() + "\n";
+                }
+            }
+
+            updateString += reminder + "\n";
+        }
+
+        dialogContainer.getChildren().add(getDialogLabel(updateString));
+
     }
 
     /**
@@ -87,7 +159,8 @@ public class Duke extends Application{
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        greeting();
+        greet();
+        remind(taskList);
 
         // Functionality
         sendButton.setOnMouseClicked((event) -> {

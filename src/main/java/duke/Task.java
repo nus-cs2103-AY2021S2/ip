@@ -53,11 +53,19 @@ public class Task {
     }
     
     /**
-    * Getter for the Date of the Task object. Returns null when object is of todo type.
+    * Getter for the Date of the Task object, as a String. Returns null when object is of todo type.
     * @return Date of task.
     */
-    public String getDate() {
+    public String getDateString() {
         return dateTime.toString();
+    }
+
+    /**
+     * Getter for the Date of the Task object. Returns null when object is of todo type.
+     * @return Date of task.
+     */
+    public LocalDate getDate() {
+        return dateTime;
     }
     
     /**

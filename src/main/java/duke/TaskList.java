@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -80,7 +82,57 @@ public class TaskList {
     public Task getTask(int i) {
         return taskList.get(i);
     }
-    
+
+    /**
+     * Returns a HashMap containing the task and how close today is to the due date
+     * @return HashMap object with Task and the number of days
+     */
+    public HashMap<Task, Integer> getDueTasks() {
+        HashMap<Task, Integer> taskMap = new HashMap<>();
+
+        LocalDate today = LocalDate.now();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+
+            if (today.compareTo(task.getDate()) == 0) {
+                taskMap.put(task, new Integer(0));
+                continue;
+            }
+
+            if (today.plusDays(1).compareTo(task.getDate()) == 0) {
+                taskMap.put(task, new Integer(1));
+                continue;
+            }
+
+            if (today.plusDays(2).compareTo(task.getDate()) == 0) {
+                taskMap.put(task, new Integer(2));
+                continue;
+            }
+
+            if (today.plusDays(3).compareTo(task.getDate()) == 0) {
+                taskMap.put(task, new Integer(3));
+                continue;
+            }
+
+            if (today.minusDays(1).compareTo(task.getDate()) == 0) {
+                taskMap.put(task, new Integer(-1));
+                continue;
+            }
+
+            if (today.minusDays(2).compareTo(task.getDate()) == 0) {
+                taskMap.put(task, new Integer(-1));
+                continue;
+            }
+
+            if (today.minusDays(3).compareTo(task.getDate()) == 0) {
+                taskMap.put(task, new Integer(-1));
+                continue;
+            }
+        }
+
+        return taskMap;
+    }
+
     /**
     * This method checks whether the two TaskList objects are the same.
     * @param tl TaskList object to be compared
