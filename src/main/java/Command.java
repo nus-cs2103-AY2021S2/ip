@@ -10,6 +10,7 @@ public abstract class Command {
     String command, task, date;
 
     public Command(String command, String task, String date) {
+        assert (command != null);
         this.command = command;
         this.task = task;
         this.date = date;

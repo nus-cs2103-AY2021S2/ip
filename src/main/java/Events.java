@@ -14,7 +14,12 @@ public class Events extends Task {
         this.duration = LocalDate.parse(duration);
     }
     @Override
+<<<<<<< HEAD
+    LocalDate getTime(){
+        assert (this.duration != null);
+=======
     LocalDate getTime() {
+>>>>>>> master
         return this.duration;
     }
 
