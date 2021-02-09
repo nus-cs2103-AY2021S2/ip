@@ -102,7 +102,7 @@ public class Storage {
                 boolean isValidTask = taskType.equals("T") || taskType.equals("E") || taskType.equals("D");
                 if (isValidTask) {
                     boolean isTaskCompleted = taskDetail[1].equals("1");
-           
+
                     if (isTaskCompleted) {
                         newTask.markAsDone();
                     }
