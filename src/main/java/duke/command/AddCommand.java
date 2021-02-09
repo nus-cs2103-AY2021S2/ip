@@ -46,7 +46,7 @@ public class AddCommand implements Command {
         boolean isInsert = false;
         if (tasks.size() >= 100) {
             return "\tSorry. The database is full!";
-        } 
+        }
 
         switch (type) {
         case TODO:
@@ -88,8 +88,10 @@ public class AddCommand implements Command {
 
         if (isInsert) {
             String headerText = "\tGot it. I've added this task: \n";
-            String addedTaskText = String.format("\tTask added: %s\n", tasks.getTaskDescription(tasks.size() - 1));
-            String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", tasks.size(), tasks.size() == 1 ? "" : "s");
+            String addedTaskText = String.format(
+                    "\tTask added: %s\n", tasks.getTaskDescription(tasks.size() - 1));
+            String currentTasksText = String.format(
+                    "\tNow you have %d task%s in the list.\n", tasks.size(), tasks.size() == 1 ? "" : "s");
             return headerText + addedTaskText + currentTasksText;
         }
 

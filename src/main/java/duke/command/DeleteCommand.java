@@ -23,7 +23,8 @@ public class DeleteCommand implements Command {
             final Task removed = tasks.delete(index);
             String headerText = "\tNoted. I've removed this task: \n";
             String taskRemovedText = String.format("\t%s\n", removed);
-            String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", tasks.size(), tasks.size() == 1 ? "" : "s");
+            String currentTasksText = String.format(
+                    "\tNow you have %d task%s in the list.\n", tasks.size(), tasks.size() == 1 ? "" : "s");
             return headerText + taskRemovedText + currentTasksText;
         } else {
             return "\tOops! The index is out of bound.\n";
