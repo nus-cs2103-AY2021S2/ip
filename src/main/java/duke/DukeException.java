@@ -9,7 +9,6 @@ public class DukeException extends Exception {
      * @param message The message to return in toString method.
      */
     public DukeException(String message) {
-        super(message);
         this.message = message;
     }
 
