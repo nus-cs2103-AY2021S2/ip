@@ -63,13 +63,9 @@ public class Duke extends Application {
 
 
     public static void main(String[] args) {
-
         String path = "duke.txt";
         Duke duke = new Duke(path);
-
-        duke.ui.greet(duke.storage);
         duke.storage.taskHistory();
-
 
         while (!canExit) {
             try {
@@ -80,8 +76,6 @@ public class Duke extends Application {
         }
 
         duke.storage.record(taskList);
-        duke.ui.sayBye();
-        System.exit(0);
     }
 
     @Override
@@ -92,21 +86,21 @@ public class Duke extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-        scrollPane.setStyle("-fx-background: rgb(255, 223, 223); -fx-background-color: rgb(255, 223, 223);");
+        scrollPane.setStyle("-fx-background: #FEE1E8 ; -fx-background-color: #FEE1E8;");
 
         userInput = new TextField();
         sendButton = new Button("Enter");
         exitButton = new Button("Exit");
 
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.setStyle("-fx-background-color: rgb(255, 223, 223);");
+        mainLayout.setStyle("-fx-background-color: #FEE1E8;");
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, exitButton);
 
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("\u2764小茜的程序\u2764");
+        stage.setTitle("\u2764小茜的待办事项\u2764");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
