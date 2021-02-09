@@ -164,6 +164,7 @@ public class Elaina extends Application {
         welcomeText += Ui
                 .printLine("Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?");
         welcomeText += Ui.printLine("Sou, watashi desu!");
+        welcomeText += Ui.printLine("My official website: https://elaina.lirc572.com");
         return welcomeText;
     }
 
