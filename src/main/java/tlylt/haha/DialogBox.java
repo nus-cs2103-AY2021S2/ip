@@ -8,9 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 
@@ -18,6 +20,9 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Generates a DialogBox that displays the interactions between user and the program.
+     */
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     public DialogBox(Label text, ImageView imageView) {
@@ -53,9 +58,9 @@ public class DialogBox extends HBox {
     private DialogBox flip() {
         DialogBox reversedDialogBox = new DialogBox(this.text, this.displayPicture);
         reversedDialogBox.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> listOFNodes = FXCollections.observableArrayList(reversedDialogBox.getChildren());
-        FXCollections.reverse(listOFNodes);
-        reversedDialogBox.getChildren().setAll(listOFNodes);
+        ObservableList<Node> listOfNodes = FXCollections.observableArrayList(reversedDialogBox.getChildren());
+        FXCollections.reverse(listOfNodes);
+        reversedDialogBox.getChildren().setAll(listOfNodes);
         return reversedDialogBox;
     }
 

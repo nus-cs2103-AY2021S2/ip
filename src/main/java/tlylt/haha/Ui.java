@@ -22,6 +22,9 @@ public class Ui {
             + ":(\n"
             + "No related tasks in your list!";
 
+    /**
+     * Returns warning about a task that cannot be located.
+     */
     public String taskNotFound() {
         System.out.println(TASK_NOT_FOUND);
         return TASK_NOT_FOUND;

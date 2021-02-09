@@ -12,7 +12,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -20,14 +25,18 @@ public class Haha extends Application {
     private final TaskList database = new TaskList();
     private final Storage storage = new Storage();
     private final Ui ui = new Ui();
-    private ScrollPane scrollPane = new ScrollPane();
-    private VBox dialogContainer = new VBox();
-    private TextField userInput = new TextField();
-    private Button sendButton = new Button("Send");
+    private final ScrollPane scrollPane = new ScrollPane();
+    private final VBox dialogContainer = new VBox();
+    private final TextField userInput = new TextField();
+    private final Button sendButton = new Button("Send");
     private Scene scene;
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image hahaImage = new Image(this.getClass().getResourceAsStream("/images/DaHaha.png"));
 
+
+    /**
+     * Starts the internal program logic.
+     */
     public Haha() {
         List<String> list = this.storage.getTasks();
         this.database.readTasks(list);
