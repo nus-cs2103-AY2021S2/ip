@@ -20,7 +20,7 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation for Todo object
+     * Represents Todo event as a string.
      */
 
     @Override

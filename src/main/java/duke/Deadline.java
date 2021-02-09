@@ -23,7 +23,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation for Deadline object
+     * representates a Deadline object as a string
      */
     @Override
     public String toString() {

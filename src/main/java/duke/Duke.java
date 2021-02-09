@@ -26,7 +26,7 @@ public class Duke {
         } catch (FileNotFoundException e){
             throw new FileNotFoundException("No File Detected");
         }
-        ui.initGreating();
+        ui.initGreeting();
         Scanner input = new Scanner(System.in);
         while(input.hasNextLine()) {
             String s = input.next();

@@ -17,7 +17,7 @@ public class Database {
     private String name;
 
     /**
-     * Initialize a database object to handle loading and saving of tasks.
+     * Initializes a database object to handle loading and saving of tasks.
      *
      * @param name The name of the path of the file
      */
@@ -27,7 +27,7 @@ public class Database {
 
 
     /**
-     * Read from file and initialize Strings of tasks
+     * Reads from file and initialize Strings of tasks
      * @return list of strings representing tasks toString method.
      */
 
@@ -47,7 +47,7 @@ public class Database {
 
 
     /**
-     * Write to file and update strings
+     * Writes to file and update strings
      * @params Updated list of tasks.
      */
 

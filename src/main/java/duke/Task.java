@@ -10,7 +10,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Initialize a Task.
+     * Initializes a Task.
      *
      * @param description The name of the task.
      */
@@ -21,22 +21,21 @@ public class Task {
 
 
     /**
-     * Status Icon if done is represented by a tick
-     * If not done, represented by a x.
+     * Gets status Icon as a string
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
-     * Mark Task as done, change icon from x to tick
+     * Marks Task as done, changes icon from x to tick
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * String representation of Task object
+     * Represents Tasks object as a String
      */
     public String toString() {
         return "[" +this.getStatusIcon() + "] " + this.description;

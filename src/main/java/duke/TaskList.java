@@ -54,11 +54,6 @@ public class TaskList {
         return this.tasks;
     }
 
-    /**
-<<<<<<< HEAD
-     * Returns number of tasks in task list.
-=======
->>>>>>> branch-A-JavaDoc
      *
      * @return Number of tasks in task list.
      */
@@ -77,6 +72,10 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Represents contents of TaskList as a string
+     * @return String of TaskList
+     */
     public String toString(){
         String output = "";
         for(int i = 0; i< tasks.size(); i++){

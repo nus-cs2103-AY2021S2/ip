@@ -21,7 +21,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation for Event object
+     * Represents Event object as a String
      */
     @Override
     public String toString(){

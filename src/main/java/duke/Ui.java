@@ -16,10 +16,9 @@ public class Ui {
      * Initialize and prints greeting message when a user runs programme.
      */
 
-    public static void initGreating() {
+    public static void initGreeting() {
         System.out.println(HORIZONTAL_LINE + "\n" + greeting + HORIZONTAL_LINE + "\n");
     }
-
 
     /**
      * Prints error message when a user encounters exceptions.
