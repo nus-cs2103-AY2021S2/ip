@@ -63,13 +63,13 @@ public class Storage {
 
             switch (split[0]) {
             case "T":
-                list.add(new Todo(split[2], split[1].equals("1")));
+                list.add(new Todo(split[3], split[1].equals("1"), split[2]));
                 break;
             case "D":
-                list.add(new Deadline(split[2], split[1].equals("1"), split[3]));
+                list.add(new Deadline(split[3], split[1].equals("1"), split[4], split[2]));
                 break;
             case "E":
-                list.add(new Event(split[2], split[1].equals("1"), split[3]));
+                list.add(new Event(split[3], split[1].equals("1"), split[4], split[2]));
                 break;
             default:
                 throw new UnknownCommandException();
@@ -132,12 +132,12 @@ public class Storage {
     String translateTask(Task task) {
         int isDone = task.isDone ? 1 : 0;
         if (task instanceof Todo) {
-            return String.format("T : %d : %s\n", isDone, task.name);
+            return String.format("T : %d : %s : %s\n", isDone, task.priority, task.name);
         } else if (task instanceof Deadline) {
-            return String.format("D : %d : %s : %s\n", isDone,
+            return String.format("D : %d : %s : %s : %s\n", isDone, task.priority,
                     task.name, ((Deadline) task).getTime());
         } else {
-            return String.format("E : %d : %s : %s\n", isDone,
+            return String.format("E : %d : %s : %s : %s\n", isDone, task.priority,
                     task.name, ((Event) task).getTime());
         }
     }
