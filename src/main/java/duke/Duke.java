@@ -12,6 +12,10 @@ import java.util.Scanner;
  * events.
  */
 public class Duke {
+    /**
+     * Runs the duke bot
+     * @param args user input via cmd
+     */
     public static void main(String[] args) {
 
         Ui.greeting();
@@ -25,45 +29,45 @@ public class Duke {
             try {
                 Command taskType = parser.getCommand();
                 switch (taskType) {
-                    case LIST:
-                        Ui.execute(Command.LIST, taskList, null);
-                        break;
-                    case DELETE:
-                        Task deletedTask = taskList.get(parser.getTaskIndex() - 1);
-                        taskList.delete(parser.getTaskIndex());
-                        Ui.execute(Command.DELETE, taskList, deletedTask.getStatus());
-                        break;
-                    case DONE:
-                        Task doneTask = taskList.get(parser.getTaskIndex() - 1);
-                        doneTask.setDone(true);
-                        Ui.execute(Command.DONE, taskList, doneTask.getStatus());
-                        break;
-                    case DEADLINE:
-                    case EVENT:
-                    case TODO:
-                        if (parser.hasDescriptionError()) {
-                            Ui.exception(parser.getDescription());
-                        } else if (!taskType.equals(Command.TODO) && parser.hasDateError()) {
-                            Ui.exception(parser.getDate());
-                        }
-                        Task task = taskType.equals(Command.EVENT)
-                                ? new Event(parser.getDescription(), LocalDate.parse(parser.getDate(), formatter))
-                                : taskType.equals(Command.TODO) ? new ToDo(parser.getDescription())
-                                        : new Deadline(parser.getDescription(),
-                                                LocalDate.parse(parser.getDate(), formatter));
-                        taskList.add(task);
-                        Ui.execute(Command.TODO, taskList, task.getStatus());
-                        break;
-                    case FIND:
-                        Ui.execute(Command.FIND, taskList, parser.getDescription());
-                        break;
-                    case NONE:
-                        throw new TaskException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-                    case BYE:
-                        break;
+                case LIST:
+                    Ui.execute(Command.LIST, taskList, null);
+                    break;
+                case DELETE:
+                    Task deletedTask = taskList.get(parser.getTaskIndex() - 1);
+                    taskList.delete(parser.getTaskIndex());
+                    Ui.execute(Command.DELETE, taskList, deletedTask.getStatus());
+                    break;
+                case DONE:
+                    Task doneTask = taskList.get(parser.getTaskIndex() - 1);
+                    doneTask.setDone(true);
+                    Ui.execute(Command.DONE, taskList, doneTask.getStatus());
+                    break;
+                case DEADLINE:
+                case EVENT:
+                case TODO:
+                    if (parser.hasDescriptionError()) {
+                        Ui.exception(parser.getDescription());
+                    } else if (!taskType.equals(Command.TODO) && parser.hasDateError()) {
+                        Ui.exception(parser.getDate());
+                    }
+                    Task task = taskType.equals(Command.EVENT)
+                            ? new Event(parser.getDescription(), LocalDate.parse(parser.getDate(), formatter))
+                            : taskType.equals(Command.TODO) ? new ToDo(parser.getDescription())
+                                    : new Deadline(parser.getDescription(),
+                                            LocalDate.parse(parser.getDate(), formatter));
+                    taskList.add(task);
+                    Ui.execute(Command.TODO, taskList, task.getStatus());
+                    break;
+                case FIND:
+                    Ui.execute(Command.FIND, taskList, parser.getDescription());
+                    break;
+                case NONE:
+                    throw new TaskException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                case BYE:
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
 
                 }
 

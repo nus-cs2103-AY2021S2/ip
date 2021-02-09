@@ -10,7 +10,7 @@ public class Parser {
     /**
      * contructs a Parser object that breaksdown user input to useful parts relevant
      * to execution of commands
-     * 
+     *
      * @param input user input
      */
     public Parser(String input) {
@@ -19,25 +19,26 @@ public class Parser {
             this.command = Command.valueOf(this.information[0].toUpperCase());
 
             switch (this.command) {
-                case FIND:
-                    this.description = this.information[1];
-                    break;
-                case DELETE:
-                case DONE:
-                    this.taskIndex = Integer.parseInt(this.information[1]);
-                    break;
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    String[] descriptionAndTime = information.length < 2 ? null : information[1].split("/", 2);
-                    this.description = descriptionAndTime == null ? "DESCRIPTION.ERROR" : descriptionAndTime[0];
-                    this.date = descriptionAndTime == null || descriptionAndTime.length < 2 ? "DATE.ERROR"
-                            : descriptionAndTime[1].split(" ", 2)[1];
+            case FIND:
+                this.description = this.information[1];
+                break;
+            case DELETE:
+            case DONE:
+                this.taskIndex = Integer.parseInt(this.information[1]);
+                break;
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                String[] descriptionAndTime = information.length < 2 ? null : information[1].split("/", 2);
+                this.description = descriptionAndTime == null ? "DESCRIPTION.ERROR" : descriptionAndTime[0];
+                this.date = descriptionAndTime == null || descriptionAndTime.length < 2 ? "DATE.ERROR"
+                        : descriptionAndTime[1].split(" ", 2)[1];
 
-                    break;
-                case BYE:
-                case NONE:
-                case LIST:
+                break;
+            case BYE:
+            case NONE:
+            case LIST:
+            default:
             }
         } catch (IllegalArgumentException e) {
             this.command = Command.NONE;
@@ -47,7 +48,7 @@ public class Parser {
 
     /**
      * checks whether there is a lack of decription
-     * 
+     *
      * @return true if there is no description false otherwise
      */
     public boolean hasDescriptionError() {
@@ -56,7 +57,7 @@ public class Parser {
 
     /**
      * checks if there is a lack of date input
-     * 
+     *
      * @return true if there is no date input false otherwise
      */
     public boolean hasDateError() {
@@ -65,7 +66,7 @@ public class Parser {
 
     /**
      * checks if the bye input has been entered
-     * 
+     *
      * @return false if command is bye, true otherwise
      */
     public boolean isCommandNotBye() {
@@ -74,7 +75,7 @@ public class Parser {
 
     /**
      * returns the index of the task that user is interested in
-     * 
+     *
      * @return index of task
      */
     public int getTaskIndex() {
@@ -83,7 +84,7 @@ public class Parser {
 
     /**
      * returns the command that the user is interested in executing
-     * 
+     *
      * @return user command
      */
     public Command getCommand() {
@@ -92,7 +93,7 @@ public class Parser {
 
     /**
      * returns the date of task
-     * 
+     *
      * @return date of task
      */
     public String getDate() {
@@ -101,7 +102,7 @@ public class Parser {
 
     /**
      * returns description of task
-     * 
+     *
      * @return description of task
      */
     public String getDescription() {

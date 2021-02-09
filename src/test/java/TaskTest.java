@@ -1,40 +1,45 @@
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.Task;
+
 
 public class TaskTest {
 
     @Test
     public void testSetDone() {
-        Task testTask = new Task("");
+        TaskStub testTask = new TaskStub("");
         testTask.setDone(true);
-        assertEquals(true, testTask.isDone);
+        assertTrue(testTask.getDone());
         testTask.setDone(false);
-        assertEquals(false, testTask.isDone);
+        assertFalse(testTask.getDone());
     }
 
     @Test
     public void testGetStatus() {
-        Task testTask = new Task("");
-        testTask.isDone = true;
+        TaskStub testTask = new TaskStub("");
+        testTask.setDone(true);
         assertEquals("[X] ", testTask.getStatus());
-        testTask.isDone = false;
+        testTask.setDone(false);
         assertEquals("[ ] ", testTask.getStatus());
     }
 
     @Test
     public void testSaveStatus() {
-        Task testTask = new Task("");
-        testTask.isDone = true;
+        TaskStub testTask = new TaskStub("");
+        testTask.setDone(true);
         assertEquals(" | 1 | \n", testTask.saveStatus());
-        testTask.isDone = false;
+        testTask.setDone(false);
         assertEquals(" | 0 | \n", testTask.saveStatus());
     }
 
     @Test
     public void testDoesDescriptionContain() {
         Task testTask = new Task("");
-        assertEquals(true, testTask.doesDescriptionContain(""));
-        assertEquals(false, testTask.doesDescriptionContain("123"));
+        assertTrue(testTask.doesDescriptionContain(""));
+        assertFalse(testTask.doesDescriptionContain("123"));
     }
 }

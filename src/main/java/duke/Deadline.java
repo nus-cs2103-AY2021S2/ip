@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline with specified name and time.
-     * 
+     *
      * @param description  the name of the task
      * @param deadlineTime when the task would need to be done by
      */
@@ -25,7 +25,7 @@ public class Deadline extends Task {
     /**
      * Makes use of the time and desciption to return well formatted status of
      * deadline
-     * 
+     *
      * @return status, descripton and time of deadline
      */
     @Override
@@ -36,7 +36,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the current status of the deadline
-     * 
+     *
      * @return status of deadline
      */
     @Override

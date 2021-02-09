@@ -19,7 +19,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list
-     * 
+     *
      * @param task task to be added to list
      */
     public void add(Task task) {
@@ -28,7 +28,7 @@ public class TaskList {
 
     /**
      * Delete a task at the index - 1, due to 0 indexing and user input compensation
-     * 
+     *
      * @param taskIndex index - 1 where the task is to be deleted
      */
     public void delete(int taskIndex) {
@@ -39,13 +39,14 @@ public class TaskList {
      * Prints out each task in a new line
      */
     public void print() {
-        for (int i = 0; i < listOfTasks.size(); i++)
+        for (int i = 0; i < listOfTasks.size(); i++) {
             System.out.println("    " + this.listOfTasks.get(i).getStatus());
+        }
     }
 
     /**
      * return size of TaskList
-     * 
+     *
      * @return size of TaskList
      */
     public int numberOfTasks() {
@@ -58,7 +59,7 @@ public class TaskList {
 
     /**
      * Searches for task that contains the word and prints them out
-     * 
+     *
      * @param words word that the task must contain to be printed
      */
     public void printContains(String words) {

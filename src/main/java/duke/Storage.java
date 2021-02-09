@@ -13,7 +13,7 @@ public class Storage {
     /**
      * Creates and writes all the task statues in listOfTasks into the path
      * sepcified
-     * 
+     *
      * @param path        path where the text file would be created and written to
      * @param listOfTasks the list of tasks that would be written to the text file
      */
