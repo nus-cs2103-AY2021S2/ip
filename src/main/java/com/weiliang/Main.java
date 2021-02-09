@@ -16,6 +16,9 @@ public class Main extends Application {
 
     private final Duke duke;
 
+    /**
+     * Instantiates the JavaFX application.
+     */
     public Main() {
         this.duke = new Duke("SimpleBot");
     }

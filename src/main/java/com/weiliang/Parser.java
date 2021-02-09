@@ -10,8 +10,13 @@ import com.weiliang.task.TaskList;
  */
 public class Parser {
 
-    private TaskList tasks;
+    private final TaskList tasks;
 
+    /**
+     * Instantiates a new parser object for operating commands.
+     *
+     * @param tasks Task list to handle.
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }

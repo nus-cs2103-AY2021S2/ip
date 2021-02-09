@@ -4,7 +4,7 @@ import com.weiliang.storage.Storage;
 import com.weiliang.task.TaskList;
 
 /**
- * Main logic controller for simple bot program.
+ * Main logic controller for a simple bot program.
  */
 public class Duke {
 
@@ -18,7 +18,7 @@ public class Duke {
     /**
      * Initializes a new instance of the logic controller.
      *
-     * @param name the name of the associated AI
+     * @param name The name of the associated AI.
      */
     public Duke(String name) {
         this.name = name;
@@ -33,6 +33,13 @@ public class Duke {
         this.parser = new Parser(tasks);
     }
 
+    /**
+     * Returns a {@link String} response after processing is done by the artificial intelligence.
+     *
+     * @param input Input from user.
+     * @return Response from simple bot.
+     * @throws DukeException If unable to process input correctly.
+     */
     public String getResponse(String input) throws DukeException {
         // Clear leading and trailing whitespace
         input = input.strip();
@@ -89,7 +96,6 @@ public class Duke {
         }
 
         // Default
-        // Don't actually need to throw bot exception
         throw new DukeException("Don't understand.");
     }
 
