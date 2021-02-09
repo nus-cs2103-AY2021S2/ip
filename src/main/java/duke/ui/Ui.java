@@ -82,6 +82,15 @@ public class Ui {
     }
 
     /**
+     * Prints the task whose priority has been updated.
+     * @param task The task whose priority has been updated.
+     */
+    public void printTaskUpdated(Task task) {
+        System.out.println(" Updated the priority of following task:");
+        System.out.println("  " + task);
+    }
+
+    /**
      * Prints all the tasks in the TaskList.
      * @param tasks The TaskList to be printed.
      */
@@ -132,6 +141,10 @@ public class Ui {
      */
     public String completeTaskResponse(Task task) {
         return "Marked:\n" + "  " + task.toString();
+    }
+
+    public String updateTaskResponse(Task task) {
+        return "Priority has been updated:\n" + "  " + task.toString();
     }
 
     /**
