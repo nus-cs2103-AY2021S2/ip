@@ -17,9 +17,9 @@ public abstract class Command {
      * Create a command with user instruction, task, date and a function to execute the instruction.
      *
      * @param instruction user instruction.
-     * @param task        user task.
-     * @param date        date of the task.
-     * @param func        the function takes a command to execute the task and returns a boolean whether to end the program.
+     * @param task user task.
+     * @param date date of the task.
+     * @param func the function takes a command to execute and returns a response String.
      */
     public Command(String instruction, String task, String date, boolean isExit, Function<Command, String> func) {
         this.instruction = instruction;
@@ -33,7 +33,7 @@ public abstract class Command {
     /**
      * Execution of a command and return a boolean whether to end the program.
      *
-     * @return a boolean of whether to end the program.
+     * @return a response String.
      */
     public String execute() {
         return func.apply(this);

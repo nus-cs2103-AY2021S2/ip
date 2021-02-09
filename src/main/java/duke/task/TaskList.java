@@ -3,7 +3,6 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.exceptions.DukeException;
 import duke.ui.ErrorBox;
 import duke.ui.Ui;
 

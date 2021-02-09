@@ -1,18 +1,15 @@
 package duke.ui;
 
-import duke.Duke;
+
 import duke.command.Command;
-import duke.exceptions.DukeException;
 import duke.utils.Parser;
 import duke.utils.TaskStorage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -28,19 +25,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+
     private String response;
 
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cat1.jpg"));
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat2.jpg"));
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.GREETING, dukeImage),
                 DialogBox.getDukeDialog(TaskStorage.loadFiles(), dukeImage)
-          );
+        );
 
     }
 
@@ -58,6 +55,9 @@ public class MainWindow extends AnchorPane {
         String dukeText = response;
 
         if (response.equals(Ui.FAREWELL)) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
             Platform.exit();
         }
 
@@ -75,10 +75,6 @@ public class MainWindow extends AnchorPane {
 
 
         userInput.clear();
-    }
-
-    private void saveFiles() {
-
     }
 
 

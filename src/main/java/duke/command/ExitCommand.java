@@ -8,8 +8,7 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command {
     public ExitCommand(String task, String date) {
-        super("bye", task, date, true,
-                command -> handleBye());
+        super("bye", task, date, true, command -> handleBye());
     }
 
 

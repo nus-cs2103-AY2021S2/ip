@@ -48,13 +48,13 @@ public class Parser {
             command = new ListCommand();
             break;
         case "done":
-            command = new DoneCommand(taskName, date);
+            command = new DoneCommand(taskName);
             break;
         case "todo": case "deadline": case "event":
             command = new AddCommand(instruction, taskName, date);
             break;
         case "delete":
-            command = new DeleteCommand(taskName, date);
+            command = new DeleteCommand(taskName);
             break;
         case "find":
             command = new FindCommand(taskName, date);
