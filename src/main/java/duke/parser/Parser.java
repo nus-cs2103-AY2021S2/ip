@@ -11,16 +11,13 @@ import javafx.application.Platform;
  */
 public class Parser {
 
-    private final Ui ui;
     private final TaskList tasks;
 
     /**
      * Constructor for the Parser class
-     *  @param ui      Ui object that interacts with user
      * @param tasks   TaskList object which contains all the tasks in the program
      */
-    public Parser(Ui ui, TaskList tasks) {
-        this.ui = ui;
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
@@ -34,12 +31,10 @@ public class Parser {
      */
     public String parse(String fullCommand) {
         try {
-            boolean isTaskCommand = fullCommand.startsWith("event") || (fullCommand.startsWith("todo")
-                    || fullCommand.startsWith("deadline"));
-
             StringBuilder response = new StringBuilder();
             if (fullCommand.equals("bye")) {
                 Platform.exit();
+                System.exit(0);
             } else if (fullCommand.equals("list")) {
                 response.append("Here are the tasks in your list:\n");
                 for (int i = 0; i < tasks.size(); i++) {
@@ -71,7 +66,8 @@ public class Parser {
                 response.append("\nNow you have ");
                 response.append(tasks.size());
                 response.append(" tasks in the list.");
-            } else if (isTaskCommand) {
+            } else if (fullCommand.startsWith("event") || (fullCommand.startsWith("todo")
+                    || fullCommand.startsWith("deadline"))) {
                 Task task = Task.parseTask(fullCommand);
                 tasks.add(task);
                 response.append("Got it. I've added this task:\n  added: ");
@@ -98,9 +94,9 @@ public class Parser {
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            return ui.displayMessage(response.toString());
+            return Ui.displayMessage(response.toString());
         } catch (DukeException e) {
-            return ui.displayMessage(e.getMessage());
+            return Ui.displayMessage(e.getMessage());
         }
     }
 }

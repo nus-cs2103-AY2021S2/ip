@@ -36,7 +36,7 @@ public class Duke extends Application {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-        parser = new Parser(ui, tasks);
+        parser = new Parser(tasks);
     }
 
     public String getWelcomeMessage() {
