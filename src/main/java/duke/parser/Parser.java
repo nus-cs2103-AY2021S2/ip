@@ -3,15 +3,14 @@ package duke.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
-import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.ValidateCommand;
 import duke.duke.Duke;
 import duke.exceptions.InvalidArgumentException;
 import duke.exceptions.InvalidCommandException;
@@ -34,83 +33,36 @@ public class Parser {
     public static Command processInput(String userInput, Duke bot) throws InvalidCommandException,
             InvalidArgumentException {
         String[] userInputArray = userInput.split(" ", 2);
+        String command = userInputArray[0];
         Command userCommand;
         if (userInputArray.length == 1) {
-            if (!(userInputArray[0].equals("bye") || userInputArray[0].equals("list"))) {
-                if (userInputArray[0].equals("todo") || userInputArray[0].equals("done")
-                        || userInputArray[0].equals("deadline") || userInputArray[0].equals("event")
-                        || userInputArray[0].equals("delete")) {
-                    throw new InvalidCommandException("OOPS!!! " + "The description of a "
-                            + userInputArray[0] + " cannot be empty.\n");
-                } else {
-                    throw new InvalidCommandException("OOPS!!! "
-                            + "I'm sorry, but I don't know what that means :-()\n");
-                }
-            }
-
-            if (userInputArray[0].equals("bye")) {
-                userCommand = new ByeCommand();
-            } else {
-                userCommand = new ListCommand();
-            }
+            userCommand = ValidateCommand.validateSingleArgumentCommand(command);
         } else {
+            String input = userInputArray[1];
             switch (userInputArray[0]) {
             case "done":
-                try {
-                    Integer.parseInt(userInputArray[1]);
-                } catch (NumberFormatException ex) {
-                    throw new InvalidArgumentException("Invalid command! "
-                            + "Please input task number using 'delete (number)'.\n");
-                }
-                if (Integer.parseInt(userInputArray[1]) > bot.getNumberOfTasks()) {
-                    throw new InvalidArgumentException("Please input argument <= to "
-                            + bot.getNumberOfTasks() + "!\n");
-                }
-                userCommand = new DoneCommand(userInputArray[1]);
+                int taskNumber = ValidateCommand.validateDoneCommand(input, bot);
+                userCommand = new DoneCommand(taskNumber);
                 break;
             case "delete":
-                try {
-                    Integer.parseInt(userInputArray[1]);
-                } catch (NumberFormatException ex) {
-                    throw new InvalidArgumentException("Invalid command! "
-                            + "Please input task number using 'delete (number)'.\n");
-                }
-                if (Integer.parseInt(userInputArray[1]) > bot.getNumberOfTasks()) {
-                    throw new InvalidArgumentException("Please input argument <= to "
-                            + bot.getList().getLst().size() + "!\n");
-                }
-                userCommand = new DeleteCommand(userInputArray[1]);
+                int taskIndex = ValidateCommand.validateDeleteCommand(input, bot);
+                userCommand = new DeleteCommand(taskIndex);
                 break;
             case "todo":
-                userCommand = new TodoCommand(userInputArray[1]);
+                userCommand = new TodoCommand(input);
                 break;
             case "deadline":
-                String[] arr = userInputArray[1].split("/by");
-                if (arr.length == 1) {
-                    throw new InvalidArgumentException("Please input task due date using '/by (date)'!\n");
-                }
-                String[] str = arr[0].split(" ", 2);
-                if (str.length == 1) {
-                    throw new InvalidArgumentException("Please input task description!\n");
-                }
+                String[] arr = ValidateCommand.validateDeadlineCommand(input);
                 String deadLine = arr[1].strip();
                 userCommand = new DeadlineCommand(arr[0], processDate(deadLine));
                 break;
             case "event":
-                String[] a = userInputArray[1].split("/at");
-                if (a.length == 1) {
-                    throw new InvalidArgumentException("Please input task due date using '/at (date)'!\n");
-                }
-                String[] s = a[0].split(" ", 2);
-
-                if (s.length == 1) {
-                    throw new InvalidArgumentException("Please input task description!\n");
-                }
+                String[] a = ValidateCommand.validateEventCommand(input);
                 String eventTime = a[1].strip();
                 userCommand = new EventCommand(a[0], processDate(eventTime));
                 break;
             case "find":
-                userCommand = new FindCommand(userInputArray[1]);
+                userCommand = new FindCommand(input);
                 break;
             default:
                 throw new InvalidCommandException("Invalid Command!\n");

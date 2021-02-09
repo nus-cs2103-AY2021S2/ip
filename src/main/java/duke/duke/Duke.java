@@ -64,8 +64,8 @@ public class Duke {
      * Removes a task from list of tasks.
      * @param id Index of task to be removed.
      */
-    public String removeTask(String id) {
-        int n = Integer.parseInt(id) - 1;
+    public String removeTask(int id) {
+        int n = id - 1;
         Task task = list.getLst().get(n);
         list.removeItem(n);
         return Ui.showRemoveTaskMessage(task, list.getLst());
@@ -75,9 +75,8 @@ public class Duke {
      * Marks a task as done.
      * @param id index of task to be marked as done
      */
-    public String markAsDone(String id) {
-        int n = Integer.parseInt(id) - 1;
-        assert n < getList().size();
+    public String markAsDone(int id) {
+        int n = id - 1;
         list.doneTask(n);
         return Ui.showDoneTaskMessage(list.getLst(), n);
 
