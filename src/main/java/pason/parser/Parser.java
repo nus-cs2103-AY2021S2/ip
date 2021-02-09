@@ -14,6 +14,7 @@ import pason.commands.DeleteCommand;
 import pason.commands.DoneCommand;
 import pason.commands.FindCommand;
 import pason.commands.ListCommand;
+import pason.commands.ListScheduleCommand;
 import pason.commands.UnknownCommand;
 import pason.exceptions.PasonException;
 import pason.tasks.Deadline;
@@ -55,6 +56,8 @@ public class Parser {
             return new DeleteCommand(input, Integer.parseInt(splitInput[1]));
         case "find":
             return new FindCommand(input, splitInput[1]);
+        case "listschedule":
+            return Parser.validateListSchedule(input);
         default:
             return new UnknownCommand(input);
         }
@@ -192,5 +195,45 @@ public class Parser {
             return null;
         }
         return dateAndTime[1];
+    }
+
+    /**
+     * Constructs the AddCommand object for the Event.
+     * Returns the new AddCommand object if successful, or throws exception.
+     *
+     * @param input  Input to be validated.
+     * @return AddCommand to be executed.
+     * @throws PasonException  If invalid input or formatting.
+     */
+    public static Command validateListSchedule(String input) throws Exception {
+        String[] inputParts = input.trim().split(" ");
+        if (inputParts.length != 2) {
+            throw new PasonException("Please use the format listschedule <dd/mm/yyyy>");
+        }
+        String parsedDate = Parser.parseDate(inputParts[1]);
+        return new ListScheduleCommand(input, parsedDate);
+    }
+
+    /**
+     * Parses date to correct format.
+     */
+    public static String parseDate(String date) throws Exception {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+            if (date.equals("today")) {
+                return LocalDate.now().format(formatter).toString();
+            } else if (date.equals("tomorrow")) {
+                return LocalDate.now().plusDays(1).format(formatter).toString();
+            } else {
+                LocalDate parsedDate = LocalDate.parse(date, formatter);
+                String formattedString = parsedDate.format(formatter);
+                return formattedString;
+            }
+        } catch (DateTimeParseException e) {
+            throw new PasonException("Oops! You've entered an invalid date format.\n"
+                    + "Please use: dd/mm/yyyy");
+        } catch (Exception e) {
+            throw new PasonException(e.getMessage());
+        }
     }
 }

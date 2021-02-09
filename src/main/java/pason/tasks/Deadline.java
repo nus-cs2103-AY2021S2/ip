@@ -23,6 +23,13 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the date.
+     */
+    public String getDate() {
+        return this.by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    /**
      * Formats Deadline to textual form.
      */
     public String toString() {

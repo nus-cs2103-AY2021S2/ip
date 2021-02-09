@@ -24,6 +24,13 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the date.
+     */
+    public String getDate() {
+        return this.at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    /**
      * Formats Event to textual form.
      */
     public String toString() {
