@@ -7,6 +7,9 @@
     <list default="true" id="a898240b-4d67-4018-9118-40dd9820aa98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/ip.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ip.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/duke/DukeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/duke/DukeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/TaskList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasklist" beforeDir="false" afterPath="$PROJECT_DIR$/tasklist" afterDir="false" />
     </list>
