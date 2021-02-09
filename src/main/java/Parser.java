@@ -108,9 +108,7 @@ public class Parser {
             throw new DukeException("Invalid command, please provide a supported command.");
         }
 
-        if (parsed == null) {
-            throw new DukeException("Error in parsed command");
-        }
+        assert parsed != null : "Error in parsed command: parsed command is null";
 
         return parsed;
     }

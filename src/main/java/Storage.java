@@ -44,13 +44,13 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File("duke_saved_tasks");
-            boolean isAlreadyPresent = !file.createNewFile();
+            boolean fileIsAlreadyPresent = !file.createNewFile();
 
-            if (isAlreadyPresent) {
+            if (fileIsAlreadyPresent) {
                 FileReader fileReader = new FileReader(file);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 String currLine = bufferedReader.readLine();
-                ArrayList<Task> ret = new ArrayList<>();
+                ArrayList<Task> loadedTasks = new ArrayList<>();
 
                 while (currLine != null) {
                     String[] split = currLine.split(" \\| ");
@@ -64,7 +64,7 @@ public class Storage {
                         if (isDone.equals("T")) {
                             deadline.setDone();
                         }
-                        ret.add(deadline);
+                        loadedTasks.add(deadline);
                         break;
 
                     case "E":
@@ -72,7 +72,7 @@ public class Storage {
                         if (isDone.equals("T")) {
                             event.setDone();
                         }
-                        ret.add(event);
+                        loadedTasks.add(event);
                         break;
 
                     case "T":
@@ -80,7 +80,7 @@ public class Storage {
                         if (isDone.equals("T")) {
                             toDo.setDone();
                         }
-                        ret.add(toDo);
+                        loadedTasks.add(toDo);
                         break;
 
                     default:
@@ -90,7 +90,7 @@ public class Storage {
                     currLine = bufferedReader.readLine();
                 }
 
-                return ret;
+                return loadedTasks;
 
             } else {
                 throw new DukeException("No existing save file, creating new save now.\n");
