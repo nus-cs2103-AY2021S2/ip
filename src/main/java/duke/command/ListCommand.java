@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Handles listing of tasks in TaskList

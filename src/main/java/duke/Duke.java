@@ -50,6 +50,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Welcomes a user into the chat
+     *
+     * @return Welcome message from duke
+     */
     public String welcomeMessage() {
         String output = "Duke:\n Hello! I'm Duke\n"
                 + "What can I do for you?";

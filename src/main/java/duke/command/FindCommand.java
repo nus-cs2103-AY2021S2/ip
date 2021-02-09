@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 /**
  * Handles finding matching keywords of a task name
@@ -47,7 +47,7 @@ public class FindCommand extends Command {
             contents.append(String.format("\n\t%d.%s", counter.intValue(), task.toString()));
             counter.getAndIncrement();
         });
-      
+
         return contents.toString();
     }
 
@@ -68,3 +68,4 @@ public class FindCommand extends Command {
     }
 
 }
+
