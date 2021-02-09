@@ -81,16 +81,13 @@ public class TaskList {
         String output = "";
         for (Task t : tasks) {
             if (t.getDescription().indexOf(searchTerm) != -1) {
-                if (count == -1) {
-                    output += Ui.showSuccessSearch();
-                }
                 output += Ui.printTask(++count + ".", t.toString());
             }
         }
         if (count == 0) {
             return Ui.showFailSearch(searchTerm);
         }
-        return output;
+        return Ui.showSuccessSearch() + output;
     }
 
     /**
