@@ -37,6 +37,7 @@ public class Storage {
             data[lines] = line;
             lines++;
         }
+        assert (lines < 1000);
         br.close();
         return data;
     }

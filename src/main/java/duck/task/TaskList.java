@@ -7,6 +7,7 @@ public class TaskList {
 
     /**
      * initialize  the TaskLisk object
+     *
      * @param data use data to form task list
      */
     public TaskList(String[] data) {
@@ -67,6 +68,12 @@ public class TaskList {
         taskList.add(task);
     }
 
+    /**
+     * Using keyword to find task from task list
+     *
+     * @param description the keyword
+     * @return a string array includes the found task
+     */
     public String[] findTask(String description) {
         int numberOfFinding = 0;
         String[] findTask = new String[100];
@@ -76,6 +83,7 @@ public class TaskList {
                 numberOfFinding++;
             }
         }
+        assert (numberOfFinding < 100);
         return findTask;
     }
 }

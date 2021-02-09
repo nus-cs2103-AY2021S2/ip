@@ -34,6 +34,7 @@ public class CommandGui {
      */
     public String execute(TaskList tasks, Gui gui, Storage storage) throws IOException {
         String[] descriptionSplit;
+        assert (!command.equals(null));
         switch (command) {
         case "bye":
         case "list":
@@ -89,8 +90,8 @@ public class CommandGui {
             break;
         case "todo":
             try {
-                String test = description;
-            } catch (ArrayIndexOutOfBoundsException e) {
+                description.equals(null);
+            } catch (NullPointerException e) {
                 return gui.showErrorReply("error_todo_empty");
             }
             tasks.addTask(new Todo(description));
@@ -98,11 +99,10 @@ public class CommandGui {
             return gui.showCommandReply(description, tasks);
         case "deadline":
             try {
-                String test = description;
-            } catch (ArrayIndexOutOfBoundsException e) {
+                descriptionSplit = description.split("/by");
+            } catch (NullPointerException e) {
                 return gui.showErrorReply("error_deadline_empty");
             }
-            descriptionSplit = description.split("/by");
             try {
                 tasks.addTask(new Deadline(descriptionSplit[0].trim(), descriptionSplit[1].trim()));
                 storage.updateFile(tasks);
@@ -114,11 +114,10 @@ public class CommandGui {
             }
         case "event":
             try {
-                String test = description;
-            } catch (ArrayIndexOutOfBoundsException e) {
+                descriptionSplit = description.split("/at");
+            } catch (NullPointerException e) {
                 return gui.showErrorReply("error_event_empty");
             }
-            descriptionSplit = description.split("/at");
             try {
                 tasks.addTask(new Event(descriptionSplit[0].trim(), descriptionSplit[1].trim()));
                 storage.updateFile(tasks);
