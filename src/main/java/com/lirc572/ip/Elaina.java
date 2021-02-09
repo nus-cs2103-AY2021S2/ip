@@ -1,8 +1,6 @@
 package com.lirc572.ip;
 
 import java.util.Scanner;
-import java.util.regex.MatchResult;
-import java.util.regex.Pattern;
 
 import javafx.application.Application;
 import javafx.application.Platform;
