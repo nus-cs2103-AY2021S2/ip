@@ -14,12 +14,11 @@ public class ListCommand extends Command {
 
     @Override
     String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-            return ui.list(storage.read(),this.date);
+        return ui.list(storage.read(), this.date);
     }
 
     @Override
     boolean isExit() {
         return false;
     }
-    
 }
