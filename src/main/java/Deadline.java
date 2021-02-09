@@ -16,6 +16,7 @@ class Deadline extends Task {
     }
     @Override
     LocalDate getTime(){
+        assert (this.date != null);
         return this.date;
     }
 
