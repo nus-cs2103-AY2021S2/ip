@@ -1,6 +1,7 @@
 package duke;
 
-import duke.system.*;
+import duke.system.Parser;
+import duke.system.Storage;
 import duke.system.view.Gui;
 import duke.task.TaskList;
 import javafx.application.Application;
@@ -8,10 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
-public class Duke{
+public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/memeeman.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/memeeman.jpg"));
     private ScrollPane scrollPane;
@@ -26,9 +27,10 @@ public class Duke{
 
     /**
      * initiate UI and try to load in the data if exist, else initiate a new list and show error
+     *
      * @param filePath the path where the stored txt is saved
      */
-    public Duke(){
+    public Duke() {
         in = new Parser();
         tasks = new TaskList();
     }

@@ -165,7 +165,7 @@ public class Parser {
         default:
             return "";
         }
-//         every case must return some form of string, therefore break is not required
+        //every case must return some form of string, therefore break is not required
     }
 
     /**
