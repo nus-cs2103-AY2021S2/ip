@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Main class.
  */
-public class Duckie {
+public class Duckie{
     private Storage storage;
     private TaskList lst;
     private Ui ui;
@@ -25,6 +25,17 @@ public class Duckie {
     public Duckie(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
+        try {
+            lst = new TaskList(storage.loadTasks());
+        } catch (IOException e) {
+            //ui.showLoadingError();
+            lst = new TaskList();
+        }
+    }
+
+    public Duckie() throws IOException {
+        ui = new Ui();
+        storage = new Storage("duckie.txt");
         try {
             lst = new TaskList(storage.loadTasks());
         } catch (IOException e) {
