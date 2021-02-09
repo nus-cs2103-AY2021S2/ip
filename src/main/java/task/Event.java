@@ -24,6 +24,7 @@ public class Event extends Task {
      */
     public Event(String... taskDescription) throws DukeException {
         this.type = "E";
+        assert taskDescription.length >= 0: "Error in length of taskDescription";
         if (taskDescription.length >= 1) {
             this.description = taskDescription[0];
             String[] input = taskDescription[1].split("\\s+");
@@ -40,7 +41,7 @@ public class Event extends Task {
                 }
             }
         } else {
-            if (description.length() == 0) {
+            if (taskDescription.length == 0) {
                 throw new DukeException("☹ OOPS!!! Description of Event cannot be empty, please check!");
             } else {
                 throw new DukeException("☹ OOPS!!! Date of Event cannot be empty, please check!");
