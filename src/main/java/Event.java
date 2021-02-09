@@ -38,36 +38,28 @@ public class Event extends Task {
     public static Event parseEvent(String record) {
         if (record.contains("\u2713")) {
             String[] taskSeg = record.split("\u2713 ");
-            String taskContent = taskSeg[taskSeg.length - 1];
-            String taskContentWithDate = taskContent.replace(" (at:", "");
-            taskContentWithDate = taskContentWithDate.replace(")", "");
-            Pattern p = Pattern.compile("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})");
-            Matcher m = p.matcher(taskContentWithDate);
-            m.find();
-            String date = m.group();
-            date = date.replace(" ", "T");
-            LocalDateTime t = LocalDateTime.parse(date);
-            String[] seg = taskContentWithDate.split(" ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})");
-            String myTask = seg[0];
-            Event e = new Event(myTask, t);
+            Event e = getHistoryEvent(taskSeg);
             e.markAsDone();
             return e;
         } else {
             String[] taskSeg = record.split("\u2718 ");
-            String taskContent = taskSeg[taskSeg.length - 1];
-            String taskContentWithDate = taskContent.replace(" (at:", "");
-            taskContentWithDate = taskContentWithDate.replace(")", "");
-            Pattern p = Pattern.compile("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})");
-            Matcher m = p.matcher(taskContentWithDate);
-            m.find();
-            String date = m.group();
-            date = date.replace(" ", "T");
-            LocalDateTime t = LocalDateTime.parse(date);
-            String[] seg = taskContentWithDate.split(" ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})");
-            String myTask = seg[0];
-            return new Event(myTask, t);
-
+            return getHistoryEvent(taskSeg);
         }
+    }
+
+    public static Event getHistoryEvent(String[] taskSeg) {
+        String taskContent = taskSeg[taskSeg.length - 1];
+        String taskContentWithDate = taskContent.replace(" (at:", "");
+        taskContentWithDate = taskContentWithDate.replace(")", "");
+        Pattern p = Pattern.compile("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})");
+        Matcher m = p.matcher(taskContentWithDate);
+        m.find();
+        String date = m.group();
+        date = date.replace(" ", "T");
+        LocalDateTime t = LocalDateTime.parse(date);
+        String[] seg = taskContentWithDate.split(" ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})");
+        String myTask = seg[0];
+        return new Event(myTask, t);
     }
 
 }
