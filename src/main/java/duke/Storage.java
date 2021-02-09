@@ -43,6 +43,7 @@ public class Storage {
             if (!(Files.isDirectory(Paths.get(this.pathDirectory)))) {
                 // Handles folder does not exist case
                 dataDirectory.mkdir();
+                assert Files.isDirectory(Paths.get(this.pathDirectory)) : "Directory does not exist";
                 dataFile.createNewFile();
             } else if (!dataFile.exists()) {
                 // Handles file does not exist
@@ -65,6 +66,7 @@ public class Storage {
         try {
             File dataFile = fileConfiguration();
             FileWriter fileWriter = new FileWriter(dataFile, false);
+            assert fileWriter != null : "File writer is not initialised";
 
             for (int index = 0; index < tasks.size(); index++) {
                 Task currTask = tasks.get(index);
@@ -87,11 +89,12 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
             File dataFile = fileConfiguration();
             Scanner sc = new Scanner(dataFile);
+            assert sc != null : "Scanner for data file is null";
 
             while (sc.hasNext()) {
                 String[] taskDetails = sc.nextLine().split("[|]");
                 String taskType = taskDetails[0];
-                Task newTask = null;
+                Task newTask = new Task();
 
                 switch (taskType) {
                 case "T":
