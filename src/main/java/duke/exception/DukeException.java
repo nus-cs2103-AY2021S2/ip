@@ -70,6 +70,12 @@ public class DukeException extends Exception {
         case FILE_CREATION_ERROR:
             errMsg = "☹ OOPS!!! Unable to create file, please restart the program.";
             break;
+        case INVALID_UPDATE_PARAMETERS:
+            errMsg = "☹ OOPS!!! You might have invalid params! Some example of update command are:\n"
+                    + "update <selection number> <todo>.\n"
+                    + "update <selection number> <deadline>.\n"
+                    + "update <selection number> <event>.\n";
+            break;
         default:
             break;
         }

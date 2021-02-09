@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.exception.DukeExceptionType;
 
@@ -53,6 +54,18 @@ public class Parser {
             String date = getDate(text);
             commandType = new AddCommand(command, description, date);
             break;
+        case "update":
+            String detailsForUpdate = text.replaceFirst("update \\d+ ", "");
+            String selection = text.split(" ")[1];
+            String addCommand = getCommand(detailsForUpdate);
+            String descriptionForUpdate = getDescription(detailsForUpdate);
+            if (addCommand.equals("deadline") || addCommand.equals("event")) {
+                String dateForUpdate = getDate(detailsForUpdate);
+                commandType = new UpdateCommand(selection, addCommand, descriptionForUpdate, dateForUpdate);
+            } else {
+                commandType = new UpdateCommand(selection, addCommand, descriptionForUpdate);
+            }
+            break;
         default:
             throw new DukeException(DukeExceptionType.UNKNOWN_INPUT);
         }
@@ -75,6 +88,7 @@ public class Parser {
         case "delete":
         case "done":
         case "todo":
+        case "update":
             description = text;
             break;
         case "event":
@@ -136,6 +150,24 @@ public class Parser {
             if (!Utility.isNumeric(description)) {
                 // Selection not numeric
                 throw new DukeException(command, DukeExceptionType.INVALID_INTEGER);
+            }
+        }
+
+        //throws exception for update commands
+        if (command.equals("update")) {
+            String[] text = description.split(" ");
+            boolean isMissingParam = text.length < 3;
+
+            if (isMissingParam) {
+                throw new DukeException(command, DukeExceptionType.INVALID_UPDATE_PARAMETERS);
+            }
+
+            String selection = text[0];
+            String descriptionForUpdate = text[1];
+            boolean isEmptyDescription = descriptionForUpdate.equals("");
+
+            if (!Utility.isNumeric(selection) || isEmptyDescription) {
+                throw new DukeException(command, DukeExceptionType.INVALID_UPDATE_PARAMETERS);
             }
         }
     }
