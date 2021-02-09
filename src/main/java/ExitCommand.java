@@ -5,12 +5,12 @@ public class ExitCommand extends Command {
     public ExitCommand() {}
 
     public static boolean isExit(Command command) {
-        return command instanceof ExitCommand; // instanceof returns false if it is null
+        // instanceof returns false if it is null
+        return command instanceof ExitCommand;
     }
 
     @Override
     public CommandResult execute() throws DukeException {
-        System.exit(0);
         return new CommandResult(EXIT_MESSAGE);
     }
 }

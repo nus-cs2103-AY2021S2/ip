@@ -8,10 +8,6 @@ public class DeleteCommand extends Command {
         this.taskNumberToDelete = taskNumber;
     }
 
-    public int getTaskNumberToDelete() {
-        return this.taskNumberToDelete;
-    }
-
     @Override
     public CommandResult execute() throws DukeException {
         try {

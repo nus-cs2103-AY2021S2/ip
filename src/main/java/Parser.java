@@ -37,9 +37,8 @@ public class Parser {
         String operator = parseOperator(userInput);
         // split command text by its first space into 2 parts
         String[] taskDetail = userInput.split(" ", 2);
-
-//        TaskManager taskManager = new TaskManager(operator);
         Command command = new Command();
+
         // parse command details according to their operator
         switch (operator) {
         case "bye":
@@ -48,36 +47,29 @@ public class Parser {
         case "done":
             int taskNumberToComplete = parseDone(taskDetail);
             command = new DoneCommand(taskNumberToComplete);
-//            taskManager =  new TaskManager(operator, Integer.toString(taskNumberToComplete));
             break;
         case "delete":
             int taskNumberToDelete = parseDelete(taskDetail);
             command = new DeleteCommand(taskNumberToDelete);
-//            taskManager = new TaskManager(operator, Integer.toString(taskNumberToDelete));
             break;
         case "todo":
             String description = parseAddToDo(taskDetail);
             command = new AddCommand(operator, description);
-//            taskManager = new TaskManager(operator, description);
             break;
         case "deadline":
             String[] detailsDeadline = parseAddDeadline(taskDetail);
             command = new AddCommand(operator, detailsDeadline);
-//            taskManager = new TaskManager(operator, detailsDeadline);
             break;
         case "event":
             String[] detailsEvent = parseAddEvent(taskDetail);
             command = new AddCommand(operator, detailsEvent);
-//                taskManager = new TaskManager(operator, detailsEvent);
-                break;
+            break;
         case "list":
             command = new ListCommand();
-//                taskManager = new TaskManager(operator);
-                break;
+            break;
         case "find":
             String keyword = parseFindTask(taskDetail);
             command = new FindCommand(keyword);
-//            taskManager = new TaskManager(operator, keyword);
             break;
         }
         return command;

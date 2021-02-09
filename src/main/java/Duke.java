@@ -20,8 +20,6 @@ public class Duke {
     }
 
     private CommandResult executeCommand(Command command) throws DukeException {
-//            TaskAction action = taskManager.execute();
-//            TaskResult result = tasks.executeOperation(action);
         command.setData(tasks);
         CommandResult result = command.execute();
         return result;
@@ -37,6 +35,9 @@ public class Duke {
         try {
             Parser commandParser = new Parser();
             command = commandParser.parseCommand(userInput);
+            if (ExitCommand.isExit(command)) {
+                exit();
+            }
             CommandResult result = executeCommand(command);
             storage.updateTaskList(tasks);
             String response = ui.showResultToUser(result);
@@ -45,22 +46,4 @@ public class Duke {
             return ui.showErrorMessage(e.getMessage());
         }
     }
-
-
-//        if (userInput.equals("bye")){
-//            exit();
-//            return ui.showGoodbyeMessage();
-//        }
-//        try {
-//            Parser commandParser = new Parser();
-//            Command command = commandParser.parseCommand(userInput);
-//            CommandResult result = executeCommand(command);
-////            TaskManager taskManager = commandParser.parseCommand(userInput);
-////            TaskResult result = executeCommand(taskManager);
-//            storage.updateTaskList(tasks);
-//            String response = ui.showResultToUser(result);
-//            return response;
-//        } catch (DukeException e) {
-//            return ui.showErrorMessage(e.getMessage());
-//        }
 }

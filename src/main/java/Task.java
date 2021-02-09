@@ -1,7 +1,6 @@
 public class Task {
     private String description;
     private boolean isDone;
-    private String type;
     protected String separator = " | ";
 
     public Task(String description) {
@@ -24,8 +23,6 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-
-    public boolean getStatus() { return this.isDone; }
 
     @Override
     public String toString() {

@@ -21,44 +21,6 @@ public class TaskList {
         this.totalTask = getSize();
     }
 
-    /**
-     * Execute the operations on this TaskList as instructed.
-     * @param taskAction TaskAction object contains actionType and related task details to instruct the operation.
-     * @return TaskResult object contains operation result as feedback to user.
-     * @throws DukeException If taskNumber is invalid.
-     */
-    public TaskResult executeOperation(TaskAction taskAction) throws DukeException {
-        Task relatedTask = taskAction.getRelatedTask();
-        int relatedTaskNumber = taskAction.getRelatedTaskNumber();
-        String keyword = taskAction.getKeyword();
-        String actionType = taskAction.getActionType();
-
-        TaskResult taskResult = new TaskResult();
-        switch (actionType) {
-        case "add":
-            addTask(relatedTask);
-            taskResult = new TaskResult(relatedTask, "add");
-            break;
-        case "complete":
-            relatedTask = markTaskAsDone(relatedTaskNumber);
-            taskResult = new TaskResult(relatedTask, "complete");
-            break;
-        case "delete":
-            relatedTask = deleteTask(relatedTaskNumber);
-            taskResult = new TaskResult(relatedTask, "delete");
-            break;
-        case "display":
-            taskResult = new TaskResult(new TaskList(this.taskList, this.totalTask), "display");
-            break;
-        case "find":
-            TaskList matchingTaskList = findMatchingTask(keyword);
-            taskResult = new TaskResult(matchingTaskList, "find");
-            break;
-        }
-        return taskResult;
-    }
-
-
     private boolean isDone(String icon) {
         if (icon.equals("\u2713")){
             return true;

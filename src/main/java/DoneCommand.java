@@ -8,10 +8,6 @@ public class DoneCommand extends Command {
         this.taskNumberToDone = taskNumber;
     }
 
-    public int getTaskNumberToDone() {
-        return this.taskNumberToDone;
-    }
-
     @Override
     public CommandResult execute() throws DukeException {
         try {
