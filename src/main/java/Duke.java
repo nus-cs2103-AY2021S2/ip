@@ -28,6 +28,8 @@ public class Duke {
         } catch (DukeException e) {
             taskList = new TaskList();
         }
+
+        assert taskList != null;
     }
 
     /**
@@ -53,6 +55,9 @@ public class Duke {
                     // user wants to complete a task
                 } else if (command.equals("done")) {
                     int index = parser.getIndexToModify();
+
+                    assert index >= 1;
+
                     taskList = taskList.completeTask(index);
                     output = ui.displayTaskCompleted(taskList.getTask(index));
                     storage.writeFile(taskList);
@@ -60,6 +65,9 @@ public class Duke {
                     // user wants to delete a task
                 } else if (command.equals("delete")) {
                     int index = parser.getIndexToModify();
+
+                    assert index >= 1;
+
                     Task task = taskList.getTask(index);
                     taskList = taskList.deleteTask(index);
                     output = ui.displayTaskDeleted(task, taskList);

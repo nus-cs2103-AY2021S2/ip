@@ -40,6 +40,7 @@ public class TaskList {
      * @return Task at the given index.
      */
     public Task getTask(int index) {
+        assert index >= 0;
         return taskArrayList.get(index);
     }
 
@@ -61,6 +62,7 @@ public class TaskList {
      * @return New TaskList object with the task deleted.
      */
     public TaskList deleteTask(int index) {
+        assert index >= 0;
         taskArrayList.remove(index);
         return new TaskList(taskArrayList);
     }
