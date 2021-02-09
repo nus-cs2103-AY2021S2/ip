@@ -85,6 +85,13 @@ public class Ui {
         return  response;
     }
 
+    public String showUpcomingTasks(TaskList taskList) {
+        String response = "";
+        response += LINE_PREFIX + "Ok Human. Here are your upcoming tasks:\n";
+        response += showTasks(taskList);
+        return  response;
+    }
+
     public String printTaskDone(Task task) {
         return String.format("%sNoted Human. I've marked this task as done:\n[%s] [%s] %s\n",
                 LINE_PREFIX, task.getTaskType(), task.getStatusIcon(),

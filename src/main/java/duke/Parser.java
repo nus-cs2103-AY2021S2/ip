@@ -30,6 +30,8 @@ public class Parser {
             return parseDelete(splitInput[1]);
         } else if (command.equals("find")) {
             return parseFind(splitInput[1]);
+        }else if (command.equals("remind")) {
+            return parseRemind(userInput);
         }else if (isValidTaskCommand(command)) {
             return parseTask(userInput);
         } else {
@@ -69,6 +71,29 @@ public class Parser {
      */
     public static Command parseFind(String keyword) {
         return new FindCommand(keyword);
+    }
+
+    /**
+     * Parse the command args in the context of Remind
+     * @param input user's input
+     * @return FindCommand
+     * @throws DukeCommandException exceptions in user command inputs for remind
+     */
+    public static Command parseRemind(String input) throws DukeCommandException {
+        String[] splitInput = input.split(" ");
+        switch (splitInput.length) {
+        case 1:
+            return new RemindCommand();
+        case 2:
+            try {
+                int numDays = Integer.parseInt(splitInput[1]);
+                return new RemindCommand(numDays);
+            } catch (NumberFormatException e) {
+                throw new DukeCommandException("Only give numbers for argument of remind");
+            }
+        default:
+            throw new DukeCommandException("Give the command in the correct format below:\nremind <number>");
+        }
     }
 
 
