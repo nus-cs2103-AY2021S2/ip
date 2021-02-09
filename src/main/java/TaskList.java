@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+
 import javafx.scene.control.Label;
 
 /**
@@ -61,7 +62,7 @@ public class TaskList {
             output[0] = "Here are the tasks in your list:";
             for (int i = 0; i < list.size(); i++) {
                 Task currTask = list.get(i);
-                String task =  (i + 1) + "." + currTask.toString();
+                String task = (i + 1) + "." + currTask.toString();
                 output[i + 1] = task;
             }
             return ui.print(output);

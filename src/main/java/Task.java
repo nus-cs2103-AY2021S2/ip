@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Task object for CS2103T iP. Stores relevant data regarding a task, including type, task,
@@ -81,12 +80,12 @@ public class Task {
     public String toString() {
         if (this.type == 0) {
             return checkType() + checkDone() + this.task;
-        } else if  (this.type == 1) {
+        } else if (this.type == 1) {
             return checkType() + checkDone() + this.task + "(by: "
                     + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
             return checkType() + checkDone() + this.task + "(at: "
-                    + this.time.format(DateTimeFormatter.ofPattern("hh:mm a"))+ ")";
+                    + this.time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
         }
     }
 

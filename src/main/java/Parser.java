@@ -27,7 +27,7 @@ public class Parser {
     public Label parse(String input) {
         if (input.equals("list")) {
             return list.listAll();
-        } else if (input.contains("done")){
+        } else if (input.contains("done")) {
             int number;
             try {
                 number = (Integer.parseInt(input.substring(5))) - 1;
@@ -104,7 +104,7 @@ public class Parser {
                     }
                 }
                 if (noOfHits == 0) {
-                    return ui.print("Looks like no tasks were found :(");
+                    return ui.print("Looks like no tasks were found :-(");
                 } else {
                     String[] output = new String[noOfHits + 1];
                     output[0] = "Here are the matching tasks in your list:";
