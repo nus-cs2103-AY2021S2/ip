@@ -18,6 +18,7 @@ import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
 import duke.dukeexceptions.EmptyArgumentException;
 import duke.dukeexceptions.EmptyListException;
+import duke.dukeexceptions.InvalidCommandException;
 import duke.dukeexceptions.InvalidDateTimeException;
 import duke.dukeexceptions.InvalidIndexInputException;
 import duke.tasks.TaskList;
@@ -54,7 +55,7 @@ public class Parser {
      * @throws EmptyListException when trying to find by keyword but TaskList is empty.
      */
     public Command parse(String input) throws EmptyArgumentException, InvalidDateTimeException,
-            InvalidIndexInputException, EmptyListException {
+            InvalidIndexInputException, EmptyListException, InvalidCommandException {
         String[] commandAndInput = input.split(" ", 2);
         String command = commandAndInput[0];
 
@@ -83,8 +84,11 @@ public class Parser {
         case ByeCommand.COMMAND_WORD:
             return prepareExit();
 
+        case HelpCommand.COMMAND_WORD:
+            return prepareHelp(commandAndInput);
+
         default:
-            return prepareHelp();
+            throw new InvalidCommandException();
         }
     }
 
@@ -198,8 +202,14 @@ public class Parser {
         return new ByeCommand(this.taskList, this.storage);
     }
 
-    private Command prepareHelp() {
-        return new HelpCommand(this.taskList, this.storage);
+    private Command prepareHelp(String[] commandAndInput) {
+        assert commandAndInput.length >= 1 && commandAndInput.length <= 2;
+
+        if (commandAndInput.length == 1) {
+            return new HelpCommand(this.taskList, this.storage, null);
+        }
+
+        return new HelpCommand(this.taskList, this.storage, commandAndInput[1]);
     }
 
     private void trimInputsInArray(String[] taskInputAndDate) {
