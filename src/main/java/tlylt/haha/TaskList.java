@@ -37,12 +37,18 @@ public class TaskList {
      * @param task Task created by user.
      */
     String addToDB(Task task) {
+        if (isDuplicate(task)) {
+            return "Already added this task!";
+        }
         database.add(task);
-
         String response = tellAdd();
         response += "  " + database.get(database.size() - 1) + "\n";
         response += tellSize();
         return response;
+    }
+
+    private boolean isDuplicate(Task task) {
+        return database.stream().anyMatch(currentTask -> currentTask.equals(task));
     }
 
     /**

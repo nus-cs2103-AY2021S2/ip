@@ -15,7 +15,7 @@ public class Ui {
     private static final String STARTER = "Dude, I'm HAHA.\n"
             + "What can I do for you?\n"
             + "Hint: deadline & event to include date & time\n"
-            + "e.g. 2020-02-02 18:00\n"
+            + "Sample: deadline homework /by 2020-02-02 18:00\n"
             + "(Oh when you are done, say bye)\n";
 
     private static final String TASK_NOT_FOUND = "OH WAIT A MINUTE!\n"
