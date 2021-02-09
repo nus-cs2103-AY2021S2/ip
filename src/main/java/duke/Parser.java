@@ -1,6 +1,8 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Parser {
 
@@ -16,10 +18,9 @@ public class Parser {
             return "Bye!";
         } else if (line.compareTo("list") == 0) {
             // List command, print out all the previous lines.
-            String response = "";
-            for (int i = 0; i < tasks.size(); i++) {
-                response += String.format("%d. %s\n", i + 1, tasks.get(i));
-            }
+            String response = IntStream.range(0, tasks.size())
+                                .mapToObj(i -> String.format("%d. %s\n", i + 1, tasks.get(i)))
+                                .collect(Collectors.joining());
             return response;
         } else if (line.startsWith("done ")) {
             // Done command, set the task as done.
