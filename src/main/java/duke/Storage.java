@@ -48,6 +48,7 @@ public class Storage {
             File dir = new File(dirPath);
             handleNonExistentFiles(file, dir);
             Scanner sc = new Scanner(file);
+            assert sc != null : "Scanner for file is null";
 
             while (sc.hasNext()) {
                 String[] taskInfo = sc.nextLine().split(" \\| ");
@@ -94,8 +95,10 @@ public class Storage {
 
         try {
             FileWriter fileWriter = new FileWriter(file, false);
-            for (int i = 1; i <= tasks.getSize(); i++) {
+            assert fileWriter != null : "FileWriter not initialized";
+            for (int i = 1; i <= tasks.size(); i++) {
                 Task task = tasks.get(i);
+                assert task != null : "Task is null";
                 fileWriter.write(task.writeContentFormat() + System.lineSeparator());
             }
             fileWriter.close();
@@ -109,6 +112,7 @@ public class Storage {
             if (!Files.isDirectory(Paths.get(dirPath))) {
                 // Create data folder and duke.txt if do not exist
                 dir.mkdir();
+                assert Files.isDirectory(Paths.get(dirPath)) : "Directory does not exist";
                 file.createNewFile();
             } else if (!file.exists()) {
                 // Create duke.txt if do not exist
