@@ -12,7 +12,9 @@ public abstract class Task {
         this.isDone = false; // tasks always start as not done
     }
 
-    public boolean isDone() { return isDone; }
+    public boolean isDone() {
+        return isDone;
+    }
 
     public String getDescription() {
         return description;

@@ -30,14 +30,12 @@ public class Storage {
             Scanner saveReader = new Scanner(savefile);
 
             while (saveReader.hasNextLine()) {
-                String savedata = saveReader.nextLine();
-                tasks.add(TaskParser.parseTask(savedata));
+                String saveData = saveReader.nextLine();
+                tasks.add(TaskParser.parseTask(saveData));
             }
 
             saveReader.close();
         } catch (FileNotFoundException e) {
-            tasks.clear();
-
             // create file if it doesn't exist
             File saveFile = new File(filepath);
             try {
@@ -75,9 +73,10 @@ public class Storage {
 
             saveWriter.write(saveStringBuilder.toString());
             saveWriter.close();
+
         } catch (Exception e) {
-            String errorMsg = "Save file not found!\n" +
-                    "Please don't manually edit the save file.";
+            String errorMsg = "Save file not found!\n"
+                    + "Please don't manually edit the save file.";
             throw new DukeException(errorMsg);
         }
     }
