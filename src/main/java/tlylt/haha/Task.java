@@ -3,6 +3,7 @@ package tlylt.haha;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Abstract representation of a task.
@@ -103,4 +104,19 @@ public abstract class Task {
         return type + "|" + getIsDone() + "|" + description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        Task task = (Task) o;
+        return isDone == task.isDone &&
+                description.equals(task.description) &&
+                type.equals(task.type) &&
+                Objects.equals(date, task.date) &&
+                Objects.equals(time, task.time);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone, type, date, time);
+    }
 }

@@ -37,7 +37,7 @@ public class DialogBox extends HBox {
                 Color.rgb(224, 234, 245),
                 CornerRadii.EMPTY,
                 Insets.EMPTY)));
-        text.setStyle("-fx-text-fill:#31456A;-fx-font-size: 14px;-fx-font-weight:bold;");
+        text.setStyle("-fx-text-fill:#31456A;-fx-font-size: 13px;-fx-font-weight:bold;");
         text.setEffect(new DropShadow(
                 BlurType.GAUSSIAN,
                 Color.rgb(199, 212, 228),

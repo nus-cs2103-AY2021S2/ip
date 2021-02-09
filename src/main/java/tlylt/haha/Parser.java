@@ -3,6 +3,7 @@ package tlylt.haha;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Utility class to parse user input.
@@ -78,17 +79,21 @@ public class Parser {
      * @throws HahaEmptyDescriptionException Command's required description is missing.
      */
     static void handleEmptyDescriptionCommand(String input) throws HahaEmptyDescriptionException {
-        // TaskType
-        String task = Parser.tokenize(input)[0];
+
         String description = Parser.tokenize(input).length == 2 ? Parser.tokenize(input)[1] : "";
         // Check input has description following task command words
-        boolean hasTaskKeyword = Arrays
-                .stream(TaskType.values())
-                .map(TaskType::getRep)
-                .anyMatch(x -> x.equals(task));
+        boolean hasTaskKeyword = checkHasTaskKeyword(input);
         if (hasTaskKeyword && description.isEmpty()) {
             throw new HahaEmptyDescriptionException(input);
         }
+    }
+
+    private static boolean checkHasTaskKeyword(String input) {
+        String task = Parser.tokenize(input)[0];
+        return Arrays
+                .stream(TaskType.values())
+                .map(TaskType::getRep)
+                .anyMatch(x -> x.equals(task));
     }
 
     /**
