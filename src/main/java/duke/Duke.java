@@ -36,6 +36,10 @@ public class Duke {
         }
     }
 
+    public String welcomeUser() {
+        return ui.showGreetings();
+    }
+
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -44,25 +48,4 @@ public class Duke {
             return "Oh no... " + e.getMessage();
         }
     }
-
-//    /**
-//     * Manages the logic of the Duke chat bot.
-//     */
-//    public void run() {
-//        ui.showGreetings();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.ask();
-//                ui.showLine();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError("Oh no... " + e.getMessage());
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
-//    }
 }
