@@ -127,6 +127,11 @@ public class Haha extends Application {
         return DialogBox.getUserDialog(label, new ImageView(userImage));
     }
 
+    private void configureSendButton() {
+        sendButton.setPrefWidth(55.0);
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
+    }
+    
     private DialogBox makeHahaDialogBox(String text) {
         Label label = new Label(text);
         return DialogBox.getHahaDialog(label, new ImageView(hahaImage));
