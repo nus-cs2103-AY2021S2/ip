@@ -19,3 +19,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 # data storage
 src/main/java/duke/data
 src/main/java/duke/DukeTwo.java
+data/
