@@ -64,8 +64,7 @@ public class TaskStorage {
 
 
             assert directory.exists() : "Directory does not exist";
-
-            File file = new File(FILEPATH);
+            
 
             if (!file.exists()) {
                 file.createNewFile();
