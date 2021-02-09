@@ -34,6 +34,7 @@ public class Parser {
      */
     public static Command parse(String userInput, TaskList tasks) {
         String[] split = userInput.split("\\s+");
+        assert(split.length >= 1);
         String command = split[0];
         Command res;
         try {
@@ -41,6 +42,7 @@ public class Parser {
             case "todo":
                 checkStringArgument(split, command);
                 String description = userInput.substring(5);
+                assert(!description.isBlank());
                 res = new AddCommand(new ToDo(description));
                 break;
             case "deadline":
@@ -48,6 +50,8 @@ public class Parser {
                 String[] deadlineDetails = userInput.substring(9).split(" /by ");
                 checkDateTime(deadlineDetails);
                 String deadlineDescription = deadlineDetails[0];
+                assert(!deadlineDescription.isBlank());
+                assert(deadlineDetails.length == 2);
                 LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlineDetails[1].trim(), formatter);
                 res = new AddCommand(new Deadline(deadlineDescription, deadlineDateTime));
                 break;
@@ -56,6 +60,8 @@ public class Parser {
                 String[] eventDetails = userInput.substring(6).split(" /at ");
                 checkDateTime(eventDetails);
                 String eventDescription = eventDetails[0];
+                assert(!eventDescription.isBlank());
+                assert(eventDetails.length == 2);
                 LocalDateTime eventDateTime = LocalDateTime.parse(eventDetails[1].trim(), formatter);
                 res = new AddCommand(new Event(eventDescription, eventDateTime));
                 break;
@@ -64,10 +70,12 @@ public class Parser {
                 break;
             case "done":
                 int completedTaskIdx = checkNumericalArgument(split, tasks);
+                assert(completedTaskIdx >= 0 && completedTaskIdx < tasks.getSize());
                 res = new DoneCommand(completedTaskIdx);
                 break;
             case "delete":
                 int taskToDelete = checkNumericalArgument(split, tasks);
+                assert(taskToDelete >= 0 && taskToDelete < tasks.getSize());
                 res = new DeleteCommand(taskToDelete);
                 break;
             case "find":
