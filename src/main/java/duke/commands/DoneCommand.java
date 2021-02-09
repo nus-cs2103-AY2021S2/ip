@@ -4,6 +4,7 @@ import static duke.common.CommandUtils.ALL;
 import static duke.common.CommandUtils.assertInputs;
 import static duke.common.CommandUtils.checkIndexOutOfBounds;
 import static duke.common.CommandUtils.checkListIsEmpty;
+import static duke.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static duke.common.Messages.MESSAGE_TASK_ALL_COMPLETED;
 import static duke.common.Messages.MESSAGE_TASK_COMPLETED;
 import static duke.common.Utils.checkIsNumeric;
@@ -37,13 +38,14 @@ public class DoneCommand extends Command {
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         assertInputs(input);
         int listSize = checkListIsEmpty(taskList, false);
+
         String response;
         if (input.equals(ALL)) {
             response = processDoneAllCommand(taskList, ui);
         } else if (checkIsNumeric(input)) {
             response = processDoneCommand(taskList, ui, input, listSize);
         } else {
-            throw new DukeException("Invalid command");
+            throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         storage.saveFile(taskList);
         return new CommandResponse(response);
