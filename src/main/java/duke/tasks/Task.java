@@ -166,7 +166,7 @@ public class Task {
             output.append("D");
             break;
         default:
-            break;
+            assert false : "There should only be three todo types";
         }
         output.append("|");
         output.append(this.isComplete() ? "1" : "0");

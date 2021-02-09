@@ -50,6 +50,8 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Encountered an error when saving duke.tasks to file");
         }
+
+        assert this.file.exists() : "Missing task list on disk!";
     }
 
     /**
