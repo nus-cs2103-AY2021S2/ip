@@ -46,7 +46,7 @@ public class TaskList {
      */
     public String printTasks() {
         if (tasks.isEmpty()) {
-            return "It is empty boss.";
+            return "The task list is empty boss.";
         }
 
         StringBuilder allTasks = new StringBuilder("You have ")

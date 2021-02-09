@@ -16,6 +16,7 @@ public class Duke {
             tempTasks = new TaskList(); // case where save file does not exist
         }
 
+        assert tempTasks != null : "Error: Attempt to construct Duke without valid Storage.";
         this.tasks = tempTasks;
     }
 

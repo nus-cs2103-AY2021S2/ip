@@ -44,13 +44,13 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File("duke_saved_tasks");
-            boolean isAlreadyPresent = !file.createNewFile();
+            boolean fileIsAlreadyPresent = !file.createNewFile();
 
-            if (isAlreadyPresent) {
+            if (fileIsAlreadyPresent) {
                 FileReader fileReader = new FileReader(file);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 String currLine = bufferedReader.readLine();
-                ArrayList<Task> ret = new ArrayList<>();
+                ArrayList<Task> loadedTasks = new ArrayList<>();
 
                 while (currLine != null) {
                     String[] split = currLine.split(" \\| ");
@@ -62,19 +62,19 @@ public class Storage {
                     case "D":
                         Deadline deadline = new Deadline(description, LocalDateTime.parse(split[3]));
                         setDoneStatus(deadline, isDone);
-                        ret.add(deadline);
+                        loadedTasks.add(deadline);
                         break;
 
                     case "E":
                         Event event = new Event(description, LocalDateTime.parse(split[3]));
                         setDoneStatus(event, isDone);
-                        ret.add(event);
+                        loadedTasks.add(event);
                         break;
 
                     case "T":
                         ToDo toDo = new ToDo(description);
                         setDoneStatus(toDo, isDone);
-                        ret.add(toDo);
+                        loadedTasks.add(toDo);
                         break;
 
                     default:
@@ -84,7 +84,7 @@ public class Storage {
                     currLine = bufferedReader.readLine();
                 }
 
-                return ret;
+                return loadedTasks;
 
             } else {
                 throw new DukeException("No existing save file, creating new save now.\n");
