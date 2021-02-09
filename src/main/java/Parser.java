@@ -27,7 +27,7 @@ public class Parser {
     public Label parse(String input) {
         if (input.equals("list")) {
             return list.listAll();
-        } else if (input.contains("done")){
+        } else if (input.contains("done")) {
             int number;
             try {
                 number = (Integer.parseInt(input.substring(5))) - 1;

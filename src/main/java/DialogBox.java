@@ -11,6 +11,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates a new DialogBox for Duke.
+     * @param l Text to be displayed.
+     * @param iv Image to be displayed.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
