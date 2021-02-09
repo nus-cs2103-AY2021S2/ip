@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -67,7 +68,7 @@ public class Storage {
      * @param directory String of directory containing "switchblade.SwitchBlade.txt"
      * @exception IOException Error was encountered attempting to write to "switchblade.SwitchBlade.txt"
      */
-    public static void save(ArrayList<Task> outputToFile, String directory) throws IOException {
+    public static void save(List<Task> outputToFile, String directory) throws IOException {
         String filepath = directory + "/switchblade.SwitchBlade.txt";
         File file = new File(filepath);
         File folder = new File(directory);

@@ -3,6 +3,9 @@ package switchblade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Contains an ArrayList of Tasks with its own methods that handle user printing and saving to file
@@ -10,7 +13,7 @@ import java.util.ArrayList;
  * @author leeyueyang
  */
 public class myList {
-    ArrayList<Task> taskList;
+    List<Task> taskList;
 
     public myList() {
         taskList = new ArrayList<>();
@@ -58,6 +61,23 @@ public class myList {
         } else {
             return Ui.taskNotFoundError();
         }
+    }
+
+    public String delete(List<Integer> integers) {
+        assert integers.size() > 0;
+
+        for (int i : integers) {
+            if (i < taskList.size() && i >= 0) {
+                taskList.set(i, null);
+            }
+        }
+
+        taskList = taskList.parallelStream()
+                                .filter(Objects::nonNull)
+                                .collect(Collectors.toList());
+
+        this.save();
+        return Ui.removeTask(taskList);
     }
 
     public String retrieve()  {

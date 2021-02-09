@@ -1,6 +1,7 @@
 package switchblade;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Returns String required by GUI to output
@@ -12,7 +13,7 @@ public class Ui {
 
 
 
-    public static String addedTask(ArrayList<Task> taskList) {
+    public static String addedTask(List<Task> taskList) {
         // Retrieve last task in list and print it
         StringBuilder sb = new StringBuilder();
 
@@ -23,9 +24,9 @@ public class Ui {
         return sb.toString();
     }
 
-    public static String removeTask(ArrayList<Task> taskList) {
+    public static String removeTask(List<Task> taskList) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Got it! I've removed the task for you\n");
+        sb.append("Got it! I've removed the task(s) for you\n");
         sb.append("You now have " + taskList.size() + " tasks\n");
 
         return sb.toString();
