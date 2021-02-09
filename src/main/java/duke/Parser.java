@@ -65,6 +65,7 @@ public class Parser {
         default:
             throw new DukeWrongCommandException(commandStr);
         }
+        assert c != null : "Command should not be null!";
         return c;
     }
 }

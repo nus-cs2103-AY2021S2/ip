@@ -41,6 +41,7 @@ public class AddCommand extends Command {
         default:
             throw new DukeWrongCommandException(taskType);
         }
+        assert t != null : "Task should not be null!";
         tl.add(t);
         storage.save(tl.toString());
         return ui.printTaskMsg(t, tl, "add");
