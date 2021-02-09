@@ -14,6 +14,6 @@ public class UiTest {
 
     @Test
     public void showErrorTest() {
-        assertEquals(":( OOPS!!! Invalid Input", ui.showError("Invalid Input"));
+        assertEquals(":( OOPS!!! Invalid input", ui.showError("Invalid input"));
     }
 }
