@@ -19,10 +19,12 @@ public class Duke {
         }
     }
 
-    private TaskResult executeCommand(TaskManager taskManager) throws DukeException {
-            TaskAction action = taskManager.execute();
-            TaskResult result = tasks.executeOperation(action);
-            return result;
+    private CommandResult executeCommand(Command command) throws DukeException {
+//            TaskAction action = taskManager.execute();
+//            TaskResult result = tasks.executeOperation(action);
+        command.setData(tasks);
+        CommandResult result = command.execute();
+        return result;
     }
 
     private void exit() {
@@ -31,19 +33,34 @@ public class Duke {
     }
 
     public String getResponse(String userInput) throws DukeException {
-        if (userInput.equals("bye")){
-            exit();
-            return ui.showGoodbyeMessage();
-        }
+        Command command;
         try {
             Parser commandParser = new Parser();
-            TaskManager taskManager = commandParser.parseCommand(userInput);
-            TaskResult result = executeCommand(taskManager);
+            command = commandParser.parseCommand(userInput);
+            CommandResult result = executeCommand(command);
             storage.updateTaskList(tasks);
-            String response = ui.showResultToUser(tasks, result);
+            String response = ui.showResultToUser(result);
             return response;
         } catch (DukeException e) {
             return ui.showErrorMessage(e.getMessage());
         }
     }
+
+
+//        if (userInput.equals("bye")){
+//            exit();
+//            return ui.showGoodbyeMessage();
+//        }
+//        try {
+//            Parser commandParser = new Parser();
+//            Command command = commandParser.parseCommand(userInput);
+//            CommandResult result = executeCommand(command);
+////            TaskManager taskManager = commandParser.parseCommand(userInput);
+////            TaskResult result = executeCommand(taskManager);
+//            storage.updateTaskList(tasks);
+//            String response = ui.showResultToUser(result);
+//            return response;
+//        } catch (DukeException e) {
+//            return ui.showErrorMessage(e.getMessage());
+//        }
 }

@@ -150,7 +150,7 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    private void addTask(Task task) {
+    public void addTask(Task task) {
         this.taskList.add(task);
     }
 
@@ -160,7 +160,7 @@ public class TaskList {
      * @param taskNumber Order number of the task to be deleted.
      * @return Task deleted.
      */
-    private Task deleteTask(int taskNumber) throws DukeException {
+    public Task deleteTask(int taskNumber) throws DukeException {
         try {
             Task curTask = this.taskList.remove(taskNumber - 1);
             return curTask;
@@ -175,7 +175,7 @@ public class TaskList {
      * @param taskNumber Order number of the task to be completed.
      * @return Task marked as done.
      */
-    private Task markTaskAsDone(int taskNumber) throws DukeException {
+    public Task markTaskAsDone(int taskNumber) throws DukeException {
         try {
             Task curTask = this.taskList.get(taskNumber - 1);
             curTask.markAsDone();
@@ -191,7 +191,7 @@ public class TaskList {
      * @param keyword Keyword to look for in tasks' description.
      * @return List of tasks that have the keyword in their description.
      */
-    private TaskList findMatchingTask(String keyword) {
+    public TaskList findMatchingTask(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<> ();
         // loop through every task in the list
         for (Task t: this.taskList) {

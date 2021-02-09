@@ -22,32 +22,36 @@ public class Ui {
         System.out.println("---------------------------------------------");
     }
 
-    public String showResultToUser(TaskList tasks, TaskResult taskResult) {
-        String feedbackToUser = taskResult.getFeedbackToUser();
-        TaskList relatedTaskList = taskResult.getTaskList();
-        Task relatedTask = taskResult.getTask();
-
-        String responseToUser = "OOPS!! Something is wrong.";
-
-        switch (feedbackToUser) {
-        case "add":
-            responseToUser = showAddMessage(relatedTask, tasks.getSize());
-            break;
-        case "complete":
-            responseToUser = showCompleteMessage(relatedTask);
-            break;
-        case "delete":
-            responseToUser = showDeleteMessage(relatedTask, tasks.getSize());
-            break;
-        case "display":
-            responseToUser = printMyTask(tasks);
-            break;
-       case "find":
-           responseToUser = printMatchingTask(relatedTaskList);
-           break;
-        }
-        return responseToUser;
+    public String showResultToUser(CommandResult result) {
+        return result.getFeedbackToUser();
     }
+
+//    public String showResultToUser(TaskList tasks, TaskResult taskResult) {
+//        String feedbackToUser = taskResult.getFeedbackToUser();
+//        TaskList relatedTaskList = taskResult.getTaskList();
+//        Task relatedTask = taskResult.getTask();
+//
+//        String responseToUser = "OOPS!! Something is wrong.";
+//
+//        switch (feedbackToUser) {
+//        case "add":
+//            responseToUser = showAddMessage(relatedTask, tasks.getSize());
+//            break;
+//        case "complete":
+//            responseToUser = showCompleteMessage(relatedTask);
+//            break;
+//        case "delete":
+//            responseToUser = showDeleteMessage(relatedTask, tasks.getSize());
+//            break;
+//        case "display":
+//            responseToUser = printMyTask(tasks);
+//            break;
+//       case "find":
+//           responseToUser = printMatchingTask(relatedTaskList);
+//           break;
+//        }
+//        return responseToUser;
+//    }
 
 
     /**

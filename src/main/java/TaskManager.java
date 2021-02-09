@@ -16,6 +16,7 @@ public class TaskManager {
      */
     public TaskAction execute() {
         TaskAction action = new TaskAction();
+        Command command = new Command();
 
         switch (this.operator){
         case "bye":
@@ -30,16 +31,17 @@ public class TaskManager {
             action = deleteTask(taskNumberToDelete);
             break;
         case "todo":
-            String description = taskDetail[0];
-            action = addToDo(description);
+//            command = new AddCommand(taskDetail);
+//            String description = taskDetail[0];
+//            action = addToDo(description);
             break;
         case "deadline":
-            String[] detailsDeadline = taskDetail;
-            action = addDeadline(detailsDeadline);
+//            String[] detailsDeadline = taskDetail;
+//            action = addDeadline(detailsDeadline);
             break;
         case "event":
-            String[] detailsEvent = taskDetail;
-            action = addEvent(detailsEvent);
+//            String[] detailsEvent = taskDetail;
+//            action = addEvent(detailsEvent);
             break;
         case "list":
             action = displayList();
@@ -52,28 +54,28 @@ public class TaskManager {
         return action;
     }
 
-    private TaskAction addEvent(String[] details) {
-        // create a new Event
-        String description = details[0];
-        String time = details[1];
-        Event newTask = new Event(description, time);
-        return new TaskAction(newTask, "add");
-    }
-
-    private TaskAction addDeadline(String[] details) {
-        // create a new Deadline
-        String description = details[0];
-        String time = details[1];
-        Deadline newTask = new Deadline(description, time);
-
-        return new TaskAction(newTask, "add");
-    }
-
-    private TaskAction addToDo(String description) {
-        // create a new ToDo
-        ToDo newTask = new ToDo(description);
-        return new TaskAction(newTask, "add");
-    }
+//    private TaskAction addEvent(String[] details) {
+//        // create a new Event
+//        String description = details[0];
+//        String time = details[1];
+//        Event newTask = new Event(description, time);
+//        return new TaskAction(newTask, "add");
+//    }
+//
+//    private TaskAction addDeadline(String[] details) {
+//        // create a new Deadline
+//        String description = details[0];
+//        String time = details[1];
+//        Deadline newTask = new Deadline(description, time);
+//
+//        return new TaskAction(newTask, "add");
+//    }
+//
+//    private TaskAction addToDo(String description) {
+//        // create a new ToDo
+//        ToDo newTask = new ToDo(description);
+//        return new TaskAction(newTask, "add");
+//    }
 
     private TaskAction completeTask(int taskNumber) {
         return new TaskAction(taskNumber, "complete");
