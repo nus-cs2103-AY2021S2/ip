@@ -22,10 +22,6 @@ public class Duke {
         }
     }
 
-    private int getIndex(String args) {
-        return Integer.parseInt(args) - 1;
-    }
-
     /**
      * Adds a new Todo to the TaskList and returns the reply.
      *
