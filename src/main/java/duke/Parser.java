@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Parser {
 
+public class Parser {
     /**
      * Handle each line
      *
@@ -15,32 +15,36 @@ public class Parser {
      * @return response of the command
      */
     public String processLine(String line, TaskList tasks) {
-        if (line.compareTo("bye") == 0) {
-            // Bye command, print and exit immediately.
-            return "Bye!";
-        } else if (line.compareTo("list") == 0) {
-            return commandList(line, tasks);
-        } else if (line.startsWith("done ")) {
-            return commandDone(line, tasks);
-        } else if (line.startsWith("delete ")) {
-            return commandDelete(line, tasks);
-        } else if (line.startsWith("find ")) {
-            return commandFind(line, tasks);
-        } else {
-            // No command, add the line task based on the prefix inside.
-            try {
+        try {
+            if (line.compareTo("bye") == 0) {
+                // Bye command, print and exit immediately.
+                return "Bye!";
+            } else if (line.compareTo("list") == 0) {
+                return commandList(line, tasks);
+            } else if (line.startsWith("done ")) {
+                return commandDone(line, tasks);
+            } else if (line.startsWith("delete ")) {
+                return commandDelete(line, tasks);
+            } else if (line.startsWith("find ")) {
+                return commandFind(line, tasks);
+            } else if (line.startsWith("tag ")) {
+                return commandTag(line, tasks);
+            } else {
+                // No command, add the line task based on the prefix inside.
                 return processNewTask(line, tasks);
-            } catch (DukeUnknownCommandException e) {
-                //Handle Unknown Command Exception
-                return "Unknown command detected, ignoring!";
-            } catch (DukeEmptyDescriptionException e) {
-                //Handle Empty Description Exception
-                return "Task description cannot be empty, ignoring!";
-            } catch (DukeException e) {
-                return "Reached an error!";
-            } catch (DateTimeParseException e) {
-                return "Invalid Date Format!";
             }
+        } catch (NumberFormatException e) {
+            return "Task index must be a number!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Task index must be in range!";
+        } catch (DukeUnknownCommandException e) {
+            return "Unknown command detected, ignoring!";
+        } catch (DukeEmptyDescriptionException e) {
+            return "Task description cannot be empty, ignoring!";
+        } catch (DukeException e) {
+            return "Reached an error!";
+        } catch (DateTimeParseException e) {
+            return "Invalid Date Format!";
         }
     }
 
@@ -67,16 +71,10 @@ public class Parser {
      */
     public String commandDone(String line, TaskList tasks) {
         String indexStr = line.substring(5);
-        try {
             int index = Integer.parseInt(indexStr) - 1;
             AbstractTask currentTask = tasks.get(index);
             currentTask.markDone();
             return String.format("Marked task %d as done:\n%s\n", index, currentTask);
-        } catch (NumberFormatException e) {
-            return "Task index must be a number!";
-        } catch (IndexOutOfBoundsException e) {
-            return "Task index must be in range!";
-        }
     }
 
     /**
@@ -88,16 +86,10 @@ public class Parser {
      */
     public String commandDelete(String line, TaskList tasks) {
         String indexStr = line.substring(7);
-        try {
-            int index = Integer.parseInt(indexStr) - 1;
-            String response = String.format("Deleted task %d: %s\n", index, tasks.get(index));
-            tasks.remove(index);
-            return response;
-        } catch (NumberFormatException e) {
-            return "Task index must be a number!";
-        } catch (IndexOutOfBoundsException e) {
-            return "Task index must be in range!";
-        }
+        int index = Integer.parseInt(indexStr) - 1;
+        String response = String.format("Deleted task %d: %s\n", index, tasks.get(index));
+        tasks.remove(index);
+        return response;
     }
 
     /**
@@ -124,6 +116,31 @@ public class Parser {
                 .mapToObj(x -> String.format("%d. %s\n", x + 1, foundTasks.get(x)))
                 .collect(Collectors.joining());
         return response;
+    }
+
+    /**
+     * Add a tag to a task
+     *
+     * @param line the current line to process
+     * @param tasks the current task list to process
+     * @return response of the command
+     */
+    public String commandTag(String line, TaskList tasks) {
+        String[] tokens = line.split(" ");
+        assert(tokens[0].equals("find"));
+
+        if (tokens.length < 4) {
+            return "Invalid command for tag";
+        }
+        int taskIdx = Integer.parseInt(tokens[2]) - 1;
+        if (tokens[1].equals("add")) {
+            tasks.get(taskIdx).addTag(tokens[3]);
+        } else if (tokens[1].equals("delete")) {
+            tasks.get(taskIdx).deleteTag(tokens[3]);
+        } else {
+            return "Invalid tag command";
+        }
+        return "Task tag " + tokens[1] + " complete!";
     }
 
     /**
