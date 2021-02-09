@@ -16,6 +16,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public Task copy() {
+        return new Todo(this.description, this.taskType);
+    }
+
+    @Override
     public String saveTaskString() {
         return super.saveTaskString();
     }

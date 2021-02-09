@@ -27,6 +27,18 @@ public class Deadline extends Task {
         }
     }
 
+    private Deadline(String description, TaskType taskType, LocalDate by) {
+        super(description, taskType);
+        this.by = by;
+    }
+
+    @Override
+    public Task copy() {
+        Deadline taskCopy = new Deadline(this.description, this.taskType, this.by);
+        taskCopy.isDone = this.isDone;
+        return taskCopy;
+    }
+
     @Override
     public String saveTaskString() {
         String delimiter = " ~ ";
