@@ -76,7 +76,12 @@ public class Parser {
         if (EXIT_COMMANDS.contains(command)) {
             response += Ui.printLine("Bye. Hope to see you again soon!");
         } else {
-            if (tokens[0].equals("list")) {
+            if (tokens[0].equals("help")) {
+                response += Ui.printLine(
+                        "For a detailed user guide, "
+                        + "please refer to https://elaina.lirc572.com/#/user_guide"
+                );
+            } else if (tokens[0].equals("list")) {
                 response += Ui.printLine("Here are the tasks in your list:");
                 response += tasks.printAll();
             } else if (tokens[0].equals("done")) {
