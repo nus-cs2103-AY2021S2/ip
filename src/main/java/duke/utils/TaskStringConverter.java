@@ -2,9 +2,11 @@ package duke.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.dukeexceptions.InvalidFileTaskTypeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -109,19 +111,23 @@ public class TaskStringConverter {
 
     /**
      * Returns a List of Tasks, each Task converted from 1 String in the specified list.
-     *consider throwing exceptions?
+     *
      * @param list List of Strings to convert to Tasks.
      * @return List of Tasks.
+     * @throws InvalidFileTaskTypeException thrown when there is an invalid Task type in an entry in the local
+     *     storage file.
      */
-    public static List<Task> listStringToListTask(List<String> list) {
-        List<Task> result = list.stream()
-                                .map(string -> fileStringToTask(string))
-                                .collect(Collectors.toList());
+    public static List<Task> listStringToListTask(List<String> list) throws InvalidFileTaskTypeException {
+        List<Task> result = new ArrayList<>();
+
+        for (String stringTask : list) {
+            result.add(fileStringToTask(stringTask));
+        }
 
         return result;
     }
 
-    private static Task fileStringToTask(String input) {
+    private static Task fileStringToTask(String input) throws InvalidFileTaskTypeException {
         String[] splitFileInput = input.split(" \\| ");
 
         assert splitFileInput.length >= 3;
@@ -139,7 +145,7 @@ public class TaskStringConverter {
             return generateDeadlineTask(splitFileInput);
 
         default:
-            throw new AssertionError(taskType);
+            throw new InvalidFileTaskTypeException();
         }
     }
 

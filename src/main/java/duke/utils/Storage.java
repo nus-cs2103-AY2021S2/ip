@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.dukeexceptions.InvalidFileTaskTypeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -29,7 +30,7 @@ public class Storage {
      *
      * @return TaskList populated with Tasks, if applicable.
      */
-    public TaskList loadFromFile() throws FileNotFoundException {
+    public TaskList loadFromFile() throws FileNotFoundException, InvalidFileTaskTypeException {
         File file = new File(filepath);
 
         List<String> txtInput = new ArrayList<>();
