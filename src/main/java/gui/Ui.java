@@ -1,5 +1,6 @@
 package gui;
 
+import dukeproject.ContactList;
 import dukeproject.TaskList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -54,16 +55,17 @@ public class Ui {
         this.printWithSpace("OOPS!! Please input a value date time format of yyyy-MM-dd HHmm");
     }
 
-    // Error message when task number is invalid
     public void printTaskNumError() {
         this.printWithSpace("Please enter a valid task number");
     }
 
-    // Error message when the find command is invalid
     public void printFindError() {
         this.printWithSpace("Please enter a valid find command");
     }
 
+    public void printGeneralParseError() {
+        this.printWithSpace("Please enter a valid command.");
+    }
     /**
      * Prints a success message after marking a task as done.
      *
@@ -86,6 +88,20 @@ public class Ui {
         // Shows the list of user inputs with its numbering starting from 1
         for (int index = 0; index < taskList.size(); index++) {
             this.printWithSpace(index + 1 + ". " + taskList.getTask(index).toString());
+        }
+        this.printWithSpace("");
+    }
+
+    /**
+     * Prints the list of contacts for the user.
+     * @param contacts Represents the list of all the contacts.
+     */
+    public void printContactList(ContactList contacts) {
+        this.printWithSpace("Here are the contacts in your list:");
+
+        // Shows the list of user inputs with its numbering starting from 1
+        for (int index = 0; index < contacts.getContactsSize(); index++) {
+            this.printWithSpace(index + 1 + ". " + contacts.getContact(index).toString());
         }
         this.printWithSpace("");
     }
@@ -116,6 +132,14 @@ public class Ui {
             this.printWithSpace("None");
         }
         this.printWithSpace(""); // Blank line
+    }
+
+    public void printContactAdded() {
+        this.printWithSpace("The contact has been successfully added.");
+    }
+
+    public void printContactDeleted() {
+        this.printWithSpace("The contact has been successfully deleted.");
     }
 
     /**

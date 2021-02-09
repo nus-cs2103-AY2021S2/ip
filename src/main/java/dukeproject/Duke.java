@@ -17,6 +17,7 @@ public class Duke {
 
     private final Storage storage;
     private TaskList taskList;
+    private ContactList contacts;
     private Ui ui = null;
 
     /**
@@ -31,9 +32,11 @@ public class Duke {
         storage = new Storage(filePath);
 
         try {
-            taskList = new TaskList(storage.loadFileContent());
+            taskList = new TaskList(storage.loadDataFileContent());
+            contacts = new ContactList(storage.loadContactFileContent());
         } catch (FileNotFoundException | DukeException ex) {
             taskList = new TaskList();
+            contacts = new ContactList();
         } catch (Exception ex) {
             throw new DukeException();
         }
@@ -50,6 +53,6 @@ public class Duke {
      * @return Whether we should continue running the application
      */
     public boolean runUserInput(String userInput) {
-        return new Parser().parseUserInput(userInput, ui, storage, taskList);
+        return new Parser().parseUserInput(userInput, ui, storage, taskList, contacts);
     }
 }

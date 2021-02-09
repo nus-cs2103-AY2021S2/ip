@@ -18,6 +18,8 @@ public class Parser {
         FILE_EVENT
     }
 
+    private final int OFFSET_AFTER_CONTACTS_CMD = 8;
+
     /**
      * Reads and understand the user inputs.
      *
@@ -27,7 +29,7 @@ public class Parser {
      * @param taskList Represents the list of task.
      * @return A boolean on whether the application should continue running.
      */
-    public boolean parseUserInput(String userInput, Ui ui, Storage storage, TaskList taskList) {
+    public boolean parseUserInput(String userInput, Ui ui, Storage storage, TaskList taskList, ContactList contacts) {
         if (userInput.equals("bye")) {
             // Exit when the user inputs "bye"
             ui.goodByeMessage();
@@ -52,6 +54,9 @@ public class Parser {
         } else if (userInput.startsWith("find")) {
             // Find a return a list of task that is related to the keyword
             parseForFind(userInput, ui, taskList);
+        } else if (userInput.startsWith("contact")) {
+            // Only takes the string value after contact
+            parseContactCommand(userInput, ui, storage, contacts);
         } else {
             // Unable to detect the user's input
             ui.printUnreadableError();
@@ -76,7 +81,7 @@ public class Parser {
 
             ToDo newToDoTask = new ToDo(command.substring(5));
             taskList.addTask(newToDoTask);
-            storage.writeToFile(taskList);
+            storage.writeTasksToFile(taskList);
 
             // Print a success message
             ui.printWithSpace(newToDoTask.successMessage(taskList.size()));
@@ -110,7 +115,7 @@ public class Parser {
             // Add a deadline task
             Deadline newDeadlineTask = new Deadline(output.getString(), output.getDate());
             taskList.addTask(newDeadlineTask);
-            storage.writeToFile(taskList);
+            storage.writeTasksToFile(taskList);
 
             // Print a success message
             ui.printWithSpace(newDeadlineTask.successMessage(taskList.size()));
@@ -147,7 +152,7 @@ public class Parser {
             // Add a deadline task
             Event newEventTask = new Event(output.getString(), output.getDate());
             taskList.addTask(newEventTask);
-            storage.writeToFile(taskList);
+            storage.writeTasksToFile(taskList);
 
             // Print a success message
             ui.printWithSpace(newEventTask.successMessage(taskList.size()));
@@ -178,7 +183,7 @@ public class Parser {
 
             // Mark the task as done
             taskList.getTask(taskIndex - 1).markAsDone();
-            storage.writeToFile(taskList);
+            storage.writeTasksToFile(taskList);
 
             // Print success message that the task was marked as done
             ui.printTaskSuccess(taskList, taskIndex);
@@ -207,7 +212,7 @@ public class Parser {
 
             // Remove the appropriate task away from the list of task
             taskList.removeTask(taskIndex);
-            storage.writeToFile(taskList);
+            storage.writeTasksToFile(taskList);
             ui.printWithSpace(taskToBeRemoved.deleteMessage(taskList.size()));
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
             // Task number is empty
@@ -229,6 +234,69 @@ public class Parser {
             ui.printKeywordTaskList(taskList, keyword);
         } catch (Exception ex) {
             ui.printFindError();
+        }
+    }
+
+    /**
+     * Parse a contact command.
+     * @param command Represents the command that the user has given.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param contacts Represents the list of contacts.
+     */
+    public void parseContactCommand(String command, Ui ui, Storage storage, ContactList contacts) {
+        try {
+            if (command.startsWith("list", OFFSET_AFTER_CONTACTS_CMD)) {
+                ui.printContactList(contacts);
+            } else if (command.startsWith("add", OFFSET_AFTER_CONTACTS_CMD)) {
+                parseContactAddCommand(command, ui, storage, contacts);
+            } else if (command.startsWith("delete", OFFSET_AFTER_CONTACTS_CMD)) {
+                parseContactDeleteCommand(command, ui, storage, contacts);
+            } else {
+                ui.printUnreadableError();
+            }
+        } catch (Exception ex) {
+            ui.printGeneralParseError();
+        }
+    }
+
+    /**
+     * Parse an add contact command.
+     * @param command Represents the command that the user has given.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param contacts Represents the list of contacts.
+     */
+    public void parseContactAddCommand(String command, Ui ui, Storage storage, ContactList contacts) {
+        try {
+            String[] inputs = command.substring(OFFSET_AFTER_CONTACTS_CMD + 4).split(" ");
+            String fullName = inputs[0];
+            String emailAddress = inputs[1];
+            int contactNumber = Integer.parseInt(inputs[2]);
+
+            contacts.addContact(fullName, emailAddress, contactNumber);
+            ui.printContactAdded();
+            storage.writeContactsToFile(contacts);
+        } catch (Exception ex) {
+            ui.printGeneralParseError();
+        }
+    }
+
+    /**
+     * Parse a delete contact command.
+     * @param command Represents the command that the user has given.
+     * @param ui Represents the UI object.
+     * @param storage Represents the storage object.
+     * @param contacts Represents the list of contacts.
+     */
+    public void parseContactDeleteCommand(String command, Ui ui, Storage storage, ContactList contacts) {
+        try {
+            int contactIndex = Integer.parseInt(command.substring(OFFSET_AFTER_CONTACTS_CMD + 7)) - 1;
+            contacts.removeContact(contactIndex);
+            ui.printContactDeleted();
+            storage.writeContactsToFile(contacts);
+        } catch (Exception ex) {
+            ui.printTaskNumError();
         }
     }
 
