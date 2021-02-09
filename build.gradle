@@ -33,7 +33,7 @@ test {
 }
 
 application {
-    mainClassName = "Snom"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
