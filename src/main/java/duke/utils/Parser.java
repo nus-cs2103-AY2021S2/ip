@@ -74,8 +74,9 @@ public class Parser {
      * @return String representation of the command word of the user input.
      */
     static String extractInstruction(String input) throws DukeException {
-
-        String instruction = input.trim().toLowerCase().split(" ")[0];
+        String[] splits = input.trim().toLowerCase().split(" ", 2);
+        assert splits.length >= 1 : "Command cannot be empty!";
+        String instruction = splits[0];
         if (input.replaceAll(" ", "").equals("")) {
             throw new DukeException(Ui.EMPTY_COMMAND);
         }

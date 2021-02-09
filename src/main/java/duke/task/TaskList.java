@@ -14,6 +14,7 @@ public class TaskList {
 
     public static void addTask(Task t) {
         tasks.add(t);
+        assert tasks.size() >= 1 : "Task is not added successfully";
     }
 
 
@@ -26,6 +27,7 @@ public class TaskList {
         try {
             Task t = tasks.get(i - 1);
             tasks.get(i - 1).markDone();
+            assert t.getDoneStatus() == "X" : "Task is not marked as done successfully";
             String result = Ui.doneTask(t);
             return result;
         } catch (IndexOutOfBoundsException e) {

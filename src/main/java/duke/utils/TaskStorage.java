@@ -37,6 +37,8 @@ public class TaskStorage {
                 fw.write(temp);
             }
             fw.close();
+            taskList.clear();
+            assert taskList.size() == 0 : "TaskList not clear";
         } catch (IOException err) {
             ErrorBox.display(err.getMessage());
         }
@@ -60,9 +62,16 @@ public class TaskStorage {
                 directory.mkdir();
             }
 
+
+            assert directory.exists() : "Directory does not exist";
+
+            File file = new File(FILEPATH);
+
             if (!file.exists()) {
                 file.createNewFile();
             }
+
+            assert file.exists() : "File does not exist";
 
             if (file.length() == 0) {
                 return Ui.EMPTY_FILE;
