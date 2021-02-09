@@ -13,6 +13,7 @@ import com.tjtanjin.steve.commands.FindCommand;
 import com.tjtanjin.steve.commands.HelpCommand;
 import com.tjtanjin.steve.commands.ListCommand;
 import com.tjtanjin.steve.commands.TodoCommand;
+import com.tjtanjin.steve.commands.UndoCommand;
 
 /**
  * Parser class parses user input and returns a response. It also deals directly with the CommandHandler
@@ -30,7 +31,8 @@ public class Parser {
         EVENT,
         DELETE,
         HELP,
-        FIND
+        FIND,
+        UNDO
     }
 
     //all commands
@@ -43,6 +45,7 @@ public class Parser {
     private final HelpCommand HELP_COMMAND;
     private final ListCommand LIST_COMMAND;
     private final TodoCommand TODO_COMMAND;
+    private final UndoCommand UNDO_COMMAND;
 
     /**
      * Constructor for Parser class that initialises all valid commands.
@@ -57,6 +60,7 @@ public class Parser {
         this.HELP_COMMAND = commandHandler.getHelpCommand();
         this.LIST_COMMAND = commandHandler.getListCommand();
         this.TODO_COMMAND = commandHandler.getTodoCommand();
+        this.UNDO_COMMAND = commandHandler.getUndoCommand();
     }
 
     /**
@@ -102,6 +106,8 @@ public class Parser {
             case TODO:
                 String todoTaskName = parseTaskName(input);
                 return TODO_COMMAND.execute(command, todoTaskName);
+            case UNDO:
+                return UNDO_COMMAND.execute();
             default:
                 return "Error: Invalid instruction, type 'help' to see the options.";
             }
