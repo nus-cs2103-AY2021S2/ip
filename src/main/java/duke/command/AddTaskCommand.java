@@ -11,10 +11,11 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showNewLine("Got it I've added this task: ");
-        ui.showNewLine(tasks.get(tasks.size() - 1).toString());
-        ui.showNewLine(String.format("Now you have %d tasks in the list", tasks.size()));
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.saveTasksToFile(tasks);
+        String dukeResponse = "Got it I've added this task: \n"
+                + tasks.get(tasks.size() - 1).toString()
+                + "Now you have " + tasks.size() + " in the list\n";
+        return dukeResponse;
     }
 }

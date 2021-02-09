@@ -37,7 +37,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)",
+        return String.format("[E][%s] %s (at: %s)\n",
                 this.getStatusIcon(),
                 this.description,
                 this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));

@@ -12,8 +12,9 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.saveTasksToFile(tasks);
-        ui.showNewLine("Bye bye!");
+        String dukeResponse = "Bye bye!";
+        return dukeResponse;
     }
 }

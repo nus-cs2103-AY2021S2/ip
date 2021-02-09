@@ -1,7 +1,9 @@
 package duke;
 
+
 import duke.command.Command;
 import duke.task.TaskList;
+
 
 /**
  * The Duke class serves as the main entry point to the program.
@@ -31,6 +33,10 @@ public class Duke {
 
     }
 
+    public Duke() {
+        this("data/tasks.txt");
+    }
+
     /**
      * Starts running the Duke program.
      */
@@ -52,7 +58,17 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getWelcomeMessage() {
+        return ui.getWelcomeMessage();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parseCommand(input);
+            String dukeResponse = command.execute(tasks, ui, storage);
+            return dukeResponse;
+        } catch (DukeException e) {
+            return "Oops " + e.getMessage();
+        }
     }
 }

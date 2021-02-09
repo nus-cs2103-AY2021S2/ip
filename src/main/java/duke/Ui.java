@@ -42,6 +42,10 @@ public class Ui {
         showLine();
     }
 
+    public String getWelcomeMessage() {
+        return WELCOME_MESSAGE;
+    }
+
     /**
      * Reads a command from the user.
      */
