@@ -44,6 +44,7 @@ public class Ui {
      * @return Message confirming that the task has been marked as done/completed.
      */
     public String showDoneTask(Task task) {
+        assert task.isDone() : " Task not properly marked as done";
         String msg = String.format("Congrats! The following task has been marked as done:\n  %s",
                 task.toString());
         return msg;
@@ -66,6 +67,7 @@ public class Ui {
         if (tasks.size() > 0) {
             output = "Here's all the matches I found:\n" + formattedTasks;
         } else {
+            assert (tasks.size() == 0) : " Non-empty list displayed as empty";
             output = "I couldn't find anything!";
         }
 
