@@ -8,7 +8,7 @@ import java.util.List;
  * handles operation to the list including add, update and delete
  */
 public class TaskList {
-    List<ListItem> listItems;
+    private List<ListItem> listItems;
 
     public TaskList() {
         this.listItems = new ArrayList<>();
@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Immutable way to add the new task by returning a new list
+     *
      * @param task the task to be added to the list
      */
     public TaskList addCommand(ListItem task) {
@@ -27,8 +28,10 @@ public class TaskList {
         tempList.add(task);
         return new TaskList(tempList);
     }
+
     /**
      * Mutable way to add the new task by modifying the list
+     *
      * @param task the task to be added to the list
      */
     public void addCommandMutable(ListItem task) {
@@ -41,6 +44,7 @@ public class TaskList {
 
     /**
      * Mutable way to mark the task as done by directly changing item in the list
+     *
      * @param index the index of the item to be changed
      */
     public void updateItemMutable(int index) {
@@ -51,6 +55,7 @@ public class TaskList {
 
     /**
      * Mutable way to delete the task by directly removing item in the list
+     *
      * @param index the index of the item to be changed
      */
     public void deleteCommandMutable(int index) {
@@ -58,21 +63,28 @@ public class TaskList {
         this.listItems.remove(correctIndex);
     }
 
-    public TaskList findItem(String keyword){
+    /**
+     * Look for all items that contains the <code>keyword</code> and return the list
+     *
+     * @param keyword the keyword to be searched through the TaskList, in SQL LIKE syntax
+     */
+    public TaskList findItem(String keyword) {
         List<ListItem> tempList = new ArrayList<>();
-        for(ListItem item: listItems){
-            if(item.getTask().contains(keyword)){
+        for (ListItem item : listItems) {
+            if (item.getTask().contains(keyword)) {
                 tempList.add(item);
             }
         }
         return new TaskList(tempList);
     }
+
     @Override
     public String toString() {
         String initStr = "";
         for (int i = 0; i < this.listItems.size(); i++) {
             ListItem tempItem = this.listItems.get(i);
-            initStr = initStr + (tempItem.getClass().getName().charAt(0) + "|" + tempItem.getDone() + "|" + tempItem.getTask() + tempItem.getDate() + "\n");
+            initStr = initStr + (tempItem.getClass().getName().charAt(0)
+                    + "|" + tempItem.getDone() + "|" + tempItem.getTask() + tempItem.getDate() + "\n");
         }
         return initStr;
     }

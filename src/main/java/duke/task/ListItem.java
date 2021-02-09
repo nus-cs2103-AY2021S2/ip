@@ -8,11 +8,20 @@ public abstract class ListItem {
     private final boolean isDone;
     private final String task;
 
+    /**
+     * Constructor for ListItem
+     * @param task takes in string and pass to parent's constructor as the task name
+     */
     public ListItem(String task) {
         this.task = task;
         this.isDone = false;
     }
 
+    /**
+     * Overloaded version of Constructor for ListItem
+     * @param task takes in string and pass to parent's constructor as the task name
+     * @param isDone takes in the task's status
+     */
     public ListItem(String task, boolean isDone) {
         this.task = task;
         this.isDone = isDone;

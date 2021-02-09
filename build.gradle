@@ -42,9 +42,8 @@ test {
 }
 
 application {
-    mainClassName = "duke.system.Launcher"
+    mainClassName = "duke.Duke"
 }
-
 
 shadowJar {
     archiveBaseName = "duke"
