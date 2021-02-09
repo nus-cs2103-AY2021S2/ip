@@ -25,6 +25,10 @@ public class Task {
         isDone = true;
     }
 
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
     /**
      * Returns the status icon of the Task.
      * @return The status icon of the task.
@@ -43,7 +47,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "][ " + priority + " ] " + name;
+        return "[" + getStatusIcon() + "][" + priority + "] " + name;
     }
 
     /**

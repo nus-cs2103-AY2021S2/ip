@@ -8,6 +8,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SetCommand;
 import duke.command.TodoCommand;
 import duke.exception.CommandNotFoundException;
 import duke.exception.DescriptionMissingException;
@@ -44,6 +45,8 @@ public class CommandParser implements Parser {
             command = new DoneCommand(IndexParser.parseIndex(cleanerInput));
         } else if (potentialCommand.equalsIgnoreCase("DELETE")) {
             command = new DeleteCommand(IndexParser.parseIndex(cleanerInput));
+        } else if (potentialCommand.equalsIgnoreCase("SET")) {
+            command = new SetCommand(IndexParser.parseIndex(cleanerInput), IndexParser.parsePriority(cleanerInput));
         } else if (potentialCommand.equalsIgnoreCase("TODO")) {
             TaskDescription td = DescriptionParser.parseDescription(EnumTask.TODO, cleanerInput, endIndex);
             command = new TodoCommand(td);

@@ -51,27 +51,32 @@ public class Storage {
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 String[] keyWords = line.split(" \\| ");
-                String taskType = keyWords[0].strip();
+                String taskType = keyWords[0].trim();
                 String taskName;
                 String taskStatus;
+                int taskPriority;
                 Task thisTask;
 
                 if (taskType.equals("T")) {
-                    taskName = keyWords[2];
+                    taskName = keyWords[3];
+                    taskPriority = Integer.parseInt(keyWords[2].trim());
                     thisTask = new Todo(taskName);
                 } else if (taskType.equals("D")) {
-                    taskName = keyWords[2];
-                    LocalDateTime cutOffDate = DateTimeParser.parseDateTime(keyWords[3]);
+                    taskName = keyWords[3];
+                    LocalDateTime cutOffDate = DateTimeParser.parseDateTime(keyWords[4]);
+                    taskPriority = Integer.parseInt(keyWords[2].trim());
                     thisTask = new Deadline(taskName, cutOffDate);
                 } else {
-                    taskName = keyWords[2];
-                    LocalDateTime startDate = DateTimeParser.parseDateTime(keyWords[3]);
+                    taskName = keyWords[3];
+                    LocalDateTime startDate = DateTimeParser.parseDateTime(keyWords[4]);
+                    taskPriority = Integer.parseInt(keyWords[2].trim());
                     thisTask = new Event(taskName, startDate);
                 }
-                taskStatus = keyWords[1].strip();
+                taskStatus = keyWords[1].trim();
                 if (taskStatus.equals("1")) {
                     thisTask.complete();
                 }
+                thisTask.setPriority(taskPriority);
                 tasks.add(thisTask);
             }
             return tasks;
