@@ -9,6 +9,15 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
+    static final int MIN_LENGTH_FIND = 4; //Min string length for find.
+    static final int MIN_LENGTH_TODO = 4; //Min string length for todo.
+    static final int MIN_LENGTH_EVENT = 5; //Min string length for event.
+    static final int MIN_LENGTH_DEADLINE = 8; //Min string length for deadline.
+    static final int START_READ_FIND = 5; //Index to start reading for other details.
+    static final int START_READ_TODO = 5; //Index to start reading for other details.
+    static final int START_READ_EVENT = 6; //Index to start reading for other details.
+    static final int START_READ_DEADLINE = 9; //Index to start reading for other details.
+
     /**
      * Instantiates Parser.
      */
@@ -50,20 +59,20 @@ public class Parser {
         try {
             if (taskType == TaskType.TODO) {
                 type = "todo";
-                if (cmd.length() > 4) {
-                    task = cmd.substring(5);
+                if (cmd.length() > MIN_LENGTH_TODO) {
+                    task = cmd.substring(START_READ_TODO);
                 }
             } else if (taskType == TaskType.DEADLINE) {
                 type = "deadline";
                 int seg = cmd.indexOf("/");
-                if (cmd.length() > 8 && seg != -1) {
-                    task = cmd.substring(9, seg);
+                if (cmd.length() > MIN_LENGTH_DEADLINE && seg != -1) {
+                    task = cmd.substring(START_READ_DEADLINE, seg);
                 }
             } else if (taskType == TaskType.EVENT) {
                 type = "event";
                 int seg = cmd.indexOf("/");
-                if (cmd.length() > 5 && seg != -1) {
-                    task = cmd.substring(6, seg);
+                if (cmd.length() > MIN_LENGTH_EVENT && seg != -1) {
+                    task = cmd.substring(START_READ_EVENT, seg);
                 }
             }
             if (task.equals("") && !type.isEmpty()) {
@@ -87,9 +96,9 @@ public class Parser {
         assert cmd != null : "Input command is null";
         String searchText = new String();
         try {
-            if (cmd.length() > 4) {
-                if (cmd.charAt(4) == ' ') {
-                    searchText = cmd.substring(5);
+            if (cmd.length() > MIN_LENGTH_FIND) {
+                if (cmd.charAt(MIN_LENGTH_FIND) == ' ') {
+                    searchText = cmd.substring(START_READ_FIND);
                 } else {
                     throw new DukeException("Invalid: Invalid command.");
                 }
@@ -97,7 +106,7 @@ public class Parser {
                 throw new DukeException("Invalid: Please type a white space, followed by description");
             }
         } catch (DukeException de) {
-            searchText = searchText + de.getMessage();
+            searchText = de.getMessage();
         }
         return searchText;
     }
@@ -110,8 +119,8 @@ public class Parser {
      */
     public LocalDateTime dateFormatter(String cmd) {
         assert cmd != null : "Input command is null";
-        int nextChar = -1;
-        int nextWord = 4;
+        int nextChar = -1; //Set by default to not able to find.
+        int nextWord = 4; //Template number to find the next text in String.
         if (cmd.indexOf("/by") != -1) {
             nextChar = cmd.indexOf("/by");
         } else if (cmd.indexOf("/at") != -1) {

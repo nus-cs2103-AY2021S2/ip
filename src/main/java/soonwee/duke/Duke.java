@@ -7,24 +7,26 @@ import java.time.LocalDateTime;
  */
 public class Duke {
 
+    static final int DONE_INDEX = 5; //Read from index 5 of string.
+    static final int DELETE_INDEX = 7; //Read from index 7 of string.
     /**
      * Initializes the input by checking the front command and performing
      * their required actions.
      *
-     * @return updated Task List
+     * @return a string output based on the result computed
      */
     public static String initialize(String input) {
         assert input != null : "Input is null.";
-        String result = new String();
+        String result;
         Storage storage = new Storage("data\\tasks.txt");
         if (input.equals("list")) {
             result = storage.taskList.displayTasks();
         } else if (input.contains("done")) {
-            int index = Integer.parseInt(input.substring(5));
+            int index = Integer.parseInt(input.substring(DONE_INDEX));
             result = storage.taskList.setTaskDone(index);
             storage.writeFile();
         } else if (input.contains("delete")) {
-            int index = Integer.parseInt(input.substring(7));
+            int index = Integer.parseInt(input.substring(DELETE_INDEX));
             result = storage.taskList.removeTask(index);
             storage.writeFile();
         } else if (input.contains("find")) {
@@ -32,7 +34,7 @@ public class Duke {
             if(text.contains("Invalid:")) {
                 return text;
             }
-            result = result + storage.taskList.searchRelatedText(text) + "\n";
+            result = storage.taskList.searchRelatedText(text) + "\n";
         } else {
             result = performTaskCheck(storage.taskList, input);
             storage.writeFile();
@@ -44,7 +46,7 @@ public class Duke {
      * Performs the checking of Tasks to determine and validate what they are, and
      * create them accordingly.
      *
-     * @return updated Task List
+     * @return result output
      */
     public static String performTaskCheck(TaskList taskList, String cmd) {
         assert cmd != null: "Input command is null";
@@ -60,36 +62,54 @@ public class Duke {
                 if (taskType == TaskType.UNKNOWN) {
                     throw new
                             DukeException("OOPS!!! I'm sorry, " + "but I don't know what that means :-(");
-                } else {
-                    if (taskType == TaskType.TODO) {
-                        ToDo newToDo = new ToDo(task);
-                        result = result + performAddTask(taskList, newToDo);
-                    } else {
-                        LocalDateTime date = checker.dateFormatter(cmd);
-                        if (taskType == TaskType.DEADLINE) {
-                            Deadline newDeadLine = new Deadline(task, date);
-                            result = result + performAddTask(taskList, newDeadLine);
-                        } else {
-                            Event newEvent = new Event(task, date);
-                            result = result + performAddTask(taskList, newEvent);
-                        }
-                    }
-                    result = result + taskList.printTotalTasks();
                 }
+                result = performTaskAllocation(taskType, task, cmd, taskList);
             } catch (DukeException de) {
-                result = result + de.getMessage();
+                result = de.getMessage();
             }
         }
         return result;
     }
 
     /**
+     * Performs adding of respective task into TaskList.
+     *
+     * @param taskType type of task
+     * @param filteredInput filtered input done from the previous method
+     * @param fullInput unfiltered input
+     * @param taskList a TaskList instance
+     * @return output result once the addition for respective task is performed
+     */
+    public static String performTaskAllocation(TaskType taskType, String filteredInput, String fullInput, TaskList taskList) {
+        assert taskType != TaskType.UNKNOWN : "An unknown task is being allocated.";
+        String result;
+        Parser checker = new Parser();
+        if (taskType == TaskType.TODO) {
+            ToDo newToDo = new ToDo(filteredInput);
+            result = performAddTask(taskList, newToDo);
+        } else {
+            LocalDateTime date = checker.dateFormatter(fullInput);
+            if (taskType == TaskType.DEADLINE) {
+                Deadline newDeadLine = new Deadline(filteredInput, date);
+                result = performAddTask(taskList, newDeadLine);
+            } else {
+                Event newEvent = new Event(filteredInput, date);
+                result = performAddTask(taskList, newEvent);
+            }
+        }
+        return result + taskList.printTotalTasks();
+    }
+
+    /**
      * Performs addition of task into TaskList.
+     *
+     * @param taskList a TaskList instance
+     * @param task a certain task
+     * @return output result from the addition action
      */
     public static String performAddTask(TaskList taskList, Task task) {
         taskList.addTask(task);
-        String result = new String();
-        result = result + "Got it. I've added this task: \n" + task.toString() + "\n";
+        String result = "Got it. I've added this task: \n" + task.toString() + "\n";
         return result;
     }
 
@@ -100,8 +120,6 @@ public class Duke {
      * @return output result from the input
      */
     public String getResponse(String input) {
-        String result = new String();
-        result = result + initialize(input);
-        return result;
+        return initialize(input);
     }
 }
