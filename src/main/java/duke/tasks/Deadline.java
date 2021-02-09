@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import duke.common.Utils;
@@ -36,6 +37,10 @@ public class Deadline extends Task {
 
     public LocalDateTime getDeadlineDateTime() {
         return deadlineDateTime;
+    }
+
+    public LocalDate getDeadlineDate() {
+        return deadlineDateTime.toLocalDate();
     }
 
     @Override

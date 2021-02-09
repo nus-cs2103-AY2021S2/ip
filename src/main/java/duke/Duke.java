@@ -1,6 +1,7 @@
 package duke;
 
 import duke.commands.Command;
+import duke.commands.CommandResponse;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -34,12 +35,12 @@ public class Duke {
      *
      * @param input input from user
      */
-    public String getResponse(String input) {
+    public CommandResponse getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return ui.showError(e.getMessage());
+            return new CommandResponse(ui.showError(e.getMessage()));
         }
     }
 }

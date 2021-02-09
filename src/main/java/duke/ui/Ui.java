@@ -1,5 +1,16 @@
 package duke.ui;
 
+import static duke.common.Messages.MESSAGE_ERROR;
+import static duke.common.Messages.MESSAGE_GOODBYE;
+import static duke.common.Messages.MESSAGE_LIST;
+import static duke.common.Messages.MESSAGE_TASKLIST_SUMMARY;
+import static duke.common.Messages.MESSAGE_TASK_ADD;
+import static duke.common.Messages.MESSAGE_TASK_ALL_DELETE;
+import static duke.common.Messages.MESSAGE_TASK_ALL_DONE;
+import static duke.common.Messages.MESSAGE_TASK_DELETE;
+import static duke.common.Messages.MESSAGE_TASK_DONE;
+import static duke.common.Messages.MESSAGE_WELCOME;
+
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -21,14 +32,14 @@ public class Ui {
      * Returns the welcome message.
      */
     public static String showWelcome() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return MESSAGE_WELCOME;
     }
 
     /**
      * Returns a farewell message.
      */
-    public static String showExit() {
-        return "Bye. Hope to see you again soon!";
+    public String showExit() {
+        return MESSAGE_GOODBYE;
     }
 
     private void clear() {
@@ -43,7 +54,7 @@ public class Ui {
      */
     public String showListMessage(TaskList taskList, boolean isFind) {
         clear();
-        sb.append(String.format("Here are the %s in your list:%n", isFind ? "matching tasks" : "tasks"));
+        sb.append(String.format(MESSAGE_LIST, isFind ? "matching tasks" : "tasks"));
         for (int i = 0; i < taskList.size(); i++) {
             sb.append(String.format("%d.%s%n", i + 1, taskList.get(i).toString()));
         }
@@ -58,7 +69,7 @@ public class Ui {
      */
     public String showAddMessage(Task task, int listSize) {
         clear();
-        sb.append("Got it. I've added this task:");
+        sb.append(MESSAGE_TASK_ADD);
         sb.append("\n");
         sb.append(formattedPrint(task.toString()));
         showSummaryMessage(listSize);
@@ -72,7 +83,7 @@ public class Ui {
      */
     public String showDoneMessage(Task task) {
         clear();
-        sb.append("Nice! I've marked this task as done:");
+        sb.append(MESSAGE_TASK_DONE);
         sb.append("\n");
         sb.append(formattedPrint(task.toString()));
         return sb.toString();
@@ -85,7 +96,7 @@ public class Ui {
      */
     public String showDoneMessage(TaskList taskList) {
         clear();
-        sb.append("Nice! I've marked all your tasks as done:");
+        sb.append(MESSAGE_TASK_ALL_DONE);
         sb.append("\n");
         printList(taskList);
         return sb.toString();
@@ -99,7 +110,7 @@ public class Ui {
      */
     public String showDeleteMessage(Task task, int listSize) {
         clear();
-        sb.append("Noted. I've removed this task:");
+        sb.append(MESSAGE_TASK_DELETE);
         sb.append("\n");
         sb.append(formattedPrint(task.toString()));
         showSummaryMessage(listSize);
@@ -113,7 +124,7 @@ public class Ui {
      */
     public String showDeleteMessage(TaskList taskList) {
         clear();
-        sb.append("Noted. I've removed all your tasks.");
+        sb.append(MESSAGE_TASK_ALL_DELETE);
         sb.append("\n");
         printList(taskList);
         showSummaryMessage(0);
@@ -126,7 +137,7 @@ public class Ui {
      * @param listSize size of the current {@code TaskList}
      */
     private void showSummaryMessage(int listSize) {
-        sb.append(String.format("Now you have %d %s in the list.%n", listSize, listSize >= 2 ? "tasks" : "task"));
+        sb.append(String.format(MESSAGE_TASKLIST_SUMMARY, listSize, listSize >= 2 ? "tasks" : "task"));
     }
 
     /**
@@ -135,7 +146,7 @@ public class Ui {
      * @param message message to be formatted
      */
     public String showError(String message) {
-        return String.format("☹️ OOPS!!! %s%n", message);
+        return String.format(MESSAGE_ERROR, message);
     }
 
     /**

@@ -80,15 +80,17 @@ public class TaskList {
     /**
      * Deletes all the {@code Task} in the task list.
      */
-    public void clear() {
+    public TaskList clear() {
+        TaskList taskList = clone();
         tasks.clear();
+        return taskList;
     }
 
     /**
      * Sets all the tasks in the task list to done.
      */
     public void setAllDone() {
-        for (Task task : tasks) {
+        for (Task task: tasks) {
             task.setDone();
         }
     }
@@ -99,7 +101,7 @@ public class TaskList {
      * @return boolean to indicate are all the tasks done
      */
     public boolean isAllDone() {
-        for (Task task : tasks) {
+        for (Task task: tasks) {
             if (!task.getDone()) {
                 return false;
             }
@@ -134,7 +136,7 @@ public class TaskList {
      */
     public String toStorageString() {
         StringBuilder sb = new StringBuilder();
-        for (Task t : tasks) {
+        for (Task t: tasks) {
             sb.append(String.format("%s%n", t.toStorageString()));
         }
         return sb.toString();

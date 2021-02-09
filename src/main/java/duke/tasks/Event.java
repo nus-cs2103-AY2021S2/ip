@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import duke.common.Utils;
@@ -36,6 +37,10 @@ public class Event extends Task {
 
     public LocalDateTime getEventDateTime() {
         return eventDateTime;
+    }
+
+    public LocalDate getEventDate() {
+        return eventDateTime.toLocalDate();
     }
 
     @Override

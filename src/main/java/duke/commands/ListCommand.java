@@ -1,6 +1,7 @@
 package duke.commands;
 
-import duke.common.Utils;
+import static duke.common.CommandUtils.checkListIsEmpty;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -11,15 +12,20 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
 
-    private final String date;
+    private final String queryDate;
 
-    public ListCommand(String ... date) {
-        String _date = null;
-        if (date.length > 0) {
-            _date = date[0];
+    /**
+     * Constructor for List {@code Command}, queryDate is null by default otherwise specified.
+     *
+     * @param queryDate date to be queried
+     */
+    public ListCommand(String ... queryDate) {
+        String newQueryDate = null;
+        if (queryDate.length > 0) {
+            newQueryDate = queryDate[0];
         }
 
-        this.date = _date;
+        this.queryDate = newQueryDate;
     }
 
     /**
@@ -31,25 +37,14 @@ public class ListCommand extends Command {
      * @throws DukeException if there were errors encountered parsing the user's input
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        int listSize = taskList.size();
-        if (listSize <= 0) {
-            throw new DukeException("Your task list is empty.");
-        }
-
-        //Clone the duke.task list for filtering
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        checkListIsEmpty(taskList, false);
         TaskList printTaskList = taskList.clone();
-        //If there is date in the duke.command, only display the events or deadlines on the particular date.
-        if (date != null) {
-            if (!date.isEmpty() || !date.isBlank()) {
-                printTaskList = printTaskList.filterByDate(date);
-            }
+        if (queryDate != null) {
+            printTaskList = printTaskList.filterByDate(queryDate);
         }
+        checkListIsEmpty(printTaskList, true);
 
-        if (printTaskList.size() <= 0) {
-            throw new DukeException(String.format("You have no task on %s.", Utils.formatDateString(date)));
-        }
-
-        return ui.showListMessage(printTaskList, false);
+        return new CommandResponse(ui.showListMessage(printTaskList, false));
     }
 }
