@@ -29,6 +29,7 @@ public class Todo extends Task {
     }
 
     private String[] buildInfo() {
+        assert !taskLine.equals("");
         return taskLine.split("todo");
     }
 

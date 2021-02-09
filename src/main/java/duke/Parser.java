@@ -40,8 +40,9 @@ public class Parser {
      * @return
      */
     private String handleCommand(Duke duke, String currLine, TaskList taskList, Ui ui, Storage storage) throws Exception {
-        // basic commands
+
         currLine = currLine.toLowerCase();
+        assert !currLine.equals("");
         String[] parsedLine = currLine.split(" ");
         if (currLine.startsWith("list")) {
             return ui.printListTasks(taskList);

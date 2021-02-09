@@ -42,6 +42,7 @@ public class Event extends Task {
     }
 
     private String[] buildInfo() {
+        assert !taskLine.equals("");
         String[] parsedTask = taskLine.split("event");
         parsedTask = parsedTask[1].split("/at");
         return parsedTask;
