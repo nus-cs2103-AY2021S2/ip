@@ -1,48 +1,40 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Scanner;
 
 public class Parser {
     private static String input;
-    private Scanner scanner;
-    private Ui userInterface;
+    private final Ui userInterface;
+    private Storage storage = new Storage();
 
     Parser() {
-        scanner = new Scanner(System.in);
         userInterface = new Ui();
         userInterface.welcomeUser();
     }
 
-    /**
-     * Method removed extra line and spaces fron input
-     * and formats input to lowercase
-     */
-    private void removeExtraLinesAndSpacesFromInput() {
-        input = input.replaceAll("\n", "");
-        input = input.toLowerCase();
+
+    private String removeExtraLinesAndSpacesFromInput(String input) {
+        String cleanedInput = input.replaceAll("\n", "");
+        cleanedInput = cleanedInput.toLowerCase();
+        return cleanedInput;
     }
 
     /**
-     * Method scans the next line of input from user if there is next line
-     * and calls the method analyseInput() if there is a next line
-     * else it closes the scanner and bids goodbye to user.
+     * Decides which command to call given the input
+     * by parsing the input into analyseInput().
+     * @param userInput User's command given to the system
+     * @param list of TaskList for reference and so changes can be made
+     * @return respond to the user's input
+     * @throws Exception
      */
-    public void readInput(TaskList list) throws Exception {
-        if (scanner.hasNextLine()) {
-            input = scanner.nextLine();
-            removeExtraLinesAndSpacesFromInput();
-            if (!inputDoesNotContainBye()) {
-                userInterface.userLeaving();
-                scanner.close();
-            } else {
-                analyseInput(list);
-            }
+    public String respondToInput(String userInput, TaskList list) throws Exception {
+        input = removeExtraLinesAndSpacesFromInput(userInput);
+        if (inputDoesNotContainBye()) {
+            return analyseInput(list);
         } else {
-            userInterface.userLeaving();
-            scanner.close();
+            storage.saveHistory(list);
+            return userInterface.userLeaving();
         }
-
     }
 
     /**
@@ -88,7 +80,7 @@ public class Parser {
      *
      * @return int val index in the list that user wants to mark as completed.
      */
-    public int inputContainsDoneAtIndex() throws ArrayIndexOutOfBoundsException {
+    public int inputDoneAtIndex() throws ArrayIndexOutOfBoundsException {
         String value = input.split(" ")[1];
         int val = Integer.parseInt(value) - 1;
         return val;
@@ -97,10 +89,10 @@ public class Parser {
     /**
      * Method enters TaskList and marks the task at the value user indicated to mark as complete.
      */
-    public void markDoneAtIndex(TaskList list) {
-        int index = inputContainsDoneAtIndex();
+    public String markDoneAtIndex(TaskList list) {
+        int index = inputDoneAtIndex();
         list.markDone(index);
-        userInterface.userDoneTask(list.getTaskAtIndex(index).toString());
+        return userInterface.userDoneTask(list.getTaskAtIndex(index).toString());
     }
 
     /**
@@ -120,9 +112,9 @@ public class Parser {
     /**
      * Method adds the Todo task user indicated into a TaskList.
      */
-    public void addTodoTask(TaskList list) {
+    public String addTodoTask(TaskList list) {
         list.addTodo(inputTaskToDoIs());
-        userInterface.userAddTask(list);
+        return userInterface.userAddTask(list);
     }
 
     /**
@@ -183,10 +175,10 @@ public class Parser {
      * after reading what the input was
      * @param list TaskList that stores user's Tasks
      */
-    public void addEventTask(TaskList list) {
+    public String addEventTask(TaskList list) {
         String[] taskAndDate = findTaskWithDate();
         list.addEvent(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
-        userInterface.userAddTask(list);
+        return userInterface.userAddTask(list);
     }
 
     /**
@@ -194,30 +186,25 @@ public class Parser {
      * Deadline comes from input by user to be saved into TaskList
      * @param list TaskList that stores user's Tasks
      */
-    public void addDeadlineTask(TaskList list) {
+    public String addDeadlineTask(TaskList list) {
         String[] taskAndDate = findTaskWithDate();
         list.addDeadline(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
-        userInterface.userAddTask(list);
+        return userInterface.userAddTask(list);
     }
-
-    ////////// command event and deadline end //////////////
-
-    ////////////// Command delete START ///////////////
 
     /**
      * Deletes the requested Task given in input
      * from TaskList passed into method
      * @param list TaskList that contains Task to be deleted
      */
-    public void commandDelete(TaskList list) {
+    public String commandDelete(TaskList list) {
         String value = input.replaceFirst("delete", "");
         value = value.strip();
         int val = Integer.parseInt(value);
         Task delete = list.deleteTaskAtIndex(val - 1);
-        userInterface.userDeleteTask(delete, list);
+        return userInterface.userDeleteTask(delete, list);
     }
 
-    ////////////// Command delete End ///////////////
 
     /**
      * Method formats input to content that user wishes to search for
@@ -227,48 +214,39 @@ public class Parser {
         input = input.strip();
     }
 
-    private void displayFindList(TaskList list) {
+
+    private String displayFindList(TaskList list) {
         contentToFind();
         TaskList filteredList = list.filterFind(input);
+        String result = "";
         if (filteredList.size() == 0) {
-            System.out.print("No similar matched found.");
+            result = result.concat("No similar matched found.");
         } else {
-            userInterface.tellUserListFound();
-            filteredList.listAllTasks();
+            result = result.concat(userInterface.tellUserListFound());
+            result = result.concat(filteredList.listAllTasks());
         }
+        return result;
     }
 
-    private void analyseInput(TaskList list) throws Exception {
-        while (inputDoesNotContainBye()) {
-            if (inputContainsDone()) {
-                markDoneAtIndex(list);
-            } else if (inputContainsTodo()) {
-                addTodoTask(list);
-            } else if (inputContainsDeadline()) {
-                addDeadlineTask(list);
-            } else if (inputContainsEvent()) {
-                addEventTask(list);
-            } else if (inputContainsDelete()) {
-                commandDelete(list);
-            } else if (inputContainsList()) {
-                if (list.size() == 0) {
-                    System.out.print("You have 0 tasks in your list. ");
-                } else {
-                    System.out.println("Here are the tasks in your list:");
-                    list.listAllTasks();
-                }
-            } else if (inputContainsFind()) {
-                displayFindList(list);
-            } else {
-                if (scanner.hasNextLine()) {
-                    input = scanner.nextLine();
-                } else {
-                    throw new Exception("Please enter a valid command!");
-                }
-                continue;
-            }
-            readInput(list);
+    private String analyseInput(TaskList list) throws Exception {
+        String result = "";
+        if (inputContainsDone()) {
+            result = markDoneAtIndex(list);
+        } else if (inputContainsTodo()) {
+            result = addTodoTask(list);
+        } else if (inputContainsDeadline()) {
+            result = addDeadlineTask(list);
+        } else if (inputContainsEvent()) {
+            result = addEventTask(list);
+        } else if (inputContainsDelete()) {
+            result = commandDelete(list);
+        } else if (inputContainsList()) {
+            result = list.listAllTasks();
+        } else if (inputContainsFind()) {
+            result = displayFindList(list);
+        } else {
+            result = "Please enter a valid command!";
         }
+        return result;
     }
-
 }

@@ -67,16 +67,18 @@ public class TaskList {
     /**
      * Prints the list of all task
      */
-    public void listAllTasks() {
+    public String listAllTasks() {
+        String result = "";
         if (list.size() == 0) {
-            System.out.print("You have 0 tasks in your list. ");
+            result = result.concat("You have 0 tasks in your list. ");
         } else {
-            System.out.println("Here are the tasks in your list:");
+            result = result.concat("Here are the tasks in your list:\n");
             for (int i = 0; i < list.size(); i++) {
                 Task current = list.get(i);
-                System.out.println (i + 1 + ". " + current);
+                result = result.concat(i + 1 + ". " + current + "\n");
             }
         }
+        return result;
     }
 
     /**
