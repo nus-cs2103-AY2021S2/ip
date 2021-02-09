@@ -12,7 +12,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event that would happen as eventTime
-     * 
+     *
      * @param description name of the event
      * @param eventTime   time the event occurs
      */
@@ -23,7 +23,7 @@ public class Event extends Task {
 
     /**
      * returns well formatted event status for the bot to print to the user
-     * 
+     *
      * @return status of event with relevant information
      */
     @Override
@@ -34,8 +34,8 @@ public class Event extends Task {
 
     /**
      * returns current status of event
-     * 
-     * @returncurrent status of event
+     *
+     * @return current status of event
      */
     @Override
     public String saveStatus() {

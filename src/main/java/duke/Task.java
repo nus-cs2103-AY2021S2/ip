@@ -3,7 +3,7 @@ package duke;
 /**
  * This Task class is responsible for handling and manipulating task
  * information.
- * 
+ *
  */
 public class Task {
     protected final String description;
@@ -11,7 +11,7 @@ public class Task {
 
     /**
      * Constructs a task the given description
-     * 
+     *
      * @param description name of the task
      */
     public Task(String description) {
@@ -21,7 +21,7 @@ public class Task {
 
     /**
      * changes the status of the task, done or not
-     * 
+     *
      * @param isDone sets the status to this input
      */
     public void setDone(boolean isDone) {
@@ -30,7 +30,7 @@ public class Task {
 
     /**
      * returns a "[X] " if task is not done, and "[ ] " if task is done
-     * 
+     *
      * @return "[X] " or "[ ] "
      */
     public String getStatus() {
@@ -40,7 +40,7 @@ public class Task {
 
     /**
      * returns formatted string based on whether task is done
-     * 
+     *
      * @return a formwatted string based on done status
      */
     public String saveStatus() {
@@ -49,11 +49,15 @@ public class Task {
 
     /**
      * checks if the description of the task contains specified word
-     * 
+     *
      * @param word word that is to be found the in task
      * @return true if found, false otherwise
      */
     public boolean doesDescriptionContain(String word) {
         return this.description.contains(word);
+    }
+
+    public boolean getDone() {
+        return this.isDone;
     }
 }

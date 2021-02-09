@@ -6,37 +6,38 @@ package duke;
 public class Ui {
     /**
      * Executes the command by printing out the relevant statements to the user
-     * 
+     *
      * @param command  the command issued by the user
      * @param taskList the list of tasks that information may be needed from
      * @param status   the status of the newly added task
      */
     public static void execute(Command command, TaskList taskList, String status) {
         switch (command) {
-            case BYE:
-                System.out.println("    Bye bye, catch you soon.");
-                break;
-            case EVENT:
-            case TODO:
-            case DEADLINE:
-                System.out.println("    Got it. I've added this task: ");
-                break;
-            case DELETE:
-                System.out.println("    Noted. I've removed this task:");
-                break;
-            case DONE:
-                System.out.println("    Nice! I've marked this task as done:");
-                break;
-            case LIST:
-                System.out.println("    Here are the tasks in your list:");
-                taskList.print();
-                break;
-            case FIND:
-                System.out.println("    Here are the matching tasks in your list:");
-                taskList.printContains(status);
-                break;
-            case NONE:
-                break;
+        case BYE:
+            System.out.println("    Bye bye, catch you soon.");
+            break;
+        case EVENT:
+        case TODO:
+        case DEADLINE:
+            System.out.println("    Got it. I've added this task: ");
+            break;
+        case DELETE:
+            System.out.println("    Noted. I've removed this task:");
+            break;
+        case DONE:
+            System.out.println("    Nice! I've marked this task as done:");
+            break;
+        case LIST:
+            System.out.println("    Here are the tasks in your list:");
+            taskList.print();
+            break;
+        case FIND:
+            System.out.println("    Here are the matching tasks in your list:");
+            taskList.printContains(status);
+            break;
+        case NONE:
+            break;
+        default:
 
         }
         if (!(command.equals(Command.LIST) || command.equals(Command.BYE) || command.equals(Command.FIND))) {
