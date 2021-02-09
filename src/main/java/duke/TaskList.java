@@ -38,10 +38,12 @@ public class TaskList {
     /**
      * Prints out each task in a new line
      */
-    public void print() {
+    public String listOutTasks() {
+        String output = "";
         for (int i = 0; i < listOfTasks.size(); i++) {
-            System.out.println("    " + this.listOfTasks.get(i).getStatus());
+            output += "    " + this.listOfTasks.get(i).getStatus() + "\n";
         }
+        return output;
     }
 
     /**
@@ -62,13 +64,15 @@ public class TaskList {
      *
      * @param words word that the task must contain to be printed
      */
-    public void printContains(String words) {
+    public String findContains(String words) {
+        String output = "";
         int j = 0;
         for (int i = 0; i < listOfTasks.size(); i++) {
             if (this.listOfTasks.get(i).doesDescriptionContain(words)) {
                 j++;
-                System.out.println("    " + j + "." + this.listOfTasks.get(i).getStatus());
+                output += "    " + j + "." + this.listOfTasks.get(i).getStatus() + "\n";
             }
         }
+        return output;
     }
 }
