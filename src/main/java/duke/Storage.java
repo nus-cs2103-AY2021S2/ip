@@ -89,6 +89,7 @@ public class Storage {
                     .map(str -> Parser.parseAsTask(str))
                     .filter(task -> task != null)
                     .collect(Collectors.toList());
+            assert(!t.contains(null));
             return new TaskList(t);
         } catch (IOException e) {
             System.err.println("Duke cannot read the file.");
