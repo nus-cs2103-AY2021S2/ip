@@ -17,7 +17,7 @@ public class Task {
     /**
      * get status of task
      *
-     * @return  tick or X symbols
+     * @return tick or X symbols
      */
     public String getStatusIcon() {
         return (isDone ? "[\u2713]" : "[\u2718]");
@@ -59,7 +59,8 @@ public class Task {
 
     /**
      * get period from now to the setting time
-     * @return spac,wait for overriding
+     *
+     * @return spac, wait for overriding
      */
     public String getPeriodDays() {
         return "";
