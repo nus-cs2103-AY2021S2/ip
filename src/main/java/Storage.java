@@ -59,7 +59,7 @@ public class Storage {
      * Sets up the tasks file in the hardcoded path, if the task file doesn't exist yet
      * @throws IOException
      */
-    public static void setupTasksFile() throws IOException {
+    private static void createTasksFile() throws IOException {
         if (doesTaskFileExist()) {
             // probably not gonna be used due to tasklist.TaskList.java impl
             return;
@@ -120,7 +120,7 @@ public class Storage {
             }
         } else {
             // probably not gonna be used due to tasklist.TaskList.java impl
-            setupTasksFile();
+            createTasksFile();
         }
         return isAnyTaskFound;
     }
