@@ -21,10 +21,10 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Planner");
+            assert duke != null: "Did not initialise duke in main";
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().welcomeUser();
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
