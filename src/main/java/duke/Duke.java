@@ -49,7 +49,7 @@ public class Duke {
                         Task task = taskType.equals(Command.EVENT)
                                 ? new Event(parser.getDescription(), LocalDate.parse(parser.getDate(), formatter))
                                 : taskType.equals(Command.TODO) ? new ToDo(parser.getDescription())
-                                        : new Deadlines(parser.getDescription(),
+                                        : new Deadline(parser.getDescription(),
                                                 LocalDate.parse(parser.getDate(), formatter));
                         taskList.add(task);
                         Ui.execute(Command.TODO, taskList, task.getStatus());
