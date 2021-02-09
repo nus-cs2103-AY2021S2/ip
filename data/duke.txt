@@ -1,4 +1,4 @@
 T|1|makan
-E|0|minum|2020
-D|1|kuli|2020-10-10
-T|0|minuman
+E|1|minum|2020
+T|1|minuman
+T|0|ayah

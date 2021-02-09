@@ -1,8 +1,8 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.Optional;
-
+import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 /**
@@ -10,14 +10,14 @@ import java.util.stream.Collectors;
  */
 public class TaskList {
     private List<Task> tasks;
-    private Optional<List<Task>> prev;
+    private LinkedList<List<Task>> histories;
 
     /**
      * Constructor of TaskList object
      */
     TaskList() {
-        this.tasks = new ArrayList<Task>();
-        this.prev = Optional.empty();
+        this.tasks = new ArrayList<>();
+        this.histories = new LinkedList<>();
     }
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      */
     TaskList(List<Task> tasks) {
         this.tasks = tasks.stream().collect(Collectors.toList()); //deep-copy
-        this.prev = Optional.empty();
+        this.histories = new LinkedList<>();
     }
 
     /**
@@ -38,7 +38,7 @@ public class TaskList {
         }
         String output = Ui.showMessage("Here are the tasks in your list:");
         for (int i = 0; i < this.tasks.size(); i++) {
-            output += Ui.showMessage(String.valueOf(i + 1) + "." + this.tasks.get(i));
+            output += Ui.showMessage((i + 1) + "." + this.tasks.get(i));
         }
         return output;
     }
@@ -49,9 +49,9 @@ public class TaskList {
      * @throws DukeException Index out of bound
      */
     public String finishATask(String input) throws DukeException {
-        this.prev = Optional.of(this.tasks.stream().collect(Collectors.toList()));
         try {
             int index = Integer.parseInt(input) - 1;
+            this.histories.add(this.tasks.stream().collect(Collectors.toList()));
             this.tasks.set(index, this.tasks.get(index).finishTask());
             return Ui.finishTaskMessage(this.tasks.get(index).toString());
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -68,10 +68,10 @@ public class TaskList {
      * @throws DukeException Index out of bound
      */
     public String deleteATask(String input) throws DukeException {
-        this.prev = Optional.of(this.tasks.stream().collect(Collectors.toList()));
         try {
             int index = Integer.parseInt(input) - 1;
             Task deleted = this.tasks.get(index);
+            this.histories.add(this.tasks.stream().collect(Collectors.toList()));
             this.tasks.remove(index);
             return Ui.deleteTaskMessage(deleted.toString(), this.tasks.size());
         }
@@ -88,10 +88,10 @@ public class TaskList {
      * @param task Task that is going to be added
      */
     public String addTask(Task task) throws DukeException {
-        this.prev = Optional.of(this.tasks.stream().collect(Collectors.toList()));
         if (this.tasks.stream().filter(item -> item.equals(task)).collect(Collectors.toList()).size() != 0) {
             throw new DukeException("Same task has been added before !!!"); //duplicated items are not allowed
         }
+        this.histories.add(this.tasks.stream().collect(Collectors.toList()));
         this.tasks.add(task);
         return Ui.addTaskMessage(task.toString(), this.tasks.size());
     }
@@ -115,13 +115,36 @@ public class TaskList {
 
     }
 
-    public String undo() throws DukeException{
-        if (this.prev.isEmpty()) {
-            throw new DukeException("Sorry, the history of TaskList is gone !!!");
+    public String undo(String description) throws DukeException{
+        if (this.histories.isEmpty()) {
+            throw new DukeException("Sorry, the history of TaskList is empty!!!");
         }
-        this.tasks = this.prev.get();
-        this.prev = Optional.empty();
-        return "Succesfully undo to previous state!";
+        if (description.equals("") || description.equals("1")) {
+            this.tasks = this.histories.pollLast();
+            return "Successfully undo to the previous state!";
+        }
+        int numberOfUndo;
+        try {
+            numberOfUndo = Integer.parseInt(description);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Sorry!!! Undo takes an integer as an argument");
+        }
+        int totalReset = 0;
+        while (numberOfUndo > 0 && this.histories.size() > 0) {
+            this.tasks = this.histories.pollLast();
+            totalReset++;
+            numberOfUndo--;
+        }
+        return "Succesfully undo to " + totalReset + " previous states!";
+    }
+
+    public String sort() throws DukeException{
+        if (this.tasks.isEmpty()) {
+            throw new DukeException("Sorry, the TaskList is empty!!!");
+        }
+        this.histories.add(this.tasks.stream().collect(Collectors.toList()));
+        this.tasks.sort(Comparator.comparing(a -> a.task));
+        return "TaskList successfully sorted alphabetically";
     }
 
     /**

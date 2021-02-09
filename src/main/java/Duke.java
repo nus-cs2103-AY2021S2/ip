@@ -6,10 +6,8 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
-    private String lastCommand = "";
 
     public String getResponse(String command) {
-        lastCommand = command;
         String output = "";
         if (command.equals("bye")) {
             return Ui.doBye();
@@ -24,7 +22,6 @@ public class Duke {
                 Task task = processTask(parsedCommand, description, deadline);
                 output = taskList.addTask(task);
             }
-            return output;
         } catch (DukeException e) {
             output = Ui.showMessage(e.getMessage());
         } catch (DukeExceptionDeadline e) {
@@ -84,10 +81,9 @@ public class Duke {
         case "find":
             return taskList.findTasks(description);
         case "undo":
-            if (this.lastCommand.equals("")) {
-                throw new DukeException("No command before. Cannot undo!");
-            }
-            return taskList.undo();
+            return taskList.undo(description);
+        case "sort":
+            return taskList.sort();
         }
         return "";
     }

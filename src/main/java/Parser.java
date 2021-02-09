@@ -33,15 +33,17 @@ public class Parser {
         try {
             switch (command){
             case "list":
-                if (this.description.length() != 4) {
+                if (this.description.length() != "list".length()) {
+                    throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
+                }
+                return "";
+            case "sort":
+                if (this.description.length() != "sort".length()) {
                     throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
                 }
                 return "";
             case "undo":
-                if (this.description.length() != 4) {
-                    throw new DukeException("OOPS!!! I'm sorry, but undo shouldn't have any additional arguments");
-                }
-                return "";
+                return this.description.length() > 4 ? this.description.substring(5) : "";
             case "done":
                 return this.description.substring(5);
             case "delete":
@@ -75,6 +77,8 @@ public class Parser {
         try {
             switch (command){
             case "list":
+                return "";
+            case "sort":
                 return "";
             case "done":
                 return "";
