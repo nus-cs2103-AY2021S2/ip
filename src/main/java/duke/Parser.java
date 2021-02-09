@@ -1,6 +1,8 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Parser {
 
@@ -49,11 +51,9 @@ public class Parser {
      * @return response of the command
      */
     public String commandList(String line, TaskList tasks) {
-        String response = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            assert(tasks.get(i) != null);
-            response += String.format("%d. %s\n", i + 1, tasks.get(i));
-        }
+        String response = IntStream.range(0, tasks.size())
+                .mapToObj(i -> String.format("%d. %s\n", i + 1, tasks.get(i)))
+                .collect(Collectors.joining());
         return response;
     }
 
