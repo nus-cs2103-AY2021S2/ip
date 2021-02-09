@@ -1,7 +1,3 @@
-1.[T][ ] return book
-2.[T][✘] read book
-3.[T][ ] list
-4.[D][✘] som (by: Feb 2 2019)
-5.[D][ ] some(by: Feb 2 2019)
-6.[E][ ] (at: Feb 2 2019)
-7.[T][ ] homework
+1.[T][✘] read book
+2.[D][✘] som (by: Feb 2 2019)
+3.[T][ ] homework

@@ -91,7 +91,7 @@ public class Ui {
         }
     }
 
-    public String findTaskString(String task, Scanner scanner) {
+    String findTaskString(String task, Scanner scanner) {
         String value;
         value = ("Here are the tasks in your list:\n");
         while (scanner.hasNext()) {
