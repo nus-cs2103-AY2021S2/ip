@@ -33,7 +33,7 @@ public class TaskList {
         return task;
     }
 
-    public Task taskDone(int index) {
+    public Task markTaskDone(int index) {
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
