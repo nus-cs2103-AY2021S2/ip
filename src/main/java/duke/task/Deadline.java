@@ -32,11 +32,11 @@ public class Deadline extends Task {
      *                      exception occurred
      */
     @Override
-    public void addTask(int count) throws DukeException {
+    public String addTask(int count) throws DukeException {
         if (this.name.equals("deadline")) {
             throw new DukeException("      OOPS!!! The description of a deadline cannot be empty.");
         } else {
-            super.addTask(count);
+            return super.addTask(count);
         }
     }
 

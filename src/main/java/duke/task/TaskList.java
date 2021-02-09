@@ -21,7 +21,7 @@ public class TaskList {
 
 
     public ArrayList<Task> getTasks() {
-        return tasks;
+        return this.tasks;
     }
 
     public void setTasks(ArrayList<Task> tasks) {

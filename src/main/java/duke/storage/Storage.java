@@ -35,6 +35,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         File myObj = new File("data/duke.txt");
         if (myObj.exists()) {
+            System.out.println("exists");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();

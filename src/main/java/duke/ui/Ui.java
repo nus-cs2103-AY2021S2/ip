@@ -15,8 +15,9 @@ public class Ui {
     /**
      * Prints break line.
      */
-    public void showLine() {
-        System.out.println("    ____________________________________________________________");
+    public String showLine() {
+        return "";
+        //return "    ____________________________________________________________";
     }
 
     /**
@@ -24,18 +25,20 @@ public class Ui {
      *
      * @param message  the error message of the error.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________");
+    public String showWelcome() {
+        String output = "";
+        output += "    ____________________________________________________________" + "\n";
+        output += "     Hello! I'm Duke" + "\n";
+        output += "     What can I do for you?" + "\n";
+        output += "    ____________________________________________________________" + "\n";
+        return output;
     }
 
 

@@ -35,14 +35,15 @@ public class Command {
      * @throws IOException  If an input or output
      *                      exception occurred
      */
-    public void execute(TaskList tasks) throws IOException, DukeException {
+    public String execute(TaskList tasks) throws IOException, DukeException {
         ArrayList<Task> tList = tasks.getTasks();
+        String output = "";
         if (commandName.equals("list")) {
-            System.out.println("     Here are the tasks in your list:");
+            output = "     Here are the tasks in your list:\n";
             int counter = 1;
             for (Task s : tList) {
                 if (s != null) {
-                    System.out.println("     " + counter + "." + s.toString());
+                    output += "     " + counter + "." + s.toString() + "\n";
                     counter++;
                 } else {
                     break;
@@ -51,8 +52,8 @@ public class Command {
         } else if (commandName.split(" ")[0].equals("done")) {
             int index = Integer.parseInt(commandName.split(" ")[1]);
             tList.get(index - 1).markAsDone();
-            System.out.println("     Nice! I've marked this task as done:");
-            System.out.println("       " + tList.get(index - 1).toString());
+            output = "     Nice! I've marked this task as done:\n";
+            output += "       " + tList.get(index - 1).toString() + "\n";
             Task currTask = tList.get(index - 1);
             tasks.setTasks(tList);
             String old = null;
@@ -84,12 +85,12 @@ public class Command {
             writer.close();
         } else if (commandName.split(" ")[0].equals("delete")) {
             int index = Integer.parseInt(commandName.split(" ")[1]);
-            System.out.println("     Noted. I've removed this task:");
-            System.out.println("       " + tList.get(index - 1).toString());
-            System.out.println("     Now you have " + (tList.size() - 1) + " tasks in the list.");
+            output = "     Noted. I've removed this task:\n";
+            output += "       " + tList.get(index - 1).toString() + "\n";
+            output += "     Now you have " + (tList.size() - 1) + " tasks in the list.\n";
             tList.remove(index - 1);
             tasks.setTasks(tList);
-            BufferedReader reader = new BufferedReader(new FileReader("data/duke.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("/data/duke.txt"));
             String oldContent = "";
             String line = reader.readLine();
             int counter = 0;
@@ -107,26 +108,26 @@ public class Command {
         } else if (commandName.split(" ")[0].equals("todo")) {
             if (commandName.length() < 5) {
                 ToDo todo = new ToDo(commandName);
-                todo.addTask(0);
+                output = todo.addTask(0);
             } else {
                 int end = commandName.indexOf(" ");
                 String name = commandName.substring(end + 1);
                 try {
                     tList.add(new ToDo(name));
-                    tList.get(tList.size() - 1).addTask(tList.size());
+                    output = tList.get(tList.size() - 1).addTask(tList.size());
                     BufferedWriter writer = new BufferedWriter(
                             new FileWriter("data/duke.txt", true));
                     writer.write("T | 0 | " + name + "\n");
                     writer.close();
                     tasks.setTasks(tList);
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    output += e.getMessage();
                 }
             }
         } else if (commandName.split(" ")[0].equals("deadline")) {
             if (commandName.length() < 9) {
                 Deadline deadline = new Deadline(commandName, null);
-                deadline.addTask(0);
+                output = deadline.addTask(0);
             } else {
                 try {
                     int end1 = commandName.indexOf(" ");
@@ -137,23 +138,23 @@ public class Command {
                     int mon = Integer.valueOf(subString2.substring(5, 7));
                     int day = Integer.valueOf(subString2.substring(8));
                     tList.add(new Deadline(subString1, LocalDate.of(year, mon, day)));
-                    tList.get(tList.size() - 1).addTask(tList.size());
+                    output = tList.get(tList.size() - 1).addTask(tList.size());
                     BufferedWriter writer = new BufferedWriter(
                             new FileWriter("data/duke.txt", true));
                     writer.write("D | 0 | " + subString1 + " | " + subString2 + "\n");
                     writer.close();
                     tasks.setTasks(tList);
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    output += e.getMessage();
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("      OOPS!!! The due date of a deadline "
-                            + "cannot be empty. (Format: /by + date[YYYY-MM-DD])");
+                    output += "      OOPS!!! The due date of a deadline "
+                            + "cannot be empty. (Format: /by + date[YYYY-MM-DD])";
                 }
             }
         } else if (commandName.split(" ")[0].equals("event")) {
             if (commandName.length() < 6) {
                 Event event = new Event(commandName, null);
-                event.addTask(0);
+                output = event.addTask(0);
             } else {
                 try {
                     int end1 = commandName.indexOf(" ");
@@ -164,17 +165,17 @@ public class Command {
                     int mon = Integer.valueOf(subString2.substring(5, 7));
                     int day = Integer.valueOf(subString2.substring(8));
                     tList.add(new Event(subString1, LocalDate.of(year, mon, day)));
-                    tList.get(tList.size() - 1).addTask(tList.size());
+                    output = tList.get(tList.size() - 1).addTask(tList.size());
                     BufferedWriter writer = new BufferedWriter(
                             new FileWriter("data/duke.txt", true));
                     writer.write("E | 0 | " + subString1 + " | " + subString2 + "\n");
                     writer.close();
                     tasks.setTasks(tList);
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    output += e.getMessage();
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("      OOPS!!! The start and end date of "
-                            + "an event cannot be empty.(Format: /at + duration[YYYY-MM-DD])");
+                    output += "      OOPS!!! The start and end date of "
+                            + "an event cannot be empty.(Format: /at + duration[YYYY-MM-DD])";
                 }
             }
         } else if (commandName.split(" ")[0].equals("find")) {
@@ -183,20 +184,21 @@ public class Command {
             String line = reader.readLine();
             int counter = 0;
             int secondCounter = 1;
-            System.out.println("     Here are the matching tasks in your list:");
+            output = "     Here are the matching tasks in your list:\n";
             while (line != null) {
                 if (line.indexOf(match) != -1) {
-                    System.out.println("     " + secondCounter + "." + tasks.getTasks().get(counter).toString());
+                    output += "     " + secondCounter + "." + tasks.getTasks().get(counter).toString() + "\n";
                     secondCounter++;
                 }
                 line = reader.readLine();
                 counter++;
             }
         } else if (commandName.equals("bye")) {
-            System.out.println("     Bye. Hope to see you again soon!");
+            output = "     Bye. Hope to see you again soon!\n";
         } else {
-            System.out.println("      OOPS!!! I'm sorry, but I don't know what that means :-(");
+            output = "      OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
+        return output;
     }
 
     /**

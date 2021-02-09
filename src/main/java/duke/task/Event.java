@@ -35,11 +35,11 @@ public class Event extends Task {
      *                      exception occurred
      */
     @Override
-    public void addTask(int count) throws DukeException {
+    public String addTask(int count) throws DukeException {
         if (this.name.equals("event")) {
             throw new DukeException("      OOPS!!! The description of an event cannot be empty.");
         } else {
-            super.addTask(count);
+            return super.addTask(count);
         }
     }
 

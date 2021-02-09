@@ -59,39 +59,30 @@ public class Duke extends Application {
         }
     }
 
-    public Duke() {
-//        ui = new Ui();
-//        storage = new Storage("data/tasks.txt");
-//        try {
-//            tasks = new TaskList(storage.load());
-//        } catch (IOException | DukeException e) {
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
-    }
-
 
     /**
      * Calls showWelcome to show welcome message.
      * Then gets command from user and executes the command.
      * Displays possible error message.
      */
-    public void run() {
-        ui.showWelcome();
+    public String run(String fullCommand) {
+        String output = "";
+//        output += ui.showWelcome();
         boolean isExit = false;
-        while (!isExit) {
+//        while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                //String fullCommand = ui.readCommand();
+                output += ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks);
-                isExit = c.isExit();
+                output += c.execute(tasks);
+                //isExit = c.isExit();
             } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
+                output += ui.showError(e.getMessage());
             } finally {
-                ui.showLine();
+                output += ui.showLine();
             }
-        }
+        //}
+        return output;
     }
 
     @Override
@@ -183,33 +174,17 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-//    /**
-//     * Iteration 2:
-//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-//     * the dialog container. Clears the user input after processing.
-//     */
-//    private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-
-        return "Duke heard: " + input;
+        return new Duke("data/tasks.txt").run(input);
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
+//    public static void main(String[] args) {
+//        new Duke("data/tasks.txt").run();
+//    }
 
 
 }
