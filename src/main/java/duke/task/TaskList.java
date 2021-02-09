@@ -65,4 +65,13 @@ public class TaskList {
         return taskList.get(i);
     }
 
+    /**
+     * Returns a list of task
+     *
+     * @return A list of task
+     */
+    public List<Task> asList() {
+        return taskList;
+    }
+
 }
