@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -46,17 +45,15 @@ public class Ui extends Application {
 
     /**
      * Initialises the input scanner, task list and user interface nodes.
+     *
+     * @throws DukeException If unable to load tasks.
      */
-    public void initialise() {
+    public void initialise() throws DukeException {
         scanner = new Scanner(System.in);
 
         // Initialise task list
         tasks = new TaskList();
-        try {
-            tasks.load();
-        } catch (IOException ex) {
-            System.out.println("  Unable to load tasks.");
-        }
+        tasks.load();
 
         // Create nodes for GUI
         scrollPane = new ScrollPane();
@@ -76,9 +73,10 @@ public class Ui extends Application {
      * Creates the GUI for user to communicate with Duke.
      *
      * @param stage The stage for the GUI.
+     * @throws DukeException If unable to initialise task list.
      */
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws DukeException {
         this.stage = stage;
         initialise();
         arrangeNodes();

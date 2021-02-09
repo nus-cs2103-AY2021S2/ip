@@ -6,7 +6,7 @@ package duke;
 public class Event extends Task {
     protected static final String TAG = "[E]";
 
-    public Event(String name) {
+    public Event(String name) throws DukeException {
         super(name);
     }
 

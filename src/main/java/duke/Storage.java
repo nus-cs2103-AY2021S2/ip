@@ -27,9 +27,10 @@ public class Storage {
      * Creates the text file if it does not exist.
      *
      * @return List of tasks.
+     * @throws DukeException If there is an invalid task loaded.
      * @throws IOException If unable to load from file.
      */
-    public List<Task> load() throws IOException {
+    public List<Task> load() throws DukeException, IOException {
         assert path != null : "storage filepath is null";
 
         List<Task> tasks = new ArrayList<>();

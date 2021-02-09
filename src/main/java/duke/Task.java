@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * This is used to store information about tasks for use by Duke.
@@ -20,8 +21,9 @@ public class Task {
      * Initialises task using task description.
      *
      * @param name Description of task.
+     * @throws DukeException If calculateDate throws it.
      */
-    public Task(String name) {
+    public Task(String name) throws DukeException {
         this.name = name;
         this.isDone = false;
         this.date = calculateDate(name);
@@ -31,15 +33,20 @@ public class Task {
      * Calculates the date given a task description. Returns null if no date is given.
      *
      * @param name Task description.
-     * @return Date if specified in task description.
+     * @return Date If specified in task description.
+     * @throws DukeException If input is not a date in the correct format.
      */
-    public LocalDate calculateDate(String name) {
+    public LocalDate calculateDate(String name) throws DukeException {
         assert name != null && name.length() > 0 : "invalid task name";
 
         String[] inputs = name.substring(0, name.length() - 1).split(": ");
         if (inputs.length > 1) {
             String inputDate = inputs[1].split(" ")[0];
-            return LocalDate.parse(inputDate, Task.INPUT_DATE_FORMAT);
+            try {
+                return LocalDate.parse(inputDate, Task.INPUT_DATE_FORMAT);
+            } catch (DateTimeParseException ex) {
+                throw new DukeException("  Please provide a date in yyyy-MM-dd format.");
+            }
         }
         return null;
     }
