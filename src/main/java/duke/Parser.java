@@ -43,6 +43,12 @@ public class Parser {
 
         currLine = currLine.toLowerCase();
         assert !currLine.equals("");
+        String output = handleRealCommand(duke, currLine, taskList, ui, storage);
+        output += taskList.checkDuplicate(currLine);
+        return output;
+    }
+
+    private String handleRealCommand(Duke duke, String currLine, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] parsedLine = currLine.split(" ");
         if (currLine.startsWith("list")) {
             return ui.printListTasks(taskList);
@@ -72,6 +78,5 @@ public class Parser {
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
     }
 }

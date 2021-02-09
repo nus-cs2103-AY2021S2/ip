@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents the list of tasks, and the relevant commands for the list, of the Duke.
@@ -48,6 +49,18 @@ public class TaskList {
         Task curr = list.get(num - 1);
         list.remove(num - 1);
         return curr;
+    }
+
+    protected String checkDuplicate(String currLine){
+        String[] toCheck = currLine.strip().split(" ");
+        for (Task task: list){
+            String existing[] = task.taskLine.strip().split(" ");
+            if (Arrays.equals(existing, toCheck)){
+                System.out.println(" Please note that you have entered a duplicate task.");
+                return " \n Please note that you have entered a duplicate task.\n";
+            }
+        }
+        return "";
     }
 
     /**
