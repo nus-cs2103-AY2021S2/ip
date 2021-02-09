@@ -3,6 +3,7 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of task.
@@ -66,13 +67,10 @@ public class TaskList {
      * @return task list containing the matching tasks
      */
     public TaskList find(String query) {
-        TaskList newTaskList = new TaskList();
-        tasks.forEach(task -> {
-            if (task.getDescription().contains(query)) {
-                newTaskList.add(task);
-            }
-        });
-        return newTaskList;
+        List<Task> queryTasks = tasks.stream().filter(task ->
+            task.getDescription().contains(query)
+        ).collect(Collectors.toList());
+        return new TaskList(queryTasks);
     }
 
     /**
@@ -117,12 +115,7 @@ public class TaskList {
      * @return boolean to indicate are all the tasks done
      */
     public boolean isAllDone() {
-        for (Task task: tasks) {
-            if (!task.getDone()) {
-                return false;
-            }
-        }
-        return true;
+        return tasks.stream().allMatch(Task::getDone);
     }
 
     /**
@@ -132,16 +125,16 @@ public class TaskList {
      * @return task list containing {@code Task} that is occurring on the specified date
      */
     public TaskList filterByDate(String date) {
-        List<Task> printTasks = new ArrayList<>(tasks);
         LocalDate queryDate = LocalDate.parse(date);
-        printTasks.removeIf(t -> {
-            if (t instanceof Deadline) {
-                return !(((Deadline) t).getDeadlineDateTime().toLocalDate().isEqual(queryDate));
-            } else if (t instanceof Event) {
-                return !((Event) t).getEventDateTime().toLocalDate().isEqual(queryDate);
+        List<Task> printTasks = tasks.stream().filter(task -> {
+            if (task instanceof Deadline) {
+                return ((Deadline) task).getDeadlineDate().isEqual(queryDate);
+            } else if (task instanceof Event) {
+                return ((Event) task).getEventDate().isEqual(queryDate);
+            } else {
+                return false;
             }
-            return true;
-        });
+        }).collect(Collectors.toList());
         return new TaskList(printTasks);
     }
 
@@ -151,10 +144,6 @@ public class TaskList {
      * @return formatted string that is suitable for storing
      */
     public String toStorageString() {
-        StringBuilder sb = new StringBuilder();
-        tasks.forEach(task -> {
-            sb.append(String.format("%s%n", task.toStorageString()));
-        });
-        return sb.toString();
+        return tasks.stream().map(e -> e.toStorageString()).collect(Collectors.joining("\n"));
     }
 }

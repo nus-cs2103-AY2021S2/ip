@@ -1,5 +1,6 @@
 package duke.common;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -39,7 +40,21 @@ public class Utils {
      */
     public static boolean checkIsValidDate(String dateString) {
         try {
-            LocalDateTime.parse(dateString);
+            LocalDate.parse(dateString);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if the String is a valid datetime.
+     *
+     * @param dateTimeString a datetime String to be checked
+     */
+    public static boolean checkIsValidDateTime(String dateTimeString) {
+        try {
+            LocalDateTime.parse(dateTimeString);
             return true;
         } catch (DateTimeParseException e) {
             return false;
