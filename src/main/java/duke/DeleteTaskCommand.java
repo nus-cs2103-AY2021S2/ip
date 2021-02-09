@@ -14,7 +14,8 @@ public class DeleteTaskCommand extends Command {
     private String removeTask() {
         try {
             if (parser.canParseIndexCommand(input, taskList.getSize())) {
-                int index = parser.parseIndex(input);
+                int index = parser.parseIndex(input, taskList.getSize());
+                assert index < taskList.getSize() && index >= 0: "Index out of bounds";
                 Task deleted = taskList.deleteTask(index);
                 return ui.getDeleteTask(deleted);
             } else {

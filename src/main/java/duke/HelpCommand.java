@@ -10,6 +10,8 @@ public class HelpCommand extends Command {
      * Checks if the user input is formatted into a correct help command.
      * If it is, help message is printed.
      * Otherwise, it prints the exception faced.
+     *
+     * @return String of help command.
      */
     private String help() {
         try {
@@ -25,6 +27,8 @@ public class HelpCommand extends Command {
 
     /**
      * Executes the help command.
+     *
+     * @return String of help command.
      */
     @Override
     public String execute() {

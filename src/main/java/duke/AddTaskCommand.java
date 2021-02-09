@@ -13,6 +13,8 @@ public class AddTaskCommand extends Command {
      * Checks if the user input is formatted into a correct To-do command.
      * If it is, it adds the To-do to the task list and prints the Add task message.
      * Otherwise, it prints the exception faced.
+     *
+     * @return String of to-do task or error faced
      */
     private String addTodo() {
         try {
@@ -33,6 +35,8 @@ public class AddTaskCommand extends Command {
      * Checks if the user input is formatted into a correct Deadline command.
      * If it is, it adds the Deadline to the task list and prints the Add task message.
      * Otherwise, it prints the exception faced.
+     *
+     * @return String of deadline task or error faced
      */
     private String addDeadline() {
         try {
@@ -58,6 +62,8 @@ public class AddTaskCommand extends Command {
      * Checks if the user input is formatted into a correct Event command.
      * If it is, it adds the Event to the task list and prints the Add task message.
      * Otherwise, it prints the exception faced.
+     *
+     * @return String of event task or error faced.
      */
     private String addEvent() {
         try {
@@ -82,17 +88,20 @@ public class AddTaskCommand extends Command {
 
     /**
      * Executes the add task command.
+     *
+     * @return String of task executed.
      */
     @Override
     public String execute() {
         if (command.equals("todo")) {
             return addTodo();
-        } else if (command.equals("deadline")) {
-            return addDeadline();
-        } else if (command.equals("event")) {
-            return addEvent();
-        } else {
-            return "Something went wrong";
         }
+        if (command.equals("deadline")) {
+            return addDeadline();
+        }
+        if (command.equals("event")) {
+            return addEvent();
+        }
+        return "Something went wrong";
     }
 }

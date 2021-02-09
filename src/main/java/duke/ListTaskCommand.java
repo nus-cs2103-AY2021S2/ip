@@ -10,6 +10,8 @@ public class ListTaskCommand extends Command {
      * Checks if the user input is formatted into a correct list command.
      * If it is, it prints the task list.
      * Otherwise, it prints the error faced.
+     *
+     * @return String of list task command.
      */
     private String listTask() {
         try {
@@ -25,6 +27,8 @@ public class ListTaskCommand extends Command {
 
     /**
      * Executes the list task command.
+     *
+     * @return String of list task command.
      */
     @Override
     public String execute() {

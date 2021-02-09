@@ -50,8 +50,8 @@ public class Storage {
                 switch(taskArr[0]) {
                 case "T ":
                     String input = taskArr[2];
-                        task = new Todo(input);
-                        break;
+                    task = new Todo(input);
+                    break;
                 case "D ":
                     LocalDateTime dateTime = LocalDateTime.parse(taskArr[3].substring(4),
                             DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"));
@@ -65,10 +65,8 @@ public class Storage {
                     task = new Event(dateTimeStart, dateTimeEnd, taskArr[2].substring(0, taskArr[2].length() - 1));
                     break;
                 }
-                if (task != null) {
-                    if (taskArr[1].equals("X ")) {
-                        task.checkTask();
-                    }
+                if (task != null && taskArr[1].equals("X ")) {
+                    task.checkTask();
                     taskList.addTask(task);
                 }
             }

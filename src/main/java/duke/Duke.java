@@ -22,6 +22,7 @@ public class Duke {
      * Executes the command that the user inputs.
      *
      * @param input User input.
+     * @return String of command executed.
      */
     private String executeCommand(String input) {
         String command = parser.parseCommand(input);
@@ -67,14 +68,30 @@ public class Duke {
         storage.saveTaskList(str);
     }
 
+    /**
+     * Greets the user.
+     *
+     * @return String of greeting.
+     */
     public static String greeting() {
         return new Ui().getGreeting();
     }
 
+    /**
+     * Returns help message.
+     *
+     * @return String of help message.
+     */
     public static String help() {
         return new Ui().getHelp();
     }
 
+    /**
+     * Gets String of command executed.
+     *
+     * @param input User input.
+     * @return String of command executed.
+     */
     public String getResponse(String input) {
         try {
             return executeCommand(input);

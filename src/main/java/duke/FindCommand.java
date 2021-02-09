@@ -10,6 +10,8 @@ public class FindCommand extends Command {
      * Checks if the user input is formatted into a correct find command.
      * If it is, it prints the find message.
      * Otherwise, it prints the exception faced.
+     *
+     * @return String of find command.
      */
     private String find() {
         try {
@@ -24,9 +26,8 @@ public class FindCommand extends Command {
                 }
                 if (tempTaskList.getSize() == 0) {
                     throw new NoSuchKeywordException(keyword);
-                } else {
-                    return ui.getFoundTaskList(tempTaskList);
                 }
+                return ui.getFoundTaskList(tempTaskList);
             } else {
                 throw new WrongFormatDukeException(command);
             }
@@ -37,6 +38,8 @@ public class FindCommand extends Command {
 
     /**
      * Executes the find command.
+     *
+     * @return String of find command.
      */
     @Override
     public String execute() {

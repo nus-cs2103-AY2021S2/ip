@@ -33,11 +33,11 @@ public class Parser {
         String[] command = input.split(" ");
         if (command.length == 1) {
             return false;
-        } else if (command[1].equals("")) {
-            return false;
-        } else {
-            return true;
         }
+        if (command[1].equals("")) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -65,16 +65,15 @@ public class Parser {
         String[] command = input.split(" ");
         if (command.length == 1) {
             return false;
-        } else if (command[1].equals("/by")) {
-            return false;
-        } else {
-            String[] details = input.split(" /by ");
-            if (details.length != 2) {
-                return false;
-            } else {
-                    return true;
-            }
         }
+        if (command[1].equals("/by")) {
+            return false;
+        }
+        String[] details = input.split(" /by ");
+        if (details.length != 2) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -109,21 +108,19 @@ public class Parser {
         String[] command = input.split(" ");
         if (command.length == 1) {
             return false;
-        } else if (command[1].equals("/from")) {
-            return false;
-        } else {
-            String[] details = input.split(" /from ");
-            if (details.length != 2) {
-                return false;
-            } else {
-                String[] dates = details[1].split(" /to ");
-                if (dates.length != 2) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
         }
+        if (command[1].equals("/from")) {
+            return false;
+        }
+        String[] details = input.split(" /from ");
+        if (details.length != 2) {
+            return false;
+        }
+        String[] dates = details[1].split(" /to ");
+        if (dates.length != 2) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -189,9 +186,8 @@ public class Parser {
             int index = Integer.valueOf(command[1]) - 1;
             if (index < 0 || index >= size) {
                 return false;
-            } else {
-                return true;
             }
+            return true;
         } catch (NumberFormatException e) {
             return false;
         }
@@ -203,9 +199,10 @@ public class Parser {
      * @param input User input.
      * @return Index.
      */
-    public int parseIndex(String input) {
+    public int parseIndex(String input, int size) {
         String[] command = input.split(" ");
         int index = Integer.valueOf(command[1]) - 1;
+        assert index >= 0 && index < size: "Index is out of bounds.";
         return index;
     }
 
@@ -218,9 +215,8 @@ public class Parser {
     public boolean canParseHelpCommand(String input) {
         if (input.equals("help") || input.equals("help ")) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -233,11 +229,11 @@ public class Parser {
         String[] command = input.split(" ");
         if (input.equals("find") || input.equals("find ")) {
             return false;
-        } else if (command.length != 2) {
-            return false;
-        } else {
-            return true;
         }
+        if (command.length != 2) {
+            return false;
+        }
+        return true;
     }
 
     /**

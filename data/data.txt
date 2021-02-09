@@ -4,3 +4,4 @@ E | O | team meeting | from: 02-2-2021 2100 | to: 02-2-2021 2359
 D | X | op1 slides | by: 07-2-2021 2300
 T | X | work 
 E | O | party | from: 23-2-2021 2000 | to: 24-2-2021 0200
+D | O | assertion | by: 10-2-2021 2359
