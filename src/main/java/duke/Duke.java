@@ -6,7 +6,7 @@ public class Duke {
     private TaskList tl;
 
     /**
-     * Constructor for Duke.
+     * Constructs new Duke object.
      */
     public Duke() {
         this.ui = new Ui();
@@ -14,16 +14,27 @@ public class Duke {
         this.tl = this.storage.load();
     }
 
+    /**
+     * Returns string of greeting.
+     * @return Greeting message.
+     */
     public static String greeting() {
         return new Ui().printGreeting();
     }
+
+    /**
+     * Returns string of help message.
+     * @return Help message.
+     */
     public static String help() {
         return new Ui().printHelp();
     }
 
-    public static void main(String[] args) {
-    }
-
+    /**
+     * Returns string to print given user input.
+     * @param input Input from user.
+     * @return Respond from duke in string format.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parseInput(input);

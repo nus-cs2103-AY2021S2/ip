@@ -8,7 +8,7 @@ public class Deadline extends Task {
     protected LocalDateTime deadline;
 
     /**
-     * Constructor for deadltine task.
+     * Constructs new deadline task.
      *
      * @param description Name of Deadline task.
      * @param deadline Time format of deadline.
@@ -19,7 +19,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Static method to create a Deadline task.
+     * Returns new deadline task created with taskInfo.
      *
      * @param taskInfo information about the deadline task.
      * @return a deadline task.

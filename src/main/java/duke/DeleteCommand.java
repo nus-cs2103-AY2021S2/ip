@@ -4,7 +4,7 @@ public class DeleteCommand extends Command {
     private int taskNum;
 
     /**
-     * Construct a delete command.
+     * Constructs a delete command.
      *
      * @param taskNum The task number to delete in task list.
      */

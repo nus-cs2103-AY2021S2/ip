@@ -2,7 +2,7 @@ package duke;
 
 public class ToDo extends Task {
     /**
-     * Constructor of to-do task.
+     * Constructs new to-do task.
      * @param description Name of task.
      */
     public ToDo(String description) {
@@ -25,7 +25,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Return string of to-do task name and info.
+     * Returns string of to-do task name and info.
      * Format is for saving task into text file.
      *
      * @return string format of to-do info.

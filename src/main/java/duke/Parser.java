@@ -26,7 +26,7 @@ public class Parser {
     }
 
     /**
-     * Parse the user input for Duke.
+     * Parses the user input for Duke.
      * ALlows duke to identify which command user inputted.
      * Returns the unique command.
      *

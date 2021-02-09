@@ -4,7 +4,7 @@ public class DoneCommand extends Command {
     private int taskNum;
 
     /**
-     * Constructer for done command.
+     * Constructs new done command.
      *
      * @param taskNum The task number to be set as done.
      */
@@ -14,8 +14,8 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks a task done of a specfic numbering.
-     * Print marked message and update drive.
+     * Marks a task done of a specific numbering.
+     * Prints marked message and update drive.
      *
      * @param tl task list.
      * @param ui object for user interface.

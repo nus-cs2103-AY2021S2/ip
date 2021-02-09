@@ -8,7 +8,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for task object.
+     * Constructs new task object.
      * @param description Name of task.
      */
     public Task(String description) {
@@ -18,7 +18,7 @@ public abstract class Task {
 
 
     /**
-     * Return string logo for task's completion.
+     * Returns string logo for task's completion.
      * 'X' is done. ' ' is not done.
      *
      * @return string logo.
@@ -28,7 +28,7 @@ public abstract class Task {
     }
 
     /**
-     * String for task date and timing.
+     * Returns string for task date and timing.
      *
      * @param dateTime date and timing of task.
      * @return String for task date and timing.
@@ -37,10 +37,17 @@ public abstract class Task {
         return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
     }
 
+    /**
+     * Returns task name.
+     * @return String for task name.
+     */
     public String getName() {
         return description;
     }
 
+    /**
+     * Finishes the task.
+     */
     public void finishTask() {
         isDone = true;
     }
@@ -48,7 +55,11 @@ public abstract class Task {
     public abstract String saveTask();
 
 
-
+    /**
+     * Returns string for task.
+     * String contains type and name of task.
+     * @return String message for task information.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);

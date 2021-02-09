@@ -3,9 +3,9 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private final String LINE = "";
     private final String HELP = "     These are the formats for Duke commands:\n"
             + "    - help\n"
+            + "    - bye\n"
             + "    - list\n"
             + "    - todo (taskName)\n"
             + "    - deadline (taskName) /by (YYYY-M-D TIME)\n"
@@ -20,19 +20,28 @@ public class Ui {
     }
 
     /**
-     * Print greeting message.
+     * Returns greeting message to be printed.
+     *
+     * @return String format of greeting.
      */
     public String printGreeting() {
         String greeting = "     Hello! I'm Duke\n" + "     What can I do for you?\n";
         return greeting;
     }
 
+    /**
+     * Returns help message to be printed.
+     *
+     * @return String message of help.
+     */
     public String printHelp() {
         return HELP;
     }
 
     /**
-     * Print bye message.
+     * Returns string of bye message.
+     *
+     * @return String format of bye message.
      */
     public String printBye() {
         String byeMessage = "     Bye. Hope to see you again soon!\n";
@@ -49,43 +58,29 @@ public class Ui {
     }
 
     /**
-     * Print errors by user input.
+     * Returns String format of error.
      *
-     * @param error error found.
+     * @param error String format of error.
+     * @return String format of error.
      */
     public String printError(String error) {
-        return LINE + error + LINE;
+        return error;
     }
 
-    /**
-     * Reads next line of user input.
-     * Returns in string format.
-     *
-     * @return string format of user input.
-     */
-    public String readLine() {
-        return sc.nextLine();
-    }
 
-    /**
-     * Prints the list of the tasks.
-     *
-     * @param tl task list to be printed.
-     */
     public String printTasks(TaskList tl) {
         if (tl.size() == 0) {
             String emptyListMsg = "     There are no tasks in your list!\n";
-            return LINE + emptyListMsg + LINE;
+            return emptyListMsg;
         } else {
             int index = 1;
             String listMsg = "     These are the tasks in your list:\n";
             String msg = "";
-            msg += LINE + listMsg;
+            msg += listMsg;
             for (Task t : tl.getList()) {
                 msg += String.format("     %d. %s\n",
                         index++, t.toString());
             }
-            msg += LINE;
             return msg;
         }
     }
@@ -103,7 +98,7 @@ public class Ui {
         String addMsg = "     Got it. I've added this task:\n";
         String taskMsg = "\t" + t.toString() + "\n";
         String listSizeMsg = taskListSizeMsg(tl.size());
-        return LINE + addMsg + taskMsg + listSizeMsg + LINE;
+        return addMsg + taskMsg + listSizeMsg;
     }
 
     /**
@@ -114,7 +109,7 @@ public class Ui {
     public String printMarkedDone(Task t) {
         String doneMsg = "     Nice! I've marked this task as done:\n";
         String taskMsg = "\t" + t.toString() + "\n";
-        return LINE + doneMsg + taskMsg + LINE;
+        return doneMsg + taskMsg;
     }
 
     /**
@@ -126,7 +121,7 @@ public class Ui {
         String deleteMsg = "     Noted. I've removed this task:\n";
         String taskMsg = "\t" + t.toString() + "\n";
         String listSizeMsg = taskListSizeMsg(tl.size());
-        return LINE + deleteMsg + taskMsg + listSizeMsg + LINE;
+        return deleteMsg + taskMsg + listSizeMsg;
     }
 
     /**
@@ -138,17 +133,16 @@ public class Ui {
     public String printFoundTasks(TaskList tl) {
         if (tl.size() == 0) {
             String noMatchMsg = "     There are no matching task in your list!\n";
-            return LINE + noMatchMsg + LINE;
+            return noMatchMsg;
         } else {
             int index = 1;
             String findMsg = "     Here are the matching tasks in your list:\n";
             String msg = "";
-            msg += LINE + findMsg;
+            msg += findMsg;
             for (Task t : tl.getList()) {
                 msg += String.format("     %d. %s\n",
                         index++, t.toString());
             }
-            msg += LINE;
             return msg;
         }
     }

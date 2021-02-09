@@ -5,7 +5,7 @@ public class AddCommand extends Command {
     private String taskInfo;
 
     /**
-     * Constructor for add command.
+     * Constructs add command.
      *
      * @param taskType Type of task to add.
      * @param taskInfo Information of task to be parsed.
@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Identify task type and create the task with the task info.
+     * Identifies task type and create the task with the task info.
      * Task is then added to the task list and stored on disk.
      *
      * @param tl task list.

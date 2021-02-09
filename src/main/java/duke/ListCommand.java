@@ -2,7 +2,7 @@ package duke;
 
 public class ListCommand extends Command {
     /**
-     * List out the tasks in the list to user.
+     * Lists out the tasks in the list to user.
      * @param tl task list.
      * @param ui object for user interface.
      * @param storage object to load and save tasks.
