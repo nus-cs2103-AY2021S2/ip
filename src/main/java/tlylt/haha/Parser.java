@@ -82,13 +82,11 @@ public class Parser {
         String task = Parser.tokenize(input)[0];
         String description = Parser.tokenize(input).length == 2 ? Parser.tokenize(input)[1] : "";
         // Check input has description following task command words
-        if (Arrays
+        boolean hasTaskKeyword = Arrays
                 .stream(TaskType.values())
                 .map(TaskType::getRep)
-                .anyMatch(x -> x.equals(task))
-                &&
-                description.isEmpty()
-        ) {
+                .anyMatch(x -> x.equals(task));
+        if (hasTaskKeyword && description.isEmpty()) {
             throw new HahaEmptyDescriptionException(input);
         }
     }
