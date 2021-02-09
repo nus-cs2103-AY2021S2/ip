@@ -13,29 +13,29 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private final LocalDateTime by;
+    private final LocalDateTime deadlineDate;
 
     /**
      * Constructor for the Deadline task, specifying the description of the task and
      * the date time to be completed by.
      * @param description Description of the deadline task.
-     * @param by Deadline in terms of date time.
+     * @param deadlineDate Deadline in terms of date time.
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime deadlineDate) {
         super(description);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
      * Constructor for the Deadline task, specifying the description of the task,
      * the date time to be completed by and whether the task has been completed.
      * @param description Description of the deadline task.
-     * @param by Deadline in terms of date time.
+     * @param deadlineDate Deadline in terms of date time.
      * @param isDone Determine whether the task is done or not.
      */
-    public Deadline(String description, LocalDateTime by, boolean isDone) {
+    public Deadline(String description, LocalDateTime deadlineDate, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
@@ -47,6 +47,6 @@ public class Deadline extends Task {
         return String.format("[D][%s] %s (by: %s)",
             super.getStatusIcon(),
             super.toString(),
-            by.format(DateTimeFormatter.ofPattern("d MMM yyyy - HHmm")));
+            deadlineDate.format(DateTimeFormatter.ofPattern("d MMM yyyy - HHmm")));
     }
 }

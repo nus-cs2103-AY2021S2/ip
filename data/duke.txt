@@ -1,2 +1,4 @@
 [T][ ] test
 [T][ ] borrow item
+[E][ ] project meeting  (at: 28 Jan 2020 - 0800)
+[T][ ] buy book

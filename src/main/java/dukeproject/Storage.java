@@ -57,16 +57,16 @@ public class Storage {
      * @throws FileNotFoundException If the file cannot be found.
      */
     public void writeToFile(TaskList taskList) throws FileNotFoundException {
-        // Push the file content to the page
-        FileWriter fileWriter;
         assertFileCreated();
+
+        FileWriter fileWriter;
 
         try {
             fileWriter = new FileWriter(filePath);
 
             // Rewrite the file with the entire list of text
             for (int index = 0; index < taskList.size(); index++) {
-                fileWriter.write(taskList.get(index).toString() + "\n");
+                fileWriter.write(taskList.getTask(index).toString() + "\n");
             }
 
             fileWriter.close();
@@ -84,6 +84,7 @@ public class Storage {
     public ArrayList<String> loadFileContent() throws FileNotFoundException {
 
         assertFileCreated();
+
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
         ArrayList<String> contents = new ArrayList<>();

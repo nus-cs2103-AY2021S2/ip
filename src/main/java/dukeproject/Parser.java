@@ -75,7 +75,7 @@ public class Parser {
             }
 
             ToDo newToDoTask = new ToDo(command.substring(5));
-            taskList.add(newToDoTask);
+            taskList.addTask(newToDoTask);
             storage.writeToFile(taskList);
 
             // Print a success message
@@ -105,11 +105,11 @@ public class Parser {
             }
 
             // Get the description and date from the user's input
-            StringDatePair output = new Parser().parse(command, Parser.CommandType.INPUT_DEADLINE);
+            StringDatePair output = new Parser().parseInputAndFileEvents(command, Parser.CommandType.INPUT_DEADLINE);
 
             // Add a deadline task
             Deadline newDeadlineTask = new Deadline(output.getString(), output.getDate());
-            taskList.add(newDeadlineTask);
+            taskList.addTask(newDeadlineTask);
             storage.writeToFile(taskList);
 
             // Print a success message
@@ -142,11 +142,11 @@ public class Parser {
             }
 
             // Get the description and date from the user's input
-            StringDatePair output = new Parser().parse(command, Parser.CommandType.INPUT_EVENT);
+            StringDatePair output = new Parser().parseInputAndFileEvents(command, Parser.CommandType.INPUT_EVENT);
 
             // Add a deadline task
             Event newEventTask = new Event(output.getString(), output.getDate());
-            taskList.add(newEventTask);
+            taskList.addTask(newEventTask);
             storage.writeToFile(taskList);
 
             // Print a success message
@@ -177,7 +177,7 @@ public class Parser {
             int taskIndex = Integer.parseInt(command.substring(5));
 
             // Mark the task as done
-            taskList.get(taskIndex - 1).markAsDone();
+            taskList.getTask(taskIndex - 1).markAsDone();
             storage.writeToFile(taskList);
 
             // Print success message that the task was marked as done
@@ -203,10 +203,10 @@ public class Parser {
         try {
             // Delete task
             int taskIndex = Integer.parseInt(command.substring(7)) - 1;
-            Task taskToBeRemoved = taskList.get(taskIndex);
+            Task taskToBeRemoved = taskList.getTask(taskIndex);
 
             // Remove the appropriate task away from the list of task
-            taskList.remove(taskIndex);
+            taskList.removeTask(taskIndex);
             storage.writeToFile(taskList);
             ui.printWithSpace(taskToBeRemoved.deleteMessage(taskList.size()));
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
@@ -239,56 +239,84 @@ public class Parser {
      * @param cmdType The command type which determines how we try to interpret the data.
      * @return An object which contains the description and date of a task.
      */
-    public StringDatePair parse(String fullCommand, CommandType cmdType) {
+    public StringDatePair parseInputAndFileEvents(String fullCommand, CommandType cmdType) {
         if (cmdType == CommandType.INPUT_DEADLINE) {
-            // Split up the string into the description and date accordingly
-            String[] userInputValues = fullCommand.substring(9).split("/by ");
-            String description = userInputValues[0];
-
-            // Specific the date format that our system will accept and save it in the by variable
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime by = LocalDateTime.parse(userInputValues[1], dateFormatter);
-
-            // Return the description and date pair
-            return new StringDatePair(description, by);
+            return handleInputDeadlineCmd(fullCommand);
         } else if (cmdType == CommandType.INPUT_EVENT) {
-            // Split up the string into the description and date accordingly
-            String[] userInputValues = fullCommand.substring(6).split("/at ");
-            String description = userInputValues[0];
-
-            // Specific the date format that our system will accept and save it in the by variable
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime at = LocalDateTime.parse(userInputValues[1], dateFormatter);
-
-            // Return the description and date pair
-            return new StringDatePair(description, at);
+            return handleInputEventCmd(fullCommand);
         } else if (cmdType == CommandType.FILE_DEADLINE) {
-            // Split up the string into the description and date accordingly
-            String[] taskInputValues = fullCommand.substring(7).split(" \\(by: ");
-            String description = taskInputValues[0];
-
-            // Specific the date format that our system will accept and save it in the by variable
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy - HHmm");
-            LocalDateTime by = LocalDateTime.parse(
-                taskInputValues[1].substring(0, taskInputValues[1].length() - 1),
-                dateFormatter);
-
-            // Return the description and date pair
-            return new StringDatePair(description, by);
+            return handleFileDeadlineCmd(fullCommand);
         } else if (cmdType == CommandType.FILE_EVENT) {
-            // Split up the string into the description and date accordingly
-            String[] taskInputValues = fullCommand.substring(7).split(" \\(at: ");
-            String description = taskInputValues[0];
-
-            // Specific the date format that our system will accept and save it in the by variable
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy - HHmm");
-            LocalDateTime at = LocalDateTime.parse(
-                taskInputValues[1].substring(0, taskInputValues[1].length() - 1),
-                dateFormatter);
-
-            // Return the description and date pair
-            return new StringDatePair(description, at);
+            return handleFileEventCmd(fullCommand);
         }
         return null;
+    }
+
+    /**
+     * Handles and understand the input event command given by the user.
+     * @param fullCommand Command given by the user.
+     * @return An object which contains the description and date of a task.
+     */
+    public StringDatePair handleInputDeadlineCmd(String fullCommand) {
+        String[] userInputValues = fullCommand.substring(9).split("/by ");
+        String description = userInputValues[0];
+
+        // Specific the date format that our system will accept and save it in the by variable
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime by = LocalDateTime.parse(userInputValues[1], dateFormatter);
+
+        return new StringDatePair(description, by);
+    }
+
+    /**
+     * Handles and understand the input event command given by the user.
+     * @param fullCommand Command given by the user.
+     * @return An object which contains the description and date of a task.
+     */
+    public StringDatePair handleInputEventCmd(String fullCommand) {
+        String[] userInputValues = fullCommand.substring(6).split("/at ");
+        String description = userInputValues[0];
+
+        // Specific the date format that our system will accept and save it in the by variable
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime at = LocalDateTime.parse(userInputValues[1], dateFormatter);
+
+        return new StringDatePair(description, at);
+    }
+
+    /**
+     * Handles and understand the file deadline command taken from the file.
+     * @param fullCommand Command given by the user.
+     * @return An object which contains the description and date of a task.
+     */
+    public StringDatePair handleFileDeadlineCmd(String fullCommand) {
+        String[] taskInputValues = fullCommand.substring(7).split(" \\(by: ");
+        String description = taskInputValues[0];
+
+        // Specific the date format that our system will accept and save it in the by variable
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy - HHmm");
+        LocalDateTime by = LocalDateTime.parse(
+            taskInputValues[1].substring(0, taskInputValues[1].length() - 1),
+            dateFormatter);
+
+        return new StringDatePair(description, by);
+    }
+
+    /**
+     * Handles and understand the file event command taken from the file.
+     * @param fullCommand Command given by the user.
+     * @return An object which contains the description and date of a task.
+     */
+    public StringDatePair handleFileEventCmd(String fullCommand) {
+        String[] taskInputValues = fullCommand.substring(7).split(" \\(at: ");
+        String description = taskInputValues[0];
+
+        // Specific the date format that our system will accept and save it in the by variable
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy - HHmm");
+        LocalDateTime at = LocalDateTime.parse(
+            taskInputValues[1].substring(0, taskInputValues[1].length() - 1),
+            dateFormatter);
+
+        return new StringDatePair(description, at);
     }
 }
