@@ -64,10 +64,22 @@ public class TaskList {
      * @param index the index of the task to be marked as done.
      * @return Task object that was marked as done.
      */
-    public Task taskDone(int index) {
+    public Task markTaskDone(int index) {
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
+    }
+
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            String taskDescription = task.getDescription();
+            if (taskDescription.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
     }
 
     /**

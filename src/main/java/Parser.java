@@ -25,6 +25,13 @@ public class Parser {
         } else if (commandType.equals("delete")) {
             int taskIndex = Integer.parseInt(commandArr[1]) - 1;
             return new DeleteCommand(taskIndex);
+        } else if (commandType.equals("find")) {
+            if (commandArr.length == 1) {
+                throw new DukeException("Oops! Please provide a keyword you want to find!");
+            } else {
+                String keyword = commandArr[1];
+                return new FindCommand(keyword);
+            }
         } else if (commandType.equals("deadline")) {
             if (commandArr.length == 1) {
                 throw new DukeException("Oops! The description of deadline cannot be empty!");
