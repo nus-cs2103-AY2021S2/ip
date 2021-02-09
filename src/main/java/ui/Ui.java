@@ -31,7 +31,9 @@ public class Ui {
     public final static String GREETING_MSG = "Hey there! I'm Kawaii Kat \n"
             + "How can i assist you ~nya~?";
     public final static String EXIT_MSG = "Farewell. See you soon :)!";
-
+    public final static String SAVE_EXIT_MSG = "Task List Saved Successfully!\n"
+            + EXIT_MSG;
+    public final static String EMPTY_LIST_MSG = "OOPPS! Your Current Task List Is Empty!";
 
     /**
      * Surrounds the specified <code>input</code> with a asterisk border.
@@ -41,6 +43,19 @@ public class Ui {
     public static void printBox(String input) {
         System.out.println(TOP_BORDER + INDENT_4_SPACES + input
                 + "\n" + BOTTOM_BORDER);
+    }
+
+    /**
+     * Prints the Ui of loading save record.
+     */
+    public static String retrieveList(boolean bool) {
+        if (bool) {
+            return Ui.formatBox(Ui.INDENT_32_SPACES + "No Save Record Detected... \n"
+                    + Ui.INDENT_32_SPACES + "     Creating New List! :)");
+        } else {
+            return Ui.formatBox(Ui.INDENT_32_SPACES + "Saved Record Detected... \n"
+                    + Ui.INDENT_32_SPACES + "     Retrieving List! :)");
+        }
     }
 
     /**
@@ -60,7 +75,7 @@ public class Ui {
      */
     public static String printList(TaskList list) {
         if (list.size() == 0 ) {
-            return "OOPPS! Your Current Task List Is Empty!";
+            return EMPTY_LIST_MSG;
         } else {
             StringBuilder result = new StringBuilder("     This is your present task list: \n");
             for (int i = 1; i <= list.size(); i++) {

@@ -17,11 +17,11 @@ public class Parser {
      * @return list of parsed input.
      */
     public ArrayList<String> parseInput(String input) {
-        ArrayList<String> parsedOuput = new ArrayList<>();
+        ArrayList<String> parsedOutput = new ArrayList<>();
         try {
             String[] contents = input.split("\\s+");
             String command = contents[0];
-            parsedOuput.add(command);
+            parsedOutput.add(command);
             StringBuilder sb = new StringBuilder();
             // Initialise a pointer
             int pointer = 0;
@@ -40,21 +40,20 @@ public class Parser {
                     }
                 }
             }
-            parsedOuput.add(sb.toString());
+            parsedOutput.add(sb.toString());
             // Reset the string builder to append the date.
             sb = new StringBuilder();
             if (command.equals("deadline") || command.equals("event")) {
-                String duration;
                 for (int i = pointer + 1; i < contents.length; i++) {
                     sb.append(contents[i]);
                     sb.append(" ");
                 }
-                parsedOuput.add(sb.toString());
+                parsedOutput.add(sb.toString());
             }
         } catch (Exception err) {
             Ui.printBox("☹ OOPS!!! Incorrect input, please check!");
         }
-        return parsedOuput;
+        return parsedOutput;
     }
 
 }

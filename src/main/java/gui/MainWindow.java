@@ -25,12 +25,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private ChatBot chatbox;
+    private ChatBot chatbot;
 
-    private Gui gui;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image chatBotImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image chatBotImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
 
     /**
      * initialize the MainWindow for ChatBot.
@@ -38,19 +37,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        chatbox = new ChatBot();
+        chatbot = new ChatBot();
     }
 
     /**
      * Set a MainWindow for Duke.
-     * @param chatbot Chat Bot
      */
-    public void setDuke(Gui chatbot) {
-        gui = chatbot;
-
+    public void setDuke() {
         dialogContainer.getChildren().addAll(
                 new Label(Ui.WELCOME_MSG + Ui.LOGO),
-                new Label(chatbox.startup()),
+                new Label(chatbot.startup()),
                 DialogBox.getDukeDialog(Ui.GREETING_MSG, chatBotImage)
         );
 
@@ -63,7 +59,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = chatbox.process(input);
+        String response = chatbot.process(input);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
