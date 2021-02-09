@@ -43,6 +43,6 @@ public class AddCommand extends Command {
         }
         tl.add(t);
         storage.save(tl.toString());
-        return ui.printAddedTask(t, tl);
+        return ui.printTaskMsg(t, tl, "add");
     }
 }

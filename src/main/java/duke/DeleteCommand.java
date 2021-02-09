@@ -20,11 +20,12 @@ public class DeleteCommand extends Command {
      * @param tl task list.
      * @param ui object for user interface.
      * @param storage storage for tasks.
+     * @throws DukeException When command is wrong in printTaskMsg().
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         Task t = tl.remove(taskNum - 1);
         storage.save(tl.toString());
-        return ui.printDeletedTask(t, tl);
+        return ui.printTaskMsg(t, tl, "delete");
     }
 }

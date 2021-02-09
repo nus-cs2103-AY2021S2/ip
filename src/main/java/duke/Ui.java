@@ -13,6 +13,9 @@ public class Ui {
             + "    - find (relevantName)\n"
             + "    - delete (taskNumber from list)\n"
             + "    - done (taskNumber from list)\n";
+    private final String ADD_MSG = "     Got it. I've added this task:\n";
+    private final String DELETE_MSG = "     Noted. I've removed this task:\n";
+    private final String DONE_MSG = "     Nice! I've marked this task as done:\n";
     private Scanner sc;
 
     public Ui() {
@@ -68,82 +71,86 @@ public class Ui {
     }
 
 
+    /**
+     * Returns String format of tasks.
+     *
+     * @param tl Task list containing tasks.
+     * @return String format of tasks.
+     */
     public String printTasks(TaskList tl) {
         if (tl.size() == 0) {
             String emptyListMsg = "     There are no tasks in your list!\n";
             return emptyListMsg;
         } else {
-            int index = 1;
             String listMsg = "     These are the tasks in your list:\n";
-            String msg = "";
-            msg += listMsg;
-            for (Task t : tl.getList()) {
-                msg += String.format("     %d. %s\n",
-                        index++, t.toString());
-            }
-            return msg;
+            String taskListMsg = taskListMsg(tl);
+            return listMsg + taskListMsg;
         }
     }
 
     private String taskListSizeMsg(int numOfTasks) {
-        return String.format("     Now you have %d task(s) in the list\n", numOfTasks);
+        return String.format("     You have %d task(s) in your list.\n", numOfTasks);
+    }
+
+    private String taskListMsg(TaskList tl) {
+        int index = 1;
+        String msg = "";
+        for (Task t : tl.getList()) {
+            msg += String.format("     %d. %s\n",
+                    index++, t.toString());
+        }
+        return msg;
+    }
+
+    private String getCommandMsg(String command) throws DukeWrongCommandException {
+        String cmdMsg;
+        switch(command) {
+        case "add":
+            cmdMsg = ADD_MSG;
+            break;
+        case "delete":
+            cmdMsg = DELETE_MSG;
+            break;
+        case "done":
+            cmdMsg = DONE_MSG;
+            break;
+        default:
+            throw new DukeWrongCommandException(command);
+        }
+        return cmdMsg;
     }
 
     /**
-     * Print task added to task list message.
+     * Returns string message for commands for task.
      *
-     * @param t task added to task list.
+     * @param t Given task.
+     * @param tl Task list containing the task.
+     * @param command Type of command for task.
+     * @return String message for action on task.
+     * @throws DukeException When command is unknown.
      */
-    public String printAddedTask(Task t, TaskList tl) {
-        String addMsg = "     Got it. I've added this task:\n";
+    public String printTaskMsg(Task t, TaskList tl, String command) throws DukeException {
+        String cmdMsg = getCommandMsg(command);
         String taskMsg = "\t" + t.toString() + "\n";
         String listSizeMsg = taskListSizeMsg(tl.size());
-        return addMsg + taskMsg + listSizeMsg;
+        return cmdMsg + taskMsg + listSizeMsg;
     }
 
     /**
-     * Print task marked done message.
+     * Returns string format for found task.
+     * If no tasks found, return corespond message.
      *
-     * @param t task marked done.
-     */
-    public String printMarkedDone(Task t) {
-        String doneMsg = "     Nice! I've marked this task as done:\n";
-        String taskMsg = "\t" + t.toString() + "\n";
-        return doneMsg + taskMsg;
-    }
-
-    /**
-     * Print deleted task message.
-     *
-     * @param t task deleted.
-     */
-    public String printDeletedTask(Task t, TaskList tl) {
-        String deleteMsg = "     Noted. I've removed this task:\n";
-        String taskMsg = "\t" + t.toString() + "\n";
-        String listSizeMsg = taskListSizeMsg(tl.size());
-        return deleteMsg + taskMsg + listSizeMsg;
-    }
-
-    /**
-     * Print matched tasks as a list.
-     * If list size is zero, print no matching task.
-     *
-     * @param tl list of task to be printed.
+     * @param tl Task list containing task.
+     * @return String message for task(s) found.
      */
     public String printFoundTasks(TaskList tl) {
         if (tl.size() == 0) {
             String noMatchMsg = "     There are no matching task in your list!\n";
             return noMatchMsg;
         } else {
-            int index = 1;
             String findMsg = "     Here are the matching tasks in your list:\n";
-            String msg = "";
-            msg += findMsg;
-            for (Task t : tl.getList()) {
-                msg += String.format("     %d. %s\n",
-                        index++, t.toString());
-            }
-            return msg;
+            String taskListMsg = taskListMsg(tl);
+            return findMsg + taskListMsg;
         }
     }
 }

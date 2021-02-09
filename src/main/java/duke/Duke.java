@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Application;
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -28,6 +29,10 @@ public class Duke {
      */
     public static String help() {
         return new Ui().printHelp();
+    }
+
+    public static void main(String[] args) {
+
     }
 
     /**

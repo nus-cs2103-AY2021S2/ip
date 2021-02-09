@@ -19,14 +19,15 @@ public class DoneCommand extends Command {
      *
      * @param tl task list.
      * @param ui object for user interface.
-     * @param storage objec to store and load task list.
+     * @param storage object to store and load task list.
+     * @throws DukeException When command is wrong in printTaskMsg().
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         Task t = tl.get(taskNum - 1);
         t.finishTask();
         tl.set(taskNum - 1, t);
         storage.save(tl.toString());
-        return ui.printMarkedDone(t);
+        return ui.printTaskMsg(t, tl, "done");
     }
 }
