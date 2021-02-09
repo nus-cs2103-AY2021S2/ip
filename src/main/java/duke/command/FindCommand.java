@@ -5,6 +5,8 @@ import java.io.File;
 import duke.duke.Duke;
 
 public class FindCommand extends Command {
+    private static final String usageMessage = "Command: find <keyword>\n"
+            + "Description: Searches for a keyword\n";
     private final String keyword;
 
     /**
@@ -18,6 +20,10 @@ public class FindCommand extends Command {
 
     public String getKeyword() {
         return keyword;
+    }
+
+    public static String getUsageMessage() {
+        return usageMessage;
     }
 
     @Override

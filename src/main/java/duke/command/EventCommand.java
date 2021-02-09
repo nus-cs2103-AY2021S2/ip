@@ -11,6 +11,8 @@ import duke.storage.Storage;
  * Creates an Event task.
  */
 public class EventCommand extends Command {
+    private static final String usageMessage = "Command: event <task_description> /at <date>\n"
+            + "Description: Adds an event task with an event time to task list\n";
     private final String description;
     private final String eventTime;
 
@@ -41,6 +43,12 @@ public class EventCommand extends Command {
         return eventTime;
     }
 
+    /**
+     * Validates arguments of EventCommand.
+     * @param userInput User input as String.
+     * @return A String array with task description and event time.
+     * @throws InvalidArgumentException If task description or event time is missing from input.
+     */
     public static String[] validateArgument(String userInput) throws InvalidArgumentException {
         String[] userInputArr = userInput.split("/at");
         if (userInputArr.length == 1) {
@@ -54,6 +62,11 @@ public class EventCommand extends Command {
 
         return userInputArr;
     }
+
+    public static String getUsageMessage() {
+        return usageMessage;
+    }
+
     @Override
     public String run(File file, Duke bot) throws IOException {
         String output = bot.addTask(getDescription(), getCommand(), getEventTime());

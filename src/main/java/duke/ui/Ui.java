@@ -2,6 +2,14 @@ package duke.ui;
 
 import java.util.List;
 
+import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.duke.Duke;
 import duke.tasks.Task;
 
@@ -24,7 +32,7 @@ public class Ui {
      */
     public static String showTasksToUser(List<Task> list) {
         StringBuilder tasks = new StringBuilder();
-        if(list.isEmpty()) {
+        if (list.isEmpty()) {
             tasks.append("You have no tasks currently!\n");
         } else {
             for (int i = 0; i < list.size(); i++) {
@@ -71,5 +79,20 @@ public class Ui {
      */
     public static String showExitMessage() {
         return "Bye. Hope to see you again soon!";
+    }
+
+    /**
+     * Displays response for HelpCommand.
+     * @return Message for HelpCommand.
+     */
+    public static String showHelpMessage() {
+        return ListCommand.getUsageMessage() + "\n"
+                + ByeCommand.getUsageMessage() + "\n"
+                + DoneCommand.getUsageMessage() + "\n"
+                + DeleteCommand.getUsageMessage() + "\n"
+                + FindCommand.getUsageMessage() + "\n"
+                + TodoCommand.getUsageMessage() + "\n"
+                + DeadlineCommand.getUsageMessage() + "\n"
+                + EventCommand.getUsageMessage();
     }
 }

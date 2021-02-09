@@ -11,6 +11,8 @@ import duke.storage.Storage;
  * Creates a Deadline task.
  */
 public class DeadlineCommand extends Command {
+    private static final String usageMessage = "Command: deadline <task_description> /by <due_date>\n"
+            + "Description: Adds a deadline task with a due date to task list\n";
     private final String description;
     private final String deadline;
 
@@ -41,6 +43,12 @@ public class DeadlineCommand extends Command {
         return deadline;
     }
 
+    /**
+     * Validates argument for Deadline Command.
+     * @param userInput User input as String.
+     * @return String array with task description and deadline.
+     * @throws InvalidArgumentException If task description is missing from input.
+     */
     public static String[] validateArgument(String userInput) throws InvalidArgumentException {
         String[] userInputArr = userInput.split("/by");
         if (userInputArr.length == 1) {
@@ -51,6 +59,10 @@ public class DeadlineCommand extends Command {
             throw new InvalidArgumentException("Please input task description!\n");
         }
         return userInputArr;
+    }
+
+    public static String getUsageMessage() {
+        return usageMessage;
     }
 
     @Override

@@ -11,6 +11,8 @@ import duke.storage.Storage;
  * Deletes a task.
  */
 public class DeleteCommand extends Command {
+    private static final String usageMessage = "Command: delete <task_number>\n"
+            + "Description: Deletes a task\n";
     private final int taskNumber;
 
     /**
@@ -30,6 +32,13 @@ public class DeleteCommand extends Command {
         return taskNumber;
     }
 
+    /**
+     * Validates argument of DeleteCommand.
+     * @param userInput User Input as String.
+     * @param bot A Duke object.
+     * @return Index of task as int.
+     * @throws InvalidArgumentException If task index is invalid.
+     */
     public static int validateArgument(String userInput, Duke bot) throws InvalidArgumentException {
         int taskIndex;
         try {
@@ -43,6 +52,10 @@ public class DeleteCommand extends Command {
                     + bot.getNumberOfTasks() + "!\n");
         }
         return taskIndex;
+    }
+
+    public static String getUsageMessage() {
+        return usageMessage;
     }
 
     @Override

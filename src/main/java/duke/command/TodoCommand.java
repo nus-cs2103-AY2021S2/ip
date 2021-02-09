@@ -10,6 +10,8 @@ import duke.storage.Storage;
  * Creates a Todo task.
  */
 public class TodoCommand extends Command {
+    private static final String usageMessage = "Command: todo <task_description>\n"
+            + "Description: Adds a todo task with no specified time to task list\n";
     private final String description;
 
     /**
@@ -27,6 +29,10 @@ public class TodoCommand extends Command {
      */
     public String getDescription() {
         return description;
+    }
+
+    public static String getUsageMessage() {
+        return usageMessage;
     }
 
     @Override

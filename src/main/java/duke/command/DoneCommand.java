@@ -11,6 +11,8 @@ import duke.storage.Storage;
  * Completes a task.
  */
 public class DoneCommand extends Command {
+    private static final String usageMessage = "Command: done <task_number>\n"
+            + "Description: Marks a task as done\n";
     private final int taskNumber;
 
     /**
@@ -30,6 +32,13 @@ public class DoneCommand extends Command {
         return taskNumber;
     }
 
+    /**
+     * Validates argument of DoneCommand.
+     * @param userInput User input as String.
+     * @param bot A Duke object.
+     * @return Index of task as int.
+     * @throws InvalidArgumentException If task number is invalid.
+     */
     public static int validateArgument(String userInput, Duke bot) throws InvalidArgumentException {
         int taskNumber;
         try {
@@ -43,6 +52,10 @@ public class DoneCommand extends Command {
                     + bot.getNumberOfTasks() + "!\n");
         }
         return taskNumber;
+    }
+
+    public static String getUsageMessage() {
+        return usageMessage;
     }
 
     @Override
