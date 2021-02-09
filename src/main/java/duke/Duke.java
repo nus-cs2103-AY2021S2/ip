@@ -7,11 +7,19 @@ import duke.task.TaskList;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task manager
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Class constructor with specified file path.
+     * 
+     * @param filePath The path to load and save from
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,7 +33,9 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
+    /**
+     * Runs the duke programme.
+     */
     public void run() {
         Command c = new WelcomeCommand();
         c.execute(tasks, ui, storage);

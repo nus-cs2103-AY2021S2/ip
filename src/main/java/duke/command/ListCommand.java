@@ -5,6 +5,9 @@ import duke.Storage;
 
 import duke.task.TaskList;
 
+/**
+ * Represents a command telling duke to list all current tasks
+ */
 public class ListCommand implements Command{
 
     public boolean isExit() {

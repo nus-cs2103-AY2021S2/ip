@@ -15,13 +15,28 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Storage for Duke
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Construction with specified file path
+     * 
+     * @param filePath the file path to load and save from
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads task list from the file path given during initialisation
+     * 
+     * @return List of saved tasks
+     * @throws IOException
+     * @throws DateTimeParseException
+     */
     public TaskList load() throws IOException, DateTimeParseException {
         int lastDelimiterIndex = this.filePath.lastIndexOf("/");
         if (lastDelimiterIndex < 0) {
@@ -70,6 +85,12 @@ public class Storage {
         return memList;
     }
 
+    /**
+     * Stores task list into file path specified during initialisation
+     * 
+     * @param tasks Task list to be saved
+     * @throws IOException
+     */
     public void store(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
 
