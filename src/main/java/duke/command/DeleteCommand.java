@@ -7,9 +7,17 @@ import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents a command telling duke to delete a task
+ */
 public class DeleteCommand implements Command {
     private int taskNum;
 
+    /**
+     * Constructor
+     * 
+     * @param taskNum The task number of the task to be deleted
+     */
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }

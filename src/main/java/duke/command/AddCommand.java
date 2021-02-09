@@ -6,9 +6,17 @@ import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents a command telling duke to add a task to its task list
+ */
 public class AddCommand implements Command {
     Task taskToAdd;
 
+    /**
+     * Constructor
+     * 
+     * @param task Task to be added
+     */
     public AddCommand(Task task) {
         this.taskToAdd = task;
     }

@@ -8,6 +8,9 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Represents a command telling duke to close
+ */
 public class ExitCommand implements Command {
 
     public boolean isExit() {

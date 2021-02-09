@@ -5,6 +5,9 @@ import duke.Storage;
 
 import duke.task.TaskList;
 
+/**
+ * Represents a command telling duke to print the welcome message
+ */
 public class WelcomeCommand implements Command {
 
     public boolean isExit() {

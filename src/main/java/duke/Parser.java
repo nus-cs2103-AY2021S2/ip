@@ -18,7 +18,18 @@ import duke.task.ToDoException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser for Duke commands
+ */
 public class Parser {
+
+    /**
+     * Parses a string input to the relevent command instruction. 
+     * 
+     * @param input The String to be parsed
+     * @return Command to be executed
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException{
         switch (input) {
         case "bye":

@@ -8,9 +8,16 @@ import duke.task.TaskList;
 
 import java.time.LocalDate;
 
+/**
+ * Represetns a command telling to list all tasks on a specified date
+ */
 public class CheckCommand implements Command{
     private LocalDate date;
 
+    /**
+     * Constructor
+     * @param date Date to check
+     */
     public CheckCommand(LocalDate date) {
         this.date = date;
     }
@@ -19,6 +26,7 @@ public class CheckCommand implements Command{
         return false;
     }
 
+    /** */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredList = new TaskList();
 
