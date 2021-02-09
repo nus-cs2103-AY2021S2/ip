@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.command.AddCommand;
 import duke.command.CheckCommand;
+import duke.command.FindCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
@@ -48,6 +49,12 @@ public class Parser {
                     throw new DukeException("Please enter the date to check!");
                 }
                 return getCheckCommand(splitInput[1]);
+            
+            case "find":
+                if (splitInput.length < 2) {
+                    throw new DukeException("Please enter the keyword(s) to find!");
+                }
+                return new FindCommand(splitInput[1].strip());
 
             case "todo":
                 if (splitInput.length < 2) {

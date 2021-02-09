@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -32,17 +31,6 @@ public class TaskList {
 
     public int size() {
         return this.tasks.size();
-    }
-
-    public TaskList getTasksOnDate(LocalDate date) {
-        ArrayList<Task> tasksOnDate = new ArrayList<>();
-        for (int i = 1; i <= this.tasks.size(); i++) {
-            Task currTask = this.tasks.get(i);
-            if (date.equals(currTask.getDate())) {
-                tasksOnDate.add(currTask);
-            }
-        }
-        return new TaskList(tasksOnDate);
     }
 
     @Override

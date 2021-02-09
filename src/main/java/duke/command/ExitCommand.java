@@ -10,10 +10,12 @@ import java.io.IOException;
 
 public class ExitCommand implements Command {
 
+    @Override
     public boolean isExit() {
         return true;
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showGoodbye();
         

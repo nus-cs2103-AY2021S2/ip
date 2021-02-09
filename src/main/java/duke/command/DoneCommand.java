@@ -13,10 +13,12 @@ public class DoneCommand implements Command {
         this.taskNum = taskNum;
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (this.taskNum > tasks.size()) {
             throw new DukeException("No such task exists!");
