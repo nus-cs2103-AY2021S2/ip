@@ -56,12 +56,11 @@ public class Storage {
                 default:
                     throw new DukeWrongFormatException("loaded file");
                 }
-                if (t != null) {
-                    if (taskArray[1].equals("X")) {
+                assert t != null : "Task should not be null!";
+                if (taskArray[1].equals("X")) {
                         t.finishTask();
-                    }
-                    tl.add(t);
                 }
+                tl.add(t);
             }
             return tl;
         } catch (Exception e) {

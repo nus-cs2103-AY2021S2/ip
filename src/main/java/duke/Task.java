@@ -47,8 +47,6 @@ public abstract class Task {
 
     public abstract String saveTask();
 
-
-
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
