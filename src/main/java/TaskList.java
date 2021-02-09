@@ -32,6 +32,7 @@ public class TaskList {
         ArrayList<Task> taskList = new ArrayList<>();
 
         // loop through every task in the list
+
         for (String s : myTasks) {
             String[] taskByParts = s.split(" \\| ", 3);
             String type = taskByParts[0];

@@ -33,6 +33,8 @@ public class Parser {
      */
     public Command parseCommand(String userInput) throws DukeException {
         String operator = parseOperator(userInput);
+        assert validOperators.contains(operator);
+
         // split command text by its first space into 2 parts
         String[] taskDetail = userInput.split(" ", 2);
         Command command = new Command();
@@ -106,6 +108,7 @@ public class Parser {
      */
     private int parseDone(String[] taskDetail) throws DukeException {
         // parse task number
+        assert taskDetail.length > 0;
         if (taskDetail.length == 1) {
             throw new DukeException("OOPS!!! Please specify the task number.");
         } else {
@@ -127,6 +130,7 @@ public class Parser {
      */
     private int parseDelete(String[] taskDetail) throws DukeException {
         // parse task number
+        assert taskDetail.length > 0;
         if (taskDetail.length == 1) {
             throw new DukeException("OOPS!!! Please specify the task number.");
         } else {
@@ -148,6 +152,7 @@ public class Parser {
      */
     private String parseAddToDo(String[] taskDetail) throws DukeException {
         // parse description of ToDo
+        assert taskDetail.length > 0;
         if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else{
@@ -165,6 +170,7 @@ public class Parser {
      */
     private String[] parseAddDeadline(String[] taskDetail) throws DukeException {
         // parse details of Deadline
+        assert taskDetail.length > 0;
         if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else{
@@ -187,8 +193,8 @@ public class Parser {
      * @throws DukeException If description is empty or time does not follow 'yyyy-M-d H:mm' format.
      */
     private String[] parseAddEvent(String[] taskDetail) throws DukeException {
-
         // parse details of Event
+        assert taskDetail.length > 0;
         if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else{
@@ -212,6 +218,7 @@ public class Parser {
      */
     private String parseFindTask(String[] taskDetail) throws DukeException {
         // parse keyword of task
+        assert taskDetail.length > 0;
         if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! Keyword cannot be empty.");
         } else{
