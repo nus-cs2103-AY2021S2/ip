@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'checkstyle'
 }
 
 repositories {
@@ -42,4 +43,8 @@ run{
 
 javafx {
     modules = [ 'javafx.controls' , 'javafx.fxml', 'javafx.graphics']
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }
