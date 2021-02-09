@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Deadline extends Task {
-    protected LocalDate by;
-
+public class Deadline extends TaskWithDate {
     /**
      * initialize Deadline object
      *
@@ -14,9 +12,7 @@ public class Deadline extends Task {
      * @param by          the deadline of task (YYYY-MM-DD)
      */
     public Deadline(String description, String by) {
-        super(description);
-        this.by = LocalDate.parse(by);
-        ;
+        super(description, by);
     }
 
     /**
@@ -27,7 +23,7 @@ public class Deadline extends Task {
     @Override
     public String getTaskInfo() {
         return "[D]" + super.getTaskInfo() + " (by: "
-                + by.getDayOfWeek() + "," + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + date.getDayOfWeek() + "," + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -38,7 +34,7 @@ public class Deadline extends Task {
     @Override
     public String getPeriodDays() {
         LocalDate now = LocalDate.parse(LocalDate.now().toString());
-        return "There are " + now.until(by, ChronoUnit.DAYS) + "day(s) before the deadline";
+        return "There are " + now.until(date, ChronoUnit.DAYS) + "day(s) before the deadline";
     }
 
     /**
@@ -48,7 +44,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskInfoOfFile() {
-        return "D | " + (super.isDone ? "1" : "0") + " | " + super.getDescription() + " | " + this.by;
+        return "D | " + (super.isDone ? "1" : "0") + " | " + super.getDescription() + " | " + this.date;
     }
 
 }

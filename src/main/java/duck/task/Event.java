@@ -4,18 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Event extends Task {
-    protected LocalDate at;
-
+public class Event extends TaskWithDate {
     /**
      * initialize Event object
      *
      * @param description the description of task
-     * @param at the starting time of task (YYYY-MM-DD)
+     * @param at          the starting time of task (YYYY-MM-DD)
      */
     public Event(String description, String at) {
-        super(description);
-        this.at = LocalDate.parse(at);
+        super(description, at);
     }
 
     /**
@@ -26,7 +23,7 @@ public class Event extends Task {
     @Override
     public String getTaskInfo() {
         return "[E]" + super.getTaskInfo() + " (at: "
-                + at.getDayOfWeek() + "," + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + date.getDayOfWeek() + "," + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -37,7 +34,7 @@ public class Event extends Task {
     @Override
     public String getPeriodDays() {
         LocalDate now = LocalDate.parse(LocalDate.now().toString());
-        return "There are " + now.until(at, ChronoUnit.DAYS) + "day(s) before the event starting";
+        return "There are " + now.until(date, ChronoUnit.DAYS) + "day(s) before the event starting";
     }
 
     /**
@@ -47,6 +44,6 @@ public class Event extends Task {
      */
     @Override
     public String getTaskInfoOfFile() {
-        return "E | " + (super.isDone ? "1" : "0") + " | " + super.getDescription() + " | " + this.at;
+        return "E | " + (super.isDone ? "1" : "0") + " | " + super.getDescription() + " | " + this.date;
     }
 }

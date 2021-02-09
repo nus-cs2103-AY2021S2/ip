@@ -7,6 +7,7 @@ import duck.task.Todo;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class CommandGui {
     private String command;
@@ -42,52 +43,54 @@ public class CommandGui {
             return gui.showCommandReply(command, tasks);
         case "done":
             try {
-                tasks.getTask(Integer.parseInt(description) - 1).markAsDone();
+                Integer NoOfTask = Integer.parseInt(description) - 1;
+                tasks.getTask(NoOfTask).markAsDone();
                 storage.updateFile(tasks);
-                return gui.showDoneReply(Integer.parseInt(description) - 1, tasks);
+                return gui.showDoneReply(NoOfTask, tasks);
             } catch (ArrayIndexOutOfBoundsException e) {
-                gui.showErrorReply("error_done_empty");
+                return gui.showErrorReply("error_done_empty");
             } catch (NumberFormatException e) {
-                gui.showErrorReply("error_done_no_meaning");
+                return gui.showErrorReply("error_done_no_meaning");
             } catch (IndexOutOfBoundsException e) {
-                gui.showErrorReply("error_done_non_existed_task");
+                return gui.showErrorReply("error_done_non_existed_task");
             } catch (IOException e) {
                 e.printStackTrace();
             }
             break;
         case "delete":
             try {
-                tasks.getTask(Integer.parseInt(description) - 1);
-                String replyString = gui.showDeleteReply(Integer.parseInt(description) - 1, tasks);
-                tasks.removeTask(Integer.parseInt(description) - 1);
+                Integer NoOfTask = Integer.parseInt(description) - 1;
+                tasks.getTask(NoOfTask);
+                String replyString = gui.showDeleteReply(NoOfTask, tasks);
+                tasks.removeTask(NoOfTask);
                 storage.updateFile(tasks);
                 return replyString;
             } catch (ArrayIndexOutOfBoundsException e) {
-                gui.showErrorReply("error_delete_empty");
+                return gui.showErrorReply("error_delete_empty");
             } catch (NumberFormatException e) {
-                gui.showErrorReply("error_delete_no_meaning");
+                return gui.showErrorReply("error_delete_no_meaning");
             } catch (NullPointerException e) {
-                gui.showErrorReply("error_delete_non_existed_task");
+                return gui.showErrorReply("error_delete_non_existed_task");
             } catch (IndexOutOfBoundsException e) {
-                gui.showErrorReply("error_delete_non_existed_task");
+                return gui.showErrorReply("error_delete_non_existed_task");
             } catch (IOException e) {
                 e.printStackTrace();
             }
             break;
         case "date":
             try {
-                tasks.getTask(Integer.parseInt(description) - 1);
-                return gui.showDateReply(Integer.parseInt(description) - 1, tasks);
+                Integer NoOfTask = Integer.parseInt(description) - 1;
+                tasks.getTask(NoOfTask);
+                return gui.showDateReply(NoOfTask, tasks);
             } catch (ArrayIndexOutOfBoundsException e) {
-                gui.showErrorReply("error_date_empty");
+                return gui.showErrorReply("error_date_empty");
             } catch (NumberFormatException e) {
-                gui.showErrorReply("error_date_no_meaning");
+                return gui.showErrorReply("error_date_no_meaning");
             } catch (NullPointerException e) {
-                gui.showErrorReply("error_date_non_existed_task");
+                return gui.showErrorReply("error_date_non_existed_task");
             } catch (IndexOutOfBoundsException e) {
-                gui.showErrorReply("error_date_non_existed_task");
+                return gui.showErrorReply("error_date_non_existed_task");
             }
-            break;
         case "todo":
             try {
                 description.equals(null);
@@ -134,11 +137,13 @@ public class CommandGui {
             } catch (NullPointerException e) {
                 return gui.showErrorReply("find_empty");
             }
+        case "schedule":
+            ArrayList <ArrayList<String> > scheduleTask = tasks.scheduleTask();
+            return gui.showScheduleReply(scheduleTask);
         default:
             return gui.showErrorReply("error_no_meaning");
         }
+
         return "error";
     }
-
-
 }

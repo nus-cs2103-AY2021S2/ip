@@ -1,6 +1,7 @@
 package duck.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<Task>();
@@ -9,7 +10,6 @@ public class TaskList {
      * initialize  the Task list object
      *
      * @param dataArray use data to form task list
-
      */
     public TaskList(String[] dataArray) {
         for (int i = 0; dataArray[i] != null; i++) {
@@ -89,4 +89,38 @@ public class TaskList {
         assert (numberOfFinding < 100);
         return findTask;
     }
+
+    /**
+     * create a schedule of all tasks
+     *
+     * @return
+     */
+    public ArrayList<ArrayList<String>> scheduleTask() {
+        ArrayList<ArrayList<String>> schedule = new ArrayList<ArrayList<String>>();
+        schedule.add(new ArrayList<String>(Arrays.asList("Todo")));
+        for (int i = 0; i < this.getSizeOfTasks(); i++) {
+            if (this.getTask(i) instanceof Todo) {
+                schedule.get(0).add(this.getTask(i).getTaskInfo());
+            }
+
+            if (this.getTask(i) instanceof TaskWithDate) {
+                TaskWithDate taskWithDate = (TaskWithDate) this.getTask(i);
+                String taskDate = taskWithDate.getDate();
+                Boolean isRecorded = false;
+                for (int j = 1; j < schedule.size(); j++) {
+                    if (taskDate.equals(schedule.get(j).get(0))) {
+                        schedule.get(j).add(taskWithDate.getTaskInfo());
+                        isRecorded = true;
+                        break;
+                    }
+                }
+                if (!isRecorded) {
+                    schedule.add(new ArrayList<>(
+                            Arrays.asList(taskDate, taskWithDate.getTaskInfo())));
+                }
+            }
+        }
+        return schedule;
+    }
+
 }

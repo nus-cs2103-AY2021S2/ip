@@ -2,6 +2,7 @@ package duck.operation;
 
 import duck.task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -154,5 +155,29 @@ public class Gui {
             stringList.append(result[i] + "\n");
         }
         return stringList.toString();
+    }
+
+    /**
+     * show the reply for schedule command
+     * @param scheduleTask use tasks to form schedule
+     * @return schedule string
+     */
+    public String showScheduleReply(
+            ArrayList<ArrayList<String>> scheduleTask) {
+        String scheduleString = "Here are your schedule of tasks\n";
+        scheduleString += "have not determined date:\n";
+        for (int i = 1; i < scheduleTask.get(0).size(); i++) {
+            scheduleString += scheduleTask.get(0).get(i) + "\n";
+        }
+        scheduleString += "\n";
+
+        for (int i = 1; i < scheduleTask.size(); i++) {
+            scheduleString += scheduleTask.get(i).get(0) + "\n";
+            for (int j = 1; j < scheduleTask.get(i).size(); j++) {
+                scheduleString += scheduleTask.get(i).get(j) + "\n";
+            }
+            scheduleString += "\n";
+        }
+        return scheduleString;
     }
 }
