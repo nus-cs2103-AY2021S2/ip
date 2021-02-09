@@ -29,6 +29,7 @@ public class Duke {
      * @throws InvalidCommandException If the command cannot be recognised.
      */
     public static String runCommand(String command) throws InvalidCommandException {
+        assert !command.isEmpty() : "command should not be an empty string";
         String reply;
         if (command.equals("list")) {
             reply = TaskList.printList(tasks);
@@ -63,6 +64,7 @@ public class Duke {
         } else {
             throw new InvalidCommandException();
         }
+        assert !reply.isEmpty() : "reply should not be an empty string";
         return reply;
     }
 
@@ -84,6 +86,7 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        assert !input.isEmpty() : "input should not be an empty string";
         String reply;
         try {
             reply = runCommand(input);
