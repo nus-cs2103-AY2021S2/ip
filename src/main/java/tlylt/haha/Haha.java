@@ -100,6 +100,10 @@ public class Haha extends Application {
 
     }
 
+    private void configureSendButton() {
+        sendButton.setPrefWidth(55.0);
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
+    }
 
     /**
      * Iteration 2:
