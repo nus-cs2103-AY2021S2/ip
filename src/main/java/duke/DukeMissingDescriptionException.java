@@ -17,6 +17,8 @@ public class DukeMissingDescriptionException extends DukeException {
      */
     @Override
     public String toString() {
-        return String.format("     Sorry, '%s' task has missing description!\n", command);
+        String missingMsg = String.format("     Sorry, '%s' task has missing description!\n",
+                command);
+        return missingMsg + HELP_MSG;
     }
 }

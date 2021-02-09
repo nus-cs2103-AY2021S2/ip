@@ -26,15 +26,30 @@ public class Parser {
     }
 
     /**
+     * Returns integer by parsing string input.
+     *
+     * @param input Input string.
+     * @return Integer converted from String input.
+     * @throws DukeWrongFormatException When string is not a number.
+     */
+    private static Integer parseInt(String input) throws DukeWrongFormatException {
+        try {
+            return Integer.parseInt(input);
+        } catch (Exception e) {
+            throw new DukeWrongFormatException("done/delete");
+        }
+    }
+
+    /**
      * Parses the user input for Duke.
-     * ALlows duke to identify which command user inputted.
+     * Allows duke to identify which command user inputted.
      * Returns the unique command.
      *
      * @param input User input for the command for Duke.
      * @return Command of a type matching to the input from user.
      * @throws DukeWrongCommandException When command is unknown.
      */
-    public static Command parseInput(String input) throws DukeWrongCommandException {
+    public static Command parseInput(String input) throws DukeException {
         String[] parsedInput = input.split(" ", 2);
         String commandStr = parsedInput[0];
         Command c;
@@ -52,7 +67,7 @@ public class Parser {
             c = new ListCommand();
             break;
         case "done":
-            c = new DoneCommand(Integer.parseInt(parsedInput[1]));
+            c = new DoneCommand(Parser.parseInt(parsedInput[1]));
             break;
         case "todo":
         case "deadline":
@@ -60,7 +75,7 @@ public class Parser {
             c = new AddCommand(commandStr, parsedInput[1]);
             break;
         case "delete":
-            c = new DeleteCommand(Integer.parseInt(parsedInput[1]));
+            c = new DeleteCommand(Parser.parseInt(parsedInput[1]));
             break;
         default:
             throw new DukeWrongCommandException(commandStr);

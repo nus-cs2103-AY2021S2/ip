@@ -38,8 +38,12 @@ public class TaskList {
      * @param num index of task to be removed.
      * @return removed task.
      */
-    public Task remove(int num) {
-        return taskList.remove(num);
+    public Task remove(int num) throws DukeNumOutOfRangeException {
+        try {
+            return taskList.remove(num);
+        } catch (Exception e) {
+            throw new DukeNumOutOfRangeException();
+        }
     }
 
     /**
@@ -48,8 +52,13 @@ public class TaskList {
      * @param num index of task.
      * @return task of certain index.
      */
-    public Task get(int num) {
-        return taskList.get(num);
+    public Task get(int num) throws DukeNumOutOfRangeException {
+        try {
+            return taskList.get(num);
+        } catch (Exception e) {
+            throw new DukeNumOutOfRangeException();
+        }
+
     }
 
     /**
@@ -58,8 +67,12 @@ public class TaskList {
      * @param taskNum index of task replaced.
      * @param t task that is replacing.
      */
-    public void set(int taskNum, Task t) {
-        taskList.set(taskNum, t);
+    public void set(int taskNum, Task t) throws DukeNumOutOfRangeException {
+        try {
+            taskList.set(taskNum, t);
+        } catch (Exception e) {
+            throw new DukeNumOutOfRangeException();
+        }
     }
 
     /**
