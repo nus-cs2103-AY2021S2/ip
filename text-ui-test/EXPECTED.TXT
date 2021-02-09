@@ -62,19 +62,19 @@
     ___________________________________________________________________________
 
     ___________________________________________________________________________
-     Oh no :( Please use /by when creating deadline or /at when creating event.
+     Oh no :( Pleasure provide the required information or ensure /by is used when creating a deadline and /at is used when creating an event.
     ___________________________________________________________________________
 
     ___________________________________________________________________________
-     Oh no :( Please provide a description or a by date when creating deadline.
+     Oh no :( Please provide the required information.
     ___________________________________________________________________________
 
     ___________________________________________________________________________
-     Oh no :( Please use /by when creating deadline or /at when creating event.
+     Oh no :( Pleasure provide the required information or ensure /by is used when creating a deadline and /at is used when creating an event.
     ___________________________________________________________________________
 
     ___________________________________________________________________________
-     Oh no :( Please provide a description or a by date when creating deadline.
+     Oh no :( Please provide the required information.
     ___________________________________________________________________________
 
     ___________________________________________________________________________
@@ -82,19 +82,19 @@
     ___________________________________________________________________________
 
     ___________________________________________________________________________
-     Oh no :( Please use /by when creating deadline or /at when creating event.
+     Oh no :( Pleasure provide the required information or ensure /by is used when creating a deadline and /at is used when creating an event.
     ___________________________________________________________________________
 
     ___________________________________________________________________________
-     Oh no :( Please provide a description or a by date when creating deadline.
+     Oh no :( Please provide the required information.
     ___________________________________________________________________________
 
     ___________________________________________________________________________
-     Oh no :( Please use /by when creating deadline or /at when creating event.
+     Oh no :( Pleasure provide the required information or ensure /by is used when creating a deadline and /at is used when creating an event.
     ___________________________________________________________________________
 
     ___________________________________________________________________________
-     Oh no :( Please provide a description or a by date when creating deadline.
+     Oh no :( Please provide the required information.
     ___________________________________________________________________________
 
     ___________________________________________________________________________

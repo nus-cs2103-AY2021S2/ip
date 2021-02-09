@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
@@ -151,5 +152,24 @@ public class TaskList {
 
         matchedTasksInfoInArray = matchedTasksInfo.toArray(new String[0]);
         return matchedTasksInfoInArray;
+    }
+
+    /**
+     * Updates the deadline object at the given index with the new by date
+     * @param taskIndex the index of the deadline object to be updated
+     * @param newDate new date to update
+     * @return the successful message if update is successful
+     * @throws DukeException when the task at the given index is not an deadline object
+     */
+    public static String[] updateTaskDate(int taskIndex, LocalDate newDate) throws DukeException {
+        int verifiedTaskIndex = verifyTaskIndex(taskIndex);
+        Task taskToBeUpdated = tasks.get(verifiedTaskIndex);
+        taskToBeUpdated.updateDate(newDate);
+
+        String[] successMessage = new String[] {
+            "Wonderful! You have updated the by date:",
+            "  " + taskToBeUpdated.toString()
+        };
+        return successMessage;
     }
 }

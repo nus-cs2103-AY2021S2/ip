@@ -2,7 +2,6 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
 /**
@@ -19,14 +18,9 @@ public class Deadline extends Task {
      * @param by a string that represents timing to be completed by
      *           currently, only "yyyy-mm-dd" format is supported.
      */
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, LocalDate by) {
         super(description);
-        try {
-            this.by = LocalDate.parse(by);
-            assert !by.isEmpty() : "deadline cannot be created without a by date!";
-        } catch (DateTimeParseException e) {
-            throw new DukeException("invalid deadline date given.");
-        }
+        this.by = by;
     }
 
     /**
@@ -36,14 +30,9 @@ public class Deadline extends Task {
      * @param by a string that represents timing to be completed by
      *           currently, only "yyyy-mm-dd" format is supported.
      */
-    public Deadline(String description, boolean isDone, String by) throws DukeException {
+    public Deadline(String description, boolean isDone, LocalDate by) throws DukeException {
         super(description);
-        try {
-            assert !by.isEmpty() : "deadline cannot be created without a by date!";
-            this.by = LocalDate.parse(by);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("invalid deadline date given.");
-        }
+        this.by = by;
         this.isDone = isDone;
     }
 
@@ -72,5 +61,14 @@ public class Deadline extends Task {
                 + (isDone ? "1" : "0") + divider
                 + description + divider
                 + by;
+    }
+
+    /**
+     * Updates the by date
+     * @param newDate new date to be updated
+     */
+    @Override
+    public void updateDate(LocalDate newDate) {
+        this.by = newDate;
     }
 }

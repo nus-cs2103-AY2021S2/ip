@@ -8,11 +8,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
+import duke.parser.Parser;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.tasks.Todo;
 
 
 /**
@@ -73,7 +71,7 @@ public class Storage {
             BufferedReader br = Files.newBufferedReader(filePath);
             String taskInfoInString;
             while ((taskInfoInString = br.readLine()) != null) {
-                Task task = stringToTask(taskInfoInString);
+                Task task = Parser.stringToTask(taskInfoInString);
                 if (task != null) {
                     tasks.add(task);
                 }
@@ -84,31 +82,6 @@ public class Storage {
                 + "      " + e);
         }
         return tasks;
-    }
-
-    private static Task stringToTask(String taskInfo) throws DukeException {
-        String[] taskInfoArr = taskInfo.split("\\|");
-        String type = taskInfoArr[0].strip();
-        boolean isDone = taskInfoArr[1].strip().equals("1");
-        String description = taskInfoArr[2].strip();
-
-        Task task = null;
-        switch(type) {
-        case "T":
-            task = new Todo(description, isDone);
-            break;
-        case "E":
-            String at = taskInfoArr[3].strip();
-            task = new Event(description, isDone, at);
-            break;
-        case "D":
-            String by = taskInfoArr[3].strip();
-            task = new Deadline(description, isDone, by);
-            break;
-        default:
-            throw new DukeException("Invalid task info found in storage.");
-        }
-        return task;
     }
 
     private static void storageExistOrCreate() throws DukeException {
