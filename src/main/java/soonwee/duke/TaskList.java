@@ -24,8 +24,17 @@ public class TaskList {
      */
     public String setTaskDone(int index) {
         String result = new String();
-        this.getTask(index - 1).setCompleted();
-        result = result + "Nice! I've marked this task as done: \n" + this.getTask(index - 1);
+        int actualIndex = index - 1;
+        try {
+            if (actualIndex < this.tasksList.size()) {
+                this.getTask(actualIndex).setCompleted();
+                result = result + "Nice! I've marked this task as done: \n" + this.getTask(index - 1);
+            } else {
+                throw new DukeException("Index is out of range. Please input a correct index.");
+            }
+        } catch (DukeException de) {
+            result = result + de.getMessage();
+        }
         return result;
     }
 
@@ -58,11 +67,15 @@ public class TaskList {
     }
 
     public String searchRelatedText(String cmd) {
+        assert tasksList != null : "TaskList is null.";
         ArrayList<Task> temporaryList = new ArrayList<>();
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).taskDesc.contains(cmd)) {
                 temporaryList.add(tasksList.get(i));
             }
+        }
+        if (temporaryList.size() == 0) {
+            return "There are no matching keywords to your search.";
         }
         String result = "Here are the matching tasks in your list: \n";
         for (int j = 0; j < temporaryList.size(); j++) {
@@ -87,11 +100,20 @@ public class TaskList {
      * @param index task index
      */
     public String removeTask(int index) {
-        Task temp = this.getTask(index - 1);
-        tasksList.remove(index - 1);
+        int actualIndex = index - 1;
         String result = new String();
-        result = result + "Noted. I've removed this task: \n" + temp + "\n"
-                + "Now you have " + this.getSize() + " tasks in the list.";
+        try {
+            if (actualIndex < this.tasksList.size()) {
+                Task temp = this.getTask(actualIndex);
+                this.tasksList.remove(index - 1);
+                result = result + "Noted. I've removed this task: \n" + temp + "\n"
+                        + "Now you have " + this.getSize() + " tasks in the list.";
+            } else {
+                throw new DukeException("Index is out of range. Please input a correct index.");
+            }
+        } catch (DukeException de) {
+            result = result + de.getMessage();
+        }
         return result;
     }
 

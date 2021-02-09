@@ -44,6 +44,7 @@ public class Parser {
      * @return task description
      */
     public String checkFrontInput(String cmd, TaskType taskType) {
+        assert cmd != null : "Input command is null";
         String task = new String();
         String type = new String();
         try {
@@ -83,9 +84,20 @@ public class Parser {
      * @return search text to filter
      */
     public String getSearchWord(String cmd) {
+        assert cmd != null : "Input command is null";
         String searchText = new String();
-        if (cmd.length() > 4) {
-            searchText = cmd.substring(5);
+        try {
+            if (cmd.length() > 4) {
+                if (cmd.charAt(4) == ' ') {
+                    searchText = cmd.substring(5);
+                } else {
+                    throw new DukeException("Invalid: Invalid command.");
+                }
+            } else {
+                throw new DukeException("Invalid: Please type a white space, followed by description");
+            }
+        } catch (DukeException de) {
+            searchText = searchText + de.getMessage();
         }
         return searchText;
     }
@@ -97,6 +109,7 @@ public class Parser {
      * @return datetime in LocalDateTime format
      */
     public LocalDateTime dateFormatter(String cmd) {
+        assert cmd != null : "Input command is null";
         int nextChar = -1;
         int nextWord = 4;
         if (cmd.indexOf("/by") != -1) {

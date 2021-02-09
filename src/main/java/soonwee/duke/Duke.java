@@ -14,6 +14,7 @@ public class Duke {
      * @return updated Task List
      */
     public static String initialize(String input) {
+        assert input != null : "Input is null.";
         String result = new String();
         Storage storage = new Storage("data\\tasks.txt");
         if (input.equals("list")) {
@@ -28,6 +29,9 @@ public class Duke {
             storage.writeFile();
         } else if (input.contains("find")) {
             String text = new Parser().getSearchWord(input);
+            if(text.contains("Invalid:")) {
+                return text;
+            }
             result = result + storage.taskList.searchRelatedText(text) + "\n";
         } else {
             result = performTaskCheck(storage.taskList, input);
@@ -43,6 +47,7 @@ public class Duke {
      * @return updated Task List
      */
     public static String performTaskCheck(TaskList taskList, String cmd) {
+        assert cmd != null: "Input command is null";
         String result = new String();
         Parser checker = new Parser();
         TaskType taskType = checker.checkTaskType(cmd);
