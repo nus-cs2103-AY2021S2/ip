@@ -27,4 +27,8 @@ public enum DukeCommand {
         }
         return false;
     }
+
+    public String toLower() {
+        return this.toString().toLowerCase();
+    }
 }

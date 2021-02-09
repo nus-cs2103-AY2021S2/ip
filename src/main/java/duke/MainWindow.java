@@ -3,6 +3,7 @@ package duke;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import duke.commands.CommandResponse;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,14 +51,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        CommandResponse response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response.toString(), dukeImage)
         );
         userInput.clear();
 
-        if (response.equals(Ui.showExit())) {
+        if (response.isShouldExit()) {
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {

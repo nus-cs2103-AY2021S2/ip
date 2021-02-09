@@ -49,6 +49,11 @@ public class Storage {
             throw new DukeException("File not found.");
         }
 
+        List<Task> tasks = populateTaskListFromStorage(sc);
+        return tasks;
+    }
+
+    private List<Task> populateTaskListFromStorage(Scanner sc) throws DukeException {
         List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
             String item = sc.nextLine();

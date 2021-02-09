@@ -1,5 +1,10 @@
 package duke.commands;
 
+import static duke.common.CommandUtils.ALL;
+import static duke.common.CommandUtils.assertInputs;
+import static duke.common.CommandUtils.checkIndexOutOfBounds;
+import static duke.common.CommandUtils.checkListIsEmpty;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
@@ -26,36 +31,24 @@ public class DeleteCommand extends Command {
      * @throws DukeException if there were errors encountered when saving the file
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assert !input.isBlank() : "input should not be blank";
-        assert !input.isEmpty() : "input should not be empty";
-
-        int listSize = taskList.size();
-        if (listSize <= 0) {
-            throw new DukeException("Your task list is empty.");
-        }
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assertInputs(input);
+        int listSize = checkListIsEmpty(taskList, false);
 
         String returnMessage;
-        if (input.equals("all")) {
-            //Cloning taskList for print message
-            TaskList tl = taskList.clone();
-            taskList.clear();
+        if (input.equals(ALL)) {
+            TaskList printTaskList = taskList.clear();
             assert taskList.size() > 0 : "taskList should be emptied";
-            storage.saveFile(taskList);
-            returnMessage = ui.showDeleteMessage(tl);
+            returnMessage = ui.showDeleteMessage(printTaskList);
         } else {
             int index = Integer.parseInt(input) - 1;
-            if (index < 0 || index >= listSize) {
-                throw new DukeException("The number you have entered is out of bound.");
-            }
-
+            checkIndexOutOfBounds(index, listSize);
             assert index >= 0 : "input should not be negative";
             Task task = taskList.delete(index);
             assert taskList.get(index) == null : "task should be deleted";
-            storage.saveFile(taskList);
             returnMessage = ui.showDeleteMessage(task, taskList.size());
         }
         storage.saveFile(taskList);
-        return returnMessage;
+        return new CommandResponse(returnMessage);
     }
 }

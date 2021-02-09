@@ -26,9 +26,9 @@ public class AddCommand extends Command {
      * @throws DukeException if there were errors encountered when saving the file.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.add(task);
         storage.saveFile(taskList);
-        return ui.showAddMessage(task, taskList.size());
+        return new CommandResponse(ui.showAddMessage(task, taskList.size()));
     }
 }

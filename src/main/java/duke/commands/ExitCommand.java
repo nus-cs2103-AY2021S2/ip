@@ -8,11 +8,6 @@ import duke.ui.Ui;
  * Terminates the program.
  */
 public class ExitCommand extends Command {
-
-    public ExitCommand() {
-        super(true);
-    }
-
     /**
      * Terminates the program and prints a farewell message to the user.
      *
@@ -21,7 +16,7 @@ public class ExitCommand extends Command {
      * @param storage storage object
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.showExit();
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
+        return new CommandResponse(ui.showExit(), true);
     }
 }

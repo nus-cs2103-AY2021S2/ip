@@ -1,5 +1,13 @@
 package duke.commands;
 
+import static duke.common.CommandUtils.ALL;
+import static duke.common.CommandUtils.assertInputs;
+import static duke.common.CommandUtils.checkIndexOutOfBounds;
+import static duke.common.CommandUtils.checkListIsEmpty;
+import static duke.common.Messages.MESSAGE_TASK_ALL_COMPLETED;
+import static duke.common.Messages.MESSAGE_TASK_COMPLETED;
+import static duke.common.Utils.checkIsNumeric;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
@@ -7,7 +15,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Mark a task as done from the list based on given index, or mark everything as done from the list.
+ * Marks a task as done from the list based on given index, or mark everything as done from the list.
  */
 public class DoneCommand extends Command {
 
@@ -26,41 +34,39 @@ public class DoneCommand extends Command {
      * @throws DukeException if there were errors encountered when saving the file
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assert !input.isBlank() : "input should not be blank";
-        assert !input.isEmpty() : "input should not be empty";
-
-        int listSize = taskList.size();
-        if (listSize <= 0) {
-            throw new DukeException("Your task list is empty.");
-        }
-
-        String returnMessage;
-        if (input.equals("all")) {
-            if (taskList.isAllDone()) {
-                throw new DukeException("You have already completed all the tasks!");
-            }
-            taskList.setAllDone();
-            returnMessage = ui.showDoneMessage(taskList);
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assertInputs(input);
+        int listSize = checkListIsEmpty(taskList, false);
+        String response;
+        if (input.equals(ALL)) {
+            response = processDoneAllCommand(taskList, ui);
+        } else if (checkIsNumeric(input)) {
+            response = processDoneCommand(taskList, ui, input, listSize);
         } else {
-            int index = Integer.parseInt(input) - 1;
-
-            if (index < 0 || index >= listSize) {
-                throw new DukeException("The index you entered is out of bound.");
-            }
-            assert index >= 0 : "input should not be negative";
-
-            Task task = taskList.get(index);
-            if (task.getDone()) {
-                throw new DukeException("You have already completed this task!");
-            }
-
-            task.setDone();
-            assert task.getDone() : "task should be set as done";
-            returnMessage = ui.showDoneMessage(task);
+            throw new DukeException("Invalid command");
         }
-
         storage.saveFile(taskList);
-        return returnMessage;
+        return new CommandResponse(response);
+    }
+
+    private String processDoneAllCommand(TaskList taskList, Ui ui) throws DukeException {
+        if (taskList.isAllDone()) {
+            throw new DukeException(MESSAGE_TASK_ALL_COMPLETED);
+        }
+        taskList.setAllDone();
+        return ui.showDoneMessage(taskList);
+    }
+
+    private String processDoneCommand(TaskList taskList, Ui ui, String input, int listSize) throws DukeException {
+        int index = Integer.parseInt(input) - 1;
+        checkIndexOutOfBounds(index, listSize);
+        assert index >= 0 : "input should not be negative";
+        Task task = taskList.get(index);
+        if (task.getDone()) {
+            throw new DukeException(MESSAGE_TASK_COMPLETED);
+        }
+        task.setDone();
+        assert task.getDone() : "task should be set as done";
+        return ui.showDoneMessage(task);
     }
 }

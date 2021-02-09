@@ -1,5 +1,8 @@
 package duke.commands;
 
+import static duke.common.CommandUtils.assertInputs;
+import static duke.common.CommandUtils.checkListIsEmpty;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
@@ -25,21 +28,15 @@ public class FindCommand extends Command {
      * @param storage storage object
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assert !query.isBlank() : "input should not be blank";
-        assert !query.isEmpty() : "input should not be empty";
-
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assertInputs(query);
         TaskList printTaskList = new TaskList();
         for (Task task: taskList.getTaskList()) {
             if (task.getDescription().contains(query)) {
                 printTaskList.add(task);
             }
         }
-
-        if (printTaskList.size() <= 0) {
-            throw new DukeException("No results found.");
-        }
-
-        return ui.showListMessage(printTaskList, true);
+        checkListIsEmpty(printTaskList, true);
+        return new CommandResponse(ui.showListMessage(printTaskList, true));
     }
 }
