@@ -8,6 +8,7 @@ public class Parser {
      * Handle each line
      *
      * @param line the current line to process
+     * @param tasks the current task list to process
      * @return response of the command
      */
     public String processLine(String line, TaskList tasks) {
@@ -15,62 +16,13 @@ public class Parser {
             // Bye command, print and exit immediately.
             return "Bye!";
         } else if (line.compareTo("list") == 0) {
-            // List command, print out all the previous lines.
-            String response = "";
-            for (int i = 0; i < tasks.size(); i++) {
-                assert(tasks.get(i) != null);
-                response += String.format("%d. %s\n", i + 1, tasks.get(i));
-            }
-            return response;
+            return commandList(line, tasks);
         } else if (line.startsWith("done ")) {
-            // Done command, set the task as done.
-            String indexStr = line.substring(5);
-            try {
-                int index = Integer.parseInt(indexStr) - 1;
-                AbstractTask currentTask = tasks.get(index);
-                currentTask.markDone();
-                return String.format("Marked task %d as done:\n%s\n", index, currentTask);
-            } catch (NumberFormatException e) {
-                return "Task index must be a number!";
-            } catch (IndexOutOfBoundsException e) {
-                return "Task index must be in range!";
-            }
+            return commandDone(line, tasks);
         } else if (line.startsWith("delete ")) {
-            // Done command, set the task as done.
-            String indexStr = line.substring(7);
-            try {
-                int index = Integer.parseInt(indexStr) - 1;
-                String response = String.format("Deleted task %d: %s\n", index, tasks.get(index));
-                tasks.remove(index);
-                return response;
-            } catch (NumberFormatException e) {
-                return "Task index must be a number!";
-            } catch (IndexOutOfBoundsException e) {
-                return "Task index must be in range!";
-            }
+            return commandDelete(line, tasks);
         } else if (line.startsWith("find ")) {
-            // Find string in the list of tasks
-            String findStr = line.substring(5);
-            int index = 0;
-            boolean isFound = false;
-            for (AbstractTask task : tasks) {
-                if (task.toString().contains(findStr)) {
-                    isFound = true;
-                    break;
-                }
-            }
-            if (!isFound) {
-                return "No tasks with the keyword found!";
-            } else {
-                String response = "I've found the following task(s) with the specified keyword:\n";
-                for (AbstractTask task : tasks) {
-                    if (task.toString().contains(findStr)) {
-                        index++;
-                        response += String.format("%d. %s\n", index, task.toString());
-                    }
-                }
-                return response;
-            }
+            return commandFind(line, tasks);
         } else {
             // No command, add the line task based on the prefix inside.
             try {
@@ -86,6 +38,95 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 return "Invalid Date Format!";
             }
+        }
+    }
+
+    /**
+     * List command, print out all the previous lines.
+     *
+     * @param line the current line to process
+     * @param tasks the current task list to process
+     * @return response of the command
+     */
+    public String commandList(String line, TaskList tasks) {
+        String response = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            assert(tasks.get(i) != null);
+            response += String.format("%d. %s\n", i + 1, tasks.get(i));
+        }
+        return response;
+    }
+
+    /**
+     * Done command, set the task as done.
+     *
+     * @param line the current line to process
+     * @param tasks the current task list to process
+     * @return response of the command
+     */
+    public String commandDone(String line, TaskList tasks) {
+        String indexStr = line.substring(5);
+        try {
+            int index = Integer.parseInt(indexStr) - 1;
+            AbstractTask currentTask = tasks.get(index);
+            currentTask.markDone();
+            return String.format("Marked task %d as done:\n%s\n", index, currentTask);
+        } catch (NumberFormatException e) {
+            return "Task index must be a number!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Task index must be in range!";
+        }
+    }
+
+    /**
+     * Delete command, delete the task.
+     *
+     * @param line the current line to process
+     * @param tasks the current task list to process
+     * @return response of the command
+     */
+    public String commandDelete(String line, TaskList tasks) {
+        String indexStr = line.substring(7);
+        try {
+            int index = Integer.parseInt(indexStr) - 1;
+            String response = String.format("Deleted task %d: %s\n", index, tasks.get(index));
+            tasks.remove(index);
+            return response;
+        } catch (NumberFormatException e) {
+            return "Task index must be a number!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Task index must be in range!";
+        }
+    }
+
+    /**
+     * Find string in the list of tasks
+     *
+     * @param line the current line to process
+     * @param tasks the current task list to process
+     * @return response of the command
+     */
+    public String commandFind(String line, TaskList tasks) {
+        String findStr = line.substring(5);
+        int index = 0;
+        boolean isFound = false;
+        for (AbstractTask task : tasks) {
+            if (task.toString().contains(findStr)) {
+                isFound = true;
+                break;
+            }
+        }
+        if (!isFound) {
+            return "No tasks with the keyword found!";
+        } else {
+            String response = "I've found the following task(s) with the specified keyword:\n";
+            for (AbstractTask task : tasks) {
+                if (task.toString().contains(findStr)) {
+                    index++;
+                    response += String.format("%d. %s\n", index, task.toString());
+                }
+            }
+            return response;
         }
     }
 
