@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 /**
  * Main class for the duke project.
@@ -13,7 +13,7 @@ import duke.ui.UI;
  */
 public class Duke {
     private Storage storage;
-    private UI ui;
+    private Ui ui;
     /**
      * Constructor.
      */
@@ -36,11 +36,11 @@ public class Duke {
 
     private void start() {
         try {
-            UI.greet();
+            Ui.greet();
             loadUiAndStorage();
         } catch (DukeException e) {
-            UI.printMessage(new String[] {e.getMessage()});
-            UI.printMessage(new String[] {"Closing..."});
+            Ui.printMessage(new String[] {e.getMessage()});
+            Ui.printMessage(new String[] {"Closing..."});
             System.exit(-1);
         }
     }
@@ -51,16 +51,16 @@ public class Duke {
             try {
                 Command command = new Parser().parseMessage(message);
                 String[] result = command.execute();
-                UI.printMessage(result);
+                Ui.printMessage(result);
             } catch (DukeException e) {
-                UI.printMessage(new String[] {e.getMessage()});
+                Ui.printMessage(new String[] {e.getMessage()});
             }
             message = ui.getUserInput();
         }
     }
 
     private void exit() {
-        UI.bye();
+        Ui.bye();
         System.exit(-1);
     }
 
@@ -71,14 +71,14 @@ public class Duke {
      */
     public String getResponse(String input) {
         if (input.equalsIgnoreCase("bye")) {
-            return UI.getExitGui();
+            return Ui.getExitGui();
         } else {
             try {
                 Command command = new Parser().parseMessage(input);
                 String[] result = command.execute();
-                return UI.formatMessageGui(result);
+                return Ui.formatMessageGui(result);
             } catch (DukeException e) {
-                return UI.formatMessageGui(new String[] {e.getMessage()});
+                return Ui.formatMessageGui(new String[] {e.getMessage()});
             }
         }
     }
@@ -88,15 +88,15 @@ public class Duke {
      * @return the greet message
      */
     public String getGreetMessage() {
-        return UI.getGreetGui();
+        return Ui.getGreetGui();
     }
 
     /**
-     * Loads UI and storage for duke created
+     * Loads Ui and storage for duke created
      * @throws DukeException when unable to load storage
      */
     public void loadUiAndStorage() throws DukeException {
-        this.ui = new UI();
+        this.ui = new Ui();
         this.storage = new Storage();
     }
 

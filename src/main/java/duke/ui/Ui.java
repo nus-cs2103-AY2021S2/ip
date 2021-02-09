@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Interacts with user by receiving input and printing results from user commands.
  */
-public class UI {
+public class Ui {
     private static final String[] greet = {
         " ____        _        ",
         "|  _ \\ _   _| | _____ ",
@@ -31,7 +31,7 @@ public class UI {
     /**
      * Constructor and inits the scanner for input.
      */
-    public UI() {
+    public Ui() {
         this.in = new Scanner(System.in);
     }
 
