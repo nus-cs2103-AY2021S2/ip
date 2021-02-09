@@ -17,6 +17,7 @@ import duke.task.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class representing a Parser.
@@ -47,7 +48,7 @@ public class Parser {
                 String[] deadlineDetails = userInput.substring(9).split(" /by ");
                 checkDateTime(deadlineDetails);
                 String deadlineDescription = deadlineDetails[0];
-                LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlineDetails[1], formatter);
+                LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlineDetails[1].trim(), formatter);
                 res = new AddCommand(new Deadline(deadlineDescription, deadlineDateTime));
                 break;
             case "event":
@@ -55,7 +56,7 @@ public class Parser {
                 String[] eventDetails = userInput.substring(6).split(" /at ");
                 checkDateTime(eventDetails);
                 String eventDescription = eventDetails[0];
-                LocalDateTime eventDateTime = LocalDateTime.parse(eventDetails[1], formatter);
+                LocalDateTime eventDateTime = LocalDateTime.parse(eventDetails[1].trim(), formatter);
                 res = new AddCommand(new Event(eventDescription, eventDateTime));
                 break;
             case "list":
@@ -110,6 +111,12 @@ public class Parser {
     private static void checkDateTime(String[] details) throws DukeDateTimeException {
         if (details.length < 2 || details[1].isBlank()) {
             throw new DukeDateTimeException("You have not entered a date and time!");
+        }
+        try {
+            LocalDateTime.parse(details[1].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeException("Please make sure that you enter the Date and Time " +
+                    "in the following format: yyyy-mm-dd HHmm");
         }
     }
 
