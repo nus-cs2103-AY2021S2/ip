@@ -19,12 +19,10 @@ public class Duke {
     /**
      * Creates a new Duke object that contains a list of tasks from file at given path.
      * If no file is found, an empty task list is created instead.
-     *
-     * @param filePath Path of the file that contains the lists of tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("dukeTaskList.txt");
         try {
             taskList = new TaskList(storage.readFile());
         } catch (DukeException e) {
@@ -37,54 +35,43 @@ public class Duke {
      *
      * @throws DukeException If user input is incorrect.
      */
-    public void run() throws DukeException {
+    public String run(String input) {
 
-        ui.displayWelcomeMessage();
-
-        FastIO reader = new FastIO();
-        String input = reader.nextLine();
         Parser parser = new Parser(input);
+        String command = parser.getCommand();
+        String output;
 
         try {
-            while (true) {
-
-                String command = parser.getCommand();
-
                 // user exits the program
                 if (command.equals("bye")) {
-                    ui.displayClosingMessage();
-                    break;
+                    output = ui.displayClosingMessage();
 
                     // user wants list of tasks
                 } else if (command.equals("list")) {
-                    ui.displayListMessage(taskList);
-                    parser = parser.newInput(reader.nextLine());
+                    output = ui.displayListMessage(taskList);
 
                     // user wants to complete a task
                 } else if (command.equals("done")) {
                     int index = parser.getIndexToModify();
                     taskList = taskList.completeTask(index);
-                    ui.displayTaskCompleted(taskList.getTask(index));
+                    output = ui.displayTaskCompleted(taskList.getTask(index));
                     storage.writeFile(taskList);
-                    parser = parser.newInput(reader.nextLine());
 
                     // user wants to delete a task
                 } else if (command.equals("delete")) {
                     int index = parser.getIndexToModify();
                     Task task = taskList.getTask(index);
                     taskList = taskList.deleteTask(index);
-                    ui.displayTaskDeleted(task, taskList);
+                    output = ui.displayTaskDeleted(task, taskList);
                     storage.writeFile(taskList);
-                    parser = parser.newInput(reader.nextLine());
 
                     // user wants to add a ToDo
                 } else if (command.equals("todo")) {
                     String taskDesc = parser.getTaskDescription();
                     ToDo newTask = new ToDo(taskDesc);
                     taskList = taskList.addTask(newTask);
-                    ui.displayTaskAdded(newTask, taskList);
+                    output = ui.displayTaskAdded(newTask, taskList);
                     storage.writeFile(taskList);
-                    parser = parser.newInput(reader.nextLine());
 
                     // user wants to add a Deadline
                 } else if (command.equals("deadline")) {
@@ -96,9 +83,8 @@ public class Duke {
 
                     Deadline newTask = new Deadline(taskDesc, date, time);
                     taskList = taskList.addTask(newTask);
-                    ui.displayTaskAdded(newTask, taskList);
+                    output = ui.displayTaskAdded(newTask, taskList);
                     storage.writeFile(taskList);
-                    parser = parser.newInput(reader.nextLine());
 
                     // user wants to add an Event
                 } else if (command.equals("event")) {
@@ -110,37 +96,32 @@ public class Duke {
 
                     Event newTask = new Event(taskDesc, date, time);
                     taskList = taskList.addTask(newTask);
-                    ui.displayTaskAdded(newTask, taskList);
+                    output = ui.displayTaskAdded(newTask, taskList);
                     storage.writeFile(taskList);
-                    parser = parser.newInput(reader.nextLine());
 
                 // user wants to find tasks using a keyword
                 } else if (command.equals("find")) {
                     String keyword = parser.getKeyword();
-                    ui.displayTaskSearch(keyword, taskList);
-                    parser = parser.newInput(reader.nextLine());
+                    output = ui.displayTaskSearch(keyword, taskList);
 
                 } else {
                     throw new DukeException("unknown");
                 }
-            }
 
         } catch (DukeException e) {
-            System.out.println(e.errorMessage());
-
-        } finally {
-            reader.close();
+            output = e.errorMessage();
         }
+
+        return output;
     }
 
+
     /**
-     * Runs the application.
-     *
-     * @param args Input.
-     * @throws DukeException If user input is incorrect.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) throws DukeException {
-        new Duke("dukeTaskList.txt").run();
+    public String getResponse(String input) {
+        return run(input);
     }
 
 }

@@ -6,16 +6,15 @@ public class Ui {
     /**
      * Displays the welcome message when user enters program.
      */
-    public void displayWelcomeMessage() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    public String displayWelcomeMessage() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
      * Displays the closing message when user exits program.
      */
-    public void displayClosingMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String displayClosingMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -23,9 +22,9 @@ public class Ui {
      *
      * @param taskList TaskList containing list of tasks.
      */
-    public void displayListMessage(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(taskList.getList());
+    public String displayListMessage(TaskList taskList) {
+        String output = "Here are the tasks in your list:\n" + taskList.getList();
+        return output;
     }
 
     /**
@@ -34,10 +33,12 @@ public class Ui {
      * @param task Task to be added.
      * @param taskList TaskList containing updated list of tasks.
      */
-    public void displayTaskAdded(Task task, TaskList taskList) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.taskStatus());
-        System.out.println("Now you have " + taskList.getSize() + " tasks in the list");
+    public String displayTaskAdded(Task task, TaskList taskList) {
+        String output = "Got it. I've added this task:\n";
+        output = output + task.taskStatus() + "\n";
+        output = output + "Now you have " + taskList.getSize() + " tasks in the list";
+
+        return output;
     }
 
     /**
@@ -45,9 +46,9 @@ public class Ui {
      *
      * @param task Task that was completed.
      */
-    public void displayTaskCompleted(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.taskStatus());
+    public String displayTaskCompleted(Task task) {
+        String output = "Nice! I've marked this task as done:\n" + task.taskStatus();
+        return output;
     }
 
     /**
@@ -56,10 +57,12 @@ public class Ui {
      * @param task Task that was deleted.
      * @param taskList TaskList containing updated list of tasks.
      */
-    public void displayTaskDeleted(Task task, TaskList taskList) {
-        System.out.println("Noted. I have removed this task:");
-        System.out.println(task.taskStatus());
-        System.out.println("Now you have " + taskList.getSize() + " tasks in the list");
+    public String displayTaskDeleted(Task task, TaskList taskList) {
+        String output = "Noted. I have removed this task:\n";
+        output = output + task.taskStatus() + "\n";
+        output = output + "Now you have " + taskList.getSize() + " tasks in the list";
+
+        return output;
     }
 
     /**
@@ -68,15 +71,10 @@ public class Ui {
      * @param keyword Keyword used to search through tasks.
      * @param taskList TaskList containing list of tasks to be searched through.
      */
-    public void displayTaskSearch(String keyword, TaskList taskList) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(taskList.search(keyword));
+    public String displayTaskSearch(String keyword, TaskList taskList) {
+        String output = "Here are the matching tasks in your list:\n";
+        output = output + taskList.search(keyword);
+        return output;
     }
 
-    /**
-     * Displays message when list of tasks is not found.
-     */
-    public void displayLoadingError() {
-        System.out.println("List of Tasks not found.");
-    }
 }
