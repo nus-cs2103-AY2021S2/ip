@@ -8,6 +8,7 @@ public class AddCommand extends Command {
         String description;
         String time;
 
+        // initialise AddCommand with a specific task
         switch(operator) {
         case "todo":
             taskType = "todo";

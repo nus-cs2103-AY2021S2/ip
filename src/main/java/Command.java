@@ -1,11 +1,7 @@
 public class Command {
     protected TaskList tasks;
 
-//    protected Task relatedTask;
-//    protected Task relatedTaskNumber;
-//    protected TaskList relatedTaskList;
-
-    public Command(){ }
+    public Command() {}
 
     public void setData(TaskList tasks) {
         this.tasks = tasks;

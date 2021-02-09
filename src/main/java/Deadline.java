@@ -1,10 +1,5 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
-import java.util.Locale;
 
 public class Deadline extends Task {
 
@@ -25,7 +20,7 @@ public class Deadline extends Task {
      *
      * @return Due time in String.
      */
-    public String getTime(){
+    public String getTime() {
         String time = this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
         return time;
     }

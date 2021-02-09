@@ -1,7 +1,3 @@
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Ui {
 
     public Ui(){ }

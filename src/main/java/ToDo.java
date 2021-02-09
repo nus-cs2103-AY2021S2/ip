@@ -10,10 +10,6 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
-    public String getType(){
-        return this.type;
-    }
-
     @Override
     public String toString() {
         return type + separator + super.toString();
