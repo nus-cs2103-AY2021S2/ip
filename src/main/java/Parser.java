@@ -5,6 +5,7 @@ public class Parser {
 
     /** String array of user input */
     private String[] input;
+    private final String DELETE_MESSAGE = "delete";
 
     /**
      * Creates Parser object from given String input.
@@ -47,7 +48,7 @@ public class Parser {
         try {
             index = input[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("delete");
+            throw new DukeException(DELETE_MESSAGE);
         }
 
         return Integer.parseInt(index) - 1;

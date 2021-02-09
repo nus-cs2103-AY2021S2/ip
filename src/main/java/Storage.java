@@ -21,6 +21,8 @@ public class Storage {
     /** directory path of the task list file. */
     private String filePath;
 
+    private final String LOADING_ERROR = "loading error";
+
     /**
      * Initializes Storage with a file path to read a file.
      *
@@ -102,7 +104,7 @@ public class Storage {
             }
 
         } catch (FileNotFoundException e) {
-            throw new DukeException("loading error");
+            throw new DukeException(LOADING_ERROR);
         }
 
         return output;

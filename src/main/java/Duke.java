@@ -16,6 +16,8 @@ public class Duke {
     /** Ui to display messages for user */
     private Ui ui;
 
+    private final String UNKNOWN_MESSAGE = "unknown";
+
     /**
      * Creates a new Duke object that contains a list of tasks from file at given path.
      * If no file is found, an empty task list is created instead.
@@ -113,7 +115,7 @@ public class Duke {
                     output = ui.displayTaskSearch(keyword, taskList);
 
                 } else {
-                    throw new DukeException("unknown");
+                    throw new DukeException(UNKNOWN_MESSAGE);
                 }
 
         } catch (DukeException e) {
