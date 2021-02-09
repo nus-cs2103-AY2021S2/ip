@@ -36,9 +36,12 @@ class TaskList {
             String dateTime = taskDescription.substring(taskDescription.indexOf("/by") + 4);
             LocalDateTime dlTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             task = new Deadline(taskName, dlTime);
-        } else {
+        } else if (!(taskDescription.contains("/at") || taskDescription.contains("/by"))) {
             task = new ToDo(taskDescription);
+        } else {
+            task = null;
         }
+        assert task != null : "Must be a type among those 3 types.";
         this.listUsed.add(task);
         return task;
     }

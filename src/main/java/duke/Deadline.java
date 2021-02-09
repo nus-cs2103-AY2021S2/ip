@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * the Deadline due date: dlTime
  */
 class Deadline extends Task {
-    private LocalDateTime dlTime;
+    private final LocalDateTime dlTime;
 
     /**
      * Returns a Deadline with specified description (name) and due date.
@@ -34,10 +34,13 @@ class Deadline extends Task {
         if (this.isTaskDone()) {
             ans = "[D][X] " + this.getTaskName() + " (by: "
                     + this.dlTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
-        } else {
+        } else if (!this.isTaskDone()) {
             ans = "[D][ ] " + this.getTaskName() + " (by: "
                     + this.dlTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
+        } else {
+            ans = "Error";
         }
+        assert !ans.equals("Error") : "The task should be either done or not";
         return ans;
     }
 
