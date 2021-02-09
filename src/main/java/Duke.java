@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Represents main class for chat bot.
  */
 public class Duke {
-
+/*
     public static void main(String[] args) throws IOException {
         Ui ui = new Ui();
         ui.printIntro();
@@ -75,4 +75,9 @@ public class Duke {
             ui.printLine();
         }
     }
+*/
+    public String getResponse(String input) {
+        return "I heard you say: " + input;
+    }
+
 }
