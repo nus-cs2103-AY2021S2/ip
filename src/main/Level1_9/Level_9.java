@@ -1,59 +1,55 @@
-package ip.src.main.java;
+package Level1_9;
+
+import ip.src.main.java.*;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.time.LocalDate;
 
-public class Level_8 {
+/** A-More OOP class that demonstrates OOP by having classes such as Task, Event etc.
+ *
+ */
+
+public class Level_9 {
+
+    /** Returns a Duke bot that has loaded the tasks from the file given.
+     *
+     * @param filePath Location of the file with the tasks information.
+     * @param bot The Duke bot to be updated with the tasks from the file.
+     * @throws FileNotFoundException
+     */
 
     private static void createBot(String filePath, Duke bot) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        Storage storage = new Storage(filePath, bot);
         Task newTask = new Task("");
+
         while (s.hasNext()) {
-            String[] taskData = s.nextLine().split(" \\| ");
-            String type = taskData[0];
-            String doneStatus = taskData[1];
-            if (type.equals("T")) {
-                String details = taskData[2];
-                newTask = new ToDo(details);
-                bot.addToBot(newTask);
-
-            } else if (type.equals("E")) {
-                String content = taskData[2];
-                String at = taskData[3];
-                newTask = new Event(content, at);
-                bot.addToBot(newTask);
-
-            } else {
-                String content = taskData[2];
-                String by = taskData[3];
-                newTask = new Deadline(content, by);
-                bot.addToBot(newTask);
-            }
-
-            if (doneStatus == " 1 ") {
-                newTask.markDone();
-            }
-
+            storage.loadTask(s.nextLine());
         }
+
     }
 
-
+    /**
+     * Overwrites the file with the updated tasks everytime a user gives a command/input.
+     *
+     * @param filePath The location of the file to be updated.
+     * @param bot The bot with the new tasks to be written to the file.
+     * @throws IOException
+     */
     private static void updateFile(String filePath, Duke bot) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for(Task element:bot.list.list) {
-            fw.write(element.toString() + "\n");
-
-        }
-        fw.close();
+        Storage storage = new Storage(filePath, bot);
+        storage.updateFile();
     }
+
     public static void main(String[] args) throws DukeException {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Duke bot = new Duke();
+
         try{
             File f = new File("data/duke.txt");
             f.getParentFile().mkdirs();
@@ -65,46 +61,48 @@ public class Level_8 {
         }catch (IOException e){
             System.out.println("Error in creating file");
 
-
         }
+
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+        Parser parser = new Parser();
+        Ui ui = new Ui(bot);
 
         while (!(input.equals("bye"))) {
             if (input.equals("list")) {
                 bot.printList();
             } else {
-                String command = input.split(" ")[0];
+                String command = parser.getCommand(input);
                 try {
                     if (command.equals("done")) {
-                        int id = Integer.valueOf(input.split(" ")[1]);
-                        bot.markTaskAsDone(id);
+                        int id = parser.getId(input);
+                        ui.doneCommand(id);
+
+                    } else if (command.equals("find")) {
+                        String keyword = parser.getKeyword(input);
+                        bot.findMatchingTasks(keyword);
 
                     } else if (command.equals("todo")) {
                         try {
-                            input = input.split(" ", 2)[1];
-                            ToDo newTask = new ToDo(input);
-                            bot.addToList(newTask);
-                            //counter++;
+                            input = parser.toDoTask(input);
+                            ui.toDoCommand(input);
+
                         } catch (Exception e) {
                             throw new DukeException(("OOPS!!! The description cannot be empty."));
                         }
                     } else if (command.equals("event")) {
-                        input = input.split(" ", 2)[1];
-                        String content = input.split("/at")[0];
-                        String at = input.split(" /at ")[1];
-                        Event newTask = new Event(content, at);
-                        bot.addToList(newTask);
+                        String content = parser.eventTaskContent(input);
+                        String at = parser.eventTaskAt(input);
+                        ui.eventCommand(content, at);
+
                     } else if (command.equals("deadline")) {
-                        input = input.split(" ", 2)[1];
-                        String content = input.split("/by")[0];
-                        String by = input.split(" /by ")[1];
-                        System.out.println(by);
-                        Deadline newTask = new Deadline(content, by);
-                        bot.addToList(newTask);
+                        String content = parser.deadlineTaskContent(input);
+                        String by = parser.deadlineTaskBy(input);
+                        ui.deadlineCommand(content, by);
+
                     }else if(command.equals("delete")){
-                        int id = Integer.valueOf(input.split(" ")[1]);
-                        bot.deleteTask(id);
+                        int id = parser.getId(input);
+                        ui.deleteCommand(id);
 
                     } else {
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-{");
@@ -126,9 +124,6 @@ public class Level_8 {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
-
-
-
 
 
 

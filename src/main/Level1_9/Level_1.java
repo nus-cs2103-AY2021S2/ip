@@ -1,4 +1,6 @@
-package ip.src.main.java;
+package Level1_9;
+import ip.src.main.java.Duke;
+
 import java.util.Scanner;
 
 public class Level_1 {

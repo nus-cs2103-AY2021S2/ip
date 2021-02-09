@@ -1,7 +1,9 @@
-package ip.src.main.java;
+package Level1_9;
+import ip.src.main.java.*;
+
 import java.util.Scanner;
 
-public class Level_6 {
+public class Level_5 {
     public static void main(String[] args) throws DukeException {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -41,10 +43,6 @@ public class Level_6 {
                         String by = input.split("/by")[1];
                         Deadline newTask = new Deadline(content, by);
                         bot.addToList(newTask);
-                    }else if(command.equals("delete")){
-                        int id = Integer.valueOf(input.split(" ")[1]);
-                        bot.deleteTask(id);
-
                     } else {
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-{");
                     }
@@ -61,6 +59,4 @@ public class Level_6 {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
-
-
 

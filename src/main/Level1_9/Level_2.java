@@ -1,7 +1,10 @@
-package ip.src.main.java;
+package Level1_9;
+import ip.src.main.java.Duke;
+import ip.src.main.java.Task;
+
 import java.util.Scanner;
 
-public class Level_3 {
+public class Level_2 {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -14,16 +17,9 @@ public class Level_3 {
             if (input.equals("list")) {
                 bot.printList();
             }else{
-                String command = input.split(" ")[0];
-                if(command.equals("done")){
-                    int id = Integer.valueOf(input.split(" ")[1]);
-                    bot.markTaskAsDone(id);
-
-                }else {
-                    Task newTask = new Task(input);
-                    bot.addToList(newTask);
-                    //counter++;
-                }
+                Task newTask = new Task(input);
+                bot.addToList(newTask);
+                //counter++;
             }
             input = sc.nextLine();
         }

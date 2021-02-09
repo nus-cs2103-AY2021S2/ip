@@ -1,16 +1,15 @@
 package ip.src.main.java;
 
 import java.io.IOException;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.util.Scanner;
 
 /** A-More OOP class that demonstrates OOP by having classes such as Task, Event etc.
  *
  */
 
-public class Level_9 {
+public class A_MoreOop {
 
     /** Returns a Duke bot that has loaded the tasks from the file given.
      *
@@ -43,20 +42,23 @@ public class Level_9 {
         storage.updateFile();
     }
 
+    /**
+     * Main method that greets users and interacts with users.
+     */
     public static void main(String[] args) throws DukeException {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Duke bot = new Duke();
 
-        try{
+        try {
             File f = new File("data/duke.txt");
             f.getParentFile().mkdirs();
-            if(f.createNewFile()){
+            if (f.createNewFile()) {
                 System.out.println("File created");
-            }else {
+            } else {
                 createBot("data/duke.txt", bot);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error in creating file");
 
         }
@@ -76,10 +78,6 @@ public class Level_9 {
                         int id = parser.getId(input);
                         ui.doneCommand(id);
 
-                    } else if (command.equals("find")) {
-                        String keyword = parser.getKeyword(input);
-                        bot.findMatchingTasks(keyword);
-
                     } else if (command.equals("todo")) {
                         try {
                             input = parser.toDoTask(input);
@@ -98,7 +96,7 @@ public class Level_9 {
                         String by = parser.deadlineTaskBy(input);
                         ui.deadlineCommand(content, by);
 
-                    }else if(command.equals("delete")){
+                    } else if(command.equals("delete")) {
                         int id = parser.getId(input);
                         ui.deleteCommand(id);
 
@@ -112,7 +110,7 @@ public class Level_9 {
             }
             try {
                 updateFile("data/duke.txt", bot);
-            }catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println("Unable to update file");
             }
             input = sc.nextLine();
@@ -122,6 +120,9 @@ public class Level_9 {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
+
+
+
 
 
 
