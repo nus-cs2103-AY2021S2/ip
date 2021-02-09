@@ -25,8 +25,15 @@ public class DoneCommand extends Command {
 
     private void doneProcess(String selection, TaskList tasks) {
         int taskNum = Integer.parseInt(selection);
+        assert taskNum >= 0 : "Negative integer supplied";
         Task task = tasks.get(taskNum);
+        assert task != null : "Task is null";
         task.markAsDone();
+        updateOutput(task, tasks);
+    }
+
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
         output = "Nice! I've marked this task as done:\n\t  "
                 + task.toString();
     }
@@ -40,21 +47,15 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        if (Integer.parseInt(description) > tasks.size() || Integer.parseInt(description) <= 0) {
-            // Selection out of taskList range
+        boolean isSelectionOutOfBounds = Integer.parseInt(description) > tasks.getSize()
+                || Integer.parseInt(description) <= 0;
+
+        if (isSelectionOutOfBounds) {
             throw new DukeException(command, DukeExceptionType.SELECTION_EXCEED_RANGE);
         }
         doneProcess(description, tasks);
+        assert storage != null : "Storage object not initialized";
         storage.save(tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

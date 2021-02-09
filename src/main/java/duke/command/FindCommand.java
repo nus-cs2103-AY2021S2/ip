@@ -43,6 +43,11 @@ public class FindCommand extends Command {
         return contents.toString();
     }
 
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
+        output = getMatchedTaskListContents(tasks);
+    }
+
     /**
      * Outputs list of keyword-matched tasks
      *
@@ -51,16 +56,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
-        output = getMatchedTaskListContents(tasks);
+        updateOutput(null, tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
