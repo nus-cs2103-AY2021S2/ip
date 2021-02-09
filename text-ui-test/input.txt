@@ -1,0 +1,13 @@
+todo finish duke level 5
+todo learn chess
+list
+deadline ma1101r homework /by tommorow
+done 1
+deadline ma1100 tutorial /by today
+list
+event dinner date /at satuday 7pm - 9pm
+list
+done 3
+list
+bye
+
