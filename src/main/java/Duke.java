@@ -1,6 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Task List manager that can store task lists.
@@ -16,15 +28,22 @@ public class Duke {
     /** Ui to display messages for user */
     private Ui ui;
 
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
     /**
      * Creates a new Duke object that contains a list of tasks from file at given path.
      * If no file is found, an empty task list is created instead.
-     *
-     * @param filePath Path of the file that contains the lists of tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("dukeTaskList.txt");
         try {
             taskList = new TaskList(storage.readFile());
         } catch (DukeException e) {
@@ -140,7 +159,15 @@ public class Duke {
      * @throws DukeException If user input is incorrect.
      */
     public static void main(String[] args) throws DukeException {
-        new Duke("dukeTaskList.txt").run();
+        new Duke().run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
 }
