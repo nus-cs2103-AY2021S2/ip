@@ -55,6 +55,8 @@ public class Storage {
                 String nextLine = sc.nextLine();
                 String[] spiltString = nextLine.split(" \\|\\| ");
                 String taskType = spiltString[0];
+                assert taskType.equals("T") || taskType.equals("D") || taskType.equals("E");
+                assert spiltString[1].equals("1") || spiltString[1].equals("0");
                 boolean isCompleted = spiltString[1].equals("1");
                 String taskName = spiltString[2];
 
