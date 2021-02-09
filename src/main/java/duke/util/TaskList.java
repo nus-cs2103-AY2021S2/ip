@@ -180,4 +180,28 @@ public class TaskList {
     public void sort() {
         lst.sort(null);
     }
+
+    /**
+     * Set the priority of a task.
+     *
+     * @param isHigh Set to high if isHigh, else low.
+     * @param taskNum Index of task.
+     * @return Changed task.
+     * @throws DukeInputException If given index is out of range.
+     */
+    public String setPriority(boolean isHigh, int taskNum) throws DukeInputException {
+        if (taskNum < 0 || taskNum >= lst.size()) {
+            throw new DukeInputException(String.format("\"%d\" is an invalid number!", taskNum + 1));
+        }
+
+        Task t;
+        if (isHigh) {
+            t = lst.get(taskNum).setHighPriority();
+        } else {
+            t = lst.get(taskNum).setLowPriority();
+        }
+
+        lst.set(taskNum, t);
+        return t.toString();
+    }
 }

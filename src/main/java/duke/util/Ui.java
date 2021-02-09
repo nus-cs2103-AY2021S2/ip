@@ -42,8 +42,10 @@ public class Ui {
                 "done [int (int int...)]",
                 "event [description] /at [date]",
                 "help",
+                "highpriority [int]",
                 "list",
                 "load",
+                "lowpriority [int]",
                 "save",
                 "search search [keyword | date]",
                 "sort",
@@ -175,5 +177,16 @@ public class Ui {
      */
     public String displaySortMessage() {
         return "TaskList have been sorted!";
+    }
+
+    /**
+     * Display change task priority message.
+     *
+     * @param isHigh True if high priority, else false.
+     * @param task Changed task.
+     * @return Change task priority message.
+     */
+    public String displaySetPriority(boolean isHigh, String task) {
+        return echo(String.format("Got it! I've set this task as a %s PRIORITY", isHigh ? "HIGH" : "LOW"), task);
     }
 }

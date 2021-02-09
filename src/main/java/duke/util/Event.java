@@ -17,9 +17,10 @@ public class Event extends Task {
         super(description, date);
     }
 
-    private Event(String description, LocalDate date, boolean isDone) {
+    private Event(String description, LocalDate date, boolean isDone, boolean isHighPriority) {
         super(description, date);
         this.isDone = isDone;
+        this.isHighPriority = isHighPriority;
     }
 
     /**
@@ -71,6 +72,7 @@ public class Event extends Task {
     protected List<String> exportData() {
         return List.of(TYPE,
                 isDone ? "1" : "0",
+                isHighPriority ? "1" : "0",
                 description,
                 date.toString());
     }
@@ -83,9 +85,11 @@ public class Event extends Task {
      */
     protected static Event importData(String[] args) {
         assert args[1].equals("1") || args[1].equals("0") : "Parser.checkImportFormat() missed an invalid input";
+        assert args[2].equals("1") || args[2].equals("0") : "Parser.checkImportFormat() missed an invalid input";
 
         boolean isDone = args[1].equals("1");
-        return new Event(args[2], LocalDate.parse(args[3]), isDone);
+        boolean isHighPriority = args[2].equals("1");
+        return new Event(args[3], LocalDate.parse(args[4]), isDone, isHighPriority);
     }
 
     /**
@@ -95,6 +99,26 @@ public class Event extends Task {
      */
     @Override
     public Event markDone() {
-        return new Event(description, date, true);
+        return new Event(description, date, true, isHighPriority);
+    }
+
+    /**
+     * Returns the Event as high priority;
+     *
+     * @return High priority Event.
+     */
+    @Override
+    public Event setHighPriority() {
+        return new Event(description, date, isDone, true);
+    }
+
+    /**
+     * Returns the Event as low priority;
+     *
+     * @return low priority Event.
+     */
+    @Override
+    public Event setLowPriority() {
+        return new Event(description, date, isDone, false);
     }
 }

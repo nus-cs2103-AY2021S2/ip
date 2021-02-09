@@ -51,11 +51,17 @@ public class Parser {
         case HELP:
             checkNoArgument(args);
             break;
+        case HIGHPRIORITY:
+            checkValidNumber(args);
+            break;
         case LIST:
             checkNoArgument(args);
             break;
         case LOAD:
             checkNoArgument(args);
+            break;
+        case LOWPRIORITY:
+            checkValidNumber(args);
             break;
         case SAVE:
             checkNoArgument(args);
@@ -81,16 +87,19 @@ public class Parser {
      * @throws DukeInputException If input is invalid.
      */
     public static void checkImportFormat(String input) throws DukeInputException {
-        String[] s = input.split(";", 3);
+        String[] s = input.split(";", 4);
 
-        if (s.length != 3) {
+        if (s.length != 4) {
             throw new DukeInputException("Wrong number of arguments");
         }
         if (!(s[1].equals("0") || s[1].equals("1"))) {
             throw new DukeInputException("isDone column should be 0 or 1");
         }
+        if (!(s[2].equals("0") || s[2].equals("1"))) {
+            throw new DukeInputException("Priority column should be 0 or 1");
+        }
 
-        String[] args = s[2].split(";", 2);
+        String[] args = s[3].split(";", 2);
 
         switch (s[0]) {
         case "T":
@@ -169,12 +178,7 @@ public class Parser {
             if (s.isEmpty()) {
                 throw new DukeInputException("Please only leave one space between numbers!");
             }
-            try {
-                Integer.parseInt(s);
-            } catch (NumberFormatException e) {
-                throw new DukeInputException(
-                        String.format("\"%s\" is not a valid number!", s));
-            }
+            checkValidNumber(s);
         }
 
         Arrays.sort(args);
@@ -188,6 +192,15 @@ public class Parser {
     private static void checkValidSearch(String s) throws DukeInputException {
         if (s.length() == 0) {
             throw new DukeInputException("Enter a keyword to search!");
+        }
+    }
+
+    private static void checkValidNumber(String s) throws DukeInputException {
+        try {
+            Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new DukeInputException(
+                    String.format("\"%s\" is not a valid number!", s));
         }
     }
 
