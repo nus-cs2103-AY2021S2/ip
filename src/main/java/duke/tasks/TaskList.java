@@ -1,8 +1,9 @@
 package duke.tasks;
 
+import java.util.ArrayList;
+
 import duke.exceptions.TaskNumberNotExistException;
 
-import java.util.ArrayList;
 
 /**
  * Collects a list of <code>Task</code> objects. Note that the <code>Task</code> objects

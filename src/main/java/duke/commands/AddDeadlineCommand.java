@@ -1,10 +1,10 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
 
 /**
  * Handles the logic of adding a deadline task to the to-do list.

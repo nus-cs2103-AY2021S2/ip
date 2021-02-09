@@ -1,13 +1,14 @@
 package duke.tasks;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 
 public class TestTaskList {
     private final TaskList tasks;
@@ -15,6 +16,9 @@ public class TestTaskList {
     private final Deadline deadline;
     private final Event event;
 
+    /**
+     * Initializes a <code>TaskList</code> instance with preset properties for testing.
+     */
     public TestTaskList() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse("2021-02-06 23:30", formatter);
@@ -29,6 +33,9 @@ public class TestTaskList {
         this.tasks.addTask(this.event);
     }
 
+    /**
+     * Test whether the <code>TaskList</code> class collects and orders its tasks correctly.
+     */
     @Test
     public void testGetListOfTasks() {
         ArrayList<Task> listOfTasks = this.tasks.getListOfTasks();
@@ -38,6 +45,9 @@ public class TestTaskList {
         assertEquals(this.event, listOfTasks.get(2));
     }
 
+    /**
+     * Test whether the correct task can be retrieved, by index, from the <code>TaskList</code> collection.
+     */
     @Test
     public void testGetTask() {
         assertNull(this.tasks.getTaskByIndex(-1));
@@ -49,6 +59,9 @@ public class TestTaskList {
         assertEquals(this.event, this.tasks.getTaskByIndex(3));
     }
 
+    /**
+     * Test whether the correct task can be popped, by index, from the <code>TaskList</code> collection.
+     */
     @Test
     public void testPopTask() {
         assertNull(this.tasks.popTaskByIndex(-1));
@@ -64,11 +77,17 @@ public class TestTaskList {
         this.tasks.addTask(this.event);
     }
 
+    /**
+     * Test whether the print method of the <code>TaskList</code> class works.
+     */
     @Test
     public void testPrintTasks() {
         this.tasks.printTasks();
     }
 
+    /**
+     * Test whether the <code>TaskList</code> class outputs the size of its collection correctly.
+     */
     @Test
     public void testGetSize() {
         assertEquals(3, this.tasks.getSize());

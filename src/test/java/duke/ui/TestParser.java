@@ -1,19 +1,32 @@
 package duke.ui;
 
-import duke.commands.*;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.ByeCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoNothingCommand;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+
 
 public class TestParser {
 
+    /**
+     * Test that the parser interprets our raw input correctly.
+     */
     @Test
     public void testParser() {
         // Test that parsing valid input will return commands that carry out concrete action
@@ -50,6 +63,10 @@ public class TestParser {
         }
     }
 
+    /**
+     * Test that the parser converts the datetime strings in our raw input (if any) to
+     * <code>LocalDateTime</code> objects correctly.
+     */
     @Test
     public void testDateTimeParser() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");

@@ -1,23 +1,5 @@
 package duke.ui;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddToDoCommand;
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.DoNothingCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-
-import duke.exceptions.DateTimeFormatException;
-import duke.exceptions.InvalidActionException;
-import duke.exceptions.MissingDeadlineException;
-import duke.exceptions.MissingDescriptionException;
-import duke.exceptions.MissingEventTimeException;
-import duke.exceptions.TaskNumberNotIntException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -26,6 +8,24 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoNothingCommand;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.exceptions.DateTimeFormatException;
+import duke.exceptions.InvalidActionException;
+import duke.exceptions.MissingDeadlineException;
+import duke.exceptions.MissingDescriptionException;
+import duke.exceptions.MissingEventTimeException;
+import duke.exceptions.TaskNumberNotIntException;
+
 
 /**
  * Handles all the interpretation and conversion of users' raw input into logic that
@@ -41,8 +41,8 @@ public class Parser {
     private static final String DEADLINE = "DEADLINE";
     private static final String EVENT = "EVENT";
 
-    private static final ArrayList<String> validActions
-            = new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, TODO, DEADLINE, EVENT));
+    private static final ArrayList<String> validActions =
+            new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, TODO, DEADLINE, EVENT));
 
     /**
      * Initializes a scanner to read a new line of user input (as a <code>String</code>).
@@ -74,24 +74,24 @@ public class Parser {
         LocalDateTime eventDateTime = convertToDateTime(getAtDateTimeString(input));
 
         switch (action) {
-            case BYE:
-                return new ByeCommand();
-            case LIST:
-                return new ListCommand();
-            case DONE:
-                return new DoneCommand(description);
-            case DELETE:
-                return new DeleteCommand(description);
-            case FIND:
-                return new FindCommand(description);
-            case TODO:
-                return new AddToDoCommand(description);
-            case DEADLINE:
-                return new AddDeadlineCommand(description, deadlineDateTime);
-            case EVENT:
-                return new AddEventCommand(description, eventDateTime);
-            default:
-                return new DoNothingCommand();
+        case BYE:
+            return new ByeCommand();
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            return new DoneCommand(description);
+        case DELETE:
+            return new DeleteCommand(description);
+        case FIND:
+            return new FindCommand(description);
+        case TODO:
+            return new AddToDoCommand(description);
+        case DEADLINE:
+            return new AddDeadlineCommand(description, deadlineDateTime);
+        case EVENT:
+            return new AddEventCommand(description, eventDateTime);
+        default:
+            return new DoNothingCommand();
         }
     }
 

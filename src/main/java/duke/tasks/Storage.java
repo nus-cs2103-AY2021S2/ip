@@ -1,13 +1,14 @@
 package duke.tasks;
 
-import duke.ui.Parser;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+
+import duke.ui.Parser;
+
 
 /**
  * Handles the loading of tasks when the app starts, as well as the saving of tasks when
