@@ -1,8 +1,12 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.InvalidCommandException;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
 
+import duke.exception.InvalidCommandException;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +23,7 @@ public class Parser {
     public static Command parse(String line) throws ParseException, InvalidCommandException {
         line = line.trim();
         Command c = null;
-        String singleTokens[] = {"bye", "list", "exit", "ls"};
+        String[] singleTokens = {"bye", "list", "exit", "ls"};
         String[] tokens = splitTokenIntoTwo(line, " ", singleTokens);
         switch (tokens[0].toLowerCase()) {
         case "exit":
@@ -67,7 +71,7 @@ public class Parser {
     }
     private static String[] splitTokenIntoTwo(String parseTarget,String delimiter) throws ParseException {
         String[] tokens = parseTarget.split(delimiter,2);
-        if (tokens.length < 2){
+        if (tokens.length < 2) {
             throw new ParseException("Expected deliminter '"+ delimiter +"'", tokens[0].length());
         }
         return tokens;
@@ -76,7 +80,7 @@ public class Parser {
     private static String[] splitTokenIntoTwo(String parseTarget,String delimiter, String[] exception) throws ParseException{
         List<String> exceptionList = Arrays.asList(exception);
         String[] tokens = parseTarget.split(delimiter,2);
-        if (!exceptionList.contains(tokens[0]) && tokens.length < 2){
+        if (!exceptionList.contains(tokens[0]) && tokens.length < 2) {
             throw new ParseException("Expected deliminter '"+ delimiter +"'", tokens[0].length());
         }
         return tokens;

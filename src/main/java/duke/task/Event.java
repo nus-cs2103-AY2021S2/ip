@@ -2,7 +2,7 @@ package duke.task;
 
 import duke.exception.EmptyArgumentException;
 
-public class Event extends Task{
+public class Event extends Task {
     private String eventPeriod;
 
     /**
@@ -15,7 +15,7 @@ public class Event extends Task{
     public Event(String description, String eventPeriod) throws EmptyArgumentException {
         super(description);
         eventPeriod = eventPeriod.trim();
-        if (eventPeriod.isEmpty()){
+        if (eventPeriod.isEmpty()) {
             throw new EmptyArgumentException();
         }
         this.eventPeriod = eventPeriod;

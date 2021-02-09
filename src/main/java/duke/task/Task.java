@@ -16,7 +16,7 @@ public abstract class Task {
      */
     public Task(String description) throws EmptyArgumentException {
         description = description.trim();
-        if (description.isEmpty()){
+        if (description.isEmpty()) {
             throw new EmptyArgumentException();
         }
         this.description = description;
@@ -40,8 +40,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "["+ this.getStatusIcon()+"]: " +
-                description;
+        return "["+ this.getStatusIcon()+"]: " + description;
     }
 
     /**

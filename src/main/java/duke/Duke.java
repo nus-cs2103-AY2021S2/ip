@@ -24,26 +24,26 @@ public class Duke {
         }
         Scanner in = new Scanner(System.in);
         String line;
-        do{
+        do {
             ui.prompt();
             line = in.nextLine();
             try {
                 Command c = Parser.parse(line);
-                if (c==null){ //Bye command
+                if (c==null) { //Bye command
                     break;
                 }
                 String data = store.run(c);
                 ui.commandMessage(c,data);
             } catch (ParseException e) {
                 ui.handleException(e);
-            } catch (InvalidCommandException e){
+            } catch (InvalidCommandException e) {
                 ui.handleException(e);
-            } catch(EmptyArgumentException e){
+            } catch (EmptyArgumentException e) {
                 ui.handleException(e);
             } catch (BadDateArgumentException e) {
                 ui.handleException(e);
             } finally {
-                if(store.isEdited()){
+                if (store.isEdited()) {
                     try {
                         Storage.saveTaskList(store);
                         store.markSaved();
@@ -52,7 +52,7 @@ public class Duke {
                     }
                 }
             }
-        }while(true);
+        } while (true);
         ui.goodByeMessage();
         in.close();
     }

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.TaskList.Action;
 
-public class DoneCommand extends IndexedCommand{
+public class DoneCommand extends IndexedCommand {
     /**
      * Create command to mark Task in TaskList as done
      *
