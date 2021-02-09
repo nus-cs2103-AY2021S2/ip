@@ -4,6 +4,7 @@ import duck.task.TaskList;
 
 import java.io.*;
 
+
 public class Storage {
     private File fileOfData;
 
@@ -47,7 +48,6 @@ public class Storage {
      * @param tasks
      * @throws IOException
      */
-
     public void updateFile(TaskList tasks) throws IOException {
         FileOutputStream outStream = new FileOutputStream(fileOfData);
         OutputStreamWriter writer = new OutputStreamWriter(outStream, "UTF-8");

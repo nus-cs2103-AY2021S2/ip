@@ -26,7 +26,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Gui gui;
-
+    private AnchorPane mainLayout;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -37,6 +37,20 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
+     * initialize mainLayout
+     */
+    private void initMainLayout() {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+    }
+
+    /**
      * Set the showing scene
      *
      * @param stage  the stage which control the scene
@@ -45,7 +59,8 @@ public class Duke extends Application {
      * @param height the height of scene
      * @param width  the width of scene
      */
-    private void setScene(Stage stage, Scene scene, String title, double height, double width) {
+    private void setScene(
+            Stage stage, Scene scene, String title, double height, double width) {
         stage.setScene(scene);
         stage.show();
         stage.setTitle(title);
@@ -54,41 +69,7 @@ public class Duke extends Application {
         stage.setMinWidth(width);
     }
 
-    /**
-     * Set scrollPane
-     *
-     * @param scrollPane
-     * @param prefWidth the width of scroll pane
-     * @param prefHeight the height of scroll pane
-     */
-    private void setScrollPane(ScrollPane scrollPane, double prefWidth, double prefHeight) {
-        scrollPane.setPrefSize(prefWidth, prefHeight);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-    }
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        String filePathOfData = ".\\data\\duke.txt";
-        storage = new Storage(filePathOfData);
-        tasks = new TaskList(storage.load());
-        gui = new Gui();
-
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-        setScene(stage, scene, "Duck", 800.0, 600.0);
-
+    private void setPanePrefSize() {
         mainLayout.setPrefSize(600.0, 800.0);
 
         setScrollPane(scrollPane, 585, 735);
@@ -98,38 +79,39 @@ public class Duke extends Application {
         userInput.setPrefWidth(525.0);
 
         sendButton.setPrefWidth(155.0);
+    }
 
+    /**
+     * Set scrollPane
+     *
+     * @param scrollPane
+     * @param prefWidth  the width of scroll pane
+     * @param prefHeight the height of scroll pane
+     */
+    private void setScrollPane(
+            ScrollPane scrollPane, double prefWidth, double prefHeight) {
+        scrollPane.setPrefSize(prefWidth, prefHeight);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+    }
+
+    /**
+     * set anchor pane
+     *
+     * @param scrollPane
+     * @param sendButton
+     * @param userInput
+     */
+    private void setAnchorPane(
+            ScrollPane scrollPane, Button sendButton, TextField userInput) {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(gui.showWelcome());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
-
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -156,5 +138,43 @@ public class Duke extends Application {
         return c.execute(tasks, gui, storage);
     }
 
+    @Override
+    public void start(Stage stage) throws IOException {
+        String filePathOfData = ".\\data\\duke.txt";
+        storage = new Storage(filePathOfData);
+        tasks = new TaskList(storage.load());
+        gui = new Gui();
 
+        initMainLayout();
+
+        scene = new Scene(mainLayout);
+        setScene(stage, scene, "Duck", 800.0, 600.0);
+
+        setPanePrefSize();
+
+        setAnchorPane(scrollPane, sendButton, userInput);
+
+        Label helloText = new Label(gui.showWelcome());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(helloText, new ImageView(duke))
+        );
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        sendButton.setOnMouseClicked((event) -> {
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        userInput.setOnAction((event) -> {
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
