@@ -18,6 +18,7 @@ public abstract class AddTaskWithTimeCommand extends CommandWithParameters {
 //    public void run(TaskList taskList) {
     protected void handleSplittingArgs() throws Exception{
         try {
+            assert this.timeArgDelimiter != null : "arg delimiter hasn't been initialised in child subclass";
             int thirdArgIdx = this.commandBody.indexOf(this.timeArgDelimiter); // assuming valid
             String desc = this.commandBody.substring(0, thirdArgIdx - 1).trim();
             String thirdArg = this.commandBody.substring(thirdArgIdx + 3).trim();
