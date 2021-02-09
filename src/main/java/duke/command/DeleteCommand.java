@@ -20,14 +20,11 @@ public class DeleteCommand implements Command {
     @Override
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         if (0 <= index && index < tasks.size()) {
-            final Task removed = tasks.delete(index);
-            String headerText = "\tNoted. I've removed this task: \n";
-            String taskRemovedText = String.format("\t%s\n", removed);
-            String currentTasksText = String.format(
-                    "\tNow you have %d task%s in the list.\n", tasks.size(), tasks.size() == 1 ? "" : "s");
-            return headerText + taskRemovedText + currentTasksText;
+            final Task deletedTask = tasks.delete(index);
+            boolean hasOnlyOneTask = tasks.size() == 1;
+            return ui.getDeleteTaskMessage(deletedTask, hasOnlyOneTask);
         } else {
-            return "\tOops! The index is out of bound.\n";
+            return ui.getIndexOutOfBoundMessage();
         }
     }
 
