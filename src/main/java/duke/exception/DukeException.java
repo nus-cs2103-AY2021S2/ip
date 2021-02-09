@@ -33,7 +33,8 @@ public class DukeException extends Exception {
             errorMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             break;
         case INVALID_FORMAT:
-            errorMsg = "☹ OOPS!!! Invalid format detected :-( \n\n Pls enter your event/deadline commands followed by "
+            errorMsg = "☹ OOPS!!! Invalid format detected :-( \n\n "
+                    + "Pls enter your event/deadline commands followed by "
                     + "description then /at with date (for event) or \n/by with date (for deadline)";
             break;
         case INVALID_INTEGER:
