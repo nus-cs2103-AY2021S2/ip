@@ -21,12 +21,12 @@ public class ParserTest {
 
     @Test
     void taskNumber_notANumber_exceptionThrown() {
-        assertThrows(HahaTaskNumberNotIntException.class, () -> Parser.taskNumber("one"));
+        assertThrows(HahaTaskNumberNotIntException.class, () -> Parser.getTaskNumber("one"));
     }
 
     @Test
     void taskNumber_number_int() throws HahaTaskNumberNotIntException {
-        assertEquals(2, Parser.taskNumber("done 2"));
+        assertEquals(2, Parser.getTaskNumber("done 2"));
     }
 }
 
