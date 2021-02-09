@@ -35,6 +35,22 @@ public class Task {
     }
 
     /**
+     * Returns true is task contains keyword
+     * @return boolean value whether task contains keyword
+     */
+    public boolean hasKeyWord(String keyword){
+        String[] words = this.description.split(" ");
+        boolean containsKeyword = false;
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equals(keyword)) {
+                containsKeyword = true;
+            }
+        }
+        return containsKeyword;
+
+    }
+
+    /**
      * Represents Tasks object as a String
      */
     public String toString() {

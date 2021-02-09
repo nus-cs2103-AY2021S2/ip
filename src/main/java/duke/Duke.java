@@ -64,8 +64,11 @@ public class Duke {
                     parser.parseDeleteCommand(input, taskList, ui, database);
                     break;
 
-                default:
+                case "find":
+                    parser.parseFindCommand(input, taskList,ui);
+                    break;
 
+                default:
                     parser.parseDefault(input,ui);
                     break;
             }

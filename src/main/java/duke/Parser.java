@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -169,6 +170,49 @@ public class Parser {
     }
 
     /**
+     *Parses the rest of the input string after find and finds tasks in
+     *TaskList that corresponds to the input keyword
+     * @param input Scanner
+     * @param taskList the current taskList
+     * @param ui the current ui
+     * @throws DukeException if the user input a command with invalid format.
+     */
+    public static void parseFindCommand(Scanner input, TaskList taskList, Ui ui){
+        try{
+            String s1 = input.nextLine();
+            if(s1.equals("")){
+                throw new DukeException("Please specify a keyword you are trying to find");
+            } else {
+                String parts[] = s1.split(" ");
+                if(parts.length> 2){
+                    throw new DukeException(" Please insert only 1 keyword");
+                } else {
+                    try{
+                        String keyWord = parts[1];
+                        ArrayList<String> matchingWithKeyword = new ArrayList<>();
+                        boolean hasMatch = false;
+                        for(int i =0; i< taskList.getSize(); i++){
+                            if(taskList.getList().get(i).hasKeyWord(keyWord)){
+                                matchingWithKeyword.add(taskList.getList().get(i).toString());
+                                hasMatch = true;
+                            }
+                        }
+                        if(!hasMatch){
+                            throw new DukeException("Sorry. None of your tasks contain this keyword");
+                        } else {
+                            ui.showKeyWordMessage(matchingWithKeyword);
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e){
+                        ui.showErrorMessage("Please specify a keyword you are trying to find");
+                    }
+                }
+            }
+        } catch (DukeException e){
+            ui.showErrorMessage(e.getMessage());
+        }
+    }
+
+    /**
      *Parses the rest of the input string after delete and updates database
      *
      * @param input Scanner
@@ -177,7 +221,6 @@ public class Parser {
      * @param database the current database
      * @throws DukeException if the user input a command with invalid format.
      */
-
     public static void parseDeleteCommand(Scanner input, TaskList taskList, Ui ui, Database database){
         try{
             String s1 = input.nextLine();

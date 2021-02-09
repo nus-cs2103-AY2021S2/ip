@@ -1,11 +1,14 @@
 package duke;
 
 
+import java.util.ArrayList;
+
 /**
  *  The Ui class contains methods to handle text represention to users via the CLI.
  */
 public class Ui {
 
+    public static final String BLANK_SPACE_BABY = "";
     public static final String HORIZONTAL_LINE = "________________________________________________";
     public static final String FILE_PATH = "data.txt";
     private static final String greeting =" Hello! I'm duke.\n What can I do for you?\n";
@@ -47,7 +50,8 @@ public class Ui {
 
     public static void showListContent(TaskList taskList){
         System.out.println(HORIZONTAL_LINE);
-        System.out.println(" Here are your remaining tasks!\n");
+        System.out.println(" Here are your remaining tasks!");
+        System.out.println(BLANK_SPACE_BABY);
         if(taskList.getSize() ==0){
             System.out.println(" The list is empty!\n Please add tasks into the list :))");
         }
@@ -86,6 +90,28 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+
+    /**
+     *
+     * @param matchingTaks
+     */
+    public static void showKeyWordMessage(ArrayList<String> matchingTaks){
+
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("Here are the relevant tasks:");
+        System.out.println(BLANK_SPACE_BABY);
+        String output = "";
+        for(int i=0; i< matchingTaks.size(); i++){
+            if(i == matchingTaks.size()-1){
+                output += matchingTaks.get(i);
+            } else {
+                output += matchingTaks.get(i) + "\n";
+            }
+        }
+        System.out.println(output);
+        System.out.println(HORIZONTAL_LINE);
+    }
+
     /**
      * Prints default message when a user inputs invalid arguments.
      * Prints list of valid arguments
@@ -95,7 +121,7 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(" Please enter a valid command!");
         System.out.println(" Valid commands include:");
-        System.out.println(" todo\n event\n deadline\n list\n done\n delete\n bye");
+        System.out.println(" todo\n event\n deadline\n list\n done\n delete\n find\n bye");
         System.out.println(HORIZONTAL_LINE);
     }
 
