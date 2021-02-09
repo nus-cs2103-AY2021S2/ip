@@ -14,6 +14,10 @@ public abstract class Command {
         this.isExit = false;
     }
 
+    public Command(boolean isExit) {
+        this.isExit = false;
+    }
+
     public void setExit(boolean exit) {
         isExit = exit;
     }

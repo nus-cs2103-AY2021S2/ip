@@ -15,9 +15,9 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String LINE_PREFIX = ">>> ";
+    private static final String LINE_PREFIX = "";
     private static final String WELCOME_MESSAGE = "Hello Human, I am Bob.";
-    private static final String EXIT_MESSAGE = "Goodbye Human. See You Again.";
+    private static final String EXIT_MESSAGE = "Goodbye Human. Exiting in 3 seconds.";
     private static final String LINE_DIVIDER = "-----------------------------\n";
 
     private final Scanner in;
@@ -60,10 +60,10 @@ public class Ui {
         String response = "";
         for( Task t : taskList.getTaskList()) {
             if (t.getTaskType().equals("TODO")) {
-                response += String.format("    %d: [%s] [%s] %s\n", i,
+                response += String.format("%d: [%s] [%s] %s\n", i,
                         t.getTaskType(), t.getStatusIcon(), t.getTaskDescription());
             } else {
-                response += String.format("    %d: %s\n", i, t);
+                response += String.format("%d: %s\n", i, t);
             }
 
             i++;
@@ -87,19 +87,19 @@ public class Ui {
     }
 
     public String printTaskDone(Task task) {
-        return String.format("%sNoted Human. I've marked this task as done:\n    [%s] [%s] %s\n",
+        return String.format("%sNoted Human. I've marked this task as done:\n[%s] [%s] %s\n",
                 LINE_PREFIX, task.getTaskType(), task.getStatusIcon(),
                 task.getTaskDescription());
     }
 
     public String showTaskDeleted(Task task) {
-        return String.format(LINE_PREFIX + "Task deleted successfully:\n    [%s] [%s] %s\n",
+        return String.format(LINE_PREFIX + "Task deleted successfully:\n[%s] [%s] %s\n",
                 task.getTaskType(), task.getStatusIcon(),
                 task.getTaskDescription());
     }
 
     public String showAddToDo(ToDo toDo) {
-        return String.format(LINE_PREFIX + "added:\n    [%s] [%s] %s\n",
+        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s\n",
                 toDo.getTaskType(), toDo.getStatusIcon(),
                 toDo.getTaskDescription());
 
@@ -107,7 +107,7 @@ public class Ui {
 
     public String showAddDeadLine(Deadline deadline) {
         LocalDateTime time = deadline.getEndTime();
-        return String.format(LINE_PREFIX + "added:\n    [%s] [%s] %s (by: %s %s %s %s:%s)\n",
+        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s (by: %s %s %s %s:%s)\n",
                 deadline.getTaskType(), deadline.getStatusIcon(), deadline.getTaskDescription(),
                 time.getMonth(), time.getDayOfMonth(), time.getYear(), time.getHour(),
                 time.getMinute());
@@ -115,7 +115,7 @@ public class Ui {
 
     public String showAddEvent(Event event) {
         LocalDateTime time = event.getEventTime();
-        return String.format(LINE_PREFIX + "added:\n    [%s] [%s] %s (at: %s %s %s %s:%s)\n",
+        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s (at: %s %s %s %s:%s)\n",
                 event.getTaskType(), event.getStatusIcon(), event.getTaskDescription(),
                 time.getMonth(), time.getDayOfMonth(), time.getYear(), time.getHour(),
                 time.getMinute());
@@ -124,7 +124,7 @@ public class Ui {
 
 
     public String showError(String errorMsg) {
-        return "[ERROR]: " + errorMsg + "\n";
+        return "[ERROR] : " + errorMsg + "\n";
     }
 
     public String showLine() {

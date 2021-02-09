@@ -1,0 +1,31 @@
+.backgroundPic {
+     -fx-background-color: #CCFFFF;
+     -fx-background-size: 75% 75%;
+     -fx-background-position: bottom center;
+     -fx-background: transparent;
+}
+
+.messageWindow {
+    -fx-border-width: 5.0;
+    -fx-border-color: #000080;
+    -fx-background-color: #7FFFD4;
+    -fx-background-radius: 20;
+    -fx-padding: 15px;
+    -fx-border-insets: 3px;
+    -fx-background-insets: 3px;
+    -fx-border-radius: 20;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+.textField {
+    -fx-border-color: #000080;
+    -fx-border-width: 4.0;
+}
+
+.sendButton {
+    -fx-border-color: #000080;
+    -fx-border-width: 5.0;
+    -fx-background-color: #6BFEFF70;
+    -fx-text-fill: black;
+}

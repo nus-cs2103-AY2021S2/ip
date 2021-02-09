@@ -33,8 +33,7 @@ public class Parser {
         }else if (isValidTaskCommand(command)) {
             return parseTask(userInput);
         } else {
-            throw new DukeCommandException("Sorry Human. I do not comprehend.\n"+
-                    "         Please read the user manual and try again");
+            throw new DukeCommandException("Sorry Human. I do not comprehend.");
         }
 
     }
@@ -89,13 +88,13 @@ public class Parser {
             if(splitInput.length == 1) {
                 throw new DukeToDoException("The description of a todo cannot be empty.");
             }
-            String taskDescription = splitInput[1];
+            String taskDescription = splitInput[1].trim();
             return new TaskCommand(command, taskDescription);
 
         case "deadline":
             assert splitInput[1].contains("/by") : "Missing keyword '/by'";
             String[] taskDetails = splitInput[1].split("/by");
-            taskDescription = taskDetails[0];
+            taskDescription = taskDetails[0].trim();
             LocalDateTime endTime =  LocalDateTime.parse(taskDetails[1].trim(),
                     dateTimeFormatter);
             return new TaskCommand(command, taskDescription, endTime);
@@ -103,7 +102,7 @@ public class Parser {
         case "event":
             assert splitInput[1].contains("/at") : "Missing keyword '/at'";
             taskDetails = splitInput[1].split("/at");
-            taskDescription = taskDetails[0];
+            taskDescription = taskDetails[0].trim();
             LocalDateTime eventTime =  LocalDateTime.parse(taskDetails[1].trim(),
                     dateTimeFormatter);
             return new TaskCommand(command, taskDescription, eventTime);
