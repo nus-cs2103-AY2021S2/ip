@@ -48,6 +48,21 @@ public class Duke {
         //response += Ui.introduce(); dont want to respond each time!
 
         input = Parser.trimWhiteSpaces(input);
+        if (input.length() == 0) {
+            //if just enter spaces
+            response += Ui.informOnlySpaces();
+        }
+        try {
+            Command command = Parser.parse(input);
+            response += command.action();
+        } catch (IllegalArgumentException e) {
+            response += Ui.informIllegalArgExc();
+        } catch (DateTimeParseException e) {
+            response += Ui.informDateTimeParseExc();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            response += e.getMessage();
+        }
+        /*
         if (input.equals("bye")) {
             response += Ui.exit();
         } else if (input.length() == 0) {
@@ -112,7 +127,7 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException e) {
                 response += e.getMessage();
             }
-        }
+        }*/
         return response;
     }
 }

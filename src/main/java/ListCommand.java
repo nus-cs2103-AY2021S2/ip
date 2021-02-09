@@ -1,4 +1,4 @@
-public class ListCommand implements Command{
+public class ListCommand extends Command{
     public String action() {
         try {
             return TaskList.printList();

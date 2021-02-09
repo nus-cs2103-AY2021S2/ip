@@ -62,7 +62,7 @@ public class Parser {
             return new FindCommand(secondPartOfCommand);
         } else if (firstPartOfCommand.equals("todo") || firstPartOfCommand.equals("deadline")
                 || firstPartOfCommand.equals("event")) {
-            return new WriteCommand(secondPartOfCommand);
+            return new WriteCommand(firstPartOfCommand, secondPartOfCommand);
         } else {
             throw new IllegalArgumentException();
         }

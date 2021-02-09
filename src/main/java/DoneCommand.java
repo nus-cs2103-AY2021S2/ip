@@ -1,4 +1,4 @@
-public class DoneCommand implements Command {
+public class DoneCommand extends Command {
     private String secondPartOfCommand;
 
     public DoneCommand(String secondPartOfCommand) {
@@ -9,6 +9,7 @@ public class DoneCommand implements Command {
         try {
             int num = Parser.makeToInt(secondPartOfCommand);
             Task done = TaskList.doneTask(num - 1);
+            super.writeToFile();
             return Ui.doneTask(done);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return e.getMessage();

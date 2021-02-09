@@ -1,4 +1,4 @@
-public class FindCommand implements Command {
+public class FindCommand extends Command {
     private String secondPartOfCommand;
 
     public FindCommand(String secondPartOfCommand) {
