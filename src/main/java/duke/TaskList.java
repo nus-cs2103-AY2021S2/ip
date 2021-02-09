@@ -25,7 +25,8 @@ public class TaskList {
      * @return Number of tasks in task list.
      */
     public int size() {
-        return this.tasks.size();
+        assert tasks != null : "task list is null";
+        return tasks.size();
     }
 
     /**
@@ -35,7 +36,8 @@ public class TaskList {
      * @return Task at specified index.
      */
     public Task get(int index) {
-        return this.tasks.get(index);
+        assert tasks != null : "task list is null";
+        return tasks.get(index);
     }
 
     /**
@@ -44,7 +46,8 @@ public class TaskList {
      * @throws IOException If unable to load from file.
      */
     public void load() throws IOException {
-        this.tasks = this.storage.load();
+        assert storage != null : "storage is null";
+        tasks = storage.load();
     }
 
     /**
@@ -54,7 +57,8 @@ public class TaskList {
      * @throws IOException If unable to save to file.
      */
     public void add(Task task) throws IOException {
-        this.tasks.add(task);
+        assert tasks != null : "task list is null";
+        tasks.add(task);
         updateStorage();
     }
 
@@ -66,7 +70,8 @@ public class TaskList {
      * @throws IOException If unable to save to file.
      */
     public Task remove(int index) throws IOException {
-        Task task = this.tasks.remove(index);
+        assert tasks != null : "task list is null";
+        Task task = tasks.remove(index);
         updateStorage();
         return task;
     }
@@ -88,6 +93,7 @@ public class TaskList {
      * @throws IOException If unable to save to file.
      */
     public void updateStorage() throws IOException {
-        this.storage.save(tasks);
+        assert storage != null : "storage is null";
+        storage.save(tasks);
     }
 }
