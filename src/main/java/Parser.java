@@ -1,4 +1,16 @@
+/**
+ * Provides the static method for parsing user input.
+ */
 public class Parser {
+
+    /**
+     * Handles the logic of parsing user input to determine type of command.
+     * The rest of the user input is parsed according to command type to pass
+     * correct arguments to create a command to execute.
+     * @param userInput the input given by the user to Duke.
+     * @return the command to be executed.
+     * @throws DukeException if user input is invalid or if description of tasks is empty.
+     */
     public static Command parseCommand(String userInput) throws DukeException {
         String[] commandArr = userInput.split(" ", 2);
         String commandType = commandArr[0];
