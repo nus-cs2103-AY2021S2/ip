@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
  */
 public class Duke {
     private TaskList tasks;
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
 
     Duke() {
         this.ui = new Ui();

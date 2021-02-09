@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    private LocalDate at;
+    private final LocalDate at;
 
     /**
      * Creates an event instance.

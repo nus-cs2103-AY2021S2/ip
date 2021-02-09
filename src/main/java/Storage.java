@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -29,7 +29,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
             String line = s.nextLine();
-            String[] elements = line.replace(" ", "").split("\\|", -2);
+            String[] elements = line.split(" \\| ", -2);
             if (elements[0].equals("D")) {
                 boolean isDone = convertToBool(elements[1]);
                 String description = elements[2];
@@ -89,13 +89,9 @@ public class Storage {
      * Convert the String of a number into a boolean.
      *
      * @param numString String having value "1" or "0".
-     * */
+     */
     public Boolean convertToBool(String numString) {
-        if (numString.equals("1")) {
-            return true;
-        } else {
-            return false;
-        }
+        return numString.equals("1");
 
     }
 
