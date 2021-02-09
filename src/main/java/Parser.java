@@ -23,7 +23,7 @@ public class Parser {
         return Integer.parseInt(command.split(" ")[1]) - 1;
     }
 
-    private static LocalDateTime DateTimeParser(String input) {
+    private static LocalDateTime dateTimeParser(String input) {
         return LocalDateTime.parse(input,
                 DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
     }
@@ -74,8 +74,8 @@ public class Parser {
         String[] split = task.split("\\|");
         String typeOfTask = split[0].trim();
         LocalDateTime time = typeOfTask.equals("T")
-                             ? Parser.DateTimeParser("01-01-2001 0101")
-                             : Parser.DateTimeParser(split[3].trim());
+                             ? Parser.dateTimeParser("01-01-2001 0101")
+                             : Parser.dateTimeParser(split[3].trim());
         return time;
     }
 

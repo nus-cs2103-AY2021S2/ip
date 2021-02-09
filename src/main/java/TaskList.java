@@ -5,11 +5,13 @@ import java.util.List;
 
 public class TaskList {
 
+
     /**
      * Marks the task at a particular index as done.
      *
      * @param index Index of the task to be removed.
      * @param tasks List of all tasks.
+     * @return Acknowledgment that task has been marked as done.
      */
     public static String markDone(int index, List<Task> tasks) {
         String reply = "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -32,6 +34,7 @@ public class TaskList {
      *                which contains the name of
      *                the task.
      * @param tasks List of all tasks.
+     * @return Acknowledgment that todo has been added to the list.
      * @throws InvalidTodoException If Todo does not
      *                              have a description.
      */
@@ -65,9 +68,9 @@ public class TaskList {
      *                the task and the deadline
      *                to submit it by.
      * @param tasks List of all tasks.
+     * @return Acknowledgment that deadline has been added to the list.
      * @throws InvalidDateTimeFormatException If the format of the date and time entered is incorrect.
      */
-
     public static String addDeadline(String command, List<Task> tasks) throws InvalidDateTimeFormatException {
         String reply = "";
         try {
@@ -94,14 +97,14 @@ public class TaskList {
     }
 
     /**
-     * Adds a deadline to the list.
+     * Adds an event to the list.
      *
      * @param command Command input by the user
      *                which contains the name of
      *                the event and the date and time.
      * @param tasks List of all tasks.
+     * @return Acknowledgment that event has been added to the list.
      */
-
     public static String addEvent(String command, List<Task> tasks) throws InvalidDateTimeFormatException {
         String reply = "";
         try {
@@ -122,7 +125,7 @@ public class TaskList {
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
-            System.out.println("Sorry, unable to save data to the hard disk.");
+            reply += "Sorry, unable to save data to the hard disk.";
         }
         return reply;
     }
@@ -134,6 +137,7 @@ public class TaskList {
      *                which contains the index of
      *                the task to be deleted.
      * @param tasks List of all tasks.
+     * @return Acknowledgment that task has been deleted.
      */
     public static String deleteTask(String command, List<Task> tasks) {
         String reply = "";
@@ -150,7 +154,7 @@ public class TaskList {
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
-            Ui.printUnableToSaveDataMessage();
+            reply += Ui.printUnableToSaveDataMessage();
         }
         return reply;
     }
@@ -159,6 +163,7 @@ public class TaskList {
      * Lists all the tasks that have been input by the user.
      *
      * @param tasks List of all tasks.
+     * @return List of tasks converted to print format.
      */
     public static String printList(List<Task> tasks) {
         String reply = "";
@@ -170,7 +175,6 @@ public class TaskList {
             listCount++;
         }
         reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-        System.out.println(reply);
         return reply;
     }
 
@@ -179,6 +183,7 @@ public class TaskList {
      *
      * @param command Command input by user.
      * @param tasks List of tasks.
+     * @return List of tasks which contain the keyword required.
      */
     public static String findTask(String command, List<Task> tasks) {
         String reply = "";
