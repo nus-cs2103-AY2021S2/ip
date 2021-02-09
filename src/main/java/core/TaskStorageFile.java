@@ -24,6 +24,7 @@ public class TaskStorageFile extends TaskStorage {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ArrayList<Task> retrieveTaskList(Path fileLocation) throws IOException {
         if (Files.isRegularFile(fileLocation)) {
@@ -33,11 +34,11 @@ public class TaskStorageFile extends TaskStorage {
                     if(x instanceof ArrayList<?>) {
                         return (ArrayList<Task>) x;
                     }else {
-                        return new ArrayList<Task>();
+                        return new ArrayList<>();
                     }
                 } catch (ClassNotFoundException e) {
                     Files.deleteIfExists(fileLocation);
-                    return new ArrayList<Task>();
+                    return new ArrayList<>();
                 }
             }
         } else {
