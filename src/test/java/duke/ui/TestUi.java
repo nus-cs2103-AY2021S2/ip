@@ -20,8 +20,8 @@ public class TestUi {
         ui.showWelcome();
         ui.handleBye();
         ui.handleList(this.tasks);
-        ui.handleDone(this.dummyTask);
-        ui.handleDelete(this.dummyTask);
+        ui.handleDone(this.dummyTask, 2);
+        ui.handleDelete(this.dummyTask, 2);
         ui.handleFind(this.tasks, "dummy keyword");
         ui.handleAddTask(this.tasks, this.dummyTask);
     }

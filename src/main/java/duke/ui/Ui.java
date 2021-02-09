@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.exceptions.TaskNumberNotExistException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -18,77 +19,98 @@ public class Ui {
     }
 
     /**
-     * Prints message for when the app terminates. That is, when the ByeCommand is executed.
+     * Computes and returns the message to be shown when the app is shutting down.
+     * That is, when the ByeCommand is executed.
+     *
+     * @return A <code>String</code> to respond to the shutting down of the application.
      */
-    public void handleBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String handleBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints message for when users list the existing tasks. That is, when the ListCommand is executed.
+     * Computes and returns the message to be shown when the tasks in the to-do list
+     * are to be displayed.
      *
      * @param tasks A <code>TaskList</code> object, representing a collection of <Task>Task</Task>
-     *              objects to be printed.
+     *              objects to be displayed.
      */
-    public void handleList(TaskList tasks) {
+    public String handleList(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            System.out.println("You have no tasks in your list yet :)");
+            return "You have no tasks in your list yet :)";
         } else {
-            System.out.println("Here are the task(s) in your list:");
-            tasks.printTasks();
+            return "Here are the task(s) in your list:" + "\n" + tasks.getTaskListAsString();
         }
     }
 
     /**
-     * Prints message for when users mark a particular tasks as done.
-     * That is, when the DoneCommand is executed.
+     * Computes and returns the message to be shown when a particular task in the
+     * to-do list is to be marked as done.
      *
-     * @param doneTask The <code>Task</code> object marked as done.
+     * @param doneTask The <code>Task</code> marked as done if any, else null.
+     * @param index    Index of the <code>Task</code> (if any) that was marked as done.
+     * @return A <code>String</code> to respond to the marking of a <code>Task</code> as done.
      */
-    public void handleDone(Task doneTask) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(doneTask.getStatusString());
+    public String handleDone(Task doneTask, int index) {
+        try {
+            if (null == doneTask) {
+                throw new TaskNumberNotExistException(index);
+            }
+        } catch (TaskNumberNotExistException e) {
+            return e.getMessage();
+        }
+
+        return "Nice! I've marked this task as done:" + "\n" + doneTask.getStatusString();
     }
 
     /**
-     * Prints message for when users delete a partciular task from the to-do list.
-     * That is, when the DeleteCommand is executed.
+     * Computes and returns the message to be shown when a particular task is to be
+     * deleted from the to-do list.
      *
-     * @param deletedTask The deleted <code>Task</code> object.
+     * @param deletedTask The deleted <code>Task</code> if any, else null.
+     * @param index       Index of the <code>Task</code> (if any) that was deleted.
+     * @return A <code>String</code> to respond to the deletion of a <code>Task</code>.
      */
-    public void handleDelete(Task deletedTask) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedTask.getStatusString());
+    public String handleDelete(Task deletedTask, int index) {
+        try {
+            if (null == deletedTask) {
+                throw new TaskNumberNotExistException(index);
+            }
+        } catch (TaskNumberNotExistException e) {
+            return e.getMessage();
+        }
+
+        return "Noted. I've removed this task:" + "\n" + deletedTask.getStatusString();
     }
 
     /**
-     * Prints message for when users search the to-do list for tasks matching certain input keywords.
-     * That is, when the FindCommand is executed.
+     * Computes and returns the message to be shown when the to-do list is searched for tasks
+     * matching certain input keywords. That is, when the FindCommand is executed.
      *
      * @param tasks   A <code>TaskList</code> object containing only task(s) with descriptions
      *                that match the keyword(s) used for the search.
      * @param keyword Keyword(s) used for the search
      */
-    public void handleFind(TaskList tasks, String keyword) {
+    public String handleFind(TaskList tasks, String keyword) {
         if (tasks.getSize() == 0) {
-            System.out.println("There are no tasks matching the '" + keyword + "' in your list :O");
+            return "There are no tasks matching the '" + keyword + "' in your list :O";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            tasks.printTasks();
+            return "Here are the matching tasks in your list:" + "\n" + tasks.getTaskListAsString();
         }
     }
 
     /**
-     * Prints message for when users add a new task to the to-do list.
+     * Computes and returns the message to be shown a new task is added to the to-do list.
      * That is, when the AddToDoCommand, the AddDeadlineCommand or the AddEventCommand is executed.
      *
      * @param tasks   A <code>TaskList</code> object to which a new <code>Task</code>
      *                object was added.
      * @param newTask The added <code>Task</code> object.
+     * @return A <code>String</code> to respond to the adding of a new <code>Task</code>.
      */
-    public void handleAddTask(TaskList tasks, Task newTask) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask.getStatusString());
-        System.out.println("Now you have " + tasks.getSize() + " task(s) in the list.");
+    public String handleAddTask(TaskList tasks, Task newTask) {
+        return "Got it. I've added this task:" + "\n"
+                + newTask.getStatusString() + "\n"
+                + "Now you have " + tasks.getSize() + " task(s) in the list.";
     }
 }

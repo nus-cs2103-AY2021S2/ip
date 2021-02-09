@@ -7,11 +7,10 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the logic of adding an event task to the to-do list.
+ * Handles the logic of adding an <code>Event</code> to the to-do list.
  */
 public class AddEventCommand extends Command {
-    private final String description;
-    private final LocalDateTime atDateTime;
+    private final Event event;
 
     /**
      * Initializes a command to add an event task with a description and a datetime.
@@ -20,24 +19,35 @@ public class AddEventCommand extends Command {
      * @param atDateTime  The event's time.
      */
     public AddEventCommand(String description, LocalDateTime atDateTime) {
-        this.description = description;
-        this.atDateTime = atDateTime;
+        this.event = new Event(description, atDateTime);
     }
 
+    /**
+     * Returns false as adding <code>Event</code> tasks should not terminate the application.
+     *
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Creates an <code>Event</code> object and adds it to the input <code>TaskList</code>.
-     * Then, prints responses to the notify the users.
+     * Adds the created <code>Event</code> to the input <code>TaskList</code>.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui A handler to manage the application's user-interface layer.
      */
-    public void execute(TaskList tasks, Ui ui) {
-        Event event = new Event(this.description, this.atDateTime);
-        tasks.addTask(event);
-        ui.handleAddTask(tasks, event);
+    public void execute(TaskList tasks) {
+        tasks.addTask(this.event);
+    }
+
+    /**
+     * Computes a response to notify the users the adding of the <code>Event</code>.
+     *
+     * @param tasks A collection of <code>Task</code> objects representing the application's state.
+     * @param ui    A handler to manage the application's user-interface layer.
+     * @return A <code>String</code> to respond to the adding of the <code>Event</code>.
+     */
+    public String getResponse(TaskList tasks, Ui ui) {
+        return ui.handleAddTask(tasks, this.event);
     }
 }

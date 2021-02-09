@@ -8,42 +8,56 @@ import duke.ui.Ui;
  * Handles the logic of searching the to-do list for tasks that matches certain keywords.
  */
 public class FindCommand extends Command {
-    private final String description;
+    private final String keywords;
 
     /**
      * Initializes a command to search the application's <code>TaskList</code> for task(s)
      * whose descriptions match the input keyword(s).
      *
-     * @param description The input keyword(s).
+     * @param keywords The input keyword(s).
      */
-    public FindCommand(String description) {
-        this.description = description;
+    public FindCommand(String keywords) {
+        this.keywords = keywords;
     }
 
     /**
-     * Creates a new <code>TaskList</code> object containing only tasks with descriptions that match
-     * the keyword of the "find" command. Then, prints the descriptions and statuses of the
-     * <code>Task</code> objects in the new <code>TaskList</code>.
+     * Returns false as searching for tasks should not terminate the application.
+     *
+     * @return false
+     */
+    public boolean isExit() {
+        return false;
+    }
+
+    /**
+     * Does nothing.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui A handler to manage the application's user-interface layer.
      */
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks) {
+    }
+
+    /**
+     * Creates a response to display the search results to the users. The tasks in the search
+     * results will take the form of a multi-line string, with each row displaying one task with its
+     * index, description and status.
+     *
+     * @param tasks A collection of <code>Task</code> objects representing the application's state.
+     * @param ui    A handler to manage the application's user-interface layer.
+     * @return A <code>String</code> displaying the search results.
+     */
+    public String getResponse(TaskList tasks, Ui ui) {
         TaskList matchingTasks = new TaskList();
 
         for (Task task : tasks.getListOfTasks()) {
             String taskDescription = task.getDescription().toLowerCase();
-            String stringToFind = this.description.toLowerCase();
+            String stringToFind = this.keywords.toLowerCase();
 
             if (taskDescription.contains(stringToFind)) {
                 matchingTasks.addTask(task);
             }
         }
 
-        ui.handleFind(matchingTasks, this.description);
-    }
-
-    public boolean isExit() {
-        return false;
+        return ui.handleFind(matchingTasks, this.keywords);
     }
 }

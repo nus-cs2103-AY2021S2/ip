@@ -9,14 +9,20 @@ import duke.ui.Ui;
 public abstract class Command {
 
     /**
-     * Alters the application's state through the input <code>TaskList</code>, and
-     * then display the corresponding feedback/response to the users via the input
-     * <code>Ui</code>.
+     * Alters the application's state through the input <code>TaskList</code>.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui A handler to manage the application's user-interface layer.
      */
-    public abstract void execute(TaskList tasks, Ui ui);
+    public abstract void execute(TaskList tasks);
+
+    /**
+     * Computes a feedback or response to the users' input.
+     *
+     * @param tasks A collection of <code>Task</code> objects representing the application's state.
+     * @param ui    A handler to manage the application's user-interface layer.
+     * @return A <code>String</code> of response.
+     */
+    public abstract String getResponse(TaskList tasks, Ui ui);
 
     /**
      * Determines whether or not to terminate the application.

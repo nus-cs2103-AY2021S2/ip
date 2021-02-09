@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
@@ -45,16 +44,6 @@ public class Parser {
             new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, TODO, DEADLINE, EVENT));
 
     /**
-     * Initializes a scanner to read a new line of user input (as a <code>String</code>).
-     *
-     * @return A line of raw user input.
-     */
-    public static String readInput() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
      * Parses a line of raw user input, converting it into a <code>Command</code> object that
      * handles all of the application's logic. Accordingly, the output <code>Command</code> object
      * will be used to (1) alter the application's state, (2) display responses to the users, and
@@ -64,8 +53,9 @@ public class Parser {
      * @return Returns a <code>Command</code> object which will be used to execute the desired responses.
      */
     public static Command parse(String input) {
-        if (!isInputValid(input)) {
-            return new DoNothingCommand();
+        String errorMessage = getErrorMessage(input);
+        if (!errorMessage.equals("")) {
+            return new DoNothingCommand(errorMessage);
         }
 
         String action = getAction(input);
@@ -79,9 +69,9 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case DONE:
-            return new DoneCommand(description);
+            return new DoneCommand(Integer.parseInt(description));
         case DELETE:
-            return new DeleteCommand(description);
+            return new DeleteCommand(Integer.parseInt(description));
         case FIND:
             return new FindCommand(description);
         case TODO:
@@ -91,7 +81,7 @@ public class Parser {
         case EVENT:
             return new AddEventCommand(description, eventDateTime);
         default:
-            return new DoNothingCommand();
+            return new DoNothingCommand("I do not understand your message :(");
         }
     }
 
@@ -225,7 +215,7 @@ public class Parser {
      * @param input A line of raw user input.
      * @return True if the input can be converted into a <code>Command</code>, and false otherwise.
      */
-    private static boolean isInputValid(String input) {
+    private static String getErrorMessage(String input) {
         String action = getAction(input);
         String description = getDescription(input);
         String byDateTimeString = getByDateTimeString(input);
@@ -266,10 +256,9 @@ public class Parser {
                 | MissingDeadlineException
                 | MissingEventTimeException
                 | DateTimeFormatException e) {
-            System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
-        return true;
+        return "";
     }
 }

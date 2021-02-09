@@ -78,14 +78,6 @@ public class TestTaskList {
     }
 
     /**
-     * Test whether the print method of the <code>TaskList</code> class works.
-     */
-    @Test
-    public void testPrintTasks() {
-        this.tasks.printTasks();
-    }
-
-    /**
      * Test whether the <code>TaskList</code> class outputs the size of its collection correctly.
      */
     @Test

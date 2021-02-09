@@ -79,15 +79,19 @@ public class TaskList {
     }
 
     /**
-     * Prints the description and statuses of the <code>Task</code> objects in the collection,
-     * starting with the lowest index.
+     * Computes a <code>String</code> of the description and statuses of all the
+     * <code>Task</code> objects in the collection, starting with the lowest index.
+     *
+     * @return A <code>String</code> of tasks with their descriptions and statuses.
      */
-    public void printTasks() {
+    public String getTaskListAsString() {
+        StringBuilder output = new StringBuilder();
         for (int index = 0; index < this.tasks.size(); index++) {
             int taskNumber = index + 1;
             Task task = this.getTaskByIndex(taskNumber);
-            System.out.print(taskNumber + "." + task.getStatusString() + "\n");
+            output.append(taskNumber).append(".").append(task.getStatusString()).append("\n");
         }
+        return output.toString();
     }
 
     /**

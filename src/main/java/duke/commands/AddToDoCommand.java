@@ -5,34 +5,46 @@ import duke.tasks.ToDo;
 import duke.ui.Ui;
 
 /**
- * Handles the logic of adding a to-do task to the to-do list.
+ * Handles the logic of adding a <code>ToDo</code> to the to-do list.
  */
 public class AddToDoCommand extends Command {
-    private final String description;
+    private final ToDo toDo;
 
     /**
-     * Initializes a command to add a to-do task with a description and a datetime.
+     * Initializes a command to add a <code>ToDo</code> with a description.
      *
      * @param description Description of the to-do task.
      */
     public AddToDoCommand(String description) {
-        this.description = description;
+        this.toDo = new ToDo(description);
     }
 
+    /**
+     * Returns false as adding <code>ToDo</code> tasks should not terminate the application.
+     *
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Creates a <code>ToDo</code> object and adds it to the input <code>TaskList</code>.
-     * Then, prints responses to the notify the users.
+     * Adds the created <code>ToDo</code> to the input <code>TaskList</code>.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui A handler to manage the application's user-interface layer.
      */
-    public void execute(TaskList tasks, Ui ui) {
-        ToDo toDo = new ToDo(this.description);
-        tasks.addTask(toDo);
-        ui.handleAddTask(tasks, toDo);
+    public void execute(TaskList tasks) {
+        tasks.addTask(this.toDo);
+    }
+
+    /**
+     * Computes a response to notify the users the adding of the <code>ToDo</code>.
+     *
+     * @param tasks A collection of <code>Task</code> objects representing the application's state.
+     * @param ui    A handler to manage the application's user-interface layer.
+     * @return A <code>String</code> to respond to the adding of the <code>ToDo</code>.
+     */
+    public String getResponse(TaskList tasks, Ui ui) {
+        return ui.handleAddTask(tasks, this.toDo);
     }
 }
