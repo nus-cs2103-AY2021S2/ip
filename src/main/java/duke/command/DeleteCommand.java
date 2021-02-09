@@ -25,7 +25,9 @@ public class DeleteCommand extends Command {
 
     private void deleteProcess(String selection, TaskList tasks) {
         int taskNum = Integer.parseInt(selection);
+        assert taskNum >= 0 : "Negative integer supplied";
         Task task = tasks.get(taskNum);
+        assert task != null : "Task is null";
         tasks.remove(task);
         updateOutput(task, tasks);
     }
@@ -56,6 +58,7 @@ public class DeleteCommand extends Command {
             throw new DukeException(command, DukeExceptionType.SELECTION_EXCEED_RANGE);
         }
         deleteProcess(description, tasks);
+        assert storage != null : "Storage object not initialized";
         storage.save(tasks);
     }
 

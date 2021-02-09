@@ -43,6 +43,7 @@ public class AddCommand extends Command {
 
     private void todoProcess(String taskName, TaskList tasks) {
         Task task = new ToDo(taskName);
+        assert task != null : "Empty task";
         tasks.add(task);
         updateOutput(task, tasks);
     }
@@ -52,6 +53,7 @@ public class AddCommand extends Command {
             throw new DukeException(DukeExceptionType.INVALID_DATE_FORMAT);
         }
         Task task = new Event(description, LocalDate.parse(date));
+        assert task != null : "Empty task";
         tasks.add(task);
         updateOutput(task, tasks);
     }
@@ -61,6 +63,7 @@ public class AddCommand extends Command {
             throw new DukeException(DukeExceptionType.INVALID_DATE_FORMAT);
         }
         Task task = new Deadline(description, LocalDate.parse(date));
+        assert task != null : "Task is null";
         tasks.add(task);
         updateOutput(task, tasks);
     }
@@ -97,6 +100,7 @@ public class AddCommand extends Command {
         default:
             break;
         }
+        assert storage != null : "Storage object not initialized";
         storage.save(tasks);
     }
 
