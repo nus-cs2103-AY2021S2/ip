@@ -173,7 +173,6 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
