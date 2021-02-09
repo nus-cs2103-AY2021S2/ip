@@ -1,5 +1,9 @@
 package duke.storage;
 
+import static duke.common.Messages.MESSAGE_COMMAND_NOT_FOUND;
+import static duke.common.Messages.MESSAGE_FILE_NOT_FOUND;
+import static duke.common.Messages.MESSAGE_SAVE_FILE_ERROR;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -46,7 +50,7 @@ public class Storage {
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
-            throw new DukeException("File not found.");
+            throw new DukeException(MESSAGE_FILE_NOT_FOUND);
         }
 
         return populateTasksFromStorage(sc);
@@ -73,7 +77,7 @@ public class Storage {
                 tasks.add(new Deadline(done, desc, items[3]));
                 break;
             default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(MESSAGE_COMMAND_NOT_FOUND);
             }
         }
         sc.close();
@@ -92,7 +96,7 @@ public class Storage {
             fileWriter.write(taskList.toStorageString());
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Error saving file.");
+            throw new DukeException(MESSAGE_SAVE_FILE_ERROR);
         }
     }
 }
