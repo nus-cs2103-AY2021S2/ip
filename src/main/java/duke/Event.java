@@ -21,7 +21,7 @@ public class Event extends Task {
     public String getSaveString() {
         String datetimeString = datetime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (this.isDone()) {
-            return String.format("event [isDone] %s /on %s\n", description, datetimeString);
+            return String.format("[isDone] event %s /on %s\n", description, datetimeString);
         } else {
             return String.format("event %s /on %s\n", description, datetimeString);
         }

@@ -14,7 +14,7 @@ public class Todo extends Task {
      */
     public String getSaveString() {
         if (this.isDone()) {
-            return String.format("todo [isDone] %s\n", description);
+            return String.format("[isDone] todo %s\n", description);
         } else {
             return String.format("todo %s\n", description);
         }

@@ -21,7 +21,7 @@ public class Deadline extends Task {
     public String getSaveString() {
         String datetimeString = deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (this.isDone()) {
-            return String.format("deadline [isDone] %s /by %s\n", description, datetimeString);
+            return String.format("[isDone] deadline %s /by %s\n", description, datetimeString);
         } else {
             return String.format("deadline %s /by %s\n", description, datetimeString);
         }
