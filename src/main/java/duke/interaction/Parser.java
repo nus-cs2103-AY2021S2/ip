@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -17,6 +19,7 @@ import duke.command.SnoozeCommand;
 import duke.command.TodoCommand;
 import duke.common.DukeException;
 import duke.common.DukeString;
+import javafx.application.Platform;
 
 /**
  * A class that handles the interpretation of the given command to DukeBot.
@@ -93,6 +96,12 @@ public class Parser {
         }
     }
     private ExitCommand getExitCommand() {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+            }
+        }, 2000);
         this.isBye = true;
         return new ExitCommand();
     }
