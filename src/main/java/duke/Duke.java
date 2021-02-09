@@ -16,7 +16,6 @@ public class Duke {
      *
      */
     public Duke() {
-        this.storage = null;
         String filePath = System.getProperty("user.dir") + "/data/Duke.txt";
         initialiseDuke(filePath);
     }
@@ -28,6 +27,7 @@ public class Duke {
      */
     public void initialiseDuke(String filePath) {
         try {
+            assert this.storage != null : "Storage is not initialised";
             this.storage = new Storage(filePath);
             this.tasks = new TaskList(this.storage.loadData());
         } catch (DukeException ex) {

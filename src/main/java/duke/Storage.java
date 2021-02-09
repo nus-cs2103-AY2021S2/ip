@@ -45,6 +45,7 @@ public class Storage {
             if (isInvalidFolder) {
                 // Handles folder does not exist case
                 dataDirectory.mkdir();
+                assert Files.isDirectory(Paths.get(this.pathDirectory)) : "Directory does not exist";
                 dataFile.createNewFile();
             } else if (isInvalidFile) {
                 // Handles file does not exist
@@ -67,6 +68,7 @@ public class Storage {
         try {
             File dataFile = fileConfiguration();
             FileWriter fileWriter = new FileWriter(dataFile, false);
+            assert fileWriter != null : "File writer is not initialised";
 
             for (int index = 0; index < tasks.getSize(); index++) {
                 Task currTask = tasks.getTask(index);
@@ -90,6 +92,7 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
             File dataFile = fileConfiguration();
             Scanner sc = new Scanner(dataFile);
+            assert sc != null : "Scanner for data file is null";
 
             while (sc.hasNext()) {
                 String[] taskDetail = sc.nextLine().split("[|]");
@@ -99,7 +102,7 @@ public class Storage {
                 boolean isValidTask = taskType.equals("T") || taskType.equals("E") || taskType.equals("D");
                 if (isValidTask) {
                     boolean isTaskCompleted = taskDetail[1].equals("1");
-
+           
                     if (isTaskCompleted) {
                         newTask.markAsDone();
                     }
