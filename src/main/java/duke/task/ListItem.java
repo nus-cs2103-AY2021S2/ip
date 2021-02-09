@@ -13,6 +13,8 @@ public abstract class ListItem {
      * @param task takes in string and pass to parent's constructor as the task name
      */
     public ListItem(String task) {
+        // check if the task name is empty or not
+        assert !task.isEmpty();
         this.task = task;
         this.isDone = false;
     }
@@ -23,6 +25,8 @@ public abstract class ListItem {
      * @param isDone takes in the task's status
      */
     public ListItem(String task, boolean isDone) {
+        // check if the task name is empty or not
+        assert !task.isEmpty();
         this.task = task;
         this.isDone = isDone;
     }

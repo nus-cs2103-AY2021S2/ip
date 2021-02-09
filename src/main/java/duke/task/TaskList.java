@@ -49,7 +49,9 @@ public class TaskList {
      */
     public void updateItemMutable(int index) {
         int correctIndex = index - 1;
+        assertIndexInRange(correctIndex);
         ListItem tempItem = this.listItems.get(correctIndex).markAsDone();
+        assert tempItem.getDone(); // check the updated item's done status is true
         this.listItems.set(correctIndex, tempItem);
     }
 
@@ -60,6 +62,7 @@ public class TaskList {
      */
     public void deleteCommandMutable(int index) {
         int correctIndex = index - 1;
+        assertIndexInRange(correctIndex);
         this.listItems.remove(correctIndex);
     }
 
@@ -87,5 +90,10 @@ public class TaskList {
                     + "|" + tempItem.getDone() + "|" + tempItem.getTask() + tempItem.getDate() + "\n");
         }
         return initStr;
+    }
+
+    // a method with an assertion that checks the index is >= 0 so it can be used for indexing with the List
+    public void assertIndexInRange(int index){
+        assert index >= 0;
     }
 }
