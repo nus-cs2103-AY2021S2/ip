@@ -1,9 +1,6 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
-    protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
-    private final LocalDateTime by;
+public class Deadline extends TimedTask {
 
     /**
      * Initializes a Deadline Task with the specified description and dateTime.
@@ -12,15 +9,14 @@ public class Deadline extends Task {
      * @param dateTime Date and Time the Deadline Task should be done by.
      */
     public Deadline(String description, LocalDateTime dateTime) {
-        super(description, "D");
-        by = dateTime;
+        super(description, dateTime, "D");
     }
 
     public String toString() {
-        return super.toString() + " (by: " + by.format(DATE_TIME_FORMAT) + ")";
+        return super.toString() + " (by: " + dateTime.format(DATE_TIME_FORMAT) + ")";
     }
 
     public String toLog() {
-        return super.toLog() + " | " + by;
+        return super.toLog() + " | " + dateTime;
     }
 }

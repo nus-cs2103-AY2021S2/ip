@@ -36,4 +36,8 @@ public abstract class Task {
     public String getDescription() {
         return description;
     }
+
+    public void changeDescription(String newDescription) {
+        this.description = newDescription;
+    }
 }
