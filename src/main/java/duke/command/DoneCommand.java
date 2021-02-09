@@ -7,7 +7,7 @@ import duke.Ui;
 import java.io.IOException;
 
 public class DoneCommand extends Command{
-    private int index;
+    private final int index;
 
     public DoneCommand(int index) {
         this.index = index;
@@ -16,8 +16,6 @@ public class DoneCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.setTaskIsDone(index,true);
-        // System.out.printf(">>> Nice! I've marked this task as done:\n  [%s] [%s] %s\n",
-        //         taskList..getTaskType(), newTask.getStatusIcon(), newTask.getTaskDescription());
         storage.saveData(taskList);
         return ui.printTaskDone(taskList.getTask(index));
     }
