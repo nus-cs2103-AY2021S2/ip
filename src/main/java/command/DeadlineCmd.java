@@ -1,9 +1,9 @@
-package main.java.command;
+package command;
 
-import main.java.classes.DuckieException;
-import main.java.classes.Storage;
-import main.java.classes.TaskList;
-import main.java.classes.Ui;
+import classes.DuckieException;
+import classes.Storage;
+import classes.TaskList;
+import classes.Ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,18 +1,21 @@
+
 package duckie;
 
-import main.java.classes.DuckieException;
-import main.java.classes.Parser;
-import main.java.classes.Storage;
-import main.java.classes.TaskList;
-import main.java.classes.Ui;
-import main.java.command.Command;
-
 import java.io.IOException;
+
+import classes.DuckieException;
+import classes.Parser;
+import classes.Storage;
+import classes.TaskList;
+import classes.Ui;
+import command.Command;
+
+
 
 /**
  * Main class.
  */
-public class Duckie{
+public class Duckie {
     private Storage storage;
     private TaskList lst;
     private Ui ui;

@@ -1,10 +1,10 @@
-package main.java.command;
+package command;
 
-import main.java.classes.DuckieException;
-import main.java.classes.Storage;
-import main.java.classes.Task;
-import main.java.classes.TaskList;
-import main.java.classes.Ui;
+import classes.DuckieException;
+import classes.Storage;
+import classes.Task;
+import classes.TaskList;
+import classes.Ui;
 
 public class DoneCmd extends Command {
 

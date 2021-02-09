@@ -1,4 +1,4 @@
-package main.java.classes;
+package classes;
 
 /**
  * Task encapsulates a task with String description and boolean isDone.

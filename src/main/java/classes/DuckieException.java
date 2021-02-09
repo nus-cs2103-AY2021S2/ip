@@ -1,4 +1,4 @@
-package main.java.classes;
+package classes;
 
 /**
  * DuckieException inherits from Exception class.

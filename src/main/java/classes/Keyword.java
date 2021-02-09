@@ -1,4 +1,4 @@
-package main.java.classes;
+package classes;
 
 /**
  * Enumerates the only commands accepted by Duckie.

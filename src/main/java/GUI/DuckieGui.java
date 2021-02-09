@@ -6,9 +6,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class DuckieGUI extends Application {
+import java.io.IOException;
 
-    private Duckie duckie = new Duckie();
+public class DuckieGui extends Application {
+
+    private Duckie duckie;
+
+    {
+        try {
+            duckie = new Duckie();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void start(Stage stage) {

@@ -7,6 +7,6 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(DuckieGUI.class, args);
+        Application.launch(DuckieGui.class, args);
     }
 }

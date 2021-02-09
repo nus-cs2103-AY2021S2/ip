@@ -1,6 +1,6 @@
-package main.java.command;
+package command;
 
-import main.java.classes.*;
+import classes.*;
 
 public class FindCmd extends Command {
     private String cmd;

@@ -1,14 +1,14 @@
-package main.java.classes;
+package classes;
 
-import main.java.command.ByeCmd;
-import main.java.command.Command;
-import main.java.command.DeadlineCmd;
-import main.java.command.DeleteCmd;
-import main.java.command.DoneCmd;
-import main.java.command.EventCmd;
-import main.java.command.ListCmd;
-import main.java.command.ToDoCmd;
-import main.java.command.FindCmd;
+import command.ByeCmd;
+import command.Command;
+import command.DeadlineCmd;
+import command.DeleteCmd;
+import command.DoneCmd;
+import command.EventCmd;
+import command.ListCmd;
+import command.ToDoCmd;
+import command.FindCmd;
 
 /**
  * Parser class to deal with making sense of the user command.

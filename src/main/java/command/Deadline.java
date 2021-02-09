@@ -1,6 +1,6 @@
-package main.java.command;
+package command;
 
-import main.java.classes.Task;
+import classes.Task;
 
 import java.util.Date;
 
