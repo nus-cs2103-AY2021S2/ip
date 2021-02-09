@@ -15,7 +15,7 @@ public class Parser {
      * @return Correct task number as an integer.
      * @throws HahaTaskNumberNotIntException Task number given is not an integer.
      */
-    static int taskNumber(String command) throws HahaTaskNumberNotIntException {
+    static int getTaskNumber(String command) throws HahaTaskNumberNotIntException {
         try {
             return Integer.parseInt("" + command.charAt(command.length() - 1));
         } catch (NumberFormatException ex) {
