@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Storage {
 
-    public static ArrayList<Task> data;
+    private static ArrayList<Task> data;
     private static final Path fileLocation = Paths.get("./data", "duke.txt");
     private static final Path directoryLocation = Paths.get("./data");
 
@@ -91,7 +91,7 @@ public class Storage {
      * @param tasks Tasks to be saved on the file.
      * @throws UnableToSaveDataException If unable to save tasks to the file.
      */
-     public static void saveDataToFile(List<Task> tasks) throws UnableToSaveDataException {
+    public static void saveDataToFile(List<Task> tasks) throws UnableToSaveDataException {
         try {
             BufferedWriter writer = Files.newBufferedWriter(fileLocation, StandardCharsets.UTF_8);
             for (Task task : tasks) {

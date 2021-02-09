@@ -5,12 +5,12 @@ public class Ui {
      */
     public static void printWelcomeMessage() {
         String logo =
-                "     ______\n" +
-                        "    |___  /\n" +
-                        "       / / \n" +
-                        "      / /  \n" +
-                        "     / /__ \n" +
-                        "    /_____|\n";
+                "     ______\n"
+                        + "    |___  /\n"
+                        + "       / / \n"
+                        + "      / /  \n"
+                        + "     / /__ \n"
+                        + "    /_____|\n";
         System.out.println("\n~ Hello! I am Zee :) ~\n"
                 + logo + "\n"
                 + "~ What can I do for you today? ~\n");
@@ -48,8 +48,8 @@ public class Ui {
      * Prints error message when the input format for date and time is invalid.
      */
     public static String printInvalidDateFormatMessage() {
-        return "\nDate time format is invalid. " +
-                "Please enter the date and time in the following format: DD-MM-YYYY HHMM\n";
+        return "\nDate time format is invalid. "
+                + "Please enter the date and time in the following format: DD-MM-YYYY HHMM\n";
     }
 
     /**

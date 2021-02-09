@@ -1,18 +1,12 @@
 import java.util.List;
 import java.util.Scanner;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 public class Duke {
 
@@ -63,7 +57,7 @@ public class Duke {
             reply = TaskList.deleteTask(command, tasks);
         } else if (Parser.parseCommand(command).equals("find")) {
             reply = TaskList.findTask(command, tasks);
-        } else if(command.equals("bye")) {
+        } else if (command.equals("bye")) {
             reply = Ui.printExitMessage();
             System.exit(0);
         } else {
