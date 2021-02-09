@@ -17,7 +17,6 @@ public class Parser {
      * command name, task index/description, date/error name (if applicable).
      */
     public ArrayList<String> parseInputToList(String input) {
-//        String input = scan.nextLine();
         ArrayList<String> result = new ArrayList<>();
 
         String[] inputArr = input.split(" ", 2);
@@ -31,11 +30,6 @@ public class Parser {
         default:
             try {
                 String details = inputArr[1];
-//                String[] detailsArr = details.split(" ", 2);
-//                String task = inputArr[0];
-//                result.add(task);
-
-//                String scannedInput = inputArr[1];
                 String description, date, taskIndex;
 
                 switch (command) {
@@ -74,8 +68,7 @@ public class Parser {
                         || command.equals("done") || command.equals("delete")) {
                     result.add("emptyDescError");
                 } else {
-//                    result.add("idkError");
-                    result.add(command);
+                    result.add("idkError");
                 }
             }
         }
