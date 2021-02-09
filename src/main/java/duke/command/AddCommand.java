@@ -25,11 +25,11 @@ public class AddCommand extends Command {
      */
     @Override
     public String[] execute() {
-        String[] res;
+        String[] executionResult;
         try {
-            res = TaskList.addTask(taskToAdd);
-            Storage.saveData();
-            return res;
+            executionResult = TaskList.addTask(taskToAdd);
+            Storage.saveDataToStorage();
+            return executionResult;
         } catch (DukeException e) {
             return new String[]{e.getMessage()};
         }

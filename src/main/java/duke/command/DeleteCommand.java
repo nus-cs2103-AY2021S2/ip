@@ -24,11 +24,11 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String[] execute() {
-        String[] res;
+        String[] executionResult;
         try {
-            res = TaskList.deleteTask(taskIndexToDelete);
-            Storage.saveData();
-            return res;
+            executionResult = TaskList.deleteTask(taskIndexToDelete);
+            Storage.saveDataToStorage();
+            return executionResult;
         } catch (DukeException e) {
             return new String[]{e.getMessage()};
         }

@@ -8,14 +8,14 @@ import duke.tasks.TaskList;
  * Complete a task to the taskList.
  */
 public class DoneCommand extends Command {
-    private int taskToComplete;
+    private int taskIndexToComplete;
 
     /**
      * Constructor for the DoneCommand class.
-     * @param taskToComplete an index for the Task object to be done
+     * @param taskIndexToComplete an index for the Task object to be done
      */
-    public DoneCommand(int taskToComplete) {
-        this.taskToComplete = taskToComplete;
+    public DoneCommand(int taskIndexToComplete) {
+        this.taskIndexToComplete = taskIndexToComplete;
     }
 
     /**
@@ -24,11 +24,11 @@ public class DoneCommand extends Command {
      */
     @Override
     public String[] execute() {
-        String[] res;
+        String[] executionResult;
         try {
-            res = TaskList.completeTask(taskToComplete);
-            Storage.saveData();
-            return res;
+            executionResult = TaskList.completeTask(taskIndexToComplete);
+            Storage.saveDataToStorage();
+            return executionResult;
         } catch (DukeException e) {
             return new String[]{e.getMessage()};
         }

@@ -37,52 +37,68 @@ public class Parser {
      * 4. Disclaimer: the idea of using .valueOf and convert to UpperCase is inspired
      *      based on discussion of #Issue 14 in forum.
      *      Credit to @samuelfangjw who mentioned it first.
-     * @param message user input
+     * @param userInput user input
      * @throws DukeException thrown if user enters a valid command but invalid related information
      *                       or an invalid command
      */
-    public Command parseMessage(String message) throws DukeException {
-        String[] msgArray = message.split(" ", 2);
+    public Command parseMessage(String userInput) throws DukeException {
+        String[] processedUserInput = processUserInput(userInput);
+        return getCommand(processedUserInput);
+    }
+
+    private Command getCommand(String[] processedUserInput) throws DukeException {
+        String commandWord = processedUserInput[0];
+        String otherInfo = processedUserInput[1];
+        Command command;
+        try {
+            command = commandWordToCommand(commandWord, otherInfo);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("I do not understand this command.");
+        }
+        return command;
+    }
+
+    private Command commandWordToCommand(String commandWord, String otherInfo)
+            throws DukeException {
+        Command command;
+        CommandOption commandEnum = CommandOption.valueOf(commandWord.toUpperCase(Locale.ROOT));
+        switch (commandEnum) {
+        case LIST:
+            command = new ListCommand();
+            break;
+        case DONE:
+            command = preCompleteTask(otherInfo);
+            break;
+        case TODO:
+            command = preTodoTask(otherInfo);
+            break;
+        case EVENT:
+            command = preEventTask(otherInfo);
+            break;
+        case DEADLINE:
+            command = preDeadlineTask(otherInfo);
+            break;
+        case DELETE:
+            command = preDeleteTask(otherInfo);
+            break;
+        case FIND:
+            command = preFindTask(otherInfo);
+            break;
+        default:
+            throw new DukeException("Unexpected value: " + commandEnum);
+        }
+        return command;
+    }
+
+    private String[] processUserInput(String userInput) {
+        String[] msgArray = userInput.split(" ", 2);
         String commandWord = msgArray[0].strip();
         String otherInfo = null;
         if (msgArray.length > 1) {
             otherInfo = msgArray[1].strip();
         }
-        Command command;
-        try {
-            CommandOption commandEnum = CommandOption.valueOf(commandWord.toUpperCase(Locale.ROOT));
-            switch (commandEnum) {
-            case LIST:
-                command = new ListCommand();
-                break;
-            case DONE:
-                command = preCompleteTask(otherInfo);
-                break;
-            case TODO:
-                command = preTodoTask(otherInfo);
-                break;
-            case EVENT:
-                command = preEventTask(otherInfo);
-                break;
-            case DEADLINE:
-                command = preDeadlineTask(otherInfo);
-                break;
-            case DELETE:
-                command = preDeleteTask(otherInfo);
-                break;
-            case FIND:
-                command = preFindTask(otherInfo);
-                break;
-            default:
-                throw new DukeException("Unexpected value: " + commandEnum);
-            }
-        } catch (IllegalArgumentException e) {
-            throw new DukeException("I do not understand this command.");
-        }
-
-        return command;
+        return new String[] {commandWord, otherInfo};
     }
-
     private Command preCompleteTask(String taskIndex) throws DukeException {
         int index = validateInteger(taskIndex);
         return new DoneCommand(index);

@@ -52,14 +52,14 @@ public class TaskList {
         int index = verifyTaskIndex(taskIndex);
         Task task = tasks.remove(index);
 
-        String[] res = new String[] {
+        String[] successMessage = new String[] {
             "On your command! I have removed this task:",
             "  " + task.toString(),
             "Now you have " + tasks.size() + " "
                 + (tasks.size() > 1 ? "tasks" : "task")
                 + " in the list."
         };
-        return res;
+        return successMessage;
     }
 
     /**
@@ -79,11 +79,11 @@ public class TaskList {
             throw new DukeException("Task with the given index has been completed.");
         }
 
-        String[] res = new String[] {
+        String[] successMessage = new String[] {
             "Wonderful! You have completed this task:",
             "  " + task.toString()
         };
-        return res;
+        return successMessage;
     }
 
     /**
@@ -94,33 +94,33 @@ public class TaskList {
     public static String[] addTask(Task newTask) {
         tasks.add(newTask);
 
-        String[] res = new String[] {
+        String[] successMessage = new String[] {
             "Roger that! Added new task:",
             " " + newTask.toString(),
             "Now you have " + tasks.size() + " "
                 + (tasks.size() > 1 ? "tasks" : "task")
                 + " in the list."
         };
-        return res;
+        return successMessage;
     }
 
     /**
      * Lists the tasks in the task list
      * @return the information of the tasks present
      */
-    public static String[] getAllTaskListInfo() {
-        String[] res;
+    public static String[] getAllTasksInfo() {
+        String[] taskListInfo;
         if (tasks.isEmpty()) {
-            res = new String[] {"Hi! Your todo list is currently empty."};
+            taskListInfo = new String[] {"Hi! Your todo list is currently empty."};
         } else {
-            res = new String[tasks.size() + 1];
-            res[0] = "Hi! This is your todo list:";
+            taskListInfo = new String[tasks.size() + 1];
+            taskListInfo[0] = "Hi! This is your todo list:";
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                res[i + 1] = " " + (i + 1) + "." + task.toString();
+                taskListInfo[i + 1] = " " + (i + 1) + "." + task.toString();
             }
         }
-        return res;
+        return taskListInfo;
     }
 
     /**
@@ -129,23 +129,27 @@ public class TaskList {
      * @return the information of the tasks containing the given keyword
      */
     public static String[] findTasks(String keyword) {
-        ArrayList<String> res = new ArrayList<>();
-        res.add("Here are the matching tasks in your list:");
+        ArrayList<String> matchedTasksInfo = new ArrayList<>();
+        boolean noMatchedTasksFound;
+        String[] matchedTasksInfoInArray;
 
-        int i = 1;
-        for (Task task : tasks) {
+        matchedTasksInfo.add("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            int index = i + 1;
             if (task.toString().contains(keyword)) {
-                String description = " " + i + "." + task.toString();
-                res.add(description);
-                i++;
+                String description = " " + index + "." + task.toString();
+                matchedTasksInfo.add(description);
             }
         }
 
-        if (res.size() == 1) {
-            res.clear();
-            res.add("Sorry, no relevant tasks found:(");
+        noMatchedTasksFound = (matchedTasksInfo.size() == 1);
+        if (noMatchedTasksFound) {
+            matchedTasksInfo.clear();
+            matchedTasksInfo.add("Sorry, no relevant tasks found:(");
         }
 
-        return res.toArray(new String[0]);
+        matchedTasksInfoInArray = matchedTasksInfo.toArray(new String[0]);
+        return matchedTasksInfoInArray;
     }
 }
