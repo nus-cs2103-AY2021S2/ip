@@ -18,17 +18,44 @@ import java.util.Scanner;
 import ui.Ui;
 
 /**
- * Class <code>Storage</code> deals with loading tasks from file and saving taks in the file.
+ * Class <code>Storage</code> deals with loading tasks from file and saving task in the file.
  * Contains two method <code>load</code> and <code>save</code>.
  */
 public class Storage {
-    private File data;
+    private final File data;
 
     /**
      * Constructs a storage with file to be loaded or saved initialized.
      */
     public Storage() {
         data = new File("./data.txt");
+    }
+
+
+    /**
+     * Creates a new task with specified <code>type</code>, <code>status</code> and <code>description</code>.
+     * @param type type of task.
+     * @param status status of task.
+     * @param description description of task.
+     * @return a Task object.
+     */
+    public Task newTask(String type, String status, String description) {
+        Task task = new Task();
+        try {
+            if (type.equals("T")) {
+                task = new Todo(status, description);
+            } else {
+                String[] details = description.split("@");
+                if (type.equals("D")) {
+                    task = new Deadline(status, details);
+                } else {
+                    task = new Event(status, details);
+                }
+            }
+        } catch (DukeException ex) {
+            Ui.printBox(ex.getMessage());
+        }
+            return task;
     }
 
     /**
@@ -39,32 +66,17 @@ public class Storage {
      */
     public TaskList load(TaskList list) {
         try {
-            if (data.createNewFile()) {
-                Ui.printBox("No Save Record Detected... \n"
-                        + "     Creating New List! :)");
-            } else {
-                Ui.printBox("Saved Record Detected... \n"
-                        + "     Retrieving List! :)");
+            if (!data.createNewFile()) {
                 Scanner sc = new Scanner(data);
                 while (sc.hasNext()) {
                     String[] content = sc.nextLine().split("\\|");
-                    String command = content[0];
+                    String type = content[0];
                     String status = content[1];
-                    Task task;
-                    if (command.equals("T")) {
-                        task = new Todo(status, content[2]);
-                    } else {
-                        String[] description = content[2].split("@");
-                        if (command.equals("D")) {
-                            task = new Deadline(status, description);
-                        } else {
-                            task = new Event(status, description);
-                        }
-                    }
+                    Task task = newTask(type, status, content[2]);
                     list.addTask(task);
                 }
             }
-        } catch (DukeException | IOException ex) {
+        } catch (IOException ex) {
             Ui.printBox(ex.getMessage());
         }
         return list;
@@ -104,7 +116,6 @@ public class Storage {
             writer.newLine();
         }
         writer.close();
-        return "Task List Saved Successfully!\n"
-                + Ui.EXIT_MSG;
+        return Ui.SAVE_EXIT_MSG;
     }
 }

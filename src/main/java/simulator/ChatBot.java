@@ -36,13 +36,7 @@ public class ChatBot {
      */
     public String startup() {
         tasklist = storage.load(tasklist);
-        if (tasklist.size() == 0) {
-            return Ui.formatBox(Ui.INDENT_32_SPACES + "No Save Record Detected... \n"
-                    + Ui.INDENT_32_SPACES + "     Creating New List! :)");
-        } else {
-            return Ui.formatBox(Ui.INDENT_32_SPACES + "Saved Record Detected... \n"
-                    + Ui.INDENT_32_SPACES + "     Retrieving List! :)");
-        }
+        return Ui.retrieveList(tasklist.size() == 0);
     }
 
     /**

@@ -22,11 +22,9 @@ public class Gui extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
 
     /**
      * Starts up the Gui with the specified <code>Stage</code>.
@@ -42,12 +40,12 @@ public class Gui extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
