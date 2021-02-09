@@ -14,6 +14,9 @@ public interface Storage {
         File file = new File(SAVE_PATH.toString());
         (new File(SAVE_PATH.getParent().toString())).mkdir();
         file.createNewFile();
+
+        assert file != null;
+
         return file;
     }
 

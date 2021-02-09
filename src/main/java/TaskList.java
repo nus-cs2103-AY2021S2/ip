@@ -138,6 +138,9 @@ public class TaskList {
             return false;
         }
 
+        assert file != null;
+        assert sc != null;
+
         while (sc.hasNextLine()) {
             String saveLine = sc.nextLine();
             String command = getCommand(saveLine);
