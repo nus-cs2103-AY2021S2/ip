@@ -28,26 +28,13 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private static final String FOLDER_PATH = "./src/main/java/data/";
-    private static final String FILE_NAME = "All Tasks.txt";
-
-
     public String getResponse(String input) {
-        //Scanner scanner = new Scanner(System.in);
-        //scanner.useDelimiter("\n");
-        //only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
-        //String relPath = "./src/main/java/data/All Tasks.txt";//for runtest.sh put .. coz the path for that is diff
-        // compared to this
-
         try {
-            //File f = new File("./");
-            //System.out.println(f.getAbsolutePath());//to get the path to see which path java is looking
-            ArrayList<Task> prevTasks = FileAccessor.readFromTasks(FOLDER_PATH + FILE_NAME, new ArrayList<Task>());
+            ArrayList<Task> prevTasks = FileAccessor.readFromTasks(new ArrayList<Task>());
             TaskList.setList(prevTasks);
         } catch (FileNotFoundException | IllegalArgumentException e) {
-            //System.out.println("EXCEPTION");
             try {
-                Files.createDirectory(Paths.get(FOLDER_PATH));
+                Files.createDirectory(Paths.get(FileAccessor.getFolderPath()));
                 TaskList.setList(new ArrayList<Task>());
             } catch (IOException e1) {
                 assert false : "Ui.lineGetter() + \" Cannot create new directory\\n\" + Ui.lineGetter()";
@@ -60,70 +47,19 @@ public class Duke {
         //response += Ui.introduce(); dont want to respond each time!
 
         input = Parser.trimWhiteSpaces(input);
-        if (input.equals("bye")) {
-            response += Ui.exit();
-        } else if (input.length() == 0) {
+        if (input.length() == 0) {
             //if just enter spaces
             response += Ui.informOnlySpaces();
-        } else if (input.equals("list")) {
-            try {
-                response += TaskList.printList();
-            } catch (IllegalArgumentException e) {
-                response += e.getMessage();
-            }
-        } else {
-            try {
-                String[] split = Parser.splitFirstAndRest(input);
-                if (split[0].equals("done")) {
-                    try {
-                        int num = Parser.makeToInt(split[1]);
-                        Task done = TaskList.doneTask(num - 1);
-                        response += Ui.doneTask(done);
-                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                        response += e.getMessage();
-                    }
-                } else if (split[0].equals("delete")) {
-                    try {
-                        int num = Parser.makeToInt(split[1]);
-                        Task del = TaskList.deleteTask(num - 1);
-                        response += Ui.deleteTask(del, TaskList.getListSize());
-                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                        response += e.getMessage();
-                    }
-                } else if (split[0].equals("find")) {
-                    try {
-                        response += TaskList.findTask(split[1]);
-                    } catch (IllegalArgumentException e) {
-                        response += e.getMessage();
-                    }
-                } else if (split[0].equals("todo") || split[0].equals("deadline")
-                        || split[0].equals("event")) {
-                    Task task;
-                    if (split[0].equals("todo")) {
-                        task = new Todo(split[1]);
-                    } else if (split[0].equals("deadline")) {
-                        task = new Deadline(split[1]);
-                    } else {
-                        task = new Event(split[1]);
-                    }
-                    TaskList.addTask(task);
-                    response += Ui.addTask(task, TaskList.getListSize());
-                } else {
-                    throw new IllegalArgumentException();
-                }
-
-                try {
-                    FileAccessor.writeToTasks(FOLDER_PATH + FILE_NAME, TaskList.getList());
-                } catch (IOException e) {
-                    assert false : Ui.informUnableSave();
-                }
-            } catch (IllegalArgumentException e) {
-                response += Ui.informIllegalArgExc();
-            } catch (DateTimeParseException e) {
-                response += Ui.informDateTimeParseExc();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                response += e.getMessage();
-            }
+        }
+        try {
+            Command command = Parser.parse(input);
+            response += command.action();
+        } catch (IllegalArgumentException e) {
+            response += Ui.informIllegalArgExc();
+        } catch (DateTimeParseException e) {
+            response += Ui.informDateTimeParseExc();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            response += e.getMessage();
         }
         return response;
     }

@@ -9,18 +9,30 @@ import java.io.FileWriter;
  * Represents the accessing a file to write and read.
  */
 public class FileAccessor {
+    //File f = new File("./");
+    //System.out.println(f.getAbsolutePath());
+    //to get the path to see which path java is looking
+    private static final String FOLDER_PATH = "./src/main/java/data/";
+    private static final String FILE_NAME = "All Tasks.txt";
+
+    public static String getFolderPath() {
+        return FOLDER_PATH;
+    }
+
+    public static String getFileName() {
+        return FILE_NAME;
+    }
 
     /**
      * Returns a ArrayList which has the tasks in the hard drive file specified by path appended to it.
      *
-     * @param path Specify the path where the file with data exists.
      * @param tasks ArrayList to save the tasks from hard drive to.
      * @return ArrayList of tasks saved in path.
      * @throws FileNotFoundException if file at path does not exist.
      * @throws IllegalArgumentException if data in file is not in the correct format.
      */
-    public static ArrayList<Task> readFromTasks(String path, ArrayList<Task> tasks) throws FileNotFoundException {
-        File file = new File(path);
+    public static ArrayList<Task> readFromTasks(ArrayList<Task> tasks) throws FileNotFoundException {
+        File file = new File(FOLDER_PATH + FILE_NAME);
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
@@ -51,12 +63,11 @@ public class FileAccessor {
     /**
      * Writes the data from tasks to the path.
      *
-     * @param path Specify the path where the file with data exists.
      * @param tasks ArrayList of tasks to write to path.
      * @throws IOException if unable to write to path.
      */
-    public static void writeToTasks(String path, ArrayList<Task> tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter(path);
+    public static void writeToFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter fileWriter = new FileWriter(FOLDER_PATH + FILE_NAME);
         String taskToWrite = "";
         for (Task task : tasks) {
             String done = "0";
@@ -72,16 +83,17 @@ public class FileAccessor {
                 taskToWrite =
                         taskToWrite + "D|" + done + "|" + deadline.task + "|" + deadline.getDeadline()
                                 + System.lineSeparator();
-            } else {
+            } else if (task instanceof Event){
                 Event event = (Event) task;
                 taskToWrite =
                         taskToWrite + "E|" + done + "|" + event.task + "|" + event.getEvent() + System.lineSeparator();
+            } else {
+                assert false : "Wrong part of writeToFile code";
             }
         }
         fileWriter.write(taskToWrite);
         //write all as one string outside or else will keep writing for each task, but somehow give
         // ioexception when put inside for loop?
         fileWriter.close();
-        //rmb to close
     }
 }

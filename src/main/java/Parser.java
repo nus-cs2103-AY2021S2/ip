@@ -42,4 +42,30 @@ public class Parser {
                      + Ui.lineGetter());
         }
     }
+
+    public static Command parse(String input) {
+        if (input.equals("bye")) {
+            return new ByeCommand();
+        } else if (input.equals("list")) {
+            return new ListCommand();
+        }
+
+        String[] split = Parser.splitFirstAndRest(input);
+        String firstPartOfCommand = split[0];
+        String secondPartOfCommand = split[1];
+        boolean isWritingToFile = firstPartOfCommand.equals("todo") || firstPartOfCommand.equals("deadline")
+                || firstPartOfCommand.equals("event");
+
+        if (firstPartOfCommand.equals("done")) {
+            return new DoneCommand(secondPartOfCommand);
+        } else if (firstPartOfCommand.equals("delete")) {
+            return new DeleteCommand(secondPartOfCommand);
+        } else if (firstPartOfCommand.equals("find")) {
+            return new FindCommand(secondPartOfCommand);
+        } else if (isWritingToFile) {
+            return new WriteCommand(firstPartOfCommand, secondPartOfCommand);
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
 }
