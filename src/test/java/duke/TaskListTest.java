@@ -1,11 +1,8 @@
-package java.duke;
-
-import duke.DukeEmptyDescriptionException;
-import duke.Task;
-import duke.TaskList;
-import org.junit.jupiter.api.Test;
+package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
