@@ -13,6 +13,14 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void changeDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
     /**
      * Returns the String representation of the Task.
      *
@@ -25,7 +33,7 @@ public abstract class Task {
 
     /**
      * Returns the save format of the Task.
-     * 
+     *
      * @return Save format of the Task.
      */
     public String toLog() {
@@ -33,11 +41,7 @@ public abstract class Task {
         return icon + " | " + doneIcon + " | " + this.description;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void changeDescription(String newDescription) {
-        this.description = newDescription;
+    public boolean isTimed() {
+        return false;
     }
 }
