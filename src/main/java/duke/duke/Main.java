@@ -30,6 +30,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         Duke bot = startMain();
+        assert bot != null : "There should be a Duke object at this point";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             VBox ap = fxmlLoader.load();
@@ -75,6 +76,8 @@ public class Main extends Application {
      * @throws IOException If error occurs while writing to file.
      */
     public static String runUserCommand(Command userCommand, Duke bot) throws IOException {
+        assert userCommand != null : "User command should not be empty at this point";
+        assert file != null;
         return userCommand.run(file, bot);
     }
 }

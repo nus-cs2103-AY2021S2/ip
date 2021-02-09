@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import duke.duke.Duke;
+import duke.exceptions.InvalidArgumentException;
 import duke.storage.Storage;
 
 /**
@@ -38,6 +39,18 @@ public class DeadlineCommand extends Command {
      */
     public String getDeadline() {
         return deadline;
+    }
+
+    public static String[] validateArgument(String userInput) throws InvalidArgumentException {
+        String[] userInputArr = userInput.split("/by");
+        if (userInputArr.length == 1) {
+            throw new InvalidArgumentException("Please input task due date using '/by (date)'!\n");
+        }
+        String[] str = userInputArr[0].split(" ", 2);
+        if (str.length == 1) {
+            throw new InvalidArgumentException("Please input task description!\n");
+        }
+        return userInputArr;
     }
 
     @Override

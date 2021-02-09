@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import duke.duke.Duke;
+import duke.exceptions.InvalidArgumentException;
 import duke.storage.Storage;
 
 /**
@@ -40,6 +41,19 @@ public class EventCommand extends Command {
         return eventTime;
     }
 
+    public static String[] validateArgument(String userInput) throws InvalidArgumentException {
+        String[] userInputArr = userInput.split("/at");
+        if (userInputArr.length == 1) {
+            throw new InvalidArgumentException("Please input task due date using '/at (date)'!\n");
+        }
+        String[] s = userInputArr[0].split(" ", 2);
+
+        if (s.length == 1) {
+            throw new InvalidArgumentException("Please input task description!\n");
+        }
+
+        return userInputArr;
+    }
     @Override
     public String run(File file, Duke bot) throws IOException {
         String output = bot.addTask(getDescription(), getCommand(), getEventTime());
