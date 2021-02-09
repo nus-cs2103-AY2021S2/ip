@@ -17,87 +17,41 @@ public class UserInterface {
      *
      * @throws IOException
      */
-    public void logo() throws IOException {
+    public String logo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        this.output.write("Hello from\n" + logo + "\n");
-        this.output.flush();
+        return ("Hello from\n" + logo + "\n");
     }
 
     /*
      * Greets the user.
-     *
-     * @throws IOException
      */
-    public void greet() throws IOException {
-        this.output.write("Hello! I'm Duke\n");
-        this.output.flush();
+    public String greet() {
+        return "Hello! I'm Duke\n";
     }
 
     /*
      * Bids the user farewell.
-     *
-     * @throws IOException
      */
-    public void goodBye() throws IOException {
-        this.output.write("Goodbye!\n");
-        this.output.flush();
+    public String goodBye() {
+        return "Goodbye\n";
     }
 
     /*
      * Prompts the user to input a task.
-     *
-     * @throws IOException
      */
-    public void prompt() throws IOException{
-        this.output.write("What can I do for you?" + "\n");
-        this.output.flush();
+    public String prompt() {
+        return "What can I do for you?\n";
     }
 
     /*
      * Lets the user know that a task has been added.
-     *
-     * @throws IOException
      */
-    public void addedTask() throws IOException {
-        this.output.write("Added task!\n");
-        this.output.flush();
-    }
-
-    /*
-     * Lets the user know that a task has been removed.
-     *
-     * @throws IOException
-     */
-    public void removedTask() throws IOException {
-        this.output.write("Removed task.\n");
-        this.output.flush();
-    }
-
-    /*
-     * Lets the user know that a task has been marked as complete.
-     *
-     * @throws IOException
-     */
-    public void completedTask() throws IOException {
-        this.output.write("Marked task as complete!\n");
-        this.output.flush();
-    }
-
-    /*
-     * Lets the user know that a task has been removed.
-     *
-     * @throws IOException
-     */
-    public void foundPrompt() throws IOException {
-        this.output.write("Would you like to:\n" +
-                "[1] Mark a task as complete\n" +
-                "[2] Remove a task\n" +
-                "from the found tasks?\n");
-        this.output.flush();
+    public String addedTask() {
+        return "Added task!\n";
     }
 
     /*
@@ -105,13 +59,15 @@ public class UserInterface {
      *
      * @throws IOException
      */
-    public void listTasks() throws IOException {
+    public String listTasks() throws IOException {
         int taskNumber = 1;
+        String result = "All tasks: \n";
         for(Task t : TaskList.taskList) {
-            this.output.write(taskNumber + ": " + t + "\n");
+            result += (taskNumber + ": " + t + "\n");
             this.output.flush();
             taskNumber++;
         }
+        return result;
     }
 
     /*
@@ -119,12 +75,13 @@ public class UserInterface {
      *
      * @throws IOException
      */
-    public void listTasks(List<Task> foundTasks) throws IOException {
+    public String listTasks(List<Task> foundTasks) throws IOException {
         int taskNumber = 1;
+        String result = "There were " + foundTasks.size() + " tasks containing your keyword:\n";
         for(Task t : foundTasks){
-            this.output.write(taskNumber + ": " + t + "\n");
-            this.output.flush();
+            result += (taskNumber + ": " + t + "\n");
             taskNumber++;
         }
+        return result;
     }
 }
