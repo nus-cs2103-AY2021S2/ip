@@ -31,7 +31,7 @@ public class Event extends ListItem {
 
     @Override
     public String toString() {
-        return "[E]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask() + " (at: " + date + ")";
+        return "[E]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask() + " (at: " + date + ")" + super.printTags();
     }
 
     public String getDate() {
