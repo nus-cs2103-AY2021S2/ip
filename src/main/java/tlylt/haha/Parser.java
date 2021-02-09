@@ -15,7 +15,7 @@ public class Parser {
      * @return Correct task number as an integer.
      * @throws HahaTaskNumberNotIntException Task number given is not an integer.
      */
-    static int taskNumber(String command) throws HahaTaskNumberNotIntException {
+    static int getTaskNumber(String command) throws HahaTaskNumberNotIntException {
         try {
             return Integer.parseInt("" + command.charAt(command.length() - 1));
         } catch (NumberFormatException ex) {
@@ -30,6 +30,7 @@ public class Parser {
      * @return Command + details.
      */
     static String[] tokenize(String command) {
+        assert command.length() > 0 : "command is too short";
         return command.split(" ", 2);
     }
 
@@ -157,6 +158,7 @@ public class Parser {
         case "bye":
             return LegitCommand.BYE;
         default:
+            assert false : firstWord;
             throw new IllegalStateException("Unexpected value: " + firstWord);
         }
     }

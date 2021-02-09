@@ -20,7 +20,6 @@ public class TaskList {
      * Outputs information about adding of task to database.
      */
     String tellAdd() {
-        System.out.println("Got it. I've added this task:");
         return "Got it. I've added this task:\n";
     }
 
@@ -29,8 +28,7 @@ public class TaskList {
      */
     String tellSize() {
         String task = database.size() > 1 ? " tasks" : " task";
-        System.out.println("Now you have " + database.size() + task + " in the list");
-        return "Now you have " + database.size() + task + " in the list\n";
+        return String.format("Now you have %d %s in the list\n", database.size(), task);
     }
 
     /**
@@ -39,11 +37,9 @@ public class TaskList {
      * @param task Task created by user.
      */
     String addToDB(Task task) {
-        String response = "";
-
         database.add(task);
-        response += tellAdd();
-        System.out.println("  " + database.get(database.size() - 1));
+
+        String response = tellAdd();
         response += "  " + database.get(database.size() - 1) + "\n";
         response += tellSize();
         return response;
@@ -57,19 +53,15 @@ public class TaskList {
     String deleteFromDB(String inputNum) {
         String response = "";
         try {
-            int num = Parser.taskNumber(inputNum);
+            int num = Parser.getTaskNumber(inputNum);
             Task currentTask = database.get(num - 1);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(currentTask);
             response += "Noted. I've removed this task:\n";
             response += currentTask + "\n";
             database.remove(currentTask);
             response += tellSize();
         } catch (HahaTaskNumberNotIntException ex) {
-            System.out.println(ex);
             return ex.toString();
         } catch (IndexOutOfBoundsException ex) {
-            System.out.println("OOPS! Wrong number!\nTry specify the right task number");
             return "OOPS! Wrong number!\nTry specify the right task number\n";
         }
         return response;
@@ -106,15 +98,12 @@ public class TaskList {
     String listFromDB() {
         String response = "";
         if (database.size() == 0) {
-            System.out.println("You have nothing going on!");
             response += "You have nothing going on!\n";
         } else {
-            System.out.println("Here are your list of tasks:");
             response += "Here are your list of tasks:\n";
             for (int i = 0; i < database.size(); i++) {
                 String idx = Integer.toString(i + 1) + '.';
                 String task = idx + database.get(i);
-                System.out.println(task);
                 response += task + "\n";
             }
         }
@@ -123,7 +112,6 @@ public class TaskList {
 
     private String findFromDB(String keyword, Ui ui) {
         String response = "";
-        System.out.println("Here are the matching tasks in your list:");
         response += "Here are the matching tasks in your list:\n";
         boolean hasRelated = false;
         for (int i = 0; i < database.size(); i++) {
@@ -150,25 +138,20 @@ public class TaskList {
     String markDoneToDB(String inputNum) {
         String response = "";
         try {
-            int givenIndex = Parser.taskNumber(inputNum) - 1;
+            int givenIndex = Parser.getTaskNumber(inputNum) - 1;
             if (givenIndex < 0 || givenIndex >= database.size()) {
-                System.out.println("OOPS! Wrong number!\nTry specify the right task number");
-                response += "OOPS! Wrong number!\nTry specify the right task number\n";
-            } else {
-                Task currentTask = database.get(givenIndex);
-                if (currentTask.getIsDone()) {
-                    System.out.println("OOPS! I've marked this task as done ALREADY");
-                    response += "OOPS! I've marked this task as done ALREADY\n";
-                } else {
-                    System.out.println("Nice! I've marked this task as done:");
-                    response += "Nice! I've marked this task as done:\n";
-                    currentTask.setDone(true);
-                    System.out.println(currentTask);
-                    response += currentTask + "\n";
-                }
+                return "OOPS! Wrong number!\nTry specify the right task number\n";
             }
+
+            Task currentTask = database.get(givenIndex);
+            if (currentTask.getIsDone()) {
+                return "OOPS! I've marked this task as done ALREADY\n";
+            }
+            response += "Nice! I've marked this task as done:\n";
+            currentTask.setDone(true);
+            response += currentTask + "\n";
+
         } catch (HahaTaskNumberNotIntException ex) {
-            System.out.println(ex);
             return ex.toString();
         }
         return response;
@@ -211,7 +194,8 @@ public class TaskList {
             this.updateFile();
             break;
         default:
-            throw new IllegalStateException("Unexpected value: " + command);
+            assert false : command;
+            throw new AssertionError(command);
         }
         return response;
     }
