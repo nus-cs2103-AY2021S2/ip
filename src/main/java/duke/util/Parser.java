@@ -76,6 +76,13 @@ public class Parser {
         System.exit(0);
     }
 
+    /**
+     * Calls TaskHandler for Done command.
+     * @param command Command that has been called.
+     * @param input Input from user command.
+     * @param taskList TaskList containing tasks.
+     * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
+     */
     private static void handleDone(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
         try {
             TaskHandler.doneTask(input, taskList);
@@ -84,6 +91,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Calls TaskHandler for Delete command.
+     * @param command Command that has been called.
+     * @param input Input from user command.
+     * @param taskList TaskList containing tasks.
+     * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
+     */
     private static void handleDelete(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
         try {
             TaskHandler.deleteTask(input, taskList);
@@ -92,6 +106,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Calls TaskHandler for Find command.
+     * @param command Command that has been called.
+     * @param input Input from user command.
+     * @param taskList TaskList containing tasks.
+     * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
+     */
     private static void handleFind(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
         try {
             TaskHandler.findTasks(input, taskList);
@@ -100,6 +121,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Calls TaskHandler for Task command.
+     * @param command Command that has been called.
+     * @param input Input from user command.
+     * @param taskList TaskList containing tasks.
+     * @throws DukeException Occurs when a command has been passed in with the wrong format.
+     */
     private static void handleTask(Commands command, String input, ArrayList<Task> taskList) throws DukeException {
         try {
             TaskHandler.addTask(command, input, taskList);
