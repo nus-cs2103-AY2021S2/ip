@@ -34,7 +34,7 @@ public class AddTask extends Command {
     }
 
     private void handleNewTask(TaskList taskList) throws DukeException {
-        Task newTask = null;
+        Task newTask = new Task();
         this.outputMessage = "Got it. I've added this task: \n";
 
         switch (this.commandType) {
