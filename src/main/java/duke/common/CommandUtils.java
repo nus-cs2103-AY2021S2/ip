@@ -25,10 +25,10 @@ public class CommandUtils {
     }
 
     /**
-     * Checks whether the index entered by the user is within the range of the tasklist's size.
+     * Checks whether the index entered by the user is within the range of the size of task list.
      *
      * @param index index entered
-     * @param size tasklist's
+     * @param size size of task list
      * @throws DukeException when the index is out of bounds.
      */
     public static void checkIndexOutOfBounds(int index, int size) throws DukeException {
@@ -38,12 +38,12 @@ public class CommandUtils {
     }
 
     /**
-     * Checks whether the tasklist is empty.
+     * Checks whether the task list is empty.
      *
-     * @param taskList tasklist to be checked
+     * @param taskList task list to be checked
      * @param isQuery indicator used to differentiate whether is it a search command
      * @return size of the tasklist
-     * @throws DukeException when the tasklist is empty
+     * @throws DukeException when the task list is empty
      */
     public static int checkListIsEmpty(TaskList taskList, boolean isQuery) throws DukeException {
         int size = taskList.size();

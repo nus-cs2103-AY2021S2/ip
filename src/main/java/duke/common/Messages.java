@@ -22,6 +22,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_TASK_FORMAT = "You have entered an invalid %1$s format.";
     public static final String MESSAGE_EMPTY_TASK_DESCRIPTION = "The description of %1$s cannot be empty.";
     public static final String MESSAGE_EMPTY_DATETIME_DESCRIPTION = "The date and time of %1$s cannot be empty.";
-
-
+    public static final String MESSAGE_EMPTY_DESCRIPTION = "The description cannot be empty.";
 }

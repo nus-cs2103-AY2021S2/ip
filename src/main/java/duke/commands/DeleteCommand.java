@@ -4,6 +4,8 @@ import static duke.common.CommandUtils.ALL;
 import static duke.common.CommandUtils.assertInputs;
 import static duke.common.CommandUtils.checkIndexOutOfBounds;
 import static duke.common.CommandUtils.checkListIsEmpty;
+import static duke.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static duke.common.Utils.checkIsNumeric;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
@@ -35,20 +37,30 @@ public class DeleteCommand extends Command {
         assertInputs(input);
         int listSize = checkListIsEmpty(taskList, false);
 
-        String returnMessage;
+        String response;
         if (input.equals(ALL)) {
-            TaskList printTaskList = taskList.clear();
-            assert taskList.size() > 0 : "taskList should be emptied";
-            returnMessage = ui.showDeleteMessage(printTaskList);
+            response = processDeleteAllCommand(taskList, ui);
+        } else if (checkIsNumeric(input)) {
+            response = processDeleteCommand(taskList, ui, input, listSize);
         } else {
-            int index = Integer.parseInt(input) - 1;
-            checkIndexOutOfBounds(index, listSize);
-            assert index >= 0 : "input should not be negative";
-            Task task = taskList.delete(index);
-            assert taskList.get(index) == null : "task should be deleted";
-            returnMessage = ui.showDeleteMessage(task, taskList.size());
+            throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         storage.saveFile(taskList);
-        return new CommandResponse(returnMessage);
+        return new CommandResponse(response);
+    }
+
+    private String processDeleteAllCommand(TaskList taskList, Ui ui) {
+        TaskList printTaskList = taskList.clear();
+        assert taskList.size() > 0 : "task list should be emptied";
+        return ui.showDeleteMessage(printTaskList);
+    }
+
+    private String processDeleteCommand(TaskList taskList, Ui ui, String input, int listSize) throws DukeException {
+        int index = Integer.parseInt(input) - 1;
+        checkIndexOutOfBounds(index, listSize);
+        assert index >= 0 : "input should not be negative";
+        Task task = taskList.delete(index);
+        assert taskList.get(index) == null : "task should be deleted";
+        return ui.showDeleteMessage(task, taskList.size());
     }
 }

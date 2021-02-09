@@ -1,7 +1,9 @@
 package duke.parser;
 
+import static duke.common.CommandUtils.ALL;
 import static duke.common.Messages.MESSAGE_COMMAND_NOT_FOUND;
 import static duke.common.Messages.MESSAGE_EMPTY_DATETIME_DESCRIPTION;
+import static duke.common.Messages.MESSAGE_EMPTY_DESCRIPTION;
 import static duke.common.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
 import static duke.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static duke.common.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
@@ -28,6 +30,10 @@ import duke.tasks.ToDo;
  * Parses the user's input.
  */
 public class Parser {
+    private static final String DEADLINE_DELIMITER = "/by";
+    private static final String EVENT_DELIMITER = "/at";
+    private static final String DATETIME_DELIMITER = "T";
+
     /**
      * Parses the user input into its respective command.
      *
@@ -72,7 +78,7 @@ public class Parser {
     private static Command parseDoneAndDeleteCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         checkInputsLength(inputs);
         String input = inputs[1];
-        if (!Utils.checkIsNumeric(input) && !input.equals("all")) {
+        if (!Utils.checkIsNumeric(input) && !input.equals(ALL)) {
             throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
@@ -93,7 +99,7 @@ public class Parser {
      * @throws DukeException when the user types an invalid command format
      */
     private static Command parseEventAndDeadlineCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
-        String delimiter = dukeCommand == DukeCommand.EVENT ? "/at" : "/by";
+        String delimiter = dukeCommand == DukeCommand.EVENT ? EVENT_DELIMITER : DEADLINE_DELIMITER;
         int index = getDelimiterIndex(inputs, dukeCommand.toLower(), delimiter);
         String desc = String.join(" ", Arrays.copyOfRange(inputs, 1, index));
         String date = checkIsValidDate(inputs, index);
@@ -146,7 +152,7 @@ public class Parser {
     }
 
     private static String checkIsValidDate(String[] inputs, int index) throws DukeException {
-        String date = String.join("T", Arrays.copyOfRange(inputs, index + 1, inputs.length));
+        String date = String.join(DATETIME_DELIMITER, Arrays.copyOfRange(inputs, index + 1, inputs.length));
         if (!Utils.checkIsValidDate(date)) {
             throw new DukeException(MESSAGE_INVALID_DATETIME_FORMAT);
         }
@@ -173,7 +179,7 @@ public class Parser {
 
     private static void checkInputsLength(String[] inputs) throws DukeException {
         if (inputs.length < 2) {
-            throw new DukeException("The description cannot be empty.");
+            throw new DukeException(MESSAGE_EMPTY_DESCRIPTION);
         }
     }
 }
