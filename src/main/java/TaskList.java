@@ -14,6 +14,7 @@ public class TaskList {
      * @return Acknowledgment that task has been marked as done.
      */
     public static String markDone(int index, List<Task> tasks) {
+        assert index > tasks.size() : "index is invalid and command should not have been allowed";
         String reply = "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         tasks.get(index).markAsDone();
         reply += "\nGood job, I have marked this task as done!";
@@ -24,6 +25,7 @@ public class TaskList {
         } catch (UnableToSaveDataException e) {
             reply += "\nSorry, unable to save data to the hard disk.";
         }
+        assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
 
@@ -57,6 +59,7 @@ public class TaskList {
         } catch (UnableToSaveDataException e) {
             reply += "\n" + "Sorry, unable to save data to the hard disk.";
         }
+        assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
 
@@ -93,6 +96,7 @@ public class TaskList {
         } catch (UnableToSaveDataException e) {
             reply += "\n" + "Sorry, unable to save data to the hard disk.";
         }
+        assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
 
@@ -127,6 +131,7 @@ public class TaskList {
         } catch (UnableToSaveDataException e) {
             reply += "Sorry, unable to save data to the hard disk.";
         }
+        assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
 
@@ -156,6 +161,7 @@ public class TaskList {
         } catch (UnableToSaveDataException e) {
             reply += Ui.printUnableToSaveDataMessage();
         }
+        assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
 
@@ -175,6 +181,7 @@ public class TaskList {
             listCount++;
         }
         reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
 
@@ -197,6 +204,7 @@ public class TaskList {
             }
         }
         reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
 

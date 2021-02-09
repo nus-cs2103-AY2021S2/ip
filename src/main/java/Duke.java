@@ -13,6 +13,7 @@ public class Duke {
      * @throws InvalidCommandException If the command cannot be recognised.
      */
     public static String runCommand(String command) throws InvalidCommandException {
+        assert !command.isEmpty() : "command should not be an empty string";
         String reply;
         String parsedCommand = Parser.parseCommand(command);
         if (command.equals("list")) {
@@ -48,10 +49,12 @@ public class Duke {
         } else {
             throw new InvalidCommandException();
         }
+        assert !reply.isEmpty() : "reply should not be an empty string";
         return reply;
     }
 
     public String getResponse(String input) {
+        assert !input.isEmpty() : "input should not be an empty string";
         String reply;
         try {
             reply = runCommand(input);
