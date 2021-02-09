@@ -22,7 +22,7 @@ public class Storage {
     private static TaskList taskList;
     private static String rootProject = System.getProperty("user.dir");
     private static Path dataFilePath =
-        Paths.get(rootProject,  "data", "duke.txt");
+        Paths.get(rootProject, "data", "duke.txt");
     private static Path dataFolderPath =
         Paths.get(rootProject, "data");
 
