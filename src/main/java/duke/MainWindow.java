@@ -40,16 +40,23 @@ public class MainWindow extends SplitPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        // Add number to listView and change color
+        // Add number to listView and set text/background color
         listView.setCellFactory(list -> new ListCell<>() {
             @Override
             protected void updateItem(Task item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty ? "" : (getIndex() + 1) + ". " + item);
-                setStyle("-fx-text-fill:white;-fx-background-color:"
-                        + (getIndex() % 2 == 0
-                        ? "rgb(140, 140, 140);"
-                        : "rgb(130, 130, 130);"));
+
+                if (empty) {
+                    setText("");
+                    setStyle(String.format("-fx-background-color:%s",
+                            getIndex() % 2 == 0 ? "rgb(140, 140, 140);" : "rgb(130, 130, 130);"));
+                } else {
+                    setText((getIndex() + 1) + ". " + item);
+                    setStyle(String.format("-fx-text-fill:%s;-fx-background-color:%s;",
+                            item.isHighPriority() ? "yellow " : "white",
+                            getIndex() % 2 == 0 ? "rgb(140, 140, 140)" : "rgb(130, 130, 130)"));
+
+                }
             }
         });
     }

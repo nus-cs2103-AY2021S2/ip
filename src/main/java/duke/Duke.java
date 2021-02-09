@@ -206,6 +206,18 @@ public class Duke {
         return ui.displaySortMessage();
     }
 
+    private String setHighPriority(String num) throws DukeInputException {
+        int taskNum = Integer.parseInt(num) - 1;
+        String task = tasks.setPriority(true, taskNum);
+        return ui.displaySetPriority(true, task);
+    }
+
+    private String setLowPriority(String num) throws DukeInputException {
+        int taskNum = Integer.parseInt(num) - 1;
+        String task = tasks.setPriority(false, taskNum);
+        return ui.displaySetPriority(false, task);
+    }
+
     private String processCommand(Command command, String args) {
         if (args.equals("-h")) {
             return command.getHelp();
@@ -225,10 +237,14 @@ public class Duke {
                 return addTask(Event.createEvent(args));
             case HELP:
                 return displayHelp();
+            case HIGHPRIORITY:
+                return setHighPriority(args);
             case LIST:
                 return listOutTask();
             case LOAD:
                 return load();
+            case LOWPRIORITY:
+                return setLowPriority(args);
             case SAVE:
                 return save();
             case SEARCH:

@@ -82,5 +82,4 @@ public class TaskListTest {
         assertEquals("[D][ ] c (by: 1 Jan)", lst.getList().get(3).toString());
         assertEquals("[E][ ] b (at: 2 Feb)", lst.getList().get(4).toString());
     }
-
 }

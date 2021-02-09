@@ -17,9 +17,10 @@ public class Deadline extends Task {
         super(description, date);
     }
 
-    private Deadline(String description, LocalDate date, boolean isDone) {
+    private Deadline(String description, LocalDate date, boolean isDone, boolean isHighPriority) {
         super(description, date);
         this.isDone = isDone;
+        this.isHighPriority = isHighPriority;
     }
 
     /**
@@ -71,6 +72,7 @@ public class Deadline extends Task {
     protected List<String> exportData() {
         return List.of(TYPE,
                 isDone ? "1" : "0",
+                isHighPriority ? "1" : "0",
                 description,
                 date.toString());
     }
@@ -83,9 +85,11 @@ public class Deadline extends Task {
      */
     protected static Deadline importData(String[] args) {
         assert args[1].equals("1") || args[1].equals("0") : "Parser.checkImportFormat() missed an invalid input";
+        assert args[2].equals("1") || args[2].equals("0") : "Parser.checkImportFormat() missed an invalid input";
 
         boolean isDone = args[1].equals("1");
-        return new Deadline(args[2], LocalDate.parse(args[3]), isDone);
+        boolean isHighPriority = args[2].equals("1");
+        return new Deadline(args[3], LocalDate.parse(args[4]), isDone, isHighPriority);
     }
 
     /**
@@ -95,6 +99,26 @@ public class Deadline extends Task {
      */
     @Override
     public Deadline markDone() {
-        return new Deadline(description, date, true);
+        return new Deadline(description, date, true, isHighPriority);
+    }
+
+    /**
+     * Returns the Deadline as high priority;
+     *
+     * @return High priority Deadline.
+     */
+    @Override
+    public Deadline setHighPriority() {
+        return new Deadline(description, date, isDone, true);
+    }
+
+    /**
+     * Returns the Deadline as low priority;
+     *
+     * @return low priority Deadline.
+     */
+    @Override
+    public Deadline setLowPriority() {
+        return new Deadline(description, date, isDone, false);
     }
 }

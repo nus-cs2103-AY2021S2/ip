@@ -68,18 +68,19 @@ public class ParserTest {
 
     @Test
     public void checkImportFormatTest() {
-        assertDoesNotThrow(() -> Parser.checkImportFormat("T;1;a"));
-        assertDoesNotThrow(() -> Parser.checkImportFormat("D;1;a;2011-01-01"));
-        assertDoesNotThrow(() -> Parser.checkImportFormat("E;0;a;2011-01-01"));
+        assertDoesNotThrow(() -> Parser.checkImportFormat("T;1;0;a"));
+        assertDoesNotThrow(() -> Parser.checkImportFormat("D;1;0;a;2011-01-01"));
+        assertDoesNotThrow(() -> Parser.checkImportFormat("E;0;0;a;2011-01-01"));
 
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("Z;1;a;2011-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;3;;2011-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;a;201-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;a;2011-01-01;"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;a;2011-01-01;b"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;a;"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;a;;2011-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat(";D;1;a;;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("Z;1;0;a;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;3;0;;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;201-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;2011-01-01;"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;2011-01-01;b"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat(";D;1;0;a;;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;2;a;2011-01-01"));
         assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("a"));
         assertThrows(DukeInputException.class, () -> Parser.checkImportFormat(""));
     }

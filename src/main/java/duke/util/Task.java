@@ -11,6 +11,7 @@ public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
     protected LocalDate date;
+    protected boolean isHighPriority;
 
     /**
      * Constructor to create a Task with a description.
@@ -21,6 +22,7 @@ public abstract class Task implements Comparable<Task> {
         this.description = description;
         this.isDone = false;
         this.date = null;
+        this.isHighPriority = false;
     }
 
     /**
@@ -33,12 +35,29 @@ public abstract class Task implements Comparable<Task> {
         this.description = description;
         this.isDone = false;
         this.date = date;
+        this.isHighPriority = false;
     }
 
     /**
-     * Returns a new task marked as done.
+     * Returns the task marked as done.
+     *
+     * @return Done task.
      */
     public abstract Task markDone();
+
+    /**
+     * Returns the task as high priority;
+     *
+     * @return High priority task.
+     */
+    public abstract Task setHighPriority();
+
+    /**
+     * Returns the task as low priority;
+     *
+     * @return Low priority task.
+     */
+    public abstract Task setLowPriority();
 
     private String getStatus() {
         return isDone ? "X" : " ";
@@ -63,13 +82,25 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
+     * Returns priority of task.
+     *
+     * @return True if high priority else false.
+     */
+    public boolean isHighPriority() {
+        return isHighPriority;
+    }
+
+    /**
      * Returns String in the form "[status] description".
      *
      * @return String representation of Task.
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatus(), description);
+        return String.format("[%s] %s%s",
+                getStatus(),
+                isHighPriority ? "IMPT! " : "",
+                description);
     }
 
     /**
@@ -81,9 +112,10 @@ public abstract class Task implements Comparable<Task> {
 
     /**
      * Compares 2 task.
-     *     First, completed task is smaller.
-     *     Second, absence of date (eg. todo) is smaller.
-     *     Third, eariler date is smaller
+     *     First, high priority task is smaller.
+     *     Second, completed task is smaller.
+     *     Third, absence of date (eg. todo) is smaller.
+     *     Forth, eariler date is smaller
      *     Last, by description lexicographically.
      *
      * @param other The task to be compared to.
@@ -91,6 +123,16 @@ public abstract class Task implements Comparable<Task> {
      */
     @Override
     public int compareTo(Task other) {
+        if (!(isHighPriority ^ other.isHighPriority)) {
+            return compareDone(other);
+        } else if (isHighPriority) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+
+    private int compareDone(Task other) {
         if (!(isDone ^ other.isDone)) {
             return compareDate(other);
         } else if (isDone) {

@@ -14,9 +14,10 @@ public class Todo extends Task {
         super(description);
     }
 
-    private Todo(String description, boolean isDone) {
+    private Todo(String description, boolean isDone, boolean isHighPriority) {
         super(description);
         this.isDone = isDone;
+        this.isHighPriority = isHighPriority;
     }
 
     /**
@@ -52,6 +53,7 @@ public class Todo extends Task {
     protected List<String> exportData() {
         return List.of(TYPE,
                 isDone ? "1" : "0",
+                isHighPriority ? "1" : "0",
                 description);
     }
 
@@ -63,9 +65,11 @@ public class Todo extends Task {
      */
     protected static Todo importData(String[] args) {
         assert args[1].equals("1") || args[1].equals("0") : "Parser.checkImportFormat() missed an invalid input";
+        assert args[2].equals("1") || args[2].equals("0") : "Parser.checkImportFormat() missed an invalid input";
 
         boolean isDone = args[1].equals("1");
-        return new Todo(args[2], isDone);
+        boolean isHighPriority = args[2].equals("1");
+        return new Todo(args[3], isDone, isHighPriority);
     }
 
     /**
@@ -75,6 +79,26 @@ public class Todo extends Task {
      */
     @Override
     public Todo markDone() {
-        return new Todo(description, true);
+        return new Todo(description, true, isHighPriority);
+    }
+
+    /**
+     * Returns the Todo as high priority;
+     *
+     * @return High priority Todo.
+     */
+    @Override
+    public Todo setHighPriority() {
+        return new Todo(description, isDone, true);
+    }
+
+    /**
+     * Returns the Todo as low priority;
+     *
+     * @return low priority Todo.
+     */
+    @Override
+    public Todo setLowPriority() {
+        return new Todo(description, isDone, false);
     }
 }

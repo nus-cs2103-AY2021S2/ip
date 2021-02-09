@@ -7,8 +7,10 @@ public enum Command {
     DONE,
     EVENT,
     HELP,
+    HIGHPRIORITY,
     LIST,
     LOAD,
+    LOWPRIORITY,
     SAVE,
     SEARCH,
     SORT,
@@ -28,10 +30,14 @@ public enum Command {
             return "event [description] /at [date]\n\t- Add an event task with a date (YYYY-MM-DD)";
         case HELP:
             return "help\n\t- Display list of commands";
+        case HIGHPRIORITY:
+            return "highpriority [int]\n\t- Set this task as high priority";
         case LIST:
             return "list\n\t- List out all task";
         case LOAD:
             return "load\n\t- Load tasklist from saved file";
+        case LOWPRIORITY:
+            return "lowpriority [int]\n\t- Set this task as low priority";
         case SAVE:
             return "save\n\t- save tasklist to \"data/dukeData.txt\"";
         case SEARCH:
