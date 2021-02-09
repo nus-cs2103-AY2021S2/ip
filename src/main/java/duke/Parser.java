@@ -85,6 +85,7 @@ public class Parser {
 
     private static String command(String text) {
         String[] commandLine = text.split(" ");
+        assert commandLine.length > 0 : "Cannot differentiate command from given input";
         return commandLine[0];
     }
 
@@ -117,6 +118,8 @@ public class Parser {
         String command = command(text);
         text = text.replaceFirst(command + " ", "");
         String date = "";
+
+        assert text.contains("/at") || text.contains("/by") : "Date for /at or /by not specified";
 
         switch (command) {
         case "event":
