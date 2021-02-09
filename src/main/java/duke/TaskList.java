@@ -7,16 +7,24 @@ import java.util.Collection;
 public class TaskList {
     private ArrayList<Task> taskList;
 
+    /**
+     * Constructs new task list.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Constructs new task list with existing list.
+     *
+     * @param tasks Collection of tasks.
+     */
     public TaskList(Collection<Task> tasks) {
         this.taskList = new ArrayList<>(tasks);
     }
 
     /**
-     * Add task into task list.
+     * Adds task into task list.
      *
      * @param t task to be added into list.
      */
@@ -25,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * Remove a task from the list.
+     * Removes a task from the list.
      *
      * @param num index of task to be removed.
      * @return removed task.
@@ -35,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * Return task from the list.
+     * Returns task from the list.
      *
      * @param num index of task.
      * @return task of certain index.
@@ -45,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Replace task of certain index.
+     * Replaces task of certain index.
      *
      * @param taskNum index of task replaced.
      * @param t task that is replacing.

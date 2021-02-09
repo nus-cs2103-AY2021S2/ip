@@ -26,8 +26,7 @@ public class Storage {
     }
 
     /**
-     * Load tasks stored in drive to task list.
-     *
+     * Loads tasks stored in drive to task list.
      */
     public TaskList load() {
         try {
@@ -64,7 +63,6 @@ public class Storage {
             }
             return tl;
         } catch (Exception e) {
-            Ui.printMessage("Unable to load file!");
             return new TaskList();
         }
     }

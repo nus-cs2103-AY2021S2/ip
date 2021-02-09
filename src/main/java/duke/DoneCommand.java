@@ -4,7 +4,7 @@ public class DoneCommand extends Command {
     private int taskNum;
 
     /**
-     * Constructer for done command.
+     * Constructs new done command.
      *
      * @param taskNum The task number to be set as done.
      */
@@ -14,19 +14,20 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks a task done of a specfic numbering.
-     * Print marked message and update drive.
+     * Marks a task done of a specific numbering.
+     * Prints marked message and update drive.
      *
      * @param tl task list.
      * @param ui object for user interface.
-     * @param storage objec to store and load task list.
+     * @param storage object to store and load task list.
+     * @throws DukeException When command is wrong in printTaskMsg().
      */
     @Override
-    public String execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         Task t = tl.get(taskNum - 1);
         t.finishTask();
         tl.set(taskNum - 1, t);
         storage.save(tl.toString());
-        return ui.printMarkedDone(t);
+        return ui.printTaskMsg(t, tl, "done");
     }
 }

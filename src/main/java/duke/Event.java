@@ -7,7 +7,7 @@ public class Event extends Task {
     protected LocalDateTime end;
 
     /**
-     * Constructor for Event task.
+     * Constructs new Event task.
      *
      * @param description Name of the event.
      * @param start Starting time of event.
@@ -49,7 +49,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return string of deadline name and info.
+     * Returns string of deadline name and info.
      * Format is for saving task into text file.
      *
      * @return string format of task's info.
