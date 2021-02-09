@@ -1,5 +1,9 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+
+import duke.exception.DukeException;
+
 /**
  * Parent class for all tasks in Duke
  */
@@ -44,6 +48,7 @@ public class Task {
      */
     @Override
     public String toString() {
+        assert !description.isEmpty() : "task does not have a description!";
         return "[" + getStatusIcon() + "] " + description;
     }
 
@@ -55,5 +60,14 @@ public class Task {
         String divider = " | ";
         return (isDone ? "1" : "0") + divider
                 + description;
+    }
+
+    /**
+     * Updates the date of a task, if applicable.
+     * Currently only supports for deadline
+     * @param newDate new date to be updated
+     */
+    public void updateDate(LocalDate newDate) throws DukeException {
+        throw new DukeException("Only deadlines can be update currently.");
     }
 }
