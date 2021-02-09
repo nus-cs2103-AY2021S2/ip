@@ -3,7 +3,7 @@ package com.weiliang;
 import javafx.application.Application;
 
 /**
- * Main application for launching graphic UI
+ * Main application for launching graphic UI.
  */
 public class Launcher {
     

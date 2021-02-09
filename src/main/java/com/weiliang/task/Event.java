@@ -14,12 +14,12 @@ public class Event extends Task {
 
     @Override
     public String toFormattedString() {
-        return "E | " + (completed ? 1 : 0) + " | " + task + " | " + timing;
+        return "E | " + (isComplete ? 1 : 0) + " | " + task + " | " + timing;
     }
 
     @Override
     public String toString() {
-        return "[E][" + (completed ? "X" : " ") + "] " + task + " (at: "
+        return "[E][" + (isComplete ? "X" : " ") + "] " + task + " (at: "
                 + timing.format(DateTimeFormatter.ofPattern("dd MMMM YYYY, hh:mma")) + ")";
     }
 

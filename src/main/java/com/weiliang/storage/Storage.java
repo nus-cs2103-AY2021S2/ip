@@ -14,31 +14,29 @@ import com.weiliang.task.Task;
 import com.weiliang.task.TaskList;
 
 /**
- * Main text-based storage facility
+ * The main text-based storage facility.
  */
 public class Storage {
 
-    /**
-     * The filename to store to
-     */
-    private String filename;
+    /** The name of the file to store to. Does not include file extension. */
+    private String fileName;
 
     /**
-     * Initializes a new storage
+     * Initializes a new storage instance.
      * 
-     * @param filename the text file associated
+     * @param fileName File name of text document.
      */
-    public Storage(String filename) {
-        this.filename = filename;
+    public Storage(String fileName) {
+        this.fileName = fileName;
     }
 
     /**
-     * Stores lists of tasks into textfile
+     * Stores a list of tasks into text documents.
      * 
-     * @param tasks the lists of tasks
+     * @param tasks Task list.
      */
     public void storeFile(TaskList tasks) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             for (Task task : tasks) {
                 bufferedWriter.write(task.toFormattedString());
                 bufferedWriter.newLine();
@@ -48,25 +46,25 @@ public class Storage {
         }
     }
 
-
     /**
-     * Retrieves list of tasks from text document
+     * Returns list of tasks from text document.
      * 
-     * @return task list associated
-     * @throws DukeException if unable to fetch
+     * @return Associated {@code TaskList}.
+     * @throws DukeException If unable to fetch tasks.
      */
     public TaskList loadTasks() throws DukeException {
         TaskList tasks = new TaskList();
 
         // Create if non-existent
         try {
-            File file = new File(filename);
+            File file = new File(fileName);
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
+        // Read from file
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line = bufferedReader.readLine();
             while (line != null && !line.isEmpty()) {
                 tasks.add(parseTask(line));
@@ -80,10 +78,10 @@ public class Storage {
     }
 
     /**
-     * Inner method for parsing information
+     * Parses task information from raw data.
      * 
-     * @param content raw string content
-     * @return the parsed task
+     * @param content Raw string content.
+     * @return The parsed task.
      */
     private Task parseTask(String content) {
         // Format -> D | 1 | details | timing
@@ -99,7 +97,7 @@ public class Storage {
         }
 
         if (parts[1].equals("1")) {
-            task.complete();
+            task.markComplete();
         }
         return task;
     }
