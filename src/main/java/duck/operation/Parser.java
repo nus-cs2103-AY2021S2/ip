@@ -24,7 +24,6 @@ public class Parser {
             command = "null";
             description = null;
         }
-        assert (!description.isBlank());
         return new CommandGui(command, description);
     }
 }

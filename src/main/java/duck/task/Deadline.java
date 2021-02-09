@@ -38,7 +38,7 @@ public class Deadline extends Task {
     @Override
     public String getPeriodDays() {
         LocalDate now = LocalDate.parse(LocalDate.now().toString());
-        return "There are " + String.valueOf(now.until(by, ChronoUnit.DAYS)) + "day(s) before the deadline";
+        return "There are " + now.until(by, ChronoUnit.DAYS) + "day(s) before the deadline";
     }
 
     /**

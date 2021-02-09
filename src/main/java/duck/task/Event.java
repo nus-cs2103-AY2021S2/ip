@@ -37,7 +37,7 @@ public class Event extends Task {
     @Override
     public String getPeriodDays() {
         LocalDate now = LocalDate.parse(LocalDate.now().toString());
-        return "There are " + String.valueOf(now.until(at, ChronoUnit.DAYS)) + "day(s) before the event starting";
+        return "There are " + now.until(at, ChronoUnit.DAYS) + "day(s) before the event starting";
     }
 
     /**
