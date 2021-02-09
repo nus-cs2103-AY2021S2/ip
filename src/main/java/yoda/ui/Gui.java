@@ -7,18 +7,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import yoda.Yoda;
 
-public class Gui extends Application{
+public class Gui extends Application {
 
     private Yoda yoda = new Yoda();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader((Gui.class.
-                    getResource("/view/MainWindow.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader((Gui.class
+                    .getResource("/view/MainWindow.fxml")));
             AnchorPane anchorPane = fxmlLoader.load();
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);

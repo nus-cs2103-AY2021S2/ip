@@ -35,12 +35,12 @@ public class Storage {
         File tasks = new File(filePath);
         System.out.println("1");
         TaskList taskList = new TaskList(new ArrayList<Task>());
-        boolean newFile = false;
+        boolean isNewFile = false;
         try {
             if (tasks.createNewFile()) {
                 System.out.println("Created new file " + tasks.getName());
                 System.out.println("Location: " + tasks.getAbsolutePath());
-                newFile = true;
+                isNewFile = true;
             } else {
                 System.out.println("Used existing file");
                 System.out.println("Location: " + tasks.getAbsolutePath());
@@ -48,7 +48,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("An error occurred when trying to create the file");
         }
-        if (!newFile) {
+        if (!isNewFile) {
             return deserialize();
         } else {
             return taskList;

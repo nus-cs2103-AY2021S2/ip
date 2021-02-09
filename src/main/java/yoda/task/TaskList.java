@@ -24,8 +24,13 @@ public class TaskList implements Serializable {
      * @param taskNumber Position of task in list.
      * @return Task requested by user
      */
-    public Task accessTask(int taskNumber) {
-        return tasks.get(taskNumber);
+    public Task accessTask(int taskNumber) throws InvalidTaskListIndexException {
+        try {
+            return tasks.get(taskNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskListIndexException("Exist in the task list, "
+                    + "this task does not!");
+        }
     }
 
     /**
@@ -40,24 +45,46 @@ public class TaskList implements Serializable {
      * Marks a task in the list as done.
      * @param taskNumber Position of task in the list.
      */
-    public void markTaskAsDone(int taskNumber) {
-        tasks.get(taskNumber).markAsDone();
+    public void markTaskAsDone(int ... taskNumber) {
+        for (int j : taskNumber) {
+            tasks.get(j - 1).markAsDone();
+        }
     }
 
     /**
      * Deletes a task from the list.
      * @param taskNumber Position of task in list.
      */
-    public void deleteTask(int taskNumber) {
-        tasks.remove(taskNumber);
+    public void markTaskToBeDeleted(int ... taskNumber) {
+        for (int j : taskNumber) {
+            tasks.get(j - 1).markToBeDeleted();
+        }
+    }
+
+    public void deleteMarkedTasks() {
+        for (int i = tasks.size() - 1; i >= 0; i--) {
+            if (tasks.get(i).isMarkedToBeDeleted) {
+                tasks.remove(i);
+            }
+        }
     }
 
     /**
      * Gets the number of tasks in the list.
      * @return The number of tasks in the list
      */
-    public int length() {
+    public int getTaskListSize() {
         return tasks.size();
+    }
+
+    public int getNumberOfUnfinishedTasks() {
+        int unfinishedTasks = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            if(!tasks.get(i).isDone) {
+               unfinishedTasks++;
+            }
+        }
+        return unfinishedTasks;
     }
 
     /**

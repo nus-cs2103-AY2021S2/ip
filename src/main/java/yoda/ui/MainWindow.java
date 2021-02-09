@@ -8,10 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 import yoda.Yoda;
 
-public class MainWindow extends AnchorPane{
+public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -46,7 +45,7 @@ public class MainWindow extends AnchorPane{
                 DialogBox.getYodaDialog(response, yodaImage)
         );
         userInput.clear();
-        if (response.toLowerCase() == "bye") {
+        if (input.equalsIgnoreCase("bye")) {
             Platform.exit();
         }
     }

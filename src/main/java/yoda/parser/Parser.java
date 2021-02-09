@@ -18,7 +18,7 @@ public class Parser {
      * @return Command needed to handle the input provided.
      */
     public static Command parse(String input) {
-        String[] splitInput = input.split(" ", 2);
+        String[] splitInput = input.split(" ");
         splitInput[0] = splitInput[0].toUpperCase();
         CommandType command = checkCommand(splitInput[0]);
         splitInput[0] = command.name();

@@ -1,7 +1,5 @@
 package yoda.task;
 
-import java.time.LocalDateTime;
-
 /**
  * ToDo class that is a specialised version of the Task class and extends the Task class.
  */
@@ -12,7 +10,6 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
-        super.dateTime = LocalDateTime.now();
     }
 
     /**
@@ -21,6 +18,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString() + "created on " + formatDateTime();
+        return "[T]" + super.toString();
     }
 }

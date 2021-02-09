@@ -3,7 +3,6 @@ package yoda.task;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Abstract task class to handle task-related information.
@@ -15,6 +14,7 @@ public abstract class Task implements Serializable {
     protected boolean isDone;
     /** Date and time related to the task created */
     protected LocalDateTime dateTime;
+    protected boolean isMarkedToBeDeleted;
 
     /**
      * Creates a task object.
@@ -23,6 +23,7 @@ public abstract class Task implements Serializable {
     public Task(String description) {
         this.description = description;
         isDone = false;
+        isMarkedToBeDeleted = false;
     }
 
     /**
@@ -38,8 +39,8 @@ public abstract class Task implements Serializable {
      * @param dateTime The date and time associated with the task.
      */
     public void setDateTime(String dateTime) {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            this.dateTime = LocalDateTime.parse(dateTime, format);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.dateTime = LocalDateTime.parse(dateTime, format);
     }
 
     /**
@@ -57,12 +58,16 @@ public abstract class Task implements Serializable {
         isDone = true;
     }
 
+    public void markToBeDeleted() {
+        isMarkedToBeDeleted = true;
+    }
+
     /**
      * Formats the Task information to be user-readable.
      * @return User-readable format of the Task object.
      */
     @Override
     public String toString() {
-        return "[" + checkStatus() + "] " + description + " ---> ";
+        return "[" + checkStatus() + "] " + description;
     }
 }

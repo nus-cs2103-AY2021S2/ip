@@ -1,34 +1,30 @@
 package yoda.ui;
 
 import yoda.task.Task;
-import yoda.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Ui class to handle interactions with the user.
  */
 public class Ui {
-    /** Divider to divide between successive instructions */
-    private static final String DIVIDER = "--------------------------------";
     /** Valid inputs that are available to the user */
-    private static final String HELP_LIST = "HELP!";
-    /** Scanner to scan user input */
-    private Scanner s;
+    private static final String HELP_LIST = "The commands you can use, these are:\n"
+                                            + "To add a task:\n"
+                                            + "todo [description]\n"
+                                            + "event [description] /at YYYY-MM-DD HHmm\n"
+                                            + "deadline [description] /by YYYY-MM-DD HHmm\n"
+                                            + "To list tasks:\n"
+                                            + "list (-t/-e/d)\n"
+                                            + "To find all tasks related to a keyword:\n"
+                                            + "find [keyword]\n"
+                                            + "To mark a task as done:\n"
+                                            + "done [taskNumber_in_the_list]\n"
+                                            + "To delete a task:\n"
+                                            + "delete [taskNumber_in_the_list]";
 
     /**
      * Creates a Ui object.
      */
-    public Ui() {
-        s = new Scanner(System.in);
-    }
-
-    /**
-     * Prints the divider.
-     */
-    public void showLine() {
-        System.out.println(DIVIDER);
-    }
+    public Ui() {}
 
     /**
      * Greets the user when the Yoda chatbot is started up.
@@ -44,14 +40,6 @@ public class Ui {
     }
 
     /**
-     * Reads the input provided by the user on the command line.
-     * @return Input provided by the user.
-     */
-    public String readInput() {
-        return s.nextLine();
-    }
-
-    /**
      * Bids farewell to the user after user is done using the Yoda chatbot.
      */
     public String exit() {
@@ -61,7 +49,7 @@ public class Ui {
 
     public String showError() {
         return "The greatest teacher, failure is \n"
-                + "Recognise your request, I do not"
+                + "Recognise your request, I do not\n"
                 + showHelp();
     }
 
@@ -74,38 +62,41 @@ public class Ui {
                 + "Added this task to the list, I have:\n" + task;
     }
 
-    public String printDeletedTask(Task task, int numberOfTasksLeft) {
-        return "Deleted this task, I have:\n" + task
-                + "\n" + numberOfTasksLeft + " in the list, you have left!";
+    public String printDeletedTask(String deletedTasks, int numberOfTasksLeft) {
+        return "Deleted these task(s), I have:\n" + deletedTasks
+                + "\n" + numberOfTasksLeft + " tasks in the list, you have left!";
     }
 
-    public String printFinishedTask(Task task, int numberOfTasksLeft) {
+    public String printFinishedTask(String finishedTasks, int numberOfTasksLeft) {
         return "Well done my young Padawan!\n"
-                + "Marked this task as done, I have:\n"
-                + task
-                + "\n" + numberOfTasksLeft + " in the list, you have left!";
+                + "Marked these task(s) as done, I have:\n"
+                + finishedTasks
+                + "\n" + numberOfTasksLeft + " unfinished tasks in the list, you have left!";
     }
 
-    public String printTasks(String identifier, String list) {
+    public String printTasks(String identifier, String list, int listSize) {
+        if (listSize == 0) {
+            return "No tasks in the list, there seem to be!";
+        }
         switch(identifier) {
         case "all":
-            return "All the tasks in your list, I present to you\n"
+            return "All the tasks in your list, I present to you!\n"
                     + list;
         case "find":
-            return "The matching tasks in your list, I present to you\n"
+            return "The matching tasks in your list, I present to you!\n"
                     + list;
         case "deadline":
-            return "The deadline(s) in your list, I present to you\n"
+            return "The deadline(s) in your list, I present to you!\n"
                     + list;
         case "event":
-            return "The event(s) in your list, I present to you\n"
+            return "The event(s) in your list, I present to you!\n"
                     + list;
         case "todo":
-            return "The todo(s) in your list, I present to you\n"
+            return "The todo(s) in your list, I present to you!\n"
                     + list;
         case "bad":
             return "To get a specific type of task, use list -d/-t/-e.\n"
-                    + "Else, the find request, you can use instead";
+                    + "Else, the find request, you can use instead!";
         default:
             return "The greatest teacher failure is.";
         }
