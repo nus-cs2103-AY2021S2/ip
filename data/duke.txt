@@ -1,4 +1,4 @@
-T|1|makan
+
 E|1|minum|2020
 T|1|minuman
 T|0|ayah
