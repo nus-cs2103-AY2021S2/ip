@@ -60,6 +60,22 @@ public class TaskList {
     }
 
     /**
+     * Returns {@code Task} that contains the search query.
+     *
+     * @param query the search query
+     * @return task list containing the matching tasks
+     */
+    public TaskList find(String query) {
+        TaskList newTaskList = new TaskList();
+        tasks.forEach(task -> {
+            if (task.getDescription().contains(query)) {
+                newTaskList.add(task);
+            }
+        });
+        return newTaskList;
+    }
+
+    /**
      * Returns the size of the task list
      *
      * @return size of the task list
@@ -90,9 +106,9 @@ public class TaskList {
      * Sets all the tasks in the task list to done.
      */
     public void setAllDone() {
-        for (Task task: tasks) {
+        tasks.forEach(task -> {
             task.setDone();
-        }
+        });
     }
 
     /**
@@ -136,9 +152,9 @@ public class TaskList {
      */
     public String toStorageString() {
         StringBuilder sb = new StringBuilder();
-        for (Task t: tasks) {
-            sb.append(String.format("%s%n", t.toStorageString()));
-        }
+        tasks.forEach(task -> {
+            sb.append(String.format("%s%n", task.toStorageString()));
+        });
         return sb.toString();
     }
 }

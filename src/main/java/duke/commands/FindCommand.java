@@ -5,7 +5,6 @@ import static duke.common.CommandUtils.checkListIsEmpty;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -30,12 +29,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         assertInputs(query);
-        TaskList printTaskList = new TaskList();
-        for (Task task: taskList.getTaskList()) {
-            if (task.getDescription().contains(query)) {
-                printTaskList.add(task);
-            }
-        }
+        TaskList printTaskList = taskList.find(query);
         checkListIsEmpty(printTaskList, true);
         return new CommandResponse(ui.showListMessage(printTaskList, true));
     }
