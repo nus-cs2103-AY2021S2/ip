@@ -15,6 +15,8 @@ public class Parser {
      * @return String found after the argument
      */
     private static String findDatetime(String input, String argument) {
+        assert input.length() > 0;
+
         int argumentIndex = input.lastIndexOf(argument);
         String output = input.substring(argumentIndex + argument.length());
 
@@ -33,6 +35,8 @@ public class Parser {
      * @return Datetime String for switchblade.Deadline type Tasks
      */
     public static String findDeadlineDatetime(String input) {
+        assert input.length() > 0;
+
         // split by /at and /to
         return findDatetime(input, "/by");
     }
@@ -44,6 +48,8 @@ public class Parser {
      * @return String[] containing start datetime and end datetime
      */
     public static String[] findEventDatetime(String input) {
+        assert input.length() > 0;
+
         // split by /at and /to
         String output = input;
 
@@ -72,6 +78,8 @@ public class Parser {
      * @return Removes command from input string and returns description without datetime
      */
     public static String findDescription(String input) {
+        assert input.length() > 0;
+
         String noCommand = input.split("\\s+", 2)[1];
 
         if (noCommand.contains("/by")) {

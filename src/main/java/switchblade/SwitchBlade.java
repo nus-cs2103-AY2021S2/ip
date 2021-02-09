@@ -14,6 +14,8 @@ import java.util.Locale;
 public class SwitchBlade {
 
     public static String processCommand(String input, myList taskList) {
+        assert input.length() > 0;
+
         String command = input.split("\\s+")[0];
 
         switch (command.toLowerCase(Locale.ROOT)) {
@@ -50,6 +52,9 @@ public class SwitchBlade {
     }
 
     private static String addTask(String input, myList taskList) {
+        assert input != null;
+        assert input.length() > 0;
+
         if (input.replaceAll("todo", "").length() > 0) {
             return taskList.addTask(input);
         } else {
@@ -58,6 +63,8 @@ public class SwitchBlade {
     }
 
     private static String addDeadline(String input, myList taskList) {
+        assert input.length() > 0;
+
         if (input.contains("/by") && (Parser.findDeadlineDatetime(input) != null)) {
             String datetime = Parser.findDeadlineDatetime(input);
             String description = Parser.findDescription(input);
@@ -69,6 +76,8 @@ public class SwitchBlade {
     }
 
     private static String addEvent(String input, myList taskList) {
+        assert input.length() > 0;
+
         if (input.contains("/at") && (Parser.findEventDatetime(input) != null)) {
             String[] datetimeArr = Parser.findEventDatetime(input);
             String description = Parser.findDescription(input);
