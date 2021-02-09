@@ -1,4 +1,4 @@
-package vergil.types;
+package vergil.types.commands;
 
 public enum CommandType {
     BYE,

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import vergil.components.TaskList;
 import vergil.types.Todo;
-import vergil.types.VergilException;
+import vergil.types.exceptions.VergilException;
 
 public class VergilTest {
     TaskList taskList = new TaskList();

@@ -19,11 +19,7 @@ import vergil.components.Parser;
 import vergil.components.TaskList;
 import vergil.components.ui.DialogBox;
 
-import vergil.types.VergilException;
-import vergil.types.Command;
-import vergil.types.Todo;
-import vergil.types.Event;
-import vergil.types.Deadline;
+import vergil.types.exceptions.VergilException;
 
 public class Vergil extends Application {
     private ScrollPane scrollPane;
@@ -32,8 +28,8 @@ public class Vergil extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("resources/images/user.png"));
-    private Image vergil = new Image(this.getClass().getResourceAsStream("resources/images/vergil.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("images/user.png"));
+    private Image vergil = new Image(this.getClass().getResourceAsStream("images/vergil.png"));
 
     private Ui ui;
     private Storage storage;
@@ -56,73 +52,6 @@ public class Vergil extends Application {
         }
     }
 
-    /**
-     * Runs the Vergil chatbot system, making use of the Ui, Storage, Parser,
-     * and TaskList objects.
-     */
-    public void run() {
-        boolean hasFinished = false;
-        Command cmd;
-
-        ui.displayWelcome();
-
-        while (!hasFinished) {
-            try {
-                cmd = parser.parse(ui.readCommand().trim());
-
-                switch (cmd.getType()) {
-                case BYE:
-                    ui.displayBye();
-                    hasFinished = true;
-                    break;
-
-                case LIST:
-                    ui.displayTaskList(taskList);
-                    break;
-
-                case DONE:
-                    taskList.complete(cmd.getListNumber());
-                    ui.displaySuccess();
-                    storage.save(taskList);
-                    break;
-
-                case DELETE:
-                    taskList.delete(cmd.getListNumber());
-                    ui.displaySuccess();
-                    storage.save(taskList);
-                    break;
-
-                case TODO:
-                    taskList.add(new Todo(cmd.getDesc()));
-                    ui.displaySuccess();
-                    storage.save(taskList);
-                    break;
-
-                case DEADLINE:
-                    taskList.add(new Deadline(cmd.getDesc(), cmd.getTime()));
-                    ui.displaySuccess();
-                    storage.save(taskList);
-                    break;
-
-                case EVENT:
-                    taskList.add(new Event(cmd.getDesc(), cmd.getTime()));
-                    ui.displaySuccess();
-                    storage.save(taskList);
-                    break;
-
-                case FIND:
-                    TaskList resultsList = taskList.find(cmd.getDesc());
-                    ui.displayFindResult(resultsList);
-                    break;
-                }
-            } catch (VergilException e) {
-                ui.displayError(e.getMessage());
-            }
-
-            System.out.println();
-        }
-    }
-
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -137,7 +66,7 @@ public class Vergil extends Application {
 
         scene = new Scene(mainLayout);
 
-        stage.setTitle("Duke");
+        stage.setTitle("Vergil");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -192,7 +121,7 @@ public class Vergil extends Application {
 
     public String getResponse(String command) {
         try {
-            return parser.parse(command).execute(taskList, storage);
+            return parser.parse(command).execute(ui, taskList, storage);
         } catch (VergilException e) {
             return e.getMessage();
         }
@@ -200,15 +129,15 @@ public class Vergil extends Application {
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label vergilText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 getUserDialog(userText, new ImageView(user)),
-                getVergilDialog(dukeText, new ImageView(vergil))
+                getVergilDialog(vergilText, new ImageView(vergil))
         );
         userInput.clear();
     }
 
     public static void main(String[] args) {
-        new Vergil().run();
+        // Do nothing.
     }
 }
