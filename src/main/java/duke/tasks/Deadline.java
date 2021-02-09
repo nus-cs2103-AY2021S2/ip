@@ -1,10 +1,10 @@
 package duke.tasks;
 
-import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.exception.DukeException;
 /**
  * Inherited from Task, used to store information related to tasks of type 'deadline'.
  *
@@ -23,6 +23,7 @@ public class Deadline extends Task {
         super(description);
         try {
             this.by = LocalDate.parse(by);
+            assert !by.isEmpty() : "deadline cannot be created without a by date!";
         } catch (DateTimeParseException e) {
             throw new DukeException("invalid deadline date given.");
         }
@@ -38,6 +39,7 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, String by) throws DukeException {
         super(description);
         try {
+            assert !by.isEmpty() : "deadline cannot be created without a by date!";
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new DukeException("invalid deadline date given.");
@@ -51,6 +53,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert by != null : "deadline does not have an by date!";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
     }
@@ -61,6 +64,9 @@ public class Deadline extends Task {
      */
     @Override
     public String infoToStore() {
+        assert !description.isEmpty() : "deadline does not have a description!";
+        assert by != null : "deadline does not have an by date!";
+
         String divider = " | ";
         return "D" + divider
                 + (isDone ? "1" : "0") + divider

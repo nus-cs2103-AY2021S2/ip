@@ -40,6 +40,8 @@ public class Todo extends Task {
      */
     @Override
     public String infoToStore() {
+        assert !description.isEmpty() : "todo does not have a description!";
+
         String divider = " | ";
         return "T" + divider
                 + (isDone ? "1" : "0") + divider

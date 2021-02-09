@@ -16,6 +16,7 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
+        assert !at.isEmpty() : "event cannot be created without an at date!";
     }
 
     /**
@@ -27,6 +28,7 @@ public class Event extends Task {
         super(description);
         this.at = at;
         this.isDone = isDone;
+        assert !at.isEmpty() : "event cannot be created without an at date!";
     }
 
     /**
@@ -44,6 +46,9 @@ public class Event extends Task {
      */
     @Override
     public String infoToStore() {
+        assert !description.isEmpty() : "event does not have a description!";
+        assert !at.isEmpty() : "event does not have an at date!";
+
         String divider = " | ";
         return "E" + divider
                 + (isDone ? "1" : "0") + divider
