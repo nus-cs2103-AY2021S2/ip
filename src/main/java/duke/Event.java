@@ -35,10 +35,13 @@ class Event extends Task {
         if (this.isTaskDone()) {
             ans = "[E][X] " + this.getTaskName() + " (at: "
                     + this.eTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
-        } else {
+        } else if (!this.isTaskDone()) {
             ans = "[E][ ] " + this.getTaskName() + " (at: "
                     + this.eTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
+        } else {
+            ans = "Ërror";
         }
+        assert !(ans.equals("Error")) : "Task must be either done or not";
         return ans;
     }
 
