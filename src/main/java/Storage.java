@@ -61,6 +61,7 @@ public class Storage {
      * @param  tasks The TaskList object containing all tasks.
      */
     public void finalise(TaskList tasks) throws IOException {
+        assert !filePath.isBlank() : "No file path specified";
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.getNumItems(); i++) {
             fw.write(tasks.getAtInd(i).save() + "\n");

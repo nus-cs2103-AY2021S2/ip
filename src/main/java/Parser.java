@@ -35,7 +35,7 @@ public class Parser {
 
         Pattern pFind = Pattern.compile("^(find )([a-zA-Z_0-9 ]+)");
         Matcher mFind = pFind.matcher((str));
-
+        assert !str.isBlank() : "No command given!";
         if (str.equals("list")) {
             output += "Here are the tasks in your tasks!\n";
             tasks.getNumItems();
