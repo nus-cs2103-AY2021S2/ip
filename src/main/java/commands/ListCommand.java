@@ -15,6 +15,6 @@ public class ListCommand extends CommandWithNoParameters {
         } else {
             handleTooManyArgs();
         }
-        assert this.commandOutputMsg != null;
+        assert !this.commandOutputMsg.isEmpty() : "empty command output in " + this.commandName;
     }
 }

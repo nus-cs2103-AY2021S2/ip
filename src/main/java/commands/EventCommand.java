@@ -23,6 +23,6 @@ public class EventCommand extends AddTaskWithTimeCommand {
             handleException(e);
         }
 
-        assert !this.commandOutputMsg.isEmpty();
+        assert !this.commandOutputMsg.isEmpty() : "empty command output in " + this.commandName;
     }
 }

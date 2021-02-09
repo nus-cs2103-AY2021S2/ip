@@ -20,5 +20,7 @@ public class ByeCommand extends CommandWithNoParameters {
         } else {
             handleTooManyArgs(); // should this be in try-catch block
         }
+
+        assert !this.commandOutputMsg.isEmpty() : "empty command output in " + this.commandName;
     }
 }

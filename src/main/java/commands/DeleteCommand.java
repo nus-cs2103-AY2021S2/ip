@@ -16,6 +16,6 @@ public class DeleteCommand extends CommandWithParameters {
             handleException(e);
         }
 
-        assert !this.commandOutputMsg.isEmpty();
+        assert !this.commandOutputMsg.isEmpty() : "empty command output in " + this.commandName;
     }
 }
