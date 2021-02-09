@@ -23,6 +23,49 @@ public class Storage {
     }
 
     /**
+     * Creates a file according to the specified pathName.
+     *
+     * @throws IOException if an I/O error occurred.
+     */
+    void createFile() throws IOException {
+        // Create directory and file
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+    }
+
+    /**
+     * Overwrites the file with the new updated TaskList.
+     *
+     * @param list a List of Task object derived from TaskList
+     *             with the updated Task objects.
+     * @throws IOException if an I/O error occurred.
+     */
+    void writeToFile(List<Task> list) throws IOException {
+        FileWriter fw = new FileWriter(file.getAbsolutePath());
+
+        StringBuffer sb = new StringBuffer();
+        for (Task task : list) {
+            sb.append(this.translateTask(task));
+        }
+
+        fw.write(sb.toString());
+        fw.close();
+    }
+
+    /**
+     * Adds a Task to the bottom of the file containing the TaskList.
+     *
+     * @param task a Task object to be added to the TaskList.
+     * @throws IOException if an I/O error occurred.
+     */
+    void appendToFile(Task task) throws IOException {
+        // Create a FileWriter in append mode
+        FileWriter fw = new FileWriter(file.getAbsolutePath(), true);
+        fw.write(this.translateTask(task));
+        fw.close();
+    }
+
+    /**
      * Creates a new file in the path specified
      * and return an empty TaskList if file does not exist.
      * Otherwise, reads from the existing file
@@ -83,53 +126,6 @@ public class Storage {
     }
 
     /**
-     * Creates a file according to the specified pathName.
-     *
-     * @throws IOException if an I/O error occurred.
-     */
-    void createFile() throws IOException {
-        // Create directory and file
-        file.getParentFile().mkdirs();
-        file.createNewFile();
-    }
-
-    /**
-     * Overwrites the file with the new updated TaskList.
-     *
-     * @param list a List of Task object derived from TaskList
-     *             with the updated Task objects.
-     * @throws IOException if an I/O error occurred.
-     */
-    void writeToFile(List<Task> list) throws IOException {
-        assert file != null : "File not found";
-
-        FileWriter fw = new FileWriter(file.getAbsolutePath());
-
-        StringBuffer sb = new StringBuffer();
-        for (Task task : list) {
-            sb.append(this.translateTask(task));
-        }
-
-        fw.write(sb.toString());
-        fw.close();
-    }
-
-    /**
-     * Adds a Task to the bottom of the file containing the TaskList.
-     *
-     * @param task a Task object to be added to the TaskList.
-     * @throws IOException if an I/O error occurred.
-     */
-    void appendToFile(Task task) throws IOException {
-        assert task != null : "Task should not be null";
-        assert file != null : "File not found";
-        // Create a FileWriter in append mode
-        FileWriter fw = new FileWriter(file.getAbsolutePath(), true);
-        fw.write(this.translateTask(task));
-        fw.close();
-    }
-
-    /**
      * Translates a Task object into String format to be stored into the file.
      *
      * @param task a Task object to be translated to String.
@@ -147,10 +143,5 @@ public class Storage {
             return String.format("E : %d : %s : %s : %s\n", isDone, task.priority,
                     task.name, ((Event) task).getTime());
         }
-    }
-
-    File getFile() {
-        assert file != null : "File not found";
-        return file;
     }
 }

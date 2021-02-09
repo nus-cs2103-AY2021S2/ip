@@ -32,13 +32,6 @@ public class Ui {
     }
 
     /**
-     * Prints the exit message.
-     */
-    String showBye() {
-        return "Bye. Hope to see you again soon!";
-    }
-
-    /**
      * Prints the given list argument.
      *
      * @param list the List of Task to be displayed.
@@ -54,17 +47,14 @@ public class Ui {
             }
         } else {
             StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+
             for (int i = 1; i <= list.size(); i++) {
                 sb.append(i + ". " + list.get(i - 1) + "\n");
             }
-            System.out.println("skfj");
+
             System.out.println(sb.toString());
             return sb.toString();
         }
-    }
-
-    String showDone(Task task) {
-        return String.format("Nice! I've marked this task as done:\n%s", task);
     }
 
     String showAddTask(Task task, int listSize) {
@@ -75,5 +65,16 @@ public class Ui {
     String showRemoveTask(Task task, int listSize) {
         return String.format("Noted. I've removed this task:\n"
                 + "%s\nNow you have %d tasks in the list.\n", task, listSize);
+    }
+
+    String showDone(Task task) {
+        return String.format("Nice! I've marked this task as done:\n%s", task);
+    }
+
+    /**
+     * Prints the exit message.
+     */
+    String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 }
