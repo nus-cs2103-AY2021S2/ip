@@ -6,14 +6,15 @@ public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<Task>();
 
     /**
-     * initialize  the TaskLisk object
+     * initialize  the Task list object
      *
-     * @param data use data to form task list
+     * @param dataArray use data to form task list
+
      */
-    public TaskList(String[] data) {
-        for (int i = 0; data[i] != null; i++) {
-            String datas = data[i];
-            String[] dataSplit = datas.split("\\|");
+    public TaskList(String[] dataArray) {
+        for (int i = 0; dataArray[i] != null; i++) {
+            String data = dataArray[i];
+            String[] dataSplit = data.split("\\|");
             switch (dataSplit[0].trim()) {
             case "T":
                 taskList.add(new Todo(dataSplit[2].trim()));
@@ -23,6 +24,8 @@ public class TaskList {
                 break;
             case "E":
                 taskList.add(new Event(dataSplit[2].trim(), dataSplit[3].trim()));
+                break;
+            default:
                 break;
             }
             if (dataSplit[1].trim().equals("1")) {
