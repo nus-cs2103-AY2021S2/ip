@@ -10,9 +10,10 @@ public class Parser {
      * @param input String given by the user
      */
     Parser(String input) {
-        String[] tokens = input.split(" ");
+        String cleanedInput = input.trim();
+        String[] tokens = cleanedInput.split(" ");
         this.command = tokens[0];
-        this.description = input;
+        this.description = cleanedInput;
     }
 
     /**
@@ -30,17 +31,40 @@ public class Parser {
      */
     public String getDescription() throws DukeException{
         try {
-            if (this.command.equals("list")) {
-                return command;
-            } else if (this.command.equals("done") || this.command.equals("delete")
-                    || this.command.equals("todo") || this.command.equals("find")) {
-                return this.description.substring(this.command.length() + 1);
-            } else if (this.command.equals("deadline")) {
-                String[] phrases = this.description.split(" /by ");
-                return phrases[0].substring(this.command.length() + 1);
-            } else if (this.command.equals("event")) {
-                String[] phrases = this.description.split(" /at ");
-                return phrases[0].substring(this.command.length() + 1);
+            switch (command){
+            case "list":
+                if (this.description.length() != "list".length()) {
+                    throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
+                }
+                return "";
+            case "help":
+                if (this.description.length() != "list".length()) {
+                    throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
+                }
+                return "";
+            case "sort":
+                if (this.description.length() != "sort".length()) {
+                    throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
+                }
+                return "";
+            case "undo":
+                return this.description.length() > 4 ? this.description.substring(5) : "";
+            case "statistics":
+                return this.description.length() > 10 ? this.description.substring(11) : "";
+            case "done":
+                return this.description.substring(5);
+            case "delete":
+                return this.description.substring(7);
+            case "todo":
+                return this.description.substring(5);
+            case "find":
+                return this.description.substring(5);
+            case "deadline":
+                String[] phrasesFromDeadline = this.description.split(" /by ");
+                return phrasesFromDeadline[0].substring(this.command.length() + 1);
+            case "event":
+                String[] phrasesFromEvent = this.description.split(" /at ");
+                return phrasesFromEvent[0].substring(this.command.length() + 1);
             }
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! I'm sorry, but the "
@@ -58,16 +82,31 @@ public class Parser {
      */
     public String getDeadLine() throws DukeException {
         try {
-            if (this.command.equals("done") || this.command.equals("delete")
-                    || this.command.equals("todo") || this.command.equals("list")
-                    || this.command.equals("find")) {
+            switch (command){
+            case "list":
                 return "";
-            } else if (this.command.equals("deadline")) {
-                String[] phrases = this.description.split(" /by ");
-                return phrases[1];
-            } else if (this.command.equals("event")) {
-                String[] phrases = this.description.split(" /at ");
-                return phrases[1];
+            case "help":
+                return "";
+            case "sort":
+                return "";
+            case "done":
+                return "";
+            case "delete":
+                return "";
+            case "todo":
+                return "";
+            case "find":
+                return "";
+            case "undo":
+                return "";
+            case "statistics":
+                return "";
+            case "deadline":
+                String[] phrasesFromDeadline = this.description.split(" /by ");
+                return phrasesFromDeadline[1];
+            case "event":
+                String[] phrasesFromEvent = this.description.split(" /at ");
+                return phrasesFromEvent[1];
             }
         }
         catch (StringIndexOutOfBoundsException e) {

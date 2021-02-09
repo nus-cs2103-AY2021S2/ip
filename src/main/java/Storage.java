@@ -31,16 +31,17 @@ public class Storage {
      */
     private Task processData(String type, String bool, String[] commands)
             throws DukeExceptionCorruptedData {
-        if (type.equals("T")) {
+        switch (type){
+        case "T":
             return bool.equals("1") ? new Todo(commands[0], true) : new Todo(commands[0]);
-        } else if (type.equals("D")) {
+        case "D":
             try {
                 return bool.equals("1") ? new Deadline(commands[0], commands[1], true)
                         : new Deadline(commands[0], commands[1]);
             } catch (DukeExceptionDeadline e) {
                 throw new DukeExceptionCorruptedData("The deadline task in the txt file corrupted");
             }
-        } else if (type.equals("E")) {
+        case "E":
             return bool.equals("1") ? new Event(commands[0], commands[1], true)
                     : new Event(commands[0], commands[1]);
         }
@@ -53,7 +54,7 @@ public class Storage {
      * @throws DukeExceptionFolder The folder doesn't exist
      * @throws DukeExceptionCorruptedData The data format is incompatible
      */
-    public List<Task> load() throws DukeExceptionFolder,DukeExceptionCorruptedData {
+    public TaskList load() throws DukeExceptionFolder,DukeExceptionCorruptedData {
         List<Task> tasks = new ArrayList<>();
         File file = new File(this.filePath);
         try {
@@ -63,7 +64,7 @@ public class Storage {
                 String[] commands = line.split("\\|");
                 tasks.add(processData(commands[0], commands[1], Arrays.copyOfRange(commands, 2, 5)));
             }
-            return tasks;
+            return new TaskList(tasks);
         } catch (FileNotFoundException e) {
             try {
                 file.createNewFile();
@@ -71,7 +72,7 @@ public class Storage {
                 throw new DukeExceptionFolder("No 'data' folder in this directory");
             }
         }
-        return tasks;
+        return new TaskList();
     }
 
     /**

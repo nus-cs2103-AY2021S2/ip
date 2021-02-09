@@ -7,20 +7,6 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
 
-    /*
-    public static void main(String[] args) {
-        try {
-            new Duke("./data/duke.txt").run();
-        } catch (DukeExceptionFolder e) {
-            Ui.showMessage(e.getMessage());
-            return;
-        } catch (DukeExceptionCorruptedData e) {
-            Ui.showMessage(e.getMessage());
-            return;
-        }
-    }
-    */
-
     public String getResponse(String command) {
         String output = "";
         if (command.equals("bye")) {
@@ -31,15 +17,8 @@ public class Duke {
             String parsedCommand = this.parser.getCommand();
             String description = this.parser.getDescription();
             String deadline = this.parser.getDeadLine();
-            if (parsedCommand.equals("list")) {
-                output = taskList.iterateList();
-            } else if (parsedCommand.equals("done")) {
-                output = taskList.finishATask(description);
-            } else if (parsedCommand.equals("delete")) {
-                output = taskList.deleteATask(description);
-            } else if (parsedCommand.equals("find")) {
-                output = taskList.findTasks(description);
-            } else {
+            output = processCommand(parsedCommand, description);
+            if (output.equals("")){
                 Task task = processTask(parsedCommand, description, deadline);
                 output = taskList.addTask(task);
             }
@@ -53,6 +32,7 @@ public class Duke {
         } catch (DukeException e) {
             output = Ui.showMessage(e.getMessage());
         }
+        assert(!output.equals(""));
         return output;
     }
 
@@ -64,7 +44,7 @@ public class Duke {
      */
     public Duke(String filepath) throws DukeExceptionFolder, DukeExceptionCorruptedData {
         this.storage = new Storage(filepath);
-        this.taskList = new TaskList(storage.load());
+        this.taskList = this.storage.load();
     }
 
     /**
@@ -78,13 +58,37 @@ public class Duke {
      */
     public static Task processTask(String command, String description, String deadline)
             throws DukeException, DukeExceptionDeadline {
-        if (command.equals("todo")) {
+        switch (command){
+        case "todo":
             return new Todo(description);
-        } else if (command.equals("deadline")) {
+        case "deadline":
             return new Deadline(description, deadline);
-        } else if (command.equals("event")) {
+        case "event":
             return new Event(description, deadline);
         }
         throw new DukeException("Invalid Command");
+    }
+
+    public String processCommand(String command, String description) throws DukeException {
+        switch (command){
+        case "list":
+            assert (description.equals(""));
+            return taskList.iterateList();
+        case "done":
+            return taskList.finishATask(description);
+        case "delete":
+            return taskList.deleteATask(description);
+        case "find":
+            return taskList.findTasks(description);
+        case "undo":
+            return taskList.undo(description);
+        case "sort":
+            return taskList.sort();
+        case "statistics":
+            return taskList.statistics();
+        case "help":
+            return Ui.showHelpMessage();
+        }
+        return "";
     }
 }

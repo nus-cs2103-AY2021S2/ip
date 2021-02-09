@@ -22,7 +22,7 @@ public class Todo extends Task {
     }
 
     /**
-     * An overriden method from the parent class Task. The purpose is to
+     * An overridden method from the parent class Task. The purpose is to
      * return a new finished Task.
      * @return Finished Todo object.
      */
@@ -35,7 +35,7 @@ public class Todo extends Task {
     }
 
     /**
-     * An overriden method from the parent class Task. The purpose is to
+     * An overridden method from the parent class Task. The purpose is to
      * return a String representation for txt files
      * @return String for txt files
      */
@@ -45,7 +45,7 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of Todo object
+     * Return a string representation of Todo object
      * @return String representation of Todo object
      */
     @Override

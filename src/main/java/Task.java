@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Finish the current Task
+     * Finish the current Task and return a new Task
      * @return New Task object that has been done
      */
     public Task finishTask() throws DukeException {
@@ -30,6 +30,10 @@ public class Task {
             throw new DukeException("Task has been done before!");
         }
         return new Task(this.task, true);
+    }
+
+    public boolean hasDone() {
+        return this.isDone;
     }
 
     /**
@@ -44,7 +48,7 @@ public class Task {
     }
 
     /**
-     * String representation of Task object
+     * Returns a String representation of Task object
      * @return String representation of Task object
      */
     @Override
@@ -54,5 +58,21 @@ public class Task {
             tick = "X";
         }
         return "[" + tick + "]" + " " + this.task;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        else if (o instanceof Task) {
+            Task otherTask = (Task) o;
+            return this.equals(otherTask);
+        }
+        return false;
+    }
+
+    public boolean equals(Task otherTask) {
+        return this.task.equals(otherTask.task);
     }
 }
