@@ -61,25 +61,19 @@ public class Storage {
                     switch (icon) {
                     case "D":
                         Deadline deadline = new Deadline(description, LocalDateTime.parse(split[3]));
-                        if (isDone.equals("T")) {
-                            deadline.setDone();
-                        }
+                        setDoneStatus(deadline, isDone);
                         ret.add(deadline);
                         break;
 
                     case "E":
                         Event event = new Event(description, LocalDateTime.parse(split[3]));
-                        if (isDone.equals("T")) {
-                            event.setDone();
-                        }
+                        setDoneStatus(event, isDone);
                         ret.add(event);
                         break;
 
                     case "T":
                         ToDo toDo = new ToDo(description);
-                        if (isDone.equals("T")) {
-                            toDo.setDone();
-                        }
+                        setDoneStatus(toDo, isDone);
                         ret.add(toDo);
                         break;
 
@@ -100,6 +94,12 @@ public class Storage {
             throw new DukeException("Error loading file, creating new save now.\n");
         }
 
+    }
+
+    private void setDoneStatus(Task task, String isDone) {
+        if (isDone.equals("T")) {
+            task.setDone();
+        }
     }
 }
 

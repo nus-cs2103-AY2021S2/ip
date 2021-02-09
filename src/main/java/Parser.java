@@ -11,40 +11,24 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         String[] commandAndParams = input.split(" ", 2);
-        String command = commandAndParams[0].toLowerCase();
+        String command = commandAndParams[0].toUpperCase();
         Command parsed = null;
         boolean hasParams = commandAndParams.length > 1 && !commandAndParams[1].isBlank();
 
         switch (command) {
-        case "bye":
+        case "BYE":
             parsed = new CommandBye();
             break;
 
-        case "deadline":
+        case "DEADLINE":
             if (!hasParams) {
-                throw new DukeException("Deadline description and date cannot be empty!");
+                throw new DukeException("DEADLINE description and date cannot be empty!");
             }
 
-            String[] deadlineArgs = commandAndParams[1].split(" /by ", 2);
-            if (deadlineArgs.length != 2) {
-                throw new DukeException("Deadline command must follow the format: description /by time");
-            }
-
-            String[] deadlineDateTime = deadlineArgs[1].split(" ");
-            String deadlineDate = deadlineDateTime[0];
-            String deadlineTime = deadlineDateTime.length > 1 // if time is not provided, default time is 23:59:59
-                    ? deadlineDateTime[1].substring(0, 2) + ":" + deadlineDateTime[1].substring(2, 4)
-                    : "23:59:59";
-            try {
-                LocalDateTime parsedDeadlineDateTime = LocalDateTime.parse(deadlineDate + "T" + deadlineTime);
-                parsed = new CommandDeadline(deadlineArgs[0], parsedDeadlineDateTime);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please follow the Date-Time format: YYYY-MM-DD TIME");
-            }
-
+            parsed = parseTimedTaskInput(commandAndParams[1], command);
             break;
 
-        case "delete":
+        case "DELETE":
             if (!hasParams) {
                 throw new DukeException("Task index cannot be empty!");
             }
@@ -52,7 +36,7 @@ public class Parser {
             parsed = new CommandDelete(Integer.parseInt(commandAndParams[1]));
             break;
 
-        case "done":
+        case "DONE":
             if (!hasParams) {
                 throw new DukeException("Task index cannot be empty!");
             }
@@ -60,31 +44,15 @@ public class Parser {
             parsed = new CommandDone(Integer.parseInt(commandAndParams[1]));
             break;
 
-        case "event":
+        case "EVENT":
             if (!hasParams) {
-                throw new DukeException("Event description and date cannot be empty!");
+                throw new DukeException("EVENT description and date cannot be empty!");
             }
 
-            String[] eventArgs = commandAndParams[1].split(" /at ", 2);
-            if (eventArgs.length != 2) {
-                throw new DukeException("Event command must follow the format: description /at time");
-            }
-
-            String[] eventDateTime = eventArgs[1].split(" ");
-            String eventDate = eventDateTime[0];
-            String eventTime = eventDateTime.length > 1 // if time is not provided, default time is 00:00
-                    ? eventDateTime[1].substring(0, 2) + ":" + eventDateTime[1].substring(2, 4)
-                    : "00:00:00";
-            try {
-                LocalDateTime parsedEventDateTime = LocalDateTime.parse(eventDate + "T" + eventTime);
-                parsed = new CommandEvent(eventArgs[0], parsedEventDateTime);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please follow the Date-Time format: YYYY-MM-DD TIME");
-            }
-
+            parsed = parseTimedTaskInput(commandAndParams[1], command);
             break;
 
-        case "find":
+        case "FIND":
             if (!hasParams) {
                 throw new DukeException("Search term cannot be empty!");
             }
@@ -92,13 +60,13 @@ public class Parser {
             parsed = new CommandFind(commandAndParams[1]);
             break;
 
-        case "list":
+        case "LIST":
             parsed = new CommandList();
             break;
 
-        case "todo":
+        case "TODO":
             if (!hasParams) {
-                throw new DukeException("ToDo description cannot be empty!");
+                throw new DukeException("TODO description cannot be empty!");
             }
 
             parsed = new CommandToDo(commandAndParams[1]);
@@ -113,5 +81,45 @@ public class Parser {
         }
 
         return parsed;
+    }
+
+    private static Command parseTimedTaskInput(String input, String taskType)
+            throws DukeException, DateTimeParseException {
+
+        char taskIcon = taskType.charAt(0);
+        String delimiter = null;
+        String defaultTime = null;
+
+        switch (taskIcon) {
+        case 'D':
+            delimiter = " /by ";
+            defaultTime = "23:59:59";
+            break;
+        case 'E':
+            delimiter = " /at ";
+            defaultTime = "00:00:00";
+            break;
+        }
+
+        assert delimiter != null : "Split key is invalid.";
+        String[] arguments = input.split(delimiter, 2);
+
+        if (arguments.length != 2) {
+            String errorMsg = taskType + " command must follow the format: description" + delimiter + "date";
+            throw new DukeException(errorMsg);
+        }
+
+        String[] dateAndTime = arguments[1].split(" ");
+        String date = dateAndTime[0];
+        String time = dateAndTime.length > 1  // if time is not provided, use default time
+                ? dateAndTime[1].substring(0, 2) + ":" + dateAndTime[1].substring(2, 4)
+                : defaultTime;
+
+        try {
+            LocalDateTime parsedDateAndTime = LocalDateTime.parse(date + "T" + time);
+            return new CommandDeadline(arguments[0], parsedDateAndTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please follow the Date-Time format: YYYY-MM-DD TIME");
+        }
     }
 }

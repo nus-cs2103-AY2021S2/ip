@@ -47,20 +47,20 @@ public class TaskList {
     public String printTasks() {
         if (tasks.isEmpty()) {
             return "It is empty boss.";
-        } else {
-            StringBuilder allTasks = new StringBuilder("You have ")
-                    .append(tasks.size())
-                    .append(" task(s) in the list:\n");
-
-            int i = 1;
-            for (Task task : tasks) {
-                allTasks.append(i).append(". ").append(task).append("\n");
-
-                i++;
-            }
-
-            return allTasks.toString();
         }
+
+        StringBuilder allTasks = new StringBuilder("You have ")
+                .append(tasks.size())
+                .append(" task(s) in the list:\n");
+
+        int i = 1;
+        for (Task task : tasks) {
+            allTasks.append(i).append(". ").append(task).append("\n");
+
+            i++;
+        }
+
+        return allTasks.toString();
     }
 
     /**
@@ -70,19 +70,20 @@ public class TaskList {
     public String findTasks(String query) {
         if (tasks.isEmpty()) {
             return "Oops, the task list is empty boss, there's nothing to find!";
-        } else {
-            StringBuilder foundTasks = new StringBuilder("Here you go boss:\n");
-
-            int i = 1;
-            for (Task task : tasks) {
-                String string = task.toString();
-                if (string.contains(query)) {
-                    foundTasks.append(i).append(". ").append(string).append("\n");
-                }
-                i++;
-            }
-            return foundTasks.toString();
         }
+
+        StringBuilder foundTasks = new StringBuilder("Here you go boss:\n");
+
+        int i = 1;
+        for (Task task : tasks) {
+            String string = task.toString();
+            if (string.contains(query)) {
+                foundTasks.append(i).append(". ").append(string).append("\n");
+            }
+            i++;
+        }
+        return foundTasks.toString();
+
     }
 
     public ArrayList<Task> getTasks() {
