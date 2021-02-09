@@ -35,7 +35,7 @@ public abstract class Task {
      * @return "X" symbol if it is done, else returns an empty string " ".
      */
     public String getStatusIcon() {
-        return isDone ? "\u2718" : " ";
+        return isDone ? "X" : " ";
     }
 
     public void setDone() {
