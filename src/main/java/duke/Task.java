@@ -34,6 +34,8 @@ public class Task {
      * @return Date if specified in task description.
      */
     public LocalDate calculateDate(String name) {
+        assert name != null && name.length() > 0 : "invalid task name";
+
         String[] inputs = name.substring(0, name.length() - 1).split(": ");
         if (inputs.length > 1) {
             String inputDate = inputs[1].split(" ")[0];
