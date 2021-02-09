@@ -16,7 +16,6 @@ public class TaskList {
 
     /**
      * To get current total count of tasks in a list.
-     *
      * @return total count of tasks.
      */
     public int getTasksCount() {
@@ -37,7 +36,6 @@ public class TaskList {
 
     /**
      * To set a task's completion status.
-     *
      * @param index Position of the task in the list.
      */
     public void setTaskIsDone(int index, boolean isDone) {

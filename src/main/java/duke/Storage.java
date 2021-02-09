@@ -43,7 +43,6 @@ public class Storage {
 
     /**
      * Method to save TaskList to hard disk.
-     *
      * @param taskList
      * @throws IOException
      */
