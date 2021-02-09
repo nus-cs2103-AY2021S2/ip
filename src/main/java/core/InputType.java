@@ -19,7 +19,9 @@ public enum InputType {
         var data2 = data.substring(5);
         int cnt = 1;
 
-        for (var x : tm.retrieveAllTasks().stream().filter(x -> x.contains(data2.trim())).toArray()) {
+        Predicate<Task> partialSearchFunction = task -> task.contains(data2.trim());
+
+        for (var x : tm.retrieveAllTasks().stream().filter(partialSearchFunction).toArray()) {
             ret.append(cnt++).append(". ").append(x).append("\n");
         }
         return ret.toString();
