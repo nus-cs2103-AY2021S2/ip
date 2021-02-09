@@ -8,6 +8,6 @@ public class Launcher {
      * A launcher class to workaround classpath issues.
      */
     public static void main(String[] args) {
-        Application.launch(kobe.KobeN.class, args);
+        Application.launch(kobe.Main.class, args);
     }
 }
