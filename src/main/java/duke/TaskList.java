@@ -18,6 +18,19 @@ public class TaskList {
     }
 
     /**
+     * Returns a copy of the TaskList
+     *
+     * @param taskList TaskList
+     */
+    public TaskList(TaskList taskList) {
+        this.tasks = new ArrayList<>();
+        for (Task task: taskList.tasks) {
+            this.tasks.add(task.copy());
+        }
+        // this.tasks = new ArrayList<>(taskList.tasks);
+    }
+
+    /**
      * Returns a TaskList that represents a List of Tasks.
      *
      * @param tasks the list of tasks that the TaskList represents

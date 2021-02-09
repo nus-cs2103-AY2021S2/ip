@@ -21,6 +21,17 @@ public class Task {
     }
 
     /**
+     * Returns a copy of the Task
+     *
+     * @return A copy of the Task
+     */
+    public Task copy() {
+        Task taskCopy = new Task(this.description, this.taskType);
+        taskCopy.isDone = this.isDone;
+        return taskCopy;
+    }
+
+    /**
      * Marks a task as done.
      */
     public void markAsDone() {

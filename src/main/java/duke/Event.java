@@ -27,6 +27,18 @@ public class Event extends Task {
         }
     }
 
+    private Event(String description, TaskType taskType, LocalDate at) {
+        super(description, taskType);
+        this.at = at;
+    }
+
+    @Override
+    public Task copy() {
+        Event taskCopy = new Event(this.description, this.taskType, this.at);
+        taskCopy.isDone = this.isDone;
+        return taskCopy;
+    }
+
     @Override
     public String saveTaskString() {
         String delimiter = " ~ ";
