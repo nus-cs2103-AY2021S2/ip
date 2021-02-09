@@ -30,13 +30,15 @@ public class Storage {
      * @throws IOException If unable to load from file.
      */
     public List<Task> load() throws IOException {
+        assert path != null : "storage filepath is null";
+
         List<Task> tasks = new ArrayList<>();
-        Files.createDirectories(this.path.getParent());
-        if (!Files.exists(this.path)) {
-            Files.createFile(this.path);
+        Files.createDirectories(path.getParent());
+        if (!Files.exists(path)) {
+            Files.createFile(path);
             return tasks;
         }
-        BufferedReader reader = Files.newBufferedReader(this.path);
+        BufferedReader reader = Files.newBufferedReader(path);
         String taskType = reader.readLine();
         while (taskType != null) {
             Task newTask;
@@ -55,8 +57,10 @@ public class Storage {
                 break;
             }
             default:
+                assert false : "error in data file";
                 return tasks;
             }
+
             boolean isDone = Boolean.parseBoolean(reader.readLine());
             if (isDone) {
                 newTask.markAsDone();
@@ -74,7 +78,9 @@ public class Storage {
      * @throws IOException If unable to save to file.
      */
     public void save(List<Task> tasks) throws IOException {
-        BufferedWriter writer = Files.newBufferedWriter(this.path);
+        assert path != null : "storage filepath is null";
+
+        BufferedWriter writer = Files.newBufferedWriter(path);
         for (Task task : tasks) {
             writer.write(task.toString().charAt(1));
             writer.newLine();
