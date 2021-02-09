@@ -6,12 +6,6 @@ import java.util.Scanner;
  * Handles receiving user input and outputting relevant textual information for the user to see.
  */
 public class Ui {
-    private Scanner scanner;
-
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
     /**
      * Shows details of a Task that's been added to the TaskList.
      * @param task Task that's added to the TaskList.
