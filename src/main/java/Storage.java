@@ -4,13 +4,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Provides the methods to create a storage object and relevant methods to interact with storage.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Initialises Storage object.
+     * @param filePath the file path that specifies location in hard disk for storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the data in the hard disk location specified by file path.
+     * @return an array list of the tasks saved in the hard disk.
+     */
     public ArrayList<Task> loadData() {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -31,6 +42,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Converts the data being stored as strings in the hard disk into Task objects.
+     * @param input each individual string task data from the file in the hard disk.
+     * @return the Task object of the String description.
+     */
     public Task stringToTask(String input) {
         String[] splitTask = input.split(" \\| ");
         String taskType = splitTask[0];
@@ -60,6 +76,10 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Writes the specified taskList into the specified file in the hard disk.
+     * @param taskList the list of tasks to be written into file.
+     */
     public void writeToFile(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -73,6 +93,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the Task objects into formatted String objects.
+     * @param task the individual tasks from the taskList to be converted.
+     * @return a String object of the task.
+     */
     public String taskToString(Task task) {
         int isDone;
         String converted = " ";
