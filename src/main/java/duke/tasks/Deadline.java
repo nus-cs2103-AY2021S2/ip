@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeException;
 
 /**
  * Deadline class which is an extension of Task which also contains deadline (date and time) of the task.
@@ -92,8 +92,8 @@ public class Deadline extends Task {
                 return new Deadline(desc, LocalDate.parse(datetime[0]));
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! The datetime description of a deadline must be either of the form" +
-                    "'YYYY-MM-DD' or 'YYYY-MM-DD hh:mm'");
+            throw new DukeException("☹ OOPS!!! The datetime description of a deadline must be either of the form"
+                    + "'YYYY-MM-DD' or 'YYYY-MM-DD hh:mm'");
         }
 
     }

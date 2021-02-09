@@ -1,8 +1,5 @@
 package duke.storage;
 
-import duke.DukeException;
-import duke.tasks.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
 
 /**
  * Storage class handles the loading and saving of tasks to hard disk
@@ -34,7 +34,7 @@ public class Storage {
     /**
      * Save tasks to hard disk
      *
-     * @param taskList List\<Task\> of tasks to be written to disk
+     * @param taskList List of tasks to be written to disk
      * @throws DukeException If IOException encountered
      */
     public void save(List<Task> taskList) throws DukeException {
@@ -55,7 +55,7 @@ public class Storage {
     /**
      * Loads tasks from hard disk
      *
-     * @return List\<Task\> of tasks read from hard disk
+     * @return List of tasks read from hard disk
      * @throws DukeException If FileNotFoundException occurs which is possible in the event that the file is
      *                       missing/not created yet
      */

@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 
 /**
  * Event task which is an extension os Task to also include a location of the event

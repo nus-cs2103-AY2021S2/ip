@@ -1,14 +1,20 @@
 package duke;
 
+import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Handles the main program logic of the Duke task manager program
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -33,28 +39,29 @@ public class Duke {
         parser = new Parser(ui, tasks);
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getWelcomeMessage() {
+        return ui.displayWelcomeMessage();
     }
 
-    /**
-     * Handles the running of the Duke program by continually fetching user commands, parsing them and then executing
-     * them
-     */
-    public void run() {
-        this.ui.displayWelcomeMessage();
-
-        while (true) {
-            String userCommand = this.ui.getUserCommand();
-            boolean exit = this.parser.parse(userCommand);
-            try {
-                this.storage.save(this.tasks.getTaskList());
-            } catch (DukeException e) {
-                ui.showSavingError();
-            }
-            if (exit) {
-                break;
-            }
+    public String getResponse(String inputCommand) {
+        String response = this.parser.parse(inputCommand);
+        try {
+            this.storage.save(this.tasks.getTaskList());
+        } catch (DukeException e) {
+            ui.showSavingError();
         }
+        if (response.isEmpty()) {
+            Platform.exit();
+        }
+        return response;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }

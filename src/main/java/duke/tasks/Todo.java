@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 
 /**
  * Todo class to handle todo entries which are the simplest type of task

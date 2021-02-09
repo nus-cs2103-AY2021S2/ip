@@ -1,9 +1,9 @@
 package duke.tasks;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import duke.exceptions.DukeException;
 
 /**
  * Base Task class which provides shared functionality such as description, task type and status
@@ -96,6 +96,8 @@ public class Task {
         case "E":
             output = new Event(description, recordSplit[3], completed);
             break;
+        default:
+            break;
         }
         return output;
     }
@@ -138,6 +140,8 @@ public class Task {
         case DEADLINE:
             output.append("[D]");
             break;
+        default:
+            break;
         }
         output.append(this.isComplete() ? "[X] " : "[ ] ");
         output.append(this.description);
@@ -160,6 +164,8 @@ public class Task {
             break;
         case DEADLINE:
             output.append("D");
+            break;
+        default:
             break;
         }
         output.append("|");

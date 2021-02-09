@@ -1,9 +1,10 @@
 package duke.parser;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Parser is the class that parses raw user commands and executes the intended effect
@@ -31,13 +32,14 @@ public class Parser {
      * @param fullCommand raw command provided as a String
      * @return true if the user enters "bye", a sign to terminate the program
      */
-    public boolean parse(String fullCommand) {
+    public String parse(String fullCommand) {
         try {
+            boolean isTaskCommand = fullCommand.startsWith("event") || (fullCommand.startsWith("todo")
+                    || fullCommand.startsWith("deadline"));
+
             StringBuilder response = new StringBuilder();
             if (fullCommand.equals("bye")) {
-                response.append("Bye. Hope to see you soon!");
-                this.ui.displayMessage(response.toString());
-                return true;
+                Platform.exit();
             } else if (fullCommand.equals("list")) {
                 response.append("Here are the tasks in your list:\n");
                 for (int i = 0; i < tasks.size(); i++) {
@@ -68,17 +70,15 @@ public class Parser {
                 response.append(task);
                 response.append("\nNow you have ");
                 response.append(tasks.size());
-                response.append(" duke.tasks in the list.");
-            } else if (fullCommand.startsWith("event") ||
-                    fullCommand.startsWith("todo") ||
-                    fullCommand.startsWith("deadline")) {
+                response.append(" tasks in the list.");
+            } else if (isTaskCommand) {
                 Task task = Task.parseTask(fullCommand);
                 tasks.add(task);
                 response.append("Got it. I've added this task:\n  added: ");
                 response.append(task);
                 response.append("\nNow you have ");
                 response.append(tasks.size());
-                response.append(" duke.tasks in the list.");
+                response.append(" tasks in the list.");
             } else if (fullCommand.startsWith("on")) {
                 // TODO: Implement a command that fetches all deadlines on a given date
             } else if (fullCommand.startsWith("find")) {
@@ -98,10 +98,9 @@ public class Parser {
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            this.ui.displayMessage(response.toString());
+            return ui.displayMessage(response.toString());
         } catch (DukeException e) {
-            this.ui.displayMessage(e.getMessage());
+            return ui.displayMessage(e.getMessage());
         }
-        return false;
     }
 }
