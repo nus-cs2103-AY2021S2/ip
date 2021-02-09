@@ -70,6 +70,11 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Finds a list of tasks from the current taskList that contains the specified keyword.
+     * @param keyword the keyword provided by the user to search for specific tasks.
+     * @return an array list of tasks that contains the keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
