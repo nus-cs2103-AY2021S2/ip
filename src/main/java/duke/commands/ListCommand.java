@@ -39,9 +39,9 @@ public class ListCommand extends Command {
     @Override
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         checkListIsEmpty(taskList, false);
-        TaskList printTaskList = taskList.clone();
+        TaskList printTaskList = taskList;
         if (queryDate != null) {
-            printTaskList = printTaskList.filterByDate(queryDate);
+            printTaskList = taskList.filterByDate(queryDate);
         }
         checkListIsEmpty(printTaskList, true);
 

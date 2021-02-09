@@ -1,5 +1,7 @@
 package duke.commands;
 
+import java.util.Arrays;
+
 /**
  * Valid commands that the user can execute.
  */
@@ -20,12 +22,7 @@ public enum DukeCommand {
      * @return the boolean to indicate whether is it a valid command
      */
     public static boolean isContains(String value) {
-        for (DukeCommand cmd: values()) {
-            if (cmd.name().equals(value)) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays.stream(values()).anyMatch(cmd -> cmd.name().equals(value));
     }
 
     public String toLower() {

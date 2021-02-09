@@ -78,6 +78,7 @@ public class Parser {
     private static Command parseDoneAndDeleteCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         checkInputsLength(inputs);
         String input = inputs[1];
+
         if (!Utils.checkIsNumeric(input) && !input.equals(ALL)) {
             throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
@@ -143,7 +144,11 @@ public class Parser {
      */
     private static Command parseListCmd(String[] inputs) throws DukeException {
         if (inputs.length == 2) {
-            return new ListCommand(inputs[1]);
+            String date = inputs[1];
+            if (!Utils.checkIsValidDate(date)) {
+                throw new DukeException(MESSAGE_INVALID_DATETIME_FORMAT);
+            }
+            return new ListCommand(date);
         } else if (inputs.length == 1) {
             return new ListCommand();
         } else {
@@ -153,7 +158,7 @@ public class Parser {
 
     private static String checkIsValidDate(String[] inputs, int index) throws DukeException {
         String date = String.join(DATETIME_DELIMITER, Arrays.copyOfRange(inputs, index + 1, inputs.length));
-        if (!Utils.checkIsValidDate(date)) {
+        if (!Utils.checkIsValidDateTime(date)) {
             throw new DukeException(MESSAGE_INVALID_DATETIME_FORMAT);
         }
         return date;
