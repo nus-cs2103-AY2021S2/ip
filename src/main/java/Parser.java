@@ -19,6 +19,7 @@ public class Parser {
                 Command list = new ListCommand("list", "", lineSplit[1]);
                 return list;
             } else {
+                assert length == 1;
                 Command list = new ListCommand("list", "", "");
                 return list;
             }
@@ -67,7 +68,7 @@ public class Parser {
                 }
             
         }
-        
+        assert false;
         return null;
     }
 

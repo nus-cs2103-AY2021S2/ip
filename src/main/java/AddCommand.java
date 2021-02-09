@@ -31,6 +31,7 @@ public class AddCommand extends Command {
             storage.store(taskList.size() + "." + newTask.toString());
             return ui.addCommandString(taskList.size(), newTask.toString());
         } else {
+            assert false;
             return "error";
         }
     }

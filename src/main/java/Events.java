@@ -15,6 +15,7 @@ public class Events extends Task {
     }
     @Override
     LocalDate getTime(){
+        assert (this.duration != null);
         return this.duration;
     }
 
