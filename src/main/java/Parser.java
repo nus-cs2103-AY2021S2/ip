@@ -1,5 +1,8 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 public class Parser {
     /**
@@ -72,6 +75,14 @@ public class Parser {
             parsed = new CommandToDo(commandAndParams[1]);
             break;
 
+        case "UPDATE":
+            if (!hasParams) {
+                throw new DukeException("UPDATE command must include at least one parameter!");
+            }
+
+            parsed = parseUpdateTaskInput(commandAndParams[1]);
+            break;
+
         default:
             throw new DukeException("Invalid command, please provide a supported command.");
         }
@@ -81,8 +92,8 @@ public class Parser {
         return parsed;
     }
 
-    private static Command parseTimedTaskInput(String input, String taskType)
-            throws DukeException, DateTimeParseException {
+    private static Command parseTimedTaskInput(String input, String taskType) throws DukeException,
+            DateTimeParseException {
 
         char taskIcon = taskType.charAt(0);
         String delimiter = null;
@@ -115,9 +126,48 @@ public class Parser {
 
         try {
             LocalDateTime parsedDateAndTime = LocalDateTime.parse(date + "T" + time);
-            return new CommandDeadline(arguments[0], parsedDateAndTime);
+            Command timedTaskCommand = null;
+            switch (taskIcon) {
+            case 'D':
+                timedTaskCommand = new CommandDeadline(arguments[0], parsedDateAndTime);
+                break;
+
+            case 'E':
+                timedTaskCommand = new CommandEvent(arguments[0], parsedDateAndTime);
+                break;
+            }
+
+            assert timedTaskCommand != null : "Error in creating timedTaskCommand.";
+            return timedTaskCommand;
+
         } catch (DateTimeParseException e) {
             throw new DukeException("Please follow the Date-Time format: YYYY-MM-DD TIME");
         }
+    }
+
+    private static Command parseUpdateTaskInput(String input) throws DukeException{
+        String[] arguments = input.split("/");
+        int index = Integer.parseInt(arguments[0].strip());
+        String description = arguments.length > 1 && !arguments[1].isBlank() ? arguments[1].strip() : null;
+        LocalDate date;
+        LocalTime time;
+
+        try {
+            date = arguments.length > 2 ? LocalDate.parse(arguments[2].strip()) : null;
+        } catch (DateTimeParseException e) {
+            date = null;
+        }
+
+        try {
+            time = arguments.length > 3 ? LocalTime.parse(arguments[3].strip()) : null;
+        } catch (DateTimeParseException e) {
+            time = null;
+        }
+
+        if (description == null && date == null && time == null) {
+            throw new DukeException("There is nothing to change, please provide a change to least one field!");
+        }
+
+        return new CommandUpdate(index, description, date, time);
     }
 }

@@ -19,4 +19,9 @@ public abstract class TimedTask extends Task {
     public void changeTime(LocalTime newTime) {
         this.dateTime = LocalDateTime.of(this.dateTime.toLocalDate(), newTime);
     }
+
+    @Override
+    public boolean isTimed() {
+        return true;
+    }
 }
