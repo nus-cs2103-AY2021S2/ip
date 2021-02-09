@@ -1,7 +1,6 @@
 package duke;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -11,10 +10,6 @@ public class EventWindow {
     @FXML
     private AnchorPane window;
     @FXML
-    private Button cancel;
-    @FXML
-    private Button confirm;
-    @FXML
     private TextField userInput;
     @FXML
     private DatePicker userDate;
@@ -22,13 +17,13 @@ public class EventWindow {
     private Parser parser;
 
     public void setParser(Parser p) {
+        assert(p != null);
         this.parser = p;
     }
 
     @FXML
     private void submit() {
         String command = userInput.getText() + " /at " + userDate.getValue();
-        //text.setText(parser.chat(command));
         parser.parser("event " + command);
         window.getScene().getWindow().hide();
     }

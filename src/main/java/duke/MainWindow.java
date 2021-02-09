@@ -16,34 +16,13 @@ import java.io.IOException;
 public class MainWindow extends VBox {
 
     @FXML
-    private VBox console;
-    @FXML
-    private MenuBar menu;
-    @FXML
-    private Menu change;
-    @FXML
-    private Label changeButton;
-    @FXML
-    private Menu createTodo;
-    @FXML
-    private Label todoButton;
-    @FXML
-    private Menu createDeadline;
-    @FXML
-    private Menu createEvent;
-    @FXML
-    private Menu guiDelete;
-    @FXML
     private ScrollPane scrollPane;
-    @FXML
-    private VBox vBox;
     @FXML
     private VBox consoleWindow;
     @FXML
     private TextField userInput;
 
     private Parser parser;
-
     private Stage stage;
 
     @FXML
@@ -73,10 +52,12 @@ public class MainWindow extends VBox {
     }
 
     public void setParser(Parser p) {
+        assert(p != null);
         this.parser = p;
     }
 
     public void setStage(Stage s) {
+        assert(s != null);
         this.stage = s;
     }
 
@@ -88,7 +69,6 @@ public class MainWindow extends VBox {
     private void parseCommand() {
         String command = userInput.getText();
         consoleWindow.getChildren().addAll(new Label(command), new Label(parser.parser(command)));
-        //text.setText(parser.chat(command));
         userInput.clear();
         if (command.equals("bye")) {
             Platform.exit();
@@ -158,7 +138,6 @@ public class MainWindow extends VBox {
     @FXML
     private void switchScene() {
         try {
-            System.out.println("test");
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/AltWindow.fxml"));
             VBox ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

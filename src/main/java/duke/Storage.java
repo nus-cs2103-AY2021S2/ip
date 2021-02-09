@@ -69,6 +69,7 @@ class Storage {
      */
     void save(ArrayList<Task> mem) {
 
+        assert(this.data != null);
         ArrayList<String> list = new ArrayList<String>();
 
         for (Task t : mem) {
