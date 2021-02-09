@@ -53,16 +53,6 @@ public class myList {
         }
     }
 
-    public String delete(int index) {
-        if (index < taskList.size() && index >= 0) {
-            taskList.remove(index);
-            this.save();
-            return Ui.removeTask(taskList);
-        } else {
-            return Ui.taskNotFoundError();
-        }
-    }
-
     public String delete(List<Integer> integers) {
         assert integers.size() > 0;
 
