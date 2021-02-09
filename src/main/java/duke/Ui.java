@@ -15,16 +15,6 @@ public class Ui {
     }
 
     /**
-     * Reads the next user given command.
-     *
-     * @return Command entered by the user.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
      * Prints the LoadSuccess message to output.
      */
     public void showLoadSuccess() {
@@ -44,6 +34,7 @@ public class Ui {
     public void showExit() {
         System.out.println(EXIT_MESSAGE);
     }
+
     /**
      * Returns the error as a string.
      *
