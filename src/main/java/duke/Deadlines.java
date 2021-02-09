@@ -3,20 +3,42 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadlines extends Task {
+/**
+ * Deadline implementation of the super class task. In addition to tracking
+ * event time, this class provide methods to return strings relevant to user
+ * input.
+ */
+public class Deadline extends Task {
     private LocalDate deadlineTime;
 
-    public Deadlines(String description, LocalDate deadlineTime) {
+    /**
+     * Constructs a deadline with specified name and time.
+     * 
+     * @param description  the name of the task
+     * @param deadlineTime when the task would need to be done by
+     */
+    public Deadline(String description, LocalDate deadlineTime) {
         super(description);
         this.deadlineTime = deadlineTime;
     }
 
+    /**
+     * Makes use of the time and desciption to return well formatted status of
+     * deadline
+     * 
+     * @return status, descripton and time of deadline
+     */
     @Override
     public String getStatus() {
         return "[D]" + super.getStatus() + "(by: " + this.deadlineTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 
+    /**
+     * Returns the current status of the deadline
+     * 
+     * @return status of deadline
+     */
     @Override
     public String saveStatus() {
         return "D" + super.saveStatus();

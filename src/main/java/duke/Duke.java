@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * A chat bot that accepts certain commands and keeps track of them in a
+ * seperate file. The commands are similar to a calendar where the user would
+ * like to keep track of todo events and deadlines that are upcoming. Tasks can
+ * be marked as done or pending, time can be specified for time sensitive
+ * events.
+ */
 public class Duke {
     public static void main(String[] args) {
 
