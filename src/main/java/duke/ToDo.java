@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Todo implementation of the super class task. Includes method to properly
+ * format the printing of todo tasks.
+ */
 public class ToDo extends Task {
 
     public ToDo(String description) {

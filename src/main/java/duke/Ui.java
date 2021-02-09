@@ -1,6 +1,16 @@
 package duke;
 
+/**
+ * The UI class handles the printing of statements for the user to see.
+ */
 public class Ui {
+    /**
+     * Executes the command by printing out the relevant statements to the user
+     * 
+     * @param command  the command issued by the user
+     * @param taskList the list of tasks that information may be needed from
+     * @param status   the status of the newly added task
+     */
     public static void execute(Command command, TaskList taskList, String status) {
         switch (command) {
             case BYE:
