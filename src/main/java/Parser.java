@@ -1,4 +1,7 @@
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Represents a Parser which deals with making sense of user commands
@@ -13,7 +16,7 @@ public class Parser {
      * @return String with the output of the requested action / error message.
      */
     public static String parseInput(String input, TaskList tasks, Storage storage) {
-        String output = "";
+        String output;
         try {
             if (input.equals("list")) {
                 output = tasks.listTasks();
@@ -23,15 +26,16 @@ public class Parser {
                     throw new DukeException("The list item number provided is invalid");
                 }
                 output = tasks.markAsDone(index - 1);
-                storage.writeTasksToFile(tasks.getTaskList());
+                ArrayList<Task> allTasks = tasks.getTaskList();
+                storage.writeTasksToFile(allTasks);
             } else if (input.startsWith("todo")) {
                 String description = input.replace("todo", "");
-                ToDo todo = new ToDo(description);
                 if (description.strip().equals("")) {
                     throw new DukeException("todo description cannot be empty");
                 }
+                ToDo todo = new ToDo(description);
                 tasks.addTask(todo);
-                output = tasks.printAddedTask(todo);
+                output = tasks.addedTaskDetails(todo);
                 storage.writeTasksToFile(tasks.getTaskList());
             } else if (input.startsWith("deadline")) {
                 if (input.strip().equals("deadline")) {
@@ -47,7 +51,7 @@ public class Parser {
                 LocalDate date = LocalDate.parse(input.split("/by", 2)[1].strip());
                 Deadline deadline = new Deadline(description, date);
                 tasks.addTask(deadline);
-                output = tasks.printAddedTask(deadline);
+                output = tasks.addedTaskDetails(deadline);
                 storage.writeTasksToFile(tasks.getTaskList());
             } else if (input.startsWith("event")) {
 
@@ -65,7 +69,7 @@ public class Parser {
 
                 Event event = new Event(description, date);
                 tasks.addTask(event);
-                output = tasks.printAddedTask(event);
+                output = tasks.addedTaskDetails(event);
                 storage.writeTasksToFile(tasks.getTaskList());
 
             } else if (input.startsWith("delete")) {
@@ -86,8 +90,15 @@ public class Parser {
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
-        } catch (Exception e) {
-            return e.getMessage();
+        } catch (DukeException e) {
+            output = e.getMessage();
+        } catch (NumberFormatException e) {
+            output = e.getMessage();
+        } catch (IOException e) {
+            output = e.getMessage();
+        } catch (DateTimeParseException wrongFormat) {
+            output = wrongFormat.getMessage();
+
         }
         return output;
 

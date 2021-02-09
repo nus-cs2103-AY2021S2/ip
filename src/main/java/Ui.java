@@ -2,22 +2,24 @@
  * Class which deals with the UI interactions with the user.
  */
 class Ui {
-    static final String FORMAT_LINE = "....................................................";
+    /**
+     * Gets the line for formatting the output message
+     *
+     * @return String representing a dotted line
+     */
+    public String getLine() {
+        String formatLine = "....................................................";
+        return formatLine;
+    }
 
     /**
      * Greets the user
      */
     public void greetUser() {
-        System.out.println(FORMAT_LINE + "\nHey, "
+        System.out.println(this.getLine() + "\nHey, "
                 + "I am Duke.\nHow can I help you?\n"
-                + FORMAT_LINE);
+                + this.getLine());
     }
 
-    /**
-     * Echoes the command input by the user for better UI clarity.
-     */
-    public void echoCommand(String input) {
-        System.out.println("\n>>> " + input);
-    }
 
 }
