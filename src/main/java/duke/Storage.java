@@ -40,11 +40,13 @@ public class Storage {
         File dataFile = new File(this.fileDirectory);
 
         try {
-            if (!(Files.isDirectory(Paths.get(this.pathDirectory)))) {
+            boolean isInvalidFolder = !(Files.isDirectory(Paths.get(this.pathDirectory)));
+            boolean isInvalidFile = !dataFile.exists();
+            if (isInvalidFolder) {
                 // Handles folder does not exist case
                 dataDirectory.mkdir();
                 dataFile.createNewFile();
-            } else if (!dataFile.exists()) {
+            } else if (isInvalidFile) {
                 // Handles file does not exist
                 dataFile.createNewFile();
             }
@@ -66,9 +68,10 @@ public class Storage {
             File dataFile = fileConfiguration();
             FileWriter fileWriter = new FileWriter(dataFile, false);
 
-            for (int index = 0; index < tasks.size(); index++) {
-                Task currTask = tasks.get(index);
-                fileWriter.write(currTask.formatTask() + System.lineSeparator());
+            for (int index = 0; index < tasks.getSize(); index++) {
+                Task currTask = tasks.getTask(index);
+                String formattedTask = currTask.formatTask() + System.lineSeparator();
+                fileWriter.write(formattedTask);
             }
             fileWriter.close();
         } catch (IOException ex) {
@@ -89,26 +92,15 @@ public class Storage {
             Scanner sc = new Scanner(dataFile);
 
             while (sc.hasNext()) {
-                String[] taskDetails = sc.nextLine().split("[|]");
-                String taskType = taskDetails[0];
-                Task newTask = null;
+                String[] taskDetail = sc.nextLine().split("[|]");
+                String taskType = taskDetail[0];
+                Task newTask = handleNewTask(taskType, taskDetail);
 
-                switch (taskType) {
-                case "T":
-                    newTask = new ToDo(taskDetails[2]);
-                    break;
-                case "E":
-                    newTask = new Event(taskDetails[2], LocalDate.parse(taskDetails[3]));
-                    break;
-                case "D":
-                    newTask = new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]));
-                    break;
-                default:
-                    break;
-                }
+                boolean isValidTask = taskType.equals("T") || taskType.equals("E") || taskType.equals("D");
+                if (isValidTask) {
+                    boolean isTaskCompleted = taskDetail[1].equals("1");
 
-                if (taskType.equals("T") || taskType.equals("E") || taskType.equals("D")) {
-                    if (taskDetails[1].equals("1")) {
+                    if (isTaskCompleted) {
                         newTask.markAsDone();
                     }
                     tasks.add(newTask);
@@ -118,5 +110,24 @@ public class Storage {
         } catch (IOException ex) {
             throw new DukeException(ExceptionType.LOADING_ERROR, "");
         }
+    }
+
+    private static Task handleNewTask(String taskType, String[] taskDetail) {
+        Task newTask = new Task();
+
+        switch (taskType) {
+        case "T":
+            newTask = new ToDo(taskDetail[2]);
+            break;
+        case "E":
+            newTask = new Event(taskDetail[2], LocalDate.parse(taskDetail[3]));
+            break;
+        case "D":
+            newTask = new Deadline(taskDetail[2], LocalDate.parse(taskDetail[3]));
+            break;
+        default:
+            break;
+        }
+        return newTask;
     }
 }

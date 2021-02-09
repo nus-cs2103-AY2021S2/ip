@@ -19,17 +19,20 @@ public class DeleteTask extends Command {
      */
     public DeleteTask(String commandType, int index) {
         super.commandType = commandType;
-        super.commandDetails = String.valueOf(index);
+        super.commandDetail = String.valueOf(index);
         super.dateTime = "";
         super.outputMessage = "";
         super.index = index;
     }
 
     private void handleDeleteTask(TaskList taskList) {
-        Task deleteTask = taskList.get(index - 1);
-        taskList.remove(deleteTask);
-        this.outputMessage = "Noted. I've removed this task: \n" + "\t  " + deleteTask.toString()
-                + "\n\t Now you have " + taskList.size() + " tasks in the list.";
+        Task deleteTask = taskList.getTask(index - 1);
+        taskList.removeTask(deleteTask);
+        String taskDetail = deleteTask.toString();
+        int numTasks = taskList.getSize();
+
+        this.outputMessage = "Noted. I've removed this task: \n" + "\t  " + taskDetail
+                + "\n\t Now you have " + numTasks + " tasks in the list.";
     }
 
     /**
@@ -41,10 +44,11 @@ public class DeleteTask extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        if (index <= 0 || index > tasks.size()) {
+        boolean isValidIndex = this.index <= 0 || this.index > tasks.getSize();
+
+        if (isValidIndex) {
             throw new DukeException(ExceptionType.INVALID_INTEGER, "");
         }
-
         handleDeleteTask(tasks);
         storage.saveData(tasks);
     }

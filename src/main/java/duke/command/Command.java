@@ -9,7 +9,7 @@ import duke.task.TaskList;
  */
 public abstract class Command {
     protected String commandType;
-    protected String commandDetails;
+    protected String commandDetail;
     protected int index;
     protected String dateTime;
     protected String outputMessage;
@@ -20,7 +20,7 @@ public abstract class Command {
      * @return Command name, details of task and date (when applicable)
      */
     public String getTaskDetails() {
-        return String.format("%s %s %s", commandType, commandDetails, dateTime);
+        return String.format("%s %s %s", this.commandType, this.commandDetail, this.dateTime);
     }
 
     /**

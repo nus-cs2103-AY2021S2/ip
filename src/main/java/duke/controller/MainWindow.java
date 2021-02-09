@@ -63,6 +63,7 @@ public class MainWindow extends AnchorPane {
         try {
             String input = userInput.getText();
             String response = duke.getResponse(input);
+
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog("User:\n" + input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)

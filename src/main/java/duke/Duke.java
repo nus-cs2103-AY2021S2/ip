@@ -42,13 +42,16 @@ public class Duke {
      * @return Response message in string format
      */
     public String getResponse(String input) throws DukeException {
+        String responseMsg = "";
+
         try {
             Command command = Parser.parse(input);
             command.execute(this.tasks, this.storage);
-            return "Duke:\n" + command.getMessage();
+            responseMsg = "Duke:\n" + command.getMessage();
         } catch (DukeException ex) {
-            return "Duke:\n" + ex.getMessage();
+            responseMsg = "Duke:\n" + ex.getMessage();
         }
+        return responseMsg;
     }
 
     /**
@@ -57,7 +60,8 @@ public class Duke {
      * @return Greeting message in String format
      */
     public String greetUser() {
-        return "Duke:\n Hello! I'm Duke\n" + "What can I do for you?";
+        String greetingMsg = "Duke:\n Hello! I'm Duke\n" + "What can I do for you?";
+        return greetingMsg;
     }
 }
 

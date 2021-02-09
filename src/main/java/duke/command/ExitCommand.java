@@ -15,7 +15,7 @@ public class ExitCommand extends Command {
      */
     public ExitCommand(String commandType) {
         super.commandType = commandType;
-        super.commandDetails = "";
+        super.commandDetail = "";
         super.dateTime = "";
         super.outputMessage = "";
         // index is -1 because it is only used in done and delete tasks

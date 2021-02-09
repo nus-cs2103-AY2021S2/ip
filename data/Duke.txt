@@ -1,1 +1,1 @@
-D | 0 | sell book
+T | 0 | buy book
