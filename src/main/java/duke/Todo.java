@@ -6,7 +6,7 @@ package duke;
 public class Todo extends Task {
     protected static final String TAG = "[T]";
 
-    public Todo(String name) {
+    public Todo(String name) throws DukeException {
         super(name);
     }
 

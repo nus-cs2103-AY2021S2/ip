@@ -43,11 +43,15 @@ public class TaskList {
     /**
      * Loads task list from storage.
      *
-     * @throws IOException If unable to load from file.
+     * @throws DukeException If unable to load from file.
      */
-    public void load() throws IOException {
+    public void load() throws DukeException {
         assert storage != null : "storage is null";
-        tasks = storage.load();
+        try {
+            tasks = storage.load();
+        } catch (IOException ex) {
+            throw new DukeException("  Unable to load tasks.");
+        }
     }
 
     /**

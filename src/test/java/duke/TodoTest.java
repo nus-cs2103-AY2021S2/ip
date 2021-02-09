@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
  */
 public class TodoTest {
     @Test
-    public void testName() {
+    public void testName() throws DukeException {
         Todo task = new Todo("borrow books");
         assertEquals("[T][ ] borrow books", task.toString());
     }
 
     @Test
-    public void testMarkAsDone() {
+    public void testMarkAsDone() throws DukeException {
         Todo task = new Todo("borrow books");
         task.markAsDone();
         assertEquals("[T][X] borrow books", task.toString());

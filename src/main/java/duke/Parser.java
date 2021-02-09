@@ -111,33 +111,42 @@ public class Parser {
     }
 
     private static String addNewTask(String input, TaskList tasks) throws DukeException {
-        StringBuilder output = new StringBuilder();
         Task task;
-        switch (input.split(" ")[0]) {
+        String[] inputs = input.split(" ");
+        if (inputs.length <= 1) {
+            throw new DukeException("  Please describe the task.");
+        }
+        String command = inputs[0];
+        int index = input.indexOf(' ');
+        String description = input.substring(index + 1);
+        String[] descriptions;
+        String name;
+
+        switch (command) {
         case "todo":
-            if (input.split(" ").length <= 1) {
-                throw new DukeException("  Please describe the task.");
-            }
-            task = new Todo(input.substring(5));
+        case "t":
+            task = new Todo(description);
             break;
-        case "deadline": {
-            if (input.split(" ").length <= 1) {
-                throw new DukeException("  Please describe the task.");
+        case "deadline":
+        case "d":
+            descriptions = description.split("/by");
+            if (descriptions.length <= 1) {
+                throw new DukeException("  Please provide a description in the format "
+                        + "[name] /by [date].");
             }
-            String[] inputs = input.substring(9).split("/by");
-            String name = inputs[0] + "(by:" + inputs[1] + ")";
+            name = String.format("%s(by:%s)", descriptions[0], descriptions[1]);
             task = new Deadline(name);
             break;
-        }
-        case "event": {
-            if (input.split(" ").length <= 1) {
-                throw new DukeException("  Please describe the task.");
+        case "event":
+        case "e":
+            descriptions = description.split("/at");
+            if (descriptions.length <= 1) {
+                throw new DukeException("  Please provide a description in the format "
+                        + "[name] /at [date].");
             }
-            String[] inputs = input.substring(6).split("/at");
-            String name = inputs[0] + "(at:" + inputs[1] + ")";
+            name = String.format("%s(at:%s)", descriptions[0], descriptions[1]);
             task = new Event(name);
             break;
-        }
         default:
             throw new DukeException("  That command is invalid.");
         }
@@ -148,9 +157,7 @@ public class Parser {
             throw new DukeException("  Unable to save tasks.");
         }
 
-        output.append("  Task added:\n");
-        output.append(String.format("    %s\n", task));
-        output.append(String.format("  Total tasks in list: %d\n", tasks.size()));
-        return output.toString();
+        return "  Task added:\n" + String.format("    %s\n", task)
+                + String.format("  Total tasks in list: %d\n", tasks.size());
     }
 }
