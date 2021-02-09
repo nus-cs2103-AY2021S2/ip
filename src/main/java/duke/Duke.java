@@ -42,8 +42,7 @@ class Duke {
      */
     public static void main(String[] args) throws IOException {
         Duke myDuke = new Duke();
-        boolean signalToExit = false;
-        while (!signalToExit && myDuke.ui.stillHaveCommand()) {
+        while (myDuke.ui.stillHaveCommand()) {
             String commandLine = myDuke.ui.readCommand();
             Command command = Parser.parse(commandLine, myDuke.getTaskList().getListUsed());
             executeCommand(myDuke, command);
@@ -60,8 +59,7 @@ class Duke {
     public static String markTaskDone(Duke duke, int index) {
         Task task = duke.getTaskList().doneTask(index);
         duke.storage.updateFile(duke.getTaskList().getListUsed());
-        String ans = duke.ui.echoMarkTaskDone(task);
-        return ans;
+        return duke.ui.echoMarkTaskDone(task);
     }
 
     /**
@@ -73,8 +71,7 @@ class Duke {
     public static String addToList(Duke duke, String taskDescription) {
         Task task = duke.getTaskList().addTask(taskDescription);
         duke.storage.updateFile(duke.getTaskList().getListUsed());
-        String ans = duke.ui.echoAddToList(task, duke.getTaskList().getListUsed().size());
-        return ans;
+        return duke.ui.echoAddToList(task, duke.getTaskList().getListUsed().size());
     }
 
     /**
@@ -119,10 +116,19 @@ class Duke {
         } else if (command.startsWith("myTaskOn")) {
             throw new DukeException("No body or wrong body format for myTaskOn command, Lisa!");
         } else {
+            //This is not the last case but everything else.
             throw new DukeException("Invalid command format, Lisa!");
         }
     }
 
+
+    /**
+     * Let Duke execute the command and produce the output of that command.
+     *
+     * @param myDuke Duke carrying out this command.
+     * @param command The Command to be executed.
+     * @return the output of that command.
+     */
     public static String executeCommand(Duke myDuke, Command command) {
         String ans = "";
         switch (command.getCommandTitle()) {
@@ -131,6 +137,7 @@ class Duke {
             break;
         case "bye":
             ans = myDuke.ui.echoBye();
+            assert ans.equals("Bye. Hope to see you again soon!\n") : "Wrong bye ui output";
             break;
         case "done":
             ans = markTaskDone(myDuke, Integer.parseInt(command.getCommandContent()));

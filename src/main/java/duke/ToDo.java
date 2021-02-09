@@ -25,9 +25,12 @@ class ToDo extends Task {
         String ans;
         if (this.isTaskDone()) {
             ans = "[T][X] " + this.getTaskName();
-        } else {
+        } else if (!this.isTaskDone()) {
             ans = "[T][ ] " + this.getTaskName();
+        } else {
+            ans = "Error";
         }
+        assert !ans.equals("Error") : "The task should be either done or not";
         return ans;
     }
 
