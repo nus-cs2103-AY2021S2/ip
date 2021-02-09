@@ -165,8 +165,8 @@ public class Ui {
      * @param taskList the {@code TaskList} to be printed
      */
     private void printList(TaskList taskList) {
-        for (Task task : taskList.getTaskList()) {
+        taskList.getTaskList().forEach(task -> {
             sb.append(formattedPrint(task.toString()));
-        }
+        });
     }
 }
