@@ -3,12 +3,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
-    public void testGreeting() {
-        assertEquals(2, 2);
+    public void testInvalidTodoCommand() throws InvalidCommandException {
+        Duke test = new Duke();
+        assertEquals(test.parser.readCommand("Todo"),
+                "\u2639 OOPS!!! The description of a todo cannot be empty...");
     }
 
     @Test
-    public void testExit() {
+    public void testInvalidDeadlineCommand() throws InvalidCommandException {
+        Duke test = new Duke();
+        assertEquals(test.parser.readCommand("Deadline"),
+                "\u2639 OOPS!!! The description of a deadline cannot be empty...");
 
     }
 }

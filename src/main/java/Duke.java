@@ -21,11 +21,11 @@ public class Duke extends Application {
 
 
     protected static boolean canExit = false;
-    private static final ArrayList<Task> taskList = new ArrayList<Task>();
-    private final TaskList tasks;
-    private final Storage storage;
-    private final Ui ui;
-    private final Parser parser;
+    protected static final ArrayList<Task> taskList = new ArrayList<Task>();
+    protected final TaskList tasks;
+    protected final Storage storage;
+    protected final Ui ui;
+    protected final Parser parser;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
