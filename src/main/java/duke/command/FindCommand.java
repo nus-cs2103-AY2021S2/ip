@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 
 import java.util.concurrent.atomic.AtomicInteger;
