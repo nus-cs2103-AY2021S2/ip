@@ -6,6 +6,7 @@ package duke.task;
 public class Task {
     protected String name;
     protected boolean isDone;
+    protected int priority;
 
     /**
      * Constructs a Task.
@@ -14,6 +15,7 @@ public class Task {
     protected Task(String taskName) {
         name = taskName;
         isDone = false;
+        priority = 0;
     }
 
     /**
@@ -41,7 +43,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + name;
+        return "[" + getStatusIcon() + "][ " + priority + " ] " + name;
     }
 
     /**
@@ -49,6 +51,6 @@ public class Task {
      * @return A string in the given format for storing in files.
      */
     public String toFileString() {
-        return "| " + (isDone ? "1" : "0") + " | " + name;
+        return "| " + (isDone ? "1" : "0") + " | " + priority + " | " + name;
     }
 }
