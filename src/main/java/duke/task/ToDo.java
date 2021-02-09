@@ -1,5 +1,5 @@
 package duke.task;
-import duke.dukeexception.DukeException;
+import duke.dukeException.DukeException;
 
 public class ToDo extends Task {
     /**

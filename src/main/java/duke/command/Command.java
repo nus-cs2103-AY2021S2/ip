@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import duke.dukeexception.DukeException;
+import duke.dukeException.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,7 +35,7 @@ public class Command {
      * @throws IOException  If an input or output
      *                      exception occurred
      */
-    public String execute(TaskList tasks) throws IOException, DukeException {
+    public String execute(TaskList tasks) throws IOException, DukeException, DukeException {
         ArrayList<Task> tList = tasks.getTasks();
         String output = "";
         if (commandName.equals("list")) {
@@ -61,7 +61,8 @@ public class Command {
                 old = "T | 0 | " + currTask.getName();
             } else if (currTask instanceof Deadline) {
                 old = "D | 0 | " + currTask.getName();
-            } else if (currTask instanceof Event) {
+            } else {
+                assert currTask instanceof Event;
                 old = "E | 0 | " + currTask.getName();
             }
             BufferedReader reader = new BufferedReader(new FileReader("data/duke.txt"));
@@ -76,7 +77,8 @@ public class Command {
                 newContent = oldContent.replace(old, "T | 1 | " + currTask.getName());
             } else if (currTask instanceof Deadline) {
                 newContent = oldContent.replace(old, "D | 1 | " + currTask.getName());
-            } else if (currTask instanceof Event) {
+            } else {
+                assert currTask instanceof Event;
                 newContent = oldContent.replace(old, "E | 1 | " + currTask.getName());
             }
             FileWriter writer = new FileWriter("data/duke.txt");
@@ -195,9 +197,12 @@ public class Command {
             }
         } else if (commandName.equals("bye")) {
             output = "     Bye. Hope to see you again soon!\n";
+        } else if(commandName.equals("")) {
+            output = "      Please enter something!\n";
         } else {
             output = "      OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
+        assert output != "" : "output is null";
         return output;
     }
 
