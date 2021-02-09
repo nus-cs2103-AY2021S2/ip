@@ -19,6 +19,9 @@ public class Storage {
     public String directory;
     public File fileObject;
     public TaskList taskList;
+    static final int TASK_DESCRIPTION_INDEX = 7; //States the index in the string to read for description.
+    static final int DATE_JUMP_INDEX = 5; //States the index jump from the previous read string.
+
 
     /**
      * Instantiates Storage with its target directory.
@@ -29,11 +32,6 @@ public class Storage {
         this.fileObject = createFile(directory);
     }
 
-    /**
-     * Create new TaskList instance for this instance.
-     *
-     * @return a TaskList instance
-     */
     public TaskList createNew() {
         return new TaskList();
     }
@@ -60,9 +58,6 @@ public class Storage {
         return fileObject;
     }
 
-    /**
-     * Read file contents.
-     */
     public void readFile() {
         try {
             File fileObject = new File("data\\tasks.txt");
@@ -85,14 +80,14 @@ public class Storage {
      */
     public void processFileData(String data) {
         char taskType = data.charAt(1);
-        String task = new String();
+        String task;
         String time = new String();
         int secondSeg = data.indexOf("(");
         int endSeg = data.indexOf(")");
-        task = data.substring(7);
+        task = data.substring(TASK_DESCRIPTION_INDEX);
         if (secondSeg != -1 && endSeg != -1) {
-            task = data.substring(7, secondSeg);
-            time = data.substring(secondSeg + 5, endSeg);
+            task = data.substring(TASK_DESCRIPTION_INDEX, secondSeg);
+            time = data.substring(secondSeg + DATE_JUMP_INDEX, endSeg);
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         if (taskType == 'T') {
@@ -101,7 +96,7 @@ public class Storage {
             LocalDateTime formatDate = LocalDateTime.parse(time, formatter);
             if (taskType == 'D') {
                 this.taskList.addTask(new Deadline(task, formatDate));
-            } else {
+            } else if (taskType == 'E') {
                 this.taskList.addTask(new Event(task, formatDate));
             }
         }

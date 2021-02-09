@@ -10,9 +10,6 @@ public class TaskList {
 
     public ArrayList<Task> tasksList;
 
-    /**
-     * Instantiate TaskList instance.
-     */
     public TaskList(){
         this.tasksList = new ArrayList<>();
     }
@@ -23,48 +20,41 @@ public class TaskList {
      * @param index task number
      */
     public String setTaskDone(int index) {
-        String result = new String();
         this.getTask(index - 1).setCompleted();
-        result = result + "Nice! I've marked this task as done: \n" + this.getTask(index - 1);
-        return result;
+        return "Nice! I've marked this task as done: \n" + this.getTask(index - 1);
     }
 
-    /**
-     * Adds a new task to the Task List.
-     *
-     * @param newTask new task
-     */
     public void addTask(Task newTask){
         tasksList.add(newTask);
     }
 
-    /**
-     * Gets size of Task List.
-     *
-     * @return updated Task List
-     */
     public int getSize() {
         return this.tasksList.size();
     }
 
-    /**
-     * Gets the task at respective index.
-     *
-     * @param index task index
-     * @return task at that index
-     */
+
     public Task getTask(int index){
         return tasksList.get(index);
     }
 
+    /**
+     * Gets input command and search for tasks that contains the matching characters with input.
+     *
+     * @param cmd input command
+     * @return matching tasks to the input
+     */
     public String searchRelatedText(String cmd) {
         ArrayList<Task> temporaryList = new ArrayList<>();
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).taskDesc.contains(cmd)) {
-                temporaryList.add(tasksList.get(i));
+        for (Task task : tasksList) {
+            if (task.taskDesc.contains(cmd)) {
+                temporaryList.add(task);
             }
         }
         String result = "Here are the matching tasks in your list: \n";
+        if (temporaryList.size() == 0) {
+            result = "There is no matching tasks found.";
+            return result;
+        }
         for (int j = 0; j < temporaryList.size(); j++) {
             result = result + String.valueOf(j + 1) + ". " + temporaryList.get(j).toString() + "\n";
         }
@@ -95,9 +85,6 @@ public class TaskList {
         return result;
     }
 
-    /**
-     * Displays all tasks.
-     */
     public String displayTasks() {
         String result = new String();
         result = result + "Here are the tasks in your list: \n";
