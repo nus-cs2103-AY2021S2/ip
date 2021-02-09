@@ -16,6 +16,7 @@ public class Duke {
             this.tasks = new TaskList();
         }
 
+        assert tasks.size() >= 0 : " Task list not successfully initialized";
         this.commandParser = new CommandParser(tasks, ui);
     }
 

@@ -30,6 +30,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String datetimeString = datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        assert datetimeString.length() > 0 : " Datetime string not successfully initialized";
         return String.format("[E][%s] %s (on: %s)", getStatus(), description, datetimeString);
     }
 }

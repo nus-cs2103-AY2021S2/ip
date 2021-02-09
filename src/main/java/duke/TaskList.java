@@ -30,6 +30,7 @@ public class TaskList {
      * @return Task that was removed from the TaskList.
      */
     public Task remove(int idx) {
+        assert (idx >= 0 && idx < tasks.size()) : " Task index out of bounds";
         return tasks.remove(idx - 1); // TaskList is 1-indexed
     }
 
@@ -39,6 +40,7 @@ public class TaskList {
      * @return Task to at the given (1-indexed) index of the TaskList.
      */
     public Task get(int idx) {
+        assert (idx >= 0 && idx < tasks.size()) : " Task index out of bounds";
         return tasks.get(idx - 1); // TaskList is 1-indexed
     }
 
