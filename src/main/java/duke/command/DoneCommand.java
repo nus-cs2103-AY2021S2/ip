@@ -10,11 +10,14 @@ import duke.ui.Ui;
  * Sub-class of Command that represents and execute the done instruction of user.
  */
 public class DoneCommand extends Command {
+    private static final String NO_DATE = "";
 
-
-    public DoneCommand(String task, String date) {
-        super("done", task, date, false,
-                command -> handleDone(task));
+    /**
+     * Create a DoneCommand object with the given task.
+     * @param task user task.
+     */
+    public DoneCommand(String task) {
+        super("done", task, NO_DATE, false, command -> handleDone(task));
     }
 
 

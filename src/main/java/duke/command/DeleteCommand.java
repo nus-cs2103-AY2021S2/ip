@@ -1,7 +1,7 @@
 package duke.command;
 
 
-import duke.exceptions.DukeException;
+
 import duke.task.TaskList;
 import duke.ui.ErrorBox;
 import duke.ui.Ui;
@@ -12,11 +12,16 @@ import duke.ui.Ui;
  */
 
 public class DeleteCommand extends Command {
+    private static final String NO_DATE = "";
 
 
-    public DeleteCommand(String task, String date) {
-        super("delete", task, date, false,
-            command -> handleDelete(task, date));
+    /**
+     * Create a DeleteCommand object with given task and date.
+     * @param task index of the task to be deleted.
+     */
+    public DeleteCommand(String task) {
+        super("delete", task, NO_DATE, false,
+            command -> handleDelete(task));
     }
 
 
@@ -24,9 +29,8 @@ public class DeleteCommand extends Command {
      * handle delete command key in by user by removing the task from the list if there is any.
      *
      * @param task user task in String.
-     * @param date date of the task.
      */
-    private static String handleDelete(String task, String date) {
+    private static String handleDelete(String task) {
         String response = "";
         try {
             int num = Integer.parseInt(task);
