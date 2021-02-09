@@ -25,7 +25,7 @@ public class Duke {
      */
     public void initializeDuke(String filePath) {
         storage = new Storage(filePath);
-
+        assert storage != null : "Storage object not initialized";
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException dukeEx) {

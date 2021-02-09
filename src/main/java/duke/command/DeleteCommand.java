@@ -25,14 +25,21 @@ public class DeleteCommand extends Command {
 
     private void deleteProcess(String selection, TaskList tasks) {
         int taskNum = Integer.parseInt(selection);
+        assert taskNum >= 0 : "Negative integer supplied";
         Task task = tasks.get(taskNum);
+        assert task != null : "Task is null";
         tasks.remove(task);
-        output = "Noted. I've removed this task: \n"
-                + task.toString() + getRemainingTasks(tasks);
+        updateOutput(task, tasks);
     }
 
     private String getRemainingTasks(TaskList tasks) {
-        return "\nNow you have " + tasks.size() + " tasks in the list.";
+        return "\nNow you have " + tasks.getSize() + " tasks in the list.";
+    }
+
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
+        output = "Noted. I've removed this task: \n"
+                + task.toString() + getRemainingTasks(tasks);
     }
 
     /**
@@ -44,21 +51,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        if (Integer.parseInt(description) > tasks.size() || Integer.parseInt(description) <= 0) {
-            // Selection out of taskList range
+        boolean isSelectionOutOfBounds = Integer.parseInt(description) > tasks.getSize()
+                || Integer.parseInt(description) <= 0;
+
+        if (isSelectionOutOfBounds) {
             throw new DukeException(command, DukeExceptionType.SELECTION_EXCEED_RANGE);
         }
         deleteProcess(description, tasks);
+        assert storage != null : "Storage object not initialized";
         storage.save(tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

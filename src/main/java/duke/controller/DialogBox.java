@@ -27,6 +27,7 @@ public class DialogBox extends HBox {
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            assert fxmlLoader != null : "fxmlLoader not initialized";
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -68,6 +69,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        assert db != null : "DialogBox not initialized";
         db.flip();
         return db;
     }

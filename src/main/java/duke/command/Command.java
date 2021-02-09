@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.exception.DukeException;
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -23,7 +24,7 @@ public abstract class Command {
     }
 
     public abstract void execute(TaskList tasks, Storage storage) throws DukeException;
-    public abstract boolean isExit();
+    protected abstract void updateOutput(Task task, TaskList tasks);
 
     public String getResponse() {
         return output;
