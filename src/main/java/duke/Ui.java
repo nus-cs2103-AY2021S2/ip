@@ -26,6 +26,15 @@ import javafx.stage.Stage;
  */
 public class Ui extends Application {
     public static final String LOGO = "D U K E";
+    public static final String START_MESSAGE = "  Hello from\n    " + LOGO + "\n"
+            + "  Please input a command.";
+    private static final double STAGE_HEIGHT = 600.0;
+    private static final double STAGE_WIDTH = 400.0;
+    private static final double SCROLL_PANE_HEIGHT = 535.0;
+    private static final double SCROLL_PANE_WIDTH = 385.0;
+    private static final double INPUT_BOX_WIDTH = 325.0;
+    private static final double BUTTON_WIDTH = 55.0;
+
     protected Scanner scanner;
     protected TaskList tasks;
     private Stage stage;
@@ -33,10 +42,10 @@ public class Ui extends Application {
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
-    private Scene scene;
+    private AnchorPane mainLayout;
 
     /**
-     * Initialises the input scanner and task list.
+     * Initialises the input scanner, task list and user interface nodes.
      */
     public void initialise() {
         scanner = new Scanner(System.in);
@@ -48,6 +57,19 @@ public class Ui extends Application {
         } catch (IOException ex) {
             System.out.println("  Unable to load tasks.");
         }
+
+        // Create nodes for GUI
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        Scene scene = new Scene(mainLayout);
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
@@ -59,31 +81,26 @@ public class Ui extends Application {
     public void start(Stage stage) {
         this.stage = stage;
         initialise();
+        arrangeNodes();
+        displayResponse(START_MESSAGE);
 
-        // Create nodes for GUI
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
+        // Provide user with interactive actions
+        sendButton.setOnMouseClicked((event) -> processUserInput());
+        userInput.setOnAction((event) -> processUserInput());
+    }
 
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-        stage.setScene(scene);
-        stage.show();
-
-        // Arrange nodes for GUI
+    /**
+     * Arrange nodes for the user interface
+     */
+    private void arrangeNodes() {
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(STAGE_HEIGHT);
+        stage.setMinWidth(STAGE_WIDTH);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(STAGE_WIDTH, STAGE_HEIGHT);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(SCROLL_PANE_WIDTH, SCROLL_PANE_HEIGHT);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -92,9 +109,8 @@ public class Ui extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
+        userInput.setPrefWidth(INPUT_BOX_WIDTH);
+        sendButton.setPrefWidth(BUTTON_WIDTH);
 
         // Set anchor points for GUI
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -105,15 +121,6 @@ public class Ui extends Application {
 
         // Auto scroll to bottom of screen
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        // Display startup message from Duke
-        String startMessage = "  Hello from\n    " + LOGO + "\n"
-                + "  Please input a command.";
-        displayResponse(startMessage);
-
-        // Provide user with interactive actions
-        sendButton.setOnMouseClicked((event) -> processUserInput());
-        userInput.setOnAction((event) -> processUserInput());
     }
 
     /**
