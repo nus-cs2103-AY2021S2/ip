@@ -23,6 +23,7 @@ public class DialogBox extends HBox {
     public DialogBox(Label text, ImageView imageView) {
         super(20);
         this.text = text;
+        this.setPadding(new Insets(10, 10, 10, 10));
         displayPicture = imageView;
 
         text.setWrapText(true);
@@ -31,16 +32,17 @@ public class DialogBox extends HBox {
                 Color.rgb(224, 234, 245),
                 CornerRadii.EMPTY,
                 Insets.EMPTY)));
-        text.setStyle("-fx-text-fill:#31456A;-fx-font-size: 14px;");
+        text.setStyle("-fx-text-fill:#31456A;-fx-font-size: 14px;-fx-font-weight:bold;");
         text.setEffect(new DropShadow(
                 BlurType.GAUSSIAN,
                 Color.rgb(199, 212, 228),
                 3, 5, 0, 0));
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(90.0);
+        displayPicture.setFitHeight(90.0);
 
         this.setAlignment(Pos.CENTER_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+
     }
 
     /**

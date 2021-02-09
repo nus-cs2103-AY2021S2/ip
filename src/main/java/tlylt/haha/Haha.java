@@ -84,7 +84,7 @@ public class Haha extends Application {
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     private void formatScrollPane() {
-        scrollPane.setPrefSize(400, 535);
+        scrollPane.setPrefSize(400, 572);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
