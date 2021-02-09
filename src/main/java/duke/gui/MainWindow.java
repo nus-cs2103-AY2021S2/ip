@@ -1,5 +1,6 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
 import duke.util.Task;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 
 /**
@@ -28,6 +30,8 @@ public class MainWindow extends SplitPane {
     private ListView<Task> listView;
 
     private Duke duke;
+
+    private History history = new History();
 
     //Icon made by Freepik from www.flaticon.com
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
@@ -59,6 +63,8 @@ public class MainWindow extends SplitPane {
                 }
             }
         });
+
+        userInput.setOnKeyPressed(e -> handleUserKey(e.getCode()));
     }
 
     /**
@@ -92,6 +98,8 @@ public class MainWindow extends SplitPane {
             return;
         }
 
+        history.add(input);
+
         String response = duke.getResponse(input);
 
         dialogContainer.getChildren().addAll(
@@ -103,5 +111,16 @@ public class MainWindow extends SplitPane {
         if (response.equals("shutdownConfirm")) {
             Platform.exit();
         }
+    }
+
+    private void handleUserKey(KeyCode key) {
+        if (key == KeyCode.UP) {
+            userInput.setText(history.getPrevious());
+        } else if (key == KeyCode.DOWN) {
+            userInput.setText(history.getNext());
+        } else if (key == KeyCode.ESCAPE) {
+            userInput.setText("");
+        }
+        userInput.positionCaret(userInput.getText().length());
     }
 }

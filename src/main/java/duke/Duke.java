@@ -268,7 +268,7 @@ public class Duke {
      *
      * @return TaskList.
      */
-    protected ObservableList<Task> getTaskList() {
+    public ObservableList<Task> getTaskList() {
         return tasks.getList();
     }
 
