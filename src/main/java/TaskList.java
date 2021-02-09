@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     public String write(int index) {
-        return this.list.get(index).toCommand();
+        return this.list.get(index).saveInStorageAs();
     }
 
     public void markDone(int index) {
@@ -90,7 +90,7 @@ public class TaskList {
         TaskList filteredList = new TaskList();
         for (int i = 0; i < list.size(); i++) {
             Task current = list.get(i);
-            if (current.taskMatch(keyword)) {
+            if (current.doesTaskMatchKeyword(keyword)) {
                 filteredList.add(current);
             }
         }

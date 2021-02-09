@@ -6,7 +6,7 @@ public class TaskListTest {
     @Test
     public void getTest() {
         TaskList list = new TaskList();
-        Task task = new Task("make this right");
+        Task task = new Todo("return books");
         list.add(task);
         assertEquals(list.getList().get(0), task);
 

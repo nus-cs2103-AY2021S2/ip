@@ -1,1 +1,3 @@
 class Event, false, utown dinner , 2020-02-07T18:00
+class Event, false, conference , 2020-02-07T22:00
+class Deadline, false, 2105 assignment , 2020-02-24T23:59

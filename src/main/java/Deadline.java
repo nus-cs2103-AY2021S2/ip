@@ -17,12 +17,12 @@ class Deadline extends Task {
 
     /**
      * returns a Deadline if the line stored in Storage of a Task is of type Deadline
-     *
      * @param input
      * @return Deadline created with reading from Storage file
      */
-    public static Deadline readTask(String input) {
+    public static Deadline readTaskFromStorage(String input) {
         String[] list = input.split(", ", 4);
+        assert list.length == 4: "Todo was stored from previous user visit is corrupted.";
         return new Deadline(list[2], Boolean.parseBoolean(list[1]), LocalDateTime.parse(list[3]));
     }
 
@@ -31,9 +31,8 @@ class Deadline extends Task {
      *
      * @return String formatted to save a Deadline into storage
      */
-    public String toCommand() {
-        return this.getClass().toString() + ", "
-                + this.getCompleted() + ", " + this.getTask() + ", " + this.date;
+    public String saveInStorageAs() {
+        return super.saveInStorageAs() + ", " + this.date;
     }
 
     @Override

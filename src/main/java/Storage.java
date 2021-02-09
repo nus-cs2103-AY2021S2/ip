@@ -27,12 +27,12 @@ public class Storage {
             while (s.hasNext()) {
                 String current = s.nextLine().toLowerCase();
                 if (current.contains("todo")) {
-                    Task task = Todo.readTask(current);
+                    Task task = Todo.readTaskFromStorage(current);
                     tasklist.add(task);
                 } else if (current.contains("deadline")) {
-                    tasklist.add(Deadline.readTask(current));
+                    tasklist.add(Deadline.readTaskFromStorage(current));
                 } else if (current.contains("event")) {
-                    tasklist.add(Event.readTask(current));
+                    tasklist.add(Event.readTaskFromStorage(current));
                 } else {
                     if (s.hasNext()) {
                         current = s.nextLine();

@@ -21,8 +21,9 @@ class Event extends Task {
      * @param input
      * @return Event created with reading from Storage file
      */
-    public static Event readTask(String input) {
+    public static Event readTaskFromStorage(String input) {
         String[] list = input.split(", ", 4);
+        assert list.length == 4: "Todo was stored from previous user visit is corrupted.";
         return new Event(list[2], Boolean.parseBoolean(list[1]), LocalDateTime.parse(list[3]));
     }
 
@@ -31,13 +32,13 @@ class Event extends Task {
      *
      * @return String formatted to save a Event into storage
      */
-    public String toCommand() {
+    public String saveInStorageAs() {
         return this.getClass().toString() + ", " + this.getCompleted() + ", " + this.getTask() + ", " + this.date;
     }
     @Override
     public String toString() {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd YYYY hh:mm a");
-        return "[E]" + this.completedBox() + this.getTask()
+        return "[E]" + super.toString()
                 + "(at: " + dateFormatter.format(Timestamp.valueOf(this.date)) + ")";
     }
 }
