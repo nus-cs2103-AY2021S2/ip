@@ -101,24 +101,6 @@ public class Ui {
     }
 
     /**
-     * Starts the input manager which handles user input.
-     * @param apollo The chat bot that the input manager is to handle inputs for.
-     */
-    public void startInputManager(Duke apollo) {
-        Scanner scanner = new Scanner(System.in);
-
-        while (scanner.hasNext()) {
-            String input = scanner.nextLine();
-
-            try {
-                Parser.handleInput(input, apollo.getTasks().getTaskList(), apollo);
-            } catch (Exception e) {
-                Ui.showMessageBetweenLines("An error occurred:", e.getMessage());
-            }
-        }
-    }
-
-    /**
      * Passes input from Duke's GUI to Parser to execute related commands.
      * @param apollo Instance of Duke.
      * @param input User input to be passed to Parser.
@@ -159,13 +141,6 @@ public class Ui {
         } catch (Exception e) {
             showErrorMessage(e.getMessage());
         }
-    }
-
-    /**
-     * Clears messages in messageQueue.
-     */
-    public static void clearMessageQueue() {
-        messageQueue.clear();
     }
 
     /**
