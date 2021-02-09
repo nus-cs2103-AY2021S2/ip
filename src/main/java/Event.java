@@ -12,6 +12,18 @@ public class Event extends Task {
         this.at = at.trim();
     }
 
+    /**
+     * Constructor for the Event class.
+     *
+     * @param description Description of the Event task.
+     * @param at Location of the Event task.
+     * @param tags String of tags.
+     */
+    public Event(String description, String at, String tags) {
+        super(description, tags);
+        this.at = at.trim();
+    }
+
     @Override
     public String toFileString() {
         return String.format("%s | %s | %s\n", Command.EVENT, super.toFileString(), this.at);
@@ -19,6 +31,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return String.format("[E]%s (at: %s)%s", super.toStringWithoutTags(), this.at, super.getTagsString());
     }
 }

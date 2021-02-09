@@ -31,20 +31,20 @@ public class Storage {
     }
 
     private void addTodo(String[] parts, TaskList tasks) {
-        assert parts.length == 3 : "There should be 3 parts to this line of data";
-        Task todo = new Todo(parts[2]);
+        assert parts.length == 4 : "There should be 4 parts to this line of data";
+        Task todo = new Todo(parts[3], parts[2]);
         markDoneAndAdd(todo, parts[1], tasks);
     }
 
     private void addDeadline(String[] parts, TaskList tasks) throws DateTimeParseException {
-        assert parts.length == 4 : "There should be 4 parts to this line of data";
-        Task deadline = new Deadline(parts[2], parts[3]);
+        assert parts.length == 5 : "There should be 5 parts to this line of data";
+        Task deadline = new Deadline(parts[3], parts[4], parts[2]);
         markDoneAndAdd(deadline, parts[1], tasks);
     }
 
     private void addEvent(String[] parts, TaskList tasks) {
-        assert parts.length == 4 : "There should be 4 parts to this line of data";
-        Task event = new Event(parts[2], parts[3]);
+        assert parts.length == 5 : "There should be 5 parts to this line of data";
+        Task event = new Event(parts[3], parts[4], parts[2]);
         markDoneAndAdd(event, parts[1], tasks);
     }
 
