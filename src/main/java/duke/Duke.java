@@ -13,32 +13,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 public class Duke {
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/memeeman.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/memeeman.jpg"));
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Storage storage;
     private TaskList tasks;
     private Parser in;
 
-    /**
-     * initiate UI and try to load in the data if exist, else initiate a new list and show error
-     *
-     * @param filePath the path where the stored txt is saved
-     */
     public Duke() {
         in = new Parser();
         tasks = new TaskList();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input, TaskList tasks) {
         in = new Parser(input);
         return in.print(tasks);

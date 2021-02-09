@@ -10,7 +10,7 @@ public abstract class DukeException extends Exception {
 
     public static class NoDescriptionException extends DukeException {
         public NoDescriptionException(String itemClass) {
-            super("OOPS!!! The description of a " + itemClass + " cannot be empty.");
+            super("OOPS!!! The argument of the command " + itemClass + " cannot be empty or is in wrong format.");
         }
     }
 

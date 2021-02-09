@@ -6,6 +6,7 @@ import duke.task.Event;
 import duke.task.ListItem;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.tools;
 
 /**
  * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,
@@ -52,43 +53,55 @@ public class Parser {
         String tempCommand = "";
         String[] result = in.split("\\s");
         String tempArg = "";
+        // has temporary variables tempArg, tempDate, tempCommand as they are "final"
         try {
-            if (result[0].equals("done") || result[0].equals("find")) {
-                tempCommand = result[0];
-                if (result.length <= 1) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else {
-                    tempArg = result[1];
-                }
-            } else if (result[0].equals("todo") || result[0].equals("delete")) {
-                String temp = in.substring(in.indexOf(" ") + 1);
-                tempArg = temp;
-                if (temp.equals("todo") || temp.equals("delete")) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else {
+            // check the first part of the input string and decide what to do next using switch case
+            switch(result[0]) {
+                case "find":
+                case "todo": // both only need a name in a form of string therefore grouped
                     tempCommand = result[0];
-                }
-            } else if (result[0].equals("deadline") || result[0].equals("event")) {
-                String firstParam = in.substring(in.indexOf("/") + 1);
-                if (firstParam.equals("deadline") || firstParam.equals("event")) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else {
-                    int dateIndex = Math.max(firstParam.indexOf("by "), firstParam.indexOf("at "));
-                    if (dateIndex == -1) {
+                    if (result.length <= 1) {
                         throw new DukeException.NoDescriptionException(result[0]);
                     } else {
-                        tempCommand = result[0];
-                        tempDate = firstParam.substring(dateIndex + 3);
-                        firstParam = in.substring(in.indexOf(" ") + 1);
-                        tempArg = firstParam.substring(0, firstParam.indexOf("/") - 1);
+                        tempArg = result[1];
                     }
-                }
-            } else {
-                try {
-                    tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0]));
-                } catch (IllegalArgumentException ex) {
-                    throw new DukeException.UnknownCommandException();
-                }
+                    break;
+                case "done":
+                case "delete": // both requires an index of the item
+                    String indexOfItemAsString = in.substring(in.indexOf(" ") + 1);
+                    tempArg = indexOfItemAsString;
+                    if(!tools.isInteger(indexOfItemAsString)){
+                        throw new DukeException.NoDescriptionException(result[0]);
+                    }else{
+                        tempCommand = result[0];
+                    }
+                    break;
+                case "deadline":
+                case "event": // both requires an extra string (date)
+                    String firstParam = in.substring(in.indexOf("/") + 1);
+                    if (firstParam.equals("deadline") || firstParam.equals("event")) {
+                        throw new DukeException.NoDescriptionException(result[0]);
+                    } else {
+                        // check if the date starts by "by" or "at" to classify them
+                        int dateIndex = Math.max(firstParam.indexOf("by "), firstParam.indexOf("at "));
+                        if (dateIndex == -1) {
+                            throw new DukeException.NoDescriptionException(result[0]);
+                        } else {
+                            tempCommand = result[0];
+                            tempDate = firstParam.substring(dateIndex + 3);
+                            firstParam = in.substring(in.indexOf(" ") + 1);
+                            tempArg = firstParam.substring(0, firstParam.indexOf("/") - 1);
+                        }
+                    }
+                    break;
+                default:
+                    // try parsing the command first, else throw exception
+                    try {
+                        tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0]));
+                    } catch (IllegalArgumentException ex) {
+                        throw new DukeException.UnknownCommandException();
+                    }
+                    break;
             }
         } catch (DukeException ex) {
             tempCommand = "error";
