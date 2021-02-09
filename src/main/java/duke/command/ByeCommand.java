@@ -11,7 +11,7 @@ public class ByeCommand extends Command {
      */
     public ByeCommand(String[] commandSplit) {
         super(commandSplit);
-        assert commandSplit.length == 1 && commandSplit[0].equals("bye") : "Bye command should be \"bye\"";
+        assert commandSplit[0].equals("bye") : "Bye command should have \"bye\" keyword.";
     }
 
     /**

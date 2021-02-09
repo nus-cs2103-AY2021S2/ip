@@ -9,6 +9,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -38,10 +39,12 @@ public class Parser {
             return new AddCommand(splitBySpaces);
         } else if (keyword.equals("delete")) {
             return new DeleteCommand(splitBySpaces);
-        } else if (keyword.equals("bye") && splitBySpaces.length == 1) {
+        } else if (keyword.equals("bye")) {
             return new ByeCommand(splitBySpaces);
         } else if (keyword.equals("find")) {
             return new FindCommand(splitBySpaces);
+        } else if (keyword.equals("sort")) {
+            return new SortCommand(splitBySpaces);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
