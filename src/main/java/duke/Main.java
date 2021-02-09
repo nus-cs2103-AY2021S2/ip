@@ -14,10 +14,10 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt");
-
     @Override
     public void start(Stage stage) {
+        Parameters params = this.getParameters();
+        Duke duke = new Duke(params.getNamed().get("data") == null ? "data/tasks.txt" : params.getNamed().get("data"));
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
