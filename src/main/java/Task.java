@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Task {
     private String description;
@@ -42,10 +41,7 @@ public class Task {
     }
 
     public boolean isSameDay(LocalDate targetDate) {
-//        return this.dateTime.truncatedTo(ChronoUnit.DAYS).isEqual(targetDate.truncatedTo(ChronoUnit.DAYS));
             return this.dateTime.toLocalDate().isEqual(targetDate);
-//        }
-//        return this.dateTime.isEqual(targetDate.truncatedTo(ChronoUnit.DAYS));
     }
 
     private LocalDateTime convertToTime(String time) {

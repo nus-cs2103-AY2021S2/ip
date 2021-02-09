@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -261,10 +260,6 @@ public class Parser {
 
     private boolean isValidDate(String time) throws DateTimeParseException {
         try {
-            // convert time from String to LocalDateTime
-//            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d");
-//            inputFormat.parse(time);
-
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
             LocalDate dt = LocalDate.parse(time, formatter);
         } catch (DateTimeParseException e){

@@ -168,21 +168,24 @@ public class TaskList {
         return new TaskList(matchingTasks, totalTask);
     }
 
-    public ArrayList<Task> getScheduleByDate(LocalDate time) throws DukeException {
-        try {
-            ArrayList<Task> tasksOnDate = new ArrayList<>();
-            for (Task task : this.taskList) {
-                if (task instanceof ToDo) {
-                    continue;
-                }
-                if (task.isSameDay(time)) {
-                    tasksOnDate.add(task);
-                }
+    /**
+     * View all tasks scheduled on a specific date.
+     * @param targetDate The target date on which the schedule is viewed.
+     * @return List of all tasks schedule on the date.
+     */
+    public ArrayList<Task> getScheduleByDate(LocalDate targetDate) {
+        ArrayList<Task> tasksOnDate = new ArrayList<>();
+        // loop through every task in the list
+        for (Task task : this.taskList) {
+            // do not check ToDo tasks
+            if (task instanceof ToDo) {
+                continue;
             }
-            return tasksOnDate;
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+            if (task.isSameDay(targetDate)) {
+                tasksOnDate.add(task);
+            }
         }
+        return tasksOnDate;
     }
 }
 
