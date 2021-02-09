@@ -42,6 +42,7 @@ public class Deadline extends Task {
     }
 
     private String[] buildInfo() {
+        assert !taskLine.equals("");
         String[] parsedTask = taskLine.split("deadline");
         parsedTask = parsedTask[1].split("/by");
         return parsedTask;
