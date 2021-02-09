@@ -36,6 +36,8 @@ public class ChatBot {
      */
     public String startup() {
         tasklist = storage.load(tasklist);
+        assert tasklist.size() >= 0 : "size smaller than 0";
+
         if (tasklist.size() == 0) {
             return Ui.formatBox(Ui.INDENT_32_SPACES + "No Save Record Detected... \n"
                     + Ui.INDENT_32_SPACES + "     Creating New List! :)");
@@ -65,29 +67,28 @@ public class ChatBot {
             String command = parsedInput.get(0);
             if (command.equals("list")) {
                 return Ui.printList(tasklist);
+            }
+            if (command.equals("done") || command.equals("delete")) {
+                int index = Integer.parseInt(parsedInput.get(1));
+                return command.equals("done") ? tasklist.completeTask(index) : tasklist.deleteTask(index);
             } else {
-                if (command.equals("done") || command.equals("delete")) {
-                    int index = Integer.parseInt(parsedInput.get(1));
-                    return command.equals("done") ? tasklist.completeTask(index) : tasklist.deleteTask(index);
-                } else {
-                    String description = parsedInput.get(1);
-                    String duration;
-                    switch (command) {
-                    case "find":
-                        return tasklist.find(description);
-                    case "todo":
-                        return tasklist.addTask(new Todo(description));
-                    case "deadline":
-                        duration = parsedInput.get(2);
-                        return tasklist.addTask(new Deadline(description, duration));
-                    case "event":
-                        duration = parsedInput.get(2);
-                        return tasklist.addTask(new Event(description, duration));
-                    case "bye" :
-                        return this.save();
-                    default:
-                        throw new DukeException("☹ OOPS!!! Incorrect input, please check!");
-                    }
+                assert parsedInput.size() > 0 : "task description is empty";
+                String description = parsedInput.get(1);
+                String duration;
+                switch (command) { case "find":
+                    return tasklist.find(description);
+                case "todo":
+                    return tasklist.addTask(new Todo(description));
+                case "deadline":
+                    duration = parsedInput.get(2);
+                    return tasklist.addTask(new Deadline(description, duration));
+                case "event":
+                    duration = parsedInput.get(2);
+                    return tasklist.addTask(new Event(description, duration));
+                case "bye" :
+                    return this.save();
+                default:
+                    throw new DukeException("☹ OOPS!!! Incorrect input, please check!");
                 }
             }
         } catch (DukeException err) {

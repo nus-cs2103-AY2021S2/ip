@@ -83,6 +83,7 @@ public class Storage {
             String status = task.getStatus();
             String type = task.getType();
             String description = task.getDetails();
+            assert type.equals("T") || type.equals("D") || type.equals("E") : "Error! Not event,deadline or todo task";
             // check whether the saved data is a todo
             if (type.equals("T")) {
                 writer.write(type + "|" + status + "|" + description);

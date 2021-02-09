@@ -27,6 +27,7 @@ public class Deadline extends Task {
      */
     public Deadline(String... taskDescription) throws DukeException {
         this.type = "D";
+        assert taskDescription.length >= 0: "Error in length of taskDescription";
         if (taskDescription.length >= 1) {
             this.description = taskDescription[0];
 
@@ -44,7 +45,7 @@ public class Deadline extends Task {
                 }
             }
         } else {
-            if (description.length() == 0) {
+            if (taskDescription.length == 0) {
                 throw new DukeException("☹ OOPS!!! Description of Deadline cannot be empty, please check!");
             } else {
                 throw new DukeException("☹ OOPS!!! Date of Deadline cannot be empty, please check!");
