@@ -18,66 +18,66 @@ public class Parser {
     static String parse(String command, Ui ui, TaskList taskList, Storage storage)
             throws NoSuchElementException, UnknownCommandException, IOException {
         switch(parseCommand(command)) {
-            case "bye":
-                return ui.showBye();
-            case "list":
-                return ui.showList(taskList.getList(), false);
-            case "done":
-                // To get the index
-                int index = Integer.parseInt(getDescription(command));
-                Task doneTask = taskList.markTaskAsDone(index);
-                storage.writeToFile(taskList.getList());
-                return ui.showDone(doneTask);
-            case "todo":
-                String name = getDescription(command);
-                if (!name.equals("")) {
-                    Todo todo = new Todo(name.trim());
-                    Task newTask = taskList.addTask(todo);
-                    storage.appendToFile(todo);
-                    return ui.showAddTask(newTask, taskList.getListSize());
-                } else {
-                    throw new NoSuchElementException("☹ OOPS!!! The description of"
-                            + " a todo cannot be empty.");
-                }
-            case "deadline":
-                String desc = getDescription(command);
-                if (!desc.equals("")) {
-                    String[] split = desc.split("/by", 2);
-                    Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
-                    Task newTask = taskList.addTask(deadline);
-                    storage.appendToFile(deadline);
-                    return ui.showAddTask(newTask, taskList.getListSize());
-                } else {
-                    throw new NoSuchElementException("☹ OOPS!!! The description of"
-                            + " a deadline cannot be empty.");
-                }
-            case "event":
-                String description = getDescription(command);
-                if (!description.equals("")) {
-                    String[] split = description.split("/at", 2);
-                    Event event = new Event(split[0].trim(), split[1].trim());
-                    Task newTask = taskList.addTask(event);
-                    storage.appendToFile(event);
-                    return ui.showAddTask(newTask, taskList.getListSize());
-                } else {
-                    throw new NoSuchElementException("☹ OOPS!!! The description of"
-                            + " an event cannot be empty.");
-                }
-            case "find":
-                String searchString = getDescription(command);
-                if (!searchString.equals("")) {
-                    return ui.showList(taskList.searchTask(searchString.trim()), true);
-                } else {
-                    throw new NoSuchElementException("    ☹ OOPS!!! The search keyword cannot be empty.");
-                }
-            case "delete":
-                // To get the index
-                int i = Integer.parseInt(getDescription(command));
-                Task removedTask = taskList.removeTask(i);
-                storage.writeToFile(taskList.getList());
-                return ui.showRemoveTask(removedTask, taskList.getListSize());
-            default:
-                throw new UnknownCommandException();
+        case "bye":
+            return ui.showBye();
+        case "list":
+            return ui.showList(taskList.getList(), false);
+        case "done":
+            // To get the index
+            int index = Integer.parseInt(getDescription(command));
+            Task doneTask = taskList.markTaskAsDone(index);
+            storage.writeToFile(taskList.getList());
+            return ui.showDone(doneTask);
+        case "todo":
+            String name = getDescription(command);
+            if (!name.equals("")) {
+                Todo todo = new Todo(name.trim());
+                Task newTask = taskList.addTask(todo);
+                storage.appendToFile(todo);
+                return ui.showAddTask(newTask, taskList.getListSize());
+            } else {
+                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                        + " a todo cannot be empty.");
+            }
+        case "deadline":
+            String desc = getDescription(command);
+            if (!desc.equals("")) {
+                String[] split = desc.split("/by", 2);
+                Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
+                Task newTask = taskList.addTask(deadline);
+                storage.appendToFile(deadline);
+                return ui.showAddTask(newTask, taskList.getListSize());
+            } else {
+                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                        + " a deadline cannot be empty.");
+            }
+        case "event":
+            String description = getDescription(command);
+            if (!description.equals("")) {
+                String[] split = description.split("/at", 2);
+                Event event = new Event(split[0].trim(), split[1].trim());
+                Task newTask = taskList.addTask(event);
+                storage.appendToFile(event);
+                return ui.showAddTask(newTask, taskList.getListSize());
+            } else {
+                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                        + " an event cannot be empty.");
+            }
+        case "find":
+            String searchString = getDescription(command);
+            if (!searchString.equals("")) {
+                return ui.showList(taskList.searchTask(searchString.trim()), true);
+            } else {
+                throw new NoSuchElementException("    ☹ OOPS!!! The search keyword cannot be empty.");
+            }
+        case "delete":
+            // To get the index
+            int i = Integer.parseInt(getDescription(command));
+            Task removedTask = taskList.removeTask(i);
+            storage.writeToFile(taskList.getList());
+            return ui.showRemoveTask(removedTask, taskList.getListSize());
+        default:
+            throw new UnknownCommandException();
         }
     }
 

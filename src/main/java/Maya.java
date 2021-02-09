@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.sql.Struct;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -10,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -27,13 +25,17 @@ public class Maya extends Application {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Initiates an object of Maya with a Ui and Storage object.
+     * @param filePath a String that represents the path to store the file of Tasks.
+     */
     public Maya(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
 
         try {
             taskList = storage.load();
-        } catch(UnknownCommandException | NoSuchElementException
+        } catch (UnknownCommandException | NoSuchElementException
                 | ArrayIndexOutOfBoundsException | IOException e) {
             System.out.println(e.getMessage());
         }
@@ -161,10 +163,10 @@ public class Maya extends Application {
                 }
             }
             sc.close();
-        } catch(UnknownCommandException | NoSuchElementException
-                | ArrayIndexOutOfBoundsException | IOException e){
+        } catch (UnknownCommandException | NoSuchElementException
+                | ArrayIndexOutOfBoundsException | IOException e) {
             System.out.println(e.getMessage());
-        } finally{
+        } finally {
             ui.showLine();
         }
     }
