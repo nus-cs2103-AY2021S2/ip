@@ -1,24 +1,23 @@
 import java.io.IOException;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-
 import duke.command.Command;
 import duke.dukeexception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 
 
 public class Duke extends Application {
@@ -67,20 +66,20 @@ public class Duke extends Application {
      */
     public String run(String fullCommand) {
         String output = "";
-//        output += ui.showWelcome();
+        //output += ui.showWelcome();
         boolean isExit = false;
-//        while (!isExit) {
-            try {
-                //String fullCommand = ui.readCommand();
-                output += ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                output += c.execute(tasks);
-                //isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                output += ui.showError(e.getMessage());
-            } finally {
-                output += ui.showLine();
-            }
+        //while (!isExit) {
+        try {
+            //String fullCommand = ui.readCommand();
+            output += ui.showLine(); // show the divider line ("_______")
+            Command c = Parser.parse(fullCommand);
+            output += c.execute(tasks);
+            //isExit = c.isExit();
+        } catch (DukeException | IOException e) {
+            output += ui.showError(e.getMessage());
+        } finally {
+            output += ui.showLine();
+        }
         //}
         return output;
     }
@@ -148,16 +147,6 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-//        //Part 3. Add functionality to handle user input.
-//        sendButton.setOnMouseClicked((event) -> {
-//            handleUserInput();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            handleUserInput();
-//        });
-        // more code to be added here later
     }
 
     /**
@@ -181,10 +170,6 @@ public class Duke extends Application {
     public String getResponse(String input) {
         return new Duke("data/tasks.txt").run(input);
     }
-
-//    public static void main(String[] args) {
-//        new Duke("data/tasks.txt").run();
-//    }
 
 
 }

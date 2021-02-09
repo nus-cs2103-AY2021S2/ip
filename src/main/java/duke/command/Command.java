@@ -90,7 +90,7 @@ public class Command {
             output += "     Now you have " + (tList.size() - 1) + " tasks in the list.\n";
             tList.remove(index - 1);
             tasks.setTasks(tList);
-            BufferedReader reader = new BufferedReader(new FileReader("/data/duke.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("data/duke.txt"));
             String oldContent = "";
             String line = reader.readLine();
             int counter = 0;
