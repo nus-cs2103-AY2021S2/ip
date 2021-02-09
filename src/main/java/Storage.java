@@ -52,6 +52,8 @@ public class Storage {
      *                                      does not correspond to Todo, Deadline or Event.
      */
     List<Task> convertFileToList() throws FileNotFoundException, UnknownCommandException {
+        assert file != null : "File not found";
+        
         Scanner sc = new Scanner(file);
         List<Task> list = new ArrayList<>();
 
@@ -99,6 +101,8 @@ public class Storage {
      * @throws IOException if an I/O error occurred.
      */
     void writeToFile(List<Task> list) throws IOException {
+        assert file != null : "File not found";
+
         FileWriter fw = new FileWriter(file.getAbsolutePath());
 
         StringBuffer sb = new StringBuffer();
@@ -117,6 +121,8 @@ public class Storage {
      * @throws IOException if an I/O error occurred.
      */
     void appendToFile(Task task) throws IOException {
+        assert task != null : "Task should not be null";
+        assert file != null : "File not found";
         // Create a FileWriter in append mode
         FileWriter fw = new FileWriter(file.getAbsolutePath(), true);
         fw.write(this.translateTask(task));
@@ -130,6 +136,7 @@ public class Storage {
      * @return a String representation of the Task Object suitable to be stored in the file.
      */
     String translateTask(Task task) {
+        assert task != null : "Task should not be null";
         int isDone = task.isDone ? 1 : 0;
         if (task instanceof Todo) {
             return String.format("T : %d : %s\n", isDone, task.name);
@@ -143,6 +150,7 @@ public class Storage {
     }
 
     File getFile() {
+        assert file != null : "File not found";
         return file;
     }
 }
