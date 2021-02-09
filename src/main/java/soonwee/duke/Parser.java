@@ -53,6 +53,7 @@ public class Parser {
      * @return task description
      */
     public String checkFrontInput(String cmd, TaskType taskType) {
+        assert cmd != null : "Input command is null";
         String task = new String();
         String type = new String();
         try {
@@ -92,9 +93,20 @@ public class Parser {
      * @return search text to filter
      */
     public String getSearchWord(String cmd) {
+        assert cmd != null : "Input command is null";
         String searchText = new String();
-        if (cmd.length() > MIN_LENGTH_FIND) {
-            searchText = cmd.substring(START_READ_FIND);
+        try {
+            if (cmd.length() > MIN_LENGTH_FIND) {
+                if (cmd.charAt(MIN_LENGTH_FIND) == ' ') {
+                    searchText = cmd.substring(START_READ_FIND);
+                } else {
+                    throw new DukeException("Invalid: Invalid command.");
+                }
+            } else {
+                throw new DukeException("Invalid: Please type a white space, followed by description");
+            }
+        } catch (DukeException de) {
+            searchText = de.getMessage();
         }
         return searchText;
     }
@@ -106,6 +118,7 @@ public class Parser {
      * @return datetime in LocalDateTime format
      */
     public LocalDateTime dateFormatter(String cmd) {
+        assert cmd != null : "Input command is null";
         int nextChar = -1; //Set by default to not able to find.
         int nextWord = 4; //Template number to find the next text in String.
         if (cmd.indexOf("/by") != -1) {
