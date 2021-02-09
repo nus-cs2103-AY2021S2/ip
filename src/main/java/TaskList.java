@@ -47,6 +47,13 @@ public class TaskList {
         return selected;
     }
 
+    /**
+     * Sort tasks by alphabetical order
+     */
+    public void sort() {
+        tasks.sort((t1, t2) -> t1.desc.compareTo(t2.desc));
+    }
+
     public int size() {
         return tasks.size();
     }
