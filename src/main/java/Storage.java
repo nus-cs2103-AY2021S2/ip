@@ -25,7 +25,7 @@ public class Storage {
      */
     public ArrayList<Task> readTasksFromFile() throws FileNotFoundException {
         File f = new File(this.filePath); // create a File for the given file path
-        assert f!=null : "File cannot be null";
+        assert f != null : "File cannot be null";
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
@@ -76,7 +76,7 @@ public class Storage {
             dir.mkdirs();
         }
         FileWriter fw = new FileWriter(this.filePath);
-        assert fw!=null : "FileWriter cannot be null";
+        assert fw != null : "FileWriter cannot be null";
 
         String fileString = "";
 
@@ -93,7 +93,7 @@ public class Storage {
      * @param numString String having value "1" or "0".
      */
     public Boolean convertToBool(String numString) {
-        assert numString.equals("0") || numString.equals("1"): "Wrong value of numString";
+        assert numString.equals("0") || numString.equals("1") : "Wrong value of numString";
         if (numString.equals("1")) {
             return true;
         } else {
