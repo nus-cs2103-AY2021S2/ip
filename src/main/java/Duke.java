@@ -21,7 +21,7 @@ public class Duke extends Application {
 
 
     protected static boolean canExit = false;
-    protected static final ArrayList<Task> taskList = new ArrayList<Task>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
     protected final TaskList tasks;
     protected final Storage storage;
     protected final Ui ui;
@@ -63,6 +63,7 @@ public class Duke extends Application {
 
 
     public static void main(String[] args) {
+        launch(args);
         String path = "duke.txt";
         Duke duke = new Duke(path);
         duke.storage.taskHistory();
@@ -102,12 +103,12 @@ public class Duke extends Application {
         stage.show();
         stage.setTitle("\u2764小茜的待办事项\u2764");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(650.0);
+        stage.setMinWidth(450.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(450.0, 650.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(435, 585);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -166,6 +167,7 @@ public class Duke extends Application {
         exitButton.setOnAction((event) -> {
             storage.record(taskList);
             Platform.exit();
+            System.exit(0);
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -217,10 +219,6 @@ public class Duke extends Application {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     private String getResponse(String input) {
         return "Kitty: " + input;
     }

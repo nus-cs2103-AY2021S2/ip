@@ -9,7 +9,7 @@ public class Ui {
     }
 
     public String sayBye() {
-        String exit = "Bye bye. Hope to see you again soon<3\n" + "Wish you all the best for CS2103T\n";
+        String exit = "Bye bye. Hope to see you again soon <3\n" + "Wish you all the best for CS2103T\n";
         Duke.canExit = true;
         return exit;
     }

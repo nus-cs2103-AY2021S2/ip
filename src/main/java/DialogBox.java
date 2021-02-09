@@ -5,6 +5,7 @@ import javafx.scene.layout.HBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.text.Font;
 
 
 public class DialogBox extends HBox {
@@ -17,6 +18,7 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
+        text.setFont(Font.font("Comic Sans MS"));
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
