@@ -8,10 +8,12 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
-    public Task(String description) {
+    public Task(Priority priority, String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = priority;
     }
 
     /**
@@ -30,8 +32,26 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Gets the priority of the Task
+     *
+     * @return A string of a letter either H, M or L that represents the priority. X if no priority
+     */
+    public String getPriority() {
+        switch (priority) {
+        case LOW:
+            return "L";
+        case MEDIUM:
+            return "M";
+        case HIGH:
+            return "H";
+        default:
+            return "X";
+        }
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "]" + "[" + this.getPriority() + "] " + this.description;
     }
 }

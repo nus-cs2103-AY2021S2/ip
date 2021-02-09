@@ -7,6 +7,7 @@ import Duke.Exceptions.InvalidCommandException;
 import Duke.Exceptions.InvalidDescriptionException;
 import Duke.Tasks.Deadline;
 import Duke.Tasks.Event;
+import Duke.Tasks.Priority;
 import Duke.Tasks.ToDo;
 
 import java.time.LocalDate;
@@ -125,8 +126,17 @@ public class Parser {
             emptyDescriptionChecker(tokens);
 
             String taskInfo = tokens[1];
-
-            return new AddCommand(new ToDo(taskInfo));
+            String[] nextTaskInfo = taskInfo.split(" ", 2);
+            switch (nextTaskInfo[0]) {
+            case "H":
+                return new AddCommand(new ToDo(Priority.HIGH, nextTaskInfo[1]));
+            case "M":
+                return new AddCommand(new ToDo(Priority.MEDIUM, nextTaskInfo[1]));
+            case "L":
+                return new AddCommand(new ToDo(Priority.LOW, nextTaskInfo[1]));
+            default:
+                throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
+            }
         }
         case "deadline": {
             emptyDescriptionChecker(tokens);
@@ -135,6 +145,23 @@ public class Parser {
 
             if (!(taskInfo.contains("/by"))) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
+            }
+
+            String[] nextTaskInfo = tokens[1].split(" ", 2);
+            Priority priority = Priority.NONE;
+
+            switch (nextTaskInfo[0]) {
+            case "H":
+                priority = Priority.HIGH;
+                break;
+            case "M":
+                priority = Priority.MEDIUM;
+                break;
+            case "L":
+                priority = Priority.LOW;
+                break;
+            default:
+                break;
             }
 
             String[] taskInfoArr = taskInfo.split(" /by ", 2);
@@ -148,18 +175,35 @@ public class Parser {
             String time = parseTime(dateAndTime[1]);
             String by = date + " " + time;
 
-            return new AddCommand(new Deadline(taskInfoArr[0], by));
+            return new AddCommand(new Deadline(priority, taskInfoArr[0], by));
         }
         case "event": {
             emptyDescriptionChecker(tokens);
 
             String taskInfo = tokens[1];
+            String[] nextTaskInfo = taskInfo.split(" ", 2);
+            Priority priority = Priority.NONE;
+
+            switch (nextTaskInfo[0]) {
+            case "H":
+                priority = Priority.HIGH;
+                break;
+            case "M":
+                priority = Priority.MEDIUM;
+                break;
+            case "L":
+                priority = Priority.LOW;
+                break;
+            default:
+                break;
+            }
 
             if (!(taskInfo.contains("/at"))) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
             }
 
             String[] taskInfoArr = taskInfo.split(" /at ", 2);
+
 
             if (taskInfoArr.length < 2) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
@@ -170,7 +214,7 @@ public class Parser {
             String time = parseTime(dateAndTime[1]);
             String by = date + " " + time;
 
-            return new AddCommand(new Event(taskInfoArr[0], by));
+            return new AddCommand(new Event(priority, taskInfoArr[0], by));
         }
         case "find": {
             emptyDescriptionChecker(tokens);

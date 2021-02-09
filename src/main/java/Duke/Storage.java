@@ -1,9 +1,6 @@
 package Duke;
 
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Task;
-import Duke.Tasks.ToDo;
+import Duke.Tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,7 +38,8 @@ public class Storage {
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            Task task = getTask(input);
+            Priority p = getTaskPriority(input);
+            Task task = getTask(p, input);
             markTaskAsDone(input, task);
             tasks.add(task);
         }
@@ -60,27 +58,45 @@ public class Storage {
     }
 
     /**
+     * Gets the Task Priority from the input string
+     *
+     * @param input A string of task description
+     * @return Priority Enum to determine the priority
+     */
+    private Priority getTaskPriority(String input) {
+        if (input.contains("[H]")) {
+            return Priority.HIGH;
+        } else if (input.contains("M")) {
+            return Priority.MEDIUM;
+        } else if (input.contains("L")) {
+            return Priority.LOW;
+        } else {
+            return Priority.NONE;
+        }
+    }
+
+    /**
      * Gets the Task as represented from the input
      *
      * @param input A string of task description
      * @return Task that is represented from the string
      */
-    private Task getTask(String input) {
+    private Task getTask(Priority priority, String input) {
         Task task;
         if (input.contains("[T]")) {
             String[] tokens = input.split("] ", 2);
             String taskInfo = tokens[1];
-            task = new ToDo(taskInfo);
+            task = new ToDo(priority, taskInfo);
         } else if (input.contains("[D]")) {
             String[] tokens = input.split("] ", 2);
             String[] nextTokens = tokens[1].split(" ", 2);
             String date = nextTokens[1].substring(nextTokens[1].indexOf(':') + 2, nextTokens[1].indexOf(')'));
-            task = new Deadline(nextTokens[0], date);
+            task = new Deadline(priority, nextTokens[0], date);
         } else {
             String[] tokens = input.split("] ", 2);
             String[] nextTokens = tokens[1].split(" ", 2);
             String date = nextTokens[1].substring(nextTokens[1].indexOf(':') + 2, nextTokens[1].indexOf(')'));
-            task = new Event(nextTokens[0], date);
+            task = new Event(priority, nextTokens[0], date);
         }
         return task;
     }

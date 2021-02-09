@@ -8,8 +8,8 @@ public class Deadline extends Task {
 
     protected String by;
 
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(Priority priority, String description, String by) {
+        super(priority, description);
         this.by = by;
     }
 

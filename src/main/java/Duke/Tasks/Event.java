@@ -8,8 +8,8 @@ public class Event extends Task {
 
     protected String at;
 
-    public Event(String description, String at) {
-        super(description);
+    public Event(Priority priority, String description, String at) {
+        super(priority, description);
         this.at = at;
     }
 

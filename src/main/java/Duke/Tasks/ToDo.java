@@ -5,8 +5,8 @@ package Duke.Tasks;
  */
 public class ToDo extends Task {
 
-    public ToDo(String description) {
-        super(description);
+    public ToDo(Priority priority, String description) {
+        super(priority, description);
     }
 
     @Override
