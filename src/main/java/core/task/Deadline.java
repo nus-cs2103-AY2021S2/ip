@@ -15,7 +15,7 @@ public class Deadline extends Task {
      */
     public Deadline(String desc) {
         super(desc);
-
+        assert(desc.contains("/by"));
         var parts = desc.split("/by");
         this.taskDescription = parts[0].trim();
         this.byTime = LocalDate.parse(parts[1].trim());
