@@ -35,8 +35,16 @@ public class Ui {
         return DIVIDER + SPACE + "Sayonara, matta ne~ \n" + DIVIDER;
     }
 
+    private String printOnlyList(TaskList list) {
+        String result = "";
+        for (int i = 0; i < list.size(); i++) {
+            result = result + SPACE + (i + 1) + ". " + list.getTask(i).toString() + "\n";
+        }
+        return result;
+    }
+
     /**
-     * Prints list of tasks
+     * Prints list of tasks in duke output format
      *
      * @param list List of tasks
      */
@@ -46,10 +54,8 @@ public class Ui {
         if (list.size() == 0) {
             resultString = resultString + SPACE + "Ara, the list is empty right now!\n";
         } else {
-            resultString = resultString + SPACE + "Hai~ Current tasks are: \n";
-            for (int i = 0; i < list.size(); i++) {
-                resultString = resultString + SPACE + (i + 1) + ". " + list.getTask(i).toString() + "\n";
-            }
+            resultString = resultString + SPACE + "Hai~ Current tasks are: \n" + printOnlyList(list);
+
         }
 
         resultString = resultString + DIVIDER;
@@ -103,22 +109,19 @@ public class Ui {
      * @param taskList Given list of tasks
      */
     public String printSearchResults(TaskList taskList) {
+        String resultString = DIVIDER;
         if (taskList.size() == 0) {
-            return DIVIDER + SPACE + "There are no matching results D:\n" + DIVIDER;
+            resultString = resultString + SPACE + "There are no matching results D:\n" + DIVIDER;
         } else {
-            String resultString = DIVIDER;
-            resultString = resultString + SPACE + "Hai~ The search results are are: \n";
-            for (int i = 0; i < taskList.size(); i++) {
-                resultString = resultString + SPACE + (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
-            }
-            resultString = resultString + DIVIDER;
-            return resultString;
+            resultString = resultString + SPACE + "Hai~ The search results are are: \n"
+                    + printOnlyList(taskList) + DIVIDER;
         }
+        return resultString;
 
     }
 
     /**
-     * Prints error if unable to parse user command.
+     * Prints error when unable to parse user input into known command
      */
     public String printUnknowInputError() {
         return DIVIDER + SPACE + "Sorry! I do not understand what you just said. Try again pwease?"

@@ -21,7 +21,6 @@ public class Duke {
         taskList = new TaskList(storage.getTasks());
     }
 
-
     public String getResponse(String input) {
         Parser parser = new Parser();
         Command command = parser.parse(input);
