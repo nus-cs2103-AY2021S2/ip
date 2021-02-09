@@ -45,8 +45,7 @@ public class AddCommand extends Command {
         Task task = new ToDo(taskName);
         assert task != null : "Empty task";
         tasks.add(task);
-        output = "Got it. I've added this task: \n"
-                + task.toString() + getRemainingTasks(tasks);
+        updateOutput(task, tasks);
     }
 
     private void eventProcess(String description, String date, TaskList tasks) throws DukeException {
@@ -56,8 +55,7 @@ public class AddCommand extends Command {
         Task task = new Event(description, LocalDate.parse(date));
         assert task != null : "Empty task";
         tasks.add(task);
-        output = "Got it. I've added this task: \n"
-                + task.toString() + getRemainingTasks(tasks);
+        updateOutput(task, tasks);
     }
 
     private void deadlineProcess(String description, String date, TaskList tasks) throws DukeException {
@@ -67,12 +65,17 @@ public class AddCommand extends Command {
         Task task = new Deadline(description, LocalDate.parse(date));
         assert task != null : "Task is null";
         tasks.add(task);
-        output = "Got it. I've added this task: \n"
-                + task.toString() + getRemainingTasks(tasks);
+        updateOutput(task, tasks);
     }
 
     private String getRemainingTasks(TaskList tasks) {
-        return "\nNow you have " + tasks.size() + " tasks in the list.";
+        return "\nNow you have " + tasks.getSize() + " tasks in the list.";
+    }
+
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
+        output = "Got it. I've added this task: \n"
+                + task.toString() + getRemainingTasks(tasks);
     }
 
     /**
@@ -101,13 +104,4 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -29,7 +29,7 @@ public class FindCommand extends Command {
         String contents = "Here are the matching tasks in your list:";
         // Tracks index of previously matched task
         int prevIndex = 1;
-        for (int i = 1; i <= tasks.size(); i++) {
+        for (int i = 1; i <= tasks.getSize(); i++) {
             Task task = tasks.get(i);
             assert task != null : "Task is null";
             if (task.getDescription().toLowerCase().contains(description.toLowerCase())) {
@@ -41,6 +41,11 @@ public class FindCommand extends Command {
         return contents;
     }
 
+    @Override
+    protected void updateOutput(Task task, TaskList tasks) {
+        output = getMatchedTaskListContents(tasks);
+    }
+
     /**
      * Outputs list of keyword-matched tasks
      *
@@ -49,16 +54,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
-        output = getMatchedTaskListContents(tasks);
+        updateOutput(null, tasks);
     }
 
-    /**
-     * Determines if Exit is called by user
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
